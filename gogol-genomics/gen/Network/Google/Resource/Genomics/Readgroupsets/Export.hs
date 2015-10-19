@@ -26,7 +26,7 @@
 -- [ImportReadGroupSets](google.genomics.v1.ReadServiceV1.ImportReadGroupSets)
 -- for caveats.
 --
--- /See:/ < Genomics API Reference> for @GenomicsReadgroupsetsExport@.
+-- /See:/ < Genomics API Reference> for @genomics.readgroupsets.export@.
 module Network.Google.Resource.Genomics.Readgroupsets.Export
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.Genomics.Readgroupsets.Export
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReadgroupsetsExport@ method which the
+-- | A resource alias for @genomics.readgroupsets.export@ method which the
 -- 'ReadgroupsetsExport'' request conforms to.
 type ReadgroupsetsExportResource =
      "v1" :>
@@ -109,8 +109,8 @@ data ReadgroupsetsExport' = ReadgroupsetsExport'
 --
 -- * 'reCallback'
 readgroupsetsExport'
-    :: Text -- ^ 'readGroupSetId'
-    -> ExportReadGroupSetRequest -- ^ 'payload'
+    :: Text -- ^ 'reReadGroupSetId'
+    -> ExportReadGroupSetRequest -- ^ 'rePayload'
     -> ReadgroupsetsExport'
 readgroupsetsExport' pReReadGroupSetId_ pRePayload_ =
     ReadgroupsetsExport'

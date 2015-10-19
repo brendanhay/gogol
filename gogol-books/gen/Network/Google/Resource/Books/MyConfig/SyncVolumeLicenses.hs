@@ -23,7 +23,7 @@
 -- Request downloaded content access for specified volumes on the My eBooks
 -- shelf.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyConfigSyncVolumeLicenses@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.myconfig.syncVolumeLicenses@.
 module Network.Google.Resource.Books.MyConfig.SyncVolumeLicenses
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Books.MyConfig.SyncVolumeLicenses
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyConfigSyncVolumeLicenses@ method which the
+-- | A resource alias for @books.myconfig.syncVolumeLicenses@ method which the
 -- 'MyConfigSyncVolumeLicenses'' request conforms to.
 type MyConfigSyncVolumeLicensesResource =
      "myconfig" :>
@@ -94,9 +94,9 @@ data MyConfigSyncVolumeLicenses' = MyConfigSyncVolumeLicenses'
 --
 -- * 'mcsvlNonce'
 myConfigSyncVolumeLicenses'
-    :: Text -- ^ 'cpksver'
-    -> Text -- ^ 'source'
-    -> Text -- ^ 'nonce'
+    :: Text -- ^ 'mcsvlCpksver'
+    -> Text -- ^ 'mcsvlSource'
+    -> Text -- ^ 'mcsvlNonce'
     -> MyConfigSyncVolumeLicenses'
 myConfigSyncVolumeLicenses' pMcsvlCpksver_ pMcsvlSource_ pMcsvlNonce_ =
     MyConfigSyncVolumeLicenses'

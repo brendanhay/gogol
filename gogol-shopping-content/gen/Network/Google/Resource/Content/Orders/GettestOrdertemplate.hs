@@ -23,7 +23,7 @@
 -- Sandbox only. Retrieves an order template that can be used to quickly
 -- create a new order in sandbox.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersGettestOrdertemplate@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.gettestordertemplate@.
 module Network.Google.Resource.Content.Orders.GettestOrdertemplate
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Orders.GettestOrdertemplate
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersGettestOrdertemplate@ method which the
+-- | A resource alias for @content.orders.gettestordertemplate@ method which the
 -- 'OrdersGettestOrdertemplate'' request conforms to.
 type OrdersGettestOrdertemplateResource =
      Capture "merchantId" Word64 :>
@@ -69,8 +69,8 @@ data OrdersGettestOrdertemplate' = OrdersGettestOrdertemplate'
 --
 -- * 'ogoTemplateName'
 ordersGettestOrdertemplate'
-    :: Word64 -- ^ 'merchantId'
-    -> OrdersGettestOrdertemplateTemplateName -- ^ 'templateName'
+    :: Word64 -- ^ 'ogoMerchantId'
+    -> OrdersGettestOrdertemplateTemplateName -- ^ 'ogoTemplateName'
     -> OrdersGettestOrdertemplate'
 ordersGettestOrdertemplate' pOgoMerchantId_ pOgoTemplateName_ =
     OrdersGettestOrdertemplate'

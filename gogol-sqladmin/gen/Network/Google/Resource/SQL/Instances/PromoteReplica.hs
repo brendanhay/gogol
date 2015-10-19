@@ -23,7 +23,7 @@
 -- Promotes the read replica instance to be a stand-alone Cloud SQL
 -- instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesPromoteReplica@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.promoteReplica@.
 module Network.Google.Resource.SQL.Instances.PromoteReplica
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.SQL.Instances.PromoteReplica
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesPromoteReplica@ method which the
+-- | A resource alias for @sql.instances.promoteReplica@ method which the
 -- 'InstancesPromoteReplica'' request conforms to.
 type InstancesPromoteReplicaResource =
      "projects" :>
@@ -68,8 +68,8 @@ data InstancesPromoteReplica' = InstancesPromoteReplica'
 --
 -- * 'iprInstance'
 instancesPromoteReplica'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'iprProject'
+    -> Text -- ^ 'iprInstance'
     -> InstancesPromoteReplica'
 instancesPromoteReplica' pIprProject_ pIprInstance_ =
     InstancesPromoteReplica'

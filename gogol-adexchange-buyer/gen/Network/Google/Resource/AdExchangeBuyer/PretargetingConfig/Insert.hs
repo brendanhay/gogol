@@ -22,7 +22,7 @@
 --
 -- Inserts a new pretargeting configuration.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPretargetingConfigInsert@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.pretargetingConfig.insert@.
 module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Insert
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerPretargetingConfigInsert@ method which the
+-- | A resource alias for @adexchangebuyer.pretargetingConfig.insert@ method which the
 -- 'PretargetingConfigInsert'' request conforms to.
 type PretargetingConfigInsertResource =
      "pretargetingconfigs" :>
@@ -65,8 +65,8 @@ data PretargetingConfigInsert' = PretargetingConfigInsert'
 --
 -- * 'pciAccountId'
 pretargetingConfigInsert'
-    :: PretargetingConfig -- ^ 'payload'
-    -> Int64 -- ^ 'accountId'
+    :: PretargetingConfig -- ^ 'pciPayload'
+    -> Int64 -- ^ 'pciAccountId'
     -> PretargetingConfigInsert'
 pretargetingConfigInsert' pPciPayload_ pPciAccountId_ =
     PretargetingConfigInsert'

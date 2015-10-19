@@ -22,7 +22,7 @@
 --
 -- Gets one content category by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingContentCategoriesGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.contentCategories.get@.
 module Network.Google.Resource.DFAReporting.ContentCategories.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingContentCategoriesGet@ method which the
+-- | A resource alias for @dfareporting.contentCategories.get@ method which the
 -- 'ContentCategoriesGet'' request conforms to.
 type ContentCategoriesGetResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data ContentCategoriesGet' = ContentCategoriesGet'
 --
 -- * 'ccgId'
 contentCategoriesGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'ccgProFileId'
+    -> Int64 -- ^ 'ccgId'
     -> ContentCategoriesGet'
 contentCategoriesGet' pCcgProFileId_ pCcgId_ =
     ContentCategoriesGet'

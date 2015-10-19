@@ -22,7 +22,7 @@
 --
 -- Returns all of the details about the specified managed instance group.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.get@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersGet@ method which the
+-- | A resource alias for @compute.instanceGroupManagers.get@ method which the
 -- 'InstanceGroupManagersGet'' request conforms to.
 type InstanceGroupManagersGetResource =
      Capture "project" Text :>
@@ -71,9 +71,9 @@ data InstanceGroupManagersGet' = InstanceGroupManagersGet'
 --
 -- * 'igmgZone'
 instanceGroupManagersGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instanceGroupManager'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'igmgProject'
+    -> Text -- ^ 'igmgInstanceGroupManager'
+    -> Text -- ^ 'igmgZone'
     -> InstanceGroupManagersGet'
 instanceGroupManagersGet' pIgmgProject_ pIgmgInstanceGroupManager_ pIgmgZone_ =
     InstanceGroupManagersGet'

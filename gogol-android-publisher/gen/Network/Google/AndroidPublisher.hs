@@ -26,160 +26,160 @@ module Network.Google.AndroidPublisher
 
     -- * Resources
 
-    -- ** AndroidPublisherEditsAPKListingsDelete
+    -- ** androidpublisher.edits.apklistings.delete
     , module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Delete
 
-    -- ** AndroidPublisherEditsAPKListingsDeleteall
+    -- ** androidpublisher.edits.apklistings.deleteall
     , module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Deleteall
 
-    -- ** AndroidPublisherEditsAPKListingsGet
+    -- ** androidpublisher.edits.apklistings.get
     , module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Get
 
-    -- ** AndroidPublisherEditsAPKListingsList
+    -- ** androidpublisher.edits.apklistings.list
     , module Network.Google.Resource.AndroidPublisher.Edits.APKListings.List
 
-    -- ** AndroidPublisherEditsAPKListingsPatch
+    -- ** androidpublisher.edits.apklistings.patch
     , module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Patch
 
-    -- ** AndroidPublisherEditsAPKListingsUpdate
+    -- ** androidpublisher.edits.apklistings.update
     , module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Update
 
-    -- ** AndroidPublisherEditsAPKsAddexternallyhosted
+    -- ** androidpublisher.edits.apks.addexternallyhosted
     , module Network.Google.Resource.AndroidPublisher.Edits.APKs.Addexternallyhosted
 
-    -- ** AndroidPublisherEditsAPKsList
+    -- ** androidpublisher.edits.apks.list
     , module Network.Google.Resource.AndroidPublisher.Edits.APKs.List
 
-    -- ** AndroidPublisherEditsAPKsUpload
+    -- ** androidpublisher.edits.apks.upload
     , module Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
 
-    -- ** AndroidPublisherEditsCommit
+    -- ** androidpublisher.edits.commit
     , module Network.Google.Resource.AndroidPublisher.Edits.Commit
 
-    -- ** AndroidPublisherEditsDelete
+    -- ** androidpublisher.edits.delete
     , module Network.Google.Resource.AndroidPublisher.Edits.Delete
 
-    -- ** AndroidPublisherEditsDetailsGet
+    -- ** androidpublisher.edits.details.get
     , module Network.Google.Resource.AndroidPublisher.Edits.Details.Get
 
-    -- ** AndroidPublisherEditsDetailsPatch
+    -- ** androidpublisher.edits.details.patch
     , module Network.Google.Resource.AndroidPublisher.Edits.Details.Patch
 
-    -- ** AndroidPublisherEditsDetailsUpdate
+    -- ** androidpublisher.edits.details.update
     , module Network.Google.Resource.AndroidPublisher.Edits.Details.Update
 
-    -- ** AndroidPublisherEditsExpansionFilesGet
+    -- ** androidpublisher.edits.expansionfiles.get
     , module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Get
 
-    -- ** AndroidPublisherEditsExpansionFilesPatch
+    -- ** androidpublisher.edits.expansionfiles.patch
     , module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Patch
 
-    -- ** AndroidPublisherEditsExpansionFilesUpdate
+    -- ** androidpublisher.edits.expansionfiles.update
     , module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Update
 
-    -- ** AndroidPublisherEditsExpansionFilesUpload
+    -- ** androidpublisher.edits.expansionfiles.upload
     , module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Upload
 
-    -- ** AndroidPublisherEditsGet
+    -- ** androidpublisher.edits.get
     , module Network.Google.Resource.AndroidPublisher.Edits.Get
 
-    -- ** AndroidPublisherEditsImagesDelete
+    -- ** androidpublisher.edits.images.delete
     , module Network.Google.Resource.AndroidPublisher.Edits.Images.Delete
 
-    -- ** AndroidPublisherEditsImagesDeleteall
+    -- ** androidpublisher.edits.images.deleteall
     , module Network.Google.Resource.AndroidPublisher.Edits.Images.Deleteall
 
-    -- ** AndroidPublisherEditsImagesList
+    -- ** androidpublisher.edits.images.list
     , module Network.Google.Resource.AndroidPublisher.Edits.Images.List
 
-    -- ** AndroidPublisherEditsImagesUpload
+    -- ** androidpublisher.edits.images.upload
     , module Network.Google.Resource.AndroidPublisher.Edits.Images.Upload
 
-    -- ** AndroidPublisherEditsInsert
+    -- ** androidpublisher.edits.insert
     , module Network.Google.Resource.AndroidPublisher.Edits.Insert
 
-    -- ** AndroidPublisherEditsListingsDelete
+    -- ** androidpublisher.edits.listings.delete
     , module Network.Google.Resource.AndroidPublisher.Edits.Listings.Delete
 
-    -- ** AndroidPublisherEditsListingsDeleteall
+    -- ** androidpublisher.edits.listings.deleteall
     , module Network.Google.Resource.AndroidPublisher.Edits.Listings.Deleteall
 
-    -- ** AndroidPublisherEditsListingsGet
+    -- ** androidpublisher.edits.listings.get
     , module Network.Google.Resource.AndroidPublisher.Edits.Listings.Get
 
-    -- ** AndroidPublisherEditsListingsList
+    -- ** androidpublisher.edits.listings.list
     , module Network.Google.Resource.AndroidPublisher.Edits.Listings.List
 
-    -- ** AndroidPublisherEditsListingsPatch
+    -- ** androidpublisher.edits.listings.patch
     , module Network.Google.Resource.AndroidPublisher.Edits.Listings.Patch
 
-    -- ** AndroidPublisherEditsListingsUpdate
+    -- ** androidpublisher.edits.listings.update
     , module Network.Google.Resource.AndroidPublisher.Edits.Listings.Update
 
-    -- ** AndroidPublisherEditsTestersGet
+    -- ** androidpublisher.edits.testers.get
     , module Network.Google.Resource.AndroidPublisher.Edits.Testers.Get
 
-    -- ** AndroidPublisherEditsTestersPatch
+    -- ** androidpublisher.edits.testers.patch
     , module Network.Google.Resource.AndroidPublisher.Edits.Testers.Patch
 
-    -- ** AndroidPublisherEditsTestersUpdate
+    -- ** androidpublisher.edits.testers.update
     , module Network.Google.Resource.AndroidPublisher.Edits.Testers.Update
 
-    -- ** AndroidPublisherEditsTracksGet
+    -- ** androidpublisher.edits.tracks.get
     , module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Get
 
-    -- ** AndroidPublisherEditsTracksList
+    -- ** androidpublisher.edits.tracks.list
     , module Network.Google.Resource.AndroidPublisher.Edits.Tracks.List
 
-    -- ** AndroidPublisherEditsTracksPatch
+    -- ** androidpublisher.edits.tracks.patch
     , module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Patch
 
-    -- ** AndroidPublisherEditsTracksUpdate
+    -- ** androidpublisher.edits.tracks.update
     , module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Update
 
-    -- ** AndroidPublisherEditsValidate
+    -- ** androidpublisher.edits.validate
     , module Network.Google.Resource.AndroidPublisher.Edits.Validate
 
-    -- ** AndroidPublisherEntitlementsList
+    -- ** androidpublisher.entitlements.list
     , module Network.Google.Resource.AndroidPublisher.Entitlements.List
 
-    -- ** AndroidPublisherInAppProductsBatch
+    -- ** androidpublisher.inappproducts.batch
     , module Network.Google.Resource.AndroidPublisher.InAppProducts.Batch
 
-    -- ** AndroidPublisherInAppProductsDelete
+    -- ** androidpublisher.inappproducts.delete
     , module Network.Google.Resource.AndroidPublisher.InAppProducts.Delete
 
-    -- ** AndroidPublisherInAppProductsGet
+    -- ** androidpublisher.inappproducts.get
     , module Network.Google.Resource.AndroidPublisher.InAppProducts.Get
 
-    -- ** AndroidPublisherInAppProductsInsert
+    -- ** androidpublisher.inappproducts.insert
     , module Network.Google.Resource.AndroidPublisher.InAppProducts.Insert
 
-    -- ** AndroidPublisherInAppProductsList
+    -- ** androidpublisher.inappproducts.list
     , module Network.Google.Resource.AndroidPublisher.InAppProducts.List
 
-    -- ** AndroidPublisherInAppProductsPatch
+    -- ** androidpublisher.inappproducts.patch
     , module Network.Google.Resource.AndroidPublisher.InAppProducts.Patch
 
-    -- ** AndroidPublisherInAppProductsUpdate
+    -- ** androidpublisher.inappproducts.update
     , module Network.Google.Resource.AndroidPublisher.InAppProducts.Update
 
-    -- ** AndroidPublisherPurchasesProductsGet
+    -- ** androidpublisher.purchases.products.get
     , module Network.Google.Resource.AndroidPublisher.Purchases.Products.Get
 
-    -- ** AndroidPublisherPurchasesSubscriptionsCancel
+    -- ** androidpublisher.purchases.subscriptions.cancel
     , module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Cancel
 
-    -- ** AndroidPublisherPurchasesSubscriptionsDefer
+    -- ** androidpublisher.purchases.subscriptions.defer
     , module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer
 
-    -- ** AndroidPublisherPurchasesSubscriptionsGet
+    -- ** androidpublisher.purchases.subscriptions.get
     , module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Get
 
-    -- ** AndroidPublisherPurchasesSubscriptionsRefund
+    -- ** androidpublisher.purchases.subscriptions.refund
     , module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Refund
 
-    -- ** AndroidPublisherPurchasesSubscriptionsRevoke
+    -- ** androidpublisher.purchases.subscriptions.revoke
     , module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
 
     -- * Types

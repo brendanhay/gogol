@@ -22,7 +22,7 @@
 --
 -- Update Chrome OS Device
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryChromeosDevicesUpdate@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.chromeosdevices.update@.
 module Network.Google.Resource.Directory.ChromeosDevices.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Directory.ChromeosDevices.Update
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryChromeosDevicesUpdate@ method which the
+-- | A resource alias for @directory.chromeosdevices.update@ method which the
 -- 'ChromeosDevicesUpdate'' request conforms to.
 type ChromeosDevicesUpdateResource =
      "customer" :>
@@ -79,9 +79,9 @@ data ChromeosDevicesUpdate' = ChromeosDevicesUpdate'
 --
 -- * 'cduProjection'
 chromeosDevicesUpdate'
-    :: ChromeOSDevice -- ^ 'payload'
-    -> Text -- ^ 'customerId'
-    -> Text -- ^ 'deviceId'
+    :: ChromeOSDevice -- ^ 'cduPayload'
+    -> Text -- ^ 'cduCustomerId'
+    -> Text -- ^ 'cduDeviceId'
     -> ChromeosDevicesUpdate'
 chromeosDevicesUpdate' pCduPayload_ pCduCustomerId_ pCduDeviceId_ =
     ChromeosDevicesUpdate'

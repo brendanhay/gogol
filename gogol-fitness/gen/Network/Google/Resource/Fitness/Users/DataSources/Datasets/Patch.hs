@@ -25,7 +25,7 @@
 -- subsquent calls to retrieve this dataset. Data points can belong to more
 -- than one dataset. This method does not use patch semantics.
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesDatasetsPatch@.
+-- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataSources.datasets.patch@.
 module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Patch
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Patch
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersDataSourcesDatasetsPatch@ method which the
+-- | A resource alias for @fitness.users.dataSources.datasets.patch@ method which the
 -- 'UsersDataSourcesDatasetsPatch'' request conforms to.
 type UsersDataSourcesDatasetsPatchResource =
      Capture "userId" Text :>
@@ -86,10 +86,10 @@ data UsersDataSourcesDatasetsPatch' = UsersDataSourcesDatasetsPatch'
 --
 -- * 'udsdpCurrentTimeMillis'
 usersDataSourcesDatasetsPatch'
-    :: Text -- ^ 'dataSourceId'
-    -> Dataset -- ^ 'payload'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'datasetId'
+    :: Text -- ^ 'udsdpDataSourceId'
+    -> Dataset -- ^ 'udsdpPayload'
+    -> Text -- ^ 'udsdpUserId'
+    -> Text -- ^ 'udsdpDatasetId'
     -> UsersDataSourcesDatasetsPatch'
 usersDataSourcesDatasetsPatch' pUdsdpDataSourceId_ pUdsdpPayload_ pUdsdpUserId_ pUdsdpDatasetId_ =
     UsersDataSourcesDatasetsPatch'

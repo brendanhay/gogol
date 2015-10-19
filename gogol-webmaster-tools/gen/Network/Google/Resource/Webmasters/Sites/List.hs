@@ -22,7 +22,7 @@
 --
 -- Lists the user\'s Webmaster Tools sites.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitesList@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sites.list@.
 module Network.Google.Resource.Webmasters.Sites.List
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.Webmasters.Sites.List
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersSitesList@ method which the
+-- | A resource alias for @webmasters.sites.list@ method which the
 -- 'SitesList'' request conforms to.
 type SitesListResource =
      "sites" :>

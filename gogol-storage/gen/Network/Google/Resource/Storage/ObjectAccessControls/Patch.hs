@@ -23,7 +23,7 @@
 -- Updates an ACL entry on the specified object. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectAccessControlsPatch@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objectAccessControls.patch@.
 module Network.Google.Resource.Storage.ObjectAccessControls.Patch
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Patch
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectAccessControlsPatch@ method which the
+-- | A resource alias for @storage.objectAccessControls.patch@ method which the
 -- 'ObjectAccessControlsPatch'' request conforms to.
 type ObjectAccessControlsPatchResource =
      "b" :>
@@ -84,10 +84,10 @@ data ObjectAccessControlsPatch' = ObjectAccessControlsPatch'
 --
 -- * 'oacpGeneration'
 objectAccessControlsPatch'
-    :: Text -- ^ 'bucket'
-    -> ObjectAccessControl -- ^ 'payload'
-    -> Text -- ^ 'object'
-    -> Text -- ^ 'entity'
+    :: Text -- ^ 'oacpBucket'
+    -> ObjectAccessControl -- ^ 'oacpPayload'
+    -> Text -- ^ 'oacpObject'
+    -> Text -- ^ 'oacpEntity'
     -> ObjectAccessControlsPatch'
 objectAccessControlsPatch' pOacpBucket_ pOacpPayload_ pOacpObject_ pOacpEntity_ =
     ObjectAccessControlsPatch'

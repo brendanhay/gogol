@@ -22,7 +22,7 @@
 --
 -- Adds a resource to a playlist.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlayListItemsInsert@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.playlistItems.insert@.
 module Network.Google.Resource.YouTube.PlayListItems.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.YouTube.PlayListItems.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubePlayListItemsInsert@ method which the
+-- | A resource alias for @youtube.playlistItems.insert@ method which the
 -- 'PlayListItemsInsert'' request conforms to.
 type PlayListItemsInsertResource =
      "playlistItems" :>
@@ -70,8 +70,8 @@ data PlayListItemsInsert' = PlayListItemsInsert'
 --
 -- * 'pliiOnBehalfOfContentOwner'
 playListItemsInsert'
-    :: Text -- ^ 'part'
-    -> PlayListItem -- ^ 'payload'
+    :: Text -- ^ 'pliiPart'
+    -> PlayListItem -- ^ 'pliiPayload'
     -> PlayListItemsInsert'
 playListItemsInsert' pPliiPart_ pPliiPayload_ =
     PlayListItemsInsert'

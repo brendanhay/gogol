@@ -24,7 +24,7 @@
 -- If you\'d like to delete the manager without deleting the instances, you
 -- must first abandon the instances to remove them from the group.
 --
--- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @replicapool.instanceGroupManagers.delete@.
 module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Delete
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Delete
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
--- | A resource alias for @ReplicapoolInstanceGroupManagersDelete@ method which the
+-- | A resource alias for @replicapool.instanceGroupManagers.delete@ method which the
 -- 'InstanceGroupManagersDelete'' request conforms to.
 type InstanceGroupManagersDeleteResource =
      Capture "project" Text :>
@@ -74,9 +74,9 @@ data InstanceGroupManagersDelete' = InstanceGroupManagersDelete'
 --
 -- * 'igmdZone'
 instanceGroupManagersDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instanceGroupManager'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'igmdProject'
+    -> Text -- ^ 'igmdInstanceGroupManager'
+    -> Text -- ^ 'igmdZone'
     -> InstanceGroupManagersDelete'
 instanceGroupManagersDelete' pIgmdProject_ pIgmdInstanceGroupManager_ pIgmdZone_ =
     InstanceGroupManagersDelete'

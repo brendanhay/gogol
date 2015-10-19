@@ -27,10 +27,10 @@ module Network.Google.Discovery
 
     -- * Resources
 
-    -- ** DiscoveryAPIsGetRest
+    -- ** discovery.apis.getRest
     , module Network.Google.Resource.Discovery.APIs.GetRest
 
-    -- ** DiscoveryAPIsList
+    -- ** discovery.apis.list
     , module Network.Google.Resource.Discovery.APIs.List
 
     -- * Types

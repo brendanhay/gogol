@@ -22,7 +22,7 @@
 --
 -- Update tasks that are leased out of a TaskQueue.
 --
--- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksUpdate@.
+-- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @taskqueue.tasks.update@.
 module Network.Google.Resource.TaskQueue.Tasks.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Update
 import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
--- | A resource alias for @TaskqueueTasksUpdate@ method which the
+-- | A resource alias for @taskqueue.tasks.update@ method which the
 -- 'TasksUpdate'' request conforms to.
 type TasksUpdateResource =
      Capture "project" Text :>
@@ -80,11 +80,11 @@ data TasksUpdate' = TasksUpdate'
 --
 -- * 'tuNewLeaseSeconds'
 tasksUpdate'
-    :: Text -- ^ 'taskqueue'
-    -> Text -- ^ 'project'
-    -> Task -- ^ 'payload'
-    -> Text -- ^ 'task'
-    -> Int32 -- ^ 'newLeaseSeconds'
+    :: Text -- ^ 'tuTaskqueue'
+    -> Text -- ^ 'tuProject'
+    -> Task -- ^ 'tuPayload'
+    -> Text -- ^ 'tuTask'
+    -> Int32 -- ^ 'tuNewLeaseSeconds'
     -> TasksUpdate'
 tasksUpdate' pTuTaskqueue_ pTuProject_ pTuPayload_ pTuTask_ pTuNewLeaseSeconds_ =
     TasksUpdate'

@@ -22,7 +22,7 @@
 --
 -- Lists a file\'s comments.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveCommentsList@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.comments.list@.
 module Network.Google.Resource.Drive.Comments.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Drive.Comments.List
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveCommentsList@ method which the
+-- | A resource alias for @drive.comments.list@ method which the
 -- 'CommentsList'' request conforms to.
 type CommentsListResource =
      "files" :>
@@ -80,7 +80,7 @@ data CommentsList' = CommentsList'
 --
 -- * 'cIncludeDeleted'
 commentsList'
-    :: Text -- ^ 'fileId'
+    :: Text -- ^ 'cFileId'
     -> CommentsList'
 commentsList' pCFileId_ =
     CommentsList'

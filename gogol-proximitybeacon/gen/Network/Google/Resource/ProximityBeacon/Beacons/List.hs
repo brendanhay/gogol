@@ -24,7 +24,7 @@
 -- criteria. Only those beacons that the client has permission to list will
 -- be returned.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsList@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.list@.
 module Network.Google.Resource.ProximityBeacon.Beacons.List
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.List
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconBeaconsList@ method which the
+-- | A resource alias for @proximitybeacon.beacons.list@ method which the
 -- 'BeaconsList'' request conforms to.
 type BeaconsListResource =
      "v1beta1" :>

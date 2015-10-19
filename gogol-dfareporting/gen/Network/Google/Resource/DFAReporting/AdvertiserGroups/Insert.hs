@@ -22,7 +22,7 @@
 --
 -- Inserts a new advertiser group.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertiserGroupsInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.advertiserGroups.insert@.
 module Network.Google.Resource.DFAReporting.AdvertiserGroups.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAdvertiserGroupsInsert@ method which the
+-- | A resource alias for @dfareporting.advertiserGroups.insert@ method which the
 -- 'AdvertiserGroupsInsert'' request conforms to.
 type AdvertiserGroupsInsertResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data AdvertiserGroupsInsert' = AdvertiserGroupsInsert'
 --
 -- * 'agiPayload'
 advertiserGroupsInsert'
-    :: Int64 -- ^ 'profileId'
-    -> AdvertiserGroup -- ^ 'payload'
+    :: Int64 -- ^ 'agiProFileId'
+    -> AdvertiserGroup -- ^ 'agiPayload'
     -> AdvertiserGroupsInsert'
 advertiserGroupsInsert' pAgiProFileId_ pAgiPayload_ =
     AdvertiserGroupsInsert'

@@ -22,7 +22,7 @@
 --
 -- Lists unsampled reports to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUnSampledReportsList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.unsampledReports.list@.
 module Network.Google.Resource.Analytics.Management.UnSampledReports.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Analytics.Management.UnSampledReports.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementUnSampledReportsList@ method which the
+-- | A resource alias for @analytics.management.unsampledReports.list@ method which the
 -- 'ManagementUnSampledReportsList'' request conforms to.
 type ManagementUnSampledReportsListResource =
      "management" :>
@@ -84,9 +84,9 @@ data ManagementUnSampledReportsList' = ManagementUnSampledReportsList'
 --
 -- * 'musrlMaxResults'
 managementUnSampledReportsList'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'musrlWebPropertyId'
+    -> Text -- ^ 'musrlProFileId'
+    -> Text -- ^ 'musrlAccountId'
     -> ManagementUnSampledReportsList'
 managementUnSampledReportsList' pMusrlWebPropertyId_ pMusrlProFileId_ pMusrlAccountId_ =
     ManagementUnSampledReportsList'

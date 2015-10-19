@@ -29,7 +29,7 @@
 -- levels\'. The caller must have READ permissions for the target read
 -- group set.
 --
--- /See:/ < Genomics API Reference> for @GenomicsReadgroupsetsCoveragebucketsList@.
+-- /See:/ < Genomics API Reference> for @genomics.readgroupsets.coveragebuckets.list@.
 module Network.Google.Resource.Genomics.Readgroupsets.Coveragebuckets.List
     (
     -- * REST Resource
@@ -59,7 +59,7 @@ module Network.Google.Resource.Genomics.Readgroupsets.Coveragebuckets.List
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReadgroupsetsCoveragebucketsList@ method which the
+-- | A resource alias for @genomics.readgroupsets.coveragebuckets.list@ method which the
 -- 'ReadgroupsetsCoveragebucketsList'' request conforms to.
 type ReadgroupsetsCoveragebucketsListResource =
      "v1" :>
@@ -141,7 +141,7 @@ data ReadgroupsetsCoveragebucketsList' = ReadgroupsetsCoveragebucketsList'
 --
 -- * 'rclCallback'
 readgroupsetsCoveragebucketsList'
-    :: Text -- ^ 'readGroupSetId'
+    :: Text -- ^ 'rclReadGroupSetId'
     -> ReadgroupsetsCoveragebucketsList'
 readgroupsetsCoveragebucketsList' pRclReadGroupSetId_ =
     ReadgroupsetsCoveragebucketsList'

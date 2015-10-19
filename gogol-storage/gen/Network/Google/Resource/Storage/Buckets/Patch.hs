@@ -22,7 +22,7 @@
 --
 -- Updates a bucket. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketsPatch@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.buckets.patch@.
 module Network.Google.Resource.Storage.Buckets.Patch
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Storage.Buckets.Patch
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageBucketsPatch@ method which the
+-- | A resource alias for @storage.buckets.patch@ method which the
 -- 'BucketsPatch'' request conforms to.
 type BucketsPatchResource =
      "b" :>
@@ -92,8 +92,8 @@ data BucketsPatch' = BucketsPatch'
 --
 -- * 'bpProjection'
 bucketsPatch'
-    :: Text -- ^ 'bucket'
-    -> Bucket -- ^ 'payload'
+    :: Text -- ^ 'bpBucket'
+    -> Bucket -- ^ 'bpPayload'
     -> BucketsPatch'
 bucketsPatch' pBpBucket_ pBpPayload_ =
     BucketsPatch'

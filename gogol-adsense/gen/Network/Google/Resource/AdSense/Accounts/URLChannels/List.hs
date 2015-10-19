@@ -23,7 +23,7 @@
 -- List all URL channels in the specified ad client for the specified
 -- account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsURLChannelsList@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.urlchannels.list@.
 module Network.Google.Resource.AdSense.Accounts.URLChannels.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AdSense.Accounts.URLChannels.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAccountsURLChannelsList@ method which the
+-- | A resource alias for @adsense.accounts.urlchannels.list@ method which the
 -- 'AccountsURLChannelsList'' request conforms to.
 type AccountsURLChannelsListResource =
      "accounts" :>
@@ -78,8 +78,8 @@ data AccountsURLChannelsList' = AccountsURLChannelsList'
 --
 -- * 'auclMaxResults'
 accountsURLChannelsList'
-    :: Text -- ^ 'adClientId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'auclAdClientId'
+    -> Text -- ^ 'auclAccountId'
     -> AccountsURLChannelsList'
 accountsURLChannelsList' pAuclAdClientId_ pAuclAccountId_ =
     AccountsURLChannelsList'

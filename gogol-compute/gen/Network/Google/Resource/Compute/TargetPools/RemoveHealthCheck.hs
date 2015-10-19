@@ -22,7 +22,7 @@
 --
 -- Removes health check URL from targetPool.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsRemoveHealthCheck@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.removeHealthCheck@.
 module Network.Google.Resource.Compute.TargetPools.RemoveHealthCheck
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.TargetPools.RemoveHealthCheck
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetPoolsRemoveHealthCheck@ method which the
+-- | A resource alias for @compute.targetPools.removeHealthCheck@ method which the
 -- 'TargetPoolsRemoveHealthCheck'' request conforms to.
 type TargetPoolsRemoveHealthCheckResource =
      Capture "project" Text :>
@@ -77,10 +77,10 @@ data TargetPoolsRemoveHealthCheck' = TargetPoolsRemoveHealthCheck'
 --
 -- * 'tprhcRegion'
 targetPoolsRemoveHealthCheck'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'targetPool'
-    -> TargetPoolsRemoveHealthCheckRequest -- ^ 'payload'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'tprhcProject'
+    -> Text -- ^ 'tprhcTargetPool'
+    -> TargetPoolsRemoveHealthCheckRequest -- ^ 'tprhcPayload'
+    -> Text -- ^ 'tprhcRegion'
     -> TargetPoolsRemoveHealthCheck'
 targetPoolsRemoveHealthCheck' pTprhcProject_ pTprhcTargetPool_ pTprhcPayload_ pTprhcRegion_ =
     TargetPoolsRemoveHealthCheck'

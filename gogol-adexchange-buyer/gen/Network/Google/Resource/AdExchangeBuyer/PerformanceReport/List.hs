@@ -22,7 +22,7 @@
 --
 -- Retrieves the authenticated user\'s list of performance metrics.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPerformanceReportList@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.performanceReport.list@.
 module Network.Google.Resource.AdExchangeBuyer.PerformanceReport.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AdExchangeBuyer.PerformanceReport.List
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerPerformanceReportList@ method which the
+-- | A resource alias for @adexchangebuyer.performanceReport.list@ method which the
 -- 'PerformanceReportList'' request conforms to.
 type PerformanceReportListResource =
      "performancereport" :>
@@ -80,9 +80,9 @@ data PerformanceReportList' = PerformanceReportList'
 --
 -- * 'prlStartDateTime'
 performanceReportList'
-    :: Int64 -- ^ 'accountId'
-    -> Text -- ^ 'endDateTime'
-    -> Text -- ^ 'startDateTime'
+    :: Int64 -- ^ 'prlAccountId'
+    -> Text -- ^ 'prlEndDateTime'
+    -> Text -- ^ 'prlStartDateTime'
     -> PerformanceReportList'
 performanceReportList' pPrlAccountId_ pPrlEndDateTime_ pPrlStartDateTime_ =
     PerformanceReportList'

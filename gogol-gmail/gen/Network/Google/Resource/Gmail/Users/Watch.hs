@@ -22,7 +22,7 @@
 --
 -- Set up or update a push notification watch on the given user mailbox.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersWatch@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.watch@.
 module Network.Google.Resource.Gmail.Users.Watch
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Gmail.Users.Watch
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersWatch@ method which the
+-- | A resource alias for @gmail.users.watch@ method which the
 -- 'UsersWatch'' request conforms to.
 type UsersWatchResource =
      Capture "userId" Text :>
@@ -65,7 +65,7 @@ data UsersWatch' = UsersWatch'
 --
 -- * 'uwUserId'
 usersWatch'
-    :: WatchRequest -- ^ 'payload'
+    :: WatchRequest -- ^ 'uwPayload'
     -> Text
     -> UsersWatch'
 usersWatch' pUwPayload_ pUwUserId_ =

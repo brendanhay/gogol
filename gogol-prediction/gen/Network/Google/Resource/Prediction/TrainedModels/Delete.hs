@@ -22,7 +22,7 @@
 --
 -- Delete a trained model.
 --
--- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedModelsDelete@.
+-- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @prediction.trainedmodels.delete@.
 module Network.Google.Resource.Prediction.TrainedModels.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Prediction.TrainedModels.Delete
 import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PredictionTrainedModelsDelete@ method which the
+-- | A resource alias for @prediction.trainedmodels.delete@ method which the
 -- 'TrainedModelsDelete'' request conforms to.
 type TrainedModelsDeleteResource =
      Capture "project" Text :>
@@ -64,8 +64,8 @@ data TrainedModelsDelete' = TrainedModelsDelete'
 --
 -- * 'tmdId'
 trainedModelsDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'id'
+    :: Text -- ^ 'tmdProject'
+    -> Text -- ^ 'tmdId'
     -> TrainedModelsDelete'
 trainedModelsDelete' pTmdProject_ pTmdId_ =
     TrainedModelsDelete'

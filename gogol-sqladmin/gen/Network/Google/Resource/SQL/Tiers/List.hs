@@ -23,7 +23,7 @@
 -- Lists all available service tiers for Google Cloud SQL, for example D1,
 -- D2. For related information, see Pricing.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLTiersList@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.tiers.list@.
 module Network.Google.Resource.SQL.Tiers.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.SQL.Tiers.List
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLTiersList@ method which the
+-- | A resource alias for @sql.tiers.list@ method which the
 -- 'TiersList'' request conforms to.
 type TiersListResource =
      "projects" :>
@@ -63,7 +63,7 @@ newtype TiersList' = TiersList'
 --
 -- * 'tlProject'
 tiersList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'tlProject'
     -> TiersList'
 tiersList' pTlProject_ =
     TiersList'

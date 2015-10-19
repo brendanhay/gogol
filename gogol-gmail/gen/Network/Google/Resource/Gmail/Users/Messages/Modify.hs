@@ -22,7 +22,7 @@
 --
 -- Modifies the labels on the specified message.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesModify@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.messages.modify@.
 module Network.Google.Resource.Gmail.Users.Messages.Modify
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Gmail.Users.Messages.Modify
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersMessagesModify@ method which the
+-- | A resource alias for @gmail.users.messages.modify@ method which the
 -- 'UsersMessagesModify'' request conforms to.
 type UsersMessagesModifyResource =
      Capture "userId" Text :>
@@ -71,8 +71,8 @@ data UsersMessagesModify' = UsersMessagesModify'
 --
 -- * 'ummId'
 usersMessagesModify'
-    :: ModifyMessageRequest -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: ModifyMessageRequest -- ^ 'ummPayload'
+    -> Text -- ^ 'ummId'
     -> Text
     -> UsersMessagesModify'
 usersMessagesModify' pUmmPayload_ pUmmUserId_ pUmmId_ =

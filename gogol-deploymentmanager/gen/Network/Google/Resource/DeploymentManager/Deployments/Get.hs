@@ -22,7 +22,7 @@
 --
 -- Gets information about a specific deployment.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsGet@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @deploymentmanager.deployments.get@.
 module Network.Google.Resource.DeploymentManager.Deployments.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DeploymentManager.Deployments.Get
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerDeploymentsGet@ method which the
+-- | A resource alias for @deploymentmanager.deployments.get@ method which the
 -- 'DeploymentsGet'' request conforms to.
 type DeploymentsGetResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data DeploymentsGet' = DeploymentsGet'
 --
 -- * 'dgDeployment'
 deploymentsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'deployment'
+    :: Text -- ^ 'dgProject'
+    -> Text -- ^ 'dgDeployment'
     -> DeploymentsGet'
 deploymentsGet' pDgProject_ pDgDeployment_ =
     DeploymentsGet'

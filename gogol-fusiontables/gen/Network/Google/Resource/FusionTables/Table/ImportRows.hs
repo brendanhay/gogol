@@ -22,7 +22,7 @@
 --
 -- Imports more rows into a table.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableImportRows@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.table.importRows@.
 module Network.Google.Resource.FusionTables.Table.ImportRows
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.FusionTables.Table.ImportRows
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTableImportRows@ method which the
+-- | A resource alias for @fusiontables.table.importRows@ method which the
 -- 'TableImportRows'' request conforms to.
 type TableImportRowsResource =
      "tables" :>
@@ -90,8 +90,8 @@ data TableImportRows' = TableImportRows'
 --
 -- * 'tirIsStrict'
 tableImportRows'
-    :: Body -- ^ 'media'
-    -> Text -- ^ 'tableId'
+    :: Body -- ^ 'tirMedia'
+    -> Text -- ^ 'tirTableId'
     -> TableImportRows'
 tableImportRows' pTirMedia_ pTirTableId_ =
     TableImportRows'

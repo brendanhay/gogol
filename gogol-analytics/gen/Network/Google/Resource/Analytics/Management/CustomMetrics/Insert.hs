@@ -22,7 +22,7 @@
 --
 -- Create a new custom metric.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomMetricsInsert@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.customMetrics.insert@.
 module Network.Google.Resource.Analytics.Management.CustomMetrics.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementCustomMetricsInsert@ method which the
+-- | A resource alias for @analytics.management.customMetrics.insert@ method which the
 -- 'ManagementCustomMetricsInsert'' request conforms to.
 type ManagementCustomMetricsInsertResource =
      "management" :>
@@ -73,9 +73,9 @@ data ManagementCustomMetricsInsert' = ManagementCustomMetricsInsert'
 --
 -- * 'mcmiAccountId'
 managementCustomMetricsInsert'
-    :: Text -- ^ 'webPropertyId'
-    -> CustomMetric -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mcmiWebPropertyId'
+    -> CustomMetric -- ^ 'mcmiPayload'
+    -> Text -- ^ 'mcmiAccountId'
     -> ManagementCustomMetricsInsert'
 managementCustomMetricsInsert' pMcmiWebPropertyId_ pMcmiPayload_ pMcmiAccountId_ =
     ManagementCustomMetricsInsert'

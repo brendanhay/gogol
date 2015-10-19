@@ -24,7 +24,7 @@
 -- example, \`my-project-123\`). The caller must have read permissions for
 -- this project.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerProjectsGet@.
+-- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.get@.
 module Network.Google.Resource.CloudResourceManager.Projects.Get
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.CloudResourceManager.Projects.Get
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerProjectsGet@ method which the
+-- | A resource alias for @cloudresourcemanager.projects.get@ method which the
 -- 'ProjectsGet'' request conforms to.
 type ProjectsGetResource =
      "v1beta1" :>
@@ -99,7 +99,7 @@ data ProjectsGet' = ProjectsGet'
 --
 -- * 'pgCallback'
 projectsGet'
-    :: Text -- ^ 'projectId'
+    :: Text -- ^ 'pgProjectId'
     -> ProjectsGet'
 projectsGet' pPgProjectId_ =
     ProjectsGet'

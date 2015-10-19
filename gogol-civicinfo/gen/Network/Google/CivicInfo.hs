@@ -26,19 +26,19 @@ module Network.Google.CivicInfo
 
     -- * Resources
 
-    -- ** CivicInfoDivisionsSearch
+    -- ** civicinfo.divisions.search
     , module Network.Google.Resource.CivicInfo.Divisions.Search
 
-    -- ** CivicInfoElectionsElectionQuery
+    -- ** civicinfo.elections.electionQuery
     , module Network.Google.Resource.CivicInfo.Elections.ElectionQuery
 
-    -- ** CivicInfoElectionsVoterInfoQuery
+    -- ** civicinfo.elections.voterInfoQuery
     , module Network.Google.Resource.CivicInfo.Elections.VoterInfoQuery
 
-    -- ** CivicInfoRepresentativesRepresentativeInfoByAddress
+    -- ** civicinfo.representatives.representativeInfoByAddress
     , module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAddress
 
-    -- ** CivicInfoRepresentativesRepresentativeInfoByDivision
+    -- ** civicinfo.representatives.representativeInfoByDivision
     , module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDivision
 
     -- * Types

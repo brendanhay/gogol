@@ -22,7 +22,7 @@
 --
 -- Updates the details of an in-app product.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherInAppProductsUpdate@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.inappproducts.update@.
 module Network.Google.Resource.AndroidPublisher.InAppProducts.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AndroidPublisher.InAppProducts.Update
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherInAppProductsUpdate@ method which the
+-- | A resource alias for @androidpublisher.inappproducts.update@ method which the
 -- 'InAppProductsUpdate'' request conforms to.
 type InAppProductsUpdateResource =
      Capture "packageName" Text :>
@@ -75,9 +75,9 @@ data InAppProductsUpdate' = InAppProductsUpdate'
 --
 -- * 'iapuSKU'
 inAppProductsUpdate'
-    :: Text -- ^ 'packageName'
-    -> InAppProduct -- ^ 'payload'
-    -> Text -- ^ 'sku'
+    :: Text -- ^ 'iapuPackageName'
+    -> InAppProduct -- ^ 'iapuPayload'
+    -> Text -- ^ 'iapuSKU'
     -> InAppProductsUpdate'
 inAppProductsUpdate' pIapuPackageName_ pIapuPayload_ pIapuSKU_ =
     InAppProductsUpdate'

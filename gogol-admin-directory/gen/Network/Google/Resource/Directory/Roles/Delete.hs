@@ -22,7 +22,7 @@
 --
 -- Deletes a role.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryRolesDelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.roles.delete@.
 module Network.Google.Resource.Directory.Roles.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Roles.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryRolesDelete@ method which the
+-- | A resource alias for @directory.roles.delete@ method which the
 -- 'RolesDelete'' request conforms to.
 type RolesDeleteResource =
      "customer" :>
@@ -65,8 +65,8 @@ data RolesDelete' = RolesDelete'
 --
 -- * 'rdCustomer'
 rolesDelete'
-    :: Text -- ^ 'roleId'
-    -> Text -- ^ 'customer'
+    :: Text -- ^ 'rdRoleId'
+    -> Text -- ^ 'rdCustomer'
     -> RolesDelete'
 rolesDelete' pRdRoleId_ pRdCustomer_ =
     RolesDelete'

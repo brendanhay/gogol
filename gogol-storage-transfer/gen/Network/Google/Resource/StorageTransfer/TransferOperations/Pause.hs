@@ -22,7 +22,7 @@
 --
 -- Pauses a transfer operation.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferOperationsPause@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.transferOperations.pause@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Pause
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Pause
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferTransferOperationsPause@ method which the
+-- | A resource alias for @storagetransfer.transferOperations.pause@ method which the
 -- 'TransferOperationsPause'' request conforms to.
 type TransferOperationsPauseResource =
      "v1" :>
@@ -100,8 +100,8 @@ data TransferOperationsPause' = TransferOperationsPause'
 --
 -- * 'topCallback'
 transferOperationsPause'
-    :: PauseTransferOperationRequest -- ^ 'payload'
-    -> Text -- ^ 'name'
+    :: PauseTransferOperationRequest -- ^ 'topPayload'
+    -> Text -- ^ 'topName'
     -> TransferOperationsPause'
 transferOperationsPause' pTopPayload_ pTopName_ =
     TransferOperationsPause'

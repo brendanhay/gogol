@@ -22,7 +22,7 @@
 --
 -- Gets one placement strategy by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementStrategiesGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placementStrategies.get@.
 module Network.Google.Resource.DFAReporting.PlacementStrategies.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPlacementStrategiesGet@ method which the
+-- | A resource alias for @dfareporting.placementStrategies.get@ method which the
 -- 'PlacementStrategiesGet'' request conforms to.
 type PlacementStrategiesGetResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data PlacementStrategiesGet' = PlacementStrategiesGet'
 --
 -- * 'psgId'
 placementStrategiesGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'psgProFileId'
+    -> Int64 -- ^ 'psgId'
     -> PlacementStrategiesGet'
 placementStrategiesGet' pPsgProFileId_ pPsgId_ =
     PlacementStrategiesGet'

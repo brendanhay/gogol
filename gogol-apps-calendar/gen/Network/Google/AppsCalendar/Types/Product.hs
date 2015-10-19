@@ -882,7 +882,7 @@ newtype ColorsEvent = ColorsEvent
 --
 -- * 'ceAddtional'
 colorsEvent
-    :: HashMap Text ColorDefinition -- ^ 'addtional'
+    :: HashMap Text ColorDefinition -- ^ 'ceAddtional'
     -> ColorsEvent
 colorsEvent pCeAddtional_ =
     ColorsEvent
@@ -1565,7 +1565,7 @@ newtype FreeBusyResponseGroups = FreeBusyResponseGroups
 --
 -- * 'fbrgAddtional'
 freeBusyResponseGroups
-    :: HashMap Text FreeBusyGroup -- ^ 'addtional'
+    :: HashMap Text FreeBusyGroup -- ^ 'fbrgAddtional'
     -> FreeBusyResponseGroups
 freeBusyResponseGroups pFbrgAddtional_ =
     FreeBusyResponseGroups
@@ -1655,7 +1655,7 @@ newtype ColorsCalendar = ColorsCalendar
 --
 -- * 'ccAddtional'
 colorsCalendar
-    :: HashMap Text ColorDefinition -- ^ 'addtional'
+    :: HashMap Text ColorDefinition -- ^ 'ccAddtional'
     -> ColorsCalendar
 colorsCalendar pCcAddtional_ =
     ColorsCalendar
@@ -1743,7 +1743,7 @@ newtype EventExtendedPropertiesPrivate = EventExtendedPropertiesPrivate
 --
 -- * 'eeppAddtional'
 eventExtendedPropertiesPrivate
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'eeppAddtional'
     -> EventExtendedPropertiesPrivate
 eventExtendedPropertiesPrivate pEeppAddtional_ =
     EventExtendedPropertiesPrivate
@@ -1780,7 +1780,7 @@ newtype ChannelParams = ChannelParams
 --
 -- * 'cpAddtional'
 channelParams
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'cpAddtional'
     -> ChannelParams
 channelParams pCpAddtional_ =
     ChannelParams
@@ -2733,7 +2733,7 @@ newtype EventGadgetPreferences = EventGadgetPreferences
 --
 -- * 'egpAddtional'
 eventGadgetPreferences
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'egpAddtional'
     -> EventGadgetPreferences
 eventGadgetPreferences pEgpAddtional_ =
     EventGadgetPreferences
@@ -2948,7 +2948,7 @@ newtype EventExtendedPropertiesShared = EventExtendedPropertiesShared
 --
 -- * 'eepsAddtional'
 eventExtendedPropertiesShared
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'eepsAddtional'
     -> EventExtendedPropertiesShared
 eventExtendedPropertiesShared pEepsAddtional_ =
     EventExtendedPropertiesShared
@@ -2984,7 +2984,7 @@ newtype FreeBusyResponseCalendars = FreeBusyResponseCalendars
 --
 -- * 'fbrcAddtional'
 freeBusyResponseCalendars
-    :: HashMap Text FreeBusyCalendar -- ^ 'addtional'
+    :: HashMap Text FreeBusyCalendar -- ^ 'fbrcAddtional'
     -> FreeBusyResponseCalendars
 freeBusyResponseCalendars pFbrcAddtional_ =
     FreeBusyResponseCalendars

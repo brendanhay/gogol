@@ -22,7 +22,7 @@
 --
 -- Watch for changes to Settings resources.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarSettingsWatch@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.settings.watch@.
 module Network.Google.Resource.Calendar.Settings.Watch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Calendar.Settings.Watch
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarSettingsWatch@ method which the
+-- | A resource alias for @calendar.settings.watch@ method which the
 -- 'SettingsWatch'' request conforms to.
 type SettingsWatchResource =
      "users" :>
@@ -77,7 +77,7 @@ data SettingsWatch' = SettingsWatch'
 --
 -- * 'swMaxResults'
 settingsWatch'
-    :: Channel -- ^ 'payload'
+    :: Channel -- ^ 'swPayload'
     -> SettingsWatch'
 settingsWatch' pSwPayload_ =
     SettingsWatch'

@@ -23,7 +23,7 @@
 -- Updates a deployment and all of the resources described by the
 -- deployment manifest. This method supports patch semantics.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsPatch@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @deploymentmanager.deployments.patch@.
 module Network.Google.Resource.DeploymentManager.Deployments.Patch
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.DeploymentManager.Deployments.Patch
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerDeploymentsPatch@ method which the
+-- | A resource alias for @deploymentmanager.deployments.patch@ method which the
 -- 'DeploymentsPatch'' request conforms to.
 type DeploymentsPatchResource =
      Capture "project" Text :>
@@ -91,9 +91,9 @@ data DeploymentsPatch' = DeploymentsPatch'
 --
 -- * 'dpDeployment'
 deploymentsPatch'
-    :: Text -- ^ 'project'
-    -> Deployment -- ^ 'payload'
-    -> Text -- ^ 'deployment'
+    :: Text -- ^ 'dpProject'
+    -> Deployment -- ^ 'dpPayload'
+    -> Text -- ^ 'dpDeployment'
     -> DeploymentsPatch'
 deploymentsPatch' pDpProject_ pDpPayload_ pDpDeployment_ =
     DeploymentsPatch'

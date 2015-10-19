@@ -23,7 +23,7 @@
 -- Cancels and removes the preview currently associated with the
 -- deployment.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsCancelPreview@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @deploymentmanager.deployments.cancelPreview@.
 module Network.Google.Resource.DeploymentManager.Deployments.CancelPreview
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.DeploymentManager.Deployments.CancelPreview
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerDeploymentsCancelPreview@ method which the
+-- | A resource alias for @deploymentmanager.deployments.cancelPreview@ method which the
 -- 'DeploymentsCancelPreview'' request conforms to.
 type DeploymentsCancelPreviewResource =
      Capture "project" Text :>
@@ -74,9 +74,9 @@ data DeploymentsCancelPreview' = DeploymentsCancelPreview'
 --
 -- * 'dcpDeployment'
 deploymentsCancelPreview'
-    :: Text -- ^ 'project'
-    -> DeploymentsCancelPreviewRequest -- ^ 'payload'
-    -> Text -- ^ 'deployment'
+    :: Text -- ^ 'dcpProject'
+    -> DeploymentsCancelPreviewRequest -- ^ 'dcpPayload'
+    -> Text -- ^ 'dcpDeployment'
     -> DeploymentsCancelPreview'
 deploymentsCancelPreview' pDcpProject_ pDcpPayload_ pDcpDeployment_ =
     DeploymentsCancelPreview'

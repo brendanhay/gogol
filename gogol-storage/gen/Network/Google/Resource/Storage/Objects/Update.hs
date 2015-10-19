@@ -22,7 +22,7 @@
 --
 -- Updates an object\'s metadata.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsUpdate@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objects.update@.
 module Network.Google.Resource.Storage.Objects.Update
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Storage.Objects.Update
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsUpdate@ method which the
+-- | A resource alias for @storage.objects.update@ method which the
 -- 'ObjectsUpdate'' request conforms to.
 type ObjectsUpdateResource =
      "b" :>
@@ -122,9 +122,9 @@ data ObjectsUpdate' = ObjectsUpdate'
 --
 -- * 'ouGeneration'
 objectsUpdate'
-    :: Text -- ^ 'bucket'
-    -> Object -- ^ 'payload'
-    -> Text -- ^ 'object'
+    :: Text -- ^ 'ouBucket'
+    -> Object -- ^ 'ouPayload'
+    -> Text -- ^ 'ouObject'
     -> ObjectsUpdate'
 objectsUpdate' pOuBucket_ pOuPayload_ pOuObject_ =
     ObjectsUpdate'

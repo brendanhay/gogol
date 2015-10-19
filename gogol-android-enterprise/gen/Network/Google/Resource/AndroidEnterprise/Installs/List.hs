@@ -22,7 +22,7 @@
 --
 -- Retrieves the details of all apps installed on the specified device.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseInstallsList@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.installs.list@.
 module Network.Google.Resource.AndroidEnterprise.Installs.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidEnterprise.Installs.List
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseInstallsList@ method which the
+-- | A resource alias for @androidenterprise.installs.list@ method which the
 -- 'InstallsList'' request conforms to.
 type InstallsListResource =
      "enterprises" :>
@@ -73,9 +73,9 @@ data InstallsList' = InstallsList'
 --
 -- * 'ilDeviceId'
 installsList'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'deviceId'
+    :: Text -- ^ 'ilEnterpriseId'
+    -> Text -- ^ 'ilUserId'
+    -> Text -- ^ 'ilDeviceId'
     -> InstallsList'
 installsList' pIlEnterpriseId_ pIlUserId_ pIlDeviceId_ =
     InstallsList'

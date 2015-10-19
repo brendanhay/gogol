@@ -26,10 +26,10 @@ module Network.Google.FreebaseSearch
 
     -- * Methods
 
-    -- ** FreebaseReconcile
+    -- ** freebase.reconcile
     , module Network.Google.Method.Freebase.Reconcile
 
-    -- ** FreebaseSearch
+    -- ** freebase.search
     , module Network.Google.Method.Freebase.Search
 
     -- * Types

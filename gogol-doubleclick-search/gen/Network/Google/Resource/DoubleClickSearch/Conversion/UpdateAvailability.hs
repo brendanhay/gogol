@@ -23,7 +23,7 @@
 -- Updates the availabilities of a batch of floodlight activities in
 -- DoubleClick Search.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchConversionUpdateAvailability@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @doubleclicksearch.conversion.updateAvailability@.
 module Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClicksearchConversionUpdateAvailability@ method which the
+-- | A resource alias for @doubleclicksearch.conversion.updateAvailability@ method which the
 -- 'ConversionUpdateAvailability'' request conforms to.
 type ConversionUpdateAvailabilityResource =
      "conversion" :>
@@ -63,7 +63,7 @@ newtype ConversionUpdateAvailability' = ConversionUpdateAvailability'
 --
 -- * 'cuaPayload'
 conversionUpdateAvailability'
-    :: UpdateAvailabilityRequest -- ^ 'payload'
+    :: UpdateAvailabilityRequest -- ^ 'cuaPayload'
     -> ConversionUpdateAvailability'
 conversionUpdateAvailability' pCuaPayload_ =
     ConversionUpdateAvailability'

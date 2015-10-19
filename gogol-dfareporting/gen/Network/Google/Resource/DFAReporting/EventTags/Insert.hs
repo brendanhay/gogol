@@ -22,7 +22,7 @@
 --
 -- Inserts a new event tag.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingEventTagsInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.eventTags.insert@.
 module Network.Google.Resource.DFAReporting.EventTags.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.EventTags.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingEventTagsInsert@ method which the
+-- | A resource alias for @dfareporting.eventTags.insert@ method which the
 -- 'EventTagsInsert'' request conforms to.
 type EventTagsInsertResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data EventTagsInsert' = EventTagsInsert'
 --
 -- * 'etiPayload'
 eventTagsInsert'
-    :: Int64 -- ^ 'profileId'
-    -> EventTag -- ^ 'payload'
+    :: Int64 -- ^ 'etiProFileId'
+    -> EventTag -- ^ 'etiPayload'
     -> EventTagsInsert'
 eventTagsInsert' pEtiProFileId_ pEtiPayload_ =
     EventTagsInsert'

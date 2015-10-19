@@ -22,7 +22,7 @@
 --
 -- Updates an existing template. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTemplatePatch@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.template.patch@.
 module Network.Google.Resource.FusionTables.Template.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.FusionTables.Template.Patch
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTemplatePatch@ method which the
+-- | A resource alias for @fusiontables.template.patch@ method which the
 -- 'TemplatePatch'' request conforms to.
 type TemplatePatchResource =
      "tables" :>
@@ -70,9 +70,9 @@ data TemplatePatch' = TemplatePatch'
 --
 -- * 'tpTableId'
 templatePatch'
-    :: Int32 -- ^ 'templateId'
-    -> Template -- ^ 'payload'
-    -> Text -- ^ 'tableId'
+    :: Int32 -- ^ 'tpTemplateId'
+    -> Template -- ^ 'tpPayload'
+    -> Text -- ^ 'tpTableId'
     -> TemplatePatch'
 templatePatch' pTpTemplateId_ pTpPayload_ pTpTableId_ =
     TemplatePatch'

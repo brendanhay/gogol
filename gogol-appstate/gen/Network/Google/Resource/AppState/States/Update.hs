@@ -24,7 +24,7 @@
 -- version matches the currently stored version. This method is safe in the
 -- face of concurrent writes. Maximum per-key size is 128KB.
 --
--- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @AppStateStatesUpdate@.
+-- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @appstate.states.update@.
 module Network.Google.Resource.AppState.States.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AppState.States.Update
 import           Network.Google.AppState.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppStateStatesUpdate@ method which the
+-- | A resource alias for @appstate.states.update@ method which the
 -- 'StatesUpdate'' request conforms to.
 type StatesUpdateResource =
      "states" :>
@@ -74,8 +74,8 @@ data StatesUpdate' = StatesUpdate'
 --
 -- * 'suPayload'
 statesUpdate'
-    :: Int32 -- ^ 'stateKey'
-    -> UpdateRequest -- ^ 'payload'
+    :: Int32 -- ^ 'suStateKey'
+    -> UpdateRequest -- ^ 'suPayload'
     -> StatesUpdate'
 statesUpdate' pSuStateKey_ pSuPayload_ =
     StatesUpdate'

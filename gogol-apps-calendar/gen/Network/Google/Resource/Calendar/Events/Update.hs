@@ -22,7 +22,7 @@
 --
 -- Updates an event.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsUpdate@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.events.update@.
 module Network.Google.Resource.Calendar.Events.Update
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Calendar.Events.Update
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarEventsUpdate@ method which the
+-- | A resource alias for @calendar.events.update@ method which the
 -- 'EventsUpdate'' request conforms to.
 type EventsUpdateResource =
      "calendars" :>
@@ -90,9 +90,9 @@ data EventsUpdate' = EventsUpdate'
 --
 -- * 'euEventId'
 eventsUpdate'
-    :: Text -- ^ 'calendarId'
-    -> Event -- ^ 'payload'
-    -> Text -- ^ 'eventId'
+    :: Text -- ^ 'euCalendarId'
+    -> Event -- ^ 'euPayload'
+    -> Text -- ^ 'euEventId'
     -> EventsUpdate'
 eventsUpdate' pEuCalendarId_ pEuPayload_ pEuEventId_ =
     EventsUpdate'

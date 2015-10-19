@@ -23,7 +23,7 @@
 -- Returns a list of application languages that the YouTube website
 -- supports.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeI18nLanguagesList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.i18nLanguages.list@.
 module Network.Google.Resource.YouTube.I18nLanguages.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.YouTube.I18nLanguages.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeI18nLanguagesList@ method which the
+-- | A resource alias for @youtube.i18nLanguages.list@ method which the
 -- 'I18nLanguagesList'' request conforms to.
 type I18nLanguagesListResource =
      "i18nLanguages" :>
@@ -67,7 +67,7 @@ data I18nLanguagesList' = I18nLanguagesList'
 --
 -- * 'illHl'
 i18nLanguagesList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'illPart'
     -> I18nLanguagesList'
 i18nLanguagesList' pIllPart_ =
     I18nLanguagesList'

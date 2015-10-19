@@ -23,7 +23,7 @@
 -- Retrieves the list of instance resources contained within the specified
 -- zone.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.list@.
 module Network.Google.Resource.Compute.Instances.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.Instances.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesList@ method which the
+-- | A resource alias for @compute.instances.list@ method which the
 -- 'InstancesList'' request conforms to.
 type InstancesListResource =
      Capture "project" Text :>
@@ -82,8 +82,8 @@ data InstancesList' = InstancesList'
 --
 -- * 'illMaxResults'
 instancesList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'illProject'
+    -> Text -- ^ 'illZone'
     -> InstancesList'
 instancesList' pIllProject_ pIllZone_ =
     InstancesList'

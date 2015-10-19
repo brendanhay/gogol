@@ -24,7 +24,7 @@
 -- APK\'s Expansion Files. To add a new Expansion File use the Upload
 -- method.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsExpansionFilesUpdate@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.expansionfiles.update@.
 module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Update
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Update
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsExpansionFilesUpdate@ method which the
+-- | A resource alias for @androidpublisher.edits.expansionfiles.update@ method which the
 -- 'EditsExpansionFilesUpdate'' request conforms to.
 type EditsExpansionFilesUpdateResource =
      Capture "packageName" Text :>
@@ -88,11 +88,11 @@ data EditsExpansionFilesUpdate' = EditsExpansionFilesUpdate'
 --
 -- * 'eEditId'
 editsExpansionFilesUpdate'
-    :: Text -- ^ 'packageName'
-    -> Int32 -- ^ 'apkVersionCode'
-    -> ExpansionFile -- ^ 'payload'
-    -> EditsExpansionFilesUpdateExpansionFileType -- ^ 'expansionFileType'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'ePackageName'
+    -> Int32 -- ^ 'eAPKVersionCode'
+    -> ExpansionFile -- ^ 'ePayload'
+    -> EditsExpansionFilesUpdateExpansionFileType -- ^ 'eExpansionFileType'
+    -> Text -- ^ 'eEditId'
     -> EditsExpansionFilesUpdate'
 editsExpansionFilesUpdate' pEPackageName_ pEAPKVersionCode_ pEPayload_ pEExpansionFileType_ pEEditId_ =
     EditsExpansionFilesUpdate'

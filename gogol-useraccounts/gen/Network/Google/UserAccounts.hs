@@ -26,55 +26,55 @@ module Network.Google.UserAccounts
 
     -- * Resources
 
-    -- ** CloudUserAccountsGlobalAccountsOperationsDelete
+    -- ** clouduseraccounts.globalAccountsOperations.delete
     , module Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.Delete
 
-    -- ** CloudUserAccountsGlobalAccountsOperationsGet
+    -- ** clouduseraccounts.globalAccountsOperations.get
     , module Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.Get
 
-    -- ** CloudUserAccountsGlobalAccountsOperationsList
+    -- ** clouduseraccounts.globalAccountsOperations.list
     , module Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.List
 
-    -- ** CloudUserAccountsGroupsAddMember
+    -- ** clouduseraccounts.groups.addMember
     , module Network.Google.Resource.CloudUserAccounts.Groups.AddMember
 
-    -- ** CloudUserAccountsGroupsDelete
+    -- ** clouduseraccounts.groups.delete
     , module Network.Google.Resource.CloudUserAccounts.Groups.Delete
 
-    -- ** CloudUserAccountsGroupsGet
+    -- ** clouduseraccounts.groups.get
     , module Network.Google.Resource.CloudUserAccounts.Groups.Get
 
-    -- ** CloudUserAccountsGroupsInsert
+    -- ** clouduseraccounts.groups.insert
     , module Network.Google.Resource.CloudUserAccounts.Groups.Insert
 
-    -- ** CloudUserAccountsGroupsList
+    -- ** clouduseraccounts.groups.list
     , module Network.Google.Resource.CloudUserAccounts.Groups.List
 
-    -- ** CloudUserAccountsGroupsRemoveMember
+    -- ** clouduseraccounts.groups.removeMember
     , module Network.Google.Resource.CloudUserAccounts.Groups.RemoveMember
 
-    -- ** CloudUserAccountsLinuxGetAuthorizedKeysView
+    -- ** clouduseraccounts.linux.getAuthorizedKeysView
     , module Network.Google.Resource.CloudUserAccounts.Linux.GetAuthorizedKeysView
 
-    -- ** CloudUserAccountsLinuxGetLinuxAccountViews
+    -- ** clouduseraccounts.linux.getLinuxAccountViews
     , module Network.Google.Resource.CloudUserAccounts.Linux.GetLinuxAccountViews
 
-    -- ** CloudUserAccountsUsersAddPublicKey
+    -- ** clouduseraccounts.users.addPublicKey
     , module Network.Google.Resource.CloudUserAccounts.Users.AddPublicKey
 
-    -- ** CloudUserAccountsUsersDelete
+    -- ** clouduseraccounts.users.delete
     , module Network.Google.Resource.CloudUserAccounts.Users.Delete
 
-    -- ** CloudUserAccountsUsersGet
+    -- ** clouduseraccounts.users.get
     , module Network.Google.Resource.CloudUserAccounts.Users.Get
 
-    -- ** CloudUserAccountsUsersInsert
+    -- ** clouduseraccounts.users.insert
     , module Network.Google.Resource.CloudUserAccounts.Users.Insert
 
-    -- ** CloudUserAccountsUsersList
+    -- ** clouduseraccounts.users.list
     , module Network.Google.Resource.CloudUserAccounts.Users.List
 
-    -- ** CloudUserAccountsUsersRemovePublicKey
+    -- ** clouduseraccounts.users.removePublicKey
     , module Network.Google.Resource.CloudUserAccounts.Users.RemovePublicKey
 
     -- * Types

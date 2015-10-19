@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of browsers.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingBrowsersList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.browsers.list@.
 module Network.Google.Resource.DFAReporting.Browsers.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DFAReporting.Browsers.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingBrowsersList@ method which the
+-- | A resource alias for @dfareporting.browsers.list@ method which the
 -- 'BrowsersList'' request conforms to.
 type BrowsersListResource =
      "userprofiles" :>
@@ -61,7 +61,7 @@ newtype BrowsersList' = BrowsersList'
 --
 -- * 'blProFileId'
 browsersList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'blProFileId'
     -> BrowsersList'
 browsersList' pBlProFileId_ =
     BrowsersList'

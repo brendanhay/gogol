@@ -22,7 +22,7 @@
 --
 -- Imports a new table.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableImportTable@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.table.importTable@.
 module Network.Google.Resource.FusionTables.Table.ImportTable
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.FusionTables.Table.ImportTable
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTableImportTable@ method which the
+-- | A resource alias for @fusiontables.table.importTable@ method which the
 -- 'TableImportTable'' request conforms to.
 type TableImportTableResource =
      "tables" :>
@@ -75,8 +75,8 @@ data TableImportTable' = TableImportTable'
 --
 -- * 'titEncoding'
 tableImportTable'
-    :: Body -- ^ 'media'
-    -> Text -- ^ 'name'
+    :: Body -- ^ 'titMedia'
+    -> Text -- ^ 'titName'
     -> TableImportTable'
 tableImportTable' pTitMedia_ pTitName_ =
     TableImportTable'

@@ -22,7 +22,7 @@
 --
 -- Runs a stored query to generate a report.
 --
--- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleClickBidManagerQueriesRunQuery@.
+-- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.queries.runquery@.
 module Network.Google.Resource.DoubleClickBidManager.Queries.RunQuery
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DoubleClickBidManager.Queries.RunQuery
 import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClickBidManagerQueriesRunQuery@ method which the
+-- | A resource alias for @doubleclickbidmanager.queries.runquery@ method which the
 -- 'QueriesRunQuery'' request conforms to.
 type QueriesRunQueryResource =
      "query" :>
@@ -64,8 +64,8 @@ data QueriesRunQuery' = QueriesRunQuery'
 --
 -- * 'qrqPayload'
 queriesRunQuery'
-    :: Int64 -- ^ 'queryId'
-    -> RunQueryRequest -- ^ 'payload'
+    :: Int64 -- ^ 'qrqQueryId'
+    -> RunQueryRequest -- ^ 'qrqPayload'
     -> QueriesRunQuery'
 queriesRunQuery' pQrqQueryId_ pQrqPayload_ =
     QueriesRunQuery'

@@ -22,7 +22,7 @@
 --
 -- Retrieves the details of a collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseCollectionsGet@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.get@.
 module Network.Google.Resource.AndroidEnterprise.Collections.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidEnterprise.Collections.Get
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseCollectionsGet@ method which the
+-- | A resource alias for @androidenterprise.collections.get@ method which the
 -- 'CollectionsGet'' request conforms to.
 type CollectionsGetResource =
      "enterprises" :>
@@ -65,8 +65,8 @@ data CollectionsGet' = CollectionsGet'
 --
 -- * 'cggCollectionId'
 collectionsGet'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'collectionId'
+    :: Text -- ^ 'cggEnterpriseId'
+    -> Text -- ^ 'cggCollectionId'
     -> CollectionsGet'
 collectionsGet' pCggEnterpriseId_ pCggCollectionId_ =
     CollectionsGet'

@@ -22,7 +22,7 @@
 --
 -- Checks whether the games client is out of date.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesRevisionsCheck@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.revisions.check@.
 module Network.Google.Resource.Games.Revisions.Check
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Games.Revisions.Check
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesRevisionsCheck@ method which the
+-- | A resource alias for @games.revisions.check@ method which the
 -- 'RevisionsCheck'' request conforms to.
 type RevisionsCheckResource =
      "revisions" :>
@@ -61,7 +61,7 @@ newtype RevisionsCheck' = RevisionsCheck'
 --
 -- * 'rcClientRevision'
 revisionsCheck'
-    :: Text -- ^ 'clientRevision'
+    :: Text -- ^ 'rcClientRevision'
     -> RevisionsCheck'
 revisionsCheck' pRcClientRevision_ =
     RevisionsCheck'

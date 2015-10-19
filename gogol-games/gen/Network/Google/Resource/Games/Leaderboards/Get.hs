@@ -22,7 +22,7 @@
 --
 -- Retrieves the metadata of the leaderboard with the given ID.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesLeaderboardsGet@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.leaderboards.get@.
 module Network.Google.Resource.Games.Leaderboards.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Games.Leaderboards.Get
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesLeaderboardsGet@ method which the
+-- | A resource alias for @games.leaderboards.get@ method which the
 -- 'LeaderboardsGet'' request conforms to.
 type LeaderboardsGetResource =
      "leaderboards" :>
@@ -64,7 +64,7 @@ data LeaderboardsGet' = LeaderboardsGet'
 --
 -- * 'lgLanguage'
 leaderboardsGet'
-    :: Text -- ^ 'leaderboardId'
+    :: Text -- ^ 'lgLeaderboardId'
     -> LeaderboardsGet'
 leaderboardsGet' pLgLeaderboardId_ =
     LeaderboardsGet'

@@ -22,7 +22,7 @@
 --
 -- Deletes an access control rule.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarACLDelete@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.acl.delete@.
 module Network.Google.Resource.Calendar.ACL.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Calendar.ACL.Delete
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarACLDelete@ method which the
+-- | A resource alias for @calendar.acl.delete@ method which the
 -- 'ACLDelete'' request conforms to.
 type ACLDeleteResource =
      "calendars" :>
@@ -65,8 +65,8 @@ data ACLDelete' = ACLDelete'
 --
 -- * 'adRuleId'
 aclDelete'
-    :: Text -- ^ 'calendarId'
-    -> Text -- ^ 'ruleId'
+    :: Text -- ^ 'adCalendarId'
+    -> Text -- ^ 'adRuleId'
     -> ACLDelete'
 aclDelete' pAdCalendarId_ pAdRuleId_ =
     ACLDelete'

@@ -22,7 +22,7 @@
 --
 -- Updates a Merchant Center account. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountsPatch@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounts.patch@.
 module Network.Google.Resource.Content.Accounts.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Content.Accounts.Patch
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccountsPatch@ method which the
+-- | A resource alias for @content.accounts.patch@ method which the
 -- 'AccountsPatch'' request conforms to.
 type AccountsPatchResource =
      Capture "merchantId" Word64 :>
@@ -74,9 +74,9 @@ data AccountsPatch' = AccountsPatch'
 --
 -- * 'ap1DryRun'
 accountsPatch'
-    :: Word64 -- ^ 'merchantId'
-    -> Account -- ^ 'payload'
-    -> Word64 -- ^ 'accountId'
+    :: Word64 -- ^ 'ap1MerchantId'
+    -> Account -- ^ 'ap1Payload'
+    -> Word64 -- ^ 'ap1AccountId'
     -> AccountsPatch'
 accountsPatch' pAp1MerchantId_ pAp1Payload_ pAp1AccountId_ =
     AccountsPatch'

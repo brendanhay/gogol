@@ -22,7 +22,7 @@
 --
 -- Sets an instance\'s scheduling options.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesSetScheduling@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.setScheduling@.
 module Network.Google.Resource.Compute.Instances.SetScheduling
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Instances.SetScheduling
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesSetScheduling@ method which the
+-- | A resource alias for @compute.instances.setScheduling@ method which the
 -- 'InstancesSetScheduling'' request conforms to.
 type InstancesSetSchedulingResource =
      Capture "project" Text :>
@@ -76,10 +76,10 @@ data InstancesSetScheduling' = InstancesSetScheduling'
 --
 -- * 'issInstance'
 instancesSetScheduling'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Scheduling -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'issProject'
+    -> Text -- ^ 'issZone'
+    -> Scheduling -- ^ 'issPayload'
+    -> Text -- ^ 'issInstance'
     -> InstancesSetScheduling'
 instancesSetScheduling' pIssProject_ pIssZone_ pIssPayload_ pIssInstance_ =
     InstancesSetScheduling'

@@ -23,7 +23,7 @@
 -- Retrieves the list of BackendService resources available to the
 -- specified project.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeBackendServicesList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.list@.
 module Network.Google.Resource.Compute.BackendServices.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.BackendServices.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeBackendServicesList@ method which the
+-- | A resource alias for @compute.backendServices.list@ method which the
 -- 'BackendServicesList'' request conforms to.
 type BackendServicesListResource =
      Capture "project" Text :>
@@ -78,7 +78,7 @@ data BackendServicesList' = BackendServicesList'
 --
 -- * 'bslMaxResults'
 backendServicesList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'bslProject'
     -> BackendServicesList'
 backendServicesList' pBslProject_ =
     BackendServicesList'

@@ -22,7 +22,7 @@
 --
 -- Cancel processing on a raster collection asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRasterCollectionsCancelProcessing@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.rasterCollections.cancelProcessing@.
 module Network.Google.Resource.MapsEngine.RasterCollections.CancelProcessing
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.RasterCollections.CancelProcessing
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRasterCollectionsCancelProcessing@ method which the
+-- | A resource alias for @mapsengine.rasterCollections.cancelProcessing@ method which the
 -- 'RasterCollectionsCancelProcessing'' request conforms to.
 type RasterCollectionsCancelProcessingResource =
      "rasterCollections" :>
@@ -61,7 +61,7 @@ newtype RasterCollectionsCancelProcessing' = RasterCollectionsCancelProcessing'
 --
 -- * 'rccpId'
 rasterCollectionsCancelProcessing'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'rccpId'
     -> RasterCollectionsCancelProcessing'
 rasterCollectionsCancelProcessing' pRccpId_ =
     RasterCollectionsCancelProcessing'

@@ -22,7 +22,7 @@
 --
 -- Returns channelSection resources that match the API request criteria.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeChannelSectionsList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.channelSections.list@.
 module Network.Google.Resource.YouTube.ChannelSections.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.YouTube.ChannelSections.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeChannelSectionsList@ method which the
+-- | A resource alias for @youtube.channelSections.list@ method which the
 -- 'ChannelSectionsList'' request conforms to.
 type ChannelSectionsListResource =
      "channelSections" :>
@@ -85,7 +85,7 @@ data ChannelSectionsList' = ChannelSectionsList'
 --
 -- * 'cslId'
 channelSectionsList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'cslPart'
     -> ChannelSectionsList'
 channelSectionsList' pCslPart_ =
     ChannelSectionsList'

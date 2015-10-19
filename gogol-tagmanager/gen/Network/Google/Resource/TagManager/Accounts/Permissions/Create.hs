@@ -22,7 +22,7 @@
 --
 -- Creates a user\'s Account & Container Permissions.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsPermissionsCreate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.permissions.create@.
 module Network.Google.Resource.TagManager.Accounts.Permissions.Create
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.Create
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsPermissionsCreate@ method which the
+-- | A resource alias for @tagmanager.accounts.permissions.create@ method which the
 -- 'AccountsPermissionsCreate'' request conforms to.
 type AccountsPermissionsCreateResource =
      "accounts" :>
@@ -65,8 +65,8 @@ data AccountsPermissionsCreate' = AccountsPermissionsCreate'
 --
 -- * 'apcAccountId'
 accountsPermissionsCreate'
-    :: UserAccess -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: UserAccess -- ^ 'apcPayload'
+    -> Text -- ^ 'apcAccountId'
     -> AccountsPermissionsCreate'
 accountsPermissionsCreate' pApcPayload_ pApcAccountId_ =
     AccountsPermissionsCreate'

@@ -24,7 +24,7 @@
 -- _Authentication and Authorization rules_ and _List methods rules_ for
 -- more information about this method.
 --
--- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviesPartnerAccountsExperienceLocalesList@.
+-- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @playmoviespartner.accounts.experienceLocales.list@.
 module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviesPartnerAccountsExperienceLocalesList@ method which the
+-- | A resource alias for @playmoviespartner.accounts.experienceLocales.list@ method which the
 -- 'AccountsExperienceLocalesList'' request conforms to.
 type AccountsExperienceLocalesListResource =
      "v1" :>
@@ -147,7 +147,7 @@ data AccountsExperienceLocalesList' = AccountsExperienceLocalesList'
 --
 -- * 'aellCallback'
 accountsExperienceLocalesList'
-    :: Text -- ^ 'accountId'
+    :: Text -- ^ 'aellAccountId'
     -> AccountsExperienceLocalesList'
 accountsExperienceLocalesList' pAellAccountId_ =
     AccountsExperienceLocalesList'

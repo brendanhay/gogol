@@ -23,7 +23,7 @@
 -- Imports data into a Cloud SQL instance from a MySQL dump file in Google
 -- Cloud Storage.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesImport@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.import@.
 module Network.Google.Resource.SQL.Instances.Import
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.SQL.Instances.Import
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesImport@ method which the
+-- | A resource alias for @sql.instances.import@ method which the
 -- 'InstancesImport'' request conforms to.
 type InstancesImportResource =
      "projects" :>
@@ -74,9 +74,9 @@ data InstancesImport' = InstancesImport'
 --
 -- * 'insInstance'
 instancesImport'
-    :: Text -- ^ 'project'
-    -> InstancesImportRequest -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'insProject'
+    -> InstancesImportRequest -- ^ 'insPayload'
+    -> Text -- ^ 'insInstance'
     -> InstancesImport'
 instancesImport' pInsProject_ pInsPayload_ pInsInstance_ =
     InstancesImport'

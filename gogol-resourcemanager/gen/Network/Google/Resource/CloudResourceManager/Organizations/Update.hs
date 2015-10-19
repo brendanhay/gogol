@@ -22,7 +22,7 @@
 --
 -- Updates an Organization resource.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerOrganizationsUpdate@.
+-- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.organizations.update@.
 module Network.Google.Resource.CloudResourceManager.Organizations.Update
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.CloudResourceManager.Organizations.Update
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerOrganizationsUpdate@ method which the
+-- | A resource alias for @cloudresourcemanager.organizations.update@ method which the
 -- 'OrganizationsUpdate'' request conforms to.
 type OrganizationsUpdateResource =
      "v1beta1" :>
@@ -101,8 +101,8 @@ data OrganizationsUpdate' = OrganizationsUpdate'
 --
 -- * 'ouCallback'
 organizationsUpdate'
-    :: Organization -- ^ 'payload'
-    -> Text -- ^ 'organizationId'
+    :: Organization -- ^ 'ouPayload'
+    -> Text -- ^ 'ouOrganizationId'
     -> OrganizationsUpdate'
 organizationsUpdate' pOuPayload_ pOuOrganizationId_ =
     OrganizationsUpdate'

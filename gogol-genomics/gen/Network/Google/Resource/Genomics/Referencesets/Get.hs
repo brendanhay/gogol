@@ -23,7 +23,7 @@
 -- Gets a reference set. Implements
 -- [GlobalAllianceApi.getReferenceSet](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L83).
 --
--- /See:/ < Genomics API Reference> for @GenomicsReferencesetsGet@.
+-- /See:/ < Genomics API Reference> for @genomics.referencesets.get@.
 module Network.Google.Resource.Genomics.Referencesets.Get
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Genomics.Referencesets.Get
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReferencesetsGet@ method which the
+-- | A resource alias for @genomics.referencesets.get@ method which the
 -- 'ReferencesetsGet'' request conforms to.
 type ReferencesetsGetResource =
      "v1" :>
@@ -97,7 +97,7 @@ data ReferencesetsGet' = ReferencesetsGet'
 --
 -- * 'rCallback'
 referencesetsGet'
-    :: Text -- ^ 'referenceSetId'
+    :: Text -- ^ 'rReferenceSetId'
     -> ReferencesetsGet'
 referencesetsGet' pRReferenceSetId_ =
     ReferencesetsGet'

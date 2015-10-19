@@ -22,7 +22,7 @@
 --
 -- Updates an existing filter. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementFiltersPatch@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.filters.patch@.
 module Network.Google.Resource.Analytics.Management.Filters.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.Filters.Patch
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementFiltersPatch@ method which the
+-- | A resource alias for @analytics.management.filters.patch@ method which the
 -- 'ManagementFiltersPatch'' request conforms to.
 type ManagementFiltersPatchResource =
      "management" :>
@@ -71,9 +71,9 @@ data ManagementFiltersPatch' = ManagementFiltersPatch'
 --
 -- * 'mfpAccountId'
 managementFiltersPatch'
-    :: Text -- ^ 'filterId'
-    -> Filter -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mfpFilterId'
+    -> Filter -- ^ 'mfpPayload'
+    -> Text -- ^ 'mfpAccountId'
     -> ManagementFiltersPatch'
 managementFiltersPatch' pMfpFilterId_ pMfpPayload_ pMfpAccountId_ =
     ManagementFiltersPatch'

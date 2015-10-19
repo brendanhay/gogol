@@ -23,7 +23,7 @@
 -- Retrieves the list of firewall resources available to the specified
 -- project.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeFirewallsList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.firewalls.list@.
 module Network.Google.Resource.Compute.Firewalls.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.Firewalls.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeFirewallsList@ method which the
+-- | A resource alias for @compute.firewalls.list@ method which the
 -- 'FirewallsList'' request conforms to.
 type FirewallsListResource =
      Capture "project" Text :>
@@ -77,7 +77,7 @@ data FirewallsList' = FirewallsList'
 --
 -- * 'flMaxResults'
 firewallsList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'flProject'
     -> FirewallsList'
 firewallsList' pFlProject_ =
     FirewallsList'

@@ -22,7 +22,7 @@
 --
 -- Create a new ManagedZone.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSManagedZonesCreate@.
+-- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.managedZones.create@.
 module Network.Google.Resource.DNS.ManagedZones.Create
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DNS.ManagedZones.Create
 import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DNSManagedZonesCreate@ method which the
+-- | A resource alias for @dns.managedZones.create@ method which the
 -- 'ManagedZonesCreate'' request conforms to.
 type ManagedZonesCreateResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data ManagedZonesCreate' = ManagedZonesCreate'
 --
 -- * 'mzcPayload'
 managedZonesCreate'
-    :: Text -- ^ 'project'
-    -> ManagedZone -- ^ 'payload'
+    :: Text -- ^ 'mzcProject'
+    -> ManagedZone -- ^ 'mzcPayload'
     -> ManagedZonesCreate'
 managedZonesCreate' pMzcProject_ pMzcPayload_ =
     ManagedZonesCreate'

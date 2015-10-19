@@ -22,7 +22,7 @@
 --
 -- Lists matching subscriptions.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsList@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.list@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.List
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsSubscriptionsList@ method which the
+-- | A resource alias for @pubsub.projects.subscriptions.list@ method which the
 -- 'ProjectsSubscriptionsList'' request conforms to.
 type ProjectsSubscriptionsListResource =
      "v1" :>
@@ -106,7 +106,7 @@ data ProjectsSubscriptionsList' = ProjectsSubscriptionsList'
 --
 -- * 'pslCallback'
 projectsSubscriptionsList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'pslProject'
     -> ProjectsSubscriptionsList'
 projectsSubscriptionsList' pPslProject_ =
     ProjectsSubscriptionsList'

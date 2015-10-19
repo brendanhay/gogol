@@ -22,7 +22,7 @@
 --
 -- Updates a Container Version.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVersionsUpdate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.versions.update@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Update
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersVersionsUpdate@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.versions.update@ method which the
 -- 'AccountsContainersVersionsUpdate'' request conforms to.
 type AccountsContainersVersionsUpdateResource =
      "accounts" :>
@@ -82,10 +82,10 @@ data AccountsContainersVersionsUpdate' = AccountsContainersVersionsUpdate'
 --
 -- * 'acvucAccountId'
 accountsContainersVersionsUpdate'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'containerVersionId'
-    -> ContainerVersion -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acvucContainerId'
+    -> Text -- ^ 'acvucContainerVersionId'
+    -> ContainerVersion -- ^ 'acvucPayload'
+    -> Text -- ^ 'acvucAccountId'
     -> AccountsContainersVersionsUpdate'
 accountsContainersVersionsUpdate' pAcvucContainerId_ pAcvucContainerVersionId_ pAcvucPayload_ pAcvucAccountId_ =
     AccountsContainersVersionsUpdate'

@@ -96,7 +96,7 @@ dataName = \case
     Prod n _ _ _ _ _ -> n
 
 data Action = Action
-    { _actId        :: Global
+    { _actId        :: Text
     , _actType      :: Global
     , _actNamespace :: NS
     , _actHelp      :: Maybe Help

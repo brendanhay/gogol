@@ -23,7 +23,7 @@
 -- Increments the steps of the achievement with the given ID for the
 -- currently authenticated player.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementsIncrement@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.achievements.increment@.
 module Network.Google.Resource.Games.Achievements.Increment
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Games.Achievements.Increment
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesAchievementsIncrement@ method which the
+-- | A resource alias for @games.achievements.increment@ method which the
 -- 'AchievementsIncrement'' request conforms to.
 type AchievementsIncrementResource =
      "achievements" :>
@@ -73,8 +73,8 @@ data AchievementsIncrement' = AchievementsIncrement'
 --
 -- * 'aiStepsToIncrement'
 achievementsIncrement'
-    :: Text -- ^ 'achievementId'
-    -> Int32 -- ^ 'stepsToIncrement'
+    :: Text -- ^ 'aiAchievementId'
+    -> Int32 -- ^ 'aiStepsToIncrement'
     -> AchievementsIncrement'
 achievementsIncrement' pAiAchievementId_ pAiStepsToIncrement_ =
     AchievementsIncrement'

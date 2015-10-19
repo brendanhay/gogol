@@ -22,7 +22,7 @@
 --
 -- Looks up a user by email address.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseUsersList@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.users.list@.
 module Network.Google.Resource.AndroidEnterprise.Users.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidEnterprise.Users.List
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseUsersList@ method which the
+-- | A resource alias for @androidenterprise.users.list@ method which the
 -- 'UsersList'' request conforms to.
 type UsersListResource =
      "enterprises" :>
@@ -66,8 +66,8 @@ data UsersList' = UsersList'
 --
 -- * 'ulEnterpriseId'
 usersList'
-    :: Text -- ^ 'email'
-    -> Text -- ^ 'enterpriseId'
+    :: Text -- ^ 'ulEmail'
+    -> Text -- ^ 'ulEnterpriseId'
     -> UsersList'
 usersList' pUlEmail_ pUlEnterpriseId_ =
     UsersList'

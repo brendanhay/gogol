@@ -22,7 +22,7 @@
 --
 -- Removes users from the specified group.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsGroupsRemoveMember@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.groups.removeMember@.
 module Network.Google.Resource.CloudUserAccounts.Groups.RemoveMember
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.CloudUserAccounts.Groups.RemoveMember
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsGroupsRemoveMember@ method which the
+-- | A resource alias for @clouduseraccounts.groups.removeMember@ method which the
 -- 'GroupsRemoveMember'' request conforms to.
 type GroupsRemoveMemberResource =
      Capture "project" Text :>
@@ -72,9 +72,9 @@ data GroupsRemoveMember' = GroupsRemoveMember'
 --
 -- * 'grmGroupName'
 groupsRemoveMember'
-    :: Text -- ^ 'project'
-    -> GroupsRemoveMemberRequest -- ^ 'payload'
-    -> Text -- ^ 'groupName'
+    :: Text -- ^ 'grmProject'
+    -> GroupsRemoveMemberRequest -- ^ 'grmPayload'
+    -> Text -- ^ 'grmGroupName'
     -> GroupsRemoveMember'
 groupsRemoveMember' pGrmProject_ pGrmPayload_ pGrmGroupName_ =
     GroupsRemoveMember'

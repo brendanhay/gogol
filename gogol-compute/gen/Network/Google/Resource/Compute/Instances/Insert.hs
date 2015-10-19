@@ -23,7 +23,7 @@
 -- Creates an instance resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.insert@.
 module Network.Google.Resource.Compute.Instances.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Instances.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesInsert@ method which the
+-- | A resource alias for @compute.instances.insert@ method which the
 -- 'InstancesInsert'' request conforms to.
 type InstancesInsertResource =
      Capture "project" Text :>
@@ -72,9 +72,9 @@ data InstancesInsert' = InstancesInsert'
 --
 -- * 'iiPayload'
 instancesInsert'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Instance -- ^ 'payload'
+    :: Text -- ^ 'iiProject'
+    -> Text -- ^ 'iiZone'
+    -> Instance -- ^ 'iiPayload'
     -> InstancesInsert'
 instancesInsert' pIiProject_ pIiZone_ pIiPayload_ =
     InstancesInsert'

@@ -22,7 +22,7 @@
 --
 -- List all host URL channels in the host AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostURLChannelsList@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.urlchannels.list@.
 module Network.Google.Resource.AdSenseHost.URLChannels.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AdSenseHost.URLChannels.List
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostURLChannelsList@ method which the
+-- | A resource alias for @adsensehost.urlchannels.list@ method which the
 -- 'URLChannelsList'' request conforms to.
 type URLChannelsListResource =
      "adclients" :>
@@ -70,7 +70,7 @@ data URLChannelsList' = URLChannelsList'
 --
 -- * 'uclMaxResults'
 urlChannelsList'
-    :: Text -- ^ 'adClientId'
+    :: Text -- ^ 'uclAdClientId'
     -> URLChannelsList'
 urlChannelsList' pUclAdClientId_ =
     URLChannelsList'

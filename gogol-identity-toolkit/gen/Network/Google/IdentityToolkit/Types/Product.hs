@@ -1034,7 +1034,7 @@ newtype IdentitytoolkitRelyingPartyGetPublicKeysResponse = IdentitytoolkitRelyin
 --
 -- * 'irpgpkrAddtional'
 identitytoolkitRelyingPartyGetPublicKeysResponse
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'irpgpkrAddtional'
     -> IdentitytoolkitRelyingPartyGetPublicKeysResponse
 identitytoolkitRelyingPartyGetPublicKeysResponse pIrpgpkrAddtional_ =
     IdentitytoolkitRelyingPartyGetPublicKeysResponse

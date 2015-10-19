@@ -22,7 +22,7 @@
 --
 -- Inserts a new landing page for the specified campaign.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingLandingPagesInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.landingPages.insert@.
 module Network.Google.Resource.DFAReporting.LandingPages.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingLandingPagesInsert@ method which the
+-- | A resource alias for @dfareporting.landingPages.insert@ method which the
 -- 'LandingPagesInsert'' request conforms to.
 type LandingPagesInsertResource =
      "userprofiles" :>
@@ -72,9 +72,9 @@ data LandingPagesInsert' = LandingPagesInsert'
 --
 -- * 'lpiPayload'
 landingPagesInsert'
-    :: Int64 -- ^ 'campaignId'
-    -> Int64 -- ^ 'profileId'
-    -> LandingPage -- ^ 'payload'
+    :: Int64 -- ^ 'lpiCampaignId'
+    -> Int64 -- ^ 'lpiProFileId'
+    -> LandingPage -- ^ 'lpiPayload'
     -> LandingPagesInsert'
 landingPagesInsert' pLpiCampaignId_ pLpiProFileId_ pLpiPayload_ =
     LandingPagesInsert'

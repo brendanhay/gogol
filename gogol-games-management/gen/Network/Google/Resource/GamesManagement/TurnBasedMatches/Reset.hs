@@ -23,7 +23,7 @@
 -- Reset all turn-based match data for a user. This method is only
 -- accessible to whitelisted tester accounts for your application.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementTurnBasedMatchesReset@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.turnBasedMatches.reset@.
 module Network.Google.Resource.GamesManagement.TurnBasedMatches.Reset
     (
     -- * REST Resource
@@ -38,7 +38,7 @@ module Network.Google.Resource.GamesManagement.TurnBasedMatches.Reset
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementTurnBasedMatchesReset@ method which the
+-- | A resource alias for @gamesManagement.turnBasedMatches.reset@ method which the
 -- 'TurnBasedMatchesReset'' request conforms to.
 type TurnBasedMatchesResetResource =
      "turnbasedmatches" :>

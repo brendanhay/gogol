@@ -22,7 +22,7 @@
 --
 -- Retrieves a user\'s details.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseUsersGet@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.users.get@.
 module Network.Google.Resource.AndroidEnterprise.Users.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidEnterprise.Users.Get
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseUsersGet@ method which the
+-- | A resource alias for @androidenterprise.users.get@ method which the
 -- 'UsersGet'' request conforms to.
 type UsersGetResource =
      "enterprises" :>
@@ -65,8 +65,8 @@ data UsersGet' = UsersGet'
 --
 -- * 'ugUserId'
 usersGet'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'ugEnterpriseId'
+    -> Text -- ^ 'ugUserId'
     -> UsersGet'
 usersGet' pUgEnterpriseId_ pUgUserId_ =
     UsersGet'

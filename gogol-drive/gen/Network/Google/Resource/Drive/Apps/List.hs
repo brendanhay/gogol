@@ -22,7 +22,7 @@
 --
 -- Lists a user\'s installed apps.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveAppsList@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.apps.list@.
 module Network.Google.Resource.Drive.Apps.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Drive.Apps.List
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveAppsList@ method which the
+-- | A resource alias for @drive.apps.list@ method which the
 -- 'AppsList'' request conforms to.
 type AppsListResource =
      "apps" :>

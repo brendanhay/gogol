@@ -23,7 +23,7 @@
 -- Lists the tax settings of the sub-accounts in your Merchant Center
 -- account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccounttaxList@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounttax.list@.
 module Network.Google.Resource.Content.Accounttax.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Content.Accounttax.List
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccounttaxList@ method which the
+-- | A resource alias for @content.accounttax.list@ method which the
 -- 'AccounttaxList'' request conforms to.
 type AccounttaxListResource =
      Capture "merchantId" Word64 :>
@@ -72,7 +72,7 @@ data AccounttaxList' = AccounttaxList'
 --
 -- * 'allMaxResults'
 accounttaxList'
-    :: Word64 -- ^ 'merchantId'
+    :: Word64 -- ^ 'allMerchantId'
     -> AccounttaxList'
 accounttaxList' pAllMerchantId_ =
     AccounttaxList'

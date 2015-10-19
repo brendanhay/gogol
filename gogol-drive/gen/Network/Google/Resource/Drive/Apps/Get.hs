@@ -22,7 +22,7 @@
 --
 -- Gets a specific app.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveAppsGet@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.apps.get@.
 module Network.Google.Resource.Drive.Apps.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Drive.Apps.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveAppsGet@ method which the
+-- | A resource alias for @drive.apps.get@ method which the
 -- 'AppsGet'' request conforms to.
 type AppsGetResource =
      "apps" :>
@@ -59,7 +59,7 @@ newtype AppsGet' = AppsGet'
 --
 -- * 'agAppId'
 appsGet'
-    :: Text -- ^ 'appId'
+    :: Text -- ^ 'agAppId'
     -> AppsGet'
 appsGet' pAgAppId_ =
     AppsGet'

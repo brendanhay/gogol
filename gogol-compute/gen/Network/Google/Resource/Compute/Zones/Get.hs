@@ -22,7 +22,7 @@
 --
 -- Returns the specified zone resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeZonesGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.zones.get@.
 module Network.Google.Resource.Compute.Zones.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.Zones.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeZonesGet@ method which the
+-- | A resource alias for @compute.zones.get@ method which the
 -- 'ZonesGet'' request conforms to.
 type ZonesGetResource =
      Capture "project" Text :>
@@ -64,8 +64,8 @@ data ZonesGet' = ZonesGet'
 --
 -- * 'zgZone'
 zonesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'zgProject'
+    -> Text -- ^ 'zgZone'
     -> ZonesGet'
 zonesGet' pZgProject_ pZgZone_ =
     ZonesGet'

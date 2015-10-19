@@ -22,7 +22,7 @@
 --
 -- Deletes an existing event tag.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingEventTagsDelete@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.eventTags.delete@.
 module Network.Google.Resource.DFAReporting.EventTags.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.EventTags.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingEventTagsDelete@ method which the
+-- | A resource alias for @dfareporting.eventTags.delete@ method which the
 -- 'EventTagsDelete'' request conforms to.
 type EventTagsDeleteResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data EventTagsDelete' = EventTagsDelete'
 --
 -- * 'etdId'
 eventTagsDelete'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'etdProFileId'
+    -> Int64 -- ^ 'etdId'
     -> EventTagsDelete'
 eventTagsDelete' pEtdProFileId_ pEtdId_ =
     EventTagsDelete'

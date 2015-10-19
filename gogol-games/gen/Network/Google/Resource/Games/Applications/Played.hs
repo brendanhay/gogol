@@ -23,7 +23,7 @@
 -- Indicate that the the currently authenticated user is playing your
 -- application.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesApplicationsPlayed@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.applications.played@.
 module Network.Google.Resource.Games.Applications.Played
     (
     -- * REST Resource
@@ -38,7 +38,7 @@ module Network.Google.Resource.Games.Applications.Played
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesApplicationsPlayed@ method which the
+-- | A resource alias for @games.applications.played@ method which the
 -- 'ApplicationsPlayed'' request conforms to.
 type ApplicationsPlayedResource =
      "applications" :>

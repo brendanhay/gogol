@@ -65,7 +65,7 @@ newtype RestDescriptionParameters = RestDescriptionParameters
 --
 -- * 'rdpAddtional'
 restDescriptionParameters
-    :: HashMap Text JSONSchema -- ^ 'addtional'
+    :: HashMap Text JSONSchema -- ^ 'rdpAddtional'
     -> RestDescriptionParameters
 restDescriptionParameters pRdpAddtional_ =
     RestDescriptionParameters
@@ -356,7 +356,7 @@ newtype RestDescriptionAuthOAuth2Scopes = RestDescriptionAuthOAuth2Scopes
 --
 -- * 'rdaoasAddtional'
 restDescriptionAuthOAuth2Scopes
-    :: HashMap Text RestDescriptionAuthOAuth2ScopesAdditional -- ^ 'addtional'
+    :: HashMap Text RestDescriptionAuthOAuth2ScopesAdditional -- ^ 'rdaoasAddtional'
     -> RestDescriptionAuthOAuth2Scopes
 restDescriptionAuthOAuth2Scopes pRdaoasAddtional_ =
     RestDescriptionAuthOAuth2Scopes
@@ -393,7 +393,7 @@ newtype RestDescriptionMethods = RestDescriptionMethods
 --
 -- * 'rdmAddtional'
 restDescriptionMethods
-    :: HashMap Text RestMethod -- ^ 'addtional'
+    :: HashMap Text RestMethod -- ^ 'rdmAddtional'
     -> RestDescriptionMethods
 restDescriptionMethods pRdmAddtional_ =
     RestDescriptionMethods
@@ -630,7 +630,7 @@ newtype RestResourceResources = RestResourceResources
 --
 -- * 'rrrAddtional'
 restResourceResources
-    :: HashMap Text RestResource -- ^ 'addtional'
+    :: HashMap Text RestResource -- ^ 'rrrAddtional'
     -> RestResourceResources
 restResourceResources pRrrAddtional_ =
     RestResourceResources
@@ -885,7 +885,7 @@ newtype RestResourceMethods = RestResourceMethods
 --
 -- * 'rrmAddtional'
 restResourceMethods
-    :: HashMap Text RestMethod -- ^ 'addtional'
+    :: HashMap Text RestMethod -- ^ 'rrmAddtional'
     -> RestResourceMethods
 restResourceMethods pRrmAddtional_ =
     RestResourceMethods
@@ -1561,7 +1561,7 @@ newtype RestDescriptionSchemas = RestDescriptionSchemas
 --
 -- * 'rdsAddtional'
 restDescriptionSchemas
-    :: HashMap Text JSONSchema -- ^ 'addtional'
+    :: HashMap Text JSONSchema -- ^ 'rdsAddtional'
     -> RestDescriptionSchemas
 restDescriptionSchemas pRdsAddtional_ =
     RestDescriptionSchemas
@@ -1639,7 +1639,7 @@ newtype RestDescriptionResources = RestDescriptionResources
 --
 -- * 'rdrAddtional'
 restDescriptionResources
-    :: HashMap Text RestResource -- ^ 'addtional'
+    :: HashMap Text RestResource -- ^ 'rdrAddtional'
     -> RestDescriptionResources
 restDescriptionResources pRdrAddtional_ =
     RestDescriptionResources
@@ -1761,7 +1761,7 @@ newtype RestMethodParameters = RestMethodParameters
 --
 -- * 'rmpAddtional'
 restMethodParameters
-    :: HashMap Text JSONSchema -- ^ 'addtional'
+    :: HashMap Text JSONSchema -- ^ 'rmpAddtional'
     -> RestMethodParameters
 restMethodParameters pRmpAddtional_ =
     RestMethodParameters
@@ -1856,7 +1856,7 @@ newtype JSONSchemaProperties = JSONSchemaProperties
 --
 -- * 'jspAddtional'
 jsonSchemaProperties
-    :: HashMap Text JSONSchema -- ^ 'addtional'
+    :: HashMap Text JSONSchema -- ^ 'jspAddtional'
     -> JSONSchemaProperties
 jsonSchemaProperties pJspAddtional_ =
     JSONSchemaProperties

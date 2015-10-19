@@ -22,7 +22,7 @@
 --
 -- Restores a backup of a Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesRestoreBackup@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.restoreBackup@.
 module Network.Google.Resource.SQL.Instances.RestoreBackup
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.SQL.Instances.RestoreBackup
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesRestoreBackup@ method which the
+-- | A resource alias for @sql.instances.restoreBackup@ method which the
 -- 'InstancesRestoreBackup'' request conforms to.
 type InstancesRestoreBackupResource =
      "projects" :>
@@ -72,9 +72,9 @@ data InstancesRestoreBackup' = InstancesRestoreBackup'
 --
 -- * 'irbInstance'
 instancesRestoreBackup'
-    :: Text -- ^ 'project'
-    -> InstancesRestoreBackupRequest -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'irbProject'
+    -> InstancesRestoreBackupRequest -- ^ 'irbPayload'
+    -> Text -- ^ 'irbInstance'
     -> InstancesRestoreBackup'
 instancesRestoreBackup' pIrbProject_ pIrbPayload_ pIrbInstance_ =
     InstancesRestoreBackup'

@@ -22,7 +22,7 @@
 --
 -- Removes the specified message from the trash.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesUntrash@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.messages.untrash@.
 module Network.Google.Resource.Gmail.Users.Messages.Untrash
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Gmail.Users.Messages.Untrash
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersMessagesUntrash@ method which the
+-- | A resource alias for @gmail.users.messages.untrash@ method which the
 -- 'UsersMessagesUntrash'' request conforms to.
 type UsersMessagesUntrashResource =
      Capture "userId" Text :>
@@ -65,7 +65,7 @@ data UsersMessagesUntrash' = UsersMessagesUntrash'
 --
 -- * 'umuId'
 usersMessagesUntrash'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'umuId'
     -> Text
     -> UsersMessagesUntrash'
 usersMessagesUntrash' pUmuUserId_ pUmuId_ =

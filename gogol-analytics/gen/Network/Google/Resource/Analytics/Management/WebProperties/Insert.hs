@@ -24,7 +24,7 @@
 -- properties are visible in the Google Analytics interface only if they
 -- have at least one profile.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertiesInsert@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webproperties.insert@.
 module Network.Google.Resource.Analytics.Management.WebProperties.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertiesInsert@ method which the
+-- | A resource alias for @analytics.management.webproperties.insert@ method which the
 -- 'ManagementWebPropertiesInsert'' request conforms to.
 type ManagementWebPropertiesInsertResource =
      "management" :>
@@ -71,8 +71,8 @@ data ManagementWebPropertiesInsert' = ManagementWebPropertiesInsert'
 --
 -- * 'mwpiAccountId'
 managementWebPropertiesInsert'
-    :: WebProperty -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: WebProperty -- ^ 'mwpiPayload'
+    -> Text -- ^ 'mwpiAccountId'
     -> ManagementWebPropertiesInsert'
 managementWebPropertiesInsert' pMwpiPayload_ pMwpiAccountId_ =
     ManagementWebPropertiesInsert'

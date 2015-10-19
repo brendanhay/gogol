@@ -27,49 +27,49 @@ module Network.Google.DeploymentManager
 
     -- * Resources
 
-    -- ** DeploymentManagerDeploymentsCancelPreview
+    -- ** deploymentmanager.deployments.cancelPreview
     , module Network.Google.Resource.DeploymentManager.Deployments.CancelPreview
 
-    -- ** DeploymentManagerDeploymentsDelete
+    -- ** deploymentmanager.deployments.delete
     , module Network.Google.Resource.DeploymentManager.Deployments.Delete
 
-    -- ** DeploymentManagerDeploymentsGet
+    -- ** deploymentmanager.deployments.get
     , module Network.Google.Resource.DeploymentManager.Deployments.Get
 
-    -- ** DeploymentManagerDeploymentsInsert
+    -- ** deploymentmanager.deployments.insert
     , module Network.Google.Resource.DeploymentManager.Deployments.Insert
 
-    -- ** DeploymentManagerDeploymentsList
+    -- ** deploymentmanager.deployments.list
     , module Network.Google.Resource.DeploymentManager.Deployments.List
 
-    -- ** DeploymentManagerDeploymentsPatch
+    -- ** deploymentmanager.deployments.patch
     , module Network.Google.Resource.DeploymentManager.Deployments.Patch
 
-    -- ** DeploymentManagerDeploymentsStop
+    -- ** deploymentmanager.deployments.stop
     , module Network.Google.Resource.DeploymentManager.Deployments.Stop
 
-    -- ** DeploymentManagerDeploymentsUpdate
+    -- ** deploymentmanager.deployments.update
     , module Network.Google.Resource.DeploymentManager.Deployments.Update
 
-    -- ** DeploymentManagerManifestsGet
+    -- ** deploymentmanager.manifests.get
     , module Network.Google.Resource.DeploymentManager.Manifests.Get
 
-    -- ** DeploymentManagerManifestsList
+    -- ** deploymentmanager.manifests.list
     , module Network.Google.Resource.DeploymentManager.Manifests.List
 
-    -- ** DeploymentManagerOperationsGet
+    -- ** deploymentmanager.operations.get
     , module Network.Google.Resource.DeploymentManager.Operations.Get
 
-    -- ** DeploymentManagerOperationsList
+    -- ** deploymentmanager.operations.list
     , module Network.Google.Resource.DeploymentManager.Operations.List
 
-    -- ** DeploymentManagerResourcesGet
+    -- ** deploymentmanager.resources.get
     , module Network.Google.Resource.DeploymentManager.Resources.Get
 
-    -- ** DeploymentManagerResourcesList
+    -- ** deploymentmanager.resources.list
     , module Network.Google.Resource.DeploymentManager.Resources.List
 
-    -- ** DeploymentManagerTypesList
+    -- ** deploymentmanager.types.list
     , module Network.Google.Resource.DeploymentManager.Types.List
 
     -- * Types

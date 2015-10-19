@@ -24,7 +24,7 @@
 -- be updated, then you need to create a new stream with the proper
 -- settings.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveStreamsUpdate@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveStreams.update@.
 module Network.Google.Resource.YouTube.LiveStreams.Update
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.YouTube.LiveStreams.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveStreamsUpdate@ method which the
+-- | A resource alias for @youtube.liveStreams.update@ method which the
 -- 'LiveStreamsUpdate'' request conforms to.
 type LiveStreamsUpdateResource =
      "liveStreams" :>
@@ -78,8 +78,8 @@ data LiveStreamsUpdate' = LiveStreamsUpdate'
 --
 -- * 'lsuOnBehalfOfContentOwnerChannel'
 liveStreamsUpdate'
-    :: Text -- ^ 'part'
-    -> LiveStream -- ^ 'payload'
+    :: Text -- ^ 'lsuPart'
+    -> LiveStream -- ^ 'lsuPayload'
     -> LiveStreamsUpdate'
 liveStreamsUpdate' pLsuPart_ pLsuPayload_ =
     LiveStreamsUpdate'

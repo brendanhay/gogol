@@ -24,7 +24,7 @@
 -- the quest corresponding to questId has been claimed by the currently
 -- authorized user.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesQuestMilestonesClaim@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.questMilestones.claim@.
 module Network.Google.Resource.Games.QuestMilestones.Claim
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Games.QuestMilestones.Claim
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesQuestMilestonesClaim@ method which the
+-- | A resource alias for @games.questMilestones.claim@ method which the
 -- 'QuestMilestonesClaim'' request conforms to.
 type QuestMilestonesClaimResource =
      "quests" :>
@@ -75,9 +75,9 @@ data QuestMilestonesClaim' = QuestMilestonesClaim'
 --
 -- * 'qmcQuestId'
 questMilestonesClaim'
-    :: Int64 -- ^ 'requestId'
-    -> Text -- ^ 'milestoneId'
-    -> Text -- ^ 'questId'
+    :: Int64 -- ^ 'qmcRequestId'
+    -> Text -- ^ 'qmcMilestoneId'
+    -> Text -- ^ 'qmcQuestId'
     -> QuestMilestonesClaim'
 questMilestonesClaim' pQmcRequestId_ pQmcMilestoneId_ pQmcQuestId_ =
     QuestMilestonesClaim'

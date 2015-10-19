@@ -23,7 +23,7 @@
 -- Retrieves the list of persistent disks contained within the specified
 -- zone.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDisksList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.disks.list@.
 module Network.Google.Resource.Compute.Disks.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.Disks.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeDisksList@ method which the
+-- | A resource alias for @compute.disks.list@ method which the
 -- 'DisksList'' request conforms to.
 type DisksListResource =
      Capture "project" Text :>
@@ -82,8 +82,8 @@ data DisksList' = DisksList'
 --
 -- * 'dlMaxResults'
 disksList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'dlProject'
+    -> Text -- ^ 'dlZone'
     -> DisksList'
 disksList' pDlProject_ pDlZone_ =
     DisksList'

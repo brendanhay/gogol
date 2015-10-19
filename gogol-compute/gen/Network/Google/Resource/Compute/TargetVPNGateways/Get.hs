@@ -22,7 +22,7 @@
 --
 -- Returns the specified TargetVpnGateway resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetVPNGatewaysGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetVpnGateways.get@.
 module Network.Google.Resource.Compute.TargetVPNGateways.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.TargetVPNGateways.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetVPNGatewaysGet@ method which the
+-- | A resource alias for @compute.targetVpnGateways.get@ method which the
 -- 'TargetVPNGatewaysGet'' request conforms to.
 type TargetVPNGatewaysGetResource =
      Capture "project" Text :>
@@ -71,9 +71,9 @@ data TargetVPNGatewaysGet' = TargetVPNGatewaysGet'
 --
 -- * 'tvggRegion'
 targetVPNGatewaysGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'targetVpnGateway'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'tvggProject'
+    -> Text -- ^ 'tvggTargetVPNGateway'
+    -> Text -- ^ 'tvggRegion'
     -> TargetVPNGatewaysGet'
 targetVPNGatewaysGet' pTvggProject_ pTvggTargetVPNGateway_ pTvggRegion_ =
     TargetVPNGatewaysGet'

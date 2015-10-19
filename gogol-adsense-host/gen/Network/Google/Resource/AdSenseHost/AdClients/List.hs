@@ -22,7 +22,7 @@
 --
 -- List all host ad clients in this AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAdClientsList@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.adclients.list@.
 module Network.Google.Resource.AdSenseHost.AdClients.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdSenseHost.AdClients.List
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAdClientsList@ method which the
+-- | A resource alias for @adsensehost.adclients.list@ method which the
 -- 'AdClientsList'' request conforms to.
 type AdClientsListResource =
      "adclients" :>

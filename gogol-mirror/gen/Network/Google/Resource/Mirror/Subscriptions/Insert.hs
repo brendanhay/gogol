@@ -22,7 +22,7 @@
 --
 -- Creates a new subscription.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorSubscriptionsInsert@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.subscriptions.insert@.
 module Network.Google.Resource.Mirror.Subscriptions.Insert
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Mirror.Subscriptions.Insert
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorSubscriptionsInsert@ method which the
+-- | A resource alias for @mirror.subscriptions.insert@ method which the
 -- 'SubscriptionsInsert'' request conforms to.
 type SubscriptionsInsertResource =
      "subscriptions" :>
@@ -60,7 +60,7 @@ newtype SubscriptionsInsert' = SubscriptionsInsert'
 --
 -- * 'siPayload'
 subscriptionsInsert'
-    :: Subscription -- ^ 'payload'
+    :: Subscription -- ^ 'siPayload'
     -> SubscriptionsInsert'
 subscriptionsInsert' pSiPayload_ =
     SubscriptionsInsert'

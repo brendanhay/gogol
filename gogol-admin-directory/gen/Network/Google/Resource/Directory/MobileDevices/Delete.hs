@@ -22,7 +22,7 @@
 --
 -- Delete Mobile Device
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMobileDevicesDelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.mobiledevices.delete@.
 module Network.Google.Resource.Directory.MobileDevices.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.MobileDevices.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryMobileDevicesDelete@ method which the
+-- | A resource alias for @directory.mobiledevices.delete@ method which the
 -- 'MobileDevicesDelete'' request conforms to.
 type MobileDevicesDeleteResource =
      "customer" :>
@@ -66,8 +66,8 @@ data MobileDevicesDelete' = MobileDevicesDelete'
 --
 -- * 'mddCustomerId'
 mobileDevicesDelete'
-    :: Text -- ^ 'resourceId'
-    -> Text -- ^ 'customerId'
+    :: Text -- ^ 'mddResourceId'
+    -> Text -- ^ 'mddCustomerId'
     -> MobileDevicesDelete'
 mobileDevicesDelete' pMddResourceId_ pMddCustomerId_ =
     MobileDevicesDelete'

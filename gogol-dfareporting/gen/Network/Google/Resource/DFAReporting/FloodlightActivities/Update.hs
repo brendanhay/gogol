@@ -22,7 +22,7 @@
 --
 -- Updates an existing floodlight activity.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivitiesUpdate@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightActivities.update@.
 module Network.Google.Resource.DFAReporting.FloodlightActivities.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFloodlightActivitiesUpdate@ method which the
+-- | A resource alias for @dfareporting.floodlightActivities.update@ method which the
 -- 'FloodlightActivitiesUpdate'' request conforms to.
 type FloodlightActivitiesUpdateResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data FloodlightActivitiesUpdate' = FloodlightActivitiesUpdate'
 --
 -- * 'fauPayload'
 floodlightActivitiesUpdate'
-    :: Int64 -- ^ 'profileId'
-    -> FloodlightActivity -- ^ 'payload'
+    :: Int64 -- ^ 'fauProFileId'
+    -> FloodlightActivity -- ^ 'fauPayload'
     -> FloodlightActivitiesUpdate'
 floodlightActivitiesUpdate' pFauProFileId_ pFauPayload_ =
     FloodlightActivitiesUpdate'

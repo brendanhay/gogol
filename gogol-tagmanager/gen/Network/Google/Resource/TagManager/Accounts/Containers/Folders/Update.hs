@@ -22,7 +22,7 @@
 --
 -- Updates a GTM Folder.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersFoldersUpdate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.folders.update@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Update
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersFoldersUpdate@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.folders.update@ method which the
 -- 'AccountsContainersFoldersUpdate'' request conforms to.
 type AccountsContainersFoldersUpdateResource =
      "accounts" :>
@@ -81,10 +81,10 @@ data AccountsContainersFoldersUpdate' = AccountsContainersFoldersUpdate'
 --
 -- * 'acfuAccountId'
 accountsContainersFoldersUpdate'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'folderId'
-    -> Folder -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acfuContainerId'
+    -> Text -- ^ 'acfuFolderId'
+    -> Folder -- ^ 'acfuPayload'
+    -> Text -- ^ 'acfuAccountId'
     -> AccountsContainersFoldersUpdate'
 accountsContainersFoldersUpdate' pAcfuContainerId_ pAcfuFolderId_ pAcfuPayload_ pAcfuAccountId_ =
     AccountsContainersFoldersUpdate'

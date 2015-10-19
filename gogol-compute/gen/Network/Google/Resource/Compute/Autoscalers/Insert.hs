@@ -23,7 +23,7 @@
 -- Creates an autoscaler resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAutoscalersInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.autoscalers.insert@.
 module Network.Google.Resource.Compute.Autoscalers.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Autoscalers.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeAutoscalersInsert@ method which the
+-- | A resource alias for @compute.autoscalers.insert@ method which the
 -- 'AutoscalersInsert'' request conforms to.
 type AutoscalersInsertResource =
      Capture "project" Text :>
@@ -72,9 +72,9 @@ data AutoscalersInsert' = AutoscalersInsert'
 --
 -- * 'autPayload'
 autoscalersInsert'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Autoscaler -- ^ 'payload'
+    :: Text -- ^ 'autProject'
+    -> Text -- ^ 'autZone'
+    -> Autoscaler -- ^ 'autPayload'
     -> AutoscalersInsert'
 autoscalersInsert' pAutProject_ pAutZone_ pAutPayload_ =
     AutoscalersInsert'

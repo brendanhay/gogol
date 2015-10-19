@@ -23,7 +23,7 @@
 -- Updates an autoscaler resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAutoscalersUpdate@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.autoscalers.update@.
 module Network.Google.Resource.Compute.Autoscalers.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.Autoscalers.Update
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeAutoscalersUpdate@ method which the
+-- | A resource alias for @compute.autoscalers.update@ method which the
 -- 'AutoscalersUpdate'' request conforms to.
 type AutoscalersUpdateResource =
      Capture "project" Text :>
@@ -77,9 +77,9 @@ data AutoscalersUpdate' = AutoscalersUpdate'
 --
 -- * 'auAutoscaler'
 autoscalersUpdate'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Autoscaler -- ^ 'payload'
+    :: Text -- ^ 'auProject'
+    -> Text -- ^ 'auZone'
+    -> Autoscaler -- ^ 'auPayload'
     -> AutoscalersUpdate'
 autoscalersUpdate' pAuProject_ pAuZone_ pAuPayload_ =
     AutoscalersUpdate'

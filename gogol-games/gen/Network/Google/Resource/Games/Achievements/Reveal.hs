@@ -23,7 +23,7 @@
 -- Sets the state of the achievement with the given ID to REVEALED for the
 -- currently authenticated player.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementsReveal@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.achievements.reveal@.
 module Network.Google.Resource.Games.Achievements.Reveal
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Games.Achievements.Reveal
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesAchievementsReveal@ method which the
+-- | A resource alias for @games.achievements.reveal@ method which the
 -- 'AchievementsReveal'' request conforms to.
 type AchievementsRevealResource =
      "achievements" :>
@@ -63,7 +63,7 @@ newtype AchievementsReveal' = AchievementsReveal'
 --
 -- * 'arAchievementId'
 achievementsReveal'
-    :: Text -- ^ 'achievementId'
+    :: Text -- ^ 'arAchievementId'
     -> AchievementsReveal'
 achievementsReveal' pArAchievementId_ =
     AchievementsReveal'

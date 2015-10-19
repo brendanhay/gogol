@@ -23,7 +23,7 @@
 -- Resets scores for all draft leaderboards for all players. This method is
 -- only available to user accounts for your developer console.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementScoresResetAllForAllPlayers@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.scores.resetAllForAllPlayers@.
 module Network.Google.Resource.GamesManagement.Scores.ResetAllForAllPlayers
     (
     -- * REST Resource
@@ -38,7 +38,7 @@ module Network.Google.Resource.GamesManagement.Scores.ResetAllForAllPlayers
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementScoresResetAllForAllPlayers@ method which the
+-- | A resource alias for @gamesManagement.scores.resetAllForAllPlayers@ method which the
 -- 'ScoresResetAllForAllPlayers'' request conforms to.
 type ScoresResetAllForAllPlayersResource =
      "scores" :>

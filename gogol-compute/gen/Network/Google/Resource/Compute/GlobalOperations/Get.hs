@@ -22,7 +22,7 @@
 --
 -- Retrieves the specified Operations resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalOperationsGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalOperations.get@.
 module Network.Google.Resource.Compute.GlobalOperations.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.GlobalOperations.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeGlobalOperationsGet@ method which the
+-- | A resource alias for @compute.globalOperations.get@ method which the
 -- 'GlobalOperationsGet'' request conforms to.
 type GlobalOperationsGetResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data GlobalOperationsGet' = GlobalOperationsGet'
 --
 -- * 'gogOperation'
 globalOperationsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'operation'
+    :: Text -- ^ 'gogProject'
+    -> Text -- ^ 'gogOperation'
     -> GlobalOperationsGet'
 globalOperationsGet' pGogProject_ pGogOperation_ =
     GlobalOperationsGet'

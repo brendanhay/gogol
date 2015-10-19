@@ -23,7 +23,7 @@
 -- List all the in-app products for an Android app, both subscriptions and
 -- managed in-app products..
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherInAppProductsList@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.inappproducts.list@.
 module Network.Google.Resource.AndroidPublisher.InAppProducts.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AndroidPublisher.InAppProducts.List
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherInAppProductsList@ method which the
+-- | A resource alias for @androidpublisher.inappproducts.list@ method which the
 -- 'InAppProductsList'' request conforms to.
 type InAppProductsListResource =
      Capture "packageName" Text :>
@@ -77,7 +77,7 @@ data InAppProductsList' = InAppProductsList'
 --
 -- * 'iaplMaxResults'
 inAppProductsList'
-    :: Text -- ^ 'packageName'
+    :: Text -- ^ 'iaplPackageName'
     -> InAppProductsList'
 inAppProductsList' pIaplPackageName_ =
     InAppProductsList'

@@ -23,7 +23,7 @@
 -- Returns a list showing the current progress on events in this
 -- application for the currently authenticated user.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesEventsListByPlayer@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.events.listByPlayer@.
 module Network.Google.Resource.Games.Events.ListByPlayer
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Games.Events.ListByPlayer
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesEventsListByPlayer@ method which the
+-- | A resource alias for @games.events.listByPlayer@ method which the
 -- 'EventsListByPlayer'' request conforms to.
 type EventsListByPlayerResource =
      "events" :>

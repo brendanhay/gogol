@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of locations for a worker.
 --
--- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateLocationList@.
+-- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @coordinate.location.list@.
 module Network.Google.Resource.Coordinate.Location.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Coordinate.Location.List
 import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CoordinateLocationList@ method which the
+-- | A resource alias for @coordinate.location.list@ method which the
 -- 'LocationList'' request conforms to.
 type LocationListResource =
      "teams" :>
@@ -82,9 +82,9 @@ data LocationList' = LocationList'
 --
 -- * 'llMaxResults'
 locationList'
-    :: Text -- ^ 'workerEmail'
-    -> Word64 -- ^ 'startTimestampMs'
-    -> Text -- ^ 'teamId'
+    :: Text -- ^ 'llWorkerEmail'
+    -> Word64 -- ^ 'llStartTimestampMs'
+    -> Text -- ^ 'llTeamId'
     -> LocationList'
 locationList' pLlWorkerEmail_ pLlStartTimestampMs_ pLlTeamId_ =
     LocationList'

@@ -22,7 +22,7 @@
 --
 -- Watch for changes to ACL resources.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarACLWatch@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.acl.watch@.
 module Network.Google.Resource.Calendar.ACL.Watch
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Calendar.ACL.Watch
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarACLWatch@ method which the
+-- | A resource alias for @calendar.acl.watch@ method which the
 -- 'ACLWatch'' request conforms to.
 type ACLWatchResource =
      "calendars" :>
@@ -86,8 +86,8 @@ data ACLWatch' = ACLWatch'
 --
 -- * 'awMaxResults'
 aclWatch'
-    :: Text -- ^ 'calendarId'
-    -> Channel -- ^ 'payload'
+    :: Text -- ^ 'awCalendarId'
+    -> Channel -- ^ 'awPayload'
     -> ACLWatch'
 aclWatch' pAwCalendarId_ pAwPayload_ =
     ACLWatch'

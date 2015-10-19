@@ -25,7 +25,7 @@
 -- in the Supported data formats and limits article of the Google Maps
 -- Engine help center.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesFilesInsert@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.tables.files.insert@.
 module Network.Google.Resource.MapsEngine.Tables.Files.Insert
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.MapsEngine.Tables.Files.Insert
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesFilesInsert@ method which the
+-- | A resource alias for @mapsengine.tables.files.insert@ method which the
 -- 'TablesFilesInsert'' request conforms to.
 type TablesFilesInsertResource =
      "tables" :>
@@ -76,9 +76,9 @@ data TablesFilesInsert' = TablesFilesInsert'
 --
 -- * 'tfiFilename'
 tablesFilesInsert'
-    :: Body -- ^ 'media'
-    -> Text -- ^ 'id'
-    -> Text -- ^ 'filename'
+    :: Body -- ^ 'tfiMedia'
+    -> Text -- ^ 'tfiId'
+    -> Text -- ^ 'tfiFilename'
     -> TablesFilesInsert'
 tablesFilesInsert' pTfiMedia_ pTfiId_ pTfiFilename_ =
     TablesFilesInsert'

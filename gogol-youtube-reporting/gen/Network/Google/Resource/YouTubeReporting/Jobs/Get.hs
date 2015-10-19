@@ -22,7 +22,7 @@
 --
 -- Gets a job.
 --
--- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @YouTubereportingJobsGet@.
+-- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @youtubereporting.jobs.get@.
 module Network.Google.Resource.YouTubeReporting.Jobs.Get
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Get
 import           Network.Google.Prelude
 import           Network.Google.YouTubeReporting.Types
 
--- | A resource alias for @YouTubereportingJobsGet@ method which the
+-- | A resource alias for @youtubereporting.jobs.get@ method which the
 -- 'JobsGet'' request conforms to.
 type JobsGetResource =
      "v1" :>
@@ -100,7 +100,7 @@ data JobsGet' = JobsGet'
 --
 -- * 'jgCallback'
 jobsGet'
-    :: Text -- ^ 'jobId'
+    :: Text -- ^ 'jgJobId'
     -> JobsGet'
 jobsGet' pJgJobId_ =
     JobsGet'

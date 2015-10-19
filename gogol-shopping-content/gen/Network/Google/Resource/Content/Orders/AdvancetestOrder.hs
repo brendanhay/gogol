@@ -23,7 +23,7 @@
 -- Sandbox only. Moves a test order from state \"inProgress\" to state
 -- \"pendingShipment\".
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersAdvancetestOrder@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.advancetestorder@.
 module Network.Google.Resource.Content.Orders.AdvancetestOrder
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Orders.AdvancetestOrder
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersAdvancetestOrder@ method which the
+-- | A resource alias for @content.orders.advancetestorder@ method which the
 -- 'OrdersAdvancetestOrder'' request conforms to.
 type OrdersAdvancetestOrderResource =
      Capture "merchantId" Word64 :>
@@ -68,8 +68,8 @@ data OrdersAdvancetestOrder' = OrdersAdvancetestOrder'
 --
 -- * 'oaoOrderId'
 ordersAdvancetestOrder'
-    :: Word64 -- ^ 'merchantId'
-    -> Text -- ^ 'orderId'
+    :: Word64 -- ^ 'oaoMerchantId'
+    -> Text -- ^ 'oaoOrderId'
     -> OrdersAdvancetestOrder'
 ordersAdvancetestOrder' pOaoMerchantId_ pOaoOrderId_ =
     OrdersAdvancetestOrder'

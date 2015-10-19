@@ -22,7 +22,7 @@
 --
 -- Gets one subaccount by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSubAccountsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.subaccounts.get@.
 module Network.Google.Resource.DFAReporting.SubAccounts.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSubAccountsGet@ method which the
+-- | A resource alias for @dfareporting.subaccounts.get@ method which the
 -- 'SubAccountsGet'' request conforms to.
 type SubAccountsGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data SubAccountsGet' = SubAccountsGet'
 --
 -- * 'sagId'
 subAccountsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'sagProFileId'
+    -> Int64 -- ^ 'sagId'
     -> SubAccountsGet'
 subAccountsGet' pSagProFileId_ pSagId_ =
     SubAccountsGet'

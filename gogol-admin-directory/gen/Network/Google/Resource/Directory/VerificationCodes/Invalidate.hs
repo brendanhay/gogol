@@ -22,7 +22,7 @@
 --
 -- Invalidate the current backup verification codes for the user.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryVerificationCodesInvalidate@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.verificationCodes.invalidate@.
 module Network.Google.Resource.Directory.VerificationCodes.Invalidate
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Directory.VerificationCodes.Invalidate
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryVerificationCodesInvalidate@ method which the
+-- | A resource alias for @directory.verificationCodes.invalidate@ method which the
 -- 'VerificationCodesInvalidate'' request conforms to.
 type VerificationCodesInvalidateResource =
      "users" :>
@@ -61,7 +61,7 @@ newtype VerificationCodesInvalidate' = VerificationCodesInvalidate'
 --
 -- * 'vciUserKey'
 verificationCodesInvalidate'
-    :: Text -- ^ 'userKey'
+    :: Text -- ^ 'vciUserKey'
     -> VerificationCodesInvalidate'
 verificationCodesInvalidate' pVciUserKey_ =
     VerificationCodesInvalidate'

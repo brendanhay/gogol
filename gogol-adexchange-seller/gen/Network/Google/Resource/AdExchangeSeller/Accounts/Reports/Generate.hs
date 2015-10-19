@@ -24,7 +24,7 @@
 -- query parameters. Returns the result as JSON; to retrieve output in CSV
 -- format specify \"alt=csv\" as a query parameter.
 --
--- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsReportsGenerate@.
+-- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @adexchangeseller.accounts.reports.generate@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Generate
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Generate
 import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangesellerAccountsReportsGenerate@ method which the
+-- | A resource alias for @adexchangeseller.accounts.reports.generate@ method which the
 -- 'AccountsReportsGenerate'' request conforms to.
 type AccountsReportsGenerateResource =
      "accounts" :>
@@ -124,9 +124,9 @@ data AccountsReportsGenerate' = AccountsReportsGenerate'
 --
 -- * 'argMaxResults'
 accountsReportsGenerate'
-    :: Text -- ^ 'endDate'
-    -> Text -- ^ 'startDate'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'argEndDate'
+    -> Text -- ^ 'argStartDate'
+    -> Text -- ^ 'argAccountId'
     -> AccountsReportsGenerate'
 accountsReportsGenerate' pArgEndDate_ pArgStartDate_ pArgAccountId_ =
     AccountsReportsGenerate'

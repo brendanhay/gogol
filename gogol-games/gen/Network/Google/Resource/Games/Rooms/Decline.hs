@@ -23,7 +23,7 @@
 -- Decline an invitation to join a room. For internal use by the Games SDK
 -- only. Calling this method directly is unsupported.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesRoomsDecline@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.rooms.decline@.
 module Network.Google.Resource.Games.Rooms.Decline
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Games.Rooms.Decline
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesRoomsDecline@ method which the
+-- | A resource alias for @games.rooms.decline@ method which the
 -- 'RoomsDecline'' request conforms to.
 type RoomsDeclineResource =
      "rooms" :>
@@ -67,7 +67,7 @@ data RoomsDecline' = RoomsDecline'
 --
 -- * 'rdLanguage'
 roomsDecline'
-    :: Text -- ^ 'roomId'
+    :: Text -- ^ 'rdRoomId'
     -> RoomsDecline'
 roomsDecline' pRdRoomId_ =
     RoomsDecline'

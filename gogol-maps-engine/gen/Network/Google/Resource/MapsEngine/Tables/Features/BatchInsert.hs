@@ -28,7 +28,7 @@
 -- features, read Creating features in the Google Maps Engine developer\'s
 -- guide.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesFeaturesBatchInsert@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.tables.features.batchInsert@.
 module Network.Google.Resource.MapsEngine.Tables.Features.BatchInsert
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.MapsEngine.Tables.Features.BatchInsert
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesFeaturesBatchInsert@ method which the
+-- | A resource alias for @mapsengine.tables.features.batchInsert@ method which the
 -- 'TablesFeaturesBatchInsert'' request conforms to.
 type TablesFeaturesBatchInsertResource =
      "tables" :>
@@ -79,8 +79,8 @@ data TablesFeaturesBatchInsert' = TablesFeaturesBatchInsert'
 --
 -- * 'tfbiId'
 tablesFeaturesBatchInsert'
-    :: FeaturesBatchInsertRequest -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: FeaturesBatchInsertRequest -- ^ 'tfbiPayload'
+    -> Text -- ^ 'tfbiId'
     -> TablesFeaturesBatchInsert'
 tablesFeaturesBatchInsert' pTfbiPayload_ pTfbiId_ =
     TablesFeaturesBatchInsert'

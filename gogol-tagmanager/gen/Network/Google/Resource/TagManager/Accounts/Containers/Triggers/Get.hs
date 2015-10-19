@@ -22,7 +22,7 @@
 --
 -- Gets a GTM Trigger.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersTriggersGet@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.triggers.get@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Get
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersTriggersGet@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.triggers.get@ method which the
 -- 'AccountsContainersTriggersGet'' request conforms to.
 type AccountsContainersTriggersGetResource =
      "accounts" :>
@@ -71,9 +71,9 @@ data AccountsContainersTriggersGet' = AccountsContainersTriggersGet'
 --
 -- * 'actgAccountId'
 accountsContainersTriggersGet'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'triggerId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'actgContainerId'
+    -> Text -- ^ 'actgTriggerId'
+    -> Text -- ^ 'actgAccountId'
     -> AccountsContainersTriggersGet'
 accountsContainersTriggersGet' pActgContainerId_ pActgTriggerId_ pActgAccountId_ =
     AccountsContainersTriggersGet'

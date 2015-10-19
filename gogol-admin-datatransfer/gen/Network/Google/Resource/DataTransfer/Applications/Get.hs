@@ -22,7 +22,7 @@
 --
 -- Retrieves information about an application for the given application ID.
 --
--- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @DataTransferApplicationsGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @datatransfer.applications.get@.
 module Network.Google.Resource.DataTransfer.Applications.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DataTransfer.Applications.Get
 import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataTransferApplicationsGet@ method which the
+-- | A resource alias for @datatransfer.applications.get@ method which the
 -- 'ApplicationsGet'' request conforms to.
 type ApplicationsGetResource =
      "applications" :>
@@ -59,7 +59,7 @@ newtype ApplicationsGet' = ApplicationsGet'
 --
 -- * 'agApplicationId'
 applicationsGet'
-    :: Int64 -- ^ 'applicationId'
+    :: Int64 -- ^ 'agApplicationId'
     -> ApplicationsGet'
 applicationsGet' pAgApplicationId_ =
     ApplicationsGet'

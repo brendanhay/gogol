@@ -23,7 +23,7 @@
 -- Updates an existing pretargeting config. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPretargetingConfigPatch@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.pretargetingConfig.patch@.
 module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Patch
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerPretargetingConfigPatch@ method which the
+-- | A resource alias for @adexchangebuyer.pretargetingConfig.patch@ method which the
 -- 'PretargetingConfigPatch'' request conforms to.
 type PretargetingConfigPatchResource =
      "pretargetingconfigs" :>
@@ -72,9 +72,9 @@ data PretargetingConfigPatch' = PretargetingConfigPatch'
 --
 -- * 'pcpConfigId'
 pretargetingConfigPatch'
-    :: PretargetingConfig -- ^ 'payload'
-    -> Int64 -- ^ 'accountId'
-    -> Int64 -- ^ 'configId'
+    :: PretargetingConfig -- ^ 'pcpPayload'
+    -> Int64 -- ^ 'pcpAccountId'
+    -> Int64 -- ^ 'pcpConfigId'
     -> PretargetingConfigPatch'
 pretargetingConfigPatch' pPcpPayload_ pPcpAccountId_ pPcpConfigId_ =
     PretargetingConfigPatch'

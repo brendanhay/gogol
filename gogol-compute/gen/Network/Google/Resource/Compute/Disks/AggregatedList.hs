@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of disks grouped by scope.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDisksAggregatedList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.disks.aggregatedList@.
 module Network.Google.Resource.Compute.Disks.AggregatedList
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Disks.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeDisksAggregatedList@ method which the
+-- | A resource alias for @compute.disks.aggregatedList@ method which the
 -- 'DisksAggregatedList'' request conforms to.
 type DisksAggregatedListResource =
      Capture "project" Text :>
@@ -76,7 +76,7 @@ data DisksAggregatedList' = DisksAggregatedList'
 --
 -- * 'dalMaxResults'
 disksAggregatedList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'dalProject'
     -> DisksAggregatedList'
 disksAggregatedList' pDalProject_ =
     DisksAggregatedList'

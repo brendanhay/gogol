@@ -24,7 +24,7 @@
 -- topic does not exist. The message payload must not be empty; it must
 -- contain either a non-empty data field, or at least one attribute.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsPublish@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.topics.publish@.
 module Network.Google.Resource.PubSub.Projects.Topics.Publish
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.PubSub.Projects.Topics.Publish
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsTopicsPublish@ method which the
+-- | A resource alias for @pubsub.projects.topics.publish@ method which the
 -- 'ProjectsTopicsPublish'' request conforms to.
 type ProjectsTopicsPublishResource =
      "v1" :>
@@ -104,8 +104,8 @@ data ProjectsTopicsPublish' = ProjectsTopicsPublish'
 --
 -- * 'ptpCallback'
 projectsTopicsPublish'
-    :: PublishRequest -- ^ 'payload'
-    -> Text -- ^ 'topic'
+    :: PublishRequest -- ^ 'ptpPayload'
+    -> Text -- ^ 'ptpTopic'
     -> ProjectsTopicsPublish'
 projectsTopicsPublish' pPtpPayload_ pPtpTopic_ =
     ProjectsTopicsPublish'

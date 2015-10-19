@@ -22,7 +22,7 @@
 --
 -- Get the specified custom channel from the specified ad client.
 --
--- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsCustomChannelsGet@.
+-- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @adexchangeseller.accounts.customchannels.get@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.Get
 import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangesellerAccountsCustomChannelsGet@ method which the
+-- | A resource alias for @adexchangeseller.accounts.customchannels.get@ method which the
 -- 'AccountsCustomChannelsGet'' request conforms to.
 type AccountsCustomChannelsGetResource =
      "accounts" :>
@@ -71,9 +71,9 @@ data AccountsCustomChannelsGet' = AccountsCustomChannelsGet'
 --
 -- * 'accgAccountId'
 accountsCustomChannelsGet'
-    :: Text -- ^ 'customChannelId'
-    -> Text -- ^ 'adClientId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'accgCustomChannelId'
+    -> Text -- ^ 'accgAdClientId'
+    -> Text -- ^ 'accgAccountId'
     -> AccountsCustomChannelsGet'
 accountsCustomChannelsGet' pAccgCustomChannelId_ pAccgAdClientId_ pAccgAccountId_ =
     AccountsCustomChannelsGet'

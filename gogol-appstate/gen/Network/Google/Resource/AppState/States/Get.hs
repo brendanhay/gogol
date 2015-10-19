@@ -23,7 +23,7 @@
 -- Retrieves the data corresponding to the passed key. If the key does not
 -- exist on the server, an HTTP 404 will be returned.
 --
--- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @AppStateStatesGet@.
+-- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @appstate.states.get@.
 module Network.Google.Resource.AppState.States.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AppState.States.Get
 import           Network.Google.AppState.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppStateStatesGet@ method which the
+-- | A resource alias for @appstate.states.get@ method which the
 -- 'StatesGet'' request conforms to.
 type StatesGetResource =
      "states" :>
@@ -61,7 +61,7 @@ newtype StatesGet' = StatesGet'
 --
 -- * 'sgStateKey'
 statesGet'
-    :: Int32 -- ^ 'stateKey'
+    :: Int32 -- ^ 'sgStateKey'
     -> StatesGet'
 statesGet' pSgStateKey_ =
     StatesGet'

@@ -22,7 +22,7 @@
 --
 -- Roll back a transaction.
 --
--- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @DatastoreDatasetsRollback@.
+-- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @datastore.datasets.rollback@.
 module Network.Google.Resource.Datastore.Datasets.Rollback
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Datastore.Datasets.Rollback
 import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DatastoreDatasetsRollback@ method which the
+-- | A resource alias for @datastore.datasets.rollback@ method which the
 -- 'DatasetsRollback'' request conforms to.
 type DatasetsRollbackResource =
      Capture "datasetId" Text :>
@@ -65,8 +65,8 @@ data DatasetsRollback' = DatasetsRollback'
 --
 -- * 'drDatasetId'
 datasetsRollback'
-    :: RollbackRequest -- ^ 'payload'
-    -> Text -- ^ 'datasetId'
+    :: RollbackRequest -- ^ 'drPayload'
+    -> Text -- ^ 'drDatasetId'
     -> DatasetsRollback'
 datasetsRollback' pDrPayload_ pDrDatasetId_ =
     DatasetsRollback'

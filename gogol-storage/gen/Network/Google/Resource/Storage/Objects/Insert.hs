@@ -22,7 +22,7 @@
 --
 -- Stores a new object and metadata.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsInsert@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objects.insert@.
 module Network.Google.Resource.Storage.Objects.Insert
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Storage.Objects.Insert
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsInsert@ method which the
+-- | A resource alias for @storage.objects.insert@ method which the
 -- 'ObjectsInsert'' request conforms to.
 type ObjectsInsertResource =
      "b" :>
@@ -127,9 +127,9 @@ data ObjectsInsert' = ObjectsInsert'
 --
 -- * 'oiProjection'
 objectsInsert'
-    :: Text -- ^ 'bucket'
-    -> Object -- ^ 'payload'
-    -> Body -- ^ 'media'
+    :: Text -- ^ 'oiBucket'
+    -> Object -- ^ 'oiPayload'
+    -> Body -- ^ 'oiMedia'
     -> ObjectsInsert'
 objectsInsert' pOiBucket_ pOiPayload_ pOiMedia_ =
     ObjectsInsert'

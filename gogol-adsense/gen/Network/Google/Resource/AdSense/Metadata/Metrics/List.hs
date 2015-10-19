@@ -22,7 +22,7 @@
 --
 -- List the metadata for the metrics available to this AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseMetadataMetricsList@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.metadata.metrics.list@.
 module Network.Google.Resource.AdSense.Metadata.Metrics.List
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.AdSense.Metadata.Metrics.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseMetadataMetricsList@ method which the
+-- | A resource alias for @adsense.metadata.metrics.list@ method which the
 -- 'MetadataMetricsList'' request conforms to.
 type MetadataMetricsListResource =
      "metadata" :>

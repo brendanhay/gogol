@@ -23,7 +23,7 @@
 -- Creates a BackendService resource in the specified project using the
 -- data included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeBackendServicesInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.insert@.
 module Network.Google.Resource.Compute.BackendServices.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.BackendServices.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeBackendServicesInsert@ method which the
+-- | A resource alias for @compute.backendServices.insert@ method which the
 -- 'BackendServicesInsert'' request conforms to.
 type BackendServicesInsertResource =
      Capture "project" Text :>
@@ -68,8 +68,8 @@ data BackendServicesInsert' = BackendServicesInsert'
 --
 -- * 'bsiPayload'
 backendServicesInsert'
-    :: Text -- ^ 'project'
-    -> BackendService -- ^ 'payload'
+    :: Text -- ^ 'bsiProject'
+    -> BackendService -- ^ 'bsiPayload'
     -> BackendServicesInsert'
 backendServicesInsert' pBsiProject_ pBsiPayload_ =
     BackendServicesInsert'

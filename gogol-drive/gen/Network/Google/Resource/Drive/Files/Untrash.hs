@@ -22,7 +22,7 @@
 --
 -- Restores a file from the trash.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesUntrash@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.untrash@.
 module Network.Google.Resource.Drive.Files.Untrash
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Drive.Files.Untrash
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesUntrash@ method which the
+-- | A resource alias for @drive.files.untrash@ method which the
 -- 'FilesUntrash'' request conforms to.
 type FilesUntrashResource =
      "files" :>
@@ -60,7 +60,7 @@ newtype FilesUntrash' = FilesUntrash'
 --
 -- * 'fFileId'
 filesUntrash'
-    :: Text -- ^ 'fileId'
+    :: Text -- ^ 'fFileId'
     -> FilesUntrash'
 filesUntrash' pFFileId_ =
     FilesUntrash'

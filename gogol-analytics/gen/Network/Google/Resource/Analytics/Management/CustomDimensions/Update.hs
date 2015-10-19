@@ -22,7 +22,7 @@
 --
 -- Updates an existing custom dimension.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomDimensionsUpdate@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.customDimensions.update@.
 module Network.Google.Resource.Analytics.Management.CustomDimensions.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Update
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementCustomDimensionsUpdate@ method which the
+-- | A resource alias for @analytics.management.customDimensions.update@ method which the
 -- 'ManagementCustomDimensionsUpdate'' request conforms to.
 type ManagementCustomDimensionsUpdateResource =
      "management" :>
@@ -83,10 +83,10 @@ data ManagementCustomDimensionsUpdate' = ManagementCustomDimensionsUpdate'
 --
 -- * 'mcduCustomDimensionId'
 managementCustomDimensionsUpdate'
-    :: Text -- ^ 'webPropertyId'
-    -> CustomDimension -- ^ 'payload'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'customDimensionId'
+    :: Text -- ^ 'mcduWebPropertyId'
+    -> CustomDimension -- ^ 'mcduPayload'
+    -> Text -- ^ 'mcduAccountId'
+    -> Text -- ^ 'mcduCustomDimensionId'
     -> ManagementCustomDimensionsUpdate'
 managementCustomDimensionsUpdate' pMcduWebPropertyId_ pMcduPayload_ pMcduAccountId_ pMcduCustomDimensionId_ =
     ManagementCustomDimensionsUpdate'

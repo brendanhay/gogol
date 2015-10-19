@@ -22,7 +22,7 @@
 --
 -- Updates the merchant order ID for a given order.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersUpdatemerchantOrderid@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.updatemerchantorderid@.
 module Network.Google.Resource.Content.Orders.UpdatemerchantOrderid
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Orders.UpdatemerchantOrderid
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersUpdatemerchantOrderid@ method which the
+-- | A resource alias for @content.orders.updatemerchantorderid@ method which the
 -- 'OrdersUpdatemerchantOrderid'' request conforms to.
 type OrdersUpdatemerchantOrderidResource =
      Capture "merchantId" Word64 :>
@@ -71,9 +71,9 @@ data OrdersUpdatemerchantOrderid' = OrdersUpdatemerchantOrderid'
 --
 -- * 'ouoOrderId'
 ordersUpdatemerchantOrderid'
-    :: Word64 -- ^ 'merchantId'
-    -> OrdersUpdateMerchantOrderIdRequest -- ^ 'payload'
-    -> Text -- ^ 'orderId'
+    :: Word64 -- ^ 'ouoMerchantId'
+    -> OrdersUpdateMerchantOrderIdRequest -- ^ 'ouoPayload'
+    -> Text -- ^ 'ouoOrderId'
     -> OrdersUpdatemerchantOrderid'
 ordersUpdatemerchantOrderid' pOuoMerchantId_ pOuoPayload_ pOuoOrderId_ =
     OrdersUpdatemerchantOrderid'

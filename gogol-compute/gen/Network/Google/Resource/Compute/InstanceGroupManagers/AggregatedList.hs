@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of managed instance groups and groups them by zone.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersAggregatedList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.aggregatedList@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.AggregatedList
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersAggregatedList@ method which the
+-- | A resource alias for @compute.instanceGroupManagers.aggregatedList@ method which the
 -- 'InstanceGroupManagersAggregatedList'' request conforms to.
 type InstanceGroupManagersAggregatedListResource =
      Capture "project" Text :>
@@ -76,7 +76,7 @@ data InstanceGroupManagersAggregatedList' = InstanceGroupManagersAggregatedList'
 --
 -- * 'igmalMaxResults'
 instanceGroupManagersAggregatedList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'igmalProject'
     -> InstanceGroupManagersAggregatedList'
 instanceGroupManagersAggregatedList' pIgmalProject_ =
     InstanceGroupManagersAggregatedList'

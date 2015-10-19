@@ -23,7 +23,7 @@
 -- Modifies the labels applied to the thread. This applies to all messages
 -- in the thread.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersThreadsModify@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.threads.modify@.
 module Network.Google.Resource.Gmail.Users.Threads.Modify
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Gmail.Users.Threads.Modify
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersThreadsModify@ method which the
+-- | A resource alias for @gmail.users.threads.modify@ method which the
 -- 'UsersThreadsModify'' request conforms to.
 type UsersThreadsModifyResource =
      Capture "userId" Text :>
@@ -73,8 +73,8 @@ data UsersThreadsModify' = UsersThreadsModify'
 --
 -- * 'utmId'
 usersThreadsModify'
-    :: ModifyThreadRequest -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: ModifyThreadRequest -- ^ 'utmPayload'
+    -> Text -- ^ 'utmId'
     -> Text
     -> UsersThreadsModify'
 usersThreadsModify' pUtmPayload_ pUtmUserId_ pUtmId_ =

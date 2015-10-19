@@ -22,7 +22,7 @@
 --
 -- Returns the specified User resource.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsUsersGet@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.users.get@.
 module Network.Google.Resource.CloudUserAccounts.Users.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.CloudUserAccounts.Users.Get
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsUsersGet@ method which the
+-- | A resource alias for @clouduseraccounts.users.get@ method which the
 -- 'UsersGet'' request conforms to.
 type UsersGetResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data UsersGet' = UsersGet'
 --
 -- * 'ugUser'
 usersGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'user'
+    :: Text -- ^ 'ugProject'
+    -> Text -- ^ 'ugUser'
     -> UsersGet'
 usersGet' pUgProject_ pUgUser_ =
     UsersGet'

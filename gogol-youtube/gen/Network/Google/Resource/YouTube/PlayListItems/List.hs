@@ -24,7 +24,7 @@
 -- parameters. You can retrieve all of the playlist items in a specified
 -- playlist or retrieve one or more playlist items by their unique IDs.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlayListItemsList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.playlistItems.list@.
 module Network.Google.Resource.YouTube.PlayListItems.List
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.YouTube.PlayListItems.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubePlayListItemsList@ method which the
+-- | A resource alias for @youtube.playlistItems.list@ method which the
 -- 'PlayListItemsList'' request conforms to.
 type PlayListItemsListResource =
      "playlistItems" :>
@@ -94,7 +94,7 @@ data PlayListItemsList' = PlayListItemsList'
 --
 -- * 'plilMaxResults'
 playListItemsList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'plilPart'
     -> PlayListItemsList'
 playListItemsList' pPlilPart_ =
     PlayListItemsList'

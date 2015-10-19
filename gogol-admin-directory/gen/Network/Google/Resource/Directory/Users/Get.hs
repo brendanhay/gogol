@@ -22,7 +22,7 @@
 --
 -- retrieve user
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.get@.
 module Network.Google.Resource.Directory.Users.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Directory.Users.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersGet@ method which the
+-- | A resource alias for @directory.users.get@ method which the
 -- 'UsersGet'' request conforms to.
 type UsersGetResource =
      "users" :>
@@ -74,7 +74,7 @@ data UsersGet' = UsersGet'
 --
 -- * 'ugUserKey'
 usersGet'
-    :: Text -- ^ 'userKey'
+    :: Text -- ^ 'ugUserKey'
     -> UsersGet'
 usersGet' pUgUserKey_ =
     UsersGet'

@@ -24,7 +24,7 @@
 -- can hold up to 20 different permission entries. Each batchInsert request
 -- is atomic.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRastersPermissionsBatchUpdate@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.rasters.permissions.batchUpdate@.
 module Network.Google.Resource.MapsEngine.Rasters.Permissions.BatchUpdate
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.MapsEngine.Rasters.Permissions.BatchUpdate
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRastersPermissionsBatchUpdate@ method which the
+-- | A resource alias for @mapsengine.rasters.permissions.batchUpdate@ method which the
 -- 'RastersPermissionsBatchUpdate'' request conforms to.
 type RastersPermissionsBatchUpdateResource =
      "rasters" :>
@@ -71,8 +71,8 @@ data RastersPermissionsBatchUpdate' = RastersPermissionsBatchUpdate'
 --
 -- * 'rpbuId'
 rastersPermissionsBatchUpdate'
-    :: PermissionsBatchUpdateRequest -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: PermissionsBatchUpdateRequest -- ^ 'rpbuPayload'
+    -> Text -- ^ 'rpbuId'
     -> RastersPermissionsBatchUpdate'
 rastersPermissionsBatchUpdate' pRpbuPayload_ pRpbuId_ =
     RastersPermissionsBatchUpdate'

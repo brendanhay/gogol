@@ -22,7 +22,7 @@
 --
 -- Retrieves stored queries.
 --
--- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleClickBidManagerQueriesListqueries@.
+-- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.queries.listqueries@.
 module Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
 import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClickBidManagerQueriesListqueries@ method which the
+-- | A resource alias for @doubleclickbidmanager.queries.listqueries@ method which the
 -- 'QueriesListqueries'' request conforms to.
 type QueriesListqueriesResource =
      "queries" :>

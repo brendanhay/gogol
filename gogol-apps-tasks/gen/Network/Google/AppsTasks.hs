@@ -26,46 +26,46 @@ module Network.Google.AppsTasks
 
     -- * Resources
 
-    -- ** TasksTaskListsDelete
+    -- ** tasks.tasklists.delete
     , module Network.Google.Resource.Tasks.TaskLists.Delete
 
-    -- ** TasksTaskListsGet
+    -- ** tasks.tasklists.get
     , module Network.Google.Resource.Tasks.TaskLists.Get
 
-    -- ** TasksTaskListsInsert
+    -- ** tasks.tasklists.insert
     , module Network.Google.Resource.Tasks.TaskLists.Insert
 
-    -- ** TasksTaskListsList
+    -- ** tasks.tasklists.list
     , module Network.Google.Resource.Tasks.TaskLists.List
 
-    -- ** TasksTaskListsPatch
+    -- ** tasks.tasklists.patch
     , module Network.Google.Resource.Tasks.TaskLists.Patch
 
-    -- ** TasksTaskListsUpdate
+    -- ** tasks.tasklists.update
     , module Network.Google.Resource.Tasks.TaskLists.Update
 
-    -- ** TasksTasksClear
+    -- ** tasks.tasks.clear
     , module Network.Google.Resource.Tasks.Tasks.Clear
 
-    -- ** TasksTasksDelete
+    -- ** tasks.tasks.delete
     , module Network.Google.Resource.Tasks.Tasks.Delete
 
-    -- ** TasksTasksGet
+    -- ** tasks.tasks.get
     , module Network.Google.Resource.Tasks.Tasks.Get
 
-    -- ** TasksTasksInsert
+    -- ** tasks.tasks.insert
     , module Network.Google.Resource.Tasks.Tasks.Insert
 
-    -- ** TasksTasksList
+    -- ** tasks.tasks.list
     , module Network.Google.Resource.Tasks.Tasks.List
 
-    -- ** TasksTasksMove
+    -- ** tasks.tasks.move
     , module Network.Google.Resource.Tasks.Tasks.Move
 
-    -- ** TasksTasksPatch
+    -- ** tasks.tasks.patch
     , module Network.Google.Resource.Tasks.Tasks.Patch
 
-    -- ** TasksTasksUpdate
+    -- ** tasks.tasks.update
     , module Network.Google.Resource.Tasks.Tasks.Update
 
     -- * Types

@@ -30,7 +30,7 @@
 -- group. You must separately verify the status of the abandoning action
 -- with the listmanagedinstances method.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersAbandonInstances@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.abandonInstances@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersAbandonInstances@ method which the
+-- | A resource alias for @compute.instanceGroupManagers.abandonInstances@ method which the
 -- 'InstanceGroupManagersAbandonInstances'' request conforms to.
 type InstanceGroupManagersAbandonInstancesResource =
      Capture "project" Text :>
@@ -94,10 +94,10 @@ data InstanceGroupManagersAbandonInstances' = InstanceGroupManagersAbandonInstan
 --
 -- * 'igmaiPayload'
 instanceGroupManagersAbandonInstances'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instanceGroupManager'
-    -> Text -- ^ 'zone'
-    -> InstanceGroupManagersAbandonInstancesRequest -- ^ 'payload'
+    :: Text -- ^ 'igmaiProject'
+    -> Text -- ^ 'igmaiInstanceGroupManager'
+    -> Text -- ^ 'igmaiZone'
+    -> InstanceGroupManagersAbandonInstancesRequest -- ^ 'igmaiPayload'
     -> InstanceGroupManagersAbandonInstances'
 instanceGroupManagersAbandonInstances' pIgmaiProject_ pIgmaiInstanceGroupManager_ pIgmaiZone_ pIgmaiPayload_ =
     InstanceGroupManagersAbandonInstances'

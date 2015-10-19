@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of columns.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesColumnList@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.column.list@.
 module Network.Google.Resource.FusionTables.Column.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.FusionTables.Column.List
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesColumnList@ method which the
+-- | A resource alias for @fusiontables.column.list@ method which the
 -- 'ColumnList'' request conforms to.
 type ColumnListResource =
      "tables" :>
@@ -70,7 +70,7 @@ data ColumnList' = ColumnList'
 --
 -- * 'clMaxResults'
 columnList'
-    :: Text -- ^ 'tableId'
+    :: Text -- ^ 'clTableId'
     -> ColumnList'
 columnList' pClTableId_ =
     ColumnList'

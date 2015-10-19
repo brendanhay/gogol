@@ -22,7 +22,7 @@
 --
 -- Updates an existing reply. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRepliesPatch@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.replies.patch@.
 module Network.Google.Resource.Drive.Replies.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Drive.Replies.Patch
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRepliesPatch@ method which the
+-- | A resource alias for @drive.replies.patch@ method which the
 -- 'RepliesPatch'' request conforms to.
 type RepliesPatchResource =
      "files" :>
@@ -77,10 +77,10 @@ data RepliesPatch' = RepliesPatch'
 --
 -- * 'rpCommentId'
 repliesPatch'
-    :: CommentReply -- ^ 'payload'
-    -> Text -- ^ 'replyId'
-    -> Text -- ^ 'fileId'
-    -> Text -- ^ 'commentId'
+    :: CommentReply -- ^ 'rpPayload'
+    -> Text -- ^ 'rpReplyId'
+    -> Text -- ^ 'rpFileId'
+    -> Text -- ^ 'rpCommentId'
     -> RepliesPatch'
 repliesPatch' pRpPayload_ pRpReplyId_ pRpFileId_ pRpCommentId_ =
     RepliesPatch'

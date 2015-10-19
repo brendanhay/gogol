@@ -22,7 +22,7 @@
 --
 -- Watch for changes to Events resources.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsWatch@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.events.watch@.
 module Network.Google.Resource.Calendar.Events.Watch
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ module Network.Google.Resource.Calendar.Events.Watch
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarEventsWatch@ method which the
+-- | A resource alias for @calendar.events.watch@ method which the
 -- 'EventsWatch'' request conforms to.
 type EventsWatchResource =
      "calendars" :>
@@ -154,8 +154,8 @@ data EventsWatch' = EventsWatch'
 --
 -- * 'ewTimeMax'
 eventsWatch'
-    :: Text -- ^ 'calendarId'
-    -> Channel -- ^ 'payload'
+    :: Text -- ^ 'ewCalendarId'
+    -> Channel -- ^ 'ewPayload'
     -> EventsWatch'
 eventsWatch' pEwCalendarId_ pEwPayload_ =
     EventsWatch'

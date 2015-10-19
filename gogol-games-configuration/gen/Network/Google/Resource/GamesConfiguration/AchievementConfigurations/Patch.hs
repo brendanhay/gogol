@@ -23,7 +23,7 @@
 -- Update the metadata of the achievement configuration with the given ID.
 -- This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationAchievementConfigurationsPatch@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.achievementConfigurations.patch@.
 module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Patc
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationAchievementConfigurationsPatch@ method which the
+-- | A resource alias for @gamesConfiguration.achievementConfigurations.patch@ method which the
 -- 'AchievementConfigurationsPatch'' request conforms to.
 type AchievementConfigurationsPatchResource =
      "achievements" :>
@@ -67,8 +67,8 @@ data AchievementConfigurationsPatch' = AchievementConfigurationsPatch'
 --
 -- * 'acpPayload'
 achievementConfigurationsPatch'
-    :: Text -- ^ 'achievementId'
-    -> AchievementConfiguration -- ^ 'payload'
+    :: Text -- ^ 'acpAchievementId'
+    -> AchievementConfiguration -- ^ 'acpPayload'
     -> AchievementConfigurationsPatch'
 achievementConfigurationsPatch' pAcpAchievementId_ pAcpPayload_ =
     AchievementConfigurationsPatch'

@@ -22,7 +22,7 @@
 --
 -- Deletes a GTM Folder.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersFoldersDelete@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.folders.delete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Delete
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersFoldersDelete@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.folders.delete@ method which the
 -- 'AccountsContainersFoldersDelete'' request conforms to.
 type AccountsContainersFoldersDeleteResource =
      "accounts" :>
@@ -71,9 +71,9 @@ data AccountsContainersFoldersDelete' = AccountsContainersFoldersDelete'
 --
 -- * 'acfdAccountId'
 accountsContainersFoldersDelete'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'folderId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acfdContainerId'
+    -> Text -- ^ 'acfdFolderId'
+    -> Text -- ^ 'acfdAccountId'
     -> AccountsContainersFoldersDelete'
 accountsContainersFoldersDelete' pAcfdContainerId_ pAcfdFolderId_ pAcfdAccountId_ =
     AccountsContainersFoldersDelete'

@@ -22,7 +22,7 @@
 --
 -- Stop watching resources through this channel
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @AdminChannelsStop@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @admin.channels.stop@.
 module Network.Google.Resource.Admin.Channels.Stop
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Admin.Channels.Stop
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdminChannelsStop@ method which the
+-- | A resource alias for @admin.channels.stop@ method which the
 -- 'ChannelsStop'' request conforms to.
 type ChannelsStopResource =
      "admin" :>
@@ -62,7 +62,7 @@ newtype ChannelsStop' = ChannelsStop'
 --
 -- * 'csPayload'
 channelsStop'
-    :: Channel -- ^ 'payload'
+    :: Channel -- ^ 'csPayload'
     -> ChannelsStop'
 channelsStop' pCsPayload_ =
     ChannelsStop'

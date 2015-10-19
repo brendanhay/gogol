@@ -25,7 +25,7 @@
 -- with the \'insert\' call, then enroll them again with the \'enroll\'
 -- call.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEnterprisesDelete@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.delete@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.Delete
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.Delete
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEnterprisesDelete@ method which the
+-- | A resource alias for @androidenterprise.enterprises.delete@ method which the
 -- 'EnterprisesDelete'' request conforms to.
 type EnterprisesDeleteResource =
      "enterprises" :>
@@ -65,7 +65,7 @@ newtype EnterprisesDelete' = EnterprisesDelete'
 --
 -- * 'eddEnterpriseId'
 enterprisesDelete'
-    :: Text -- ^ 'enterpriseId'
+    :: Text -- ^ 'eddEnterpriseId'
     -> EnterprisesDelete'
 enterprisesDelete' pEddEnterpriseId_ =
     EnterprisesDelete'

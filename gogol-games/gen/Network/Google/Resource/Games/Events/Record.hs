@@ -23,7 +23,7 @@
 -- Records a batch of changes to the number of times events have occurred
 -- for the currently authenticated user of this application.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesEventsRecord@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.events.record@.
 module Network.Google.Resource.Games.Events.Record
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Games.Events.Record
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesEventsRecord@ method which the
+-- | A resource alias for @games.events.record@ method which the
 -- 'EventsRecord'' request conforms to.
 type EventsRecordResource =
      "events" :>
@@ -67,7 +67,7 @@ data EventsRecord' = EventsRecord'
 --
 -- * 'erLanguage'
 eventsRecord'
-    :: EventRecordRequest -- ^ 'payload'
+    :: EventRecordRequest -- ^ 'erPayload'
     -> EventsRecord'
 eventsRecord' pErPayload_ =
     EventsRecord'

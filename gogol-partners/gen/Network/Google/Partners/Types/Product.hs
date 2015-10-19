@@ -1131,7 +1131,7 @@ newtype LogMessageRequestClientInfo = LogMessageRequestClientInfo
 --
 -- * 'lmrciAddtional'
 logMessageRequestClientInfo
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'lmrciAddtional'
     -> LogMessageRequestClientInfo
 logMessageRequestClientInfo pLmrciAddtional_ =
     LogMessageRequestClientInfo

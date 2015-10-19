@@ -22,7 +22,7 @@
 --
 -- Inserts a file into a folder.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChildrenInsert@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.children.insert@.
 module Network.Google.Resource.Drive.Children.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Drive.Children.Insert
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveChildrenInsert@ method which the
+-- | A resource alias for @drive.children.insert@ method which the
 -- 'ChildrenInsert'' request conforms to.
 type ChildrenInsertResource =
      "files" :>
@@ -66,8 +66,8 @@ data ChildrenInsert' = ChildrenInsert'
 --
 -- * 'chiPayload'
 childrenInsert'
-    :: Text -- ^ 'folderId'
-    -> ChildReference -- ^ 'payload'
+    :: Text -- ^ 'chiFolderId'
+    -> ChildReference -- ^ 'chiPayload'
     -> ChildrenInsert'
 childrenInsert' pChiFolderId_ pChiPayload_ =
     ChildrenInsert'

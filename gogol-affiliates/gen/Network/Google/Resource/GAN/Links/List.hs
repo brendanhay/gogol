@@ -22,7 +22,7 @@
 --
 -- Retrieves all links that match the query parameters.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANLinksList@.
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @gan.links.list@.
 module Network.Google.Resource.GAN.Links.List
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ module Network.Google.Resource.GAN.Links.List
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GANLinksList@ method which the
+-- | A resource alias for @gan.links.list@ method which the
 -- 'LinksList'' request conforms to.
 type LinksListResource =
      Capture "role" LinksListRole :>
@@ -132,8 +132,8 @@ data LinksList' = LinksList'
 --
 -- * 'llMaxResults'
 linksList'
-    :: Text -- ^ 'roleId'
-    -> LinksListRole -- ^ 'role'
+    :: Text -- ^ 'llRoleId'
+    -> LinksListRole -- ^ 'llRole'
     -> LinksList'
 linksList' pLlRoleId_ pLlRole_ =
     LinksList'

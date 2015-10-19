@@ -22,7 +22,7 @@
 --
 -- Returns the specified Instance Group Manager resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersGet@.
+-- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @replicapool.instanceGroupManagers.get@.
 module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Get
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
--- | A resource alias for @ReplicapoolInstanceGroupManagersGet@ method which the
+-- | A resource alias for @replicapool.instanceGroupManagers.get@ method which the
 -- 'InstanceGroupManagersGet'' request conforms to.
 type InstanceGroupManagersGetResource =
      Capture "project" Text :>
@@ -71,9 +71,9 @@ data InstanceGroupManagersGet' = InstanceGroupManagersGet'
 --
 -- * 'igmgZone'
 instanceGroupManagersGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instanceGroupManager'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'igmgProject'
+    -> Text -- ^ 'igmgInstanceGroupManager'
+    -> Text -- ^ 'igmgZone'
     -> InstanceGroupManagersGet'
 instanceGroupManagersGet' pIgmgProject_ pIgmgInstanceGroupManager_ pIgmgZone_ =
     InstanceGroupManagersGet'

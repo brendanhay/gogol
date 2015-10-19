@@ -603,7 +603,7 @@ newtype PubsubMessageAttributes = PubsubMessageAttributes
 --
 -- * 'pmaAddtional'
 pubsubMessageAttributes
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'pmaAddtional'
     -> PubsubMessageAttributes
 pubsubMessageAttributes pPmaAddtional_ =
     PubsubMessageAttributes
@@ -879,7 +879,7 @@ newtype PushConfigAttributes = PushConfigAttributes
 --
 -- * 'pcaAddtional'
 pushConfigAttributes
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'pcaAddtional'
     -> PushConfigAttributes
 pushConfigAttributes pPcaAddtional_ =
     PushConfigAttributes

@@ -22,7 +22,7 @@
 --
 -- Deletes a GTM Trigger.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersTriggersDelete@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.triggers.delete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Delete
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersTriggersDelete@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.triggers.delete@ method which the
 -- 'AccountsContainersTriggersDelete'' request conforms to.
 type AccountsContainersTriggersDeleteResource =
      "accounts" :>
@@ -71,9 +71,9 @@ data AccountsContainersTriggersDelete' = AccountsContainersTriggersDelete'
 --
 -- * 'actdAccountId'
 accountsContainersTriggersDelete'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'triggerId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'actdContainerId'
+    -> Text -- ^ 'actdTriggerId'
+    -> Text -- ^ 'actdAccountId'
     -> AccountsContainersTriggersDelete'
 accountsContainersTriggersDelete' pActdContainerId_ pActdTriggerId_ pActdAccountId_ =
     AccountsContainersTriggersDelete'

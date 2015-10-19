@@ -22,7 +22,7 @@
 --
 -- Add new deals for the specified order
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceDealsInsert@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.marketplacedeals.insert@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Insert
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerMarketplaceDealsInsert@ method which the
+-- | A resource alias for @adexchangebuyer.marketplacedeals.insert@ method which the
 -- 'MarketplaceDealsInsert'' request conforms to.
 type MarketplaceDealsInsertResource =
      "marketplaceOrders" :>
@@ -67,8 +67,8 @@ data MarketplaceDealsInsert' = MarketplaceDealsInsert'
 --
 -- * 'mdiOrderId'
 marketplaceDealsInsert'
-    :: AddOrderDealsRequest -- ^ 'payload'
-    -> Text -- ^ 'orderId'
+    :: AddOrderDealsRequest -- ^ 'mdiPayload'
+    -> Text -- ^ 'mdiOrderId'
     -> MarketplaceDealsInsert'
 marketplaceDealsInsert' pMdiPayload_ pMdiOrderId_ =
     MarketplaceDealsInsert'

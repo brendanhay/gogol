@@ -23,7 +23,7 @@
 -- Retrieves, inserts, updates, and deletes multiple Merchant Center
 -- (sub-)accounts in a single request.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountsCustombatch@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounts.custombatch@.
 module Network.Google.Resource.Content.Accounts.Custombatch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Accounts.Custombatch
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccountsCustombatch@ method which the
+-- | A resource alias for @content.accounts.custombatch@ method which the
 -- 'AccountsCustombatch'' request conforms to.
 type AccountsCustombatchResource =
      "accounts" :>
@@ -68,7 +68,7 @@ data AccountsCustombatch' = AccountsCustombatch'
 --
 -- * 'accDryRun'
 accountsCustombatch'
-    :: AccountsCustomBatchRequest -- ^ 'payload'
+    :: AccountsCustomBatchRequest -- ^ 'accPayload'
     -> AccountsCustombatch'
 accountsCustombatch' pAccPayload_ =
     AccountsCustombatch'

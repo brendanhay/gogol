@@ -22,7 +22,7 @@
 --
 -- Retrieves details of a product for display to an enterprise admin.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseProductsGet@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.get@.
 module Network.Google.Resource.AndroidEnterprise.Products.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidEnterprise.Products.Get
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseProductsGet@ method which the
+-- | A resource alias for @androidenterprise.products.get@ method which the
 -- 'ProductsGet'' request conforms to.
 type ProductsGetResource =
      "enterprises" :>
@@ -70,8 +70,8 @@ data ProductsGet' = ProductsGet'
 --
 -- * 'pProductId'
 productsGet'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'productId'
+    :: Text -- ^ 'pEnterpriseId'
+    -> Text -- ^ 'pProductId'
     -> ProductsGet'
 productsGet' pPEnterpriseId_ pPProductId_ =
     ProductsGet'

@@ -23,7 +23,7 @@
 -- Looks up political geography and representative information for a single
 -- address.
 --
--- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicInfoRepresentativesRepresentativeInfoByAddress@.
+-- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @civicinfo.representatives.representativeInfoByAddress@.
 module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAddress
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAdd
 import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CivicInfoRepresentativesRepresentativeInfoByAddress@ method which the
+-- | A resource alias for @civicinfo.representatives.representativeInfoByAddress@ method which the
 -- 'RepresentativesRepresentativeInfoByAddress'' request conforms to.
 type RepresentativesRepresentativeInfoByAddressResource
      =

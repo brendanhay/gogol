@@ -22,7 +22,7 @@
 --
 -- Unenrolls an enterprise from the calling MDM.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEnterprisesUnenroll@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.unenroll@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.Unenroll
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.Unenroll
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEnterprisesUnenroll@ method which the
+-- | A resource alias for @androidenterprise.enterprises.unenroll@ method which the
 -- 'EnterprisesUnenroll'' request conforms to.
 type EnterprisesUnenrollResource =
      "enterprises" :>
@@ -60,7 +60,7 @@ newtype EnterprisesUnenroll' = EnterprisesUnenroll'
 --
 -- * 'euEnterpriseId'
 enterprisesUnenroll'
-    :: Text -- ^ 'enterpriseId'
+    :: Text -- ^ 'euEnterpriseId'
     -> EnterprisesUnenroll'
 enterprisesUnenroll' pEuEnterpriseId_ =
     EnterprisesUnenroll'

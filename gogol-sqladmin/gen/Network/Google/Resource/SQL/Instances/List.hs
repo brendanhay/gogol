@@ -23,7 +23,7 @@
 -- Lists instances under a given project in the alphabetical order of the
 -- instance name.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesList@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.list@.
 module Network.Google.Resource.SQL.Instances.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.SQL.Instances.List
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesList@ method which the
+-- | A resource alias for @sql.instances.list@ method which the
 -- 'InstancesList'' request conforms to.
 type InstancesListResource =
      "projects" :>
@@ -73,7 +73,7 @@ data InstancesList' = InstancesList'
 --
 -- * 'ilMaxResults'
 instancesList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'ilProject'
     -> InstancesList'
 instancesList' pIlProject_ =
     InstancesList'

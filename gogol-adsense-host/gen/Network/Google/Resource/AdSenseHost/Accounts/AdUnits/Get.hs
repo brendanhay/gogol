@@ -22,7 +22,7 @@
 --
 -- Get the specified host ad unit in this AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdUnitsGet@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.accounts.adunits.get@.
 module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Get
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAccountsAdUnitsGet@ method which the
+-- | A resource alias for @adsensehost.accounts.adunits.get@ method which the
 -- 'AccountsAdUnitsGet'' request conforms to.
 type AccountsAdUnitsGetResource =
      "accounts" :>
@@ -71,9 +71,9 @@ data AccountsAdUnitsGet' = AccountsAdUnitsGet'
 --
 -- * 'aaugAccountId'
 accountsAdUnitsGet'
-    :: Text -- ^ 'adUnitId'
-    -> Text -- ^ 'adClientId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'aaugAdUnitId'
+    -> Text -- ^ 'aaugAdClientId'
+    -> Text -- ^ 'aaugAccountId'
     -> AccountsAdUnitsGet'
 accountsAdUnitsGet' pAaugAdUnitId_ pAaugAdClientId_ pAaugAccountId_ =
     AccountsAdUnitsGet'

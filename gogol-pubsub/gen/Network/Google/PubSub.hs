@@ -27,64 +27,64 @@ module Network.Google.PubSub
 
     -- * Resources
 
-    -- ** PubsubProjectsSubscriptionsAcknowledge
+    -- ** pubsub.projects.subscriptions.acknowledge
     , module Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
 
-    -- ** PubsubProjectsSubscriptionsCreate
+    -- ** pubsub.projects.subscriptions.create
     , module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
 
-    -- ** PubsubProjectsSubscriptionsDelete
+    -- ** pubsub.projects.subscriptions.delete
     , module Network.Google.Resource.PubSub.Projects.Subscriptions.Delete
 
-    -- ** PubsubProjectsSubscriptionsGet
+    -- ** pubsub.projects.subscriptions.get
     , module Network.Google.Resource.PubSub.Projects.Subscriptions.Get
 
-    -- ** PubsubProjectsSubscriptionsGetIAMPolicy
+    -- ** pubsub.projects.subscriptions.getIamPolicy
     , module Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPolicy
 
-    -- ** PubsubProjectsSubscriptionsList
+    -- ** pubsub.projects.subscriptions.list
     , module Network.Google.Resource.PubSub.Projects.Subscriptions.List
 
-    -- ** PubsubProjectsSubscriptionsModifyAckDeadline
+    -- ** pubsub.projects.subscriptions.modifyAckDeadline
     , module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
 
-    -- ** PubsubProjectsSubscriptionsModifyPushConfig
+    -- ** pubsub.projects.subscriptions.modifyPushConfig
     , module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
 
-    -- ** PubsubProjectsSubscriptionsPull
+    -- ** pubsub.projects.subscriptions.pull
     , module Network.Google.Resource.PubSub.Projects.Subscriptions.Pull
 
-    -- ** PubsubProjectsSubscriptionsSetIAMPolicy
+    -- ** pubsub.projects.subscriptions.setIamPolicy
     , module Network.Google.Resource.PubSub.Projects.Subscriptions.SetIAMPolicy
 
-    -- ** PubsubProjectsSubscriptionsTestIAMPermissions
+    -- ** pubsub.projects.subscriptions.testIamPermissions
     , module Network.Google.Resource.PubSub.Projects.Subscriptions.TestIAMPermissions
 
-    -- ** PubsubProjectsTopicsCreate
+    -- ** pubsub.projects.topics.create
     , module Network.Google.Resource.PubSub.Projects.Topics.Create
 
-    -- ** PubsubProjectsTopicsDelete
+    -- ** pubsub.projects.topics.delete
     , module Network.Google.Resource.PubSub.Projects.Topics.Delete
 
-    -- ** PubsubProjectsTopicsGet
+    -- ** pubsub.projects.topics.get
     , module Network.Google.Resource.PubSub.Projects.Topics.Get
 
-    -- ** PubsubProjectsTopicsGetIAMPolicy
+    -- ** pubsub.projects.topics.getIamPolicy
     , module Network.Google.Resource.PubSub.Projects.Topics.GetIAMPolicy
 
-    -- ** PubsubProjectsTopicsList
+    -- ** pubsub.projects.topics.list
     , module Network.Google.Resource.PubSub.Projects.Topics.List
 
-    -- ** PubsubProjectsTopicsPublish
+    -- ** pubsub.projects.topics.publish
     , module Network.Google.Resource.PubSub.Projects.Topics.Publish
 
-    -- ** PubsubProjectsTopicsSetIAMPolicy
+    -- ** pubsub.projects.topics.setIamPolicy
     , module Network.Google.Resource.PubSub.Projects.Topics.SetIAMPolicy
 
-    -- ** PubsubProjectsTopicsSubscriptionsList
+    -- ** pubsub.projects.topics.subscriptions.list
     , module Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
 
-    -- ** PubsubProjectsTopicsTestIAMPermissions
+    -- ** pubsub.projects.topics.testIamPermissions
     , module Network.Google.Resource.PubSub.Projects.Topics.TestIAMPermissions
 
     -- * Types

@@ -22,7 +22,7 @@
 --
 -- Deletes the breakpoint from the debuggee.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @CloudDebuggerDebuggerDebuggeesBreakpointsDelete@.
+-- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.delete@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Delete
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Dele
 import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudDebuggerDebuggerDebuggeesBreakpointsDelete@ method which the
+-- | A resource alias for @clouddebugger.debugger.debuggees.breakpoints.delete@ method which the
 -- 'DebuggerDebuggeesBreakpointsDelete'' request conforms to.
 type DebuggerDebuggeesBreakpointsDeleteResource =
      "v2" :>
@@ -102,8 +102,8 @@ data DebuggerDebuggeesBreakpointsDelete' = DebuggerDebuggeesBreakpointsDelete'
 --
 -- * 'ddbdCallback'
 debuggerDebuggeesBreakpointsDelete'
-    :: Text -- ^ 'breakpointId'
-    -> Text -- ^ 'debuggeeId'
+    :: Text -- ^ 'ddbdBreakpointId'
+    -> Text -- ^ 'ddbdDebuggeeId'
     -> DebuggerDebuggeesBreakpointsDelete'
 debuggerDebuggeesBreakpointsDelete' pDdbdBreakpointId_ pDdbdDebuggeeId_ =
     DebuggerDebuggeesBreakpointsDelete'

@@ -22,7 +22,7 @@
 --
 -- Updates an existing webProperty-AdWords link.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyAdWordsLinksUpdate@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webPropertyAdWordsLinks.update@.
 module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Upda
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksUpdate@ method which the
+-- | A resource alias for @analytics.management.webPropertyAdWordsLinks.update@ method which the
 -- 'ManagementWebPropertyAdWordsLinksUpdate'' request conforms to.
 type ManagementWebPropertyAdWordsLinksUpdateResource
      =
@@ -79,10 +79,10 @@ data ManagementWebPropertyAdWordsLinksUpdate' = ManagementWebPropertyAdWordsLink
 --
 -- * 'mwpawluWebPropertyAdWordsLinkId'
 managementWebPropertyAdWordsLinksUpdate'
-    :: Text -- ^ 'webPropertyId'
-    -> EntityAdWordsLink -- ^ 'payload'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'webPropertyAdWordsLinkId'
+    :: Text -- ^ 'mwpawluWebPropertyId'
+    -> EntityAdWordsLink -- ^ 'mwpawluPayload'
+    -> Text -- ^ 'mwpawluAccountId'
+    -> Text -- ^ 'mwpawluWebPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksUpdate'
 managementWebPropertyAdWordsLinksUpdate' pMwpawluWebPropertyId_ pMwpawluPayload_ pMwpawluAccountId_ pMwpawluWebPropertyAdWordsLinkId_ =
     ManagementWebPropertyAdWordsLinksUpdate'

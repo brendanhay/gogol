@@ -22,7 +22,7 @@
 --
 -- Gets the current user\'s Gmail profile.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersGetProFile@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.getProfile@.
 module Network.Google.Resource.Gmail.Users.GetProFile
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Gmail.Users.GetProFile
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersGetProFile@ method which the
+-- | A resource alias for @gmail.users.getProfile@ method which the
 -- 'UsersGetProFile'' request conforms to.
 type UsersGetProFileResource =
      Capture "userId" Text :>

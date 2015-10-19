@@ -22,7 +22,7 @@
 --
 -- Lists all breakpoints of the debuggee that the user has access to.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @CloudDebuggerDebuggerDebuggeesBreakpointsList@.
+-- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.list@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List
 import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudDebuggerDebuggerDebuggeesBreakpointsList@ method which the
+-- | A resource alias for @clouddebugger.debugger.debuggees.breakpoints.list@ method which the
 -- 'DebuggerDebuggeesBreakpointsList'' request conforms to.
 type DebuggerDebuggeesBreakpointsListResource =
      "v2" :>
@@ -123,7 +123,7 @@ data DebuggerDebuggeesBreakpointsList' = DebuggerDebuggeesBreakpointsList'
 --
 -- * 'ddblCallback'
 debuggerDebuggeesBreakpointsList'
-    :: Text -- ^ 'debuggeeId'
+    :: Text -- ^ 'ddblDebuggeeId'
     -> DebuggerDebuggeesBreakpointsList'
 debuggerDebuggeesBreakpointsList' pDdblDebuggeeId_ =
     DebuggerDebuggeesBreakpointsList'

@@ -22,7 +22,7 @@
 --
 -- Lists the drafts in the user\'s mailbox.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersDraftsList@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.drafts.list@.
 module Network.Google.Resource.Gmail.Users.Drafts.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Gmail.Users.Drafts.List
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersDraftsList@ method which the
+-- | A resource alias for @gmail.users.drafts.list@ method which the
 -- 'UsersDraftsList'' request conforms to.
 type UsersDraftsListResource =
      Capture "userId" Text :>

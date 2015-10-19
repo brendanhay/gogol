@@ -23,7 +23,7 @@
 -- Sends the specified, existing draft to the recipients in the To, Cc, and
 -- Bcc headers.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersDraftsSend@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.drafts.send@.
 module Network.Google.Resource.Gmail.Users.Drafts.Send
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Gmail.Users.Drafts.Send
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersDraftsSend@ method which the
+-- | A resource alias for @gmail.users.drafts.send@ method which the
 -- 'UsersDraftsSend'' request conforms to.
 type UsersDraftsSendResource =
      Capture "userId" Text :>
@@ -72,8 +72,8 @@ data UsersDraftsSend' = UsersDraftsSend'
 --
 -- * 'udsMedia'
 usersDraftsSend'
-    :: Draft -- ^ 'payload'
-    -> Text -- ^ 'media'
+    :: Draft -- ^ 'udsPayload'
+    -> Text -- ^ 'udsMedia'
     -> Body
     -> UsersDraftsSend'
 usersDraftsSend' pUdsPayload_ pUdsUserId_ pUdsMedia_ =

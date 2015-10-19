@@ -23,7 +23,7 @@
 -- Executes a Fusion Tables SQL statement, which can be any of - SELECT -
 -- INSERT - UPDATE - DELETE - SHOW - DESCRIBE - CREATE statement.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesQuerySQL@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.query.sql@.
 module Network.Google.Resource.FusionTables.Query.SQL
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.FusionTables.Query.SQL
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesQuerySQL@ method which the
+-- | A resource alias for @fusiontables.query.sql@ method which the
 -- 'QuerySQL'' request conforms to.
 type QuerySQLResource =
      "query" :>
@@ -78,7 +78,7 @@ data QuerySQL' = QuerySQL'
 --
 -- * 'qsqlSQL'
 querySQL'
-    :: Text -- ^ 'sql'
+    :: Text -- ^ 'qsqlSQL'
     -> QuerySQL'
 querySQL' pQsqlSQL_ =
     QuerySQL'

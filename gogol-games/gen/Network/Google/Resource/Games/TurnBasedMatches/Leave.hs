@@ -23,7 +23,7 @@
 -- Leave a turn-based match when it is not the current player\'s turn,
 -- without canceling the match.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesLeave@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.turnBasedMatches.leave@.
 module Network.Google.Resource.Games.TurnBasedMatches.Leave
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.Leave
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesTurnBasedMatchesLeave@ method which the
+-- | A resource alias for @games.turnBasedMatches.leave@ method which the
 -- 'TurnBasedMatchesLeave'' request conforms to.
 type TurnBasedMatchesLeaveResource =
      "turnbasedmatches" :>
@@ -68,7 +68,7 @@ data TurnBasedMatchesLeave' = TurnBasedMatchesLeave'
 --
 -- * 'turMatchId'
 turnBasedMatchesLeave'
-    :: Text -- ^ 'matchId'
+    :: Text -- ^ 'turMatchId'
     -> TurnBasedMatchesLeave'
 turnBasedMatchesLeave' pTurMatchId_ =
     TurnBasedMatchesLeave'

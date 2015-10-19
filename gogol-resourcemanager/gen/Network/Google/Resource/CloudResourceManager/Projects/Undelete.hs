@@ -30,7 +30,7 @@
 -- the project cannot be restored. The caller must have modify permissions
 -- for this project.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerProjectsUndelete@.
+-- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.undelete@.
 module Network.Google.Resource.CloudResourceManager.Projects.Undelete
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ module Network.Google.Resource.CloudResourceManager.Projects.Undelete
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerProjectsUndelete@ method which the
+-- | A resource alias for @cloudresourcemanager.projects.undelete@ method which the
 -- 'ProjectsUndelete'' request conforms to.
 type ProjectsUndeleteResource =
      "v1beta1" :>
@@ -111,7 +111,7 @@ data ProjectsUndelete' = ProjectsUndelete'
 --
 -- * 'proCallback'
 projectsUndelete'
-    :: Text -- ^ 'projectId'
+    :: Text -- ^ 'proProjectId'
     -> ProjectsUndelete'
 projectsUndelete' pProProjectId_ =
     ProjectsUndelete'

@@ -23,7 +23,7 @@
 -- Copies a source object to a destination object. Optionally overrides
 -- metadata.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsCopy@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objects.copy@.
 module Network.Google.Resource.Storage.Objects.Copy
     (
     -- * REST Resource
@@ -55,7 +55,7 @@ module Network.Google.Resource.Storage.Objects.Copy
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsCopy@ method which the
+-- | A resource alias for @storage.objects.copy@ method which the
 -- 'ObjectsCopy'' request conforms to.
 type ObjectsCopyResource =
      "b" :>
@@ -188,11 +188,11 @@ data ObjectsCopy' = ObjectsCopy'
 --
 -- * 'ocDestinationObject'
 objectsCopy'
-    :: Text -- ^ 'sourceObject'
-    -> Text -- ^ 'sourceBucket'
-    -> Object -- ^ 'payload'
-    -> Text -- ^ 'destinationBucket'
-    -> Text -- ^ 'destinationObject'
+    :: Text -- ^ 'ocSourceObject'
+    -> Text -- ^ 'ocSourceBucket'
+    -> Object -- ^ 'ocPayload'
+    -> Text -- ^ 'ocDestinationBucket'
+    -> Text -- ^ 'ocDestinationObject'
     -> ObjectsCopy'
 objectsCopy' pOcSourceObject_ pOcSourceBucket_ pOcPayload_ pOcDestinationBucket_ pOcDestinationObject_ =
     ObjectsCopy'

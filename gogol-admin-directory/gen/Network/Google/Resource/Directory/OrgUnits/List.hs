@@ -22,7 +22,7 @@
 --
 -- Retrieve all Organization Units
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryOrgUnitsList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.orgunits.list@.
 module Network.Google.Resource.Directory.OrgUnits.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Directory.OrgUnits.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryOrgUnitsList@ method which the
+-- | A resource alias for @directory.orgunits.list@ method which the
 -- 'OrgUnitsList'' request conforms to.
 type OrgUnitsListResource =
      "customer" :>
@@ -70,7 +70,7 @@ data OrgUnitsList' = OrgUnitsList'
 --
 -- * 'oulType'
 orgUnitsList'
-    :: Text -- ^ 'customerId'
+    :: Text -- ^ 'oulCustomerId'
     -> OrgUnitsList'
 orgUnitsList' pOulCustomerId_ =
     OrgUnitsList'

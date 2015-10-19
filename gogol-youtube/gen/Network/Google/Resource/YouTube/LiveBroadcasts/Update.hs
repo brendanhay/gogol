@@ -23,7 +23,7 @@
 -- Updates a broadcast. For example, you could modify the broadcast
 -- settings defined in the liveBroadcast resource\'s contentDetails object.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveBroadcastsUpdate@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveBroadcasts.update@.
 module Network.Google.Resource.YouTube.LiveBroadcasts.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveBroadcastsUpdate@ method which the
+-- | A resource alias for @youtube.liveBroadcasts.update@ method which the
 -- 'LiveBroadcastsUpdate'' request conforms to.
 type LiveBroadcastsUpdateResource =
      "liveBroadcasts" :>
@@ -77,8 +77,8 @@ data LiveBroadcastsUpdate' = LiveBroadcastsUpdate'
 --
 -- * 'lbuOnBehalfOfContentOwnerChannel'
 liveBroadcastsUpdate'
-    :: Text -- ^ 'part'
-    -> LiveBroadcast -- ^ 'payload'
+    :: Text -- ^ 'lbuPart'
+    -> LiveBroadcast -- ^ 'lbuPayload'
     -> LiveBroadcastsUpdate'
 liveBroadcastsUpdate' pLbuPart_ pLbuPayload_ =
     LiveBroadcastsUpdate'

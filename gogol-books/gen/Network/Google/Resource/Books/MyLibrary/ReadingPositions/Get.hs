@@ -22,7 +22,7 @@
 --
 -- Retrieves my reading position information for a volume.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryReadingPositionsGet@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.readingpositions.get@.
 module Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryReadingPositionsGet@ method which the
+-- | A resource alias for @books.mylibrary.readingpositions.get@ method which the
 -- 'MyLibraryReadingPositionsGet'' request conforms to.
 type MyLibraryReadingPositionsGetResource =
      "mylibrary" :>
@@ -71,7 +71,7 @@ data MyLibraryReadingPositionsGet' = MyLibraryReadingPositionsGet'
 --
 -- * 'mlrpgSource'
 myLibraryReadingPositionsGet'
-    :: Text -- ^ 'volumeId'
+    :: Text -- ^ 'mlrpgVolumeId'
     -> MyLibraryReadingPositionsGet'
 myLibraryReadingPositionsGet' pMlrpgVolumeId_ =
     MyLibraryReadingPositionsGet'

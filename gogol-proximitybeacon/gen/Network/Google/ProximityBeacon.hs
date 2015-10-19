@@ -27,46 +27,46 @@ module Network.Google.ProximityBeacon
 
     -- * Resources
 
-    -- ** ProximitybeaconBeaconInfoGetforObserved
+    -- ** proximitybeacon.beaconinfo.getforobserved
     , module Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
 
-    -- ** ProximitybeaconBeaconsActivate
+    -- ** proximitybeacon.beacons.activate
     , module Network.Google.Resource.ProximityBeacon.Beacons.Activate
 
-    -- ** ProximitybeaconBeaconsAttachmentsBatchDelete
+    -- ** proximitybeacon.beacons.attachments.batchDelete
     , module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
 
-    -- ** ProximitybeaconBeaconsAttachmentsCreate
+    -- ** proximitybeacon.beacons.attachments.create
     , module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Create
 
-    -- ** ProximitybeaconBeaconsAttachmentsDelete
+    -- ** proximitybeacon.beacons.attachments.delete
     , module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
 
-    -- ** ProximitybeaconBeaconsAttachmentsList
+    -- ** proximitybeacon.beacons.attachments.list
     , module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
 
-    -- ** ProximitybeaconBeaconsDeactivate
+    -- ** proximitybeacon.beacons.deactivate
     , module Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
 
-    -- ** ProximitybeaconBeaconsDecommission
+    -- ** proximitybeacon.beacons.decommission
     , module Network.Google.Resource.ProximityBeacon.Beacons.Decommission
 
-    -- ** ProximitybeaconBeaconsDiagnosticsList
+    -- ** proximitybeacon.beacons.diagnostics.list
     , module Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
 
-    -- ** ProximitybeaconBeaconsGet
+    -- ** proximitybeacon.beacons.get
     , module Network.Google.Resource.ProximityBeacon.Beacons.Get
 
-    -- ** ProximitybeaconBeaconsList
+    -- ** proximitybeacon.beacons.list
     , module Network.Google.Resource.ProximityBeacon.Beacons.List
 
-    -- ** ProximitybeaconBeaconsRegister
+    -- ** proximitybeacon.beacons.register
     , module Network.Google.Resource.ProximityBeacon.Beacons.Register
 
-    -- ** ProximitybeaconBeaconsUpdate
+    -- ** proximitybeacon.beacons.update
     , module Network.Google.Resource.ProximityBeacon.Beacons.Update
 
-    -- ** ProximitybeaconNamespacesList
+    -- ** proximitybeacon.namespaces.list
     , module Network.Google.Resource.ProximityBeacon.Namespaces.List
 
     -- * Types

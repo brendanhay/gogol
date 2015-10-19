@@ -22,7 +22,7 @@
 --
 -- Updates an existing event tag. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingEventTagsPatch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.eventTags.patch@.
 module Network.Google.Resource.DFAReporting.EventTags.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.EventTags.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingEventTagsPatch@ method which the
+-- | A resource alias for @dfareporting.eventTags.patch@ method which the
 -- 'EventTagsPatch'' request conforms to.
 type EventTagsPatchResource =
      "userprofiles" :>
@@ -70,9 +70,9 @@ data EventTagsPatch' = EventTagsPatch'
 --
 -- * 'etpId'
 eventTagsPatch'
-    :: Int64 -- ^ 'profileId'
-    -> EventTag -- ^ 'payload'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'etpProFileId'
+    -> EventTag -- ^ 'etpPayload'
+    -> Int64 -- ^ 'etpId'
     -> EventTagsPatch'
 eventTagsPatch' pEtpProFileId_ pEtpPayload_ pEtpId_ =
     EventTagsPatch'

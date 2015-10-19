@@ -22,7 +22,7 @@
 --
 -- Lists profile-user links for a given view (profile).
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFileUserLinksList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.profileUserLinks.list@.
 module Network.Google.Resource.Analytics.Management.ProFileUserLinks.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Analytics.Management.ProFileUserLinks.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFileUserLinksList@ method which the
+-- | A resource alias for @analytics.management.profileUserLinks.list@ method which the
 -- 'ManagementProFileUserLinksList'' request conforms to.
 type ManagementProFileUserLinksListResource =
      "management" :>
@@ -84,9 +84,9 @@ data ManagementProFileUserLinksList' = ManagementProFileUserLinksList'
 --
 -- * 'mpfullMaxResults'
 managementProFileUserLinksList'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mpfullWebPropertyId'
+    -> Text -- ^ 'mpfullProFileId'
+    -> Text -- ^ 'mpfullAccountId'
     -> ManagementProFileUserLinksList'
 managementProFileUserLinksList' pMpfullWebPropertyId_ pMpfullProFileId_ pMpfullAccountId_ =
     ManagementProFileUserLinksList'

@@ -22,7 +22,7 @@
 --
 -- Reset password for a user.
 --
--- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyResetPassword@.
+-- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.resetPassword@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.ResetPassword
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.ResetPassword
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyResetPassword@ method which the
+-- | A resource alias for @identitytoolkit.relyingparty.resetPassword@ method which the
 -- 'RelyingPartyResetPassword'' request conforms to.
 type RelyingPartyResetPasswordResource =
      "resetPassword" :>
@@ -61,7 +61,7 @@ newtype RelyingPartyResetPassword' = RelyingPartyResetPassword'
 --
 -- * 'rprpPayload'
 relyingPartyResetPassword'
-    :: IdentitytoolkitRelyingPartyResetPasswordRequest -- ^ 'payload'
+    :: IdentitytoolkitRelyingPartyResetPasswordRequest -- ^ 'rprpPayload'
     -> RelyingPartyResetPassword'
 relyingPartyResetPassword' pRprpPayload_ =
     RelyingPartyResetPassword'

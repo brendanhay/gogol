@@ -22,7 +22,7 @@
 --
 -- Update schema. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectorySchemasPatch@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.schemas.patch@.
 module Network.Google.Resource.Directory.Schemas.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Directory.Schemas.Patch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectorySchemasPatch@ method which the
+-- | A resource alias for @directory.schemas.patch@ method which the
 -- 'SchemasPatch'' request conforms to.
 type SchemasPatchResource =
      "customer" :>
@@ -70,9 +70,9 @@ data SchemasPatch' = SchemasPatch'
 --
 -- * 'spSchemaKey'
 schemasPatch'
-    :: Schema -- ^ 'payload'
-    -> Text -- ^ 'customerId'
-    -> Text -- ^ 'schemaKey'
+    :: Schema -- ^ 'spPayload'
+    -> Text -- ^ 'spCustomerId'
+    -> Text -- ^ 'spSchemaKey'
     -> SchemasPatch'
 schemasPatch' pSpPayload_ pSpCustomerId_ pSpSchemaKey_ =
     SchemasPatch'

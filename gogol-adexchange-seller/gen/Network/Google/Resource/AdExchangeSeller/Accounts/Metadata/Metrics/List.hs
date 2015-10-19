@@ -22,7 +22,7 @@
 --
 -- List the metadata for the metrics available to this AdExchange account.
 --
--- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsMetadataMetricsList@.
+-- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @adexchangeseller.accounts.metadata.metrics.list@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Metrics.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Metrics.List
 import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangesellerAccountsMetadataMetricsList@ method which the
+-- | A resource alias for @adexchangeseller.accounts.metadata.metrics.list@ method which the
 -- 'AccountsMetadataMetricsList'' request conforms to.
 type AccountsMetadataMetricsListResource =
      "accounts" :>
@@ -61,7 +61,7 @@ newtype AccountsMetadataMetricsList' = AccountsMetadataMetricsList'
 --
 -- * 'ammlAccountId'
 accountsMetadataMetricsList'
-    :: Text -- ^ 'accountId'
+    :: Text -- ^ 'ammlAccountId'
     -> AccountsMetadataMetricsList'
 accountsMetadataMetricsList' pAmmlAccountId_ =
     AccountsMetadataMetricsList'

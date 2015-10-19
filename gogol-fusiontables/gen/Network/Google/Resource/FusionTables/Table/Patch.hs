@@ -24,7 +24,7 @@
 -- description, and attribution will be updated. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTablePatch@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.table.patch@.
 module Network.Google.Resource.FusionTables.Table.Patch
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.FusionTables.Table.Patch
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTablePatch@ method which the
+-- | A resource alias for @fusiontables.table.patch@ method which the
 -- 'TablePatch'' request conforms to.
 type TablePatchResource =
      "tables" :>
@@ -73,8 +73,8 @@ data TablePatch' = TablePatch'
 --
 -- * 'tppTableId'
 tablePatch'
-    :: Table -- ^ 'payload'
-    -> Text -- ^ 'tableId'
+    :: Table -- ^ 'tppPayload'
+    -> Text -- ^ 'tppTableId'
     -> TablePatch'
 tablePatch' pTppPayload_ pTppTableId_ =
     TablePatch'

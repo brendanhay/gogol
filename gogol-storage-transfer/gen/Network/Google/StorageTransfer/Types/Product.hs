@@ -587,7 +587,7 @@ newtype StatusDetailsItem = StatusDetailsItem
 --
 -- * 'sdiAddtional'
 statusDetailsItem
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
     StatusDetailsItem
@@ -1400,7 +1400,7 @@ newtype OperationMetadata = OperationMetadata
 --
 -- * 'omAddtional'
 operationMetadata
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
     OperationMetadata
@@ -1792,7 +1792,7 @@ newtype OperationResponse = OperationResponse
 --
 -- * 'orAddtional'
 operationResponse
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
     OperationResponse

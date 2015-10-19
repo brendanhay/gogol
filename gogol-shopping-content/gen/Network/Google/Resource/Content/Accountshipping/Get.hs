@@ -22,7 +22,7 @@
 --
 -- Retrieves the shipping settings of the account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountshippingGet@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accountshipping.get@.
 module Network.Google.Resource.Content.Accountshipping.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Content.Accountshipping.Get
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccountshippingGet@ method which the
+-- | A resource alias for @content.accountshipping.get@ method which the
 -- 'AccountshippingGet'' request conforms to.
 type AccountshippingGetResource =
      Capture "merchantId" Word64 :>
@@ -65,8 +65,8 @@ data AccountshippingGet' = AccountshippingGet'
 --
 -- * 'agAccountId'
 accountshippingGet'
-    :: Word64 -- ^ 'merchantId'
-    -> Word64 -- ^ 'accountId'
+    :: Word64 -- ^ 'agMerchantId'
+    -> Word64 -- ^ 'agAccountId'
     -> AccountshippingGet'
 accountshippingGet' pAgMerchantId_ pAgAccountId_ =
     AccountshippingGet'

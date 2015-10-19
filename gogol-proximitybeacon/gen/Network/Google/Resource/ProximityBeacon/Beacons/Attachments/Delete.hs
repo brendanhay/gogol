@@ -26,7 +26,7 @@
 -- delete request to control which attachment is removed. This operation
 -- cannot be undone.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsAttachmentsDelete@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.attachments.delete@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconBeaconsAttachmentsDelete@ method which the
+-- | A resource alias for @proximitybeacon.beacons.attachments.delete@ method which the
 -- 'BeaconsAttachmentsDelete'' request conforms to.
 type BeaconsAttachmentsDeleteResource =
      "v1beta1" :>
@@ -102,7 +102,7 @@ data BeaconsAttachmentsDelete' = BeaconsAttachmentsDelete'
 --
 -- * 'badCallback'
 beaconsAttachmentsDelete'
-    :: Text -- ^ 'attachmentName'
+    :: Text -- ^ 'badAttachmentName'
     -> BeaconsAttachmentsDelete'
 beaconsAttachmentsDelete' pBadAttachmentName_ =
     BeaconsAttachmentsDelete'

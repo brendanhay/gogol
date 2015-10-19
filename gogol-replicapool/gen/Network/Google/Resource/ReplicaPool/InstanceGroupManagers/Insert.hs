@@ -23,7 +23,7 @@
 -- Creates an instance group manager, as well as the instance group and the
 -- specified number of instances.
 --
--- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @replicapool.instanceGroupManagers.insert@.
 module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Insert
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Insert
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
--- | A resource alias for @ReplicapoolInstanceGroupManagersInsert@ method which the
+-- | A resource alias for @replicapool.instanceGroupManagers.insert@ method which the
 -- 'InstanceGroupManagersInsert'' request conforms to.
 type InstanceGroupManagersInsertResource =
      Capture "project" Text :>
@@ -78,10 +78,10 @@ data InstanceGroupManagersInsert' = InstanceGroupManagersInsert'
 --
 -- * 'igmiPayload'
 instanceGroupManagersInsert'
-    :: Text -- ^ 'project'
-    -> Int32 -- ^ 'size'
-    -> Text -- ^ 'zone'
-    -> InstanceGroupManager -- ^ 'payload'
+    :: Text -- ^ 'igmiProject'
+    -> Int32 -- ^ 'igmiSize'
+    -> Text -- ^ 'igmiZone'
+    -> InstanceGroupManager -- ^ 'igmiPayload'
     -> InstanceGroupManagersInsert'
 instanceGroupManagersInsert' pIgmiProject_ pIgmiSize_ pIgmiZone_ pIgmiPayload_ =
     InstanceGroupManagersInsert'

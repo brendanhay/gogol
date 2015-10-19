@@ -22,7 +22,7 @@
 --
 -- Update Group. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsPatch@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.groups.patch@.
 module Network.Google.Resource.Directory.Groups.Patch
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Groups.Patch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryGroupsPatch@ method which the
+-- | A resource alias for @directory.groups.patch@ method which the
 -- 'GroupsPatch'' request conforms to.
 type GroupsPatchResource =
      "groups" :>
@@ -64,8 +64,8 @@ data GroupsPatch' = GroupsPatch'
 --
 -- * 'gpPayload'
 groupsPatch'
-    :: Text -- ^ 'groupKey'
-    -> Group -- ^ 'payload'
+    :: Text -- ^ 'gpGroupKey'
+    -> Group -- ^ 'gpPayload'
     -> GroupsPatch'
 groupsPatch' pGpGroupKey_ pGpPayload_ =
     GroupsPatch'

@@ -22,7 +22,7 @@
 --
 -- Lists the sub-accounts in your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountsList@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounts.list@.
 module Network.Google.Resource.Content.Accounts.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Accounts.List
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccountsList@ method which the
+-- | A resource alias for @content.accounts.list@ method which the
 -- 'AccountsList'' request conforms to.
 type AccountsListResource =
      Capture "merchantId" Word64 :>
@@ -70,7 +70,7 @@ data AccountsList' = AccountsList'
 --
 -- * 'alMaxResults'
 accountsList'
-    :: Word64 -- ^ 'merchantId'
+    :: Word64 -- ^ 'alMerchantId'
     -> AccountsList'
 accountsList' pAlMerchantId_ =
     AccountsList'

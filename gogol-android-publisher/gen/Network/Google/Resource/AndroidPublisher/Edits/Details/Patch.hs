@@ -22,7 +22,7 @@
 --
 -- Updates app details for this edit. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsDetailsPatch@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.details.patch@.
 module Network.Google.Resource.AndroidPublisher.Edits.Details.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Details.Patch
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsDetailsPatch@ method which the
+-- | A resource alias for @androidpublisher.edits.details.patch@ method which the
 -- 'EditsDetailsPatch'' request conforms to.
 type EditsDetailsPatchResource =
      Capture "packageName" Text :>
@@ -71,9 +71,9 @@ data EditsDetailsPatch' = EditsDetailsPatch'
 --
 -- * 'edpEditId'
 editsDetailsPatch'
-    :: Text -- ^ 'packageName'
-    -> AppDetails -- ^ 'payload'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'edpPackageName'
+    -> AppDetails -- ^ 'edpPayload'
+    -> Text -- ^ 'edpEditId'
     -> EditsDetailsPatch'
 editsDetailsPatch' pEdpPackageName_ pEdpPayload_ pEdpEditId_ =
     EditsDetailsPatch'

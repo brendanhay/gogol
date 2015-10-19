@@ -23,7 +23,7 @@
 -- Lists all instance operations that have been performed on the given
 -- Cloud SQL instance in the reverse chronological order of the start time.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLOperationsList@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.operations.list@.
 module Network.Google.Resource.SQL.Operations.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.SQL.Operations.List
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLOperationsList@ method which the
+-- | A resource alias for @sql.operations.list@ method which the
 -- 'OperationsList'' request conforms to.
 type OperationsListResource =
      "projects" :>
@@ -78,8 +78,8 @@ data OperationsList' = OperationsList'
 --
 -- * 'olInstance'
 operationsList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'olProject'
+    -> Text -- ^ 'olInstance'
     -> OperationsList'
 operationsList' pOlProject_ pOlInstance_ =
     OperationsList'

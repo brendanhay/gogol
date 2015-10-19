@@ -22,7 +22,7 @@
 --
 -- Generates a set of file IDs which can be provided in insert requests.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesGenerateIds@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.generateIds@.
 module Network.Google.Resource.Drive.Files.GenerateIds
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Drive.Files.GenerateIds
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesGenerateIds@ method which the
+-- | A resource alias for @drive.files.generateIds@ method which the
 -- 'FilesGenerateIds'' request conforms to.
 type FilesGenerateIdsResource =
      "files" :>

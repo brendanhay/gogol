@@ -22,7 +22,7 @@
 --
 -- Refund a portion of the order, up to the full amount paid.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersRefund@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.refund@.
 module Network.Google.Resource.Content.Orders.Refund
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Orders.Refund
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersRefund@ method which the
+-- | A resource alias for @content.orders.refund@ method which the
 -- 'OrdersRefund'' request conforms to.
 type OrdersRefundResource =
      Capture "merchantId" Word64 :>
@@ -71,9 +71,9 @@ data OrdersRefund' = OrdersRefund'
 --
 -- * 'orOrderId'
 ordersRefund'
-    :: Word64 -- ^ 'merchantId'
-    -> OrdersRefundRequest -- ^ 'payload'
-    -> Text -- ^ 'orderId'
+    :: Word64 -- ^ 'orMerchantId'
+    -> OrdersRefundRequest -- ^ 'orPayload'
+    -> Text -- ^ 'orOrderId'
     -> OrdersRefund'
 ordersRefund' pOrMerchantId_ pOrPayload_ pOrOrderId_ =
     OrdersRefund'

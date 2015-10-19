@@ -22,7 +22,7 @@
 --
 -- Gets one floodlight configuration by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightConfigurationsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightConfigurations.get@.
 module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFloodlightConfigurationsGet@ method which the
+-- | A resource alias for @dfareporting.floodlightConfigurations.get@ method which the
 -- 'FloodlightConfigurationsGet'' request conforms to.
 type FloodlightConfigurationsGetResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data FloodlightConfigurationsGet' = FloodlightConfigurationsGet'
 --
 -- * 'fcgId'
 floodlightConfigurationsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'fcgProFileId'
+    -> Int64 -- ^ 'fcgId'
     -> FloodlightConfigurationsGet'
 floodlightConfigurationsGet' pFcgProFileId_ pFcgId_ =
     FloodlightConfigurationsGet'

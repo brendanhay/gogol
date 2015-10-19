@@ -22,7 +22,7 @@
 --
 -- Return all of the permissions for the specified asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRasterCollectionsPermissionsList@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.rasterCollections.permissions.list@.
 module Network.Google.Resource.MapsEngine.RasterCollections.Permissions.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Permissions.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRasterCollectionsPermissionsList@ method which the
+-- | A resource alias for @mapsengine.rasterCollections.permissions.list@ method which the
 -- 'RasterCollectionsPermissionsList'' request conforms to.
 type RasterCollectionsPermissionsListResource =
      "rasterCollections" :>
@@ -61,7 +61,7 @@ newtype RasterCollectionsPermissionsList' = RasterCollectionsPermissionsList'
 --
 -- * 'rcplcId'
 rasterCollectionsPermissionsList'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'rcplcId'
     -> RasterCollectionsPermissionsList'
 rasterCollectionsPermissionsList' pRcplcId_ =
     RasterCollectionsPermissionsList'

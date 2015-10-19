@@ -22,7 +22,7 @@
 --
 -- Retrieves a report of the specified type.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANReportsGet@.
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @gan.reports.get@.
 module Network.Google.Resource.GAN.Reports.Get
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.GAN.Reports.Get
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GANReportsGet@ method which the
+-- | A resource alias for @gan.reports.get@ method which the
 -- 'ReportsGet'' request conforms to.
 type ReportsGetResource =
      Capture "role" ReportsGetRole :>
@@ -125,9 +125,9 @@ data ReportsGet' = ReportsGet'
 --
 -- * 'rgMaxResults'
 reportsGet'
-    :: Text -- ^ 'roleId'
-    -> ReportsGetRole -- ^ 'role'
-    -> ReportsGetReportType -- ^ 'reportType'
+    :: Text -- ^ 'rgRoleId'
+    -> ReportsGetRole -- ^ 'rgRole'
+    -> ReportsGetReportType -- ^ 'rgReportType'
     -> ReportsGet'
 reportsGet' pRgRoleId_ pRgRole_ pRgReportType_ =
     ReportsGet'

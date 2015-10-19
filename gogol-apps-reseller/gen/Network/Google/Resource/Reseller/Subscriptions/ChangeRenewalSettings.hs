@@ -22,7 +22,7 @@
 --
 -- Changes the renewal settings of a subscription
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsChangeRenewalSettings@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.changeRenewalSettings@.
 module Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerSubscriptionsChangeRenewalSettings@ method which the
+-- | A resource alias for @reseller.subscriptions.changeRenewalSettings@ method which the
 -- 'SubscriptionsChangeRenewalSettings'' request conforms to.
 type SubscriptionsChangeRenewalSettingsResource =
      "customers" :>
@@ -72,9 +72,9 @@ data SubscriptionsChangeRenewalSettings' = SubscriptionsChangeRenewalSettings'
 --
 -- * 'scrsSubscriptionId'
 subscriptionsChangeRenewalSettings'
-    :: RenewalSettings -- ^ 'payload'
-    -> Text -- ^ 'customerId'
-    -> Text -- ^ 'subscriptionId'
+    :: RenewalSettings -- ^ 'scrsPayload'
+    -> Text -- ^ 'scrsCustomerId'
+    -> Text -- ^ 'scrsSubscriptionId'
     -> SubscriptionsChangeRenewalSettings'
 subscriptionsChangeRenewalSettings' pScrsPayload_ pScrsCustomerId_ pScrsSubscriptionId_ =
     SubscriptionsChangeRenewalSettings'

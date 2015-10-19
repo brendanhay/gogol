@@ -22,7 +22,7 @@
 --
 -- Returns a list of offline dictionary metadata available
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksDictionaryListOfflineMetadata@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.dictionary.listOfflineMetadata@.
 module Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksDictionaryListOfflineMetadata@ method which the
+-- | A resource alias for @books.dictionary.listOfflineMetadata@ method which the
 -- 'DictionaryListOfflineMetadata'' request conforms to.
 type DictionaryListOfflineMetadataResource =
      "dictionary" :>
@@ -60,7 +60,7 @@ newtype DictionaryListOfflineMetadata' = DictionaryListOfflineMetadata'
 --
 -- * 'dlomCpksver'
 dictionaryListOfflineMetadata'
-    :: Text -- ^ 'cpksver'
+    :: Text -- ^ 'dlomCpksver'
     -> DictionaryListOfflineMetadata'
 dictionaryListOfflineMetadata' pDlomCpksver_ =
     DictionaryListOfflineMetadata'

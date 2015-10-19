@@ -23,7 +23,7 @@
 -- Retrieves the list of Operation resources contained within the specified
 -- zone.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeZoneOperationsList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.zoneOperations.list@.
 module Network.Google.Resource.Compute.ZoneOperations.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.ZoneOperations.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeZoneOperationsList@ method which the
+-- | A resource alias for @compute.zoneOperations.list@ method which the
 -- 'ZoneOperationsList'' request conforms to.
 type ZoneOperationsListResource =
      Capture "project" Text :>
@@ -82,8 +82,8 @@ data ZoneOperationsList' = ZoneOperationsList'
 --
 -- * 'zolMaxResults'
 zoneOperationsList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'zolProject'
+    -> Text -- ^ 'zolZone'
     -> ZoneOperationsList'
 zoneOperationsList' pZolProject_ pZolZone_ =
     ZoneOperationsList'

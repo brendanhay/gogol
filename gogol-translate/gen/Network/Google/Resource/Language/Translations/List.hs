@@ -22,7 +22,7 @@
 --
 -- Returns text translations from one language to another.
 --
--- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference> for @LanguageTranslationsList@.
+-- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference> for @language.translations.list@.
 module Network.Google.Resource.Language.Translations.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Language.Translations.List
 import           Network.Google.Prelude
 import           Network.Google.Translate.Types
 
--- | A resource alias for @LanguageTranslationsList@ method which the
+-- | A resource alias for @language.translations.list@ method which the
 -- 'TranslationsList'' request conforms to.
 type TranslationsListResource =
      "v2" :>
@@ -80,8 +80,8 @@ data TranslationsList' = TranslationsList'
 --
 -- * 'tlTarget'
 translationsList'
-    :: [Text] -- ^ 'q'
-    -> Text -- ^ 'target'
+    :: [Text] -- ^ 'tlQ'
+    -> Text -- ^ 'tlTarget'
     -> TranslationsList'
 translationsList' pTlQ_ pTlTarget_ =
     TranslationsList'

@@ -545,7 +545,7 @@ newtype ProjectLabels = ProjectLabels
 --
 -- * 'plAddtional'
 projectLabels
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'plAddtional'
     -> ProjectLabels
 projectLabels pPlAddtional_ =
     ProjectLabels

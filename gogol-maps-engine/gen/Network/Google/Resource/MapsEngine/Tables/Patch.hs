@@ -22,7 +22,7 @@
 --
 -- Mutate a table asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesPatch@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.tables.patch@.
 module Network.Google.Resource.MapsEngine.Tables.Patch
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.MapsEngine.Tables.Patch
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesPatch@ method which the
+-- | A resource alias for @mapsengine.tables.patch@ method which the
 -- 'TablesPatch'' request conforms to.
 type TablesPatchResource =
      "tables" :>
@@ -64,8 +64,8 @@ data TablesPatch' = TablesPatch'
 --
 -- * 'tpId'
 tablesPatch'
-    :: Table -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: Table -- ^ 'tpPayload'
+    -> Text -- ^ 'tpId'
     -> TablesPatch'
 tablesPatch' pTpPayload_ pTpId_ =
     TablesPatch'

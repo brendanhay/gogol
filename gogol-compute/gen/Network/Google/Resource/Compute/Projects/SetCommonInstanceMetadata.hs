@@ -23,7 +23,7 @@
 -- Sets metadata common to all instances within the specified project using
 -- the data included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeProjectsSetCommonInstanceMetadata@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.projects.setCommonInstanceMetadata@.
 module Network.Google.Resource.Compute.Projects.SetCommonInstanceMetadata
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.Projects.SetCommonInstanceMetadata
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeProjectsSetCommonInstanceMetadata@ method which the
+-- | A resource alias for @compute.projects.setCommonInstanceMetadata@ method which the
 -- 'ProjectsSetCommonInstanceMetadata'' request conforms to.
 type ProjectsSetCommonInstanceMetadataResource =
      Capture "project" Text :>
@@ -66,8 +66,8 @@ data ProjectsSetCommonInstanceMetadata' = ProjectsSetCommonInstanceMetadata'
 --
 -- * 'pscimPayload'
 projectsSetCommonInstanceMetadata'
-    :: Text -- ^ 'project'
-    -> Metadata -- ^ 'payload'
+    :: Text -- ^ 'pscimProject'
+    -> Metadata -- ^ 'pscimPayload'
     -> ProjectsSetCommonInstanceMetadata'
 projectsSetCommonInstanceMetadata' pPscimProject_ pPscimPayload_ =
     ProjectsSetCommonInstanceMetadata'

@@ -22,7 +22,7 @@
 --
 -- Adds a property to a file.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePropertiesInsert@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.properties.insert@.
 module Network.Google.Resource.Drive.Properties.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Drive.Properties.Insert
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePropertiesInsert@ method which the
+-- | A resource alias for @drive.properties.insert@ method which the
 -- 'PropertiesInsert'' request conforms to.
 type PropertiesInsertResource =
      "files" :>
@@ -65,8 +65,8 @@ data PropertiesInsert' = PropertiesInsert'
 --
 -- * 'proFileId'
 propertiesInsert'
-    :: Property -- ^ 'payload'
-    -> Text -- ^ 'fileId'
+    :: Property -- ^ 'proPayload'
+    -> Text -- ^ 'proFileId'
     -> PropertiesInsert'
 propertiesInsert' pProPayload_ pProFileId_ =
     PropertiesInsert'

@@ -22,7 +22,7 @@
 --
 -- Set account info for a user.
 --
--- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartySetAccountInfo@.
+-- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.setAccountInfo@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.SetAccountInfo
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.SetAccountInfo
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartySetAccountInfo@ method which the
+-- | A resource alias for @identitytoolkit.relyingparty.setAccountInfo@ method which the
 -- 'RelyingPartySetAccountInfo'' request conforms to.
 type RelyingPartySetAccountInfoResource =
      "setAccountInfo" :>
@@ -61,7 +61,7 @@ newtype RelyingPartySetAccountInfo' = RelyingPartySetAccountInfo'
 --
 -- * 'rpsaiPayload'
 relyingPartySetAccountInfo'
-    :: IdentitytoolkitRelyingPartySetAccountInfoRequest -- ^ 'payload'
+    :: IdentitytoolkitRelyingPartySetAccountInfoRequest -- ^ 'rpsaiPayload'
     -> RelyingPartySetAccountInfo'
 relyingPartySetAccountInfo' pRpsaiPayload_ =
     RelyingPartySetAccountInfo'

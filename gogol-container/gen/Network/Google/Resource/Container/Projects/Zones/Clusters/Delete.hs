@@ -24,7 +24,7 @@
 -- nodes. Firewalls and routes that were configured during cluster creation
 -- are also deleted.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @ContainerProjectsZonesClustersDelete@.
+-- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.delete@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
 import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ContainerProjectsZonesClustersDelete@ method which the
+-- | A resource alias for @container.projects.zones.clusters.delete@ method which the
 -- 'ProjectsZonesClustersDelete'' request conforms to.
 type ProjectsZonesClustersDeleteResource =
      "v1" :>
@@ -112,9 +112,9 @@ data ProjectsZonesClustersDelete' = ProjectsZonesClustersDelete'
 --
 -- * 'pzcdCallback'
 projectsZonesClustersDelete'
-    :: Text -- ^ 'zone'
-    -> Text -- ^ 'clusterId'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'pzcdZone'
+    -> Text -- ^ 'pzcdClusterId'
+    -> Text -- ^ 'pzcdProjectId'
     -> ProjectsZonesClustersDelete'
 projectsZonesClustersDelete' pPzcdZone_ pPzcdClusterId_ pPzcdProjectId_ =
     ProjectsZonesClustersDelete'

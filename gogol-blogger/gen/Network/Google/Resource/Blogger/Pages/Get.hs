@@ -22,7 +22,7 @@
 --
 -- Gets one blog page by ID.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesGet@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pages.get@.
 module Network.Google.Resource.Blogger.Pages.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Blogger.Pages.Get
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPagesGet@ method which the
+-- | A resource alias for @blogger.pages.get@ method which the
 -- 'PagesGet'' request conforms to.
 type PagesGetResource =
      "blogs" :>
@@ -70,8 +70,8 @@ data PagesGet' = PagesGet'
 --
 -- * 'pggView'
 pagesGet'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'pageId'
+    :: Text -- ^ 'pggBlogId'
+    -> Text -- ^ 'pggPageId'
     -> PagesGet'
 pagesGet' pPggBlogId_ pPggPageId_ =
     PagesGet'

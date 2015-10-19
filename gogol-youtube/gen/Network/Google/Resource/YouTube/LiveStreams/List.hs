@@ -22,7 +22,7 @@
 --
 -- Returns a list of video streams that match the API request parameters.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveStreamsList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveStreams.list@.
 module Network.Google.Resource.YouTube.LiveStreams.List
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.YouTube.LiveStreams.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveStreamsList@ method which the
+-- | A resource alias for @youtube.liveStreams.list@ method which the
 -- 'LiveStreamsList'' request conforms to.
 type LiveStreamsListResource =
      "liveStreams" :>
@@ -90,7 +90,7 @@ data LiveStreamsList' = LiveStreamsList'
 --
 -- * 'lslMaxResults'
 liveStreamsList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'lslPart'
     -> LiveStreamsList'
 liveStreamsList' pLslPart_ =
     LiveStreamsList'

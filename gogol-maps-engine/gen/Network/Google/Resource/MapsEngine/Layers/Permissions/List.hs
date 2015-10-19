@@ -22,7 +22,7 @@
 --
 -- Return all of the permissions for the specified asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineLayersPermissionsList@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.layers.permissions.list@.
 module Network.Google.Resource.MapsEngine.Layers.Permissions.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.Layers.Permissions.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersPermissionsList@ method which the
+-- | A resource alias for @mapsengine.layers.permissions.list@ method which the
 -- 'LayersPermissionsList'' request conforms to.
 type LayersPermissionsListResource =
      "layers" :>
@@ -61,7 +61,7 @@ newtype LayersPermissionsList' = LayersPermissionsList'
 --
 -- * 'lplId'
 layersPermissionsList'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'lplId'
     -> LayersPermissionsList'
 layersPermissionsList' pLplId_ =
     LayersPermissionsList'

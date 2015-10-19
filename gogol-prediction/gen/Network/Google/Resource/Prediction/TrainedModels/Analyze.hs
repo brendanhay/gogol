@@ -22,7 +22,7 @@
 --
 -- Get analysis of the model and the data the model was trained on.
 --
--- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedModelsAnalyze@.
+-- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @prediction.trainedmodels.analyze@.
 module Network.Google.Resource.Prediction.TrainedModels.Analyze
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Prediction.TrainedModels.Analyze
 import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PredictionTrainedModelsAnalyze@ method which the
+-- | A resource alias for @prediction.trainedmodels.analyze@ method which the
 -- 'TrainedModelsAnalyze'' request conforms to.
 type TrainedModelsAnalyzeResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data TrainedModelsAnalyze' = TrainedModelsAnalyze'
 --
 -- * 'tmaId'
 trainedModelsAnalyze'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'id'
+    :: Text -- ^ 'tmaProject'
+    -> Text -- ^ 'tmaId'
     -> TrainedModelsAnalyze'
 trainedModelsAnalyze' pTmaProject_ pTmaId_ =
     TrainedModelsAnalyze'

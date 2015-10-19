@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsTestersGet@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.testers.get@.
 module Network.Google.Resource.AndroidPublisher.Edits.Testers.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Testers.Get
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsTestersGet@ method which the
+-- | A resource alias for @androidpublisher.edits.testers.get@ method which the
 -- 'EditsTestersGet'' request conforms to.
 type EditsTestersGetResource =
      Capture "packageName" Text :>
@@ -67,9 +67,9 @@ data EditsTestersGet' = EditsTestersGet'
 --
 -- * 'etgtEditId'
 editsTestersGet'
-    :: EditsTestersGetTrack -- ^ 'track'
-    -> Text -- ^ 'packageName'
-    -> Text -- ^ 'editId'
+    :: EditsTestersGetTrack -- ^ 'etgtTrack'
+    -> Text -- ^ 'etgtPackageName'
+    -> Text -- ^ 'etgtEditId'
     -> EditsTestersGet'
 editsTestersGet' pEtgtTrack_ pEtgtPackageName_ pEtgtEditId_ =
     EditsTestersGet'

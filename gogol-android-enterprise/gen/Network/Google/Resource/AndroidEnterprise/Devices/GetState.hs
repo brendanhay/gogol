@@ -26,7 +26,7 @@
 -- Otherwise, the device state is ignored and all devices are allowed
 -- access to Google services.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseDevicesGetState@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.devices.getState@.
 module Network.Google.Resource.AndroidEnterprise.Devices.GetState
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.AndroidEnterprise.Devices.GetState
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseDevicesGetState@ method which the
+-- | A resource alias for @androidenterprise.devices.getState@ method which the
 -- 'DevicesGetState'' request conforms to.
 type DevicesGetStateResource =
      "enterprises" :>
@@ -80,9 +80,9 @@ data DevicesGetState' = DevicesGetState'
 --
 -- * 'dgsDeviceId'
 devicesGetState'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'deviceId'
+    :: Text -- ^ 'dgsEnterpriseId'
+    -> Text -- ^ 'dgsUserId'
+    -> Text -- ^ 'dgsDeviceId'
     -> DevicesGetState'
 devicesGetState' pDgsEnterpriseId_ pDgsUserId_ pDgsDeviceId_ =
     DevicesGetState'

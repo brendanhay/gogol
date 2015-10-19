@@ -28,7 +28,7 @@
 -- characters except for the forward slash (\`\/\`) up to 100 characters in
 -- length. Attachment data can be up to 1024 bytes long.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsAttachmentsCreate@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.attachments.create@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Create
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Create
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconBeaconsAttachmentsCreate@ method which the
+-- | A resource alias for @proximitybeacon.beacons.attachments.create@ method which the
 -- 'BeaconsAttachmentsCreate'' request conforms to.
 type BeaconsAttachmentsCreateResource =
      "v1beta1" :>
@@ -113,8 +113,8 @@ data BeaconsAttachmentsCreate' = BeaconsAttachmentsCreate'
 --
 -- * 'bacCallback'
 beaconsAttachmentsCreate'
-    :: Text -- ^ 'beaconName'
-    -> BeaconAttachment -- ^ 'payload'
+    :: Text -- ^ 'bacBeaconName'
+    -> BeaconAttachment -- ^ 'bacPayload'
     -> BeaconsAttachmentsCreate'
 beaconsAttachmentsCreate' pBacBeaconName_ pBacPayload_ =
     BeaconsAttachmentsCreate'

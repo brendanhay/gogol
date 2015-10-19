@@ -22,7 +22,7 @@
 --
 -- Inserts a new creative field.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldsInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeFields.insert@.
 module Network.Google.Resource.DFAReporting.CreativeFields.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeFieldsInsert@ method which the
+-- | A resource alias for @dfareporting.creativeFields.insert@ method which the
 -- 'CreativeFieldsInsert'' request conforms to.
 type CreativeFieldsInsertResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data CreativeFieldsInsert' = CreativeFieldsInsert'
 --
 -- * 'cfiPayload'
 creativeFieldsInsert'
-    :: Int64 -- ^ 'profileId'
-    -> CreativeField -- ^ 'payload'
+    :: Int64 -- ^ 'cfiProFileId'
+    -> CreativeField -- ^ 'cfiPayload'
     -> CreativeFieldsInsert'
 creativeFieldsInsert' pCfiProFileId_ pCfiPayload_ =
     CreativeFieldsInsert'

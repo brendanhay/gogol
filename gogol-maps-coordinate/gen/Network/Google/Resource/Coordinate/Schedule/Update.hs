@@ -22,7 +22,7 @@
 --
 -- Replaces the schedule of a job with the provided schedule.
 --
--- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateScheduleUpdate@.
+-- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @coordinate.schedule.update@.
 module Network.Google.Resource.Coordinate.Schedule.Update
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Coordinate.Schedule.Update
 import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CoordinateScheduleUpdate@ method which the
+-- | A resource alias for @coordinate.schedule.update@ method which the
 -- 'ScheduleUpdate'' request conforms to.
 type ScheduleUpdateResource =
      "teams" :>
@@ -91,9 +91,9 @@ data ScheduleUpdate' = ScheduleUpdate'
 --
 -- * 'suDuration'
 scheduleUpdate'
-    :: Word64 -- ^ 'jobId'
-    -> Text -- ^ 'teamId'
-    -> Schedule -- ^ 'payload'
+    :: Word64 -- ^ 'suJobId'
+    -> Text -- ^ 'suTeamId'
+    -> Schedule -- ^ 'suPayload'
     -> ScheduleUpdate'
 scheduleUpdate' pSuJobId_ pSuTeamId_ pSuPayload_ =
     ScheduleUpdate'

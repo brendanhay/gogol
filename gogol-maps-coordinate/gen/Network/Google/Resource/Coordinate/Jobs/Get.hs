@@ -22,7 +22,7 @@
 --
 -- Retrieves a job, including all the changes made to the job.
 --
--- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateJobsGet@.
+-- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @coordinate.jobs.get@.
 module Network.Google.Resource.Coordinate.Jobs.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Coordinate.Jobs.Get
 import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CoordinateJobsGet@ method which the
+-- | A resource alias for @coordinate.jobs.get@ method which the
 -- 'JobsGet'' request conforms to.
 type JobsGetResource =
      "teams" :>
@@ -65,8 +65,8 @@ data JobsGet' = JobsGet'
 --
 -- * 'jgTeamId'
 jobsGet'
-    :: Word64 -- ^ 'jobId'
-    -> Text -- ^ 'teamId'
+    :: Word64 -- ^ 'jgJobId'
+    -> Text -- ^ 'jgTeamId'
     -> JobsGet'
 jobsGet' pJgJobId_ pJgTeamId_ =
     JobsGet'

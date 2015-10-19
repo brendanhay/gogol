@@ -22,7 +22,7 @@
 --
 -- Stop watching resources through this channel
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageChannelsStop@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.channels.stop@.
 module Network.Google.Resource.Storage.Channels.Stop
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Storage.Channels.Stop
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageChannelsStop@ method which the
+-- | A resource alias for @storage.channels.stop@ method which the
 -- 'ChannelsStop'' request conforms to.
 type ChannelsStopResource =
      "channels" :>
@@ -60,7 +60,7 @@ newtype ChannelsStop' = ChannelsStop'
 --
 -- * 'csPayload'
 channelsStop'
-    :: Channel -- ^ 'payload'
+    :: Channel -- ^ 'csPayload'
     -> ChannelsStop'
 channelsStop' pCsPayload_ =
     ChannelsStop'

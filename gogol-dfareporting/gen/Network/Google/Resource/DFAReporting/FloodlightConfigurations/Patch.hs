@@ -23,7 +23,7 @@
 -- Updates an existing floodlight configuration. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightConfigurationsPatch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightConfigurations.patch@.
 module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFloodlightConfigurationsPatch@ method which the
+-- | A resource alias for @dfareporting.floodlightConfigurations.patch@ method which the
 -- 'FloodlightConfigurationsPatch'' request conforms to.
 type FloodlightConfigurationsPatchResource =
      "userprofiles" :>
@@ -73,9 +73,9 @@ data FloodlightConfigurationsPatch' = FloodlightConfigurationsPatch'
 --
 -- * 'fcpId'
 floodlightConfigurationsPatch'
-    :: Int64 -- ^ 'profileId'
-    -> FloodlightConfiguration -- ^ 'payload'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'fcpProFileId'
+    -> FloodlightConfiguration -- ^ 'fcpPayload'
+    -> Int64 -- ^ 'fcpId'
     -> FloodlightConfigurationsPatch'
 floodlightConfigurationsPatch' pFcpProFileId_ pFcpPayload_ pFcpId_ =
     FloodlightConfigurationsPatch'

@@ -27,7 +27,7 @@
 -- you need to know which days have data, issue a broad date range query
 -- grouped by date for any metric, and see which day rows are returned.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSearchanalyticsQuery@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.searchanalytics.query@.
 module Network.Google.Resource.Webmasters.Searchanalytics.Query
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Webmasters.Searchanalytics.Query
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersSearchanalyticsQuery@ method which the
+-- | A resource alias for @webmasters.searchanalytics.query@ method which the
 -- 'SearchanalyticsQuery'' request conforms to.
 type SearchanalyticsQueryResource =
      "sites" :>
@@ -77,8 +77,8 @@ data SearchanalyticsQuery' = SearchanalyticsQuery'
 --
 -- * 'sqPayload'
 searchanalyticsQuery'
-    :: Text -- ^ 'siteUrl'
-    -> SearchAnalyticsQueryRequest -- ^ 'payload'
+    :: Text -- ^ 'sqSiteURL'
+    -> SearchAnalyticsQueryRequest -- ^ 'sqPayload'
     -> SearchanalyticsQuery'
 searchanalyticsQuery' pSqSiteURL_ pSqPayload_ =
     SearchanalyticsQuery'

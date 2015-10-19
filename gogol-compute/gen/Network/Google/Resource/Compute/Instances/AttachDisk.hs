@@ -22,7 +22,7 @@
 --
 -- Attaches a Disk resource to an instance.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesAttachDisk@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.attachDisk@.
 module Network.Google.Resource.Compute.Instances.AttachDisk
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Instances.AttachDisk
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesAttachDisk@ method which the
+-- | A resource alias for @compute.instances.attachDisk@ method which the
 -- 'InstancesAttachDisk'' request conforms to.
 type InstancesAttachDiskResource =
      Capture "project" Text :>
@@ -77,10 +77,10 @@ data InstancesAttachDisk' = InstancesAttachDisk'
 --
 -- * 'iadInstance'
 instancesAttachDisk'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> AttachedDisk -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'iadProject'
+    -> Text -- ^ 'iadZone'
+    -> AttachedDisk -- ^ 'iadPayload'
+    -> Text -- ^ 'iadInstance'
     -> InstancesAttachDisk'
 instancesAttachDisk' pIadProject_ pIadZone_ pIadPayload_ pIadInstance_ =
     InstancesAttachDisk'

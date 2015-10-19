@@ -23,7 +23,7 @@
 -- Returns metadata about the search performed, metadata about the custom
 -- search engine used for the search, and the search results.
 --
--- /See:/ <https://developers.google.com/custom-search/v1/using_rest CustomSearch API Reference> for @SearchCSEList@.
+-- /See:/ <https://developers.google.com/custom-search/v1/using_rest CustomSearch API Reference> for @search.cse.list@.
 module Network.Google.Resource.Search.CSE.List
     (
     -- * REST Resource
@@ -71,7 +71,7 @@ module Network.Google.Resource.Search.CSE.List
 import           Network.Google.CustomSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @SearchCSEList@ method which the
+-- | A resource alias for @search.cse.list@ method which the
 -- 'CSEList'' request conforms to.
 type CSEListResource =
      "v1" :>
@@ -245,7 +245,7 @@ data CSEList' = CSEList'
 --
 -- * 'cselHighRange'
 cSEList'
-    :: Text -- ^ 'q'
+    :: Text -- ^ 'cselQ'
     -> CSEList'
 cSEList' pCselQ_ =
     CSEList'

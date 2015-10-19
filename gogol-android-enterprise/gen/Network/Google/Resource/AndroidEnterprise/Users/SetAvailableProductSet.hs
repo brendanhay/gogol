@@ -22,7 +22,7 @@
 --
 -- Modifies the set of products a user is entitled to access.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseUsersSetAvailableProductSet@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.users.setAvailableProductSet@.
 module Network.Google.Resource.AndroidEnterprise.Users.SetAvailableProductSet
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidEnterprise.Users.SetAvailableProductSet
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseUsersSetAvailableProductSet@ method which the
+-- | A resource alias for @androidenterprise.users.setAvailableProductSet@ method which the
 -- 'UsersSetAvailableProductSet'' request conforms to.
 type UsersSetAvailableProductSetResource =
      "enterprises" :>
@@ -71,9 +71,9 @@ data UsersSetAvailableProductSet' = UsersSetAvailableProductSet'
 --
 -- * 'usapsUserId'
 usersSetAvailableProductSet'
-    :: Text -- ^ 'enterpriseId'
-    -> ProductSet -- ^ 'payload'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'usapsEnterpriseId'
+    -> ProductSet -- ^ 'usapsPayload'
+    -> Text -- ^ 'usapsUserId'
     -> UsersSetAvailableProductSet'
 usersSetAvailableProductSet' pUsapsEnterpriseId_ pUsapsPayload_ pUsapsUserId_ =
     UsersSetAvailableProductSet'

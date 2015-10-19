@@ -23,7 +23,7 @@
 -- Creates a deployment and all of the resources described by the
 -- deployment manifest.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsInsert@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @deploymentmanager.deployments.insert@.
 module Network.Google.Resource.DeploymentManager.Deployments.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.DeploymentManager.Deployments.Insert
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerDeploymentsInsert@ method which the
+-- | A resource alias for @deploymentmanager.deployments.insert@ method which the
 -- 'DeploymentsInsert'' request conforms to.
 type DeploymentsInsertResource =
      Capture "project" Text :>
@@ -72,8 +72,8 @@ data DeploymentsInsert' = DeploymentsInsert'
 --
 -- * 'diPreview'
 deploymentsInsert'
-    :: Text -- ^ 'project'
-    -> Deployment -- ^ 'payload'
+    :: Text -- ^ 'diProject'
+    -> Deployment -- ^ 'diPayload'
     -> DeploymentsInsert'
 deploymentsInsert' pDiProject_ pDiPayload_ =
     DeploymentsInsert'

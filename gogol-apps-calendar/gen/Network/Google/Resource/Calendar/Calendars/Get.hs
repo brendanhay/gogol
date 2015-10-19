@@ -22,7 +22,7 @@
 --
 -- Returns metadata for a calendar.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarsGet@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendars.get@.
 module Network.Google.Resource.Calendar.Calendars.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Calendar.Calendars.Get
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarsGet@ method which the
+-- | A resource alias for @calendar.calendars.get@ method which the
 -- 'CalendarsGet'' request conforms to.
 type CalendarsGetResource =
      "calendars" :>
@@ -59,7 +59,7 @@ newtype CalendarsGet' = CalendarsGet'
 --
 -- * 'cgCalendarId'
 calendarsGet'
-    :: Text -- ^ 'calendarId'
+    :: Text -- ^ 'cgCalendarId'
     -> CalendarsGet'
 calendarsGet' pCgCalendarId_ =
     CalendarsGet'

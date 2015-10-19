@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of directory site contacts, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingDirectorySiteContactsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.directorySiteContacts.list@.
 module Network.Google.Resource.DFAReporting.DirectorySiteContacts.List
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.DirectorySiteContacts.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingDirectorySiteContactsList@ method which the
+-- | A resource alias for @dfareporting.directorySiteContacts.list@ method which the
 -- 'DirectorySiteContactsList'' request conforms to.
 type DirectorySiteContactsListResource =
      "userprofiles" :>
@@ -100,7 +100,7 @@ data DirectorySiteContactsList' = DirectorySiteContactsList'
 --
 -- * 'dsclMaxResults'
 directorySiteContactsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'dsclProFileId'
     -> DirectorySiteContactsList'
 directorySiteContactsList' pDsclProFileId_ =
     DirectorySiteContactsList'

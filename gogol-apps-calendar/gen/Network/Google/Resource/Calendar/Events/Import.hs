@@ -23,7 +23,7 @@
 -- Imports an event. This operation is used to add a private copy of an
 -- existing event to a calendar.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsImport@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.events.import@.
 module Network.Google.Resource.Calendar.Events.Import
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Calendar.Events.Import
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarEventsImport@ method which the
+-- | A resource alias for @calendar.events.import@ method which the
 -- 'EventsImport'' request conforms to.
 type EventsImportResource =
      "calendars" :>
@@ -73,8 +73,8 @@ data EventsImport' = EventsImport'
 --
 -- * 'eSupportsAttachments'
 eventsImport'
-    :: Text -- ^ 'calendarId'
-    -> Event -- ^ 'payload'
+    :: Text -- ^ 'eCalendarId'
+    -> Event -- ^ 'ePayload'
     -> EventsImport'
 eventsImport' pECalendarId_ pEPayload_ =
     EventsImport'

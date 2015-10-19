@@ -25,7 +25,7 @@
 -- may use the certificate to authenticate as themselves when connecting to
 -- the database.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLSSLCertsCreateEphemeral@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.sslCerts.createEphemeral@.
 module Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLSSLCertsCreateEphemeral@ method which the
+-- | A resource alias for @sql.sslCerts.createEphemeral@ method which the
 -- 'SSLCertsCreateEphemeral'' request conforms to.
 type SSLCertsCreateEphemeralResource =
      "projects" :>
@@ -78,9 +78,9 @@ data SSLCertsCreateEphemeral' = SSLCertsCreateEphemeral'
 --
 -- * 'scceInstance'
 sslCertsCreateEphemeral'
-    :: Text -- ^ 'project'
-    -> SSLCertsCreateEphemeralRequest -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'scceProject'
+    -> SSLCertsCreateEphemeralRequest -- ^ 'sccePayload'
+    -> Text -- ^ 'scceInstance'
     -> SSLCertsCreateEphemeral'
 sslCertsCreateEphemeral' pScceProject_ pSccePayload_ pScceInstance_ =
     SSLCertsCreateEphemeral'

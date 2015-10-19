@@ -22,7 +22,7 @@
 --
 -- Add a alias for the group
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsAliasesInsert@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.groups.aliases.insert@.
 module Network.Google.Resource.Directory.Groups.Aliases.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Groups.Aliases.Insert
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryGroupsAliasesInsert@ method which the
+-- | A resource alias for @directory.groups.aliases.insert@ method which the
 -- 'GroupsAliasesInsert'' request conforms to.
 type GroupsAliasesInsertResource =
      "groups" :>
@@ -65,8 +65,8 @@ data GroupsAliasesInsert' = GroupsAliasesInsert'
 --
 -- * 'gaiPayload'
 groupsAliasesInsert'
-    :: Text -- ^ 'groupKey'
-    -> Alias -- ^ 'payload'
+    :: Text -- ^ 'gaiGroupKey'
+    -> Alias -- ^ 'gaiPayload'
     -> GroupsAliasesInsert'
 groupsAliasesInsert' pGaiGroupKey_ pGaiPayload_ =
     GroupsAliasesInsert'

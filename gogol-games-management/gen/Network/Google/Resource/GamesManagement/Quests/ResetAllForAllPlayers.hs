@@ -23,7 +23,7 @@
 -- Resets all draft quests for all players. This method is only available
 -- to user accounts for your developer console.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementQuestsResetAllForAllPlayers@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.quests.resetAllForAllPlayers@.
 module Network.Google.Resource.GamesManagement.Quests.ResetAllForAllPlayers
     (
     -- * REST Resource
@@ -38,7 +38,7 @@ module Network.Google.Resource.GamesManagement.Quests.ResetAllForAllPlayers
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementQuestsResetAllForAllPlayers@ method which the
+-- | A resource alias for @gamesManagement.quests.resetAllForAllPlayers@ method which the
 -- 'QuestsResetAllForAllPlayers'' request conforms to.
 type QuestsResetAllForAllPlayersResource =
      "quests" :>

@@ -23,7 +23,7 @@
 -- Fetches the track configuration for the specified track type. Includes
 -- the APK version codes that are in this track.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsTracksGet@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.tracks.get@.
 module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Get
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsTracksGet@ method which the
+-- | A resource alias for @androidpublisher.edits.tracks.get@ method which the
 -- 'EditsTracksGet'' request conforms to.
 type EditsTracksGetResource =
      Capture "packageName" Text :>
@@ -72,9 +72,9 @@ data EditsTracksGet' = EditsTracksGet'
 --
 -- * 'etgEditId'
 editsTracksGet'
-    :: EditsTracksGetTrack -- ^ 'track'
-    -> Text -- ^ 'packageName'
-    -> Text -- ^ 'editId'
+    :: EditsTracksGetTrack -- ^ 'etgTrack'
+    -> Text -- ^ 'etgPackageName'
+    -> Text -- ^ 'etgEditId'
     -> EditsTracksGet'
 editsTracksGet' pEtgTrack_ pEtgPackageName_ pEtgEditId_ =
     EditsTracksGet'

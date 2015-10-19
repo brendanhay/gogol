@@ -27,37 +27,37 @@ module Network.Google.ResourceViews
 
     -- * Resources
 
-    -- ** ResourceviewsZoneOperationsGet
+    -- ** resourceviews.zoneOperations.get
     , module Network.Google.Resource.ResourceViews.ZoneOperations.Get
 
-    -- ** ResourceviewsZoneOperationsList
+    -- ** resourceviews.zoneOperations.list
     , module Network.Google.Resource.ResourceViews.ZoneOperations.List
 
-    -- ** ResourceviewsZoneViewsAddResources
+    -- ** resourceviews.zoneViews.addResources
     , module Network.Google.Resource.ResourceViews.ZoneViews.AddResources
 
-    -- ** ResourceviewsZoneViewsDelete
+    -- ** resourceviews.zoneViews.delete
     , module Network.Google.Resource.ResourceViews.ZoneViews.Delete
 
-    -- ** ResourceviewsZoneViewsGet
+    -- ** resourceviews.zoneViews.get
     , module Network.Google.Resource.ResourceViews.ZoneViews.Get
 
-    -- ** ResourceviewsZoneViewsGetService
+    -- ** resourceviews.zoneViews.getService
     , module Network.Google.Resource.ResourceViews.ZoneViews.GetService
 
-    -- ** ResourceviewsZoneViewsInsert
+    -- ** resourceviews.zoneViews.insert
     , module Network.Google.Resource.ResourceViews.ZoneViews.Insert
 
-    -- ** ResourceviewsZoneViewsList
+    -- ** resourceviews.zoneViews.list
     , module Network.Google.Resource.ResourceViews.ZoneViews.List
 
-    -- ** ResourceviewsZoneViewsListResources
+    -- ** resourceviews.zoneViews.listResources
     , module Network.Google.Resource.ResourceViews.ZoneViews.ListResources
 
-    -- ** ResourceviewsZoneViewsRemoveResources
+    -- ** resourceviews.zoneViews.removeResources
     , module Network.Google.Resource.ResourceViews.ZoneViews.RemoveResources
 
-    -- ** ResourceviewsZoneViewsSetService
+    -- ** resourceviews.zoneViews.setService
     , module Network.Google.Resource.ResourceViews.ZoneViews.SetService
 
     -- * Types

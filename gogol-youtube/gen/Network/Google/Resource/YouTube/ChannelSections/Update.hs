@@ -22,7 +22,7 @@
 --
 -- Update a channelSection.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeChannelSectionsUpdate@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.channelSections.update@.
 module Network.Google.Resource.YouTube.ChannelSections.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.YouTube.ChannelSections.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeChannelSectionsUpdate@ method which the
+-- | A resource alias for @youtube.channelSections.update@ method which the
 -- 'ChannelSectionsUpdate'' request conforms to.
 type ChannelSectionsUpdateResource =
      "channelSections" :>
@@ -70,8 +70,8 @@ data ChannelSectionsUpdate' = ChannelSectionsUpdate'
 --
 -- * 'csuOnBehalfOfContentOwner'
 channelSectionsUpdate'
-    :: Text -- ^ 'part'
-    -> ChannelSection -- ^ 'payload'
+    :: Text -- ^ 'csuPart'
+    -> ChannelSection -- ^ 'csuPayload'
     -> ChannelSectionsUpdate'
 channelSectionsUpdate' pCsuPart_ pCsuPayload_ =
     ChannelSectionsUpdate'

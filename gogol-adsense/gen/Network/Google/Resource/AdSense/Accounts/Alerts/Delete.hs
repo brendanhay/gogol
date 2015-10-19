@@ -23,7 +23,7 @@
 -- Dismiss (delete) the specified alert from the specified publisher
 -- AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsAlertsDelete@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.alerts.delete@.
 module Network.Google.Resource.AdSense.Accounts.Alerts.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AdSense.Accounts.Alerts.Delete
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAccountsAlertsDelete@ method which the
+-- | A resource alias for @adsense.accounts.alerts.delete@ method which the
 -- 'AccountsAlertsDelete'' request conforms to.
 type AccountsAlertsDeleteResource =
      "accounts" :>
@@ -67,8 +67,8 @@ data AccountsAlertsDelete' = AccountsAlertsDelete'
 --
 -- * 'aadAccountId'
 accountsAlertsDelete'
-    :: Text -- ^ 'alertId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'aadAlertId'
+    -> Text -- ^ 'aadAccountId'
     -> AccountsAlertsDelete'
 accountsAlertsDelete' pAadAlertId_ pAadAccountId_ =
     AccountsAlertsDelete'

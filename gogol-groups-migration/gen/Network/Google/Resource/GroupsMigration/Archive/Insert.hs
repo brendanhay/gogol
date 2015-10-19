@@ -22,7 +22,7 @@
 --
 -- Inserts a new mail into the archive of the Google group.
 --
--- /See:/ <https://developers.google.com/google-apps/groups-migration/ Groups Migration API Reference> for @GroupsmigrationArchiveInsert@.
+-- /See:/ <https://developers.google.com/google-apps/groups-migration/ Groups Migration API Reference> for @groupsmigration.archive.insert@.
 module Network.Google.Resource.GroupsMigration.Archive.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.GroupsMigration.Archive.Insert
 import           Network.Google.GroupsMigration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GroupsmigrationArchiveInsert@ method which the
+-- | A resource alias for @groupsmigration.archive.insert@ method which the
 -- 'ArchiveInsert'' request conforms to.
 type ArchiveInsertResource =
      Capture "groupId" Text :>
@@ -64,8 +64,8 @@ data ArchiveInsert' = ArchiveInsert'
 --
 -- * 'aiGroupId'
 archiveInsert'
-    :: Body -- ^ 'media'
-    -> Text -- ^ 'groupId'
+    :: Body -- ^ 'aiMedia'
+    -> Text -- ^ 'aiGroupId'
     -> ArchiveInsert'
 archiveInsert' pAiMedia_ pAiGroupId_ =
     ArchiveInsert'

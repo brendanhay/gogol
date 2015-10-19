@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of connection types.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingConnectionTypesList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.connectionTypes.list@.
 module Network.Google.Resource.DFAReporting.ConnectionTypes.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DFAReporting.ConnectionTypes.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingConnectionTypesList@ method which the
+-- | A resource alias for @dfareporting.connectionTypes.list@ method which the
 -- 'ConnectionTypesList'' request conforms to.
 type ConnectionTypesListResource =
      "userprofiles" :>
@@ -61,7 +61,7 @@ newtype ConnectionTypesList' = ConnectionTypesList'
 --
 -- * 'ctlProFileId'
 connectionTypesList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'ctlProFileId'
     -> ConnectionTypesList'
 connectionTypesList' pCtlProFileId_ =
     ConnectionTypesList'

@@ -22,7 +22,7 @@
 --
 -- Updates an existing annotation.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryAnnotationsUpdate@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.annotations.update@.
 module Network.Google.Resource.Books.MyLibrary.Annotations.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.Update
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryAnnotationsUpdate@ method which the
+-- | A resource alias for @books.mylibrary.annotations.update@ method which the
 -- 'MyLibraryAnnotationsUpdate'' request conforms to.
 type MyLibraryAnnotationsUpdateResource =
      "mylibrary" :>
@@ -70,8 +70,8 @@ data MyLibraryAnnotationsUpdate' = MyLibraryAnnotationsUpdate'
 --
 -- * 'mlauSource'
 myLibraryAnnotationsUpdate'
-    :: Annotation -- ^ 'payload'
-    -> Text -- ^ 'annotationId'
+    :: Annotation -- ^ 'mlauPayload'
+    -> Text -- ^ 'mlauAnnotationId'
     -> MyLibraryAnnotationsUpdate'
 myLibraryAnnotationsUpdate' pMlauPayload_ pMlauAnnotationId_ =
     MyLibraryAnnotationsUpdate'

@@ -27,7 +27,7 @@
 -- with the old subscription, or its topic unless the same topic is
 -- specified.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsDelete@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.delete@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Delete
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Delete
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsSubscriptionsDelete@ method which the
+-- | A resource alias for @pubsub.projects.subscriptions.delete@ method which the
 -- 'ProjectsSubscriptionsDelete'' request conforms to.
 type ProjectsSubscriptionsDeleteResource =
      "v1" :>
@@ -104,7 +104,7 @@ data ProjectsSubscriptionsDelete' = ProjectsSubscriptionsDelete'
 --
 -- * 'psdCallback'
 projectsSubscriptionsDelete'
-    :: Text -- ^ 'subscription'
+    :: Text -- ^ 'psdSubscription'
     -> ProjectsSubscriptionsDelete'
 projectsSubscriptionsDelete' pPsdSubscription_ =
     ProjectsSubscriptionsDelete'

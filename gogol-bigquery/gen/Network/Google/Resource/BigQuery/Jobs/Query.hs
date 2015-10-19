@@ -23,7 +23,7 @@
 -- Runs a BigQuery SQL query synchronously and returns query results if the
 -- query completes within a specified timeout.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryJobsQuery@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @bigquery.jobs.query@.
 module Network.Google.Resource.BigQuery.Jobs.Query
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.BigQuery.Jobs.Query
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigQueryJobsQuery@ method which the
+-- | A resource alias for @bigquery.jobs.query@ method which the
 -- 'JobsQuery'' request conforms to.
 type JobsQueryResource =
      "projects" :>
@@ -68,8 +68,8 @@ data JobsQuery' = JobsQuery'
 --
 -- * 'jqProjectId'
 jobsQuery'
-    :: QueryRequest -- ^ 'payload'
-    -> Text -- ^ 'projectId'
+    :: QueryRequest -- ^ 'jqPayload'
+    -> Text -- ^ 'jqProjectId'
     -> JobsQuery'
 jobsQuery' pJqPayload_ pJqProjectId_ =
     JobsQuery'

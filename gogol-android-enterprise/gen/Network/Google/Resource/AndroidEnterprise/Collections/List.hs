@@ -22,7 +22,7 @@
 --
 -- Retrieves the IDs of all the collections for an enterprise.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseCollectionsList@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.list@.
 module Network.Google.Resource.AndroidEnterprise.Collections.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AndroidEnterprise.Collections.List
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseCollectionsList@ method which the
+-- | A resource alias for @androidenterprise.collections.list@ method which the
 -- 'CollectionsList'' request conforms to.
 type CollectionsListResource =
      "enterprises" :>
@@ -61,7 +61,7 @@ newtype CollectionsList' = CollectionsList'
 --
 -- * 'cEnterpriseId'
 collectionsList'
-    :: Text -- ^ 'enterpriseId'
+    :: Text -- ^ 'cEnterpriseId'
     -> CollectionsList'
 collectionsList' pCEnterpriseId_ =
     CollectionsList'

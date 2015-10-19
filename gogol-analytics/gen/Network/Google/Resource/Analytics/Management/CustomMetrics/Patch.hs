@@ -22,7 +22,7 @@
 --
 -- Updates an existing custom metric. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomMetricsPatch@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.customMetrics.patch@.
 module Network.Google.Resource.Analytics.Management.CustomMetrics.Patch
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Patch
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementCustomMetricsPatch@ method which the
+-- | A resource alias for @analytics.management.customMetrics.patch@ method which the
 -- 'ManagementCustomMetricsPatch'' request conforms to.
 type ManagementCustomMetricsPatchResource =
      "management" :>
@@ -83,10 +83,10 @@ data ManagementCustomMetricsPatch' = ManagementCustomMetricsPatch'
 --
 -- * 'mcmpAccountId'
 managementCustomMetricsPatch'
-    :: Text -- ^ 'customMetricId'
-    -> Text -- ^ 'webPropertyId'
-    -> CustomMetric -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mcmpCustomMetricId'
+    -> Text -- ^ 'mcmpWebPropertyId'
+    -> CustomMetric -- ^ 'mcmpPayload'
+    -> Text -- ^ 'mcmpAccountId'
     -> ManagementCustomMetricsPatch'
 managementCustomMetricsPatch' pMcmpCustomMetricId_ pMcmpWebPropertyId_ pMcmpPayload_ pMcmpAccountId_ =
     ManagementCustomMetricsPatch'

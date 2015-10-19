@@ -22,7 +22,7 @@
 --
 -- Upload data for a custom data source.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUploadsUploadData@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.uploads.uploadData@.
 module Network.Google.Resource.Analytics.Management.Uploads.UploadData
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.Uploads.UploadData
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementUploadsUploadData@ method which the
+-- | A resource alias for @analytics.management.uploads.uploadData@ method which the
 -- 'ManagementUploadsUploadData'' request conforms to.
 type ManagementUploadsUploadDataResource =
      "management" :>
@@ -78,10 +78,10 @@ data ManagementUploadsUploadData' = ManagementUploadsUploadData'
 --
 -- * 'muudAccountId'
 managementUploadsUploadData'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'customDataSourceId'
-    -> Body -- ^ 'media'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'muudWebPropertyId'
+    -> Text -- ^ 'muudCustomDataSourceId'
+    -> Body -- ^ 'muudMedia'
+    -> Text -- ^ 'muudAccountId'
     -> ManagementUploadsUploadData'
 managementUploadsUploadData' pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudMedia_ pMuudAccountId_ =
     ManagementUploadsUploadData'

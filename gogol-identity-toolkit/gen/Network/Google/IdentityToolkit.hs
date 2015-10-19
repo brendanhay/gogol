@@ -26,40 +26,40 @@ module Network.Google.IdentityToolkit
 
     -- * Resources
 
-    -- ** IdentitytoolkitRelyingPartyCreateAuthURI
+    -- ** identitytoolkit.relyingparty.createAuthUri
     , module Network.Google.Resource.IdentityToolkit.RelyingParty.CreateAuthURI
 
-    -- ** IdentitytoolkitRelyingPartyDeleteAccount
+    -- ** identitytoolkit.relyingparty.deleteAccount
     , module Network.Google.Resource.IdentityToolkit.RelyingParty.DeleteAccount
 
-    -- ** IdentitytoolkitRelyingPartyDownloadAccount
+    -- ** identitytoolkit.relyingparty.downloadAccount
     , module Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount
 
-    -- ** IdentitytoolkitRelyingPartyGetAccountInfo
+    -- ** identitytoolkit.relyingparty.getAccountInfo
     , module Network.Google.Resource.IdentityToolkit.RelyingParty.GetAccountInfo
 
-    -- ** IdentitytoolkitRelyingPartyGetOOBConfirmationCode
+    -- ** identitytoolkit.relyingparty.getOobConfirmationCode
     , module Network.Google.Resource.IdentityToolkit.RelyingParty.GetOOBConfirmationCode
 
-    -- ** IdentitytoolkitRelyingPartyGetPublicKeys
+    -- ** identitytoolkit.relyingparty.getPublicKeys
     , module Network.Google.Resource.IdentityToolkit.RelyingParty.GetPublicKeys
 
-    -- ** IdentitytoolkitRelyingPartyGetRecaptchaParam
+    -- ** identitytoolkit.relyingparty.getRecaptchaParam
     , module Network.Google.Resource.IdentityToolkit.RelyingParty.GetRecaptchaParam
 
-    -- ** IdentitytoolkitRelyingPartyResetPassword
+    -- ** identitytoolkit.relyingparty.resetPassword
     , module Network.Google.Resource.IdentityToolkit.RelyingParty.ResetPassword
 
-    -- ** IdentitytoolkitRelyingPartySetAccountInfo
+    -- ** identitytoolkit.relyingparty.setAccountInfo
     , module Network.Google.Resource.IdentityToolkit.RelyingParty.SetAccountInfo
 
-    -- ** IdentitytoolkitRelyingPartyUploadAccount
+    -- ** identitytoolkit.relyingparty.uploadAccount
     , module Network.Google.Resource.IdentityToolkit.RelyingParty.UploadAccount
 
-    -- ** IdentitytoolkitRelyingPartyVerifyAssertion
+    -- ** identitytoolkit.relyingparty.verifyAssertion
     , module Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyAssertion
 
-    -- ** IdentitytoolkitRelyingPartyVerifyPassword
+    -- ** identitytoolkit.relyingparty.verifyPassword
     , module Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyPassword
 
     -- * Types

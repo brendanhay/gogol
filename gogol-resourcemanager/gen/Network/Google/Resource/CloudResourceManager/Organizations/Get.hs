@@ -22,7 +22,7 @@
 --
 -- Fetches an Organization resource by id.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerOrganizationsGet@.
+-- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.organizations.get@.
 module Network.Google.Resource.CloudResourceManager.Organizations.Get
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.CloudResourceManager.Organizations.Get
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerOrganizationsGet@ method which the
+-- | A resource alias for @cloudresourcemanager.organizations.get@ method which the
 -- 'OrganizationsGet'' request conforms to.
 type OrganizationsGetResource =
      "v1beta1" :>
@@ -95,7 +95,7 @@ data OrganizationsGet' = OrganizationsGet'
 --
 -- * 'ogCallback'
 organizationsGet'
-    :: Text -- ^ 'organizationId'
+    :: Text -- ^ 'ogOrganizationId'
     -> OrganizationsGet'
 organizationsGet' pOgOrganizationId_ =
     OrganizationsGet'

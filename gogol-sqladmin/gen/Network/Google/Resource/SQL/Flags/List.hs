@@ -22,7 +22,7 @@
 --
 -- List all available database flags for Google Cloud SQL instances.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLFlagsList@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.flags.list@.
 module Network.Google.Resource.SQL.Flags.List
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.SQL.Flags.List
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLFlagsList@ method which the
+-- | A resource alias for @sql.flags.list@ method which the
 -- 'FlagsList'' request conforms to.
 type FlagsListResource =
      "flags" :>

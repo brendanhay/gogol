@@ -22,7 +22,7 @@
 --
 -- Inserts a batch of new conversions into DoubleClick Search.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchConversionInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @doubleclicksearch.conversion.insert@.
 module Network.Google.Resource.DoubleClickSearch.Conversion.Insert
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.Insert
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClicksearchConversionInsert@ method which the
+-- | A resource alias for @doubleclicksearch.conversion.insert@ method which the
 -- 'ConversionInsert'' request conforms to.
 type ConversionInsertResource =
      "conversion" :>
@@ -60,7 +60,7 @@ newtype ConversionInsert' = ConversionInsert'
 --
 -- * 'ciPayload'
 conversionInsert'
-    :: ConversionList -- ^ 'payload'
+    :: ConversionList -- ^ 'ciPayload'
     -> ConversionInsert'
 conversionInsert' pCiPayload_ =
     ConversionInsert'

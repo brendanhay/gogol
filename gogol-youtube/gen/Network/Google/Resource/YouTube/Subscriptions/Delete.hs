@@ -22,7 +22,7 @@
 --
 -- Deletes a subscription.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeSubscriptionsDelete@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.subscriptions.delete@.
 module Network.Google.Resource.YouTube.Subscriptions.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.YouTube.Subscriptions.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeSubscriptionsDelete@ method which the
+-- | A resource alias for @youtube.subscriptions.delete@ method which the
 -- 'SubscriptionsDelete'' request conforms to.
 type SubscriptionsDeleteResource =
      "subscriptions" :>
@@ -59,7 +59,7 @@ newtype SubscriptionsDelete' = SubscriptionsDelete'
 --
 -- * 'sdId'
 subscriptionsDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'sdId'
     -> SubscriptionsDelete'
 subscriptionsDelete' pSdId_ =
     SubscriptionsDelete'

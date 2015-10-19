@@ -28,28 +28,28 @@ module Network.Google.Container
 
     -- * Resources
 
-    -- ** ContainerProjectsZonesClustersCreate
+    -- ** container.projects.zones.clusters.create
     , module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
 
-    -- ** ContainerProjectsZonesClustersDelete
+    -- ** container.projects.zones.clusters.delete
     , module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
 
-    -- ** ContainerProjectsZonesClustersGet
+    -- ** container.projects.zones.clusters.get
     , module Network.Google.Resource.Container.Projects.Zones.Clusters.Get
 
-    -- ** ContainerProjectsZonesClustersList
+    -- ** container.projects.zones.clusters.list
     , module Network.Google.Resource.Container.Projects.Zones.Clusters.List
 
-    -- ** ContainerProjectsZonesClustersUpdate
+    -- ** container.projects.zones.clusters.update
     , module Network.Google.Resource.Container.Projects.Zones.Clusters.Update
 
-    -- ** ContainerProjectsZonesGetServerConfig
+    -- ** container.projects.zones.getServerconfig
     , module Network.Google.Resource.Container.Projects.Zones.GetServerConfig
 
-    -- ** ContainerProjectsZonesOperationsGet
+    -- ** container.projects.zones.operations.get
     , module Network.Google.Resource.Container.Projects.Zones.Operations.Get
 
-    -- ** ContainerProjectsZonesOperationsList
+    -- ** container.projects.zones.operations.list
     , module Network.Google.Resource.Container.Projects.Zones.Operations.List
 
     -- * Types

@@ -22,7 +22,7 @@
 --
 -- Delete an ASP issued by a user.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryAspsDelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.asps.delete@.
 module Network.Google.Resource.Directory.Asps.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Asps.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryAspsDelete@ method which the
+-- | A resource alias for @directory.asps.delete@ method which the
 -- 'AspsDelete'' request conforms to.
 type AspsDeleteResource =
      "users" :>
@@ -65,8 +65,8 @@ data AspsDelete' = AspsDelete'
 --
 -- * 'adUserKey'
 aspsDelete'
-    :: Int32 -- ^ 'codeId'
-    -> Text -- ^ 'userKey'
+    :: Int32 -- ^ 'adCodeId'
+    -> Text -- ^ 'adUserKey'
     -> AspsDelete'
 aspsDelete' pAdCodeId_ pAdUserKey_ =
     AspsDelete'

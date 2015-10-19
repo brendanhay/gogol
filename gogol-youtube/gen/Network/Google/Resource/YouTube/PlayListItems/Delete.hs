@@ -22,7 +22,7 @@
 --
 -- Deletes a playlist item.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlayListItemsDelete@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.playlistItems.delete@.
 module Network.Google.Resource.YouTube.PlayListItems.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.YouTube.PlayListItems.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubePlayListItemsDelete@ method which the
+-- | A resource alias for @youtube.playlistItems.delete@ method which the
 -- 'PlayListItemsDelete'' request conforms to.
 type PlayListItemsDeleteResource =
      "playlistItems" :>
@@ -59,7 +59,7 @@ newtype PlayListItemsDelete' = PlayListItemsDelete'
 --
 -- * 'plidId'
 playListItemsDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'plidId'
     -> PlayListItemsDelete'
 playListItemsDelete' pPlidId_ =
     PlayListItemsDelete'

@@ -22,7 +22,7 @@
 --
 -- Deletes the specified instance template.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceTemplatesDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceTemplates.delete@.
 module Network.Google.Resource.Compute.InstanceTemplates.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.InstanceTemplates.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceTemplatesDelete@ method which the
+-- | A resource alias for @compute.instanceTemplates.delete@ method which the
 -- 'InstanceTemplatesDelete'' request conforms to.
 type InstanceTemplatesDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data InstanceTemplatesDelete' = InstanceTemplatesDelete'
 --
 -- * 'itdInstanceTemplate'
 instanceTemplatesDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instanceTemplate'
+    :: Text -- ^ 'itdProject'
+    -> Text -- ^ 'itdInstanceTemplate'
     -> InstanceTemplatesDelete'
 instanceTemplatesDelete' pItdProject_ pItdInstanceTemplate_ =
     InstanceTemplatesDelete'

@@ -22,7 +22,7 @@
 --
 -- This method is not supported and the server returns \`UNIMPLEMENTED\`.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferOperationsDelete@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.transferOperations.delete@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Delete
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Delete
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferTransferOperationsDelete@ method which the
+-- | A resource alias for @storagetransfer.transferOperations.delete@ method which the
 -- 'TransferOperationsDelete'' request conforms to.
 type TransferOperationsDeleteResource =
      "v1" :>
@@ -94,7 +94,7 @@ data TransferOperationsDelete' = TransferOperationsDelete'
 --
 -- * 'todCallback'
 transferOperationsDelete'
-    :: Text -- ^ 'name'
+    :: Text -- ^ 'todName'
     -> TransferOperationsDelete'
 transferOperationsDelete' pTodName_ =
     TransferOperationsDelete'

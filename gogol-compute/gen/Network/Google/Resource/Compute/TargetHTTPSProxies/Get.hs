@@ -22,7 +22,7 @@
 --
 -- Returns the specified TargetHttpsProxy resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetHTTPSProxiesGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetHttpsProxies.get@.
 module Network.Google.Resource.Compute.TargetHTTPSProxies.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.TargetHTTPSProxies.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetHTTPSProxiesGet@ method which the
+-- | A resource alias for @compute.targetHttpsProxies.get@ method which the
 -- 'TargetHTTPSProxiesGet'' request conforms to.
 type TargetHTTPSProxiesGetResource =
      Capture "project" Text :>
@@ -66,8 +66,8 @@ data TargetHTTPSProxiesGet' = TargetHTTPSProxiesGet'
 --
 -- * 'thpgTargetHTTPSProxy'
 targetHTTPSProxiesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'targetHttpsProxy'
+    :: Text -- ^ 'thpgProject'
+    -> Text -- ^ 'thpgTargetHTTPSProxy'
     -> TargetHTTPSProxiesGet'
 targetHTTPSProxiesGet' pThpgProject_ pThpgTargetHTTPSProxy_ =
     TargetHTTPSProxiesGet'

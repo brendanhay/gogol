@@ -23,7 +23,7 @@
 -- Creates a Group resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsGroupsInsert@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.groups.insert@.
 module Network.Google.Resource.CloudUserAccounts.Groups.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.CloudUserAccounts.Groups.Insert
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsGroupsInsert@ method which the
+-- | A resource alias for @clouduseraccounts.groups.insert@ method which the
 -- 'GroupsInsert'' request conforms to.
 type GroupsInsertResource =
      Capture "project" Text :>
@@ -67,8 +67,8 @@ data GroupsInsert' = GroupsInsert'
 --
 -- * 'giPayload'
 groupsInsert'
-    :: Text -- ^ 'project'
-    -> Group -- ^ 'payload'
+    :: Text -- ^ 'giProject'
+    -> Group -- ^ 'giPayload'
     -> GroupsInsert'
 groupsInsert' pGiProject_ pGiPayload_ =
     GroupsInsert'

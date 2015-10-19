@@ -25,7 +25,7 @@
 -- advertisers. Advertisers can request information about themselves by
 -- omitting the advertiserId query parameter.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANAdvertisersGet@.
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @gan.advertisers.get@.
 module Network.Google.Resource.GAN.Advertisers.Get
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.GAN.Advertisers.Get
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GANAdvertisersGet@ method which the
+-- | A resource alias for @gan.advertisers.get@ method which the
 -- 'AdvertisersGet'' request conforms to.
 type AdvertisersGetResource =
      Capture "role" AdvertisersGetRole :>
@@ -75,8 +75,8 @@ data AdvertisersGet' = AdvertisersGet'
 --
 -- * 'agRole'
 advertisersGet'
-    :: Text -- ^ 'roleId'
-    -> AdvertisersGetRole -- ^ 'role'
+    :: Text -- ^ 'agRoleId'
+    -> AdvertisersGetRole -- ^ 'agRole'
     -> AdvertisersGet'
 advertisersGet' pAgRoleId_ pAgRole_ =
     AdvertisersGet'

@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of operating systems.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingOperatingSystemsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.operatingSystems.list@.
 module Network.Google.Resource.DFAReporting.OperatingSystems.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DFAReporting.OperatingSystems.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingOperatingSystemsList@ method which the
+-- | A resource alias for @dfareporting.operatingSystems.list@ method which the
 -- 'OperatingSystemsList'' request conforms to.
 type OperatingSystemsListResource =
      "userprofiles" :>
@@ -61,7 +61,7 @@ newtype OperatingSystemsList' = OperatingSystemsList'
 --
 -- * 'oslProFileId'
 operatingSystemsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'oslProFileId'
     -> OperatingSystemsList'
 operatingSystemsList' pOslProFileId_ =
     OperatingSystemsList'

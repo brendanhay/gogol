@@ -22,7 +22,7 @@
 --
 -- Gets one remarketing list by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingTargetableRemarketingListsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.targetableRemarketingLists.get@.
 module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingTargetableRemarketingListsGet@ method which the
+-- | A resource alias for @dfareporting.targetableRemarketingLists.get@ method which the
 -- 'TargetableRemarketingListsGet'' request conforms to.
 type TargetableRemarketingListsGetResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data TargetableRemarketingListsGet' = TargetableRemarketingListsGet'
 --
 -- * 'trlgId'
 targetableRemarketingListsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'trlgProFileId'
+    -> Int64 -- ^ 'trlgId'
     -> TargetableRemarketingListsGet'
 targetableRemarketingListsGet' pTrlgProFileId_ pTrlgId_ =
     TargetableRemarketingListsGet'

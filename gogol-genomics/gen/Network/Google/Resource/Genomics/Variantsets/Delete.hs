@@ -23,7 +23,7 @@
 -- Deletes the contents of a variant set. The variant set object is not
 -- deleted.
 --
--- /See:/ < Genomics API Reference> for @GenomicsVariantsetsDelete@.
+-- /See:/ < Genomics API Reference> for @genomics.variantsets.delete@.
 module Network.Google.Resource.Genomics.Variantsets.Delete
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Genomics.Variantsets.Delete
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsVariantsetsDelete@ method which the
+-- | A resource alias for @genomics.variantsets.delete@ method which the
 -- 'VariantsetsDelete'' request conforms to.
 type VariantsetsDeleteResource =
      "v1" :>
@@ -97,7 +97,7 @@ data VariantsetsDelete' = VariantsetsDelete'
 --
 -- * 'vddCallback'
 variantsetsDelete'
-    :: Text -- ^ 'variantSetId'
+    :: Text -- ^ 'vddVariantSetId'
     -> VariantsetsDelete'
 variantsetsDelete' pVddVariantSetId_ =
     VariantsetsDelete'

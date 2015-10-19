@@ -22,7 +22,7 @@
 --
 -- Retrieves the authenticated user\'s list of accounts.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerAccountsList@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.accounts.list@.
 module Network.Google.Resource.AdExchangeBuyer.Accounts.List
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.List
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerAccountsList@ method which the
+-- | A resource alias for @adexchangebuyer.accounts.list@ method which the
 -- 'AccountsList'' request conforms to.
 type AccountsListResource =
      "accounts" :>

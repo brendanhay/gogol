@@ -22,7 +22,7 @@
 --
 -- Return metadata for a single raster.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRastersGet@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.rasters.get@.
 module Network.Google.Resource.MapsEngine.Rasters.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.Rasters.Get
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRastersGet@ method which the
+-- | A resource alias for @mapsengine.rasters.get@ method which the
 -- 'RastersGet'' request conforms to.
 type RastersGetResource =
      "rasters" :>
@@ -59,7 +59,7 @@ newtype RastersGet' = RastersGet'
 --
 -- * 'rgId'
 rastersGet'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'rgId'
     -> RastersGet'
 rastersGet' pRgId_ =
     RastersGet'

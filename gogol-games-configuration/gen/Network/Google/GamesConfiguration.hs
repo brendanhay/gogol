@@ -26,43 +26,43 @@ module Network.Google.GamesConfiguration
 
     -- * Resources
 
-    -- ** GamesConfigurationAchievementConfigurationsDelete
+    -- ** gamesConfiguration.achievementConfigurations.delete
     , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Delete
 
-    -- ** GamesConfigurationAchievementConfigurationsGet
+    -- ** gamesConfiguration.achievementConfigurations.get
     , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Get
 
-    -- ** GamesConfigurationAchievementConfigurationsInsert
+    -- ** gamesConfiguration.achievementConfigurations.insert
     , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Insert
 
-    -- ** GamesConfigurationAchievementConfigurationsList
+    -- ** gamesConfiguration.achievementConfigurations.list
     , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.List
 
-    -- ** GamesConfigurationAchievementConfigurationsPatch
+    -- ** gamesConfiguration.achievementConfigurations.patch
     , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Patch
 
-    -- ** GamesConfigurationAchievementConfigurationsUpdate
+    -- ** gamesConfiguration.achievementConfigurations.update
     , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Update
 
-    -- ** GamesConfigurationImageConfigurationsUpload
+    -- ** gamesConfiguration.imageConfigurations.upload
     , module Network.Google.Resource.GamesConfiguration.ImageConfigurations.Upload
 
-    -- ** GamesConfigurationLeaderboardConfigurationsDelete
+    -- ** gamesConfiguration.leaderboardConfigurations.delete
     , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Delete
 
-    -- ** GamesConfigurationLeaderboardConfigurationsGet
+    -- ** gamesConfiguration.leaderboardConfigurations.get
     , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Get
 
-    -- ** GamesConfigurationLeaderboardConfigurationsInsert
+    -- ** gamesConfiguration.leaderboardConfigurations.insert
     , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Insert
 
-    -- ** GamesConfigurationLeaderboardConfigurationsList
+    -- ** gamesConfiguration.leaderboardConfigurations.list
     , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.List
 
-    -- ** GamesConfigurationLeaderboardConfigurationsPatch
+    -- ** gamesConfiguration.leaderboardConfigurations.patch
     , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Patch
 
-    -- ** GamesConfigurationLeaderboardConfigurationsUpdate
+    -- ** gamesConfiguration.leaderboardConfigurations.update
     , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Update
 
     -- * Types

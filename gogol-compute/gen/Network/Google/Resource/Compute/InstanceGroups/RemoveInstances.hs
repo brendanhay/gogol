@@ -23,7 +23,7 @@
 -- Removes one or more instances from the specified instance group, but
 -- does not delete those instances.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsRemoveInstances@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroups.removeInstances@.
 module Network.Google.Resource.Compute.InstanceGroups.RemoveInstances
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.InstanceGroups.RemoveInstances
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupsRemoveInstances@ method which the
+-- | A resource alias for @compute.instanceGroups.removeInstances@ method which the
 -- 'InstanceGroupsRemoveInstances'' request conforms to.
 type InstanceGroupsRemoveInstancesResource =
      Capture "project" Text :>
@@ -79,10 +79,10 @@ data InstanceGroupsRemoveInstances' = InstanceGroupsRemoveInstances'
 --
 -- * 'igriInstanceGroup'
 instanceGroupsRemoveInstances'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> InstanceGroupsRemoveInstancesRequest -- ^ 'payload'
-    -> Text -- ^ 'instanceGroup'
+    :: Text -- ^ 'igriProject'
+    -> Text -- ^ 'igriZone'
+    -> InstanceGroupsRemoveInstancesRequest -- ^ 'igriPayload'
+    -> Text -- ^ 'igriInstanceGroup'
     -> InstanceGroupsRemoveInstances'
 instanceGroupsRemoveInstances' pIgriProject_ pIgriZone_ pIgriPayload_ pIgriInstanceGroup_ =
     InstanceGroupsRemoveInstances'

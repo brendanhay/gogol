@@ -27,7 +27,7 @@
 -- identified by their data stream ID. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesPatch@.
+-- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataSources.patch@.
 module Network.Google.Resource.Fitness.Users.DataSources.Patch
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Fitness.Users.DataSources.Patch
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersDataSourcesPatch@ method which the
+-- | A resource alias for @fitness.users.dataSources.patch@ method which the
 -- 'UsersDataSourcesPatch'' request conforms to.
 type UsersDataSourcesPatchResource =
      Capture "userId" Text :>
@@ -80,9 +80,9 @@ data UsersDataSourcesPatch' = UsersDataSourcesPatch'
 --
 -- * 'udspUserId'
 usersDataSourcesPatch'
-    :: Text -- ^ 'dataSourceId'
-    -> DataSource -- ^ 'payload'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'udspDataSourceId'
+    -> DataSource -- ^ 'udspPayload'
+    -> Text -- ^ 'udspUserId'
     -> UsersDataSourcesPatch'
 usersDataSourcesPatch' pUdspDataSourceId_ pUdspPayload_ pUdspUserId_ =
     UsersDataSourcesPatch'

@@ -22,7 +22,7 @@
 --
 -- Marks an order as acknowledged.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersAcknowledge@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.acknowledge@.
 module Network.Google.Resource.Content.Orders.Acknowledge
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Orders.Acknowledge
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersAcknowledge@ method which the
+-- | A resource alias for @content.orders.acknowledge@ method which the
 -- 'OrdersAcknowledge'' request conforms to.
 type OrdersAcknowledgeResource =
      Capture "merchantId" Word64 :>
@@ -71,9 +71,9 @@ data OrdersAcknowledge' = OrdersAcknowledge'
 --
 -- * 'oaOrderId'
 ordersAcknowledge'
-    :: Word64 -- ^ 'merchantId'
-    -> OrdersAcknowledgeRequest -- ^ 'payload'
-    -> Text -- ^ 'orderId'
+    :: Word64 -- ^ 'oaMerchantId'
+    -> OrdersAcknowledgeRequest -- ^ 'oaPayload'
+    -> Text -- ^ 'oaOrderId'
     -> OrdersAcknowledge'
 ordersAcknowledge' pOaMerchantId_ pOaPayload_ pOaOrderId_ =
     OrdersAcknowledge'

@@ -23,7 +23,7 @@
 -- Lists a site\'s sample URLs for the specified crawl error category and
 -- platform.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersURLCrawlErrorsSamplesList@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.urlcrawlerrorssamples.list@.
 module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.List
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersURLCrawlErrorsSamplesList@ method which the
+-- | A resource alias for @webmasters.urlcrawlerrorssamples.list@ method which the
 -- 'URLCrawlErrorsSamplesList'' request conforms to.
 type URLCrawlErrorsSamplesListResource =
      "sites" :>
@@ -77,9 +77,9 @@ data URLCrawlErrorsSamplesList' = URLCrawlErrorsSamplesList'
 --
 -- * 'uceslSiteURL'
 urlCrawlErrorsSamplesList'
-    :: URLCrawlErrorsSamplesListPlatform -- ^ 'platform'
-    -> URLCrawlErrorsSamplesListCategory -- ^ 'category'
-    -> Text -- ^ 'siteUrl'
+    :: URLCrawlErrorsSamplesListPlatform -- ^ 'uceslPlatform'
+    -> URLCrawlErrorsSamplesListCategory -- ^ 'uceslCategory'
+    -> Text -- ^ 'uceslSiteURL'
     -> URLCrawlErrorsSamplesList'
 urlCrawlErrorsSamplesList' pUceslPlatform_ pUceslCategory_ pUceslSiteURL_ =
     URLCrawlErrorsSamplesList'

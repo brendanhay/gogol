@@ -22,7 +22,7 @@
 --
 -- Marks a comment as not spam.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerCommentsApprove@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.comments.approve@.
 module Network.Google.Resource.Blogger.Comments.Approve
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Blogger.Comments.Approve
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerCommentsApprove@ method which the
+-- | A resource alias for @blogger.comments.approve@ method which the
 -- 'CommentsApprove'' request conforms to.
 type CommentsApproveResource =
      "blogs" :>
@@ -72,9 +72,9 @@ data CommentsApprove' = CommentsApprove'
 --
 -- * 'caCommentId'
 commentsApprove'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'postId'
-    -> Text -- ^ 'commentId'
+    :: Text -- ^ 'caBlogId'
+    -> Text -- ^ 'caPostId'
+    -> Text -- ^ 'caCommentId'
     -> CommentsApprove'
 commentsApprove' pCaBlogId_ pCaPostId_ pCaCommentId_ =
     CommentsApprove'

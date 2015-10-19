@@ -23,7 +23,7 @@
 -- List all of the activities in the specified collection for a particular
 -- user.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsActivitiesList@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.activities.list@.
 module Network.Google.Resource.PlusDomains.Activities.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.PlusDomains.Activities.List
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsActivitiesList@ method which the
+-- | A resource alias for @plusDomains.activities.list@ method which the
 -- 'ActivitiesList'' request conforms to.
 type ActivitiesListResource =
      "people" :>
@@ -77,8 +77,8 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'aMaxResults'
 activitiesList'
-    :: ActivitiesListCollection -- ^ 'collection'
-    -> Text -- ^ 'userId'
+    :: ActivitiesListCollection -- ^ 'aCollection'
+    -> Text -- ^ 'aUserId'
     -> ActivitiesList'
 activitiesList' pACollection_ pAUserId_ =
     ActivitiesList'

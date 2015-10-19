@@ -23,7 +23,7 @@
 -- Overwrites the Realtime API data model associated with this file with
 -- the provided JSON data model.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRealtimeUpdate@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.realtime.update@.
 module Network.Google.Resource.Drive.Realtime.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Drive.Realtime.Update
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRealtimeUpdate@ method which the
+-- | A resource alias for @drive.realtime.update@ method which the
 -- 'RealtimeUpdate'' request conforms to.
 type RealtimeUpdateResource =
      "files" :>
@@ -72,8 +72,8 @@ data RealtimeUpdate' = RealtimeUpdate'
 --
 -- * 'rFileId'
 realtimeUpdate'
-    :: Body -- ^ 'media'
-    -> Text -- ^ 'fileId'
+    :: Body -- ^ 'rMedia'
+    -> Text -- ^ 'rFileId'
     -> RealtimeUpdate'
 realtimeUpdate' pRMedia_ pRFileId_ =
     RealtimeUpdate'

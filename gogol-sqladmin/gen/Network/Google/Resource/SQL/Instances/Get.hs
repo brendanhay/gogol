@@ -22,7 +22,7 @@
 --
 -- Retrieves a resource containing information about a Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesGet@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.get@.
 module Network.Google.Resource.SQL.Instances.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.SQL.Instances.Get
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesGet@ method which the
+-- | A resource alias for @sql.instances.get@ method which the
 -- 'InstancesGet'' request conforms to.
 type InstancesGetResource =
      "projects" :>
@@ -66,8 +66,8 @@ data InstancesGet' = InstancesGet'
 --
 -- * 'igInstance'
 instancesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'igProject'
+    -> Text -- ^ 'igInstance'
     -> InstancesGet'
 instancesGet' pIgProject_ pIgInstance_ =
     InstancesGet'

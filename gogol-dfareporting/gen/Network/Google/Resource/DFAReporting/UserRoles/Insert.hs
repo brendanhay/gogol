@@ -22,7 +22,7 @@
 --
 -- Inserts a new user role.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolesInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userRoles.insert@.
 module Network.Google.Resource.DFAReporting.UserRoles.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.UserRoles.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingUserRolesInsert@ method which the
+-- | A resource alias for @dfareporting.userRoles.insert@ method which the
 -- 'UserRolesInsert'' request conforms to.
 type UserRolesInsertResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data UserRolesInsert' = UserRolesInsert'
 --
 -- * 'uriPayload'
 userRolesInsert'
-    :: Int64 -- ^ 'profileId'
-    -> UserRole -- ^ 'payload'
+    :: Int64 -- ^ 'uriProFileId'
+    -> UserRole -- ^ 'uriPayload'
     -> UserRolesInsert'
 userRolesInsert' pUriProFileId_ pUriPayload_ =
     UserRolesInsert'

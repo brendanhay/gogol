@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of ads, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.ads.list@.
 module Network.Google.Resource.DFAReporting.Ads.List
     (
     -- * REST Resource
@@ -63,7 +63,7 @@ module Network.Google.Resource.DFAReporting.Ads.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAdsList@ method which the
+-- | A resource alias for @dfareporting.ads.list@ method which the
 -- 'AdsList'' request conforms to.
 type AdsListResource =
      "userprofiles" :>
@@ -203,7 +203,7 @@ data AdsList' = AdsList'
 --
 -- * 'adsAudienceSegmentIds'
 adsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'adsProFileId'
     -> AdsList'
 adsList' pAdsProFileId_ =
     AdsList'

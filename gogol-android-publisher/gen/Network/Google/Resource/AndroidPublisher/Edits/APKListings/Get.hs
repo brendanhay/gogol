@@ -23,7 +23,7 @@
 -- Fetches the APK-specific localized listing for a specified APK and
 -- language code.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsAPKListingsGet@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.apklistings.get@.
 module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Get
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Get
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsAPKListingsGet@ method which the
+-- | A resource alias for @androidpublisher.edits.apklistings.get@ method which the
 -- 'EditsAPKListingsGet'' request conforms to.
 type EditsAPKListingsGetResource =
      Capture "packageName" Text :>
@@ -78,10 +78,10 @@ data EditsAPKListingsGet' = EditsAPKListingsGet'
 --
 -- * 'eapklgEditId'
 editsAPKListingsGet'
-    :: Text -- ^ 'packageName'
-    -> Int32 -- ^ 'apkVersionCode'
-    -> Text -- ^ 'language'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eapklgPackageName'
+    -> Int32 -- ^ 'eapklgAPKVersionCode'
+    -> Text -- ^ 'eapklgLanguage'
+    -> Text -- ^ 'eapklgEditId'
     -> EditsAPKListingsGet'
 editsAPKListingsGet' pEapklgPackageName_ pEapklgAPKVersionCode_ pEapklgLanguage_ pEapklgEditId_ =
     EditsAPKListingsGet'

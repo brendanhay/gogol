@@ -134,7 +134,7 @@ newtype OperationSchema = OperationSchema
 --
 -- * 'osAddtional'
 operationSchema
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'osAddtional'
     -> OperationSchema
 operationSchema pOsAddtional_ =
     OperationSchema
@@ -692,7 +692,7 @@ newtype VersionEnvVariables = VersionEnvVariables
 --
 -- * 'vevAddtional'
 versionEnvVariables
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'vevAddtional'
     -> VersionEnvVariables
 versionEnvVariables pVevAddtional_ =
     VersionEnvVariables
@@ -816,7 +816,7 @@ newtype VersionBetaSettings = VersionBetaSettings
 --
 -- * 'vbsAddtional'
 versionBetaSettings
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'vbsAddtional'
     -> VersionBetaSettings
 versionBetaSettings pVbsAddtional_ =
     VersionBetaSettings
@@ -1002,7 +1002,7 @@ newtype StaticDirectoryHandlerHTTPHeaders = StaticDirectoryHandlerHTTPHeaders
 --
 -- * 'sdhhttphAddtional'
 staticDirectoryHandlerHTTPHeaders
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'sdhhttphAddtional'
     -> StaticDirectoryHandlerHTTPHeaders
 staticDirectoryHandlerHTTPHeaders pSdhhttphAddtional_ =
     StaticDirectoryHandlerHTTPHeaders
@@ -1382,7 +1382,7 @@ newtype StatusDetailsItem = StatusDetailsItem
 --
 -- * 'sdiAddtional'
 statusDetailsItem
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
     StatusDetailsItem
@@ -1479,7 +1479,7 @@ newtype StaticFilesHandlerHTTPHeaders = StaticFilesHandlerHTTPHeaders
 --
 -- * 'sfhhttphAddtional'
 staticFilesHandlerHTTPHeaders
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'sfhhttphAddtional'
     -> StaticFilesHandlerHTTPHeaders
 staticFilesHandlerHTTPHeaders pSfhhttphAddtional_ =
     StaticFilesHandlerHTTPHeaders
@@ -1571,7 +1571,7 @@ newtype DeploymentFiles = DeploymentFiles
 --
 -- * 'dfAddtional'
 deploymentFiles
-    :: HashMap Text FileInfo -- ^ 'addtional'
+    :: HashMap Text FileInfo -- ^ 'dfAddtional'
     -> DeploymentFiles
 deploymentFiles pDfAddtional_ =
     DeploymentFiles
@@ -1661,7 +1661,7 @@ newtype TrafficSplitAllocations = TrafficSplitAllocations
 --
 -- * 'tsaAddtional'
 trafficSplitAllocations
-    :: HashMap Text Double -- ^ 'addtional'
+    :: HashMap Text Double -- ^ 'tsaAddtional'
     -> TrafficSplitAllocations
 trafficSplitAllocations pTsaAddtional_ =
     TrafficSplitAllocations
@@ -2543,7 +2543,7 @@ newtype OperationResponse = OperationResponse
 --
 -- * 'orAddtional'
 operationResponse
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
     OperationResponse

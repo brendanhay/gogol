@@ -22,7 +22,7 @@
 --
 -- Adds a new attachment to a timeline item.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineAttachmentsInsert@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.timeline.attachments.insert@.
 module Network.Google.Resource.Mirror.Timeline.Attachments.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Mirror.Timeline.Attachments.Insert
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorTimelineAttachmentsInsert@ method which the
+-- | A resource alias for @mirror.timeline.attachments.insert@ method which the
 -- 'TimelineAttachmentsInsert'' request conforms to.
 type TimelineAttachmentsInsertResource =
      "timeline" :>
@@ -66,8 +66,8 @@ data TimelineAttachmentsInsert' = TimelineAttachmentsInsert'
 --
 -- * 'taiMedia'
 timelineAttachmentsInsert'
-    :: Text -- ^ 'itemId'
-    -> Body -- ^ 'media'
+    :: Text -- ^ 'taiItemId'
+    -> Body -- ^ 'taiMedia'
     -> TimelineAttachmentsInsert'
 timelineAttachmentsInsert' pTaiItemId_ pTaiMedia_ =
     TimelineAttachmentsInsert'

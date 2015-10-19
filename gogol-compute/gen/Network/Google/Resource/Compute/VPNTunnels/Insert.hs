@@ -23,7 +23,7 @@
 -- Creates a VpnTunnel resource in the specified project and region using
 -- the data included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeVPNTunnelsInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.vpnTunnels.insert@.
 module Network.Google.Resource.Compute.VPNTunnels.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.VPNTunnels.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeVPNTunnelsInsert@ method which the
+-- | A resource alias for @compute.vpnTunnels.insert@ method which the
 -- 'VPNTunnelsInsert'' request conforms to.
 type VPNTunnelsInsertResource =
      Capture "project" Text :>
@@ -72,9 +72,9 @@ data VPNTunnelsInsert' = VPNTunnelsInsert'
 --
 -- * 'vtiRegion'
 vpnTunnelsInsert'
-    :: Text -- ^ 'project'
-    -> VPNTunnel -- ^ 'payload'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'vtiProject'
+    -> VPNTunnel -- ^ 'vtiPayload'
+    -> Text -- ^ 'vtiRegion'
     -> VPNTunnelsInsert'
 vpnTunnelsInsert' pVtiProject_ pVtiPayload_ pVtiRegion_ =
     VPNTunnelsInsert'

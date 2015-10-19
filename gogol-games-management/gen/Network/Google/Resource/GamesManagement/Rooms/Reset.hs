@@ -24,7 +24,7 @@
 -- application. This method is only accessible to whitelisted tester
 -- accounts for your application.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementRoomsReset@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.rooms.reset@.
 module Network.Google.Resource.GamesManagement.Rooms.Reset
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.GamesManagement.Rooms.Reset
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementRoomsReset@ method which the
+-- | A resource alias for @gamesManagement.rooms.reset@ method which the
 -- 'RoomsReset'' request conforms to.
 type RoomsResetResource =
      "rooms" :>

@@ -22,7 +22,7 @@
 --
 -- Get a circle.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesGet@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.circles.get@.
 module Network.Google.Resource.PlusDomains.Circles.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.PlusDomains.Circles.Get
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsCirclesGet@ method which the
+-- | A resource alias for @plusDomains.circles.get@ method which the
 -- 'CirclesGet'' request conforms to.
 type CirclesGetResource =
      "circles" :>
@@ -59,7 +59,7 @@ newtype CirclesGet' = CirclesGet'
 --
 -- * 'cgCircleId'
 circlesGet'
-    :: Text -- ^ 'circleId'
+    :: Text -- ^ 'cgCircleId'
     -> CirclesGet'
 circlesGet' pCgCircleId_ =
     CirclesGet'

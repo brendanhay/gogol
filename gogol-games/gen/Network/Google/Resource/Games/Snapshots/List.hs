@@ -23,7 +23,7 @@
 -- Retrieves a list of snapshots created by your application for the player
 -- corresponding to the player ID.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesSnapshotsList@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.snapshots.list@.
 module Network.Google.Resource.Games.Snapshots.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Games.Snapshots.List
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesSnapshotsList@ method which the
+-- | A resource alias for @games.snapshots.list@ method which the
 -- 'SnapshotsList'' request conforms to.
 type SnapshotsListResource =
      "players" :>
@@ -78,7 +78,7 @@ data SnapshotsList' = SnapshotsList'
 --
 -- * 'slMaxResults'
 snapshotsList'
-    :: Text -- ^ 'playerId'
+    :: Text -- ^ 'slPlayerId'
     -> SnapshotsList'
 snapshotsList' pSlPlayerId_ =
     SnapshotsList'

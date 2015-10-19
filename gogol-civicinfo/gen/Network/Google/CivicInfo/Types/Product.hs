@@ -33,7 +33,7 @@ newtype RepresentativeInfoResponseDivisions = RepresentativeInfoResponseDivision
 --
 -- * 'rirdAddtional'
 representativeInfoResponseDivisions
-    :: HashMap Text GeographicDivision -- ^ 'addtional'
+    :: HashMap Text GeographicDivision -- ^ 'rirdAddtional'
     -> RepresentativeInfoResponseDivisions
 representativeInfoResponseDivisions pRirdAddtional_ =
     RepresentativeInfoResponseDivisions
@@ -1529,7 +1529,7 @@ newtype RepresentativeInfoDataDivisions = RepresentativeInfoDataDivisions
 --
 -- * 'riddAddtional'
 representativeInfoDataDivisions
-    :: HashMap Text GeographicDivision -- ^ 'addtional'
+    :: HashMap Text GeographicDivision -- ^ 'riddAddtional'
     -> RepresentativeInfoDataDivisions
 representativeInfoDataDivisions pRiddAddtional_ =
     RepresentativeInfoDataDivisions

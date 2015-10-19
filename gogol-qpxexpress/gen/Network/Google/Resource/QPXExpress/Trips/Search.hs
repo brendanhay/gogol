@@ -22,7 +22,7 @@
 --
 -- Returns a list of flights.
 --
--- /See:/ <http://developers.google.com/qpx-express QPX Express API Reference> for @QpxExpressTripsSearch@.
+-- /See:/ <http://developers.google.com/qpx-express QPX Express API Reference> for @qpxExpress.trips.search@.
 module Network.Google.Resource.QPXExpress.Trips.Search
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.QPXExpress.Trips.Search
 import           Network.Google.Prelude
 import           Network.Google.QPXExpress.Types
 
--- | A resource alias for @QpxExpressTripsSearch@ method which the
+-- | A resource alias for @qpxExpress.trips.search@ method which the
 -- 'TripsSearch'' request conforms to.
 type TripsSearchResource =
      "search" :>
@@ -60,7 +60,7 @@ newtype TripsSearch' = TripsSearch'
 --
 -- * 'tsPayload'
 tripsSearch'
-    :: TripsSearchRequest -- ^ 'payload'
+    :: TripsSearchRequest -- ^ 'tsPayload'
     -> TripsSearch'
 tripsSearch' pTsPayload_ =
     TripsSearch'

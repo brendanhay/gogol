@@ -22,7 +22,7 @@
 --
 -- Lists the applications available for data transfer for a customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @DataTransferApplicationsList@.
+-- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @datatransfer.applications.list@.
 module Network.Google.Resource.DataTransfer.Applications.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DataTransfer.Applications.List
 import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataTransferApplicationsList@ method which the
+-- | A resource alias for @datatransfer.applications.list@ method which the
 -- 'ApplicationsList'' request conforms to.
 type ApplicationsListResource =
      "applications" :>

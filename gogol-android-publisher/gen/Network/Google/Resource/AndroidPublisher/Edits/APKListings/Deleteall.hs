@@ -22,7 +22,7 @@
 --
 -- Deletes all the APK-specific localized listings for a specified APK.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsAPKListingsDeleteall@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.apklistings.deleteall@.
 module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Deleteall
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Deleteall
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsAPKListingsDeleteall@ method which the
+-- | A resource alias for @androidpublisher.edits.apklistings.deleteall@ method which the
 -- 'EditsAPKListingsDeleteall'' request conforms to.
 type EditsAPKListingsDeleteallResource =
      Capture "packageName" Text :>
@@ -71,9 +71,9 @@ data EditsAPKListingsDeleteall' = EditsAPKListingsDeleteall'
 --
 -- * 'eapkldaEditId'
 editsAPKListingsDeleteall'
-    :: Text -- ^ 'packageName'
-    -> Int32 -- ^ 'apkVersionCode'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eapkldaPackageName'
+    -> Int32 -- ^ 'eapkldaAPKVersionCode'
+    -> Text -- ^ 'eapkldaEditId'
     -> EditsAPKListingsDeleteall'
 editsAPKListingsDeleteall' pEapkldaPackageName_ pEapkldaAPKVersionCode_ pEapkldaEditId_ =
     EditsAPKListingsDeleteall'

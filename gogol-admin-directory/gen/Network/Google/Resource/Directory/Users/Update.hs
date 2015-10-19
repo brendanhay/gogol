@@ -22,7 +22,7 @@
 --
 -- update user
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersUpdate@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.update@.
 module Network.Google.Resource.Directory.Users.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Users.Update
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersUpdate@ method which the
+-- | A resource alias for @directory.users.update@ method which the
 -- 'UsersUpdate'' request conforms to.
 type UsersUpdateResource =
      "users" :>
@@ -64,8 +64,8 @@ data UsersUpdate' = UsersUpdate'
 --
 -- * 'uuUserKey'
 usersUpdate'
-    :: User -- ^ 'payload'
-    -> Text -- ^ 'userKey'
+    :: User -- ^ 'uuPayload'
+    -> Text -- ^ 'uuUserKey'
     -> UsersUpdate'
 usersUpdate' pUuPayload_ pUuUserKey_ =
     UsersUpdate'

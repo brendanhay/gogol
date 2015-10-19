@@ -22,7 +22,7 @@
 --
 -- List of available elections to query.
 --
--- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicInfoElectionsElectionQuery@.
+-- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @civicinfo.elections.electionQuery@.
 module Network.Google.Resource.CivicInfo.Elections.ElectionQuery
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.CivicInfo.Elections.ElectionQuery
 import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CivicInfoElectionsElectionQuery@ method which the
+-- | A resource alias for @civicinfo.elections.electionQuery@ method which the
 -- 'ElectionsElectionQuery'' request conforms to.
 type ElectionsElectionQueryResource =
      "elections" :>

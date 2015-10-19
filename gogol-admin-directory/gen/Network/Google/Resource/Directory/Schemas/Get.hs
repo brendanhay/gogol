@@ -22,7 +22,7 @@
 --
 -- Retrieve schema
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectorySchemasGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.schemas.get@.
 module Network.Google.Resource.Directory.Schemas.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Schemas.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectorySchemasGet@ method which the
+-- | A resource alias for @directory.schemas.get@ method which the
 -- 'SchemasGet'' request conforms to.
 type SchemasGetResource =
      "customer" :>
@@ -65,8 +65,8 @@ data SchemasGet' = SchemasGet'
 --
 -- * 'sgSchemaKey'
 schemasGet'
-    :: Text -- ^ 'customerId'
-    -> Text -- ^ 'schemaKey'
+    :: Text -- ^ 'sgCustomerId'
+    -> Text -- ^ 'sgSchemaKey'
     -> SchemasGet'
 schemasGet' pSgCustomerId_ pSgSchemaKey_ =
     SchemasGet'

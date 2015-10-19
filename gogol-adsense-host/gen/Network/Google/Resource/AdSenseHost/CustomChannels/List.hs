@@ -22,7 +22,7 @@
 --
 -- List all host custom channels in this AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostCustomChannelsList@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.customchannels.list@.
 module Network.Google.Resource.AdSenseHost.CustomChannels.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.List
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostCustomChannelsList@ method which the
+-- | A resource alias for @adsensehost.customchannels.list@ method which the
 -- 'CustomChannelsList'' request conforms to.
 type CustomChannelsListResource =
      "adclients" :>
@@ -71,7 +71,7 @@ data CustomChannelsList' = CustomChannelsList'
 --
 -- * 'cclMaxResults'
 customChannelsList'
-    :: Text -- ^ 'adClientId'
+    :: Text -- ^ 'cclAdClientId'
     -> CustomChannelsList'
 customChannelsList' pCclAdClientId_ =
     CustomChannelsList'

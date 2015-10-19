@@ -22,7 +22,7 @@
 --
 -- Search for a post.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsSearch@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.search@.
 module Network.Google.Resource.Blogger.Posts.Search
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Blogger.Posts.Search
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostsSearch@ method which the
+-- | A resource alias for @blogger.posts.search@ method which the
 -- 'PostsSearch'' request conforms to.
 type PostsSearchResource =
      "blogs" :>
@@ -76,8 +76,8 @@ data PostsSearch' = PostsSearch'
 --
 -- * 'psFetchBodies'
 postsSearch'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'q'
+    :: Text -- ^ 'psBlogId'
+    -> Text -- ^ 'psQ'
     -> PostsSearch'
 postsSearch' pPsBlogId_ pPsQ_ =
     PostsSearch'

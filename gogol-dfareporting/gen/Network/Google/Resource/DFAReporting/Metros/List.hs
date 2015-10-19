@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of metros.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingMetrosList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.metros.list@.
 module Network.Google.Resource.DFAReporting.Metros.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DFAReporting.Metros.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingMetrosList@ method which the
+-- | A resource alias for @dfareporting.metros.list@ method which the
 -- 'MetrosList'' request conforms to.
 type MetrosListResource =
      "userprofiles" :>
@@ -61,7 +61,7 @@ newtype MetrosList' = MetrosList'
 --
 -- * 'mlProFileId'
 metrosList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'mlProFileId'
     -> MetrosList'
 metrosList' pMlProFileId_ =
     MetrosList'

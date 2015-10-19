@@ -22,7 +22,7 @@
 --
 -- Returns the color definitions for calendars and events.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarColorsGet@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.colors.get@.
 module Network.Google.Resource.Calendar.Colors.Get
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.Calendar.Colors.Get
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarColorsGet@ method which the
+-- | A resource alias for @calendar.colors.get@ method which the
 -- 'ColorsGet'' request conforms to.
 type ColorsGetResource =
      "colors" :>

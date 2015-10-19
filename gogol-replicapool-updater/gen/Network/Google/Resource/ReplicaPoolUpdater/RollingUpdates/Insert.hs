@@ -22,7 +22,7 @@
 --
 -- Inserts and starts a new update.
 --
--- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesInsert@.
+-- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.rollingUpdates.insert@.
 module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Insert
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
--- | A resource alias for @ReplicapoolupdaterRollingUpdatesInsert@ method which the
+-- | A resource alias for @replicapoolupdater.rollingUpdates.insert@ method which the
 -- 'RollingUpdatesInsert'' request conforms to.
 type RollingUpdatesInsertResource =
      Capture "project" Text :>
@@ -71,9 +71,9 @@ data RollingUpdatesInsert' = RollingUpdatesInsert'
 --
 -- * 'ruiPayload'
 rollingUpdatesInsert'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> RollingUpdate -- ^ 'payload'
+    :: Text -- ^ 'ruiProject'
+    -> Text -- ^ 'ruiZone'
+    -> RollingUpdate -- ^ 'ruiPayload'
     -> RollingUpdatesInsert'
 rollingUpdatesInsert' pRuiProject_ pRuiZone_ pRuiPayload_ =
     RollingUpdatesInsert'

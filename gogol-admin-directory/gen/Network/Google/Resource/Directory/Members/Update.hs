@@ -22,7 +22,7 @@
 --
 -- Update membership of a user in the specified group.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMembersUpdate@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.members.update@.
 module Network.Google.Resource.Directory.Members.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Directory.Members.Update
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryMembersUpdate@ method which the
+-- | A resource alias for @directory.members.update@ method which the
 -- 'MembersUpdate'' request conforms to.
 type MembersUpdateResource =
      "groups" :>
@@ -70,9 +70,9 @@ data MembersUpdate' = MembersUpdate'
 --
 -- * 'muPayload'
 membersUpdate'
-    :: Text -- ^ 'memberKey'
-    -> Text -- ^ 'groupKey'
-    -> Member -- ^ 'payload'
+    :: Text -- ^ 'muMemberKey'
+    -> Text -- ^ 'muGroupKey'
+    -> Member -- ^ 'muPayload'
     -> MembersUpdate'
 membersUpdate' pMuMemberKey_ pMuGroupKey_ pMuPayload_ =
     MembersUpdate'

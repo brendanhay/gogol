@@ -22,7 +22,7 @@
 --
 -- Returns a list of the achievement configurations in this application.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationAchievementConfigurationsList@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.achievementConfigurations.list@.
 module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.List
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationAchievementConfigurationsList@ method which the
+-- | A resource alias for @gamesConfiguration.achievementConfigurations.list@ method which the
 -- 'AchievementConfigurationsList'' request conforms to.
 type AchievementConfigurationsListResource =
      "applications" :>
@@ -71,7 +71,7 @@ data AchievementConfigurationsList' = AchievementConfigurationsList'
 --
 -- * 'aclMaxResults'
 achievementConfigurationsList'
-    :: Text -- ^ 'applicationId'
+    :: Text -- ^ 'aclApplicationId'
     -> AchievementConfigurationsList'
 achievementConfigurationsList' pAclApplicationId_ =
     AchievementConfigurationsList'

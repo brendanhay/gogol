@@ -22,7 +22,7 @@
 --
 -- Publishes a Container Version.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVersionsPublish@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.versions.publish@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersVersionsPublish@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.versions.publish@ method which the
 -- 'AccountsContainersVersionsPublish'' request conforms to.
 type AccountsContainersVersionsPublishResource =
      "accounts" :>
@@ -78,9 +78,9 @@ data AccountsContainersVersionsPublish' = AccountsContainersVersionsPublish'
 --
 -- * 'acvpAccountId'
 accountsContainersVersionsPublish'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'containerVersionId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acvpContainerId'
+    -> Text -- ^ 'acvpContainerVersionId'
+    -> Text -- ^ 'acvpAccountId'
     -> AccountsContainersVersionsPublish'
 accountsContainersVersionsPublish' pAcvpContainerId_ pAcvpContainerVersionId_ pAcvpAccountId_ =
     AccountsContainersVersionsPublish'

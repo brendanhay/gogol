@@ -23,7 +23,7 @@
 -- Retrieves a list of conversions from a DoubleClick Search engine
 -- account.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchConversionGet@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @doubleclicksearch.conversion.get@.
 module Network.Google.Resource.DoubleClickSearch.Conversion.Get
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.Get
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClicksearchConversionGet@ method which the
+-- | A resource alias for @doubleclicksearch.conversion.get@ method which the
 -- 'ConversionGet'' request conforms to.
 type ConversionGetResource =
      "agency" :>
@@ -115,13 +115,13 @@ data ConversionGet' = ConversionGet'
 --
 -- * 'cgRowCount'
 conversionGet'
-    :: Int64 -- ^ 'engineAccountId'
-    -> Int64 -- ^ 'agencyId'
-    -> Int64 -- ^ 'advertiserId'
-    -> Int32 -- ^ 'endDate'
-    -> Int32 -- ^ 'startDate'
-    -> Word32 -- ^ 'startRow'
-    -> Int32 -- ^ 'rowCount'
+    :: Int64 -- ^ 'cgEngineAccountId'
+    -> Int64 -- ^ 'cgAgencyId'
+    -> Int64 -- ^ 'cgAdvertiserId'
+    -> Int32 -- ^ 'cgEndDate'
+    -> Int32 -- ^ 'cgStartDate'
+    -> Word32 -- ^ 'cgStartRow'
+    -> Int32 -- ^ 'cgRowCount'
     -> ConversionGet'
 conversionGet' pCgEngineAccountId_ pCgAgencyId_ pCgAdvertiserId_ pCgEndDate_ pCgStartDate_ pCgStartRow_ pCgRowCount_ =
     ConversionGet'

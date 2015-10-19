@@ -22,7 +22,7 @@
 --
 -- Deletes a stored query as well as the associated stored reports.
 --
--- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleClickBidManagerQueriesDeleteQuery@.
+-- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.queries.deletequery@.
 module Network.Google.Resource.DoubleClickBidManager.Queries.DeleteQuery
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DoubleClickBidManager.Queries.DeleteQuery
 import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClickBidManagerQueriesDeleteQuery@ method which the
+-- | A resource alias for @doubleclickbidmanager.queries.deletequery@ method which the
 -- 'QueriesDeleteQuery'' request conforms to.
 type QueriesDeleteQueryResource =
      "query" :>
@@ -59,7 +59,7 @@ newtype QueriesDeleteQuery' = QueriesDeleteQuery'
 --
 -- * 'qdqQueryId'
 queriesDeleteQuery'
-    :: Int64 -- ^ 'queryId'
+    :: Int64 -- ^ 'qdqQueryId'
     -> QueriesDeleteQuery'
 queriesDeleteQuery' pQdqQueryId_ =
     QueriesDeleteQuery'

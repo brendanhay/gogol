@@ -22,7 +22,7 @@
 --
 -- Gets a Container Version.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVersionsGet@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.versions.get@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Get
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersVersionsGet@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.versions.get@ method which the
 -- 'AccountsContainersVersionsGet'' request conforms to.
 type AccountsContainersVersionsGetResource =
      "accounts" :>
@@ -72,9 +72,9 @@ data AccountsContainersVersionsGet' = AccountsContainersVersionsGet'
 --
 -- * 'acvgcAccountId'
 accountsContainersVersionsGet'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'containerVersionId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acvgcContainerId'
+    -> Text -- ^ 'acvgcContainerVersionId'
+    -> Text -- ^ 'acvgcAccountId'
     -> AccountsContainersVersionsGet'
 accountsContainersVersionsGet' pAcvgcContainerId_ pAcvgcContainerVersionId_ pAcvgcAccountId_ =
     AccountsContainersVersionsGet'

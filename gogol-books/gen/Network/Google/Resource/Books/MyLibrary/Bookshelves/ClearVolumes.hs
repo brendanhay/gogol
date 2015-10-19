@@ -22,7 +22,7 @@
 --
 -- Clears all volumes from a bookshelf.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryBookshelvesClearVolumes@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.bookshelves.clearVolumes@.
 module Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryBookshelvesClearVolumes@ method which the
+-- | A resource alias for @books.mylibrary.bookshelves.clearVolumes@ method which the
 -- 'MyLibraryBookshelvesClearVolumes'' request conforms to.
 type MyLibraryBookshelvesClearVolumesResource =
      "mylibrary" :>
@@ -66,7 +66,7 @@ data MyLibraryBookshelvesClearVolumes' = MyLibraryBookshelvesClearVolumes'
 --
 -- * 'mlbcvSource'
 myLibraryBookshelvesClearVolumes'
-    :: Text -- ^ 'shelf'
+    :: Text -- ^ 'mlbcvShelf'
     -> MyLibraryBookshelvesClearVolumes'
 myLibraryBookshelvesClearVolumes' pMlbcvShelf_ =
     MyLibraryBookshelvesClearVolumes'

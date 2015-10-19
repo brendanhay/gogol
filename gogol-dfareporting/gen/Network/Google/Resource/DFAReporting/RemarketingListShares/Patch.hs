@@ -23,7 +23,7 @@
 -- Updates an existing remarketing list share. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingRemarketingListSharesPatch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.remarketingListShares.patch@.
 module Network.Google.Resource.DFAReporting.RemarketingListShares.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.DFAReporting.RemarketingListShares.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingRemarketingListSharesPatch@ method which the
+-- | A resource alias for @dfareporting.remarketingListShares.patch@ method which the
 -- 'RemarketingListSharesPatch'' request conforms to.
 type RemarketingListSharesPatchResource =
      "userprofiles" :>
@@ -73,9 +73,9 @@ data RemarketingListSharesPatch' = RemarketingListSharesPatch'
 --
 -- * 'rlspRemarketingListId'
 remarketingListSharesPatch'
-    :: Int64 -- ^ 'profileId'
-    -> RemarketingListShare -- ^ 'payload'
-    -> Int64 -- ^ 'remarketingListId'
+    :: Int64 -- ^ 'rlspProFileId'
+    -> RemarketingListShare -- ^ 'rlspPayload'
+    -> Int64 -- ^ 'rlspRemarketingListId'
     -> RemarketingListSharesPatch'
 remarketingListSharesPatch' pRlspProFileId_ pRlspPayload_ pRlspRemarketingListId_ =
     RemarketingListSharesPatch'

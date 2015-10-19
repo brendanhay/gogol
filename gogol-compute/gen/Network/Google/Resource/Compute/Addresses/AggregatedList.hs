@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of addresses grouped by scope.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAddressesAggregatedList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.addresses.aggregatedList@.
 module Network.Google.Resource.Compute.Addresses.AggregatedList
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Addresses.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeAddressesAggregatedList@ method which the
+-- | A resource alias for @compute.addresses.aggregatedList@ method which the
 -- 'AddressesAggregatedList'' request conforms to.
 type AddressesAggregatedListResource =
      Capture "project" Text :>
@@ -76,7 +76,7 @@ data AddressesAggregatedList' = AddressesAggregatedList'
 --
 -- * 'aalMaxResults'
 addressesAggregatedList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'aalProject'
     -> AddressesAggregatedList'
 addressesAggregatedList' pAalProject_ =
     AddressesAggregatedList'

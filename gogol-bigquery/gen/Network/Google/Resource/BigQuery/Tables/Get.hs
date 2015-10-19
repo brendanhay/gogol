@@ -24,7 +24,7 @@
 -- return the data in the table, it only returns the table resource, which
 -- describes the structure of this table.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryTablesGet@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @bigquery.tables.get@.
 module Network.Google.Resource.BigQuery.Tables.Get
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.BigQuery.Tables.Get
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigQueryTablesGet@ method which the
+-- | A resource alias for @bigquery.tables.get@ method which the
 -- 'TablesGet'' request conforms to.
 type TablesGetResource =
      "projects" :>
@@ -75,9 +75,9 @@ data TablesGet' = TablesGet'
 --
 -- * 'tgTableId'
 tablesGet'
-    :: Text -- ^ 'datasetId'
-    -> Text -- ^ 'projectId'
-    -> Text -- ^ 'tableId'
+    :: Text -- ^ 'tgDatasetId'
+    -> Text -- ^ 'tgProjectId'
+    -> Text -- ^ 'tgTableId'
     -> TablesGet'
 tablesGet' pTgDatasetId_ pTgProjectId_ pTgTableId_ =
     TablesGet'

@@ -22,7 +22,7 @@
 --
 -- Delete user
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersDelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.delete@.
 module Network.Google.Resource.Directory.Users.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Directory.Users.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersDelete@ method which the
+-- | A resource alias for @directory.users.delete@ method which the
 -- 'UsersDelete'' request conforms to.
 type UsersDeleteResource =
      "users" :>
@@ -59,7 +59,7 @@ newtype UsersDelete' = UsersDelete'
 --
 -- * 'udUserKey'
 usersDelete'
-    :: Text -- ^ 'userKey'
+    :: Text -- ^ 'udUserKey'
     -> UsersDelete'
 usersDelete' pUdUserKey_ =
     UsersDelete'

@@ -22,7 +22,7 @@
 --
 -- Deletes an existing user role.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolesDelete@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userRoles.delete@.
 module Network.Google.Resource.DFAReporting.UserRoles.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.UserRoles.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingUserRolesDelete@ method which the
+-- | A resource alias for @dfareporting.userRoles.delete@ method which the
 -- 'UserRolesDelete'' request conforms to.
 type UserRolesDeleteResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data UserRolesDelete' = UserRolesDelete'
 --
 -- * 'urdId'
 userRolesDelete'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'urdProFileId'
+    -> Int64 -- ^ 'urdId'
     -> UserRolesDelete'
 userRolesDelete' pUrdProFileId_ pUrdId_ =
     UserRolesDelete'

@@ -22,7 +22,7 @@
 --
 -- Gets a dataset by ID.
 --
--- /See:/ < Genomics API Reference> for @GenomicsDatasetsGet@.
+-- /See:/ < Genomics API Reference> for @genomics.datasets.get@.
 module Network.Google.Resource.Genomics.Datasets.Get
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.Datasets.Get
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsDatasetsGet@ method which the
+-- | A resource alias for @genomics.datasets.get@ method which the
 -- 'DatasetsGet'' request conforms to.
 type DatasetsGetResource =
      "v1" :>
@@ -95,7 +95,7 @@ data DatasetsGet' = DatasetsGet'
 --
 -- * 'dgCallback'
 datasetsGet'
-    :: Text -- ^ 'datasetId'
+    :: Text -- ^ 'dgDatasetId'
     -> DatasetsGet'
 datasetsGet' pDgDatasetId_ =
     DatasetsGet'

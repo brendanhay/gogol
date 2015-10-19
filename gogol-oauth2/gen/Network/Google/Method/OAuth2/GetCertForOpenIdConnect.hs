@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference> for @OAuth2GetCertForOpenIdConnect@.
+-- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference> for @oauth2.getCertForOpenIdConnect@.
 module Network.Google.Method.OAuth2.GetCertForOpenIdConnect
     (
     -- * REST Resource
@@ -35,7 +35,7 @@ module Network.Google.Method.OAuth2.GetCertForOpenIdConnect
 import           Network.Google.OAuth2.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @OAuth2GetCertForOpenIdConnect@ method which the
+-- | A resource alias for @oauth2.getCertForOpenIdConnect@ method which the
 -- 'GetCertForOpenIdConnect'' request conforms to.
 type GetCertForOpenIdConnectMethod =
      "oauth2" :>

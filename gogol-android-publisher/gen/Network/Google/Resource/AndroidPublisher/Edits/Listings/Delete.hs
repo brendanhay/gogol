@@ -22,7 +22,7 @@
 --
 -- Deletes the specified localized store listing from an edit.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsListingsDelete@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.listings.delete@.
 module Network.Google.Resource.AndroidPublisher.Edits.Listings.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.Delete
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsListingsDelete@ method which the
+-- | A resource alias for @androidpublisher.edits.listings.delete@ method which the
 -- 'EditsListingsDelete'' request conforms to.
 type EditsListingsDeleteResource =
      Capture "packageName" Text :>
@@ -70,9 +70,9 @@ data EditsListingsDelete' = EditsListingsDelete'
 --
 -- * 'eldEditId'
 editsListingsDelete'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'language'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eldPackageName'
+    -> Text -- ^ 'eldLanguage'
+    -> Text -- ^ 'eldEditId'
     -> EditsListingsDelete'
 editsListingsDelete' pEldPackageName_ pEldLanguage_ pEldEditId_ =
     EditsListingsDelete'

@@ -22,7 +22,7 @@
 --
 -- Retrieves the pages for a blog, optionally including non-LIVE statuses.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesList@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pages.list@.
 module Network.Google.Resource.Blogger.Pages.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Blogger.Pages.List
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPagesList@ method which the
+-- | A resource alias for @blogger.pages.list@ method which the
 -- 'PagesList'' request conforms to.
 type PagesListResource =
      "blogs" :>
@@ -85,7 +85,7 @@ data PagesList' = PagesList'
 --
 -- * 'plMaxResults'
 pagesList'
-    :: Text -- ^ 'blogId'
+    :: Text -- ^ 'plBlogId'
     -> PagesList'
 pagesList' pPlBlogId_ =
     PagesList'

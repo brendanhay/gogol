@@ -22,7 +22,7 @@
 --
 -- Attempt verification of a website or domain.
 --
--- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceInsert@.
+-- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @siteVerification.webResource.insert@.
 module Network.Google.Resource.SiteVerification.WebResource.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.SiteVerification.WebResource.Insert
 import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
--- | A resource alias for @SiteVerificationWebResourceInsert@ method which the
+-- | A resource alias for @siteVerification.webResource.insert@ method which the
 -- 'WebResourceInsert'' request conforms to.
 type WebResourceInsertResource =
      "webResource" :>
@@ -65,8 +65,8 @@ data WebResourceInsert' = WebResourceInsert'
 --
 -- * 'wriVerificationMethod'
 webResourceInsert'
-    :: SiteVerificationWebResourceResource -- ^ 'payload'
-    -> Text -- ^ 'verificationMethod'
+    :: SiteVerificationWebResourceResource -- ^ 'wriPayload'
+    -> Text -- ^ 'wriVerificationMethod'
     -> WebResourceInsert'
 webResourceInsert' pWriPayload_ pWriVerificationMethod_ =
     WebResourceInsert'

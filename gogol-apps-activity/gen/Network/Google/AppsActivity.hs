@@ -26,7 +26,7 @@ module Network.Google.AppsActivity
 
     -- * Resources
 
-    -- ** AppsactivityActivitiesList
+    -- ** appsactivity.activities.list
     , module Network.Google.Resource.AppsActivity.Activities.List
 
     -- * Types

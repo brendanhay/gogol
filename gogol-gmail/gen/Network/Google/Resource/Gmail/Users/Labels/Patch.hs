@@ -22,7 +22,7 @@
 --
 -- Updates the specified label. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersLabelsPatch@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.labels.patch@.
 module Network.Google.Resource.Gmail.Users.Labels.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Gmail.Users.Labels.Patch
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersLabelsPatch@ method which the
+-- | A resource alias for @gmail.users.labels.patch@ method which the
 -- 'UsersLabelsPatch'' request conforms to.
 type UsersLabelsPatchResource =
      Capture "userId" Text :>
@@ -69,8 +69,8 @@ data UsersLabelsPatch' = UsersLabelsPatch'
 --
 -- * 'ulpId'
 usersLabelsPatch'
-    :: Label -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: Label -- ^ 'ulpPayload'
+    -> Text -- ^ 'ulpId'
     -> Text
     -> UsersLabelsPatch'
 usersLabelsPatch' pUlpPayload_ pUlpUserId_ pUlpId_ =

@@ -24,7 +24,7 @@
 -- available to user accounts for your developer console. Only draft quests
 -- may be reset.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementQuestsResetMultipleForAllPlayers@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.quests.resetMultipleForAllPlayers@.
 module Network.Google.Resource.GamesManagement.Quests.ResetMultipleForAllPlayers
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.GamesManagement.Quests.ResetMultipleForAllPlayers
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementQuestsResetMultipleForAllPlayers@ method which the
+-- | A resource alias for @gamesManagement.quests.resetMultipleForAllPlayers@ method which the
 -- 'QuestsResetMultipleForAllPlayers'' request conforms to.
 type QuestsResetMultipleForAllPlayersResource =
      "quests" :>
@@ -65,7 +65,7 @@ newtype QuestsResetMultipleForAllPlayers' = QuestsResetMultipleForAllPlayers'
 --
 -- * 'qrmfapPayload'
 questsResetMultipleForAllPlayers'
-    :: QuestsResetMultipleForAllRequest -- ^ 'payload'
+    :: QuestsResetMultipleForAllRequest -- ^ 'qrmfapPayload'
     -> QuestsResetMultipleForAllPlayers'
 questsResetMultipleForAllPlayers' pQrmfapPayload_ =
     QuestsResetMultipleForAllPlayers'

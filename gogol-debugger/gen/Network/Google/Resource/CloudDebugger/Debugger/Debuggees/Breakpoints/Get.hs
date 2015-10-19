@@ -22,7 +22,7 @@
 --
 -- Gets breakpoint information.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @CloudDebuggerDebuggerDebuggeesBreakpointsGet@.
+-- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.get@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Get
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Get
 import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudDebuggerDebuggerDebuggeesBreakpointsGet@ method which the
+-- | A resource alias for @clouddebugger.debugger.debuggees.breakpoints.get@ method which the
 -- 'DebuggerDebuggeesBreakpointsGet'' request conforms to.
 type DebuggerDebuggeesBreakpointsGetResource =
      "v2" :>
@@ -103,8 +103,8 @@ data DebuggerDebuggeesBreakpointsGet' = DebuggerDebuggeesBreakpointsGet'
 --
 -- * 'ddbgCallback'
 debuggerDebuggeesBreakpointsGet'
-    :: Text -- ^ 'breakpointId'
-    -> Text -- ^ 'debuggeeId'
+    :: Text -- ^ 'ddbgBreakpointId'
+    -> Text -- ^ 'ddbgDebuggeeId'
     -> DebuggerDebuggeesBreakpointsGet'
 debuggerDebuggeesBreakpointsGet' pDdbgBreakpointId_ pDdbgDebuggeeId_ =
     DebuggerDebuggeesBreakpointsGet'

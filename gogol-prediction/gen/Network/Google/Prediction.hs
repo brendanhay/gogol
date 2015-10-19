@@ -27,28 +27,28 @@ module Network.Google.Prediction
 
     -- * Resources
 
-    -- ** PredictionHostedModelsPredict
+    -- ** prediction.hostedmodels.predict
     , module Network.Google.Resource.Prediction.HostedModels.Predict
 
-    -- ** PredictionTrainedModelsAnalyze
+    -- ** prediction.trainedmodels.analyze
     , module Network.Google.Resource.Prediction.TrainedModels.Analyze
 
-    -- ** PredictionTrainedModelsDelete
+    -- ** prediction.trainedmodels.delete
     , module Network.Google.Resource.Prediction.TrainedModels.Delete
 
-    -- ** PredictionTrainedModelsGet
+    -- ** prediction.trainedmodels.get
     , module Network.Google.Resource.Prediction.TrainedModels.Get
 
-    -- ** PredictionTrainedModelsInsert
+    -- ** prediction.trainedmodels.insert
     , module Network.Google.Resource.Prediction.TrainedModels.Insert
 
-    -- ** PredictionTrainedModelsList
+    -- ** prediction.trainedmodels.list
     , module Network.Google.Resource.Prediction.TrainedModels.List
 
-    -- ** PredictionTrainedModelsPredict
+    -- ** prediction.trainedmodels.predict
     , module Network.Google.Resource.Prediction.TrainedModels.Predict
 
-    -- ** PredictionTrainedModelsUpdate
+    -- ** prediction.trainedmodels.update
     , module Network.Google.Resource.Prediction.TrainedModels.Update
 
     -- * Types

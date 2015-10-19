@@ -22,7 +22,7 @@
 --
 -- Deletes a web property-AdWords link.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyAdWordsLinksDelete@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webPropertyAdWordsLinks.delete@.
 module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Dele
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksDelete@ method which the
+-- | A resource alias for @analytics.management.webPropertyAdWordsLinks.delete@ method which the
 -- 'ManagementWebPropertyAdWordsLinksDelete'' request conforms to.
 type ManagementWebPropertyAdWordsLinksDeleteResource
      =
@@ -73,9 +73,9 @@ data ManagementWebPropertyAdWordsLinksDelete' = ManagementWebPropertyAdWordsLink
 --
 -- * 'mwpawldWebPropertyAdWordsLinkId'
 managementWebPropertyAdWordsLinksDelete'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'webPropertyAdWordsLinkId'
+    :: Text -- ^ 'mwpawldWebPropertyId'
+    -> Text -- ^ 'mwpawldAccountId'
+    -> Text -- ^ 'mwpawldWebPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksDelete'
 managementWebPropertyAdWordsLinksDelete' pMwpawldWebPropertyId_ pMwpawldAccountId_ pMwpawldWebPropertyAdWordsLinkId_ =
     ManagementWebPropertyAdWordsLinksDelete'

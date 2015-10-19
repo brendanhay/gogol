@@ -22,7 +22,7 @@
 --
 -- List the jobs of a project
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsList@.
+-- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.jobs.list@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.List
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.List
 import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataflowProjectsJobsList@ method which the
+-- | A resource alias for @dataflow.projects.jobs.list@ method which the
 -- 'ProjectsJobsList'' request conforms to.
 type ProjectsJobsListResource =
      "v1b3" :>
@@ -112,7 +112,7 @@ data ProjectsJobsList' = ProjectsJobsList'
 --
 -- * 'pjlCallback'
 projectsJobsList'
-    :: Text -- ^ 'projectId'
+    :: Text -- ^ 'pjlProjectId'
     -> ProjectsJobsList'
 projectsJobsList' pPjlProjectId_ =
     ProjectsJobsList'

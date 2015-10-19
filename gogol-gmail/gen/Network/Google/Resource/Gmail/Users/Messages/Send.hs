@@ -23,7 +23,7 @@
 -- Sends the specified message to the recipients in the To, Cc, and Bcc
 -- headers.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesSend@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.messages.send@.
 module Network.Google.Resource.Gmail.Users.Messages.Send
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Gmail.Users.Messages.Send
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersMessagesSend@ method which the
+-- | A resource alias for @gmail.users.messages.send@ method which the
 -- 'UsersMessagesSend'' request conforms to.
 type UsersMessagesSendResource =
      Capture "userId" Text :>
@@ -72,8 +72,8 @@ data UsersMessagesSend' = UsersMessagesSend'
 --
 -- * 'umsMedia'
 usersMessagesSend'
-    :: Message -- ^ 'payload'
-    -> Text -- ^ 'media'
+    :: Message -- ^ 'umsPayload'
+    -> Text -- ^ 'umsMedia'
     -> Body
     -> UsersMessagesSend'
 usersMessagesSend' pUmsPayload_ pUmsUserId_ pUmsMedia_ =

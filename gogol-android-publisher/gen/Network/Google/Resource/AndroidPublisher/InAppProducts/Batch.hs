@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherInAppProductsBatch@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.inappproducts.batch@.
 module Network.Google.Resource.AndroidPublisher.InAppProducts.Batch
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.AndroidPublisher.InAppProducts.Batch
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherInAppProductsBatch@ method which the
+-- | A resource alias for @androidpublisher.inappproducts.batch@ method which the
 -- 'InAppProductsBatch'' request conforms to.
 type InAppProductsBatchResource =
      "inappproducts" :>
@@ -58,7 +58,7 @@ newtype InAppProductsBatch' = InAppProductsBatch'
 --
 -- * 'iapbPayload'
 inAppProductsBatch'
-    :: InAppProductsBatchRequest -- ^ 'payload'
+    :: InAppProductsBatchRequest -- ^ 'iapbPayload'
     -> InAppProductsBatch'
 inAppProductsBatch' pIapbPayload_ =
     InAppProductsBatch'

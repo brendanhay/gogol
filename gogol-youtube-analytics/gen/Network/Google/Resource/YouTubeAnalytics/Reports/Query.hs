@@ -22,7 +22,7 @@
 --
 -- Retrieve your YouTube Analytics reports.
 --
--- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsReportsQuery@.
+-- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @youtubeAnalytics.reports.query@.
 module Network.Google.Resource.YouTubeAnalytics.Reports.Query
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.YouTubeAnalytics.Reports.Query
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
--- | A resource alias for @YouTubeAnalyticsReportsQuery@ method which the
+-- | A resource alias for @youtubeAnalytics.reports.query@ method which the
 -- 'ReportsQuery'' request conforms to.
 type ReportsQueryResource =
      "reports" :>
@@ -104,10 +104,10 @@ data ReportsQuery' = ReportsQuery'
 --
 -- * 'rqStartDate'
 reportsQuery'
-    :: Text -- ^ 'metrics'
-    -> Text -- ^ 'ids'
-    -> Text -- ^ 'end-date'
-    -> Text -- ^ 'start-date'
+    :: Text -- ^ 'rqMetrics'
+    -> Text -- ^ 'rqIds'
+    -> Text -- ^ 'rqEndDate'
+    -> Text -- ^ 'rqStartDate'
     -> ReportsQuery'
 reportsQuery' pRqMetrics_ pRqIds_ pRqEndDate_ pRqStartDate_ =
     ReportsQuery'

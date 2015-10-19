@@ -22,7 +22,7 @@
 --
 -- Enumerate Changes to a ResourceRecordSet collection.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSChangesList@.
+-- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.changes.list@.
 module Network.Google.Resource.DNS.Changes.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.DNS.Changes.List
 import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DNSChangesList@ method which the
+-- | A resource alias for @dns.changes.list@ method which the
 -- 'ChangesList'' request conforms to.
 type ChangesListResource =
      Capture "project" Text :>
@@ -86,8 +86,8 @@ data ChangesList' = ChangesList'
 --
 -- * 'clSortBy'
 changesList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'managedZone'
+    :: Text -- ^ 'clProject'
+    -> Text -- ^ 'clManagedZone'
     -> ChangesList'
 changesList' pClProject_ pClManagedZone_ =
     ChangesList'

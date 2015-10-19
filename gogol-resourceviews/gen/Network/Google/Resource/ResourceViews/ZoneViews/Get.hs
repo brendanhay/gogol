@@ -22,7 +22,7 @@
 --
 -- Get the information of a zonal resource view.
 --
--- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsGet@.
+-- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @resourceviews.zoneViews.get@.
 module Network.Google.Resource.ResourceViews.ZoneViews.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.ResourceViews.ZoneViews.Get
 import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
--- | A resource alias for @ResourceviewsZoneViewsGet@ method which the
+-- | A resource alias for @resourceviews.zoneViews.get@ method which the
 -- 'ZoneViewsGet'' request conforms to.
 type ZoneViewsGetResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data ZoneViewsGet' = ZoneViewsGet'
 --
 -- * 'zvgZone'
 zoneViewsGet'
-    :: Text -- ^ 'resourceView'
-    -> Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'zvgResourceView'
+    -> Text -- ^ 'zvgProject'
+    -> Text -- ^ 'zvgZone'
     -> ZoneViewsGet'
 zoneViewsGet' pZvgResourceView_ pZvgProject_ pZvgZone_ =
     ZoneViewsGet'

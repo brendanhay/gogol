@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of workers in a team.
 --
--- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateWorkerList@.
+-- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @coordinate.worker.list@.
 module Network.Google.Resource.Coordinate.Worker.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Coordinate.Worker.List
 import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CoordinateWorkerList@ method which the
+-- | A resource alias for @coordinate.worker.list@ method which the
 -- 'WorkerList'' request conforms to.
 type WorkerListResource =
      "teams" :>
@@ -61,7 +61,7 @@ newtype WorkerList' = WorkerList'
 --
 -- * 'wlTeamId'
 workerList'
-    :: Text -- ^ 'teamId'
+    :: Text -- ^ 'wlTeamId'
     -> WorkerList'
 workerList' pWlTeamId_ =
     WorkerList'

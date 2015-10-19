@@ -22,7 +22,7 @@
 --
 -- Add notes to the order
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceNotesInsert@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.marketplacenotes.insert@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.Insert
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerMarketplaceNotesInsert@ method which the
+-- | A resource alias for @adexchangebuyer.marketplacenotes.insert@ method which the
 -- 'MarketplaceNotesInsert'' request conforms to.
 type MarketplaceNotesInsertResource =
      "marketplaceOrders" :>
@@ -67,8 +67,8 @@ data MarketplaceNotesInsert' = MarketplaceNotesInsert'
 --
 -- * 'mniOrderId'
 marketplaceNotesInsert'
-    :: AddOrderNotesRequest -- ^ 'payload'
-    -> Text -- ^ 'orderId'
+    :: AddOrderNotesRequest -- ^ 'mniPayload'
+    -> Text -- ^ 'mniOrderId'
     -> MarketplaceNotesInsert'
 marketplaceNotesInsert' pMniPayload_ pMniOrderId_ =
     MarketplaceNotesInsert'

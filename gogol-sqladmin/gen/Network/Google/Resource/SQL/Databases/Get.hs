@@ -23,7 +23,7 @@
 -- Retrieves a resource containing information about a database inside a
 -- Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLDatabasesGet@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.databases.get@.
 module Network.Google.Resource.SQL.Databases.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.SQL.Databases.Get
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLDatabasesGet@ method which the
+-- | A resource alias for @sql.databases.get@ method which the
 -- 'DatabasesGet'' request conforms to.
 type DatabasesGetResource =
      "projects" :>
@@ -73,9 +73,9 @@ data DatabasesGet' = DatabasesGet'
 --
 -- * 'dgInstance'
 databasesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'database'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'dgProject'
+    -> Text -- ^ 'dgDatabase'
+    -> Text -- ^ 'dgInstance'
     -> DatabasesGet'
 databasesGet' pDgProject_ pDgDatabase_ pDgInstance_ =
     DatabasesGet'

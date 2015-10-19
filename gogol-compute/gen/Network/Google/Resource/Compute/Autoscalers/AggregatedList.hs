@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of autoscalers grouped by scope.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAutoscalersAggregatedList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.autoscalers.aggregatedList@.
 module Network.Google.Resource.Compute.Autoscalers.AggregatedList
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Autoscalers.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeAutoscalersAggregatedList@ method which the
+-- | A resource alias for @compute.autoscalers.aggregatedList@ method which the
 -- 'AutoscalersAggregatedList'' request conforms to.
 type AutoscalersAggregatedListResource =
      Capture "project" Text :>
@@ -76,7 +76,7 @@ data AutoscalersAggregatedList' = AutoscalersAggregatedList'
 --
 -- * 'aalaMaxResults'
 autoscalersAggregatedList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'aalaProject'
     -> AutoscalersAggregatedList'
 autoscalersAggregatedList' pAalaProject_ =
     AutoscalersAggregatedList'

@@ -22,7 +22,7 @@
 --
 -- Deletes a comment.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveCommentsDelete@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.comments.delete@.
 module Network.Google.Resource.Drive.Comments.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Drive.Comments.Delete
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveCommentsDelete@ method which the
+-- | A resource alias for @drive.comments.delete@ method which the
 -- 'CommentsDelete'' request conforms to.
 type CommentsDeleteResource =
      "files" :>
@@ -65,8 +65,8 @@ data CommentsDelete' = CommentsDelete'
 --
 -- * 'cdCommentId'
 commentsDelete'
-    :: Text -- ^ 'fileId'
-    -> Text -- ^ 'commentId'
+    :: Text -- ^ 'cdFileId'
+    -> Text -- ^ 'cdCommentId'
     -> CommentsDelete'
 commentsDelete' pCdFileId_ pCdCommentId_ =
     CommentsDelete'

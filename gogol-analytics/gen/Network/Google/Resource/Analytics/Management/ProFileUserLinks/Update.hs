@@ -22,7 +22,7 @@
 --
 -- Updates permissions for an existing user on the given view (profile).
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFileUserLinksUpdate@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.profileUserLinks.update@.
 module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Update
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFileUserLinksUpdate@ method which the
+-- | A resource alias for @analytics.management.profileUserLinks.update@ method which the
 -- 'ManagementProFileUserLinksUpdate'' request conforms to.
 type ManagementProFileUserLinksUpdateResource =
      "management" :>
@@ -84,11 +84,11 @@ data ManagementProFileUserLinksUpdate' = ManagementProFileUserLinksUpdate'
 --
 -- * 'mpfuluLinkId'
 managementProFileUserLinksUpdate'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> EntityUserLink -- ^ 'payload'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'linkId'
+    :: Text -- ^ 'mpfuluWebPropertyId'
+    -> Text -- ^ 'mpfuluProFileId'
+    -> EntityUserLink -- ^ 'mpfuluPayload'
+    -> Text -- ^ 'mpfuluAccountId'
+    -> Text -- ^ 'mpfuluLinkId'
     -> ManagementProFileUserLinksUpdate'
 managementProFileUserLinksUpdate' pMpfuluWebPropertyId_ pMpfuluProFileId_ pMpfuluPayload_ pMpfuluAccountId_ pMpfuluLinkId_ =
     ManagementProFileUserLinksUpdate'

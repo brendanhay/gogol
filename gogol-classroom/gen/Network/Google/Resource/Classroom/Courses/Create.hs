@@ -29,7 +29,7 @@
 -- * UserGroupsMembershipLimitReached * \`ALREADY_EXISTS\` if an alias was
 -- specified in the \`id\` and already exists.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesCreate@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.create@.
 module Network.Google.Resource.Classroom.Courses.Create
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ module Network.Google.Resource.Classroom.Courses.Create
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesCreate@ method which the
+-- | A resource alias for @classroom.courses.create@ method which the
 -- 'CoursesCreate'' request conforms to.
 type CoursesCreateResource =
      "v1" :>
@@ -109,7 +109,7 @@ data CoursesCreate' = CoursesCreate'
 --
 -- * 'ccCallback'
 coursesCreate'
-    :: Course -- ^ 'payload'
+    :: Course -- ^ 'ccPayload'
     -> CoursesCreate'
 coursesCreate' pCcPayload_ =
     CoursesCreate'

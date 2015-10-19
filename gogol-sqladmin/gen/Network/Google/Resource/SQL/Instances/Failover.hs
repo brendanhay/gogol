@@ -22,7 +22,7 @@
 --
 -- Failover the instance to its failover replica instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesFailover@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.failover@.
 module Network.Google.Resource.SQL.Instances.Failover
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.SQL.Instances.Failover
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesFailover@ method which the
+-- | A resource alias for @sql.instances.failover@ method which the
 -- 'InstancesFailover'' request conforms to.
 type InstancesFailoverResource =
      "projects" :>
@@ -72,9 +72,9 @@ data InstancesFailover' = InstancesFailover'
 --
 -- * 'ifInstance'
 instancesFailover'
-    :: Text -- ^ 'project'
-    -> InstancesFailoverRequest -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'ifProject'
+    -> InstancesFailoverRequest -- ^ 'ifPayload'
+    -> Text -- ^ 'ifInstance'
     -> InstancesFailover'
 instancesFailover' pIfProject_ pIfPayload_ pIfInstance_ =
     InstancesFailover'

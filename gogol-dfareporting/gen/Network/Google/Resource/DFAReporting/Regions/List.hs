@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of regions.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingRegionsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.regions.list@.
 module Network.Google.Resource.DFAReporting.Regions.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DFAReporting.Regions.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingRegionsList@ method which the
+-- | A resource alias for @dfareporting.regions.list@ method which the
 -- 'RegionsList'' request conforms to.
 type RegionsListResource =
      "userprofiles" :>
@@ -61,7 +61,7 @@ newtype RegionsList' = RegionsList'
 --
 -- * 'rlProFileId'
 regionsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'rlProFileId'
     -> RegionsList'
 regionsList' pRlProFileId_ =
     RegionsList'

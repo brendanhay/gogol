@@ -22,7 +22,7 @@
 --
 -- Deletes an existing version.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesVersionsDelete@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @appengine.apps.modules.versions.delete@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Delete
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Delete
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppEngineAppsModulesVersionsDelete@ method which the
+-- | A resource alias for @appengine.apps.modules.versions.delete@ method which the
 -- 'AppsModulesVersionsDelete'' request conforms to.
 type AppsModulesVersionsDeleteResource =
      "v1beta4" :>
@@ -108,9 +108,9 @@ data AppsModulesVersionsDelete' = AppsModulesVersionsDelete'
 --
 -- * 'amvdCallback'
 appsModulesVersionsDelete'
-    :: Text -- ^ 'versionsId'
-    -> Text -- ^ 'modulesId'
-    -> Text -- ^ 'appsId'
+    :: Text -- ^ 'amvdVersionsId'
+    -> Text -- ^ 'amvdModulesId'
+    -> Text -- ^ 'amvdAppsId'
     -> AppsModulesVersionsDelete'
 appsModulesVersionsDelete' pAmvdVersionsId_ pAmvdModulesId_ pAmvdAppsId_ =
     AppsModulesVersionsDelete'

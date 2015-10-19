@@ -23,7 +23,7 @@
 -- Retrieves the list of disk type resources available to the specified
 -- project.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDiskTypesList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.diskTypes.list@.
 module Network.Google.Resource.Compute.DiskTypes.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.DiskTypes.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeDiskTypesList@ method which the
+-- | A resource alias for @compute.diskTypes.list@ method which the
 -- 'DiskTypesList'' request conforms to.
 type DiskTypesListResource =
      Capture "project" Text :>
@@ -82,8 +82,8 @@ data DiskTypesList' = DiskTypesList'
 --
 -- * 'dtlMaxResults'
 diskTypesList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'dtlProject'
+    -> Text -- ^ 'dtlZone'
     -> DiskTypesList'
 diskTypesList' pDtlProject_ pDtlZone_ =
     DiskTypesList'

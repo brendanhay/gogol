@@ -26,7 +26,7 @@
 -- if no student of this course has the requested ID or if the course does
 -- not exist.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesStudentsDelete@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.students.delete@.
 module Network.Google.Resource.Classroom.Courses.Students.Delete
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.Classroom.Courses.Students.Delete
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesStudentsDelete@ method which the
+-- | A resource alias for @classroom.courses.students.delete@ method which the
 -- 'CoursesStudentsDelete'' request conforms to.
 type CoursesStudentsDeleteResource =
      "v1" :>
@@ -109,8 +109,8 @@ data CoursesStudentsDelete' = CoursesStudentsDelete'
 --
 -- * 'csdCallback'
 coursesStudentsDelete'
-    :: Text -- ^ 'courseId'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'csdCourseId'
+    -> Text -- ^ 'csdUserId'
     -> CoursesStudentsDelete'
 coursesStudentsDelete' pCsdCourseId_ pCsdUserId_ =
     CoursesStudentsDelete'

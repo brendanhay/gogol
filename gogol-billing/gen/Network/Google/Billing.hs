@@ -27,19 +27,19 @@ module Network.Google.Billing
 
     -- * Resources
 
-    -- ** CloudBillingBillingAccountsGet
+    -- ** cloudbilling.billingAccounts.get
     , module Network.Google.Resource.CloudBilling.BillingAccounts.Get
 
-    -- ** CloudBillingBillingAccountsList
+    -- ** cloudbilling.billingAccounts.list
     , module Network.Google.Resource.CloudBilling.BillingAccounts.List
 
-    -- ** CloudBillingBillingAccountsProjectsList
+    -- ** cloudbilling.billingAccounts.projects.list
     , module Network.Google.Resource.CloudBilling.BillingAccounts.Projects.List
 
-    -- ** CloudBillingProjectsGetBillingInfo
+    -- ** cloudbilling.projects.getBillingInfo
     , module Network.Google.Resource.CloudBilling.Projects.GetBillingInfo
 
-    -- ** CloudBillingProjectsUpdateBillingInfo
+    -- ** cloudbilling.projects.updateBillingInfo
     , module Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
 
     -- * Types

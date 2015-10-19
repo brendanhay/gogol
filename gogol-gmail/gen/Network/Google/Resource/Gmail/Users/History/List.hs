@@ -23,7 +23,7 @@
 -- Lists the history of all changes to the given mailbox. History results
 -- are returned in chronological order (increasing historyId).
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersHistoryList@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.history.list@.
 module Network.Google.Resource.Gmail.Users.History.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Gmail.Users.History.List
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersHistoryList@ method which the
+-- | A resource alias for @gmail.users.history.list@ method which the
 -- 'UsersHistoryList'' request conforms to.
 type UsersHistoryListResource =
      Capture "userId" Text :>

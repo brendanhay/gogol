@@ -22,7 +22,7 @@
 --
 -- Deletes a product from your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentProductsDelete@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.products.delete@.
 module Network.Google.Resource.Content.Products.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Products.Delete
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentProductsDelete@ method which the
+-- | A resource alias for @content.products.delete@ method which the
 -- 'ProductsDelete'' request conforms to.
 type ProductsDeleteResource =
      Capture "merchantId" Word64 :>
@@ -69,8 +69,8 @@ data ProductsDelete' = ProductsDelete'
 --
 -- * 'pdDryRun'
 productsDelete'
-    :: Word64 -- ^ 'merchantId'
-    -> Text -- ^ 'productId'
+    :: Word64 -- ^ 'pdMerchantId'
+    -> Text -- ^ 'pdProductId'
     -> ProductsDelete'
 productsDelete' pPdMerchantId_ pPdProductId_ =
     ProductsDelete'

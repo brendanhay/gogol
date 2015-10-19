@@ -22,7 +22,7 @@
 --
 -- Inserts a new link.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANLinksInsert@.
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @gan.links.insert@.
 module Network.Google.Resource.GAN.Links.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.GAN.Links.Insert
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GANLinksInsert@ method which the
+-- | A resource alias for @gan.links.insert@ method which the
 -- 'LinksInsert'' request conforms to.
 type LinksInsertResource =
      Capture "role" LinksInsertRole :>
@@ -69,9 +69,9 @@ data LinksInsert' = LinksInsert'
 --
 -- * 'liRole'
 linksInsert'
-    :: Link -- ^ 'payload'
-    -> Text -- ^ 'roleId'
-    -> LinksInsertRole -- ^ 'role'
+    :: Link -- ^ 'liPayload'
+    -> Text -- ^ 'liRoleId'
+    -> LinksInsertRole -- ^ 'liRole'
     -> LinksInsert'
 linksInsert' pLiPayload_ pLiRoleId_ pLiRole_ =
     LinksInsert'

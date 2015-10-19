@@ -252,7 +252,7 @@ newtype MachineTypeAggregatedListItems = MachineTypeAggregatedListItems
 --
 -- * 'mtaliAddtional'
 machineTypeAggregatedListItems
-    :: HashMap Text MachineTypesScopedList -- ^ 'addtional'
+    :: HashMap Text MachineTypesScopedList -- ^ 'mtaliAddtional'
     -> MachineTypeAggregatedListItems
 machineTypeAggregatedListItems pMtaliAddtional_ =
     MachineTypeAggregatedListItems
@@ -289,7 +289,7 @@ newtype DiskTypeAggregatedListItems = DiskTypeAggregatedListItems
 --
 -- * 'dtaliAddtional'
 diskTypeAggregatedListItems
-    :: HashMap Text DiskTypesScopedList -- ^ 'addtional'
+    :: HashMap Text DiskTypesScopedList -- ^ 'dtaliAddtional'
     -> DiskTypeAggregatedListItems
 diskTypeAggregatedListItems pDtaliAddtional_ =
     DiskTypeAggregatedListItems
@@ -550,7 +550,7 @@ newtype AutoscalerAggregatedListItems = AutoscalerAggregatedListItems
 --
 -- * 'aaliAddtional'
 autoscalerAggregatedListItems
-    :: HashMap Text AutoscalersScopedList -- ^ 'addtional'
+    :: HashMap Text AutoscalersScopedList -- ^ 'aaliAddtional'
     -> AutoscalerAggregatedListItems
 autoscalerAggregatedListItems pAaliAddtional_ =
     AutoscalerAggregatedListItems
@@ -1862,7 +1862,7 @@ newtype InstanceGroupAggregatedListItems = InstanceGroupAggregatedListItems
 --
 -- * 'igaliAddtional'
 instanceGroupAggregatedListItems
-    :: HashMap Text InstanceGroupsScopedList -- ^ 'addtional'
+    :: HashMap Text InstanceGroupsScopedList -- ^ 'igaliAddtional'
     -> InstanceGroupAggregatedListItems
 instanceGroupAggregatedListItems pIgaliAddtional_ =
     InstanceGroupAggregatedListItems
@@ -4894,7 +4894,7 @@ newtype InstanceAggregatedListItems = InstanceAggregatedListItems
 --
 -- * 'ialiAddtional'
 instanceAggregatedListItems
-    :: HashMap Text InstancesScopedList -- ^ 'addtional'
+    :: HashMap Text InstancesScopedList -- ^ 'ialiAddtional'
     -> InstanceAggregatedListItems
 instanceAggregatedListItems pIaliAddtional_ =
     InstanceAggregatedListItems
@@ -6994,7 +6994,7 @@ newtype TargetInstanceAggregatedListItems = TargetInstanceAggregatedListItems
 --
 -- * 'tialiAddtional'
 targetInstanceAggregatedListItems
-    :: HashMap Text TargetInstancesScopedList -- ^ 'addtional'
+    :: HashMap Text TargetInstancesScopedList -- ^ 'tialiAddtional'
     -> TargetInstanceAggregatedListItems
 targetInstanceAggregatedListItems pTialiAddtional_ =
     TargetInstanceAggregatedListItems
@@ -8019,7 +8019,7 @@ newtype DiskAggregatedListItems = DiskAggregatedListItems
 --
 -- * 'daliAddtional'
 diskAggregatedListItems
-    :: HashMap Text DisksScopedList -- ^ 'addtional'
+    :: HashMap Text DisksScopedList -- ^ 'daliAddtional'
     -> DiskAggregatedListItems
 diskAggregatedListItems pDaliAddtional_ =
     DiskAggregatedListItems
@@ -8289,7 +8289,7 @@ newtype InstanceGroupManagerAggregatedListItems = InstanceGroupManagerAggregated
 --
 -- * 'igmaliAddtional'
 instanceGroupManagerAggregatedListItems
-    :: HashMap Text InstanceGroupManagersScopedList -- ^ 'addtional'
+    :: HashMap Text InstanceGroupManagersScopedList -- ^ 'igmaliAddtional'
     -> InstanceGroupManagerAggregatedListItems
 instanceGroupManagerAggregatedListItems pIgmaliAddtional_ =
     InstanceGroupManagerAggregatedListItems
@@ -8639,7 +8639,7 @@ newtype ForwardingRuleAggregatedListItems = ForwardingRuleAggregatedListItems
 --
 -- * 'fraliAddtional'
 forwardingRuleAggregatedListItems
-    :: HashMap Text ForwardingRulesScopedList -- ^ 'addtional'
+    :: HashMap Text ForwardingRulesScopedList -- ^ 'fraliAddtional'
     -> ForwardingRuleAggregatedListItems
 forwardingRuleAggregatedListItems pFraliAddtional_ =
     ForwardingRuleAggregatedListItems
@@ -8677,7 +8677,7 @@ newtype OperationAggregatedListItems = OperationAggregatedListItems
 --
 -- * 'oaliAddtional'
 operationAggregatedListItems
-    :: HashMap Text OperationsScopedList -- ^ 'addtional'
+    :: HashMap Text OperationsScopedList -- ^ 'oaliAddtional'
     -> OperationAggregatedListItems
 operationAggregatedListItems pOaliAddtional_ =
     OperationAggregatedListItems
@@ -9004,7 +9004,7 @@ newtype TargetPoolAggregatedListItems = TargetPoolAggregatedListItems
 --
 -- * 'tpaliAddtional'
 targetPoolAggregatedListItems
-    :: HashMap Text TargetPoolsScopedList -- ^ 'addtional'
+    :: HashMap Text TargetPoolsScopedList -- ^ 'tpaliAddtional'
     -> TargetPoolAggregatedListItems
 targetPoolAggregatedListItems pTpaliAddtional_ =
     TargetPoolAggregatedListItems
@@ -9091,7 +9091,7 @@ newtype AddressAggregatedListItems = AddressAggregatedListItems
 --
 -- * 'aAddtional'
 addressAggregatedListItems
-    :: HashMap Text AddressesScopedList -- ^ 'addtional'
+    :: HashMap Text AddressesScopedList -- ^ 'aAddtional'
     -> AddressAggregatedListItems
 addressAggregatedListItems pAAddtional_ =
     AddressAggregatedListItems
@@ -11804,7 +11804,7 @@ newtype TargetVPNGatewayAggregatedListItems = TargetVPNGatewayAggregatedListItem
 --
 -- * 'tvgaliAddtional'
 targetVPNGatewayAggregatedListItems
-    :: HashMap Text TargetVPNGatewaysScopedList -- ^ 'addtional'
+    :: HashMap Text TargetVPNGatewaysScopedList -- ^ 'tvgaliAddtional'
     -> TargetVPNGatewayAggregatedListItems
 targetVPNGatewayAggregatedListItems pTvgaliAddtional_ =
     TargetVPNGatewayAggregatedListItems
@@ -15066,7 +15066,7 @@ newtype VPNTunnelAggregatedListItems = VPNTunnelAggregatedListItems
 --
 -- * 'vtaliAddtional'
 vpnTunnelAggregatedListItems
-    :: HashMap Text VPNTunnelsScopedList -- ^ 'addtional'
+    :: HashMap Text VPNTunnelsScopedList -- ^ 'vtaliAddtional'
     -> VPNTunnelAggregatedListItems
 vpnTunnelAggregatedListItems pVtaliAddtional_ =
     VPNTunnelAggregatedListItems

@@ -22,7 +22,7 @@
 --
 -- Upload a file to a raster asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRastersFilesInsert@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.rasters.files.insert@.
 module Network.Google.Resource.MapsEngine.Rasters.Files.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.MapsEngine.Rasters.Files.Insert
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRastersFilesInsert@ method which the
+-- | A resource alias for @mapsengine.rasters.files.insert@ method which the
 -- 'RastersFilesInsert'' request conforms to.
 type RastersFilesInsertResource =
      "rasters" :>
@@ -70,9 +70,9 @@ data RastersFilesInsert' = RastersFilesInsert'
 --
 -- * 'rfiFilename'
 rastersFilesInsert'
-    :: Body -- ^ 'media'
-    -> Text -- ^ 'id'
-    -> Text -- ^ 'filename'
+    :: Body -- ^ 'rfiMedia'
+    -> Text -- ^ 'rfiId'
+    -> Text -- ^ 'rfiFilename'
     -> RastersFilesInsert'
 rastersFilesInsert' pRfiMedia_ pRfiId_ pRfiFilename_ =
     RastersFilesInsert'

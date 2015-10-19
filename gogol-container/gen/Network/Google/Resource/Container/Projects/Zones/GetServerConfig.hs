@@ -22,7 +22,7 @@
 --
 -- Returns configuration info about the Container Engine service.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @ContainerProjectsZonesGetServerConfig@.
+-- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.getServerconfig@.
 module Network.Google.Resource.Container.Projects.Zones.GetServerConfig
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Container.Projects.Zones.GetServerConfig
 import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ContainerProjectsZonesGetServerConfig@ method which the
+-- | A resource alias for @container.projects.zones.getServerconfig@ method which the
 -- 'ProjectsZonesGetServerConfig'' request conforms to.
 type ProjectsZonesGetServerConfigResource =
      "v1" :>
@@ -103,8 +103,8 @@ data ProjectsZonesGetServerConfig' = ProjectsZonesGetServerConfig'
 --
 -- * 'pzgscCallback'
 projectsZonesGetServerConfig'
-    :: Text -- ^ 'zone'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'pzgscZone'
+    -> Text -- ^ 'pzgscProjectId'
     -> ProjectsZonesGetServerConfig'
 projectsZonesGetServerConfig' pPzgscZone_ pPzgscProjectId_ =
     ProjectsZonesGetServerConfig'

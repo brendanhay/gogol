@@ -22,7 +22,7 @@
 --
 -- Updates an existing account user profile.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAccountUserProFilesUpdate@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accountUserProfiles.update@.
 module Network.Google.Resource.DFAReporting.AccountUserProFiles.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.AccountUserProFiles.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAccountUserProFilesUpdate@ method which the
+-- | A resource alias for @dfareporting.accountUserProfiles.update@ method which the
 -- 'AccountUserProFilesUpdate'' request conforms to.
 type AccountUserProFilesUpdateResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data AccountUserProFilesUpdate' = AccountUserProFilesUpdate'
 --
 -- * 'aupfuPayload'
 accountUserProFilesUpdate'
-    :: Int64 -- ^ 'profileId'
-    -> AccountUserProFile -- ^ 'payload'
+    :: Int64 -- ^ 'aupfuProFileId'
+    -> AccountUserProFile -- ^ 'aupfuPayload'
     -> AccountUserProFilesUpdate'
 accountUserProFilesUpdate' pAupfuProFileId_ pAupfuPayload_ =
     AccountUserProFilesUpdate'

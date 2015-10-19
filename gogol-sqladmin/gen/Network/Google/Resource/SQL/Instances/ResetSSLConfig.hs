@@ -25,7 +25,7 @@
 -- instance is restarted. Existing instances without a server certificate
 -- will need to call this once to set a server certificate.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesResetSSLConfig@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.resetSslConfig@.
 module Network.Google.Resource.SQL.Instances.ResetSSLConfig
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.SQL.Instances.ResetSSLConfig
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesResetSSLConfig@ method which the
+-- | A resource alias for @sql.instances.resetSslConfig@ method which the
 -- 'InstancesResetSSLConfig'' request conforms to.
 type InstancesResetSSLConfigResource =
      "projects" :>
@@ -72,8 +72,8 @@ data InstancesResetSSLConfig' = InstancesResetSSLConfig'
 --
 -- * 'irscInstance'
 instancesResetSSLConfig'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'irscProject'
+    -> Text -- ^ 'irscInstance'
     -> InstancesResetSSLConfig'
 instancesResetSSLConfig' pIrscProject_ pIrscInstance_ =
     InstancesResetSSLConfig'

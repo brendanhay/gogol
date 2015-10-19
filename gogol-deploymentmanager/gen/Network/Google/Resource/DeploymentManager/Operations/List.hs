@@ -22,7 +22,7 @@
 --
 -- Lists all operations for a project.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerOperationsList@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @deploymentmanager.operations.list@.
 module Network.Google.Resource.DeploymentManager.Operations.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.DeploymentManager.Operations.List
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerOperationsList@ method which the
+-- | A resource alias for @deploymentmanager.operations.list@ method which the
 -- 'OperationsList'' request conforms to.
 type OperationsListResource =
      Capture "project" Text :>
@@ -76,7 +76,7 @@ data OperationsList' = OperationsList'
 --
 -- * 'olMaxResults'
 operationsList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'olProject'
     -> OperationsList'
 operationsList' pOlProject_ =
     OperationsList'

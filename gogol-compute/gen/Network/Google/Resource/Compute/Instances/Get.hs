@@ -22,7 +22,7 @@
 --
 -- Returns the specified instance resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.get@.
 module Network.Google.Resource.Compute.Instances.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.Instances.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesGet@ method which the
+-- | A resource alias for @compute.instances.get@ method which the
 -- 'InstancesGet'' request conforms to.
 type InstancesGetResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data InstancesGet' = InstancesGet'
 --
 -- * 'igInstance'
 instancesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'igProject'
+    -> Text -- ^ 'igZone'
+    -> Text -- ^ 'igInstance'
     -> InstancesGet'
 instancesGet' pIgProject_ pIgZone_ pIgInstance_ =
     InstancesGet'

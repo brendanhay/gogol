@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of processed batch reports.
 --
--- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsBatchReportsList@.
+-- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @youtubeAnalytics.batchReports.list@.
 module Network.Google.Resource.YouTubeAnalytics.BatchReports.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTubeAnalytics.BatchReports.List
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
--- | A resource alias for @YouTubeAnalyticsBatchReportsList@ method which the
+-- | A resource alias for @youtubeAnalytics.batchReports.list@ method which the
 -- 'BatchReportsList'' request conforms to.
 type BatchReportsListResource =
      "batchReports" :>
@@ -65,8 +65,8 @@ data BatchReportsList' = BatchReportsList'
 --
 -- * 'brlOnBehalfOfContentOwner'
 batchReportsList'
-    :: Text -- ^ 'batchReportDefinitionId'
-    -> Text -- ^ 'onBehalfOfContentOwner'
+    :: Text -- ^ 'brlBatchReportDefinitionId'
+    -> Text -- ^ 'brlOnBehalfOfContentOwner'
     -> BatchReportsList'
 batchReportsList' pBrlBatchReportDefinitionId_ pBrlOnBehalfOfContentOwner_ =
     BatchReportsList'

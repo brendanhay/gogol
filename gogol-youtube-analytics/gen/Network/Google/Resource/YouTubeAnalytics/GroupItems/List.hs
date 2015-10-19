@@ -23,7 +23,7 @@
 -- Returns a collection of group items that match the API request
 -- parameters.
 --
--- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsGroupItemsList@.
+-- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @youtubeAnalytics.groupItems.list@.
 module Network.Google.Resource.YouTubeAnalytics.GroupItems.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.YouTubeAnalytics.GroupItems.List
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
--- | A resource alias for @YouTubeAnalyticsGroupItemsList@ method which the
+-- | A resource alias for @youtubeAnalytics.groupItems.list@ method which the
 -- 'GroupItemsList'' request conforms to.
 type GroupItemsListResource =
      "groupItems" :>
@@ -67,7 +67,7 @@ data GroupItemsList' = GroupItemsList'
 --
 -- * 'gilGroupId'
 groupItemsList'
-    :: Text -- ^ 'groupId'
+    :: Text -- ^ 'gilGroupId'
     -> GroupItemsList'
 groupItemsList' pGilGroupId_ =
     GroupItemsList'

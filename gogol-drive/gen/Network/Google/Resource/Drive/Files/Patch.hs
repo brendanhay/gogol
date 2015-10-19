@@ -23,7 +23,7 @@
 -- Updates file metadata and\/or content. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesPatch@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.patch@.
 module Network.Google.Resource.Drive.Files.Patch
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ module Network.Google.Resource.Drive.Files.Patch
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesPatch@ method which the
+-- | A resource alias for @drive.files.patch@ method which the
 -- 'FilesPatch'' request conforms to.
 type FilesPatchResource =
      "files" :>
@@ -133,8 +133,8 @@ data FilesPatch' = FilesPatch'
 --
 -- * 'fpOCR'
 filesPatch'
-    :: File -- ^ 'payload'
-    -> Text -- ^ 'fileId'
+    :: File -- ^ 'fpPayload'
+    -> Text -- ^ 'fpFileId'
     -> FilesPatch'
 filesPatch' pFpPayload_ pFpFileId_ =
     FilesPatch'

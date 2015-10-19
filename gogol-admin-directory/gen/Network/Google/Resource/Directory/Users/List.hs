@@ -22,7 +22,7 @@
 --
 -- Retrieve either deleted users or all users in a domain (paginated)
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.list@.
 module Network.Google.Resource.Directory.Users.List
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.Directory.Users.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersList@ method which the
+-- | A resource alias for @directory.users.list@ method which the
 -- 'UsersList'' request conforms to.
 type UsersListResource =
      "users" :>

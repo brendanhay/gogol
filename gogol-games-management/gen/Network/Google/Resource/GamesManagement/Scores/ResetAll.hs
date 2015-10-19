@@ -24,7 +24,7 @@
 -- players. This method is only accessible to whitelisted tester accounts
 -- for your application.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementScoresResetAll@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.scores.resetAll@.
 module Network.Google.Resource.GamesManagement.Scores.ResetAll
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.GamesManagement.Scores.ResetAll
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementScoresResetAll@ method which the
+-- | A resource alias for @gamesManagement.scores.resetAll@ method which the
 -- 'ScoresResetAll'' request conforms to.
 type ScoresResetAllResource =
      "scores" :>

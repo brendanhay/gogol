@@ -22,7 +22,7 @@
 --
 -- Gets one user role permission by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolePermissionsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userRolePermissions.get@.
 module Network.Google.Resource.DFAReporting.UserRolePermissions.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.UserRolePermissions.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingUserRolePermissionsGet@ method which the
+-- | A resource alias for @dfareporting.userRolePermissions.get@ method which the
 -- 'UserRolePermissionsGet'' request conforms to.
 type UserRolePermissionsGetResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data UserRolePermissionsGet' = UserRolePermissionsGet'
 --
 -- * 'urpgId'
 userRolePermissionsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'urpgProFileId'
+    -> Int64 -- ^ 'urpgId'
     -> UserRolePermissionsGet'
 userRolePermissionsGet' pUrpgProFileId_ pUrpgId_ =
     UserRolePermissionsGet'

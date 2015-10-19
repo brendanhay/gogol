@@ -24,7 +24,7 @@
 -- sections of a report criteria, given the fields already selected in the
 -- input report and user permissions.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingReportsCompatibleFieldsQuery@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.reports.compatibleFields.query@.
 module Network.Google.Resource.DFAReporting.Reports.CompatibleFields.Query
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.DFAReporting.Reports.CompatibleFields.Query
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingReportsCompatibleFieldsQuery@ method which the
+-- | A resource alias for @dfareporting.reports.compatibleFields.query@ method which the
 -- 'ReportsCompatibleFieldsQuery'' request conforms to.
 type ReportsCompatibleFieldsQueryResource =
      "userprofiles" :>
@@ -72,8 +72,8 @@ data ReportsCompatibleFieldsQuery' = ReportsCompatibleFieldsQuery'
 --
 -- * 'rcfqPayload'
 reportsCompatibleFieldsQuery'
-    :: Int64 -- ^ 'profileId'
-    -> Report -- ^ 'payload'
+    :: Int64 -- ^ 'rcfqProFileId'
+    -> Report -- ^ 'rcfqPayload'
     -> ReportsCompatibleFieldsQuery'
 reportsCompatibleFieldsQuery' pRcfqProFileId_ pRcfqPayload_ =
     ReportsCompatibleFieldsQuery'

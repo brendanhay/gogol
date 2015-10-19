@@ -23,7 +23,7 @@
 -- Permanently deletes the ACL entry for the specified entity on the
 -- specified object.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectAccessControlsDelete@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objectAccessControls.delete@.
 module Network.Google.Resource.Storage.ObjectAccessControls.Delete
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Delete
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectAccessControlsDelete@ method which the
+-- | A resource alias for @storage.objectAccessControls.delete@ method which the
 -- 'ObjectAccessControlsDelete'' request conforms to.
 type ObjectAccessControlsDeleteResource =
      "b" :>
@@ -78,9 +78,9 @@ data ObjectAccessControlsDelete' = ObjectAccessControlsDelete'
 --
 -- * 'oacdGeneration'
 objectAccessControlsDelete'
-    :: Text -- ^ 'bucket'
-    -> Text -- ^ 'object'
-    -> Text -- ^ 'entity'
+    :: Text -- ^ 'oacdBucket'
+    -> Text -- ^ 'oacdObject'
+    -> Text -- ^ 'oacdEntity'
     -> ObjectAccessControlsDelete'
 objectAccessControlsDelete' pOacdBucket_ pOacdObject_ pOacdEntity_ =
     ObjectAccessControlsDelete'

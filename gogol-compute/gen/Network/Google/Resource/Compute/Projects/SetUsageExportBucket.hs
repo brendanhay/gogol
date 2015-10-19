@@ -24,7 +24,7 @@
 -- reports are stored. If you provide an empty request body using this
 -- method, the usage export feature will be disabled.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeProjectsSetUsageExportBucket@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.projects.setUsageExportBucket@.
 module Network.Google.Resource.Compute.Projects.SetUsageExportBucket
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Projects.SetUsageExportBucket
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeProjectsSetUsageExportBucket@ method which the
+-- | A resource alias for @compute.projects.setUsageExportBucket@ method which the
 -- 'ProjectsSetUsageExportBucket'' request conforms to.
 type ProjectsSetUsageExportBucketResource =
      Capture "project" Text :>
@@ -69,8 +69,8 @@ data ProjectsSetUsageExportBucket' = ProjectsSetUsageExportBucket'
 --
 -- * 'psuebPayload'
 projectsSetUsageExportBucket'
-    :: Text -- ^ 'project'
-    -> UsageExportLocation -- ^ 'payload'
+    :: Text -- ^ 'psuebProject'
+    -> UsageExportLocation -- ^ 'psuebPayload'
     -> ProjectsSetUsageExportBucket'
 projectsSetUsageExportBucket' pPsuebProject_ pPsuebPayload_ =
     ProjectsSetUsageExportBucket'

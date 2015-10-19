@@ -22,7 +22,7 @@
 --
 -- Gets a user\'s Account & Container Permissions.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsPermissionsGet@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.permissions.get@.
 module Network.Google.Resource.TagManager.Accounts.Permissions.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.Get
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsPermissionsGet@ method which the
+-- | A resource alias for @tagmanager.accounts.permissions.get@ method which the
 -- 'AccountsPermissionsGet'' request conforms to.
 type AccountsPermissionsGetResource =
      "accounts" :>
@@ -65,8 +65,8 @@ data AccountsPermissionsGet' = AccountsPermissionsGet'
 --
 -- * 'apgPermissionId'
 accountsPermissionsGet'
-    :: Text -- ^ 'accountId'
-    -> Text -- ^ 'permissionId'
+    :: Text -- ^ 'apgAccountId'
+    -> Text -- ^ 'apgPermissionId'
     -> AccountsPermissionsGet'
 accountsPermissionsGet' pApgAccountId_ pApgPermissionId_ =
     AccountsPermissionsGet'

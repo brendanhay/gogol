@@ -22,7 +22,7 @@
 --
 -- Create a table asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesCreate@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.tables.create@.
 module Network.Google.Resource.MapsEngine.Tables.Create
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.Tables.Create
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesCreate@ method which the
+-- | A resource alias for @mapsengine.tables.create@ method which the
 -- 'TablesCreate'' request conforms to.
 type TablesCreateResource =
      "tables" :>
@@ -59,7 +59,7 @@ newtype TablesCreate' = TablesCreate'
 --
 -- * 'tcPayload'
 tablesCreate'
-    :: Table -- ^ 'payload'
+    :: Table -- ^ 'tcPayload'
     -> TablesCreate'
 tablesCreate' pTcPayload_ =
     TablesCreate'

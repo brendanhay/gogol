@@ -29,7 +29,7 @@
 -- property in a Products.approve call to approve the product. This URL can
 -- only be used to display permissions for up to 1 day.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseProductsGenerateApprovalURL@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.generateApprovalUrl@.
 module Network.Google.Resource.AndroidEnterprise.Products.GenerateApprovalURL
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.AndroidEnterprise.Products.GenerateApprovalURL
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseProductsGenerateApprovalURL@ method which the
+-- | A resource alias for @androidenterprise.products.generateApprovalUrl@ method which the
 -- 'ProductsGenerateApprovalURL'' request conforms to.
 type ProductsGenerateApprovalURLResource =
      "enterprises" :>
@@ -86,8 +86,8 @@ data ProductsGenerateApprovalURL' = ProductsGenerateApprovalURL'
 --
 -- * 'pgauProductId'
 productsGenerateApprovalURL'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'productId'
+    :: Text -- ^ 'pgauEnterpriseId'
+    -> Text -- ^ 'pgauProductId'
     -> ProductsGenerateApprovalURL'
 productsGenerateApprovalURL' pPgauEnterpriseId_ pPgauProductId_ =
     ProductsGenerateApprovalURL'

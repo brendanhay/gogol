@@ -24,7 +24,7 @@
 -- single request. This operation does not update the expiration date of
 -- the products.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentInventoryCustombatch@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.inventory.custombatch@.
 module Network.Google.Resource.Content.Inventory.Custombatch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Content.Inventory.Custombatch
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentInventoryCustombatch@ method which the
+-- | A resource alias for @content.inventory.custombatch@ method which the
 -- 'InventoryCustombatch'' request conforms to.
 type InventoryCustombatchResource =
      "inventory" :>
@@ -70,7 +70,7 @@ data InventoryCustombatch' = InventoryCustombatch'
 --
 -- * 'icDryRun'
 inventoryCustombatch'
-    :: InventoryCustomBatchRequest -- ^ 'payload'
+    :: InventoryCustomBatchRequest -- ^ 'icPayload'
     -> InventoryCustombatch'
 inventoryCustombatch' pIcPayload_ =
     InventoryCustombatch'

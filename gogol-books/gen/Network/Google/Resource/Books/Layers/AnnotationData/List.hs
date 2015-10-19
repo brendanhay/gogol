@@ -22,7 +22,7 @@
 --
 -- Gets the annotation data for a volume and layer.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksLayersAnnotationDataList@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.layers.annotationData.list@.
 module Network.Google.Resource.Books.Layers.AnnotationData.List
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.Books.Layers.AnnotationData.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksLayersAnnotationDataList@ method which the
+-- | A resource alias for @books.layers.annotationData.list@ method which the
 -- 'LayersAnnotationDataList'' request conforms to.
 type LayersAnnotationDataListResource =
      "volumes" :>
@@ -122,9 +122,9 @@ data LayersAnnotationDataList' = LayersAnnotationDataList'
 --
 -- * 'ladlMaxResults'
 layersAnnotationDataList'
-    :: Text -- ^ 'contentVersion'
-    -> Text -- ^ 'volumeId'
-    -> Text -- ^ 'layerId'
+    :: Text -- ^ 'ladlContentVersion'
+    -> Text -- ^ 'ladlVolumeId'
+    -> Text -- ^ 'ladlLayerId'
     -> LayersAnnotationDataList'
 layersAnnotationDataList' pLadlContentVersion_ pLadlVolumeId_ pLadlLayerId_ =
     LayersAnnotationDataList'

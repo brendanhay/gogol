@@ -27,235 +27,235 @@ module Network.Google.MapsEngine
 
     -- * Resources
 
-    -- ** MapsEngineAssetsGet
+    -- ** mapsengine.assets.get
     , module Network.Google.Resource.MapsEngine.Assets.Get
 
-    -- ** MapsEngineAssetsList
+    -- ** mapsengine.assets.list
     , module Network.Google.Resource.MapsEngine.Assets.List
 
-    -- ** MapsEngineAssetsParentsList
+    -- ** mapsengine.assets.parents.list
     , module Network.Google.Resource.MapsEngine.Assets.Parents.List
 
-    -- ** MapsEngineAssetsPermissionsList
+    -- ** mapsengine.assets.permissions.list
     , module Network.Google.Resource.MapsEngine.Assets.Permissions.List
 
-    -- ** MapsEngineLayersCancelProcessing
+    -- ** mapsengine.layers.cancelProcessing
     , module Network.Google.Resource.MapsEngine.Layers.CancelProcessing
 
-    -- ** MapsEngineLayersCreate
+    -- ** mapsengine.layers.create
     , module Network.Google.Resource.MapsEngine.Layers.Create
 
-    -- ** MapsEngineLayersDelete
+    -- ** mapsengine.layers.delete
     , module Network.Google.Resource.MapsEngine.Layers.Delete
 
-    -- ** MapsEngineLayersGet
+    -- ** mapsengine.layers.get
     , module Network.Google.Resource.MapsEngine.Layers.Get
 
-    -- ** MapsEngineLayersGetPublished
+    -- ** mapsengine.layers.getPublished
     , module Network.Google.Resource.MapsEngine.Layers.GetPublished
 
-    -- ** MapsEngineLayersList
+    -- ** mapsengine.layers.list
     , module Network.Google.Resource.MapsEngine.Layers.List
 
-    -- ** MapsEngineLayersListPublished
+    -- ** mapsengine.layers.listPublished
     , module Network.Google.Resource.MapsEngine.Layers.ListPublished
 
-    -- ** MapsEngineLayersParentsList
+    -- ** mapsengine.layers.parents.list
     , module Network.Google.Resource.MapsEngine.Layers.Parents.List
 
-    -- ** MapsEngineLayersPatch
+    -- ** mapsengine.layers.patch
     , module Network.Google.Resource.MapsEngine.Layers.Patch
 
-    -- ** MapsEngineLayersPermissionsBatchDelete
+    -- ** mapsengine.layers.permissions.batchDelete
     , module Network.Google.Resource.MapsEngine.Layers.Permissions.BatchDelete
 
-    -- ** MapsEngineLayersPermissionsBatchUpdate
+    -- ** mapsengine.layers.permissions.batchUpdate
     , module Network.Google.Resource.MapsEngine.Layers.Permissions.BatchUpdate
 
-    -- ** MapsEngineLayersPermissionsList
+    -- ** mapsengine.layers.permissions.list
     , module Network.Google.Resource.MapsEngine.Layers.Permissions.List
 
-    -- ** MapsEngineLayersProcess
+    -- ** mapsengine.layers.process
     , module Network.Google.Resource.MapsEngine.Layers.Process
 
-    -- ** MapsEngineLayersPublish
+    -- ** mapsengine.layers.publish
     , module Network.Google.Resource.MapsEngine.Layers.Publish
 
-    -- ** MapsEngineLayersUnPublish
+    -- ** mapsengine.layers.unpublish
     , module Network.Google.Resource.MapsEngine.Layers.UnPublish
 
-    -- ** MapsEngineMapsCreate
+    -- ** mapsengine.maps.create
     , module Network.Google.Resource.MapsEngine.Maps.Create
 
-    -- ** MapsEngineMapsDelete
+    -- ** mapsengine.maps.delete
     , module Network.Google.Resource.MapsEngine.Maps.Delete
 
-    -- ** MapsEngineMapsGet
+    -- ** mapsengine.maps.get
     , module Network.Google.Resource.MapsEngine.Maps.Get
 
-    -- ** MapsEngineMapsGetPublished
+    -- ** mapsengine.maps.getPublished
     , module Network.Google.Resource.MapsEngine.Maps.GetPublished
 
-    -- ** MapsEngineMapsList
+    -- ** mapsengine.maps.list
     , module Network.Google.Resource.MapsEngine.Maps.List
 
-    -- ** MapsEngineMapsListPublished
+    -- ** mapsengine.maps.listPublished
     , module Network.Google.Resource.MapsEngine.Maps.ListPublished
 
-    -- ** MapsEngineMapsPatch
+    -- ** mapsengine.maps.patch
     , module Network.Google.Resource.MapsEngine.Maps.Patch
 
-    -- ** MapsEngineMapsPermissionsBatchDelete
+    -- ** mapsengine.maps.permissions.batchDelete
     , module Network.Google.Resource.MapsEngine.Maps.Permissions.BatchDelete
 
-    -- ** MapsEngineMapsPermissionsBatchUpdate
+    -- ** mapsengine.maps.permissions.batchUpdate
     , module Network.Google.Resource.MapsEngine.Maps.Permissions.BatchUpdate
 
-    -- ** MapsEngineMapsPermissionsList
+    -- ** mapsengine.maps.permissions.list
     , module Network.Google.Resource.MapsEngine.Maps.Permissions.List
 
-    -- ** MapsEngineMapsPublish
+    -- ** mapsengine.maps.publish
     , module Network.Google.Resource.MapsEngine.Maps.Publish
 
-    -- ** MapsEngineMapsUnPublish
+    -- ** mapsengine.maps.unpublish
     , module Network.Google.Resource.MapsEngine.Maps.UnPublish
 
-    -- ** MapsEngineProjectsIconsCreate
+    -- ** mapsengine.projects.icons.create
     , module Network.Google.Resource.MapsEngine.Projects.Icons.Create
 
-    -- ** MapsEngineProjectsIconsGet
+    -- ** mapsengine.projects.icons.get
     , module Network.Google.Resource.MapsEngine.Projects.Icons.Get
 
-    -- ** MapsEngineProjectsIconsList
+    -- ** mapsengine.projects.icons.list
     , module Network.Google.Resource.MapsEngine.Projects.Icons.List
 
-    -- ** MapsEngineProjectsList
+    -- ** mapsengine.projects.list
     , module Network.Google.Resource.MapsEngine.Projects.List
 
-    -- ** MapsEngineRasterCollectionsCancelProcessing
+    -- ** mapsengine.rasterCollections.cancelProcessing
     , module Network.Google.Resource.MapsEngine.RasterCollections.CancelProcessing
 
-    -- ** MapsEngineRasterCollectionsCreate
+    -- ** mapsengine.rasterCollections.create
     , module Network.Google.Resource.MapsEngine.RasterCollections.Create
 
-    -- ** MapsEngineRasterCollectionsDelete
+    -- ** mapsengine.rasterCollections.delete
     , module Network.Google.Resource.MapsEngine.RasterCollections.Delete
 
-    -- ** MapsEngineRasterCollectionsGet
+    -- ** mapsengine.rasterCollections.get
     , module Network.Google.Resource.MapsEngine.RasterCollections.Get
 
-    -- ** MapsEngineRasterCollectionsList
+    -- ** mapsengine.rasterCollections.list
     , module Network.Google.Resource.MapsEngine.RasterCollections.List
 
-    -- ** MapsEngineRasterCollectionsParentsList
+    -- ** mapsengine.rasterCollections.parents.list
     , module Network.Google.Resource.MapsEngine.RasterCollections.Parents.List
 
-    -- ** MapsEngineRasterCollectionsPatch
+    -- ** mapsengine.rasterCollections.patch
     , module Network.Google.Resource.MapsEngine.RasterCollections.Patch
 
-    -- ** MapsEngineRasterCollectionsPermissionsBatchDelete
+    -- ** mapsengine.rasterCollections.permissions.batchDelete
     , module Network.Google.Resource.MapsEngine.RasterCollections.Permissions.BatchDelete
 
-    -- ** MapsEngineRasterCollectionsPermissionsBatchUpdate
+    -- ** mapsengine.rasterCollections.permissions.batchUpdate
     , module Network.Google.Resource.MapsEngine.RasterCollections.Permissions.BatchUpdate
 
-    -- ** MapsEngineRasterCollectionsPermissionsList
+    -- ** mapsengine.rasterCollections.permissions.list
     , module Network.Google.Resource.MapsEngine.RasterCollections.Permissions.List
 
-    -- ** MapsEngineRasterCollectionsProcess
+    -- ** mapsengine.rasterCollections.process
     , module Network.Google.Resource.MapsEngine.RasterCollections.Process
 
-    -- ** MapsEngineRasterCollectionsRastersBatchDelete
+    -- ** mapsengine.rasterCollections.rasters.batchDelete
     , module Network.Google.Resource.MapsEngine.RasterCollections.Rasters.BatchDelete
 
-    -- ** MapsEngineRasterCollectionsRastersBatchInsert
+    -- ** mapsengine.rasterCollections.rasters.batchInsert
     , module Network.Google.Resource.MapsEngine.RasterCollections.Rasters.BatchInsert
 
-    -- ** MapsEngineRasterCollectionsRastersList
+    -- ** mapsengine.rasterCollections.rasters.list
     , module Network.Google.Resource.MapsEngine.RasterCollections.Rasters.List
 
-    -- ** MapsEngineRastersDelete
+    -- ** mapsengine.rasters.delete
     , module Network.Google.Resource.MapsEngine.Rasters.Delete
 
-    -- ** MapsEngineRastersFilesInsert
+    -- ** mapsengine.rasters.files.insert
     , module Network.Google.Resource.MapsEngine.Rasters.Files.Insert
 
-    -- ** MapsEngineRastersGet
+    -- ** mapsengine.rasters.get
     , module Network.Google.Resource.MapsEngine.Rasters.Get
 
-    -- ** MapsEngineRastersList
+    -- ** mapsengine.rasters.list
     , module Network.Google.Resource.MapsEngine.Rasters.List
 
-    -- ** MapsEngineRastersParentsList
+    -- ** mapsengine.rasters.parents.list
     , module Network.Google.Resource.MapsEngine.Rasters.Parents.List
 
-    -- ** MapsEngineRastersPatch
+    -- ** mapsengine.rasters.patch
     , module Network.Google.Resource.MapsEngine.Rasters.Patch
 
-    -- ** MapsEngineRastersPermissionsBatchDelete
+    -- ** mapsengine.rasters.permissions.batchDelete
     , module Network.Google.Resource.MapsEngine.Rasters.Permissions.BatchDelete
 
-    -- ** MapsEngineRastersPermissionsBatchUpdate
+    -- ** mapsengine.rasters.permissions.batchUpdate
     , module Network.Google.Resource.MapsEngine.Rasters.Permissions.BatchUpdate
 
-    -- ** MapsEngineRastersPermissionsList
+    -- ** mapsengine.rasters.permissions.list
     , module Network.Google.Resource.MapsEngine.Rasters.Permissions.List
 
-    -- ** MapsEngineRastersProcess
+    -- ** mapsengine.rasters.process
     , module Network.Google.Resource.MapsEngine.Rasters.Process
 
-    -- ** MapsEngineRastersUpload
+    -- ** mapsengine.rasters.upload
     , module Network.Google.Resource.MapsEngine.Rasters.Upload
 
-    -- ** MapsEngineTablesCreate
+    -- ** mapsengine.tables.create
     , module Network.Google.Resource.MapsEngine.Tables.Create
 
-    -- ** MapsEngineTablesDelete
+    -- ** mapsengine.tables.delete
     , module Network.Google.Resource.MapsEngine.Tables.Delete
 
-    -- ** MapsEngineTablesFeaturesBatchDelete
+    -- ** mapsengine.tables.features.batchDelete
     , module Network.Google.Resource.MapsEngine.Tables.Features.BatchDelete
 
-    -- ** MapsEngineTablesFeaturesBatchInsert
+    -- ** mapsengine.tables.features.batchInsert
     , module Network.Google.Resource.MapsEngine.Tables.Features.BatchInsert
 
-    -- ** MapsEngineTablesFeaturesBatchPatch
+    -- ** mapsengine.tables.features.batchPatch
     , module Network.Google.Resource.MapsEngine.Tables.Features.BatchPatch
 
-    -- ** MapsEngineTablesFeaturesGet
+    -- ** mapsengine.tables.features.get
     , module Network.Google.Resource.MapsEngine.Tables.Features.Get
 
-    -- ** MapsEngineTablesFeaturesList
+    -- ** mapsengine.tables.features.list
     , module Network.Google.Resource.MapsEngine.Tables.Features.List
 
-    -- ** MapsEngineTablesFilesInsert
+    -- ** mapsengine.tables.files.insert
     , module Network.Google.Resource.MapsEngine.Tables.Files.Insert
 
-    -- ** MapsEngineTablesGet
+    -- ** mapsengine.tables.get
     , module Network.Google.Resource.MapsEngine.Tables.Get
 
-    -- ** MapsEngineTablesList
+    -- ** mapsengine.tables.list
     , module Network.Google.Resource.MapsEngine.Tables.List
 
-    -- ** MapsEngineTablesParentsList
+    -- ** mapsengine.tables.parents.list
     , module Network.Google.Resource.MapsEngine.Tables.Parents.List
 
-    -- ** MapsEngineTablesPatch
+    -- ** mapsengine.tables.patch
     , module Network.Google.Resource.MapsEngine.Tables.Patch
 
-    -- ** MapsEngineTablesPermissionsBatchDelete
+    -- ** mapsengine.tables.permissions.batchDelete
     , module Network.Google.Resource.MapsEngine.Tables.Permissions.BatchDelete
 
-    -- ** MapsEngineTablesPermissionsBatchUpdate
+    -- ** mapsengine.tables.permissions.batchUpdate
     , module Network.Google.Resource.MapsEngine.Tables.Permissions.BatchUpdate
 
-    -- ** MapsEngineTablesPermissionsList
+    -- ** mapsengine.tables.permissions.list
     , module Network.Google.Resource.MapsEngine.Tables.Permissions.List
 
-    -- ** MapsEngineTablesProcess
+    -- ** mapsengine.tables.process
     , module Network.Google.Resource.MapsEngine.Tables.Process
 
-    -- ** MapsEngineTablesUpload
+    -- ** mapsengine.tables.upload
     , module Network.Google.Resource.MapsEngine.Tables.Upload
 
     -- * Types

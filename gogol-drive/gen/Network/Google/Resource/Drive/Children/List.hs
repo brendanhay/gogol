@@ -22,7 +22,7 @@
 --
 -- Lists a folder\'s children.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChildrenList@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.children.list@.
 module Network.Google.Resource.Drive.Children.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Drive.Children.List
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveChildrenList@ method which the
+-- | A resource alias for @drive.children.list@ method which the
 -- 'ChildrenList'' request conforms to.
 type ChildrenListResource =
      "files" :>
@@ -80,7 +80,7 @@ data ChildrenList' = ChildrenList'
 --
 -- * 'clMaxResults'
 childrenList'
-    :: Text -- ^ 'folderId'
+    :: Text -- ^ 'clFolderId'
     -> ChildrenList'
 childrenList' pClFolderId_ =
     ChildrenList'

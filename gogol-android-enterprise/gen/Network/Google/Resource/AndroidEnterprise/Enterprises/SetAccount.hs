@@ -23,7 +23,7 @@
 -- Set the account that will be used to authenticate to the API as the
 -- enterprise.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEnterprisesSetAccount@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.setAccount@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.SetAccount
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEnterprisesSetAccount@ method which the
+-- | A resource alias for @androidenterprise.enterprises.setAccount@ method which the
 -- 'EnterprisesSetAccount'' request conforms to.
 type EnterprisesSetAccountResource =
      "enterprises" :>
@@ -68,8 +68,8 @@ data EnterprisesSetAccount' = EnterprisesSetAccount'
 --
 -- * 'esaPayload'
 enterprisesSetAccount'
-    :: Text -- ^ 'enterpriseId'
-    -> EnterpriseAccount -- ^ 'payload'
+    :: Text -- ^ 'esaEnterpriseId'
+    -> EnterpriseAccount -- ^ 'esaPayload'
     -> EnterprisesSetAccount'
 enterprisesSetAccount' pEsaEnterpriseId_ pEsaPayload_ =
     EnterprisesSetAccount'

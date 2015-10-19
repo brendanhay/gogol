@@ -22,7 +22,7 @@
 --
 -- Removes an entitlement to an app for a user and uninstalls it.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEntitlementsDelete@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.entitlements.delete@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Delete
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEntitlementsDelete@ method which the
+-- | A resource alias for @androidenterprise.entitlements.delete@ method which the
 -- 'EntitlementsDelete'' request conforms to.
 type EntitlementsDeleteResource =
      "enterprises" :>
@@ -71,9 +71,9 @@ data EntitlementsDelete' = EntitlementsDelete'
 --
 -- * 'edUserId'
 entitlementsDelete'
-    :: Text -- ^ 'entitlementId'
-    -> Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'edEntitlementId'
+    -> Text -- ^ 'edEnterpriseId'
+    -> Text -- ^ 'edUserId'
     -> EntitlementsDelete'
 entitlementsDelete' pEdEntitlementId_ pEdEnterpriseId_ pEdUserId_ =
     EntitlementsDelete'

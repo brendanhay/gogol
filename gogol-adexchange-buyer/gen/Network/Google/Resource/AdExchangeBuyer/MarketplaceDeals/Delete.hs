@@ -22,7 +22,7 @@
 --
 -- Delete the specified deals from the order
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceDealsDelete@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.marketplacedeals.delete@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Delete
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerMarketplaceDealsDelete@ method which the
+-- | A resource alias for @adexchangebuyer.marketplacedeals.delete@ method which the
 -- 'MarketplaceDealsDelete'' request conforms to.
 type MarketplaceDealsDeleteResource =
      "marketplaceOrders" :>
@@ -67,8 +67,8 @@ data MarketplaceDealsDelete' = MarketplaceDealsDelete'
 --
 -- * 'mddOrderId'
 marketplaceDealsDelete'
-    :: DeleteOrderDealsRequest -- ^ 'payload'
-    -> Text -- ^ 'orderId'
+    :: DeleteOrderDealsRequest -- ^ 'mddPayload'
+    -> Text -- ^ 'mddOrderId'
     -> MarketplaceDealsDelete'
 marketplaceDealsDelete' pMddPayload_ pMddOrderId_ =
     MarketplaceDealsDelete'

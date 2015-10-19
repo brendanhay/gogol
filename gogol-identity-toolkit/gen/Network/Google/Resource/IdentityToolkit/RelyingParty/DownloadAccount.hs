@@ -22,7 +22,7 @@
 --
 -- Batch download user accounts.
 --
--- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyDownloadAccount@.
+-- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.downloadAccount@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyDownloadAccount@ method which the
+-- | A resource alias for @identitytoolkit.relyingparty.downloadAccount@ method which the
 -- 'RelyingPartyDownloadAccount'' request conforms to.
 type RelyingPartyDownloadAccountResource =
      "downloadAccount" :>
@@ -61,7 +61,7 @@ newtype RelyingPartyDownloadAccount' = RelyingPartyDownloadAccount'
 --
 -- * 'rpdaPayload'
 relyingPartyDownloadAccount'
-    :: IdentitytoolkitRelyingPartyDownloadAccountRequest -- ^ 'payload'
+    :: IdentitytoolkitRelyingPartyDownloadAccountRequest -- ^ 'rpdaPayload'
     -> RelyingPartyDownloadAccount'
 relyingPartyDownloadAccount' pRpdaPayload_ =
     RelyingPartyDownloadAccount'

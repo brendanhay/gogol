@@ -22,7 +22,7 @@
 --
 -- Creates an account ticket.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsProvisioningCreateAccountTicket@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.provisioning.createAccountTicket@.
 module Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsProvisioningCreateAccountTicket@ method which the
+-- | A resource alias for @analytics.provisioning.createAccountTicket@ method which the
 -- 'ProvisioningCreateAccountTicket'' request conforms to.
 type ProvisioningCreateAccountTicketResource =
      "provisioning" :>
@@ -61,7 +61,7 @@ newtype ProvisioningCreateAccountTicket' = ProvisioningCreateAccountTicket'
 --
 -- * 'pcatPayload'
 provisioningCreateAccountTicket'
-    :: AccountTicket -- ^ 'payload'
+    :: AccountTicket -- ^ 'pcatPayload'
     -> ProvisioningCreateAccountTicket'
 provisioningCreateAccountTicket' pPcatPayload_ =
     ProvisioningCreateAccountTicket'

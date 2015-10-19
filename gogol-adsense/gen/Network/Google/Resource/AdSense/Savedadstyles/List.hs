@@ -22,7 +22,7 @@
 --
 -- List all saved ad styles in the user\'s account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseSavedadstylesList@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.savedadstyles.list@.
 module Network.Google.Resource.AdSense.Savedadstyles.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdSense.Savedadstyles.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseSavedadstylesList@ method which the
+-- | A resource alias for @adsense.savedadstyles.list@ method which the
 -- 'SavedadstylesList'' request conforms to.
 type SavedadstylesListResource =
      "savedadstyles" :>

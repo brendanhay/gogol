@@ -22,7 +22,7 @@
 --
 -- Creates a new collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseCollectionsInsert@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.insert@.
 module Network.Google.Resource.AndroidEnterprise.Collections.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidEnterprise.Collections.Insert
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseCollectionsInsert@ method which the
+-- | A resource alias for @androidenterprise.collections.insert@ method which the
 -- 'CollectionsInsert'' request conforms to.
 type CollectionsInsertResource =
      "enterprises" :>
@@ -65,8 +65,8 @@ data CollectionsInsert' = CollectionsInsert'
 --
 -- * 'ciPayload'
 collectionsInsert'
-    :: Text -- ^ 'enterpriseId'
-    -> Collection -- ^ 'payload'
+    :: Text -- ^ 'ciEnterpriseId'
+    -> Collection -- ^ 'ciPayload'
     -> CollectionsInsert'
 collectionsInsert' pCiEnterpriseId_ pCiPayload_ =
     CollectionsInsert'

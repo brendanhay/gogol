@@ -23,7 +23,7 @@
 -- Deletes the specified Instance resource. For more information, see
 -- Shutting down an instance.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.delete@.
 module Network.Google.Resource.Compute.Instances.Delete
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Instances.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesDelete@ method which the
+-- | A resource alias for @compute.instances.delete@ method which the
 -- 'InstancesDelete'' request conforms to.
 type InstancesDeleteResource =
      Capture "project" Text :>
@@ -72,9 +72,9 @@ data InstancesDelete' = InstancesDelete'
 --
 -- * 'insInstance'
 instancesDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'insProject'
+    -> Text -- ^ 'insZone'
+    -> Text -- ^ 'insInstance'
     -> InstancesDelete'
 instancesDelete' pInsProject_ pInsZone_ pInsInstance_ =
     InstancesDelete'

@@ -27,7 +27,7 @@
 -- not exist. * \`FAILED_PRECONDITION\` if the requested ID belongs to the
 -- primary teacher of this course.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesTeachersDelete@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.teachers.delete@.
 module Network.Google.Resource.Classroom.Courses.Teachers.Delete
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.Classroom.Courses.Teachers.Delete
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesTeachersDelete@ method which the
+-- | A resource alias for @classroom.courses.teachers.delete@ method which the
 -- 'CoursesTeachersDelete'' request conforms to.
 type CoursesTeachersDeleteResource =
      "v1" :>
@@ -111,8 +111,8 @@ data CoursesTeachersDelete' = CoursesTeachersDelete'
 --
 -- * 'ctdCallback'
 coursesTeachersDelete'
-    :: Text -- ^ 'courseId'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'ctdCourseId'
+    -> Text -- ^ 'ctdUserId'
     -> CoursesTeachersDelete'
 coursesTeachersDelete' pCtdCourseId_ pCtdUserId_ =
     CoursesTeachersDelete'

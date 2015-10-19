@@ -27,7 +27,7 @@
 -- instances have not yet been recreated. You must separately verify the
 -- status of the recreating action with the listmanagedinstances method.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersRecreateInstances@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.recreateInstances@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.RecreateInstances
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.RecreateInstances
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersRecreateInstances@ method which the
+-- | A resource alias for @compute.instanceGroupManagers.recreateInstances@ method which the
 -- 'InstanceGroupManagersRecreateInstances'' request conforms to.
 type InstanceGroupManagersRecreateInstancesResource =
      Capture "project" Text :>
@@ -88,10 +88,10 @@ data InstanceGroupManagersRecreateInstances' = InstanceGroupManagersRecreateInst
 --
 -- * 'igmriPayload'
 instanceGroupManagersRecreateInstances'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instanceGroupManager'
-    -> Text -- ^ 'zone'
-    -> InstanceGroupManagersRecreateInstancesRequest -- ^ 'payload'
+    :: Text -- ^ 'igmriProject'
+    -> Text -- ^ 'igmriInstanceGroupManager'
+    -> Text -- ^ 'igmriZone'
+    -> InstanceGroupManagersRecreateInstancesRequest -- ^ 'igmriPayload'
     -> InstanceGroupManagersRecreateInstances'
 instanceGroupManagersRecreateInstances' pIgmriProject_ pIgmriInstanceGroupManager_ pIgmriZone_ pIgmriPayload_ =
     InstanceGroupManagersRecreateInstances'

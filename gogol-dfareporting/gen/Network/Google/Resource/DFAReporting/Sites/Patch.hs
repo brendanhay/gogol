@@ -22,7 +22,7 @@
 --
 -- Updates an existing site. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSitesPatch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.sites.patch@.
 module Network.Google.Resource.DFAReporting.Sites.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.Sites.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSitesPatch@ method which the
+-- | A resource alias for @dfareporting.sites.patch@ method which the
 -- 'SitesPatch'' request conforms to.
 type SitesPatchResource =
      "userprofiles" :>
@@ -70,9 +70,9 @@ data SitesPatch' = SitesPatch'
 --
 -- * 'spId'
 sitesPatch'
-    :: Int64 -- ^ 'profileId'
-    -> Site -- ^ 'payload'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'spProFileId'
+    -> Site -- ^ 'spPayload'
+    -> Int64 -- ^ 'spId'
     -> SitesPatch'
 sitesPatch' pSpProFileId_ pSpPayload_ pSpId_ =
     SitesPatch'

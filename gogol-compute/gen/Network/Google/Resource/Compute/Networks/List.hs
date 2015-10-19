@@ -23,7 +23,7 @@
 -- Retrieves the list of network resources available to the specified
 -- project.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeNetworksList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.networks.list@.
 module Network.Google.Resource.Compute.Networks.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.Networks.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeNetworksList@ method which the
+-- | A resource alias for @compute.networks.list@ method which the
 -- 'NetworksList'' request conforms to.
 type NetworksListResource =
      Capture "project" Text :>
@@ -77,7 +77,7 @@ data NetworksList' = NetworksList'
 --
 -- * 'nlMaxResults'
 networksList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'nlProject'
     -> NetworksList'
 networksList' pNlProject_ =
     NetworksList'

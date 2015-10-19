@@ -22,7 +22,7 @@
 --
 -- Add a post.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsInsert@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.insert@.
 module Network.Google.Resource.Blogger.Posts.Insert
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Blogger.Posts.Insert
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostsInsert@ method which the
+-- | A resource alias for @blogger.posts.insert@ method which the
 -- 'PostsInsert'' request conforms to.
 type PostsInsertResource =
      "blogs" :>
@@ -80,8 +80,8 @@ data PostsInsert' = PostsInsert'
 --
 -- * 'piiPayload'
 postsInsert'
-    :: Text -- ^ 'blogId'
-    -> Post' -- ^ 'payload'
+    :: Text -- ^ 'piiBlogId'
+    -> Post' -- ^ 'piiPayload'
     -> PostsInsert'
 postsInsert' pPiiBlogId_ pPiiPayload_ =
     PostsInsert'

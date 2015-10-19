@@ -22,7 +22,7 @@
 --
 -- Delete the data source if there are no datapoints associated with it
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesDelete@.
+-- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataSources.delete@.
 module Network.Google.Resource.Fitness.Users.DataSources.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Fitness.Users.DataSources.Delete
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersDataSourcesDelete@ method which the
+-- | A resource alias for @fitness.users.dataSources.delete@ method which the
 -- 'UsersDataSourcesDelete'' request conforms to.
 type UsersDataSourcesDeleteResource =
      Capture "userId" Text :>
@@ -64,8 +64,8 @@ data UsersDataSourcesDelete' = UsersDataSourcesDelete'
 --
 -- * 'udsdUserId'
 usersDataSourcesDelete'
-    :: Text -- ^ 'dataSourceId'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'udsdDataSourceId'
+    -> Text -- ^ 'udsdUserId'
     -> UsersDataSourcesDelete'
 usersDataSourcesDelete' pUdsdDataSourceId_ pUdsdUserId_ =
     UsersDataSourcesDelete'

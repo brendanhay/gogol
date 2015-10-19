@@ -22,7 +22,7 @@
 --
 -- Updates a default object ACL entry on the specified bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageDefaultObjectAccessControlsUpdate@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.defaultObjectAccessControls.update@.
 module Network.Google.Resource.Storage.DefaultObjectAccessControls.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Update
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageDefaultObjectAccessControlsUpdate@ method which the
+-- | A resource alias for @storage.defaultObjectAccessControls.update@ method which the
 -- 'DefaultObjectAccessControlsUpdate'' request conforms to.
 type DefaultObjectAccessControlsUpdateResource =
      "b" :>
@@ -71,9 +71,9 @@ data DefaultObjectAccessControlsUpdate' = DefaultObjectAccessControlsUpdate'
 --
 -- * 'doacuEntity'
 defaultObjectAccessControlsUpdate'
-    :: Text -- ^ 'bucket'
-    -> ObjectAccessControl -- ^ 'payload'
-    -> Text -- ^ 'entity'
+    :: Text -- ^ 'doacuBucket'
+    -> ObjectAccessControl -- ^ 'doacuPayload'
+    -> Text -- ^ 'doacuEntity'
     -> DefaultObjectAccessControlsUpdate'
 defaultObjectAccessControlsUpdate' pDoacuBucket_ pDoacuPayload_ pDoacuEntity_ =
     DefaultObjectAccessControlsUpdate'

@@ -22,7 +22,7 @@
 --
 -- Revert a published or scheduled page to draft state.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesRevert@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pages.revert@.
 module Network.Google.Resource.Blogger.Pages.Revert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Blogger.Pages.Revert
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPagesRevert@ method which the
+-- | A resource alias for @blogger.pages.revert@ method which the
 -- 'PagesRevert'' request conforms to.
 type PagesRevertResource =
      "blogs" :>
@@ -66,8 +66,8 @@ data PagesRevert' = PagesRevert'
 --
 -- * 'pagPageId'
 pagesRevert'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'pageId'
+    :: Text -- ^ 'pagBlogId'
+    -> Text -- ^ 'pagPageId'
     -> PagesRevert'
 pagesRevert' pPagBlogId_ pPagPageId_ =
     PagesRevert'

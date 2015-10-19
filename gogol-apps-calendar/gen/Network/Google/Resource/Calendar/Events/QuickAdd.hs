@@ -22,7 +22,7 @@
 --
 -- Creates an event based on a simple text string.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsQuickAdd@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.events.quickAdd@.
 module Network.Google.Resource.Calendar.Events.QuickAdd
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Calendar.Events.QuickAdd
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarEventsQuickAdd@ method which the
+-- | A resource alias for @calendar.events.quickAdd@ method which the
 -- 'EventsQuickAdd'' request conforms to.
 type EventsQuickAddResource =
      "calendars" :>
@@ -71,8 +71,8 @@ data EventsQuickAdd' = EventsQuickAdd'
 --
 -- * 'eqaSendNotifications'
 eventsQuickAdd'
-    :: Text -- ^ 'calendarId'
-    -> Text -- ^ 'text'
+    :: Text -- ^ 'eqaCalendarId'
+    -> Text -- ^ 'eqaText'
     -> EventsQuickAdd'
 eventsQuickAdd' pEqaCalendarId_ pEqaText_ =
     EventsQuickAdd'

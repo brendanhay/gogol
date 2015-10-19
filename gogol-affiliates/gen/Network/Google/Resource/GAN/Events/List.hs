@@ -22,7 +22,7 @@
 --
 -- Retrieves event data for a given advertiser\/publisher.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANEventsList@.
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @gan.events.list@.
 module Network.Google.Resource.GAN.Events.List
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ module Network.Google.Resource.GAN.Events.List
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GANEventsList@ method which the
+-- | A resource alias for @gan.events.list@ method which the
 -- 'EventsList'' request conforms to.
 type EventsListResource =
      Capture "role" EventsListRole :>
@@ -145,8 +145,8 @@ data EventsList' = EventsList'
 --
 -- * 'elMaxResults'
 eventsList'
-    :: Text -- ^ 'roleId'
-    -> EventsListRole -- ^ 'role'
+    :: Text -- ^ 'elRoleId'
+    -> EventsListRole -- ^ 'elRole'
     -> EventsList'
 eventsList' pElRoleId_ pElRole_ =
     EventsList'

@@ -22,7 +22,7 @@
 --
 -- Gets a property by its key.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePropertiesGet@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.properties.get@.
 module Network.Google.Resource.Drive.Properties.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Drive.Properties.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePropertiesGet@ method which the
+-- | A resource alias for @drive.properties.get@ method which the
 -- 'PropertiesGet'' request conforms to.
 type PropertiesGetResource =
      "files" :>
@@ -70,8 +70,8 @@ data PropertiesGet' = PropertiesGet'
 --
 -- * 'pgFileId'
 propertiesGet'
-    :: Text -- ^ 'propertyKey'
-    -> Text -- ^ 'fileId'
+    :: Text -- ^ 'pgPropertyKey'
+    -> Text -- ^ 'pgFileId'
     -> PropertiesGet'
 propertiesGet' pPgPropertyKey_ pPgFileId_ =
     PropertiesGet'

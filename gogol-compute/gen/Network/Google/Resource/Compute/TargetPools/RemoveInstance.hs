@@ -22,7 +22,7 @@
 --
 -- Removes instance URL from targetPool.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsRemoveInstance@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.removeInstance@.
 module Network.Google.Resource.Compute.TargetPools.RemoveInstance
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.TargetPools.RemoveInstance
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetPoolsRemoveInstance@ method which the
+-- | A resource alias for @compute.targetPools.removeInstance@ method which the
 -- 'TargetPoolsRemoveInstance'' request conforms to.
 type TargetPoolsRemoveInstanceResource =
      Capture "project" Text :>
@@ -77,10 +77,10 @@ data TargetPoolsRemoveInstance' = TargetPoolsRemoveInstance'
 --
 -- * 'tpriRegion'
 targetPoolsRemoveInstance'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'targetPool'
-    -> TargetPoolsRemoveInstanceRequest -- ^ 'payload'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'tpriProject'
+    -> Text -- ^ 'tpriTargetPool'
+    -> TargetPoolsRemoveInstanceRequest -- ^ 'tpriPayload'
+    -> Text -- ^ 'tpriRegion'
     -> TargetPoolsRemoveInstance'
 targetPoolsRemoveInstance' pTpriProject_ pTpriTargetPool_ pTpriPayload_ pTpriRegion_ =
     TargetPoolsRemoveInstance'

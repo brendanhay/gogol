@@ -26,7 +26,7 @@ module Network.Google.EmailMigration
 
     -- * Resources
 
-    -- ** EmailMigrationMailInsert
+    -- ** emailMigration.mail.insert
     , module Network.Google.Resource.EmailMigration.Mail.Insert
 
     -- * Types

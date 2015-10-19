@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of campaigns, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCampaignsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.campaigns.list@.
 module Network.Google.Resource.DFAReporting.Campaigns.List
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.DFAReporting.Campaigns.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCampaignsList@ method which the
+-- | A resource alias for @dfareporting.campaigns.list@ method which the
 -- 'CampaignsList'' request conforms to.
 type CampaignsListResource =
      "userprofiles" :>
@@ -126,7 +126,7 @@ data CampaignsList' = CampaignsList'
 --
 -- * 'ccMaxResults'
 campaignsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'ccProFileId'
     -> CampaignsList'
 campaignsList' pCcProFileId_ =
     CampaignsList'

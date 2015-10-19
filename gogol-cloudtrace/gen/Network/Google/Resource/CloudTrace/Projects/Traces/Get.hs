@@ -22,7 +22,7 @@
 --
 -- Gets one trace by id.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference> for @CloudtraceProjectsTracesGet@.
+-- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference> for @cloudtrace.projects.traces.get@.
 module Network.Google.Resource.CloudTrace.Projects.Traces.Get
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.CloudTrace.Projects.Traces.Get
 import           Network.Google.CloudTrace.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudtraceProjectsTracesGet@ method which the
+-- | A resource alias for @cloudtrace.projects.traces.get@ method which the
 -- 'ProjectsTracesGet'' request conforms to.
 type ProjectsTracesGetResource =
      "v1" :>
@@ -101,8 +101,8 @@ data ProjectsTracesGet' = ProjectsTracesGet'
 --
 -- * 'ptgCallback'
 projectsTracesGet'
-    :: Text -- ^ 'traceId'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'ptgTraceId'
+    -> Text -- ^ 'ptgProjectId'
     -> ProjectsTracesGet'
 projectsTracesGet' pPtgTraceId_ pPtgProjectId_ =
     ProjectsTracesGet'

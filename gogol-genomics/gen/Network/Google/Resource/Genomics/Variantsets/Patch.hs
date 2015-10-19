@@ -22,7 +22,7 @@
 --
 -- Updates a variant set. This method supports patch semantics.
 --
--- /See:/ < Genomics API Reference> for @GenomicsVariantsetsPatch@.
+-- /See:/ < Genomics API Reference> for @genomics.variantsets.patch@.
 module Network.Google.Resource.Genomics.Variantsets.Patch
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Genomics.Variantsets.Patch
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsVariantsetsPatch@ method which the
+-- | A resource alias for @genomics.variantsets.patch@ method which the
 -- 'VariantsetsPatch'' request conforms to.
 type VariantsetsPatchResource =
      "v1" :>
@@ -106,8 +106,8 @@ data VariantsetsPatch' = VariantsetsPatch'
 --
 -- * 'vpCallback'
 variantsetsPatch'
-    :: Text -- ^ 'variantSetId'
-    -> VariantSet -- ^ 'payload'
+    :: Text -- ^ 'vpVariantSetId'
+    -> VariantSet -- ^ 'vpPayload'
     -> VariantsetsPatch'
 variantsetsPatch' pVpVariantSetId_ pVpPayload_ =
     VariantsetsPatch'

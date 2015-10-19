@@ -22,7 +22,7 @@
 --
 -- Updates a revision. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRevisionsPatch@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.revisions.patch@.
 module Network.Google.Resource.Drive.Revisions.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Drive.Revisions.Patch
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRevisionsPatch@ method which the
+-- | A resource alias for @drive.revisions.patch@ method which the
 -- 'RevisionsPatch'' request conforms to.
 type RevisionsPatchResource =
      "files" :>
@@ -70,9 +70,9 @@ data RevisionsPatch' = RevisionsPatch'
 --
 -- * 'rppRevisionId'
 revisionsPatch'
-    :: Revision -- ^ 'payload'
-    -> Text -- ^ 'fileId'
-    -> Text -- ^ 'revisionId'
+    :: Revision -- ^ 'rppPayload'
+    -> Text -- ^ 'rppFileId'
+    -> Text -- ^ 'rppRevisionId'
     -> RevisionsPatch'
 revisionsPatch' pRppPayload_ pRppFileId_ pRppRevisionId_ =
     RevisionsPatch'

@@ -22,7 +22,7 @@
 --
 -- Lists the domain aliases of the customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryDomainAliasesList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.domainAliases.list@.
 module Network.Google.Resource.Directory.DomainAliases.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.DomainAliases.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryDomainAliasesList@ method which the
+-- | A resource alias for @directory.domainAliases.list@ method which the
 -- 'DomainAliasesList'' request conforms to.
 type DomainAliasesListResource =
      "customer" :>
@@ -65,7 +65,7 @@ data DomainAliasesList' = DomainAliasesList'
 --
 -- * 'dalParentDomainName'
 domainAliasesList'
-    :: Text -- ^ 'customer'
+    :: Text -- ^ 'dalCustomer'
     -> DomainAliasesList'
 domainAliasesList' pDalCustomer_ =
     DomainAliasesList'

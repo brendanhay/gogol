@@ -25,7 +25,7 @@
 -- Matches that should be removed from the local cache will have a status
 -- of MATCH_DELETED.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesSync@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.turnBasedMatches.sync@.
 module Network.Google.Resource.Games.TurnBasedMatches.Sync
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.Sync
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesTurnBasedMatchesSync@ method which the
+-- | A resource alias for @games.turnBasedMatches.sync@ method which the
 -- 'TurnBasedMatchesSync'' request conforms to.
 type TurnBasedMatchesSyncResource =
      "turnbasedmatches" :>

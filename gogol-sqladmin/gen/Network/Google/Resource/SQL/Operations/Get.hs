@@ -22,7 +22,7 @@
 --
 -- Retrieves an instance operation that has been performed on an instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLOperationsGet@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.operations.get@.
 module Network.Google.Resource.SQL.Operations.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.SQL.Operations.Get
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLOperationsGet@ method which the
+-- | A resource alias for @sql.operations.get@ method which the
 -- 'OperationsGet'' request conforms to.
 type OperationsGetResource =
      "projects" :>
@@ -65,8 +65,8 @@ data OperationsGet' = OperationsGet'
 --
 -- * 'ogOperation'
 operationsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'operation'
+    :: Text -- ^ 'ogProject'
+    -> Text -- ^ 'ogOperation'
     -> OperationsGet'
 operationsGet' pOgProject_ pOgOperation_ =
     OperationsGet'

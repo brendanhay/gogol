@@ -27,118 +27,118 @@ module Network.Google.AdSense
 
     -- * Resources
 
-    -- ** AdsenseAccountsAdClientsList
+    -- ** adsense.accounts.adclients.list
     , module Network.Google.Resource.AdSense.Accounts.AdClients.List
 
-    -- ** AdsenseAccountsAdUnitsCustomChannelsList
+    -- ** adsense.accounts.adunits.customchannels.list
     , module Network.Google.Resource.AdSense.Accounts.AdUnits.CustomChannels.List
 
-    -- ** AdsenseAccountsAdUnitsGet
+    -- ** adsense.accounts.adunits.get
     , module Network.Google.Resource.AdSense.Accounts.AdUnits.Get
 
-    -- ** AdsenseAccountsAdUnitsGetAdCode
+    -- ** adsense.accounts.adunits.getAdCode
     , module Network.Google.Resource.AdSense.Accounts.AdUnits.GetAdCode
 
-    -- ** AdsenseAccountsAdUnitsList
+    -- ** adsense.accounts.adunits.list
     , module Network.Google.Resource.AdSense.Accounts.AdUnits.List
 
-    -- ** AdsenseAccountsAlertsDelete
+    -- ** adsense.accounts.alerts.delete
     , module Network.Google.Resource.AdSense.Accounts.Alerts.Delete
 
-    -- ** AdsenseAccountsAlertsList
+    -- ** adsense.accounts.alerts.list
     , module Network.Google.Resource.AdSense.Accounts.Alerts.List
 
-    -- ** AdsenseAccountsCustomChannelsAdUnitsList
+    -- ** adsense.accounts.customchannels.adunits.list
     , module Network.Google.Resource.AdSense.Accounts.CustomChannels.AdUnits.List
 
-    -- ** AdsenseAccountsCustomChannelsGet
+    -- ** adsense.accounts.customchannels.get
     , module Network.Google.Resource.AdSense.Accounts.CustomChannels.Get
 
-    -- ** AdsenseAccountsCustomChannelsList
+    -- ** adsense.accounts.customchannels.list
     , module Network.Google.Resource.AdSense.Accounts.CustomChannels.List
 
-    -- ** AdsenseAccountsGet
+    -- ** adsense.accounts.get
     , module Network.Google.Resource.AdSense.Accounts.Get
 
-    -- ** AdsenseAccountsList
+    -- ** adsense.accounts.list
     , module Network.Google.Resource.AdSense.Accounts.List
 
-    -- ** AdsenseAccountsPaymentsList
+    -- ** adsense.accounts.payments.list
     , module Network.Google.Resource.AdSense.Accounts.Payments.List
 
-    -- ** AdsenseAccountsReportsGenerate
+    -- ** adsense.accounts.reports.generate
     , module Network.Google.Resource.AdSense.Accounts.Reports.Generate
 
-    -- ** AdsenseAccountsReportsSavedGenerate
+    -- ** adsense.accounts.reports.saved.generate
     , module Network.Google.Resource.AdSense.Accounts.Reports.Saved.Generate
 
-    -- ** AdsenseAccountsReportsSavedList
+    -- ** adsense.accounts.reports.saved.list
     , module Network.Google.Resource.AdSense.Accounts.Reports.Saved.List
 
-    -- ** AdsenseAccountsSavedadstylesGet
+    -- ** adsense.accounts.savedadstyles.get
     , module Network.Google.Resource.AdSense.Accounts.Savedadstyles.Get
 
-    -- ** AdsenseAccountsSavedadstylesList
+    -- ** adsense.accounts.savedadstyles.list
     , module Network.Google.Resource.AdSense.Accounts.Savedadstyles.List
 
-    -- ** AdsenseAccountsURLChannelsList
+    -- ** adsense.accounts.urlchannels.list
     , module Network.Google.Resource.AdSense.Accounts.URLChannels.List
 
-    -- ** AdsenseAdClientsList
+    -- ** adsense.adclients.list
     , module Network.Google.Resource.AdSense.AdClients.List
 
-    -- ** AdsenseAdUnitsCustomChannelsList
+    -- ** adsense.adunits.customchannels.list
     , module Network.Google.Resource.AdSense.AdUnits.CustomChannels.List
 
-    -- ** AdsenseAdUnitsGet
+    -- ** adsense.adunits.get
     , module Network.Google.Resource.AdSense.AdUnits.Get
 
-    -- ** AdsenseAdUnitsGetAdCode
+    -- ** adsense.adunits.getAdCode
     , module Network.Google.Resource.AdSense.AdUnits.GetAdCode
 
-    -- ** AdsenseAdUnitsList
+    -- ** adsense.adunits.list
     , module Network.Google.Resource.AdSense.AdUnits.List
 
-    -- ** AdsenseAlertsDelete
+    -- ** adsense.alerts.delete
     , module Network.Google.Resource.AdSense.Alerts.Delete
 
-    -- ** AdsenseAlertsList
+    -- ** adsense.alerts.list
     , module Network.Google.Resource.AdSense.Alerts.List
 
-    -- ** AdsenseCustomChannelsAdUnitsList
+    -- ** adsense.customchannels.adunits.list
     , module Network.Google.Resource.AdSense.CustomChannels.AdUnits.List
 
-    -- ** AdsenseCustomChannelsGet
+    -- ** adsense.customchannels.get
     , module Network.Google.Resource.AdSense.CustomChannels.Get
 
-    -- ** AdsenseCustomChannelsList
+    -- ** adsense.customchannels.list
     , module Network.Google.Resource.AdSense.CustomChannels.List
 
-    -- ** AdsenseMetadataDimensionsList
+    -- ** adsense.metadata.dimensions.list
     , module Network.Google.Resource.AdSense.Metadata.Dimensions.List
 
-    -- ** AdsenseMetadataMetricsList
+    -- ** adsense.metadata.metrics.list
     , module Network.Google.Resource.AdSense.Metadata.Metrics.List
 
-    -- ** AdsensePaymentsList
+    -- ** adsense.payments.list
     , module Network.Google.Resource.AdSense.Payments.List
 
-    -- ** AdsenseReportsGenerate
+    -- ** adsense.reports.generate
     , module Network.Google.Resource.AdSense.Reports.Generate
 
-    -- ** AdsenseReportsSavedGenerate
+    -- ** adsense.reports.saved.generate
     , module Network.Google.Resource.AdSense.Reports.Saved.Generate
 
-    -- ** AdsenseReportsSavedList
+    -- ** adsense.reports.saved.list
     , module Network.Google.Resource.AdSense.Reports.Saved.List
 
-    -- ** AdsenseSavedadstylesGet
+    -- ** adsense.savedadstyles.get
     , module Network.Google.Resource.AdSense.Savedadstyles.Get
 
-    -- ** AdsenseSavedadstylesList
+    -- ** adsense.savedadstyles.list
     , module Network.Google.Resource.AdSense.Savedadstyles.List
 
-    -- ** AdsenseURLChannelsList
+    -- ** adsense.urlchannels.list
     , module Network.Google.Resource.AdSense.URLChannels.List
 
     -- * Types

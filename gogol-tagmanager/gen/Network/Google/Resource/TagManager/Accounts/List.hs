@@ -22,7 +22,7 @@
 --
 -- Lists all GTM Accounts that a user has access to.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsList@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.list@.
 module Network.Google.Resource.TagManager.Accounts.List
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.TagManager.Accounts.List
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsList@ method which the
+-- | A resource alias for @tagmanager.accounts.list@ method which the
 -- 'AccountsList'' request conforms to.
 type AccountsListResource =
      "accounts" :>

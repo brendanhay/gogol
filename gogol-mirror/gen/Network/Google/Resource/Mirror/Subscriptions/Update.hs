@@ -22,7 +22,7 @@
 --
 -- Updates an existing subscription in place.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorSubscriptionsUpdate@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.subscriptions.update@.
 module Network.Google.Resource.Mirror.Subscriptions.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Mirror.Subscriptions.Update
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorSubscriptionsUpdate@ method which the
+-- | A resource alias for @mirror.subscriptions.update@ method which the
 -- 'SubscriptionsUpdate'' request conforms to.
 type SubscriptionsUpdateResource =
      "subscriptions" :>
@@ -65,8 +65,8 @@ data SubscriptionsUpdate' = SubscriptionsUpdate'
 --
 -- * 'suId'
 subscriptionsUpdate'
-    :: Subscription -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: Subscription -- ^ 'suPayload'
+    -> Text -- ^ 'suId'
     -> SubscriptionsUpdate'
 subscriptionsUpdate' pSuPayload_ pSuId_ =
     SubscriptionsUpdate'

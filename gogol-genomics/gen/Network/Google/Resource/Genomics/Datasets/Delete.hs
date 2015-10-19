@@ -22,7 +22,7 @@
 --
 -- Deletes a dataset.
 --
--- /See:/ < Genomics API Reference> for @GenomicsDatasetsDelete@.
+-- /See:/ < Genomics API Reference> for @genomics.datasets.delete@.
 module Network.Google.Resource.Genomics.Datasets.Delete
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.Datasets.Delete
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsDatasetsDelete@ method which the
+-- | A resource alias for @genomics.datasets.delete@ method which the
 -- 'DatasetsDelete'' request conforms to.
 type DatasetsDeleteResource =
      "v1" :>
@@ -95,7 +95,7 @@ data DatasetsDelete' = DatasetsDelete'
 --
 -- * 'ddCallback'
 datasetsDelete'
-    :: Text -- ^ 'datasetId'
+    :: Text -- ^ 'ddDatasetId'
     -> DatasetsDelete'
 datasetsDelete' pDdDatasetId_ =
     DatasetsDelete'

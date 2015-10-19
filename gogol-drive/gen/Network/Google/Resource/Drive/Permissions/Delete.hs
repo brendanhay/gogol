@@ -22,7 +22,7 @@
 --
 -- Deletes a permission from a file.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsDelete@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.permissions.delete@.
 module Network.Google.Resource.Drive.Permissions.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Drive.Permissions.Delete
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePermissionsDelete@ method which the
+-- | A resource alias for @drive.permissions.delete@ method which the
 -- 'PermissionsDelete'' request conforms to.
 type PermissionsDeleteResource =
      "files" :>
@@ -65,8 +65,8 @@ data PermissionsDelete' = PermissionsDelete'
 --
 -- * 'perPermissionId'
 permissionsDelete'
-    :: Text -- ^ 'fileId'
-    -> Text -- ^ 'permissionId'
+    :: Text -- ^ 'perFileId'
+    -> Text -- ^ 'perPermissionId'
     -> PermissionsDelete'
 permissionsDelete' pPerFileId_ pPerPermissionId_ =
     PermissionsDelete'

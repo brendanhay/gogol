@@ -23,7 +23,7 @@
 -- Lists reports created by a specific job. Returns NOT_FOUND if the job
 -- does not exist.
 --
--- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @YouTubereportingJobsReportsList@.
+-- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @youtubereporting.jobs.reports.list@.
 module Network.Google.Resource.YouTubeReporting.Jobs.Reports.List
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Reports.List
 import           Network.Google.Prelude
 import           Network.Google.YouTubeReporting.Types
 
--- | A resource alias for @YouTubereportingJobsReportsList@ method which the
+-- | A resource alias for @youtubereporting.jobs.reports.list@ method which the
 -- 'JobsReportsList'' request conforms to.
 type JobsReportsListResource =
      "v1" :>
@@ -114,7 +114,7 @@ data JobsReportsList' = JobsReportsList'
 --
 -- * 'jrlCallback'
 jobsReportsList'
-    :: Text -- ^ 'jobId'
+    :: Text -- ^ 'jrlJobId'
     -> JobsReportsList'
 jobsReportsList' pJrlJobId_ =
     JobsReportsList'

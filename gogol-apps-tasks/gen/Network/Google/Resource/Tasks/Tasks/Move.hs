@@ -24,7 +24,7 @@
 -- include putting it as a child task under a new parent and\/or move it to
 -- a different position among its sibling tasks.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTasksMove@.
+-- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasks.move@.
 module Network.Google.Resource.Tasks.Tasks.Move
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Tasks.Tasks.Move
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTasksMove@ method which the
+-- | A resource alias for @tasks.tasks.move@ method which the
 -- 'TasksMove'' request conforms to.
 type TasksMoveResource =
      "lists" :>
@@ -80,8 +80,8 @@ data TasksMove' = TasksMove'
 --
 -- * 'tmPrevious'
 tasksMove'
-    :: Text -- ^ 'tasklist'
-    -> Text -- ^ 'task'
+    :: Text -- ^ 'tmTaskList'
+    -> Text -- ^ 'tmTask'
     -> TasksMove'
 tasksMove' pTmTaskList_ pTmTask_ =
     TasksMove'

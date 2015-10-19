@@ -23,7 +23,7 @@
 -- Controls the settings for a slate that can be displayed in the broadcast
 -- stream.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveBroadcastsControl@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveBroadcasts.control@.
 module Network.Google.Resource.YouTube.LiveBroadcasts.Control
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Control
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveBroadcastsControl@ method which the
+-- | A resource alias for @youtube.liveBroadcasts.control@ method which the
 -- 'LiveBroadcastsControl'' request conforms to.
 type LiveBroadcastsControlResource =
      "liveBroadcasts" :>
@@ -93,8 +93,8 @@ data LiveBroadcastsControl' = LiveBroadcastsControl'
 --
 -- * 'lbcOffsetTimeMs'
 liveBroadcastsControl'
-    :: Text -- ^ 'part'
-    -> Text -- ^ 'id'
+    :: Text -- ^ 'lbcPart'
+    -> Text -- ^ 'lbcId'
     -> LiveBroadcastsControl'
 liveBroadcastsControl' pLbcPart_ pLbcId_ =
     LiveBroadcastsControl'

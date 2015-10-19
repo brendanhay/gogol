@@ -23,7 +23,7 @@
 -- Updates the details of an in-app product. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherInAppProductsPatch@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.inappproducts.patch@.
 module Network.Google.Resource.AndroidPublisher.InAppProducts.Patch
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AndroidPublisher.InAppProducts.Patch
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherInAppProductsPatch@ method which the
+-- | A resource alias for @androidpublisher.inappproducts.patch@ method which the
 -- 'InAppProductsPatch'' request conforms to.
 type InAppProductsPatchResource =
      Capture "packageName" Text :>
@@ -77,9 +77,9 @@ data InAppProductsPatch' = InAppProductsPatch'
 --
 -- * 'iAppSKU'
 inAppProductsPatch'
-    :: Text -- ^ 'packageName'
-    -> InAppProduct -- ^ 'payload'
-    -> Text -- ^ 'sku'
+    :: Text -- ^ 'iAppPackageName'
+    -> InAppProduct -- ^ 'iAppPayload'
+    -> Text -- ^ 'iAppSKU'
     -> InAppProductsPatch'
 inAppProductsPatch' pIAppPackageName_ pIAppPayload_ pIAppSKU_ =
     InAppProductsPatch'

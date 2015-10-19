@@ -24,7 +24,7 @@
 -- passed version matches the currently stored version. This method results
 -- in a conflict error on version mismatch.
 --
--- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @AppStateStatesClear@.
+-- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @appstate.states.clear@.
 module Network.Google.Resource.AppState.States.Clear
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AppState.States.Clear
 import           Network.Google.AppState.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppStateStatesClear@ method which the
+-- | A resource alias for @appstate.states.clear@ method which the
 -- 'StatesClear'' request conforms to.
 type StatesClearResource =
      "states" :>
@@ -69,7 +69,7 @@ data StatesClear' = StatesClear'
 --
 -- * 'scCurrentDataVersion'
 statesClear'
-    :: Int32 -- ^ 'stateKey'
+    :: Int32 -- ^ 'scStateKey'
     -> StatesClear'
 statesClear' pScStateKey_ =
     StatesClear'

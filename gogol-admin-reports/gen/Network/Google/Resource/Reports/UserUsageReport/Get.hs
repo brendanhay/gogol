@@ -23,7 +23,7 @@
 -- Retrieves a report which is a collection of properties \/ statistics for
 -- a set of users.
 --
--- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference> for @ReportsUserUsageReportGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference> for @reports.userUsageReport.get@.
 module Network.Google.Resource.Reports.UserUsageReport.Get
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Reports.UserUsageReport.Get
 import           Network.Google.Prelude
 import           Network.Google.Reports.Types
 
--- | A resource alias for @ReportsUserUsageReportGet@ method which the
+-- | A resource alias for @reports.userUsageReport.get@ method which the
 -- 'UserUsageReportGet'' request conforms to.
 type UserUsageReportGetResource =
      "usage" :>
@@ -93,8 +93,8 @@ data UserUsageReportGet' = UserUsageReportGet'
 --
 -- * 'uurgMaxResults'
 userUsageReportGet'
-    :: Text -- ^ 'date'
-    -> Text -- ^ 'userKey'
+    :: Text -- ^ 'uurgDate'
+    -> Text -- ^ 'uurgUserKey'
     -> UserUsageReportGet'
 userUsageReportGet' pUurgDate_ pUurgUserKey_ =
     UserUsageReportGet'

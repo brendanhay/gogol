@@ -24,7 +24,7 @@
 -- parameters. Returns the result as JSON; to retrieve output in CSV format
 -- specify \"alt=csv\" as a query parameter.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostReportsGenerate@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.reports.generate@.
 module Network.Google.Resource.AdSenseHost.Reports.Generate
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.AdSenseHost.Reports.Generate
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostReportsGenerate@ method which the
+-- | A resource alias for @adsensehost.reports.generate@ method which the
 -- 'ReportsGenerate'' request conforms to.
 type ReportsGenerateResource =
      "reports" :>
@@ -103,8 +103,8 @@ data ReportsGenerate' = ReportsGenerate'
 --
 -- * 'rgMaxResults'
 reportsGenerate'
-    :: Text -- ^ 'endDate'
-    -> Text -- ^ 'startDate'
+    :: Text -- ^ 'rgEndDate'
+    -> Text -- ^ 'rgStartDate'
     -> ReportsGenerate'
 reportsGenerate' pRgEndDate_ pRgStartDate_ =
     ReportsGenerate'

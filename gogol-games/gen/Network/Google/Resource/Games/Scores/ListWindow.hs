@@ -23,7 +23,7 @@
 -- Lists the scores in a leaderboard around (and including) a player\'s
 -- score.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesScoresListWindow@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.scores.listWindow@.
 module Network.Google.Resource.Games.Scores.ListWindow
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Games.Scores.ListWindow
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesScoresListWindow@ method which the
+-- | A resource alias for @games.scores.listWindow@ method which the
 -- 'ScoresListWindow'' request conforms to.
 type ScoresListWindowResource =
      "leaderboards" :>
@@ -98,9 +98,9 @@ data ScoresListWindow' = ScoresListWindow'
 --
 -- * 'slwMaxResults'
 scoresListWindow'
-    :: ScoresListWindowCollection -- ^ 'collection'
-    -> ScoresListWindowTimeSpan -- ^ 'timeSpan'
-    -> Text -- ^ 'leaderboardId'
+    :: ScoresListWindowCollection -- ^ 'slwCollection'
+    -> ScoresListWindowTimeSpan -- ^ 'slwTimeSpan'
+    -> Text -- ^ 'slwLeaderboardId'
     -> ScoresListWindow'
 scoresListWindow' pSlwCollection_ pSlwTimeSpan_ pSlwLeaderboardId_ =
     ScoresListWindow'

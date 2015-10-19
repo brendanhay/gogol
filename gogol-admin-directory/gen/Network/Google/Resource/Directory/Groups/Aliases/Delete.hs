@@ -22,7 +22,7 @@
 --
 -- Remove a alias for the group
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsAliasesDelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.groups.aliases.delete@.
 module Network.Google.Resource.Directory.Groups.Aliases.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Groups.Aliases.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryGroupsAliasesDelete@ method which the
+-- | A resource alias for @directory.groups.aliases.delete@ method which the
 -- 'GroupsAliasesDelete'' request conforms to.
 type GroupsAliasesDeleteResource =
      "groups" :>
@@ -65,8 +65,8 @@ data GroupsAliasesDelete' = GroupsAliasesDelete'
 --
 -- * 'gadAlias'
 groupsAliasesDelete'
-    :: Text -- ^ 'groupKey'
-    -> Text -- ^ 'alias'
+    :: Text -- ^ 'gadGroupKey'
+    -> Text -- ^ 'gadAlias'
     -> GroupsAliasesDelete'
 groupsAliasesDelete' pGadGroupKey_ pGadAlias_ =
     GroupsAliasesDelete'

@@ -22,7 +22,7 @@
 --
 -- Retrieves a specific table by its ID.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableGet@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.table.get@.
 module Network.Google.Resource.FusionTables.Table.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.FusionTables.Table.Get
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTableGet@ method which the
+-- | A resource alias for @fusiontables.table.get@ method which the
 -- 'TableGet'' request conforms to.
 type TableGetResource =
      "tables" :>
@@ -59,7 +59,7 @@ newtype TableGet' = TableGet'
 --
 -- * 'tabTableId'
 tableGet'
-    :: Text -- ^ 'tableId'
+    :: Text -- ^ 'tabTableId'
     -> TableGet'
 tableGet' pTabTableId_ =
     TableGet'

@@ -22,7 +22,7 @@
 --
 -- Add Organization Unit
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryOrgUnitsInsert@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.orgunits.insert@.
 module Network.Google.Resource.Directory.OrgUnits.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.OrgUnits.Insert
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryOrgUnitsInsert@ method which the
+-- | A resource alias for @directory.orgunits.insert@ method which the
 -- 'OrgUnitsInsert'' request conforms to.
 type OrgUnitsInsertResource =
      "customer" :>
@@ -65,8 +65,8 @@ data OrgUnitsInsert' = OrgUnitsInsert'
 --
 -- * 'ouiCustomerId'
 orgUnitsInsert'
-    :: OrgUnit -- ^ 'payload'
-    -> Text -- ^ 'customerId'
+    :: OrgUnit -- ^ 'ouiPayload'
+    -> Text -- ^ 'ouiCustomerId'
     -> OrgUnitsInsert'
 orgUnitsInsert' pOuiPayload_ pOuiCustomerId_ =
     OrgUnitsInsert'

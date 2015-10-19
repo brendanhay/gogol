@@ -22,7 +22,7 @@
 --
 -- Verifies the assertion returned by the IdP.
 --
--- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyVerifyAssertion@.
+-- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.verifyAssertion@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyAssertion
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyAssertion
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyVerifyAssertion@ method which the
+-- | A resource alias for @identitytoolkit.relyingparty.verifyAssertion@ method which the
 -- 'RelyingPartyVerifyAssertion'' request conforms to.
 type RelyingPartyVerifyAssertionResource =
      "verifyAssertion" :>
@@ -61,7 +61,7 @@ newtype RelyingPartyVerifyAssertion' = RelyingPartyVerifyAssertion'
 --
 -- * 'rpvaPayload'
 relyingPartyVerifyAssertion'
-    :: IdentitytoolkitRelyingPartyVerifyAssertionRequest -- ^ 'payload'
+    :: IdentitytoolkitRelyingPartyVerifyAssertionRequest -- ^ 'rpvaPayload'
     -> RelyingPartyVerifyAssertion'
 relyingPartyVerifyAssertion' pRpvaPayload_ =
     RelyingPartyVerifyAssertion'

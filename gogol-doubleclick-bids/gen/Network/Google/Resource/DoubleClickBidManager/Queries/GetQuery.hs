@@ -22,7 +22,7 @@
 --
 -- Retrieves a stored query.
 --
--- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleClickBidManagerQueriesGetQuery@.
+-- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.queries.getquery@.
 module Network.Google.Resource.DoubleClickBidManager.Queries.GetQuery
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DoubleClickBidManager.Queries.GetQuery
 import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClickBidManagerQueriesGetQuery@ method which the
+-- | A resource alias for @doubleclickbidmanager.queries.getquery@ method which the
 -- 'QueriesGetQuery'' request conforms to.
 type QueriesGetQueryResource =
      "query" :>
@@ -59,7 +59,7 @@ newtype QueriesGetQuery' = QueriesGetQuery'
 --
 -- * 'qgqQueryId'
 queriesGetQuery'
-    :: Int64 -- ^ 'queryId'
+    :: Int64 -- ^ 'qgqQueryId'
     -> QueriesGetQuery'
 queriesGetQuery' pQgqQueryId_ =
     QueriesGetQuery'

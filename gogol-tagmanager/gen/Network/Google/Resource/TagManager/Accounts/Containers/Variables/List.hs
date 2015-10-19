@@ -22,7 +22,7 @@
 --
 -- Lists all GTM Variables of a Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVariablesList@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.variables.list@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Variables.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Variables.List
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersVariablesList@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.variables.list@ method which the
 -- 'AccountsContainersVariablesList'' request conforms to.
 type AccountsContainersVariablesListResource =
      "accounts" :>
@@ -67,8 +67,8 @@ data AccountsContainersVariablesList' = AccountsContainersVariablesList'
 --
 -- * 'acvlcAccountId'
 accountsContainersVariablesList'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acvlcContainerId'
+    -> Text -- ^ 'acvlcAccountId'
     -> AccountsContainersVariablesList'
 accountsContainersVariablesList' pAcvlcContainerId_ pAcvlcAccountId_ =
     AccountsContainersVariablesList'

@@ -22,7 +22,7 @@
 --
 -- List all of the audiences to which a user can share.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsAudiencesList@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.audiences.list@.
 module Network.Google.Resource.PlusDomains.Audiences.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.PlusDomains.Audiences.List
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsAudiencesList@ method which the
+-- | A resource alias for @plusDomains.audiences.list@ method which the
 -- 'AudiencesList'' request conforms to.
 type AudiencesListResource =
      "people" :>
@@ -70,7 +70,7 @@ data AudiencesList' = AudiencesList'
 --
 -- * 'alMaxResults'
 audiencesList'
-    :: Text -- ^ 'userId'
+    :: Text -- ^ 'alUserId'
     -> AudiencesList'
 audiencesList' pAlUserId_ =
     AudiencesList'

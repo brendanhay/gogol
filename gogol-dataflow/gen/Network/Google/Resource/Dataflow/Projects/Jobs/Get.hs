@@ -22,7 +22,7 @@
 --
 -- Gets the state of the specified dataflow job.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsGet@.
+-- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.jobs.get@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.Get
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Get
 import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataflowProjectsJobsGet@ method which the
+-- | A resource alias for @dataflow.projects.jobs.get@ method which the
 -- 'ProjectsJobsGet'' request conforms to.
 type ProjectsJobsGetResource =
      "v1b3" :>
@@ -106,8 +106,8 @@ data ProjectsJobsGet' = ProjectsJobsGet'
 --
 -- * 'pjgCallback'
 projectsJobsGet'
-    :: Text -- ^ 'jobId'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'pjgJobId'
+    -> Text -- ^ 'pjgProjectId'
     -> ProjectsJobsGet'
 projectsJobsGet' pPjgJobId_ pPjgProjectId_ =
     ProjectsJobsGet'

@@ -22,7 +22,7 @@
 --
 -- Lists the user\'s current inapp item or subscription entitlements
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEntitlementsList@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.entitlements.list@.
 module Network.Google.Resource.AndroidPublisher.Entitlements.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AndroidPublisher.Entitlements.List
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEntitlementsList@ method which the
+-- | A resource alias for @androidpublisher.entitlements.list@ method which the
 -- 'EntitlementsList'' request conforms to.
 type EntitlementsListResource =
      Capture "packageName" Text :>
@@ -80,7 +80,7 @@ data EntitlementsList' = EntitlementsList'
 --
 -- * 'elMaxResults'
 entitlementsList'
-    :: Text -- ^ 'packageName'
+    :: Text -- ^ 'elPackageName'
     -> EntitlementsList'
 entitlementsList' pElPackageName_ =
     EntitlementsList'

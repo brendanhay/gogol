@@ -22,7 +22,7 @@
 --
 -- Lists jobs.
 --
--- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @YouTubereportingJobsList@.
+-- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @youtubereporting.jobs.list@.
 module Network.Google.Resource.YouTubeReporting.Jobs.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.YouTubeReporting.Jobs.List
 import           Network.Google.Prelude
 import           Network.Google.YouTubeReporting.Types
 
--- | A resource alias for @YouTubereportingJobsList@ method which the
+-- | A resource alias for @youtubereporting.jobs.list@ method which the
 -- 'JobsList'' request conforms to.
 type JobsListResource =
      "v1" :>

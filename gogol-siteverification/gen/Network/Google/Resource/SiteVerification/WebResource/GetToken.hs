@@ -22,7 +22,7 @@
 --
 -- Get a verification token for placing on a website or domain.
 --
--- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceGetToken@.
+-- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @siteVerification.webResource.getToken@.
 module Network.Google.Resource.SiteVerification.WebResource.GetToken
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.SiteVerification.WebResource.GetToken
 import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
--- | A resource alias for @SiteVerificationWebResourceGetToken@ method which the
+-- | A resource alias for @siteVerification.webResource.getToken@ method which the
 -- 'WebResourceGetToken'' request conforms to.
 type WebResourceGetTokenResource =
      "token" :>
@@ -63,7 +63,7 @@ newtype WebResourceGetToken' = WebResourceGetToken'
 --
 -- * 'wrgtPayload'
 webResourceGetToken'
-    :: SiteVerificationWebResourceGettokenRequest -- ^ 'payload'
+    :: SiteVerificationWebResourceGettokenRequest -- ^ 'wrgtPayload'
     -> WebResourceGetToken'
 webResourceGetToken' pWrgtPayload_ =
     WebResourceGetToken'

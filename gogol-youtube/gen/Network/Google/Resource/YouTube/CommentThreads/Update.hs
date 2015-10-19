@@ -22,7 +22,7 @@
 --
 -- Modifies the top-level comment in a comment thread.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentThreadsUpdate@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.commentThreads.update@.
 module Network.Google.Resource.YouTube.CommentThreads.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTube.CommentThreads.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCommentThreadsUpdate@ method which the
+-- | A resource alias for @youtube.commentThreads.update@ method which the
 -- 'CommentThreadsUpdate'' request conforms to.
 type CommentThreadsUpdateResource =
      "commentThreads" :>
@@ -65,8 +65,8 @@ data CommentThreadsUpdate' = CommentThreadsUpdate'
 --
 -- * 'ctuPayload'
 commentThreadsUpdate'
-    :: Text -- ^ 'part'
-    -> CommentThread -- ^ 'payload'
+    :: Text -- ^ 'ctuPart'
+    -> CommentThread -- ^ 'ctuPayload'
     -> CommentThreadsUpdate'
 commentThreadsUpdate' pCtuPart_ pCtuPayload_ =
     CommentThreadsUpdate'

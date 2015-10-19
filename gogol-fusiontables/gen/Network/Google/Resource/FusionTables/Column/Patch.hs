@@ -23,7 +23,7 @@
 -- Updates the name or type of an existing column. This method supports
 -- patch semantics.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesColumnPatch@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.column.patch@.
 module Network.Google.Resource.FusionTables.Column.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.FusionTables.Column.Patch
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesColumnPatch@ method which the
+-- | A resource alias for @fusiontables.column.patch@ method which the
 -- 'ColumnPatch'' request conforms to.
 type ColumnPatchResource =
      "tables" :>
@@ -72,9 +72,9 @@ data ColumnPatch' = ColumnPatch'
 --
 -- * 'cpColumnId'
 columnPatch'
-    :: Column -- ^ 'payload'
-    -> Text -- ^ 'tableId'
-    -> Text -- ^ 'columnId'
+    :: Column -- ^ 'cpPayload'
+    -> Text -- ^ 'cpTableId'
+    -> Text -- ^ 'cpColumnId'
     -> ColumnPatch'
 columnPatch' pCpPayload_ pCpTableId_ pCpColumnId_ =
     ColumnPatch'

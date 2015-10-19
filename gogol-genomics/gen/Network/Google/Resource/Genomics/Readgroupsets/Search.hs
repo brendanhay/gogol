@@ -23,7 +23,7 @@
 -- Searches for read group sets matching the criteria. Implements
 -- [GlobalAllianceApi.searchReadGroupSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/readmethods.avdl#L135).
 --
--- /See:/ < Genomics API Reference> for @GenomicsReadgroupsetsSearch@.
+-- /See:/ < Genomics API Reference> for @genomics.readgroupsets.search@.
 module Network.Google.Resource.Genomics.Readgroupsets.Search
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Genomics.Readgroupsets.Search
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReadgroupsetsSearch@ method which the
+-- | A resource alias for @genomics.readgroupsets.search@ method which the
 -- 'ReadgroupsetsSearch'' request conforms to.
 type ReadgroupsetsSearchResource =
      "v1" :>
@@ -99,7 +99,7 @@ data ReadgroupsetsSearch' = ReadgroupsetsSearch'
 --
 -- * 'reaCallback'
 readgroupsetsSearch'
-    :: SearchReadGroupSetsRequest -- ^ 'payload'
+    :: SearchReadGroupSetsRequest -- ^ 'reaPayload'
     -> ReadgroupsetsSearch'
 readgroupsetsSearch' pReaPayload_ =
     ReadgroupsetsSearch'

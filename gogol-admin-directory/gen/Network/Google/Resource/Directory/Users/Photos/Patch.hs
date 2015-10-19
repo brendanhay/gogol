@@ -22,7 +22,7 @@
 --
 -- Add a photo for the user. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersPhotosPatch@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.photos.patch@.
 module Network.Google.Resource.Directory.Users.Photos.Patch
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Users.Photos.Patch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersPhotosPatch@ method which the
+-- | A resource alias for @directory.users.photos.patch@ method which the
 -- 'UsersPhotosPatch'' request conforms to.
 type UsersPhotosPatchResource =
      "users" :>
@@ -66,8 +66,8 @@ data UsersPhotosPatch' = UsersPhotosPatch'
 --
 -- * 'uppUserKey'
 usersPhotosPatch'
-    :: UserPhoto -- ^ 'payload'
-    -> Text -- ^ 'userKey'
+    :: UserPhoto -- ^ 'uppPayload'
+    -> Text -- ^ 'uppUserKey'
     -> UsersPhotosPatch'
 usersPhotosPatch' pUppPayload_ pUppUserKey_ =
     UsersPhotosPatch'

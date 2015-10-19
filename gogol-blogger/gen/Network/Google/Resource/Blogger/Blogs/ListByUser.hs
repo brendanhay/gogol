@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of blogs, possibly filtered.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerBlogsListByUser@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.blogs.listByUser@.
 module Network.Google.Resource.Blogger.Blogs.ListByUser
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Blogger.Blogs.ListByUser
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerBlogsListByUser@ method which the
+-- | A resource alias for @blogger.blogs.listByUser@ method which the
 -- 'BlogsListByUser'' request conforms to.
 type BlogsListByUserResource =
      "users" :>
@@ -80,7 +80,7 @@ data BlogsListByUser' = BlogsListByUser'
 --
 -- * 'blbuView'
 blogsListByUser'
-    :: Text -- ^ 'userId'
+    :: Text -- ^ 'blbuUserId'
     -> BlogsListByUser'
 blogsListByUser' pBlbuUserId_ =
     BlogsListByUser'

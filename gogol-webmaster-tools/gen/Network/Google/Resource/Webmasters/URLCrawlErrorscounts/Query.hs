@@ -23,7 +23,7 @@
 -- Retrieves a time series of the number of URL crawl errors per error
 -- category and platform.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersURLCrawlErrorscountsQuery@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.urlcrawlerrorscounts.query@.
 module Network.Google.Resource.Webmasters.URLCrawlErrorscounts.Query
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Webmasters.URLCrawlErrorscounts.Query
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersURLCrawlErrorscountsQuery@ method which the
+-- | A resource alias for @webmasters.urlcrawlerrorscounts.query@ method which the
 -- 'URLCrawlErrorscountsQuery'' request conforms to.
 type URLCrawlErrorscountsQueryResource =
      "sites" :>
@@ -83,7 +83,7 @@ data URLCrawlErrorscountsQuery' = URLCrawlErrorscountsQuery'
 --
 -- * 'uceqLatestCountsOnly'
 urlCrawlErrorscountsQuery'
-    :: Text -- ^ 'siteUrl'
+    :: Text -- ^ 'uceqSiteURL'
     -> URLCrawlErrorscountsQuery'
 urlCrawlErrorscountsQuery' pUceqSiteURL_ =
     URLCrawlErrorscountsQuery'

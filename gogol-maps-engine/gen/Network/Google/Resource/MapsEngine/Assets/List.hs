@@ -22,7 +22,7 @@
 --
 -- Return all assets readable by the current user.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineAssetsList@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.assets.list@.
 module Network.Google.Resource.MapsEngine.Assets.List
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.MapsEngine.Assets.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineAssetsList@ method which the
+-- | A resource alias for @mapsengine.assets.list@ method which the
 -- 'AssetsList'' request conforms to.
 type AssetsListResource =
      "assets" :>

@@ -22,7 +22,7 @@
 --
 -- Get recaptcha secure param.
 --
--- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyGetRecaptchaParam@.
+-- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.getRecaptchaParam@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.GetRecaptchaParam
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.GetRecaptchaParam
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyGetRecaptchaParam@ method which the
+-- | A resource alias for @identitytoolkit.relyingparty.getRecaptchaParam@ method which the
 -- 'RelyingPartyGetRecaptchaParam'' request conforms to.
 type RelyingPartyGetRecaptchaParamResource =
      "getRecaptchaParam" :>

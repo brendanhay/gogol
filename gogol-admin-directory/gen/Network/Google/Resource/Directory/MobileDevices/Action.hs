@@ -22,7 +22,7 @@
 --
 -- Take action on Mobile Device
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMobileDevicesAction@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.mobiledevices.action@.
 module Network.Google.Resource.Directory.MobileDevices.Action
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Directory.MobileDevices.Action
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryMobileDevicesAction@ method which the
+-- | A resource alias for @directory.mobiledevices.action@ method which the
 -- 'MobileDevicesAction'' request conforms to.
 type MobileDevicesActionResource =
      "customer" :>
@@ -72,9 +72,9 @@ data MobileDevicesAction' = MobileDevicesAction'
 --
 -- * 'mdaCustomerId'
 mobileDevicesAction'
-    :: Text -- ^ 'resourceId'
-    -> MobileDeviceAction -- ^ 'payload'
-    -> Text -- ^ 'customerId'
+    :: Text -- ^ 'mdaResourceId'
+    -> MobileDeviceAction -- ^ 'mdaPayload'
+    -> Text -- ^ 'mdaCustomerId'
     -> MobileDevicesAction'
 mobileDevicesAction' pMdaResourceId_ pMdaPayload_ pMdaCustomerId_ =
     MobileDevicesAction'

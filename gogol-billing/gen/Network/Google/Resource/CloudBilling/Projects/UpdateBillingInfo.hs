@@ -48,7 +48,7 @@
 -- billing, you should always call this method with the name of an *open*
 -- billing account.
 --
--- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @CloudBillingProjectsUpdateBillingInfo@.
+-- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @cloudbilling.projects.updateBillingInfo@.
 module Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
     (
     -- * REST Resource
@@ -73,7 +73,7 @@ module Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
 import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudBillingProjectsUpdateBillingInfo@ method which the
+-- | A resource alias for @cloudbilling.projects.updateBillingInfo@ method which the
 -- 'ProjectsUpdateBillingInfo'' request conforms to.
 type ProjectsUpdateBillingInfoResource =
      "v1" :>
@@ -153,8 +153,8 @@ data ProjectsUpdateBillingInfo' = ProjectsUpdateBillingInfo'
 --
 -- * 'pubiCallback'
 projectsUpdateBillingInfo'
-    :: ProjectBillingInfo -- ^ 'payload'
-    -> Text -- ^ 'name'
+    :: ProjectBillingInfo -- ^ 'pubiPayload'
+    -> Text -- ^ 'pubiName'
     -> ProjectsUpdateBillingInfo'
 projectsUpdateBillingInfo' pPubiPayload_ pPubiName_ =
     ProjectsUpdateBillingInfo'

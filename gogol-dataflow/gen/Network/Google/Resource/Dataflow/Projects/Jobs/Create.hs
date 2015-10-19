@@ -22,7 +22,7 @@
 --
 -- Creates a dataflow job.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsCreate@.
+-- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.jobs.create@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.Create
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Create
 import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataflowProjectsJobsCreate@ method which the
+-- | A resource alias for @dataflow.projects.jobs.create@ method which the
 -- 'ProjectsJobsCreate'' request conforms to.
 type ProjectsJobsCreateResource =
      "v1b3" :>
@@ -111,8 +111,8 @@ data ProjectsJobsCreate' = ProjectsJobsCreate'
 --
 -- * 'pjcCallback'
 projectsJobsCreate'
-    :: Job -- ^ 'payload'
-    -> Text -- ^ 'projectId'
+    :: Job -- ^ 'pjcPayload'
+    -> Text -- ^ 'pjcProjectId'
     -> ProjectsJobsCreate'
 projectsJobsCreate' pPjcPayload_ pPjcProjectId_ =
     ProjectsJobsCreate'

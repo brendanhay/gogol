@@ -22,7 +22,7 @@
 --
 -- Adds users to the specified group.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsGroupsAddMember@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.groups.addMember@.
 module Network.Google.Resource.CloudUserAccounts.Groups.AddMember
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.CloudUserAccounts.Groups.AddMember
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsGroupsAddMember@ method which the
+-- | A resource alias for @clouduseraccounts.groups.addMember@ method which the
 -- 'GroupsAddMember'' request conforms to.
 type GroupsAddMemberResource =
      Capture "project" Text :>
@@ -72,9 +72,9 @@ data GroupsAddMember' = GroupsAddMember'
 --
 -- * 'gamGroupName'
 groupsAddMember'
-    :: Text -- ^ 'project'
-    -> GroupsAddMemberRequest -- ^ 'payload'
-    -> Text -- ^ 'groupName'
+    :: Text -- ^ 'gamProject'
+    -> GroupsAddMemberRequest -- ^ 'gamPayload'
+    -> Text -- ^ 'gamGroupName'
     -> GroupsAddMember'
 groupsAddMember' pGamProject_ pGamPayload_ pGamGroupName_ =
     GroupsAddMember'

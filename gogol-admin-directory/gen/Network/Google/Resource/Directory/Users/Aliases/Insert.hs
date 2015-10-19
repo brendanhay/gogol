@@ -22,7 +22,7 @@
 --
 -- Add a alias for the user
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersAliasesInsert@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.aliases.insert@.
 module Network.Google.Resource.Directory.Users.Aliases.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Users.Aliases.Insert
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersAliasesInsert@ method which the
+-- | A resource alias for @directory.users.aliases.insert@ method which the
 -- 'UsersAliasesInsert'' request conforms to.
 type UsersAliasesInsertResource =
      "users" :>
@@ -65,8 +65,8 @@ data UsersAliasesInsert' = UsersAliasesInsert'
 --
 -- * 'uaiUserKey'
 usersAliasesInsert'
-    :: Alias -- ^ 'payload'
-    -> Text -- ^ 'userKey'
+    :: Alias -- ^ 'uaiPayload'
+    -> Text -- ^ 'uaiUserKey'
     -> UsersAliasesInsert'
 usersAliasesInsert' pUaiPayload_ pUaiUserKey_ =
     UsersAliasesInsert'

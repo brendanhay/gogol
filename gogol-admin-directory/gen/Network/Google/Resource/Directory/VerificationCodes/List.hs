@@ -23,7 +23,7 @@
 -- Returns the current set of valid backup verification codes for the
 -- specified user.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryVerificationCodesList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.verificationCodes.list@.
 module Network.Google.Resource.Directory.VerificationCodes.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.VerificationCodes.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryVerificationCodesList@ method which the
+-- | A resource alias for @directory.verificationCodes.list@ method which the
 -- 'VerificationCodesList'' request conforms to.
 type VerificationCodesListResource =
      "users" :>
@@ -63,7 +63,7 @@ newtype VerificationCodesList' = VerificationCodesList'
 --
 -- * 'vclUserKey'
 verificationCodesList'
-    :: Text -- ^ 'userKey'
+    :: Text -- ^ 'vclUserKey'
     -> VerificationCodesList'
 verificationCodesList' pVclUserKey_ =
     VerificationCodesList'

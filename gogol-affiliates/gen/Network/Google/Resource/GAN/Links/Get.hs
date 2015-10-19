@@ -25,7 +25,7 @@
 -- own links. Publishers can look up visible links or links belonging to
 -- advertisers they are in a relationship with.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANLinksGet@.
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @gan.links.get@.
 module Network.Google.Resource.GAN.Links.Get
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.GAN.Links.Get
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GANLinksGet@ method which the
+-- | A resource alias for @gan.links.get@ method which the
 -- 'LinksGet'' request conforms to.
 type LinksGetResource =
      Capture "role" LinksGetRole :>
@@ -75,9 +75,9 @@ data LinksGet' = LinksGet'
 --
 -- * 'lgLinkId'
 linksGet'
-    :: Text -- ^ 'roleId'
-    -> LinksGetRole -- ^ 'role'
-    -> Int64 -- ^ 'linkId'
+    :: Text -- ^ 'lgRoleId'
+    -> LinksGetRole -- ^ 'lgRole'
+    -> Int64 -- ^ 'lgLinkId'
     -> LinksGet'
 linksGet' pLgRoleId_ pLgRole_ pLgLinkId_ =
     LinksGet'

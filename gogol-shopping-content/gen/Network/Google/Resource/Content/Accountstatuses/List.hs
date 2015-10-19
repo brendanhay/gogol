@@ -22,7 +22,7 @@
 --
 -- Lists the statuses of the sub-accounts in your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountstatusesList@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accountstatuses.list@.
 module Network.Google.Resource.Content.Accountstatuses.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Accountstatuses.List
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccountstatusesList@ method which the
+-- | A resource alias for @content.accountstatuses.list@ method which the
 -- 'AccountstatusesList'' request conforms to.
 type AccountstatusesListResource =
      Capture "merchantId" Word64 :>
@@ -70,7 +70,7 @@ data AccountstatusesList' = AccountstatusesList'
 --
 -- * 'acc3MaxResults'
 accountstatusesList'
-    :: Word64 -- ^ 'merchantId'
+    :: Word64 -- ^ 'acc3MerchantId'
     -> AccountstatusesList'
 accountstatusesList' pAcc3MerchantId_ =
     AccountstatusesList'

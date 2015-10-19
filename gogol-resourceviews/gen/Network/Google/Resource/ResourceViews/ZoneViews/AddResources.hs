@@ -22,7 +22,7 @@
 --
 -- Add resources to the view.
 --
--- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsAddResources@.
+-- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @resourceviews.zoneViews.addResources@.
 module Network.Google.Resource.ResourceViews.ZoneViews.AddResources
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.ResourceViews.ZoneViews.AddResources
 import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
--- | A resource alias for @ResourceviewsZoneViewsAddResources@ method which the
+-- | A resource alias for @resourceviews.zoneViews.addResources@ method which the
 -- 'ZoneViewsAddResources'' request conforms to.
 type ZoneViewsAddResourcesResource =
      Capture "project" Text :>
@@ -77,10 +77,10 @@ data ZoneViewsAddResources' = ZoneViewsAddResources'
 --
 -- * 'zvarPayload'
 zoneViewsAddResources'
-    :: Text -- ^ 'resourceView'
-    -> Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> ZoneViewsAddResourcesRequest -- ^ 'payload'
+    :: Text -- ^ 'zvarResourceView'
+    -> Text -- ^ 'zvarProject'
+    -> Text -- ^ 'zvarZone'
+    -> ZoneViewsAddResourcesRequest -- ^ 'zvarPayload'
     -> ZoneViewsAddResources'
 zoneViewsAddResources' pZvarResourceView_ pZvarProject_ pZvarZone_ pZvarPayload_ =
     ZoneViewsAddResources'

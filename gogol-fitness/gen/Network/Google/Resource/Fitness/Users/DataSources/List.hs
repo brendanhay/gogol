@@ -25,7 +25,7 @@
 -- private data sources that are only visible to other developers or calls
 -- using other scopes.
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesList@.
+-- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataSources.list@.
 module Network.Google.Resource.Fitness.Users.DataSources.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Fitness.Users.DataSources.List
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersDataSourcesList@ method which the
+-- | A resource alias for @fitness.users.dataSources.list@ method which the
 -- 'UsersDataSourcesList'' request conforms to.
 type UsersDataSourcesListResource =
      Capture "userId" Text :>
@@ -71,7 +71,7 @@ data UsersDataSourcesList' = UsersDataSourcesList'
 --
 -- * 'udslUserId'
 usersDataSourcesList'
-    :: Text -- ^ 'userId'
+    :: Text -- ^ 'udslUserId'
     -> UsersDataSourcesList'
 usersDataSourcesList' pUdslUserId_ =
     UsersDataSourcesList'

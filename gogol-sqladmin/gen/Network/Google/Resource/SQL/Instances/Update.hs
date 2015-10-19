@@ -24,7 +24,7 @@
 -- update, so you must include values for all the settings that you want to
 -- retain. For partial updates, use patch.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesUpdate@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.update@.
 module Network.Google.Resource.SQL.Instances.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.SQL.Instances.Update
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesUpdate@ method which the
+-- | A resource alias for @sql.instances.update@ method which the
 -- 'InstancesUpdate'' request conforms to.
 type InstancesUpdateResource =
      "projects" :>
@@ -75,9 +75,9 @@ data InstancesUpdate' = InstancesUpdate'
 --
 -- * 'iuInstance'
 instancesUpdate'
-    :: Text -- ^ 'project'
-    -> DatabaseInstance -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'iuProject'
+    -> DatabaseInstance -- ^ 'iuPayload'
+    -> Text -- ^ 'iuInstance'
     -> InstancesUpdate'
 instancesUpdate' pIuProject_ pIuPayload_ pIuInstance_ =
     InstancesUpdate'

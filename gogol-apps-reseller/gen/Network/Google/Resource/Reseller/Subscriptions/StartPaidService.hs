@@ -22,7 +22,7 @@
 --
 -- Starts paid service of a trial subscription
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsStartPaidService@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.startPaidService@.
 module Network.Google.Resource.Reseller.Subscriptions.StartPaidService
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Reseller.Subscriptions.StartPaidService
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerSubscriptionsStartPaidService@ method which the
+-- | A resource alias for @reseller.subscriptions.startPaidService@ method which the
 -- 'SubscriptionsStartPaidService'' request conforms to.
 type SubscriptionsStartPaidServiceResource =
      "customers" :>
@@ -66,8 +66,8 @@ data SubscriptionsStartPaidService' = SubscriptionsStartPaidService'
 --
 -- * 'sspsSubscriptionId'
 subscriptionsStartPaidService'
-    :: Text -- ^ 'customerId'
-    -> Text -- ^ 'subscriptionId'
+    :: Text -- ^ 'sspsCustomerId'
+    -> Text -- ^ 'sspsSubscriptionId'
     -> SubscriptionsStartPaidService'
 subscriptionsStartPaidService' pSspsCustomerId_ pSspsSubscriptionId_ =
     SubscriptionsStartPaidService'

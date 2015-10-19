@@ -22,7 +22,7 @@
 --
 -- Returns a list of categories that can be associated with YouTube videos.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideoCategoriesList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.videoCategories.list@.
 module Network.Google.Resource.YouTube.VideoCategories.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.YouTube.VideoCategories.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeVideoCategoriesList@ method which the
+-- | A resource alias for @youtube.videoCategories.list@ method which the
 -- 'VideoCategoriesList'' request conforms to.
 type VideoCategoriesListResource =
      "videoCategories" :>
@@ -75,7 +75,7 @@ data VideoCategoriesList' = VideoCategoriesList'
 --
 -- * 'vclId'
 videoCategoriesList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'vclPart'
     -> VideoCategoriesList'
 videoCategoriesList' pVclPart_ =
     VideoCategoriesList'

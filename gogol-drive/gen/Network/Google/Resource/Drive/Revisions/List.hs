@@ -22,7 +22,7 @@
 --
 -- Lists a file\'s revisions.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRevisionsList@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.revisions.list@.
 module Network.Google.Resource.Drive.Revisions.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Drive.Revisions.List
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRevisionsList@ method which the
+-- | A resource alias for @drive.revisions.list@ method which the
 -- 'RevisionsList'' request conforms to.
 type RevisionsListResource =
      "files" :>
@@ -60,7 +60,7 @@ newtype RevisionsList' = RevisionsList'
 --
 -- * 'rlFileId'
 revisionsList'
-    :: Text -- ^ 'fileId'
+    :: Text -- ^ 'rlFileId'
     -> RevisionsList'
 revisionsList' pRlFileId_ =
     RevisionsList'

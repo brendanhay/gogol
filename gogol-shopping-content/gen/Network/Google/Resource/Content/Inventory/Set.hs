@@ -24,7 +24,7 @@
 -- account. This operation does not update the expiration date of the
 -- product.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentInventorySet@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.inventory.set@.
 module Network.Google.Resource.Content.Inventory.Set
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Content.Inventory.Set
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentInventorySet@ method which the
+-- | A resource alias for @content.inventory.set@ method which the
 -- 'InventorySet'' request conforms to.
 type InventorySetResource =
      Capture "merchantId" Word64 :>
@@ -85,10 +85,10 @@ data InventorySet' = InventorySet'
 --
 -- * 'isDryRun'
 inventorySet'
-    :: Word64 -- ^ 'merchantId'
-    -> Text -- ^ 'storeCode'
-    -> InventorySetRequest -- ^ 'payload'
-    -> Text -- ^ 'productId'
+    :: Word64 -- ^ 'isMerchantId'
+    -> Text -- ^ 'isStoreCode'
+    -> InventorySetRequest -- ^ 'isPayload'
+    -> Text -- ^ 'isProductId'
     -> InventorySet'
 inventorySet' pIsMerchantId_ pIsStoreCode_ pIsPayload_ pIsProductId_ =
     InventorySet'

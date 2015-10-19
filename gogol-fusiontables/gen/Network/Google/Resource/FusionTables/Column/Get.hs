@@ -22,7 +22,7 @@
 --
 -- Retrieves a specific column by its ID.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesColumnGet@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.column.get@.
 module Network.Google.Resource.FusionTables.Column.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.FusionTables.Column.Get
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesColumnGet@ method which the
+-- | A resource alias for @fusiontables.column.get@ method which the
 -- 'ColumnGet'' request conforms to.
 type ColumnGetResource =
      "tables" :>
@@ -65,8 +65,8 @@ data ColumnGet' = ColumnGet'
 --
 -- * 'cgColumnId'
 columnGet'
-    :: Text -- ^ 'tableId'
-    -> Text -- ^ 'columnId'
+    :: Text -- ^ 'cgTableId'
+    -> Text -- ^ 'cgColumnId'
     -> ColumnGet'
 columnGet' pCgTableId_ pCgColumnId_ =
     ColumnGet'

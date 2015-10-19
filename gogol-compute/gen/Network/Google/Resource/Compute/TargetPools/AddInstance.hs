@@ -22,7 +22,7 @@
 --
 -- Adds instance url to targetPool.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsAddInstance@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.addInstance@.
 module Network.Google.Resource.Compute.TargetPools.AddInstance
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.TargetPools.AddInstance
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetPoolsAddInstance@ method which the
+-- | A resource alias for @compute.targetPools.addInstance@ method which the
 -- 'TargetPoolsAddInstance'' request conforms to.
 type TargetPoolsAddInstanceResource =
      Capture "project" Text :>
@@ -77,10 +77,10 @@ data TargetPoolsAddInstance' = TargetPoolsAddInstance'
 --
 -- * 'tpaiRegion'
 targetPoolsAddInstance'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'targetPool'
-    -> TargetPoolsAddInstanceRequest -- ^ 'payload'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'tpaiProject'
+    -> Text -- ^ 'tpaiTargetPool'
+    -> TargetPoolsAddInstanceRequest -- ^ 'tpaiPayload'
+    -> Text -- ^ 'tpaiRegion'
     -> TargetPoolsAddInstance'
 targetPoolsAddInstance' pTpaiProject_ pTpaiTargetPool_ pTpaiPayload_ pTpaiRegion_ =
     TargetPoolsAddInstance'

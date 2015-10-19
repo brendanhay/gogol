@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentDatafeedstatusesCustombatch@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeedstatuses.custombatch@.
 module Network.Google.Resource.Content.Datafeedstatuses.Custombatch
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.Content.Datafeedstatuses.Custombatch
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentDatafeedstatusesCustombatch@ method which the
+-- | A resource alias for @content.datafeedstatuses.custombatch@ method which the
 -- 'DatafeedstatusesCustombatch'' request conforms to.
 type DatafeedstatusesCustombatchResource =
      "datafeedstatuses" :>
@@ -58,7 +58,7 @@ newtype DatafeedstatusesCustombatch' = DatafeedstatusesCustombatch'
 --
 -- * 'dcPayload'
 datafeedstatusesCustombatch'
-    :: DatafeedstatusesCustomBatchRequest -- ^ 'payload'
+    :: DatafeedstatusesCustomBatchRequest -- ^ 'dcPayload'
     -> DatafeedstatusesCustombatch'
 datafeedstatusesCustombatch' pDcPayload_ =
     DatafeedstatusesCustombatch'

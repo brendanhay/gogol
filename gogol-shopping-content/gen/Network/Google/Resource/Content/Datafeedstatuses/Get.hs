@@ -22,7 +22,7 @@
 --
 -- Retrieves the status of a datafeed from your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentDatafeedstatusesGet@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeedstatuses.get@.
 module Network.Google.Resource.Content.Datafeedstatuses.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Content.Datafeedstatuses.Get
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentDatafeedstatusesGet@ method which the
+-- | A resource alias for @content.datafeedstatuses.get@ method which the
 -- 'DatafeedstatusesGet'' request conforms to.
 type DatafeedstatusesGetResource =
      Capture "merchantId" Word64 :>
@@ -65,8 +65,8 @@ data DatafeedstatusesGet' = DatafeedstatusesGet'
 --
 -- * 'dDatafeedId'
 datafeedstatusesGet'
-    :: Word64 -- ^ 'merchantId'
-    -> Word64 -- ^ 'datafeedId'
+    :: Word64 -- ^ 'dMerchantId'
+    -> Word64 -- ^ 'dDatafeedId'
     -> DatafeedstatusesGet'
 datafeedstatusesGet' pDMerchantId_ pDDatafeedId_ =
     DatafeedstatusesGet'

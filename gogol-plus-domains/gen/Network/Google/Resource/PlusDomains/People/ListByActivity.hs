@@ -23,7 +23,7 @@
 -- List all of the people in the specified collection for a particular
 -- activity.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsPeopleListByActivity@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.people.listByActivity@.
 module Network.Google.Resource.PlusDomains.People.ListByActivity
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.PlusDomains.People.ListByActivity
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsPeopleListByActivity@ method which the
+-- | A resource alias for @plusDomains.people.listByActivity@ method which the
 -- 'PeopleListByActivity'' request conforms to.
 type PeopleListByActivityResource =
      "activities" :>
@@ -78,8 +78,8 @@ data PeopleListByActivity' = PeopleListByActivity'
 --
 -- * 'plbaMaxResults'
 peopleListByActivity'
-    :: Text -- ^ 'activityId'
-    -> PeopleListByActivityCollection -- ^ 'collection'
+    :: Text -- ^ 'plbaActivityId'
+    -> PeopleListByActivityCollection -- ^ 'plbaCollection'
     -> PeopleListByActivity'
 peopleListByActivity' pPlbaActivityId_ pPlbaCollection_ =
     PeopleListByActivity'

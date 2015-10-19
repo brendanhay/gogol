@@ -22,7 +22,7 @@
 --
 -- Removes a site from the set of the user\'s Webmaster Tools sites.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitesDelete@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sites.delete@.
 module Network.Google.Resource.Webmasters.Sites.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Webmasters.Sites.Delete
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersSitesDelete@ method which the
+-- | A resource alias for @webmasters.sites.delete@ method which the
 -- 'SitesDelete'' request conforms to.
 type SitesDeleteResource =
      "sites" :>
@@ -59,7 +59,7 @@ newtype SitesDelete' = SitesDelete'
 --
 -- * 'sdSiteURL'
 sitesDelete'
-    :: Text -- ^ 'siteUrl'
+    :: Text -- ^ 'sdSiteURL'
     -> SitesDelete'
 sitesDelete' pSdSiteURL_ =
     SitesDelete'

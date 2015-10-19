@@ -22,7 +22,7 @@
 --
 -- Gets a web property to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertiesGet@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webproperties.get@.
 module Network.Google.Resource.Analytics.Management.WebProperties.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertiesGet@ method which the
+-- | A resource alias for @analytics.management.webproperties.get@ method which the
 -- 'ManagementWebPropertiesGet'' request conforms to.
 type ManagementWebPropertiesGetResource =
      "management" :>
@@ -66,8 +66,8 @@ data ManagementWebPropertiesGet' = ManagementWebPropertiesGet'
 --
 -- * 'mwpgAccountId'
 managementWebPropertiesGet'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mwpgWebPropertyId'
+    -> Text -- ^ 'mwpgAccountId'
     -> ManagementWebPropertiesGet'
 managementWebPropertiesGet' pMwpgWebPropertyId_ pMwpgAccountId_ =
     ManagementWebPropertiesGet'

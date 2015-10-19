@@ -22,7 +22,7 @@
 --
 -- Creates a new short URL.
 --
--- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference> for @URLshortenerURLInsert@.
+-- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference> for @urlshortener.url.insert@.
 module Network.Google.Resource.URLShortener.URL.Insert
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.URLShortener.URL.Insert
 import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types
 
--- | A resource alias for @URLshortenerURLInsert@ method which the
+-- | A resource alias for @urlshortener.url.insert@ method which the
 -- 'URLInsert'' request conforms to.
 type URLInsertResource =
      "url" :>
@@ -59,7 +59,7 @@ newtype URLInsert' = URLInsert'
 --
 -- * 'uiPayload'
 urlInsert'
-    :: URL -- ^ 'payload'
+    :: URL -- ^ 'uiPayload'
     -> URLInsert'
 urlInsert' pUiPayload_ =
     URLInsert'

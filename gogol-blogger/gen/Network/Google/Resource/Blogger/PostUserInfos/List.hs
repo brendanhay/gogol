@@ -24,7 +24,7 @@
 -- The post user info contains per-user information about the post, such as
 -- access rights, specific to the user.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostUserInfosList@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.postUserInfos.list@.
 module Network.Google.Resource.Blogger.PostUserInfos.List
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.Blogger.PostUserInfos.List
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostUserInfosList@ method which the
+-- | A resource alias for @blogger.postUserInfos.list@ method which the
 -- 'PostUserInfosList'' request conforms to.
 type PostUserInfosListResource =
      "users" :>
@@ -116,8 +116,8 @@ data PostUserInfosList' = PostUserInfosList'
 --
 -- * 'puilMaxResults'
 postUserInfosList'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'puilBlogId'
+    -> Text -- ^ 'puilUserId'
     -> PostUserInfosList'
 postUserInfosList' pPuilBlogId_ pPuilUserId_ =
     PostUserInfosList'

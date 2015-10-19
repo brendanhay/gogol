@@ -22,7 +22,7 @@
 --
 -- Retrieves a paginated list of all the roles in a domain.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryRolesList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.roles.list@.
 module Network.Google.Resource.Directory.Roles.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Directory.Roles.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryRolesList@ method which the
+-- | A resource alias for @directory.roles.list@ method which the
 -- 'RolesList'' request conforms to.
 type RolesListResource =
      "customer" :>
@@ -70,7 +70,7 @@ data RolesList' = RolesList'
 --
 -- * 'rlMaxResults'
 rolesList'
-    :: Text -- ^ 'customer'
+    :: Text -- ^ 'rlCustomer'
     -> RolesList'
 rolesList' pRlCustomer_ =
     RolesList'

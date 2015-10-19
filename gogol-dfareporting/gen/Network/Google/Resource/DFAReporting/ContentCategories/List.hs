@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of content categories, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingContentCategoriesList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.contentCategories.list@.
 module Network.Google.Resource.DFAReporting.ContentCategories.List
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingContentCategoriesList@ method which the
+-- | A resource alias for @dfareporting.contentCategories.list@ method which the
 -- 'ContentCategoriesList'' request conforms to.
 type ContentCategoriesListResource =
      "userprofiles" :>
@@ -93,7 +93,7 @@ data ContentCategoriesList' = ContentCategoriesList'
 --
 -- * 'cclMaxResults'
 contentCategoriesList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'cclProFileId'
     -> ContentCategoriesList'
 contentCategoriesList' pCclProFileId_ =
     ContentCategoriesList'

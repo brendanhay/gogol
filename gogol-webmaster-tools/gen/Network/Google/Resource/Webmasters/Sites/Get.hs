@@ -22,7 +22,7 @@
 --
 -- Retrieves information about specific site.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitesGet@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sites.get@.
 module Network.Google.Resource.Webmasters.Sites.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Webmasters.Sites.Get
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersSitesGet@ method which the
+-- | A resource alias for @webmasters.sites.get@ method which the
 -- 'SitesGet'' request conforms to.
 type SitesGetResource =
      "sites" :>
@@ -59,7 +59,7 @@ newtype SitesGet' = SitesGet'
 --
 -- * 'sSiteURL'
 sitesGet'
-    :: Text -- ^ 'siteUrl'
+    :: Text -- ^ 'sSiteURL'
     -> SitesGet'
 sitesGet' pSSiteURL_ =
     SitesGet'

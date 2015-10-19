@@ -26,19 +26,19 @@ module Network.Google.AppState
 
     -- * Resources
 
-    -- ** AppStateStatesClear
+    -- ** appstate.states.clear
     , module Network.Google.Resource.AppState.States.Clear
 
-    -- ** AppStateStatesDelete
+    -- ** appstate.states.delete
     , module Network.Google.Resource.AppState.States.Delete
 
-    -- ** AppStateStatesGet
+    -- ** appstate.states.get
     , module Network.Google.Resource.AppState.States.Get
 
-    -- ** AppStateStatesList
+    -- ** appstate.states.list
     , module Network.Google.Resource.AppState.States.List
 
-    -- ** AppStateStatesUpdate
+    -- ** appstate.states.update
     , module Network.Google.Resource.AppState.States.Update
 
     -- * Types

@@ -22,7 +22,7 @@
 --
 -- Return metadata for a particular asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineAssetsGet@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.assets.get@.
 module Network.Google.Resource.MapsEngine.Assets.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.Assets.Get
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineAssetsGet@ method which the
+-- | A resource alias for @mapsengine.assets.get@ method which the
 -- 'AssetsGet'' request conforms to.
 type AssetsGetResource =
      "assets" :>
@@ -59,7 +59,7 @@ newtype AssetsGet' = AssetsGet'
 --
 -- * 'agId'
 assetsGet'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'agId'
     -> AssetsGet'
 assetsGet' pAgId_ =
     AssetsGet'

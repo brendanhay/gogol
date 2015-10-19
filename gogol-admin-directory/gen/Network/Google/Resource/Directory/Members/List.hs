@@ -22,7 +22,7 @@
 --
 -- Retrieve all members in a group (paginated)
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMembersList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.members.list@.
 module Network.Google.Resource.Directory.Members.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Directory.Members.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryMembersList@ method which the
+-- | A resource alias for @directory.members.list@ method which the
 -- 'MembersList'' request conforms to.
 type MembersListResource =
      "groups" :>
@@ -75,7 +75,7 @@ data MembersList' = MembersList'
 --
 -- * 'mlMaxResults'
 membersList'
-    :: Text -- ^ 'groupKey'
+    :: Text -- ^ 'mlGroupKey'
     -> MembersList'
 membersList' pMlGroupKey_ =
     MembersList'

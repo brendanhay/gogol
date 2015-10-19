@@ -22,7 +22,7 @@
 --
 -- Logs a user event.
 --
--- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @PartnersUserEventsLog@.
+-- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @partners.userEvents.log@.
 module Network.Google.Resource.Partners.UserEvents.Log
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Partners.UserEvents.Log
 import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PartnersUserEventsLog@ method which the
+-- | A resource alias for @partners.userEvents.log@ method which the
 -- 'UserEventsLog'' request conforms to.
 type UserEventsLogResource =
      "v2" :>
@@ -96,7 +96,7 @@ data UserEventsLog' = UserEventsLog'
 --
 -- * 'uelCallback'
 userEventsLog'
-    :: LogUserEventRequest -- ^ 'payload'
+    :: LogUserEventRequest -- ^ 'uelPayload'
     -> UserEventsLog'
 userEventsLog' pUelPayload_ =
     UserEventsLog'

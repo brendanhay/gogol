@@ -22,7 +22,7 @@
 --
 -- Add user to the specified group.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMembersInsert@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.members.insert@.
 module Network.Google.Resource.Directory.Members.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Members.Insert
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryMembersInsert@ method which the
+-- | A resource alias for @directory.members.insert@ method which the
 -- 'MembersInsert'' request conforms to.
 type MembersInsertResource =
      "groups" :>
@@ -65,8 +65,8 @@ data MembersInsert' = MembersInsert'
 --
 -- * 'miPayload'
 membersInsert'
-    :: Text -- ^ 'groupKey'
-    -> Member -- ^ 'payload'
+    :: Text -- ^ 'miGroupKey'
+    -> Member -- ^ 'miPayload'
     -> MembersInsert'
 membersInsert' pMiGroupKey_ pMiPayload_ =
     MembersInsert'

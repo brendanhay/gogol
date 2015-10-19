@@ -22,7 +22,7 @@
 --
 -- Gets one directory site contact by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingDirectorySiteContactsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.directorySiteContacts.get@.
 module Network.Google.Resource.DFAReporting.DirectorySiteContacts.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.DirectorySiteContacts.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingDirectorySiteContactsGet@ method which the
+-- | A resource alias for @dfareporting.directorySiteContacts.get@ method which the
 -- 'DirectorySiteContactsGet'' request conforms to.
 type DirectorySiteContactsGetResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data DirectorySiteContactsGet' = DirectorySiteContactsGet'
 --
 -- * 'dscgId'
 directorySiteContactsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'dscgProFileId'
+    -> Int64 -- ^ 'dscgId'
     -> DirectorySiteContactsGet'
 directorySiteContactsGet' pDscgProFileId_ pDscgId_ =
     DirectorySiteContactsGet'

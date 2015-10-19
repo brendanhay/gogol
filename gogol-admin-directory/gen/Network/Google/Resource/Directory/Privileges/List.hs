@@ -22,7 +22,7 @@
 --
 -- Retrieves a paginated list of all privileges for a customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryPrivilegesList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.privileges.list@.
 module Network.Google.Resource.Directory.Privileges.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Directory.Privileges.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryPrivilegesList@ method which the
+-- | A resource alias for @directory.privileges.list@ method which the
 -- 'PrivilegesList'' request conforms to.
 type PrivilegesListResource =
      "customer" :>
@@ -62,7 +62,7 @@ newtype PrivilegesList' = PrivilegesList'
 --
 -- * 'plCustomer'
 privilegesList'
-    :: Text -- ^ 'customer'
+    :: Text -- ^ 'plCustomer'
     -> PrivilegesList'
 privilegesList' pPlCustomer_ =
     PrivilegesList'

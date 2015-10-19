@@ -24,7 +24,7 @@
 -- from any target pools of which they were members, without deleting the
 -- instances.
 --
--- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersAbandonInstances@.
+-- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @replicapool.instanceGroupManagers.abandonInstances@.
 module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.AbandonInstances
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.AbandonInstance
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
--- | A resource alias for @ReplicapoolInstanceGroupManagersAbandonInstances@ method which the
+-- | A resource alias for @replicapool.instanceGroupManagers.abandonInstances@ method which the
 -- 'InstanceGroupManagersAbandonInstances'' request conforms to.
 type InstanceGroupManagersAbandonInstancesResource =
      Capture "project" Text :>
@@ -82,10 +82,10 @@ data InstanceGroupManagersAbandonInstances' = InstanceGroupManagersAbandonInstan
 --
 -- * 'igmaiPayload'
 instanceGroupManagersAbandonInstances'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instanceGroupManager'
-    -> Text -- ^ 'zone'
-    -> InstanceGroupManagersAbandonInstancesRequest -- ^ 'payload'
+    :: Text -- ^ 'igmaiProject'
+    -> Text -- ^ 'igmaiInstanceGroupManager'
+    -> Text -- ^ 'igmaiZone'
+    -> InstanceGroupManagersAbandonInstancesRequest -- ^ 'igmaiPayload'
     -> InstanceGroupManagersAbandonInstances'
 instanceGroupManagersAbandonInstances' pIgmaiProject_ pIgmaiInstanceGroupManager_ pIgmaiZone_ pIgmaiPayload_ =
     InstanceGroupManagersAbandonInstances'

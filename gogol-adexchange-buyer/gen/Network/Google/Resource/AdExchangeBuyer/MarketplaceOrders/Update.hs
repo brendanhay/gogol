@@ -22,7 +22,7 @@
 --
 -- Update the given order
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceOrdersUpdate@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.marketplaceorders.update@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Update
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerMarketplaceOrdersUpdate@ method which the
+-- | A resource alias for @adexchangebuyer.marketplaceorders.update@ method which the
 -- 'MarketplaceOrdersUpdate'' request conforms to.
 type MarketplaceOrdersUpdateResource =
      "marketplaceOrders" :>
@@ -77,10 +77,10 @@ data MarketplaceOrdersUpdate' = MarketplaceOrdersUpdate'
 --
 -- * 'mouOrderId'
 marketplaceOrdersUpdate'
-    :: MarketplaceOrdersUpdateUpdateAction -- ^ 'updateAction'
-    -> Int64 -- ^ 'revisionNumber'
-    -> MarketplaceOrder -- ^ 'payload'
-    -> Text -- ^ 'orderId'
+    :: MarketplaceOrdersUpdateUpdateAction -- ^ 'mouUpdateAction'
+    -> Int64 -- ^ 'mouRevisionNumber'
+    -> MarketplaceOrder -- ^ 'mouPayload'
+    -> Text -- ^ 'mouOrderId'
     -> MarketplaceOrdersUpdate'
 marketplaceOrdersUpdate' pMouUpdateAction_ pMouRevisionNumber_ pMouPayload_ pMouOrderId_ =
     MarketplaceOrdersUpdate'

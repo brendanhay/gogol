@@ -22,7 +22,7 @@
 --
 -- Gets the requested offer.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerOffersGet@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.offers.get@.
 module Network.Google.Resource.AdExchangeBuyer.Offers.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeBuyer.Offers.Get
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerOffersGet@ method which the
+-- | A resource alias for @adexchangebuyer.offers.get@ method which the
 -- 'OffersGet'' request conforms to.
 type OffersGetResource =
      "offers" :>
@@ -59,7 +59,7 @@ newtype OffersGet' = OffersGet'
 --
 -- * 'ogOfferId'
 offersGet'
-    :: Int64 -- ^ 'offerId'
+    :: Int64 -- ^ 'ogOfferId'
     -> OffersGet'
 offersGet' pOgOfferId_ =
     OffersGet'

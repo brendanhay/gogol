@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of mobile carriers.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingMobileCarriersList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.mobileCarriers.list@.
 module Network.Google.Resource.DFAReporting.MobileCarriers.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DFAReporting.MobileCarriers.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingMobileCarriersList@ method which the
+-- | A resource alias for @dfareporting.mobileCarriers.list@ method which the
 -- 'MobileCarriersList'' request conforms to.
 type MobileCarriersListResource =
      "userprofiles" :>
@@ -61,7 +61,7 @@ newtype MobileCarriersList' = MobileCarriersList'
 --
 -- * 'mclProFileId'
 mobileCarriersList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'mclProFileId'
     -> MobileCarriersList'
 mobileCarriersList' pMclProFileId_ =
     MobileCarriersList'

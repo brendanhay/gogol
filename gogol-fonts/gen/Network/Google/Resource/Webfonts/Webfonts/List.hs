@@ -23,7 +23,7 @@
 -- Retrieves the list of fonts currently served by the Google Fonts
 -- Developer API
 --
--- /See:/ <https://developers.google.com/fonts/docs/developer_api Google Fonts Developer API Reference> for @WebfontsWebfontsList@.
+-- /See:/ <https://developers.google.com/fonts/docs/developer_api Google Fonts Developer API Reference> for @webfonts.webfonts.list@.
 module Network.Google.Resource.Webfonts.Webfonts.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Webfonts.Webfonts.List
 import           Network.Google.Fonts.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @WebfontsWebfontsList@ method which the
+-- | A resource alias for @webfonts.webfonts.list@ method which the
 -- 'WebfontsList'' request conforms to.
 type WebfontsListResource =
      "webfonts" :>

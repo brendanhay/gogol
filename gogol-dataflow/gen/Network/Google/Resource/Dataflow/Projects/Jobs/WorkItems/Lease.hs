@@ -22,7 +22,7 @@
 --
 -- Leases a dataflow WorkItem to run.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsWorkItemsLease@.
+-- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.jobs.workItems.lease@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
 import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataflowProjectsJobsWorkItemsLease@ method which the
+-- | A resource alias for @dataflow.projects.jobs.workItems.lease@ method which the
 -- 'ProjectsJobsWorkItemsLease'' request conforms to.
 type ProjectsJobsWorkItemsLeaseResource =
      "v1b3" :>
@@ -108,9 +108,9 @@ data ProjectsJobsWorkItemsLease' = ProjectsJobsWorkItemsLease'
 --
 -- * 'pjwilCallback'
 projectsJobsWorkItemsLease'
-    :: Text -- ^ 'jobId'
-    -> LeaseWorkItemRequest -- ^ 'payload'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'pjwilJobId'
+    -> LeaseWorkItemRequest -- ^ 'pjwilPayload'
+    -> Text -- ^ 'pjwilProjectId'
     -> ProjectsJobsWorkItemsLease'
 projectsJobsWorkItemsLease' pPjwilJobId_ pPjwilPayload_ pPjwilProjectId_ =
     ProjectsJobsWorkItemsLease'

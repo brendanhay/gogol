@@ -22,7 +22,7 @@
 --
 -- Adds a parent folder for a file.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveParentsInsert@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.parents.insert@.
 module Network.Google.Resource.Drive.Parents.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Drive.Parents.Insert
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveParentsInsert@ method which the
+-- | A resource alias for @drive.parents.insert@ method which the
 -- 'ParentsInsert'' request conforms to.
 type ParentsInsertResource =
      "files" :>
@@ -66,8 +66,8 @@ data ParentsInsert' = ParentsInsert'
 --
 -- * 'piiFileId'
 parentsInsert'
-    :: ParentReference -- ^ 'payload'
-    -> Text -- ^ 'fileId'
+    :: ParentReference -- ^ 'piiPayload'
+    -> Text -- ^ 'piiFileId'
     -> ParentsInsert'
 parentsInsert' pPiiPayload_ pPiiFileId_ =
     ParentsInsert'

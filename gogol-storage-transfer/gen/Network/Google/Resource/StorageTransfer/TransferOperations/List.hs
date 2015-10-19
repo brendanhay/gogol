@@ -26,7 +26,7 @@
 -- to use different resource name schemes, such as
 -- \`users\/*\/operations\`.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferOperationsList@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.transferOperations.list@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.List
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.List
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferTransferOperationsList@ method which the
+-- | A resource alias for @storagetransfer.transferOperations.list@ method which the
 -- 'TransferOperationsList'' request conforms to.
 type TransferOperationsListResource =
      "v1" :>
@@ -118,7 +118,7 @@ data TransferOperationsList' = TransferOperationsList'
 --
 -- * 'tolCallback'
 transferOperationsList'
-    :: Text -- ^ 'name'
+    :: Text -- ^ 'tolName'
     -> TransferOperationsList'
 transferOperationsList' pTolName_ =
     TransferOperationsList'

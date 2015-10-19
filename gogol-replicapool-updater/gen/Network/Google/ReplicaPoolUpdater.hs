@@ -27,34 +27,34 @@ module Network.Google.ReplicaPoolUpdater
 
     -- * Resources
 
-    -- ** ReplicapoolupdaterRollingUpdatesCancel
+    -- ** replicapoolupdater.rollingUpdates.cancel
     , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Cancel
 
-    -- ** ReplicapoolupdaterRollingUpdatesGet
+    -- ** replicapoolupdater.rollingUpdates.get
     , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Get
 
-    -- ** ReplicapoolupdaterRollingUpdatesInsert
+    -- ** replicapoolupdater.rollingUpdates.insert
     , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Insert
 
-    -- ** ReplicapoolupdaterRollingUpdatesList
+    -- ** replicapoolupdater.rollingUpdates.list
     , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.List
 
-    -- ** ReplicapoolupdaterRollingUpdatesListInstanceUpdates
+    -- ** replicapoolupdater.rollingUpdates.listInstanceUpdates
     , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.ListInstanceUpdates
 
-    -- ** ReplicapoolupdaterRollingUpdatesPause
+    -- ** replicapoolupdater.rollingUpdates.pause
     , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Pause
 
-    -- ** ReplicapoolupdaterRollingUpdatesResume
+    -- ** replicapoolupdater.rollingUpdates.resume
     , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Resume
 
-    -- ** ReplicapoolupdaterRollingUpdatesRollback
+    -- ** replicapoolupdater.rollingUpdates.rollback
     , module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Rollback
 
-    -- ** ReplicapoolupdaterZoneOperationsGet
+    -- ** replicapoolupdater.zoneOperations.get
     , module Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.Get
 
-    -- ** ReplicapoolupdaterZoneOperationsList
+    -- ** replicapoolupdater.zoneOperations.list
     , module Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.List
 
     -- * Types

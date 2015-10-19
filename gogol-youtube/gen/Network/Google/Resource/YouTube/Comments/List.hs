@@ -22,7 +22,7 @@
 --
 -- Returns a list of comments that match the API request parameters.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentsList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.comments.list@.
 module Network.Google.Resource.YouTube.Comments.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.YouTube.Comments.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCommentsList@ method which the
+-- | A resource alias for @youtube.comments.list@ method which the
 -- 'CommentsList'' request conforms to.
 type CommentsListResource =
      "comments" :>
@@ -85,7 +85,7 @@ data CommentsList' = CommentsList'
 --
 -- * 'comParentId'
 commentsList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'comPart'
     -> CommentsList'
 commentsList' pComPart_ =
     CommentsList'

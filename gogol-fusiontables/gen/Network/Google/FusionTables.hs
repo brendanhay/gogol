@@ -26,103 +26,103 @@ module Network.Google.FusionTables
 
     -- * Resources
 
-    -- ** FusiontablesColumnDelete
+    -- ** fusiontables.column.delete
     , module Network.Google.Resource.FusionTables.Column.Delete
 
-    -- ** FusiontablesColumnGet
+    -- ** fusiontables.column.get
     , module Network.Google.Resource.FusionTables.Column.Get
 
-    -- ** FusiontablesColumnInsert
+    -- ** fusiontables.column.insert
     , module Network.Google.Resource.FusionTables.Column.Insert
 
-    -- ** FusiontablesColumnList
+    -- ** fusiontables.column.list
     , module Network.Google.Resource.FusionTables.Column.List
 
-    -- ** FusiontablesColumnPatch
+    -- ** fusiontables.column.patch
     , module Network.Google.Resource.FusionTables.Column.Patch
 
-    -- ** FusiontablesColumnUpdate
+    -- ** fusiontables.column.update
     , module Network.Google.Resource.FusionTables.Column.Update
 
-    -- ** FusiontablesQuerySQL
+    -- ** fusiontables.query.sql
     , module Network.Google.Resource.FusionTables.Query.SQL
 
-    -- ** FusiontablesQuerySQLGet
+    -- ** fusiontables.query.sqlGet
     , module Network.Google.Resource.FusionTables.Query.SQLGet
 
-    -- ** FusiontablesStyleDelete
+    -- ** fusiontables.style.delete
     , module Network.Google.Resource.FusionTables.Style.Delete
 
-    -- ** FusiontablesStyleGet
+    -- ** fusiontables.style.get
     , module Network.Google.Resource.FusionTables.Style.Get
 
-    -- ** FusiontablesStyleInsert
+    -- ** fusiontables.style.insert
     , module Network.Google.Resource.FusionTables.Style.Insert
 
-    -- ** FusiontablesStyleList
+    -- ** fusiontables.style.list
     , module Network.Google.Resource.FusionTables.Style.List
 
-    -- ** FusiontablesStylePatch
+    -- ** fusiontables.style.patch
     , module Network.Google.Resource.FusionTables.Style.Patch
 
-    -- ** FusiontablesStyleUpdate
+    -- ** fusiontables.style.update
     , module Network.Google.Resource.FusionTables.Style.Update
 
-    -- ** FusiontablesTableCopy
+    -- ** fusiontables.table.copy
     , module Network.Google.Resource.FusionTables.Table.Copy
 
-    -- ** FusiontablesTableDelete
+    -- ** fusiontables.table.delete
     , module Network.Google.Resource.FusionTables.Table.Delete
 
-    -- ** FusiontablesTableGet
+    -- ** fusiontables.table.get
     , module Network.Google.Resource.FusionTables.Table.Get
 
-    -- ** FusiontablesTableImportRows
+    -- ** fusiontables.table.importRows
     , module Network.Google.Resource.FusionTables.Table.ImportRows
 
-    -- ** FusiontablesTableImportTable
+    -- ** fusiontables.table.importTable
     , module Network.Google.Resource.FusionTables.Table.ImportTable
 
-    -- ** FusiontablesTableInsert
+    -- ** fusiontables.table.insert
     , module Network.Google.Resource.FusionTables.Table.Insert
 
-    -- ** FusiontablesTableList
+    -- ** fusiontables.table.list
     , module Network.Google.Resource.FusionTables.Table.List
 
-    -- ** FusiontablesTablePatch
+    -- ** fusiontables.table.patch
     , module Network.Google.Resource.FusionTables.Table.Patch
 
-    -- ** FusiontablesTableReplaceRows
+    -- ** fusiontables.table.replaceRows
     , module Network.Google.Resource.FusionTables.Table.ReplaceRows
 
-    -- ** FusiontablesTableUpdate
+    -- ** fusiontables.table.update
     , module Network.Google.Resource.FusionTables.Table.Update
 
-    -- ** FusiontablesTaskDelete
+    -- ** fusiontables.task.delete
     , module Network.Google.Resource.FusionTables.Task.Delete
 
-    -- ** FusiontablesTaskGet
+    -- ** fusiontables.task.get
     , module Network.Google.Resource.FusionTables.Task.Get
 
-    -- ** FusiontablesTaskList
+    -- ** fusiontables.task.list
     , module Network.Google.Resource.FusionTables.Task.List
 
-    -- ** FusiontablesTemplateDelete
+    -- ** fusiontables.template.delete
     , module Network.Google.Resource.FusionTables.Template.Delete
 
-    -- ** FusiontablesTemplateGet
+    -- ** fusiontables.template.get
     , module Network.Google.Resource.FusionTables.Template.Get
 
-    -- ** FusiontablesTemplateInsert
+    -- ** fusiontables.template.insert
     , module Network.Google.Resource.FusionTables.Template.Insert
 
-    -- ** FusiontablesTemplateList
+    -- ** fusiontables.template.list
     , module Network.Google.Resource.FusionTables.Template.List
 
-    -- ** FusiontablesTemplatePatch
+    -- ** fusiontables.template.patch
     , module Network.Google.Resource.FusionTables.Template.Patch
 
-    -- ** FusiontablesTemplateUpdate
+    -- ** fusiontables.template.update
     , module Network.Google.Resource.FusionTables.Template.Update
 
     -- * Types

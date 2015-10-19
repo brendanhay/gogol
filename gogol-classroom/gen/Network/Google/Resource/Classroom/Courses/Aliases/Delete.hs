@@ -25,7 +25,7 @@
 -- to remove the alias or for access errors. * \`NOT_FOUND\` if the alias
 -- does not exist.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesAliasesDelete@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.aliases.delete@.
 module Network.Google.Resource.Classroom.Courses.Aliases.Delete
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.Classroom.Courses.Aliases.Delete
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesAliasesDelete@ method which the
+-- | A resource alias for @classroom.courses.aliases.delete@ method which the
 -- 'CoursesAliasesDelete'' request conforms to.
 type CoursesAliasesDeleteResource =
      "v1" :>
@@ -107,8 +107,8 @@ data CoursesAliasesDelete' = CoursesAliasesDelete'
 --
 -- * 'cadCallback'
 coursesAliasesDelete'
-    :: Text -- ^ 'courseId'
-    -> Text -- ^ 'alias'
+    :: Text -- ^ 'cadCourseId'
+    -> Text -- ^ 'cadAlias'
     -> CoursesAliasesDelete'
 coursesAliasesDelete' pCadCourseId_ pCadAlias_ =
     CoursesAliasesDelete'

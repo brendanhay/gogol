@@ -30,7 +30,7 @@
 -- project\'s global metadata indicating which CIDR range is being used by
 -- the cluster.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @ContainerProjectsZonesClustersCreate@.
+-- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.create@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
 import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ContainerProjectsZonesClustersCreate@ method which the
+-- | A resource alias for @container.projects.zones.clusters.create@ method which the
 -- 'ProjectsZonesClustersCreate'' request conforms to.
 type ProjectsZonesClustersCreateResource =
      "v1" :>
@@ -124,9 +124,9 @@ data ProjectsZonesClustersCreate' = ProjectsZonesClustersCreate'
 --
 -- * 'pzccCallback'
 projectsZonesClustersCreate'
-    :: Text -- ^ 'zone'
-    -> CreateClusterRequest -- ^ 'payload'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'pzccZone'
+    -> CreateClusterRequest -- ^ 'pzccPayload'
+    -> Text -- ^ 'pzccProjectId'
     -> ProjectsZonesClustersCreate'
 projectsZonesClustersCreate' pPzccZone_ pPzccPayload_ pPzccProjectId_ =
     ProjectsZonesClustersCreate'

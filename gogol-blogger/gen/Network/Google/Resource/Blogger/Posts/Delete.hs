@@ -22,7 +22,7 @@
 --
 -- Delete a post by ID.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsDelete@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.delete@.
 module Network.Google.Resource.Blogger.Posts.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Blogger.Posts.Delete
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostsDelete@ method which the
+-- | A resource alias for @blogger.posts.delete@ method which the
 -- 'PostsDelete'' request conforms to.
 type PostsDeleteResource =
      "blogs" :>
@@ -65,8 +65,8 @@ data PostsDelete' = PostsDelete'
 --
 -- * 'pdPostId'
 postsDelete'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'postId'
+    :: Text -- ^ 'pdBlogId'
+    -> Text -- ^ 'pdPostId'
     -> PostsDelete'
 postsDelete' pPdBlogId_ pPdPostId_ =
     PostsDelete'

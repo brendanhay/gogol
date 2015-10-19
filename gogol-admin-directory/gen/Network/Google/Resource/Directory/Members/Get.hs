@@ -22,7 +22,7 @@
 --
 -- Retrieve Group Member
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMembersGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.members.get@.
 module Network.Google.Resource.Directory.Members.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Members.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryMembersGet@ method which the
+-- | A resource alias for @directory.members.get@ method which the
 -- 'MembersGet'' request conforms to.
 type MembersGetResource =
      "groups" :>
@@ -65,8 +65,8 @@ data MembersGet' = MembersGet'
 --
 -- * 'mgGroupKey'
 membersGet'
-    :: Text -- ^ 'memberKey'
-    -> Text -- ^ 'groupKey'
+    :: Text -- ^ 'mgMemberKey'
+    -> Text -- ^ 'mgGroupKey'
     -> MembersGet'
 membersGet' pMgMemberKey_ pMgGroupKey_ =
     MembersGet'

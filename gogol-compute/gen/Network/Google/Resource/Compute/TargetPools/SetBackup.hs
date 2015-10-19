@@ -22,7 +22,7 @@
 --
 -- Changes backup pool configurations.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsSetBackup@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.setBackup@.
 module Network.Google.Resource.Compute.TargetPools.SetBackup
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.TargetPools.SetBackup
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetPoolsSetBackup@ method which the
+-- | A resource alias for @compute.targetPools.setBackup@ method which the
 -- 'TargetPoolsSetBackup'' request conforms to.
 type TargetPoolsSetBackupResource =
      Capture "project" Text :>
@@ -82,10 +82,10 @@ data TargetPoolsSetBackup' = TargetPoolsSetBackup'
 --
 -- * 'tpsbRegion'
 targetPoolsSetBackup'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'targetPool'
-    -> TargetReference -- ^ 'payload'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'tpsbProject'
+    -> Text -- ^ 'tpsbTargetPool'
+    -> TargetReference -- ^ 'tpsbPayload'
+    -> Text -- ^ 'tpsbRegion'
     -> TargetPoolsSetBackup'
 targetPoolsSetBackup' pTpsbProject_ pTpsbTargetPool_ pTpsbPayload_ pTpsbRegion_ =
     TargetPoolsSetBackup'

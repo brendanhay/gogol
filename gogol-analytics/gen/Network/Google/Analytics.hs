@@ -26,238 +26,238 @@ module Network.Google.Analytics
 
     -- * Resources
 
-    -- ** AnalyticsDataGaGet
+    -- ** analytics.data.ga.get
     , module Network.Google.Resource.Analytics.Data.Ga.Get
 
-    -- ** AnalyticsDataMcfGet
+    -- ** analytics.data.mcf.get
     , module Network.Google.Resource.Analytics.Data.Mcf.Get
 
-    -- ** AnalyticsDataRealtimeGet
+    -- ** analytics.data.realtime.get
     , module Network.Google.Resource.Analytics.Data.Realtime.Get
 
-    -- ** AnalyticsManagementAccountSummariesList
+    -- ** analytics.management.accountSummaries.list
     , module Network.Google.Resource.Analytics.Management.AccountSummaries.List
 
-    -- ** AnalyticsManagementAccountUserLinksDelete
+    -- ** analytics.management.accountUserLinks.delete
     , module Network.Google.Resource.Analytics.Management.AccountUserLinks.Delete
 
-    -- ** AnalyticsManagementAccountUserLinksInsert
+    -- ** analytics.management.accountUserLinks.insert
     , module Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert
 
-    -- ** AnalyticsManagementAccountUserLinksList
+    -- ** analytics.management.accountUserLinks.list
     , module Network.Google.Resource.Analytics.Management.AccountUserLinks.List
 
-    -- ** AnalyticsManagementAccountUserLinksUpdate
+    -- ** analytics.management.accountUserLinks.update
     , module Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
 
-    -- ** AnalyticsManagementAccountsList
+    -- ** analytics.management.accounts.list
     , module Network.Google.Resource.Analytics.Management.Accounts.List
 
-    -- ** AnalyticsManagementCustomDataSourcesList
+    -- ** analytics.management.customDataSources.list
     , module Network.Google.Resource.Analytics.Management.CustomDataSources.List
 
-    -- ** AnalyticsManagementCustomDimensionsGet
+    -- ** analytics.management.customDimensions.get
     , module Network.Google.Resource.Analytics.Management.CustomDimensions.Get
 
-    -- ** AnalyticsManagementCustomDimensionsInsert
+    -- ** analytics.management.customDimensions.insert
     , module Network.Google.Resource.Analytics.Management.CustomDimensions.Insert
 
-    -- ** AnalyticsManagementCustomDimensionsList
+    -- ** analytics.management.customDimensions.list
     , module Network.Google.Resource.Analytics.Management.CustomDimensions.List
 
-    -- ** AnalyticsManagementCustomDimensionsPatch
+    -- ** analytics.management.customDimensions.patch
     , module Network.Google.Resource.Analytics.Management.CustomDimensions.Patch
 
-    -- ** AnalyticsManagementCustomDimensionsUpdate
+    -- ** analytics.management.customDimensions.update
     , module Network.Google.Resource.Analytics.Management.CustomDimensions.Update
 
-    -- ** AnalyticsManagementCustomMetricsGet
+    -- ** analytics.management.customMetrics.get
     , module Network.Google.Resource.Analytics.Management.CustomMetrics.Get
 
-    -- ** AnalyticsManagementCustomMetricsInsert
+    -- ** analytics.management.customMetrics.insert
     , module Network.Google.Resource.Analytics.Management.CustomMetrics.Insert
 
-    -- ** AnalyticsManagementCustomMetricsList
+    -- ** analytics.management.customMetrics.list
     , module Network.Google.Resource.Analytics.Management.CustomMetrics.List
 
-    -- ** AnalyticsManagementCustomMetricsPatch
+    -- ** analytics.management.customMetrics.patch
     , module Network.Google.Resource.Analytics.Management.CustomMetrics.Patch
 
-    -- ** AnalyticsManagementCustomMetricsUpdate
+    -- ** analytics.management.customMetrics.update
     , module Network.Google.Resource.Analytics.Management.CustomMetrics.Update
 
-    -- ** AnalyticsManagementExperimentsDelete
+    -- ** analytics.management.experiments.delete
     , module Network.Google.Resource.Analytics.Management.Experiments.Delete
 
-    -- ** AnalyticsManagementExperimentsGet
+    -- ** analytics.management.experiments.get
     , module Network.Google.Resource.Analytics.Management.Experiments.Get
 
-    -- ** AnalyticsManagementExperimentsInsert
+    -- ** analytics.management.experiments.insert
     , module Network.Google.Resource.Analytics.Management.Experiments.Insert
 
-    -- ** AnalyticsManagementExperimentsList
+    -- ** analytics.management.experiments.list
     , module Network.Google.Resource.Analytics.Management.Experiments.List
 
-    -- ** AnalyticsManagementExperimentsPatch
+    -- ** analytics.management.experiments.patch
     , module Network.Google.Resource.Analytics.Management.Experiments.Patch
 
-    -- ** AnalyticsManagementExperimentsUpdate
+    -- ** analytics.management.experiments.update
     , module Network.Google.Resource.Analytics.Management.Experiments.Update
 
-    -- ** AnalyticsManagementFiltersDelete
+    -- ** analytics.management.filters.delete
     , module Network.Google.Resource.Analytics.Management.Filters.Delete
 
-    -- ** AnalyticsManagementFiltersGet
+    -- ** analytics.management.filters.get
     , module Network.Google.Resource.Analytics.Management.Filters.Get
 
-    -- ** AnalyticsManagementFiltersInsert
+    -- ** analytics.management.filters.insert
     , module Network.Google.Resource.Analytics.Management.Filters.Insert
 
-    -- ** AnalyticsManagementFiltersList
+    -- ** analytics.management.filters.list
     , module Network.Google.Resource.Analytics.Management.Filters.List
 
-    -- ** AnalyticsManagementFiltersPatch
+    -- ** analytics.management.filters.patch
     , module Network.Google.Resource.Analytics.Management.Filters.Patch
 
-    -- ** AnalyticsManagementFiltersUpdate
+    -- ** analytics.management.filters.update
     , module Network.Google.Resource.Analytics.Management.Filters.Update
 
-    -- ** AnalyticsManagementGoalsGet
+    -- ** analytics.management.goals.get
     , module Network.Google.Resource.Analytics.Management.Goals.Get
 
-    -- ** AnalyticsManagementGoalsInsert
+    -- ** analytics.management.goals.insert
     , module Network.Google.Resource.Analytics.Management.Goals.Insert
 
-    -- ** AnalyticsManagementGoalsList
+    -- ** analytics.management.goals.list
     , module Network.Google.Resource.Analytics.Management.Goals.List
 
-    -- ** AnalyticsManagementGoalsPatch
+    -- ** analytics.management.goals.patch
     , module Network.Google.Resource.Analytics.Management.Goals.Patch
 
-    -- ** AnalyticsManagementGoalsUpdate
+    -- ** analytics.management.goals.update
     , module Network.Google.Resource.Analytics.Management.Goals.Update
 
-    -- ** AnalyticsManagementProFileFilterLinksDelete
+    -- ** analytics.management.profileFilterLinks.delete
     , module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Delete
 
-    -- ** AnalyticsManagementProFileFilterLinksGet
+    -- ** analytics.management.profileFilterLinks.get
     , module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Get
 
-    -- ** AnalyticsManagementProFileFilterLinksInsert
+    -- ** analytics.management.profileFilterLinks.insert
     , module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Insert
 
-    -- ** AnalyticsManagementProFileFilterLinksList
+    -- ** analytics.management.profileFilterLinks.list
     , module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.List
 
-    -- ** AnalyticsManagementProFileFilterLinksPatch
+    -- ** analytics.management.profileFilterLinks.patch
     , module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Patch
 
-    -- ** AnalyticsManagementProFileFilterLinksUpdate
+    -- ** analytics.management.profileFilterLinks.update
     , module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Update
 
-    -- ** AnalyticsManagementProFileUserLinksDelete
+    -- ** analytics.management.profileUserLinks.delete
     , module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Delete
 
-    -- ** AnalyticsManagementProFileUserLinksInsert
+    -- ** analytics.management.profileUserLinks.insert
     , module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Insert
 
-    -- ** AnalyticsManagementProFileUserLinksList
+    -- ** analytics.management.profileUserLinks.list
     , module Network.Google.Resource.Analytics.Management.ProFileUserLinks.List
 
-    -- ** AnalyticsManagementProFileUserLinksUpdate
+    -- ** analytics.management.profileUserLinks.update
     , module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Update
 
-    -- ** AnalyticsManagementProFilesDelete
+    -- ** analytics.management.profiles.delete
     , module Network.Google.Resource.Analytics.Management.ProFiles.Delete
 
-    -- ** AnalyticsManagementProFilesGet
+    -- ** analytics.management.profiles.get
     , module Network.Google.Resource.Analytics.Management.ProFiles.Get
 
-    -- ** AnalyticsManagementProFilesInsert
+    -- ** analytics.management.profiles.insert
     , module Network.Google.Resource.Analytics.Management.ProFiles.Insert
 
-    -- ** AnalyticsManagementProFilesList
+    -- ** analytics.management.profiles.list
     , module Network.Google.Resource.Analytics.Management.ProFiles.List
 
-    -- ** AnalyticsManagementProFilesPatch
+    -- ** analytics.management.profiles.patch
     , module Network.Google.Resource.Analytics.Management.ProFiles.Patch
 
-    -- ** AnalyticsManagementProFilesUpdate
+    -- ** analytics.management.profiles.update
     , module Network.Google.Resource.Analytics.Management.ProFiles.Update
 
-    -- ** AnalyticsManagementSegmentsList
+    -- ** analytics.management.segments.list
     , module Network.Google.Resource.Analytics.Management.Segments.List
 
-    -- ** AnalyticsManagementUnSampledReportsGet
+    -- ** analytics.management.unsampledReports.get
     , module Network.Google.Resource.Analytics.Management.UnSampledReports.Get
 
-    -- ** AnalyticsManagementUnSampledReportsInsert
+    -- ** analytics.management.unsampledReports.insert
     , module Network.Google.Resource.Analytics.Management.UnSampledReports.Insert
 
-    -- ** AnalyticsManagementUnSampledReportsList
+    -- ** analytics.management.unsampledReports.list
     , module Network.Google.Resource.Analytics.Management.UnSampledReports.List
 
-    -- ** AnalyticsManagementUploadsDeleteUploadData
+    -- ** analytics.management.uploads.deleteUploadData
     , module Network.Google.Resource.Analytics.Management.Uploads.DeleteUploadData
 
-    -- ** AnalyticsManagementUploadsGet
+    -- ** analytics.management.uploads.get
     , module Network.Google.Resource.Analytics.Management.Uploads.Get
 
-    -- ** AnalyticsManagementUploadsList
+    -- ** analytics.management.uploads.list
     , module Network.Google.Resource.Analytics.Management.Uploads.List
 
-    -- ** AnalyticsManagementUploadsUploadData
+    -- ** analytics.management.uploads.uploadData
     , module Network.Google.Resource.Analytics.Management.Uploads.UploadData
 
-    -- ** AnalyticsManagementWebPropertyAdWordsLinksDelete
+    -- ** analytics.management.webPropertyAdWordsLinks.delete
     , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Delete
 
-    -- ** AnalyticsManagementWebPropertyAdWordsLinksGet
+    -- ** analytics.management.webPropertyAdWordsLinks.get
     , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Get
 
-    -- ** AnalyticsManagementWebPropertyAdWordsLinksInsert
+    -- ** analytics.management.webPropertyAdWordsLinks.insert
     , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Insert
 
-    -- ** AnalyticsManagementWebPropertyAdWordsLinksList
+    -- ** analytics.management.webPropertyAdWordsLinks.list
     , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.List
 
-    -- ** AnalyticsManagementWebPropertyAdWordsLinksPatch
+    -- ** analytics.management.webPropertyAdWordsLinks.patch
     , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Patch
 
-    -- ** AnalyticsManagementWebPropertyAdWordsLinksUpdate
+    -- ** analytics.management.webPropertyAdWordsLinks.update
     , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Update
 
-    -- ** AnalyticsManagementWebPropertiesGet
+    -- ** analytics.management.webproperties.get
     , module Network.Google.Resource.Analytics.Management.WebProperties.Get
 
-    -- ** AnalyticsManagementWebPropertiesInsert
+    -- ** analytics.management.webproperties.insert
     , module Network.Google.Resource.Analytics.Management.WebProperties.Insert
 
-    -- ** AnalyticsManagementWebPropertiesList
+    -- ** analytics.management.webproperties.list
     , module Network.Google.Resource.Analytics.Management.WebProperties.List
 
-    -- ** AnalyticsManagementWebPropertiesPatch
+    -- ** analytics.management.webproperties.patch
     , module Network.Google.Resource.Analytics.Management.WebProperties.Patch
 
-    -- ** AnalyticsManagementWebPropertiesUpdate
+    -- ** analytics.management.webproperties.update
     , module Network.Google.Resource.Analytics.Management.WebProperties.Update
 
-    -- ** AnalyticsManagementWebPropertyUserLinksDelete
+    -- ** analytics.management.webpropertyUserLinks.delete
     , module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Delete
 
-    -- ** AnalyticsManagementWebPropertyUserLinksInsert
+    -- ** analytics.management.webpropertyUserLinks.insert
     , module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Insert
 
-    -- ** AnalyticsManagementWebPropertyUserLinksList
+    -- ** analytics.management.webpropertyUserLinks.list
     , module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.List
 
-    -- ** AnalyticsManagementWebPropertyUserLinksUpdate
+    -- ** analytics.management.webpropertyUserLinks.update
     , module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update
 
-    -- ** AnalyticsMetadataColumnsList
+    -- ** analytics.metadata.columns.list
     , module Network.Google.Resource.Analytics.Metadata.Columns.List
 
-    -- ** AnalyticsProvisioningCreateAccountTicket
+    -- ** analytics.provisioning.createAccountTicket
     , module Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
 
     -- * Types

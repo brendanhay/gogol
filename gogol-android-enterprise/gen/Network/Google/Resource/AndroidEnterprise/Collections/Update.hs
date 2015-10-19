@@ -22,7 +22,7 @@
 --
 -- Updates a collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseCollectionsUpdate@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.update@.
 module Network.Google.Resource.AndroidEnterprise.Collections.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidEnterprise.Collections.Update
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseCollectionsUpdate@ method which the
+-- | A resource alias for @androidenterprise.collections.update@ method which the
 -- 'CollectionsUpdate'' request conforms to.
 type CollectionsUpdateResource =
      "enterprises" :>
@@ -70,9 +70,9 @@ data CollectionsUpdate' = CollectionsUpdate'
 --
 -- * 'cuPayload'
 collectionsUpdate'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'collectionId'
-    -> Collection -- ^ 'payload'
+    :: Text -- ^ 'cuEnterpriseId'
+    -> Text -- ^ 'cuCollectionId'
+    -> Collection -- ^ 'cuPayload'
     -> CollectionsUpdate'
 collectionsUpdate' pCuEnterpriseId_ pCuCollectionId_ pCuPayload_ =
     CollectionsUpdate'

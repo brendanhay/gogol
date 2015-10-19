@@ -22,7 +22,7 @@
 --
 -- Lists the user\'s files.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesList@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.list@.
 module Network.Google.Resource.Drive.Files.List
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Drive.Files.List
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesList@ method which the
+-- | A resource alias for @drive.files.list@ method which the
 -- 'FilesList'' request conforms to.
 type FilesListResource =
      "files" :>

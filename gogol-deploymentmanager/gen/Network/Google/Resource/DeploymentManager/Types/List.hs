@@ -22,7 +22,7 @@
 --
 -- Lists all resource types for Deployment Manager.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerTypesList@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @deploymentmanager.types.list@.
 module Network.Google.Resource.DeploymentManager.Types.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.DeploymentManager.Types.List
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerTypesList@ method which the
+-- | A resource alias for @deploymentmanager.types.list@ method which the
 -- 'TypesList'' request conforms to.
 type TypesListResource =
      Capture "project" Text :>
@@ -76,7 +76,7 @@ data TypesList' = TypesList'
 --
 -- * 'tlMaxResults'
 typesList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'tlProject'
     -> TypesList'
 typesList' pTlProject_ =
     TypesList'

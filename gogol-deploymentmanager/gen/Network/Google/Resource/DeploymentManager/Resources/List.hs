@@ -22,7 +22,7 @@
 --
 -- Lists all resources in a given deployment.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerResourcesList@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @deploymentmanager.resources.list@.
 module Network.Google.Resource.DeploymentManager.Resources.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.DeploymentManager.Resources.List
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerResourcesList@ method which the
+-- | A resource alias for @deploymentmanager.resources.list@ method which the
 -- 'ResourcesList'' request conforms to.
 type ResourcesListResource =
      Capture "project" Text :>
@@ -82,8 +82,8 @@ data ResourcesList' = ResourcesList'
 --
 -- * 'rlDeployment'
 resourcesList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'deployment'
+    :: Text -- ^ 'rlProject'
+    -> Text -- ^ 'rlDeployment'
     -> ResourcesList'
 resourcesList' pRlProject_ pRlDeployment_ =
     ResourcesList'

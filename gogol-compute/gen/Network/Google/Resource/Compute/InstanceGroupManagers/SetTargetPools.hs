@@ -27,7 +27,7 @@
 -- added to their target pools. The change might take some time to apply to
 -- all of the instances in the group depending on the size of the group.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersSetTargetPools@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.setTargetPools@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.SetTargetPools
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.SetTargetPools
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersSetTargetPools@ method which the
+-- | A resource alias for @compute.instanceGroupManagers.setTargetPools@ method which the
 -- 'InstanceGroupManagersSetTargetPools'' request conforms to.
 type InstanceGroupManagersSetTargetPoolsResource =
      Capture "project" Text :>
@@ -88,10 +88,10 @@ data InstanceGroupManagersSetTargetPools' = InstanceGroupManagersSetTargetPools'
 --
 -- * 'igmstpPayload'
 instanceGroupManagersSetTargetPools'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instanceGroupManager'
-    -> Text -- ^ 'zone'
-    -> InstanceGroupManagersSetTargetPoolsRequest -- ^ 'payload'
+    :: Text -- ^ 'igmstpProject'
+    -> Text -- ^ 'igmstpInstanceGroupManager'
+    -> Text -- ^ 'igmstpZone'
+    -> InstanceGroupManagersSetTargetPoolsRequest -- ^ 'igmstpPayload'
     -> InstanceGroupManagersSetTargetPools'
 instanceGroupManagersSetTargetPools' pIgmstpProject_ pIgmstpInstanceGroupManager_ pIgmstpZone_ pIgmstpPayload_ =
     InstanceGroupManagersSetTargetPools'

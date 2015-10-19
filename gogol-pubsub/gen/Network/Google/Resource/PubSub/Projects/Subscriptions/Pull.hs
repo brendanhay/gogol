@@ -25,7 +25,7 @@
 -- if there are too many concurrent pull requests pending for the given
 -- subscription.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsPull@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.pull@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Pull
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Pull
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsSubscriptionsPull@ method which the
+-- | A resource alias for @pubsub.projects.subscriptions.pull@ method which the
 -- 'ProjectsSubscriptionsPull'' request conforms to.
 type ProjectsSubscriptionsPullResource =
      "v1" :>
@@ -106,8 +106,8 @@ data ProjectsSubscriptionsPull' = ProjectsSubscriptionsPull'
 --
 -- * 'pspCallback'
 projectsSubscriptionsPull'
-    :: PullRequest -- ^ 'payload'
-    -> Text -- ^ 'subscription'
+    :: PullRequest -- ^ 'pspPayload'
+    -> Text -- ^ 'pspSubscription'
     -> ProjectsSubscriptionsPull'
 projectsSubscriptionsPull' pPspPayload_ pPspSubscription_ =
     ProjectsSubscriptionsPull'

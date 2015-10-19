@@ -27,37 +27,37 @@ module Network.Google.AppEngine
 
     -- * Resources
 
-    -- ** AppEngineAppsGet
+    -- ** appengine.apps.get
     , module Network.Google.Resource.AppEngine.Apps.Get
 
-    -- ** AppEngineAppsModulesDelete
+    -- ** appengine.apps.modules.delete
     , module Network.Google.Resource.AppEngine.Apps.Modules.Delete
 
-    -- ** AppEngineAppsModulesGet
+    -- ** appengine.apps.modules.get
     , module Network.Google.Resource.AppEngine.Apps.Modules.Get
 
-    -- ** AppEngineAppsModulesList
+    -- ** appengine.apps.modules.list
     , module Network.Google.Resource.AppEngine.Apps.Modules.List
 
-    -- ** AppEngineAppsModulesPatch
+    -- ** appengine.apps.modules.patch
     , module Network.Google.Resource.AppEngine.Apps.Modules.Patch
 
-    -- ** AppEngineAppsModulesVersionsCreate
+    -- ** appengine.apps.modules.versions.create
     , module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create
 
-    -- ** AppEngineAppsModulesVersionsDelete
+    -- ** appengine.apps.modules.versions.delete
     , module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Delete
 
-    -- ** AppEngineAppsModulesVersionsGet
+    -- ** appengine.apps.modules.versions.get
     , module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Get
 
-    -- ** AppEngineAppsModulesVersionsList
+    -- ** appengine.apps.modules.versions.list
     , module Network.Google.Resource.AppEngine.Apps.Modules.Versions.List
 
-    -- ** AppEngineAppsOperationsGet
+    -- ** appengine.apps.operations.get
     , module Network.Google.Resource.AppEngine.Apps.Operations.Get
 
-    -- ** AppEngineAppsOperationsList
+    -- ** appengine.apps.operations.list
     , module Network.Google.Resource.AppEngine.Apps.Operations.List
 
     -- * Types

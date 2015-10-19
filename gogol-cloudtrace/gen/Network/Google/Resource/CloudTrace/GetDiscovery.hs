@@ -23,7 +23,7 @@
 -- Returns a discovery document in the specified \`format\`. The typeurl in
 -- the returned google.protobuf.Any value depends on the requested format.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference> for @CloudtraceGetDiscovery@.
+-- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference> for @cloudtrace.getDiscovery@.
 module Network.Google.Resource.CloudTrace.GetDiscovery
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.CloudTrace.GetDiscovery
 import           Network.Google.CloudTrace.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudtraceGetDiscovery@ method which the
+-- | A resource alias for @cloudtrace.getDiscovery@ method which the
 -- 'GetDiscovery'' request conforms to.
 type GetDiscoveryResource =
      "v1" :>

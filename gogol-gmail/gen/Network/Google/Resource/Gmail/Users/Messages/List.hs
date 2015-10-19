@@ -22,7 +22,7 @@
 --
 -- Lists the messages in the user\'s mailbox.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesList@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.messages.list@.
 module Network.Google.Resource.Gmail.Users.Messages.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Gmail.Users.Messages.List
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersMessagesList@ method which the
+-- | A resource alias for @gmail.users.messages.list@ method which the
 -- 'UsersMessagesList'' request conforms to.
 type UsersMessagesListResource =
      Capture "userId" Text :>

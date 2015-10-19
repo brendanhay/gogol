@@ -22,7 +22,7 @@
 --
 -- Inserts a report request into the reporting system.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchReportsRequest@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @doubleclicksearch.reports.request@.
 module Network.Google.Resource.DoubleClickSearch.Reports.Request
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DoubleClickSearch.Reports.Request
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClicksearchReportsRequest@ method which the
+-- | A resource alias for @doubleclicksearch.reports.request@ method which the
 -- 'ReportsRequest'' request conforms to.
 type ReportsRequestResource =
      "reports" :>
@@ -59,7 +59,7 @@ newtype ReportsRequest' = ReportsRequest'
 --
 -- * 'rrPayload'
 reportsRequest'
-    :: ReportRequest -- ^ 'payload'
+    :: ReportRequest -- ^ 'rrPayload'
     -> ReportsRequest'
 reportsRequest' pRrPayload_ =
     ReportsRequest'

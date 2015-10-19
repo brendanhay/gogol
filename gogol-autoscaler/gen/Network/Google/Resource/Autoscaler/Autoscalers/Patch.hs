@@ -23,7 +23,7 @@
 -- Update the entire content of the Autoscaler resource. This method
 -- supports patch semantics.
 --
--- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerAutoscalersPatch@.
+-- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @autoscaler.autoscalers.patch@.
 module Network.Google.Resource.Autoscaler.Autoscalers.Patch
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Autoscaler.Autoscalers.Patch
 import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AutoscalerAutoscalersPatch@ method which the
+-- | A resource alias for @autoscaler.autoscalers.patch@ method which the
 -- 'AutoscalersPatch'' request conforms to.
 type AutoscalersPatchResource =
      "projects" :>
@@ -78,10 +78,10 @@ data AutoscalersPatch' = AutoscalersPatch'
 --
 -- * 'apAutoscaler'
 autoscalersPatch'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Autoscaler -- ^ 'payload'
-    -> Text -- ^ 'autoscaler'
+    :: Text -- ^ 'apProject'
+    -> Text -- ^ 'apZone'
+    -> Autoscaler -- ^ 'apPayload'
+    -> Text -- ^ 'apAutoscaler'
     -> AutoscalersPatch'
 autoscalersPatch' pApProject_ pApZone_ pApPayload_ pApAutoscaler_ =
     AutoscalersPatch'

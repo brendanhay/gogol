@@ -22,7 +22,7 @@
 --
 -- Search public activities.
 --
--- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusActivitiesSearch@.
+-- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.activities.search@.
 module Network.Google.Resource.Plus.Activities.Search
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Plus.Activities.Search
 import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusActivitiesSearch@ method which the
+-- | A resource alias for @plus.activities.search@ method which the
 -- 'ActivitiesSearch'' request conforms to.
 type ActivitiesSearchResource =
      "activities" :>
@@ -79,7 +79,7 @@ data ActivitiesSearch' = ActivitiesSearch'
 --
 -- * 'asMaxResults'
 activitiesSearch'
-    :: Text -- ^ 'query'
+    :: Text -- ^ 'asQuery'
     -> ActivitiesSearch'
 activitiesSearch' pAsQuery_ =
     ActivitiesSearch'

@@ -26,7 +26,7 @@
 -- development and testing purposes. Invoking this method in shipping code
 -- can result in data loss and data corruption.
 --
--- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @AppStateStatesDelete@.
+-- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @appstate.states.delete@.
 module Network.Google.Resource.AppState.States.Delete
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AppState.States.Delete
 import           Network.Google.AppState.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppStateStatesDelete@ method which the
+-- | A resource alias for @appstate.states.delete@ method which the
 -- 'StatesDelete'' request conforms to.
 type StatesDeleteResource =
      "states" :>
@@ -67,7 +67,7 @@ newtype StatesDelete' = StatesDelete'
 --
 -- * 'sdStateKey'
 statesDelete'
-    :: Int32 -- ^ 'stateKey'
+    :: Int32 -- ^ 'sdStateKey'
     -> StatesDelete'
 statesDelete' pSdStateKey_ =
     StatesDelete'

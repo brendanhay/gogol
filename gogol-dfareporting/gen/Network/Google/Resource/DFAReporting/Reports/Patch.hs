@@ -22,7 +22,7 @@
 --
 -- Updates a report. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingReportsPatch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.reports.patch@.
 module Network.Google.Resource.DFAReporting.Reports.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.Reports.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingReportsPatch@ method which the
+-- | A resource alias for @dfareporting.reports.patch@ method which the
 -- 'ReportsPatch'' request conforms to.
 type ReportsPatchResource =
      "userprofiles" :>
@@ -70,9 +70,9 @@ data ReportsPatch' = ReportsPatch'
 --
 -- * 'rpPayload'
 reportsPatch'
-    :: Int64 -- ^ 'reportId'
-    -> Int64 -- ^ 'profileId'
-    -> Report -- ^ 'payload'
+    :: Int64 -- ^ 'rpReportId'
+    -> Int64 -- ^ 'rpProFileId'
+    -> Report -- ^ 'rpPayload'
     -> ReportsPatch'
 reportsPatch' pRpReportId_ pRpProFileId_ pRpPayload_ =
     ReportsPatch'

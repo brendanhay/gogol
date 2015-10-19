@@ -22,7 +22,7 @@
 --
 -- Remove photos for the user
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersPhotosDelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.photos.delete@.
 module Network.Google.Resource.Directory.Users.Photos.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Directory.Users.Photos.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersPhotosDelete@ method which the
+-- | A resource alias for @directory.users.photos.delete@ method which the
 -- 'UsersPhotosDelete'' request conforms to.
 type UsersPhotosDeleteResource =
      "users" :>
@@ -61,7 +61,7 @@ newtype UsersPhotosDelete' = UsersPhotosDelete'
 --
 -- * 'updUserKey'
 usersPhotosDelete'
-    :: Text -- ^ 'userKey'
+    :: Text -- ^ 'updUserKey'
     -> UsersPhotosDelete'
 usersPhotosDelete' pUpdUserKey_ =
     UsersPhotosDelete'

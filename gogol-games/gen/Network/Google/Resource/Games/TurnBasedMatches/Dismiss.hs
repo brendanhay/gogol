@@ -23,7 +23,7 @@
 -- Dismiss a turn-based match from the match list. The match will no longer
 -- show up in the list and will not generate notifications.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesDismiss@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.turnBasedMatches.dismiss@.
 module Network.Google.Resource.Games.TurnBasedMatches.Dismiss
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.Dismiss
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesTurnBasedMatchesDismiss@ method which the
+-- | A resource alias for @games.turnBasedMatches.dismiss@ method which the
 -- 'TurnBasedMatchesDismiss'' request conforms to.
 type TurnBasedMatchesDismissResource =
      "turnbasedmatches" :>
@@ -62,7 +62,7 @@ newtype TurnBasedMatchesDismiss' = TurnBasedMatchesDismiss'
 --
 -- * 'tbmdMatchId'
 turnBasedMatchesDismiss'
-    :: Text -- ^ 'matchId'
+    :: Text -- ^ 'tbmdMatchId'
     -> TurnBasedMatchesDismiss'
 turnBasedMatchesDismiss' pTbmdMatchId_ =
     TurnBasedMatchesDismiss'

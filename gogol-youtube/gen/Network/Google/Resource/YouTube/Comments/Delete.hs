@@ -22,7 +22,7 @@
 --
 -- Deletes a comment.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentsDelete@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.comments.delete@.
 module Network.Google.Resource.YouTube.Comments.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.YouTube.Comments.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCommentsDelete@ method which the
+-- | A resource alias for @youtube.comments.delete@ method which the
 -- 'CommentsDelete'' request conforms to.
 type CommentsDeleteResource =
      "comments" :>
@@ -59,7 +59,7 @@ newtype CommentsDelete' = CommentsDelete'
 --
 -- * 'cdId'
 commentsDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'cdId'
     -> CommentsDelete'
 commentsDelete' pCdId_ =
     CommentsDelete'

@@ -22,7 +22,7 @@
 --
 -- Lists the name of the subscriptions for this topic.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsSubscriptionsList@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.topics.subscriptions.list@.
 module Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsTopicsSubscriptionsList@ method which the
+-- | A resource alias for @pubsub.projects.topics.subscriptions.list@ method which the
 -- 'ProjectsTopicsSubscriptionsList'' request conforms to.
 type ProjectsTopicsSubscriptionsListResource =
      "v1" :>
@@ -106,7 +106,7 @@ data ProjectsTopicsSubscriptionsList' = ProjectsTopicsSubscriptionsList'
 --
 -- * 'ptslCallback'
 projectsTopicsSubscriptionsList'
-    :: Text -- ^ 'topic'
+    :: Text -- ^ 'ptslTopic'
     -> ProjectsTopicsSubscriptionsList'
 projectsTopicsSubscriptionsList' pPtslTopic_ =
     ProjectsTopicsSubscriptionsList'

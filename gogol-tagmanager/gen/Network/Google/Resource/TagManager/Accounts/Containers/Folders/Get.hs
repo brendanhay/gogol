@@ -22,7 +22,7 @@
 --
 -- Gets a GTM Folder.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersFoldersGet@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.folders.get@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Get
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersFoldersGet@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.folders.get@ method which the
 -- 'AccountsContainersFoldersGet'' request conforms to.
 type AccountsContainersFoldersGetResource =
      "accounts" :>
@@ -71,9 +71,9 @@ data AccountsContainersFoldersGet' = AccountsContainersFoldersGet'
 --
 -- * 'acfgAccountId'
 accountsContainersFoldersGet'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'folderId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acfgContainerId'
+    -> Text -- ^ 'acfgFolderId'
+    -> Text -- ^ 'acfgAccountId'
     -> AccountsContainersFoldersGet'
 accountsContainersFoldersGet' pAcfgContainerId_ pAcfgFolderId_ pAcfgAccountId_ =
     AccountsContainersFoldersGet'

@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of remarketing lists, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingRemarketingListsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.remarketingLists.list@.
 module Network.Google.Resource.DFAReporting.RemarketingLists.List
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingRemarketingListsList@ method which the
+-- | A resource alias for @dfareporting.remarketingLists.list@ method which the
 -- 'RemarketingListsList'' request conforms to.
 type RemarketingListsListResource =
      "userprofiles" :>
@@ -103,8 +103,8 @@ data RemarketingListsList' = RemarketingListsList'
 --
 -- * 'rllMaxResults'
 remarketingListsList'
-    :: Int64 -- ^ 'advertiserId'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'rllAdvertiserId'
+    -> Int64 -- ^ 'rllProFileId'
     -> RemarketingListsList'
 remarketingListsList' pRllAdvertiserId_ pRllProFileId_ =
     RemarketingListsList'

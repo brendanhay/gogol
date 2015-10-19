@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of available batch report definitions.
 --
--- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsBatchReportDefinitionsList@.
+-- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @youtubeAnalytics.batchReportDefinitions.list@.
 module Network.Google.Resource.YouTubeAnalytics.BatchReportDefinitions.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.YouTubeAnalytics.BatchReportDefinitions.List
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
--- | A resource alias for @YouTubeAnalyticsBatchReportDefinitionsList@ method which the
+-- | A resource alias for @youtubeAnalytics.batchReportDefinitions.list@ method which the
 -- 'BatchReportDefinitionsList'' request conforms to.
 type BatchReportDefinitionsListResource =
      "batchReportDefinitions" :>
@@ -60,7 +60,7 @@ newtype BatchReportDefinitionsList' = BatchReportDefinitionsList'
 --
 -- * 'brdlOnBehalfOfContentOwner'
 batchReportDefinitionsList'
-    :: Text -- ^ 'onBehalfOfContentOwner'
+    :: Text -- ^ 'brdlOnBehalfOfContentOwner'
     -> BatchReportDefinitionsList'
 batchReportDefinitionsList' pBrdlOnBehalfOfContentOwner_ =
     BatchReportDefinitionsList'

@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of operating system versions.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingOperatingSystemVersionsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.operatingSystemVersions.list@.
 module Network.Google.Resource.DFAReporting.OperatingSystemVersions.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DFAReporting.OperatingSystemVersions.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingOperatingSystemVersionsList@ method which the
+-- | A resource alias for @dfareporting.operatingSystemVersions.list@ method which the
 -- 'OperatingSystemVersionsList'' request conforms to.
 type OperatingSystemVersionsListResource =
      "userprofiles" :>
@@ -61,7 +61,7 @@ newtype OperatingSystemVersionsList' = OperatingSystemVersionsList'
 --
 -- * 'osvlProFileId'
 operatingSystemVersionsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'osvlProFileId'
     -> OperatingSystemVersionsList'
 operatingSystemVersionsList' pOsvlProFileId_ =
     OperatingSystemVersionsList'

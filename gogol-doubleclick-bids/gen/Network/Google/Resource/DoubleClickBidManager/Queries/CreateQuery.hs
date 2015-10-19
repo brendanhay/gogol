@@ -22,7 +22,7 @@
 --
 -- Creates a query.
 --
--- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleClickBidManagerQueriesCreateQuery@.
+-- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.queries.createquery@.
 module Network.Google.Resource.DoubleClickBidManager.Queries.CreateQuery
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DoubleClickBidManager.Queries.CreateQuery
 import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClickBidManagerQueriesCreateQuery@ method which the
+-- | A resource alias for @doubleclickbidmanager.queries.createquery@ method which the
 -- 'QueriesCreateQuery'' request conforms to.
 type QueriesCreateQueryResource =
      "query" :>
@@ -59,7 +59,7 @@ newtype QueriesCreateQuery' = QueriesCreateQuery'
 --
 -- * 'qcqPayload'
 queriesCreateQuery'
-    :: Query -- ^ 'payload'
+    :: Query -- ^ 'qcqPayload'
     -> QueriesCreateQuery'
 queriesCreateQuery' pQcqPayload_ =
     QueriesCreateQuery'

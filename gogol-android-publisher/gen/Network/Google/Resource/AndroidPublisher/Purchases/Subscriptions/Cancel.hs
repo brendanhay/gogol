@@ -23,7 +23,7 @@
 -- Cancels a user\'s subscription purchase. The subscription remains valid
 -- until its expiration time.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherPurchasesSubscriptionsCancel@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.purchases.subscriptions.cancel@.
 module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Cancel
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Cancel
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherPurchasesSubscriptionsCancel@ method which the
+-- | A resource alias for @androidpublisher.purchases.subscriptions.cancel@ method which the
 -- 'PurchasesSubscriptionsCancel'' request conforms to.
 type PurchasesSubscriptionsCancelResource =
      Capture "packageName" Text :>
@@ -73,9 +73,9 @@ data PurchasesSubscriptionsCancel' = PurchasesSubscriptionsCancel'
 --
 -- * 'pscSubscriptionId'
 purchasesSubscriptionsCancel'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'token'
-    -> Text -- ^ 'subscriptionId'
+    :: Text -- ^ 'pscPackageName'
+    -> Text -- ^ 'pscToken'
+    -> Text -- ^ 'pscSubscriptionId'
     -> PurchasesSubscriptionsCancel'
 purchasesSubscriptionsCancel' pPscPackageName_ pPscToken_ pPscSubscriptionId_ =
     PurchasesSubscriptionsCancel'

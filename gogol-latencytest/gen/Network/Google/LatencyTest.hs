@@ -26,10 +26,10 @@ module Network.Google.LatencyTest
 
     -- * Resources
 
-    -- ** CloudlatencytestStatscollectionUpdateaggregatedstats
+    -- ** cloudlatencytest.statscollection.updateaggregatedstats
     , module Network.Google.Resource.Cloudlatencytest.Statscollection.Updateaggregatedstats
 
-    -- ** CloudlatencytestStatscollectionUpdatestats
+    -- ** cloudlatencytest.statscollection.updatestats
     , module Network.Google.Resource.Cloudlatencytest.Statscollection.Updatestats
 
     -- * Types

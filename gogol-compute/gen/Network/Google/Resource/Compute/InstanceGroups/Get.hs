@@ -22,7 +22,7 @@
 --
 -- Returns the specified instance group resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroups.get@.
 module Network.Google.Resource.Compute.InstanceGroups.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.InstanceGroups.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupsGet@ method which the
+-- | A resource alias for @compute.instanceGroups.get@ method which the
 -- 'InstanceGroupsGet'' request conforms to.
 type InstanceGroupsGetResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data InstanceGroupsGet' = InstanceGroupsGet'
 --
 -- * 'iggInstanceGroup'
 instanceGroupsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Text -- ^ 'instanceGroup'
+    :: Text -- ^ 'iggProject'
+    -> Text -- ^ 'iggZone'
+    -> Text -- ^ 'iggInstanceGroup'
     -> InstanceGroupsGet'
 instanceGroupsGet' pIggProject_ pIggZone_ pIggInstanceGroup_ =
     InstanceGroupsGet'

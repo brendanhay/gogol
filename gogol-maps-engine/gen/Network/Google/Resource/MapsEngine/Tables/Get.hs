@@ -22,7 +22,7 @@
 --
 -- Return metadata for a particular table, including the schema.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesGet@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.tables.get@.
 module Network.Google.Resource.MapsEngine.Tables.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.MapsEngine.Tables.Get
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesGet@ method which the
+-- | A resource alias for @mapsengine.tables.get@ method which the
 -- 'TablesGet'' request conforms to.
 type TablesGetResource =
      "tables" :>
@@ -64,7 +64,7 @@ data TablesGet' = TablesGet'
 --
 -- * 'tgId'
 tablesGet'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'tgId'
     -> TablesGet'
 tablesGet' pTgId_ =
     TablesGet'

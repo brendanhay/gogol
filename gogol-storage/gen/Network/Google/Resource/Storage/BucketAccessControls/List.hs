@@ -22,7 +22,7 @@
 --
 -- Retrieves ACL entries on the specified bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketAccessControlsList@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.bucketAccessControls.list@.
 module Network.Google.Resource.Storage.BucketAccessControls.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Storage.BucketAccessControls.List
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageBucketAccessControlsList@ method which the
+-- | A resource alias for @storage.bucketAccessControls.list@ method which the
 -- 'BucketAccessControlsList'' request conforms to.
 type BucketAccessControlsListResource =
      "b" :>
@@ -61,7 +61,7 @@ newtype BucketAccessControlsList' = BucketAccessControlsList'
 --
 -- * 'baclBucket'
 bucketAccessControlsList'
-    :: Text -- ^ 'bucket'
+    :: Text -- ^ 'baclBucket'
     -> BucketAccessControlsList'
 bucketAccessControlsList' pBaclBucket_ =
     BucketAccessControlsList'

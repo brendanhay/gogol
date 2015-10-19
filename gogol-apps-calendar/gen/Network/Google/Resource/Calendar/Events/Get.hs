@@ -22,7 +22,7 @@
 --
 -- Returns an event.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsGet@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.events.get@.
 module Network.Google.Resource.Calendar.Events.Get
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Calendar.Events.Get
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarEventsGet@ method which the
+-- | A resource alias for @calendar.events.get@ method which the
 -- 'EventsGet'' request conforms to.
 type EventsGetResource =
      "calendars" :>
@@ -80,8 +80,8 @@ data EventsGet' = EventsGet'
 --
 -- * 'egEventId'
 eventsGet'
-    :: Text -- ^ 'calendarId'
-    -> Text -- ^ 'eventId'
+    :: Text -- ^ 'egCalendarId'
+    -> Text -- ^ 'egEventId'
     -> EventsGet'
 eventsGet' pEgCalendarId_ pEgEventId_ =
     EventsGet'

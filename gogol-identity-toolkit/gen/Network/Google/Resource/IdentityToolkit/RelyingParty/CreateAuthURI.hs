@@ -22,7 +22,7 @@
 --
 -- Creates the URI used by the IdP to authenticate the user.
 --
--- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyCreateAuthURI@.
+-- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.createAuthUri@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.CreateAuthURI
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.CreateAuthURI
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyCreateAuthURI@ method which the
+-- | A resource alias for @identitytoolkit.relyingparty.createAuthUri@ method which the
 -- 'RelyingPartyCreateAuthURI'' request conforms to.
 type RelyingPartyCreateAuthURIResource =
      "createAuthUri" :>
@@ -61,7 +61,7 @@ newtype RelyingPartyCreateAuthURI' = RelyingPartyCreateAuthURI'
 --
 -- * 'rpcauPayload'
 relyingPartyCreateAuthURI'
-    :: IdentitytoolkitRelyingPartyCreateAuthURIRequest -- ^ 'payload'
+    :: IdentitytoolkitRelyingPartyCreateAuthURIRequest -- ^ 'rpcauPayload'
     -> RelyingPartyCreateAuthURI'
 relyingPartyCreateAuthURI' pRpcauPayload_ =
     RelyingPartyCreateAuthURI'

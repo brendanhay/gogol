@@ -22,7 +22,7 @@
 --
 -- Gets the volume annotation.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksLayersVolumeAnnotationsGet@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.layers.volumeAnnotations.get@.
 module Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksLayersVolumeAnnotationsGet@ method which the
+-- | A resource alias for @books.layers.volumeAnnotations.get@ method which the
 -- 'LayersVolumeAnnotationsGet'' request conforms to.
 type LayersVolumeAnnotationsGetResource =
      "volumes" :>
@@ -82,9 +82,9 @@ data LayersVolumeAnnotationsGet' = LayersVolumeAnnotationsGet'
 --
 -- * 'lvagLayerId'
 layersVolumeAnnotationsGet'
-    :: Text -- ^ 'annotationId'
-    -> Text -- ^ 'volumeId'
-    -> Text -- ^ 'layerId'
+    :: Text -- ^ 'lvagAnnotationId'
+    -> Text -- ^ 'lvagVolumeId'
+    -> Text -- ^ 'lvagLayerId'
     -> LayersVolumeAnnotationsGet'
 layersVolumeAnnotationsGet' pLvagAnnotationId_ pLvagVolumeId_ pLvagLayerId_ =
     LayersVolumeAnnotationsGet'

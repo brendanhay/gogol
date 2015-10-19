@@ -23,7 +23,7 @@
 -- Fetches app details for this edit. This includes the default language
 -- and developer support contact information.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsDetailsGet@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.details.get@.
 module Network.Google.Resource.AndroidPublisher.Edits.Details.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Details.Get
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsDetailsGet@ method which the
+-- | A resource alias for @androidpublisher.edits.details.get@ method which the
 -- 'EditsDetailsGet'' request conforms to.
 type EditsDetailsGetResource =
      Capture "packageName" Text :>
@@ -67,8 +67,8 @@ data EditsDetailsGet' = EditsDetailsGet'
 --
 -- * 'edgEditId'
 editsDetailsGet'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'edgPackageName'
+    -> Text -- ^ 'edgEditId'
     -> EditsDetailsGet'
 editsDetailsGet' pEdgPackageName_ pEdgEditId_ =
     EditsDetailsGet'

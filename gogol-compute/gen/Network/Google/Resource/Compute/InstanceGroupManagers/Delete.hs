@@ -23,7 +23,7 @@
 -- Deletes the specified managed instance group and all of the instances in
 -- that group.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.delete@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.Delete
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersDelete@ method which the
+-- | A resource alias for @compute.instanceGroupManagers.delete@ method which the
 -- 'InstanceGroupManagersDelete'' request conforms to.
 type InstanceGroupManagersDeleteResource =
      Capture "project" Text :>
@@ -72,9 +72,9 @@ data InstanceGroupManagersDelete' = InstanceGroupManagersDelete'
 --
 -- * 'igmdZone'
 instanceGroupManagersDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instanceGroupManager'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'igmdProject'
+    -> Text -- ^ 'igmdInstanceGroupManager'
+    -> Text -- ^ 'igmdZone'
     -> InstanceGroupManagersDelete'
 instanceGroupManagersDelete' pIgmdProject_ pIgmdInstanceGroupManager_ pIgmdZone_ =
     InstanceGroupManagersDelete'

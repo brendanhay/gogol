@@ -23,7 +23,7 @@
 -- Deletes the SSL certificate. The change will not take effect until the
 -- instance is restarted.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLSSLCertsDelete@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.sslCerts.delete@.
 module Network.Google.Resource.SQL.SSLCerts.Delete
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.SQL.SSLCerts.Delete
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLSSLCertsDelete@ method which the
+-- | A resource alias for @sql.sslCerts.delete@ method which the
 -- 'SSLCertsDelete'' request conforms to.
 type SSLCertsDeleteResource =
      "projects" :>
@@ -73,9 +73,9 @@ data SSLCertsDelete' = SSLCertsDelete'
 --
 -- * 'scdInstance'
 sslCertsDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'sha1Fingerprint'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'scdProject'
+    -> Text -- ^ 'scdSha1Fingerprint'
+    -> Text -- ^ 'scdInstance'
     -> SSLCertsDelete'
 sslCertsDelete' pScdProject_ pScdSha1Fingerprint_ pScdInstance_ =
     SSLCertsDelete'

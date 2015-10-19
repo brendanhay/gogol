@@ -22,7 +22,7 @@
 --
 -- Retrieves list of report dimension values for a list of filters.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingDimensionValuesQuery@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.dimensionValues.query@.
 module Network.Google.Resource.DFAReporting.DimensionValues.Query
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.DFAReporting.DimensionValues.Query
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingDimensionValuesQuery@ method which the
+-- | A resource alias for @dfareporting.dimensionValues.query@ method which the
 -- 'DimensionValuesQuery'' request conforms to.
 type DimensionValuesQueryResource =
      "userprofiles" :>
@@ -77,8 +77,8 @@ data DimensionValuesQuery' = DimensionValuesQuery'
 --
 -- * 'dvqMaxResults'
 dimensionValuesQuery'
-    :: Int64 -- ^ 'profileId'
-    -> DimensionValueRequest -- ^ 'payload'
+    :: Int64 -- ^ 'dvqProFileId'
+    -> DimensionValueRequest -- ^ 'dvqPayload'
     -> DimensionValuesQuery'
 dimensionValuesQuery' pDvqProFileId_ pDvqPayload_ =
     DimensionValuesQuery'

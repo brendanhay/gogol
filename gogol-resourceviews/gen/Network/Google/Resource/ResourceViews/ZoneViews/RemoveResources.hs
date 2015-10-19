@@ -22,7 +22,7 @@
 --
 -- Remove resources from the view.
 --
--- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsRemoveResources@.
+-- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @resourceviews.zoneViews.removeResources@.
 module Network.Google.Resource.ResourceViews.ZoneViews.RemoveResources
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.ResourceViews.ZoneViews.RemoveResources
 import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
--- | A resource alias for @ResourceviewsZoneViewsRemoveResources@ method which the
+-- | A resource alias for @resourceviews.zoneViews.removeResources@ method which the
 -- 'ZoneViewsRemoveResources'' request conforms to.
 type ZoneViewsRemoveResourcesResource =
      Capture "project" Text :>
@@ -77,10 +77,10 @@ data ZoneViewsRemoveResources' = ZoneViewsRemoveResources'
 --
 -- * 'zvrrPayload'
 zoneViewsRemoveResources'
-    :: Text -- ^ 'resourceView'
-    -> Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> ZoneViewsRemoveResourcesRequest -- ^ 'payload'
+    :: Text -- ^ 'zvrrResourceView'
+    -> Text -- ^ 'zvrrProject'
+    -> Text -- ^ 'zvrrZone'
+    -> ZoneViewsRemoveResourcesRequest -- ^ 'zvrrPayload'
     -> ZoneViewsRemoveResources'
 zoneViewsRemoveResources' pZvrrResourceView_ pZvrrProject_ pZvrrZone_ pZvrrPayload_ =
     ZoneViewsRemoveResources'

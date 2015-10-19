@@ -23,7 +23,7 @@
 -- Gets a list of call sets matching the criteria. Implements
 -- [GlobalAllianceApi.searchCallSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L178).
 --
--- /See:/ < Genomics API Reference> for @GenomicsCallsetsSearch@.
+-- /See:/ < Genomics API Reference> for @genomics.callsets.search@.
 module Network.Google.Resource.Genomics.Callsets.Search
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Genomics.Callsets.Search
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsCallsetsSearch@ method which the
+-- | A resource alias for @genomics.callsets.search@ method which the
 -- 'CallsetsSearch'' request conforms to.
 type CallsetsSearchResource =
      "v1" :>
@@ -99,7 +99,7 @@ data CallsetsSearch' = CallsetsSearch'
 --
 -- * 'csCallback'
 callsetsSearch'
-    :: SearchCallSetsRequest -- ^ 'payload'
+    :: SearchCallSetsRequest -- ^ 'csPayload'
     -> CallsetsSearch'
 callsetsSearch' pCsPayload_ =
     CallsetsSearch'

@@ -22,7 +22,7 @@
 --
 -- List all aliases for a group
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsAliasesList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.groups.aliases.list@.
 module Network.Google.Resource.Directory.Groups.Aliases.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Directory.Groups.Aliases.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryGroupsAliasesList@ method which the
+-- | A resource alias for @directory.groups.aliases.list@ method which the
 -- 'GroupsAliasesList'' request conforms to.
 type GroupsAliasesListResource =
      "groups" :>
@@ -60,7 +60,7 @@ newtype GroupsAliasesList' = GroupsAliasesList'
 --
 -- * 'galGroupKey'
 groupsAliasesList'
-    :: Text -- ^ 'groupKey'
+    :: Text -- ^ 'galGroupKey'
     -> GroupsAliasesList'
 groupsAliasesList' pGalGroupKey_ =
     GroupsAliasesList'

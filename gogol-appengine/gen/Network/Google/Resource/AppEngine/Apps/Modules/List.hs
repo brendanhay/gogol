@@ -22,7 +22,7 @@
 --
 -- Lists all the modules in the application.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesList@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @appengine.apps.modules.list@.
 module Network.Google.Resource.AppEngine.Apps.Modules.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.AppEngine.Apps.Modules.List
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppEngineAppsModulesList@ method which the
+-- | A resource alias for @appengine.apps.modules.list@ method which the
 -- 'AppsModulesList'' request conforms to.
 type AppsModulesListResource =
      "v1beta4" :>
@@ -107,7 +107,7 @@ data AppsModulesList' = AppsModulesList'
 --
 -- * 'amlCallback'
 appsModulesList'
-    :: Text -- ^ 'appsId'
+    :: Text -- ^ 'amlAppsId'
     -> AppsModulesList'
 appsModulesList' pAmlAppsId_ =
     AppsModulesList'

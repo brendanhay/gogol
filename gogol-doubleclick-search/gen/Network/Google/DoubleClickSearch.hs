@@ -27,34 +27,34 @@ module Network.Google.DoubleClickSearch
 
     -- * Resources
 
-    -- ** DoubleClicksearchConversionGet
+    -- ** doubleclicksearch.conversion.get
     , module Network.Google.Resource.DoubleClickSearch.Conversion.Get
 
-    -- ** DoubleClicksearchConversionInsert
+    -- ** doubleclicksearch.conversion.insert
     , module Network.Google.Resource.DoubleClickSearch.Conversion.Insert
 
-    -- ** DoubleClicksearchConversionPatch
+    -- ** doubleclicksearch.conversion.patch
     , module Network.Google.Resource.DoubleClickSearch.Conversion.Patch
 
-    -- ** DoubleClicksearchConversionUpdate
+    -- ** doubleclicksearch.conversion.update
     , module Network.Google.Resource.DoubleClickSearch.Conversion.Update
 
-    -- ** DoubleClicksearchConversionUpdateAvailability
+    -- ** doubleclicksearch.conversion.updateAvailability
     , module Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
 
-    -- ** DoubleClicksearchReportsGenerate
+    -- ** doubleclicksearch.reports.generate
     , module Network.Google.Resource.DoubleClickSearch.Reports.Generate
 
-    -- ** DoubleClicksearchReportsGet
+    -- ** doubleclicksearch.reports.get
     , module Network.Google.Resource.DoubleClickSearch.Reports.Get
 
-    -- ** DoubleClicksearchReportsGetFile
+    -- ** doubleclicksearch.reports.getFile
     , module Network.Google.Resource.DoubleClickSearch.Reports.GetFile
 
-    -- ** DoubleClicksearchReportsRequest
+    -- ** doubleclicksearch.reports.request
     , module Network.Google.Resource.DoubleClickSearch.Reports.Request
 
-    -- ** DoubleClicksearchSavedColumnsList
+    -- ** doubleclicksearch.savedColumns.list
     , module Network.Google.Resource.DoubleClickSearch.SavedColumns.List
 
     -- * Types

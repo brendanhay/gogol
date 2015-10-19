@@ -27,7 +27,7 @@
 -- namespace must be one of the ones returned from the \`namespaces\`
 -- endpoint.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsAttachmentsList@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.attachments.list@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconBeaconsAttachmentsList@ method which the
+-- | A resource alias for @proximitybeacon.beacons.attachments.list@ method which the
 -- 'BeaconsAttachmentsList'' request conforms to.
 type BeaconsAttachmentsListResource =
      "v1beta1" :>
@@ -111,7 +111,7 @@ data BeaconsAttachmentsList' = BeaconsAttachmentsList'
 --
 -- * 'balCallback'
 beaconsAttachmentsList'
-    :: Text -- ^ 'beaconName'
+    :: Text -- ^ 'balBeaconName'
     -> BeaconsAttachmentsList'
 beaconsAttachmentsList' pBalBeaconName_ =
     BeaconsAttachmentsList'

@@ -23,7 +23,7 @@
 -- Inserts a resource containing information about a database inside a
 -- Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLDatabasesInsert@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.databases.insert@.
 module Network.Google.Resource.SQL.Databases.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.SQL.Databases.Insert
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLDatabasesInsert@ method which the
+-- | A resource alias for @sql.databases.insert@ method which the
 -- 'DatabasesInsert'' request conforms to.
 type DatabasesInsertResource =
      "projects" :>
@@ -73,9 +73,9 @@ data DatabasesInsert' = DatabasesInsert'
 --
 -- * 'diInstance'
 databasesInsert'
-    :: Text -- ^ 'project'
-    -> Database -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'diProject'
+    -> Database -- ^ 'diPayload'
+    -> Text -- ^ 'diInstance'
     -> DatabasesInsert'
 databasesInsert' pDiProject_ pDiPayload_ pDiInstance_ =
     DatabasesInsert'

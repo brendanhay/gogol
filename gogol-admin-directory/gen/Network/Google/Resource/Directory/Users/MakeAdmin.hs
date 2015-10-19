@@ -22,7 +22,7 @@
 --
 -- change admin status of a user
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersMakeAdmin@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.makeAdmin@.
 module Network.Google.Resource.Directory.Users.MakeAdmin
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Users.MakeAdmin
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersMakeAdmin@ method which the
+-- | A resource alias for @directory.users.makeAdmin@ method which the
 -- 'UsersMakeAdmin'' request conforms to.
 type UsersMakeAdminResource =
      "users" :>
@@ -65,8 +65,8 @@ data UsersMakeAdmin' = UsersMakeAdmin'
 --
 -- * 'umaUserKey'
 usersMakeAdmin'
-    :: UserMakeAdmin -- ^ 'payload'
-    -> Text -- ^ 'userKey'
+    :: UserMakeAdmin -- ^ 'umaPayload'
+    -> Text -- ^ 'umaUserKey'
     -> UsersMakeAdmin'
 usersMakeAdmin' pUmaPayload_ pUmaUserKey_ =
     UsersMakeAdmin'

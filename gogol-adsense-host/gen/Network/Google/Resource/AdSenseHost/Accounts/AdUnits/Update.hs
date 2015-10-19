@@ -22,7 +22,7 @@
 --
 -- Update the supplied ad unit in the specified publisher AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdUnitsUpdate@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.accounts.adunits.update@.
 module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Update
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAccountsAdUnitsUpdate@ method which the
+-- | A resource alias for @adsensehost.accounts.adunits.update@ method which the
 -- 'AccountsAdUnitsUpdate'' request conforms to.
 type AccountsAdUnitsUpdateResource =
      "accounts" :>
@@ -71,9 +71,9 @@ data AccountsAdUnitsUpdate' = AccountsAdUnitsUpdate'
 --
 -- * 'aauuAccountId'
 accountsAdUnitsUpdate'
-    :: AdUnit -- ^ 'payload'
-    -> Text -- ^ 'adClientId'
-    -> Text -- ^ 'accountId'
+    :: AdUnit -- ^ 'aauuPayload'
+    -> Text -- ^ 'aauuAdClientId'
+    -> Text -- ^ 'aauuAccountId'
     -> AccountsAdUnitsUpdate'
 accountsAdUnitsUpdate' pAauuPayload_ pAauuAdClientId_ pAauuAccountId_ =
     AccountsAdUnitsUpdate'

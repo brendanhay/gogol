@@ -22,7 +22,7 @@
 --
 -- List all of the people who are members of a circle.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsPeopleListByCircle@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.people.listByCircle@.
 module Network.Google.Resource.PlusDomains.People.ListByCircle
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.PlusDomains.People.ListByCircle
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsPeopleListByCircle@ method which the
+-- | A resource alias for @plusDomains.people.listByCircle@ method which the
 -- 'PeopleListByCircle'' request conforms to.
 type PeopleListByCircleResource =
      "circles" :>
@@ -70,7 +70,7 @@ data PeopleListByCircle' = PeopleListByCircle'
 --
 -- * 'plbcMaxResults'
 peopleListByCircle'
-    :: Text -- ^ 'circleId'
+    :: Text -- ^ 'plbcCircleId'
     -> PeopleListByCircle'
 peopleListByCircle' pPlbcCircleId_ =
     PeopleListByCircle'

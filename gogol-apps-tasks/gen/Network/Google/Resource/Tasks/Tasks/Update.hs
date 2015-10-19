@@ -22,7 +22,7 @@
 --
 -- Updates the specified task.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTasksUpdate@.
+-- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasks.update@.
 module Network.Google.Resource.Tasks.Tasks.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Tasks.Tasks.Update
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTasksUpdate@ method which the
+-- | A resource alias for @tasks.tasks.update@ method which the
 -- 'TasksUpdate'' request conforms to.
 type TasksUpdateResource =
      "lists" :>
@@ -70,9 +70,9 @@ data TasksUpdate' = TasksUpdate'
 --
 -- * 'tuTask'
 tasksUpdate'
-    :: Task -- ^ 'payload'
-    -> Text -- ^ 'tasklist'
-    -> Text -- ^ 'task'
+    :: Task -- ^ 'tuPayload'
+    -> Text -- ^ 'tuTaskList'
+    -> Text -- ^ 'tuTask'
     -> TasksUpdate'
 tasksUpdate' pTuPayload_ pTuTaskList_ pTuTask_ =
     TasksUpdate'

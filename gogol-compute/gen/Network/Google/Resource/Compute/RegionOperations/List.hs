@@ -23,7 +23,7 @@
 -- Retrieves the list of Operation resources contained within the specified
 -- region.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRegionOperationsList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.regionOperations.list@.
 module Network.Google.Resource.Compute.RegionOperations.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.RegionOperations.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeRegionOperationsList@ method which the
+-- | A resource alias for @compute.regionOperations.list@ method which the
 -- 'RegionOperationsList'' request conforms to.
 type RegionOperationsListResource =
      Capture "project" Text :>
@@ -82,8 +82,8 @@ data RegionOperationsList' = RegionOperationsList'
 --
 -- * 'rolMaxResults'
 regionOperationsList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'rolProject'
+    -> Text -- ^ 'rolRegion'
     -> RegionOperationsList'
 regionOperationsList' pRolProject_ pRolRegion_ =
     RegionOperationsList'

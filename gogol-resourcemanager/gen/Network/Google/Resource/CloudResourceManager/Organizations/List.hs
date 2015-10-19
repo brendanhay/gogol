@@ -22,7 +22,7 @@
 --
 -- Query Organization resources.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerOrganizationsList@.
+-- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.organizations.list@.
 module Network.Google.Resource.CloudResourceManager.Organizations.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.CloudResourceManager.Organizations.List
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerOrganizationsList@ method which the
+-- | A resource alias for @cloudresourcemanager.organizations.list@ method which the
 -- 'OrganizationsList'' request conforms to.
 type OrganizationsListResource =
      "v1beta1" :>

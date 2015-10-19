@@ -22,7 +22,7 @@
 --
 -- Return the published metadata for a particular map.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineMapsGetPublished@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.maps.getPublished@.
 module Network.Google.Resource.MapsEngine.Maps.GetPublished
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.Maps.GetPublished
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineMapsGetPublished@ method which the
+-- | A resource alias for @mapsengine.maps.getPublished@ method which the
 -- 'MapsGetPublished'' request conforms to.
 type MapsGetPublishedResource =
      "maps" :>
@@ -60,7 +60,7 @@ newtype MapsGetPublished' = MapsGetPublished'
 --
 -- * 'mgpId'
 mapsGetPublished'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'mgpId'
     -> MapsGetPublished'
 mapsGetPublished' pMgpId_ =
     MapsGetPublished'

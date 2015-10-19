@@ -22,7 +22,7 @@
 --
 -- Add a new URL channel to the host AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostURLChannelsInsert@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.urlchannels.insert@.
 module Network.Google.Resource.AdSenseHost.URLChannels.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdSenseHost.URLChannels.Insert
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostURLChannelsInsert@ method which the
+-- | A resource alias for @adsensehost.urlchannels.insert@ method which the
 -- 'URLChannelsInsert'' request conforms to.
 type URLChannelsInsertResource =
      "adclients" :>
@@ -65,8 +65,8 @@ data URLChannelsInsert' = URLChannelsInsert'
 --
 -- * 'uciAdClientId'
 urlChannelsInsert'
-    :: URLChannel -- ^ 'payload'
-    -> Text -- ^ 'adClientId'
+    :: URLChannel -- ^ 'uciPayload'
+    -> Text -- ^ 'uciAdClientId'
     -> URLChannelsInsert'
 urlChannelsInsert' pUciPayload_ pUciAdClientId_ =
     URLChannelsInsert'

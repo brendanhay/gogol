@@ -22,7 +22,7 @@
 --
 -- Inserts a data transfer request.
 --
--- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @DataTransferTransfersInsert@.
+-- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @datatransfer.transfers.insert@.
 module Network.Google.Resource.DataTransfer.Transfers.Insert
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DataTransfer.Transfers.Insert
 import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataTransferTransfersInsert@ method which the
+-- | A resource alias for @datatransfer.transfers.insert@ method which the
 -- 'TransfersInsert'' request conforms to.
 type TransfersInsertResource =
      "transfers" :>
@@ -60,7 +60,7 @@ newtype TransfersInsert' = TransfersInsert'
 --
 -- * 'tiPayload'
 transfersInsert'
-    :: DataTransfer -- ^ 'payload'
+    :: DataTransfer -- ^ 'tiPayload'
     -> TransfersInsert'
 transfersInsert' pTiPayload_ =
     TransfersInsert'

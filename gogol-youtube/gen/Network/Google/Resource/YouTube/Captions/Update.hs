@@ -24,7 +24,7 @@
 -- the track\'s draft status, upload a new caption file for the track, or
 -- both.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCaptionsUpdate@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.captions.update@.
 module Network.Google.Resource.YouTube.Captions.Update
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTube.Captions.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCaptionsUpdate@ method which the
+-- | A resource alias for @youtube.captions.update@ method which the
 -- 'CaptionsUpdate'' request conforms to.
 type CaptionsUpdateResource =
      "captions" :>
@@ -88,9 +88,9 @@ data CaptionsUpdate' = CaptionsUpdate'
 --
 -- * 'capSync'
 captionsUpdate'
-    :: Text -- ^ 'part'
-    -> Caption -- ^ 'payload'
-    -> Body -- ^ 'media'
+    :: Text -- ^ 'capPart'
+    -> Caption -- ^ 'capPayload'
+    -> Body -- ^ 'capMedia'
     -> CaptionsUpdate'
 captionsUpdate' pCapPart_ pCapPayload_ pCapMedia_ =
     CaptionsUpdate'

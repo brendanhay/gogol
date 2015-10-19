@@ -22,7 +22,7 @@
 --
 -- Retrieves a paginated list of all roleAssignments.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryRoleAssignmentsList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.roleAssignments.list@.
 module Network.Google.Resource.Directory.RoleAssignments.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Directory.RoleAssignments.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryRoleAssignmentsList@ method which the
+-- | A resource alias for @directory.roleAssignments.list@ method which the
 -- 'RoleAssignmentsList'' request conforms to.
 type RoleAssignmentsListResource =
      "customer" :>
@@ -81,7 +81,7 @@ data RoleAssignmentsList' = RoleAssignmentsList'
 --
 -- * 'ralMaxResults'
 roleAssignmentsList'
-    :: Text -- ^ 'customer'
+    :: Text -- ^ 'ralCustomer'
     -> RoleAssignmentsList'
 roleAssignmentsList' pRalCustomer_ =
     RoleAssignmentsList'

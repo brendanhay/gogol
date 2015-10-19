@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of cities, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCitiesList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.cities.list@.
 module Network.Google.Resource.DFAReporting.Cities.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.DFAReporting.Cities.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCitiesList@ method which the
+-- | A resource alias for @dfareporting.cities.list@ method which the
 -- 'CitiesList'' request conforms to.
 type CitiesListResource =
      "userprofiles" :>
@@ -81,7 +81,7 @@ data CitiesList' = CitiesList'
 --
 -- * 'cDartIds'
 citiesList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'cProFileId'
     -> CitiesList'
 citiesList' pCProFileId_ =
     CitiesList'

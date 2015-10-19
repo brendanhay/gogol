@@ -23,7 +23,7 @@
 -- Generate an AdSense report based on the saved report ID sent in the
 -- query parameters.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseReportsSavedGenerate@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.reports.saved.generate@.
 module Network.Google.Resource.AdSense.Reports.Saved.Generate
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AdSense.Reports.Saved.Generate
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseReportsSavedGenerate@ method which the
+-- | A resource alias for @adsense.reports.saved.generate@ method which the
 -- 'ReportsSavedGenerate'' request conforms to.
 type ReportsSavedGenerateResource =
      "reports" :>
@@ -77,7 +77,7 @@ data ReportsSavedGenerate' = ReportsSavedGenerate'
 --
 -- * 'rsgMaxResults'
 reportsSavedGenerate'
-    :: Text -- ^ 'savedReportId'
+    :: Text -- ^ 'rsgSavedReportId'
     -> ReportsSavedGenerate'
 reportsSavedGenerate' pRsgSavedReportId_ =
     ReportsSavedGenerate'

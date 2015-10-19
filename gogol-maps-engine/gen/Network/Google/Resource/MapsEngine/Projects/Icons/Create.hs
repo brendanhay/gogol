@@ -22,7 +22,7 @@
 --
 -- Create an icon.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineProjectsIconsCreate@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.projects.icons.create@.
 module Network.Google.Resource.MapsEngine.Projects.Icons.Create
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.MapsEngine.Projects.Icons.Create
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineProjectsIconsCreate@ method which the
+-- | A resource alias for @mapsengine.projects.icons.create@ method which the
 -- 'ProjectsIconsCreate'' request conforms to.
 type ProjectsIconsCreateResource =
      "projects" :>
@@ -70,9 +70,9 @@ data ProjectsIconsCreate' = ProjectsIconsCreate'
 --
 -- * 'picProjectId'
 projectsIconsCreate'
-    :: Icon -- ^ 'payload'
-    -> Body -- ^ 'media'
-    -> Text -- ^ 'projectId'
+    :: Icon -- ^ 'picPayload'
+    -> Body -- ^ 'picMedia'
+    -> Text -- ^ 'picProjectId'
     -> ProjectsIconsCreate'
 projectsIconsCreate' pPicPayload_ pPicMedia_ pPicProjectId_ =
     ProjectsIconsCreate'

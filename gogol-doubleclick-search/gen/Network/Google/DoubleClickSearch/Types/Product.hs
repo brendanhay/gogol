@@ -33,7 +33,7 @@ newtype ReportRow = ReportRow
 --
 -- * 'rrAddtional'
 reportRow
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'rrAddtional'
     -> ReportRow
 reportRow pRrAddtional_ =
     ReportRow

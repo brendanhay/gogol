@@ -22,7 +22,7 @@
 --
 -- Deletes a group.
 --
--- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsGroupsDelete@.
+-- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @youtubeAnalytics.groups.delete@.
 module Network.Google.Resource.YouTubeAnalytics.Groups.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTubeAnalytics.Groups.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
--- | A resource alias for @YouTubeAnalyticsGroupsDelete@ method which the
+-- | A resource alias for @youtubeAnalytics.groups.delete@ method which the
 -- 'GroupsDelete'' request conforms to.
 type GroupsDeleteResource =
      "groups" :>
@@ -64,7 +64,7 @@ data GroupsDelete' = GroupsDelete'
 --
 -- * 'gdId'
 groupsDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'gdId'
     -> GroupsDelete'
 groupsDelete' pGdId_ =
     GroupsDelete'

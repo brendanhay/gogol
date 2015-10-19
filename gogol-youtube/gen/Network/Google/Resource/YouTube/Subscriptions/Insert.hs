@@ -22,7 +22,7 @@
 --
 -- Adds a subscription for the authenticated user\'s channel.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeSubscriptionsInsert@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.subscriptions.insert@.
 module Network.Google.Resource.YouTube.Subscriptions.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTube.Subscriptions.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeSubscriptionsInsert@ method which the
+-- | A resource alias for @youtube.subscriptions.insert@ method which the
 -- 'SubscriptionsInsert'' request conforms to.
 type SubscriptionsInsertResource =
      "subscriptions" :>
@@ -65,8 +65,8 @@ data SubscriptionsInsert' = SubscriptionsInsert'
 --
 -- * 'siPayload'
 subscriptionsInsert'
-    :: Text -- ^ 'part'
-    -> Subscription -- ^ 'payload'
+    :: Text -- ^ 'siPart'
+    -> Subscription -- ^ 'siPayload'
     -> SubscriptionsInsert'
 subscriptionsInsert' pSiPart_ pSiPayload_ =
     SubscriptionsInsert'

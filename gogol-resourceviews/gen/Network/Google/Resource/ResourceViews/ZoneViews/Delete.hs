@@ -22,7 +22,7 @@
 --
 -- Delete a resource view.
 --
--- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsDelete@.
+-- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @resourceviews.zoneViews.delete@.
 module Network.Google.Resource.ResourceViews.ZoneViews.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.ResourceViews.ZoneViews.Delete
 import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
--- | A resource alias for @ResourceviewsZoneViewsDelete@ method which the
+-- | A resource alias for @resourceviews.zoneViews.delete@ method which the
 -- 'ZoneViewsDelete'' request conforms to.
 type ZoneViewsDeleteResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data ZoneViewsDelete' = ZoneViewsDelete'
 --
 -- * 'zvdZone'
 zoneViewsDelete'
-    :: Text -- ^ 'resourceView'
-    -> Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'zvdResourceView'
+    -> Text -- ^ 'zvdProject'
+    -> Text -- ^ 'zvdZone'
     -> ZoneViewsDelete'
 zoneViewsDelete' pZvdResourceView_ pZvdProject_ pZvdZone_ =
     ZoneViewsDelete'

@@ -22,7 +22,7 @@
 --
 -- Lists goals to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementGoalsList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.goals.list@.
 module Network.Google.Resource.Analytics.Management.Goals.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Analytics.Management.Goals.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementGoalsList@ method which the
+-- | A resource alias for @analytics.management.goals.list@ method which the
 -- 'ManagementGoalsList'' request conforms to.
 type ManagementGoalsListResource =
      "management" :>
@@ -83,9 +83,9 @@ data ManagementGoalsList' = ManagementGoalsList'
 --
 -- * 'mglMaxResults'
 managementGoalsList'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mglWebPropertyId'
+    -> Text -- ^ 'mglProFileId'
+    -> Text -- ^ 'mglAccountId'
     -> ManagementGoalsList'
 managementGoalsList' pMglWebPropertyId_ pMglProFileId_ pMglAccountId_ =
     ManagementGoalsList'

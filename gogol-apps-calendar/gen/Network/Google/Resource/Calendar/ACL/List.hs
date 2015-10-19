@@ -22,7 +22,7 @@
 --
 -- Returns the rules in the access control list for the calendar.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarACLList@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.acl.list@.
 module Network.Google.Resource.Calendar.ACL.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Calendar.ACL.List
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarACLList@ method which the
+-- | A resource alias for @calendar.acl.list@ method which the
 -- 'ACLList'' request conforms to.
 type ACLListResource =
      "calendars" :>
@@ -80,7 +80,7 @@ data ACLList' = ACLList'
 --
 -- * 'alMaxResults'
 aclList'
-    :: Text -- ^ 'calendarId'
+    :: Text -- ^ 'alCalendarId'
     -> ACLList'
 aclList' pAlCalendarId_ =
     ACLList'

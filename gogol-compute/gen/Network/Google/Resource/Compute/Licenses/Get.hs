@@ -22,7 +22,7 @@
 --
 -- Returns the specified license resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeLicensesGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.licenses.get@.
 module Network.Google.Resource.Compute.Licenses.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.Licenses.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeLicensesGet@ method which the
+-- | A resource alias for @compute.licenses.get@ method which the
 -- 'LicensesGet'' request conforms to.
 type LicensesGetResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data LicensesGet' = LicensesGet'
 --
 -- * 'lgLicense'
 licensesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'license'
+    :: Text -- ^ 'lgProject'
+    -> Text -- ^ 'lgLicense'
     -> LicensesGet'
 licensesGet' pLgProject_ pLgLicense_ =
     LicensesGet'

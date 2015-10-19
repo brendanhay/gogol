@@ -25,7 +25,7 @@
 -- regulator. The Google Spectrum Database does not operate in domains that
 -- require notification, so this always yields an UNIMPLEMENTED error.
 --
--- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @SpectrumPawsNotifySpectrumUse@.
+-- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @spectrum.paws.notifySpectrumUse@.
 module Network.Google.Resource.Spectrum.Paws.NotifySpectrumUse
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Spectrum.Paws.NotifySpectrumUse
 import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
--- | A resource alias for @SpectrumPawsNotifySpectrumUse@ method which the
+-- | A resource alias for @spectrum.paws.notifySpectrumUse@ method which the
 -- 'PawsNotifySpectrumUse'' request conforms to.
 type PawsNotifySpectrumUseResource =
      "notifySpectrumUse" :>
@@ -66,7 +66,7 @@ newtype PawsNotifySpectrumUse' = PawsNotifySpectrumUse'
 --
 -- * 'pnsuPayload'
 pawsNotifySpectrumUse'
-    :: PawsNotifySpectrumUseRequest -- ^ 'payload'
+    :: PawsNotifySpectrumUseRequest -- ^ 'pnsuPayload'
     -> PawsNotifySpectrumUse'
 pawsNotifySpectrumUse' pPnsuPayload_ =
     PawsNotifySpectrumUse'

@@ -22,7 +22,7 @@
 --
 -- Update Group
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsUpdate@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.groups.update@.
 module Network.Google.Resource.Directory.Groups.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Groups.Update
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryGroupsUpdate@ method which the
+-- | A resource alias for @directory.groups.update@ method which the
 -- 'GroupsUpdate'' request conforms to.
 type GroupsUpdateResource =
      "groups" :>
@@ -64,8 +64,8 @@ data GroupsUpdate' = GroupsUpdate'
 --
 -- * 'guPayload'
 groupsUpdate'
-    :: Text -- ^ 'groupKey'
-    -> Group -- ^ 'payload'
+    :: Text -- ^ 'guGroupKey'
+    -> Group -- ^ 'guPayload'
     -> GroupsUpdate'
 groupsUpdate' pGuGroupKey_ pGuPayload_ =
     GroupsUpdate'

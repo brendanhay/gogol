@@ -22,7 +22,7 @@
 --
 -- Fetch the representation of an existing Project.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSProjectsGet@.
+-- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.projects.get@.
 module Network.Google.Resource.DNS.Projects.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DNS.Projects.Get
 import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DNSProjectsGet@ method which the
+-- | A resource alias for @dns.projects.get@ method which the
 -- 'ProjectsGet'' request conforms to.
 type ProjectsGetResource =
      Capture "project" Text :>
@@ -58,7 +58,7 @@ newtype ProjectsGet' = ProjectsGet'
 --
 -- * 'pgProject'
 projectsGet'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'pgProject'
     -> ProjectsGet'
 projectsGet' pPgProject_ =
     ProjectsGet'

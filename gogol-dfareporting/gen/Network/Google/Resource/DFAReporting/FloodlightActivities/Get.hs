@@ -22,7 +22,7 @@
 --
 -- Gets one floodlight activity by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivitiesGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightActivities.get@.
 module Network.Google.Resource.DFAReporting.FloodlightActivities.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFloodlightActivitiesGet@ method which the
+-- | A resource alias for @dfareporting.floodlightActivities.get@ method which the
 -- 'FloodlightActivitiesGet'' request conforms to.
 type FloodlightActivitiesGetResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data FloodlightActivitiesGet' = FloodlightActivitiesGet'
 --
 -- * 'fId'
 floodlightActivitiesGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'fProFileId'
+    -> Int64 -- ^ 'fId'
     -> FloodlightActivitiesGet'
 floodlightActivitiesGet' pFProFileId_ pFId_ =
     FloodlightActivitiesGet'

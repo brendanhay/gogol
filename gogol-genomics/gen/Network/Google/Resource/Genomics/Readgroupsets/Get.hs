@@ -22,7 +22,7 @@
 --
 -- Gets a read group set by ID.
 --
--- /See:/ < Genomics API Reference> for @GenomicsReadgroupsetsGet@.
+-- /See:/ < Genomics API Reference> for @genomics.readgroupsets.get@.
 module Network.Google.Resource.Genomics.Readgroupsets.Get
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.Readgroupsets.Get
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReadgroupsetsGet@ method which the
+-- | A resource alias for @genomics.readgroupsets.get@ method which the
 -- 'ReadgroupsetsGet'' request conforms to.
 type ReadgroupsetsGetResource =
      "v1" :>
@@ -95,7 +95,7 @@ data ReadgroupsetsGet' = ReadgroupsetsGet'
 --
 -- * 'rgCallback'
 readgroupsetsGet'
-    :: Text -- ^ 'readGroupSetId'
+    :: Text -- ^ 'rgReadGroupSetId'
     -> ReadgroupsetsGet'
 readgroupsetsGet' pRgReadGroupSetId_ =
     ReadgroupsetsGet'

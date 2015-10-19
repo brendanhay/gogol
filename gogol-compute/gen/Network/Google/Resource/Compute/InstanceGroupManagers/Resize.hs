@@ -28,7 +28,7 @@
 -- status of the creating or deleting actions with the listmanagedinstances
 -- method.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersResize@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.resize@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.Resize
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Resize
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersResize@ method which the
+-- | A resource alias for @compute.instanceGroupManagers.resize@ method which the
 -- 'InstanceGroupManagersResize'' request conforms to.
 type InstanceGroupManagersResizeResource =
      Capture "project" Text :>
@@ -88,10 +88,10 @@ data InstanceGroupManagersResize' = InstanceGroupManagersResize'
 --
 -- * 'igmrZone'
 instanceGroupManagersResize'
-    :: Text -- ^ 'project'
-    -> Int32 -- ^ 'size'
-    -> Text -- ^ 'instanceGroupManager'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'igmrProject'
+    -> Int32 -- ^ 'igmrSize'
+    -> Text -- ^ 'igmrInstanceGroupManager'
+    -> Text -- ^ 'igmrZone'
     -> InstanceGroupManagersResize'
 instanceGroupManagersResize' pIgmrProject_ pIgmrSize_ pIgmrInstanceGroupManager_ pIgmrZone_ =
     InstanceGroupManagersResize'

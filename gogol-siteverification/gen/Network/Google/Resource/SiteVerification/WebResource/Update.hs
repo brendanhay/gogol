@@ -22,7 +22,7 @@
 --
 -- Modify the list of owners for your website or domain.
 --
--- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceUpdate@.
+-- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @siteVerification.webResource.update@.
 module Network.Google.Resource.SiteVerification.WebResource.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.SiteVerification.WebResource.Update
 import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
--- | A resource alias for @SiteVerificationWebResourceUpdate@ method which the
+-- | A resource alias for @siteVerification.webResource.update@ method which the
 -- 'WebResourceUpdate'' request conforms to.
 type WebResourceUpdateResource =
      "webResource" :>
@@ -65,8 +65,8 @@ data WebResourceUpdate' = WebResourceUpdate'
 --
 -- * 'wruId'
 webResourceUpdate'
-    :: SiteVerificationWebResourceResource -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: SiteVerificationWebResourceResource -- ^ 'wruPayload'
+    -> Text -- ^ 'wruId'
     -> WebResourceUpdate'
 webResourceUpdate' pWruPayload_ pWruId_ =
     WebResourceUpdate'

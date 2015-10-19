@@ -22,7 +22,7 @@
 --
 -- Lists the versions of a module.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesVersionsList@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @appengine.apps.modules.versions.list@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Versions.List
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.List
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppEngineAppsModulesVersionsList@ method which the
+-- | A resource alias for @appengine.apps.modules.versions.list@ method which the
 -- 'AppsModulesVersionsList'' request conforms to.
 type AppsModulesVersionsListResource =
      "v1beta4" :>
@@ -118,8 +118,8 @@ data AppsModulesVersionsList' = AppsModulesVersionsList'
 --
 -- * 'amvlCallback'
 appsModulesVersionsList'
-    :: Text -- ^ 'modulesId'
-    -> Text -- ^ 'appsId'
+    :: Text -- ^ 'amvlModulesId'
+    -> Text -- ^ 'amvlAppsId'
     -> AppsModulesVersionsList'
 appsModulesVersionsList' pAmvlModulesId_ pAmvlAppsId_ =
     AppsModulesVersionsList'

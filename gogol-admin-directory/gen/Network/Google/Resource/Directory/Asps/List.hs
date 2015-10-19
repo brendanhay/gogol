@@ -22,7 +22,7 @@
 --
 -- List the ASPs issued by a user.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryAspsList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.asps.list@.
 module Network.Google.Resource.Directory.Asps.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Directory.Asps.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryAspsList@ method which the
+-- | A resource alias for @directory.asps.list@ method which the
 -- 'AspsList'' request conforms to.
 type AspsListResource =
      "users" :>
@@ -60,7 +60,7 @@ newtype AspsList' = AspsList'
 --
 -- * 'alUserKey'
 aspsList'
-    :: Text -- ^ 'userKey'
+    :: Text -- ^ 'alUserKey'
     -> AspsList'
 aspsList' pAlUserKey_ =
     AspsList'

@@ -23,7 +23,7 @@
 -- Updates an entry on the user\'s calendar list. This method supports
 -- patch semantics.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarListPatch@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendarList.patch@.
 module Network.Google.Resource.Calendar.CalendarList.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Calendar.CalendarList.Patch
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarListPatch@ method which the
+-- | A resource alias for @calendar.calendarList.patch@ method which the
 -- 'CalendarListPatch'' request conforms to.
 type CalendarListPatchResource =
      "users" :>
@@ -74,8 +74,8 @@ data CalendarListPatch' = CalendarListPatch'
 --
 -- * 'clpColorRgbFormat'
 calendarListPatch'
-    :: Text -- ^ 'calendarId'
-    -> CalendarListEntry -- ^ 'payload'
+    :: Text -- ^ 'clpCalendarId'
+    -> CalendarListEntry -- ^ 'clpPayload'
     -> CalendarListPatch'
 calendarListPatch' pClpCalendarId_ pClpPayload_ =
     CalendarListPatch'

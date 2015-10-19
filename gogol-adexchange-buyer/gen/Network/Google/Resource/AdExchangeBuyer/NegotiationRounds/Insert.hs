@@ -22,7 +22,7 @@
 --
 -- Adds the requested negotiationRound to the requested negotiation.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerNegotiationRoundsInsert@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.negotiationrounds.insert@.
 module Network.Google.Resource.AdExchangeBuyer.NegotiationRounds.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdExchangeBuyer.NegotiationRounds.Insert
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerNegotiationRoundsInsert@ method which the
+-- | A resource alias for @adexchangebuyer.negotiationrounds.insert@ method which the
 -- 'NegotiationRoundsInsert'' request conforms to.
 type NegotiationRoundsInsertResource =
      "negotiations" :>
@@ -66,8 +66,8 @@ data NegotiationRoundsInsert' = NegotiationRoundsInsert'
 --
 -- * 'nriNegotiationId'
 negotiationRoundsInsert'
-    :: NegotiationRoundDTO -- ^ 'payload'
-    -> Int64 -- ^ 'negotiationId'
+    :: NegotiationRoundDTO -- ^ 'nriPayload'
+    -> Int64 -- ^ 'nriNegotiationId'
     -> NegotiationRoundsInsert'
 negotiationRoundsInsert' pNriPayload_ pNriNegotiationId_ =
     NegotiationRoundsInsert'

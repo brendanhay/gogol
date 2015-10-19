@@ -22,7 +22,7 @@
 --
 -- Inserts a new directory site.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingDirectorySitesInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.directorySites.insert@.
 module Network.Google.Resource.DFAReporting.DirectorySites.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.DirectorySites.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingDirectorySitesInsert@ method which the
+-- | A resource alias for @dfareporting.directorySites.insert@ method which the
 -- 'DirectorySitesInsert'' request conforms to.
 type DirectorySitesInsertResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data DirectorySitesInsert' = DirectorySitesInsert'
 --
 -- * 'dsiPayload'
 directorySitesInsert'
-    :: Int64 -- ^ 'profileId'
-    -> DirectorySite -- ^ 'payload'
+    :: Int64 -- ^ 'dsiProFileId'
+    -> DirectorySite -- ^ 'dsiPayload'
     -> DirectorySitesInsert'
 directorySitesInsert' pDsiProFileId_ pDsiPayload_ =
     DirectorySitesInsert'

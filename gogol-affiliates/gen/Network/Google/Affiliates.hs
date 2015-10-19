@@ -26,34 +26,34 @@ module Network.Google.Affiliates
 
     -- * Resources
 
-    -- ** GANAdvertisersGet
+    -- ** gan.advertisers.get
     , module Network.Google.Resource.GAN.Advertisers.Get
 
-    -- ** GANAdvertisersList
+    -- ** gan.advertisers.list
     , module Network.Google.Resource.GAN.Advertisers.List
 
-    -- ** GANCcOffersList
+    -- ** gan.ccOffers.list
     , module Network.Google.Resource.GAN.CcOffers.List
 
-    -- ** GANEventsList
+    -- ** gan.events.list
     , module Network.Google.Resource.GAN.Events.List
 
-    -- ** GANLinksGet
+    -- ** gan.links.get
     , module Network.Google.Resource.GAN.Links.Get
 
-    -- ** GANLinksInsert
+    -- ** gan.links.insert
     , module Network.Google.Resource.GAN.Links.Insert
 
-    -- ** GANLinksList
+    -- ** gan.links.list
     , module Network.Google.Resource.GAN.Links.List
 
-    -- ** GANPublishersGet
+    -- ** gan.publishers.get
     , module Network.Google.Resource.GAN.Publishers.Get
 
-    -- ** GANPublishersList
+    -- ** gan.publishers.list
     , module Network.Google.Resource.GAN.Publishers.List
 
-    -- ** GANReportsGet
+    -- ** gan.reports.get
     , module Network.Google.Resource.GAN.Reports.Get
 
     -- * Types

@@ -22,7 +22,7 @@
 --
 -- Deletes a report by its ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingReportsDelete@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.reports.delete@.
 module Network.Google.Resource.DFAReporting.Reports.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Reports.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingReportsDelete@ method which the
+-- | A resource alias for @dfareporting.reports.delete@ method which the
 -- 'ReportsDelete'' request conforms to.
 type ReportsDeleteResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data ReportsDelete' = ReportsDelete'
 --
 -- * 'rdProFileId'
 reportsDelete'
-    :: Int64 -- ^ 'reportId'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'rdReportId'
+    -> Int64 -- ^ 'rdProFileId'
     -> ReportsDelete'
 reportsDelete' pRdReportId_ pRdProFileId_ =
     ReportsDelete'

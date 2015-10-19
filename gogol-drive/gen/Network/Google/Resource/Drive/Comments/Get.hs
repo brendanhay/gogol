@@ -22,7 +22,7 @@
 --
 -- Gets a comment by ID.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveCommentsGet@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.comments.get@.
 module Network.Google.Resource.Drive.Comments.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Drive.Comments.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveCommentsGet@ method which the
+-- | A resource alias for @drive.comments.get@ method which the
 -- 'CommentsGet'' request conforms to.
 type CommentsGetResource =
      "files" :>
@@ -70,8 +70,8 @@ data CommentsGet' = CommentsGet'
 --
 -- * 'cgIncludeDeleted'
 commentsGet'
-    :: Text -- ^ 'fileId'
-    -> Text -- ^ 'commentId'
+    :: Text -- ^ 'cgFileId'
+    -> Text -- ^ 'cgCommentId'
     -> CommentsGet'
 commentsGet' pCgFileId_ pCgCommentId_ =
     CommentsGet'

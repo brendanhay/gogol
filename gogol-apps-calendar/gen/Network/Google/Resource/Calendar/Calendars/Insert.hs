@@ -22,7 +22,7 @@
 --
 -- Creates a secondary calendar.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarsInsert@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendars.insert@.
 module Network.Google.Resource.Calendar.Calendars.Insert
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Calendar.Calendars.Insert
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarsInsert@ method which the
+-- | A resource alias for @calendar.calendars.insert@ method which the
 -- 'CalendarsInsert'' request conforms to.
 type CalendarsInsertResource =
      "calendars" :>
@@ -59,7 +59,7 @@ newtype CalendarsInsert' = CalendarsInsert'
 --
 -- * 'ciPayload'
 calendarsInsert'
-    :: Calendar -- ^ 'payload'
+    :: Calendar -- ^ 'ciPayload'
     -> CalendarsInsert'
 calendarsInsert' pCiPayload_ =
     CalendarsInsert'

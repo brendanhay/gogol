@@ -22,7 +22,7 @@
 --
 -- Returns a single profile filter link.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFileFilterLinksGet@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.profileFilterLinks.get@.
 module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFileFilterLinksGet@ method which the
+-- | A resource alias for @analytics.management.profileFilterLinks.get@ method which the
 -- 'ManagementProFileFilterLinksGet'' request conforms to.
 type ManagementProFileFilterLinksGetResource =
      "management" :>
@@ -79,10 +79,10 @@ data ManagementProFileFilterLinksGet' = ManagementProFileFilterLinksGet'
 --
 -- * 'mpfflgLinkId'
 managementProFileFilterLinksGet'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'linkId'
+    :: Text -- ^ 'mpfflgWebPropertyId'
+    -> Text -- ^ 'mpfflgProFileId'
+    -> Text -- ^ 'mpfflgAccountId'
+    -> Text -- ^ 'mpfflgLinkId'
     -> ManagementProFileFilterLinksGet'
 managementProFileFilterLinksGet' pMpfflgWebPropertyId_ pMpfflgProFileId_ pMpfflgAccountId_ pMpfflgLinkId_ =
     ManagementProFileFilterLinksGet'

@@ -22,7 +22,7 @@
 --
 -- Retrieve the list of saved columns for a specified advertiser.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchSavedColumnsList@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @doubleclicksearch.savedColumns.list@.
 module Network.Google.Resource.DoubleClickSearch.SavedColumns.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DoubleClickSearch.SavedColumns.List
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClicksearchSavedColumnsList@ method which the
+-- | A resource alias for @doubleclicksearch.savedColumns.list@ method which the
 -- 'SavedColumnsList'' request conforms to.
 type SavedColumnsListResource =
      "agency" :>
@@ -67,8 +67,8 @@ data SavedColumnsList' = SavedColumnsList'
 --
 -- * 'sclAdvertiserId'
 savedColumnsList'
-    :: Int64 -- ^ 'agencyId'
-    -> Int64 -- ^ 'advertiserId'
+    :: Int64 -- ^ 'sclAgencyId'
+    -> Int64 -- ^ 'sclAdvertiserId'
     -> SavedColumnsList'
 savedColumnsList' pSclAgencyId_ pSclAdvertiserId_ =
     SavedColumnsList'

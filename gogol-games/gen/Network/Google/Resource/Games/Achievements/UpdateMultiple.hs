@@ -22,7 +22,7 @@
 --
 -- Updates multiple achievements for the currently authenticated player.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementsUpdateMultiple@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.achievements.updateMultiple@.
 module Network.Google.Resource.Games.Achievements.UpdateMultiple
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Games.Achievements.UpdateMultiple
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesAchievementsUpdateMultiple@ method which the
+-- | A resource alias for @games.achievements.updateMultiple@ method which the
 -- 'AchievementsUpdateMultiple'' request conforms to.
 type AchievementsUpdateMultipleResource =
      "achievements" :>
@@ -61,7 +61,7 @@ newtype AchievementsUpdateMultiple' = AchievementsUpdateMultiple'
 --
 -- * 'aumPayload'
 achievementsUpdateMultiple'
-    :: AchievementUpdateMultipleRequest -- ^ 'payload'
+    :: AchievementUpdateMultipleRequest -- ^ 'aumPayload'
     -> AchievementsUpdateMultiple'
 achievementsUpdateMultiple' pAumPayload_ =
     AchievementsUpdateMultiple'

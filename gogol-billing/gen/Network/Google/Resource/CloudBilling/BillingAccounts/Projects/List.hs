@@ -24,7 +24,7 @@
 -- authenticated user must be an [owner of the billing
 -- account](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
--- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @CloudBillingBillingAccountsProjectsList@.
+-- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @cloudbilling.billingAccounts.projects.list@.
 module Network.Google.Resource.CloudBilling.BillingAccounts.Projects.List
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.Projects.List
 import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudBillingBillingAccountsProjectsList@ method which the
+-- | A resource alias for @cloudbilling.billingAccounts.projects.list@ method which the
 -- 'BillingAccountsProjectsList'' request conforms to.
 type BillingAccountsProjectsListResource =
      "v1" :>
@@ -110,7 +110,7 @@ data BillingAccountsProjectsList' = BillingAccountsProjectsList'
 --
 -- * 'baplCallback'
 billingAccountsProjectsList'
-    :: Text -- ^ 'name'
+    :: Text -- ^ 'baplName'
     -> BillingAccountsProjectsList'
 billingAccountsProjectsList' pBaplName_ =
     BillingAccountsProjectsList'

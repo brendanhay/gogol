@@ -22,7 +22,7 @@
 --
 -- Updates a revision.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRevisionsUpdate@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.revisions.update@.
 module Network.Google.Resource.Drive.Revisions.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Drive.Revisions.Update
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRevisionsUpdate@ method which the
+-- | A resource alias for @drive.revisions.update@ method which the
 -- 'RevisionsUpdate'' request conforms to.
 type RevisionsUpdateResource =
      "files" :>
@@ -70,9 +70,9 @@ data RevisionsUpdate' = RevisionsUpdate'
 --
 -- * 'ruRevisionId'
 revisionsUpdate'
-    :: Revision -- ^ 'payload'
-    -> Text -- ^ 'fileId'
-    -> Text -- ^ 'revisionId'
+    :: Revision -- ^ 'ruPayload'
+    -> Text -- ^ 'ruFileId'
+    -> Text -- ^ 'ruRevisionId'
     -> RevisionsUpdate'
 revisionsUpdate' pRuPayload_ pRuFileId_ pRuRevisionId_ =
     RevisionsUpdate'

@@ -23,7 +23,7 @@
 -- Retrieves the list of creative IDs associated with the specified
 -- campaign.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCampaignCreativeAssociationsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.campaignCreativeAssociations.list@.
 module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCampaignCreativeAssociationsList@ method which the
+-- | A resource alias for @dfareporting.campaignCreativeAssociations.list@ method which the
 -- 'CampaignCreativeAssociationsList'' request conforms to.
 type CampaignCreativeAssociationsListResource =
      "userprofiles" :>
@@ -86,8 +86,8 @@ data CampaignCreativeAssociationsList' = CampaignCreativeAssociationsList'
 --
 -- * 'ccalMaxResults'
 campaignCreativeAssociationsList'
-    :: Int64 -- ^ 'campaignId'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'ccalCampaignId'
+    -> Int64 -- ^ 'ccalProFileId'
     -> CampaignCreativeAssociationsList'
 campaignCreativeAssociationsList' pCcalCampaignId_ pCcalProFileId_ =
     CampaignCreativeAssociationsList'

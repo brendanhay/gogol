@@ -22,7 +22,7 @@
 --
 -- Returns the specified TargetPool resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.get@.
 module Network.Google.Resource.Compute.TargetPools.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.TargetPools.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetPoolsGet@ method which the
+-- | A resource alias for @compute.targetPools.get@ method which the
 -- 'TargetPoolsGet'' request conforms to.
 type TargetPoolsGetResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data TargetPoolsGet' = TargetPoolsGet'
 --
 -- * 'tpgRegion'
 targetPoolsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'targetPool'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'tpgProject'
+    -> Text -- ^ 'tpgTargetPool'
+    -> Text -- ^ 'tpgRegion'
     -> TargetPoolsGet'
 targetPoolsGet' pTpgProject_ pTpgTargetPool_ pTpgRegion_ =
     TargetPoolsGet'

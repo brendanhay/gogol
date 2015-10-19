@@ -22,7 +22,7 @@
 --
 -- Remove membership.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMembersDelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.members.delete@.
 module Network.Google.Resource.Directory.Members.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Members.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryMembersDelete@ method which the
+-- | A resource alias for @directory.members.delete@ method which the
 -- 'MembersDelete'' request conforms to.
 type MembersDeleteResource =
      "groups" :>
@@ -65,8 +65,8 @@ data MembersDelete' = MembersDelete'
 --
 -- * 'mdGroupKey'
 membersDelete'
-    :: Text -- ^ 'memberKey'
-    -> Text -- ^ 'groupKey'
+    :: Text -- ^ 'mdMemberKey'
+    -> Text -- ^ 'mdGroupKey'
     -> MembersDelete'
 membersDelete' pMdMemberKey_ pMdGroupKey_ =
     MembersDelete'

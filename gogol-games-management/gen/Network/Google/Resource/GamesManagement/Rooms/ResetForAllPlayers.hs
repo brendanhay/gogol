@@ -24,7 +24,7 @@
 -- tester accounts for your application. This method is only available to
 -- user accounts for your developer console.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementRoomsResetForAllPlayers@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.rooms.resetForAllPlayers@.
 module Network.Google.Resource.GamesManagement.Rooms.ResetForAllPlayers
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.GamesManagement.Rooms.ResetForAllPlayers
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementRoomsResetForAllPlayers@ method which the
+-- | A resource alias for @gamesManagement.rooms.resetForAllPlayers@ method which the
 -- 'RoomsResetForAllPlayers'' request conforms to.
 type RoomsResetForAllPlayersResource =
      "rooms" :>

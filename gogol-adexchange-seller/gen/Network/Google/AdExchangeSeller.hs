@@ -27,46 +27,46 @@ module Network.Google.AdExchangeSeller
 
     -- * Resources
 
-    -- ** AdexchangesellerAccountsAdClientsList
+    -- ** adexchangeseller.accounts.adclients.list
     , module Network.Google.Resource.AdExchangeSeller.Accounts.AdClients.List
 
-    -- ** AdexchangesellerAccountsAlertsList
+    -- ** adexchangeseller.accounts.alerts.list
     , module Network.Google.Resource.AdExchangeSeller.Accounts.Alerts.List
 
-    -- ** AdexchangesellerAccountsCustomChannelsGet
+    -- ** adexchangeseller.accounts.customchannels.get
     , module Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.Get
 
-    -- ** AdexchangesellerAccountsCustomChannelsList
+    -- ** adexchangeseller.accounts.customchannels.list
     , module Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.List
 
-    -- ** AdexchangesellerAccountsGet
+    -- ** adexchangeseller.accounts.get
     , module Network.Google.Resource.AdExchangeSeller.Accounts.Get
 
-    -- ** AdexchangesellerAccountsList
+    -- ** adexchangeseller.accounts.list
     , module Network.Google.Resource.AdExchangeSeller.Accounts.List
 
-    -- ** AdexchangesellerAccountsMetadataDimensionsList
+    -- ** adexchangeseller.accounts.metadata.dimensions.list
     , module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Dimensions.List
 
-    -- ** AdexchangesellerAccountsMetadataMetricsList
+    -- ** adexchangeseller.accounts.metadata.metrics.list
     , module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Metrics.List
 
-    -- ** AdexchangesellerAccountsPreferredDealsGet
+    -- ** adexchangeseller.accounts.preferreddeals.get
     , module Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.Get
 
-    -- ** AdexchangesellerAccountsPreferredDealsList
+    -- ** adexchangeseller.accounts.preferreddeals.list
     , module Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.List
 
-    -- ** AdexchangesellerAccountsReportsGenerate
+    -- ** adexchangeseller.accounts.reports.generate
     , module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Generate
 
-    -- ** AdexchangesellerAccountsReportsSavedGenerate
+    -- ** adexchangeseller.accounts.reports.saved.generate
     , module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.Generate
 
-    -- ** AdexchangesellerAccountsReportsSavedList
+    -- ** adexchangeseller.accounts.reports.saved.list
     , module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.List
 
-    -- ** AdexchangesellerAccountsURLChannelsList
+    -- ** adexchangeseller.accounts.urlchannels.list
     , module Network.Google.Resource.AdExchangeSeller.Accounts.URLChannels.List
 
     -- * Types

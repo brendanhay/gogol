@@ -22,7 +22,7 @@
 --
 -- List the layer summaries for a volume.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksLayersList@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.layers.list@.
 module Network.Google.Resource.Books.Layers.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Books.Layers.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksLayersList@ method which the
+-- | A resource alias for @books.layers.list@ method which the
 -- 'LayersList'' request conforms to.
 type LayersListResource =
      "volumes" :>
@@ -81,7 +81,7 @@ data LayersList' = LayersList'
 --
 -- * 'llMaxResults'
 layersList'
-    :: Text -- ^ 'volumeId'
+    :: Text -- ^ 'llVolumeId'
     -> LayersList'
 layersList' pLlVolumeId_ =
     LayersList'

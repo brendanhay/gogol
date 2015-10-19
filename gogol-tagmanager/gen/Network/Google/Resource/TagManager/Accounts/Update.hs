@@ -22,7 +22,7 @@
 --
 -- Updates a GTM Account.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsUpdate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.update@.
 module Network.Google.Resource.TagManager.Accounts.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Update
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsUpdate@ method which the
+-- | A resource alias for @tagmanager.accounts.update@ method which the
 -- 'AccountsUpdate'' request conforms to.
 type AccountsUpdateResource =
      "accounts" :>
@@ -69,8 +69,8 @@ data AccountsUpdate' = AccountsUpdate'
 --
 -- * 'auAccountId'
 accountsUpdate'
-    :: Account -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Account -- ^ 'auPayload'
+    -> Text -- ^ 'auAccountId'
     -> AccountsUpdate'
 accountsUpdate' pAuPayload_ pAuAccountId_ =
     AccountsUpdate'

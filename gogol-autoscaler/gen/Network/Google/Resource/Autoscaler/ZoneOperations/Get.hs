@@ -22,7 +22,7 @@
 --
 -- Retrieves the specified zone-specific operation resource.
 --
--- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerZoneOperationsGet@.
+-- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @autoscaler.zoneOperations.get@.
 module Network.Google.Resource.Autoscaler.ZoneOperations.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Autoscaler.ZoneOperations.Get
 import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AutoscalerZoneOperationsGet@ method which the
+-- | A resource alias for @autoscaler.zoneOperations.get@ method which the
 -- 'ZoneOperationsGet'' request conforms to.
 type ZoneOperationsGetResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data ZoneOperationsGet' = ZoneOperationsGet'
 --
 -- * 'zogZone'
 zoneOperationsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'operation'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'zogProject'
+    -> Text -- ^ 'zogOperation'
+    -> Text -- ^ 'zogZone'
     -> ZoneOperationsGet'
 zoneOperationsGet' pZogProject_ pZogOperation_ pZogZone_ =
     ZoneOperationsGet'

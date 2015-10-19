@@ -22,7 +22,7 @@
 --
 -- Adds a volume to a bookshelf.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryBookshelvesAddVolume@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.bookshelves.addVolume@.
 module Network.Google.Resource.Books.MyLibrary.Bookshelves.AddVolume
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.AddVolume
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryBookshelvesAddVolume@ method which the
+-- | A resource alias for @books.mylibrary.bookshelves.addVolume@ method which the
 -- 'MyLibraryBookshelvesAddVolume'' request conforms to.
 type MyLibraryBookshelvesAddVolumeResource =
      "mylibrary" :>
@@ -78,8 +78,8 @@ data MyLibraryBookshelvesAddVolume' = MyLibraryBookshelvesAddVolume'
 --
 -- * 'mlbavSource'
 myLibraryBookshelvesAddVolume'
-    :: Text -- ^ 'shelf'
-    -> Text -- ^ 'volumeId'
+    :: Text -- ^ 'mlbavShelf'
+    -> Text -- ^ 'mlbavVolumeId'
     -> MyLibraryBookshelvesAddVolume'
 myLibraryBookshelvesAddVolume' pMlbavShelf_ pMlbavVolumeId_ =
     MyLibraryBookshelvesAddVolume'

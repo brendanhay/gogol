@@ -23,7 +23,7 @@
 -- Immediately and permanently deletes the specified draft. Does not simply
 -- trash it.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersDraftsDelete@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.drafts.delete@.
 module Network.Google.Resource.Gmail.Users.Drafts.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Gmail.Users.Drafts.Delete
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersDraftsDelete@ method which the
+-- | A resource alias for @gmail.users.drafts.delete@ method which the
 -- 'UsersDraftsDelete'' request conforms to.
 type UsersDraftsDeleteResource =
      Capture "userId" Text :>
@@ -66,7 +66,7 @@ data UsersDraftsDelete' = UsersDraftsDelete'
 --
 -- * 'uddId'
 usersDraftsDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'uddId'
     -> Text
     -> UsersDraftsDelete'
 usersDraftsDelete' pUddUserId_ pUddId_ =

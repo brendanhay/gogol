@@ -22,7 +22,7 @@
 --
 -- Atomically update the ResourceRecordSet collection.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSChangesCreate@.
+-- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.changes.create@.
 module Network.Google.Resource.DNS.Changes.Create
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DNS.Changes.Create
 import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DNSChangesCreate@ method which the
+-- | A resource alias for @dns.changes.create@ method which the
 -- 'ChangesCreate'' request conforms to.
 type ChangesCreateResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data ChangesCreate' = ChangesCreate'
 --
 -- * 'ccManagedZone'
 changesCreate'
-    :: Text -- ^ 'project'
-    -> Change -- ^ 'payload'
-    -> Text -- ^ 'managedZone'
+    :: Text -- ^ 'ccProject'
+    -> Change -- ^ 'ccPayload'
+    -> Text -- ^ 'ccManagedZone'
     -> ChangesCreate'
 changesCreate' pCcProject_ pCcPayload_ pCcManagedZone_ =
     ChangesCreate'

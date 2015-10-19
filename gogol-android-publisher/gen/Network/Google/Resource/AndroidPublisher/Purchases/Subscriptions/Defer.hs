@@ -23,7 +23,7 @@
 -- Defers a user\'s subscription purchase until a specified future
 -- expiration time.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherPurchasesSubscriptionsDefer@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.purchases.subscriptions.defer@.
 module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherPurchasesSubscriptionsDefer@ method which the
+-- | A resource alias for @androidpublisher.purchases.subscriptions.defer@ method which the
 -- 'PurchasesSubscriptionsDefer'' request conforms to.
 type PurchasesSubscriptionsDeferResource =
      Capture "packageName" Text :>
@@ -79,10 +79,10 @@ data PurchasesSubscriptionsDefer' = PurchasesSubscriptionsDefer'
 --
 -- * 'psdSubscriptionId'
 purchasesSubscriptionsDefer'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'token'
-    -> SubscriptionPurchasesDeferRequest -- ^ 'payload'
-    -> Text -- ^ 'subscriptionId'
+    :: Text -- ^ 'psdPackageName'
+    -> Text -- ^ 'psdToken'
+    -> SubscriptionPurchasesDeferRequest -- ^ 'psdPayload'
+    -> Text -- ^ 'psdSubscriptionId'
     -> PurchasesSubscriptionsDefer'
 purchasesSubscriptionsDefer' pPsdPackageName_ pPsdToken_ pPsdPayload_ pPsdSubscriptionId_ =
     PurchasesSubscriptionsDefer'

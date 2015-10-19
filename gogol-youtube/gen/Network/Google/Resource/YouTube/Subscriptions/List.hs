@@ -22,7 +22,7 @@
 --
 -- Returns subscription resources that match the API request criteria.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeSubscriptionsList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.subscriptions.list@.
 module Network.Google.Resource.YouTube.Subscriptions.List
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.YouTube.Subscriptions.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeSubscriptionsList@ method which the
+-- | A resource alias for @youtube.subscriptions.list@ method which the
 -- 'SubscriptionsList'' request conforms to.
 type SubscriptionsListResource =
      "subscriptions" :>
@@ -110,7 +110,7 @@ data SubscriptionsList' = SubscriptionsList'
 --
 -- * 'sMaxResults'
 subscriptionsList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'sPart'
     -> SubscriptionsList'
 subscriptionsList' pSPart_ =
     SubscriptionsList'

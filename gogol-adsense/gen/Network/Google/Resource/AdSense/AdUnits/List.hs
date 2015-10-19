@@ -22,7 +22,7 @@
 --
 -- List all ad units in the specified ad client for this AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAdUnitsList@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.adunits.list@.
 module Network.Google.Resource.AdSense.AdUnits.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AdSense.AdUnits.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAdUnitsList@ method which the
+-- | A resource alias for @adsense.adunits.list@ method which the
 -- 'AdUnitsList'' request conforms to.
 type AdUnitsListResource =
      "adclients" :>
@@ -75,7 +75,7 @@ data AdUnitsList' = AdUnitsList'
 --
 -- * 'aulMaxResults'
 adUnitsList'
-    :: Text -- ^ 'adClientId'
+    :: Text -- ^ 'aulAdClientId'
     -> AdUnitsList'
 adUnitsList' pAulAdClientId_ =
     AdUnitsList'

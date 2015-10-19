@@ -22,7 +22,7 @@
 --
 -- Return a single feature, given its ID.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesFeaturesGet@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.tables.features.get@.
 module Network.Google.Resource.MapsEngine.Tables.Features.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.MapsEngine.Tables.Features.Get
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesFeaturesGet@ method which the
+-- | A resource alias for @mapsengine.tables.features.get@ method which the
 -- 'TablesFeaturesGet'' request conforms to.
 type TablesFeaturesGetResource =
      "tables" :>
@@ -75,8 +75,8 @@ data TablesFeaturesGet' = TablesFeaturesGet'
 --
 -- * 'tfgTableId'
 tablesFeaturesGet'
-    :: Text -- ^ 'id'
-    -> Text -- ^ 'tableId'
+    :: Text -- ^ 'tfgId'
+    -> Text -- ^ 'tfgTableId'
     -> TablesFeaturesGet'
 tablesFeaturesGet' pTfgId_ pTfgTableId_ =
     TablesFeaturesGet'

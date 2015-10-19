@@ -28,142 +28,142 @@ module Network.Google.AdExchangeBuyer
 
     -- * Resources
 
-    -- ** AdexchangebuyerAccountsGet
+    -- ** adexchangebuyer.accounts.get
     , module Network.Google.Resource.AdExchangeBuyer.Accounts.Get
 
-    -- ** AdexchangebuyerAccountsList
+    -- ** adexchangebuyer.accounts.list
     , module Network.Google.Resource.AdExchangeBuyer.Accounts.List
 
-    -- ** AdexchangebuyerAccountsPatch
+    -- ** adexchangebuyer.accounts.patch
     , module Network.Google.Resource.AdExchangeBuyer.Accounts.Patch
 
-    -- ** AdexchangebuyerAccountsUpdate
+    -- ** adexchangebuyer.accounts.update
     , module Network.Google.Resource.AdExchangeBuyer.Accounts.Update
 
-    -- ** AdexchangebuyerBillingInfoGet
+    -- ** adexchangebuyer.billingInfo.get
     , module Network.Google.Resource.AdExchangeBuyer.BillingInfo.Get
 
-    -- ** AdexchangebuyerBillingInfoList
+    -- ** adexchangebuyer.billingInfo.list
     , module Network.Google.Resource.AdExchangeBuyer.BillingInfo.List
 
-    -- ** AdexchangebuyerBudgetGet
+    -- ** adexchangebuyer.budget.get
     , module Network.Google.Resource.AdExchangeBuyer.Budget.Get
 
-    -- ** AdexchangebuyerBudgetPatch
+    -- ** adexchangebuyer.budget.patch
     , module Network.Google.Resource.AdExchangeBuyer.Budget.Patch
 
-    -- ** AdexchangebuyerBudgetUpdate
+    -- ** adexchangebuyer.budget.update
     , module Network.Google.Resource.AdExchangeBuyer.Budget.Update
 
-    -- ** AdexchangebuyerClientAccessDelete
+    -- ** adexchangebuyer.clientaccess.delete
     , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Delete
 
-    -- ** AdexchangebuyerClientAccessGet
+    -- ** adexchangebuyer.clientaccess.get
     , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Get
 
-    -- ** AdexchangebuyerClientAccessInsert
+    -- ** adexchangebuyer.clientaccess.insert
     , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Insert
 
-    -- ** AdexchangebuyerClientAccessList
+    -- ** adexchangebuyer.clientaccess.list
     , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.List
 
-    -- ** AdexchangebuyerClientAccessPatch
+    -- ** adexchangebuyer.clientaccess.patch
     , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Patch
 
-    -- ** AdexchangebuyerClientAccessUpdate
+    -- ** adexchangebuyer.clientaccess.update
     , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Update
 
-    -- ** AdexchangebuyerCreativesGet
+    -- ** adexchangebuyer.creatives.get
     , module Network.Google.Resource.AdExchangeBuyer.Creatives.Get
 
-    -- ** AdexchangebuyerCreativesInsert
+    -- ** adexchangebuyer.creatives.insert
     , module Network.Google.Resource.AdExchangeBuyer.Creatives.Insert
 
-    -- ** AdexchangebuyerCreativesList
+    -- ** adexchangebuyer.creatives.list
     , module Network.Google.Resource.AdExchangeBuyer.Creatives.List
 
-    -- ** AdexchangebuyerDealsGet
+    -- ** adexchangebuyer.deals.get
     , module Network.Google.Resource.AdExchangeBuyer.Deals.Get
 
-    -- ** AdexchangebuyerMarketplaceDealsDelete
+    -- ** adexchangebuyer.marketplacedeals.delete
     , module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Delete
 
-    -- ** AdexchangebuyerMarketplaceDealsInsert
+    -- ** adexchangebuyer.marketplacedeals.insert
     , module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Insert
 
-    -- ** AdexchangebuyerMarketplaceDealsList
+    -- ** adexchangebuyer.marketplacedeals.list
     , module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
 
-    -- ** AdexchangebuyerMarketplaceDealsUpdate
+    -- ** adexchangebuyer.marketplacedeals.update
     , module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Update
 
-    -- ** AdexchangebuyerMarketplaceNotesInsert
+    -- ** adexchangebuyer.marketplacenotes.insert
     , module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.Insert
 
-    -- ** AdexchangebuyerMarketplaceNotesList
+    -- ** adexchangebuyer.marketplacenotes.list
     , module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
 
-    -- ** AdexchangebuyerMarketplaceOffersGet
+    -- ** adexchangebuyer.marketplaceoffers.get
     , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOffers.Get
 
-    -- ** AdexchangebuyerMarketplaceOffersSearch
+    -- ** adexchangebuyer.marketplaceoffers.search
     , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOffers.Search
 
-    -- ** AdexchangebuyerMarketplaceOrdersGet
+    -- ** adexchangebuyer.marketplaceorders.get
     , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Get
 
-    -- ** AdexchangebuyerMarketplaceOrdersInsert
+    -- ** adexchangebuyer.marketplaceorders.insert
     , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Insert
 
-    -- ** AdexchangebuyerMarketplaceOrdersPatch
+    -- ** adexchangebuyer.marketplaceorders.patch
     , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Patch
 
-    -- ** AdexchangebuyerMarketplaceOrdersSearch
+    -- ** adexchangebuyer.marketplaceorders.search
     , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Search
 
-    -- ** AdexchangebuyerMarketplaceOrdersUpdate
+    -- ** adexchangebuyer.marketplaceorders.update
     , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Update
 
-    -- ** AdexchangebuyerNegotiationRoundsInsert
+    -- ** adexchangebuyer.negotiationrounds.insert
     , module Network.Google.Resource.AdExchangeBuyer.NegotiationRounds.Insert
 
-    -- ** AdexchangebuyerNegotiationsGet
+    -- ** adexchangebuyer.negotiations.get
     , module Network.Google.Resource.AdExchangeBuyer.Negotiations.Get
 
-    -- ** AdexchangebuyerNegotiationsInsert
+    -- ** adexchangebuyer.negotiations.insert
     , module Network.Google.Resource.AdExchangeBuyer.Negotiations.Insert
 
-    -- ** AdexchangebuyerNegotiationsList
+    -- ** adexchangebuyer.negotiations.list
     , module Network.Google.Resource.AdExchangeBuyer.Negotiations.List
 
-    -- ** AdexchangebuyerOffersGet
+    -- ** adexchangebuyer.offers.get
     , module Network.Google.Resource.AdExchangeBuyer.Offers.Get
 
-    -- ** AdexchangebuyerOffersInsert
+    -- ** adexchangebuyer.offers.insert
     , module Network.Google.Resource.AdExchangeBuyer.Offers.Insert
 
-    -- ** AdexchangebuyerOffersList
+    -- ** adexchangebuyer.offers.list
     , module Network.Google.Resource.AdExchangeBuyer.Offers.List
 
-    -- ** AdexchangebuyerPerformanceReportList
+    -- ** adexchangebuyer.performanceReport.list
     , module Network.Google.Resource.AdExchangeBuyer.PerformanceReport.List
 
-    -- ** AdexchangebuyerPretargetingConfigDelete
+    -- ** adexchangebuyer.pretargetingConfig.delete
     , module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Delete
 
-    -- ** AdexchangebuyerPretargetingConfigGet
+    -- ** adexchangebuyer.pretargetingConfig.get
     , module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Get
 
-    -- ** AdexchangebuyerPretargetingConfigInsert
+    -- ** adexchangebuyer.pretargetingConfig.insert
     , module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Insert
 
-    -- ** AdexchangebuyerPretargetingConfigList
+    -- ** adexchangebuyer.pretargetingConfig.list
     , module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.List
 
-    -- ** AdexchangebuyerPretargetingConfigPatch
+    -- ** adexchangebuyer.pretargetingConfig.patch
     , module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Patch
 
-    -- ** AdexchangebuyerPretargetingConfigUpdate
+    -- ** adexchangebuyer.pretargetingConfig.update
     , module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Update
 
     -- * Types

@@ -22,7 +22,7 @@
 --
 -- Return all of the permissions for the specified asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineAssetsPermissionsList@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.assets.permissions.list@.
 module Network.Google.Resource.MapsEngine.Assets.Permissions.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.Assets.Permissions.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineAssetsPermissionsList@ method which the
+-- | A resource alias for @mapsengine.assets.permissions.list@ method which the
 -- 'AssetsPermissionsList'' request conforms to.
 type AssetsPermissionsListResource =
      "assets" :>
@@ -61,7 +61,7 @@ newtype AssetsPermissionsList' = AssetsPermissionsList'
 --
 -- * 'aplId'
 assetsPermissionsList'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'aplId'
     -> AssetsPermissionsList'
 assetsPermissionsList' pAplId_ =
     AssetsPermissionsList'

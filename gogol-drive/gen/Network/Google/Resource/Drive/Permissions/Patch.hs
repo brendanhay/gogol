@@ -22,7 +22,7 @@
 --
 -- Updates a permission using patch semantics.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsPatch@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.permissions.patch@.
 module Network.Google.Resource.Drive.Permissions.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Drive.Permissions.Patch
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePermissionsPatch@ method which the
+-- | A resource alias for @drive.permissions.patch@ method which the
 -- 'PermissionsPatch'' request conforms to.
 type PermissionsPatchResource =
      "files" :>
@@ -76,9 +76,9 @@ data PermissionsPatch' = PermissionsPatch'
 --
 -- * 'pppPermissionId'
 permissionsPatch'
-    :: Permission -- ^ 'payload'
-    -> Text -- ^ 'fileId'
-    -> Text -- ^ 'permissionId'
+    :: Permission -- ^ 'pppPayload'
+    -> Text -- ^ 'pppFileId'
+    -> Text -- ^ 'pppPermissionId'
     -> PermissionsPatch'
 permissionsPatch' pPppPayload_ pPppFileId_ pPppPermissionId_ =
     PermissionsPatch'

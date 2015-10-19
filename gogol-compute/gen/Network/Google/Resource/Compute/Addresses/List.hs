@@ -23,7 +23,7 @@
 -- Retrieves the list of address resources contained within the specified
 -- region.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAddressesList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.addresses.list@.
 module Network.Google.Resource.Compute.Addresses.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.Addresses.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeAddressesList@ method which the
+-- | A resource alias for @compute.addresses.list@ method which the
 -- 'AddressesList'' request conforms to.
 type AddressesListResource =
      Capture "project" Text :>
@@ -82,8 +82,8 @@ data AddressesList' = AddressesList'
 --
 -- * 'alMaxResults'
 addressesList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'alProject'
+    -> Text -- ^ 'alRegion'
     -> AddressesList'
 addressesList' pAlProject_ pAlRegion_ =
     AddressesList'

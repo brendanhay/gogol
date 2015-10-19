@@ -23,7 +23,7 @@
 -- Updates the budget amount for the budget of the adgroup specified by the
 -- accountId and billingId, with the budget amount in the request.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerBudgetUpdate@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.budget.update@.
 module Network.Google.Resource.AdExchangeBuyer.Budget.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Update
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerBudgetUpdate@ method which the
+-- | A resource alias for @adexchangebuyer.budget.update@ method which the
 -- 'BudgetUpdate'' request conforms to.
 type BudgetUpdateResource =
      "billinginfo" :>
@@ -71,9 +71,9 @@ data BudgetUpdate' = BudgetUpdate'
 --
 -- * 'buBillingId'
 budgetUpdate'
-    :: Budget -- ^ 'payload'
-    -> Int64 -- ^ 'accountId'
-    -> Int64 -- ^ 'billingId'
+    :: Budget -- ^ 'buPayload'
+    -> Int64 -- ^ 'buAccountId'
+    -> Int64 -- ^ 'buBillingId'
     -> BudgetUpdate'
 budgetUpdate' pBuPayload_ pBuAccountId_ pBuBillingId_ =
     BudgetUpdate'

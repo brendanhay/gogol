@@ -30,7 +30,7 @@
 -- \`ALREADY_EXISTS\` if the user is already a student or teacher in the
 -- course.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesStudentsCreate@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.students.create@.
 module Network.Google.Resource.Classroom.Courses.Students.Create
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ module Network.Google.Resource.Classroom.Courses.Students.Create
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesStudentsCreate@ method which the
+-- | A resource alias for @classroom.courses.students.create@ method which the
 -- 'CoursesStudentsCreate'' request conforms to.
 type CoursesStudentsCreateResource =
      "v1" :>
@@ -122,8 +122,8 @@ data CoursesStudentsCreate' = CoursesStudentsCreate'
 --
 -- * 'cscCallback'
 coursesStudentsCreate'
-    :: Text -- ^ 'courseId'
-    -> Student -- ^ 'payload'
+    :: Text -- ^ 'cscCourseId'
+    -> Student -- ^ 'cscPayload'
     -> CoursesStudentsCreate'
 coursesStudentsCreate' pCscCourseId_ pCscPayload_ =
     CoursesStudentsCreate'

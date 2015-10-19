@@ -22,7 +22,7 @@
 --
 -- Stop watching resources through this channel
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarChannelsStop@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.channels.stop@.
 module Network.Google.Resource.Calendar.Channels.Stop
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Calendar.Channels.Stop
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarChannelsStop@ method which the
+-- | A resource alias for @calendar.channels.stop@ method which the
 -- 'ChannelsStop'' request conforms to.
 type ChannelsStopResource =
      "channels" :>
@@ -60,7 +60,7 @@ newtype ChannelsStop' = ChannelsStop'
 --
 -- * 'csPayload'
 channelsStop'
-    :: Channel -- ^ 'payload'
+    :: Channel -- ^ 'csPayload'
     -> ChannelsStop'
 channelsStop' pCsPayload_ =
     ChannelsStop'

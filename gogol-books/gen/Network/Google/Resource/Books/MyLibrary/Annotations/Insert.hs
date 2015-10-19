@@ -22,7 +22,7 @@
 --
 -- Inserts a new annotation.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryAnnotationsInsert@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.annotations.insert@.
 module Network.Google.Resource.Books.MyLibrary.Annotations.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.Insert
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryAnnotationsInsert@ method which the
+-- | A resource alias for @books.mylibrary.annotations.insert@ method which the
 -- 'MyLibraryAnnotationsInsert'' request conforms to.
 type MyLibraryAnnotationsInsertResource =
      "mylibrary" :>
@@ -75,7 +75,7 @@ data MyLibraryAnnotationsInsert' = MyLibraryAnnotationsInsert'
 --
 -- * 'mlaiSource'
 myLibraryAnnotationsInsert'
-    :: Annotation -- ^ 'payload'
+    :: Annotation -- ^ 'mlaiPayload'
     -> MyLibraryAnnotationsInsert'
 myLibraryAnnotationsInsert' pMlaiPayload_ =
     MyLibraryAnnotationsInsert'

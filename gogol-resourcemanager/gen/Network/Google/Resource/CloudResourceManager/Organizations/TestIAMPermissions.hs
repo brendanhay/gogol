@@ -22,7 +22,7 @@
 --
 -- Returns permissions that a caller has on the specified Organization.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerOrganizationsTestIAMPermissions@.
+-- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.organizations.testIamPermissions@.
 module Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermissions
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermiss
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerOrganizationsTestIAMPermissions@ method which the
+-- | A resource alias for @cloudresourcemanager.organizations.testIamPermissions@ method which the
 -- 'OrganizationsTestIAMPermissions'' request conforms to.
 type OrganizationsTestIAMPermissionsResource =
      "v1beta1" :>
@@ -101,8 +101,8 @@ data OrganizationsTestIAMPermissions' = OrganizationsTestIAMPermissions'
 --
 -- * 'otipCallback'
 organizationsTestIAMPermissions'
-    :: TestIAMPermissionsRequest -- ^ 'payload'
-    -> Text -- ^ 'resource'
+    :: TestIAMPermissionsRequest -- ^ 'otipPayload'
+    -> Text -- ^ 'otipResource'
     -> OrganizationsTestIAMPermissions'
 organizationsTestIAMPermissions' pOtipPayload_ pOtipResource_ =
     OrganizationsTestIAMPermissions'

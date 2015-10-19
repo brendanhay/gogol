@@ -22,7 +22,7 @@
 --
 -- Update the given order. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceOrdersPatch@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.marketplaceorders.patch@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Patch
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerMarketplaceOrdersPatch@ method which the
+-- | A resource alias for @adexchangebuyer.marketplaceorders.patch@ method which the
 -- 'MarketplaceOrdersPatch'' request conforms to.
 type MarketplaceOrdersPatchResource =
      "marketplaceOrders" :>
@@ -77,10 +77,10 @@ data MarketplaceOrdersPatch' = MarketplaceOrdersPatch'
 --
 -- * 'mopOrderId'
 marketplaceOrdersPatch'
-    :: MarketplaceOrdersPatchUpdateAction -- ^ 'updateAction'
-    -> Int64 -- ^ 'revisionNumber'
-    -> MarketplaceOrder -- ^ 'payload'
-    -> Text -- ^ 'orderId'
+    :: MarketplaceOrdersPatchUpdateAction -- ^ 'mopUpdateAction'
+    -> Int64 -- ^ 'mopRevisionNumber'
+    -> MarketplaceOrder -- ^ 'mopPayload'
+    -> Text -- ^ 'mopOrderId'
     -> MarketplaceOrdersPatch'
 marketplaceOrdersPatch' pMopUpdateAction_ pMopRevisionNumber_ pMopPayload_ pMopOrderId_ =
     MarketplaceOrdersPatch'

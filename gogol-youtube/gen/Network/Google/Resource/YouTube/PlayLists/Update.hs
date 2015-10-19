@@ -23,7 +23,7 @@
 -- Modifies a playlist. For example, you could change a playlist\'s title,
 -- description, or privacy status.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlayListsUpdate@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.playlists.update@.
 module Network.Google.Resource.YouTube.PlayLists.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.YouTube.PlayLists.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubePlayListsUpdate@ method which the
+-- | A resource alias for @youtube.playlists.update@ method which the
 -- 'PlayListsUpdate'' request conforms to.
 type PlayListsUpdateResource =
      "playlists" :>
@@ -71,8 +71,8 @@ data PlayListsUpdate' = PlayListsUpdate'
 --
 -- * 'pluOnBehalfOfContentOwner'
 playListsUpdate'
-    :: Text -- ^ 'part'
-    -> PlayList -- ^ 'payload'
+    :: Text -- ^ 'pluPart'
+    -> PlayList -- ^ 'pluPayload'
     -> PlayListsUpdate'
 playListsUpdate' pPluPart_ pPluPayload_ =
     PlayListsUpdate'

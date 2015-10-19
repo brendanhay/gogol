@@ -22,7 +22,7 @@
 --
 -- Retrieves an order using merchant order id.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersGetbymerchantOrderid@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.getbymerchantorderid@.
 module Network.Google.Resource.Content.Orders.GetbymerchantOrderid
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Content.Orders.GetbymerchantOrderid
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersGetbymerchantOrderid@ method which the
+-- | A resource alias for @content.orders.getbymerchantorderid@ method which the
 -- 'OrdersGetbymerchantOrderid'' request conforms to.
 type OrdersGetbymerchantOrderidResource =
      Capture "merchantId" Word64 :>
@@ -65,8 +65,8 @@ data OrdersGetbymerchantOrderid' = OrdersGetbymerchantOrderid'
 --
 -- * 'ordMerchantOrderId'
 ordersGetbymerchantOrderid'
-    :: Word64 -- ^ 'merchantId'
-    -> Text -- ^ 'merchantOrderId'
+    :: Word64 -- ^ 'ordMerchantId'
+    -> Text -- ^ 'ordMerchantOrderId'
     -> OrdersGetbymerchantOrderid'
 ordersGetbymerchantOrderid' pOrdMerchantId_ pOrdMerchantOrderId_ =
     OrdersGetbymerchantOrderid'

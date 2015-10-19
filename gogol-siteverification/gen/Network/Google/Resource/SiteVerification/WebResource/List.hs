@@ -22,7 +22,7 @@
 --
 -- Get the list of your verified websites and domains.
 --
--- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceList@.
+-- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @siteVerification.webResource.list@.
 module Network.Google.Resource.SiteVerification.WebResource.List
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.SiteVerification.WebResource.List
 import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
--- | A resource alias for @SiteVerificationWebResourceList@ method which the
+-- | A resource alias for @siteVerification.webResource.list@ method which the
 -- 'WebResourceList'' request conforms to.
 type WebResourceListResource =
      "webResource" :>

@@ -27,133 +27,133 @@ module Network.Google.Genomics
 
     -- * Resources
 
-    -- ** GenomicsCallsetsCreate
+    -- ** genomics.callsets.create
     , module Network.Google.Resource.Genomics.Callsets.Create
 
-    -- ** GenomicsCallsetsDelete
+    -- ** genomics.callsets.delete
     , module Network.Google.Resource.Genomics.Callsets.Delete
 
-    -- ** GenomicsCallsetsGet
+    -- ** genomics.callsets.get
     , module Network.Google.Resource.Genomics.Callsets.Get
 
-    -- ** GenomicsCallsetsPatch
+    -- ** genomics.callsets.patch
     , module Network.Google.Resource.Genomics.Callsets.Patch
 
-    -- ** GenomicsCallsetsSearch
+    -- ** genomics.callsets.search
     , module Network.Google.Resource.Genomics.Callsets.Search
 
-    -- ** GenomicsDatasetsCreate
+    -- ** genomics.datasets.create
     , module Network.Google.Resource.Genomics.Datasets.Create
 
-    -- ** GenomicsDatasetsDelete
+    -- ** genomics.datasets.delete
     , module Network.Google.Resource.Genomics.Datasets.Delete
 
-    -- ** GenomicsDatasetsGet
+    -- ** genomics.datasets.get
     , module Network.Google.Resource.Genomics.Datasets.Get
 
-    -- ** GenomicsDatasetsGetIAMPolicy
+    -- ** genomics.datasets.getIamPolicy
     , module Network.Google.Resource.Genomics.Datasets.GetIAMPolicy
 
-    -- ** GenomicsDatasetsList
+    -- ** genomics.datasets.list
     , module Network.Google.Resource.Genomics.Datasets.List
 
-    -- ** GenomicsDatasetsPatch
+    -- ** genomics.datasets.patch
     , module Network.Google.Resource.Genomics.Datasets.Patch
 
-    -- ** GenomicsDatasetsSetIAMPolicy
+    -- ** genomics.datasets.setIamPolicy
     , module Network.Google.Resource.Genomics.Datasets.SetIAMPolicy
 
-    -- ** GenomicsDatasetsTestIAMPermissions
+    -- ** genomics.datasets.testIamPermissions
     , module Network.Google.Resource.Genomics.Datasets.TestIAMPermissions
 
-    -- ** GenomicsDatasetsUndelete
+    -- ** genomics.datasets.undelete
     , module Network.Google.Resource.Genomics.Datasets.Undelete
 
-    -- ** GenomicsOperationsCancel
+    -- ** genomics.operations.cancel
     , module Network.Google.Resource.Genomics.Operations.Cancel
 
-    -- ** GenomicsOperationsDelete
+    -- ** genomics.operations.delete
     , module Network.Google.Resource.Genomics.Operations.Delete
 
-    -- ** GenomicsOperationsGet
+    -- ** genomics.operations.get
     , module Network.Google.Resource.Genomics.Operations.Get
 
-    -- ** GenomicsOperationsList
+    -- ** genomics.operations.list
     , module Network.Google.Resource.Genomics.Operations.List
 
-    -- ** GenomicsReadgroupsetsCoveragebucketsList
+    -- ** genomics.readgroupsets.coveragebuckets.list
     , module Network.Google.Resource.Genomics.Readgroupsets.Coveragebuckets.List
 
-    -- ** GenomicsReadgroupsetsDelete
+    -- ** genomics.readgroupsets.delete
     , module Network.Google.Resource.Genomics.Readgroupsets.Delete
 
-    -- ** GenomicsReadgroupsetsExport
+    -- ** genomics.readgroupsets.export
     , module Network.Google.Resource.Genomics.Readgroupsets.Export
 
-    -- ** GenomicsReadgroupsetsGet
+    -- ** genomics.readgroupsets.get
     , module Network.Google.Resource.Genomics.Readgroupsets.Get
 
-    -- ** GenomicsReadgroupsetsImport
+    -- ** genomics.readgroupsets.import
     , module Network.Google.Resource.Genomics.Readgroupsets.Import
 
-    -- ** GenomicsReadgroupsetsPatch
+    -- ** genomics.readgroupsets.patch
     , module Network.Google.Resource.Genomics.Readgroupsets.Patch
 
-    -- ** GenomicsReadgroupsetsSearch
+    -- ** genomics.readgroupsets.search
     , module Network.Google.Resource.Genomics.Readgroupsets.Search
 
-    -- ** GenomicsReadsSearch
+    -- ** genomics.reads.search
     , module Network.Google.Resource.Genomics.Reads.Search
 
-    -- ** GenomicsReferencesBasesList
+    -- ** genomics.references.bases.list
     , module Network.Google.Resource.Genomics.References.Bases.List
 
-    -- ** GenomicsReferencesGet
+    -- ** genomics.references.get
     , module Network.Google.Resource.Genomics.References.Get
 
-    -- ** GenomicsReferencesSearch
+    -- ** genomics.references.search
     , module Network.Google.Resource.Genomics.References.Search
 
-    -- ** GenomicsReferencesetsGet
+    -- ** genomics.referencesets.get
     , module Network.Google.Resource.Genomics.Referencesets.Get
 
-    -- ** GenomicsReferencesetsSearch
+    -- ** genomics.referencesets.search
     , module Network.Google.Resource.Genomics.Referencesets.Search
 
-    -- ** GenomicsVariantsCreate
+    -- ** genomics.variants.create
     , module Network.Google.Resource.Genomics.Variants.Create
 
-    -- ** GenomicsVariantsDelete
+    -- ** genomics.variants.delete
     , module Network.Google.Resource.Genomics.Variants.Delete
 
-    -- ** GenomicsVariantsGet
+    -- ** genomics.variants.get
     , module Network.Google.Resource.Genomics.Variants.Get
 
-    -- ** GenomicsVariantsImport
+    -- ** genomics.variants.import
     , module Network.Google.Resource.Genomics.Variants.Import
 
-    -- ** GenomicsVariantsPatch
+    -- ** genomics.variants.patch
     , module Network.Google.Resource.Genomics.Variants.Patch
 
-    -- ** GenomicsVariantsSearch
+    -- ** genomics.variants.search
     , module Network.Google.Resource.Genomics.Variants.Search
 
-    -- ** GenomicsVariantsetsCreate
+    -- ** genomics.variantsets.create
     , module Network.Google.Resource.Genomics.Variantsets.Create
 
-    -- ** GenomicsVariantsetsDelete
+    -- ** genomics.variantsets.delete
     , module Network.Google.Resource.Genomics.Variantsets.Delete
 
-    -- ** GenomicsVariantsetsExport
+    -- ** genomics.variantsets.export
     , module Network.Google.Resource.Genomics.Variantsets.Export
 
-    -- ** GenomicsVariantsetsGet
+    -- ** genomics.variantsets.get
     , module Network.Google.Resource.Genomics.Variantsets.Get
 
-    -- ** GenomicsVariantsetsPatch
+    -- ** genomics.variantsets.patch
     , module Network.Google.Resource.Genomics.Variantsets.Patch
 
-    -- ** GenomicsVariantsetsSearch
+    -- ** genomics.variantsets.search
     , module Network.Google.Resource.Genomics.Variantsets.Search
 
     -- * Types

@@ -22,7 +22,7 @@
 --
 -- Commits\/applies the changes made in this edit back to the app.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsCommit@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.commit@.
 module Network.Google.Resource.AndroidPublisher.Edits.Commit
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Commit
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsCommit@ method which the
+-- | A resource alias for @androidpublisher.edits.commit@ method which the
 -- 'EditsCommit'' request conforms to.
 type EditsCommitResource =
      Capture "packageName" Text :>
@@ -64,8 +64,8 @@ data EditsCommit' = EditsCommit'
 --
 -- * 'ecEditId'
 editsCommit'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'ecPackageName'
+    -> Text -- ^ 'ecEditId'
     -> EditsCommit'
 editsCommit' pEcPackageName_ pEcEditId_ =
     EditsCommit'

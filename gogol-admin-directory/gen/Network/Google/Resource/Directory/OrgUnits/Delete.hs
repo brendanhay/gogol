@@ -22,7 +22,7 @@
 --
 -- Remove Organization Unit
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryOrgUnitsDelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.orgunits.delete@.
 module Network.Google.Resource.Directory.OrgUnits.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.OrgUnits.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryOrgUnitsDelete@ method which the
+-- | A resource alias for @directory.orgunits.delete@ method which the
 -- 'OrgUnitsDelete'' request conforms to.
 type OrgUnitsDeleteResource =
      "customer" :>
@@ -65,8 +65,8 @@ data OrgUnitsDelete' = OrgUnitsDelete'
 --
 -- * 'oudCustomerId'
 orgUnitsDelete'
-    :: [Text] -- ^ 'orgUnitPath'
-    -> Text -- ^ 'customerId'
+    :: [Text] -- ^ 'oudOrgUnitPath'
+    -> Text -- ^ 'oudCustomerId'
     -> OrgUnitsDelete'
 orgUnitsDelete' pOudOrgUnitPath_ pOudCustomerId_ =
     OrgUnitsDelete'

@@ -23,7 +23,7 @@
 -- Leave a room. For internal use by the Games SDK only. Calling this
 -- method directly is unsupported.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesRoomsLeave@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.rooms.leave@.
 module Network.Google.Resource.Games.Rooms.Leave
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Games.Rooms.Leave
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesRoomsLeave@ method which the
+-- | A resource alias for @games.rooms.leave@ method which the
 -- 'RoomsLeave'' request conforms to.
 type RoomsLeaveResource =
      "rooms" :>
@@ -72,8 +72,8 @@ data RoomsLeave' = RoomsLeave'
 --
 -- * 'rlLanguage'
 roomsLeave'
-    :: RoomLeaveRequest -- ^ 'payload'
-    -> Text -- ^ 'roomId'
+    :: RoomLeaveRequest -- ^ 'rlPayload'
+    -> Text -- ^ 'rlRoomId'
     -> RoomsLeave'
 roomsLeave' pRlPayload_ pRlRoomId_ =
     RoomsLeave'

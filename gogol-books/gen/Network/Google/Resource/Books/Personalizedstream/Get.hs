@@ -22,7 +22,7 @@
 --
 -- Returns a stream of personalized book clusters
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksPersonalizedstreamGet@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.personalizedstream.get@.
 module Network.Google.Resource.Books.Personalizedstream.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Books.Personalizedstream.Get
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksPersonalizedstreamGet@ method which the
+-- | A resource alias for @books.personalizedstream.get@ method which the
 -- 'PersonalizedstreamGet'' request conforms to.
 type PersonalizedstreamGetResource =
      "personalizedstream" :>

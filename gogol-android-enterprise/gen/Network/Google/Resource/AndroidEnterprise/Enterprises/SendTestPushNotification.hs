@@ -23,7 +23,7 @@
 -- Sends a test push notification to validate the MDM integration with the
 -- Google Cloud Pub\/Sub service for this enterprise.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEnterprisesSendTestPushNotification@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.sendTestPushNotification@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.SendTestPushNotification
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.SendTestPushNotific
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEnterprisesSendTestPushNotification@ method which the
+-- | A resource alias for @androidenterprise.enterprises.sendTestPushNotification@ method which the
 -- 'EnterprisesSendTestPushNotification'' request conforms to.
 type EnterprisesSendTestPushNotificationResource =
      "enterprises" :>
@@ -64,7 +64,7 @@ newtype EnterprisesSendTestPushNotification' = EnterprisesSendTestPushNotificati
 --
 -- * 'estpnEnterpriseId'
 enterprisesSendTestPushNotification'
-    :: Text -- ^ 'enterpriseId'
+    :: Text -- ^ 'estpnEnterpriseId'
     -> EnterprisesSendTestPushNotification'
 enterprisesSendTestPushNotification' pEstpnEnterpriseId_ =
     EnterprisesSendTestPushNotification'

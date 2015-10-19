@@ -23,7 +23,7 @@
 -- Returns the set of tokens specified user has issued to 3rd party
 -- applications.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryTokensList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.tokens.list@.
 module Network.Google.Resource.Directory.Tokens.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Tokens.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryTokensList@ method which the
+-- | A resource alias for @directory.tokens.list@ method which the
 -- 'TokensList'' request conforms to.
 type TokensListResource =
      "users" :>
@@ -62,7 +62,7 @@ newtype TokensList' = TokensList'
 --
 -- * 'tlUserKey'
 tokensList'
-    :: Text -- ^ 'userKey'
+    :: Text -- ^ 'tlUserKey'
     -> TokensList'
 tokensList' pTlUserKey_ =
     TokensList'

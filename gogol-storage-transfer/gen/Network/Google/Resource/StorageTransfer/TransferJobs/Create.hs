@@ -22,7 +22,7 @@
 --
 -- Creates a transfer job that runs periodically.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferJobsCreate@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.transferJobs.create@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.Create
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.Create
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferTransferJobsCreate@ method which the
+-- | A resource alias for @storagetransfer.transferJobs.create@ method which the
 -- 'TransferJobsCreate'' request conforms to.
 type TransferJobsCreateResource =
      "v1" :>
@@ -96,7 +96,7 @@ data TransferJobsCreate' = TransferJobsCreate'
 --
 -- * 'tjcCallback'
 transferJobsCreate'
-    :: TransferJob -- ^ 'payload'
+    :: TransferJob -- ^ 'tjcPayload'
     -> TransferJobsCreate'
 transferJobsCreate' pTjcPayload_ =
     TransferJobsCreate'

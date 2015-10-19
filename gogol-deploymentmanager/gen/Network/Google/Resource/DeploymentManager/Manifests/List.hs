@@ -22,7 +22,7 @@
 --
 -- Lists all manifests for a given deployment.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerManifestsList@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @deploymentmanager.manifests.list@.
 module Network.Google.Resource.DeploymentManager.Manifests.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.DeploymentManager.Manifests.List
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerManifestsList@ method which the
+-- | A resource alias for @deploymentmanager.manifests.list@ method which the
 -- 'ManifestsList'' request conforms to.
 type ManifestsListResource =
      Capture "project" Text :>
@@ -82,8 +82,8 @@ data ManifestsList' = ManifestsList'
 --
 -- * 'mlDeployment'
 manifestsList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'deployment'
+    :: Text -- ^ 'mlProject'
+    -> Text -- ^ 'mlDeployment'
     -> ManifestsList'
 manifestsList' pMlProject_ pMlDeployment_ =
     ManifestsList'

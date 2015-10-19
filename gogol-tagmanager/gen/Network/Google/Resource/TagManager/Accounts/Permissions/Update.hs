@@ -22,7 +22,7 @@
 --
 -- Updates a user\'s Account & Container Permissions.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsPermissionsUpdate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.permissions.update@.
 module Network.Google.Resource.TagManager.Accounts.Permissions.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.Update
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsPermissionsUpdate@ method which the
+-- | A resource alias for @tagmanager.accounts.permissions.update@ method which the
 -- 'AccountsPermissionsUpdate'' request conforms to.
 type AccountsPermissionsUpdateResource =
      "accounts" :>
@@ -70,9 +70,9 @@ data AccountsPermissionsUpdate' = AccountsPermissionsUpdate'
 --
 -- * 'apuPermissionId'
 accountsPermissionsUpdate'
-    :: UserAccess -- ^ 'payload'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'permissionId'
+    :: UserAccess -- ^ 'apuPayload'
+    -> Text -- ^ 'apuAccountId'
+    -> Text -- ^ 'apuPermissionId'
     -> AccountsPermissionsUpdate'
 accountsPermissionsUpdate' pApuPayload_ pApuAccountId_ pApuPermissionId_ =
     AccountsPermissionsUpdate'

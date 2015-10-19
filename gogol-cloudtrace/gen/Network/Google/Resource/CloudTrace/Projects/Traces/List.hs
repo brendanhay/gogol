@@ -22,7 +22,7 @@
 --
 -- List traces matching the filter expression.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference> for @CloudtraceProjectsTracesList@.
+-- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference> for @cloudtrace.projects.traces.list@.
 module Network.Google.Resource.CloudTrace.Projects.Traces.List
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ module Network.Google.Resource.CloudTrace.Projects.Traces.List
 import           Network.Google.CloudTrace.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudtraceProjectsTracesList@ method which the
+-- | A resource alias for @cloudtrace.projects.traces.list@ method which the
 -- 'ProjectsTracesList'' request conforms to.
 type ProjectsTracesListResource =
      "v1" :>
@@ -132,7 +132,7 @@ data ProjectsTracesList' = ProjectsTracesList'
 --
 -- * 'ptlCallback'
 projectsTracesList'
-    :: Text -- ^ 'projectId'
+    :: Text -- ^ 'ptlProjectId'
     -> ProjectsTracesList'
 projectsTracesList' pPtlProjectId_ =
     ProjectsTracesList'

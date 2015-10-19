@@ -22,7 +22,7 @@
 --
 -- Watch for changes in user aliases list
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersAliasesWatch@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.aliases.watch@.
 module Network.Google.Resource.Directory.Users.Aliases.Watch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Directory.Users.Aliases.Watch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersAliasesWatch@ method which the
+-- | A resource alias for @directory.users.aliases.watch@ method which the
 -- 'UsersAliasesWatch'' request conforms to.
 type UsersAliasesWatchResource =
      "users" :>
@@ -71,8 +71,8 @@ data UsersAliasesWatch' = UsersAliasesWatch'
 --
 -- * 'uawUserKey'
 usersAliasesWatch'
-    :: Channel -- ^ 'payload'
-    -> Text -- ^ 'userKey'
+    :: Channel -- ^ 'uawPayload'
+    -> Text -- ^ 'uawUserKey'
     -> UsersAliasesWatch'
 usersAliasesWatch' pUawPayload_ pUawUserKey_ =
     UsersAliasesWatch'

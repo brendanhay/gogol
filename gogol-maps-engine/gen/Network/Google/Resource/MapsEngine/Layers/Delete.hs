@@ -22,7 +22,7 @@
 --
 -- Delete a layer.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineLayersDelete@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.layers.delete@.
 module Network.Google.Resource.MapsEngine.Layers.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.Layers.Delete
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersDelete@ method which the
+-- | A resource alias for @mapsengine.layers.delete@ method which the
 -- 'LayersDelete'' request conforms to.
 type LayersDeleteResource =
      "layers" :>
@@ -59,7 +59,7 @@ newtype LayersDelete' = LayersDelete'
 --
 -- * 'ldId'
 layersDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'ldId'
     -> LayersDelete'
 layersDelete' pLdId_ =
     LayersDelete'

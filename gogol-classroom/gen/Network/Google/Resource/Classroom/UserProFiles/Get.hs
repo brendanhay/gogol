@@ -25,7 +25,7 @@
 -- this user profile or if no profile exists with the requested ID or for
 -- access errors.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomUserProFilesGet@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.userProfiles.get@.
 module Network.Google.Resource.Classroom.UserProFiles.Get
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Classroom.UserProFiles.Get
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomUserProFilesGet@ method which the
+-- | A resource alias for @classroom.userProfiles.get@ method which the
 -- 'UserProFilesGet'' request conforms to.
 type UserProFilesGetResource =
      "v1" :>
@@ -101,7 +101,7 @@ data UserProFilesGet' = UserProFilesGet'
 --
 -- * 'upfgCallback'
 userProFilesGet'
-    :: Text -- ^ 'userId'
+    :: Text -- ^ 'upfgUserId'
     -> UserProFilesGet'
 userProFilesGet' pUpfgUserId_ =
     UserProFilesGet'

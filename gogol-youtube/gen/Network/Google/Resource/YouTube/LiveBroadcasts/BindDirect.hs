@@ -25,7 +25,7 @@
 -- video stream, though a video stream may be bound to more than one
 -- broadcast.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveBroadcastsBind_direct@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveBroadcasts.bind_direct@.
 module Network.Google.Resource.YouTube.LiveBroadcasts.BindDirect
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.BindDirect
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveBroadcastsBind_direct@ method which the
+-- | A resource alias for @youtube.liveBroadcasts.bind_direct@ method which the
 -- 'LiveBroadcastsBindDirect'' request conforms to.
 type LiveBroadcastsBindDirectResource =
      "liveBroadcasts" :>
@@ -88,8 +88,8 @@ data LiveBroadcastsBindDirect' = LiveBroadcastsBindDirect'
 --
 -- * 'lbbdStreamId'
 liveBroadcastsBindDirect'
-    :: Text -- ^ 'part'
-    -> Text -- ^ 'id'
+    :: Text -- ^ 'lbbdPart'
+    -> Text -- ^ 'lbbdId'
     -> LiveBroadcastsBindDirect'
 liveBroadcastsBindDirect' pLbbdPart_ pLbbdId_ =
     LiveBroadcastsBindDirect'

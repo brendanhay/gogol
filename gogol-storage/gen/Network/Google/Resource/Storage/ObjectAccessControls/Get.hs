@@ -22,7 +22,7 @@
 --
 -- Returns the ACL entry for the specified entity on the specified object.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectAccessControlsGet@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objectAccessControls.get@.
 module Network.Google.Resource.Storage.ObjectAccessControls.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Get
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectAccessControlsGet@ method which the
+-- | A resource alias for @storage.objectAccessControls.get@ method which the
 -- 'ObjectAccessControlsGet'' request conforms to.
 type ObjectAccessControlsGetResource =
      "b" :>
@@ -77,9 +77,9 @@ data ObjectAccessControlsGet' = ObjectAccessControlsGet'
 --
 -- * 'oacgGeneration'
 objectAccessControlsGet'
-    :: Text -- ^ 'bucket'
-    -> Text -- ^ 'object'
-    -> Text -- ^ 'entity'
+    :: Text -- ^ 'oacgBucket'
+    -> Text -- ^ 'oacgObject'
+    -> Text -- ^ 'oacgEntity'
     -> ObjectAccessControlsGet'
 objectAccessControlsGet' pOacgBucket_ pOacgObject_ pOacgEntity_ =
     ObjectAccessControlsGet'

@@ -23,7 +23,7 @@
 -- List all users that have access to the account along with Account and
 -- Container Permissions granted to each of them.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsPermissionsList@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.permissions.list@.
 module Network.Google.Resource.TagManager.Accounts.Permissions.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.List
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsPermissionsList@ method which the
+-- | A resource alias for @tagmanager.accounts.permissions.list@ method which the
 -- 'AccountsPermissionsList'' request conforms to.
 type AccountsPermissionsListResource =
      "accounts" :>
@@ -63,7 +63,7 @@ newtype AccountsPermissionsList' = AccountsPermissionsList'
 --
 -- * 'aplAccountId'
 accountsPermissionsList'
-    :: Text -- ^ 'accountId'
+    :: Text -- ^ 'aplAccountId'
     -> AccountsPermissionsList'
 accountsPermissionsList' pAplAccountId_ =
     AccountsPermissionsList'

@@ -22,7 +22,7 @@
 --
 -- Gets one user profile by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserProFilesGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userProfiles.get@.
 module Network.Google.Resource.DFAReporting.UserProFiles.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DFAReporting.UserProFiles.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingUserProFilesGet@ method which the
+-- | A resource alias for @dfareporting.userProfiles.get@ method which the
 -- 'UserProFilesGet'' request conforms to.
 type UserProFilesGetResource =
      "userprofiles" :>
@@ -59,7 +59,7 @@ newtype UserProFilesGet' = UserProFilesGet'
 --
 -- * 'upfgProFileId'
 userProFilesGet'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'upfgProFileId'
     -> UserProFilesGet'
 userProFilesGet' pUpfgProFileId_ =
     UserProFilesGet'

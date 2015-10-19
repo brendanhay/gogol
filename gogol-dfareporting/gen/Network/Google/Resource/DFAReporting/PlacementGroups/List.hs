@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of placement groups, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementGroupsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placementGroups.list@.
 module Network.Google.Resource.DFAReporting.PlacementGroups.List
     (
     -- * REST Resource
@@ -58,7 +58,7 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPlacementGroupsList@ method which the
+-- | A resource alias for @dfareporting.placementGroups.list@ method which the
 -- 'PlacementGroupsList'' request conforms to.
 type PlacementGroupsListResource =
      "userprofiles" :>
@@ -164,7 +164,7 @@ data PlacementGroupsList' = PlacementGroupsList'
 --
 -- * 'pglMinEndDate'
 placementGroupsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'pglProFileId'
     -> PlacementGroupsList'
 placementGroupsList' pPglProFileId_ =
     PlacementGroupsList'

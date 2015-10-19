@@ -22,7 +22,7 @@
 --
 -- Create Group
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsInsert@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.groups.insert@.
 module Network.Google.Resource.Directory.Groups.Insert
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Directory.Groups.Insert
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryGroupsInsert@ method which the
+-- | A resource alias for @directory.groups.insert@ method which the
 -- 'GroupsInsert'' request conforms to.
 type GroupsInsertResource =
      "groups" :>
@@ -59,7 +59,7 @@ newtype GroupsInsert' = GroupsInsert'
 --
 -- * 'giPayload'
 groupsInsert'
-    :: Group -- ^ 'payload'
+    :: Group -- ^ 'giPayload'
     -> GroupsInsert'
 groupsInsert' pGiPayload_ =
     GroupsInsert'

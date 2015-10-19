@@ -23,7 +23,7 @@
 -- Modifies the target pools to which all new instances in this group are
 -- assigned. Existing instances in the group are not affected.
 --
--- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersSetTargetPools@.
+-- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @replicapool.instanceGroupManagers.setTargetPools@.
 module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.SetTargetPools
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.SetTargetPools
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
--- | A resource alias for @ReplicapoolInstanceGroupManagersSetTargetPools@ method which the
+-- | A resource alias for @replicapool.instanceGroupManagers.setTargetPools@ method which the
 -- 'InstanceGroupManagersSetTargetPools'' request conforms to.
 type InstanceGroupManagersSetTargetPoolsResource =
      Capture "project" Text :>
@@ -80,10 +80,10 @@ data InstanceGroupManagersSetTargetPools' = InstanceGroupManagersSetTargetPools'
 --
 -- * 'igmstpPayload'
 instanceGroupManagersSetTargetPools'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instanceGroupManager'
-    -> Text -- ^ 'zone'
-    -> InstanceGroupManagersSetTargetPoolsRequest -- ^ 'payload'
+    :: Text -- ^ 'igmstpProject'
+    -> Text -- ^ 'igmstpInstanceGroupManager'
+    -> Text -- ^ 'igmstpZone'
+    -> InstanceGroupManagersSetTargetPoolsRequest -- ^ 'igmstpPayload'
     -> InstanceGroupManagersSetTargetPools'
 instanceGroupManagersSetTargetPools' pIgmstpProject_ pIgmstpInstanceGroupManager_ pIgmstpZone_ pIgmstpPayload_ =
     InstanceGroupManagersSetTargetPools'

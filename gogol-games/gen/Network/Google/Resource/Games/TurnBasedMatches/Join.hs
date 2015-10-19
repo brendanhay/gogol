@@ -22,7 +22,7 @@
 --
 -- Join a turn-based match.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesJoin@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.turnBasedMatches.join@.
 module Network.Google.Resource.Games.TurnBasedMatches.Join
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.Join
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesTurnBasedMatchesJoin@ method which the
+-- | A resource alias for @games.turnBasedMatches.join@ method which the
 -- 'TurnBasedMatchesJoin'' request conforms to.
 type TurnBasedMatchesJoinResource =
      "turnbasedmatches" :>
@@ -66,7 +66,7 @@ data TurnBasedMatchesJoin' = TurnBasedMatchesJoin'
 --
 -- * 'tbmjMatchId'
 turnBasedMatchesJoin'
-    :: Text -- ^ 'matchId'
+    :: Text -- ^ 'tbmjMatchId'
     -> TurnBasedMatchesJoin'
 turnBasedMatchesJoin' pTbmjMatchId_ =
     TurnBasedMatchesJoin'

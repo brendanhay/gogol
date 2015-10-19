@@ -22,7 +22,7 @@
 --
 -- Performs a book search.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesList@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.volumes.list@.
 module Network.Google.Resource.Books.Volumes.List
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.Books.Volumes.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksVolumesList@ method which the
+-- | A resource alias for @books.volumes.list@ method which the
 -- 'VolumesList'' request conforms to.
 type VolumesListResource =
      "volumes" :>
@@ -121,7 +121,7 @@ data VolumesList' = VolumesList'
 --
 -- * 'vlPrintType'
 volumesList'
-    :: Text -- ^ 'q'
+    :: Text -- ^ 'vlQ'
     -> VolumesList'
 volumesList' pVlQ_ =
     VolumesList'

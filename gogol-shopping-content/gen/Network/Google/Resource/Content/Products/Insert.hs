@@ -22,7 +22,7 @@
 --
 -- Uploads a product to your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentProductsInsert@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.products.insert@.
 module Network.Google.Resource.Content.Products.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Products.Insert
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentProductsInsert@ method which the
+-- | A resource alias for @content.products.insert@ method which the
 -- 'ProductsInsert'' request conforms to.
 type ProductsInsertResource =
      Capture "merchantId" Word64 :>
@@ -69,8 +69,8 @@ data ProductsInsert' = ProductsInsert'
 --
 -- * 'piDryRun'
 productsInsert'
-    :: Word64 -- ^ 'merchantId'
-    -> Product -- ^ 'payload'
+    :: Word64 -- ^ 'piMerchantId'
+    -> Product -- ^ 'piPayload'
     -> ProductsInsert'
 productsInsert' pPiMerchantId_ pPiPayload_ =
     ProductsInsert'

@@ -23,7 +23,7 @@
 -- Creates an image resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeImagesInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.images.insert@.
 module Network.Google.Resource.Compute.Images.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.Images.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeImagesInsert@ method which the
+-- | A resource alias for @compute.images.insert@ method which the
 -- 'ImagesInsert'' request conforms to.
 type ImagesInsertResource =
      Capture "project" Text :>
@@ -67,8 +67,8 @@ data ImagesInsert' = ImagesInsert'
 --
 -- * 'iPayload'
 imagesInsert'
-    :: Text -- ^ 'project'
-    -> Image -- ^ 'payload'
+    :: Text -- ^ 'iProject'
+    -> Image -- ^ 'iPayload'
     -> ImagesInsert'
 imagesInsert' pIProject_ pIPayload_ =
     ImagesInsert'

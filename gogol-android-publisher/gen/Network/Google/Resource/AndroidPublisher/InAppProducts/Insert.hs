@@ -22,7 +22,7 @@
 --
 -- Creates a new in-app product for an app.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherInAppProductsInsert@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.inappproducts.insert@.
 module Network.Google.Resource.AndroidPublisher.InAppProducts.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidPublisher.InAppProducts.Insert
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherInAppProductsInsert@ method which the
+-- | A resource alias for @androidpublisher.inappproducts.insert@ method which the
 -- 'InAppProductsInsert'' request conforms to.
 type InAppProductsInsertResource =
      Capture "packageName" Text :>
@@ -70,8 +70,8 @@ data InAppProductsInsert' = InAppProductsInsert'
 --
 -- * 'iapiPayload'
 inAppProductsInsert'
-    :: Text -- ^ 'packageName'
-    -> InAppProduct -- ^ 'payload'
+    :: Text -- ^ 'iapiPackageName'
+    -> InAppProduct -- ^ 'iapiPayload'
     -> InAppProductsInsert'
 inAppProductsInsert' pIapiPackageName_ pIapiPayload_ =
     InAppProductsInsert'

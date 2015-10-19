@@ -25,7 +25,7 @@
 -- \`NOT_FOUND\` if the course does not exist. * \`PERMISSION_DENIED\` for
 -- access errors.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesTeachersList@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.teachers.list@.
 module Network.Google.Resource.Classroom.Courses.Teachers.List
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.Classroom.Courses.Teachers.List
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesTeachersList@ method which the
+-- | A resource alias for @classroom.courses.teachers.list@ method which the
 -- 'CoursesTeachersList'' request conforms to.
 type CoursesTeachersListResource =
      "v1" :>
@@ -113,7 +113,7 @@ data CoursesTeachersList' = CoursesTeachersList'
 --
 -- * 'ctlCallback'
 coursesTeachersList'
-    :: Text -- ^ 'courseId'
+    :: Text -- ^ 'ctlCourseId'
     -> CoursesTeachersList'
 coursesTeachersList' pCtlCourseId_ =
     CoursesTeachersList'

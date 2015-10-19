@@ -22,7 +22,7 @@
 --
 -- Deletes the image (specified by id) from the edit.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsImagesDelete@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.images.delete@.
 module Network.Google.Resource.AndroidPublisher.Edits.Images.Delete
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Images.Delete
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsImagesDelete@ method which the
+-- | A resource alias for @androidpublisher.edits.images.delete@ method which the
 -- 'EditsImagesDelete'' request conforms to.
 type EditsImagesDeleteResource =
      Capture "packageName" Text :>
@@ -80,11 +80,11 @@ data EditsImagesDelete' = EditsImagesDelete'
 --
 -- * 'eidEditId'
 editsImagesDelete'
-    :: Text -- ^ 'packageName'
-    -> EditsImagesDeleteImageType -- ^ 'imageType'
-    -> Text -- ^ 'imageId'
-    -> Text -- ^ 'language'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eidPackageName'
+    -> EditsImagesDeleteImageType -- ^ 'eidImageType'
+    -> Text -- ^ 'eidImageId'
+    -> Text -- ^ 'eidLanguage'
+    -> Text -- ^ 'eidEditId'
     -> EditsImagesDelete'
 editsImagesDelete' pEidPackageName_ pEidImageType_ pEidImageId_ pEidLanguage_ pEidEditId_ =
     EditsImagesDelete'

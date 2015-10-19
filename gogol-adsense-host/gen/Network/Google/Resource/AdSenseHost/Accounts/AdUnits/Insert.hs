@@ -23,7 +23,7 @@
 -- Insert the supplied ad unit into the specified publisher AdSense
 -- account.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdUnitsInsert@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.accounts.adunits.insert@.
 module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Insert
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAccountsAdUnitsInsert@ method which the
+-- | A resource alias for @adsensehost.accounts.adunits.insert@ method which the
 -- 'AccountsAdUnitsInsert'' request conforms to.
 type AccountsAdUnitsInsertResource =
      "accounts" :>
@@ -73,9 +73,9 @@ data AccountsAdUnitsInsert' = AccountsAdUnitsInsert'
 --
 -- * 'aauiAccountId'
 accountsAdUnitsInsert'
-    :: AdUnit -- ^ 'payload'
-    -> Text -- ^ 'adClientId'
-    -> Text -- ^ 'accountId'
+    :: AdUnit -- ^ 'aauiPayload'
+    -> Text -- ^ 'aauiAdClientId'
+    -> Text -- ^ 'aauiAccountId'
     -> AccountsAdUnitsInsert'
 accountsAdUnitsInsert' pAauiPayload_ pAauiAdClientId_ pAauiAccountId_ =
     AccountsAdUnitsInsert'

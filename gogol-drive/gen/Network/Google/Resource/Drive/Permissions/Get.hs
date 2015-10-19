@@ -22,7 +22,7 @@
 --
 -- Gets a permission by ID.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsGet@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.permissions.get@.
 module Network.Google.Resource.Drive.Permissions.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Drive.Permissions.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePermissionsGet@ method which the
+-- | A resource alias for @drive.permissions.get@ method which the
 -- 'PermissionsGet'' request conforms to.
 type PermissionsGetResource =
      "files" :>
@@ -65,8 +65,8 @@ data PermissionsGet' = PermissionsGet'
 --
 -- * 'pggPermissionId'
 permissionsGet'
-    :: Text -- ^ 'fileId'
-    -> Text -- ^ 'permissionId'
+    :: Text -- ^ 'pggFileId'
+    -> Text -- ^ 'pggPermissionId'
     -> PermissionsGet'
 permissionsGet' pPggFileId_ pPggPermissionId_ =
     PermissionsGet'

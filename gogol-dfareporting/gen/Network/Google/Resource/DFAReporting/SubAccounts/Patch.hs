@@ -22,7 +22,7 @@
 --
 -- Updates an existing subaccount. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSubAccountsPatch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.subaccounts.patch@.
 module Network.Google.Resource.DFAReporting.SubAccounts.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSubAccountsPatch@ method which the
+-- | A resource alias for @dfareporting.subaccounts.patch@ method which the
 -- 'SubAccountsPatch'' request conforms to.
 type SubAccountsPatchResource =
      "userprofiles" :>
@@ -71,9 +71,9 @@ data SubAccountsPatch' = SubAccountsPatch'
 --
 -- * 'sapId'
 subAccountsPatch'
-    :: Int64 -- ^ 'profileId'
-    -> SubAccount -- ^ 'payload'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'sapProFileId'
+    -> SubAccount -- ^ 'sapPayload'
+    -> Int64 -- ^ 'sapId'
     -> SubAccountsPatch'
 subAccountsPatch' pSapProFileId_ pSapPayload_ pSapId_ =
     SubAccountsPatch'

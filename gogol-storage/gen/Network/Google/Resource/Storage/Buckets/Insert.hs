@@ -22,7 +22,7 @@
 --
 -- Creates a new bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketsInsert@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.buckets.insert@.
 module Network.Google.Resource.Storage.Buckets.Insert
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Storage.Buckets.Insert
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageBucketsInsert@ method which the
+-- | A resource alias for @storage.buckets.insert@ method which the
 -- 'BucketsInsert'' request conforms to.
 type BucketsInsertResource =
      "b" :>
@@ -82,8 +82,8 @@ data BucketsInsert' = BucketsInsert'
 --
 -- * 'biProjection'
 bucketsInsert'
-    :: Text -- ^ 'project'
-    -> Bucket -- ^ 'payload'
+    :: Text -- ^ 'biProject'
+    -> Bucket -- ^ 'biPayload'
     -> BucketsInsert'
 bucketsInsert' pBiProject_ pBiPayload_ =
     BucketsInsert'

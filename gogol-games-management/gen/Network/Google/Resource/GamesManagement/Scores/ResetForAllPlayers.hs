@@ -24,7 +24,7 @@
 -- This method is only available to user accounts for your developer
 -- console. Only draft leaderboards can be reset.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementScoresResetForAllPlayers@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.scores.resetForAllPlayers@.
 module Network.Google.Resource.GamesManagement.Scores.ResetForAllPlayers
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.GamesManagement.Scores.ResetForAllPlayers
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementScoresResetForAllPlayers@ method which the
+-- | A resource alias for @gamesManagement.scores.resetForAllPlayers@ method which the
 -- 'ScoresResetForAllPlayers'' request conforms to.
 type ScoresResetForAllPlayersResource =
      "leaderboards" :>
@@ -65,7 +65,7 @@ newtype ScoresResetForAllPlayers' = ScoresResetForAllPlayers'
 --
 -- * 'srfapLeaderboardId'
 scoresResetForAllPlayers'
-    :: Text -- ^ 'leaderboardId'
+    :: Text -- ^ 'srfapLeaderboardId'
     -> ScoresResetForAllPlayers'
 scoresResetForAllPlayers' pSrfapLeaderboardId_ =
     ScoresResetForAllPlayers'

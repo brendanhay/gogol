@@ -25,7 +25,7 @@
 -- down, instances are removed in the order outlined in Resizing a managed
 -- instance group.
 --
--- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersResize@.
+-- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @replicapool.instanceGroupManagers.resize@.
 module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Resize
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Resize
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
--- | A resource alias for @ReplicapoolInstanceGroupManagersResize@ method which the
+-- | A resource alias for @replicapool.instanceGroupManagers.resize@ method which the
 -- 'InstanceGroupManagersResize'' request conforms to.
 type InstanceGroupManagersResizeResource =
      Capture "project" Text :>
@@ -82,10 +82,10 @@ data InstanceGroupManagersResize' = InstanceGroupManagersResize'
 --
 -- * 'igmrZone'
 instanceGroupManagersResize'
-    :: Text -- ^ 'project'
-    -> Int32 -- ^ 'size'
-    -> Text -- ^ 'instanceGroupManager'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'igmrProject'
+    -> Int32 -- ^ 'igmrSize'
+    -> Text -- ^ 'igmrInstanceGroupManager'
+    -> Text -- ^ 'igmrZone'
     -> InstanceGroupManagersResize'
 instanceGroupManagersResize' pIgmrProject_ pIgmrSize_ pIgmrInstanceGroupManager_ pIgmrZone_ =
     InstanceGroupManagersResize'

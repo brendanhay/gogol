@@ -23,7 +23,7 @@
 -- Retrieves the metadata of the achievement configuration with the given
 -- ID.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationAchievementConfigurationsGet@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.achievementConfigurations.get@.
 module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Get
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationAchievementConfigurationsGet@ method which the
+-- | A resource alias for @gamesConfiguration.achievementConfigurations.get@ method which the
 -- 'AchievementConfigurationsGet'' request conforms to.
 type AchievementConfigurationsGetResource =
      "achievements" :>
@@ -62,7 +62,7 @@ newtype AchievementConfigurationsGet' = AchievementConfigurationsGet'
 --
 -- * 'acgAchievementId'
 achievementConfigurationsGet'
-    :: Text -- ^ 'achievementId'
+    :: Text -- ^ 'acgAchievementId'
     -> AchievementConfigurationsGet'
 achievementConfigurationsGet' pAcgAchievementId_ =
     AchievementConfigurationsGet'

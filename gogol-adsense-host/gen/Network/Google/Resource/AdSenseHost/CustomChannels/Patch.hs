@@ -23,7 +23,7 @@
 -- Update a custom channel in the host AdSense account. This method
 -- supports patch semantics.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostCustomChannelsPatch@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.customchannels.patch@.
 module Network.Google.Resource.AdSenseHost.CustomChannels.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.Patch
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostCustomChannelsPatch@ method which the
+-- | A resource alias for @adsensehost.customchannels.patch@ method which the
 -- 'CustomChannelsPatch'' request conforms to.
 type CustomChannelsPatchResource =
      "adclients" :>
@@ -73,9 +73,9 @@ data CustomChannelsPatch' = CustomChannelsPatch'
 --
 -- * 'ccpAdClientId'
 customChannelsPatch'
-    :: Text -- ^ 'customChannelId'
-    -> CustomChannel -- ^ 'payload'
-    -> Text -- ^ 'adClientId'
+    :: Text -- ^ 'ccpCustomChannelId'
+    -> CustomChannel -- ^ 'ccpPayload'
+    -> Text -- ^ 'ccpAdClientId'
     -> CustomChannelsPatch'
 customChannelsPatch' pCcpCustomChannelId_ pCcpPayload_ pCcpAdClientId_ =
     CustomChannelsPatch'

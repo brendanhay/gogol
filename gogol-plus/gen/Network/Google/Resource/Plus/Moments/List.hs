@@ -22,7 +22,7 @@
 --
 -- List all of the moments for a particular user.
 --
--- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusMomentsList@.
+-- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.moments.list@.
 module Network.Google.Resource.Plus.Moments.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Plus.Moments.List
 import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusMomentsList@ method which the
+-- | A resource alias for @plus.moments.list@ method which the
 -- 'MomentsList'' request conforms to.
 type MomentsListResource =
      "people" :>
@@ -85,8 +85,8 @@ data MomentsList' = MomentsList'
 --
 -- * 'mlMaxResults'
 momentsList'
-    :: MomentsListCollection -- ^ 'collection'
-    -> Text -- ^ 'userId'
+    :: MomentsListCollection -- ^ 'mlCollection'
+    -> Text -- ^ 'mlUserId'
     -> MomentsList'
 momentsList' pMlCollection_ pMlUserId_ =
     MomentsList'

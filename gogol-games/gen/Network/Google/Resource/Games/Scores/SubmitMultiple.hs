@@ -22,7 +22,7 @@
 --
 -- Submits multiple scores to leaderboards.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesScoresSubmitMultiple@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.scores.submitMultiple@.
 module Network.Google.Resource.Games.Scores.SubmitMultiple
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Games.Scores.SubmitMultiple
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesScoresSubmitMultiple@ method which the
+-- | A resource alias for @games.scores.submitMultiple@ method which the
 -- 'ScoresSubmitMultiple'' request conforms to.
 type ScoresSubmitMultipleResource =
      "leaderboards" :>
@@ -66,7 +66,7 @@ data ScoresSubmitMultiple' = ScoresSubmitMultiple'
 --
 -- * 'ssmLanguage'
 scoresSubmitMultiple'
-    :: PlayerScoreSubmissionList -- ^ 'payload'
+    :: PlayerScoreSubmissionList -- ^ 'ssmPayload'
     -> ScoresSubmitMultiple'
 scoresSubmitMultiple' pSsmPayload_ =
     ScoresSubmitMultiple'

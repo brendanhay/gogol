@@ -22,7 +22,7 @@
 --
 -- Deletes an event.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsDelete@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.events.delete@.
 module Network.Google.Resource.Calendar.Events.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Calendar.Events.Delete
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarEventsDelete@ method which the
+-- | A resource alias for @calendar.events.delete@ method which the
 -- 'EventsDelete'' request conforms to.
 type EventsDeleteResource =
      "calendars" :>
@@ -70,8 +70,8 @@ data EventsDelete' = EventsDelete'
 --
 -- * 'edEventId'
 eventsDelete'
-    :: Text -- ^ 'calendarId'
-    -> Text -- ^ 'eventId'
+    :: Text -- ^ 'edCalendarId'
+    -> Text -- ^ 'edEventId'
     -> EventsDelete'
 eventsDelete' pEdCalendarId_ pEdEventId_ =
     EventsDelete'

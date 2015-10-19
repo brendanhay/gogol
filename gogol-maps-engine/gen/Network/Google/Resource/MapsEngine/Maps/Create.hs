@@ -22,7 +22,7 @@
 --
 -- Create a map asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineMapsCreate@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.maps.create@.
 module Network.Google.Resource.MapsEngine.Maps.Create
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.Maps.Create
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineMapsCreate@ method which the
+-- | A resource alias for @mapsengine.maps.create@ method which the
 -- 'MapsCreate'' request conforms to.
 type MapsCreateResource =
      "maps" :>
@@ -59,7 +59,7 @@ newtype MapsCreate' = MapsCreate'
 --
 -- * 'mcPayload'
 mapsCreate'
-    :: Map -- ^ 'payload'
+    :: Map -- ^ 'mcPayload'
     -> MapsCreate'
 mapsCreate' pMcPayload_ =
     MapsCreate'

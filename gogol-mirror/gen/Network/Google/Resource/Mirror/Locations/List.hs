@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of locations for the user.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorLocationsList@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.locations.list@.
 module Network.Google.Resource.Mirror.Locations.List
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.Mirror.Locations.List
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorLocationsList@ method which the
+-- | A resource alias for @mirror.locations.list@ method which the
 -- 'LocationsList'' request conforms to.
 type LocationsListResource =
      "locations" :>

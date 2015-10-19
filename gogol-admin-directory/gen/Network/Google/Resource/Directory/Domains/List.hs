@@ -22,7 +22,7 @@
 --
 -- Lists the domains of the customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryDomainsList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.domains.list@.
 module Network.Google.Resource.Directory.Domains.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Directory.Domains.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryDomainsList@ method which the
+-- | A resource alias for @directory.domains.list@ method which the
 -- 'DomainsList'' request conforms to.
 type DomainsListResource =
      "customer" :>
@@ -60,7 +60,7 @@ newtype DomainsList' = DomainsList'
 --
 -- * 'dlCustomer'
 domainsList'
-    :: Text -- ^ 'customer'
+    :: Text -- ^ 'dlCustomer'
     -> DomainsList'
 domainsList' pDlCustomer_ =
     DomainsList'

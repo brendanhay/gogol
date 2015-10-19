@@ -23,7 +23,7 @@
 -- Create a room. For internal use by the Games SDK only. Calling this
 -- method directly is unsupported.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesRoomsCreate@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.rooms.create@.
 module Network.Google.Resource.Games.Rooms.Create
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Games.Rooms.Create
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesRoomsCreate@ method which the
+-- | A resource alias for @games.rooms.create@ method which the
 -- 'RoomsCreate'' request conforms to.
 type RoomsCreateResource =
      "rooms" :>
@@ -68,7 +68,7 @@ data RoomsCreate' = RoomsCreate'
 --
 -- * 'rcLanguage'
 roomsCreate'
-    :: RoomCreateRequest -- ^ 'payload'
+    :: RoomCreateRequest -- ^ 'rcPayload'
     -> RoomsCreate'
 roomsCreate' pRcPayload_ =
     RoomsCreate'

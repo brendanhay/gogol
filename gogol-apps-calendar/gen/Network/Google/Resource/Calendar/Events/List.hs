@@ -22,7 +22,7 @@
 --
 -- Returns events on the specified calendar.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsList@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.events.list@.
 module Network.Google.Resource.Calendar.Events.List
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ module Network.Google.Resource.Calendar.Events.List
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarEventsList@ method which the
+-- | A resource alias for @calendar.events.list@ method which the
 -- 'EventsList'' request conforms to.
 type EventsListResource =
      "calendars" :>
@@ -146,7 +146,7 @@ data EventsList' = EventsList'
 --
 -- * 'elTimeMax'
 eventsList'
-    :: Text -- ^ 'calendarId'
+    :: Text -- ^ 'elCalendarId'
     -> EventsList'
 eventsList' pElCalendarId_ =
     EventsList'

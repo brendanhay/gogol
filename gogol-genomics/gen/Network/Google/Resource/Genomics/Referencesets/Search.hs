@@ -23,7 +23,7 @@
 -- Searches for reference sets which match the given criteria. Implements
 -- [GlobalAllianceApi.searchReferenceSets](http:\/\/ga4gh.org\/documentation\/api\/v0.5.1\/ga4gh_api.html#\/schema\/org.ga4gh.searchReferenceSets).
 --
--- /See:/ < Genomics API Reference> for @GenomicsReferencesetsSearch@.
+-- /See:/ < Genomics API Reference> for @genomics.referencesets.search@.
 module Network.Google.Resource.Genomics.Referencesets.Search
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Genomics.Referencesets.Search
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReferencesetsSearch@ method which the
+-- | A resource alias for @genomics.referencesets.search@ method which the
 -- 'ReferencesetsSearch'' request conforms to.
 type ReferencesetsSearchResource =
      "v1" :>
@@ -99,7 +99,7 @@ data ReferencesetsSearch' = ReferencesetsSearch'
 --
 -- * 'rssCallback'
 referencesetsSearch'
-    :: SearchReferenceSetsRequest -- ^ 'payload'
+    :: SearchReferenceSetsRequest -- ^ 'rssPayload'
     -> ReferencesetsSearch'
 referencesetsSearch' pRssPayload_ =
     ReferencesetsSearch'

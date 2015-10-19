@@ -22,7 +22,7 @@
 --
 -- Gets the specified ad unit in the specified ad client.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAdUnitsGet@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.adunits.get@.
 module Network.Google.Resource.AdSense.AdUnits.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdSense.AdUnits.Get
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAdUnitsGet@ method which the
+-- | A resource alias for @adsense.adunits.get@ method which the
 -- 'AdUnitsGet'' request conforms to.
 type AdUnitsGetResource =
      "adclients" :>
@@ -65,8 +65,8 @@ data AdUnitsGet' = AdUnitsGet'
 --
 -- * 'augAdClientId'
 adUnitsGet'
-    :: Text -- ^ 'adUnitId'
-    -> Text -- ^ 'adClientId'
+    :: Text -- ^ 'augAdUnitId'
+    -> Text -- ^ 'augAdClientId'
     -> AdUnitsGet'
 adUnitsGet' pAugAdUnitId_ pAugAdClientId_ =
     AdUnitsGet'

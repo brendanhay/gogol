@@ -22,7 +22,7 @@
 --
 -- Returns the specified Snapshot resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeSnapshotsGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.snapshots.get@.
 module Network.Google.Resource.Compute.Snapshots.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.Snapshots.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeSnapshotsGet@ method which the
+-- | A resource alias for @compute.snapshots.get@ method which the
 -- 'SnapshotsGet'' request conforms to.
 type SnapshotsGetResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data SnapshotsGet' = SnapshotsGet'
 --
 -- * 'sgProject'
 snapshotsGet'
-    :: Text -- ^ 'snapshot'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'sgSnapshot'
+    -> Text -- ^ 'sgProject'
     -> SnapshotsGet'
 snapshotsGet' pSgSnapshot_ pSgProject_ =
     SnapshotsGet'

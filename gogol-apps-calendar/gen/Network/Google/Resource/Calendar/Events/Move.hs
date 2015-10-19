@@ -22,7 +22,7 @@
 --
 -- Moves an event to another calendar, i.e. changes an event\'s organizer.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsMove@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.events.move@.
 module Network.Google.Resource.Calendar.Events.Move
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Calendar.Events.Move
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarEventsMove@ method which the
+-- | A resource alias for @calendar.events.move@ method which the
 -- 'EventsMove'' request conforms to.
 type EventsMoveResource =
      "calendars" :>
@@ -76,9 +76,9 @@ data EventsMove' = EventsMove'
 --
 -- * 'emEventId'
 eventsMove'
-    :: Text -- ^ 'destination'
-    -> Text -- ^ 'calendarId'
-    -> Text -- ^ 'eventId'
+    :: Text -- ^ 'emDestination'
+    -> Text -- ^ 'emCalendarId'
+    -> Text -- ^ 'emEventId'
     -> EventsMove'
 eventsMove' pEmDestination_ pEmCalendarId_ pEmEventId_ =
     EventsMove'

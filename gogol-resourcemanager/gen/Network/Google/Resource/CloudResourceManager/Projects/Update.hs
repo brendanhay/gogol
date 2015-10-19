@@ -24,7 +24,7 @@
 -- \`project_id\` (for example, \`my-project-123\`). The caller must have
 -- modify permissions for this project.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerProjectsUpdate@.
+-- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.update@.
 module Network.Google.Resource.CloudResourceManager.Projects.Update
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.CloudResourceManager.Projects.Update
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerProjectsUpdate@ method which the
+-- | A resource alias for @cloudresourcemanager.projects.update@ method which the
 -- 'ProjectsUpdate'' request conforms to.
 type ProjectsUpdateResource =
      "v1beta1" :>
@@ -104,8 +104,8 @@ data ProjectsUpdate' = ProjectsUpdate'
 --
 -- * 'puCallback'
 projectsUpdate'
-    :: Project -- ^ 'payload'
-    -> Text -- ^ 'projectId'
+    :: Project -- ^ 'puPayload'
+    -> Text -- ^ 'puProjectId'
     -> ProjectsUpdate'
 projectsUpdate' pPuPayload_ pPuProjectId_ =
     ProjectsUpdate'

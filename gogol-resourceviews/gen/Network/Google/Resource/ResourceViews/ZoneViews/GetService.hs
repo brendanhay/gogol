@@ -22,7 +22,7 @@
 --
 -- Get the service information of a resource view or a resource.
 --
--- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsGetService@.
+-- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @resourceviews.zoneViews.getService@.
 module Network.Google.Resource.ResourceViews.ZoneViews.GetService
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.ResourceViews.ZoneViews.GetService
 import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
--- | A resource alias for @ResourceviewsZoneViewsGetService@ method which the
+-- | A resource alias for @resourceviews.zoneViews.getService@ method which the
 -- 'ZoneViewsGetService'' request conforms to.
 type ZoneViewsGetServiceResource =
      Capture "project" Text :>
@@ -77,9 +77,9 @@ data ZoneViewsGetService' = ZoneViewsGetService'
 --
 -- * 'zvgsZone'
 zoneViewsGetService'
-    :: Text -- ^ 'resourceView'
-    -> Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'zvgsResourceView'
+    -> Text -- ^ 'zvgsProject'
+    -> Text -- ^ 'zvgsZone'
     -> ZoneViewsGetService'
 zoneViewsGetService' pZvgsResourceView_ pZvgsProject_ pZvgsZone_ =
     ZoneViewsGetService'

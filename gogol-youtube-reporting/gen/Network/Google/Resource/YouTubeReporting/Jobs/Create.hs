@@ -22,7 +22,7 @@
 --
 -- Creates a job and returns it.
 --
--- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @YouTubereportingJobsCreate@.
+-- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @youtubereporting.jobs.create@.
 module Network.Google.Resource.YouTubeReporting.Jobs.Create
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Create
 import           Network.Google.Prelude
 import           Network.Google.YouTubeReporting.Types
 
--- | A resource alias for @YouTubereportingJobsCreate@ method which the
+-- | A resource alias for @youtubereporting.jobs.create@ method which the
 -- 'JobsCreate'' request conforms to.
 type JobsCreateResource =
      "v1" :>
@@ -100,7 +100,7 @@ data JobsCreate' = JobsCreate'
 --
 -- * 'jcCallback'
 jobsCreate'
-    :: Job -- ^ 'payload'
+    :: Job -- ^ 'jcPayload'
     -> JobsCreate'
 jobsCreate' pJcPayload_ =
     JobsCreate'

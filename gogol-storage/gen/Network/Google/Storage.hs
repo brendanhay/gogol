@@ -26,109 +26,109 @@ module Network.Google.Storage
 
     -- * Resources
 
-    -- ** StorageBucketAccessControlsDelete
+    -- ** storage.bucketAccessControls.delete
     , module Network.Google.Resource.Storage.BucketAccessControls.Delete
 
-    -- ** StorageBucketAccessControlsGet
+    -- ** storage.bucketAccessControls.get
     , module Network.Google.Resource.Storage.BucketAccessControls.Get
 
-    -- ** StorageBucketAccessControlsInsert
+    -- ** storage.bucketAccessControls.insert
     , module Network.Google.Resource.Storage.BucketAccessControls.Insert
 
-    -- ** StorageBucketAccessControlsList
+    -- ** storage.bucketAccessControls.list
     , module Network.Google.Resource.Storage.BucketAccessControls.List
 
-    -- ** StorageBucketAccessControlsPatch
+    -- ** storage.bucketAccessControls.patch
     , module Network.Google.Resource.Storage.BucketAccessControls.Patch
 
-    -- ** StorageBucketAccessControlsUpdate
+    -- ** storage.bucketAccessControls.update
     , module Network.Google.Resource.Storage.BucketAccessControls.Update
 
-    -- ** StorageBucketsDelete
+    -- ** storage.buckets.delete
     , module Network.Google.Resource.Storage.Buckets.Delete
 
-    -- ** StorageBucketsGet
+    -- ** storage.buckets.get
     , module Network.Google.Resource.Storage.Buckets.Get
 
-    -- ** StorageBucketsInsert
+    -- ** storage.buckets.insert
     , module Network.Google.Resource.Storage.Buckets.Insert
 
-    -- ** StorageBucketsList
+    -- ** storage.buckets.list
     , module Network.Google.Resource.Storage.Buckets.List
 
-    -- ** StorageBucketsPatch
+    -- ** storage.buckets.patch
     , module Network.Google.Resource.Storage.Buckets.Patch
 
-    -- ** StorageBucketsUpdate
+    -- ** storage.buckets.update
     , module Network.Google.Resource.Storage.Buckets.Update
 
-    -- ** StorageChannelsStop
+    -- ** storage.channels.stop
     , module Network.Google.Resource.Storage.Channels.Stop
 
-    -- ** StorageDefaultObjectAccessControlsDelete
+    -- ** storage.defaultObjectAccessControls.delete
     , module Network.Google.Resource.Storage.DefaultObjectAccessControls.Delete
 
-    -- ** StorageDefaultObjectAccessControlsGet
+    -- ** storage.defaultObjectAccessControls.get
     , module Network.Google.Resource.Storage.DefaultObjectAccessControls.Get
 
-    -- ** StorageDefaultObjectAccessControlsInsert
+    -- ** storage.defaultObjectAccessControls.insert
     , module Network.Google.Resource.Storage.DefaultObjectAccessControls.Insert
 
-    -- ** StorageDefaultObjectAccessControlsList
+    -- ** storage.defaultObjectAccessControls.list
     , module Network.Google.Resource.Storage.DefaultObjectAccessControls.List
 
-    -- ** StorageDefaultObjectAccessControlsPatch
+    -- ** storage.defaultObjectAccessControls.patch
     , module Network.Google.Resource.Storage.DefaultObjectAccessControls.Patch
 
-    -- ** StorageDefaultObjectAccessControlsUpdate
+    -- ** storage.defaultObjectAccessControls.update
     , module Network.Google.Resource.Storage.DefaultObjectAccessControls.Update
 
-    -- ** StorageObjectAccessControlsDelete
+    -- ** storage.objectAccessControls.delete
     , module Network.Google.Resource.Storage.ObjectAccessControls.Delete
 
-    -- ** StorageObjectAccessControlsGet
+    -- ** storage.objectAccessControls.get
     , module Network.Google.Resource.Storage.ObjectAccessControls.Get
 
-    -- ** StorageObjectAccessControlsInsert
+    -- ** storage.objectAccessControls.insert
     , module Network.Google.Resource.Storage.ObjectAccessControls.Insert
 
-    -- ** StorageObjectAccessControlsList
+    -- ** storage.objectAccessControls.list
     , module Network.Google.Resource.Storage.ObjectAccessControls.List
 
-    -- ** StorageObjectAccessControlsPatch
+    -- ** storage.objectAccessControls.patch
     , module Network.Google.Resource.Storage.ObjectAccessControls.Patch
 
-    -- ** StorageObjectAccessControlsUpdate
+    -- ** storage.objectAccessControls.update
     , module Network.Google.Resource.Storage.ObjectAccessControls.Update
 
-    -- ** StorageObjectsCompose
+    -- ** storage.objects.compose
     , module Network.Google.Resource.Storage.Objects.Compose
 
-    -- ** StorageObjectsCopy
+    -- ** storage.objects.copy
     , module Network.Google.Resource.Storage.Objects.Copy
 
-    -- ** StorageObjectsDelete
+    -- ** storage.objects.delete
     , module Network.Google.Resource.Storage.Objects.Delete
 
-    -- ** StorageObjectsGet
+    -- ** storage.objects.get
     , module Network.Google.Resource.Storage.Objects.Get
 
-    -- ** StorageObjectsInsert
+    -- ** storage.objects.insert
     , module Network.Google.Resource.Storage.Objects.Insert
 
-    -- ** StorageObjectsList
+    -- ** storage.objects.list
     , module Network.Google.Resource.Storage.Objects.List
 
-    -- ** StorageObjectsPatch
+    -- ** storage.objects.patch
     , module Network.Google.Resource.Storage.Objects.Patch
 
-    -- ** StorageObjectsRewrite
+    -- ** storage.objects.rewrite
     , module Network.Google.Resource.Storage.Objects.Rewrite
 
-    -- ** StorageObjectsUpdate
+    -- ** storage.objects.update
     , module Network.Google.Resource.Storage.Objects.Update
 
-    -- ** StorageObjectsWatchAll
+    -- ** storage.objects.watchAll
     , module Network.Google.Resource.Storage.Objects.WatchAll
 
     -- * Types

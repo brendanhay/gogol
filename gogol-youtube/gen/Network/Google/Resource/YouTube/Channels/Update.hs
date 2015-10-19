@@ -24,7 +24,7 @@
 -- supports updates to the channel resource\'s brandingSettings and
 -- invideoPromotion objects and their child properties.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeChannelsUpdate@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.channels.update@.
 module Network.Google.Resource.YouTube.Channels.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.YouTube.Channels.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeChannelsUpdate@ method which the
+-- | A resource alias for @youtube.channels.update@ method which the
 -- 'ChannelsUpdate'' request conforms to.
 type ChannelsUpdateResource =
      "channels" :>
@@ -73,8 +73,8 @@ data ChannelsUpdate' = ChannelsUpdate'
 --
 -- * 'chaOnBehalfOfContentOwner'
 channelsUpdate'
-    :: Text -- ^ 'part'
-    -> Channel -- ^ 'payload'
+    :: Text -- ^ 'chaPart'
+    -> Channel -- ^ 'chaPayload'
     -> ChannelsUpdate'
 channelsUpdate' pChaPart_ pChaPayload_ =
     ChannelsUpdate'

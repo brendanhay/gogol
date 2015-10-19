@@ -22,7 +22,7 @@
 --
 -- Inserts a new campaign.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCampaignsInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.campaigns.insert@.
 module Network.Google.Resource.DFAReporting.Campaigns.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.DFAReporting.Campaigns.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCampaignsInsert@ method which the
+-- | A resource alias for @dfareporting.campaigns.insert@ method which the
 -- 'CampaignsInsert'' request conforms to.
 type CampaignsInsertResource =
      "userprofiles" :>
@@ -75,10 +75,10 @@ data CampaignsInsert' = CampaignsInsert'
 --
 -- * 'ciDefaultLandingPageName'
 campaignsInsert'
-    :: Int64 -- ^ 'profileId'
-    -> Campaign -- ^ 'payload'
-    -> Text -- ^ 'defaultLandingPageUrl'
-    -> Text -- ^ 'defaultLandingPageName'
+    :: Int64 -- ^ 'ciProFileId'
+    -> Campaign -- ^ 'ciPayload'
+    -> Text -- ^ 'ciDefaultLandingPageURL'
+    -> Text -- ^ 'ciDefaultLandingPageName'
     -> CampaignsInsert'
 campaignsInsert' pCiProFileId_ pCiPayload_ pCiDefaultLandingPageURL_ pCiDefaultLandingPageName_ =
     CampaignsInsert'

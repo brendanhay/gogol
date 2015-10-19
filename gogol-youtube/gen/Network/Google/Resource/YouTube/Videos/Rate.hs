@@ -22,7 +22,7 @@
 --
 -- Add a like or dislike rating to a video or remove a rating from a video.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosRate@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.videos.rate@.
 module Network.Google.Resource.YouTube.Videos.Rate
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTube.Videos.Rate
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeVideosRate@ method which the
+-- | A resource alias for @youtube.videos.rate@ method which the
 -- 'VideosRate'' request conforms to.
 type VideosRateResource =
      "videos" :>
@@ -65,8 +65,8 @@ data VideosRate' = VideosRate'
 --
 -- * 'vrId'
 videosRate'
-    :: VideosRateRating -- ^ 'rating'
-    -> Text -- ^ 'id'
+    :: VideosRateRating -- ^ 'vrRating'
+    -> Text -- ^ 'vrId'
     -> VideosRate'
 videosRate' pVrRating_ pVrId_ =
     VideosRate'

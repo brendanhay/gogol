@@ -22,7 +22,7 @@
 --
 -- Creates a new ACL entry on the specified bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketAccessControlsInsert@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.bucketAccessControls.insert@.
 module Network.Google.Resource.Storage.BucketAccessControls.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Storage.BucketAccessControls.Insert
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageBucketAccessControlsInsert@ method which the
+-- | A resource alias for @storage.bucketAccessControls.insert@ method which the
 -- 'BucketAccessControlsInsert'' request conforms to.
 type BucketAccessControlsInsertResource =
      "b" :>
@@ -66,8 +66,8 @@ data BucketAccessControlsInsert' = BucketAccessControlsInsert'
 --
 -- * 'baciPayload'
 bucketAccessControlsInsert'
-    :: Text -- ^ 'bucket'
-    -> BucketAccessControl -- ^ 'payload'
+    :: Text -- ^ 'baciBucket'
+    -> BucketAccessControl -- ^ 'baciPayload'
     -> BucketAccessControlsInsert'
 bucketAccessControlsInsert' pBaciBucket_ pBaciPayload_ =
     BucketAccessControlsInsert'

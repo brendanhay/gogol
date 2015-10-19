@@ -22,7 +22,7 @@
 --
 -- Updates an existing campaign landing page.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingLandingPagesUpdate@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.landingPages.update@.
 module Network.Google.Resource.DFAReporting.LandingPages.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingLandingPagesUpdate@ method which the
+-- | A resource alias for @dfareporting.landingPages.update@ method which the
 -- 'LandingPagesUpdate'' request conforms to.
 type LandingPagesUpdateResource =
      "userprofiles" :>
@@ -72,9 +72,9 @@ data LandingPagesUpdate' = LandingPagesUpdate'
 --
 -- * 'lpuPayload'
 landingPagesUpdate'
-    :: Int64 -- ^ 'campaignId'
-    -> Int64 -- ^ 'profileId'
-    -> LandingPage -- ^ 'payload'
+    :: Int64 -- ^ 'lpuCampaignId'
+    -> Int64 -- ^ 'lpuProFileId'
+    -> LandingPage -- ^ 'lpuPayload'
     -> LandingPagesUpdate'
 landingPagesUpdate' pLpuCampaignId_ pLpuProFileId_ pLpuPayload_ =
     LandingPagesUpdate'

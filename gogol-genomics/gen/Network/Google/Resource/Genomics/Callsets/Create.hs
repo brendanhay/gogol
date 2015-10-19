@@ -22,7 +22,7 @@
 --
 -- Creates a new call set.
 --
--- /See:/ < Genomics API Reference> for @GenomicsCallsetsCreate@.
+-- /See:/ < Genomics API Reference> for @genomics.callsets.create@.
 module Network.Google.Resource.Genomics.Callsets.Create
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.Callsets.Create
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsCallsetsCreate@ method which the
+-- | A resource alias for @genomics.callsets.create@ method which the
 -- 'CallsetsCreate'' request conforms to.
 type CallsetsCreateResource =
      "v1" :>
@@ -95,7 +95,7 @@ data CallsetsCreate' = CallsetsCreate'
 --
 -- * 'ccCallback'
 callsetsCreate'
-    :: CallSet -- ^ 'payload'
+    :: CallSet -- ^ 'ccPayload'
     -> CallsetsCreate'
 callsetsCreate' pCcPayload_ =
     CallsetsCreate'

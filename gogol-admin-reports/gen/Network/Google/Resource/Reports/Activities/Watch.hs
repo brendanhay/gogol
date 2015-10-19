@@ -22,7 +22,7 @@
 --
 -- Push changes to activities
 --
--- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference> for @ReportsActivitiesWatch@.
+-- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference> for @reports.activities.watch@.
 module Network.Google.Resource.Reports.Activities.Watch
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Reports.Activities.Watch
 import           Network.Google.Prelude
 import           Network.Google.Reports.Types
 
--- | A resource alias for @ReportsActivitiesWatch@ method which the
+-- | A resource alias for @reports.activities.watch@ method which the
 -- 'ActivitiesWatch'' request conforms to.
 type ActivitiesWatchResource =
      "activity" :>
@@ -113,9 +113,9 @@ data ActivitiesWatch' = ActivitiesWatch'
 --
 -- * 'awMaxResults'
 activitiesWatch'
-    :: Channel -- ^ 'payload'
-    -> Text -- ^ 'applicationName'
-    -> Text -- ^ 'userKey'
+    :: Channel -- ^ 'awPayload'
+    -> Text -- ^ 'awApplicationName'
+    -> Text -- ^ 'awUserKey'
     -> ActivitiesWatch'
 activitiesWatch' pAwPayload_ pAwApplicationName_ pAwUserKey_ =
     ActivitiesWatch'

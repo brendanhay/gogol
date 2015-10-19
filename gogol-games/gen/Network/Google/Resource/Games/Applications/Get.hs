@@ -24,7 +24,7 @@
 -- requested application is not available for the specified platformType,
 -- the returned response will not include any instance data.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesApplicationsGet@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.applications.get@.
 module Network.Google.Resource.Games.Applications.Get
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Games.Applications.Get
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesApplicationsGet@ method which the
+-- | A resource alias for @games.applications.get@ method which the
 -- 'ApplicationsGet'' request conforms to.
 type ApplicationsGetResource =
      "applications" :>
@@ -74,7 +74,7 @@ data ApplicationsGet' = ApplicationsGet'
 --
 -- * 'agLanguage'
 applicationsGet'
-    :: Text -- ^ 'applicationId'
+    :: Text -- ^ 'agApplicationId'
     -> ApplicationsGet'
 applicationsGet' pAgApplicationId_ =
     ApplicationsGet'

@@ -2054,7 +2054,7 @@ newtype UserCustomSchemas = UserCustomSchemas
 --
 -- * 'ucsAddtional'
 userCustomSchemas
-    :: HashMap Text UserCustomProperties -- ^ 'addtional'
+    :: HashMap Text UserCustomProperties -- ^ 'ucsAddtional'
     -> UserCustomSchemas
 userCustomSchemas pUcsAddtional_ =
     UserCustomSchemas
@@ -3909,7 +3909,7 @@ newtype ChannelParams = ChannelParams
 --
 -- * 'cpAddtional'
 channelParams
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'cpAddtional'
     -> ChannelParams
 channelParams pCpAddtional_ =
     ChannelParams
@@ -4933,7 +4933,7 @@ newtype UserCustomProperties = UserCustomProperties
 --
 -- * 'ucpAddtional'
 userCustomProperties
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'ucpAddtional'
     -> UserCustomProperties
 userCustomProperties pUcpAddtional_ =
     UserCustomProperties

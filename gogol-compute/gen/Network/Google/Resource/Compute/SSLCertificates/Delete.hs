@@ -22,7 +22,7 @@
 --
 -- Deletes the specified SslCertificate resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeSSLCertificatesDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.sslCertificates.delete@.
 module Network.Google.Resource.Compute.SSLCertificates.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.SSLCertificates.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeSSLCertificatesDelete@ method which the
+-- | A resource alias for @compute.sslCertificates.delete@ method which the
 -- 'SSLCertificatesDelete'' request conforms to.
 type SSLCertificatesDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data SSLCertificatesDelete' = SSLCertificatesDelete'
 --
 -- * 'scdSSLCertificate'
 sslCertificatesDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'sslCertificate'
+    :: Text -- ^ 'scdProject'
+    -> Text -- ^ 'scdSSLCertificate'
     -> SSLCertificatesDelete'
 sslCertificatesDelete' pScdProject_ pScdSSLCertificate_ =
     SSLCertificatesDelete'

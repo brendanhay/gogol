@@ -23,7 +23,7 @@
 -- Clears a primary calendar. This operation deletes all events associated
 -- with the primary calendar of an account.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarsClear@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendars.clear@.
 module Network.Google.Resource.Calendar.Calendars.Clear
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Calendar.Calendars.Clear
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarsClear@ method which the
+-- | A resource alias for @calendar.calendars.clear@ method which the
 -- 'CalendarsClear'' request conforms to.
 type CalendarsClearResource =
      "calendars" :>
@@ -62,7 +62,7 @@ newtype CalendarsClear' = CalendarsClear'
 --
 -- * 'ccCalendarId'
 calendarsClear'
-    :: Text -- ^ 'calendarId'
+    :: Text -- ^ 'ccCalendarId'
     -> CalendarsClear'
 calendarsClear' pCcCalendarId_ =
     CalendarsClear'

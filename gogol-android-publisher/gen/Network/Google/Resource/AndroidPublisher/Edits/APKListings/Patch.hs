@@ -23,7 +23,7 @@
 -- Updates or creates the APK-specific localized listing for a specified
 -- APK and language code. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsAPKListingsPatch@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.apklistings.patch@.
 module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Patch
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Patch
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsAPKListingsPatch@ method which the
+-- | A resource alias for @androidpublisher.edits.apklistings.patch@ method which the
 -- 'EditsAPKListingsPatch'' request conforms to.
 type EditsAPKListingsPatchResource =
      Capture "packageName" Text :>
@@ -84,11 +84,11 @@ data EditsAPKListingsPatch' = EditsAPKListingsPatch'
 --
 -- * 'eapklpEditId'
 editsAPKListingsPatch'
-    :: Text -- ^ 'packageName'
-    -> Int32 -- ^ 'apkVersionCode'
-    -> APKListing -- ^ 'payload'
-    -> Text -- ^ 'language'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eapklpPackageName'
+    -> Int32 -- ^ 'eapklpAPKVersionCode'
+    -> APKListing -- ^ 'eapklpPayload'
+    -> Text -- ^ 'eapklpLanguage'
+    -> Text -- ^ 'eapklpEditId'
     -> EditsAPKListingsPatch'
 editsAPKListingsPatch' pEapklpPackageName_ pEapklpAPKVersionCode_ pEapklpPayload_ pEapklpLanguage_ pEapklpEditId_ =
     EditsAPKListingsPatch'

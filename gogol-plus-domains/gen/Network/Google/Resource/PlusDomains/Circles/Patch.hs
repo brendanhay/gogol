@@ -22,7 +22,7 @@
 --
 -- Update a circle\'s description. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesPatch@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.circles.patch@.
 module Network.Google.Resource.PlusDomains.Circles.Patch
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.PlusDomains.Circles.Patch
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsCirclesPatch@ method which the
+-- | A resource alias for @plusDomains.circles.patch@ method which the
 -- 'CirclesPatch'' request conforms to.
 type CirclesPatchResource =
      "circles" :>
@@ -64,8 +64,8 @@ data CirclesPatch' = CirclesPatch'
 --
 -- * 'cpCircleId'
 circlesPatch'
-    :: Circle -- ^ 'payload'
-    -> Text -- ^ 'circleId'
+    :: Circle -- ^ 'cpPayload'
+    -> Text -- ^ 'cpCircleId'
     -> CirclesPatch'
 circlesPatch' pCpPayload_ pCpCircleId_ =
     CirclesPatch'

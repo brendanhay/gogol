@@ -22,7 +22,7 @@
 --
 -- Return a list of books uploaded by the current user.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesUserUploadedList@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.volumes.useruploaded.list@.
 module Network.Google.Resource.Books.Volumes.UserUploaded.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Books.Volumes.UserUploaded.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksVolumesUserUploadedList@ method which the
+-- | A resource alias for @books.volumes.useruploaded.list@ method which the
 -- 'VolumesUserUploadedList'' request conforms to.
 type VolumesUserUploadedListResource =
      "volumes" :>

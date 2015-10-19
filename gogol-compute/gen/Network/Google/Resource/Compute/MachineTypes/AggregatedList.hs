@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of machine type resources grouped by scope.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeMachineTypesAggregatedList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.machineTypes.aggregatedList@.
 module Network.Google.Resource.Compute.MachineTypes.AggregatedList
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.MachineTypes.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeMachineTypesAggregatedList@ method which the
+-- | A resource alias for @compute.machineTypes.aggregatedList@ method which the
 -- 'MachineTypesAggregatedList'' request conforms to.
 type MachineTypesAggregatedListResource =
      Capture "project" Text :>
@@ -76,7 +76,7 @@ data MachineTypesAggregatedList' = MachineTypesAggregatedList'
 --
 -- * 'mtalMaxResults'
 machineTypesAggregatedList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'mtalProject'
     -> MachineTypesAggregatedList'
 machineTypesAggregatedList' pMtalProject_ =
     MachineTypesAggregatedList'

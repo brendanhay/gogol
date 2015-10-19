@@ -23,7 +23,7 @@
 -- Creates a persistent disk in the specified project using the data
 -- included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDisksInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.disks.insert@.
 module Network.Google.Resource.Compute.Disks.Insert
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.Disks.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeDisksInsert@ method which the
+-- | A resource alias for @compute.disks.insert@ method which the
 -- 'DisksInsert'' request conforms to.
 type DisksInsertResource =
      Capture "project" Text :>
@@ -77,9 +77,9 @@ data DisksInsert' = DisksInsert'
 --
 -- * 'diPayload'
 disksInsert'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Disk -- ^ 'payload'
+    :: Text -- ^ 'diProject'
+    -> Text -- ^ 'diZone'
+    -> Disk -- ^ 'diPayload'
     -> DisksInsert'
 disksInsert' pDiProject_ pDiZone_ pDiPayload_ =
     DisksInsert'

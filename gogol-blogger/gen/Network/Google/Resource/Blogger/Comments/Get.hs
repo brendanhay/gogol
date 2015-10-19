@@ -22,7 +22,7 @@
 --
 -- Gets one comment by ID.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerCommentsGet@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.comments.get@.
 module Network.Google.Resource.Blogger.Comments.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Blogger.Comments.Get
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerCommentsGet@ method which the
+-- | A resource alias for @blogger.comments.get@ method which the
 -- 'CommentsGet'' request conforms to.
 type CommentsGetResource =
      "blogs" :>
@@ -76,9 +76,9 @@ data CommentsGet' = CommentsGet'
 --
 -- * 'cgCommentId'
 commentsGet'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'postId'
-    -> Text -- ^ 'commentId'
+    :: Text -- ^ 'cgBlogId'
+    -> Text -- ^ 'cgPostId'
+    -> Text -- ^ 'cgCommentId'
     -> CommentsGet'
 commentsGet' pCgBlogId_ pCgPostId_ pCgCommentId_ =
     CommentsGet'

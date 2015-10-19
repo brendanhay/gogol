@@ -22,7 +22,7 @@
 --
 -- Gets a GTM Variable.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVariablesGet@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.variables.get@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Get
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersVariablesGet@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.variables.get@ method which the
 -- 'AccountsContainersVariablesGet'' request conforms to.
 type AccountsContainersVariablesGetResource =
      "accounts" :>
@@ -71,9 +71,9 @@ data AccountsContainersVariablesGet' = AccountsContainersVariablesGet'
 --
 -- * 'acvgAccountId'
 accountsContainersVariablesGet'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'variableId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acvgContainerId'
+    -> Text -- ^ 'acvgVariableId'
+    -> Text -- ^ 'acvgAccountId'
     -> AccountsContainersVariablesGet'
 accountsContainersVariablesGet' pAcvgContainerId_ pAcvgVariableId_ pAcvgAccountId_ =
     AccountsContainersVariablesGet'

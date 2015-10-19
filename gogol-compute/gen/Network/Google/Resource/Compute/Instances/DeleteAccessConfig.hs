@@ -22,7 +22,7 @@
 --
 -- Deletes an access config from an instance\'s network interface.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesDeleteAccessConfig@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.deleteAccessConfig@.
 module Network.Google.Resource.Compute.Instances.DeleteAccessConfig
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.Instances.DeleteAccessConfig
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesDeleteAccessConfig@ method which the
+-- | A resource alias for @compute.instances.deleteAccessConfig@ method which the
 -- 'InstancesDeleteAccessConfig'' request conforms to.
 type InstancesDeleteAccessConfigResource =
      Capture "project" Text :>
@@ -81,11 +81,11 @@ data InstancesDeleteAccessConfig' = InstancesDeleteAccessConfig'
 --
 -- * 'idacInstance'
 instancesDeleteAccessConfig'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'networkInterface'
-    -> Text -- ^ 'zone'
-    -> Text -- ^ 'accessConfig'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'idacProject'
+    -> Text -- ^ 'idacNetworkInterface'
+    -> Text -- ^ 'idacZone'
+    -> Text -- ^ 'idacAccessConfig'
+    -> Text -- ^ 'idacInstance'
     -> InstancesDeleteAccessConfig'
 instancesDeleteAccessConfig' pIdacProject_ pIdacNetworkInterface_ pIdacZone_ pIdacAccessConfig_ pIdacInstance_ =
     InstancesDeleteAccessConfig'

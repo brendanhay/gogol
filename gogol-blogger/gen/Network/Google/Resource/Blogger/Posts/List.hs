@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of posts, possibly filtered.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsList@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.list@.
 module Network.Google.Resource.Blogger.Posts.List
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Blogger.Posts.List
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostsList@ method which the
+-- | A resource alias for @blogger.posts.list@ method which the
 -- 'PostsList'' request conforms to.
 type PostsListResource =
      "blogs" :>
@@ -110,7 +110,7 @@ data PostsList' = PostsList'
 --
 -- * 'pllMaxResults'
 postsList'
-    :: Text -- ^ 'blogId'
+    :: Text -- ^ 'pllBlogId'
     -> PostsList'
 postsList' pPllBlogId_ =
     PostsList'

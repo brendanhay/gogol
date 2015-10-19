@@ -24,7 +24,7 @@
 -- IMAP APPEND, bypassing most scanning and classification. Does not send a
 -- message.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesInsert@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.messages.insert@.
 module Network.Google.Resource.Gmail.Users.Messages.Insert
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Gmail.Users.Messages.Insert
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersMessagesInsert@ method which the
+-- | A resource alias for @gmail.users.messages.insert@ method which the
 -- 'UsersMessagesInsert'' request conforms to.
 type UsersMessagesInsertResource =
      Capture "userId" Text :>
@@ -85,8 +85,8 @@ data UsersMessagesInsert' = UsersMessagesInsert'
 --
 -- * 'umiInternalDateSource'
 usersMessagesInsert'
-    :: Message -- ^ 'payload'
-    -> Text -- ^ 'media'
+    :: Message -- ^ 'umiPayload'
+    -> Text -- ^ 'umiMedia'
     -> Body
     -> UsersMessagesInsert'
 usersMessagesInsert' pUmiPayload_ pUmiUserId_ pUmiMedia_ =

@@ -22,7 +22,7 @@
 --
 -- List license assignments for given product and sku of the customer.
 --
--- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @LicensingLicenseAssignmentsListForProductAndSKU@.
+-- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @licensing.licenseAssignments.listForProductAndSku@.
 module Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSKU
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSKU
 import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @LicensingLicenseAssignmentsListForProductAndSKU@ method which the
+-- | A resource alias for @licensing.licenseAssignments.listForProductAndSku@ method which the
 -- 'LicenseAssignmentsListForProductAndSKU'' request conforms to.
 type LicenseAssignmentsListForProductAndSKUResource =
      Capture "productId" Text :>
@@ -81,9 +81,9 @@ data LicenseAssignmentsListForProductAndSKU' = LicenseAssignmentsListForProductA
 --
 -- * 'lalfpaskuMaxResults'
 licenseAssignmentsListForProductAndSKU'
-    :: Text -- ^ 'skuId'
-    -> Text -- ^ 'customerId'
-    -> Text -- ^ 'productId'
+    :: Text -- ^ 'lalfpaskuSKUId'
+    -> Text -- ^ 'lalfpaskuCustomerId'
+    -> Text -- ^ 'lalfpaskuProductId'
     -> LicenseAssignmentsListForProductAndSKU'
 licenseAssignmentsListForProductAndSKU' pLalfpaskuSKUId_ pLalfpaskuCustomerId_ pLalfpaskuProductId_ =
     LicenseAssignmentsListForProductAndSKU'

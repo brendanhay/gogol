@@ -23,7 +23,7 @@
 -- Modifies a playlist item. For example, you could update the item\'s
 -- position in the playlist.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlayListItemsUpdate@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.playlistItems.update@.
 module Network.Google.Resource.YouTube.PlayListItems.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.YouTube.PlayListItems.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubePlayListItemsUpdate@ method which the
+-- | A resource alias for @youtube.playlistItems.update@ method which the
 -- 'PlayListItemsUpdate'' request conforms to.
 type PlayListItemsUpdateResource =
      "playlistItems" :>
@@ -67,8 +67,8 @@ data PlayListItemsUpdate' = PlayListItemsUpdate'
 --
 -- * 'pliuPayload'
 playListItemsUpdate'
-    :: Text -- ^ 'part'
-    -> PlayListItem -- ^ 'payload'
+    :: Text -- ^ 'pliuPart'
+    -> PlayListItem -- ^ 'pliuPayload'
     -> PlayListItemsUpdate'
 playListItemsUpdate' pPliuPart_ pPliuPayload_ =
     PlayListItemsUpdate'

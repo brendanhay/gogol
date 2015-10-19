@@ -26,100 +26,100 @@ module Network.Google.Gmail
 
     -- * Resources
 
-    -- ** GmailUsersDraftsCreate
+    -- ** gmail.users.drafts.create
     , module Network.Google.Resource.Gmail.Users.Drafts.Create
 
-    -- ** GmailUsersDraftsDelete
+    -- ** gmail.users.drafts.delete
     , module Network.Google.Resource.Gmail.Users.Drafts.Delete
 
-    -- ** GmailUsersDraftsGet
+    -- ** gmail.users.drafts.get
     , module Network.Google.Resource.Gmail.Users.Drafts.Get
 
-    -- ** GmailUsersDraftsList
+    -- ** gmail.users.drafts.list
     , module Network.Google.Resource.Gmail.Users.Drafts.List
 
-    -- ** GmailUsersDraftsSend
+    -- ** gmail.users.drafts.send
     , module Network.Google.Resource.Gmail.Users.Drafts.Send
 
-    -- ** GmailUsersDraftsUpdate
+    -- ** gmail.users.drafts.update
     , module Network.Google.Resource.Gmail.Users.Drafts.Update
 
-    -- ** GmailUsersGetProFile
+    -- ** gmail.users.getProfile
     , module Network.Google.Resource.Gmail.Users.GetProFile
 
-    -- ** GmailUsersHistoryList
+    -- ** gmail.users.history.list
     , module Network.Google.Resource.Gmail.Users.History.List
 
-    -- ** GmailUsersLabelsCreate
+    -- ** gmail.users.labels.create
     , module Network.Google.Resource.Gmail.Users.Labels.Create
 
-    -- ** GmailUsersLabelsDelete
+    -- ** gmail.users.labels.delete
     , module Network.Google.Resource.Gmail.Users.Labels.Delete
 
-    -- ** GmailUsersLabelsGet
+    -- ** gmail.users.labels.get
     , module Network.Google.Resource.Gmail.Users.Labels.Get
 
-    -- ** GmailUsersLabelsList
+    -- ** gmail.users.labels.list
     , module Network.Google.Resource.Gmail.Users.Labels.List
 
-    -- ** GmailUsersLabelsPatch
+    -- ** gmail.users.labels.patch
     , module Network.Google.Resource.Gmail.Users.Labels.Patch
 
-    -- ** GmailUsersLabelsUpdate
+    -- ** gmail.users.labels.update
     , module Network.Google.Resource.Gmail.Users.Labels.Update
 
-    -- ** GmailUsersMessagesAttachmentsGet
+    -- ** gmail.users.messages.attachments.get
     , module Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
 
-    -- ** GmailUsersMessagesDelete
+    -- ** gmail.users.messages.delete
     , module Network.Google.Resource.Gmail.Users.Messages.Delete
 
-    -- ** GmailUsersMessagesGet
+    -- ** gmail.users.messages.get
     , module Network.Google.Resource.Gmail.Users.Messages.Get
 
-    -- ** GmailUsersMessagesImport
+    -- ** gmail.users.messages.import
     , module Network.Google.Resource.Gmail.Users.Messages.Import
 
-    -- ** GmailUsersMessagesInsert
+    -- ** gmail.users.messages.insert
     , module Network.Google.Resource.Gmail.Users.Messages.Insert
 
-    -- ** GmailUsersMessagesList
+    -- ** gmail.users.messages.list
     , module Network.Google.Resource.Gmail.Users.Messages.List
 
-    -- ** GmailUsersMessagesModify
+    -- ** gmail.users.messages.modify
     , module Network.Google.Resource.Gmail.Users.Messages.Modify
 
-    -- ** GmailUsersMessagesSend
+    -- ** gmail.users.messages.send
     , module Network.Google.Resource.Gmail.Users.Messages.Send
 
-    -- ** GmailUsersMessagesTrash
+    -- ** gmail.users.messages.trash
     , module Network.Google.Resource.Gmail.Users.Messages.Trash
 
-    -- ** GmailUsersMessagesUntrash
+    -- ** gmail.users.messages.untrash
     , module Network.Google.Resource.Gmail.Users.Messages.Untrash
 
-    -- ** GmailUsersStop
+    -- ** gmail.users.stop
     , module Network.Google.Resource.Gmail.Users.Stop
 
-    -- ** GmailUsersThreadsDelete
+    -- ** gmail.users.threads.delete
     , module Network.Google.Resource.Gmail.Users.Threads.Delete
 
-    -- ** GmailUsersThreadsGet
+    -- ** gmail.users.threads.get
     , module Network.Google.Resource.Gmail.Users.Threads.Get
 
-    -- ** GmailUsersThreadsList
+    -- ** gmail.users.threads.list
     , module Network.Google.Resource.Gmail.Users.Threads.List
 
-    -- ** GmailUsersThreadsModify
+    -- ** gmail.users.threads.modify
     , module Network.Google.Resource.Gmail.Users.Threads.Modify
 
-    -- ** GmailUsersThreadsTrash
+    -- ** gmail.users.threads.trash
     , module Network.Google.Resource.Gmail.Users.Threads.Trash
 
-    -- ** GmailUsersThreadsUntrash
+    -- ** gmail.users.threads.untrash
     , module Network.Google.Resource.Gmail.Users.Threads.Untrash
 
-    -- ** GmailUsersWatch
+    -- ** gmail.users.watch
     , module Network.Google.Resource.Gmail.Users.Watch
 
     -- * Types

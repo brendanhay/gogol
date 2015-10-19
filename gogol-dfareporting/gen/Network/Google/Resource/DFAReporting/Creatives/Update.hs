@@ -22,7 +22,7 @@
 --
 -- Updates an existing creative.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativesUpdate@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creatives.update@.
 module Network.Google.Resource.DFAReporting.Creatives.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Creatives.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativesUpdate@ method which the
+-- | A resource alias for @dfareporting.creatives.update@ method which the
 -- 'CreativesUpdate'' request conforms to.
 type CreativesUpdateResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data CreativesUpdate' = CreativesUpdate'
 --
 -- * 'cuuPayload'
 creativesUpdate'
-    :: Int64 -- ^ 'profileId'
-    -> Creative -- ^ 'payload'
+    :: Int64 -- ^ 'cuuProFileId'
+    -> Creative -- ^ 'cuuPayload'
     -> CreativesUpdate'
 creativesUpdate' pCuuProFileId_ pCuuPayload_ =
     CreativesUpdate'

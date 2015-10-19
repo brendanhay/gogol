@@ -22,7 +22,7 @@
 --
 -- Delete a specific custom channel from the host AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostCustomChannelsDelete@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.customchannels.delete@.
 module Network.Google.Resource.AdSenseHost.CustomChannels.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.Delete
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostCustomChannelsDelete@ method which the
+-- | A resource alias for @adsensehost.customchannels.delete@ method which the
 -- 'CustomChannelsDelete'' request conforms to.
 type CustomChannelsDeleteResource =
      "adclients" :>
@@ -66,8 +66,8 @@ data CustomChannelsDelete' = CustomChannelsDelete'
 --
 -- * 'ccdAdClientId'
 customChannelsDelete'
-    :: Text -- ^ 'customChannelId'
-    -> Text -- ^ 'adClientId'
+    :: Text -- ^ 'ccdCustomChannelId'
+    -> Text -- ^ 'ccdAdClientId'
     -> CustomChannelsDelete'
 customChannelsDelete' pCcdCustomChannelId_ pCcdAdClientId_ =
     CustomChannelsDelete'

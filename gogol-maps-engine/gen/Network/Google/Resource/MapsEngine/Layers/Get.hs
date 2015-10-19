@@ -22,7 +22,7 @@
 --
 -- Return metadata for a particular layer.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineLayersGet@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.layers.get@.
 module Network.Google.Resource.MapsEngine.Layers.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.MapsEngine.Layers.Get
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersGet@ method which the
+-- | A resource alias for @mapsengine.layers.get@ method which the
 -- 'LayersGet'' request conforms to.
 type LayersGetResource =
      "layers" :>
@@ -64,7 +64,7 @@ data LayersGet' = LayersGet'
 --
 -- * 'lgId'
 layersGet'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'lgId'
     -> LayersGet'
 layersGet' pLgId_ =
     LayersGet'

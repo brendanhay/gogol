@@ -22,7 +22,7 @@
 --
 -- Gets one creative field value by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldValuesGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeFieldValues.get@.
 module Network.Google.Resource.DFAReporting.CreativeFieldValues.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeFieldValuesGet@ method which the
+-- | A resource alias for @dfareporting.creativeFieldValues.get@ method which the
 -- 'CreativeFieldValuesGet'' request conforms to.
 type CreativeFieldValuesGetResource =
      "userprofiles" :>
@@ -72,9 +72,9 @@ data CreativeFieldValuesGet' = CreativeFieldValuesGet'
 --
 -- * 'cfvgId'
 creativeFieldValuesGet'
-    :: Int64 -- ^ 'creativeFieldId'
-    -> Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'cfvgCreativeFieldId'
+    -> Int64 -- ^ 'cfvgProFileId'
+    -> Int64 -- ^ 'cfvgId'
     -> CreativeFieldValuesGet'
 creativeFieldValuesGet' pCfvgCreativeFieldId_ pCfvgProFileId_ pCfvgId_ =
     CreativeFieldValuesGet'

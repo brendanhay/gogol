@@ -22,7 +22,7 @@
 --
 -- Deletes an existing content category.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingContentCategoriesDelete@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.contentCategories.delete@.
 module Network.Google.Resource.DFAReporting.ContentCategories.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingContentCategoriesDelete@ method which the
+-- | A resource alias for @dfareporting.contentCategories.delete@ method which the
 -- 'ContentCategoriesDelete'' request conforms to.
 type ContentCategoriesDeleteResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data ContentCategoriesDelete' = ContentCategoriesDelete'
 --
 -- * 'ccdId'
 contentCategoriesDelete'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'ccdProFileId'
+    -> Int64 -- ^ 'ccdId'
     -> ContentCategoriesDelete'
 contentCategoriesDelete' pCcdProFileId_ pCcdId_ =
     ContentCategoriesDelete'

@@ -22,7 +22,7 @@
 --
 -- Inserts a new subaccount.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSubAccountsInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.subaccounts.insert@.
 module Network.Google.Resource.DFAReporting.SubAccounts.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSubAccountsInsert@ method which the
+-- | A resource alias for @dfareporting.subaccounts.insert@ method which the
 -- 'SubAccountsInsert'' request conforms to.
 type SubAccountsInsertResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data SubAccountsInsert' = SubAccountsInsert'
 --
 -- * 'saiPayload'
 subAccountsInsert'
-    :: Int64 -- ^ 'profileId'
-    -> SubAccount -- ^ 'payload'
+    :: Int64 -- ^ 'saiProFileId'
+    -> SubAccount -- ^ 'saiPayload'
     -> SubAccountsInsert'
 subAccountsInsert' pSaiProFileId_ pSaiPayload_ =
     SubAccountsInsert'

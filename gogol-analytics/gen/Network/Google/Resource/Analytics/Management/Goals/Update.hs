@@ -22,7 +22,7 @@
 --
 -- Updates an existing view (profile).
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementGoalsUpdate@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.goals.update@.
 module Network.Google.Resource.Analytics.Management.Goals.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Analytics.Management.Goals.Update
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementGoalsUpdate@ method which the
+-- | A resource alias for @analytics.management.goals.update@ method which the
 -- 'ManagementGoalsUpdate'' request conforms to.
 type ManagementGoalsUpdateResource =
      "management" :>
@@ -83,11 +83,11 @@ data ManagementGoalsUpdate' = ManagementGoalsUpdate'
 --
 -- * 'mguAccountId'
 managementGoalsUpdate'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'goalId'
-    -> Text -- ^ 'profileId'
-    -> Goal -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mguWebPropertyId'
+    -> Text -- ^ 'mguGoalId'
+    -> Text -- ^ 'mguProFileId'
+    -> Goal -- ^ 'mguPayload'
+    -> Text -- ^ 'mguAccountId'
     -> ManagementGoalsUpdate'
 managementGoalsUpdate' pMguWebPropertyId_ pMguGoalId_ pMguProFileId_ pMguPayload_ pMguAccountId_ =
     ManagementGoalsUpdate'

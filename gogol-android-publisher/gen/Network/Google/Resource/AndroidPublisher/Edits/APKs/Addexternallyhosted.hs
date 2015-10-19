@@ -25,7 +25,7 @@
 -- available to enterprises using Google Play for Work whose application is
 -- configured to restrict distribution to the enterprise domain.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsAPKsAddexternallyhosted@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.apks.addexternallyhosted@.
 module Network.Google.Resource.AndroidPublisher.Edits.APKs.Addexternallyhosted
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKs.Addexternallyhosted
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsAPKsAddexternallyhosted@ method which the
+-- | A resource alias for @androidpublisher.edits.apks.addexternallyhosted@ method which the
 -- 'EditsAPKsAddexternallyhosted'' request conforms to.
 type EditsAPKsAddexternallyhostedResource =
      Capture "packageName" Text :>
@@ -78,9 +78,9 @@ data EditsAPKsAddexternallyhosted' = EditsAPKsAddexternallyhosted'
 --
 -- * 'eapkaEditId'
 editsAPKsAddexternallyhosted'
-    :: Text -- ^ 'packageName'
-    -> APKsAddExternallyHostedRequest -- ^ 'payload'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eapkaPackageName'
+    -> APKsAddExternallyHostedRequest -- ^ 'eapkaPayload'
+    -> Text -- ^ 'eapkaEditId'
     -> EditsAPKsAddexternallyhosted'
 editsAPKsAddexternallyhosted' pEapkaPackageName_ pEapkaPayload_ pEapkaEditId_ =
     EditsAPKsAddexternallyhosted'

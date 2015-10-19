@@ -24,7 +24,7 @@
 -- to user accounts for your developer console. All quests that use any of
 -- these events will also be reset.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementEventsResetAllForAllPlayers@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.events.resetAllForAllPlayers@.
 module Network.Google.Resource.GamesManagement.Events.ResetAllForAllPlayers
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.GamesManagement.Events.ResetAllForAllPlayers
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementEventsResetAllForAllPlayers@ method which the
+-- | A resource alias for @gamesManagement.events.resetAllForAllPlayers@ method which the
 -- 'EventsResetAllForAllPlayers'' request conforms to.
 type EventsResetAllForAllPlayersResource =
      "events" :>

@@ -23,7 +23,7 @@
 -- Retrieves a list of billing information for all accounts of the
 -- authenticated user.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerBillingInfoList@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.billingInfo.list@.
 module Network.Google.Resource.AdExchangeBuyer.BillingInfo.List
     (
     -- * REST Resource
@@ -38,7 +38,7 @@ module Network.Google.Resource.AdExchangeBuyer.BillingInfo.List
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerBillingInfoList@ method which the
+-- | A resource alias for @adexchangebuyer.billingInfo.list@ method which the
 -- 'BillingInfoList'' request conforms to.
 type BillingInfoListResource =
      "billinginfo" :>

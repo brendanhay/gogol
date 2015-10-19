@@ -22,7 +22,7 @@
 --
 -- Update a custom channel in the host AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostCustomChannelsUpdate@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.customchannels.update@.
 module Network.Google.Resource.AdSenseHost.CustomChannels.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.Update
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostCustomChannelsUpdate@ method which the
+-- | A resource alias for @adsensehost.customchannels.update@ method which the
 -- 'CustomChannelsUpdate'' request conforms to.
 type CustomChannelsUpdateResource =
      "adclients" :>
@@ -66,8 +66,8 @@ data CustomChannelsUpdate' = CustomChannelsUpdate'
 --
 -- * 'ccuAdClientId'
 customChannelsUpdate'
-    :: CustomChannel -- ^ 'payload'
-    -> Text -- ^ 'adClientId'
+    :: CustomChannel -- ^ 'ccuPayload'
+    -> Text -- ^ 'ccuAdClientId'
     -> CustomChannelsUpdate'
 customChannelsUpdate' pCcuPayload_ pCcuAdClientId_ =
     CustomChannelsUpdate'

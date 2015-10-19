@@ -22,7 +22,7 @@
 --
 -- Deletes an entry on the user\'s calendar list.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarListDelete@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendarList.delete@.
 module Network.Google.Resource.Calendar.CalendarList.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Calendar.CalendarList.Delete
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarListDelete@ method which the
+-- | A resource alias for @calendar.calendarList.delete@ method which the
 -- 'CalendarListDelete'' request conforms to.
 type CalendarListDeleteResource =
      "users" :>
@@ -61,7 +61,7 @@ newtype CalendarListDelete' = CalendarListDelete'
 --
 -- * 'cldCalendarId'
 calendarListDelete'
-    :: Text -- ^ 'calendarId'
+    :: Text -- ^ 'cldCalendarId'
     -> CalendarListDelete'
 calendarListDelete' pCldCalendarId_ =
     CalendarListDelete'

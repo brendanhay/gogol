@@ -22,7 +22,7 @@
 --
 -- Update an existing profile filter link.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFileFilterLinksUpdate@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.profileFilterLinks.update@.
 module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Update
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFileFilterLinksUpdate@ method which the
+-- | A resource alias for @analytics.management.profileFilterLinks.update@ method which the
 -- 'ManagementProFileFilterLinksUpdate'' request conforms to.
 type ManagementProFileFilterLinksUpdateResource =
      "management" :>
@@ -84,11 +84,11 @@ data ManagementProFileFilterLinksUpdate' = ManagementProFileFilterLinksUpdate'
 --
 -- * 'mpffluLinkId'
 managementProFileFilterLinksUpdate'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> ProFileFilterLink -- ^ 'payload'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'linkId'
+    :: Text -- ^ 'mpffluWebPropertyId'
+    -> Text -- ^ 'mpffluProFileId'
+    -> ProFileFilterLink -- ^ 'mpffluPayload'
+    -> Text -- ^ 'mpffluAccountId'
+    -> Text -- ^ 'mpffluLinkId'
     -> ManagementProFileFilterLinksUpdate'
 managementProFileFilterLinksUpdate' pMpffluWebPropertyId_ pMpffluProFileId_ pMpffluPayload_ pMpffluAccountId_ pMpffluLinkId_ =
     ManagementProFileFilterLinksUpdate'

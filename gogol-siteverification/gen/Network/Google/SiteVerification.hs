@@ -27,25 +27,25 @@ module Network.Google.SiteVerification
 
     -- * Resources
 
-    -- ** SiteVerificationWebResourceDelete
+    -- ** siteVerification.webResource.delete
     , module Network.Google.Resource.SiteVerification.WebResource.Delete
 
-    -- ** SiteVerificationWebResourceGet
+    -- ** siteVerification.webResource.get
     , module Network.Google.Resource.SiteVerification.WebResource.Get
 
-    -- ** SiteVerificationWebResourceGetToken
+    -- ** siteVerification.webResource.getToken
     , module Network.Google.Resource.SiteVerification.WebResource.GetToken
 
-    -- ** SiteVerificationWebResourceInsert
+    -- ** siteVerification.webResource.insert
     , module Network.Google.Resource.SiteVerification.WebResource.Insert
 
-    -- ** SiteVerificationWebResourceList
+    -- ** siteVerification.webResource.list
     , module Network.Google.Resource.SiteVerification.WebResource.List
 
-    -- ** SiteVerificationWebResourcePatch
+    -- ** siteVerification.webResource.patch
     , module Network.Google.Resource.SiteVerification.WebResource.Patch
 
-    -- ** SiteVerificationWebResourceUpdate
+    -- ** siteVerification.webResource.update
     , module Network.Google.Resource.SiteVerification.WebResource.Update
 
     -- * Types

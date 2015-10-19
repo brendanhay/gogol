@@ -22,7 +22,7 @@
 --
 -- Creates a new Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesInsert@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.insert@.
 module Network.Google.Resource.SQL.Instances.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.SQL.Instances.Insert
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesInsert@ method which the
+-- | A resource alias for @sql.instances.insert@ method which the
 -- 'InstancesInsert'' request conforms to.
 type InstancesInsertResource =
      "projects" :>
@@ -66,8 +66,8 @@ data InstancesInsert' = InstancesInsert'
 --
 -- * 'iiPayload'
 instancesInsert'
-    :: Text -- ^ 'project'
-    -> DatabaseInstance -- ^ 'payload'
+    :: Text -- ^ 'iiProject'
+    -> DatabaseInstance -- ^ 'iiPayload'
     -> InstancesInsert'
 instancesInsert' pIiProject_ pIiPayload_ =
     InstancesInsert'

@@ -23,7 +23,7 @@
 -- Replaces rows of an existing table. Current rows remain visible until
 -- all replacement rows are ready.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableReplaceRows@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.table.replaceRows@.
 module Network.Google.Resource.FusionTables.Table.ReplaceRows
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.FusionTables.Table.ReplaceRows
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTableReplaceRows@ method which the
+-- | A resource alias for @fusiontables.table.replaceRows@ method which the
 -- 'TableReplaceRows'' request conforms to.
 type TableReplaceRowsResource =
      "tables" :>
@@ -92,8 +92,8 @@ data TableReplaceRows' = TableReplaceRows'
 --
 -- * 'trrIsStrict'
 tableReplaceRows'
-    :: Body -- ^ 'media'
-    -> Text -- ^ 'tableId'
+    :: Body -- ^ 'trrMedia'
+    -> Text -- ^ 'trrTableId'
     -> TableReplaceRows'
 tableReplaceRows' pTrrMedia_ pTrrTableId_ =
     TableReplaceRows'

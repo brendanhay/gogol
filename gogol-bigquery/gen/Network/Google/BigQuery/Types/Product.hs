@@ -2840,7 +2840,7 @@ newtype JSONObject = JSONObject
 --
 -- * 'joAddtional'
 jsonObject
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'joAddtional'
     -> JSONObject
 jsonObject pJoAddtional_ =
     JSONObject
@@ -3189,7 +3189,7 @@ newtype JobConfigurationQueryTableDefinitions = JobConfigurationQueryTableDefini
 --
 -- * 'jcqtdAddtional'
 jobConfigurationQueryTableDefinitions
-    :: HashMap Text ExternalDataConfiguration -- ^ 'addtional'
+    :: HashMap Text ExternalDataConfiguration -- ^ 'jcqtdAddtional'
     -> JobConfigurationQueryTableDefinitions
 jobConfigurationQueryTableDefinitions pJcqtdAddtional_ =
     JobConfigurationQueryTableDefinitions

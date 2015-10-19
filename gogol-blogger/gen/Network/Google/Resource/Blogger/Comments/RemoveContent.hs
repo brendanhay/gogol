@@ -22,7 +22,7 @@
 --
 -- Removes the content of a comment.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerCommentsRemoveContent@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.comments.removeContent@.
 module Network.Google.Resource.Blogger.Comments.RemoveContent
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Blogger.Comments.RemoveContent
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerCommentsRemoveContent@ method which the
+-- | A resource alias for @blogger.comments.removeContent@ method which the
 -- 'CommentsRemoveContent'' request conforms to.
 type CommentsRemoveContentResource =
      "blogs" :>
@@ -72,9 +72,9 @@ data CommentsRemoveContent' = CommentsRemoveContent'
 --
 -- * 'crcCommentId'
 commentsRemoveContent'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'postId'
-    -> Text -- ^ 'commentId'
+    :: Text -- ^ 'crcBlogId'
+    -> Text -- ^ 'crcPostId'
+    -> Text -- ^ 'crcCommentId'
     -> CommentsRemoveContent'
 commentsRemoveContent' pCrcBlogId_ pCrcPostId_ pCrcCommentId_ =
     CommentsRemoveContent'

@@ -22,7 +22,7 @@
 --
 -- Return a list of books in My Library.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesMybooksList@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.volumes.mybooks.list@.
 module Network.Google.Resource.Books.Volumes.Mybooks.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Books.Volumes.Mybooks.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksVolumesMybooksList@ method which the
+-- | A resource alias for @books.volumes.mybooks.list@ method which the
 -- 'VolumesMybooksList'' request conforms to.
 type VolumesMybooksListResource =
      "volumes" :>

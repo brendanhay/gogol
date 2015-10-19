@@ -22,7 +22,7 @@
 --
 -- Lists all negotiations the authenticated user has access to.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerNegotiationsList@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.negotiations.list@.
 module Network.Google.Resource.AdExchangeBuyer.Negotiations.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeBuyer.Negotiations.List
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerNegotiationsList@ method which the
+-- | A resource alias for @adexchangebuyer.negotiations.list@ method which the
 -- 'NegotiationsList'' request conforms to.
 type NegotiationsListResource =
      "negotiations" :>
@@ -60,7 +60,7 @@ newtype NegotiationsList' = NegotiationsList'
 --
 -- * 'nlPayload'
 negotiationsList'
-    :: GetNegotiationsRequest -- ^ 'payload'
+    :: GetNegotiationsRequest -- ^ 'nlPayload'
     -> NegotiationsList'
 negotiationsList' pNlPayload_ =
     NegotiationsList'

@@ -23,7 +23,7 @@
 -- Retrieves IDs of all products for which the enterprise has a group
 -- license.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseGrouplicensesList@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.grouplicenses.list@.
 module Network.Google.Resource.AndroidEnterprise.Grouplicenses.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidEnterprise.Grouplicenses.List
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseGrouplicensesList@ method which the
+-- | A resource alias for @androidenterprise.grouplicenses.list@ method which the
 -- 'GrouplicensesList'' request conforms to.
 type GrouplicensesListResource =
      "enterprises" :>
@@ -63,7 +63,7 @@ newtype GrouplicensesList' = GrouplicensesList'
 --
 -- * 'glEnterpriseId'
 grouplicensesList'
-    :: Text -- ^ 'enterpriseId'
+    :: Text -- ^ 'glEnterpriseId'
     -> GrouplicensesList'
 grouplicensesList' pGlEnterpriseId_ =
     GrouplicensesList'

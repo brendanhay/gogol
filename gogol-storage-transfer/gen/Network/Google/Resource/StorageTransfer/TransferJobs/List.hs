@@ -22,7 +22,7 @@
 --
 -- Lists transfer jobs.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferJobsList@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.transferJobs.list@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.List
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferTransferJobsList@ method which the
+-- | A resource alias for @storagetransfer.transferJobs.list@ method which the
 -- 'TransferJobsList'' request conforms to.
 type TransferJobsListResource =
      "v1" :>

@@ -1310,7 +1310,7 @@ newtype DebuggeeLabels = DebuggeeLabels
 --
 -- * 'dlAddtional'
 debuggeeLabels
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'dlAddtional'
     -> DebuggeeLabels
 debuggeeLabels pDlAddtional_ =
     DebuggeeLabels

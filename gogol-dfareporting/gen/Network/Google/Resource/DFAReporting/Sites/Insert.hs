@@ -22,7 +22,7 @@
 --
 -- Inserts a new site.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSitesInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.sites.insert@.
 module Network.Google.Resource.DFAReporting.Sites.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Sites.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSitesInsert@ method which the
+-- | A resource alias for @dfareporting.sites.insert@ method which the
 -- 'SitesInsert'' request conforms to.
 type SitesInsertResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data SitesInsert' = SitesInsert'
 --
 -- * 'siPayload'
 sitesInsert'
-    :: Int64 -- ^ 'profileId'
-    -> Site -- ^ 'payload'
+    :: Int64 -- ^ 'siProFileId'
+    -> Site -- ^ 'siPayload'
     -> SitesInsert'
 sitesInsert' pSiProFileId_ pSiPayload_ =
     SitesInsert'

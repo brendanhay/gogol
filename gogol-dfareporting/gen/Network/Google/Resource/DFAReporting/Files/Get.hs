@@ -22,7 +22,7 @@
 --
 -- Retrieves a report file by its report ID and file ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFilesGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.files.get@.
 module Network.Google.Resource.DFAReporting.Files.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Files.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFilesGet@ method which the
+-- | A resource alias for @dfareporting.files.get@ method which the
 -- 'FilesGet'' request conforms to.
 type FilesGetResource =
      "reports" :>
@@ -72,8 +72,8 @@ data FilesGet' = FilesGet'
 --
 -- * 'fgFileId'
 filesGet'
-    :: Int64 -- ^ 'reportId'
-    -> Int64 -- ^ 'fileId'
+    :: Int64 -- ^ 'fgReportId'
+    -> Int64 -- ^ 'fgFileId'
     -> FilesGet'
 filesGet' pFgReportId_ pFgFileId_ =
     FilesGet'

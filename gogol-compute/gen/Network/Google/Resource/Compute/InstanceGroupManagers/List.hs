@@ -23,7 +23,7 @@
 -- Retrieves a list of managed instance groups that are contained within
 -- the specified project and zone.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.list@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersList@ method which the
+-- | A resource alias for @compute.instanceGroupManagers.list@ method which the
 -- 'InstanceGroupManagersList'' request conforms to.
 type InstanceGroupManagersListResource =
      Capture "project" Text :>
@@ -83,8 +83,8 @@ data InstanceGroupManagersList' = InstanceGroupManagersList'
 --
 -- * 'igmlMaxResults'
 instanceGroupManagersList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'igmlProject'
+    -> Text -- ^ 'igmlZone'
     -> InstanceGroupManagersList'
 instanceGroupManagersList' pIgmlProject_ pIgmlZone_ =
     InstanceGroupManagersList'

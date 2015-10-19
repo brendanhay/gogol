@@ -22,7 +22,7 @@
 --
 -- Gets a transfer job.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferJobsGet@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.transferJobs.get@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.Get
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.Get
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferTransferJobsGet@ method which the
+-- | A resource alias for @storagetransfer.transferJobs.get@ method which the
 -- 'TransferJobsGet'' request conforms to.
 type TransferJobsGetResource =
      "v1" :>
@@ -99,7 +99,7 @@ data TransferJobsGet' = TransferJobsGet'
 --
 -- * 'tjgCallback'
 transferJobsGet'
-    :: Text -- ^ 'jobName'
+    :: Text -- ^ 'tjgJobName'
     -> TransferJobsGet'
 transferJobsGet' pTjgJobName_ =
     TransferJobsGet'

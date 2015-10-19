@@ -22,7 +22,7 @@
 --
 -- Submits a score to the specified leaderboard.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesScoresSubmit@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.scores.submit@.
 module Network.Google.Resource.Games.Scores.Submit
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Games.Scores.Submit
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesScoresSubmit@ method which the
+-- | A resource alias for @games.scores.submit@ method which the
 -- 'ScoresSubmit'' request conforms to.
 type ScoresSubmitResource =
      "leaderboards" :>
@@ -76,8 +76,8 @@ data ScoresSubmit' = ScoresSubmit'
 --
 -- * 'ssLanguage'
 scoresSubmit'
-    :: Int64 -- ^ 'score'
-    -> Text -- ^ 'leaderboardId'
+    :: Int64 -- ^ 'ssScore'
+    -> Text -- ^ 'ssLeaderboardId'
     -> ScoresSubmit'
 scoresSubmit' pSsScore_ pSsLeaderboardId_ =
     ScoresSubmit'

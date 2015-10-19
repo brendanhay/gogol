@@ -22,7 +22,7 @@
 --
 -- Returns the specified project resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeProjectsGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.projects.get@.
 module Network.Google.Resource.Compute.Projects.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Compute.Projects.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeProjectsGet@ method which the
+-- | A resource alias for @compute.projects.get@ method which the
 -- 'ProjectsGet'' request conforms to.
 type ProjectsGetResource =
      Capture "project" Text :>
@@ -58,7 +58,7 @@ newtype ProjectsGet' = ProjectsGet'
 --
 -- * 'pgProject'
 projectsGet'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'pgProject'
     -> ProjectsGet'
 projectsGet' pPgProject_ =
     ProjectsGet'

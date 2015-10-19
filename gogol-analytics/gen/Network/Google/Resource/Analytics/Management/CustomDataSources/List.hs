@@ -22,7 +22,7 @@
 --
 -- List custom data sources to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomDataSourcesList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.customDataSources.list@.
 module Network.Google.Resource.Analytics.Management.CustomDataSources.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.CustomDataSources.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementCustomDataSourcesList@ method which the
+-- | A resource alias for @analytics.management.customDataSources.list@ method which the
 -- 'ManagementCustomDataSourcesList'' request conforms to.
 type ManagementCustomDataSourcesListResource =
      "management" :>
@@ -78,8 +78,8 @@ data ManagementCustomDataSourcesList' = ManagementCustomDataSourcesList'
 --
 -- * 'mcdslMaxResults'
 managementCustomDataSourcesList'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mcdslWebPropertyId'
+    -> Text -- ^ 'mcdslAccountId'
     -> ManagementCustomDataSourcesList'
 managementCustomDataSourcesList' pMcdslWebPropertyId_ pMcdslAccountId_ =
     ManagementCustomDataSourcesList'

@@ -27,7 +27,7 @@
 -- later. Acknowledging a message more than once will not result in an
 -- error.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsAcknowledge@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.acknowledge@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsSubscriptionsAcknowledge@ method which the
+-- | A resource alias for @pubsub.projects.subscriptions.acknowledge@ method which the
 -- 'ProjectsSubscriptionsAcknowledge'' request conforms to.
 type ProjectsSubscriptionsAcknowledgeResource =
      "v1" :>
@@ -110,8 +110,8 @@ data ProjectsSubscriptionsAcknowledge' = ProjectsSubscriptionsAcknowledge'
 --
 -- * 'psaCallback'
 projectsSubscriptionsAcknowledge'
-    :: AcknowledgeRequest -- ^ 'payload'
-    -> Text -- ^ 'subscription'
+    :: AcknowledgeRequest -- ^ 'psaPayload'
+    -> Text -- ^ 'psaSubscription'
     -> ProjectsSubscriptionsAcknowledge'
 projectsSubscriptionsAcknowledge' pPsaPayload_ pPsaSubscription_ =
     ProjectsSubscriptionsAcknowledge'

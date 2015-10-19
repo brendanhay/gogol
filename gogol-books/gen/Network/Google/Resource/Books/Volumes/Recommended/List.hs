@@ -22,7 +22,7 @@
 --
 -- Return a list of recommended books for the current user.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesRecommendedList@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.volumes.recommended.list@.
 module Network.Google.Resource.Books.Volumes.Recommended.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Books.Volumes.Recommended.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksVolumesRecommendedList@ method which the
+-- | A resource alias for @books.volumes.recommended.list@ method which the
 -- 'VolumesRecommendedList'' request conforms to.
 type VolumesRecommendedListResource =
      "volumes" :>

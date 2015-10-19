@@ -23,7 +23,7 @@
 -- Creates a route resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRoutesInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.routes.insert@.
 module Network.Google.Resource.Compute.Routes.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.Routes.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeRoutesInsert@ method which the
+-- | A resource alias for @compute.routes.insert@ method which the
 -- 'RoutesInsert'' request conforms to.
 type RoutesInsertResource =
      Capture "project" Text :>
@@ -67,8 +67,8 @@ data RoutesInsert' = RoutesInsert'
 --
 -- * 'riPayload'
 routesInsert'
-    :: Text -- ^ 'project'
-    -> Route -- ^ 'payload'
+    :: Text -- ^ 'riProject'
+    -> Route -- ^ 'riPayload'
     -> RoutesInsert'
 routesInsert' pRiProject_ pRiPayload_ =
     RoutesInsert'

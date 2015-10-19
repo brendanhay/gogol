@@ -4817,7 +4817,7 @@ newtype ChannelLocalizations = ChannelLocalizations
 --
 -- * 'clAddtional'
 channelLocalizations
-    :: HashMap Text ChannelLocalization -- ^ 'addtional'
+    :: HashMap Text ChannelLocalization -- ^ 'clAddtional'
     -> ChannelLocalizations
 channelLocalizations pClAddtional_ =
     ChannelLocalizations
@@ -5312,7 +5312,7 @@ newtype PlayListLocalizations = PlayListLocalizations
 --
 -- * 'pllAddtional'
 playListLocalizations
-    :: HashMap Text PlayListLocalization -- ^ 'addtional'
+    :: HashMap Text PlayListLocalization -- ^ 'pllAddtional'
     -> PlayListLocalizations
 playListLocalizations pPllAddtional_ =
     PlayListLocalizations
@@ -6094,7 +6094,7 @@ newtype VideoLocalizations = VideoLocalizations
 --
 -- * 'vlAddtional'
 videoLocalizations
-    :: HashMap Text VideoLocalization -- ^ 'addtional'
+    :: HashMap Text VideoLocalization -- ^ 'vlAddtional'
     -> VideoLocalizations
 videoLocalizations pVlAddtional_ =
     VideoLocalizations
@@ -8269,7 +8269,7 @@ newtype ChannelSectionLocalizations = ChannelSectionLocalizations
 --
 -- * 'cslAddtional'
 channelSectionLocalizations
-    :: HashMap Text ChannelSectionLocalization -- ^ 'addtional'
+    :: HashMap Text ChannelSectionLocalization -- ^ 'cslAddtional'
     -> ChannelSectionLocalizations
 channelSectionLocalizations pCslAddtional_ =
     ChannelSectionLocalizations

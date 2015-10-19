@@ -26,13 +26,13 @@ module Network.Google.URLShortener
 
     -- * Resources
 
-    -- ** URLshortenerURLGet
+    -- ** urlshortener.url.get
     , module Network.Google.Resource.URLShortener.URL.Get
 
-    -- ** URLshortenerURLInsert
+    -- ** urlshortener.url.insert
     , module Network.Google.Resource.URLShortener.URL.Insert
 
-    -- ** URLshortenerURLList
+    -- ** urlshortener.url.list
     , module Network.Google.Resource.URLShortener.URL.List
 
     -- * Types

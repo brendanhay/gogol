@@ -22,7 +22,7 @@
 --
 -- Returns a list of authorized public keys for a specific user account.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsLinuxGetAuthorizedKeysView@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.linux.getAuthorizedKeysView@.
 module Network.Google.Resource.CloudUserAccounts.Linux.GetAuthorizedKeysView
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.CloudUserAccounts.Linux.GetAuthorizedKeysView
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsLinuxGetAuthorizedKeysView@ method which the
+-- | A resource alias for @clouduseraccounts.linux.getAuthorizedKeysView@ method which the
 -- 'LinuxGetAuthorizedKeysView'' request conforms to.
 type LinuxGetAuthorizedKeysViewResource =
      Capture "project" Text :>
@@ -81,10 +81,10 @@ data LinuxGetAuthorizedKeysView' = LinuxGetAuthorizedKeysView'
 --
 -- * 'lgakvInstance'
 linuxGetAuthorizedKeysView'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Text -- ^ 'user'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'lgakvProject'
+    -> Text -- ^ 'lgakvZone'
+    -> Text -- ^ 'lgakvUser'
+    -> Text -- ^ 'lgakvInstance'
     -> LinuxGetAuthorizedKeysView'
 linuxGetAuthorizedKeysView' pLgakvProject_ pLgakvZone_ pLgakvUser_ pLgakvInstance_ =
     LinuxGetAuthorizedKeysView'

@@ -22,7 +22,7 @@
 --
 -- Adds a new user to the given web property.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyUserLinksInsert@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webpropertyUserLinks.insert@.
 module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertyUserLinksInsert@ method which the
+-- | A resource alias for @analytics.management.webpropertyUserLinks.insert@ method which the
 -- 'ManagementWebPropertyUserLinksInsert'' request conforms to.
 type ManagementWebPropertyUserLinksInsertResource =
      "management" :>
@@ -73,9 +73,9 @@ data ManagementWebPropertyUserLinksInsert' = ManagementWebPropertyUserLinksInser
 --
 -- * 'mwpuliAccountId'
 managementWebPropertyUserLinksInsert'
-    :: Text -- ^ 'webPropertyId'
-    -> EntityUserLink -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mwpuliWebPropertyId'
+    -> EntityUserLink -- ^ 'mwpuliPayload'
+    -> Text -- ^ 'mwpuliAccountId'
     -> ManagementWebPropertyUserLinksInsert'
 managementWebPropertyUserLinksInsert' pMwpuliWebPropertyId_ pMwpuliPayload_ pMwpuliAccountId_ =
     ManagementWebPropertyUserLinksInsert'

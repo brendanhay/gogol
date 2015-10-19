@@ -22,7 +22,7 @@
 --
 -- Gets the statuses of multiple products in a single request.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentProductstatusesCustombatch@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.productstatuses.custombatch@.
 module Network.Google.Resource.Content.Productstatuses.Custombatch
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Content.Productstatuses.Custombatch
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentProductstatusesCustombatch@ method which the
+-- | A resource alias for @content.productstatuses.custombatch@ method which the
 -- 'ProductstatusesCustombatch'' request conforms to.
 type ProductstatusesCustombatchResource =
      "productstatuses" :>
@@ -61,7 +61,7 @@ newtype ProductstatusesCustombatch' = ProductstatusesCustombatch'
 --
 -- * 'pcPayload'
 productstatusesCustombatch'
-    :: ProductstatusesCustomBatchRequest -- ^ 'payload'
+    :: ProductstatusesCustomBatchRequest -- ^ 'pcPayload'
     -> ProductstatusesCustombatch'
 productstatusesCustombatch' pPcPayload_ =
     ProductstatusesCustombatch'

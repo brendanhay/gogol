@@ -26,76 +26,76 @@ module Network.Google.Mirror
 
     -- * Resources
 
-    -- ** MirrorAccountsInsert
+    -- ** mirror.accounts.insert
     , module Network.Google.Resource.Mirror.Accounts.Insert
 
-    -- ** MirrorContactsDelete
+    -- ** mirror.contacts.delete
     , module Network.Google.Resource.Mirror.Contacts.Delete
 
-    -- ** MirrorContactsGet
+    -- ** mirror.contacts.get
     , module Network.Google.Resource.Mirror.Contacts.Get
 
-    -- ** MirrorContactsInsert
+    -- ** mirror.contacts.insert
     , module Network.Google.Resource.Mirror.Contacts.Insert
 
-    -- ** MirrorContactsList
+    -- ** mirror.contacts.list
     , module Network.Google.Resource.Mirror.Contacts.List
 
-    -- ** MirrorContactsPatch
+    -- ** mirror.contacts.patch
     , module Network.Google.Resource.Mirror.Contacts.Patch
 
-    -- ** MirrorContactsUpdate
+    -- ** mirror.contacts.update
     , module Network.Google.Resource.Mirror.Contacts.Update
 
-    -- ** MirrorLocationsGet
+    -- ** mirror.locations.get
     , module Network.Google.Resource.Mirror.Locations.Get
 
-    -- ** MirrorLocationsList
+    -- ** mirror.locations.list
     , module Network.Google.Resource.Mirror.Locations.List
 
-    -- ** MirrorSettingsGet
+    -- ** mirror.settings.get
     , module Network.Google.Resource.Mirror.Settings.Get
 
-    -- ** MirrorSubscriptionsDelete
+    -- ** mirror.subscriptions.delete
     , module Network.Google.Resource.Mirror.Subscriptions.Delete
 
-    -- ** MirrorSubscriptionsInsert
+    -- ** mirror.subscriptions.insert
     , module Network.Google.Resource.Mirror.Subscriptions.Insert
 
-    -- ** MirrorSubscriptionsList
+    -- ** mirror.subscriptions.list
     , module Network.Google.Resource.Mirror.Subscriptions.List
 
-    -- ** MirrorSubscriptionsUpdate
+    -- ** mirror.subscriptions.update
     , module Network.Google.Resource.Mirror.Subscriptions.Update
 
-    -- ** MirrorTimelineAttachmentsDelete
+    -- ** mirror.timeline.attachments.delete
     , module Network.Google.Resource.Mirror.Timeline.Attachments.Delete
 
-    -- ** MirrorTimelineAttachmentsGet
+    -- ** mirror.timeline.attachments.get
     , module Network.Google.Resource.Mirror.Timeline.Attachments.Get
 
-    -- ** MirrorTimelineAttachmentsInsert
+    -- ** mirror.timeline.attachments.insert
     , module Network.Google.Resource.Mirror.Timeline.Attachments.Insert
 
-    -- ** MirrorTimelineAttachmentsList
+    -- ** mirror.timeline.attachments.list
     , module Network.Google.Resource.Mirror.Timeline.Attachments.List
 
-    -- ** MirrorTimelineDelete
+    -- ** mirror.timeline.delete
     , module Network.Google.Resource.Mirror.Timeline.Delete
 
-    -- ** MirrorTimelineGet
+    -- ** mirror.timeline.get
     , module Network.Google.Resource.Mirror.Timeline.Get
 
-    -- ** MirrorTimelineInsert
+    -- ** mirror.timeline.insert
     , module Network.Google.Resource.Mirror.Timeline.Insert
 
-    -- ** MirrorTimelineList
+    -- ** mirror.timeline.list
     , module Network.Google.Resource.Mirror.Timeline.List
 
-    -- ** MirrorTimelinePatch
+    -- ** mirror.timeline.patch
     , module Network.Google.Resource.Mirror.Timeline.Patch
 
-    -- ** MirrorTimelineUpdate
+    -- ** mirror.timeline.update
     , module Network.Google.Resource.Mirror.Timeline.Update
 
     -- * Types

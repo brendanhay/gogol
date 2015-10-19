@@ -23,7 +23,7 @@
 -- Exports the contents of the Realtime API data model associated with this
 -- file as JSON.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRealtimeGet@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.realtime.get@.
 module Network.Google.Resource.Drive.Realtime.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Drive.Realtime.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRealtimeGet@ method which the
+-- | A resource alias for @drive.realtime.get@ method which the
 -- 'RealtimeGet'' request conforms to.
 type RealtimeGetResource =
      "files" :>
@@ -74,7 +74,7 @@ data RealtimeGet' = RealtimeGet'
 --
 -- * 'reaRevision'
 realtimeGet'
-    :: Text -- ^ 'fileId'
+    :: Text -- ^ 'reaFileId'
     -> RealtimeGet'
 realtimeGet' pReaFileId_ =
     RealtimeGet'

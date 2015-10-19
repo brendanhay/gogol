@@ -22,7 +22,7 @@
 --
 -- Gets the specified draft.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersDraftsGet@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.drafts.get@.
 module Network.Google.Resource.Gmail.Users.Drafts.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Gmail.Users.Drafts.Get
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersDraftsGet@ method which the
+-- | A resource alias for @gmail.users.drafts.get@ method which the
 -- 'UsersDraftsGet'' request conforms to.
 type UsersDraftsGetResource =
      Capture "userId" Text :>
@@ -69,7 +69,7 @@ data UsersDraftsGet' = UsersDraftsGet'
 --
 -- * 'udgId'
 usersDraftsGet'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'udgId'
     -> Text
     -> UsersDraftsGet'
 usersDraftsGet' pUdgUserId_ pUdgId_ =

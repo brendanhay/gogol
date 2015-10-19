@@ -22,7 +22,7 @@
 --
 -- Deletes a read group set.
 --
--- /See:/ < Genomics API Reference> for @GenomicsReadgroupsetsDelete@.
+-- /See:/ < Genomics API Reference> for @genomics.readgroupsets.delete@.
 module Network.Google.Resource.Genomics.Readgroupsets.Delete
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.Readgroupsets.Delete
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReadgroupsetsDelete@ method which the
+-- | A resource alias for @genomics.readgroupsets.delete@ method which the
 -- 'ReadgroupsetsDelete'' request conforms to.
 type ReadgroupsetsDeleteResource =
      "v1" :>
@@ -95,7 +95,7 @@ data ReadgroupsetsDelete' = ReadgroupsetsDelete'
 --
 -- * 'rdCallback'
 readgroupsetsDelete'
-    :: Text -- ^ 'readGroupSetId'
+    :: Text -- ^ 'rdReadGroupSetId'
     -> ReadgroupsetsDelete'
 readgroupsetsDelete' pRdReadGroupSetId_ =
     ReadgroupsetsDelete'

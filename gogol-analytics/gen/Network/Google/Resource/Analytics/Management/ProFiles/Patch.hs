@@ -23,7 +23,7 @@
 -- Updates an existing view (profile). This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFilesPatch@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.profiles.patch@.
 module Network.Google.Resource.Analytics.Management.ProFiles.Patch
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Patch
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFilesPatch@ method which the
+-- | A resource alias for @analytics.management.profiles.patch@ method which the
 -- 'ManagementProFilesPatch'' request conforms to.
 type ManagementProFilesPatchResource =
      "management" :>
@@ -79,10 +79,10 @@ data ManagementProFilesPatch' = ManagementProFilesPatch'
 --
 -- * 'mpfpAccountId'
 managementProFilesPatch'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> ProFile -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mpfpWebPropertyId'
+    -> Text -- ^ 'mpfpProFileId'
+    -> ProFile -- ^ 'mpfpPayload'
+    -> Text -- ^ 'mpfpAccountId'
     -> ManagementProFilesPatch'
 managementProFilesPatch' pMpfpWebPropertyId_ pMpfpProFileId_ pMpfpPayload_ pMpfpAccountId_ =
     ManagementProFilesPatch'

@@ -23,7 +23,7 @@
 -- Delete the specified ad unit from the specified publisher AdSense
 -- account.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdUnitsDelete@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.accounts.adunits.delete@.
 module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Delete
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Delete
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAccountsAdUnitsDelete@ method which the
+-- | A resource alias for @adsensehost.accounts.adunits.delete@ method which the
 -- 'AccountsAdUnitsDelete'' request conforms to.
 type AccountsAdUnitsDeleteResource =
      "accounts" :>
@@ -73,9 +73,9 @@ data AccountsAdUnitsDelete' = AccountsAdUnitsDelete'
 --
 -- * 'aaudAccountId'
 accountsAdUnitsDelete'
-    :: Text -- ^ 'adUnitId'
-    -> Text -- ^ 'adClientId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'aaudAdUnitId'
+    -> Text -- ^ 'aaudAdClientId'
+    -> Text -- ^ 'aaudAccountId'
     -> AccountsAdUnitsDelete'
 accountsAdUnitsDelete' pAaudAdUnitId_ pAaudAdClientId_ pAaudAccountId_ =
     AccountsAdUnitsDelete'

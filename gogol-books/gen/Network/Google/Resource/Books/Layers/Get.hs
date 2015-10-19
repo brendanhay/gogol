@@ -22,7 +22,7 @@
 --
 -- Gets the layer summary for a volume.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksLayersGet@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.layers.get@.
 module Network.Google.Resource.Books.Layers.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Books.Layers.Get
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksLayersGet@ method which the
+-- | A resource alias for @books.layers.get@ method which the
 -- 'LayersGet'' request conforms to.
 type LayersGetResource =
      "volumes" :>
@@ -75,8 +75,8 @@ data LayersGet' = LayersGet'
 --
 -- * 'lgSummaryId'
 layersGet'
-    :: Text -- ^ 'volumeId'
-    -> Text -- ^ 'summaryId'
+    :: Text -- ^ 'lgVolumeId'
+    -> Text -- ^ 'lgSummaryId'
     -> LayersGet'
 layersGet' pLgVolumeId_ pLgSummaryId_ =
     LayersGet'

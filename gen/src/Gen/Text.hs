@@ -222,6 +222,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("Xml",           "XML")
          , ("Youtube",       "YouTube")
 
+         , ("([^a])data",  "$1Data")
          , ("([^ypn])load", "$1Load")
          , ("access",      "Access")
          , ("account",     "Account")
@@ -234,6 +235,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("client",      "Client")
          , ("config",      "Config")
          , ("crawl",       "Crawl")
+         , ("dapi",        "dAPI")
          , ("deal",        "Deal")
          , ("debug",       "Debug")
          , ("device",      "Device")
@@ -241,6 +243,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("engine",      "Engine")
          , ("enterprise",  "Enterprise")
          , ("error",       "Error")
+         , ("exchange",    "Exchange")
          , ("file",        "File")
          , ("info",        "Info")
          , ("library",     "Library")
@@ -253,11 +256,13 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("offer",       "Offer")
          , ("online",      "Online")
          , ("order",       "Order")
+         , ("pagespeed",   "Pagespeed")
          , ("part",        "Part")
          , ("position",    "Position")
          , ("product",     "Product")
          , ("proper",      "Proper")
          , ("publish",     "Publish")
+         , ("query",       "Query")
          , ("resource",    "Resource")
          , ("round",       "Round")
          , ("sample",      "Sample")
@@ -268,10 +273,6 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("unit",        "Unit")
          , ("upload",      "Upload")
          , ("user",        "User")
-         , ("pagespeed",   "Pagespeed")
-         , ("dapi",        "dAPI")
-         , ("([^a])data",  "$1Data")
-         , ("query",       "Query")
          ]
 
 acronyms :: [(String, String)]

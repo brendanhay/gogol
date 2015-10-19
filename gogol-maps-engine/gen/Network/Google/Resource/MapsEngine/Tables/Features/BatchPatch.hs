@@ -33,7 +33,7 @@
 -- deletes that property. For more information about updating features,
 -- read Updating features in the Google Maps Engine developer\'s guide.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesFeaturesBatchPatch@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.tables.features.batchPatch@.
 module Network.Google.Resource.MapsEngine.Tables.Features.BatchPatch
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.MapsEngine.Tables.Features.BatchPatch
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesFeaturesBatchPatch@ method which the
+-- | A resource alias for @mapsengine.tables.features.batchPatch@ method which the
 -- 'TablesFeaturesBatchPatch'' request conforms to.
 type TablesFeaturesBatchPatchResource =
      "tables" :>
@@ -89,8 +89,8 @@ data TablesFeaturesBatchPatch' = TablesFeaturesBatchPatch'
 --
 -- * 'tfbpId'
 tablesFeaturesBatchPatch'
-    :: FeaturesBatchPatchRequest -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: FeaturesBatchPatchRequest -- ^ 'tfbpPayload'
+    -> Text -- ^ 'tfbpId'
     -> TablesFeaturesBatchPatch'
 tablesFeaturesBatchPatch' pTfbpPayload_ pTfbpId_ =
     TablesFeaturesBatchPatch'

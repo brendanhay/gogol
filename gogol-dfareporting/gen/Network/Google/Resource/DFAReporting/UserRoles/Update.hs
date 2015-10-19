@@ -22,7 +22,7 @@
 --
 -- Updates an existing user role.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolesUpdate@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userRoles.update@.
 module Network.Google.Resource.DFAReporting.UserRoles.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.UserRoles.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingUserRolesUpdate@ method which the
+-- | A resource alias for @dfareporting.userRoles.update@ method which the
 -- 'UserRolesUpdate'' request conforms to.
 type UserRolesUpdateResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data UserRolesUpdate' = UserRolesUpdate'
 --
 -- * 'uruPayload'
 userRolesUpdate'
-    :: Int64 -- ^ 'profileId'
-    -> UserRole -- ^ 'payload'
+    :: Int64 -- ^ 'uruProFileId'
+    -> UserRole -- ^ 'uruPayload'
     -> UserRolesUpdate'
 userRolesUpdate' pUruProFileId_ pUruPayload_ =
     UserRolesUpdate'

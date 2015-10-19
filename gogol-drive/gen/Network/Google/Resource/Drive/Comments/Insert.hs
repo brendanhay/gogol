@@ -22,7 +22,7 @@
 --
 -- Creates a new comment on the given file.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveCommentsInsert@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.comments.insert@.
 module Network.Google.Resource.Drive.Comments.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Drive.Comments.Insert
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveCommentsInsert@ method which the
+-- | A resource alias for @drive.comments.insert@ method which the
 -- 'CommentsInsert'' request conforms to.
 type CommentsInsertResource =
      "files" :>
@@ -65,8 +65,8 @@ data CommentsInsert' = CommentsInsert'
 --
 -- * 'ciFileId'
 commentsInsert'
-    :: Comment -- ^ 'payload'
-    -> Text -- ^ 'fileId'
+    :: Comment -- ^ 'ciPayload'
+    -> Text -- ^ 'ciFileId'
     -> CommentsInsert'
 commentsInsert' pCiPayload_ pCiFileId_ =
     CommentsInsert'

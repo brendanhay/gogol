@@ -27,7 +27,7 @@
 -- beacon will be deleted. You also may explicitly specify \`*\/*\` to
 -- delete all.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsAttachmentsBatchDelete@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.attachments.batchDelete@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconBeaconsAttachmentsBatchDelete@ method which the
+-- | A resource alias for @proximitybeacon.beacons.attachments.batchDelete@ method which the
 -- 'BeaconsAttachmentsBatchDelete'' request conforms to.
 type BeaconsAttachmentsBatchDeleteResource =
      "v1beta1" :>
@@ -111,7 +111,7 @@ data BeaconsAttachmentsBatchDelete' = BeaconsAttachmentsBatchDelete'
 --
 -- * 'babdCallback'
 beaconsAttachmentsBatchDelete'
-    :: Text -- ^ 'beaconName'
+    :: Text -- ^ 'babdBeaconName'
     -> BeaconsAttachmentsBatchDelete'
 beaconsAttachmentsBatchDelete' pBabdBeaconName_ =
     BeaconsAttachmentsBatchDelete'

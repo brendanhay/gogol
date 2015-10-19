@@ -701,7 +701,7 @@ newtype GaDataTotalsForAllResults = GaDataTotalsForAllResults
 --
 -- * 'gdtfarAddtional'
 gaDataTotalsForAllResults
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'gdtfarAddtional'
     -> GaDataTotalsForAllResults
 gaDataTotalsForAllResults pGdtfarAddtional_ =
     GaDataTotalsForAllResults
@@ -3742,7 +3742,7 @@ newtype RealtimeDataTotalsForAllResults = RealtimeDataTotalsForAllResults
 --
 -- * 'rdtfarAddtional'
 realtimeDataTotalsForAllResults
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'rdtfarAddtional'
     -> RealtimeDataTotalsForAllResults
 realtimeDataTotalsForAllResults pRdtfarAddtional_ =
     RealtimeDataTotalsForAllResults
@@ -9176,7 +9176,7 @@ newtype McfDataTotalsForAllResults = McfDataTotalsForAllResults
 --
 -- * 'mdtfarAddtional'
 mcfDataTotalsForAllResults
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'mdtfarAddtional'
     -> McfDataTotalsForAllResults
 mcfDataTotalsForAllResults pMdtfarAddtional_ =
     McfDataTotalsForAllResults
@@ -9419,7 +9419,7 @@ newtype ColumnAttributes = ColumnAttributes
 --
 -- * 'caAddtional'
 columnAttributes
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'caAddtional'
     -> ColumnAttributes
 columnAttributes pCaAddtional_ =
     ColumnAttributes

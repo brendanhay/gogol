@@ -24,7 +24,7 @@
 -- is already installed then it is updated to the latest version if
 -- necessary. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseInstallsPatch@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.installs.patch@.
 module Network.Google.Resource.AndroidEnterprise.Installs.Patch
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Patch
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseInstallsPatch@ method which the
+-- | A resource alias for @androidenterprise.installs.patch@ method which the
 -- 'InstallsPatch'' request conforms to.
 type InstallsPatchResource =
      "enterprises" :>
@@ -86,11 +86,11 @@ data InstallsPatch' = InstallsPatch'
 --
 -- * 'ipDeviceId'
 installsPatch'
-    :: Text -- ^ 'enterpriseId'
-    -> Install -- ^ 'payload'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'installId'
-    -> Text -- ^ 'deviceId'
+    :: Text -- ^ 'ipEnterpriseId'
+    -> Install -- ^ 'ipPayload'
+    -> Text -- ^ 'ipUserId'
+    -> Text -- ^ 'ipInstallId'
+    -> Text -- ^ 'ipDeviceId'
     -> InstallsPatch'
 installsPatch' pIpEnterpriseId_ pIpPayload_ pIpUserId_ pIpInstallId_ pIpDeviceId_ =
     InstallsPatch'

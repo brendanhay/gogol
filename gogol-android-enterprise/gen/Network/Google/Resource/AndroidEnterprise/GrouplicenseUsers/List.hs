@@ -23,7 +23,7 @@
 -- Retrieves the IDs of the users who have been granted entitlements under
 -- the license.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseGrouplicenseUsersList@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.grouplicenseusers.list@.
 module Network.Google.Resource.AndroidEnterprise.GrouplicenseUsers.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidEnterprise.GrouplicenseUsers.List
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseGrouplicenseUsersList@ method which the
+-- | A resource alias for @androidenterprise.grouplicenseusers.list@ method which the
 -- 'GrouplicenseUsersList'' request conforms to.
 type GrouplicenseUsersListResource =
      "enterprises" :>
@@ -69,8 +69,8 @@ data GrouplicenseUsersList' = GrouplicenseUsersList'
 --
 -- * 'gulGroupLicenseId'
 grouplicenseUsersList'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'groupLicenseId'
+    :: Text -- ^ 'gulEnterpriseId'
+    -> Text -- ^ 'gulGroupLicenseId'
     -> GrouplicenseUsersList'
 grouplicenseUsersList' pGulEnterpriseId_ pGulGroupLicenseId_ =
     GrouplicenseUsersList'

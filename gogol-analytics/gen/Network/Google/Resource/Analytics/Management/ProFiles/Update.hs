@@ -22,7 +22,7 @@
 --
 -- Updates an existing view (profile).
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFilesUpdate@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.profiles.update@.
 module Network.Google.Resource.Analytics.Management.ProFiles.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Update
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFilesUpdate@ method which the
+-- | A resource alias for @analytics.management.profiles.update@ method which the
 -- 'ManagementProFilesUpdate'' request conforms to.
 type ManagementProFilesUpdateResource =
      "management" :>
@@ -77,10 +77,10 @@ data ManagementProFilesUpdate' = ManagementProFilesUpdate'
 --
 -- * 'mpfuAccountId'
 managementProFilesUpdate'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> ProFile -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mpfuWebPropertyId'
+    -> Text -- ^ 'mpfuProFileId'
+    -> ProFile -- ^ 'mpfuPayload'
+    -> Text -- ^ 'mpfuAccountId'
     -> ManagementProFilesUpdate'
 managementProFilesUpdate' pMpfuWebPropertyId_ pMpfuProFileId_ pMpfuPayload_ pMpfuAccountId_ =
     ManagementProFilesUpdate'

@@ -23,7 +23,7 @@
 -- List the metadata for the dimensions available to this AdExchange
 -- account.
 --
--- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsMetadataDimensionsList@.
+-- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @adexchangeseller.accounts.metadata.dimensions.list@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Dimensions.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Dimensions.Lis
 import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangesellerAccountsMetadataDimensionsList@ method which the
+-- | A resource alias for @adexchangeseller.accounts.metadata.dimensions.list@ method which the
 -- 'AccountsMetadataDimensionsList'' request conforms to.
 type AccountsMetadataDimensionsListResource =
      "accounts" :>
@@ -63,7 +63,7 @@ newtype AccountsMetadataDimensionsList' = AccountsMetadataDimensionsList'
 --
 -- * 'amdlAccountId'
 accountsMetadataDimensionsList'
-    :: Text -- ^ 'accountId'
+    :: Text -- ^ 'amdlAccountId'
     -> AccountsMetadataDimensionsList'
 accountsMetadataDimensionsList' pAmdlAccountId_ =
     AccountsMetadataDimensionsList'

@@ -22,7 +22,7 @@
 --
 -- Suspends an active subscription
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsSuspend@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.suspend@.
 module Network.Google.Resource.Reseller.Subscriptions.Suspend
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Reseller.Subscriptions.Suspend
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerSubscriptionsSuspend@ method which the
+-- | A resource alias for @reseller.subscriptions.suspend@ method which the
 -- 'SubscriptionsSuspend'' request conforms to.
 type SubscriptionsSuspendResource =
      "customers" :>
@@ -66,8 +66,8 @@ data SubscriptionsSuspend' = SubscriptionsSuspend'
 --
 -- * 'ssSubscriptionId'
 subscriptionsSuspend'
-    :: Text -- ^ 'customerId'
-    -> Text -- ^ 'subscriptionId'
+    :: Text -- ^ 'ssCustomerId'
+    -> Text -- ^ 'ssSubscriptionId'
     -> SubscriptionsSuspend'
 subscriptionsSuspend' pSsCustomerId_ pSsSubscriptionId_ =
     SubscriptionsSuspend'

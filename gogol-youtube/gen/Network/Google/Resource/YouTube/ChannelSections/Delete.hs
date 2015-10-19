@@ -22,7 +22,7 @@
 --
 -- Deletes a channelSection.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeChannelSectionsDelete@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.channelSections.delete@.
 module Network.Google.Resource.YouTube.ChannelSections.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTube.ChannelSections.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeChannelSectionsDelete@ method which the
+-- | A resource alias for @youtube.channelSections.delete@ method which the
 -- 'ChannelSectionsDelete'' request conforms to.
 type ChannelSectionsDeleteResource =
      "channelSections" :>
@@ -64,7 +64,7 @@ data ChannelSectionsDelete' = ChannelSectionsDelete'
 --
 -- * 'csdId'
 channelSectionsDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'csdId'
     -> ChannelSectionsDelete'
 channelSectionsDelete' pCsdId_ =
     ChannelSectionsDelete'

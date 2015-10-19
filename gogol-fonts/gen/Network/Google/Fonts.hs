@@ -26,7 +26,7 @@ module Network.Google.Fonts
 
     -- * Resources
 
-    -- ** WebfontsWebfontsList
+    -- ** webfonts.webfonts.list
     , module Network.Google.Resource.Webfonts.Webfonts.List
 
     -- * Types

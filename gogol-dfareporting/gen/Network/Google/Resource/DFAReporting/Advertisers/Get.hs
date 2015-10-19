@@ -22,7 +22,7 @@
 --
 -- Gets one advertiser by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertisersGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.advertisers.get@.
 module Network.Google.Resource.DFAReporting.Advertisers.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Advertisers.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAdvertisersGet@ method which the
+-- | A resource alias for @dfareporting.advertisers.get@ method which the
 -- 'AdvertisersGet'' request conforms to.
 type AdvertisersGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data AdvertisersGet' = AdvertisersGet'
 --
 -- * 'agId'
 advertisersGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'agProFileId'
+    -> Int64 -- ^ 'agId'
     -> AdvertisersGet'
 advertisersGet' pAgProFileId_ pAgId_ =
     AdvertisersGet'

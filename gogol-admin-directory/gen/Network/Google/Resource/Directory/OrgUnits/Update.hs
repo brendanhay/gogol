@@ -22,7 +22,7 @@
 --
 -- Update Organization Unit
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryOrgUnitsUpdate@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.orgunits.update@.
 module Network.Google.Resource.Directory.OrgUnits.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Directory.OrgUnits.Update
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryOrgUnitsUpdate@ method which the
+-- | A resource alias for @directory.orgunits.update@ method which the
 -- 'OrgUnitsUpdate'' request conforms to.
 type OrgUnitsUpdateResource =
      "customer" :>
@@ -70,9 +70,9 @@ data OrgUnitsUpdate' = OrgUnitsUpdate'
 --
 -- * 'ouuCustomerId'
 orgUnitsUpdate'
-    :: OrgUnit -- ^ 'payload'
-    -> [Text] -- ^ 'orgUnitPath'
-    -> Text -- ^ 'customerId'
+    :: OrgUnit -- ^ 'ouuPayload'
+    -> [Text] -- ^ 'ouuOrgUnitPath'
+    -> Text -- ^ 'ouuCustomerId'
     -> OrgUnitsUpdate'
 orgUnitsUpdate' pOuuPayload_ pOuuOrgUnitPath_ pOuuCustomerId_ =
     OrgUnitsUpdate'

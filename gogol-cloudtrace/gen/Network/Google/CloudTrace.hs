@@ -27,16 +27,16 @@ module Network.Google.CloudTrace
 
     -- * Resources
 
-    -- ** CloudtraceGetDiscovery
+    -- ** cloudtrace.getDiscovery
     , module Network.Google.Resource.CloudTrace.GetDiscovery
 
-    -- ** CloudtraceProjectsPatchTraces
+    -- ** cloudtrace.projects.patchTraces
     , module Network.Google.Resource.CloudTrace.Projects.PatchTraces
 
-    -- ** CloudtraceProjectsTracesGet
+    -- ** cloudtrace.projects.traces.get
     , module Network.Google.Resource.CloudTrace.Projects.Traces.Get
 
-    -- ** CloudtraceProjectsTracesList
+    -- ** cloudtrace.projects.traces.list
     , module Network.Google.Resource.CloudTrace.Projects.Traces.List
 
     -- * Types

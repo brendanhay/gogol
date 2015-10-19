@@ -23,7 +23,7 @@
 -- Retrieves the list of operation resources contained within the specified
 -- zone.
 --
--- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerZoneOperationsList@.
+-- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @autoscaler.zoneOperations.list@.
 module Network.Google.Resource.Autoscaler.ZoneOperations.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Autoscaler.ZoneOperations.List
 import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AutoscalerZoneOperationsList@ method which the
+-- | A resource alias for @autoscaler.zoneOperations.list@ method which the
 -- 'ZoneOperationsList'' request conforms to.
 type ZoneOperationsListResource =
      Capture "project" Text :>
@@ -82,8 +82,8 @@ data ZoneOperationsList' = ZoneOperationsList'
 --
 -- * 'zolMaxResults'
 zoneOperationsList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'zolProject'
+    -> Text -- ^ 'zolZone'
     -> ZoneOperationsList'
 zoneOperationsList' pZolProject_ pZolZone_ =
     ZoneOperationsList'

@@ -24,7 +24,7 @@
 -- For example, you can retrieve all playlists that the authenticated user
 -- owns, or you can retrieve one or more playlists by their unique IDs.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlayListsList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.playlists.list@.
 module Network.Google.Resource.YouTube.PlayLists.List
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.YouTube.PlayLists.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubePlayListsList@ method which the
+-- | A resource alias for @youtube.playlists.list@ method which the
 -- 'PlayListsList'' request conforms to.
 type PlayListsListResource =
      "playlists" :>
@@ -104,7 +104,7 @@ data PlayListsList' = PlayListsList'
 --
 -- * 'pllMaxResults'
 playListsList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'pllPart'
     -> PlayListsList'
 playListsList' pPllPart_ =
     PlayListsList'

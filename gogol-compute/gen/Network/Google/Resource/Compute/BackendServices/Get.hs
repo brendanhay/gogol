@@ -22,7 +22,7 @@
 --
 -- Returns the specified BackendService resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeBackendServicesGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.get@.
 module Network.Google.Resource.Compute.BackendServices.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.BackendServices.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeBackendServicesGet@ method which the
+-- | A resource alias for @compute.backendServices.get@ method which the
 -- 'BackendServicesGet'' request conforms to.
 type BackendServicesGetResource =
      Capture "project" Text :>
@@ -66,8 +66,8 @@ data BackendServicesGet' = BackendServicesGet'
 --
 -- * 'bsgBackendService'
 backendServicesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'backendService'
+    :: Text -- ^ 'bsgProject'
+    -> Text -- ^ 'bsgBackendService'
     -> BackendServicesGet'
 backendServicesGet' pBsgProject_ pBsgBackendService_ =
     BackendServicesGet'

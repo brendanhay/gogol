@@ -22,7 +22,7 @@
 --
 -- Lists webProperty-user links for a given web property.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyUserLinksList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webpropertyUserLinks.list@.
 module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertyUserLinksList@ method which the
+-- | A resource alias for @analytics.management.webpropertyUserLinks.list@ method which the
 -- 'ManagementWebPropertyUserLinksList'' request conforms to.
 type ManagementWebPropertyUserLinksListResource =
      "management" :>
@@ -78,8 +78,8 @@ data ManagementWebPropertyUserLinksList' = ManagementWebPropertyUserLinksList'
 --
 -- * 'mwpullMaxResults'
 managementWebPropertyUserLinksList'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mwpullWebPropertyId'
+    -> Text -- ^ 'mwpullAccountId'
     -> ManagementWebPropertyUserLinksList'
 managementWebPropertyUserLinksList' pMwpullWebPropertyId_ pMwpullAccountId_ =
     ManagementWebPropertyUserLinksList'

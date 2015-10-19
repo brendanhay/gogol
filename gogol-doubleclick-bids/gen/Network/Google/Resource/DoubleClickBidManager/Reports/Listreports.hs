@@ -22,7 +22,7 @@
 --
 -- Retrieves stored reports.
 --
--- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleClickBidManagerReportsListreports@.
+-- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.reports.listreports@.
 module Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
 import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClickBidManagerReportsListreports@ method which the
+-- | A resource alias for @doubleclickbidmanager.reports.listreports@ method which the
 -- 'ReportsListreports'' request conforms to.
 type ReportsListreportsResource =
      "queries" :>
@@ -61,7 +61,7 @@ newtype ReportsListreports' = ReportsListreports'
 --
 -- * 'rlQueryId'
 reportsListreports'
-    :: Int64 -- ^ 'queryId'
+    :: Int64 -- ^ 'rlQueryId'
     -> ReportsListreports'
 reportsListreports' pRlQueryId_ =
     ReportsListreports'

@@ -22,7 +22,7 @@
 --
 -- Update an existing experiment. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementExperimentsPatch@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.experiments.patch@.
 module Network.Google.Resource.Analytics.Management.Experiments.Patch
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.Patch
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementExperimentsPatch@ method which the
+-- | A resource alias for @analytics.management.experiments.patch@ method which the
 -- 'ManagementExperimentsPatch'' request conforms to.
 type ManagementExperimentsPatchResource =
      "management" :>
@@ -84,11 +84,11 @@ data ManagementExperimentsPatch' = ManagementExperimentsPatch'
 --
 -- * 'mepExperimentId'
 managementExperimentsPatch'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Experiment -- ^ 'payload'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'experimentId'
+    :: Text -- ^ 'mepWebPropertyId'
+    -> Text -- ^ 'mepProFileId'
+    -> Experiment -- ^ 'mepPayload'
+    -> Text -- ^ 'mepAccountId'
+    -> Text -- ^ 'mepExperimentId'
     -> ManagementExperimentsPatch'
 managementExperimentsPatch' pMepWebPropertyId_ pMepProFileId_ pMepPayload_ pMepAccountId_ pMepExperimentId_ =
     ManagementExperimentsPatch'

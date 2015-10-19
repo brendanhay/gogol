@@ -22,7 +22,7 @@
 --
 -- Returns the specified firewall resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeFirewallsGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.firewalls.get@.
 module Network.Google.Resource.Compute.Firewalls.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.Firewalls.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeFirewallsGet@ method which the
+-- | A resource alias for @compute.firewalls.get@ method which the
 -- 'FirewallsGet'' request conforms to.
 type FirewallsGetResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data FirewallsGet' = FirewallsGet'
 --
 -- * 'fgFirewall'
 firewallsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'firewall'
+    :: Text -- ^ 'fgProject'
+    -> Text -- ^ 'fgFirewall'
     -> FirewallsGet'
 firewallsGet' pFgProject_ pFgFirewall_ =
     FirewallsGet'

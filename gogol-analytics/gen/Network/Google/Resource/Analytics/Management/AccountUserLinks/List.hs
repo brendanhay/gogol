@@ -22,7 +22,7 @@
 --
 -- Lists account-user links for a given account.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountUserLinksList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.accountUserLinks.list@.
 module Network.Google.Resource.Analytics.Management.AccountUserLinks.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementAccountUserLinksList@ method which the
+-- | A resource alias for @analytics.management.accountUserLinks.list@ method which the
 -- 'ManagementAccountUserLinksList'' request conforms to.
 type ManagementAccountUserLinksListResource =
      "management" :>
@@ -72,7 +72,7 @@ data ManagementAccountUserLinksList' = ManagementAccountUserLinksList'
 --
 -- * 'maullMaxResults'
 managementAccountUserLinksList'
-    :: Text -- ^ 'accountId'
+    :: Text -- ^ 'maullAccountId'
     -> ManagementAccountUserLinksList'
 managementAccountUserLinksList' pMaullAccountId_ =
     ManagementAccountUserLinksList'

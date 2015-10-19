@@ -23,7 +23,7 @@
 -- Get a list of quests for your application and the currently
 -- authenticated player.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesQuestsList@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.quests.list@.
 module Network.Google.Resource.Games.Quests.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Games.Quests.List
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesQuestsList@ method which the
+-- | A resource alias for @games.quests.list@ method which the
 -- 'QuestsList'' request conforms to.
 type QuestsListResource =
      "players" :>
@@ -78,7 +78,7 @@ data QuestsList' = QuestsList'
 --
 -- * 'qlMaxResults'
 questsList'
-    :: Text -- ^ 'playerId'
+    :: Text -- ^ 'qlPlayerId'
     -> QuestsList'
 questsList' pQlPlayerId_ =
     QuestsList'

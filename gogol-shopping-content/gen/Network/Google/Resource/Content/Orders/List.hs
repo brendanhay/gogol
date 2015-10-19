@@ -22,7 +22,7 @@
 --
 -- Lists the orders in your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersList@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.list@.
 module Network.Google.Resource.Content.Orders.List
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Content.Orders.List
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersList@ method which the
+-- | A resource alias for @content.orders.list@ method which the
 -- 'OrdersList'' request conforms to.
 type OrdersListResource =
      Capture "merchantId" Word64 :>
@@ -95,7 +95,7 @@ data OrdersList' = OrdersList'
 --
 -- * 'olMaxResults'
 ordersList'
-    :: Word64 -- ^ 'merchantId'
+    :: Word64 -- ^ 'olMerchantId'
     -> OrdersList'
 ordersList' pOlMerchantId_ =
     OrdersList'

@@ -22,7 +22,7 @@
 --
 -- RPC to update the new TCP stats.
 --
--- /See:/ < Google Cloud Network Performance Monitoring API Reference> for @CloudlatencytestStatscollectionUpdateaggregatedstats@.
+-- /See:/ < Google Cloud Network Performance Monitoring API Reference> for @cloudlatencytest.statscollection.updateaggregatedstats@.
 module Network.Google.Resource.Cloudlatencytest.Statscollection.Updateaggregatedstats
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Cloudlatencytest.Statscollection.Updateaggregated
 import           Network.Google.LatencyTest.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudlatencytestStatscollectionUpdateaggregatedstats@ method which the
+-- | A resource alias for @cloudlatencytest.statscollection.updateaggregatedstats@ method which the
 -- 'StatscollectionUpdateaggregatedstats'' request conforms to.
 type StatscollectionUpdateaggregatedstatsResource =
      "updateaggregatedstats" :>
@@ -60,7 +60,7 @@ newtype StatscollectionUpdateaggregatedstats' = StatscollectionUpdateaggregateds
 --
 -- * 'suPayload'
 statscollectionUpdateaggregatedstats'
-    :: AggregatedStats -- ^ 'payload'
+    :: AggregatedStats -- ^ 'suPayload'
     -> StatscollectionUpdateaggregatedstats'
 statscollectionUpdateaggregatedstats' pSuPayload_ =
     StatscollectionUpdateaggregatedstats'

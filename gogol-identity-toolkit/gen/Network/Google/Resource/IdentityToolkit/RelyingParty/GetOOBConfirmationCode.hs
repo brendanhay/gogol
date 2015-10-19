@@ -22,7 +22,7 @@
 --
 -- Get a code for user action confirmation.
 --
--- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyGetOOBConfirmationCode@.
+-- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.getOobConfirmationCode@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.GetOOBConfirmationCode
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.GetOOBConfirmationCo
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyGetOOBConfirmationCode@ method which the
+-- | A resource alias for @identitytoolkit.relyingparty.getOobConfirmationCode@ method which the
 -- 'RelyingPartyGetOOBConfirmationCode'' request conforms to.
 type RelyingPartyGetOOBConfirmationCodeResource =
      "getOobConfirmationCode" :>
@@ -60,7 +60,7 @@ newtype RelyingPartyGetOOBConfirmationCode' = RelyingPartyGetOOBConfirmationCode
 --
 -- * 'rpgoobccPayload'
 relyingPartyGetOOBConfirmationCode'
-    :: RelyingParty -- ^ 'payload'
+    :: RelyingParty -- ^ 'rpgoobccPayload'
     -> RelyingPartyGetOOBConfirmationCode'
 relyingPartyGetOOBConfirmationCode' pRpgoobccPayload_ =
     RelyingPartyGetOOBConfirmationCode'

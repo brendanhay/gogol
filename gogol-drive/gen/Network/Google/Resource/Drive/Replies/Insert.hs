@@ -22,7 +22,7 @@
 --
 -- Creates a new reply to the given comment.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRepliesInsert@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.replies.insert@.
 module Network.Google.Resource.Drive.Replies.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Drive.Replies.Insert
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRepliesInsert@ method which the
+-- | A resource alias for @drive.replies.insert@ method which the
 -- 'RepliesInsert'' request conforms to.
 type RepliesInsertResource =
      "files" :>
@@ -72,9 +72,9 @@ data RepliesInsert' = RepliesInsert'
 --
 -- * 'riCommentId'
 repliesInsert'
-    :: CommentReply -- ^ 'payload'
-    -> Text -- ^ 'fileId'
-    -> Text -- ^ 'commentId'
+    :: CommentReply -- ^ 'riPayload'
+    -> Text -- ^ 'riFileId'
+    -> Text -- ^ 'riCommentId'
     -> RepliesInsert'
 repliesInsert' pRiPayload_ pRiFileId_ pRiCommentId_ =
     RepliesInsert'

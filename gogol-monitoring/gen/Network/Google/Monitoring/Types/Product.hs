@@ -316,7 +316,7 @@ newtype WriteTimeseriesRequestCommonLabels = WriteTimeseriesRequestCommonLabels
 --
 -- * 'wtrclAddtional'
 writeTimeseriesRequestCommonLabels
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'wtrclAddtional'
     -> WriteTimeseriesRequestCommonLabels
 writeTimeseriesRequestCommonLabels pWtrclAddtional_ =
     WriteTimeseriesRequestCommonLabels
@@ -561,7 +561,7 @@ newtype TimeseriesDescriptorLabels = TimeseriesDescriptorLabels
 --
 -- * 'tdlAddtional'
 timeseriesDescriptorLabels
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'tdlAddtional'
     -> TimeseriesDescriptorLabels
 timeseriesDescriptorLabels pTdlAddtional_ =
     TimeseriesDescriptorLabels

@@ -22,7 +22,7 @@
 --
 -- Returns the account info.
 --
--- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyGetAccountInfo@.
+-- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.getAccountInfo@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.GetAccountInfo
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.GetAccountInfo
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyGetAccountInfo@ method which the
+-- | A resource alias for @identitytoolkit.relyingparty.getAccountInfo@ method which the
 -- 'RelyingPartyGetAccountInfo'' request conforms to.
 type RelyingPartyGetAccountInfoResource =
      "getAccountInfo" :>
@@ -61,7 +61,7 @@ newtype RelyingPartyGetAccountInfo' = RelyingPartyGetAccountInfo'
 --
 -- * 'rpgaiPayload'
 relyingPartyGetAccountInfo'
-    :: IdentitytoolkitRelyingPartyGetAccountInfoRequest -- ^ 'payload'
+    :: IdentitytoolkitRelyingPartyGetAccountInfoRequest -- ^ 'rpgaiPayload'
     -> RelyingPartyGetAccountInfo'
 relyingPartyGetAccountInfo' pRpgaiPayload_ =
     RelyingPartyGetAccountInfo'

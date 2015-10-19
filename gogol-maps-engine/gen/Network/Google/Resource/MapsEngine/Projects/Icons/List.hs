@@ -22,7 +22,7 @@
 --
 -- Return all icons in the current project
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineProjectsIconsList@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.projects.icons.list@.
 module Network.Google.Resource.MapsEngine.Projects.Icons.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.MapsEngine.Projects.Icons.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineProjectsIconsList@ method which the
+-- | A resource alias for @mapsengine.projects.icons.list@ method which the
 -- 'ProjectsIconsList'' request conforms to.
 type ProjectsIconsListResource =
      "projects" :>
@@ -71,7 +71,7 @@ data ProjectsIconsList' = ProjectsIconsList'
 --
 -- * 'pilMaxResults'
 projectsIconsList'
-    :: Text -- ^ 'projectId'
+    :: Text -- ^ 'pilProjectId'
     -> ProjectsIconsList'
 projectsIconsList' pPilProjectId_ =
     ProjectsIconsList'

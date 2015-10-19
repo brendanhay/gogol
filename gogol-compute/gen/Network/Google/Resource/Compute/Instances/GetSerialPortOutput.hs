@@ -22,7 +22,7 @@
 --
 -- Returns the specified instance\'s serial port output.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesGetSerialPortOutput@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.getSerialPortOutput@.
 module Network.Google.Resource.Compute.Instances.GetSerialPortOutput
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Instances.GetSerialPortOutput
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesGetSerialPortOutput@ method which the
+-- | A resource alias for @compute.instances.getSerialPortOutput@ method which the
 -- 'InstancesGetSerialPortOutput'' request conforms to.
 type InstancesGetSerialPortOutputResource =
      Capture "project" Text :>
@@ -77,9 +77,9 @@ data InstancesGetSerialPortOutput' = InstancesGetSerialPortOutput'
 --
 -- * 'igspoInstance'
 instancesGetSerialPortOutput'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'igspoProject'
+    -> Text -- ^ 'igspoZone'
+    -> Text -- ^ 'igspoInstance'
     -> InstancesGetSerialPortOutput'
 instancesGetSerialPortOutput' pIgspoProject_ pIgspoZone_ pIgspoInstance_ =
     InstancesGetSerialPortOutput'

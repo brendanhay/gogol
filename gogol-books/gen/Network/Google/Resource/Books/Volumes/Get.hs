@@ -22,7 +22,7 @@
 --
 -- Gets volume information for a single volume.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesGet@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.volumes.get@.
 module Network.Google.Resource.Books.Volumes.Get
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Books.Volumes.Get
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksVolumesGet@ method which the
+-- | A resource alias for @books.volumes.get@ method which the
 -- 'VolumesGet'' request conforms to.
 type VolumesGetResource =
      "volumes" :>
@@ -84,7 +84,7 @@ data VolumesGet' = VolumesGet'
 --
 -- * 'vgUserLibraryConsistentRead'
 volumesGet'
-    :: Text -- ^ 'volumeId'
+    :: Text -- ^ 'vgVolumeId'
     -> VolumesGet'
 volumesGet' pVgVolumeId_ =
     VolumesGet'

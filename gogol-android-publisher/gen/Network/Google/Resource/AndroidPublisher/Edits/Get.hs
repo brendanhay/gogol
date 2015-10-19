@@ -23,7 +23,7 @@
 -- Returns information about the edit specified. Calls will fail if the
 -- edit is no long active (e.g. has been deleted, superseded or expired).
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsGet@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.get@.
 module Network.Google.Resource.AndroidPublisher.Edits.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Get
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsGet@ method which the
+-- | A resource alias for @androidpublisher.edits.get@ method which the
 -- 'EditsGet'' request conforms to.
 type EditsGetResource =
      Capture "packageName" Text :>
@@ -66,8 +66,8 @@ data EditsGet' = EditsGet'
 --
 -- * 'egEditId'
 editsGet'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'egPackageName'
+    -> Text -- ^ 'egEditId'
     -> EditsGet'
 editsGet' pEgPackageName_ pEgEditId_ =
     EditsGet'

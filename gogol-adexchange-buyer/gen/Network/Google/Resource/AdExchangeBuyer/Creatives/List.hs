@@ -23,7 +23,7 @@
 -- Retrieves a list of the authenticated user\'s active creatives. A
 -- creative will be available 30-40 minutes after submission.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerCreativesList@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.creatives.list@.
 module Network.Google.Resource.AdExchangeBuyer.Creatives.List
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.AdExchangeBuyer.Creatives.List
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerCreativesList@ method which the
+-- | A resource alias for @adexchangebuyer.creatives.list@ method which the
 -- 'CreativesList'' request conforms to.
 type CreativesListResource =
      "creatives" :>

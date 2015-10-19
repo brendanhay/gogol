@@ -26,7 +26,7 @@
 -- You cannot ask for \'ALL\' leaderboards and \'ALL\' timeSpans in the
 -- same request; only one parameter may be set to \'ALL\'.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesScoresGet@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.scores.get@.
 module Network.Google.Resource.Games.Scores.Get
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Games.Scores.Get
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesScoresGet@ method which the
+-- | A resource alias for @games.scores.get@ method which the
 -- 'ScoresGet'' request conforms to.
 type ScoresGetResource =
      "players" :>
@@ -101,9 +101,9 @@ data ScoresGet' = ScoresGet'
 --
 -- * 'sgMaxResults'
 scoresGet'
-    :: ScoresGetTimeSpan -- ^ 'timeSpan'
-    -> Text -- ^ 'leaderboardId'
-    -> Text -- ^ 'playerId'
+    :: ScoresGetTimeSpan -- ^ 'sgTimeSpan'
+    -> Text -- ^ 'sgLeaderboardId'
+    -> Text -- ^ 'sgPlayerId'
     -> ScoresGet'
 scoresGet' pSgTimeSpan_ pSgLeaderboardId_ pSgPlayerId_ =
     ScoresGet'

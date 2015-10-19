@@ -22,7 +22,7 @@
 --
 -- Returns the specified task.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTasksGet@.
+-- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasks.get@.
 module Network.Google.Resource.Tasks.Tasks.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Tasks.Tasks.Get
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTasksGet@ method which the
+-- | A resource alias for @tasks.tasks.get@ method which the
 -- 'TasksGet'' request conforms to.
 type TasksGetResource =
      "lists" :>
@@ -65,8 +65,8 @@ data TasksGet' = TasksGet'
 --
 -- * 'tgTask'
 tasksGet'
-    :: Text -- ^ 'tasklist'
-    -> Text -- ^ 'task'
+    :: Text -- ^ 'tgTaskList'
+    -> Text -- ^ 'tgTask'
     -> TasksGet'
 tasksGet' pTgTaskList_ pTgTask_ =
     TasksGet'

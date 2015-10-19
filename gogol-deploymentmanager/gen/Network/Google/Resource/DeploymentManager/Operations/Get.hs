@@ -22,7 +22,7 @@
 --
 -- Gets information about a specific operation.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerOperationsGet@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @deploymentmanager.operations.get@.
 module Network.Google.Resource.DeploymentManager.Operations.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DeploymentManager.Operations.Get
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerOperationsGet@ method which the
+-- | A resource alias for @deploymentmanager.operations.get@ method which the
 -- 'OperationsGet'' request conforms to.
 type OperationsGetResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data OperationsGet' = OperationsGet'
 --
 -- * 'ogOperation'
 operationsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'operation'
+    :: Text -- ^ 'ogProject'
+    -> Text -- ^ 'ogOperation'
     -> OperationsGet'
 operationsGet' pOgProject_ pOgOperation_ =
     OperationsGet'

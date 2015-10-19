@@ -25,7 +25,7 @@
 -- delete any snapshots previously made from the disk. You must separately
 -- delete snapshots.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDisksDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.disks.delete@.
 module Network.Google.Resource.Compute.Disks.Delete
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.Disks.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeDisksDelete@ method which the
+-- | A resource alias for @compute.disks.delete@ method which the
 -- 'DisksDelete'' request conforms to.
 type DisksDeleteResource =
      Capture "project" Text :>
@@ -76,9 +76,9 @@ data DisksDelete' = DisksDelete'
 --
 -- * 'ddZone'
 disksDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'disk'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'ddProject'
+    -> Text -- ^ 'ddDisk'
+    -> Text -- ^ 'ddZone'
     -> DisksDelete'
 disksDelete' pDdProject_ pDdDisk_ pDdZone_ =
     DisksDelete'

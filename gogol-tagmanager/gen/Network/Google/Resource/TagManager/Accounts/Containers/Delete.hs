@@ -22,7 +22,7 @@
 --
 -- Deletes a Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersDelete@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.delete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Delete
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersDelete@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.delete@ method which the
 -- 'AccountsContainersDelete'' request conforms to.
 type AccountsContainersDeleteResource =
      "accounts" :>
@@ -65,8 +65,8 @@ data AccountsContainersDelete' = AccountsContainersDelete'
 --
 -- * 'acdAccountId'
 accountsContainersDelete'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acdContainerId'
+    -> Text -- ^ 'acdAccountId'
     -> AccountsContainersDelete'
 accountsContainersDelete' pAcdContainerId_ pAcdAccountId_ =
     AccountsContainersDelete'

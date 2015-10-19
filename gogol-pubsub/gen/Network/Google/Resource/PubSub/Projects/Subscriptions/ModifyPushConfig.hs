@@ -27,7 +27,7 @@
 -- continuously through the call regardless of changes to the
 -- \`PushConfig\`.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsModifyPushConfig@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.modifyPushConfig@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsSubscriptionsModifyPushConfig@ method which the
+-- | A resource alias for @pubsub.projects.subscriptions.modifyPushConfig@ method which the
 -- 'ProjectsSubscriptionsModifyPushConfig'' request conforms to.
 type ProjectsSubscriptionsModifyPushConfigResource =
      "v1" :>
@@ -110,8 +110,8 @@ data ProjectsSubscriptionsModifyPushConfig' = ProjectsSubscriptionsModifyPushCon
 --
 -- * 'psmpcCallback'
 projectsSubscriptionsModifyPushConfig'
-    :: ModifyPushConfigRequest -- ^ 'payload'
-    -> Text -- ^ 'subscription'
+    :: ModifyPushConfigRequest -- ^ 'psmpcPayload'
+    -> Text -- ^ 'psmpcSubscription'
     -> ProjectsSubscriptionsModifyPushConfig'
 projectsSubscriptionsModifyPushConfig' pPsmpcPayload_ pPsmpcSubscription_ =
     ProjectsSubscriptionsModifyPushConfig'

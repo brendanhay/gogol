@@ -22,7 +22,7 @@
 --
 -- Generates a tag for a floodlight activity.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivitiesGeneratetag@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightActivities.generatetag@.
 module Network.Google.Resource.DFAReporting.FloodlightActivities.Generatetag
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Generatetag
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFloodlightActivitiesGeneratetag@ method which the
+-- | A resource alias for @dfareporting.floodlightActivities.generatetag@ method which the
 -- 'FloodlightActivitiesGeneratetag'' request conforms to.
 type FloodlightActivitiesGeneratetagResource =
      "userprofiles" :>
@@ -67,7 +67,7 @@ data FloodlightActivitiesGeneratetag' = FloodlightActivitiesGeneratetag'
 --
 -- * 'fagProFileId'
 floodlightActivitiesGeneratetag'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'fagProFileId'
     -> FloodlightActivitiesGeneratetag'
 floodlightActivitiesGeneratetag' pFagProFileId_ =
     FloodlightActivitiesGeneratetag'

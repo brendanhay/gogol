@@ -22,7 +22,7 @@
 --
 -- Deletes a Merchant Center sub-account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountsDelete@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounts.delete@.
 module Network.Google.Resource.Content.Accounts.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Accounts.Delete
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccountsDelete@ method which the
+-- | A resource alias for @content.accounts.delete@ method which the
 -- 'AccountsDelete'' request conforms to.
 type AccountsDeleteResource =
      Capture "merchantId" Word64 :>
@@ -69,8 +69,8 @@ data AccountsDelete' = AccountsDelete'
 --
 -- * 'adDryRun'
 accountsDelete'
-    :: Word64 -- ^ 'merchantId'
-    -> Word64 -- ^ 'accountId'
+    :: Word64 -- ^ 'adMerchantId'
+    -> Word64 -- ^ 'adAccountId'
     -> AccountsDelete'
 accountsDelete' pAdMerchantId_ pAdAccountId_ =
     AccountsDelete'

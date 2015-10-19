@@ -22,7 +22,7 @@
 --
 -- Returns an experiment to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementExperimentsGet@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.experiments.get@.
 module Network.Google.Resource.Analytics.Management.Experiments.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementExperimentsGet@ method which the
+-- | A resource alias for @analytics.management.experiments.get@ method which the
 -- 'ManagementExperimentsGet'' request conforms to.
 type ManagementExperimentsGetResource =
      "management" :>
@@ -78,10 +78,10 @@ data ManagementExperimentsGet' = ManagementExperimentsGet'
 --
 -- * 'megExperimentId'
 managementExperimentsGet'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'experimentId'
+    :: Text -- ^ 'megWebPropertyId'
+    -> Text -- ^ 'megProFileId'
+    -> Text -- ^ 'megAccountId'
+    -> Text -- ^ 'megExperimentId'
     -> ManagementExperimentsGet'
 managementExperimentsGet' pMegWebPropertyId_ pMegProFileId_ pMegAccountId_ pMegExperimentId_ =
     ManagementExperimentsGet'

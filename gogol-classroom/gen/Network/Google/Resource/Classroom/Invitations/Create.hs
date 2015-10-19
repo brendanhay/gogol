@@ -30,7 +30,7 @@
 -- greater permissions. * \`ALREADY_EXISTS\` if an invitation for the
 -- specified user and course already exists.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomInvitationsCreate@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.invitations.create@.
 module Network.Google.Resource.Classroom.Invitations.Create
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ module Network.Google.Resource.Classroom.Invitations.Create
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomInvitationsCreate@ method which the
+-- | A resource alias for @classroom.invitations.create@ method which the
 -- 'InvitationsCreate'' request conforms to.
 type InvitationsCreateResource =
      "v1" :>
@@ -111,7 +111,7 @@ data InvitationsCreate' = InvitationsCreate'
 --
 -- * 'icCallback'
 invitationsCreate'
-    :: Invitation -- ^ 'payload'
+    :: Invitation -- ^ 'icPayload'
     -> InvitationsCreate'
 invitationsCreate' pIcPayload_ =
     InvitationsCreate'

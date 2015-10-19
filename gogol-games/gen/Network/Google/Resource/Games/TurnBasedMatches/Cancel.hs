@@ -22,7 +22,7 @@
 --
 -- Cancel a turn-based match.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesCancel@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.turnBasedMatches.cancel@.
 module Network.Google.Resource.Games.TurnBasedMatches.Cancel
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.Cancel
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesTurnBasedMatchesCancel@ method which the
+-- | A resource alias for @games.turnBasedMatches.cancel@ method which the
 -- 'TurnBasedMatchesCancel'' request conforms to.
 type TurnBasedMatchesCancelResource =
      "turnbasedmatches" :>
@@ -60,7 +60,7 @@ newtype TurnBasedMatchesCancel' = TurnBasedMatchesCancel'
 --
 -- * 'tbmcMatchId'
 turnBasedMatchesCancel'
-    :: Text -- ^ 'matchId'
+    :: Text -- ^ 'tbmcMatchId'
     -> TurnBasedMatchesCancel'
 turnBasedMatchesCancel' pTbmcMatchId_ =
     TurnBasedMatchesCancel'

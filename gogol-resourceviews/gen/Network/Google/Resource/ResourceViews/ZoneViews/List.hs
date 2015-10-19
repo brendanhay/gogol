@@ -22,7 +22,7 @@
 --
 -- List resource views.
 --
--- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsList@.
+-- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @resourceviews.zoneViews.list@.
 module Network.Google.Resource.ResourceViews.ZoneViews.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.ResourceViews.ZoneViews.List
 import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
--- | A resource alias for @ResourceviewsZoneViewsList@ method which the
+-- | A resource alias for @resourceviews.zoneViews.list@ method which the
 -- 'ZoneViewsList'' request conforms to.
 type ZoneViewsListResource =
      Capture "project" Text :>
@@ -75,8 +75,8 @@ data ZoneViewsList' = ZoneViewsList'
 --
 -- * 'zvlMaxResults'
 zoneViewsList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'zvlProject'
+    -> Text -- ^ 'zvlZone'
     -> ZoneViewsList'
 zoneViewsList' pZvlProject_ pZvlZone_ =
     ZoneViewsList'

@@ -22,7 +22,7 @@
 --
 -- Lists operations that match the specified filter in the request.
 --
--- /See:/ < Genomics API Reference> for @GenomicsOperationsList@.
+-- /See:/ < Genomics API Reference> for @genomics.operations.list@.
 module Network.Google.Resource.Genomics.Operations.List
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Genomics.Operations.List
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsOperationsList@ method which the
+-- | A resource alias for @genomics.operations.list@ method which the
 -- 'OperationsList'' request conforms to.
 type OperationsListResource =
      "v1" :>
@@ -110,7 +110,7 @@ data OperationsList' = OperationsList'
 --
 -- * 'olCallback'
 operationsList'
-    :: Text -- ^ 'name'
+    :: Text -- ^ 'olName'
     -> OperationsList'
 operationsList' pOlName_ =
     OperationsList'

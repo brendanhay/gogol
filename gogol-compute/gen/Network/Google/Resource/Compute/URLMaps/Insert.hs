@@ -23,7 +23,7 @@
 -- Creates a UrlMap resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeURLMapsInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.urlMaps.insert@.
 module Network.Google.Resource.Compute.URLMaps.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.URLMaps.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeURLMapsInsert@ method which the
+-- | A resource alias for @compute.urlMaps.insert@ method which the
 -- 'URLMapsInsert'' request conforms to.
 type URLMapsInsertResource =
      Capture "project" Text :>
@@ -67,8 +67,8 @@ data URLMapsInsert' = URLMapsInsert'
 --
 -- * 'umiPayload'
 urlMapsInsert'
-    :: Text -- ^ 'project'
-    -> URLMap -- ^ 'payload'
+    :: Text -- ^ 'umiProject'
+    -> URLMap -- ^ 'umiPayload'
     -> URLMapsInsert'
 urlMapsInsert' pUmiProject_ pUmiPayload_ =
     URLMapsInsert'

@@ -24,7 +24,7 @@
 -- their work account in the Android Setup Wizard. Revokes any previously
 -- generated token.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseUsersGenerateToken@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.users.generateToken@.
 module Network.Google.Resource.AndroidEnterprise.Users.GenerateToken
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AndroidEnterprise.Users.GenerateToken
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseUsersGenerateToken@ method which the
+-- | A resource alias for @androidenterprise.users.generateToken@ method which the
 -- 'UsersGenerateToken'' request conforms to.
 type UsersGenerateTokenResource =
      "enterprises" :>
@@ -70,8 +70,8 @@ data UsersGenerateToken' = UsersGenerateToken'
 --
 -- * 'ugtUserId'
 usersGenerateToken'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'ugtEnterpriseId'
+    -> Text -- ^ 'ugtUserId'
     -> UsersGenerateToken'
 usersGenerateToken' pUgtEnterpriseId_ pUgtUserId_ =
     UsersGenerateToken'

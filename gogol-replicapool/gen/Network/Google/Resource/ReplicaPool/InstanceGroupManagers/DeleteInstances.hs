@@ -25,7 +25,7 @@
 -- member. The targetSize of the instance group manager is reduced by the
 -- number of instances deleted.
 --
--- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersDeleteInstances@.
+-- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @replicapool.instanceGroupManagers.deleteInstances@.
 module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.DeleteInstances
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.DeleteInstances
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
--- | A resource alias for @ReplicapoolInstanceGroupManagersDeleteInstances@ method which the
+-- | A resource alias for @replicapool.instanceGroupManagers.deleteInstances@ method which the
 -- 'InstanceGroupManagersDeleteInstances'' request conforms to.
 type InstanceGroupManagersDeleteInstancesResource =
      Capture "project" Text :>
@@ -84,10 +84,10 @@ data InstanceGroupManagersDeleteInstances' = InstanceGroupManagersDeleteInstance
 --
 -- * 'igmdiPayload'
 instanceGroupManagersDeleteInstances'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instanceGroupManager'
-    -> Text -- ^ 'zone'
-    -> InstanceGroupManagersDeleteInstancesRequest -- ^ 'payload'
+    :: Text -- ^ 'igmdiProject'
+    -> Text -- ^ 'igmdiInstanceGroupManager'
+    -> Text -- ^ 'igmdiZone'
+    -> InstanceGroupManagersDeleteInstancesRequest -- ^ 'igmdiPayload'
     -> InstanceGroupManagersDeleteInstances'
 instanceGroupManagersDeleteInstances' pIgmdiProject_ pIgmdiInstanceGroupManager_ pIgmdiZone_ pIgmdiPayload_ =
     InstanceGroupManagersDeleteInstances'

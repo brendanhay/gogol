@@ -22,7 +22,7 @@
 --
 -- Delete a table.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesDelete@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.tables.delete@.
 module Network.Google.Resource.MapsEngine.Tables.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.Tables.Delete
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesDelete@ method which the
+-- | A resource alias for @mapsengine.tables.delete@ method which the
 -- 'TablesDelete'' request conforms to.
 type TablesDeleteResource =
      "tables" :>
@@ -59,7 +59,7 @@ newtype TablesDelete' = TablesDelete'
 --
 -- * 'tdId'
 tablesDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'tdId'
     -> TablesDelete'
 tablesDelete' pTdId_ =
     TablesDelete'

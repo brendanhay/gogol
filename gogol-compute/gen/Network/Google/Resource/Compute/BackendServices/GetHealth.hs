@@ -22,7 +22,7 @@
 --
 -- Gets the most recent health check results for this BackendService.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeBackendServicesGetHealth@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.getHealth@.
 module Network.Google.Resource.Compute.BackendServices.GetHealth
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.BackendServices.GetHealth
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeBackendServicesGetHealth@ method which the
+-- | A resource alias for @compute.backendServices.getHealth@ method which the
 -- 'BackendServicesGetHealth'' request conforms to.
 type BackendServicesGetHealthResource =
      Capture "project" Text :>
@@ -72,9 +72,9 @@ data BackendServicesGetHealth' = BackendServicesGetHealth'
 --
 -- * 'bsghBackendService'
 backendServicesGetHealth'
-    :: Text -- ^ 'project'
-    -> ResourceGroupReference -- ^ 'payload'
-    -> Text -- ^ 'backendService'
+    :: Text -- ^ 'bsghProject'
+    -> ResourceGroupReference -- ^ 'bsghPayload'
+    -> Text -- ^ 'bsghBackendService'
     -> BackendServicesGetHealth'
 backendServicesGetHealth' pBsghProject_ pBsghPayload_ pBsghBackendService_ =
     BackendServicesGetHealth'

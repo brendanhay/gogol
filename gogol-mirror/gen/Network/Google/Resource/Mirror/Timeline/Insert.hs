@@ -22,7 +22,7 @@
 --
 -- Inserts a new item into the timeline.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineInsert@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.timeline.insert@.
 module Network.Google.Resource.Mirror.Timeline.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Mirror.Timeline.Insert
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorTimelineInsert@ method which the
+-- | A resource alias for @mirror.timeline.insert@ method which the
 -- 'TimelineInsert'' request conforms to.
 type TimelineInsertResource =
      "timeline" :>
@@ -64,8 +64,8 @@ data TimelineInsert' = TimelineInsert'
 --
 -- * 'tiMedia'
 timelineInsert'
-    :: TimelineItem -- ^ 'payload'
-    -> Body -- ^ 'media'
+    :: TimelineItem -- ^ 'tiPayload'
+    -> Body -- ^ 'tiMedia'
     -> TimelineInsert'
 timelineInsert' pTiPayload_ pTiMedia_ =
     TimelineInsert'

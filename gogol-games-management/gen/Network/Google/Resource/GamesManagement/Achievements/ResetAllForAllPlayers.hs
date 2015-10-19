@@ -23,7 +23,7 @@
 -- Resets all draft achievements for all players. This method is only
 -- available to user accounts for your developer console.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementAchievementsResetAllForAllPlayers@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.achievements.resetAllForAllPlayers@.
 module Network.Google.Resource.GamesManagement.Achievements.ResetAllForAllPlayers
     (
     -- * REST Resource
@@ -38,7 +38,7 @@ module Network.Google.Resource.GamesManagement.Achievements.ResetAllForAllPlayer
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementAchievementsResetAllForAllPlayers@ method which the
+-- | A resource alias for @gamesManagement.achievements.resetAllForAllPlayers@ method which the
 -- 'AchievementsResetAllForAllPlayers'' request conforms to.
 type AchievementsResetAllForAllPlayersResource =
      "achievements" :>

@@ -22,7 +22,7 @@
 --
 -- Lists all filters for an account
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementFiltersList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.filters.list@.
 module Network.Google.Resource.Analytics.Management.Filters.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.Filters.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementFiltersList@ method which the
+-- | A resource alias for @analytics.management.filters.list@ method which the
 -- 'ManagementFiltersList'' request conforms to.
 type ManagementFiltersListResource =
      "management" :>
@@ -71,7 +71,7 @@ data ManagementFiltersList' = ManagementFiltersList'
 --
 -- * 'mflMaxResults'
 managementFiltersList'
-    :: Text -- ^ 'accountId'
+    :: Text -- ^ 'mflAccountId'
     -> ManagementFiltersList'
 managementFiltersList' pMflAccountId_ =
     ManagementFiltersList'

@@ -22,7 +22,7 @@
 --
 -- Returns a list of content regions that the YouTube website supports.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeI18nRegionsList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.i18nRegions.list@.
 module Network.Google.Resource.YouTube.I18nRegions.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTube.I18nRegions.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeI18nRegionsList@ method which the
+-- | A resource alias for @youtube.i18nRegions.list@ method which the
 -- 'I18nRegionsList'' request conforms to.
 type I18nRegionsListResource =
      "i18nRegions" :>
@@ -65,7 +65,7 @@ data I18nRegionsList' = I18nRegionsList'
 --
 -- * 'irlHl'
 i18nRegionsList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'irlPart'
     -> I18nRegionsList'
 i18nRegionsList' pIrlPart_ =
     I18nRegionsList'

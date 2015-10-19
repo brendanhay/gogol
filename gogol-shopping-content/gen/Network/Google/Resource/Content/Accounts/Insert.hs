@@ -22,7 +22,7 @@
 --
 -- Creates a Merchant Center sub-account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountsInsert@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounts.insert@.
 module Network.Google.Resource.Content.Accounts.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Accounts.Insert
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccountsInsert@ method which the
+-- | A resource alias for @content.accounts.insert@ method which the
 -- 'AccountsInsert'' request conforms to.
 type AccountsInsertResource =
      Capture "merchantId" Word64 :>
@@ -69,8 +69,8 @@ data AccountsInsert' = AccountsInsert'
 --
 -- * 'aiiDryRun'
 accountsInsert'
-    :: Word64 -- ^ 'merchantId'
-    -> Account -- ^ 'payload'
+    :: Word64 -- ^ 'aiiMerchantId'
+    -> Account -- ^ 'aiiPayload'
     -> AccountsInsert'
 accountsInsert' pAiiMerchantId_ pAiiPayload_ =
     AccountsInsert'

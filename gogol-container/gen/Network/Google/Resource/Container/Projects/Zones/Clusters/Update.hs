@@ -22,7 +22,7 @@
 --
 -- Update settings of a specific cluster.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @ContainerProjectsZonesClustersUpdate@.
+-- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.update@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Update
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Update
 import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ContainerProjectsZonesClustersUpdate@ method which the
+-- | A resource alias for @container.projects.zones.clusters.update@ method which the
 -- 'ProjectsZonesClustersUpdate'' request conforms to.
 type ProjectsZonesClustersUpdateResource =
      "v1" :>
@@ -113,10 +113,10 @@ data ProjectsZonesClustersUpdate' = ProjectsZonesClustersUpdate'
 --
 -- * 'pzcuCallback'
 projectsZonesClustersUpdate'
-    :: Text -- ^ 'zone'
-    -> UpdateClusterRequest -- ^ 'payload'
-    -> Text -- ^ 'clusterId'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'pzcuZone'
+    -> UpdateClusterRequest -- ^ 'pzcuPayload'
+    -> Text -- ^ 'pzcuClusterId'
+    -> Text -- ^ 'pzcuProjectId'
     -> ProjectsZonesClustersUpdate'
 projectsZonesClustersUpdate' pPzcuZone_ pPzcuPayload_ pPzcuClusterId_ pPzcuProjectId_ =
     ProjectsZonesClustersUpdate'

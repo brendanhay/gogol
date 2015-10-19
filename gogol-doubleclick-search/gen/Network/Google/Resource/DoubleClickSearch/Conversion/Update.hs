@@ -22,7 +22,7 @@
 --
 -- Updates a batch of conversions in DoubleClick Search.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchConversionUpdate@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @doubleclicksearch.conversion.update@.
 module Network.Google.Resource.DoubleClickSearch.Conversion.Update
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.Update
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClicksearchConversionUpdate@ method which the
+-- | A resource alias for @doubleclicksearch.conversion.update@ method which the
 -- 'ConversionUpdate'' request conforms to.
 type ConversionUpdateResource =
      "conversion" :>
@@ -60,7 +60,7 @@ newtype ConversionUpdate' = ConversionUpdate'
 --
 -- * 'cuPayload'
 conversionUpdate'
-    :: ConversionList -- ^ 'payload'
+    :: ConversionList -- ^ 'cuPayload'
     -> ConversionUpdate'
 conversionUpdate' pCuPayload_ =
     ConversionUpdate'

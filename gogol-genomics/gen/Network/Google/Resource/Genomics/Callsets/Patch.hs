@@ -22,7 +22,7 @@
 --
 -- Updates a call set. This method supports patch semantics.
 --
--- /See:/ < Genomics API Reference> for @GenomicsCallsetsPatch@.
+-- /See:/ < Genomics API Reference> for @genomics.callsets.patch@.
 module Network.Google.Resource.Genomics.Callsets.Patch
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Genomics.Callsets.Patch
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsCallsetsPatch@ method which the
+-- | A resource alias for @genomics.callsets.patch@ method which the
 -- 'CallsetsPatch'' request conforms to.
 type CallsetsPatchResource =
      "v1" :>
@@ -105,8 +105,8 @@ data CallsetsPatch' = CallsetsPatch'
 --
 -- * 'cpCallback'
 callsetsPatch'
-    :: CallSet -- ^ 'payload'
-    -> Text -- ^ 'callSetId'
+    :: CallSet -- ^ 'cpPayload'
+    -> Text -- ^ 'cpCallSetId'
     -> CallsetsPatch'
 callsetsPatch' pCpPayload_ pCpCallSetId_ =
     CallsetsPatch'

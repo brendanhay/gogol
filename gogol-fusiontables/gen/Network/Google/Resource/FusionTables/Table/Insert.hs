@@ -22,7 +22,7 @@
 --
 -- Creates a new table.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableInsert@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.table.insert@.
 module Network.Google.Resource.FusionTables.Table.Insert
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.FusionTables.Table.Insert
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTableInsert@ method which the
+-- | A resource alias for @fusiontables.table.insert@ method which the
 -- 'TableInsert'' request conforms to.
 type TableInsertResource =
      "tables" :>
@@ -59,7 +59,7 @@ newtype TableInsert' = TableInsert'
 --
 -- * 'tPayload'
 tableInsert'
-    :: Table -- ^ 'payload'
+    :: Table -- ^ 'tPayload'
     -> TableInsert'
 tableInsert' pTPayload_ =
     TableInsert'

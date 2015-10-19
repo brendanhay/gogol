@@ -22,7 +22,7 @@
 --
 -- Deletes an existing floodlight activity.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivitiesDelete@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightActivities.delete@.
 module Network.Google.Resource.DFAReporting.FloodlightActivities.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFloodlightActivitiesDelete@ method which the
+-- | A resource alias for @dfareporting.floodlightActivities.delete@ method which the
 -- 'FloodlightActivitiesDelete'' request conforms to.
 type FloodlightActivitiesDeleteResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data FloodlightActivitiesDelete' = FloodlightActivitiesDelete'
 --
 -- * 'fadId'
 floodlightActivitiesDelete'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'fadProFileId'
+    -> Int64 -- ^ 'fadId'
     -> FloodlightActivitiesDelete'
 floodlightActivitiesDelete' pFadProFileId_ pFadId_ =
     FloodlightActivitiesDelete'

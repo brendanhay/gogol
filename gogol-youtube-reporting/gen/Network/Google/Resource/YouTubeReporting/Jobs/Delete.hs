@@ -22,7 +22,7 @@
 --
 -- Deletes a job.
 --
--- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @YouTubereportingJobsDelete@.
+-- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @youtubereporting.jobs.delete@.
 module Network.Google.Resource.YouTubeReporting.Jobs.Delete
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTubeReporting.Types
 
--- | A resource alias for @YouTubereportingJobsDelete@ method which the
+-- | A resource alias for @youtubereporting.jobs.delete@ method which the
 -- 'JobsDelete'' request conforms to.
 type JobsDeleteResource =
      "v1" :>
@@ -100,7 +100,7 @@ data JobsDelete' = JobsDelete'
 --
 -- * 'jdCallback'
 jobsDelete'
-    :: Text -- ^ 'jobId'
+    :: Text -- ^ 'jdJobId'
     -> JobsDelete'
 jobsDelete' pJdJobId_ =
     JobsDelete'

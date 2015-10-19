@@ -22,7 +22,7 @@
 --
 -- Deletes all localized listings from an edit.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsListingsDeleteall@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.listings.deleteall@.
 module Network.Google.Resource.AndroidPublisher.Edits.Listings.Deleteall
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.Deleteall
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsListingsDeleteall@ method which the
+-- | A resource alias for @androidpublisher.edits.listings.deleteall@ method which the
 -- 'EditsListingsDeleteall'' request conforms to.
 type EditsListingsDeleteallResource =
      Capture "packageName" Text :>
@@ -65,8 +65,8 @@ data EditsListingsDeleteall' = EditsListingsDeleteall'
 --
 -- * 'ediEditId'
 editsListingsDeleteall'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'ediPackageName'
+    -> Text -- ^ 'ediEditId'
     -> EditsListingsDeleteall'
 editsListingsDeleteall' pEdiPackageName_ pEdiEditId_ =
     EditsListingsDeleteall'

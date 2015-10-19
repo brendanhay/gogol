@@ -28,7 +28,7 @@
 -- recover from any registration loss. If the debuggee is disabled server,
 -- the response will have is_disabled\' set to true.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @CloudDebuggerControllerDebuggeesRegister@.
+-- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.controller.debuggees.register@.
 module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Register
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Register
 import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudDebuggerControllerDebuggeesRegister@ method which the
+-- | A resource alias for @clouddebugger.controller.debuggees.register@ method which the
 -- 'ControllerDebuggeesRegister'' request conforms to.
 type ControllerDebuggeesRegisterResource =
      "v2" :>
@@ -110,7 +110,7 @@ data ControllerDebuggeesRegister' = ControllerDebuggeesRegister'
 --
 -- * 'cdrCallback'
 controllerDebuggeesRegister'
-    :: RegisterDebuggeeRequest -- ^ 'payload'
+    :: RegisterDebuggeeRequest -- ^ 'cdrPayload'
     -> ControllerDebuggeesRegister'
 controllerDebuggeesRegister' pCdrPayload_ =
     ControllerDebuggeesRegister'

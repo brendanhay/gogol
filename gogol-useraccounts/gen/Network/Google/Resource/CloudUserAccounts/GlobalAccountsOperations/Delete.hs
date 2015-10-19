@@ -22,7 +22,7 @@
 --
 -- Deletes the specified operation resource.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsGlobalAccountsOperationsDelete@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.globalAccountsOperations.delete@.
 module Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.Delete
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsGlobalAccountsOperationsDelete@ method which the
+-- | A resource alias for @clouduseraccounts.globalAccountsOperations.delete@ method which the
 -- 'GlobalAccountsOperationsDelete'' request conforms to.
 type GlobalAccountsOperationsDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data GlobalAccountsOperationsDelete' = GlobalAccountsOperationsDelete'
 --
 -- * 'gaodOperation'
 globalAccountsOperationsDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'operation'
+    :: Text -- ^ 'gaodProject'
+    -> Text -- ^ 'gaodOperation'
     -> GlobalAccountsOperationsDelete'
 globalAccountsOperationsDelete' pGaodProject_ pGaodOperation_ =
     GlobalAccountsOperationsDelete'

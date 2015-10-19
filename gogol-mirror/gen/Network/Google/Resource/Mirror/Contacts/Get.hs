@@ -22,7 +22,7 @@
 --
 -- Gets a single contact by ID.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorContactsGet@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.contacts.get@.
 module Network.Google.Resource.Mirror.Contacts.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Mirror.Contacts.Get
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorContactsGet@ method which the
+-- | A resource alias for @mirror.contacts.get@ method which the
 -- 'ContactsGet'' request conforms to.
 type ContactsGetResource =
      "contacts" :>
@@ -59,7 +59,7 @@ newtype ContactsGet' = ContactsGet'
 --
 -- * 'cgId'
 contactsGet'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'cgId'
     -> ContactsGet'
 contactsGet' pCgId_ =
     ContactsGet'

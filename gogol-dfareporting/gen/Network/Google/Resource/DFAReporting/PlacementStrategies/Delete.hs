@@ -22,7 +22,7 @@
 --
 -- Deletes an existing placement strategy.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementStrategiesDelete@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placementStrategies.delete@.
 module Network.Google.Resource.DFAReporting.PlacementStrategies.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPlacementStrategiesDelete@ method which the
+-- | A resource alias for @dfareporting.placementStrategies.delete@ method which the
 -- 'PlacementStrategiesDelete'' request conforms to.
 type PlacementStrategiesDeleteResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data PlacementStrategiesDelete' = PlacementStrategiesDelete'
 --
 -- * 'psdId'
 placementStrategiesDelete'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'psdProFileId'
+    -> Int64 -- ^ 'psdId'
     -> PlacementStrategiesDelete'
 placementStrategiesDelete' pPsdProFileId_ pPsdId_ =
     PlacementStrategiesDelete'

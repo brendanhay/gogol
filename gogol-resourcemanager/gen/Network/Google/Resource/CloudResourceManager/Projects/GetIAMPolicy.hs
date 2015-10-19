@@ -22,7 +22,7 @@
 --
 -- Returns the IAM access control policy for specified project.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerProjectsGetIAMPolicy@.
+-- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.getIamPolicy@.
 module Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerProjectsGetIAMPolicy@ method which the
+-- | A resource alias for @cloudresourcemanager.projects.getIamPolicy@ method which the
 -- 'ProjectsGetIAMPolicy'' request conforms to.
 type ProjectsGetIAMPolicyResource =
      "v1beta1" :>
@@ -101,8 +101,8 @@ data ProjectsGetIAMPolicy' = ProjectsGetIAMPolicy'
 --
 -- * 'pgipCallback'
 projectsGetIAMPolicy'
-    :: GetIAMPolicyRequest -- ^ 'payload'
-    -> Text -- ^ 'resource'
+    :: GetIAMPolicyRequest -- ^ 'pgipPayload'
+    -> Text -- ^ 'pgipResource'
     -> ProjectsGetIAMPolicy'
 projectsGetIAMPolicy' pPgipPayload_ pPgipResource_ =
     ProjectsGetIAMPolicy'

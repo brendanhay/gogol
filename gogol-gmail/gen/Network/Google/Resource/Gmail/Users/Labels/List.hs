@@ -22,7 +22,7 @@
 --
 -- Lists all labels in the user\'s mailbox.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersLabelsList@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.labels.list@.
 module Network.Google.Resource.Gmail.Users.Labels.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Gmail.Users.Labels.List
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersLabelsList@ method which the
+-- | A resource alias for @gmail.users.labels.list@ method which the
 -- 'UsersLabelsList'' request conforms to.
 type UsersLabelsListResource =
      Capture "userId" Text :>

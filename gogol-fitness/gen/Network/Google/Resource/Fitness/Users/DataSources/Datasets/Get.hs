@@ -26,7 +26,7 @@
 -- than or equal to the dataset end time and whose end time is greater than
 -- or equal to the dataset start time.
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesDatasetsGet@.
+-- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataSources.datasets.get@.
 module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Get
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Get
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersDataSourcesDatasetsGet@ method which the
+-- | A resource alias for @fitness.users.dataSources.datasets.get@ method which the
 -- 'UsersDataSourcesDatasetsGet'' request conforms to.
 type UsersDataSourcesDatasetsGetResource =
      Capture "userId" Text :>
@@ -88,9 +88,9 @@ data UsersDataSourcesDatasetsGet' = UsersDataSourcesDatasetsGet'
 --
 -- * 'udsdgPageToken'
 usersDataSourcesDatasetsGet'
-    :: Text -- ^ 'dataSourceId'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'datasetId'
+    :: Text -- ^ 'udsdgDataSourceId'
+    -> Text -- ^ 'udsdgUserId'
+    -> Text -- ^ 'udsdgDatasetId'
     -> UsersDataSourcesDatasetsGet'
 usersDataSourcesDatasetsGet' pUdsdgDataSourceId_ pUdsdgUserId_ pUdsdgDatasetId_ =
     UsersDataSourcesDatasetsGet'

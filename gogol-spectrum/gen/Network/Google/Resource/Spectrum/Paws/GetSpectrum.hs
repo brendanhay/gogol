@@ -24,7 +24,7 @@
 -- location. Requests from a fixed-mode device must include owner
 -- information so the device can be registered with the database.
 --
--- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @SpectrumPawsGetSpectrum@.
+-- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @spectrum.paws.getSpectrum@.
 module Network.Google.Resource.Spectrum.Paws.GetSpectrum
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Spectrum.Paws.GetSpectrum
 import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
--- | A resource alias for @SpectrumPawsGetSpectrum@ method which the
+-- | A resource alias for @spectrum.paws.getSpectrum@ method which the
 -- 'PawsGetSpectrum'' request conforms to.
 type PawsGetSpectrumResource =
      "getSpectrum" :>
@@ -64,7 +64,7 @@ newtype PawsGetSpectrum' = PawsGetSpectrum'
 --
 -- * 'pgsPayload'
 pawsGetSpectrum'
-    :: PawsGetSpectrumRequest -- ^ 'payload'
+    :: PawsGetSpectrumRequest -- ^ 'pgsPayload'
     -> PawsGetSpectrum'
 pawsGetSpectrum' pPgsPayload_ =
     PawsGetSpectrum'

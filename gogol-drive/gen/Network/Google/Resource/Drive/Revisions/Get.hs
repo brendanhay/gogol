@@ -22,7 +22,7 @@
 --
 -- Gets a specific revision.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRevisionsGet@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.revisions.get@.
 module Network.Google.Resource.Drive.Revisions.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Drive.Revisions.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRevisionsGet@ method which the
+-- | A resource alias for @drive.revisions.get@ method which the
 -- 'RevisionsGet'' request conforms to.
 type RevisionsGetResource =
      "files" :>
@@ -65,8 +65,8 @@ data RevisionsGet' = RevisionsGet'
 --
 -- * 'revRevisionId'
 revisionsGet'
-    :: Text -- ^ 'fileId'
-    -> Text -- ^ 'revisionId'
+    :: Text -- ^ 'revFileId'
+    -> Text -- ^ 'revRevisionId'
     -> RevisionsGet'
 revisionsGet' pRevFileId_ pRevRevisionId_ =
     RevisionsGet'

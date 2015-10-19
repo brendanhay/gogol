@@ -22,7 +22,7 @@
 --
 -- Retrieve all schemas for a customer
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectorySchemasList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.schemas.list@.
 module Network.Google.Resource.Directory.Schemas.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Directory.Schemas.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectorySchemasList@ method which the
+-- | A resource alias for @directory.schemas.list@ method which the
 -- 'SchemasList'' request conforms to.
 type SchemasListResource =
      "customer" :>
@@ -60,7 +60,7 @@ newtype SchemasList' = SchemasList'
 --
 -- * 'slCustomerId'
 schemasList'
-    :: Text -- ^ 'customerId'
+    :: Text -- ^ 'slCustomerId'
     -> SchemasList'
 schemasList' pSlCustomerId_ =
     SchemasList'

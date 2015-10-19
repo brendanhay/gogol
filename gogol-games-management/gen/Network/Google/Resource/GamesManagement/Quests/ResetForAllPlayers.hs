@@ -24,7 +24,7 @@
 -- players. This method is only available to user accounts for your
 -- developer console. Only draft quests can be reset.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementQuestsResetForAllPlayers@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.quests.resetForAllPlayers@.
 module Network.Google.Resource.GamesManagement.Quests.ResetForAllPlayers
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.GamesManagement.Quests.ResetForAllPlayers
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementQuestsResetForAllPlayers@ method which the
+-- | A resource alias for @gamesManagement.quests.resetForAllPlayers@ method which the
 -- 'QuestsResetForAllPlayers'' request conforms to.
 type QuestsResetForAllPlayersResource =
      "quests" :>
@@ -64,7 +64,7 @@ newtype QuestsResetForAllPlayers' = QuestsResetForAllPlayers'
 --
 -- * 'qrfapQuestId'
 questsResetForAllPlayers'
-    :: Text -- ^ 'questId'
+    :: Text -- ^ 'qrfapQuestId'
     -> QuestsResetForAllPlayers'
 questsResetForAllPlayers' pQrfapQuestId_ =
     QuestsResetForAllPlayers'

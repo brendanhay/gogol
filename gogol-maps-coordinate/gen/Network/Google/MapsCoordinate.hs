@@ -26,40 +26,40 @@ module Network.Google.MapsCoordinate
 
     -- * Resources
 
-    -- ** CoordinateCustomFieldDefList
+    -- ** coordinate.customFieldDef.list
     , module Network.Google.Resource.Coordinate.CustomFieldDef.List
 
-    -- ** CoordinateJobsGet
+    -- ** coordinate.jobs.get
     , module Network.Google.Resource.Coordinate.Jobs.Get
 
-    -- ** CoordinateJobsInsert
+    -- ** coordinate.jobs.insert
     , module Network.Google.Resource.Coordinate.Jobs.Insert
 
-    -- ** CoordinateJobsList
+    -- ** coordinate.jobs.list
     , module Network.Google.Resource.Coordinate.Jobs.List
 
-    -- ** CoordinateJobsPatch
+    -- ** coordinate.jobs.patch
     , module Network.Google.Resource.Coordinate.Jobs.Patch
 
-    -- ** CoordinateJobsUpdate
+    -- ** coordinate.jobs.update
     , module Network.Google.Resource.Coordinate.Jobs.Update
 
-    -- ** CoordinateLocationList
+    -- ** coordinate.location.list
     , module Network.Google.Resource.Coordinate.Location.List
 
-    -- ** CoordinateScheduleGet
+    -- ** coordinate.schedule.get
     , module Network.Google.Resource.Coordinate.Schedule.Get
 
-    -- ** CoordinateSchedulePatch
+    -- ** coordinate.schedule.patch
     , module Network.Google.Resource.Coordinate.Schedule.Patch
 
-    -- ** CoordinateScheduleUpdate
+    -- ** coordinate.schedule.update
     , module Network.Google.Resource.Coordinate.Schedule.Update
 
-    -- ** CoordinateTeamList
+    -- ** coordinate.team.list
     , module Network.Google.Resource.Coordinate.Team.List
 
-    -- ** CoordinateWorkerList
+    -- ** coordinate.worker.list
     , module Network.Google.Resource.Coordinate.Worker.List
 
     -- * Types

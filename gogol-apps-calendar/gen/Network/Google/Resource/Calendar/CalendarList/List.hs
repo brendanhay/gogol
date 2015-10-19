@@ -22,7 +22,7 @@
 --
 -- Returns entries on the user\'s calendar list.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarListList@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendarList.list@.
 module Network.Google.Resource.Calendar.CalendarList.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Calendar.CalendarList.List
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarListList@ method which the
+-- | A resource alias for @calendar.calendarList.list@ method which the
 -- 'CalendarListList'' request conforms to.
 type CalendarListListResource =
      "users" :>

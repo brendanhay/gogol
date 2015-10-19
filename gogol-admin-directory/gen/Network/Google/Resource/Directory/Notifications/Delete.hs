@@ -22,7 +22,7 @@
 --
 -- Deletes a notification
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryNotificationsDelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.notifications.delete@.
 module Network.Google.Resource.Directory.Notifications.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Notifications.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryNotificationsDelete@ method which the
+-- | A resource alias for @directory.notifications.delete@ method which the
 -- 'NotificationsDelete'' request conforms to.
 type NotificationsDeleteResource =
      "customer" :>
@@ -65,8 +65,8 @@ data NotificationsDelete' = NotificationsDelete'
 --
 -- * 'ndNotificationId'
 notificationsDelete'
-    :: Text -- ^ 'customer'
-    -> Text -- ^ 'notificationId'
+    :: Text -- ^ 'ndCustomer'
+    -> Text -- ^ 'ndNotificationId'
     -> NotificationsDelete'
 notificationsDelete' pNdCustomer_ pNdNotificationId_ =
     NotificationsDelete'

@@ -23,7 +23,7 @@
 -- Immediately and permanently deletes the specified message. This
 -- operation cannot be undone. Prefer messages.trash instead.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesDelete@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.messages.delete@.
 module Network.Google.Resource.Gmail.Users.Messages.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Gmail.Users.Messages.Delete
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersMessagesDelete@ method which the
+-- | A resource alias for @gmail.users.messages.delete@ method which the
 -- 'UsersMessagesDelete'' request conforms to.
 type UsersMessagesDeleteResource =
      Capture "userId" Text :>
@@ -66,7 +66,7 @@ data UsersMessagesDelete' = UsersMessagesDelete'
 --
 -- * 'umdId'
 usersMessagesDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'umdId'
     -> Text
     -> UsersMessagesDelete'
 usersMessagesDelete' pUmdUserId_ pUmdId_ =

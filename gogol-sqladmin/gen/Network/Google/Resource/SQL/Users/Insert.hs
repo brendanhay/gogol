@@ -22,7 +22,7 @@
 --
 -- Creates a new user in a Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLUsersInsert@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.users.insert@.
 module Network.Google.Resource.SQL.Users.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.SQL.Users.Insert
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLUsersInsert@ method which the
+-- | A resource alias for @sql.users.insert@ method which the
 -- 'UsersInsert'' request conforms to.
 type UsersInsertResource =
      "projects" :>
@@ -71,9 +71,9 @@ data UsersInsert' = UsersInsert'
 --
 -- * 'uiInstance'
 usersInsert'
-    :: Text -- ^ 'project'
-    -> User -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'uiProject'
+    -> User -- ^ 'uiPayload'
+    -> Text -- ^ 'uiInstance'
     -> UsersInsert'
 usersInsert' pUiProject_ pUiPayload_ pUiInstance_ =
     UsersInsert'

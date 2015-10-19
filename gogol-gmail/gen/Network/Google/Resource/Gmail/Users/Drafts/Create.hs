@@ -22,7 +22,7 @@
 --
 -- Creates a new draft with the DRAFT label.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersDraftsCreate@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.drafts.create@.
 module Network.Google.Resource.Gmail.Users.Drafts.Create
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Gmail.Users.Drafts.Create
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersDraftsCreate@ method which the
+-- | A resource alias for @gmail.users.drafts.create@ method which the
 -- 'UsersDraftsCreate'' request conforms to.
 type UsersDraftsCreateResource =
      Capture "userId" Text :>
@@ -69,8 +69,8 @@ data UsersDraftsCreate' = UsersDraftsCreate'
 --
 -- * 'udcMedia'
 usersDraftsCreate'
-    :: Draft -- ^ 'payload'
-    -> Text -- ^ 'media'
+    :: Draft -- ^ 'udcPayload'
+    -> Text -- ^ 'udcMedia'
     -> Body
     -> UsersDraftsCreate'
 usersDraftsCreate' pUdcPayload_ pUdcUserId_ pUdcMedia_ =

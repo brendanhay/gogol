@@ -25,7 +25,7 @@
 -- their list; the player must have called Finish first. Returns the newly
 -- created match; it will be the caller\'s turn.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesRematch@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.turnBasedMatches.rematch@.
 module Network.Google.Resource.Games.TurnBasedMatches.Rematch
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.Rematch
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesTurnBasedMatchesRematch@ method which the
+-- | A resource alias for @games.turnBasedMatches.rematch@ method which the
 -- 'TurnBasedMatchesRematch'' request conforms to.
 type TurnBasedMatchesRematchResource =
      "turnbasedmatches" :>
@@ -77,7 +77,7 @@ data TurnBasedMatchesRematch' = TurnBasedMatchesRematch'
 --
 -- * 'tbmrMatchId'
 turnBasedMatchesRematch'
-    :: Text -- ^ 'matchId'
+    :: Text -- ^ 'tbmrMatchId'
     -> TurnBasedMatchesRematch'
 turnBasedMatchesRematch' pTbmrMatchId_ =
     TurnBasedMatchesRematch'

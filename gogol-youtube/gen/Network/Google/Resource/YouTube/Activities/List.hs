@@ -26,7 +26,7 @@
 -- Google+ friends, or the YouTube home page feed, which is customized for
 -- each user.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeActivitiesList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.activities.list@.
 module Network.Google.Resource.YouTube.Activities.List
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.YouTube.Activities.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeActivitiesList@ method which the
+-- | A resource alias for @youtube.activities.list@ method which the
 -- 'ActivitiesList'' request conforms to.
 type ActivitiesListResource =
      "activities" :>
@@ -108,7 +108,7 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'alPublishedBefore'
 activitiesList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'alPart'
     -> ActivitiesList'
 activitiesList' pAlPart_ =
     ActivitiesList'

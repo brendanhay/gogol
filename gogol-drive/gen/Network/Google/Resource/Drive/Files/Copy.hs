@@ -22,7 +22,7 @@
 --
 -- Creates a copy of the specified file.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesCopy@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.copy@.
 module Network.Google.Resource.Drive.Files.Copy
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Drive.Files.Copy
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesCopy@ method which the
+-- | A resource alias for @drive.files.copy@ method which the
 -- 'FilesCopy'' request conforms to.
 type FilesCopyResource =
      "files" :>
@@ -100,8 +100,8 @@ data FilesCopy' = FilesCopy'
 --
 -- * 'fcOCR'
 filesCopy'
-    :: File -- ^ 'payload'
-    -> Text -- ^ 'fileId'
+    :: File -- ^ 'fcPayload'
+    -> Text -- ^ 'fcFileId'
     -> FilesCopy'
 filesCopy' pFcPayload_ pFcFileId_ =
     FilesCopy'

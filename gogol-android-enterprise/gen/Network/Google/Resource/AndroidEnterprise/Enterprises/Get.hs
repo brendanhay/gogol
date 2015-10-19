@@ -22,7 +22,7 @@
 --
 -- Retrieves the name and domain of an enterprise.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEnterprisesGet@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.get@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.Get
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEnterprisesGet@ method which the
+-- | A resource alias for @androidenterprise.enterprises.get@ method which the
 -- 'EnterprisesGet'' request conforms to.
 type EnterprisesGetResource =
      "enterprises" :>
@@ -59,7 +59,7 @@ newtype EnterprisesGet' = EnterprisesGet'
 --
 -- * 'egEnterpriseId'
 enterprisesGet'
-    :: Text -- ^ 'enterpriseId'
+    :: Text -- ^ 'egEnterpriseId'
     -> EnterprisesGet'
 enterprisesGet' pEgEnterpriseId_ =
     EnterprisesGet'

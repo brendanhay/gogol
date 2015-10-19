@@ -22,7 +22,7 @@
 --
 -- Lists all the leaderboard metadata for your application.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesLeaderboardsList@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.leaderboards.list@.
 module Network.Google.Resource.Games.Leaderboards.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Games.Leaderboards.List
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesLeaderboardsList@ method which the
+-- | A resource alias for @games.leaderboards.list@ method which the
 -- 'LeaderboardsList'' request conforms to.
 type LeaderboardsListResource =
      "leaderboards" :>

@@ -22,7 +22,7 @@
 --
 -- Delete a task from a TaskQueue.
 --
--- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksDelete@.
+-- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @taskqueue.tasks.delete@.
 module Network.Google.Resource.TaskQueue.Tasks.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Delete
 import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
--- | A resource alias for @TaskqueueTasksDelete@ method which the
+-- | A resource alias for @taskqueue.tasks.delete@ method which the
 -- 'TasksDelete'' request conforms to.
 type TasksDeleteResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data TasksDelete' = TasksDelete'
 --
 -- * 'tdTask'
 tasksDelete'
-    :: Text -- ^ 'taskqueue'
-    -> Text -- ^ 'project'
-    -> Text -- ^ 'task'
+    :: Text -- ^ 'tdTaskqueue'
+    -> Text -- ^ 'tdProject'
+    -> Text -- ^ 'tdTask'
     -> TasksDelete'
 tasksDelete' pTdTaskqueue_ pTdProject_ pTdTask_ =
     TasksDelete'

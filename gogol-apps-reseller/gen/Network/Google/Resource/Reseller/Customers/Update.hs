@@ -23,7 +23,7 @@
 -- Update a customer resource if one it exists and is owned by the
 -- reseller.
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerCustomersUpdate@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.customers.update@.
 module Network.Google.Resource.Reseller.Customers.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Reseller.Customers.Update
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerCustomersUpdate@ method which the
+-- | A resource alias for @reseller.customers.update@ method which the
 -- 'CustomersUpdate'' request conforms to.
 type CustomersUpdateResource =
      "customers" :>
@@ -66,8 +66,8 @@ data CustomersUpdate' = CustomersUpdate'
 --
 -- * 'cuCustomerId'
 customersUpdate'
-    :: Customer -- ^ 'payload'
-    -> Text -- ^ 'customerId'
+    :: Customer -- ^ 'cuPayload'
+    -> Text -- ^ 'cuCustomerId'
     -> CustomersUpdate'
 customersUpdate' pCuPayload_ pCuCustomerId_ =
     CustomersUpdate'

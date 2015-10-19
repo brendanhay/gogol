@@ -22,7 +22,7 @@
 --
 -- Gets a customer resource if one exists and is owned by the reseller.
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerCustomersGet@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.customers.get@.
 module Network.Google.Resource.Reseller.Customers.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Reseller.Customers.Get
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerCustomersGet@ method which the
+-- | A resource alias for @reseller.customers.get@ method which the
 -- 'CustomersGet'' request conforms to.
 type CustomersGetResource =
      "customers" :>
@@ -59,7 +59,7 @@ newtype CustomersGet' = CustomersGet'
 --
 -- * 'cgCustomerId'
 customersGet'
-    :: Text -- ^ 'customerId'
+    :: Text -- ^ 'cgCustomerId'
     -> CustomersGet'
 customersGet' pCgCustomerId_ =
     CustomersGet'

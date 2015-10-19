@@ -22,7 +22,7 @@
 --
 -- Update a circle\'s description.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesUpdate@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.circles.update@.
 module Network.Google.Resource.PlusDomains.Circles.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.PlusDomains.Circles.Update
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsCirclesUpdate@ method which the
+-- | A resource alias for @plusDomains.circles.update@ method which the
 -- 'CirclesUpdate'' request conforms to.
 type CirclesUpdateResource =
      "circles" :>
@@ -64,8 +64,8 @@ data CirclesUpdate' = CirclesUpdate'
 --
 -- * 'cuCircleId'
 circlesUpdate'
-    :: Circle -- ^ 'payload'
-    -> Text -- ^ 'circleId'
+    :: Circle -- ^ 'cuPayload'
+    -> Text -- ^ 'cuCircleId'
     -> CirclesUpdate'
 circlesUpdate' pCuPayload_ pCuCircleId_ =
     CirclesUpdate'

@@ -22,7 +22,7 @@
 --
 -- Generate new backup verification codes for the user.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryVerificationCodesGenerate@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.verificationCodes.generate@.
 module Network.Google.Resource.Directory.VerificationCodes.Generate
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Directory.VerificationCodes.Generate
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryVerificationCodesGenerate@ method which the
+-- | A resource alias for @directory.verificationCodes.generate@ method which the
 -- 'VerificationCodesGenerate'' request conforms to.
 type VerificationCodesGenerateResource =
      "users" :>
@@ -61,7 +61,7 @@ newtype VerificationCodesGenerate' = VerificationCodesGenerate'
 --
 -- * 'vcgUserKey'
 verificationCodesGenerate'
-    :: Text -- ^ 'userKey'
+    :: Text -- ^ 'vcgUserKey'
     -> VerificationCodesGenerate'
 verificationCodesGenerate' pVcgUserKey_ =
     VerificationCodesGenerate'

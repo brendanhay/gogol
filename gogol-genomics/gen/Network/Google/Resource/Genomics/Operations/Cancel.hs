@@ -26,7 +26,7 @@
 -- Operations.ListOperations to check whether the cancellation succeeded or
 -- the operation completed despite cancellation.
 --
--- /See:/ < Genomics API Reference> for @GenomicsOperationsCancel@.
+-- /See:/ < Genomics API Reference> for @genomics.operations.cancel@.
 module Network.Google.Resource.Genomics.Operations.Cancel
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.Genomics.Operations.Cancel
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsOperationsCancel@ method which the
+-- | A resource alias for @genomics.operations.cancel@ method which the
 -- 'OperationsCancel'' request conforms to.
 type OperationsCancelResource =
      "v1" :>
@@ -108,8 +108,8 @@ data OperationsCancel' = OperationsCancel'
 --
 -- * 'ocCallback'
 operationsCancel'
-    :: CancelOperationRequest -- ^ 'payload'
-    -> Text -- ^ 'name'
+    :: CancelOperationRequest -- ^ 'ocPayload'
+    -> Text -- ^ 'ocName'
     -> OperationsCancel'
 operationsCancel' pOcPayload_ pOcName_ =
     OperationsCancel'

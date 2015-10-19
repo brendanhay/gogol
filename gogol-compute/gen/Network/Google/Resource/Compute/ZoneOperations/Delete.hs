@@ -22,7 +22,7 @@
 --
 -- Deletes the specified zone-specific Operations resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeZoneOperationsDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.zoneOperations.delete@.
 module Network.Google.Resource.Compute.ZoneOperations.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.ZoneOperations.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeZoneOperationsDelete@ method which the
+-- | A resource alias for @compute.zoneOperations.delete@ method which the
 -- 'ZoneOperationsDelete'' request conforms to.
 type ZoneOperationsDeleteResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data ZoneOperationsDelete' = ZoneOperationsDelete'
 --
 -- * 'zodZone'
 zoneOperationsDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'operation'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'zodProject'
+    -> Text -- ^ 'zodOperation'
+    -> Text -- ^ 'zodZone'
     -> ZoneOperationsDelete'
 zoneOperationsDelete' pZodProject_ pZodOperation_ pZodZone_ =
     ZoneOperationsDelete'

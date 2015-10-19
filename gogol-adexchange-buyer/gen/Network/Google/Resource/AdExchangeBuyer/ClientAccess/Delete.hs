@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerClientAccessDelete@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.clientaccess.delete@.
 module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Delete
     (
     -- * REST Resource
@@ -38,7 +38,7 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Delete
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerClientAccessDelete@ method which the
+-- | A resource alias for @adexchangebuyer.clientaccess.delete@ method which the
 -- 'ClientAccessDelete'' request conforms to.
 type ClientAccessDeleteResource =
      "clientAccess" :>
@@ -61,8 +61,8 @@ data ClientAccessDelete' = ClientAccessDelete'
 --
 -- * 'cadClientAccountId'
 clientAccessDelete'
-    :: Int32 -- ^ 'sponsorAccountId'
-    -> Int64 -- ^ 'clientAccountId'
+    :: Int32 -- ^ 'cadSponsorAccountId'
+    -> Int64 -- ^ 'cadClientAccountId'
     -> ClientAccessDelete'
 clientAccessDelete' pCadSponsorAccountId_ pCadClientAccountId_ =
     ClientAccessDelete'

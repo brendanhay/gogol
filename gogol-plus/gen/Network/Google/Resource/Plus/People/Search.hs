@@ -22,7 +22,7 @@
 --
 -- Search all public profiles.
 --
--- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusPeopleSearch@.
+-- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.people.search@.
 module Network.Google.Resource.Plus.People.Search
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Plus.People.Search
 import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusPeopleSearch@ method which the
+-- | A resource alias for @plus.people.search@ method which the
 -- 'PeopleSearch'' request conforms to.
 type PeopleSearchResource =
      "people" :>
@@ -74,7 +74,7 @@ data PeopleSearch' = PeopleSearch'
 --
 -- * 'psMaxResults'
 peopleSearch'
-    :: Text -- ^ 'query'
+    :: Text -- ^ 'psQuery'
     -> PeopleSearch'
 peopleSearch' pPsQuery_ =
     PeopleSearch'

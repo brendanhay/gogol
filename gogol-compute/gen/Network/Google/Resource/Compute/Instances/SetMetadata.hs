@@ -23,7 +23,7 @@
 -- Sets metadata for the specified instance to the data included in the
 -- request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesSetMetadata@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.setMetadata@.
 module Network.Google.Resource.Compute.Instances.SetMetadata
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.Instances.SetMetadata
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesSetMetadata@ method which the
+-- | A resource alias for @compute.instances.setMetadata@ method which the
 -- 'InstancesSetMetadata'' request conforms to.
 type InstancesSetMetadataResource =
      Capture "project" Text :>
@@ -78,10 +78,10 @@ data InstancesSetMetadata' = InstancesSetMetadata'
 --
 -- * 'ismInstance'
 instancesSetMetadata'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Metadata -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'ismProject'
+    -> Text -- ^ 'ismZone'
+    -> Metadata -- ^ 'ismPayload'
+    -> Text -- ^ 'ismInstance'
     -> InstancesSetMetadata'
 instancesSetMetadata' pIsmProject_ pIsmZone_ pIsmPayload_ pIsmInstance_ =
     InstancesSetMetadata'

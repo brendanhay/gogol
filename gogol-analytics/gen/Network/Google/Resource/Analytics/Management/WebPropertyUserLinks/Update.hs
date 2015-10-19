@@ -22,7 +22,7 @@
 --
 -- Updates permissions for an existing user on the given web property.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyUserLinksUpdate@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webpropertyUserLinks.update@.
 module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertyUserLinksUpdate@ method which the
+-- | A resource alias for @analytics.management.webpropertyUserLinks.update@ method which the
 -- 'ManagementWebPropertyUserLinksUpdate'' request conforms to.
 type ManagementWebPropertyUserLinksUpdateResource =
      "management" :>
@@ -78,10 +78,10 @@ data ManagementWebPropertyUserLinksUpdate' = ManagementWebPropertyUserLinksUpdat
 --
 -- * 'mwpuluLinkId'
 managementWebPropertyUserLinksUpdate'
-    :: Text -- ^ 'webPropertyId'
-    -> EntityUserLink -- ^ 'payload'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'linkId'
+    :: Text -- ^ 'mwpuluWebPropertyId'
+    -> EntityUserLink -- ^ 'mwpuluPayload'
+    -> Text -- ^ 'mwpuluAccountId'
+    -> Text -- ^ 'mwpuluLinkId'
     -> ManagementWebPropertyUserLinksUpdate'
 managementWebPropertyUserLinksUpdate' pMwpuluWebPropertyId_ pMwpuluPayload_ pMwpuluAccountId_ pMwpuluLinkId_ =
     ManagementWebPropertyUserLinksUpdate'

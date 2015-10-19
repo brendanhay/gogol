@@ -26,67 +26,67 @@ module Network.Google.BigQuery
 
     -- * Resources
 
-    -- ** BigQueryDatasetsDelete
+    -- ** bigquery.datasets.delete
     , module Network.Google.Resource.BigQuery.Datasets.Delete
 
-    -- ** BigQueryDatasetsGet
+    -- ** bigquery.datasets.get
     , module Network.Google.Resource.BigQuery.Datasets.Get
 
-    -- ** BigQueryDatasetsInsert
+    -- ** bigquery.datasets.insert
     , module Network.Google.Resource.BigQuery.Datasets.Insert
 
-    -- ** BigQueryDatasetsList
+    -- ** bigquery.datasets.list
     , module Network.Google.Resource.BigQuery.Datasets.List
 
-    -- ** BigQueryDatasetsPatch
+    -- ** bigquery.datasets.patch
     , module Network.Google.Resource.BigQuery.Datasets.Patch
 
-    -- ** BigQueryDatasetsUpdate
+    -- ** bigquery.datasets.update
     , module Network.Google.Resource.BigQuery.Datasets.Update
 
-    -- ** BigQueryJobsCancel
+    -- ** bigquery.jobs.cancel
     , module Network.Google.Resource.BigQuery.Jobs.Cancel
 
-    -- ** BigQueryJobsGet
+    -- ** bigquery.jobs.get
     , module Network.Google.Resource.BigQuery.Jobs.Get
 
-    -- ** BigQueryJobsGetQueryResults
+    -- ** bigquery.jobs.getQueryResults
     , module Network.Google.Resource.BigQuery.Jobs.GetQueryResults
 
-    -- ** BigQueryJobsInsert
+    -- ** bigquery.jobs.insert
     , module Network.Google.Resource.BigQuery.Jobs.Insert
 
-    -- ** BigQueryJobsList
+    -- ** bigquery.jobs.list
     , module Network.Google.Resource.BigQuery.Jobs.List
 
-    -- ** BigQueryJobsQuery
+    -- ** bigquery.jobs.query
     , module Network.Google.Resource.BigQuery.Jobs.Query
 
-    -- ** BigQueryProjectsList
+    -- ** bigquery.projects.list
     , module Network.Google.Resource.BigQuery.Projects.List
 
-    -- ** BigQueryTableDataInsertAll
+    -- ** bigquery.tabledata.insertAll
     , module Network.Google.Resource.BigQuery.TableData.InsertAll
 
-    -- ** BigQueryTableDataList
+    -- ** bigquery.tabledata.list
     , module Network.Google.Resource.BigQuery.TableData.List
 
-    -- ** BigQueryTablesDelete
+    -- ** bigquery.tables.delete
     , module Network.Google.Resource.BigQuery.Tables.Delete
 
-    -- ** BigQueryTablesGet
+    -- ** bigquery.tables.get
     , module Network.Google.Resource.BigQuery.Tables.Get
 
-    -- ** BigQueryTablesInsert
+    -- ** bigquery.tables.insert
     , module Network.Google.Resource.BigQuery.Tables.Insert
 
-    -- ** BigQueryTablesList
+    -- ** bigquery.tables.list
     , module Network.Google.Resource.BigQuery.Tables.List
 
-    -- ** BigQueryTablesPatch
+    -- ** bigquery.tables.patch
     , module Network.Google.Resource.BigQuery.Tables.Patch
 
-    -- ** BigQueryTablesUpdate
+    -- ** bigquery.tables.update
     , module Network.Google.Resource.BigQuery.Tables.Update
 
     -- * Types

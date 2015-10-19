@@ -22,7 +22,7 @@
 --
 -- Expands a short URL or gets creation time and analytics.
 --
--- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference> for @URLshortenerURLGet@.
+-- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference> for @urlshortener.url.get@.
 module Network.Google.Resource.URLShortener.URL.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.URLShortener.URL.Get
 import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types
 
--- | A resource alias for @URLshortenerURLGet@ method which the
+-- | A resource alias for @urlshortener.url.get@ method which the
 -- 'URLGet'' request conforms to.
 type URLGetResource =
      "url" :>
@@ -64,7 +64,7 @@ data URLGet' = URLGet'
 --
 -- * 'ugShortURL'
 urlGet'
-    :: Text -- ^ 'shortUrl'
+    :: Text -- ^ 'ugShortURL'
     -> URLGet'
 urlGet' pUgShortURL_ =
     URLGet'

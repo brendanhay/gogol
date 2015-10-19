@@ -24,7 +24,7 @@
 -- application. This method is only available to user accounts for your
 -- developer console.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementPlayersUnhide@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.players.unhide@.
 module Network.Google.Resource.GamesManagement.Players.Unhide
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.GamesManagement.Players.Unhide
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementPlayersUnhide@ method which the
+-- | A resource alias for @gamesManagement.players.unhide@ method which the
 -- 'PlayersUnhide'' request conforms to.
 type PlayersUnhideResource =
      "applications" :>
@@ -70,8 +70,8 @@ data PlayersUnhide' = PlayersUnhide'
 --
 -- * 'puPlayerId'
 playersUnhide'
-    :: Text -- ^ 'applicationId'
-    -> Text -- ^ 'playerId'
+    :: Text -- ^ 'puApplicationId'
+    -> Text -- ^ 'puPlayerId'
     -> PlayersUnhide'
 playersUnhide' pPuApplicationId_ pPuPlayerId_ =
     PlayersUnhide'

@@ -22,7 +22,7 @@
 --
 -- Deletes the specified TargetInstance resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetInstancesDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetInstances.delete@.
 module Network.Google.Resource.Compute.TargetInstances.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.TargetInstances.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetInstancesDelete@ method which the
+-- | A resource alias for @compute.targetInstances.delete@ method which the
 -- 'TargetInstancesDelete'' request conforms to.
 type TargetInstancesDeleteResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data TargetInstancesDelete' = TargetInstancesDelete'
 --
 -- * 'tidZone'
 targetInstancesDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'targetInstance'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'tidProject'
+    -> Text -- ^ 'tidTargetInstance'
+    -> Text -- ^ 'tidZone'
     -> TargetInstancesDelete'
 targetInstancesDelete' pTidProject_ pTidTargetInstance_ pTidZone_ =
     TargetInstancesDelete'

@@ -22,7 +22,7 @@
 --
 -- Get information about the selected associated AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsGet@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.accounts.get@.
 module Network.Google.Resource.AdSenseHost.Accounts.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.Get
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAccountsGet@ method which the
+-- | A resource alias for @adsensehost.accounts.get@ method which the
 -- 'AccountsGet'' request conforms to.
 type AccountsGetResource =
      "accounts" :>
@@ -59,7 +59,7 @@ newtype AccountsGet' = AccountsGet'
 --
 -- * 'agAccountId'
 accountsGet'
-    :: Text -- ^ 'accountId'
+    :: Text -- ^ 'agAccountId'
     -> AccountsGet'
 accountsGet' pAgAccountId_ =
     AccountsGet'

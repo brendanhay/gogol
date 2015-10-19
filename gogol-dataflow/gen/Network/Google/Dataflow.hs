@@ -26,28 +26,28 @@ module Network.Google.Dataflow
 
     -- * Resources
 
-    -- ** DataflowProjectsJobsCreate
+    -- ** dataflow.projects.jobs.create
     , module Network.Google.Resource.Dataflow.Projects.Jobs.Create
 
-    -- ** DataflowProjectsJobsGet
+    -- ** dataflow.projects.jobs.get
     , module Network.Google.Resource.Dataflow.Projects.Jobs.Get
 
-    -- ** DataflowProjectsJobsGetMetrics
+    -- ** dataflow.projects.jobs.getMetrics
     , module Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
 
-    -- ** DataflowProjectsJobsList
+    -- ** dataflow.projects.jobs.list
     , module Network.Google.Resource.Dataflow.Projects.Jobs.List
 
-    -- ** DataflowProjectsJobsMessagesList
+    -- ** dataflow.projects.jobs.messages.list
     , module Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
 
-    -- ** DataflowProjectsJobsUpdate
+    -- ** dataflow.projects.jobs.update
     , module Network.Google.Resource.Dataflow.Projects.Jobs.Update
 
-    -- ** DataflowProjectsJobsWorkItemsLease
+    -- ** dataflow.projects.jobs.workItems.lease
     , module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
 
-    -- ** DataflowProjectsJobsWorkItemsReportStatus
+    -- ** dataflow.projects.jobs.workItems.reportStatus
     , module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
 
     -- * Types

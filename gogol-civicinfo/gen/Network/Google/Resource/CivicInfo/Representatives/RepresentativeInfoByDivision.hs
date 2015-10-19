@@ -22,7 +22,7 @@
 --
 -- Looks up representative information for a single geographic division.
 --
--- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicInfoRepresentativesRepresentativeInfoByDivision@.
+-- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @civicinfo.representatives.representativeInfoByDivision@.
 module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDivision
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDiv
 import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CivicInfoRepresentativesRepresentativeInfoByDivision@ method which the
+-- | A resource alias for @civicinfo.representatives.representativeInfoByDivision@ method which the
 -- 'RepresentativesRepresentativeInfoByDivision'' request conforms to.
 type RepresentativesRepresentativeInfoByDivisionResource
      =
@@ -80,7 +80,7 @@ data RepresentativesRepresentativeInfoByDivision' = RepresentativesRepresentativ
 --
 -- * 'rribdLevels'
 representativesRepresentativeInfoByDivision'
-    :: Text -- ^ 'ocdId'
+    :: Text -- ^ 'rribdOcdId'
     -> RepresentativesRepresentativeInfoByDivision'
 representativesRepresentativeInfoByDivision' pRribdOcdId_ =
     RepresentativesRepresentativeInfoByDivision'

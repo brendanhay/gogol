@@ -25,7 +25,7 @@
 -- the requested invitation or for access errors. * \`NOT_FOUND\` if no
 -- invitation exists with the requested ID.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomInvitationsGet@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.invitations.get@.
 module Network.Google.Resource.Classroom.Invitations.Get
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Classroom.Invitations.Get
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomInvitationsGet@ method which the
+-- | A resource alias for @classroom.invitations.get@ method which the
 -- 'InvitationsGet'' request conforms to.
 type InvitationsGetResource =
      "v1" :>
@@ -101,7 +101,7 @@ data InvitationsGet' = InvitationsGet'
 --
 -- * 'igCallback'
 invitationsGet'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'igId'
     -> InvitationsGet'
 invitationsGet' pIgId_ =
     InvitationsGet'

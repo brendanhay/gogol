@@ -23,7 +23,7 @@
 -- Creates a TargetVpnGateway resource in the specified project and region
 -- using the data included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetVPNGatewaysInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetVpnGateways.insert@.
 module Network.Google.Resource.Compute.TargetVPNGateways.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.TargetVPNGateways.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetVPNGatewaysInsert@ method which the
+-- | A resource alias for @compute.targetVpnGateways.insert@ method which the
 -- 'TargetVPNGatewaysInsert'' request conforms to.
 type TargetVPNGatewaysInsertResource =
      Capture "project" Text :>
@@ -73,9 +73,9 @@ data TargetVPNGatewaysInsert' = TargetVPNGatewaysInsert'
 --
 -- * 'tvgiRegion'
 targetVPNGatewaysInsert'
-    :: Text -- ^ 'project'
-    -> TargetVPNGateway -- ^ 'payload'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'tvgiProject'
+    -> TargetVPNGateway -- ^ 'tvgiPayload'
+    -> Text -- ^ 'tvgiRegion'
     -> TargetVPNGatewaysInsert'
 targetVPNGatewaysInsert' pTvgiProject_ pTvgiPayload_ pTvgiRegion_ =
     TargetVPNGatewaysInsert'

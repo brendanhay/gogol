@@ -25,7 +25,7 @@
 -- permanent -- you will not be able to re-register a beacon with this ID
 -- again.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsDecommission@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.decommission@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Decommission
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Decommission
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconBeaconsDecommission@ method which the
+-- | A resource alias for @proximitybeacon.beacons.decommission@ method which the
 -- 'BeaconsDecommission'' request conforms to.
 type BeaconsDecommissionResource =
      "v1beta1" :>
@@ -100,7 +100,7 @@ data BeaconsDecommission' = BeaconsDecommission'
 --
 -- * 'bdCallback'
 beaconsDecommission'
-    :: Text -- ^ 'beaconName'
+    :: Text -- ^ 'bdBeaconName'
     -> BeaconsDecommission'
 beaconsDecommission' pBdBeaconName_ =
     BeaconsDecommission'

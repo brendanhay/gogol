@@ -22,7 +22,7 @@
 --
 -- Retrieves a domain alias of the customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryDomainAliasesGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.domainAliases.get@.
 module Network.Google.Resource.Directory.DomainAliases.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.DomainAliases.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryDomainAliasesGet@ method which the
+-- | A resource alias for @directory.domainAliases.get@ method which the
 -- 'DomainAliasesGet'' request conforms to.
 type DomainAliasesGetResource =
      "customer" :>
@@ -65,8 +65,8 @@ data DomainAliasesGet' = DomainAliasesGet'
 --
 -- * 'dagCustomer'
 domainAliasesGet'
-    :: Text -- ^ 'domainAliasName'
-    -> Text -- ^ 'customer'
+    :: Text -- ^ 'dagDomainAliasName'
+    -> Text -- ^ 'dagCustomer'
     -> DomainAliasesGet'
 domainAliasesGet' pDagDomainAliasName_ pDagCustomer_ =
     DomainAliasesGet'

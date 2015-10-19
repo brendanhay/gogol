@@ -22,7 +22,7 @@
 --
 -- Inserts a new creative.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativesInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creatives.insert@.
 module Network.Google.Resource.DFAReporting.Creatives.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Creatives.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativesInsert@ method which the
+-- | A resource alias for @dfareporting.creatives.insert@ method which the
 -- 'CreativesInsert'' request conforms to.
 type CreativesInsertResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data CreativesInsert' = CreativesInsert'
 --
 -- * 'crePayload'
 creativesInsert'
-    :: Int64 -- ^ 'profileId'
-    -> Creative -- ^ 'payload'
+    :: Int64 -- ^ 'creProFileId'
+    -> Creative -- ^ 'crePayload'
     -> CreativesInsert'
 creativesInsert' pCreProFileId_ pCrePayload_ =
     CreativesInsert'

@@ -23,7 +23,7 @@
 -- Get the list of players hidden from the given application. This method
 -- is only available to user accounts for your developer console.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementApplicationsListHidden@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.applications.listHidden@.
 module Network.Google.Resource.GamesManagement.Applications.ListHidden
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.GamesManagement.Applications.ListHidden
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementApplicationsListHidden@ method which the
+-- | A resource alias for @gamesManagement.applications.listHidden@ method which the
 -- 'ApplicationsListHidden'' request conforms to.
 type ApplicationsListHiddenResource =
      "applications" :>
@@ -74,7 +74,7 @@ data ApplicationsListHidden' = ApplicationsListHidden'
 --
 -- * 'alhMaxResults'
 applicationsListHidden'
-    :: Text -- ^ 'applicationId'
+    :: Text -- ^ 'alhApplicationId'
     -> ApplicationsListHidden'
 applicationsListHidden' pAlhApplicationId_ =
     ApplicationsListHidden'

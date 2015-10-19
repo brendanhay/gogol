@@ -22,7 +22,7 @@
 --
 -- Updates an existing advertiser group.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertiserGroupsUpdate@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.advertiserGroups.update@.
 module Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAdvertiserGroupsUpdate@ method which the
+-- | A resource alias for @dfareporting.advertiserGroups.update@ method which the
 -- 'AdvertiserGroupsUpdate'' request conforms to.
 type AdvertiserGroupsUpdateResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data AdvertiserGroupsUpdate' = AdvertiserGroupsUpdate'
 --
 -- * 'aguPayload'
 advertiserGroupsUpdate'
-    :: Int64 -- ^ 'profileId'
-    -> AdvertiserGroup -- ^ 'payload'
+    :: Int64 -- ^ 'aguProFileId'
+    -> AdvertiserGroup -- ^ 'aguPayload'
     -> AdvertiserGroupsUpdate'
 advertiserGroupsUpdate' pAguProFileId_ pAguPayload_ =
     AdvertiserGroupsUpdate'

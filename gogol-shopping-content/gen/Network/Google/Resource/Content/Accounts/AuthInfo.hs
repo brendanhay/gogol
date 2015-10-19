@@ -22,7 +22,7 @@
 --
 -- Returns information about the authenticated user.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountsAuthInfo@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounts.authinfo@.
 module Network.Google.Resource.Content.Accounts.AuthInfo
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.Content.Accounts.AuthInfo
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccountsAuthInfo@ method which the
+-- | A resource alias for @content.accounts.authinfo@ method which the
 -- 'AccountsAuthInfo'' request conforms to.
 type AccountsAuthInfoResource =
      "accounts" :>

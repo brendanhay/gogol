@@ -22,7 +22,7 @@
 --
 -- Create a new filter.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementFiltersInsert@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.filters.insert@.
 module Network.Google.Resource.Analytics.Management.Filters.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Analytics.Management.Filters.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementFiltersInsert@ method which the
+-- | A resource alias for @analytics.management.filters.insert@ method which the
 -- 'ManagementFiltersInsert'' request conforms to.
 type ManagementFiltersInsertResource =
      "management" :>
@@ -66,8 +66,8 @@ data ManagementFiltersInsert' = ManagementFiltersInsert'
 --
 -- * 'mfiAccountId'
 managementFiltersInsert'
-    :: Filter -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Filter -- ^ 'mfiPayload'
+    -> Text -- ^ 'mfiAccountId'
     -> ManagementFiltersInsert'
 managementFiltersInsert' pMfiPayload_ pMfiAccountId_ =
     ManagementFiltersInsert'

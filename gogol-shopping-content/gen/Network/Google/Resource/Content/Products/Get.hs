@@ -22,7 +22,7 @@
 --
 -- Retrieves a product from your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentProductsGet@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.products.get@.
 module Network.Google.Resource.Content.Products.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Content.Products.Get
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentProductsGet@ method which the
+-- | A resource alias for @content.products.get@ method which the
 -- 'ProductsGet'' request conforms to.
 type ProductsGetResource =
      Capture "merchantId" Word64 :>
@@ -64,8 +64,8 @@ data ProductsGet' = ProductsGet'
 --
 -- * 'pgProductId'
 productsGet'
-    :: Word64 -- ^ 'merchantId'
-    -> Text -- ^ 'productId'
+    :: Word64 -- ^ 'pgMerchantId'
+    -> Text -- ^ 'pgProductId'
     -> ProductsGet'
 productsGet' pPgMerchantId_ pPgProductId_ =
     ProductsGet'

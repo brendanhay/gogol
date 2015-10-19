@@ -154,7 +154,7 @@ newtype BeaconProperties = BeaconProperties
 --
 -- * 'bpAddtional'
 beaconProperties
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'bpAddtional'
     -> BeaconProperties
 beaconProperties pBpAddtional_ =
     BeaconProperties

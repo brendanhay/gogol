@@ -22,7 +22,7 @@
 --
 -- Creates a snapshot of this disk.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDisksCreateSnapshot@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.disks.createSnapshot@.
 module Network.Google.Resource.Compute.Disks.CreateSnapshot
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Disks.CreateSnapshot
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeDisksCreateSnapshot@ method which the
+-- | A resource alias for @compute.disks.createSnapshot@ method which the
 -- 'DisksCreateSnapshot'' request conforms to.
 type DisksCreateSnapshotResource =
      Capture "project" Text :>
@@ -76,10 +76,10 @@ data DisksCreateSnapshot' = DisksCreateSnapshot'
 --
 -- * 'dcsPayload'
 disksCreateSnapshot'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'disk'
-    -> Text -- ^ 'zone'
-    -> Snapshot -- ^ 'payload'
+    :: Text -- ^ 'dcsProject'
+    -> Text -- ^ 'dcsDisk'
+    -> Text -- ^ 'dcsZone'
+    -> Snapshot -- ^ 'dcsPayload'
     -> DisksCreateSnapshot'
 disksCreateSnapshot' pDcsProject_ pDcsDisk_ pDcsZone_ pDcsPayload_ =
     DisksCreateSnapshot'

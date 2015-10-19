@@ -22,7 +22,7 @@
 --
 -- Unlocks this achievement for the currently authenticated player.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementsUnlock@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.achievements.unlock@.
 module Network.Google.Resource.Games.Achievements.Unlock
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Games.Achievements.Unlock
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesAchievementsUnlock@ method which the
+-- | A resource alias for @games.achievements.unlock@ method which the
 -- 'AchievementsUnlock'' request conforms to.
 type AchievementsUnlockResource =
      "achievements" :>
@@ -61,7 +61,7 @@ newtype AchievementsUnlock' = AchievementsUnlock'
 --
 -- * 'auAchievementId'
 achievementsUnlock'
-    :: Text -- ^ 'achievementId'
+    :: Text -- ^ 'auAchievementId'
     -> AchievementsUnlock'
 achievementsUnlock' pAuAchievementId_ =
     AchievementsUnlock'

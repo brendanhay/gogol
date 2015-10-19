@@ -25,7 +25,7 @@
 -- to 50 rasters can be included in a single batchInsert request. Each
 -- batchInsert request is atomic.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRasterCollectionsRastersBatchInsert@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.rasterCollections.rasters.batchInsert@.
 module Network.Google.Resource.MapsEngine.RasterCollections.Rasters.BatchInsert
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Rasters.BatchInsert
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRasterCollectionsRastersBatchInsert@ method which the
+-- | A resource alias for @mapsengine.rasterCollections.rasters.batchInsert@ method which the
 -- 'RasterCollectionsRastersBatchInsert'' request conforms to.
 type RasterCollectionsRastersBatchInsertResource =
      "rasterCollections" :>
@@ -76,8 +76,8 @@ data RasterCollectionsRastersBatchInsert' = RasterCollectionsRastersBatchInsert'
 --
 -- * 'rcrbiId'
 rasterCollectionsRastersBatchInsert'
-    :: RasterCollectionsRastersBatchInsertRequest -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: RasterCollectionsRastersBatchInsertRequest -- ^ 'rcrbiPayload'
+    -> Text -- ^ 'rcrbiId'
     -> RasterCollectionsRastersBatchInsert'
 rasterCollectionsRastersBatchInsert' pRcrbiPayload_ pRcrbiId_ =
     RasterCollectionsRastersBatchInsert'

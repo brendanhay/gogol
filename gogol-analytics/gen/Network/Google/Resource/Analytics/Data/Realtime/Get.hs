@@ -22,7 +22,7 @@
 --
 -- Returns real time data for a view (profile).
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsDataRealtimeGet@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.data.realtime.get@.
 module Network.Google.Resource.Analytics.Data.Realtime.Get
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Analytics.Data.Realtime.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsDataRealtimeGet@ method which the
+-- | A resource alias for @analytics.data.realtime.get@ method which the
 -- 'DataRealtimeGet'' request conforms to.
 type DataRealtimeGetResource =
      "data" :>
@@ -85,8 +85,8 @@ data DataRealtimeGet' = DataRealtimeGet'
 --
 -- * 'drgMaxResults'
 dataRealtimeGet'
-    :: Text -- ^ 'metrics'
-    -> Text -- ^ 'ids'
+    :: Text -- ^ 'drgMetrics'
+    -> Text -- ^ 'drgIds'
     -> DataRealtimeGet'
 dataRealtimeGet' pDrgMetrics_ pDrgIds_ =
     DataRealtimeGet'

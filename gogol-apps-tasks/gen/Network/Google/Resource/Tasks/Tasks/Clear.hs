@@ -24,7 +24,7 @@
 -- tasks will be marked as \'hidden\' and no longer be returned by default
 -- when retrieving all tasks for a task list.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTasksClear@.
+-- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasks.clear@.
 module Network.Google.Resource.Tasks.Tasks.Clear
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Tasks.Tasks.Clear
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTasksClear@ method which the
+-- | A resource alias for @tasks.tasks.clear@ method which the
 -- 'TasksClear'' request conforms to.
 type TasksClearResource =
      "lists" :>
@@ -64,7 +64,7 @@ newtype TasksClear' = TasksClear'
 --
 -- * 'tcTaskList'
 tasksClear'
-    :: Text -- ^ 'tasklist'
+    :: Text -- ^ 'tcTaskList'
     -> TasksClear'
 tasksClear' pTcTaskList_ =
     TasksClear'

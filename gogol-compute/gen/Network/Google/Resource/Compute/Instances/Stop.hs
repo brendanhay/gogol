@@ -27,7 +27,7 @@
 -- persistent disks and static IP addresses,will continue to be charged
 -- until they are deleted. For more information, see Stopping an instance.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesStop@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.stop@.
 module Network.Google.Resource.Compute.Instances.Stop
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.Instances.Stop
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesStop@ method which the
+-- | A resource alias for @compute.instances.stop@ method which the
 -- 'InstancesStop'' request conforms to.
 type InstancesStopResource =
      Capture "project" Text :>
@@ -81,9 +81,9 @@ data InstancesStop' = InstancesStop'
 --
 -- * 'isInstance'
 instancesStop'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'isProject'
+    -> Text -- ^ 'isZone'
+    -> Text -- ^ 'isInstance'
     -> InstancesStop'
 instancesStop' pIsProject_ pIsZone_ pIsInstance_ =
     InstancesStop'

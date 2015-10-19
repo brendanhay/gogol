@@ -22,7 +22,7 @@
 --
 -- Sets my reading position information for a volume.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryReadingPositionsSetPosition@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.readingpositions.setPosition@.
 module Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryReadingPositionsSetPosition@ method which the
+-- | A resource alias for @books.mylibrary.readingpositions.setPosition@ method which the
 -- 'MyLibraryReadingPositionsSetPosition'' request conforms to.
 type MyLibraryReadingPositionsSetPositionResource =
      "mylibrary" :>
@@ -93,9 +93,9 @@ data MyLibraryReadingPositionsSetPosition' = MyLibraryReadingPositionsSetPositio
 --
 -- * 'mlrpspPosition'
 myLibraryReadingPositionsSetPosition'
-    :: Text -- ^ 'volumeId'
-    -> Text -- ^ 'timestamp'
-    -> Text -- ^ 'position'
+    :: Text -- ^ 'mlrpspVolumeId'
+    -> Text -- ^ 'mlrpspTimestamp'
+    -> Text -- ^ 'mlrpspPosition'
     -> MyLibraryReadingPositionsSetPosition'
 myLibraryReadingPositionsSetPosition' pMlrpspVolumeId_ pMlrpspTimestamp_ pMlrpspPosition_ =
     MyLibraryReadingPositionsSetPosition'

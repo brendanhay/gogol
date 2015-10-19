@@ -22,7 +22,7 @@
 --
 -- Lists datasets within a project.
 --
--- /See:/ < Genomics API Reference> for @GenomicsDatasetsList@.
+-- /See:/ < Genomics API Reference> for @genomics.datasets.list@.
 module Network.Google.Resource.Genomics.Datasets.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Genomics.Datasets.List
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsDatasetsList@ method which the
+-- | A resource alias for @genomics.datasets.list@ method which the
 -- 'DatasetsList'' request conforms to.
 type DatasetsListResource =
      "v1" :>

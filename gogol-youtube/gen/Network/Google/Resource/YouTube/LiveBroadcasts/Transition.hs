@@ -27,7 +27,7 @@
 -- you should confirm that the value of the status.streamStatus property
 -- for the stream bound to your broadcast is active.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveBroadcastsTransition@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveBroadcasts.transition@.
 module Network.Google.Resource.YouTube.LiveBroadcasts.Transition
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Transition
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveBroadcastsTransition@ method which the
+-- | A resource alias for @youtube.liveBroadcasts.transition@ method which the
 -- 'LiveBroadcastsTransition'' request conforms to.
 type LiveBroadcastsTransitionResource =
      "liveBroadcasts" :>
@@ -93,9 +93,9 @@ data LiveBroadcastsTransition' = LiveBroadcastsTransition'
 --
 -- * 'lbtId'
 liveBroadcastsTransition'
-    :: Text -- ^ 'part'
-    -> LiveBroadcastsTransitionBroadcastStatus -- ^ 'broadcastStatus'
-    -> Text -- ^ 'id'
+    :: Text -- ^ 'lbtPart'
+    -> LiveBroadcastsTransitionBroadcastStatus -- ^ 'lbtBroadcastStatus'
+    -> Text -- ^ 'lbtId'
     -> LiveBroadcastsTransition'
 liveBroadcastsTransition' pLbtPart_ pLbtBroadcastStatus_ pLbtId_ =
     LiveBroadcastsTransition'

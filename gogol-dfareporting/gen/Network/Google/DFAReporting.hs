@@ -26,583 +26,583 @@ module Network.Google.DFAReporting
 
     -- * Resources
 
-    -- ** DfareportingAccountActiveAdSummariesGet
+    -- ** dfareporting.accountActiveAdSummaries.get
     , module Network.Google.Resource.DFAReporting.AccountActiveAdSummaries.Get
 
-    -- ** DfareportingAccountPermissionGroupsGet
+    -- ** dfareporting.accountPermissionGroups.get
     , module Network.Google.Resource.DFAReporting.AccountPermissionGroups.Get
 
-    -- ** DfareportingAccountPermissionGroupsList
+    -- ** dfareporting.accountPermissionGroups.list
     , module Network.Google.Resource.DFAReporting.AccountPermissionGroups.List
 
-    -- ** DfareportingAccountPermissionsGet
+    -- ** dfareporting.accountPermissions.get
     , module Network.Google.Resource.DFAReporting.AccountPermissions.Get
 
-    -- ** DfareportingAccountPermissionsList
+    -- ** dfareporting.accountPermissions.list
     , module Network.Google.Resource.DFAReporting.AccountPermissions.List
 
-    -- ** DfareportingAccountUserProFilesGet
+    -- ** dfareporting.accountUserProfiles.get
     , module Network.Google.Resource.DFAReporting.AccountUserProFiles.Get
 
-    -- ** DfareportingAccountUserProFilesInsert
+    -- ** dfareporting.accountUserProfiles.insert
     , module Network.Google.Resource.DFAReporting.AccountUserProFiles.Insert
 
-    -- ** DfareportingAccountUserProFilesList
+    -- ** dfareporting.accountUserProfiles.list
     , module Network.Google.Resource.DFAReporting.AccountUserProFiles.List
 
-    -- ** DfareportingAccountUserProFilesPatch
+    -- ** dfareporting.accountUserProfiles.patch
     , module Network.Google.Resource.DFAReporting.AccountUserProFiles.Patch
 
-    -- ** DfareportingAccountUserProFilesUpdate
+    -- ** dfareporting.accountUserProfiles.update
     , module Network.Google.Resource.DFAReporting.AccountUserProFiles.Update
 
-    -- ** DfareportingAccountsGet
+    -- ** dfareporting.accounts.get
     , module Network.Google.Resource.DFAReporting.Accounts.Get
 
-    -- ** DfareportingAccountsList
+    -- ** dfareporting.accounts.list
     , module Network.Google.Resource.DFAReporting.Accounts.List
 
-    -- ** DfareportingAccountsPatch
+    -- ** dfareporting.accounts.patch
     , module Network.Google.Resource.DFAReporting.Accounts.Patch
 
-    -- ** DfareportingAccountsUpdate
+    -- ** dfareporting.accounts.update
     , module Network.Google.Resource.DFAReporting.Accounts.Update
 
-    -- ** DfareportingAdsGet
+    -- ** dfareporting.ads.get
     , module Network.Google.Resource.DFAReporting.Ads.Get
 
-    -- ** DfareportingAdsInsert
+    -- ** dfareporting.ads.insert
     , module Network.Google.Resource.DFAReporting.Ads.Insert
 
-    -- ** DfareportingAdsList
+    -- ** dfareporting.ads.list
     , module Network.Google.Resource.DFAReporting.Ads.List
 
-    -- ** DfareportingAdsPatch
+    -- ** dfareporting.ads.patch
     , module Network.Google.Resource.DFAReporting.Ads.Patch
 
-    -- ** DfareportingAdsUpdate
+    -- ** dfareporting.ads.update
     , module Network.Google.Resource.DFAReporting.Ads.Update
 
-    -- ** DfareportingAdvertiserGroupsDelete
+    -- ** dfareporting.advertiserGroups.delete
     , module Network.Google.Resource.DFAReporting.AdvertiserGroups.Delete
 
-    -- ** DfareportingAdvertiserGroupsGet
+    -- ** dfareporting.advertiserGroups.get
     , module Network.Google.Resource.DFAReporting.AdvertiserGroups.Get
 
-    -- ** DfareportingAdvertiserGroupsInsert
+    -- ** dfareporting.advertiserGroups.insert
     , module Network.Google.Resource.DFAReporting.AdvertiserGroups.Insert
 
-    -- ** DfareportingAdvertiserGroupsList
+    -- ** dfareporting.advertiserGroups.list
     , module Network.Google.Resource.DFAReporting.AdvertiserGroups.List
 
-    -- ** DfareportingAdvertiserGroupsPatch
+    -- ** dfareporting.advertiserGroups.patch
     , module Network.Google.Resource.DFAReporting.AdvertiserGroups.Patch
 
-    -- ** DfareportingAdvertiserGroupsUpdate
+    -- ** dfareporting.advertiserGroups.update
     , module Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
 
-    -- ** DfareportingAdvertisersGet
+    -- ** dfareporting.advertisers.get
     , module Network.Google.Resource.DFAReporting.Advertisers.Get
 
-    -- ** DfareportingAdvertisersInsert
+    -- ** dfareporting.advertisers.insert
     , module Network.Google.Resource.DFAReporting.Advertisers.Insert
 
-    -- ** DfareportingAdvertisersList
+    -- ** dfareporting.advertisers.list
     , module Network.Google.Resource.DFAReporting.Advertisers.List
 
-    -- ** DfareportingAdvertisersPatch
+    -- ** dfareporting.advertisers.patch
     , module Network.Google.Resource.DFAReporting.Advertisers.Patch
 
-    -- ** DfareportingAdvertisersUpdate
+    -- ** dfareporting.advertisers.update
     , module Network.Google.Resource.DFAReporting.Advertisers.Update
 
-    -- ** DfareportingBrowsersList
+    -- ** dfareporting.browsers.list
     , module Network.Google.Resource.DFAReporting.Browsers.List
 
-    -- ** DfareportingCampaignCreativeAssociationsInsert
+    -- ** dfareporting.campaignCreativeAssociations.insert
     , module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.Insert
 
-    -- ** DfareportingCampaignCreativeAssociationsList
+    -- ** dfareporting.campaignCreativeAssociations.list
     , module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.List
 
-    -- ** DfareportingCampaignsGet
+    -- ** dfareporting.campaigns.get
     , module Network.Google.Resource.DFAReporting.Campaigns.Get
 
-    -- ** DfareportingCampaignsInsert
+    -- ** dfareporting.campaigns.insert
     , module Network.Google.Resource.DFAReporting.Campaigns.Insert
 
-    -- ** DfareportingCampaignsList
+    -- ** dfareporting.campaigns.list
     , module Network.Google.Resource.DFAReporting.Campaigns.List
 
-    -- ** DfareportingCampaignsPatch
+    -- ** dfareporting.campaigns.patch
     , module Network.Google.Resource.DFAReporting.Campaigns.Patch
 
-    -- ** DfareportingCampaignsUpdate
+    -- ** dfareporting.campaigns.update
     , module Network.Google.Resource.DFAReporting.Campaigns.Update
 
-    -- ** DfareportingChangeLogsGet
+    -- ** dfareporting.changeLogs.get
     , module Network.Google.Resource.DFAReporting.ChangeLogs.Get
 
-    -- ** DfareportingChangeLogsList
+    -- ** dfareporting.changeLogs.list
     , module Network.Google.Resource.DFAReporting.ChangeLogs.List
 
-    -- ** DfareportingCitiesList
+    -- ** dfareporting.cities.list
     , module Network.Google.Resource.DFAReporting.Cities.List
 
-    -- ** DfareportingConnectionTypesGet
+    -- ** dfareporting.connectionTypes.get
     , module Network.Google.Resource.DFAReporting.ConnectionTypes.Get
 
-    -- ** DfareportingConnectionTypesList
+    -- ** dfareporting.connectionTypes.list
     , module Network.Google.Resource.DFAReporting.ConnectionTypes.List
 
-    -- ** DfareportingContentCategoriesDelete
+    -- ** dfareporting.contentCategories.delete
     , module Network.Google.Resource.DFAReporting.ContentCategories.Delete
 
-    -- ** DfareportingContentCategoriesGet
+    -- ** dfareporting.contentCategories.get
     , module Network.Google.Resource.DFAReporting.ContentCategories.Get
 
-    -- ** DfareportingContentCategoriesInsert
+    -- ** dfareporting.contentCategories.insert
     , module Network.Google.Resource.DFAReporting.ContentCategories.Insert
 
-    -- ** DfareportingContentCategoriesList
+    -- ** dfareporting.contentCategories.list
     , module Network.Google.Resource.DFAReporting.ContentCategories.List
 
-    -- ** DfareportingContentCategoriesPatch
+    -- ** dfareporting.contentCategories.patch
     , module Network.Google.Resource.DFAReporting.ContentCategories.Patch
 
-    -- ** DfareportingContentCategoriesUpdate
+    -- ** dfareporting.contentCategories.update
     , module Network.Google.Resource.DFAReporting.ContentCategories.Update
 
-    -- ** DfareportingCountriesGet
+    -- ** dfareporting.countries.get
     , module Network.Google.Resource.DFAReporting.Countries.Get
 
-    -- ** DfareportingCountriesList
+    -- ** dfareporting.countries.list
     , module Network.Google.Resource.DFAReporting.Countries.List
 
-    -- ** DfareportingCreativeAssetsInsert
+    -- ** dfareporting.creativeAssets.insert
     , module Network.Google.Resource.DFAReporting.CreativeAssets.Insert
 
-    -- ** DfareportingCreativeFieldValuesDelete
+    -- ** dfareporting.creativeFieldValues.delete
     , module Network.Google.Resource.DFAReporting.CreativeFieldValues.Delete
 
-    -- ** DfareportingCreativeFieldValuesGet
+    -- ** dfareporting.creativeFieldValues.get
     , module Network.Google.Resource.DFAReporting.CreativeFieldValues.Get
 
-    -- ** DfareportingCreativeFieldValuesInsert
+    -- ** dfareporting.creativeFieldValues.insert
     , module Network.Google.Resource.DFAReporting.CreativeFieldValues.Insert
 
-    -- ** DfareportingCreativeFieldValuesList
+    -- ** dfareporting.creativeFieldValues.list
     , module Network.Google.Resource.DFAReporting.CreativeFieldValues.List
 
-    -- ** DfareportingCreativeFieldValuesPatch
+    -- ** dfareporting.creativeFieldValues.patch
     , module Network.Google.Resource.DFAReporting.CreativeFieldValues.Patch
 
-    -- ** DfareportingCreativeFieldValuesUpdate
+    -- ** dfareporting.creativeFieldValues.update
     , module Network.Google.Resource.DFAReporting.CreativeFieldValues.Update
 
-    -- ** DfareportingCreativeFieldsDelete
+    -- ** dfareporting.creativeFields.delete
     , module Network.Google.Resource.DFAReporting.CreativeFields.Delete
 
-    -- ** DfareportingCreativeFieldsGet
+    -- ** dfareporting.creativeFields.get
     , module Network.Google.Resource.DFAReporting.CreativeFields.Get
 
-    -- ** DfareportingCreativeFieldsInsert
+    -- ** dfareporting.creativeFields.insert
     , module Network.Google.Resource.DFAReporting.CreativeFields.Insert
 
-    -- ** DfareportingCreativeFieldsList
+    -- ** dfareporting.creativeFields.list
     , module Network.Google.Resource.DFAReporting.CreativeFields.List
 
-    -- ** DfareportingCreativeFieldsPatch
+    -- ** dfareporting.creativeFields.patch
     , module Network.Google.Resource.DFAReporting.CreativeFields.Patch
 
-    -- ** DfareportingCreativeFieldsUpdate
+    -- ** dfareporting.creativeFields.update
     , module Network.Google.Resource.DFAReporting.CreativeFields.Update
 
-    -- ** DfareportingCreativeGroupsGet
+    -- ** dfareporting.creativeGroups.get
     , module Network.Google.Resource.DFAReporting.CreativeGroups.Get
 
-    -- ** DfareportingCreativeGroupsInsert
+    -- ** dfareporting.creativeGroups.insert
     , module Network.Google.Resource.DFAReporting.CreativeGroups.Insert
 
-    -- ** DfareportingCreativeGroupsList
+    -- ** dfareporting.creativeGroups.list
     , module Network.Google.Resource.DFAReporting.CreativeGroups.List
 
-    -- ** DfareportingCreativeGroupsPatch
+    -- ** dfareporting.creativeGroups.patch
     , module Network.Google.Resource.DFAReporting.CreativeGroups.Patch
 
-    -- ** DfareportingCreativeGroupsUpdate
+    -- ** dfareporting.creativeGroups.update
     , module Network.Google.Resource.DFAReporting.CreativeGroups.Update
 
-    -- ** DfareportingCreativesGet
+    -- ** dfareporting.creatives.get
     , module Network.Google.Resource.DFAReporting.Creatives.Get
 
-    -- ** DfareportingCreativesInsert
+    -- ** dfareporting.creatives.insert
     , module Network.Google.Resource.DFAReporting.Creatives.Insert
 
-    -- ** DfareportingCreativesList
+    -- ** dfareporting.creatives.list
     , module Network.Google.Resource.DFAReporting.Creatives.List
 
-    -- ** DfareportingCreativesPatch
+    -- ** dfareporting.creatives.patch
     , module Network.Google.Resource.DFAReporting.Creatives.Patch
 
-    -- ** DfareportingCreativesUpdate
+    -- ** dfareporting.creatives.update
     , module Network.Google.Resource.DFAReporting.Creatives.Update
 
-    -- ** DfareportingDimensionValuesQuery
+    -- ** dfareporting.dimensionValues.query
     , module Network.Google.Resource.DFAReporting.DimensionValues.Query
 
-    -- ** DfareportingDirectorySiteContactsGet
+    -- ** dfareporting.directorySiteContacts.get
     , module Network.Google.Resource.DFAReporting.DirectorySiteContacts.Get
 
-    -- ** DfareportingDirectorySiteContactsList
+    -- ** dfareporting.directorySiteContacts.list
     , module Network.Google.Resource.DFAReporting.DirectorySiteContacts.List
 
-    -- ** DfareportingDirectorySitesGet
+    -- ** dfareporting.directorySites.get
     , module Network.Google.Resource.DFAReporting.DirectorySites.Get
 
-    -- ** DfareportingDirectorySitesInsert
+    -- ** dfareporting.directorySites.insert
     , module Network.Google.Resource.DFAReporting.DirectorySites.Insert
 
-    -- ** DfareportingDirectorySitesList
+    -- ** dfareporting.directorySites.list
     , module Network.Google.Resource.DFAReporting.DirectorySites.List
 
-    -- ** DfareportingEventTagsDelete
+    -- ** dfareporting.eventTags.delete
     , module Network.Google.Resource.DFAReporting.EventTags.Delete
 
-    -- ** DfareportingEventTagsGet
+    -- ** dfareporting.eventTags.get
     , module Network.Google.Resource.DFAReporting.EventTags.Get
 
-    -- ** DfareportingEventTagsInsert
+    -- ** dfareporting.eventTags.insert
     , module Network.Google.Resource.DFAReporting.EventTags.Insert
 
-    -- ** DfareportingEventTagsList
+    -- ** dfareporting.eventTags.list
     , module Network.Google.Resource.DFAReporting.EventTags.List
 
-    -- ** DfareportingEventTagsPatch
+    -- ** dfareporting.eventTags.patch
     , module Network.Google.Resource.DFAReporting.EventTags.Patch
 
-    -- ** DfareportingEventTagsUpdate
+    -- ** dfareporting.eventTags.update
     , module Network.Google.Resource.DFAReporting.EventTags.Update
 
-    -- ** DfareportingFilesGet
+    -- ** dfareporting.files.get
     , module Network.Google.Resource.DFAReporting.Files.Get
 
-    -- ** DfareportingFilesList
+    -- ** dfareporting.files.list
     , module Network.Google.Resource.DFAReporting.Files.List
 
-    -- ** DfareportingFloodlightActivitiesDelete
+    -- ** dfareporting.floodlightActivities.delete
     , module Network.Google.Resource.DFAReporting.FloodlightActivities.Delete
 
-    -- ** DfareportingFloodlightActivitiesGeneratetag
+    -- ** dfareporting.floodlightActivities.generatetag
     , module Network.Google.Resource.DFAReporting.FloodlightActivities.Generatetag
 
-    -- ** DfareportingFloodlightActivitiesGet
+    -- ** dfareporting.floodlightActivities.get
     , module Network.Google.Resource.DFAReporting.FloodlightActivities.Get
 
-    -- ** DfareportingFloodlightActivitiesInsert
+    -- ** dfareporting.floodlightActivities.insert
     , module Network.Google.Resource.DFAReporting.FloodlightActivities.Insert
 
-    -- ** DfareportingFloodlightActivitiesList
+    -- ** dfareporting.floodlightActivities.list
     , module Network.Google.Resource.DFAReporting.FloodlightActivities.List
 
-    -- ** DfareportingFloodlightActivitiesPatch
+    -- ** dfareporting.floodlightActivities.patch
     , module Network.Google.Resource.DFAReporting.FloodlightActivities.Patch
 
-    -- ** DfareportingFloodlightActivitiesUpdate
+    -- ** dfareporting.floodlightActivities.update
     , module Network.Google.Resource.DFAReporting.FloodlightActivities.Update
 
-    -- ** DfareportingFloodlightActivityGroupsDelete
+    -- ** dfareporting.floodlightActivityGroups.delete
     , module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Delete
 
-    -- ** DfareportingFloodlightActivityGroupsGet
+    -- ** dfareporting.floodlightActivityGroups.get
     , module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Get
 
-    -- ** DfareportingFloodlightActivityGroupsInsert
+    -- ** dfareporting.floodlightActivityGroups.insert
     , module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Insert
 
-    -- ** DfareportingFloodlightActivityGroupsList
+    -- ** dfareporting.floodlightActivityGroups.list
     , module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List
 
-    -- ** DfareportingFloodlightActivityGroupsPatch
+    -- ** dfareporting.floodlightActivityGroups.patch
     , module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Patch
 
-    -- ** DfareportingFloodlightActivityGroupsUpdate
+    -- ** dfareporting.floodlightActivityGroups.update
     , module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Update
 
-    -- ** DfareportingFloodlightConfigurationsGet
+    -- ** dfareporting.floodlightConfigurations.get
     , module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Get
 
-    -- ** DfareportingFloodlightConfigurationsList
+    -- ** dfareporting.floodlightConfigurations.list
     , module Network.Google.Resource.DFAReporting.FloodlightConfigurations.List
 
-    -- ** DfareportingFloodlightConfigurationsPatch
+    -- ** dfareporting.floodlightConfigurations.patch
     , module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Patch
 
-    -- ** DfareportingFloodlightConfigurationsUpdate
+    -- ** dfareporting.floodlightConfigurations.update
     , module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Update
 
-    -- ** DfareportingInventoryItemsGet
+    -- ** dfareporting.inventoryItems.get
     , module Network.Google.Resource.DFAReporting.InventoryItems.Get
 
-    -- ** DfareportingInventoryItemsList
+    -- ** dfareporting.inventoryItems.list
     , module Network.Google.Resource.DFAReporting.InventoryItems.List
 
-    -- ** DfareportingLandingPagesDelete
+    -- ** dfareporting.landingPages.delete
     , module Network.Google.Resource.DFAReporting.LandingPages.Delete
 
-    -- ** DfareportingLandingPagesGet
+    -- ** dfareporting.landingPages.get
     , module Network.Google.Resource.DFAReporting.LandingPages.Get
 
-    -- ** DfareportingLandingPagesInsert
+    -- ** dfareporting.landingPages.insert
     , module Network.Google.Resource.DFAReporting.LandingPages.Insert
 
-    -- ** DfareportingLandingPagesList
+    -- ** dfareporting.landingPages.list
     , module Network.Google.Resource.DFAReporting.LandingPages.List
 
-    -- ** DfareportingLandingPagesPatch
+    -- ** dfareporting.landingPages.patch
     , module Network.Google.Resource.DFAReporting.LandingPages.Patch
 
-    -- ** DfareportingLandingPagesUpdate
+    -- ** dfareporting.landingPages.update
     , module Network.Google.Resource.DFAReporting.LandingPages.Update
 
-    -- ** DfareportingMetrosList
+    -- ** dfareporting.metros.list
     , module Network.Google.Resource.DFAReporting.Metros.List
 
-    -- ** DfareportingMobileCarriersGet
+    -- ** dfareporting.mobileCarriers.get
     , module Network.Google.Resource.DFAReporting.MobileCarriers.Get
 
-    -- ** DfareportingMobileCarriersList
+    -- ** dfareporting.mobileCarriers.list
     , module Network.Google.Resource.DFAReporting.MobileCarriers.List
 
-    -- ** DfareportingOperatingSystemVersionsGet
+    -- ** dfareporting.operatingSystemVersions.get
     , module Network.Google.Resource.DFAReporting.OperatingSystemVersions.Get
 
-    -- ** DfareportingOperatingSystemVersionsList
+    -- ** dfareporting.operatingSystemVersions.list
     , module Network.Google.Resource.DFAReporting.OperatingSystemVersions.List
 
-    -- ** DfareportingOperatingSystemsGet
+    -- ** dfareporting.operatingSystems.get
     , module Network.Google.Resource.DFAReporting.OperatingSystems.Get
 
-    -- ** DfareportingOperatingSystemsList
+    -- ** dfareporting.operatingSystems.list
     , module Network.Google.Resource.DFAReporting.OperatingSystems.List
 
-    -- ** DfareportingOrderDocumentsGet
+    -- ** dfareporting.orderDocuments.get
     , module Network.Google.Resource.DFAReporting.OrderDocuments.Get
 
-    -- ** DfareportingOrderDocumentsList
+    -- ** dfareporting.orderDocuments.list
     , module Network.Google.Resource.DFAReporting.OrderDocuments.List
 
-    -- ** DfareportingOrdersGet
+    -- ** dfareporting.orders.get
     , module Network.Google.Resource.DFAReporting.Orders.Get
 
-    -- ** DfareportingOrdersList
+    -- ** dfareporting.orders.list
     , module Network.Google.Resource.DFAReporting.Orders.List
 
-    -- ** DfareportingPlacementGroupsGet
+    -- ** dfareporting.placementGroups.get
     , module Network.Google.Resource.DFAReporting.PlacementGroups.Get
 
-    -- ** DfareportingPlacementGroupsInsert
+    -- ** dfareporting.placementGroups.insert
     , module Network.Google.Resource.DFAReporting.PlacementGroups.Insert
 
-    -- ** DfareportingPlacementGroupsList
+    -- ** dfareporting.placementGroups.list
     , module Network.Google.Resource.DFAReporting.PlacementGroups.List
 
-    -- ** DfareportingPlacementGroupsPatch
+    -- ** dfareporting.placementGroups.patch
     , module Network.Google.Resource.DFAReporting.PlacementGroups.Patch
 
-    -- ** DfareportingPlacementGroupsUpdate
+    -- ** dfareporting.placementGroups.update
     , module Network.Google.Resource.DFAReporting.PlacementGroups.Update
 
-    -- ** DfareportingPlacementStrategiesDelete
+    -- ** dfareporting.placementStrategies.delete
     , module Network.Google.Resource.DFAReporting.PlacementStrategies.Delete
 
-    -- ** DfareportingPlacementStrategiesGet
+    -- ** dfareporting.placementStrategies.get
     , module Network.Google.Resource.DFAReporting.PlacementStrategies.Get
 
-    -- ** DfareportingPlacementStrategiesInsert
+    -- ** dfareporting.placementStrategies.insert
     , module Network.Google.Resource.DFAReporting.PlacementStrategies.Insert
 
-    -- ** DfareportingPlacementStrategiesList
+    -- ** dfareporting.placementStrategies.list
     , module Network.Google.Resource.DFAReporting.PlacementStrategies.List
 
-    -- ** DfareportingPlacementStrategiesPatch
+    -- ** dfareporting.placementStrategies.patch
     , module Network.Google.Resource.DFAReporting.PlacementStrategies.Patch
 
-    -- ** DfareportingPlacementStrategiesUpdate
+    -- ** dfareporting.placementStrategies.update
     , module Network.Google.Resource.DFAReporting.PlacementStrategies.Update
 
-    -- ** DfareportingPlacementsGeneratetags
+    -- ** dfareporting.placements.generatetags
     , module Network.Google.Resource.DFAReporting.Placements.Generatetags
 
-    -- ** DfareportingPlacementsGet
+    -- ** dfareporting.placements.get
     , module Network.Google.Resource.DFAReporting.Placements.Get
 
-    -- ** DfareportingPlacementsInsert
+    -- ** dfareporting.placements.insert
     , module Network.Google.Resource.DFAReporting.Placements.Insert
 
-    -- ** DfareportingPlacementsList
+    -- ** dfareporting.placements.list
     , module Network.Google.Resource.DFAReporting.Placements.List
 
-    -- ** DfareportingPlacementsPatch
+    -- ** dfareporting.placements.patch
     , module Network.Google.Resource.DFAReporting.Placements.Patch
 
-    -- ** DfareportingPlacementsUpdate
+    -- ** dfareporting.placements.update
     , module Network.Google.Resource.DFAReporting.Placements.Update
 
-    -- ** DfareportingPlatformTypesGet
+    -- ** dfareporting.platformTypes.get
     , module Network.Google.Resource.DFAReporting.PlatformTypes.Get
 
-    -- ** DfareportingPlatformTypesList
+    -- ** dfareporting.platformTypes.list
     , module Network.Google.Resource.DFAReporting.PlatformTypes.List
 
-    -- ** DfareportingPostalCodesGet
+    -- ** dfareporting.postalCodes.get
     , module Network.Google.Resource.DFAReporting.PostalCodes.Get
 
-    -- ** DfareportingPostalCodesList
+    -- ** dfareporting.postalCodes.list
     , module Network.Google.Resource.DFAReporting.PostalCodes.List
 
-    -- ** DfareportingProjectsGet
+    -- ** dfareporting.projects.get
     , module Network.Google.Resource.DFAReporting.Projects.Get
 
-    -- ** DfareportingProjectsList
+    -- ** dfareporting.projects.list
     , module Network.Google.Resource.DFAReporting.Projects.List
 
-    -- ** DfareportingRegionsList
+    -- ** dfareporting.regions.list
     , module Network.Google.Resource.DFAReporting.Regions.List
 
-    -- ** DfareportingRemarketingListSharesGet
+    -- ** dfareporting.remarketingListShares.get
     , module Network.Google.Resource.DFAReporting.RemarketingListShares.Get
 
-    -- ** DfareportingRemarketingListSharesPatch
+    -- ** dfareporting.remarketingListShares.patch
     , module Network.Google.Resource.DFAReporting.RemarketingListShares.Patch
 
-    -- ** DfareportingRemarketingListSharesUpdate
+    -- ** dfareporting.remarketingListShares.update
     , module Network.Google.Resource.DFAReporting.RemarketingListShares.Update
 
-    -- ** DfareportingRemarketingListsGet
+    -- ** dfareporting.remarketingLists.get
     , module Network.Google.Resource.DFAReporting.RemarketingLists.Get
 
-    -- ** DfareportingRemarketingListsInsert
+    -- ** dfareporting.remarketingLists.insert
     , module Network.Google.Resource.DFAReporting.RemarketingLists.Insert
 
-    -- ** DfareportingRemarketingListsList
+    -- ** dfareporting.remarketingLists.list
     , module Network.Google.Resource.DFAReporting.RemarketingLists.List
 
-    -- ** DfareportingRemarketingListsPatch
+    -- ** dfareporting.remarketingLists.patch
     , module Network.Google.Resource.DFAReporting.RemarketingLists.Patch
 
-    -- ** DfareportingRemarketingListsUpdate
+    -- ** dfareporting.remarketingLists.update
     , module Network.Google.Resource.DFAReporting.RemarketingLists.Update
 
-    -- ** DfareportingReportsCompatibleFieldsQuery
+    -- ** dfareporting.reports.compatibleFields.query
     , module Network.Google.Resource.DFAReporting.Reports.CompatibleFields.Query
 
-    -- ** DfareportingReportsDelete
+    -- ** dfareporting.reports.delete
     , module Network.Google.Resource.DFAReporting.Reports.Delete
 
-    -- ** DfareportingReportsFilesGet
+    -- ** dfareporting.reports.files.get
     , module Network.Google.Resource.DFAReporting.Reports.Files.Get
 
-    -- ** DfareportingReportsFilesList
+    -- ** dfareporting.reports.files.list
     , module Network.Google.Resource.DFAReporting.Reports.Files.List
 
-    -- ** DfareportingReportsGet
+    -- ** dfareporting.reports.get
     , module Network.Google.Resource.DFAReporting.Reports.Get
 
-    -- ** DfareportingReportsInsert
+    -- ** dfareporting.reports.insert
     , module Network.Google.Resource.DFAReporting.Reports.Insert
 
-    -- ** DfareportingReportsList
+    -- ** dfareporting.reports.list
     , module Network.Google.Resource.DFAReporting.Reports.List
 
-    -- ** DfareportingReportsPatch
+    -- ** dfareporting.reports.patch
     , module Network.Google.Resource.DFAReporting.Reports.Patch
 
-    -- ** DfareportingReportsRun
+    -- ** dfareporting.reports.run
     , module Network.Google.Resource.DFAReporting.Reports.Run
 
-    -- ** DfareportingReportsUpdate
+    -- ** dfareporting.reports.update
     , module Network.Google.Resource.DFAReporting.Reports.Update
 
-    -- ** DfareportingSitesGet
+    -- ** dfareporting.sites.get
     , module Network.Google.Resource.DFAReporting.Sites.Get
 
-    -- ** DfareportingSitesInsert
+    -- ** dfareporting.sites.insert
     , module Network.Google.Resource.DFAReporting.Sites.Insert
 
-    -- ** DfareportingSitesList
+    -- ** dfareporting.sites.list
     , module Network.Google.Resource.DFAReporting.Sites.List
 
-    -- ** DfareportingSitesPatch
+    -- ** dfareporting.sites.patch
     , module Network.Google.Resource.DFAReporting.Sites.Patch
 
-    -- ** DfareportingSitesUpdate
+    -- ** dfareporting.sites.update
     , module Network.Google.Resource.DFAReporting.Sites.Update
 
-    -- ** DfareportingSizesGet
+    -- ** dfareporting.sizes.get
     , module Network.Google.Resource.DFAReporting.Sizes.Get
 
-    -- ** DfareportingSizesInsert
+    -- ** dfareporting.sizes.insert
     , module Network.Google.Resource.DFAReporting.Sizes.Insert
 
-    -- ** DfareportingSizesList
+    -- ** dfareporting.sizes.list
     , module Network.Google.Resource.DFAReporting.Sizes.List
 
-    -- ** DfareportingSubAccountsGet
+    -- ** dfareporting.subaccounts.get
     , module Network.Google.Resource.DFAReporting.SubAccounts.Get
 
-    -- ** DfareportingSubAccountsInsert
+    -- ** dfareporting.subaccounts.insert
     , module Network.Google.Resource.DFAReporting.SubAccounts.Insert
 
-    -- ** DfareportingSubAccountsList
+    -- ** dfareporting.subaccounts.list
     , module Network.Google.Resource.DFAReporting.SubAccounts.List
 
-    -- ** DfareportingSubAccountsPatch
+    -- ** dfareporting.subaccounts.patch
     , module Network.Google.Resource.DFAReporting.SubAccounts.Patch
 
-    -- ** DfareportingSubAccountsUpdate
+    -- ** dfareporting.subaccounts.update
     , module Network.Google.Resource.DFAReporting.SubAccounts.Update
 
-    -- ** DfareportingTargetableRemarketingListsGet
+    -- ** dfareporting.targetableRemarketingLists.get
     , module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
 
-    -- ** DfareportingTargetableRemarketingListsList
+    -- ** dfareporting.targetableRemarketingLists.list
     , module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
 
-    -- ** DfareportingUserProFilesGet
+    -- ** dfareporting.userProfiles.get
     , module Network.Google.Resource.DFAReporting.UserProFiles.Get
 
-    -- ** DfareportingUserProFilesList
+    -- ** dfareporting.userProfiles.list
     , module Network.Google.Resource.DFAReporting.UserProFiles.List
 
-    -- ** DfareportingUserRolePermissionGroupsGet
+    -- ** dfareporting.userRolePermissionGroups.get
     , module Network.Google.Resource.DFAReporting.UserRolePermissionGroups.Get
 
-    -- ** DfareportingUserRolePermissionGroupsList
+    -- ** dfareporting.userRolePermissionGroups.list
     , module Network.Google.Resource.DFAReporting.UserRolePermissionGroups.List
 
-    -- ** DfareportingUserRolePermissionsGet
+    -- ** dfareporting.userRolePermissions.get
     , module Network.Google.Resource.DFAReporting.UserRolePermissions.Get
 
-    -- ** DfareportingUserRolePermissionsList
+    -- ** dfareporting.userRolePermissions.list
     , module Network.Google.Resource.DFAReporting.UserRolePermissions.List
 
-    -- ** DfareportingUserRolesDelete
+    -- ** dfareporting.userRoles.delete
     , module Network.Google.Resource.DFAReporting.UserRoles.Delete
 
-    -- ** DfareportingUserRolesGet
+    -- ** dfareporting.userRoles.get
     , module Network.Google.Resource.DFAReporting.UserRoles.Get
 
-    -- ** DfareportingUserRolesInsert
+    -- ** dfareporting.userRoles.insert
     , module Network.Google.Resource.DFAReporting.UserRoles.Insert
 
-    -- ** DfareportingUserRolesList
+    -- ** dfareporting.userRoles.list
     , module Network.Google.Resource.DFAReporting.UserRoles.List
 
-    -- ** DfareportingUserRolesPatch
+    -- ** dfareporting.userRoles.patch
     , module Network.Google.Resource.DFAReporting.UserRoles.Patch
 
-    -- ** DfareportingUserRolesUpdate
+    -- ** dfareporting.userRoles.update
     , module Network.Google.Resource.DFAReporting.UserRoles.Update
 
     -- * Types

@@ -22,7 +22,7 @@
 --
 -- Gets a list of subaccounts, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSubAccountsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.subaccounts.list@.
 module Network.Google.Resource.DFAReporting.SubAccounts.List
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.DFAReporting.SubAccounts.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSubAccountsList@ method which the
+-- | A resource alias for @dfareporting.subaccounts.list@ method which the
 -- 'SubAccountsList'' request conforms to.
 type SubAccountsListResource =
      "userprofiles" :>
@@ -91,7 +91,7 @@ data SubAccountsList' = SubAccountsList'
 --
 -- * 'salMaxResults'
 subAccountsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'salProFileId'
     -> SubAccountsList'
 subAccountsList' pSalProFileId_ =
     SubAccountsList'

@@ -28,7 +28,7 @@
 -- are restricted to changes such as canonicalizing a value or snapping the
 -- location to the correct line of code.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @CloudDebuggerControllerDebuggeesBreakpointsUpdate@.
+-- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.update@.
 module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Update
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Up
 import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudDebuggerControllerDebuggeesBreakpointsUpdate@ method which the
+-- | A resource alias for @clouddebugger.controller.debuggees.breakpoints.update@ method which the
 -- 'ControllerDebuggeesBreakpointsUpdate'' request conforms to.
 type ControllerDebuggeesBreakpointsUpdateResource =
      "v2" :>
@@ -120,9 +120,9 @@ data ControllerDebuggeesBreakpointsUpdate' = ControllerDebuggeesBreakpointsUpdat
 --
 -- * 'cdbuCallback'
 controllerDebuggeesBreakpointsUpdate'
-    :: UpdateActiveBreakpointRequest -- ^ 'payload'
-    -> Text -- ^ 'id'
-    -> Text -- ^ 'debuggeeId'
+    :: UpdateActiveBreakpointRequest -- ^ 'cdbuPayload'
+    -> Text -- ^ 'cdbuId'
+    -> Text -- ^ 'cdbuDebuggeeId'
     -> ControllerDebuggeesBreakpointsUpdate'
 controllerDebuggeesBreakpointsUpdate' pCdbuPayload_ pCdbuId_ pCdbuDebuggeeId_ =
     ControllerDebuggeesBreakpointsUpdate'

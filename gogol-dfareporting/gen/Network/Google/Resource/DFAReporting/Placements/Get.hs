@@ -22,7 +22,7 @@
 --
 -- Gets one placement by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placements.get@.
 module Network.Google.Resource.DFAReporting.Placements.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Placements.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPlacementsGet@ method which the
+-- | A resource alias for @dfareporting.placements.get@ method which the
 -- 'PlacementsGet'' request conforms to.
 type PlacementsGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data PlacementsGet' = PlacementsGet'
 --
 -- * 'pgId'
 placementsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'pgProFileId'
+    -> Int64 -- ^ 'pgId'
     -> PlacementsGet'
 placementsGet' pPgProFileId_ pPgId_ =
     PlacementsGet'

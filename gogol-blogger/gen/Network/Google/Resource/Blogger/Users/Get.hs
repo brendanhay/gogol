@@ -22,7 +22,7 @@
 --
 -- Gets one user by ID.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerUsersGet@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.users.get@.
 module Network.Google.Resource.Blogger.Users.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Blogger.Users.Get
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerUsersGet@ method which the
+-- | A resource alias for @blogger.users.get@ method which the
 -- 'UsersGet'' request conforms to.
 type UsersGetResource =
      "users" :>
@@ -59,7 +59,7 @@ newtype UsersGet' = UsersGet'
 --
 -- * 'ugUserId'
 usersGet'
-    :: Text -- ^ 'userId'
+    :: Text -- ^ 'ugUserId'
     -> UsersGet'
 usersGet' pUgUserId_ =
     UsersGet'

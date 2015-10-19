@@ -22,7 +22,7 @@
 --
 -- Revoke License.
 --
--- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @LicensingLicenseAssignmentsDelete@.
+-- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @licensing.licenseAssignments.delete@.
 module Network.Google.Resource.Licensing.LicenseAssignments.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Delete
 import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @LicensingLicenseAssignmentsDelete@ method which the
+-- | A resource alias for @licensing.licenseAssignments.delete@ method which the
 -- 'LicenseAssignmentsDelete'' request conforms to.
 type LicenseAssignmentsDeleteResource =
      Capture "productId" Text :>
@@ -70,9 +70,9 @@ data LicenseAssignmentsDelete' = LicenseAssignmentsDelete'
 --
 -- * 'ladProductId'
 licenseAssignmentsDelete'
-    :: Text -- ^ 'skuId'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'productId'
+    :: Text -- ^ 'ladSKUId'
+    -> Text -- ^ 'ladUserId'
+    -> Text -- ^ 'ladProductId'
     -> LicenseAssignmentsDelete'
 licenseAssignmentsDelete' pLadSKUId_ pLadUserId_ pLadProductId_ =
     LicenseAssignmentsDelete'

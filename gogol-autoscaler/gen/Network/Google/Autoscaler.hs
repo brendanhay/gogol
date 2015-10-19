@@ -27,34 +27,34 @@ module Network.Google.Autoscaler
 
     -- * Resources
 
-    -- ** AutoscalerAutoscalersDelete
+    -- ** autoscaler.autoscalers.delete
     , module Network.Google.Resource.Autoscaler.Autoscalers.Delete
 
-    -- ** AutoscalerAutoscalersGet
+    -- ** autoscaler.autoscalers.get
     , module Network.Google.Resource.Autoscaler.Autoscalers.Get
 
-    -- ** AutoscalerAutoscalersInsert
+    -- ** autoscaler.autoscalers.insert
     , module Network.Google.Resource.Autoscaler.Autoscalers.Insert
 
-    -- ** AutoscalerAutoscalersList
+    -- ** autoscaler.autoscalers.list
     , module Network.Google.Resource.Autoscaler.Autoscalers.List
 
-    -- ** AutoscalerAutoscalersPatch
+    -- ** autoscaler.autoscalers.patch
     , module Network.Google.Resource.Autoscaler.Autoscalers.Patch
 
-    -- ** AutoscalerAutoscalersUpdate
+    -- ** autoscaler.autoscalers.update
     , module Network.Google.Resource.Autoscaler.Autoscalers.Update
 
-    -- ** AutoscalerZoneOperationsDelete
+    -- ** autoscaler.zoneOperations.delete
     , module Network.Google.Resource.Autoscaler.ZoneOperations.Delete
 
-    -- ** AutoscalerZoneOperationsGet
+    -- ** autoscaler.zoneOperations.get
     , module Network.Google.Resource.Autoscaler.ZoneOperations.Get
 
-    -- ** AutoscalerZoneOperationsList
+    -- ** autoscaler.zoneOperations.list
     , module Network.Google.Resource.Autoscaler.ZoneOperations.List
 
-    -- ** AutoscalerZonesList
+    -- ** autoscaler.zones.list
     , module Network.Google.Resource.Autoscaler.Zones.List
 
     -- * Types

@@ -22,7 +22,7 @@
 --
 -- Gets one advertiser group by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertiserGroupsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.advertiserGroups.get@.
 module Network.Google.Resource.DFAReporting.AdvertiserGroups.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAdvertiserGroupsGet@ method which the
+-- | A resource alias for @dfareporting.advertiserGroups.get@ method which the
 -- 'AdvertiserGroupsGet'' request conforms to.
 type AdvertiserGroupsGetResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data AdvertiserGroupsGet' = AdvertiserGroupsGet'
 --
 -- * 'aggId'
 advertiserGroupsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'aggProFileId'
+    -> Int64 -- ^ 'aggId'
     -> AdvertiserGroupsGet'
 advertiserGroupsGet' pAggProFileId_ pAggId_ =
     AdvertiserGroupsGet'

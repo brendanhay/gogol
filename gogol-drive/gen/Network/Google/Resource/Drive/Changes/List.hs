@@ -22,7 +22,7 @@
 --
 -- Lists the changes for a user.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChangesList@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.changes.list@.
 module Network.Google.Resource.Drive.Changes.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Drive.Changes.List
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveChangesList@ method which the
+-- | A resource alias for @drive.changes.list@ method which the
 -- 'ChangesList'' request conforms to.
 type ChangesListResource =
      "changes" :>

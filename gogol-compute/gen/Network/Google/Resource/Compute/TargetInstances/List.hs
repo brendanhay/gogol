@@ -23,7 +23,7 @@
 -- Retrieves the list of TargetInstance resources available to the
 -- specified project and zone.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetInstancesList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetInstances.list@.
 module Network.Google.Resource.Compute.TargetInstances.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.TargetInstances.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetInstancesList@ method which the
+-- | A resource alias for @compute.targetInstances.list@ method which the
 -- 'TargetInstancesList'' request conforms to.
 type TargetInstancesListResource =
      Capture "project" Text :>
@@ -83,8 +83,8 @@ data TargetInstancesList' = TargetInstancesList'
 --
 -- * 'tilMaxResults'
 targetInstancesList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'tilProject'
+    -> Text -- ^ 'tilZone'
     -> TargetInstancesList'
 targetInstancesList' pTilProject_ pTilZone_ =
     TargetInstancesList'

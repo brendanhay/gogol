@@ -26,7 +26,7 @@ module Network.Google.GroupsMigration
 
     -- * Resources
 
-    -- ** GroupsmigrationArchiveInsert
+    -- ** groupsmigration.archive.insert
     , module Network.Google.Resource.GroupsMigration.Archive.Insert
 
     -- * Types

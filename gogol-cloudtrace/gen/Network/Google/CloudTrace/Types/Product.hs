@@ -56,7 +56,7 @@ newtype TraceSpanLabels = TraceSpanLabels
 --
 -- * 'tslAddtional'
 traceSpanLabels
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'tslAddtional'
     -> TraceSpanLabels
 traceSpanLabels pTslAddtional_ =
     TraceSpanLabels

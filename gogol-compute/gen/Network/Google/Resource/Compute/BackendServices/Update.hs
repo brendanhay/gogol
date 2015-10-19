@@ -22,7 +22,7 @@
 --
 -- Update the entire content of the BackendService resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeBackendServicesUpdate@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.update@.
 module Network.Google.Resource.Compute.BackendServices.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.BackendServices.Update
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeBackendServicesUpdate@ method which the
+-- | A resource alias for @compute.backendServices.update@ method which the
 -- 'BackendServicesUpdate'' request conforms to.
 type BackendServicesUpdateResource =
      Capture "project" Text :>
@@ -71,9 +71,9 @@ data BackendServicesUpdate' = BackendServicesUpdate'
 --
 -- * 'bsuBackendService'
 backendServicesUpdate'
-    :: Text -- ^ 'project'
-    -> BackendService -- ^ 'payload'
-    -> Text -- ^ 'backendService'
+    :: Text -- ^ 'bsuProject'
+    -> BackendService -- ^ 'bsuPayload'
+    -> Text -- ^ 'bsuBackendService'
     -> BackendServicesUpdate'
 backendServicesUpdate' pBsuProject_ pBsuPayload_ pBsuBackendService_ =
     BackendServicesUpdate'

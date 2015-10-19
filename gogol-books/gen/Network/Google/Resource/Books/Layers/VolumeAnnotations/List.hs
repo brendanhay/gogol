@@ -22,7 +22,7 @@
 --
 -- Gets the volume annotations for a volume and layer.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksLayersVolumeAnnotationsList@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.layers.volumeAnnotations.list@.
 module Network.Google.Resource.Books.Layers.VolumeAnnotations.List
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ module Network.Google.Resource.Books.Layers.VolumeAnnotations.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksLayersVolumeAnnotationsList@ method which the
+-- | A resource alias for @books.layers.volumeAnnotations.list@ method which the
 -- 'LayersVolumeAnnotationsList'' request conforms to.
 type LayersVolumeAnnotationsListResource =
      "volumes" :>
@@ -131,9 +131,9 @@ data LayersVolumeAnnotationsList' = LayersVolumeAnnotationsList'
 --
 -- * 'lvalStartPosition'
 layersVolumeAnnotationsList'
-    :: Text -- ^ 'contentVersion'
-    -> Text -- ^ 'volumeId'
-    -> Text -- ^ 'layerId'
+    :: Text -- ^ 'lvalContentVersion'
+    -> Text -- ^ 'lvalVolumeId'
+    -> Text -- ^ 'lvalLayerId'
     -> LayersVolumeAnnotationsList'
 layersVolumeAnnotationsList' pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
     LayersVolumeAnnotationsList'

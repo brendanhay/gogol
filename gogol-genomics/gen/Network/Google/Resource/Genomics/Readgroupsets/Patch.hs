@@ -22,7 +22,7 @@
 --
 -- Updates a read group set. This method supports patch semantics.
 --
--- /See:/ < Genomics API Reference> for @GenomicsReadgroupsetsPatch@.
+-- /See:/ < Genomics API Reference> for @genomics.readgroupsets.patch@.
 module Network.Google.Resource.Genomics.Readgroupsets.Patch
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Genomics.Readgroupsets.Patch
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReadgroupsetsPatch@ method which the
+-- | A resource alias for @genomics.readgroupsets.patch@ method which the
 -- 'ReadgroupsetsPatch'' request conforms to.
 type ReadgroupsetsPatchResource =
      "v1" :>
@@ -106,8 +106,8 @@ data ReadgroupsetsPatch' = ReadgroupsetsPatch'
 --
 -- * 'rpCallback'
 readgroupsetsPatch'
-    :: Text -- ^ 'readGroupSetId'
-    -> ReadGroupSet -- ^ 'payload'
+    :: Text -- ^ 'rpReadGroupSetId'
+    -> ReadGroupSet -- ^ 'rpPayload'
     -> ReadgroupsetsPatch'
 readgroupsetsPatch' pRpReadGroupSetId_ pRpPayload_ =
     ReadgroupsetsPatch'

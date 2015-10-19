@@ -22,7 +22,7 @@
 --
 -- Create a new view (profile).
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFilesInsert@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.profiles.insert@.
 module Network.Google.Resource.Analytics.Management.ProFiles.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFilesInsert@ method which the
+-- | A resource alias for @analytics.management.profiles.insert@ method which the
 -- 'ManagementProFilesInsert'' request conforms to.
 type ManagementProFilesInsertResource =
      "management" :>
@@ -72,9 +72,9 @@ data ManagementProFilesInsert' = ManagementProFilesInsert'
 --
 -- * 'mpfiAccountId'
 managementProFilesInsert'
-    :: Text -- ^ 'webPropertyId'
-    -> ProFile -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mpfiWebPropertyId'
+    -> ProFile -- ^ 'mpfiPayload'
+    -> Text -- ^ 'mpfiAccountId'
     -> ManagementProFilesInsert'
 managementProFilesInsert' pMpfiWebPropertyId_ pMpfiPayload_ pMpfiAccountId_ =
     ManagementProFilesInsert'

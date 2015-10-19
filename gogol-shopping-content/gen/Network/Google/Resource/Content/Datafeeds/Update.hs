@@ -22,7 +22,7 @@
 --
 -- Updates a datafeed of your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentDatafeedsUpdate@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.update@.
 module Network.Google.Resource.Content.Datafeeds.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Content.Datafeeds.Update
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentDatafeedsUpdate@ method which the
+-- | A resource alias for @content.datafeeds.update@ method which the
 -- 'DatafeedsUpdate'' request conforms to.
 type DatafeedsUpdateResource =
      Capture "merchantId" Word64 :>
@@ -74,9 +74,9 @@ data DatafeedsUpdate' = DatafeedsUpdate'
 --
 -- * 'duDryRun'
 datafeedsUpdate'
-    :: Word64 -- ^ 'merchantId'
-    -> Datafeed -- ^ 'payload'
-    -> Word64 -- ^ 'datafeedId'
+    :: Word64 -- ^ 'duMerchantId'
+    -> Datafeed -- ^ 'duPayload'
+    -> Word64 -- ^ 'duDatafeedId'
     -> DatafeedsUpdate'
 datafeedsUpdate' pDuMerchantId_ pDuPayload_ pDuDatafeedId_ =
     DatafeedsUpdate'

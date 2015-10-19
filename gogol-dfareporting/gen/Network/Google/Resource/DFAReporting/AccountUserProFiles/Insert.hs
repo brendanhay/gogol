@@ -22,7 +22,7 @@
 --
 -- Inserts a new account user profile.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAccountUserProFilesInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accountUserProfiles.insert@.
 module Network.Google.Resource.DFAReporting.AccountUserProFiles.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.AccountUserProFiles.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAccountUserProFilesInsert@ method which the
+-- | A resource alias for @dfareporting.accountUserProfiles.insert@ method which the
 -- 'AccountUserProFilesInsert'' request conforms to.
 type AccountUserProFilesInsertResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data AccountUserProFilesInsert' = AccountUserProFilesInsert'
 --
 -- * 'aupfiPayload'
 accountUserProFilesInsert'
-    :: Int64 -- ^ 'profileId'
-    -> AccountUserProFile -- ^ 'payload'
+    :: Int64 -- ^ 'aupfiProFileId'
+    -> AccountUserProFile -- ^ 'aupfiPayload'
     -> AccountUserProFilesInsert'
 accountUserProFilesInsert' pAupfiProFileId_ pAupfiPayload_ =
     AccountUserProFilesInsert'

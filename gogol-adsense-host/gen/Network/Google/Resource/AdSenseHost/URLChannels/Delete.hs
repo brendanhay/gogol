@@ -22,7 +22,7 @@
 --
 -- Delete a URL channel from the host AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostURLChannelsDelete@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.urlchannels.delete@.
 module Network.Google.Resource.AdSenseHost.URLChannels.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdSenseHost.URLChannels.Delete
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostURLChannelsDelete@ method which the
+-- | A resource alias for @adsensehost.urlchannels.delete@ method which the
 -- 'URLChannelsDelete'' request conforms to.
 type URLChannelsDeleteResource =
      "adclients" :>
@@ -65,8 +65,8 @@ data URLChannelsDelete' = URLChannelsDelete'
 --
 -- * 'ucdAdClientId'
 urlChannelsDelete'
-    :: Text -- ^ 'urlChannelId'
-    -> Text -- ^ 'adClientId'
+    :: Text -- ^ 'ucdURLChannelId'
+    -> Text -- ^ 'ucdAdClientId'
     -> URLChannelsDelete'
 urlChannelsDelete' pUcdURLChannelId_ pUcdAdClientId_ =
     URLChannelsDelete'

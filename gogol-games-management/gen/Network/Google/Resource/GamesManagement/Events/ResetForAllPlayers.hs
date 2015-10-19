@@ -24,7 +24,7 @@
 -- available to user accounts for your developer console. Only draft events
 -- can be reset. All quests that use the event will also be reset.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementEventsResetForAllPlayers@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.events.resetForAllPlayers@.
 module Network.Google.Resource.GamesManagement.Events.ResetForAllPlayers
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.GamesManagement.Events.ResetForAllPlayers
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementEventsResetForAllPlayers@ method which the
+-- | A resource alias for @gamesManagement.events.resetForAllPlayers@ method which the
 -- 'EventsResetForAllPlayers'' request conforms to.
 type EventsResetForAllPlayersResource =
      "events" :>
@@ -64,7 +64,7 @@ newtype EventsResetForAllPlayers' = EventsResetForAllPlayers'
 --
 -- * 'erfapEventId'
 eventsResetForAllPlayers'
-    :: Text -- ^ 'eventId'
+    :: Text -- ^ 'erfapEventId'
     -> EventsResetForAllPlayers'
 eventsResetForAllPlayers' pErfapEventId_ =
     EventsResetForAllPlayers'

@@ -24,7 +24,7 @@
 -- all results are in. Only the player whose turn it is may make the first
 -- call to Finish, and can pass in the final match state.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesFinish@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.turnBasedMatches.finish@.
 module Network.Google.Resource.Games.TurnBasedMatches.Finish
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.Finish
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesTurnBasedMatchesFinish@ method which the
+-- | A resource alias for @games.turnBasedMatches.finish@ method which the
 -- 'TurnBasedMatchesFinish'' request conforms to.
 type TurnBasedMatchesFinishResource =
      "turnbasedmatches" :>
@@ -75,8 +75,8 @@ data TurnBasedMatchesFinish' = TurnBasedMatchesFinish'
 --
 -- * 'tbmfMatchId'
 turnBasedMatchesFinish'
-    :: TurnBasedMatchResults -- ^ 'payload'
-    -> Text -- ^ 'matchId'
+    :: TurnBasedMatchResults -- ^ 'tbmfPayload'
+    -> Text -- ^ 'tbmfMatchId'
     -> TurnBasedMatchesFinish'
 turnBasedMatchesFinish' pTbmfPayload_ pTbmfMatchId_ =
     TurnBasedMatchesFinish'

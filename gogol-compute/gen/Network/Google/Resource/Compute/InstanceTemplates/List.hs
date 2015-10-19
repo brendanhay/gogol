@@ -23,7 +23,7 @@
 -- Retrieves a list of instance templates that are contained within the
 -- specified project and zone.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceTemplatesList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceTemplates.list@.
 module Network.Google.Resource.Compute.InstanceTemplates.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.InstanceTemplates.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceTemplatesList@ method which the
+-- | A resource alias for @compute.instanceTemplates.list@ method which the
 -- 'InstanceTemplatesList'' request conforms to.
 type InstanceTemplatesListResource =
      Capture "project" Text :>
@@ -78,7 +78,7 @@ data InstanceTemplatesList' = InstanceTemplatesList'
 --
 -- * 'itlMaxResults'
 instanceTemplatesList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'itlProject'
     -> InstanceTemplatesList'
 instanceTemplatesList' pItlProject_ =
     InstanceTemplatesList'

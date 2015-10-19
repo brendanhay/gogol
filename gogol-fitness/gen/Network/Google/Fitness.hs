@@ -26,43 +26,43 @@ module Network.Google.Fitness
 
     -- * Resources
 
-    -- ** FitnessUsersDataSourcesCreate
+    -- ** fitness.users.dataSources.create
     , module Network.Google.Resource.Fitness.Users.DataSources.Create
 
-    -- ** FitnessUsersDataSourcesDatasetsDelete
+    -- ** fitness.users.dataSources.datasets.delete
     , module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Delete
 
-    -- ** FitnessUsersDataSourcesDatasetsGet
+    -- ** fitness.users.dataSources.datasets.get
     , module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Get
 
-    -- ** FitnessUsersDataSourcesDatasetsPatch
+    -- ** fitness.users.dataSources.datasets.patch
     , module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Patch
 
-    -- ** FitnessUsersDataSourcesDelete
+    -- ** fitness.users.dataSources.delete
     , module Network.Google.Resource.Fitness.Users.DataSources.Delete
 
-    -- ** FitnessUsersDataSourcesGet
+    -- ** fitness.users.dataSources.get
     , module Network.Google.Resource.Fitness.Users.DataSources.Get
 
-    -- ** FitnessUsersDataSourcesList
+    -- ** fitness.users.dataSources.list
     , module Network.Google.Resource.Fitness.Users.DataSources.List
 
-    -- ** FitnessUsersDataSourcesPatch
+    -- ** fitness.users.dataSources.patch
     , module Network.Google.Resource.Fitness.Users.DataSources.Patch
 
-    -- ** FitnessUsersDataSourcesUpdate
+    -- ** fitness.users.dataSources.update
     , module Network.Google.Resource.Fitness.Users.DataSources.Update
 
-    -- ** FitnessUsersDatasetAggregate
+    -- ** fitness.users.dataset.aggregate
     , module Network.Google.Resource.Fitness.Users.Dataset.Aggregate
 
-    -- ** FitnessUsersSessionsDelete
+    -- ** fitness.users.sessions.delete
     , module Network.Google.Resource.Fitness.Users.Sessions.Delete
 
-    -- ** FitnessUsersSessionsList
+    -- ** fitness.users.sessions.list
     , module Network.Google.Resource.Fitness.Users.Sessions.List
 
-    -- ** FitnessUsersSessionsUpdate
+    -- ** fitness.users.sessions.update
     , module Network.Google.Resource.Fitness.Users.Sessions.Update
 
     -- * Types

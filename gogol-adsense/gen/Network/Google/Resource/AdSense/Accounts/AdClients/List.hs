@@ -22,7 +22,7 @@
 --
 -- List all ad clients in the specified account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsAdClientsList@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.adclients.list@.
 module Network.Google.Resource.AdSense.Accounts.AdClients.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AdSense.Accounts.AdClients.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAccountsAdClientsList@ method which the
+-- | A resource alias for @adsense.accounts.adclients.list@ method which the
 -- 'AccountsAdClientsList'' request conforms to.
 type AccountsAdClientsListResource =
      "accounts" :>
@@ -70,7 +70,7 @@ data AccountsAdClientsList' = AccountsAdClientsList'
 --
 -- * 'aaclMaxResults'
 accountsAdClientsList'
-    :: Text -- ^ 'accountId'
+    :: Text -- ^ 'aaclAccountId'
     -> AccountsAdClientsList'
 accountsAdClientsList' pAaclAccountId_ =
     AccountsAdClientsList'

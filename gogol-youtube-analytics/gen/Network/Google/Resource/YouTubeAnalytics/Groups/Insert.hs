@@ -22,7 +22,7 @@
 --
 -- Creates a group.
 --
--- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsGroupsInsert@.
+-- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @youtubeAnalytics.groups.insert@.
 module Network.Google.Resource.YouTubeAnalytics.Groups.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTubeAnalytics.Groups.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
--- | A resource alias for @YouTubeAnalyticsGroupsInsert@ method which the
+-- | A resource alias for @youtubeAnalytics.groups.insert@ method which the
 -- 'GroupsInsert'' request conforms to.
 type GroupsInsertResource =
      "groups" :>
@@ -64,7 +64,7 @@ data GroupsInsert' = GroupsInsert'
 --
 -- * 'giOnBehalfOfContentOwner'
 groupsInsert'
-    :: Group -- ^ 'payload'
+    :: Group -- ^ 'giPayload'
     -> GroupsInsert'
 groupsInsert' pGiPayload_ =
     GroupsInsert'

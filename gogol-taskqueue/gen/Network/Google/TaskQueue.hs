@@ -26,28 +26,28 @@ module Network.Google.TaskQueue
 
     -- * Resources
 
-    -- ** TaskqueueTaskqueuesGet
+    -- ** taskqueue.taskqueues.get
     , module Network.Google.Resource.TaskQueue.Taskqueues.Get
 
-    -- ** TaskqueueTasksDelete
+    -- ** taskqueue.tasks.delete
     , module Network.Google.Resource.TaskQueue.Tasks.Delete
 
-    -- ** TaskqueueTasksGet
+    -- ** taskqueue.tasks.get
     , module Network.Google.Resource.TaskQueue.Tasks.Get
 
-    -- ** TaskqueueTasksInsert
+    -- ** taskqueue.tasks.insert
     , module Network.Google.Resource.TaskQueue.Tasks.Insert
 
-    -- ** TaskqueueTasksLease
+    -- ** taskqueue.tasks.lease
     , module Network.Google.Resource.TaskQueue.Tasks.Lease
 
-    -- ** TaskqueueTasksList
+    -- ** taskqueue.tasks.list
     , module Network.Google.Resource.TaskQueue.Tasks.List
 
-    -- ** TaskqueueTasksPatch
+    -- ** taskqueue.tasks.patch
     , module Network.Google.Resource.TaskQueue.Tasks.Patch
 
-    -- ** TaskqueueTasksUpdate
+    -- ** taskqueue.tasks.update
     , module Network.Google.Resource.TaskQueue.Tasks.Update
 
     -- * Types

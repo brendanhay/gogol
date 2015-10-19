@@ -26,7 +26,7 @@
 -- is not provided in the request, the server will assign a random name for
 -- this subscription on the same project as the topic.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsCreate@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.create@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsSubscriptionsCreate@ method which the
+-- | A resource alias for @pubsub.projects.subscriptions.create@ method which the
 -- 'ProjectsSubscriptionsCreate'' request conforms to.
 type ProjectsSubscriptionsCreateResource =
      "v1" :>
@@ -108,8 +108,8 @@ data ProjectsSubscriptionsCreate' = ProjectsSubscriptionsCreate'
 --
 -- * 'pscCallback'
 projectsSubscriptionsCreate'
-    :: Subscription -- ^ 'payload'
-    -> Text -- ^ 'name'
+    :: Subscription -- ^ 'pscPayload'
+    -> Text -- ^ 'pscName'
     -> ProjectsSubscriptionsCreate'
 projectsSubscriptionsCreate' pPscPayload_ pPscName_ =
     ProjectsSubscriptionsCreate'

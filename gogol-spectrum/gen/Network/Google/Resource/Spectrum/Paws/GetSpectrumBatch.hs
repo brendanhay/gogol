@@ -23,7 +23,7 @@
 -- The Google Spectrum Database does not support batch requests, so this
 -- method always yields an UNIMPLEMENTED error.
 --
--- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @SpectrumPawsGetSpectrumBatch@.
+-- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @spectrum.paws.getSpectrumBatch@.
 module Network.Google.Resource.Spectrum.Paws.GetSpectrumBatch
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Spectrum.Paws.GetSpectrumBatch
 import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
--- | A resource alias for @SpectrumPawsGetSpectrumBatch@ method which the
+-- | A resource alias for @spectrum.paws.getSpectrumBatch@ method which the
 -- 'PawsGetSpectrumBatch'' request conforms to.
 type PawsGetSpectrumBatchResource =
      "getSpectrumBatch" :>
@@ -62,7 +62,7 @@ newtype PawsGetSpectrumBatch' = PawsGetSpectrumBatch'
 --
 -- * 'pgsbPayload'
 pawsGetSpectrumBatch'
-    :: PawsGetSpectrumBatchRequest -- ^ 'payload'
+    :: PawsGetSpectrumBatchRequest -- ^ 'pgsbPayload'
     -> PawsGetSpectrumBatch'
 pawsGetSpectrumBatch' pPgsbPayload_ =
     PawsGetSpectrumBatch'

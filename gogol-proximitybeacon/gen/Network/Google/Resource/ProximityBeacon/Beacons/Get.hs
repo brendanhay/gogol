@@ -22,7 +22,7 @@
 --
 -- Returns detailed information about the specified beacon.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsGet@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.get@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Get
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Get
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconBeaconsGet@ method which the
+-- | A resource alias for @proximitybeacon.beacons.get@ method which the
 -- 'BeaconsGet'' request conforms to.
 type BeaconsGetResource =
      "v1beta1" :>
@@ -94,7 +94,7 @@ data BeaconsGet' = BeaconsGet'
 --
 -- * 'bgCallback'
 beaconsGet'
-    :: Text -- ^ 'beaconName'
+    :: Text -- ^ 'bgBeaconName'
     -> BeaconsGet'
 beaconsGet' pBgBeaconName_ =
     BeaconsGet'

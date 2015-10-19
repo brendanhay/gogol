@@ -22,7 +22,7 @@
 --
 -- Retrieves the tax settings of the account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccounttaxGet@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounttax.get@.
 module Network.Google.Resource.Content.Accounttax.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Content.Accounttax.Get
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccounttaxGet@ method which the
+-- | A resource alias for @content.accounttax.get@ method which the
 -- 'AccounttaxGet'' request conforms to.
 type AccounttaxGetResource =
      Capture "merchantId" Word64 :>
@@ -64,8 +64,8 @@ data AccounttaxGet' = AccounttaxGet'
 --
 -- * 'aggAccountId'
 accounttaxGet'
-    :: Word64 -- ^ 'merchantId'
-    -> Word64 -- ^ 'accountId'
+    :: Word64 -- ^ 'aggMerchantId'
+    -> Word64 -- ^ 'aggAccountId'
     -> AccounttaxGet'
 accounttaxGet' pAggMerchantId_ pAggAccountId_ =
     AccounttaxGet'

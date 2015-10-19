@@ -23,7 +23,7 @@
 -- Update an existing profile filter link. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFileFilterLinksPatch@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.profileFilterLinks.patch@.
 module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Patch
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Patch
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFileFilterLinksPatch@ method which the
+-- | A resource alias for @analytics.management.profileFilterLinks.patch@ method which the
 -- 'ManagementProFileFilterLinksPatch'' request conforms to.
 type ManagementProFileFilterLinksPatchResource =
      "management" :>
@@ -86,11 +86,11 @@ data ManagementProFileFilterLinksPatch' = ManagementProFileFilterLinksPatch'
 --
 -- * 'mpfflpLinkId'
 managementProFileFilterLinksPatch'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> ProFileFilterLink -- ^ 'payload'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'linkId'
+    :: Text -- ^ 'mpfflpWebPropertyId'
+    -> Text -- ^ 'mpfflpProFileId'
+    -> ProFileFilterLink -- ^ 'mpfflpPayload'
+    -> Text -- ^ 'mpfflpAccountId'
+    -> Text -- ^ 'mpfflpLinkId'
     -> ManagementProFileFilterLinksPatch'
 managementProFileFilterLinksPatch' pMpfflpWebPropertyId_ pMpfflpProFileId_ pMpfflpPayload_ pMpfflpAccountId_ pMpfflpLinkId_ =
     ManagementProFileFilterLinksPatch'

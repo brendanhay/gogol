@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference> for @OAuth2TokenInfo@.
+-- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference> for @oauth2.tokeninfo@.
 module Network.Google.Method.OAuth2.TokenInfo
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Method.OAuth2.TokenInfo
 import           Network.Google.OAuth2.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @OAuth2TokenInfo@ method which the
+-- | A resource alias for @oauth2.tokeninfo@ method which the
 -- 'TokenInfo'' request conforms to.
 type TokenInfoMethod =
      "oauth2" :>

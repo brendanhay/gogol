@@ -22,7 +22,7 @@
 --
 -- Updates a GTM Variable.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVariablesUpdate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.variables.update@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Update
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersVariablesUpdate@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.variables.update@ method which the
 -- 'AccountsContainersVariablesUpdate'' request conforms to.
 type AccountsContainersVariablesUpdateResource =
      "accounts" :>
@@ -81,10 +81,10 @@ data AccountsContainersVariablesUpdate' = AccountsContainersVariablesUpdate'
 --
 -- * 'aAccountId'
 accountsContainersVariablesUpdate'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'variableId'
-    -> Variable -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'aContainerId'
+    -> Text -- ^ 'aVariableId'
+    -> Variable -- ^ 'aPayload'
+    -> Text -- ^ 'aAccountId'
     -> AccountsContainersVariablesUpdate'
 accountsContainersVariablesUpdate' pAContainerId_ pAVariableId_ pAPayload_ pAAccountId_ =
     AccountsContainersVariablesUpdate'

@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of global address resources.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalAddressesList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalAddresses.list@.
 module Network.Google.Resource.Compute.GlobalAddresses.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.GlobalAddresses.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeGlobalAddressesList@ method which the
+-- | A resource alias for @compute.globalAddresses.list@ method which the
 -- 'GlobalAddressesList'' request conforms to.
 type GlobalAddressesListResource =
      Capture "project" Text :>
@@ -75,7 +75,7 @@ data GlobalAddressesList' = GlobalAddressesList'
 --
 -- * 'galMaxResults'
 globalAddressesList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'galProject'
     -> GlobalAddressesList'
 globalAddressesList' pGalProject_ =
     GlobalAddressesList'

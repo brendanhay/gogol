@@ -23,7 +23,7 @@
 -- Update the metadata of the leaderboard configuration with the given ID.
 -- This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationLeaderboardConfigurationsPatch@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.patch@.
 module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Patc
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationLeaderboardConfigurationsPatch@ method which the
+-- | A resource alias for @gamesConfiguration.leaderboardConfigurations.patch@ method which the
 -- 'LeaderboardConfigurationsPatch'' request conforms to.
 type LeaderboardConfigurationsPatchResource =
      "leaderboards" :>
@@ -67,8 +67,8 @@ data LeaderboardConfigurationsPatch' = LeaderboardConfigurationsPatch'
 --
 -- * 'lcpLeaderboardId'
 leaderboardConfigurationsPatch'
-    :: LeaderboardConfiguration -- ^ 'payload'
-    -> Text -- ^ 'leaderboardId'
+    :: LeaderboardConfiguration -- ^ 'lcpPayload'
+    -> Text -- ^ 'lcpLeaderboardId'
     -> LeaderboardConfigurationsPatch'
 leaderboardConfigurationsPatch' pLcpPayload_ pLcpLeaderboardId_ =
     LeaderboardConfigurationsPatch'

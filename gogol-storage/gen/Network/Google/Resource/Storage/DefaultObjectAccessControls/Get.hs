@@ -23,7 +23,7 @@
 -- Returns the default object ACL entry for the specified entity on the
 -- specified bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageDefaultObjectAccessControlsGet@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.defaultObjectAccessControls.get@.
 module Network.Google.Resource.Storage.DefaultObjectAccessControls.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Get
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageDefaultObjectAccessControlsGet@ method which the
+-- | A resource alias for @storage.defaultObjectAccessControls.get@ method which the
 -- 'DefaultObjectAccessControlsGet'' request conforms to.
 type DefaultObjectAccessControlsGetResource =
      "b" :>
@@ -68,8 +68,8 @@ data DefaultObjectAccessControlsGet' = DefaultObjectAccessControlsGet'
 --
 -- * 'doacgEntity'
 defaultObjectAccessControlsGet'
-    :: Text -- ^ 'bucket'
-    -> Text -- ^ 'entity'
+    :: Text -- ^ 'doacgBucket'
+    -> Text -- ^ 'doacgEntity'
     -> DefaultObjectAccessControlsGet'
 defaultObjectAccessControlsGet' pDoacgBucket_ pDoacgEntity_ =
     DefaultObjectAccessControlsGet'

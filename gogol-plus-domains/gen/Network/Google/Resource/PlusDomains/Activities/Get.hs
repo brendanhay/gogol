@@ -22,7 +22,7 @@
 --
 -- Get an activity.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsActivitiesGet@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.activities.get@.
 module Network.Google.Resource.PlusDomains.Activities.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.PlusDomains.Activities.Get
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsActivitiesGet@ method which the
+-- | A resource alias for @plusDomains.activities.get@ method which the
 -- 'ActivitiesGet'' request conforms to.
 type ActivitiesGetResource =
      "activities" :>
@@ -59,7 +59,7 @@ newtype ActivitiesGet' = ActivitiesGet'
 --
 -- * 'agActivityId'
 activitiesGet'
-    :: Text -- ^ 'activityId'
+    :: Text -- ^ 'agActivityId'
     -> ActivitiesGet'
 activitiesGet' pAgActivityId_ =
     ActivitiesGet'

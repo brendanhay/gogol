@@ -22,7 +22,7 @@
 --
 -- Returns the specified Group resource.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsGroupsGet@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.groups.get@.
 module Network.Google.Resource.CloudUserAccounts.Groups.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.CloudUserAccounts.Groups.Get
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsGroupsGet@ method which the
+-- | A resource alias for @clouduseraccounts.groups.get@ method which the
 -- 'GroupsGet'' request conforms to.
 type GroupsGetResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data GroupsGet' = GroupsGet'
 --
 -- * 'ggGroupName'
 groupsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'groupName'
+    :: Text -- ^ 'ggProject'
+    -> Text -- ^ 'ggGroupName'
     -> GroupsGet'
 groupsGet' pGgProject_ pGgGroupName_ =
     GroupsGet'

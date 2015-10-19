@@ -22,7 +22,7 @@
 --
 -- Generates and returns a report immediately.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchReportsGenerate@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @doubleclicksearch.reports.generate@.
 module Network.Google.Resource.DoubleClickSearch.Reports.Generate
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DoubleClickSearch.Reports.Generate
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClicksearchReportsGenerate@ method which the
+-- | A resource alias for @doubleclicksearch.reports.generate@ method which the
 -- 'ReportsGenerate'' request conforms to.
 type ReportsGenerateResource =
      "reports" :>
@@ -60,7 +60,7 @@ newtype ReportsGenerate' = ReportsGenerate'
 --
 -- * 'rgPayload'
 reportsGenerate'
-    :: ReportRequest -- ^ 'payload'
+    :: ReportRequest -- ^ 'rgPayload'
     -> ReportsGenerate'
 reportsGenerate' pRgPayload_ =
     ReportsGenerate'

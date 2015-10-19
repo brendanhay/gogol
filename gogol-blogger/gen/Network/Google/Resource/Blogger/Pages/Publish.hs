@@ -22,7 +22,7 @@
 --
 -- Publishes a draft page.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesPublish@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pages.publish@.
 module Network.Google.Resource.Blogger.Pages.Publish
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Blogger.Pages.Publish
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPagesPublish@ method which the
+-- | A resource alias for @blogger.pages.publish@ method which the
 -- 'PagesPublish'' request conforms to.
 type PagesPublishResource =
      "blogs" :>
@@ -66,8 +66,8 @@ data PagesPublish' = PagesPublish'
 --
 -- * 'pppPageId'
 pagesPublish'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'pageId'
+    :: Text -- ^ 'pppBlogId'
+    -> Text -- ^ 'pppPageId'
     -> PagesPublish'
 pagesPublish' pPppBlogId_ pPppPageId_ =
     PagesPublish'

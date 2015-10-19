@@ -22,7 +22,7 @@
 --
 -- Updates a timeline item in place.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineUpdate@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.timeline.update@.
 module Network.Google.Resource.Mirror.Timeline.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Mirror.Timeline.Update
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorTimelineUpdate@ method which the
+-- | A resource alias for @mirror.timeline.update@ method which the
 -- 'TimelineUpdate'' request conforms to.
 type TimelineUpdateResource =
      "timeline" :>
@@ -69,9 +69,9 @@ data TimelineUpdate' = TimelineUpdate'
 --
 -- * 'tuId'
 timelineUpdate'
-    :: TimelineItem -- ^ 'payload'
-    -> Body -- ^ 'media'
-    -> Text -- ^ 'id'
+    :: TimelineItem -- ^ 'tuPayload'
+    -> Body -- ^ 'tuMedia'
+    -> Text -- ^ 'tuId'
     -> TimelineUpdate'
 timelineUpdate' pTuPayload_ pTuMedia_ pTuId_ =
     TimelineUpdate'

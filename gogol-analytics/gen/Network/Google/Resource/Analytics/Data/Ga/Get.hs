@@ -22,7 +22,7 @@
 --
 -- Returns Analytics data for a view (profile).
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsDataGaGet@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.data.ga.get@.
 module Network.Google.Resource.Analytics.Data.Ga.Get
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.Analytics.Data.Ga.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsDataGaGet@ method which the
+-- | A resource alias for @analytics.data.ga.get@ method which the
 -- 'DataGaGet'' request conforms to.
 type DataGaGetResource =
      "data" :>
@@ -115,10 +115,10 @@ data DataGaGet' = DataGaGet'
 --
 -- * 'dggStartDate'
 dataGaGet'
-    :: Text -- ^ 'metrics'
-    -> Text -- ^ 'ids'
-    -> Text -- ^ 'end-date'
-    -> Text -- ^ 'start-date'
+    :: Text -- ^ 'dggMetrics'
+    -> Text -- ^ 'dggIds'
+    -> Text -- ^ 'dggEndDate'
+    -> Text -- ^ 'dggStartDate'
     -> DataGaGet'
 dataGaGet' pDggMetrics_ pDggIds_ pDggEndDate_ pDggStartDate_ =
     DataGaGet'

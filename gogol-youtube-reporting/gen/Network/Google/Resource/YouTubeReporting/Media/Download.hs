@@ -23,7 +23,7 @@
 -- Method for media download. Download is supported on the URI
 -- \`\/v1\/media\/{+name}?alt=media\`.
 --
--- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @YouTubereportingMediaDownload@.
+-- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @youtubereporting.media.download@.
 module Network.Google.Resource.YouTubeReporting.Media.Download
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.YouTubeReporting.Media.Download
 import           Network.Google.Prelude
 import           Network.Google.YouTubeReporting.Types
 
--- | A resource alias for @YouTubereportingMediaDownload@ method which the
+-- | A resource alias for @youtubereporting.media.download@ method which the
 -- 'MediaDownload'' request conforms to.
 type MediaDownloadResource =
      "v1" :>
@@ -110,7 +110,7 @@ data MediaDownload' = MediaDownload'
 --
 -- * 'mdCallback'
 mediaDownload'
-    :: Text -- ^ 'resourceName'
+    :: Text -- ^ 'mdResourceName'
     -> MediaDownload'
 mediaDownload' pMdResourceName_ =
     MediaDownload'

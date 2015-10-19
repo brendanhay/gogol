@@ -26,7 +26,7 @@
 -- unique data stream ID and separate data source. Data sources are
 -- identified by their data stream ID.
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesUpdate@.
+-- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataSources.update@.
 module Network.Google.Resource.Fitness.Users.DataSources.Update
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Fitness.Users.DataSources.Update
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersDataSourcesUpdate@ method which the
+-- | A resource alias for @fitness.users.dataSources.update@ method which the
 -- 'UsersDataSourcesUpdate'' request conforms to.
 type UsersDataSourcesUpdateResource =
      Capture "userId" Text :>
@@ -77,9 +77,9 @@ data UsersDataSourcesUpdate' = UsersDataSourcesUpdate'
 --
 -- * 'udsuUserId'
 usersDataSourcesUpdate'
-    :: Text -- ^ 'dataSourceId'
-    -> DataSource -- ^ 'payload'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'udsuDataSourceId'
+    -> DataSource -- ^ 'udsuPayload'
+    -> Text -- ^ 'udsuUserId'
     -> UsersDataSourcesUpdate'
 usersDataSourcesUpdate' pUdsuDataSourceId_ pUdsuPayload_ pUdsuUserId_ =
     UsersDataSourcesUpdate'

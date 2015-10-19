@@ -22,7 +22,7 @@
 --
 -- Retrieves a data transfer request by its resource ID.
 --
--- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @DataTransferTransfersGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @datatransfer.transfers.get@.
 module Network.Google.Resource.DataTransfer.Transfers.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DataTransfer.Transfers.Get
 import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataTransferTransfersGet@ method which the
+-- | A resource alias for @datatransfer.transfers.get@ method which the
 -- 'TransfersGet'' request conforms to.
 type TransfersGetResource =
      "transfers" :>
@@ -59,7 +59,7 @@ newtype TransfersGet' = TransfersGet'
 --
 -- * 'tgDataTransferId'
 transfersGet'
-    :: Text -- ^ 'dataTransferId'
+    :: Text -- ^ 'tgDataTransferId'
     -> TransfersGet'
 transfersGet' pTgDataTransferId_ =
     TransfersGet'

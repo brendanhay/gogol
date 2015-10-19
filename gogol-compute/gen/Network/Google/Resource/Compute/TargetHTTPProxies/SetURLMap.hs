@@ -22,7 +22,7 @@
 --
 -- Changes the URL map for TargetHttpProxy.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetHTTPProxiesSetURLMap@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetHttpProxies.setUrlMap@.
 module Network.Google.Resource.Compute.TargetHTTPProxies.SetURLMap
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.SetURLMap
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetHTTPProxiesSetURLMap@ method which the
+-- | A resource alias for @compute.targetHttpProxies.setUrlMap@ method which the
 -- 'TargetHTTPProxiesSetURLMap'' request conforms to.
 type TargetHTTPProxiesSetURLMapResource =
      Capture "project" Text :>
@@ -71,9 +71,9 @@ data TargetHTTPProxiesSetURLMap' = TargetHTTPProxiesSetURLMap'
 --
 -- * 'thttppsumTargetHTTPProxy'
 targetHTTPProxiesSetURLMap'
-    :: Text -- ^ 'project'
-    -> URLMapReference -- ^ 'payload'
-    -> Text -- ^ 'targetHttpProxy'
+    :: Text -- ^ 'thttppsumProject'
+    -> URLMapReference -- ^ 'thttppsumPayload'
+    -> Text -- ^ 'thttppsumTargetHTTPProxy'
     -> TargetHTTPProxiesSetURLMap'
 targetHTTPProxiesSetURLMap' pThttppsumProject_ pThttppsumPayload_ pThttppsumTargetHTTPProxy_ =
     TargetHTTPProxiesSetURLMap'

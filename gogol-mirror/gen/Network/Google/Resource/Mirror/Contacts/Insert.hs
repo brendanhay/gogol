@@ -22,7 +22,7 @@
 --
 -- Inserts a new contact.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorContactsInsert@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.contacts.insert@.
 module Network.Google.Resource.Mirror.Contacts.Insert
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Mirror.Contacts.Insert
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorContactsInsert@ method which the
+-- | A resource alias for @mirror.contacts.insert@ method which the
 -- 'ContactsInsert'' request conforms to.
 type ContactsInsertResource =
      "contacts" :>
@@ -59,7 +59,7 @@ newtype ContactsInsert' = ContactsInsert'
 --
 -- * 'ciPayload'
 contactsInsert'
-    :: Contact -- ^ 'payload'
+    :: Contact -- ^ 'ciPayload'
     -> ContactsInsert'
 contactsInsert' pCiPayload_ =
     ContactsInsert'

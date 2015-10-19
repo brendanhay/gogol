@@ -22,7 +22,7 @@
 --
 -- Deletes a broadcast.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveBroadcastsDelete@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveBroadcasts.delete@.
 module Network.Google.Resource.YouTube.LiveBroadcasts.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveBroadcastsDelete@ method which the
+-- | A resource alias for @youtube.liveBroadcasts.delete@ method which the
 -- 'LiveBroadcastsDelete'' request conforms to.
 type LiveBroadcastsDeleteResource =
      "liveBroadcasts" :>
@@ -69,7 +69,7 @@ data LiveBroadcastsDelete' = LiveBroadcastsDelete'
 --
 -- * 'lbdId'
 liveBroadcastsDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'lbdId'
     -> LiveBroadcastsDelete'
 liveBroadcastsDelete' pLbdId_ =
     LiveBroadcastsDelete'

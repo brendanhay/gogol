@@ -22,7 +22,7 @@
 --
 -- Returns the specified disk type resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDiskTypesGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.diskTypes.get@.
 module Network.Google.Resource.Compute.DiskTypes.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.DiskTypes.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeDiskTypesGet@ method which the
+-- | A resource alias for @compute.diskTypes.get@ method which the
 -- 'DiskTypesGet'' request conforms to.
 type DiskTypesGetResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data DiskTypesGet' = DiskTypesGet'
 --
 -- * 'dtgDiskType'
 diskTypesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Text -- ^ 'diskType'
+    :: Text -- ^ 'dtgProject'
+    -> Text -- ^ 'dtgZone'
+    -> Text -- ^ 'dtgDiskType'
     -> DiskTypesGet'
 diskTypesGet' pDtgProject_ pDtgZone_ pDtgDiskType_ =
     DiskTypesGet'

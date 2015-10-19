@@ -22,7 +22,7 @@
 --
 -- Creates a GTM Variable.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVariablesCreate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.variables.create@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Create
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Create
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersVariablesCreate@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.variables.create@ method which the
 -- 'AccountsContainersVariablesCreate'' request conforms to.
 type AccountsContainersVariablesCreateResource =
      "accounts" :>
@@ -71,9 +71,9 @@ data AccountsContainersVariablesCreate' = AccountsContainersVariablesCreate'
 --
 -- * 'acvccAccountId'
 accountsContainersVariablesCreate'
-    :: Text -- ^ 'containerId'
-    -> Variable -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acvccContainerId'
+    -> Variable -- ^ 'acvccPayload'
+    -> Text -- ^ 'acvccAccountId'
     -> AccountsContainersVariablesCreate'
 accountsContainersVariablesCreate' pAcvccContainerId_ pAcvccPayload_ pAcvccAccountId_ =
     AccountsContainersVariablesCreate'

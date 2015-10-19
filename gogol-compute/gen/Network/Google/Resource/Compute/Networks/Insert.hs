@@ -23,7 +23,7 @@
 -- Creates a network resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeNetworksInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.networks.insert@.
 module Network.Google.Resource.Compute.Networks.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.Networks.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeNetworksInsert@ method which the
+-- | A resource alias for @compute.networks.insert@ method which the
 -- 'NetworksInsert'' request conforms to.
 type NetworksInsertResource =
      Capture "project" Text :>
@@ -67,8 +67,8 @@ data NetworksInsert' = NetworksInsert'
 --
 -- * 'niPayload'
 networksInsert'
-    :: Text -- ^ 'project'
-    -> Network -- ^ 'payload'
+    :: Text -- ^ 'niProject'
+    -> Network -- ^ 'niPayload'
     -> NetworksInsert'
 networksInsert' pNiProject_ pNiPayload_ =
     NetworksInsert'

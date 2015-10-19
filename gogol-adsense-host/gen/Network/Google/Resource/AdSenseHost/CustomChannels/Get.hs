@@ -22,7 +22,7 @@
 --
 -- Get a specific custom channel from the host AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostCustomChannelsGet@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.customchannels.get@.
 module Network.Google.Resource.AdSenseHost.CustomChannels.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.Get
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostCustomChannelsGet@ method which the
+-- | A resource alias for @adsensehost.customchannels.get@ method which the
 -- 'CustomChannelsGet'' request conforms to.
 type CustomChannelsGetResource =
      "adclients" :>
@@ -65,8 +65,8 @@ data CustomChannelsGet' = CustomChannelsGet'
 --
 -- * 'ccgAdClientId'
 customChannelsGet'
-    :: Text -- ^ 'customChannelId'
-    -> Text -- ^ 'adClientId'
+    :: Text -- ^ 'ccgCustomChannelId'
+    -> Text -- ^ 'ccgAdClientId'
     -> CustomChannelsGet'
 customChannelsGet' pCcgCustomChannelId_ pCcgAdClientId_ =
     CustomChannelsGet'

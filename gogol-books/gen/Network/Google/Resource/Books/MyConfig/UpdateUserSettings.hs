@@ -24,7 +24,7 @@
 -- overwrite the existing sub-object stored in the server. Unspecified
 -- sub-objects will retain the existing value.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyConfigUpdateUserSettings@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.myconfig.updateUserSettings@.
 module Network.Google.Resource.Books.MyConfig.UpdateUserSettings
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Books.MyConfig.UpdateUserSettings
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyConfigUpdateUserSettings@ method which the
+-- | A resource alias for @books.myconfig.updateUserSettings@ method which the
 -- 'MyConfigUpdateUserSettings'' request conforms to.
 type MyConfigUpdateUserSettingsResource =
      "myconfig" :>
@@ -65,7 +65,7 @@ newtype MyConfigUpdateUserSettings' = MyConfigUpdateUserSettings'
 --
 -- * 'mcuusPayload'
 myConfigUpdateUserSettings'
-    :: Usersettings -- ^ 'payload'
+    :: Usersettings -- ^ 'mcuusPayload'
     -> MyConfigUpdateUserSettings'
 myConfigUpdateUserSettings' pMcuusPayload_ =
     MyConfigUpdateUserSettings'

@@ -25,7 +25,7 @@
 -- matching video, channel, and playlist resources, but you can also
 -- configure queries to only retrieve a specific type of resource.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeSearchList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.search.list@.
 module Network.Google.Resource.YouTube.Search.List
     (
     -- * REST Resource
@@ -72,7 +72,7 @@ module Network.Google.Resource.YouTube.Search.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeSearchList@ method which the
+-- | A resource alias for @youtube.search.list@ method which the
 -- 'SearchList'' request conforms to.
 type SearchListResource =
      "search" :>
@@ -253,7 +253,7 @@ data SearchList' = SearchList'
 --
 -- * 'slVideoDimension'
 searchList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'slPart'
     -> SearchList'
 searchList' pSlPart_ =
     SearchList'

@@ -24,7 +24,7 @@
 -- filter. This method returns projects in an unspecified order. New
 -- projects do not necessarily appear at the end of the list.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerProjectsList@.
+-- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.list@.
 module Network.Google.Resource.CloudResourceManager.Projects.List
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.CloudResourceManager.Projects.List
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerProjectsList@ method which the
+-- | A resource alias for @cloudresourcemanager.projects.list@ method which the
 -- 'ProjectsList'' request conforms to.
 type ProjectsListResource =
      "v1beta1" :>

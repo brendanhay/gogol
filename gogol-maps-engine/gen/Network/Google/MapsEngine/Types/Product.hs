@@ -77,7 +77,7 @@ newtype GeoJSONProperties = GeoJSONProperties
 --
 -- * 'gjpAddtional'
 geoJSONProperties
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'gjpAddtional'
     -> GeoJSONProperties
 geoJSONProperties pGjpAddtional_ =
     GeoJSONProperties

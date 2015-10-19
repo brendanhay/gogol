@@ -22,7 +22,7 @@
 --
 -- Returns a list of the leaderboard configurations in this application.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationLeaderboardConfigurationsList@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.list@.
 module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.List
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationLeaderboardConfigurationsList@ method which the
+-- | A resource alias for @gamesConfiguration.leaderboardConfigurations.list@ method which the
 -- 'LeaderboardConfigurationsList'' request conforms to.
 type LeaderboardConfigurationsListResource =
      "applications" :>
@@ -71,7 +71,7 @@ data LeaderboardConfigurationsList' = LeaderboardConfigurationsList'
 --
 -- * 'lclMaxResults'
 leaderboardConfigurationsList'
-    :: Text -- ^ 'applicationId'
+    :: Text -- ^ 'lclApplicationId'
     -> LeaderboardConfigurationsList'
 leaderboardConfigurationsList' pLclApplicationId_ =
     LeaderboardConfigurationsList'

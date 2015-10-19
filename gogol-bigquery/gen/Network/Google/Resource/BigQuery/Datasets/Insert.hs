@@ -22,7 +22,7 @@
 --
 -- Creates a new empty dataset.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryDatasetsInsert@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @bigquery.datasets.insert@.
 module Network.Google.Resource.BigQuery.Datasets.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.BigQuery.Datasets.Insert
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigQueryDatasetsInsert@ method which the
+-- | A resource alias for @bigquery.datasets.insert@ method which the
 -- 'DatasetsInsert'' request conforms to.
 type DatasetsInsertResource =
      "projects" :>
@@ -65,8 +65,8 @@ data DatasetsInsert' = DatasetsInsert'
 --
 -- * 'diProjectId'
 datasetsInsert'
-    :: Dataset -- ^ 'payload'
-    -> Text -- ^ 'projectId'
+    :: Dataset -- ^ 'diPayload'
+    -> Text -- ^ 'diProjectId'
     -> DatasetsInsert'
 datasetsInsert' pDiPayload_ pDiProjectId_ =
     DatasetsInsert'

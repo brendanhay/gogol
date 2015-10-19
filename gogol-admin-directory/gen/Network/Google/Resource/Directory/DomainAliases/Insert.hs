@@ -22,7 +22,7 @@
 --
 -- Inserts a Domain alias of the customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryDomainAliasesInsert@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.domainAliases.insert@.
 module Network.Google.Resource.Directory.DomainAliases.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.DomainAliases.Insert
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryDomainAliasesInsert@ method which the
+-- | A resource alias for @directory.domainAliases.insert@ method which the
 -- 'DomainAliasesInsert'' request conforms to.
 type DomainAliasesInsertResource =
      "customer" :>
@@ -66,8 +66,8 @@ data DomainAliasesInsert' = DomainAliasesInsert'
 --
 -- * 'daiCustomer'
 domainAliasesInsert'
-    :: DomainAlias -- ^ 'payload'
-    -> Text -- ^ 'customer'
+    :: DomainAlias -- ^ 'daiPayload'
+    -> Text -- ^ 'daiCustomer'
     -> DomainAliasesInsert'
 domainAliasesInsert' pDaiPayload_ pDaiCustomer_ =
     DomainAliasesInsert'

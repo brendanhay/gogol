@@ -23,7 +23,7 @@
 -- Expresses the caller\'s opinion that one or more comments should be
 -- flagged as spam.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentsMarkAsSpam@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.comments.markAsSpam@.
 module Network.Google.Resource.YouTube.Comments.MarkAsSpam
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTube.Comments.MarkAsSpam
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCommentsMarkAsSpam@ method which the
+-- | A resource alias for @youtube.comments.markAsSpam@ method which the
 -- 'CommentsMarkAsSpam'' request conforms to.
 type CommentsMarkAsSpamResource =
      "comments" :>
@@ -62,7 +62,7 @@ newtype CommentsMarkAsSpam' = CommentsMarkAsSpam'
 --
 -- * 'cmasId'
 commentsMarkAsSpam'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'cmasId'
     -> CommentsMarkAsSpam'
 commentsMarkAsSpam' pCmasId_ =
     CommentsMarkAsSpam'

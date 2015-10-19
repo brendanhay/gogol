@@ -22,7 +22,7 @@
 --
 -- Get a comment.
 --
--- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusCommentsGet@.
+-- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.comments.get@.
 module Network.Google.Resource.Plus.Comments.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Plus.Comments.Get
 import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusCommentsGet@ method which the
+-- | A resource alias for @plus.comments.get@ method which the
 -- 'CommentsGet'' request conforms to.
 type CommentsGetResource =
      "comments" :>
@@ -59,7 +59,7 @@ newtype CommentsGet' = CommentsGet'
 --
 -- * 'cgCommentId'
 commentsGet'
-    :: Text -- ^ 'commentId'
+    :: Text -- ^ 'cgCommentId'
     -> CommentsGet'
 commentsGet' pCgCommentId_ =
     CommentsGet'

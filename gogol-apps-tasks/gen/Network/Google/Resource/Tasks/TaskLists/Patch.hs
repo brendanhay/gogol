@@ -23,7 +23,7 @@
 -- Updates the authenticated user\'s specified task list. This method
 -- supports patch semantics.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTaskListsPatch@.
+-- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasklists.patch@.
 module Network.Google.Resource.Tasks.TaskLists.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Tasks.TaskLists.Patch
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTaskListsPatch@ method which the
+-- | A resource alias for @tasks.tasklists.patch@ method which the
 -- 'TaskListsPatch'' request conforms to.
 type TaskListsPatchResource =
      "users" :>
@@ -68,8 +68,8 @@ data TaskListsPatch' = TaskListsPatch'
 --
 -- * 'tlpTaskList'
 taskListsPatch'
-    :: TaskList -- ^ 'payload'
-    -> Text -- ^ 'tasklist'
+    :: TaskList -- ^ 'tlpPayload'
+    -> Text -- ^ 'tlpTaskList'
     -> TaskListsPatch'
 taskListsPatch' pTlpPayload_ pTlpTaskList_ =
     TaskListsPatch'

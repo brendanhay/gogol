@@ -23,7 +23,7 @@
 -- Retrieves the Player resource with the given ID. To retrieve the player
 -- for the currently authenticated user, set playerId to me.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesPlayersGet@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.players.get@.
 module Network.Google.Resource.Games.Players.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Games.Players.Get
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesPlayersGet@ method which the
+-- | A resource alias for @games.players.get@ method which the
 -- 'PlayersGet'' request conforms to.
 type PlayersGetResource =
      "players" :>
@@ -66,7 +66,7 @@ data PlayersGet' = PlayersGet'
 --
 -- * 'pgPlayerId'
 playersGet'
-    :: Text -- ^ 'playerId'
+    :: Text -- ^ 'pgPlayerId'
     -> PlayersGet'
 playersGet' pPgPlayerId_ =
     PlayersGet'

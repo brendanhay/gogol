@@ -22,7 +22,7 @@
 --
 -- Gets a specific cluster.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @ContainerProjectsZonesClustersGet@.
+-- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.get@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Get
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Get
 import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ContainerProjectsZonesClustersGet@ method which the
+-- | A resource alias for @container.projects.zones.clusters.get@ method which the
 -- 'ProjectsZonesClustersGet'' request conforms to.
 type ProjectsZonesClustersGetResource =
      "v1" :>
@@ -107,9 +107,9 @@ data ProjectsZonesClustersGet' = ProjectsZonesClustersGet'
 --
 -- * 'pzcgCallback'
 projectsZonesClustersGet'
-    :: Text -- ^ 'zone'
-    -> Text -- ^ 'clusterId'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'pzcgZone'
+    -> Text -- ^ 'pzcgClusterId'
+    -> Text -- ^ 'pzcgProjectId'
     -> ProjectsZonesClustersGet'
 projectsZonesClustersGet' pPzcgZone_ pPzcgClusterId_ pPzcgProjectId_ =
     ProjectsZonesClustersGet'

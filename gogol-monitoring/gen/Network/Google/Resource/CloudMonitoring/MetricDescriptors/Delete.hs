@@ -22,7 +22,7 @@
 --
 -- Delete an existing metric.
 --
--- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @CloudMonitoringMetricDescriptorsDelete@.
+-- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @cloudmonitoring.metricDescriptors.delete@.
 module Network.Google.Resource.CloudMonitoring.MetricDescriptors.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.CloudMonitoring.MetricDescriptors.Delete
 import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudMonitoringMetricDescriptorsDelete@ method which the
+-- | A resource alias for @cloudmonitoring.metricDescriptors.delete@ method which the
 -- 'MetricDescriptorsDelete'' request conforms to.
 type MetricDescriptorsDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data MetricDescriptorsDelete' = MetricDescriptorsDelete'
 --
 -- * 'mddMetric'
 metricDescriptorsDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'metric'
+    :: Text -- ^ 'mddProject'
+    -> Text -- ^ 'mddMetric'
     -> MetricDescriptorsDelete'
 metricDescriptorsDelete' pMddProject_ pMddMetric_ =
     MetricDescriptorsDelete'

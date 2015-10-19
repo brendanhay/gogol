@@ -22,7 +22,7 @@
 --
 -- Gets a view (profile) to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFilesGet@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.profiles.get@.
 module Network.Google.Resource.Analytics.Management.ProFiles.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFilesGet@ method which the
+-- | A resource alias for @analytics.management.profiles.get@ method which the
 -- 'ManagementProFilesGet'' request conforms to.
 type ManagementProFilesGetResource =
      "management" :>
@@ -72,9 +72,9 @@ data ManagementProFilesGet' = ManagementProFilesGet'
 --
 -- * 'mpfgAccountId'
 managementProFilesGet'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mpfgWebPropertyId'
+    -> Text -- ^ 'mpfgProFileId'
+    -> Text -- ^ 'mpfgAccountId'
     -> ManagementProFilesGet'
 managementProFilesGet' pMpfgWebPropertyId_ pMpfgProFileId_ pMpfgAccountId_ =
     ManagementProFilesGet'

@@ -22,7 +22,7 @@
 --
 -- Get token signing public key.
 --
--- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyGetPublicKeys@.
+-- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.getPublicKeys@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.GetPublicKeys
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.GetPublicKeys
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyGetPublicKeys@ method which the
+-- | A resource alias for @identitytoolkit.relyingparty.getPublicKeys@ method which the
 -- 'RelyingPartyGetPublicKeys'' request conforms to.
 type RelyingPartyGetPublicKeysResource =
      "publicKeys" :>

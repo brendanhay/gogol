@@ -23,7 +23,7 @@
 -- Creates a firewall resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeFirewallsInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.firewalls.insert@.
 module Network.Google.Resource.Compute.Firewalls.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.Firewalls.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeFirewallsInsert@ method which the
+-- | A resource alias for @compute.firewalls.insert@ method which the
 -- 'FirewallsInsert'' request conforms to.
 type FirewallsInsertResource =
      Capture "project" Text :>
@@ -67,8 +67,8 @@ data FirewallsInsert' = FirewallsInsert'
 --
 -- * 'fiPayload'
 firewallsInsert'
-    :: Text -- ^ 'project'
-    -> Firewall -- ^ 'payload'
+    :: Text -- ^ 'fiProject'
+    -> Firewall -- ^ 'fiPayload'
     -> FirewallsInsert'
 firewallsInsert' pFiProject_ pFiPayload_ =
     FirewallsInsert'

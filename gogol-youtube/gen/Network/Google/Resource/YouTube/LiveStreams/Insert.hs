@@ -23,7 +23,7 @@
 -- Creates a video stream. The stream enables you to send your video to
 -- YouTube, which can then broadcast the video to your audience.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveStreamsInsert@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveStreams.insert@.
 module Network.Google.Resource.YouTube.LiveStreams.Insert
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.YouTube.LiveStreams.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveStreamsInsert@ method which the
+-- | A resource alias for @youtube.liveStreams.insert@ method which the
 -- 'LiveStreamsInsert'' request conforms to.
 type LiveStreamsInsertResource =
      "liveStreams" :>
@@ -76,8 +76,8 @@ data LiveStreamsInsert' = LiveStreamsInsert'
 --
 -- * 'lsiOnBehalfOfContentOwnerChannel'
 liveStreamsInsert'
-    :: Text -- ^ 'part'
-    -> LiveStream -- ^ 'payload'
+    :: Text -- ^ 'lsiPart'
+    -> LiveStream -- ^ 'lsiPayload'
     -> LiveStreamsInsert'
 liveStreamsInsert' pLsiPart_ pLsiPayload_ =
     LiveStreamsInsert'

@@ -22,7 +22,7 @@
 --
 -- Return the published metadata for a particular layer.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineLayersGetPublished@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.layers.getPublished@.
 module Network.Google.Resource.MapsEngine.Layers.GetPublished
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.Layers.GetPublished
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersGetPublished@ method which the
+-- | A resource alias for @mapsengine.layers.getPublished@ method which the
 -- 'LayersGetPublished'' request conforms to.
 type LayersGetPublishedResource =
      "layers" :>
@@ -61,7 +61,7 @@ newtype LayersGetPublished' = LayersGetPublished'
 --
 -- * 'lgpId'
 layersGetPublished'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'lgpId'
     -> LayersGetPublished'
 layersGetPublished' pLgpId_ =
     LayersGetPublished'

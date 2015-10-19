@@ -24,7 +24,7 @@
 -- the collection. If the collection\'s visibility is set to viewersOnly
 -- then only these users will see the collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseCollectionviewersList@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collectionviewers.list@.
 module Network.Google.Resource.AndroidEnterprise.Collectionviewers.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AndroidEnterprise.Collectionviewers.List
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseCollectionviewersList@ method which the
+-- | A resource alias for @androidenterprise.collectionviewers.list@ method which the
 -- 'CollectionviewersList'' request conforms to.
 type CollectionviewersListResource =
      "enterprises" :>
@@ -71,8 +71,8 @@ data CollectionviewersList' = CollectionviewersList'
 --
 -- * 'clCollectionId'
 collectionviewersList'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'collectionId'
+    :: Text -- ^ 'clEnterpriseId'
+    -> Text -- ^ 'clCollectionId'
     -> CollectionviewersList'
 collectionviewersList' pClEnterpriseId_ pClCollectionId_ =
     CollectionviewersList'

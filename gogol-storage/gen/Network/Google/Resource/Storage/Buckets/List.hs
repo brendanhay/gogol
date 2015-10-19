@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of buckets for a given project.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketsList@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.buckets.list@.
 module Network.Google.Resource.Storage.Buckets.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Storage.Buckets.List
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageBucketsList@ method which the
+-- | A resource alias for @storage.buckets.list@ method which the
 -- 'BucketsList'' request conforms to.
 type BucketsListResource =
      "b" :>
@@ -79,7 +79,7 @@ data BucketsList' = BucketsList'
 --
 -- * 'blMaxResults'
 bucketsList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'blProject'
     -> BucketsList'
 bucketsList' pBlProject_ =
     BucketsList'

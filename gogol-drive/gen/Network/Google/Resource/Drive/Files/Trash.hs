@@ -23,7 +23,7 @@
 -- Moves a file to the trash. The currently authenticated user must own the
 -- file.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesTrash@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.trash@.
 module Network.Google.Resource.Drive.Files.Trash
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Drive.Files.Trash
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesTrash@ method which the
+-- | A resource alias for @drive.files.trash@ method which the
 -- 'FilesTrash'' request conforms to.
 type FilesTrashResource =
      "files" :>
@@ -62,7 +62,7 @@ newtype FilesTrash' = FilesTrash'
 --
 -- * 'filFileId'
 filesTrash'
-    :: Text -- ^ 'fileId'
+    :: Text -- ^ 'filFileId'
     -> FilesTrash'
 filesTrash' pFilFileId_ =
     FilesTrash'

@@ -22,7 +22,7 @@
 --
 -- Create a new unsampled report.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUnSampledReportsInsert@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.unsampledReports.insert@.
 module Network.Google.Resource.Analytics.Management.UnSampledReports.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.UnSampledReports.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementUnSampledReportsInsert@ method which the
+-- | A resource alias for @analytics.management.unsampledReports.insert@ method which the
 -- 'ManagementUnSampledReportsInsert'' request conforms to.
 type ManagementUnSampledReportsInsertResource =
      "management" :>
@@ -79,10 +79,10 @@ data ManagementUnSampledReportsInsert' = ManagementUnSampledReportsInsert'
 --
 -- * 'musriAccountId'
 managementUnSampledReportsInsert'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> UnSampledReport -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'musriWebPropertyId'
+    -> Text -- ^ 'musriProFileId'
+    -> UnSampledReport -- ^ 'musriPayload'
+    -> Text -- ^ 'musriAccountId'
     -> ManagementUnSampledReportsInsert'
 managementUnSampledReportsInsert' pMusriWebPropertyId_ pMusriProFileId_ pMusriPayload_ pMusriAccountId_ =
     ManagementUnSampledReportsInsert'

@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of notifications.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryNotificationsList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.notifications.list@.
 module Network.Google.Resource.Directory.Notifications.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Directory.Notifications.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryNotificationsList@ method which the
+-- | A resource alias for @directory.notifications.list@ method which the
 -- 'NotificationsList'' request conforms to.
 type NotificationsListResource =
      "customer" :>
@@ -75,7 +75,7 @@ data NotificationsList' = NotificationsList'
 --
 -- * 'nlMaxResults'
 notificationsList'
-    :: Text -- ^ 'customer'
+    :: Text -- ^ 'nlCustomer'
     -> NotificationsList'
 notificationsList' pNlCustomer_ =
     NotificationsList'

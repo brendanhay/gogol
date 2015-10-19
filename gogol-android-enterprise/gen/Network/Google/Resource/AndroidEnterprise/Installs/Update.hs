@@ -24,7 +24,7 @@
 -- is already installed then it is updated to the latest version if
 -- necessary.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseInstallsUpdate@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.installs.update@.
 module Network.Google.Resource.AndroidEnterprise.Installs.Update
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Update
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseInstallsUpdate@ method which the
+-- | A resource alias for @androidenterprise.installs.update@ method which the
 -- 'InstallsUpdate'' request conforms to.
 type InstallsUpdateResource =
      "enterprises" :>
@@ -86,11 +86,11 @@ data InstallsUpdate' = InstallsUpdate'
 --
 -- * 'iuDeviceId'
 installsUpdate'
-    :: Text -- ^ 'enterpriseId'
-    -> Install -- ^ 'payload'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'installId'
-    -> Text -- ^ 'deviceId'
+    :: Text -- ^ 'iuEnterpriseId'
+    -> Install -- ^ 'iuPayload'
+    -> Text -- ^ 'iuUserId'
+    -> Text -- ^ 'iuInstallId'
+    -> Text -- ^ 'iuDeviceId'
     -> InstallsUpdate'
 installsUpdate' pIuEnterpriseId_ pIuPayload_ pIuUserId_ pIuInstallId_ pIuDeviceId_ =
     InstallsUpdate'

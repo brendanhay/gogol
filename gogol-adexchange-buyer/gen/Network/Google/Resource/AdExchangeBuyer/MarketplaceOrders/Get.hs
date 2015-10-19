@@ -22,7 +22,7 @@
 --
 -- Get an order given its id
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceOrdersGet@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.marketplaceorders.get@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Get
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerMarketplaceOrdersGet@ method which the
+-- | A resource alias for @adexchangebuyer.marketplaceorders.get@ method which the
 -- 'MarketplaceOrdersGet'' request conforms to.
 type MarketplaceOrdersGetResource =
      "marketplaceOrders" :>
@@ -60,7 +60,7 @@ newtype MarketplaceOrdersGet' = MarketplaceOrdersGet'
 --
 -- * 'mogOrderId'
 marketplaceOrdersGet'
-    :: Text -- ^ 'orderId'
+    :: Text -- ^ 'mogOrderId'
     -> MarketplaceOrdersGet'
 marketplaceOrdersGet' pMogOrderId_ =
     MarketplaceOrdersGet'

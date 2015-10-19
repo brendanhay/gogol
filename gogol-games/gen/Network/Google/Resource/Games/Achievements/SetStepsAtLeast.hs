@@ -25,7 +25,7 @@
 -- of steps that the player already gained for the achievement, the
 -- achievement is not modified.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementsSetStepsAtLeast@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.achievements.setStepsAtLeast@.
 module Network.Google.Resource.Games.Achievements.SetStepsAtLeast
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Games.Achievements.SetStepsAtLeast
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesAchievementsSetStepsAtLeast@ method which the
+-- | A resource alias for @games.achievements.setStepsAtLeast@ method which the
 -- 'AchievementsSetStepsAtLeast'' request conforms to.
 type AchievementsSetStepsAtLeastResource =
      "achievements" :>
@@ -72,8 +72,8 @@ data AchievementsSetStepsAtLeast' = AchievementsSetStepsAtLeast'
 --
 -- * 'assalSteps'
 achievementsSetStepsAtLeast'
-    :: Text -- ^ 'achievementId'
-    -> Int32 -- ^ 'steps'
+    :: Text -- ^ 'assalAchievementId'
+    -> Int32 -- ^ 'assalSteps'
     -> AchievementsSetStepsAtLeast'
 achievementsSetStepsAtLeast' pAssalAchievementId_ pAssalSteps_ =
     AchievementsSetStepsAtLeast'

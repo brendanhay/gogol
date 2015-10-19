@@ -22,7 +22,7 @@
 --
 -- Get all the notes associated with an order
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceNotesList@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.marketplacenotes.list@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerMarketplaceNotesList@ method which the
+-- | A resource alias for @adexchangebuyer.marketplacenotes.list@ method which the
 -- 'MarketplaceNotesList'' request conforms to.
 type MarketplaceNotesListResource =
      "marketplaceOrders" :>
@@ -61,7 +61,7 @@ newtype MarketplaceNotesList' = MarketplaceNotesList'
 --
 -- * 'mnlOrderId'
 marketplaceNotesList'
-    :: Text -- ^ 'orderId'
+    :: Text -- ^ 'mnlOrderId'
     -> MarketplaceNotesList'
 marketplaceNotesList' pMnlOrderId_ =
     MarketplaceNotesList'

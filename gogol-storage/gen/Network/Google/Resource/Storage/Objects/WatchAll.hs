@@ -22,7 +22,7 @@
 --
 -- Watch for changes on all objects in a bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsWatchAll@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objects.watchAll@.
 module Network.Google.Resource.Storage.Objects.WatchAll
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Storage.Objects.WatchAll
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsWatchAll@ method which the
+-- | A resource alias for @storage.objects.watchAll@ method which the
 -- 'ObjectsWatchAll'' request conforms to.
 type ObjectsWatchAllResource =
      "b" :>
@@ -96,8 +96,8 @@ data ObjectsWatchAll' = ObjectsWatchAll'
 --
 -- * 'owaMaxResults'
 objectsWatchAll'
-    :: Text -- ^ 'bucket'
-    -> Channel -- ^ 'payload'
+    :: Text -- ^ 'owaBucket'
+    -> Channel -- ^ 'owaPayload'
     -> ObjectsWatchAll'
 objectsWatchAll' pOwaBucket_ pOwaPayload_ =
     ObjectsWatchAll'

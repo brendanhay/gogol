@@ -23,7 +23,7 @@
 -- Sets the access control policy on the specified resource. Replaces any
 -- existing policy.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsSetIAMPolicy@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.setIamPolicy@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.SetIAMPolicy
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.SetIAMPolicy
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsSubscriptionsSetIAMPolicy@ method which the
+-- | A resource alias for @pubsub.projects.subscriptions.setIamPolicy@ method which the
 -- 'ProjectsSubscriptionsSetIAMPolicy'' request conforms to.
 type ProjectsSubscriptionsSetIAMPolicyResource =
      "v1" :>
@@ -102,8 +102,8 @@ data ProjectsSubscriptionsSetIAMPolicy' = ProjectsSubscriptionsSetIAMPolicy'
 --
 -- * 'pssipCallback'
 projectsSubscriptionsSetIAMPolicy'
-    :: SetIAMPolicyRequest -- ^ 'payload'
-    -> Text -- ^ 'resource'
+    :: SetIAMPolicyRequest -- ^ 'pssipPayload'
+    -> Text -- ^ 'pssipResource'
     -> ProjectsSubscriptionsSetIAMPolicy'
 projectsSubscriptionsSetIAMPolicy' pPssipPayload_ pPssipResource_ =
     ProjectsSubscriptionsSetIAMPolicy'

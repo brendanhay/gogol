@@ -24,7 +24,7 @@
 -- still show the app as installed on the device until it is actually
 -- removed.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseInstallsDelete@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.installs.delete@.
 module Network.Google.Resource.AndroidEnterprise.Installs.Delete
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Delete
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseInstallsDelete@ method which the
+-- | A resource alias for @androidenterprise.installs.delete@ method which the
 -- 'InstallsDelete'' request conforms to.
 type InstallsDeleteResource =
      "enterprises" :>
@@ -81,10 +81,10 @@ data InstallsDelete' = InstallsDelete'
 --
 -- * 'idDeviceId'
 installsDelete'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'installId'
-    -> Text -- ^ 'deviceId'
+    :: Text -- ^ 'idEnterpriseId'
+    -> Text -- ^ 'idUserId'
+    -> Text -- ^ 'idInstallId'
+    -> Text -- ^ 'idDeviceId'
     -> InstallsDelete'
 installsDelete' pIdEnterpriseId_ pIdUserId_ pIdInstallId_ pIdDeviceId_ =
     InstallsDelete'

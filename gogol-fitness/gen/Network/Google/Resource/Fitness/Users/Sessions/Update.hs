@@ -22,7 +22,7 @@
 --
 -- Updates or insert a given session.
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersSessionsUpdate@.
+-- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.sessions.update@.
 module Network.Google.Resource.Fitness.Users.Sessions.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Fitness.Users.Sessions.Update
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersSessionsUpdate@ method which the
+-- | A resource alias for @fitness.users.sessions.update@ method which the
 -- 'UsersSessionsUpdate'' request conforms to.
 type UsersSessionsUpdateResource =
      Capture "userId" Text :>
@@ -74,9 +74,9 @@ data UsersSessionsUpdate' = UsersSessionsUpdate'
 --
 -- * 'usuSessionId'
 usersSessionsUpdate'
-    :: Session -- ^ 'payload'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'sessionId'
+    :: Session -- ^ 'usuPayload'
+    -> Text -- ^ 'usuUserId'
+    -> Text -- ^ 'usuSessionId'
     -> UsersSessionsUpdate'
 usersSessionsUpdate' pUsuPayload_ pUsuUserId_ pUsuSessionId_ =
     UsersSessionsUpdate'

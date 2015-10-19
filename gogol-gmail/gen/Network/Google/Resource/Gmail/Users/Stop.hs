@@ -22,7 +22,7 @@
 --
 -- Stop receiving push notifications for the given user mailbox.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersStop@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.stop@.
 module Network.Google.Resource.Gmail.Users.Stop
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Gmail.Users.Stop
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersStop@ method which the
+-- | A resource alias for @gmail.users.stop@ method which the
 -- 'UsersStop'' request conforms to.
 type UsersStopResource =
      Capture "userId" Text :>

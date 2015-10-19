@@ -25,7 +25,7 @@
 -- retain. For partial updates, use patch.. This method supports patch
 -- semantics.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesPatch@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.patch@.
 module Network.Google.Resource.SQL.Instances.Patch
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.SQL.Instances.Patch
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesPatch@ method which the
+-- | A resource alias for @sql.instances.patch@ method which the
 -- 'InstancesPatch'' request conforms to.
 type InstancesPatchResource =
      "projects" :>
@@ -77,9 +77,9 @@ data InstancesPatch' = InstancesPatch'
 --
 -- * 'ipInstance'
 instancesPatch'
-    :: Text -- ^ 'project'
-    -> DatabaseInstance -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'ipProject'
+    -> DatabaseInstance -- ^ 'ipPayload'
+    -> Text -- ^ 'ipInstance'
     -> InstancesPatch'
 instancesPatch' pIpProject_ pIpPayload_ pIpInstance_ =
     InstancesPatch'

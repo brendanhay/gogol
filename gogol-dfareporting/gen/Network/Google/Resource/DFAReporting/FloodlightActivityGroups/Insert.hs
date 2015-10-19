@@ -22,7 +22,7 @@
 --
 -- Inserts a new floodlight activity group.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivityGroupsInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightActivityGroups.insert@.
 module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFloodlightActivityGroupsInsert@ method which the
+-- | A resource alias for @dfareporting.floodlightActivityGroups.insert@ method which the
 -- 'FloodlightActivityGroupsInsert'' request conforms to.
 type FloodlightActivityGroupsInsertResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data FloodlightActivityGroupsInsert' = FloodlightActivityGroupsInsert'
 --
 -- * 'fagiPayload'
 floodlightActivityGroupsInsert'
-    :: Int64 -- ^ 'profileId'
-    -> FloodlightActivityGroup -- ^ 'payload'
+    :: Int64 -- ^ 'fagiProFileId'
+    -> FloodlightActivityGroup -- ^ 'fagiPayload'
     -> FloodlightActivityGroupsInsert'
 floodlightActivityGroupsInsert' pFagiProFileId_ pFagiPayload_ =
     FloodlightActivityGroupsInsert'

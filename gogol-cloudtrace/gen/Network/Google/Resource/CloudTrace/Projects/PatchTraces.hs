@@ -25,7 +25,7 @@
 -- are overwritten by the update, and any additional fields in an update
 -- are merged with the existing trace data.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference> for @CloudtraceProjectsPatchTraces@.
+-- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference> for @cloudtrace.projects.patchTraces@.
 module Network.Google.Resource.CloudTrace.Projects.PatchTraces
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.CloudTrace.Projects.PatchTraces
 import           Network.Google.CloudTrace.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudtraceProjectsPatchTraces@ method which the
+-- | A resource alias for @cloudtrace.projects.patchTraces@ method which the
 -- 'ProjectsPatchTraces'' request conforms to.
 type ProjectsPatchTracesResource =
      "v1" :>
@@ -107,8 +107,8 @@ data ProjectsPatchTraces' = ProjectsPatchTraces'
 --
 -- * 'pptCallback'
 projectsPatchTraces'
-    :: Traces -- ^ 'payload'
-    -> Text -- ^ 'projectId'
+    :: Traces -- ^ 'pptPayload'
+    -> Text -- ^ 'pptProjectId'
     -> ProjectsPatchTraces'
 projectsPatchTraces' pPptPayload_ pPptProjectId_ =
     ProjectsPatchTraces'

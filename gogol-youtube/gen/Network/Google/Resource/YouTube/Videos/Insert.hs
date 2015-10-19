@@ -22,7 +22,7 @@
 --
 -- Uploads a video to YouTube and optionally sets the video\'s metadata.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosInsert@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.videos.insert@.
 module Network.Google.Resource.YouTube.Videos.Insert
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTube.Videos.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeVideosInsert@ method which the
+-- | A resource alias for @youtube.videos.insert@ method which the
 -- 'VideosInsert'' request conforms to.
 type VideosInsertResource =
      "videos" :>
@@ -94,9 +94,9 @@ data VideosInsert' = VideosInsert'
 --
 -- * 'viAutoLevels'
 videosInsert'
-    :: Text -- ^ 'part'
-    -> Video -- ^ 'payload'
-    -> Body -- ^ 'media'
+    :: Text -- ^ 'viPart'
+    -> Video -- ^ 'viPayload'
+    -> Body -- ^ 'viMedia'
     -> VideosInsert'
 videosInsert' pViPart_ pViPayload_ pViMedia_ =
     VideosInsert'

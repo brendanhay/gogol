@@ -23,7 +23,7 @@
 -- Dismiss an invitation to join a room. For internal use by the Games SDK
 -- only. Calling this method directly is unsupported.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesRoomsDismiss@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.rooms.dismiss@.
 module Network.Google.Resource.Games.Rooms.Dismiss
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Games.Rooms.Dismiss
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesRoomsDismiss@ method which the
+-- | A resource alias for @games.rooms.dismiss@ method which the
 -- 'RoomsDismiss'' request conforms to.
 type RoomsDismissResource =
      "rooms" :>
@@ -62,7 +62,7 @@ newtype RoomsDismiss' = RoomsDismiss'
 --
 -- * 'rooRoomId'
 roomsDismiss'
-    :: Text -- ^ 'roomId'
+    :: Text -- ^ 'rooRoomId'
     -> RoomsDismiss'
 roomsDismiss' pRooRoomId_ =
     RoomsDismiss'

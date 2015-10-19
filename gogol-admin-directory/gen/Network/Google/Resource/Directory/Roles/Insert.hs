@@ -22,7 +22,7 @@
 --
 -- Creates a role.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryRolesInsert@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.roles.insert@.
 module Network.Google.Resource.Directory.Roles.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Roles.Insert
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryRolesInsert@ method which the
+-- | A resource alias for @directory.roles.insert@ method which the
 -- 'RolesInsert'' request conforms to.
 type RolesInsertResource =
      "customer" :>
@@ -65,8 +65,8 @@ data RolesInsert' = RolesInsert'
 --
 -- * 'riCustomer'
 rolesInsert'
-    :: Role -- ^ 'payload'
-    -> Text -- ^ 'customer'
+    :: Role -- ^ 'riPayload'
+    -> Text -- ^ 'riCustomer'
     -> RolesInsert'
 rolesInsert' pRiPayload_ pRiCustomer_ =
     RolesInsert'

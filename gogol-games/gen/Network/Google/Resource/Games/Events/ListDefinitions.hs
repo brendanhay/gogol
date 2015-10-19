@@ -22,7 +22,7 @@
 --
 -- Returns a list of the event definitions in this application.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesEventsListDefinitions@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.events.listDefinitions@.
 module Network.Google.Resource.Games.Events.ListDefinitions
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Games.Events.ListDefinitions
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesEventsListDefinitions@ method which the
+-- | A resource alias for @games.events.listDefinitions@ method which the
 -- 'EventsListDefinitions'' request conforms to.
 type EventsListDefinitionsResource =
      "eventDefinitions" :>

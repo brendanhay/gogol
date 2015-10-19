@@ -22,7 +22,7 @@
 --
 -- Retrieves the details of a device.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseDevicesGet@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.devices.get@.
 module Network.Google.Resource.AndroidEnterprise.Devices.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidEnterprise.Devices.Get
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseDevicesGet@ method which the
+-- | A resource alias for @androidenterprise.devices.get@ method which the
 -- 'DevicesGet'' request conforms to.
 type DevicesGetResource =
      "enterprises" :>
@@ -71,9 +71,9 @@ data DevicesGet' = DevicesGet'
 --
 -- * 'dgDeviceId'
 devicesGet'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'deviceId'
+    :: Text -- ^ 'dgEnterpriseId'
+    -> Text -- ^ 'dgUserId'
+    -> Text -- ^ 'dgDeviceId'
     -> DevicesGet'
 devicesGet' pDgEnterpriseId_ pDgUserId_ pDgDeviceId_ =
     DevicesGet'

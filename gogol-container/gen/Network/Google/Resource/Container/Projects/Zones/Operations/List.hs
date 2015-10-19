@@ -22,7 +22,7 @@
 --
 -- Lists all operations in a project in a specific zone or all zones.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @ContainerProjectsZonesOperationsList@.
+-- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.operations.list@.
 module Network.Google.Resource.Container.Projects.Zones.Operations.List
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Container.Projects.Zones.Operations.List
 import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ContainerProjectsZonesOperationsList@ method which the
+-- | A resource alias for @container.projects.zones.operations.list@ method which the
 -- 'ProjectsZonesOperationsList'' request conforms to.
 type ProjectsZonesOperationsListResource =
      "v1" :>
@@ -103,8 +103,8 @@ data ProjectsZonesOperationsList' = ProjectsZonesOperationsList'
 --
 -- * 'pzolCallback'
 projectsZonesOperationsList'
-    :: Text -- ^ 'zone'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'pzolZone'
+    -> Text -- ^ 'pzolProjectId'
     -> ProjectsZonesOperationsList'
 projectsZonesOperationsList' pPzolZone_ pPzolProjectId_ =
     ProjectsZonesOperationsList'

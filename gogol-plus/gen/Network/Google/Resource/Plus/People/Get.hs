@@ -24,7 +24,7 @@
 -- https:\/\/www.googleapis.com\/auth\/plus.login, this method is
 -- guaranteed to return ageRange and language.
 --
--- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusPeopleGet@.
+-- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.people.get@.
 module Network.Google.Resource.Plus.People.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Plus.People.Get
 import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusPeopleGet@ method which the
+-- | A resource alias for @plus.people.get@ method which the
 -- 'PeopleGet'' request conforms to.
 type PeopleGetResource =
      "people" :>
@@ -63,7 +63,7 @@ newtype PeopleGet' = PeopleGet'
 --
 -- * 'pgUserId'
 peopleGet'
-    :: Text -- ^ 'userId'
+    :: Text -- ^ 'pgUserId'
     -> PeopleGet'
 peopleGet' pPgUserId_ =
     PeopleGet'

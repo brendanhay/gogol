@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of target instances grouped by scope.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetInstancesAggregatedList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetInstances.aggregatedList@.
 module Network.Google.Resource.Compute.TargetInstances.AggregatedList
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.TargetInstances.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetInstancesAggregatedList@ method which the
+-- | A resource alias for @compute.targetInstances.aggregatedList@ method which the
 -- 'TargetInstancesAggregatedList'' request conforms to.
 type TargetInstancesAggregatedListResource =
      Capture "project" Text :>
@@ -76,7 +76,7 @@ data TargetInstancesAggregatedList' = TargetInstancesAggregatedList'
 --
 -- * 'tialMaxResults'
 targetInstancesAggregatedList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'tialProject'
     -> TargetInstancesAggregatedList'
 targetInstancesAggregatedList' pTialProject_ =
     TargetInstancesAggregatedList'

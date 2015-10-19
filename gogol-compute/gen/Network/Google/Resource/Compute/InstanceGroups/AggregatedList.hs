@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of instance groups and sorts them by zone.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsAggregatedList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroups.aggregatedList@.
 module Network.Google.Resource.Compute.InstanceGroups.AggregatedList
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.InstanceGroups.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupsAggregatedList@ method which the
+-- | A resource alias for @compute.instanceGroups.aggregatedList@ method which the
 -- 'InstanceGroupsAggregatedList'' request conforms to.
 type InstanceGroupsAggregatedListResource =
      Capture "project" Text :>
@@ -76,7 +76,7 @@ data InstanceGroupsAggregatedList' = InstanceGroupsAggregatedList'
 --
 -- * 'igalMaxResults'
 instanceGroupsAggregatedList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'igalProject'
     -> InstanceGroupsAggregatedList'
 instanceGroupsAggregatedList' pIgalProject_ =
     InstanceGroupsAggregatedList'

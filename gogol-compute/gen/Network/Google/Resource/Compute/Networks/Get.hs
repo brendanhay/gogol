@@ -22,7 +22,7 @@
 --
 -- Returns the specified network resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeNetworksGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.networks.get@.
 module Network.Google.Resource.Compute.Networks.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.Networks.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeNetworksGet@ method which the
+-- | A resource alias for @compute.networks.get@ method which the
 -- 'NetworksGet'' request conforms to.
 type NetworksGetResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data NetworksGet' = NetworksGet'
 --
 -- * 'ngNetwork'
 networksGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'network'
+    :: Text -- ^ 'ngProject'
+    -> Text -- ^ 'ngNetwork'
     -> NetworksGet'
 networksGet' pNgProject_ pNgNetwork_ =
     NetworksGet'

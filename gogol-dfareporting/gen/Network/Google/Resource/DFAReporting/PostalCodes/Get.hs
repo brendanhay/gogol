@@ -22,7 +22,7 @@
 --
 -- Gets one postal code by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPostalCodesGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.postalCodes.get@.
 module Network.Google.Resource.DFAReporting.PostalCodes.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.PostalCodes.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPostalCodesGet@ method which the
+-- | A resource alias for @dfareporting.postalCodes.get@ method which the
 -- 'PostalCodesGet'' request conforms to.
 type PostalCodesGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data PostalCodesGet' = PostalCodesGet'
 --
 -- * 'pcgCode'
 postalCodesGet'
-    :: Int64 -- ^ 'profileId'
-    -> Text -- ^ 'code'
+    :: Int64 -- ^ 'pcgProFileId'
+    -> Text -- ^ 'pcgCode'
     -> PostalCodesGet'
 postalCodesGet' pPcgProFileId_ pPcgCode_ =
     PostalCodesGet'

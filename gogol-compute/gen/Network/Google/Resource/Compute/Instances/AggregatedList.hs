@@ -22,7 +22,7 @@
 --
 -- Retrieves aggregated list of instance resources.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesAggregatedList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.aggregatedList@.
 module Network.Google.Resource.Compute.Instances.AggregatedList
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Instances.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesAggregatedList@ method which the
+-- | A resource alias for @compute.instances.aggregatedList@ method which the
 -- 'InstancesAggregatedList'' request conforms to.
 type InstancesAggregatedListResource =
      Capture "project" Text :>
@@ -76,7 +76,7 @@ data InstancesAggregatedList' = InstancesAggregatedList'
 --
 -- * 'ialMaxResults'
 instancesAggregatedList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'ialProject'
     -> InstancesAggregatedList'
 instancesAggregatedList' pIalProject_ =
     InstancesAggregatedList'

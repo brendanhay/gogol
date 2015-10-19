@@ -22,7 +22,7 @@
 --
 -- Request concurrent and download access restrictions.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyConfigRequestAccess@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.myconfig.requestAccess@.
 module Network.Google.Resource.Books.MyConfig.RequestAccess
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Books.MyConfig.RequestAccess
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyConfigRequestAccess@ method which the
+-- | A resource alias for @books.myconfig.requestAccess@ method which the
 -- 'MyConfigRequestAccess'' request conforms to.
 type MyConfigRequestAccessResource =
      "myconfig" :>
@@ -88,10 +88,10 @@ data MyConfigRequestAccess' = MyConfigRequestAccess'
 --
 -- * 'mcraNonce'
 myConfigRequestAccess'
-    :: Text -- ^ 'cpksver'
-    -> Text -- ^ 'volumeId'
-    -> Text -- ^ 'source'
-    -> Text -- ^ 'nonce'
+    :: Text -- ^ 'mcraCpksver'
+    -> Text -- ^ 'mcraVolumeId'
+    -> Text -- ^ 'mcraSource'
+    -> Text -- ^ 'mcraNonce'
     -> MyConfigRequestAccess'
 myConfigRequestAccess' pMcraCpksver_ pMcraVolumeId_ pMcraSource_ pMcraNonce_ =
     MyConfigRequestAccess'

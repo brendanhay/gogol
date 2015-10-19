@@ -22,7 +22,7 @@
 --
 -- Updates an existing resource. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference> for @GroupsSettingsGroupsPatch@.
+-- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference> for @groupsSettings.groups.patch@.
 module Network.Google.Resource.GroupsSettings.Groups.Patch
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.GroupsSettings.Groups.Patch
 import           Network.Google.GroupsSettings.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GroupsSettingsGroupsPatch@ method which the
+-- | A resource alias for @groupsSettings.groups.patch@ method which the
 -- 'GroupsPatch'' request conforms to.
 type GroupsPatchResource =
      Capture "groupUniqueId" Text :>
@@ -63,8 +63,8 @@ data GroupsPatch' = GroupsPatch'
 --
 -- * 'gpGroupUniqueId'
 groupsPatch'
-    :: Groups -- ^ 'payload'
-    -> Text -- ^ 'groupUniqueId'
+    :: Groups -- ^ 'gpPayload'
+    -> Text -- ^ 'gpGroupUniqueId'
     -> GroupsPatch'
 groupsPatch' pGpPayload_ pGpGroupUniqueId_ =
     GroupsPatch'

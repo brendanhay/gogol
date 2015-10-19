@@ -24,7 +24,7 @@
 -- product. All products have a schema, but this may be empty if no app
 -- restrictions are defined.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseProductsGetAppRestrictionsSchema@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.getAppRestrictionsSchema@.
 module Network.Google.Resource.AndroidEnterprise.Products.GetAppRestrictionsSchema
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AndroidEnterprise.Products.GetAppRestrictionsSche
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseProductsGetAppRestrictionsSchema@ method which the
+-- | A resource alias for @androidenterprise.products.getAppRestrictionsSchema@ method which the
 -- 'ProductsGetAppRestrictionsSchema'' request conforms to.
 type ProductsGetAppRestrictionsSchemaResource =
      "enterprises" :>
@@ -76,8 +76,8 @@ data ProductsGetAppRestrictionsSchema' = ProductsGetAppRestrictionsSchema'
 --
 -- * 'pgarsProductId'
 productsGetAppRestrictionsSchema'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'productId'
+    :: Text -- ^ 'pgarsEnterpriseId'
+    -> Text -- ^ 'pgarsProductId'
     -> ProductsGetAppRestrictionsSchema'
 productsGetAppRestrictionsSchema' pPgarsEnterpriseId_ pPgarsProductId_ =
     ProductsGetAppRestrictionsSchema'

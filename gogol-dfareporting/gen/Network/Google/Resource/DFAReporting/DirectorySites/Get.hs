@@ -22,7 +22,7 @@
 --
 -- Gets one directory site by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingDirectorySitesGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.directorySites.get@.
 module Network.Google.Resource.DFAReporting.DirectorySites.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.DirectorySites.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingDirectorySitesGet@ method which the
+-- | A resource alias for @dfareporting.directorySites.get@ method which the
 -- 'DirectorySitesGet'' request conforms to.
 type DirectorySitesGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data DirectorySitesGet' = DirectorySitesGet'
 --
 -- * 'dsgId'
 directorySitesGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'dsgProFileId'
+    -> Int64 -- ^ 'dsgId'
     -> DirectorySitesGet'
 directorySitesGet' pDsgProFileId_ pDsgId_ =
     DirectorySitesGet'

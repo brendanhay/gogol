@@ -23,7 +23,7 @@
 -- Retrieves the list of instance groups that are located in the specified
 -- project and zone.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroups.list@.
 module Network.Google.Resource.Compute.InstanceGroups.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.InstanceGroups.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupsList@ method which the
+-- | A resource alias for @compute.instanceGroups.list@ method which the
 -- 'InstanceGroupsList'' request conforms to.
 type InstanceGroupsListResource =
      Capture "project" Text :>
@@ -83,8 +83,8 @@ data InstanceGroupsList' = InstanceGroupsList'
 --
 -- * 'iglMaxResults'
 instanceGroupsList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'iglProject'
+    -> Text -- ^ 'iglZone'
     -> InstanceGroupsList'
 instanceGroupsList' pIglProject_ pIglZone_ =
     InstanceGroupsList'

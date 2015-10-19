@@ -22,7 +22,7 @@
 --
 -- Lists custom metrics to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomMetricsList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.customMetrics.list@.
 module Network.Google.Resource.Analytics.Management.CustomMetrics.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementCustomMetricsList@ method which the
+-- | A resource alias for @analytics.management.customMetrics.list@ method which the
 -- 'ManagementCustomMetricsList'' request conforms to.
 type ManagementCustomMetricsListResource =
      "management" :>
@@ -77,8 +77,8 @@ data ManagementCustomMetricsList' = ManagementCustomMetricsList'
 --
 -- * 'mcmlMaxResults'
 managementCustomMetricsList'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mcmlWebPropertyId'
+    -> Text -- ^ 'mcmlAccountId'
     -> ManagementCustomMetricsList'
 managementCustomMetricsList' pMcmlWebPropertyId_ pMcmlAccountId_ =
     ManagementCustomMetricsList'

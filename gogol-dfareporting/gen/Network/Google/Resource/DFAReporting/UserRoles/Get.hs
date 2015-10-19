@@ -22,7 +22,7 @@
 --
 -- Gets one user role by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolesGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userRoles.get@.
 module Network.Google.Resource.DFAReporting.UserRoles.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.UserRoles.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingUserRolesGet@ method which the
+-- | A resource alias for @dfareporting.userRoles.get@ method which the
 -- 'UserRolesGet'' request conforms to.
 type UserRolesGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data UserRolesGet' = UserRolesGet'
 --
 -- * 'urgId'
 userRolesGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'urgProFileId'
+    -> Int64 -- ^ 'urgId'
     -> UserRolesGet'
 userRolesGet' pUrgProFileId_ pUrgId_ =
     UserRolesGet'

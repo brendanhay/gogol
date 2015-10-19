@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of sizes, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSizesList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.sizes.list@.
 module Network.Google.Resource.DFAReporting.Sizes.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.DFAReporting.Sizes.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSizesList@ method which the
+-- | A resource alias for @dfareporting.sizes.list@ method which the
 -- 'SizesList'' request conforms to.
 type SizesListResource =
      "userprofiles" :>
@@ -81,7 +81,7 @@ data SizesList' = SizesList'
 --
 -- * 'slIabStandard'
 sizesList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'slProFileId'
     -> SizesList'
 sizesList' pSlProFileId_ =
     SizesList'

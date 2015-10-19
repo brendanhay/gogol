@@ -22,7 +22,7 @@
 --
 -- Deletes a Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesDelete@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.delete@.
 module Network.Google.Resource.SQL.Instances.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.SQL.Instances.Delete
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesDelete@ method which the
+-- | A resource alias for @sql.instances.delete@ method which the
 -- 'InstancesDelete'' request conforms to.
 type InstancesDeleteResource =
      "projects" :>
@@ -65,8 +65,8 @@ data InstancesDelete' = InstancesDelete'
 --
 -- * 'idInstance'
 instancesDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'idProject'
+    -> Text -- ^ 'idInstance'
     -> InstancesDelete'
 instancesDelete' pIdProject_ pIdInstance_ =
     InstancesDelete'

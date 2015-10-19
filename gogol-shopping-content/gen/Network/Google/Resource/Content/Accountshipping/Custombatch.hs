@@ -23,7 +23,7 @@
 -- Retrieves and updates the shipping settings of multiple accounts in a
 -- single request.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountshippingCustombatch@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accountshipping.custombatch@.
 module Network.Google.Resource.Content.Accountshipping.Custombatch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Accountshipping.Custombatch
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccountshippingCustombatch@ method which the
+-- | A resource alias for @content.accountshipping.custombatch@ method which the
 -- 'AccountshippingCustombatch'' request conforms to.
 type AccountshippingCustombatchResource =
      "accountshipping" :>
@@ -68,7 +68,7 @@ data AccountshippingCustombatch' = AccountshippingCustombatch'
 --
 -- * 'acccDryRun'
 accountshippingCustombatch'
-    :: AccountshippingCustomBatchRequest -- ^ 'payload'
+    :: AccountshippingCustomBatchRequest -- ^ 'acccPayload'
     -> AccountshippingCustombatch'
 accountshippingCustombatch' pAcccPayload_ =
     AccountshippingCustombatch'

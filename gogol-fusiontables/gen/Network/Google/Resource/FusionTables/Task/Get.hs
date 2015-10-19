@@ -22,7 +22,7 @@
 --
 -- Retrieves a specific task by its ID.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTaskGet@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.task.get@.
 module Network.Google.Resource.FusionTables.Task.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.FusionTables.Task.Get
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTaskGet@ method which the
+-- | A resource alias for @fusiontables.task.get@ method which the
 -- 'TaskGet'' request conforms to.
 type TaskGetResource =
      "tables" :>
@@ -65,8 +65,8 @@ data TaskGet' = TaskGet'
 --
 -- * 'tgTableId'
 taskGet'
-    :: Text -- ^ 'taskId'
-    -> Text -- ^ 'tableId'
+    :: Text -- ^ 'tgTaskId'
+    -> Text -- ^ 'tgTableId'
     -> TaskGet'
 taskGet' pTgTaskId_ pTgTableId_ =
     TaskGet'

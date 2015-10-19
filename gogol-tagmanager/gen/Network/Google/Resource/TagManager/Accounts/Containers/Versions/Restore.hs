@@ -25,7 +25,7 @@
 -- operation will not have any effect on the version that is being served
 -- (i.e. the published version).
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVersionsRestore@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.versions.restore@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Restore
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Restore
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersVersionsRestore@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.versions.restore@ method which the
 -- 'AccountsContainersVersionsRestore'' request conforms to.
 type AccountsContainersVersionsRestoreResource =
      "accounts" :>
@@ -79,9 +79,9 @@ data AccountsContainersVersionsRestore' = AccountsContainersVersionsRestore'
 --
 -- * 'acvrAccountId'
 accountsContainersVersionsRestore'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'containerVersionId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acvrContainerId'
+    -> Text -- ^ 'acvrContainerVersionId'
+    -> Text -- ^ 'acvrAccountId'
     -> AccountsContainersVersionsRestore'
 accountsContainersVersionsRestore' pAcvrContainerId_ pAcvrContainerVersionId_ pAcvrAccountId_ =
     AccountsContainersVersionsRestore'

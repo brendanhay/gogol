@@ -22,7 +22,7 @@
 --
 -- Lists all GTM Folders of a Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersFoldersList@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.folders.list@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Folders.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.List
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersFoldersList@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.folders.list@ method which the
 -- 'AccountsContainersFoldersList'' request conforms to.
 type AccountsContainersFoldersListResource =
      "accounts" :>
@@ -67,8 +67,8 @@ data AccountsContainersFoldersList' = AccountsContainersFoldersList'
 --
 -- * 'acflAccountId'
 accountsContainersFoldersList'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acflContainerId'
+    -> Text -- ^ 'acflAccountId'
     -> AccountsContainersFoldersList'
 accountsContainersFoldersList' pAcflContainerId_ pAcflAccountId_ =
     AccountsContainersFoldersList'

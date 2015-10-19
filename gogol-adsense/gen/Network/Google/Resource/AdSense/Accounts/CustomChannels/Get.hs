@@ -23,7 +23,7 @@
 -- Get the specified custom channel from the specified ad client for the
 -- specified account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsCustomChannelsGet@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.customchannels.get@.
 module Network.Google.Resource.AdSense.Accounts.CustomChannels.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AdSense.Accounts.CustomChannels.Get
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAccountsCustomChannelsGet@ method which the
+-- | A resource alias for @adsense.accounts.customchannels.get@ method which the
 -- 'AccountsCustomChannelsGet'' request conforms to.
 type AccountsCustomChannelsGetResource =
      "accounts" :>
@@ -73,9 +73,9 @@ data AccountsCustomChannelsGet' = AccountsCustomChannelsGet'
 --
 -- * 'accgAccountId'
 accountsCustomChannelsGet'
-    :: Text -- ^ 'customChannelId'
-    -> Text -- ^ 'adClientId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'accgCustomChannelId'
+    -> Text -- ^ 'accgAdClientId'
+    -> Text -- ^ 'accgAccountId'
     -> AccountsCustomChannelsGet'
 accountsCustomChannelsGet' pAccgCustomChannelId_ pAccgAdClientId_ pAccgAccountId_ =
     AccountsCustomChannelsGet'

@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of creative field values, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldValuesList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeFieldValues.list@.
 module Network.Google.Resource.DFAReporting.CreativeFieldValues.List
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeFieldValuesList@ method which the
+-- | A resource alias for @dfareporting.creativeFieldValues.list@ method which the
 -- 'CreativeFieldValuesList'' request conforms to.
 type CreativeFieldValuesListResource =
      "userprofiles" :>
@@ -101,8 +101,8 @@ data CreativeFieldValuesList' = CreativeFieldValuesList'
 --
 -- * 'cfvlMaxResults'
 creativeFieldValuesList'
-    :: Int64 -- ^ 'creativeFieldId'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'cfvlCreativeFieldId'
+    -> Int64 -- ^ 'cfvlProFileId'
     -> CreativeFieldValuesList'
 creativeFieldValuesList' pCfvlCreativeFieldId_ pCfvlProFileId_ =
     CreativeFieldValuesList'

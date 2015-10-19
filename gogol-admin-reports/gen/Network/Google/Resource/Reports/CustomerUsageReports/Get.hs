@@ -23,7 +23,7 @@
 -- Retrieves a report which is a collection of properties \/ statistics for
 -- a specific customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference> for @ReportsCustomerUsageReportsGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference> for @reports.customerUsageReports.get@.
 module Network.Google.Resource.Reports.CustomerUsageReports.Get
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Reports.CustomerUsageReports.Get
 import           Network.Google.Prelude
 import           Network.Google.Reports.Types
 
--- | A resource alias for @ReportsCustomerUsageReportsGet@ method which the
+-- | A resource alias for @reports.customerUsageReports.get@ method which the
 -- 'CustomerUsageReportsGet'' request conforms to.
 type CustomerUsageReportsGetResource =
      "usage" :>
@@ -77,7 +77,7 @@ data CustomerUsageReportsGet' = CustomerUsageReportsGet'
 --
 -- * 'curgPageToken'
 customerUsageReportsGet'
-    :: Text -- ^ 'date'
+    :: Text -- ^ 'curgDate'
     -> CustomerUsageReportsGet'
 customerUsageReportsGet' pCurgDate_ =
     CustomerUsageReportsGet'

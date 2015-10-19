@@ -22,7 +22,7 @@
 --
 -- Retrieves the results of a query job.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryJobsGetQueryResults@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @bigquery.jobs.getQueryResults@.
 module Network.Google.Resource.BigQuery.Jobs.GetQueryResults
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.BigQuery.Jobs.GetQueryResults
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigQueryJobsGetQueryResults@ method which the
+-- | A resource alias for @bigquery.jobs.getQueryResults@ method which the
 -- 'JobsGetQueryResults'' request conforms to.
 type JobsGetQueryResultsResource =
      "projects" :>
@@ -86,8 +86,8 @@ data JobsGetQueryResults' = JobsGetQueryResults'
 --
 -- * 'jgqrMaxResults'
 jobsGetQueryResults'
-    :: Text -- ^ 'jobId'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'jgqrJobId'
+    -> Text -- ^ 'jgqrProjectId'
     -> JobsGetQueryResults'
 jobsGetQueryResults' pJgqrJobId_ pJgqrProjectId_ =
     JobsGetQueryResults'

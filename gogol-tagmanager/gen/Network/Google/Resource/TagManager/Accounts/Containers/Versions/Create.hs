@@ -22,7 +22,7 @@
 --
 -- Creates a Container Version.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVersionsCreate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.versions.create@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Create
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Create
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersVersionsCreate@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.versions.create@ method which the
 -- 'AccountsContainersVersionsCreate'' request conforms to.
 type AccountsContainersVersionsCreateResource =
      "accounts" :>
@@ -73,9 +73,9 @@ data AccountsContainersVersionsCreate' = AccountsContainersVersionsCreate'
 --
 -- * 'acvcAccountId'
 accountsContainersVersionsCreate'
-    :: Text -- ^ 'containerId'
-    -> CreateContainerVersionRequestVersionOptions -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acvcContainerId'
+    -> CreateContainerVersionRequestVersionOptions -- ^ 'acvcPayload'
+    -> Text -- ^ 'acvcAccountId'
     -> AccountsContainersVersionsCreate'
 accountsContainersVersionsCreate' pAcvcContainerId_ pAcvcPayload_ pAcvcAccountId_ =
     AccountsContainersVersionsCreate'

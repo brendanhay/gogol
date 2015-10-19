@@ -23,7 +23,7 @@
 -- Refunds a user\'s subscription purchase, but the subscription remains
 -- valid until its expiration time and it will continue to recur.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherPurchasesSubscriptionsRefund@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.purchases.subscriptions.refund@.
 module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Refund
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Refund
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherPurchasesSubscriptionsRefund@ method which the
+-- | A resource alias for @androidpublisher.purchases.subscriptions.refund@ method which the
 -- 'PurchasesSubscriptionsRefund'' request conforms to.
 type PurchasesSubscriptionsRefundResource =
      Capture "packageName" Text :>
@@ -73,9 +73,9 @@ data PurchasesSubscriptionsRefund' = PurchasesSubscriptionsRefund'
 --
 -- * 'pSubscriptionId'
 purchasesSubscriptionsRefund'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'token'
-    -> Text -- ^ 'subscriptionId'
+    :: Text -- ^ 'pPackageName'
+    -> Text -- ^ 'pToken'
+    -> Text -- ^ 'pSubscriptionId'
     -> PurchasesSubscriptionsRefund'
 purchasesSubscriptionsRefund' pPPackageName_ pPToken_ pPSubscriptionId_ =
     PurchasesSubscriptionsRefund'

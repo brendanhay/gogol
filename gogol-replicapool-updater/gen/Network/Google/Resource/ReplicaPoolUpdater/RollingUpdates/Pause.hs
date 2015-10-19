@@ -23,7 +23,7 @@
 -- Pauses the update in state from ROLLING_FORWARD or ROLLING_BACK. Has no
 -- effect if invoked when the state of the update is PAUSED.
 --
--- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesPause@.
+-- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.rollingUpdates.pause@.
 module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Pause
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Pause
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
--- | A resource alias for @ReplicapoolupdaterRollingUpdatesPause@ method which the
+-- | A resource alias for @replicapoolupdater.rollingUpdates.pause@ method which the
 -- 'RollingUpdatesPause'' request conforms to.
 type RollingUpdatesPauseResource =
      Capture "project" Text :>
@@ -73,9 +73,9 @@ data RollingUpdatesPause' = RollingUpdatesPause'
 --
 -- * 'rupZone'
 rollingUpdatesPause'
-    :: Text -- ^ 'rollingUpdate'
-    -> Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'rupRollingUpdate'
+    -> Text -- ^ 'rupProject'
+    -> Text -- ^ 'rupZone'
     -> RollingUpdatesPause'
 rollingUpdatesPause' pRupRollingUpdate_ pRupProject_ pRupZone_ =
     RollingUpdatesPause'

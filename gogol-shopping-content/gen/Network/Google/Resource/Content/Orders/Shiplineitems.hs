@@ -22,7 +22,7 @@
 --
 -- Marks line item(s) as shipped.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersShiplineitems@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.shiplineitems@.
 module Network.Google.Resource.Content.Orders.Shiplineitems
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Orders.Shiplineitems
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersShiplineitems@ method which the
+-- | A resource alias for @content.orders.shiplineitems@ method which the
 -- 'OrdersShiplineitems'' request conforms to.
 type OrdersShiplineitemsResource =
      Capture "merchantId" Word64 :>
@@ -71,9 +71,9 @@ data OrdersShiplineitems' = OrdersShiplineitems'
 --
 -- * 'osOrderId'
 ordersShiplineitems'
-    :: Word64 -- ^ 'merchantId'
-    -> OrdersShipLineItemsRequest -- ^ 'payload'
-    -> Text -- ^ 'orderId'
+    :: Word64 -- ^ 'osMerchantId'
+    -> OrdersShipLineItemsRequest -- ^ 'osPayload'
+    -> Text -- ^ 'osOrderId'
     -> OrdersShiplineitems'
 ordersShiplineitems' pOsMerchantId_ pOsPayload_ pOsOrderId_ =
     OrdersShiplineitems'

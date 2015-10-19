@@ -22,7 +22,7 @@
 --
 -- Gets a specific parent reference.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveParentsGet@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.parents.get@.
 module Network.Google.Resource.Drive.Parents.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Drive.Parents.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveParentsGet@ method which the
+-- | A resource alias for @drive.parents.get@ method which the
 -- 'ParentsGet'' request conforms to.
 type ParentsGetResource =
      "files" :>
@@ -66,8 +66,8 @@ data ParentsGet' = ParentsGet'
 --
 -- * 'paraParentId'
 parentsGet'
-    :: Text -- ^ 'fileId'
-    -> Text -- ^ 'parentId'
+    :: Text -- ^ 'paraFileId'
+    -> Text -- ^ 'paraParentId'
     -> ParentsGet'
 parentsGet' pParaFileId_ pParaParentId_ =
     ParentsGet'

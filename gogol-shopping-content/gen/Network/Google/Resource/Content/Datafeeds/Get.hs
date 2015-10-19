@@ -22,7 +22,7 @@
 --
 -- Retrieves a datafeed from your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentDatafeedsGet@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.get@.
 module Network.Google.Resource.Content.Datafeeds.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Content.Datafeeds.Get
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentDatafeedsGet@ method which the
+-- | A resource alias for @content.datafeeds.get@ method which the
 -- 'DatafeedsGet'' request conforms to.
 type DatafeedsGetResource =
      Capture "merchantId" Word64 :>
@@ -64,8 +64,8 @@ data DatafeedsGet' = DatafeedsGet'
 --
 -- * 'dgDatafeedId'
 datafeedsGet'
-    :: Word64 -- ^ 'merchantId'
-    -> Word64 -- ^ 'datafeedId'
+    :: Word64 -- ^ 'dgMerchantId'
+    -> Word64 -- ^ 'dgDatafeedId'
     -> DatafeedsGet'
 datafeedsGet' pDgMerchantId_ pDgDatafeedId_ =
     DatafeedsGet'

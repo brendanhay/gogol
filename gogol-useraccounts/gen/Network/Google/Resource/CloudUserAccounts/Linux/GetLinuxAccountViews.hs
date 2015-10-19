@@ -23,7 +23,7 @@
 -- Retrieves a list of user accounts for an instance within a specific
 -- project.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsLinuxGetLinuxAccountViews@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.linux.getLinuxAccountViews@.
 module Network.Google.Resource.CloudUserAccounts.Linux.GetLinuxAccountViews
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.CloudUserAccounts.Linux.GetLinuxAccountViews
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsLinuxGetLinuxAccountViews@ method which the
+-- | A resource alias for @clouduseraccounts.linux.getLinuxAccountViews@ method which the
 -- 'LinuxGetLinuxAccountViews'' request conforms to.
 type LinuxGetLinuxAccountViewsResource =
      Capture "project" Text :>
@@ -93,9 +93,9 @@ data LinuxGetLinuxAccountViews' = LinuxGetLinuxAccountViews'
 --
 -- * 'lglavInstance'
 linuxGetLinuxAccountViews'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'lglavProject'
+    -> Text -- ^ 'lglavZone'
+    -> Text -- ^ 'lglavInstance'
     -> LinuxGetLinuxAccountViews'
 linuxGetLinuxAccountViews' pLglavProject_ pLglavZone_ pLglavInstance_ =
     LinuxGetLinuxAccountViews'

@@ -22,7 +22,7 @@
 --
 -- Gets a list of user role permissions, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolePermissionsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userRolePermissions.list@.
 module Network.Google.Resource.DFAReporting.UserRolePermissions.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.UserRolePermissions.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingUserRolePermissionsList@ method which the
+-- | A resource alias for @dfareporting.userRolePermissions.list@ method which the
 -- 'UserRolePermissionsList'' request conforms to.
 type UserRolePermissionsListResource =
      "userprofiles" :>
@@ -66,7 +66,7 @@ data UserRolePermissionsList' = UserRolePermissionsList'
 --
 -- * 'urplProFileId'
 userRolePermissionsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'urplProFileId'
     -> UserRolePermissionsList'
 userRolePermissionsList' pUrplProFileId_ =
     UserRolePermissionsList'

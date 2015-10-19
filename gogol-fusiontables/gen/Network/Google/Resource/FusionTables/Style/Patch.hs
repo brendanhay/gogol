@@ -22,7 +22,7 @@
 --
 -- Updates an existing style. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesStylePatch@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.style.patch@.
 module Network.Google.Resource.FusionTables.Style.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.FusionTables.Style.Patch
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesStylePatch@ method which the
+-- | A resource alias for @fusiontables.style.patch@ method which the
 -- 'StylePatch'' request conforms to.
 type StylePatchResource =
      "tables" :>
@@ -71,9 +71,9 @@ data StylePatch' = StylePatch'
 --
 -- * 'spTableId'
 stylePatch'
-    :: StyleSetting -- ^ 'payload'
-    -> Int32 -- ^ 'styleId'
-    -> Text -- ^ 'tableId'
+    :: StyleSetting -- ^ 'spPayload'
+    -> Int32 -- ^ 'spStyleId'
+    -> Text -- ^ 'spTableId'
     -> StylePatch'
 stylePatch' pSpPayload_ pSpStyleId_ pSpTableId_ =
     StylePatch'

@@ -22,7 +22,7 @@
 --
 -- Retrieves the schedule for a job.
 --
--- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateScheduleGet@.
+-- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @coordinate.schedule.get@.
 module Network.Google.Resource.Coordinate.Schedule.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Coordinate.Schedule.Get
 import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CoordinateScheduleGet@ method which the
+-- | A resource alias for @coordinate.schedule.get@ method which the
 -- 'ScheduleGet'' request conforms to.
 type ScheduleGetResource =
      "teams" :>
@@ -66,8 +66,8 @@ data ScheduleGet' = ScheduleGet'
 --
 -- * 'sgTeamId'
 scheduleGet'
-    :: Word64 -- ^ 'jobId'
-    -> Text -- ^ 'teamId'
+    :: Word64 -- ^ 'sgJobId'
+    -> Text -- ^ 'sgTeamId'
     -> ScheduleGet'
 scheduleGet' pSgJobId_ pSgTeamId_ =
     ScheduleGet'

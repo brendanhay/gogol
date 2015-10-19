@@ -22,7 +22,7 @@
 --
 -- Updates metadata for a calendar.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarsUpdate@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendars.update@.
 module Network.Google.Resource.Calendar.Calendars.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Calendar.Calendars.Update
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarsUpdate@ method which the
+-- | A resource alias for @calendar.calendars.update@ method which the
 -- 'CalendarsUpdate'' request conforms to.
 type CalendarsUpdateResource =
      "calendars" :>
@@ -64,8 +64,8 @@ data CalendarsUpdate' = CalendarsUpdate'
 --
 -- * 'cuPayload'
 calendarsUpdate'
-    :: Text -- ^ 'calendarId'
-    -> Calendar -- ^ 'payload'
+    :: Text -- ^ 'cuCalendarId'
+    -> Calendar -- ^ 'cuPayload'
     -> CalendarsUpdate'
 calendarsUpdate' pCuCalendarId_ pCuPayload_ =
     CalendarsUpdate'

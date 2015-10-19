@@ -22,7 +22,7 @@
 --
 -- Lists all the APK-specific localized listings for a specified APK.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsAPKListingsList@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.apklistings.list@.
 module Network.Google.Resource.AndroidPublisher.Edits.APKListings.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKListings.List
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsAPKListingsList@ method which the
+-- | A resource alias for @androidpublisher.edits.apklistings.list@ method which the
 -- 'EditsAPKListingsList'' request conforms to.
 type EditsAPKListingsListResource =
      Capture "packageName" Text :>
@@ -72,9 +72,9 @@ data EditsAPKListingsList' = EditsAPKListingsList'
 --
 -- * 'eapkllEditId'
 editsAPKListingsList'
-    :: Text -- ^ 'packageName'
-    -> Int32 -- ^ 'apkVersionCode'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eapkllPackageName'
+    -> Int32 -- ^ 'eapkllAPKVersionCode'
+    -> Text -- ^ 'eapkllEditId'
     -> EditsAPKListingsList'
 editsAPKListingsList' pEapkllPackageName_ pEapkllAPKVersionCode_ pEapkllEditId_ =
     EditsAPKListingsList'

@@ -23,7 +23,7 @@
 -- Returns the budget information for the adgroup specified by the
 -- accountId and billingId.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerBudgetGet@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.budget.get@.
 module Network.Google.Resource.AdExchangeBuyer.Budget.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Get
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerBudgetGet@ method which the
+-- | A resource alias for @adexchangebuyer.budget.get@ method which the
 -- 'BudgetGet'' request conforms to.
 type BudgetGetResource =
      "billinginfo" :>
@@ -66,8 +66,8 @@ data BudgetGet' = BudgetGet'
 --
 -- * 'bgBillingId'
 budgetGet'
-    :: Int64 -- ^ 'accountId'
-    -> Int64 -- ^ 'billingId'
+    :: Int64 -- ^ 'bgAccountId'
+    -> Int64 -- ^ 'bgBillingId'
     -> BudgetGet'
 budgetGet' pBgAccountId_ pBgBillingId_ =
     BudgetGet'

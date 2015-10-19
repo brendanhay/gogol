@@ -22,7 +22,7 @@
 --
 -- Relinquish ownership of a website or domain.
 --
--- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceDelete@.
+-- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @siteVerification.webResource.delete@.
 module Network.Google.Resource.SiteVerification.WebResource.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.SiteVerification.WebResource.Delete
 import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
--- | A resource alias for @SiteVerificationWebResourceDelete@ method which the
+-- | A resource alias for @siteVerification.webResource.delete@ method which the
 -- 'WebResourceDelete'' request conforms to.
 type WebResourceDeleteResource =
      "webResource" :>
@@ -59,7 +59,7 @@ newtype WebResourceDelete' = WebResourceDelete'
 --
 -- * 'wrdId'
 webResourceDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'wrdId'
     -> WebResourceDelete'
 webResourceDelete' pWrdId_ =
     WebResourceDelete'

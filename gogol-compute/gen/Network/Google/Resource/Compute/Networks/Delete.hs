@@ -22,7 +22,7 @@
 --
 -- Deletes the specified network resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeNetworksDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.networks.delete@.
 module Network.Google.Resource.Compute.Networks.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.Networks.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeNetworksDelete@ method which the
+-- | A resource alias for @compute.networks.delete@ method which the
 -- 'NetworksDelete'' request conforms to.
 type NetworksDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data NetworksDelete' = NetworksDelete'
 --
 -- * 'ndNetwork'
 networksDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'network'
+    :: Text -- ^ 'ndProject'
+    -> Text -- ^ 'ndNetwork'
     -> NetworksDelete'
 networksDelete' pNdProject_ pNdNetwork_ =
     NetworksDelete'

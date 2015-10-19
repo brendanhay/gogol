@@ -23,7 +23,7 @@
 -- Retrieves and updates tax settings of multiple accounts in a single
 -- request.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccounttaxCustombatch@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounttax.custombatch@.
 module Network.Google.Resource.Content.Accounttax.Custombatch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Accounttax.Custombatch
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccounttaxCustombatch@ method which the
+-- | A resource alias for @content.accounttax.custombatch@ method which the
 -- 'AccounttaxCustombatch'' request conforms to.
 type AccounttaxCustombatchResource =
      "accounttax" :>
@@ -68,7 +68,7 @@ data AccounttaxCustombatch' = AccounttaxCustombatch'
 --
 -- * 'acDryRun'
 accounttaxCustombatch'
-    :: AccounttaxCustomBatchRequest -- ^ 'payload'
+    :: AccounttaxCustomBatchRequest -- ^ 'acPayload'
     -> AccounttaxCustombatch'
 accounttaxCustombatch' pAcPayload_ =
     AccounttaxCustombatch'

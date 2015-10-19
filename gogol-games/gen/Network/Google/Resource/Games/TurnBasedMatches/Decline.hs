@@ -22,7 +22,7 @@
 --
 -- Decline an invitation to play a turn-based match.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesDecline@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.turnBasedMatches.decline@.
 module Network.Google.Resource.Games.TurnBasedMatches.Decline
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.Decline
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesTurnBasedMatchesDecline@ method which the
+-- | A resource alias for @games.turnBasedMatches.decline@ method which the
 -- 'TurnBasedMatchesDecline'' request conforms to.
 type TurnBasedMatchesDeclineResource =
      "turnbasedmatches" :>
@@ -66,7 +66,7 @@ data TurnBasedMatchesDecline' = TurnBasedMatchesDecline'
 --
 -- * 'tMatchId'
 turnBasedMatchesDecline'
-    :: Text -- ^ 'matchId'
+    :: Text -- ^ 'tMatchId'
     -> TurnBasedMatchesDecline'
 turnBasedMatchesDecline' pTMatchId_ =
     TurnBasedMatchesDecline'

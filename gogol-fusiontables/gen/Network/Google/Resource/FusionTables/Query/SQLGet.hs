@@ -22,7 +22,7 @@
 --
 -- Executes a SQL statement which can be any of - SELECT - SHOW - DESCRIBE
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesQuerySQLGet@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.query.sqlGet@.
 module Network.Google.Resource.FusionTables.Query.SQLGet
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.FusionTables.Query.SQLGet
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesQuerySQLGet@ method which the
+-- | A resource alias for @fusiontables.query.sqlGet@ method which the
 -- 'QuerySQLGet'' request conforms to.
 type QuerySQLGetResource =
      "query" :>
@@ -76,7 +76,7 @@ data QuerySQLGet' = QuerySQLGet'
 --
 -- * 'qsqlgSQL'
 querySQLGet'
-    :: Text -- ^ 'sql'
+    :: Text -- ^ 'qsqlgSQL'
     -> QuerySQLGet'
 querySQLGet' pQsqlgSQL_ =
     QuerySQLGet'

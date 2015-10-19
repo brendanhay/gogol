@@ -24,7 +24,7 @@
 -- This method is only available to user accounts for your developer
 -- console.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementPlayersHide@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.players.hide@.
 module Network.Google.Resource.GamesManagement.Players.Hide
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.GamesManagement.Players.Hide
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementPlayersHide@ method which the
+-- | A resource alias for @gamesManagement.players.hide@ method which the
 -- 'PlayersHide'' request conforms to.
 type PlayersHideResource =
      "applications" :>
@@ -70,8 +70,8 @@ data PlayersHide' = PlayersHide'
 --
 -- * 'phPlayerId'
 playersHide'
-    :: Text -- ^ 'applicationId'
-    -> Text -- ^ 'playerId'
+    :: Text -- ^ 'phApplicationId'
+    -> Text -- ^ 'phPlayerId'
     -> PlayersHide'
 playersHide' pPhApplicationId_ pPhPlayerId_ =
     PlayersHide'

@@ -22,7 +22,7 @@
 --
 -- -- |
 --
--- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerZonesList@.
+-- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @autoscaler.zones.list@.
 module Network.Google.Resource.Autoscaler.Zones.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Autoscaler.Zones.List
 import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AutoscalerZonesList@ method which the
+-- | A resource alias for @autoscaler.zones.list@ method which the
 -- 'ZonesList'' request conforms to.
 type ZonesListResource =
      Capture "project" Text :>
@@ -74,7 +74,7 @@ data ZonesList' = ZonesList'
 --
 -- * 'zlMaxResults'
 zonesList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'zlProject'
     -> ZonesList'
 zonesList' pZlProject_ =
     ZonesList'

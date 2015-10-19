@@ -22,7 +22,7 @@
 --
 -- Update the metadata of the leaderboard configuration with the given ID.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationLeaderboardConfigurationsUpdate@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.update@.
 module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Upda
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationLeaderboardConfigurationsUpdate@ method which the
+-- | A resource alias for @gamesConfiguration.leaderboardConfigurations.update@ method which the
 -- 'LeaderboardConfigurationsUpdate'' request conforms to.
 type LeaderboardConfigurationsUpdateResource =
      "leaderboards" :>
@@ -65,8 +65,8 @@ data LeaderboardConfigurationsUpdate' = LeaderboardConfigurationsUpdate'
 --
 -- * 'lcuLeaderboardId'
 leaderboardConfigurationsUpdate'
-    :: LeaderboardConfiguration -- ^ 'payload'
-    -> Text -- ^ 'leaderboardId'
+    :: LeaderboardConfiguration -- ^ 'lcuPayload'
+    -> Text -- ^ 'lcuLeaderboardId'
     -> LeaderboardConfigurationsUpdate'
 leaderboardConfigurationsUpdate' pLcuPayload_ pLcuLeaderboardId_ =
     LeaderboardConfigurationsUpdate'

@@ -22,7 +22,7 @@
 --
 -- Updates the configuration of the specified module.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesPatch@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @appengine.apps.modules.patch@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Patch
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Patch
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppEngineAppsModulesPatch@ method which the
+-- | A resource alias for @appengine.apps.modules.patch@ method which the
 -- 'AppsModulesPatch'' request conforms to.
 type AppsModulesPatchResource =
      "v1beta4" :>
@@ -117,9 +117,9 @@ data AppsModulesPatch' = AppsModulesPatch'
 --
 -- * 'ampCallback'
 appsModulesPatch'
-    :: Module -- ^ 'payload'
-    -> Text -- ^ 'modulesId'
-    -> Text -- ^ 'appsId'
+    :: Module -- ^ 'ampPayload'
+    -> Text -- ^ 'ampModulesId'
+    -> Text -- ^ 'ampAppsId'
     -> AppsModulesPatch'
 appsModulesPatch' pAmpPayload_ pAmpModulesId_ pAmpAppsId_ =
     AppsModulesPatch'

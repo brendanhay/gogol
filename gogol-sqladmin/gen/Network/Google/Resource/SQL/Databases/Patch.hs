@@ -23,7 +23,7 @@
 -- Updates a resource containing information about a database inside a
 -- Cloud SQL instance. This method supports patch semantics.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLDatabasesPatch@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.databases.patch@.
 module Network.Google.Resource.SQL.Databases.Patch
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.SQL.Databases.Patch
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLDatabasesPatch@ method which the
+-- | A resource alias for @sql.databases.patch@ method which the
 -- 'DatabasesPatch'' request conforms to.
 type DatabasesPatchResource =
      "projects" :>
@@ -78,10 +78,10 @@ data DatabasesPatch' = DatabasesPatch'
 --
 -- * 'dpInstance'
 databasesPatch'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'database'
-    -> Database -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'dpProject'
+    -> Text -- ^ 'dpDatabase'
+    -> Database -- ^ 'dpPayload'
+    -> Text -- ^ 'dpInstance'
     -> DatabasesPatch'
 databasesPatch' pDpProject_ pDpDatabase_ pDpPayload_ pDpInstance_ =
     DatabasesPatch'

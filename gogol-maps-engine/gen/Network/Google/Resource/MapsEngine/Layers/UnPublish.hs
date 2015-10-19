@@ -22,7 +22,7 @@
 --
 -- Unpublish a layer asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineLayersUnPublish@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.layers.unpublish@.
 module Network.Google.Resource.MapsEngine.Layers.UnPublish
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.Layers.UnPublish
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersUnPublish@ method which the
+-- | A resource alias for @mapsengine.layers.unpublish@ method which the
 -- 'LayersUnPublish'' request conforms to.
 type LayersUnPublishResource =
      "layers" :>
@@ -61,7 +61,7 @@ newtype LayersUnPublish' = LayersUnPublish'
 --
 -- * 'lupId'
 layersUnPublish'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'lupId'
     -> LayersUnPublish'
 layersUnPublish' pLupId_ =
     LayersUnPublish'

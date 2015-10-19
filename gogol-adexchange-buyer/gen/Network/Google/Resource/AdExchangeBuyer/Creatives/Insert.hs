@@ -22,7 +22,7 @@
 --
 -- Submit a new creative.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerCreativesInsert@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.creatives.insert@.
 module Network.Google.Resource.AdExchangeBuyer.Creatives.Insert
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeBuyer.Creatives.Insert
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerCreativesInsert@ method which the
+-- | A resource alias for @adexchangebuyer.creatives.insert@ method which the
 -- 'CreativesInsert'' request conforms to.
 type CreativesInsertResource =
      "creatives" :>
@@ -59,7 +59,7 @@ newtype CreativesInsert' = CreativesInsert'
 --
 -- * 'ciPayload'
 creativesInsert'
-    :: Creative -- ^ 'payload'
+    :: Creative -- ^ 'ciPayload'
     -> CreativesInsert'
 creativesInsert' pCiPayload_ =
     CreativesInsert'

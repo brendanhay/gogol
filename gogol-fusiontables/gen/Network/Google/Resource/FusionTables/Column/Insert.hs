@@ -22,7 +22,7 @@
 --
 -- Adds a new column to the table.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesColumnInsert@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.column.insert@.
 module Network.Google.Resource.FusionTables.Column.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.FusionTables.Column.Insert
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesColumnInsert@ method which the
+-- | A resource alias for @fusiontables.column.insert@ method which the
 -- 'ColumnInsert'' request conforms to.
 type ColumnInsertResource =
      "tables" :>
@@ -65,8 +65,8 @@ data ColumnInsert' = ColumnInsert'
 --
 -- * 'ciTableId'
 columnInsert'
-    :: Column -- ^ 'payload'
-    -> Text -- ^ 'tableId'
+    :: Column -- ^ 'ciPayload'
+    -> Text -- ^ 'ciTableId'
     -> ColumnInsert'
 columnInsert' pCiPayload_ pCiTableId_ =
     ColumnInsert'

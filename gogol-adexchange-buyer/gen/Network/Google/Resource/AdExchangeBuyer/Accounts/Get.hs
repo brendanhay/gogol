@@ -22,7 +22,7 @@
 --
 -- Gets one account by ID.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerAccountsGet@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.accounts.get@.
 module Network.Google.Resource.AdExchangeBuyer.Accounts.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.Get
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerAccountsGet@ method which the
+-- | A resource alias for @adexchangebuyer.accounts.get@ method which the
 -- 'AccountsGet'' request conforms to.
 type AccountsGetResource =
      "accounts" :>
@@ -59,7 +59,7 @@ newtype AccountsGet' = AccountsGet'
 --
 -- * 'agId'
 accountsGet'
-    :: Int32 -- ^ 'id'
+    :: Int32 -- ^ 'agId'
     -> AccountsGet'
 accountsGet' pAgId_ =
     AccountsGet'

@@ -22,7 +22,7 @@
 --
 -- Returns a list of comment threads that match the API request parameters.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentThreadsList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.commentThreads.list@.
 module Network.Google.Resource.YouTube.CommentThreads.List
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.YouTube.CommentThreads.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCommentThreadsList@ method which the
+-- | A resource alias for @youtube.commentThreads.list@ method which the
 -- 'CommentThreadsList'' request conforms to.
 type CommentThreadsListResource =
      "commentThreads" :>
@@ -113,7 +113,7 @@ data CommentThreadsList' = CommentThreadsList'
 --
 -- * 'ctlMaxResults'
 commentThreadsList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'ctlPart'
     -> CommentThreadsList'
 commentThreadsList' pCtlPart_ =
     CommentThreadsList'

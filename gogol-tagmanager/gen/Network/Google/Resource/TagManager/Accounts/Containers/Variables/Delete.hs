@@ -22,7 +22,7 @@
 --
 -- Deletes a GTM Variable.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVariablesDelete@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.variables.delete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Delete
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersVariablesDelete@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.variables.delete@ method which the
 -- 'AccountsContainersVariablesDelete'' request conforms to.
 type AccountsContainersVariablesDeleteResource =
      "accounts" :>
@@ -71,9 +71,9 @@ data AccountsContainersVariablesDelete' = AccountsContainersVariablesDelete'
 --
 -- * 'acvdAccountId'
 accountsContainersVariablesDelete'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'variableId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acvdContainerId'
+    -> Text -- ^ 'acvdVariableId'
+    -> Text -- ^ 'acvdAccountId'
     -> AccountsContainersVariablesDelete'
 accountsContainersVariablesDelete' pAcvdContainerId_ pAcvdVariableId_ pAcvdAccountId_ =
     AccountsContainersVariablesDelete'

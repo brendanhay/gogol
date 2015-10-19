@@ -22,7 +22,7 @@
 --
 -- Deletes a specified caption track.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCaptionsDelete@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.captions.delete@.
 module Network.Google.Resource.YouTube.Captions.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.YouTube.Captions.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCaptionsDelete@ method which the
+-- | A resource alias for @youtube.captions.delete@ method which the
 -- 'CaptionsDelete'' request conforms to.
 type CaptionsDeleteResource =
      "captions" :>
@@ -69,7 +69,7 @@ data CaptionsDelete' = CaptionsDelete'
 --
 -- * 'cddId'
 captionsDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'cddId'
     -> CaptionsDelete'
 captionsDelete' pCddId_ =
     CaptionsDelete'

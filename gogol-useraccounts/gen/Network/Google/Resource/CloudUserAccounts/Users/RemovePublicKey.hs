@@ -22,7 +22,7 @@
 --
 -- Removes the specified public key from the user.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsUsersRemovePublicKey@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.users.removePublicKey@.
 module Network.Google.Resource.CloudUserAccounts.Users.RemovePublicKey
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.CloudUserAccounts.Users.RemovePublicKey
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsUsersRemovePublicKey@ method which the
+-- | A resource alias for @clouduseraccounts.users.removePublicKey@ method which the
 -- 'UsersRemovePublicKey'' request conforms to.
 type UsersRemovePublicKeyResource =
      Capture "project" Text :>
@@ -71,9 +71,9 @@ data UsersRemovePublicKey' = UsersRemovePublicKey'
 --
 -- * 'urpkUser'
 usersRemovePublicKey'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'fingerprint'
-    -> Text -- ^ 'user'
+    :: Text -- ^ 'urpkProject'
+    -> Text -- ^ 'urpkFingerprint'
+    -> Text -- ^ 'urpkUser'
     -> UsersRemovePublicKey'
 usersRemovePublicKey' pUrpkProject_ pUrpkFingerprint_ pUrpkUser_ =
     UsersRemovePublicKey'

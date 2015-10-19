@@ -23,7 +23,7 @@
 -- Retrieves the metadata of the leaderboard configuration with the given
 -- ID.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationLeaderboardConfigurationsGet@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.get@.
 module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Get
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationLeaderboardConfigurationsGet@ method which the
+-- | A resource alias for @gamesConfiguration.leaderboardConfigurations.get@ method which the
 -- 'LeaderboardConfigurationsGet'' request conforms to.
 type LeaderboardConfigurationsGetResource =
      "leaderboards" :>
@@ -62,7 +62,7 @@ newtype LeaderboardConfigurationsGet' = LeaderboardConfigurationsGet'
 --
 -- * 'lcgLeaderboardId'
 leaderboardConfigurationsGet'
-    :: Text -- ^ 'leaderboardId'
+    :: Text -- ^ 'lcgLeaderboardId'
     -> LeaderboardConfigurationsGet'
 leaderboardConfigurationsGet' pLcgLeaderboardId_ =
     LeaderboardConfigurationsGet'

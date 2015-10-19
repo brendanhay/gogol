@@ -22,7 +22,7 @@
 --
 -- Updates an existing floodlight configuration.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightConfigurationsUpdate@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightConfigurations.update@.
 module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFloodlightConfigurationsUpdate@ method which the
+-- | A resource alias for @dfareporting.floodlightConfigurations.update@ method which the
 -- 'FloodlightConfigurationsUpdate'' request conforms to.
 type FloodlightConfigurationsUpdateResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data FloodlightConfigurationsUpdate' = FloodlightConfigurationsUpdate'
 --
 -- * 'fcuPayload'
 floodlightConfigurationsUpdate'
-    :: Int64 -- ^ 'profileId'
-    -> FloodlightConfiguration -- ^ 'payload'
+    :: Int64 -- ^ 'fcuProFileId'
+    -> FloodlightConfiguration -- ^ 'fcuPayload'
     -> FloodlightConfigurationsUpdate'
 floodlightConfigurationsUpdate' pFcuProFileId_ pFcuPayload_ =
     FloodlightConfigurationsUpdate'

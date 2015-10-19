@@ -22,7 +22,7 @@
 --
 -- Lists the scores in a leaderboard, starting from the top.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesScoresList@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.scores.list@.
 module Network.Google.Resource.Games.Scores.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Games.Scores.List
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesScoresList@ method which the
+-- | A resource alias for @games.scores.list@ method which the
 -- 'ScoresList'' request conforms to.
 type ScoresListResource =
      "leaderboards" :>
@@ -86,9 +86,9 @@ data ScoresList' = ScoresList'
 --
 -- * 'sllMaxResults'
 scoresList'
-    :: ScoresListCollection -- ^ 'collection'
-    -> ScoresListTimeSpan -- ^ 'timeSpan'
-    -> Text -- ^ 'leaderboardId'
+    :: ScoresListCollection -- ^ 'sllCollection'
+    -> ScoresListTimeSpan -- ^ 'sllTimeSpan'
+    -> Text -- ^ 'sllLeaderboardId'
     -> ScoresList'
 scoresList' pSllCollection_ pSllTimeSpan_ pSllLeaderboardId_ =
     ScoresList'

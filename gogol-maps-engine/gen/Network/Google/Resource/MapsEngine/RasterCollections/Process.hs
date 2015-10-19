@@ -22,7 +22,7 @@
 --
 -- Process a raster collection asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRasterCollectionsProcess@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.rasterCollections.process@.
 module Network.Google.Resource.MapsEngine.RasterCollections.Process
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Process
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRasterCollectionsProcess@ method which the
+-- | A resource alias for @mapsengine.rasterCollections.process@ method which the
 -- 'RasterCollectionsProcess'' request conforms to.
 type RasterCollectionsProcessResource =
      "rasterCollections" :>
@@ -61,7 +61,7 @@ newtype RasterCollectionsProcess' = RasterCollectionsProcess'
 --
 -- * 'rcpcId'
 rasterCollectionsProcess'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'rcpcId'
     -> RasterCollectionsProcess'
 rasterCollectionsProcess' pRcpcId_ =
     RasterCollectionsProcess'

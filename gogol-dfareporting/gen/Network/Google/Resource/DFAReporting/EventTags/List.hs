@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of event tags, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingEventTagsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.eventTags.list@.
 module Network.Google.Resource.DFAReporting.EventTags.List
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.DFAReporting.EventTags.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingEventTagsList@ method which the
+-- | A resource alias for @dfareporting.eventTags.list@ method which the
 -- 'EventTagsList'' request conforms to.
 type EventTagsListResource =
      "userprofiles" :>
@@ -113,7 +113,7 @@ data EventTagsList' = EventTagsList'
 --
 -- * 'etlSortField'
 eventTagsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'etlProFileId'
     -> EventTagsList'
 eventTagsList' pEtlProFileId_ =
     EventTagsList'

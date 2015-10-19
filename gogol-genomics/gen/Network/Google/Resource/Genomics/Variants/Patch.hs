@@ -23,7 +23,7 @@
 -- Updates a variant. This method supports patch semantics. Returns the
 -- modified variant without its calls.
 --
--- /See:/ < Genomics API Reference> for @GenomicsVariantsPatch@.
+-- /See:/ < Genomics API Reference> for @genomics.variants.patch@.
 module Network.Google.Resource.Genomics.Variants.Patch
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Genomics.Variants.Patch
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsVariantsPatch@ method which the
+-- | A resource alias for @genomics.variants.patch@ method which the
 -- 'VariantsPatch'' request conforms to.
 type VariantsPatchResource =
      "v1" :>
@@ -107,8 +107,8 @@ data VariantsPatch' = VariantsPatch'
 --
 -- * 'vppCallback'
 variantsPatch'
-    :: Variant -- ^ 'payload'
-    -> Text -- ^ 'variantId'
+    :: Variant -- ^ 'vppPayload'
+    -> Text -- ^ 'vppVariantId'
     -> VariantsPatch'
 variantsPatch' pVppPayload_ pVppVariantId_ =
     VariantsPatch'

@@ -22,7 +22,7 @@
 --
 -- Update a page.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesUpdate@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pages.update@.
 module Network.Google.Resource.Blogger.Pages.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Blogger.Pages.Update
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPagesUpdate@ method which the
+-- | A resource alias for @blogger.pages.update@ method which the
 -- 'PagesUpdate'' request conforms to.
 type PagesUpdateResource =
      "blogs" :>
@@ -80,9 +80,9 @@ data PagesUpdate' = PagesUpdate'
 --
 -- * 'puuPublish'
 pagesUpdate'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'pageId'
-    -> Page -- ^ 'payload'
+    :: Text -- ^ 'puuBlogId'
+    -> Text -- ^ 'puuPageId'
+    -> Page -- ^ 'puuPayload'
     -> PagesUpdate'
 pagesUpdate' pPuuBlogId_ pPuuPageId_ pPuuPayload_ =
     PagesUpdate'

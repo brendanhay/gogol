@@ -22,7 +22,7 @@
 --
 -- Updates a Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountsUpdate@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounts.update@.
 module Network.Google.Resource.Content.Accounts.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Content.Accounts.Update
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccountsUpdate@ method which the
+-- | A resource alias for @content.accounts.update@ method which the
 -- 'AccountsUpdate'' request conforms to.
 type AccountsUpdateResource =
      Capture "merchantId" Word64 :>
@@ -74,9 +74,9 @@ data AccountsUpdate' = AccountsUpdate'
 --
 -- * 'auDryRun'
 accountsUpdate'
-    :: Word64 -- ^ 'merchantId'
-    -> Account -- ^ 'payload'
-    -> Word64 -- ^ 'accountId'
+    :: Word64 -- ^ 'auMerchantId'
+    -> Account -- ^ 'auPayload'
+    -> Word64 -- ^ 'auAccountId'
     -> AccountsUpdate'
 accountsUpdate' pAuMerchantId_ pAuPayload_ pAuAccountId_ =
     AccountsUpdate'

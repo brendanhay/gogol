@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of directory sites, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingDirectorySitesList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.directorySites.list@.
 module Network.Google.Resource.DFAReporting.DirectorySites.List
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.DFAReporting.DirectorySites.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingDirectorySitesList@ method which the
+-- | A resource alias for @dfareporting.directorySites.list@ method which the
 -- 'DirectorySitesList'' request conforms to.
 type DirectorySitesListResource =
      "userprofiles" :>
@@ -126,7 +126,7 @@ data DirectorySitesList' = DirectorySitesList'
 --
 -- * 'dslDfpNetworkCode'
 directorySitesList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'dslProFileId'
     -> DirectorySitesList'
 directorySitesList' pDslProFileId_ =
     DirectorySitesList'

@@ -23,7 +23,7 @@
 -- Get ad code for the specified ad unit, attaching the specified host
 -- custom channels.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdUnitsGetAdCode@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.accounts.adunits.getAdCode@.
 module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.GetAdCode
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.GetAdCode
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAccountsAdUnitsGetAdCode@ method which the
+-- | A resource alias for @adsensehost.accounts.adunits.getAdCode@ method which the
 -- 'AccountsAdUnitsGetAdCode'' request conforms to.
 type AccountsAdUnitsGetAdCodeResource =
      "accounts" :>
@@ -79,9 +79,9 @@ data AccountsAdUnitsGetAdCode' = AccountsAdUnitsGetAdCode'
 --
 -- * 'aaugacHostCustomChannelId'
 accountsAdUnitsGetAdCode'
-    :: Text -- ^ 'adUnitId'
-    -> Text -- ^ 'adClientId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'aaugacAdUnitId'
+    -> Text -- ^ 'aaugacAdClientId'
+    -> Text -- ^ 'aaugacAccountId'
     -> AccountsAdUnitsGetAdCode'
 accountsAdUnitsGetAdCode' pAaugacAdUnitId_ pAaugacAdClientId_ pAaugacAccountId_ =
     AccountsAdUnitsGetAdCode'

@@ -24,7 +24,7 @@
 -- Authorization rules_ and _Get methods rules_ for more information about
 -- this method.
 --
--- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviesPartnerAccountsExperienceLocalesGet@.
+-- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @playmoviespartner.accounts.experienceLocales.get@.
 module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviesPartnerAccountsExperienceLocalesGet@ method which the
+-- | A resource alias for @playmoviespartner.accounts.experienceLocales.get@ method which the
 -- 'AccountsExperienceLocalesGet'' request conforms to.
 type AccountsExperienceLocalesGetResource =
      "v1" :>
@@ -106,8 +106,8 @@ data AccountsExperienceLocalesGet' = AccountsExperienceLocalesGet'
 --
 -- * 'aelgCallback'
 accountsExperienceLocalesGet'
-    :: Text -- ^ 'elId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'aelgElId'
+    -> Text -- ^ 'aelgAccountId'
     -> AccountsExperienceLocalesGet'
 accountsExperienceLocalesGet' pAelgElId_ pAelgAccountId_ =
     AccountsExperienceLocalesGet'

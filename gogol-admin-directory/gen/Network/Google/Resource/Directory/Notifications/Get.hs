@@ -22,7 +22,7 @@
 --
 -- Retrieves a notification.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryNotificationsGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.notifications.get@.
 module Network.Google.Resource.Directory.Notifications.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Notifications.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryNotificationsGet@ method which the
+-- | A resource alias for @directory.notifications.get@ method which the
 -- 'NotificationsGet'' request conforms to.
 type NotificationsGetResource =
      "customer" :>
@@ -65,8 +65,8 @@ data NotificationsGet' = NotificationsGet'
 --
 -- * 'ngNotificationId'
 notificationsGet'
-    :: Text -- ^ 'customer'
-    -> Text -- ^ 'notificationId'
+    :: Text -- ^ 'ngCustomer'
+    -> Text -- ^ 'ngNotificationId'
     -> NotificationsGet'
 notificationsGet' pNgCustomer_ pNgNotificationId_ =
     NotificationsGet'

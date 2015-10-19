@@ -23,7 +23,7 @@
 -- Gets the access control policy for a Organization resource. May be empty
 -- if no such policy or resource exists.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerOrganizationsGetIAMPolicy@.
+-- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.organizations.getIamPolicy@.
 module Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerOrganizationsGetIAMPolicy@ method which the
+-- | A resource alias for @cloudresourcemanager.organizations.getIamPolicy@ method which the
 -- 'OrganizationsGetIAMPolicy'' request conforms to.
 type OrganizationsGetIAMPolicyResource =
      "v1beta1" :>
@@ -103,8 +103,8 @@ data OrganizationsGetIAMPolicy' = OrganizationsGetIAMPolicy'
 --
 -- * 'ogipCallback'
 organizationsGetIAMPolicy'
-    :: GetIAMPolicyRequest -- ^ 'payload'
-    -> Text -- ^ 'resource'
+    :: GetIAMPolicyRequest -- ^ 'ogipPayload'
+    -> Text -- ^ 'ogipResource'
     -> OrganizationsGetIAMPolicy'
 organizationsGetIAMPolicy' pOgipPayload_ pOgipResource_ =
     OrganizationsGetIAMPolicy'

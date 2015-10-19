@@ -22,7 +22,7 @@
 --
 -- Adds a channelSection for the authenticated user\'s channel.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeChannelSectionsInsert@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.channelSections.insert@.
 module Network.Google.Resource.YouTube.ChannelSections.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.YouTube.ChannelSections.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeChannelSectionsInsert@ method which the
+-- | A resource alias for @youtube.channelSections.insert@ method which the
 -- 'ChannelSectionsInsert'' request conforms to.
 type ChannelSectionsInsertResource =
      "channelSections" :>
@@ -75,8 +75,8 @@ data ChannelSectionsInsert' = ChannelSectionsInsert'
 --
 -- * 'csiOnBehalfOfContentOwnerChannel'
 channelSectionsInsert'
-    :: Text -- ^ 'part'
-    -> ChannelSection -- ^ 'payload'
+    :: Text -- ^ 'csiPart'
+    -> ChannelSection -- ^ 'csiPayload'
     -> ChannelSectionsInsert'
 channelSectionsInsert' pCsiPart_ pCsiPayload_ =
     ChannelSectionsInsert'

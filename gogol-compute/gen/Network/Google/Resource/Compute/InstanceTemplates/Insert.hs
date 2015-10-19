@@ -23,7 +23,7 @@
 -- Creates an instance template in the specified project using the data
 -- that is included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceTemplatesInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceTemplates.insert@.
 module Network.Google.Resource.Compute.InstanceTemplates.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.InstanceTemplates.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceTemplatesInsert@ method which the
+-- | A resource alias for @compute.instanceTemplates.insert@ method which the
 -- 'InstanceTemplatesInsert'' request conforms to.
 type InstanceTemplatesInsertResource =
      Capture "project" Text :>
@@ -68,8 +68,8 @@ data InstanceTemplatesInsert' = InstanceTemplatesInsert'
 --
 -- * 'itiPayload'
 instanceTemplatesInsert'
-    :: Text -- ^ 'project'
-    -> InstanceTemplate -- ^ 'payload'
+    :: Text -- ^ 'itiProject'
+    -> InstanceTemplate -- ^ 'itiPayload'
     -> InstanceTemplatesInsert'
 instanceTemplatesInsert' pItiProject_ pItiPayload_ =
     InstanceTemplatesInsert'

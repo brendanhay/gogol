@@ -26,142 +26,142 @@ module Network.Google.Books
 
     -- * Resources
 
-    -- ** BooksBookshelvesGet
+    -- ** books.bookshelves.get
     , module Network.Google.Resource.Books.Bookshelves.Get
 
-    -- ** BooksBookshelvesList
+    -- ** books.bookshelves.list
     , module Network.Google.Resource.Books.Bookshelves.List
 
-    -- ** BooksBookshelvesVolumesList
+    -- ** books.bookshelves.volumes.list
     , module Network.Google.Resource.Books.Bookshelves.Volumes.List
 
-    -- ** BooksCloudLoadingAddBook
+    -- ** books.cloudloading.addBook
     , module Network.Google.Resource.Books.CloudLoading.AddBook
 
-    -- ** BooksCloudLoadingDeleteBook
+    -- ** books.cloudloading.deleteBook
     , module Network.Google.Resource.Books.CloudLoading.DeleteBook
 
-    -- ** BooksCloudLoadingUpdateBook
+    -- ** books.cloudloading.updateBook
     , module Network.Google.Resource.Books.CloudLoading.UpdateBook
 
-    -- ** BooksDictionaryListOfflineMetadata
+    -- ** books.dictionary.listOfflineMetadata
     , module Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
 
-    -- ** BooksLayersAnnotationDataGet
+    -- ** books.layers.annotationData.get
     , module Network.Google.Resource.Books.Layers.AnnotationData.Get
 
-    -- ** BooksLayersAnnotationDataList
+    -- ** books.layers.annotationData.list
     , module Network.Google.Resource.Books.Layers.AnnotationData.List
 
-    -- ** BooksLayersGet
+    -- ** books.layers.get
     , module Network.Google.Resource.Books.Layers.Get
 
-    -- ** BooksLayersList
+    -- ** books.layers.list
     , module Network.Google.Resource.Books.Layers.List
 
-    -- ** BooksLayersVolumeAnnotationsGet
+    -- ** books.layers.volumeAnnotations.get
     , module Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
 
-    -- ** BooksLayersVolumeAnnotationsList
+    -- ** books.layers.volumeAnnotations.list
     , module Network.Google.Resource.Books.Layers.VolumeAnnotations.List
 
-    -- ** BooksMyConfigGetUserSettings
+    -- ** books.myconfig.getUserSettings
     , module Network.Google.Resource.Books.MyConfig.GetUserSettings
 
-    -- ** BooksMyConfigReleaseDownloadAccess
+    -- ** books.myconfig.releaseDownloadAccess
     , module Network.Google.Resource.Books.MyConfig.ReleaseDownloadAccess
 
-    -- ** BooksMyConfigRequestAccess
+    -- ** books.myconfig.requestAccess
     , module Network.Google.Resource.Books.MyConfig.RequestAccess
 
-    -- ** BooksMyConfigSyncVolumeLicenses
+    -- ** books.myconfig.syncVolumeLicenses
     , module Network.Google.Resource.Books.MyConfig.SyncVolumeLicenses
 
-    -- ** BooksMyConfigUpdateUserSettings
+    -- ** books.myconfig.updateUserSettings
     , module Network.Google.Resource.Books.MyConfig.UpdateUserSettings
 
-    -- ** BooksMyLibraryAnnotationsDelete
+    -- ** books.mylibrary.annotations.delete
     , module Network.Google.Resource.Books.MyLibrary.Annotations.Delete
 
-    -- ** BooksMyLibraryAnnotationsInsert
+    -- ** books.mylibrary.annotations.insert
     , module Network.Google.Resource.Books.MyLibrary.Annotations.Insert
 
-    -- ** BooksMyLibraryAnnotationsList
+    -- ** books.mylibrary.annotations.list
     , module Network.Google.Resource.Books.MyLibrary.Annotations.List
 
-    -- ** BooksMyLibraryAnnotationsSummary
+    -- ** books.mylibrary.annotations.summary
     , module Network.Google.Resource.Books.MyLibrary.Annotations.Summary
 
-    -- ** BooksMyLibraryAnnotationsUpdate
+    -- ** books.mylibrary.annotations.update
     , module Network.Google.Resource.Books.MyLibrary.Annotations.Update
 
-    -- ** BooksMyLibraryBookshelvesAddVolume
+    -- ** books.mylibrary.bookshelves.addVolume
     , module Network.Google.Resource.Books.MyLibrary.Bookshelves.AddVolume
 
-    -- ** BooksMyLibraryBookshelvesClearVolumes
+    -- ** books.mylibrary.bookshelves.clearVolumes
     , module Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes
 
-    -- ** BooksMyLibraryBookshelvesGet
+    -- ** books.mylibrary.bookshelves.get
     , module Network.Google.Resource.Books.MyLibrary.Bookshelves.Get
 
-    -- ** BooksMyLibraryBookshelvesList
+    -- ** books.mylibrary.bookshelves.list
     , module Network.Google.Resource.Books.MyLibrary.Bookshelves.List
 
-    -- ** BooksMyLibraryBookshelvesMoveVolume
+    -- ** books.mylibrary.bookshelves.moveVolume
     , module Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume
 
-    -- ** BooksMyLibraryBookshelvesRemoveVolume
+    -- ** books.mylibrary.bookshelves.removeVolume
     , module Network.Google.Resource.Books.MyLibrary.Bookshelves.RemoveVolume
 
-    -- ** BooksMyLibraryBookshelvesVolumesList
+    -- ** books.mylibrary.bookshelves.volumes.list
     , module Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
 
-    -- ** BooksMyLibraryReadingPositionsGet
+    -- ** books.mylibrary.readingpositions.get
     , module Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
 
-    -- ** BooksMyLibraryReadingPositionsSetPosition
+    -- ** books.mylibrary.readingpositions.setPosition
     , module Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
 
-    -- ** BooksNotificationGet
+    -- ** books.notification.get
     , module Network.Google.Resource.Books.Notification.Get
 
-    -- ** BooksOnboardingListCategories
+    -- ** books.onboarding.listCategories
     , module Network.Google.Resource.Books.Onboarding.ListCategories
 
-    -- ** BooksOnboardingListCategoryVolumes
+    -- ** books.onboarding.listCategoryVolumes
     , module Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
 
-    -- ** BooksPersonalizedstreamGet
+    -- ** books.personalizedstream.get
     , module Network.Google.Resource.Books.Personalizedstream.Get
 
-    -- ** BooksPromoOfferAccept
+    -- ** books.promooffer.accept
     , module Network.Google.Resource.Books.PromoOffer.Accept
 
-    -- ** BooksPromoOfferDismiss
+    -- ** books.promooffer.dismiss
     , module Network.Google.Resource.Books.PromoOffer.Dismiss
 
-    -- ** BooksPromoOfferGet
+    -- ** books.promooffer.get
     , module Network.Google.Resource.Books.PromoOffer.Get
 
-    -- ** BooksVolumesAssociatedList
+    -- ** books.volumes.associated.list
     , module Network.Google.Resource.Books.Volumes.Associated.List
 
-    -- ** BooksVolumesGet
+    -- ** books.volumes.get
     , module Network.Google.Resource.Books.Volumes.Get
 
-    -- ** BooksVolumesList
+    -- ** books.volumes.list
     , module Network.Google.Resource.Books.Volumes.List
 
-    -- ** BooksVolumesMybooksList
+    -- ** books.volumes.mybooks.list
     , module Network.Google.Resource.Books.Volumes.Mybooks.List
 
-    -- ** BooksVolumesRecommendedList
+    -- ** books.volumes.recommended.list
     , module Network.Google.Resource.Books.Volumes.Recommended.List
 
-    -- ** BooksVolumesRecommendedRate
+    -- ** books.volumes.recommended.rate
     , module Network.Google.Resource.Books.Volumes.Recommended.Rate
 
-    -- ** BooksVolumesUserUploadedList
+    -- ** books.volumes.useruploaded.list
     , module Network.Google.Resource.Books.Volumes.UserUploaded.List
 
     -- * Types

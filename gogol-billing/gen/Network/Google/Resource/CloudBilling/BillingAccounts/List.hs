@@ -23,7 +23,7 @@
 -- Lists the billing accounts that the current authenticated user
 -- [owns](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
--- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @CloudBillingBillingAccountsList@.
+-- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @cloudbilling.billingAccounts.list@.
 module Network.Google.Resource.CloudBilling.BillingAccounts.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.List
 import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudBillingBillingAccountsList@ method which the
+-- | A resource alias for @cloudbilling.billingAccounts.list@ method which the
 -- 'BillingAccountsList'' request conforms to.
 type BillingAccountsListResource =
      "v1" :>

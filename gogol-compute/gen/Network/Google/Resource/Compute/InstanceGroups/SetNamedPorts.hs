@@ -22,7 +22,7 @@
 --
 -- Sets the named ports for the specified instance group.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsSetNamedPorts@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroups.setNamedPorts@.
 module Network.Google.Resource.Compute.InstanceGroups.SetNamedPorts
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.InstanceGroups.SetNamedPorts
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupsSetNamedPorts@ method which the
+-- | A resource alias for @compute.instanceGroups.setNamedPorts@ method which the
 -- 'InstanceGroupsSetNamedPorts'' request conforms to.
 type InstanceGroupsSetNamedPortsResource =
      Capture "project" Text :>
@@ -77,10 +77,10 @@ data InstanceGroupsSetNamedPorts' = InstanceGroupsSetNamedPorts'
 --
 -- * 'igsnpInstanceGroup'
 instanceGroupsSetNamedPorts'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> InstanceGroupsSetNamedPortsRequest -- ^ 'payload'
-    -> Text -- ^ 'instanceGroup'
+    :: Text -- ^ 'igsnpProject'
+    -> Text -- ^ 'igsnpZone'
+    -> InstanceGroupsSetNamedPortsRequest -- ^ 'igsnpPayload'
+    -> Text -- ^ 'igsnpInstanceGroup'
     -> InstanceGroupsSetNamedPorts'
 instanceGroupsSetNamedPorts' pIgsnpProject_ pIgsnpZone_ pIgsnpPayload_ pIgsnpInstanceGroup_ =
     InstanceGroupsSetNamedPorts'

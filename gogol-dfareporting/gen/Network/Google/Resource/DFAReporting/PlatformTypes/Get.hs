@@ -22,7 +22,7 @@
 --
 -- Gets one platform type by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlatformTypesGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.platformTypes.get@.
 module Network.Google.Resource.DFAReporting.PlatformTypes.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.PlatformTypes.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPlatformTypesGet@ method which the
+-- | A resource alias for @dfareporting.platformTypes.get@ method which the
 -- 'PlatformTypesGet'' request conforms to.
 type PlatformTypesGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data PlatformTypesGet' = PlatformTypesGet'
 --
 -- * 'ptgId'
 platformTypesGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'ptgProFileId'
+    -> Int64 -- ^ 'ptgId'
     -> PlatformTypesGet'
 platformTypesGet' pPtgProFileId_ pPtgId_ =
     PlatformTypesGet'

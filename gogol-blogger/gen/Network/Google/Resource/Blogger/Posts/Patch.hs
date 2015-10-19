@@ -22,7 +22,7 @@
 --
 -- Update a post. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsPatch@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.patch@.
 module Network.Google.Resource.Blogger.Posts.Patch
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Blogger.Posts.Patch
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostsPatch@ method which the
+-- | A resource alias for @blogger.posts.patch@ method which the
 -- 'PostsPatch'' request conforms to.
 type PostsPatchResource =
      "blogs" :>
@@ -95,9 +95,9 @@ data PostsPatch' = PostsPatch'
 --
 -- * 'ppPublish'
 postsPatch'
-    :: Text -- ^ 'blogId'
-    -> Post' -- ^ 'payload'
-    -> Text -- ^ 'postId'
+    :: Text -- ^ 'ppBlogId'
+    -> Post' -- ^ 'ppPayload'
+    -> Text -- ^ 'ppPostId'
     -> PostsPatch'
 postsPatch' pPpBlogId_ pPpPayload_ pPpPostId_ =
     PostsPatch'

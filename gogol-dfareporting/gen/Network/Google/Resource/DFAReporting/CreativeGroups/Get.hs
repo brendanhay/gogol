@@ -22,7 +22,7 @@
 --
 -- Gets one creative group by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeGroupsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeGroups.get@.
 module Network.Google.Resource.DFAReporting.CreativeGroups.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeGroupsGet@ method which the
+-- | A resource alias for @dfareporting.creativeGroups.get@ method which the
 -- 'CreativeGroupsGet'' request conforms to.
 type CreativeGroupsGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data CreativeGroupsGet' = CreativeGroupsGet'
 --
 -- * 'cggId'
 creativeGroupsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'cggProFileId'
+    -> Int64 -- ^ 'cggId'
     -> CreativeGroupsGet'
 creativeGroupsGet' pCggProFileId_ pCggId_ =
     CreativeGroupsGet'

@@ -23,7 +23,7 @@
 -- Immediately and permanently deletes the specified label and removes it
 -- from any messages and threads that it is applied to.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersLabelsDelete@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.labels.delete@.
 module Network.Google.Resource.Gmail.Users.Labels.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Gmail.Users.Labels.Delete
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersLabelsDelete@ method which the
+-- | A resource alias for @gmail.users.labels.delete@ method which the
 -- 'UsersLabelsDelete'' request conforms to.
 type UsersLabelsDeleteResource =
      Capture "userId" Text :>
@@ -66,7 +66,7 @@ data UsersLabelsDelete' = UsersLabelsDelete'
 --
 -- * 'uldId'
 usersLabelsDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'uldId'
     -> Text
     -> UsersLabelsDelete'
 usersLabelsDelete' pUldUserId_ pUldId_ =

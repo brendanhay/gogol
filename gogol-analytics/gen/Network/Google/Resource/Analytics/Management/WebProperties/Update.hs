@@ -22,7 +22,7 @@
 --
 -- Updates an existing web property.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertiesUpdate@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webproperties.update@.
 module Network.Google.Resource.Analytics.Management.WebProperties.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Update
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertiesUpdate@ method which the
+-- | A resource alias for @analytics.management.webproperties.update@ method which the
 -- 'ManagementWebPropertiesUpdate'' request conforms to.
 type ManagementWebPropertiesUpdateResource =
      "management" :>
@@ -72,9 +72,9 @@ data ManagementWebPropertiesUpdate' = ManagementWebPropertiesUpdate'
 --
 -- * 'mwpuAccountId'
 managementWebPropertiesUpdate'
-    :: Text -- ^ 'webPropertyId'
-    -> WebProperty -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mwpuWebPropertyId'
+    -> WebProperty -- ^ 'mwpuPayload'
+    -> Text -- ^ 'mwpuAccountId'
     -> ManagementWebPropertiesUpdate'
 managementWebPropertiesUpdate' pMwpuWebPropertyId_ pMwpuPayload_ pMwpuAccountId_ =
     ManagementWebPropertiesUpdate'

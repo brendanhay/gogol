@@ -23,7 +23,7 @@
 -- Record a moment representing a user\'s action such as making a purchase
 -- or commenting on a blog.
 --
--- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusMomentsInsert@.
+-- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.moments.insert@.
 module Network.Google.Resource.Plus.Moments.Insert
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Plus.Moments.Insert
 import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusMomentsInsert@ method which the
+-- | A resource alias for @plus.moments.insert@ method which the
 -- 'MomentsInsert'' request conforms to.
 type MomentsInsertResource =
      "people" :>
@@ -77,9 +77,9 @@ data MomentsInsert' = MomentsInsert'
 --
 -- * 'miUserId'
 momentsInsert'
-    :: MomentsInsertCollection -- ^ 'collection'
-    -> Moment -- ^ 'payload'
-    -> Text -- ^ 'userId'
+    :: MomentsInsertCollection -- ^ 'miCollection'
+    -> Moment -- ^ 'miPayload'
+    -> Text -- ^ 'miUserId'
     -> MomentsInsert'
 momentsInsert' pMiCollection_ pMiPayload_ pMiUserId_ =
     MomentsInsert'

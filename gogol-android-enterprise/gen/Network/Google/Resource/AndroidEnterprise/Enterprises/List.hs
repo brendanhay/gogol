@@ -22,7 +22,7 @@
 --
 -- Looks up an enterprise by domain name.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEnterprisesList@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.list@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.List
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEnterprisesList@ method which the
+-- | A resource alias for @androidenterprise.enterprises.list@ method which the
 -- 'EnterprisesList'' request conforms to.
 type EnterprisesListResource =
      "enterprises" :>
@@ -60,7 +60,7 @@ newtype EnterprisesList' = EnterprisesList'
 --
 -- * 'elDomain'
 enterprisesList'
-    :: Text -- ^ 'domain'
+    :: Text -- ^ 'elDomain'
     -> EnterprisesList'
 enterprisesList' pElDomain_ =
     EnterprisesList'

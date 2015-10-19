@@ -22,7 +22,7 @@
 --
 -- Remove a person from a circle.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesRemovePeople@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.circles.removePeople@.
 module Network.Google.Resource.PlusDomains.Circles.RemovePeople
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.PlusDomains.Circles.RemovePeople
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsCirclesRemovePeople@ method which the
+-- | A resource alias for @plusDomains.circles.removePeople@ method which the
 -- 'CirclesRemovePeople'' request conforms to.
 type CirclesRemovePeopleResource =
      "circles" :>
@@ -70,7 +70,7 @@ data CirclesRemovePeople' = CirclesRemovePeople'
 --
 -- * 'crpCircleId'
 circlesRemovePeople'
-    :: Text -- ^ 'circleId'
+    :: Text -- ^ 'crpCircleId'
     -> CirclesRemovePeople'
 circlesRemovePeople' pCrpCircleId_ =
     CirclesRemovePeople'

@@ -22,7 +22,7 @@
 --
 -- Get a custom metric to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomMetricsGet@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.customMetrics.get@.
 module Network.Google.Resource.Analytics.Management.CustomMetrics.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementCustomMetricsGet@ method which the
+-- | A resource alias for @analytics.management.customMetrics.get@ method which the
 -- 'ManagementCustomMetricsGet'' request conforms to.
 type ManagementCustomMetricsGetResource =
      "management" :>
@@ -72,9 +72,9 @@ data ManagementCustomMetricsGet' = ManagementCustomMetricsGet'
 --
 -- * 'mcmgAccountId'
 managementCustomMetricsGet'
-    :: Text -- ^ 'customMetricId'
-    -> Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mcmgCustomMetricId'
+    -> Text -- ^ 'mcmgWebPropertyId'
+    -> Text -- ^ 'mcmgAccountId'
     -> ManagementCustomMetricsGet'
 managementCustomMetricsGet' pMcmgCustomMetricId_ pMcmgWebPropertyId_ pMcmgAccountId_ =
     ManagementCustomMetricsGet'

@@ -22,7 +22,7 @@
 --
 -- Return all parent ids of the specified layer.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineLayersParentsList@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.layers.parents.list@.
 module Network.Google.Resource.MapsEngine.Layers.Parents.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.MapsEngine.Layers.Parents.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersParentsList@ method which the
+-- | A resource alias for @mapsengine.layers.parents.list@ method which the
 -- 'LayersParentsList'' request conforms to.
 type LayersParentsListResource =
      "layers" :>
@@ -71,7 +71,7 @@ data LayersParentsList' = LayersParentsList'
 --
 -- * 'lplpMaxResults'
 layersParentsList'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'lplpId'
     -> LayersParentsList'
 layersParentsList' pLplpId_ =
     LayersParentsList'

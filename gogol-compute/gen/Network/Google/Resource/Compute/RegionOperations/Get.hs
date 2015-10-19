@@ -22,7 +22,7 @@
 --
 -- Retrieves the specified region-specific Operations resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRegionOperationsGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.regionOperations.get@.
 module Network.Google.Resource.Compute.RegionOperations.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.RegionOperations.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeRegionOperationsGet@ method which the
+-- | A resource alias for @compute.regionOperations.get@ method which the
 -- 'RegionOperationsGet'' request conforms to.
 type RegionOperationsGetResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data RegionOperationsGet' = RegionOperationsGet'
 --
 -- * 'rogRegion'
 regionOperationsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'operation'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'rogProject'
+    -> Text -- ^ 'rogOperation'
+    -> Text -- ^ 'rogRegion'
     -> RegionOperationsGet'
 regionOperationsGet' pRogProject_ pRogOperation_ pRogRegion_ =
     RegionOperationsGet'

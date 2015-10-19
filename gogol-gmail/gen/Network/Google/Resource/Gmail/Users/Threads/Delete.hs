@@ -23,7 +23,7 @@
 -- Immediately and permanently deletes the specified thread. This operation
 -- cannot be undone. Prefer threads.trash instead.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersThreadsDelete@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.threads.delete@.
 module Network.Google.Resource.Gmail.Users.Threads.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Gmail.Users.Threads.Delete
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersThreadsDelete@ method which the
+-- | A resource alias for @gmail.users.threads.delete@ method which the
 -- 'UsersThreadsDelete'' request conforms to.
 type UsersThreadsDeleteResource =
      Capture "userId" Text :>
@@ -66,7 +66,7 @@ data UsersThreadsDelete' = UsersThreadsDelete'
 --
 -- * 'utdId'
 usersThreadsDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'utdId'
     -> Text
     -> UsersThreadsDelete'
 usersThreadsDelete' pUtdUserId_ pUtdId_ =

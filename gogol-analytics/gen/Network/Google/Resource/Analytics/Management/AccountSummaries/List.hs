@@ -23,7 +23,7 @@
 -- Lists account summaries (lightweight tree comprised of
 -- accounts\/properties\/profiles) to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountSummariesList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.accountSummaries.list@.
 module Network.Google.Resource.Analytics.Management.AccountSummaries.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.AccountSummaries.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementAccountSummariesList@ method which the
+-- | A resource alias for @analytics.management.accountSummaries.list@ method which the
 -- 'ManagementAccountSummariesList'' request conforms to.
 type ManagementAccountSummariesListResource =
      "management" :>

@@ -22,7 +22,7 @@
 --
 -- Inserts a new placement.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementsInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placements.insert@.
 module Network.Google.Resource.DFAReporting.Placements.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Placements.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPlacementsInsert@ method which the
+-- | A resource alias for @dfareporting.placements.insert@ method which the
 -- 'PlacementsInsert'' request conforms to.
 type PlacementsInsertResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data PlacementsInsert' = PlacementsInsert'
 --
 -- * 'piPayload'
 placementsInsert'
-    :: Int64 -- ^ 'profileId'
-    -> Placement -- ^ 'payload'
+    :: Int64 -- ^ 'piProFileId'
+    -> Placement -- ^ 'piPayload'
     -> PlacementsInsert'
 placementsInsert' pPiProFileId_ pPiPayload_ =
     PlacementsInsert'

@@ -22,7 +22,7 @@
 --
 -- List the preferred deals for this Ad Exchange account.
 --
--- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsPreferredDealsList@.
+-- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @adexchangeseller.accounts.preferreddeals.list@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.List
 import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangesellerAccountsPreferredDealsList@ method which the
+-- | A resource alias for @adexchangeseller.accounts.preferreddeals.list@ method which the
 -- 'AccountsPreferredDealsList'' request conforms to.
 type AccountsPreferredDealsListResource =
      "accounts" :>
@@ -61,7 +61,7 @@ newtype AccountsPreferredDealsList' = AccountsPreferredDealsList'
 --
 -- * 'apdlAccountId'
 accountsPreferredDealsList'
-    :: Text -- ^ 'accountId'
+    :: Text -- ^ 'apdlAccountId'
     -> AccountsPreferredDealsList'
 accountsPreferredDealsList' pApdlAccountId_ =
     AccountsPreferredDealsList'

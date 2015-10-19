@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of objects matching the criteria.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsList@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objects.list@.
 module Network.Google.Resource.Storage.Objects.List
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Storage.Objects.List
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsList@ method which the
+-- | A resource alias for @storage.objects.list@ method which the
 -- 'ObjectsList'' request conforms to.
 type ObjectsListResource =
      "b" :>
@@ -90,7 +90,7 @@ data ObjectsList' = ObjectsList'
 --
 -- * 'olMaxResults'
 objectsList'
-    :: Text -- ^ 'bucket'
+    :: Text -- ^ 'olBucket'
     -> ObjectsList'
 objectsList' pOlBucket_ =
     ObjectsList'

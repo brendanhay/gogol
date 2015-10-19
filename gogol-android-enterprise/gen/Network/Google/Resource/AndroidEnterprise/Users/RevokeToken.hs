@@ -22,7 +22,7 @@
 --
 -- Revokes a previously generated token (activation code) for the user.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseUsersRevokeToken@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.users.revokeToken@.
 module Network.Google.Resource.AndroidEnterprise.Users.RevokeToken
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidEnterprise.Users.RevokeToken
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseUsersRevokeToken@ method which the
+-- | A resource alias for @androidenterprise.users.revokeToken@ method which the
 -- 'UsersRevokeToken'' request conforms to.
 type UsersRevokeTokenResource =
      "enterprises" :>
@@ -66,8 +66,8 @@ data UsersRevokeToken' = UsersRevokeToken'
 --
 -- * 'urtUserId'
 usersRevokeToken'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'urtEnterpriseId'
+    -> Text -- ^ 'urtUserId'
     -> UsersRevokeToken'
 usersRevokeToken' pUrtEnterpriseId_ pUrtUserId_ =
     UsersRevokeToken'

@@ -22,7 +22,7 @@
 --
 -- Return all rasters within a raster collection.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRasterCollectionsRastersList@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.rasterCollections.rasters.list@.
 module Network.Google.Resource.MapsEngine.RasterCollections.Rasters.List
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Rasters.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRasterCollectionsRastersList@ method which the
+-- | A resource alias for @mapsengine.rasterCollections.rasters.list@ method which the
 -- 'RasterCollectionsRastersList'' request conforms to.
 type RasterCollectionsRastersListResource =
      "rasterCollections" :>
@@ -117,7 +117,7 @@ data RasterCollectionsRastersList' = RasterCollectionsRastersList'
 --
 -- * 'rcrlCreatedBefore'
 rasterCollectionsRastersList'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'rcrlId'
     -> RasterCollectionsRastersList'
 rasterCollectionsRastersList' pRcrlId_ =
     RasterCollectionsRastersList'

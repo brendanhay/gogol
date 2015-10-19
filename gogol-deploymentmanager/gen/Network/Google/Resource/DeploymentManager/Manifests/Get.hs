@@ -22,7 +22,7 @@
 --
 -- Gets information about a specific manifest.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerManifestsGet@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @deploymentmanager.manifests.get@.
 module Network.Google.Resource.DeploymentManager.Manifests.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DeploymentManager.Manifests.Get
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerManifestsGet@ method which the
+-- | A resource alias for @deploymentmanager.manifests.get@ method which the
 -- 'ManifestsGet'' request conforms to.
 type ManifestsGetResource =
      Capture "project" Text :>
@@ -71,9 +71,9 @@ data ManifestsGet' = ManifestsGet'
 --
 -- * 'mgDeployment'
 manifestsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'manifest'
-    -> Text -- ^ 'deployment'
+    :: Text -- ^ 'mgProject'
+    -> Text -- ^ 'mgManifest'
+    -> Text -- ^ 'mgDeployment'
     -> ManifestsGet'
 manifestsGet' pMgProject_ pMgManifest_ pMgDeployment_ =
     ManifestsGet'

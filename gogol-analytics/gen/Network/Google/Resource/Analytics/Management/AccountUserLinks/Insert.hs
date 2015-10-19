@@ -22,7 +22,7 @@
 --
 -- Adds a new user to the given account.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountUserLinksInsert@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.accountUserLinks.insert@.
 module Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementAccountUserLinksInsert@ method which the
+-- | A resource alias for @analytics.management.accountUserLinks.insert@ method which the
 -- 'ManagementAccountUserLinksInsert'' request conforms to.
 type ManagementAccountUserLinksInsertResource =
      "management" :>
@@ -67,8 +67,8 @@ data ManagementAccountUserLinksInsert' = ManagementAccountUserLinksInsert'
 --
 -- * 'mauliAccountId'
 managementAccountUserLinksInsert'
-    :: EntityUserLink -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: EntityUserLink -- ^ 'mauliPayload'
+    -> Text -- ^ 'mauliAccountId'
     -> ManagementAccountUserLinksInsert'
 managementAccountUserLinksInsert' pMauliPayload_ pMauliAccountId_ =
     ManagementAccountUserLinksInsert'

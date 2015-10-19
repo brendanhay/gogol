@@ -23,7 +23,7 @@
 -- Streams data into BigQuery one record at a time without needing to run a
 -- load job. Requires the WRITER dataset role.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryTableDataInsertAll@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @bigquery.tabledata.insertAll@.
 module Network.Google.Resource.BigQuery.TableData.InsertAll
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.BigQuery.TableData.InsertAll
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigQueryTableDataInsertAll@ method which the
+-- | A resource alias for @bigquery.tabledata.insertAll@ method which the
 -- 'TableDataInsertAll'' request conforms to.
 type TableDataInsertAllResource =
      "projects" :>
@@ -80,10 +80,10 @@ data TableDataInsertAll' = TableDataInsertAll'
 --
 -- * 'tdiaTableId'
 tableDataInsertAll'
-    :: TableDataInsertAllRequest -- ^ 'payload'
-    -> Text -- ^ 'datasetId'
-    -> Text -- ^ 'projectId'
-    -> Text -- ^ 'tableId'
+    :: TableDataInsertAllRequest -- ^ 'tdiaPayload'
+    -> Text -- ^ 'tdiaDatasetId'
+    -> Text -- ^ 'tdiaProjectId'
+    -> Text -- ^ 'tdiaTableId'
     -> TableDataInsertAll'
 tableDataInsertAll' pTdiaPayload_ pTdiaDatasetId_ pTdiaProjectId_ pTdiaTableId_ =
     TableDataInsertAll'

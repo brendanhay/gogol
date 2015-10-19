@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsAPKsList@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.apks.list@.
 module Network.Google.Resource.AndroidPublisher.Edits.APKs.List
     (
     -- * REST Resource
@@ -38,7 +38,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKs.List
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsAPKsList@ method which the
+-- | A resource alias for @androidpublisher.edits.apks.list@ method which the
 -- 'EditsAPKsList'' request conforms to.
 type EditsAPKsListResource =
      Capture "packageName" Text :>
@@ -63,8 +63,8 @@ data EditsAPKsList' = EditsAPKsList'
 --
 -- * 'eapklEditId'
 editsAPKsList'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eapklPackageName'
+    -> Text -- ^ 'eapklEditId'
     -> EditsAPKsList'
 editsAPKsList' pEapklPackageName_ pEapklEditId_ =
     EditsAPKsList'

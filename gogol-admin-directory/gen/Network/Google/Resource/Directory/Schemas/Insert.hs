@@ -22,7 +22,7 @@
 --
 -- Create schema.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectorySchemasInsert@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.schemas.insert@.
 module Network.Google.Resource.Directory.Schemas.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Schemas.Insert
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectorySchemasInsert@ method which the
+-- | A resource alias for @directory.schemas.insert@ method which the
 -- 'SchemasInsert'' request conforms to.
 type SchemasInsertResource =
      "customer" :>
@@ -65,8 +65,8 @@ data SchemasInsert' = SchemasInsert'
 --
 -- * 'siCustomerId'
 schemasInsert'
-    :: Schema -- ^ 'payload'
-    -> Text -- ^ 'customerId'
+    :: Schema -- ^ 'siPayload'
+    -> Text -- ^ 'siCustomerId'
     -> SchemasInsert'
 schemasInsert' pSiPayload_ pSiCustomerId_ =
     SchemasInsert'

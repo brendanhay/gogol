@@ -23,7 +23,7 @@
 -- Indicates that the currently authorized user will participate in the
 -- quest.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesQuestsAccept@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.quests.accept@.
 module Network.Google.Resource.Games.Quests.Accept
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Games.Quests.Accept
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesQuestsAccept@ method which the
+-- | A resource alias for @games.quests.accept@ method which the
 -- 'QuestsAccept'' request conforms to.
 type QuestsAcceptResource =
      "quests" :>
@@ -67,7 +67,7 @@ data QuestsAccept' = QuestsAccept'
 --
 -- * 'qaQuestId'
 questsAccept'
-    :: Text -- ^ 'questId'
+    :: Text -- ^ 'qaQuestId'
     -> QuestsAccept'
 questsAccept' pQaQuestId_ =
     QuestsAccept'

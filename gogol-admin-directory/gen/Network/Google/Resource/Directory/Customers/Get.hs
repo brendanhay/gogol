@@ -22,7 +22,7 @@
 --
 -- Retrives a customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryCustomersGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.customers.get@.
 module Network.Google.Resource.Directory.Customers.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Directory.Customers.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryCustomersGet@ method which the
+-- | A resource alias for @directory.customers.get@ method which the
 -- 'CustomersGet'' request conforms to.
 type CustomersGetResource =
      "customers" :>
@@ -59,7 +59,7 @@ newtype CustomersGet' = CustomersGet'
 --
 -- * 'cgCustomerKey'
 customersGet'
-    :: Text -- ^ 'customerKey'
+    :: Text -- ^ 'cgCustomerKey'
     -> CustomersGet'
 customersGet' pCgCustomerKey_ =
     CustomersGet'

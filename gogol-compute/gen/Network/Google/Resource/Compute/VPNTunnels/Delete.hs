@@ -22,7 +22,7 @@
 --
 -- Deletes the specified VpnTunnel resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeVPNTunnelsDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.vpnTunnels.delete@.
 module Network.Google.Resource.Compute.VPNTunnels.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.VPNTunnels.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeVPNTunnelsDelete@ method which the
+-- | A resource alias for @compute.vpnTunnels.delete@ method which the
 -- 'VPNTunnelsDelete'' request conforms to.
 type VPNTunnelsDeleteResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data VPNTunnelsDelete' = VPNTunnelsDelete'
 --
 -- * 'vtdRegion'
 vpnTunnelsDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'vpnTunnel'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'vtdProject'
+    -> Text -- ^ 'vtdVPNTunnel'
+    -> Text -- ^ 'vtdRegion'
     -> VPNTunnelsDelete'
 vpnTunnelsDelete' pVtdProject_ pVtdVPNTunnel_ pVtdRegion_ =
     VPNTunnelsDelete'

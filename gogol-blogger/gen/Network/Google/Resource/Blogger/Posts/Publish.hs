@@ -23,7 +23,7 @@
 -- Publishes a draft post, optionally at the specific time of the given
 -- publishDate parameter.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsPublish@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.publish@.
 module Network.Google.Resource.Blogger.Posts.Publish
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Blogger.Posts.Publish
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostsPublish@ method which the
+-- | A resource alias for @blogger.posts.publish@ method which the
 -- 'PostsPublish'' request conforms to.
 type PostsPublishResource =
      "blogs" :>
@@ -73,8 +73,8 @@ data PostsPublish' = PostsPublish'
 --
 -- * 'posPostId'
 postsPublish'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'postId'
+    :: Text -- ^ 'posBlogId'
+    -> Text -- ^ 'posPostId'
     -> PostsPublish'
 postsPublish' pPosBlogId_ pPosPostId_ =
     PostsPublish'

@@ -22,7 +22,7 @@
 --
 -- Train a Prediction API model.
 --
--- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedModelsInsert@.
+-- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @prediction.trainedmodels.insert@.
 module Network.Google.Resource.Prediction.TrainedModels.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Prediction.TrainedModels.Insert
 import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PredictionTrainedModelsInsert@ method which the
+-- | A resource alias for @prediction.trainedmodels.insert@ method which the
 -- 'TrainedModelsInsert'' request conforms to.
 type TrainedModelsInsertResource =
      Capture "project" Text :>
@@ -64,8 +64,8 @@ data TrainedModelsInsert' = TrainedModelsInsert'
 --
 -- * 'tmiPayload'
 trainedModelsInsert'
-    :: Text -- ^ 'project'
-    -> Insert -- ^ 'payload'
+    :: Text -- ^ 'tmiProject'
+    -> Insert -- ^ 'tmiPayload'
     -> TrainedModelsInsert'
 trainedModelsInsert' pTmiProject_ pTmiPayload_ =
     TrainedModelsInsert'

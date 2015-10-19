@@ -24,7 +24,7 @@
 -- must be an [owner of the billing
 -- account](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
--- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @CloudBillingBillingAccountsGet@.
+-- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @cloudbilling.billingAccounts.get@.
 module Network.Google.Resource.CloudBilling.BillingAccounts.Get
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.Get
 import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudBillingBillingAccountsGet@ method which the
+-- | A resource alias for @cloudbilling.billingAccounts.get@ method which the
 -- 'BillingAccountsGet'' request conforms to.
 type BillingAccountsGetResource =
      "v1" :>
@@ -99,7 +99,7 @@ data BillingAccountsGet' = BillingAccountsGet'
 --
 -- * 'bagCallback'
 billingAccountsGet'
-    :: Text -- ^ 'name'
+    :: Text -- ^ 'bagName'
     -> BillingAccountsGet'
 billingAccountsGet' pBagName_ =
     BillingAccountsGet'

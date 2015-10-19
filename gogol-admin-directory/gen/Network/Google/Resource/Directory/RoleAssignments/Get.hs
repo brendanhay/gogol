@@ -22,7 +22,7 @@
 --
 -- Retrieve a role assignment.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryRoleAssignmentsGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.roleAssignments.get@.
 module Network.Google.Resource.Directory.RoleAssignments.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.RoleAssignments.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryRoleAssignmentsGet@ method which the
+-- | A resource alias for @directory.roleAssignments.get@ method which the
 -- 'RoleAssignmentsGet'' request conforms to.
 type RoleAssignmentsGetResource =
      "customer" :>
@@ -66,8 +66,8 @@ data RoleAssignmentsGet' = RoleAssignmentsGet'
 --
 -- * 'ragRoleAssignmentId'
 roleAssignmentsGet'
-    :: Text -- ^ 'customer'
-    -> Text -- ^ 'roleAssignmentId'
+    :: Text -- ^ 'ragCustomer'
+    -> Text -- ^ 'ragRoleAssignmentId'
     -> RoleAssignmentsGet'
 roleAssignmentsGet' pRagCustomer_ pRagRoleAssignmentId_ =
     RoleAssignmentsGet'

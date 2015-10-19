@@ -22,7 +22,7 @@
 --
 -- Removes a user from the given account.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountUserLinksDelete@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.accountUserLinks.delete@.
 module Network.Google.Resource.Analytics.Management.AccountUserLinks.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Delete
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementAccountUserLinksDelete@ method which the
+-- | A resource alias for @analytics.management.accountUserLinks.delete@ method which the
 -- 'ManagementAccountUserLinksDelete'' request conforms to.
 type ManagementAccountUserLinksDeleteResource =
      "management" :>
@@ -66,8 +66,8 @@ data ManagementAccountUserLinksDelete' = ManagementAccountUserLinksDelete'
 --
 -- * 'mauldLinkId'
 managementAccountUserLinksDelete'
-    :: Text -- ^ 'accountId'
-    -> Text -- ^ 'linkId'
+    :: Text -- ^ 'mauldAccountId'
+    -> Text -- ^ 'mauldLinkId'
     -> ManagementAccountUserLinksDelete'
 managementAccountUserLinksDelete' pMauldAccountId_ pMauldLinkId_ =
     ManagementAccountUserLinksDelete'

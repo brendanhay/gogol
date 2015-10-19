@@ -27,7 +27,7 @@ module Network.Google.PageSpeed
 
     -- * Resources
 
-    -- ** PagespeedOnlinePagespeedAPIRunPagespeed
+    -- ** pagespeedonline.pagespeedapi.runpagespeed
     , module Network.Google.Resource.PagespeedOnline.PagespeedAPI.RunPagespeed
 
     -- * Types

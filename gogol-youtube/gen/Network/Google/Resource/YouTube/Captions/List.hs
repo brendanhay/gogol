@@ -25,7 +25,7 @@
 -- and that the captions.download method provides the ability to retrieve a
 -- caption track.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCaptionsList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.captions.list@.
 module Network.Google.Resource.YouTube.Captions.List
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTube.Captions.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCaptionsList@ method which the
+-- | A resource alias for @youtube.captions.list@ method which the
 -- 'CaptionsList'' request conforms to.
 type CaptionsListResource =
      "captions" :>
@@ -86,8 +86,8 @@ data CaptionsList' = CaptionsList'
 --
 -- * 'cllId'
 captionsList'
-    :: Text -- ^ 'part'
-    -> Text -- ^ 'videoId'
+    :: Text -- ^ 'cllPart'
+    -> Text -- ^ 'cllVideoId'
     -> CaptionsList'
 captionsList' pCllPart_ pCllVideoId_ =
     CaptionsList'

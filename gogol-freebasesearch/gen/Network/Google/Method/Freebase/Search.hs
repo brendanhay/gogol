@@ -22,7 +22,7 @@
 --
 -- Search Freebase open data.
 --
--- /See:/ <https://developers.google.com/freebase/ Freebase Search Reference> for @FreebaseSearch@.
+-- /See:/ <https://developers.google.com/freebase/ Freebase Search Reference> for @freebase.search@.
 module Network.Google.Method.Freebase.Search
     (
     -- * REST Resource
@@ -61,7 +61,7 @@ module Network.Google.Method.Freebase.Search
 import           Network.Google.FreebaseSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FreebaseSearch@ method which the
+-- | A resource alias for @freebase.search@ method which the
 -- 'Search'' request conforms to.
 type SearchMethod =
      "search" :>

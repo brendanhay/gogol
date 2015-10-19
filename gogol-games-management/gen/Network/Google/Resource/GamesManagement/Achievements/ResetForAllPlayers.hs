@@ -24,7 +24,7 @@
 -- only available to user accounts for your developer console. Only draft
 -- achievements can be reset.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementAchievementsResetForAllPlayers@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.achievements.resetForAllPlayers@.
 module Network.Google.Resource.GamesManagement.Achievements.ResetForAllPlayers
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.GamesManagement.Achievements.ResetForAllPlayers
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementAchievementsResetForAllPlayers@ method which the
+-- | A resource alias for @gamesManagement.achievements.resetForAllPlayers@ method which the
 -- 'AchievementsResetForAllPlayers'' request conforms to.
 type AchievementsResetForAllPlayersResource =
      "achievements" :>
@@ -64,7 +64,7 @@ newtype AchievementsResetForAllPlayers' = AchievementsResetForAllPlayers'
 --
 -- * 'arfapAchievementId'
 achievementsResetForAllPlayers'
-    :: Text -- ^ 'achievementId'
+    :: Text -- ^ 'arfapAchievementId'
     -> AchievementsResetForAllPlayers'
 achievementsResetForAllPlayers' pArfapAchievementId_ =
     AchievementsResetForAllPlayers'

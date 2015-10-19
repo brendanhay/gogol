@@ -22,7 +22,7 @@
 --
 -- Retrieves or modifies multiple orders in a single request.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersCustombatch@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.custombatch@.
 module Network.Google.Resource.Content.Orders.Custombatch
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Content.Orders.Custombatch
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersCustombatch@ method which the
+-- | A resource alias for @content.orders.custombatch@ method which the
 -- 'OrdersCustombatch'' request conforms to.
 type OrdersCustombatchResource =
      "orders" :>
@@ -61,7 +61,7 @@ newtype OrdersCustombatch' = OrdersCustombatch'
 --
 -- * 'ordPayload'
 ordersCustombatch'
-    :: OrdersCustomBatchRequest -- ^ 'payload'
+    :: OrdersCustomBatchRequest -- ^ 'ordPayload'
     -> OrdersCustombatch'
 ordersCustombatch' pOrdPayload_ =
     OrdersCustombatch'

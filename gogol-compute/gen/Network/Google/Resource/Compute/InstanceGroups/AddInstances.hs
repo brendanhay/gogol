@@ -24,7 +24,7 @@
 -- instances in the instance group must be in the same network\/subnetwork.
 -- TODO: Change to comment to state \"if IG is load balanced.\"
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsAddInstances@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroups.addInstances@.
 module Network.Google.Resource.Compute.InstanceGroups.AddInstances
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.InstanceGroups.AddInstances
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupsAddInstances@ method which the
+-- | A resource alias for @compute.instanceGroups.addInstances@ method which the
 -- 'InstanceGroupsAddInstances'' request conforms to.
 type InstanceGroupsAddInstancesResource =
      Capture "project" Text :>
@@ -81,10 +81,10 @@ data InstanceGroupsAddInstances' = InstanceGroupsAddInstances'
 --
 -- * 'igaiInstanceGroup'
 instanceGroupsAddInstances'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> InstanceGroupsAddInstancesRequest -- ^ 'payload'
-    -> Text -- ^ 'instanceGroup'
+    :: Text -- ^ 'igaiProject'
+    -> Text -- ^ 'igaiZone'
+    -> InstanceGroupsAddInstancesRequest -- ^ 'igaiPayload'
+    -> Text -- ^ 'igaiInstanceGroup'
     -> InstanceGroupsAddInstances'
 instanceGroupsAddInstances' pIgaiProject_ pIgaiZone_ pIgaiPayload_ pIgaiInstanceGroup_ =
     InstanceGroupsAddInstances'

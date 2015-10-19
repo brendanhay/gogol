@@ -22,7 +22,7 @@
 --
 -- Deletes a module and all enclosed versions.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesDelete@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @appengine.apps.modules.delete@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Delete
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Delete
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppEngineAppsModulesDelete@ method which the
+-- | A resource alias for @appengine.apps.modules.delete@ method which the
 -- 'AppsModulesDelete'' request conforms to.
 type AppsModulesDeleteResource =
      "v1beta4" :>
@@ -102,8 +102,8 @@ data AppsModulesDelete' = AppsModulesDelete'
 --
 -- * 'amdCallback'
 appsModulesDelete'
-    :: Text -- ^ 'modulesId'
-    -> Text -- ^ 'appsId'
+    :: Text -- ^ 'amdModulesId'
+    -> Text -- ^ 'amdAppsId'
     -> AppsModulesDelete'
 appsModulesDelete' pAmdModulesId_ pAmdAppsId_ =
     AppsModulesDelete'

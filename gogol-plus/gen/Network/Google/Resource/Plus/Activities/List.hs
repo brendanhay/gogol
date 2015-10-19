@@ -23,7 +23,7 @@
 -- List all of the activities in the specified collection for a particular
 -- user.
 --
--- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusActivitiesList@.
+-- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.activities.list@.
 module Network.Google.Resource.Plus.Activities.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Plus.Activities.List
 import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusActivitiesList@ method which the
+-- | A resource alias for @plus.activities.list@ method which the
 -- 'ActivitiesList'' request conforms to.
 type ActivitiesListResource =
      "people" :>
@@ -77,8 +77,8 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'alMaxResults'
 activitiesList'
-    :: ActivitiesListCollection -- ^ 'collection'
-    -> Text -- ^ 'userId'
+    :: ActivitiesListCollection -- ^ 'alCollection'
+    -> Text -- ^ 'alUserId'
     -> ActivitiesList'
 activitiesList' pAlCollection_ pAlUserId_ =
     ActivitiesList'

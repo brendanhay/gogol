@@ -22,7 +22,7 @@
 --
 -- Return all layers readable by the current user.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineLayersList@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.layers.list@.
 module Network.Google.Resource.MapsEngine.Layers.List
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.MapsEngine.Layers.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersList@ method which the
+-- | A resource alias for @mapsengine.layers.list@ method which the
 -- 'LayersList'' request conforms to.
 type LayersListResource =
      "layers" :>

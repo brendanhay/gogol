@@ -24,7 +24,7 @@
 -- \`datasetId\` set - all other fields are optional. Note that the \`id\`
 -- field will be ignored, as this is assigned by the server.
 --
--- /See:/ < Genomics API Reference> for @GenomicsVariantsetsCreate@.
+-- /See:/ < Genomics API Reference> for @genomics.variantsets.create@.
 module Network.Google.Resource.Genomics.Variantsets.Create
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Genomics.Variantsets.Create
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsVariantsetsCreate@ method which the
+-- | A resource alias for @genomics.variantsets.create@ method which the
 -- 'VariantsetsCreate'' request conforms to.
 type VariantsetsCreateResource =
      "v1" :>
@@ -99,7 +99,7 @@ data VariantsetsCreate' = VariantsetsCreate'
 --
 -- * 'vcCallback'
 variantsetsCreate'
-    :: VariantSet -- ^ 'payload'
+    :: VariantSet -- ^ 'vcPayload'
     -> VariantsetsCreate'
 variantsetsCreate' pVcPayload_ =
     VariantsetsCreate'

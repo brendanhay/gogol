@@ -22,7 +22,7 @@
 --
 -- Gets one campaign landing page by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingLandingPagesGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.landingPages.get@.
 module Network.Google.Resource.DFAReporting.LandingPages.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingLandingPagesGet@ method which the
+-- | A resource alias for @dfareporting.landingPages.get@ method which the
 -- 'LandingPagesGet'' request conforms to.
 type LandingPagesGetResource =
      "userprofiles" :>
@@ -71,9 +71,9 @@ data LandingPagesGet' = LandingPagesGet'
 --
 -- * 'lpgId'
 landingPagesGet'
-    :: Int64 -- ^ 'campaignId'
-    -> Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'lpgCampaignId'
+    -> Int64 -- ^ 'lpgProFileId'
+    -> Int64 -- ^ 'lpgId'
     -> LandingPagesGet'
 landingPagesGet' pLpgCampaignId_ pLpgProFileId_ pLpgId_ =
     LandingPagesGet'

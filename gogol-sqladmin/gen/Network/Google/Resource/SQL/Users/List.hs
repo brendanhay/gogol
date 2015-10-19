@@ -22,7 +22,7 @@
 --
 -- Lists users in the specified Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLUsersList@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.users.list@.
 module Network.Google.Resource.SQL.Users.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.SQL.Users.List
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLUsersList@ method which the
+-- | A resource alias for @sql.users.list@ method which the
 -- 'UsersList'' request conforms to.
 type UsersListResource =
      "projects" :>
@@ -67,8 +67,8 @@ data UsersList' = UsersList'
 --
 -- * 'ulInstance'
 usersList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'ulProject'
+    -> Text -- ^ 'ulInstance'
     -> UsersList'
 usersList' pUlProject_ pUlInstance_ =
     UsersList'

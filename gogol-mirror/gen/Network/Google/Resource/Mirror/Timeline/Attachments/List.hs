@@ -22,7 +22,7 @@
 --
 -- Returns a list of attachments for a timeline item.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineAttachmentsList@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.timeline.attachments.list@.
 module Network.Google.Resource.Mirror.Timeline.Attachments.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Mirror.Timeline.Attachments.List
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorTimelineAttachmentsList@ method which the
+-- | A resource alias for @mirror.timeline.attachments.list@ method which the
 -- 'TimelineAttachmentsList'' request conforms to.
 type TimelineAttachmentsListResource =
      "timeline" :>
@@ -61,7 +61,7 @@ newtype TimelineAttachmentsList' = TimelineAttachmentsList'
 --
 -- * 'talItemId'
 timelineAttachmentsList'
-    :: Text -- ^ 'itemId'
+    :: Text -- ^ 'talItemId'
     -> TimelineAttachmentsList'
 timelineAttachmentsList' pTalItemId_ =
     TimelineAttachmentsList'

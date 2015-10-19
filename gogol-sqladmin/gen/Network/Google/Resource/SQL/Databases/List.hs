@@ -22,7 +22,7 @@
 --
 -- Lists databases in the specified Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLDatabasesList@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.databases.list@.
 module Network.Google.Resource.SQL.Databases.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.SQL.Databases.List
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLDatabasesList@ method which the
+-- | A resource alias for @sql.databases.list@ method which the
 -- 'DatabasesList'' request conforms to.
 type DatabasesListResource =
      "projects" :>
@@ -67,8 +67,8 @@ data DatabasesList' = DatabasesList'
 --
 -- * 'dlInstance'
 databasesList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'dlProject'
+    -> Text -- ^ 'dlInstance'
     -> DatabasesList'
 databasesList' pDlProject_ pDlInstance_ =
     DatabasesList'

@@ -22,7 +22,7 @@
 --
 -- Retrieves jobs created or modified since the given timestamp.
 --
--- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateJobsList@.
+-- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @coordinate.jobs.list@.
 module Network.Google.Resource.Coordinate.Jobs.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Coordinate.Jobs.List
 import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CoordinateJobsList@ method which the
+-- | A resource alias for @coordinate.jobs.list@ method which the
 -- 'JobsList'' request conforms to.
 type JobsListResource =
      "teams" :>
@@ -81,7 +81,7 @@ data JobsList' = JobsList'
 --
 -- * 'jlMaxResults'
 jobsList'
-    :: Text -- ^ 'teamId'
+    :: Text -- ^ 'jlTeamId'
     -> JobsList'
 jobsList' pJlTeamId_ =
     JobsList'

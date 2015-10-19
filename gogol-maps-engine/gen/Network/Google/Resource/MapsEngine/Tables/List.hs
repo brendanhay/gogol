@@ -22,7 +22,7 @@
 --
 -- Return all tables readable by the current user.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesList@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.tables.list@.
 module Network.Google.Resource.MapsEngine.Tables.List
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.MapsEngine.Tables.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesList@ method which the
+-- | A resource alias for @mapsengine.tables.list@ method which the
 -- 'TablesList'' request conforms to.
 type TablesListResource =
      "tables" :>

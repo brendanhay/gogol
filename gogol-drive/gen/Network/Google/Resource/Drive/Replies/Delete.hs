@@ -22,7 +22,7 @@
 --
 -- Deletes a reply.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRepliesDelete@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.replies.delete@.
 module Network.Google.Resource.Drive.Replies.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Drive.Replies.Delete
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRepliesDelete@ method which the
+-- | A resource alias for @drive.replies.delete@ method which the
 -- 'RepliesDelete'' request conforms to.
 type RepliesDeleteResource =
      "files" :>
@@ -71,9 +71,9 @@ data RepliesDelete' = RepliesDelete'
 --
 -- * 'rddCommentId'
 repliesDelete'
-    :: Text -- ^ 'replyId'
-    -> Text -- ^ 'fileId'
-    -> Text -- ^ 'commentId'
+    :: Text -- ^ 'rddReplyId'
+    -> Text -- ^ 'rddFileId'
+    -> Text -- ^ 'rddCommentId'
     -> RepliesDelete'
 repliesDelete' pRddReplyId_ pRddFileId_ pRddCommentId_ =
     RepliesDelete'

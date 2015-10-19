@@ -22,7 +22,7 @@
 --
 -- Create a new activity for the authenticated user.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsActivitiesInsert@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.activities.insert@.
 module Network.Google.Resource.PlusDomains.Activities.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.PlusDomains.Activities.Insert
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsActivitiesInsert@ method which the
+-- | A resource alias for @plusDomains.activities.insert@ method which the
 -- 'ActivitiesInsert'' request conforms to.
 type ActivitiesInsertResource =
      "people" :>
@@ -70,8 +70,8 @@ data ActivitiesInsert' = ActivitiesInsert'
 --
 -- * 'aiPreview'
 activitiesInsert'
-    :: Activity -- ^ 'payload'
-    -> Text -- ^ 'userId'
+    :: Activity -- ^ 'aiPayload'
+    -> Text -- ^ 'aiUserId'
     -> ActivitiesInsert'
 activitiesInsert' pAiPayload_ pAiUserId_ =
     ActivitiesInsert'

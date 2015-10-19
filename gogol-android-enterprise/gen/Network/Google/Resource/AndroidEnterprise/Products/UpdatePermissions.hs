@@ -23,7 +23,7 @@
 -- Updates the set of Android app permissions for this app that have been
 -- accepted by the enterprise.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseProductsUpdatePermissions@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.updatePermissions@.
 module Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseProductsUpdatePermissions@ method which the
+-- | A resource alias for @androidenterprise.products.updatePermissions@ method which the
 -- 'ProductsUpdatePermissions'' request conforms to.
 type ProductsUpdatePermissionsResource =
      "enterprises" :>
@@ -74,9 +74,9 @@ data ProductsUpdatePermissions' = ProductsUpdatePermissions'
 --
 -- * 'pupProductId'
 productsUpdatePermissions'
-    :: Text -- ^ 'enterpriseId'
-    -> ProductPermissions -- ^ 'payload'
-    -> Text -- ^ 'productId'
+    :: Text -- ^ 'pupEnterpriseId'
+    -> ProductPermissions -- ^ 'pupPayload'
+    -> Text -- ^ 'pupProductId'
     -> ProductsUpdatePermissions'
 productsUpdatePermissions' pPupEnterpriseId_ pPupPayload_ pPupProductId_ =
     ProductsUpdatePermissions'

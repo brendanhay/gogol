@@ -22,7 +22,7 @@
 --
 -- Gets one size by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSizesGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.sizes.get@.
 module Network.Google.Resource.DFAReporting.Sizes.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Sizes.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSizesGet@ method which the
+-- | A resource alias for @dfareporting.sizes.get@ method which the
 -- 'SizesGet'' request conforms to.
 type SizesGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data SizesGet' = SizesGet'
 --
 -- * 'sizId'
 sizesGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'sizProFileId'
+    -> Int64 -- ^ 'sizId'
     -> SizesGet'
 sizesGet' pSizProFileId_ pSizId_ =
     SizesGet'

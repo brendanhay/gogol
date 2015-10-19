@@ -31,7 +31,7 @@
 -- reads will be stripped of positional information (reference name and
 -- position)
 --
--- /See:/ < Genomics API Reference> for @GenomicsReadgroupsetsImport@.
+-- /See:/ < Genomics API Reference> for @genomics.readgroupsets.import@.
 module Network.Google.Resource.Genomics.Readgroupsets.Import
     (
     -- * REST Resource
@@ -55,7 +55,7 @@ module Network.Google.Resource.Genomics.Readgroupsets.Import
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReadgroupsetsImport@ method which the
+-- | A resource alias for @genomics.readgroupsets.import@ method which the
 -- 'ReadgroupsetsImport'' request conforms to.
 type ReadgroupsetsImportResource =
      "v1" :>
@@ -114,7 +114,7 @@ data ReadgroupsetsImport' = ReadgroupsetsImport'
 --
 -- * 'riCallback'
 readgroupsetsImport'
-    :: ImportReadGroupSetsRequest -- ^ 'payload'
+    :: ImportReadGroupSetsRequest -- ^ 'riPayload'
     -> ReadgroupsetsImport'
 readgroupsetsImport' pRiPayload_ =
     ReadgroupsetsImport'

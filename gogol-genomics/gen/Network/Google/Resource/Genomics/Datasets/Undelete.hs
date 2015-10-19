@@ -24,7 +24,7 @@
 -- API. This operation is only possible for a week after the deletion
 -- occurred.
 --
--- /See:/ < Genomics API Reference> for @GenomicsDatasetsUndelete@.
+-- /See:/ < Genomics API Reference> for @genomics.datasets.undelete@.
 module Network.Google.Resource.Genomics.Datasets.Undelete
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Genomics.Datasets.Undelete
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsDatasetsUndelete@ method which the
+-- | A resource alias for @genomics.datasets.undelete@ method which the
 -- 'DatasetsUndelete'' request conforms to.
 type DatasetsUndeleteResource =
      "v1" :>
@@ -105,8 +105,8 @@ data DatasetsUndelete' = DatasetsUndelete'
 --
 -- * 'duCallback'
 datasetsUndelete'
-    :: UndeleteDatasetRequest -- ^ 'payload'
-    -> Text -- ^ 'datasetId'
+    :: UndeleteDatasetRequest -- ^ 'duPayload'
+    -> Text -- ^ 'duDatasetId'
     -> DatasetsUndelete'
 datasetsUndelete' pDuPayload_ pDuDatasetId_ =
     DatasetsUndelete'

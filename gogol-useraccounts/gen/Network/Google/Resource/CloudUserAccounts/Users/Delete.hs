@@ -22,7 +22,7 @@
 --
 -- Deletes the specified User resource.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsUsersDelete@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.users.delete@.
 module Network.Google.Resource.CloudUserAccounts.Users.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.CloudUserAccounts.Users.Delete
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsUsersDelete@ method which the
+-- | A resource alias for @clouduseraccounts.users.delete@ method which the
 -- 'UsersDelete'' request conforms to.
 type UsersDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data UsersDelete' = UsersDelete'
 --
 -- * 'udUser'
 usersDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'user'
+    :: Text -- ^ 'udProject'
+    -> Text -- ^ 'udUser'
     -> UsersDelete'
 usersDelete' pUdProject_ pUdUser_ =
     UsersDelete'

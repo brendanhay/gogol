@@ -22,7 +22,7 @@
 --
 -- Gets one country by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCountriesGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.countries.get@.
 module Network.Google.Resource.DFAReporting.Countries.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Countries.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCountriesGet@ method which the
+-- | A resource alias for @dfareporting.countries.get@ method which the
 -- 'CountriesGet'' request conforms to.
 type CountriesGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data CountriesGet' = CountriesGet'
 --
 -- * 'cgDartId'
 countriesGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'dartId'
+    :: Int64 -- ^ 'cgProFileId'
+    -> Int64 -- ^ 'cgDartId'
     -> CountriesGet'
 countriesGet' pCgProFileId_ pCgDartId_ =
     CountriesGet'

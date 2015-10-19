@@ -22,7 +22,7 @@
 --
 -- Returns the specified TargetInstance resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetInstancesGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetInstances.get@.
 module Network.Google.Resource.Compute.TargetInstances.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.TargetInstances.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetInstancesGet@ method which the
+-- | A resource alias for @compute.targetInstances.get@ method which the
 -- 'TargetInstancesGet'' request conforms to.
 type TargetInstancesGetResource =
      Capture "project" Text :>
@@ -71,9 +71,9 @@ data TargetInstancesGet' = TargetInstancesGet'
 --
 -- * 'tigZone'
 targetInstancesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'targetInstance'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'tigProject'
+    -> Text -- ^ 'tigTargetInstance'
+    -> Text -- ^ 'tigZone'
     -> TargetInstancesGet'
 targetInstancesGet' pTigProject_ pTigTargetInstance_ pTigZone_ =
     TargetInstancesGet'

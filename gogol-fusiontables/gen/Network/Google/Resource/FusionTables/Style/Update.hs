@@ -22,7 +22,7 @@
 --
 -- Updates an existing style.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesStyleUpdate@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.style.update@.
 module Network.Google.Resource.FusionTables.Style.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.FusionTables.Style.Update
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesStyleUpdate@ method which the
+-- | A resource alias for @fusiontables.style.update@ method which the
 -- 'StyleUpdate'' request conforms to.
 type StyleUpdateResource =
      "tables" :>
@@ -71,9 +71,9 @@ data StyleUpdate' = StyleUpdate'
 --
 -- * 'suTableId'
 styleUpdate'
-    :: StyleSetting -- ^ 'payload'
-    -> Int32 -- ^ 'styleId'
-    -> Text -- ^ 'tableId'
+    :: StyleSetting -- ^ 'suPayload'
+    -> Int32 -- ^ 'suStyleId'
+    -> Text -- ^ 'suTableId'
     -> StyleUpdate'
 styleUpdate' pSuPayload_ pSuStyleId_ pSuTableId_ =
     StyleUpdate'

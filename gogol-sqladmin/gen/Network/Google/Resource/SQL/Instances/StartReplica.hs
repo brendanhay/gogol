@@ -22,7 +22,7 @@
 --
 -- Starts the replication in the read replica instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesStartReplica@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.startReplica@.
 module Network.Google.Resource.SQL.Instances.StartReplica
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.SQL.Instances.StartReplica
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesStartReplica@ method which the
+-- | A resource alias for @sql.instances.startReplica@ method which the
 -- 'InstancesStartReplica'' request conforms to.
 type InstancesStartReplicaResource =
      "projects" :>
@@ -66,8 +66,8 @@ data InstancesStartReplica' = InstancesStartReplica'
 --
 -- * 'iInstance'
 instancesStartReplica'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'iProject'
+    -> Text -- ^ 'iInstance'
     -> InstancesStartReplica'
 instancesStartReplica' pIProject_ pIInstance_ =
     InstancesStartReplica'

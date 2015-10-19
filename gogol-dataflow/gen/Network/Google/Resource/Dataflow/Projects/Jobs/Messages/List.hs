@@ -22,7 +22,7 @@
 --
 -- Request the job status.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsMessagesList@.
+-- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.jobs.messages.list@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
 import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataflowProjectsJobsMessagesList@ method which the
+-- | A resource alias for @dataflow.projects.jobs.messages.list@ method which the
 -- 'ProjectsJobsMessagesList'' request conforms to.
 type ProjectsJobsMessagesListResource =
      "v1b3" :>
@@ -128,8 +128,8 @@ data ProjectsJobsMessagesList' = ProjectsJobsMessagesList'
 --
 -- * 'pjmlCallback'
 projectsJobsMessagesList'
-    :: Text -- ^ 'jobId'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'pjmlJobId'
+    -> Text -- ^ 'pjmlProjectId'
     -> ProjectsJobsMessagesList'
 projectsJobsMessagesList' pPjmlJobId_ pPjmlProjectId_ =
     ProjectsJobsMessagesList'

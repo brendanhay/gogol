@@ -22,7 +22,7 @@
 --
 -- Report abuse for a video.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosReportAbuse@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.videos.reportAbuse@.
 module Network.Google.Resource.YouTube.Videos.ReportAbuse
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTube.Videos.ReportAbuse
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeVideosReportAbuse@ method which the
+-- | A resource alias for @youtube.videos.reportAbuse@ method which the
 -- 'VideosReportAbuse'' request conforms to.
 type VideosReportAbuseResource =
      "videos" :>
@@ -65,7 +65,7 @@ data VideosReportAbuse' = VideosReportAbuse'
 --
 -- * 'vraOnBehalfOfContentOwner'
 videosReportAbuse'
-    :: VideoAbuseReport -- ^ 'payload'
+    :: VideoAbuseReport -- ^ 'vraPayload'
     -> VideosReportAbuse'
 videosReportAbuse' pVraPayload_ =
     VideosReportAbuse'

@@ -22,7 +22,7 @@
 --
 -- Gets a single timeline item by ID.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineGet@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.timeline.get@.
 module Network.Google.Resource.Mirror.Timeline.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Mirror.Timeline.Get
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorTimelineGet@ method which the
+-- | A resource alias for @mirror.timeline.get@ method which the
 -- 'TimelineGet'' request conforms to.
 type TimelineGetResource =
      "timeline" :>
@@ -59,7 +59,7 @@ newtype TimelineGet' = TimelineGet'
 --
 -- * 'tgId'
 timelineGet'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'tgId'
     -> TimelineGet'
 timelineGet' pTgId_ =
     TimelineGet'

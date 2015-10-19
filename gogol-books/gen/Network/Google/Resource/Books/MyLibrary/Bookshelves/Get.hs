@@ -23,7 +23,7 @@
 -- Retrieves metadata for a specific bookshelf belonging to the
 -- authenticated user.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryBookshelvesGet@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.bookshelves.get@.
 module Network.Google.Resource.Books.MyLibrary.Bookshelves.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.Get
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryBookshelvesGet@ method which the
+-- | A resource alias for @books.mylibrary.bookshelves.get@ method which the
 -- 'MyLibraryBookshelvesGet'' request conforms to.
 type MyLibraryBookshelvesGetResource =
      "mylibrary" :>
@@ -67,7 +67,7 @@ data MyLibraryBookshelvesGet' = MyLibraryBookshelvesGet'
 --
 -- * 'mlbgSource'
 myLibraryBookshelvesGet'
-    :: Text -- ^ 'shelf'
+    :: Text -- ^ 'mlbgShelf'
     -> MyLibraryBookshelvesGet'
 myLibraryBookshelvesGet' pMlbgShelf_ =
     MyLibraryBookshelvesGet'

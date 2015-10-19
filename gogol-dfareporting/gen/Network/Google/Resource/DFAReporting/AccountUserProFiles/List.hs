@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of account user profiles, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAccountUserProFilesList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accountUserProfiles.list@.
 module Network.Google.Resource.DFAReporting.AccountUserProFiles.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.DFAReporting.AccountUserProFiles.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAccountUserProFilesList@ method which the
+-- | A resource alias for @dfareporting.accountUserProfiles.list@ method which the
 -- 'AccountUserProFilesList'' request conforms to.
 type AccountUserProFilesListResource =
      "userprofiles" :>
@@ -110,7 +110,7 @@ data AccountUserProFilesList' = AccountUserProFilesList'
 --
 -- * 'aupflMaxResults'
 accountUserProFilesList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'aupflProFileId'
     -> AccountUserProFilesList'
 accountUserProFilesList' pAupflProFileId_ =
     AccountUserProFilesList'

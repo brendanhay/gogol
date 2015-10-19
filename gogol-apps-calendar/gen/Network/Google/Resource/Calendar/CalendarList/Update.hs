@@ -22,7 +22,7 @@
 --
 -- Updates an entry on the user\'s calendar list.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarListUpdate@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendarList.update@.
 module Network.Google.Resource.Calendar.CalendarList.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Calendar.CalendarList.Update
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarListUpdate@ method which the
+-- | A resource alias for @calendar.calendarList.update@ method which the
 -- 'CalendarListUpdate'' request conforms to.
 type CalendarListUpdateResource =
      "users" :>
@@ -72,8 +72,8 @@ data CalendarListUpdate' = CalendarListUpdate'
 --
 -- * 'cluColorRgbFormat'
 calendarListUpdate'
-    :: Text -- ^ 'calendarId'
-    -> CalendarListEntry -- ^ 'payload'
+    :: Text -- ^ 'cluCalendarId'
+    -> CalendarListEntry -- ^ 'cluPayload'
     -> CalendarListUpdate'
 calendarListUpdate' pCluCalendarId_ pCluPayload_ =
     CalendarListUpdate'

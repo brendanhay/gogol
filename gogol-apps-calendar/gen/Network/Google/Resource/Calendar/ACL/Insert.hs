@@ -22,7 +22,7 @@
 --
 -- Creates an access control rule.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarACLInsert@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.acl.insert@.
 module Network.Google.Resource.Calendar.ACL.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Calendar.ACL.Insert
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarACLInsert@ method which the
+-- | A resource alias for @calendar.acl.insert@ method which the
 -- 'ACLInsert'' request conforms to.
 type ACLInsertResource =
      "calendars" :>
@@ -65,8 +65,8 @@ data ACLInsert' = ACLInsert'
 --
 -- * 'aiPayload'
 aclInsert'
-    :: Text -- ^ 'calendarId'
-    -> ACLRule -- ^ 'payload'
+    :: Text -- ^ 'aiCalendarId'
+    -> ACLRule -- ^ 'aiPayload'
     -> ACLInsert'
 aclInsert' pAiCalendarId_ pAiPayload_ =
     ACLInsert'

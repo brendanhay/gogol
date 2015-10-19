@@ -22,7 +22,7 @@
 --
 -- Updates a GTM Trigger.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersTriggersUpdate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.triggers.update@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Update
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersTriggersUpdate@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.triggers.update@ method which the
 -- 'AccountsContainersTriggersUpdate'' request conforms to.
 type AccountsContainersTriggersUpdateResource =
      "accounts" :>
@@ -81,10 +81,10 @@ data AccountsContainersTriggersUpdate' = AccountsContainersTriggersUpdate'
 --
 -- * 'actuAccountId'
 accountsContainersTriggersUpdate'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'triggerId'
-    -> Trigger -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'actuContainerId'
+    -> Text -- ^ 'actuTriggerId'
+    -> Trigger -- ^ 'actuPayload'
+    -> Text -- ^ 'actuAccountId'
     -> AccountsContainersTriggersUpdate'
 accountsContainersTriggersUpdate' pActuContainerId_ pActuTriggerId_ pActuPayload_ pActuAccountId_ =
     AccountsContainersTriggersUpdate'

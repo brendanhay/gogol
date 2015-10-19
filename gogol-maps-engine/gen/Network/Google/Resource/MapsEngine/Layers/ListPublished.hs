@@ -22,7 +22,7 @@
 --
 -- Return all published layers readable by the current user.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineLayersListPublished@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.layers.listPublished@.
 module Network.Google.Resource.MapsEngine.Layers.ListPublished
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.MapsEngine.Layers.ListPublished
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersListPublished@ method which the
+-- | A resource alias for @mapsengine.layers.listPublished@ method which the
 -- 'LayersListPublished'' request conforms to.
 type LayersListPublishedResource =
      "layers" :>

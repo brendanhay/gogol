@@ -23,7 +23,7 @@
 -- Update the entire content of the UrlMap resource. This method supports
 -- patch semantics.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeURLMapsPatch@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.urlMaps.patch@.
 module Network.Google.Resource.Compute.URLMaps.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.URLMaps.Patch
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeURLMapsPatch@ method which the
+-- | A resource alias for @compute.urlMaps.patch@ method which the
 -- 'URLMapsPatch'' request conforms to.
 type URLMapsPatchResource =
      Capture "project" Text :>
@@ -72,9 +72,9 @@ data URLMapsPatch' = URLMapsPatch'
 --
 -- * 'umpPayload'
 urlMapsPatch'
-    :: Text -- ^ 'urlMap'
-    -> Text -- ^ 'project'
-    -> URLMap -- ^ 'payload'
+    :: Text -- ^ 'umpURLMap'
+    -> Text -- ^ 'umpProject'
+    -> URLMap -- ^ 'umpPayload'
     -> URLMapsPatch'
 urlMapsPatch' pUmpURLMap_ pUmpProject_ pUmpPayload_ =
     URLMapsPatch'

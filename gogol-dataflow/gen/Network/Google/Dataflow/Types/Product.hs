@@ -33,7 +33,7 @@ newtype JobExecutionInfoStages = JobExecutionInfoStages
 --
 -- * 'jeisAddtional'
 jobExecutionInfoStages
-    :: HashMap Text JobExecutionStageInfo -- ^ 'addtional'
+    :: HashMap Text JobExecutionStageInfo -- ^ 'jeisAddtional'
     -> JobExecutionInfoStages
 jobExecutionInfoStages pJeisAddtional_ =
     JobExecutionInfoStages
@@ -592,7 +592,7 @@ newtype WorkerPoolMetadata = WorkerPoolMetadata
 --
 -- * 'wpmAddtional'
 workerPoolMetadata
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'wpmAddtional'
     -> WorkerPoolMetadata
 workerPoolMetadata pWpmAddtional_ =
     WorkerPoolMetadata
@@ -840,7 +840,7 @@ newtype EnvironmentVersion = EnvironmentVersion
 --
 -- * 'evAddtional'
 environmentVersion
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'evAddtional'
     -> EnvironmentVersion
 environmentVersion pEvAddtional_ =
     EnvironmentVersion
@@ -1023,7 +1023,7 @@ newtype EnvironmentUserAgent = EnvironmentUserAgent
 --
 -- * 'euaAddtional'
 environmentUserAgent
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'euaAddtional'
     -> EnvironmentUserAgent
 environmentUserAgent pEuaAddtional_ =
     EnvironmentUserAgent
@@ -1502,7 +1502,7 @@ newtype MetricStructuredNameContext = MetricStructuredNameContext
 --
 -- * 'msncAddtional'
 metricStructuredNameContext
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'msncAddtional'
     -> MetricStructuredNameContext
 metricStructuredNameContext pMsncAddtional_ =
     MetricStructuredNameContext
@@ -1910,7 +1910,7 @@ newtype JobTransformNameMApping = JobTransformNameMApping
 --
 -- * 'jtnmaAddtional'
 jobTransformNameMApping
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'jtnmaAddtional'
     -> JobTransformNameMApping
 jobTransformNameMApping pJtnmaAddtional_ =
     JobTransformNameMApping
@@ -1944,7 +1944,7 @@ newtype SourceSpec = SourceSpec
 --
 -- * 'ssAddtional'
 sourceSpec
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'ssAddtional'
     -> SourceSpec
 sourceSpec pSsAddtional_ =
     SourceSpec
@@ -2043,7 +2043,7 @@ newtype EnvironmentInternalExperiments = EnvironmentInternalExperiments
 --
 -- * 'eieAddtional'
 environmentInternalExperiments
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'eieAddtional'
     -> EnvironmentInternalExperiments
 environmentInternalExperiments pEieAddtional_ =
     EnvironmentInternalExperiments
@@ -2350,7 +2350,7 @@ newtype EnvironmentSdkPipelineOptions = EnvironmentSdkPipelineOptions
 --
 -- * 'espoAddtional'
 environmentSdkPipelineOptions
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'espoAddtional'
     -> EnvironmentSdkPipelineOptions
 environmentSdkPipelineOptions pEspoAddtional_ =
     EnvironmentSdkPipelineOptions
@@ -2528,7 +2528,7 @@ newtype TopologyConfigUserStageToComputationNameMap = TopologyConfigUserStageToC
 --
 -- * 'tcustcnmAddtional'
 topologyConfigUserStageToComputationNameMap
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'tcustcnmAddtional'
     -> TopologyConfigUserStageToComputationNameMap
 topologyConfigUserStageToComputationNameMap pTcustcnmAddtional_ =
     TopologyConfigUserStageToComputationNameMap
@@ -2612,7 +2612,7 @@ newtype StatusDetailsItem = StatusDetailsItem
 --
 -- * 'sdiAddtional'
 statusDetailsItem
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
     StatusDetailsItem
@@ -2646,7 +2646,7 @@ newtype StepProperties = StepProperties
 --
 -- * 'spAddtional'
 stepProperties
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'spAddtional'
     -> StepProperties
 stepProperties pSpAddtional_ =
     StepProperties
@@ -2854,7 +2854,7 @@ newtype WorkItemServiceStateHarnessData = WorkItemServiceStateHarnessData
 --
 -- * 'wisshdAddtional'
 workItemServiceStateHarnessData
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'wisshdAddtional'
     -> WorkItemServiceStateHarnessData
 workItemServiceStateHarnessData pWisshdAddtional_ =
     WorkItemServiceStateHarnessData
@@ -3117,7 +3117,7 @@ newtype PartialGroupByKeyInstructionInputElementCodec = PartialGroupByKeyInstruc
 --
 -- * 'pgbkiiecAddtional'
 partialGroupByKeyInstructionInputElementCodec
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'pgbkiiecAddtional'
     -> PartialGroupByKeyInstructionInputElementCodec
 partialGroupByKeyInstructionInputElementCodec pPgbkiiecAddtional_ =
     PartialGroupByKeyInstructionInputElementCodec
@@ -3258,7 +3258,7 @@ newtype SinkCodec = SinkCodec
 --
 -- * 'scAddtional'
 sinkCodec
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'scAddtional'
     -> SinkCodec
 sinkCodec pScAddtional_ =
     SinkCodec
@@ -3291,7 +3291,7 @@ newtype ParDoInstructionUserFn = ParDoInstructionUserFn
 --
 -- * 'pdiufAddtional'
 parDoInstructionUserFn
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'pdiufAddtional'
     -> ParDoInstructionUserFn
 parDoInstructionUserFn pPdiufAddtional_ =
     ParDoInstructionUserFn
@@ -3326,7 +3326,7 @@ newtype InstructionOutputCodec = InstructionOutputCodec
 --
 -- * 'iocAddtional'
 instructionOutputCodec
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'iocAddtional'
     -> InstructionOutputCodec
 instructionOutputCodec pIocAddtional_ =
     InstructionOutputCodec
@@ -3438,7 +3438,7 @@ newtype WorkerPoolPoolArgs = WorkerPoolPoolArgs
 --
 -- * 'wppaAddtional'
 workerPoolPoolArgs
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'wppaAddtional'
     -> WorkerPoolPoolArgs
 workerPoolPoolArgs pWppaAddtional_ =
     WorkerPoolPoolArgs
@@ -3733,7 +3733,7 @@ newtype SeqMapTaskUserFn = SeqMapTaskUserFn
 --
 -- * 'smtufAddtional'
 seqMapTaskUserFn
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'smtufAddtional'
     -> SeqMapTaskUserFn
 seqMapTaskUserFn pSmtufAddtional_ =
     SeqMapTaskUserFn
@@ -3767,7 +3767,7 @@ newtype PartialGroupByKeyInstructionValueCombiningFn = PartialGroupByKeyInstruct
 --
 -- * 'pgbkivcfAddtional'
 partialGroupByKeyInstructionValueCombiningFn
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'pgbkivcfAddtional'
     -> PartialGroupByKeyInstructionValueCombiningFn
 partialGroupByKeyInstructionValueCombiningFn pPgbkivcfAddtional_ =
     PartialGroupByKeyInstructionValueCombiningFn
@@ -4059,7 +4059,7 @@ newtype SinkSpec = SinkSpec
 --
 -- * 'sAddtional'
 sinkSpec
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'sAddtional'
     -> SinkSpec
 sinkSpec pSAddtional_ =
     SinkSpec
@@ -5200,7 +5200,7 @@ newtype SourceBaseSpecsItem = SourceBaseSpecsItem
 --
 -- * 'sbsiAddtional'
 sourceBaseSpecsItem
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'sbsiAddtional'
     -> SourceBaseSpecsItem
 sourceBaseSpecsItem pSbsiAddtional_ =
     SourceBaseSpecsItem
@@ -5345,7 +5345,7 @@ newtype SideInputInfoKind = SideInputInfoKind
 --
 -- * 'siikAddtional'
 sideInputInfoKind
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'siikAddtional'
     -> SideInputInfoKind
 sideInputInfoKind pSiikAddtional_ =
     SideInputInfoKind
@@ -5522,7 +5522,7 @@ newtype SourceCodec = SourceCodec
 --
 -- * 'souAddtional'
 sourceCodec
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'souAddtional'
     -> SourceCodec
 sourceCodec pSouAddtional_ =
     SourceCodec

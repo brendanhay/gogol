@@ -27,49 +27,49 @@ module Network.Google.ResourceManager
 
     -- * Resources
 
-    -- ** CloudResourceManagerOrganizationsGet
+    -- ** cloudresourcemanager.organizations.get
     , module Network.Google.Resource.CloudResourceManager.Organizations.Get
 
-    -- ** CloudResourceManagerOrganizationsGetIAMPolicy
+    -- ** cloudresourcemanager.organizations.getIamPolicy
     , module Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
 
-    -- ** CloudResourceManagerOrganizationsList
+    -- ** cloudresourcemanager.organizations.list
     , module Network.Google.Resource.CloudResourceManager.Organizations.List
 
-    -- ** CloudResourceManagerOrganizationsSetIAMPolicy
+    -- ** cloudresourcemanager.organizations.setIamPolicy
     , module Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
 
-    -- ** CloudResourceManagerOrganizationsTestIAMPermissions
+    -- ** cloudresourcemanager.organizations.testIamPermissions
     , module Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermissions
 
-    -- ** CloudResourceManagerOrganizationsUpdate
+    -- ** cloudresourcemanager.organizations.update
     , module Network.Google.Resource.CloudResourceManager.Organizations.Update
 
-    -- ** CloudResourceManagerProjectsCreate
+    -- ** cloudresourcemanager.projects.create
     , module Network.Google.Resource.CloudResourceManager.Projects.Create
 
-    -- ** CloudResourceManagerProjectsDelete
+    -- ** cloudresourcemanager.projects.delete
     , module Network.Google.Resource.CloudResourceManager.Projects.Delete
 
-    -- ** CloudResourceManagerProjectsGet
+    -- ** cloudresourcemanager.projects.get
     , module Network.Google.Resource.CloudResourceManager.Projects.Get
 
-    -- ** CloudResourceManagerProjectsGetIAMPolicy
+    -- ** cloudresourcemanager.projects.getIamPolicy
     , module Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
 
-    -- ** CloudResourceManagerProjectsList
+    -- ** cloudresourcemanager.projects.list
     , module Network.Google.Resource.CloudResourceManager.Projects.List
 
-    -- ** CloudResourceManagerProjectsSetIAMPolicy
+    -- ** cloudresourcemanager.projects.setIamPolicy
     , module Network.Google.Resource.CloudResourceManager.Projects.SetIAMPolicy
 
-    -- ** CloudResourceManagerProjectsTestIAMPermissions
+    -- ** cloudresourcemanager.projects.testIamPermissions
     , module Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
 
-    -- ** CloudResourceManagerProjectsUndelete
+    -- ** cloudresourcemanager.projects.undelete
     , module Network.Google.Resource.CloudResourceManager.Projects.Undelete
 
-    -- ** CloudResourceManagerProjectsUpdate
+    -- ** cloudresourcemanager.projects.update
     , module Network.Google.Resource.CloudResourceManager.Projects.Update
 
     -- * Types

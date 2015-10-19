@@ -27,7 +27,7 @@ module Network.Google.QPXExpress
 
     -- * Resources
 
-    -- ** QpxExpressTripsSearch
+    -- ** qpxExpress.trips.search
     , module Network.Google.Resource.QPXExpress.Trips.Search
 
     -- * Types

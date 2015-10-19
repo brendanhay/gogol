@@ -22,7 +22,7 @@
 --
 -- Retrieve all Chrome OS Devices of a customer (paginated)
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryChromeosDevicesList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.chromeosdevices.list@.
 module Network.Google.Resource.Directory.ChromeosDevices.List
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Directory.ChromeosDevices.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryChromeosDevicesList@ method which the
+-- | A resource alias for @directory.chromeosdevices.list@ method which the
 -- 'ChromeosDevicesList'' request conforms to.
 type ChromeosDevicesListResource =
      "customer" :>
@@ -94,7 +94,7 @@ data ChromeosDevicesList' = ChromeosDevicesList'
 --
 -- * 'cdlMaxResults'
 chromeosDevicesList'
-    :: Text -- ^ 'customerId'
+    :: Text -- ^ 'cdlCustomerId'
     -> ChromeosDevicesList'
 chromeosDevicesList' pCdlCustomerId_ =
     ChromeosDevicesList'

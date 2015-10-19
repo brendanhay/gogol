@@ -22,7 +22,7 @@
 --
 -- Gets a single location by ID.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorLocationsGet@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.locations.get@.
 module Network.Google.Resource.Mirror.Locations.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Mirror.Locations.Get
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorLocationsGet@ method which the
+-- | A resource alias for @mirror.locations.get@ method which the
 -- 'LocationsGet'' request conforms to.
 type LocationsGetResource =
      "locations" :>
@@ -59,7 +59,7 @@ newtype LocationsGet' = LocationsGet'
 --
 -- * 'lgId'
 locationsGet'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'lgId'
     -> LocationsGet'
 locationsGet' pLgId_ =
     LocationsGet'

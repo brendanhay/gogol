@@ -22,7 +22,7 @@
 --
 -- Lists all the debuggees that the user can set breakpoints to.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @CloudDebuggerDebuggerDebuggeesList@.
+-- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.list@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.List
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.List
 import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudDebuggerDebuggerDebuggeesList@ method which the
+-- | A resource alias for @clouddebugger.debugger.debuggees.list@ method which the
 -- 'DebuggerDebuggeesList'' request conforms to.
 type DebuggerDebuggeesListResource =
      "v2" :>

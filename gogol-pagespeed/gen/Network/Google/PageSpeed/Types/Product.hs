@@ -1056,7 +1056,7 @@ newtype ResultRuleGroups = ResultRuleGroups
 --
 -- * 'rrgAddtional'
 resultRuleGroups
-    :: HashMap Text ResultRuleGroupsAdditional -- ^ 'addtional'
+    :: HashMap Text ResultRuleGroupsAdditional -- ^ 'rrgAddtional'
     -> ResultRuleGroups
 resultRuleGroups pRrgAddtional_ =
     ResultRuleGroups
@@ -1141,7 +1141,7 @@ newtype ResultFormattedResultsRuleResults = ResultFormattedResultsRuleResults
 --
 -- * 'rfrrrAddtional'
 resultFormattedResultsRuleResults
-    :: HashMap Text ResultFormattedResultsRuleResultsAdditional -- ^ 'addtional'
+    :: HashMap Text ResultFormattedResultsRuleResultsAdditional -- ^ 'rfrrrAddtional'
     -> ResultFormattedResultsRuleResults
 resultFormattedResultsRuleResults pRfrrrAddtional_ =
     ResultFormattedResultsRuleResults

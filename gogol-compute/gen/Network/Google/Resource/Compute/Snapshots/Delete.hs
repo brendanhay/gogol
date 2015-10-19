@@ -26,7 +26,7 @@
 -- needed for subsequent snapshots, the data will be moved to the next
 -- corresponding snapshot. For more information, see Deleting snaphots.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeSnapshotsDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.snapshots.delete@.
 module Network.Google.Resource.Compute.Snapshots.Delete
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.Snapshots.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeSnapshotsDelete@ method which the
+-- | A resource alias for @compute.snapshots.delete@ method which the
 -- 'SnapshotsDelete'' request conforms to.
 type SnapshotsDeleteResource =
      Capture "project" Text :>
@@ -73,8 +73,8 @@ data SnapshotsDelete' = SnapshotsDelete'
 --
 -- * 'sdProject'
 snapshotsDelete'
-    :: Text -- ^ 'snapshot'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'sdSnapshot'
+    -> Text -- ^ 'sdProject'
     -> SnapshotsDelete'
 snapshotsDelete' pSdSnapshot_ pSdProject_ =
     SnapshotsDelete'

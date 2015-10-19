@@ -22,7 +22,7 @@
 --
 -- List all entities in a GTM Folder.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersFoldersEntitiesList@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.folders.entities.list@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Entities.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Entities.L
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersFoldersEntitiesList@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.folders.entities.list@ method which the
 -- 'AccountsContainersFoldersEntitiesList'' request conforms to.
 type AccountsContainersFoldersEntitiesListResource =
      "accounts" :>
@@ -73,9 +73,9 @@ data AccountsContainersFoldersEntitiesList' = AccountsContainersFoldersEntitiesL
 --
 -- * 'acfelAccountId'
 accountsContainersFoldersEntitiesList'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'folderId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acfelContainerId'
+    -> Text -- ^ 'acfelFolderId'
+    -> Text -- ^ 'acfelAccountId'
     -> AccountsContainersFoldersEntitiesList'
 accountsContainersFoldersEntitiesList' pAcfelContainerId_ pAcfelFolderId_ pAcfelAccountId_ =
     AccountsContainersFoldersEntitiesList'

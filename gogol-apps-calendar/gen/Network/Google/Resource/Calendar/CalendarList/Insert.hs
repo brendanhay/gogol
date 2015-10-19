@@ -22,7 +22,7 @@
 --
 -- Adds an entry to the user\'s calendar list.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarListInsert@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendarList.insert@.
 module Network.Google.Resource.Calendar.CalendarList.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Calendar.CalendarList.Insert
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarListInsert@ method which the
+-- | A resource alias for @calendar.calendarList.insert@ method which the
 -- 'CalendarListInsert'' request conforms to.
 type CalendarListInsertResource =
      "users" :>
@@ -67,7 +67,7 @@ data CalendarListInsert' = CalendarListInsert'
 --
 -- * 'cliColorRgbFormat'
 calendarListInsert'
-    :: CalendarListEntry -- ^ 'payload'
+    :: CalendarListEntry -- ^ 'cliPayload'
     -> CalendarListInsert'
 calendarListInsert' pCliPayload_ =
     CalendarListInsert'

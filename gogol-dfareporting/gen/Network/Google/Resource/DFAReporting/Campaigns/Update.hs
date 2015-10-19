@@ -22,7 +22,7 @@
 --
 -- Updates an existing campaign.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCampaignsUpdate@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.campaigns.update@.
 module Network.Google.Resource.DFAReporting.Campaigns.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Campaigns.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCampaignsUpdate@ method which the
+-- | A resource alias for @dfareporting.campaigns.update@ method which the
 -- 'CampaignsUpdate'' request conforms to.
 type CampaignsUpdateResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data CampaignsUpdate' = CampaignsUpdate'
 --
 -- * 'cuPayload'
 campaignsUpdate'
-    :: Int64 -- ^ 'profileId'
-    -> Campaign -- ^ 'payload'
+    :: Int64 -- ^ 'cuProFileId'
+    -> Campaign -- ^ 'cuPayload'
     -> CampaignsUpdate'
 campaignsUpdate' pCuProFileId_ pCuPayload_ =
     CampaignsUpdate'

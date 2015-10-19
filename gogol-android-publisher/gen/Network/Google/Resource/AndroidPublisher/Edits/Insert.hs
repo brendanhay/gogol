@@ -22,7 +22,7 @@
 --
 -- Creates a new edit for an app, populated with the app\'s current state.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsInsert@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.insert@.
 module Network.Google.Resource.AndroidPublisher.Edits.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Insert
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsInsert@ method which the
+-- | A resource alias for @androidpublisher.edits.insert@ method which the
 -- 'EditsInsert'' request conforms to.
 type EditsInsertResource =
      Capture "packageName" Text :>
@@ -64,8 +64,8 @@ data EditsInsert' = EditsInsert'
 --
 -- * 'eiPayload'
 editsInsert'
-    :: Text -- ^ 'packageName'
-    -> AppEdit -- ^ 'payload'
+    :: Text -- ^ 'eiPackageName'
+    -> AppEdit -- ^ 'eiPayload'
     -> EditsInsert'
 editsInsert' pEiPackageName_ pEiPayload_ =
     EditsInsert'

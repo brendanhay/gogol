@@ -24,7 +24,7 @@
 -- for all the beacons owned by your Google Developers Console project by
 -- using the beacon name \`beacons\/-\`.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsDiagnosticsList@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.diagnostics.list@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconBeaconsDiagnosticsList@ method which the
+-- | A resource alias for @proximitybeacon.beacons.diagnostics.list@ method which the
 -- 'BeaconsDiagnosticsList'' request conforms to.
 type BeaconsDiagnosticsListResource =
      "v1beta1" :>
@@ -115,7 +115,7 @@ data BeaconsDiagnosticsList' = BeaconsDiagnosticsList'
 --
 -- * 'bdlCallback'
 beaconsDiagnosticsList'
-    :: Text -- ^ 'beaconName'
+    :: Text -- ^ 'bdlBeaconName'
     -> BeaconsDiagnosticsList'
 beaconsDiagnosticsList' pBdlBeaconName_ =
     BeaconsDiagnosticsList'

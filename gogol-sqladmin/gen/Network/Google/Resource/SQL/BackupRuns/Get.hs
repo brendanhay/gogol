@@ -22,7 +22,7 @@
 --
 -- Retrieves a resource containing information about a backup run.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLBackupRunsGet@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.backupRuns.get@.
 module Network.Google.Resource.SQL.BackupRuns.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.SQL.BackupRuns.Get
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLBackupRunsGet@ method which the
+-- | A resource alias for @sql.backupRuns.get@ method which the
 -- 'BackupRunsGet'' request conforms to.
 type BackupRunsGetResource =
      "projects" :>
@@ -71,9 +71,9 @@ data BackupRunsGet' = BackupRunsGet'
 --
 -- * 'brgInstance'
 backupRunsGet'
-    :: Text -- ^ 'project'
-    -> Int64 -- ^ 'id'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'brgProject'
+    -> Int64 -- ^ 'brgId'
+    -> Text -- ^ 'brgInstance'
     -> BackupRunsGet'
 backupRunsGet' pBrgProject_ pBrgId_ pBrgInstance_ =
     BackupRunsGet'

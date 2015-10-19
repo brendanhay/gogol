@@ -27,37 +27,37 @@ module Network.Google.Plus
 
     -- * Resources
 
-    -- ** PlusActivitiesGet
+    -- ** plus.activities.get
     , module Network.Google.Resource.Plus.Activities.Get
 
-    -- ** PlusActivitiesList
+    -- ** plus.activities.list
     , module Network.Google.Resource.Plus.Activities.List
 
-    -- ** PlusActivitiesSearch
+    -- ** plus.activities.search
     , module Network.Google.Resource.Plus.Activities.Search
 
-    -- ** PlusCommentsGet
+    -- ** plus.comments.get
     , module Network.Google.Resource.Plus.Comments.Get
 
-    -- ** PlusCommentsList
+    -- ** plus.comments.list
     , module Network.Google.Resource.Plus.Comments.List
 
-    -- ** PlusMomentsInsert
+    -- ** plus.moments.insert
     , module Network.Google.Resource.Plus.Moments.Insert
 
-    -- ** PlusMomentsList
+    -- ** plus.moments.list
     , module Network.Google.Resource.Plus.Moments.List
 
-    -- ** PlusPeopleGet
+    -- ** plus.people.get
     , module Network.Google.Resource.Plus.People.Get
 
-    -- ** PlusPeopleList
+    -- ** plus.people.list
     , module Network.Google.Resource.Plus.People.List
 
-    -- ** PlusPeopleListByActivity
+    -- ** plus.people.listByActivity
     , module Network.Google.Resource.Plus.People.ListByActivity
 
-    -- ** PlusPeopleSearch
+    -- ** plus.people.search
     , module Network.Google.Resource.Plus.People.Search
 
     -- * Types

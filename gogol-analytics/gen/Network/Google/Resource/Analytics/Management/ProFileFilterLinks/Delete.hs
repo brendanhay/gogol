@@ -22,7 +22,7 @@
 --
 -- Delete a profile filter link.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFileFilterLinksDelete@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.profileFilterLinks.delete@.
 module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Delete
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Delete
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFileFilterLinksDelete@ method which the
+-- | A resource alias for @analytics.management.profileFilterLinks.delete@ method which the
 -- 'ManagementProFileFilterLinksDelete'' request conforms to.
 type ManagementProFileFilterLinksDeleteResource =
      "management" :>
@@ -78,10 +78,10 @@ data ManagementProFileFilterLinksDelete' = ManagementProFileFilterLinksDelete'
 --
 -- * 'mpffldLinkId'
 managementProFileFilterLinksDelete'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'linkId'
+    :: Text -- ^ 'mpffldWebPropertyId'
+    -> Text -- ^ 'mpffldProFileId'
+    -> Text -- ^ 'mpffldAccountId'
+    -> Text -- ^ 'mpffldLinkId'
     -> ManagementProFileFilterLinksDelete'
 managementProFileFilterLinksDelete' pMpffldWebPropertyId_ pMpffldProFileId_ pMpffldAccountId_ pMpffldLinkId_ =
     ManagementProFileFilterLinksDelete'

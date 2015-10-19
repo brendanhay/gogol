@@ -22,7 +22,7 @@
 --
 -- Release downloaded content access restriction.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyConfigReleaseDownloadAccess@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.myconfig.releaseDownloadAccess@.
 module Network.Google.Resource.Books.MyConfig.ReleaseDownloadAccess
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Books.MyConfig.ReleaseDownloadAccess
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyConfigReleaseDownloadAccess@ method which the
+-- | A resource alias for @books.myconfig.releaseDownloadAccess@ method which the
 -- 'MyConfigReleaseDownloadAccess'' request conforms to.
 type MyConfigReleaseDownloadAccessResource =
      "myconfig" :>
@@ -76,8 +76,8 @@ data MyConfigReleaseDownloadAccess' = MyConfigReleaseDownloadAccess'
 --
 -- * 'mcrdaSource'
 myConfigReleaseDownloadAccess'
-    :: Text -- ^ 'cpksver'
-    -> [Text] -- ^ 'volumeIds'
+    :: Text -- ^ 'mcrdaCpksver'
+    -> [Text] -- ^ 'mcrdaVolumeIds'
     -> MyConfigReleaseDownloadAccess'
 myConfigReleaseDownloadAccess' pMcrdaCpksver_ pMcrdaVolumeIds_ =
     MyConfigReleaseDownloadAccess'

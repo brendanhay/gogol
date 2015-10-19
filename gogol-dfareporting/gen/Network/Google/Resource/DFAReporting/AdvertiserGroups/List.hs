@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of advertiser groups, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertiserGroupsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.advertiserGroups.list@.
 module Network.Google.Resource.DFAReporting.AdvertiserGroups.List
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAdvertiserGroupsList@ method which the
+-- | A resource alias for @dfareporting.advertiserGroups.list@ method which the
 -- 'AdvertiserGroupsList'' request conforms to.
 type AdvertiserGroupsListResource =
      "userprofiles" :>
@@ -93,7 +93,7 @@ data AdvertiserGroupsList' = AdvertiserGroupsList'
 --
 -- * 'aglMaxResults'
 advertiserGroupsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'aglProFileId'
     -> AdvertiserGroupsList'
 advertiserGroupsList' pAglProFileId_ =
     AdvertiserGroupsList'

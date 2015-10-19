@@ -22,7 +22,7 @@
 --
 -- Deletes an attachment from a timeline item.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineAttachmentsDelete@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.timeline.attachments.delete@.
 module Network.Google.Resource.Mirror.Timeline.Attachments.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Mirror.Timeline.Attachments.Delete
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorTimelineAttachmentsDelete@ method which the
+-- | A resource alias for @mirror.timeline.attachments.delete@ method which the
 -- 'TimelineAttachmentsDelete'' request conforms to.
 type TimelineAttachmentsDeleteResource =
      "timeline" :>
@@ -65,8 +65,8 @@ data TimelineAttachmentsDelete' = TimelineAttachmentsDelete'
 --
 -- * 'tadAttachmentId'
 timelineAttachmentsDelete'
-    :: Text -- ^ 'itemId'
-    -> Text -- ^ 'attachmentId'
+    :: Text -- ^ 'tadItemId'
+    -> Text -- ^ 'tadAttachmentId'
     -> TimelineAttachmentsDelete'
 timelineAttachmentsDelete' pTadItemId_ pTadAttachmentId_ =
     TimelineAttachmentsDelete'

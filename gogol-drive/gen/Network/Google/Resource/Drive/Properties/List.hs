@@ -22,7 +22,7 @@
 --
 -- Lists a file\'s properties.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePropertiesList@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.properties.list@.
 module Network.Google.Resource.Drive.Properties.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Drive.Properties.List
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePropertiesList@ method which the
+-- | A resource alias for @drive.properties.list@ method which the
 -- 'PropertiesList'' request conforms to.
 type PropertiesListResource =
      "files" :>
@@ -60,7 +60,7 @@ newtype PropertiesList' = PropertiesList'
 --
 -- * 'plFileId'
 propertiesList'
-    :: Text -- ^ 'fileId'
+    :: Text -- ^ 'plFileId'
     -> PropertiesList'
 propertiesList' pPlFileId_ =
     PropertiesList'

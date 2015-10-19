@@ -22,7 +22,7 @@
 --
 -- Inserts a new content category.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingContentCategoriesInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.contentCategories.insert@.
 module Network.Google.Resource.DFAReporting.ContentCategories.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingContentCategoriesInsert@ method which the
+-- | A resource alias for @dfareporting.contentCategories.insert@ method which the
 -- 'ContentCategoriesInsert'' request conforms to.
 type ContentCategoriesInsertResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data ContentCategoriesInsert' = ContentCategoriesInsert'
 --
 -- * 'cciPayload'
 contentCategoriesInsert'
-    :: Int64 -- ^ 'profileId'
-    -> ContentCategory -- ^ 'payload'
+    :: Int64 -- ^ 'cciProFileId'
+    -> ContentCategory -- ^ 'cciPayload'
     -> ContentCategoriesInsert'
 contentCategoriesInsert' pCciProFileId_ pCciPayload_ =
     ContentCategoriesInsert'

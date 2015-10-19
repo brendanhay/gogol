@@ -23,7 +23,7 @@
 -- Updates or creates the APK-specific localized listing for a specified
 -- APK and language code.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsAPKListingsUpdate@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.apklistings.update@.
 module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Update
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Update
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsAPKListingsUpdate@ method which the
+-- | A resource alias for @androidpublisher.edits.apklistings.update@ method which the
 -- 'EditsAPKListingsUpdate'' request conforms to.
 type EditsAPKListingsUpdateResource =
      Capture "packageName" Text :>
@@ -83,11 +83,11 @@ data EditsAPKListingsUpdate' = EditsAPKListingsUpdate'
 --
 -- * 'eapkluEditId'
 editsAPKListingsUpdate'
-    :: Text -- ^ 'packageName'
-    -> Int32 -- ^ 'apkVersionCode'
-    -> APKListing -- ^ 'payload'
-    -> Text -- ^ 'language'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eapkluPackageName'
+    -> Int32 -- ^ 'eapkluAPKVersionCode'
+    -> APKListing -- ^ 'eapkluPayload'
+    -> Text -- ^ 'eapkluLanguage'
+    -> Text -- ^ 'eapkluEditId'
     -> EditsAPKListingsUpdate'
 editsAPKListingsUpdate' pEapkluPackageName_ pEapkluAPKVersionCode_ pEapkluPayload_ pEapkluLanguage_ pEapkluEditId_ =
     EditsAPKListingsUpdate'

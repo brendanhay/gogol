@@ -22,7 +22,7 @@
 --
 -- Retrieves the comments for a blog, across all posts, possibly filtered.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerCommentsListByBlog@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.comments.listByBlog@.
 module Network.Google.Resource.Blogger.Comments.ListByBlog
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Blogger.Comments.ListByBlog
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerCommentsListByBlog@ method which the
+-- | A resource alias for @blogger.comments.listByBlog@ method which the
 -- 'CommentsListByBlog'' request conforms to.
 type CommentsListByBlogResource =
      "blogs" :>
@@ -90,7 +90,7 @@ data CommentsListByBlog' = CommentsListByBlog'
 --
 -- * 'clbbMaxResults'
 commentsListByBlog'
-    :: Text -- ^ 'blogId'
+    :: Text -- ^ 'clbbBlogId'
     -> CommentsListByBlog'
 commentsListByBlog' pClbbBlogId_ =
     CommentsListByBlog'

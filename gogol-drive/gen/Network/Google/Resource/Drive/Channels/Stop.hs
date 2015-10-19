@@ -22,7 +22,7 @@
 --
 -- Stop watching resources through this channel
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChannelsStop@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.channels.stop@.
 module Network.Google.Resource.Drive.Channels.Stop
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Drive.Channels.Stop
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveChannelsStop@ method which the
+-- | A resource alias for @drive.channels.stop@ method which the
 -- 'ChannelsStop'' request conforms to.
 type ChannelsStopResource =
      "channels" :>
@@ -60,7 +60,7 @@ newtype ChannelsStop' = ChannelsStop'
 --
 -- * 'csPayload'
 channelsStop'
-    :: Channel -- ^ 'payload'
+    :: Channel -- ^ 'csPayload'
     -> ChannelsStop'
 channelsStop' pCsPayload_ =
     ChannelsStop'

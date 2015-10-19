@@ -22,7 +22,7 @@
 --
 -- Add a page.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesInsert@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pages.insert@.
 module Network.Google.Resource.Blogger.Pages.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Blogger.Pages.Insert
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPagesInsert@ method which the
+-- | A resource alias for @blogger.pages.insert@ method which the
 -- 'PagesInsert'' request conforms to.
 type PagesInsertResource =
      "blogs" :>
@@ -70,8 +70,8 @@ data PagesInsert' = PagesInsert'
 --
 -- * 'piPayload'
 pagesInsert'
-    :: Text -- ^ 'blogId'
-    -> Page -- ^ 'payload'
+    :: Text -- ^ 'piBlogId'
+    -> Page -- ^ 'piPayload'
     -> PagesInsert'
 pagesInsert' pPiBlogId_ pPiPayload_ =
     PagesInsert'

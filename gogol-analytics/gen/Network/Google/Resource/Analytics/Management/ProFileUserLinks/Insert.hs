@@ -22,7 +22,7 @@
 --
 -- Adds a new user to the given view (profile).
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFileUserLinksInsert@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.profileUserLinks.insert@.
 module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFileUserLinksInsert@ method which the
+-- | A resource alias for @analytics.management.profileUserLinks.insert@ method which the
 -- 'ManagementProFileUserLinksInsert'' request conforms to.
 type ManagementProFileUserLinksInsertResource =
      "management" :>
@@ -79,10 +79,10 @@ data ManagementProFileUserLinksInsert' = ManagementProFileUserLinksInsert'
 --
 -- * 'mpfuliAccountId'
 managementProFileUserLinksInsert'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> EntityUserLink -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mpfuliWebPropertyId'
+    -> Text -- ^ 'mpfuliProFileId'
+    -> EntityUserLink -- ^ 'mpfuliPayload'
+    -> Text -- ^ 'mpfuliAccountId'
     -> ManagementProFileUserLinksInsert'
 managementProFileUserLinksInsert' pMpfuliWebPropertyId_ pMpfuliProFileId_ pMpfuliPayload_ pMpfuliAccountId_ =
     ManagementProFileUserLinksInsert'

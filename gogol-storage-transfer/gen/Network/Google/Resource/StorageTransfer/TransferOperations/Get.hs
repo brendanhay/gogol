@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferOperationsGet@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.transferOperations.get@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Get
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Get
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferTransferOperationsGet@ method which the
+-- | A resource alias for @storagetransfer.transferOperations.get@ method which the
 -- 'TransferOperationsGet'' request conforms to.
 type TransferOperationsGetResource =
      "v1" :>
@@ -98,7 +98,7 @@ data TransferOperationsGet' = TransferOperationsGet'
 --
 -- * 'togCallback'
 transferOperationsGet'
-    :: Text -- ^ 'name'
+    :: Text -- ^ 'togName'
     -> TransferOperationsGet'
 transferOperationsGet' pTogName_ =
     TransferOperationsGet'

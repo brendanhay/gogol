@@ -22,7 +22,7 @@
 --
 -- Returns the specified UrlMap resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeURLMapsGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.urlMaps.get@.
 module Network.Google.Resource.Compute.URLMaps.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.URLMaps.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeURLMapsGet@ method which the
+-- | A resource alias for @compute.urlMaps.get@ method which the
 -- 'URLMapsGet'' request conforms to.
 type URLMapsGetResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data URLMapsGet' = URLMapsGet'
 --
 -- * 'umgProject'
 urlMapsGet'
-    :: Text -- ^ 'urlMap'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'umgURLMap'
+    -> Text -- ^ 'umgProject'
     -> URLMapsGet'
 urlMapsGet' pUmgURLMap_ pUmgProject_ =
     URLMapsGet'

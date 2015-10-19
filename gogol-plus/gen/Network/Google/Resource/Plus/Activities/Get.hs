@@ -22,7 +22,7 @@
 --
 -- Get an activity.
 --
--- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusActivitiesGet@.
+-- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.activities.get@.
 module Network.Google.Resource.Plus.Activities.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Plus.Activities.Get
 import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusActivitiesGet@ method which the
+-- | A resource alias for @plus.activities.get@ method which the
 -- 'ActivitiesGet'' request conforms to.
 type ActivitiesGetResource =
      "activities" :>
@@ -59,7 +59,7 @@ newtype ActivitiesGet' = ActivitiesGet'
 --
 -- * 'agActivityId'
 activitiesGet'
-    :: Text -- ^ 'activityId'
+    :: Text -- ^ 'agActivityId'
     -> ActivitiesGet'
 activitiesGet' pAgActivityId_ =
     ActivitiesGet'

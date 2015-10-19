@@ -22,7 +22,7 @@
 --
 -- Retrieves an attachment on a timeline item by item ID and attachment ID.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineAttachmentsGet@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.timeline.attachments.get@.
 module Network.Google.Resource.Mirror.Timeline.Attachments.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Mirror.Timeline.Attachments.Get
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorTimelineAttachmentsGet@ method which the
+-- | A resource alias for @mirror.timeline.attachments.get@ method which the
 -- 'TimelineAttachmentsGet'' request conforms to.
 type TimelineAttachmentsGetResource =
      "timeline" :>
@@ -72,8 +72,8 @@ data TimelineAttachmentsGet' = TimelineAttachmentsGet'
 --
 -- * 'tagAttachmentId'
 timelineAttachmentsGet'
-    :: Text -- ^ 'itemId'
-    -> Text -- ^ 'attachmentId'
+    :: Text -- ^ 'tagItemId'
+    -> Text -- ^ 'tagAttachmentId'
     -> TimelineAttachmentsGet'
 timelineAttachmentsGet' pTagItemId_ pTagAttachmentId_ =
     TimelineAttachmentsGet'

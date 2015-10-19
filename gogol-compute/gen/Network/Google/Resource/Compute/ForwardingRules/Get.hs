@@ -22,7 +22,7 @@
 --
 -- Returns the specified ForwardingRule resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeForwardingRulesGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.forwardingRules.get@.
 module Network.Google.Resource.Compute.ForwardingRules.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.ForwardingRules.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeForwardingRulesGet@ method which the
+-- | A resource alias for @compute.forwardingRules.get@ method which the
 -- 'ForwardingRulesGet'' request conforms to.
 type ForwardingRulesGetResource =
      Capture "project" Text :>
@@ -71,9 +71,9 @@ data ForwardingRulesGet' = ForwardingRulesGet'
 --
 -- * 'frgRegion'
 forwardingRulesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'forwardingRule'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'frgProject'
+    -> Text -- ^ 'frgForwardingRule'
+    -> Text -- ^ 'frgRegion'
     -> ForwardingRulesGet'
 forwardingRulesGet' pFrgProject_ pFrgForwardingRule_ pFrgRegion_ =
     ForwardingRulesGet'

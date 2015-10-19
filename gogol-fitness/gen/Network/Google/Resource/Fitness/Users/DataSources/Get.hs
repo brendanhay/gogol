@@ -22,7 +22,7 @@
 --
 -- Returns a data source identified by a data stream ID.
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesGet@.
+-- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataSources.get@.
 module Network.Google.Resource.Fitness.Users.DataSources.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Fitness.Users.DataSources.Get
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersDataSourcesGet@ method which the
+-- | A resource alias for @fitness.users.dataSources.get@ method which the
 -- 'UsersDataSourcesGet'' request conforms to.
 type UsersDataSourcesGetResource =
      Capture "userId" Text :>
@@ -64,8 +64,8 @@ data UsersDataSourcesGet' = UsersDataSourcesGet'
 --
 -- * 'udsgUserId'
 usersDataSourcesGet'
-    :: Text -- ^ 'dataSourceId'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'udsgDataSourceId'
+    -> Text -- ^ 'udsgUserId'
     -> UsersDataSourcesGet'
 usersDataSourcesGet' pUdsgDataSourceId_ pUdsgUserId_ =
     UsersDataSourcesGet'

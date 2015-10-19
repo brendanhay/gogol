@@ -23,7 +23,7 @@
 -- Retrieves the list of Operation resources contained within the specified
 -- zone.
 --
--- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterZoneOperationsList@.
+-- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.zoneOperations.list@.
 module Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.List
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
--- | A resource alias for @ReplicapoolupdaterZoneOperationsList@ method which the
+-- | A resource alias for @replicapoolupdater.zoneOperations.list@ method which the
 -- 'ZoneOperationsList'' request conforms to.
 type ZoneOperationsListResource =
      Capture "project" Text :>
@@ -82,8 +82,8 @@ data ZoneOperationsList' = ZoneOperationsList'
 --
 -- * 'zolMaxResults'
 zoneOperationsList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'zolProject'
+    -> Text -- ^ 'zolZone'
     -> ZoneOperationsList'
 zoneOperationsList' pZolProject_ pZolZone_ =
     ZoneOperationsList'

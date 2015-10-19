@@ -22,7 +22,7 @@
 --
 -- Performs a hard reset on the instance.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesReset@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.reset@.
 module Network.Google.Resource.Compute.Instances.Reset
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.Instances.Reset
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesReset@ method which the
+-- | A resource alias for @compute.instances.reset@ method which the
 -- 'InstancesReset'' request conforms to.
 type InstancesResetResource =
      Capture "project" Text :>
@@ -71,9 +71,9 @@ data InstancesReset' = InstancesReset'
 --
 -- * 'irrInstance'
 instancesReset'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'irrProject'
+    -> Text -- ^ 'irrZone'
+    -> Text -- ^ 'irrInstance'
     -> InstancesReset'
 instancesReset' pIrrProject_ pIrrZone_ pIrrInstance_ =
     InstancesReset'

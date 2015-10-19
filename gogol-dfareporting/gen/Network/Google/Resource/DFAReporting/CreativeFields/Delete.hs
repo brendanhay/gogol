@@ -22,7 +22,7 @@
 --
 -- Deletes an existing creative field.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldsDelete@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeFields.delete@.
 module Network.Google.Resource.DFAReporting.CreativeFields.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeFieldsDelete@ method which the
+-- | A resource alias for @dfareporting.creativeFields.delete@ method which the
 -- 'CreativeFieldsDelete'' request conforms to.
 type CreativeFieldsDeleteResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data CreativeFieldsDelete' = CreativeFieldsDelete'
 --
 -- * 'cfdId'
 creativeFieldsDelete'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'cfdProFileId'
+    -> Int64 -- ^ 'cfdId'
     -> CreativeFieldsDelete'
 creativeFieldsDelete' pCfdProFileId_ pCfdId_ =
     CreativeFieldsDelete'

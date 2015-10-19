@@ -23,7 +23,7 @@
 -- Checks that the edit can be successfully committed. The edit\'s changes
 -- are not applied to the live app.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsValidate@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.validate@.
 module Network.Google.Resource.AndroidPublisher.Edits.Validate
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Validate
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsValidate@ method which the
+-- | A resource alias for @androidpublisher.edits.validate@ method which the
 -- 'EditsValidate'' request conforms to.
 type EditsValidateResource =
      Capture "packageName" Text :>
@@ -66,8 +66,8 @@ data EditsValidate' = EditsValidate'
 --
 -- * 'evEditId'
 editsValidate'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'evPackageName'
+    -> Text -- ^ 'evEditId'
     -> EditsValidate'
 editsValidate' pEvPackageName_ pEvEditId_ =
     EditsValidate'

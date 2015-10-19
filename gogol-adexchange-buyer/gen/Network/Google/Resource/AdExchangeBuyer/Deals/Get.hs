@@ -22,7 +22,7 @@
 --
 -- Gets the requested deal.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerDealsGet@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.deals.get@.
 module Network.Google.Resource.AdExchangeBuyer.Deals.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdExchangeBuyer.Deals.Get
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerDealsGet@ method which the
+-- | A resource alias for @adexchangebuyer.deals.get@ method which the
 -- 'DealsGet'' request conforms to.
 type DealsGetResource =
      "deals" :>
@@ -66,8 +66,8 @@ data DealsGet' = DealsGet'
 --
 -- * 'dgDealId'
 dealsGet'
-    :: GetFinalizedNegotiationByExternalDealIdRequest -- ^ 'payload'
-    -> Int64 -- ^ 'dealId'
+    :: GetFinalizedNegotiationByExternalDealIdRequest -- ^ 'dgPayload'
+    -> Int64 -- ^ 'dgDealId'
     -> DealsGet'
 dealsGet' pDgPayload_ pDgDealId_ =
     DealsGet'

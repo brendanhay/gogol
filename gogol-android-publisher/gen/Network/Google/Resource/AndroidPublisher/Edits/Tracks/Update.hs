@@ -24,7 +24,7 @@
 -- halted, the rollout track cannot be updated without adding new APKs, and
 -- adding new APKs will cause it to resume.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsTracksUpdate@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.tracks.update@.
 module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Update
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Update
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsTracksUpdate@ method which the
+-- | A resource alias for @androidpublisher.edits.tracks.update@ method which the
 -- 'EditsTracksUpdate'' request conforms to.
 type EditsTracksUpdateResource =
      Capture "packageName" Text :>
@@ -79,10 +79,10 @@ data EditsTracksUpdate' = EditsTracksUpdate'
 --
 -- * 'etuEditId'
 editsTracksUpdate'
-    :: EditsTracksUpdateTrack -- ^ 'track'
-    -> Text -- ^ 'packageName'
-    -> Track -- ^ 'payload'
-    -> Text -- ^ 'editId'
+    :: EditsTracksUpdateTrack -- ^ 'etuTrack'
+    -> Text -- ^ 'etuPackageName'
+    -> Track -- ^ 'etuPayload'
+    -> Text -- ^ 'etuEditId'
     -> EditsTracksUpdate'
 editsTracksUpdate' pEtuTrack_ pEtuPackageName_ pEtuPayload_ pEtuEditId_ =
     EditsTracksUpdate'

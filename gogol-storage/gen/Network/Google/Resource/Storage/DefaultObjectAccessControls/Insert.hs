@@ -22,7 +22,7 @@
 --
 -- Creates a new default object ACL entry on the specified bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageDefaultObjectAccessControlsInsert@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.defaultObjectAccessControls.insert@.
 module Network.Google.Resource.Storage.DefaultObjectAccessControls.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Insert
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageDefaultObjectAccessControlsInsert@ method which the
+-- | A resource alias for @storage.defaultObjectAccessControls.insert@ method which the
 -- 'DefaultObjectAccessControlsInsert'' request conforms to.
 type DefaultObjectAccessControlsInsertResource =
      "b" :>
@@ -66,8 +66,8 @@ data DefaultObjectAccessControlsInsert' = DefaultObjectAccessControlsInsert'
 --
 -- * 'doaciPayload'
 defaultObjectAccessControlsInsert'
-    :: Text -- ^ 'bucket'
-    -> ObjectAccessControl -- ^ 'payload'
+    :: Text -- ^ 'doaciBucket'
+    -> ObjectAccessControl -- ^ 'doaciPayload'
     -> DefaultObjectAccessControlsInsert'
 defaultObjectAccessControlsInsert' pDoaciBucket_ pDoaciPayload_ =
     DefaultObjectAccessControlsInsert'

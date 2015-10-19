@@ -22,7 +22,7 @@
 --
 -- Gets the specified Autoscaler resource.
 --
--- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerAutoscalersGet@.
+-- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @autoscaler.autoscalers.get@.
 module Network.Google.Resource.Autoscaler.Autoscalers.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Autoscaler.Autoscalers.Get
 import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AutoscalerAutoscalersGet@ method which the
+-- | A resource alias for @autoscaler.autoscalers.get@ method which the
 -- 'AutoscalersGet'' request conforms to.
 type AutoscalersGetResource =
      "projects" :>
@@ -71,9 +71,9 @@ data AutoscalersGet' = AutoscalersGet'
 --
 -- * 'agAutoscaler'
 autoscalersGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Text -- ^ 'autoscaler'
+    :: Text -- ^ 'agProject'
+    -> Text -- ^ 'agZone'
+    -> Text -- ^ 'agAutoscaler'
     -> AutoscalersGet'
 autoscalersGet' pAgProject_ pAgZone_ pAgAutoscaler_ =
     AutoscalersGet'

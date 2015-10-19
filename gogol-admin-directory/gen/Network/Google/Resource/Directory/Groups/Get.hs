@@ -22,7 +22,7 @@
 --
 -- Retrieve Group
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.groups.get@.
 module Network.Google.Resource.Directory.Groups.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Directory.Groups.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryGroupsGet@ method which the
+-- | A resource alias for @directory.groups.get@ method which the
 -- 'GroupsGet'' request conforms to.
 type GroupsGetResource =
      "groups" :>
@@ -59,7 +59,7 @@ newtype GroupsGet' = GroupsGet'
 --
 -- * 'ggGroupKey'
 groupsGet'
-    :: Text -- ^ 'groupKey'
+    :: Text -- ^ 'ggGroupKey'
     -> GroupsGet'
 groupsGet' pGgGroupKey_ =
     GroupsGet'

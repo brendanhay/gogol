@@ -27,7 +27,7 @@
 -- method will be silently ignored. To update beacon status, use the
 -- separate methods on this API for (de)activation and decommissioning.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsUpdate@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.update@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Update
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Update
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconBeaconsUpdate@ method which the
+-- | A resource alias for @proximitybeacon.beacons.update@ method which the
 -- 'BeaconsUpdate'' request conforms to.
 type BeaconsUpdateResource =
      "v1beta1" :>
@@ -109,8 +109,8 @@ data BeaconsUpdate' = BeaconsUpdate'
 --
 -- * 'buCallback'
 beaconsUpdate'
-    :: Text -- ^ 'beaconName'
-    -> Beacon -- ^ 'payload'
+    :: Text -- ^ 'buBeaconName'
+    -> Beacon -- ^ 'buPayload'
     -> BeaconsUpdate'
 beaconsUpdate' pBuBeaconName_ pBuPayload_ =
     BeaconsUpdate'

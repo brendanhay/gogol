@@ -23,7 +23,7 @@
 -- Concatenates a list of existing objects into a new object in the same
 -- bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsCompose@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objects.compose@.
 module Network.Google.Resource.Storage.Objects.Compose
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Storage.Objects.Compose
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsCompose@ method which the
+-- | A resource alias for @storage.objects.compose@ method which the
 -- 'ObjectsCompose'' request conforms to.
 type ObjectsComposeResource =
      "b" :>
@@ -104,9 +104,9 @@ data ObjectsCompose' = ObjectsCompose'
 --
 -- * 'oDestinationObject'
 objectsCompose'
-    :: ComposeRequest -- ^ 'payload'
-    -> Text -- ^ 'destinationBucket'
-    -> Text -- ^ 'destinationObject'
+    :: ComposeRequest -- ^ 'oPayload'
+    -> Text -- ^ 'oDestinationBucket'
+    -> Text -- ^ 'oDestinationObject'
     -> ObjectsCompose'
 objectsCompose' pOPayload_ pODestinationBucket_ pODestinationObject_ =
     ObjectsCompose'

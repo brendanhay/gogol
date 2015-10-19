@@ -25,7 +25,7 @@
 -- publishers. Publishers can request information about themselves by
 -- omitting the publisherId query parameter.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANPublishersGet@.
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @gan.publishers.get@.
 module Network.Google.Resource.GAN.Publishers.Get
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.GAN.Publishers.Get
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GANPublishersGet@ method which the
+-- | A resource alias for @gan.publishers.get@ method which the
 -- 'PublishersGet'' request conforms to.
 type PublishersGetResource =
      Capture "role" PublishersGetRole :>
@@ -75,8 +75,8 @@ data PublishersGet' = PublishersGet'
 --
 -- * 'pgPublisherId'
 publishersGet'
-    :: Text -- ^ 'roleId'
-    -> PublishersGetRole -- ^ 'role'
+    :: Text -- ^ 'pgRoleId'
+    -> PublishersGetRole -- ^ 'pgRole'
     -> PublishersGet'
 publishersGet' pPgRoleId_ pPgRole_ =
     PublishersGet'

@@ -22,7 +22,7 @@
 --
 -- Retrieves details about crawl errors for a site\'s sample URL.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersURLCrawlErrorsSamplesGet@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.urlcrawlerrorssamples.get@.
 module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.Get
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersURLCrawlErrorsSamplesGet@ method which the
+-- | A resource alias for @webmasters.urlcrawlerrorssamples.get@ method which the
 -- 'URLCrawlErrorsSamplesGet'' request conforms to.
 type URLCrawlErrorsSamplesGetResource =
      "sites" :>
@@ -80,10 +80,10 @@ data URLCrawlErrorsSamplesGet' = URLCrawlErrorsSamplesGet'
 --
 -- * 'ucesgURL'
 urlCrawlErrorsSamplesGet'
-    :: URLCrawlErrorsSamplesGetPlatform -- ^ 'platform'
-    -> URLCrawlErrorsSamplesGetCategory -- ^ 'category'
-    -> Text -- ^ 'siteUrl'
-    -> Text -- ^ 'url'
+    :: URLCrawlErrorsSamplesGetPlatform -- ^ 'ucesgPlatform'
+    -> URLCrawlErrorsSamplesGetCategory -- ^ 'ucesgCategory'
+    -> Text -- ^ 'ucesgSiteURL'
+    -> Text -- ^ 'ucesgURL'
     -> URLCrawlErrorsSamplesGet'
 urlCrawlErrorsSamplesGet' pUcesgPlatform_ pUcesgCategory_ pUcesgSiteURL_ pUcesgURL_ =
     URLCrawlErrorsSamplesGet'

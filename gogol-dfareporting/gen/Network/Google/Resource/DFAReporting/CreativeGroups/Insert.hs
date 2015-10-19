@@ -22,7 +22,7 @@
 --
 -- Inserts a new creative group.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeGroupsInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeGroups.insert@.
 module Network.Google.Resource.DFAReporting.CreativeGroups.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeGroupsInsert@ method which the
+-- | A resource alias for @dfareporting.creativeGroups.insert@ method which the
 -- 'CreativeGroupsInsert'' request conforms to.
 type CreativeGroupsInsertResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data CreativeGroupsInsert' = CreativeGroupsInsert'
 --
 -- * 'cgiPayload'
 creativeGroupsInsert'
-    :: Int64 -- ^ 'profileId'
-    -> CreativeGroup -- ^ 'payload'
+    :: Int64 -- ^ 'cgiProFileId'
+    -> CreativeGroup -- ^ 'cgiPayload'
     -> CreativeGroupsInsert'
 creativeGroupsInsert' pCgiProFileId_ pCgiPayload_ =
     CreativeGroupsInsert'

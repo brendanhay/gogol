@@ -22,7 +22,7 @@
 --
 -- Creates a role assignment.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryRoleAssignmentsInsert@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.roleAssignments.insert@.
 module Network.Google.Resource.Directory.RoleAssignments.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.RoleAssignments.Insert
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryRoleAssignmentsInsert@ method which the
+-- | A resource alias for @directory.roleAssignments.insert@ method which the
 -- 'RoleAssignmentsInsert'' request conforms to.
 type RoleAssignmentsInsertResource =
      "customer" :>
@@ -66,8 +66,8 @@ data RoleAssignmentsInsert' = RoleAssignmentsInsert'
 --
 -- * 'raiCustomer'
 roleAssignmentsInsert'
-    :: RoleAssignment -- ^ 'payload'
-    -> Text -- ^ 'customer'
+    :: RoleAssignment -- ^ 'raiPayload'
+    -> Text -- ^ 'raiCustomer'
     -> RoleAssignmentsInsert'
 roleAssignmentsInsert' pRaiPayload_ pRaiCustomer_ =
     RoleAssignmentsInsert'

@@ -22,7 +22,7 @@
 --
 -- Returns information about an update.
 --
--- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesGet@.
+-- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.rollingUpdates.get@.
 module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Get
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
--- | A resource alias for @ReplicapoolupdaterRollingUpdatesGet@ method which the
+-- | A resource alias for @replicapoolupdater.rollingUpdates.get@ method which the
 -- 'RollingUpdatesGet'' request conforms to.
 type RollingUpdatesGetResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data RollingUpdatesGet' = RollingUpdatesGet'
 --
 -- * 'rugZone'
 rollingUpdatesGet'
-    :: Text -- ^ 'rollingUpdate'
-    -> Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'rugRollingUpdate'
+    -> Text -- ^ 'rugProject'
+    -> Text -- ^ 'rugZone'
     -> RollingUpdatesGet'
 rollingUpdatesGet' pRugRollingUpdate_ pRugProject_ pRugZone_ =
     RollingUpdatesGet'

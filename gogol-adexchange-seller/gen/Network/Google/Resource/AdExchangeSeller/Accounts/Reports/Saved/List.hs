@@ -22,7 +22,7 @@
 --
 -- List all saved reports in this Ad Exchange account.
 --
--- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsReportsSavedList@.
+-- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @adexchangeseller.accounts.reports.saved.list@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.List
 import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangesellerAccountsReportsSavedList@ method which the
+-- | A resource alias for @adexchangeseller.accounts.reports.saved.list@ method which the
 -- 'AccountsReportsSavedList'' request conforms to.
 type AccountsReportsSavedListResource =
      "accounts" :>
@@ -71,7 +71,7 @@ data AccountsReportsSavedList' = AccountsReportsSavedList'
 --
 -- * 'arslMaxResults'
 accountsReportsSavedList'
-    :: Text -- ^ 'accountId'
+    :: Text -- ^ 'arslAccountId'
     -> AccountsReportsSavedList'
 accountsReportsSavedList' pArslAccountId_ =
     AccountsReportsSavedList'

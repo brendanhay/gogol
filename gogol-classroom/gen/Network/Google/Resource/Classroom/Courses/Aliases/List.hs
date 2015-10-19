@@ -25,7 +25,7 @@
 -- not permitted to access the course or for access errors. * \`NOT_FOUND\`
 -- if the course does not exist.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesAliasesList@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.aliases.list@.
 module Network.Google.Resource.Classroom.Courses.Aliases.List
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.Classroom.Courses.Aliases.List
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesAliasesList@ method which the
+-- | A resource alias for @classroom.courses.aliases.list@ method which the
 -- 'CoursesAliasesList'' request conforms to.
 type CoursesAliasesListResource =
      "v1" :>
@@ -113,7 +113,7 @@ data CoursesAliasesList' = CoursesAliasesList'
 --
 -- * 'calCallback'
 coursesAliasesList'
-    :: Text -- ^ 'courseId'
+    :: Text -- ^ 'calCourseId'
     -> CoursesAliasesList'
 coursesAliasesList' pCalCourseId_ =
     CoursesAliasesList'

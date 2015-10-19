@@ -26,22 +26,22 @@ module Network.Google.Spectrum
 
     -- * Resources
 
-    -- ** SpectrumPawsGetSpectrum
+    -- ** spectrum.paws.getSpectrum
     , module Network.Google.Resource.Spectrum.Paws.GetSpectrum
 
-    -- ** SpectrumPawsGetSpectrumBatch
+    -- ** spectrum.paws.getSpectrumBatch
     , module Network.Google.Resource.Spectrum.Paws.GetSpectrumBatch
 
-    -- ** SpectrumPawsInit
+    -- ** spectrum.paws.init
     , module Network.Google.Resource.Spectrum.Paws.Init
 
-    -- ** SpectrumPawsNotifySpectrumUse
+    -- ** spectrum.paws.notifySpectrumUse
     , module Network.Google.Resource.Spectrum.Paws.NotifySpectrumUse
 
-    -- ** SpectrumPawsRegister
+    -- ** spectrum.paws.register
     , module Network.Google.Resource.Spectrum.Paws.Register
 
-    -- ** SpectrumPawsVerifyDevice
+    -- ** spectrum.paws.verifyDevice
     , module Network.Google.Resource.Spectrum.Paws.VerifyDevice
 
     -- * Types

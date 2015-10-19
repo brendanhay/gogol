@@ -22,7 +22,7 @@
 --
 -- Delete the achievement configuration with the given ID.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationAchievementConfigurationsDelete@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.achievementConfigurations.delete@.
 module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Dele
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationAchievementConfigurationsDelete@ method which the
+-- | A resource alias for @gamesConfiguration.achievementConfigurations.delete@ method which the
 -- 'AchievementConfigurationsDelete'' request conforms to.
 type AchievementConfigurationsDeleteResource =
      "achievements" :>
@@ -59,7 +59,7 @@ newtype AchievementConfigurationsDelete' = AchievementConfigurationsDelete'
 --
 -- * 'acdAchievementId'
 achievementConfigurationsDelete'
-    :: Text -- ^ 'achievementId'
+    :: Text -- ^ 'acdAchievementId'
     -> AchievementConfigurationsDelete'
 achievementConfigurationsDelete' pAcdAchievementId_ =
     AchievementConfigurationsDelete'

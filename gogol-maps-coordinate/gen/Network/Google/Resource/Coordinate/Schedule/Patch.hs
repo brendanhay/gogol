@@ -23,7 +23,7 @@
 -- Replaces the schedule of a job with the provided schedule. This method
 -- supports patch semantics.
 --
--- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateSchedulePatch@.
+-- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @coordinate.schedule.patch@.
 module Network.Google.Resource.Coordinate.Schedule.Patch
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Coordinate.Schedule.Patch
 import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CoordinateSchedulePatch@ method which the
+-- | A resource alias for @coordinate.schedule.patch@ method which the
 -- 'SchedulePatch'' request conforms to.
 type SchedulePatchResource =
      "teams" :>
@@ -93,9 +93,9 @@ data SchedulePatch' = SchedulePatch'
 --
 -- * 'spDuration'
 schedulePatch'
-    :: Word64 -- ^ 'jobId'
-    -> Text -- ^ 'teamId'
-    -> Schedule -- ^ 'payload'
+    :: Word64 -- ^ 'spJobId'
+    -> Text -- ^ 'spTeamId'
+    -> Schedule -- ^ 'spPayload'
     -> SchedulePatch'
 schedulePatch' pSpJobId_ pSpTeamId_ pSpPayload_ =
     SchedulePatch'

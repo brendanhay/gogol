@@ -22,7 +22,7 @@
 --
 -- Updates an existing web property. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertiesPatch@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webproperties.patch@.
 module Network.Google.Resource.Analytics.Management.WebProperties.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Patch
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertiesPatch@ method which the
+-- | A resource alias for @analytics.management.webproperties.patch@ method which the
 -- 'ManagementWebPropertiesPatch'' request conforms to.
 type ManagementWebPropertiesPatchResource =
      "management" :>
@@ -72,9 +72,9 @@ data ManagementWebPropertiesPatch' = ManagementWebPropertiesPatch'
 --
 -- * 'mwppAccountId'
 managementWebPropertiesPatch'
-    :: Text -- ^ 'webPropertyId'
-    -> WebProperty -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mwppWebPropertyId'
+    -> WebProperty -- ^ 'mwppPayload'
+    -> Text -- ^ 'mwppAccountId'
     -> ManagementWebPropertiesPatch'
 managementWebPropertiesPatch' pMwppWebPropertyId_ pMwppPayload_ pMwppAccountId_ =
     ManagementWebPropertiesPatch'

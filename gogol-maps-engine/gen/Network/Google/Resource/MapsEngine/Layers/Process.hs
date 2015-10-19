@@ -22,7 +22,7 @@
 --
 -- Process a layer asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineLayersProcess@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.layers.process@.
 module Network.Google.Resource.MapsEngine.Layers.Process
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.Layers.Process
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersProcess@ method which the
+-- | A resource alias for @mapsengine.layers.process@ method which the
 -- 'LayersProcess'' request conforms to.
 type LayersProcessResource =
      "layers" :>
@@ -61,7 +61,7 @@ newtype LayersProcess' = LayersProcess'
 --
 -- * 'lpId'
 layersProcess'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'lpId'
     -> LayersProcess'
 layersProcess' pLpId_ =
     LayersProcess'

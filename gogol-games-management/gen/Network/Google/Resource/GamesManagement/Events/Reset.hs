@@ -25,7 +25,7 @@
 -- whitelisted tester accounts for your application. All quests for this
 -- player that use the event will also be reset.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementEventsReset@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.events.reset@.
 module Network.Google.Resource.GamesManagement.Events.Reset
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.GamesManagement.Events.Reset
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementEventsReset@ method which the
+-- | A resource alias for @gamesManagement.events.reset@ method which the
 -- 'EventsReset'' request conforms to.
 type EventsResetResource =
      "events" :>
@@ -66,7 +66,7 @@ newtype EventsReset' = EventsReset'
 --
 -- * 'erEventId'
 eventsReset'
-    :: Text -- ^ 'eventId'
+    :: Text -- ^ 'erEventId'
     -> EventsReset'
 eventsReset' pErEventId_ =
     EventsReset'

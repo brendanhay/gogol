@@ -22,7 +22,7 @@
 --
 -- Check training status of your model.
 --
--- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedModelsGet@.
+-- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @prediction.trainedmodels.get@.
 module Network.Google.Resource.Prediction.TrainedModels.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Prediction.TrainedModels.Get
 import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PredictionTrainedModelsGet@ method which the
+-- | A resource alias for @prediction.trainedmodels.get@ method which the
 -- 'TrainedModelsGet'' request conforms to.
 type TrainedModelsGetResource =
      Capture "project" Text :>
@@ -64,8 +64,8 @@ data TrainedModelsGet' = TrainedModelsGet'
 --
 -- * 'tmgId'
 trainedModelsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'id'
+    :: Text -- ^ 'tmgProject'
+    -> Text -- ^ 'tmgId'
     -> TrainedModelsGet'
 trainedModelsGet' pTmgProject_ pTmgId_ =
     TrainedModelsGet'

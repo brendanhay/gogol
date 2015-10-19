@@ -22,7 +22,7 @@
 --
 -- Creates or updates the requested negotiation.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerNegotiationsInsert@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.negotiations.insert@.
 module Network.Google.Resource.AdExchangeBuyer.Negotiations.Insert
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeBuyer.Negotiations.Insert
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerNegotiationsInsert@ method which the
+-- | A resource alias for @adexchangebuyer.negotiations.insert@ method which the
 -- 'NegotiationsInsert'' request conforms to.
 type NegotiationsInsertResource =
      "negotiations" :>
@@ -60,7 +60,7 @@ newtype NegotiationsInsert' = NegotiationsInsert'
 --
 -- * 'niPayload'
 negotiationsInsert'
-    :: NegotiationDTO -- ^ 'payload'
+    :: NegotiationDTO -- ^ 'niPayload'
     -> NegotiationsInsert'
 negotiationsInsert' pNiPayload_ =
     NegotiationsInsert'

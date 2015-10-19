@@ -22,7 +22,7 @@
 --
 -- Updates metadata for a calendar. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarsPatch@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendars.patch@.
 module Network.Google.Resource.Calendar.Calendars.Patch
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Calendar.Calendars.Patch
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarsPatch@ method which the
+-- | A resource alias for @calendar.calendars.patch@ method which the
 -- 'CalendarsPatch'' request conforms to.
 type CalendarsPatchResource =
      "calendars" :>
@@ -64,8 +64,8 @@ data CalendarsPatch' = CalendarsPatch'
 --
 -- * 'cpPayload'
 calendarsPatch'
-    :: Text -- ^ 'calendarId'
-    -> Calendar -- ^ 'payload'
+    :: Text -- ^ 'cpCalendarId'
+    -> Calendar -- ^ 'cpPayload'
     -> CalendarsPatch'
 calendarsPatch' pCpCalendarId_ pCpPayload_ =
     CalendarsPatch'

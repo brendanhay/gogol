@@ -22,7 +22,7 @@
 --
 -- Checks the purchase and consumption status of an inapp item.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherPurchasesProductsGet@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.purchases.products.get@.
 module Network.Google.Resource.AndroidPublisher.Purchases.Products.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Products.Get
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherPurchasesProductsGet@ method which the
+-- | A resource alias for @androidpublisher.purchases.products.get@ method which the
 -- 'PurchasesProductsGet'' request conforms to.
 type PurchasesProductsGetResource =
      Capture "packageName" Text :>
@@ -72,9 +72,9 @@ data PurchasesProductsGet' = PurchasesProductsGet'
 --
 -- * 'ppgProductId'
 purchasesProductsGet'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'token'
-    -> Text -- ^ 'productId'
+    :: Text -- ^ 'ppgPackageName'
+    -> Text -- ^ 'ppgToken'
+    -> Text -- ^ 'ppgProductId'
     -> PurchasesProductsGet'
 purchasesProductsGet' pPpgPackageName_ pPpgToken_ pPpgProductId_ =
     PurchasesProductsGet'

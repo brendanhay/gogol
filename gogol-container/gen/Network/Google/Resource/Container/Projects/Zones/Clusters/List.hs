@@ -23,7 +23,7 @@
 -- Lists all clusters owned by a project in either the specified zone or
 -- all zones.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @ContainerProjectsZonesClustersList@.
+-- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.list@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.List
 import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ContainerProjectsZonesClustersList@ method which the
+-- | A resource alias for @container.projects.zones.clusters.list@ method which the
 -- 'ProjectsZonesClustersList'' request conforms to.
 type ProjectsZonesClustersListResource =
      "v1" :>
@@ -105,8 +105,8 @@ data ProjectsZonesClustersList' = ProjectsZonesClustersList'
 --
 -- * 'pzclCallback'
 projectsZonesClustersList'
-    :: Text -- ^ 'zone'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'pzclZone'
+    -> Text -- ^ 'pzclProjectId'
     -> ProjectsZonesClustersList'
 projectsZonesClustersList' pPzclZone_ pPzclProjectId_ =
     ProjectsZonesClustersList'

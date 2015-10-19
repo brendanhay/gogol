@@ -23,7 +23,7 @@
 -- Returns a list of YouTube broadcasts that match the API request
 -- parameters.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveBroadcastsList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveBroadcasts.list@.
 module Network.Google.Resource.YouTube.LiveBroadcasts.List
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveBroadcastsList@ method which the
+-- | A resource alias for @youtube.liveBroadcasts.list@ method which the
 -- 'LiveBroadcastsList'' request conforms to.
 type LiveBroadcastsListResource =
      "liveBroadcasts" :>
@@ -99,7 +99,7 @@ data LiveBroadcastsList' = LiveBroadcastsList'
 --
 -- * 'lblMaxResults'
 liveBroadcastsList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'lblPart'
     -> LiveBroadcastsList'
 liveBroadcastsList' pLblPart_ =
     LiveBroadcastsList'

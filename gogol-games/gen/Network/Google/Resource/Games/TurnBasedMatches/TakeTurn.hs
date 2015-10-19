@@ -22,7 +22,7 @@
 --
 -- Commit the results of a player turn.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesTakeTurn@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.turnBasedMatches.takeTurn@.
 module Network.Google.Resource.Games.TurnBasedMatches.TakeTurn
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.TakeTurn
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesTurnBasedMatchesTakeTurn@ method which the
+-- | A resource alias for @games.turnBasedMatches.takeTurn@ method which the
 -- 'TurnBasedMatchesTakeTurn'' request conforms to.
 type TurnBasedMatchesTakeTurnResource =
      "turnbasedmatches" :>
@@ -71,8 +71,8 @@ data TurnBasedMatchesTakeTurn' = TurnBasedMatchesTakeTurn'
 --
 -- * 'tbmttMatchId'
 turnBasedMatchesTakeTurn'
-    :: TurnBasedMatchTurn -- ^ 'payload'
-    -> Text -- ^ 'matchId'
+    :: TurnBasedMatchTurn -- ^ 'tbmttPayload'
+    -> Text -- ^ 'tbmttMatchId'
     -> TurnBasedMatchesTakeTurn'
 turnBasedMatchesTakeTurn' pTbmttPayload_ pTbmttMatchId_ =
     TurnBasedMatchesTakeTurn'

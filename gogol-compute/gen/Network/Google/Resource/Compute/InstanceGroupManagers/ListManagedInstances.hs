@@ -27,7 +27,7 @@
 -- If a previous action failed, the list displays the errors for that
 -- failed action.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersListManagedInstances@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.listManagedInstances@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.ListManagedInstances
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.ListManagedInstance
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersListManagedInstances@ method which the
+-- | A resource alias for @compute.instanceGroupManagers.listManagedInstances@ method which the
 -- 'InstanceGroupManagersListManagedInstances'' request conforms to.
 type InstanceGroupManagersListManagedInstancesResource
      =
@@ -84,9 +84,9 @@ data InstanceGroupManagersListManagedInstances' = InstanceGroupManagersListManag
 --
 -- * 'igmlmiZone'
 instanceGroupManagersListManagedInstances'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instanceGroupManager'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'igmlmiProject'
+    -> Text -- ^ 'igmlmiInstanceGroupManager'
+    -> Text -- ^ 'igmlmiZone'
     -> InstanceGroupManagersListManagedInstances'
 instanceGroupManagersListManagedInstances' pIgmlmiProject_ pIgmlmiInstanceGroupManager_ pIgmlmiZone_ =
     InstanceGroupManagersListManagedInstances'

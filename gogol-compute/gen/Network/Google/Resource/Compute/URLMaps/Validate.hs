@@ -24,7 +24,7 @@
 -- provided UrlMap will be run. Calling this method does NOT create the
 -- UrlMap.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeURLMapsValidate@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.urlMaps.validate@.
 module Network.Google.Resource.Compute.URLMaps.Validate
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.URLMaps.Validate
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeURLMapsValidate@ method which the
+-- | A resource alias for @compute.urlMaps.validate@ method which the
 -- 'URLMapsValidate'' request conforms to.
 type URLMapsValidateResource =
      Capture "project" Text :>
@@ -76,9 +76,9 @@ data URLMapsValidate' = URLMapsValidate'
 --
 -- * 'umvPayload'
 urlMapsValidate'
-    :: Text -- ^ 'urlMap'
-    -> Text -- ^ 'project'
-    -> URLMapsValidateRequest -- ^ 'payload'
+    :: Text -- ^ 'umvURLMap'
+    -> Text -- ^ 'umvProject'
+    -> URLMapsValidateRequest -- ^ 'umvPayload'
     -> URLMapsValidate'
 urlMapsValidate' pUmvURLMap_ pUmvProject_ pUmvPayload_ =
     URLMapsValidate'

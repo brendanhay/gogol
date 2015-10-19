@@ -22,7 +22,7 @@
 --
 -- Detect the language of text.
 --
--- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference> for @LanguageDetectionsList@.
+-- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference> for @language.detections.list@.
 module Network.Google.Resource.Language.Detections.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Language.Detections.List
 import           Network.Google.Prelude
 import           Network.Google.Translate.Types
 
--- | A resource alias for @LanguageDetectionsList@ method which the
+-- | A resource alias for @language.detections.list@ method which the
 -- 'DetectionsList'' request conforms to.
 type DetectionsListResource =
      "v2" :>
@@ -61,7 +61,7 @@ newtype DetectionsList' = DetectionsList'
 --
 -- * 'dlQ'
 detectionsList'
-    :: [Text] -- ^ 'q'
+    :: [Text] -- ^ 'dlQ'
     -> DetectionsList'
 detectionsList' pDlQ_ =
     DetectionsList'

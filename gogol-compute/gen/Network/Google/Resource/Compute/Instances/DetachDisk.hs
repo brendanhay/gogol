@@ -22,7 +22,7 @@
 --
 -- Detaches a disk from an instance.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesDetachDisk@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.detachDisk@.
 module Network.Google.Resource.Compute.Instances.DetachDisk
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Instances.DetachDisk
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesDetachDisk@ method which the
+-- | A resource alias for @compute.instances.detachDisk@ method which the
 -- 'InstancesDetachDisk'' request conforms to.
 type InstancesDetachDiskResource =
      Capture "project" Text :>
@@ -76,10 +76,10 @@ data InstancesDetachDisk' = InstancesDetachDisk'
 --
 -- * 'iddInstance'
 instancesDetachDisk'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Text -- ^ 'deviceName'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'iddProject'
+    -> Text -- ^ 'iddZone'
+    -> Text -- ^ 'iddDeviceName'
+    -> Text -- ^ 'iddInstance'
     -> InstancesDetachDisk'
 instancesDetachDisk' pIddProject_ pIddZone_ pIddDeviceName_ pIddInstance_ =
     InstancesDetachDisk'

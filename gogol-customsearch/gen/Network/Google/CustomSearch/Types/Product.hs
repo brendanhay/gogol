@@ -127,7 +127,7 @@ newtype SearchQueries = SearchQueries
 --
 -- * 'sqAddtional'
 searchQueries
-    :: HashMap Text [Query] -- ^ 'addtional'
+    :: HashMap Text [Query] -- ^ 'sqAddtional'
     -> SearchQueries
 searchQueries pSqAddtional_ =
     SearchQueries
@@ -158,7 +158,7 @@ newtype ResultPagemapAdditionalItem = ResultPagemapAdditionalItem
 --
 -- * 'rpaiAddtional'
 resultPagemapAdditionalItem
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'rpaiAddtional'
     -> ResultPagemapAdditionalItem
 resultPagemapAdditionalItem pRpaiAddtional_ =
     ResultPagemapAdditionalItem
@@ -379,7 +379,7 @@ newtype ResultPagemap = ResultPagemap
 --
 -- * 'rpAddtional'
 resultPagemap
-    :: HashMap Text [ResultPagemapAdditionalItem] -- ^ 'addtional'
+    :: HashMap Text [ResultPagemapAdditionalItem] -- ^ 'rpAddtional'
     -> ResultPagemap
 resultPagemap pRpAddtional_ =
     ResultPagemap

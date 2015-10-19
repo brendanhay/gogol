@@ -23,7 +23,7 @@
 -- Lists all tables in the specified dataset. Requires the READER dataset
 -- role.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryTablesList@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @bigquery.tables.list@.
 module Network.Google.Resource.BigQuery.Tables.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.BigQuery.Tables.List
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigQueryTablesList@ method which the
+-- | A resource alias for @bigquery.tables.list@ method which the
 -- 'TablesList'' request conforms to.
 type TablesListResource =
      "projects" :>
@@ -78,8 +78,8 @@ data TablesList' = TablesList'
 --
 -- * 'tlMaxResults'
 tablesList'
-    :: Text -- ^ 'datasetId'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'tlDatasetId'
+    -> Text -- ^ 'tlProjectId'
     -> TablesList'
 tablesList' pTlDatasetId_ pTlProjectId_ =
     TablesList'

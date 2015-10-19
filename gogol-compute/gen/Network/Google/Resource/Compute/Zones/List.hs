@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of zone resources available to the specified project.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeZonesList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.zones.list@.
 module Network.Google.Resource.Compute.Zones.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Zones.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeZonesList@ method which the
+-- | A resource alias for @compute.zones.list@ method which the
 -- 'ZonesList'' request conforms to.
 type ZonesListResource =
      Capture "project" Text :>
@@ -74,7 +74,7 @@ data ZonesList' = ZonesList'
 --
 -- * 'zlMaxResults'
 zonesList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'zlProject'
     -> ZonesList'
 zonesList' pZlProject_ =
     ZonesList'

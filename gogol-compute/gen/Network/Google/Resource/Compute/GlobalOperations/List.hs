@@ -23,7 +23,7 @@
 -- Retrieves the list of Operation resources contained within the specified
 -- project.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalOperationsList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalOperations.list@.
 module Network.Google.Resource.Compute.GlobalOperations.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.GlobalOperations.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeGlobalOperationsList@ method which the
+-- | A resource alias for @compute.globalOperations.list@ method which the
 -- 'GlobalOperationsList'' request conforms to.
 type GlobalOperationsListResource =
      Capture "project" Text :>
@@ -77,7 +77,7 @@ data GlobalOperationsList' = GlobalOperationsList'
 --
 -- * 'golMaxResults'
 globalOperationsList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'golProject'
     -> GlobalOperationsList'
 globalOperationsList' pGolProject_ =
     GlobalOperationsList'

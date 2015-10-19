@@ -23,7 +23,7 @@
 -- Retrieves the list of TargetPool resources available to the specified
 -- project and region.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.list@.
 module Network.Google.Resource.Compute.TargetPools.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.TargetPools.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetPoolsList@ method which the
+-- | A resource alias for @compute.targetPools.list@ method which the
 -- 'TargetPoolsList'' request conforms to.
 type TargetPoolsListResource =
      Capture "project" Text :>
@@ -83,8 +83,8 @@ data TargetPoolsList' = TargetPoolsList'
 --
 -- * 'tplMaxResults'
 targetPoolsList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'tplProject'
+    -> Text -- ^ 'tplRegion'
     -> TargetPoolsList'
 targetPoolsList' pTplProject_ pTplRegion_ =
     TargetPoolsList'

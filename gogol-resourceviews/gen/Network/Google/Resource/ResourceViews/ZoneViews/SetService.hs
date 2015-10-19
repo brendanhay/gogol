@@ -22,7 +22,7 @@
 --
 -- Update the service information of a resource view or a resource.
 --
--- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsSetService@.
+-- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @resourceviews.zoneViews.setService@.
 module Network.Google.Resource.ResourceViews.ZoneViews.SetService
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.ResourceViews.ZoneViews.SetService
 import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
--- | A resource alias for @ResourceviewsZoneViewsSetService@ method which the
+-- | A resource alias for @resourceviews.zoneViews.setService@ method which the
 -- 'ZoneViewsSetService'' request conforms to.
 type ZoneViewsSetServiceResource =
      Capture "project" Text :>
@@ -77,10 +77,10 @@ data ZoneViewsSetService' = ZoneViewsSetService'
 --
 -- * 'zvssPayload'
 zoneViewsSetService'
-    :: Text -- ^ 'resourceView'
-    -> Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> ZoneViewsSetServiceRequest -- ^ 'payload'
+    :: Text -- ^ 'zvssResourceView'
+    -> Text -- ^ 'zvssProject'
+    -> Text -- ^ 'zvssZone'
+    -> ZoneViewsSetServiceRequest -- ^ 'zvssPayload'
     -> ZoneViewsSetService'
 zoneViewsSetService' pZvssResourceView_ pZvssProject_ pZvssZone_ pZvssPayload_ =
     ZoneViewsSetService'

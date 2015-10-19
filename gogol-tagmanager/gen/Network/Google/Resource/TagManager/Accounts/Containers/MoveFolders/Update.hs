@@ -22,7 +22,7 @@
 --
 -- Moves entities to a GTM Folder.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersMove_foldersUpdate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.move_folders.update@.
 module Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersMove_foldersUpdate@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.move_folders.update@ method which the
 -- 'AccountsContainersMoveFoldersUpdate'' request conforms to.
 type AccountsContainersMoveFoldersUpdateResource =
      "accounts" :>
@@ -86,9 +86,9 @@ data AccountsContainersMoveFoldersUpdate' = AccountsContainersMoveFoldersUpdate'
 --
 -- * 'acmfuTagId'
 accountsContainersMoveFoldersUpdate'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'folderId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acmfuContainerId'
+    -> Text -- ^ 'acmfuFolderId'
+    -> Text -- ^ 'acmfuAccountId'
     -> AccountsContainersMoveFoldersUpdate'
 accountsContainersMoveFoldersUpdate' pAcmfuContainerId_ pAcmfuFolderId_ pAcmfuAccountId_ =
     AccountsContainersMoveFoldersUpdate'

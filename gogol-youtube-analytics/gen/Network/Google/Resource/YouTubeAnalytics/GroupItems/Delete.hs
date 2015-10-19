@@ -22,7 +22,7 @@
 --
 -- Removes an item from a group.
 --
--- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsGroupItemsDelete@.
+-- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @youtubeAnalytics.groupItems.delete@.
 module Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
--- | A resource alias for @YouTubeAnalyticsGroupItemsDelete@ method which the
+-- | A resource alias for @youtubeAnalytics.groupItems.delete@ method which the
 -- 'GroupItemsDelete'' request conforms to.
 type GroupItemsDeleteResource =
      "groupItems" :>
@@ -64,7 +64,7 @@ data GroupItemsDelete' = GroupItemsDelete'
 --
 -- * 'gidId'
 groupItemsDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'gidId'
     -> GroupItemsDelete'
 groupItemsDelete' pGidId_ =
     GroupItemsDelete'

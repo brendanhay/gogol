@@ -22,7 +22,7 @@
 --
 -- Deletes a template
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTemplateDelete@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.template.delete@.
 module Network.Google.Resource.FusionTables.Template.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.FusionTables.Template.Delete
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTemplateDelete@ method which the
+-- | A resource alias for @fusiontables.template.delete@ method which the
 -- 'TemplateDelete'' request conforms to.
 type TemplateDeleteResource =
      "tables" :>
@@ -65,8 +65,8 @@ data TemplateDelete' = TemplateDelete'
 --
 -- * 'tddTableId'
 templateDelete'
-    :: Int32 -- ^ 'templateId'
-    -> Text -- ^ 'tableId'
+    :: Int32 -- ^ 'tddTemplateId'
+    -> Text -- ^ 'tddTableId'
     -> TemplateDelete'
 templateDelete' pTddTemplateId_ pTddTableId_ =
     TemplateDelete'

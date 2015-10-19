@@ -22,7 +22,7 @@
 --
 -- Lists views (profiles) to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFilesList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.profiles.list@.
 module Network.Google.Resource.Analytics.Management.ProFiles.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.ProFiles.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFilesList@ method which the
+-- | A resource alias for @analytics.management.profiles.list@ method which the
 -- 'ManagementProFilesList'' request conforms to.
 type ManagementProFilesListResource =
      "management" :>
@@ -77,8 +77,8 @@ data ManagementProFilesList' = ManagementProFilesList'
 --
 -- * 'mpflMaxResults'
 managementProFilesList'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mpflWebPropertyId'
+    -> Text -- ^ 'mpflAccountId'
     -> ManagementProFilesList'
 managementProFilesList' pMpflWebPropertyId_ pMpflAccountId_ =
     ManagementProFilesList'

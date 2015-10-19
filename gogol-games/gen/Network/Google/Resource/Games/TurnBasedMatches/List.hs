@@ -22,7 +22,7 @@
 --
 -- Returns turn-based matches the player is or was involved in.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesList@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.turnBasedMatches.list@.
 module Network.Google.Resource.Games.TurnBasedMatches.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.List
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesTurnBasedMatchesList@ method which the
+-- | A resource alias for @games.turnBasedMatches.list@ method which the
 -- 'TurnBasedMatchesList'' request conforms to.
 type TurnBasedMatchesListResource =
      "turnbasedmatches" :>

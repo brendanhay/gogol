@@ -23,7 +23,7 @@
 -- Sets the access control policy on a Organization resource. Replaces any
 -- existing policy.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerOrganizationsSetIAMPolicy@.
+-- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.organizations.setIamPolicy@.
 module Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerOrganizationsSetIAMPolicy@ method which the
+-- | A resource alias for @cloudresourcemanager.organizations.setIamPolicy@ method which the
 -- 'OrganizationsSetIAMPolicy'' request conforms to.
 type OrganizationsSetIAMPolicyResource =
      "v1beta1" :>
@@ -103,8 +103,8 @@ data OrganizationsSetIAMPolicy' = OrganizationsSetIAMPolicy'
 --
 -- * 'osipCallback'
 organizationsSetIAMPolicy'
-    :: SetIAMPolicyRequest -- ^ 'payload'
-    -> Text -- ^ 'resource'
+    :: SetIAMPolicyRequest -- ^ 'osipPayload'
+    -> Text -- ^ 'osipResource'
     -> OrganizationsSetIAMPolicy'
 organizationsSetIAMPolicy' pOsipPayload_ pOsipResource_ =
     OrganizationsSetIAMPolicy'

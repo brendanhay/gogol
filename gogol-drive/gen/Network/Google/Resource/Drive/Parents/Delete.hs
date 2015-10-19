@@ -22,7 +22,7 @@
 --
 -- Removes a parent from a file.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveParentsDelete@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.parents.delete@.
 module Network.Google.Resource.Drive.Parents.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Drive.Parents.Delete
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveParentsDelete@ method which the
+-- | A resource alias for @drive.parents.delete@ method which the
 -- 'ParentsDelete'' request conforms to.
 type ParentsDeleteResource =
      "files" :>
@@ -65,8 +65,8 @@ data ParentsDelete' = ParentsDelete'
 --
 -- * 'parParentId'
 parentsDelete'
-    :: Text -- ^ 'fileId'
-    -> Text -- ^ 'parentId'
+    :: Text -- ^ 'parFileId'
+    -> Text -- ^ 'parParentId'
     -> ParentsDelete'
 parentsDelete' pParFileId_ pParParentId_ =
     ParentsDelete'

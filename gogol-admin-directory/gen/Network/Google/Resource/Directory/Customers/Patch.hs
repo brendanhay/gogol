@@ -22,7 +22,7 @@
 --
 -- Updates a customer. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryCustomersPatch@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.customers.patch@.
 module Network.Google.Resource.Directory.Customers.Patch
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Customers.Patch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryCustomersPatch@ method which the
+-- | A resource alias for @directory.customers.patch@ method which the
 -- 'CustomersPatch'' request conforms to.
 type CustomersPatchResource =
      "customers" :>
@@ -64,8 +64,8 @@ data CustomersPatch' = CustomersPatch'
 --
 -- * 'cpPayload'
 customersPatch'
-    :: Text -- ^ 'customerKey'
-    -> Customer -- ^ 'payload'
+    :: Text -- ^ 'cpCustomerKey'
+    -> Customer -- ^ 'cpPayload'
     -> CustomersPatch'
 customersPatch' pCpCustomerKey_ pCpPayload_ =
     CustomersPatch'

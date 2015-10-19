@@ -22,7 +22,7 @@
 --
 -- Submits a sitemap for a site.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitemapsSubmit@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sitemaps.submit@.
 module Network.Google.Resource.Webmasters.Sitemaps.Submit
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Webmasters.Sitemaps.Submit
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersSitemapsSubmit@ method which the
+-- | A resource alias for @webmasters.sitemaps.submit@ method which the
 -- 'SitemapsSubmit'' request conforms to.
 type SitemapsSubmitResource =
      "sites" :>
@@ -65,8 +65,8 @@ data SitemapsSubmit' = SitemapsSubmit'
 --
 -- * 'ssSiteURL'
 sitemapsSubmit'
-    :: Text -- ^ 'feedpath'
-    -> Text -- ^ 'siteUrl'
+    :: Text -- ^ 'ssFeedpath'
+    -> Text -- ^ 'ssSiteURL'
     -> SitemapsSubmit'
 sitemapsSubmit' pSsFeedpath_ pSsSiteURL_ =
     SitemapsSubmit'

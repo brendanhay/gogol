@@ -26,103 +26,103 @@ module Network.Google.Blogger
 
     -- * Resources
 
-    -- ** BloggerBlogUserInfosGet
+    -- ** blogger.blogUserInfos.get
     , module Network.Google.Resource.Blogger.BlogUserInfos.Get
 
-    -- ** BloggerBlogsGet
+    -- ** blogger.blogs.get
     , module Network.Google.Resource.Blogger.Blogs.Get
 
-    -- ** BloggerBlogsGetByURL
+    -- ** blogger.blogs.getByUrl
     , module Network.Google.Resource.Blogger.Blogs.GetByURL
 
-    -- ** BloggerBlogsListByUser
+    -- ** blogger.blogs.listByUser
     , module Network.Google.Resource.Blogger.Blogs.ListByUser
 
-    -- ** BloggerCommentsApprove
+    -- ** blogger.comments.approve
     , module Network.Google.Resource.Blogger.Comments.Approve
 
-    -- ** BloggerCommentsDelete
+    -- ** blogger.comments.delete
     , module Network.Google.Resource.Blogger.Comments.Delete
 
-    -- ** BloggerCommentsGet
+    -- ** blogger.comments.get
     , module Network.Google.Resource.Blogger.Comments.Get
 
-    -- ** BloggerCommentsList
+    -- ** blogger.comments.list
     , module Network.Google.Resource.Blogger.Comments.List
 
-    -- ** BloggerCommentsListByBlog
+    -- ** blogger.comments.listByBlog
     , module Network.Google.Resource.Blogger.Comments.ListByBlog
 
-    -- ** BloggerCommentsMarkAsSpam
+    -- ** blogger.comments.markAsSpam
     , module Network.Google.Resource.Blogger.Comments.MarkAsSpam
 
-    -- ** BloggerCommentsRemoveContent
+    -- ** blogger.comments.removeContent
     , module Network.Google.Resource.Blogger.Comments.RemoveContent
 
-    -- ** BloggerPageViewsGet
+    -- ** blogger.pageViews.get
     , module Network.Google.Resource.Blogger.PageViews.Get
 
-    -- ** BloggerPagesDelete
+    -- ** blogger.pages.delete
     , module Network.Google.Resource.Blogger.Pages.Delete
 
-    -- ** BloggerPagesGet
+    -- ** blogger.pages.get
     , module Network.Google.Resource.Blogger.Pages.Get
 
-    -- ** BloggerPagesInsert
+    -- ** blogger.pages.insert
     , module Network.Google.Resource.Blogger.Pages.Insert
 
-    -- ** BloggerPagesList
+    -- ** blogger.pages.list
     , module Network.Google.Resource.Blogger.Pages.List
 
-    -- ** BloggerPagesPatch
+    -- ** blogger.pages.patch
     , module Network.Google.Resource.Blogger.Pages.Patch
 
-    -- ** BloggerPagesPublish
+    -- ** blogger.pages.publish
     , module Network.Google.Resource.Blogger.Pages.Publish
 
-    -- ** BloggerPagesRevert
+    -- ** blogger.pages.revert
     , module Network.Google.Resource.Blogger.Pages.Revert
 
-    -- ** BloggerPagesUpdate
+    -- ** blogger.pages.update
     , module Network.Google.Resource.Blogger.Pages.Update
 
-    -- ** BloggerPostUserInfosGet
+    -- ** blogger.postUserInfos.get
     , module Network.Google.Resource.Blogger.PostUserInfos.Get
 
-    -- ** BloggerPostUserInfosList
+    -- ** blogger.postUserInfos.list
     , module Network.Google.Resource.Blogger.PostUserInfos.List
 
-    -- ** BloggerPostsDelete
+    -- ** blogger.posts.delete
     , module Network.Google.Resource.Blogger.Posts.Delete
 
-    -- ** BloggerPostsGet
+    -- ** blogger.posts.get
     , module Network.Google.Resource.Blogger.Posts.Get
 
-    -- ** BloggerPostsGetByPath
+    -- ** blogger.posts.getByPath
     , module Network.Google.Resource.Blogger.Posts.GetByPath
 
-    -- ** BloggerPostsInsert
+    -- ** blogger.posts.insert
     , module Network.Google.Resource.Blogger.Posts.Insert
 
-    -- ** BloggerPostsList
+    -- ** blogger.posts.list
     , module Network.Google.Resource.Blogger.Posts.List
 
-    -- ** BloggerPostsPatch
+    -- ** blogger.posts.patch
     , module Network.Google.Resource.Blogger.Posts.Patch
 
-    -- ** BloggerPostsPublish
+    -- ** blogger.posts.publish
     , module Network.Google.Resource.Blogger.Posts.Publish
 
-    -- ** BloggerPostsRevert
+    -- ** blogger.posts.revert
     , module Network.Google.Resource.Blogger.Posts.Revert
 
-    -- ** BloggerPostsSearch
+    -- ** blogger.posts.search
     , module Network.Google.Resource.Blogger.Posts.Search
 
-    -- ** BloggerPostsUpdate
+    -- ** blogger.posts.update
     , module Network.Google.Resource.Blogger.Posts.Update
 
-    -- ** BloggerUsersGet
+    -- ** blogger.users.get
     , module Network.Google.Resource.Blogger.Users.Get
 
     -- * Types

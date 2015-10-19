@@ -22,7 +22,7 @@
 --
 -- Update Chrome OS Device. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryChromeosDevicesPatch@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.chromeosdevices.patch@.
 module Network.Google.Resource.Directory.ChromeosDevices.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Directory.ChromeosDevices.Patch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryChromeosDevicesPatch@ method which the
+-- | A resource alias for @directory.chromeosdevices.patch@ method which the
 -- 'ChromeosDevicesPatch'' request conforms to.
 type ChromeosDevicesPatchResource =
      "customer" :>
@@ -79,9 +79,9 @@ data ChromeosDevicesPatch' = ChromeosDevicesPatch'
 --
 -- * 'cdpProjection'
 chromeosDevicesPatch'
-    :: ChromeOSDevice -- ^ 'payload'
-    -> Text -- ^ 'customerId'
-    -> Text -- ^ 'deviceId'
+    :: ChromeOSDevice -- ^ 'cdpPayload'
+    -> Text -- ^ 'cdpCustomerId'
+    -> Text -- ^ 'cdpDeviceId'
     -> ChromeosDevicesPatch'
 chromeosDevicesPatch' pCdpPayload_ pCdpCustomerId_ pCdpDeviceId_ =
     ChromeosDevicesPatch'

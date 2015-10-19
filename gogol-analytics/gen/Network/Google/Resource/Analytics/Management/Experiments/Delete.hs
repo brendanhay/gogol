@@ -22,7 +22,7 @@
 --
 -- Delete an experiment.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementExperimentsDelete@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.experiments.delete@.
 module Network.Google.Resource.Analytics.Management.Experiments.Delete
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.Delete
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementExperimentsDelete@ method which the
+-- | A resource alias for @analytics.management.experiments.delete@ method which the
 -- 'ManagementExperimentsDelete'' request conforms to.
 type ManagementExperimentsDeleteResource =
      "management" :>
@@ -78,10 +78,10 @@ data ManagementExperimentsDelete' = ManagementExperimentsDelete'
 --
 -- * 'medExperimentId'
 managementExperimentsDelete'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'experimentId'
+    :: Text -- ^ 'medWebPropertyId'
+    -> Text -- ^ 'medProFileId'
+    -> Text -- ^ 'medAccountId'
+    -> Text -- ^ 'medExperimentId'
     -> ManagementExperimentsDelete'
 managementExperimentsDelete' pMedWebPropertyId_ pMedProFileId_ pMedAccountId_ pMedExperimentId_ =
     ManagementExperimentsDelete'

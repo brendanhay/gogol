@@ -22,7 +22,7 @@
 --
 -- Subscribe to changes on a file
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesWatch@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.watch@.
 module Network.Google.Resource.Drive.Files.Watch
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Drive.Files.Watch
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesWatch@ method which the
+-- | A resource alias for @drive.files.watch@ method which the
 -- 'FilesWatch'' request conforms to.
 type FilesWatchResource =
      "files" :>
@@ -95,8 +95,8 @@ data FilesWatch' = FilesWatch'
 --
 -- * 'fwRevisionId'
 filesWatch'
-    :: Channel -- ^ 'payload'
-    -> Text -- ^ 'fileId'
+    :: Channel -- ^ 'fwPayload'
+    -> Text -- ^ 'fwFileId'
     -> FilesWatch'
 filesWatch' pFwPayload_ pFwFileId_ =
     FilesWatch'

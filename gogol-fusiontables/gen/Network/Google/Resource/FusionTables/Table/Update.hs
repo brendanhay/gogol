@@ -23,7 +23,7 @@
 -- Updates an existing table. Unless explicitly requested, only the name,
 -- description, and attribution will be updated.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableUpdate@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.table.update@.
 module Network.Google.Resource.FusionTables.Table.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.FusionTables.Table.Update
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTableUpdate@ method which the
+-- | A resource alias for @fusiontables.table.update@ method which the
 -- 'TableUpdate'' request conforms to.
 type TableUpdateResource =
      "tables" :>
@@ -71,8 +71,8 @@ data TableUpdate' = TableUpdate'
 --
 -- * 'tuTableId'
 tableUpdate'
-    :: Table -- ^ 'payload'
-    -> Text -- ^ 'tableId'
+    :: Table -- ^ 'tuPayload'
+    -> Text -- ^ 'tuTableId'
     -> TableUpdate'
 tableUpdate' pTuPayload_ pTuTableId_ =
     TableUpdate'

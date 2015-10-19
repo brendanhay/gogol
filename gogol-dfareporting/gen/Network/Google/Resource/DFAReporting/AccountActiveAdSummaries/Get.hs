@@ -22,7 +22,7 @@
 --
 -- Gets the account\'s active ad summary by account ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAccountActiveAdSummariesGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accountActiveAdSummaries.get@.
 module Network.Google.Resource.DFAReporting.AccountActiveAdSummaries.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.AccountActiveAdSummaries.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAccountActiveAdSummariesGet@ method which the
+-- | A resource alias for @dfareporting.accountActiveAdSummaries.get@ method which the
 -- 'AccountActiveAdSummariesGet'' request conforms to.
 type AccountActiveAdSummariesGetResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data AccountActiveAdSummariesGet' = AccountActiveAdSummariesGet'
 --
 -- * 'aaasgSummaryAccountId'
 accountActiveAdSummariesGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'summaryAccountId'
+    :: Int64 -- ^ 'aaasgProFileId'
+    -> Int64 -- ^ 'aaasgSummaryAccountId'
     -> AccountActiveAdSummariesGet'
 accountActiveAdSummariesGet' pAaasgProFileId_ pAaasgSummaryAccountId_ =
     AccountActiveAdSummariesGet'

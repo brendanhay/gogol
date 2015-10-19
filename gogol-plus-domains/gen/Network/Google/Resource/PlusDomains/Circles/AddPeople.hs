@@ -23,7 +23,7 @@
 -- Add a person to a circle. Google+ limits certain circle operations,
 -- including the number of circle adds. Learn More.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesAddPeople@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.circles.addPeople@.
 module Network.Google.Resource.PlusDomains.Circles.AddPeople
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.PlusDomains.Circles.AddPeople
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsCirclesAddPeople@ method which the
+-- | A resource alias for @plusDomains.circles.addPeople@ method which the
 -- 'CirclesAddPeople'' request conforms to.
 type CirclesAddPeopleResource =
      "circles" :>
@@ -72,7 +72,7 @@ data CirclesAddPeople' = CirclesAddPeople'
 --
 -- * 'capCircleId'
 circlesAddPeople'
-    :: Text -- ^ 'circleId'
+    :: Text -- ^ 'capCircleId'
     -> CirclesAddPeople'
 circlesAddPeople' pCapCircleId_ =
     CirclesAddPeople'

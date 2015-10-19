@@ -22,7 +22,7 @@
 --
 -- Update schema
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectorySchemasUpdate@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.schemas.update@.
 module Network.Google.Resource.Directory.Schemas.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Directory.Schemas.Update
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectorySchemasUpdate@ method which the
+-- | A resource alias for @directory.schemas.update@ method which the
 -- 'SchemasUpdate'' request conforms to.
 type SchemasUpdateResource =
      "customer" :>
@@ -70,9 +70,9 @@ data SchemasUpdate' = SchemasUpdate'
 --
 -- * 'suSchemaKey'
 schemasUpdate'
-    :: Schema -- ^ 'payload'
-    -> Text -- ^ 'customerId'
-    -> Text -- ^ 'schemaKey'
+    :: Schema -- ^ 'suPayload'
+    -> Text -- ^ 'suCustomerId'
+    -> Text -- ^ 'suSchemaKey'
     -> SchemasUpdate'
 schemasUpdate' pSuPayload_ pSuCustomerId_ pSuSchemaKey_ =
     SchemasUpdate'

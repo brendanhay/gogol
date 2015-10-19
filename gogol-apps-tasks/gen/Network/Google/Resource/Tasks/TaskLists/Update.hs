@@ -22,7 +22,7 @@
 --
 -- Updates the authenticated user\'s specified task list.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTaskListsUpdate@.
+-- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasklists.update@.
 module Network.Google.Resource.Tasks.TaskLists.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Tasks.TaskLists.Update
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTaskListsUpdate@ method which the
+-- | A resource alias for @tasks.tasklists.update@ method which the
 -- 'TaskListsUpdate'' request conforms to.
 type TaskListsUpdateResource =
      "users" :>
@@ -66,8 +66,8 @@ data TaskListsUpdate' = TaskListsUpdate'
 --
 -- * 'tluTaskList'
 taskListsUpdate'
-    :: TaskList -- ^ 'payload'
-    -> Text -- ^ 'tasklist'
+    :: TaskList -- ^ 'tluPayload'
+    -> Text -- ^ 'tluTaskList'
     -> TaskListsUpdate'
 taskListsUpdate' pTluPayload_ pTluTaskList_ =
     TaskListsUpdate'

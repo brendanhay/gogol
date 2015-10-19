@@ -22,7 +22,7 @@
 --
 -- Deletes a subscription.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorSubscriptionsDelete@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.subscriptions.delete@.
 module Network.Google.Resource.Mirror.Subscriptions.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Mirror.Subscriptions.Delete
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorSubscriptionsDelete@ method which the
+-- | A resource alias for @mirror.subscriptions.delete@ method which the
 -- 'SubscriptionsDelete'' request conforms to.
 type SubscriptionsDeleteResource =
      "subscriptions" :>
@@ -59,7 +59,7 @@ newtype SubscriptionsDelete' = SubscriptionsDelete'
 --
 -- * 'sdId'
 subscriptionsDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'sdId'
     -> SubscriptionsDelete'
 subscriptionsDelete' pSdId_ =
     SubscriptionsDelete'

@@ -24,7 +24,7 @@
 -- default ad with dimensions matching the creative in the campaign if such
 -- a default ad does not exist already.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCampaignCreativeAssociationsInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.campaignCreativeAssociations.insert@.
 module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.Insert
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCampaignCreativeAssociationsInsert@ method which the
+-- | A resource alias for @dfareporting.campaignCreativeAssociations.insert@ method which the
 -- 'CampaignCreativeAssociationsInsert'' request conforms to.
 type CampaignCreativeAssociationsInsertResource =
      "userprofiles" :>
@@ -76,9 +76,9 @@ data CampaignCreativeAssociationsInsert' = CampaignCreativeAssociationsInsert'
 --
 -- * 'ccaiPayload'
 campaignCreativeAssociationsInsert'
-    :: Int64 -- ^ 'campaignId'
-    -> Int64 -- ^ 'profileId'
-    -> CampaignCreativeAssociation -- ^ 'payload'
+    :: Int64 -- ^ 'ccaiCampaignId'
+    -> Int64 -- ^ 'ccaiProFileId'
+    -> CampaignCreativeAssociation -- ^ 'ccaiPayload'
     -> CampaignCreativeAssociationsInsert'
 campaignCreativeAssociationsInsert' pCcaiCampaignId_ pCcaiProFileId_ pCcaiPayload_ =
     CampaignCreativeAssociationsInsert'

@@ -22,7 +22,7 @@
 --
 -- Returns the permission ID for an email address.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsGetIdForEmail@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.permissions.getIdForEmail@.
 module Network.Google.Resource.Drive.Permissions.GetIdForEmail
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Drive.Permissions.GetIdForEmail
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePermissionsGetIdForEmail@ method which the
+-- | A resource alias for @drive.permissions.getIdForEmail@ method which the
 -- 'PermissionsGetIdForEmail'' request conforms to.
 type PermissionsGetIdForEmailResource =
      "permissionIds" :>
@@ -59,7 +59,7 @@ newtype PermissionsGetIdForEmail' = PermissionsGetIdForEmail'
 --
 -- * 'pgifeEmail'
 permissionsGetIdForEmail'
-    :: Text -- ^ 'email'
+    :: Text -- ^ 'pgifeEmail'
     -> PermissionsGetIdForEmail'
 permissionsGetIdForEmail' pPgifeEmail_ =
     PermissionsGetIdForEmail'

@@ -22,7 +22,7 @@
 --
 -- Creates a customer resource if one does not already exist.
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerCustomersInsert@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.customers.insert@.
 module Network.Google.Resource.Reseller.Customers.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Reseller.Customers.Insert
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerCustomersInsert@ method which the
+-- | A resource alias for @reseller.customers.insert@ method which the
 -- 'CustomersInsert'' request conforms to.
 type CustomersInsertResource =
      "customers" :>
@@ -64,7 +64,7 @@ data CustomersInsert' = CustomersInsert'
 --
 -- * 'ciCustomerAuthToken'
 customersInsert'
-    :: Customer -- ^ 'payload'
+    :: Customer -- ^ 'ciPayload'
     -> CustomersInsert'
 customersInsert' pCiPayload_ =
     CustomersInsert'

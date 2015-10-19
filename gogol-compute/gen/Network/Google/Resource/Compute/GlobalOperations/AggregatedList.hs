@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of all operations grouped by scope.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalOperationsAggregatedList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalOperations.aggregatedList@.
 module Network.Google.Resource.Compute.GlobalOperations.AggregatedList
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.GlobalOperations.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeGlobalOperationsAggregatedList@ method which the
+-- | A resource alias for @compute.globalOperations.aggregatedList@ method which the
 -- 'GlobalOperationsAggregatedList'' request conforms to.
 type GlobalOperationsAggregatedListResource =
      Capture "project" Text :>
@@ -76,7 +76,7 @@ data GlobalOperationsAggregatedList' = GlobalOperationsAggregatedList'
 --
 -- * 'goalMaxResults'
 globalOperationsAggregatedList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'goalProject'
     -> GlobalOperationsAggregatedList'
 globalOperationsAggregatedList' pGoalProject_ =
     GlobalOperationsAggregatedList'

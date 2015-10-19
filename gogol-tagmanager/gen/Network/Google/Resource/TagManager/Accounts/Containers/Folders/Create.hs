@@ -22,7 +22,7 @@
 --
 -- Creates a GTM Folder.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersFoldersCreate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.folders.create@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Create
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Create
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersFoldersCreate@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.folders.create@ method which the
 -- 'AccountsContainersFoldersCreate'' request conforms to.
 type AccountsContainersFoldersCreateResource =
      "accounts" :>
@@ -71,9 +71,9 @@ data AccountsContainersFoldersCreate' = AccountsContainersFoldersCreate'
 --
 -- * 'acfcAccountId'
 accountsContainersFoldersCreate'
-    :: Text -- ^ 'containerId'
-    -> Folder -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acfcContainerId'
+    -> Folder -- ^ 'acfcPayload'
+    -> Text -- ^ 'acfcAccountId'
     -> AccountsContainersFoldersCreate'
 accountsContainersFoldersCreate' pAcfcContainerId_ pAcfcPayload_ pAcfcAccountId_ =
     AccountsContainersFoldersCreate'

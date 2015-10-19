@@ -22,7 +22,7 @@
 --
 -- Creates a new template for the table.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTemplateInsert@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.template.insert@.
 module Network.Google.Resource.FusionTables.Template.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.FusionTables.Template.Insert
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTemplateInsert@ method which the
+-- | A resource alias for @fusiontables.template.insert@ method which the
 -- 'TemplateInsert'' request conforms to.
 type TemplateInsertResource =
      "tables" :>
@@ -65,8 +65,8 @@ data TemplateInsert' = TemplateInsert'
 --
 -- * 'tiTableId'
 templateInsert'
-    :: Template -- ^ 'payload'
-    -> Text -- ^ 'tableId'
+    :: Template -- ^ 'tiPayload'
+    -> Text -- ^ 'tiTableId'
     -> TemplateInsert'
 templateInsert' pTiPayload_ pTiTableId_ =
     TemplateInsert'

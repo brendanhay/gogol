@@ -23,7 +23,7 @@
 -- Moves an instance and its attached persistent disks from one zone to
 -- another.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeProjectsMoveInstance@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.projects.moveInstance@.
 module Network.Google.Resource.Compute.Projects.MoveInstance
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.Projects.MoveInstance
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeProjectsMoveInstance@ method which the
+-- | A resource alias for @compute.projects.moveInstance@ method which the
 -- 'ProjectsMoveInstance'' request conforms to.
 type ProjectsMoveInstanceResource =
      Capture "project" Text :>
@@ -67,8 +67,8 @@ data ProjectsMoveInstance' = ProjectsMoveInstance'
 --
 -- * 'pmiPayload'
 projectsMoveInstance'
-    :: Text -- ^ 'project'
-    -> InstanceMoveRequest -- ^ 'payload'
+    :: Text -- ^ 'pmiProject'
+    -> InstanceMoveRequest -- ^ 'pmiPayload'
     -> ProjectsMoveInstance'
 projectsMoveInstance' pPmiProject_ pPmiPayload_ =
     ProjectsMoveInstance'

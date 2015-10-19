@@ -22,7 +22,7 @@
 --
 -- Gets a subscription of the customer.
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsGet@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.get@.
 module Network.Google.Resource.Reseller.Subscriptions.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Reseller.Subscriptions.Get
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerSubscriptionsGet@ method which the
+-- | A resource alias for @reseller.subscriptions.get@ method which the
 -- 'SubscriptionsGet'' request conforms to.
 type SubscriptionsGetResource =
      "customers" :>
@@ -65,8 +65,8 @@ data SubscriptionsGet' = SubscriptionsGet'
 --
 -- * 'sgSubscriptionId'
 subscriptionsGet'
-    :: Text -- ^ 'customerId'
-    -> Text -- ^ 'subscriptionId'
+    :: Text -- ^ 'sgCustomerId'
+    -> Text -- ^ 'sgSubscriptionId'
     -> SubscriptionsGet'
 subscriptionsGet' pSgCustomerId_ pSgSubscriptionId_ =
     SubscriptionsGet'

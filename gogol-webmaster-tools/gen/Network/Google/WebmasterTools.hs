@@ -26,43 +26,43 @@ module Network.Google.WebmasterTools
 
     -- * Resources
 
-    -- ** WebmastersSearchanalyticsQuery
+    -- ** webmasters.searchanalytics.query
     , module Network.Google.Resource.Webmasters.Searchanalytics.Query
 
-    -- ** WebmastersSitemapsDelete
+    -- ** webmasters.sitemaps.delete
     , module Network.Google.Resource.Webmasters.Sitemaps.Delete
 
-    -- ** WebmastersSitemapsGet
+    -- ** webmasters.sitemaps.get
     , module Network.Google.Resource.Webmasters.Sitemaps.Get
 
-    -- ** WebmastersSitemapsList
+    -- ** webmasters.sitemaps.list
     , module Network.Google.Resource.Webmasters.Sitemaps.List
 
-    -- ** WebmastersSitemapsSubmit
+    -- ** webmasters.sitemaps.submit
     , module Network.Google.Resource.Webmasters.Sitemaps.Submit
 
-    -- ** WebmastersSitesAdd
+    -- ** webmasters.sites.add
     , module Network.Google.Resource.Webmasters.Sites.Add
 
-    -- ** WebmastersSitesDelete
+    -- ** webmasters.sites.delete
     , module Network.Google.Resource.Webmasters.Sites.Delete
 
-    -- ** WebmastersSitesGet
+    -- ** webmasters.sites.get
     , module Network.Google.Resource.Webmasters.Sites.Get
 
-    -- ** WebmastersSitesList
+    -- ** webmasters.sites.list
     , module Network.Google.Resource.Webmasters.Sites.List
 
-    -- ** WebmastersURLCrawlErrorscountsQuery
+    -- ** webmasters.urlcrawlerrorscounts.query
     , module Network.Google.Resource.Webmasters.URLCrawlErrorscounts.Query
 
-    -- ** WebmastersURLCrawlErrorsSamplesGet
+    -- ** webmasters.urlcrawlerrorssamples.get
     , module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.Get
 
-    -- ** WebmastersURLCrawlErrorsSamplesList
+    -- ** webmasters.urlcrawlerrorssamples.list
     , module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.List
 
-    -- ** WebmastersURLCrawlErrorsSamplesMarkAsFixed
+    -- ** webmasters.urlcrawlerrorssamples.markAsFixed
     , module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.MarkAsFixed
 
     -- * Types

@@ -22,7 +22,7 @@
 --
 -- Begin a new transaction.
 --
--- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @DatastoreDatasetsBeginTransaction@.
+-- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @datastore.datasets.beginTransaction@.
 module Network.Google.Resource.Datastore.Datasets.BeginTransaction
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Datastore.Datasets.BeginTransaction
 import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DatastoreDatasetsBeginTransaction@ method which the
+-- | A resource alias for @datastore.datasets.beginTransaction@ method which the
 -- 'DatasetsBeginTransaction'' request conforms to.
 type DatasetsBeginTransactionResource =
      Capture "datasetId" Text :>
@@ -65,8 +65,8 @@ data DatasetsBeginTransaction' = DatasetsBeginTransaction'
 --
 -- * 'dbtDatasetId'
 datasetsBeginTransaction'
-    :: BeginTransactionRequest -- ^ 'payload'
-    -> Text -- ^ 'datasetId'
+    :: BeginTransactionRequest -- ^ 'dbtPayload'
+    -> Text -- ^ 'dbtDatasetId'
     -> DatasetsBeginTransaction'
 datasetsBeginTransaction' pDbtPayload_ pDbtDatasetId_ =
     DatasetsBeginTransaction'

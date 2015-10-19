@@ -22,7 +22,7 @@
 --
 -- Updates a report.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingReportsUpdate@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.reports.update@.
 module Network.Google.Resource.DFAReporting.Reports.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.Reports.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingReportsUpdate@ method which the
+-- | A resource alias for @dfareporting.reports.update@ method which the
 -- 'ReportsUpdate'' request conforms to.
 type ReportsUpdateResource =
      "userprofiles" :>
@@ -70,9 +70,9 @@ data ReportsUpdate' = ReportsUpdate'
 --
 -- * 'ruPayload'
 reportsUpdate'
-    :: Int64 -- ^ 'reportId'
-    -> Int64 -- ^ 'profileId'
-    -> Report -- ^ 'payload'
+    :: Int64 -- ^ 'ruReportId'
+    -> Int64 -- ^ 'ruProFileId'
+    -> Report -- ^ 'ruPayload'
     -> ReportsUpdate'
 reportsUpdate' pRuReportId_ pRuProFileId_ pRuPayload_ =
     ReportsUpdate'

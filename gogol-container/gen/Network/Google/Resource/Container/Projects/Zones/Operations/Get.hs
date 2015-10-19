@@ -22,7 +22,7 @@
 --
 -- Gets the specified operation.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @ContainerProjectsZonesOperationsGet@.
+-- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.operations.get@.
 module Network.Google.Resource.Container.Projects.Zones.Operations.Get
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Container.Projects.Zones.Operations.Get
 import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ContainerProjectsZonesOperationsGet@ method which the
+-- | A resource alias for @container.projects.zones.operations.get@ method which the
 -- 'ProjectsZonesOperationsGet'' request conforms to.
 type ProjectsZonesOperationsGetResource =
      "v1" :>
@@ -108,9 +108,9 @@ data ProjectsZonesOperationsGet' = ProjectsZonesOperationsGet'
 --
 -- * 'pzogCallback'
 projectsZonesOperationsGet'
-    :: Text -- ^ 'zone'
-    -> Text -- ^ 'projectId'
-    -> Text -- ^ 'operationId'
+    :: Text -- ^ 'pzogZone'
+    -> Text -- ^ 'pzogProjectId'
+    -> Text -- ^ 'pzogOperationId'
     -> ProjectsZonesOperationsGet'
 projectsZonesOperationsGet' pPzogZone_ pPzogProjectId_ pPzogOperationId_ =
     ProjectsZonesOperationsGet'

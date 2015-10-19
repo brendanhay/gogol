@@ -22,7 +22,7 @@
 --
 -- Update an existing experiment.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementExperimentsUpdate@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.experiments.update@.
 module Network.Google.Resource.Analytics.Management.Experiments.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.Update
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementExperimentsUpdate@ method which the
+-- | A resource alias for @analytics.management.experiments.update@ method which the
 -- 'ManagementExperimentsUpdate'' request conforms to.
 type ManagementExperimentsUpdateResource =
      "management" :>
@@ -83,11 +83,11 @@ data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
 --
 -- * 'meuExperimentId'
 managementExperimentsUpdate'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Experiment -- ^ 'payload'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'experimentId'
+    :: Text -- ^ 'meuWebPropertyId'
+    -> Text -- ^ 'meuProFileId'
+    -> Experiment -- ^ 'meuPayload'
+    -> Text -- ^ 'meuAccountId'
+    -> Text -- ^ 'meuExperimentId'
     -> ManagementExperimentsUpdate'
 managementExperimentsUpdate' pMeuWebPropertyId_ pMeuProFileId_ pMeuPayload_ pMeuAccountId_ pMeuExperimentId_ =
     ManagementExperimentsUpdate'

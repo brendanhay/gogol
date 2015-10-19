@@ -22,7 +22,7 @@
 --
 -- Polls for the status of a report request.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchReportsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @doubleclicksearch.reports.get@.
 module Network.Google.Resource.DoubleClickSearch.Reports.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DoubleClickSearch.Reports.Get
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClicksearchReportsGet@ method which the
+-- | A resource alias for @doubleclicksearch.reports.get@ method which the
 -- 'ReportsGet'' request conforms to.
 type ReportsGetResource =
      "reports" :>
@@ -59,7 +59,7 @@ newtype ReportsGet' = ReportsGet'
 --
 -- * 'rgReportId'
 reportsGet'
-    :: Text -- ^ 'reportId'
+    :: Text -- ^ 'rgReportId'
     -> ReportsGet'
 reportsGet' pRgReportId_ =
     ReportsGet'

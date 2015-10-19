@@ -22,7 +22,7 @@
 --
 -- Removes a revision.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRevisionsDelete@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.revisions.delete@.
 module Network.Google.Resource.Drive.Revisions.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Drive.Revisions.Delete
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRevisionsDelete@ method which the
+-- | A resource alias for @drive.revisions.delete@ method which the
 -- 'RevisionsDelete'' request conforms to.
 type RevisionsDeleteResource =
      "files" :>
@@ -65,8 +65,8 @@ data RevisionsDelete' = RevisionsDelete'
 --
 -- * 'rdRevisionId'
 revisionsDelete'
-    :: Text -- ^ 'fileId'
-    -> Text -- ^ 'revisionId'
+    :: Text -- ^ 'rdFileId'
+    -> Text -- ^ 'rdRevisionId'
     -> RevisionsDelete'
 revisionsDelete' pRdFileId_ pRdRevisionId_ =
     RevisionsDelete'

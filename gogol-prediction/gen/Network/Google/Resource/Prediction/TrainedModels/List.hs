@@ -22,7 +22,7 @@
 --
 -- List available models.
 --
--- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedModelsList@.
+-- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @prediction.trainedmodels.list@.
 module Network.Google.Resource.Prediction.TrainedModels.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Prediction.TrainedModels.List
 import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PredictionTrainedModelsList@ method which the
+-- | A resource alias for @prediction.trainedmodels.list@ method which the
 -- 'TrainedModelsList'' request conforms to.
 type TrainedModelsListResource =
      Capture "project" Text :>
@@ -70,7 +70,7 @@ data TrainedModelsList' = TrainedModelsList'
 --
 -- * 'tmlMaxResults'
 trainedModelsList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'tmlProject'
     -> TrainedModelsList'
 trainedModelsList' pTmlProject_ =
     TrainedModelsList'

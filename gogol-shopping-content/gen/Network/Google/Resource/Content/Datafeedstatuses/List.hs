@@ -22,7 +22,7 @@
 --
 -- Lists the statuses of the datafeeds in your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentDatafeedstatusesList@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeedstatuses.list@.
 module Network.Google.Resource.Content.Datafeedstatuses.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Datafeedstatuses.List
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentDatafeedstatusesList@ method which the
+-- | A resource alias for @content.datafeedstatuses.list@ method which the
 -- 'DatafeedstatusesList'' request conforms to.
 type DatafeedstatusesListResource =
      Capture "merchantId" Word64 :>
@@ -70,7 +70,7 @@ data DatafeedstatusesList' = DatafeedstatusesList'
 --
 -- * 'dllMaxResults'
 datafeedstatusesList'
-    :: Word64 -- ^ 'merchantId'
+    :: Word64 -- ^ 'dllMerchantId'
     -> DatafeedstatusesList'
 datafeedstatusesList' pDllMerchantId_ =
     DatafeedstatusesList'

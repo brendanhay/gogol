@@ -23,7 +23,7 @@
 -- Allocate IDs for incomplete keys (useful for referencing an entity
 -- before it is inserted).
 --
--- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @DatastoreDatasetsAllocateIds@.
+-- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @datastore.datasets.allocateIds@.
 module Network.Google.Resource.Datastore.Datasets.AllocateIds
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Datastore.Datasets.AllocateIds
 import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DatastoreDatasetsAllocateIds@ method which the
+-- | A resource alias for @datastore.datasets.allocateIds@ method which the
 -- 'DatasetsAllocateIds'' request conforms to.
 type DatasetsAllocateIdsResource =
      Capture "datasetId" Text :>
@@ -67,8 +67,8 @@ data DatasetsAllocateIds' = DatasetsAllocateIds'
 --
 -- * 'daiDatasetId'
 datasetsAllocateIds'
-    :: AllocateIdsRequest -- ^ 'payload'
-    -> Text -- ^ 'datasetId'
+    :: AllocateIdsRequest -- ^ 'daiPayload'
+    -> Text -- ^ 'daiDatasetId'
     -> DatasetsAllocateIds'
 datasetsAllocateIds' pDaiPayload_ pDaiDatasetId_ =
     DatasetsAllocateIds'

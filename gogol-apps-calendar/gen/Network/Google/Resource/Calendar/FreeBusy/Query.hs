@@ -22,7 +22,7 @@
 --
 -- Returns free\/busy information for a set of calendars.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarFreeBusyQuery@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.freebusy.query@.
 module Network.Google.Resource.Calendar.FreeBusy.Query
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Calendar.FreeBusy.Query
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarFreeBusyQuery@ method which the
+-- | A resource alias for @calendar.freebusy.query@ method which the
 -- 'FreeBusyQuery'' request conforms to.
 type FreeBusyQueryResource =
      "freeBusy" :>
@@ -60,7 +60,7 @@ newtype FreeBusyQuery' = FreeBusyQuery'
 --
 -- * 'fbqPayload'
 freeBusyQuery'
-    :: FreeBusyRequest -- ^ 'payload'
+    :: FreeBusyRequest -- ^ 'fbqPayload'
     -> FreeBusyQuery'
 freeBusyQuery' pFbqPayload_ =
     FreeBusyQuery'

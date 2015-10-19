@@ -26,115 +26,115 @@ module Network.Google.AppsCalendar
 
     -- * Resources
 
-    -- ** CalendarACLDelete
+    -- ** calendar.acl.delete
     , module Network.Google.Resource.Calendar.ACL.Delete
 
-    -- ** CalendarACLGet
+    -- ** calendar.acl.get
     , module Network.Google.Resource.Calendar.ACL.Get
 
-    -- ** CalendarACLInsert
+    -- ** calendar.acl.insert
     , module Network.Google.Resource.Calendar.ACL.Insert
 
-    -- ** CalendarACLList
+    -- ** calendar.acl.list
     , module Network.Google.Resource.Calendar.ACL.List
 
-    -- ** CalendarACLPatch
+    -- ** calendar.acl.patch
     , module Network.Google.Resource.Calendar.ACL.Patch
 
-    -- ** CalendarACLUpdate
+    -- ** calendar.acl.update
     , module Network.Google.Resource.Calendar.ACL.Update
 
-    -- ** CalendarACLWatch
+    -- ** calendar.acl.watch
     , module Network.Google.Resource.Calendar.ACL.Watch
 
-    -- ** CalendarCalendarListDelete
+    -- ** calendar.calendarList.delete
     , module Network.Google.Resource.Calendar.CalendarList.Delete
 
-    -- ** CalendarCalendarListGet
+    -- ** calendar.calendarList.get
     , module Network.Google.Resource.Calendar.CalendarList.Get
 
-    -- ** CalendarCalendarListInsert
+    -- ** calendar.calendarList.insert
     , module Network.Google.Resource.Calendar.CalendarList.Insert
 
-    -- ** CalendarCalendarListList
+    -- ** calendar.calendarList.list
     , module Network.Google.Resource.Calendar.CalendarList.List
 
-    -- ** CalendarCalendarListPatch
+    -- ** calendar.calendarList.patch
     , module Network.Google.Resource.Calendar.CalendarList.Patch
 
-    -- ** CalendarCalendarListUpdate
+    -- ** calendar.calendarList.update
     , module Network.Google.Resource.Calendar.CalendarList.Update
 
-    -- ** CalendarCalendarListWatch
+    -- ** calendar.calendarList.watch
     , module Network.Google.Resource.Calendar.CalendarList.Watch
 
-    -- ** CalendarCalendarsClear
+    -- ** calendar.calendars.clear
     , module Network.Google.Resource.Calendar.Calendars.Clear
 
-    -- ** CalendarCalendarsDelete
+    -- ** calendar.calendars.delete
     , module Network.Google.Resource.Calendar.Calendars.Delete
 
-    -- ** CalendarCalendarsGet
+    -- ** calendar.calendars.get
     , module Network.Google.Resource.Calendar.Calendars.Get
 
-    -- ** CalendarCalendarsInsert
+    -- ** calendar.calendars.insert
     , module Network.Google.Resource.Calendar.Calendars.Insert
 
-    -- ** CalendarCalendarsPatch
+    -- ** calendar.calendars.patch
     , module Network.Google.Resource.Calendar.Calendars.Patch
 
-    -- ** CalendarCalendarsUpdate
+    -- ** calendar.calendars.update
     , module Network.Google.Resource.Calendar.Calendars.Update
 
-    -- ** CalendarChannelsStop
+    -- ** calendar.channels.stop
     , module Network.Google.Resource.Calendar.Channels.Stop
 
-    -- ** CalendarColorsGet
+    -- ** calendar.colors.get
     , module Network.Google.Resource.Calendar.Colors.Get
 
-    -- ** CalendarEventsDelete
+    -- ** calendar.events.delete
     , module Network.Google.Resource.Calendar.Events.Delete
 
-    -- ** CalendarEventsGet
+    -- ** calendar.events.get
     , module Network.Google.Resource.Calendar.Events.Get
 
-    -- ** CalendarEventsImport
+    -- ** calendar.events.import
     , module Network.Google.Resource.Calendar.Events.Import
 
-    -- ** CalendarEventsInsert
+    -- ** calendar.events.insert
     , module Network.Google.Resource.Calendar.Events.Insert
 
-    -- ** CalendarEventsInstances
+    -- ** calendar.events.instances
     , module Network.Google.Resource.Calendar.Events.Instances
 
-    -- ** CalendarEventsList
+    -- ** calendar.events.list
     , module Network.Google.Resource.Calendar.Events.List
 
-    -- ** CalendarEventsMove
+    -- ** calendar.events.move
     , module Network.Google.Resource.Calendar.Events.Move
 
-    -- ** CalendarEventsPatch
+    -- ** calendar.events.patch
     , module Network.Google.Resource.Calendar.Events.Patch
 
-    -- ** CalendarEventsQuickAdd
+    -- ** calendar.events.quickAdd
     , module Network.Google.Resource.Calendar.Events.QuickAdd
 
-    -- ** CalendarEventsUpdate
+    -- ** calendar.events.update
     , module Network.Google.Resource.Calendar.Events.Update
 
-    -- ** CalendarEventsWatch
+    -- ** calendar.events.watch
     , module Network.Google.Resource.Calendar.Events.Watch
 
-    -- ** CalendarFreeBusyQuery
+    -- ** calendar.freebusy.query
     , module Network.Google.Resource.Calendar.FreeBusy.Query
 
-    -- ** CalendarSettingsGet
+    -- ** calendar.settings.get
     , module Network.Google.Resource.Calendar.Settings.Get
 
-    -- ** CalendarSettingsList
+    -- ** calendar.settings.list
     , module Network.Google.Resource.Calendar.Settings.List
 
-    -- ** CalendarSettingsWatch
+    -- ** calendar.settings.watch
     , module Network.Google.Resource.Calendar.Settings.Watch
 
     -- * Types

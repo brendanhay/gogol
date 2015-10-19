@@ -23,7 +23,7 @@
 -- Update the supplied ad unit in the specified publisher AdSense account.
 -- This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdUnitsPatch@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.accounts.adunits.patch@.
 module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Patch
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Patch
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAccountsAdUnitsPatch@ method which the
+-- | A resource alias for @adsensehost.accounts.adunits.patch@ method which the
 -- 'AccountsAdUnitsPatch'' request conforms to.
 type AccountsAdUnitsPatchResource =
      "accounts" :>
@@ -78,10 +78,10 @@ data AccountsAdUnitsPatch' = AccountsAdUnitsPatch'
 --
 -- * 'aaupAccountId'
 accountsAdUnitsPatch'
-    :: Text -- ^ 'adUnitId'
-    -> AdUnit -- ^ 'payload'
-    -> Text -- ^ 'adClientId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'aaupAdUnitId'
+    -> AdUnit -- ^ 'aaupPayload'
+    -> Text -- ^ 'aaupAdClientId'
+    -> Text -- ^ 'aaupAccountId'
     -> AccountsAdUnitsPatch'
 accountsAdUnitsPatch' pAaupAdUnitId_ pAaupPayload_ pAaupAdClientId_ pAaupAccountId_ =
     AccountsAdUnitsPatch'

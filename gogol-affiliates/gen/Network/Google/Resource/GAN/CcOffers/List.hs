@@ -22,7 +22,7 @@
 --
 -- Retrieves credit card offers for the given publisher.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANCcOffersList@.
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @gan.ccOffers.list@.
 module Network.Google.Resource.GAN.CcOffers.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.GAN.CcOffers.List
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GANCcOffersList@ method which the
+-- | A resource alias for @gan.ccOffers.list@ method which the
 -- 'CcOffersList'' request conforms to.
 type CcOffersListResource =
      "publishers" :>
@@ -70,7 +70,7 @@ data CcOffersList' = CcOffersList'
 --
 -- * 'colPublisher'
 ccOffersList'
-    :: Text -- ^ 'publisher'
+    :: Text -- ^ 'colPublisher'
     -> CcOffersList'
 ccOffersList' pColPublisher_ =
     CcOffersList'

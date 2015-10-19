@@ -23,7 +23,7 @@
 -- Retrieves table data from a specified set of rows. Requires the READER
 -- dataset role.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryTableDataList@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @bigquery.tabledata.list@.
 module Network.Google.Resource.BigQuery.TableData.List
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.BigQuery.TableData.List
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigQueryTableDataList@ method which the
+-- | A resource alias for @bigquery.tabledata.list@ method which the
 -- 'TableDataList'' request conforms to.
 type TableDataListResource =
      "projects" :>
@@ -89,9 +89,9 @@ data TableDataList' = TableDataList'
 --
 -- * 'tMaxResults'
 tableDataList'
-    :: Text -- ^ 'datasetId'
-    -> Text -- ^ 'projectId'
-    -> Text -- ^ 'tableId'
+    :: Text -- ^ 'tDatasetId'
+    -> Text -- ^ 'tProjectId'
+    -> Text -- ^ 'tTableId'
     -> TableDataList'
 tableDataList' pTDatasetId_ pTProjectId_ pTTableId_ =
     TableDataList'

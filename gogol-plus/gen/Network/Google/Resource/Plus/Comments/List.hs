@@ -22,7 +22,7 @@
 --
 -- List all of the comments for an activity.
 --
--- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusCommentsList@.
+-- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @plus.comments.list@.
 module Network.Google.Resource.Plus.Comments.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Plus.Comments.List
 import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusCommentsList@ method which the
+-- | A resource alias for @plus.comments.list@ method which the
 -- 'CommentsList'' request conforms to.
 type CommentsListResource =
      "activities" :>
@@ -75,7 +75,7 @@ data CommentsList' = CommentsList'
 --
 -- * 'clMaxResults'
 commentsList'
-    :: Text -- ^ 'activityId'
+    :: Text -- ^ 'clActivityId'
     -> CommentsList'
 commentsList' pClActivityId_ =
     CommentsList'

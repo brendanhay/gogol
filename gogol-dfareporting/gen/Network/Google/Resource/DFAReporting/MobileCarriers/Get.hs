@@ -22,7 +22,7 @@
 --
 -- Gets one mobile carrier by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingMobileCarriersGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.mobileCarriers.get@.
 module Network.Google.Resource.DFAReporting.MobileCarriers.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.MobileCarriers.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingMobileCarriersGet@ method which the
+-- | A resource alias for @dfareporting.mobileCarriers.get@ method which the
 -- 'MobileCarriersGet'' request conforms to.
 type MobileCarriersGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data MobileCarriersGet' = MobileCarriersGet'
 --
 -- * 'mcgId'
 mobileCarriersGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'mcgProFileId'
+    -> Int64 -- ^ 'mcgId'
     -> MobileCarriersGet'
 mobileCarriersGet' pMcgProFileId_ pMcgId_ =
     MobileCarriersGet'

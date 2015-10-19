@@ -22,7 +22,7 @@
 --
 -- Deletes all images for the specified language and image type.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsImagesDeleteall@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.images.deleteall@.
 module Network.Google.Resource.AndroidPublisher.Edits.Images.Deleteall
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Images.Deleteall
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsImagesDeleteall@ method which the
+-- | A resource alias for @androidpublisher.edits.images.deleteall@ method which the
 -- 'EditsImagesDeleteall'' request conforms to.
 type EditsImagesDeleteallResource =
      Capture "packageName" Text :>
@@ -76,10 +76,10 @@ data EditsImagesDeleteall' = EditsImagesDeleteall'
 --
 -- * 'eidiEditId'
 editsImagesDeleteall'
-    :: Text -- ^ 'packageName'
-    -> EditsImagesDeleteallImageType -- ^ 'imageType'
-    -> Text -- ^ 'language'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eidiPackageName'
+    -> EditsImagesDeleteallImageType -- ^ 'eidiImageType'
+    -> Text -- ^ 'eidiLanguage'
+    -> Text -- ^ 'eidiEditId'
     -> EditsImagesDeleteall'
 editsImagesDeleteall' pEidiPackageName_ pEidiImageType_ pEidiLanguage_ pEidiEditId_ =
     EditsImagesDeleteall'

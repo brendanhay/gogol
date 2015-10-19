@@ -22,7 +22,7 @@
 --
 -- Uploads a custom video thumbnail to YouTube and sets it for a video.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeThumbnailsSet@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.thumbnails.set@.
 module Network.Google.Resource.YouTube.Thumbnails.Set
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.YouTube.Thumbnails.Set
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeThumbnailsSet@ method which the
+-- | A resource alias for @youtube.thumbnails.set@ method which the
 -- 'ThumbnailsSet'' request conforms to.
 type ThumbnailsSetResource =
      "thumbnails" :>
@@ -71,8 +71,8 @@ data ThumbnailsSet' = ThumbnailsSet'
 --
 -- * 'tsVideoId'
 thumbnailsSet'
-    :: Body -- ^ 'media'
-    -> Text -- ^ 'videoId'
+    :: Body -- ^ 'tsMedia'
+    -> Text -- ^ 'tsVideoId'
     -> ThumbnailsSet'
 thumbnailsSet' pTsMedia_ pTsVideoId_ =
     ThumbnailsSet'

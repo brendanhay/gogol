@@ -23,7 +23,7 @@
 -- Adds a public key to the specified User resource with the data included
 -- in the request.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsUsersAddPublicKey@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.users.addPublicKey@.
 module Network.Google.Resource.CloudUserAccounts.Users.AddPublicKey
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.CloudUserAccounts.Users.AddPublicKey
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsUsersAddPublicKey@ method which the
+-- | A resource alias for @clouduseraccounts.users.addPublicKey@ method which the
 -- 'UsersAddPublicKey'' request conforms to.
 type UsersAddPublicKeyResource =
      Capture "project" Text :>
@@ -73,9 +73,9 @@ data UsersAddPublicKey' = UsersAddPublicKey'
 --
 -- * 'uapkUser'
 usersAddPublicKey'
-    :: Text -- ^ 'project'
-    -> PublicKey -- ^ 'payload'
-    -> Text -- ^ 'user'
+    :: Text -- ^ 'uapkProject'
+    -> PublicKey -- ^ 'uapkPayload'
+    -> Text -- ^ 'uapkUser'
     -> UsersAddPublicKey'
 usersAddPublicKey' pUapkProject_ pUapkPayload_ pUapkUser_ =
     UsersAddPublicKey'

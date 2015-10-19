@@ -27,22 +27,22 @@ module Network.Google.Partners
 
     -- * Resources
 
-    -- ** PartnersClientMessagesLog
+    -- ** partners.clientMessages.log
     , module Network.Google.Resource.Partners.ClientMessages.Log
 
-    -- ** PartnersCompaniesGet
+    -- ** partners.companies.get
     , module Network.Google.Resource.Partners.Companies.Get
 
-    -- ** PartnersCompaniesLeadsCreate
+    -- ** partners.companies.leads.create
     , module Network.Google.Resource.Partners.Companies.Leads.Create
 
-    -- ** PartnersCompaniesList
+    -- ** partners.companies.list
     , module Network.Google.Resource.Partners.Companies.List
 
-    -- ** PartnersUserEventsLog
+    -- ** partners.userEvents.log
     , module Network.Google.Resource.Partners.UserEvents.Log
 
-    -- ** PartnersUserStatesList
+    -- ** partners.userStates.list
     , module Network.Google.Resource.Partners.UserStates.List
 
     -- * Types

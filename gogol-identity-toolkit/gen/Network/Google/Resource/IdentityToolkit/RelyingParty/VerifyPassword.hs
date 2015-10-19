@@ -22,7 +22,7 @@
 --
 -- Verifies the user entered password.
 --
--- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyVerifyPassword@.
+-- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.verifyPassword@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyPassword
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyPassword
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyVerifyPassword@ method which the
+-- | A resource alias for @identitytoolkit.relyingparty.verifyPassword@ method which the
 -- 'RelyingPartyVerifyPassword'' request conforms to.
 type RelyingPartyVerifyPasswordResource =
      "verifyPassword" :>
@@ -61,7 +61,7 @@ newtype RelyingPartyVerifyPassword' = RelyingPartyVerifyPassword'
 --
 -- * 'rpvpPayload'
 relyingPartyVerifyPassword'
-    :: IdentitytoolkitRelyingPartyVerifyPasswordRequest -- ^ 'payload'
+    :: IdentitytoolkitRelyingPartyVerifyPasswordRequest -- ^ 'rpvpPayload'
     -> RelyingPartyVerifyPassword'
 relyingPartyVerifyPassword' pRpvpPayload_ =
     RelyingPartyVerifyPassword'

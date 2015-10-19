@@ -22,7 +22,7 @@
 --
 -- Moves a volume within a bookshelf.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryBookshelvesMoveVolume@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.bookshelves.moveVolume@.
 module Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryBookshelvesMoveVolume@ method which the
+-- | A resource alias for @books.mylibrary.bookshelves.moveVolume@ method which the
 -- 'MyLibraryBookshelvesMoveVolume'' request conforms to.
 type MyLibraryBookshelvesMoveVolumeResource =
      "mylibrary" :>
@@ -76,9 +76,9 @@ data MyLibraryBookshelvesMoveVolume' = MyLibraryBookshelvesMoveVolume'
 --
 -- * 'mlbmvVolumePosition'
 myLibraryBookshelvesMoveVolume'
-    :: Text -- ^ 'shelf'
-    -> Text -- ^ 'volumeId'
-    -> Int32 -- ^ 'volumePosition'
+    :: Text -- ^ 'mlbmvShelf'
+    -> Text -- ^ 'mlbmvVolumeId'
+    -> Int32 -- ^ 'mlbmvVolumePosition'
     -> MyLibraryBookshelvesMoveVolume'
 myLibraryBookshelvesMoveVolume' pMlbmvShelf_ pMlbmvVolumeId_ pMlbmvVolumePosition_ =
     MyLibraryBookshelvesMoveVolume'

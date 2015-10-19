@@ -22,7 +22,7 @@
 --
 -- Updates an existing site.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSitesUpdate@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.sites.update@.
 module Network.Google.Resource.DFAReporting.Sites.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Sites.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSitesUpdate@ method which the
+-- | A resource alias for @dfareporting.sites.update@ method which the
 -- 'SitesUpdate'' request conforms to.
 type SitesUpdateResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data SitesUpdate' = SitesUpdate'
 --
 -- * 'suPayload'
 sitesUpdate'
-    :: Int64 -- ^ 'profileId'
-    -> Site -- ^ 'payload'
+    :: Int64 -- ^ 'suProFileId'
+    -> Site -- ^ 'suPayload'
     -> SitesUpdate'
 sitesUpdate' pSuProFileId_ pSuPayload_ =
     SitesUpdate'

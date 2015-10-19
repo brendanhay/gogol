@@ -22,7 +22,7 @@
 --
 -- Updates a role. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryRolesPatch@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.roles.patch@.
 module Network.Google.Resource.Directory.Roles.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Directory.Roles.Patch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryRolesPatch@ method which the
+-- | A resource alias for @directory.roles.patch@ method which the
 -- 'RolesPatch'' request conforms to.
 type RolesPatchResource =
      "customer" :>
@@ -70,9 +70,9 @@ data RolesPatch' = RolesPatch'
 --
 -- * 'rpCustomer'
 rolesPatch'
-    :: Role -- ^ 'payload'
-    -> Text -- ^ 'roleId'
-    -> Text -- ^ 'customer'
+    :: Role -- ^ 'rpPayload'
+    -> Text -- ^ 'rpRoleId'
+    -> Text -- ^ 'rpCustomer'
     -> RolesPatch'
 rolesPatch' pRpPayload_ pRpRoleId_ pRpCustomer_ =
     RolesPatch'

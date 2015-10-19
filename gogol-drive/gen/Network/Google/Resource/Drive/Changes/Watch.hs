@@ -22,7 +22,7 @@
 --
 -- Subscribe to changes for a user.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChangesWatch@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.changes.watch@.
 module Network.Google.Resource.Drive.Changes.Watch
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Drive.Changes.Watch
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveChangesWatch@ method which the
+-- | A resource alias for @drive.changes.watch@ method which the
 -- 'ChangesWatch'' request conforms to.
 type ChangesWatchResource =
      "changes" :>
@@ -90,7 +90,7 @@ data ChangesWatch' = ChangesWatch'
 --
 -- * 'cwIncludeDeleted'
 changesWatch'
-    :: Channel -- ^ 'payload'
+    :: Channel -- ^ 'cwPayload'
     -> ChangesWatch'
 changesWatch' pCwPayload_ =
     ChangesWatch'

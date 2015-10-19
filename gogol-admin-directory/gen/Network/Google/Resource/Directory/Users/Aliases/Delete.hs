@@ -22,7 +22,7 @@
 --
 -- Remove a alias for the user
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersAliasesDelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.aliases.delete@.
 module Network.Google.Resource.Directory.Users.Aliases.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Users.Aliases.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersAliasesDelete@ method which the
+-- | A resource alias for @directory.users.aliases.delete@ method which the
 -- 'UsersAliasesDelete'' request conforms to.
 type UsersAliasesDeleteResource =
      "users" :>
@@ -65,8 +65,8 @@ data UsersAliasesDelete' = UsersAliasesDelete'
 --
 -- * 'uadUserKey'
 usersAliasesDelete'
-    :: Text -- ^ 'alias'
-    -> Text -- ^ 'userKey'
+    :: Text -- ^ 'uadAlias'
+    -> Text -- ^ 'uadUserKey'
     -> UsersAliasesDelete'
 usersAliasesDelete' pUadAlias_ pUadUserKey_ =
     UsersAliasesDelete'

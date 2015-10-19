@@ -22,7 +22,7 @@
 --
 -- Mutate a layer asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineLayersPatch@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.layers.patch@.
 module Network.Google.Resource.MapsEngine.Layers.Patch
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.MapsEngine.Layers.Patch
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersPatch@ method which the
+-- | A resource alias for @mapsengine.layers.patch@ method which the
 -- 'LayersPatch'' request conforms to.
 type LayersPatchResource =
      "layers" :>
@@ -64,8 +64,8 @@ data LayersPatch' = LayersPatch'
 --
 -- * 'layId'
 layersPatch'
-    :: Layer -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: Layer -- ^ 'layPayload'
+    -> Text -- ^ 'layId'
     -> LayersPatch'
 layersPatch' pLayPayload_ pLayId_ =
     LayersPatch'

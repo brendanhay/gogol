@@ -22,7 +22,7 @@
 --
 -- Updates an existing reply.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRepliesUpdate@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.replies.update@.
 module Network.Google.Resource.Drive.Replies.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Drive.Replies.Update
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRepliesUpdate@ method which the
+-- | A resource alias for @drive.replies.update@ method which the
 -- 'RepliesUpdate'' request conforms to.
 type RepliesUpdateResource =
      "files" :>
@@ -77,10 +77,10 @@ data RepliesUpdate' = RepliesUpdate'
 --
 -- * 'repCommentId'
 repliesUpdate'
-    :: CommentReply -- ^ 'payload'
-    -> Text -- ^ 'replyId'
-    -> Text -- ^ 'fileId'
-    -> Text -- ^ 'commentId'
+    :: CommentReply -- ^ 'repPayload'
+    -> Text -- ^ 'repReplyId'
+    -> Text -- ^ 'repFileId'
+    -> Text -- ^ 'repCommentId'
     -> RepliesUpdate'
 repliesUpdate' pRepPayload_ pRepReplyId_ pRepFileId_ pRepCommentId_ =
     RepliesUpdate'

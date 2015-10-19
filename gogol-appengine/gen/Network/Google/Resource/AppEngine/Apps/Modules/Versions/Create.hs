@@ -22,7 +22,7 @@
 --
 -- Deploys new code and resource files to a version.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesVersionsCreate@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @appengine.apps.modules.versions.create@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppEngineAppsModulesVersionsCreate@ method which the
+-- | A resource alias for @appengine.apps.modules.versions.create@ method which the
 -- 'AppsModulesVersionsCreate'' request conforms to.
 type AppsModulesVersionsCreateResource =
      "v1beta4" :>
@@ -108,9 +108,9 @@ data AppsModulesVersionsCreate' = AppsModulesVersionsCreate'
 --
 -- * 'amvcCallback'
 appsModulesVersionsCreate'
-    :: Version -- ^ 'payload'
-    -> Text -- ^ 'modulesId'
-    -> Text -- ^ 'appsId'
+    :: Version -- ^ 'amvcPayload'
+    -> Text -- ^ 'amvcModulesId'
+    -> Text -- ^ 'amvcAppsId'
     -> AppsModulesVersionsCreate'
 appsModulesVersionsCreate' pAmvcPayload_ pAmvcModulesId_ pAmvcAppsId_ =
     AppsModulesVersionsCreate'

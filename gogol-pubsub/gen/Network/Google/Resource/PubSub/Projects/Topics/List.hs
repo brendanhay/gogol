@@ -22,7 +22,7 @@
 --
 -- Lists matching topics.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsList@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.topics.list@.
 module Network.Google.Resource.PubSub.Projects.Topics.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.PubSub.Projects.Topics.List
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsTopicsList@ method which the
+-- | A resource alias for @pubsub.projects.topics.list@ method which the
 -- 'ProjectsTopicsList'' request conforms to.
 type ProjectsTopicsListResource =
      "v1" :>
@@ -106,7 +106,7 @@ data ProjectsTopicsList' = ProjectsTopicsList'
 --
 -- * 'ptlCallback'
 projectsTopicsList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'ptlProject'
     -> ProjectsTopicsList'
 projectsTopicsList' pPtlProject_ =
     ProjectsTopicsList'

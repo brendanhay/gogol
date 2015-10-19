@@ -24,7 +24,7 @@
 -- rules. The Google Spectrum Database does not support master\/slave
 -- configurations, so this always yields an UNIMPLEMENTED error.
 --
--- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @SpectrumPawsVerifyDevice@.
+-- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @spectrum.paws.verifyDevice@.
 module Network.Google.Resource.Spectrum.Paws.VerifyDevice
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Spectrum.Paws.VerifyDevice
 import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
--- | A resource alias for @SpectrumPawsVerifyDevice@ method which the
+-- | A resource alias for @spectrum.paws.verifyDevice@ method which the
 -- 'PawsVerifyDevice'' request conforms to.
 type PawsVerifyDeviceResource =
      "verifyDevice" :>
@@ -64,7 +64,7 @@ newtype PawsVerifyDevice' = PawsVerifyDevice'
 --
 -- * 'pvdPayload'
 pawsVerifyDevice'
-    :: PawsVerifyDeviceRequest -- ^ 'payload'
+    :: PawsVerifyDeviceRequest -- ^ 'pvdPayload'
     -> PawsVerifyDevice'
 pawsVerifyDevice' pPvdPayload_ =
     PawsVerifyDevice'

@@ -22,7 +22,7 @@
 --
 -- Lists report types.
 --
--- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @YouTubereportingReportTypesList@.
+-- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @youtubereporting.reportTypes.list@.
 module Network.Google.Resource.YouTubeReporting.ReportTypes.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.YouTubeReporting.ReportTypes.List
 import           Network.Google.Prelude
 import           Network.Google.YouTubeReporting.Types
 
--- | A resource alias for @YouTubereportingReportTypesList@ method which the
+-- | A resource alias for @youtubereporting.reportTypes.list@ method which the
 -- 'ReportTypesList'' request conforms to.
 type ReportTypesListResource =
      "v1" :>

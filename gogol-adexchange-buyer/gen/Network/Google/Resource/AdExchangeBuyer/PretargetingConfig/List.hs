@@ -23,7 +23,7 @@
 -- Retrieves a list of the authenticated user\'s pretargeting
 -- configurations.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPretargetingConfigList@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.pretargetingConfig.list@.
 module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.List
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerPretargetingConfigList@ method which the
+-- | A resource alias for @adexchangebuyer.pretargetingConfig.list@ method which the
 -- 'PretargetingConfigList'' request conforms to.
 type PretargetingConfigListResource =
      "pretargetingconfigs" :>
@@ -62,7 +62,7 @@ newtype PretargetingConfigList' = PretargetingConfigList'
 --
 -- * 'pclAccountId'
 pretargetingConfigList'
-    :: Int64 -- ^ 'accountId'
+    :: Int64 -- ^ 'pclAccountId'
     -> PretargetingConfigList'
 pretargetingConfigList' pPclAccountId_ =
     PretargetingConfigList'

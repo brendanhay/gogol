@@ -22,7 +22,7 @@
 --
 -- Adds a site to the set of the user\'s sites in Webmaster Tools.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitesAdd@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sites.add@.
 module Network.Google.Resource.Webmasters.Sites.Add
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Webmasters.Sites.Add
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersSitesAdd@ method which the
+-- | A resource alias for @webmasters.sites.add@ method which the
 -- 'SitesAdd'' request conforms to.
 type SitesAddResource =
      "sites" :>
@@ -59,7 +59,7 @@ newtype SitesAdd' = SitesAdd'
 --
 -- * 'saSiteURL'
 sitesAdd'
-    :: Text -- ^ 'siteUrl'
+    :: Text -- ^ 'saSiteURL'
     -> SitesAdd'
 sitesAdd' pSaSiteURL_ =
     SitesAdd'

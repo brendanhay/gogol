@@ -22,7 +22,7 @@
 --
 -- Updates an existing template
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTemplateUpdate@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.template.update@.
 module Network.Google.Resource.FusionTables.Template.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.FusionTables.Template.Update
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTemplateUpdate@ method which the
+-- | A resource alias for @fusiontables.template.update@ method which the
 -- 'TemplateUpdate'' request conforms to.
 type TemplateUpdateResource =
      "tables" :>
@@ -70,9 +70,9 @@ data TemplateUpdate' = TemplateUpdate'
 --
 -- * 'temTableId'
 templateUpdate'
-    :: Int32 -- ^ 'templateId'
-    -> Template -- ^ 'payload'
-    -> Text -- ^ 'tableId'
+    :: Int32 -- ^ 'temTemplateId'
+    -> Template -- ^ 'temPayload'
+    -> Text -- ^ 'temTableId'
     -> TemplateUpdate'
 templateUpdate' pTemTemplateId_ pTemPayload_ pTemTableId_ =
     TemplateUpdate'

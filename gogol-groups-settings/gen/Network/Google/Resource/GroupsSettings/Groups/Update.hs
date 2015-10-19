@@ -22,7 +22,7 @@
 --
 -- Updates an existing resource.
 --
--- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference> for @GroupsSettingsGroupsUpdate@.
+-- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference> for @groupsSettings.groups.update@.
 module Network.Google.Resource.GroupsSettings.Groups.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.GroupsSettings.Groups.Update
 import           Network.Google.GroupsSettings.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GroupsSettingsGroupsUpdate@ method which the
+-- | A resource alias for @groupsSettings.groups.update@ method which the
 -- 'GroupsUpdate'' request conforms to.
 type GroupsUpdateResource =
      Capture "groupUniqueId" Text :>
@@ -63,8 +63,8 @@ data GroupsUpdate' = GroupsUpdate'
 --
 -- * 'guGroupUniqueId'
 groupsUpdate'
-    :: Groups -- ^ 'payload'
-    -> Text -- ^ 'groupUniqueId'
+    :: Groups -- ^ 'guPayload'
+    -> Text -- ^ 'guGroupUniqueId'
     -> GroupsUpdate'
 groupsUpdate' pGuPayload_ pGuGroupUniqueId_ =
     GroupsUpdate'

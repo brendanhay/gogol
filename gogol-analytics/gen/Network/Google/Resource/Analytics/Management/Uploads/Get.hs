@@ -22,7 +22,7 @@
 --
 -- List uploads to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUploadsGet@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.uploads.get@.
 module Network.Google.Resource.Analytics.Management.Uploads.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.Uploads.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementUploadsGet@ method which the
+-- | A resource alias for @analytics.management.uploads.get@ method which the
 -- 'ManagementUploadsGet'' request conforms to.
 type ManagementUploadsGetResource =
      "management" :>
@@ -78,10 +78,10 @@ data ManagementUploadsGet' = ManagementUploadsGet'
 --
 -- * 'mugUploadId'
 managementUploadsGet'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'customDataSourceId'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'uploadId'
+    :: Text -- ^ 'mugWebPropertyId'
+    -> Text -- ^ 'mugCustomDataSourceId'
+    -> Text -- ^ 'mugAccountId'
+    -> Text -- ^ 'mugUploadId'
     -> ManagementUploadsGet'
 managementUploadsGet' pMugWebPropertyId_ pMugCustomDataSourceId_ pMugAccountId_ pMugUploadId_ =
     ManagementUploadsGet'

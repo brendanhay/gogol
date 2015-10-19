@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountstatusesCustombatch@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accountstatuses.custombatch@.
 module Network.Google.Resource.Content.Accountstatuses.Custombatch
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.Content.Accountstatuses.Custombatch
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccountstatusesCustombatch@ method which the
+-- | A resource alias for @content.accountstatuses.custombatch@ method which the
 -- 'AccountstatusesCustombatch'' request conforms to.
 type AccountstatusesCustombatchResource =
      "accountstatuses" :>
@@ -58,7 +58,7 @@ newtype AccountstatusesCustombatch' = AccountstatusesCustombatch'
 --
 -- * 'aaPayload'
 accountstatusesCustombatch'
-    :: AccountstatusesCustomBatchRequest -- ^ 'payload'
+    :: AccountstatusesCustomBatchRequest -- ^ 'aaPayload'
     -> AccountstatusesCustombatch'
 accountstatusesCustombatch' pAaPayload_ =
     AccountstatusesCustombatch'

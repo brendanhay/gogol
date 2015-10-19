@@ -23,7 +23,7 @@
 -- Returns a list of categories that can be associated with YouTube
 -- channels.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeGuideCategoriesList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.guideCategories.list@.
 module Network.Google.Resource.YouTube.GuideCategories.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.YouTube.GuideCategories.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeGuideCategoriesList@ method which the
+-- | A resource alias for @youtube.guideCategories.list@ method which the
 -- 'GuideCategoriesList'' request conforms to.
 type GuideCategoriesListResource =
      "guideCategories" :>
@@ -77,7 +77,7 @@ data GuideCategoriesList' = GuideCategoriesList'
 --
 -- * 'gclId'
 guideCategoriesList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'gclPart'
     -> GuideCategoriesList'
 guideCategoriesList' pGclPart_ =
     GuideCategoriesList'

@@ -22,7 +22,7 @@
 --
 -- Delete user account.
 --
--- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyDeleteAccount@.
+-- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.deleteAccount@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.DeleteAccount
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.DeleteAccount
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyDeleteAccount@ method which the
+-- | A resource alias for @identitytoolkit.relyingparty.deleteAccount@ method which the
 -- 'RelyingPartyDeleteAccount'' request conforms to.
 type RelyingPartyDeleteAccountResource =
      "deleteAccount" :>
@@ -61,7 +61,7 @@ newtype RelyingPartyDeleteAccount' = RelyingPartyDeleteAccount'
 --
 -- * 'rPayload'
 relyingPartyDeleteAccount'
-    :: IdentitytoolkitRelyingPartyDeleteAccountRequest -- ^ 'payload'
+    :: IdentitytoolkitRelyingPartyDeleteAccountRequest -- ^ 'rPayload'
     -> RelyingPartyDeleteAccount'
 relyingPartyDeleteAccount' pRPayload_ =
     RelyingPartyDeleteAccount'

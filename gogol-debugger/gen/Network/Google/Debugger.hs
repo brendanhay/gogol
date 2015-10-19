@@ -27,28 +27,28 @@ module Network.Google.Debugger
 
     -- * Resources
 
-    -- ** CloudDebuggerControllerDebuggeesBreakpointsList
+    -- ** clouddebugger.controller.debuggees.breakpoints.list
     , module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.List
 
-    -- ** CloudDebuggerControllerDebuggeesBreakpointsUpdate
+    -- ** clouddebugger.controller.debuggees.breakpoints.update
     , module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Update
 
-    -- ** CloudDebuggerControllerDebuggeesRegister
+    -- ** clouddebugger.controller.debuggees.register
     , module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Register
 
-    -- ** CloudDebuggerDebuggerDebuggeesBreakpointsDelete
+    -- ** clouddebugger.debugger.debuggees.breakpoints.delete
     , module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Delete
 
-    -- ** CloudDebuggerDebuggerDebuggeesBreakpointsGet
+    -- ** clouddebugger.debugger.debuggees.breakpoints.get
     , module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Get
 
-    -- ** CloudDebuggerDebuggerDebuggeesBreakpointsList
+    -- ** clouddebugger.debugger.debuggees.breakpoints.list
     , module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List
 
-    -- ** CloudDebuggerDebuggerDebuggeesBreakpointsSet
+    -- ** clouddebugger.debugger.debuggees.breakpoints.set
     , module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set
 
-    -- ** CloudDebuggerDebuggerDebuggeesList
+    -- ** clouddebugger.debugger.debuggees.list
     , module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.List
 
     -- * Types

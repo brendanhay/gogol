@@ -22,7 +22,7 @@
 --
 -- Creates the given topic with the given name.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsCreate@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.topics.create@.
 module Network.Google.Resource.PubSub.Projects.Topics.Create
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.PubSub.Projects.Topics.Create
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsTopicsCreate@ method which the
+-- | A resource alias for @pubsub.projects.topics.create@ method which the
 -- 'ProjectsTopicsCreate'' request conforms to.
 type ProjectsTopicsCreateResource =
      "v1" :>
@@ -99,8 +99,8 @@ data ProjectsTopicsCreate' = ProjectsTopicsCreate'
 --
 -- * 'ptcCallback'
 projectsTopicsCreate'
-    :: Topic -- ^ 'payload'
-    -> Text -- ^ 'name'
+    :: Topic -- ^ 'ptcPayload'
+    -> Text -- ^ 'ptcName'
     -> ProjectsTopicsCreate'
 projectsTopicsCreate' pPtcPayload_ pPtcName_ =
     ProjectsTopicsCreate'

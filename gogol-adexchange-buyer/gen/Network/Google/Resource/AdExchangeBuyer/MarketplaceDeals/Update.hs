@@ -22,7 +22,7 @@
 --
 -- Replaces all the deals in the order with the passed in deals
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceDealsUpdate@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.marketplacedeals.update@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Update
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerMarketplaceDealsUpdate@ method which the
+-- | A resource alias for @adexchangebuyer.marketplacedeals.update@ method which the
 -- 'MarketplaceDealsUpdate'' request conforms to.
 type MarketplaceDealsUpdateResource =
      "marketplaceOrders" :>
@@ -67,8 +67,8 @@ data MarketplaceDealsUpdate' = MarketplaceDealsUpdate'
 --
 -- * 'mduOrderId'
 marketplaceDealsUpdate'
-    :: EditAllOrderDealsRequest -- ^ 'payload'
-    -> Text -- ^ 'orderId'
+    :: EditAllOrderDealsRequest -- ^ 'mduPayload'
+    -> Text -- ^ 'mduOrderId'
     -> MarketplaceDealsUpdate'
 marketplaceDealsUpdate' pMduPayload_ pMduOrderId_ =
     MarketplaceDealsUpdate'

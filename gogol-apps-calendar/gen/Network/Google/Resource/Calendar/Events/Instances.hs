@@ -22,7 +22,7 @@
 --
 -- Returns instances of the specified recurring event.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsInstances@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.events.instances@.
 module Network.Google.Resource.Calendar.Events.Instances
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Calendar.Events.Instances
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarEventsInstances@ method which the
+-- | A resource alias for @calendar.events.instances@ method which the
 -- 'EventsInstances'' request conforms to.
 type EventsInstancesResource =
      "calendars" :>
@@ -111,8 +111,8 @@ data EventsInstances' = EventsInstances'
 --
 -- * 'eiEventId'
 eventsInstances'
-    :: Text -- ^ 'calendarId'
-    -> Text -- ^ 'eventId'
+    :: Text -- ^ 'eiCalendarId'
+    -> Text -- ^ 'eiEventId'
     -> EventsInstances'
 eventsInstances' pEiCalendarId_ pEiEventId_ =
     EventsInstances'

@@ -22,7 +22,7 @@
 --
 -- Undeletes a Container Version.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVersionsUndelete@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.versions.undelete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Undelete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Undelete
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersVersionsUndelete@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.versions.undelete@ method which the
 -- 'AccountsContainersVersionsUndelete'' request conforms to.
 type AccountsContainersVersionsUndeleteResource =
      "accounts" :>
@@ -73,9 +73,9 @@ data AccountsContainersVersionsUndelete' = AccountsContainersVersionsUndelete'
 --
 -- * 'acvuAccountId'
 accountsContainersVersionsUndelete'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'containerVersionId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acvuContainerId'
+    -> Text -- ^ 'acvuContainerVersionId'
+    -> Text -- ^ 'acvuAccountId'
     -> AccountsContainersVersionsUndelete'
 accountsContainersVersionsUndelete' pAcvuContainerId_ pAcvuContainerVersionId_ pAcvuAccountId_ =
     AccountsContainersVersionsUndelete'

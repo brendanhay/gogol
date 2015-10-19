@@ -22,7 +22,7 @@
 --
 -- Removes a child from a folder.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChildrenDelete@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.children.delete@.
 module Network.Google.Resource.Drive.Children.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Drive.Children.Delete
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveChildrenDelete@ method which the
+-- | A resource alias for @drive.children.delete@ method which the
 -- 'ChildrenDelete'' request conforms to.
 type ChildrenDeleteResource =
      "files" :>
@@ -65,8 +65,8 @@ data ChildrenDelete' = ChildrenDelete'
 --
 -- * 'cdChildId'
 childrenDelete'
-    :: Text -- ^ 'folderId'
-    -> Text -- ^ 'childId'
+    :: Text -- ^ 'cdFolderId'
+    -> Text -- ^ 'cdChildId'
     -> ChildrenDelete'
 childrenDelete' pCdFolderId_ pCdChildId_ =
     ChildrenDelete'

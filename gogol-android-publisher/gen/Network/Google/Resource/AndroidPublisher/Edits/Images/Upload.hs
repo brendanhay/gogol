@@ -23,7 +23,7 @@
 -- Uploads a new image and adds it to the list of images for the specified
 -- language and image type.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsImagesUpload@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.images.upload@.
 module Network.Google.Resource.AndroidPublisher.Edits.Images.Upload
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Images.Upload
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsImagesUpload@ method which the
+-- | A resource alias for @androidpublisher.edits.images.upload@ method which the
 -- 'EditsImagesUpload'' request conforms to.
 type EditsImagesUploadResource =
      Capture "packageName" Text :>
@@ -83,11 +83,11 @@ data EditsImagesUpload' = EditsImagesUpload'
 --
 -- * 'eiuEditId'
 editsImagesUpload'
-    :: Text -- ^ 'packageName'
-    -> Body -- ^ 'media'
-    -> EditsImagesUploadImageType -- ^ 'imageType'
-    -> Text -- ^ 'language'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eiuPackageName'
+    -> Body -- ^ 'eiuMedia'
+    -> EditsImagesUploadImageType -- ^ 'eiuImageType'
+    -> Text -- ^ 'eiuLanguage'
+    -> Text -- ^ 'eiuEditId'
     -> EditsImagesUpload'
 editsImagesUpload' pEiuPackageName_ pEiuMedia_ pEiuImageType_ pEiuLanguage_ pEiuEditId_ =
     EditsImagesUpload'

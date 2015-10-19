@@ -22,7 +22,7 @@
 --
 -- Updates an existing filter.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementFiltersUpdate@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.filters.update@.
 module Network.Google.Resource.Analytics.Management.Filters.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.Filters.Update
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementFiltersUpdate@ method which the
+-- | A resource alias for @analytics.management.filters.update@ method which the
 -- 'ManagementFiltersUpdate'' request conforms to.
 type ManagementFiltersUpdateResource =
      "management" :>
@@ -71,9 +71,9 @@ data ManagementFiltersUpdate' = ManagementFiltersUpdate'
 --
 -- * 'mfuAccountId'
 managementFiltersUpdate'
-    :: Text -- ^ 'filterId'
-    -> Filter -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mfuFilterId'
+    -> Filter -- ^ 'mfuPayload'
+    -> Text -- ^ 'mfuAccountId'
     -> ManagementFiltersUpdate'
 managementFiltersUpdate' pMfuFilterId_ pMfuPayload_ pMfuAccountId_ =
     ManagementFiltersUpdate'

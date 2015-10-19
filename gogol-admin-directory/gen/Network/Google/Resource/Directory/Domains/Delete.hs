@@ -22,7 +22,7 @@
 --
 -- Deletes a domain of the customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryDomainsDelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.domains.delete@.
 module Network.Google.Resource.Directory.Domains.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Domains.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryDomainsDelete@ method which the
+-- | A resource alias for @directory.domains.delete@ method which the
 -- 'DomainsDelete'' request conforms to.
 type DomainsDeleteResource =
      "customer" :>
@@ -65,8 +65,8 @@ data DomainsDelete' = DomainsDelete'
 --
 -- * 'ddDomainName'
 domainsDelete'
-    :: Text -- ^ 'customer'
-    -> Text -- ^ 'domainName'
+    :: Text -- ^ 'ddCustomer'
+    -> Text -- ^ 'ddDomainName'
     -> DomainsDelete'
 domainsDelete' pDdCustomer_ pDdDomainName_ =
     DomainsDelete'

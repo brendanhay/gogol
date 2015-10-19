@@ -23,7 +23,7 @@
 -- Update tasks that are leased out of a TaskQueue. This method supports
 -- patch semantics.
 --
--- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksPatch@.
+-- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @taskqueue.tasks.patch@.
 module Network.Google.Resource.TaskQueue.Tasks.Patch
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Patch
 import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
--- | A resource alias for @TaskqueueTasksPatch@ method which the
+-- | A resource alias for @taskqueue.tasks.patch@ method which the
 -- 'TasksPatch'' request conforms to.
 type TasksPatchResource =
      Capture "project" Text :>
@@ -82,11 +82,11 @@ data TasksPatch' = TasksPatch'
 --
 -- * 'tpNewLeaseSeconds'
 tasksPatch'
-    :: Text -- ^ 'taskqueue'
-    -> Text -- ^ 'project'
-    -> Task -- ^ 'payload'
-    -> Text -- ^ 'task'
-    -> Int32 -- ^ 'newLeaseSeconds'
+    :: Text -- ^ 'tpTaskqueue'
+    -> Text -- ^ 'tpProject'
+    -> Task -- ^ 'tpPayload'
+    -> Text -- ^ 'tpTask'
+    -> Int32 -- ^ 'tpNewLeaseSeconds'
     -> TasksPatch'
 tasksPatch' pTpTaskqueue_ pTpProject_ pTpPayload_ pTpTask_ pTpNewLeaseSeconds_ =
     TasksPatch'

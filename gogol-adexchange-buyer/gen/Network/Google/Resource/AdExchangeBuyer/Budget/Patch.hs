@@ -24,7 +24,7 @@
 -- accountId and billingId, with the budget amount in the request. This
 -- method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerBudgetPatch@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.budget.patch@.
 module Network.Google.Resource.AdExchangeBuyer.Budget.Patch
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Patch
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerBudgetPatch@ method which the
+-- | A resource alias for @adexchangebuyer.budget.patch@ method which the
 -- 'BudgetPatch'' request conforms to.
 type BudgetPatchResource =
      "billinginfo" :>
@@ -73,9 +73,9 @@ data BudgetPatch' = BudgetPatch'
 --
 -- * 'bpBillingId'
 budgetPatch'
-    :: Budget -- ^ 'payload'
-    -> Int64 -- ^ 'accountId'
-    -> Int64 -- ^ 'billingId'
+    :: Budget -- ^ 'bpPayload'
+    -> Int64 -- ^ 'bpAccountId'
+    -> Int64 -- ^ 'bpBillingId'
     -> BudgetPatch'
 budgetPatch' pBpPayload_ pBpAccountId_ pBpBillingId_ =
     BudgetPatch'

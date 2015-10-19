@@ -27,64 +27,64 @@ module Network.Google.PlusDomains
 
     -- * Resources
 
-    -- ** PlusDomainsActivitiesGet
+    -- ** plusDomains.activities.get
     , module Network.Google.Resource.PlusDomains.Activities.Get
 
-    -- ** PlusDomainsActivitiesInsert
+    -- ** plusDomains.activities.insert
     , module Network.Google.Resource.PlusDomains.Activities.Insert
 
-    -- ** PlusDomainsActivitiesList
+    -- ** plusDomains.activities.list
     , module Network.Google.Resource.PlusDomains.Activities.List
 
-    -- ** PlusDomainsAudiencesList
+    -- ** plusDomains.audiences.list
     , module Network.Google.Resource.PlusDomains.Audiences.List
 
-    -- ** PlusDomainsCirclesAddPeople
+    -- ** plusDomains.circles.addPeople
     , module Network.Google.Resource.PlusDomains.Circles.AddPeople
 
-    -- ** PlusDomainsCirclesGet
+    -- ** plusDomains.circles.get
     , module Network.Google.Resource.PlusDomains.Circles.Get
 
-    -- ** PlusDomainsCirclesInsert
+    -- ** plusDomains.circles.insert
     , module Network.Google.Resource.PlusDomains.Circles.Insert
 
-    -- ** PlusDomainsCirclesList
+    -- ** plusDomains.circles.list
     , module Network.Google.Resource.PlusDomains.Circles.List
 
-    -- ** PlusDomainsCirclesPatch
+    -- ** plusDomains.circles.patch
     , module Network.Google.Resource.PlusDomains.Circles.Patch
 
-    -- ** PlusDomainsCirclesRemove
+    -- ** plusDomains.circles.remove
     , module Network.Google.Resource.PlusDomains.Circles.Remove
 
-    -- ** PlusDomainsCirclesRemovePeople
+    -- ** plusDomains.circles.removePeople
     , module Network.Google.Resource.PlusDomains.Circles.RemovePeople
 
-    -- ** PlusDomainsCirclesUpdate
+    -- ** plusDomains.circles.update
     , module Network.Google.Resource.PlusDomains.Circles.Update
 
-    -- ** PlusDomainsCommentsGet
+    -- ** plusDomains.comments.get
     , module Network.Google.Resource.PlusDomains.Comments.Get
 
-    -- ** PlusDomainsCommentsInsert
+    -- ** plusDomains.comments.insert
     , module Network.Google.Resource.PlusDomains.Comments.Insert
 
-    -- ** PlusDomainsCommentsList
+    -- ** plusDomains.comments.list
     , module Network.Google.Resource.PlusDomains.Comments.List
 
-    -- ** PlusDomainsMediaInsert
+    -- ** plusDomains.media.insert
     , module Network.Google.Resource.PlusDomains.Media.Insert
 
-    -- ** PlusDomainsPeopleGet
+    -- ** plusDomains.people.get
     , module Network.Google.Resource.PlusDomains.People.Get
 
-    -- ** PlusDomainsPeopleList
+    -- ** plusDomains.people.list
     , module Network.Google.Resource.PlusDomains.People.List
 
-    -- ** PlusDomainsPeopleListByActivity
+    -- ** plusDomains.people.listByActivity
     , module Network.Google.Resource.PlusDomains.People.ListByActivity
 
-    -- ** PlusDomainsPeopleListByCircle
+    -- ** plusDomains.people.listByCircle
     , module Network.Google.Resource.PlusDomains.People.ListByCircle
 
     -- * Types

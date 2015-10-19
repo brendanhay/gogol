@@ -23,7 +23,7 @@
 -- Retrieves the ratings that the authorized user gave to a list of
 -- specified videos.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosGetRating@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.videos.getRating@.
 module Network.Google.Resource.YouTube.Videos.GetRating
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.YouTube.Videos.GetRating
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeVideosGetRating@ method which the
+-- | A resource alias for @youtube.videos.getRating@ method which the
 -- 'VideosGetRating'' request conforms to.
 type VideosGetRatingResource =
      "videos" :>
@@ -68,7 +68,7 @@ data VideosGetRating' = VideosGetRating'
 --
 -- * 'vgrId'
 videosGetRating'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'vgrId'
     -> VideosGetRating'
 videosGetRating' pVgrId_ =
     VideosGetRating'

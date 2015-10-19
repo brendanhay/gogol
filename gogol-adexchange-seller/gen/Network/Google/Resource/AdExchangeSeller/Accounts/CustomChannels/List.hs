@@ -23,7 +23,7 @@
 -- List all custom channels in the specified ad client for this Ad Exchange
 -- account.
 --
--- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsCustomChannelsList@.
+-- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @adexchangeseller.accounts.customchannels.list@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.List
 import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangesellerAccountsCustomChannelsList@ method which the
+-- | A resource alias for @adexchangeseller.accounts.customchannels.list@ method which the
 -- 'AccountsCustomChannelsList'' request conforms to.
 type AccountsCustomChannelsListResource =
      "accounts" :>
@@ -79,8 +79,8 @@ data AccountsCustomChannelsList' = AccountsCustomChannelsList'
 --
 -- * 'acclMaxResults'
 accountsCustomChannelsList'
-    :: Text -- ^ 'adClientId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acclAdClientId'
+    -> Text -- ^ 'acclAccountId'
     -> AccountsCustomChannelsList'
 accountsCustomChannelsList' pAcclAdClientId_ pAcclAccountId_ =
     AccountsCustomChannelsList'

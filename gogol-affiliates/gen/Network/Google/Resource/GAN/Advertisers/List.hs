@@ -23,7 +23,7 @@
 -- Retrieves data about all advertisers that the requesting
 -- advertiser\/publisher has access to.
 --
--- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANAdvertisersList@.
+-- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @gan.advertisers.list@.
 module Network.Google.Resource.GAN.Advertisers.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.GAN.Advertisers.List
 import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GANAdvertisersList@ method which the
+-- | A resource alias for @gan.advertisers.list@ method which the
 -- 'AdvertisersList'' request conforms to.
 type AdvertisersListResource =
      Capture "role" AdvertisersListRole :>
@@ -103,8 +103,8 @@ data AdvertisersList' = AdvertisersList'
 --
 -- * 'alMaxResults'
 advertisersList'
-    :: Text -- ^ 'roleId'
-    -> AdvertisersListRole -- ^ 'role'
+    :: Text -- ^ 'alRoleId'
+    -> AdvertisersListRole -- ^ 'alRole'
     -> AdvertisersList'
 advertisersList' pAlRoleId_ pAlRole_ =
     AdvertisersList'

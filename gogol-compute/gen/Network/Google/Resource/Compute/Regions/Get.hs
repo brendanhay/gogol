@@ -22,7 +22,7 @@
 --
 -- Returns the specified region resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRegionsGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.regions.get@.
 module Network.Google.Resource.Compute.Regions.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.Regions.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeRegionsGet@ method which the
+-- | A resource alias for @compute.regions.get@ method which the
 -- 'RegionsGet'' request conforms to.
 type RegionsGetResource =
      Capture "project" Text :>
@@ -64,8 +64,8 @@ data RegionsGet' = RegionsGet'
 --
 -- * 'rgRegion'
 regionsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'rgProject'
+    -> Text -- ^ 'rgRegion'
     -> RegionsGet'
 regionsGet' pRgProject_ pRgRegion_ =
     RegionsGet'

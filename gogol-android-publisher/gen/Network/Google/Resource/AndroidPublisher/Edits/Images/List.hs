@@ -22,7 +22,7 @@
 --
 -- Lists all images for the specified language and image type.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsImagesList@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.images.list@.
 module Network.Google.Resource.AndroidPublisher.Edits.Images.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Images.List
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsImagesList@ method which the
+-- | A resource alias for @androidpublisher.edits.images.list@ method which the
 -- 'EditsImagesList'' request conforms to.
 type EditsImagesListResource =
      Capture "packageName" Text :>
@@ -76,10 +76,10 @@ data EditsImagesList' = EditsImagesList'
 --
 -- * 'eilEditId'
 editsImagesList'
-    :: Text -- ^ 'packageName'
-    -> EditsImagesListImageType -- ^ 'imageType'
-    -> Text -- ^ 'language'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eilPackageName'
+    -> EditsImagesListImageType -- ^ 'eilImageType'
+    -> Text -- ^ 'eilLanguage'
+    -> Text -- ^ 'eilEditId'
     -> EditsImagesList'
 editsImagesList' pEilPackageName_ pEilImageType_ pEilLanguage_ pEilEditId_ =
     EditsImagesList'

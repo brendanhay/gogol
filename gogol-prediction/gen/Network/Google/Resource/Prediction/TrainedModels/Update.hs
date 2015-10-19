@@ -22,7 +22,7 @@
 --
 -- Add new data to a trained model.
 --
--- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedModelsUpdate@.
+-- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @prediction.trainedmodels.update@.
 module Network.Google.Resource.Prediction.TrainedModels.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Prediction.TrainedModels.Update
 import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PredictionTrainedModelsUpdate@ method which the
+-- | A resource alias for @prediction.trainedmodels.update@ method which the
 -- 'TrainedModelsUpdate'' request conforms to.
 type TrainedModelsUpdateResource =
      Capture "project" Text :>
@@ -69,9 +69,9 @@ data TrainedModelsUpdate' = TrainedModelsUpdate'
 --
 -- * 'tmuId'
 trainedModelsUpdate'
-    :: Text -- ^ 'project'
-    -> Update -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: Text -- ^ 'tmuProject'
+    -> Update -- ^ 'tmuPayload'
+    -> Text -- ^ 'tmuId'
     -> TrainedModelsUpdate'
 trainedModelsUpdate' pTmuProject_ pTmuPayload_ pTmuId_ =
     TrainedModelsUpdate'

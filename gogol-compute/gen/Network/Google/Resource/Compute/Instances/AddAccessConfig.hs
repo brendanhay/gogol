@@ -22,7 +22,7 @@
 --
 -- Adds an access config to an instance\'s network interface.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesAddAccessConfig@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.addAccessConfig@.
 module Network.Google.Resource.Compute.Instances.AddAccessConfig
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.Instances.AddAccessConfig
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesAddAccessConfig@ method which the
+-- | A resource alias for @compute.instances.addAccessConfig@ method which the
 -- 'InstancesAddAccessConfig'' request conforms to.
 type InstancesAddAccessConfigResource =
      Capture "project" Text :>
@@ -82,11 +82,11 @@ data InstancesAddAccessConfig' = InstancesAddAccessConfig'
 --
 -- * 'iaacInstance'
 instancesAddAccessConfig'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'networkInterface'
-    -> Text -- ^ 'zone'
-    -> AccessConfig -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'iaacProject'
+    -> Text -- ^ 'iaacNetworkInterface'
+    -> Text -- ^ 'iaacZone'
+    -> AccessConfig -- ^ 'iaacPayload'
+    -> Text -- ^ 'iaacInstance'
     -> InstancesAddAccessConfig'
 instancesAddAccessConfig' pIaacProject_ pIaacNetworkInterface_ pIaacZone_ pIaacPayload_ pIaacInstance_ =
     InstancesAddAccessConfig'

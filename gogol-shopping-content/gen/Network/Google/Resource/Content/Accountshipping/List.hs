@@ -23,7 +23,7 @@
 -- Lists the shipping settings of the sub-accounts in your Merchant Center
 -- account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountshippingList@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accountshipping.list@.
 module Network.Google.Resource.Content.Accountshipping.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Content.Accountshipping.List
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccountshippingList@ method which the
+-- | A resource alias for @content.accountshipping.list@ method which the
 -- 'AccountshippingList'' request conforms to.
 type AccountshippingListResource =
      Capture "merchantId" Word64 :>
@@ -72,7 +72,7 @@ data AccountshippingList' = AccountshippingList'
 --
 -- * 'al1MaxResults'
 accountshippingList'
-    :: Word64 -- ^ 'merchantId'
+    :: Word64 -- ^ 'al1MerchantId'
     -> AccountshippingList'
 accountshippingList' pAl1MerchantId_ =
     AccountshippingList'

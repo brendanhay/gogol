@@ -22,7 +22,7 @@
 --
 -- Gets the requested negotiation.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerNegotiationsGet@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.negotiations.get@.
 module Network.Google.Resource.AdExchangeBuyer.Negotiations.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdExchangeBuyer.Negotiations.Get
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerNegotiationsGet@ method which the
+-- | A resource alias for @adexchangebuyer.negotiations.get@ method which the
 -- 'NegotiationsGet'' request conforms to.
 type NegotiationsGetResource =
      "negotiations" :>
@@ -65,8 +65,8 @@ data NegotiationsGet' = NegotiationsGet'
 --
 -- * 'ngNegotiationId'
 negotiationsGet'
-    :: GetNegotiationByIdRequest -- ^ 'payload'
-    -> Int64 -- ^ 'negotiationId'
+    :: GetNegotiationByIdRequest -- ^ 'ngPayload'
+    -> Int64 -- ^ 'ngNegotiationId'
     -> NegotiationsGet'
 negotiationsGet' pNgPayload_ pNgNegotiationId_ =
     NegotiationsGet'

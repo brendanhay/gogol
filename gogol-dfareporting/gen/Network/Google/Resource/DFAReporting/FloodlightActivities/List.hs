@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of floodlight activities, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivitiesList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightActivities.list@.
 module Network.Google.Resource.DFAReporting.FloodlightActivities.List
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFloodlightActivitiesList@ method which the
+-- | A resource alias for @dfareporting.floodlightActivities.list@ method which the
 -- 'FloodlightActivitiesList'' request conforms to.
 type FloodlightActivitiesListResource =
      "userprofiles" :>
@@ -133,7 +133,7 @@ data FloodlightActivitiesList' = FloodlightActivitiesList'
 --
 -- * 'falMaxResults'
 floodlightActivitiesList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'falProFileId'
     -> FloodlightActivitiesList'
 floodlightActivitiesList' pFalProFileId_ =
     FloodlightActivitiesList'

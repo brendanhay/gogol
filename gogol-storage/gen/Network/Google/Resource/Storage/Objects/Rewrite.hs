@@ -23,7 +23,7 @@
 -- Rewrites a source object to a destination object. Optionally overrides
 -- metadata.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsRewrite@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objects.rewrite@.
 module Network.Google.Resource.Storage.Objects.Rewrite
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ module Network.Google.Resource.Storage.Objects.Rewrite
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsRewrite@ method which the
+-- | A resource alias for @storage.objects.rewrite@ method which the
 -- 'ObjectsRewrite'' request conforms to.
 type ObjectsRewriteResource =
      "b" :>
@@ -164,11 +164,11 @@ data ObjectsRewrite' = ObjectsRewrite'
 --
 -- * 'orDestinationObject'
 objectsRewrite'
-    :: Text -- ^ 'sourceObject'
-    -> Text -- ^ 'sourceBucket'
-    -> Object -- ^ 'payload'
-    -> Text -- ^ 'destinationBucket'
-    -> Text -- ^ 'destinationObject'
+    :: Text -- ^ 'orSourceObject'
+    -> Text -- ^ 'orSourceBucket'
+    -> Object -- ^ 'orPayload'
+    -> Text -- ^ 'orDestinationBucket'
+    -> Text -- ^ 'orDestinationObject'
     -> ObjectsRewrite'
 objectsRewrite' pOrSourceObject_ pOrSourceBucket_ pOrPayload_ pOrDestinationBucket_ pOrDestinationObject_ =
     ObjectsRewrite'

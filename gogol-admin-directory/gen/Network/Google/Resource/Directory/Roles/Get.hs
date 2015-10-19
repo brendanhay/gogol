@@ -22,7 +22,7 @@
 --
 -- Retrieves a role.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryRolesGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.roles.get@.
 module Network.Google.Resource.Directory.Roles.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Roles.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryRolesGet@ method which the
+-- | A resource alias for @directory.roles.get@ method which the
 -- 'RolesGet'' request conforms to.
 type RolesGetResource =
      "customer" :>
@@ -65,8 +65,8 @@ data RolesGet' = RolesGet'
 --
 -- * 'rgCustomer'
 rolesGet'
-    :: Text -- ^ 'roleId'
-    -> Text -- ^ 'customer'
+    :: Text -- ^ 'rgRoleId'
+    -> Text -- ^ 'rgCustomer'
     -> RolesGet'
 rolesGet' pRgRoleId_ pRgCustomer_ =
     RolesGet'

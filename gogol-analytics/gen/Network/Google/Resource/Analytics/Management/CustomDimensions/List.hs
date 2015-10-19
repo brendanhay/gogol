@@ -22,7 +22,7 @@
 --
 -- Lists custom dimensions to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomDimensionsList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.customDimensions.list@.
 module Network.Google.Resource.Analytics.Management.CustomDimensions.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementCustomDimensionsList@ method which the
+-- | A resource alias for @analytics.management.customDimensions.list@ method which the
 -- 'ManagementCustomDimensionsList'' request conforms to.
 type ManagementCustomDimensionsListResource =
      "management" :>
@@ -78,8 +78,8 @@ data ManagementCustomDimensionsList' = ManagementCustomDimensionsList'
 --
 -- * 'mcdlMaxResults'
 managementCustomDimensionsList'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mcdlWebPropertyId'
+    -> Text -- ^ 'mcdlAccountId'
     -> ManagementCustomDimensionsList'
 managementCustomDimensionsList' pMcdlWebPropertyId_ pMcdlAccountId_ =
     ManagementCustomDimensionsList'

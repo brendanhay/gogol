@@ -22,7 +22,7 @@
 --
 -- -- |
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksCloudLoadingAddBook@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.cloudloading.addBook@.
 module Network.Google.Resource.Books.CloudLoading.AddBook
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Books.CloudLoading.AddBook
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksCloudLoadingAddBook@ method which the
+-- | A resource alias for @books.cloudloading.addBook@ method which the
 -- 'CloudLoadingAddBook'' request conforms to.
 type CloudLoadingAddBookResource =
      "cloudloading" :>

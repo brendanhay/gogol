@@ -22,7 +22,7 @@
 --
 -- Insert a new leaderboard configuration in this application.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationLeaderboardConfigurationsInsert@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.insert@.
 module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Inse
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationLeaderboardConfigurationsInsert@ method which the
+-- | A resource alias for @gamesConfiguration.leaderboardConfigurations.insert@ method which the
 -- 'LeaderboardConfigurationsInsert'' request conforms to.
 type LeaderboardConfigurationsInsertResource =
      "applications" :>
@@ -66,8 +66,8 @@ data LeaderboardConfigurationsInsert' = LeaderboardConfigurationsInsert'
 --
 -- * 'lciApplicationId'
 leaderboardConfigurationsInsert'
-    :: LeaderboardConfiguration -- ^ 'payload'
-    -> Text -- ^ 'applicationId'
+    :: LeaderboardConfiguration -- ^ 'lciPayload'
+    -> Text -- ^ 'lciApplicationId'
     -> LeaderboardConfigurationsInsert'
 leaderboardConfigurationsInsert' pLciPayload_ pLciApplicationId_ =
     LeaderboardConfigurationsInsert'

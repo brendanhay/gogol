@@ -22,7 +22,7 @@
 --
 -- Fetches the Expansion File configuration for the APK specified.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsExpansionFilesGet@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.expansionfiles.get@.
 module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Get
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsExpansionFilesGet@ method which the
+-- | A resource alias for @androidpublisher.edits.expansionfiles.get@ method which the
 -- 'EditsExpansionFilesGet'' request conforms to.
 type EditsExpansionFilesGetResource =
      Capture "packageName" Text :>
@@ -78,10 +78,10 @@ data EditsExpansionFilesGet' = EditsExpansionFilesGet'
 --
 -- * 'eefgEditId'
 editsExpansionFilesGet'
-    :: Text -- ^ 'packageName'
-    -> Int32 -- ^ 'apkVersionCode'
-    -> EditsExpansionFilesGetExpansionFileType -- ^ 'expansionFileType'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eefgPackageName'
+    -> Int32 -- ^ 'eefgAPKVersionCode'
+    -> EditsExpansionFilesGetExpansionFileType -- ^ 'eefgExpansionFileType'
+    -> Text -- ^ 'eefgEditId'
     -> EditsExpansionFilesGet'
 editsExpansionFilesGet' pEefgPackageName_ pEefgAPKVersionCode_ pEefgExpansionFileType_ pEefgEditId_ =
     EditsExpansionFilesGet'

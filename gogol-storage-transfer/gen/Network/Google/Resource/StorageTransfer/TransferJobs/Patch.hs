@@ -24,7 +24,7 @@
 -- transfer operations that are running already. Updating the scheduling of
 -- a job is not allowed.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferJobsPatch@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.transferJobs.patch@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferTransferJobsPatch@ method which the
+-- | A resource alias for @storagetransfer.transferJobs.patch@ method which the
 -- 'TransferJobsPatch'' request conforms to.
 type TransferJobsPatchResource =
      "v1" :>
@@ -104,8 +104,8 @@ data TransferJobsPatch' = TransferJobsPatch'
 --
 -- * 'tjpCallback'
 transferJobsPatch'
-    :: Text -- ^ 'jobName'
-    -> UpdateTransferJobRequest -- ^ 'payload'
+    :: Text -- ^ 'tjpJobName'
+    -> UpdateTransferJobRequest -- ^ 'tjpPayload'
     -> TransferJobsPatch'
 transferJobsPatch' pTjpJobName_ pTjpPayload_ =
     TransferJobsPatch'

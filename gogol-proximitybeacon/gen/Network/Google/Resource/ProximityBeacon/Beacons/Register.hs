@@ -24,7 +24,7 @@
 -- These IDs are unique within the system. An ID can be registered only
 -- once.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsRegister@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.register@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Register
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Register
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconBeaconsRegister@ method which the
+-- | A resource alias for @proximitybeacon.beacons.register@ method which the
 -- 'BeaconsRegister'' request conforms to.
 type BeaconsRegisterResource =
      "v1beta1" :>
@@ -99,7 +99,7 @@ data BeaconsRegister' = BeaconsRegister'
 --
 -- * 'brCallback'
 beaconsRegister'
-    :: Beacon -- ^ 'payload'
+    :: Beacon -- ^ 'brPayload'
     -> BeaconsRegister'
 beaconsRegister' pBrPayload_ =
     BeaconsRegister'

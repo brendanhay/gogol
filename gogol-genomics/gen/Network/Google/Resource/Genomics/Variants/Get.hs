@@ -22,7 +22,7 @@
 --
 -- Gets a variant by ID.
 --
--- /See:/ < Genomics API Reference> for @GenomicsVariantsGet@.
+-- /See:/ < Genomics API Reference> for @genomics.variants.get@.
 module Network.Google.Resource.Genomics.Variants.Get
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.Variants.Get
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsVariantsGet@ method which the
+-- | A resource alias for @genomics.variants.get@ method which the
 -- 'VariantsGet'' request conforms to.
 type VariantsGetResource =
      "v1" :>
@@ -95,7 +95,7 @@ data VariantsGet' = VariantsGet'
 --
 -- * 'vggCallback'
 variantsGet'
-    :: Text -- ^ 'variantId'
+    :: Text -- ^ 'vggVariantId'
     -> VariantsGet'
 variantsGet' pVggVariantId_ =
     VariantsGet'

@@ -22,7 +22,7 @@
 --
 -- Get a custom dimension to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomDimensionsGet@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.customDimensions.get@.
 module Network.Google.Resource.Analytics.Management.CustomDimensions.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementCustomDimensionsGet@ method which the
+-- | A resource alias for @analytics.management.customDimensions.get@ method which the
 -- 'ManagementCustomDimensionsGet'' request conforms to.
 type ManagementCustomDimensionsGetResource =
      "management" :>
@@ -73,9 +73,9 @@ data ManagementCustomDimensionsGet' = ManagementCustomDimensionsGet'
 --
 -- * 'mcdgCustomDimensionId'
 managementCustomDimensionsGet'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'customDimensionId'
+    :: Text -- ^ 'mcdgWebPropertyId'
+    -> Text -- ^ 'mcdgAccountId'
+    -> Text -- ^ 'mcdgCustomDimensionId'
     -> ManagementCustomDimensionsGet'
 managementCustomDimensionsGet' pMcdgWebPropertyId_ pMcdgAccountId_ pMcdgCustomDimensionId_ =
     ManagementCustomDimensionsGet'

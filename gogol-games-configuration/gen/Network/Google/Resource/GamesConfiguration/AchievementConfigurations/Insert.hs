@@ -22,7 +22,7 @@
 --
 -- Insert a new achievement configuration in this application.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationAchievementConfigurationsInsert@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.achievementConfigurations.insert@.
 module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Inse
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationAchievementConfigurationsInsert@ method which the
+-- | A resource alias for @gamesConfiguration.achievementConfigurations.insert@ method which the
 -- 'AchievementConfigurationsInsert'' request conforms to.
 type AchievementConfigurationsInsertResource =
      "applications" :>
@@ -66,8 +66,8 @@ data AchievementConfigurationsInsert' = AchievementConfigurationsInsert'
 --
 -- * 'aciApplicationId'
 achievementConfigurationsInsert'
-    :: AchievementConfiguration -- ^ 'payload'
-    -> Text -- ^ 'applicationId'
+    :: AchievementConfiguration -- ^ 'aciPayload'
+    -> Text -- ^ 'aciApplicationId'
     -> AchievementConfigurationsInsert'
 achievementConfigurationsInsert' pAciPayload_ pAciApplicationId_ =
     AchievementConfigurationsInsert'

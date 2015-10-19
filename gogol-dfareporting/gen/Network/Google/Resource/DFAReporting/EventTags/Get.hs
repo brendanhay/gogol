@@ -22,7 +22,7 @@
 --
 -- Gets one event tag by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingEventTagsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.eventTags.get@.
 module Network.Google.Resource.DFAReporting.EventTags.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.EventTags.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingEventTagsGet@ method which the
+-- | A resource alias for @dfareporting.eventTags.get@ method which the
 -- 'EventTagsGet'' request conforms to.
 type EventTagsGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data EventTagsGet' = EventTagsGet'
 --
 -- * 'etgId'
 eventTagsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'etgProFileId'
+    -> Int64 -- ^ 'etgId'
     -> EventTagsGet'
 eventTagsGet' pEtgProFileId_ pEtgId_ =
     EventTagsGet'

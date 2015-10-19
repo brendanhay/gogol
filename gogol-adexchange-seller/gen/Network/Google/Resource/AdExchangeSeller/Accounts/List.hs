@@ -22,7 +22,7 @@
 --
 -- List all accounts available to this Ad Exchange account.
 --
--- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsList@.
+-- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @adexchangeseller.accounts.list@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.List
 import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangesellerAccountsList@ method which the
+-- | A resource alias for @adexchangeseller.accounts.list@ method which the
 -- 'AccountsList'' request conforms to.
 type AccountsListResource =
      "accounts" :>

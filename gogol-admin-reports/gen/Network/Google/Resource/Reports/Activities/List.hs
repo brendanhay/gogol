@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of activities for a specific customer and application.
 --
--- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference> for @ReportsActivitiesList@.
+-- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference> for @reports.activities.list@.
 module Network.Google.Resource.Reports.Activities.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Reports.Activities.List
 import           Network.Google.Prelude
 import           Network.Google.Reports.Types
 
--- | A resource alias for @ReportsActivitiesList@ method which the
+-- | A resource alias for @reports.activities.list@ method which the
 -- 'ActivitiesList'' request conforms to.
 type ActivitiesListResource =
      "activity" :>
@@ -107,8 +107,8 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'alMaxResults'
 activitiesList'
-    :: Text -- ^ 'applicationName'
-    -> Text -- ^ 'userKey'
+    :: Text -- ^ 'alApplicationName'
+    -> Text -- ^ 'alUserKey'
     -> ActivitiesList'
 activitiesList' pAlApplicationName_ pAlUserKey_ =
     ActivitiesList'

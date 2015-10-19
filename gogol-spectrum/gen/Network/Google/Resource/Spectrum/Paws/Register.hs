@@ -23,7 +23,7 @@
 -- The Google Spectrum Database implements registration in the getSpectrum
 -- method. As such this always returns an UNIMPLEMENTED error.
 --
--- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @SpectrumPawsRegister@.
+-- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @spectrum.paws.register@.
 module Network.Google.Resource.Spectrum.Paws.Register
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Spectrum.Paws.Register
 import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
--- | A resource alias for @SpectrumPawsRegister@ method which the
+-- | A resource alias for @spectrum.paws.register@ method which the
 -- 'PawsRegister'' request conforms to.
 type PawsRegisterResource =
      "register" :>
@@ -62,7 +62,7 @@ newtype PawsRegister' = PawsRegister'
 --
 -- * 'prPayload'
 pawsRegister'
-    :: PawsRegisterRequest -- ^ 'payload'
+    :: PawsRegisterRequest -- ^ 'prPayload'
     -> PawsRegister'
 pawsRegister' pPrPayload_ =
     PawsRegister'

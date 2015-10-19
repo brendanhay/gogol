@@ -28,7 +28,7 @@
 -- the instances are still being deleted. You must separately verify the
 -- status of the deleting action with the listmanagedinstances method.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersDeleteInstances@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.deleteInstances@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.DeleteInstances
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.DeleteInstances
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersDeleteInstances@ method which the
+-- | A resource alias for @compute.instanceGroupManagers.deleteInstances@ method which the
 -- 'InstanceGroupManagersDeleteInstances'' request conforms to.
 type InstanceGroupManagersDeleteInstancesResource =
      Capture "project" Text :>
@@ -90,10 +90,10 @@ data InstanceGroupManagersDeleteInstances' = InstanceGroupManagersDeleteInstance
 --
 -- * 'igmdiPayload'
 instanceGroupManagersDeleteInstances'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instanceGroupManager'
-    -> Text -- ^ 'zone'
-    -> InstanceGroupManagersDeleteInstancesRequest -- ^ 'payload'
+    :: Text -- ^ 'igmdiProject'
+    -> Text -- ^ 'igmdiInstanceGroupManager'
+    -> Text -- ^ 'igmdiZone'
+    -> InstanceGroupManagersDeleteInstancesRequest -- ^ 'igmdiPayload'
     -> InstanceGroupManagersDeleteInstances'
 instanceGroupManagersDeleteInstances' pIgmdiProject_ pIgmdiInstanceGroupManager_ pIgmdiZone_ pIgmdiPayload_ =
     InstanceGroupManagersDeleteInstances'

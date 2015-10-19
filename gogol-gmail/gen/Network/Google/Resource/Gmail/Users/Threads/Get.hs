@@ -22,7 +22,7 @@
 --
 -- Gets the specified thread.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersThreadsGet@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.threads.get@.
 module Network.Google.Resource.Gmail.Users.Threads.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Gmail.Users.Threads.Get
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersThreadsGet@ method which the
+-- | A resource alias for @gmail.users.threads.get@ method which the
 -- 'UsersThreadsGet'' request conforms to.
 type UsersThreadsGetResource =
      Capture "userId" Text :>
@@ -74,7 +74,7 @@ data UsersThreadsGet' = UsersThreadsGet'
 --
 -- * 'utgMetadataHeaders'
 usersThreadsGet'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'utgId'
     -> Text
     -> UsersThreadsGet'
 usersThreadsGet' pUtgUserId_ pUtgId_ =

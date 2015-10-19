@@ -23,7 +23,7 @@
 -- Retrieves the list of TargetHttpProxy resources available to the
 -- specified project.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetHTTPProxiesList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetHttpProxies.list@.
 module Network.Google.Resource.Compute.TargetHTTPProxies.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetHTTPProxiesList@ method which the
+-- | A resource alias for @compute.targetHttpProxies.list@ method which the
 -- 'TargetHTTPProxiesList'' request conforms to.
 type TargetHTTPProxiesListResource =
      Capture "project" Text :>
@@ -78,7 +78,7 @@ data TargetHTTPProxiesList' = TargetHTTPProxiesList'
 --
 -- * 'thttpplMaxResults'
 targetHTTPProxiesList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'thttpplProject'
     -> TargetHTTPProxiesList'
 targetHTTPProxiesList' pThttpplProject_ =
     TargetHTTPProxiesList'

@@ -22,7 +22,7 @@
 --
 -- Delete a previously created ManagedZone.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSManagedZonesDelete@.
+-- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.managedZones.delete@.
 module Network.Google.Resource.DNS.ManagedZones.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DNS.ManagedZones.Delete
 import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DNSManagedZonesDelete@ method which the
+-- | A resource alias for @dns.managedZones.delete@ method which the
 -- 'ManagedZonesDelete'' request conforms to.
 type ManagedZonesDeleteResource =
      Capture "project" Text :>
@@ -64,8 +64,8 @@ data ManagedZonesDelete' = ManagedZonesDelete'
 --
 -- * 'mzdManagedZone'
 managedZonesDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'managedZone'
+    :: Text -- ^ 'mzdProject'
+    -> Text -- ^ 'mzdManagedZone'
     -> ManagedZonesDelete'
 managedZonesDelete' pMzdProject_ pMzdManagedZone_ =
     ManagedZonesDelete'

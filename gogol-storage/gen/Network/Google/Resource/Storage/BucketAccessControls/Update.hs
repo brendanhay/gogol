@@ -22,7 +22,7 @@
 --
 -- Updates an ACL entry on the specified bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketAccessControlsUpdate@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.bucketAccessControls.update@.
 module Network.Google.Resource.Storage.BucketAccessControls.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Storage.BucketAccessControls.Update
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageBucketAccessControlsUpdate@ method which the
+-- | A resource alias for @storage.bucketAccessControls.update@ method which the
 -- 'BucketAccessControlsUpdate'' request conforms to.
 type BucketAccessControlsUpdateResource =
      "b" :>
@@ -71,9 +71,9 @@ data BucketAccessControlsUpdate' = BucketAccessControlsUpdate'
 --
 -- * 'bacuEntity'
 bucketAccessControlsUpdate'
-    :: Text -- ^ 'bucket'
-    -> BucketAccessControl -- ^ 'payload'
-    -> Text -- ^ 'entity'
+    :: Text -- ^ 'bacuBucket'
+    -> BucketAccessControl -- ^ 'bacuPayload'
+    -> Text -- ^ 'bacuEntity'
     -> BucketAccessControlsUpdate'
 bucketAccessControlsUpdate' pBacuBucket_ pBacuPayload_ pBacuEntity_ =
     BucketAccessControlsUpdate'

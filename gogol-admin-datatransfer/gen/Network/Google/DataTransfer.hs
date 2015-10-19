@@ -27,19 +27,19 @@ module Network.Google.DataTransfer
 
     -- * Resources
 
-    -- ** DataTransferApplicationsGet
+    -- ** datatransfer.applications.get
     , module Network.Google.Resource.DataTransfer.Applications.Get
 
-    -- ** DataTransferApplicationsList
+    -- ** datatransfer.applications.list
     , module Network.Google.Resource.DataTransfer.Applications.List
 
-    -- ** DataTransferTransfersGet
+    -- ** datatransfer.transfers.get
     , module Network.Google.Resource.DataTransfer.Transfers.Get
 
-    -- ** DataTransferTransfersInsert
+    -- ** datatransfer.transfers.insert
     , module Network.Google.Resource.DataTransfer.Transfers.Insert
 
-    -- ** DataTransferTransfersList
+    -- ** datatransfer.transfers.list
     , module Network.Google.Resource.DataTransfer.Transfers.List
 
     -- * Types

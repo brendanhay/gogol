@@ -22,7 +22,7 @@
 --
 -- Lists all Containers that belongs to a GTM Account.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersList@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.list@.
 module Network.Google.Resource.TagManager.Accounts.Containers.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.List
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersList@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.list@ method which the
 -- 'AccountsContainersList'' request conforms to.
 type AccountsContainersListResource =
      "accounts" :>
@@ -61,7 +61,7 @@ newtype AccountsContainersList' = AccountsContainersList'
 --
 -- * 'aclAccountId'
 accountsContainersList'
-    :: Text -- ^ 'accountId'
+    :: Text -- ^ 'aclAccountId'
     -> AccountsContainersList'
 accountsContainersList' pAclAccountId_ =
     AccountsContainersList'

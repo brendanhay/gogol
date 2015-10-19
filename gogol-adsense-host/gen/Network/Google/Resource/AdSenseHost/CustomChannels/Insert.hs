@@ -22,7 +22,7 @@
 --
 -- Add a new custom channel to the host AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostCustomChannelsInsert@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.customchannels.insert@.
 module Network.Google.Resource.AdSenseHost.CustomChannels.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.Insert
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostCustomChannelsInsert@ method which the
+-- | A resource alias for @adsensehost.customchannels.insert@ method which the
 -- 'CustomChannelsInsert'' request conforms to.
 type CustomChannelsInsertResource =
      "adclients" :>
@@ -66,8 +66,8 @@ data CustomChannelsInsert' = CustomChannelsInsert'
 --
 -- * 'cciAdClientId'
 customChannelsInsert'
-    :: CustomChannel -- ^ 'payload'
-    -> Text -- ^ 'adClientId'
+    :: CustomChannel -- ^ 'cciPayload'
+    -> Text -- ^ 'cciAdClientId'
     -> CustomChannelsInsert'
 customChannelsInsert' pCciPayload_ pCciAdClientId_ =
     CustomChannelsInsert'

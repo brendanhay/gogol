@@ -22,7 +22,7 @@
 --
 -- Lists sessions previously created.
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersSessionsList@.
+-- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.sessions.list@.
 module Network.Google.Resource.Fitness.Users.Sessions.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Fitness.Users.Sessions.List
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersSessionsList@ method which the
+-- | A resource alias for @fitness.users.sessions.list@ method which the
 -- 'UsersSessionsList'' request conforms to.
 type UsersSessionsListResource =
      Capture "userId" Text :>
@@ -80,7 +80,7 @@ data UsersSessionsList' = UsersSessionsList'
 --
 -- * 'uslIncludeDeleted'
 usersSessionsList'
-    :: Text -- ^ 'userId'
+    :: Text -- ^ 'uslUserId'
     -> UsersSessionsList'
 usersSessionsList' pUslUserId_ =
     UsersSessionsList'

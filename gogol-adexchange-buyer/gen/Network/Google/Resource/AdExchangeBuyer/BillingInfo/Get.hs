@@ -22,7 +22,7 @@
 --
 -- Returns the billing information for one account specified by account ID.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerBillingInfoGet@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.billingInfo.get@.
 module Network.Google.Resource.AdExchangeBuyer.BillingInfo.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeBuyer.BillingInfo.Get
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerBillingInfoGet@ method which the
+-- | A resource alias for @adexchangebuyer.billingInfo.get@ method which the
 -- 'BillingInfoGet'' request conforms to.
 type BillingInfoGetResource =
      "billinginfo" :>
@@ -59,7 +59,7 @@ newtype BillingInfoGet' = BillingInfoGet'
 --
 -- * 'bigAccountId'
 billingInfoGet'
-    :: Int32 -- ^ 'accountId'
+    :: Int32 -- ^ 'bigAccountId'
     -> BillingInfoGet'
 billingInfoGet' pBigAccountId_ =
     BillingInfoGet'

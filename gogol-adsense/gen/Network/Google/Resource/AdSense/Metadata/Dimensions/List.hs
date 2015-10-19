@@ -22,7 +22,7 @@
 --
 -- List the metadata for the dimensions available to this AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseMetadataDimensionsList@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.metadata.dimensions.list@.
 module Network.Google.Resource.AdSense.Metadata.Dimensions.List
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.AdSense.Metadata.Dimensions.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseMetadataDimensionsList@ method which the
+-- | A resource alias for @adsense.metadata.dimensions.list@ method which the
 -- 'MetadataDimensionsList'' request conforms to.
 type MetadataDimensionsListResource =
      "metadata" :>

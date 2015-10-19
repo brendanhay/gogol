@@ -22,7 +22,7 @@
 --
 -- Returns a web property-AdWords link to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyAdWordsLinksGet@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webPropertyAdWordsLinks.get@.
 module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksGet@ method which the
+-- | A resource alias for @analytics.management.webPropertyAdWordsLinks.get@ method which the
 -- 'ManagementWebPropertyAdWordsLinksGet'' request conforms to.
 type ManagementWebPropertyAdWordsLinksGetResource =
      "management" :>
@@ -73,9 +73,9 @@ data ManagementWebPropertyAdWordsLinksGet' = ManagementWebPropertyAdWordsLinksGe
 --
 -- * 'mwpawlgWebPropertyAdWordsLinkId'
 managementWebPropertyAdWordsLinksGet'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'webPropertyAdWordsLinkId'
+    :: Text -- ^ 'mwpawlgWebPropertyId'
+    -> Text -- ^ 'mwpawlgAccountId'
+    -> Text -- ^ 'mwpawlgWebPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksGet'
 managementWebPropertyAdWordsLinksGet' pMwpawlgWebPropertyId_ pMwpawlgAccountId_ pMwpawlgWebPropertyAdWordsLinkId_ =
     ManagementWebPropertyAdWordsLinksGet'

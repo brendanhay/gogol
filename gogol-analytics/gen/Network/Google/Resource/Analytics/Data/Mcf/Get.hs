@@ -22,7 +22,7 @@
 --
 -- Returns Analytics Multi-Channel Funnels data for a view (profile).
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsDataMcfGet@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.data.mcf.get@.
 module Network.Google.Resource.Analytics.Data.Mcf.Get
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Analytics.Data.Mcf.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsDataMcfGet@ method which the
+-- | A resource alias for @analytics.data.mcf.get@ method which the
 -- 'DataMcfGet'' request conforms to.
 type DataMcfGetResource =
      "data" :>
@@ -105,10 +105,10 @@ data DataMcfGet' = DataMcfGet'
 --
 -- * 'dmgStartDate'
 dataMcfGet'
-    :: Text -- ^ 'metrics'
-    -> Text -- ^ 'ids'
-    -> Text -- ^ 'end-date'
-    -> Text -- ^ 'start-date'
+    :: Text -- ^ 'dmgMetrics'
+    -> Text -- ^ 'dmgIds'
+    -> Text -- ^ 'dmgEndDate'
+    -> Text -- ^ 'dmgStartDate'
     -> DataMcfGet'
 dataMcfGet' pDmgMetrics_ pDmgIds_ pDmgEndDate_ pDmgStartDate_ =
     DataMcfGet'

@@ -22,7 +22,7 @@
 --
 -- Returns all user settings for the authenticated user.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarSettingsList@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.settings.list@.
 module Network.Google.Resource.Calendar.Settings.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Calendar.Settings.List
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarSettingsList@ method which the
+-- | A resource alias for @calendar.settings.list@ method which the
 -- 'SettingsList'' request conforms to.
 type SettingsListResource =
      "users" :>

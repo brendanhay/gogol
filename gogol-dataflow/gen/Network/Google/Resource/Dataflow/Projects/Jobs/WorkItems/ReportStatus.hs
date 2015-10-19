@@ -22,7 +22,7 @@
 --
 -- Reports the status of dataflow WorkItems leased by a worker.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsWorkItemsReportStatus@.
+-- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.jobs.workItems.reportStatus@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
 import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataflowProjectsJobsWorkItemsReportStatus@ method which the
+-- | A resource alias for @dataflow.projects.jobs.workItems.reportStatus@ method which the
 -- 'ProjectsJobsWorkItemsReportStatus'' request conforms to.
 type ProjectsJobsWorkItemsReportStatusResource =
      "v1b3" :>
@@ -108,9 +108,9 @@ data ProjectsJobsWorkItemsReportStatus' = ProjectsJobsWorkItemsReportStatus'
 --
 -- * 'pjwirsCallback'
 projectsJobsWorkItemsReportStatus'
-    :: Text -- ^ 'jobId'
-    -> ReportWorkItemStatusRequest -- ^ 'payload'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'pjwirsJobId'
+    -> ReportWorkItemStatusRequest -- ^ 'pjwirsPayload'
+    -> Text -- ^ 'pjwirsProjectId'
     -> ProjectsJobsWorkItemsReportStatus'
 projectsJobsWorkItemsReportStatus' pPjwirsJobId_ pPjwirsPayload_ pPjwirsProjectId_ =
     ProjectsJobsWorkItemsReportStatus'

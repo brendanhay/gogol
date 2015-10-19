@@ -23,7 +23,7 @@
 -- Updates an existing webProperty-AdWords link. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyAdWordsLinksPatch@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webPropertyAdWordsLinks.patch@.
 module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Patch
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Patc
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksPatch@ method which the
+-- | A resource alias for @analytics.management.webPropertyAdWordsLinks.patch@ method which the
 -- 'ManagementWebPropertyAdWordsLinksPatch'' request conforms to.
 type ManagementWebPropertyAdWordsLinksPatchResource =
      "management" :>
@@ -80,10 +80,10 @@ data ManagementWebPropertyAdWordsLinksPatch' = ManagementWebPropertyAdWordsLinks
 --
 -- * 'mwpawlpWebPropertyAdWordsLinkId'
 managementWebPropertyAdWordsLinksPatch'
-    :: Text -- ^ 'webPropertyId'
-    -> EntityAdWordsLink -- ^ 'payload'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'webPropertyAdWordsLinkId'
+    :: Text -- ^ 'mwpawlpWebPropertyId'
+    -> EntityAdWordsLink -- ^ 'mwpawlpPayload'
+    -> Text -- ^ 'mwpawlpAccountId'
+    -> Text -- ^ 'mwpawlpWebPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksPatch'
 managementWebPropertyAdWordsLinksPatch' pMwpawlpWebPropertyId_ pMwpawlpPayload_ pMwpawlpAccountId_ pMwpawlpWebPropertyAdWordsLinkId_ =
     ManagementWebPropertyAdWordsLinksPatch'

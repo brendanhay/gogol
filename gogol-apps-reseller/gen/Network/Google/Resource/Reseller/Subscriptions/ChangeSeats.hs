@@ -22,7 +22,7 @@
 --
 -- Changes the seats configuration of a subscription
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsChangeSeats@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.changeSeats@.
 module Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerSubscriptionsChangeSeats@ method which the
+-- | A resource alias for @reseller.subscriptions.changeSeats@ method which the
 -- 'SubscriptionsChangeSeats'' request conforms to.
 type SubscriptionsChangeSeatsResource =
      "customers" :>
@@ -71,9 +71,9 @@ data SubscriptionsChangeSeats' = SubscriptionsChangeSeats'
 --
 -- * 'scsSubscriptionId'
 subscriptionsChangeSeats'
-    :: Seats -- ^ 'payload'
-    -> Text -- ^ 'customerId'
-    -> Text -- ^ 'subscriptionId'
+    :: Seats -- ^ 'scsPayload'
+    -> Text -- ^ 'scsCustomerId'
+    -> Text -- ^ 'scsSubscriptionId'
     -> SubscriptionsChangeSeats'
 subscriptionsChangeSeats' pScsPayload_ pScsCustomerId_ pScsSubscriptionId_ =
     SubscriptionsChangeSeats'

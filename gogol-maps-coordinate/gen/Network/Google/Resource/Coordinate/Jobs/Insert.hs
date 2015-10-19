@@ -22,7 +22,7 @@
 --
 -- Inserts a new job. Only the state field of the job should be set.
 --
--- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateJobsInsert@.
+-- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @coordinate.jobs.insert@.
 module Network.Google.Resource.Coordinate.Jobs.Insert
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Coordinate.Jobs.Insert
 import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CoordinateJobsInsert@ method which the
+-- | A resource alias for @coordinate.jobs.insert@ method which the
 -- 'JobsInsert'' request conforms to.
 type JobsInsertResource =
      "teams" :>
@@ -110,12 +110,12 @@ data JobsInsert' = JobsInsert'
 --
 -- * 'jiCustomField'
 jobsInsert'
-    :: Text -- ^ 'teamId'
-    -> Text -- ^ 'address'
-    -> Job -- ^ 'payload'
-    -> Double -- ^ 'lat'
-    -> Double -- ^ 'lng'
-    -> Text -- ^ 'title'
+    :: Text -- ^ 'jiTeamId'
+    -> Text -- ^ 'jiAddress'
+    -> Job -- ^ 'jiPayload'
+    -> Double -- ^ 'jiLat'
+    -> Double -- ^ 'jiLng'
+    -> Text -- ^ 'jiTitle'
     -> JobsInsert'
 jobsInsert' pJiTeamId_ pJiAddress_ pJiPayload_ pJiLat_ pJiLng_ pJiTitle_ =
     JobsInsert'

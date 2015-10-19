@@ -23,7 +23,7 @@
 -- Updates an existing view (profile). This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementGoalsPatch@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.goals.patch@.
 module Network.Google.Resource.Analytics.Management.Goals.Patch
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Analytics.Management.Goals.Patch
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementGoalsPatch@ method which the
+-- | A resource alias for @analytics.management.goals.patch@ method which the
 -- 'ManagementGoalsPatch'' request conforms to.
 type ManagementGoalsPatchResource =
      "management" :>
@@ -85,11 +85,11 @@ data ManagementGoalsPatch' = ManagementGoalsPatch'
 --
 -- * 'mgpAccountId'
 managementGoalsPatch'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'goalId'
-    -> Text -- ^ 'profileId'
-    -> Goal -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mgpWebPropertyId'
+    -> Text -- ^ 'mgpGoalId'
+    -> Text -- ^ 'mgpProFileId'
+    -> Goal -- ^ 'mgpPayload'
+    -> Text -- ^ 'mgpAccountId'
     -> ManagementGoalsPatch'
 managementGoalsPatch' pMgpWebPropertyId_ pMgpGoalId_ pMgpProFileId_ pMgpPayload_ pMgpAccountId_ =
     ManagementGoalsPatch'

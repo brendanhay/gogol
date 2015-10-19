@@ -23,7 +23,7 @@
 -- Retrieves the list of ForwardingRule resources available to the
 -- specified project and region.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeForwardingRulesList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.forwardingRules.list@.
 module Network.Google.Resource.Compute.ForwardingRules.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.ForwardingRules.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeForwardingRulesList@ method which the
+-- | A resource alias for @compute.forwardingRules.list@ method which the
 -- 'ForwardingRulesList'' request conforms to.
 type ForwardingRulesListResource =
      Capture "project" Text :>
@@ -83,8 +83,8 @@ data ForwardingRulesList' = ForwardingRulesList'
 --
 -- * 'frlMaxResults'
 forwardingRulesList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'frlProject'
+    -> Text -- ^ 'frlRegion'
     -> ForwardingRulesList'
 forwardingRulesList' pFrlProject_ pFrlRegion_ =
     ForwardingRulesList'

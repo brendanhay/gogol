@@ -22,7 +22,7 @@
 --
 -- Creates a Cloud SQL instance as a clone of the source instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesClone@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.clone@.
 module Network.Google.Resource.SQL.Instances.Clone
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.SQL.Instances.Clone
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesClone@ method which the
+-- | A resource alias for @sql.instances.clone@ method which the
 -- 'InstancesClone'' request conforms to.
 type InstancesCloneResource =
      "projects" :>
@@ -72,9 +72,9 @@ data InstancesClone' = InstancesClone'
 --
 -- * 'icInstance'
 instancesClone'
-    :: Text -- ^ 'project'
-    -> InstancesCloneRequest -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'icProject'
+    -> InstancesCloneRequest -- ^ 'icPayload'
+    -> Text -- ^ 'icInstance'
     -> InstancesClone'
 instancesClone' pIcProject_ pIcPayload_ pIcInstance_ =
     InstancesClone'

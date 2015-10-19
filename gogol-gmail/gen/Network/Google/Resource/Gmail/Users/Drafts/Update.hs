@@ -22,7 +22,7 @@
 --
 -- Replaces a draft\'s content.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersDraftsUpdate@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.drafts.update@.
 module Network.Google.Resource.Gmail.Users.Drafts.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Gmail.Users.Drafts.Update
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersDraftsUpdate@ method which the
+-- | A resource alias for @gmail.users.drafts.update@ method which the
 -- 'UsersDraftsUpdate'' request conforms to.
 type UsersDraftsUpdateResource =
      Capture "userId" Text :>
@@ -74,9 +74,9 @@ data UsersDraftsUpdate' = UsersDraftsUpdate'
 --
 -- * 'uduId'
 usersDraftsUpdate'
-    :: Draft -- ^ 'payload'
-    -> Text -- ^ 'media'
-    -> Body -- ^ 'id'
+    :: Draft -- ^ 'uduPayload'
+    -> Text -- ^ 'uduMedia'
+    -> Body -- ^ 'uduId'
     -> Text
     -> UsersDraftsUpdate'
 usersDraftsUpdate' pUduPayload_ pUduUserId_ pUduMedia_ pUduId_ =

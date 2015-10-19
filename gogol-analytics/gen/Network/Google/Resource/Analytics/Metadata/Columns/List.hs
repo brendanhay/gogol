@@ -22,7 +22,7 @@
 --
 -- Lists all columns for a report type
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsMetadataColumnsList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.metadata.columns.list@.
 module Network.Google.Resource.Analytics.Metadata.Columns.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Analytics.Metadata.Columns.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsMetadataColumnsList@ method which the
+-- | A resource alias for @analytics.metadata.columns.list@ method which the
 -- 'MetadataColumnsList'' request conforms to.
 type MetadataColumnsListResource =
      "metadata" :>
@@ -60,7 +60,7 @@ newtype MetadataColumnsList' = MetadataColumnsList'
 --
 -- * 'mclReportType'
 metadataColumnsList'
-    :: Text -- ^ 'reportType'
+    :: Text -- ^ 'mclReportType'
     -> MetadataColumnsList'
 metadataColumnsList' pMclReportType_ =
     MetadataColumnsList'

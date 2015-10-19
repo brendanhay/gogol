@@ -22,7 +22,7 @@
 --
 -- Retrieve all groups in a domain (paginated)
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.groups.list@.
 module Network.Google.Resource.Directory.Groups.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Directory.Groups.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryGroupsList@ method which the
+-- | A resource alias for @directory.groups.list@ method which the
 -- 'GroupsList'' request conforms to.
 type GroupsListResource =
      "groups" :>

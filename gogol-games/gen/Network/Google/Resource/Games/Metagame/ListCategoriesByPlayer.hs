@@ -23,7 +23,7 @@
 -- List play data aggregated per category for the player corresponding to
 -- playerId.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesMetagameListCategoriesByPlayer@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.metagame.listCategoriesByPlayer@.
 module Network.Google.Resource.Games.Metagame.ListCategoriesByPlayer
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Games.Metagame.ListCategoriesByPlayer
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesMetagameListCategoriesByPlayer@ method which the
+-- | A resource alias for @games.metagame.listCategoriesByPlayer@ method which the
 -- 'MetagameListCategoriesByPlayer'' request conforms to.
 type MetagameListCategoriesByPlayerResource =
      "players" :>
@@ -85,8 +85,8 @@ data MetagameListCategoriesByPlayer' = MetagameListCategoriesByPlayer'
 --
 -- * 'mlcbpMaxResults'
 metagameListCategoriesByPlayer'
-    :: MetagameListCategoriesByPlayerCollection -- ^ 'collection'
-    -> Text -- ^ 'playerId'
+    :: MetagameListCategoriesByPlayerCollection -- ^ 'mlcbpCollection'
+    -> Text -- ^ 'mlcbpPlayerId'
     -> MetagameListCategoriesByPlayer'
 metagameListCategoriesByPlayer' pMlcbpCollection_ pMlcbpPlayerId_ =
     MetagameListCategoriesByPlayer'

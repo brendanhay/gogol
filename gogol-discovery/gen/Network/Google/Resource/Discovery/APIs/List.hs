@@ -22,7 +22,7 @@
 --
 -- Retrieve the list of APIs supported at this endpoint.
 --
--- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference> for @DiscoveryAPIsList@.
+-- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference> for @discovery.apis.list@.
 module Network.Google.Resource.Discovery.APIs.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Discovery.APIs.List
 import           Network.Google.Discovery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DiscoveryAPIsList@ method which the
+-- | A resource alias for @discovery.apis.list@ method which the
 -- 'APIsList'' request conforms to.
 type APIsListResource =
      "apis" :>

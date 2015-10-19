@@ -31,7 +31,7 @@
 -- complete until the controller removes them from the active list to avoid
 -- setting those breakpoints again.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @CloudDebuggerControllerDebuggeesBreakpointsList@.
+-- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.list@.
 module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.List
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Li
 import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudDebuggerControllerDebuggeesBreakpointsList@ method which the
+-- | A resource alias for @clouddebugger.controller.debuggees.breakpoints.list@ method which the
 -- 'ControllerDebuggeesBreakpointsList'' request conforms to.
 type ControllerDebuggeesBreakpointsListResource =
      "v2" :>
@@ -121,7 +121,7 @@ data ControllerDebuggeesBreakpointsList' = ControllerDebuggeesBreakpointsList'
 --
 -- * 'cdblCallback'
 controllerDebuggeesBreakpointsList'
-    :: Text -- ^ 'debuggeeId'
+    :: Text -- ^ 'cdblDebuggeeId'
     -> ControllerDebuggeesBreakpointsList'
 controllerDebuggeesBreakpointsList' pCdblDebuggeeId_ =
     ControllerDebuggeesBreakpointsList'

@@ -22,7 +22,7 @@
 --
 -- Updates an existing remarketing list.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingRemarketingListsUpdate@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.remarketingLists.update@.
 module Network.Google.Resource.DFAReporting.RemarketingLists.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingRemarketingListsUpdate@ method which the
+-- | A resource alias for @dfareporting.remarketingLists.update@ method which the
 -- 'RemarketingListsUpdate'' request conforms to.
 type RemarketingListsUpdateResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data RemarketingListsUpdate' = RemarketingListsUpdate'
 --
 -- * 'rluPayload'
 remarketingListsUpdate'
-    :: Int64 -- ^ 'profileId'
-    -> RemarketingList -- ^ 'payload'
+    :: Int64 -- ^ 'rluProFileId'
+    -> RemarketingList -- ^ 'rluPayload'
     -> RemarketingListsUpdate'
 remarketingListsUpdate' pRluProFileId_ pRluPayload_ =
     RemarketingListsUpdate'

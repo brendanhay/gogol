@@ -22,7 +22,7 @@
 --
 -- Activates a subscription previously suspended by the reseller
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsActivate@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.activate@.
 module Network.Google.Resource.Reseller.Subscriptions.Activate
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Reseller.Subscriptions.Activate
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerSubscriptionsActivate@ method which the
+-- | A resource alias for @reseller.subscriptions.activate@ method which the
 -- 'SubscriptionsActivate'' request conforms to.
 type SubscriptionsActivateResource =
      "customers" :>
@@ -66,8 +66,8 @@ data SubscriptionsActivate' = SubscriptionsActivate'
 --
 -- * 'saSubscriptionId'
 subscriptionsActivate'
-    :: Text -- ^ 'customerId'
-    -> Text -- ^ 'subscriptionId'
+    :: Text -- ^ 'saCustomerId'
+    -> Text -- ^ 'saSubscriptionId'
     -> SubscriptionsActivate'
 subscriptionsActivate' pSaCustomerId_ pSaSubscriptionId_ =
     SubscriptionsActivate'

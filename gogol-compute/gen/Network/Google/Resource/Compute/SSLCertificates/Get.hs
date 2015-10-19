@@ -22,7 +22,7 @@
 --
 -- Returns the specified SslCertificate resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeSSLCertificatesGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.sslCertificates.get@.
 module Network.Google.Resource.Compute.SSLCertificates.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.SSLCertificates.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeSSLCertificatesGet@ method which the
+-- | A resource alias for @compute.sslCertificates.get@ method which the
 -- 'SSLCertificatesGet'' request conforms to.
 type SSLCertificatesGetResource =
      Capture "project" Text :>
@@ -66,8 +66,8 @@ data SSLCertificatesGet' = SSLCertificatesGet'
 --
 -- * 'scgSSLCertificate'
 sslCertificatesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'sslCertificate'
+    :: Text -- ^ 'scgProject'
+    -> Text -- ^ 'scgSSLCertificate'
     -> SSLCertificatesGet'
 sslCertificatesGet' pScgProject_ pScgSSLCertificate_ =
     SSLCertificatesGet'

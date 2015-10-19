@@ -22,7 +22,7 @@
 --
 -- Gets one project by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingProjectsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.projects.get@.
 module Network.Google.Resource.DFAReporting.Projects.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Projects.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingProjectsGet@ method which the
+-- | A resource alias for @dfareporting.projects.get@ method which the
 -- 'ProjectsGet'' request conforms to.
 type ProjectsGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data ProjectsGet' = ProjectsGet'
 --
 -- * 'proId'
 projectsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'proProFileId'
+    -> Int64 -- ^ 'proId'
     -> ProjectsGet'
 projectsGet' pProProFileId_ pProId_ =
     ProjectsGet'

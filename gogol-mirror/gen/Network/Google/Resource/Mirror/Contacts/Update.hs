@@ -22,7 +22,7 @@
 --
 -- Updates a contact in place.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorContactsUpdate@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.contacts.update@.
 module Network.Google.Resource.Mirror.Contacts.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Mirror.Contacts.Update
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorContactsUpdate@ method which the
+-- | A resource alias for @mirror.contacts.update@ method which the
 -- 'ContactsUpdate'' request conforms to.
 type ContactsUpdateResource =
      "contacts" :>
@@ -64,8 +64,8 @@ data ContactsUpdate' = ContactsUpdate'
 --
 -- * 'cuId'
 contactsUpdate'
-    :: Contact -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: Contact -- ^ 'cuPayload'
+    -> Text -- ^ 'cuId'
     -> ContactsUpdate'
 contactsUpdate' pCuPayload_ pCuId_ =
     ContactsUpdate'

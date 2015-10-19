@@ -22,7 +22,7 @@
 --
 -- List the payments for this AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsensePaymentsList@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.payments.list@.
 module Network.Google.Resource.AdSense.Payments.List
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.AdSense.Payments.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensePaymentsList@ method which the
+-- | A resource alias for @adsense.payments.list@ method which the
 -- 'PaymentsList'' request conforms to.
 type PaymentsListResource =
      "payments" :>

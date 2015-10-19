@@ -30,7 +30,7 @@
 -- CourseTeacherLimitReached * UserGroupsMembershipLimitReached *
 -- \`NOT_FOUND\` if no invitation exists with the requested ID.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomInvitationsAccept@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.invitations.accept@.
 module Network.Google.Resource.Classroom.Invitations.Accept
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ module Network.Google.Resource.Classroom.Invitations.Accept
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomInvitationsAccept@ method which the
+-- | A resource alias for @classroom.invitations.accept@ method which the
 -- 'InvitationsAccept'' request conforms to.
 type InvitationsAcceptResource =
      "v1" :>
@@ -111,7 +111,7 @@ data InvitationsAccept' = InvitationsAccept'
 --
 -- * 'iaCallback'
 invitationsAccept'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'iaId'
     -> InvitationsAccept'
 invitationsAccept' pIaId_ =
     InvitationsAccept'

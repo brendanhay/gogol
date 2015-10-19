@@ -22,7 +22,7 @@
 --
 -- Updates an access control rule.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarACLUpdate@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.acl.update@.
 module Network.Google.Resource.Calendar.ACL.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Calendar.ACL.Update
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarACLUpdate@ method which the
+-- | A resource alias for @calendar.acl.update@ method which the
 -- 'ACLUpdate'' request conforms to.
 type ACLUpdateResource =
      "calendars" :>
@@ -70,9 +70,9 @@ data ACLUpdate' = ACLUpdate'
 --
 -- * 'auPayload'
 aclUpdate'
-    :: Text -- ^ 'calendarId'
-    -> Text -- ^ 'ruleId'
-    -> ACLRule -- ^ 'payload'
+    :: Text -- ^ 'auCalendarId'
+    -> Text -- ^ 'auRuleId'
+    -> ACLRule -- ^ 'auPayload'
     -> ACLUpdate'
 aclUpdate' pAuCalendarId_ pAuRuleId_ pAuPayload_ =
     ACLUpdate'

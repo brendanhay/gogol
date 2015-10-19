@@ -22,7 +22,7 @@
 --
 -- Get a person\'s profile.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsPeopleGet@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.people.get@.
 module Network.Google.Resource.PlusDomains.People.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.PlusDomains.People.Get
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsPeopleGet@ method which the
+-- | A resource alias for @plusDomains.people.get@ method which the
 -- 'PeopleGet'' request conforms to.
 type PeopleGetResource =
      "people" :>
@@ -59,7 +59,7 @@ newtype PeopleGet' = PeopleGet'
 --
 -- * 'pgUserId'
 peopleGet'
-    :: Text -- ^ 'userId'
+    :: Text -- ^ 'pgUserId'
     -> PeopleGet'
 peopleGet' pPgUserId_ =
     PeopleGet'

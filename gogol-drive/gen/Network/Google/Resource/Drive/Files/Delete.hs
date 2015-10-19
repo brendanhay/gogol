@@ -23,7 +23,7 @@
 -- Permanently deletes a file by ID. Skips the trash. The currently
 -- authenticated user must own the file.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesDelete@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.delete@.
 module Network.Google.Resource.Drive.Files.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Drive.Files.Delete
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesDelete@ method which the
+-- | A resource alias for @drive.files.delete@ method which the
 -- 'FilesDelete'' request conforms to.
 type FilesDeleteResource =
      "files" :>
@@ -61,7 +61,7 @@ newtype FilesDelete' = FilesDelete'
 --
 -- * 'fdFileId'
 filesDelete'
-    :: Text -- ^ 'fileId'
+    :: Text -- ^ 'fdFileId'
     -> FilesDelete'
 filesDelete' pFdFileId_ =
     FilesDelete'

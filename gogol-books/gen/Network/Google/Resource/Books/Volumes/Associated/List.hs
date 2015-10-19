@@ -22,7 +22,7 @@
 --
 -- Return a list of associated books.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesAssociatedList@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.volumes.associated.list@.
 module Network.Google.Resource.Books.Volumes.Associated.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Books.Volumes.Associated.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksVolumesAssociatedList@ method which the
+-- | A resource alias for @books.volumes.associated.list@ method which the
 -- 'VolumesAssociatedList'' request conforms to.
 type VolumesAssociatedListResource =
      "volumes" :>
@@ -83,7 +83,7 @@ data VolumesAssociatedList' = VolumesAssociatedList'
 --
 -- * 'valAssociation'
 volumesAssociatedList'
-    :: Text -- ^ 'volumeId'
+    :: Text -- ^ 'valVolumeId'
     -> VolumesAssociatedList'
 volumesAssociatedList' pValVolumeId_ =
     VolumesAssociatedList'

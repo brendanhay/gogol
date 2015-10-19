@@ -22,7 +22,7 @@
 --
 -- Creates\/Transfers a subscription for the customer.
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsInsert@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.insert@.
 module Network.Google.Resource.Reseller.Subscriptions.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Reseller.Subscriptions.Insert
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerSubscriptionsInsert@ method which the
+-- | A resource alias for @reseller.subscriptions.insert@ method which the
 -- 'SubscriptionsInsert'' request conforms to.
 type SubscriptionsInsertResource =
      "customers" :>
@@ -71,8 +71,8 @@ data SubscriptionsInsert' = SubscriptionsInsert'
 --
 -- * 'siCustomerAuthToken'
 subscriptionsInsert'
-    :: Subscription -- ^ 'payload'
-    -> Text -- ^ 'customerId'
+    :: Subscription -- ^ 'siPayload'
+    -> Text -- ^ 'siCustomerId'
     -> SubscriptionsInsert'
 subscriptionsInsert' pSiPayload_ pSiCustomerId_ =
     SubscriptionsInsert'

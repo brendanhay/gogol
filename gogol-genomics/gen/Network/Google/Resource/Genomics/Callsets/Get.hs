@@ -22,7 +22,7 @@
 --
 -- Gets a call set by ID.
 --
--- /See:/ < Genomics API Reference> for @GenomicsCallsetsGet@.
+-- /See:/ < Genomics API Reference> for @genomics.callsets.get@.
 module Network.Google.Resource.Genomics.Callsets.Get
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.Callsets.Get
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsCallsetsGet@ method which the
+-- | A resource alias for @genomics.callsets.get@ method which the
 -- 'CallsetsGet'' request conforms to.
 type CallsetsGetResource =
      "v1" :>
@@ -95,7 +95,7 @@ data CallsetsGet' = CallsetsGet'
 --
 -- * 'cgCallback'
 callsetsGet'
-    :: Text -- ^ 'callSetId'
+    :: Text -- ^ 'cgCallSetId'
     -> CallsetsGet'
 callsetsGet' pCgCallSetId_ =
     CallsetsGet'

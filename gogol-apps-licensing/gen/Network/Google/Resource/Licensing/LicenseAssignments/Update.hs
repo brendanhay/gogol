@@ -22,7 +22,7 @@
 --
 -- Assign License.
 --
--- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @LicensingLicenseAssignmentsUpdate@.
+-- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @licensing.licenseAssignments.update@.
 module Network.Google.Resource.Licensing.LicenseAssignments.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Update
 import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @LicensingLicenseAssignmentsUpdate@ method which the
+-- | A resource alias for @licensing.licenseAssignments.update@ method which the
 -- 'LicenseAssignmentsUpdate'' request conforms to.
 type LicenseAssignmentsUpdateResource =
      Capture "productId" Text :>
@@ -76,10 +76,10 @@ data LicenseAssignmentsUpdate' = LicenseAssignmentsUpdate'
 --
 -- * 'lauProductId'
 licenseAssignmentsUpdate'
-    :: Text -- ^ 'skuId'
-    -> LicenseAssignment -- ^ 'payload'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'productId'
+    :: Text -- ^ 'lauSKUId'
+    -> LicenseAssignment -- ^ 'lauPayload'
+    -> Text -- ^ 'lauUserId'
+    -> Text -- ^ 'lauProductId'
     -> LicenseAssignmentsUpdate'
 licenseAssignmentsUpdate' pLauSKUId_ pLauPayload_ pLauUserId_ pLauProductId_ =
     LicenseAssignmentsUpdate'

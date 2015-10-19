@@ -22,7 +22,7 @@
 --
 -- Inserts a new creative asset.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeAssetsInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeAssets.insert@.
 module Network.Google.Resource.DFAReporting.CreativeAssets.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.DFAReporting.CreativeAssets.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeAssetsInsert@ method which the
+-- | A resource alias for @dfareporting.creativeAssets.insert@ method which the
 -- 'CreativeAssetsInsert'' request conforms to.
 type CreativeAssetsInsertResource =
      "userprofiles" :>
@@ -76,10 +76,10 @@ data CreativeAssetsInsert' = CreativeAssetsInsert'
 --
 -- * 'caiMedia'
 creativeAssetsInsert'
-    :: Int64 -- ^ 'advertiserId'
-    -> Int64 -- ^ 'profileId'
-    -> CreativeAssetMetadata -- ^ 'payload'
-    -> Body -- ^ 'media'
+    :: Int64 -- ^ 'caiAdvertiserId'
+    -> Int64 -- ^ 'caiProFileId'
+    -> CreativeAssetMetadata -- ^ 'caiPayload'
+    -> Body -- ^ 'caiMedia'
     -> CreativeAssetsInsert'
 creativeAssetsInsert' pCaiAdvertiserId_ pCaiProFileId_ pCaiPayload_ pCaiMedia_ =
     CreativeAssetsInsert'

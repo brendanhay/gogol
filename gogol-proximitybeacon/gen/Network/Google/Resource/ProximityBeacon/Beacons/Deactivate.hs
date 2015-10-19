@@ -26,7 +26,7 @@
 -- inactive beacon will do nothing (but will return a successful response
 -- code).
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsDeactivate@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.deactivate@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconBeaconsDeactivate@ method which the
+-- | A resource alias for @proximitybeacon.beacons.deactivate@ method which the
 -- 'BeaconsDeactivate'' request conforms to.
 type BeaconsDeactivateResource =
      "v1beta1" :>
@@ -102,7 +102,7 @@ data BeaconsDeactivate' = BeaconsDeactivate'
 --
 -- * 'beaCallback'
 beaconsDeactivate'
-    :: Text -- ^ 'beaconName'
+    :: Text -- ^ 'beaBeaconName'
     -> BeaconsDeactivate'
 beaconsDeactivate' pBeaBeaconName_ =
     BeaconsDeactivate'

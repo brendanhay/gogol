@@ -24,7 +24,7 @@
 -- delivery scanning and classification similar to receiving via SMTP. Does
 -- not send a message.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesImport@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.messages.import@.
 module Network.Google.Resource.Gmail.Users.Messages.Import
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Gmail.Users.Messages.Import
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersMessagesImport@ method which the
+-- | A resource alias for @gmail.users.messages.import@ method which the
 -- 'UsersMessagesImport'' request conforms to.
 type UsersMessagesImportResource =
      Capture "userId" Text :>
@@ -96,8 +96,8 @@ data UsersMessagesImport' = UsersMessagesImport'
 --
 -- * 'uInternalDateSource'
 usersMessagesImport'
-    :: Message -- ^ 'payload'
-    -> Text -- ^ 'media'
+    :: Message -- ^ 'uPayload'
+    -> Text -- ^ 'uMedia'
     -> Body
     -> UsersMessagesImport'
 usersMessagesImport' pUPayload_ pUUserId_ pUMedia_ =

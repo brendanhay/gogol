@@ -22,7 +22,7 @@
 --
 -- Deletes a collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseCollectionsDelete@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.delete@.
 module Network.Google.Resource.AndroidEnterprise.Collections.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidEnterprise.Collections.Delete
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseCollectionsDelete@ method which the
+-- | A resource alias for @androidenterprise.collections.delete@ method which the
 -- 'CollectionsDelete'' request conforms to.
 type CollectionsDeleteResource =
      "enterprises" :>
@@ -65,8 +65,8 @@ data CollectionsDelete' = CollectionsDelete'
 --
 -- * 'cdCollectionId'
 collectionsDelete'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'collectionId'
+    :: Text -- ^ 'cdEnterpriseId'
+    -> Text -- ^ 'cdCollectionId'
     -> CollectionsDelete'
 collectionsDelete' pCdEnterpriseId_ pCdCollectionId_ =
     CollectionsDelete'

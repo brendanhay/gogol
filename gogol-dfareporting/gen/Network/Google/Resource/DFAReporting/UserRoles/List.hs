@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of user roles, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolesList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userRoles.list@.
 module Network.Google.Resource.DFAReporting.UserRoles.List
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.DFAReporting.UserRoles.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingUserRolesList@ method which the
+-- | A resource alias for @dfareporting.userRoles.list@ method which the
 -- 'UserRolesList'' request conforms to.
 type UserRolesListResource =
      "userprofiles" :>
@@ -101,7 +101,7 @@ data UserRolesList' = UserRolesList'
 --
 -- * 'urlMaxResults'
 userRolesList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'urlProFileId'
     -> UserRolesList'
 userRolesList' pUrlProFileId_ =
     UserRolesList'

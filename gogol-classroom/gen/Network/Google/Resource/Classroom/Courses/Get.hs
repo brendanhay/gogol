@@ -25,7 +25,7 @@
 -- the requested course or for access errors. * \`NOT_FOUND\` if no course
 -- exists with the requested ID.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesGet@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.get@.
 module Network.Google.Resource.Classroom.Courses.Get
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Classroom.Courses.Get
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesGet@ method which the
+-- | A resource alias for @classroom.courses.get@ method which the
 -- 'CoursesGet'' request conforms to.
 type CoursesGetResource =
      "v1" :>
@@ -101,7 +101,7 @@ data CoursesGet' = CoursesGet'
 --
 -- * 'cgCallback'
 coursesGet'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'cgId'
     -> CoursesGet'
 coursesGet' pCgId_ =
     CoursesGet'

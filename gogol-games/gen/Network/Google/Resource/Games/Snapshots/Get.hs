@@ -22,7 +22,7 @@
 --
 -- Retrieves the metadata for a given snapshot ID.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesSnapshotsGet@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.snapshots.get@.
 module Network.Google.Resource.Games.Snapshots.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Games.Snapshots.Get
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesSnapshotsGet@ method which the
+-- | A resource alias for @games.snapshots.get@ method which the
 -- 'SnapshotsGet'' request conforms to.
 type SnapshotsGetResource =
      "snapshots" :>
@@ -64,7 +64,7 @@ data SnapshotsGet' = SnapshotsGet'
 --
 -- * 'sSnapshotId'
 snapshotsGet'
-    :: Text -- ^ 'snapshotId'
+    :: Text -- ^ 'sSnapshotId'
     -> SnapshotsGet'
 snapshotsGet' pSSnapshotId_ =
     SnapshotsGet'

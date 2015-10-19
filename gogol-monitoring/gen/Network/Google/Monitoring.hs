@@ -26,22 +26,22 @@ module Network.Google.Monitoring
 
     -- * Resources
 
-    -- ** CloudMonitoringMetricDescriptorsCreate
+    -- ** cloudmonitoring.metricDescriptors.create
     , module Network.Google.Resource.CloudMonitoring.MetricDescriptors.Create
 
-    -- ** CloudMonitoringMetricDescriptorsDelete
+    -- ** cloudmonitoring.metricDescriptors.delete
     , module Network.Google.Resource.CloudMonitoring.MetricDescriptors.Delete
 
-    -- ** CloudMonitoringMetricDescriptorsList
+    -- ** cloudmonitoring.metricDescriptors.list
     , module Network.Google.Resource.CloudMonitoring.MetricDescriptors.List
 
-    -- ** CloudMonitoringTimeseriesList
+    -- ** cloudmonitoring.timeseries.list
     , module Network.Google.Resource.CloudMonitoring.Timeseries.List
 
-    -- ** CloudMonitoringTimeseriesWrite
+    -- ** cloudmonitoring.timeseries.write
     , module Network.Google.Resource.CloudMonitoring.Timeseries.Write
 
-    -- ** CloudMonitoringTimeseriesDescriptorsList
+    -- ** cloudmonitoring.timeseriesDescriptors.list
     , module Network.Google.Resource.CloudMonitoring.TimeseriesDescriptors.List
 
     -- * Types

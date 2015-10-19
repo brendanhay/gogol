@@ -22,7 +22,7 @@
 --
 -- Gets a company.
 --
--- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @PartnersCompaniesGet@.
+-- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @partners.companies.get@.
 module Network.Google.Resource.Partners.Companies.Get
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ module Network.Google.Resource.Partners.Companies.Get
 import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PartnersCompaniesGet@ method which the
+-- | A resource alias for @partners.companies.get@ method which the
 -- 'CompaniesGet'' request conforms to.
 type CompaniesGetResource =
      "v2" :>
@@ -166,7 +166,7 @@ data CompaniesGet' = CompaniesGet'
 --
 -- * 'cgCallback'
 companiesGet'
-    :: Text -- ^ 'companyId'
+    :: Text -- ^ 'cgCompanyId'
     -> CompaniesGet'
 companiesGet' pCgCompanyId_ =
     CompaniesGet'

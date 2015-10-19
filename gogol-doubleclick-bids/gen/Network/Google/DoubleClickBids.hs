@@ -26,28 +26,28 @@ module Network.Google.DoubleClickBids
 
     -- * Resources
 
-    -- ** DoubleClickBidManagerLineitemsDownloadlineitems
+    -- ** doubleclickbidmanager.lineitems.downloadlineitems
     , module Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
 
-    -- ** DoubleClickBidManagerLineitemsUploadlineitems
+    -- ** doubleclickbidmanager.lineitems.uploadlineitems
     , module Network.Google.Resource.DoubleClickBidManager.Lineitems.Uploadlineitems
 
-    -- ** DoubleClickBidManagerQueriesCreateQuery
+    -- ** doubleclickbidmanager.queries.createquery
     , module Network.Google.Resource.DoubleClickBidManager.Queries.CreateQuery
 
-    -- ** DoubleClickBidManagerQueriesDeleteQuery
+    -- ** doubleclickbidmanager.queries.deletequery
     , module Network.Google.Resource.DoubleClickBidManager.Queries.DeleteQuery
 
-    -- ** DoubleClickBidManagerQueriesGetQuery
+    -- ** doubleclickbidmanager.queries.getquery
     , module Network.Google.Resource.DoubleClickBidManager.Queries.GetQuery
 
-    -- ** DoubleClickBidManagerQueriesListqueries
+    -- ** doubleclickbidmanager.queries.listqueries
     , module Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
 
-    -- ** DoubleClickBidManagerQueriesRunQuery
+    -- ** doubleclickbidmanager.queries.runquery
     , module Network.Google.Resource.DoubleClickBidManager.Queries.RunQuery
 
-    -- ** DoubleClickBidManagerReportsListreports
+    -- ** doubleclickbidmanager.reports.listreports
     , module Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
 
     -- * Types

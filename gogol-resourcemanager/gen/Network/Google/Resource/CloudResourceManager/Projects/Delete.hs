@@ -45,7 +45,7 @@
 -- [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects]
 -- methods. The caller must have modify permissions for this project.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerProjectsDelete@.
+-- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.delete@.
 module Network.Google.Resource.CloudResourceManager.Projects.Delete
     (
     -- * REST Resource
@@ -69,7 +69,7 @@ module Network.Google.Resource.CloudResourceManager.Projects.Delete
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerProjectsDelete@ method which the
+-- | A resource alias for @cloudresourcemanager.projects.delete@ method which the
 -- 'ProjectsDelete'' request conforms to.
 type ProjectsDeleteResource =
      "v1beta1" :>
@@ -141,7 +141,7 @@ data ProjectsDelete' = ProjectsDelete'
 --
 -- * 'pdCallback'
 projectsDelete'
-    :: Text -- ^ 'projectId'
+    :: Text -- ^ 'pdProjectId'
     -> ProjectsDelete'
 projectsDelete' pPdProjectId_ =
     ProjectsDelete'

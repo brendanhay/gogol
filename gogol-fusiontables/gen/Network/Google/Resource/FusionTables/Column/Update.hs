@@ -22,7 +22,7 @@
 --
 -- Updates the name or type of an existing column.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesColumnUpdate@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.column.update@.
 module Network.Google.Resource.FusionTables.Column.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.FusionTables.Column.Update
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesColumnUpdate@ method which the
+-- | A resource alias for @fusiontables.column.update@ method which the
 -- 'ColumnUpdate'' request conforms to.
 type ColumnUpdateResource =
      "tables" :>
@@ -70,9 +70,9 @@ data ColumnUpdate' = ColumnUpdate'
 --
 -- * 'cuColumnId'
 columnUpdate'
-    :: Column -- ^ 'payload'
-    -> Text -- ^ 'tableId'
-    -> Text -- ^ 'columnId'
+    :: Column -- ^ 'cuPayload'
+    -> Text -- ^ 'cuTableId'
+    -> Text -- ^ 'cuColumnId'
     -> ColumnUpdate'
 columnUpdate' pCuPayload_ pCuTableId_ pCuColumnId_ =
     ColumnUpdate'

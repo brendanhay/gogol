@@ -22,7 +22,7 @@
 --
 -- Deletes a deployment and all of the resources in the deployment.
 --
--- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsDelete@.
+-- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @deploymentmanager.deployments.delete@.
 module Network.Google.Resource.DeploymentManager.Deployments.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DeploymentManager.Deployments.Delete
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentManagerDeploymentsDelete@ method which the
+-- | A resource alias for @deploymentmanager.deployments.delete@ method which the
 -- 'DeploymentsDelete'' request conforms to.
 type DeploymentsDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data DeploymentsDelete' = DeploymentsDelete'
 --
 -- * 'ddDeployment'
 deploymentsDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'deployment'
+    :: Text -- ^ 'ddProject'
+    -> Text -- ^ 'ddDeployment'
     -> DeploymentsDelete'
 deploymentsDelete' pDdProject_ pDdDeployment_ =
     DeploymentsDelete'

@@ -26,73 +26,73 @@ module Network.Google.Classroom
 
     -- * Resources
 
-    -- ** ClassroomCoursesAliasesCreate
+    -- ** classroom.courses.aliases.create
     , module Network.Google.Resource.Classroom.Courses.Aliases.Create
 
-    -- ** ClassroomCoursesAliasesDelete
+    -- ** classroom.courses.aliases.delete
     , module Network.Google.Resource.Classroom.Courses.Aliases.Delete
 
-    -- ** ClassroomCoursesAliasesList
+    -- ** classroom.courses.aliases.list
     , module Network.Google.Resource.Classroom.Courses.Aliases.List
 
-    -- ** ClassroomCoursesCreate
+    -- ** classroom.courses.create
     , module Network.Google.Resource.Classroom.Courses.Create
 
-    -- ** ClassroomCoursesDelete
+    -- ** classroom.courses.delete
     , module Network.Google.Resource.Classroom.Courses.Delete
 
-    -- ** ClassroomCoursesGet
+    -- ** classroom.courses.get
     , module Network.Google.Resource.Classroom.Courses.Get
 
-    -- ** ClassroomCoursesList
+    -- ** classroom.courses.list
     , module Network.Google.Resource.Classroom.Courses.List
 
-    -- ** ClassroomCoursesPatch
+    -- ** classroom.courses.patch
     , module Network.Google.Resource.Classroom.Courses.Patch
 
-    -- ** ClassroomCoursesStudentsCreate
+    -- ** classroom.courses.students.create
     , module Network.Google.Resource.Classroom.Courses.Students.Create
 
-    -- ** ClassroomCoursesStudentsDelete
+    -- ** classroom.courses.students.delete
     , module Network.Google.Resource.Classroom.Courses.Students.Delete
 
-    -- ** ClassroomCoursesStudentsGet
+    -- ** classroom.courses.students.get
     , module Network.Google.Resource.Classroom.Courses.Students.Get
 
-    -- ** ClassroomCoursesStudentsList
+    -- ** classroom.courses.students.list
     , module Network.Google.Resource.Classroom.Courses.Students.List
 
-    -- ** ClassroomCoursesTeachersCreate
+    -- ** classroom.courses.teachers.create
     , module Network.Google.Resource.Classroom.Courses.Teachers.Create
 
-    -- ** ClassroomCoursesTeachersDelete
+    -- ** classroom.courses.teachers.delete
     , module Network.Google.Resource.Classroom.Courses.Teachers.Delete
 
-    -- ** ClassroomCoursesTeachersGet
+    -- ** classroom.courses.teachers.get
     , module Network.Google.Resource.Classroom.Courses.Teachers.Get
 
-    -- ** ClassroomCoursesTeachersList
+    -- ** classroom.courses.teachers.list
     , module Network.Google.Resource.Classroom.Courses.Teachers.List
 
-    -- ** ClassroomCoursesUpdate
+    -- ** classroom.courses.update
     , module Network.Google.Resource.Classroom.Courses.Update
 
-    -- ** ClassroomInvitationsAccept
+    -- ** classroom.invitations.accept
     , module Network.Google.Resource.Classroom.Invitations.Accept
 
-    -- ** ClassroomInvitationsCreate
+    -- ** classroom.invitations.create
     , module Network.Google.Resource.Classroom.Invitations.Create
 
-    -- ** ClassroomInvitationsDelete
+    -- ** classroom.invitations.delete
     , module Network.Google.Resource.Classroom.Invitations.Delete
 
-    -- ** ClassroomInvitationsGet
+    -- ** classroom.invitations.get
     , module Network.Google.Resource.Classroom.Invitations.Get
 
-    -- ** ClassroomInvitationsList
+    -- ** classroom.invitations.list
     , module Network.Google.Resource.Classroom.Invitations.List
 
-    -- ** ClassroomUserProFilesGet
+    -- ** classroom.userProfiles.get
     , module Network.Google.Resource.Classroom.UserProFiles.Get
 
     -- * Types

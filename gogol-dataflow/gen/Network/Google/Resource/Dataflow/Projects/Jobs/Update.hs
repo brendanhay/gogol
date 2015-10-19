@@ -22,7 +22,7 @@
 --
 -- Updates the state of an existing dataflow job.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsUpdate@.
+-- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.jobs.update@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.Update
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Update
 import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataflowProjectsJobsUpdate@ method which the
+-- | A resource alias for @dataflow.projects.jobs.update@ method which the
 -- 'ProjectsJobsUpdate'' request conforms to.
 type ProjectsJobsUpdateResource =
      "v1b3" :>
@@ -106,9 +106,9 @@ data ProjectsJobsUpdate' = ProjectsJobsUpdate'
 --
 -- * 'pjuCallback'
 projectsJobsUpdate'
-    :: Text -- ^ 'jobId'
-    -> Job -- ^ 'payload'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'pjuJobId'
+    -> Job -- ^ 'pjuPayload'
+    -> Text -- ^ 'pjuProjectId'
     -> ProjectsJobsUpdate'
 projectsJobsUpdate' pPjuJobId_ pPjuPayload_ pPjuProjectId_ =
     ProjectsJobsUpdate'

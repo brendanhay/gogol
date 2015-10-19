@@ -22,7 +22,7 @@
 --
 -- Lease 1 or more tasks from a TaskQueue.
 --
--- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksLease@.
+-- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @taskqueue.tasks.lease@.
 module Network.Google.Resource.TaskQueue.Tasks.Lease
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Lease
 import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
--- | A resource alias for @TaskqueueTasksLease@ method which the
+-- | A resource alias for @taskqueue.tasks.lease@ method which the
 -- 'TasksLease'' request conforms to.
 type TasksLeaseResource =
      Capture "project" Text :>
@@ -86,10 +86,10 @@ data TasksLease' = TasksLease'
 --
 -- * 'tlGroupByTag'
 tasksLease'
-    :: Text -- ^ 'taskqueue'
-    -> Text -- ^ 'project'
-    -> Int32 -- ^ 'numTasks'
-    -> Int32 -- ^ 'leaseSecs'
+    :: Text -- ^ 'tlTaskqueue'
+    -> Text -- ^ 'tlProject'
+    -> Int32 -- ^ 'tlNumTasks'
+    -> Int32 -- ^ 'tlLeaseSecs'
     -> TasksLease'
 tasksLease' pTlTaskqueue_ pTlProject_ pTlNumTasks_ pTlLeaseSecs_ =
     TasksLease'

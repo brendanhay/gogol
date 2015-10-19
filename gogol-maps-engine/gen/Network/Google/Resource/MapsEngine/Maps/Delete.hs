@@ -22,7 +22,7 @@
 --
 -- Delete a map.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineMapsDelete@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.maps.delete@.
 module Network.Google.Resource.MapsEngine.Maps.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.Maps.Delete
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineMapsDelete@ method which the
+-- | A resource alias for @mapsengine.maps.delete@ method which the
 -- 'MapsDelete'' request conforms to.
 type MapsDeleteResource =
      "maps" :>
@@ -59,7 +59,7 @@ newtype MapsDelete' = MapsDelete'
 --
 -- * 'mdId'
 mapsDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'mdId'
     -> MapsDelete'
 mapsDelete' pMdId_ =
     MapsDelete'

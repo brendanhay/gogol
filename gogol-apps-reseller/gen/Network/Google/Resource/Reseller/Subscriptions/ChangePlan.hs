@@ -22,7 +22,7 @@
 --
 -- Changes the plan of a subscription
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsChangePlan@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.changePlan@.
 module Network.Google.Resource.Reseller.Subscriptions.ChangePlan
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Reseller.Subscriptions.ChangePlan
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerSubscriptionsChangePlan@ method which the
+-- | A resource alias for @reseller.subscriptions.changePlan@ method which the
 -- 'SubscriptionsChangePlan'' request conforms to.
 type SubscriptionsChangePlanResource =
      "customers" :>
@@ -72,9 +72,9 @@ data SubscriptionsChangePlan' = SubscriptionsChangePlan'
 --
 -- * 'scpSubscriptionId'
 subscriptionsChangePlan'
-    :: ChangePlanRequest -- ^ 'payload'
-    -> Text -- ^ 'customerId'
-    -> Text -- ^ 'subscriptionId'
+    :: ChangePlanRequest -- ^ 'scpPayload'
+    -> Text -- ^ 'scpCustomerId'
+    -> Text -- ^ 'scpSubscriptionId'
     -> SubscriptionsChangePlan'
 subscriptionsChangePlan' pScpPayload_ pScpCustomerId_ pScpSubscriptionId_ =
     SubscriptionsChangePlan'

@@ -23,7 +23,7 @@
 -- Retrieves the list of operation resources contained within the specified
 -- project.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsGlobalAccountsOperationsList@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.globalAccountsOperations.list@.
 module Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.List
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsGlobalAccountsOperationsList@ method which the
+-- | A resource alias for @clouduseraccounts.globalAccountsOperations.list@ method which the
 -- 'GlobalAccountsOperationsList'' request conforms to.
 type GlobalAccountsOperationsListResource =
      Capture "project" Text :>
@@ -82,7 +82,7 @@ data GlobalAccountsOperationsList' = GlobalAccountsOperationsList'
 --
 -- * 'gaolMaxResults'
 globalAccountsOperationsList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'gaolProject'
     -> GlobalAccountsOperationsList'
 globalAccountsOperationsList' pGaolProject_ =
     GlobalAccountsOperationsList'

@@ -22,7 +22,7 @@
 --
 -- Remove permission entries from an already existing asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRastersPermissionsBatchDelete@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.rasters.permissions.batchDelete@.
 module Network.Google.Resource.MapsEngine.Rasters.Permissions.BatchDelete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.MapsEngine.Rasters.Permissions.BatchDelete
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRastersPermissionsBatchDelete@ method which the
+-- | A resource alias for @mapsengine.rasters.permissions.batchDelete@ method which the
 -- 'RastersPermissionsBatchDelete'' request conforms to.
 type RastersPermissionsBatchDeleteResource =
      "rasters" :>
@@ -67,8 +67,8 @@ data RastersPermissionsBatchDelete' = RastersPermissionsBatchDelete'
 --
 -- * 'rpbdId'
 rastersPermissionsBatchDelete'
-    :: PermissionsBatchDeleteRequest -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: PermissionsBatchDeleteRequest -- ^ 'rpbdPayload'
+    -> Text -- ^ 'rpbdId'
     -> RastersPermissionsBatchDelete'
 rastersPermissionsBatchDelete' pRpbdPayload_ pRpbdId_ =
     RastersPermissionsBatchDelete'

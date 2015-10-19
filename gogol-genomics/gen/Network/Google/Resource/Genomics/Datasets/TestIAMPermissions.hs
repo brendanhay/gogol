@@ -23,7 +23,7 @@
 -- Returns permissions that a caller has on the specified resource. See
 -- Testing Permissions for more information.
 --
--- /See:/ < Genomics API Reference> for @GenomicsDatasetsTestIAMPermissions@.
+-- /See:/ < Genomics API Reference> for @genomics.datasets.testIamPermissions@.
 module Network.Google.Resource.Genomics.Datasets.TestIAMPermissions
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Genomics.Datasets.TestIAMPermissions
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsDatasetsTestIAMPermissions@ method which the
+-- | A resource alias for @genomics.datasets.testIamPermissions@ method which the
 -- 'DatasetsTestIAMPermissions'' request conforms to.
 type DatasetsTestIAMPermissionsResource =
      "v1" :>
@@ -102,8 +102,8 @@ data DatasetsTestIAMPermissions' = DatasetsTestIAMPermissions'
 --
 -- * 'dtipCallback'
 datasetsTestIAMPermissions'
-    :: TestIAMPermissionsRequest -- ^ 'payload'
-    -> Text -- ^ 'resource'
+    :: TestIAMPermissionsRequest -- ^ 'dtipPayload'
+    -> Text -- ^ 'dtipResource'
     -> DatasetsTestIAMPermissions'
 datasetsTestIAMPermissions' pDtipPayload_ pDtipResource_ =
     DatasetsTestIAMPermissions'

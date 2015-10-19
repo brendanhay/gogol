@@ -22,7 +22,7 @@
 --
 -- Retrieves the set of products a user is entitled to access.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseUsersGetAvailableProductSet@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.users.getAvailableProductSet@.
 module Network.Google.Resource.AndroidEnterprise.Users.GetAvailableProductSet
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidEnterprise.Users.GetAvailableProductSet
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseUsersGetAvailableProductSet@ method which the
+-- | A resource alias for @androidenterprise.users.getAvailableProductSet@ method which the
 -- 'UsersGetAvailableProductSet'' request conforms to.
 type UsersGetAvailableProductSetResource =
      "enterprises" :>
@@ -66,8 +66,8 @@ data UsersGetAvailableProductSet' = UsersGetAvailableProductSet'
 --
 -- * 'ugapsUserId'
 usersGetAvailableProductSet'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'ugapsEnterpriseId'
+    -> Text -- ^ 'ugapsUserId'
     -> UsersGetAvailableProductSet'
 usersGetAvailableProductSet' pUgapsEnterpriseId_ pUgapsUserId_ =
     UsersGetAvailableProductSet'

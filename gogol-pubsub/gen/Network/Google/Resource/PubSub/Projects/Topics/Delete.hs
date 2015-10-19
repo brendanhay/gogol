@@ -27,7 +27,7 @@
 -- topic are not deleted, but their \`topic\` field is set to
 -- \`_deleted-topic_\`.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsDelete@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.topics.delete@.
 module Network.Google.Resource.PubSub.Projects.Topics.Delete
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.PubSub.Projects.Topics.Delete
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsTopicsDelete@ method which the
+-- | A resource alias for @pubsub.projects.topics.delete@ method which the
 -- 'ProjectsTopicsDelete'' request conforms to.
 type ProjectsTopicsDeleteResource =
      "v1" :>
@@ -104,7 +104,7 @@ data ProjectsTopicsDelete' = ProjectsTopicsDelete'
 --
 -- * 'ptdCallback'
 projectsTopicsDelete'
-    :: Text -- ^ 'topic'
+    :: Text -- ^ 'ptdTopic'
     -> ProjectsTopicsDelete'
 projectsTopicsDelete' pPtdTopic_ =
     ProjectsTopicsDelete'

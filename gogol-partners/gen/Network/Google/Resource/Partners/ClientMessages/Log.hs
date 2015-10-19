@@ -24,7 +24,7 @@
 -- component\`, \`Profile page is running slow\`, \`More than 500 users
 -- have accessed this result.\`, etc.
 --
--- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @PartnersClientMessagesLog@.
+-- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @partners.clientMessages.log@.
 module Network.Google.Resource.Partners.ClientMessages.Log
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Partners.ClientMessages.Log
 import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PartnersClientMessagesLog@ method which the
+-- | A resource alias for @partners.clientMessages.log@ method which the
 -- 'ClientMessagesLog'' request conforms to.
 type ClientMessagesLogResource =
      "v2" :>
@@ -100,7 +100,7 @@ data ClientMessagesLog' = ClientMessagesLog'
 --
 -- * 'cmlCallback'
 clientMessagesLog'
-    :: LogMessageRequest -- ^ 'payload'
+    :: LogMessageRequest -- ^ 'cmlPayload'
     -> ClientMessagesLog'
 clientMessagesLog' pCmlPayload_ =
     ClientMessagesLog'

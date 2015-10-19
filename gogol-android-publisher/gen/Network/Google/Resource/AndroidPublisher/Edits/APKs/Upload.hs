@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsAPKsUpload@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.apks.upload@.
 module Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsAPKsUpload@ method which the
+-- | A resource alias for @androidpublisher.edits.apks.upload@ method which the
 -- 'EditsAPKsUpload'' request conforms to.
 type EditsAPKsUploadResource =
      Capture "packageName" Text :>
@@ -67,9 +67,9 @@ data EditsAPKsUpload' = EditsAPKsUpload'
 --
 -- * 'eapkuEditId'
 editsAPKsUpload'
-    :: Text -- ^ 'packageName'
-    -> Body -- ^ 'media'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eapkuPackageName'
+    -> Body -- ^ 'eapkuMedia'
+    -> Text -- ^ 'eapkuEditId'
     -> EditsAPKsUpload'
 editsAPKsUpload' pEapkuPackageName_ pEapkuMedia_ pEapkuEditId_ =
     EditsAPKsUpload'

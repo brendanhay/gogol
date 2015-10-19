@@ -22,7 +22,7 @@
 --
 -- Gets one user role permission group by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolePermissionGroupsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userRolePermissionGroups.get@.
 module Network.Google.Resource.DFAReporting.UserRolePermissionGroups.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.UserRolePermissionGroups.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingUserRolePermissionGroupsGet@ method which the
+-- | A resource alias for @dfareporting.userRolePermissionGroups.get@ method which the
 -- 'UserRolePermissionGroupsGet'' request conforms to.
 type UserRolePermissionGroupsGetResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data UserRolePermissionGroupsGet' = UserRolePermissionGroupsGet'
 --
 -- * 'urpggId'
 userRolePermissionGroupsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'urpggProFileId'
+    -> Int64 -- ^ 'urpggId'
     -> UserRolePermissionGroupsGet'
 userRolePermissionGroupsGet' pUrpggProFileId_ pUrpggId_ =
     UserRolePermissionGroupsGet'

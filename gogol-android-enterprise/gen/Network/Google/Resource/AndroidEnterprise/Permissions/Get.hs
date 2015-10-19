@@ -23,7 +23,7 @@
 -- Retrieves details of an Android app permission for display to an
 -- enterprise admin.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterprisePermissionsGet@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.permissions.get@.
 module Network.Google.Resource.AndroidEnterprise.Permissions.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidEnterprise.Permissions.Get
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterprisePermissionsGet@ method which the
+-- | A resource alias for @androidenterprise.permissions.get@ method which the
 -- 'PermissionsGet'' request conforms to.
 type PermissionsGetResource =
      "permissions" :>
@@ -66,7 +66,7 @@ data PermissionsGet' = PermissionsGet'
 --
 -- * 'pgPermissionId'
 permissionsGet'
-    :: Text -- ^ 'permissionId'
+    :: Text -- ^ 'pgPermissionId'
     -> PermissionsGet'
 permissionsGet' pPgPermissionId_ =
     PermissionsGet'

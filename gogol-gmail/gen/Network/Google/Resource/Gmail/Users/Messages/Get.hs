@@ -22,7 +22,7 @@
 --
 -- Gets the specified message.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesGet@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.messages.get@.
 module Network.Google.Resource.Gmail.Users.Messages.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Gmail.Users.Messages.Get
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersMessagesGet@ method which the
+-- | A resource alias for @gmail.users.messages.get@ method which the
 -- 'UsersMessagesGet'' request conforms to.
 type UsersMessagesGetResource =
      Capture "userId" Text :>
@@ -74,7 +74,7 @@ data UsersMessagesGet' = UsersMessagesGet'
 --
 -- * 'umgMetadataHeaders'
 usersMessagesGet'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'umgId'
     -> Text
     -> UsersMessagesGet'
 usersMessagesGet' pUmgUserId_ pUmgId_ =

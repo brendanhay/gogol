@@ -22,7 +22,7 @@
 --
 -- Gets a specific change.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChangesGet@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.changes.get@.
 module Network.Google.Resource.Drive.Changes.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Drive.Changes.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveChangesGet@ method which the
+-- | A resource alias for @drive.changes.get@ method which the
 -- 'ChangesGet'' request conforms to.
 type ChangesGetResource =
      "changes" :>
@@ -59,7 +59,7 @@ newtype ChangesGet' = ChangesGet'
 --
 -- * 'cgChangeId'
 changesGet'
-    :: Text -- ^ 'changeId'
+    :: Text -- ^ 'cgChangeId'
     -> ChangesGet'
 changesGet' pCgChangeId_ =
     ChangesGet'

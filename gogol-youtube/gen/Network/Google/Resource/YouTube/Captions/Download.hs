@@ -25,7 +25,7 @@
 -- in its original language unless the request specifies a value for the
 -- tlang parameter.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCaptionsDownload@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.captions.download@.
 module Network.Google.Resource.YouTube.Captions.Download
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTube.Captions.Download
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCaptionsDownload@ method which the
+-- | A resource alias for @youtube.captions.download@ method which the
 -- 'CaptionsDownload'' request conforms to.
 type CaptionsDownloadResource =
      "captions" :>
@@ -94,7 +94,7 @@ data CaptionsDownload' = CaptionsDownload'
 --
 -- * 'capaTfmt'
 captionsDownload'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'capaId'
     -> CaptionsDownload'
 captionsDownload' pCapaId_ =
     CaptionsDownload'

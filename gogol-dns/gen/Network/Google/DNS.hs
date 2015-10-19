@@ -27,31 +27,31 @@ module Network.Google.DNS
 
     -- * Resources
 
-    -- ** DNSChangesCreate
+    -- ** dns.changes.create
     , module Network.Google.Resource.DNS.Changes.Create
 
-    -- ** DNSChangesGet
+    -- ** dns.changes.get
     , module Network.Google.Resource.DNS.Changes.Get
 
-    -- ** DNSChangesList
+    -- ** dns.changes.list
     , module Network.Google.Resource.DNS.Changes.List
 
-    -- ** DNSManagedZonesCreate
+    -- ** dns.managedZones.create
     , module Network.Google.Resource.DNS.ManagedZones.Create
 
-    -- ** DNSManagedZonesDelete
+    -- ** dns.managedZones.delete
     , module Network.Google.Resource.DNS.ManagedZones.Delete
 
-    -- ** DNSManagedZonesGet
+    -- ** dns.managedZones.get
     , module Network.Google.Resource.DNS.ManagedZones.Get
 
-    -- ** DNSManagedZonesList
+    -- ** dns.managedZones.list
     , module Network.Google.Resource.DNS.ManagedZones.List
 
-    -- ** DNSProjectsGet
+    -- ** dns.projects.get
     , module Network.Google.Resource.DNS.Projects.Get
 
-    -- ** DNSResourceRecordSetsList
+    -- ** dns.resourceRecordSets.list
     , module Network.Google.Resource.DNS.ResourceRecordSets.List
 
     -- * Types

@@ -22,7 +22,7 @@
 --
 -- Returns notification details for a given notification id.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksNotificationGet@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.notification.get@.
 module Network.Google.Resource.Books.Notification.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Books.Notification.Get
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksNotificationGet@ method which the
+-- | A resource alias for @books.notification.get@ method which the
 -- 'NotificationGet'' request conforms to.
 type NotificationGetResource =
      "notification" :>
@@ -70,7 +70,7 @@ data NotificationGet' = NotificationGet'
 --
 -- * 'ngSource'
 notificationGet'
-    :: Text -- ^ 'notification_id'
+    :: Text -- ^ 'ngNotificationId'
     -> NotificationGet'
 notificationGet' pNgNotificationId_ =
     NotificationGet'

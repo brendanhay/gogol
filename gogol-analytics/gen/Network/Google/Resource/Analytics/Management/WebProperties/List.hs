@@ -22,7 +22,7 @@
 --
 -- Lists web properties to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertiesList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webproperties.list@.
 module Network.Google.Resource.Analytics.Management.WebProperties.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.WebProperties.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertiesList@ method which the
+-- | A resource alias for @analytics.management.webproperties.list@ method which the
 -- 'ManagementWebPropertiesList'' request conforms to.
 type ManagementWebPropertiesListResource =
      "management" :>
@@ -71,7 +71,7 @@ data ManagementWebPropertiesList' = ManagementWebPropertiesList'
 --
 -- * 'mwplMaxResults'
 managementWebPropertiesList'
-    :: Text -- ^ 'accountId'
+    :: Text -- ^ 'mwplAccountId'
     -> ManagementWebPropertiesList'
 managementWebPropertiesList' pMwplAccountId_ =
     ManagementWebPropertiesList'

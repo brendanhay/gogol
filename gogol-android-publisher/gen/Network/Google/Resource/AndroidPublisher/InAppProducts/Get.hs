@@ -22,7 +22,7 @@
 --
 -- Returns information about the in-app product specified.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherInAppProductsGet@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.inappproducts.get@.
 module Network.Google.Resource.AndroidPublisher.InAppProducts.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidPublisher.InAppProducts.Get
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherInAppProductsGet@ method which the
+-- | A resource alias for @androidpublisher.inappproducts.get@ method which the
 -- 'InAppProductsGet'' request conforms to.
 type InAppProductsGetResource =
      Capture "packageName" Text :>
@@ -64,8 +64,8 @@ data InAppProductsGet' = InAppProductsGet'
 --
 -- * 'iapgSKU'
 inAppProductsGet'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'sku'
+    :: Text -- ^ 'iapgPackageName'
+    -> Text -- ^ 'iapgSKU'
     -> InAppProductsGet'
 inAppProductsGet' pIapgPackageName_ pIapgSKU_ =
     InAppProductsGet'

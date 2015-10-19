@@ -24,7 +24,7 @@
 -- parameters. Returns the result as JSON; to retrieve output in CSV format
 -- specify \"alt=csv\" as a query parameter.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseReportsGenerate@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.reports.generate@.
 module Network.Google.Resource.AdSense.Reports.Generate
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.AdSense.Reports.Generate
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseReportsGenerate@ method which the
+-- | A resource alias for @adsense.reports.generate@ method which the
 -- 'ReportsGenerate'' request conforms to.
 type ReportsGenerateResource =
      "reports" :>
@@ -135,8 +135,8 @@ data ReportsGenerate' = ReportsGenerate'
 --
 -- * 'rgMaxResults'
 reportsGenerate'
-    :: Text -- ^ 'endDate'
-    -> Text -- ^ 'startDate'
+    :: Text -- ^ 'rgEndDate'
+    -> Text -- ^ 'rgStartDate'
     -> ReportsGenerate'
 reportsGenerate' pRgEndDate_ pRgStartDate_ =
     ReportsGenerate'

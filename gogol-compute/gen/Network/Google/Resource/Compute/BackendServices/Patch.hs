@@ -23,7 +23,7 @@
 -- Update the entire content of the BackendService resource. This method
 -- supports patch semantics.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeBackendServicesPatch@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.patch@.
 module Network.Google.Resource.Compute.BackendServices.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.BackendServices.Patch
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeBackendServicesPatch@ method which the
+-- | A resource alias for @compute.backendServices.patch@ method which the
 -- 'BackendServicesPatch'' request conforms to.
 type BackendServicesPatchResource =
      Capture "project" Text :>
@@ -73,9 +73,9 @@ data BackendServicesPatch' = BackendServicesPatch'
 --
 -- * 'bspBackendService'
 backendServicesPatch'
-    :: Text -- ^ 'project'
-    -> BackendService -- ^ 'payload'
-    -> Text -- ^ 'backendService'
+    :: Text -- ^ 'bspProject'
+    -> BackendService -- ^ 'bspPayload'
+    -> Text -- ^ 'bspBackendService'
     -> BackendServicesPatch'
 backendServicesPatch' pBspProject_ pBspPayload_ pBspBackendService_ =
     BackendServicesPatch'

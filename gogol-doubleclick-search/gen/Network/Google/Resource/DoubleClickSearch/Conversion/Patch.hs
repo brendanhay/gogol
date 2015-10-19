@@ -23,7 +23,7 @@
 -- Updates a batch of conversions in DoubleClick Search. This method
 -- supports patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchConversionPatch@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @doubleclicksearch.conversion.patch@.
 module Network.Google.Resource.DoubleClickSearch.Conversion.Patch
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.Patch
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClicksearchConversionPatch@ method which the
+-- | A resource alias for @doubleclicksearch.conversion.patch@ method which the
 -- 'ConversionPatch'' request conforms to.
 type ConversionPatchResource =
      "conversion" :>
@@ -97,14 +97,14 @@ data ConversionPatch' = ConversionPatch'
 --
 -- * 'cpRowCount'
 conversionPatch'
-    :: Int64 -- ^ 'engineAccountId'
-    -> Int64 -- ^ 'agencyId'
-    -> Int64 -- ^ 'advertiserId'
-    -> Int32 -- ^ 'endDate'
-    -> ConversionList -- ^ 'payload'
-    -> Int32 -- ^ 'startDate'
-    -> Word32 -- ^ 'startRow'
-    -> Int32 -- ^ 'rowCount'
+    :: Int64 -- ^ 'cpEngineAccountId'
+    -> Int64 -- ^ 'cpAgencyId'
+    -> Int64 -- ^ 'cpAdvertiserId'
+    -> Int32 -- ^ 'cpEndDate'
+    -> ConversionList -- ^ 'cpPayload'
+    -> Int32 -- ^ 'cpStartDate'
+    -> Word32 -- ^ 'cpStartRow'
+    -> Int32 -- ^ 'cpRowCount'
     -> ConversionPatch'
 conversionPatch' pCpEngineAccountId_ pCpAgencyId_ pCpAdvertiserId_ pCpEndDate_ pCpPayload_ pCpStartDate_ pCpStartRow_ pCpRowCount_ =
     ConversionPatch'

@@ -22,7 +22,7 @@
 --
 -- Gets the metadata of a specific report.
 --
--- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @YouTubereportingJobsReportsGet@.
+-- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @youtubereporting.jobs.reports.get@.
 module Network.Google.Resource.YouTubeReporting.Jobs.Reports.Get
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Reports.Get
 import           Network.Google.Prelude
 import           Network.Google.YouTubeReporting.Types
 
--- | A resource alias for @YouTubereportingJobsReportsGet@ method which the
+-- | A resource alias for @youtubereporting.jobs.reports.get@ method which the
 -- 'JobsReportsGet'' request conforms to.
 type JobsReportsGetResource =
      "v1" :>
@@ -106,8 +106,8 @@ data JobsReportsGet' = JobsReportsGet'
 --
 -- * 'jrgCallback'
 jobsReportsGet'
-    :: Text -- ^ 'jobId'
-    -> Text -- ^ 'reportId'
+    :: Text -- ^ 'jrgJobId'
+    -> Text -- ^ 'jrgReportId'
     -> JobsReportsGet'
 jobsReportsGet' pJrgJobId_ pJrgReportId_ =
     JobsReportsGet'

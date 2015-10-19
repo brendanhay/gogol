@@ -22,7 +22,7 @@
 --
 -- Rate a recommended book for the current user.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesRecommendedRate@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.volumes.recommended.rate@.
 module Network.Google.Resource.Books.Volumes.Recommended.Rate
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Books.Volumes.Recommended.Rate
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksVolumesRecommendedRate@ method which the
+-- | A resource alias for @books.volumes.recommended.rate@ method which the
 -- 'VolumesRecommendedRate'' request conforms to.
 type VolumesRecommendedRateResource =
      "volumes" :>
@@ -77,8 +77,8 @@ data VolumesRecommendedRate' = VolumesRecommendedRate'
 --
 -- * 'vrrSource'
 volumesRecommendedRate'
-    :: VolumesRecommendedRateRating -- ^ 'rating'
-    -> Text -- ^ 'volumeId'
+    :: VolumesRecommendedRateRating -- ^ 'vrrRating'
+    -> Text -- ^ 'vrrVolumeId'
     -> VolumesRecommendedRate'
 volumesRecommendedRate' pVrrRating_ pVrrVolumeId_ =
     VolumesRecommendedRate'

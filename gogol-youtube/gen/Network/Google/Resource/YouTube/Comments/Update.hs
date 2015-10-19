@@ -22,7 +22,7 @@
 --
 -- Modifies a comment.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentsUpdate@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.comments.update@.
 module Network.Google.Resource.YouTube.Comments.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTube.Comments.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCommentsUpdate@ method which the
+-- | A resource alias for @youtube.comments.update@ method which the
 -- 'CommentsUpdate'' request conforms to.
 type CommentsUpdateResource =
      "comments" :>
@@ -64,8 +64,8 @@ data CommentsUpdate' = CommentsUpdate'
 --
 -- * 'cuPayload'
 commentsUpdate'
-    :: Text -- ^ 'part'
-    -> Comment -- ^ 'payload'
+    :: Text -- ^ 'cuPart'
+    -> Comment -- ^ 'cuPayload'
     -> CommentsUpdate'
 commentsUpdate' pCuPart_ pCuPayload_ =
     CommentsUpdate'

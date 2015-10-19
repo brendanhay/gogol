@@ -22,7 +22,7 @@
 --
 -- Retrieves an object or its metadata.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsGet@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objects.get@.
 module Network.Google.Resource.Storage.Objects.Get
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Storage.Objects.Get
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsGet@ method which the
+-- | A resource alias for @storage.objects.get@ method which the
 -- 'ObjectsGet'' request conforms to.
 type ObjectsGetResource =
      "b" :>
@@ -108,8 +108,8 @@ data ObjectsGet' = ObjectsGet'
 --
 -- * 'ogGeneration'
 objectsGet'
-    :: Text -- ^ 'bucket'
-    -> Text -- ^ 'object'
+    :: Text -- ^ 'ogBucket'
+    -> Text -- ^ 'ogObject'
     -> ObjectsGet'
 objectsGet' pOgBucket_ pOgObject_ =
     ObjectsGet'

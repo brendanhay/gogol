@@ -22,7 +22,7 @@
 --
 -- Updates a property. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePropertiesPatch@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.properties.patch@.
 module Network.Google.Resource.Drive.Properties.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Drive.Properties.Patch
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePropertiesPatch@ method which the
+-- | A resource alias for @drive.properties.patch@ method which the
 -- 'PropertiesPatch'' request conforms to.
 type PropertiesPatchResource =
      "files" :>
@@ -75,9 +75,9 @@ data PropertiesPatch' = PropertiesPatch'
 --
 -- * 'ppFileId'
 propertiesPatch'
-    :: Text -- ^ 'propertyKey'
-    -> Property -- ^ 'payload'
-    -> Text -- ^ 'fileId'
+    :: Text -- ^ 'ppPropertyKey'
+    -> Property -- ^ 'ppPayload'
+    -> Text -- ^ 'ppFileId'
     -> PropertiesPatch'
 propertiesPatch' pPpPropertyKey_ pPpPayload_ pPpFileId_ =
     PropertiesPatch'

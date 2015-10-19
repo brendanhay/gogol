@@ -23,7 +23,7 @@
 -- List all URL channels in the specified ad client for this Ad Exchange
 -- account.
 --
--- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsURLChannelsList@.
+-- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @adexchangeseller.accounts.urlchannels.list@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.URLChannels.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.URLChannels.List
 import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangesellerAccountsURLChannelsList@ method which the
+-- | A resource alias for @adexchangeseller.accounts.urlchannels.list@ method which the
 -- 'AccountsURLChannelsList'' request conforms to.
 type AccountsURLChannelsListResource =
      "accounts" :>
@@ -78,8 +78,8 @@ data AccountsURLChannelsList' = AccountsURLChannelsList'
 --
 -- * 'auclMaxResults'
 accountsURLChannelsList'
-    :: Text -- ^ 'adClientId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'auclAdClientId'
+    -> Text -- ^ 'auclAccountId'
     -> AccountsURLChannelsList'
 accountsURLChannelsList' pAuclAdClientId_ pAuclAccountId_ =
     AccountsURLChannelsList'

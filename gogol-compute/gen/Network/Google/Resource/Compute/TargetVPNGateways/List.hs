@@ -23,7 +23,7 @@
 -- Retrieves the list of TargetVpnGateway resources available to the
 -- specified project and region.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetVPNGatewaysList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetVpnGateways.list@.
 module Network.Google.Resource.Compute.TargetVPNGateways.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.TargetVPNGateways.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetVPNGatewaysList@ method which the
+-- | A resource alias for @compute.targetVpnGateways.list@ method which the
 -- 'TargetVPNGatewaysList'' request conforms to.
 type TargetVPNGatewaysListResource =
      Capture "project" Text :>
@@ -83,8 +83,8 @@ data TargetVPNGatewaysList' = TargetVPNGatewaysList'
 --
 -- * 'tvglMaxResults'
 targetVPNGatewaysList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'tvglProject'
+    -> Text -- ^ 'tvglRegion'
     -> TargetVPNGatewaysList'
 targetVPNGatewaysList' pTvglProject_ pTvglRegion_ =
     TargetVPNGatewaysList'

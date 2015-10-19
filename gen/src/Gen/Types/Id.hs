@@ -26,6 +26,7 @@ module Gen.Types.Id
     , global
     , local
 
+    , commasep
     , abbreviate
     , globalise
     , localise
@@ -62,6 +63,7 @@ import           Data.Coerce
 import           Data.Foldable                (foldl')
 import           Data.Function                (on)
 import           Data.Hashable
+import           Data.List                    (intersperse)
 import           Data.List                    (elemIndex, nub, sortOn)
 import           Data.Maybe
 import           Data.Ord
@@ -127,7 +129,7 @@ newtype Suffix = Suffix Text
 newtype Prefix = Prefix Text
     deriving (Show, Monoid)
 
-newtype Global = Global [Text]
+newtype Global = Global { unsafeGlobal :: [Text] }
     deriving (Ord, Show, Generic)
 
 instance Eq Global where
@@ -167,6 +169,9 @@ mkGlobal = Global . Text.split (== '.')
 
 global :: Global -> Text
 global (Global g) = foldMap (upperAcronym . upperHead) g
+
+commasep :: Global -> Text
+commasep = mconcat . intersperse "." . unsafeGlobal
 
 reference :: Global -> Local -> Global
 reference (Global g) (Local l) = Global

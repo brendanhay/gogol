@@ -22,7 +22,7 @@
 --
 -- Updates the specified task. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTasksPatch@.
+-- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasks.patch@.
 module Network.Google.Resource.Tasks.Tasks.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Tasks.Tasks.Patch
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTasksPatch@ method which the
+-- | A resource alias for @tasks.tasks.patch@ method which the
 -- 'TasksPatch'' request conforms to.
 type TasksPatchResource =
      "lists" :>
@@ -70,9 +70,9 @@ data TasksPatch' = TasksPatch'
 --
 -- * 'tpTask'
 tasksPatch'
-    :: Task -- ^ 'payload'
-    -> Text -- ^ 'tasklist'
-    -> Text -- ^ 'task'
+    :: Task -- ^ 'tpPayload'
+    -> Text -- ^ 'tpTaskList'
+    -> Text -- ^ 'tpTask'
     -> TasksPatch'
 tasksPatch' pTpPayload_ pTpTaskList_ pTpTask_ =
     TasksPatch'

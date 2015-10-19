@@ -26,184 +26,184 @@ module Network.Google.Drive
 
     -- * Resources
 
-    -- ** DriveAboutGet
+    -- ** drive.about.get
     , module Network.Google.Resource.Drive.About.Get
 
-    -- ** DriveAppsGet
+    -- ** drive.apps.get
     , module Network.Google.Resource.Drive.Apps.Get
 
-    -- ** DriveAppsList
+    -- ** drive.apps.list
     , module Network.Google.Resource.Drive.Apps.List
 
-    -- ** DriveChangesGet
+    -- ** drive.changes.get
     , module Network.Google.Resource.Drive.Changes.Get
 
-    -- ** DriveChangesList
+    -- ** drive.changes.list
     , module Network.Google.Resource.Drive.Changes.List
 
-    -- ** DriveChangesWatch
+    -- ** drive.changes.watch
     , module Network.Google.Resource.Drive.Changes.Watch
 
-    -- ** DriveChannelsStop
+    -- ** drive.channels.stop
     , module Network.Google.Resource.Drive.Channels.Stop
 
-    -- ** DriveChildrenDelete
+    -- ** drive.children.delete
     , module Network.Google.Resource.Drive.Children.Delete
 
-    -- ** DriveChildrenGet
+    -- ** drive.children.get
     , module Network.Google.Resource.Drive.Children.Get
 
-    -- ** DriveChildrenInsert
+    -- ** drive.children.insert
     , module Network.Google.Resource.Drive.Children.Insert
 
-    -- ** DriveChildrenList
+    -- ** drive.children.list
     , module Network.Google.Resource.Drive.Children.List
 
-    -- ** DriveCommentsDelete
+    -- ** drive.comments.delete
     , module Network.Google.Resource.Drive.Comments.Delete
 
-    -- ** DriveCommentsGet
+    -- ** drive.comments.get
     , module Network.Google.Resource.Drive.Comments.Get
 
-    -- ** DriveCommentsInsert
+    -- ** drive.comments.insert
     , module Network.Google.Resource.Drive.Comments.Insert
 
-    -- ** DriveCommentsList
+    -- ** drive.comments.list
     , module Network.Google.Resource.Drive.Comments.List
 
-    -- ** DriveCommentsPatch
+    -- ** drive.comments.patch
     , module Network.Google.Resource.Drive.Comments.Patch
 
-    -- ** DriveCommentsUpdate
+    -- ** drive.comments.update
     , module Network.Google.Resource.Drive.Comments.Update
 
-    -- ** DriveFilesCopy
+    -- ** drive.files.copy
     , module Network.Google.Resource.Drive.Files.Copy
 
-    -- ** DriveFilesDelete
+    -- ** drive.files.delete
     , module Network.Google.Resource.Drive.Files.Delete
 
-    -- ** DriveFilesEmptyTrash
+    -- ** drive.files.emptyTrash
     , module Network.Google.Resource.Drive.Files.EmptyTrash
 
-    -- ** DriveFilesGenerateIds
+    -- ** drive.files.generateIds
     , module Network.Google.Resource.Drive.Files.GenerateIds
 
-    -- ** DriveFilesGet
+    -- ** drive.files.get
     , module Network.Google.Resource.Drive.Files.Get
 
-    -- ** DriveFilesInsert
+    -- ** drive.files.insert
     , module Network.Google.Resource.Drive.Files.Insert
 
-    -- ** DriveFilesList
+    -- ** drive.files.list
     , module Network.Google.Resource.Drive.Files.List
 
-    -- ** DriveFilesPatch
+    -- ** drive.files.patch
     , module Network.Google.Resource.Drive.Files.Patch
 
-    -- ** DriveFilesTouch
+    -- ** drive.files.touch
     , module Network.Google.Resource.Drive.Files.Touch
 
-    -- ** DriveFilesTrash
+    -- ** drive.files.trash
     , module Network.Google.Resource.Drive.Files.Trash
 
-    -- ** DriveFilesUntrash
+    -- ** drive.files.untrash
     , module Network.Google.Resource.Drive.Files.Untrash
 
-    -- ** DriveFilesUpdate
+    -- ** drive.files.update
     , module Network.Google.Resource.Drive.Files.Update
 
-    -- ** DriveFilesWatch
+    -- ** drive.files.watch
     , module Network.Google.Resource.Drive.Files.Watch
 
-    -- ** DriveParentsDelete
+    -- ** drive.parents.delete
     , module Network.Google.Resource.Drive.Parents.Delete
 
-    -- ** DriveParentsGet
+    -- ** drive.parents.get
     , module Network.Google.Resource.Drive.Parents.Get
 
-    -- ** DriveParentsInsert
+    -- ** drive.parents.insert
     , module Network.Google.Resource.Drive.Parents.Insert
 
-    -- ** DriveParentsList
+    -- ** drive.parents.list
     , module Network.Google.Resource.Drive.Parents.List
 
-    -- ** DrivePermissionsDelete
+    -- ** drive.permissions.delete
     , module Network.Google.Resource.Drive.Permissions.Delete
 
-    -- ** DrivePermissionsGet
+    -- ** drive.permissions.get
     , module Network.Google.Resource.Drive.Permissions.Get
 
-    -- ** DrivePermissionsGetIdForEmail
+    -- ** drive.permissions.getIdForEmail
     , module Network.Google.Resource.Drive.Permissions.GetIdForEmail
 
-    -- ** DrivePermissionsInsert
+    -- ** drive.permissions.insert
     , module Network.Google.Resource.Drive.Permissions.Insert
 
-    -- ** DrivePermissionsList
+    -- ** drive.permissions.list
     , module Network.Google.Resource.Drive.Permissions.List
 
-    -- ** DrivePermissionsPatch
+    -- ** drive.permissions.patch
     , module Network.Google.Resource.Drive.Permissions.Patch
 
-    -- ** DrivePermissionsUpdate
+    -- ** drive.permissions.update
     , module Network.Google.Resource.Drive.Permissions.Update
 
-    -- ** DrivePropertiesDelete
+    -- ** drive.properties.delete
     , module Network.Google.Resource.Drive.Properties.Delete
 
-    -- ** DrivePropertiesGet
+    -- ** drive.properties.get
     , module Network.Google.Resource.Drive.Properties.Get
 
-    -- ** DrivePropertiesInsert
+    -- ** drive.properties.insert
     , module Network.Google.Resource.Drive.Properties.Insert
 
-    -- ** DrivePropertiesList
+    -- ** drive.properties.list
     , module Network.Google.Resource.Drive.Properties.List
 
-    -- ** DrivePropertiesPatch
+    -- ** drive.properties.patch
     , module Network.Google.Resource.Drive.Properties.Patch
 
-    -- ** DrivePropertiesUpdate
+    -- ** drive.properties.update
     , module Network.Google.Resource.Drive.Properties.Update
 
-    -- ** DriveRealtimeGet
+    -- ** drive.realtime.get
     , module Network.Google.Resource.Drive.Realtime.Get
 
-    -- ** DriveRealtimeUpdate
+    -- ** drive.realtime.update
     , module Network.Google.Resource.Drive.Realtime.Update
 
-    -- ** DriveRepliesDelete
+    -- ** drive.replies.delete
     , module Network.Google.Resource.Drive.Replies.Delete
 
-    -- ** DriveRepliesGet
+    -- ** drive.replies.get
     , module Network.Google.Resource.Drive.Replies.Get
 
-    -- ** DriveRepliesInsert
+    -- ** drive.replies.insert
     , module Network.Google.Resource.Drive.Replies.Insert
 
-    -- ** DriveRepliesList
+    -- ** drive.replies.list
     , module Network.Google.Resource.Drive.Replies.List
 
-    -- ** DriveRepliesPatch
+    -- ** drive.replies.patch
     , module Network.Google.Resource.Drive.Replies.Patch
 
-    -- ** DriveRepliesUpdate
+    -- ** drive.replies.update
     , module Network.Google.Resource.Drive.Replies.Update
 
-    -- ** DriveRevisionsDelete
+    -- ** drive.revisions.delete
     , module Network.Google.Resource.Drive.Revisions.Delete
 
-    -- ** DriveRevisionsGet
+    -- ** drive.revisions.get
     , module Network.Google.Resource.Drive.Revisions.Get
 
-    -- ** DriveRevisionsList
+    -- ** drive.revisions.list
     , module Network.Google.Resource.Drive.Revisions.List
 
-    -- ** DriveRevisionsPatch
+    -- ** drive.revisions.patch
     , module Network.Google.Resource.Drive.Revisions.Patch
 
-    -- ** DriveRevisionsUpdate
+    -- ** drive.revisions.update
     , module Network.Google.Resource.Drive.Revisions.Update
 
     -- * Types

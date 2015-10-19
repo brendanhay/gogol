@@ -23,7 +23,7 @@
 -- Tests the specified permissions against the IAM access control policy
 -- for the specified project.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerProjectsTestIAMPermissions@.
+-- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.testIamPermissions@.
 module Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerProjectsTestIAMPermissions@ method which the
+-- | A resource alias for @cloudresourcemanager.projects.testIamPermissions@ method which the
 -- 'ProjectsTestIAMPermissions'' request conforms to.
 type ProjectsTestIAMPermissionsResource =
      "v1beta1" :>
@@ -103,8 +103,8 @@ data ProjectsTestIAMPermissions' = ProjectsTestIAMPermissions'
 --
 -- * 'ptipCallback'
 projectsTestIAMPermissions'
-    :: TestIAMPermissionsRequest -- ^ 'payload'
-    -> Text -- ^ 'resource'
+    :: TestIAMPermissionsRequest -- ^ 'ptipPayload'
+    -> Text -- ^ 'ptipResource'
     -> ProjectsTestIAMPermissions'
 projectsTestIAMPermissions' pPtipPayload_ pPtipResource_ =
     ProjectsTestIAMPermissions'

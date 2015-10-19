@@ -22,7 +22,7 @@
 --
 -- Lists all Container Versions of a GTM Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVersionsList@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.versions.list@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.List
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersVersionsList@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.versions.list@ method which the
 -- 'AccountsContainersVersionsList'' request conforms to.
 type AccountsContainersVersionsListResource =
      "accounts" :>
@@ -72,8 +72,8 @@ data AccountsContainersVersionsList' = AccountsContainersVersionsList'
 --
 -- * 'acvlAccountId'
 accountsContainersVersionsList'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acvlContainerId'
+    -> Text -- ^ 'acvlAccountId'
     -> AccountsContainersVersionsList'
 accountsContainersVersionsList' pAcvlContainerId_ pAcvlAccountId_ =
     AccountsContainersVersionsList'

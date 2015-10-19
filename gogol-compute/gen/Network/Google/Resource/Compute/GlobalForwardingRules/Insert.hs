@@ -23,7 +23,7 @@
 -- Creates a ForwardingRule resource in the specified project and region
 -- using the data included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalForwardingRulesInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalForwardingRules.insert@.
 module Network.Google.Resource.Compute.GlobalForwardingRules.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.GlobalForwardingRules.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeGlobalForwardingRulesInsert@ method which the
+-- | A resource alias for @compute.globalForwardingRules.insert@ method which the
 -- 'GlobalForwardingRulesInsert'' request conforms to.
 type GlobalForwardingRulesInsertResource =
      Capture "project" Text :>
@@ -68,8 +68,8 @@ data GlobalForwardingRulesInsert' = GlobalForwardingRulesInsert'
 --
 -- * 'gfriPayload'
 globalForwardingRulesInsert'
-    :: Text -- ^ 'project'
-    -> ForwardingRule -- ^ 'payload'
+    :: Text -- ^ 'gfriProject'
+    -> ForwardingRule -- ^ 'gfriPayload'
     -> GlobalForwardingRulesInsert'
 globalForwardingRulesInsert' pGfriProject_ pGfriPayload_ =
     GlobalForwardingRulesInsert'

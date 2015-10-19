@@ -22,7 +22,7 @@
 --
 -- Uploads line items in CSV format.
 --
--- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleClickBidManagerLineitemsUploadlineitems@.
+-- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.lineitems.uploadlineitems@.
 module Network.Google.Resource.DoubleClickBidManager.Lineitems.Uploadlineitems
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DoubleClickBidManager.Lineitems.Uploadlineitems
 import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClickBidManagerLineitemsUploadlineitems@ method which the
+-- | A resource alias for @doubleclickbidmanager.lineitems.uploadlineitems@ method which the
 -- 'LineitemsUploadlineitems'' request conforms to.
 type LineitemsUploadlineitemsResource =
      "lineitems" :>
@@ -61,7 +61,7 @@ newtype LineitemsUploadlineitems' = LineitemsUploadlineitems'
 --
 -- * 'luPayload'
 lineitemsUploadlineitems'
-    :: UploadLineItemsRequest -- ^ 'payload'
+    :: UploadLineItemsRequest -- ^ 'luPayload'
     -> LineitemsUploadlineitems'
 lineitemsUploadlineitems' pLuPayload_ =
     LineitemsUploadlineitems'

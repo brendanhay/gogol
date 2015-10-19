@@ -23,7 +23,7 @@
 -- Updates an existing content category. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingContentCategoriesPatch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.contentCategories.patch@.
 module Network.Google.Resource.DFAReporting.ContentCategories.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingContentCategoriesPatch@ method which the
+-- | A resource alias for @dfareporting.contentCategories.patch@ method which the
 -- 'ContentCategoriesPatch'' request conforms to.
 type ContentCategoriesPatchResource =
      "userprofiles" :>
@@ -73,9 +73,9 @@ data ContentCategoriesPatch' = ContentCategoriesPatch'
 --
 -- * 'ccpId'
 contentCategoriesPatch'
-    :: Int64 -- ^ 'profileId'
-    -> ContentCategory -- ^ 'payload'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'ccpProFileId'
+    -> ContentCategory -- ^ 'ccpPayload'
+    -> Int64 -- ^ 'ccpId'
     -> ContentCategoriesPatch'
 contentCategoriesPatch' pCcpProFileId_ pCcpPayload_ pCcpId_ =
     ContentCategoriesPatch'

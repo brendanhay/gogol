@@ -23,7 +23,7 @@
 -- Creates a new top-level comment. To add a reply to an existing comment,
 -- use the comments.insert method instead.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentThreadsInsert@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.commentThreads.insert@.
 module Network.Google.Resource.YouTube.CommentThreads.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.YouTube.CommentThreads.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCommentThreadsInsert@ method which the
+-- | A resource alias for @youtube.commentThreads.insert@ method which the
 -- 'CommentThreadsInsert'' request conforms to.
 type CommentThreadsInsertResource =
      "commentThreads" :>
@@ -67,8 +67,8 @@ data CommentThreadsInsert' = CommentThreadsInsert'
 --
 -- * 'ctiPayload'
 commentThreadsInsert'
-    :: Text -- ^ 'part'
-    -> CommentThread -- ^ 'payload'
+    :: Text -- ^ 'ctiPart'
+    -> CommentThread -- ^ 'ctiPayload'
     -> CommentThreadsInsert'
 commentThreadsInsert' pCtiPart_ pCtiPayload_ =
     CommentThreadsInsert'

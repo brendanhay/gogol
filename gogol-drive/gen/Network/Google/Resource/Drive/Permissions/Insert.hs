@@ -22,7 +22,7 @@
 --
 -- Inserts a permission for a file.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsInsert@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.permissions.insert@.
 module Network.Google.Resource.Drive.Permissions.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Drive.Permissions.Insert
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePermissionsInsert@ method which the
+-- | A resource alias for @drive.permissions.insert@ method which the
 -- 'PermissionsInsert'' request conforms to.
 type PermissionsInsertResource =
      "files" :>
@@ -75,8 +75,8 @@ data PermissionsInsert' = PermissionsInsert'
 --
 -- * 'piSendNotificationEmails'
 permissionsInsert'
-    :: Permission -- ^ 'payload'
-    -> Text -- ^ 'fileId'
+    :: Permission -- ^ 'piPayload'
+    -> Text -- ^ 'piFileId'
     -> PermissionsInsert'
 permissionsInsert' pPiPayload_ pPiFileId_ =
     PermissionsInsert'

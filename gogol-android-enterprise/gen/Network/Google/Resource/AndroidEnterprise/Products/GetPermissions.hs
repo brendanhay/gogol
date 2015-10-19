@@ -22,7 +22,7 @@
 --
 -- Retrieves the Android app permissions required by this app.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseProductsGetPermissions@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.getPermissions@.
 module Network.Google.Resource.AndroidEnterprise.Products.GetPermissions
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidEnterprise.Products.GetPermissions
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseProductsGetPermissions@ method which the
+-- | A resource alias for @androidenterprise.products.getPermissions@ method which the
 -- 'ProductsGetPermissions'' request conforms to.
 type ProductsGetPermissionsResource =
      "enterprises" :>
@@ -67,8 +67,8 @@ data ProductsGetPermissions' = ProductsGetPermissions'
 --
 -- * 'pgpProductId'
 productsGetPermissions'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'productId'
+    :: Text -- ^ 'pgpEnterpriseId'
+    -> Text -- ^ 'pgpProductId'
     -> ProductsGetPermissions'
 productsGetPermissions' pPgpEnterpriseId_ pPgpProductId_ =
     ProductsGetPermissions'

@@ -22,7 +22,7 @@
 --
 -- Lists all the achievement definitions for your application.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementDefinitionsList@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.achievementDefinitions.list@.
 module Network.Google.Resource.Games.AchievementDefinitions.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Games.AchievementDefinitions.List
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesAchievementDefinitionsList@ method which the
+-- | A resource alias for @games.achievementDefinitions.list@ method which the
 -- 'AchievementDefinitionsList'' request conforms to.
 type AchievementDefinitionsListResource =
      "achievements" :>

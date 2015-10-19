@@ -28,7 +28,7 @@
 -- Therefore, users should make sure that points of a time series are
 -- written sequentially in the order of their end time.
 --
--- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @CloudMonitoringTimeseriesWrite@.
+-- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @cloudmonitoring.timeseries.write@.
 module Network.Google.Resource.CloudMonitoring.Timeseries.Write
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.CloudMonitoring.Timeseries.Write
 import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudMonitoringTimeseriesWrite@ method which the
+-- | A resource alias for @cloudmonitoring.timeseries.write@ method which the
 -- 'TimeseriesWrite'' request conforms to.
 type TimeseriesWriteResource =
      Capture "project" Text :>
@@ -77,8 +77,8 @@ data TimeseriesWrite' = TimeseriesWrite'
 --
 -- * 'twPayload'
 timeseriesWrite'
-    :: Text -- ^ 'project'
-    -> WriteTimeseriesRequest -- ^ 'payload'
+    :: Text -- ^ 'twProject'
+    -> WriteTimeseriesRequest -- ^ 'twPayload'
     -> TimeseriesWrite'
 timeseriesWrite' pTwProject_ pTwPayload_ =
     TimeseriesWrite'

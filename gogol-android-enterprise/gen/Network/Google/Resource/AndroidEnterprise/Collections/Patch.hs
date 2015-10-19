@@ -22,7 +22,7 @@
 --
 -- Updates a collection. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseCollectionsPatch@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collections.patch@.
 module Network.Google.Resource.AndroidEnterprise.Collections.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidEnterprise.Collections.Patch
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseCollectionsPatch@ method which the
+-- | A resource alias for @androidenterprise.collections.patch@ method which the
 -- 'CollectionsPatch'' request conforms to.
 type CollectionsPatchResource =
      "enterprises" :>
@@ -71,9 +71,9 @@ data CollectionsPatch' = CollectionsPatch'
 --
 -- * 'colPayload'
 collectionsPatch'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'collectionId'
-    -> Collection -- ^ 'payload'
+    :: Text -- ^ 'colEnterpriseId'
+    -> Text -- ^ 'colCollectionId'
+    -> Collection -- ^ 'colPayload'
     -> CollectionsPatch'
 collectionsPatch' pColEnterpriseId_ pColCollectionId_ pColPayload_ =
     CollectionsPatch'

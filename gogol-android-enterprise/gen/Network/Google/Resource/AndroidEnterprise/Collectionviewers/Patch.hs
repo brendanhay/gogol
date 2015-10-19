@@ -25,7 +25,7 @@
 -- only such users will see the collection. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseCollectionviewersPatch@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collectionviewers.patch@.
 module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Patch
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Patch
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseCollectionviewersPatch@ method which the
+-- | A resource alias for @androidenterprise.collectionviewers.patch@ method which the
 -- 'CollectionviewersPatch'' request conforms to.
 type CollectionviewersPatchResource =
      "enterprises" :>
@@ -82,10 +82,10 @@ data CollectionviewersPatch' = CollectionviewersPatch'
 --
 -- * 'cpUserId'
 collectionviewersPatch'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'collectionId'
-    -> User -- ^ 'payload'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'cpEnterpriseId'
+    -> Text -- ^ 'cpCollectionId'
+    -> User -- ^ 'cpPayload'
+    -> Text -- ^ 'cpUserId'
     -> CollectionviewersPatch'
 collectionviewersPatch' pCpEnterpriseId_ pCpCollectionId_ pCpPayload_ pCpUserId_ =
     CollectionviewersPatch'

@@ -22,7 +22,7 @@
 --
 -- Lists all the states keys, and optionally the state data.
 --
--- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @AppStateStatesList@.
+-- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @appstate.states.list@.
 module Network.Google.Resource.AppState.States.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AppState.States.List
 import           Network.Google.AppState.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppStateStatesList@ method which the
+-- | A resource alias for @appstate.states.list@ method which the
 -- 'StatesList'' request conforms to.
 type StatesListResource =
      "states" :>

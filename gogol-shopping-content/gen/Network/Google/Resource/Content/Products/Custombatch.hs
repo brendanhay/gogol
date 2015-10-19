@@ -22,7 +22,7 @@
 --
 -- Retrieves, inserts, and deletes multiple products in a single request.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentProductsCustombatch@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.products.custombatch@.
 module Network.Google.Resource.Content.Products.Custombatch
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Content.Products.Custombatch
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentProductsCustombatch@ method which the
+-- | A resource alias for @content.products.custombatch@ method which the
 -- 'ProductsCustombatch'' request conforms to.
 type ProductsCustombatchResource =
      "products" :>
@@ -66,7 +66,7 @@ data ProductsCustombatch' = ProductsCustombatch'
 --
 -- * 'pDryRun'
 productsCustombatch'
-    :: ProductsCustomBatchRequest -- ^ 'payload'
+    :: ProductsCustomBatchRequest -- ^ 'pPayload'
     -> ProductsCustombatch'
 productsCustombatch' pPPayload_ =
     ProductsCustombatch'

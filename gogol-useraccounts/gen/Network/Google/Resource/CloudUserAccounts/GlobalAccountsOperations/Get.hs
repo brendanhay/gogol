@@ -22,7 +22,7 @@
 --
 -- Retrieves the specified operation resource.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsGlobalAccountsOperationsGet@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.globalAccountsOperations.get@.
 module Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.Get
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsGlobalAccountsOperationsGet@ method which the
+-- | A resource alias for @clouduseraccounts.globalAccountsOperations.get@ method which the
 -- 'GlobalAccountsOperationsGet'' request conforms to.
 type GlobalAccountsOperationsGetResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data GlobalAccountsOperationsGet' = GlobalAccountsOperationsGet'
 --
 -- * 'gaogOperation'
 globalAccountsOperationsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'operation'
+    :: Text -- ^ 'gaogProject'
+    -> Text -- ^ 'gaogOperation'
     -> GlobalAccountsOperationsGet'
 globalAccountsOperationsGet' pGaogProject_ pGaogOperation_ =
     GlobalAccountsOperationsGet'

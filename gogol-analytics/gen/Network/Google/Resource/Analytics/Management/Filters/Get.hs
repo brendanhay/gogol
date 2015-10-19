@@ -22,7 +22,7 @@
 --
 -- Returns a filters to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementFiltersGet@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.filters.get@.
 module Network.Google.Resource.Analytics.Management.Filters.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Analytics.Management.Filters.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementFiltersGet@ method which the
+-- | A resource alias for @analytics.management.filters.get@ method which the
 -- 'ManagementFiltersGet'' request conforms to.
 type ManagementFiltersGetResource =
      "management" :>
@@ -66,8 +66,8 @@ data ManagementFiltersGet' = ManagementFiltersGet'
 --
 -- * 'mfgAccountId'
 managementFiltersGet'
-    :: Text -- ^ 'filterId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mfgFilterId'
+    -> Text -- ^ 'mfgAccountId'
     -> ManagementFiltersGet'
 managementFiltersGet' pMfgFilterId_ pMfgAccountId_ =
     ManagementFiltersGet'

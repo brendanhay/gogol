@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerClientAccessList@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.clientaccess.list@.
 module Network.Google.Resource.AdExchangeBuyer.ClientAccess.List
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.List
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerClientAccessList@ method which the
+-- | A resource alias for @adexchangebuyer.clientaccess.list@ method which the
 -- 'ClientAccessList'' request conforms to.
 type ClientAccessListResource =
      "clientAccess" :>
@@ -57,7 +57,7 @@ newtype ClientAccessList' = ClientAccessList'
 --
 -- * 'calPayload'
 clientAccessList'
-    :: ListClientAccessCapabilitiesRequest -- ^ 'payload'
+    :: ListClientAccessCapabilitiesRequest -- ^ 'calPayload'
     -> ClientAccessList'
 clientAccessList' pCalPayload_ =
     ClientAccessList'

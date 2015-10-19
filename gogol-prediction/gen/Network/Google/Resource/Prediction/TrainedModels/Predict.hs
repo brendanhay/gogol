@@ -22,7 +22,7 @@
 --
 -- Submit model id and request a prediction.
 --
--- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedModelsPredict@.
+-- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @prediction.trainedmodels.predict@.
 module Network.Google.Resource.Prediction.TrainedModels.Predict
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Prediction.TrainedModels.Predict
 import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PredictionTrainedModelsPredict@ method which the
+-- | A resource alias for @prediction.trainedmodels.predict@ method which the
 -- 'TrainedModelsPredict'' request conforms to.
 type TrainedModelsPredictResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data TrainedModelsPredict' = TrainedModelsPredict'
 --
 -- * 'tmpId'
 trainedModelsPredict'
-    :: Text -- ^ 'project'
-    -> Input -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: Text -- ^ 'tmpProject'
+    -> Input -- ^ 'tmpPayload'
+    -> Text -- ^ 'tmpId'
     -> TrainedModelsPredict'
 trainedModelsPredict' pTmpProject_ pTmpPayload_ pTmpId_ =
     TrainedModelsPredict'

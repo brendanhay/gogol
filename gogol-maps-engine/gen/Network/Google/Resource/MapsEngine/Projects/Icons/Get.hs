@@ -22,7 +22,7 @@
 --
 -- Return an icon or its associated metadata
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineProjectsIconsGet@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.projects.icons.get@.
 module Network.Google.Resource.MapsEngine.Projects.Icons.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.MapsEngine.Projects.Icons.Get
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineProjectsIconsGet@ method which the
+-- | A resource alias for @mapsengine.projects.icons.get@ method which the
 -- 'ProjectsIconsGet'' request conforms to.
 type ProjectsIconsGetResource =
      "projects" :>
@@ -72,8 +72,8 @@ data ProjectsIconsGet' = ProjectsIconsGet'
 --
 -- * 'pigProjectId'
 projectsIconsGet'
-    :: Text -- ^ 'id'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'pigId'
+    -> Text -- ^ 'pigProjectId'
     -> ProjectsIconsGet'
 projectsIconsGet' pPigId_ pPigProjectId_ =
     ProjectsIconsGet'

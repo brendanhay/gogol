@@ -22,7 +22,7 @@
 --
 -- Updates a customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryCustomersUpdate@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.customers.update@.
 module Network.Google.Resource.Directory.Customers.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Customers.Update
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryCustomersUpdate@ method which the
+-- | A resource alias for @directory.customers.update@ method which the
 -- 'CustomersUpdate'' request conforms to.
 type CustomersUpdateResource =
      "customers" :>
@@ -64,8 +64,8 @@ data CustomersUpdate' = CustomersUpdate'
 --
 -- * 'cuPayload'
 customersUpdate'
-    :: Text -- ^ 'customerKey'
-    -> Customer -- ^ 'payload'
+    :: Text -- ^ 'cuCustomerKey'
+    -> Customer -- ^ 'cuPayload'
     -> CustomersUpdate'
 customersUpdate' pCuCustomerKey_ pCuPayload_ =
     CustomersUpdate'

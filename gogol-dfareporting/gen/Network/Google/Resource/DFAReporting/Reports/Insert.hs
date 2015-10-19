@@ -22,7 +22,7 @@
 --
 -- Creates a report.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingReportsInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.reports.insert@.
 module Network.Google.Resource.DFAReporting.Reports.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Reports.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingReportsInsert@ method which the
+-- | A resource alias for @dfareporting.reports.insert@ method which the
 -- 'ReportsInsert'' request conforms to.
 type ReportsInsertResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data ReportsInsert' = ReportsInsert'
 --
 -- * 'riPayload'
 reportsInsert'
-    :: Int64 -- ^ 'profileId'
-    -> Report -- ^ 'payload'
+    :: Int64 -- ^ 'riProFileId'
+    -> Report -- ^ 'riPayload'
     -> ReportsInsert'
 reportsInsert' pRiProFileId_ pRiPayload_ =
     ReportsInsert'

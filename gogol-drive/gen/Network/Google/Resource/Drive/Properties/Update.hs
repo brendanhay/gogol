@@ -22,7 +22,7 @@
 --
 -- Updates a property.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePropertiesUpdate@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.properties.update@.
 module Network.Google.Resource.Drive.Properties.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Drive.Properties.Update
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePropertiesUpdate@ method which the
+-- | A resource alias for @drive.properties.update@ method which the
 -- 'PropertiesUpdate'' request conforms to.
 type PropertiesUpdateResource =
      "files" :>
@@ -75,9 +75,9 @@ data PropertiesUpdate' = PropertiesUpdate'
 --
 -- * 'puFileId'
 propertiesUpdate'
-    :: Text -- ^ 'propertyKey'
-    -> Property -- ^ 'payload'
-    -> Text -- ^ 'fileId'
+    :: Text -- ^ 'puPropertyKey'
+    -> Property -- ^ 'puPayload'
+    -> Text -- ^ 'puFileId'
     -> PropertiesUpdate'
 propertiesUpdate' pPuPropertyKey_ pPuPayload_ pPuFileId_ =
     PropertiesUpdate'

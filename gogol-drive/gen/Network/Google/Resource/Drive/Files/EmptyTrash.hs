@@ -22,7 +22,7 @@
 --
 -- Permanently deletes all of the user\'s trashed files.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesEmptyTrash@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.emptyTrash@.
 module Network.Google.Resource.Drive.Files.EmptyTrash
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.Drive.Files.EmptyTrash
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesEmptyTrash@ method which the
+-- | A resource alias for @drive.files.emptyTrash@ method which the
 -- 'FilesEmptyTrash'' request conforms to.
 type FilesEmptyTrashResource =
      "files" :>

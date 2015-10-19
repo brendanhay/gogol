@@ -22,7 +22,7 @@
 --
 -- Deletes a datafeed from your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentDatafeedsDelete@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.delete@.
 module Network.Google.Resource.Content.Datafeeds.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Datafeeds.Delete
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentDatafeedsDelete@ method which the
+-- | A resource alias for @content.datafeeds.delete@ method which the
 -- 'DatafeedsDelete'' request conforms to.
 type DatafeedsDeleteResource =
      Capture "merchantId" Word64 :>
@@ -69,8 +69,8 @@ data DatafeedsDelete' = DatafeedsDelete'
 --
 -- * 'ddDryRun'
 datafeedsDelete'
-    :: Word64 -- ^ 'merchantId'
-    -> Word64 -- ^ 'datafeedId'
+    :: Word64 -- ^ 'ddMerchantId'
+    -> Word64 -- ^ 'ddDatafeedId'
     -> DatafeedsDelete'
 datafeedsDelete' pDdMerchantId_ pDdDatafeedId_ =
     DatafeedsDelete'

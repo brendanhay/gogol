@@ -23,7 +23,7 @@
 -- Retrieves the list of region resources available to the specified
 -- project.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRegionsList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.regions.list@.
 module Network.Google.Resource.Compute.Regions.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.Regions.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeRegionsList@ method which the
+-- | A resource alias for @compute.regions.list@ method which the
 -- 'RegionsList'' request conforms to.
 type RegionsListResource =
      Capture "project" Text :>
@@ -76,7 +76,7 @@ data RegionsList' = RegionsList'
 --
 -- * 'rMaxResults'
 regionsList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'rProject'
     -> RegionsList'
 regionsList' pRProject_ =
     RegionsList'

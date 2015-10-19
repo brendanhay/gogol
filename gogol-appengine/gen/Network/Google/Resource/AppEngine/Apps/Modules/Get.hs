@@ -22,7 +22,7 @@
 --
 -- Gets the current configuration of the module.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesGet@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @appengine.apps.modules.get@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Get
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Get
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppEngineAppsModulesGet@ method which the
+-- | A resource alias for @appengine.apps.modules.get@ method which the
 -- 'AppsModulesGet'' request conforms to.
 type AppsModulesGetResource =
      "v1beta4" :>
@@ -101,8 +101,8 @@ data AppsModulesGet' = AppsModulesGet'
 --
 -- * 'amgCallback'
 appsModulesGet'
-    :: Text -- ^ 'modulesId'
-    -> Text -- ^ 'appsId'
+    :: Text -- ^ 'amgModulesId'
+    -> Text -- ^ 'amgAppsId'
     -> AppsModulesGet'
 appsModulesGet' pAmgModulesId_ pAmgAppsId_ =
     AppsModulesGet'

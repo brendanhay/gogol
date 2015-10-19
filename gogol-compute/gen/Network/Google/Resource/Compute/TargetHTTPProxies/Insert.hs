@@ -23,7 +23,7 @@
 -- Creates a TargetHttpProxy resource in the specified project using the
 -- data included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetHTTPProxiesInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetHttpProxies.insert@.
 module Network.Google.Resource.Compute.TargetHTTPProxies.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetHTTPProxiesInsert@ method which the
+-- | A resource alias for @compute.targetHttpProxies.insert@ method which the
 -- 'TargetHTTPProxiesInsert'' request conforms to.
 type TargetHTTPProxiesInsertResource =
      Capture "project" Text :>
@@ -68,8 +68,8 @@ data TargetHTTPProxiesInsert' = TargetHTTPProxiesInsert'
 --
 -- * 'thttppiPayload'
 targetHTTPProxiesInsert'
-    :: Text -- ^ 'project'
-    -> TargetHTTPProxy -- ^ 'payload'
+    :: Text -- ^ 'thttppiProject'
+    -> TargetHTTPProxy -- ^ 'thttppiPayload'
     -> TargetHTTPProxiesInsert'
 targetHTTPProxiesInsert' pThttppiProject_ pThttppiPayload_ =
     TargetHTTPProxiesInsert'

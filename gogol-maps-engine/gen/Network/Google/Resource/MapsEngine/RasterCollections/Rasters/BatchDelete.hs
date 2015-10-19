@@ -24,7 +24,7 @@
 -- be included in a single batchDelete request. Each batchDelete request is
 -- atomic.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRasterCollectionsRastersBatchDelete@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.rasterCollections.rasters.batchDelete@.
 module Network.Google.Resource.MapsEngine.RasterCollections.Rasters.BatchDelete
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Rasters.BatchDelete
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRasterCollectionsRastersBatchDelete@ method which the
+-- | A resource alias for @mapsengine.rasterCollections.rasters.batchDelete@ method which the
 -- 'RasterCollectionsRastersBatchDelete'' request conforms to.
 type RasterCollectionsRastersBatchDeleteResource =
      "rasterCollections" :>
@@ -74,8 +74,8 @@ data RasterCollectionsRastersBatchDelete' = RasterCollectionsRastersBatchDelete'
 --
 -- * 'rcrbdId'
 rasterCollectionsRastersBatchDelete'
-    :: RasterCollectionsRasterBatchDeleteRequest -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: RasterCollectionsRasterBatchDeleteRequest -- ^ 'rcrbdPayload'
+    -> Text -- ^ 'rcrbdId'
     -> RasterCollectionsRastersBatchDelete'
 rasterCollectionsRastersBatchDelete' pRcrbdPayload_ pRcrbdId_ =
     RasterCollectionsRastersBatchDelete'

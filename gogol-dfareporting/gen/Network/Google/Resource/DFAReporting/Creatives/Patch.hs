@@ -22,7 +22,7 @@
 --
 -- Updates an existing creative. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativesPatch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creatives.patch@.
 module Network.Google.Resource.DFAReporting.Creatives.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.Creatives.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativesPatch@ method which the
+-- | A resource alias for @dfareporting.creatives.patch@ method which the
 -- 'CreativesPatch'' request conforms to.
 type CreativesPatchResource =
      "userprofiles" :>
@@ -70,9 +70,9 @@ data CreativesPatch' = CreativesPatch'
 --
 -- * 'cppId'
 creativesPatch'
-    :: Int64 -- ^ 'profileId'
-    -> Creative -- ^ 'payload'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'cppProFileId'
+    -> Creative -- ^ 'cppPayload'
+    -> Int64 -- ^ 'cppId'
     -> CreativesPatch'
 creativesPatch' pCppProFileId_ pCppPayload_ pCppId_ =
     CreativesPatch'

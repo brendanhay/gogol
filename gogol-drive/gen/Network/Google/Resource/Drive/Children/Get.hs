@@ -22,7 +22,7 @@
 --
 -- Gets a specific child reference.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChildrenGet@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.children.get@.
 module Network.Google.Resource.Drive.Children.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Drive.Children.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveChildrenGet@ method which the
+-- | A resource alias for @drive.children.get@ method which the
 -- 'ChildrenGet'' request conforms to.
 type ChildrenGetResource =
      "files" :>
@@ -66,8 +66,8 @@ data ChildrenGet' = ChildrenGet'
 --
 -- * 'cgChildId'
 childrenGet'
-    :: Text -- ^ 'folderId'
-    -> Text -- ^ 'childId'
+    :: Text -- ^ 'cgFolderId'
+    -> Text -- ^ 'cgChildId'
     -> ChildrenGet'
 childrenGet' pCgFolderId_ pCgChildId_ =
     ChildrenGet'

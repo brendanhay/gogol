@@ -26,7 +26,7 @@
 -- subsequent pages of results by setting the pageToken query parameter to
 -- the value of the nextPageToken.
 --
--- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @CloudMonitoringTimeseriesList@.
+-- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @cloudmonitoring.timeseries.list@.
 module Network.Google.Resource.CloudMonitoring.Timeseries.List
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ module Network.Google.Resource.CloudMonitoring.Timeseries.List
 import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudMonitoringTimeseriesList@ method which the
+-- | A resource alias for @cloudmonitoring.timeseries.list@ method which the
 -- 'TimeseriesList'' request conforms to.
 type TimeseriesListResource =
      Capture "project" Text :>
@@ -118,10 +118,10 @@ data TimeseriesList' = TimeseriesList'
 --
 -- * 'tlYoungest'
 timeseriesList'
-    :: Text -- ^ 'project'
-    -> ListTimeseriesRequest -- ^ 'payload'
-    -> Text -- ^ 'metric'
-    -> Text -- ^ 'youngest'
+    :: Text -- ^ 'tlProject'
+    -> ListTimeseriesRequest -- ^ 'tlPayload'
+    -> Text -- ^ 'tlMetric'
+    -> Text -- ^ 'tlYoungest'
     -> TimeseriesList'
 timeseriesList' pTlProject_ pTlPayload_ pTlMetric_ pTlYoungest_ =
     TimeseriesList'

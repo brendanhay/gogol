@@ -23,7 +23,7 @@
 -- Updates an existing creative group. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeGroupsPatch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeGroups.patch@.
 module Network.Google.Resource.DFAReporting.CreativeGroups.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeGroupsPatch@ method which the
+-- | A resource alias for @dfareporting.creativeGroups.patch@ method which the
 -- 'CreativeGroupsPatch'' request conforms to.
 type CreativeGroupsPatchResource =
      "userprofiles" :>
@@ -73,9 +73,9 @@ data CreativeGroupsPatch' = CreativeGroupsPatch'
 --
 -- * 'cgpId'
 creativeGroupsPatch'
-    :: Int64 -- ^ 'profileId'
-    -> CreativeGroup -- ^ 'payload'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'cgpProFileId'
+    -> CreativeGroup -- ^ 'cgpPayload'
+    -> Int64 -- ^ 'cgpId'
     -> CreativeGroupsPatch'
 creativeGroupsPatch' pCgpProFileId_ pCgpPayload_ pCgpId_ =
     CreativeGroupsPatch'

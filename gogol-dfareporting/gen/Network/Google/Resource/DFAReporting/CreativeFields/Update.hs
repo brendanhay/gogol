@@ -22,7 +22,7 @@
 --
 -- Updates an existing creative field.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldsUpdate@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeFields.update@.
 module Network.Google.Resource.DFAReporting.CreativeFields.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeFieldsUpdate@ method which the
+-- | A resource alias for @dfareporting.creativeFields.update@ method which the
 -- 'CreativeFieldsUpdate'' request conforms to.
 type CreativeFieldsUpdateResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data CreativeFieldsUpdate' = CreativeFieldsUpdate'
 --
 -- * 'cfuPayload'
 creativeFieldsUpdate'
-    :: Int64 -- ^ 'profileId'
-    -> CreativeField -- ^ 'payload'
+    :: Int64 -- ^ 'cfuProFileId'
+    -> CreativeField -- ^ 'cfuPayload'
     -> CreativeFieldsUpdate'
 creativeFieldsUpdate' pCfuProFileId_ pCfuPayload_ =
     CreativeFieldsUpdate'

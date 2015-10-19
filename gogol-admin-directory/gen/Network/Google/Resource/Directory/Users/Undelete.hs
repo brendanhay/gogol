@@ -22,7 +22,7 @@
 --
 -- Undelete a deleted user
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersUndelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.undelete@.
 module Network.Google.Resource.Directory.Users.Undelete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Users.Undelete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersUndelete@ method which the
+-- | A resource alias for @directory.users.undelete@ method which the
 -- 'UsersUndelete'' request conforms to.
 type UsersUndeleteResource =
      "users" :>
@@ -65,8 +65,8 @@ data UsersUndelete' = UsersUndelete'
 --
 -- * 'uUserKey'
 usersUndelete'
-    :: UserUndelete -- ^ 'payload'
-    -> Text -- ^ 'userKey'
+    :: UserUndelete -- ^ 'uPayload'
+    -> Text -- ^ 'uUserKey'
     -> UsersUndelete'
 usersUndelete' pUPayload_ pUUserKey_ =
     UsersUndelete'

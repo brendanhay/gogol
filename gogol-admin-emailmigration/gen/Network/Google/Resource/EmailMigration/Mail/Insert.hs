@@ -22,7 +22,7 @@
 --
 -- Insert Mail into Google\'s Gmail backends
 --
--- /See:/ <https://developers.google.com/admin-sdk/email-migration/v2/ Email Migration API v2 Reference> for @EmailMigrationMailInsert@.
+-- /See:/ <https://developers.google.com/admin-sdk/email-migration/v2/ Email Migration API v2 Reference> for @emailMigration.mail.insert@.
 module Network.Google.Resource.EmailMigration.Mail.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.EmailMigration.Mail.Insert
 import           Network.Google.EmailMigration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @EmailMigrationMailInsert@ method which the
+-- | A resource alias for @emailMigration.mail.insert@ method which the
 -- 'MailInsert'' request conforms to.
 type MailInsertResource =
      Capture "userKey" Text :>
@@ -69,9 +69,9 @@ data MailInsert' = MailInsert'
 --
 -- * 'miUserKey'
 mailInsert'
-    :: MailItem -- ^ 'payload'
-    -> Body -- ^ 'media'
-    -> Text -- ^ 'userKey'
+    :: MailItem -- ^ 'miPayload'
+    -> Body -- ^ 'miMedia'
+    -> Text -- ^ 'miUserKey'
     -> MailInsert'
 mailInsert' pMiPayload_ pMiMedia_ pMiUserKey_ =
     MailInsert'

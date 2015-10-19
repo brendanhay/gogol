@@ -24,7 +24,7 @@
 -- delete any of your previous edits so this method need only be called if
 -- you want to preemptively abandon an edit.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsDelete@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.delete@.
 module Network.Google.Resource.AndroidPublisher.Edits.Delete
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Delete
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsDelete@ method which the
+-- | A resource alias for @androidpublisher.edits.delete@ method which the
 -- 'EditsDelete'' request conforms to.
 type EditsDeleteResource =
      Capture "packageName" Text :>
@@ -68,8 +68,8 @@ data EditsDelete' = EditsDelete'
 --
 -- * 'edEditId'
 editsDelete'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'edPackageName'
+    -> Text -- ^ 'edEditId'
     -> EditsDelete'
 editsDelete' pEdPackageName_ pEdEditId_ =
     EditsDelete'

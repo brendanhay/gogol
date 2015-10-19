@@ -24,7 +24,7 @@
 -- to the subscription will be terminated immediately and it will stop
 -- recurring.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherPurchasesSubscriptionsRevoke@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.purchases.subscriptions.revoke@.
 module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherPurchasesSubscriptionsRevoke@ method which the
+-- | A resource alias for @androidpublisher.purchases.subscriptions.revoke@ method which the
 -- 'PurchasesSubscriptionsRevoke'' request conforms to.
 type PurchasesSubscriptionsRevokeResource =
      Capture "packageName" Text :>
@@ -75,9 +75,9 @@ data PurchasesSubscriptionsRevoke' = PurchasesSubscriptionsRevoke'
 --
 -- * 'psrSubscriptionId'
 purchasesSubscriptionsRevoke'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'token'
-    -> Text -- ^ 'subscriptionId'
+    :: Text -- ^ 'psrPackageName'
+    -> Text -- ^ 'psrToken'
+    -> Text -- ^ 'psrSubscriptionId'
     -> PurchasesSubscriptionsRevoke'
 purchasesSubscriptionsRevoke' pPsrPackageName_ pPsrToken_ pPsrSubscriptionId_ =
     PurchasesSubscriptionsRevoke'

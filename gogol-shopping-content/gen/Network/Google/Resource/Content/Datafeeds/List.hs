@@ -22,7 +22,7 @@
 --
 -- Lists the datafeeds in your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentDatafeedsList@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.list@.
 module Network.Google.Resource.Content.Datafeeds.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Datafeeds.List
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentDatafeedsList@ method which the
+-- | A resource alias for @content.datafeeds.list@ method which the
 -- 'DatafeedsList'' request conforms to.
 type DatafeedsListResource =
      Capture "merchantId" Word64 :>
@@ -70,7 +70,7 @@ data DatafeedsList' = DatafeedsList'
 --
 -- * 'dlMaxResults'
 datafeedsList'
-    :: Word64 -- ^ 'merchantId'
+    :: Word64 -- ^ 'dlMerchantId'
     -> DatafeedsList'
 datafeedsList' pDlMerchantId_ =
     DatafeedsList'

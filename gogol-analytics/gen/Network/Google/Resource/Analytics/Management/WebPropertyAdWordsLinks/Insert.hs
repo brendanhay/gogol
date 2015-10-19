@@ -22,7 +22,7 @@
 --
 -- Creates a webProperty-AdWords link.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyAdWordsLinksInsert@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webPropertyAdWordsLinks.insert@.
 module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Inse
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksInsert@ method which the
+-- | A resource alias for @analytics.management.webPropertyAdWordsLinks.insert@ method which the
 -- 'ManagementWebPropertyAdWordsLinksInsert'' request conforms to.
 type ManagementWebPropertyAdWordsLinksInsertResource
      =
@@ -74,9 +74,9 @@ data ManagementWebPropertyAdWordsLinksInsert' = ManagementWebPropertyAdWordsLink
 --
 -- * 'mwpawliAccountId'
 managementWebPropertyAdWordsLinksInsert'
-    :: Text -- ^ 'webPropertyId'
-    -> EntityAdWordsLink -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mwpawliWebPropertyId'
+    -> EntityAdWordsLink -- ^ 'mwpawliPayload'
+    -> Text -- ^ 'mwpawliAccountId'
     -> ManagementWebPropertyAdWordsLinksInsert'
 managementWebPropertyAdWordsLinksInsert' pMwpawliWebPropertyId_ pMwpawliPayload_ pMwpawliAccountId_ =
     ManagementWebPropertyAdWordsLinksInsert'

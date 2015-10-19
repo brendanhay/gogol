@@ -23,7 +23,7 @@
 -- Removes a push token for the current user and application. Removing a
 -- non-existent push token will report success.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesPushtokensRemove@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.pushtokens.remove@.
 module Network.Google.Resource.Games.Pushtokens.Remove
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Games.Pushtokens.Remove
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesPushtokensRemove@ method which the
+-- | A resource alias for @games.pushtokens.remove@ method which the
 -- 'PushtokensRemove'' request conforms to.
 type PushtokensRemoveResource =
      "pushtokens" :>
@@ -62,7 +62,7 @@ newtype PushtokensRemove' = PushtokensRemove'
 --
 -- * 'prPayload'
 pushtokensRemove'
-    :: PushTokenId -- ^ 'payload'
+    :: PushTokenId -- ^ 'prPayload'
     -> PushtokensRemove'
 pushtokensRemove' pPrPayload_ =
     PushtokensRemove'

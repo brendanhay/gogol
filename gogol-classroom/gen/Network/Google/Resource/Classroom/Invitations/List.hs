@@ -26,7 +26,7 @@
 -- supplied. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` for access errors.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomInvitationsList@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.invitations.list@.
 module Network.Google.Resource.Classroom.Invitations.List
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ module Network.Google.Resource.Classroom.Invitations.List
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomInvitationsList@ method which the
+-- | A resource alias for @classroom.invitations.list@ method which the
 -- 'InvitationsList'' request conforms to.
 type InvitationsListResource =
      "v1" :>

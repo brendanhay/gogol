@@ -22,7 +22,7 @@
 --
 -- Creates a Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersCreate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.create@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Create
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Create
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersCreate@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.create@ method which the
 -- 'AccountsContainersCreate'' request conforms to.
 type AccountsContainersCreateResource =
      "accounts" :>
@@ -65,8 +65,8 @@ data AccountsContainersCreate' = AccountsContainersCreate'
 --
 -- * 'accAccountId'
 accountsContainersCreate'
-    :: Container -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Container -- ^ 'accPayload'
+    -> Text -- ^ 'accAccountId'
     -> AccountsContainersCreate'
 accountsContainersCreate' pAccPayload_ pAccAccountId_ =
     AccountsContainersCreate'

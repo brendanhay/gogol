@@ -22,7 +22,7 @@
 --
 -- Deletes a Domain Alias of the customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryDomainAliasesDelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.domainAliases.delete@.
 module Network.Google.Resource.Directory.DomainAliases.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.DomainAliases.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryDomainAliasesDelete@ method which the
+-- | A resource alias for @directory.domainAliases.delete@ method which the
 -- 'DomainAliasesDelete'' request conforms to.
 type DomainAliasesDeleteResource =
      "customer" :>
@@ -65,8 +65,8 @@ data DomainAliasesDelete' = DomainAliasesDelete'
 --
 -- * 'dadCustomer'
 domainAliasesDelete'
-    :: Text -- ^ 'domainAliasName'
-    -> Text -- ^ 'customer'
+    :: Text -- ^ 'dadDomainAliasName'
+    -> Text -- ^ 'dadCustomer'
     -> DomainAliasesDelete'
 domainAliasesDelete' pDadDomainAliasName_ pDadCustomer_ =
     DomainAliasesDelete'

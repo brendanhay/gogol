@@ -22,7 +22,7 @@
 --
 -- Get a particular task from a TaskQueue.
 --
--- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksGet@.
+-- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @taskqueue.tasks.get@.
 module Network.Google.Resource.TaskQueue.Tasks.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Get
 import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
--- | A resource alias for @TaskqueueTasksGet@ method which the
+-- | A resource alias for @taskqueue.tasks.get@ method which the
 -- 'TasksGet'' request conforms to.
 type TasksGetResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data TasksGet' = TasksGet'
 --
 -- * 'tgTask'
 tasksGet'
-    :: Text -- ^ 'taskqueue'
-    -> Text -- ^ 'project'
-    -> Text -- ^ 'task'
+    :: Text -- ^ 'tgTaskqueue'
+    -> Text -- ^ 'tgProject'
+    -> Text -- ^ 'tgTask'
     -> TasksGet'
 tasksGet' pTgTaskqueue_ pTgProject_ pTgTask_ =
     TasksGet'

@@ -22,7 +22,7 @@
 --
 -- Moves a persistent disk from one zone to another.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeProjectsMoveDisk@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.projects.moveDisk@.
 module Network.Google.Resource.Compute.Projects.MoveDisk
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.Projects.MoveDisk
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeProjectsMoveDisk@ method which the
+-- | A resource alias for @compute.projects.moveDisk@ method which the
 -- 'ProjectsMoveDisk'' request conforms to.
 type ProjectsMoveDiskResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data ProjectsMoveDisk' = ProjectsMoveDisk'
 --
 -- * 'pmdPayload'
 projectsMoveDisk'
-    :: Text -- ^ 'project'
-    -> DiskMoveRequest -- ^ 'payload'
+    :: Text -- ^ 'pmdProject'
+    -> DiskMoveRequest -- ^ 'pmdPayload'
     -> ProjectsMoveDisk'
 projectsMoveDisk' pPmdProject_ pPmdPayload_ =
     ProjectsMoveDisk'

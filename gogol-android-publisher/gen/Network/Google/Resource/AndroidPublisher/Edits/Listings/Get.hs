@@ -22,7 +22,7 @@
 --
 -- Fetches information about a localized store listing.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsListingsGet@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.listings.get@.
 module Network.Google.Resource.AndroidPublisher.Edits.Listings.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.Get
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsListingsGet@ method which the
+-- | A resource alias for @androidpublisher.edits.listings.get@ method which the
 -- 'EditsListingsGet'' request conforms to.
 type EditsListingsGetResource =
      Capture "packageName" Text :>
@@ -70,9 +70,9 @@ data EditsListingsGet' = EditsListingsGet'
 --
 -- * 'elgEditId'
 editsListingsGet'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'language'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'elgPackageName'
+    -> Text -- ^ 'elgLanguage'
+    -> Text -- ^ 'elgEditId'
     -> EditsListingsGet'
 editsListingsGet' pElgPackageName_ pElgLanguage_ pElgEditId_ =
     EditsListingsGet'

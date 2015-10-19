@@ -22,7 +22,7 @@
 --
 -- Deletes a sitemap from this site.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitemapsDelete@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sitemaps.delete@.
 module Network.Google.Resource.Webmasters.Sitemaps.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Webmasters.Sitemaps.Delete
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersSitemapsDelete@ method which the
+-- | A resource alias for @webmasters.sitemaps.delete@ method which the
 -- 'SitemapsDelete'' request conforms to.
 type SitemapsDeleteResource =
      "sites" :>
@@ -65,8 +65,8 @@ data SitemapsDelete' = SitemapsDelete'
 --
 -- * 'sitSiteURL'
 sitemapsDelete'
-    :: Text -- ^ 'feedpath'
-    -> Text -- ^ 'siteUrl'
+    :: Text -- ^ 'sitFeedpath'
+    -> Text -- ^ 'sitSiteURL'
     -> SitemapsDelete'
 sitemapsDelete' pSitFeedpath_ pSitSiteURL_ =
     SitemapsDelete'

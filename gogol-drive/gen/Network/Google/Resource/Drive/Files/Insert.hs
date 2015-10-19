@@ -22,7 +22,7 @@
 --
 -- Insert a new file.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesInsert@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.insert@.
 module Network.Google.Resource.Drive.Files.Insert
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Drive.Files.Insert
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesInsert@ method which the
+-- | A resource alias for @drive.files.insert@ method which the
 -- 'FilesInsert'' request conforms to.
 type FilesInsertResource =
      "files" :>
@@ -104,8 +104,8 @@ data FilesInsert' = FilesInsert'
 --
 -- * 'fiOCR'
 filesInsert'
-    :: File -- ^ 'payload'
-    -> Body -- ^ 'media'
+    :: File -- ^ 'fiPayload'
+    -> Body -- ^ 'fiMedia'
     -> FilesInsert'
 filesInsert' pFiPayload_ pFiMedia_ =
     FilesInsert'

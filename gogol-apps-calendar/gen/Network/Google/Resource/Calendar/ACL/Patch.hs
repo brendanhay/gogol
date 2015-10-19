@@ -22,7 +22,7 @@
 --
 -- Updates an access control rule. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarACLPatch@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.acl.patch@.
 module Network.Google.Resource.Calendar.ACL.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Calendar.ACL.Patch
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarACLPatch@ method which the
+-- | A resource alias for @calendar.acl.patch@ method which the
 -- 'ACLPatch'' request conforms to.
 type ACLPatchResource =
      "calendars" :>
@@ -70,9 +70,9 @@ data ACLPatch' = ACLPatch'
 --
 -- * 'apPayload'
 aclPatch'
-    :: Text -- ^ 'calendarId'
-    -> Text -- ^ 'ruleId'
-    -> ACLRule -- ^ 'payload'
+    :: Text -- ^ 'apCalendarId'
+    -> Text -- ^ 'apRuleId'
+    -> ACLRule -- ^ 'apPayload'
     -> ACLPatch'
 aclPatch' pApCalendarId_ pApRuleId_ pApPayload_ =
     ACLPatch'

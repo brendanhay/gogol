@@ -23,7 +23,7 @@
 -- Updates an existing creative field value. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldValuesPatch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeFieldValues.patch@.
 module Network.Google.Resource.DFAReporting.CreativeFieldValues.Patch
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeFieldValuesPatch@ method which the
+-- | A resource alias for @dfareporting.creativeFieldValues.patch@ method which the
 -- 'CreativeFieldValuesPatch'' request conforms to.
 type CreativeFieldValuesPatchResource =
      "userprofiles" :>
@@ -79,10 +79,10 @@ data CreativeFieldValuesPatch' = CreativeFieldValuesPatch'
 --
 -- * 'cfvpId'
 creativeFieldValuesPatch'
-    :: Int64 -- ^ 'creativeFieldId'
-    -> Int64 -- ^ 'profileId'
-    -> CreativeFieldValue -- ^ 'payload'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'cfvpCreativeFieldId'
+    -> Int64 -- ^ 'cfvpProFileId'
+    -> CreativeFieldValue -- ^ 'cfvpPayload'
+    -> Int64 -- ^ 'cfvpId'
     -> CreativeFieldValuesPatch'
 creativeFieldValuesPatch' pCfvpCreativeFieldId_ pCfvpProFileId_ pCfvpPayload_ pCfvpId_ =
     CreativeFieldValuesPatch'

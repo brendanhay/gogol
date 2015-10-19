@@ -22,7 +22,7 @@
 --
 -- Deletes the specified zone-specific operation resource.
 --
--- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerZoneOperationsDelete@.
+-- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @autoscaler.zoneOperations.delete@.
 module Network.Google.Resource.Autoscaler.ZoneOperations.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Autoscaler.ZoneOperations.Delete
 import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AutoscalerZoneOperationsDelete@ method which the
+-- | A resource alias for @autoscaler.zoneOperations.delete@ method which the
 -- 'ZoneOperationsDelete'' request conforms to.
 type ZoneOperationsDeleteResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data ZoneOperationsDelete' = ZoneOperationsDelete'
 --
 -- * 'zodZone'
 zoneOperationsDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'operation'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'zodProject'
+    -> Text -- ^ 'zodOperation'
+    -> Text -- ^ 'zodZone'
     -> ZoneOperationsDelete'
 zoneOperationsDelete' pZodProject_ pZodOperation_ pZodZone_ =
     ZoneOperationsDelete'

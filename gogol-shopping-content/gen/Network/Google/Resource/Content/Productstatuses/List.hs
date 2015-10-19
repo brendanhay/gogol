@@ -22,7 +22,7 @@
 --
 -- Lists the statuses of the products in your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentProductstatusesList@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.productstatuses.list@.
 module Network.Google.Resource.Content.Productstatuses.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Productstatuses.List
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentProductstatusesList@ method which the
+-- | A resource alias for @content.productstatuses.list@ method which the
 -- 'ProductstatusesList'' request conforms to.
 type ProductstatusesListResource =
      Capture "merchantId" Word64 :>
@@ -70,7 +70,7 @@ data ProductstatusesList' = ProductstatusesList'
 --
 -- * 'plMaxResults'
 productstatusesList'
-    :: Word64 -- ^ 'merchantId'
+    :: Word64 -- ^ 'plMerchantId'
     -> ProductstatusesList'
 productstatusesList' pPlMerchantId_ =
     ProductstatusesList'

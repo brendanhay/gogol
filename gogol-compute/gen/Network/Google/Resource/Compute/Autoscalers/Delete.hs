@@ -22,7 +22,7 @@
 --
 -- Deletes the specified autoscaler resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAutoscalersDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.autoscalers.delete@.
 module Network.Google.Resource.Compute.Autoscalers.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.Autoscalers.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeAutoscalersDelete@ method which the
+-- | A resource alias for @compute.autoscalers.delete@ method which the
 -- 'AutoscalersDelete'' request conforms to.
 type AutoscalersDeleteResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data AutoscalersDelete' = AutoscalersDelete'
 --
 -- * 'adAutoscaler'
 autoscalersDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Text -- ^ 'autoscaler'
+    :: Text -- ^ 'adProject'
+    -> Text -- ^ 'adZone'
+    -> Text -- ^ 'adAutoscaler'
     -> AutoscalersDelete'
 autoscalersDelete' pAdProject_ pAdZone_ pAdAutoscaler_ =
     AutoscalersDelete'

@@ -28,271 +28,271 @@ module Network.Google.Directory
 
     -- * Resources
 
-    -- ** AdminChannelsStop
+    -- ** admin.channels.stop
     , module Network.Google.Resource.Admin.Channels.Stop
 
-    -- ** DirectoryAspsDelete
+    -- ** directory.asps.delete
     , module Network.Google.Resource.Directory.Asps.Delete
 
-    -- ** DirectoryAspsGet
+    -- ** directory.asps.get
     , module Network.Google.Resource.Directory.Asps.Get
 
-    -- ** DirectoryAspsList
+    -- ** directory.asps.list
     , module Network.Google.Resource.Directory.Asps.List
 
-    -- ** DirectoryChromeosDevicesGet
+    -- ** directory.chromeosdevices.get
     , module Network.Google.Resource.Directory.ChromeosDevices.Get
 
-    -- ** DirectoryChromeosDevicesList
+    -- ** directory.chromeosdevices.list
     , module Network.Google.Resource.Directory.ChromeosDevices.List
 
-    -- ** DirectoryChromeosDevicesPatch
+    -- ** directory.chromeosdevices.patch
     , module Network.Google.Resource.Directory.ChromeosDevices.Patch
 
-    -- ** DirectoryChromeosDevicesUpdate
+    -- ** directory.chromeosdevices.update
     , module Network.Google.Resource.Directory.ChromeosDevices.Update
 
-    -- ** DirectoryCustomersGet
+    -- ** directory.customers.get
     , module Network.Google.Resource.Directory.Customers.Get
 
-    -- ** DirectoryCustomersPatch
+    -- ** directory.customers.patch
     , module Network.Google.Resource.Directory.Customers.Patch
 
-    -- ** DirectoryCustomersUpdate
+    -- ** directory.customers.update
     , module Network.Google.Resource.Directory.Customers.Update
 
-    -- ** DirectoryDomainAliasesDelete
+    -- ** directory.domainAliases.delete
     , module Network.Google.Resource.Directory.DomainAliases.Delete
 
-    -- ** DirectoryDomainAliasesGet
+    -- ** directory.domainAliases.get
     , module Network.Google.Resource.Directory.DomainAliases.Get
 
-    -- ** DirectoryDomainAliasesInsert
+    -- ** directory.domainAliases.insert
     , module Network.Google.Resource.Directory.DomainAliases.Insert
 
-    -- ** DirectoryDomainAliasesList
+    -- ** directory.domainAliases.list
     , module Network.Google.Resource.Directory.DomainAliases.List
 
-    -- ** DirectoryDomainsDelete
+    -- ** directory.domains.delete
     , module Network.Google.Resource.Directory.Domains.Delete
 
-    -- ** DirectoryDomainsGet
+    -- ** directory.domains.get
     , module Network.Google.Resource.Directory.Domains.Get
 
-    -- ** DirectoryDomainsInsert
+    -- ** directory.domains.insert
     , module Network.Google.Resource.Directory.Domains.Insert
 
-    -- ** DirectoryDomainsList
+    -- ** directory.domains.list
     , module Network.Google.Resource.Directory.Domains.List
 
-    -- ** DirectoryGroupsAliasesDelete
+    -- ** directory.groups.aliases.delete
     , module Network.Google.Resource.Directory.Groups.Aliases.Delete
 
-    -- ** DirectoryGroupsAliasesInsert
+    -- ** directory.groups.aliases.insert
     , module Network.Google.Resource.Directory.Groups.Aliases.Insert
 
-    -- ** DirectoryGroupsAliasesList
+    -- ** directory.groups.aliases.list
     , module Network.Google.Resource.Directory.Groups.Aliases.List
 
-    -- ** DirectoryGroupsDelete
+    -- ** directory.groups.delete
     , module Network.Google.Resource.Directory.Groups.Delete
 
-    -- ** DirectoryGroupsGet
+    -- ** directory.groups.get
     , module Network.Google.Resource.Directory.Groups.Get
 
-    -- ** DirectoryGroupsInsert
+    -- ** directory.groups.insert
     , module Network.Google.Resource.Directory.Groups.Insert
 
-    -- ** DirectoryGroupsList
+    -- ** directory.groups.list
     , module Network.Google.Resource.Directory.Groups.List
 
-    -- ** DirectoryGroupsPatch
+    -- ** directory.groups.patch
     , module Network.Google.Resource.Directory.Groups.Patch
 
-    -- ** DirectoryGroupsUpdate
+    -- ** directory.groups.update
     , module Network.Google.Resource.Directory.Groups.Update
 
-    -- ** DirectoryMembersDelete
+    -- ** directory.members.delete
     , module Network.Google.Resource.Directory.Members.Delete
 
-    -- ** DirectoryMembersGet
+    -- ** directory.members.get
     , module Network.Google.Resource.Directory.Members.Get
 
-    -- ** DirectoryMembersInsert
+    -- ** directory.members.insert
     , module Network.Google.Resource.Directory.Members.Insert
 
-    -- ** DirectoryMembersList
+    -- ** directory.members.list
     , module Network.Google.Resource.Directory.Members.List
 
-    -- ** DirectoryMembersPatch
+    -- ** directory.members.patch
     , module Network.Google.Resource.Directory.Members.Patch
 
-    -- ** DirectoryMembersUpdate
+    -- ** directory.members.update
     , module Network.Google.Resource.Directory.Members.Update
 
-    -- ** DirectoryMobileDevicesAction
+    -- ** directory.mobiledevices.action
     , module Network.Google.Resource.Directory.MobileDevices.Action
 
-    -- ** DirectoryMobileDevicesDelete
+    -- ** directory.mobiledevices.delete
     , module Network.Google.Resource.Directory.MobileDevices.Delete
 
-    -- ** DirectoryMobileDevicesGet
+    -- ** directory.mobiledevices.get
     , module Network.Google.Resource.Directory.MobileDevices.Get
 
-    -- ** DirectoryMobileDevicesList
+    -- ** directory.mobiledevices.list
     , module Network.Google.Resource.Directory.MobileDevices.List
 
-    -- ** DirectoryNotificationsDelete
+    -- ** directory.notifications.delete
     , module Network.Google.Resource.Directory.Notifications.Delete
 
-    -- ** DirectoryNotificationsGet
+    -- ** directory.notifications.get
     , module Network.Google.Resource.Directory.Notifications.Get
 
-    -- ** DirectoryNotificationsList
+    -- ** directory.notifications.list
     , module Network.Google.Resource.Directory.Notifications.List
 
-    -- ** DirectoryNotificationsPatch
+    -- ** directory.notifications.patch
     , module Network.Google.Resource.Directory.Notifications.Patch
 
-    -- ** DirectoryNotificationsUpdate
+    -- ** directory.notifications.update
     , module Network.Google.Resource.Directory.Notifications.Update
 
-    -- ** DirectoryOrgUnitsDelete
+    -- ** directory.orgunits.delete
     , module Network.Google.Resource.Directory.OrgUnits.Delete
 
-    -- ** DirectoryOrgUnitsGet
+    -- ** directory.orgunits.get
     , module Network.Google.Resource.Directory.OrgUnits.Get
 
-    -- ** DirectoryOrgUnitsInsert
+    -- ** directory.orgunits.insert
     , module Network.Google.Resource.Directory.OrgUnits.Insert
 
-    -- ** DirectoryOrgUnitsList
+    -- ** directory.orgunits.list
     , module Network.Google.Resource.Directory.OrgUnits.List
 
-    -- ** DirectoryOrgUnitsPatch
+    -- ** directory.orgunits.patch
     , module Network.Google.Resource.Directory.OrgUnits.Patch
 
-    -- ** DirectoryOrgUnitsUpdate
+    -- ** directory.orgunits.update
     , module Network.Google.Resource.Directory.OrgUnits.Update
 
-    -- ** DirectoryPrivilegesList
+    -- ** directory.privileges.list
     , module Network.Google.Resource.Directory.Privileges.List
 
-    -- ** DirectoryRoleAssignmentsDelete
+    -- ** directory.roleAssignments.delete
     , module Network.Google.Resource.Directory.RoleAssignments.Delete
 
-    -- ** DirectoryRoleAssignmentsGet
+    -- ** directory.roleAssignments.get
     , module Network.Google.Resource.Directory.RoleAssignments.Get
 
-    -- ** DirectoryRoleAssignmentsInsert
+    -- ** directory.roleAssignments.insert
     , module Network.Google.Resource.Directory.RoleAssignments.Insert
 
-    -- ** DirectoryRoleAssignmentsList
+    -- ** directory.roleAssignments.list
     , module Network.Google.Resource.Directory.RoleAssignments.List
 
-    -- ** DirectoryRolesDelete
+    -- ** directory.roles.delete
     , module Network.Google.Resource.Directory.Roles.Delete
 
-    -- ** DirectoryRolesGet
+    -- ** directory.roles.get
     , module Network.Google.Resource.Directory.Roles.Get
 
-    -- ** DirectoryRolesInsert
+    -- ** directory.roles.insert
     , module Network.Google.Resource.Directory.Roles.Insert
 
-    -- ** DirectoryRolesList
+    -- ** directory.roles.list
     , module Network.Google.Resource.Directory.Roles.List
 
-    -- ** DirectoryRolesPatch
+    -- ** directory.roles.patch
     , module Network.Google.Resource.Directory.Roles.Patch
 
-    -- ** DirectoryRolesUpdate
+    -- ** directory.roles.update
     , module Network.Google.Resource.Directory.Roles.Update
 
-    -- ** DirectorySchemasDelete
+    -- ** directory.schemas.delete
     , module Network.Google.Resource.Directory.Schemas.Delete
 
-    -- ** DirectorySchemasGet
+    -- ** directory.schemas.get
     , module Network.Google.Resource.Directory.Schemas.Get
 
-    -- ** DirectorySchemasInsert
+    -- ** directory.schemas.insert
     , module Network.Google.Resource.Directory.Schemas.Insert
 
-    -- ** DirectorySchemasList
+    -- ** directory.schemas.list
     , module Network.Google.Resource.Directory.Schemas.List
 
-    -- ** DirectorySchemasPatch
+    -- ** directory.schemas.patch
     , module Network.Google.Resource.Directory.Schemas.Patch
 
-    -- ** DirectorySchemasUpdate
+    -- ** directory.schemas.update
     , module Network.Google.Resource.Directory.Schemas.Update
 
-    -- ** DirectoryTokensDelete
+    -- ** directory.tokens.delete
     , module Network.Google.Resource.Directory.Tokens.Delete
 
-    -- ** DirectoryTokensGet
+    -- ** directory.tokens.get
     , module Network.Google.Resource.Directory.Tokens.Get
 
-    -- ** DirectoryTokensList
+    -- ** directory.tokens.list
     , module Network.Google.Resource.Directory.Tokens.List
 
-    -- ** DirectoryUsersAliasesDelete
+    -- ** directory.users.aliases.delete
     , module Network.Google.Resource.Directory.Users.Aliases.Delete
 
-    -- ** DirectoryUsersAliasesInsert
+    -- ** directory.users.aliases.insert
     , module Network.Google.Resource.Directory.Users.Aliases.Insert
 
-    -- ** DirectoryUsersAliasesList
+    -- ** directory.users.aliases.list
     , module Network.Google.Resource.Directory.Users.Aliases.List
 
-    -- ** DirectoryUsersAliasesWatch
+    -- ** directory.users.aliases.watch
     , module Network.Google.Resource.Directory.Users.Aliases.Watch
 
-    -- ** DirectoryUsersDelete
+    -- ** directory.users.delete
     , module Network.Google.Resource.Directory.Users.Delete
 
-    -- ** DirectoryUsersGet
+    -- ** directory.users.get
     , module Network.Google.Resource.Directory.Users.Get
 
-    -- ** DirectoryUsersInsert
+    -- ** directory.users.insert
     , module Network.Google.Resource.Directory.Users.Insert
 
-    -- ** DirectoryUsersList
+    -- ** directory.users.list
     , module Network.Google.Resource.Directory.Users.List
 
-    -- ** DirectoryUsersMakeAdmin
+    -- ** directory.users.makeAdmin
     , module Network.Google.Resource.Directory.Users.MakeAdmin
 
-    -- ** DirectoryUsersPatch
+    -- ** directory.users.patch
     , module Network.Google.Resource.Directory.Users.Patch
 
-    -- ** DirectoryUsersPhotosDelete
+    -- ** directory.users.photos.delete
     , module Network.Google.Resource.Directory.Users.Photos.Delete
 
-    -- ** DirectoryUsersPhotosGet
+    -- ** directory.users.photos.get
     , module Network.Google.Resource.Directory.Users.Photos.Get
 
-    -- ** DirectoryUsersPhotosPatch
+    -- ** directory.users.photos.patch
     , module Network.Google.Resource.Directory.Users.Photos.Patch
 
-    -- ** DirectoryUsersPhotosUpdate
+    -- ** directory.users.photos.update
     , module Network.Google.Resource.Directory.Users.Photos.Update
 
-    -- ** DirectoryUsersUndelete
+    -- ** directory.users.undelete
     , module Network.Google.Resource.Directory.Users.Undelete
 
-    -- ** DirectoryUsersUpdate
+    -- ** directory.users.update
     , module Network.Google.Resource.Directory.Users.Update
 
-    -- ** DirectoryUsersWatch
+    -- ** directory.users.watch
     , module Network.Google.Resource.Directory.Users.Watch
 
-    -- ** DirectoryVerificationCodesGenerate
+    -- ** directory.verificationCodes.generate
     , module Network.Google.Resource.Directory.VerificationCodes.Generate
 
-    -- ** DirectoryVerificationCodesInvalidate
+    -- ** directory.verificationCodes.invalidate
     , module Network.Google.Resource.Directory.VerificationCodes.Invalidate
 
-    -- ** DirectoryVerificationCodesList
+    -- ** directory.verificationCodes.list
     , module Network.Google.Resource.Directory.VerificationCodes.List
 
     -- * Types

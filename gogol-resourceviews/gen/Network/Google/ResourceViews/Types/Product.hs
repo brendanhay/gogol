@@ -822,7 +822,7 @@ newtype ListResourceResponseItemEndpoints = ListResourceResponseItemEndpoints
 --
 -- * 'lrrieAddtional'
 listResourceResponseItemEndpoints
-    :: HashMap Text [Int32] -- ^ 'addtional'
+    :: HashMap Text [Int32] -- ^ 'lrrieAddtional'
     -> ListResourceResponseItemEndpoints
 listResourceResponseItemEndpoints pLrrieAddtional_ =
     ListResourceResponseItemEndpoints

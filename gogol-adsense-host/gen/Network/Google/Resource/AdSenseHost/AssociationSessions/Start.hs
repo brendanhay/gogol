@@ -23,7 +23,7 @@
 -- Create an association session for initiating an association with an
 -- AdSense user.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAssociationSessionsStart@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.associationsessions.start@.
 module Network.Google.Resource.AdSenseHost.AssociationSessions.Start
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AdSenseHost.AssociationSessions.Start
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAssociationSessionsStart@ method which the
+-- | A resource alias for @adsensehost.associationsessions.start@ method which the
 -- 'AssociationSessionsStart'' request conforms to.
 type AssociationSessionsStartResource =
      "associationsessions" :>
@@ -80,8 +80,8 @@ data AssociationSessionsStart' = AssociationSessionsStart'
 --
 -- * 'assProductCode'
 associationSessionsStart'
-    :: Text -- ^ 'websiteUrl'
-    -> [AssociationSessionsStartProductCode] -- ^ 'productCode'
+    :: Text -- ^ 'assWebsiteURL'
+    -> [AssociationSessionsStartProductCode] -- ^ 'assProductCode'
     -> AssociationSessionsStart'
 associationSessionsStart' pAssWebsiteURL_ pAssProductCode_ =
     AssociationSessionsStart'

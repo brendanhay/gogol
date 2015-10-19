@@ -26,34 +26,34 @@ module Network.Google.YouTubeAnalytics
 
     -- * Resources
 
-    -- ** YouTubeAnalyticsBatchReportDefinitionsList
+    -- ** youtubeAnalytics.batchReportDefinitions.list
     , module Network.Google.Resource.YouTubeAnalytics.BatchReportDefinitions.List
 
-    -- ** YouTubeAnalyticsBatchReportsList
+    -- ** youtubeAnalytics.batchReports.list
     , module Network.Google.Resource.YouTubeAnalytics.BatchReports.List
 
-    -- ** YouTubeAnalyticsGroupItemsDelete
+    -- ** youtubeAnalytics.groupItems.delete
     , module Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
 
-    -- ** YouTubeAnalyticsGroupItemsInsert
+    -- ** youtubeAnalytics.groupItems.insert
     , module Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert
 
-    -- ** YouTubeAnalyticsGroupItemsList
+    -- ** youtubeAnalytics.groupItems.list
     , module Network.Google.Resource.YouTubeAnalytics.GroupItems.List
 
-    -- ** YouTubeAnalyticsGroupsDelete
+    -- ** youtubeAnalytics.groups.delete
     , module Network.Google.Resource.YouTubeAnalytics.Groups.Delete
 
-    -- ** YouTubeAnalyticsGroupsInsert
+    -- ** youtubeAnalytics.groups.insert
     , module Network.Google.Resource.YouTubeAnalytics.Groups.Insert
 
-    -- ** YouTubeAnalyticsGroupsList
+    -- ** youtubeAnalytics.groups.list
     , module Network.Google.Resource.YouTubeAnalytics.Groups.List
 
-    -- ** YouTubeAnalyticsGroupsUpdate
+    -- ** youtubeAnalytics.groups.update
     , module Network.Google.Resource.YouTubeAnalytics.Groups.Update
 
-    -- ** YouTubeAnalyticsReportsQuery
+    -- ** youtubeAnalytics.reports.query
     , module Network.Google.Resource.YouTubeAnalytics.Reports.Query
 
     -- * Types

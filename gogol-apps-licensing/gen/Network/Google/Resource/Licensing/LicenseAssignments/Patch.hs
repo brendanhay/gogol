@@ -22,7 +22,7 @@
 --
 -- Assign License. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @LicensingLicenseAssignmentsPatch@.
+-- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @licensing.licenseAssignments.patch@.
 module Network.Google.Resource.Licensing.LicenseAssignments.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Patch
 import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @LicensingLicenseAssignmentsPatch@ method which the
+-- | A resource alias for @licensing.licenseAssignments.patch@ method which the
 -- 'LicenseAssignmentsPatch'' request conforms to.
 type LicenseAssignmentsPatchResource =
      Capture "productId" Text :>
@@ -76,10 +76,10 @@ data LicenseAssignmentsPatch' = LicenseAssignmentsPatch'
 --
 -- * 'lapProductId'
 licenseAssignmentsPatch'
-    :: Text -- ^ 'skuId'
-    -> LicenseAssignment -- ^ 'payload'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'productId'
+    :: Text -- ^ 'lapSKUId'
+    -> LicenseAssignment -- ^ 'lapPayload'
+    -> Text -- ^ 'lapUserId'
+    -> Text -- ^ 'lapProductId'
     -> LicenseAssignmentsPatch'
 licenseAssignmentsPatch' pLapSKUId_ pLapPayload_ pLapUserId_ pLapProductId_ =
     LicenseAssignmentsPatch'

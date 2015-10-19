@@ -22,7 +22,7 @@
 --
 -- Updates a role.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryRolesUpdate@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.roles.update@.
 module Network.Google.Resource.Directory.Roles.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Directory.Roles.Update
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryRolesUpdate@ method which the
+-- | A resource alias for @directory.roles.update@ method which the
 -- 'RolesUpdate'' request conforms to.
 type RolesUpdateResource =
      "customer" :>
@@ -70,9 +70,9 @@ data RolesUpdate' = RolesUpdate'
 --
 -- * 'ruCustomer'
 rolesUpdate'
-    :: Role -- ^ 'payload'
-    -> Text -- ^ 'roleId'
-    -> Text -- ^ 'customer'
+    :: Role -- ^ 'ruPayload'
+    -> Text -- ^ 'ruRoleId'
+    -> Text -- ^ 'ruCustomer'
     -> RolesUpdate'
 rolesUpdate' pRuPayload_ pRuRoleId_ pRuCustomer_ =
     RolesUpdate'

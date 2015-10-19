@@ -26,22 +26,22 @@ module Network.Google.Datastore
 
     -- * Resources
 
-    -- ** DatastoreDatasetsAllocateIds
+    -- ** datastore.datasets.allocateIds
     , module Network.Google.Resource.Datastore.Datasets.AllocateIds
 
-    -- ** DatastoreDatasetsBeginTransaction
+    -- ** datastore.datasets.beginTransaction
     , module Network.Google.Resource.Datastore.Datasets.BeginTransaction
 
-    -- ** DatastoreDatasetsCommit
+    -- ** datastore.datasets.commit
     , module Network.Google.Resource.Datastore.Datasets.Commit
 
-    -- ** DatastoreDatasetsLookup
+    -- ** datastore.datasets.lookup
     , module Network.Google.Resource.Datastore.Datasets.Lookup
 
-    -- ** DatastoreDatasetsRollback
+    -- ** datastore.datasets.rollback
     , module Network.Google.Resource.Datastore.Datasets.Rollback
 
-    -- ** DatastoreDatasetsRunQuery
+    -- ** datastore.datasets.runQuery
     , module Network.Google.Resource.Datastore.Datasets.RunQuery
 
     -- * Types

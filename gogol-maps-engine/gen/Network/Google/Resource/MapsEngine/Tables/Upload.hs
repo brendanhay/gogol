@@ -26,7 +26,7 @@
 -- endpoint. See Table Upload in the Developer\'s Guide or Table.files:
 -- insert in the reference documentation for more information.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesUpload@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.tables.upload@.
 module Network.Google.Resource.MapsEngine.Tables.Upload
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.MapsEngine.Tables.Upload
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesUpload@ method which the
+-- | A resource alias for @mapsengine.tables.upload@ method which the
 -- 'TablesUpload'' request conforms to.
 type TablesUploadResource =
      "tables" :>
@@ -68,7 +68,7 @@ newtype TablesUpload' = TablesUpload'
 --
 -- * 'tuPayload'
 tablesUpload'
-    :: Table -- ^ 'payload'
+    :: Table -- ^ 'tuPayload'
     -> TablesUpload'
 tablesUpload' pTuPayload_ =
     TablesUpload'

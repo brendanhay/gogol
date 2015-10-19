@@ -22,7 +22,7 @@
 --
 -- Gets one resource by id.
 --
--- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference> for @GroupsSettingsGroupsGet@.
+-- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference> for @groupsSettings.groups.get@.
 module Network.Google.Resource.GroupsSettings.Groups.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.GroupsSettings.Groups.Get
 import           Network.Google.GroupsSettings.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GroupsSettingsGroupsGet@ method which the
+-- | A resource alias for @groupsSettings.groups.get@ method which the
 -- 'GroupsGet'' request conforms to.
 type GroupsGetResource =
      Capture "groupUniqueId" Text :>
@@ -58,7 +58,7 @@ newtype GroupsGet' = GroupsGet'
 --
 -- * 'ggGroupUniqueId'
 groupsGet'
-    :: Text -- ^ 'groupUniqueId'
+    :: Text -- ^ 'ggGroupUniqueId'
     -> GroupsGet'
 groupsGet' pGgGroupUniqueId_ =
     GroupsGet'

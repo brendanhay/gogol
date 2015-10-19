@@ -22,7 +22,7 @@
 --
 -- List all aliases for a user
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersAliasesList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.aliases.list@.
 module Network.Google.Resource.Directory.Users.Aliases.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Users.Aliases.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersAliasesList@ method which the
+-- | A resource alias for @directory.users.aliases.list@ method which the
 -- 'UsersAliasesList'' request conforms to.
 type UsersAliasesListResource =
      "users" :>
@@ -65,7 +65,7 @@ data UsersAliasesList' = UsersAliasesList'
 --
 -- * 'ualUserKey'
 usersAliasesList'
-    :: Text -- ^ 'userKey'
+    :: Text -- ^ 'ualUserKey'
     -> UsersAliasesList'
 usersAliasesList' pUalUserKey_ =
     UsersAliasesList'

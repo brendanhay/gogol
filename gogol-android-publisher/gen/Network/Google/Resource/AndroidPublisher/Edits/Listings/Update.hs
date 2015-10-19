@@ -22,7 +22,7 @@
 --
 -- Creates or updates a localized store listing.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsListingsUpdate@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.listings.update@.
 module Network.Google.Resource.AndroidPublisher.Edits.Listings.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.Update
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsListingsUpdate@ method which the
+-- | A resource alias for @androidpublisher.edits.listings.update@ method which the
 -- 'EditsListingsUpdate'' request conforms to.
 type EditsListingsUpdateResource =
      Capture "packageName" Text :>
@@ -75,10 +75,10 @@ data EditsListingsUpdate' = EditsListingsUpdate'
 --
 -- * 'eluEditId'
 editsListingsUpdate'
-    :: Text -- ^ 'packageName'
-    -> Listing -- ^ 'payload'
-    -> Text -- ^ 'language'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eluPackageName'
+    -> Listing -- ^ 'eluPayload'
+    -> Text -- ^ 'eluLanguage'
+    -> Text -- ^ 'eluEditId'
     -> EditsListingsUpdate'
 editsListingsUpdate' pEluPackageName_ pEluPayload_ pEluLanguage_ pEluEditId_ =
     EditsListingsUpdate'

@@ -22,7 +22,7 @@
 --
 -- Updates a notification.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryNotificationsUpdate@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.notifications.update@.
 module Network.Google.Resource.Directory.Notifications.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Directory.Notifications.Update
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryNotificationsUpdate@ method which the
+-- | A resource alias for @directory.notifications.update@ method which the
 -- 'NotificationsUpdate'' request conforms to.
 type NotificationsUpdateResource =
      "customer" :>
@@ -71,9 +71,9 @@ data NotificationsUpdate' = NotificationsUpdate'
 --
 -- * 'nuNotificationId'
 notificationsUpdate'
-    :: Notification -- ^ 'payload'
-    -> Text -- ^ 'customer'
-    -> Text -- ^ 'notificationId'
+    :: Notification -- ^ 'nuPayload'
+    -> Text -- ^ 'nuCustomer'
+    -> Text -- ^ 'nuNotificationId'
     -> NotificationsUpdate'
 notificationsUpdate' pNuPayload_ pNuCustomer_ pNuNotificationId_ =
     NotificationsUpdate'

@@ -22,7 +22,7 @@
 --
 -- Replaces SslCertificates for TargetHttpsProxy.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetHTTPSProxiesSetSSLCertificates@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetHttpsProxies.setSslCertificates@.
 module Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLCertificates
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLCertificates
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetHTTPSProxiesSetSSLCertificates@ method which the
+-- | A resource alias for @compute.targetHttpsProxies.setSslCertificates@ method which the
 -- 'TargetHTTPSProxiesSetSSLCertificates'' request conforms to.
 type TargetHTTPSProxiesSetSSLCertificatesResource =
      Capture "project" Text :>
@@ -72,9 +72,9 @@ data TargetHTTPSProxiesSetSSLCertificates' = TargetHTTPSProxiesSetSSLCertificate
 --
 -- * 'thpsscTargetHTTPSProxy'
 targetHTTPSProxiesSetSSLCertificates'
-    :: Text -- ^ 'project'
-    -> TargetHTTPSProxiesSetSSLCertificatesRequest -- ^ 'payload'
-    -> Text -- ^ 'targetHttpsProxy'
+    :: Text -- ^ 'thpsscProject'
+    -> TargetHTTPSProxiesSetSSLCertificatesRequest -- ^ 'thpsscPayload'
+    -> Text -- ^ 'thpsscTargetHTTPSProxy'
     -> TargetHTTPSProxiesSetSSLCertificates'
 targetHTTPSProxiesSetSSLCertificates' pThpsscProject_ pThpsscPayload_ pThpsscTargetHTTPSProxy_ =
     TargetHTTPSProxiesSetSSLCertificates'

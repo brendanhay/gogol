@@ -22,7 +22,7 @@
 --
 -- Restarts a Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesRestart@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.restart@.
 module Network.Google.Resource.SQL.Instances.Restart
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.SQL.Instances.Restart
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesRestart@ method which the
+-- | A resource alias for @sql.instances.restart@ method which the
 -- 'InstancesRestart'' request conforms to.
 type InstancesRestartResource =
      "projects" :>
@@ -66,8 +66,8 @@ data InstancesRestart' = InstancesRestart'
 --
 -- * 'irInstance'
 instancesRestart'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'irProject'
+    -> Text -- ^ 'irInstance'
     -> InstancesRestart'
 instancesRestart' pIrProject_ pIrInstance_ =
     InstancesRestart'

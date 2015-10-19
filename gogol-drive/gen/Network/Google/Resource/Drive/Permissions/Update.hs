@@ -22,7 +22,7 @@
 --
 -- Updates a permission.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsUpdate@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.permissions.update@.
 module Network.Google.Resource.Drive.Permissions.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Drive.Permissions.Update
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePermissionsUpdate@ method which the
+-- | A resource alias for @drive.permissions.update@ method which the
 -- 'PermissionsUpdate'' request conforms to.
 type PermissionsUpdateResource =
      "files" :>
@@ -75,9 +75,9 @@ data PermissionsUpdate' = PermissionsUpdate'
 --
 -- * 'puuPermissionId'
 permissionsUpdate'
-    :: Permission -- ^ 'payload'
-    -> Text -- ^ 'fileId'
-    -> Text -- ^ 'permissionId'
+    :: Permission -- ^ 'puuPayload'
+    -> Text -- ^ 'puuFileId'
+    -> Text -- ^ 'puuPermissionId'
     -> PermissionsUpdate'
 permissionsUpdate' pPuuPayload_ pPuuFileId_ pPuuPermissionId_ =
     PermissionsUpdate'

@@ -23,7 +23,7 @@
 -- Rolls back the update in state from ROLLING_FORWARD or PAUSED. Has no
 -- effect if invoked when the state of the update is ROLLED_BACK.
 --
--- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesRollback@.
+-- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.rollingUpdates.rollback@.
 module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Rollback
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Rollback
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
--- | A resource alias for @ReplicapoolupdaterRollingUpdatesRollback@ method which the
+-- | A resource alias for @replicapoolupdater.rollingUpdates.rollback@ method which the
 -- 'RollingUpdatesRollback'' request conforms to.
 type RollingUpdatesRollbackResource =
      Capture "project" Text :>
@@ -73,9 +73,9 @@ data RollingUpdatesRollback' = RollingUpdatesRollback'
 --
 -- * 'rurZone'
 rollingUpdatesRollback'
-    :: Text -- ^ 'rollingUpdate'
-    -> Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'rurRollingUpdate'
+    -> Text -- ^ 'rurProject'
+    -> Text -- ^ 'rurZone'
     -> RollingUpdatesRollback'
 rollingUpdatesRollback' pRurRollingUpdate_ pRurProject_ pRurZone_ =
     RollingUpdatesRollback'

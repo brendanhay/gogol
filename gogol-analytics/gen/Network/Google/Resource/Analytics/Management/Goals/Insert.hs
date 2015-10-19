@@ -22,7 +22,7 @@
 --
 -- Create a new goal.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementGoalsInsert@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.goals.insert@.
 module Network.Google.Resource.Analytics.Management.Goals.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.Goals.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementGoalsInsert@ method which the
+-- | A resource alias for @analytics.management.goals.insert@ method which the
 -- 'ManagementGoalsInsert'' request conforms to.
 type ManagementGoalsInsertResource =
      "management" :>
@@ -78,10 +78,10 @@ data ManagementGoalsInsert' = ManagementGoalsInsert'
 --
 -- * 'mgiAccountId'
 managementGoalsInsert'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Goal -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mgiWebPropertyId'
+    -> Text -- ^ 'mgiProFileId'
+    -> Goal -- ^ 'mgiPayload'
+    -> Text -- ^ 'mgiAccountId'
     -> ManagementGoalsInsert'
 managementGoalsInsert' pMgiWebPropertyId_ pMgiProFileId_ pMgiPayload_ pMgiAccountId_ =
     ManagementGoalsInsert'

@@ -22,7 +22,7 @@
 --
 -- Lists the products in your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentProductsList@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.products.list@.
 module Network.Google.Resource.Content.Products.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Products.List
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentProductsList@ method which the
+-- | A resource alias for @content.products.list@ method which the
 -- 'ProductsList'' request conforms to.
 type ProductsListResource =
      Capture "merchantId" Word64 :>
@@ -70,7 +70,7 @@ data ProductsList' = ProductsList'
 --
 -- * 'proMaxResults'
 productsList'
-    :: Word64 -- ^ 'merchantId'
+    :: Word64 -- ^ 'proMerchantId'
     -> ProductsList'
 productsList' pProMerchantId_ =
     ProductsList'

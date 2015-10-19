@@ -22,7 +22,7 @@
 --
 -- Updates an existing subaccount.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSubAccountsUpdate@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.subaccounts.update@.
 module Network.Google.Resource.DFAReporting.SubAccounts.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSubAccountsUpdate@ method which the
+-- | A resource alias for @dfareporting.subaccounts.update@ method which the
 -- 'SubAccountsUpdate'' request conforms to.
 type SubAccountsUpdateResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data SubAccountsUpdate' = SubAccountsUpdate'
 --
 -- * 'sauPayload'
 subAccountsUpdate'
-    :: Int64 -- ^ 'profileId'
-    -> SubAccount -- ^ 'payload'
+    :: Int64 -- ^ 'sauProFileId'
+    -> SubAccount -- ^ 'sauPayload'
     -> SubAccountsUpdate'
 subAccountsUpdate' pSauProFileId_ pSauPayload_ =
     SubAccountsUpdate'

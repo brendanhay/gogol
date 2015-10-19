@@ -22,7 +22,7 @@
 --
 -- Create a layer asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineLayersCreate@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.layers.create@.
 module Network.Google.Resource.MapsEngine.Layers.Create
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.MapsEngine.Layers.Create
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersCreate@ method which the
+-- | A resource alias for @mapsengine.layers.create@ method which the
 -- 'LayersCreate'' request conforms to.
 type LayersCreateResource =
      "layers" :>
@@ -64,7 +64,7 @@ data LayersCreate' = LayersCreate'
 --
 -- * 'lcPayload'
 layersCreate'
-    :: Layer -- ^ 'payload'
+    :: Layer -- ^ 'lcPayload'
     -> LayersCreate'
 layersCreate' pLcPayload_ =
     LayersCreate'

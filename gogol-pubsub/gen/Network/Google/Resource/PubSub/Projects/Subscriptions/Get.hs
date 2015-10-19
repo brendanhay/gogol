@@ -22,7 +22,7 @@
 --
 -- Gets the configuration details of a subscription.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsGet@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.get@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Get
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Get
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsSubscriptionsGet@ method which the
+-- | A resource alias for @pubsub.projects.subscriptions.get@ method which the
 -- 'ProjectsSubscriptionsGet'' request conforms to.
 type ProjectsSubscriptionsGetResource =
      "v1" :>
@@ -94,7 +94,7 @@ data ProjectsSubscriptionsGet' = ProjectsSubscriptionsGet'
 --
 -- * 'psgCallback'
 projectsSubscriptionsGet'
-    :: Text -- ^ 'subscription'
+    :: Text -- ^ 'psgSubscription'
     -> ProjectsSubscriptionsGet'
 projectsSubscriptionsGet' pPsgSubscription_ =
     ProjectsSubscriptionsGet'

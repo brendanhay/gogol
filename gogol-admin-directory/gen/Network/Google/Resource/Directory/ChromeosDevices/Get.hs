@@ -22,7 +22,7 @@
 --
 -- Retrieve Chrome OS Device
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryChromeosDevicesGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.chromeosdevices.get@.
 module Network.Google.Resource.Directory.ChromeosDevices.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Directory.ChromeosDevices.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryChromeosDevicesGet@ method which the
+-- | A resource alias for @directory.chromeosdevices.get@ method which the
 -- 'ChromeosDevicesGet'' request conforms to.
 type ChromeosDevicesGetResource =
      "customer" :>
@@ -73,8 +73,8 @@ data ChromeosDevicesGet' = ChromeosDevicesGet'
 --
 -- * 'cdgProjection'
 chromeosDevicesGet'
-    :: Text -- ^ 'customerId'
-    -> Text -- ^ 'deviceId'
+    :: Text -- ^ 'cdgCustomerId'
+    -> Text -- ^ 'cdgDeviceId'
     -> ChromeosDevicesGet'
 chromeosDevicesGet' pCdgCustomerId_ pCdgDeviceId_ =
     ChromeosDevicesGet'

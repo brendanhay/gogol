@@ -23,7 +23,7 @@
 -- Given one or more beacon observations, returns any beacon information
 -- and attachments accessible to your application.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconInfoGetforObserved@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beaconinfo.getforobserved@.
 module Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconBeaconInfoGetforObserved@ method which the
+-- | A resource alias for @proximitybeacon.beaconinfo.getforobserved@ method which the
 -- 'BeaconInfoGetforObserved'' request conforms to.
 type BeaconInfoGetforObservedResource =
      "v1beta1" :>
@@ -98,7 +98,7 @@ data BeaconInfoGetforObserved' = BeaconInfoGetforObserved'
 --
 -- * 'bigoCallback'
 beaconInfoGetforObserved'
-    :: GetInfoForObservedBeaconsRequest -- ^ 'payload'
+    :: GetInfoForObservedBeaconsRequest -- ^ 'bigoPayload'
     -> BeaconInfoGetforObserved'
 beaconInfoGetforObserved' pBigoPayload_ =
     BeaconInfoGetforObserved'

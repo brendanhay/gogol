@@ -22,7 +22,7 @@
 --
 -- Updates an existing campaign. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCampaignsPatch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.campaigns.patch@.
 module Network.Google.Resource.DFAReporting.Campaigns.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.Campaigns.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCampaignsPatch@ method which the
+-- | A resource alias for @dfareporting.campaigns.patch@ method which the
 -- 'CampaignsPatch'' request conforms to.
 type CampaignsPatchResource =
      "userprofiles" :>
@@ -70,9 +70,9 @@ data CampaignsPatch' = CampaignsPatch'
 --
 -- * 'cpId'
 campaignsPatch'
-    :: Int64 -- ^ 'profileId'
-    -> Campaign -- ^ 'payload'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'cpProFileId'
+    -> Campaign -- ^ 'cpPayload'
+    -> Int64 -- ^ 'cpId'
     -> CampaignsPatch'
 campaignsPatch' pCpProFileId_ pCpPayload_ pCpId_ =
     CampaignsPatch'

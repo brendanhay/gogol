@@ -26,574 +26,574 @@ module Network.Google.Compute
 
     -- * Resources
 
-    -- ** ComputeAddressesAggregatedList
+    -- ** compute.addresses.aggregatedList
     , module Network.Google.Resource.Compute.Addresses.AggregatedList
 
-    -- ** ComputeAddressesDelete
+    -- ** compute.addresses.delete
     , module Network.Google.Resource.Compute.Addresses.Delete
 
-    -- ** ComputeAddressesGet
+    -- ** compute.addresses.get
     , module Network.Google.Resource.Compute.Addresses.Get
 
-    -- ** ComputeAddressesInsert
+    -- ** compute.addresses.insert
     , module Network.Google.Resource.Compute.Addresses.Insert
 
-    -- ** ComputeAddressesList
+    -- ** compute.addresses.list
     , module Network.Google.Resource.Compute.Addresses.List
 
-    -- ** ComputeAutoscalersAggregatedList
+    -- ** compute.autoscalers.aggregatedList
     , module Network.Google.Resource.Compute.Autoscalers.AggregatedList
 
-    -- ** ComputeAutoscalersDelete
+    -- ** compute.autoscalers.delete
     , module Network.Google.Resource.Compute.Autoscalers.Delete
 
-    -- ** ComputeAutoscalersGet
+    -- ** compute.autoscalers.get
     , module Network.Google.Resource.Compute.Autoscalers.Get
 
-    -- ** ComputeAutoscalersInsert
+    -- ** compute.autoscalers.insert
     , module Network.Google.Resource.Compute.Autoscalers.Insert
 
-    -- ** ComputeAutoscalersList
+    -- ** compute.autoscalers.list
     , module Network.Google.Resource.Compute.Autoscalers.List
 
-    -- ** ComputeAutoscalersPatch
+    -- ** compute.autoscalers.patch
     , module Network.Google.Resource.Compute.Autoscalers.Patch
 
-    -- ** ComputeAutoscalersUpdate
+    -- ** compute.autoscalers.update
     , module Network.Google.Resource.Compute.Autoscalers.Update
 
-    -- ** ComputeBackendServicesDelete
+    -- ** compute.backendServices.delete
     , module Network.Google.Resource.Compute.BackendServices.Delete
 
-    -- ** ComputeBackendServicesGet
+    -- ** compute.backendServices.get
     , module Network.Google.Resource.Compute.BackendServices.Get
 
-    -- ** ComputeBackendServicesGetHealth
+    -- ** compute.backendServices.getHealth
     , module Network.Google.Resource.Compute.BackendServices.GetHealth
 
-    -- ** ComputeBackendServicesInsert
+    -- ** compute.backendServices.insert
     , module Network.Google.Resource.Compute.BackendServices.Insert
 
-    -- ** ComputeBackendServicesList
+    -- ** compute.backendServices.list
     , module Network.Google.Resource.Compute.BackendServices.List
 
-    -- ** ComputeBackendServicesPatch
+    -- ** compute.backendServices.patch
     , module Network.Google.Resource.Compute.BackendServices.Patch
 
-    -- ** ComputeBackendServicesUpdate
+    -- ** compute.backendServices.update
     , module Network.Google.Resource.Compute.BackendServices.Update
 
-    -- ** ComputeDiskTypesAggregatedList
+    -- ** compute.diskTypes.aggregatedList
     , module Network.Google.Resource.Compute.DiskTypes.AggregatedList
 
-    -- ** ComputeDiskTypesGet
+    -- ** compute.diskTypes.get
     , module Network.Google.Resource.Compute.DiskTypes.Get
 
-    -- ** ComputeDiskTypesList
+    -- ** compute.diskTypes.list
     , module Network.Google.Resource.Compute.DiskTypes.List
 
-    -- ** ComputeDisksAggregatedList
+    -- ** compute.disks.aggregatedList
     , module Network.Google.Resource.Compute.Disks.AggregatedList
 
-    -- ** ComputeDisksCreateSnapshot
+    -- ** compute.disks.createSnapshot
     , module Network.Google.Resource.Compute.Disks.CreateSnapshot
 
-    -- ** ComputeDisksDelete
+    -- ** compute.disks.delete
     , module Network.Google.Resource.Compute.Disks.Delete
 
-    -- ** ComputeDisksGet
+    -- ** compute.disks.get
     , module Network.Google.Resource.Compute.Disks.Get
 
-    -- ** ComputeDisksInsert
+    -- ** compute.disks.insert
     , module Network.Google.Resource.Compute.Disks.Insert
 
-    -- ** ComputeDisksList
+    -- ** compute.disks.list
     , module Network.Google.Resource.Compute.Disks.List
 
-    -- ** ComputeFirewallsDelete
+    -- ** compute.firewalls.delete
     , module Network.Google.Resource.Compute.Firewalls.Delete
 
-    -- ** ComputeFirewallsGet
+    -- ** compute.firewalls.get
     , module Network.Google.Resource.Compute.Firewalls.Get
 
-    -- ** ComputeFirewallsInsert
+    -- ** compute.firewalls.insert
     , module Network.Google.Resource.Compute.Firewalls.Insert
 
-    -- ** ComputeFirewallsList
+    -- ** compute.firewalls.list
     , module Network.Google.Resource.Compute.Firewalls.List
 
-    -- ** ComputeFirewallsPatch
+    -- ** compute.firewalls.patch
     , module Network.Google.Resource.Compute.Firewalls.Patch
 
-    -- ** ComputeFirewallsUpdate
+    -- ** compute.firewalls.update
     , module Network.Google.Resource.Compute.Firewalls.Update
 
-    -- ** ComputeForwardingRulesAggregatedList
+    -- ** compute.forwardingRules.aggregatedList
     , module Network.Google.Resource.Compute.ForwardingRules.AggregatedList
 
-    -- ** ComputeForwardingRulesDelete
+    -- ** compute.forwardingRules.delete
     , module Network.Google.Resource.Compute.ForwardingRules.Delete
 
-    -- ** ComputeForwardingRulesGet
+    -- ** compute.forwardingRules.get
     , module Network.Google.Resource.Compute.ForwardingRules.Get
 
-    -- ** ComputeForwardingRulesInsert
+    -- ** compute.forwardingRules.insert
     , module Network.Google.Resource.Compute.ForwardingRules.Insert
 
-    -- ** ComputeForwardingRulesList
+    -- ** compute.forwardingRules.list
     , module Network.Google.Resource.Compute.ForwardingRules.List
 
-    -- ** ComputeForwardingRulesSetTarget
+    -- ** compute.forwardingRules.setTarget
     , module Network.Google.Resource.Compute.ForwardingRules.SetTarget
 
-    -- ** ComputeGlobalAddressesDelete
+    -- ** compute.globalAddresses.delete
     , module Network.Google.Resource.Compute.GlobalAddresses.Delete
 
-    -- ** ComputeGlobalAddressesGet
+    -- ** compute.globalAddresses.get
     , module Network.Google.Resource.Compute.GlobalAddresses.Get
 
-    -- ** ComputeGlobalAddressesInsert
+    -- ** compute.globalAddresses.insert
     , module Network.Google.Resource.Compute.GlobalAddresses.Insert
 
-    -- ** ComputeGlobalAddressesList
+    -- ** compute.globalAddresses.list
     , module Network.Google.Resource.Compute.GlobalAddresses.List
 
-    -- ** ComputeGlobalForwardingRulesDelete
+    -- ** compute.globalForwardingRules.delete
     , module Network.Google.Resource.Compute.GlobalForwardingRules.Delete
 
-    -- ** ComputeGlobalForwardingRulesGet
+    -- ** compute.globalForwardingRules.get
     , module Network.Google.Resource.Compute.GlobalForwardingRules.Get
 
-    -- ** ComputeGlobalForwardingRulesInsert
+    -- ** compute.globalForwardingRules.insert
     , module Network.Google.Resource.Compute.GlobalForwardingRules.Insert
 
-    -- ** ComputeGlobalForwardingRulesList
+    -- ** compute.globalForwardingRules.list
     , module Network.Google.Resource.Compute.GlobalForwardingRules.List
 
-    -- ** ComputeGlobalForwardingRulesSetTarget
+    -- ** compute.globalForwardingRules.setTarget
     , module Network.Google.Resource.Compute.GlobalForwardingRules.SetTarget
 
-    -- ** ComputeGlobalOperationsAggregatedList
+    -- ** compute.globalOperations.aggregatedList
     , module Network.Google.Resource.Compute.GlobalOperations.AggregatedList
 
-    -- ** ComputeGlobalOperationsDelete
+    -- ** compute.globalOperations.delete
     , module Network.Google.Resource.Compute.GlobalOperations.Delete
 
-    -- ** ComputeGlobalOperationsGet
+    -- ** compute.globalOperations.get
     , module Network.Google.Resource.Compute.GlobalOperations.Get
 
-    -- ** ComputeGlobalOperationsList
+    -- ** compute.globalOperations.list
     , module Network.Google.Resource.Compute.GlobalOperations.List
 
-    -- ** ComputeHTTPHealthChecksDelete
+    -- ** compute.httpHealthChecks.delete
     , module Network.Google.Resource.Compute.HTTPHealthChecks.Delete
 
-    -- ** ComputeHTTPHealthChecksGet
+    -- ** compute.httpHealthChecks.get
     , module Network.Google.Resource.Compute.HTTPHealthChecks.Get
 
-    -- ** ComputeHTTPHealthChecksInsert
+    -- ** compute.httpHealthChecks.insert
     , module Network.Google.Resource.Compute.HTTPHealthChecks.Insert
 
-    -- ** ComputeHTTPHealthChecksList
+    -- ** compute.httpHealthChecks.list
     , module Network.Google.Resource.Compute.HTTPHealthChecks.List
 
-    -- ** ComputeHTTPHealthChecksPatch
+    -- ** compute.httpHealthChecks.patch
     , module Network.Google.Resource.Compute.HTTPHealthChecks.Patch
 
-    -- ** ComputeHTTPHealthChecksUpdate
+    -- ** compute.httpHealthChecks.update
     , module Network.Google.Resource.Compute.HTTPHealthChecks.Update
 
-    -- ** ComputeHTTPSHealthChecksDelete
+    -- ** compute.httpsHealthChecks.delete
     , module Network.Google.Resource.Compute.HTTPSHealthChecks.Delete
 
-    -- ** ComputeHTTPSHealthChecksGet
+    -- ** compute.httpsHealthChecks.get
     , module Network.Google.Resource.Compute.HTTPSHealthChecks.Get
 
-    -- ** ComputeHTTPSHealthChecksInsert
+    -- ** compute.httpsHealthChecks.insert
     , module Network.Google.Resource.Compute.HTTPSHealthChecks.Insert
 
-    -- ** ComputeHTTPSHealthChecksList
+    -- ** compute.httpsHealthChecks.list
     , module Network.Google.Resource.Compute.HTTPSHealthChecks.List
 
-    -- ** ComputeHTTPSHealthChecksPatch
+    -- ** compute.httpsHealthChecks.patch
     , module Network.Google.Resource.Compute.HTTPSHealthChecks.Patch
 
-    -- ** ComputeHTTPSHealthChecksUpdate
+    -- ** compute.httpsHealthChecks.update
     , module Network.Google.Resource.Compute.HTTPSHealthChecks.Update
 
-    -- ** ComputeImagesDelete
+    -- ** compute.images.delete
     , module Network.Google.Resource.Compute.Images.Delete
 
-    -- ** ComputeImagesDeprecate
+    -- ** compute.images.deprecate
     , module Network.Google.Resource.Compute.Images.Deprecate
 
-    -- ** ComputeImagesGet
+    -- ** compute.images.get
     , module Network.Google.Resource.Compute.Images.Get
 
-    -- ** ComputeImagesInsert
+    -- ** compute.images.insert
     , module Network.Google.Resource.Compute.Images.Insert
 
-    -- ** ComputeImagesList
+    -- ** compute.images.list
     , module Network.Google.Resource.Compute.Images.List
 
-    -- ** ComputeInstanceGroupManagersAbandonInstances
+    -- ** compute.instanceGroupManagers.abandonInstances
     , module Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
 
-    -- ** ComputeInstanceGroupManagersAggregatedList
+    -- ** compute.instanceGroupManagers.aggregatedList
     , module Network.Google.Resource.Compute.InstanceGroupManagers.AggregatedList
 
-    -- ** ComputeInstanceGroupManagersDelete
+    -- ** compute.instanceGroupManagers.delete
     , module Network.Google.Resource.Compute.InstanceGroupManagers.Delete
 
-    -- ** ComputeInstanceGroupManagersDeleteInstances
+    -- ** compute.instanceGroupManagers.deleteInstances
     , module Network.Google.Resource.Compute.InstanceGroupManagers.DeleteInstances
 
-    -- ** ComputeInstanceGroupManagersGet
+    -- ** compute.instanceGroupManagers.get
     , module Network.Google.Resource.Compute.InstanceGroupManagers.Get
 
-    -- ** ComputeInstanceGroupManagersInsert
+    -- ** compute.instanceGroupManagers.insert
     , module Network.Google.Resource.Compute.InstanceGroupManagers.Insert
 
-    -- ** ComputeInstanceGroupManagersList
+    -- ** compute.instanceGroupManagers.list
     , module Network.Google.Resource.Compute.InstanceGroupManagers.List
 
-    -- ** ComputeInstanceGroupManagersListManagedInstances
+    -- ** compute.instanceGroupManagers.listManagedInstances
     , module Network.Google.Resource.Compute.InstanceGroupManagers.ListManagedInstances
 
-    -- ** ComputeInstanceGroupManagersRecreateInstances
+    -- ** compute.instanceGroupManagers.recreateInstances
     , module Network.Google.Resource.Compute.InstanceGroupManagers.RecreateInstances
 
-    -- ** ComputeInstanceGroupManagersResize
+    -- ** compute.instanceGroupManagers.resize
     , module Network.Google.Resource.Compute.InstanceGroupManagers.Resize
 
-    -- ** ComputeInstanceGroupManagersSetInstanceTemplate
+    -- ** compute.instanceGroupManagers.setInstanceTemplate
     , module Network.Google.Resource.Compute.InstanceGroupManagers.SetInstanceTemplate
 
-    -- ** ComputeInstanceGroupManagersSetTargetPools
+    -- ** compute.instanceGroupManagers.setTargetPools
     , module Network.Google.Resource.Compute.InstanceGroupManagers.SetTargetPools
 
-    -- ** ComputeInstanceGroupsAddInstances
+    -- ** compute.instanceGroups.addInstances
     , module Network.Google.Resource.Compute.InstanceGroups.AddInstances
 
-    -- ** ComputeInstanceGroupsAggregatedList
+    -- ** compute.instanceGroups.aggregatedList
     , module Network.Google.Resource.Compute.InstanceGroups.AggregatedList
 
-    -- ** ComputeInstanceGroupsDelete
+    -- ** compute.instanceGroups.delete
     , module Network.Google.Resource.Compute.InstanceGroups.Delete
 
-    -- ** ComputeInstanceGroupsGet
+    -- ** compute.instanceGroups.get
     , module Network.Google.Resource.Compute.InstanceGroups.Get
 
-    -- ** ComputeInstanceGroupsInsert
+    -- ** compute.instanceGroups.insert
     , module Network.Google.Resource.Compute.InstanceGroups.Insert
 
-    -- ** ComputeInstanceGroupsList
+    -- ** compute.instanceGroups.list
     , module Network.Google.Resource.Compute.InstanceGroups.List
 
-    -- ** ComputeInstanceGroupsListInstances
+    -- ** compute.instanceGroups.listInstances
     , module Network.Google.Resource.Compute.InstanceGroups.ListInstances
 
-    -- ** ComputeInstanceGroupsRemoveInstances
+    -- ** compute.instanceGroups.removeInstances
     , module Network.Google.Resource.Compute.InstanceGroups.RemoveInstances
 
-    -- ** ComputeInstanceGroupsSetNamedPorts
+    -- ** compute.instanceGroups.setNamedPorts
     , module Network.Google.Resource.Compute.InstanceGroups.SetNamedPorts
 
-    -- ** ComputeInstanceTemplatesDelete
+    -- ** compute.instanceTemplates.delete
     , module Network.Google.Resource.Compute.InstanceTemplates.Delete
 
-    -- ** ComputeInstanceTemplatesGet
+    -- ** compute.instanceTemplates.get
     , module Network.Google.Resource.Compute.InstanceTemplates.Get
 
-    -- ** ComputeInstanceTemplatesInsert
+    -- ** compute.instanceTemplates.insert
     , module Network.Google.Resource.Compute.InstanceTemplates.Insert
 
-    -- ** ComputeInstanceTemplatesList
+    -- ** compute.instanceTemplates.list
     , module Network.Google.Resource.Compute.InstanceTemplates.List
 
-    -- ** ComputeInstancesAddAccessConfig
+    -- ** compute.instances.addAccessConfig
     , module Network.Google.Resource.Compute.Instances.AddAccessConfig
 
-    -- ** ComputeInstancesAggregatedList
+    -- ** compute.instances.aggregatedList
     , module Network.Google.Resource.Compute.Instances.AggregatedList
 
-    -- ** ComputeInstancesAttachDisk
+    -- ** compute.instances.attachDisk
     , module Network.Google.Resource.Compute.Instances.AttachDisk
 
-    -- ** ComputeInstancesDelete
+    -- ** compute.instances.delete
     , module Network.Google.Resource.Compute.Instances.Delete
 
-    -- ** ComputeInstancesDeleteAccessConfig
+    -- ** compute.instances.deleteAccessConfig
     , module Network.Google.Resource.Compute.Instances.DeleteAccessConfig
 
-    -- ** ComputeInstancesDetachDisk
+    -- ** compute.instances.detachDisk
     , module Network.Google.Resource.Compute.Instances.DetachDisk
 
-    -- ** ComputeInstancesGet
+    -- ** compute.instances.get
     , module Network.Google.Resource.Compute.Instances.Get
 
-    -- ** ComputeInstancesGetSerialPortOutput
+    -- ** compute.instances.getSerialPortOutput
     , module Network.Google.Resource.Compute.Instances.GetSerialPortOutput
 
-    -- ** ComputeInstancesInsert
+    -- ** compute.instances.insert
     , module Network.Google.Resource.Compute.Instances.Insert
 
-    -- ** ComputeInstancesList
+    -- ** compute.instances.list
     , module Network.Google.Resource.Compute.Instances.List
 
-    -- ** ComputeInstancesReset
+    -- ** compute.instances.reset
     , module Network.Google.Resource.Compute.Instances.Reset
 
-    -- ** ComputeInstancesSetDiskAutoDelete
+    -- ** compute.instances.setDiskAutoDelete
     , module Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
 
-    -- ** ComputeInstancesSetMetadata
+    -- ** compute.instances.setMetadata
     , module Network.Google.Resource.Compute.Instances.SetMetadata
 
-    -- ** ComputeInstancesSetScheduling
+    -- ** compute.instances.setScheduling
     , module Network.Google.Resource.Compute.Instances.SetScheduling
 
-    -- ** ComputeInstancesSetTags
+    -- ** compute.instances.setTags
     , module Network.Google.Resource.Compute.Instances.SetTags
 
-    -- ** ComputeInstancesStart
+    -- ** compute.instances.start
     , module Network.Google.Resource.Compute.Instances.Start
 
-    -- ** ComputeInstancesStop
+    -- ** compute.instances.stop
     , module Network.Google.Resource.Compute.Instances.Stop
 
-    -- ** ComputeLicensesGet
+    -- ** compute.licenses.get
     , module Network.Google.Resource.Compute.Licenses.Get
 
-    -- ** ComputeMachineTypesAggregatedList
+    -- ** compute.machineTypes.aggregatedList
     , module Network.Google.Resource.Compute.MachineTypes.AggregatedList
 
-    -- ** ComputeMachineTypesGet
+    -- ** compute.machineTypes.get
     , module Network.Google.Resource.Compute.MachineTypes.Get
 
-    -- ** ComputeMachineTypesList
+    -- ** compute.machineTypes.list
     , module Network.Google.Resource.Compute.MachineTypes.List
 
-    -- ** ComputeNetworksDelete
+    -- ** compute.networks.delete
     , module Network.Google.Resource.Compute.Networks.Delete
 
-    -- ** ComputeNetworksGet
+    -- ** compute.networks.get
     , module Network.Google.Resource.Compute.Networks.Get
 
-    -- ** ComputeNetworksInsert
+    -- ** compute.networks.insert
     , module Network.Google.Resource.Compute.Networks.Insert
 
-    -- ** ComputeNetworksList
+    -- ** compute.networks.list
     , module Network.Google.Resource.Compute.Networks.List
 
-    -- ** ComputeProjectsGet
+    -- ** compute.projects.get
     , module Network.Google.Resource.Compute.Projects.Get
 
-    -- ** ComputeProjectsMoveDisk
+    -- ** compute.projects.moveDisk
     , module Network.Google.Resource.Compute.Projects.MoveDisk
 
-    -- ** ComputeProjectsMoveInstance
+    -- ** compute.projects.moveInstance
     , module Network.Google.Resource.Compute.Projects.MoveInstance
 
-    -- ** ComputeProjectsSetCommonInstanceMetadata
+    -- ** compute.projects.setCommonInstanceMetadata
     , module Network.Google.Resource.Compute.Projects.SetCommonInstanceMetadata
 
-    -- ** ComputeProjectsSetUsageExportBucket
+    -- ** compute.projects.setUsageExportBucket
     , module Network.Google.Resource.Compute.Projects.SetUsageExportBucket
 
-    -- ** ComputeRegionOperationsDelete
+    -- ** compute.regionOperations.delete
     , module Network.Google.Resource.Compute.RegionOperations.Delete
 
-    -- ** ComputeRegionOperationsGet
+    -- ** compute.regionOperations.get
     , module Network.Google.Resource.Compute.RegionOperations.Get
 
-    -- ** ComputeRegionOperationsList
+    -- ** compute.regionOperations.list
     , module Network.Google.Resource.Compute.RegionOperations.List
 
-    -- ** ComputeRegionsGet
+    -- ** compute.regions.get
     , module Network.Google.Resource.Compute.Regions.Get
 
-    -- ** ComputeRegionsList
+    -- ** compute.regions.list
     , module Network.Google.Resource.Compute.Regions.List
 
-    -- ** ComputeRoutesDelete
+    -- ** compute.routes.delete
     , module Network.Google.Resource.Compute.Routes.Delete
 
-    -- ** ComputeRoutesGet
+    -- ** compute.routes.get
     , module Network.Google.Resource.Compute.Routes.Get
 
-    -- ** ComputeRoutesInsert
+    -- ** compute.routes.insert
     , module Network.Google.Resource.Compute.Routes.Insert
 
-    -- ** ComputeRoutesList
+    -- ** compute.routes.list
     , module Network.Google.Resource.Compute.Routes.List
 
-    -- ** ComputeSnapshotsDelete
+    -- ** compute.snapshots.delete
     , module Network.Google.Resource.Compute.Snapshots.Delete
 
-    -- ** ComputeSnapshotsGet
+    -- ** compute.snapshots.get
     , module Network.Google.Resource.Compute.Snapshots.Get
 
-    -- ** ComputeSnapshotsList
+    -- ** compute.snapshots.list
     , module Network.Google.Resource.Compute.Snapshots.List
 
-    -- ** ComputeSSLCertificatesDelete
+    -- ** compute.sslCertificates.delete
     , module Network.Google.Resource.Compute.SSLCertificates.Delete
 
-    -- ** ComputeSSLCertificatesGet
+    -- ** compute.sslCertificates.get
     , module Network.Google.Resource.Compute.SSLCertificates.Get
 
-    -- ** ComputeSSLCertificatesInsert
+    -- ** compute.sslCertificates.insert
     , module Network.Google.Resource.Compute.SSLCertificates.Insert
 
-    -- ** ComputeSSLCertificatesList
+    -- ** compute.sslCertificates.list
     , module Network.Google.Resource.Compute.SSLCertificates.List
 
-    -- ** ComputeTargetHTTPProxiesDelete
+    -- ** compute.targetHttpProxies.delete
     , module Network.Google.Resource.Compute.TargetHTTPProxies.Delete
 
-    -- ** ComputeTargetHTTPProxiesGet
+    -- ** compute.targetHttpProxies.get
     , module Network.Google.Resource.Compute.TargetHTTPProxies.Get
 
-    -- ** ComputeTargetHTTPProxiesInsert
+    -- ** compute.targetHttpProxies.insert
     , module Network.Google.Resource.Compute.TargetHTTPProxies.Insert
 
-    -- ** ComputeTargetHTTPProxiesList
+    -- ** compute.targetHttpProxies.list
     , module Network.Google.Resource.Compute.TargetHTTPProxies.List
 
-    -- ** ComputeTargetHTTPProxiesSetURLMap
+    -- ** compute.targetHttpProxies.setUrlMap
     , module Network.Google.Resource.Compute.TargetHTTPProxies.SetURLMap
 
-    -- ** ComputeTargetHTTPSProxiesDelete
+    -- ** compute.targetHttpsProxies.delete
     , module Network.Google.Resource.Compute.TargetHTTPSProxies.Delete
 
-    -- ** ComputeTargetHTTPSProxiesGet
+    -- ** compute.targetHttpsProxies.get
     , module Network.Google.Resource.Compute.TargetHTTPSProxies.Get
 
-    -- ** ComputeTargetHTTPSProxiesInsert
+    -- ** compute.targetHttpsProxies.insert
     , module Network.Google.Resource.Compute.TargetHTTPSProxies.Insert
 
-    -- ** ComputeTargetHTTPSProxiesList
+    -- ** compute.targetHttpsProxies.list
     , module Network.Google.Resource.Compute.TargetHTTPSProxies.List
 
-    -- ** ComputeTargetHTTPSProxiesSetSSLCertificates
+    -- ** compute.targetHttpsProxies.setSslCertificates
     , module Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLCertificates
 
-    -- ** ComputeTargetHTTPSProxiesSetURLMap
+    -- ** compute.targetHttpsProxies.setUrlMap
     , module Network.Google.Resource.Compute.TargetHTTPSProxies.SetURLMap
 
-    -- ** ComputeTargetInstancesAggregatedList
+    -- ** compute.targetInstances.aggregatedList
     , module Network.Google.Resource.Compute.TargetInstances.AggregatedList
 
-    -- ** ComputeTargetInstancesDelete
+    -- ** compute.targetInstances.delete
     , module Network.Google.Resource.Compute.TargetInstances.Delete
 
-    -- ** ComputeTargetInstancesGet
+    -- ** compute.targetInstances.get
     , module Network.Google.Resource.Compute.TargetInstances.Get
 
-    -- ** ComputeTargetInstancesInsert
+    -- ** compute.targetInstances.insert
     , module Network.Google.Resource.Compute.TargetInstances.Insert
 
-    -- ** ComputeTargetInstancesList
+    -- ** compute.targetInstances.list
     , module Network.Google.Resource.Compute.TargetInstances.List
 
-    -- ** ComputeTargetPoolsAddHealthCheck
+    -- ** compute.targetPools.addHealthCheck
     , module Network.Google.Resource.Compute.TargetPools.AddHealthCheck
 
-    -- ** ComputeTargetPoolsAddInstance
+    -- ** compute.targetPools.addInstance
     , module Network.Google.Resource.Compute.TargetPools.AddInstance
 
-    -- ** ComputeTargetPoolsAggregatedList
+    -- ** compute.targetPools.aggregatedList
     , module Network.Google.Resource.Compute.TargetPools.AggregatedList
 
-    -- ** ComputeTargetPoolsDelete
+    -- ** compute.targetPools.delete
     , module Network.Google.Resource.Compute.TargetPools.Delete
 
-    -- ** ComputeTargetPoolsGet
+    -- ** compute.targetPools.get
     , module Network.Google.Resource.Compute.TargetPools.Get
 
-    -- ** ComputeTargetPoolsGetHealth
+    -- ** compute.targetPools.getHealth
     , module Network.Google.Resource.Compute.TargetPools.GetHealth
 
-    -- ** ComputeTargetPoolsInsert
+    -- ** compute.targetPools.insert
     , module Network.Google.Resource.Compute.TargetPools.Insert
 
-    -- ** ComputeTargetPoolsList
+    -- ** compute.targetPools.list
     , module Network.Google.Resource.Compute.TargetPools.List
 
-    -- ** ComputeTargetPoolsRemoveHealthCheck
+    -- ** compute.targetPools.removeHealthCheck
     , module Network.Google.Resource.Compute.TargetPools.RemoveHealthCheck
 
-    -- ** ComputeTargetPoolsRemoveInstance
+    -- ** compute.targetPools.removeInstance
     , module Network.Google.Resource.Compute.TargetPools.RemoveInstance
 
-    -- ** ComputeTargetPoolsSetBackup
+    -- ** compute.targetPools.setBackup
     , module Network.Google.Resource.Compute.TargetPools.SetBackup
 
-    -- ** ComputeTargetVPNGatewaysAggregatedList
+    -- ** compute.targetVpnGateways.aggregatedList
     , module Network.Google.Resource.Compute.TargetVPNGateways.AggregatedList
 
-    -- ** ComputeTargetVPNGatewaysDelete
+    -- ** compute.targetVpnGateways.delete
     , module Network.Google.Resource.Compute.TargetVPNGateways.Delete
 
-    -- ** ComputeTargetVPNGatewaysGet
+    -- ** compute.targetVpnGateways.get
     , module Network.Google.Resource.Compute.TargetVPNGateways.Get
 
-    -- ** ComputeTargetVPNGatewaysInsert
+    -- ** compute.targetVpnGateways.insert
     , module Network.Google.Resource.Compute.TargetVPNGateways.Insert
 
-    -- ** ComputeTargetVPNGatewaysList
+    -- ** compute.targetVpnGateways.list
     , module Network.Google.Resource.Compute.TargetVPNGateways.List
 
-    -- ** ComputeURLMapsDelete
+    -- ** compute.urlMaps.delete
     , module Network.Google.Resource.Compute.URLMaps.Delete
 
-    -- ** ComputeURLMapsGet
+    -- ** compute.urlMaps.get
     , module Network.Google.Resource.Compute.URLMaps.Get
 
-    -- ** ComputeURLMapsInsert
+    -- ** compute.urlMaps.insert
     , module Network.Google.Resource.Compute.URLMaps.Insert
 
-    -- ** ComputeURLMapsList
+    -- ** compute.urlMaps.list
     , module Network.Google.Resource.Compute.URLMaps.List
 
-    -- ** ComputeURLMapsPatch
+    -- ** compute.urlMaps.patch
     , module Network.Google.Resource.Compute.URLMaps.Patch
 
-    -- ** ComputeURLMapsUpdate
+    -- ** compute.urlMaps.update
     , module Network.Google.Resource.Compute.URLMaps.Update
 
-    -- ** ComputeURLMapsValidate
+    -- ** compute.urlMaps.validate
     , module Network.Google.Resource.Compute.URLMaps.Validate
 
-    -- ** ComputeVPNTunnelsAggregatedList
+    -- ** compute.vpnTunnels.aggregatedList
     , module Network.Google.Resource.Compute.VPNTunnels.AggregatedList
 
-    -- ** ComputeVPNTunnelsDelete
+    -- ** compute.vpnTunnels.delete
     , module Network.Google.Resource.Compute.VPNTunnels.Delete
 
-    -- ** ComputeVPNTunnelsGet
+    -- ** compute.vpnTunnels.get
     , module Network.Google.Resource.Compute.VPNTunnels.Get
 
-    -- ** ComputeVPNTunnelsInsert
+    -- ** compute.vpnTunnels.insert
     , module Network.Google.Resource.Compute.VPNTunnels.Insert
 
-    -- ** ComputeVPNTunnelsList
+    -- ** compute.vpnTunnels.list
     , module Network.Google.Resource.Compute.VPNTunnels.List
 
-    -- ** ComputeZoneOperationsDelete
+    -- ** compute.zoneOperations.delete
     , module Network.Google.Resource.Compute.ZoneOperations.Delete
 
-    -- ** ComputeZoneOperationsGet
+    -- ** compute.zoneOperations.get
     , module Network.Google.Resource.Compute.ZoneOperations.Get
 
-    -- ** ComputeZoneOperationsList
+    -- ** compute.zoneOperations.list
     , module Network.Google.Resource.Compute.ZoneOperations.List
 
-    -- ** ComputeZonesGet
+    -- ** compute.zones.get
     , module Network.Google.Resource.Compute.Zones.Get
 
-    -- ** ComputeZonesList
+    -- ** compute.zones.list
     , module Network.Google.Resource.Compute.Zones.List
 
     -- * Types

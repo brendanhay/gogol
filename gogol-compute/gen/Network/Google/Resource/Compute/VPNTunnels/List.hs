@@ -23,7 +23,7 @@
 -- Retrieves the list of VpnTunnel resources contained in the specified
 -- project and region.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeVPNTunnelsList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.vpnTunnels.list@.
 module Network.Google.Resource.Compute.VPNTunnels.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.VPNTunnels.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeVPNTunnelsList@ method which the
+-- | A resource alias for @compute.vpnTunnels.list@ method which the
 -- 'VPNTunnelsList'' request conforms to.
 type VPNTunnelsListResource =
      Capture "project" Text :>
@@ -82,8 +82,8 @@ data VPNTunnelsList' = VPNTunnelsList'
 --
 -- * 'vtlMaxResults'
 vpnTunnelsList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'vtlProject'
+    -> Text -- ^ 'vtlRegion'
     -> VPNTunnelsList'
 vpnTunnelsList' pVtlProject_ pVtlRegion_ =
     VPNTunnelsList'

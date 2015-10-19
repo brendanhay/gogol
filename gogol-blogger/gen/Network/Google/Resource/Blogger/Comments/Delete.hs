@@ -22,7 +22,7 @@
 --
 -- Delete a comment by ID.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerCommentsDelete@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.comments.delete@.
 module Network.Google.Resource.Blogger.Comments.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Blogger.Comments.Delete
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerCommentsDelete@ method which the
+-- | A resource alias for @blogger.comments.delete@ method which the
 -- 'CommentsDelete'' request conforms to.
 type CommentsDeleteResource =
      "blogs" :>
@@ -71,9 +71,9 @@ data CommentsDelete' = CommentsDelete'
 --
 -- * 'cdCommentId'
 commentsDelete'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'postId'
-    -> Text -- ^ 'commentId'
+    :: Text -- ^ 'cdBlogId'
+    -> Text -- ^ 'cdPostId'
+    -> Text -- ^ 'cdCommentId'
     -> CommentsDelete'
 commentsDelete' pCdBlogId_ pCdPostId_ pCdCommentId_ =
     CommentsDelete'

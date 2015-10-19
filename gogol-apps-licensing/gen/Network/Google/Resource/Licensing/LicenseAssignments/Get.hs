@@ -22,7 +22,7 @@
 --
 -- Get license assignment of a particular product and sku for a user
 --
--- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @LicensingLicenseAssignmentsGet@.
+-- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @licensing.licenseAssignments.get@.
 module Network.Google.Resource.Licensing.LicenseAssignments.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Get
 import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @LicensingLicenseAssignmentsGet@ method which the
+-- | A resource alias for @licensing.licenseAssignments.get@ method which the
 -- 'LicenseAssignmentsGet'' request conforms to.
 type LicenseAssignmentsGetResource =
      Capture "productId" Text :>
@@ -71,9 +71,9 @@ data LicenseAssignmentsGet' = LicenseAssignmentsGet'
 --
 -- * 'lagProductId'
 licenseAssignmentsGet'
-    :: Text -- ^ 'skuId'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'productId'
+    :: Text -- ^ 'lagSKUId'
+    -> Text -- ^ 'lagUserId'
+    -> Text -- ^ 'lagProductId'
     -> LicenseAssignmentsGet'
 licenseAssignmentsGet' pLagSKUId_ pLagUserId_ pLagProductId_ =
     LicenseAssignmentsGet'

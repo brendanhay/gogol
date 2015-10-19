@@ -22,7 +22,7 @@
 --
 -- Retrieves the specified zone-specific Operations resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeZoneOperationsGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.zoneOperations.get@.
 module Network.Google.Resource.Compute.ZoneOperations.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.ZoneOperations.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeZoneOperationsGet@ method which the
+-- | A resource alias for @compute.zoneOperations.get@ method which the
 -- 'ZoneOperationsGet'' request conforms to.
 type ZoneOperationsGetResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data ZoneOperationsGet' = ZoneOperationsGet'
 --
 -- * 'zogZone'
 zoneOperationsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'operation'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'zogProject'
+    -> Text -- ^ 'zogOperation'
+    -> Text -- ^ 'zogZone'
     -> ZoneOperationsGet'
 zoneOperationsGet' pZogProject_ pZogOperation_ pZogZone_ =
     ZoneOperationsGet'

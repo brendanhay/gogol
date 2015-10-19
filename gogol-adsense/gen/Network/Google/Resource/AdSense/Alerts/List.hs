@@ -22,7 +22,7 @@
 --
 -- List the alerts for this AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAlertsList@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.alerts.list@.
 module Network.Google.Resource.AdSense.Alerts.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdSense.Alerts.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAlertsList@ method which the
+-- | A resource alias for @adsense.alerts.list@ method which the
 -- 'AlertsList'' request conforms to.
 type AlertsListResource =
      "alerts" :>

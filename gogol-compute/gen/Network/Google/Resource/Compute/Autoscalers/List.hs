@@ -23,7 +23,7 @@
 -- Retrieves the list of autoscaler resources contained within the
 -- specified zone.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAutoscalersList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.autoscalers.list@.
 module Network.Google.Resource.Compute.Autoscalers.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.Autoscalers.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeAutoscalersList@ method which the
+-- | A resource alias for @compute.autoscalers.list@ method which the
 -- 'AutoscalersList'' request conforms to.
 type AutoscalersListResource =
      Capture "project" Text :>
@@ -83,8 +83,8 @@ data AutoscalersList' = AutoscalersList'
 --
 -- * 'aMaxResults'
 autoscalersList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'aProject'
+    -> Text -- ^ 'aZone'
     -> AutoscalersList'
 autoscalersList' pAProject_ pAZone_ =
     AutoscalersList'

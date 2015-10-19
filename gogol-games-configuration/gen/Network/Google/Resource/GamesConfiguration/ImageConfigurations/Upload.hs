@@ -22,7 +22,7 @@
 --
 -- Uploads an image for a resource with the given ID and image type.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationImageConfigurationsUpload@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.imageConfigurations.upload@.
 module Network.Google.Resource.GamesConfiguration.ImageConfigurations.Upload
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.GamesConfiguration.ImageConfigurations.Upload
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationImageConfigurationsUpload@ method which the
+-- | A resource alias for @gamesConfiguration.imageConfigurations.upload@ method which the
 -- 'ImageConfigurationsUpload'' request conforms to.
 type ImageConfigurationsUploadResource =
      "images" :>
@@ -73,9 +73,9 @@ data ImageConfigurationsUpload' = ImageConfigurationsUpload'
 --
 -- * 'icuImageType'
 imageConfigurationsUpload'
-    :: Text -- ^ 'resourceId'
-    -> Body -- ^ 'media'
-    -> ImageConfigurationsUploadImageType -- ^ 'imageType'
+    :: Text -- ^ 'icuResourceId'
+    -> Body -- ^ 'icuMedia'
+    -> ImageConfigurationsUploadImageType -- ^ 'icuImageType'
     -> ImageConfigurationsUpload'
 imageConfigurationsUpload' pIcuResourceId_ pIcuMedia_ pIcuImageType_ =
     ImageConfigurationsUpload'

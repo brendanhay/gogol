@@ -23,7 +23,7 @@
 -- Retrieves the list of route resources available to the specified
 -- project.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRoutesList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.routes.list@.
 module Network.Google.Resource.Compute.Routes.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.Routes.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeRoutesList@ method which the
+-- | A resource alias for @compute.routes.list@ method which the
 -- 'RoutesList'' request conforms to.
 type RoutesListResource =
      Capture "project" Text :>
@@ -77,7 +77,7 @@ data RoutesList' = RoutesList'
 --
 -- * 'rlMaxResults'
 routesList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'rlProject'
     -> RoutesList'
 routesList' pRlProject_ =
     RoutesList'

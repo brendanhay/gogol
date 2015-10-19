@@ -22,7 +22,7 @@
 --
 -- Update the entire content of the UrlMap resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeURLMapsUpdate@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.urlMaps.update@.
 module Network.Google.Resource.Compute.URLMaps.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.URLMaps.Update
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeURLMapsUpdate@ method which the
+-- | A resource alias for @compute.urlMaps.update@ method which the
 -- 'URLMapsUpdate'' request conforms to.
 type URLMapsUpdateResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data URLMapsUpdate' = URLMapsUpdate'
 --
 -- * 'umuPayload'
 urlMapsUpdate'
-    :: Text -- ^ 'urlMap'
-    -> Text -- ^ 'project'
-    -> URLMap -- ^ 'payload'
+    :: Text -- ^ 'umuURLMap'
+    -> Text -- ^ 'umuProject'
+    -> URLMap -- ^ 'umuPayload'
     -> URLMapsUpdate'
 urlMapsUpdate' pUmuURLMap_ pUmuProject_ pUmuPayload_ =
     URLMapsUpdate'

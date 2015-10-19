@@ -23,7 +23,7 @@
 -- Deletes the specified instance group. The instances in the group are not
 -- deleted.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroups.delete@.
 module Network.Google.Resource.Compute.InstanceGroups.Delete
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.InstanceGroups.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupsDelete@ method which the
+-- | A resource alias for @compute.instanceGroups.delete@ method which the
 -- 'InstanceGroupsDelete'' request conforms to.
 type InstanceGroupsDeleteResource =
      Capture "project" Text :>
@@ -72,9 +72,9 @@ data InstanceGroupsDelete' = InstanceGroupsDelete'
 --
 -- * 'igdInstanceGroup'
 instanceGroupsDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Text -- ^ 'instanceGroup'
+    :: Text -- ^ 'igdProject'
+    -> Text -- ^ 'igdZone'
+    -> Text -- ^ 'igdInstanceGroup'
     -> InstanceGroupsDelete'
 instanceGroupsDelete' pIgdProject_ pIgdZone_ pIgdInstanceGroup_ =
     InstanceGroupsDelete'

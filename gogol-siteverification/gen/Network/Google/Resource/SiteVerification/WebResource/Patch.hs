@@ -23,7 +23,7 @@
 -- Modify the list of owners for your website or domain. This method
 -- supports patch semantics.
 --
--- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourcePatch@.
+-- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @siteVerification.webResource.patch@.
 module Network.Google.Resource.SiteVerification.WebResource.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.SiteVerification.WebResource.Patch
 import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
--- | A resource alias for @SiteVerificationWebResourcePatch@ method which the
+-- | A resource alias for @siteVerification.webResource.patch@ method which the
 -- 'WebResourcePatch'' request conforms to.
 type WebResourcePatchResource =
      "webResource" :>
@@ -67,8 +67,8 @@ data WebResourcePatch' = WebResourcePatch'
 --
 -- * 'wrpId'
 webResourcePatch'
-    :: SiteVerificationWebResourceResource -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: SiteVerificationWebResourceResource -- ^ 'wrpPayload'
+    -> Text -- ^ 'wrpId'
     -> WebResourcePatch'
 webResourcePatch' pWrpPayload_ pWrpId_ =
     WebResourcePatch'

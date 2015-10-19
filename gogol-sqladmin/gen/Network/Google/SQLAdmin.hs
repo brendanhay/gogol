@@ -26,118 +26,118 @@ module Network.Google.SQLAdmin
 
     -- * Resources
 
-    -- ** SQLBackupRunsDelete
+    -- ** sql.backupRuns.delete
     , module Network.Google.Resource.SQL.BackupRuns.Delete
 
-    -- ** SQLBackupRunsGet
+    -- ** sql.backupRuns.get
     , module Network.Google.Resource.SQL.BackupRuns.Get
 
-    -- ** SQLBackupRunsList
+    -- ** sql.backupRuns.list
     , module Network.Google.Resource.SQL.BackupRuns.List
 
-    -- ** SQLDatabasesDelete
+    -- ** sql.databases.delete
     , module Network.Google.Resource.SQL.Databases.Delete
 
-    -- ** SQLDatabasesGet
+    -- ** sql.databases.get
     , module Network.Google.Resource.SQL.Databases.Get
 
-    -- ** SQLDatabasesInsert
+    -- ** sql.databases.insert
     , module Network.Google.Resource.SQL.Databases.Insert
 
-    -- ** SQLDatabasesList
+    -- ** sql.databases.list
     , module Network.Google.Resource.SQL.Databases.List
 
-    -- ** SQLDatabasesPatch
+    -- ** sql.databases.patch
     , module Network.Google.Resource.SQL.Databases.Patch
 
-    -- ** SQLDatabasesUpdate
+    -- ** sql.databases.update
     , module Network.Google.Resource.SQL.Databases.Update
 
-    -- ** SQLFlagsList
+    -- ** sql.flags.list
     , module Network.Google.Resource.SQL.Flags.List
 
-    -- ** SQLInstancesClone
+    -- ** sql.instances.clone
     , module Network.Google.Resource.SQL.Instances.Clone
 
-    -- ** SQLInstancesDelete
+    -- ** sql.instances.delete
     , module Network.Google.Resource.SQL.Instances.Delete
 
-    -- ** SQLInstancesExport
+    -- ** sql.instances.export
     , module Network.Google.Resource.SQL.Instances.Export
 
-    -- ** SQLInstancesFailover
+    -- ** sql.instances.failover
     , module Network.Google.Resource.SQL.Instances.Failover
 
-    -- ** SQLInstancesGet
+    -- ** sql.instances.get
     , module Network.Google.Resource.SQL.Instances.Get
 
-    -- ** SQLInstancesImport
+    -- ** sql.instances.import
     , module Network.Google.Resource.SQL.Instances.Import
 
-    -- ** SQLInstancesInsert
+    -- ** sql.instances.insert
     , module Network.Google.Resource.SQL.Instances.Insert
 
-    -- ** SQLInstancesList
+    -- ** sql.instances.list
     , module Network.Google.Resource.SQL.Instances.List
 
-    -- ** SQLInstancesPatch
+    -- ** sql.instances.patch
     , module Network.Google.Resource.SQL.Instances.Patch
 
-    -- ** SQLInstancesPromoteReplica
+    -- ** sql.instances.promoteReplica
     , module Network.Google.Resource.SQL.Instances.PromoteReplica
 
-    -- ** SQLInstancesResetSSLConfig
+    -- ** sql.instances.resetSslConfig
     , module Network.Google.Resource.SQL.Instances.ResetSSLConfig
 
-    -- ** SQLInstancesRestart
+    -- ** sql.instances.restart
     , module Network.Google.Resource.SQL.Instances.Restart
 
-    -- ** SQLInstancesRestoreBackup
+    -- ** sql.instances.restoreBackup
     , module Network.Google.Resource.SQL.Instances.RestoreBackup
 
-    -- ** SQLInstancesStartReplica
+    -- ** sql.instances.startReplica
     , module Network.Google.Resource.SQL.Instances.StartReplica
 
-    -- ** SQLInstancesStopReplica
+    -- ** sql.instances.stopReplica
     , module Network.Google.Resource.SQL.Instances.StopReplica
 
-    -- ** SQLInstancesUpdate
+    -- ** sql.instances.update
     , module Network.Google.Resource.SQL.Instances.Update
 
-    -- ** SQLOperationsGet
+    -- ** sql.operations.get
     , module Network.Google.Resource.SQL.Operations.Get
 
-    -- ** SQLOperationsList
+    -- ** sql.operations.list
     , module Network.Google.Resource.SQL.Operations.List
 
-    -- ** SQLSSLCertsCreateEphemeral
+    -- ** sql.sslCerts.createEphemeral
     , module Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
 
-    -- ** SQLSSLCertsDelete
+    -- ** sql.sslCerts.delete
     , module Network.Google.Resource.SQL.SSLCerts.Delete
 
-    -- ** SQLSSLCertsGet
+    -- ** sql.sslCerts.get
     , module Network.Google.Resource.SQL.SSLCerts.Get
 
-    -- ** SQLSSLCertsInsert
+    -- ** sql.sslCerts.insert
     , module Network.Google.Resource.SQL.SSLCerts.Insert
 
-    -- ** SQLSSLCertsList
+    -- ** sql.sslCerts.list
     , module Network.Google.Resource.SQL.SSLCerts.List
 
-    -- ** SQLTiersList
+    -- ** sql.tiers.list
     , module Network.Google.Resource.SQL.Tiers.List
 
-    -- ** SQLUsersDelete
+    -- ** sql.users.delete
     , module Network.Google.Resource.SQL.Users.Delete
 
-    -- ** SQLUsersInsert
+    -- ** sql.users.insert
     , module Network.Google.Resource.SQL.Users.Insert
 
-    -- ** SQLUsersList
+    -- ** sql.users.list
     , module Network.Google.Resource.SQL.Users.List
 
-    -- ** SQLUsersUpdate
+    -- ** sql.users.update
     , module Network.Google.Resource.SQL.Users.Update
 
     -- * Types

@@ -23,7 +23,7 @@
 -- Lists subscriptions of a reseller, optionally filtered by a customer
 -- name prefix.
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsList@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.list@.
 module Network.Google.Resource.Reseller.Subscriptions.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Reseller.Subscriptions.List
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerSubscriptionsList@ method which the
+-- | A resource alias for @reseller.subscriptions.list@ method which the
 -- 'SubscriptionsList'' request conforms to.
 type SubscriptionsListResource =
      "subscriptions" :>

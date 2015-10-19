@@ -22,7 +22,7 @@
 --
 -- Gets one operating system version by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingOperatingSystemVersionsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.operatingSystemVersions.get@.
 module Network.Google.Resource.DFAReporting.OperatingSystemVersions.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.OperatingSystemVersions.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingOperatingSystemVersionsGet@ method which the
+-- | A resource alias for @dfareporting.operatingSystemVersions.get@ method which the
 -- 'OperatingSystemVersionsGet'' request conforms to.
 type OperatingSystemVersionsGetResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data OperatingSystemVersionsGet' = OperatingSystemVersionsGet'
 --
 -- * 'osvgId'
 operatingSystemVersionsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'osvgProFileId'
+    -> Int64 -- ^ 'osvgId'
     -> OperatingSystemVersionsGet'
 operatingSystemVersionsGet' pOsvgProFileId_ pOsvgId_ =
     OperatingSystemVersionsGet'

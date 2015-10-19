@@ -22,7 +22,7 @@
 --
 -- Create a new profile filter link.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFileFilterLinksInsert@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.profileFilterLinks.insert@.
 module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFileFilterLinksInsert@ method which the
+-- | A resource alias for @analytics.management.profileFilterLinks.insert@ method which the
 -- 'ManagementProFileFilterLinksInsert'' request conforms to.
 type ManagementProFileFilterLinksInsertResource =
      "management" :>
@@ -79,10 +79,10 @@ data ManagementProFileFilterLinksInsert' = ManagementProFileFilterLinksInsert'
 --
 -- * 'mpffliAccountId'
 managementProFileFilterLinksInsert'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> ProFileFilterLink -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mpffliWebPropertyId'
+    -> Text -- ^ 'mpffliProFileId'
+    -> ProFileFilterLink -- ^ 'mpffliPayload'
+    -> Text -- ^ 'mpffliAccountId'
     -> ManagementProFileFilterLinksInsert'
 managementProFileFilterLinksInsert' pMpffliWebPropertyId_ pMpffliProFileId_ pMpffliPayload_ pMpffliAccountId_ =
     ManagementProFileFilterLinksInsert'

@@ -22,7 +22,7 @@
 --
 -- Watch for changes to CalendarList resources.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarListWatch@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendarList.watch@.
 module Network.Google.Resource.Calendar.CalendarList.Watch
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Calendar.CalendarList.Watch
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarListWatch@ method which the
+-- | A resource alias for @calendar.calendarList.watch@ method which the
 -- 'CalendarListWatch'' request conforms to.
 type CalendarListWatchResource =
      "users" :>
@@ -94,7 +94,7 @@ data CalendarListWatch' = CalendarListWatch'
 --
 -- * 'clwMaxResults'
 calendarListWatch'
-    :: Channel -- ^ 'payload'
+    :: Channel -- ^ 'clwPayload'
     -> CalendarListWatch'
 calendarListWatch' pClwPayload_ =
     CalendarListWatch'

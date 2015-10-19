@@ -22,7 +22,7 @@
 --
 -- Query for entities.
 --
--- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @DatastoreDatasetsRunQuery@.
+-- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @datastore.datasets.runQuery@.
 module Network.Google.Resource.Datastore.Datasets.RunQuery
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Datastore.Datasets.RunQuery
 import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DatastoreDatasetsRunQuery@ method which the
+-- | A resource alias for @datastore.datasets.runQuery@ method which the
 -- 'DatasetsRunQuery'' request conforms to.
 type DatasetsRunQueryResource =
      Capture "datasetId" Text :>
@@ -65,8 +65,8 @@ data DatasetsRunQuery' = DatasetsRunQuery'
 --
 -- * 'drqDatasetId'
 datasetsRunQuery'
-    :: RunQueryRequest -- ^ 'payload'
-    -> Text -- ^ 'datasetId'
+    :: RunQueryRequest -- ^ 'drqPayload'
+    -> Text -- ^ 'drqDatasetId'
     -> DatasetsRunQuery'
 datasetsRunQuery' pDrqPayload_ pDrqDatasetId_ =
     DatasetsRunQuery'

@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of account permissions.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAccountPermissionsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accountPermissions.list@.
 module Network.Google.Resource.DFAReporting.AccountPermissions.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DFAReporting.AccountPermissions.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAccountPermissionsList@ method which the
+-- | A resource alias for @dfareporting.accountPermissions.list@ method which the
 -- 'AccountPermissionsList'' request conforms to.
 type AccountPermissionsListResource =
      "userprofiles" :>
@@ -61,7 +61,7 @@ newtype AccountPermissionsList' = AccountPermissionsList'
 --
 -- * 'aplProFileId'
 accountPermissionsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'aplProFileId'
     -> AccountPermissionsList'
 accountPermissionsList' pAplProFileId_ =
     AccountPermissionsList'

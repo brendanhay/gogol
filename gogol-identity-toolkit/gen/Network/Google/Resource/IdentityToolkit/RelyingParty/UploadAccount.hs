@@ -22,7 +22,7 @@
 --
 -- Batch upload existing user accounts.
 --
--- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyUploadAccount@.
+-- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @identitytoolkit.relyingparty.uploadAccount@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.UploadAccount
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.UploadAccount
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @IdentitytoolkitRelyingPartyUploadAccount@ method which the
+-- | A resource alias for @identitytoolkit.relyingparty.uploadAccount@ method which the
 -- 'RelyingPartyUploadAccount'' request conforms to.
 type RelyingPartyUploadAccountResource =
      "uploadAccount" :>
@@ -61,7 +61,7 @@ newtype RelyingPartyUploadAccount' = RelyingPartyUploadAccount'
 --
 -- * 'rpuaPayload'
 relyingPartyUploadAccount'
-    :: IdentitytoolkitRelyingPartyUploadAccountRequest -- ^ 'payload'
+    :: IdentitytoolkitRelyingPartyUploadAccountRequest -- ^ 'rpuaPayload'
     -> RelyingPartyUploadAccount'
 relyingPartyUploadAccount' pRpuaPayload_ =
     RelyingPartyUploadAccount'

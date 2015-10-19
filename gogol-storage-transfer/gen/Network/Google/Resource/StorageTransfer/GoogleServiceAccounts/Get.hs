@@ -28,7 +28,7 @@
 -- Service. This service account is created and owned by Storage Transfer
 -- Service and can only be used by Storage Transfer Service.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferGoogleServiceAccountsGet@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.googleServiceAccounts.get@.
 module Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferGoogleServiceAccountsGet@ method which the
+-- | A resource alias for @storagetransfer.googleServiceAccounts.get@ method which the
 -- 'GoogleServiceAccountsGet'' request conforms to.
 type GoogleServiceAccountsGetResource =
      "v1" :>
@@ -108,7 +108,7 @@ data GoogleServiceAccountsGet' = GoogleServiceAccountsGet'
 --
 -- * 'gsagCallback'
 googleServiceAccountsGet'
-    :: Text -- ^ 'projectId'
+    :: Text -- ^ 'gsagProjectId'
     -> GoogleServiceAccountsGet'
 googleServiceAccountsGet' pGsagProjectId_ =
     GoogleServiceAccountsGet'

@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of contacts for the authenticated user.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorContactsList@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.contacts.list@.
 module Network.Google.Resource.Mirror.Contacts.List
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.Mirror.Contacts.List
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorContactsList@ method which the
+-- | A resource alias for @mirror.contacts.list@ method which the
 -- 'ContactsList'' request conforms to.
 type ContactsListResource =
      "contacts" :>

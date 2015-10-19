@@ -22,7 +22,7 @@
 --
 -- Stops the replication in the read replica instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesStopReplica@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.stopReplica@.
 module Network.Google.Resource.SQL.Instances.StopReplica
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.SQL.Instances.StopReplica
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesStopReplica@ method which the
+-- | A resource alias for @sql.instances.stopReplica@ method which the
 -- 'InstancesStopReplica'' request conforms to.
 type InstancesStopReplicaResource =
      "projects" :>
@@ -66,8 +66,8 @@ data InstancesStopReplica' = InstancesStopReplica'
 --
 -- * 'isrInstance'
 instancesStopReplica'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'isrProject'
+    -> Text -- ^ 'isrInstance'
     -> InstancesStopReplica'
 instancesStopReplica' pIsrProject_ pIsrInstance_ =
     InstancesStopReplica'

@@ -22,7 +22,7 @@
 --
 -- Create a new circle for the authenticated user.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesInsert@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.circles.insert@.
 module Network.Google.Resource.PlusDomains.Circles.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.PlusDomains.Circles.Insert
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsCirclesInsert@ method which the
+-- | A resource alias for @plusDomains.circles.insert@ method which the
 -- 'CirclesInsert'' request conforms to.
 type CirclesInsertResource =
      "people" :>
@@ -65,8 +65,8 @@ data CirclesInsert' = CirclesInsert'
 --
 -- * 'cUserId'
 circlesInsert'
-    :: Circle -- ^ 'payload'
-    -> Text -- ^ 'userId'
+    :: Circle -- ^ 'cPayload'
+    -> Text -- ^ 'cUserId'
     -> CirclesInsert'
 circlesInsert' pCPayload_ pCUserId_ =
     CirclesInsert'

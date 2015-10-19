@@ -22,7 +22,7 @@
 --
 -- Retrieve Mobile Device
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMobileDevicesGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.mobiledevices.get@.
 module Network.Google.Resource.Directory.MobileDevices.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Directory.MobileDevices.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryMobileDevicesGet@ method which the
+-- | A resource alias for @directory.mobiledevices.get@ method which the
 -- 'MobileDevicesGet'' request conforms to.
 type MobileDevicesGetResource =
      "customer" :>
@@ -71,8 +71,8 @@ data MobileDevicesGet' = MobileDevicesGet'
 --
 -- * 'mdgProjection'
 mobileDevicesGet'
-    :: Text -- ^ 'resourceId'
-    -> Text -- ^ 'customerId'
+    :: Text -- ^ 'mdgResourceId'
+    -> Text -- ^ 'mdgCustomerId'
     -> MobileDevicesGet'
 mobileDevicesGet' pMdgResourceId_ pMdgCustomerId_ =
     MobileDevicesGet'

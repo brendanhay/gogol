@@ -22,7 +22,7 @@
 --
 -- Deletes the authenticated user\'s specified task list.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTaskListsDelete@.
+-- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasklists.delete@.
 module Network.Google.Resource.Tasks.TaskLists.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Tasks.TaskLists.Delete
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTaskListsDelete@ method which the
+-- | A resource alias for @tasks.tasklists.delete@ method which the
 -- 'TaskListsDelete'' request conforms to.
 type TaskListsDeleteResource =
      "users" :>
@@ -61,7 +61,7 @@ newtype TaskListsDelete' = TaskListsDelete'
 --
 -- * 'tldTaskList'
 taskListsDelete'
-    :: Text -- ^ 'tasklist'
+    :: Text -- ^ 'tldTaskList'
     -> TaskListsDelete'
 taskListsDelete' pTldTaskList_ =
     TaskListsDelete'

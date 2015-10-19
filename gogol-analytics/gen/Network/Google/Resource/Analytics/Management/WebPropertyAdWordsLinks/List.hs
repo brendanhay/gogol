@@ -22,7 +22,7 @@
 --
 -- Lists webProperty-AdWords links for a given web property.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyAdWordsLinksList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webPropertyAdWordsLinks.list@.
 module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksList@ method which the
+-- | A resource alias for @analytics.management.webPropertyAdWordsLinks.list@ method which the
 -- 'ManagementWebPropertyAdWordsLinksList'' request conforms to.
 type ManagementWebPropertyAdWordsLinksListResource =
      "management" :>
@@ -78,8 +78,8 @@ data ManagementWebPropertyAdWordsLinksList' = ManagementWebPropertyAdWordsLinksL
 --
 -- * 'mwpawllMaxResults'
 managementWebPropertyAdWordsLinksList'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mwpawllWebPropertyId'
+    -> Text -- ^ 'mwpawllAccountId'
     -> ManagementWebPropertyAdWordsLinksList'
 managementWebPropertyAdWordsLinksList' pMwpawllWebPropertyId_ pMwpawllAccountId_ =
     ManagementWebPropertyAdWordsLinksList'

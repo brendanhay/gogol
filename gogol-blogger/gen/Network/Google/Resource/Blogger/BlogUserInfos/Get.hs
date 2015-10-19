@@ -22,7 +22,7 @@
 --
 -- Gets one blog and user info pair by blogId and userId.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerBlogUserInfosGet@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.blogUserInfos.get@.
 module Network.Google.Resource.Blogger.BlogUserInfos.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Blogger.BlogUserInfos.Get
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerBlogUserInfosGet@ method which the
+-- | A resource alias for @blogger.blogUserInfos.get@ method which the
 -- 'BlogUserInfosGet'' request conforms to.
 type BlogUserInfosGetResource =
      "users" :>
@@ -70,8 +70,8 @@ data BlogUserInfosGet' = BlogUserInfosGet'
 --
 -- * 'buigMaxPosts'
 blogUserInfosGet'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'buigBlogId'
+    -> Text -- ^ 'buigUserId'
     -> BlogUserInfosGet'
 blogUserInfosGet' pBuigBlogId_ pBuigUserId_ =
     BlogUserInfosGet'

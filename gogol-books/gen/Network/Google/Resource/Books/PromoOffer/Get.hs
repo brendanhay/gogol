@@ -22,7 +22,7 @@
 --
 -- Returns a list of promo offers available to the user
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksPromoOfferGet@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.promooffer.get@.
 module Network.Google.Resource.Books.PromoOffer.Get
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Books.PromoOffer.Get
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksPromoOfferGet@ method which the
+-- | A resource alias for @books.promooffer.get@ method which the
 -- 'PromoOfferGet'' request conforms to.
 type PromoOfferGetResource =
      "promooffer" :>

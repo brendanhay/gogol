@@ -22,7 +22,7 @@
 --
 -- Watch for changes in users list
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersWatch@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.watch@.
 module Network.Google.Resource.Directory.Users.Watch
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.Directory.Users.Watch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersWatch@ method which the
+-- | A resource alias for @directory.users.watch@ method which the
 -- 'UsersWatch'' request conforms to.
 type UsersWatchResource =
      "users" :>
@@ -121,7 +121,7 @@ data UsersWatch' = UsersWatch'
 --
 -- * 'uwMaxResults'
 usersWatch'
-    :: Channel -- ^ 'payload'
+    :: Channel -- ^ 'uwPayload'
     -> UsersWatch'
 usersWatch' pUwPayload_ =
     UsersWatch'

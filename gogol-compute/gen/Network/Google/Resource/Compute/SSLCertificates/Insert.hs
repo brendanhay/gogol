@@ -23,7 +23,7 @@
 -- Creates a SslCertificate resource in the specified project using the
 -- data included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeSSLCertificatesInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.sslCertificates.insert@.
 module Network.Google.Resource.Compute.SSLCertificates.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.SSLCertificates.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeSSLCertificatesInsert@ method which the
+-- | A resource alias for @compute.sslCertificates.insert@ method which the
 -- 'SSLCertificatesInsert'' request conforms to.
 type SSLCertificatesInsertResource =
      Capture "project" Text :>
@@ -68,8 +68,8 @@ data SSLCertificatesInsert' = SSLCertificatesInsert'
 --
 -- * 'sciPayload'
 sslCertificatesInsert'
-    :: Text -- ^ 'project'
-    -> SSLCertificate -- ^ 'payload'
+    :: Text -- ^ 'sciProject'
+    -> SSLCertificate -- ^ 'sciPayload'
     -> SSLCertificatesInsert'
 sslCertificatesInsert' pSciProject_ pSciPayload_ =
     SSLCertificatesInsert'

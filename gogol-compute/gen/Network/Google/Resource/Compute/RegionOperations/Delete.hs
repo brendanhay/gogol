@@ -22,7 +22,7 @@
 --
 -- Deletes the specified region-specific Operations resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRegionOperationsDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.regionOperations.delete@.
 module Network.Google.Resource.Compute.RegionOperations.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.RegionOperations.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeRegionOperationsDelete@ method which the
+-- | A resource alias for @compute.regionOperations.delete@ method which the
 -- 'RegionOperationsDelete'' request conforms to.
 type RegionOperationsDeleteResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data RegionOperationsDelete' = RegionOperationsDelete'
 --
 -- * 'rodRegion'
 regionOperationsDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'operation'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'rodProject'
+    -> Text -- ^ 'rodOperation'
+    -> Text -- ^ 'rodRegion'
     -> RegionOperationsDelete'
 regionOperationsDelete' pRodProject_ pRodOperation_ pRodRegion_ =
     RegionOperationsDelete'

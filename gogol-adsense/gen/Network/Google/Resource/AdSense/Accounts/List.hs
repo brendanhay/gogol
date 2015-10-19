@@ -22,7 +22,7 @@
 --
 -- List all accounts available to this AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsList@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.list@.
 module Network.Google.Resource.AdSense.Accounts.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdSense.Accounts.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAccountsList@ method which the
+-- | A resource alias for @adsense.accounts.list@ method which the
 -- 'AccountsList'' request conforms to.
 type AccountsListResource =
      "accounts" :>

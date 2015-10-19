@@ -28,7 +28,7 @@
 -- point of the dataset, only the overlapping portion of the data point
 -- will be deleted.
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesDatasetsDelete@.
+-- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataSources.datasets.delete@.
 module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Delete
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Delete
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersDataSourcesDatasetsDelete@ method which the
+-- | A resource alias for @fitness.users.dataSources.datasets.delete@ method which the
 -- 'UsersDataSourcesDatasetsDelete'' request conforms to.
 type UsersDataSourcesDatasetsDeleteResource =
      Capture "userId" Text :>
@@ -92,9 +92,9 @@ data UsersDataSourcesDatasetsDelete' = UsersDataSourcesDatasetsDelete'
 --
 -- * 'udsddCurrentTimeMillis'
 usersDataSourcesDatasetsDelete'
-    :: Text -- ^ 'dataSourceId'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'datasetId'
+    :: Text -- ^ 'udsddDataSourceId'
+    -> Text -- ^ 'udsddUserId'
+    -> Text -- ^ 'udsddDatasetId'
     -> UsersDataSourcesDatasetsDelete'
 usersDataSourcesDatasetsDelete' pUdsddDataSourceId_ pUdsddUserId_ pUdsddDatasetId_ =
     UsersDataSourcesDatasetsDelete'

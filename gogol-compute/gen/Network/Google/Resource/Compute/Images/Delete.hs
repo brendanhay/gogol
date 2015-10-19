@@ -22,7 +22,7 @@
 --
 -- Deletes the specified image resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeImagesDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.images.delete@.
 module Network.Google.Resource.Compute.Images.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.Images.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeImagesDelete@ method which the
+-- | A resource alias for @compute.images.delete@ method which the
 -- 'ImagesDelete'' request conforms to.
 type ImagesDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data ImagesDelete' = ImagesDelete'
 --
 -- * 'idProject'
 imagesDelete'
-    :: Text -- ^ 'image'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'idImage'
+    -> Text -- ^ 'idProject'
     -> ImagesDelete'
 imagesDelete' pIdImage_ pIdProject_ =
     ImagesDelete'

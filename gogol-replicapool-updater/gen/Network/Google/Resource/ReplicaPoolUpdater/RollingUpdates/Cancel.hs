@@ -23,7 +23,7 @@
 -- Cancels an update. The update must be PAUSED before it can be cancelled.
 -- This has no effect if the update is already CANCELLED.
 --
--- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesCancel@.
+-- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.rollingUpdates.cancel@.
 module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Cancel
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Cancel
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
--- | A resource alias for @ReplicapoolupdaterRollingUpdatesCancel@ method which the
+-- | A resource alias for @replicapoolupdater.rollingUpdates.cancel@ method which the
 -- 'RollingUpdatesCancel'' request conforms to.
 type RollingUpdatesCancelResource =
      Capture "project" Text :>
@@ -73,9 +73,9 @@ data RollingUpdatesCancel' = RollingUpdatesCancel'
 --
 -- * 'rucZone'
 rollingUpdatesCancel'
-    :: Text -- ^ 'rollingUpdate'
-    -> Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'rucRollingUpdate'
+    -> Text -- ^ 'rucProject'
+    -> Text -- ^ 'rucZone'
     -> RollingUpdatesCancel'
 rollingUpdatesCancel' pRucRollingUpdate_ pRucProject_ pRucZone_ =
     RollingUpdatesCancel'

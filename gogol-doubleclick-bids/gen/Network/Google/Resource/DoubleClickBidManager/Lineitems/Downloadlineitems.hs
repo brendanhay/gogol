@@ -22,7 +22,7 @@
 --
 -- Retrieves line items in CSV format.
 --
--- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleClickBidManagerLineitemsDownloadlineitems@.
+-- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.lineitems.downloadlineitems@.
 module Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
 import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClickBidManagerLineitemsDownloadlineitems@ method which the
+-- | A resource alias for @doubleclickbidmanager.lineitems.downloadlineitems@ method which the
 -- 'LineitemsDownloadlineitems'' request conforms to.
 type LineitemsDownloadlineitemsResource =
      "lineitems" :>
@@ -61,7 +61,7 @@ newtype LineitemsDownloadlineitems' = LineitemsDownloadlineitems'
 --
 -- * 'ldPayload'
 lineitemsDownloadlineitems'
-    :: DownloadLineItemsRequest -- ^ 'payload'
+    :: DownloadLineItemsRequest -- ^ 'ldPayload'
     -> LineitemsDownloadlineitems'
 lineitemsDownloadlineitems' pLdPayload_ =
     LineitemsDownloadlineitems'

@@ -22,7 +22,7 @@
 --
 -- List the alerts for this Ad Exchange account.
 --
--- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsAlertsList@.
+-- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @adexchangeseller.accounts.alerts.list@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.Alerts.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Alerts.List
 import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangesellerAccountsAlertsList@ method which the
+-- | A resource alias for @adexchangeseller.accounts.alerts.list@ method which the
 -- 'AccountsAlertsList'' request conforms to.
 type AccountsAlertsListResource =
      "accounts" :>
@@ -65,7 +65,7 @@ data AccountsAlertsList' = AccountsAlertsList'
 --
 -- * 'aalAccountId'
 accountsAlertsList'
-    :: Text -- ^ 'accountId'
+    :: Text -- ^ 'aalAccountId'
     -> AccountsAlertsList'
 accountsAlertsList' pAalAccountId_ =
     AccountsAlertsList'

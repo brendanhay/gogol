@@ -23,7 +23,7 @@
 -- Retrieves the list of HttpHealthCheck resources available to the
 -- specified project.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeHTTPHealthChecksList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.httpHealthChecks.list@.
 module Network.Google.Resource.Compute.HTTPHealthChecks.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeHTTPHealthChecksList@ method which the
+-- | A resource alias for @compute.httpHealthChecks.list@ method which the
 -- 'HTTPHealthChecksList'' request conforms to.
 type HTTPHealthChecksListResource =
      Capture "project" Text :>
@@ -78,7 +78,7 @@ data HTTPHealthChecksList' = HTTPHealthChecksList'
 --
 -- * 'httphclMaxResults'
 hTTPHealthChecksList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'httphclProject'
     -> HTTPHealthChecksList'
 hTTPHealthChecksList' pHttphclProject_ =
     HTTPHealthChecksList'

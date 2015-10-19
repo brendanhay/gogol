@@ -22,7 +22,7 @@
 --
 -- Deletes the specified firewall resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeFirewallsDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.firewalls.delete@.
 module Network.Google.Resource.Compute.Firewalls.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.Firewalls.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeFirewallsDelete@ method which the
+-- | A resource alias for @compute.firewalls.delete@ method which the
 -- 'FirewallsDelete'' request conforms to.
 type FirewallsDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data FirewallsDelete' = FirewallsDelete'
 --
 -- * 'fdFirewall'
 firewallsDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'firewall'
+    :: Text -- ^ 'fdProject'
+    -> Text -- ^ 'fdFirewall'
     -> FirewallsDelete'
 firewallsDelete' pFdProject_ pFdFirewall_ =
     FirewallsDelete'

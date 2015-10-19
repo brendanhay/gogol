@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of groups contained within the specified project.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsGroupsList@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.groups.list@.
 module Network.Google.Resource.CloudUserAccounts.Groups.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.CloudUserAccounts.Groups.List
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsGroupsList@ method which the
+-- | A resource alias for @clouduseraccounts.groups.list@ method which the
 -- 'GroupsList'' request conforms to.
 type GroupsListResource =
      Capture "project" Text :>
@@ -80,7 +80,7 @@ data GroupsList' = GroupsList'
 --
 -- * 'glMaxResults'
 groupsList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'glProject'
     -> GroupsList'
 groupsList' pGlProject_ =
     GroupsList'

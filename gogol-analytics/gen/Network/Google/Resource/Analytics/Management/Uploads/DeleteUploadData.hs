@@ -22,7 +22,7 @@
 --
 -- Delete data associated with a previous upload.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUploadsDeleteUploadData@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.uploads.deleteUploadData@.
 module Network.Google.Resource.Analytics.Management.Uploads.DeleteUploadData
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.Uploads.DeleteUploadData
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementUploadsDeleteUploadData@ method which the
+-- | A resource alias for @analytics.management.uploads.deleteUploadData@ method which the
 -- 'ManagementUploadsDeleteUploadData'' request conforms to.
 type ManagementUploadsDeleteUploadDataResource =
      "management" :>
@@ -80,10 +80,10 @@ data ManagementUploadsDeleteUploadData' = ManagementUploadsDeleteUploadData'
 --
 -- * 'mududAccountId'
 managementUploadsDeleteUploadData'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'customDataSourceId'
-    -> AnalyticsDataimportDeleteUploadDataRequest -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mududWebPropertyId'
+    -> Text -- ^ 'mududCustomDataSourceId'
+    -> AnalyticsDataimportDeleteUploadDataRequest -- ^ 'mududPayload'
+    -> Text -- ^ 'mududAccountId'
     -> ManagementUploadsDeleteUploadData'
 managementUploadsDeleteUploadData' pMududWebPropertyId_ pMududCustomDataSourceId_ pMududPayload_ pMududAccountId_ =
     ManagementUploadsDeleteUploadData'

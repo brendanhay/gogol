@@ -24,7 +24,7 @@
 -- project. Attachment data associated with a beacon must include a
 -- namespaced type, and the namespace must be owned by your project.
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconNamespacesList@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.namespaces.list@.
 module Network.Google.Resource.ProximityBeacon.Namespaces.List
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.ProximityBeacon.Namespaces.List
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconNamespacesList@ method which the
+-- | A resource alias for @proximitybeacon.namespaces.list@ method which the
 -- 'NamespacesList'' request conforms to.
 type NamespacesListResource =
      "v1beta1" :>

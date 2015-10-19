@@ -22,7 +22,7 @@
 --
 -- Updates a shipment\'s status, carrier, and\/or tracking ID.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersUpdateshipment@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.updateshipment@.
 module Network.Google.Resource.Content.Orders.Updateshipment
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Orders.Updateshipment
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersUpdateshipment@ method which the
+-- | A resource alias for @content.orders.updateshipment@ method which the
 -- 'OrdersUpdateshipment'' request conforms to.
 type OrdersUpdateshipmentResource =
      Capture "merchantId" Word64 :>
@@ -71,9 +71,9 @@ data OrdersUpdateshipment' = OrdersUpdateshipment'
 --
 -- * 'ouOrderId'
 ordersUpdateshipment'
-    :: Word64 -- ^ 'merchantId'
-    -> OrdersUpdateShipmentRequest -- ^ 'payload'
-    -> Text -- ^ 'orderId'
+    :: Word64 -- ^ 'ouMerchantId'
+    -> OrdersUpdateShipmentRequest -- ^ 'ouPayload'
+    -> Text -- ^ 'ouOrderId'
     -> OrdersUpdateshipment'
 ordersUpdateshipment' pOuMerchantId_ pOuPayload_ pOuOrderId_ =
     OrdersUpdateshipment'

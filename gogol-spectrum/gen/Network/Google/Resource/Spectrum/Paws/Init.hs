@@ -23,7 +23,7 @@
 -- Initializes the connection between a white space device and the
 -- database.
 --
--- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @SpectrumPawsInit@.
+-- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @spectrum.paws.init@.
 module Network.Google.Resource.Spectrum.Paws.Init
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Spectrum.Paws.Init
 import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
--- | A resource alias for @SpectrumPawsInit@ method which the
+-- | A resource alias for @spectrum.paws.init@ method which the
 -- 'PawsInit'' request conforms to.
 type PawsInitResource =
      "init" :>
@@ -62,7 +62,7 @@ newtype PawsInit' = PawsInit'
 --
 -- * 'piPayload'
 pawsInit'
-    :: PawsInitRequest -- ^ 'payload'
+    :: PawsInitRequest -- ^ 'piPayload'
     -> PawsInit'
 pawsInit' pPiPayload_ =
     PawsInit'

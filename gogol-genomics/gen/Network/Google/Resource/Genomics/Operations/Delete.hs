@@ -23,7 +23,7 @@
 -- This method is not implemented. To cancel an operation, please use
 -- Operations.CancelOperation.
 --
--- /See:/ < Genomics API Reference> for @GenomicsOperationsDelete@.
+-- /See:/ < Genomics API Reference> for @genomics.operations.delete@.
 module Network.Google.Resource.Genomics.Operations.Delete
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Genomics.Operations.Delete
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsOperationsDelete@ method which the
+-- | A resource alias for @genomics.operations.delete@ method which the
 -- 'OperationsDelete'' request conforms to.
 type OperationsDeleteResource =
      "v1" :>
@@ -96,7 +96,7 @@ data OperationsDelete' = OperationsDelete'
 --
 -- * 'odCallback'
 operationsDelete'
-    :: Text -- ^ 'name'
+    :: Text -- ^ 'odName'
     -> OperationsDelete'
 operationsDelete' pOdName_ =
     OperationsDelete'

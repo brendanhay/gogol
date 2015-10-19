@@ -719,7 +719,7 @@ newtype FileOpenWithLinks = FileOpenWithLinks
 --
 -- * 'fowlAddtional'
 fileOpenWithLinks
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'fowlAddtional'
     -> FileOpenWithLinks
 fileOpenWithLinks pFowlAddtional_ =
     FileOpenWithLinks
@@ -2046,7 +2046,7 @@ newtype RevisionExportLinks = RevisionExportLinks
 --
 -- * 'relAddtional'
 revisionExportLinks
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'relAddtional'
     -> RevisionExportLinks
 revisionExportLinks pRelAddtional_ =
     RevisionExportLinks
@@ -2159,7 +2159,7 @@ newtype ChannelParams = ChannelParams
 --
 -- * 'cpAddtional'
 channelParams
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'cpAddtional'
     -> ChannelParams
 channelParams pCpAddtional_ =
     ChannelParams
@@ -4549,7 +4549,7 @@ newtype FileExportLinks = FileExportLinks
 --
 -- * 'felAddtional'
 fileExportLinks
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'felAddtional'
     -> FileExportLinks
 fileExportLinks pFelAddtional_ =
     FileExportLinks

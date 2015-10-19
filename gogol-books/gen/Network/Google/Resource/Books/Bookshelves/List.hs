@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of public bookshelves for the specified user.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksBookshelvesList@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.bookshelves.list@.
 module Network.Google.Resource.Books.Bookshelves.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Books.Bookshelves.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksBookshelvesList@ method which the
+-- | A resource alias for @books.bookshelves.list@ method which the
 -- 'BookshelvesList'' request conforms to.
 type BookshelvesListResource =
      "users" :>
@@ -65,7 +65,7 @@ data BookshelvesList' = BookshelvesList'
 --
 -- * 'blSource'
 bookshelvesList'
-    :: Text -- ^ 'userId'
+    :: Text -- ^ 'blUserId'
     -> BookshelvesList'
 bookshelvesList' pBlUserId_ =
     BookshelvesList'

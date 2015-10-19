@@ -22,7 +22,7 @@
 --
 -- Sets the breakpoint to the debuggee.
 --
--- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @CloudDebuggerDebuggerDebuggeesBreakpointsSet@.
+-- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.set@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set
 import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudDebuggerDebuggerDebuggeesBreakpointsSet@ method which the
+-- | A resource alias for @clouddebugger.debugger.debuggees.breakpoints.set@ method which the
 -- 'DebuggerDebuggeesBreakpointsSet'' request conforms to.
 type DebuggerDebuggeesBreakpointsSetResource =
      "v2" :>
@@ -104,8 +104,8 @@ data DebuggerDebuggeesBreakpointsSet' = DebuggerDebuggeesBreakpointsSet'
 --
 -- * 'ddbsCallback'
 debuggerDebuggeesBreakpointsSet'
-    :: Breakpoint -- ^ 'payload'
-    -> Text -- ^ 'debuggeeId'
+    :: Breakpoint -- ^ 'ddbsPayload'
+    -> Text -- ^ 'ddbsDebuggeeId'
     -> DebuggerDebuggeesBreakpointsSet'
 debuggerDebuggeesBreakpointsSet' pDdbsPayload_ pDdbsDebuggeeId_ =
     DebuggerDebuggeesBreakpointsSet'

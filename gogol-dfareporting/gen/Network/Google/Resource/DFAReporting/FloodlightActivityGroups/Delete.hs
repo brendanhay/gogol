@@ -22,7 +22,7 @@
 --
 -- Deletes an existing floodlight activity group.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivityGroupsDelete@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightActivityGroups.delete@.
 module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFloodlightActivityGroupsDelete@ method which the
+-- | A resource alias for @dfareporting.floodlightActivityGroups.delete@ method which the
 -- 'FloodlightActivityGroupsDelete'' request conforms to.
 type FloodlightActivityGroupsDeleteResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data FloodlightActivityGroupsDelete' = FloodlightActivityGroupsDelete'
 --
 -- * 'fagdId'
 floodlightActivityGroupsDelete'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'fagdProFileId'
+    -> Int64 -- ^ 'fagdId'
     -> FloodlightActivityGroupsDelete'
 floodlightActivityGroupsDelete' pFagdProFileId_ pFagdId_ =
     FloodlightActivityGroupsDelete'

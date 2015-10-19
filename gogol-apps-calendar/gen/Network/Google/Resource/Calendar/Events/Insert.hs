@@ -22,7 +22,7 @@
 --
 -- Creates an event.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsInsert@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.events.insert@.
 module Network.Google.Resource.Calendar.Events.Insert
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Calendar.Events.Insert
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarEventsInsert@ method which the
+-- | A resource alias for @calendar.events.insert@ method which the
 -- 'EventsInsert'' request conforms to.
 type EventsInsertResource =
      "calendars" :>
@@ -80,8 +80,8 @@ data EventsInsert' = EventsInsert'
 --
 -- * 'eveSupportsAttachments'
 eventsInsert'
-    :: Text -- ^ 'calendarId'
-    -> Event -- ^ 'payload'
+    :: Text -- ^ 'eveCalendarId'
+    -> Event -- ^ 'evePayload'
     -> EventsInsert'
 eventsInsert' pEveCalendarId_ pEvePayload_ =
     EventsInsert'

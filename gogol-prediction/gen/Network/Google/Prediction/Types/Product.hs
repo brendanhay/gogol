@@ -139,7 +139,7 @@ newtype AnalyzeModelDescriptionConfusionMatrixRowTotals = AnalyzeModelDescriptio
 --
 -- * 'amdcmrtAddtional'
 analyzeModelDescriptionConfusionMatrixRowTotals
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'amdcmrtAddtional'
     -> AnalyzeModelDescriptionConfusionMatrixRowTotals
 analyzeModelDescriptionConfusionMatrixRowTotals pAmdcmrtAddtional_ =
     AnalyzeModelDescriptionConfusionMatrixRowTotals
@@ -369,7 +369,7 @@ newtype InsertUtilityItem = InsertUtilityItem
 --
 -- * 'iuiAddtional'
 insertUtilityItem
-    :: HashMap Text Double -- ^ 'addtional'
+    :: HashMap Text Double -- ^ 'iuiAddtional'
     -> InsertUtilityItem
 insertUtilityItem pIuiAddtional_ =
     InsertUtilityItem
@@ -1035,7 +1035,7 @@ newtype AnalyzeModelDescriptionConfusionMatrix = AnalyzeModelDescriptionConfusio
 --
 -- * 'amdcmAddtional'
 analyzeModelDescriptionConfusionMatrix
-    :: HashMap Text AnalyzeModelDescriptionConfusionMatrixAdditional -- ^ 'addtional'
+    :: HashMap Text AnalyzeModelDescriptionConfusionMatrixAdditional -- ^ 'amdcmAddtional'
     -> AnalyzeModelDescriptionConfusionMatrix
 analyzeModelDescriptionConfusionMatrix pAmdcmAddtional_ =
     AnalyzeModelDescriptionConfusionMatrix
@@ -1225,7 +1225,7 @@ newtype AnalyzeErrorsItem = AnalyzeErrorsItem
 --
 -- * 'aeiAddtional'
 analyzeErrorsItem
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'aeiAddtional'
     -> AnalyzeErrorsItem
 analyzeErrorsItem pAeiAddtional_ =
     AnalyzeErrorsItem
@@ -1413,7 +1413,7 @@ newtype AnalyzeModelDescriptionConfusionMatrixAdditional = AnalyzeModelDescripti
 --
 -- * 'amdcmaAddtional'
 analyzeModelDescriptionConfusionMatrixAdditional
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'amdcmaAddtional'
     -> AnalyzeModelDescriptionConfusionMatrixAdditional
 analyzeModelDescriptionConfusionMatrixAdditional pAmdcmaAddtional_ =
     AnalyzeModelDescriptionConfusionMatrixAdditional

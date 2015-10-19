@@ -22,7 +22,7 @@
 --
 -- Returns the authenticated user\'s specified task list.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTaskListsGet@.
+-- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasklists.get@.
 module Network.Google.Resource.Tasks.TaskLists.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Tasks.TaskLists.Get
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTaskListsGet@ method which the
+-- | A resource alias for @tasks.tasklists.get@ method which the
 -- 'TaskListsGet'' request conforms to.
 type TaskListsGetResource =
      "users" :>
@@ -61,7 +61,7 @@ newtype TaskListsGet' = TaskListsGet'
 --
 -- * 'tlgTaskList'
 taskListsGet'
-    :: Text -- ^ 'tasklist'
+    :: Text -- ^ 'tlgTaskList'
     -> TaskListsGet'
 taskListsGet' pTlgTaskList_ =
     TaskListsGet'

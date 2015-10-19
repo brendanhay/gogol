@@ -22,7 +22,7 @@
 --
 -- Gets a file\'s metadata by ID.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesGet@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.get@.
 module Network.Google.Resource.Drive.Files.Get
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Drive.Files.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesGet@ method which the
+-- | A resource alias for @drive.files.get@ method which the
 -- 'FilesGet'' request conforms to.
 type FilesGetResource =
      "files" :>
@@ -88,7 +88,7 @@ data FilesGet' = FilesGet'
 --
 -- * 'fgRevisionId'
 filesGet'
-    :: Text -- ^ 'fileId'
+    :: Text -- ^ 'fgFileId'
     -> FilesGet'
 filesGet' pFgFileId_ =
     FilesGet'

@@ -22,7 +22,7 @@
 --
 -- Set the file\'s updated time to the current server time.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesTouch@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.touch@.
 module Network.Google.Resource.Drive.Files.Touch
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Drive.Files.Touch
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesTouch@ method which the
+-- | A resource alias for @drive.files.touch@ method which the
 -- 'FilesTouch'' request conforms to.
 type FilesTouchResource =
      "files" :>
@@ -60,7 +60,7 @@ newtype FilesTouch' = FilesTouch'
 --
 -- * 'ftFileId'
 filesTouch'
-    :: Text -- ^ 'fileId'
+    :: Text -- ^ 'ftFileId'
     -> FilesTouch'
 filesTouch' pFtFileId_ =
     FilesTouch'

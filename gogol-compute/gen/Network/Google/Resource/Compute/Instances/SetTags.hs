@@ -23,7 +23,7 @@
 -- Sets tags for the specified instance to the data included in the
 -- request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesSetTags@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.setTags@.
 module Network.Google.Resource.Compute.Instances.SetTags
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.Instances.SetTags
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesSetTags@ method which the
+-- | A resource alias for @compute.instances.setTags@ method which the
 -- 'InstancesSetTags'' request conforms to.
 type InstancesSetTagsResource =
      Capture "project" Text :>
@@ -78,10 +78,10 @@ data InstancesSetTags' = InstancesSetTags'
 --
 -- * 'istInstance'
 instancesSetTags'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Tags -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'istProject'
+    -> Text -- ^ 'istZone'
+    -> Tags -- ^ 'istPayload'
+    -> Text -- ^ 'istInstance'
     -> InstancesSetTags'
 instancesSetTags' pIstProject_ pIstZone_ pIstPayload_ pIstInstance_ =
     InstancesSetTags'

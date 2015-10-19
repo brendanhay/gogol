@@ -22,7 +22,7 @@
 --
 -- Deletes the specified column.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesColumnDelete@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.column.delete@.
 module Network.Google.Resource.FusionTables.Column.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.FusionTables.Column.Delete
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesColumnDelete@ method which the
+-- | A resource alias for @fusiontables.column.delete@ method which the
 -- 'ColumnDelete'' request conforms to.
 type ColumnDeleteResource =
      "tables" :>
@@ -65,8 +65,8 @@ data ColumnDelete' = ColumnDelete'
 --
 -- * 'cdColumnId'
 columnDelete'
-    :: Text -- ^ 'tableId'
-    -> Text -- ^ 'columnId'
+    :: Text -- ^ 'cdTableId'
+    -> Text -- ^ 'cdColumnId'
     -> ColumnDelete'
 columnDelete' pCdTableId_ pCdColumnId_ =
     ColumnDelete'

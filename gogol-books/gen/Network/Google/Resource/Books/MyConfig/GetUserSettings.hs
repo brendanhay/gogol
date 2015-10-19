@@ -22,7 +22,7 @@
 --
 -- Gets the current settings for the user.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyConfigGetUserSettings@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.myconfig.getUserSettings@.
 module Network.Google.Resource.Books.MyConfig.GetUserSettings
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.Books.MyConfig.GetUserSettings
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyConfigGetUserSettings@ method which the
+-- | A resource alias for @books.myconfig.getUserSettings@ method which the
 -- 'MyConfigGetUserSettings'' request conforms to.
 type MyConfigGetUserSettingsResource =
      "myconfig" :>

@@ -22,7 +22,7 @@
 --
 -- Creates a broadcast.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveBroadcastsInsert@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveBroadcasts.insert@.
 module Network.Google.Resource.YouTube.LiveBroadcasts.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveBroadcastsInsert@ method which the
+-- | A resource alias for @youtube.liveBroadcasts.insert@ method which the
 -- 'LiveBroadcastsInsert'' request conforms to.
 type LiveBroadcastsInsertResource =
      "liveBroadcasts" :>
@@ -75,8 +75,8 @@ data LiveBroadcastsInsert' = LiveBroadcastsInsert'
 --
 -- * 'lbiOnBehalfOfContentOwnerChannel'
 liveBroadcastsInsert'
-    :: Text -- ^ 'part'
-    -> LiveBroadcast -- ^ 'payload'
+    :: Text -- ^ 'lbiPart'
+    -> LiveBroadcast -- ^ 'lbiPayload'
     -> LiveBroadcastsInsert'
 liveBroadcastsInsert' pLbiPart_ pLbiPayload_ =
     LiveBroadcastsInsert'

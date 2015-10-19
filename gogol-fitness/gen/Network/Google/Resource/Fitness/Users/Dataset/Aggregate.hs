@@ -25,7 +25,7 @@
 -- multiple sources can be aggreated into exactly one bucket type per
 -- request.
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDatasetAggregate@.
+-- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataset.aggregate@.
 module Network.Google.Resource.Fitness.Users.Dataset.Aggregate
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Fitness.Users.Dataset.Aggregate
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersDatasetAggregate@ method which the
+-- | A resource alias for @fitness.users.dataset.aggregate@ method which the
 -- 'UsersDatasetAggregate'' request conforms to.
 type UsersDatasetAggregateResource =
      Capture "userId" Text :>
@@ -71,8 +71,8 @@ data UsersDatasetAggregate' = UsersDatasetAggregate'
 --
 -- * 'udaUserId'
 usersDatasetAggregate'
-    :: AggregateRequest -- ^ 'payload'
-    -> Text -- ^ 'userId'
+    :: AggregateRequest -- ^ 'udaPayload'
+    -> Text -- ^ 'udaUserId'
     -> UsersDatasetAggregate'
 usersDatasetAggregate' pUdaPayload_ pUdaUserId_ =
     UsersDatasetAggregate'

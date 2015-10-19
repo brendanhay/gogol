@@ -22,7 +22,7 @@
 --
 -- Insert a new task in a TaskQueue
 --
--- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksInsert@.
+-- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @taskqueue.tasks.insert@.
 module Network.Google.Resource.TaskQueue.Tasks.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Insert
 import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
--- | A resource alias for @TaskqueueTasksInsert@ method which the
+-- | A resource alias for @taskqueue.tasks.insert@ method which the
 -- 'TasksInsert'' request conforms to.
 type TasksInsertResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data TasksInsert' = TasksInsert'
 --
 -- * 'tiPayload'
 tasksInsert'
-    :: Text -- ^ 'taskqueue'
-    -> Text -- ^ 'project'
-    -> Task -- ^ 'payload'
+    :: Text -- ^ 'tiTaskqueue'
+    -> Text -- ^ 'tiProject'
+    -> Task -- ^ 'tiPayload'
     -> TasksInsert'
 tasksInsert' pTiTaskqueue_ pTiProject_ pTiPayload_ =
     TasksInsert'

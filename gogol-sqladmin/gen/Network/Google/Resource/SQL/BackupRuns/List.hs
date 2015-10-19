@@ -23,7 +23,7 @@
 -- Lists all backup runs associated with a given instance and configuration
 -- in the reverse chronological order of the enqueued time.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLBackupRunsList@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.backupRuns.list@.
 module Network.Google.Resource.SQL.BackupRuns.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.SQL.BackupRuns.List
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLBackupRunsList@ method which the
+-- | A resource alias for @sql.backupRuns.list@ method which the
 -- 'BackupRunsList'' request conforms to.
 type BackupRunsListResource =
      "projects" :>
@@ -79,8 +79,8 @@ data BackupRunsList' = BackupRunsList'
 --
 -- * 'brlInstance'
 backupRunsList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'brlProject'
+    -> Text -- ^ 'brlInstance'
     -> BackupRunsList'
 backupRunsList' pBrlProject_ pBrlInstance_ =
     BackupRunsList'

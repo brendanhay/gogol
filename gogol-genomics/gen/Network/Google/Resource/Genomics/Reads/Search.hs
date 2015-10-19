@@ -32,7 +32,7 @@
 -- genomic coordinates are returned in a deterministic order. Implements
 -- [GlobalAllianceApi.searchReads](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/readmethods.avdl#L85).
 --
--- /See:/ < Genomics API Reference> for @GenomicsReadsSearch@.
+-- /See:/ < Genomics API Reference> for @genomics.reads.search@.
 module Network.Google.Resource.Genomics.Reads.Search
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ module Network.Google.Resource.Genomics.Reads.Search
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReadsSearch@ method which the
+-- | A resource alias for @genomics.reads.search@ method which the
 -- 'ReadsSearch'' request conforms to.
 type ReadsSearchResource =
      "v1" :>
@@ -117,7 +117,7 @@ data ReadsSearch' = ReadsSearch'
 --
 -- * 'rsCallback'
 readsSearch'
-    :: SearchReadsRequest -- ^ 'payload'
+    :: SearchReadsRequest -- ^ 'rsPayload'
     -> ReadsSearch'
 readsSearch' pRsPayload_ =
     ReadsSearch'

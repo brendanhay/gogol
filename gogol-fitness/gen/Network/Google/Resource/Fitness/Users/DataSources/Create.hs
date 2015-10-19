@@ -29,7 +29,7 @@
 -- data source is included. This developer project number is obfuscated
 -- when read by any other developer reading public data types.
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesCreate@.
+-- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.dataSources.create@.
 module Network.Google.Resource.Fitness.Users.DataSources.Create
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Fitness.Users.DataSources.Create
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersDataSourcesCreate@ method which the
+-- | A resource alias for @fitness.users.dataSources.create@ method which the
 -- 'UsersDataSourcesCreate'' request conforms to.
 type UsersDataSourcesCreateResource =
      Capture "userId" Text :>
@@ -78,8 +78,8 @@ data UsersDataSourcesCreate' = UsersDataSourcesCreate'
 --
 -- * 'udscUserId'
 usersDataSourcesCreate'
-    :: DataSource -- ^ 'payload'
-    -> Text -- ^ 'userId'
+    :: DataSource -- ^ 'udscPayload'
+    -> Text -- ^ 'udscUserId'
     -> UsersDataSourcesCreate'
 usersDataSourcesCreate' pUdscPayload_ pUdscUserId_ =
     UsersDataSourcesCreate'

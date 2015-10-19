@@ -198,7 +198,7 @@ newtype WebfontFiles = WebfontFiles
 --
 -- * 'wfAddtional'
 webfontFiles
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'wfAddtional'
     -> WebfontFiles
 webfontFiles pWfAddtional_ =
     WebfontFiles

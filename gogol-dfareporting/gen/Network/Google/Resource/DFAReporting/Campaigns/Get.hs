@@ -22,7 +22,7 @@
 --
 -- Gets one campaign by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCampaignsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.campaigns.get@.
 module Network.Google.Resource.DFAReporting.Campaigns.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Campaigns.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCampaignsGet@ method which the
+-- | A resource alias for @dfareporting.campaigns.get@ method which the
 -- 'CampaignsGet'' request conforms to.
 type CampaignsGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data CampaignsGet' = CampaignsGet'
 --
 -- * 'camaId'
 campaignsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'camaProFileId'
+    -> Int64 -- ^ 'camaId'
     -> CampaignsGet'
 campaignsGet' pCamaProFileId_ pCamaId_ =
     CampaignsGet'

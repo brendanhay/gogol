@@ -22,7 +22,7 @@
 --
 -- Gets one site by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSitesGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.sites.get@.
 module Network.Google.Resource.DFAReporting.Sites.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Sites.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSitesGet@ method which the
+-- | A resource alias for @dfareporting.sites.get@ method which the
 -- 'SitesGet'' request conforms to.
 type SitesGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data SitesGet' = SitesGet'
 --
 -- * 'sgId'
 sitesGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'sgProFileId'
+    -> Int64 -- ^ 'sgId'
     -> SitesGet'
 sitesGet' pSgProFileId_ pSgId_ =
     SitesGet'

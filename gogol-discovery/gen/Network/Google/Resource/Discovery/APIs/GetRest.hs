@@ -22,7 +22,7 @@
 --
 -- Retrieve the description of a particular version of an api.
 --
--- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference> for @DiscoveryAPIsGetRest@.
+-- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference> for @discovery.apis.getRest@.
 module Network.Google.Resource.Discovery.APIs.GetRest
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Discovery.APIs.GetRest
 import           Network.Google.Discovery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DiscoveryAPIsGetRest@ method which the
+-- | A resource alias for @discovery.apis.getRest@ method which the
 -- 'APIsGetRest'' request conforms to.
 type APIsGetRestResource =
      "apis" :>
@@ -66,8 +66,8 @@ data APIsGetRest' = APIsGetRest'
 --
 -- * 'agrAPI'
 apisGetRest'
-    :: Text -- ^ 'version'
-    -> Text -- ^ 'api'
+    :: Text -- ^ 'agrVersion'
+    -> Text -- ^ 'agrAPI'
     -> APIsGetRest'
 apisGetRest' pAgrVersion_ pAgrAPI_ =
     APIsGetRest'

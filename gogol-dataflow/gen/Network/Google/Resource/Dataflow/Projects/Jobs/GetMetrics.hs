@@ -22,7 +22,7 @@
 --
 -- Request the job status.
 --
--- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsGetMetrics@.
+-- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @dataflow.projects.jobs.getMetrics@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
 import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataflowProjectsJobsGetMetrics@ method which the
+-- | A resource alias for @dataflow.projects.jobs.getMetrics@ method which the
 -- 'ProjectsJobsGetMetrics'' request conforms to.
 type ProjectsJobsGetMetricsResource =
      "v1b3" :>
@@ -108,8 +108,8 @@ data ProjectsJobsGetMetrics' = ProjectsJobsGetMetrics'
 --
 -- * 'pjgmCallback'
 projectsJobsGetMetrics'
-    :: Text -- ^ 'jobId'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'pjgmJobId'
+    -> Text -- ^ 'pjgmProjectId'
     -> ProjectsJobsGetMetrics'
 projectsJobsGetMetrics' pPjgmJobId_ pPjgmProjectId_ =
     ProjectsJobsGetMetrics'

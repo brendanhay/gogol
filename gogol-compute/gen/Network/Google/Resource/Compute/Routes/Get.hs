@@ -22,7 +22,7 @@
 --
 -- Returns the specified route resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRoutesGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.routes.get@.
 module Network.Google.Resource.Compute.Routes.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.Routes.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeRoutesGet@ method which the
+-- | A resource alias for @compute.routes.get@ method which the
 -- 'RoutesGet'' request conforms to.
 type RoutesGetResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data RoutesGet' = RoutesGet'
 --
 -- * 'rouRoute'
 routesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'route'
+    :: Text -- ^ 'rouProject'
+    -> Text -- ^ 'rouRoute'
     -> RoutesGet'
 routesGet' pRouProject_ pRouRoute_ =
     RoutesGet'

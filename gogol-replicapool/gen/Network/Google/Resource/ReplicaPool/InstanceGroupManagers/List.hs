@@ -23,7 +23,7 @@
 -- Retrieves the list of Instance Group Manager resources contained within
 -- the specified zone.
 --
--- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersList@.
+-- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @replicapool.instanceGroupManagers.list@.
 module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.List
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
--- | A resource alias for @ReplicapoolInstanceGroupManagersList@ method which the
+-- | A resource alias for @replicapool.instanceGroupManagers.list@ method which the
 -- 'InstanceGroupManagersList'' request conforms to.
 type InstanceGroupManagersListResource =
      Capture "project" Text :>
@@ -83,8 +83,8 @@ data InstanceGroupManagersList' = InstanceGroupManagersList'
 --
 -- * 'igmlMaxResults'
 instanceGroupManagersList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'igmlProject'
+    -> Text -- ^ 'igmlZone'
     -> InstanceGroupManagersList'
 instanceGroupManagersList' pIgmlProject_ pIgmlZone_ =
     InstanceGroupManagersList'

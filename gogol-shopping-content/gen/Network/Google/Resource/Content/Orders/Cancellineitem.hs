@@ -22,7 +22,7 @@
 --
 -- Cancels a line item.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersCancellineitem@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.cancellineitem@.
 module Network.Google.Resource.Content.Orders.Cancellineitem
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Orders.Cancellineitem
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersCancellineitem@ method which the
+-- | A resource alias for @content.orders.cancellineitem@ method which the
 -- 'OrdersCancellineitem'' request conforms to.
 type OrdersCancellineitemResource =
      Capture "merchantId" Word64 :>
@@ -71,9 +71,9 @@ data OrdersCancellineitem' = OrdersCancellineitem'
 --
 -- * 'oOrderId'
 ordersCancellineitem'
-    :: Word64 -- ^ 'merchantId'
-    -> OrdersCancelLineItemRequest -- ^ 'payload'
-    -> Text -- ^ 'orderId'
+    :: Word64 -- ^ 'oMerchantId'
+    -> OrdersCancelLineItemRequest -- ^ 'oPayload'
+    -> Text -- ^ 'oOrderId'
     -> OrdersCancellineitem'
 ordersCancellineitem' pOMerchantId_ pOPayload_ pOOrderId_ =
     OrdersCancellineitem'

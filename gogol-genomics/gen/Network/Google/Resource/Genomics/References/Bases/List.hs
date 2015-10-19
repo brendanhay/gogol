@@ -24,7 +24,7 @@
 -- Implements
 -- [GlobalAllianceApi.getReferenceBases](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L221).
 --
--- /See:/ < Genomics API Reference> for @GenomicsReferencesBasesList@.
+-- /See:/ < Genomics API Reference> for @genomics.references.bases.list@.
 module Network.Google.Resource.Genomics.References.Bases.List
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.Genomics.References.Bases.List
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReferencesBasesList@ method which the
+-- | A resource alias for @genomics.references.bases.list@ method which the
 -- 'ReferencesBasesList'' request conforms to.
 type ReferencesBasesListResource =
      "v1" :>
@@ -121,7 +121,7 @@ data ReferencesBasesList' = ReferencesBasesList'
 --
 -- * 'rblCallback'
 referencesBasesList'
-    :: Text -- ^ 'referenceId'
+    :: Text -- ^ 'rblReferenceId'
     -> ReferencesBasesList'
 referencesBasesList' pRblReferenceId_ =
     ReferencesBasesList'

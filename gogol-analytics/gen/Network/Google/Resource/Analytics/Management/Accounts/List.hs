@@ -22,7 +22,7 @@
 --
 -- Lists all accounts to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountsList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.accounts.list@.
 module Network.Google.Resource.Analytics.Management.Accounts.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Analytics.Management.Accounts.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementAccountsList@ method which the
+-- | A resource alias for @analytics.management.accounts.list@ method which the
 -- 'ManagementAccountsList'' request conforms to.
 type ManagementAccountsListResource =
      "management" :>

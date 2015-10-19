@@ -33,7 +33,7 @@ newtype InAppProductListings = InAppProductListings
 --
 -- * 'iaplAddtional'
 inAppProductListings
-    :: HashMap Text InAppProductListing -- ^ 'addtional'
+    :: HashMap Text InAppProductListing -- ^ 'iaplAddtional'
     -> InAppProductListings
 inAppProductListings pIaplAddtional_ =
     InAppProductListings
@@ -1279,7 +1279,7 @@ newtype InAppProductPrices = InAppProductPrices
 --
 -- * 'iAppAddtional'
 inAppProductPrices
-    :: HashMap Text Price -- ^ 'addtional'
+    :: HashMap Text Price -- ^ 'iAppAddtional'
     -> InAppProductPrices
 inAppProductPrices pIAppAddtional_ =
     InAppProductPrices

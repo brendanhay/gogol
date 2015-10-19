@@ -23,7 +23,7 @@
 -- Returns a list of all variant sets matching search criteria. Implements
 -- [GlobalAllianceApi.searchVariantSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L49).
 --
--- /See:/ < Genomics API Reference> for @GenomicsVariantsetsSearch@.
+-- /See:/ < Genomics API Reference> for @genomics.variantsets.search@.
 module Network.Google.Resource.Genomics.Variantsets.Search
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Genomics.Variantsets.Search
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsVariantsetsSearch@ method which the
+-- | A resource alias for @genomics.variantsets.search@ method which the
 -- 'VariantsetsSearch'' request conforms to.
 type VariantsetsSearchResource =
      "v1" :>
@@ -99,7 +99,7 @@ data VariantsetsSearch' = VariantsetsSearch'
 --
 -- * 'vCallback'
 variantsetsSearch'
-    :: SearchVariantSetsRequest -- ^ 'payload'
+    :: SearchVariantSetsRequest -- ^ 'vPayload'
     -> VariantsetsSearch'
 variantsetsSearch' pVPayload_ =
     VariantsetsSearch'

@@ -22,7 +22,7 @@
 --
 -- Deletes the specified TargetVpnGateway resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetVPNGatewaysDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetVpnGateways.delete@.
 module Network.Google.Resource.Compute.TargetVPNGateways.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.TargetVPNGateways.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetVPNGatewaysDelete@ method which the
+-- | A resource alias for @compute.targetVpnGateways.delete@ method which the
 -- 'TargetVPNGatewaysDelete'' request conforms to.
 type TargetVPNGatewaysDeleteResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data TargetVPNGatewaysDelete' = TargetVPNGatewaysDelete'
 --
 -- * 'tvgdRegion'
 targetVPNGatewaysDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'targetVpnGateway'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'tvgdProject'
+    -> Text -- ^ 'tvgdTargetVPNGateway'
+    -> Text -- ^ 'tvgdRegion'
     -> TargetVPNGatewaysDelete'
 targetVPNGatewaysDelete' pTvgdProject_ pTvgdTargetVPNGateway_ pTvgdRegion_ =
     TargetVPNGatewaysDelete'

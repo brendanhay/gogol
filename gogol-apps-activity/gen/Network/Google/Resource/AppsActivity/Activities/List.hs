@@ -27,7 +27,7 @@
 -- similar. A request is scoped to activities from a given Google service
 -- using the source parameter.
 --
--- /See:/ <https://developers.google.com/google-apps/activity/ Google Apps Activity API Reference> for @AppsactivityActivitiesList@.
+-- /See:/ <https://developers.google.com/google-apps/activity/ Google Apps Activity API Reference> for @appsactivity.activities.list@.
 module Network.Google.Resource.AppsActivity.Activities.List
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.AppsActivity.Activities.List
 import           Network.Google.AppsActivity.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppsactivityActivitiesList@ method which the
+-- | A resource alias for @appsactivity.activities.list@ method which the
 -- 'ActivitiesList'' request conforms to.
 type ActivitiesListResource =
      "activities" :>

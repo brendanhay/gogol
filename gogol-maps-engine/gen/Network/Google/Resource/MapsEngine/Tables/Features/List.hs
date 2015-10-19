@@ -22,7 +22,7 @@
 --
 -- Return all features readable by the current user.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesFeaturesList@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.tables.features.list@.
 module Network.Google.Resource.MapsEngine.Tables.Features.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.MapsEngine.Tables.Features.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesFeaturesList@ method which the
+-- | A resource alias for @mapsengine.tables.features.list@ method which the
 -- 'TablesFeaturesList'' request conforms to.
 type TablesFeaturesListResource =
      "tables" :>
@@ -106,7 +106,7 @@ data TablesFeaturesList' = TablesFeaturesList'
 --
 -- * 'tflMaxResults'
 tablesFeaturesList'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'tflId'
     -> TablesFeaturesList'
 tablesFeaturesList' pTflId_ =
     TablesFeaturesList'

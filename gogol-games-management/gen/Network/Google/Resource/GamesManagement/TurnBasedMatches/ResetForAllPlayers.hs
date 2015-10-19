@@ -24,7 +24,7 @@
 -- whitelisted tester accounts for your application. This method is only
 -- available to user accounts for your developer console.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementTurnBasedMatchesResetForAllPlayers@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.turnBasedMatches.resetForAllPlayers@.
 module Network.Google.Resource.GamesManagement.TurnBasedMatches.ResetForAllPlayers
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.GamesManagement.TurnBasedMatches.ResetForAllPlaye
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementTurnBasedMatchesResetForAllPlayers@ method which the
+-- | A resource alias for @gamesManagement.turnBasedMatches.resetForAllPlayers@ method which the
 -- 'TurnBasedMatchesResetForAllPlayers'' request conforms to.
 type TurnBasedMatchesResetForAllPlayersResource =
      "turnbasedmatches" :>

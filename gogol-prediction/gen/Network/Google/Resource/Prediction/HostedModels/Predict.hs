@@ -22,7 +22,7 @@
 --
 -- Submit input and request an output against a hosted model.
 --
--- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionHostedModelsPredict@.
+-- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @prediction.hostedmodels.predict@.
 module Network.Google.Resource.Prediction.HostedModels.Predict
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Prediction.HostedModels.Predict
 import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PredictionHostedModelsPredict@ method which the
+-- | A resource alias for @prediction.hostedmodels.predict@ method which the
 -- 'HostedModelsPredict'' request conforms to.
 type HostedModelsPredictResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data HostedModelsPredict' = HostedModelsPredict'
 --
 -- * 'hmpHostedModelName'
 hostedModelsPredict'
-    :: Text -- ^ 'project'
-    -> Input -- ^ 'payload'
-    -> Text -- ^ 'hostedModelName'
+    :: Text -- ^ 'hmpProject'
+    -> Input -- ^ 'hmpPayload'
+    -> Text -- ^ 'hmpHostedModelName'
     -> HostedModelsPredict'
 hostedModelsPredict' pHmpProject_ pHmpPayload_ pHmpHostedModelName_ =
     HostedModelsPredict'

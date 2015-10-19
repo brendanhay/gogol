@@ -22,7 +22,7 @@
 --
 -- Return all parent ids of the specified raster collection.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRasterCollectionsParentsList@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.rasterCollections.parents.list@.
 module Network.Google.Resource.MapsEngine.RasterCollections.Parents.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Parents.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRasterCollectionsParentsList@ method which the
+-- | A resource alias for @mapsengine.rasterCollections.parents.list@ method which the
 -- 'RasterCollectionsParentsList'' request conforms to.
 type RasterCollectionsParentsListResource =
      "rasterCollections" :>
@@ -71,7 +71,7 @@ data RasterCollectionsParentsList' = RasterCollectionsParentsList'
 --
 -- * 'rcplMaxResults'
 rasterCollectionsParentsList'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'rcplId'
     -> RasterCollectionsParentsList'
 rasterCollectionsParentsList' pRcplId_ =
     RasterCollectionsParentsList'

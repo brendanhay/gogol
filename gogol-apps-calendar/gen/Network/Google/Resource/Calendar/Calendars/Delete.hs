@@ -23,7 +23,7 @@
 -- Deletes a secondary calendar. Use calendars.clear for clearing all
 -- events on primary calendars.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarsDelete@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.calendars.delete@.
 module Network.Google.Resource.Calendar.Calendars.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Calendar.Calendars.Delete
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarCalendarsDelete@ method which the
+-- | A resource alias for @calendar.calendars.delete@ method which the
 -- 'CalendarsDelete'' request conforms to.
 type CalendarsDeleteResource =
      "calendars" :>
@@ -61,7 +61,7 @@ newtype CalendarsDelete' = CalendarsDelete'
 --
 -- * 'cdCalendarId'
 calendarsDelete'
-    :: Text -- ^ 'calendarId'
+    :: Text -- ^ 'cdCalendarId'
     -> CalendarsDelete'
 calendarsDelete' pCdCalendarId_ =
     CalendarsDelete'

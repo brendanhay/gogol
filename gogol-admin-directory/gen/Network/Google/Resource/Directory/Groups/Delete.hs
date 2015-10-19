@@ -22,7 +22,7 @@
 --
 -- Delete Group
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsDelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.groups.delete@.
 module Network.Google.Resource.Directory.Groups.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Directory.Groups.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryGroupsDelete@ method which the
+-- | A resource alias for @directory.groups.delete@ method which the
 -- 'GroupsDelete'' request conforms to.
 type GroupsDeleteResource =
      "groups" :>
@@ -59,7 +59,7 @@ newtype GroupsDelete' = GroupsDelete'
 --
 -- * 'gdGroupKey'
 groupsDelete'
-    :: Text -- ^ 'groupKey'
+    :: Text -- ^ 'gdGroupKey'
     -> GroupsDelete'
 groupsDelete' pGdGroupKey_ =
     GroupsDelete'

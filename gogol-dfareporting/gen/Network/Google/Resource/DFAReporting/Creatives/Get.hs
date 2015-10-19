@@ -22,7 +22,7 @@
 --
 -- Gets one creative by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativesGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creatives.get@.
 module Network.Google.Resource.DFAReporting.Creatives.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Creatives.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativesGet@ method which the
+-- | A resource alias for @dfareporting.creatives.get@ method which the
 -- 'CreativesGet'' request conforms to.
 type CreativesGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data CreativesGet' = CreativesGet'
 --
 -- * 'crerId'
 creativesGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'crerProFileId'
+    -> Int64 -- ^ 'crerId'
     -> CreativesGet'
 creativesGet' pCrerProFileId_ pCrerId_ =
     CreativesGet'

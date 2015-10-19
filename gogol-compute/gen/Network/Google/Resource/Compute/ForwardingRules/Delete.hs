@@ -22,7 +22,7 @@
 --
 -- Deletes the specified ForwardingRule resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeForwardingRulesDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.forwardingRules.delete@.
 module Network.Google.Resource.Compute.ForwardingRules.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.ForwardingRules.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeForwardingRulesDelete@ method which the
+-- | A resource alias for @compute.forwardingRules.delete@ method which the
 -- 'ForwardingRulesDelete'' request conforms to.
 type ForwardingRulesDeleteResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data ForwardingRulesDelete' = ForwardingRulesDelete'
 --
 -- * 'frdRegion'
 forwardingRulesDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'forwardingRule'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'frdProject'
+    -> Text -- ^ 'frdForwardingRule'
+    -> Text -- ^ 'frdRegion'
     -> ForwardingRulesDelete'
 forwardingRulesDelete' pFrdProject_ pFrdForwardingRule_ pFrdRegion_ =
     ForwardingRulesDelete'

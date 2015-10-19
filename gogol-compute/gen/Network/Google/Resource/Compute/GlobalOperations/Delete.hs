@@ -22,7 +22,7 @@
 --
 -- Deletes the specified Operations resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalOperationsDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalOperations.delete@.
 module Network.Google.Resource.Compute.GlobalOperations.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.GlobalOperations.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeGlobalOperationsDelete@ method which the
+-- | A resource alias for @compute.globalOperations.delete@ method which the
 -- 'GlobalOperationsDelete'' request conforms to.
 type GlobalOperationsDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data GlobalOperationsDelete' = GlobalOperationsDelete'
 --
 -- * 'godOperation'
 globalOperationsDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'operation'
+    :: Text -- ^ 'godProject'
+    -> Text -- ^ 'godOperation'
     -> GlobalOperationsDelete'
 globalOperationsDelete' pGodProject_ pGodOperation_ =
     GlobalOperationsDelete'

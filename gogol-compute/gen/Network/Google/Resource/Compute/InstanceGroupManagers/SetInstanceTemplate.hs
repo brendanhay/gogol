@@ -24,7 +24,7 @@
 -- this group. The templates for existing instances in the group do not
 -- change unless you recreate them.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersSetInstanceTemplate@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.setInstanceTemplate@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.SetInstanceTemplate
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.SetInstanceTemplate
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersSetInstanceTemplate@ method which the
+-- | A resource alias for @compute.instanceGroupManagers.setInstanceTemplate@ method which the
 -- 'InstanceGroupManagersSetInstanceTemplate'' request conforms to.
 type InstanceGroupManagersSetInstanceTemplateResource
      =
@@ -83,10 +83,10 @@ data InstanceGroupManagersSetInstanceTemplate' = InstanceGroupManagersSetInstanc
 --
 -- * 'igmsitPayload'
 instanceGroupManagersSetInstanceTemplate'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instanceGroupManager'
-    -> Text -- ^ 'zone'
-    -> InstanceGroupManagersSetInstanceTemplateRequest -- ^ 'payload'
+    :: Text -- ^ 'igmsitProject'
+    -> Text -- ^ 'igmsitInstanceGroupManager'
+    -> Text -- ^ 'igmsitZone'
+    -> InstanceGroupManagersSetInstanceTemplateRequest -- ^ 'igmsitPayload'
     -> InstanceGroupManagersSetInstanceTemplate'
 instanceGroupManagersSetInstanceTemplate' pIgmsitProject_ pIgmsitInstanceGroupManager_ pIgmsitZone_ pIgmsitPayload_ =
     InstanceGroupManagersSetInstanceTemplate'

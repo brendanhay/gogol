@@ -23,7 +23,7 @@
 -- Returns a collection of zero or more channel resources that match the
 -- request criteria.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeChannelsList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.channels.list@.
 module Network.Google.Resource.YouTube.Channels.List
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.YouTube.Channels.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeChannelsList@ method which the
+-- | A resource alias for @youtube.channels.list@ method which the
 -- 'ChannelsList'' request conforms to.
 type ChannelsListResource =
      "channels" :>
@@ -112,7 +112,7 @@ data ChannelsList' = ChannelsList'
 --
 -- * 'clMaxResults'
 channelsList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'clPart'
     -> ChannelsList'
 channelsList' pClPart_ =
     ChannelsList'

@@ -22,7 +22,7 @@
 --
 -- Return metadata for a particular map.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineMapsGet@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.maps.get@.
 module Network.Google.Resource.MapsEngine.Maps.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.MapsEngine.Maps.Get
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineMapsGet@ method which the
+-- | A resource alias for @mapsengine.maps.get@ method which the
 -- 'MapsGet'' request conforms to.
 type MapsGetResource =
      "maps" :>
@@ -64,7 +64,7 @@ data MapsGet' = MapsGet'
 --
 -- * 'mgId'
 mapsGet'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'mgId'
     -> MapsGet'
 mapsGet' pMgId_ =
     MapsGet'

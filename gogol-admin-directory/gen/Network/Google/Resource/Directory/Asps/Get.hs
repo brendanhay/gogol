@@ -22,7 +22,7 @@
 --
 -- Get information about an ASP issued by a user.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryAspsGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.asps.get@.
 module Network.Google.Resource.Directory.Asps.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Asps.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryAspsGet@ method which the
+-- | A resource alias for @directory.asps.get@ method which the
 -- 'AspsGet'' request conforms to.
 type AspsGetResource =
      "users" :>
@@ -65,8 +65,8 @@ data AspsGet' = AspsGet'
 --
 -- * 'agUserKey'
 aspsGet'
-    :: Int32 -- ^ 'codeId'
-    -> Text -- ^ 'userKey'
+    :: Int32 -- ^ 'agCodeId'
+    -> Text -- ^ 'agUserKey'
     -> AspsGet'
 aspsGet' pAgCodeId_ pAgUserKey_ =
     AspsGet'

@@ -22,7 +22,7 @@
 --
 -- Deletes the specified TargetHttpProxy resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetHTTPProxiesDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetHttpProxies.delete@.
 module Network.Google.Resource.Compute.TargetHTTPProxies.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetHTTPProxiesDelete@ method which the
+-- | A resource alias for @compute.targetHttpProxies.delete@ method which the
 -- 'TargetHTTPProxiesDelete'' request conforms to.
 type TargetHTTPProxiesDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data TargetHTTPProxiesDelete' = TargetHTTPProxiesDelete'
 --
 -- * 'thttppdTargetHTTPProxy'
 targetHTTPProxiesDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'targetHttpProxy'
+    :: Text -- ^ 'thttppdProject'
+    -> Text -- ^ 'thttppdTargetHTTPProxy'
     -> TargetHTTPProxiesDelete'
 targetHTTPProxiesDelete' pThttppdProject_ pThttppdTargetHTTPProxy_ =
     TargetHTTPProxiesDelete'

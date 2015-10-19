@@ -22,7 +22,7 @@
 --
 -- Remove the book and its contents
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksCloudLoadingDeleteBook@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.cloudloading.deleteBook@.
 module Network.Google.Resource.Books.CloudLoading.DeleteBook
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Books.CloudLoading.DeleteBook
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksCloudLoadingDeleteBook@ method which the
+-- | A resource alias for @books.cloudloading.deleteBook@ method which the
 -- 'CloudLoadingDeleteBook'' request conforms to.
 type CloudLoadingDeleteBookResource =
      "cloudloading" :>
@@ -60,7 +60,7 @@ newtype CloudLoadingDeleteBook' = CloudLoadingDeleteBook'
 --
 -- * 'cldbVolumeId'
 cloudLoadingDeleteBook'
-    :: Text -- ^ 'volumeId'
+    :: Text -- ^ 'cldbVolumeId'
     -> CloudLoadingDeleteBook'
 cloudLoadingDeleteBook' pCldbVolumeId_ =
     CloudLoadingDeleteBook'

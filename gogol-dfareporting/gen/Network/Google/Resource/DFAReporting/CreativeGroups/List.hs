@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of creative groups, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeGroupsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.creativeGroups.list@.
 module Network.Google.Resource.DFAReporting.CreativeGroups.List
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingCreativeGroupsList@ method which the
+-- | A resource alias for @dfareporting.creativeGroups.list@ method which the
 -- 'CreativeGroupsList'' request conforms to.
 type CreativeGroupsListResource =
      "userprofiles" :>
@@ -101,7 +101,7 @@ data CreativeGroupsList' = CreativeGroupsList'
 --
 -- * 'cglMaxResults'
 creativeGroupsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'cglProFileId'
     -> CreativeGroupsList'
 creativeGroupsList' pCglProFileId_ =
     CreativeGroupsList'

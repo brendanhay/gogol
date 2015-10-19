@@ -23,7 +23,7 @@
 -- Gets the access control policy for a \`resource\`. Is empty if the
 -- policy or the resource does not exist.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsGetIAMPolicy@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.getIamPolicy@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPolicy
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPolicy
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsSubscriptionsGetIAMPolicy@ method which the
+-- | A resource alias for @pubsub.projects.subscriptions.getIamPolicy@ method which the
 -- 'ProjectsSubscriptionsGetIAMPolicy'' request conforms to.
 type ProjectsSubscriptionsGetIAMPolicyResource =
      "v1" :>
@@ -96,7 +96,7 @@ data ProjectsSubscriptionsGetIAMPolicy' = ProjectsSubscriptionsGetIAMPolicy'
 --
 -- * 'psgipCallback'
 projectsSubscriptionsGetIAMPolicy'
-    :: Text -- ^ 'resource'
+    :: Text -- ^ 'psgipResource'
     -> ProjectsSubscriptionsGetIAMPolicy'
 projectsSubscriptionsGetIAMPolicy' pPsgipResource_ =
     ProjectsSubscriptionsGetIAMPolicy'

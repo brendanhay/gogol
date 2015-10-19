@@ -22,7 +22,7 @@
 --
 -- Retrieve pageview stats for a Blog.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPageViewsGet@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pageViews.get@.
 module Network.Google.Resource.Blogger.PageViews.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Blogger.PageViews.Get
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPageViewsGet@ method which the
+-- | A resource alias for @blogger.pageViews.get@ method which the
 -- 'PageViewsGet'' request conforms to.
 type PageViewsGetResource =
      "blogs" :>
@@ -65,7 +65,7 @@ data PageViewsGet' = PageViewsGet'
 --
 -- * 'pvgRange'
 pageViewsGet'
-    :: Text -- ^ 'blogId'
+    :: Text -- ^ 'pvgBlogId'
     -> PageViewsGet'
 pageViewsGet' pPvgBlogId_ =
     PageViewsGet'

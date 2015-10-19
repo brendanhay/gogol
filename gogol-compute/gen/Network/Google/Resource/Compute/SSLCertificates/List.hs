@@ -23,7 +23,7 @@
 -- Retrieves the list of SslCertificate resources available to the
 -- specified project.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeSSLCertificatesList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.sslCertificates.list@.
 module Network.Google.Resource.Compute.SSLCertificates.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.SSLCertificates.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeSSLCertificatesList@ method which the
+-- | A resource alias for @compute.sslCertificates.list@ method which the
 -- 'SSLCertificatesList'' request conforms to.
 type SSLCertificatesListResource =
      Capture "project" Text :>
@@ -78,7 +78,7 @@ data SSLCertificatesList' = SSLCertificatesList'
 --
 -- * 'sclMaxResults'
 sslCertificatesList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'sclProject'
     -> SSLCertificatesList'
 sslCertificatesList' pSclProject_ =
     SSLCertificatesList'

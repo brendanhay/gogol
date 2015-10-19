@@ -23,7 +23,7 @@
 -- Gets the most recent health check results for each IP for the given
 -- instance that is referenced by given TargetPool.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsGetHealth@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.getHealth@.
 module Network.Google.Resource.Compute.TargetPools.GetHealth
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.TargetPools.GetHealth
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetPoolsGetHealth@ method which the
+-- | A resource alias for @compute.targetPools.getHealth@ method which the
 -- 'TargetPoolsGetHealth'' request conforms to.
 type TargetPoolsGetHealthResource =
      Capture "project" Text :>
@@ -79,10 +79,10 @@ data TargetPoolsGetHealth' = TargetPoolsGetHealth'
 --
 -- * 'tpghRegion'
 targetPoolsGetHealth'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'targetPool'
-    -> InstanceReference -- ^ 'payload'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'tpghProject'
+    -> Text -- ^ 'tpghTargetPool'
+    -> InstanceReference -- ^ 'tpghPayload'
+    -> Text -- ^ 'tpghRegion'
     -> TargetPoolsGetHealth'
 targetPoolsGetHealth' pTpghProject_ pTpghTargetPool_ pTpghPayload_ pTpghRegion_ =
     TargetPoolsGetHealth'

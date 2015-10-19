@@ -23,7 +23,7 @@
 -- Gets the status for a single creative. A creative will be available
 -- 30-40 minutes after submission.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerCreativesGet@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.creatives.get@.
 module Network.Google.Resource.AdExchangeBuyer.Creatives.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AdExchangeBuyer.Creatives.Get
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerCreativesGet@ method which the
+-- | A resource alias for @adexchangebuyer.creatives.get@ method which the
 -- 'CreativesGet'' request conforms to.
 type CreativesGetResource =
      "creatives" :>
@@ -66,8 +66,8 @@ data CreativesGet' = CreativesGet'
 --
 -- * 'cgAccountId'
 creativesGet'
-    :: Text -- ^ 'buyerCreativeId'
-    -> Int32 -- ^ 'accountId'
+    :: Text -- ^ 'cgBuyerCreativeId'
+    -> Int32 -- ^ 'cgAccountId'
     -> CreativesGet'
 creativesGet' pCgBuyerCreativeId_ pCgAccountId_ =
     CreativesGet'

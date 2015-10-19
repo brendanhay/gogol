@@ -22,7 +22,7 @@
 --
 -- Updates an existing custom metric.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomMetricsUpdate@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.customMetrics.update@.
 module Network.Google.Resource.Analytics.Management.CustomMetrics.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Update
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementCustomMetricsUpdate@ method which the
+-- | A resource alias for @analytics.management.customMetrics.update@ method which the
 -- 'ManagementCustomMetricsUpdate'' request conforms to.
 type ManagementCustomMetricsUpdateResource =
      "management" :>
@@ -83,10 +83,10 @@ data ManagementCustomMetricsUpdate' = ManagementCustomMetricsUpdate'
 --
 -- * 'mcmuAccountId'
 managementCustomMetricsUpdate'
-    :: Text -- ^ 'customMetricId'
-    -> Text -- ^ 'webPropertyId'
-    -> CustomMetric -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mcmuCustomMetricId'
+    -> Text -- ^ 'mcmuWebPropertyId'
+    -> CustomMetric -- ^ 'mcmuPayload'
+    -> Text -- ^ 'mcmuAccountId'
     -> ManagementCustomMetricsUpdate'
 managementCustomMetricsUpdate' pMcmuCustomMetricId_ pMcmuWebPropertyId_ pMcmuPayload_ pMcmuAccountId_ =
     ManagementCustomMetricsUpdate'

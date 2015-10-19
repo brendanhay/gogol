@@ -22,7 +22,7 @@
 --
 -- List all hosted ad clients in the specified hosted account.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdClientsList@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.accounts.adclients.list@.
 module Network.Google.Resource.AdSenseHost.Accounts.AdClients.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdClients.List
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAccountsAdClientsList@ method which the
+-- | A resource alias for @adsensehost.accounts.adclients.list@ method which the
 -- 'AccountsAdClientsList'' request conforms to.
 type AccountsAdClientsListResource =
      "accounts" :>
@@ -70,7 +70,7 @@ data AccountsAdClientsList' = AccountsAdClientsList'
 --
 -- * 'aaclMaxResults'
 accountsAdClientsList'
-    :: Text -- ^ 'accountId'
+    :: Text -- ^ 'aaclAccountId'
     -> AccountsAdClientsList'
 accountsAdClientsList' pAaclAccountId_ =
     AccountsAdClientsList'

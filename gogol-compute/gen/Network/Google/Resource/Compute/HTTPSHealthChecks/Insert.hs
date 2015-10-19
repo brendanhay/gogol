@@ -23,7 +23,7 @@
 -- Creates a HttpsHealthCheck resource in the specified project using the
 -- data included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeHTTPSHealthChecksInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.httpsHealthChecks.insert@.
 module Network.Google.Resource.Compute.HTTPSHealthChecks.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.HTTPSHealthChecks.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeHTTPSHealthChecksInsert@ method which the
+-- | A resource alias for @compute.httpsHealthChecks.insert@ method which the
 -- 'HTTPSHealthChecksInsert'' request conforms to.
 type HTTPSHealthChecksInsertResource =
      Capture "project" Text :>
@@ -68,8 +68,8 @@ data HTTPSHealthChecksInsert' = HTTPSHealthChecksInsert'
 --
 -- * 'hhciPayload'
 httpsHealthChecksInsert'
-    :: Text -- ^ 'project'
-    -> HTTPSHealthCheck -- ^ 'payload'
+    :: Text -- ^ 'hhciProject'
+    -> HTTPSHealthCheck -- ^ 'hhciPayload'
     -> HTTPSHealthChecksInsert'
 httpsHealthChecksInsert' pHhciProject_ pHhciPayload_ =
     HTTPSHealthChecksInsert'

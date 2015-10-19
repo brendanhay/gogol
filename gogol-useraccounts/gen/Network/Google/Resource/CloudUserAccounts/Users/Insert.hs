@@ -23,7 +23,7 @@
 -- Creates a User resource in the specified project using the data included
 -- in the request.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsUsersInsert@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.users.insert@.
 module Network.Google.Resource.CloudUserAccounts.Users.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.CloudUserAccounts.Users.Insert
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsUsersInsert@ method which the
+-- | A resource alias for @clouduseraccounts.users.insert@ method which the
 -- 'UsersInsert'' request conforms to.
 type UsersInsertResource =
      Capture "project" Text :>
@@ -67,8 +67,8 @@ data UsersInsert' = UsersInsert'
 --
 -- * 'uiPayload'
 usersInsert'
-    :: Text -- ^ 'project'
-    -> User -- ^ 'payload'
+    :: Text -- ^ 'uiProject'
+    -> User -- ^ 'uiPayload'
     -> UsersInsert'
 usersInsert' pUiProject_ pUiPayload_ =
     UsersInsert'

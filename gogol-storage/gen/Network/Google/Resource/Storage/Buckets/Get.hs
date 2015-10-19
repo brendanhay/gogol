@@ -22,7 +22,7 @@
 --
 -- Returns metadata for the specified bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketsGet@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.buckets.get@.
 module Network.Google.Resource.Storage.Buckets.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Storage.Buckets.Get
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageBucketsGet@ method which the
+-- | A resource alias for @storage.buckets.get@ method which the
 -- 'BucketsGet'' request conforms to.
 type BucketsGetResource =
      "b" :>
@@ -74,7 +74,7 @@ data BucketsGet' = BucketsGet'
 --
 -- * 'bgProjection'
 bucketsGet'
-    :: Text -- ^ 'bucket'
+    :: Text -- ^ 'bgBucket'
     -> BucketsGet'
 bucketsGet' pBgBucket_ =
     BucketsGet'

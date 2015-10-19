@@ -22,7 +22,7 @@
 --
 -- Returns a single user setting.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarSettingsGet@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.settings.get@.
 module Network.Google.Resource.Calendar.Settings.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Calendar.Settings.Get
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarSettingsGet@ method which the
+-- | A resource alias for @calendar.settings.get@ method which the
 -- 'SettingsGet'' request conforms to.
 type SettingsGetResource =
      "users" :>
@@ -61,7 +61,7 @@ newtype SettingsGet' = SettingsGet'
 --
 -- * 'sgSetting'
 settingsGet'
-    :: Text -- ^ 'setting'
+    :: Text -- ^ 'sgSetting'
     -> SettingsGet'
 settingsGet' pSgSetting_ =
     SettingsGet'

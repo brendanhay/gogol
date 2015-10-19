@@ -22,7 +22,7 @@
 --
 -- Exports variant set data to an external destination.
 --
--- /See:/ < Genomics API Reference> for @GenomicsVariantsetsExport@.
+-- /See:/ < Genomics API Reference> for @genomics.variantsets.export@.
 module Network.Google.Resource.Genomics.Variantsets.Export
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Genomics.Variantsets.Export
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsVariantsetsExport@ method which the
+-- | A resource alias for @genomics.variantsets.export@ method which the
 -- 'VariantsetsExport'' request conforms to.
 type VariantsetsExportResource =
      "v1" :>
@@ -101,8 +101,8 @@ data VariantsetsExport' = VariantsetsExport'
 --
 -- * 'veCallback'
 variantsetsExport'
-    :: Text -- ^ 'variantSetId'
-    -> ExportVariantSetRequest -- ^ 'payload'
+    :: Text -- ^ 'veVariantSetId'
+    -> ExportVariantSetRequest -- ^ 'vePayload'
     -> VariantsetsExport'
 variantsetsExport' pVeVariantSetId_ pVePayload_ =
     VariantsetsExport'

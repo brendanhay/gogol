@@ -23,7 +23,7 @@
 -- Marks the provided site\'s sample URL as fixed, and removes it from the
 -- samples list.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersURLCrawlErrorsSamplesMarkAsFixed@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.urlcrawlerrorssamples.markAsFixed@.
 module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.MarkAsFixed
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.MarkAsFixed
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersURLCrawlErrorsSamplesMarkAsFixed@ method which the
+-- | A resource alias for @webmasters.urlcrawlerrorssamples.markAsFixed@ method which the
 -- 'URLCrawlErrorsSamplesMarkAsFixed'' request conforms to.
 type URLCrawlErrorsSamplesMarkAsFixedResource =
      "sites" :>
@@ -80,10 +80,10 @@ data URLCrawlErrorsSamplesMarkAsFixed' = URLCrawlErrorsSamplesMarkAsFixed'
 --
 -- * 'ucesmafURL'
 urlCrawlErrorsSamplesMarkAsFixed'
-    :: URLCrawlErrorsSamplesMarkAsFixedPlatform -- ^ 'platform'
-    -> URLCrawlErrorsSamplesMarkAsFixedCategory -- ^ 'category'
-    -> Text -- ^ 'siteUrl'
-    -> Text -- ^ 'url'
+    :: URLCrawlErrorsSamplesMarkAsFixedPlatform -- ^ 'ucesmafPlatform'
+    -> URLCrawlErrorsSamplesMarkAsFixedCategory -- ^ 'ucesmafCategory'
+    -> Text -- ^ 'ucesmafSiteURL'
+    -> Text -- ^ 'ucesmafURL'
     -> URLCrawlErrorsSamplesMarkAsFixed'
 urlCrawlErrorsSamplesMarkAsFixed' pUcesmafPlatform_ pUcesmafCategory_ pUcesmafSiteURL_ pUcesmafURL_ =
     URLCrawlErrorsSamplesMarkAsFixed'

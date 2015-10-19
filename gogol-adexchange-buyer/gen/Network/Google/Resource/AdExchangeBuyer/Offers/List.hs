@@ -22,7 +22,7 @@
 --
 -- Lists all offers the authenticated user has access to.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerOffersList@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.offers.list@.
 module Network.Google.Resource.AdExchangeBuyer.Offers.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeBuyer.Offers.List
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerOffersList@ method which the
+-- | A resource alias for @adexchangebuyer.offers.list@ method which the
 -- 'OffersList'' request conforms to.
 type OffersListResource =
      "offers" :>
@@ -60,7 +60,7 @@ newtype OffersList' = OffersList'
 --
 -- * 'olPayload'
 offersList'
-    :: ListOffersRequest -- ^ 'payload'
+    :: ListOffersRequest -- ^ 'olPayload'
     -> OffersList'
 offersList' pOlPayload_ =
     OffersList'

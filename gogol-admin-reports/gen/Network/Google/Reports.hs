@@ -27,19 +27,19 @@ module Network.Google.Reports
 
     -- * Resources
 
-    -- ** AdminChannelsStop
+    -- ** admin.channels.stop
     , module Network.Google.Resource.Admin.Channels.Stop
 
-    -- ** ReportsActivitiesList
+    -- ** reports.activities.list
     , module Network.Google.Resource.Reports.Activities.List
 
-    -- ** ReportsActivitiesWatch
+    -- ** reports.activities.watch
     , module Network.Google.Resource.Reports.Activities.Watch
 
-    -- ** ReportsCustomerUsageReportsGet
+    -- ** reports.customerUsageReports.get
     , module Network.Google.Resource.Reports.CustomerUsageReports.Get
 
-    -- ** ReportsUserUsageReportGet
+    -- ** reports.userUsageReport.get
     , module Network.Google.Resource.Reports.UserUsageReport.Get
 
     -- * Types

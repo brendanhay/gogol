@@ -23,7 +23,7 @@
 -- Creates a TargetInstance resource in the specified project and zone
 -- using the data included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetInstancesInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetInstances.insert@.
 module Network.Google.Resource.Compute.TargetInstances.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.TargetInstances.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetInstancesInsert@ method which the
+-- | A resource alias for @compute.targetInstances.insert@ method which the
 -- 'TargetInstancesInsert'' request conforms to.
 type TargetInstancesInsertResource =
      Capture "project" Text :>
@@ -73,9 +73,9 @@ data TargetInstancesInsert' = TargetInstancesInsert'
 --
 -- * 'tiiPayload'
 targetInstancesInsert'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> TargetInstance -- ^ 'payload'
+    :: Text -- ^ 'tiiProject'
+    -> Text -- ^ 'tiiZone'
+    -> TargetInstance -- ^ 'tiiPayload'
     -> TargetInstancesInsert'
 targetInstancesInsert' pTiiProject_ pTiiZone_ pTiiPayload_ =
     TargetInstancesInsert'

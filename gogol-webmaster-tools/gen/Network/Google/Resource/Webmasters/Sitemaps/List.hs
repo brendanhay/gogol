@@ -23,7 +23,7 @@
 -- Lists the sitemaps-entries submitted for this site, or included in the
 -- sitemap index file (if sitemapIndex is specified in the request).
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitemapsList@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sitemaps.list@.
 module Network.Google.Resource.Webmasters.Sitemaps.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Webmasters.Sitemaps.List
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersSitemapsList@ method which the
+-- | A resource alias for @webmasters.sitemaps.list@ method which the
 -- 'SitemapsList'' request conforms to.
 type SitemapsListResource =
      "sites" :>
@@ -68,7 +68,7 @@ data SitemapsList' = SitemapsList'
 --
 -- * 'slSitemapIndex'
 sitemapsList'
-    :: Text -- ^ 'siteUrl'
+    :: Text -- ^ 'slSiteURL'
     -> SitemapsList'
 sitemapsList' pSlSiteURL_ =
     SitemapsList'

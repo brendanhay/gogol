@@ -22,7 +22,7 @@
 --
 -- Return all rasters readable by the current user.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRastersList@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.rasters.list@.
 module Network.Google.Resource.MapsEngine.Rasters.List
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.MapsEngine.Rasters.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRastersList@ method which the
+-- | A resource alias for @mapsengine.rasters.list@ method which the
 -- 'RastersList'' request conforms to.
 type RastersListResource =
      "rasters" :>
@@ -122,7 +122,7 @@ data RastersList' = RastersList'
 --
 -- * 'rlCreatedBefore'
 rastersList'
-    :: Text -- ^ 'projectId'
+    :: Text -- ^ 'rlProjectId'
     -> RastersList'
 rastersList' pRlProjectId_ =
     RastersList'

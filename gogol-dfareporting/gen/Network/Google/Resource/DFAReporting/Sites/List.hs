@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of sites, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSitesList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.sites.list@.
 module Network.Google.Resource.DFAReporting.Sites.List
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ module Network.Google.Resource.DFAReporting.Sites.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSitesList@ method which the
+-- | A resource alias for @dfareporting.sites.list@ method which the
 -- 'SitesList'' request conforms to.
 type SitesListResource =
      "userprofiles" :>
@@ -138,7 +138,7 @@ data SitesList' = SitesList'
 --
 -- * 'sitMaxResults'
 sitesList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'sitProFileId'
     -> SitesList'
 sitesList' pSitProFileId_ =
     SitesList'

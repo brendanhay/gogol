@@ -22,7 +22,7 @@
 --
 -- -- |
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksPromoOfferDismiss@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.promooffer.dismiss@.
 module Network.Google.Resource.Books.PromoOffer.Dismiss
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Books.PromoOffer.Dismiss
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksPromoOfferDismiss@ method which the
+-- | A resource alias for @books.promooffer.dismiss@ method which the
 -- 'PromoOfferDismiss'' request conforms to.
 type PromoOfferDismissResource =
      "promooffer" :>

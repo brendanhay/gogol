@@ -22,7 +22,7 @@
 --
 -- Removes a volume from a bookshelf.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryBookshelvesRemoveVolume@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.bookshelves.removeVolume@.
 module Network.Google.Resource.Books.MyLibrary.Bookshelves.RemoveVolume
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.RemoveVolume
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryBookshelvesRemoveVolume@ method which the
+-- | A resource alias for @books.mylibrary.bookshelves.removeVolume@ method which the
 -- 'MyLibraryBookshelvesRemoveVolume'' request conforms to.
 type MyLibraryBookshelvesRemoveVolumeResource =
      "mylibrary" :>
@@ -78,8 +78,8 @@ data MyLibraryBookshelvesRemoveVolume' = MyLibraryBookshelvesRemoveVolume'
 --
 -- * 'mlbrvSource'
 myLibraryBookshelvesRemoveVolume'
-    :: Text -- ^ 'shelf'
-    -> Text -- ^ 'volumeId'
+    :: Text -- ^ 'mlbrvShelf'
+    -> Text -- ^ 'mlbrvVolumeId'
     -> MyLibraryBookshelvesRemoveVolume'
 myLibraryBookshelvesRemoveVolume' pMlbrvShelf_ pMlbrvVolumeId_ =
     MyLibraryBookshelvesRemoveVolume'

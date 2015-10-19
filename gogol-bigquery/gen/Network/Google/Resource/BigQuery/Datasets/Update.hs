@@ -24,7 +24,7 @@
 -- the entire dataset resource, whereas the patch method only replaces
 -- fields that are provided in the submitted dataset resource.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryDatasetsUpdate@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @bigquery.datasets.update@.
 module Network.Google.Resource.BigQuery.Datasets.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.BigQuery.Datasets.Update
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigQueryDatasetsUpdate@ method which the
+-- | A resource alias for @bigquery.datasets.update@ method which the
 -- 'DatasetsUpdate'' request conforms to.
 type DatasetsUpdateResource =
      "projects" :>
@@ -74,9 +74,9 @@ data DatasetsUpdate' = DatasetsUpdate'
 --
 -- * 'duProjectId'
 datasetsUpdate'
-    :: Dataset -- ^ 'payload'
-    -> Text -- ^ 'datasetId'
-    -> Text -- ^ 'projectId'
+    :: Dataset -- ^ 'duPayload'
+    -> Text -- ^ 'duDatasetId'
+    -> Text -- ^ 'duProjectId'
     -> DatasetsUpdate'
 datasetsUpdate' pDuPayload_ pDuDatasetId_ pDuProjectId_ =
     DatasetsUpdate'

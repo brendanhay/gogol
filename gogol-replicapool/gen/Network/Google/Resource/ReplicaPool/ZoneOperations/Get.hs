@@ -22,7 +22,7 @@
 --
 -- Retrieves the specified zone-specific operation resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolZoneOperationsGet@.
+-- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @replicapool.zoneOperations.get@.
 module Network.Google.Resource.ReplicaPool.ZoneOperations.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.ReplicaPool.ZoneOperations.Get
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
--- | A resource alias for @ReplicapoolZoneOperationsGet@ method which the
+-- | A resource alias for @replicapool.zoneOperations.get@ method which the
 -- 'ZoneOperationsGet'' request conforms to.
 type ZoneOperationsGetResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data ZoneOperationsGet' = ZoneOperationsGet'
 --
 -- * 'zogZone'
 zoneOperationsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'operation'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'zogProject'
+    -> Text -- ^ 'zogOperation'
+    -> Text -- ^ 'zogZone'
     -> ZoneOperationsGet'
 zoneOperationsGet' pZogProject_ pZogOperation_ pZogZone_ =
     ZoneOperationsGet'

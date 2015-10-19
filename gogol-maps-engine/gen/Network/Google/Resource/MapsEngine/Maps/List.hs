@@ -22,7 +22,7 @@
 --
 -- Return all maps readable by the current user.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineMapsList@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.maps.list@.
 module Network.Google.Resource.MapsEngine.Maps.List
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.MapsEngine.Maps.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineMapsList@ method which the
+-- | A resource alias for @mapsengine.maps.list@ method which the
 -- 'MapsList'' request conforms to.
 type MapsListResource =
      "maps" :>

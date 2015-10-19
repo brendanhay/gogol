@@ -23,7 +23,7 @@
 -- Lists the transfers for a customer by source user, destination user, or
 -- status.
 --
--- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @DataTransferTransfersList@.
+-- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @datatransfer.transfers.list@.
 module Network.Google.Resource.DataTransfer.Transfers.List
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.DataTransfer.Transfers.List
 import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DataTransferTransfersList@ method which the
+-- | A resource alias for @datatransfer.transfers.list@ method which the
 -- 'TransfersList'' request conforms to.
 type TransfersListResource =
      "transfers" :>

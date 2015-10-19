@@ -24,7 +24,7 @@
 -- Authorization rules_ and _List methods rules_ for more information about
 -- this method.
 --
--- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviesPartnerAccountsAvailsList@.
+-- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @playmoviespartner.accounts.avails.list@.
 module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
     (
     -- * REST Resource
@@ -56,7 +56,7 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviesPartnerAccountsAvailsList@ method which the
+-- | A resource alias for @playmoviespartner.accounts.avails.list@ method which the
 -- 'AccountsAvailsList'' request conforms to.
 type AccountsAvailsListResource =
      "v1" :>
@@ -141,7 +141,7 @@ data AccountsAvailsList' = AccountsAvailsList'
 --
 -- * 'aalCallback'
 accountsAvailsList'
-    :: Text -- ^ 'accountId'
+    :: Text -- ^ 'aalAccountId'
     -> AccountsAvailsList'
 accountsAvailsList' pAalAccountId_ =
     AccountsAvailsList'

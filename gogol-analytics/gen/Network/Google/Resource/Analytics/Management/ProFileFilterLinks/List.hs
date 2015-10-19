@@ -22,7 +22,7 @@
 --
 -- Lists all profile filter links for a profile.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFileFilterLinksList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.profileFilterLinks.list@.
 module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFileFilterLinksList@ method which the
+-- | A resource alias for @analytics.management.profileFilterLinks.list@ method which the
 -- 'ManagementProFileFilterLinksList'' request conforms to.
 type ManagementProFileFilterLinksListResource =
      "management" :>
@@ -84,9 +84,9 @@ data ManagementProFileFilterLinksList' = ManagementProFileFilterLinksList'
 --
 -- * 'mpffllMaxResults'
 managementProFileFilterLinksList'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mpffllWebPropertyId'
+    -> Text -- ^ 'mpffllProFileId'
+    -> Text -- ^ 'mpffllAccountId'
     -> ManagementProFileFilterLinksList'
 managementProFileFilterLinksList' pMpffllWebPropertyId_ pMpffllProFileId_ pMpffllAccountId_ =
     ManagementProFileFilterLinksList'

@@ -27,82 +27,82 @@ module Network.Google.AdSenseHost
 
     -- * Resources
 
-    -- ** AdsensehostAccountsAdClientsGet
+    -- ** adsensehost.accounts.adclients.get
     , module Network.Google.Resource.AdSenseHost.Accounts.AdClients.Get
 
-    -- ** AdsensehostAccountsAdClientsList
+    -- ** adsensehost.accounts.adclients.list
     , module Network.Google.Resource.AdSenseHost.Accounts.AdClients.List
 
-    -- ** AdsensehostAccountsAdUnitsDelete
+    -- ** adsensehost.accounts.adunits.delete
     , module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Delete
 
-    -- ** AdsensehostAccountsAdUnitsGet
+    -- ** adsensehost.accounts.adunits.get
     , module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Get
 
-    -- ** AdsensehostAccountsAdUnitsGetAdCode
+    -- ** adsensehost.accounts.adunits.getAdCode
     , module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.GetAdCode
 
-    -- ** AdsensehostAccountsAdUnitsInsert
+    -- ** adsensehost.accounts.adunits.insert
     , module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Insert
 
-    -- ** AdsensehostAccountsAdUnitsList
+    -- ** adsensehost.accounts.adunits.list
     , module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.List
 
-    -- ** AdsensehostAccountsAdUnitsPatch
+    -- ** adsensehost.accounts.adunits.patch
     , module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Patch
 
-    -- ** AdsensehostAccountsAdUnitsUpdate
+    -- ** adsensehost.accounts.adunits.update
     , module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Update
 
-    -- ** AdsensehostAccountsGet
+    -- ** adsensehost.accounts.get
     , module Network.Google.Resource.AdSenseHost.Accounts.Get
 
-    -- ** AdsensehostAccountsList
+    -- ** adsensehost.accounts.list
     , module Network.Google.Resource.AdSenseHost.Accounts.List
 
-    -- ** AdsensehostAccountsReportsGenerate
+    -- ** adsensehost.accounts.reports.generate
     , module Network.Google.Resource.AdSenseHost.Accounts.Reports.Generate
 
-    -- ** AdsensehostAdClientsGet
+    -- ** adsensehost.adclients.get
     , module Network.Google.Resource.AdSenseHost.AdClients.Get
 
-    -- ** AdsensehostAdClientsList
+    -- ** adsensehost.adclients.list
     , module Network.Google.Resource.AdSenseHost.AdClients.List
 
-    -- ** AdsensehostAssociationSessionsStart
+    -- ** adsensehost.associationsessions.start
     , module Network.Google.Resource.AdSenseHost.AssociationSessions.Start
 
-    -- ** AdsensehostAssociationSessionsVerify
+    -- ** adsensehost.associationsessions.verify
     , module Network.Google.Resource.AdSenseHost.AssociationSessions.Verify
 
-    -- ** AdsensehostCustomChannelsDelete
+    -- ** adsensehost.customchannels.delete
     , module Network.Google.Resource.AdSenseHost.CustomChannels.Delete
 
-    -- ** AdsensehostCustomChannelsGet
+    -- ** adsensehost.customchannels.get
     , module Network.Google.Resource.AdSenseHost.CustomChannels.Get
 
-    -- ** AdsensehostCustomChannelsInsert
+    -- ** adsensehost.customchannels.insert
     , module Network.Google.Resource.AdSenseHost.CustomChannels.Insert
 
-    -- ** AdsensehostCustomChannelsList
+    -- ** adsensehost.customchannels.list
     , module Network.Google.Resource.AdSenseHost.CustomChannels.List
 
-    -- ** AdsensehostCustomChannelsPatch
+    -- ** adsensehost.customchannels.patch
     , module Network.Google.Resource.AdSenseHost.CustomChannels.Patch
 
-    -- ** AdsensehostCustomChannelsUpdate
+    -- ** adsensehost.customchannels.update
     , module Network.Google.Resource.AdSenseHost.CustomChannels.Update
 
-    -- ** AdsensehostReportsGenerate
+    -- ** adsensehost.reports.generate
     , module Network.Google.Resource.AdSenseHost.Reports.Generate
 
-    -- ** AdsensehostURLChannelsDelete
+    -- ** adsensehost.urlchannels.delete
     , module Network.Google.Resource.AdSenseHost.URLChannels.Delete
 
-    -- ** AdsensehostURLChannelsInsert
+    -- ** adsensehost.urlchannels.insert
     , module Network.Google.Resource.AdSenseHost.URLChannels.Insert
 
-    -- ** AdsensehostURLChannelsList
+    -- ** adsensehost.urlchannels.list
     , module Network.Google.Resource.AdSenseHost.URLChannels.List
 
     -- * Types

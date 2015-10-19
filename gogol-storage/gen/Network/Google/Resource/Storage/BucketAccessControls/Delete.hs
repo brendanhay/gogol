@@ -23,7 +23,7 @@
 -- Permanently deletes the ACL entry for the specified entity on the
 -- specified bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketAccessControlsDelete@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.bucketAccessControls.delete@.
 module Network.Google.Resource.Storage.BucketAccessControls.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Storage.BucketAccessControls.Delete
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageBucketAccessControlsDelete@ method which the
+-- | A resource alias for @storage.bucketAccessControls.delete@ method which the
 -- 'BucketAccessControlsDelete'' request conforms to.
 type BucketAccessControlsDeleteResource =
      "b" :>
@@ -67,8 +67,8 @@ data BucketAccessControlsDelete' = BucketAccessControlsDelete'
 --
 -- * 'bacdEntity'
 bucketAccessControlsDelete'
-    :: Text -- ^ 'bucket'
-    -> Text -- ^ 'entity'
+    :: Text -- ^ 'bacdBucket'
+    -> Text -- ^ 'bacdEntity'
     -> BucketAccessControlsDelete'
 bucketAccessControlsDelete' pBacdBucket_ pBacdEntity_ =
     BucketAccessControlsDelete'

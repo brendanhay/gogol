@@ -22,7 +22,7 @@
 --
 -- Updates a video\'s metadata.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosUpdate@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.videos.update@.
 module Network.Google.Resource.YouTube.Videos.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.YouTube.Videos.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeVideosUpdate@ method which the
+-- | A resource alias for @youtube.videos.update@ method which the
 -- 'VideosUpdate'' request conforms to.
 type VideosUpdateResource =
      "videos" :>
@@ -69,8 +69,8 @@ data VideosUpdate' = VideosUpdate'
 --
 -- * 'vuOnBehalfOfContentOwner'
 videosUpdate'
-    :: Text -- ^ 'part'
-    -> Video -- ^ 'payload'
+    :: Text -- ^ 'vuPart'
+    -> Video -- ^ 'vuPayload'
     -> VideosUpdate'
 videosUpdate' pVuPart_ pVuPayload_ =
     VideosUpdate'

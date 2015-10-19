@@ -22,7 +22,7 @@
 --
 -- Get the most current data for a website or domain.
 --
--- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceGet@.
+-- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @siteVerification.webResource.get@.
 module Network.Google.Resource.SiteVerification.WebResource.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.SiteVerification.WebResource.Get
 import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
--- | A resource alias for @SiteVerificationWebResourceGet@ method which the
+-- | A resource alias for @siteVerification.webResource.get@ method which the
 -- 'WebResourceGet'' request conforms to.
 type WebResourceGetResource =
      "webResource" :>
@@ -60,7 +60,7 @@ newtype WebResourceGet' = WebResourceGet'
 --
 -- * 'wrgId'
 webResourceGet'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'wrgId'
     -> WebResourceGet'
 webResourceGet' pWrgId_ =
     WebResourceGet'

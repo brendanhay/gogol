@@ -22,7 +22,7 @@
 --
 -- Lists all the track configurations for this edit.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsTracksList@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.tracks.list@.
 module Network.Google.Resource.AndroidPublisher.Edits.Tracks.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Tracks.List
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsTracksList@ method which the
+-- | A resource alias for @androidpublisher.edits.tracks.list@ method which the
 -- 'EditsTracksList'' request conforms to.
 type EditsTracksListResource =
      Capture "packageName" Text :>
@@ -66,8 +66,8 @@ data EditsTracksList' = EditsTracksList'
 --
 -- * 'etlEditId'
 editsTracksList'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'etlPackageName'
+    -> Text -- ^ 'etlEditId'
     -> EditsTracksList'
 editsTracksList' pEtlPackageName_ pEtlEditId_ =
     EditsTracksList'

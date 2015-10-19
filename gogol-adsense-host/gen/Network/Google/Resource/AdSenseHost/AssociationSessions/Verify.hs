@@ -23,7 +23,7 @@
 -- Verify an association session after the association callback returns
 -- from AdSense signup.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAssociationSessionsVerify@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.associationsessions.verify@.
 module Network.Google.Resource.AdSenseHost.AssociationSessions.Verify
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdSenseHost.AssociationSessions.Verify
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAssociationSessionsVerify@ method which the
+-- | A resource alias for @adsensehost.associationsessions.verify@ method which the
 -- 'AssociationSessionsVerify'' request conforms to.
 type AssociationSessionsVerifyResource =
      "associationsessions" :>
@@ -63,7 +63,7 @@ newtype AssociationSessionsVerify' = AssociationSessionsVerify'
 --
 -- * 'asvToken'
 associationSessionsVerify'
-    :: Text -- ^ 'token'
+    :: Text -- ^ 'asvToken'
     -> AssociationSessionsVerify'
 associationSessionsVerify' pAsvToken_ =
     AssociationSessionsVerify'

@@ -22,7 +22,7 @@
 --
 -- Lists all GTM Triggers of a Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersTriggersList@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.triggers.list@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.List
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersTriggersList@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.triggers.list@ method which the
 -- 'AccountsContainersTriggersList'' request conforms to.
 type AccountsContainersTriggersListResource =
      "accounts" :>
@@ -67,8 +67,8 @@ data AccountsContainersTriggersList' = AccountsContainersTriggersList'
 --
 -- * 'actlAccountId'
 accountsContainersTriggersList'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'actlContainerId'
+    -> Text -- ^ 'actlAccountId'
     -> AccountsContainersTriggersList'
 accountsContainersTriggersList' pActlContainerId_ pActlAccountId_ =
     AccountsContainersTriggersList'

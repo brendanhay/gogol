@@ -24,7 +24,7 @@
 -- (required for usage). The private key must be saved from the response to
 -- initial creation.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLSSLCertsGet@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.sslCerts.get@.
 module Network.Google.Resource.SQL.SSLCerts.Get
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.SQL.SSLCerts.Get
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLSSLCertsGet@ method which the
+-- | A resource alias for @sql.sslCerts.get@ method which the
 -- 'SSLCertsGet'' request conforms to.
 type SSLCertsGetResource =
      "projects" :>
@@ -75,9 +75,9 @@ data SSLCertsGet' = SSLCertsGet'
 --
 -- * 'scgInstance'
 sslCertsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'sha1Fingerprint'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'scgProject'
+    -> Text -- ^ 'scgSha1Fingerprint'
+    -> Text -- ^ 'scgInstance'
     -> SSLCertsGet'
 sslCertsGet' pScgProject_ pScgSha1Fingerprint_ pScgInstance_ =
     SSLCertsGet'

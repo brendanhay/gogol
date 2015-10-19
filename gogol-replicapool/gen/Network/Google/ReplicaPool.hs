@@ -27,40 +27,40 @@ module Network.Google.ReplicaPool
 
     -- * Resources
 
-    -- ** ReplicapoolInstanceGroupManagersAbandonInstances
+    -- ** replicapool.instanceGroupManagers.abandonInstances
     , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.AbandonInstances
 
-    -- ** ReplicapoolInstanceGroupManagersDelete
+    -- ** replicapool.instanceGroupManagers.delete
     , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Delete
 
-    -- ** ReplicapoolInstanceGroupManagersDeleteInstances
+    -- ** replicapool.instanceGroupManagers.deleteInstances
     , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.DeleteInstances
 
-    -- ** ReplicapoolInstanceGroupManagersGet
+    -- ** replicapool.instanceGroupManagers.get
     , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Get
 
-    -- ** ReplicapoolInstanceGroupManagersInsert
+    -- ** replicapool.instanceGroupManagers.insert
     , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Insert
 
-    -- ** ReplicapoolInstanceGroupManagersList
+    -- ** replicapool.instanceGroupManagers.list
     , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.List
 
-    -- ** ReplicapoolInstanceGroupManagersRecreateInstances
+    -- ** replicapool.instanceGroupManagers.recreateInstances
     , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.RecreateInstances
 
-    -- ** ReplicapoolInstanceGroupManagersResize
+    -- ** replicapool.instanceGroupManagers.resize
     , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Resize
 
-    -- ** ReplicapoolInstanceGroupManagersSetInstanceTemplate
+    -- ** replicapool.instanceGroupManagers.setInstanceTemplate
     , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.SetInstanceTemplate
 
-    -- ** ReplicapoolInstanceGroupManagersSetTargetPools
+    -- ** replicapool.instanceGroupManagers.setTargetPools
     , module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.SetTargetPools
 
-    -- ** ReplicapoolZoneOperationsGet
+    -- ** replicapool.zoneOperations.get
     , module Network.Google.Resource.ReplicaPool.ZoneOperations.Get
 
-    -- ** ReplicapoolZoneOperationsList
+    -- ** replicapool.zoneOperations.list
     , module Network.Google.Resource.ReplicaPool.ZoneOperations.List
 
     -- * Types

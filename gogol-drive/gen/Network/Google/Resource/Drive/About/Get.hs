@@ -23,7 +23,7 @@
 -- Gets the information about the current user along with Drive API
 -- settings
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveAboutGet@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.about.get@.
 module Network.Google.Resource.Drive.About.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Drive.About.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveAboutGet@ method which the
+-- | A resource alias for @drive.about.get@ method which the
 -- 'AboutGet'' request conforms to.
 type AboutGetResource =
      "about" :>

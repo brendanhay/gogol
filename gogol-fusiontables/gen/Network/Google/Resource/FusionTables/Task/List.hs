@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of tasks.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTaskList@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.task.list@.
 module Network.Google.Resource.FusionTables.Task.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.FusionTables.Task.List
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTaskList@ method which the
+-- | A resource alias for @fusiontables.task.list@ method which the
 -- 'TaskList'' request conforms to.
 type TaskListResource =
      "tables" :>
@@ -75,7 +75,7 @@ data TaskList' = TaskList'
 --
 -- * 'tlMaxResults'
 taskList'
-    :: Text -- ^ 'tableId'
+    :: Text -- ^ 'tlTableId'
     -> TaskList'
 taskList' pTlTableId_ =
     TaskList'

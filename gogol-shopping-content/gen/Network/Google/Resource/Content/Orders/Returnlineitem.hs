@@ -22,7 +22,7 @@
 --
 -- Returns a line item.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersReturnlineitem@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.returnlineitem@.
 module Network.Google.Resource.Content.Orders.Returnlineitem
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Orders.Returnlineitem
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersReturnlineitem@ method which the
+-- | A resource alias for @content.orders.returnlineitem@ method which the
 -- 'OrdersReturnlineitem'' request conforms to.
 type OrdersReturnlineitemResource =
      Capture "merchantId" Word64 :>
@@ -71,9 +71,9 @@ data OrdersReturnlineitem' = OrdersReturnlineitem'
 --
 -- * 'orrOrderId'
 ordersReturnlineitem'
-    :: Word64 -- ^ 'merchantId'
-    -> OrdersReturnLineItemRequest -- ^ 'payload'
-    -> Text -- ^ 'orderId'
+    :: Word64 -- ^ 'orrMerchantId'
+    -> OrdersReturnLineItemRequest -- ^ 'orrPayload'
+    -> Text -- ^ 'orrOrderId'
     -> OrdersReturnlineitem'
 ordersReturnlineitem' pOrrMerchantId_ pOrrPayload_ pOrrOrderId_ =
     OrdersReturnlineitem'

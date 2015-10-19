@@ -22,7 +22,7 @@
 --
 -- Create a new experiment.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementExperimentsInsert@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.experiments.insert@.
 module Network.Google.Resource.Analytics.Management.Experiments.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementExperimentsInsert@ method which the
+-- | A resource alias for @analytics.management.experiments.insert@ method which the
 -- 'ManagementExperimentsInsert'' request conforms to.
 type ManagementExperimentsInsertResource =
      "management" :>
@@ -78,10 +78,10 @@ data ManagementExperimentsInsert' = ManagementExperimentsInsert'
 --
 -- * 'meiAccountId'
 managementExperimentsInsert'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Experiment -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'meiWebPropertyId'
+    -> Text -- ^ 'meiProFileId'
+    -> Experiment -- ^ 'meiPayload'
+    -> Text -- ^ 'meiAccountId'
     -> ManagementExperimentsInsert'
 managementExperimentsInsert' pMeiWebPropertyId_ pMeiProFileId_ pMeiPayload_ pMeiAccountId_ =
     ManagementExperimentsInsert'

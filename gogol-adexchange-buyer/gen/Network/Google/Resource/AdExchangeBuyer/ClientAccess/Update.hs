@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerClientAccessUpdate@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.clientaccess.update@.
 module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Update
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Update
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerClientAccessUpdate@ method which the
+-- | A resource alias for @adexchangebuyer.clientaccess.update@ method which the
 -- 'ClientAccessUpdate'' request conforms to.
 type ClientAccessUpdateResource =
      "clientAccess" :>
@@ -67,9 +67,9 @@ data ClientAccessUpdate' = ClientAccessUpdate'
 --
 -- * 'cauClientAccountId'
 clientAccessUpdate'
-    :: Int32 -- ^ 'sponsorAccountId'
-    -> ClientAccessCapabilities -- ^ 'payload'
-    -> Int64 -- ^ 'clientAccountId'
+    :: Int32 -- ^ 'cauSponsorAccountId'
+    -> ClientAccessCapabilities -- ^ 'cauPayload'
+    -> Int64 -- ^ 'cauClientAccountId'
     -> ClientAccessUpdate'
 clientAccessUpdate' pCauSponsorAccountId_ pCauPayload_ pCauClientAccountId_ =
     ClientAccessUpdate'

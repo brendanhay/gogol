@@ -23,7 +23,7 @@
 -- Lists all datasets in the specified project to which you have been
 -- granted the READER dataset role.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryDatasetsList@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @bigquery.datasets.list@.
 module Network.Google.Resource.BigQuery.Datasets.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.BigQuery.Datasets.List
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigQueryDatasetsList@ method which the
+-- | A resource alias for @bigquery.datasets.list@ method which the
 -- 'DatasetsList'' request conforms to.
 type DatasetsListResource =
      "projects" :>
@@ -77,7 +77,7 @@ data DatasetsList' = DatasetsList'
 --
 -- * 'dlMaxResults'
 datasetsList'
-    :: Text -- ^ 'projectId'
+    :: Text -- ^ 'dlProjectId'
     -> DatasetsList'
 datasetsList' pDlProjectId_ =
     DatasetsList'

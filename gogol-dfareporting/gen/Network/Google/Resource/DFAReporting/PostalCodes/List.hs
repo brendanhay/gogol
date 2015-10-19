@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of postal codes.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPostalCodesList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.postalCodes.list@.
 module Network.Google.Resource.DFAReporting.PostalCodes.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.DFAReporting.PostalCodes.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPostalCodesList@ method which the
+-- | A resource alias for @dfareporting.postalCodes.list@ method which the
 -- 'PostalCodesList'' request conforms to.
 type PostalCodesListResource =
      "userprofiles" :>
@@ -61,7 +61,7 @@ newtype PostalCodesList' = PostalCodesList'
 --
 -- * 'pclProFileId'
 postalCodesList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'pclProFileId'
     -> PostalCodesList'
 postalCodesList' pPclProFileId_ =
     PostalCodesList'

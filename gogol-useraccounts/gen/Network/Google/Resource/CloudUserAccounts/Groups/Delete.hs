@@ -22,7 +22,7 @@
 --
 -- Deletes the specified Group resource.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsGroupsDelete@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.groups.delete@.
 module Network.Google.Resource.CloudUserAccounts.Groups.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.CloudUserAccounts.Groups.Delete
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsGroupsDelete@ method which the
+-- | A resource alias for @clouduseraccounts.groups.delete@ method which the
 -- 'GroupsDelete'' request conforms to.
 type GroupsDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data GroupsDelete' = GroupsDelete'
 --
 -- * 'gdGroupName'
 groupsDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'groupName'
+    :: Text -- ^ 'gdProject'
+    -> Text -- ^ 'gdGroupName'
     -> GroupsDelete'
 groupsDelete' pGdProject_ pGdGroupName_ =
     GroupsDelete'

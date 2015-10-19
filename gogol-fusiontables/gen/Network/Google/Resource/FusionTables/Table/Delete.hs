@@ -22,7 +22,7 @@
 --
 -- Deletes a table.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableDelete@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.table.delete@.
 module Network.Google.Resource.FusionTables.Table.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.FusionTables.Table.Delete
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTableDelete@ method which the
+-- | A resource alias for @fusiontables.table.delete@ method which the
 -- 'TableDelete'' request conforms to.
 type TableDeleteResource =
      "tables" :>
@@ -59,7 +59,7 @@ newtype TableDelete' = TableDelete'
 --
 -- * 'tdTableId'
 tableDelete'
-    :: Text -- ^ 'tableId'
+    :: Text -- ^ 'tdTableId'
     -> TableDelete'
 tableDelete' pTdTableId_ =
     TableDelete'

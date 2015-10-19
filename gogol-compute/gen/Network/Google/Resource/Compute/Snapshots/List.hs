@@ -23,7 +23,7 @@
 -- Retrieves the list of Snapshot resources contained within the specified
 -- project.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeSnapshotsList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.snapshots.list@.
 module Network.Google.Resource.Compute.Snapshots.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.Snapshots.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeSnapshotsList@ method which the
+-- | A resource alias for @compute.snapshots.list@ method which the
 -- 'SnapshotsList'' request conforms to.
 type SnapshotsListResource =
      Capture "project" Text :>
@@ -77,7 +77,7 @@ data SnapshotsList' = SnapshotsList'
 --
 -- * 'slMaxResults'
 snapshotsList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'slProject'
     -> SnapshotsList'
 snapshotsList' pSlProject_ =
     SnapshotsList'

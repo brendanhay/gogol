@@ -22,7 +22,7 @@
 --
 -- Retrieves details of an entitlement.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEntitlementsGet@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.entitlements.get@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Get
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEntitlementsGet@ method which the
+-- | A resource alias for @androidenterprise.entitlements.get@ method which the
 -- 'EntitlementsGet'' request conforms to.
 type EntitlementsGetResource =
      "enterprises" :>
@@ -71,9 +71,9 @@ data EntitlementsGet' = EntitlementsGet'
 --
 -- * 'eUserId'
 entitlementsGet'
-    :: Text -- ^ 'entitlementId'
-    -> Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'eEntitlementId'
+    -> Text -- ^ 'eEnterpriseId'
+    -> Text -- ^ 'eUserId'
     -> EntitlementsGet'
 entitlementsGet' pEEntitlementId_ pEEnterpriseId_ pEUserId_ =
     EntitlementsGet'

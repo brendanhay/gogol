@@ -22,7 +22,7 @@
 --
 -- List all the deals for a given order
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceDealsList@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.marketplacedeals.list@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerMarketplaceDealsList@ method which the
+-- | A resource alias for @adexchangebuyer.marketplacedeals.list@ method which the
 -- 'MarketplaceDealsList'' request conforms to.
 type MarketplaceDealsListResource =
      "marketplaceOrders" :>
@@ -61,7 +61,7 @@ newtype MarketplaceDealsList' = MarketplaceDealsList'
 --
 -- * 'mdlOrderId'
 marketplaceDealsList'
-    :: Text -- ^ 'orderId'
+    :: Text -- ^ 'mdlOrderId'
     -> MarketplaceDealsList'
 marketplaceDealsList' pMdlOrderId_ =
     MarketplaceDealsList'

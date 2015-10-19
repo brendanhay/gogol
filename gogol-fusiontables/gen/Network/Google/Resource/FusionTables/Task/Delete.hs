@@ -23,7 +23,7 @@
 -- Deletes a specific task by its ID, unless that task has already started
 -- running.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTaskDelete@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.task.delete@.
 module Network.Google.Resource.FusionTables.Task.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.FusionTables.Task.Delete
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTaskDelete@ method which the
+-- | A resource alias for @fusiontables.task.delete@ method which the
 -- 'TaskDelete'' request conforms to.
 type TaskDeleteResource =
      "tables" :>
@@ -67,8 +67,8 @@ data TaskDelete' = TaskDelete'
 --
 -- * 'tTableId'
 taskDelete'
-    :: Text -- ^ 'taskId'
-    -> Text -- ^ 'tableId'
+    :: Text -- ^ 'tTaskId'
+    -> Text -- ^ 'tTableId'
     -> TaskDelete'
 taskDelete' pTTaskId_ pTTableId_ =
     TaskDelete'

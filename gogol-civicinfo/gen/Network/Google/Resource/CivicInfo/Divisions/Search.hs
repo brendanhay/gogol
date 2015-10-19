@@ -22,7 +22,7 @@
 --
 -- Searches for political divisions by their natural name or OCD ID.
 --
--- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicInfoDivisionsSearch@.
+-- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @civicinfo.divisions.search@.
 module Network.Google.Resource.CivicInfo.Divisions.Search
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.CivicInfo.Divisions.Search
 import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CivicInfoDivisionsSearch@ method which the
+-- | A resource alias for @civicinfo.divisions.search@ method which the
 -- 'DivisionsSearch'' request conforms to.
 type DivisionsSearchResource =
      "divisions" :>

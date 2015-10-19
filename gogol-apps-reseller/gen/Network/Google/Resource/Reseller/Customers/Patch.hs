@@ -23,7 +23,7 @@
 -- Update a customer resource if one it exists and is owned by the
 -- reseller. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerCustomersPatch@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.customers.patch@.
 module Network.Google.Resource.Reseller.Customers.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Reseller.Customers.Patch
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerCustomersPatch@ method which the
+-- | A resource alias for @reseller.customers.patch@ method which the
 -- 'CustomersPatch'' request conforms to.
 type CustomersPatchResource =
      "customers" :>
@@ -66,8 +66,8 @@ data CustomersPatch' = CustomersPatch'
 --
 -- * 'cpCustomerId'
 customersPatch'
-    :: Customer -- ^ 'payload'
-    -> Text -- ^ 'customerId'
+    :: Customer -- ^ 'cpPayload'
+    -> Text -- ^ 'cpCustomerId'
     -> CustomersPatch'
 customersPatch' pCpPayload_ pCpCustomerId_ =
     CustomersPatch'

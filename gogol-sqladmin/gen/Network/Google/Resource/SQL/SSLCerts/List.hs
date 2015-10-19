@@ -22,7 +22,7 @@
 --
 -- Lists all of the current SSL certificates for the instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLSSLCertsList@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.sslCerts.list@.
 module Network.Google.Resource.SQL.SSLCerts.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.SQL.SSLCerts.List
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLSSLCertsList@ method which the
+-- | A resource alias for @sql.sslCerts.list@ method which the
 -- 'SSLCertsList'' request conforms to.
 type SSLCertsListResource =
      "projects" :>
@@ -67,8 +67,8 @@ data SSLCertsList' = SSLCertsList'
 --
 -- * 'sclInstance'
 sslCertsList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'sclProject'
+    -> Text -- ^ 'sclInstance'
     -> SSLCertsList'
 sslCertsList' pSclProject_ pSclInstance_ =
     SSLCertsList'

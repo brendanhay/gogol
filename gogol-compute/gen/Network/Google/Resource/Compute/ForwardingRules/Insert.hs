@@ -23,7 +23,7 @@
 -- Creates a ForwardingRule resource in the specified project and region
 -- using the data included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeForwardingRulesInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.forwardingRules.insert@.
 module Network.Google.Resource.Compute.ForwardingRules.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.ForwardingRules.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeForwardingRulesInsert@ method which the
+-- | A resource alias for @compute.forwardingRules.insert@ method which the
 -- 'ForwardingRulesInsert'' request conforms to.
 type ForwardingRulesInsertResource =
      Capture "project" Text :>
@@ -73,9 +73,9 @@ data ForwardingRulesInsert' = ForwardingRulesInsert'
 --
 -- * 'friRegion'
 forwardingRulesInsert'
-    :: Text -- ^ 'project'
-    -> ForwardingRule -- ^ 'payload'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'friProject'
+    -> ForwardingRule -- ^ 'friPayload'
+    -> Text -- ^ 'friRegion'
     -> ForwardingRulesInsert'
 forwardingRulesInsert' pFriProject_ pFriPayload_ pFriRegion_ =
     ForwardingRulesInsert'

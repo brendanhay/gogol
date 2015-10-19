@@ -28,7 +28,7 @@
 -- or if no update mask is supplied. * \`FAILED_PRECONDITION\` for the
 -- following request errors: * CourseNotModifiable
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesPatch@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.patch@.
 module Network.Google.Resource.Classroom.Courses.Patch
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ module Network.Google.Resource.Classroom.Courses.Patch
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesPatch@ method which the
+-- | A resource alias for @classroom.courses.patch@ method which the
 -- 'CoursesPatch'' request conforms to.
 type CoursesPatchResource =
      "v1" :>
@@ -117,8 +117,8 @@ data CoursesPatch' = CoursesPatch'
 --
 -- * 'cpCallback'
 coursesPatch'
-    :: Course -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: Course -- ^ 'cpPayload'
+    -> Text -- ^ 'cpId'
     -> CoursesPatch'
 coursesPatch' pCpPayload_ pCpId_ =
     CoursesPatch'

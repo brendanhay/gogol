@@ -22,7 +22,7 @@
 --
 -- Retrieve all Mobile Devices of a customer (paginated)
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMobileDevicesList@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.mobiledevices.list@.
 module Network.Google.Resource.Directory.MobileDevices.List
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Directory.MobileDevices.List
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryMobileDevicesList@ method which the
+-- | A resource alias for @directory.mobiledevices.list@ method which the
 -- 'MobileDevicesList'' request conforms to.
 type MobileDevicesListResource =
      "customer" :>
@@ -92,7 +92,7 @@ data MobileDevicesList' = MobileDevicesList'
 --
 -- * 'mdlMaxResults'
 mobileDevicesList'
-    :: Text -- ^ 'customerId'
+    :: Text -- ^ 'mdlCustomerId'
     -> MobileDevicesList'
 mobileDevicesList' pMdlCustomerId_ =
     MobileDevicesList'

@@ -22,7 +22,7 @@
 --
 -- Updates an existing comment.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveCommentsUpdate@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.comments.update@.
 module Network.Google.Resource.Drive.Comments.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Drive.Comments.Update
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveCommentsUpdate@ method which the
+-- | A resource alias for @drive.comments.update@ method which the
 -- 'CommentsUpdate'' request conforms to.
 type CommentsUpdateResource =
      "files" :>
@@ -70,9 +70,9 @@ data CommentsUpdate' = CommentsUpdate'
 --
 -- * 'cuCommentId'
 commentsUpdate'
-    :: Comment -- ^ 'payload'
-    -> Text -- ^ 'fileId'
-    -> Text -- ^ 'commentId'
+    :: Comment -- ^ 'cuPayload'
+    -> Text -- ^ 'cuFileId'
+    -> Text -- ^ 'cuCommentId'
     -> CommentsUpdate'
 commentsUpdate' pCuPayload_ pCuFileId_ pCuCommentId_ =
     CommentsUpdate'

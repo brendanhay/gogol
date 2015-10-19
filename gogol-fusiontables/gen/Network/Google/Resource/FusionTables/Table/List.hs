@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of tables a user owns.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableList@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.table.list@.
 module Network.Google.Resource.FusionTables.Table.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.FusionTables.Table.List
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTableList@ method which the
+-- | A resource alias for @fusiontables.table.list@ method which the
 -- 'TableList'' request conforms to.
 type TableListResource =
      "tables" :>

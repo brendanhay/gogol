@@ -22,7 +22,7 @@
 --
 -- Delete the leaderboard configuration with the given ID.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationLeaderboardConfigurationsDelete@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.leaderboardConfigurations.delete@.
 module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Dele
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationLeaderboardConfigurationsDelete@ method which the
+-- | A resource alias for @gamesConfiguration.leaderboardConfigurations.delete@ method which the
 -- 'LeaderboardConfigurationsDelete'' request conforms to.
 type LeaderboardConfigurationsDeleteResource =
      "leaderboards" :>
@@ -59,7 +59,7 @@ newtype LeaderboardConfigurationsDelete' = LeaderboardConfigurationsDelete'
 --
 -- * 'lcdLeaderboardId'
 leaderboardConfigurationsDelete'
-    :: Text -- ^ 'leaderboardId'
+    :: Text -- ^ 'lcdLeaderboardId'
     -> LeaderboardConfigurationsDelete'
 leaderboardConfigurationsDelete' pLcdLeaderboardId_ =
     LeaderboardConfigurationsDelete'

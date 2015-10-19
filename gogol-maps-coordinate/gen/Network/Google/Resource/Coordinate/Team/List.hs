@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of teams for a user.
 --
--- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateTeamList@.
+-- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @coordinate.team.list@.
 module Network.Google.Resource.Coordinate.Team.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Coordinate.Team.List
 import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CoordinateTeamList@ method which the
+-- | A resource alias for @coordinate.team.list@ method which the
 -- 'TeamList'' request conforms to.
 type TeamListResource =
      "teams" :>

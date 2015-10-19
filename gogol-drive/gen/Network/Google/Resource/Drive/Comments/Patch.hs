@@ -22,7 +22,7 @@
 --
 -- Updates an existing comment. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveCommentsPatch@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.comments.patch@.
 module Network.Google.Resource.Drive.Comments.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Drive.Comments.Patch
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveCommentsPatch@ method which the
+-- | A resource alias for @drive.comments.patch@ method which the
 -- 'CommentsPatch'' request conforms to.
 type CommentsPatchResource =
      "files" :>
@@ -70,9 +70,9 @@ data CommentsPatch' = CommentsPatch'
 --
 -- * 'cpCommentId'
 commentsPatch'
-    :: Comment -- ^ 'payload'
-    -> Text -- ^ 'fileId'
-    -> Text -- ^ 'commentId'
+    :: Comment -- ^ 'cpPayload'
+    -> Text -- ^ 'cpFileId'
+    -> Text -- ^ 'cpCommentId'
     -> CommentsPatch'
 commentsPatch' pCpPayload_ pCpFileId_ pCpCommentId_ =
     CommentsPatch'

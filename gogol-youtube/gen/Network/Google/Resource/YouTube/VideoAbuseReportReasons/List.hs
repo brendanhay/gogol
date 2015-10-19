@@ -23,7 +23,7 @@
 -- Returns a list of abuse reasons that can be used for reporting abusive
 -- videos.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideoAbuseReportReasonsList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.videoAbuseReportReasons.list@.
 module Network.Google.Resource.YouTube.VideoAbuseReportReasons.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.YouTube.VideoAbuseReportReasons.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeVideoAbuseReportReasonsList@ method which the
+-- | A resource alias for @youtube.videoAbuseReportReasons.list@ method which the
 -- 'VideoAbuseReportReasonsList'' request conforms to.
 type VideoAbuseReportReasonsListResource =
      "videoAbuseReportReasons" :>
@@ -67,7 +67,7 @@ data VideoAbuseReportReasonsList' = VideoAbuseReportReasonsList'
 --
 -- * 'varrlHl'
 videoAbuseReportReasonsList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'varrlPart'
     -> VideoAbuseReportReasonsList'
 videoAbuseReportReasonsList' pVarrlPart_ =
     VideoAbuseReportReasonsList'

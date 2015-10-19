@@ -23,7 +23,7 @@
 -- Updates the shipping settings of the account. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountshippingPatch@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accountshipping.patch@.
 module Network.Google.Resource.Content.Accountshipping.Patch
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Content.Accountshipping.Patch
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccountshippingPatch@ method which the
+-- | A resource alias for @content.accountshipping.patch@ method which the
 -- 'AccountshippingPatch'' request conforms to.
 type AccountshippingPatchResource =
      Capture "merchantId" Word64 :>
@@ -77,9 +77,9 @@ data AccountshippingPatch' = AccountshippingPatch'
 --
 -- * 'apDryRun'
 accountshippingPatch'
-    :: Word64 -- ^ 'merchantId'
-    -> AccountShipping -- ^ 'payload'
-    -> Word64 -- ^ 'accountId'
+    :: Word64 -- ^ 'apMerchantId'
+    -> AccountShipping -- ^ 'apPayload'
+    -> Word64 -- ^ 'apAccountId'
     -> AccountshippingPatch'
 accountshippingPatch' pApMerchantId_ pApPayload_ pApAccountId_ =
     AccountshippingPatch'

@@ -23,7 +23,7 @@
 -- Creates an instance group in the specified project using the parameters
 -- that are included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroups.insert@.
 module Network.Google.Resource.Compute.InstanceGroups.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.InstanceGroups.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupsInsert@ method which the
+-- | A resource alias for @compute.instanceGroups.insert@ method which the
 -- 'InstanceGroupsInsert'' request conforms to.
 type InstanceGroupsInsertResource =
      Capture "project" Text :>
@@ -73,9 +73,9 @@ data InstanceGroupsInsert' = InstanceGroupsInsert'
 --
 -- * 'igiPayload'
 instanceGroupsInsert'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> InstanceGroup -- ^ 'payload'
+    :: Text -- ^ 'igiProject'
+    -> Text -- ^ 'igiZone'
+    -> InstanceGroup -- ^ 'igiPayload'
     -> InstanceGroupsInsert'
 instanceGroupsInsert' pIgiProject_ pIgiZone_ pIgiPayload_ =
     InstanceGroupsInsert'

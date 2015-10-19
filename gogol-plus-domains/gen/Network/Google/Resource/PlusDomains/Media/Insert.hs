@@ -25,7 +25,7 @@
 -- quota if photos are less than 2048 pixels on their longest side or
 -- videos are less than 15 minutes in length.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsMediaInsert@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.media.insert@.
 module Network.Google.Resource.PlusDomains.Media.Insert
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.PlusDomains.Media.Insert
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsMediaInsert@ method which the
+-- | A resource alias for @plusDomains.media.insert@ method which the
 -- 'MediaInsert'' request conforms to.
 type MediaInsertResource =
      "people" :>
@@ -81,10 +81,10 @@ data MediaInsert' = MediaInsert'
 --
 -- * 'miMedia'
 mediaInsert'
-    :: MediaInsertCollection -- ^ 'collection'
-    -> Media -- ^ 'payload'
-    -> Text -- ^ 'userId'
-    -> Body -- ^ 'media'
+    :: MediaInsertCollection -- ^ 'miCollection'
+    -> Media -- ^ 'miPayload'
+    -> Text -- ^ 'miUserId'
+    -> Body -- ^ 'miMedia'
     -> MediaInsert'
 mediaInsert' pMiCollection_ pMiPayload_ pMiUserId_ pMiMedia_ =
     MediaInsert'

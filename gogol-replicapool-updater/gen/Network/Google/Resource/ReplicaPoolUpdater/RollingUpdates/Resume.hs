@@ -23,7 +23,7 @@
 -- Continues an update in PAUSED state. Has no effect if invoked when the
 -- state of the update is ROLLED_OUT.
 --
--- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesResume@.
+-- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.rollingUpdates.resume@.
 module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Resume
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Resume
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
--- | A resource alias for @ReplicapoolupdaterRollingUpdatesResume@ method which the
+-- | A resource alias for @replicapoolupdater.rollingUpdates.resume@ method which the
 -- 'RollingUpdatesResume'' request conforms to.
 type RollingUpdatesResumeResource =
      Capture "project" Text :>
@@ -73,9 +73,9 @@ data RollingUpdatesResume' = RollingUpdatesResume'
 --
 -- * 'rZone'
 rollingUpdatesResume'
-    :: Text -- ^ 'rollingUpdate'
-    -> Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'rRollingUpdate'
+    -> Text -- ^ 'rProject'
+    -> Text -- ^ 'rZone'
     -> RollingUpdatesResume'
 rollingUpdatesResume' pRRollingUpdate_ pRProject_ pRZone_ =
     RollingUpdatesResume'

@@ -25,7 +25,7 @@
 -- adding new APKs will cause it to resume. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsTracksPatch@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.tracks.patch@.
 module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Patch
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Patch
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsTracksPatch@ method which the
+-- | A resource alias for @androidpublisher.edits.tracks.patch@ method which the
 -- 'EditsTracksPatch'' request conforms to.
 type EditsTracksPatchResource =
      Capture "packageName" Text :>
@@ -81,10 +81,10 @@ data EditsTracksPatch' = EditsTracksPatch'
 --
 -- * 'etpEditId'
 editsTracksPatch'
-    :: EditsTracksPatchTrack -- ^ 'track'
-    -> Text -- ^ 'packageName'
-    -> Track -- ^ 'payload'
-    -> Text -- ^ 'editId'
+    :: EditsTracksPatchTrack -- ^ 'etpTrack'
+    -> Text -- ^ 'etpPackageName'
+    -> Track -- ^ 'etpPayload'
+    -> Text -- ^ 'etpEditId'
     -> EditsTracksPatch'
 editsTracksPatch' pEtpTrack_ pEtpPackageName_ pEtpPayload_ pEtpEditId_ =
     EditsTracksPatch'

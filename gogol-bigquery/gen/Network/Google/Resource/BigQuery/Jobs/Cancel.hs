@@ -24,7 +24,7 @@
 -- the client will need to poll for the job status to see if the cancel
 -- completed successfully. Cancelled jobs may still incur costs.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryJobsCancel@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @bigquery.jobs.cancel@.
 module Network.Google.Resource.BigQuery.Jobs.Cancel
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.BigQuery.Jobs.Cancel
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigQueryJobsCancel@ method which the
+-- | A resource alias for @bigquery.jobs.cancel@ method which the
 -- 'JobsCancel'' request conforms to.
 type JobsCancelResource =
      "project" :>
@@ -71,8 +71,8 @@ data JobsCancel' = JobsCancel'
 --
 -- * 'jcProjectId'
 jobsCancel'
-    :: Text -- ^ 'jobId'
-    -> Text -- ^ 'projectId'
+    :: Text -- ^ 'jcJobId'
+    -> Text -- ^ 'jcProjectId'
     -> JobsCancel'
 jobsCancel' pJcJobId_ pJcProjectId_ =
     JobsCancel'

@@ -23,7 +23,7 @@
 -- Creates a TargetPool resource in the specified project and region using
 -- the data included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.insert@.
 module Network.Google.Resource.Compute.TargetPools.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.TargetPools.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetPoolsInsert@ method which the
+-- | A resource alias for @compute.targetPools.insert@ method which the
 -- 'TargetPoolsInsert'' request conforms to.
 type TargetPoolsInsertResource =
      Capture "project" Text :>
@@ -72,9 +72,9 @@ data TargetPoolsInsert' = TargetPoolsInsert'
 --
 -- * 'tpiRegion'
 targetPoolsInsert'
-    :: Text -- ^ 'project'
-    -> TargetPool -- ^ 'payload'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'tpiProject'
+    -> TargetPool -- ^ 'tpiPayload'
+    -> Text -- ^ 'tpiRegion'
     -> TargetPoolsInsert'
 targetPoolsInsert' pTpiProject_ pTpiPayload_ pTpiRegion_ =
     TargetPoolsInsert'

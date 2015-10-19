@@ -28,7 +28,7 @@
 -- respective image project, such as debian-cloud or windows-cloud. See
 -- Accessing images for more information.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeImagesList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.images.list@.
 module Network.Google.Resource.Compute.Images.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Compute.Images.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeImagesList@ method which the
+-- | A resource alias for @compute.images.list@ method which the
 -- 'ImagesList'' request conforms to.
 type ImagesListResource =
      Capture "project" Text :>
@@ -87,7 +87,7 @@ data ImagesList' = ImagesList'
 --
 -- * 'ilMaxResults'
 imagesList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'ilProject'
     -> ImagesList'
 imagesList' pIlProject_ =
     ImagesList'

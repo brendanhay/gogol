@@ -24,7 +24,7 @@
 -- player. This method is only accessible to whitelisted tester accounts
 -- for your application.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementAchievementsReset@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.achievements.reset@.
 module Network.Google.Resource.GamesManagement.Achievements.Reset
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.GamesManagement.Achievements.Reset
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementAchievementsReset@ method which the
+-- | A resource alias for @gamesManagement.achievements.reset@ method which the
 -- 'AchievementsReset'' request conforms to.
 type AchievementsResetResource =
      "achievements" :>
@@ -65,7 +65,7 @@ newtype AchievementsReset' = AchievementsReset'
 --
 -- * 'arAchievementId'
 achievementsReset'
-    :: Text -- ^ 'achievementId'
+    :: Text -- ^ 'arAchievementId'
     -> AchievementsReset'
 achievementsReset' pArAchievementId_ =
     AchievementsReset'

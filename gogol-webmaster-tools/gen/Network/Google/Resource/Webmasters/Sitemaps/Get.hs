@@ -22,7 +22,7 @@
 --
 -- Retrieves information about a specific sitemap.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitemapsGet@.
+-- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @webmasters.sitemaps.get@.
 module Network.Google.Resource.Webmasters.Sitemaps.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Webmasters.Sitemaps.Get
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
--- | A resource alias for @WebmastersSitemapsGet@ method which the
+-- | A resource alias for @webmasters.sitemaps.get@ method which the
 -- 'SitemapsGet'' request conforms to.
 type SitemapsGetResource =
      "sites" :>
@@ -65,8 +65,8 @@ data SitemapsGet' = SitemapsGet'
 --
 -- * 'sgSiteURL'
 sitemapsGet'
-    :: Text -- ^ 'feedpath'
-    -> Text -- ^ 'siteUrl'
+    :: Text -- ^ 'sgFeedpath'
+    -> Text -- ^ 'sgSiteURL'
     -> SitemapsGet'
 sitemapsGet' pSgFeedpath_ pSgSiteURL_ =
     SitemapsGet'

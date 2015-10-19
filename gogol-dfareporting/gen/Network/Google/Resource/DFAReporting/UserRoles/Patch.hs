@@ -22,7 +22,7 @@
 --
 -- Updates an existing user role. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolesPatch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.userRoles.patch@.
 module Network.Google.Resource.DFAReporting.UserRoles.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.UserRoles.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingUserRolesPatch@ method which the
+-- | A resource alias for @dfareporting.userRoles.patch@ method which the
 -- 'UserRolesPatch'' request conforms to.
 type UserRolesPatchResource =
      "userprofiles" :>
@@ -70,9 +70,9 @@ data UserRolesPatch' = UserRolesPatch'
 --
 -- * 'urpId'
 userRolesPatch'
-    :: Int64 -- ^ 'profileId'
-    -> UserRole -- ^ 'payload'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'urpProFileId'
+    -> UserRole -- ^ 'urpPayload'
+    -> Int64 -- ^ 'urpId'
     -> UserRolesPatch'
 userRolesPatch' pUrpProFileId_ pUrpPayload_ pUrpId_ =
     UserRolesPatch'

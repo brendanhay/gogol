@@ -22,7 +22,7 @@
 --
 -- Enrolls an enterprise with the calling MDM.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEnterprisesEnroll@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.enroll@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEnterprisesEnroll@ method which the
+-- | A resource alias for @androidenterprise.enterprises.enroll@ method which the
 -- 'EnterprisesEnroll'' request conforms to.
 type EnterprisesEnrollResource =
      "enterprises" :>
@@ -65,8 +65,8 @@ data EnterprisesEnroll' = EnterprisesEnroll'
 --
 -- * 'eePayload'
 enterprisesEnroll'
-    :: Text -- ^ 'token'
-    -> Enterprise -- ^ 'payload'
+    :: Text -- ^ 'eeToken'
+    -> Enterprise -- ^ 'eePayload'
     -> EnterprisesEnroll'
 enterprisesEnroll' pEeToken_ pEePayload_ =
     EnterprisesEnroll'

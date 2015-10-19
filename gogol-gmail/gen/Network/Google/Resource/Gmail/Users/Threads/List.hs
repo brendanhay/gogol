@@ -22,7 +22,7 @@
 --
 -- Lists the threads in the user\'s mailbox.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersThreadsList@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.threads.list@.
 module Network.Google.Resource.Gmail.Users.Threads.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Gmail.Users.Threads.List
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersThreadsList@ method which the
+-- | A resource alias for @gmail.users.threads.list@ method which the
 -- 'UsersThreadsList'' request conforms to.
 type UsersThreadsListResource =
      Capture "userId" Text :>

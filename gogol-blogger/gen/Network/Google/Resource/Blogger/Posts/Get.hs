@@ -22,7 +22,7 @@
 --
 -- Get a post by ID.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsGet@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.get@.
 module Network.Google.Resource.Blogger.Posts.Get
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Blogger.Posts.Get
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostsGet@ method which the
+-- | A resource alias for @blogger.posts.get@ method which the
 -- 'PostsGet'' request conforms to.
 type PostsGetResource =
      "blogs" :>
@@ -85,8 +85,8 @@ data PostsGet' = PostsGet'
 --
 -- * 'pgPostId'
 postsGet'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'postId'
+    :: Text -- ^ 'pgBlogId'
+    -> Text -- ^ 'pgPostId'
     -> PostsGet'
 postsGet' pPgBlogId_ pPgPostId_ =
     PostsGet'

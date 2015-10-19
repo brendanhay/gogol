@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerClientAccessInsert@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.clientaccess.insert@.
 module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Insert
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Insert
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerClientAccessInsert@ method which the
+-- | A resource alias for @adexchangebuyer.clientaccess.insert@ method which the
 -- 'ClientAccessInsert'' request conforms to.
 type ClientAccessInsertResource =
      "clientAccess" :>
@@ -67,7 +67,7 @@ data ClientAccessInsert' = ClientAccessInsert'
 --
 -- * 'caiClientAccountId'
 clientAccessInsert'
-    :: ClientAccessCapabilities -- ^ 'payload'
+    :: ClientAccessCapabilities -- ^ 'caiPayload'
     -> ClientAccessInsert'
 clientAccessInsert' pCaiPayload_ =
     ClientAccessInsert'

@@ -22,7 +22,7 @@
 --
 -- Fetch the representation of an existing ManagedZone.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSManagedZonesGet@.
+-- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.managedZones.get@.
 module Network.Google.Resource.DNS.ManagedZones.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DNS.ManagedZones.Get
 import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DNSManagedZonesGet@ method which the
+-- | A resource alias for @dns.managedZones.get@ method which the
 -- 'ManagedZonesGet'' request conforms to.
 type ManagedZonesGetResource =
      Capture "project" Text :>
@@ -64,8 +64,8 @@ data ManagedZonesGet' = ManagedZonesGet'
 --
 -- * 'mzgManagedZone'
 managedZonesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'managedZone'
+    :: Text -- ^ 'mzgProject'
+    -> Text -- ^ 'mzgManagedZone'
     -> ManagedZonesGet'
 managedZonesGet' pMzgProject_ pMzgManagedZone_ =
     ManagedZonesGet'

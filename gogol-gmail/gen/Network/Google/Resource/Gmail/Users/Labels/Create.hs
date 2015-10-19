@@ -22,7 +22,7 @@
 --
 -- Creates a new label.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersLabelsCreate@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.labels.create@.
 module Network.Google.Resource.Gmail.Users.Labels.Create
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Gmail.Users.Labels.Create
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersLabelsCreate@ method which the
+-- | A resource alias for @gmail.users.labels.create@ method which the
 -- 'UsersLabelsCreate'' request conforms to.
 type UsersLabelsCreateResource =
      Capture "userId" Text :>
@@ -64,7 +64,7 @@ data UsersLabelsCreate' = UsersLabelsCreate'
 --
 -- * 'ulcUserId'
 usersLabelsCreate'
-    :: Label -- ^ 'payload'
+    :: Label -- ^ 'ulcPayload'
     -> Text
     -> UsersLabelsCreate'
 usersLabelsCreate' pUlcPayload_ pUlcUserId_ =

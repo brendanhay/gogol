@@ -24,7 +24,7 @@
 -- For example, you can retrieve all groups that the authenticated user
 -- owns, or you can retrieve one or more groups by their unique IDs.
 --
--- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsGroupsList@.
+-- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @youtubeAnalytics.groups.list@.
 module Network.Google.Resource.YouTubeAnalytics.Groups.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.YouTubeAnalytics.Groups.List
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
--- | A resource alias for @YouTubeAnalyticsGroupsList@ method which the
+-- | A resource alias for @youtubeAnalytics.groups.list@ method which the
 -- 'GroupsList'' request conforms to.
 type GroupsListResource =
      "groups" :>

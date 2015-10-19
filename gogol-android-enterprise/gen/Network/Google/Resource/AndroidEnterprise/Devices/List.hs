@@ -22,7 +22,7 @@
 --
 -- Retrieves the IDs of all of a user\'s devices.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseDevicesList@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.devices.list@.
 module Network.Google.Resource.AndroidEnterprise.Devices.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidEnterprise.Devices.List
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseDevicesList@ method which the
+-- | A resource alias for @androidenterprise.devices.list@ method which the
 -- 'DevicesList'' request conforms to.
 type DevicesListResource =
      "enterprises" :>
@@ -67,8 +67,8 @@ data DevicesList' = DevicesList'
 --
 -- * 'dlUserId'
 devicesList'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'dlEnterpriseId'
+    -> Text -- ^ 'dlUserId'
     -> DevicesList'
 devicesList' pDlEnterpriseId_ pDlUserId_ =
     DevicesList'

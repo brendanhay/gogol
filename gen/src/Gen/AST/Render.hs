@@ -30,6 +30,7 @@ import           Data.Char                    (isSpace)
 import qualified Data.HashMap.Strict          as Map
 import           Data.Maybe
 import           Data.Semigroup               ((<>))
+import           Data.String
 import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
@@ -41,7 +42,7 @@ import           Gen.Syntax
 import           Gen.Types
 import           HIndent
 import           Language.Haskell.Exts.Build  (name)
-import           Language.Haskell.Exts.Pretty
+import           Language.Haskell.Exts.Pretty as PP
 import           Prelude                      hiding (sum)
 
 render :: Service Solved -> AST (API, [Data])
@@ -85,7 +86,7 @@ renderSchema s = go (_schema s)
             <*> traverse (pp Print) (jsonDecls k p ts)
 
         ctor ts = Fun' (cname k) (Just help)
-            <$> (pp None   (ctorSig  k   ts) <&> comments ts)
+            <$> (pp None   (ctorSig  k   ts) <&> comments p ts)
             <*>  pp Indent (ctorDecl k p ts)
 
         lens (l, v) = Fun' (lname p l) (v ^. iDescription)
@@ -139,7 +140,7 @@ renderMethod s root suf m@Method {..} = do
 
     let is = i : [dl | _mSupportsMediaDownload]
 
-    Action _mId _unique (root <> mkNS ns) _mDescription alias
+    Action (commasep _mId) _unique (root <> mkNS ns) _mDescription alias
         <$> pp Print (verbAlias alias m)
         <*> pure (insts is d)
   where
@@ -193,10 +194,9 @@ pp i x
           , spacing = False
           }
 
-
 -- FIXME: dirty hack to render smart ctor parameter comments.
-comments :: Map Local Solved -> Rendered -> Rendered
-comments (Map.toList -> rs) =
+comments :: Prefix -> Map Local Solved -> Rendered -> Rendered
+comments p (Map.toList -> rs) =
       LText.replace     " :: " "\n    :: "
     . LText.intercalate "\n    -> "
     . zipWith rel ps
@@ -207,4 +207,5 @@ comments (Map.toList -> rs) =
     ps = map (Just . fst) ks ++ repeat Nothing
 
     rel Nothing  t = t
-    rel (Just l) t = t <> " -- ^ '" <> LText.fromStrict (local l) <> "'"
+    rel (Just l) t =
+        t <> " -- ^ '" <> fromString (PP.prettyPrint (lname p l)) <> "'"

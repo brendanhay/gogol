@@ -380,7 +380,7 @@ newtype EntityProperties = EntityProperties
 --
 -- * 'epAddtional'
 entityProperties
-    :: HashMap Text Property -- ^ 'addtional'
+    :: HashMap Text Property -- ^ 'epAddtional'
     -> EntityProperties
 entityProperties pEpAddtional_ =
     EntityProperties

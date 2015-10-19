@@ -22,7 +22,7 @@
 --
 -- Copies a table.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableCopy@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.table.copy@.
 module Network.Google.Resource.FusionTables.Table.Copy
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.FusionTables.Table.Copy
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTableCopy@ method which the
+-- | A resource alias for @fusiontables.table.copy@ method which the
 -- 'TableCopy'' request conforms to.
 type TableCopyResource =
      "tables" :>
@@ -65,7 +65,7 @@ data TableCopy' = TableCopy'
 --
 -- * 'tcCopyPresentation'
 tableCopy'
-    :: Text -- ^ 'tableId'
+    :: Text -- ^ 'tcTableId'
     -> TableCopy'
 tableCopy' pTcTableId_ =
     TableCopy'

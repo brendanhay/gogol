@@ -24,7 +24,7 @@
 -- versioning is not enabled for the bucket, or if the generation parameter
 -- is used.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsDelete@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objects.delete@.
 module Network.Google.Resource.Storage.Objects.Delete
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Storage.Objects.Delete
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectsDelete@ method which the
+-- | A resource alias for @storage.objects.delete@ method which the
 -- 'ObjectsDelete'' request conforms to.
 type ObjectsDeleteResource =
      "b" :>
@@ -94,8 +94,8 @@ data ObjectsDelete' = ObjectsDelete'
 --
 -- * 'odGeneration'
 objectsDelete'
-    :: Text -- ^ 'bucket'
-    -> Text -- ^ 'object'
+    :: Text -- ^ 'odBucket'
+    -> Text -- ^ 'odObject'
     -> ObjectsDelete'
 objectsDelete' pOdBucket_ pOdObject_ =
     ObjectsDelete'

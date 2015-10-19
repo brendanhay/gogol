@@ -22,7 +22,7 @@
 --
 -- Deletes a style.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesStyleDelete@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.style.delete@.
 module Network.Google.Resource.FusionTables.Style.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.FusionTables.Style.Delete
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesStyleDelete@ method which the
+-- | A resource alias for @fusiontables.style.delete@ method which the
 -- 'StyleDelete'' request conforms to.
 type StyleDeleteResource =
      "tables" :>
@@ -65,8 +65,8 @@ data StyleDelete' = StyleDelete'
 --
 -- * 'sdTableId'
 styleDelete'
-    :: Int32 -- ^ 'styleId'
-    -> Text -- ^ 'tableId'
+    :: Int32 -- ^ 'sdStyleId'
+    -> Text -- ^ 'sdTableId'
     -> StyleDelete'
 styleDelete' pSdStyleId_ pSdTableId_ =
     StyleDelete'

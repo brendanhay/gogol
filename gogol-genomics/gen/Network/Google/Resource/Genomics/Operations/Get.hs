@@ -24,7 +24,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ < Genomics API Reference> for @GenomicsOperationsGet@.
+-- /See:/ < Genomics API Reference> for @genomics.operations.get@.
 module Network.Google.Resource.Genomics.Operations.Get
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Genomics.Operations.Get
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsOperationsGet@ method which the
+-- | A resource alias for @genomics.operations.get@ method which the
 -- 'OperationsGet'' request conforms to.
 type OperationsGetResource =
      "v1" :>
@@ -98,7 +98,7 @@ data OperationsGet' = OperationsGet'
 --
 -- * 'ogCallback'
 operationsGet'
-    :: Text -- ^ 'name'
+    :: Text -- ^ 'ogName'
     -> OperationsGet'
 operationsGet' pOgName_ =
     OperationsGet'

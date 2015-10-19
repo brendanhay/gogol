@@ -22,7 +22,7 @@
 --
 -- Returns a single unsampled report.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUnSampledReportsGet@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.unsampledReports.get@.
 module Network.Google.Resource.Analytics.Management.UnSampledReports.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.UnSampledReports.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementUnSampledReportsGet@ method which the
+-- | A resource alias for @analytics.management.unsampledReports.get@ method which the
 -- 'ManagementUnSampledReportsGet'' request conforms to.
 type ManagementUnSampledReportsGetResource =
      "management" :>
@@ -79,10 +79,10 @@ data ManagementUnSampledReportsGet' = ManagementUnSampledReportsGet'
 --
 -- * 'musrgUnSampledReportId'
 managementUnSampledReportsGet'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'unsampledReportId'
+    :: Text -- ^ 'musrgWebPropertyId'
+    -> Text -- ^ 'musrgProFileId'
+    -> Text -- ^ 'musrgAccountId'
+    -> Text -- ^ 'musrgUnSampledReportId'
     -> ManagementUnSampledReportsGet'
 managementUnSampledReportsGet' pMusrgWebPropertyId_ pMusrgProFileId_ pMusrgAccountId_ pMusrgUnSampledReportId_ =
     ManagementUnSampledReportsGet'

@@ -22,7 +22,7 @@
 --
 -- Uploads a watermark image to YouTube and sets it for a channel.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeWatermarksSet@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.watermarks.set@.
 module Network.Google.Resource.YouTube.Watermarks.Set
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.YouTube.Watermarks.Set
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeWatermarksSet@ method which the
+-- | A resource alias for @youtube.watermarks.set@ method which the
 -- 'WatermarksSet'' request conforms to.
 type WatermarksSetResource =
      "watermarks" :>
@@ -75,9 +75,9 @@ data WatermarksSet' = WatermarksSet'
 --
 -- * 'wsOnBehalfOfContentOwner'
 watermarksSet'
-    :: Text -- ^ 'channelId'
-    -> InvideoBranding -- ^ 'payload'
-    -> Body -- ^ 'media'
+    :: Text -- ^ 'wsChannelId'
+    -> InvideoBranding -- ^ 'wsPayload'
+    -> Body -- ^ 'wsMedia'
     -> WatermarksSet'
 watermarksSet' pWsChannelId_ pWsPayload_ pWsMedia_ =
     WatermarksSet'

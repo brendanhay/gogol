@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of forwarding rules grouped by scope.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeForwardingRulesAggregatedList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.forwardingRules.aggregatedList@.
 module Network.Google.Resource.Compute.ForwardingRules.AggregatedList
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.ForwardingRules.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeForwardingRulesAggregatedList@ method which the
+-- | A resource alias for @compute.forwardingRules.aggregatedList@ method which the
 -- 'ForwardingRulesAggregatedList'' request conforms to.
 type ForwardingRulesAggregatedListResource =
      Capture "project" Text :>
@@ -76,7 +76,7 @@ data ForwardingRulesAggregatedList' = ForwardingRulesAggregatedList'
 --
 -- * 'fralMaxResults'
 forwardingRulesAggregatedList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'fralProject'
     -> ForwardingRulesAggregatedList'
 forwardingRulesAggregatedList' pFralProject_ =
     ForwardingRulesAggregatedList'

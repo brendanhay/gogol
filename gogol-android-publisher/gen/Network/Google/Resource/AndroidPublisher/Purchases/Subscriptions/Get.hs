@@ -23,7 +23,7 @@
 -- Checks whether a user\'s subscription purchase is valid and returns its
 -- expiry time.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherPurchasesSubscriptionsGet@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.purchases.subscriptions.get@.
 module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Get
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherPurchasesSubscriptionsGet@ method which the
+-- | A resource alias for @androidpublisher.purchases.subscriptions.get@ method which the
 -- 'PurchasesSubscriptionsGet'' request conforms to.
 type PurchasesSubscriptionsGetResource =
      Capture "packageName" Text :>
@@ -74,9 +74,9 @@ data PurchasesSubscriptionsGet' = PurchasesSubscriptionsGet'
 --
 -- * 'psgSubscriptionId'
 purchasesSubscriptionsGet'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'token'
-    -> Text -- ^ 'subscriptionId'
+    :: Text -- ^ 'psgPackageName'
+    -> Text -- ^ 'psgToken'
+    -> Text -- ^ 'psgSubscriptionId'
     -> PurchasesSubscriptionsGet'
 purchasesSubscriptionsGet' pPsgPackageName_ pPsgToken_ pPsgSubscriptionId_ =
     PurchasesSubscriptionsGet'

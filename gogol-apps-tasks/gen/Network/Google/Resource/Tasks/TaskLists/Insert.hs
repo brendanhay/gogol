@@ -23,7 +23,7 @@
 -- Creates a new task list and adds it to the authenticated user\'s task
 -- lists.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTaskListsInsert@.
+-- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasklists.insert@.
 module Network.Google.Resource.Tasks.TaskLists.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Tasks.TaskLists.Insert
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTaskListsInsert@ method which the
+-- | A resource alias for @tasks.tasklists.insert@ method which the
 -- 'TaskListsInsert'' request conforms to.
 type TaskListsInsertResource =
      "users" :>
@@ -63,7 +63,7 @@ newtype TaskListsInsert' = TaskListsInsert'
 --
 -- * 'tliPayload'
 taskListsInsert'
-    :: TaskList -- ^ 'payload'
+    :: TaskList -- ^ 'tliPayload'
     -> TaskListsInsert'
 taskListsInsert' pTliPayload_ =
     TaskListsInsert'

@@ -22,7 +22,7 @@
 --
 -- Delete all access tokens issued by a user for an application.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryTokensDelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.tokens.delete@.
 module Network.Google.Resource.Directory.Tokens.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Tokens.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryTokensDelete@ method which the
+-- | A resource alias for @directory.tokens.delete@ method which the
 -- 'TokensDelete'' request conforms to.
 type TokensDeleteResource =
      "users" :>
@@ -65,8 +65,8 @@ data TokensDelete' = TokensDelete'
 --
 -- * 'tdUserKey'
 tokensDelete'
-    :: Text -- ^ 'clientId'
-    -> Text -- ^ 'userKey'
+    :: Text -- ^ 'tdClientId'
+    -> Text -- ^ 'tdUserKey'
     -> TokensDelete'
 tokensDelete' pTdClientId_ pTdUserKey_ =
     TokensDelete'

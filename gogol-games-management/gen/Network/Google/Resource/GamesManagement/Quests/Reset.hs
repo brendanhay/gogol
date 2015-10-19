@@ -24,7 +24,7 @@
 -- currently authenticated player. This method is only accessible to
 -- whitelisted tester accounts for your application.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementQuestsReset@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.quests.reset@.
 module Network.Google.Resource.GamesManagement.Quests.Reset
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.GamesManagement.Quests.Reset
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementQuestsReset@ method which the
+-- | A resource alias for @gamesManagement.quests.reset@ method which the
 -- 'QuestsReset'' request conforms to.
 type QuestsResetResource =
      "quests" :>
@@ -64,7 +64,7 @@ newtype QuestsReset' = QuestsReset'
 --
 -- * 'qrQuestId'
 questsReset'
-    :: Text -- ^ 'questId'
+    :: Text -- ^ 'qrQuestId'
     -> QuestsReset'
 questsReset' pQrQuestId_ =
     QuestsReset'

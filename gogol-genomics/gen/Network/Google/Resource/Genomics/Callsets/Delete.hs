@@ -22,7 +22,7 @@
 --
 -- Deletes a call set.
 --
--- /See:/ < Genomics API Reference> for @GenomicsCallsetsDelete@.
+-- /See:/ < Genomics API Reference> for @genomics.callsets.delete@.
 module Network.Google.Resource.Genomics.Callsets.Delete
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.Callsets.Delete
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsCallsetsDelete@ method which the
+-- | A resource alias for @genomics.callsets.delete@ method which the
 -- 'CallsetsDelete'' request conforms to.
 type CallsetsDeleteResource =
      "v1" :>
@@ -95,7 +95,7 @@ data CallsetsDelete' = CallsetsDelete'
 --
 -- * 'cdCallback'
 callsetsDelete'
-    :: Text -- ^ 'callSetId'
+    :: Text -- ^ 'cdCallSetId'
     -> CallsetsDelete'
 callsetsDelete' pCdCallSetId_ =
     CallsetsDelete'

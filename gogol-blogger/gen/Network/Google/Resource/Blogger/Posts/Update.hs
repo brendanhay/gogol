@@ -22,7 +22,7 @@
 --
 -- Update a post.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsUpdate@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.update@.
 module Network.Google.Resource.Blogger.Posts.Update
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Blogger.Posts.Update
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostsUpdate@ method which the
+-- | A resource alias for @blogger.posts.update@ method which the
 -- 'PostsUpdate'' request conforms to.
 type PostsUpdateResource =
      "blogs" :>
@@ -95,9 +95,9 @@ data PostsUpdate' = PostsUpdate'
 --
 -- * 'puPublish'
 postsUpdate'
-    :: Text -- ^ 'blogId'
-    -> Post' -- ^ 'payload'
-    -> Text -- ^ 'postId'
+    :: Text -- ^ 'puBlogId'
+    -> Post' -- ^ 'puPayload'
+    -> Text -- ^ 'puPostId'
     -> PostsUpdate'
 postsUpdate' pPuBlogId_ pPuPayload_ pPuPostId_ =
     PostsUpdate'

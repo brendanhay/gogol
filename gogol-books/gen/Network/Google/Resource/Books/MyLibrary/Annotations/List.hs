@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of annotations, possibly filtered.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryAnnotationsList@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.annotations.list@.
 module Network.Google.Resource.Books.MyLibrary.Annotations.List
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryAnnotationsList@ method which the
+-- | A resource alias for @books.mylibrary.annotations.list@ method which the
 -- 'MyLibraryAnnotationsList'' request conforms to.
 type MyLibraryAnnotationsListResource =
      "mylibrary" :>

@@ -22,7 +22,7 @@
 --
 -- Deletes the specified TargetPool resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.delete@.
 module Network.Google.Resource.Compute.TargetPools.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.TargetPools.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetPoolsDelete@ method which the
+-- | A resource alias for @compute.targetPools.delete@ method which the
 -- 'TargetPoolsDelete'' request conforms to.
 type TargetPoolsDeleteResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data TargetPoolsDelete' = TargetPoolsDelete'
 --
 -- * 'tpdRegion'
 targetPoolsDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'targetPool'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'tpdProject'
+    -> Text -- ^ 'tpdTargetPool'
+    -> Text -- ^ 'tpdRegion'
     -> TargetPoolsDelete'
 targetPoolsDelete' pTpdProject_ pTpdTargetPool_ pTpdRegion_ =
     TargetPoolsDelete'

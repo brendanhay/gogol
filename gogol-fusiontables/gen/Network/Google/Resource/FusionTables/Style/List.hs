@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of styles.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesStyleList@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.style.list@.
 module Network.Google.Resource.FusionTables.Style.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.FusionTables.Style.List
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesStyleList@ method which the
+-- | A resource alias for @fusiontables.style.list@ method which the
 -- 'StyleList'' request conforms to.
 type StyleListResource =
      "tables" :>
@@ -71,7 +71,7 @@ data StyleList' = StyleList'
 --
 -- * 'slMaxResults'
 styleList'
-    :: Text -- ^ 'tableId'
+    :: Text -- ^ 'slTableId'
     -> StyleList'
 styleList' pSlTableId_ =
     StyleList'

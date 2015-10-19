@@ -22,7 +22,7 @@
 --
 -- Returns the specified machine type resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeMachineTypesGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.machineTypes.get@.
 module Network.Google.Resource.Compute.MachineTypes.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.MachineTypes.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeMachineTypesGet@ method which the
+-- | A resource alias for @compute.machineTypes.get@ method which the
 -- 'MachineTypesGet'' request conforms to.
 type MachineTypesGetResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data MachineTypesGet' = MachineTypesGet'
 --
 -- * 'mtgMachineType'
 machineTypesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Text -- ^ 'machineType'
+    :: Text -- ^ 'mtgProject'
+    -> Text -- ^ 'mtgZone'
+    -> Text -- ^ 'mtgMachineType'
     -> MachineTypesGet'
 machineTypesGet' pMtgProject_ pMtgZone_ pMtgMachineType_ =
     MachineTypesGet'

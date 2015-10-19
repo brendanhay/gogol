@@ -22,7 +22,7 @@
 --
 -- Creates a new variant.
 --
--- /See:/ < Genomics API Reference> for @GenomicsVariantsCreate@.
+-- /See:/ < Genomics API Reference> for @genomics.variants.create@.
 module Network.Google.Resource.Genomics.Variants.Create
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.Variants.Create
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsVariantsCreate@ method which the
+-- | A resource alias for @genomics.variants.create@ method which the
 -- 'VariantsCreate'' request conforms to.
 type VariantsCreateResource =
      "v1" :>
@@ -95,7 +95,7 @@ data VariantsCreate' = VariantsCreate'
 --
 -- * 'varCallback'
 variantsCreate'
-    :: Variant -- ^ 'payload'
+    :: Variant -- ^ 'varPayload'
     -> VariantsCreate'
 variantsCreate' pVarPayload_ =
     VariantsCreate'

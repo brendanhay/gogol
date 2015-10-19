@@ -22,7 +22,7 @@
 --
 -- Lists the current status for each instance within a given update.
 --
--- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesListInstanceUpdates@.
+-- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.rollingUpdates.listInstanceUpdates@.
 module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.ListInstanceUpdates
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.ListInstanceUpd
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
--- | A resource alias for @ReplicapoolupdaterRollingUpdatesListInstanceUpdates@ method which the
+-- | A resource alias for @replicapoolupdater.rollingUpdates.listInstanceUpdates@ method which the
 -- 'RollingUpdatesListInstanceUpdates'' request conforms to.
 type RollingUpdatesListInstanceUpdatesResource =
      Capture "project" Text :>
@@ -87,9 +87,9 @@ data RollingUpdatesListInstanceUpdates' = RollingUpdatesListInstanceUpdates'
 --
 -- * 'ruliuMaxResults'
 rollingUpdatesListInstanceUpdates'
-    :: Text -- ^ 'rollingUpdate'
-    -> Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'ruliuRollingUpdate'
+    -> Text -- ^ 'ruliuProject'
+    -> Text -- ^ 'ruliuZone'
     -> RollingUpdatesListInstanceUpdates'
 rollingUpdatesListInstanceUpdates' pRuliuRollingUpdate_ pRuliuProject_ pRuliuZone_ =
     RollingUpdatesListInstanceUpdates'

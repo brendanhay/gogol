@@ -22,7 +22,7 @@
 --
 -- Deletes a YouTube video.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosDelete@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.videos.delete@.
 module Network.Google.Resource.YouTube.Videos.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTube.Videos.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeVideosDelete@ method which the
+-- | A resource alias for @youtube.videos.delete@ method which the
 -- 'VideosDelete'' request conforms to.
 type VideosDeleteResource =
      "videos" :>
@@ -64,7 +64,7 @@ data VideosDelete' = VideosDelete'
 --
 -- * 'vdId'
 videosDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'vdId'
     -> VideosDelete'
 videosDelete' pVdId_ =
     VideosDelete'

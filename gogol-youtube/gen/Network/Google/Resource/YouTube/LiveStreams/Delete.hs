@@ -22,7 +22,7 @@
 --
 -- Deletes a video stream.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveStreamsDelete@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.liveStreams.delete@.
 module Network.Google.Resource.YouTube.LiveStreams.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.YouTube.LiveStreams.Delete
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeLiveStreamsDelete@ method which the
+-- | A resource alias for @youtube.liveStreams.delete@ method which the
 -- 'LiveStreamsDelete'' request conforms to.
 type LiveStreamsDeleteResource =
      "liveStreams" :>
@@ -69,7 +69,7 @@ data LiveStreamsDelete' = LiveStreamsDelete'
 --
 -- * 'lsdId'
 liveStreamsDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'lsdId'
     -> LiveStreamsDelete'
 liveStreamsDelete' pLsdId_ =
     LiveStreamsDelete'

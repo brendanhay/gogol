@@ -24,7 +24,7 @@
 -- PageSpeed scores, a list of suggestions to make that page faster, and
 -- other information.
 --
--- /See:/ <https://developers.google.com/speed/docs/insights/v2/getting-started PageSpeed Insights API Reference> for @PagespeedOnlinePagespeedAPIRunPagespeed@.
+-- /See:/ <https://developers.google.com/speed/docs/insights/v2/getting-started PageSpeed Insights API Reference> for @pagespeedonline.pagespeedapi.runpagespeed@.
 module Network.Google.Resource.PagespeedOnline.PagespeedAPI.RunPagespeed
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.PagespeedOnline.PagespeedAPI.RunPagespeed
 import           Network.Google.PageSpeed.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PagespeedOnlinePagespeedAPIRunPagespeed@ method which the
+-- | A resource alias for @pagespeedonline.pagespeedapi.runpagespeed@ method which the
 -- 'PagespeedAPIRunPagespeed'' request conforms to.
 type PagespeedAPIRunPagespeedResource =
      "runPagespeed" :>
@@ -90,7 +90,7 @@ data PagespeedAPIRunPagespeed' = PagespeedAPIRunPagespeed'
 --
 -- * 'parpRule'
 pagespeedAPIRunPagespeed'
-    :: Text -- ^ 'url'
+    :: Text -- ^ 'parpURL'
     -> PagespeedAPIRunPagespeed'
 pagespeedAPIRunPagespeed' pParpURL_ =
     PagespeedAPIRunPagespeed'

@@ -22,7 +22,7 @@
 --
 -- Return all parent ids of the specified asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineAssetsParentsList@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.assets.parents.list@.
 module Network.Google.Resource.MapsEngine.Assets.Parents.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.MapsEngine.Assets.Parents.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineAssetsParentsList@ method which the
+-- | A resource alias for @mapsengine.assets.parents.list@ method which the
 -- 'AssetsParentsList'' request conforms to.
 type AssetsParentsListResource =
      "assets" :>
@@ -71,7 +71,7 @@ data AssetsParentsList' = AssetsParentsList'
 --
 -- * 'assMaxResults'
 assetsParentsList'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'assId'
     -> AssetsParentsList'
 assetsParentsList' pAssId_ =
     AssetsParentsList'

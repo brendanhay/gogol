@@ -22,7 +22,7 @@
 --
 -- Updates an ACL entry on the specified object.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectAccessControlsUpdate@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objectAccessControls.update@.
 module Network.Google.Resource.Storage.ObjectAccessControls.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Update
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectAccessControlsUpdate@ method which the
+-- | A resource alias for @storage.objectAccessControls.update@ method which the
 -- 'ObjectAccessControlsUpdate'' request conforms to.
 type ObjectAccessControlsUpdateResource =
      "b" :>
@@ -82,10 +82,10 @@ data ObjectAccessControlsUpdate' = ObjectAccessControlsUpdate'
 --
 -- * 'oacuGeneration'
 objectAccessControlsUpdate'
-    :: Text -- ^ 'bucket'
-    -> ObjectAccessControl -- ^ 'payload'
-    -> Text -- ^ 'object'
-    -> Text -- ^ 'entity'
+    :: Text -- ^ 'oacuBucket'
+    -> ObjectAccessControl -- ^ 'oacuPayload'
+    -> Text -- ^ 'oacuObject'
+    -> Text -- ^ 'oacuEntity'
     -> ObjectAccessControlsUpdate'
 objectAccessControlsUpdate' pOacuBucket_ pOacuPayload_ pOacuObject_ pOacuEntity_ =
     ObjectAccessControlsUpdate'

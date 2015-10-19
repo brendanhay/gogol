@@ -26,13 +26,13 @@ module Network.Google.GroupsSettings
 
     -- * Resources
 
-    -- ** GroupsSettingsGroupsGet
+    -- ** groupsSettings.groups.get
     , module Network.Google.Resource.GroupsSettings.Groups.Get
 
-    -- ** GroupsSettingsGroupsPatch
+    -- ** groupsSettings.groups.patch
     , module Network.Google.Resource.GroupsSettings.Groups.Patch
 
-    -- ** GroupsSettingsGroupsUpdate
+    -- ** groupsSettings.groups.update
     , module Network.Google.Resource.GroupsSettings.Groups.Update
 
     -- * Types

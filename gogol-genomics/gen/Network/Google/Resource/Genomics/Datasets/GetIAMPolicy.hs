@@ -24,7 +24,7 @@
 -- or the resource does not exist. See Getting a Policy for more
 -- information.
 --
--- /See:/ < Genomics API Reference> for @GenomicsDatasetsGetIAMPolicy@.
+-- /See:/ < Genomics API Reference> for @genomics.datasets.getIamPolicy@.
 module Network.Google.Resource.Genomics.Datasets.GetIAMPolicy
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Genomics.Datasets.GetIAMPolicy
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsDatasetsGetIAMPolicy@ method which the
+-- | A resource alias for @genomics.datasets.getIamPolicy@ method which the
 -- 'DatasetsGetIAMPolicy'' request conforms to.
 type DatasetsGetIAMPolicyResource =
      "v1" :>
@@ -104,8 +104,8 @@ data DatasetsGetIAMPolicy' = DatasetsGetIAMPolicy'
 --
 -- * 'dgipCallback'
 datasetsGetIAMPolicy'
-    :: GetIAMPolicyRequest -- ^ 'payload'
-    -> Text -- ^ 'resource'
+    :: GetIAMPolicyRequest -- ^ 'dgipPayload'
+    -> Text -- ^ 'dgipResource'
     -> DatasetsGetIAMPolicy'
 datasetsGetIAMPolicy' pDgipPayload_ pDgipResource_ =
     DatasetsGetIAMPolicy'

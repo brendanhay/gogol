@@ -22,7 +22,7 @@
 --
 -- Lists all Autoscaler resources in this zone.
 --
--- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerAutoscalersList@.
+-- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @autoscaler.autoscalers.list@.
 module Network.Google.Resource.Autoscaler.Autoscalers.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Autoscaler.Autoscalers.List
 import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AutoscalerAutoscalersList@ method which the
+-- | A resource alias for @autoscaler.autoscalers.list@ method which the
 -- 'AutoscalersList'' request conforms to.
 type AutoscalersListResource =
      "projects" :>
@@ -82,8 +82,8 @@ data AutoscalersList' = AutoscalersList'
 --
 -- * 'alMaxResults'
 autoscalersList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'alProject'
+    -> Text -- ^ 'alZone'
     -> AutoscalersList'
 autoscalersList' pAlProject_ pAlZone_ =
     AutoscalersList'

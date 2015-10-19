@@ -33,7 +33,7 @@
 -- sometimes interpreted in a call-specific context. Imported VCF headers
 -- are appended to the metadata already in a variant set.
 --
--- /See:/ < Genomics API Reference> for @GenomicsVariantsImport@.
+-- /See:/ < Genomics API Reference> for @genomics.variants.import@.
 module Network.Google.Resource.Genomics.Variants.Import
     (
     -- * REST Resource
@@ -57,7 +57,7 @@ module Network.Google.Resource.Genomics.Variants.Import
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsVariantsImport@ method which the
+-- | A resource alias for @genomics.variants.import@ method which the
 -- 'VariantsImport'' request conforms to.
 type VariantsImportResource =
      "v1" :>
@@ -118,7 +118,7 @@ data VariantsImport' = VariantsImport'
 --
 -- * 'viCallback'
 variantsImport'
-    :: ImportVariantsRequest -- ^ 'payload'
+    :: ImportVariantsRequest -- ^ 'viPayload'
     -> VariantsImport'
 variantsImport' pViPayload_ =
     VariantsImport'

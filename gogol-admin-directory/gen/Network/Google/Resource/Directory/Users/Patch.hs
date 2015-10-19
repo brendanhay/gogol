@@ -22,7 +22,7 @@
 --
 -- update user. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersPatch@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.patch@.
 module Network.Google.Resource.Directory.Users.Patch
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Users.Patch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersPatch@ method which the
+-- | A resource alias for @directory.users.patch@ method which the
 -- 'UsersPatch'' request conforms to.
 type UsersPatchResource =
      "users" :>
@@ -64,8 +64,8 @@ data UsersPatch' = UsersPatch'
 --
 -- * 'upUserKey'
 usersPatch'
-    :: User -- ^ 'payload'
-    -> Text -- ^ 'userKey'
+    :: User -- ^ 'upPayload'
+    -> Text -- ^ 'upUserKey'
     -> UsersPatch'
 usersPatch' pUpPayload_ pUpUserKey_ =
     UsersPatch'

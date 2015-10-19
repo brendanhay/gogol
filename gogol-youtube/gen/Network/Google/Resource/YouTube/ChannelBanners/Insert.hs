@@ -30,7 +30,7 @@
 -- brandingSettings.image.bannerExternalUrl property\'s value to the URL
 -- obtained in step 2.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeChannelBannersInsert@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.channelBanners.insert@.
 module Network.Google.Resource.YouTube.ChannelBanners.Insert
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.YouTube.ChannelBanners.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeChannelBannersInsert@ method which the
+-- | A resource alias for @youtube.channelBanners.insert@ method which the
 -- 'ChannelBannersInsert'' request conforms to.
 type ChannelBannersInsertResource =
      "channelBanners" :>
@@ -86,8 +86,8 @@ data ChannelBannersInsert' = ChannelBannersInsert'
 --
 -- * 'cbiOnBehalfOfContentOwner'
 channelBannersInsert'
-    :: ChannelBannerResource -- ^ 'payload'
-    -> Body -- ^ 'media'
+    :: ChannelBannerResource -- ^ 'cbiPayload'
+    -> Body -- ^ 'cbiMedia'
     -> ChannelBannersInsert'
 channelBannersInsert' pCbiPayload_ pCbiMedia_ =
     ChannelBannersInsert'

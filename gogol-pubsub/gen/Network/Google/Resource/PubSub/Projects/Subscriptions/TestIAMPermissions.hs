@@ -22,7 +22,7 @@
 --
 -- Returns permissions that a caller has on the specified resource.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsTestIAMPermissions@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.testIamPermissions@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.TestIAMPermissions
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.TestIAMPermissions
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsSubscriptionsTestIAMPermissions@ method which the
+-- | A resource alias for @pubsub.projects.subscriptions.testIamPermissions@ method which the
 -- 'ProjectsSubscriptionsTestIAMPermissions'' request conforms to.
 type ProjectsSubscriptionsTestIAMPermissionsResource
      =
@@ -101,8 +101,8 @@ data ProjectsSubscriptionsTestIAMPermissions' = ProjectsSubscriptionsTestIAMPerm
 --
 -- * 'pstipCallback'
 projectsSubscriptionsTestIAMPermissions'
-    :: TestIAMPermissionsRequest -- ^ 'payload'
-    -> Text -- ^ 'resource'
+    :: TestIAMPermissionsRequest -- ^ 'pstipPayload'
+    -> Text -- ^ 'pstipResource'
     -> ProjectsSubscriptionsTestIAMPermissions'
 projectsSubscriptionsTestIAMPermissions' pPstipPayload_ pPstipResource_ =
     ProjectsSubscriptionsTestIAMPermissions'

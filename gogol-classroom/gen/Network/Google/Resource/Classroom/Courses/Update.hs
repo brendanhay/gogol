@@ -26,7 +26,7 @@
 -- exists with the requested ID. * \`FAILED_PRECONDITION\` for the
 -- following request errors: * CourseNotModifiable
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesUpdate@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.update@.
 module Network.Google.Resource.Classroom.Courses.Update
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.Classroom.Courses.Update
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesUpdate@ method which the
+-- | A resource alias for @classroom.courses.update@ method which the
 -- 'CoursesUpdate'' request conforms to.
 type CoursesUpdateResource =
      "v1" :>
@@ -108,8 +108,8 @@ data CoursesUpdate' = CoursesUpdate'
 --
 -- * 'cuCallback'
 coursesUpdate'
-    :: Course -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: Course -- ^ 'cuPayload'
+    -> Text -- ^ 'cuId'
     -> CoursesUpdate'
 coursesUpdate' pCuPayload_ pCuId_ =
     CoursesUpdate'

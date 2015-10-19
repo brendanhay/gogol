@@ -22,7 +22,7 @@
 --
 -- Deletes a user from a Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLUsersDelete@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.users.delete@.
 module Network.Google.Resource.SQL.Users.Delete
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.SQL.Users.Delete
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLUsersDelete@ method which the
+-- | A resource alias for @sql.users.delete@ method which the
 -- 'UsersDelete'' request conforms to.
 type UsersDeleteResource =
      "projects" :>
@@ -76,10 +76,10 @@ data UsersDelete' = UsersDelete'
 --
 -- * 'udInstance'
 usersDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'name'
-    -> Text -- ^ 'host'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'udProject'
+    -> Text -- ^ 'udName'
+    -> Text -- ^ 'udHost'
+    -> Text -- ^ 'udInstance'
     -> UsersDelete'
 usersDelete' pUdProject_ pUdName_ pUdHost_ pUdInstance_ =
     UsersDelete'

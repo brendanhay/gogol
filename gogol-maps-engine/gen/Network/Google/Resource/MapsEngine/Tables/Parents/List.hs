@@ -22,7 +22,7 @@
 --
 -- Return all parent ids of the specified table.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesParentsList@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.tables.parents.list@.
 module Network.Google.Resource.MapsEngine.Tables.Parents.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.MapsEngine.Tables.Parents.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesParentsList@ method which the
+-- | A resource alias for @mapsengine.tables.parents.list@ method which the
 -- 'TablesParentsList'' request conforms to.
 type TablesParentsListResource =
      "tables" :>
@@ -71,7 +71,7 @@ data TablesParentsList' = TablesParentsList'
 --
 -- * 'tabMaxResults'
 tablesParentsList'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'tabId'
     -> TablesParentsList'
 tablesParentsList' pTabId_ =
     TablesParentsList'

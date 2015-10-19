@@ -22,7 +22,7 @@
 --
 -- Gets one change log by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingChangeLogsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.changeLogs.get@.
 module Network.Google.Resource.DFAReporting.ChangeLogs.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.ChangeLogs.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingChangeLogsGet@ method which the
+-- | A resource alias for @dfareporting.changeLogs.get@ method which the
 -- 'ChangeLogsGet'' request conforms to.
 type ChangeLogsGetResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data ChangeLogsGet' = ChangeLogsGet'
 --
 -- * 'clgId'
 changeLogsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'clgProFileId'
+    -> Int64 -- ^ 'clgId'
     -> ChangeLogsGet'
 changeLogsGet' pClgProFileId_ pClgId_ =
     ChangeLogsGet'

@@ -22,7 +22,7 @@
 --
 -- Deletes a session specified by the given session ID.
 --
--- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersSessionsDelete@.
+-- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @fitness.users.sessions.delete@.
 module Network.Google.Resource.Fitness.Users.Sessions.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Fitness.Users.Sessions.Delete
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FitnessUsersSessionsDelete@ method which the
+-- | A resource alias for @fitness.users.sessions.delete@ method which the
 -- 'UsersSessionsDelete'' request conforms to.
 type UsersSessionsDeleteResource =
      Capture "userId" Text :>
@@ -69,8 +69,8 @@ data UsersSessionsDelete' = UsersSessionsDelete'
 --
 -- * 'usdSessionId'
 usersSessionsDelete'
-    :: Text -- ^ 'userId'
-    -> Text -- ^ 'sessionId'
+    :: Text -- ^ 'usdUserId'
+    -> Text -- ^ 'usdSessionId'
     -> UsersSessionsDelete'
 usersSessionsDelete' pUsdUserId_ pUsdSessionId_ =
     UsersSessionsDelete'

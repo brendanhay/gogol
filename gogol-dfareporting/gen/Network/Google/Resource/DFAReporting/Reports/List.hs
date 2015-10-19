@@ -22,7 +22,7 @@
 --
 -- Retrieves list of reports.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingReportsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.reports.list@.
 module Network.Google.Resource.DFAReporting.Reports.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.DFAReporting.Reports.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingReportsList@ method which the
+-- | A resource alias for @dfareporting.reports.list@ method which the
 -- 'ReportsList'' request conforms to.
 type ReportsListResource =
      "userprofiles" :>
@@ -85,7 +85,7 @@ data ReportsList' = ReportsList'
 --
 -- * 'rMaxResults'
 reportsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'rProFileId'
     -> ReportsList'
 reportsList' pRProFileId_ =
     ReportsList'

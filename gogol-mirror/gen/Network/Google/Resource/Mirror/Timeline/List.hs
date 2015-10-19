@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of timeline items for the authenticated user.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineList@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.timeline.list@.
 module Network.Google.Resource.Mirror.Timeline.List
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Mirror.Timeline.List
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorTimelineList@ method which the
+-- | A resource alias for @mirror.timeline.list@ method which the
 -- 'TimelineList'' request conforms to.
 type TimelineListResource =
      "timeline" :>

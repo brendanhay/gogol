@@ -27,28 +27,28 @@ module Network.Google.YouTubeReporting
 
     -- * Resources
 
-    -- ** YouTubereportingJobsCreate
+    -- ** youtubereporting.jobs.create
     , module Network.Google.Resource.YouTubeReporting.Jobs.Create
 
-    -- ** YouTubereportingJobsDelete
+    -- ** youtubereporting.jobs.delete
     , module Network.Google.Resource.YouTubeReporting.Jobs.Delete
 
-    -- ** YouTubereportingJobsGet
+    -- ** youtubereporting.jobs.get
     , module Network.Google.Resource.YouTubeReporting.Jobs.Get
 
-    -- ** YouTubereportingJobsList
+    -- ** youtubereporting.jobs.list
     , module Network.Google.Resource.YouTubeReporting.Jobs.List
 
-    -- ** YouTubereportingJobsReportsGet
+    -- ** youtubereporting.jobs.reports.get
     , module Network.Google.Resource.YouTubeReporting.Jobs.Reports.Get
 
-    -- ** YouTubereportingJobsReportsList
+    -- ** youtubereporting.jobs.reports.list
     , module Network.Google.Resource.YouTubeReporting.Jobs.Reports.List
 
-    -- ** YouTubereportingMediaDownload
+    -- ** youtubereporting.media.download
     , module Network.Google.Resource.YouTubeReporting.Media.Download
 
-    -- ** YouTubereportingReportTypesList
+    -- ** youtubereporting.reportTypes.list
     , module Network.Google.Resource.YouTubeReporting.ReportTypes.List
 
     -- * Types

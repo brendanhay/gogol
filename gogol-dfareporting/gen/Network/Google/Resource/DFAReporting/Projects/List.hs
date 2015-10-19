@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of projects, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingProjectsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.projects.list@.
 module Network.Google.Resource.DFAReporting.Projects.List
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.DFAReporting.Projects.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingProjectsList@ method which the
+-- | A resource alias for @dfareporting.projects.list@ method which the
 -- 'ProjectsList'' request conforms to.
 type ProjectsListResource =
      "userprofiles" :>
@@ -96,7 +96,7 @@ data ProjectsList' = ProjectsList'
 --
 -- * 'plMaxResults'
 projectsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'plProFileId'
     -> ProjectsList'
 projectsList' pPlProFileId_ =
     ProjectsList'

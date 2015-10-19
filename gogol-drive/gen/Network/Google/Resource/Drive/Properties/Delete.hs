@@ -22,7 +22,7 @@
 --
 -- Deletes a property.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePropertiesDelete@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.properties.delete@.
 module Network.Google.Resource.Drive.Properties.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Drive.Properties.Delete
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePropertiesDelete@ method which the
+-- | A resource alias for @drive.properties.delete@ method which the
 -- 'PropertiesDelete'' request conforms to.
 type PropertiesDeleteResource =
      "files" :>
@@ -70,8 +70,8 @@ data PropertiesDelete' = PropertiesDelete'
 --
 -- * 'pdFileId'
 propertiesDelete'
-    :: Text -- ^ 'propertyKey'
-    -> Text -- ^ 'fileId'
+    :: Text -- ^ 'pdPropertyKey'
+    -> Text -- ^ 'pdFileId'
     -> PropertiesDelete'
 propertiesDelete' pPdPropertyKey_ pPdFileId_ =
     PropertiesDelete'

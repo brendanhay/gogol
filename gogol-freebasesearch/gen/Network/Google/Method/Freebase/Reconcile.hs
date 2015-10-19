@@ -22,7 +22,7 @@
 --
 -- Reconcile entities to Freebase open data.
 --
--- /See:/ <https://developers.google.com/freebase/ Freebase Search Reference> for @FreebaseReconcile@.
+-- /See:/ <https://developers.google.com/freebase/ Freebase Search Reference> for @freebase.reconcile@.
 module Network.Google.Method.Freebase.Reconcile
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Method.Freebase.Reconcile
 import           Network.Google.FreebaseSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FreebaseReconcile@ method which the
+-- | A resource alias for @freebase.reconcile@ method which the
 -- 'Reconcile'' request conforms to.
 type ReconcileMethod =
      "reconcile" :>

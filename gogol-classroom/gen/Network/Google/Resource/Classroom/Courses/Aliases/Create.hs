@@ -25,7 +25,7 @@
 -- to create the alias or for access errors. * \`NOT_FOUND\` if the course
 -- does not exist. * \`ALREADY_EXISTS\` if the alias already exists.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesAliasesCreate@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.aliases.create@.
 module Network.Google.Resource.Classroom.Courses.Aliases.Create
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.Classroom.Courses.Aliases.Create
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesAliasesCreate@ method which the
+-- | A resource alias for @classroom.courses.aliases.create@ method which the
 -- 'CoursesAliasesCreate'' request conforms to.
 type CoursesAliasesCreateResource =
      "v1" :>
@@ -108,8 +108,8 @@ data CoursesAliasesCreate' = CoursesAliasesCreate'
 --
 -- * 'cacCallback'
 coursesAliasesCreate'
-    :: Text -- ^ 'courseId'
-    -> CourseAlias -- ^ 'payload'
+    :: Text -- ^ 'cacCourseId'
+    -> CourseAlias -- ^ 'cacPayload'
     -> CoursesAliasesCreate'
 coursesAliasesCreate' pCacCourseId_ pCacPayload_ =
     CoursesAliasesCreate'

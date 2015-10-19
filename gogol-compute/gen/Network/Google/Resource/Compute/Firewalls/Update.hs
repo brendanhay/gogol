@@ -23,7 +23,7 @@
 -- Updates the specified firewall resource with the data included in the
 -- request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeFirewallsUpdate@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.firewalls.update@.
 module Network.Google.Resource.Compute.Firewalls.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Firewalls.Update
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeFirewallsUpdate@ method which the
+-- | A resource alias for @compute.firewalls.update@ method which the
 -- 'FirewallsUpdate'' request conforms to.
 type FirewallsUpdateResource =
      Capture "project" Text :>
@@ -72,9 +72,9 @@ data FirewallsUpdate' = FirewallsUpdate'
 --
 -- * 'fuFirewall'
 firewallsUpdate'
-    :: Text -- ^ 'project'
-    -> Firewall -- ^ 'payload'
-    -> Text -- ^ 'firewall'
+    :: Text -- ^ 'fuProject'
+    -> Firewall -- ^ 'fuPayload'
+    -> Text -- ^ 'fuFirewall'
     -> FirewallsUpdate'
 firewallsUpdate' pFuProject_ pFuPayload_ pFuFirewall_ =
     FirewallsUpdate'

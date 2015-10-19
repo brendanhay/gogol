@@ -23,7 +23,7 @@
 -- Sets the deprecation status of an image. If an empty request body is
 -- given, clears the deprecation status instead.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeImagesDeprecate@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.images.deprecate@.
 module Network.Google.Resource.Compute.Images.Deprecate
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Images.Deprecate
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeImagesDeprecate@ method which the
+-- | A resource alias for @compute.images.deprecate@ method which the
 -- 'ImagesDeprecate'' request conforms to.
 type ImagesDeprecateResource =
      Capture "project" Text :>
@@ -74,9 +74,9 @@ data ImagesDeprecate' = ImagesDeprecate'
 --
 -- * 'imamPayload'
 imagesDeprecate'
-    :: Text -- ^ 'image'
-    -> Text -- ^ 'project'
-    -> DeprecationStatus -- ^ 'payload'
+    :: Text -- ^ 'imamImage'
+    -> Text -- ^ 'imamProject'
+    -> DeprecationStatus -- ^ 'imamPayload'
     -> ImagesDeprecate'
 imagesDeprecate' pImamImage_ pImamProject_ pImamPayload_ =
     ImagesDeprecate'

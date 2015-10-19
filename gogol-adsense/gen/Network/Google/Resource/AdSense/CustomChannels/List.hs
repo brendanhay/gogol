@@ -23,7 +23,7 @@
 -- List all custom channels in the specified ad client for this AdSense
 -- account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseCustomChannelsList@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.customchannels.list@.
 module Network.Google.Resource.AdSense.CustomChannels.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AdSense.CustomChannels.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseCustomChannelsList@ method which the
+-- | A resource alias for @adsense.customchannels.list@ method which the
 -- 'CustomChannelsList'' request conforms to.
 type CustomChannelsListResource =
      "adclients" :>
@@ -73,7 +73,7 @@ data CustomChannelsList' = CustomChannelsList'
 --
 -- * 'cclMaxResults'
 customChannelsList'
-    :: Text -- ^ 'adClientId'
+    :: Text -- ^ 'cclAdClientId'
     -> CustomChannelsList'
 customChannelsList' pCclAdClientId_ =
     CustomChannelsList'

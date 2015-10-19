@@ -23,7 +23,7 @@
 -- Searches for references which match the given criteria. Implements
 -- [GlobalAllianceApi.searchReferences](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L146).
 --
--- /See:/ < Genomics API Reference> for @GenomicsReferencesSearch@.
+-- /See:/ < Genomics API Reference> for @genomics.references.search@.
 module Network.Google.Resource.Genomics.References.Search
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Genomics.References.Search
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsReferencesSearch@ method which the
+-- | A resource alias for @genomics.references.search@ method which the
 -- 'ReferencesSearch'' request conforms to.
 type ReferencesSearchResource =
      "v1" :>
@@ -99,7 +99,7 @@ data ReferencesSearch' = ReferencesSearch'
 --
 -- * 'refCallback'
 referencesSearch'
-    :: SearchReferencesRequest -- ^ 'payload'
+    :: SearchReferencesRequest -- ^ 'refPayload'
     -> ReferencesSearch'
 referencesSearch' pRefPayload_ =
     ReferencesSearch'

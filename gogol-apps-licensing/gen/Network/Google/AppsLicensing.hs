@@ -26,25 +26,25 @@ module Network.Google.AppsLicensing
 
     -- * Resources
 
-    -- ** LicensingLicenseAssignmentsDelete
+    -- ** licensing.licenseAssignments.delete
     , module Network.Google.Resource.Licensing.LicenseAssignments.Delete
 
-    -- ** LicensingLicenseAssignmentsGet
+    -- ** licensing.licenseAssignments.get
     , module Network.Google.Resource.Licensing.LicenseAssignments.Get
 
-    -- ** LicensingLicenseAssignmentsInsert
+    -- ** licensing.licenseAssignments.insert
     , module Network.Google.Resource.Licensing.LicenseAssignments.Insert
 
-    -- ** LicensingLicenseAssignmentsListForProduct
+    -- ** licensing.licenseAssignments.listForProduct
     , module Network.Google.Resource.Licensing.LicenseAssignments.ListForProduct
 
-    -- ** LicensingLicenseAssignmentsListForProductAndSKU
+    -- ** licensing.licenseAssignments.listForProductAndSku
     , module Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSKU
 
-    -- ** LicensingLicenseAssignmentsPatch
+    -- ** licensing.licenseAssignments.patch
     , module Network.Google.Resource.Licensing.LicenseAssignments.Patch
 
-    -- ** LicensingLicenseAssignmentsUpdate
+    -- ** licensing.licenseAssignments.update
     , module Network.Google.Resource.Licensing.LicenseAssignments.Update
 
     -- * Types

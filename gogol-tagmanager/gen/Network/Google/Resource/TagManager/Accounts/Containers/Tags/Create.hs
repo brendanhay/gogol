@@ -22,7 +22,7 @@
 --
 -- Creates a GTM Tag.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersTagsCreate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.tags.create@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersTagsCreate@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.tags.create@ method which the
 -- 'AccountsContainersTagsCreate'' request conforms to.
 type AccountsContainersTagsCreateResource =
      "accounts" :>
@@ -71,9 +71,9 @@ data AccountsContainersTagsCreate' = AccountsContainersTagsCreate'
 --
 -- * 'actcAccountId'
 accountsContainersTagsCreate'
-    :: Text -- ^ 'containerId'
-    -> Tag -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'actcContainerId'
+    -> Tag -- ^ 'actcPayload'
+    -> Text -- ^ 'actcAccountId'
     -> AccountsContainersTagsCreate'
 accountsContainersTagsCreate' pActcContainerId_ pActcPayload_ pActcAccountId_ =
     AccountsContainersTagsCreate'

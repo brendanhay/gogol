@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of landing pages for the specified campaign.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingLandingPagesList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.landingPages.list@.
 module Network.Google.Resource.DFAReporting.LandingPages.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.LandingPages.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingLandingPagesList@ method which the
+-- | A resource alias for @dfareporting.landingPages.list@ method which the
 -- 'LandingPagesList'' request conforms to.
 type LandingPagesListResource =
      "userprofiles" :>
@@ -67,8 +67,8 @@ data LandingPagesList' = LandingPagesList'
 --
 -- * 'lplProFileId'
 landingPagesList'
-    :: Int64 -- ^ 'campaignId'
-    -> Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'lplCampaignId'
+    -> Int64 -- ^ 'lplProFileId'
     -> LandingPagesList'
 landingPagesList' pLplCampaignId_ pLplProFileId_ =
     LandingPagesList'

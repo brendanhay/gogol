@@ -22,7 +22,7 @@
 --
 -- Resumes a transfer operation that is paused.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferOperationsResume@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @storagetransfer.transferOperations.resume@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Resume
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Resume
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StorageTransferTransferOperationsResume@ method which the
+-- | A resource alias for @storagetransfer.transferOperations.resume@ method which the
 -- 'TransferOperationsResume'' request conforms to.
 type TransferOperationsResumeResource =
      "v1" :>
@@ -100,8 +100,8 @@ data TransferOperationsResume' = TransferOperationsResume'
 --
 -- * 'torCallback'
 transferOperationsResume'
-    :: ResumeTransferOperationRequest -- ^ 'payload'
-    -> Text -- ^ 'name'
+    :: ResumeTransferOperationRequest -- ^ 'torPayload'
+    -> Text -- ^ 'torName'
     -> TransferOperationsResume'
 transferOperationsResume' pTorPayload_ pTorName_ =
     TransferOperationsResume'

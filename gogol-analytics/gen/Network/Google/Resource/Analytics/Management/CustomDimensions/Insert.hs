@@ -22,7 +22,7 @@
 --
 -- Create a new custom dimension.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomDimensionsInsert@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.customDimensions.insert@.
 module Network.Google.Resource.Analytics.Management.CustomDimensions.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Insert
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementCustomDimensionsInsert@ method which the
+-- | A resource alias for @analytics.management.customDimensions.insert@ method which the
 -- 'ManagementCustomDimensionsInsert'' request conforms to.
 type ManagementCustomDimensionsInsertResource =
      "management" :>
@@ -73,9 +73,9 @@ data ManagementCustomDimensionsInsert' = ManagementCustomDimensionsInsert'
 --
 -- * 'mcdiAccountId'
 managementCustomDimensionsInsert'
-    :: Text -- ^ 'webPropertyId'
-    -> CustomDimension -- ^ 'payload'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mcdiWebPropertyId'
+    -> CustomDimension -- ^ 'mcdiPayload'
+    -> Text -- ^ 'mcdiAccountId'
     -> ManagementCustomDimensionsInsert'
 managementCustomDimensionsInsert' pMcdiWebPropertyId_ pMcdiPayload_ pMcdiAccountId_ =
     ManagementCustomDimensionsInsert'

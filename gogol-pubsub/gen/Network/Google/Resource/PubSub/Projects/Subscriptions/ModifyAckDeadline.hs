@@ -25,7 +25,7 @@
 -- subscriber, or to make the message available for redelivery if the
 -- processing was interrupted.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsModifyAckDeadline@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.modifyAckDeadline@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
     (
     -- * REST Resource
@@ -50,7 +50,7 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsSubscriptionsModifyAckDeadline@ method which the
+-- | A resource alias for @pubsub.projects.subscriptions.modifyAckDeadline@ method which the
 -- 'ProjectsSubscriptionsModifyAckDeadline'' request conforms to.
 type ProjectsSubscriptionsModifyAckDeadlineResource =
      "v1" :>
@@ -107,8 +107,8 @@ data ProjectsSubscriptionsModifyAckDeadline' = ProjectsSubscriptionsModifyAckDea
 --
 -- * 'psmadCallback'
 projectsSubscriptionsModifyAckDeadline'
-    :: ModifyAckDeadlineRequest -- ^ 'payload'
-    -> Text -- ^ 'subscription'
+    :: ModifyAckDeadlineRequest -- ^ 'psmadPayload'
+    -> Text -- ^ 'psmadSubscription'
     -> ProjectsSubscriptionsModifyAckDeadline'
 projectsSubscriptionsModifyAckDeadline' pPsmadPayload_ pPsmadSubscription_ =
     ProjectsSubscriptionsModifyAckDeadline'

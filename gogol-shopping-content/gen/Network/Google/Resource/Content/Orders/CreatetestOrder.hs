@@ -22,7 +22,7 @@
 --
 -- Sandbox only. Creates a test order.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersCreatetestOrder@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.orders.createtestorder@.
 module Network.Google.Resource.Content.Orders.CreatetestOrder
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Content.Orders.CreatetestOrder
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentOrdersCreatetestOrder@ method which the
+-- | A resource alias for @content.orders.createtestorder@ method which the
 -- 'OrdersCreatetestOrder'' request conforms to.
 type OrdersCreatetestOrderResource =
      Capture "merchantId" Word64 :>
@@ -65,8 +65,8 @@ data OrdersCreatetestOrder' = OrdersCreatetestOrder'
 --
 -- * 'ocoPayload'
 ordersCreatetestOrder'
-    :: Word64 -- ^ 'merchantId'
-    -> OrdersCreateTestOrderRequest -- ^ 'payload'
+    :: Word64 -- ^ 'ocoMerchantId'
+    -> OrdersCreateTestOrderRequest -- ^ 'ocoPayload'
     -> OrdersCreatetestOrder'
 ordersCreatetestOrder' pOcoMerchantId_ pOcoPayload_ =
     OrdersCreatetestOrder'

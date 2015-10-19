@@ -23,7 +23,7 @@
 -- Deletes the table specified by tableId from the dataset. If the table
 -- contains data, all the data will be deleted.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryTablesDelete@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @bigquery.tables.delete@.
 module Network.Google.Resource.BigQuery.Tables.Delete
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.BigQuery.Tables.Delete
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigQueryTablesDelete@ method which the
+-- | A resource alias for @bigquery.tables.delete@ method which the
 -- 'TablesDelete'' request conforms to.
 type TablesDeleteResource =
      "projects" :>
@@ -73,9 +73,9 @@ data TablesDelete' = TablesDelete'
 --
 -- * 'tdTableId'
 tablesDelete'
-    :: Text -- ^ 'datasetId'
-    -> Text -- ^ 'projectId'
-    -> Text -- ^ 'tableId'
+    :: Text -- ^ 'tdDatasetId'
+    -> Text -- ^ 'tdProjectId'
+    -> Text -- ^ 'tdTableId'
     -> TablesDelete'
 tablesDelete' pTdDatasetId_ pTdProjectId_ pTdTableId_ =
     TablesDelete'

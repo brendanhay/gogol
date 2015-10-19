@@ -22,7 +22,7 @@
 --
 -- Registers a push token for the current user and application.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesPushtokensUpdate@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.pushtokens.update@.
 module Network.Google.Resource.Games.Pushtokens.Update
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Games.Pushtokens.Update
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesPushtokensUpdate@ method which the
+-- | A resource alias for @games.pushtokens.update@ method which the
 -- 'PushtokensUpdate'' request conforms to.
 type PushtokensUpdateResource =
      "pushtokens" :>
@@ -59,7 +59,7 @@ newtype PushtokensUpdate' = PushtokensUpdate'
 --
 -- * 'puPayload'
 pushtokensUpdate'
-    :: PushToken -- ^ 'payload'
+    :: PushToken -- ^ 'puPayload'
     -> PushtokensUpdate'
 pushtokensUpdate' pPuPayload_ =
     PushtokensUpdate'

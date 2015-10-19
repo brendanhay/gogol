@@ -25,7 +25,7 @@
 -- others to read or update the project. Several APIs are activated
 -- automatically for the project, including Google Cloud Storage.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerProjectsCreate@.
+-- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.create@.
 module Network.Google.Resource.CloudResourceManager.Projects.Create
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.CloudResourceManager.Projects.Create
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerProjectsCreate@ method which the
+-- | A resource alias for @cloudresourcemanager.projects.create@ method which the
 -- 'ProjectsCreate'' request conforms to.
 type ProjectsCreateResource =
      "v1beta1" :>
@@ -101,7 +101,7 @@ data ProjectsCreate' = ProjectsCreate'
 --
 -- * 'pcCallback'
 projectsCreate'
-    :: Project -- ^ 'payload'
+    :: Project -- ^ 'pcPayload'
     -> ProjectsCreate'
 projectsCreate' pPcPayload_ =
     ProjectsCreate'

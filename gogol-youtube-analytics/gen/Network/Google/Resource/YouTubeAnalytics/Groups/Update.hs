@@ -22,7 +22,7 @@
 --
 -- Modifies a group. For example, you could change a group\'s title.
 --
--- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsGroupsUpdate@.
+-- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @youtubeAnalytics.groups.update@.
 module Network.Google.Resource.YouTubeAnalytics.Groups.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTubeAnalytics.Groups.Update
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
--- | A resource alias for @YouTubeAnalyticsGroupsUpdate@ method which the
+-- | A resource alias for @youtubeAnalytics.groups.update@ method which the
 -- 'GroupsUpdate'' request conforms to.
 type GroupsUpdateResource =
      "groups" :>
@@ -64,7 +64,7 @@ data GroupsUpdate' = GroupsUpdate'
 --
 -- * 'guOnBehalfOfContentOwner'
 groupsUpdate'
-    :: Group -- ^ 'payload'
+    :: Group -- ^ 'guPayload'
     -> GroupsUpdate'
 groupsUpdate' pGuPayload_ =
     GroupsUpdate'

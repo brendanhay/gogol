@@ -23,7 +23,7 @@
 -- Lists recent updates for a given managed instance group, in reverse
 -- chronological order and paginated format.
 --
--- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesList@.
+-- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @replicapoolupdater.rollingUpdates.list@.
 module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.List
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
--- | A resource alias for @ReplicapoolupdaterRollingUpdatesList@ method which the
+-- | A resource alias for @replicapoolupdater.rollingUpdates.list@ method which the
 -- 'RollingUpdatesList'' request conforms to.
 type RollingUpdatesListResource =
      Capture "project" Text :>
@@ -83,8 +83,8 @@ data RollingUpdatesList' = RollingUpdatesList'
 --
 -- * 'rulMaxResults'
 rollingUpdatesList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'rulProject'
+    -> Text -- ^ 'rulZone'
     -> RollingUpdatesList'
 rollingUpdatesList' pRulProject_ pRulZone_ =
     RollingUpdatesList'

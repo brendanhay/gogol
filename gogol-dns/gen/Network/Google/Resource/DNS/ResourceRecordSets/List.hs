@@ -22,7 +22,7 @@
 --
 -- Enumerate ResourceRecordSets that have been created but not yet deleted.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSResourceRecordSetsList@.
+-- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.resourceRecordSets.list@.
 module Network.Google.Resource.DNS.ResourceRecordSets.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.DNS.ResourceRecordSets.List
 import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DNSResourceRecordSetsList@ method which the
+-- | A resource alias for @dns.resourceRecordSets.list@ method which the
 -- 'ResourceRecordSetsList'' request conforms to.
 type ResourceRecordSetsListResource =
      Capture "project" Text :>
@@ -86,8 +86,8 @@ data ResourceRecordSetsList' = ResourceRecordSetsList'
 --
 -- * 'rrslMaxResults'
 resourceRecordSetsList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'managedZone'
+    :: Text -- ^ 'rrslProject'
+    -> Text -- ^ 'rrslManagedZone'
     -> ResourceRecordSetsList'
 resourceRecordSetsList' pRrslProject_ pRrslManagedZone_ =
     ResourceRecordSetsList'

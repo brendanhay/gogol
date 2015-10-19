@@ -22,7 +22,7 @@
 --
 -- Deletes the specified HttpHealthCheck resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeHTTPHealthChecksDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.httpHealthChecks.delete@.
 module Network.Google.Resource.Compute.HTTPHealthChecks.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeHTTPHealthChecksDelete@ method which the
+-- | A resource alias for @compute.httpHealthChecks.delete@ method which the
 -- 'HTTPHealthChecksDelete'' request conforms to.
 type HTTPHealthChecksDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data HTTPHealthChecksDelete' = HTTPHealthChecksDelete'
 --
 -- * 'httphcdHTTPHealthCheck'
 hTTPHealthChecksDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'httpHealthCheck'
+    :: Text -- ^ 'httphcdProject'
+    -> Text -- ^ 'httphcdHTTPHealthCheck'
     -> HTTPHealthChecksDelete'
 hTTPHealthChecksDelete' pHttphcdProject_ pHttphcdHTTPHealthCheck_ =
     HTTPHealthChecksDelete'

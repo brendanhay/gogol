@@ -23,7 +23,7 @@
 -- Creates or updates a localized store listing. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsListingsPatch@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.listings.patch@.
 module Network.Google.Resource.AndroidPublisher.Edits.Listings.Patch
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.Patch
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsListingsPatch@ method which the
+-- | A resource alias for @androidpublisher.edits.listings.patch@ method which the
 -- 'EditsListingsPatch'' request conforms to.
 type EditsListingsPatchResource =
      Capture "packageName" Text :>
@@ -77,10 +77,10 @@ data EditsListingsPatch' = EditsListingsPatch'
 --
 -- * 'elpEditId'
 editsListingsPatch'
-    :: Text -- ^ 'packageName'
-    -> Listing -- ^ 'payload'
-    -> Text -- ^ 'language'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'elpPackageName'
+    -> Listing -- ^ 'elpPayload'
+    -> Text -- ^ 'elpLanguage'
+    -> Text -- ^ 'elpEditId'
     -> EditsListingsPatch'
 editsListingsPatch' pElpPackageName_ pElpPayload_ pElpLanguage_ pElpEditId_ =
     EditsListingsPatch'

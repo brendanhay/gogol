@@ -22,7 +22,7 @@
 --
 -- Inserts a domain of the customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryDomainsInsert@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.domains.insert@.
 module Network.Google.Resource.Directory.Domains.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Domains.Insert
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryDomainsInsert@ method which the
+-- | A resource alias for @directory.domains.insert@ method which the
 -- 'DomainsInsert'' request conforms to.
 type DomainsInsertResource =
      "customer" :>
@@ -65,8 +65,8 @@ data DomainsInsert' = DomainsInsert'
 --
 -- * 'diCustomer'
 domainsInsert'
-    :: Domains -- ^ 'payload'
-    -> Text -- ^ 'customer'
+    :: Domains -- ^ 'diPayload'
+    -> Text -- ^ 'diCustomer'
     -> DomainsInsert'
 domainsInsert' pDiPayload_ pDiCustomer_ =
     DomainsInsert'

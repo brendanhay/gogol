@@ -22,7 +22,7 @@
 --
 -- Registers a datafeed with your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentDatafeedsInsert@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.datafeeds.insert@.
 module Network.Google.Resource.Content.Datafeeds.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Content.Datafeeds.Insert
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentDatafeedsInsert@ method which the
+-- | A resource alias for @content.datafeeds.insert@ method which the
 -- 'DatafeedsInsert'' request conforms to.
 type DatafeedsInsertResource =
      Capture "merchantId" Word64 :>
@@ -69,8 +69,8 @@ data DatafeedsInsert' = DatafeedsInsert'
 --
 -- * 'diDryRun'
 datafeedsInsert'
-    :: Word64 -- ^ 'merchantId'
-    -> Datafeed -- ^ 'payload'
+    :: Word64 -- ^ 'diMerchantId'
+    -> Datafeed -- ^ 'diPayload'
     -> DatafeedsInsert'
 datafeedsInsert' pDiMerchantId_ pDiPayload_ =
     DatafeedsInsert'

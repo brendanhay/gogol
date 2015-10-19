@@ -22,7 +22,7 @@
 --
 -- Updates a job. Fields that are set in the job state will be updated.
 --
--- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateJobsUpdate@.
+-- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @coordinate.jobs.update@.
 module Network.Google.Resource.Coordinate.Jobs.Update
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.Coordinate.Jobs.Update
 import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CoordinateJobsUpdate@ method which the
+-- | A resource alias for @coordinate.jobs.update@ method which the
 -- 'JobsUpdate'' request conforms to.
 type JobsUpdateResource =
      "teams" :>
@@ -120,9 +120,9 @@ data JobsUpdate' = JobsUpdate'
 --
 -- * 'juCustomField'
 jobsUpdate'
-    :: Word64 -- ^ 'jobId'
-    -> Text -- ^ 'teamId'
-    -> Job -- ^ 'payload'
+    :: Word64 -- ^ 'juJobId'
+    -> Text -- ^ 'juTeamId'
+    -> Job -- ^ 'juPayload'
     -> JobsUpdate'
 jobsUpdate' pJuJobId_ pJuTeamId_ pJuPayload_ =
     JobsUpdate'

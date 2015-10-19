@@ -26,7 +26,7 @@ module Network.Google.CustomSearch
 
     -- * Resources
 
-    -- ** SearchCSEList
+    -- ** search.cse.list
     , module Network.Google.Resource.Search.CSE.List
 
     -- * Types

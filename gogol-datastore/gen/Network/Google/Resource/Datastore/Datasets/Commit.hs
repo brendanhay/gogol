@@ -23,7 +23,7 @@
 -- Commit a transaction, optionally creating, deleting or modifying some
 -- entities.
 --
--- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @DatastoreDatasetsCommit@.
+-- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @datastore.datasets.commit@.
 module Network.Google.Resource.Datastore.Datasets.Commit
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Datastore.Datasets.Commit
 import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DatastoreDatasetsCommit@ method which the
+-- | A resource alias for @datastore.datasets.commit@ method which the
 -- 'DatasetsCommit'' request conforms to.
 type DatasetsCommitResource =
      Capture "datasetId" Text :>
@@ -67,8 +67,8 @@ data DatasetsCommit' = DatasetsCommit'
 --
 -- * 'dcDatasetId'
 datasetsCommit'
-    :: CommitRequest -- ^ 'payload'
-    -> Text -- ^ 'datasetId'
+    :: CommitRequest -- ^ 'dcPayload'
+    -> Text -- ^ 'dcDatasetId'
     -> DatasetsCommit'
 datasetsCommit' pDcPayload_ pDcDatasetId_ =
     DatasetsCommit'

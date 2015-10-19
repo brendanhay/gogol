@@ -23,7 +23,7 @@
 -- Sets the access control policy on the specified dataset. Replaces any
 -- existing policy. See Setting a Policy for more information.
 --
--- /See:/ < Genomics API Reference> for @GenomicsDatasetsSetIAMPolicy@.
+-- /See:/ < Genomics API Reference> for @genomics.datasets.setIamPolicy@.
 module Network.Google.Resource.Genomics.Datasets.SetIAMPolicy
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Genomics.Datasets.SetIAMPolicy
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsDatasetsSetIAMPolicy@ method which the
+-- | A resource alias for @genomics.datasets.setIamPolicy@ method which the
 -- 'DatasetsSetIAMPolicy'' request conforms to.
 type DatasetsSetIAMPolicyResource =
      "v1" :>
@@ -102,8 +102,8 @@ data DatasetsSetIAMPolicy' = DatasetsSetIAMPolicy'
 --
 -- * 'dsipCallback'
 datasetsSetIAMPolicy'
-    :: SetIAMPolicyRequest -- ^ 'payload'
-    -> Text -- ^ 'resource'
+    :: SetIAMPolicyRequest -- ^ 'dsipPayload'
+    -> Text -- ^ 'dsipResource'
     -> DatasetsSetIAMPolicy'
 datasetsSetIAMPolicy' pDsipPayload_ pDsipResource_ =
     DatasetsSetIAMPolicy'

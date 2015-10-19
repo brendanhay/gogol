@@ -23,7 +23,7 @@
 -- Creates an address resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAddressesInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.addresses.insert@.
 module Network.Google.Resource.Compute.Addresses.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.Addresses.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeAddressesInsert@ method which the
+-- | A resource alias for @compute.addresses.insert@ method which the
 -- 'AddressesInsert'' request conforms to.
 type AddressesInsertResource =
      Capture "project" Text :>
@@ -72,9 +72,9 @@ data AddressesInsert' = AddressesInsert'
 --
 -- * 'aiRegion'
 addressesInsert'
-    :: Text -- ^ 'project'
-    -> Address -- ^ 'payload'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'aiProject'
+    -> Address -- ^ 'aiPayload'
+    -> Text -- ^ 'aiRegion'
     -> AddressesInsert'
 addressesInsert' pAiProject_ pAiPayload_ pAiRegion_ =
     AddressesInsert'

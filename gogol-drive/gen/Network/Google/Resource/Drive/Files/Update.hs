@@ -22,7 +22,7 @@
 --
 -- Updates file metadata and\/or content.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesUpdate@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.update@.
 module Network.Google.Resource.Drive.Files.Update
     (
     -- * REST Resource
@@ -54,7 +54,7 @@ module Network.Google.Resource.Drive.Files.Update
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveFilesUpdate@ method which the
+-- | A resource alias for @drive.files.update@ method which the
 -- 'FilesUpdate'' request conforms to.
 type FilesUpdateResource =
      "files" :>
@@ -136,9 +136,9 @@ data FilesUpdate' = FilesUpdate'
 --
 -- * 'fuOCR'
 filesUpdate'
-    :: File -- ^ 'payload'
-    -> Body -- ^ 'media'
-    -> Text -- ^ 'fileId'
+    :: File -- ^ 'fuPayload'
+    -> Body -- ^ 'fuMedia'
+    -> Text -- ^ 'fuFileId'
     -> FilesUpdate'
 filesUpdate' pFuPayload_ pFuMedia_ pFuFileId_ =
     FilesUpdate'

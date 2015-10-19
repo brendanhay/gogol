@@ -22,7 +22,7 @@
 --
 -- Updates a dataset. This method supports patch semantics.
 --
--- /See:/ < Genomics API Reference> for @GenomicsDatasetsPatch@.
+-- /See:/ < Genomics API Reference> for @genomics.datasets.patch@.
 module Network.Google.Resource.Genomics.Datasets.Patch
     (
     -- * REST Resource
@@ -48,7 +48,7 @@ module Network.Google.Resource.Genomics.Datasets.Patch
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsDatasetsPatch@ method which the
+-- | A resource alias for @genomics.datasets.patch@ method which the
 -- 'DatasetsPatch'' request conforms to.
 type DatasetsPatchResource =
      "v1" :>
@@ -105,8 +105,8 @@ data DatasetsPatch' = DatasetsPatch'
 --
 -- * 'dpCallback'
 datasetsPatch'
-    :: Dataset -- ^ 'payload'
-    -> Text -- ^ 'datasetId'
+    :: Dataset -- ^ 'dpPayload'
+    -> Text -- ^ 'dpDatasetId'
     -> DatasetsPatch'
 datasetsPatch' pDpPayload_ pDpDatasetId_ =
     DatasetsPatch'

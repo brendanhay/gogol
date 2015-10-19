@@ -22,7 +22,7 @@
 --
 -- Creates an advertiser lead for the given company ID.
 --
--- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @PartnersCompaniesLeadsCreate@.
+-- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @partners.companies.leads.create@.
 module Network.Google.Resource.Partners.Companies.Leads.Create
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Partners.Companies.Leads.Create
 import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PartnersCompaniesLeadsCreate@ method which the
+-- | A resource alias for @partners.companies.leads.create@ method which the
 -- 'CompaniesLeadsCreate'' request conforms to.
 type CompaniesLeadsCreateResource =
      "v2" :>
@@ -102,8 +102,8 @@ data CompaniesLeadsCreate' = CompaniesLeadsCreate'
 --
 -- * 'clcCallback'
 companiesLeadsCreate'
-    :: Text -- ^ 'companyId'
-    -> CreateLeadRequest -- ^ 'payload'
+    :: Text -- ^ 'clcCompanyId'
+    -> CreateLeadRequest -- ^ 'clcPayload'
     -> CompaniesLeadsCreate'
 companiesLeadsCreate' pClcCompanyId_ pClcPayload_ =
     CompaniesLeadsCreate'

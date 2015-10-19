@@ -22,7 +22,7 @@
 --
 -- Look up some entities by key.
 --
--- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @DatastoreDatasetsLookup@.
+-- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @datastore.datasets.lookup@.
 module Network.Google.Resource.Datastore.Datasets.Lookup
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Datastore.Datasets.Lookup
 import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DatastoreDatasetsLookup@ method which the
+-- | A resource alias for @datastore.datasets.lookup@ method which the
 -- 'DatasetsLookup'' request conforms to.
 type DatasetsLookupResource =
      Capture "datasetId" Text :>
@@ -65,8 +65,8 @@ data DatasetsLookup' = DatasetsLookup'
 --
 -- * 'dlDatasetId'
 datasetsLookup'
-    :: LookupRequest -- ^ 'payload'
-    -> Text -- ^ 'datasetId'
+    :: LookupRequest -- ^ 'dlPayload'
+    -> Text -- ^ 'dlDatasetId'
     -> DatasetsLookup'
 datasetsLookup' pDlPayload_ pDlDatasetId_ =
     DatasetsLookup'

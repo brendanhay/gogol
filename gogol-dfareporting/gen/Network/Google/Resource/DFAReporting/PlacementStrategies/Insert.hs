@@ -22,7 +22,7 @@
 --
 -- Inserts a new placement strategy.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementStrategiesInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placementStrategies.insert@.
 module Network.Google.Resource.DFAReporting.PlacementStrategies.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPlacementStrategiesInsert@ method which the
+-- | A resource alias for @dfareporting.placementStrategies.insert@ method which the
 -- 'PlacementStrategiesInsert'' request conforms to.
 type PlacementStrategiesInsertResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data PlacementStrategiesInsert' = PlacementStrategiesInsert'
 --
 -- * 'psiPayload'
 placementStrategiesInsert'
-    :: Int64 -- ^ 'profileId'
-    -> PlacementStrategy -- ^ 'payload'
+    :: Int64 -- ^ 'psiProFileId'
+    -> PlacementStrategy -- ^ 'psiPayload'
     -> PlacementStrategiesInsert'
 placementStrategiesInsert' pPsiProFileId_ pPsiPayload_ =
     PlacementStrategiesInsert'

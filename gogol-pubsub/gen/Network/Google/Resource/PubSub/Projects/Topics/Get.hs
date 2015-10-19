@@ -22,7 +22,7 @@
 --
 -- Gets the configuration of a topic.
 --
--- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsGet@.
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.topics.get@.
 module Network.Google.Resource.PubSub.Projects.Topics.Get
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.PubSub.Projects.Topics.Get
 import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
--- | A resource alias for @PubsubProjectsTopicsGet@ method which the
+-- | A resource alias for @pubsub.projects.topics.get@ method which the
 -- 'ProjectsTopicsGet'' request conforms to.
 type ProjectsTopicsGetResource =
      "v1" :>
@@ -94,7 +94,7 @@ data ProjectsTopicsGet' = ProjectsTopicsGet'
 --
 -- * 'ptgCallback'
 projectsTopicsGet'
-    :: Text -- ^ 'topic'
+    :: Text -- ^ 'ptgTopic'
     -> ProjectsTopicsGet'
 projectsTopicsGet' pPtgTopic_ =
     ProjectsTopicsGet'

@@ -22,7 +22,7 @@
 --
 -- Retrieve a Post by Path.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsGetByPath@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.posts.getByPath@.
 module Network.Google.Resource.Blogger.Posts.GetByPath
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Blogger.Posts.GetByPath
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostsGetByPath@ method which the
+-- | A resource alias for @blogger.posts.getByPath@ method which the
 -- 'PostsGetByPath'' request conforms to.
 type PostsGetByPathResource =
      "blogs" :>
@@ -76,8 +76,8 @@ data PostsGetByPath' = PostsGetByPath'
 --
 -- * 'pgbpView'
 postsGetByPath'
-    :: Text -- ^ 'path'
-    -> Text -- ^ 'blogId'
+    :: Text -- ^ 'pgbpPath'
+    -> Text -- ^ 'pgbpBlogId'
     -> PostsGetByPath'
 postsGetByPath' pPgbpPath_ pPgbpBlogId_ =
     PostsGetByPath'

@@ -26,7 +26,7 @@
 -- no student of this course has the requested ID or if the course does not
 -- exist.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesStudentsGet@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.students.get@.
 module Network.Google.Resource.Classroom.Courses.Students.Get
     (
     -- * REST Resource
@@ -51,7 +51,7 @@ module Network.Google.Resource.Classroom.Courses.Students.Get
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesStudentsGet@ method which the
+-- | A resource alias for @classroom.courses.students.get@ method which the
 -- 'CoursesStudentsGet'' request conforms to.
 type CoursesStudentsGetResource =
      "v1" :>
@@ -109,8 +109,8 @@ data CoursesStudentsGet' = CoursesStudentsGet'
 --
 -- * 'csgCallback'
 coursesStudentsGet'
-    :: Text -- ^ 'courseId'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'csgCourseId'
+    -> Text -- ^ 'csgUserId'
     -> CoursesStudentsGet'
 coursesStudentsGet' pCsgCourseId_ pCsgUserId_ =
     CoursesStudentsGet'

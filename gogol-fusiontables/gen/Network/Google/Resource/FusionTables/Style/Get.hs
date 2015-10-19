@@ -22,7 +22,7 @@
 --
 -- Gets a specific style.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesStyleGet@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.style.get@.
 module Network.Google.Resource.FusionTables.Style.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.FusionTables.Style.Get
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesStyleGet@ method which the
+-- | A resource alias for @fusiontables.style.get@ method which the
 -- 'StyleGet'' request conforms to.
 type StyleGetResource =
      "tables" :>
@@ -65,8 +65,8 @@ data StyleGet' = StyleGet'
 --
 -- * 'sgTableId'
 styleGet'
-    :: Int32 -- ^ 'styleId'
-    -> Text -- ^ 'tableId'
+    :: Int32 -- ^ 'sgStyleId'
+    -> Text -- ^ 'sgTableId'
     -> StyleGet'
 styleGet' pSgStyleId_ pSgTableId_ =
     StyleGet'

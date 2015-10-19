@@ -22,7 +22,7 @@
 --
 -- Generates tags for a placement.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementsGeneratetags@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placements.generatetags@.
 module Network.Google.Resource.DFAReporting.Placements.Generatetags
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.DFAReporting.Placements.Generatetags
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPlacementsGeneratetags@ method which the
+-- | A resource alias for @dfareporting.placements.generatetags@ method which the
 -- 'PlacementsGeneratetags'' request conforms to.
 type PlacementsGeneratetagsResource =
      "userprofiles" :>
@@ -79,7 +79,7 @@ data PlacementsGeneratetags' = PlacementsGeneratetags'
 --
 -- * 'pPlacementIds'
 placementsGeneratetags'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'pProFileId'
     -> PlacementsGeneratetags'
 placementsGeneratetags' pPProFileId_ =
     PlacementsGeneratetags'

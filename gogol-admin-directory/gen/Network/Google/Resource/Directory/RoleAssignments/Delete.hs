@@ -22,7 +22,7 @@
 --
 -- Deletes a role assignment.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryRoleAssignmentsDelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.roleAssignments.delete@.
 module Network.Google.Resource.Directory.RoleAssignments.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.RoleAssignments.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryRoleAssignmentsDelete@ method which the
+-- | A resource alias for @directory.roleAssignments.delete@ method which the
 -- 'RoleAssignmentsDelete'' request conforms to.
 type RoleAssignmentsDeleteResource =
      "customer" :>
@@ -65,8 +65,8 @@ data RoleAssignmentsDelete' = RoleAssignmentsDelete'
 --
 -- * 'radRoleAssignmentId'
 roleAssignmentsDelete'
-    :: Text -- ^ 'customer'
-    -> Text -- ^ 'roleAssignmentId'
+    :: Text -- ^ 'radCustomer'
+    -> Text -- ^ 'radRoleAssignmentId'
     -> RoleAssignmentsDelete'
 roleAssignmentsDelete' pRadCustomer_ pRadRoleAssignmentId_ =
     RoleAssignmentsDelete'

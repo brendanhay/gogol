@@ -22,7 +22,7 @@
 --
 -- Deletes the backup taken by a backup run.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLBackupRunsDelete@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.backupRuns.delete@.
 module Network.Google.Resource.SQL.BackupRuns.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.SQL.BackupRuns.Delete
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLBackupRunsDelete@ method which the
+-- | A resource alias for @sql.backupRuns.delete@ method which the
 -- 'BackupRunsDelete'' request conforms to.
 type BackupRunsDeleteResource =
      "projects" :>
@@ -71,9 +71,9 @@ data BackupRunsDelete' = BackupRunsDelete'
 --
 -- * 'brdInstance'
 backupRunsDelete'
-    :: Text -- ^ 'project'
-    -> Int64 -- ^ 'id'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'brdProject'
+    -> Int64 -- ^ 'brdId'
+    -> Text -- ^ 'brdInstance'
     -> BackupRunsDelete'
 backupRunsDelete' pBrdProject_ pBrdId_ pBrdInstance_ =
     BackupRunsDelete'

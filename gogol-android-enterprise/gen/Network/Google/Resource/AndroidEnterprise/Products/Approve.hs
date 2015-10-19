@@ -23,7 +23,7 @@
 -- Approves the specified product (and the relevant app permissions, if
 -- any).
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseProductsApprove@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.products.approve@.
 module Network.Google.Resource.AndroidEnterprise.Products.Approve
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AndroidEnterprise.Products.Approve
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseProductsApprove@ method which the
+-- | A resource alias for @androidenterprise.products.approve@ method which the
 -- 'ProductsApprove'' request conforms to.
 type ProductsApproveResource =
      "enterprises" :>
@@ -74,9 +74,9 @@ data ProductsApprove' = ProductsApprove'
 --
 -- * 'paProductId'
 productsApprove'
-    :: Text -- ^ 'enterpriseId'
-    -> ProductsApproveRequest -- ^ 'payload'
-    -> Text -- ^ 'productId'
+    :: Text -- ^ 'paEnterpriseId'
+    -> ProductsApproveRequest -- ^ 'paPayload'
+    -> Text -- ^ 'paProductId'
     -> ProductsApprove'
 productsApprove' pPaEnterpriseId_ pPaPayload_ pPaProductId_ =
     ProductsApprove'

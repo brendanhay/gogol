@@ -22,7 +22,7 @@
 --
 -- Adds health check URL to targetPool.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsAddHealthCheck@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetPools.addHealthCheck@.
 module Network.Google.Resource.Compute.TargetPools.AddHealthCheck
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.TargetPools.AddHealthCheck
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetPoolsAddHealthCheck@ method which the
+-- | A resource alias for @compute.targetPools.addHealthCheck@ method which the
 -- 'TargetPoolsAddHealthCheck'' request conforms to.
 type TargetPoolsAddHealthCheckResource =
      Capture "project" Text :>
@@ -77,10 +77,10 @@ data TargetPoolsAddHealthCheck' = TargetPoolsAddHealthCheck'
 --
 -- * 'tpahcRegion'
 targetPoolsAddHealthCheck'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'targetPool'
-    -> TargetPoolsAddHealthCheckRequest -- ^ 'payload'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'tpahcProject'
+    -> Text -- ^ 'tpahcTargetPool'
+    -> TargetPoolsAddHealthCheckRequest -- ^ 'tpahcPayload'
+    -> Text -- ^ 'tpahcRegion'
     -> TargetPoolsAddHealthCheck'
 targetPoolsAddHealthCheck' pTpahcProject_ pTpahcTargetPool_ pTpahcPayload_ pTpahcRegion_ =
     TargetPoolsAddHealthCheck'

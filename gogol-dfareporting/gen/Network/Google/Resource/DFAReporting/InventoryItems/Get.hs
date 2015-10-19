@@ -22,7 +22,7 @@
 --
 -- Gets one inventory item by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingInventoryItemsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.inventoryItems.get@.
 module Network.Google.Resource.DFAReporting.InventoryItems.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.InventoryItems.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingInventoryItemsGet@ method which the
+-- | A resource alias for @dfareporting.inventoryItems.get@ method which the
 -- 'InventoryItemsGet'' request conforms to.
 type InventoryItemsGetResource =
      "userprofiles" :>
@@ -71,9 +71,9 @@ data InventoryItemsGet' = InventoryItemsGet'
 --
 -- * 'iigProjectId'
 inventoryItemsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
-    -> Int64 -- ^ 'projectId'
+    :: Int64 -- ^ 'iigProFileId'
+    -> Int64 -- ^ 'iigId'
+    -> Int64 -- ^ 'iigProjectId'
     -> InventoryItemsGet'
 inventoryItemsGet' pIigProFileId_ pIigId_ pIigProjectId_ =
     InventoryItemsGet'

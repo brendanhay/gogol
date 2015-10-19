@@ -22,7 +22,7 @@
 --
 -- Inserts a new account for a user
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorAccountsInsert@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.accounts.insert@.
 module Network.Google.Resource.Mirror.Accounts.Insert
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Mirror.Accounts.Insert
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorAccountsInsert@ method which the
+-- | A resource alias for @mirror.accounts.insert@ method which the
 -- 'AccountsInsert'' request conforms to.
 type AccountsInsertResource =
      "accounts" :>
@@ -74,10 +74,10 @@ data AccountsInsert' = AccountsInsert'
 --
 -- * 'aiAccountType'
 accountsInsert'
-    :: Text -- ^ 'accountName'
-    -> Account -- ^ 'payload'
-    -> Text -- ^ 'userToken'
-    -> Text -- ^ 'accountType'
+    :: Text -- ^ 'aiAccountName'
+    -> Account -- ^ 'aiPayload'
+    -> Text -- ^ 'aiUserToken'
+    -> Text -- ^ 'aiAccountType'
     -> AccountsInsert'
 accountsInsert' pAiAccountName_ pAiPayload_ pAiUserToken_ pAiAccountType_ =
     AccountsInsert'

@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of placements, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placements.list@.
 module Network.Google.Resource.DFAReporting.Placements.List
     (
     -- * REST Resource
@@ -61,7 +61,7 @@ module Network.Google.Resource.DFAReporting.Placements.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPlacementsList@ method which the
+-- | A resource alias for @dfareporting.placements.list@ method which the
 -- 'PlacementsList'' request conforms to.
 type PlacementsListResource =
      "userprofiles" :>
@@ -184,7 +184,7 @@ data PlacementsList' = PlacementsList'
 --
 -- * 'plaMinEndDate'
 placementsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'plaProFileId'
     -> PlacementsList'
 placementsList' pPlaProFileId_ =
     PlacementsList'

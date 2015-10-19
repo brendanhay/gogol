@@ -22,7 +22,7 @@
 --
 -- Gets information about an application.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsGet@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @appengine.apps.get@.
 module Network.Google.Resource.AppEngine.Apps.Get
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.AppEngine.Apps.Get
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppEngineAppsGet@ method which the
+-- | A resource alias for @appengine.apps.get@ method which the
 -- 'AppsGet'' request conforms to.
 type AppsGetResource =
      "v1beta4" :>
@@ -100,7 +100,7 @@ data AppsGet' = AppsGet'
 --
 -- * 'agCallback'
 appsGet'
-    :: Text -- ^ 'appsId'
+    :: Text -- ^ 'agAppsId'
     -> AppsGet'
 appsGet' pAgAppsId_ =
     AppsGet'

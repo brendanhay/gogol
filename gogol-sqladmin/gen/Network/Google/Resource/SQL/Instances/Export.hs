@@ -23,7 +23,7 @@
 -- Exports data from a Cloud SQL instance to a Google Cloud Storage bucket
 -- as a MySQL dump file.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesExport@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.instances.export@.
 module Network.Google.Resource.SQL.Instances.Export
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.SQL.Instances.Export
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLInstancesExport@ method which the
+-- | A resource alias for @sql.instances.export@ method which the
 -- 'InstancesExport'' request conforms to.
 type InstancesExportResource =
      "projects" :>
@@ -74,9 +74,9 @@ data InstancesExport' = InstancesExport'
 --
 -- * 'ieInstance'
 instancesExport'
-    :: Text -- ^ 'project'
-    -> InstancesExportRequest -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'ieProject'
+    -> InstancesExportRequest -- ^ 'iePayload'
+    -> Text -- ^ 'ieInstance'
     -> InstancesExport'
 instancesExport' pIeProject_ pIePayload_ pIeInstance_ =
     InstancesExport'

@@ -22,7 +22,7 @@
 --
 -- Creates or updates the requested offer.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerOffersInsert@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.offers.insert@.
 module Network.Google.Resource.AdExchangeBuyer.Offers.Insert
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeBuyer.Offers.Insert
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerOffersInsert@ method which the
+-- | A resource alias for @adexchangebuyer.offers.insert@ method which the
 -- 'OffersInsert'' request conforms to.
 type OffersInsertResource =
      "offers" :>
@@ -59,7 +59,7 @@ newtype OffersInsert' = OffersInsert'
 --
 -- * 'oiPayload'
 offersInsert'
-    :: OfferDTO -- ^ 'payload'
+    :: OfferDTO -- ^ 'oiPayload'
     -> OffersInsert'
 offersInsert' pOiPayload_ =
     OffersInsert'

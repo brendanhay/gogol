@@ -22,7 +22,7 @@
 --
 -- Returns the specified HttpHealthCheck resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeHTTPHealthChecksGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.httpHealthChecks.get@.
 module Network.Google.Resource.Compute.HTTPHealthChecks.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeHTTPHealthChecksGet@ method which the
+-- | A resource alias for @compute.httpHealthChecks.get@ method which the
 -- 'HTTPHealthChecksGet'' request conforms to.
 type HTTPHealthChecksGetResource =
      Capture "project" Text :>
@@ -66,8 +66,8 @@ data HTTPHealthChecksGet' = HTTPHealthChecksGet'
 --
 -- * 'httphcgHTTPHealthCheck'
 hTTPHealthChecksGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'httpHealthCheck'
+    :: Text -- ^ 'httphcgProject'
+    -> Text -- ^ 'httphcgHTTPHealthCheck'
     -> HTTPHealthChecksGet'
 hTTPHealthChecksGet' pHttphcgProject_ pHttphcgHTTPHealthCheck_ =
     HTTPHealthChecksGet'

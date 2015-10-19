@@ -22,7 +22,7 @@
 --
 -- Returns the specified instance template resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceTemplatesGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceTemplates.get@.
 module Network.Google.Resource.Compute.InstanceTemplates.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.InstanceTemplates.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceTemplatesGet@ method which the
+-- | A resource alias for @compute.instanceTemplates.get@ method which the
 -- 'InstanceTemplatesGet'' request conforms to.
 type InstanceTemplatesGetResource =
      Capture "project" Text :>
@@ -66,8 +66,8 @@ data InstanceTemplatesGet' = InstanceTemplatesGet'
 --
 -- * 'itgInstanceTemplate'
 instanceTemplatesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instanceTemplate'
+    :: Text -- ^ 'itgProject'
+    -> Text -- ^ 'itgInstanceTemplate'
     -> InstanceTemplatesGet'
 instanceTemplatesGet' pItgProject_ pItgInstanceTemplate_ =
     InstanceTemplatesGet'

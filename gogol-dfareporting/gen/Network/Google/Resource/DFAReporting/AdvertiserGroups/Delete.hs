@@ -22,7 +22,7 @@
 --
 -- Deletes an existing advertiser group.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertiserGroupsDelete@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.advertiserGroups.delete@.
 module Network.Google.Resource.DFAReporting.AdvertiserGroups.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Delete
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAdvertiserGroupsDelete@ method which the
+-- | A resource alias for @dfareporting.advertiserGroups.delete@ method which the
 -- 'AdvertiserGroupsDelete'' request conforms to.
 type AdvertiserGroupsDeleteResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data AdvertiserGroupsDelete' = AdvertiserGroupsDelete'
 --
 -- * 'agdId'
 advertiserGroupsDelete'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'agdProFileId'
+    -> Int64 -- ^ 'agdId'
     -> AdvertiserGroupsDelete'
 advertiserGroupsDelete' pAgdProFileId_ pAgdId_ =
     AdvertiserGroupsDelete'

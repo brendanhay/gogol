@@ -22,7 +22,7 @@
 --
 -- Returns an access control rule.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarACLGet@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.acl.get@.
 module Network.Google.Resource.Calendar.ACL.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Calendar.ACL.Get
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarACLGet@ method which the
+-- | A resource alias for @calendar.acl.get@ method which the
 -- 'ACLGet'' request conforms to.
 type ACLGetResource =
      "calendars" :>
@@ -65,8 +65,8 @@ data ACLGet' = ACLGet'
 --
 -- * 'agRuleId'
 aclGet'
-    :: Text -- ^ 'calendarId'
-    -> Text -- ^ 'ruleId'
+    :: Text -- ^ 'agCalendarId'
+    -> Text -- ^ 'agRuleId'
     -> ACLGet'
 aclGet' pAgCalendarId_ pAgRuleId_ =
     ACLGet'

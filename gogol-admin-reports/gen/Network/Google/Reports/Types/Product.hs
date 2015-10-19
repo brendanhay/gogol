@@ -283,7 +283,7 @@ newtype UsageReportParametersItemMsgValueItem = UsageReportParametersItemMsgValu
 --
 -- * 'urpimviAddtional'
 usageReportParametersItemMsgValueItem
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'urpimviAddtional'
     -> UsageReportParametersItemMsgValueItem
 usageReportParametersItemMsgValueItem pUrpimviAddtional_ =
     UsageReportParametersItemMsgValueItem
@@ -763,7 +763,7 @@ newtype ChannelParams = ChannelParams
 --
 -- * 'cpAddtional'
 channelParams
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'cpAddtional'
     -> ChannelParams
 channelParams pCpAddtional_ =
     ChannelParams

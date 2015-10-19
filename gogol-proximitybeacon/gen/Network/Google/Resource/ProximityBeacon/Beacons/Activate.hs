@@ -25,7 +25,7 @@
 -- Calling this method on an already active beacon will do nothing (but
 -- will return a successful response code).
 --
--- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsActivate@.
+-- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.activate@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Activate
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Activate
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
--- | A resource alias for @ProximitybeaconBeaconsActivate@ method which the
+-- | A resource alias for @proximitybeacon.beacons.activate@ method which the
 -- 'BeaconsActivate'' request conforms to.
 type BeaconsActivateResource =
      "v1beta1" :>
@@ -100,7 +100,7 @@ data BeaconsActivate' = BeaconsActivate'
 --
 -- * 'baCallback'
 beaconsActivate'
-    :: Text -- ^ 'beaconName'
+    :: Text -- ^ 'baBeaconName'
     -> BeaconsActivate'
 beaconsActivate' pBaBeaconName_ =
     BeaconsActivate'

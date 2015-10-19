@@ -22,7 +22,7 @@
 --
 -- Add a photo for the user
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersPhotosUpdate@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.photos.update@.
 module Network.Google.Resource.Directory.Users.Photos.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Users.Photos.Update
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersPhotosUpdate@ method which the
+-- | A resource alias for @directory.users.photos.update@ method which the
 -- 'UsersPhotosUpdate'' request conforms to.
 type UsersPhotosUpdateResource =
      "users" :>
@@ -66,8 +66,8 @@ data UsersPhotosUpdate' = UsersPhotosUpdate'
 --
 -- * 'upuUserKey'
 usersPhotosUpdate'
-    :: UserPhoto -- ^ 'payload'
-    -> Text -- ^ 'userKey'
+    :: UserPhoto -- ^ 'upuPayload'
+    -> Text -- ^ 'upuUserKey'
     -> UsersPhotosUpdate'
 usersPhotosUpdate' pUpuPayload_ pUpuUserKey_ =
     UsersPhotosUpdate'

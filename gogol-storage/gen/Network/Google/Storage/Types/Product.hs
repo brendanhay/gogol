@@ -223,7 +223,7 @@ newtype ObjectMetadata = ObjectMetadata
 --
 -- * 'omAddtional'
 objectMetadata
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'omAddtional'
     -> ObjectMetadata
 objectMetadata pOmAddtional_ =
     ObjectMetadata
@@ -1225,7 +1225,7 @@ newtype ChannelParams = ChannelParams
 --
 -- * 'cpAddtional'
 channelParams
-    :: HashMap Text Text -- ^ 'addtional'
+    :: HashMap Text Text -- ^ 'cpAddtional'
     -> ChannelParams
 channelParams pCpAddtional_ =
     ChannelParams

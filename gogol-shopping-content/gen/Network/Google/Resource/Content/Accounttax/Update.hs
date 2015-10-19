@@ -22,7 +22,7 @@
 --
 -- Updates the tax settings of the account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccounttaxUpdate@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.accounttax.update@.
 module Network.Google.Resource.Content.Accounttax.Update
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Content.Accounttax.Update
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentAccounttaxUpdate@ method which the
+-- | A resource alias for @content.accounttax.update@ method which the
 -- 'AccounttaxUpdate'' request conforms to.
 type AccounttaxUpdateResource =
      Capture "merchantId" Word64 :>
@@ -74,9 +74,9 @@ data AccounttaxUpdate' = AccounttaxUpdate'
 --
 -- * 'aDryRun'
 accounttaxUpdate'
-    :: Word64 -- ^ 'merchantId'
-    -> AccountTax -- ^ 'payload'
-    -> Word64 -- ^ 'accountId'
+    :: Word64 -- ^ 'aMerchantId'
+    -> AccountTax -- ^ 'aPayload'
+    -> Word64 -- ^ 'aAccountId'
     -> AccounttaxUpdate'
 accounttaxUpdate' pAMerchantId_ pAPayload_ pAAccountId_ =
     AccounttaxUpdate'

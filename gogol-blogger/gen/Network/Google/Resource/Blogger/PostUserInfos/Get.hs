@@ -24,7 +24,7 @@
 -- info contains per-user information about the post, such as access
 -- rights, specific to the user.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostUserInfosGet@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.postUserInfos.get@.
 module Network.Google.Resource.Blogger.PostUserInfos.Get
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Blogger.PostUserInfos.Get
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPostUserInfosGet@ method which the
+-- | A resource alias for @blogger.postUserInfos.get@ method which the
 -- 'PostUserInfosGet'' request conforms to.
 type PostUserInfosGetResource =
      "users" :>
@@ -80,9 +80,9 @@ data PostUserInfosGet' = PostUserInfosGet'
 --
 -- * 'puigPostId'
 postUserInfosGet'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'postId'
+    :: Text -- ^ 'puigBlogId'
+    -> Text -- ^ 'puigUserId'
+    -> Text -- ^ 'puigPostId'
     -> PostUserInfosGet'
 postUserInfosGet' pPuigBlogId_ pPuigUserId_ pPuigPostId_ =
     PostUserInfosGet'

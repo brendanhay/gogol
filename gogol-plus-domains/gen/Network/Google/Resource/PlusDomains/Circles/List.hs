@@ -22,7 +22,7 @@
 --
 -- List all of the circles for a user.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesList@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.circles.list@.
 module Network.Google.Resource.PlusDomains.Circles.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.PlusDomains.Circles.List
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsCirclesList@ method which the
+-- | A resource alias for @plusDomains.circles.list@ method which the
 -- 'CirclesList'' request conforms to.
 type CirclesListResource =
      "people" :>
@@ -70,7 +70,7 @@ data CirclesList' = CirclesList'
 --
 -- * 'clMaxResults'
 circlesList'
-    :: Text -- ^ 'userId'
+    :: Text -- ^ 'clUserId'
     -> CirclesList'
 circlesList' pClUserId_ =
     CirclesList'

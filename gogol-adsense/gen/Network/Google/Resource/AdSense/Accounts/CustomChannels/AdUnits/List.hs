@@ -22,7 +22,7 @@
 --
 -- List all ad units in the specified custom channel.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsCustomChannelsAdUnitsList@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.customchannels.adunits.list@.
 module Network.Google.Resource.AdSense.Accounts.CustomChannels.AdUnits.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.AdSense.Accounts.CustomChannels.AdUnits.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAccountsCustomChannelsAdUnitsList@ method which the
+-- | A resource alias for @adsense.accounts.customchannels.adunits.list@ method which the
 -- 'AccountsCustomChannelsAdUnitsList'' request conforms to.
 type AccountsCustomChannelsAdUnitsListResource =
      "accounts" :>
@@ -87,9 +87,9 @@ data AccountsCustomChannelsAdUnitsList' = AccountsCustomChannelsAdUnitsList'
 --
 -- * 'accaulMaxResults'
 accountsCustomChannelsAdUnitsList'
-    :: Text -- ^ 'customChannelId'
-    -> Text -- ^ 'adClientId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'accaulCustomChannelId'
+    -> Text -- ^ 'accaulAdClientId'
+    -> Text -- ^ 'accaulAccountId'
     -> AccountsCustomChannelsAdUnitsList'
 accountsCustomChannelsAdUnitsList' pAccaulCustomChannelId_ pAccaulAdClientId_ pAccaulAccountId_ =
     AccountsCustomChannelsAdUnitsList'

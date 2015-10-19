@@ -22,7 +22,7 @@
 --
 -- List uploads to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUploadsList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.uploads.list@.
 module Network.Google.Resource.Analytics.Management.Uploads.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Analytics.Management.Uploads.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementUploadsList@ method which the
+-- | A resource alias for @analytics.management.uploads.list@ method which the
 -- 'ManagementUploadsList'' request conforms to.
 type ManagementUploadsListResource =
      "management" :>
@@ -83,9 +83,9 @@ data ManagementUploadsList' = ManagementUploadsList'
 --
 -- * 'mulMaxResults'
 managementUploadsList'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'customDataSourceId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mulWebPropertyId'
+    -> Text -- ^ 'mulCustomDataSourceId'
+    -> Text -- ^ 'mulAccountId'
     -> ManagementUploadsList'
 managementUploadsList' pMulWebPropertyId_ pMulCustomDataSourceId_ pMulAccountId_ =
     ManagementUploadsList'

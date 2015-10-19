@@ -27,172 +27,172 @@ module Network.Google.ShoppingContent
 
     -- * Resources
 
-    -- ** ContentAccountsAuthInfo
+    -- ** content.accounts.authinfo
     , module Network.Google.Resource.Content.Accounts.AuthInfo
 
-    -- ** ContentAccountsCustombatch
+    -- ** content.accounts.custombatch
     , module Network.Google.Resource.Content.Accounts.Custombatch
 
-    -- ** ContentAccountsDelete
+    -- ** content.accounts.delete
     , module Network.Google.Resource.Content.Accounts.Delete
 
-    -- ** ContentAccountsGet
+    -- ** content.accounts.get
     , module Network.Google.Resource.Content.Accounts.Get
 
-    -- ** ContentAccountsInsert
+    -- ** content.accounts.insert
     , module Network.Google.Resource.Content.Accounts.Insert
 
-    -- ** ContentAccountsList
+    -- ** content.accounts.list
     , module Network.Google.Resource.Content.Accounts.List
 
-    -- ** ContentAccountsPatch
+    -- ** content.accounts.patch
     , module Network.Google.Resource.Content.Accounts.Patch
 
-    -- ** ContentAccountsUpdate
+    -- ** content.accounts.update
     , module Network.Google.Resource.Content.Accounts.Update
 
-    -- ** ContentAccountshippingCustombatch
+    -- ** content.accountshipping.custombatch
     , module Network.Google.Resource.Content.Accountshipping.Custombatch
 
-    -- ** ContentAccountshippingGet
+    -- ** content.accountshipping.get
     , module Network.Google.Resource.Content.Accountshipping.Get
 
-    -- ** ContentAccountshippingList
+    -- ** content.accountshipping.list
     , module Network.Google.Resource.Content.Accountshipping.List
 
-    -- ** ContentAccountshippingPatch
+    -- ** content.accountshipping.patch
     , module Network.Google.Resource.Content.Accountshipping.Patch
 
-    -- ** ContentAccountshippingUpdate
+    -- ** content.accountshipping.update
     , module Network.Google.Resource.Content.Accountshipping.Update
 
-    -- ** ContentAccountstatusesCustombatch
+    -- ** content.accountstatuses.custombatch
     , module Network.Google.Resource.Content.Accountstatuses.Custombatch
 
-    -- ** ContentAccountstatusesGet
+    -- ** content.accountstatuses.get
     , module Network.Google.Resource.Content.Accountstatuses.Get
 
-    -- ** ContentAccountstatusesList
+    -- ** content.accountstatuses.list
     , module Network.Google.Resource.Content.Accountstatuses.List
 
-    -- ** ContentAccounttaxCustombatch
+    -- ** content.accounttax.custombatch
     , module Network.Google.Resource.Content.Accounttax.Custombatch
 
-    -- ** ContentAccounttaxGet
+    -- ** content.accounttax.get
     , module Network.Google.Resource.Content.Accounttax.Get
 
-    -- ** ContentAccounttaxList
+    -- ** content.accounttax.list
     , module Network.Google.Resource.Content.Accounttax.List
 
-    -- ** ContentAccounttaxPatch
+    -- ** content.accounttax.patch
     , module Network.Google.Resource.Content.Accounttax.Patch
 
-    -- ** ContentAccounttaxUpdate
+    -- ** content.accounttax.update
     , module Network.Google.Resource.Content.Accounttax.Update
 
-    -- ** ContentDatafeedsCustombatch
+    -- ** content.datafeeds.custombatch
     , module Network.Google.Resource.Content.Datafeeds.Custombatch
 
-    -- ** ContentDatafeedsDelete
+    -- ** content.datafeeds.delete
     , module Network.Google.Resource.Content.Datafeeds.Delete
 
-    -- ** ContentDatafeedsGet
+    -- ** content.datafeeds.get
     , module Network.Google.Resource.Content.Datafeeds.Get
 
-    -- ** ContentDatafeedsInsert
+    -- ** content.datafeeds.insert
     , module Network.Google.Resource.Content.Datafeeds.Insert
 
-    -- ** ContentDatafeedsList
+    -- ** content.datafeeds.list
     , module Network.Google.Resource.Content.Datafeeds.List
 
-    -- ** ContentDatafeedsPatch
+    -- ** content.datafeeds.patch
     , module Network.Google.Resource.Content.Datafeeds.Patch
 
-    -- ** ContentDatafeedsUpdate
+    -- ** content.datafeeds.update
     , module Network.Google.Resource.Content.Datafeeds.Update
 
-    -- ** ContentDatafeedstatusesCustombatch
+    -- ** content.datafeedstatuses.custombatch
     , module Network.Google.Resource.Content.Datafeedstatuses.Custombatch
 
-    -- ** ContentDatafeedstatusesGet
+    -- ** content.datafeedstatuses.get
     , module Network.Google.Resource.Content.Datafeedstatuses.Get
 
-    -- ** ContentDatafeedstatusesList
+    -- ** content.datafeedstatuses.list
     , module Network.Google.Resource.Content.Datafeedstatuses.List
 
-    -- ** ContentInventoryCustombatch
+    -- ** content.inventory.custombatch
     , module Network.Google.Resource.Content.Inventory.Custombatch
 
-    -- ** ContentInventorySet
+    -- ** content.inventory.set
     , module Network.Google.Resource.Content.Inventory.Set
 
-    -- ** ContentOrdersAcknowledge
+    -- ** content.orders.acknowledge
     , module Network.Google.Resource.Content.Orders.Acknowledge
 
-    -- ** ContentOrdersAdvancetestOrder
+    -- ** content.orders.advancetestorder
     , module Network.Google.Resource.Content.Orders.AdvancetestOrder
 
-    -- ** ContentOrdersCancel
+    -- ** content.orders.cancel
     , module Network.Google.Resource.Content.Orders.Cancel
 
-    -- ** ContentOrdersCancellineitem
+    -- ** content.orders.cancellineitem
     , module Network.Google.Resource.Content.Orders.Cancellineitem
 
-    -- ** ContentOrdersCreatetestOrder
+    -- ** content.orders.createtestorder
     , module Network.Google.Resource.Content.Orders.CreatetestOrder
 
-    -- ** ContentOrdersCustombatch
+    -- ** content.orders.custombatch
     , module Network.Google.Resource.Content.Orders.Custombatch
 
-    -- ** ContentOrdersGet
+    -- ** content.orders.get
     , module Network.Google.Resource.Content.Orders.Get
 
-    -- ** ContentOrdersGetbymerchantOrderid
+    -- ** content.orders.getbymerchantorderid
     , module Network.Google.Resource.Content.Orders.GetbymerchantOrderid
 
-    -- ** ContentOrdersGettestOrdertemplate
+    -- ** content.orders.gettestordertemplate
     , module Network.Google.Resource.Content.Orders.GettestOrdertemplate
 
-    -- ** ContentOrdersList
+    -- ** content.orders.list
     , module Network.Google.Resource.Content.Orders.List
 
-    -- ** ContentOrdersRefund
+    -- ** content.orders.refund
     , module Network.Google.Resource.Content.Orders.Refund
 
-    -- ** ContentOrdersReturnlineitem
+    -- ** content.orders.returnlineitem
     , module Network.Google.Resource.Content.Orders.Returnlineitem
 
-    -- ** ContentOrdersShiplineitems
+    -- ** content.orders.shiplineitems
     , module Network.Google.Resource.Content.Orders.Shiplineitems
 
-    -- ** ContentOrdersUpdatemerchantOrderid
+    -- ** content.orders.updatemerchantorderid
     , module Network.Google.Resource.Content.Orders.UpdatemerchantOrderid
 
-    -- ** ContentOrdersUpdateshipment
+    -- ** content.orders.updateshipment
     , module Network.Google.Resource.Content.Orders.Updateshipment
 
-    -- ** ContentProductsCustombatch
+    -- ** content.products.custombatch
     , module Network.Google.Resource.Content.Products.Custombatch
 
-    -- ** ContentProductsDelete
+    -- ** content.products.delete
     , module Network.Google.Resource.Content.Products.Delete
 
-    -- ** ContentProductsGet
+    -- ** content.products.get
     , module Network.Google.Resource.Content.Products.Get
 
-    -- ** ContentProductsInsert
+    -- ** content.products.insert
     , module Network.Google.Resource.Content.Products.Insert
 
-    -- ** ContentProductsList
+    -- ** content.products.list
     , module Network.Google.Resource.Content.Products.List
 
-    -- ** ContentProductstatusesCustombatch
+    -- ** content.productstatuses.custombatch
     , module Network.Google.Resource.Content.Productstatuses.Custombatch
 
-    -- ** ContentProductstatusesGet
+    -- ** content.productstatuses.get
     , module Network.Google.Resource.Content.Productstatuses.Get
 
-    -- ** ContentProductstatusesList
+    -- ** content.productstatuses.list
     , module Network.Google.Resource.Content.Productstatuses.List
 
     -- * Types

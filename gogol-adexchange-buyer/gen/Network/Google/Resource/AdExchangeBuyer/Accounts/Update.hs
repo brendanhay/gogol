@@ -22,7 +22,7 @@
 --
 -- Updates an existing account.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerAccountsUpdate@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.accounts.update@.
 module Network.Google.Resource.AdExchangeBuyer.Accounts.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.Update
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerAccountsUpdate@ method which the
+-- | A resource alias for @adexchangebuyer.accounts.update@ method which the
 -- 'AccountsUpdate'' request conforms to.
 type AccountsUpdateResource =
      "accounts" :>
@@ -64,8 +64,8 @@ data AccountsUpdate' = AccountsUpdate'
 --
 -- * 'auId'
 accountsUpdate'
-    :: Account -- ^ 'payload'
-    -> Int32 -- ^ 'id'
+    :: Account -- ^ 'auPayload'
+    -> Int32 -- ^ 'auId'
     -> AccountsUpdate'
 accountsUpdate' pAuPayload_ pAuId_ =
     AccountsUpdate'

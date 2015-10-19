@@ -22,7 +22,7 @@
 --
 -- Gets a goal to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementGoalsGet@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.goals.get@.
 module Network.Google.Resource.Analytics.Management.Goals.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.Goals.Get
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementGoalsGet@ method which the
+-- | A resource alias for @analytics.management.goals.get@ method which the
 -- 'ManagementGoalsGet'' request conforms to.
 type ManagementGoalsGetResource =
      "management" :>
@@ -78,10 +78,10 @@ data ManagementGoalsGet' = ManagementGoalsGet'
 --
 -- * 'mggAccountId'
 managementGoalsGet'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'goalId'
-    -> Text -- ^ 'profileId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mggWebPropertyId'
+    -> Text -- ^ 'mggGoalId'
+    -> Text -- ^ 'mggProFileId'
+    -> Text -- ^ 'mggAccountId'
     -> ManagementGoalsGet'
 managementGoalsGet' pMggWebPropertyId_ pMggGoalId_ pMggProFileId_ pMggAccountId_ =
     ManagementGoalsGet'

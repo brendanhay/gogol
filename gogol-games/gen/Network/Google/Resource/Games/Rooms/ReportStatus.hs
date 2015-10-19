@@ -24,7 +24,7 @@
 -- internal use by the Games SDK only. Calling this method directly is
 -- unsupported.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesRoomsReportStatus@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.rooms.reportStatus@.
 module Network.Google.Resource.Games.Rooms.ReportStatus
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Games.Rooms.ReportStatus
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesRoomsReportStatus@ method which the
+-- | A resource alias for @games.rooms.reportStatus@ method which the
 -- 'RoomsReportStatus'' request conforms to.
 type RoomsReportStatusResource =
      "rooms" :>
@@ -75,8 +75,8 @@ data RoomsReportStatus' = RoomsReportStatus'
 --
 -- * 'rrsLanguage'
 roomsReportStatus'
-    :: RoomP2PStatuses -- ^ 'payload'
-    -> Text -- ^ 'roomId'
+    :: RoomP2PStatuses -- ^ 'rrsPayload'
+    -> Text -- ^ 'rrsRoomId'
     -> RoomsReportStatus'
 roomsReportStatus' pRrsPayload_ pRrsRoomId_ =
     RoomsReportStatus'

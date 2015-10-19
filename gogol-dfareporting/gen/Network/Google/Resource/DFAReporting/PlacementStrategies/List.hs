@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of placement strategies, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementStrategiesList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placementStrategies.list@.
 module Network.Google.Resource.DFAReporting.PlacementStrategies.List
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPlacementStrategiesList@ method which the
+-- | A resource alias for @dfareporting.placementStrategies.list@ method which the
 -- 'PlacementStrategiesList'' request conforms to.
 type PlacementStrategiesListResource =
      "userprofiles" :>
@@ -95,7 +95,7 @@ data PlacementStrategiesList' = PlacementStrategiesList'
 --
 -- * 'pslMaxResults'
 placementStrategiesList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'pslProFileId'
     -> PlacementStrategiesList'
 placementStrategiesList' pPslProFileId_ =
     PlacementStrategiesList'

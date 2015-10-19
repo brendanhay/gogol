@@ -22,7 +22,7 @@
 --
 -- Returns the specified address resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalAddressesGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalAddresses.get@.
 module Network.Google.Resource.Compute.GlobalAddresses.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.GlobalAddresses.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeGlobalAddressesGet@ method which the
+-- | A resource alias for @compute.globalAddresses.get@ method which the
 -- 'GlobalAddressesGet'' request conforms to.
 type GlobalAddressesGetResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data GlobalAddressesGet' = GlobalAddressesGet'
 --
 -- * 'gagAddress'
 globalAddressesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'address'
+    :: Text -- ^ 'gagProject'
+    -> Text -- ^ 'gagAddress'
     -> GlobalAddressesGet'
 globalAddressesGet' pGagProject_ pGagAddress_ =
     GlobalAddressesGet'

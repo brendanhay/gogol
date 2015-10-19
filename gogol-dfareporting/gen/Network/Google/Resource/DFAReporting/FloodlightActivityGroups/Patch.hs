@@ -23,7 +23,7 @@
 -- Updates an existing floodlight activity group. This method supports
 -- patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivityGroupsPatch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightActivityGroups.patch@.
 module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFloodlightActivityGroupsPatch@ method which the
+-- | A resource alias for @dfareporting.floodlightActivityGroups.patch@ method which the
 -- 'FloodlightActivityGroupsPatch'' request conforms to.
 type FloodlightActivityGroupsPatchResource =
      "userprofiles" :>
@@ -73,9 +73,9 @@ data FloodlightActivityGroupsPatch' = FloodlightActivityGroupsPatch'
 --
 -- * 'fagpId'
 floodlightActivityGroupsPatch'
-    :: Int64 -- ^ 'profileId'
-    -> FloodlightActivityGroup -- ^ 'payload'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'fagpProFileId'
+    -> FloodlightActivityGroup -- ^ 'fagpPayload'
+    -> Int64 -- ^ 'fagpId'
     -> FloodlightActivityGroupsPatch'
 floodlightActivityGroupsPatch' pFagpProFileId_ pFagpPayload_ pFagpId_ =
     FloodlightActivityGroupsPatch'

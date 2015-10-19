@@ -22,7 +22,7 @@
 --
 -- Lists a file\'s parents.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveParentsList@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.parents.list@.
 module Network.Google.Resource.Drive.Parents.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Drive.Parents.List
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveParentsList@ method which the
+-- | A resource alias for @drive.parents.list@ method which the
 -- 'ParentsList'' request conforms to.
 type ParentsListResource =
      "files" :>
@@ -60,7 +60,7 @@ newtype ParentsList' = ParentsList'
 --
 -- * 'pFileId'
 parentsList'
-    :: Text -- ^ 'fileId'
+    :: Text -- ^ 'pFileId'
     -> ParentsList'
 parentsList' pPFileId_ =
     ParentsList'

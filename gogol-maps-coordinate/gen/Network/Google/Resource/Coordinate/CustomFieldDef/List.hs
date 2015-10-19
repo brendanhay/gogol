@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of custom field definitions for a team.
 --
--- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateCustomFieldDefList@.
+-- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @coordinate.customFieldDef.list@.
 module Network.Google.Resource.Coordinate.CustomFieldDef.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Coordinate.CustomFieldDef.List
 import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CoordinateCustomFieldDefList@ method which the
+-- | A resource alias for @coordinate.customFieldDef.list@ method which the
 -- 'CustomFieldDefList'' request conforms to.
 type CustomFieldDefListResource =
      "teams" :>
@@ -61,7 +61,7 @@ newtype CustomFieldDefList' = CustomFieldDefList'
 --
 -- * 'cfdlTeamId'
 customFieldDefList'
-    :: Text -- ^ 'teamId'
+    :: Text -- ^ 'cfdlTeamId'
     -> CustomFieldDefList'
 customFieldDefList' pCfdlTeamId_ =
     CustomFieldDefList'

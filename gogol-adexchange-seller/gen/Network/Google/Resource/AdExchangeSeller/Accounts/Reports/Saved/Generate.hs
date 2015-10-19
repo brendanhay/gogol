@@ -23,7 +23,7 @@
 -- Generate an Ad Exchange report based on the saved report ID sent in the
 -- query parameters.
 --
--- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsReportsSavedGenerate@.
+-- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @adexchangeseller.accounts.reports.saved.generate@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.Generate
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.Generate
 import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangesellerAccountsReportsSavedGenerate@ method which the
+-- | A resource alias for @adexchangeseller.accounts.reports.saved.generate@ method which the
 -- 'AccountsReportsSavedGenerate'' request conforms to.
 type AccountsReportsSavedGenerateResource =
      "accounts" :>
@@ -82,8 +82,8 @@ data AccountsReportsSavedGenerate' = AccountsReportsSavedGenerate'
 --
 -- * 'arsgMaxResults'
 accountsReportsSavedGenerate'
-    :: Text -- ^ 'savedReportId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'arsgSavedReportId'
+    -> Text -- ^ 'arsgAccountId'
     -> AccountsReportsSavedGenerate'
 accountsReportsSavedGenerate' pArsgSavedReportId_ pArsgAccountId_ =
     AccountsReportsSavedGenerate'

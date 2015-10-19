@@ -22,7 +22,7 @@
 --
 -- Retrieves the list of target VPN gateways grouped by scope.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetVPNGatewaysAggregatedList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.targetVpnGateways.aggregatedList@.
 module Network.Google.Resource.Compute.TargetVPNGateways.AggregatedList
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Compute.TargetVPNGateways.AggregatedList
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeTargetVPNGatewaysAggregatedList@ method which the
+-- | A resource alias for @compute.targetVpnGateways.aggregatedList@ method which the
 -- 'TargetVPNGatewaysAggregatedList'' request conforms to.
 type TargetVPNGatewaysAggregatedListResource =
      Capture "project" Text :>
@@ -76,7 +76,7 @@ data TargetVPNGatewaysAggregatedList' = TargetVPNGatewaysAggregatedList'
 --
 -- * 'tvgalMaxResults'
 targetVPNGatewaysAggregatedList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'tvgalProject'
     -> TargetVPNGatewaysAggregatedList'
 targetVPNGatewaysAggregatedList' pTvgalProject_ =
     TargetVPNGatewaysAggregatedList'

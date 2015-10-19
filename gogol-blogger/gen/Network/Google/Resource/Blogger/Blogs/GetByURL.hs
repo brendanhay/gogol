@@ -22,7 +22,7 @@
 --
 -- Retrieve a Blog by URL.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerBlogsGetByURL@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.blogs.getByUrl@.
 module Network.Google.Resource.Blogger.Blogs.GetByURL
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Blogger.Blogs.GetByURL
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerBlogsGetByURL@ method which the
+-- | A resource alias for @blogger.blogs.getByUrl@ method which the
 -- 'BlogsGetByURL'' request conforms to.
 type BlogsGetByURLResource =
      "blogs" :>
@@ -65,7 +65,7 @@ data BlogsGetByURL' = BlogsGetByURL'
 --
 -- * 'bgbuView'
 blogsGetByURL'
-    :: Text -- ^ 'url'
+    :: Text -- ^ 'bgbuURL'
     -> BlogsGetByURL'
 blogsGetByURL' pBgbuURL_ =
     BlogsGetByURL'

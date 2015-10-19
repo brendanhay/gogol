@@ -23,7 +23,7 @@
 -- Lists the progress for all your application\'s achievements for the
 -- currently authenticated player.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementsList@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.achievements.list@.
 module Network.Google.Resource.Games.Achievements.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Games.Achievements.List
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesAchievementsList@ method which the
+-- | A resource alias for @games.achievements.list@ method which the
 -- 'AchievementsList'' request conforms to.
 type AchievementsListResource =
      "players" :>
@@ -83,7 +83,7 @@ data AchievementsList' = AchievementsList'
 --
 -- * 'alMaxResults'
 achievementsList'
-    :: Text -- ^ 'playerId'
+    :: Text -- ^ 'alPlayerId'
     -> AchievementsList'
 achievementsList' pAlPlayerId_ =
     AchievementsList'

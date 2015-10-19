@@ -23,7 +23,7 @@
 -- Updates an existing custom dimension. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomDimensionsPatch@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.customDimensions.patch@.
 module Network.Google.Resource.Analytics.Management.CustomDimensions.Patch
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Patch
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementCustomDimensionsPatch@ method which the
+-- | A resource alias for @analytics.management.customDimensions.patch@ method which the
 -- 'ManagementCustomDimensionsPatch'' request conforms to.
 type ManagementCustomDimensionsPatchResource =
      "management" :>
@@ -85,10 +85,10 @@ data ManagementCustomDimensionsPatch' = ManagementCustomDimensionsPatch'
 --
 -- * 'mcdpCustomDimensionId'
 managementCustomDimensionsPatch'
-    :: Text -- ^ 'webPropertyId'
-    -> CustomDimension -- ^ 'payload'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'customDimensionId'
+    :: Text -- ^ 'mcdpWebPropertyId'
+    -> CustomDimension -- ^ 'mcdpPayload'
+    -> Text -- ^ 'mcdpAccountId'
+    -> Text -- ^ 'mcdpCustomDimensionId'
     -> ManagementCustomDimensionsPatch'
 managementCustomDimensionsPatch' pMcdpWebPropertyId_ pMcdpPayload_ pMcdpAccountId_ pMcdpCustomDimensionId_ =
     ManagementCustomDimensionsPatch'

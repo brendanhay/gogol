@@ -22,7 +22,7 @@
 --
 -- Delete schema
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectorySchemasDelete@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.schemas.delete@.
 module Network.Google.Resource.Directory.Schemas.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Schemas.Delete
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectorySchemasDelete@ method which the
+-- | A resource alias for @directory.schemas.delete@ method which the
 -- 'SchemasDelete'' request conforms to.
 type SchemasDeleteResource =
      "customer" :>
@@ -65,8 +65,8 @@ data SchemasDelete' = SchemasDelete'
 --
 -- * 'sdSchemaKey'
 schemasDelete'
-    :: Text -- ^ 'customerId'
-    -> Text -- ^ 'schemaKey'
+    :: Text -- ^ 'sdCustomerId'
+    -> Text -- ^ 'sdSchemaKey'
     -> SchemasDelete'
 schemasDelete' pSdCustomerId_ pSdSchemaKey_ =
     SchemasDelete'

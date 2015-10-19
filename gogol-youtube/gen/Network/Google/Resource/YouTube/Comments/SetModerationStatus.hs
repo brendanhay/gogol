@@ -24,7 +24,7 @@
 -- be authorized by the owner of the channel or video associated with the
 -- comments.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentsSetModerationStatus@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.comments.setModerationStatus@.
 module Network.Google.Resource.YouTube.Comments.SetModerationStatus
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.YouTube.Comments.SetModerationStatus
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCommentsSetModerationStatus@ method which the
+-- | A resource alias for @youtube.comments.setModerationStatus@ method which the
 -- 'CommentsSetModerationStatus'' request conforms to.
 type CommentsSetModerationStatusResource =
      "comments" :>
@@ -76,8 +76,8 @@ data CommentsSetModerationStatus' = CommentsSetModerationStatus'
 --
 -- * 'csmsId'
 commentsSetModerationStatus'
-    :: CommentsSetModerationStatusModerationStatus -- ^ 'moderationStatus'
-    -> Text -- ^ 'id'
+    :: CommentsSetModerationStatusModerationStatus -- ^ 'csmsModerationStatus'
+    -> Text -- ^ 'csmsId'
     -> CommentsSetModerationStatus'
 commentsSetModerationStatus' pCsmsModerationStatus_ pCsmsId_ =
     CommentsSetModerationStatus'

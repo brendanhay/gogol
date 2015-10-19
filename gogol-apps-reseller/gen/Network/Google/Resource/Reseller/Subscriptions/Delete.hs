@@ -22,7 +22,7 @@
 --
 -- Cancels\/Downgrades a subscription.
 --
--- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsDelete@.
+-- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @reseller.subscriptions.delete@.
 module Network.Google.Resource.Reseller.Subscriptions.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Reseller.Subscriptions.Delete
 import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ResellerSubscriptionsDelete@ method which the
+-- | A resource alias for @reseller.subscriptions.delete@ method which the
 -- 'SubscriptionsDelete'' request conforms to.
 type SubscriptionsDeleteResource =
      "customers" :>
@@ -71,9 +71,9 @@ data SubscriptionsDelete' = SubscriptionsDelete'
 --
 -- * 'sdSubscriptionId'
 subscriptionsDelete'
-    :: Text -- ^ 'customerId'
-    -> SubscriptionsDeleteDeletionType -- ^ 'deletionType'
-    -> Text -- ^ 'subscriptionId'
+    :: Text -- ^ 'sdCustomerId'
+    -> SubscriptionsDeleteDeletionType -- ^ 'sdDeletionType'
+    -> Text -- ^ 'sdSubscriptionId'
     -> SubscriptionsDelete'
 subscriptionsDelete' pSdCustomerId_ pSdDeletionType_ pSdSubscriptionId_ =
     SubscriptionsDelete'

@@ -22,7 +22,7 @@
 --
 -- Deletes the specified BackendService resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeBackendServicesDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.backendServices.delete@.
 module Network.Google.Resource.Compute.BackendServices.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.BackendServices.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeBackendServicesDelete@ method which the
+-- | A resource alias for @compute.backendServices.delete@ method which the
 -- 'BackendServicesDelete'' request conforms to.
 type BackendServicesDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data BackendServicesDelete' = BackendServicesDelete'
 --
 -- * 'bsdBackendService'
 backendServicesDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'backendService'
+    :: Text -- ^ 'bsdProject'
+    -> Text -- ^ 'bsdBackendService'
     -> BackendServicesDelete'
 backendServicesDelete' pBsdProject_ pBsdBackendService_ =
     BackendServicesDelete'

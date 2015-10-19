@@ -27,40 +27,40 @@ module Network.Google.StorageTransfer
 
     -- * Resources
 
-    -- ** StorageTransferGetGoogleServiceAccount
+    -- ** storagetransfer.getGoogleServiceAccount
     , module Network.Google.Resource.StorageTransfer.GetGoogleServiceAccount
 
-    -- ** StorageTransferGoogleServiceAccountsGet
+    -- ** storagetransfer.googleServiceAccounts.get
     , module Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
 
-    -- ** StorageTransferTransferJobsCreate
+    -- ** storagetransfer.transferJobs.create
     , module Network.Google.Resource.StorageTransfer.TransferJobs.Create
 
-    -- ** StorageTransferTransferJobsGet
+    -- ** storagetransfer.transferJobs.get
     , module Network.Google.Resource.StorageTransfer.TransferJobs.Get
 
-    -- ** StorageTransferTransferJobsList
+    -- ** storagetransfer.transferJobs.list
     , module Network.Google.Resource.StorageTransfer.TransferJobs.List
 
-    -- ** StorageTransferTransferJobsPatch
+    -- ** storagetransfer.transferJobs.patch
     , module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
 
-    -- ** StorageTransferTransferOperationsCancel
+    -- ** storagetransfer.transferOperations.cancel
     , module Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
 
-    -- ** StorageTransferTransferOperationsDelete
+    -- ** storagetransfer.transferOperations.delete
     , module Network.Google.Resource.StorageTransfer.TransferOperations.Delete
 
-    -- ** StorageTransferTransferOperationsGet
+    -- ** storagetransfer.transferOperations.get
     , module Network.Google.Resource.StorageTransfer.TransferOperations.Get
 
-    -- ** StorageTransferTransferOperationsList
+    -- ** storagetransfer.transferOperations.list
     , module Network.Google.Resource.StorageTransfer.TransferOperations.List
 
-    -- ** StorageTransferTransferOperationsPause
+    -- ** storagetransfer.transferOperations.pause
     , module Network.Google.Resource.StorageTransfer.TransferOperations.Pause
 
-    -- ** StorageTransferTransferOperationsResume
+    -- ** storagetransfer.transferOperations.resume
     , module Network.Google.Resource.StorageTransfer.TransferOperations.Resume
 
     -- * Types

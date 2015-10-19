@@ -22,7 +22,7 @@
 --
 -- Gets the status of a product from your Merchant Center account.
 --
--- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentProductstatusesGet@.
+-- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @content.productstatuses.get@.
 module Network.Google.Resource.Content.Productstatuses.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Content.Productstatuses.Get
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
--- | A resource alias for @ContentProductstatusesGet@ method which the
+-- | A resource alias for @content.productstatuses.get@ method which the
 -- 'ProductstatusesGet'' request conforms to.
 type ProductstatusesGetResource =
      Capture "merchantId" Word64 :>
@@ -64,8 +64,8 @@ data ProductstatusesGet' = ProductstatusesGet'
 --
 -- * 'pggProductId'
 productstatusesGet'
-    :: Word64 -- ^ 'merchantId'
-    -> Text -- ^ 'productId'
+    :: Word64 -- ^ 'pggMerchantId'
+    -> Text -- ^ 'pggProductId'
     -> ProductstatusesGet'
 productstatusesGet' pPggMerchantId_ pPggProductId_ =
     ProductstatusesGet'

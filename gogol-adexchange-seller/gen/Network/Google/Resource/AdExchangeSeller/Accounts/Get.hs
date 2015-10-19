@@ -22,7 +22,7 @@
 --
 -- Get information about the selected Ad Exchange account.
 --
--- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsGet@.
+-- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @adexchangeseller.accounts.get@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Get
 import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangesellerAccountsGet@ method which the
+-- | A resource alias for @adexchangeseller.accounts.get@ method which the
 -- 'AccountsGet'' request conforms to.
 type AccountsGetResource =
      "accounts" :>
@@ -59,7 +59,7 @@ newtype AccountsGet' = AccountsGet'
 --
 -- * 'agAccountId'
 accountsGet'
-    :: Text -- ^ 'accountId'
+    :: Text -- ^ 'agAccountId'
     -> AccountsGet'
 accountsGet' pAgAccountId_ =
     AccountsGet'

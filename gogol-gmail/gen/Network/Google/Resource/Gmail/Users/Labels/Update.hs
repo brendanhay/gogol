@@ -22,7 +22,7 @@
 --
 -- Updates the specified label.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersLabelsUpdate@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.labels.update@.
 module Network.Google.Resource.Gmail.Users.Labels.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Gmail.Users.Labels.Update
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersLabelsUpdate@ method which the
+-- | A resource alias for @gmail.users.labels.update@ method which the
 -- 'UsersLabelsUpdate'' request conforms to.
 type UsersLabelsUpdateResource =
      Capture "userId" Text :>
@@ -69,8 +69,8 @@ data UsersLabelsUpdate' = UsersLabelsUpdate'
 --
 -- * 'uluId'
 usersLabelsUpdate'
-    :: Label -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: Label -- ^ 'uluPayload'
+    -> Text -- ^ 'uluId'
     -> Text
     -> UsersLabelsUpdate'
 usersLabelsUpdate' pUluPayload_ pUluUserId_ pUluId_ =

@@ -22,7 +22,7 @@
 --
 -- Get information about an access token issued by a user.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryTokensGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.tokens.get@.
 module Network.Google.Resource.Directory.Tokens.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Tokens.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryTokensGet@ method which the
+-- | A resource alias for @directory.tokens.get@ method which the
 -- 'TokensGet'' request conforms to.
 type TokensGetResource =
      "users" :>
@@ -65,8 +65,8 @@ data TokensGet' = TokensGet'
 --
 -- * 'tgUserKey'
 tokensGet'
-    :: Text -- ^ 'clientId'
-    -> Text -- ^ 'userKey'
+    :: Text -- ^ 'tgClientId'
+    -> Text -- ^ 'tgUserKey'
     -> TokensGet'
 tokensGet' pTgClientId_ pTgUserKey_ =
     TokensGet'

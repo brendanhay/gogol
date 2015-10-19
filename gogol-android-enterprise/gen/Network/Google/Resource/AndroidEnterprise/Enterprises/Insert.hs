@@ -23,7 +23,7 @@
 -- Establishes the binding between the MDM and an enterprise. This is now
 -- deprecated; use enroll instead.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEnterprisesInsert@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.enterprises.insert@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.Insert
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEnterprisesInsert@ method which the
+-- | A resource alias for @androidenterprise.enterprises.insert@ method which the
 -- 'EnterprisesInsert'' request conforms to.
 type EnterprisesInsertResource =
      "enterprises" :>
@@ -66,8 +66,8 @@ data EnterprisesInsert' = EnterprisesInsert'
 --
 -- * 'eiPayload'
 enterprisesInsert'
-    :: Text -- ^ 'token'
-    -> Enterprise -- ^ 'payload'
+    :: Text -- ^ 'eiToken'
+    -> Enterprise -- ^ 'eiPayload'
     -> EnterprisesInsert'
 enterprisesInsert' pEiToken_ pEiPayload_ =
     EnterprisesInsert'

@@ -22,7 +22,7 @@
 --
 -- Adds a new style for the table.
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesStyleInsert@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.style.insert@.
 module Network.Google.Resource.FusionTables.Style.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.FusionTables.Style.Insert
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesStyleInsert@ method which the
+-- | A resource alias for @fusiontables.style.insert@ method which the
 -- 'StyleInsert'' request conforms to.
 type StyleInsertResource =
      "tables" :>
@@ -66,8 +66,8 @@ data StyleInsert' = StyleInsert'
 --
 -- * 'siTableId'
 styleInsert'
-    :: StyleSetting -- ^ 'payload'
-    -> Text -- ^ 'tableId'
+    :: StyleSetting -- ^ 'siPayload'
+    -> Text -- ^ 'siTableId'
     -> StyleInsert'
 styleInsert' pSiPayload_ pSiTableId_ =
     StyleInsert'

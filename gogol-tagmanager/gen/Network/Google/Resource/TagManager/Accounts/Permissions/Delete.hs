@@ -23,7 +23,7 @@
 -- Removes a user from the account, revoking access to it and all of its
 -- containers.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsPermissionsDelete@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.permissions.delete@.
 module Network.Google.Resource.TagManager.Accounts.Permissions.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.Delete
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsPermissionsDelete@ method which the
+-- | A resource alias for @tagmanager.accounts.permissions.delete@ method which the
 -- 'AccountsPermissionsDelete'' request conforms to.
 type AccountsPermissionsDeleteResource =
      "accounts" :>
@@ -67,8 +67,8 @@ data AccountsPermissionsDelete' = AccountsPermissionsDelete'
 --
 -- * 'apdPermissionId'
 accountsPermissionsDelete'
-    :: Text -- ^ 'accountId'
-    -> Text -- ^ 'permissionId'
+    :: Text -- ^ 'apdAccountId'
+    -> Text -- ^ 'apdPermissionId'
     -> AccountsPermissionsDelete'
 accountsPermissionsDelete' pApdAccountId_ pApdPermissionId_ =
     AccountsPermissionsDelete'

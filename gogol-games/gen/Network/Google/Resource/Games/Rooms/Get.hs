@@ -22,7 +22,7 @@
 --
 -- Get the data for a room.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesRoomsGet@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.rooms.get@.
 module Network.Google.Resource.Games.Rooms.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Games.Rooms.Get
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesRoomsGet@ method which the
+-- | A resource alias for @games.rooms.get@ method which the
 -- 'RoomsGet'' request conforms to.
 type RoomsGetResource =
      "rooms" :>
@@ -64,7 +64,7 @@ data RoomsGet' = RoomsGet'
 --
 -- * 'rgLanguage'
 roomsGet'
-    :: Text -- ^ 'roomId'
+    :: Text -- ^ 'rgRoomId'
     -> RoomsGet'
 roomsGet' pRgRoomId_ =
     RoomsGet'

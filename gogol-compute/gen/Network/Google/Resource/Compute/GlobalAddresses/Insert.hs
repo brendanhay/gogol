@@ -23,7 +23,7 @@
 -- Creates an address resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalAddressesInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalAddresses.insert@.
 module Network.Google.Resource.Compute.GlobalAddresses.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.GlobalAddresses.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeGlobalAddressesInsert@ method which the
+-- | A resource alias for @compute.globalAddresses.insert@ method which the
 -- 'GlobalAddressesInsert'' request conforms to.
 type GlobalAddressesInsertResource =
      Capture "project" Text :>
@@ -67,8 +67,8 @@ data GlobalAddressesInsert' = GlobalAddressesInsert'
 --
 -- * 'gaiPayload'
 globalAddressesInsert'
-    :: Text -- ^ 'project'
-    -> Address -- ^ 'payload'
+    :: Text -- ^ 'gaiProject'
+    -> Address -- ^ 'gaiPayload'
     -> GlobalAddressesInsert'
 globalAddressesInsert' pGaiProject_ pGaiPayload_ =
     GlobalAddressesInsert'

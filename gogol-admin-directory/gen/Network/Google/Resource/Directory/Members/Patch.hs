@@ -23,7 +23,7 @@
 -- Update membership of a user in the specified group. This method supports
 -- patch semantics.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMembersPatch@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.members.patch@.
 module Network.Google.Resource.Directory.Members.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Directory.Members.Patch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryMembersPatch@ method which the
+-- | A resource alias for @directory.members.patch@ method which the
 -- 'MembersPatch'' request conforms to.
 type MembersPatchResource =
      "groups" :>
@@ -72,9 +72,9 @@ data MembersPatch' = MembersPatch'
 --
 -- * 'mpPayload'
 membersPatch'
-    :: Text -- ^ 'memberKey'
-    -> Text -- ^ 'groupKey'
-    -> Member -- ^ 'payload'
+    :: Text -- ^ 'mpMemberKey'
+    -> Text -- ^ 'mpGroupKey'
+    -> Member -- ^ 'mpPayload'
     -> MembersPatch'
 membersPatch' pMpMemberKey_ pMpGroupKey_ pMpPayload_ =
     MembersPatch'

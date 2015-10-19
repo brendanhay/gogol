@@ -22,7 +22,7 @@
 --
 -- Returns all of the localized store listings attached to this edit.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsListingsList@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.listings.list@.
 module Network.Google.Resource.AndroidPublisher.Edits.Listings.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.List
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsListingsList@ method which the
+-- | A resource alias for @androidpublisher.edits.listings.list@ method which the
 -- 'EditsListingsList'' request conforms to.
 type EditsListingsListResource =
      Capture "packageName" Text :>
@@ -66,8 +66,8 @@ data EditsListingsList' = EditsListingsList'
 --
 -- * 'ellEditId'
 editsListingsList'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'ellPackageName'
+    -> Text -- ^ 'ellEditId'
     -> EditsListingsList'
 editsListingsList' pEllPackageName_ pEllEditId_ =
     EditsListingsList'

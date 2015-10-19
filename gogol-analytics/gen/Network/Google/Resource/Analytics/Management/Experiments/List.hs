@@ -22,7 +22,7 @@
 --
 -- Lists experiments to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementExperimentsList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.experiments.list@.
 module Network.Google.Resource.Analytics.Management.Experiments.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Analytics.Management.Experiments.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementExperimentsList@ method which the
+-- | A resource alias for @analytics.management.experiments.list@ method which the
 -- 'ManagementExperimentsList'' request conforms to.
 type ManagementExperimentsListResource =
      "management" :>
@@ -83,9 +83,9 @@ data ManagementExperimentsList' = ManagementExperimentsList'
 --
 -- * 'melMaxResults'
 managementExperimentsList'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'melWebPropertyId'
+    -> Text -- ^ 'melProFileId'
+    -> Text -- ^ 'melAccountId'
     -> ManagementExperimentsList'
 managementExperimentsList' pMelWebPropertyId_ pMelProFileId_ pMelAccountId_ =
     ManagementExperimentsList'

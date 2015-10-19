@@ -22,7 +22,7 @@
 --
 -- Update Organization Unit. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryOrgUnitsPatch@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.orgunits.patch@.
 module Network.Google.Resource.Directory.OrgUnits.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Directory.OrgUnits.Patch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryOrgUnitsPatch@ method which the
+-- | A resource alias for @directory.orgunits.patch@ method which the
 -- 'OrgUnitsPatch'' request conforms to.
 type OrgUnitsPatchResource =
      "customer" :>
@@ -70,9 +70,9 @@ data OrgUnitsPatch' = OrgUnitsPatch'
 --
 -- * 'oupCustomerId'
 orgUnitsPatch'
-    :: OrgUnit -- ^ 'payload'
-    -> [Text] -- ^ 'orgUnitPath'
-    -> Text -- ^ 'customerId'
+    :: OrgUnit -- ^ 'oupPayload'
+    -> [Text] -- ^ 'oupOrgUnitPath'
+    -> Text -- ^ 'oupCustomerId'
     -> OrgUnitsPatch'
 orgUnitsPatch' pOupPayload_ pOupOrgUnitPath_ pOupCustomerId_ =
     OrgUnitsPatch'

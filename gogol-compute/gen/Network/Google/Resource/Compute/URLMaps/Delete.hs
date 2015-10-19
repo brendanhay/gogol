@@ -22,7 +22,7 @@
 --
 -- Deletes the specified UrlMap resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeURLMapsDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.urlMaps.delete@.
 module Network.Google.Resource.Compute.URLMaps.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.URLMaps.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeURLMapsDelete@ method which the
+-- | A resource alias for @compute.urlMaps.delete@ method which the
 -- 'URLMapsDelete'' request conforms to.
 type URLMapsDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data URLMapsDelete' = URLMapsDelete'
 --
 -- * 'umdProject'
 urlMapsDelete'
-    :: Text -- ^ 'urlMap'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'umdURLMap'
+    -> Text -- ^ 'umdProject'
     -> URLMapsDelete'
 urlMapsDelete' pUmdURLMap_ pUmdProject_ =
     URLMapsDelete'

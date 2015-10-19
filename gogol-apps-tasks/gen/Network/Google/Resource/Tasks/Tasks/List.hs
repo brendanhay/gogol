@@ -22,7 +22,7 @@
 --
 -- Returns all tasks in the specified task list.
 --
--- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTasksList@.
+-- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @tasks.tasks.list@.
 module Network.Google.Resource.Tasks.Tasks.List
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Tasks.Tasks.List
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @TasksTasksList@ method which the
+-- | A resource alias for @tasks.tasks.list@ method which the
 -- 'TasksList'' request conforms to.
 type TasksListResource =
      "lists" :>
@@ -110,7 +110,7 @@ data TasksList' = TasksList'
 --
 -- * 'tlMaxResults'
 tasksList'
-    :: Text -- ^ 'tasklist'
+    :: Text -- ^ 'tlTaskList'
     -> TasksList'
 tasksList' pTlTaskList_ =
     TasksList'

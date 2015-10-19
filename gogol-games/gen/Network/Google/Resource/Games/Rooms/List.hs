@@ -22,7 +22,7 @@
 --
 -- Returns invitations to join rooms.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesRoomsList@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.rooms.list@.
 module Network.Google.Resource.Games.Rooms.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Games.Rooms.List
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesRoomsList@ method which the
+-- | A resource alias for @games.rooms.list@ method which the
 -- 'RoomsList'' request conforms to.
 type RoomsListResource =
      "rooms" :>

@@ -22,7 +22,7 @@
 --
 -- List available volumes under categories for onboarding experience.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksOnboardingListCategoryVolumes@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.onboarding.listCategoryVolumes@.
 module Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksOnboardingListCategoryVolumes@ method which the
+-- | A resource alias for @books.onboarding.listCategoryVolumes@ method which the
 -- 'OnboardingListCategoryVolumes'' request conforms to.
 type OnboardingListCategoryVolumesResource =
      "onboarding" :>

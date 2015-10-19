@@ -22,7 +22,7 @@
 --
 -- Creates a group item.
 --
--- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsGroupItemsInsert@.
+-- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @youtubeAnalytics.groupItems.insert@.
 module Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
--- | A resource alias for @YouTubeAnalyticsGroupItemsInsert@ method which the
+-- | A resource alias for @youtubeAnalytics.groupItems.insert@ method which the
 -- 'GroupItemsInsert'' request conforms to.
 type GroupItemsInsertResource =
      "groupItems" :>
@@ -64,7 +64,7 @@ data GroupItemsInsert' = GroupItemsInsert'
 --
 -- * 'giiOnBehalfOfContentOwner'
 groupItemsInsert'
-    :: GroupItem -- ^ 'payload'
+    :: GroupItem -- ^ 'giiPayload'
     -> GroupItemsInsert'
 groupItemsInsert' pGiiPayload_ =
     GroupItemsInsert'

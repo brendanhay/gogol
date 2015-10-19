@@ -22,7 +22,7 @@
 --
 -- Search for orders using pql query
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceOrdersSearch@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.marketplaceorders.search@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Search
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Search
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerMarketplaceOrdersSearch@ method which the
+-- | A resource alias for @adexchangebuyer.marketplaceorders.search@ method which the
 -- 'MarketplaceOrdersSearch'' request conforms to.
 type MarketplaceOrdersSearchResource =
      "marketplaceOrders" :>

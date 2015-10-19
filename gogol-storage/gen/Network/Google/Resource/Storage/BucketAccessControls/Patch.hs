@@ -23,7 +23,7 @@
 -- Updates an ACL entry on the specified bucket. This method supports patch
 -- semantics.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketAccessControlsPatch@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.bucketAccessControls.patch@.
 module Network.Google.Resource.Storage.BucketAccessControls.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Storage.BucketAccessControls.Patch
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageBucketAccessControlsPatch@ method which the
+-- | A resource alias for @storage.bucketAccessControls.patch@ method which the
 -- 'BucketAccessControlsPatch'' request conforms to.
 type BucketAccessControlsPatchResource =
      "b" :>
@@ -73,9 +73,9 @@ data BucketAccessControlsPatch' = BucketAccessControlsPatch'
 --
 -- * 'bacpEntity'
 bucketAccessControlsPatch'
-    :: Text -- ^ 'bucket'
-    -> BucketAccessControl -- ^ 'payload'
-    -> Text -- ^ 'entity'
+    :: Text -- ^ 'bacpBucket'
+    -> BucketAccessControl -- ^ 'bacpPayload'
+    -> Text -- ^ 'bacpEntity'
     -> BucketAccessControlsPatch'
 bucketAccessControlsPatch' pBacpBucket_ pBacpPayload_ pBacpEntity_ =
     BucketAccessControlsPatch'

@@ -26,190 +26,190 @@ module Network.Google.YouTube
 
     -- * Resources
 
-    -- ** YouTubeActivitiesInsert
+    -- ** youtube.activities.insert
     , module Network.Google.Resource.YouTube.Activities.Insert
 
-    -- ** YouTubeActivitiesList
+    -- ** youtube.activities.list
     , module Network.Google.Resource.YouTube.Activities.List
 
-    -- ** YouTubeCaptionsDelete
+    -- ** youtube.captions.delete
     , module Network.Google.Resource.YouTube.Captions.Delete
 
-    -- ** YouTubeCaptionsDownload
+    -- ** youtube.captions.download
     , module Network.Google.Resource.YouTube.Captions.Download
 
-    -- ** YouTubeCaptionsInsert
+    -- ** youtube.captions.insert
     , module Network.Google.Resource.YouTube.Captions.Insert
 
-    -- ** YouTubeCaptionsList
+    -- ** youtube.captions.list
     , module Network.Google.Resource.YouTube.Captions.List
 
-    -- ** YouTubeCaptionsUpdate
+    -- ** youtube.captions.update
     , module Network.Google.Resource.YouTube.Captions.Update
 
-    -- ** YouTubeChannelBannersInsert
+    -- ** youtube.channelBanners.insert
     , module Network.Google.Resource.YouTube.ChannelBanners.Insert
 
-    -- ** YouTubeChannelSectionsDelete
+    -- ** youtube.channelSections.delete
     , module Network.Google.Resource.YouTube.ChannelSections.Delete
 
-    -- ** YouTubeChannelSectionsInsert
+    -- ** youtube.channelSections.insert
     , module Network.Google.Resource.YouTube.ChannelSections.Insert
 
-    -- ** YouTubeChannelSectionsList
+    -- ** youtube.channelSections.list
     , module Network.Google.Resource.YouTube.ChannelSections.List
 
-    -- ** YouTubeChannelSectionsUpdate
+    -- ** youtube.channelSections.update
     , module Network.Google.Resource.YouTube.ChannelSections.Update
 
-    -- ** YouTubeChannelsList
+    -- ** youtube.channels.list
     , module Network.Google.Resource.YouTube.Channels.List
 
-    -- ** YouTubeChannelsUpdate
+    -- ** youtube.channels.update
     , module Network.Google.Resource.YouTube.Channels.Update
 
-    -- ** YouTubeCommentThreadsInsert
+    -- ** youtube.commentThreads.insert
     , module Network.Google.Resource.YouTube.CommentThreads.Insert
 
-    -- ** YouTubeCommentThreadsList
+    -- ** youtube.commentThreads.list
     , module Network.Google.Resource.YouTube.CommentThreads.List
 
-    -- ** YouTubeCommentThreadsUpdate
+    -- ** youtube.commentThreads.update
     , module Network.Google.Resource.YouTube.CommentThreads.Update
 
-    -- ** YouTubeCommentsDelete
+    -- ** youtube.comments.delete
     , module Network.Google.Resource.YouTube.Comments.Delete
 
-    -- ** YouTubeCommentsInsert
+    -- ** youtube.comments.insert
     , module Network.Google.Resource.YouTube.Comments.Insert
 
-    -- ** YouTubeCommentsList
+    -- ** youtube.comments.list
     , module Network.Google.Resource.YouTube.Comments.List
 
-    -- ** YouTubeCommentsMarkAsSpam
+    -- ** youtube.comments.markAsSpam
     , module Network.Google.Resource.YouTube.Comments.MarkAsSpam
 
-    -- ** YouTubeCommentsSetModerationStatus
+    -- ** youtube.comments.setModerationStatus
     , module Network.Google.Resource.YouTube.Comments.SetModerationStatus
 
-    -- ** YouTubeCommentsUpdate
+    -- ** youtube.comments.update
     , module Network.Google.Resource.YouTube.Comments.Update
 
-    -- ** YouTubeGuideCategoriesList
+    -- ** youtube.guideCategories.list
     , module Network.Google.Resource.YouTube.GuideCategories.List
 
-    -- ** YouTubeI18nLanguagesList
+    -- ** youtube.i18nLanguages.list
     , module Network.Google.Resource.YouTube.I18nLanguages.List
 
-    -- ** YouTubeI18nRegionsList
+    -- ** youtube.i18nRegions.list
     , module Network.Google.Resource.YouTube.I18nRegions.List
 
-    -- ** YouTubeLiveBroadcastsBind
+    -- ** youtube.liveBroadcasts.bind
     , module Network.Google.Resource.YouTube.LiveBroadcasts.Bind
 
-    -- ** YouTubeLiveBroadcastsBind_direct
+    -- ** youtube.liveBroadcasts.bind_direct
     , module Network.Google.Resource.YouTube.LiveBroadcasts.BindDirect
 
-    -- ** YouTubeLiveBroadcastsControl
+    -- ** youtube.liveBroadcasts.control
     , module Network.Google.Resource.YouTube.LiveBroadcasts.Control
 
-    -- ** YouTubeLiveBroadcastsDelete
+    -- ** youtube.liveBroadcasts.delete
     , module Network.Google.Resource.YouTube.LiveBroadcasts.Delete
 
-    -- ** YouTubeLiveBroadcastsInsert
+    -- ** youtube.liveBroadcasts.insert
     , module Network.Google.Resource.YouTube.LiveBroadcasts.Insert
 
-    -- ** YouTubeLiveBroadcastsList
+    -- ** youtube.liveBroadcasts.list
     , module Network.Google.Resource.YouTube.LiveBroadcasts.List
 
-    -- ** YouTubeLiveBroadcastsTransition
+    -- ** youtube.liveBroadcasts.transition
     , module Network.Google.Resource.YouTube.LiveBroadcasts.Transition
 
-    -- ** YouTubeLiveBroadcastsUpdate
+    -- ** youtube.liveBroadcasts.update
     , module Network.Google.Resource.YouTube.LiveBroadcasts.Update
 
-    -- ** YouTubeLiveStreamsDelete
+    -- ** youtube.liveStreams.delete
     , module Network.Google.Resource.YouTube.LiveStreams.Delete
 
-    -- ** YouTubeLiveStreamsInsert
+    -- ** youtube.liveStreams.insert
     , module Network.Google.Resource.YouTube.LiveStreams.Insert
 
-    -- ** YouTubeLiveStreamsList
+    -- ** youtube.liveStreams.list
     , module Network.Google.Resource.YouTube.LiveStreams.List
 
-    -- ** YouTubeLiveStreamsUpdate
+    -- ** youtube.liveStreams.update
     , module Network.Google.Resource.YouTube.LiveStreams.Update
 
-    -- ** YouTubePlayListItemsDelete
+    -- ** youtube.playlistItems.delete
     , module Network.Google.Resource.YouTube.PlayListItems.Delete
 
-    -- ** YouTubePlayListItemsInsert
+    -- ** youtube.playlistItems.insert
     , module Network.Google.Resource.YouTube.PlayListItems.Insert
 
-    -- ** YouTubePlayListItemsList
+    -- ** youtube.playlistItems.list
     , module Network.Google.Resource.YouTube.PlayListItems.List
 
-    -- ** YouTubePlayListItemsUpdate
+    -- ** youtube.playlistItems.update
     , module Network.Google.Resource.YouTube.PlayListItems.Update
 
-    -- ** YouTubePlayListsDelete
+    -- ** youtube.playlists.delete
     , module Network.Google.Resource.YouTube.PlayLists.Delete
 
-    -- ** YouTubePlayListsInsert
+    -- ** youtube.playlists.insert
     , module Network.Google.Resource.YouTube.PlayLists.Insert
 
-    -- ** YouTubePlayListsList
+    -- ** youtube.playlists.list
     , module Network.Google.Resource.YouTube.PlayLists.List
 
-    -- ** YouTubePlayListsUpdate
+    -- ** youtube.playlists.update
     , module Network.Google.Resource.YouTube.PlayLists.Update
 
-    -- ** YouTubeSearchList
+    -- ** youtube.search.list
     , module Network.Google.Resource.YouTube.Search.List
 
-    -- ** YouTubeSubscriptionsDelete
+    -- ** youtube.subscriptions.delete
     , module Network.Google.Resource.YouTube.Subscriptions.Delete
 
-    -- ** YouTubeSubscriptionsInsert
+    -- ** youtube.subscriptions.insert
     , module Network.Google.Resource.YouTube.Subscriptions.Insert
 
-    -- ** YouTubeSubscriptionsList
+    -- ** youtube.subscriptions.list
     , module Network.Google.Resource.YouTube.Subscriptions.List
 
-    -- ** YouTubeThumbnailsSet
+    -- ** youtube.thumbnails.set
     , module Network.Google.Resource.YouTube.Thumbnails.Set
 
-    -- ** YouTubeVideoAbuseReportReasonsList
+    -- ** youtube.videoAbuseReportReasons.list
     , module Network.Google.Resource.YouTube.VideoAbuseReportReasons.List
 
-    -- ** YouTubeVideoCategoriesList
+    -- ** youtube.videoCategories.list
     , module Network.Google.Resource.YouTube.VideoCategories.List
 
-    -- ** YouTubeVideosDelete
+    -- ** youtube.videos.delete
     , module Network.Google.Resource.YouTube.Videos.Delete
 
-    -- ** YouTubeVideosGetRating
+    -- ** youtube.videos.getRating
     , module Network.Google.Resource.YouTube.Videos.GetRating
 
-    -- ** YouTubeVideosInsert
+    -- ** youtube.videos.insert
     , module Network.Google.Resource.YouTube.Videos.Insert
 
-    -- ** YouTubeVideosList
+    -- ** youtube.videos.list
     , module Network.Google.Resource.YouTube.Videos.List
 
-    -- ** YouTubeVideosRate
+    -- ** youtube.videos.rate
     , module Network.Google.Resource.YouTube.Videos.Rate
 
-    -- ** YouTubeVideosReportAbuse
+    -- ** youtube.videos.reportAbuse
     , module Network.Google.Resource.YouTube.Videos.ReportAbuse
 
-    -- ** YouTubeVideosUpdate
+    -- ** youtube.videos.update
     , module Network.Google.Resource.YouTube.Videos.Update
 
-    -- ** YouTubeWatermarksSet
+    -- ** youtube.watermarks.set
     , module Network.Google.Resource.YouTube.Watermarks.Set
 
-    -- ** YouTubeWatermarksUnset
+    -- ** youtube.watermarks.unset
     , module Network.Google.Resource.YouTube.Watermarks.Unset
 
     -- * Types

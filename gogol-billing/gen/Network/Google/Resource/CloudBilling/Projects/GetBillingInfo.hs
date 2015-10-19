@@ -25,7 +25,7 @@
 -- project](https:\/\/cloud.google.com\/docs\/permissions-overview#h.bgs0oxofvnoo
 -- ).
 --
--- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @CloudBillingProjectsGetBillingInfo@.
+-- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @cloudbilling.projects.getBillingInfo@.
 module Network.Google.Resource.CloudBilling.Projects.GetBillingInfo
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.CloudBilling.Projects.GetBillingInfo
 import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudBillingProjectsGetBillingInfo@ method which the
+-- | A resource alias for @cloudbilling.projects.getBillingInfo@ method which the
 -- 'ProjectsGetBillingInfo'' request conforms to.
 type ProjectsGetBillingInfoResource =
      "v1" :>
@@ -102,7 +102,7 @@ data ProjectsGetBillingInfo' = ProjectsGetBillingInfo'
 --
 -- * 'pgbiCallback'
 projectsGetBillingInfo'
-    :: Text -- ^ 'name'
+    :: Text -- ^ 'pgbiName'
     -> ProjectsGetBillingInfo'
 projectsGetBillingInfo' pPgbiName_ =
     ProjectsGetBillingInfo'

@@ -23,7 +23,7 @@
 -- List all custom channels in the specified ad client for the specified
 -- account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsCustomChannelsList@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.customchannels.list@.
 module Network.Google.Resource.AdSense.Accounts.CustomChannels.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AdSense.Accounts.CustomChannels.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAccountsCustomChannelsList@ method which the
+-- | A resource alias for @adsense.accounts.customchannels.list@ method which the
 -- 'AccountsCustomChannelsList'' request conforms to.
 type AccountsCustomChannelsListResource =
      "accounts" :>
@@ -79,8 +79,8 @@ data AccountsCustomChannelsList' = AccountsCustomChannelsList'
 --
 -- * 'acclMaxResults'
 accountsCustomChannelsList'
-    :: Text -- ^ 'adClientId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acclAdClientId'
+    -> Text -- ^ 'acclAccountId'
     -> AccountsCustomChannelsList'
 accountsCustomChannelsList' pAcclAdClientId_ pAcclAccountId_ =
     AccountsCustomChannelsList'

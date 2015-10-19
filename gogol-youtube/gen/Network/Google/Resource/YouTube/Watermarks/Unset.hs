@@ -22,7 +22,7 @@
 --
 -- Deletes a channel\'s watermark image.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeWatermarksUnset@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.watermarks.unset@.
 module Network.Google.Resource.YouTube.Watermarks.Unset
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTube.Watermarks.Unset
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeWatermarksUnset@ method which the
+-- | A resource alias for @youtube.watermarks.unset@ method which the
 -- 'WatermarksUnset'' request conforms to.
 type WatermarksUnsetResource =
      "watermarks" :>
@@ -65,7 +65,7 @@ data WatermarksUnset' = WatermarksUnset'
 --
 -- * 'wuOnBehalfOfContentOwner'
 watermarksUnset'
-    :: Text -- ^ 'channelId'
+    :: Text -- ^ 'wuChannelId'
     -> WatermarksUnset'
 watermarksUnset' pWuChannelId_ =
     WatermarksUnset'

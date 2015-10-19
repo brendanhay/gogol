@@ -22,7 +22,7 @@
 --
 -- Deletes a view (profile).
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFilesDelete@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.profiles.delete@.
 module Network.Google.Resource.Analytics.Management.ProFiles.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Delete
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFilesDelete@ method which the
+-- | A resource alias for @analytics.management.profiles.delete@ method which the
 -- 'ManagementProFilesDelete'' request conforms to.
 type ManagementProFilesDeleteResource =
      "management" :>
@@ -72,9 +72,9 @@ data ManagementProFilesDelete' = ManagementProFilesDelete'
 --
 -- * 'mpfdAccountId'
 managementProFilesDelete'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mpfdWebPropertyId'
+    -> Text -- ^ 'mpfdProFileId'
+    -> Text -- ^ 'mpfdAccountId'
     -> ManagementProFilesDelete'
 managementProFilesDelete' pMpfdWebPropertyId_ pMpfdProFileId_ pMpfdAccountId_ =
     ManagementProFilesDelete'

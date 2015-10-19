@@ -22,7 +22,7 @@
 --
 -- Get ad code for the specified ad unit.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAdUnitsGetAdCode@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.adunits.getAdCode@.
 module Network.Google.Resource.AdSense.AdUnits.GetAdCode
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdSense.AdUnits.GetAdCode
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAdUnitsGetAdCode@ method which the
+-- | A resource alias for @adsense.adunits.getAdCode@ method which the
 -- 'AdUnitsGetAdCode'' request conforms to.
 type AdUnitsGetAdCodeResource =
      "adclients" :>
@@ -66,8 +66,8 @@ data AdUnitsGetAdCode' = AdUnitsGetAdCode'
 --
 -- * 'augacAdClientId'
 adUnitsGetAdCode'
-    :: Text -- ^ 'adUnitId'
-    -> Text -- ^ 'adClientId'
+    :: Text -- ^ 'augacAdUnitId'
+    -> Text -- ^ 'augacAdClientId'
     -> AdUnitsGetAdCode'
 adUnitsGetAdCode' pAugacAdUnitId_ pAugacAdClientId_ =
     AdUnitsGetAdCode'

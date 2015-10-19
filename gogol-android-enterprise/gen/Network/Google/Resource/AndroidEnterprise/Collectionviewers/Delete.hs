@@ -24,7 +24,7 @@
 -- collection. If the collection\'s visibility is set to viewersOnly then
 -- only such users will see the collection.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseCollectionviewersDelete@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.collectionviewers.delete@.
 module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Delete
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Delete
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseCollectionviewersDelete@ method which the
+-- | A resource alias for @androidenterprise.collectionviewers.delete@ method which the
 -- 'CollectionviewersDelete'' request conforms to.
 type CollectionviewersDeleteResource =
      "enterprises" :>
@@ -75,9 +75,9 @@ data CollectionviewersDelete' = CollectionviewersDelete'
 --
 -- * 'cddUserId'
 collectionviewersDelete'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'collectionId'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'cddEnterpriseId'
+    -> Text -- ^ 'cddCollectionId'
+    -> Text -- ^ 'cddUserId'
     -> CollectionviewersDelete'
 collectionviewersDelete' pCddEnterpriseId_ pCddCollectionId_ pCddUserId_ =
     CollectionviewersDelete'

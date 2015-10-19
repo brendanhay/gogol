@@ -23,7 +23,7 @@
 -- Recreates the specified instances. The instances are deleted, then
 -- recreated using the instance group manager\'s current instance template.
 --
--- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersRecreateInstances@.
+-- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @replicapool.instanceGroupManagers.recreateInstances@.
 module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.RecreateInstances
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.RecreateInstanc
 import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
--- | A resource alias for @ReplicapoolInstanceGroupManagersRecreateInstances@ method which the
+-- | A resource alias for @replicapool.instanceGroupManagers.recreateInstances@ method which the
 -- 'InstanceGroupManagersRecreateInstances'' request conforms to.
 type InstanceGroupManagersRecreateInstancesResource =
      Capture "project" Text :>
@@ -80,10 +80,10 @@ data InstanceGroupManagersRecreateInstances' = InstanceGroupManagersRecreateInst
 --
 -- * 'igmriPayload'
 instanceGroupManagersRecreateInstances'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'instanceGroupManager'
-    -> Text -- ^ 'zone'
-    -> InstanceGroupManagersRecreateInstancesRequest -- ^ 'payload'
+    :: Text -- ^ 'igmriProject'
+    -> Text -- ^ 'igmriInstanceGroupManager'
+    -> Text -- ^ 'igmriZone'
+    -> InstanceGroupManagersRecreateInstancesRequest -- ^ 'igmriPayload'
     -> InstanceGroupManagersRecreateInstances'
 instanceGroupManagersRecreateInstances' pIgmriProject_ pIgmriInstanceGroupManager_ pIgmriZone_ pIgmriPayload_ =
     InstanceGroupManagersRecreateInstances'

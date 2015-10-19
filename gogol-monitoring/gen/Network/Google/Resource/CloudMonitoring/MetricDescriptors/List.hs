@@ -26,7 +26,7 @@
 -- request subsequent pages of results by setting the pageToken query
 -- parameter to the value of the nextPageToken.
 --
--- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @CloudMonitoringMetricDescriptorsList@.
+-- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @cloudmonitoring.metricDescriptors.list@.
 module Network.Google.Resource.CloudMonitoring.MetricDescriptors.List
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.CloudMonitoring.MetricDescriptors.List
 import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudMonitoringMetricDescriptorsList@ method which the
+-- | A resource alias for @cloudmonitoring.metricDescriptors.list@ method which the
 -- 'MetricDescriptorsList'' request conforms to.
 type MetricDescriptorsListResource =
      Capture "project" Text :>
@@ -88,8 +88,8 @@ data MetricDescriptorsList' = MetricDescriptorsList'
 --
 -- * 'mdlPageToken'
 metricDescriptorsList'
-    :: Text -- ^ 'project'
-    -> ListMetricDescriptorsRequest -- ^ 'payload'
+    :: Text -- ^ 'mdlProject'
+    -> ListMetricDescriptorsRequest -- ^ 'mdlPayload'
     -> MetricDescriptorsList'
 metricDescriptorsList' pMdlProject_ pMdlPayload_ =
     MetricDescriptorsList'

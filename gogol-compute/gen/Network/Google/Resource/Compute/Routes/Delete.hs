@@ -22,7 +22,7 @@
 --
 -- Deletes the specified route resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRoutesDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.routes.delete@.
 module Network.Google.Resource.Compute.Routes.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.Routes.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeRoutesDelete@ method which the
+-- | A resource alias for @compute.routes.delete@ method which the
 -- 'RoutesDelete'' request conforms to.
 type RoutesDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data RoutesDelete' = RoutesDelete'
 --
 -- * 'rdRoute'
 routesDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'route'
+    :: Text -- ^ 'rdProject'
+    -> Text -- ^ 'rdRoute'
     -> RoutesDelete'
 routesDelete' pRdProject_ pRdRoute_ =
     RoutesDelete'

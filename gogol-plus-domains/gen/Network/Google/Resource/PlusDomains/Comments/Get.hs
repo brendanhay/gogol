@@ -22,7 +22,7 @@
 --
 -- Get a comment.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCommentsGet@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.comments.get@.
 module Network.Google.Resource.PlusDomains.Comments.Get
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.PlusDomains.Comments.Get
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsCommentsGet@ method which the
+-- | A resource alias for @plusDomains.comments.get@ method which the
 -- 'CommentsGet'' request conforms to.
 type CommentsGetResource =
      "comments" :>
@@ -59,7 +59,7 @@ newtype CommentsGet' = CommentsGet'
 --
 -- * 'cgCommentId'
 commentsGet'
-    :: Text -- ^ 'commentId'
+    :: Text -- ^ 'cgCommentId'
     -> CommentsGet'
 commentsGet' pCgCommentId_ =
     CommentsGet'

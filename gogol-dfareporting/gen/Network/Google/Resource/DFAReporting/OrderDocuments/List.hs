@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of order documents, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingOrderDocumentsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.orderDocuments.list@.
 module Network.Google.Resource.DFAReporting.OrderDocuments.List
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.DFAReporting.OrderDocuments.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingOrderDocumentsList@ method which the
+-- | A resource alias for @dfareporting.orderDocuments.list@ method which the
 -- 'OrderDocumentsList'' request conforms to.
 type OrderDocumentsListResource =
      "userprofiles" :>
@@ -112,8 +112,8 @@ data OrderDocumentsList' = OrderDocumentsList'
 --
 -- * 'odlMaxResults'
 orderDocumentsList'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'projectId'
+    :: Int64 -- ^ 'odlProFileId'
+    -> Int64 -- ^ 'odlProjectId'
     -> OrderDocumentsList'
 orderDocumentsList' pOdlProFileId_ pOdlProjectId_ =
     OrderDocumentsList'

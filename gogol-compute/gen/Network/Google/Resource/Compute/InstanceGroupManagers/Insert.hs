@@ -28,7 +28,7 @@
 -- verify the status of the individual instances with the
 -- listmanagedinstances method.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersInsert@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroupManagers.insert@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.Insert
     (
     -- * REST Resource
@@ -47,7 +47,7 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Insert
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupManagersInsert@ method which the
+-- | A resource alias for @compute.instanceGroupManagers.insert@ method which the
 -- 'InstanceGroupManagersInsert'' request conforms to.
 type InstanceGroupManagersInsertResource =
      Capture "project" Text :>
@@ -83,9 +83,9 @@ data InstanceGroupManagersInsert' = InstanceGroupManagersInsert'
 --
 -- * 'igmiPayload'
 instanceGroupManagersInsert'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> InstanceGroupManager -- ^ 'payload'
+    :: Text -- ^ 'igmiProject'
+    -> Text -- ^ 'igmiZone'
+    -> InstanceGroupManager -- ^ 'igmiPayload'
     -> InstanceGroupManagersInsert'
 instanceGroupManagersInsert' pIgmiProject_ pIgmiZone_ pIgmiPayload_ =
     InstanceGroupManagersInsert'

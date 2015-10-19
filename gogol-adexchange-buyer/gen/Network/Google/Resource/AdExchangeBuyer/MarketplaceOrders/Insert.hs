@@ -22,7 +22,7 @@
 --
 -- Create the given list of orders
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceOrdersInsert@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.marketplaceorders.insert@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Insert
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Insert
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerMarketplaceOrdersInsert@ method which the
+-- | A resource alias for @adexchangebuyer.marketplaceorders.insert@ method which the
 -- 'MarketplaceOrdersInsert'' request conforms to.
 type MarketplaceOrdersInsertResource =
      "marketplaceOrders" :>
@@ -61,7 +61,7 @@ newtype MarketplaceOrdersInsert' = MarketplaceOrdersInsert'
 --
 -- * 'moiPayload'
 marketplaceOrdersInsert'
-    :: CreateOrdersRequest -- ^ 'payload'
+    :: CreateOrdersRequest -- ^ 'moiPayload'
     -> MarketplaceOrdersInsert'
 marketplaceOrdersInsert' pMoiPayload_ =
     MarketplaceOrdersInsert'

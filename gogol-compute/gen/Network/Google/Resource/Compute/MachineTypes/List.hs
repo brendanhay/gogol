@@ -23,7 +23,7 @@
 -- Retrieves the list of machine type resources available to the specified
 -- project.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeMachineTypesList@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.machineTypes.list@.
 module Network.Google.Resource.Compute.MachineTypes.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Compute.MachineTypes.List
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeMachineTypesList@ method which the
+-- | A resource alias for @compute.machineTypes.list@ method which the
 -- 'MachineTypesList'' request conforms to.
 type MachineTypesListResource =
      Capture "project" Text :>
@@ -83,8 +83,8 @@ data MachineTypesList' = MachineTypesList'
 --
 -- * 'mtlMaxResults'
 machineTypesList'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'mtlProject'
+    -> Text -- ^ 'mtlZone'
     -> MachineTypesList'
 machineTypesList' pMtlProject_ pMtlZone_ =
     MachineTypesList'

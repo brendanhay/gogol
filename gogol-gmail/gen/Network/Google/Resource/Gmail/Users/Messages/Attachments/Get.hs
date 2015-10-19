@@ -22,7 +22,7 @@
 --
 -- Gets the specified message attachment.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesAttachmentsGet@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.messages.attachments.get@.
 module Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersMessagesAttachmentsGet@ method which the
+-- | A resource alias for @gmail.users.messages.attachments.get@ method which the
 -- 'UsersMessagesAttachmentsGet'' request conforms to.
 type UsersMessagesAttachmentsGetResource =
      Capture "userId" Text :>
@@ -71,8 +71,8 @@ data UsersMessagesAttachmentsGet' = UsersMessagesAttachmentsGet'
 --
 -- * 'umagMessageId'
 usersMessagesAttachmentsGet'
-    :: Text -- ^ 'id'
-    -> Text -- ^ 'messageId'
+    :: Text -- ^ 'umagId'
+    -> Text -- ^ 'umagMessageId'
     -> Text
     -> UsersMessagesAttachmentsGet'
 usersMessagesAttachmentsGet' pUmagUserId_ pUmagId_ pUmagMessageId_ =

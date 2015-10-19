@@ -22,7 +22,7 @@
 --
 -- create user.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersInsert@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.users.insert@.
 module Network.Google.Resource.Directory.Users.Insert
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Directory.Users.Insert
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryUsersInsert@ method which the
+-- | A resource alias for @directory.users.insert@ method which the
 -- 'UsersInsert'' request conforms to.
 type UsersInsertResource =
      "users" :>
@@ -59,7 +59,7 @@ newtype UsersInsert' = UsersInsert'
 --
 -- * 'uiPayload'
 usersInsert'
-    :: User -- ^ 'payload'
+    :: User -- ^ 'uiPayload'
     -> UsersInsert'
 usersInsert' pUiPayload_ =
     UsersInsert'

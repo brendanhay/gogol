@@ -22,7 +22,7 @@
 --
 -- Lists segments to which the user has access.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementSegmentsList@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.segments.list@.
 module Network.Google.Resource.Analytics.Management.Segments.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Analytics.Management.Segments.List
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementSegmentsList@ method which the
+-- | A resource alias for @analytics.management.segments.list@ method which the
 -- 'ManagementSegmentsList'' request conforms to.
 type ManagementSegmentsListResource =
      "management" :>

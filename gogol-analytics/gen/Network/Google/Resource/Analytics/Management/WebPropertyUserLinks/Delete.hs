@@ -22,7 +22,7 @@
 --
 -- Removes a user from the given web property.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyUserLinksDelete@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.webpropertyUserLinks.delete@.
 module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Delete
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementWebPropertyUserLinksDelete@ method which the
+-- | A resource alias for @analytics.management.webpropertyUserLinks.delete@ method which the
 -- 'ManagementWebPropertyUserLinksDelete'' request conforms to.
 type ManagementWebPropertyUserLinksDeleteResource =
      "management" :>
@@ -72,9 +72,9 @@ data ManagementWebPropertyUserLinksDelete' = ManagementWebPropertyUserLinksDelet
 --
 -- * 'mwpuldLinkId'
 managementWebPropertyUserLinksDelete'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'linkId'
+    :: Text -- ^ 'mwpuldWebPropertyId'
+    -> Text -- ^ 'mwpuldAccountId'
+    -> Text -- ^ 'mwpuldLinkId'
     -> ManagementWebPropertyUserLinksDelete'
 managementWebPropertyUserLinksDelete' pMwpuldWebPropertyId_ pMwpuldAccountId_ pMwpuldLinkId_ =
     ManagementWebPropertyUserLinksDelete'

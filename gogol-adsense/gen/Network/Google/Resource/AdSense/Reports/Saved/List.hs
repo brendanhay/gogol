@@ -22,7 +22,7 @@
 --
 -- List all saved reports in this AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseReportsSavedList@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.reports.saved.list@.
 module Network.Google.Resource.AdSense.Reports.Saved.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdSense.Reports.Saved.List
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseReportsSavedList@ method which the
+-- | A resource alias for @adsense.reports.saved.list@ method which the
 -- 'ReportsSavedList'' request conforms to.
 type ReportsSavedListResource =
      "reports" :>

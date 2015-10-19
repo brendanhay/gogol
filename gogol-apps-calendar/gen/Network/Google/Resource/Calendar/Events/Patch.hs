@@ -22,7 +22,7 @@
 --
 -- Updates an event. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsPatch@.
+-- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.events.patch@.
 module Network.Google.Resource.Calendar.Events.Patch
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Calendar.Events.Patch
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CalendarEventsPatch@ method which the
+-- | A resource alias for @calendar.events.patch@ method which the
 -- 'EventsPatch'' request conforms to.
 type EventsPatchResource =
      "calendars" :>
@@ -90,9 +90,9 @@ data EventsPatch' = EventsPatch'
 --
 -- * 'epEventId'
 eventsPatch'
-    :: Text -- ^ 'calendarId'
-    -> Event -- ^ 'payload'
-    -> Text -- ^ 'eventId'
+    :: Text -- ^ 'epCalendarId'
+    -> Event -- ^ 'epPayload'
+    -> Text -- ^ 'epEventId'
     -> EventsPatch'
 eventsPatch' pEpCalendarId_ pEpPayload_ pEpEventId_ =
     EventsPatch'

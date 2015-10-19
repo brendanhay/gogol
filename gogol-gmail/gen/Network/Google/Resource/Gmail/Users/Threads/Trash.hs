@@ -22,7 +22,7 @@
 --
 -- Moves the specified thread to the trash.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersThreadsTrash@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.threads.trash@.
 module Network.Google.Resource.Gmail.Users.Threads.Trash
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Gmail.Users.Threads.Trash
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersThreadsTrash@ method which the
+-- | A resource alias for @gmail.users.threads.trash@ method which the
 -- 'UsersThreadsTrash'' request conforms to.
 type UsersThreadsTrashResource =
      Capture "userId" Text :>
@@ -65,7 +65,7 @@ data UsersThreadsTrash' = UsersThreadsTrash'
 --
 -- * 'uttId'
 usersThreadsTrash'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'uttId'
     -> Text
     -> UsersThreadsTrash'
 usersThreadsTrash' pUttUserId_ pUttId_ =

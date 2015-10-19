@@ -22,7 +22,7 @@
 --
 -- Deletes an annotation.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryAnnotationsDelete@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.annotations.delete@.
 module Network.Google.Resource.Books.MyLibrary.Annotations.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.Delete
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryAnnotationsDelete@ method which the
+-- | A resource alias for @books.mylibrary.annotations.delete@ method which the
 -- 'MyLibraryAnnotationsDelete'' request conforms to.
 type MyLibraryAnnotationsDeleteResource =
      "mylibrary" :>
@@ -65,7 +65,7 @@ data MyLibraryAnnotationsDelete' = MyLibraryAnnotationsDelete'
 --
 -- * 'mladSource'
 myLibraryAnnotationsDelete'
-    :: Text -- ^ 'annotationId'
+    :: Text -- ^ 'mladAnnotationId'
     -> MyLibraryAnnotationsDelete'
 myLibraryAnnotationsDelete' pMladAnnotationId_ =
     MyLibraryAnnotationsDelete'

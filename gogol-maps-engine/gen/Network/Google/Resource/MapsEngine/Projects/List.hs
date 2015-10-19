@@ -22,7 +22,7 @@
 --
 -- Return all projects readable by the current user.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineProjectsList@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.projects.list@.
 module Network.Google.Resource.MapsEngine.Projects.List
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.MapsEngine.Projects.List
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineProjectsList@ method which the
+-- | A resource alias for @mapsengine.projects.list@ method which the
 -- 'ProjectsList'' request conforms to.
 type ProjectsListResource =
      "projects" :>

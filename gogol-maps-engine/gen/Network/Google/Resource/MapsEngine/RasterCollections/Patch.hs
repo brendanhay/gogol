@@ -22,7 +22,7 @@
 --
 -- Mutate a raster collection asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRasterCollectionsPatch@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.rasterCollections.patch@.
 module Network.Google.Resource.MapsEngine.RasterCollections.Patch
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Patch
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRasterCollectionsPatch@ method which the
+-- | A resource alias for @mapsengine.rasterCollections.patch@ method which the
 -- 'RasterCollectionsPatch'' request conforms to.
 type RasterCollectionsPatchResource =
      "rasterCollections" :>
@@ -64,8 +64,8 @@ data RasterCollectionsPatch' = RasterCollectionsPatch'
 --
 -- * 'rcpId'
 rasterCollectionsPatch'
-    :: RasterCollection -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: RasterCollection -- ^ 'rcpPayload'
+    -> Text -- ^ 'rcpId'
     -> RasterCollectionsPatch'
 rasterCollectionsPatch' pRcpPayload_ pRcpId_ =
     RasterCollectionsPatch'

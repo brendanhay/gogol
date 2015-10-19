@@ -22,7 +22,7 @@
 --
 -- Updates permissions for an existing user on the given account.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountUserLinksUpdate@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.accountUserLinks.update@.
 module Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementAccountUserLinksUpdate@ method which the
+-- | A resource alias for @analytics.management.accountUserLinks.update@ method which the
 -- 'ManagementAccountUserLinksUpdate'' request conforms to.
 type ManagementAccountUserLinksUpdateResource =
      "management" :>
@@ -72,9 +72,9 @@ data ManagementAccountUserLinksUpdate' = ManagementAccountUserLinksUpdate'
 --
 -- * 'mauluLinkId'
 managementAccountUserLinksUpdate'
-    :: EntityUserLink -- ^ 'payload'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'linkId'
+    :: EntityUserLink -- ^ 'mauluPayload'
+    -> Text -- ^ 'mauluAccountId'
+    -> Text -- ^ 'mauluLinkId'
     -> ManagementAccountUserLinksUpdate'
 managementAccountUserLinksUpdate' pMauluPayload_ pMauluAccountId_ pMauluLinkId_ =
     ManagementAccountUserLinksUpdate'

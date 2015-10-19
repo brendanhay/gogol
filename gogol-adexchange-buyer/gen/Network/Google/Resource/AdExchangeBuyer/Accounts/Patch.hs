@@ -22,7 +22,7 @@
 --
 -- Updates an existing account. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerAccountsPatch@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.accounts.patch@.
 module Network.Google.Resource.AdExchangeBuyer.Accounts.Patch
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.Patch
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerAccountsPatch@ method which the
+-- | A resource alias for @adexchangebuyer.accounts.patch@ method which the
 -- 'AccountsPatch'' request conforms to.
 type AccountsPatchResource =
      "accounts" :>
@@ -64,8 +64,8 @@ data AccountsPatch' = AccountsPatch'
 --
 -- * 'apId'
 accountsPatch'
-    :: Account -- ^ 'payload'
-    -> Int32 -- ^ 'id'
+    :: Account -- ^ 'apPayload'
+    -> Int32 -- ^ 'apId'
     -> AccountsPatch'
 accountsPatch' pApPayload_ pApId_ =
     AccountsPatch'

@@ -22,7 +22,7 @@
 --
 -- Adds new Autoscaler resource.
 --
--- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerAutoscalersInsert@.
+-- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @autoscaler.autoscalers.insert@.
 module Network.Google.Resource.Autoscaler.Autoscalers.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Autoscaler.Autoscalers.Insert
 import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AutoscalerAutoscalersInsert@ method which the
+-- | A resource alias for @autoscaler.autoscalers.insert@ method which the
 -- 'AutoscalersInsert'' request conforms to.
 type AutoscalersInsertResource =
      "projects" :>
@@ -71,9 +71,9 @@ data AutoscalersInsert' = AutoscalersInsert'
 --
 -- * 'aiPayload'
 autoscalersInsert'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> Autoscaler -- ^ 'payload'
+    :: Text -- ^ 'aiProject'
+    -> Text -- ^ 'aiZone'
+    -> Autoscaler -- ^ 'aiPayload'
     -> AutoscalersInsert'
 autoscalersInsert' pAiProject_ pAiZone_ pAiPayload_ =
     AutoscalersInsert'

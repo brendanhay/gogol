@@ -22,7 +22,7 @@
 --
 -- Publish a map asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineMapsPublish@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.maps.publish@.
 module Network.Google.Resource.MapsEngine.Maps.Publish
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.MapsEngine.Maps.Publish
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineMapsPublish@ method which the
+-- | A resource alias for @mapsengine.maps.publish@ method which the
 -- 'MapsPublish'' request conforms to.
 type MapsPublishResource =
      "maps" :>
@@ -66,7 +66,7 @@ data MapsPublish' = MapsPublish'
 --
 -- * 'mId'
 mapsPublish'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'mId'
     -> MapsPublish'
 mapsPublish' pMId_ =
     MapsPublish'

@@ -22,7 +22,7 @@
 --
 -- Creates a new dataset.
 --
--- /See:/ < Genomics API Reference> for @GenomicsDatasetsCreate@.
+-- /See:/ < Genomics API Reference> for @genomics.datasets.create@.
 module Network.Google.Resource.Genomics.Datasets.Create
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.Datasets.Create
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsDatasetsCreate@ method which the
+-- | A resource alias for @genomics.datasets.create@ method which the
 -- 'DatasetsCreate'' request conforms to.
 type DatasetsCreateResource =
      "v1" :>
@@ -95,7 +95,7 @@ data DatasetsCreate' = DatasetsCreate'
 --
 -- * 'dcCallback'
 datasetsCreate'
-    :: Dataset -- ^ 'payload'
+    :: Dataset -- ^ 'dcPayload'
     -> DatasetsCreate'
 datasetsCreate' pDcPayload_ =
     DatasetsCreate'

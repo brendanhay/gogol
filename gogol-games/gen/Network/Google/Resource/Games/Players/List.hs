@@ -22,7 +22,7 @@
 --
 -- Get the collection of players for the currently authenticated user.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesPlayersList@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.players.list@.
 module Network.Google.Resource.Games.Players.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Games.Players.List
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesPlayersList@ method which the
+-- | A resource alias for @games.players.list@ method which the
 -- 'PlayersList'' request conforms to.
 type PlayersListResource =
      "players" :>
@@ -77,7 +77,7 @@ data PlayersList' = PlayersList'
 --
 -- * 'plMaxResults'
 playersList'
-    :: PlayersListCollection -- ^ 'collection'
+    :: PlayersListCollection -- ^ 'plCollection'
     -> PlayersList'
 playersList' pPlCollection_ =
     PlayersList'

@@ -22,7 +22,7 @@
 --
 -- Gets a reply.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRepliesGet@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.replies.get@.
 module Network.Google.Resource.Drive.Replies.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Drive.Replies.Get
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRepliesGet@ method which the
+-- | A resource alias for @drive.replies.get@ method which the
 -- 'RepliesGet'' request conforms to.
 type RepliesGetResource =
      "files" :>
@@ -76,9 +76,9 @@ data RepliesGet' = RepliesGet'
 --
 -- * 'rgIncludeDeleted'
 repliesGet'
-    :: Text -- ^ 'replyId'
-    -> Text -- ^ 'fileId'
-    -> Text -- ^ 'commentId'
+    :: Text -- ^ 'rgReplyId'
+    -> Text -- ^ 'rgFileId'
+    -> Text -- ^ 'rgCommentId'
     -> RepliesGet'
 repliesGet' pRgReplyId_ pRgFileId_ pRgCommentId_ =
     RepliesGet'

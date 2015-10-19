@@ -22,7 +22,7 @@
 --
 -- Gets one operating system by DART ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingOperatingSystemsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.operatingSystems.get@.
 module Network.Google.Resource.DFAReporting.OperatingSystems.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.OperatingSystems.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingOperatingSystemsGet@ method which the
+-- | A resource alias for @dfareporting.operatingSystems.get@ method which the
 -- 'OperatingSystemsGet'' request conforms to.
 type OperatingSystemsGetResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data OperatingSystemsGet' = OperatingSystemsGet'
 --
 -- * 'osgDartId'
 operatingSystemsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'dartId'
+    :: Int64 -- ^ 'osgProFileId'
+    -> Int64 -- ^ 'osgDartId'
     -> OperatingSystemsGet'
 operatingSystemsGet' pOsgProFileId_ pOsgDartId_ =
     OperatingSystemsGet'

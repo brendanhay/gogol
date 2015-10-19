@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of change logs.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingChangeLogsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.changeLogs.list@.
 module Network.Google.Resource.DFAReporting.ChangeLogs.List
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.DFAReporting.ChangeLogs.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingChangeLogsList@ method which the
+-- | A resource alias for @dfareporting.changeLogs.list@ method which the
 -- 'ChangeLogsList'' request conforms to.
 type ChangeLogsListResource =
      "userprofiles" :>
@@ -111,7 +111,7 @@ data ChangeLogsList' = ChangeLogsList'
 --
 -- * 'cllMaxResults'
 changeLogsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'cllProFileId'
     -> ChangeLogsList'
 changeLogsList' pCllProFileId_ =
     ChangeLogsList'

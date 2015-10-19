@@ -23,7 +23,7 @@
 -- Deletes a resource containing information about a database inside a
 -- Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLDatabasesDelete@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.databases.delete@.
 module Network.Google.Resource.SQL.Databases.Delete
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.SQL.Databases.Delete
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLDatabasesDelete@ method which the
+-- | A resource alias for @sql.databases.delete@ method which the
 -- 'DatabasesDelete'' request conforms to.
 type DatabasesDeleteResource =
      "projects" :>
@@ -73,9 +73,9 @@ data DatabasesDelete' = DatabasesDelete'
 --
 -- * 'ddInstance'
 databasesDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'database'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'ddProject'
+    -> Text -- ^ 'ddDatabase'
+    -> Text -- ^ 'ddInstance'
     -> DatabasesDelete'
 databasesDelete' pDdProject_ pDdDatabase_ pDdInstance_ =
     DatabasesDelete'

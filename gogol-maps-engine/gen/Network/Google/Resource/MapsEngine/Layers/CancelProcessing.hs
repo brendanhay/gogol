@@ -22,7 +22,7 @@
 --
 -- Cancel processing on a layer asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineLayersCancelProcessing@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.layers.cancelProcessing@.
 module Network.Google.Resource.MapsEngine.Layers.CancelProcessing
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.Layers.CancelProcessing
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineLayersCancelProcessing@ method which the
+-- | A resource alias for @mapsengine.layers.cancelProcessing@ method which the
 -- 'LayersCancelProcessing'' request conforms to.
 type LayersCancelProcessingResource =
      "layers" :>
@@ -61,7 +61,7 @@ newtype LayersCancelProcessing' = LayersCancelProcessing'
 --
 -- * 'lcpId'
 layersCancelProcessing'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'lcpId'
     -> LayersCancelProcessing'
 layersCancelProcessing' pLcpId_ =
     LayersCancelProcessing'

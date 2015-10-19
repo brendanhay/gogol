@@ -22,7 +22,7 @@
 --
 -- Delete all features matching the given IDs.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesFeaturesBatchDelete@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.tables.features.batchDelete@.
 module Network.Google.Resource.MapsEngine.Tables.Features.BatchDelete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.MapsEngine.Tables.Features.BatchDelete
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesFeaturesBatchDelete@ method which the
+-- | A resource alias for @mapsengine.tables.features.batchDelete@ method which the
 -- 'TablesFeaturesBatchDelete'' request conforms to.
 type TablesFeaturesBatchDeleteResource =
      "tables" :>
@@ -67,8 +67,8 @@ data TablesFeaturesBatchDelete' = TablesFeaturesBatchDelete'
 --
 -- * 'tfbdId'
 tablesFeaturesBatchDelete'
-    :: FeaturesBatchDeleteRequest -- ^ 'payload'
-    -> Text -- ^ 'id'
+    :: FeaturesBatchDeleteRequest -- ^ 'tfbdPayload'
+    -> Text -- ^ 'tfbdId'
     -> TablesFeaturesBatchDelete'
 tablesFeaturesBatchDelete' pTfbdPayload_ pTfbdId_ =
     TablesFeaturesBatchDelete'

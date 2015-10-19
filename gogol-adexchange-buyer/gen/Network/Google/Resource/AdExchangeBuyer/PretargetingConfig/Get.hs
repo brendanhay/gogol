@@ -22,7 +22,7 @@
 --
 -- Gets a specific pretargeting configuration
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPretargetingConfigGet@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.pretargetingConfig.get@.
 module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Get
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerPretargetingConfigGet@ method which the
+-- | A resource alias for @adexchangebuyer.pretargetingConfig.get@ method which the
 -- 'PretargetingConfigGet'' request conforms to.
 type PretargetingConfigGetResource =
      "pretargetingconfigs" :>
@@ -65,8 +65,8 @@ data PretargetingConfigGet' = PretargetingConfigGet'
 --
 -- * 'pcgConfigId'
 pretargetingConfigGet'
-    :: Int64 -- ^ 'accountId'
-    -> Int64 -- ^ 'configId'
+    :: Int64 -- ^ 'pcgAccountId'
+    -> Int64 -- ^ 'pcgConfigId'
     -> PretargetingConfigGet'
 pretargetingConfigGet' pPcgAccountId_ pPcgConfigId_ =
     PretargetingConfigGet'

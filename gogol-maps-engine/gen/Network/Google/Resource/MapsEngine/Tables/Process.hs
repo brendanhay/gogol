@@ -22,7 +22,7 @@
 --
 -- Process a table asset.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesProcess@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.tables.process@.
 module Network.Google.Resource.MapsEngine.Tables.Process
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.Tables.Process
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineTablesProcess@ method which the
+-- | A resource alias for @mapsengine.tables.process@ method which the
 -- 'TablesProcess'' request conforms to.
 type TablesProcessResource =
      "tables" :>
@@ -61,7 +61,7 @@ newtype TablesProcess' = TablesProcess'
 --
 -- * 'tId'
 tablesProcess'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'tId'
     -> TablesProcess'
 tablesProcess' pTId_ =
     TablesProcess'

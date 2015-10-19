@@ -22,7 +22,7 @@
 --
 -- Updates an existing content category.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingContentCategoriesUpdate@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.contentCategories.update@.
 module Network.Google.Resource.DFAReporting.ContentCategories.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Update
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingContentCategoriesUpdate@ method which the
+-- | A resource alias for @dfareporting.contentCategories.update@ method which the
 -- 'ContentCategoriesUpdate'' request conforms to.
 type ContentCategoriesUpdateResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data ContentCategoriesUpdate' = ContentCategoriesUpdate'
 --
 -- * 'ccuPayload'
 contentCategoriesUpdate'
-    :: Int64 -- ^ 'profileId'
-    -> ContentCategory -- ^ 'payload'
+    :: Int64 -- ^ 'ccuProFileId'
+    -> ContentCategory -- ^ 'ccuPayload'
     -> ContentCategoriesUpdate'
 contentCategoriesUpdate' pCcuProFileId_ pCcuPayload_ =
     ContentCategoriesUpdate'

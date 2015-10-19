@@ -22,7 +22,7 @@
 --
 -- Deletes a timeline item.
 --
--- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineDelete@.
+-- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @mirror.timeline.delete@.
 module Network.Google.Resource.Mirror.Timeline.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Mirror.Timeline.Delete
 import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MirrorTimelineDelete@ method which the
+-- | A resource alias for @mirror.timeline.delete@ method which the
 -- 'TimelineDelete'' request conforms to.
 type TimelineDeleteResource =
      "timeline" :>
@@ -59,7 +59,7 @@ newtype TimelineDelete' = TimelineDelete'
 --
 -- * 'tdId'
 timelineDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'tdId'
     -> TimelineDelete'
 timelineDelete' pTdId_ =
     TimelineDelete'

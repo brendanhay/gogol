@@ -22,7 +22,7 @@
 --
 -- Updates a notification. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryNotificationsPatch@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.notifications.patch@.
 module Network.Google.Resource.Directory.Notifications.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Directory.Notifications.Patch
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryNotificationsPatch@ method which the
+-- | A resource alias for @directory.notifications.patch@ method which the
 -- 'NotificationsPatch'' request conforms to.
 type NotificationsPatchResource =
      "customer" :>
@@ -71,9 +71,9 @@ data NotificationsPatch' = NotificationsPatch'
 --
 -- * 'npNotificationId'
 notificationsPatch'
-    :: Notification -- ^ 'payload'
-    -> Text -- ^ 'customer'
-    -> Text -- ^ 'notificationId'
+    :: Notification -- ^ 'npPayload'
+    -> Text -- ^ 'npCustomer'
+    -> Text -- ^ 'npNotificationId'
     -> NotificationsPatch'
 notificationsPatch' pNpPayload_ pNpCustomer_ pNpNotificationId_ =
     NotificationsPatch'

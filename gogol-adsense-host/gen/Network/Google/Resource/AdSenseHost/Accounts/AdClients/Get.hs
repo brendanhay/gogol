@@ -23,7 +23,7 @@
 -- Get information about one of the ad clients in the specified
 -- publisher\'s AdSense account.
 --
--- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdClientsGet@.
+-- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @adsensehost.accounts.adclients.get@.
 module Network.Google.Resource.AdSenseHost.Accounts.AdClients.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdClients.Get
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsensehostAccountsAdClientsGet@ method which the
+-- | A resource alias for @adsensehost.accounts.adclients.get@ method which the
 -- 'AccountsAdClientsGet'' request conforms to.
 type AccountsAdClientsGetResource =
      "accounts" :>
@@ -67,8 +67,8 @@ data AccountsAdClientsGet' = AccountsAdClientsGet'
 --
 -- * 'aacgAccountId'
 accountsAdClientsGet'
-    :: Text -- ^ 'adClientId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'aacgAdClientId'
+    -> Text -- ^ 'aacgAccountId'
     -> AccountsAdClientsGet'
 accountsAdClientsGet' pAacgAdClientId_ pAacgAccountId_ =
     AccountsAdClientsGet'

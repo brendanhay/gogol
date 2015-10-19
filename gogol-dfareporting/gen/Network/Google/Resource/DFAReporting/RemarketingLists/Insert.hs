@@ -22,7 +22,7 @@
 --
 -- Inserts a new remarketing list.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingRemarketingListsInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.remarketingLists.insert@.
 module Network.Google.Resource.DFAReporting.RemarketingLists.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingRemarketingListsInsert@ method which the
+-- | A resource alias for @dfareporting.remarketingLists.insert@ method which the
 -- 'RemarketingListsInsert'' request conforms to.
 type RemarketingListsInsertResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data RemarketingListsInsert' = RemarketingListsInsert'
 --
 -- * 'rliPayload'
 remarketingListsInsert'
-    :: Int64 -- ^ 'profileId'
-    -> RemarketingList -- ^ 'payload'
+    :: Int64 -- ^ 'rliProFileId'
+    -> RemarketingList -- ^ 'rliPayload'
     -> RemarketingListsInsert'
 remarketingListsInsert' pRliProFileId_ pRliPayload_ =
     RemarketingListsInsert'

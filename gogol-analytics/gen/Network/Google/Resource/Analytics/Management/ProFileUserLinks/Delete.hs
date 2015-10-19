@@ -22,7 +22,7 @@
 --
 -- Removes a user from the given view (profile).
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFileUserLinksDelete@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.profileUserLinks.delete@.
 module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Delete
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Delete
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementProFileUserLinksDelete@ method which the
+-- | A resource alias for @analytics.management.profileUserLinks.delete@ method which the
 -- 'ManagementProFileUserLinksDelete'' request conforms to.
 type ManagementProFileUserLinksDeleteResource =
      "management" :>
@@ -78,10 +78,10 @@ data ManagementProFileUserLinksDelete' = ManagementProFileUserLinksDelete'
 --
 -- * 'mpfuldLinkId'
 managementProFileUserLinksDelete'
-    :: Text -- ^ 'webPropertyId'
-    -> Text -- ^ 'profileId'
-    -> Text -- ^ 'accountId'
-    -> Text -- ^ 'linkId'
+    :: Text -- ^ 'mpfuldWebPropertyId'
+    -> Text -- ^ 'mpfuldProFileId'
+    -> Text -- ^ 'mpfuldAccountId'
+    -> Text -- ^ 'mpfuldLinkId'
     -> ManagementProFileUserLinksDelete'
 managementProFileUserLinksDelete' pMpfuldWebPropertyId_ pMpfuldProFileId_ pMpfuldAccountId_ pMpfuldLinkId_ =
     ManagementProFileUserLinksDelete'

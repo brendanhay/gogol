@@ -22,7 +22,7 @@
 --
 -- Create a resource view.
 --
--- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsInsert@.
+-- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @resourceviews.zoneViews.insert@.
 module Network.Google.Resource.ResourceViews.ZoneViews.Insert
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.ResourceViews.ZoneViews.Insert
 import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
--- | A resource alias for @ResourceviewsZoneViewsInsert@ method which the
+-- | A resource alias for @resourceviews.zoneViews.insert@ method which the
 -- 'ZoneViewsInsert'' request conforms to.
 type ZoneViewsInsertResource =
      Capture "project" Text :>
@@ -71,9 +71,9 @@ data ZoneViewsInsert' = ZoneViewsInsert'
 --
 -- * 'zviPayload'
 zoneViewsInsert'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> ResourceView -- ^ 'payload'
+    :: Text -- ^ 'zviProject'
+    -> Text -- ^ 'zviZone'
+    -> ResourceView -- ^ 'zviPayload'
     -> ZoneViewsInsert'
 zoneViewsInsert' pZviProject_ pZviZone_ pZviPayload_ =
     ZoneViewsInsert'

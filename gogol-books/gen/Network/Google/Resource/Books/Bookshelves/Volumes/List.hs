@@ -22,7 +22,7 @@
 --
 -- Retrieves volumes in a specific bookshelf for the specified user.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksBookshelvesVolumesList@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.bookshelves.volumes.list@.
 module Network.Google.Resource.Books.Bookshelves.Volumes.List
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.Books.Bookshelves.Volumes.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksBookshelvesVolumesList@ method which the
+-- | A resource alias for @books.bookshelves.volumes.list@ method which the
 -- 'BookshelvesVolumesList'' request conforms to.
 type BookshelvesVolumesListResource =
      "users" :>
@@ -86,8 +86,8 @@ data BookshelvesVolumesList' = BookshelvesVolumesList'
 --
 -- * 'bvlShowPreOrders'
 bookshelvesVolumesList'
-    :: Text -- ^ 'userId'
-    -> Text -- ^ 'shelf'
+    :: Text -- ^ 'bvlUserId'
+    -> Text -- ^ 'bvlShelf'
     -> BookshelvesVolumesList'
 bookshelvesVolumesList' pBvlUserId_ pBvlShelf_ =
     BookshelvesVolumesList'

@@ -22,7 +22,7 @@
 --
 -- Uploads and attaches a new Expansion File to the APK specified.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsExpansionFilesUpload@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.expansionfiles.upload@.
 module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Upload
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Upload
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsExpansionFilesUpload@ method which the
+-- | A resource alias for @androidpublisher.edits.expansionfiles.upload@ method which the
 -- 'EditsExpansionFilesUpload'' request conforms to.
 type EditsExpansionFilesUploadResource =
      Capture "packageName" Text :>
@@ -84,11 +84,11 @@ data EditsExpansionFilesUpload' = EditsExpansionFilesUpload'
 --
 -- * 'eefuEditId'
 editsExpansionFilesUpload'
-    :: Text -- ^ 'packageName'
-    -> Int32 -- ^ 'apkVersionCode'
-    -> Body -- ^ 'media'
-    -> EditsExpansionFilesUploadExpansionFileType -- ^ 'expansionFileType'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eefuPackageName'
+    -> Int32 -- ^ 'eefuAPKVersionCode'
+    -> Body -- ^ 'eefuMedia'
+    -> EditsExpansionFilesUploadExpansionFileType -- ^ 'eefuExpansionFileType'
+    -> Text -- ^ 'eefuEditId'
     -> EditsExpansionFilesUpload'
 editsExpansionFilesUpload' pEefuPackageName_ pEefuAPKVersionCode_ pEefuMedia_ pEefuExpansionFileType_ pEefuEditId_ =
     EditsExpansionFilesUpload'

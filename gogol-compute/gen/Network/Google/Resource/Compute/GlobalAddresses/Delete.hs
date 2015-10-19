@@ -22,7 +22,7 @@
 --
 -- Deletes the specified address resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalAddressesDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalAddresses.delete@.
 module Network.Google.Resource.Compute.GlobalAddresses.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.GlobalAddresses.Delete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeGlobalAddressesDelete@ method which the
+-- | A resource alias for @compute.globalAddresses.delete@ method which the
 -- 'GlobalAddressesDelete'' request conforms to.
 type GlobalAddressesDeleteResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data GlobalAddressesDelete' = GlobalAddressesDelete'
 --
 -- * 'gadAddress'
 globalAddressesDelete'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'address'
+    :: Text -- ^ 'gadProject'
+    -> Text -- ^ 'gadAddress'
     -> GlobalAddressesDelete'
 globalAddressesDelete' pGadProject_ pGadAddress_ =
     GlobalAddressesDelete'

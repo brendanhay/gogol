@@ -22,7 +22,7 @@
 --
 -- Create a new metric.
 --
--- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @CloudMonitoringMetricDescriptorsCreate@.
+-- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @cloudmonitoring.metricDescriptors.create@.
 module Network.Google.Resource.CloudMonitoring.MetricDescriptors.Create
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.CloudMonitoring.MetricDescriptors.Create
 import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CloudMonitoringMetricDescriptorsCreate@ method which the
+-- | A resource alias for @cloudmonitoring.metricDescriptors.create@ method which the
 -- 'MetricDescriptorsCreate'' request conforms to.
 type MetricDescriptorsCreateResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data MetricDescriptorsCreate' = MetricDescriptorsCreate'
 --
 -- * 'mdcPayload'
 metricDescriptorsCreate'
-    :: Text -- ^ 'project'
-    -> MetricDescriptor -- ^ 'payload'
+    :: Text -- ^ 'mdcProject'
+    -> MetricDescriptor -- ^ 'mdcPayload'
     -> MetricDescriptorsCreate'
 metricDescriptorsCreate' pMdcProject_ pMdcPayload_ =
     MetricDescriptorsCreate'

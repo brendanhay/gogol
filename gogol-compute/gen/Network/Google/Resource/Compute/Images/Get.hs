@@ -22,7 +22,7 @@
 --
 -- Returns the specified image resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeImagesGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.images.get@.
 module Network.Google.Resource.Compute.Images.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Compute.Images.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeImagesGet@ method which the
+-- | A resource alias for @compute.images.get@ method which the
 -- 'ImagesGet'' request conforms to.
 type ImagesGetResource =
      Capture "project" Text :>
@@ -65,8 +65,8 @@ data ImagesGet' = ImagesGet'
 --
 -- * 'imaProject'
 imagesGet'
-    :: Text -- ^ 'image'
-    -> Text -- ^ 'project'
+    :: Text -- ^ 'imaImage'
+    -> Text -- ^ 'imaProject'
     -> ImagesGet'
 imagesGet' pImaImage_ pImaProject_ =
     ImagesGet'

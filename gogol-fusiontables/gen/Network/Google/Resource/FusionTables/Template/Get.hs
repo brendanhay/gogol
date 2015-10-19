@@ -22,7 +22,7 @@
 --
 -- Retrieves a specific template by its id
 --
--- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTemplateGet@.
+-- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @fusiontables.template.get@.
 module Network.Google.Resource.FusionTables.Template.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.FusionTables.Template.Get
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @FusiontablesTemplateGet@ method which the
+-- | A resource alias for @fusiontables.template.get@ method which the
 -- 'TemplateGet'' request conforms to.
 type TemplateGetResource =
      "tables" :>
@@ -65,8 +65,8 @@ data TemplateGet' = TemplateGet'
 --
 -- * 'tggTableId'
 templateGet'
-    :: Int32 -- ^ 'templateId'
-    -> Text -- ^ 'tableId'
+    :: Int32 -- ^ 'tggTemplateId'
+    -> Text -- ^ 'tggTableId'
     -> TemplateGet'
 templateGet' pTggTemplateId_ pTggTableId_ =
     TemplateGet'

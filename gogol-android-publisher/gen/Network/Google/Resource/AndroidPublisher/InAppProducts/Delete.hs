@@ -22,7 +22,7 @@
 --
 -- Delete an in-app product for an app.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherInAppProductsDelete@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.inappproducts.delete@.
 module Network.Google.Resource.AndroidPublisher.InAppProducts.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidPublisher.InAppProducts.Delete
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherInAppProductsDelete@ method which the
+-- | A resource alias for @androidpublisher.inappproducts.delete@ method which the
 -- 'InAppProductsDelete'' request conforms to.
 type InAppProductsDeleteResource =
      Capture "packageName" Text :>
@@ -64,8 +64,8 @@ data InAppProductsDelete' = InAppProductsDelete'
 --
 -- * 'iapdSKU'
 inAppProductsDelete'
-    :: Text -- ^ 'packageName'
-    -> Text -- ^ 'sku'
+    :: Text -- ^ 'iapdPackageName'
+    -> Text -- ^ 'iapdSKU'
     -> InAppProductsDelete'
 inAppProductsDelete' pIapdPackageName_ pIapdSKU_ =
     InAppProductsDelete'

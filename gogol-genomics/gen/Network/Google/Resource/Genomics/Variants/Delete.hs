@@ -22,7 +22,7 @@
 --
 -- Deletes a variant.
 --
--- /See:/ < Genomics API Reference> for @GenomicsVariantsDelete@.
+-- /See:/ < Genomics API Reference> for @genomics.variants.delete@.
 module Network.Google.Resource.Genomics.Variants.Delete
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Genomics.Variants.Delete
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GenomicsVariantsDelete@ method which the
+-- | A resource alias for @genomics.variants.delete@ method which the
 -- 'VariantsDelete'' request conforms to.
 type VariantsDeleteResource =
      "v1" :>
@@ -95,7 +95,7 @@ data VariantsDelete' = VariantsDelete'
 --
 -- * 'vdCallback'
 variantsDelete'
-    :: Text -- ^ 'variantId'
+    :: Text -- ^ 'vdVariantId'
     -> VariantsDelete'
 variantsDelete' pVdVariantId_ =
     VariantsDelete'

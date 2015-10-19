@@ -22,7 +22,7 @@
 --
 -- Delete a page by ID.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesDelete@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pages.delete@.
 module Network.Google.Resource.Blogger.Pages.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Blogger.Pages.Delete
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPagesDelete@ method which the
+-- | A resource alias for @blogger.pages.delete@ method which the
 -- 'PagesDelete'' request conforms to.
 type PagesDeleteResource =
      "blogs" :>
@@ -65,8 +65,8 @@ data PagesDelete' = PagesDelete'
 --
 -- * 'pddPageId'
 pagesDelete'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'pageId'
+    :: Text -- ^ 'pddBlogId'
+    -> Text -- ^ 'pddPageId'
     -> PagesDelete'
 pagesDelete' pPddBlogId_ pPddPageId_ =
     PagesDelete'

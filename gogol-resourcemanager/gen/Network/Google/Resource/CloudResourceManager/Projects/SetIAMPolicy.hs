@@ -24,7 +24,7 @@
 -- currently support \'domain:\' prefixed members in a Binding of a Policy.
 -- Calling this method requires enabling the App Engine Admin API.
 --
--- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerProjectsSetIAMPolicy@.
+-- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.setIamPolicy@.
 module Network.Google.Resource.CloudResourceManager.Projects.SetIAMPolicy
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.CloudResourceManager.Projects.SetIAMPolicy
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
--- | A resource alias for @CloudResourceManagerProjectsSetIAMPolicy@ method which the
+-- | A resource alias for @cloudresourcemanager.projects.setIamPolicy@ method which the
 -- 'ProjectsSetIAMPolicy'' request conforms to.
 type ProjectsSetIAMPolicyResource =
      "v1beta1" :>
@@ -105,8 +105,8 @@ data ProjectsSetIAMPolicy' = ProjectsSetIAMPolicy'
 --
 -- * 'psipCallback'
 projectsSetIAMPolicy'
-    :: SetIAMPolicyRequest -- ^ 'payload'
-    -> Text -- ^ 'resource'
+    :: SetIAMPolicyRequest -- ^ 'psipPayload'
+    -> Text -- ^ 'psipResource'
     -> ProjectsSetIAMPolicy'
 projectsSetIAMPolicy' pPsipPayload_ pPsipResource_ =
     ProjectsSetIAMPolicy'

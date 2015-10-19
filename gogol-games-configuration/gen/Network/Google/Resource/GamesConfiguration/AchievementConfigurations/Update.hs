@@ -22,7 +22,7 @@
 --
 -- Update the metadata of the achievement configuration with the given ID.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationAchievementConfigurationsUpdate@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @gamesConfiguration.achievementConfigurations.update@.
 module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Update
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Upda
 import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesConfigurationAchievementConfigurationsUpdate@ method which the
+-- | A resource alias for @gamesConfiguration.achievementConfigurations.update@ method which the
 -- 'AchievementConfigurationsUpdate'' request conforms to.
 type AchievementConfigurationsUpdateResource =
      "achievements" :>
@@ -65,8 +65,8 @@ data AchievementConfigurationsUpdate' = AchievementConfigurationsUpdate'
 --
 -- * 'acuPayload'
 achievementConfigurationsUpdate'
-    :: Text -- ^ 'achievementId'
-    -> AchievementConfiguration -- ^ 'payload'
+    :: Text -- ^ 'acuAchievementId'
+    -> AchievementConfiguration -- ^ 'acuPayload'
     -> AchievementConfigurationsUpdate'
 achievementConfigurationsUpdate' pAcuAchievementId_ pAcuPayload_ =
     AchievementConfigurationsUpdate'

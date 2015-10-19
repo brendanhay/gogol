@@ -22,7 +22,7 @@
 --
 -- Marks a comment as spam.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerCommentsMarkAsSpam@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.comments.markAsSpam@.
 module Network.Google.Resource.Blogger.Comments.MarkAsSpam
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Blogger.Comments.MarkAsSpam
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerCommentsMarkAsSpam@ method which the
+-- | A resource alias for @blogger.comments.markAsSpam@ method which the
 -- 'CommentsMarkAsSpam'' request conforms to.
 type CommentsMarkAsSpamResource =
      "blogs" :>
@@ -72,9 +72,9 @@ data CommentsMarkAsSpam' = CommentsMarkAsSpam'
 --
 -- * 'cmasCommentId'
 commentsMarkAsSpam'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'postId'
-    -> Text -- ^ 'commentId'
+    :: Text -- ^ 'cmasBlogId'
+    -> Text -- ^ 'cmasPostId'
+    -> Text -- ^ 'cmasCommentId'
     -> CommentsMarkAsSpam'
 commentsMarkAsSpam' pCmasBlogId_ pCmasPostId_ pCmasCommentId_ =
     CommentsMarkAsSpam'

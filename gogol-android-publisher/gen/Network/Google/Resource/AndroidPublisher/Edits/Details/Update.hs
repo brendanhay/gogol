@@ -22,7 +22,7 @@
 --
 -- Updates app details for this edit.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsDetailsUpdate@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.details.update@.
 module Network.Google.Resource.AndroidPublisher.Edits.Details.Update
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.Details.Update
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsDetailsUpdate@ method which the
+-- | A resource alias for @androidpublisher.edits.details.update@ method which the
 -- 'EditsDetailsUpdate'' request conforms to.
 type EditsDetailsUpdateResource =
      Capture "packageName" Text :>
@@ -70,9 +70,9 @@ data EditsDetailsUpdate' = EditsDetailsUpdate'
 --
 -- * 'eduEditId'
 editsDetailsUpdate'
-    :: Text -- ^ 'packageName'
-    -> AppDetails -- ^ 'payload'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eduPackageName'
+    -> AppDetails -- ^ 'eduPayload'
+    -> Text -- ^ 'eduEditId'
     -> EditsDetailsUpdate'
 editsDetailsUpdate' pEduPackageName_ pEduPayload_ pEduEditId_ =
     EditsDetailsUpdate'

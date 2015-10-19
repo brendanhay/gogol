@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of URLs shortened by a user.
 --
--- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference> for @URLshortenerURLList@.
+-- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference> for @urlshortener.url.list@.
 module Network.Google.Resource.URLShortener.URL.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.URLShortener.URL.List
 import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types
 
--- | A resource alias for @URLshortenerURLList@ method which the
+-- | A resource alias for @urlshortener.url.list@ method which the
 -- 'URLList'' request conforms to.
 type URLListResource =
      "url" :>

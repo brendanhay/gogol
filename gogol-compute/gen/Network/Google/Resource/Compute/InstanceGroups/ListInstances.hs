@@ -22,7 +22,7 @@
 --
 -- Lists the instances in the specified instance group.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsListInstances@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instanceGroups.listInstances@.
 module Network.Google.Resource.Compute.InstanceGroups.ListInstances
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.Compute.InstanceGroups.ListInstances
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstanceGroupsListInstances@ method which the
+-- | A resource alias for @compute.instanceGroups.listInstances@ method which the
 -- 'InstanceGroupsListInstances'' request conforms to.
 type InstanceGroupsListInstancesResource =
      Capture "project" Text :>
@@ -92,10 +92,10 @@ data InstanceGroupsListInstances' = InstanceGroupsListInstances'
 --
 -- * 'igliMaxResults'
 instanceGroupsListInstances'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'zone'
-    -> InstanceGroupsListInstancesRequest -- ^ 'payload'
-    -> Text -- ^ 'instanceGroup'
+    :: Text -- ^ 'igliProject'
+    -> Text -- ^ 'igliZone'
+    -> InstanceGroupsListInstancesRequest -- ^ 'igliPayload'
+    -> Text -- ^ 'igliInstanceGroup'
     -> InstanceGroupsListInstances'
 instanceGroupsListInstances' pIgliProject_ pIgliZone_ pIgliPayload_ pIgliInstanceGroup_ =
     InstanceGroupsListInstances'

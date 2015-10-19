@@ -22,7 +22,7 @@
 --
 -- Gets application deployment information.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesVersionsGet@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @appengine.apps.modules.versions.get@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Get
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Get
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppEngineAppsModulesVersionsGet@ method which the
+-- | A resource alias for @appengine.apps.modules.versions.get@ method which the
 -- 'AppsModulesVersionsGet'' request conforms to.
 type AppsModulesVersionsGetResource =
      "v1beta4" :>
@@ -113,9 +113,9 @@ data AppsModulesVersionsGet' = AppsModulesVersionsGet'
 --
 -- * 'amvgCallback'
 appsModulesVersionsGet'
-    :: Text -- ^ 'versionsId'
-    -> Text -- ^ 'modulesId'
-    -> Text -- ^ 'appsId'
+    :: Text -- ^ 'amvgVersionsId'
+    -> Text -- ^ 'amvgModulesId'
+    -> Text -- ^ 'amvgAppsId'
     -> AppsModulesVersionsGet'
 appsModulesVersionsGet' pAmvgVersionsId_ pAmvgModulesId_ pAmvgAppsId_ =
     AppsModulesVersionsGet'

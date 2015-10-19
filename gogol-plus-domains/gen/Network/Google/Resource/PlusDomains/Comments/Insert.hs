@@ -22,7 +22,7 @@
 --
 -- Create a new comment in reply to an activity.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCommentsInsert@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.comments.insert@.
 module Network.Google.Resource.PlusDomains.Comments.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.PlusDomains.Comments.Insert
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsCommentsInsert@ method which the
+-- | A resource alias for @plusDomains.comments.insert@ method which the
 -- 'CommentsInsert'' request conforms to.
 type CommentsInsertResource =
      "activities" :>
@@ -65,8 +65,8 @@ data CommentsInsert' = CommentsInsert'
 --
 -- * 'ciPayload'
 commentsInsert'
-    :: Text -- ^ 'activityId'
-    -> Comment -- ^ 'payload'
+    :: Text -- ^ 'ciActivityId'
+    -> Comment -- ^ 'ciPayload'
     -> CommentsInsert'
 commentsInsert' pCiActivityId_ pCiPayload_ =
     CommentsInsert'

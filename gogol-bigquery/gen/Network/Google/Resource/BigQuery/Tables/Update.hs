@@ -24,7 +24,7 @@
 -- entire table resource, whereas the patch method only replaces fields
 -- that are provided in the submitted table resource.
 --
--- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryTablesUpdate@.
+-- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @bigquery.tables.update@.
 module Network.Google.Resource.BigQuery.Tables.Update
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.BigQuery.Tables.Update
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BigQueryTablesUpdate@ method which the
+-- | A resource alias for @bigquery.tables.update@ method which the
 -- 'TablesUpdate'' request conforms to.
 type TablesUpdateResource =
      "projects" :>
@@ -80,10 +80,10 @@ data TablesUpdate' = TablesUpdate'
 --
 -- * 'tuTableId'
 tablesUpdate'
-    :: Table -- ^ 'payload'
-    -> Text -- ^ 'datasetId'
-    -> Text -- ^ 'projectId'
-    -> Text -- ^ 'tableId'
+    :: Table -- ^ 'tuPayload'
+    -> Text -- ^ 'tuDatasetId'
+    -> Text -- ^ 'tuProjectId'
+    -> Text -- ^ 'tuTableId'
     -> TablesUpdate'
 tablesUpdate' pTuPayload_ pTuDatasetId_ pTuProjectId_ pTuTableId_ =
     TablesUpdate'

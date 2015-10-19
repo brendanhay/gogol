@@ -22,7 +22,7 @@
 --
 -- List a specific saved ad style for the specified account.
 --
--- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsSavedadstylesGet@.
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.savedadstyles.get@.
 module Network.Google.Resource.AdSense.Accounts.Savedadstyles.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdSense.Accounts.Savedadstyles.Get
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdsenseAccountsSavedadstylesGet@ method which the
+-- | A resource alias for @adsense.accounts.savedadstyles.get@ method which the
 -- 'AccountsSavedadstylesGet'' request conforms to.
 type AccountsSavedadstylesGetResource =
      "accounts" :>
@@ -65,8 +65,8 @@ data AccountsSavedadstylesGet' = AccountsSavedadstylesGet'
 --
 -- * 'asgAccountId'
 accountsSavedadstylesGet'
-    :: Text -- ^ 'savedAdStyleId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'asgSavedAdStyleId'
+    -> Text -- ^ 'asgAccountId'
     -> AccountsSavedadstylesGet'
 accountsSavedadstylesGet' pAsgSavedAdStyleId_ pAsgAccountId_ =
     AccountsSavedadstylesGet'

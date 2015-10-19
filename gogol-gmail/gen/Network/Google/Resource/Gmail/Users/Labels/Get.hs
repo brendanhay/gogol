@@ -22,7 +22,7 @@
 --
 -- Gets the specified label.
 --
--- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersLabelsGet@.
+-- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.labels.get@.
 module Network.Google.Resource.Gmail.Users.Labels.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Gmail.Users.Labels.Get
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GmailUsersLabelsGet@ method which the
+-- | A resource alias for @gmail.users.labels.get@ method which the
 -- 'UsersLabelsGet'' request conforms to.
 type UsersLabelsGetResource =
      Capture "userId" Text :>
@@ -64,7 +64,7 @@ data UsersLabelsGet' = UsersLabelsGet'
 --
 -- * 'ulgId'
 usersLabelsGet'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'ulgId'
     -> Text
     -> UsersLabelsGet'
 usersLabelsGet' pUlgUserId_ pUlgId_ =

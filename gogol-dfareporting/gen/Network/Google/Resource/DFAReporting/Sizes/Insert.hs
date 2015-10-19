@@ -22,7 +22,7 @@
 --
 -- Inserts a new size.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSizesInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.sizes.insert@.
 module Network.Google.Resource.DFAReporting.Sizes.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Sizes.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingSizesInsert@ method which the
+-- | A resource alias for @dfareporting.sizes.insert@ method which the
 -- 'SizesInsert'' request conforms to.
 type SizesInsertResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data SizesInsert' = SizesInsert'
 --
 -- * 'sPayload'
 sizesInsert'
-    :: Int64 -- ^ 'profileId'
-    -> Size -- ^ 'payload'
+    :: Int64 -- ^ 'sProFileId'
+    -> Size -- ^ 'sPayload'
     -> SizesInsert'
 sizesInsert' pSProFileId_ pSPayload_ =
     SizesInsert'

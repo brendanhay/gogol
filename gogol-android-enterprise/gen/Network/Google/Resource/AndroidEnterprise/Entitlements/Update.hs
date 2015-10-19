@@ -22,7 +22,7 @@
 --
 -- Adds or updates an entitlement to an app for a user.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEntitlementsUpdate@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.entitlements.update@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Update
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEntitlementsUpdate@ method which the
+-- | A resource alias for @androidenterprise.entitlements.update@ method which the
 -- 'EntitlementsUpdate'' request conforms to.
 type EntitlementsUpdateResource =
      "enterprises" :>
@@ -82,10 +82,10 @@ data EntitlementsUpdate' = EntitlementsUpdate'
 --
 -- * 'entUserId'
 entitlementsUpdate'
-    :: Text -- ^ 'entitlementId'
-    -> Text -- ^ 'enterpriseId'
-    -> Entitlement -- ^ 'payload'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'entEntitlementId'
+    -> Text -- ^ 'entEnterpriseId'
+    -> Entitlement -- ^ 'entPayload'
+    -> Text -- ^ 'entUserId'
     -> EntitlementsUpdate'
 entitlementsUpdate' pEntEntitlementId_ pEntEnterpriseId_ pEntPayload_ pEntUserId_ =
     EntitlementsUpdate'

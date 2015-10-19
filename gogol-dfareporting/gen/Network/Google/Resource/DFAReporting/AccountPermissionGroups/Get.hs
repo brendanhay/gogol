@@ -22,7 +22,7 @@
 --
 -- Gets one account permission group by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAccountPermissionGroupsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.accountPermissionGroups.get@.
 module Network.Google.Resource.DFAReporting.AccountPermissionGroups.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.AccountPermissionGroups.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAccountPermissionGroupsGet@ method which the
+-- | A resource alias for @dfareporting.accountPermissionGroups.get@ method which the
 -- 'AccountPermissionGroupsGet'' request conforms to.
 type AccountPermissionGroupsGetResource =
      "userprofiles" :>
@@ -66,8 +66,8 @@ data AccountPermissionGroupsGet' = AccountPermissionGroupsGet'
 --
 -- * 'apggId'
 accountPermissionGroupsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'apggProFileId'
+    -> Int64 -- ^ 'apggId'
     -> AccountPermissionGroupsGet'
 accountPermissionGroupsGet' pApggProFileId_ pApggId_ =
     AccountPermissionGroupsGet'

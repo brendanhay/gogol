@@ -22,7 +22,7 @@
 --
 -- Updates an existing user in a Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLUsersUpdate@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.users.update@.
 module Network.Google.Resource.SQL.Users.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.SQL.Users.Update
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLUsersUpdate@ method which the
+-- | A resource alias for @sql.users.update@ method which the
 -- 'UsersUpdate'' request conforms to.
 type UsersUpdateResource =
      "projects" :>
@@ -81,11 +81,11 @@ data UsersUpdate' = UsersUpdate'
 --
 -- * 'uuInstance'
 usersUpdate'
-    :: Text -- ^ 'project'
-    -> User -- ^ 'payload'
-    -> Text -- ^ 'name'
-    -> Text -- ^ 'host'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'uuProject'
+    -> User -- ^ 'uuPayload'
+    -> Text -- ^ 'uuName'
+    -> Text -- ^ 'uuHost'
+    -> Text -- ^ 'uuInstance'
     -> UsersUpdate'
 usersUpdate' pUuProject_ pUuPayload_ pUuName_ pUuHost_ pUuInstance_ =
     UsersUpdate'

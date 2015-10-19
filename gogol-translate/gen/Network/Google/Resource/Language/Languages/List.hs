@@ -22,7 +22,7 @@
 --
 -- List the source\/target languages supported by the API
 --
--- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference> for @LanguageLanguagesList@.
+-- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference> for @language.languages.list@.
 module Network.Google.Resource.Language.Languages.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Language.Languages.List
 import           Network.Google.Prelude
 import           Network.Google.Translate.Types
 
--- | A resource alias for @LanguageLanguagesList@ method which the
+-- | A resource alias for @language.languages.list@ method which the
 -- 'LanguagesList'' request conforms to.
 type LanguagesListResource =
      "v2" :>

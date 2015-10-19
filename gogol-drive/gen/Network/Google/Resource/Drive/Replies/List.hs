@@ -22,7 +22,7 @@
 --
 -- Lists all of the replies to a comment.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRepliesList@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.replies.list@.
 module Network.Google.Resource.Drive.Replies.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Drive.Replies.List
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DriveRepliesList@ method which the
+-- | A resource alias for @drive.replies.list@ method which the
 -- 'RepliesList'' request conforms to.
 type RepliesListResource =
      "files" :>
@@ -82,8 +82,8 @@ data RepliesList' = RepliesList'
 --
 -- * 'rllIncludeDeleted'
 repliesList'
-    :: Text -- ^ 'fileId'
-    -> Text -- ^ 'commentId'
+    :: Text -- ^ 'rllFileId'
+    -> Text -- ^ 'rllCommentId'
     -> RepliesList'
 repliesList' pRllFileId_ pRllCommentId_ =
     RepliesList'

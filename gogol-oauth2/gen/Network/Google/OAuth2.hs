@@ -26,18 +26,18 @@ module Network.Google.OAuth2
 
     -- * Methods
 
-    -- ** OAuth2GetCertForOpenIdConnect
+    -- ** oauth2.getCertForOpenIdConnect
     , module Network.Google.Method.OAuth2.GetCertForOpenIdConnect
 
-    -- ** OAuth2TokenInfo
+    -- ** oauth2.tokeninfo
     , module Network.Google.Method.OAuth2.TokenInfo
 
     -- * Resources
 
-    -- ** OAuth2UserInfoGet
+    -- ** oauth2.userinfo.get
     , module Network.Google.Resource.OAuth2.UserInfo.Get
 
-    -- ** OAuth2UserInfoV2MeGet
+    -- ** oauth2.userinfo.v2.me.get
     , module Network.Google.Resource.OAuth2.UserInfo.V2.Me.Get
 
     -- * Types

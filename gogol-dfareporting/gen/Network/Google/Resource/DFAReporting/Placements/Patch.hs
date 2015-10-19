@@ -22,7 +22,7 @@
 --
 -- Updates an existing placement. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementsPatch@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.placements.patch@.
 module Network.Google.Resource.DFAReporting.Placements.Patch
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.Placements.Patch
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingPlacementsPatch@ method which the
+-- | A resource alias for @dfareporting.placements.patch@ method which the
 -- 'PlacementsPatch'' request conforms to.
 type PlacementsPatchResource =
      "userprofiles" :>
@@ -70,9 +70,9 @@ data PlacementsPatch' = PlacementsPatch'
 --
 -- * 'ppId'
 placementsPatch'
-    :: Int64 -- ^ 'profileId'
-    -> Placement -- ^ 'payload'
-    -> Int64 -- ^ 'id'
+    :: Int64 -- ^ 'ppProFileId'
+    -> Placement -- ^ 'ppPayload'
+    -> Int64 -- ^ 'ppId'
     -> PlacementsPatch'
 placementsPatch' pPpProFileId_ pPpPayload_ pPpId_ =
     PlacementsPatch'

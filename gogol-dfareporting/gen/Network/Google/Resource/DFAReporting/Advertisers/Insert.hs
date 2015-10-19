@@ -22,7 +22,7 @@
 --
 -- Inserts a new advertiser.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertisersInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.advertisers.insert@.
 module Network.Google.Resource.DFAReporting.Advertisers.Insert
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.Advertisers.Insert
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingAdvertisersInsert@ method which the
+-- | A resource alias for @dfareporting.advertisers.insert@ method which the
 -- 'AdvertisersInsert'' request conforms to.
 type AdvertisersInsertResource =
      "userprofiles" :>
@@ -65,8 +65,8 @@ data AdvertisersInsert' = AdvertisersInsert'
 --
 -- * 'aiiPayload'
 advertisersInsert'
-    :: Int64 -- ^ 'profileId'
-    -> Advertiser -- ^ 'payload'
+    :: Int64 -- ^ 'aiiProFileId'
+    -> Advertiser -- ^ 'aiiPayload'
     -> AdvertisersInsert'
 advertisersInsert' pAiiProFileId_ pAiiPayload_ =
     AdvertisersInsert'

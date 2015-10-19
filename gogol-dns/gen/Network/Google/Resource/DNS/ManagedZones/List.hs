@@ -22,7 +22,7 @@
 --
 -- Enumerate ManagedZones that have been created but not yet deleted.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSManagedZonesList@.
+-- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.managedZones.list@.
 module Network.Google.Resource.DNS.ManagedZones.List
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.DNS.ManagedZones.List
 import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DNSManagedZonesList@ method which the
+-- | A resource alias for @dns.managedZones.list@ method which the
 -- 'ManagedZonesList'' request conforms to.
 type ManagedZonesListResource =
      Capture "project" Text :>
@@ -75,7 +75,7 @@ data ManagedZonesList' = ManagedZonesList'
 --
 -- * 'mzlMaxResults'
 managedZonesList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'mzlProject'
     -> ManagedZonesList'
 managedZonesList' pMzlProject_ =
     ManagedZonesList'

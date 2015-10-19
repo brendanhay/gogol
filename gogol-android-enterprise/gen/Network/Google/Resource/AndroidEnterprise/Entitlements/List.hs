@@ -22,7 +22,7 @@
 --
 -- List of all entitlements for the specified user. Only the ID is set.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEntitlementsList@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.entitlements.list@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.List
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseEntitlementsList@ method which the
+-- | A resource alias for @androidenterprise.entitlements.list@ method which the
 -- 'EntitlementsList'' request conforms to.
 type EntitlementsListResource =
      "enterprises" :>
@@ -67,8 +67,8 @@ data EntitlementsList' = EntitlementsList'
 --
 -- * 'elUserId'
 entitlementsList'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'userId'
+    :: Text -- ^ 'elEnterpriseId'
+    -> Text -- ^ 'elUserId'
     -> EntitlementsList'
 entitlementsList' pElEnterpriseId_ pElUserId_ =
     EntitlementsList'

@@ -22,7 +22,7 @@
 --
 -- Returns a list of videos that match the API request parameters.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosList@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.videos.list@.
 module Network.Google.Resource.YouTube.Videos.List
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.YouTube.Videos.List
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeVideosList@ method which the
+-- | A resource alias for @youtube.videos.list@ method which the
 -- 'VideosList'' request conforms to.
 type VideosListResource =
      "videos" :>
@@ -110,7 +110,7 @@ data VideosList' = VideosList'
 --
 -- * 'vlMaxResults'
 videosList'
-    :: Text -- ^ 'part'
+    :: Text -- ^ 'vlPart'
     -> VideosList'
 videosList' pVlPart_ =
     VideosList'

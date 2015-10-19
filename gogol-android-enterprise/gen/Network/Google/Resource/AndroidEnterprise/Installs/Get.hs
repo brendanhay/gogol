@@ -22,7 +22,7 @@
 --
 -- Retrieves details of an installation of an app on a device.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseInstallsGet@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.installs.get@.
 module Network.Google.Resource.AndroidEnterprise.Installs.Get
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Get
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseInstallsGet@ method which the
+-- | A resource alias for @androidenterprise.installs.get@ method which the
 -- 'InstallsGet'' request conforms to.
 type InstallsGetResource =
      "enterprises" :>
@@ -77,10 +77,10 @@ data InstallsGet' = InstallsGet'
 --
 -- * 'igDeviceId'
 installsGet'
-    :: Text -- ^ 'enterpriseId'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'installId'
-    -> Text -- ^ 'deviceId'
+    :: Text -- ^ 'igEnterpriseId'
+    -> Text -- ^ 'igUserId'
+    -> Text -- ^ 'igInstallId'
+    -> Text -- ^ 'igDeviceId'
     -> InstallsGet'
 installsGet' pIgEnterpriseId_ pIgUserId_ pIgInstallId_ pIgDeviceId_ =
     InstallsGet'

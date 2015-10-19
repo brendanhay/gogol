@@ -22,7 +22,7 @@
 --
 -- Fetch the representation of an existing Change.
 --
--- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSChangesGet@.
+-- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @dns.changes.get@.
 module Network.Google.Resource.DNS.Changes.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DNS.Changes.Get
 import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DNSChangesGet@ method which the
+-- | A resource alias for @dns.changes.get@ method which the
 -- 'ChangesGet'' request conforms to.
 type ChangesGetResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data ChangesGet' = ChangesGet'
 --
 -- * 'cgManagedZone'
 changesGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'changeId'
-    -> Text -- ^ 'managedZone'
+    :: Text -- ^ 'cgProject'
+    -> Text -- ^ 'cgChangeId'
+    -> Text -- ^ 'cgManagedZone'
     -> ChangesGet'
 changesGet' pCgProject_ pCgChangeId_ pCgManagedZone_ =
     ChangesGet'

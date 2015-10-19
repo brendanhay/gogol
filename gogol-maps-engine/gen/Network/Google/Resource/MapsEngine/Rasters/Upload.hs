@@ -22,7 +22,7 @@
 --
 -- Create a skeleton raster asset for upload.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRastersUpload@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.rasters.upload@.
 module Network.Google.Resource.MapsEngine.Rasters.Upload
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.Rasters.Upload
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRastersUpload@ method which the
+-- | A resource alias for @mapsengine.rasters.upload@ method which the
 -- 'RastersUpload'' request conforms to.
 type RastersUploadResource =
      "rasters" :>
@@ -60,7 +60,7 @@ newtype RastersUpload' = RastersUpload'
 --
 -- * 'ruPayload'
 rastersUpload'
-    :: Raster -- ^ 'payload'
+    :: Raster -- ^ 'ruPayload'
     -> RastersUpload'
 rastersUpload' pRuPayload_ =
     RastersUpload'

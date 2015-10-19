@@ -26,7 +26,7 @@
 -- \`INVALID_ARGUMENT\` if the query argument is malformed. * \`NOT_FOUND\`
 -- if any users specified in the query arguments do not exist.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesList@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.list@.
 module Network.Google.Resource.Classroom.Courses.List
     (
     -- * REST Resource
@@ -53,7 +53,7 @@ module Network.Google.Resource.Classroom.Courses.List
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomCoursesList@ method which the
+-- | A resource alias for @classroom.courses.list@ method which the
 -- 'CoursesList'' request conforms to.
 type CoursesListResource =
      "v1" :>

@@ -25,7 +25,7 @@
 -- the requested invitation or for access errors. * \`NOT_FOUND\` if no
 -- invitation exists with the requested ID.
 --
--- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomInvitationsDelete@.
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.invitations.delete@.
 module Network.Google.Resource.Classroom.Invitations.Delete
     (
     -- * REST Resource
@@ -49,7 +49,7 @@ module Network.Google.Resource.Classroom.Invitations.Delete
 import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ClassroomInvitationsDelete@ method which the
+-- | A resource alias for @classroom.invitations.delete@ method which the
 -- 'InvitationsDelete'' request conforms to.
 type InvitationsDeleteResource =
      "v1" :>
@@ -101,7 +101,7 @@ data InvitationsDelete' = InvitationsDelete'
 --
 -- * 'idCallback'
 invitationsDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'idId'
     -> InvitationsDelete'
 invitationsDelete' pIdId_ =
     InvitationsDelete'

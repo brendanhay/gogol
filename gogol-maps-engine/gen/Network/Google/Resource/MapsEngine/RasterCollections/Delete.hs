@@ -22,7 +22,7 @@
 --
 -- Delete a raster collection.
 --
--- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRasterCollectionsDelete@.
+-- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @mapsengine.rasterCollections.delete@.
 module Network.Google.Resource.MapsEngine.RasterCollections.Delete
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Delete
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @MapsEngineRasterCollectionsDelete@ method which the
+-- | A resource alias for @mapsengine.rasterCollections.delete@ method which the
 -- 'RasterCollectionsDelete'' request conforms to.
 type RasterCollectionsDeleteResource =
      "rasterCollections" :>
@@ -59,7 +59,7 @@ newtype RasterCollectionsDelete' = RasterCollectionsDelete'
 --
 -- * 'rcdId'
 rasterCollectionsDelete'
-    :: Text -- ^ 'id'
+    :: Text -- ^ 'rcdId'
     -> RasterCollectionsDelete'
 rasterCollectionsDelete' pRcdId_ =
     RasterCollectionsDelete'

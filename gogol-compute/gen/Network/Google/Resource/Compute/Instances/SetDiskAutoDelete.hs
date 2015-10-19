@@ -22,7 +22,7 @@
 --
 -- Sets the auto-delete flag for a disk attached to an instance.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesSetDiskAutoDelete@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.instances.setDiskAutoDelete@.
 module Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeInstancesSetDiskAutoDelete@ method which the
+-- | A resource alias for @compute.instances.setDiskAutoDelete@ method which the
 -- 'InstancesSetDiskAutoDelete'' request conforms to.
 type InstancesSetDiskAutoDeleteResource =
      Capture "project" Text :>
@@ -81,11 +81,11 @@ data InstancesSetDiskAutoDelete' = InstancesSetDiskAutoDelete'
 --
 -- * 'isdadInstance'
 instancesSetDiskAutoDelete'
-    :: Text -- ^ 'project'
-    -> Bool -- ^ 'autoDelete'
-    -> Text -- ^ 'zone'
-    -> Text -- ^ 'deviceName'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'isdadProject'
+    -> Bool -- ^ 'isdadAutoDelete'
+    -> Text -- ^ 'isdadZone'
+    -> Text -- ^ 'isdadDeviceName'
+    -> Text -- ^ 'isdadInstance'
     -> InstancesSetDiskAutoDelete'
 instancesSetDiskAutoDelete' pIsdadProject_ pIsdadAutoDelete_ pIsdadZone_ pIsdadDeviceName_ pIsdadInstance_ =
     InstancesSetDiskAutoDelete'

@@ -22,7 +22,7 @@
 --
 -- Returns a specified persistent disk.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDisksGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.disks.get@.
 module Network.Google.Resource.Compute.Disks.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.Disks.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeDisksGet@ method which the
+-- | A resource alias for @compute.disks.get@ method which the
 -- 'DisksGet'' request conforms to.
 type DisksGetResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data DisksGet' = DisksGet'
 --
 -- * 'dgZone'
 disksGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'disk'
-    -> Text -- ^ 'zone'
+    :: Text -- ^ 'dgProject'
+    -> Text -- ^ 'dgDisk'
+    -> Text -- ^ 'dgZone'
     -> DisksGet'
 disksGet' pDgProject_ pDgDisk_ pDgZone_ =
     DisksGet'

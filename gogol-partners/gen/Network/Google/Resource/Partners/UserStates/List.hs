@@ -22,7 +22,7 @@
 --
 -- Lists states for current user.
 --
--- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @PartnersUserStatesList@.
+-- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @partners.userStates.list@.
 module Network.Google.Resource.Partners.UserStates.List
     (
     -- * REST Resource
@@ -52,7 +52,7 @@ module Network.Google.Resource.Partners.UserStates.List
 import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PartnersUserStatesList@ method which the
+-- | A resource alias for @partners.userStates.list@ method which the
 -- 'UserStatesList'' request conforms to.
 type UserStatesListResource =
      "v2" :>

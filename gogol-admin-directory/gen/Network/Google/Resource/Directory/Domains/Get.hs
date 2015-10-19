@@ -22,7 +22,7 @@
 --
 -- Retrives a domain of the customer.
 --
--- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryDomainsGet@.
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @directory.domains.get@.
 module Network.Google.Resource.Directory.Domains.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Directory.Domains.Get
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DirectoryDomainsGet@ method which the
+-- | A resource alias for @directory.domains.get@ method which the
 -- 'DomainsGet'' request conforms to.
 type DomainsGetResource =
      "customer" :>
@@ -65,8 +65,8 @@ data DomainsGet' = DomainsGet'
 --
 -- * 'dgDomainName'
 domainsGet'
-    :: Text -- ^ 'customer'
-    -> Text -- ^ 'domainName'
+    :: Text -- ^ 'dgCustomer'
+    -> Text -- ^ 'dgDomainName'
     -> DomainsGet'
 domainsGet' pDgCustomer_ pDgDomainName_ =
     DomainsGet'

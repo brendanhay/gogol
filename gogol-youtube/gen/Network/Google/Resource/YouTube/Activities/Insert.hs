@@ -28,7 +28,7 @@
 -- would use the API\'s videos.rate() method to rate a video and the
 -- playlistItems.insert() method to mark a video as a favorite.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeActivitiesInsert@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.activities.insert@.
 module Network.Google.Resource.YouTube.Activities.Insert
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.YouTube.Activities.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeActivitiesInsert@ method which the
+-- | A resource alias for @youtube.activities.insert@ method which the
 -- 'ActivitiesInsert'' request conforms to.
 type ActivitiesInsertResource =
      "activities" :>
@@ -76,8 +76,8 @@ data ActivitiesInsert' = ActivitiesInsert'
 --
 -- * 'aiPayload'
 activitiesInsert'
-    :: Text -- ^ 'part'
-    -> Activity -- ^ 'payload'
+    :: Text -- ^ 'aiPart'
+    -> Activity -- ^ 'aiPayload'
     -> ActivitiesInsert'
 activitiesInsert' pAiPart_ pAiPayload_ =
     ActivitiesInsert'

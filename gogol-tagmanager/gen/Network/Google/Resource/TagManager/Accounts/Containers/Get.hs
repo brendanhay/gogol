@@ -22,7 +22,7 @@
 --
 -- Gets a Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersGet@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @tagmanager.accounts.containers.get@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Get
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Get
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagManagerAccountsContainersGet@ method which the
+-- | A resource alias for @tagmanager.accounts.containers.get@ method which the
 -- 'AccountsContainersGet'' request conforms to.
 type AccountsContainersGetResource =
      "accounts" :>
@@ -65,8 +65,8 @@ data AccountsContainersGet' = AccountsContainersGet'
 --
 -- * 'acgAccountId'
 accountsContainersGet'
-    :: Text -- ^ 'containerId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'acgContainerId'
+    -> Text -- ^ 'acgAccountId'
     -> AccountsContainersGet'
 accountsContainersGet' pAcgContainerId_ pAcgAccountId_ =
     AccountsContainersGet'

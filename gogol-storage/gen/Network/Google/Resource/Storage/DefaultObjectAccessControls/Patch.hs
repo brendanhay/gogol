@@ -23,7 +23,7 @@
 -- Updates a default object ACL entry on the specified bucket. This method
 -- supports patch semantics.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageDefaultObjectAccessControlsPatch@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.defaultObjectAccessControls.patch@.
 module Network.Google.Resource.Storage.DefaultObjectAccessControls.Patch
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Patch
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageDefaultObjectAccessControlsPatch@ method which the
+-- | A resource alias for @storage.defaultObjectAccessControls.patch@ method which the
 -- 'DefaultObjectAccessControlsPatch'' request conforms to.
 type DefaultObjectAccessControlsPatchResource =
      "b" :>
@@ -73,9 +73,9 @@ data DefaultObjectAccessControlsPatch' = DefaultObjectAccessControlsPatch'
 --
 -- * 'doacpEntity'
 defaultObjectAccessControlsPatch'
-    :: Text -- ^ 'bucket'
-    -> ObjectAccessControl -- ^ 'payload'
-    -> Text -- ^ 'entity'
+    :: Text -- ^ 'doacpBucket'
+    -> ObjectAccessControl -- ^ 'doacpPayload'
+    -> Text -- ^ 'doacpEntity'
     -> DefaultObjectAccessControlsPatch'
 defaultObjectAccessControlsPatch' pDoacpBucket_ pDoacpPayload_ pDoacpEntity_ =
     DefaultObjectAccessControlsPatch'

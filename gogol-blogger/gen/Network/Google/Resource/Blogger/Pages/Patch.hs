@@ -22,7 +22,7 @@
 --
 -- Update a page. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesPatch@.
+-- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @blogger.pages.patch@.
 module Network.Google.Resource.Blogger.Pages.Patch
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.Blogger.Pages.Patch
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BloggerPagesPatch@ method which the
+-- | A resource alias for @blogger.pages.patch@ method which the
 -- 'PagesPatch'' request conforms to.
 type PagesPatchResource =
      "blogs" :>
@@ -80,9 +80,9 @@ data PagesPatch' = PagesPatch'
 --
 -- * 'pagaPublish'
 pagesPatch'
-    :: Text -- ^ 'blogId'
-    -> Text -- ^ 'pageId'
-    -> Page -- ^ 'payload'
+    :: Text -- ^ 'pagaBlogId'
+    -> Text -- ^ 'pagaPageId'
+    -> Page -- ^ 'pagaPayload'
     -> PagesPatch'
 pagesPatch' pPagaBlogId_ pPagaPageId_ pPagaPayload_ =
     PagesPatch'

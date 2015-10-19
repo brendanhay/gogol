@@ -22,7 +22,7 @@
 --
 -- Downloads a report file encoded in UTF-8.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchReportsGetFile@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @doubleclicksearch.reports.getFile@.
 module Network.Google.Resource.DoubleClickSearch.Reports.GetFile
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DoubleClickSearch.Reports.GetFile
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleClicksearchReportsGetFile@ method which the
+-- | A resource alias for @doubleclicksearch.reports.getFile@ method which the
 -- 'ReportsGetFile'' request conforms to.
 type ReportsGetFileResource =
      "reports" :>
@@ -72,8 +72,8 @@ data ReportsGetFile' = ReportsGetFile'
 --
 -- * 'rgfReportFragment'
 reportsGetFile'
-    :: Text -- ^ 'reportId'
-    -> Int32 -- ^ 'reportFragment'
+    :: Text -- ^ 'rgfReportId'
+    -> Int32 -- ^ 'rgfReportFragment'
     -> ReportsGetFile'
 reportsGetFile' pRgfReportId_ pRgfReportFragment_ =
     ReportsGetFile'

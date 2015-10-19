@@ -26,13 +26,13 @@ module Network.Google.Translate
 
     -- * Resources
 
-    -- ** LanguageDetectionsList
+    -- ** language.detections.list
     , module Network.Google.Resource.Language.Detections.List
 
-    -- ** LanguageLanguagesList
+    -- ** language.languages.list
     , module Network.Google.Resource.Language.Languages.List
 
-    -- ** LanguageTranslationsList
+    -- ** language.translations.list
     , module Network.Google.Resource.Language.Translations.List
 
     -- * Types

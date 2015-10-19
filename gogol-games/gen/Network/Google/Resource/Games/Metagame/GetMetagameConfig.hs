@@ -22,7 +22,7 @@
 --
 -- Return the metagame configuration data for the calling application.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesMetagameGetMetagameConfig@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.metagame.getMetagameConfig@.
 module Network.Google.Resource.Games.Metagame.GetMetagameConfig
     (
     -- * REST Resource
@@ -37,7 +37,7 @@ module Network.Google.Resource.Games.Metagame.GetMetagameConfig
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesMetagameGetMetagameConfig@ method which the
+-- | A resource alias for @games.metagame.getMetagameConfig@ method which the
 -- 'MetagameGetMetagameConfig'' request conforms to.
 type MetagameGetMetagameConfigResource =
      "metagameConfig" :>

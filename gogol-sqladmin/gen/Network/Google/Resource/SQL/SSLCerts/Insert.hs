@@ -24,7 +24,7 @@
 -- server certificate authority. The new certificate will not be usable
 -- until the instance is restarted.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLSSLCertsInsert@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.sslCerts.insert@.
 module Network.Google.Resource.SQL.SSLCerts.Insert
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.SQL.SSLCerts.Insert
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLSSLCertsInsert@ method which the
+-- | A resource alias for @sql.sslCerts.insert@ method which the
 -- 'SSLCertsInsert'' request conforms to.
 type SSLCertsInsertResource =
      "projects" :>
@@ -76,9 +76,9 @@ data SSLCertsInsert' = SSLCertsInsert'
 --
 -- * 'sciInstance'
 sslCertsInsert'
-    :: Text -- ^ 'project'
-    -> SSLCertsInsertRequest -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'sciProject'
+    -> SSLCertsInsertRequest -- ^ 'sciPayload'
+    -> Text -- ^ 'sciInstance'
     -> SSLCertsInsert'
 sslCertsInsert' pSciProject_ pSciPayload_ pSciInstance_ =
     SSLCertsInsert'

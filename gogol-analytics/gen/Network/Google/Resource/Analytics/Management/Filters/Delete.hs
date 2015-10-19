@@ -22,7 +22,7 @@
 --
 -- Delete a filter.
 --
--- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementFiltersDelete@.
+-- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @analytics.management.filters.delete@.
 module Network.Google.Resource.Analytics.Management.Filters.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Analytics.Management.Filters.Delete
 import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AnalyticsManagementFiltersDelete@ method which the
+-- | A resource alias for @analytics.management.filters.delete@ method which the
 -- 'ManagementFiltersDelete'' request conforms to.
 type ManagementFiltersDeleteResource =
      "management" :>
@@ -66,8 +66,8 @@ data ManagementFiltersDelete' = ManagementFiltersDelete'
 --
 -- * 'mfdAccountId'
 managementFiltersDelete'
-    :: Text -- ^ 'filterId'
-    -> Text -- ^ 'accountId'
+    :: Text -- ^ 'mfdFilterId'
+    -> Text -- ^ 'mfdAccountId'
     -> ManagementFiltersDelete'
 managementFiltersDelete' pMfdFilterId_ pMfdAccountId_ =
     ManagementFiltersDelete'

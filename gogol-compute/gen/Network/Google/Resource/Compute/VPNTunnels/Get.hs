@@ -22,7 +22,7 @@
 --
 -- Returns the specified VpnTunnel resource.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeVPNTunnelsGet@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.vpnTunnels.get@.
 module Network.Google.Resource.Compute.VPNTunnels.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.VPNTunnels.Get
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeVPNTunnelsGet@ method which the
+-- | A resource alias for @compute.vpnTunnels.get@ method which the
 -- 'VPNTunnelsGet'' request conforms to.
 type VPNTunnelsGetResource =
      Capture "project" Text :>
@@ -70,9 +70,9 @@ data VPNTunnelsGet' = VPNTunnelsGet'
 --
 -- * 'vtgRegion'
 vpnTunnelsGet'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'vpnTunnel'
-    -> Text -- ^ 'region'
+    :: Text -- ^ 'vtgProject'
+    -> Text -- ^ 'vtgVPNTunnel'
+    -> Text -- ^ 'vtgRegion'
     -> VPNTunnelsGet'
 vpnTunnelsGet' pVtgProject_ pVtgVPNTunnel_ pVtgRegion_ =
     VPNTunnelsGet'

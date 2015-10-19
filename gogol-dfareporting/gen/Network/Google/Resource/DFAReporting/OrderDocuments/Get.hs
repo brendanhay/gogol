@@ -22,7 +22,7 @@
 --
 -- Gets one order document by ID.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingOrderDocumentsGet@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.orderDocuments.get@.
 module Network.Google.Resource.DFAReporting.OrderDocuments.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.DFAReporting.OrderDocuments.Get
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingOrderDocumentsGet@ method which the
+-- | A resource alias for @dfareporting.orderDocuments.get@ method which the
 -- 'OrderDocumentsGet'' request conforms to.
 type OrderDocumentsGetResource =
      "userprofiles" :>
@@ -71,9 +71,9 @@ data OrderDocumentsGet' = OrderDocumentsGet'
 --
 -- * 'odgProjectId'
 orderDocumentsGet'
-    :: Int64 -- ^ 'profileId'
-    -> Int64 -- ^ 'id'
-    -> Int64 -- ^ 'projectId'
+    :: Int64 -- ^ 'odgProFileId'
+    -> Int64 -- ^ 'odgId'
+    -> Int64 -- ^ 'odgProjectId'
     -> OrderDocumentsGet'
 orderDocumentsGet' pOdgProFileId_ pOdgId_ pOdgProjectId_ =
     OrderDocumentsGet'

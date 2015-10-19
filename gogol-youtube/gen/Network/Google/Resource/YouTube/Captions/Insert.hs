@@ -22,7 +22,7 @@
 --
 -- Uploads a caption track.
 --
--- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCaptionsInsert@.
+-- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @youtube.captions.insert@.
 module Network.Google.Resource.YouTube.Captions.Insert
     (
     -- * REST Resource
@@ -44,7 +44,7 @@ module Network.Google.Resource.YouTube.Captions.Insert
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
--- | A resource alias for @YouTubeCaptionsInsert@ method which the
+-- | A resource alias for @youtube.captions.insert@ method which the
 -- 'CaptionsInsert'' request conforms to.
 type CaptionsInsertResource =
      "captions" :>
@@ -84,9 +84,9 @@ data CaptionsInsert' = CaptionsInsert'
 --
 -- * 'ciSync'
 captionsInsert'
-    :: Text -- ^ 'part'
-    -> Caption -- ^ 'payload'
-    -> Body -- ^ 'media'
+    :: Text -- ^ 'ciPart'
+    -> Caption -- ^ 'ciPayload'
+    -> Body -- ^ 'ciMedia'
     -> CaptionsInsert'
 captionsInsert' pCiPart_ pCiPayload_ pCiMedia_ =
     CaptionsInsert'

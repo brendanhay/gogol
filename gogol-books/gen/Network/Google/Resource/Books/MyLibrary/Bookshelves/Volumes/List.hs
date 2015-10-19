@@ -22,7 +22,7 @@
 --
 -- Gets volume information for volumes on a bookshelf.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryBookshelvesVolumesList@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.bookshelves.volumes.list@.
 module Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryBookshelvesVolumesList@ method which the
+-- | A resource alias for @books.mylibrary.bookshelves.volumes.list@ method which the
 -- 'MyLibraryBookshelvesVolumesList'' request conforms to.
 type MyLibraryBookshelvesVolumesListResource =
      "mylibrary" :>
@@ -98,7 +98,7 @@ data MyLibraryBookshelvesVolumesList' = MyLibraryBookshelvesVolumesList'
 --
 -- * 'mlbvlShowPreOrders'
 myLibraryBookshelvesVolumesList'
-    :: Text -- ^ 'shelf'
+    :: Text -- ^ 'mlbvlShelf'
     -> MyLibraryBookshelvesVolumesList'
 myLibraryBookshelvesVolumesList' pMlbvlShelf_ =
     MyLibraryBookshelvesVolumesList'

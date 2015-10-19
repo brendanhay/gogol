@@ -22,7 +22,7 @@
 --
 -- Lists a file\'s permissions.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsList@.
+-- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.permissions.list@.
 module Network.Google.Resource.Drive.Permissions.List
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.Drive.Permissions.List
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DrivePermissionsList@ method which the
+-- | A resource alias for @drive.permissions.list@ method which the
 -- 'PermissionsList'' request conforms to.
 type PermissionsListResource =
      "files" :>
@@ -61,7 +61,7 @@ newtype PermissionsList' = PermissionsList'
 --
 -- * 'pllFileId'
 permissionsList'
-    :: Text -- ^ 'fileId'
+    :: Text -- ^ 'pllFileId'
     -> PermissionsList'
 permissionsList' pPllFileId_ =
     PermissionsList'

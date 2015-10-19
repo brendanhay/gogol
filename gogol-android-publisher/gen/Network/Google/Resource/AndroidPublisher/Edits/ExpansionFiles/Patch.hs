@@ -24,7 +24,7 @@
 -- APK\'s Expansion Files. To add a new Expansion File use the Upload
 -- method. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsExpansionFilesPatch@.
+-- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @androidpublisher.edits.expansionfiles.patch@.
 module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Patch
     (
     -- * REST Resource
@@ -45,7 +45,7 @@ module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Patch
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidPublisherEditsExpansionFilesPatch@ method which the
+-- | A resource alias for @androidpublisher.edits.expansionfiles.patch@ method which the
 -- 'EditsExpansionFilesPatch'' request conforms to.
 type EditsExpansionFilesPatchResource =
      Capture "packageName" Text :>
@@ -88,11 +88,11 @@ data EditsExpansionFilesPatch' = EditsExpansionFilesPatch'
 --
 -- * 'eefpEditId'
 editsExpansionFilesPatch'
-    :: Text -- ^ 'packageName'
-    -> Int32 -- ^ 'apkVersionCode'
-    -> ExpansionFile -- ^ 'payload'
-    -> EditsExpansionFilesPatchExpansionFileType -- ^ 'expansionFileType'
-    -> Text -- ^ 'editId'
+    :: Text -- ^ 'eefpPackageName'
+    -> Int32 -- ^ 'eefpAPKVersionCode'
+    -> ExpansionFile -- ^ 'eefpPayload'
+    -> EditsExpansionFilesPatchExpansionFileType -- ^ 'eefpExpansionFileType'
+    -> Text -- ^ 'eefpEditId'
     -> EditsExpansionFilesPatch'
 editsExpansionFilesPatch' pEefpPackageName_ pEefpAPKVersionCode_ pEefpPayload_ pEefpExpansionFileType_ pEefpEditId_ =
     EditsExpansionFilesPatch'

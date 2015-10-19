@@ -23,7 +23,7 @@
 -- Looks up information relevant to a voter based on the voter\'s
 -- registered address.
 --
--- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicInfoElectionsVoterInfoQuery@.
+-- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @civicinfo.elections.voterInfoQuery@.
 module Network.Google.Resource.CivicInfo.Elections.VoterInfoQuery
     (
     -- * REST Resource
@@ -42,7 +42,7 @@ module Network.Google.Resource.CivicInfo.Elections.VoterInfoQuery
 import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CivicInfoElectionsVoterInfoQuery@ method which the
+-- | A resource alias for @civicinfo.elections.voterInfoQuery@ method which the
 -- 'ElectionsVoterInfoQuery'' request conforms to.
 type ElectionsVoterInfoQueryResource =
      "voterinfo" :>
@@ -72,7 +72,7 @@ data ElectionsVoterInfoQuery' = ElectionsVoterInfoQuery'
 --
 -- * 'eviqOfficialOnly'
 electionsVoterInfoQuery'
-    :: Text -- ^ 'address'
+    :: Text -- ^ 'eviqAddress'
     -> ElectionsVoterInfoQuery'
 electionsVoterInfoQuery' pEviqAddress_ =
     ElectionsVoterInfoQuery'

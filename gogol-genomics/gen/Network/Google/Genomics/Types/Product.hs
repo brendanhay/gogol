@@ -34,7 +34,7 @@ newtype ReadInfo = ReadInfo
 --
 -- * 'riAddtional'
 readInfo
-    :: HashMap Text [JSONValue] -- ^ 'addtional'
+    :: HashMap Text [JSONValue] -- ^ 'riAddtional'
     -> ReadInfo
 readInfo pRiAddtional_ =
     ReadInfo
@@ -162,7 +162,7 @@ newtype OperationSchema = OperationSchema
 --
 -- * 'osAddtional'
 operationSchema
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'osAddtional'
     -> OperationSchema
 operationSchema pOsAddtional_ =
     OperationSchema
@@ -1853,7 +1853,7 @@ newtype VariantCallInfo = VariantCallInfo
 --
 -- * 'vciAddtional'
 variantCallInfo
-    :: HashMap Text [JSONValue] -- ^ 'addtional'
+    :: HashMap Text [JSONValue] -- ^ 'vciAddtional'
     -> VariantCallInfo
 variantCallInfo pVciAddtional_ =
     VariantCallInfo
@@ -1886,7 +1886,7 @@ newtype ReadGroupInfo = ReadGroupInfo
 --
 -- * 'rgiAddtional'
 readGroupInfo
-    :: HashMap Text [JSONValue] -- ^ 'addtional'
+    :: HashMap Text [JSONValue] -- ^ 'rgiAddtional'
     -> ReadGroupInfo
 readGroupInfo pRgiAddtional_ =
     ReadGroupInfo
@@ -1917,7 +1917,7 @@ newtype StatusDetailsItem = StatusDetailsItem
 --
 -- * 'sdiAddtional'
 statusDetailsItem
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
     StatusDetailsItem
@@ -2161,7 +2161,7 @@ newtype OperationMetadataRequest = OperationMetadataRequest
 --
 -- * 'omrAddtional'
 operationMetadataRequest
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'omrAddtional'
     -> OperationMetadataRequest
 operationMetadataRequest pOmrAddtional_ =
     OperationMetadataRequest
@@ -2196,7 +2196,7 @@ newtype VariantInfo = VariantInfo
 --
 -- * 'viAddtional'
 variantInfo
-    :: HashMap Text [JSONValue] -- ^ 'addtional'
+    :: HashMap Text [JSONValue] -- ^ 'viAddtional'
     -> VariantInfo
 variantInfo pViAddtional_ =
     VariantInfo
@@ -4117,7 +4117,7 @@ newtype CallSetInfo = CallSetInfo
 --
 -- * 'csiAddtional'
 callSetInfo
-    :: HashMap Text [JSONValue] -- ^ 'addtional'
+    :: HashMap Text [JSONValue] -- ^ 'csiAddtional'
     -> CallSetInfo
 callSetInfo pCsiAddtional_ =
     CallSetInfo
@@ -4150,7 +4150,7 @@ newtype VariantSetMetadataInfo = VariantSetMetadataInfo
 --
 -- * 'vsmiAddtional'
 variantSetMetadataInfo
-    :: HashMap Text [JSONValue] -- ^ 'addtional'
+    :: HashMap Text [JSONValue] -- ^ 'vsmiAddtional'
     -> VariantSetMetadataInfo
 variantSetMetadataInfo pVsmiAddtional_ =
     VariantSetMetadataInfo
@@ -4186,7 +4186,7 @@ newtype OperationResponse = OperationResponse
 --
 -- * 'orAddtional'
 operationResponse
-    :: HashMap Text JSONValue -- ^ 'addtional'
+    :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
     OperationResponse
@@ -4506,7 +4506,7 @@ newtype ReadGroupSetInfo = ReadGroupSetInfo
 --
 -- * 'rgsiAddtional'
 readGroupSetInfo
-    :: HashMap Text [JSONValue] -- ^ 'addtional'
+    :: HashMap Text [JSONValue] -- ^ 'rgsiAddtional'
     -> ReadGroupSetInfo
 readGroupSetInfo pRgsiAddtional_ =
     ReadGroupSetInfo

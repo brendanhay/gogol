@@ -26,46 +26,46 @@ module Network.Google.AppsReseller
 
     -- * Resources
 
-    -- ** ResellerCustomersGet
+    -- ** reseller.customers.get
     , module Network.Google.Resource.Reseller.Customers.Get
 
-    -- ** ResellerCustomersInsert
+    -- ** reseller.customers.insert
     , module Network.Google.Resource.Reseller.Customers.Insert
 
-    -- ** ResellerCustomersPatch
+    -- ** reseller.customers.patch
     , module Network.Google.Resource.Reseller.Customers.Patch
 
-    -- ** ResellerCustomersUpdate
+    -- ** reseller.customers.update
     , module Network.Google.Resource.Reseller.Customers.Update
 
-    -- ** ResellerSubscriptionsActivate
+    -- ** reseller.subscriptions.activate
     , module Network.Google.Resource.Reseller.Subscriptions.Activate
 
-    -- ** ResellerSubscriptionsChangePlan
+    -- ** reseller.subscriptions.changePlan
     , module Network.Google.Resource.Reseller.Subscriptions.ChangePlan
 
-    -- ** ResellerSubscriptionsChangeRenewalSettings
+    -- ** reseller.subscriptions.changeRenewalSettings
     , module Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
 
-    -- ** ResellerSubscriptionsChangeSeats
+    -- ** reseller.subscriptions.changeSeats
     , module Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
 
-    -- ** ResellerSubscriptionsDelete
+    -- ** reseller.subscriptions.delete
     , module Network.Google.Resource.Reseller.Subscriptions.Delete
 
-    -- ** ResellerSubscriptionsGet
+    -- ** reseller.subscriptions.get
     , module Network.Google.Resource.Reseller.Subscriptions.Get
 
-    -- ** ResellerSubscriptionsInsert
+    -- ** reseller.subscriptions.insert
     , module Network.Google.Resource.Reseller.Subscriptions.Insert
 
-    -- ** ResellerSubscriptionsList
+    -- ** reseller.subscriptions.list
     , module Network.Google.Resource.Reseller.Subscriptions.List
 
-    -- ** ResellerSubscriptionsStartPaidService
+    -- ** reseller.subscriptions.startPaidService
     , module Network.Google.Resource.Reseller.Subscriptions.StartPaidService
 
-    -- ** ResellerSubscriptionsSuspend
+    -- ** reseller.subscriptions.suspend
     , module Network.Google.Resource.Reseller.Subscriptions.Suspend
 
     -- * Types

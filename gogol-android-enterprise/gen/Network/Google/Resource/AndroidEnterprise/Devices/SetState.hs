@@ -26,7 +26,7 @@
 -- Otherwise, the device state is ignored and all devices are allowed
 -- access to Google services.
 --
--- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseDevicesSetState@.
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @androidenterprise.devices.setState@.
 module Network.Google.Resource.AndroidEnterprise.Devices.SetState
     (
     -- * REST Resource
@@ -46,7 +46,7 @@ module Network.Google.Resource.AndroidEnterprise.Devices.SetState
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AndroidEnterpriseDevicesSetState@ method which the
+-- | A resource alias for @androidenterprise.devices.setState@ method which the
 -- 'DevicesSetState'' request conforms to.
 type DevicesSetStateResource =
      "enterprises" :>
@@ -86,10 +86,10 @@ data DevicesSetState' = DevicesSetState'
 --
 -- * 'dssDeviceId'
 devicesSetState'
-    :: Text -- ^ 'enterpriseId'
-    -> DeviceState -- ^ 'payload'
-    -> Text -- ^ 'userId'
-    -> Text -- ^ 'deviceId'
+    :: Text -- ^ 'dssEnterpriseId'
+    -> DeviceState -- ^ 'dssPayload'
+    -> Text -- ^ 'dssUserId'
+    -> Text -- ^ 'dssDeviceId'
     -> DevicesSetState'
 devicesSetState' pDssEnterpriseId_ pDssPayload_ pDssUserId_ pDssDeviceId_ =
     DevicesSetState'

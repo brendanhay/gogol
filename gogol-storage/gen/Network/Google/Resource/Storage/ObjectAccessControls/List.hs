@@ -22,7 +22,7 @@
 --
 -- Retrieves ACL entries on the specified object.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectAccessControlsList@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.objectAccessControls.list@.
 module Network.Google.Resource.Storage.ObjectAccessControls.List
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Storage.ObjectAccessControls.List
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageObjectAccessControlsList@ method which the
+-- | A resource alias for @storage.objectAccessControls.list@ method which the
 -- 'ObjectAccessControlsList'' request conforms to.
 type ObjectAccessControlsListResource =
      "b" :>
@@ -72,8 +72,8 @@ data ObjectAccessControlsList' = ObjectAccessControlsList'
 --
 -- * 'oaclGeneration'
 objectAccessControlsList'
-    :: Text -- ^ 'bucket'
-    -> Text -- ^ 'object'
+    :: Text -- ^ 'oaclBucket'
+    -> Text -- ^ 'oaclObject'
     -> ObjectAccessControlsList'
 objectAccessControlsList' pOaclBucket_ pOaclObject_ =
     ObjectAccessControlsList'

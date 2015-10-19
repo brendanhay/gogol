@@ -22,7 +22,7 @@
 --
 -- List all of the people in the specified collection.
 --
--- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsPeopleList@.
+-- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @plusDomains.people.list@.
 module Network.Google.Resource.PlusDomains.People.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.PlusDomains.People.List
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlusDomainsPeopleList@ method which the
+-- | A resource alias for @plusDomains.people.list@ method which the
 -- 'PeopleList'' request conforms to.
 type PeopleListResource =
      "people" :>
@@ -80,8 +80,8 @@ data PeopleList' = PeopleList'
 --
 -- * 'plMaxResults'
 peopleList'
-    :: PeopleListCollection -- ^ 'collection'
-    -> Text -- ^ 'userId'
+    :: PeopleListCollection -- ^ 'plCollection'
+    -> Text -- ^ 'plUserId'
     -> PeopleList'
 peopleList' pPlCollection_ pPlUserId_ =
     PeopleList'

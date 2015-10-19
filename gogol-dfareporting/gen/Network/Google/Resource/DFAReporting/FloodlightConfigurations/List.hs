@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of floodlight configurations, possibly filtered.
 --
--- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightConfigurationsList@.
+-- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.floodlightConfigurations.list@.
 module Network.Google.Resource.DFAReporting.FloodlightConfigurations.List
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.List
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DfareportingFloodlightConfigurationsList@ method which the
+-- | A resource alias for @dfareporting.floodlightConfigurations.list@ method which the
 -- 'FloodlightConfigurationsList'' request conforms to.
 type FloodlightConfigurationsListResource =
      "userprofiles" :>
@@ -66,7 +66,7 @@ data FloodlightConfigurationsList' = FloodlightConfigurationsList'
 --
 -- * 'fclProFileId'
 floodlightConfigurationsList'
-    :: Int64 -- ^ 'profileId'
+    :: Int64 -- ^ 'fclProFileId'
     -> FloodlightConfigurationsList'
 floodlightConfigurationsList' pFclProFileId_ =
     FloodlightConfigurationsList'

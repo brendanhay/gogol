@@ -22,7 +22,7 @@
 --
 -- Changes target url for forwarding rule.
 --
--- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalForwardingRulesSetTarget@.
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @compute.globalForwardingRules.setTarget@.
 module Network.Google.Resource.Compute.GlobalForwardingRules.SetTarget
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Compute.GlobalForwardingRules.SetTarget
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @ComputeGlobalForwardingRulesSetTarget@ method which the
+-- | A resource alias for @compute.globalForwardingRules.setTarget@ method which the
 -- 'GlobalForwardingRulesSetTarget'' request conforms to.
 type GlobalForwardingRulesSetTargetResource =
      Capture "project" Text :>
@@ -72,9 +72,9 @@ data GlobalForwardingRulesSetTarget' = GlobalForwardingRulesSetTarget'
 --
 -- * 'gfrstPayload'
 globalForwardingRulesSetTarget'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'forwardingRule'
-    -> TargetReference -- ^ 'payload'
+    :: Text -- ^ 'gfrstProject'
+    -> Text -- ^ 'gfrstForwardingRule'
+    -> TargetReference -- ^ 'gfrstPayload'
     -> GlobalForwardingRulesSetTarget'
 globalForwardingRulesSetTarget' pGfrstProject_ pGfrstForwardingRule_ pGfrstPayload_ =
     GlobalForwardingRulesSetTarget'

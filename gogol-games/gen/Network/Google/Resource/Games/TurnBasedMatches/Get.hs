@@ -22,7 +22,7 @@
 --
 -- Get the data for a turn-based match.
 --
--- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesGet@.
+-- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @games.turnBasedMatches.get@.
 module Network.Google.Resource.Games.TurnBasedMatches.Get
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.Get
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesTurnBasedMatchesGet@ method which the
+-- | A resource alias for @games.turnBasedMatches.get@ method which the
 -- 'TurnBasedMatchesGet'' request conforms to.
 type TurnBasedMatchesGetResource =
      "turnbasedmatches" :>
@@ -70,7 +70,7 @@ data TurnBasedMatchesGet' = TurnBasedMatchesGet'
 --
 -- * 'tbmgMatchId'
 turnBasedMatchesGet'
-    :: Text -- ^ 'matchId'
+    :: Text -- ^ 'tbmgMatchId'
     -> TurnBasedMatchesGet'
 turnBasedMatchesGet' pTbmgMatchId_ =
     TurnBasedMatchesGet'

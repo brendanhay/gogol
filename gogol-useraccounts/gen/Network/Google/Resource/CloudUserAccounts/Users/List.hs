@@ -22,7 +22,7 @@
 --
 -- Retrieves a list of users contained within the specified project.
 --
--- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsUsersList@.
+-- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @clouduseraccounts.users.list@.
 module Network.Google.Resource.CloudUserAccounts.Users.List
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.CloudUserAccounts.Users.List
 import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
--- | A resource alias for @CloudUserAccountsUsersList@ method which the
+-- | A resource alias for @clouduseraccounts.users.list@ method which the
 -- 'UsersList'' request conforms to.
 type UsersListResource =
      Capture "project" Text :>
@@ -80,7 +80,7 @@ data UsersList' = UsersList'
 --
 -- * 'ulMaxResults'
 usersList'
-    :: Text -- ^ 'project'
+    :: Text -- ^ 'ulProject'
     -> UsersList'
 usersList' pUlProject_ =
     UsersList'

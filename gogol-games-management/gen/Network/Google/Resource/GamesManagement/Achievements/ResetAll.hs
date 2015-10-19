@@ -24,7 +24,7 @@
 -- application. This method is only accessible to whitelisted tester
 -- accounts for your application.
 --
--- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementAchievementsResetAll@.
+-- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @gamesManagement.achievements.resetAll@.
 module Network.Google.Resource.GamesManagement.Achievements.ResetAll
     (
     -- * REST Resource
@@ -39,7 +39,7 @@ module Network.Google.Resource.GamesManagement.Achievements.ResetAll
 import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @GamesManagementAchievementsResetAll@ method which the
+-- | A resource alias for @gamesManagement.achievements.resetAll@ method which the
 -- 'AchievementsResetAll'' request conforms to.
 type AchievementsResetAllResource =
      "achievements" :>

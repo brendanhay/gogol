@@ -22,7 +22,7 @@
 --
 -- Deletes an existing pretargeting config.
 --
--- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPretargetingConfigDelete@.
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @adexchangebuyer.pretargetingConfig.delete@.
 module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Delete
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Delete
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AdexchangebuyerPretargetingConfigDelete@ method which the
+-- | A resource alias for @adexchangebuyer.pretargetingConfig.delete@ method which the
 -- 'PretargetingConfigDelete'' request conforms to.
 type PretargetingConfigDeleteResource =
      "pretargetingconfigs" :>
@@ -64,8 +64,8 @@ data PretargetingConfigDelete' = PretargetingConfigDelete'
 --
 -- * 'pcdConfigId'
 pretargetingConfigDelete'
-    :: Int64 -- ^ 'accountId'
-    -> Int64 -- ^ 'configId'
+    :: Int64 -- ^ 'pcdAccountId'
+    -> Int64 -- ^ 'pcdConfigId'
     -> PretargetingConfigDelete'
 pretargetingConfigDelete' pPcdAccountId_ pPcdConfigId_ =
     PretargetingConfigDelete'

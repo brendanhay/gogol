@@ -22,7 +22,7 @@
 --
 -- Permanently deletes an empty bucket.
 --
--- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketsDelete@.
+-- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.buckets.delete@.
 module Network.Google.Resource.Storage.Buckets.Delete
     (
     -- * REST Resource
@@ -41,7 +41,7 @@ module Network.Google.Resource.Storage.Buckets.Delete
 import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
--- | A resource alias for @StorageBucketsDelete@ method which the
+-- | A resource alias for @storage.buckets.delete@ method which the
 -- 'BucketsDelete'' request conforms to.
 type BucketsDeleteResource =
      "b" :>
@@ -69,7 +69,7 @@ data BucketsDelete' = BucketsDelete'
 --
 -- * 'bdIfMetagenerationNotMatch'
 bucketsDelete'
-    :: Text -- ^ 'bucket'
+    :: Text -- ^ 'bdBucket'
     -> BucketsDelete'
 bucketsDelete' pBdBucket_ =
     BucketsDelete'

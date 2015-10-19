@@ -22,7 +22,7 @@
 --
 -- Gets the summary of specified layers.
 --
--- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryAnnotationsSummary@.
+-- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @books.mylibrary.annotations.summary@.
 module Network.Google.Resource.Books.MyLibrary.Annotations.Summary
     (
     -- * REST Resource
@@ -40,7 +40,7 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.Summary
 import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @BooksMyLibraryAnnotationsSummary@ method which the
+-- | A resource alias for @books.mylibrary.annotations.summary@ method which the
 -- 'MyLibraryAnnotationsSummary'' request conforms to.
 type MyLibraryAnnotationsSummaryResource =
      "mylibrary" :>
@@ -67,8 +67,8 @@ data MyLibraryAnnotationsSummary' = MyLibraryAnnotationsSummary'
 --
 -- * 'mlasVolumeId'
 myLibraryAnnotationsSummary'
-    :: [Text] -- ^ 'layerIds'
-    -> Text -- ^ 'volumeId'
+    :: [Text] -- ^ 'mlasLayerIds'
+    -> Text -- ^ 'mlasVolumeId'
     -> MyLibraryAnnotationsSummary'
 myLibraryAnnotationsSummary' pMlasLayerIds_ pMlasVolumeId_ =
     MyLibraryAnnotationsSummary'

@@ -23,7 +23,7 @@
 -- Updates a resource containing information about a database inside a
 -- Cloud SQL instance.
 --
--- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLDatabasesUpdate@.
+-- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @sql.databases.update@.
 module Network.Google.Resource.SQL.Databases.Update
     (
     -- * REST Resource
@@ -43,7 +43,7 @@ module Network.Google.Resource.SQL.Databases.Update
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
--- | A resource alias for @SQLDatabasesUpdate@ method which the
+-- | A resource alias for @sql.databases.update@ method which the
 -- 'DatabasesUpdate'' request conforms to.
 type DatabasesUpdateResource =
      "projects" :>
@@ -78,10 +78,10 @@ data DatabasesUpdate' = DatabasesUpdate'
 --
 -- * 'duInstance'
 databasesUpdate'
-    :: Text -- ^ 'project'
-    -> Text -- ^ 'database'
-    -> Database -- ^ 'payload'
-    -> Text -- ^ 'instance'
+    :: Text -- ^ 'duProject'
+    -> Text -- ^ 'duDatabase'
+    -> Database -- ^ 'duPayload'
+    -> Text -- ^ 'duInstance'
     -> DatabasesUpdate'
 databasesUpdate' pDuProject_ pDuDatabase_ pDuPayload_ pDuInstance_ =
     DatabasesUpdate'

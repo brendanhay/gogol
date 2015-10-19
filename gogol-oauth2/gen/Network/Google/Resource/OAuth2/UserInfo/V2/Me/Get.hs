@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference> for @OAuth2UserInfoV2MeGet@.
+-- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference> for @oauth2.userinfo.v2.me.get@.
 module Network.Google.Resource.OAuth2.UserInfo.V2.Me.Get
     (
     -- * REST Resource
@@ -35,7 +35,7 @@ module Network.Google.Resource.OAuth2.UserInfo.V2.Me.Get
 import           Network.Google.OAuth2.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @OAuth2UserInfoV2MeGet@ method which the
+-- | A resource alias for @oauth2.userinfo.v2.me.get@ method which the
 -- 'UserInfoV2MeGet'' request conforms to.
 type UserInfoV2MeGetResource =
      "userinfo" :>
