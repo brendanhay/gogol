@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Controls the settings for a slate that can be displayed in the broadcast
+-- Controls the settings for a slate that can be displayed in the broadcast
 -- stream.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveBroadcastsControl@.

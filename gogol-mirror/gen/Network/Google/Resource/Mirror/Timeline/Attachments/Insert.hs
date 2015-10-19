@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds a new attachment to a timeline item.
+-- Adds a new attachment to a timeline item.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineAttachmentsInsert@.
 module Network.Google.Resource.Mirror.Timeline.Attachments.Insert

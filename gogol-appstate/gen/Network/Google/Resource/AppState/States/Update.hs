@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update the data associated with the input key if and only if the passed
+-- Update the data associated with the input key if and only if the passed
 -- version matches the currently stored version. This method is safe in the
 -- face of concurrent writes. Maximum per-key size is 128KB.
 --

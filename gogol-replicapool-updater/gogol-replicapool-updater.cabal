@@ -1,6 +1,6 @@
 name:                  gogol-replicapool-updater
 version:               0.0.1
-synopsis:              Google Compute Engine Instance Group Updater API Client.
+synopsis:              Google Compute Engine Instance Group Updater SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

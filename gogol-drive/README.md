@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Drive API.
+A client library for the Google Drive.
 
 
 ## Contribute

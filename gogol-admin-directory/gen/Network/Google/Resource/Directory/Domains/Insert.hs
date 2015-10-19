@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Inserts a domain of the customer.
+-- Inserts a domain of the customer.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryDomainsInsert@.
 module Network.Google.Resource.Directory.Domains.Insert

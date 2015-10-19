@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes an entry on the user\'s calendar list.
+-- Deletes an entry on the user\'s calendar list.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarListDelete@.
 module Network.Google.Resource.Calendar.CalendarList.Delete

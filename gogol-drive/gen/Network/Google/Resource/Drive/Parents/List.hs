@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists a file\'s parents.
+-- Lists a file\'s parents.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveParentsList@.
 module Network.Google.Resource.Drive.Parents.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a user\'s details.
+-- Retrieves a user\'s details.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseUsersGet@.
 module Network.Google.Resource.AndroidEnterprise.Users.Get

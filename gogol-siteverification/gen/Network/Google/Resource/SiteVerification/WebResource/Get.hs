@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get the most current data for a website or domain.
+-- Get the most current data for a website or domain.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceGet@.
 module Network.Google.Resource.SiteVerification.WebResource.Get

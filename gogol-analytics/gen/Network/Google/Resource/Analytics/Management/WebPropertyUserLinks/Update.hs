@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates permissions for an existing user on the given web property.
+-- Updates permissions for an existing user on the given web property.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyUserLinksUpdate@.
 module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an access control rule. This method supports patch semantics.
+-- Updates an access control rule. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarACLPatch@.
 module Network.Google.Resource.Calendar.ACL.Patch

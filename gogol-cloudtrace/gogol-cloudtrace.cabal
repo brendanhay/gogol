@@ -1,6 +1,6 @@
 name:                  gogol-cloudtrace
 version:               0.0.1
-synopsis:              Google Cloud Trace API Client.
+synopsis:              Google Cloud Trace SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

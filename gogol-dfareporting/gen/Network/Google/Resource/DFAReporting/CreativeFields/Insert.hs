@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Inserts a new creative field.
+-- Inserts a new creative field.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldsInsert@.
 module Network.Google.Resource.DFAReporting.CreativeFields.Insert

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes an invitation. This method returns the following error codes: *
+-- Deletes an invitation. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to delete
 -- the requested invitation or for access errors. * \`NOT_FOUND\` if no
 -- invitation exists with the requested ID.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the list of forwarding rules grouped by scope.
+-- Retrieves the list of forwarding rules grouped by scope.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeForwardingRulesAggregatedList@.
 module Network.Google.Resource.Compute.ForwardingRules.AggregatedList

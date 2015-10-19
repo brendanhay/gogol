@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes an attachment from a timeline item.
+-- Deletes an attachment from a timeline item.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineAttachmentsDelete@.
 module Network.Google.Resource.Mirror.Timeline.Attachments.Delete

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Schedules a group action to recreate the specified instances in the
+-- Schedules a group action to recreate the specified instances in the
 -- managed instance group. The instances are deleted and recreated using
 -- the current instance template for the managed instance group. This
 -- operation is marked as DONE when the action is scheduled even if the

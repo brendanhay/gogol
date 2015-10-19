@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all URL channels in the specified ad client for this Ad Exchange
+-- List all URL channels in the specified ad client for this Ad Exchange
 -- account.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsURLChannelsList@.

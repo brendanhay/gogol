@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the Android app permissions required by this app.
+-- Retrieves the Android app permissions required by this app.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseProductsGetPermissions@.
 module Network.Google.Resource.AndroidEnterprise.Products.GetPermissions

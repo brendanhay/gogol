@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the specified instance\'s serial port output.
+-- Returns the specified instance\'s serial port output.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesGetSerialPortOutput@.
 module Network.Google.Resource.Compute.Instances.GetSerialPortOutput

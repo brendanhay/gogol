@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Finish a turn-based match. Each player should make this call once, after
+-- Finish a turn-based match. Each player should make this call once, after
 -- all results are in. Only the player whose turn it is may make the first
 -- call to Finish, and can pass in the final match state.
 --

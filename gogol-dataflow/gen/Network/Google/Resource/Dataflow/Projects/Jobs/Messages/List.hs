@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Request the job status.
+-- Request the job status.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsMessagesList@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List

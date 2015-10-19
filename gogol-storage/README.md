@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Cloud Storage JSON API.
+A client library for the Google Cloud Storage JSON.
 
 
 ## Contribute

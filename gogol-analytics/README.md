@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Analytics API.
+A client library for the Google Analytics.
 
 
 ## Contribute

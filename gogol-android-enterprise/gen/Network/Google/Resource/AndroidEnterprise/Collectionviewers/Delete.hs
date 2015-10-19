@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes the user from the list of those specifically allowed to see the
+-- Removes the user from the list of those specifically allowed to see the
 -- collection. If the collection\'s visibility is set to viewersOnly then
 -- only such users will see the collection.
 --

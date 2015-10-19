@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Tests the specified permissions against the IAM access control policy
+-- Tests the specified permissions against the IAM access control policy
 -- for the specified project.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerProjectsTestIAMPermissions@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes an existing subscription. All pending messages in the
+-- Deletes an existing subscription. All pending messages in the
 -- subscription are immediately dropped. Calls to \`Pull\` after deletion
 -- will return \`NOT_FOUND\`. After a subscription is deleted, a new one
 -- may be created with the same name, but the new one has no association

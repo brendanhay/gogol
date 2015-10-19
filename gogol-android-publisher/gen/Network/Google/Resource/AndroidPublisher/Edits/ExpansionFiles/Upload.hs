@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Uploads and attaches a new Expansion File to the APK specified.
+-- Uploads and attaches a new Expansion File to the APK specified.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsExpansionFilesUpload@.
 module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Upload

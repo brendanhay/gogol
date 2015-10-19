@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Looks up a user by email address.
+-- Looks up a user by email address.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseUsersList@.
 module Network.Google.Resource.AndroidEnterprise.Users.List

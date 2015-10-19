@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Unpublish a map asset.
+-- Unpublish a map asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineMapsUnPublish@.
 module Network.Google.Resource.MapsEngine.Maps.UnPublish

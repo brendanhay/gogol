@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Create a turn-based match.
+-- Create a turn-based match.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesCreate@.
 module Network.Google.Resource.Games.TurnBasedMatches.Create

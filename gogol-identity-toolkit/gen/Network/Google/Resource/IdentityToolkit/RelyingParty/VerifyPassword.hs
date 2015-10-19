@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Verifies the user entered password.
+-- Verifies the user entered password.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyVerifyPassword@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyPassword

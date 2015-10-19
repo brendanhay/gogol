@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Acknowledges the messages associated with the \`ack_ids\` in the
+-- Acknowledges the messages associated with the \`ack_ids\` in the
 -- \`AcknowledgeRequest\`. The Pub\/Sub system can remove the relevant
 -- messages from the subscription. Acknowledging a message whose ack
 -- deadline has expired may succeed, but such a message may be redelivered

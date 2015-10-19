@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds a new user to the given view (profile).
+-- Adds a new user to the given view (profile).
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFileUserLinksInsert@.
 module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Insert

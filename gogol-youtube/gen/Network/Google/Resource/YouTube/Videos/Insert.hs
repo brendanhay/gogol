@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Uploads a video to YouTube and optionally sets the video\'s metadata.
+-- Uploads a video to YouTube and optionally sets the video\'s metadata.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosInsert@.
 module Network.Google.Resource.YouTube.Videos.Insert

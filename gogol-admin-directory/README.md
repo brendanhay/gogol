@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Admin Directory API.
+A client library for the Google Admin Directory.
 
 
 ## Contribute

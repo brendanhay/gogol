@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists report types.
+-- Lists report types.
 --
 -- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @YouTubereportingReportTypesList@.
 module Network.Google.Resource.YouTubeReporting.ReportTypes.List

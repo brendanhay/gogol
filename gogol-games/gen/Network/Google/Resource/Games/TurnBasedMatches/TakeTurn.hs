@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Commit the results of a player turn.
+-- Commit the results of a player turn.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesTakeTurn@.
 module Network.Google.Resource.Games.TurnBasedMatches.TakeTurn

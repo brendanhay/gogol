@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Stores a new object and metadata.
+-- Stores a new object and metadata.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsInsert@.
 module Network.Google.Resource.Storage.Objects.Insert

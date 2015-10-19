@@ -1,6 +1,6 @@
 name:                  gogol-translate
 version:               0.0.1
-synopsis:              Translate API Client.
+synopsis:              Google Translate SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

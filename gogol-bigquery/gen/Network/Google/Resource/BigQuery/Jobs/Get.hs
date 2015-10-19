@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns information about a specific job. Job information is available
+-- Returns information about a specific job. Job information is available
 -- for a six month period after creation. Requires that you\'re the person
 -- who ran the job, or have the Is Owner project role.
 --

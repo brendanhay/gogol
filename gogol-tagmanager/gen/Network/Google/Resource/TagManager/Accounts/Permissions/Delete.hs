@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes a user from the account, revoking access to it and all of its
+-- Removes a user from the account, revoking access to it and all of its
 -- containers.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsPermissionsDelete@.

@@ -13,8 +13,10 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 {% include "_include/license.ede" %}
+{% if action.type.help %}
 --
-{{ action.type.help }}
+-- {{ action.type.help | stripPrefix("-- | ") }}
+{% endif %}
 --
 -- /See:/ <{{ documentationLink }} {{ title }} Reference> for @{{ action.id }}@.
 module {{ action.ns }}

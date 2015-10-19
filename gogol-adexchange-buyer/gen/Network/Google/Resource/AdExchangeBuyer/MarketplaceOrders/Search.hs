@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Search for orders using pql query
+-- Search for orders using pql query
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceOrdersSearch@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Search

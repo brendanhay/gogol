@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Modifies the labels on the specified message.
+-- Modifies the labels on the specified message.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesModify@.
 module Network.Google.Resource.Gmail.Users.Messages.Modify

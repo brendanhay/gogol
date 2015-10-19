@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Inserts a Domain alias of the customer.
+-- Inserts a Domain alias of the customer.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryDomainAliasesInsert@.
 module Network.Google.Resource.Directory.DomainAliases.Insert

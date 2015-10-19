@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists subscriptions of a reseller, optionally filtered by a customer
+-- Lists subscriptions of a reseller, optionally filtered by a customer
 -- name prefix.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsList@.

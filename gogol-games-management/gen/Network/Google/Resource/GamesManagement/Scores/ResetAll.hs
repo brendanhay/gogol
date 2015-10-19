@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Resets all scores for all leaderboards for the currently authenticated
+-- Resets all scores for all leaderboards for the currently authenticated
 -- players. This method is only accessible to whitelisted tester accounts
 -- for your application.
 --

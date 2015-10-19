@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the specified zone-specific operation resource.
+-- Deletes the specified zone-specific operation resource.
 --
 -- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerZoneOperationsDelete@.
 module Network.Google.Resource.Autoscaler.ZoneOperations.Delete

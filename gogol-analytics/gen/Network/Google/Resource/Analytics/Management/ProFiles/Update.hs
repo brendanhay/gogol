@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an existing view (profile).
+-- Updates an existing view (profile).
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFilesUpdate@.
 module Network.Google.Resource.Analytics.Management.ProFiles.Update

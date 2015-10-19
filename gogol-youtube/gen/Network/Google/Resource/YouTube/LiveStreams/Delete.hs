@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a video stream.
+-- Deletes a video stream.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveStreamsDelete@.
 module Network.Google.Resource.YouTube.LiveStreams.Delete

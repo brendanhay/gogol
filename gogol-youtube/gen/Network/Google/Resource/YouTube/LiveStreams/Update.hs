@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a video stream. If the properties that you want to change cannot
+-- Updates a video stream. If the properties that you want to change cannot
 -- be updated, then you need to create a new stream with the proper
 -- settings.
 --

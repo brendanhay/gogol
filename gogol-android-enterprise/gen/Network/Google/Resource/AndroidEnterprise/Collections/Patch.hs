@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a collection. This method supports patch semantics.
+-- Updates a collection. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseCollectionsPatch@.
 module Network.Google.Resource.AndroidEnterprise.Collections.Patch

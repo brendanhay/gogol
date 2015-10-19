@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Webmaster Tools API.
+A client library for the Google Webmaster Tools.
 
 
 ## Contribute

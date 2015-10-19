@@ -1,6 +1,6 @@
 name:                  gogol-apps-reseller
 version:               0.0.1
-synopsis:              Enterprise Apps Reseller API Client.
+synopsis:              Google Enterprise Apps Reseller SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

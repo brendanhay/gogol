@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sets the steps for the currently authenticated player towards unlocking
+-- Sets the steps for the currently authenticated player towards unlocking
 -- an achievement. If the steps parameter is less than the current number
 -- of steps that the player already gained for the achievement, the
 -- achievement is not modified.

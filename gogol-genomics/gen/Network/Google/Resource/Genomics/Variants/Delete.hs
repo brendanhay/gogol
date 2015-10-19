@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a variant.
+-- Deletes a variant.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsVariantsDelete@.
 module Network.Google.Resource.Genomics.Variants.Delete

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a GTM Tag.
+-- Deletes a GTM Tag.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersTagsDelete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Delete

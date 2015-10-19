@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List the alerts for the specified AdSense account.
+-- List the alerts for the specified AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsAlertsList@.
 module Network.Google.Resource.AdSense.Accounts.Alerts.List

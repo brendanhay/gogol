@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets breakpoint information.
+-- Gets breakpoint information.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @CloudDebuggerDebuggerDebuggeesBreakpointsGet@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Get

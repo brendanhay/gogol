@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Resizes the managed instance group up or down. If resized up, new
+-- Resizes the managed instance group up or down. If resized up, new
 -- instances are created using the current instance template. If resized
 -- down, instances are removed in the order outlined in Resizing a managed
 -- instance group.

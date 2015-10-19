@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a web property to which the user has access.
+-- Gets a web property to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertiesGet@.
 module Network.Google.Resource.Analytics.Management.WebProperties.Get

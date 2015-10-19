@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the dataset specified by datasetID.
+-- Returns the dataset specified by datasetID.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryDatasetsGet@.
 module Network.Google.Resource.BigQuery.Datasets.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all accounts to which the user has access.
+-- Lists all accounts to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountsList@.
 module Network.Google.Resource.Analytics.Management.Accounts.List

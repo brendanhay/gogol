@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns instances of the specified recurring event.
+-- Returns instances of the specified recurring event.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsInstances@.
 module Network.Google.Resource.Calendar.Events.Instances

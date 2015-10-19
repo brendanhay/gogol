@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists a user\'s installed apps.
+-- Lists a user\'s installed apps.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveAppsList@.
 module Network.Google.Resource.Drive.Apps.List

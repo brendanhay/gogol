@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Restores the project identified by the specified \`project_id\` (for
+-- Restores the project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`). You can only use this method for a project
 -- that has a lifecycle state of [DELETE_REQUESTED]
 -- [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_REQUESTED].

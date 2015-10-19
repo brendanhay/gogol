@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves an object or its metadata.
+-- Retrieves an object or its metadata.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsGet@.
 module Network.Google.Resource.Storage.Objects.Get

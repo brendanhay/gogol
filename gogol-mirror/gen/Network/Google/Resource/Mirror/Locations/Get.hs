@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a single location by ID.
+-- Gets a single location by ID.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorLocationsGet@.
 module Network.Google.Resource.Mirror.Locations.Get

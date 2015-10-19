@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieve all Mobile Devices of a customer (paginated)
+-- Retrieve all Mobile Devices of a customer (paginated)
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMobileDevicesList@.
 module Network.Google.Resource.Directory.MobileDevices.List

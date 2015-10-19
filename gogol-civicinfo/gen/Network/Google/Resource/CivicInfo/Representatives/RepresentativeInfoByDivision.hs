@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Looks up representative information for a single geographic division.
+-- Looks up representative information for a single geographic division.
 --
 -- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicInfoRepresentativesRepresentativeInfoByDivision@.
 module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDivision

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the IDs of all the collections for an enterprise.
+-- Retrieves the IDs of all the collections for an enterprise.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseCollectionsList@.
 module Network.Google.Resource.AndroidEnterprise.Collections.List

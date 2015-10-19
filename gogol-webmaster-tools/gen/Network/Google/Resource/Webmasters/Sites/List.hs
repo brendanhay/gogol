@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the user\'s Webmaster Tools sites.
+-- Lists the user\'s Webmaster Tools sites.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitesList@.
 module Network.Google.Resource.Webmasters.Sites.List

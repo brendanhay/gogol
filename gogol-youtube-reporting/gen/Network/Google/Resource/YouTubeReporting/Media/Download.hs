@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Method for media download. Download is supported on the URI
+-- Method for media download. Download is supported on the URI
 -- \`\/v1\/media\/{+name}?alt=media\`.
 --
 -- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @YouTubereportingMediaDownload@.

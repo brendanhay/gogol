@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the specified localized store listing from an edit.
+-- Deletes the specified localized store listing from an edit.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsListingsDelete@.
 module Network.Google.Resource.AndroidPublisher.Edits.Listings.Delete

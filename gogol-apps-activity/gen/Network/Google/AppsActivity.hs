@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Provides a historical view of activity.
+-- Provides a historical view of activity.
 --
 -- /See:/ <https://developers.google.com/google-apps/activity/ Google Apps Activity API Reference>
 module Network.Google.AppsActivity

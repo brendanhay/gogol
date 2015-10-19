@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Validates a device for white space use in accordance with regulatory
+-- Validates a device for white space use in accordance with regulatory
 -- rules. The Google Spectrum Database does not support master\/slave
 -- configurations, so this always yields an UNIMPLEMENTED error.
 --

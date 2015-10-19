@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds a site to the set of the user\'s sites in Webmaster Tools.
+-- Adds a site to the set of the user\'s sites in Webmaster Tools.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitesAdd@.
 module Network.Google.Resource.Webmasters.Sites.Add

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Permanently deletes an empty bucket.
+-- Permanently deletes an empty bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketsDelete@.
 module Network.Google.Resource.Storage.Buckets.Delete

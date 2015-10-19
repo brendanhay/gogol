@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Generate new backup verification codes for the user.
+-- Generate new backup verification codes for the user.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryVerificationCodesGenerate@.
 module Network.Google.Resource.Directory.VerificationCodes.Generate

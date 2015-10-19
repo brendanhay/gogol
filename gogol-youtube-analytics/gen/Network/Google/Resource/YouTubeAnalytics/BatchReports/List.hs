@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of processed batch reports.
+-- Retrieves a list of processed batch reports.
 --
 -- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsBatchReportsList@.
 module Network.Google.Resource.YouTubeAnalytics.BatchReports.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a specific change.
+-- Gets a specific change.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChangesGet@.
 module Network.Google.Resource.Drive.Changes.Get

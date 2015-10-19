@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a read group set.
+-- Deletes a read group set.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsReadgroupsetsDelete@.
 module Network.Google.Resource.Genomics.Readgroupsets.Delete

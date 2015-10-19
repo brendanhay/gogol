@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | The Deployment Manager API allows users to declaratively configure,
+-- The Deployment Manager API allows users to declaratively configure,
 -- deploy and run complex solutions on the Google Cloud Platform.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference>

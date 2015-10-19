@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Train a Prediction API model.
+-- Train a Prediction API model.
 --
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedModelsInsert@.
 module Network.Google.Resource.Prediction.TrainedModels.Insert

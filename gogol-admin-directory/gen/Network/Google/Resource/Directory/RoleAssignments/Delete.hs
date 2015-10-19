@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a role assignment.
+-- Deletes a role assignment.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryRoleAssignmentsDelete@.
 module Network.Google.Resource.Directory.RoleAssignments.Delete

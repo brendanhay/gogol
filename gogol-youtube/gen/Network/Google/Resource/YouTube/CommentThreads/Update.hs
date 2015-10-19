@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Modifies the top-level comment in a comment thread.
+-- Modifies the top-level comment in a comment thread.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentThreadsUpdate@.
 module Network.Google.Resource.YouTube.CommentThreads.Update

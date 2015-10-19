@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | The Google App Engine Admin API enables developers to provision and
+-- The Google App Engine Admin API enables developers to provision and
 -- manage their App Engine applications.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference>

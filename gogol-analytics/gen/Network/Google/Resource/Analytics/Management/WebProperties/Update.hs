@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an existing web property.
+-- Updates an existing web property.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertiesUpdate@.
 module Network.Google.Resource.Analytics.Management.WebProperties.Update

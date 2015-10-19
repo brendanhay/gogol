@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes an existing creative field value.
+-- Deletes an existing creative field value.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldValuesDelete@.
 module Network.Google.Resource.DFAReporting.CreativeFieldValues.Delete

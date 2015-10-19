@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates settings of a Cloud SQL instance. Caution: This is not a partial
+-- Updates settings of a Cloud SQL instance. Caution: This is not a partial
 -- update, so you must include values for all the settings that you want to
 -- retain. For partial updates, use patch.
 --

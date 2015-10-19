@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes an item from a group.
+-- Removes an item from a group.
 --
 -- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsGroupItemsDelete@.
 module Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete

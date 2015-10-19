@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the list of all active breakpoints for the specified debuggee.
+-- Returns the list of all active breakpoints for the specified debuggee.
 -- The breakpoint specification (location, condition, and expression
 -- fields) is semantically immutable, although the field values may change.
 -- For example, an agent may update the location line number to reflect the

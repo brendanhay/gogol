@@ -1,6 +1,6 @@
 name:                  gogol-pubsub
 version:               0.0.1
-synopsis:              Google Cloud Pub/Sub API Client.
+synopsis:              Google Cloud Pub/Sub SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

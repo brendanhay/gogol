@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a variant set. This method supports patch semantics.
+-- Updates a variant set. This method supports patch semantics.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsVariantsetsPatch@.
 module Network.Google.Resource.Genomics.Variantsets.Patch

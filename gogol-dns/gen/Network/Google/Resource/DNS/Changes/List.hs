@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Enumerate Changes to a ResourceRecordSet collection.
+-- Enumerate Changes to a ResourceRecordSet collection.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSChangesList@.
 module Network.Google.Resource.DNS.Changes.List

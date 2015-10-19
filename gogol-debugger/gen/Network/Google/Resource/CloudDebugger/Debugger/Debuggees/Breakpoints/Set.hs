@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sets the breakpoint to the debuggee.
+-- Sets the breakpoint to the debuggee.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @CloudDebuggerDebuggerDebuggeesBreakpointsSet@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set

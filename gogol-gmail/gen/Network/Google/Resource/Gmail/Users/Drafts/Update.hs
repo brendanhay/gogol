@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Replaces a draft\'s content.
+-- Replaces a draft\'s content.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersDraftsUpdate@.
 module Network.Google.Resource.Gmail.Users.Drafts.Update

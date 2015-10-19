@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a GTM Variable.
+-- Updates a GTM Variable.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVariablesUpdate@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Update

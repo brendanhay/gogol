@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get information about the selected Ad Exchange Preferred Deal.
+-- Get information about the selected Ad Exchange Preferred Deal.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsPreferredDealsGet@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the specified instances. The instances are deleted, then removed
+-- Deletes the specified instances. The instances are deleted, then removed
 -- from the instance group and any target pools of which they were a
 -- member. The targetSize of the instance group manager is reduced by the
 -- number of instances deleted.

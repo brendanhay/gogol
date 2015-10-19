@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get a custom dimension to which the user has access.
+-- Get a custom dimension to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomDimensionsGet@.
 module Network.Google.Resource.Analytics.Management.CustomDimensions.Get

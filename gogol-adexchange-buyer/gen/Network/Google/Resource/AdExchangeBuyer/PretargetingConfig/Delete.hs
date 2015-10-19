@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes an existing pretargeting config.
+-- Deletes an existing pretargeting config.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPretargetingConfigDelete@.
 module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Delete

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Modifies the set of products a user is entitled to access.
+-- Modifies the set of products a user is entitled to access.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseUsersSetAvailableProductSet@.
 module Network.Google.Resource.AndroidEnterprise.Users.SetAvailableProductSet

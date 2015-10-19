@@ -20,8 +20,6 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-
---
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsTestersPatch@.
 module Network.Google.Resource.AndroidPublisher.Edits.Testers.Patch
     (

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the authenticated user\'s specified task list.
+-- Returns the authenticated user\'s specified task list.
 --
 -- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTaskListsGet@.
 module Network.Google.Resource.Tasks.TaskLists.Get

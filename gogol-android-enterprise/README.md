@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Play EMM API.
+A client library for the Google Play EMM.
 
 
 ## Contribute

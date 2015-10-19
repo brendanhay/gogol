@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Cloud Pub/Sub API.
+A client library for the Google Cloud Pub/Sub.
 
 
 ## Contribute

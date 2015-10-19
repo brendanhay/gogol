@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get the specified host ad unit in this AdSense account.
+-- Get the specified host ad unit in this AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdUnitsGet@.
 module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Get

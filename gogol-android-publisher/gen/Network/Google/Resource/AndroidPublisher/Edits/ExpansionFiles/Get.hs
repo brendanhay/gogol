@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Fetches the Expansion File configuration for the APK specified.
+-- Fetches the Expansion File configuration for the APK specified.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsExpansionFilesGet@.
 module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Get

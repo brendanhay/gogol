@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the schema defining app restrictions configurable for this
+-- Retrieves the schema defining app restrictions configurable for this
 -- product. All products have a schema, but this may be empty if no app
 -- restrictions are defined.
 --

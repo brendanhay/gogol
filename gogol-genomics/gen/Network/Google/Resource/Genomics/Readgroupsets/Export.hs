@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Exports a read group set to a BAM file in Google Cloud Storage. Note
+-- Exports a read group set to a BAM file in Google Cloud Storage. Note
 -- that currently there may be some differences between exported BAM files
 -- and the original BAM file at the time of import. See
 -- [ImportReadGroupSets](google.genomics.v1.ReadServiceV1.ImportReadGroupSets)

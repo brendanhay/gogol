@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List categories for onboarding experience.
+-- List categories for onboarding experience.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksOnboardingListCategories@.
 module Network.Google.Resource.Books.Onboarding.ListCategories

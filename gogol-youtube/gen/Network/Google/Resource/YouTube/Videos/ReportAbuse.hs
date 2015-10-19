@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Report abuse for a video.
+-- Report abuse for a video.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosReportAbuse@.
 module Network.Google.Resource.YouTube.Videos.ReportAbuse

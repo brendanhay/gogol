@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all ad units in the specified ad client for the specified account.
+-- List all ad units in the specified ad client for the specified account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsAdUnitsList@.
 module Network.Google.Resource.AdSense.Accounts.AdUnits.List

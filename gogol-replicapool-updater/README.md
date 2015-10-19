@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Compute Engine Instance Group Updater API.
+A client library for the Google Compute Engine Instance Group Updater.
 
 
 ## Contribute

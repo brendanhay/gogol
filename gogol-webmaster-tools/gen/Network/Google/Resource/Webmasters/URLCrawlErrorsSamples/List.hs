@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists a site\'s sample URLs for the specified crawl error category and
+-- Lists a site\'s sample URLs for the specified crawl error category and
 -- platform.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersURLCrawlErrorsSamplesList@.

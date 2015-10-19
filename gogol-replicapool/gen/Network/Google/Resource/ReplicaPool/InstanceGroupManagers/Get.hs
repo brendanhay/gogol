@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the specified Instance Group Manager resource.
+-- Returns the specified Instance Group Manager resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersGet@.
 module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves stored queries.
+-- Retrieves stored queries.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleClickBidManagerQueriesListqueries@.
 module Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries

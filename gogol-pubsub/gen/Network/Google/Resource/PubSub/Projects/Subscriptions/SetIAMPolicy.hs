@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sets the access control policy on the specified resource. Replaces any
+-- Sets the access control policy on the specified resource. Replaces any
 -- existing policy.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsSetIAMPolicy@.

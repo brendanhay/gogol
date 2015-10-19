@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all Containers that belongs to a GTM Account.
+-- Lists all Containers that belongs to a GTM Account.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersList@.
 module Network.Google.Resource.TagManager.Accounts.Containers.List

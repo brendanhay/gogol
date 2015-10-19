@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Approves the specified product (and the relevant app permissions, if
+-- Approves the specified product (and the relevant app permissions, if
 -- any).
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseProductsApprove@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Stop watching resources through this channel
+-- Stop watching resources through this channel
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarChannelsStop@.
 module Network.Google.Resource.Calendar.Channels.Stop

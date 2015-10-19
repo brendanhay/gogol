@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the set of products a user is entitled to access.
+-- Retrieves the set of products a user is entitled to access.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseUsersGetAvailableProductSet@.
 module Network.Google.Resource.AndroidEnterprise.Users.GetAvailableProductSet

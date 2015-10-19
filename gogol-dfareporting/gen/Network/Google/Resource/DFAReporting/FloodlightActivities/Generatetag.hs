@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Generates a tag for a floodlight activity.
+-- Generates a tag for a floodlight activity.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivitiesGeneratetag@.
 module Network.Google.Resource.DFAReporting.FloodlightActivities.Generatetag

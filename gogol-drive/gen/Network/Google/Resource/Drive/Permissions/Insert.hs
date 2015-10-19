@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Inserts a permission for a file.
+-- Inserts a permission for a file.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsInsert@.
 module Network.Google.Resource.Drive.Permissions.Insert

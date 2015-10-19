@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update an existing experiment. This method supports patch semantics.
+-- Update an existing experiment. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementExperimentsPatch@.
 module Network.Google.Resource.Analytics.Management.Experiments.Patch

@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Cloud Monitoring API.
+A client library for the Google Cloud Monitoring.
 
 
 ## Contribute

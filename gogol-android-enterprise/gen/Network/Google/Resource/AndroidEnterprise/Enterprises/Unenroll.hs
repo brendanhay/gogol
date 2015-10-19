@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Unenrolls an enterprise from the calling MDM.
+-- Unenrolls an enterprise from the calling MDM.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEnterprisesUnenroll@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.Unenroll

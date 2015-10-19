@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update a custom channel in the host AdSense account.
+-- Update a custom channel in the host AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostCustomChannelsUpdate@.
 module Network.Google.Resource.AdSenseHost.CustomChannels.Update

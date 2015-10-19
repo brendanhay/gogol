@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Assign License. This method supports patch semantics.
+-- Assign License. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @LicensingLicenseAssignmentsPatch@.
 module Network.Google.Resource.Licensing.LicenseAssignments.Patch

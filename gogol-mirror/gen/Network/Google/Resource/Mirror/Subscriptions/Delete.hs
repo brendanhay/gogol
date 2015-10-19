@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a subscription.
+-- Deletes a subscription.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorSubscriptionsDelete@.
 module Network.Google.Resource.Mirror.Subscriptions.Delete

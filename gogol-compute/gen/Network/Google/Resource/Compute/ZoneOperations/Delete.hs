@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the specified zone-specific Operations resource.
+-- Deletes the specified zone-specific Operations resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeZoneOperationsDelete@.
 module Network.Google.Resource.Compute.ZoneOperations.Delete

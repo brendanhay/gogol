@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the existing traces specified by PatchTracesRequest and inserts
+-- Updates the existing traces specified by PatchTracesRequest and inserts
 -- the new traces. Any existing trace or span fields included in an update
 -- are overwritten by the update, and any additional fields in an update
 -- are merged with the existing trace data.

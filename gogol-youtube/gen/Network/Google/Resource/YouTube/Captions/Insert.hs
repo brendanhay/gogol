@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Uploads a caption track.
+-- Uploads a caption track.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCaptionsInsert@.
 module Network.Google.Resource.YouTube.Captions.Insert

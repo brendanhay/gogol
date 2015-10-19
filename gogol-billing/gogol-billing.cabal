@@ -1,6 +1,6 @@
 name:                  gogol-billing
 version:               0.0.1
-synopsis:              Google Cloud Billing API Client.
+synopsis:              Google Cloud Billing SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

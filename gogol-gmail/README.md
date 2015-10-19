@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Gmail API.
+A client library for the Google Gmail.
 
 
 ## Contribute

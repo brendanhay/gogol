@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get information about the selected Ad Exchange account.
+-- Get information about the selected Ad Exchange account.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsGet@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.Get

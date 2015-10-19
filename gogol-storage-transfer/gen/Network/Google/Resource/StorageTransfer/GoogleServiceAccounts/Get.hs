@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the Google service account that is used by Storage Transfer
+-- Returns the Google service account that is used by Storage Transfer
 -- Service to access buckets in the project where transfers run or in other
 -- projects. Each Google service account is associated with one Google
 -- Developers Console project. Users should add this service account to the

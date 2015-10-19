@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the state of an existing dataflow job.
+-- Updates the state of an existing dataflow job.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsUpdate@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.Update

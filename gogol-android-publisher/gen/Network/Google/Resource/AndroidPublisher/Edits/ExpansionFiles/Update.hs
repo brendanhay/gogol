@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the APK\'s Expansion File configuration to reference another
+-- Updates the APK\'s Expansion File configuration to reference another
 -- APK\'s Expansion Files. To add a new Expansion File use the Upload
 -- method.
 --

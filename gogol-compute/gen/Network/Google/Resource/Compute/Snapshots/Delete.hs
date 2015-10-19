@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the specified Snapshot resource. Keep in mind that deleting a
+-- Deletes the specified Snapshot resource. Keep in mind that deleting a
 -- single snapshot might not necessarily delete all the data on that
 -- snapshot. If any data on the snapshot that is marked for deletion is
 -- needed for subsequent snapshots, the data will be moved to the next

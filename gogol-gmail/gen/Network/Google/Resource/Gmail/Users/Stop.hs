@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Stop receiving push notifications for the given user mailbox.
+-- Stop receiving push notifications for the given user mailbox.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersStop@.
 module Network.Google.Resource.Gmail.Users.Stop

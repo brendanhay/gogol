@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves details of an enterprise\'s group license for a product.
+-- Retrieves details of an enterprise\'s group license for a product.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseGrouplicensesGet@.
 module Network.Google.Resource.AndroidEnterprise.Grouplicenses.Get

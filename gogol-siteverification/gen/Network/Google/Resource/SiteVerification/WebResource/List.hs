@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get the list of your verified websites and domains.
+-- Get the list of your verified websites and domains.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceList@.
 module Network.Google.Resource.SiteVerification.WebResource.List

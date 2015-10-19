@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a call set by ID.
+-- Gets a call set by ID.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsCallsetsGet@.
 module Network.Google.Resource.Genomics.Callsets.Get

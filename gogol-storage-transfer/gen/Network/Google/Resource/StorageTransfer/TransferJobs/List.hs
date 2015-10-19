@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists transfer jobs.
+-- Lists transfer jobs.
 --
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferJobsList@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.List

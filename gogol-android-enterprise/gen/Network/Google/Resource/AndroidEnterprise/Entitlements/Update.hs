@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds or updates an entitlement to an app for a user.
+-- Adds or updates an entitlement to an app for a user.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEntitlementsUpdate@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.Update

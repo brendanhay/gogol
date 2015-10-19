@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sets the state of the achievement with the given ID to REVEALED for the
+-- Sets the state of the achievement with the given ID to REVEALED for the
 -- currently authenticated player.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementsReveal@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Undeletes a Container Version.
+-- Undeletes a Container Version.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVersionsUndelete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Undelete

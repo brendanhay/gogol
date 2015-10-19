@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Given one or more beacon observations, returns any beacon information
+-- Given one or more beacon observations, returns any beacon information
 -- and attachments accessible to your application.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconInfoGetforObserved@.

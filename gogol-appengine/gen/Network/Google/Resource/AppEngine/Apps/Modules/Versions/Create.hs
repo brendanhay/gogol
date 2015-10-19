@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deploys new code and resource files to a version.
+-- Deploys new code and resource files to a version.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesVersionsCreate@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create

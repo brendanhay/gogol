@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the specified HttpHealthCheck resource.
+-- Deletes the specified HttpHealthCheck resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeHTTPHealthChecksDelete@.
 module Network.Google.Resource.Compute.HTTPHealthChecks.Delete

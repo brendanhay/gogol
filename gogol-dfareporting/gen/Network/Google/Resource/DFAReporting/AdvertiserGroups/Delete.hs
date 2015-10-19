@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes an existing advertiser group.
+-- Deletes an existing advertiser group.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertiserGroupsDelete@.
 module Network.Google.Resource.DFAReporting.AdvertiserGroups.Delete

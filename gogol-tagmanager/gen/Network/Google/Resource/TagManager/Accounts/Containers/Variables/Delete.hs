@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a GTM Variable.
+-- Deletes a GTM Variable.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVariablesDelete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Delete

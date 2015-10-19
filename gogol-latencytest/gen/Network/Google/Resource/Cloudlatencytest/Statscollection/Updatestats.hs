@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | RPC to update the new TCP stats.
+-- RPC to update the new TCP stats.
 --
 -- /See:/ < Google Cloud Network Performance Monitoring API Reference> for @CloudlatencytestStatscollectionUpdatestats@.
 module Network.Google.Resource.Cloudlatencytest.Statscollection.Updatestats

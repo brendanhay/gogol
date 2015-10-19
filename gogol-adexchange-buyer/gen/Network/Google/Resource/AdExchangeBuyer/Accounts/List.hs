@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the authenticated user\'s list of accounts.
+-- Retrieves the authenticated user\'s list of accounts.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerAccountsList@.
 module Network.Google.Resource.AdExchangeBuyer.Accounts.List

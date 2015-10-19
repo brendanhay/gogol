@@ -1,6 +1,6 @@
 name:                  gogol-webmaster-tools
 version:               0.0.1
-synopsis:              Webmaster Tools API Client.
+synopsis:              Google Webmaster Tools SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

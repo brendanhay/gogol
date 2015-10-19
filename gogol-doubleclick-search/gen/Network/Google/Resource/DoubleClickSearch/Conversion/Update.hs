@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a batch of conversions in DoubleClick Search.
+-- Updates a batch of conversions in DoubleClick Search.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchConversionUpdate@.
 module Network.Google.Resource.DoubleClickSearch.Conversion.Update

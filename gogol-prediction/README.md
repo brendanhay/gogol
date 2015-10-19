@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Prediction API.
+A client library for the Google Prediction.
 
 
 ## Contribute

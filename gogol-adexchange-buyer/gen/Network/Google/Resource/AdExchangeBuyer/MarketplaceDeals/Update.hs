@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Replaces all the deals in the order with the passed in deals
+-- Replaces all the deals in the order with the passed in deals
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceDealsUpdate@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Update

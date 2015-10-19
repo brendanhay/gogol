@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets one blog and user info pair by blogId and userId.
+-- Gets one blog and user info pair by blogId and userId.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerBlogUserInfosGet@.
 module Network.Google.Resource.Blogger.BlogUserInfos.Get

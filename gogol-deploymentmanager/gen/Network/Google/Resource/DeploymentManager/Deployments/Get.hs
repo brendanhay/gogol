@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets information about a specific deployment.
+-- Gets information about a specific deployment.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsGet@.
 module Network.Google.Resource.DeploymentManager.Deployments.Get

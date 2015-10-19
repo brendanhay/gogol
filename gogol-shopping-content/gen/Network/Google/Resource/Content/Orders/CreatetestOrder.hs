@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sandbox only. Creates a test order.
+-- Sandbox only. Creates a test order.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersCreatetestOrder@.
 module Network.Google.Resource.Content.Orders.CreatetestOrder

@@ -1,6 +1,6 @@
 name:                  gogol-adsense
 version:               0.0.1
-synopsis:              AdSense Management API Client.
+synopsis:              Google AdSense Management SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

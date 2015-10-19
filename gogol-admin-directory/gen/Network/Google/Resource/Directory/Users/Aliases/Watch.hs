@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Watch for changes in user aliases list
+-- Watch for changes in user aliases list
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersAliasesWatch@.
 module Network.Google.Resource.Directory.Users.Aliases.Watch

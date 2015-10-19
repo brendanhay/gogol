@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Insert a new file.
+-- Insert a new file.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesInsert@.
 module Network.Google.Resource.Drive.Files.Insert

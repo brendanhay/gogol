@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Detect the language of text.
+-- Detect the language of text.
 --
 -- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference> for @LanguageDetectionsList@.
 module Network.Google.Resource.Language.Detections.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the status of a datafeed from your Merchant Center account.
+-- Retrieves the status of a datafeed from your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentDatafeedstatusesGet@.
 module Network.Google.Resource.Content.Datafeedstatuses.Get

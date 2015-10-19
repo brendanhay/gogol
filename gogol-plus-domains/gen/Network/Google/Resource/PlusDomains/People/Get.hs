@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get a person\'s profile.
+-- Get a person\'s profile.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsPeopleGet@.
 module Network.Google.Resource.PlusDomains.People.Get

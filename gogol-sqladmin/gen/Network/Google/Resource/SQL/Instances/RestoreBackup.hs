@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Restores a backup of a Cloud SQL instance.
+-- Restores a backup of a Cloud SQL instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesRestoreBackup@.
 module Network.Google.Resource.SQL.Instances.RestoreBackup

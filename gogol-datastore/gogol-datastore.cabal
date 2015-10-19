@@ -1,6 +1,6 @@
 name:                  gogol-datastore
 version:               0.0.1
-synopsis:              Google Cloud Datastore API Client.
+synopsis:              Google Cloud Datastore SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

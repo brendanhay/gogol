@@ -1,6 +1,6 @@
 name:                  gogol-games-management
 version:               0.0.1
-synopsis:              Google Play Game Services Management API Client.
+synopsis:              Google Play Game Services Management SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

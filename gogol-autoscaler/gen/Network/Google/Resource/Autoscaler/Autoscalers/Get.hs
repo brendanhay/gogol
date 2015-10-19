@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the specified Autoscaler resource.
+-- Gets the specified Autoscaler resource.
 --
 -- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerAutoscalersGet@.
 module Network.Google.Resource.Autoscaler.Autoscalers.Get

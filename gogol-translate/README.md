@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Translate API.
+A client library for the Google Translate.
 
 
 ## Contribute

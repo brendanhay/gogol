@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a dataset containing all data points whose start and end times
+-- Returns a dataset containing all data points whose start and end times
 -- overlap with the specified range of the dataset minimum start time and
 -- maximum end time. Specifically, any data point whose start time is less
 -- than or equal to the dataset end time and whose end time is greater than

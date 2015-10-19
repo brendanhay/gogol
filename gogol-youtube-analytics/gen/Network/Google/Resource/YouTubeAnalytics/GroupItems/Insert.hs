@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a group item.
+-- Creates a group item.
 --
 -- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsGroupItemsInsert@.
 module Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds a user as a student of a course. This method returns the following
+-- Adds a user as a student of a course. This method returns the following
 -- error codes: * \`PERMISSION_DENIED\` if the requesting user is not
 -- permitted to create students in this course or for access errors. *
 -- \`NOT_FOUND\` if the requested course ID does not exist. *

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Dismiss (delete) the specified alert from the publisher\'s AdSense
+-- Dismiss (delete) the specified alert from the publisher\'s AdSense
 -- account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAlertsDelete@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Uploads a product to your Merchant Center account.
+-- Uploads a product to your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentProductsInsert@.
 module Network.Google.Resource.Content.Products.Insert

@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lets you translate text from one language to another
+-- Lets you translate text from one language to another
 --
 -- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference>
 module Network.Google.Translate

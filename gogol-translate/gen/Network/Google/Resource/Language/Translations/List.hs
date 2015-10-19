@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns text translations from one language to another.
+-- Returns text translations from one language to another.
 --
 -- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference> for @LanguageTranslationsList@.
 module Network.Google.Resource.Language.Translations.List

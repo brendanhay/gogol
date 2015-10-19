@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the scores in a leaderboard, starting from the top.
+-- Lists the scores in a leaderboard, starting from the top.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesScoresList@.
 module Network.Google.Resource.Games.Scores.List

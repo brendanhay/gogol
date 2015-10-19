@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Return all parent ids of the specified layer.
+-- Return all parent ids of the specified layer.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineLayersParentsList@.
 module Network.Google.Resource.MapsEngine.Layers.Parents.List

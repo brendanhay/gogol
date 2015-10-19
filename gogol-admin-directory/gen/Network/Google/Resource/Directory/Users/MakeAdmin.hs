@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | change admin status of a user
+-- change admin status of a user
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersMakeAdmin@.
 module Network.Google.Resource.Directory.Users.MakeAdmin

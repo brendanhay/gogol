@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the list of managed instance groups and groups them by zone.
+-- Retrieves the list of managed instance groups and groups them by zone.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersAggregatedList@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.AggregatedList

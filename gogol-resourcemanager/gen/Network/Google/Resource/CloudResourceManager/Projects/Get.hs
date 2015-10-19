@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the project identified by the specified \`project_id\` (for
+-- Retrieves the project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`). The caller must have read permissions for
 -- this project.
 --

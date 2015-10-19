@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an existing subscription in place.
+-- Updates an existing subscription in place.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorSubscriptionsUpdate@.
 module Network.Google.Resource.Mirror.Subscriptions.Update

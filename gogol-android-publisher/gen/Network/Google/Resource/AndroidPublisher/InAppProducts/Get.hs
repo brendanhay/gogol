@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns information about the in-app product specified.
+-- Returns information about the in-app product specified.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherInAppProductsGet@.
 module Network.Google.Resource.AndroidPublisher.InAppProducts.Get

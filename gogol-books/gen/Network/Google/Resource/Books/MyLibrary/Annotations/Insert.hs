@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Inserts a new annotation.
+-- Inserts a new annotation.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryAnnotationsInsert@.
 module Network.Google.Resource.Books.MyLibrary.Annotations.Insert

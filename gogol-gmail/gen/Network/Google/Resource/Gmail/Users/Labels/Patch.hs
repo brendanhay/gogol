@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the specified label. This method supports patch semantics.
+-- Updates the specified label. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersLabelsPatch@.
 module Network.Google.Resource.Gmail.Users.Labels.Patch

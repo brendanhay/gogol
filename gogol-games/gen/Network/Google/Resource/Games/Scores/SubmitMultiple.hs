@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Submits multiple scores to leaderboards.
+-- Submits multiple scores to leaderboards.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesScoresSubmitMultiple@.
 module Network.Google.Resource.Games.Scores.SubmitMultiple

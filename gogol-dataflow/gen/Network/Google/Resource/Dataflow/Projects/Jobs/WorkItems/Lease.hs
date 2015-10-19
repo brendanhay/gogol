@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Leases a dataflow WorkItem to run.
+-- Leases a dataflow WorkItem to run.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsWorkItemsLease@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease

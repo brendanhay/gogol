@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a new task list and adds it to the authenticated user\'s task
+-- Creates a new task list and adds it to the authenticated user\'s task
 -- lists.
 --
 -- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTaskListsInsert@.

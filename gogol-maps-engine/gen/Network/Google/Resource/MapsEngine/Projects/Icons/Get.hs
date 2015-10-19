@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Return an icon or its associated metadata
+-- Return an icon or its associated metadata
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineProjectsIconsGet@.
 module Network.Google.Resource.MapsEngine.Projects.Icons.Get

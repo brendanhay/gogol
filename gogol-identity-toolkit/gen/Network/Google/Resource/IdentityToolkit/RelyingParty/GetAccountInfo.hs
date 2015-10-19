@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the account info.
+-- Returns the account info.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyGetAccountInfo@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.GetAccountInfo

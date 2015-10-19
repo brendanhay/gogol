@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all resources in a given deployment.
+-- Lists all resources in a given deployment.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerResourcesList@.
 module Network.Google.Resource.DeploymentManager.Resources.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get information about the selected associated AdSense account.
+-- Get information about the selected associated AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsGet@.
 module Network.Google.Resource.AdSenseHost.Accounts.Get

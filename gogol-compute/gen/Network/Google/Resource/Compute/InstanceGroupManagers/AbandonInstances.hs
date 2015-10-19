@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Schedules a group action to remove the specified instances from the
+-- Schedules a group action to remove the specified instances from the
 -- managed instance group. Abandoning an instance does not delete the
 -- instance, but it does remove the instance from any target pools that are
 -- applied by the managed instance group. This method reduces the

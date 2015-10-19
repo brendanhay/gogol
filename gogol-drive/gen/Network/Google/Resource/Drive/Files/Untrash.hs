@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Restores a file from the trash.
+-- Restores a file from the trash.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesUntrash@.
 module Network.Google.Resource.Drive.Files.Untrash

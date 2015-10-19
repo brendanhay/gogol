@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Report and modify your advertising data in DoubleClick Search (for
+-- Report and modify your advertising data in DoubleClick Search (for
 -- example, campaigns, ad groups, keywords, and conversions).
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference>

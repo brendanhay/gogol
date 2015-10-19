@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the datafeeds in your Merchant Center account.
+-- Lists the datafeeds in your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentDatafeedsList@.
 module Network.Google.Resource.Content.Datafeeds.List

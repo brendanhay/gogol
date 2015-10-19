@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a variant set by ID.
+-- Gets a variant set by ID.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsVariantsetsGet@.
 module Network.Google.Resource.Genomics.Variantsets.Get

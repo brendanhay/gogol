@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Fetches information about a localized store listing.
+-- Fetches information about a localized store listing.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsListingsGet@.
 module Network.Google.Resource.AndroidPublisher.Edits.Listings.Get

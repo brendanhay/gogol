@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update tasks that are leased out of a TaskQueue. This method supports
+-- Update tasks that are leased out of a TaskQueue. This method supports
 -- patch semantics.
 --
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksPatch@.

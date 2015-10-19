@@ -20,8 +20,6 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-
---
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference> for @OAuth2UserInfoGet@.
 module Network.Google.Resource.OAuth2.UserInfo.Get
     (

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Replaces the schedule of a job with the provided schedule.
+-- Replaces the schedule of a job with the provided schedule.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateScheduleUpdate@.
 module Network.Google.Resource.Coordinate.Schedule.Update

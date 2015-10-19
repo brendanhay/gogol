@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an object\'s metadata. This method supports patch semantics.
+-- Updates an object\'s metadata. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsPatch@.
 module Network.Google.Resource.Storage.Objects.Patch

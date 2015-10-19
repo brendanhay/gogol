@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Return metadata for a particular layer.
+-- Return metadata for a particular layer.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineLayersGet@.
 module Network.Google.Resource.MapsEngine.Layers.Get

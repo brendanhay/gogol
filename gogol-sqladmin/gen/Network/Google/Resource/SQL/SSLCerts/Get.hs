@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a particular SSL certificate. Does not include the private key
+-- Retrieves a particular SSL certificate. Does not include the private key
 -- (required for usage). The private key must be saved from the response to
 -- initial creation.
 --

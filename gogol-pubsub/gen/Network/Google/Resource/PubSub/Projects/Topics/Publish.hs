@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds one or more messages to the topic. Returns \`NOT_FOUND\` if the
+-- Adds one or more messages to the topic. Returns \`NOT_FOUND\` if the
 -- topic does not exist. The message payload must not be empty; it must
 -- contain either a non-empty data field, or at least one attribute.
 --

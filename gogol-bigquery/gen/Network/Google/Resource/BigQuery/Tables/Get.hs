@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the specified table resource by table ID. This method does not
+-- Gets the specified table resource by table ID. This method does not
 -- return the data in the table, it only returns the table resource, which
 -- describes the structure of this table.
 --

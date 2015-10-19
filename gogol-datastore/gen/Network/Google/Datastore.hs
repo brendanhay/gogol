@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | API for accessing Google Cloud Datastore.
+-- API for accessing Google Cloud Datastore.
 --
 -- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference>
 module Network.Google.Datastore

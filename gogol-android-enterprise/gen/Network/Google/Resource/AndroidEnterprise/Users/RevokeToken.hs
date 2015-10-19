@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Revokes a previously generated token (activation code) for the user.
+-- Revokes a previously generated token (activation code) for the user.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseUsersRevokeToken@.
 module Network.Google.Resource.AndroidEnterprise.Users.RevokeToken

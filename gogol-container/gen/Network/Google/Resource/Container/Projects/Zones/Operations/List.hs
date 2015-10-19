@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all operations in a project in a specific zone or all zones.
+-- Lists all operations in a project in a specific zone or all zones.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @ContainerProjectsZonesOperationsList@.
 module Network.Google.Resource.Container.Projects.Zones.Operations.List

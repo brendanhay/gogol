@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all of the people in the specified collection for a particular
+-- List all of the people in the specified collection for a particular
 -- activity.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusPeopleListByActivity@.

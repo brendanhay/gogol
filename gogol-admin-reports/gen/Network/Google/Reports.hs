@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Allows the administrators of Google Apps customers to fetch reports
+-- Allows the administrators of Google Apps customers to fetch reports
 -- about the usage, collaboration, security and risk for their users.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference>

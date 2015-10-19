@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves stored reports.
+-- Retrieves stored reports.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleClickBidManagerReportsListreports@.
 module Network.Google.Resource.DoubleClickBidManager.Reports.Listreports

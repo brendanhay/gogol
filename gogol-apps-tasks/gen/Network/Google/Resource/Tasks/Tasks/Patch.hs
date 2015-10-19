@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the specified task. This method supports patch semantics.
+-- Updates the specified task. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTasksPatch@.
 module Network.Google.Resource.Tasks.Tasks.Patch

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves an instance operation that has been performed on an instance.
+-- Retrieves an instance operation that has been performed on an instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLOperationsGet@.
 module Network.Google.Resource.SQL.Operations.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets one post and user info pair, by post ID and user ID. The post user
+-- Gets one post and user info pair, by post ID and user ID. The post user
 -- info contains per-user information about the post, such as access
 -- rights, specific to the user.
 --

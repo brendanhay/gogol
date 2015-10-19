@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the current configuration of the module.
+-- Gets the current configuration of the module.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesGet@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Get

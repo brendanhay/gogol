@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Searches for reference sets which match the given criteria. Implements
+-- Searches for reference sets which match the given criteria. Implements
 -- [GlobalAllianceApi.searchReferenceSets](http:\/\/ga4gh.org\/documentation\/api\/v0.5.1\/ga4gh_api.html#\/schema\/org.ga4gh.searchReferenceSets).
 --
 -- /See:/ < Genomics API Reference> for @GenomicsReferencesetsSearch@.

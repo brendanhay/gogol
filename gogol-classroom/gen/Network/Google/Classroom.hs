@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Google Classroom API
+-- Google Classroom API
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference>
 module Network.Google.Classroom

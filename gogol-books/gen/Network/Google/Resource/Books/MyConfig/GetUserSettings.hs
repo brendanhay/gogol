@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the current settings for the user.
+-- Gets the current settings for the user.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyConfigGetUserSettings@.
 module Network.Google.Resource.Books.MyConfig.GetUserSettings

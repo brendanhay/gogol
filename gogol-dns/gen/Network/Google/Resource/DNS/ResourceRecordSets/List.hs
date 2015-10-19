@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Enumerate ResourceRecordSets that have been created but not yet deleted.
+-- Enumerate ResourceRecordSets that have been created but not yet deleted.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSResourceRecordSetsList@.
 module Network.Google.Resource.DNS.ResourceRecordSets.List

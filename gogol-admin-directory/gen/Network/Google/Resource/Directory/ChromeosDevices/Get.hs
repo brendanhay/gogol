@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieve Chrome OS Device
+-- Retrieve Chrome OS Device
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryChromeosDevicesGet@.
 module Network.Google.Resource.Directory.ChromeosDevices.Get

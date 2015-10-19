@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of students of this course that the requester is
+-- Returns a list of students of this course that the requester is
 -- permitted to view. This method returns the following error codes: *
 -- \`NOT_FOUND\` if the course does not exist. * \`PERMISSION_DENIED\` for
 -- access errors.

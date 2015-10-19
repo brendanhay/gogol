@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get the list of players hidden from the given application. This method
+-- Get the list of players hidden from the given application. This method
 -- is only available to user accounts for your developer console.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementApplicationsListHidden@.

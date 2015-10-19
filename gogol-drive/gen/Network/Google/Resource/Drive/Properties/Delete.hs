@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a property.
+-- Deletes a property.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePropertiesDelete@.
 module Network.Google.Resource.Drive.Properties.Delete

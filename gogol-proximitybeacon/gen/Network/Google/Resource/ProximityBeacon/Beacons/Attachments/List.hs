@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the attachments for the specified beacon that match the
+-- Returns the attachments for the specified beacon that match the
 -- specified namespaced-type pattern. To control which namespaced types are
 -- returned, you add the \`namespacedType\` query parameter to the request.
 -- You must either use \`*\/*\`, to return all attachments, or the

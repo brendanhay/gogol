@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | The Google Container Engine API is used for building and managing
+-- The Google Container Engine API is used for building and managing
 -- container based applications, powered by the open source Kubernetes
 -- technology.
 --

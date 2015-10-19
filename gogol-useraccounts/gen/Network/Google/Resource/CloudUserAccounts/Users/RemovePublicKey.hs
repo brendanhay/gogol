@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes the specified public key from the user.
+-- Removes the specified public key from the user.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsUsersRemovePublicKey@.
 module Network.Google.Resource.CloudUserAccounts.Users.RemovePublicKey

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists webProperty-user links for a given web property.
+-- Lists webProperty-user links for a given web property.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyUserLinksList@.
 module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.List

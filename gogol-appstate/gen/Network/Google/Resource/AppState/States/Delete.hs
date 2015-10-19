@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a key and the data associated with it. The key is removed and no
+-- Deletes a key and the data associated with it. The key is removed and no
 -- longer counts against the key quota. Note that since this method is not
 -- safe in the face of concurrent modifications, it should only be used for
 -- development and testing purposes. Invoking this method in shipping code

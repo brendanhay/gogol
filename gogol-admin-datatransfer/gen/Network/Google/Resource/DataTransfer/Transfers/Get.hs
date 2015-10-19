@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a data transfer request by its resource ID.
+-- Retrieves a data transfer request by its resource ID.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @DataTransferTransfersGet@.
 module Network.Google.Resource.DataTransfer.Transfers.Get

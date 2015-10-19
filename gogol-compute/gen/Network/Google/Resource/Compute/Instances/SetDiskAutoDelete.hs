@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sets the auto-delete flag for a disk attached to an instance.
+-- Sets the auto-delete flag for a disk attached to an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesSetDiskAutoDelete@.
 module Network.Google.Resource.Compute.Instances.SetDiskAutoDelete

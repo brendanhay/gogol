@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a shipment\'s status, carrier, and\/or tracking ID.
+-- Updates a shipment\'s status, carrier, and\/or tracking ID.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersUpdateshipment@.
 module Network.Google.Resource.Content.Orders.Updateshipment

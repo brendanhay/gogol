@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a list of all supported user role permission groups.
+-- Gets a list of all supported user role permission groups.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolePermissionGroupsList@.
 module Network.Google.Resource.DFAReporting.UserRolePermissionGroups.List

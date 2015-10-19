@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Starts the replication in the read replica instance.
+-- Starts the replication in the read replica instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesStartReplica@.
 module Network.Google.Resource.SQL.Instances.StartReplica

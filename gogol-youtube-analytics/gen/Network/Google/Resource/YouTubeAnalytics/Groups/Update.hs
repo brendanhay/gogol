@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Modifies a group. For example, you could change a group\'s title.
+-- Modifies a group. For example, you could change a group\'s title.
 --
 -- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsGroupsUpdate@.
 module Network.Google.Resource.YouTubeAnalytics.Groups.Update

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates price and availability of a product in your Merchant Center
+-- Updates price and availability of a product in your Merchant Center
 -- account. This operation does not update the expiration date of the
 -- product.
 --

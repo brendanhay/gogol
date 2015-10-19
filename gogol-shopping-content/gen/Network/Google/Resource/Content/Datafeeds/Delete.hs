@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a datafeed from your Merchant Center account.
+-- Deletes a datafeed from your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentDatafeedsDelete@.
 module Network.Google.Resource.Content.Datafeeds.Delete

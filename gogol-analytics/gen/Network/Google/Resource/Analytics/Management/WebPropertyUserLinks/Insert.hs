@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds a new user to the given web property.
+-- Adds a new user to the given web property.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyUserLinksInsert@.
 module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Insert

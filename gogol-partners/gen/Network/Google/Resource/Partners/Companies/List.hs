@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists companies.
+-- Lists companies.
 --
 -- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @PartnersCompaniesList@.
 module Network.Google.Resource.Partners.Companies.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Query for entities.
+-- Query for entities.
 --
 -- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @DatastoreDatasetsRunQuery@.
 module Network.Google.Resource.Datastore.Datasets.RunQuery

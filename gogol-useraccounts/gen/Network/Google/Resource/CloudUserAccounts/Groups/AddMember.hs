@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds users to the specified group.
+-- Adds users to the specified group.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsGroupsAddMember@.
 module Network.Google.Resource.CloudUserAccounts.Groups.AddMember

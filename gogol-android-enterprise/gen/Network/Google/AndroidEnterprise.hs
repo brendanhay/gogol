@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Allows MDMs\/EMMs and enterprises to manage the deployment of apps to
+-- Allows MDMs\/EMMs and enterprises to manage the deployment of apps to
 -- Android for Work users.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference>

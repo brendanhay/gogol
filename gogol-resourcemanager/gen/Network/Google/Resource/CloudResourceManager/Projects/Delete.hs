@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Marks the project identified by the specified \`project_id\` (for
+-- Marks the project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`) for deletion. This method will only affect
 -- the project if the following criteria are met: + The project does not
 -- have a billing account associated with it. + The project has a lifecycle

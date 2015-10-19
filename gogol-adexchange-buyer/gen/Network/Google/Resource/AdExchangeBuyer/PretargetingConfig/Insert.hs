@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Inserts a new pretargeting configuration.
+-- Inserts a new pretargeting configuration.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPretargetingConfigInsert@.
 module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Insert

@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the DCM/DFA Reporting And Trafficking API.
+A client library for the Google DCM/DFA Reporting And Trafficking.
 
 
 ## Contribute

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Inserts a new floodlight activity group.
+-- Inserts a new floodlight activity group.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivityGroupsInsert@.
 module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Insert

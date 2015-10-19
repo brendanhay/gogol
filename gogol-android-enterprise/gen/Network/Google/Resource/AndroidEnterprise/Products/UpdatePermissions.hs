@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the set of Android app permissions for this app that have been
+-- Updates the set of Android app permissions for this app that have been
 -- accepted by the enterprise.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseProductsUpdatePermissions@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the backup taken by a backup run.
+-- Deletes the backup taken by a backup run.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLBackupRunsDelete@.
 module Network.Google.Resource.SQL.BackupRuns.Delete

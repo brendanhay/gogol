@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Performs an inclusive delete of all data points whose start and end
+-- Performs an inclusive delete of all data points whose start and end
 -- times have any overlap with the time range specified by the dataset ID.
 -- For most data types, the entire data point will be deleted. For data
 -- types where the time span represents a consistent value (such as

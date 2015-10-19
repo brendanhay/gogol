@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List play data aggregated per category for the player corresponding to
+-- List play data aggregated per category for the player corresponding to
 -- playerId.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesMetagameListCategoriesByPlayer@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Request downloaded content access for specified volumes on the My eBooks
+-- Request downloaded content access for specified volumes on the My eBooks
 -- shelf.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyConfigSyncVolumeLicenses@.

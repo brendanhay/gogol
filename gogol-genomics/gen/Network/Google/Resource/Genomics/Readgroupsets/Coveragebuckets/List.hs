@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists fixed width coverage buckets for a read group set, each of which
+-- Lists fixed width coverage buckets for a read group set, each of which
 -- correspond to a range of a reference sequence. Each bucket summarizes
 -- coverage information across its corresponding genomic range. Coverage is
 -- defined as the number of reads which are aligned to a given base in the

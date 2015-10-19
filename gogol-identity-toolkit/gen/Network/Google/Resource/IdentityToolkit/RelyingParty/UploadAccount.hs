@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Batch upload existing user accounts.
+-- Batch upload existing user accounts.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyUploadAccount@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.UploadAccount

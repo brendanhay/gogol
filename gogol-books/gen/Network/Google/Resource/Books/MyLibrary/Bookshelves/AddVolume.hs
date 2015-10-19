@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds a volume to a bookshelf.
+-- Adds a volume to a bookshelf.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryBookshelvesAddVolume@.
 module Network.Google.Resource.Books.MyLibrary.Bookshelves.AddVolume

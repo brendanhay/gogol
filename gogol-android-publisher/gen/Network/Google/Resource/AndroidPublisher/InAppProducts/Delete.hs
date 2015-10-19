@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Delete an in-app product for an app.
+-- Delete an in-app product for an app.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherInAppProductsDelete@.
 module Network.Google.Resource.AndroidPublisher.InAppProducts.Delete

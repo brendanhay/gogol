@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the most recent health check results for this BackendService.
+-- Gets the most recent health check results for this BackendService.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeBackendServicesGetHealth@.
 module Network.Google.Resource.Compute.BackendServices.GetHealth

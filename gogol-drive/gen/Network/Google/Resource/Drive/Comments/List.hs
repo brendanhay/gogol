@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists a file\'s comments.
+-- Lists a file\'s comments.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveCommentsList@.
 module Network.Google.Resource.Drive.Comments.List

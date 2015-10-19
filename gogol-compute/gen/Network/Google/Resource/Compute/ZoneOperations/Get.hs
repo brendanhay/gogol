@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the specified zone-specific Operations resource.
+-- Retrieves the specified zone-specific Operations resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeZoneOperationsGet@.
 module Network.Google.Resource.Compute.ZoneOperations.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Inserts a new job. Only the state field of the job should be set.
+-- Inserts a new job. Only the state field of the job should be set.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateJobsInsert@.
 module Network.Google.Resource.Coordinate.Jobs.Insert

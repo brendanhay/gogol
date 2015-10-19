@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an existing template. This method supports patch semantics.
+-- Updates an existing template. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTemplatePatch@.
 module Network.Google.Resource.FusionTables.Template.Patch

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes a user from the given account.
+-- Removes a user from the given account.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountUserLinksDelete@.
 module Network.Google.Resource.Analytics.Management.AccountUserLinks.Delete

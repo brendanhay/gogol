@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Add a person to a circle. Google+ limits certain circle operations,
+-- Add a person to a circle. Google+ limits certain circle operations,
 -- including the number of circle adds. Learn More.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesAddPeople@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all GTM Accounts that a user has access to.
+-- Lists all GTM Accounts that a user has access to.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsList@.
 module Network.Google.Resource.TagManager.Accounts.List

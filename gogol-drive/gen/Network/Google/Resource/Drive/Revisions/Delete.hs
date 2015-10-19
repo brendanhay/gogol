@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes a revision.
+-- Removes a revision.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRevisionsDelete@.
 module Network.Google.Resource.Drive.Revisions.Delete

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates\/Transfers a subscription for the customer.
+-- Creates\/Transfers a subscription for the customer.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsInsert@.
 module Network.Google.Resource.Reseller.Subscriptions.Insert

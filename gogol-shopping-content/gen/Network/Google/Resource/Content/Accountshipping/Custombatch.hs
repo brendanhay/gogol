@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves and updates the shipping settings of multiple accounts in a
+-- Retrieves and updates the shipping settings of multiple accounts in a
 -- single request.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountshippingCustombatch@.

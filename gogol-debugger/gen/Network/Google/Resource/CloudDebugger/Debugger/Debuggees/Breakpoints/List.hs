@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all breakpoints of the debuggee that the user has access to.
+-- Lists all breakpoints of the debuggee that the user has access to.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @CloudDebuggerDebuggerDebuggeesBreakpointsList@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List

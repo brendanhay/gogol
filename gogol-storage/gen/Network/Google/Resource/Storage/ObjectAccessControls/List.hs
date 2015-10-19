@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves ACL entries on the specified object.
+-- Retrieves ACL entries on the specified object.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectAccessControlsList@.
 module Network.Google.Resource.Storage.ObjectAccessControls.List

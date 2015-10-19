@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an Organization resource.
+-- Updates an Organization resource.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerOrganizationsUpdate@.
 module Network.Google.Resource.CloudResourceManager.Organizations.Update

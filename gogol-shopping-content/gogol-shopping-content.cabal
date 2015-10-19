@@ -1,6 +1,6 @@
 name:                  gogol-shopping-content
 version:               0.0.1
-synopsis:              Content API for Shopping Client.
+synopsis:              Google Content API for Shopping SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

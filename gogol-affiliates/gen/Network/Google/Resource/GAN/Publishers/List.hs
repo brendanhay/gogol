@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves data about all publishers that the requesting
+-- Retrieves data about all publishers that the requesting
 -- advertiser\/publisher has access to.
 --
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANPublishersList@.

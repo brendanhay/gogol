@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets one remarketing list share by remarketing list ID.
+-- Gets one remarketing list share by remarketing list ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingRemarketingListSharesGet@.
 module Network.Google.Resource.DFAReporting.RemarketingListShares.Get

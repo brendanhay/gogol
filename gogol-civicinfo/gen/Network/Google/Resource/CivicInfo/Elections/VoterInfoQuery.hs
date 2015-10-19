@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Looks up information relevant to a voter based on the voter\'s
+-- Looks up information relevant to a voter based on the voter\'s
 -- registered address.
 --
 -- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicInfoElectionsVoterInfoQuery@.

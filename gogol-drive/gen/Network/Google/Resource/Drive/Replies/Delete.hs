@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a reply.
+-- Deletes a reply.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRepliesDelete@.
 module Network.Google.Resource.Drive.Replies.Delete

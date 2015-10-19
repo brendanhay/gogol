@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the APIs Discovery Service.
+A client library for the Google APIs Discovery Service.
 
 
 ## Contribute

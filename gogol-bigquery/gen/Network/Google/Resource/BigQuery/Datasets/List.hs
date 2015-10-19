@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all datasets in the specified project to which you have been
+-- Lists all datasets in the specified project to which you have been
 -- granted the READER dataset role.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryDatasetsList@.

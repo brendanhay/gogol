@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the comments for a blog, across all posts, possibly filtered.
+-- Retrieves the comments for a blog, across all posts, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerCommentsListByBlog@.
 module Network.Google.Resource.Blogger.Comments.ListByBlog

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a given data source. It is an error to modify the data source\'s
+-- Updates a given data source. It is an error to modify the data source\'s
 -- data stream ID, data type, type, stream name or device information apart
 -- from the device version. Changing these fields would require a new
 -- unique data stream ID and separate data source. Data sources are

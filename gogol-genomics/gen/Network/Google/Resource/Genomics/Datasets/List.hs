@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists datasets within a project.
+-- Lists datasets within a project.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsDatasetsList@.
 module Network.Google.Resource.Genomics.Datasets.List

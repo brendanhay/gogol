@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a list of call sets matching the criteria. Implements
+-- Gets a list of call sets matching the criteria. Implements
 -- [GlobalAllianceApi.searchCallSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L178).
 --
 -- /See:/ < Genomics API Reference> for @GenomicsCallsetsSearch@.

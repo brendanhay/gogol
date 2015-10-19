@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get token signing public key.
+-- Get token signing public key.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyGetPublicKeys@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.GetPublicKeys

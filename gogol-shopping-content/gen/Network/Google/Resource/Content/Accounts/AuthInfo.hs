@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns information about the authenticated user.
+-- Returns information about the authenticated user.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountsAuthInfo@.
 module Network.Google.Resource.Content.Accounts.AuthInfo

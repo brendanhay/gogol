@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a new variant.
+-- Creates a new variant.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsVariantsCreate@.
 module Network.Google.Resource.Genomics.Variants.Create

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the table specified by tableId from the dataset. If the table
+-- Deletes the table specified by tableId from the dataset. If the table
 -- contains data, all the data will be deleted.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryTablesDelete@.

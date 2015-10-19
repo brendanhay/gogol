@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns turn-based matches the player is or was involved in that changed
+-- Returns turn-based matches the player is or was involved in that changed
 -- since the last sync call, with the least recent changes coming first.
 -- Matches that should be removed from the local cache will have a status
 -- of MATCH_DELETED.

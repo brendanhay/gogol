@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Enables the usage export feature and sets the usage export bucket where
+-- Enables the usage export feature and sets the usage export bucket where
 -- reports are stored. If you provide an empty request body using this
 -- method, the usage export feature will be disabled.
 --

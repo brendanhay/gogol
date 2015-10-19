@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Enrolls an enterprise with the calling MDM.
+-- Enrolls an enterprise with the calling MDM.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEnterprisesEnroll@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.Enroll

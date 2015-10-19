@@ -1,6 +1,6 @@
 name:                  gogol-games
 version:               0.0.1
-synopsis:              Google Play Game Services API Client.
+synopsis:              Google Play Game Services SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

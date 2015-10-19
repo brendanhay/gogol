@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an ACL entry on the specified object.
+-- Updates an ACL entry on the specified object.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectAccessControlsUpdate@.
 module Network.Google.Resource.Storage.ObjectAccessControls.Update

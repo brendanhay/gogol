@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List license assignments for given product and sku of the customer.
+-- List license assignments for given product and sku of the customer.
 --
 -- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @LicensingLicenseAssignmentsListForProductAndSKU@.
 module Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSKU

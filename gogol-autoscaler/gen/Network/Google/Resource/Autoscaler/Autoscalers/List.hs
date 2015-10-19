@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all Autoscaler resources in this zone.
+-- Lists all Autoscaler resources in this zone.
 --
 -- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerAutoscalersList@.
 module Network.Google.Resource.Autoscaler.Autoscalers.List

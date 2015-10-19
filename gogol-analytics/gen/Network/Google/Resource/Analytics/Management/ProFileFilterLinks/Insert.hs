@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Create a new profile filter link.
+-- Create a new profile filter link.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFileFilterLinksInsert@.
 module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Insert

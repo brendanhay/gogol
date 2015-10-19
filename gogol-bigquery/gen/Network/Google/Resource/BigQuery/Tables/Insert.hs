@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a new, empty table in the dataset.
+-- Creates a new, empty table in the dataset.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryTablesInsert@.
 module Network.Google.Resource.BigQuery.Tables.Insert

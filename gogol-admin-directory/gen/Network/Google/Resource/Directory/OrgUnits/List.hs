@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieve all Organization Units
+-- Retrieve all Organization Units
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryOrgUnitsList@.
 module Network.Google.Resource.Directory.OrgUnits.List

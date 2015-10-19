@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Freebase Search.
+A client library for the Google Freebase Search.
 
 
 ## Contribute

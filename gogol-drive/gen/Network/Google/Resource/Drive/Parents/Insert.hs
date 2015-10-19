@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds a parent folder for a file.
+-- Adds a parent folder for a file.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveParentsInsert@.
 module Network.Google.Resource.Drive.Parents.Insert

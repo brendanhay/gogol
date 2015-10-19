@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Checks the purchase and consumption status of an inapp item.
+-- Checks the purchase and consumption status of an inapp item.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherPurchasesProductsGet@.
 module Network.Google.Resource.AndroidPublisher.Purchases.Products.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a single contact by ID.
+-- Gets a single contact by ID.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorContactsGet@.
 module Network.Google.Resource.Mirror.Contacts.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Return all icons in the current project
+-- Return all icons in the current project
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineProjectsIconsList@.
 module Network.Google.Resource.MapsEngine.Projects.Icons.List

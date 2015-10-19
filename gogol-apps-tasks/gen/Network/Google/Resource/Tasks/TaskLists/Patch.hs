@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the authenticated user\'s specified task list. This method
+-- Updates the authenticated user\'s specified task list. This method
 -- supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTaskListsPatch@.

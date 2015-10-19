@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lease 1 or more tasks from a TaskQueue.
+-- Lease 1 or more tasks from a TaskQueue.
 --
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksLease@.
 module Network.Google.Resource.TaskQueue.Tasks.Lease

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Return all published maps readable by the current user.
+-- Return all published maps readable by the current user.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineMapsListPublished@.
 module Network.Google.Resource.MapsEngine.Maps.ListPublished

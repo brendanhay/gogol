@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Generates and returns a report immediately.
+-- Generates and returns a report immediately.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchReportsGenerate@.
 module Network.Google.Resource.DoubleClickSearch.Reports.Generate

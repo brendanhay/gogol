@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of post and post user info pairs, possibly filtered.
+-- Retrieves a list of post and post user info pairs, possibly filtered.
 -- The post user info contains per-user information about the post, such as
 -- access rights, specific to the user.
 --

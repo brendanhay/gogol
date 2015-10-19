@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists profile-user links for a given view (profile).
+-- Lists profile-user links for a given view (profile).
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFileUserLinksList@.
 module Network.Google.Resource.Analytics.Management.ProFileUserLinks.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Moves a volume within a bookshelf.
+-- Moves a volume within a bookshelf.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryBookshelvesMoveVolume@.
 module Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume

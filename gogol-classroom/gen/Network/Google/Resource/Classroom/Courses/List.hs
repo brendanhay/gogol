@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of courses that the requesting user is permitted to view,
+-- Returns a list of courses that the requesting user is permitted to view,
 -- restricted to those that match the request. This method returns the
 -- following error codes: * \`PERMISSION_DENIED\` for access errors. *
 -- \`INVALID_ARGUMENT\` if the query argument is malformed. * \`NOT_FOUND\`

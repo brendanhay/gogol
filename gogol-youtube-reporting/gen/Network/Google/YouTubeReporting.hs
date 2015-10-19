@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | An API to schedule reporting jobs and download the resulting bulk data
+-- An API to schedule reporting jobs and download the resulting bulk data
 -- reports about YouTube channels, videos etc. in the form of CSV files.
 --
 -- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference>

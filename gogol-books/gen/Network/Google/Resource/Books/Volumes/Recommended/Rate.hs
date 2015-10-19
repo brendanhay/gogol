@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Rate a recommended book for the current user.
+-- Rate a recommended book for the current user.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesRecommendedRate@.
 module Network.Google.Resource.Books.Volumes.Recommended.Rate

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieve a Blog by URL.
+-- Retrieve a Blog by URL.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerBlogsGetByURL@.
 module Network.Google.Resource.Blogger.Blogs.GetByURL

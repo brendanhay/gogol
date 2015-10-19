@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates variant data by asynchronously importing the provided
+-- Creates variant data by asynchronously importing the provided
 -- information. The variants for import will be merged with any existing
 -- variant that matches its reference sequence, start, end, reference
 -- bases, and alternative bases. If no such variant exists, a new one will

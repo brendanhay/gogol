@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Admin Data Transfer API.
+A client library for the Google Admin Data Transfer.
 
 
 ## Contribute

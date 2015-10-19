@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Downloads a caption track. The caption track is returned in its original
+-- Downloads a caption track. The caption track is returned in its original
 -- format unless the request specifies a value for the tfmt parameter and
 -- in its original language unless the request specifies a value for the
 -- tlang parameter.

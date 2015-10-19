@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates or updates the requested negotiation.
+-- Creates or updates the requested negotiation.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerNegotiationsInsert@.
 module Network.Google.Resource.AdExchangeBuyer.Negotiations.Insert

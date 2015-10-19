@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of public bookshelves for the specified user.
+-- Retrieves a list of public bookshelves for the specified user.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksBookshelvesList@.
 module Network.Google.Resource.Books.Bookshelves.List

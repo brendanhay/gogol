@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Subscribe to changes for a user.
+-- Subscribe to changes for a user.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChangesWatch@.
 module Network.Google.Resource.Drive.Changes.Watch

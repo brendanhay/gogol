@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all backup runs associated with a given instance and configuration
+-- Lists all backup runs associated with a given instance and configuration
 -- in the reverse chronological order of the enqueued time.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLBackupRunsList@.

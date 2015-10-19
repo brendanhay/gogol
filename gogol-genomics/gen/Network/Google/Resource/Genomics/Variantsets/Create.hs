@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a new variant set. The provided variant set must have a valid
+-- Creates a new variant set. The provided variant set must have a valid
 -- \`datasetId\` set - all other fields are optional. Note that the \`id\`
 -- field will be ignored, as this is assigned by the server.
 --

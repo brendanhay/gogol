@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the shipping settings of the account.
+-- Retrieves the shipping settings of the account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountshippingGet@.
 module Network.Google.Resource.Content.Accountshipping.Get

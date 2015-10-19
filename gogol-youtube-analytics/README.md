@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the YouTube Analytics API.
+A client library for the Google YouTube Analytics.
 
 
 ## Contribute

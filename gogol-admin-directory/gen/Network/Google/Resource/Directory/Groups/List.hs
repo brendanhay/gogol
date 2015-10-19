@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieve all groups in a domain (paginated)
+-- Retrieve all groups in a domain (paginated)
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsList@.
 module Network.Google.Resource.Directory.Groups.List

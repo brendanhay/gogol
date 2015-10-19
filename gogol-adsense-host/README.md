@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the AdSense Host API.
+A client library for the Google AdSense Host.
 
 
 ## Contribute

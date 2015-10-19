@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | A Test API to report latency data.
+-- A Test API to report latency data.
 --
 -- /See:/ < Google Cloud Network Performance Monitoring API Reference>
 module Network.Google.LatencyTest

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Set the file\'s updated time to the current server time.
+-- Set the file\'s updated time to the current server time.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesTouch@.
 module Network.Google.Resource.Drive.Files.Touch

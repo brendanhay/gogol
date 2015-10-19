@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all of the comments for an activity.
+-- List all of the comments for an activity.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusCommentsList@.
 module Network.Google.Resource.Plus.Comments.List

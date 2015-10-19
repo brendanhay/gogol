@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a playlist item.
+-- Deletes a playlist item.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlayListItemsDelete@.
 module Network.Google.Resource.YouTube.PlayListItems.Delete

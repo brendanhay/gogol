@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Cloud Network Performance Monitoring API.
+A client library for the Google Cloud Network Performance Monitoring.
 
 
 ## Contribute

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a new draft with the DRAFT label.
+-- Creates a new draft with the DRAFT label.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersDraftsCreate@.
 module Network.Google.Resource.Gmail.Users.Drafts.Create

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the access control policy for the dataset. Is empty if the policy
+-- Gets the access control policy for the dataset. Is empty if the policy
 -- or the resource does not exist. See Getting a Policy for more
 -- information.
 --

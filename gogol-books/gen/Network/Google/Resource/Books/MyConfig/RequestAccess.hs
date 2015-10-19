@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Request concurrent and download access restrictions.
+-- Request concurrent and download access restrictions.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyConfigRequestAccess@.
 module Network.Google.Resource.Books.MyConfig.RequestAccess

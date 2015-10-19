@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a snapshot of this disk.
+-- Creates a snapshot of this disk.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDisksCreateSnapshot@.
 module Network.Google.Resource.Compute.Disks.CreateSnapshot

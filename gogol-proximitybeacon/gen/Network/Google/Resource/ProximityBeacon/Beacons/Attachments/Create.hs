@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Associates the given data with the specified beacon. Attachment data
+-- Associates the given data with the specified beacon. Attachment data
 -- must contain two parts: - A namespaced type. - The actual attachment
 -- data itself. The namespaced type consists of two parts, the namespace
 -- and the type. The namespace must be one of the values returned by the

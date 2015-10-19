@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Establishes the binding between the MDM and an enterprise. This is now
+-- Establishes the binding between the MDM and an enterprise. This is now
 -- deprecated; use enroll instead.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEnterprisesInsert@.

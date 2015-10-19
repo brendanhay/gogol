@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of users contained within the specified project.
+-- Retrieves a list of users contained within the specified project.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsUsersList@.
 module Network.Google.Resource.CloudUserAccounts.Users.List

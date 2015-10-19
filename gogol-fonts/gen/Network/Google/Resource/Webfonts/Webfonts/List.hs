@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the list of fonts currently served by the Google Fonts
+-- Retrieves the list of fonts currently served by the Google Fonts
 -- Developer API
 --
 -- /See:/ <https://developers.google.com/fonts/docs/developer_api Google Fonts Developer API Reference> for @WebfontsWebfontsList@.

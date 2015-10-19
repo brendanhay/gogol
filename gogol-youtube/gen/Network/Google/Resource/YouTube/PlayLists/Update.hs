@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Modifies a playlist. For example, you could change a playlist\'s title,
+-- Modifies a playlist. For example, you could change a playlist\'s title,
 -- description, or privacy status.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlayListsUpdate@.

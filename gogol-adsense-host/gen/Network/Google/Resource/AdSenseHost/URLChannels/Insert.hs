@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Add a new URL channel to the host AdSense account.
+-- Add a new URL channel to the host AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostURLChannelsInsert@.
 module Network.Google.Resource.AdSenseHost.URLChannels.Insert

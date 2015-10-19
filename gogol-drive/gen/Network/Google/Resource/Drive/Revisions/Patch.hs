@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a revision. This method supports patch semantics.
+-- Updates a revision. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRevisionsPatch@.
 module Network.Google.Resource.Drive.Revisions.Patch

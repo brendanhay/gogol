@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the information about the specified beacon. **Any field that you
+-- Updates the information about the specified beacon. **Any field that you
 -- do not populate in the submitted beacon will be permanently erased**, so
 -- you should follow the \"read, modify, write\" pattern to avoid
 -- inadvertently destroying data. Changes to the beacon status via this

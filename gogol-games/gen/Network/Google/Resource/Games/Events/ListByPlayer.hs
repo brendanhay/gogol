@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list showing the current progress on events in this
+-- Returns a list showing the current progress on events in this
 -- application for the currently authenticated user.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesEventsListByPlayer@.

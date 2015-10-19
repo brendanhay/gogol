@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Mutate a table asset.
+-- Mutate a table asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesPatch@.
 module Network.Google.Resource.MapsEngine.Tables.Patch

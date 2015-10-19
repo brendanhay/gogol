@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Cancel processing on a layer asset.
+-- Cancel processing on a layer asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineLayersCancelProcessing@.
 module Network.Google.Resource.MapsEngine.Layers.CancelProcessing

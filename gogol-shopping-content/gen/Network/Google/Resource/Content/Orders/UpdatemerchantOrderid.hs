@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the merchant order ID for a given order.
+-- Updates the merchant order ID for a given order.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersUpdatemerchantOrderid@.
 module Network.Google.Resource.Content.Orders.UpdatemerchantOrderid

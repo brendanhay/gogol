@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Stop watching resources through this channel
+-- Stop watching resources through this channel
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @AdminChannelsStop@.
 module Network.Google.Resource.Admin.Channels.Stop

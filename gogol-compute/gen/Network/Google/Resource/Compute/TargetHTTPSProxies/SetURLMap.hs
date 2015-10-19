@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Changes the URL map for TargetHttpsProxy.
+-- Changes the URL map for TargetHttpsProxy.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetHTTPSProxiesSetURLMap@.
 module Network.Google.Resource.Compute.TargetHTTPSProxies.SetURLMap

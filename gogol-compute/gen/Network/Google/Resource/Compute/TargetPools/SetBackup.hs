@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Changes backup pool configurations.
+-- Changes backup pool configurations.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsSetBackup@.
 module Network.Google.Resource.Compute.TargetPools.SetBackup

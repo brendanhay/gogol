@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Cloud Datastore API.
+A client library for the Google Cloud Datastore.
 
 
 ## Contribute

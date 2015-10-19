@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Play Game Services Management API.
+A client library for the Google Play Game Services Management.
 
 
 ## Contribute

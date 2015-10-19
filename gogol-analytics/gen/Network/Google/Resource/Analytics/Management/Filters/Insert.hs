@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Create a new filter.
+-- Create a new filter.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementFiltersInsert@.
 module Network.Google.Resource.Analytics.Management.Filters.Insert

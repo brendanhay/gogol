@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a managed instance group using the information that you specify
+-- Creates a managed instance group using the information that you specify
 -- in the request. After the group is created, it schedules an action to
 -- create instances in the group using the specified instance template.
 -- This operation is marked as DONE when the group is created even if the

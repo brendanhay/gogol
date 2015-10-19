@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Verifies the assertion returned by the IdP.
+-- Verifies the assertion returned by the IdP.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyVerifyAssertion@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.VerifyAssertion

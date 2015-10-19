@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a course. The user specified in \`ownerId\` is the owner of the
+-- Creates a course. The user specified in \`ownerId\` is the owner of the
 -- created course and added as a teacher. This method returns the following
 -- error codes: * \`PERMISSION_DENIED\` if the requesting user is not
 -- permitted to create courses or for access errors. * \`NOT_FOUND\` if the

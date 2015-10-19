@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Runs a stored query to generate a report.
+-- Runs a stored query to generate a report.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleClickBidManagerQueriesRunQuery@.
 module Network.Google.Resource.DoubleClickBidManager.Queries.RunQuery

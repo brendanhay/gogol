@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a reply to an existing comment. Note: To create a top-level
+-- Creates a reply to an existing comment. Note: To create a top-level
 -- comment, use the commentThreads.insert method.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentsInsert@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Allocate IDs for incomplete keys (useful for referencing an entity
+-- Allocate IDs for incomplete keys (useful for referencing an entity
 -- before it is inserted).
 --
 -- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @DatastoreDatasetsAllocateIds@.

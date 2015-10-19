@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the IDs of all of a user\'s devices.
+-- Retrieves the IDs of all of a user\'s devices.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseDevicesList@.
 module Network.Google.Resource.AndroidEnterprise.Devices.List

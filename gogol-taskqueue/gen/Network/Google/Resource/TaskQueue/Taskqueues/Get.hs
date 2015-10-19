@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get detailed information about a TaskQueue.
+-- Get detailed information about a TaskQueue.
 --
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTaskqueuesGet@.
 module Network.Google.Resource.TaskQueue.Taskqueues.Get

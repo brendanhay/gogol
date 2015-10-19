@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Downloads a report file encoded in UTF-8.
+-- Downloads a report file encoded in UTF-8.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchReportsGetFile@.
 module Network.Google.Resource.DoubleClickSearch.Reports.GetFile

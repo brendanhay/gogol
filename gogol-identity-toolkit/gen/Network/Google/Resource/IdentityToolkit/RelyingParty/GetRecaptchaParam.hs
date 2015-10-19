@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get recaptcha secure param.
+-- Get recaptcha secure param.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyGetRecaptchaParam@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.GetRecaptchaParam

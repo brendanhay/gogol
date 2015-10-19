@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Proximity Beacon API.
+A client library for the Google Proximity Beacon.
 
 
 ## Contribute

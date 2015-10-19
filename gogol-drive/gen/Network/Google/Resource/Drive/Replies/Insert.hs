@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a new reply to the given comment.
+-- Creates a new reply to the given comment.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRepliesInsert@.
 module Network.Google.Resource.Drive.Replies.Insert

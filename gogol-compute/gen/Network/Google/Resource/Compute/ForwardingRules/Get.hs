@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the specified ForwardingRule resource.
+-- Returns the specified ForwardingRule resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeForwardingRulesGet@.
 module Network.Google.Resource.Compute.ForwardingRules.Get

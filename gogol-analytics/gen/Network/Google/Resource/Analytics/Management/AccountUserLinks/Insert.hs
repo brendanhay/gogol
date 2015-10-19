@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds a new user to the given account.
+-- Adds a new user to the given account.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountUserLinksInsert@.
 module Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert

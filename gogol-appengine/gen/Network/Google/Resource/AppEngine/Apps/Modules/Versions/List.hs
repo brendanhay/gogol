@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the versions of a module.
+-- Lists the versions of a module.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesVersionsList@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Versions.List

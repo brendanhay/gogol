@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get the information of a zonal resource view.
+-- Get the information of a zonal resource view.
 --
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsGet@.
 module Network.Google.Resource.ResourceViews.ZoneViews.Get

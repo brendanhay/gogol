@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Remove rasters from an existing raster collection. Up to 50 rasters can
+-- Remove rasters from an existing raster collection. Up to 50 rasters can
 -- be included in a single batchDelete request. Each batchDelete request is
 -- atomic.
 --

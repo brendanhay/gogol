@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Create a new custom metric.
+-- Create a new custom metric.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomMetricsInsert@.
 module Network.Google.Resource.Analytics.Management.CustomMetrics.Insert

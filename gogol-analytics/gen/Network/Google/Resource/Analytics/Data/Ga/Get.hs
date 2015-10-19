@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns Analytics data for a view (profile).
+-- Returns Analytics data for a view (profile).
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsDataGaGet@.
 module Network.Google.Resource.Analytics.Data.Ga.Get

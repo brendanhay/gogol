@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Checks that the edit can be successfully committed. The edit\'s changes
+-- Checks that the edit can be successfully committed. The edit\'s changes
 -- are not applied to the live app.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsValidate@.

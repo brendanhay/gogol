@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a bucket. This method supports patch semantics.
+-- Updates a bucket. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketsPatch@.
 module Network.Google.Resource.Storage.Buckets.Patch

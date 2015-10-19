@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a property. This method supports patch semantics.
+-- Updates a property. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePropertiesPatch@.
 module Network.Google.Resource.Drive.Properties.Patch

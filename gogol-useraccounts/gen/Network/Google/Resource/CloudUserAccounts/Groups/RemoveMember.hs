@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes users from the specified group.
+-- Removes users from the specified group.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsGroupsRemoveMember@.
 module Network.Google.Resource.CloudUserAccounts.Groups.RemoveMember

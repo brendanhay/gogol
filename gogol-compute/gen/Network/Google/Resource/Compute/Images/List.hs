@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the list of private images available to the specified project.
+-- Retrieves the list of private images available to the specified project.
 -- Private images are images you create that belong to your project. This
 -- method does not get any images that belong to other projects, including
 -- publicly-available images, like Debian 7. If you want to get a list of

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Create a new circle for the authenticated user.
+-- Create a new circle for the authenticated user.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesInsert@.
 module Network.Google.Resource.PlusDomains.Circles.Insert

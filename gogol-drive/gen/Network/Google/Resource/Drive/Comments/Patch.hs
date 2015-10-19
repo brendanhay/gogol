@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an existing comment. This method supports patch semantics.
+-- Updates an existing comment. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveCommentsPatch@.
 module Network.Google.Resource.Drive.Comments.Patch

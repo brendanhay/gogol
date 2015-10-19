@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get a comment.
+-- Get a comment.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusCommentsGet@.
 module Network.Google.Resource.Plus.Comments.Get

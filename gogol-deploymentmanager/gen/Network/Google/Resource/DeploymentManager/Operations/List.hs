@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all operations for a project.
+-- Lists all operations for a project.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerOperationsList@.
 module Network.Google.Resource.DeploymentManager.Operations.List

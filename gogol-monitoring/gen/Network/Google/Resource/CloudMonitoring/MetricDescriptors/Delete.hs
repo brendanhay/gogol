@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Delete an existing metric.
+-- Delete an existing metric.
 --
 -- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @CloudMonitoringMetricDescriptorsDelete@.
 module Network.Google.Resource.CloudMonitoring.MetricDescriptors.Delete

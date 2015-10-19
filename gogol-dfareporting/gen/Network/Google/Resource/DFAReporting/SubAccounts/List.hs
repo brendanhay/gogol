@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a list of subaccounts, possibly filtered.
+-- Gets a list of subaccounts, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSubAccountsList@.
 module Network.Google.Resource.DFAReporting.SubAccounts.List

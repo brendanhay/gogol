@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update membership of a user in the specified group.
+-- Update membership of a user in the specified group.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMembersUpdate@.
 module Network.Google.Resource.Directory.Members.Update

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Replaces the schedule of a job with the provided schedule. This method
+-- Replaces the schedule of a job with the provided schedule. This method
 -- supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateSchedulePatch@.

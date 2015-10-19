@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves details about crawl errors for a site\'s sample URL.
+-- Retrieves details about crawl errors for a site\'s sample URL.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersURLCrawlErrorsSamplesGet@.
 module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.Get

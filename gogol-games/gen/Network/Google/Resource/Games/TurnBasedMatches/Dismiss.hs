@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Dismiss a turn-based match from the match list. The match will no longer
+-- Dismiss a turn-based match from the match list. The match will no longer
 -- show up in the list and will not generate notifications.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesDismiss@.

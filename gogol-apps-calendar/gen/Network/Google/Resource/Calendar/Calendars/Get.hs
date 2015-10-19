@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns metadata for a calendar.
+-- Returns metadata for a calendar.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarsGet@.
 module Network.Google.Resource.Calendar.Calendars.Get

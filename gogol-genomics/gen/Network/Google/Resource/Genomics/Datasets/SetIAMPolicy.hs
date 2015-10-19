@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sets the access control policy on the specified dataset. Replaces any
+-- Sets the access control policy on the specified dataset. Replaces any
 -- existing policy. See Setting a Policy for more information.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsDatasetsSetIAMPolicy@.

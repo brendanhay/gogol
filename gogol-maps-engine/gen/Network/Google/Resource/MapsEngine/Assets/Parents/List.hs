@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Return all parent ids of the specified asset.
+-- Return all parent ids of the specified asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineAssetsParentsList@.
 module Network.Google.Resource.MapsEngine.Assets.Parents.List

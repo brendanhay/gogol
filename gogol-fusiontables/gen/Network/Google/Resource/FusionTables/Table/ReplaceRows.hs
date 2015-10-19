@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Replaces rows of an existing table. Current rows remain visible until
+-- Replaces rows of an existing table. Current rows remain visible until
 -- all replacement rows are ready.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableReplaceRows@.

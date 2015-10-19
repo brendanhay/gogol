@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all resource types for Deployment Manager.
+-- Lists all resource types for Deployment Manager.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerTypesList@.
 module Network.Google.Resource.DeploymentManager.Types.List

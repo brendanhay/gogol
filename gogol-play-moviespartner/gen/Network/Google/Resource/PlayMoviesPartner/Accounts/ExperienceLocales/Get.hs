@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get an ExperienceLocale given its id. See _Authentication and
+-- Get an ExperienceLocale given its id. See _Authentication and
 -- Authorization rules_ and _Get methods rules_ for more information about
 -- this method.
 --

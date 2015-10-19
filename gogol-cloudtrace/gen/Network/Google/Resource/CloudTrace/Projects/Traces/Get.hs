@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets one trace by id.
+-- Gets one trace by id.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference> for @CloudtraceProjectsTracesGet@.
 module Network.Google.Resource.CloudTrace.Projects.Traces.Get

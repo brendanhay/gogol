@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Uploads an image for a resource with the given ID and image type.
+-- Uploads an image for a resource with the given ID and image type.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationImageConfigurationsUpload@.
 module Network.Google.Resource.GamesConfiguration.ImageConfigurations.Upload

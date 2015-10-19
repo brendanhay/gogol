@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | A data platform for customers to create, manage, share and query data.
+-- A data platform for customers to create, manage, share and query data.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference>
 module Network.Google.BigQuery

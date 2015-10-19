@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Remove the book and its contents
+-- Remove the book and its contents
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksCloudLoadingDeleteBook@.
 module Network.Google.Resource.Books.CloudLoading.DeleteBook

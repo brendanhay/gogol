@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Increments the steps of the achievement with the given ID for the
+-- Increments the steps of the achievement with the given ID for the
 -- currently authenticated player.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementsIncrement@.

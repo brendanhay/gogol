@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Create a new ManagedZone.
+-- Create a new ManagedZone.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSManagedZonesCreate@.
 module Network.Google.Resource.DNS.ManagedZones.Create

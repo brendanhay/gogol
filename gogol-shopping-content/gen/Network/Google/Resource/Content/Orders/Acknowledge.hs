@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Marks an order as acknowledged.
+-- Marks an order as acknowledged.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersAcknowledge@.
 module Network.Google.Resource.Content.Orders.Acknowledge

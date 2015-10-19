@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the tax settings of the account. This method supports patch
+-- Updates the tax settings of the account. This method supports patch
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccounttaxPatch@.

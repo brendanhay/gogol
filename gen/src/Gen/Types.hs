@@ -61,6 +61,7 @@ import           Data.Text.Manipulate
 import qualified Filesystem.Path.CurrentOS  as Path
 import           Formatting
 import           Gen.Orphans                ()
+import           Gen.Text
 import           Gen.Types.Data
 import           Gen.Types.Help
 import           Gen.Types.Id
@@ -240,7 +241,7 @@ instance ToJSON Library where
     toJSON l = object
         -- Library
         [ "libraryName"        .= (l ^. sLibrary)
-        , "libraryTitle"       .= (l ^. dTitle)
+        , "libraryTitle"       .= renameTitle (l ^. dTitle)
         , "libraryDescription" .= Desc 4 (l ^. dDescription)
         , "libraryVersion"     .= (l ^. libraryVersion)
         , "coreVersion"        .= (l ^. coreVersion)

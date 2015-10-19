@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all of the people in the specified collection.
+-- List all of the people in the specified collection.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsPeopleList@.
 module Network.Google.Resource.PlusDomains.People.List

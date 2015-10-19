@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Remove a alias for the group
+-- Remove a alias for the group
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsAliasesDelete@.
 module Network.Google.Resource.Directory.Groups.Aliases.Delete

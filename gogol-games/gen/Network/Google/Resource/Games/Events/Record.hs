@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Records a batch of changes to the number of times events have occurred
+-- Records a batch of changes to the number of times events have occurred
 -- for the currently authenticated user of this application.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesEventsRecord@.

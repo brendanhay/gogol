@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Delete all features matching the given IDs.
+-- Delete all features matching the given IDs.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesFeaturesBatchDelete@.
 module Network.Google.Resource.MapsEngine.Tables.Features.BatchDelete

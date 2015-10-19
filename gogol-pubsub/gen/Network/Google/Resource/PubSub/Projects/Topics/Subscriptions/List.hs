@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the name of the subscriptions for this topic.
+-- Lists the name of the subscriptions for this topic.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsSubscriptionsList@.
 module Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List

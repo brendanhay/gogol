@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Storage Transfer API.
+A client library for the Google Storage Transfer.
 
 
 ## Contribute

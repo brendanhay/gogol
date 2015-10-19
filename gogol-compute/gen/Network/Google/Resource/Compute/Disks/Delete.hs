@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the specified persistent disk. Deleting a disk removes its data
+-- Deletes the specified persistent disk. Deleting a disk removes its data
 -- permanently and is irreversible. However, deleting a disk does not
 -- delete any snapshots previously made from the disk. You must separately
 -- delete snapshots.

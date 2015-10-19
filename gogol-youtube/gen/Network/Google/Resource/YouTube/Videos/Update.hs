@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a video\'s metadata.
+-- Updates a video\'s metadata.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosUpdate@.
 module Network.Google.Resource.YouTube.Videos.Update

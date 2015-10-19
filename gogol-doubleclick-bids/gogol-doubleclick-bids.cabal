@@ -1,6 +1,6 @@
 name:                  gogol-doubleclick-bids
 version:               0.0.1
-synopsis:              DoubleClick Bid Manager API Client.
+synopsis:              Google DoubleClick Bid Manager SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

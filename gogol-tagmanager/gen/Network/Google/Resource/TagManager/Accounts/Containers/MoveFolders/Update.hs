@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Moves entities to a GTM Folder.
+-- Moves entities to a GTM Folder.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersMove_foldersUpdate@.
 module Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update

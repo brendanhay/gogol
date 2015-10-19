@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update the given order. This method supports patch semantics.
+-- Update the given order. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceOrdersPatch@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Patch

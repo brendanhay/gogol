@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Dataflow API.
+A client library for the Google Dataflow.
 
 
 ## Contribute

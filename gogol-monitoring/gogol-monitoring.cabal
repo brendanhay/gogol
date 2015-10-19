@@ -1,6 +1,6 @@
 name:                  gogol-monitoring
 version:               0.0.1
-synopsis:              Cloud Monitoring API Client.
+synopsis:              Google Cloud Monitoring SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

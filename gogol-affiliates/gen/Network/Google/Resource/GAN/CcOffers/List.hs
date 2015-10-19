@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves credit card offers for the given publisher.
+-- Retrieves credit card offers for the given publisher.
 --
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANCcOffersList@.
 module Network.Google.Resource.GAN.CcOffers.List

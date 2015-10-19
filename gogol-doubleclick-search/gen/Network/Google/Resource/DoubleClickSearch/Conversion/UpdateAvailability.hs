@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the availabilities of a batch of floodlight activities in
+-- Updates the availabilities of a batch of floodlight activities in
 -- DoubleClick Search.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchConversionUpdateAvailability@.

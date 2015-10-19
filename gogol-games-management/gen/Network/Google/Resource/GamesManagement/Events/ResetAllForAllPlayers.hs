@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Resets all draft events for all players. This method is only available
+-- Resets all draft events for all players. This method is only available
 -- to user accounts for your developer console. All quests that use any of
 -- these events will also be reset.
 --

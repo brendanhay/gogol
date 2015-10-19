@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Insert a new achievement configuration in this application.
+-- Insert a new achievement configuration in this application.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationAchievementConfigurationsInsert@.
 module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Insert

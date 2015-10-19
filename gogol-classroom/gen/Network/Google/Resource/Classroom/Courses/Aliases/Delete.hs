@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes an alias of a course. This method returns the following error
+-- Deletes an alias of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
 -- to remove the alias or for access errors. * \`NOT_FOUND\` if the alias
 -- does not exist.

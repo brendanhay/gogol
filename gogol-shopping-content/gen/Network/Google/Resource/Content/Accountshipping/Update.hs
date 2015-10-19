@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the shipping settings of the account.
+-- Updates the shipping settings of the account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountshippingUpdate@.
 module Network.Google.Resource.Content.Accountshipping.Update

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Create a new property if the account has fewer than 20 properties. Web
+-- Create a new property if the account has fewer than 20 properties. Web
 -- properties are visible in the Google Analytics interface only if they
 -- have at least one profile.
 --

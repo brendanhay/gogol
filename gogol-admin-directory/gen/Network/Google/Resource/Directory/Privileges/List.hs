@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a paginated list of all privileges for a customer.
+-- Retrieves a paginated list of all privileges for a customer.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryPrivilegesList@.
 module Network.Google.Resource.Directory.Privileges.List

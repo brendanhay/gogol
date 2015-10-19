@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Resets all player progress on the quest with the given ID for all
+-- Resets all player progress on the quest with the given ID for all
 -- players. This method is only available to user accounts for your
 -- developer console. Only draft quests can be reset.
 --

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a web property-AdWords link.
+-- Deletes a web property-AdWords link.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyAdWordsLinksDelete@.
 module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Delete

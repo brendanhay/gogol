@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of contacts for the authenticated user.
+-- Retrieves a list of contacts for the authenticated user.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorContactsList@.
 module Network.Google.Resource.Mirror.Contacts.List

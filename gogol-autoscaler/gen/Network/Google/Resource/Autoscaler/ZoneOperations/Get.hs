@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the specified zone-specific operation resource.
+-- Retrieves the specified zone-specific operation resource.
 --
 -- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerZoneOperationsGet@.
 module Network.Google.Resource.Autoscaler.ZoneOperations.Get

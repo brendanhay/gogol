@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the dataset specified by the datasetId value. Before you can
+-- Deletes the dataset specified by the datasetId value. Before you can
 -- delete a dataset, you must delete all its tables, either manually or by
 -- specifying deleteContents. Immediately after deletion, you can create
 -- another dataset with the same name.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the summary of specified layers.
+-- Gets the summary of specified layers.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryAnnotationsSummary@.
 module Network.Google.Resource.Books.MyLibrary.Annotations.Summary

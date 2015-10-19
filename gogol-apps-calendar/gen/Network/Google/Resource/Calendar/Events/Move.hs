@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Moves an event to another calendar, i.e. changes an event\'s organizer.
+-- Moves an event to another calendar, i.e. changes an event\'s organizer.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsMove@.
 module Network.Google.Resource.Calendar.Events.Move

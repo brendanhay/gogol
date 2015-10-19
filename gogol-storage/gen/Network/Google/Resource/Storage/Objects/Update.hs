@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an object\'s metadata.
+-- Updates an object\'s metadata.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsUpdate@.
 module Network.Google.Resource.Storage.Objects.Update

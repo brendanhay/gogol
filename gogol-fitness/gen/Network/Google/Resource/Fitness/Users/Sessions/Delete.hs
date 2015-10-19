@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a session specified by the given session ID.
+-- Deletes a session specified by the given session ID.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersSessionsDelete@.
 module Network.Google.Resource.Fitness.Users.Sessions.Delete

@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Tasks API.
+A client library for the Google Tasks.
 
 
 ## Contribute

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all the APK-specific localized listings for a specified APK.
+-- Lists all the APK-specific localized listings for a specified APK.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsAPKListingsList@.
 module Network.Google.Resource.AndroidPublisher.Edits.APKListings.List

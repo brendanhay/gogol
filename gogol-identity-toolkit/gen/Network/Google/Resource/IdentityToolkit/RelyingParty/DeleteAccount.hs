@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Delete user account.
+-- Delete user account.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyDeleteAccount@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.DeleteAccount

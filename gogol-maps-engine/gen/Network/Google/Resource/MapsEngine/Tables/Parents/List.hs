@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Return all parent ids of the specified table.
+-- Return all parent ids of the specified table.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesParentsList@.
 module Network.Google.Resource.MapsEngine.Tables.Parents.List

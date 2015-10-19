@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the specified BackendService resource.
+-- Deletes the specified BackendService resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeBackendServicesDelete@.
 module Network.Google.Resource.Compute.BackendServices.Delete

@@ -1,6 +1,6 @@
 name:                  gogol-fusiontables
 version:               0.0.1
-synopsis:              Fusion Tables API Client.
+synopsis:              Google Fusion Tables SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

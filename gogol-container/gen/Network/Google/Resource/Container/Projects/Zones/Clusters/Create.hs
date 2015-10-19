@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a cluster, consisting of the specified number and type of Google
+-- Creates a cluster, consisting of the specified number and type of Google
 -- Compute Engine instances, plus a Kubernetes master endpoint. By default,
 -- the cluster is created in the project\'s [default
 -- network](\/compute\/docs\/networking#networks_1). One firewall is added

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a single unsampled report.
+-- Returns a single unsampled report.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUnSampledReportsGet@.
 module Network.Google.Resource.Analytics.Management.UnSampledReports.Get

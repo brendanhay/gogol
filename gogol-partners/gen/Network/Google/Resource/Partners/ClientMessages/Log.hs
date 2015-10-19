@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Logs a generic message from the client, such as \`Failed to render
+-- Logs a generic message from the client, such as \`Failed to render
 -- component\`, \`Profile page is running slow\`, \`More than 500 users
 -- have accessed this result.\`, etc.
 --

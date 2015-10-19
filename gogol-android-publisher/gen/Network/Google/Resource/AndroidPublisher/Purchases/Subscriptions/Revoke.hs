@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Refunds and immediately revokes a user\'s subscription purchase. Access
+-- Refunds and immediately revokes a user\'s subscription purchase. Access
 -- to the subscription will be terminated immediately and it will stop
 -- recurring.
 --

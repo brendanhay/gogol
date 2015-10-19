@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a call set.
+-- Deletes a call set.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsCallsetsDelete@.
 module Network.Google.Resource.Genomics.Callsets.Delete

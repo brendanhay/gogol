@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List Orders owned or managed by the partner. See _Authentication and
+-- List Orders owned or managed by the partner. See _Authentication and
 -- Authorization rules_ and _List methods rules_ for more information about
 -- this method.
 --

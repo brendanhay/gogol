@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Immediately and permanently deletes the specified thread. This operation
+-- Immediately and permanently deletes the specified thread. This operation
 -- cannot be undone. Prefer threads.trash instead.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersThreadsDelete@.

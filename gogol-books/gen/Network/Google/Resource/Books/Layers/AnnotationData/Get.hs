@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the annotation data.
+-- Gets the annotation data.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksLayersAnnotationDataGet@.
 module Network.Google.Resource.Books.Layers.AnnotationData.Get

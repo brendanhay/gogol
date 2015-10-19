@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes a parent from a file.
+-- Removes a parent from a file.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveParentsDelete@.
 module Network.Google.Resource.Drive.Parents.Delete

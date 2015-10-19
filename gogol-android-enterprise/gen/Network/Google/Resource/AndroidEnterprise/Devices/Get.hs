@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the details of a device.
+-- Retrieves the details of a device.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseDevicesGet@.
 module Network.Google.Resource.AndroidEnterprise.Devices.Get

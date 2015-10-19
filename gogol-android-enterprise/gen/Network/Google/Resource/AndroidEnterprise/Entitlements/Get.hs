@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves details of an entitlement.
+-- Retrieves details of an entitlement.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEntitlementsGet@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all the debuggees that the user can set breakpoints to.
+-- Lists all the debuggees that the user can set breakpoints to.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @CloudDebuggerDebuggerDebuggeesList@.
 module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.List

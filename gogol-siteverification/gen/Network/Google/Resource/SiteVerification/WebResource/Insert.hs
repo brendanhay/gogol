@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Attempt verification of a website or domain.
+-- Attempt verification of a website or domain.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceInsert@.
 module Network.Google.Resource.SiteVerification.WebResource.Insert

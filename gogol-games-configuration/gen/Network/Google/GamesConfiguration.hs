@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | The Publishing API for Google Play Game Services.
+-- The Publishing API for Google Play Game Services.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference>
 module Network.Google.GamesConfiguration

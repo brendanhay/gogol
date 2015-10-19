@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of the event definitions in this application.
+-- Returns a list of the event definitions in this application.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesEventsListDefinitions@.
 module Network.Google.Resource.Games.Events.ListDefinitions

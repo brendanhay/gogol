@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all the deals for a given order
+-- List all the deals for a given order
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceDealsList@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List

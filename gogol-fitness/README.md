@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Fitness.
+A client library for the Google Fitness.
 
 
 ## Contribute

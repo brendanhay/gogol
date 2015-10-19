@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List the alerts for this Ad Exchange account.
+-- List the alerts for this Ad Exchange account.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsAlertsList@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.Alerts.List

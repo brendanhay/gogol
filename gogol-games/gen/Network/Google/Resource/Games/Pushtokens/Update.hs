@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Registers a push token for the current user and application.
+-- Registers a push token for the current user and application.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesPushtokensUpdate@.
 module Network.Google.Resource.Games.Pushtokens.Update

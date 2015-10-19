@@ -1,6 +1,6 @@
 name:                  {{ libraryName }}
 version:               {{ libraryVersion }}
-synopsis:              {{ libraryTitle }} Client.
+synopsis:              {{ libraryTitle }} SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

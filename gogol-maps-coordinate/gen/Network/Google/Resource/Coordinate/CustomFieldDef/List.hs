@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of custom field definitions for a team.
+-- Retrieves a list of custom field definitions for a team.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateCustomFieldDefList@.
 module Network.Google.Resource.Coordinate.CustomFieldDef.List

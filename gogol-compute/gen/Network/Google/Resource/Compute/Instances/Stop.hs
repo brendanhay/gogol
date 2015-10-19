@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | This method stops a running instance, shutting it down cleanly, and
+-- This method stops a running instance, shutting it down cleanly, and
 -- allows you to restart the instance at a later time. Stopped instances do
 -- not incur per-minute, virtual machine usage charges while they are
 -- stopped, but any resources that the virtual machine is using, such as

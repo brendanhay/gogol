@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Defers a user\'s subscription purchase until a specified future
+-- Defers a user\'s subscription purchase until a specified future
 -- expiration time.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherPurchasesSubscriptionsDefer@.

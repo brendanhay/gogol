@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the pages for a blog, optionally including non-LIVE statuses.
+-- Retrieves the pages for a blog, optionally including non-LIVE statuses.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesList@.
 module Network.Google.Resource.Blogger.Pages.List

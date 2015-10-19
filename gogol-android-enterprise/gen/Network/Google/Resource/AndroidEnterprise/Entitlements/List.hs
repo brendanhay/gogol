@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List of all entitlements for the specified user. Only the ID is set.
+-- List of all entitlements for the specified user. Only the ID is set.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEntitlementsList@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.List

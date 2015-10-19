@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Upload a file to a placeholder table asset. See Table Upload in the
+-- Upload a file to a placeholder table asset. See Table Upload in the
 -- Developer\'s Guide for more information. Supported file types are listed
 -- in the Supported data formats and limits article of the Google Maps
 -- Engine help center.

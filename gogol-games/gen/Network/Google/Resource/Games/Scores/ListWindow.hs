@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the scores in a leaderboard around (and including) a player\'s
+-- Lists the scores in a leaderboard around (and including) a player\'s
 -- score.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesScoresListWindow@.

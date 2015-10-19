@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Modifies a playlist item. For example, you could update the item\'s
+-- Modifies a playlist item. For example, you could update the item\'s
 -- position in the playlist.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlayListItemsUpdate@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the domain aliases of the customer.
+-- Lists the domain aliases of the customer.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryDomainAliasesList@.
 module Network.Google.Resource.Directory.DomainAliases.List

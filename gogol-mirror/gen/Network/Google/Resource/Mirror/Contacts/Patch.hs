@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a contact in place. This method supports patch semantics.
+-- Updates a contact in place. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorContactsPatch@.
 module Network.Google.Resource.Mirror.Contacts.Patch

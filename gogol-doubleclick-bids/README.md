@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the DoubleClick Bid Manager API.
+A client library for the Google DoubleClick Bid Manager.
 
 
 ## Contribute

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Return the metagame configuration data for the calling application.
+-- Return the metagame configuration data for the calling application.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesMetagameGetMetagameConfig@.
 module Network.Google.Resource.Games.Metagame.GetMetagameConfig

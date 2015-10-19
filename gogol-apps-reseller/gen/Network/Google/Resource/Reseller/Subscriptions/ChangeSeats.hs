@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Changes the seats configuration of a subscription
+-- Changes the seats configuration of a subscription
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsChangeSeats@.
 module Network.Google.Resource.Reseller.Subscriptions.ChangeSeats

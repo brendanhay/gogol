@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Enumerate ManagedZones that have been created but not yet deleted.
+-- Enumerate ManagedZones that have been created but not yet deleted.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSManagedZonesList@.
 module Network.Google.Resource.DNS.ManagedZones.List

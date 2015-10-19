@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates app details for this edit. This method supports patch semantics.
+-- Updates app details for this edit. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsDetailsPatch@.
 module Network.Google.Resource.AndroidPublisher.Edits.Details.Patch

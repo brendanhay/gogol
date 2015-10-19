@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get a code for user action confirmation.
+-- Get a code for user action confirmation.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyGetOOBConfirmationCode@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.GetOOBConfirmationCode

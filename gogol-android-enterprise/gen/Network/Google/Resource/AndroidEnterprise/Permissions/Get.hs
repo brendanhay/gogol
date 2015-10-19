@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves details of an Android app permission for display to an
+-- Retrieves details of an Android app permission for display to an
 -- enterprise admin.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterprisePermissionsGet@.

@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Groups Settings API.
+A client library for the Google Groups Settings.
 
 
 ## Contribute

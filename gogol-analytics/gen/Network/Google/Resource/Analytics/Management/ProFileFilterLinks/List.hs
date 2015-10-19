@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all profile filter links for a profile.
+-- Lists all profile filter links for a profile.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFileFilterLinksList@.
 module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.List

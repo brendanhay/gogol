@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a user\'s Account & Container Permissions.
+-- Updates a user\'s Account & Container Permissions.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsPermissionsUpdate@.
 module Network.Google.Resource.TagManager.Accounts.Permissions.Update

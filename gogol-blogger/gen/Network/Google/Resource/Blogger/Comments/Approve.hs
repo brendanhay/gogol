@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Marks a comment as not spam.
+-- Marks a comment as not spam.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerCommentsApprove@.
 module Network.Google.Resource.Blogger.Comments.Approve

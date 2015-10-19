@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Play Movies Partner API.
+A client library for the Google Play Movies Partner.
 
 
 ## Contribute

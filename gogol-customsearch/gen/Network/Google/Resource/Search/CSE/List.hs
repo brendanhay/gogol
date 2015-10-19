@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns metadata about the search performed, metadata about the custom
+-- Returns metadata about the search performed, metadata about the custom
 -- search engine used for the search, and the search results.
 --
 -- /See:/ <https://developers.google.com/custom-search/v1/using_rest CustomSearch API Reference> for @SearchCSEList@.

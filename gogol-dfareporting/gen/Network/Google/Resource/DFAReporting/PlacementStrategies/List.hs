@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of placement strategies, possibly filtered.
+-- Retrieves a list of placement strategies, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementStrategiesList@.
 module Network.Google.Resource.DFAReporting.PlacementStrategies.List

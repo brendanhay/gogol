@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists unsampled reports to which the user has access.
+-- Lists unsampled reports to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUnSampledReportsList@.
 module Network.Google.Resource.Analytics.Management.UnSampledReports.List

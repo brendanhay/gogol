@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Stop watching resources through this channel
+-- Stop watching resources through this channel
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChannelsStop@.
 module Network.Google.Resource.Drive.Channels.Stop

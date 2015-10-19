@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the shipping settings of the sub-accounts in your Merchant Center
+-- Lists the shipping settings of the sub-accounts in your Merchant Center
 -- account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountshippingList@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Promotes the read replica instance to be a stand-alone Cloud SQL
+-- Promotes the read replica instance to be a stand-alone Cloud SQL
 -- instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesPromoteReplica@.

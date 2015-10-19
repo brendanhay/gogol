@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Fetch the representation of an existing Change.
+-- Fetch the representation of an existing Change.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSChangesGet@.
 module Network.Google.Resource.DNS.Changes.Get

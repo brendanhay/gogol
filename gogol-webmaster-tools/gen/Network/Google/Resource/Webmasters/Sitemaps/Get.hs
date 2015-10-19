@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves information about a specific sitemap.
+-- Retrieves information about a specific sitemap.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitemapsGet@.
 module Network.Google.Resource.Webmasters.Sitemaps.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all negotiations the authenticated user has access to.
+-- Lists all negotiations the authenticated user has access to.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerNegotiationsList@.
 module Network.Google.Resource.AdExchangeBuyer.Negotiations.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all attachment namespaces owned by your Google Developers Console
+-- Lists all attachment namespaces owned by your Google Developers Console
 -- project. Attachment data associated with a beacon must include a
 -- namespaced type, and the namespace must be owned by your project.
 --

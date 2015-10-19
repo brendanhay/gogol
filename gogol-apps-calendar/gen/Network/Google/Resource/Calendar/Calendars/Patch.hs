@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates metadata for a calendar. This method supports patch semantics.
+-- Updates metadata for a calendar. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarsPatch@.
 module Network.Google.Resource.Calendar.Calendars.Patch

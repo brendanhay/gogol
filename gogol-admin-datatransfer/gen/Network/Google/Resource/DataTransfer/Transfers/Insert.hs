@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Inserts a data transfer request.
+-- Inserts a data transfer request.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @DataTransferTransfersInsert@.
 module Network.Google.Resource.DataTransfer.Transfers.Insert

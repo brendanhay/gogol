@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Requests information about the available spectrum for a device at a
+-- Requests information about the available spectrum for a device at a
 -- location. Requests from a fixed-mode device must include owner
 -- information so the device can be registered with the database.
 --

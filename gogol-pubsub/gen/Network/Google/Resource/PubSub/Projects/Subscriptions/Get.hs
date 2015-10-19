@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the configuration details of a subscription.
+-- Gets the configuration details of a subscription.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsGet@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Get

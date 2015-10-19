@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a new in-app product for an app.
+-- Creates a new in-app product for an app.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherInAppProductsInsert@.
 module Network.Google.Resource.AndroidPublisher.InAppProducts.Insert

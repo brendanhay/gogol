@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Searches the beacon registry for beacons that match the given search
+-- Searches the beacon registry for beacons that match the given search
 -- criteria. Only those beacons that the client has permission to list will
 -- be returned.
 --

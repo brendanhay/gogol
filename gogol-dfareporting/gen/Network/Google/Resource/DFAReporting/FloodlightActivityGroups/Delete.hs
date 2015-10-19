@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes an existing floodlight activity group.
+-- Deletes an existing floodlight activity group.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivityGroupsDelete@.
 module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Delete

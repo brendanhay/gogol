@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sets my reading position information for a volume.
+-- Sets my reading position information for a volume.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryReadingPositionsSetPosition@.
 module Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition

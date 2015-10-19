@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes a user from the given view (profile).
+-- Removes a user from the given view (profile).
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFileUserLinksDelete@.
 module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Delete

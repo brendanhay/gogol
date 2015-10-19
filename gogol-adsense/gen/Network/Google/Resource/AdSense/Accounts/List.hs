@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all accounts available to this AdSense account.
+-- List all accounts available to this AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsList@.
 module Network.Google.Resource.AdSense.Accounts.List

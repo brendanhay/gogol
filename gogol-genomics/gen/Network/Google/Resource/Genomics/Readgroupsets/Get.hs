@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a read group set by ID.
+-- Gets a read group set by ID.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsReadgroupsetsGet@.
 module Network.Google.Resource.Genomics.Readgroupsets.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the list of landing pages for the specified campaign.
+-- Retrieves the list of landing pages for the specified campaign.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingLandingPagesList@.
 module Network.Google.Resource.DFAReporting.LandingPages.List

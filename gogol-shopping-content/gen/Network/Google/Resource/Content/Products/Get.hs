@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a product from your Merchant Center account.
+-- Retrieves a product from your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentProductsGet@.
 module Network.Google.Resource.Content.Products.Get

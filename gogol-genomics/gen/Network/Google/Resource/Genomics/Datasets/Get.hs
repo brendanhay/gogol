@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a dataset by ID.
+-- Gets a dataset by ID.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsDatasetsGet@.
 module Network.Google.Resource.Genomics.Datasets.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Batch download user accounts.
+-- Batch download user accounts.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyDownloadAccount@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount

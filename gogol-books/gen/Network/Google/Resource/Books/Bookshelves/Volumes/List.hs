@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves volumes in a specific bookshelf for the specified user.
+-- Retrieves volumes in a specific bookshelf for the specified user.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksBookshelvesVolumesList@.
 module Network.Google.Resource.Books.Bookshelves.Volumes.List

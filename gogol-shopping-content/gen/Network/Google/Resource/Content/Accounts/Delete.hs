@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a Merchant Center sub-account.
+-- Deletes a Merchant Center sub-account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountsDelete@.
 module Network.Google.Resource.Content.Accounts.Delete

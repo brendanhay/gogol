@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the changes for a user.
+-- Lists the changes for a user.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChangesList@.
 module Network.Google.Resource.Drive.Changes.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all host custom channels in this AdSense account.
+-- List all host custom channels in this AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostCustomChannelsList@.
 module Network.Google.Resource.AdSenseHost.CustomChannels.List

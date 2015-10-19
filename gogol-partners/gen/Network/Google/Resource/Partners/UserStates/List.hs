@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists states for current user.
+-- Lists states for current user.
 --
 -- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @PartnersUserStatesList@.
 module Network.Google.Resource.Partners.UserStates.List

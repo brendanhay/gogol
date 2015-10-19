@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all clusters owned by a project in either the specified zone or
+-- Lists all clusters owned by a project in either the specified zone or
 -- all zones.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @ContainerProjectsZonesClustersList@.

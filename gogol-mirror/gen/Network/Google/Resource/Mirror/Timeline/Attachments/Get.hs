@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves an attachment on a timeline item by item ID and attachment ID.
+-- Retrieves an attachment on a timeline item by item ID and attachment ID.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineAttachmentsGet@.
 module Network.Google.Resource.Mirror.Timeline.Attachments.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Insert Mail into Google\'s Gmail backends
+-- Insert Mail into Google\'s Gmail backends
 --
 -- /See:/ <https://developers.google.com/admin-sdk/email-migration/v2/ Email Migration API v2 Reference> for @EmailMigrationMailInsert@.
 module Network.Google.Resource.EmailMigration.Mail.Insert

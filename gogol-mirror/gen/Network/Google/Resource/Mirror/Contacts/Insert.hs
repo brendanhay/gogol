@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Inserts a new contact.
+-- Inserts a new contact.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorContactsInsert@.
 module Network.Google.Resource.Mirror.Contacts.Insert

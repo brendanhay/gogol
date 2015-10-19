@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a data source identified by a data stream ID.
+-- Returns a data source identified by a data stream ID.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesGet@.
 module Network.Google.Resource.Fitness.Users.DataSources.Get

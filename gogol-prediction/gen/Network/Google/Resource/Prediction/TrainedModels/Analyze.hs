@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get analysis of the model and the data the model was trained on.
+-- Get analysis of the model and the data the model was trained on.
 --
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedModelsAnalyze@.
 module Network.Google.Resource.Prediction.TrainedModels.Analyze

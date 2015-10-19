@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a report of the specified type.
+-- Retrieves a report of the specified type.
 --
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANReportsGet@.
 module Network.Google.Resource.GAN.Reports.Get

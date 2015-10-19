@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the name and domain of an enterprise.
+-- Retrieves the name and domain of an enterprise.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEnterprisesGet@.
 module Network.Google.Resource.AndroidEnterprise.Enterprises.Get

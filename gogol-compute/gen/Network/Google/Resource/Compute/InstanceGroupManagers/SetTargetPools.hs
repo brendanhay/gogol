@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Modifies the target pools to which all instances in this managed
+-- Modifies the target pools to which all instances in this managed
 -- instance group are assigned. The target pools automatically apply to all
 -- of the instances in the managed instance group. This operation is marked
 -- DONE when you make the request even if the instances have not yet been

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates permissions for an existing user on the given account.
+-- Updates permissions for an existing user on the given account.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountUserLinksUpdate@.
 module Network.Google.Resource.Analytics.Management.AccountUserLinks.Update

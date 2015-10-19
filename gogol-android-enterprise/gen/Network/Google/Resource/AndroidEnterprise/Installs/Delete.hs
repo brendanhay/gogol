@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Requests to remove an app from a device. A call to get or list will
+-- Requests to remove an app from a device. A call to get or list will
 -- still show the app as installed on the device until it is actually
 -- removed.
 --

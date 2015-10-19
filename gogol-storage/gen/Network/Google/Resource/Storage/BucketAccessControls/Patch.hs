@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an ACL entry on the specified bucket. This method supports patch
+-- Updates an ACL entry on the specified bucket. This method supports patch
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketAccessControlsPatch@.

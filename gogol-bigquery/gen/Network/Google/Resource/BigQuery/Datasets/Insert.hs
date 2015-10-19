@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a new empty dataset.
+-- Creates a new empty dataset.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryDatasetsInsert@.
 module Network.Google.Resource.BigQuery.Datasets.Insert

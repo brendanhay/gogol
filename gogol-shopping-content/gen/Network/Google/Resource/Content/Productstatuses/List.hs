@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the statuses of the products in your Merchant Center account.
+-- Lists the statuses of the products in your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentProductstatusesList@.
 module Network.Google.Resource.Content.Productstatuses.List

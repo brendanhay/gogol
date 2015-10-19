@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes the specified message from the trash.
+-- Removes the specified message from the trash.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesUntrash@.
 module Network.Google.Resource.Gmail.Users.Messages.Untrash

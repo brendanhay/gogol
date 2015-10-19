@@ -1,6 +1,6 @@
 name:                  gogol-latencytest
 version:               0.0.1
-synopsis:              Google Cloud Network Performance Monitoring API Client.
+synopsis:              Google Cloud Network Performance Monitoring SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

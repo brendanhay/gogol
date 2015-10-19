@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Stops the replication in the read replica instance.
+-- Stops the replication in the read replica instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesStopReplica@.
 module Network.Google.Resource.SQL.Instances.StopReplica

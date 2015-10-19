@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a job. Fields that are set in the job state will be updated.
+-- Updates a job. Fields that are set in the job state will be updated.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateJobsUpdate@.
 module Network.Google.Resource.Coordinate.Jobs.Update

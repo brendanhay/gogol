@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Query your data with filters and parameters that you define. Returns
+-- Query your data with filters and parameters that you define. Returns
 -- zero or more rows grouped by the row keys that you define. You must
 -- define a date range of one or more days. When date is one of the group
 -- by values, any days without data are omitted from the result list. If

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Expands a short URL or gets creation time and analytics.
+-- Expands a short URL or gets creation time and analytics.
 --
 -- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference> for @URLshortenerURLGet@.
 module Network.Google.Resource.URLShortener.URL.Get

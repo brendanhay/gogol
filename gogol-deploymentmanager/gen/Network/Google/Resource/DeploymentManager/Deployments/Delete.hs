@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a deployment and all of the resources in the deployment.
+-- Deletes a deployment and all of the resources in the deployment.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsDelete@.
 module Network.Google.Resource.DeploymentManager.Deployments.Delete

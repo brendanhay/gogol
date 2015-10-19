@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List the diagnostics for a single beacon. You can also list diagnostics
+-- List the diagnostics for a single beacon. You can also list diagnostics
 -- for all the beacons owned by your Google Developers Console project by
 -- using the beacon name \`beacons\/-\`.
 --

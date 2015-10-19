@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all tables in the specified dataset. Requires the READER dataset
+-- Lists all tables in the specified dataset. Requires the READER dataset
 -- role.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryTablesList@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieve pageview stats for a Blog.
+-- Retrieve pageview stats for a Blog.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPageViewsGet@.
 module Network.Google.Resource.Blogger.PageViews.Get

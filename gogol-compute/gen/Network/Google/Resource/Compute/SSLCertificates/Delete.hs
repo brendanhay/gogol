@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the specified SslCertificate resource.
+-- Deletes the specified SslCertificate resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeSSLCertificatesDelete@.
 module Network.Google.Resource.Compute.SSLCertificates.Delete

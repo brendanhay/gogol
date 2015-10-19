@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Immediately and permanently deletes the specified draft. Does not simply
+-- Immediately and permanently deletes the specified draft. Does not simply
 -- trash it.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersDraftsDelete@.

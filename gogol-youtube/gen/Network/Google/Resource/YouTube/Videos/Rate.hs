@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Add a like or dislike rating to a video or remove a rating from a video.
+-- Add a like or dislike rating to a video or remove a rating from a video.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosRate@.
 module Network.Google.Resource.YouTube.Videos.Rate

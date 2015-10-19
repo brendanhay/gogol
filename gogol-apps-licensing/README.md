@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Enterprise License Manager API.
+A client library for the Google Enterprise License Manager.
 
 
 ## Contribute

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an existing comment.
+-- Updates an existing comment.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveCommentsUpdate@.
 module Network.Google.Resource.Drive.Comments.Update

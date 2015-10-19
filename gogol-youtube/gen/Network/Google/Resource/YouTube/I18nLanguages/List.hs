@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of application languages that the YouTube website
+-- Returns a list of application languages that the YouTube website
 -- supports.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeI18nLanguagesList@.

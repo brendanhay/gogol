@@ -1,6 +1,6 @@
 name:                  gogol-apps-activity
 version:               0.0.1
-synopsis:              Google Apps Activity API Client.
+synopsis:              Google Apps Activity SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

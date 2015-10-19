@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Decline an invitation to play a turn-based match.
+-- Decline an invitation to play a turn-based match.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesDecline@.
 module Network.Google.Resource.Games.TurnBasedMatches.Decline

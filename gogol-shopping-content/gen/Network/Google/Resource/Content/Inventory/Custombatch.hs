@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates price and availability for multiple products or stores in a
+-- Updates price and availability for multiple products or stores in a
 -- single request. This operation does not update the expiration date of
 -- the products.
 --

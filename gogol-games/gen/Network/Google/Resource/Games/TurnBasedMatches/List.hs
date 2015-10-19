@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns turn-based matches the player is or was involved in.
+-- Returns turn-based matches the player is or was involved in.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesList@.
 module Network.Google.Resource.Games.TurnBasedMatches.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves list of report dimension values for a list of filters.
+-- Retrieves list of report dimension values for a list of filters.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingDimensionValuesQuery@.
 module Network.Google.Resource.DFAReporting.DimensionValues.Query

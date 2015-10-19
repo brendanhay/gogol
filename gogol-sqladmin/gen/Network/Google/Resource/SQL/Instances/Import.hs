@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Imports data into a Cloud SQL instance from a MySQL dump file in Google
+-- Imports data into a Cloud SQL instance from a MySQL dump file in Google
 -- Cloud Storage.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesImport@.

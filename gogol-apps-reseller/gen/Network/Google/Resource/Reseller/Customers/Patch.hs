@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update a customer resource if one it exists and is owned by the
+-- Update a customer resource if one it exists and is owned by the
 -- reseller. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerCustomersPatch@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Clears (sets to empty) the data for the passed key if and only if the
+-- Clears (sets to empty) the data for the passed key if and only if the
 -- passed version matches the currently stored version. This method results
 -- in a conflict error on version mismatch.
 --

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a permission using patch semantics.
+-- Updates a permission using patch semantics.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsPatch@.
 module Network.Google.Resource.Drive.Permissions.Patch

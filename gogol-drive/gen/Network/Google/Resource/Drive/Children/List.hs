@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists a folder\'s children.
+-- Lists a folder\'s children.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChildrenList@.
 module Network.Google.Resource.Drive.Children.List

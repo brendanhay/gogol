@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Create a placeholder table asset to which table files can be uploaded.
+-- Create a placeholder table asset to which table files can be uploaded.
 -- Once the placeholder has been created, files are uploaded to the
 -- https:\/\/www.googleapis.com\/upload\/mapsengine\/v1\/tables\/table_id\/files
 -- endpoint. See Table Upload in the Developer\'s Guide or Table.files:

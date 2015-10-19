@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a channelSection.
+-- Deletes a channelSection.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeChannelSectionsDelete@.
 module Network.Google.Resource.YouTube.ChannelSections.Delete

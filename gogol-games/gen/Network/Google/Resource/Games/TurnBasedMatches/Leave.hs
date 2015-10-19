@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Leave a turn-based match when it is not the current player\'s turn,
+-- Leave a turn-based match when it is not the current player\'s turn,
 -- without canceling the match.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesLeave@.

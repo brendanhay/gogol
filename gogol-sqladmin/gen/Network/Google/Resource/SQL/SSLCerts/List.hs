@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all of the current SSL certificates for the instance.
+-- Lists all of the current SSL certificates for the instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLSSLCertsList@.
 module Network.Google.Resource.SQL.SSLCerts.List

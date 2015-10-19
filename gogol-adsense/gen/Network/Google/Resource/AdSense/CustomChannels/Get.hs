@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get the specified custom channel from the specified ad client.
+-- Get the specified custom channel from the specified ad client.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseCustomChannelsGet@.
 module Network.Google.Resource.AdSense.CustomChannels.Get

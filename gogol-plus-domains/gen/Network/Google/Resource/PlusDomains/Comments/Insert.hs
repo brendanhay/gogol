@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Create a new comment in reply to an activity.
+-- Create a new comment in reply to an activity.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCommentsInsert@.
 module Network.Google.Resource.PlusDomains.Comments.Insert

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Modifies the \`PushConfig\` for a specified subscription. This may be
+-- Modifies the \`PushConfig\` for a specified subscription. This may be
 -- used to change a push subscription to a pull one (signified by an empty
 -- \`PushConfig\`) or vice versa, or change the endpoint URL and other
 -- attributes of a push subscription. Messages will accumulate for delivery

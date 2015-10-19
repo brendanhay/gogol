@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List the metadata for the metrics available to this AdExchange account.
+-- List the metadata for the metrics available to this AdExchange account.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsMetadataMetricsList@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Metrics.List

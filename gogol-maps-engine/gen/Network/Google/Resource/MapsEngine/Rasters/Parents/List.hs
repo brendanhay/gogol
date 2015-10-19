@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Return all parent ids of the specified rasters.
+-- Return all parent ids of the specified rasters.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRastersParentsList@.
 module Network.Google.Resource.MapsEngine.Rasters.Parents.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Add resources to the view.
+-- Add resources to the view.
 --
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsAddResources@.
 module Network.Google.Resource.ResourceViews.ZoneViews.AddResources

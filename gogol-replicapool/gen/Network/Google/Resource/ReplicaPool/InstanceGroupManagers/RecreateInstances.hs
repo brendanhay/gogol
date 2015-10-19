@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Recreates the specified instances. The instances are deleted, then
+-- Recreates the specified instances. The instances are deleted, then
 -- recreated using the instance group manager\'s current instance template.
 --
 -- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersRecreateInstances@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Unlocks this achievement for the currently authenticated player.
+-- Unlocks this achievement for the currently authenticated player.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementsUnlock@.
 module Network.Google.Resource.Games.Achievements.Unlock

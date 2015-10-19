@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Atomically update the ResourceRecordSet collection.
+-- Atomically update the ResourceRecordSet collection.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSChangesCreate@.
 module Network.Google.Resource.DNS.Changes.Create

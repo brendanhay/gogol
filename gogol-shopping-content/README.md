@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Content API for Shopping.
+A client library for the Google Content API for Shopping.
 
 
 ## Contribute

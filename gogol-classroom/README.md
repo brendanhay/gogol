@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Classroom API.
+A client library for the Google Classroom.
 
 
 ## Contribute

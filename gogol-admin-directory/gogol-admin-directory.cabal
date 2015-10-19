@@ -1,6 +1,6 @@
 name:                  gogol-admin-directory
 version:               0.0.1
-synopsis:              Admin Directory API Client.
+synopsis:              Google Admin Directory SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

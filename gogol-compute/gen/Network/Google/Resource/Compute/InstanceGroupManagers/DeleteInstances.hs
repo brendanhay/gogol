@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Schedules a group action to delete the specified instances in the
+-- Schedules a group action to delete the specified instances in the
 -- managed instance group. The instances are also removed from any target
 -- pools of which they were a member. This method reduces the targetSize of
 -- the managed instance group by the number of instances that you delete.

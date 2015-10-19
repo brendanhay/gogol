@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lets you view Google Webmaster Tools data for your verified sites.
+-- Lets you view Google Webmaster Tools data for your verified sites.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference>
 module Network.Google.WebmasterTools

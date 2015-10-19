@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List Tasks in a TaskQueue
+-- List Tasks in a TaskQueue
 --
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksList@.
 module Network.Google.Resource.TaskQueue.Tasks.List

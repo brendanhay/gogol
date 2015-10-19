@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds a list of instances to the specified instance group. All of the
+-- Adds a list of instances to the specified instance group. All of the
 -- instances in the instance group must be in the same network\/subnetwork.
 -- TODO: Change to comment to state \"if IG is load balanced.\"
 --

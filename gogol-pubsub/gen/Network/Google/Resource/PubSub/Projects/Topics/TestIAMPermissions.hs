@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns permissions that a caller has on the specified resource.
+-- Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsTestIAMPermissions@.
 module Network.Google.Resource.PubSub.Projects.Topics.TestIAMPermissions

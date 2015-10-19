@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates one or more fields in a course. This method returns the
+-- Updates one or more fields in a course. This method returns the
 -- following error codes: * \`PERMISSION_DENIED\` if the requesting user is
 -- not permitted to modify the requested course or for access errors. *
 -- \`NOT_FOUND\` if no course exists with the requested ID. *

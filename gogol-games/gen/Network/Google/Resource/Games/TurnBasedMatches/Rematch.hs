@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Create a rematch of a match that was previously completed, with the same
+-- Create a rematch of a match that was previously completed, with the same
 -- participants. This can be called by only one player on a match still in
 -- their list; the player must have called Finish first. Returns the newly
 -- created match; it will be the caller\'s turn.

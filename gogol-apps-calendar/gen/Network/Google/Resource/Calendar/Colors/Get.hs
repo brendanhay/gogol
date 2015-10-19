@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the color definitions for calendars and events.
+-- Returns the color definitions for calendars and events.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarColorsGet@.
 module Network.Google.Resource.Calendar.Colors.Get

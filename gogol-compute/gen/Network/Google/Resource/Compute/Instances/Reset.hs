@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Performs a hard reset on the instance.
+-- Performs a hard reset on the instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesReset@.
 module Network.Google.Resource.Compute.Instances.Reset

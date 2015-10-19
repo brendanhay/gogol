@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Search public activities.
+-- Search public activities.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusActivitiesSearch@.
 module Network.Google.Resource.Plus.Activities.Search

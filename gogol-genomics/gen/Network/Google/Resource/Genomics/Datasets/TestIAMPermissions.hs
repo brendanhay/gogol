@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns permissions that a caller has on the specified resource. See
+-- Returns permissions that a caller has on the specified resource. See
 -- Testing Permissions for more information.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsDatasetsTestIAMPermissions@.

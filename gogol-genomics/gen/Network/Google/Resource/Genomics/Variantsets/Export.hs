@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Exports variant set data to an external destination.
+-- Exports variant set data to an external destination.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsVariantsetsExport@.
 module Network.Google.Resource.Genomics.Variantsets.Export

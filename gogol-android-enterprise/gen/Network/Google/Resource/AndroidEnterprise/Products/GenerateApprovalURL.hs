@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Generates a URL that can be rendered in an iframe to display the
+-- Generates a URL that can be rendered in an iframe to display the
 -- permissions (if any) of a product. An enterprise admin must view these
 -- permissions and accept them on behalf of their organization in order to
 -- approve that product. Admins should accept the displayed permissions by

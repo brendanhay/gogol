@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of attachments for a timeline item.
+-- Returns a list of attachments for a timeline item.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineAttachmentsList@.
 module Network.Google.Resource.Mirror.Timeline.Attachments.List

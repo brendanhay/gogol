@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a new call set.
+-- Creates a new call set.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsCallsetsCreate@.
 module Network.Google.Resource.Genomics.Callsets.Create

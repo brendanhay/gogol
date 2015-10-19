@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Marks line item(s) as shipped.
+-- Marks line item(s) as shipped.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersShiplineitems@.
 module Network.Google.Resource.Content.Orders.Shiplineitems

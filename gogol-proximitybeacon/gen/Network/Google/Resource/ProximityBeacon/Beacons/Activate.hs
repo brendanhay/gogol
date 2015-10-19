@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | (Re)activates a beacon. A beacon that is active will return information
+-- (Re)activates a beacon. A beacon that is active will return information
 -- and attachment data when queried via \`beaconinfo.getforobserved\`.
 -- Calling this method on an already active beacon will do nothing (but
 -- will return a successful response code).

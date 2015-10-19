@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns all of the localized store listings attached to this edit.
+-- Returns all of the localized store listings attached to this edit.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsListingsList@.
 module Network.Google.Resource.AndroidPublisher.Edits.Listings.List

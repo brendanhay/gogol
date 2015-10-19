@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of activities visible to the current logged in user.
+-- Returns a list of activities visible to the current logged in user.
 -- Visible activities are determined by the visiblity settings of the
 -- object that was acted on, e.g. Drive files a user can see. An activity
 -- is a record of past events. Multiple events may be merged if they are

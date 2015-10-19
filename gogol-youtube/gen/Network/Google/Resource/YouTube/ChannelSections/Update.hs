@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update a channelSection.
+-- Update a channelSection.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeChannelSectionsUpdate@.
 module Network.Google.Resource.YouTube.ChannelSections.Update

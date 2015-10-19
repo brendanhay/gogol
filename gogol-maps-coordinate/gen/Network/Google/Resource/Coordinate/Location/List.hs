@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of locations for a worker.
+-- Retrieves a list of locations for a worker.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateLocationList@.
 module Network.Google.Resource.Coordinate.Location.List

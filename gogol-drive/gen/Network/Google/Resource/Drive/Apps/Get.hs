@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a specific app.
+-- Gets a specific app.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveAppsGet@.
 module Network.Google.Resource.Drive.Apps.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Submits a sitemap for a site.
+-- Submits a sitemap for a site.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitemapsSubmit@.
 module Network.Google.Resource.Webmasters.Sitemaps.Submit

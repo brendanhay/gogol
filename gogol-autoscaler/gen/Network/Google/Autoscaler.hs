@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | The Google Compute Engine Autoscaler API provides autoscaling for groups
+-- The Google Compute Engine Autoscaler API provides autoscaling for groups
 -- of Cloud VMs.
 --
 -- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference>

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of channel activity events that match the request
+-- Returns a list of channel activity events that match the request
 -- criteria. For example, you can retrieve events associated with a
 -- particular channel, events associated with the user\'s subscriptions and
 -- Google+ friends, or the YouTube home page feed, which is customized for

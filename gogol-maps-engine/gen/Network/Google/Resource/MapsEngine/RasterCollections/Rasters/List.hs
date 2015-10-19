@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Return all rasters within a raster collection.
+-- Return all rasters within a raster collection.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRasterCollectionsRastersList@.
 module Network.Google.Resource.MapsEngine.RasterCollections.Rasters.List

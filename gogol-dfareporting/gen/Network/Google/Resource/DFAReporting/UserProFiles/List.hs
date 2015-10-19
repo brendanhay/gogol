@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves list of user profiles for a user.
+-- Retrieves list of user profiles for a user.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserProFilesList@.
 module Network.Google.Resource.DFAReporting.UserProFiles.List

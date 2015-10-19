@@ -1,6 +1,6 @@
 name:                  gogol-dfareporting
 version:               0.0.1
-synopsis:              DCM/DFA Reporting And Trafficking API Client.
+synopsis:              Google DCM/DFA Reporting And Trafficking SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

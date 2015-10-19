@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get the service information of a resource view or a resource.
+-- Get the service information of a resource view or a resource.
 --
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsGetService@.
 module Network.Google.Resource.ResourceViews.ZoneViews.GetService

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Return a list of books in My Library.
+-- Return a list of books in My Library.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesMybooksList@.
 module Network.Google.Resource.Books.Volumes.Mybooks.List

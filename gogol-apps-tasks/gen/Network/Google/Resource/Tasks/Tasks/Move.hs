@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Moves the specified task to another position in the task list. This can
+-- Moves the specified task to another position in the task list. This can
 -- include putting it as a child task under a new parent and\/or move it to
 -- a different position among its sibling tasks.
 --

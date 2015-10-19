@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Modify the list of owners for your website or domain. This method
+-- Modify the list of owners for your website or domain. This method
 -- supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourcePatch@.

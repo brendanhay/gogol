@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all available service tiers for Google Cloud SQL, for example D1,
+-- Lists all available service tiers for Google Cloud SQL, for example D1,
 -- D2. For related information, see Pricing.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLTiersList@.

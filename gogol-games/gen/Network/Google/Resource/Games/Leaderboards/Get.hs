@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the metadata of the leaderboard with the given ID.
+-- Retrieves the metadata of the leaderboard with the given ID.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesLeaderboardsGet@.
 module Network.Google.Resource.Games.Leaderboards.Get

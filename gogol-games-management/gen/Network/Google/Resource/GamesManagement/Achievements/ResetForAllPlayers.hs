@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Resets the achievement with the given ID for all players. This method is
+-- Resets the achievement with the given ID for all players. This method is
 -- only available to user accounts for your developer console. Only draft
 -- achievements can be reset.
 --

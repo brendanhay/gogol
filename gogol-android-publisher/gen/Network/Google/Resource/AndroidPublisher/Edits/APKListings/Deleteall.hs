@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes all the APK-specific localized listings for a specified APK.
+-- Deletes all the APK-specific localized listings for a specified APK.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsAPKListingsDeleteall@.
 module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Deleteall

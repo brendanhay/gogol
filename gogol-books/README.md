@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Books API.
+A client library for the Google Books.
 
 
 ## Contribute

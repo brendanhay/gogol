@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Cancel processing on a raster collection asset.
+-- Cancel processing on a raster collection asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRasterCollectionsCancelProcessing@.
 module Network.Google.Resource.MapsEngine.RasterCollections.CancelProcessing

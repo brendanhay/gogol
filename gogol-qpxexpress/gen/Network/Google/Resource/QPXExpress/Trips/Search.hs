@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of flights.
+-- Returns a list of flights.
 --
 -- /See:/ <http://developers.google.com/qpx-express QPX Express API Reference> for @QpxExpressTripsSearch@.
 module Network.Google.Resource.QPXExpress.Trips.Search

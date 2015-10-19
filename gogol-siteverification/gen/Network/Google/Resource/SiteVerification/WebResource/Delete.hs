@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Relinquish ownership of a website or domain.
+-- Relinquish ownership of a website or domain.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceDelete@.
 module Network.Google.Resource.SiteVerification.WebResource.Delete

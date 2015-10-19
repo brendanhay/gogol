@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates or updates a localized store listing.
+-- Creates or updates a localized store listing.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsListingsUpdate@.
 module Network.Google.Resource.AndroidPublisher.Edits.Listings.Update

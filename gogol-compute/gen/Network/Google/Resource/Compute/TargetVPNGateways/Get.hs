@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the specified TargetVpnGateway resource.
+-- Returns the specified TargetVpnGateway resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetVPNGatewaysGet@.
 module Network.Google.Resource.Compute.TargetVPNGateways.Get

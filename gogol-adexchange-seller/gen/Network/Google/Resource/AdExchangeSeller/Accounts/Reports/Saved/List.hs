@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all saved reports in this Ad Exchange account.
+-- List all saved reports in this Ad Exchange account.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsReportsSavedList@.
 module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.List

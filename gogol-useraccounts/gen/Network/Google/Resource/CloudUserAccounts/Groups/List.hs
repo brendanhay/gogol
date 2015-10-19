@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the list of groups contained within the specified project.
+-- Retrieves the list of groups contained within the specified project.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsGroupsList@.
 module Network.Google.Resource.CloudUserAccounts.Groups.List

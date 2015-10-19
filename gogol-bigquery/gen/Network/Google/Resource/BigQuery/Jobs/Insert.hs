@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Starts a new asynchronous job. Requires the Can View project role.
+-- Starts a new asynchronous job. Requires the Can View project role.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryJobsInsert@.
 module Network.Google.Resource.BigQuery.Jobs.Insert

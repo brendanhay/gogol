@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Submit input and request an output against a hosted model.
+-- Submit input and request an output against a hosted model.
 --
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionHostedModelsPredict@.
 module Network.Google.Resource.Prediction.HostedModels.Predict

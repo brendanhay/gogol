@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the details of a collection.
+-- Retrieves the details of a collection.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseCollectionsGet@.
 module Network.Google.Resource.AndroidEnterprise.Collections.Get

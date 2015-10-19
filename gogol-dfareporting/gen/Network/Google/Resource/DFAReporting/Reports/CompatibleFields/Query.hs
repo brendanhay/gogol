@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the fields that are compatible to be selected in the respective
+-- Returns the fields that are compatible to be selected in the respective
 -- sections of a report criteria, given the fields already selected in the
 -- input report and user permissions.
 --

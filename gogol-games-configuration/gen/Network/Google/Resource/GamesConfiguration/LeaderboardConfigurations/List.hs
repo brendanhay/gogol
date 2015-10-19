@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of the leaderboard configurations in this application.
+-- Returns a list of the leaderboard configurations in this application.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationLeaderboardConfigurationsList@.
 module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.List

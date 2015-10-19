@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves, inserts, and deletes multiple products in a single request.
+-- Retrieves, inserts, and deletes multiple products in a single request.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentProductsCustombatch@.
 module Network.Google.Resource.Content.Products.Custombatch

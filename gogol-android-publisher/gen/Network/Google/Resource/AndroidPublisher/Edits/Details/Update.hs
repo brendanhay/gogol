@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates app details for this edit.
+-- Updates app details for this edit.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsDetailsUpdate@.
 module Network.Google.Resource.AndroidPublisher.Edits.Details.Update

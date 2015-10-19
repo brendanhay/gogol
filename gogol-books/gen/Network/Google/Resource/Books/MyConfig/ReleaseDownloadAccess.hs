@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Release downloaded content access restriction.
+-- Release downloaded content access restriction.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyConfigReleaseDownloadAccess@.
 module Network.Google.Resource.Books.MyConfig.ReleaseDownloadAccess

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists operations that match the specified filter in the request. If the
+-- Lists operations that match the specified filter in the request. If the
 -- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
 -- the \`name\` binding below allows API services to override the binding
 -- to use different resource name schemes, such as

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates an invitation. Only one invitation for a user and course may
+-- Creates an invitation. Only one invitation for a user and course may
 -- exist at a time. Delete and re-create an invitation to make changes.
 -- This method returns the following error codes: * \`PERMISSION_DENIED\`
 -- if the requesting user is not permitted to create invitations for this

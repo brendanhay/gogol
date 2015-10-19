@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the specified VpnTunnel resource.
+-- Deletes the specified VpnTunnel resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeVPNTunnelsDelete@.
 module Network.Google.Resource.Compute.VPNTunnels.Delete

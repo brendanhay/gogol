@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the instance group manager and all instances contained within.
+-- Deletes the instance group manager and all instances contained within.
 -- If you\'d like to delete the manager without deleting the instances, you
 -- must first abandon the instances to remove them from the group.
 --

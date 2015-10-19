@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a domain alias of the customer.
+-- Retrieves a domain alias of the customer.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryDomainAliasesGet@.
 module Network.Google.Resource.Directory.DomainAliases.Get

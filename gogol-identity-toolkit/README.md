@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Identity Toolkit API.
+A client library for the Google Identity Toolkit.
 
 
 ## Contribute

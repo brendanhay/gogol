@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an existing reply.
+-- Updates an existing reply.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRepliesUpdate@.
 module Network.Google.Resource.Drive.Replies.Update

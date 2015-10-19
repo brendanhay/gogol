@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the state of the specified dataflow job.
+-- Gets the state of the specified dataflow job.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsGet@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.Get

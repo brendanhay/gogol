@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a resource containing information about a database inside a
+-- Updates a resource containing information about a database inside a
 -- Cloud SQL instance. This method supports patch semantics.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLDatabasesPatch@.

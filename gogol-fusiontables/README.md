@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Fusion Tables API.
+A client library for the Google Fusion Tables.
 
 
 ## Contribute

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Requests that a job be cancelled. This call will return immediately, and
+-- Requests that a job be cancelled. This call will return immediately, and
 -- the client will need to poll for the job status to see if the cancel
 -- completed successfully. Cancelled jobs may still incur costs.
 --

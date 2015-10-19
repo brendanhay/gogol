@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an existing webProperty-AdWords link.
+-- Updates an existing webProperty-AdWords link.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyAdWordsLinksUpdate@.
 module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Update

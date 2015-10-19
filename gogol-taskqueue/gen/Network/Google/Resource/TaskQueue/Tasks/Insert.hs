@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Insert a new task in a TaskQueue
+-- Insert a new task in a TaskQueue
 --
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksInsert@.
 module Network.Google.Resource.TaskQueue.Tasks.Insert

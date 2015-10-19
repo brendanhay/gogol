@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Directly inserts a message into only this user\'s mailbox similar to
+-- Directly inserts a message into only this user\'s mailbox similar to
 -- IMAP APPEND, bypassing most scanning and classification. Does not send a
 -- message.
 --

@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the DoubleClick Search API.
+A client library for the Google DoubleClick Search.
 
 
 ## Contribute

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Posts a bulletin for a specific channel. (The user submitting the
+-- Posts a bulletin for a specific channel. (The user submitting the
 -- request must be authorized to act on the channel\'s behalf.) Note: Even
 -- though an activity resource can contain information about actions like a
 -- user rating a video or marking a video as a favorite, you need to use

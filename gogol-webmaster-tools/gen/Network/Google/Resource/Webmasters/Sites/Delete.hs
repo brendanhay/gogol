@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes a site from the set of the user\'s Webmaster Tools sites.
+-- Removes a site from the set of the user\'s Webmaster Tools sites.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitesDelete@.
 module Network.Google.Resource.Webmasters.Sites.Delete

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all the states keys, and optionally the state data.
+-- Lists all the states keys, and optionally the state data.
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @AppStateStatesList@.
 module Network.Google.Resource.AppState.States.List

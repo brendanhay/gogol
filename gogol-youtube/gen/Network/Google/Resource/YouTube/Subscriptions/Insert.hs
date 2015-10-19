@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds a subscription for the authenticated user\'s channel.
+-- Adds a subscription for the authenticated user\'s channel.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeSubscriptionsInsert@.
 module Network.Google.Resource.YouTube.Subscriptions.Insert

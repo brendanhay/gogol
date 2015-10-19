@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a specific task by its ID, unless that task has already started
+-- Deletes a specific task by its ID, unless that task has already started
 -- running.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTaskDelete@.

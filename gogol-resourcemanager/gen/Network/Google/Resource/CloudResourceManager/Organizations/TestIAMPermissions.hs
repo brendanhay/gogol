@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns permissions that a caller has on the specified Organization.
+-- Returns permissions that a caller has on the specified Organization.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerOrganizationsTestIAMPermissions@.
 module Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermissions

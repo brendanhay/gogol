@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists a file\'s properties.
+-- Lists a file\'s properties.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePropertiesList@.
 module Network.Google.Resource.Drive.Properties.List

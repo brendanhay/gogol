@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieve the list of APIs supported at this endpoint.
+-- Retrieve the list of APIs supported at this endpoint.
 --
 -- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference> for @DiscoveryAPIsList@.
 module Network.Google.Resource.Discovery.APIs.List

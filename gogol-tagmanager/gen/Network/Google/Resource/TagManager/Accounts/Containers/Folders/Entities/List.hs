@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all entities in a GTM Folder.
+-- List all entities in a GTM Folder.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersFoldersEntitiesList@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Entities.List

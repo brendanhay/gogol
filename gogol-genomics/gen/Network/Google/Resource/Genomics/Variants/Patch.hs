@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a variant. This method supports patch semantics. Returns the
+-- Updates a variant. This method supports patch semantics. Returns the
 -- modified variant without its calls.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsVariantsPatch@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Marks the provided site\'s sample URL as fixed, and removes it from the
+-- Marks the provided site\'s sample URL as fixed, and removes it from the
 -- samples list.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersURLCrawlErrorsSamplesMarkAsFixed@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Return a single feature, given its ID.
+-- Return a single feature, given its ID.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesFeaturesGet@.
 module Network.Google.Resource.MapsEngine.Tables.Features.Get

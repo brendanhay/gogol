@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get a person\'s profile. If your app uses scope
+-- Get a person\'s profile. If your app uses scope
 -- https:\/\/www.googleapis.com\/auth\/plus.login, this method is
 -- guaranteed to return ageRange and language.
 --

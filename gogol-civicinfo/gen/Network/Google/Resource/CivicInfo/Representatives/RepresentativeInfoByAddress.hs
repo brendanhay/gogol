@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Looks up political geography and representative information for a single
+-- Looks up political geography and representative information for a single
 -- address.
 --
 -- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicInfoRepresentativesRepresentativeInfoByAddress@.

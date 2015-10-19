@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Watch for changes to Events resources.
+-- Watch for changes to Events resources.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsWatch@.
 module Network.Google.Resource.Calendar.Events.Watch

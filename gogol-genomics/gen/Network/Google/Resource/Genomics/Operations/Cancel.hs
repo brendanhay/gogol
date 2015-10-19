@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Starts asynchronous cancellation on a long-running operation. The server
+-- Starts asynchronous cancellation on a long-running operation. The server
 -- makes a best effort to cancel the operation, but success is not
 -- guaranteed. Clients may use Operations.GetOperation or
 -- Operations.ListOperations to check whether the cancellation succeeded or

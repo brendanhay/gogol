@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get the collection of players for the currently authenticated user.
+-- Get the collection of players for the currently authenticated user.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesPlayersList@.
 module Network.Google.Resource.Games.Players.List

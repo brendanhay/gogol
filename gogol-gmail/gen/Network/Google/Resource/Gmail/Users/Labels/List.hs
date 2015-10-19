@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all labels in the user\'s mailbox.
+-- Lists all labels in the user\'s mailbox.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersLabelsList@.
 module Network.Google.Resource.Gmail.Users.Labels.List

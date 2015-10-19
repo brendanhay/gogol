@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Upload data for a custom data source.
+-- Upload data for a custom data source.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUploadsUploadData@.
 module Network.Google.Resource.Analytics.Management.Uploads.UploadData

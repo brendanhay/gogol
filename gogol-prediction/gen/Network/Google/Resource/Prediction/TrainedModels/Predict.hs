@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Submit model id and request a prediction.
+-- Submit model id and request a prediction.
 --
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedModelsPredict@.
 module Network.Google.Resource.Prediction.TrainedModels.Predict

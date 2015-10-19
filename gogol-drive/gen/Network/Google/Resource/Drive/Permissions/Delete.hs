@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a permission from a file.
+-- Deletes a permission from a file.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsDelete@.
 module Network.Google.Resource.Drive.Permissions.Delete

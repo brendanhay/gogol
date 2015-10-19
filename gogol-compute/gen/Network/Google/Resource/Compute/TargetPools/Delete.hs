@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the specified TargetPool resource.
+-- Deletes the specified TargetPool resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsDelete@.
 module Network.Google.Resource.Compute.TargetPools.Delete

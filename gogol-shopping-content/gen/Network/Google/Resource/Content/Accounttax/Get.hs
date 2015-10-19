@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the tax settings of the account.
+-- Retrieves the tax settings of the account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccounttaxGet@.
 module Network.Google.Resource.Content.Accounttax.Get

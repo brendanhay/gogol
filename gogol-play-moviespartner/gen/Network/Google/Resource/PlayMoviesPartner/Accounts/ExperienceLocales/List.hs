@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List ExperienceLocales owned or managed by the partner. See
+-- List ExperienceLocales owned or managed by the partner. See
 -- _Authentication and Authorization rules_ and _List methods rules_ for
 -- more information about this method.
 --

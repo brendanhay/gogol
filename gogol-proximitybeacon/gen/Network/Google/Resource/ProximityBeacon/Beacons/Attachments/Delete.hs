@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the specified attachment for the given beacon. Each attachment
+-- Deletes the specified attachment for the given beacon. Each attachment
 -- has a unique attachment name (\`attachmentName\`) which is returned when
 -- you fetch the attachment data via this API. You specify this with the
 -- delete request to control which attachment is removed. This operation

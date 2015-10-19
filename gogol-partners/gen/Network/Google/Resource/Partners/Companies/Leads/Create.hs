@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates an advertiser lead for the given company ID.
+-- Creates an advertiser lead for the given company ID.
 --
 -- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @PartnersCompaniesLeadsCreate@.
 module Network.Google.Resource.Partners.Companies.Leads.Create

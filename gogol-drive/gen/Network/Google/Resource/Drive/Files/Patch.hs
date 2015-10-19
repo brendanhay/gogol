@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates file metadata and\/or content. This method supports patch
+-- Updates file metadata and\/or content. This method supports patch
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesPatch@.

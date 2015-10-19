@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a subscription to a given topic for a given subscriber. If the
+-- Creates a subscription to a given topic for a given subscriber. If the
 -- subscription already exists, returns \`ALREADY_EXISTS\`. If the
 -- corresponding topic doesn\'t exist, returns \`NOT_FOUND\`. If the name
 -- is not provided in the request, the server will assign a random name for

@@ -1,6 +1,6 @@
 name:                  gogol-dns
 version:               0.0.1
-synopsis:              Google Cloud DNS API Client.
+synopsis:              Google Cloud DNS SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

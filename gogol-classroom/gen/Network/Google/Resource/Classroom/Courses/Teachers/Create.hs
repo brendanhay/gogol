@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a teacher of a course. This method returns the following error
+-- Creates a teacher of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
 -- to create teachers in this course or for access errors. * \`NOT_FOUND\`
 -- if the requested course ID does not exist. * \`FAILED_PRECONDITION\` if

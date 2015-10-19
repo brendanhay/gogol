@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes a user from the given web property.
+-- Removes a user from the given web property.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyUserLinksDelete@.
 module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Delete

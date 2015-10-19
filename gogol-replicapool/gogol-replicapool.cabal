@@ -1,6 +1,6 @@
 name:                  gogol-replicapool
 version:               0.0.1
-synopsis:              Google Compute Engine Instance Group Manager API Client.
+synopsis:              Google Compute Engine Instance Group Manager SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

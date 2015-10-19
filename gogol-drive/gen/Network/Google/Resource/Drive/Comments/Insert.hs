@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a new comment on the given file.
+-- Creates a new comment on the given file.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveCommentsInsert@.
 module Network.Google.Resource.Drive.Comments.Insert

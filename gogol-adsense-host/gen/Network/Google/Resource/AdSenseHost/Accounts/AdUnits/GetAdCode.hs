@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get ad code for the specified ad unit, attaching the specified host
+-- Get ad code for the specified ad unit, attaching the specified host
 -- custom channels.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdUnitsGetAdCode@.

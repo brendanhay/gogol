@@ -1,6 +1,6 @@
 name:                  gogol-pagespeed
 version:               0.0.1
-synopsis:              PageSpeed Insights API Client.
+synopsis:              Google PageSpeed Insights SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

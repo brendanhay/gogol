@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an existing reply. This method supports patch semantics.
+-- Updates an existing reply. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRepliesPatch@.
 module Network.Google.Resource.Drive.Replies.Patch

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Decommissions the specified beacon in the service. This beacon will no
+-- Decommissions the specified beacon in the service. This beacon will no
 -- longer be returned from \`beaconinfo.getforobserved\`. This operation is
 -- permanent -- you will not be able to re-register a beacon with this ID
 -- again.

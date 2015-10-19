@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | The Google Cloud Trace API provides services for reading and writing
+-- The Google Cloud Trace API provides services for reading and writing
 -- runtime trace data for Cloud applications.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference>

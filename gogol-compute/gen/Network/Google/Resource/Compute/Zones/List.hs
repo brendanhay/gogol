@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the list of zone resources available to the specified project.
+-- Retrieves the list of zone resources available to the specified project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeZonesList@.
 module Network.Google.Resource.Compute.Zones.List

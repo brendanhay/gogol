@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Searches for read group sets matching the criteria. Implements
+-- Searches for read group sets matching the criteria. Implements
 -- [GlobalAllianceApi.searchReadGroupSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/readmethods.avdl#L135).
 --
 -- /See:/ < Genomics API Reference> for @GenomicsReadgroupsetsSearch@.

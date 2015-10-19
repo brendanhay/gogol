@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the BigQuery API.
+A client library for the Google BigQuery.
 
 
 ## Contribute

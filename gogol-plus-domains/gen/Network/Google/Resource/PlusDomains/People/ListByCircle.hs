@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all of the people who are members of a circle.
+-- List all of the people who are members of a circle.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsPeopleListByCircle@.
 module Network.Google.Resource.PlusDomains.People.ListByCircle

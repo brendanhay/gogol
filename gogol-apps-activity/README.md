@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Apps Activity API.
+A client library for the Google Apps Activity.
 
 
 ## Contribute

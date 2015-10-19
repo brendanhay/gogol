@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sets the deprecation status of an image. If an empty request body is
+-- Sets the deprecation status of an image. If an empty request body is
 -- given, clears the deprecation status instead.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeImagesDeprecate@.

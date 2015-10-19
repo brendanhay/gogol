@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all the modules in the application.
+-- Lists all the modules in the application.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesList@.
 module Network.Google.Resource.AppEngine.Apps.Modules.List

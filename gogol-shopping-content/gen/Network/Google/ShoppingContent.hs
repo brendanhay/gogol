@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Manage product items, inventory, and Merchant Center accounts for Google
+-- Manage product items, inventory, and Merchant Center accounts for Google
 -- Shopping.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference>

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of activities for a specific customer and application.
+-- Retrieves a list of activities for a specific customer and application.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference> for @ReportsActivitiesList@.
 module Network.Google.Resource.Reports.Activities.List

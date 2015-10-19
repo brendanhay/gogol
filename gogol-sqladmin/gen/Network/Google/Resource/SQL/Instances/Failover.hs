@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Failover the instance to its failover replica instance.
+-- Failover the instance to its failover replica instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesFailover@.
 module Network.Google.Resource.SQL.Instances.Failover

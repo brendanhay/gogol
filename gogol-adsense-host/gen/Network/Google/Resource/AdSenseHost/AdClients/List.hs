@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all host ad clients in this AdSense account.
+-- List all host ad clients in this AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAdClientsList@.
 module Network.Google.Resource.AdSenseHost.AdClients.List

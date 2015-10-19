@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns information about the edit specified. Calls will fail if the
+-- Returns information about the edit specified. Calls will fail if the
 -- edit is no long active (e.g. has been deleted, superseded or expired).
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsGet@.

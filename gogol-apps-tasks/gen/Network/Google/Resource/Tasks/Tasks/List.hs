@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns all tasks in the specified task list.
+-- Returns all tasks in the specified task list.
 --
 -- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTasksList@.
 module Network.Google.Resource.Tasks.Tasks.List

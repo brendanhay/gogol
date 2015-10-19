@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Reset all turn-based match data for a user. This method is only
+-- Reset all turn-based match data for a user. This method is only
 -- accessible to whitelisted tester accounts for your application.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementTurnBasedMatchesReset@.

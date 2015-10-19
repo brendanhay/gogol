@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a paginated list of all the roles in a domain.
+-- Retrieves a paginated list of all the roles in a domain.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryRolesList@.
 module Network.Google.Resource.Directory.Roles.List

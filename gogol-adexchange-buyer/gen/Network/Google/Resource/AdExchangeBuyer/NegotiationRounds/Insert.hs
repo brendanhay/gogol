@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds the requested negotiationRound to the requested negotiation.
+-- Adds the requested negotiationRound to the requested negotiation.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerNegotiationRoundsInsert@.
 module Network.Google.Resource.AdExchangeBuyer.NegotiationRounds.Insert

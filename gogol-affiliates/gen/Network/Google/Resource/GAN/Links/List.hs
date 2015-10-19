@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves all links that match the query parameters.
+-- Retrieves all links that match the query parameters.
 --
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANLinksList@.
 module Network.Google.Resource.GAN.Links.List

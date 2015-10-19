@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all the track configurations for this edit.
+-- Lists all the track configurations for this edit.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsTracksList@.
 module Network.Google.Resource.AndroidPublisher.Edits.Tracks.List

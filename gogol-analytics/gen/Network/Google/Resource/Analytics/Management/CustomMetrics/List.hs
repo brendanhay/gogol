@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists custom metrics to which the user has access.
+-- Lists custom metrics to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomMetricsList@.
 module Network.Google.Resource.Analytics.Management.CustomMetrics.List

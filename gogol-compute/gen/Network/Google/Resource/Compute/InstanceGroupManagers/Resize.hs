@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Resizes the managed instance group. If you increase the size, the group
+-- Resizes the managed instance group. If you increase the size, the group
 -- creates new instances using the current instance template. If you
 -- decrease the size, the group deletes instances. The resize operation is
 -- marked DONE when the resize actions are scheduled even if the group has

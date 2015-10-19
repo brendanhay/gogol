@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Searches for political divisions by their natural name or OCD ID.
+-- Searches for political divisions by their natural name or OCD ID.
 --
 -- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicInfoDivisionsSearch@.
 module Network.Google.Resource.CivicInfo.Divisions.Search

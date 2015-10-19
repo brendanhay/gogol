@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Partners API.
+A client library for the Google Partners.
 
 
 ## Contribute

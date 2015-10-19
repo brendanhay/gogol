@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the billing information for one account specified by account ID.
+-- Returns the billing information for one account specified by account ID.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerBillingInfoGet@.
 module Network.Google.Resource.AdExchangeBuyer.BillingInfo.Get

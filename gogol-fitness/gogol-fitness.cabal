@@ -1,6 +1,6 @@
 name:                  gogol-fitness
 version:               0.0.1
-synopsis:              Fitness Client.
+synopsis:              Google Fitness SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

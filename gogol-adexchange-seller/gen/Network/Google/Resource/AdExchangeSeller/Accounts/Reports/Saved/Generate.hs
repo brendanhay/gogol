@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Generate an Ad Exchange report based on the saved report ID sent in the
+-- Generate an Ad Exchange report based on the saved report ID sent in the
 -- query parameters.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsReportsSavedGenerate@.

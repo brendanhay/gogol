@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update Organization Unit. This method supports patch semantics.
+-- Update Organization Unit. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryOrgUnitsPatch@.
 module Network.Google.Resource.Directory.OrgUnits.Patch

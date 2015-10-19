@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the specified task from the task list.
+-- Deletes the specified task from the task list.
 --
 -- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTasksDelete@.
 module Network.Google.Resource.Tasks.Tasks.Delete

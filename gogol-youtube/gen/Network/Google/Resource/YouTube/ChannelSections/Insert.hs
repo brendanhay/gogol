@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds a channelSection for the authenticated user\'s channel.
+-- Adds a channelSection for the authenticated user\'s channel.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeChannelSectionsInsert@.
 module Network.Google.Resource.YouTube.ChannelSections.Insert

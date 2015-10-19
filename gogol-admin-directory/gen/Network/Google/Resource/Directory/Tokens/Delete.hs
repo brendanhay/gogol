@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Delete all access tokens issued by a user for an application.
+-- Delete all access tokens issued by a user for an application.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryTokensDelete@.
 module Network.Google.Resource.Directory.Tokens.Delete

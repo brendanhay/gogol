@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List the metadata for the dimensions available to this AdSense account.
+-- List the metadata for the dimensions available to this AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseMetadataDimensionsList@.
 module Network.Google.Resource.AdSense.Metadata.Dimensions.List

@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Email Migration API v2.
+A client library for the Google Email Migration API v2.
 
 
 ## Contribute

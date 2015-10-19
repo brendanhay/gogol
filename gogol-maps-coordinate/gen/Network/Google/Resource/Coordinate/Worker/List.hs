@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of workers in a team.
+-- Retrieves a list of workers in a team.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateWorkerList@.
 module Network.Google.Resource.Coordinate.Worker.List

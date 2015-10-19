@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Container Engine API.
+A client library for the Google Container Engine.
 
 
 ## Contribute

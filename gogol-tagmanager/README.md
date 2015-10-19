@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Tag Manager API.
+A client library for the Google Tag Manager.
 
 
 ## Contribute

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the account\'s active ad summary by account ID.
+-- Gets the account\'s active ad summary by account ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAccountActiveAdSummariesGet@.
 module Network.Google.Resource.DFAReporting.AccountActiveAdSummaries.Get

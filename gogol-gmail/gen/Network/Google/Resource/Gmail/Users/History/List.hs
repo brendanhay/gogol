@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the history of all changes to the given mailbox. History results
+-- Lists the history of all changes to the given mailbox. History results
 -- are returned in chronological order (increasing historyId).
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersHistoryList@.

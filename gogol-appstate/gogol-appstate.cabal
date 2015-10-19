@@ -1,6 +1,6 @@
 name:                  gogol-appstate
 version:               0.0.1
-synopsis:              Google App State API Client.
+synopsis:              Google App State SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

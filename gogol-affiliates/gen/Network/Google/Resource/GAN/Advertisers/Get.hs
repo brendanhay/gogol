@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves data about a single advertiser if that the requesting
+-- Retrieves data about a single advertiser if that the requesting
 -- advertiser\/publisher has access to it. Only publishers can lookup
 -- advertisers. Advertisers can request information about themselves by
 -- omitting the advertiserId query parameter.

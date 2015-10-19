@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Return the published metadata for a particular map.
+-- Return the published metadata for a particular map.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineMapsGetPublished@.
 module Network.Google.Resource.MapsEngine.Maps.GetPublished

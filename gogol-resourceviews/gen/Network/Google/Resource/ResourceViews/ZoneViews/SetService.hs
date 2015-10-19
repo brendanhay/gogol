@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update the service information of a resource view or a resource.
+-- Update the service information of a resource view or a resource.
 --
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsSetService@.
 module Network.Google.Resource.ResourceViews.ZoneViews.SetService

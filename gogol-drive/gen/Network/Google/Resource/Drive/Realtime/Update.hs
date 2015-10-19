@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Overwrites the Realtime API data model associated with this file with
+-- Overwrites the Realtime API data model associated with this file with
 -- the provided JSON data model.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRealtimeUpdate@.

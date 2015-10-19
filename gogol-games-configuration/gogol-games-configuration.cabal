@@ -1,6 +1,6 @@
 name:                  gogol-games-configuration
 version:               0.0.1
-synopsis:              Google Play Game Services Publishing API Client.
+synopsis:              Google Play Game Services Publishing SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

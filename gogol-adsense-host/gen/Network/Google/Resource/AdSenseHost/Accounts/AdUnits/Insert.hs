@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Insert the supplied ad unit into the specified publisher AdSense
+-- Insert the supplied ad unit into the specified publisher AdSense
 -- account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdUnitsInsert@.

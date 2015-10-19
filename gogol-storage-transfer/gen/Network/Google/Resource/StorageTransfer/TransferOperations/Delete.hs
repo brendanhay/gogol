@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | This method is not supported and the server returns \`UNIMPLEMENTED\`.
+-- This method is not supported and the server returns \`UNIMPLEMENTED\`.
 --
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferOperationsDelete@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Delete

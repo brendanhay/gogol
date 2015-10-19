@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Polls for the status of a report request.
+-- Polls for the status of a report request.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchReportsGet@.
 module Network.Google.Resource.DoubleClickSearch.Reports.Get

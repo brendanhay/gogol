@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Generates a set of file IDs which can be provided in insert requests.
+-- Generates a set of file IDs which can be provided in insert requests.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesGenerateIds@.
 module Network.Google.Resource.Drive.Files.GenerateIds

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an existing style. This method supports patch semantics.
+-- Updates an existing style. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesStylePatch@.
 module Network.Google.Resource.FusionTables.Style.Patch

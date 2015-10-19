@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Inserts a new mail into the archive of the Google group.
+-- Inserts a new mail into the archive of the Google group.
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-migration/ Groups Migration API Reference> for @GroupsmigrationArchiveInsert@.
 module Network.Google.Resource.GroupsMigration.Archive.Insert

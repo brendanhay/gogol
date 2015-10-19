@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns all user settings for the authenticated user.
+-- Returns all user settings for the authenticated user.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarSettingsList@.
 module Network.Google.Resource.Calendar.Settings.List

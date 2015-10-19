@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns Analytics Multi-Channel Funnels data for a view (profile).
+-- Returns Analytics Multi-Channel Funnels data for a view (profile).
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsDataMcfGet@.
 module Network.Google.Resource.Analytics.Data.Mcf.Get

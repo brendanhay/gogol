@@ -1,6 +1,6 @@
 name:                  gogol-drive
 version:               0.0.1
-synopsis:              Drive API Client.
+synopsis:              Google Drive SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

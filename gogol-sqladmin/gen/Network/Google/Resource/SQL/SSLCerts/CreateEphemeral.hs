@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Generates a short-lived X509 certificate containing the provided public
+-- Generates a short-lived X509 certificate containing the provided public
 -- key and signed by a private key specific to the target instance. Users
 -- may use the certificate to authenticate as themselves when connecting to
 -- the database.

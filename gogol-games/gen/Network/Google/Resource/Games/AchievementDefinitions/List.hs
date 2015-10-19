@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all the achievement definitions for your application.
+-- Lists all the achievement definitions for your application.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementDefinitionsList@.
 module Network.Google.Resource.Games.AchievementDefinitions.List

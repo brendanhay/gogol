@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Registers a datafeed with your Merchant Center account.
+-- Registers a datafeed with your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentDatafeedsInsert@.
 module Network.Google.Resource.Content.Datafeeds.Insert

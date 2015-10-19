@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a job and returns it.
+-- Creates a job and returns it.
 --
 -- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @YouTubereportingJobsCreate@.
 module Network.Google.Resource.YouTubeReporting.Jobs.Create

@@ -1,6 +1,6 @@
 name:                  gogol-admin-emailmigration
 version:               0.0.1
-synopsis:              Email Migration API v2 Client.
+synopsis:              Google Email Migration API v2 SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

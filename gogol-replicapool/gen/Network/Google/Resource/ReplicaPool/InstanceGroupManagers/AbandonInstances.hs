@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes the specified instances from the managed instance group, and
+-- Removes the specified instances from the managed instance group, and
 -- from any target pools of which they were members, without deleting the
 -- instances.
 --

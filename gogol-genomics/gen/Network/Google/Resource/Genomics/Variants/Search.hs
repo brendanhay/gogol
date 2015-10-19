@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a list of variants matching the criteria. Implements
+-- Gets a list of variants matching the criteria. Implements
 -- [GlobalAllianceApi.searchVariants](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L126).
 --
 -- /See:/ < Genomics API Reference> for @GenomicsVariantsSearch@.

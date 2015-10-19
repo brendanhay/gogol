@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a paginated list of all roleAssignments.
+-- Retrieves a paginated list of all roleAssignments.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryRoleAssignmentsList@.
 module Network.Google.Resource.Directory.RoleAssignments.List

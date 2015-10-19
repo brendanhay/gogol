@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a collection of playlists that match the API request parameters.
+-- Returns a collection of playlists that match the API request parameters.
 -- For example, you can retrieve all playlists that the authenticated user
 -- owns, or you can retrieve one or more playlists by their unique IDs.
 --

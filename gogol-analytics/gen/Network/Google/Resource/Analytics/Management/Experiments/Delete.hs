@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Delete an experiment.
+-- Delete an experiment.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementExperimentsDelete@.
 module Network.Google.Resource.Analytics.Management.Experiments.Delete

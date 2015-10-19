@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a contact.
+-- Deletes a contact.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorContactsDelete@.
 module Network.Google.Resource.Mirror.Contacts.Delete

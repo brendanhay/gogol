@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Delete a URL channel from the host AdSense account.
+-- Delete a URL channel from the host AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostURLChannelsDelete@.
 module Network.Google.Resource.AdSenseHost.URLChannels.Delete

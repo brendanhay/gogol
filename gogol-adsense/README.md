@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the AdSense Management API.
+A client library for the Google AdSense Management.
 
 
 ## Contribute

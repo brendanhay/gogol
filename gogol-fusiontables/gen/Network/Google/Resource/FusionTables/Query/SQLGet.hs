@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Executes a SQL statement which can be any of - SELECT - SHOW - DESCRIBE
+-- Executes a SQL statement which can be any of - SELECT - SHOW - DESCRIBE
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesQuerySQLGet@.
 module Network.Google.Resource.FusionTables.Query.SQLGet

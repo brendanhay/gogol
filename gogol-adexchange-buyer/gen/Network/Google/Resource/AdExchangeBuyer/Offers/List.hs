@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all offers the authenticated user has access to.
+-- Lists all offers the authenticated user has access to.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerOffersList@.
 module Network.Google.Resource.AdExchangeBuyer.Offers.List

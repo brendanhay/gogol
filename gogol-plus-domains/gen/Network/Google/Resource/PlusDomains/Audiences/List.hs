@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all of the audiences to which a user can share.
+-- List all of the audiences to which a user can share.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsAudiencesList@.
 module Network.Google.Resource.PlusDomains.Audiences.List

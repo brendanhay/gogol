@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a teacher of a course. This method returns the following error
+-- Deletes a teacher of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
 -- to delete teachers of this course or for access errors. * \`NOT_FOUND\`
 -- if no teacher of this course has the requested ID or if the course does

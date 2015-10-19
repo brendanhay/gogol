@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a transfer job that runs periodically.
+-- Creates a transfer job that runs periodically.
 --
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferJobsCreate@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.Create

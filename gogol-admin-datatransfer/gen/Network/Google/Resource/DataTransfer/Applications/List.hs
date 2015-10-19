@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the applications available for data transfer for a customer.
+-- Lists the applications available for data transfer for a customer.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @DataTransferApplicationsList@.
 module Network.Google.Resource.DataTransfer.Applications.List

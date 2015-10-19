@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Return a list of books uploaded by the current user.
+-- Return a list of books uploaded by the current user.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesUserUploadedList@.
 module Network.Google.Resource.Books.Volumes.UserUploaded.List

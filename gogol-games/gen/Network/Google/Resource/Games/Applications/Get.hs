@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the metadata of the application with the given ID. If the
+-- Retrieves the metadata of the application with the given ID. If the
 -- requested application is not available for the specified platformType,
 -- the returned response will not include any instance data.
 --

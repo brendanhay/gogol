@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sends a test push notification to validate the MDM integration with the
+-- Sends a test push notification to validate the MDM integration with the
 -- Google Cloud Pub\/Sub service for this enterprise.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEnterprisesSendTestPushNotification@.

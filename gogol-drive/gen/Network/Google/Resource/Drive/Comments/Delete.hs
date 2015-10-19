@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a comment.
+-- Deletes a comment.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveCommentsDelete@.
 module Network.Google.Resource.Drive.Comments.Delete

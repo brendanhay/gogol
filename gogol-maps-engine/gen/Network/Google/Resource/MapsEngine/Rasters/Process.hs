@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Process a raster asset.
+-- Process a raster asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRastersProcess@.
 module Network.Google.Resource.MapsEngine.Rasters.Process

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Mutate a raster asset.
+-- Mutate a raster asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRastersPatch@.
 module Network.Google.Resource.MapsEngine.Rasters.Patch

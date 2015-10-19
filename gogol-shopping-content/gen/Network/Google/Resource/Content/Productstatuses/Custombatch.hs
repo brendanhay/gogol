@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the statuses of multiple products in a single request.
+-- Gets the statuses of multiple products in a single request.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentProductstatusesCustombatch@.
 module Network.Google.Resource.Content.Productstatuses.Custombatch

@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the TaskQueue API.
+A client library for the Google TaskQueue.
 
 
 ## Contribute

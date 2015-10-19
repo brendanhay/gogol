@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update the entire content of the Autoscaler resource.
+-- Update the entire content of the Autoscaler resource.
 --
 -- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerAutoscalersUpdate@.
 module Network.Google.Resource.Autoscaler.Autoscalers.Update

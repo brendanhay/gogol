@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get a StoreInfo given its video id and country. See _Authentication and
+-- Get a StoreInfo given its video id and country. See _Authentication and
 -- Authorization rules_ and _Get methods rules_ for more information about
 -- this method.
 --

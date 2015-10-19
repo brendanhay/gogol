@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes a child from a folder.
+-- Removes a child from a folder.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChildrenDelete@.
 module Network.Google.Resource.Drive.Children.Delete

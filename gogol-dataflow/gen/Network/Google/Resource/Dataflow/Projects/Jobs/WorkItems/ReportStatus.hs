@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Reports the status of dataflow WorkItems leased by a worker.
+-- Reports the status of dataflow WorkItems leased by a worker.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsWorkItemsReportStatus@.
 module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus

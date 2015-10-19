@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a report which is a collection of properties \/ statistics for
+-- Retrieves a report which is a collection of properties \/ statistics for
 -- a set of users.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference> for @ReportsUserUsageReportGet@.

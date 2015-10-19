@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Uploads a new image and adds it to the list of images for the specified
+-- Uploads a new image and adds it to the list of images for the specified
 -- language and image type.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsImagesUpload@.

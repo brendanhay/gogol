@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves event data for a given advertiser\/publisher.
+-- Retrieves event data for a given advertiser\/publisher.
 --
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GANEventsList@.
 module Network.Google.Resource.GAN.Events.List

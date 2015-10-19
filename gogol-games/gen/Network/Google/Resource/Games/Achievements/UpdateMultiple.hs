@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates multiple achievements for the currently authenticated player.
+-- Updates multiple achievements for the currently authenticated player.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementsUpdateMultiple@.
 module Network.Google.Resource.Games.Achievements.UpdateMultiple

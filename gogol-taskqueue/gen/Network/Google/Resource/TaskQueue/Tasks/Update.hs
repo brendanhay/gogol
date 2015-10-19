@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update tasks that are leased out of a TaskQueue.
+-- Update tasks that are leased out of a TaskQueue.
 --
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksUpdate@.
 module Network.Google.Resource.TaskQueue.Tasks.Update

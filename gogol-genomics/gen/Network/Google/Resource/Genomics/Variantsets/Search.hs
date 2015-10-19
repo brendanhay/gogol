@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of all variant sets matching search criteria. Implements
+-- Returns a list of all variant sets matching search criteria. Implements
 -- [GlobalAllianceApi.searchVariantSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L49).
 --
 -- /See:/ < Genomics API Reference> for @GenomicsVariantsetsSearch@.

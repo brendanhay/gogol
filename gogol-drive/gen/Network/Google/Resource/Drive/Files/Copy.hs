@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a copy of the specified file.
+-- Creates a copy of the specified file.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesCopy@.
 module Network.Google.Resource.Drive.Files.Copy

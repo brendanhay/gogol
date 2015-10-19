@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Publishes a draft post, optionally at the specific time of the given
+-- Publishes a draft post, optionally at the specific time of the given
 -- publishDate parameter.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsPublish@.

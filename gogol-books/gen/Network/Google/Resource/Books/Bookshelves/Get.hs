@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves metadata for a specific bookshelf for the specified user.
+-- Retrieves metadata for a specific bookshelf for the specified user.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksBookshelvesGet@.
 module Network.Google.Resource.Books.Bookshelves.Get

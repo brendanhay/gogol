@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Inserts a new account for a user
+-- Inserts a new account for a user
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorAccountsInsert@.
 module Network.Google.Resource.Mirror.Accounts.Insert

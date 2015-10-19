@@ -1,6 +1,6 @@
 name:                  gogol-genomics
 version:               0.0.1
-synopsis:              Genomics API Client.
+synopsis:              Google Genomics SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get an order given its id
+-- Get an order given its id
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceOrdersGet@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Get

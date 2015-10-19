@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Find Freebase entities using textual queries and other constraints.
+-- Find Freebase entities using textual queries and other constraints.
 --
 -- /See:/ <https://developers.google.com/freebase/ Freebase Search Reference>
 module Network.Google.FreebaseSearch

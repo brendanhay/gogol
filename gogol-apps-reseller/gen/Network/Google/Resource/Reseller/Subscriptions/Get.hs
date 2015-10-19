@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a subscription of the customer.
+-- Gets a subscription of the customer.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsGet@.
 module Network.Google.Resource.Reseller.Subscriptions.Get

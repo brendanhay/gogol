@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a Merchant Center sub-account.
+-- Creates a Merchant Center sub-account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountsInsert@.
 module Network.Google.Resource.Content.Accounts.Insert

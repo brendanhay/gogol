@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Expresses the caller\'s opinion that one or more comments should be
+-- Expresses the caller\'s opinion that one or more comments should be
 -- flagged as spam.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentsMarkAsSpam@.

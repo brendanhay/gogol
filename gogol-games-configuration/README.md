@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Play Game Services Publishing API.
+A client library for the Google Play Game Services Publishing.
 
 
 ## Contribute

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a job, including all the changes made to the job.
+-- Retrieves a job, including all the changes made to the job.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateJobsGet@.
 module Network.Google.Resource.Coordinate.Jobs.Get

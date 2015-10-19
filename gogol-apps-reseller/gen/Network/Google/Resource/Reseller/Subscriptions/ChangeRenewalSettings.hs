@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Changes the renewal settings of a subscription
+-- Changes the renewal settings of a subscription
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsChangeRenewalSettings@.
 module Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Submits a score to the specified leaderboard.
+-- Submits a score to the specified leaderboard.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesScoresSubmit@.
 module Network.Google.Resource.Games.Scores.Submit

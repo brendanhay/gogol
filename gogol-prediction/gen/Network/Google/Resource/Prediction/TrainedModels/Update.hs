@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Add new data to a trained model.
+-- Add new data to a trained model.
 --
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedModelsUpdate@.
 module Network.Google.Resource.Prediction.TrainedModels.Update

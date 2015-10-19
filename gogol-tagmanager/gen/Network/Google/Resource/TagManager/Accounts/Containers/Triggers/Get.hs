@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a GTM Trigger.
+-- Gets a GTM Trigger.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersTriggersGet@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Get

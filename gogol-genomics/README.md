@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Genomics API.
+A client library for the Google Genomics.
 
 
 ## Contribute

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves details of a product for display to an enterprise admin.
+-- Retrieves details of a product for display to an enterprise admin.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseProductsGet@.
 module Network.Google.Resource.AndroidEnterprise.Products.Get

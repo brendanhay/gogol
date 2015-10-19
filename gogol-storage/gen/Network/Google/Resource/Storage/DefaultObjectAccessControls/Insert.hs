@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a new default object ACL entry on the specified bucket.
+-- Creates a new default object ACL entry on the specified bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageDefaultObjectAccessControlsInsert@.
 module Network.Google.Resource.Storage.DefaultObjectAccessControls.Insert

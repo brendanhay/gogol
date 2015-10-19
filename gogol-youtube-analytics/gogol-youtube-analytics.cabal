@@ -1,6 +1,6 @@
 name:                  gogol-youtube-analytics
 version:               0.0.1
-synopsis:              YouTube Analytics API Client.
+synopsis:              Google YouTube Analytics SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

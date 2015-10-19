@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Civic Information API.
+A client library for the Google Civic Information.
 
 
 ## Contribute

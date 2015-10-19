@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all ad units in the specified custom channel.
+-- List all ad units in the specified custom channel.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseCustomChannelsAdUnitsList@.
 module Network.Google.Resource.AdSense.CustomChannels.AdUnits.List

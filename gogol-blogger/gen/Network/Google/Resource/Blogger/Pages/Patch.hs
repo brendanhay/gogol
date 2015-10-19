@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update a page. This method supports patch semantics.
+-- Update a page. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesPatch@.
 module Network.Google.Resource.Blogger.Pages.Patch

@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lets Android application developers access their Google Play accounts.
+-- Lets Android application developers access their Google Play accounts.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference>
 module Network.Google.AndroidPublisher

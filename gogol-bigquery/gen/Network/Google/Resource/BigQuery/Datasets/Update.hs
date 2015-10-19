@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates information in an existing dataset. The update method replaces
+-- Updates information in an existing dataset. The update method replaces
 -- the entire dataset resource, whereas the patch method only replaces
 -- fields that are provided in the submitted dataset resource.
 --

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Delete the specified deals from the order
+-- Delete the specified deals from the order
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceDealsDelete@.
 module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Delete

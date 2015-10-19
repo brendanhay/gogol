@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Groups Migration API.
+A client library for the Google Groups Migration.
 
 
 ## Contribute

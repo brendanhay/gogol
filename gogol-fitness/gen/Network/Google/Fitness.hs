@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Google Fit API
+-- Google Fit API
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference>
 module Network.Google.Fitness

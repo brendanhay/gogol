@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieve a Post by Path.
+-- Retrieve a Post by Path.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsGetByPath@.
 module Network.Google.Resource.Blogger.Posts.GetByPath

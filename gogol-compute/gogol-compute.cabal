@@ -1,6 +1,6 @@
 name:                  gogol-compute
 version:               0.0.1
-synopsis:              Compute Engine API Client.
+synopsis:              Google Compute Engine SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all saved reports in this AdSense account.
+-- List all saved reports in this AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseReportsSavedList@.
 module Network.Google.Resource.AdSense.Reports.Saved.List

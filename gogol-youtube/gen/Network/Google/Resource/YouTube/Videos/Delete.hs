@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a YouTube video.
+-- Deletes a YouTube video.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosDelete@.
 module Network.Google.Resource.YouTube.Videos.Delete

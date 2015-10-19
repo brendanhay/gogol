@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | The API to interact with Drive.
+-- The API to interact with Drive.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference>
 module Network.Google.Drive

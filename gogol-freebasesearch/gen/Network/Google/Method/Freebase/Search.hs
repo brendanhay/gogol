@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Search Freebase open data.
+-- Search Freebase open data.
 --
 -- /See:/ <https://developers.google.com/freebase/ Freebase Search Reference> for @FreebaseSearch@.
 module Network.Google.Method.Freebase.Search

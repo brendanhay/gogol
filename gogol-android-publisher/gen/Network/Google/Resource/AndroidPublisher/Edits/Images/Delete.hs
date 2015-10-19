@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the image (specified by id) from the edit.
+-- Deletes the image (specified by id) from the edit.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsImagesDelete@.
 module Network.Google.Resource.AndroidPublisher.Edits.Images.Delete

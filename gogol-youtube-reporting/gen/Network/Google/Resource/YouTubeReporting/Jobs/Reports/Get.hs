@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the metadata of a specific report.
+-- Gets the metadata of a specific report.
 --
 -- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @YouTubereportingJobsReportsGet@.
 module Network.Google.Resource.YouTubeReporting.Jobs.Reports.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Fetches an Organization resource by id.
+-- Fetches an Organization resource by id.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerOrganizationsGet@.
 module Network.Google.Resource.CloudResourceManager.Organizations.Get

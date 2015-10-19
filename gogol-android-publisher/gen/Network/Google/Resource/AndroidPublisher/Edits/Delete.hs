@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes an edit for an app. Creating a new edit will automatically
+-- Deletes an edit for an app. Creating a new edit will automatically
 -- delete any of your previous edits so this method need only be called if
 -- you want to preemptively abandon an edit.
 --

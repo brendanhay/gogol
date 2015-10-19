@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a single profile filter link.
+-- Returns a single profile filter link.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFileFilterLinksGet@.
 module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the metadata for a given snapshot ID.
+-- Retrieves the metadata for a given snapshot ID.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesSnapshotsGet@.
 module Network.Google.Resource.Games.Snapshots.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates read group sets by asynchronously importing the provided
+-- Creates read group sets by asynchronously importing the provided
 -- information. The caller must have WRITE permissions to the dataset. ##
 -- Notes on [BAM](https:\/\/samtools.github.io\/hts-specs\/SAMv1.pdf)
 -- import - Tags will be converted to strings - tag types are not preserved

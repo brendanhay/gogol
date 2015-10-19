@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List custom data sources to which the user has access.
+-- List custom data sources to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomDataSourcesList@.
 module Network.Google.Resource.Analytics.Management.CustomDataSources.List

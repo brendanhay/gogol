@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the billing accounts that the current authenticated user
+-- Lists the billing accounts that the current authenticated user
 -- [owns](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
 -- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @CloudBillingBillingAccountsList@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of videos that match the API request parameters.
+-- Returns a list of videos that match the API request parameters.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosList@.
 module Network.Google.Resource.YouTube.Videos.List

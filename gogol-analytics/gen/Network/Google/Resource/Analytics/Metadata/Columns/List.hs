@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all columns for a report type
+-- Lists all columns for a report type
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsMetadataColumnsList@.
 module Network.Google.Resource.Analytics.Metadata.Columns.List

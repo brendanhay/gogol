@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists account summaries (lightweight tree comprised of
+-- Lists account summaries (lightweight tree comprised of
 -- accounts\/properties\/profiles) to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountSummariesList@.

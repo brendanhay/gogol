@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Fetch the representation of an existing Project.
+-- Fetch the representation of an existing Project.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSProjectsGet@.
 module Network.Google.Resource.DNS.Projects.Get

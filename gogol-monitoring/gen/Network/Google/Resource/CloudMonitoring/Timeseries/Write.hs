@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Put data points to one or more time series for one or more metrics. If a
+-- Put data points to one or more time series for one or more metrics. If a
 -- time series does not exist, a new time series will be created. It is not
 -- allowed to write a time series point that is older than the existing
 -- youngest point of that time series. Points that are older than the

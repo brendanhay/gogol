@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves information about an application for the given application ID.
+-- Retrieves information about an application for the given application ID.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @DataTransferApplicationsGet@.
 module Network.Google.Resource.DataTransfer.Applications.Get

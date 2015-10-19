@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Calendar API.
+A client library for the Google Calendar.
 
 
 ## Contribute

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get ad code for the specified ad unit.
+-- Get ad code for the specified ad unit.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsAdUnitsGetAdCode@.
 module Network.Google.Resource.AdSense.Accounts.AdUnits.GetAdCode

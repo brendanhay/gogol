@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the authenticated user\'s specified task list.
+-- Deletes the authenticated user\'s specified task list.
 --
 -- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTaskListsDelete@.
 module Network.Google.Resource.Tasks.TaskLists.Delete

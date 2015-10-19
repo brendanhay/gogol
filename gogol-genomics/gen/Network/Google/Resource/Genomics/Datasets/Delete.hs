@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a dataset.
+-- Deletes a dataset.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsDatasetsDelete@.
 module Network.Google.Resource.Genomics.Datasets.Delete

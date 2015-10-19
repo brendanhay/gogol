@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an existing resource. This method supports patch semantics.
+-- Updates an existing resource. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference> for @GroupsSettingsGroupsPatch@.
 module Network.Google.Resource.GroupsSettings.Groups.Patch

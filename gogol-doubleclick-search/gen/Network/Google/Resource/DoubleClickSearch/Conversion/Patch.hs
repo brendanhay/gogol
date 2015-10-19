@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a batch of conversions in DoubleClick Search. This method
+-- Updates a batch of conversions in DoubleClick Search. This method
 -- supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchConversionPatch@.

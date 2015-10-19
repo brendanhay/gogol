@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Unhide the given player\'s leaderboard scores from the given
+-- Unhide the given player\'s leaderboard scores from the given
 -- application. This method is only available to user accounts for your
 -- developer console.
 --

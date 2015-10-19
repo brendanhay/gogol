@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Generate an Ad Exchange report based on the report request sent in the
+-- Generate an Ad Exchange report based on the report request sent in the
 -- query parameters. Returns the result as JSON; to retrieve output in CSV
 -- format specify \"alt=csv\" as a query parameter.
 --

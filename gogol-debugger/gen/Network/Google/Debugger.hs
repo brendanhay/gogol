@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lets you examine the stack and variables of your running application
+-- Lets you examine the stack and variables of your running application
 -- without stopping or slowing it down.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference>

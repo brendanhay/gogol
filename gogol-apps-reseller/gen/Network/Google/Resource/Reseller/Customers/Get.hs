@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a customer resource if one exists and is owned by the reseller.
+-- Gets a customer resource if one exists and is owned by the reseller.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerCustomersGet@.
 module Network.Google.Resource.Reseller.Customers.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists a file\'s permissions.
+-- Lists a file\'s permissions.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsList@.
 module Network.Google.Resource.Drive.Permissions.List

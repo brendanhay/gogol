@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a customer resource if one does not already exist.
+-- Creates a customer resource if one does not already exist.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerCustomersInsert@.
 module Network.Google.Resource.Reseller.Customers.Insert

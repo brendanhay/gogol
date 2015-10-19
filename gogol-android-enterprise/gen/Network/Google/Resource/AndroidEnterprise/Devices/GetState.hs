@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves whether a device is enabled or disabled for access by the user
+-- Retrieves whether a device is enabled or disabled for access by the user
 -- to Google services. The device state takes effect only if enforcing EMM
 -- policies on Android devices is enabled in the Google Admin Console.
 -- Otherwise, the device state is ignored and all devices are allowed

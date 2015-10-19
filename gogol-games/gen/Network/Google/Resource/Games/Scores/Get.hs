@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get high scores, and optionally ranks, in leaderboards for the currently
+-- Get high scores, and optionally ranks, in leaderboards for the currently
 -- authenticated player. For a specific time span, leaderboardId can be set
 -- to ALL to retrieve data for all leaderboards in a given time span. NOTE:
 -- You cannot ask for \'ALL\' leaderboards and \'ALL\' timeSpans in the

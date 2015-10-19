@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Resets scores for the leaderboard with the given ID for all players.
+-- Resets scores for the leaderboard with the given ID for all players.
 -- This method is only available to user accounts for your developer
 -- console. Only draft leaderboards can be reset.
 --

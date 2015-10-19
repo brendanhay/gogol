@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieve the list of saved columns for a specified advertiser.
+-- Retrieve the list of saved columns for a specified advertiser.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchSavedColumnsList@.
 module Network.Google.Resource.DoubleClickSearch.SavedColumns.List

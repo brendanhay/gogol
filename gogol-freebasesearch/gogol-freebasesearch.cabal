@@ -1,6 +1,6 @@
 name:                  gogol-freebasesearch
 version:               0.0.1
-synopsis:              Freebase Search Client.
+synopsis:              Google Freebase Search SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

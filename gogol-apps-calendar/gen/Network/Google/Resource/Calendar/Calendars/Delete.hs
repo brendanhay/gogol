@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a secondary calendar. Use calendars.clear for clearing all
+-- Deletes a secondary calendar. Use calendars.clear for clearing all
 -- events on primary calendars.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarsDelete@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all projects to which you have been granted any project role.
+-- Lists all projects to which you have been granted any project role.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryProjectsList@.
 module Network.Google.Resource.BigQuery.Projects.List

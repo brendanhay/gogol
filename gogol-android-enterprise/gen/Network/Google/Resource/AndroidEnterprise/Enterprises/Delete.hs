@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the binding between the MDM and enterprise. This is now
+-- Deletes the binding between the MDM and enterprise. This is now
 -- deprecated; use this to unenroll customers that were previously enrolled
 -- with the \'insert\' call, then enroll them again with the \'enroll\'
 -- call.

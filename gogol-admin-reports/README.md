@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Admin Reports API.
+A client library for the Google Admin Reports.
 
 
 ## Contribute

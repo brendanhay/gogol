@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List traces matching the filter expression.
+-- List traces matching the filter expression.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference> for @CloudtraceProjectsTracesList@.
 module Network.Google.Resource.CloudTrace.Projects.Traces.List

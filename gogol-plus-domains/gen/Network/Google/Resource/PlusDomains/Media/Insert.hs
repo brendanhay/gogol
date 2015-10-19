@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Add a new media item to an album. The current upload size limitations
+-- Add a new media item to an album. The current upload size limitations
 -- are 36MB for a photo and 1GB for a video. Uploads do not count against
 -- quota if photos are less than 2048 pixels on their longest side or
 -- videos are less than 15 minutes in length.

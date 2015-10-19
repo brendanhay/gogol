@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Cancels an update. The update must be PAUSED before it can be cancelled.
+-- Cancels an update. The update must be PAUSED before it can be cancelled.
 -- This has no effect if the update is already CANCELLED.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesCancel@.

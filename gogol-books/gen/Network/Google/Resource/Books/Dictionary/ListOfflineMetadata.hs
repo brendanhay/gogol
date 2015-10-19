@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of offline dictionary metadata available
+-- Returns a list of offline dictionary metadata available
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksDictionaryListOfflineMetadata@.
 module Network.Google.Resource.Books.Dictionary.ListOfflineMetadata

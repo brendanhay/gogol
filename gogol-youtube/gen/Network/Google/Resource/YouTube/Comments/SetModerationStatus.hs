@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sets the moderation status of one or more comments. The API request must
+-- Sets the moderation status of one or more comments. The API request must
 -- be authorized by the owner of the channel or video associated with the
 -- comments.
 --

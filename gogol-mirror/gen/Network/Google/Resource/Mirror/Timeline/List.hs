@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of timeline items for the authenticated user.
+-- Retrieves a list of timeline items for the authenticated user.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineList@.
 module Network.Google.Resource.Mirror.Timeline.List

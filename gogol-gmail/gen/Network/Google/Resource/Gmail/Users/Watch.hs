@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Set up or update a push notification watch on the given user mailbox.
+-- Set up or update a push notification watch on the given user mailbox.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersWatch@.
 module Network.Google.Resource.Gmail.Users.Watch

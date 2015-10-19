@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update the supplied features. A single batchPatch request can update: -
+-- Update the supplied features. A single batchPatch request can update: -
 -- Up to 50 features. - A combined total of 10 000 vertices. Feature limits
 -- are documented in the Supported data formats and limits article of the
 -- Google Maps Engine help center. Note that free and paid accounts have

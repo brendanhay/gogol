@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Permanently deletes all of the user\'s trashed files.
+-- Permanently deletes all of the user\'s trashed files.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesEmptyTrash@.
 module Network.Google.Resource.Drive.Files.EmptyTrash

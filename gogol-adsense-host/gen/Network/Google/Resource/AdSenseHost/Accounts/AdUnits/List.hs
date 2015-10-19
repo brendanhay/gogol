@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all ad units in the specified publisher\'s AdSense account.
+-- List all ad units in the specified publisher\'s AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdUnitsList@.
 module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the drafts in the user\'s mailbox.
+-- Lists the drafts in the user\'s mailbox.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersDraftsList@.
 module Network.Google.Resource.Gmail.Users.Drafts.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the results of a query job.
+-- Retrieves the results of a query job.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryJobsGetQueryResults@.
 module Network.Google.Resource.BigQuery.Jobs.GetQueryResults

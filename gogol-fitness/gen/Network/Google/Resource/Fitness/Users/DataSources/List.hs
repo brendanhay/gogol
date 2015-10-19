@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all data sources that are visible to the developer, using the
+-- Lists all data sources that are visible to the developer, using the
 -- OAuth scopes provided. The list is not exhaustive: the user may have
 -- private data sources that are only visible to other developers or calls
 -- using other scopes.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update a circle\'s description. This method supports patch semantics.
+-- Update a circle\'s description. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesPatch@.
 module Network.Google.Resource.PlusDomains.Circles.Patch

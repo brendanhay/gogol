@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List the source\/target languages supported by the API
+-- List the source\/target languages supported by the API
 --
 -- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference> for @LanguageLanguagesList@.
 module Network.Google.Resource.Language.Languages.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of URLs shortened by a user.
+-- Retrieves a list of URLs shortened by a user.
 --
 -- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference> for @URLshortenerURLList@.
 module Network.Google.Resource.URLShortener.URL.List

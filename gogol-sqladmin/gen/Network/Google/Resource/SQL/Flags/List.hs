@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all available database flags for Google Cloud SQL instances.
+-- List all available database flags for Google Cloud SQL instances.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLFlagsList@.
 module Network.Google.Resource.SQL.Flags.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the SSL certificate. The change will not take effect until the
+-- Deletes the SSL certificate. The change will not take effect until the
 -- instance is restarted.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLSSLCertsDelete@.

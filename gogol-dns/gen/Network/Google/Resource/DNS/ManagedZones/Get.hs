@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Fetch the representation of an existing ManagedZone.
+-- Fetch the representation of an existing ManagedZone.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSManagedZonesGet@.
 module Network.Google.Resource.DNS.ManagedZones.Get

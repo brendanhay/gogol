@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Generate an AdSense report based on the saved report ID sent in the
+-- Generate an AdSense report based on the saved report ID sent in the
 -- query parameters.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseReportsSavedGenerate@.

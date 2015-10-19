@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a reply.
+-- Gets a reply.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRepliesGet@.
 module Network.Google.Resource.Drive.Replies.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Checks whether a user\'s subscription purchase is valid and returns its
+-- Checks whether a user\'s subscription purchase is valid and returns its
 -- expiry time.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherPurchasesSubscriptionsGet@.

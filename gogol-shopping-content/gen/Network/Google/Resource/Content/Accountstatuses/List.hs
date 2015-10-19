@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the statuses of the sub-accounts in your Merchant Center account.
+-- Lists the statuses of the sub-accounts in your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountstatusesList@.
 module Network.Google.Resource.Content.Accountstatuses.List

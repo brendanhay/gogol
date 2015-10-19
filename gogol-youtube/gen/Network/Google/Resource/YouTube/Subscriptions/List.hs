@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns subscription resources that match the API request criteria.
+-- Returns subscription resources that match the API request criteria.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeSubscriptionsList@.
 module Network.Google.Resource.YouTube.Subscriptions.List

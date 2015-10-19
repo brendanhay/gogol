@@ -1,6 +1,6 @@
 name:                  gogol-siteverification
 version:               0.0.1
-synopsis:              Google Site Verification API Client.
+synopsis:              Google Site Verification SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

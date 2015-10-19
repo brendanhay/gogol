@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a Domain Alias of the customer.
+-- Deletes a Domain Alias of the customer.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryDomainAliasesDelete@.
 module Network.Google.Resource.Directory.DomainAliases.Delete

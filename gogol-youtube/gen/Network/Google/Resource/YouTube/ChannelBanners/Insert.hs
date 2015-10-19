@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Uploads a channel banner image to YouTube. This method represents the
+-- Uploads a channel banner image to YouTube. This method represents the
 -- first two steps in a three-step process to update the banner image for a
 -- channel: - Call the channelBanners.insert method to upload the binary
 -- image data to YouTube. The image must have a 16:9 aspect ratio and be at

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a course. This method returns the following error codes: *
+-- Returns a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to access
 -- the requested course or for access errors. * \`NOT_FOUND\` if no course
 -- exists with the requested ID.

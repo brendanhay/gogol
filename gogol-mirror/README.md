@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Mirror API.
+A client library for the Google Mirror.
 
 
 ## Contribute

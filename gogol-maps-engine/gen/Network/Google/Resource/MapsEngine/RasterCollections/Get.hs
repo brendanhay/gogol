@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Return metadata for a particular raster collection.
+-- Return metadata for a particular raster collection.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRasterCollectionsGet@.
 module Network.Google.Resource.MapsEngine.RasterCollections.Get

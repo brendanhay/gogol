@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Create a new unsampled report.
+-- Create a new unsampled report.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUnSampledReportsInsert@.
 module Network.Google.Resource.Analytics.Management.UnSampledReports.Insert

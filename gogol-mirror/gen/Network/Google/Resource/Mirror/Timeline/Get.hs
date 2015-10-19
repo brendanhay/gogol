@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a single timeline item by ID.
+-- Gets a single timeline item by ID.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineGet@.
 module Network.Google.Resource.Mirror.Timeline.Get

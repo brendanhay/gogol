@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update Chrome OS Device. This method supports patch semantics.
+-- Update Chrome OS Device. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryChromeosDevicesPatch@.
 module Network.Google.Resource.Directory.ChromeosDevices.Patch

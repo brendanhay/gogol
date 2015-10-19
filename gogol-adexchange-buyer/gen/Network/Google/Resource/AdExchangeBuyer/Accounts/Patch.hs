@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an existing account. This method supports patch semantics.
+-- Updates an existing account. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerAccountsPatch@.
 module Network.Google.Resource.AdExchangeBuyer.Accounts.Patch

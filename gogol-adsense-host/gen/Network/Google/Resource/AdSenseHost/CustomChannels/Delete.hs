@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Delete a specific custom channel from the host AdSense account.
+-- Delete a specific custom channel from the host AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostCustomChannelsDelete@.
 module Network.Google.Resource.AdSenseHost.CustomChannels.Delete

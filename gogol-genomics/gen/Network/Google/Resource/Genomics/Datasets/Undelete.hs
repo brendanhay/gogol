@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Undeletes a dataset by restoring a dataset which was deleted via this
+-- Undeletes a dataset by restoring a dataset which was deleted via this
 -- API. This operation is only possible for a week after the deletion
 -- occurred.
 --

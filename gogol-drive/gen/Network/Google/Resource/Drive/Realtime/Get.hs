@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Exports the contents of the Realtime API data model associated with this
+-- Exports the contents of the Realtime API data model associated with this
 -- file as JSON.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRealtimeGet@.

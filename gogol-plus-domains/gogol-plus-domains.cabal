@@ -1,6 +1,6 @@
 name:                  gogol-plus-domains
 version:               0.0.1
-synopsis:              Google+ Domains API Client.
+synopsis:              Google + Domains SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

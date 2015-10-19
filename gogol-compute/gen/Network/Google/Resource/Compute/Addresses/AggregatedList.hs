@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the list of addresses grouped by scope.
+-- Retrieves the list of addresses grouped by scope.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAddressesAggregatedList@.
 module Network.Google.Resource.Compute.Addresses.AggregatedList

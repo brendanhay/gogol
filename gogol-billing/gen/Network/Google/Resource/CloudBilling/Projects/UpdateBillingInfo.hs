@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sets or updates the billing account associated with a project. You
+-- Sets or updates the billing account associated with a project. You
 -- specify the new billing account by setting the \`billing_account_name\`
 -- in the \`ProjectBillingInfo\` resource to the resource name of a billing
 -- account. Associating a project with an open billing account enables

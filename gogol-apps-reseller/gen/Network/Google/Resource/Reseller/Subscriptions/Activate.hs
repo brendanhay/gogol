@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Activates a subscription previously suspended by the reseller
+-- Activates a subscription previously suspended by the reseller
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsActivate@.
 module Network.Google.Resource.Reseller.Subscriptions.Activate

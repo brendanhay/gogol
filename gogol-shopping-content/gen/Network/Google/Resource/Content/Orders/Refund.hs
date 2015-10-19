@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Refund a portion of the order, up to the full amount paid.
+-- Refund a portion of the order, up to the full amount paid.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersRefund@.
 module Network.Google.Resource.Content.Orders.Refund

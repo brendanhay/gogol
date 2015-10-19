@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all the leaderboard metadata for your application.
+-- Lists all the leaderboard metadata for your application.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesLeaderboardsList@.
 module Network.Google.Resource.Games.Leaderboards.List

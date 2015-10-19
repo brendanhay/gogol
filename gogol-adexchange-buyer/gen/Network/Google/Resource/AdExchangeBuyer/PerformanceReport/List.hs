@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the authenticated user\'s list of performance metrics.
+-- Retrieves the authenticated user\'s list of performance metrics.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPerformanceReportList@.
 module Network.Google.Resource.AdExchangeBuyer.PerformanceReport.List

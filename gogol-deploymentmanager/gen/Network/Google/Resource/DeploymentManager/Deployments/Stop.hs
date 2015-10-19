@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Stops an ongoing operation. This does not roll back any work that has
+-- Stops an ongoing operation. This does not roll back any work that has
 -- already been completed, but prevents any new work from being started.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsStop@.

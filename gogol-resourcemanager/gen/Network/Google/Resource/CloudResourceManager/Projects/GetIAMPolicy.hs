@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the IAM access control policy for specified project.
+-- Returns the IAM access control policy for specified project.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerProjectsGetIAMPolicy@.
 module Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy

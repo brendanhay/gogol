@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the breakpoint state or mutable fields. The entire Breakpoint
+-- Updates the breakpoint state or mutable fields. The entire Breakpoint
 -- protobuf must be sent back to the controller. Updates to active
 -- breakpoint fields are only allowed if the new value does not change the
 -- breakpoint specification. Updates to the \'location\', \'condition\' and

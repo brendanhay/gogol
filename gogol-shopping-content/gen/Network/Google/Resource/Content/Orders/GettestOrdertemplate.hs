@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sandbox only. Retrieves an order template that can be used to quickly
+-- Sandbox only. Retrieves an order template that can be used to quickly
 -- create a new order in sandbox.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersGettestOrdertemplate@.

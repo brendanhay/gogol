@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Rewrites a source object to a destination object. Optionally overrides
+-- Rewrites a source object to a destination object. Optionally overrides
 -- metadata.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsRewrite@.

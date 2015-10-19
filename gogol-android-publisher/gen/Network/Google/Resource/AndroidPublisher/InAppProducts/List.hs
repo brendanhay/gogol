@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all the in-app products for an Android app, both subscriptions and
+-- List all the in-app products for an Android app, both subscriptions and
 -- managed in-app products..
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherInAppProductsList@.

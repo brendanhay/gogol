@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Fetches app details for this edit. This includes the default language
+-- Fetches app details for this edit. This includes the default language
 -- and developer support contact information.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsDetailsGet@.

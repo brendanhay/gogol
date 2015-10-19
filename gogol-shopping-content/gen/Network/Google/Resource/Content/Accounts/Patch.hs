@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a Merchant Center account. This method supports patch semantics.
+-- Updates a Merchant Center account. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountsPatch@.
 module Network.Google.Resource.Content.Accounts.Patch

@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the PageSpeed Insights API.
+A client library for the Google PageSpeed Insights.
 
 
 ## Contribute

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieve all Chrome OS Devices of a customer (paginated)
+-- Retrieve all Chrome OS Devices of a customer (paginated)
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryChromeosDevicesList@.
 module Network.Google.Resource.Directory.ChromeosDevices.List

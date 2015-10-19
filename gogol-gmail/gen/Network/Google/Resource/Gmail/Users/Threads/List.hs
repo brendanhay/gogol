@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the threads in the user\'s mailbox.
+-- Lists the threads in the user\'s mailbox.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersThreadsList@.
 module Network.Google.Resource.Gmail.Users.Threads.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a view (profile) to which the user has access.
+-- Gets a view (profile) to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProFilesGet@.
 module Network.Google.Resource.Analytics.Management.ProFiles.Get

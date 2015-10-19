@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all manifests for a given deployment.
+-- Lists all manifests for a given deployment.
 --
 -- /See:/ <https://cloud.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerManifestsList@.
 module Network.Google.Resource.DeploymentManager.Manifests.List

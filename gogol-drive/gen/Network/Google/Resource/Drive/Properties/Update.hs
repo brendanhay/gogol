@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a property.
+-- Updates a property.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePropertiesUpdate@.
 module Network.Google.Resource.Drive.Properties.Update

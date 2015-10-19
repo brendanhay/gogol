@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes multiple attachments on a given beacon. This operation is
+-- Deletes multiple attachments on a given beacon. This operation is
 -- permanent and cannot be undone. You can optionally specify
 -- \`namespacedType\` to choose which attachments should be deleted. If you
 -- do not specify \`namespacedType\`, all your attachments on the given

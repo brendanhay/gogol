@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the configuration of the specified module.
+-- Updates the configuration of the specified module.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesPatch@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Patch

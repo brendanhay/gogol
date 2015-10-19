@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | The Google Compute Engine Instance Group Manager API provides groups of
+-- The Google Compute Engine Instance Group Manager API provides groups of
 -- homogenous Compute Engine Instances.
 --
 -- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference>

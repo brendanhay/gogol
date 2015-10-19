@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Commit a transaction, optionally creating, deleting or modifying some
+-- Commit a transaction, optionally creating, deleting or modifying some
 -- entities.
 --
 -- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @DatastoreDatasetsCommit@.

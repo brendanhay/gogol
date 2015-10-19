@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the ID of the user if they have been specifically allowed to
+-- Retrieves the ID of the user if they have been specifically allowed to
 -- see the collection. If the collection\'s visibility is set to
 -- viewersOnly then only these users will see the collection.
 --

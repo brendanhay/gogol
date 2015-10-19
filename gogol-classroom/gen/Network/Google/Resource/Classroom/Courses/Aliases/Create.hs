@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates an alias for a course. This method returns the following error
+-- Creates an alias for a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
 -- to create the alias or for access errors. * \`NOT_FOUND\` if the course
 -- does not exist. * \`ALREADY_EXISTS\` if the alias already exists.

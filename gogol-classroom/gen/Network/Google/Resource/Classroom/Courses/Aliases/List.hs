@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of aliases for a course. This method returns the
+-- Returns a list of aliases for a course. This method returns the
 -- following error codes: * \`PERMISSION_DENIED\` if the requesting user is
 -- not permitted to access the course or for access errors. * \`NOT_FOUND\`
 -- if the course does not exist.

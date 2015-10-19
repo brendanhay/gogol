@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Immediately and permanently deletes the specified label and removes it
+-- Immediately and permanently deletes the specified label and removes it
 -- from any messages and threads that it is applied to.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersLabelsDelete@.

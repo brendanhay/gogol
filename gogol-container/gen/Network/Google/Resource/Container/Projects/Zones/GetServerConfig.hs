@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns configuration info about the Container Engine service.
+-- Returns configuration info about the Container Engine service.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @ContainerProjectsZonesGetServerConfig@.
 module Network.Google.Resource.Container.Projects.Zones.GetServerConfig

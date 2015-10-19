@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the specified zone-specific operation resource.
+-- Retrieves the specified zone-specific operation resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolZoneOperationsGet@.
 module Network.Google.Resource.ReplicaPool.ZoneOperations.Get

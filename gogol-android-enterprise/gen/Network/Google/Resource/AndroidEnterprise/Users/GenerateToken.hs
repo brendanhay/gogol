@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Generates a token (activation code) to allow this user to configure
+-- Generates a token (activation code) to allow this user to configure
 -- their work account in the Android Setup Wizard. Revokes any previously
 -- generated token.
 --

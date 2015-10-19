@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the attributes of the project identified by the specified
+-- Updates the attributes of the project identified by the specified
 -- \`project_id\` (for example, \`my-project-123\`). The caller must have
 -- modify permissions for this project.
 --

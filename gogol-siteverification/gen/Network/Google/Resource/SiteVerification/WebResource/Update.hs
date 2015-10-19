@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Modify the list of owners for your website or domain.
+-- Modify the list of owners for your website or domain.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceUpdate@.
 module Network.Google.Resource.SiteVerification.WebResource.Update

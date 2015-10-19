@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a new edit for an app, populated with the app\'s current state.
+-- Creates a new edit for an app, populated with the app\'s current state.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsInsert@.
 module Network.Google.Resource.AndroidPublisher.Edits.Insert

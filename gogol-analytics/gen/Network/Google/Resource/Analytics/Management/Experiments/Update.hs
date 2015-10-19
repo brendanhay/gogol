@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update an existing experiment.
+-- Update an existing experiment.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementExperimentsUpdate@.
 module Network.Google.Resource.Analytics.Management.Experiments.Update

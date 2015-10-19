@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Replaces SslCertificates for TargetHttpsProxy.
+-- Replaces SslCertificates for TargetHttpsProxy.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetHTTPSProxiesSetSSLCertificates@.
 module Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLCertificates

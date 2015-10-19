@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Inserts a report request into the reporting system.
+-- Inserts a report request into the reporting system.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchReportsRequest@.
 module Network.Google.Resource.DoubleClickSearch.Reports.Request

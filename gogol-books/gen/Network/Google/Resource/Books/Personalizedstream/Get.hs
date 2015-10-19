@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a stream of personalized book clusters
+-- Returns a stream of personalized book clusters
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksPersonalizedstreamGet@.
 module Network.Google.Resource.Books.Personalizedstream.Get

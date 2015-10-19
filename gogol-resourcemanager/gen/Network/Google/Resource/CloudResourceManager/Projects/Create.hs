@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a project resource. Initially, the project resource is owned by
+-- Creates a project resource. Initially, the project resource is owned by
 -- its creator exclusively. The creator can later grant permission to
 -- others to read or update the project. Several APIs are activated
 -- automatically for the project, including Google Cloud Storage.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of blogs, possibly filtered.
+-- Retrieves a list of blogs, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerBlogsListByUser@.
 module Network.Google.Resource.Blogger.Blogs.ListByUser

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Changes the status of a YouTube live broadcast and initiates any
+-- Changes the status of a YouTube live broadcast and initiates any
 -- processes associated with the new status. For example, when you
 -- transition a broadcast\'s status to testing, YouTube starts to transmit
 -- video to that broadcast\'s monitor stream. Before calling this method,

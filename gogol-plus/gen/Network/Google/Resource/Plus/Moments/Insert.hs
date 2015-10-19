@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Record a moment representing a user\'s action such as making a purchase
+-- Record a moment representing a user\'s action such as making a purchase
 -- or commenting on a blog.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusMomentsInsert@.

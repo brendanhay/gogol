@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Uploads a watermark image to YouTube and sets it for a channel.
+-- Uploads a watermark image to YouTube and sets it for a channel.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeWatermarksSet@.
 module Network.Google.Resource.YouTube.Watermarks.Set

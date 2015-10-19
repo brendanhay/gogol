@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the specified ad unit in the specified ad client.
+-- Gets the specified ad unit in the specified ad client.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAdUnitsGet@.
 module Network.Google.Resource.AdSense.AdUnits.Get

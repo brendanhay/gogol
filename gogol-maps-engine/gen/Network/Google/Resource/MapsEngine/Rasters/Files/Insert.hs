@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Upload a file to a raster asset.
+-- Upload a file to a raster asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRastersFilesInsert@.
 module Network.Google.Resource.MapsEngine.Rasters.Files.Insert

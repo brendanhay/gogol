@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Refunds a user\'s subscription purchase, but the subscription remains
+-- Refunds a user\'s subscription purchase, but the subscription remains
 -- valid until its expiration time and it will continue to recur.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherPurchasesSubscriptionsRefund@.

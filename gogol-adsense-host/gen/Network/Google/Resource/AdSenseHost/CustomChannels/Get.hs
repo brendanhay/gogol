@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get a specific custom channel from the host AdSense account.
+-- Get a specific custom channel from the host AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostCustomChannelsGet@.
 module Network.Google.Resource.AdSenseHost.CustomChannels.Get

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Runs a BigQuery SQL query synchronously and returns query results if the
+-- Runs a BigQuery SQL query synchronously and returns query results if the
 -- query completes within a specified timeout.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigQueryJobsQuery@.

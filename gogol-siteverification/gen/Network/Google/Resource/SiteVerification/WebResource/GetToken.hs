@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get a verification token for placing on a website or domain.
+-- Get a verification token for placing on a website or domain.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceGetToken@.
 module Network.Google.Resource.SiteVerification.WebResource.GetToken

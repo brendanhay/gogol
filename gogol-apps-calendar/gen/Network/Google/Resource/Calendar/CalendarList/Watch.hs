@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Watch for changes to CalendarList resources.
+-- Watch for changes to CalendarList resources.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarListWatch@.
 module Network.Google.Resource.Calendar.CalendarList.Watch

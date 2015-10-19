@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a caption track. When updating a caption track, you can change
+-- Updates a caption track. When updating a caption track, you can change
 -- the track\'s draft status, upload a new caption file for the track, or
 -- both.
 --

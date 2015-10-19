@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of caption tracks that are associated with a specified
+-- Returns a list of caption tracks that are associated with a specified
 -- video. Note that the API response does not contain the actual captions
 -- and that the captions.download method provides the ability to retrieve a
 -- caption track.

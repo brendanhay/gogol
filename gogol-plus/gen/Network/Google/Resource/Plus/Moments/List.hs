@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all of the moments for a particular user.
+-- List all of the moments for a particular user.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusMomentsList@.
 module Network.Google.Resource.Plus.Moments.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Insert a new leaderboard configuration in this application.
+-- Insert a new leaderboard configuration in this application.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationLeaderboardConfigurationsInsert@.
 module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Insert

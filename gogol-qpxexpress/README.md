@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the QPX Express API.
+A client library for the Google QPX Express.
 
 
 ## Contribute

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update the entire content of the Autoscaler resource. This method
+-- Update the entire content of the Autoscaler resource. This method
 -- supports patch semantics.
 --
 -- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerAutoscalersPatch@.

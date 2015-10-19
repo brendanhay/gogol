@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Logs a user event.
+-- Logs a user event.
 --
 -- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @PartnersUserEventsLog@.
 module Network.Google.Resource.Partners.UserEvents.Log

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Delete the data source if there are no datapoints associated with it
+-- Delete the data source if there are no datapoints associated with it
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesDelete@.
 module Network.Google.Resource.Fitness.Users.DataSources.Delete

@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the YouTube Reporting API.
+A client library for the Google YouTube Reporting.
 
 
 ## Contribute

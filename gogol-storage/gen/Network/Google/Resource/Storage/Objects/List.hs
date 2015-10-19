@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of objects matching the criteria.
+-- Retrieves a list of objects matching the criteria.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsList@.
 module Network.Google.Resource.Storage.Objects.List

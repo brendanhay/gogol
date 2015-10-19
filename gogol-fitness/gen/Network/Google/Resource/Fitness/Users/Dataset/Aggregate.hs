@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Aggregates data of a certain type or stream into buckets divided by a
+-- Aggregates data of a certain type or stream into buckets divided by a
 -- given type of boundary. Multiple data sets of multiple types and from
 -- multiple sources can be aggreated into exactly one bucket type per
 -- request.

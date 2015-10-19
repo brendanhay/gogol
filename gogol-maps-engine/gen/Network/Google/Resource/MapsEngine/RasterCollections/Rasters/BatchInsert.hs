@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Add rasters to an existing raster collection. Rasters must be
+-- Add rasters to an existing raster collection. Rasters must be
 -- successfully processed in order to be added to a raster collection. Up
 -- to 50 rasters can be included in a single batchInsert request. Each
 -- batchInsert request is atomic.

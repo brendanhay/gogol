@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sends the specified, existing draft to the recipients in the To, Cc, and
+-- Sends the specified, existing draft to the recipients in the To, Cc, and
 -- Bcc headers.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersDraftsSend@.

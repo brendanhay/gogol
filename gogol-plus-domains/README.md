@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google+ Domains API.
+A client library for the Google + Domains.
 
 
 ## Contribute

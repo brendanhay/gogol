@@ -1,6 +1,6 @@
 name:                  gogol-adexchange-seller
 version:               0.0.1
-synopsis:              Ad Exchange Seller API Client.
+synopsis:              Google Ad Exchange Seller SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

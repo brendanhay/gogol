@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all GTM Folders of a Container.
+-- Lists all GTM Folders of a Container.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersFoldersList@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Folders.List

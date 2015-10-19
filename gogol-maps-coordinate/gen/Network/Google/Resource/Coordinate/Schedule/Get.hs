@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the schedule for a job.
+-- Retrieves the schedule for a job.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateScheduleGet@.
 module Network.Google.Resource.Coordinate.Schedule.Get

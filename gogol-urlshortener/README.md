@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the URL Shortener API.
+A client library for the Google URL Shortener.
 
 
 ## Contribute

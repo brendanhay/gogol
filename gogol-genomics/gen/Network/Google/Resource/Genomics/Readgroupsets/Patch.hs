@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a read group set. This method supports patch semantics.
+-- Updates a read group set. This method supports patch semantics.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsReadgroupsetsPatch@.
 module Network.Google.Resource.Genomics.Readgroupsets.Patch

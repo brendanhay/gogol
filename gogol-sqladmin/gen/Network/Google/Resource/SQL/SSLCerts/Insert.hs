@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates an SSL certificate and returns it along with the private key and
+-- Creates an SSL certificate and returns it along with the private key and
 -- server certificate authority. The new certificate will not be usable
 -- until the instance is restarted.
 --

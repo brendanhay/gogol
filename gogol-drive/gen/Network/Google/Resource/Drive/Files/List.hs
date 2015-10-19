@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the user\'s files.
+-- Lists the user\'s files.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesList@.
 module Network.Google.Resource.Drive.Files.List

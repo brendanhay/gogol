@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Reconcile entities to Freebase open data.
+-- Reconcile entities to Freebase open data.
 --
 -- /See:/ <https://developers.google.com/freebase/ Freebase Search Reference> for @FreebaseReconcile@.
 module Network.Google.Method.Freebase.Reconcile

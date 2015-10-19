@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update the metadata of the leaderboard configuration with the given ID.
+-- Update the metadata of the leaderboard configuration with the given ID.
 -- This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationLeaderboardConfigurationsPatch@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates the URI used by the IdP to authenticate the user.
+-- Creates the URI used by the IdP to authenticate the user.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyCreateAuthURI@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.CreateAuthURI

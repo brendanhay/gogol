@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all Container Versions of a GTM Container.
+-- Lists all Container Versions of a GTM Container.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVersionsList@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.List

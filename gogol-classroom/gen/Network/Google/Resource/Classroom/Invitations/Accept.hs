@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Accepts an invitation, removing it and adding the invited user to the
+-- Accepts an invitation, removing it and adding the invited user to the
 -- teachers or students (as appropriate) of the specified course. Only the
 -- invited user may accept an invitation. This method returns the following
 -- error codes: * \`PERMISSION_DENIED\` if the requesting user is not

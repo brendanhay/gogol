@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Create a skeleton raster asset for upload.
+-- Create a skeleton raster asset for upload.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineRastersUpload@.
 module Network.Google.Resource.MapsEngine.Rasters.Upload

@@ -46,11 +46,10 @@ renameLibrary =
 
 renameTitle :: Text -> Text
 renameTitle =
-      mappend      "Google"
-    . flip mappend "API"
+      mappend "Google "
     . Text.strip
-    . stripPrefix  "Google"
-    . stripSuffix  "API"
+    . stripPrefix "Google"
+    . stripSuffix "API"
 
 renameAbbrev :: Text -> Text
 renameAbbrev = mconcat

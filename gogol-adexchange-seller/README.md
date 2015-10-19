@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Ad Exchange Seller API.
+A client library for the Google Ad Exchange Seller.
 
 
 ## Contribute

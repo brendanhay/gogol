@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates information in an existing table. The update method replaces the
+-- Updates information in an existing table. The update method replaces the
 -- entire table resource, whereas the patch method only replaces fields
 -- that are provided in the submitted table resource.
 --

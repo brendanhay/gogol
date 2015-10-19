@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update Chrome OS Device
+-- Update Chrome OS Device
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryChromeosDevicesUpdate@.
 module Network.Google.Resource.Directory.ChromeosDevices.Update

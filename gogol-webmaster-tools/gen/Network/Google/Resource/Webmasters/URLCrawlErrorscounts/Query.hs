@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a time series of the number of URL crawl errors per error
+-- Retrieves a time series of the number of URL crawl errors per error
 -- category and platform.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersURLCrawlErrorscountsQuery@.

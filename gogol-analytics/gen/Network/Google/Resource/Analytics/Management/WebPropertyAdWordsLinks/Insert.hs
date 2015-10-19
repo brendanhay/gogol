@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a webProperty-AdWords link.
+-- Creates a webProperty-AdWords link.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyAdWordsLinksInsert@.
 module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Insert

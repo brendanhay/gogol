@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Cloud User Accounts API.
+A client library for the Google Cloud User Accounts.
 
 
 ## Contribute

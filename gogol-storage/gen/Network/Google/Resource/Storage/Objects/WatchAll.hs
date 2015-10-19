@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Watch for changes on all objects in a bucket.
+-- Watch for changes on all objects in a bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageObjectsWatchAll@.
 module Network.Google.Resource.Storage.Objects.WatchAll

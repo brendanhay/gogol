@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Permanently deletes a file by ID. Skips the trash. The currently
+-- Permanently deletes a file by ID. Skips the trash. The currently
 -- authenticated user must own the file.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesDelete@.

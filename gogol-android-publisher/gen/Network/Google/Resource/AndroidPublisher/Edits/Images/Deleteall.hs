@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes all images for the specified language and image type.
+-- Deletes all images for the specified language and image type.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsImagesDeleteall@.
 module Network.Google.Resource.AndroidPublisher.Edits.Images.Deleteall

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Inserts a file into a folder.
+-- Inserts a file into a folder.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChildrenInsert@.
 module Network.Google.Resource.Drive.Children.Insert

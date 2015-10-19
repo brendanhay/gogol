@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieve either deleted users or all users in a domain (paginated)
+-- Retrieve either deleted users or all users in a domain (paginated)
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersList@.
 module Network.Google.Resource.Directory.Users.List

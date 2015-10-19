@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the ACL entry for the specified entity on the specified bucket.
+-- Returns the ACL entry for the specified entity on the specified bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketAccessControlsGet@.
 module Network.Google.Resource.Storage.BucketAccessControls.Get

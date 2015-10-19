@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists a file\'s revisions.
+-- Lists a file\'s revisions.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRevisionsList@.
 module Network.Google.Resource.Drive.Revisions.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update the supplied ad unit in the specified publisher AdSense account.
+-- Update the supplied ad unit in the specified publisher AdSense account.
 -- This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdUnitsPatch@.

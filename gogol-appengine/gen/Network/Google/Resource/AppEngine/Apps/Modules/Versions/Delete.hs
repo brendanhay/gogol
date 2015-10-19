@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes an existing version.
+-- Deletes an existing version.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesVersionsDelete@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Delete

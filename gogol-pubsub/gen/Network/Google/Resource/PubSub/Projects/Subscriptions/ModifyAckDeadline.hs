@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Modifies the ack deadline for a specific message. This method is useful
+-- Modifies the ack deadline for a specific message. This method is useful
 -- to indicate that more time is needed to process a message by the
 -- subscriber, or to make the message available for redelivery if the
 -- processing was interrupted.

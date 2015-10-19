@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sets the access control policy on a Organization resource. Replaces any
+-- Sets the access control policy on a Organization resource. Replaces any
 -- existing policy.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudResourceManagerOrganizationsSetIAMPolicy@.

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of authorized public keys for a specific user account.
+-- Returns a list of authorized public keys for a specific user account.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @CloudUserAccountsLinuxGetAuthorizedKeysView@.
 module Network.Google.Resource.CloudUserAccounts.Linux.GetAuthorizedKeysView

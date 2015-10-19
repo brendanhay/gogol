@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Imports an event. This operation is used to add a private copy of an
+-- Imports an event. This operation is used to add a private copy of an
 -- existing event to a calendar.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsImport@.

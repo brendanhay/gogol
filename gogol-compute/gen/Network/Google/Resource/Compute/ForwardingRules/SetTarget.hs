@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Changes target url for forwarding rule.
+-- Changes target url for forwarding rule.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeForwardingRulesSetTarget@.
 module Network.Google.Resource.Compute.ForwardingRules.SetTarget

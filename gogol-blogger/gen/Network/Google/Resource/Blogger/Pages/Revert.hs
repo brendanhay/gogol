@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Revert a published or scheduled page to draft state.
+-- Revert a published or scheduled page to draft state.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesRevert@.
 module Network.Google.Resource.Blogger.Pages.Revert

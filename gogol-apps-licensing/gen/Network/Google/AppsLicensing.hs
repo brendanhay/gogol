@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Licensing API to view and manage license for your domain.
+-- Licensing API to view and manage license for your domain.
 --
 -- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference>
 module Network.Google.AppsLicensing

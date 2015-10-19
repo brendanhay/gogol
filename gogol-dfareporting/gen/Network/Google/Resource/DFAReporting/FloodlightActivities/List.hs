@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of floodlight activities, possibly filtered.
+-- Retrieves a list of floodlight activities, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivitiesList@.
 module Network.Google.Resource.DFAReporting.FloodlightActivities.List

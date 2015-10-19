@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns detailed information about the specified beacon.
+-- Returns detailed information about the specified beacon.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsGet@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Get

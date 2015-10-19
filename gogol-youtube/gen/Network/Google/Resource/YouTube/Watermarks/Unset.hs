@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a channel\'s watermark image.
+-- Deletes a channel\'s watermark image.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeWatermarksUnset@.
 module Network.Google.Resource.YouTube.Watermarks.Unset

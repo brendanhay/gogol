@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Suspends an active subscription
+-- Suspends an active subscription
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsSuspend@.
 module Network.Google.Resource.Reseller.Subscriptions.Suspend

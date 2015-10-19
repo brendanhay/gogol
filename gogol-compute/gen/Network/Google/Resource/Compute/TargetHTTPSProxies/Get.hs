@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the specified TargetHttpsProxy resource.
+-- Returns the specified TargetHttpsProxy resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetHTTPSProxiesGet@.
 module Network.Google.Resource.Compute.TargetHTTPSProxies.Get

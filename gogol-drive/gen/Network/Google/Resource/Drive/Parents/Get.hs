@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a specific parent reference.
+-- Gets a specific parent reference.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveParentsGet@.
 module Network.Google.Resource.Drive.Parents.Get

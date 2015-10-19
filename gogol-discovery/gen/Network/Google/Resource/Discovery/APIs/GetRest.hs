@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieve the description of a particular version of an api.
+-- Retrieve the description of a particular version of an api.
 --
 -- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference> for @DiscoveryAPIsGetRest@.
 module Network.Google.Resource.Discovery.APIs.GetRest

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Commits\/applies the changes made in this edit back to the app.
+-- Commits\/applies the changes made in this edit back to the app.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsCommit@.
 module Network.Google.Resource.AndroidPublisher.Edits.Commit

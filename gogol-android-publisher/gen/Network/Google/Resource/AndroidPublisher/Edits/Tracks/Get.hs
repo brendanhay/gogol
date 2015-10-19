@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Fetches the track configuration for the specified track type. Includes
+-- Fetches the track configuration for the specified track type. Includes
 -- the APK version codes that are in this track.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsTracksGet@.

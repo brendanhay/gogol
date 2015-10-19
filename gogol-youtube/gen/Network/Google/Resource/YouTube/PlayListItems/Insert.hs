@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds a resource to a playlist.
+-- Adds a resource to a playlist.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlayListItemsInsert@.
 module Network.Google.Resource.YouTube.PlayListItems.Insert

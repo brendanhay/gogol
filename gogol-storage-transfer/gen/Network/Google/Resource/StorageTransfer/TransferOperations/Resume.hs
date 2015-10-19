@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Resumes a transfer operation that is paused.
+-- Resumes a transfer operation that is paused.
 --
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferOperationsResume@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Resume

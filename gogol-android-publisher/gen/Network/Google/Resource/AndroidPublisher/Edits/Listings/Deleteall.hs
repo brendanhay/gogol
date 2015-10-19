@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes all localized listings from an edit.
+-- Deletes all localized listings from an edit.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEditsListingsDeleteall@.
 module Network.Google.Resource.AndroidPublisher.Edits.Listings.Deleteall

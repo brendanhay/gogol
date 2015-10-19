@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a permission by ID.
+-- Gets a permission by ID.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsGet@.
 module Network.Google.Resource.Drive.Permissions.Get

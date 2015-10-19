@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds data points to a dataset. The dataset need not be previously
+-- Adds data points to a dataset. The dataset need not be previously
 -- created. All points within the given dataset will be returned with
 -- subsquent calls to retrieve this dataset. Data points can belong to more
 -- than one dataset. This method does not use patch semantics.

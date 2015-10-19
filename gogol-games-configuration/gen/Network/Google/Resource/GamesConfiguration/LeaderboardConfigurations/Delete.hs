@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Delete the leaderboard configuration with the given ID.
+-- Delete the leaderboard configuration with the given ID.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationLeaderboardConfigurationsDelete@.
 module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Delete

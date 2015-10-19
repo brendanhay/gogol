@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an existing filter. This method supports patch semantics.
+-- Updates an existing filter. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementFiltersPatch@.
 module Network.Google.Resource.Analytics.Management.Filters.Patch

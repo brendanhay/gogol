@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists sessions previously created.
+-- Lists sessions previously created.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersSessionsList@.
 module Network.Google.Resource.Fitness.Users.Sessions.List

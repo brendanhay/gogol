@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a new dataset.
+-- Creates a new dataset.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsDatasetsCreate@.
 module Network.Google.Resource.Genomics.Datasets.Create

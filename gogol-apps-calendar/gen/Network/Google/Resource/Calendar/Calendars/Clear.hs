@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Clears a primary calendar. This operation deletes all events associated
+-- Clears a primary calendar. This operation deletes all events associated
 -- with the primary calendar of an account.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarsClear@.

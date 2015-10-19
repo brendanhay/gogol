@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the sub-accounts in your Merchant Center account.
+-- Lists the sub-accounts in your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccountsList@.
 module Network.Google.Resource.Content.Accounts.List

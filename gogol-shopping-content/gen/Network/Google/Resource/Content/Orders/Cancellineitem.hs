@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Cancels a line item.
+-- Cancels a line item.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersCancellineitem@.
 module Network.Google.Resource.Content.Orders.Cancellineitem

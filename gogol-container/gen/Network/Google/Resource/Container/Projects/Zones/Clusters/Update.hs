@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Update settings of a specific cluster.
+-- Update settings of a specific cluster.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @ContainerProjectsZonesClustersUpdate@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Update

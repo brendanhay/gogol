@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List all ad clients in the specified account.
+-- List all ad clients in the specified account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsAdClientsList@.
 module Network.Google.Resource.AdSense.Accounts.AdClients.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Clears all volumes from a bookshelf.
+-- Clears all volumes from a bookshelf.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryBookshelvesClearVolumes@.
 module Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes

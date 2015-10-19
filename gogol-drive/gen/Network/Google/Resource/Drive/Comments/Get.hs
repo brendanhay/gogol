@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a comment by ID.
+-- Gets a comment by ID.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveCommentsGet@.
 module Network.Google.Resource.Drive.Comments.Get

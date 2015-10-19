@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sets the IAM access control policy for the specified project. We do not
+-- Sets the IAM access control policy for the specified project. We do not
 -- currently support \'domain:\' prefixed members in a Binding of a Policy.
 -- Calling this method requires enabling the App Engine Admin API.
 --

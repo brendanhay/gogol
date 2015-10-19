@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Uploads a custom video thumbnail to YouTube and sets it for a video.
+-- Uploads a custom video thumbnail to YouTube and sets it for a video.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeThumbnailsSet@.
 module Network.Google.Resource.YouTube.Thumbnails.Set

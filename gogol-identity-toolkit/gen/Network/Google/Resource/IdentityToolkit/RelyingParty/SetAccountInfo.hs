@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Set account info for a user.
+-- Set account info for a user.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartySetAccountInfo@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.SetAccountInfo

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Immediately and permanently deletes the specified message. This
+-- Immediately and permanently deletes the specified message. This
 -- operation cannot be undone. Prefer messages.trash instead.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesDelete@.

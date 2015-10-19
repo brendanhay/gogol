@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the rules in the access control list for the calendar.
+-- Returns the rules in the access control list for the calendar.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarACLList@.
 module Network.Google.Resource.Calendar.ACL.List

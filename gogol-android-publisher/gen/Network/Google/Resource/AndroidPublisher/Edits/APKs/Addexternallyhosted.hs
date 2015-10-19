@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a new APK without uploading the APK itself to Google Play,
+-- Creates a new APK without uploading the APK itself to Google Play,
 -- instead hosting the APK at a specified URL. This function is only
 -- available to enterprises using Google Play for Work whose application is
 -- configured to restrict distribution to the enterprise domain.

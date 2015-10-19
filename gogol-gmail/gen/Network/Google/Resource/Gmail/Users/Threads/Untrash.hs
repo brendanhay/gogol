@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes the specified thread from the trash.
+-- Removes the specified thread from the trash.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersThreadsUntrash@.
 module Network.Google.Resource.Gmail.Users.Threads.Untrash

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Resets all player progress on the quest with the given ID for the
+-- Resets all player progress on the quest with the given ID for the
 -- currently authenticated player. This method is only accessible to
 -- whitelisted tester accounts for your application.
 --

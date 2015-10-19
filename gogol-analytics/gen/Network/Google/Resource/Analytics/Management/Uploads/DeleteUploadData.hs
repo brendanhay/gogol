@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Delete data associated with a previous upload.
+-- Delete data associated with a previous upload.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUploadsDeleteUploadData@.
 module Network.Google.Resource.Analytics.Management.Uploads.DeleteUploadData

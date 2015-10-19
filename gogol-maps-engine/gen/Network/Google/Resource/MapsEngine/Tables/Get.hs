@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Return metadata for a particular table, including the schema.
+-- Return metadata for a particular table, including the schema.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsEngineTablesGet@.
 module Network.Google.Resource.MapsEngine.Tables.Get

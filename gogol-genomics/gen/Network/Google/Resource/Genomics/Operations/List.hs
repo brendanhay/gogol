@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists operations that match the specified filter in the request.
+-- Lists operations that match the specified filter in the request.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsOperationsList@.
 module Network.Google.Resource.Genomics.Operations.List

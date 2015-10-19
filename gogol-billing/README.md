@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Cloud Billing API.
+A client library for the Google Cloud Billing.
 
 
 ## Contribute

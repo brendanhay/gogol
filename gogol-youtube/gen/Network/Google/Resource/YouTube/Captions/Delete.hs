@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a specified caption track.
+-- Deletes a specified caption track.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCaptionsDelete@.
 module Network.Google.Resource.YouTube.Captions.Delete

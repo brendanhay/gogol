@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets a single setting by ID.
+-- Gets a single setting by ID.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorSettingsGet@.
 module Network.Google.Resource.Mirror.Settings.Get

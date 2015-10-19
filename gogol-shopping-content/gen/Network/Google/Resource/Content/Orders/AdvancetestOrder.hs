@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sandbox only. Moves a test order from state \"inProgress\" to state
+-- Sandbox only. Moves a test order from state \"inProgress\" to state
 -- \"pendingShipment\".
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersAdvancetestOrder@.

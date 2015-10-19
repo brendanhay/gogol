@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes a stored query as well as the associated stored reports.
+-- Deletes a stored query as well as the associated stored reports.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleClickBidManagerQueriesDeleteQuery@.
 module Network.Google.Resource.DoubleClickBidManager.Queries.DeleteQuery

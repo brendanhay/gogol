@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves or modifies multiple orders in a single request.
+-- Retrieves or modifies multiple orders in a single request.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersCustombatch@.
 module Network.Google.Resource.Content.Orders.Custombatch

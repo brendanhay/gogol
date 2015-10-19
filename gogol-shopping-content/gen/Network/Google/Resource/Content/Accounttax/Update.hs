@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the tax settings of the account.
+-- Updates the tax settings of the account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentAccounttaxUpdate@.
 module Network.Google.Resource.Content.Accounttax.Update

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists projects that are visible to the user and satisfy the specified
+-- Lists projects that are visible to the user and satisfy the specified
 -- filter. This method returns projects in an unspecified order. New
 -- projects do not necessarily appear at the end of the list.
 --

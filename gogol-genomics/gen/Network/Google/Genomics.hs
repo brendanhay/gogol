@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | An API to store, process, explore, and share DNA sequence reads,
+-- An API to store, process, explore, and share DNA sequence reads,
 -- reference-based alignments, and variant calls.
 --
 -- /See:/ < Genomics API Reference>

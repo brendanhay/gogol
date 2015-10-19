@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Notifies the database that the device has selected certain frequency
+-- Notifies the database that the device has selected certain frequency
 -- ranges for transmission. Only to be invoked when required by the
 -- regulator. The Google Spectrum Database does not operate in domains that
 -- require notification, so this always yields an UNIMPLEMENTED error.

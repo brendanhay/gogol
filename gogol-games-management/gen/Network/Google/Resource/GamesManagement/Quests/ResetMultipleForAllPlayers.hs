@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Resets quests with the given IDs for all players. This method is only
+-- Resets quests with the given IDs for all players. This method is only
 -- available to user accounts for your developer console. Only draft quests
 -- may be reset.
 --

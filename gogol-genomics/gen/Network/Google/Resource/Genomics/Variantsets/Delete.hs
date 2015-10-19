@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the contents of a variant set. The variant set object is not
+-- Deletes the contents of a variant set. The variant set object is not
 -- deleted.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsVariantsetsDelete@.

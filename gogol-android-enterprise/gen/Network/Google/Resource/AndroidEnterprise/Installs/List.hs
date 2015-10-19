@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the details of all apps installed on the specified device.
+-- Retrieves the details of all apps installed on the specified device.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseInstallsList@.
 module Network.Google.Resource.AndroidEnterprise.Installs.List

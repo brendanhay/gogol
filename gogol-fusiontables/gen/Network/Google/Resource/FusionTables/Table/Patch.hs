@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an existing table. Unless explicitly requested, only the name,
+-- Updates an existing table. Unless explicitly requested, only the name,
 -- description, and attribution will be updated. This method supports patch
 -- semantics.
 --

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists the user\'s current inapp item or subscription entitlements
+-- Lists the user\'s current inapp item or subscription entitlements
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidPublisherEntitlementsList@.
 module Network.Google.Resource.AndroidPublisher.Entitlements.List

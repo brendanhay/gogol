@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists reports created by a specific job. Returns NOT_FOUND if the job
+-- Lists reports created by a specific job. Returns NOT_FOUND if the job
 -- does not exist.
 --
 -- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference> for @YouTubereportingJobsReportsList@.

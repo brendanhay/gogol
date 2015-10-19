@@ -1,6 +1,6 @@
 name:                  gogol-prediction
 version:               0.0.1
-synopsis:              Prediction API Client.
+synopsis:              Google Prediction SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

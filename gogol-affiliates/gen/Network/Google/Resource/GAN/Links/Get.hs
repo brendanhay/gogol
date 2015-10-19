@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves data about a single link if the requesting
+-- Retrieves data about a single link if the requesting
 -- advertiser\/publisher has access to it. Advertisers can look up their
 -- own links. Publishers can look up visible links or links belonging to
 -- advertisers they are in a relationship with.

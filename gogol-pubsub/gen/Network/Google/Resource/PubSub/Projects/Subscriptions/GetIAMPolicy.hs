@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the access control policy for a \`resource\`. Is empty if the
+-- Gets the access control policy for a \`resource\`. Is empty if the
 -- policy or the resource does not exist.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsGetIAMPolicy@.

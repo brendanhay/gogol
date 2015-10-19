@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Invalidate the current backup verification codes for the user.
+-- Invalidate the current backup verification codes for the user.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryVerificationCodesInvalidate@.
 module Network.Google.Resource.Directory.VerificationCodes.Invalidate

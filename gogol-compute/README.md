@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Compute Engine API.
+A client library for the Google Compute Engine.
 
 
 ## Contribute

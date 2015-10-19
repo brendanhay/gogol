@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists all of the replies to a comment.
+-- Lists all of the replies to a comment.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRepliesList@.
 module Network.Google.Resource.Drive.Replies.List

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Checks whether the games client is out of date.
+-- Checks whether the games client is out of date.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesRevisionsCheck@.
 module Network.Google.Resource.Games.Revisions.Check

@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deactivates a beacon. Once deactivated, the API will not return
+-- Deactivates a beacon. Once deactivated, the API will not return
 -- information nor attachment data for the beacon when queried via
 -- \`beaconinfo.getforobserved\`. Calling this method on an already
 -- inactive beacon will do nothing (but will return a successful response

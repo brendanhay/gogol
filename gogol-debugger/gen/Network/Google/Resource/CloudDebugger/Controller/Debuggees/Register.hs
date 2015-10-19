@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Registers the debuggee with the controller. All agents should call this
+-- Registers the debuggee with the controller. All agents should call this
 -- API with the same request content to get back the same stable
 -- \'debuggee_id\'. Agents should call this API again whenever
 -- ListActiveBreakpoints or UpdateActiveBreakpoint return the error

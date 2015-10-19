@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the current user\'s Gmail profile.
+-- Gets the current user\'s Gmail profile.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersGetProFile@.
 module Network.Google.Resource.Gmail.Users.GetProFile

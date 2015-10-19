@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of annotations, possibly filtered.
+-- Retrieves a list of annotations, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyLibraryAnnotationsList@.
 module Network.Google.Resource.Books.MyLibrary.Annotations.List

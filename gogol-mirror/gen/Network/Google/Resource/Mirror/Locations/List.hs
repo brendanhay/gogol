@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of locations for the user.
+-- Retrieves a list of locations for the user.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorLocationsList@.
 module Network.Google.Resource.Mirror.Locations.List

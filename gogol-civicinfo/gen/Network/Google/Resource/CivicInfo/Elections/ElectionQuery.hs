@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List of available elections to query.
+-- List of available elections to query.
 --
 -- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicInfoElectionsElectionQuery@.
 module Network.Google.Resource.CivicInfo.Elections.ElectionQuery

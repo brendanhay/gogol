@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves an order using merchant order id.
+-- Retrieves an order using merchant order id.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersGetbymerchantOrderid@.
 module Network.Google.Resource.Content.Orders.GetbymerchantOrderid

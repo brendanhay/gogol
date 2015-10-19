@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | This method is not implemented. To cancel an operation, please use
+-- This method is not implemented. To cancel an operation, please use
 -- Operations.CancelOperation.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsOperationsDelete@.

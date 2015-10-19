@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a Cloud SQL instance as a clone of the source instance.
+-- Creates a Cloud SQL instance as a clone of the source instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SQLInstancesClone@.
 module Network.Google.Resource.SQL.Instances.Clone

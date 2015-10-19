@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Get information about one of the ad clients in the Host AdSense account.
+-- Get information about one of the ad clients in the Host AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAdClientsGet@.
 module Network.Google.Resource.AdSenseHost.AdClients.Get

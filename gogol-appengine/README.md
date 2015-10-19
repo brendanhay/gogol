@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google App Engine Admin API.
+A client library for the Google App Engine Admin.
 
 
 ## Contribute

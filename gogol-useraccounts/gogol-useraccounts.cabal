@@ -1,6 +1,6 @@
 name:                  gogol-useraccounts
 version:               0.0.1
-synopsis:              Cloud User Accounts API Client.
+synopsis:              Google Cloud User Accounts SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
 license:               OtherLicense

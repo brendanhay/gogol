@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Searches for references which match the given criteria. Implements
+-- Searches for references which match the given criteria. Implements
 -- [GlobalAllianceApi.searchReferences](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L146).
 --
 -- /See:/ < Genomics API Reference> for @GenomicsReferencesSearch@.

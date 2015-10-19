@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns notification details for a given notification id.
+-- Returns notification details for a given notification id.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksNotificationGet@.
 module Network.Google.Resource.Books.Notification.Get

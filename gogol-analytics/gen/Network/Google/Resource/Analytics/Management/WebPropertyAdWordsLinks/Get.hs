@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a web property-AdWords link to which the user has access.
+-- Returns a web property-AdWords link to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyAdWordsLinksGet@.
 module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Get

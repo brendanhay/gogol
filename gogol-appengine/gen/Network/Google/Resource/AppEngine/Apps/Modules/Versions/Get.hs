@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets application deployment information.
+-- Gets application deployment information.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesVersionsGet@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Get

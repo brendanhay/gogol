@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes an entitlement to an app for a user and uninstalls it.
+-- Removes an entitlement to an app for a user and uninstalls it.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseEntitlementsDelete@.
 module Network.Google.Resource.AndroidEnterprise.Entitlements.Delete

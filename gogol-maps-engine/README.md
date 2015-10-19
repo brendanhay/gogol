@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google Maps Engine API.
+A client library for the Google Maps Engine.
 
 
 ## Contribute

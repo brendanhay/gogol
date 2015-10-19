@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of invitations that the requesting user is permitted to
+-- Returns a list of invitations that the requesting user is permitted to
 -- view, restricted to those that match the list request. *Note:* At least
 -- one of \`user_id\` or \`course_id\` must be supplied. Both fields can be
 -- supplied. This method returns the following error codes: *

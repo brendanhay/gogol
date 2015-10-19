@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates the track configuration for the specified track type. When
+-- Updates the track configuration for the specified track type. When
 -- halted, the rollout track cannot be updated without adding new APKs, and
 -- adding new APKs will cause it to resume.
 --

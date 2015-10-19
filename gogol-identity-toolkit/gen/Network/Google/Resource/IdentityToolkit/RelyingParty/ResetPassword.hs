@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Reset password for a user.
+-- Reset password for a user.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingPartyResetPassword@.
 module Network.Google.Resource.IdentityToolkit.RelyingParty.ResetPassword

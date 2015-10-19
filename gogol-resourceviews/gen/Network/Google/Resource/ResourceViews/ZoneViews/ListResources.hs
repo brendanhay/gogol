@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List the resources of the resource view.
+-- List the resources of the resource view.
 --
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsListResources@.
 module Network.Google.Resource.ResourceViews.ZoneViews.ListResources

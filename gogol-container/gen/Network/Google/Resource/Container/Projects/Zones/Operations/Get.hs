@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the specified operation.
+-- Gets the specified operation.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @ContainerProjectsZonesOperationsGet@.
 module Network.Google.Resource.Container.Projects.Zones.Operations.Get

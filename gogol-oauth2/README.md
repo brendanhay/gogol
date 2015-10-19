@@ -13,7 +13,7 @@
 
 ## Description
 
-A client library for the Google OAuth2 API.
+A client library for the Google OAuth2.
 
 
 ## Contribute

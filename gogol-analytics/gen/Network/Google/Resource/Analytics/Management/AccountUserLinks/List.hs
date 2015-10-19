@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists account-user links for a given account.
+-- Lists account-user links for a given account.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountUserLinksList@.
 module Network.Google.Resource.Analytics.Management.AccountUserLinks.List

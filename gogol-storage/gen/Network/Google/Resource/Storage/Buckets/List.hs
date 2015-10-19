@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves a list of buckets for a given project.
+-- Retrieves a list of buckets for a given project.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @StorageBucketsList@.
 module Network.Google.Resource.Storage.Buckets.List

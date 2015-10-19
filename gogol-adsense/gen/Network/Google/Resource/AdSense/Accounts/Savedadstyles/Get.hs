@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | List a specific saved ad style for the specified account.
+-- List a specific saved ad style for the specified account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsSavedadstylesGet@.
 module Network.Google.Resource.AdSense.Accounts.Savedadstyles.Get

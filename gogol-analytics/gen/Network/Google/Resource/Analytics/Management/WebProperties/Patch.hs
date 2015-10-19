@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an existing web property. This method supports patch semantics.
+-- Updates an existing web property. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertiesPatch@.
 module Network.Google.Resource.Analytics.Management.WebProperties.Patch

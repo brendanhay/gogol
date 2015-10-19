@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves line items in CSV format.
+-- Retrieves line items in CSV format.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleClickBidManagerLineitemsDownloadlineitems@.
 module Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems

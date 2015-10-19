@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Publishes a Container Version.
+-- Publishes a Container Version.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVersionsPublish@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish

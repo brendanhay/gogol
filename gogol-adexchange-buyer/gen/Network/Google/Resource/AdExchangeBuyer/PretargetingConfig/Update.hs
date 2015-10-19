@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates an existing pretargeting config.
+-- Updates an existing pretargeting config.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPretargetingConfigUpdate@.
 module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Update

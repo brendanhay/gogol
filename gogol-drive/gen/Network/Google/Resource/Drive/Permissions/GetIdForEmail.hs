@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the permission ID for an email address.
+-- Returns the permission ID for an email address.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsGetIdForEmail@.
 module Network.Google.Resource.Drive.Permissions.GetIdForEmail

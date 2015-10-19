@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns a list of categories that can be associated with YouTube videos.
+-- Returns a list of categories that can be associated with YouTube videos.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideoCategoriesList@.
 module Network.Google.Resource.YouTube.VideoCategories.List

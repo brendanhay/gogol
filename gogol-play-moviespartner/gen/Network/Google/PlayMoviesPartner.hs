@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lets Google Play Movies Partners get the delivery status of their
+-- Lets Google Play Movies Partners get the delivery status of their
 -- titles.
 --
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference>

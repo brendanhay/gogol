@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves jobs created or modified since the given timestamp.
+-- Retrieves jobs created or modified since the given timestamp.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateJobsList@.
 module Network.Google.Resource.Coordinate.Jobs.List

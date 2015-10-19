@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Updates a dataset. This method supports patch semantics.
+-- Updates a dataset. This method supports patch semantics.
 --
 -- /See:/ < Genomics API Reference> for @GenomicsDatasetsPatch@.
 module Network.Google.Resource.Genomics.Datasets.Patch

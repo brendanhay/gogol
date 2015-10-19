@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the information about the current user along with Drive API
+-- Gets the information about the current user along with Drive API
 -- settings
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveAboutGet@.

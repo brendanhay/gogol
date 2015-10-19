@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Remove a person from a circle.
+-- Remove a person from a circle.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesRemovePeople@.
 module Network.Google.Resource.PlusDomains.Circles.RemovePeople
