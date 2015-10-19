@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Returns the specified managed instance group resource.
+-- | Returns all of the details about the specified managed instance group.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersGet@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.Get
@@ -52,7 +52,7 @@ type InstanceGroupManagersGetResource =
                QueryParam "alt" AltJSON :>
                  Get '[JSON] InstanceGroupManager
 
--- | Returns the specified managed instance group resource.
+-- | Returns all of the details about the specified managed instance group.
 --
 -- /See:/ 'instanceGroupManagersGet'' smart constructor.
 data InstanceGroupManagersGet' = InstanceGroupManagersGet'
@@ -87,13 +87,13 @@ igmgProject :: Lens' InstanceGroupManagersGet' Text
 igmgProject
   = lens _igmgProject (\ s a -> s{_igmgProject = a})
 
--- | The name of the instance group manager resource.
+-- | The name of the managed instance group.
 igmgInstanceGroupManager :: Lens' InstanceGroupManagersGet' Text
 igmgInstanceGroupManager
   = lens _igmgInstanceGroupManager
       (\ s a -> s{_igmgInstanceGroupManager = a})
 
--- | The URL of the zone where the managed instance group is located.
+-- | The name of the zone where the managed instance group is located.
 igmgZone :: Lens' InstanceGroupManagersGet' Text
 igmgZone = lens _igmgZone (\ s a -> s{_igmgZone = a})
 

@@ -23,7 +23,7 @@
 -- | Returns a list of students of this course that the requester is
 -- permitted to view. This method returns the following error codes: *
 -- \`NOT_FOUND\` if the course does not exist. * \`PERMISSION_DENIED\` for
--- [general user permission errors][User Permission Errors].
+-- access errors.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesStudentsList@.
 module Network.Google.Resource.Classroom.Courses.Students.List
@@ -73,7 +73,7 @@ type CoursesStudentsListResource =
 -- | Returns a list of students of this course that the requester is
 -- permitted to view. This method returns the following error codes: *
 -- \`NOT_FOUND\` if the course does not exist. * \`PERMISSION_DENIED\` for
--- [general user permission errors][User Permission Errors].
+-- access errors.
 --
 -- /See:/ 'coursesStudentsList'' smart constructor.
 data CoursesStudentsList' = CoursesStudentsList'
@@ -144,8 +144,7 @@ cslPp :: Lens' CoursesStudentsList' Bool
 cslPp = lens _cslPp (\ s a -> s{_cslPp = a})
 
 -- | Identifier of the course. This identifier can be either the
--- Classroom-assigned identifier or an
--- [alias][google.classroom.v1.CourseAlias].
+-- Classroom-assigned identifier or an alias.
 cslCourseId :: Lens' CoursesStudentsList' Text
 cslCourseId
   = lens _cslCourseId (\ s a -> s{_cslCourseId = a})
@@ -168,12 +167,9 @@ cslBearerToken
   = lens _cslBearerToken
       (\ s a -> s{_cslBearerToken = a})
 
--- | [nextPageToken][google.classroom.v1.ListStudentsResponse.next_page_token]
--- value returned from a previous
--- [list][google.classroom.v1.Users.ListStudents] call, indicating that the
--- subsequent page of results should be returned. The
--- [list][google.classroom.v1.Users.ListStudents] request must be otherwise
--- identical to the one that resulted in this token.
+-- | nextPageToken value returned from a previous list call, indicating that
+-- the subsequent page of results should be returned. The list request must
+-- be otherwise identical to the one that resulted in this token.
 cslPageToken :: Lens' CoursesStudentsList' (Maybe Text)
 cslPageToken
   = lens _cslPageToken (\ s a -> s{_cslPageToken = a})

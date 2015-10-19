@@ -6313,7 +6313,8 @@ vConversionPings
   = lens _vConversionPings
       (\ s a -> s{_vConversionPings = a})
 
--- | Age restriction details related to a video.
+-- | Age restriction details related to a video. This data can only be
+-- retrieved by the video owner.
 vAgeGating :: Lens' Video (Maybe VideoAgeGating)
 vAgeGating
   = lens _vAgeGating (\ s a -> s{_vAgeGating = a})

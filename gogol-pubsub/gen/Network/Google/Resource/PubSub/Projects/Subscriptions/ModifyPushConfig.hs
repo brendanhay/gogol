@@ -20,11 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Modifies the PushConfig for a specified subscription. This may be used
--- to change a push subscription to a pull one (signified by an empty
--- PushConfig) or vice versa, or change the endpoint URL and other
+-- | Modifies the \`PushConfig\` for a specified subscription. This may be
+-- used to change a push subscription to a pull one (signified by an empty
+-- \`PushConfig\`) or vice versa, or change the endpoint URL and other
 -- attributes of a push subscription. Messages will accumulate for delivery
--- continuously through the call regardless of changes to the PushConfig.
+-- continuously through the call regardless of changes to the
+-- \`PushConfig\`.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsModifyPushConfig@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
@@ -67,11 +68,12 @@ type ProjectsSubscriptionsModifyPushConfigResource =
                          ReqBody '[JSON] ModifyPushConfigRequest :>
                            Post '[JSON] Empty
 
--- | Modifies the PushConfig for a specified subscription. This may be used
--- to change a push subscription to a pull one (signified by an empty
--- PushConfig) or vice versa, or change the endpoint URL and other
+-- | Modifies the \`PushConfig\` for a specified subscription. This may be
+-- used to change a push subscription to a pull one (signified by an empty
+-- \`PushConfig\`) or vice versa, or change the endpoint URL and other
 -- attributes of a push subscription. Messages will accumulate for delivery
--- continuously through the call regardless of changes to the PushConfig.
+-- continuously through the call regardless of changes to the
+-- \`PushConfig\`.
 --
 -- /See:/ 'projectsSubscriptionsModifyPushConfig'' smart constructor.
 data ProjectsSubscriptionsModifyPushConfig' = ProjectsSubscriptionsModifyPushConfig'

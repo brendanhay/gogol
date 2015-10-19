@@ -20,9 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists instances in an instance group. The parameters for this method
--- specify whether the list filters instances by state and named ports
--- information.
+-- | Lists the instances in the specified instance group.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsListInstances@.
 module Network.Google.Resource.Compute.InstanceGroups.ListInstances
@@ -63,9 +61,7 @@ type InstanceGroupsListInstancesResource =
                          ReqBody '[JSON] InstanceGroupsListInstancesRequest :>
                            Post '[JSON] InstanceGroupsListInstances
 
--- | Lists instances in an instance group. The parameters for this method
--- specify whether the list filters instances by state and named ports
--- information.
+-- | Lists the instances in the specified instance group.
 --
 -- /See:/ 'instanceGroupsListInstances'' smart constructor.
 data InstanceGroupsListInstances' = InstanceGroupsListInstances'
@@ -117,7 +113,7 @@ igliProject :: Lens' InstanceGroupsListInstances' Text
 igliProject
   = lens _igliProject (\ s a -> s{_igliProject = a})
 
--- | The URL of the zone where the instance group is located.
+-- | The name of the zone where the instance group is located.
 igliZone :: Lens' InstanceGroupsListInstances' Text
 igliZone = lens _igliZone (\ s a -> s{_igliZone = a})
 

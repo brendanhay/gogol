@@ -20,7 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Lists managed instances.
+-- | Lists all of the instances in the managed instance group. Each instance
+-- in the list has a currentAction, which indicates the action that the
+-- managed instance group is performing on the instance. For example, if
+-- the group is still creating an instance, the currentAction is CREATING.
+-- If a previous action failed, the list displays the errors for that
+-- failed action.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersListManagedInstances@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.ListManagedInstances
@@ -55,7 +60,12 @@ type InstanceGroupManagersListManagedInstancesResource
                    Post '[JSON]
                      InstanceGroupManagersListManagedInstancesResponse
 
--- | Lists managed instances.
+-- | Lists all of the instances in the managed instance group. Each instance
+-- in the list has a currentAction, which indicates the action that the
+-- managed instance group is performing on the instance. For example, if
+-- the group is still creating an instance, the currentAction is CREATING.
+-- If a previous action failed, the list displays the errors for that
+-- failed action.
 --
 -- /See:/ 'instanceGroupManagersListManagedInstances'' smart constructor.
 data InstanceGroupManagersListManagedInstances' = InstanceGroupManagersListManagedInstances'
@@ -97,7 +107,7 @@ igmlmiInstanceGroupManager
   = lens _igmlmiInstanceGroupManager
       (\ s a -> s{_igmlmiInstanceGroupManager = a})
 
--- | The URL of the zone where the managed instance group is located.
+-- | The name of the zone where the managed instance group is located.
 igmlmiZone :: Lens' InstanceGroupManagersListManagedInstances' Text
 igmlmiZone
   = lens _igmlmiZone (\ s a -> s{_igmlmiZone = a})

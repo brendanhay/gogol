@@ -100,7 +100,7 @@ iglProject :: Lens' InstanceGroupsList' Text
 iglProject
   = lens _iglProject (\ s a -> s{_iglProject = a})
 
--- | The URL of the zone where the instance group is located.
+-- | The name of the zone where the instance group is located.
 iglZone :: Lens' InstanceGroupsList' Text
 iglZone = lens _iglZone (\ s a -> s{_iglZone = a})
 

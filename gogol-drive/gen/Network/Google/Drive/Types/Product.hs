@@ -3911,8 +3911,7 @@ fThumbnail :: Lens' File (Maybe FileThumbnail)
 fThumbnail
   = lens _fThumbnail (\ s a -> s{_fThumbnail = a})
 
--- | Time this file was explicitly marked viewed by the user (formatted RFC
--- 3339 timestamp).
+-- | Deprecated.
 fMarkedViewedByMeDate :: Lens' File (Maybe UTCTime)
 fMarkedViewedByMeDate
   = lens _fMarkedViewedByMeDate

@@ -20,7 +20,7 @@ description:
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1beta3@
+    This library is compatible with version @v2beta1@
     of the API.
 
 source-repository head
@@ -36,26 +36,6 @@ library
     exposed-modules:
           Network.Google.Logging
         , Network.Google.Logging.Types
-        , Network.Google.Resource.Logging.Projects.LogServices.Indexes.List
-        , Network.Google.Resource.Logging.Projects.LogServices.List
-        , Network.Google.Resource.Logging.Projects.LogServices.Sinks.Create
-        , Network.Google.Resource.Logging.Projects.LogServices.Sinks.Delete
-        , Network.Google.Resource.Logging.Projects.LogServices.Sinks.Get
-        , Network.Google.Resource.Logging.Projects.LogServices.Sinks.List
-        , Network.Google.Resource.Logging.Projects.LogServices.Sinks.Update
-        , Network.Google.Resource.Logging.Projects.Logs.Delete
-        , Network.Google.Resource.Logging.Projects.Logs.Entries.Write
-        , Network.Google.Resource.Logging.Projects.Logs.List
-        , Network.Google.Resource.Logging.Projects.Logs.Sinks.Create
-        , Network.Google.Resource.Logging.Projects.Logs.Sinks.Delete
-        , Network.Google.Resource.Logging.Projects.Logs.Sinks.Get
-        , Network.Google.Resource.Logging.Projects.Logs.Sinks.List
-        , Network.Google.Resource.Logging.Projects.Logs.Sinks.Update
-        , Network.Google.Resource.Logging.Projects.Sinks.Create
-        , Network.Google.Resource.Logging.Projects.Sinks.Delete
-        , Network.Google.Resource.Logging.Projects.Sinks.Get
-        , Network.Google.Resource.Logging.Projects.Sinks.List
-        , Network.Google.Resource.Logging.Projects.Sinks.Update
 
     other-modules:
           Network.Google.Logging.Types.Product

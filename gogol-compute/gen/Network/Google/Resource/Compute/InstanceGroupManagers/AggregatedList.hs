@@ -20,8 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the list of managed instance groups, and groups them by
--- project and zone.
+-- | Retrieves the list of managed instance groups and groups them by zone.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersAggregatedList@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.AggregatedList
@@ -55,8 +54,7 @@ type InstanceGroupManagersAggregatedListResource =
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] InstanceGroupManagerAggregatedList
 
--- | Retrieves the list of managed instance groups, and groups them by
--- project and zone.
+-- | Retrieves the list of managed instance groups and groups them by zone.
 --
 -- /See:/ 'instanceGroupManagersAggregatedList'' smart constructor.
 data InstanceGroupManagersAggregatedList' = InstanceGroupManagersAggregatedList'

@@ -554,6 +554,36 @@ instance FromJSON VolumesMybooksListAcquireMethod where
 instance ToJSON VolumesMybooksListAcquireMethod where
     toJSON = toJSONText
 
+-- | The maximum allowed maturity rating of returned recommendations. Books
+-- with a higher maturity rating are filtered out.
+data PersonalizedstreamGetMaxAllowedMaturityRating
+    = PGMAMRMature
+      -- ^ @mature@
+      -- Show books which are rated mature or lower.
+    | PGMAMRNotMature
+      -- ^ @not-mature@
+      -- Show books which are rated not mature.
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PersonalizedstreamGetMaxAllowedMaturityRating
+
+instance FromText PersonalizedstreamGetMaxAllowedMaturityRating where
+    fromText = \case
+        "mature" -> Just PGMAMRMature
+        "not-mature" -> Just PGMAMRNotMature
+        _ -> Nothing
+
+instance ToText PersonalizedstreamGetMaxAllowedMaturityRating where
+    toText = \case
+        PGMAMRMature -> "mature"
+        PGMAMRNotMature -> "not-mature"
+
+instance FromJSON PersonalizedstreamGetMaxAllowedMaturityRating where
+    parseJSON = parseJSONText "PersonalizedstreamGetMaxAllowedMaturityRating"
+
+instance ToJSON PersonalizedstreamGetMaxAllowedMaturityRating where
+    toJSON = toJSONText
+
 -- | Restrict to books or magazines.
 data VolumesListPrintType
     = All

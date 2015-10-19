@@ -24,6 +24,7 @@ module Network.Google.Books.Types
     -- * Usersettings
     , Usersettings
     , usersettings
+    , uNotification
     , uKind
     , uNotesExport
 
@@ -51,6 +52,11 @@ module Network.Google.Books.Types
     , adNextPageToken
     , adKind
     , adItems
+
+    -- * UsersettingsNotificationMoreFromAuthors
+    , UsersettingsNotificationMoreFromAuthors
+    , usersettingsNotificationMoreFromAuthors
+    , unmfaOptedState
 
     -- * Volumeannotations
     , Volumeannotations
@@ -145,6 +151,8 @@ module Network.Google.Books.Types
     , vuiCopy
     , vuiUserUploadedVolumeInfo
     , vuiIsPurchased
+    , vuiEntitlementType
+    , vuiAcquisitionType
     , vuiRentalState
     , vuiIsPreOrdered
     , vuiReview
@@ -248,6 +256,15 @@ module Network.Google.Books.Types
     , bTitle
     , bDescription
 
+    -- * Notification
+    , Notification
+    , notification
+    , nKind
+    , nBody
+    , nLinkURL
+    , nIconURL
+    , nTitle
+
     -- * VolumesListDownload
     , VolumesListDownload (..)
 
@@ -309,6 +326,16 @@ module Network.Google.Books.Types
 
     -- * VolumesAssociatedListAssociation
     , VolumesAssociatedListAssociation (..)
+
+    -- * DiscoveryclustersClustersItemBanner_with_content_container
+    , DiscoveryclustersClustersItemBanner_with_content_container
+    , discoveryclustersClustersItemBanner_with_content_container
+    , dcibFillColorArgb
+    , dcibMoreButtonURL
+    , dcibTextColorArgb
+    , dcibMoreButtonText
+    , dcibImageURL
+    , dcibMaskColorArgb
 
     -- * Volume
     , Volume
@@ -442,6 +469,11 @@ module Network.Google.Books.Types
     -- * VolumesListFilter
     , VolumesListFilter (..)
 
+    -- * UsersettingsNotification
+    , UsersettingsNotification
+    , usersettingsNotification
+    , unMoreFromAuthors
+
     -- * DictlayerDataDictWordsItemSensesItemSynonymsItem
     , DictlayerDataDictWordsItemSensesItemSynonymsItem
     , dictlayerDataDictWordsItemSensesItemSynonymsItem
@@ -483,6 +515,16 @@ module Network.Google.Books.Types
     , DictlayerDataCommon
     , dictlayerDataCommon
     , ddcTitle
+
+    -- * DiscoveryclustersClustersItem
+    , DiscoveryclustersClustersItem
+    , discoveryclustersClustersItem
+    , dciBannerWithContentContainer
+    , dciUid
+    , dciTotalVolumes
+    , dciSubTitle
+    , dciTitle
+    , dciVolumes
 
     -- * VolumeSaleInfoRetailPrice
     , VolumeSaleInfoRetailPrice
@@ -602,6 +644,9 @@ module Network.Google.Books.Types
     , aGbTextRange
     , aCfiRange
 
+    -- * PersonalizedstreamGetMaxAllowedMaturityRating
+    , PersonalizedstreamGetMaxAllowedMaturityRating (..)
+
     -- * VolumesListPrintType
     , VolumesListPrintType (..)
 
@@ -675,6 +720,13 @@ module Network.Google.Books.Types
 
     -- * VolumesMybooksListProcessingState
     , VolumesMybooksListProcessingState (..)
+
+    -- * Discoveryclusters
+    , Discoveryclusters
+    , discoveryclusters
+    , dKind
+    , dTotalClusters
+    , dClusters
 
     -- * UsersettingsNotesExport
     , UsersettingsNotesExport

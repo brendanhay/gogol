@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Sets the named ports in an instance group.
+-- | Sets the named ports for the specified instance group.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsSetNamedPorts@.
 module Network.Google.Resource.Compute.InstanceGroups.SetNamedPorts
@@ -55,7 +55,7 @@ type InstanceGroupsSetNamedPortsResource =
                    ReqBody '[JSON] InstanceGroupsSetNamedPortsRequest :>
                      Post '[JSON] Operation
 
--- | Sets the named ports in an instance group.
+-- | Sets the named ports for the specified instance group.
 --
 -- /See:/ 'instanceGroupsSetNamedPorts'' smart constructor.
 data InstanceGroupsSetNamedPorts' = InstanceGroupsSetNamedPorts'
@@ -95,7 +95,7 @@ igsnpProject :: Lens' InstanceGroupsSetNamedPorts' Text
 igsnpProject
   = lens _igsnpProject (\ s a -> s{_igsnpProject = a})
 
--- | The URL of the zone where the instance group is located.
+-- | The name of the zone where the instance group is located.
 igsnpZone :: Lens' InstanceGroupsSetNamedPorts' Text
 igsnpZone
   = lens _igsnpZone (\ s a -> s{_igsnpZone = a})

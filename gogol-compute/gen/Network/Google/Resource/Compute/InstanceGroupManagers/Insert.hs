@@ -20,8 +20,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Creates a managed instance group resource in the specified project using
--- the data that is included in the request.
+-- | Creates a managed instance group using the information that you specify
+-- in the request. After the group is created, it schedules an action to
+-- create instances in the group using the specified instance template.
+-- This operation is marked as DONE when the group is created even if the
+-- instances in the group have not yet been created. You must separately
+-- verify the status of the individual instances with the
+-- listmanagedinstances method.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersInsert@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.Insert
@@ -53,8 +58,13 @@ type InstanceGroupManagersInsertResource =
                ReqBody '[JSON] InstanceGroupManager :>
                  Post '[JSON] Operation
 
--- | Creates a managed instance group resource in the specified project using
--- the data that is included in the request.
+-- | Creates a managed instance group using the information that you specify
+-- in the request. After the group is created, it schedules an action to
+-- create instances in the group using the specified instance template.
+-- This operation is marked as DONE when the group is created even if the
+-- instances in the group have not yet been created. You must separately
+-- verify the status of the individual instances with the
+-- listmanagedinstances method.
 --
 -- /See:/ 'instanceGroupManagersInsert'' smart constructor.
 data InstanceGroupManagersInsert' = InstanceGroupManagersInsert'
@@ -89,7 +99,8 @@ igmiProject :: Lens' InstanceGroupManagersInsert' Text
 igmiProject
   = lens _igmiProject (\ s a -> s{_igmiProject = a})
 
--- | The URL of the zone where the managed instance group is located.
+-- | The name of the zone where you want to create the managed instance
+-- group.
 igmiZone :: Lens' InstanceGroupManagersInsert' Text
 igmiZone = lens _igmiZone (\ s a -> s{_igmiZone = a})
 

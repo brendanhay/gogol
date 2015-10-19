@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the list of instance groups, and sorts them by zone.
+-- | Retrieves the list of instance groups and sorts them by zone.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsAggregatedList@.
 module Network.Google.Resource.Compute.InstanceGroups.AggregatedList
@@ -54,7 +54,7 @@ type InstanceGroupsAggregatedListResource =
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] InstanceGroupAggregatedList
 
--- | Retrieves the list of instance groups, and sorts them by zone.
+-- | Retrieves the list of instance groups and sorts them by zone.
 --
 -- /See:/ 'instanceGroupsAggregatedList'' smart constructor.
 data InstanceGroupsAggregatedList' = InstanceGroupsAggregatedList'

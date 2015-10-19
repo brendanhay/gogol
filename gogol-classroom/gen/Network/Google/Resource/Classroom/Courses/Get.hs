@@ -22,9 +22,8 @@
 --
 -- | Returns a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to access
--- the requested course or for [general user permission errors][User
--- Permission Errors]. * \`NOT_FOUND\` if no course exists with the
--- requested ID.
+-- the requested course or for access errors. * \`NOT_FOUND\` if no course
+-- exists with the requested ID.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesGet@.
 module Network.Google.Resource.Classroom.Courses.Get
@@ -67,9 +66,8 @@ type CoursesGetResource =
 
 -- | Returns a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to access
--- the requested course or for [general user permission errors][User
--- Permission Errors]. * \`NOT_FOUND\` if no course exists with the
--- requested ID.
+-- the requested course or for access errors. * \`NOT_FOUND\` if no course
+-- exists with the requested ID.
 --
 -- /See:/ 'coursesGet'' smart constructor.
 data CoursesGet' = CoursesGet'
@@ -149,8 +147,7 @@ cgBearerToken
       (\ s a -> s{_cgBearerToken = a})
 
 -- | Identifier of the course to return. This identifier can be either the
--- Classroom-assigned identifier or an
--- [alias][google.classroom.v1.CourseAlias].
+-- Classroom-assigned identifier or an alias.
 cgId :: Lens' CoursesGet' Text
 cgId = lens _cgId (\ s a -> s{_cgId = a})
 

@@ -22,11 +22,13 @@
 --
 -- | Adds a user as a student of a course. This method returns the following
 -- error codes: * \`PERMISSION_DENIED\` if the requesting user is not
--- permitted to create students in this course or for [general user
--- permission errors][User Permission Errors]. * \`NOT_FOUND\` if the
--- requested course ID does not exist. * \`FAILED_PRECONDITION\` if the
--- requested user\'s account is disabled. * \`ALREADY_EXISTS\` if the user
--- is already a student or teacher in the course.
+-- permitted to create students in this course or for access errors. *
+-- \`NOT_FOUND\` if the requested course ID does not exist. *
+-- \`FAILED_PRECONDITION\` if the requested user\'s account is disabled,
+-- for the following request errors: * CourseMemberLimitReached *
+-- CourseNotModifiable * UserGroupsMembershipLimitReached *
+-- \`ALREADY_EXISTS\` if the user is already a student or teacher in the
+-- course.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesStudentsCreate@.
 module Network.Google.Resource.Classroom.Courses.Students.Create
@@ -74,11 +76,13 @@ type CoursesStudentsCreateResource =
 
 -- | Adds a user as a student of a course. This method returns the following
 -- error codes: * \`PERMISSION_DENIED\` if the requesting user is not
--- permitted to create students in this course or for [general user
--- permission errors][User Permission Errors]. * \`NOT_FOUND\` if the
--- requested course ID does not exist. * \`FAILED_PRECONDITION\` if the
--- requested user\'s account is disabled. * \`ALREADY_EXISTS\` if the user
--- is already a student or teacher in the course.
+-- permitted to create students in this course or for access errors. *
+-- \`NOT_FOUND\` if the requested course ID does not exist. *
+-- \`FAILED_PRECONDITION\` if the requested user\'s account is disabled,
+-- for the following request errors: * CourseMemberLimitReached *
+-- CourseNotModifiable * UserGroupsMembershipLimitReached *
+-- \`ALREADY_EXISTS\` if the user is already a student or teacher in the
+-- course.
 --
 -- /See:/ 'coursesStudentsCreate'' smart constructor.
 data CoursesStudentsCreate' = CoursesStudentsCreate'
@@ -150,8 +154,7 @@ cscPp :: Lens' CoursesStudentsCreate' Bool
 cscPp = lens _cscPp (\ s a -> s{_cscPp = a})
 
 -- | Identifier of the course to create the student in. This identifier can
--- be either the Classroom-assigned identifier or an
--- [alias][google.classroom.v1.CourseAlias].
+-- be either the Classroom-assigned identifier or an alias.
 cscCourseId :: Lens' CoursesStudentsCreate' Text
 cscCourseId
   = lens _cscCourseId (\ s a -> s{_cscCourseId = a})
@@ -174,9 +177,9 @@ cscPayload
   = lens _cscPayload (\ s a -> s{_cscPayload = a})
 
 -- | Enrollment code of the course to create the student in. This code is
--- required if [userId][google.classroom.v1.Student.user_id] corresponds to
--- the requesting user; it may be omitted if the requesting user has
--- administrative permissions to create students for any user.
+-- required if userId corresponds to the requesting user; it may be omitted
+-- if the requesting user has administrative permissions to create students
+-- for any user.
 cscEnrollmentCode :: Lens' CoursesStudentsCreate' (Maybe Text)
 cscEnrollmentCode
   = lens _cscEnrollmentCode

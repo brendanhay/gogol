@@ -25,110 +25,7 @@ module Network.Google.Logging
     -- * API Declaration
     , LoggingAPI
 
-    -- * Resources
-
-    -- ** LoggingProjectsLogServicesIndexesList
-    , module Network.Google.Resource.Logging.Projects.LogServices.Indexes.List
-
-    -- ** LoggingProjectsLogServicesList
-    , module Network.Google.Resource.Logging.Projects.LogServices.List
-
-    -- ** LoggingProjectsLogServicesSinksCreate
-    , module Network.Google.Resource.Logging.Projects.LogServices.Sinks.Create
-
-    -- ** LoggingProjectsLogServicesSinksDelete
-    , module Network.Google.Resource.Logging.Projects.LogServices.Sinks.Delete
-
-    -- ** LoggingProjectsLogServicesSinksGet
-    , module Network.Google.Resource.Logging.Projects.LogServices.Sinks.Get
-
-    -- ** LoggingProjectsLogServicesSinksList
-    , module Network.Google.Resource.Logging.Projects.LogServices.Sinks.List
-
-    -- ** LoggingProjectsLogServicesSinksUpdate
-    , module Network.Google.Resource.Logging.Projects.LogServices.Sinks.Update
-
-    -- ** LoggingProjectsLogsDelete
-    , module Network.Google.Resource.Logging.Projects.Logs.Delete
-
-    -- ** LoggingProjectsLogsEntriesWrite
-    , module Network.Google.Resource.Logging.Projects.Logs.Entries.Write
-
-    -- ** LoggingProjectsLogsList
-    , module Network.Google.Resource.Logging.Projects.Logs.List
-
-    -- ** LoggingProjectsLogsSinksCreate
-    , module Network.Google.Resource.Logging.Projects.Logs.Sinks.Create
-
-    -- ** LoggingProjectsLogsSinksDelete
-    , module Network.Google.Resource.Logging.Projects.Logs.Sinks.Delete
-
-    -- ** LoggingProjectsLogsSinksGet
-    , module Network.Google.Resource.Logging.Projects.Logs.Sinks.Get
-
-    -- ** LoggingProjectsLogsSinksList
-    , module Network.Google.Resource.Logging.Projects.Logs.Sinks.List
-
-    -- ** LoggingProjectsLogsSinksUpdate
-    , module Network.Google.Resource.Logging.Projects.Logs.Sinks.Update
-
-    -- ** LoggingProjectsSinksCreate
-    , module Network.Google.Resource.Logging.Projects.Sinks.Create
-
-    -- ** LoggingProjectsSinksDelete
-    , module Network.Google.Resource.Logging.Projects.Sinks.Delete
-
-    -- ** LoggingProjectsSinksGet
-    , module Network.Google.Resource.Logging.Projects.Sinks.Get
-
-    -- ** LoggingProjectsSinksList
-    , module Network.Google.Resource.Logging.Projects.Sinks.List
-
-    -- ** LoggingProjectsSinksUpdate
-    , module Network.Google.Resource.Logging.Projects.Sinks.Update
-
     -- * Types
-
-    -- ** Log
-    , Log
-    , log'
-    , lName
-    , lDisplayName
-    , lPayloadType
-
-    -- ** LogError
-    , LogError
-    , logError
-    , leStatus
-    , leResource
-    , leTimeNanos
-
-    -- ** Status
-    , Status
-    , status
-    , sDetails
-    , sCode
-    , sMessage
-
-    -- ** WriteLogEntriesRequest
-    , WriteLogEntriesRequest
-    , writeLogEntriesRequest
-    , wlerEntries
-    , wlerCommonLabels
-
-    -- ** WriteLogEntriesRequestCommonLabels
-    , WriteLogEntriesRequestCommonLabels
-    , writeLogEntriesRequestCommonLabels
-    , wlerclAddtional
-
-    -- ** Empty
-    , Empty
-    , empty
-
-    -- ** ListSinksResponse
-    , ListSinksResponse
-    , listSinksResponse
-    , lsrSinks
 
     -- ** RequestLog
     , RequestLog
@@ -165,86 +62,6 @@ module Network.Google.Logging
     , rlSourceReference
     , rlAppEngineRelease
 
-    -- ** LogEntryMetadata
-    , LogEntryMetadata
-    , logEntryMetadata
-    , lemSeverity
-    , lemZone
-    , lemUserId
-    , lemServiceName
-    , lemLabels
-    , lemRegion
-    , lemProjectId
-    , lemTimestamp
-
-    -- ** LogEntryProtoPayload
-    , LogEntryProtoPayload
-    , logEntryProtoPayload
-    , leppAddtional
-
-    -- ** ListLogServiceIndexesResponse
-    , ListLogServiceIndexesResponse
-    , listLogServiceIndexesResponse
-    , llsirNextPageToken
-    , llsirServiceIndexPrefixes
-
-    -- ** WriteLogEntriesResponse
-    , WriteLogEntriesResponse
-    , writeLogEntriesResponse
-
-    -- ** LogSink
-    , LogSink
-    , logSink
-    , lsDestination
-    , lsName
-    , lsFilter
-    , lsErrors
-
-    -- ** ListLogServicesResponse
-    , ListLogServicesResponse
-    , listLogServicesResponse
-    , llsrNextPageToken
-    , llsrLogServices
-
-    -- ** StatusDetailsItem
-    , StatusDetailsItem
-    , statusDetailsItem
-    , sdiAddtional
-
-    -- ** ListLogsResponse
-    , ListLogsResponse
-    , listLogsResponse
-    , llrNextPageToken
-    , llrLogs
-
-    -- ** HTTPRequest
-    , HTTPRequest
-    , hTTPRequest
-    , httprStatus
-    , httprRequestURL
-    , httprRemoteIP
-    , httprRequestSize
-    , httprUserAgent
-    , httprResponseSize
-    , httprRequestMethod
-    , httprReferer
-
-    -- ** ListLogSinksResponse
-    , ListLogSinksResponse
-    , listLogSinksResponse
-    , llsrSinks
-
-    -- ** LogService
-    , LogService
-    , logService
-    , logName
-    , logIndexKeys
-
-    -- ** ListLogServiceSinksResponse
-    , ListLogServiceSinksResponse
-    , listLogServiceSinksResponse
-    , llssrSinks
-
     -- ** LogLine
     , LogLine
     , logLine
@@ -252,22 +69,6 @@ module Network.Google.Logging
     , llSeverity
     , llLogMessage
     , llSourceLocation
-
-    -- ** LogEntry
-    , LogEntry
-    , logEntry
-    , leLog
-    , leTextPayload
-    , leHTTPRequest
-    , leStructPayload
-    , leInsertId
-    , leMetadata
-    , leProtoPayload
-
-    -- ** LogEntryMetadataLabels
-    , LogEntryMetadataLabels
-    , logEntryMetadataLabels
-    , lemlAddtional
 
     -- ** SourceLocation
     , SourceLocation
@@ -281,59 +82,14 @@ module Network.Google.Logging
     , sourceReference
     , srRepository
     , srRevisionId
-
-    -- ** LogEntryStructPayload
-    , LogEntryStructPayload
-    , logEntryStructPayload
-    , lespAddtional
     ) where
 
 import           Network.Google.Logging.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Logging.Projects.Logs.Delete
-import           Network.Google.Resource.Logging.Projects.Logs.Entries.Write
-import           Network.Google.Resource.Logging.Projects.Logs.List
-import           Network.Google.Resource.Logging.Projects.Logs.Sinks.Create
-import           Network.Google.Resource.Logging.Projects.Logs.Sinks.Delete
-import           Network.Google.Resource.Logging.Projects.Logs.Sinks.Get
-import           Network.Google.Resource.Logging.Projects.Logs.Sinks.List
-import           Network.Google.Resource.Logging.Projects.Logs.Sinks.Update
-import           Network.Google.Resource.Logging.Projects.LogServices.Indexes.List
-import           Network.Google.Resource.Logging.Projects.LogServices.List
-import           Network.Google.Resource.Logging.Projects.LogServices.Sinks.Create
-import           Network.Google.Resource.Logging.Projects.LogServices.Sinks.Delete
-import           Network.Google.Resource.Logging.Projects.LogServices.Sinks.Get
-import           Network.Google.Resource.Logging.Projects.LogServices.Sinks.List
-import           Network.Google.Resource.Logging.Projects.LogServices.Sinks.Update
-import           Network.Google.Resource.Logging.Projects.Sinks.Create
-import           Network.Google.Resource.Logging.Projects.Sinks.Delete
-import           Network.Google.Resource.Logging.Projects.Sinks.Get
-import           Network.Google.Resource.Logging.Projects.Sinks.List
-import           Network.Google.Resource.Logging.Projects.Sinks.Update
 
 {- $resources
 TODO
 -}
 
 -- | Represents the entirety of the methods and resources available for the Google Cloud Logging API service.
-type LoggingAPI =
-     ProjectsSinksListResource :<|>
-       ProjectsSinksGetResource
-       :<|> ProjectsSinksCreateResource
-       :<|> ProjectsSinksDeleteResource
-       :<|> ProjectsSinksUpdateResource
-       :<|> ProjectsLogServicesSinksListResource
-       :<|> ProjectsLogServicesSinksGetResource
-       :<|> ProjectsLogServicesSinksCreateResource
-       :<|> ProjectsLogServicesSinksDeleteResource
-       :<|> ProjectsLogServicesSinksUpdateResource
-       :<|> ProjectsLogServicesIndexesListResource
-       :<|> ProjectsLogServicesListResource
-       :<|> ProjectsLogsSinksListResource
-       :<|> ProjectsLogsSinksGetResource
-       :<|> ProjectsLogsSinksCreateResource
-       :<|> ProjectsLogsSinksDeleteResource
-       :<|> ProjectsLogsSinksUpdateResource
-       :<|> ProjectsLogsEntriesWriteResource
-       :<|> ProjectsLogsListResource
-       :<|> ProjectsLogsDeleteResource
+type LoggingAPI = ()

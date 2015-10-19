@@ -22,11 +22,10 @@
 --
 -- | Deletes a teacher of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
--- to delete teachers of this course or for [general user permission
--- errors][User Permission Errors]. * \`NOT_FOUND\` if no teacher of this
--- course has the requested ID or if the course does not exist. *
--- \`FAILED_PRECONDITION\` if the requested ID belongs to the primary
--- teacher of this course.
+-- to delete teachers of this course or for access errors. * \`NOT_FOUND\`
+-- if no teacher of this course has the requested ID or if the course does
+-- not exist. * \`FAILED_PRECONDITION\` if the requested ID belongs to the
+-- primary teacher of this course.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesTeachersDelete@.
 module Network.Google.Resource.Classroom.Courses.Teachers.Delete
@@ -72,11 +71,10 @@ type CoursesTeachersDeleteResource =
 
 -- | Deletes a teacher of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
--- to delete teachers of this course or for [general user permission
--- errors][User Permission Errors]. * \`NOT_FOUND\` if no teacher of this
--- course has the requested ID or if the course does not exist. *
--- \`FAILED_PRECONDITION\` if the requested ID belongs to the primary
--- teacher of this course.
+-- to delete teachers of this course or for access errors. * \`NOT_FOUND\`
+-- if no teacher of this course has the requested ID or if the course does
+-- not exist. * \`FAILED_PRECONDITION\` if the requested ID belongs to the
+-- primary teacher of this course.
 --
 -- /See:/ 'coursesTeachersDelete'' smart constructor.
 data CoursesTeachersDelete' = CoursesTeachersDelete'
@@ -144,8 +142,7 @@ ctdPp :: Lens' CoursesTeachersDelete' Bool
 ctdPp = lens _ctdPp (\ s a -> s{_ctdPp = a})
 
 -- | Identifier of the course. This identifier can be either the
--- Classroom-assigned identifier or an
--- [alias][google.classroom.v1.CourseAlias].
+-- Classroom-assigned identifier or an alias.
 ctdCourseId :: Lens' CoursesTeachersDelete' Text
 ctdCourseId
   = lens _ctdCourseId (\ s a -> s{_ctdCourseId = a})

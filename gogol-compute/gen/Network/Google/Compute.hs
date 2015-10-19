@@ -203,6 +203,24 @@ module Network.Google.Compute
     -- ** ComputeHTTPHealthChecksUpdate
     , module Network.Google.Resource.Compute.HTTPHealthChecks.Update
 
+    -- ** ComputeHTTPSHealthChecksDelete
+    , module Network.Google.Resource.Compute.HTTPSHealthChecks.Delete
+
+    -- ** ComputeHTTPSHealthChecksGet
+    , module Network.Google.Resource.Compute.HTTPSHealthChecks.Get
+
+    -- ** ComputeHTTPSHealthChecksInsert
+    , module Network.Google.Resource.Compute.HTTPSHealthChecks.Insert
+
+    -- ** ComputeHTTPSHealthChecksList
+    , module Network.Google.Resource.Compute.HTTPSHealthChecks.List
+
+    -- ** ComputeHTTPSHealthChecksPatch
+    , module Network.Google.Resource.Compute.HTTPSHealthChecks.Patch
+
+    -- ** ComputeHTTPSHealthChecksUpdate
+    , module Network.Google.Resource.Compute.HTTPSHealthChecks.Update
+
     -- ** ComputeImagesDelete
     , module Network.Google.Resource.Compute.Images.Delete
 
@@ -419,6 +437,18 @@ module Network.Google.Compute
     -- ** ComputeSnapshotsList
     , module Network.Google.Resource.Compute.Snapshots.List
 
+    -- ** ComputeSSLCertificatesDelete
+    , module Network.Google.Resource.Compute.SSLCertificates.Delete
+
+    -- ** ComputeSSLCertificatesGet
+    , module Network.Google.Resource.Compute.SSLCertificates.Get
+
+    -- ** ComputeSSLCertificatesInsert
+    , module Network.Google.Resource.Compute.SSLCertificates.Insert
+
+    -- ** ComputeSSLCertificatesList
+    , module Network.Google.Resource.Compute.SSLCertificates.List
+
     -- ** ComputeTargetHTTPProxiesDelete
     , module Network.Google.Resource.Compute.TargetHTTPProxies.Delete
 
@@ -433,6 +463,24 @@ module Network.Google.Compute
 
     -- ** ComputeTargetHTTPProxiesSetURLMap
     , module Network.Google.Resource.Compute.TargetHTTPProxies.SetURLMap
+
+    -- ** ComputeTargetHTTPSProxiesDelete
+    , module Network.Google.Resource.Compute.TargetHTTPSProxies.Delete
+
+    -- ** ComputeTargetHTTPSProxiesGet
+    , module Network.Google.Resource.Compute.TargetHTTPSProxies.Get
+
+    -- ** ComputeTargetHTTPSProxiesInsert
+    , module Network.Google.Resource.Compute.TargetHTTPSProxies.Insert
+
+    -- ** ComputeTargetHTTPSProxiesList
+    , module Network.Google.Resource.Compute.TargetHTTPSProxies.List
+
+    -- ** ComputeTargetHTTPSProxiesSetSSLCertificates
+    , module Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLCertificates
+
+    -- ** ComputeTargetHTTPSProxiesSetURLMap
+    , module Network.Google.Resource.Compute.TargetHTTPSProxies.SetURLMap
 
     -- ** ComputeTargetInstancesAggregatedList
     , module Network.Google.Resource.Compute.TargetInstances.AggregatedList
@@ -549,6 +597,15 @@ module Network.Google.Compute
     , module Network.Google.Resource.Compute.Zones.List
 
     -- * Types
+
+    -- ** TargetHTTPSProxyList
+    , TargetHTTPSProxyList
+    , targetHTTPSProxyList
+    , thplNextPageToken
+    , thplKind
+    , thplItems
+    , thplSelfLink
+    , thplId
 
     -- ** AddressesScopedList
     , AddressesScopedList
@@ -1255,6 +1312,15 @@ module Network.Google.Compute
     -- ** TargetInstanceNATPolicy
     , TargetInstanceNATPolicy (..)
 
+    -- ** SSLCertificateList
+    , SSLCertificateList
+    , sslCertificateList
+    , sclNextPageToken
+    , sclKind
+    , sclItems
+    , sclSelfLink
+    , sclId
+
     -- ** FirewallAllowedItem
     , FirewallAllowedItem
     , firewallAllowedItem
@@ -1389,6 +1455,11 @@ module Network.Google.Compute
     -- ** TargetVPNGatewaysScopedListWarningCode
     , TargetVPNGatewaysScopedListWarningCode (..)
 
+    -- ** TargetHTTPSProxiesSetSSLCertificatesRequest
+    , TargetHTTPSProxiesSetSSLCertificatesRequest
+    , targetHTTPSProxiesSetSSLCertificatesRequest
+    , thpsscrSSLCertificates
+
     -- ** InstanceTemplate
     , InstanceTemplate
     , instanceTemplate
@@ -1433,6 +1504,18 @@ module Network.Google.Compute
     , URLMapsValidateResponse
     , urlMapsValidateResponse
     , umvrResult
+
+    -- ** SSLCertificate
+    , SSLCertificate
+    , sslCertificate
+    , scPrivateKey
+    , scKind
+    , scSelfLink
+    , scName
+    , scCreationTimestamp
+    , scId
+    , scCertificate
+    , scDescription
 
     -- ** URLMapReference
     , URLMapReference
@@ -2003,6 +2086,15 @@ module Network.Google.Compute
     , igmstprFingerprint
     , igmstprTargetPools
 
+    -- ** HTTPSHealthCheckList
+    , HTTPSHealthCheckList
+    , httpsHealthCheckList
+    , hhclNextPageToken
+    , hhclKind
+    , hhclItems
+    , hhclSelfLink
+    , hhclId
+
     -- ** OperationErrorErrorsItem
     , OperationErrorErrorsItem
     , operationErrorErrorsItem
@@ -2159,6 +2251,18 @@ module Network.Google.Compute
     , miiValue
     , miiKey
 
+    -- ** TargetHTTPSProxy
+    , TargetHTTPSProxy
+    , targetHTTPSProxy
+    , thpURLMap
+    , thpSSLCertificates
+    , thpKind
+    , thpSelfLink
+    , thpName
+    , thpCreationTimestamp
+    , thpId
+    , thpDescription
+
     -- ** TargetVPNGatewaysScopedList
     , TargetVPNGatewaysScopedList
     , targetVPNGatewaysScopedList
@@ -2220,6 +2324,23 @@ module Network.Google.Compute
     , instanceGroupsScopedList
     , igslWarning
     , igslInstanceGroups
+
+    -- ** HTTPSHealthCheck
+    , HTTPSHealthCheck
+    , httpsHealthCheck
+    , hhcHealthyThreshold
+    , hhcKind
+    , hhcRequestPath
+    , hhcSelfLink
+    , hhcCheckIntervalSec
+    , hhcName
+    , hhcCreationTimestamp
+    , hhcId
+    , hhcHost
+    , hhcTimeoutSec
+    , hhcDescription
+    , hhcUnhealthyThreshold
+    , hhcPort
 
     -- ** ImageRawDiskContainerType
     , ImageRawDiskContainerType (..)
@@ -2351,6 +2472,12 @@ import           Network.Google.Resource.Compute.HTTPHealthChecks.Insert
 import           Network.Google.Resource.Compute.HTTPHealthChecks.List
 import           Network.Google.Resource.Compute.HTTPHealthChecks.Patch
 import           Network.Google.Resource.Compute.HTTPHealthChecks.Update
+import           Network.Google.Resource.Compute.HTTPSHealthChecks.Delete
+import           Network.Google.Resource.Compute.HTTPSHealthChecks.Get
+import           Network.Google.Resource.Compute.HTTPSHealthChecks.Insert
+import           Network.Google.Resource.Compute.HTTPSHealthChecks.List
+import           Network.Google.Resource.Compute.HTTPSHealthChecks.Patch
+import           Network.Google.Resource.Compute.HTTPSHealthChecks.Update
 import           Network.Google.Resource.Compute.Images.Delete
 import           Network.Google.Resource.Compute.Images.Deprecate
 import           Network.Google.Resource.Compute.Images.Get
@@ -2423,11 +2550,21 @@ import           Network.Google.Resource.Compute.Routes.List
 import           Network.Google.Resource.Compute.Snapshots.Delete
 import           Network.Google.Resource.Compute.Snapshots.Get
 import           Network.Google.Resource.Compute.Snapshots.List
+import           Network.Google.Resource.Compute.SSLCertificates.Delete
+import           Network.Google.Resource.Compute.SSLCertificates.Get
+import           Network.Google.Resource.Compute.SSLCertificates.Insert
+import           Network.Google.Resource.Compute.SSLCertificates.List
 import           Network.Google.Resource.Compute.TargetHTTPProxies.Delete
 import           Network.Google.Resource.Compute.TargetHTTPProxies.Get
 import           Network.Google.Resource.Compute.TargetHTTPProxies.Insert
 import           Network.Google.Resource.Compute.TargetHTTPProxies.List
 import           Network.Google.Resource.Compute.TargetHTTPProxies.SetURLMap
+import           Network.Google.Resource.Compute.TargetHTTPSProxies.Delete
+import           Network.Google.Resource.Compute.TargetHTTPSProxies.Get
+import           Network.Google.Resource.Compute.TargetHTTPSProxies.Insert
+import           Network.Google.Resource.Compute.TargetHTTPSProxies.List
+import           Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLCertificates
+import           Network.Google.Resource.Compute.TargetHTTPSProxies.SetURLMap
 import           Network.Google.Resource.Compute.TargetInstances.AggregatedList
 import           Network.Google.Resource.Compute.TargetInstances.Delete
 import           Network.Google.Resource.Compute.TargetInstances.Get
@@ -2497,6 +2634,10 @@ type ComputeAPI =
        :<|> TargetVPNGatewaysListResource
        :<|> TargetVPNGatewaysGetResource
        :<|> TargetVPNGatewaysDeleteResource
+       :<|> SSLCertificatesInsertResource
+       :<|> SSLCertificatesListResource
+       :<|> SSLCertificatesGetResource
+       :<|> SSLCertificatesDeleteResource
        :<|> ZonesListResource
        :<|> ZonesGetResource
        :<|> GlobalForwardingRulesInsertResource
@@ -2554,6 +2695,12 @@ type ComputeAPI =
        :<|> SnapshotsListResource
        :<|> SnapshotsGetResource
        :<|> SnapshotsDeleteResource
+       :<|> HTTPSHealthChecksInsertResource
+       :<|> HTTPSHealthChecksListResource
+       :<|> HTTPSHealthChecksPatchResource
+       :<|> HTTPSHealthChecksGetResource
+       :<|> HTTPSHealthChecksDeleteResource
+       :<|> HTTPSHealthChecksUpdateResource
        :<|> InstancesAddAccessConfigResource
        :<|> InstancesAggregatedListResource
        :<|> InstancesInsertResource
@@ -2601,6 +2748,12 @@ type ComputeAPI =
        :<|> ZoneOperationsListResource
        :<|> ZoneOperationsGetResource
        :<|> ZoneOperationsDeleteResource
+       :<|> TargetHTTPSProxiesInsertResource
+       :<|> TargetHTTPSProxiesListResource
+       :<|> TargetHTTPSProxiesSetURLMapResource
+       :<|> TargetHTTPSProxiesSetSSLCertificatesResource
+       :<|> TargetHTTPSProxiesGetResource
+       :<|> TargetHTTPSProxiesDeleteResource
        :<|> TargetInstancesAggregatedListResource
        :<|> TargetInstancesInsertResource
        :<|> TargetInstancesListResource

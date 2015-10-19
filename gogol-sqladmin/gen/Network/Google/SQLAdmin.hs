@@ -65,6 +65,9 @@ module Network.Google.SQLAdmin
     -- ** SQLInstancesExport
     , module Network.Google.Resource.SQL.Instances.Export
 
+    -- ** SQLInstancesFailover
+    , module Network.Google.Resource.SQL.Instances.Failover
+
     -- ** SQLInstancesGet
     , module Network.Google.Resource.SQL.Instances.Get
 
@@ -210,6 +213,7 @@ module Network.Google.SQLAdmin
     , sReplicationType
     , sActivationPolicy
     , sSettingsVersion
+    , sDataDiskSizeGb
     , sAuthorizedGaeApplications
     , sKind
     , sPricingPlan
@@ -362,6 +366,11 @@ module Network.Google.SQLAdmin
     , fType
     , fMinValue
 
+    -- ** InstancesFailoverRequest
+    , InstancesFailoverRequest
+    , instancesFailoverRequest
+    , ifrFailoverContext
+
     -- ** BackupRun
     , BackupRun
     , backupRun
@@ -447,8 +456,15 @@ module Network.Google.SQLAdmin
     -- ** ReplicaConfiguration
     , ReplicaConfiguration
     , replicaConfiguration
+    , rcFailoverTarget
     , rcKind
     , rcMysqlReplicaConfiguration
+
+    -- ** FailoverContext
+    , FailoverContext
+    , failoverContext
+    , fcSettingsVersion
+    , fcKind
 
     -- ** SSLCertsInsertResponse
     , SSLCertsInsertResponse
@@ -518,6 +534,7 @@ import           Network.Google.Resource.SQL.Flags.List
 import           Network.Google.Resource.SQL.Instances.Clone
 import           Network.Google.Resource.SQL.Instances.Delete
 import           Network.Google.Resource.SQL.Instances.Export
+import           Network.Google.Resource.SQL.Instances.Failover
 import           Network.Google.Resource.SQL.Instances.Get
 import           Network.Google.Resource.SQL.Instances.Import
 import           Network.Google.Resource.SQL.Instances.Insert
@@ -571,6 +588,7 @@ type SQLAdminAPI =
        :<|> InstancesPatchResource
        :<|> InstancesGetResource
        :<|> InstancesRestoreBackupResource
+       :<|> InstancesFailoverResource
        :<|> InstancesRestartResource
        :<|> InstancesImportResource
        :<|> InstancesStopReplicaResource

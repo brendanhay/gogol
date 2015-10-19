@@ -22,9 +22,8 @@
 --
 -- | Creates an alias for a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
--- to create the alias or for [general user permission errors][User
--- Permission Errors]. * \`NOT_FOUND\` if the course does not exist. *
--- \`ALREADY_EXISTS\` if the alias already exists.
+-- to create the alias or for access errors. * \`NOT_FOUND\` if the course
+-- does not exist. * \`ALREADY_EXISTS\` if the alias already exists.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesAliasesCreate@.
 module Network.Google.Resource.Classroom.Courses.Aliases.Create
@@ -71,9 +70,8 @@ type CoursesAliasesCreateResource =
 
 -- | Creates an alias for a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
--- to create the alias or for [general user permission errors][User
--- Permission Errors]. * \`NOT_FOUND\` if the course does not exist. *
--- \`ALREADY_EXISTS\` if the alias already exists.
+-- to create the alias or for access errors. * \`NOT_FOUND\` if the course
+-- does not exist. * \`ALREADY_EXISTS\` if the alias already exists.
 --
 -- /See:/ 'coursesAliasesCreate'' smart constructor.
 data CoursesAliasesCreate' = CoursesAliasesCreate'
@@ -141,8 +139,7 @@ cacPp :: Lens' CoursesAliasesCreate' Bool
 cacPp = lens _cacPp (\ s a -> s{_cacPp = a})
 
 -- | Identifier of the course to alias. This identifier can be either the
--- Classroom-assigned identifier or an
--- [alias][google.classroom.v1.CourseAlias].
+-- Classroom-assigned identifier or an alias.
 cacCourseId :: Lens' CoursesAliasesCreate' Text
 cacCourseId
   = lens _cacCourseId (\ s a -> s{_cacCourseId = a})

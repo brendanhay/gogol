@@ -22,8 +22,11 @@
 --
 -- | Resizes the managed instance group. If you increase the size, the group
 -- creates new instances using the current instance template. If you
--- decrease the size, the group removes instances in the order that is
--- outlined in Resizing a managed instance group.
+-- decrease the size, the group deletes instances. The resize operation is
+-- marked DONE when the resize actions are scheduled even if the group has
+-- not yet added or deleted any instances. You must separately verify the
+-- status of the creating or deleting actions with the listmanagedinstances
+-- method.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersResize@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.Resize
@@ -59,8 +62,11 @@ type InstanceGroupManagersResizeResource =
 
 -- | Resizes the managed instance group. If you increase the size, the group
 -- creates new instances using the current instance template. If you
--- decrease the size, the group removes instances in the order that is
--- outlined in Resizing a managed instance group.
+-- decrease the size, the group deletes instances. The resize operation is
+-- marked DONE when the resize actions are scheduled even if the group has
+-- not yet added or deleted any instances. You must separately verify the
+-- status of the creating or deleting actions with the listmanagedinstances
+-- method.
 --
 -- /See:/ 'instanceGroupManagersResize'' smart constructor.
 data InstanceGroupManagersResize' = InstanceGroupManagersResize'
@@ -107,13 +113,13 @@ igmrProject
 igmrSize :: Lens' InstanceGroupManagersResize' Int32
 igmrSize = lens _igmrSize (\ s a -> s{_igmrSize = a})
 
--- | The name of the instance group manager.
+-- | The name of the managed instance group.
 igmrInstanceGroupManager :: Lens' InstanceGroupManagersResize' Text
 igmrInstanceGroupManager
   = lens _igmrInstanceGroupManager
       (\ s a -> s{_igmrInstanceGroupManager = a})
 
--- | The URL of the zone where the managed instance group is located.
+-- | The name of the zone where the managed instance group is located.
 igmrZone :: Lens' InstanceGroupManagersResize' Text
 igmrZone = lens _igmrZone (\ s a -> s{_igmrZone = a})
 

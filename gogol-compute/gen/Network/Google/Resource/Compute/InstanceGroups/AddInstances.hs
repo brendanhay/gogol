@@ -20,8 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds a list of instances to an instance group. All of the instances in
--- the instance group must be in the same network.
+-- | Adds a list of instances to the specified instance group. All of the
+-- instances in the instance group must be in the same network\/subnetwork.
+-- TODO: Change to comment to state \"if IG is load balanced.\"
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsAddInstances@.
 module Network.Google.Resource.Compute.InstanceGroups.AddInstances
@@ -56,8 +57,9 @@ type InstanceGroupsAddInstancesResource =
                    ReqBody '[JSON] InstanceGroupsAddInstancesRequest :>
                      Post '[JSON] Operation
 
--- | Adds a list of instances to an instance group. All of the instances in
--- the instance group must be in the same network.
+-- | Adds a list of instances to the specified instance group. All of the
+-- instances in the instance group must be in the same network\/subnetwork.
+-- TODO: Change to comment to state \"if IG is load balanced.\"
 --
 -- /See:/ 'instanceGroupsAddInstances'' smart constructor.
 data InstanceGroupsAddInstances' = InstanceGroupsAddInstances'
@@ -97,7 +99,7 @@ igaiProject :: Lens' InstanceGroupsAddInstances' Text
 igaiProject
   = lens _igaiProject (\ s a -> s{_igaiProject = a})
 
--- | The URL of the zone where the instance group is located.
+-- | The name of the zone where the instance group is located.
 igaiZone :: Lens' InstanceGroupsAddInstances' Text
 igaiZone = lens _igaiZone (\ s a -> s{_igaiZone = a})
 

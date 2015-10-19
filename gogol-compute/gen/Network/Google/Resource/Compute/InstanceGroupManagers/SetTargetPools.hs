@@ -20,9 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Modifies the target pools to which all new instances in this group are
--- assigned. The target pools for existing instances in the group do not
--- change unless you recreate them.
+-- | Modifies the target pools to which all instances in this managed
+-- instance group are assigned. The target pools automatically apply to all
+-- of the instances in the managed instance group. This operation is marked
+-- DONE when you make the request even if the instances have not yet been
+-- added to their target pools. The change might take some time to apply to
+-- all of the instances in the group depending on the size of the group.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersSetTargetPools@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.SetTargetPools
@@ -58,9 +61,12 @@ type InstanceGroupManagersSetTargetPoolsResource =
                      InstanceGroupManagersSetTargetPoolsRequest
                      :> Post '[JSON] Operation
 
--- | Modifies the target pools to which all new instances in this group are
--- assigned. The target pools for existing instances in the group do not
--- change unless you recreate them.
+-- | Modifies the target pools to which all instances in this managed
+-- instance group are assigned. The target pools automatically apply to all
+-- of the instances in the managed instance group. This operation is marked
+-- DONE when you make the request even if the instances have not yet been
+-- added to their target pools. The change might take some time to apply to
+-- all of the instances in the group depending on the size of the group.
 --
 -- /See:/ 'instanceGroupManagersSetTargetPools'' smart constructor.
 data InstanceGroupManagersSetTargetPools' = InstanceGroupManagersSetTargetPools'
@@ -101,13 +107,13 @@ igmstpProject
   = lens _igmstpProject
       (\ s a -> s{_igmstpProject = a})
 
--- | The name of the instance group manager.
+-- | The name of the managed instance group.
 igmstpInstanceGroupManager :: Lens' InstanceGroupManagersSetTargetPools' Text
 igmstpInstanceGroupManager
   = lens _igmstpInstanceGroupManager
       (\ s a -> s{_igmstpInstanceGroupManager = a})
 
--- | The URL of the zone where the managed instance group is located.
+-- | The name of the zone where the managed instance group is located.
 igmstpZone :: Lens' InstanceGroupManagersSetTargetPools' Text
 igmstpZone
   = lens _igmstpZone (\ s a -> s{_igmstpZone = a})

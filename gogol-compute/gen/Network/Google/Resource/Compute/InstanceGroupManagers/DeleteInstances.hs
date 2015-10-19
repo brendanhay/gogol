@@ -20,10 +20,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the specified instances. The instances are deleted and removed
--- from the instance group and any target pools where they are a member.
--- The managed instance group automatically reduces its targetSize value by
--- the number of instances that you delete.
+-- | Schedules a group action to delete the specified instances in the
+-- managed instance group. The instances are also removed from any target
+-- pools of which they were a member. This method reduces the targetSize of
+-- the managed instance group by the number of instances that you delete.
+-- This operation is marked as DONE when the action is scheduled even if
+-- the instances are still being deleted. You must separately verify the
+-- status of the deleting action with the listmanagedinstances method.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersDeleteInstances@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.DeleteInstances
@@ -59,10 +62,13 @@ type InstanceGroupManagersDeleteInstancesResource =
                      InstanceGroupManagersDeleteInstancesRequest
                      :> Post '[JSON] Operation
 
--- | Deletes the specified instances. The instances are deleted and removed
--- from the instance group and any target pools where they are a member.
--- The managed instance group automatically reduces its targetSize value by
--- the number of instances that you delete.
+-- | Schedules a group action to delete the specified instances in the
+-- managed instance group. The instances are also removed from any target
+-- pools of which they were a member. This method reduces the targetSize of
+-- the managed instance group by the number of instances that you delete.
+-- This operation is marked as DONE when the action is scheduled even if
+-- the instances are still being deleted. You must separately verify the
+-- status of the deleting action with the listmanagedinstances method.
 --
 -- /See:/ 'instanceGroupManagersDeleteInstances'' smart constructor.
 data InstanceGroupManagersDeleteInstances' = InstanceGroupManagersDeleteInstances'
@@ -102,13 +108,13 @@ igmdiProject :: Lens' InstanceGroupManagersDeleteInstances' Text
 igmdiProject
   = lens _igmdiProject (\ s a -> s{_igmdiProject = a})
 
--- | The name of the instance group manager.
+-- | The name of the managed instance group.
 igmdiInstanceGroupManager :: Lens' InstanceGroupManagersDeleteInstances' Text
 igmdiInstanceGroupManager
   = lens _igmdiInstanceGroupManager
       (\ s a -> s{_igmdiInstanceGroupManager = a})
 
--- | The URL of the zone where the managed instance group is located.
+-- | The name of the zone where the managed instance group is located.
 igmdiZone :: Lens' InstanceGroupManagersDeleteInstances' Text
 igmdiZone
   = lens _igmdiZone (\ s a -> s{_igmdiZone = a})

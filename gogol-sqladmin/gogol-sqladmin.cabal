@@ -46,6 +46,7 @@ library
         , Network.Google.Resource.SQL.Instances.Clone
         , Network.Google.Resource.SQL.Instances.Delete
         , Network.Google.Resource.SQL.Instances.Export
+        , Network.Google.Resource.SQL.Instances.Failover
         , Network.Google.Resource.SQL.Instances.Get
         , Network.Google.Resource.SQL.Instances.Import
         , Network.Google.Resource.SQL.Instances.Insert

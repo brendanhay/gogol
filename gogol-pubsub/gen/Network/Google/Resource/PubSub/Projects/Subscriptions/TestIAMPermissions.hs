@@ -156,7 +156,8 @@ pstipBearerToken
       (\ s a -> s{_pstipBearerToken = a})
 
 -- | REQUIRED: The resource for which policy detail is being requested.
--- Resource is usually specified as a path, such as, projects\/{project}.
+-- \`resource\` is usually specified as a path, such as,
+-- \`projects\/{project}\`.
 pstipResource :: Lens' ProjectsSubscriptionsTestIAMPermissions' Text
 pstipResource
   = lens _pstipResource

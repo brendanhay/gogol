@@ -134,6 +134,91 @@ instance ToJSON CommentPlusoners where
           = object
               (catMaybes [("totalItems" .=) <$> _cpTotalItems])
 
+-- | Actor info specific to particular clients.
+--
+-- /See:/ 'commentActorClientSpecificActorInfo' smart constructor.
+newtype CommentActorClientSpecificActorInfo = CommentActorClientSpecificActorInfo
+    { _cacsaiYouTubeActorInfo :: Maybe CommentActorClientSpecificActorInfoYouTubeActorInfo
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommentActorClientSpecificActorInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cacsaiYouTubeActorInfo'
+commentActorClientSpecificActorInfo
+    :: CommentActorClientSpecificActorInfo
+commentActorClientSpecificActorInfo =
+    CommentActorClientSpecificActorInfo
+    { _cacsaiYouTubeActorInfo = Nothing
+    }
+
+-- | Actor info specific to YouTube clients.
+cacsaiYouTubeActorInfo :: Lens' CommentActorClientSpecificActorInfo (Maybe CommentActorClientSpecificActorInfoYouTubeActorInfo)
+cacsaiYouTubeActorInfo
+  = lens _cacsaiYouTubeActorInfo
+      (\ s a -> s{_cacsaiYouTubeActorInfo = a})
+
+instance FromJSON CommentActorClientSpecificActorInfo
+         where
+        parseJSON
+          = withObject "CommentActorClientSpecificActorInfo"
+              (\ o ->
+                 CommentActorClientSpecificActorInfo <$>
+                   (o .:? "youtubeActorInfo"))
+
+instance ToJSON CommentActorClientSpecificActorInfo
+         where
+        toJSON CommentActorClientSpecificActorInfo{..}
+          = object
+              (catMaybes
+                 [("youtubeActorInfo" .=) <$>
+                    _cacsaiYouTubeActorInfo])
+
+-- | Actor info specific to YouTube clients.
+--
+-- /See:/ 'activityObjectActorClientSpecificActorInfoYouTubeActorInfo' smart constructor.
+newtype ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo = ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+    { _aoacsaiytaiChannelId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aoacsaiytaiChannelId'
+activityObjectActorClientSpecificActorInfoYouTubeActorInfo
+    :: ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+activityObjectActorClientSpecificActorInfoYouTubeActorInfo =
+    ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+    { _aoacsaiytaiChannelId = Nothing
+    }
+
+-- | ID of the YouTube channel owned by the Actor.
+aoacsaiytaiChannelId :: Lens' ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo (Maybe Text)
+aoacsaiytaiChannelId
+  = lens _aoacsaiytaiChannelId
+      (\ s a -> s{_aoacsaiytaiChannelId = a})
+
+instance FromJSON
+         ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+         where
+        parseJSON
+          = withObject
+              "ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo"
+              (\ o ->
+                 ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+                   <$> (o .:? "channelId"))
+
+instance ToJSON
+         ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+         where
+        toJSON
+          ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo{..}
+          = object
+              (catMaybes
+                 [("channelId" .=) <$> _aoacsaiytaiChannelId])
+
 -- | People who +1\'d this activity.
 --
 -- /See:/ 'activityObjectPlusoners' smart constructor.
@@ -433,6 +518,47 @@ instance ToJSON PersonPlacesLivedItem where
               (catMaybes
                  [("value" .=) <$> _ppliValue,
                   ("primary" .=) <$> _ppliPrimary])
+
+-- | Actor info specific to particular clients.
+--
+-- /See:/ 'activityActorClientSpecificActorInfo' smart constructor.
+newtype ActivityActorClientSpecificActorInfo = ActivityActorClientSpecificActorInfo
+    { _aacsaiYouTubeActorInfo :: Maybe ActivityActorClientSpecificActorInfoYouTubeActorInfo
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityActorClientSpecificActorInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aacsaiYouTubeActorInfo'
+activityActorClientSpecificActorInfo
+    :: ActivityActorClientSpecificActorInfo
+activityActorClientSpecificActorInfo =
+    ActivityActorClientSpecificActorInfo
+    { _aacsaiYouTubeActorInfo = Nothing
+    }
+
+-- | Actor info specific to YouTube clients.
+aacsaiYouTubeActorInfo :: Lens' ActivityActorClientSpecificActorInfo (Maybe ActivityActorClientSpecificActorInfoYouTubeActorInfo)
+aacsaiYouTubeActorInfo
+  = lens _aacsaiYouTubeActorInfo
+      (\ s a -> s{_aacsaiYouTubeActorInfo = a})
+
+instance FromJSON
+         ActivityActorClientSpecificActorInfo where
+        parseJSON
+          = withObject "ActivityActorClientSpecificActorInfo"
+              (\ o ->
+                 ActivityActorClientSpecificActorInfo <$>
+                   (o .:? "youtubeActorInfo"))
+
+instance ToJSON ActivityActorClientSpecificActorInfo
+         where
+        toJSON ActivityActorClientSpecificActorInfo{..}
+          = object
+              (catMaybes
+                 [("youtubeActorInfo" .=) <$>
+                    _aacsaiYouTubeActorInfo])
 
 --
 -- /See:/ 'person' smart constructor.
@@ -878,16 +1004,19 @@ instance ToJSON ActivityObjectAttachmentsItemImage
 --
 -- /See:/ 'commentActor' smart constructor.
 data CommentActor = CommentActor
-    { _caImage        :: !(Maybe CommentActorImage)
-    , _caURL          :: !(Maybe Text)
-    , _caDisplayName  :: !(Maybe Text)
-    , _caId           :: !(Maybe Text)
-    , _caVerification :: !(Maybe CommentActorVerification)
+    { _caClientSpecificActorInfo :: !(Maybe CommentActorClientSpecificActorInfo)
+    , _caImage                   :: !(Maybe CommentActorImage)
+    , _caURL                     :: !(Maybe Text)
+    , _caDisplayName             :: !(Maybe Text)
+    , _caId                      :: !(Maybe Text)
+    , _caVerification            :: !(Maybe CommentActorVerification)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentActor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'caClientSpecificActorInfo'
 --
 -- * 'caImage'
 --
@@ -902,12 +1031,19 @@ commentActor
     :: CommentActor
 commentActor =
     CommentActor
-    { _caImage = Nothing
+    { _caClientSpecificActorInfo = Nothing
+    , _caImage = Nothing
     , _caURL = Nothing
     , _caDisplayName = Nothing
     , _caId = Nothing
     , _caVerification = Nothing
     }
+
+-- | Actor info specific to particular clients.
+caClientSpecificActorInfo :: Lens' CommentActor (Maybe CommentActorClientSpecificActorInfo)
+caClientSpecificActorInfo
+  = lens _caClientSpecificActorInfo
+      (\ s a -> s{_caClientSpecificActorInfo = a})
 
 -- | The image representation of this actor.
 caImage :: Lens' CommentActor (Maybe CommentActorImage)
@@ -938,8 +1074,9 @@ instance FromJSON CommentActor where
           = withObject "CommentActor"
               (\ o ->
                  CommentActor <$>
-                   (o .:? "image") <*> (o .:? "url") <*>
-                     (o .:? "displayName")
+                   (o .:? "clientSpecificActorInfo") <*> (o .:? "image")
+                     <*> (o .:? "url")
+                     <*> (o .:? "displayName")
                      <*> (o .:? "id")
                      <*> (o .:? "verification"))
 
@@ -947,7 +1084,9 @@ instance ToJSON CommentActor where
         toJSON CommentActor{..}
           = object
               (catMaybes
-                 [("image" .=) <$> _caImage, ("url" .=) <$> _caURL,
+                 [("clientSpecificActorInfo" .=) <$>
+                    _caClientSpecificActorInfo,
+                  ("image" .=) <$> _caImage, ("url" .=) <$> _caURL,
                   ("displayName" .=) <$> _caDisplayName,
                   ("id" .=) <$> _caId,
                   ("verification" .=) <$> _caVerification])
@@ -1201,16 +1340,19 @@ instance ToJSON ActivityObject where
 --
 -- /See:/ 'activityObjectActor' smart constructor.
 data ActivityObjectActor = ActivityObjectActor
-    { _aoaImage        :: !(Maybe ActivityObjectActorImage)
-    , _aoaURL          :: !(Maybe Text)
-    , _aoaDisplayName  :: !(Maybe Text)
-    , _aoaId           :: !(Maybe Text)
-    , _aoaVerification :: !(Maybe ActivityObjectActorVerification)
+    { _aoaClientSpecificActorInfo :: !(Maybe ActivityObjectActorClientSpecificActorInfo)
+    , _aoaImage                   :: !(Maybe ActivityObjectActorImage)
+    , _aoaURL                     :: !(Maybe Text)
+    , _aoaDisplayName             :: !(Maybe Text)
+    , _aoaId                      :: !(Maybe Text)
+    , _aoaVerification            :: !(Maybe ActivityObjectActorVerification)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivityObjectActor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aoaClientSpecificActorInfo'
 --
 -- * 'aoaImage'
 --
@@ -1225,12 +1367,19 @@ activityObjectActor
     :: ActivityObjectActor
 activityObjectActor =
     ActivityObjectActor
-    { _aoaImage = Nothing
+    { _aoaClientSpecificActorInfo = Nothing
+    , _aoaImage = Nothing
     , _aoaURL = Nothing
     , _aoaDisplayName = Nothing
     , _aoaId = Nothing
     , _aoaVerification = Nothing
     }
+
+-- | Actor info specific to particular clients.
+aoaClientSpecificActorInfo :: Lens' ActivityObjectActor (Maybe ActivityObjectActorClientSpecificActorInfo)
+aoaClientSpecificActorInfo
+  = lens _aoaClientSpecificActorInfo
+      (\ s a -> s{_aoaClientSpecificActorInfo = a})
 
 -- | The image representation of the original actor.
 aoaImage :: Lens' ActivityObjectActor (Maybe ActivityObjectActorImage)
@@ -1261,8 +1410,9 @@ instance FromJSON ActivityObjectActor where
           = withObject "ActivityObjectActor"
               (\ o ->
                  ActivityObjectActor <$>
-                   (o .:? "image") <*> (o .:? "url") <*>
-                     (o .:? "displayName")
+                   (o .:? "clientSpecificActorInfo") <*> (o .:? "image")
+                     <*> (o .:? "url")
+                     <*> (o .:? "displayName")
                      <*> (o .:? "id")
                      <*> (o .:? "verification"))
 
@@ -1270,7 +1420,9 @@ instance ToJSON ActivityObjectActor where
         toJSON ActivityObjectActor{..}
           = object
               (catMaybes
-                 [("image" .=) <$> _aoaImage, ("url" .=) <$> _aoaURL,
+                 [("clientSpecificActorInfo" .=) <$>
+                    _aoaClientSpecificActorInfo,
+                  ("image" .=) <$> _aoaImage, ("url" .=) <$> _aoaURL,
                   ("displayName" .=) <$> _aoaDisplayName,
                   ("id" .=) <$> _aoaId,
                   ("verification" .=) <$> _aoaVerification])
@@ -1623,6 +1775,50 @@ instance FromJSON ActivityObjectActorImage where
 instance ToJSON ActivityObjectActorImage where
         toJSON ActivityObjectActorImage{..}
           = object (catMaybes [("url" .=) <$> _aoaiURL])
+
+-- | Actor info specific to YouTube clients.
+--
+-- /See:/ 'commentActorClientSpecificActorInfoYouTubeActorInfo' smart constructor.
+newtype CommentActorClientSpecificActorInfoYouTubeActorInfo = CommentActorClientSpecificActorInfoYouTubeActorInfo
+    { _cacsaiytaiChannelId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CommentActorClientSpecificActorInfoYouTubeActorInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cacsaiytaiChannelId'
+commentActorClientSpecificActorInfoYouTubeActorInfo
+    :: CommentActorClientSpecificActorInfoYouTubeActorInfo
+commentActorClientSpecificActorInfoYouTubeActorInfo =
+    CommentActorClientSpecificActorInfoYouTubeActorInfo
+    { _cacsaiytaiChannelId = Nothing
+    }
+
+-- | ID of the YouTube channel owned by the Actor.
+cacsaiytaiChannelId :: Lens' CommentActorClientSpecificActorInfoYouTubeActorInfo (Maybe Text)
+cacsaiytaiChannelId
+  = lens _cacsaiytaiChannelId
+      (\ s a -> s{_cacsaiytaiChannelId = a})
+
+instance FromJSON
+         CommentActorClientSpecificActorInfoYouTubeActorInfo
+         where
+        parseJSON
+          = withObject
+              "CommentActorClientSpecificActorInfoYouTubeActorInfo"
+              (\ o ->
+                 CommentActorClientSpecificActorInfoYouTubeActorInfo
+                   <$> (o .:? "channelId"))
+
+instance ToJSON
+         CommentActorClientSpecificActorInfoYouTubeActorInfo
+         where
+        toJSON
+          CommentActorClientSpecificActorInfoYouTubeActorInfo{..}
+          = object
+              (catMaybes
+                 [("channelId" .=) <$> _cacsaiytaiChannelId])
 
 -- | Comments in reply to this activity.
 --
@@ -2388,6 +2584,48 @@ instance ToJSON ItemScope where
                   ("description" .=) <$> _isDescription,
                   ("birthDate" .=) <$> _isBirthDate])
 
+-- | Actor info specific to particular clients.
+--
+-- /See:/ 'activityObjectActorClientSpecificActorInfo' smart constructor.
+newtype ActivityObjectActorClientSpecificActorInfo = ActivityObjectActorClientSpecificActorInfo
+    { _aoacsaiYouTubeActorInfo :: Maybe ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityObjectActorClientSpecificActorInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aoacsaiYouTubeActorInfo'
+activityObjectActorClientSpecificActorInfo
+    :: ActivityObjectActorClientSpecificActorInfo
+activityObjectActorClientSpecificActorInfo =
+    ActivityObjectActorClientSpecificActorInfo
+    { _aoacsaiYouTubeActorInfo = Nothing
+    }
+
+-- | Actor info specific to YouTube clients.
+aoacsaiYouTubeActorInfo :: Lens' ActivityObjectActorClientSpecificActorInfo (Maybe ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo)
+aoacsaiYouTubeActorInfo
+  = lens _aoacsaiYouTubeActorInfo
+      (\ s a -> s{_aoacsaiYouTubeActorInfo = a})
+
+instance FromJSON
+         ActivityObjectActorClientSpecificActorInfo where
+        parseJSON
+          = withObject
+              "ActivityObjectActorClientSpecificActorInfo"
+              (\ o ->
+                 ActivityObjectActorClientSpecificActorInfo <$>
+                   (o .:? "youtubeActorInfo"))
+
+instance ToJSON
+         ActivityObjectActorClientSpecificActorInfo where
+        toJSON ActivityObjectActorClientSpecificActorInfo{..}
+          = object
+              (catMaybes
+                 [("youtubeActorInfo" .=) <$>
+                    _aoacsaiYouTubeActorInfo])
+
 --
 -- /See:/ 'activityObjectAttachmentsItem' smart constructor.
 data ActivityObjectAttachmentsItem = ActivityObjectAttachmentsItem
@@ -2818,6 +3056,50 @@ instance ToJSON PersonImage where
               (catMaybes
                  [("url" .=) <$> _piURL,
                   ("isDefault" .=) <$> _piIsDefault])
+
+-- | Actor info specific to YouTube clients.
+--
+-- /See:/ 'activityActorClientSpecificActorInfoYouTubeActorInfo' smart constructor.
+newtype ActivityActorClientSpecificActorInfoYouTubeActorInfo = ActivityActorClientSpecificActorInfoYouTubeActorInfo
+    { _aacsaiytaiChannelId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ActivityActorClientSpecificActorInfoYouTubeActorInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aacsaiytaiChannelId'
+activityActorClientSpecificActorInfoYouTubeActorInfo
+    :: ActivityActorClientSpecificActorInfoYouTubeActorInfo
+activityActorClientSpecificActorInfoYouTubeActorInfo =
+    ActivityActorClientSpecificActorInfoYouTubeActorInfo
+    { _aacsaiytaiChannelId = Nothing
+    }
+
+-- | ID of the YouTube channel owned by the Actor.
+aacsaiytaiChannelId :: Lens' ActivityActorClientSpecificActorInfoYouTubeActorInfo (Maybe Text)
+aacsaiytaiChannelId
+  = lens _aacsaiytaiChannelId
+      (\ s a -> s{_aacsaiytaiChannelId = a})
+
+instance FromJSON
+         ActivityActorClientSpecificActorInfoYouTubeActorInfo
+         where
+        parseJSON
+          = withObject
+              "ActivityActorClientSpecificActorInfoYouTubeActorInfo"
+              (\ o ->
+                 ActivityActorClientSpecificActorInfoYouTubeActorInfo
+                   <$> (o .:? "channelId"))
+
+instance ToJSON
+         ActivityActorClientSpecificActorInfoYouTubeActorInfo
+         where
+        toJSON
+          ActivityActorClientSpecificActorInfoYouTubeActorInfo{..}
+          = object
+              (catMaybes
+                 [("channelId" .=) <$> _aacsaiytaiChannelId])
 
 --
 -- /See:/ 'plusACLentryResource' smart constructor.
@@ -3891,17 +4173,20 @@ instance ToJSON ACL where
 --
 -- /See:/ 'activityActor' smart constructor.
 data ActivityActor = ActivityActor
-    { _aaImage        :: !(Maybe ActivityActorImage)
-    , _aaURL          :: !(Maybe Text)
-    , _aaName         :: !(Maybe ActivityActorName)
-    , _aaDisplayName  :: !(Maybe Text)
-    , _aaId           :: !(Maybe Text)
-    , _aaVerification :: !(Maybe ActivityActorVerification)
+    { _aaClientSpecificActorInfo :: !(Maybe ActivityActorClientSpecificActorInfo)
+    , _aaImage                   :: !(Maybe ActivityActorImage)
+    , _aaURL                     :: !(Maybe Text)
+    , _aaName                    :: !(Maybe ActivityActorName)
+    , _aaDisplayName             :: !(Maybe Text)
+    , _aaId                      :: !(Maybe Text)
+    , _aaVerification            :: !(Maybe ActivityActorVerification)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivityActor' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aaClientSpecificActorInfo'
 --
 -- * 'aaImage'
 --
@@ -3918,13 +4203,20 @@ activityActor
     :: ActivityActor
 activityActor =
     ActivityActor
-    { _aaImage = Nothing
+    { _aaClientSpecificActorInfo = Nothing
+    , _aaImage = Nothing
     , _aaURL = Nothing
     , _aaName = Nothing
     , _aaDisplayName = Nothing
     , _aaId = Nothing
     , _aaVerification = Nothing
     }
+
+-- | Actor info specific to particular clients.
+aaClientSpecificActorInfo :: Lens' ActivityActor (Maybe ActivityActorClientSpecificActorInfo)
+aaClientSpecificActorInfo
+  = lens _aaClientSpecificActorInfo
+      (\ s a -> s{_aaClientSpecificActorInfo = a})
 
 -- | The image representation of the actor.
 aaImage :: Lens' ActivityActor (Maybe ActivityActorImage)
@@ -3959,7 +4251,9 @@ instance FromJSON ActivityActor where
           = withObject "ActivityActor"
               (\ o ->
                  ActivityActor <$>
-                   (o .:? "image") <*> (o .:? "url") <*> (o .:? "name")
+                   (o .:? "clientSpecificActorInfo") <*> (o .:? "image")
+                     <*> (o .:? "url")
+                     <*> (o .:? "name")
                      <*> (o .:? "displayName")
                      <*> (o .:? "id")
                      <*> (o .:? "verification"))
@@ -3968,7 +4262,9 @@ instance ToJSON ActivityActor where
         toJSON ActivityActor{..}
           = object
               (catMaybes
-                 [("image" .=) <$> _aaImage, ("url" .=) <$> _aaURL,
+                 [("clientSpecificActorInfo" .=) <$>
+                    _aaClientSpecificActorInfo,
+                  ("image" .=) <$> _aaImage, ("url" .=) <$> _aaURL,
                   ("name" .=) <$> _aaName,
                   ("displayName" .=) <$> _aaDisplayName,
                   ("id" .=) <$> _aaId,

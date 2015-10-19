@@ -640,6 +640,7 @@ data Settings = Settings
     { _sReplicationType             :: !(Maybe Text)
     , _sActivationPolicy            :: !(Maybe Text)
     , _sSettingsVersion             :: !(Maybe Int64)
+    , _sDataDiskSizeGb              :: !(Maybe Int64)
     , _sAuthorizedGaeApplications   :: !(Maybe [Text])
     , _sKind                        :: !Text
     , _sPricingPlan                 :: !(Maybe Text)
@@ -661,6 +662,8 @@ data Settings = Settings
 -- * 'sActivationPolicy'
 --
 -- * 'sSettingsVersion'
+--
+-- * 'sDataDiskSizeGb'
 --
 -- * 'sAuthorizedGaeApplications'
 --
@@ -688,6 +691,7 @@ settings =
     { _sReplicationType = Nothing
     , _sActivationPolicy = Nothing
     , _sSettingsVersion = Nothing
+    , _sDataDiskSizeGb = Nothing
     , _sAuthorizedGaeApplications = Nothing
     , _sKind = "sql#settings"
     , _sPricingPlan = Nothing
@@ -725,6 +729,14 @@ sSettingsVersion :: Lens' Settings (Maybe Int64)
 sSettingsVersion
   = lens _sSettingsVersion
       (\ s a -> s{_sSettingsVersion = a})
+
+-- | The size of data disk for the performance instance, specified in GB.
+-- Setting this value for non-performance instances will result in an
+-- error.
+sDataDiskSizeGb :: Lens' Settings (Maybe Int64)
+sDataDiskSizeGb
+  = lens _sDataDiskSizeGb
+      (\ s a -> s{_sDataDiskSizeGb = a})
 
 -- | The App Engine app IDs that can access this instance.
 sAuthorizedGaeApplications :: Lens' Settings [Text]
@@ -801,6 +813,7 @@ instance FromJSON Settings where
                    (o .:? "replicationType") <*>
                      (o .:? "activationPolicy")
                      <*> (o .:? "settingsVersion")
+                     <*> (o .:? "dataDiskSizeGb")
                      <*> (o .:? "authorizedGaeApplications" .!= mempty)
                      <*> (o .:? "kind" .!= "sql#settings")
                      <*> (o .:? "pricingPlan")
@@ -819,6 +832,7 @@ instance ToJSON Settings where
                  [("replicationType" .=) <$> _sReplicationType,
                   ("activationPolicy" .=) <$> _sActivationPolicy,
                   ("settingsVersion" .=) <$> _sSettingsVersion,
+                  ("dataDiskSizeGb" .=) <$> _sDataDiskSizeGb,
                   ("authorizedGaeApplications" .=) <$>
                     _sAuthorizedGaeApplications,
                   Just ("kind" .= _sKind),
@@ -2090,8 +2104,8 @@ fMaxValue
 fKind :: Lens' Flag Text
 fKind = lens _fKind (\ s a -> s{_fKind = a})
 
--- | The database version this flag applies to. Currently this can only be
--- [MYSQL_5_5].
+-- | The database version this flag applies to. Can be MYSQL_5_5, MYSQL_5_6,
+-- or both.
 fAppliesTo :: Lens' Flag [Text]
 fAppliesTo
   = lens _fAppliesTo (\ s a -> s{_fAppliesTo = a}) .
@@ -2145,6 +2159,44 @@ instance ToJSON Flag where
                   ("allowedStringValues" .=) <$> _fAllowedStringValues,
                   ("type" .=) <$> _fType,
                   ("minValue" .=) <$> _fMinValue])
+
+-- | Instance failover request.
+--
+-- /See:/ 'instancesFailoverRequest' smart constructor.
+newtype InstancesFailoverRequest = InstancesFailoverRequest
+    { _ifrFailoverContext :: Maybe FailoverContext
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstancesFailoverRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ifrFailoverContext'
+instancesFailoverRequest
+    :: InstancesFailoverRequest
+instancesFailoverRequest =
+    InstancesFailoverRequest
+    { _ifrFailoverContext = Nothing
+    }
+
+-- | Failover Context.
+ifrFailoverContext :: Lens' InstancesFailoverRequest (Maybe FailoverContext)
+ifrFailoverContext
+  = lens _ifrFailoverContext
+      (\ s a -> s{_ifrFailoverContext = a})
+
+instance FromJSON InstancesFailoverRequest where
+        parseJSON
+          = withObject "InstancesFailoverRequest"
+              (\ o ->
+                 InstancesFailoverRequest <$>
+                   (o .:? "failoverContext"))
+
+instance ToJSON InstancesFailoverRequest where
+        toJSON InstancesFailoverRequest{..}
+          = object
+              (catMaybes
+                 [("failoverContext" .=) <$> _ifrFailoverContext])
 
 -- | A database instance backup run resource.
 --
@@ -2899,13 +2951,16 @@ instance ToJSON InstancesCloneRequest where
 --
 -- /See:/ 'replicaConfiguration' smart constructor.
 data ReplicaConfiguration = ReplicaConfiguration
-    { _rcKind                      :: !Text
+    { _rcFailoverTarget            :: !(Maybe Bool)
+    , _rcKind                      :: !Text
     , _rcMysqlReplicaConfiguration :: !(Maybe MySQLReplicaConfiguration)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReplicaConfiguration' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rcFailoverTarget'
 --
 -- * 'rcKind'
 --
@@ -2914,9 +2969,20 @@ replicaConfiguration
     :: ReplicaConfiguration
 replicaConfiguration =
     ReplicaConfiguration
-    { _rcKind = "sql#replicaConfiguration"
+    { _rcFailoverTarget = Nothing
+    , _rcKind = "sql#replicaConfiguration"
     , _rcMysqlReplicaConfiguration = Nothing
     }
+
+-- | Specifies if the replica is the failover target. If the field is set to
+-- true the replica will be designated as a failover replica. In case the
+-- master instance fails, the replica instance will be promoted as the new
+-- master instance. Only one replica can be specified as failover target,
+-- and the replica has to be in different zone with the master instance.
+rcFailoverTarget :: Lens' ReplicaConfiguration (Maybe Bool)
+rcFailoverTarget
+  = lens _rcFailoverTarget
+      (\ s a -> s{_rcFailoverTarget = a})
 
 -- | This is always sql#replicaConfiguration.
 rcKind :: Lens' ReplicaConfiguration Text
@@ -2938,16 +3004,67 @@ instance FromJSON ReplicaConfiguration where
           = withObject "ReplicaConfiguration"
               (\ o ->
                  ReplicaConfiguration <$>
-                   (o .:? "kind" .!= "sql#replicaConfiguration") <*>
-                     (o .:? "mysqlReplicaConfiguration"))
+                   (o .:? "failoverTarget") <*>
+                     (o .:? "kind" .!= "sql#replicaConfiguration")
+                     <*> (o .:? "mysqlReplicaConfiguration"))
 
 instance ToJSON ReplicaConfiguration where
         toJSON ReplicaConfiguration{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _rcKind),
+                 [("failoverTarget" .=) <$> _rcFailoverTarget,
+                  Just ("kind" .= _rcKind),
                   ("mysqlReplicaConfiguration" .=) <$>
                     _rcMysqlReplicaConfiguration])
+
+-- | Database instance failover context.
+--
+-- /See:/ 'failoverContext' smart constructor.
+data FailoverContext = FailoverContext
+    { _fcSettingsVersion :: !(Maybe Int64)
+    , _fcKind            :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FailoverContext' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fcSettingsVersion'
+--
+-- * 'fcKind'
+failoverContext
+    :: FailoverContext
+failoverContext =
+    FailoverContext
+    { _fcSettingsVersion = Nothing
+    , _fcKind = "sql#failoverContext"
+    }
+
+-- | The current settings version of this instance. Request will be rejected
+-- if this version doesn\'t match the current settings version.
+fcSettingsVersion :: Lens' FailoverContext (Maybe Int64)
+fcSettingsVersion
+  = lens _fcSettingsVersion
+      (\ s a -> s{_fcSettingsVersion = a})
+
+-- | This is always sql#failoverContext.
+fcKind :: Lens' FailoverContext Text
+fcKind = lens _fcKind (\ s a -> s{_fcKind = a})
+
+instance FromJSON FailoverContext where
+        parseJSON
+          = withObject "FailoverContext"
+              (\ o ->
+                 FailoverContext <$>
+                   (o .:? "settingsVersion") <*>
+                     (o .:? "kind" .!= "sql#failoverContext"))
+
+instance ToJSON FailoverContext where
+        toJSON FailoverContext{..}
+          = object
+              (catMaybes
+                 [("settingsVersion" .=) <$> _fcSettingsVersion,
+                  Just ("kind" .= _fcKind)])
 
 -- | SslCert insert response.
 --
@@ -3319,7 +3436,7 @@ exportContextSQLExportOptions =
     , _ecsqleoTables = Nothing
     }
 
--- | Export only schema.
+-- | Export only schemas.
 ecsqleoSchemaOnly :: Lens' ExportContextSQLExportOptions (Maybe Bool)
 ecsqleoSchemaOnly
   = lens _ecsqleoSchemaOnly

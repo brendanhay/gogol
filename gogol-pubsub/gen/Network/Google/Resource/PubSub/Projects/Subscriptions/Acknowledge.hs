@@ -20,11 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Acknowledges the messages associated with the ack tokens in the
--- AcknowledgeRequest. The Pub\/Sub system can remove the relevant messages
--- from the subscription. Acknowledging a message whose ack deadline has
--- expired may succeed, but such a message may be redelivered later.
--- Acknowledging a message more than once will not result in an error.
+-- | Acknowledges the messages associated with the \`ack_ids\` in the
+-- \`AcknowledgeRequest\`. The Pub\/Sub system can remove the relevant
+-- messages from the subscription. Acknowledging a message whose ack
+-- deadline has expired may succeed, but such a message may be redelivered
+-- later. Acknowledging a message more than once will not result in an
+-- error.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsAcknowledge@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
@@ -67,11 +68,12 @@ type ProjectsSubscriptionsAcknowledgeResource =
                          ReqBody '[JSON] AcknowledgeRequest :>
                            Post '[JSON] Empty
 
--- | Acknowledges the messages associated with the ack tokens in the
--- AcknowledgeRequest. The Pub\/Sub system can remove the relevant messages
--- from the subscription. Acknowledging a message whose ack deadline has
--- expired may succeed, but such a message may be redelivered later.
--- Acknowledging a message more than once will not result in an error.
+-- | Acknowledges the messages associated with the \`ack_ids\` in the
+-- \`AcknowledgeRequest\`. The Pub\/Sub system can remove the relevant
+-- messages from the subscription. Acknowledging a message whose ack
+-- deadline has expired may succeed, but such a message may be redelivered
+-- later. Acknowledging a message more than once will not result in an
+-- error.
 --
 -- /See:/ 'projectsSubscriptionsAcknowledge'' smart constructor.
 data ProjectsSubscriptionsAcknowledge' = ProjectsSubscriptionsAcknowledge'

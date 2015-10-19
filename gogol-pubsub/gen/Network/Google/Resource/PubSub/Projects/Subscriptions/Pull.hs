@@ -21,8 +21,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- | Pulls messages from the server. Returns an empty list if there are no
--- messages available in the backlog. The server may return UNAVAILABLE if
--- there are too many concurrent pull requests pending for the given
+-- messages available in the backlog. The server may return \`UNAVAILABLE\`
+-- if there are too many concurrent pull requests pending for the given
 -- subscription.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsPull@.
@@ -67,8 +67,8 @@ type ProjectsSubscriptionsPullResource =
                            Post '[JSON] PullResponse
 
 -- | Pulls messages from the server. Returns an empty list if there are no
--- messages available in the backlog. The server may return UNAVAILABLE if
--- there are too many concurrent pull requests pending for the given
+-- messages available in the backlog. The server may return \`UNAVAILABLE\`
+-- if there are too many concurrent pull requests pending for the given
 -- subscription.
 --
 -- /See:/ 'projectsSubscriptionsPull'' smart constructor.

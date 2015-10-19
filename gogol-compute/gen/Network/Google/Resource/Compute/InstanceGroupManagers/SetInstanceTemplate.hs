@@ -102,13 +102,13 @@ igmsitProject
   = lens _igmsitProject
       (\ s a -> s{_igmsitProject = a})
 
--- | The name of the instance group manager.
+-- | The name of the managed instance group.
 igmsitInstanceGroupManager :: Lens' InstanceGroupManagersSetInstanceTemplate' Text
 igmsitInstanceGroupManager
   = lens _igmsitInstanceGroupManager
       (\ s a -> s{_igmsitInstanceGroupManager = a})
 
--- | The URL of the zone where the managed instance group is located.
+-- | The name of the zone where the managed instance group is located.
 igmsitZone :: Lens' InstanceGroupManagersSetInstanceTemplate' Text
 igmsitZone
   = lens _igmsitZone (\ s a -> s{_igmsitZone = a})

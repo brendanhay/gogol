@@ -20,11 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the topic with the given name. Returns NOT_FOUND if the topic
--- does not exist. After a topic is deleted, a new topic may be created
--- with the same name; this is an entirely new topic with none of the old
--- configuration or subscriptions. Existing subscriptions to this topic are
--- not deleted, but their \`topic\` field is set to \`_deleted-topic_\`.
+-- | Deletes the topic with the given name. Returns \`NOT_FOUND\` if the
+-- topic does not exist. After a topic is deleted, a new topic may be
+-- created with the same name; this is an entirely new topic with none of
+-- the old configuration or subscriptions. Existing subscriptions to this
+-- topic are not deleted, but their \`topic\` field is set to
+-- \`_deleted-topic_\`.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsDelete@.
 module Network.Google.Resource.PubSub.Projects.Topics.Delete
@@ -64,11 +65,12 @@ type ProjectsTopicsDeleteResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes the topic with the given name. Returns NOT_FOUND if the topic
--- does not exist. After a topic is deleted, a new topic may be created
--- with the same name; this is an entirely new topic with none of the old
--- configuration or subscriptions. Existing subscriptions to this topic are
--- not deleted, but their \`topic\` field is set to \`_deleted-topic_\`.
+-- | Deletes the topic with the given name. Returns \`NOT_FOUND\` if the
+-- topic does not exist. After a topic is deleted, a new topic may be
+-- created with the same name; this is an entirely new topic with none of
+-- the old configuration or subscriptions. Existing subscriptions to this
+-- topic are not deleted, but their \`topic\` field is set to
+-- \`_deleted-topic_\`.
 --
 -- /See:/ 'projectsTopicsDelete'' smart constructor.
 data ProjectsTopicsDelete' = ProjectsTopicsDelete'

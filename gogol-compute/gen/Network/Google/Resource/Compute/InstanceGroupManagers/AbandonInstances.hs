@@ -20,10 +20,15 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes the specified instances from the managed instance group, and
--- from any target pools where they are a member. The instances are not
--- deleted. The managed instance group automatically reduces its targetSize
--- value by the number of instances that you abandon from the group.
+-- | Schedules a group action to remove the specified instances from the
+-- managed instance group. Abandoning an instance does not delete the
+-- instance, but it does remove the instance from any target pools that are
+-- applied by the managed instance group. This method reduces the
+-- targetSize of the managed instance group by the number of instances that
+-- you abandon. This operation is marked as DONE when the action is
+-- scheduled even if the instances have not yet been removed from the
+-- group. You must separately verify the status of the abandoning action
+-- with the listmanagedinstances method.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersAbandonInstances@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
@@ -59,10 +64,15 @@ type InstanceGroupManagersAbandonInstancesResource =
                      InstanceGroupManagersAbandonInstancesRequest
                      :> Post '[JSON] Operation
 
--- | Removes the specified instances from the managed instance group, and
--- from any target pools where they are a member. The instances are not
--- deleted. The managed instance group automatically reduces its targetSize
--- value by the number of instances that you abandon from the group.
+-- | Schedules a group action to remove the specified instances from the
+-- managed instance group. Abandoning an instance does not delete the
+-- instance, but it does remove the instance from any target pools that are
+-- applied by the managed instance group. This method reduces the
+-- targetSize of the managed instance group by the number of instances that
+-- you abandon. This operation is marked as DONE when the action is
+-- scheduled even if the instances have not yet been removed from the
+-- group. You must separately verify the status of the abandoning action
+-- with the listmanagedinstances method.
 --
 -- /See:/ 'instanceGroupManagersAbandonInstances'' smart constructor.
 data InstanceGroupManagersAbandonInstances' = InstanceGroupManagersAbandonInstances'
@@ -102,13 +112,13 @@ igmaiProject :: Lens' InstanceGroupManagersAbandonInstances' Text
 igmaiProject
   = lens _igmaiProject (\ s a -> s{_igmaiProject = a})
 
--- | The name of the instance group manager.
+-- | The name of the managed instance group.
 igmaiInstanceGroupManager :: Lens' InstanceGroupManagersAbandonInstances' Text
 igmaiInstanceGroupManager
   = lens _igmaiInstanceGroupManager
       (\ s a -> s{_igmaiInstanceGroupManager = a})
 
--- | The URL of the zone where the managed instance group is located.
+-- | The name of the zone where the managed instance group is located.
 igmaiZone :: Lens' InstanceGroupManagersAbandonInstances' Text
 igmaiZone
   = lens _igmaiZone (\ s a -> s{_igmaiZone = a})

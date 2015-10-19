@@ -56,38 +56,8 @@ module Network.Google.TagManager
     -- ** TagManagerAccountsContainersList
     , module Network.Google.Resource.TagManager.Accounts.Containers.List
 
-    -- ** TagManagerAccountsContainersMacrosCreate
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Macros.Create
-
-    -- ** TagManagerAccountsContainersMacrosDelete
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Macros.Delete
-
-    -- ** TagManagerAccountsContainersMacrosGet
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Macros.Get
-
-    -- ** TagManagerAccountsContainersMacrosList
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Macros.List
-
-    -- ** TagManagerAccountsContainersMacrosUpdate
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Macros.Update
-
     -- ** TagManagerAccountsContainersMove_foldersUpdate
     , module Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
-
-    -- ** TagManagerAccountsContainersRulesCreate
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Create
-
-    -- ** TagManagerAccountsContainersRulesDelete
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Delete
-
-    -- ** TagManagerAccountsContainersRulesGet
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Get
-
-    -- ** TagManagerAccountsContainersRulesList
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Rules.List
-
-    -- ** TagManagerAccountsContainersRulesUpdate
-    , module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Update
 
     -- ** TagManagerAccountsContainersTagsCreate
     , module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
@@ -196,11 +166,6 @@ module Network.Google.TagManager
     , ListFoldersResponse
     , listFoldersResponse
     , lfrFolders
-
-    -- ** ListRulesResponse
-    , ListRulesResponse
-    , listRulesResponse
-    , lrrRules
 
     -- ** PublishContainerVersionResponse
     , PublishContainerVersionResponse
@@ -458,11 +423,6 @@ module Network.Google.TagManager
     , listTagsResponse
     , ltrTags
 
-    -- ** ListMacrosResponse
-    , ListMacrosResponse
-    , listMacrosResponse
-    , lmrMacros
-
     -- ** FolderEntities
     , FolderEntities
     , folderEntities
@@ -503,17 +463,7 @@ import           Network.Google.Resource.TagManager.Accounts.Containers.Folders.
 import           Network.Google.Resource.TagManager.Accounts.Containers.Folders.Update
 import           Network.Google.Resource.TagManager.Accounts.Containers.Get
 import           Network.Google.Resource.TagManager.Accounts.Containers.List
-import           Network.Google.Resource.TagManager.Accounts.Containers.Macros.Create
-import           Network.Google.Resource.TagManager.Accounts.Containers.Macros.Delete
-import           Network.Google.Resource.TagManager.Accounts.Containers.Macros.Get
-import           Network.Google.Resource.TagManager.Accounts.Containers.Macros.List
-import           Network.Google.Resource.TagManager.Accounts.Containers.Macros.Update
 import           Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
-import           Network.Google.Resource.TagManager.Accounts.Containers.Rules.Create
-import           Network.Google.Resource.TagManager.Accounts.Containers.Rules.Delete
-import           Network.Google.Resource.TagManager.Accounts.Containers.Rules.Get
-import           Network.Google.Resource.TagManager.Accounts.Containers.Rules.List
-import           Network.Google.Resource.TagManager.Accounts.Containers.Rules.Update
 import           Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
 import           Network.Google.Resource.TagManager.Accounts.Containers.Tags.Delete
 import           Network.Google.Resource.TagManager.Accounts.Containers.Tags.Get
@@ -554,13 +504,8 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Tag Manager API service.
 type TagManagerAPI =
-     AccountsContainersRulesListResource :<|>
-       AccountsContainersRulesGetResource
-       :<|> AccountsContainersRulesCreateResource
-       :<|> AccountsContainersRulesDeleteResource
-       :<|> AccountsContainersRulesUpdateResource
-       :<|> AccountsContainersVariablesListResource
-       :<|> AccountsContainersVariablesGetResource
+     AccountsContainersVariablesListResource :<|>
+       AccountsContainersVariablesGetResource
        :<|> AccountsContainersVariablesCreateResource
        :<|> AccountsContainersVariablesDeleteResource
        :<|> AccountsContainersVariablesUpdateResource
@@ -584,11 +529,6 @@ type TagManagerAPI =
        :<|> AccountsContainersVersionsUpdateResource
        :<|> AccountsContainersVersionsPublishResource
        :<|> AccountsContainersMoveFoldersUpdateResource
-       :<|> AccountsContainersMacrosListResource
-       :<|> AccountsContainersMacrosGetResource
-       :<|> AccountsContainersMacrosCreateResource
-       :<|> AccountsContainersMacrosDeleteResource
-       :<|> AccountsContainersMacrosUpdateResource
        :<|> AccountsContainersTagsListResource
        :<|> AccountsContainersTagsGetResource
        :<|> AccountsContainersTagsCreateResource

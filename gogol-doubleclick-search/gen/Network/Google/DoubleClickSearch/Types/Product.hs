@@ -805,15 +805,16 @@ instance ToJSON ConversionList where
 --
 -- /See:/ 'reportAPIColumnSpec' smart constructor.
 data ReportAPIColumnSpec = ReportAPIColumnSpec
-    { _racsCustomDimensionName :: !(Maybe Text)
-    , _racsSavedColumnName     :: !(Maybe Text)
-    , _racsGroupByColumn       :: !Bool
-    , _racsCustomMetricName    :: !(Maybe Text)
-    , _racsEndDate             :: !(Maybe Text)
-    , _racsStartDate           :: !(Maybe Text)
-    , _racsHeaderText          :: !(Maybe Text)
-    , _racsPlatformSource      :: !(Maybe Text)
-    , _racsColumnName          :: !(Maybe Text)
+    { _racsCustomDimensionName      :: !(Maybe Text)
+    , _racsSavedColumnName          :: !(Maybe Text)
+    , _racsGroupByColumn            :: !Bool
+    , _racsCustomMetricName         :: !(Maybe Text)
+    , _racsEndDate                  :: !(Maybe Text)
+    , _racsProductReportPerspective :: !(Maybe Text)
+    , _racsStartDate                :: !(Maybe Text)
+    , _racsHeaderText               :: !(Maybe Text)
+    , _racsPlatformSource           :: !(Maybe Text)
+    , _racsColumnName               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportAPIColumnSpec' with the minimum fields required to make a request.
@@ -829,6 +830,8 @@ data ReportAPIColumnSpec = ReportAPIColumnSpec
 -- * 'racsCustomMetricName'
 --
 -- * 'racsEndDate'
+--
+-- * 'racsProductReportPerspective'
 --
 -- * 'racsStartDate'
 --
@@ -846,6 +849,7 @@ reportAPIColumnSpec =
     , _racsGroupByColumn = False
     , _racsCustomMetricName = Nothing
     , _racsEndDate = Nothing
+    , _racsProductReportPerspective = Nothing
     , _racsStartDate = Nothing
     , _racsHeaderText = Nothing
     , _racsPlatformSource = Nothing
@@ -894,6 +898,13 @@ racsEndDate :: Lens' ReportAPIColumnSpec (Maybe Text)
 racsEndDate
   = lens _racsEndDate (\ s a -> s{_racsEndDate = a})
 
+-- | Provide different source for product items. Acceptable values are
+-- \"advertised\" and \"sold\".
+racsProductReportPerspective :: Lens' ReportAPIColumnSpec (Maybe Text)
+racsProductReportPerspective
+  = lens _racsProductReportPerspective
+      (\ s a -> s{_racsProductReportPerspective = a})
+
 -- | Inclusive date in YYYY-MM-DD format. When provided, this overrides the
 -- overall time range of the report for this column only. Must be provided
 -- together with endDate.
@@ -912,7 +923,7 @@ racsHeaderText
       (\ s a -> s{_racsHeaderText = a})
 
 -- | The platform that is used to provide data for the custom dimension.
--- Acceptable values are \"Floodlight\".
+-- Acceptable values are \"floodlight\".
 racsPlatformSource :: Lens' ReportAPIColumnSpec (Maybe Text)
 racsPlatformSource
   = lens _racsPlatformSource
@@ -934,6 +945,7 @@ instance FromJSON ReportAPIColumnSpec where
                      <*> (o .:? "groupByColumn" .!= False)
                      <*> (o .:? "customMetricName")
                      <*> (o .:? "endDate")
+                     <*> (o .:? "productReportPerspective")
                      <*> (o .:? "startDate")
                      <*> (o .:? "headerText")
                      <*> (o .:? "platformSource")
@@ -949,6 +961,8 @@ instance ToJSON ReportAPIColumnSpec where
                   Just ("groupByColumn" .= _racsGroupByColumn),
                   ("customMetricName" .=) <$> _racsCustomMetricName,
                   ("endDate" .=) <$> _racsEndDate,
+                  ("productReportPerspective" .=) <$>
+                    _racsProductReportPerspective,
                   ("startDate" .=) <$> _racsStartDate,
                   ("headerText" .=) <$> _racsHeaderText,
                   ("platformSource" .=) <$> _racsPlatformSource,

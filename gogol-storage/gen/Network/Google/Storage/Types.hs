@@ -139,6 +139,7 @@ module Network.Google.Storage.Types
     , bucCORS
     , bucTimeCreated
     , bucId
+    , bucUpdated
     , bucDefaultObjectACL
     , bucMetageneration
     , bucLogging
@@ -236,6 +237,7 @@ module Network.Google.Storage.Types
     , objStorageClass
     , objContentEncoding
     , objMetadata
+    , objTimeCreated
     , objId
     , objUpdated
     , objContentLanguage

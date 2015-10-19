@@ -23,13 +23,16 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'usersettings' smart constructor.
 data Usersettings = Usersettings
-    { _uKind        :: !Text
-    , _uNotesExport :: !(Maybe UsersettingsNotesExport)
+    { _uNotification :: !(Maybe UsersettingsNotification)
+    , _uKind         :: !Text
+    , _uNotesExport  :: !(Maybe UsersettingsNotesExport)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Usersettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uNotification'
 --
 -- * 'uKind'
 --
@@ -38,9 +41,15 @@ usersettings
     :: Usersettings
 usersettings =
     Usersettings
-    { _uKind = "books#usersettings"
+    { _uNotification = Nothing
+    , _uKind = "books#usersettings"
     , _uNotesExport = Nothing
     }
+
+uNotification :: Lens' Usersettings (Maybe UsersettingsNotification)
+uNotification
+  = lens _uNotification
+      (\ s a -> s{_uNotification = a})
 
 -- | Resource type.
 uKind :: Lens' Usersettings Text
@@ -56,14 +65,16 @@ instance FromJSON Usersettings where
           = withObject "Usersettings"
               (\ o ->
                  Usersettings <$>
-                   (o .:? "kind" .!= "books#usersettings") <*>
-                     (o .:? "notesExport"))
+                   (o .:? "notification") <*>
+                     (o .:? "kind" .!= "books#usersettings")
+                     <*> (o .:? "notesExport"))
 
 instance ToJSON Usersettings where
         toJSON Usersettings{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _uKind),
+                 [("notification" .=) <$> _uNotification,
+                  Just ("kind" .= _uKind),
                   ("notesExport" .=) <$> _uNotesExport])
 
 --
@@ -204,6 +215,44 @@ instance ToJSON AnnotationsData where
                  [("totalItems" .=) <$> _adTotalItems,
                   ("nextPageToken" .=) <$> _adNextPageToken,
                   Just ("kind" .= _adKind), ("items" .=) <$> _adItems])
+
+--
+-- /See:/ 'usersettingsNotificationMoreFromAuthors' smart constructor.
+newtype UsersettingsNotificationMoreFromAuthors = UsersettingsNotificationMoreFromAuthors
+    { _unmfaOptedState :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UsersettingsNotificationMoreFromAuthors' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'unmfaOptedState'
+usersettingsNotificationMoreFromAuthors
+    :: UsersettingsNotificationMoreFromAuthors
+usersettingsNotificationMoreFromAuthors =
+    UsersettingsNotificationMoreFromAuthors
+    { _unmfaOptedState = Nothing
+    }
+
+unmfaOptedState :: Lens' UsersettingsNotificationMoreFromAuthors (Maybe Text)
+unmfaOptedState
+  = lens _unmfaOptedState
+      (\ s a -> s{_unmfaOptedState = a})
+
+instance FromJSON
+         UsersettingsNotificationMoreFromAuthors where
+        parseJSON
+          = withObject
+              "UsersettingsNotificationMoreFromAuthors"
+              (\ o ->
+                 UsersettingsNotificationMoreFromAuthors <$>
+                   (o .:? "opted_state"))
+
+instance ToJSON
+         UsersettingsNotificationMoreFromAuthors where
+        toJSON UsersettingsNotificationMoreFromAuthors{..}
+          = object
+              (catMaybes [("opted_state" .=) <$> _unmfaOptedState])
 
 --
 -- /See:/ 'volumeannotations' smart constructor.
@@ -1023,6 +1072,8 @@ data VolumeUserInfo = VolumeUserInfo
     { _vuiCopy                   :: !(Maybe VolumeUserInfoCopy)
     , _vuiUserUploadedVolumeInfo :: !(Maybe VolumeUserInfoUserUploadedVolumeInfo)
     , _vuiIsPurchased            :: !(Maybe Bool)
+    , _vuiEntitlementType        :: !(Maybe Int32)
+    , _vuiAcquisitionType        :: !(Maybe Int32)
     , _vuiRentalState            :: !(Maybe Text)
     , _vuiIsPreOrdered           :: !(Maybe Bool)
     , _vuiReview                 :: !(Maybe Review)
@@ -1042,6 +1093,10 @@ data VolumeUserInfo = VolumeUserInfo
 -- * 'vuiUserUploadedVolumeInfo'
 --
 -- * 'vuiIsPurchased'
+--
+-- * 'vuiEntitlementType'
+--
+-- * 'vuiAcquisitionType'
 --
 -- * 'vuiRentalState'
 --
@@ -1065,6 +1120,8 @@ volumeUserInfo =
     { _vuiCopy = Nothing
     , _vuiUserUploadedVolumeInfo = Nothing
     , _vuiIsPurchased = Nothing
+    , _vuiEntitlementType = Nothing
+    , _vuiAcquisitionType = Nothing
     , _vuiRentalState = Nothing
     , _vuiIsPreOrdered = Nothing
     , _vuiReview = Nothing
@@ -1090,6 +1147,18 @@ vuiIsPurchased :: Lens' VolumeUserInfo (Maybe Bool)
 vuiIsPurchased
   = lens _vuiIsPurchased
       (\ s a -> s{_vuiIsPurchased = a})
+
+-- | Whether this volume is purchased, sample, pd download etc.
+vuiEntitlementType :: Lens' VolumeUserInfo (Maybe Int32)
+vuiEntitlementType
+  = lens _vuiEntitlementType
+      (\ s a -> s{_vuiEntitlementType = a})
+
+-- | How this volume was acquired.
+vuiAcquisitionType :: Lens' VolumeUserInfo (Maybe Int32)
+vuiAcquisitionType
+  = lens _vuiAcquisitionType
+      (\ s a -> s{_vuiAcquisitionType = a})
 
 -- | Whether this book is an active or an expired rental.
 vuiRentalState :: Lens' VolumeUserInfo (Maybe Text)
@@ -1149,6 +1218,8 @@ instance FromJSON VolumeUserInfo where
                  VolumeUserInfo <$>
                    (o .:? "copy") <*> (o .:? "userUploadedVolumeInfo")
                      <*> (o .:? "isPurchased")
+                     <*> (o .:? "entitlementType")
+                     <*> (o .:? "acquisitionType")
                      <*> (o .:? "rentalState")
                      <*> (o .:? "isPreordered")
                      <*> (o .:? "review")
@@ -1166,6 +1237,8 @@ instance ToJSON VolumeUserInfo where
                   ("userUploadedVolumeInfo" .=) <$>
                     _vuiUserUploadedVolumeInfo,
                   ("isPurchased" .=) <$> _vuiIsPurchased,
+                  ("entitlementType" .=) <$> _vuiEntitlementType,
+                  ("acquisitionType" .=) <$> _vuiAcquisitionType,
                   ("rentalState" .=) <$> _vuiRentalState,
                   ("isPreordered" .=) <$> _vuiIsPreOrdered,
                   ("review" .=) <$> _vuiReview,
@@ -2018,6 +2091,76 @@ instance ToJSON Bookshelf where
                   ("description" .=) <$> _bDescription])
 
 --
+-- /See:/ 'notification' smart constructor.
+data Notification = Notification
+    { _nKind    :: !Text
+    , _nBody    :: !(Maybe Text)
+    , _nLinkURL :: !(Maybe Text)
+    , _nIconURL :: !(Maybe Text)
+    , _nTitle   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Notification' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'nKind'
+--
+-- * 'nBody'
+--
+-- * 'nLinkURL'
+--
+-- * 'nIconURL'
+--
+-- * 'nTitle'
+notification
+    :: Notification
+notification =
+    Notification
+    { _nKind = "books#notification"
+    , _nBody = Nothing
+    , _nLinkURL = Nothing
+    , _nIconURL = Nothing
+    , _nTitle = Nothing
+    }
+
+-- | Resource type.
+nKind :: Lens' Notification Text
+nKind = lens _nKind (\ s a -> s{_nKind = a})
+
+nBody :: Lens' Notification (Maybe Text)
+nBody = lens _nBody (\ s a -> s{_nBody = a})
+
+nLinkURL :: Lens' Notification (Maybe Text)
+nLinkURL = lens _nLinkURL (\ s a -> s{_nLinkURL = a})
+
+nIconURL :: Lens' Notification (Maybe Text)
+nIconURL = lens _nIconURL (\ s a -> s{_nIconURL = a})
+
+nTitle :: Lens' Notification (Maybe Text)
+nTitle = lens _nTitle (\ s a -> s{_nTitle = a})
+
+instance FromJSON Notification where
+        parseJSON
+          = withObject "Notification"
+              (\ o ->
+                 Notification <$>
+                   (o .:? "kind" .!= "books#notification") <*>
+                     (o .:? "body")
+                     <*> (o .:? "linkUrl")
+                     <*> (o .:? "iconUrl")
+                     <*> (o .:? "title"))
+
+instance ToJSON Notification where
+        toJSON Notification{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _nKind), ("body" .=) <$> _nBody,
+                  ("linkUrl" .=) <$> _nLinkURL,
+                  ("iconUrl" .=) <$> _nIconURL,
+                  ("title" .=) <$> _nTitle])
+
+--
 -- /See:/ 'annotationsSummaryLayersItem' smart constructor.
 data AnnotationsSummaryLayersItem = AnnotationsSummaryLayersItem
     { _asliLimitType               :: !(Maybe Text)
@@ -2448,6 +2591,102 @@ instance ToJSON Category where
           = object
               (catMaybes
                  [Just ("kind" .= _cKind), ("items" .=) <$> _cItems])
+
+--
+-- /See:/ 'discoveryclustersClustersItemBanner_with_content_container' smart constructor.
+data DiscoveryclustersClustersItemBanner_with_content_container = DiscoveryclustersClustersItemBanner_with_content_container
+    { _dcibFillColorArgb  :: !(Maybe Text)
+    , _dcibMoreButtonURL  :: !(Maybe Text)
+    , _dcibTextColorArgb  :: !(Maybe Text)
+    , _dcibMoreButtonText :: !(Maybe Text)
+    , _dcibImageURL       :: !(Maybe Text)
+    , _dcibMaskColorArgb  :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DiscoveryclustersClustersItemBanner_with_content_container' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dcibFillColorArgb'
+--
+-- * 'dcibMoreButtonURL'
+--
+-- * 'dcibTextColorArgb'
+--
+-- * 'dcibMoreButtonText'
+--
+-- * 'dcibImageURL'
+--
+-- * 'dcibMaskColorArgb'
+discoveryclustersClustersItemBanner_with_content_container
+    :: DiscoveryclustersClustersItemBanner_with_content_container
+discoveryclustersClustersItemBanner_with_content_container =
+    DiscoveryclustersClustersItemBanner_with_content_container
+    { _dcibFillColorArgb = Nothing
+    , _dcibMoreButtonURL = Nothing
+    , _dcibTextColorArgb = Nothing
+    , _dcibMoreButtonText = Nothing
+    , _dcibImageURL = Nothing
+    , _dcibMaskColorArgb = Nothing
+    }
+
+dcibFillColorArgb :: Lens' DiscoveryclustersClustersItemBanner_with_content_container (Maybe Text)
+dcibFillColorArgb
+  = lens _dcibFillColorArgb
+      (\ s a -> s{_dcibFillColorArgb = a})
+
+dcibMoreButtonURL :: Lens' DiscoveryclustersClustersItemBanner_with_content_container (Maybe Text)
+dcibMoreButtonURL
+  = lens _dcibMoreButtonURL
+      (\ s a -> s{_dcibMoreButtonURL = a})
+
+dcibTextColorArgb :: Lens' DiscoveryclustersClustersItemBanner_with_content_container (Maybe Text)
+dcibTextColorArgb
+  = lens _dcibTextColorArgb
+      (\ s a -> s{_dcibTextColorArgb = a})
+
+dcibMoreButtonText :: Lens' DiscoveryclustersClustersItemBanner_with_content_container (Maybe Text)
+dcibMoreButtonText
+  = lens _dcibMoreButtonText
+      (\ s a -> s{_dcibMoreButtonText = a})
+
+dcibImageURL :: Lens' DiscoveryclustersClustersItemBanner_with_content_container (Maybe Text)
+dcibImageURL
+  = lens _dcibImageURL (\ s a -> s{_dcibImageURL = a})
+
+dcibMaskColorArgb :: Lens' DiscoveryclustersClustersItemBanner_with_content_container (Maybe Text)
+dcibMaskColorArgb
+  = lens _dcibMaskColorArgb
+      (\ s a -> s{_dcibMaskColorArgb = a})
+
+instance FromJSON
+         DiscoveryclustersClustersItemBanner_with_content_container
+         where
+        parseJSON
+          = withObject
+              "DiscoveryclustersClustersItemBannerWithContentContainer"
+              (\ o ->
+                 DiscoveryclustersClustersItemBanner_with_content_container
+                   <$>
+                   (o .:? "fillColorArgb") <*> (o .:? "moreButtonUrl")
+                     <*> (o .:? "textColorArgb")
+                     <*> (o .:? "moreButtonText")
+                     <*> (o .:? "imageUrl")
+                     <*> (o .:? "maskColorArgb"))
+
+instance ToJSON
+         DiscoveryclustersClustersItemBanner_with_content_container
+         where
+        toJSON
+          DiscoveryclustersClustersItemBanner_with_content_container{..}
+          = object
+              (catMaybes
+                 [("fillColorArgb" .=) <$> _dcibFillColorArgb,
+                  ("moreButtonUrl" .=) <$> _dcibMoreButtonURL,
+                  ("textColorArgb" .=) <$> _dcibTextColorArgb,
+                  ("moreButtonText" .=) <$> _dcibMoreButtonText,
+                  ("imageUrl" .=) <$> _dcibImageURL,
+                  ("maskColorArgb" .=) <$> _dcibMaskColorArgb])
 
 --
 -- /See:/ 'volume' smart constructor.
@@ -3468,6 +3707,42 @@ instance ToJSON
                   ("attribution" .=) <$> _dddwisisisAttribution])
 
 --
+-- /See:/ 'usersettingsNotification' smart constructor.
+newtype UsersettingsNotification = UsersettingsNotification
+    { _unMoreFromAuthors :: Maybe UsersettingsNotificationMoreFromAuthors
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UsersettingsNotification' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'unMoreFromAuthors'
+usersettingsNotification
+    :: UsersettingsNotification
+usersettingsNotification =
+    UsersettingsNotification
+    { _unMoreFromAuthors = Nothing
+    }
+
+unMoreFromAuthors :: Lens' UsersettingsNotification (Maybe UsersettingsNotificationMoreFromAuthors)
+unMoreFromAuthors
+  = lens _unMoreFromAuthors
+      (\ s a -> s{_unMoreFromAuthors = a})
+
+instance FromJSON UsersettingsNotification where
+        parseJSON
+          = withObject "UsersettingsNotification"
+              (\ o ->
+                 UsersettingsNotification <$>
+                   (o .:? "moreFromAuthors"))
+
+instance ToJSON UsersettingsNotification where
+        toJSON UsersettingsNotification{..}
+          = object
+              (catMaybes
+                 [("moreFromAuthors" .=) <$> _unMoreFromAuthors])
+
+--
 -- /See:/ 'dictlayerDataDictWordsItemSensesItemSynonymsItem' smart constructor.
 data DictlayerDataDictWordsItemSensesItemSynonymsItem = DictlayerDataDictWordsItemSensesItemSynonymsItem
     { _dddwisisiText   :: !(Maybe Text)
@@ -3812,6 +4087,94 @@ instance FromJSON DictlayerDataCommon where
 instance ToJSON DictlayerDataCommon where
         toJSON DictlayerDataCommon{..}
           = object (catMaybes [("title" .=) <$> _ddcTitle])
+
+--
+-- /See:/ 'discoveryclustersClustersItem' smart constructor.
+data DiscoveryclustersClustersItem = DiscoveryclustersClustersItem
+    { _dciBannerWithContentContainer :: !(Maybe DiscoveryclustersClustersItemBanner_with_content_container)
+    , _dciUid                        :: !(Maybe Text)
+    , _dciTotalVolumes               :: !(Maybe Int32)
+    , _dciSubTitle                   :: !(Maybe Text)
+    , _dciTitle                      :: !(Maybe Text)
+    , _dciVolumes                    :: !(Maybe [Volume])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DiscoveryclustersClustersItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dciBannerWithContentContainer'
+--
+-- * 'dciUid'
+--
+-- * 'dciTotalVolumes'
+--
+-- * 'dciSubTitle'
+--
+-- * 'dciTitle'
+--
+-- * 'dciVolumes'
+discoveryclustersClustersItem
+    :: DiscoveryclustersClustersItem
+discoveryclustersClustersItem =
+    DiscoveryclustersClustersItem
+    { _dciBannerWithContentContainer = Nothing
+    , _dciUid = Nothing
+    , _dciTotalVolumes = Nothing
+    , _dciSubTitle = Nothing
+    , _dciTitle = Nothing
+    , _dciVolumes = Nothing
+    }
+
+dciBannerWithContentContainer :: Lens' DiscoveryclustersClustersItem (Maybe DiscoveryclustersClustersItemBanner_with_content_container)
+dciBannerWithContentContainer
+  = lens _dciBannerWithContentContainer
+      (\ s a -> s{_dciBannerWithContentContainer = a})
+
+dciUid :: Lens' DiscoveryclustersClustersItem (Maybe Text)
+dciUid = lens _dciUid (\ s a -> s{_dciUid = a})
+
+dciTotalVolumes :: Lens' DiscoveryclustersClustersItem (Maybe Int32)
+dciTotalVolumes
+  = lens _dciTotalVolumes
+      (\ s a -> s{_dciTotalVolumes = a})
+
+dciSubTitle :: Lens' DiscoveryclustersClustersItem (Maybe Text)
+dciSubTitle
+  = lens _dciSubTitle (\ s a -> s{_dciSubTitle = a})
+
+dciTitle :: Lens' DiscoveryclustersClustersItem (Maybe Text)
+dciTitle = lens _dciTitle (\ s a -> s{_dciTitle = a})
+
+dciVolumes :: Lens' DiscoveryclustersClustersItem [Volume]
+dciVolumes
+  = lens _dciVolumes (\ s a -> s{_dciVolumes = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON DiscoveryclustersClustersItem where
+        parseJSON
+          = withObject "DiscoveryclustersClustersItem"
+              (\ o ->
+                 DiscoveryclustersClustersItem <$>
+                   (o .:? "banner_with_content_container") <*>
+                     (o .:? "uid")
+                     <*> (o .:? "totalVolumes")
+                     <*> (o .:? "subTitle")
+                     <*> (o .:? "title")
+                     <*> (o .:? "volumes" .!= mempty))
+
+instance ToJSON DiscoveryclustersClustersItem where
+        toJSON DiscoveryclustersClustersItem{..}
+          = object
+              (catMaybes
+                 [("banner_with_content_container" .=) <$>
+                    _dciBannerWithContentContainer,
+                  ("uid" .=) <$> _dciUid,
+                  ("totalVolumes" .=) <$> _dciTotalVolumes,
+                  ("subTitle" .=) <$> _dciSubTitle,
+                  ("title" .=) <$> _dciTitle,
+                  ("volumes" .=) <$> _dciVolumes])
 
 -- | The actual selling price of the book. This is the same as the suggested
 -- retail or list price unless there are offers or discounts on this
@@ -5405,6 +5768,64 @@ instance ToJSON Offers where
           = object
               (catMaybes
                  [Just ("kind" .= _oKind), ("items" .=) <$> _oItems])
+
+--
+-- /See:/ 'discoveryclusters' smart constructor.
+data Discoveryclusters = Discoveryclusters
+    { _dKind          :: !Text
+    , _dTotalClusters :: !(Maybe Int32)
+    , _dClusters      :: !(Maybe [DiscoveryclustersClustersItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Discoveryclusters' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dKind'
+--
+-- * 'dTotalClusters'
+--
+-- * 'dClusters'
+discoveryclusters
+    :: Discoveryclusters
+discoveryclusters =
+    Discoveryclusters
+    { _dKind = "books#discovery#clusters"
+    , _dTotalClusters = Nothing
+    , _dClusters = Nothing
+    }
+
+-- | Resorce type.
+dKind :: Lens' Discoveryclusters Text
+dKind = lens _dKind (\ s a -> s{_dKind = a})
+
+dTotalClusters :: Lens' Discoveryclusters (Maybe Int32)
+dTotalClusters
+  = lens _dTotalClusters
+      (\ s a -> s{_dTotalClusters = a})
+
+dClusters :: Lens' Discoveryclusters [DiscoveryclustersClustersItem]
+dClusters
+  = lens _dClusters (\ s a -> s{_dClusters = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON Discoveryclusters where
+        parseJSON
+          = withObject "Discoveryclusters"
+              (\ o ->
+                 Discoveryclusters <$>
+                   (o .:? "kind" .!= "books#discovery#clusters") <*>
+                     (o .:? "totalClusters")
+                     <*> (o .:? "clusters" .!= mempty))
+
+instance ToJSON Discoveryclusters where
+        toJSON Discoveryclusters{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _dKind),
+                  ("totalClusters" .=) <$> _dTotalClusters,
+                  ("clusters" .=) <$> _dClusters])
 
 -- | User settings in sub-objects, each for different purposes.
 --

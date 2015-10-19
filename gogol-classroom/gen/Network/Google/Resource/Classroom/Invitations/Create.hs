@@ -24,12 +24,11 @@
 -- exist at a time. Delete and re-create an invitation to make changes.
 -- This method returns the following error codes: * \`PERMISSION_DENIED\`
 -- if the requesting user is not permitted to create invitations for this
--- course or for [general user permission errors][User Permission Errors].
--- * \`NOT_FOUND\` if the course or the user does not exist. *
--- \`FAILED_PRECONDITION\` if the requested user\'s account is disabled or
--- if the user already has this role or a role with greater permissions. *
--- \`ALREADY_EXISTS\` if an invitation for the specified user and course
--- already exists.
+-- course or for access errors. * \`NOT_FOUND\` if the course or the user
+-- does not exist. * \`FAILED_PRECONDITION\` if the requested user\'s
+-- account is disabled or if the user already has this role or a role with
+-- greater permissions. * \`ALREADY_EXISTS\` if an invitation for the
+-- specified user and course already exists.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomInvitationsCreate@.
 module Network.Google.Resource.Classroom.Invitations.Create
@@ -74,12 +73,11 @@ type InvitationsCreateResource =
 -- exist at a time. Delete and re-create an invitation to make changes.
 -- This method returns the following error codes: * \`PERMISSION_DENIED\`
 -- if the requesting user is not permitted to create invitations for this
--- course or for [general user permission errors][User Permission Errors].
--- * \`NOT_FOUND\` if the course or the user does not exist. *
--- \`FAILED_PRECONDITION\` if the requested user\'s account is disabled or
--- if the user already has this role or a role with greater permissions. *
--- \`ALREADY_EXISTS\` if an invitation for the specified user and course
--- already exists.
+-- course or for access errors. * \`NOT_FOUND\` if the course or the user
+-- does not exist. * \`FAILED_PRECONDITION\` if the requested user\'s
+-- account is disabled or if the user already has this role or a role with
+-- greater permissions. * \`ALREADY_EXISTS\` if an invitation for the
+-- specified user and course already exists.
 --
 -- /See:/ 'invitationsCreate'' smart constructor.
 data InvitationsCreate' = InvitationsCreate'

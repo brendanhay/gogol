@@ -687,6 +687,7 @@ data Bucket = Bucket
     , _bucCORS             :: !(Maybe [BucketCORSItem])
     , _bucTimeCreated      :: !(Maybe DateTime')
     , _bucId               :: !(Maybe Text)
+    , _bucUpdated          :: !(Maybe DateTime')
     , _bucDefaultObjectACL :: !(Maybe [ObjectAccessControl])
     , _bucMetageneration   :: !(Maybe Int64)
     , _bucLogging          :: !(Maybe BucketLogging)
@@ -725,6 +726,8 @@ data Bucket = Bucket
 --
 -- * 'bucId'
 --
+-- * 'bucUpdated'
+--
 -- * 'bucDefaultObjectACL'
 --
 -- * 'bucMetageneration'
@@ -750,6 +753,7 @@ bucket =
     , _bucCORS = Nothing
     , _bucTimeCreated = Nothing
     , _bucId = Nothing
+    , _bucUpdated = Nothing
     , _bucDefaultObjectACL = Nothing
     , _bucMetageneration = Nothing
     , _bucLogging = Nothing
@@ -822,7 +826,7 @@ bucCORS
   = lens _bucCORS (\ s a -> s{_bucCORS = a}) . _Default
       . _Coerce
 
--- | Creation time of the bucket in RFC 3339 format.
+-- | The creation time of the bucket in RFC 3339 format.
 bucTimeCreated :: Lens' Bucket (Maybe UTCTime)
 bucTimeCreated
   = lens _bucTimeCreated
@@ -832,6 +836,12 @@ bucTimeCreated
 -- | The ID of the bucket.
 bucId :: Lens' Bucket (Maybe Text)
 bucId = lens _bucId (\ s a -> s{_bucId = a})
+
+-- | The modification time of the bucket in RFC 3339 format.
+bucUpdated :: Lens' Bucket (Maybe UTCTime)
+bucUpdated
+  = lens _bucUpdated (\ s a -> s{_bucUpdated = a}) .
+      mapping _DateTime
 
 -- | Default access controls to apply to new objects when no ACL is provided.
 bucDefaultObjectACL :: Lens' Bucket [ObjectAccessControl]
@@ -877,6 +887,7 @@ instance FromJSON Bucket where
                      <*> (o .:? "cors" .!= mempty)
                      <*> (o .:? "timeCreated")
                      <*> (o .:? "id")
+                     <*> (o .:? "updated")
                      <*> (o .:? "defaultObjectAcl" .!= mempty)
                      <*> (o .:? "metageneration")
                      <*> (o .:? "logging")
@@ -899,7 +910,7 @@ instance ToJSON Bucket where
                   ("versioning" .=) <$> _bucVersioning,
                   ("cors" .=) <$> _bucCORS,
                   ("timeCreated" .=) <$> _bucTimeCreated,
-                  ("id" .=) <$> _bucId,
+                  ("id" .=) <$> _bucId, ("updated" .=) <$> _bucUpdated,
                   ("defaultObjectAcl" .=) <$> _bucDefaultObjectACL,
                   ("metageneration" .=) <$> _bucMetageneration,
                   ("logging" .=) <$> _bucLogging,
@@ -1252,6 +1263,7 @@ data Object = Object
     , _objStorageClass       :: !(Maybe Text)
     , _objContentEncoding    :: !(Maybe Text)
     , _objMetadata           :: !(Maybe ObjectMetadata)
+    , _objTimeCreated        :: !(Maybe DateTime')
     , _objId                 :: !(Maybe Text)
     , _objUpdated            :: !(Maybe DateTime')
     , _objContentLanguage    :: !(Maybe Text)
@@ -1296,6 +1308,8 @@ data Object = Object
 --
 -- * 'objMetadata'
 --
+-- * 'objTimeCreated'
+--
 -- * 'objId'
 --
 -- * 'objUpdated'
@@ -1333,6 +1347,7 @@ object' =
     , _objStorageClass = Nothing
     , _objContentEncoding = Nothing
     , _objMetadata = Nothing
+    , _objTimeCreated = Nothing
     , _objId = Nothing
     , _objUpdated = Nothing
     , _objContentLanguage = Nothing
@@ -1419,13 +1434,18 @@ objMetadata :: Lens' Object (Maybe ObjectMetadata)
 objMetadata
   = lens _objMetadata (\ s a -> s{_objMetadata = a})
 
+-- | The creation time of the object in RFC 3339 format.
+objTimeCreated :: Lens' Object (Maybe UTCTime)
+objTimeCreated
+  = lens _objTimeCreated
+      (\ s a -> s{_objTimeCreated = a})
+      . mapping _DateTime
+
 -- | The ID of the object.
 objId :: Lens' Object (Maybe Text)
 objId = lens _objId (\ s a -> s{_objId = a})
 
--- | The creation or modification time of the object in RFC 3339 format. For
--- buckets with versioning enabled, changing an object\'s metadata does not
--- change this property.
+-- | The modification time of the object metadata in RFC 3339 format.
 objUpdated :: Lens' Object (Maybe UTCTime)
 objUpdated
   = lens _objUpdated (\ s a -> s{_objUpdated = a}) .
@@ -1500,6 +1520,7 @@ instance FromJSON Object where
                      <*> (o .:? "storageClass")
                      <*> (o .:? "contentEncoding")
                      <*> (o .:? "metadata")
+                     <*> (o .:? "timeCreated")
                      <*> (o .:? "id")
                      <*> (o .:? "updated")
                      <*> (o .:? "contentLanguage")
@@ -1528,6 +1549,7 @@ instance ToJSON Object where
                   ("storageClass" .=) <$> _objStorageClass,
                   ("contentEncoding" .=) <$> _objContentEncoding,
                   ("metadata" .=) <$> _objMetadata,
+                  ("timeCreated" .=) <$> _objTimeCreated,
                   ("id" .=) <$> _objId, ("updated" .=) <$> _objUpdated,
                   ("contentLanguage" .=) <$> _objContentLanguage,
                   ("cacheControl" .=) <$> _objCacheControl,

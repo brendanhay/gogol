@@ -67,8 +67,10 @@ library
         , Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
         , Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
         , Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
+        , Network.Google.Resource.Books.Notification.Get
         , Network.Google.Resource.Books.Onboarding.ListCategories
         , Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
+        , Network.Google.Resource.Books.Personalizedstream.Get
         , Network.Google.Resource.Books.PromoOffer.Accept
         , Network.Google.Resource.Books.PromoOffer.Dismiss
         , Network.Google.Resource.Books.PromoOffer.Get

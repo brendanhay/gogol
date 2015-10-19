@@ -94,6 +94,12 @@ library
         , Network.Google.Resource.Compute.HTTPHealthChecks.List
         , Network.Google.Resource.Compute.HTTPHealthChecks.Patch
         , Network.Google.Resource.Compute.HTTPHealthChecks.Update
+        , Network.Google.Resource.Compute.HTTPSHealthChecks.Delete
+        , Network.Google.Resource.Compute.HTTPSHealthChecks.Get
+        , Network.Google.Resource.Compute.HTTPSHealthChecks.Insert
+        , Network.Google.Resource.Compute.HTTPSHealthChecks.List
+        , Network.Google.Resource.Compute.HTTPSHealthChecks.Patch
+        , Network.Google.Resource.Compute.HTTPSHealthChecks.Update
         , Network.Google.Resource.Compute.Images.Delete
         , Network.Google.Resource.Compute.Images.Deprecate
         , Network.Google.Resource.Compute.Images.Get
@@ -163,6 +169,10 @@ library
         , Network.Google.Resource.Compute.Routes.Get
         , Network.Google.Resource.Compute.Routes.Insert
         , Network.Google.Resource.Compute.Routes.List
+        , Network.Google.Resource.Compute.SSLCertificates.Delete
+        , Network.Google.Resource.Compute.SSLCertificates.Get
+        , Network.Google.Resource.Compute.SSLCertificates.Insert
+        , Network.Google.Resource.Compute.SSLCertificates.List
         , Network.Google.Resource.Compute.Snapshots.Delete
         , Network.Google.Resource.Compute.Snapshots.Get
         , Network.Google.Resource.Compute.Snapshots.List
@@ -171,6 +181,12 @@ library
         , Network.Google.Resource.Compute.TargetHTTPProxies.Insert
         , Network.Google.Resource.Compute.TargetHTTPProxies.List
         , Network.Google.Resource.Compute.TargetHTTPProxies.SetURLMap
+        , Network.Google.Resource.Compute.TargetHTTPSProxies.Delete
+        , Network.Google.Resource.Compute.TargetHTTPSProxies.Get
+        , Network.Google.Resource.Compute.TargetHTTPSProxies.Insert
+        , Network.Google.Resource.Compute.TargetHTTPSProxies.List
+        , Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLCertificates
+        , Network.Google.Resource.Compute.TargetHTTPSProxies.SetURLMap
         , Network.Google.Resource.Compute.TargetInstances.AggregatedList
         , Network.Google.Resource.Compute.TargetInstances.Delete
         , Network.Google.Resource.Compute.TargetInstances.Get

@@ -22,11 +22,13 @@
 --
 -- | Creates a teacher of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
--- to create teachers in this course or for [general user permission
--- errors][User Permission Errors]. * \`NOT_FOUND\` if the requested course
--- ID does not exist. * \`FAILED_PRECONDITION\` if the requested user\'s
--- account is disabled. * \`ALREADY_EXISTS\` if the user is already a
--- teacher or student in the course.
+-- to create teachers in this course or for access errors. * \`NOT_FOUND\`
+-- if the requested course ID does not exist. * \`FAILED_PRECONDITION\` if
+-- the requested user\'s account is disabled, for the following request
+-- errors: * CourseMemberLimitReached * CourseNotModifiable *
+-- CourseTeacherLimitReached * UserGroupsMembershipLimitReached *
+-- \`ALREADY_EXISTS\` if the user is already a teacher or student in the
+-- course.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesTeachersCreate@.
 module Network.Google.Resource.Classroom.Courses.Teachers.Create
@@ -72,11 +74,13 @@ type CoursesTeachersCreateResource =
 
 -- | Creates a teacher of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
--- to create teachers in this course or for [general user permission
--- errors][User Permission Errors]. * \`NOT_FOUND\` if the requested course
--- ID does not exist. * \`FAILED_PRECONDITION\` if the requested user\'s
--- account is disabled. * \`ALREADY_EXISTS\` if the user is already a
--- teacher or student in the course.
+-- to create teachers in this course or for access errors. * \`NOT_FOUND\`
+-- if the requested course ID does not exist. * \`FAILED_PRECONDITION\` if
+-- the requested user\'s account is disabled, for the following request
+-- errors: * CourseMemberLimitReached * CourseNotModifiable *
+-- CourseTeacherLimitReached * UserGroupsMembershipLimitReached *
+-- \`ALREADY_EXISTS\` if the user is already a teacher or student in the
+-- course.
 --
 -- /See:/ 'coursesTeachersCreate'' smart constructor.
 data CoursesTeachersCreate' = CoursesTeachersCreate'
@@ -144,8 +148,7 @@ ctcPp :: Lens' CoursesTeachersCreate' Bool
 ctcPp = lens _ctcPp (\ s a -> s{_ctcPp = a})
 
 -- | Identifier of the course. This identifier can be either the
--- Classroom-assigned identifier or an
--- [alias][google.classroom.v1.CourseAlias].
+-- Classroom-assigned identifier or an alias.
 ctcCourseId :: Lens' CoursesTeachersCreate' Text
 ctcCourseId
   = lens _ctcCourseId (\ s a -> s{_ctcCourseId = a})

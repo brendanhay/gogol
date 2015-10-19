@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
-
+-- | Retrieves aggregated list of instance resources.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesAggregatedList@.
 module Network.Google.Resource.Compute.Instances.AggregatedList
@@ -54,6 +54,7 @@ type InstancesAggregatedListResource =
                  QueryParam "alt" AltJSON :>
                    Get '[JSON] InstanceAggregatedList
 
+-- | Retrieves aggregated list of instance resources.
 --
 -- /See:/ 'instancesAggregatedList'' smart constructor.
 data InstancesAggregatedList' = InstancesAggregatedList'

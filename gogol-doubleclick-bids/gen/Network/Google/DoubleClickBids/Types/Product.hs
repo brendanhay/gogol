@@ -423,6 +423,7 @@ instance ToJSON UploadLineItemsRequest where
 data DownloadLineItemsRequest = DownloadLineItemsRequest
     { _dlirFilterType :: !(Maybe DownloadLineItemsRequestFilterType)
     , _dlirFormat     :: !(Maybe DownloadLineItemsRequestFormat)
+    , _dlirFileSpec   :: !(Maybe DownloadLineItemsRequestFileSpec)
     , _dlirFilterIds  :: !(Maybe [Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -434,6 +435,8 @@ data DownloadLineItemsRequest = DownloadLineItemsRequest
 --
 -- * 'dlirFormat'
 --
+-- * 'dlirFileSpec'
+--
 -- * 'dlirFilterIds'
 downloadLineItemsRequest
     :: DownloadLineItemsRequest
@@ -441,6 +444,7 @@ downloadLineItemsRequest =
     DownloadLineItemsRequest
     { _dlirFilterType = Nothing
     , _dlirFormat = Nothing
+    , _dlirFileSpec = Nothing
     , _dlirFilterIds = Nothing
     }
 
@@ -454,6 +458,12 @@ dlirFilterType
 dlirFormat :: Lens' DownloadLineItemsRequest (Maybe DownloadLineItemsRequestFormat)
 dlirFormat
   = lens _dlirFormat (\ s a -> s{_dlirFormat = a})
+
+-- | File specification (column names, types, order) in which the line items
+-- will be returned. Default to EWF.
+dlirFileSpec :: Lens' DownloadLineItemsRequest (Maybe DownloadLineItemsRequestFileSpec)
+dlirFileSpec
+  = lens _dlirFileSpec (\ s a -> s{_dlirFileSpec = a})
 
 -- | Ids of the specified filter type used to filter line items to fetch. If
 -- omitted, all the line items will be returned.
@@ -470,7 +480,8 @@ instance FromJSON DownloadLineItemsRequest where
               (\ o ->
                  DownloadLineItemsRequest <$>
                    (o .:? "filterType") <*> (o .:? "format") <*>
-                     (o .:? "filterIds" .!= mempty))
+                     (o .:? "fileSpec")
+                     <*> (o .:? "filterIds" .!= mempty))
 
 instance ToJSON DownloadLineItemsRequest where
         toJSON DownloadLineItemsRequest{..}
@@ -478,6 +489,7 @@ instance ToJSON DownloadLineItemsRequest where
               (catMaybes
                  [("filterType" .=) <$> _dlirFilterType,
                   ("format" .=) <$> _dlirFormat,
+                  ("fileSpec" .=) <$> _dlirFileSpec,
                   ("filterIds" .=) <$> _dlirFilterIds])
 
 -- | List queries response.
@@ -984,8 +996,8 @@ downloadLineItemsResponse =
     { _dlirLineItems = Nothing
     }
 
--- | Retrieved line items in CSV format. Refer to Entity Write File Format
--- for more information on file format.
+-- | Retrieved line items in CSV format. Refer to Entity Write File Format or
+-- Structured Data File Format for more information on file formats.
 dlirLineItems :: Lens' DownloadLineItemsResponse (Maybe Text)
 dlirLineItems
   = lens _dlirLineItems

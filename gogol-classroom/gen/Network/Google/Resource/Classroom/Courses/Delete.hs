@@ -22,9 +22,8 @@
 --
 -- | Deletes a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to delete
--- the requested course or for [general user permission errors][User
--- Permission Errors]. * \`NOT_FOUND\` if no course exists with the
--- requested ID.
+-- the requested course or for access errors. * \`NOT_FOUND\` if no course
+-- exists with the requested ID.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesDelete@.
 module Network.Google.Resource.Classroom.Courses.Delete
@@ -67,9 +66,8 @@ type CoursesDeleteResource =
 
 -- | Deletes a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to delete
--- the requested course or for [general user permission errors][User
--- Permission Errors]. * \`NOT_FOUND\` if no course exists with the
--- requested ID.
+-- the requested course or for access errors. * \`NOT_FOUND\` if no course
+-- exists with the requested ID.
 --
 -- /See:/ 'coursesDelete'' smart constructor.
 data CoursesDelete' = CoursesDelete'
@@ -149,8 +147,7 @@ cdBearerToken
       (\ s a -> s{_cdBearerToken = a})
 
 -- | Identifier of the course to delete. This identifier can be either the
--- Classroom-assigned identifier or an
--- [alias][google.classroom.v1.CourseAlias].
+-- Classroom-assigned identifier or an alias.
 cdId :: Lens' CoursesDelete' Text
 cdId = lens _cdId (\ s a -> s{_cdId = a})
 

@@ -22,9 +22,9 @@
 --
 -- | Updates a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to modify
--- the requested course or for [general user permission errors][User
--- Permission Errors]. * \`NOT_FOUND\` if no course exists with the
--- requested ID.
+-- the requested course or for access errors. * \`NOT_FOUND\` if no course
+-- exists with the requested ID. * \`FAILED_PRECONDITION\` for the
+-- following request errors: * CourseNotModifiable
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesUpdate@.
 module Network.Google.Resource.Classroom.Courses.Update
@@ -69,9 +69,9 @@ type CoursesUpdateResource =
 
 -- | Updates a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to modify
--- the requested course or for [general user permission errors][User
--- Permission Errors]. * \`NOT_FOUND\` if no course exists with the
--- requested ID.
+-- the requested course or for access errors. * \`NOT_FOUND\` if no course
+-- exists with the requested ID. * \`FAILED_PRECONDITION\` for the
+-- following request errors: * CourseNotModifiable
 --
 -- /See:/ 'coursesUpdate'' smart constructor.
 data CoursesUpdate' = CoursesUpdate'
@@ -161,8 +161,7 @@ cuBearerToken
       (\ s a -> s{_cuBearerToken = a})
 
 -- | Identifier of the course to update. This identifier can be either the
--- Classroom-assigned identifier or an
--- [alias][google.classroom.v1.CourseAlias].
+-- Classroom-assigned identifier or an alias.
 cuId :: Lens' CoursesUpdate' Text
 cuId = lens _cuId (\ s a -> s{_cuId = a})
 

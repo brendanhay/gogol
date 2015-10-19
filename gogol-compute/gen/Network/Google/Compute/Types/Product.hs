@@ -20,6 +20,88 @@ module Network.Google.Compute.Types.Product where
 import           Network.Google.Compute.Types.Sum
 import           Network.Google.Prelude
 
+-- | Contains a list of TargetHttpsProxy resources.
+--
+-- /See:/ 'targetHTTPSProxyList' smart constructor.
+data TargetHTTPSProxyList = TargetHTTPSProxyList
+    { _thplNextPageToken :: !(Maybe Text)
+    , _thplKind          :: !Text
+    , _thplItems         :: !(Maybe [TargetHTTPSProxy])
+    , _thplSelfLink      :: !(Maybe Text)
+    , _thplId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetHTTPSProxyList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'thplNextPageToken'
+--
+-- * 'thplKind'
+--
+-- * 'thplItems'
+--
+-- * 'thplSelfLink'
+--
+-- * 'thplId'
+targetHTTPSProxyList
+    :: TargetHTTPSProxyList
+targetHTTPSProxyList =
+    TargetHTTPSProxyList
+    { _thplNextPageToken = Nothing
+    , _thplKind = "compute#targetHttpsProxyList"
+    , _thplItems = Nothing
+    , _thplSelfLink = Nothing
+    , _thplId = Nothing
+    }
+
+-- | [Output Only] A token used to continue a truncated list request.
+thplNextPageToken :: Lens' TargetHTTPSProxyList (Maybe Text)
+thplNextPageToken
+  = lens _thplNextPageToken
+      (\ s a -> s{_thplNextPageToken = a})
+
+-- | Type of resource.
+thplKind :: Lens' TargetHTTPSProxyList Text
+thplKind = lens _thplKind (\ s a -> s{_thplKind = a})
+
+-- | A list of TargetHttpsProxy resources.
+thplItems :: Lens' TargetHTTPSProxyList [TargetHTTPSProxy]
+thplItems
+  = lens _thplItems (\ s a -> s{_thplItems = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] Server-defined URL for this resource.
+thplSelfLink :: Lens' TargetHTTPSProxyList (Maybe Text)
+thplSelfLink
+  = lens _thplSelfLink (\ s a -> s{_thplSelfLink = a})
+
+-- | [Output Only] Unique identifier for the resource; defined by the server.
+thplId :: Lens' TargetHTTPSProxyList (Maybe Text)
+thplId = lens _thplId (\ s a -> s{_thplId = a})
+
+instance FromJSON TargetHTTPSProxyList where
+        parseJSON
+          = withObject "TargetHTTPSProxyList"
+              (\ o ->
+                 TargetHTTPSProxyList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#targetHttpsProxyList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON TargetHTTPSProxyList where
+        toJSON TargetHTTPSProxyList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _thplNextPageToken,
+                  Just ("kind" .= _thplKind),
+                  ("items" .=) <$> _thplItems,
+                  ("selfLink" .=) <$> _thplSelfLink,
+                  ("id" .=) <$> _thplId])
+
 --
 -- /See:/ 'addressesScopedList' smart constructor.
 data AddressesScopedList = AddressesScopedList
@@ -132,7 +214,8 @@ instanceGroupManagersAbandonInstancesRequest =
     { _igmairInstances = Nothing
     }
 
--- | The names of instances to abandon from the managed instance group.
+-- | The URL for one or more instances to abandon from the managed instance
+-- group.
 igmairInstances :: Lens' InstanceGroupManagersAbandonInstancesRequest [Text]
 igmairInstances
   = lens _igmairInstances
@@ -415,21 +498,21 @@ iglNextPageToken
 iglKind :: Lens' InstanceGroupList Text
 iglKind = lens _iglKind (\ s a -> s{_iglKind = a})
 
--- | A list of InstanceGroup resources.
+-- | A list of instance groups.
 iglItems :: Lens' InstanceGroupList [InstanceGroup]
 iglItems
   = lens _iglItems (\ s a -> s{_iglItems = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The URL for this instance group. The server defines this
+-- | [Output Only] The URL for this resource type. The server generates this
 -- URL.
 iglSelfLink :: Lens' InstanceGroupList (Maybe Text)
 iglSelfLink
   = lens _iglSelfLink (\ s a -> s{_iglSelfLink = a})
 
 -- | [Output Only] A unique identifier for this list of instance groups. The
--- server defines this identifier.
+-- server generates this identifier.
 iglId :: Lens' InstanceGroupList (Maybe Text)
 iglId = lens _iglId (\ s a -> s{_iglId = a})
 
@@ -1031,9 +1114,12 @@ instanceGroupsSetNamedPortsRequest =
     , _igsnprNamedPorts = Nothing
     }
 
--- | The fingerprint of the named ports information, which is a hash of the
--- contents. Use this field for optimistic locking when you update the
--- named ports entries.
+-- | The fingerprint of the named ports information for this instance group.
+-- Use this optional property to prevent conflicts when multiple users
+-- change the named ports settings concurrently. Obtain the fingerprint
+-- with the instanceGroups.get method. Then, include the fingerprint in
+-- your request to ensure that you do not overwrite changes that were
+-- applied from another concurrent request.
 igsnprFingerprint :: Lens' InstanceGroupsSetNamedPortsRequest (Maybe Word8)
 igsnprFingerprint
   = lens _igsnprFingerprint
@@ -1282,7 +1368,7 @@ instanceGroupsAddInstancesRequest =
     { _igairInstances = Nothing
     }
 
--- | The instances to add to the instance group.
+-- | The list of instances to add to the instance group.
 igairInstances :: Lens' InstanceGroupsAddInstancesRequest [InstanceReference]
 igairInstances
   = lens _igairInstances
@@ -1304,7 +1390,7 @@ instance ToJSON InstanceGroupsAddInstancesRequest
           = object
               (catMaybes [("instances" .=) <$> _igairInstances])
 
--- | [Output Only] A list of InstanceGroupManager resources.
+-- | [Output Only] A list of managed instance groups.
 --
 -- /See:/ 'instanceGroupManagerList' smart constructor.
 data InstanceGroupManagerList = InstanceGroupManagerList
@@ -1345,27 +1431,26 @@ igmlNextPageToken
   = lens _igmlNextPageToken
       (\ s a -> s{_igmlNextPageToken = a})
 
--- | [Output Only] Type of the resource. Always
--- compute#instanceGroupManagerList for a list of managed instance group
--- resources.
+-- | [Output Only] The resource type, which is always
+-- compute#instanceGroupManagerList for a list of managed instance groups.
 igmlKind :: Lens' InstanceGroupManagerList Text
 igmlKind = lens _igmlKind (\ s a -> s{_igmlKind = a})
 
--- | [Output Only] A list of managed instance group resources.
+-- | [Output Only] A list of managed instance groups.
 igmlItems :: Lens' InstanceGroupManagerList [InstanceGroupManager]
 igmlItems
   = lens _igmlItems (\ s a -> s{_igmlItems = a}) .
       _Default
       . _Coerce
 
--- | [Output Only] The URL for this managed instance group. The server
--- defines this URL.
+-- | [Output Only] The URL for this resource type. The server generates this
+-- URL.
 igmlSelfLink :: Lens' InstanceGroupManagerList (Maybe Text)
 igmlSelfLink
   = lens _igmlSelfLink (\ s a -> s{_igmlSelfLink = a})
 
--- | [Output Only] A unique identifier for this managed instance group. The
--- server defines this identifier.
+-- | [Output Only] A unique identifier for this resource type. The server
+-- generates this identifier.
 igmlId :: Lens' InstanceGroupManagerList (Maybe Text)
 igmlId = lens _igmlId (\ s a -> s{_igmlId = a})
 
@@ -2172,12 +2257,12 @@ instanceWithNamedPorts =
     , _iwnpInstance = Nothing
     }
 
--- | The status of the instance.
+-- | [Output Only] The status of the instance.
 iwnpStatus :: Lens' InstanceWithNamedPorts (Maybe InstanceWithNamedPortsStatus)
 iwnpStatus
   = lens _iwnpStatus (\ s a -> s{_iwnpStatus = a})
 
--- | The named ports that belong to this instance group.
+-- | [Output Only] The named ports that belong to this instance group.
 iwnpNamedPorts :: Lens' InstanceWithNamedPorts [NamedPort]
 iwnpNamedPorts
   = lens _iwnpNamedPorts
@@ -2185,7 +2270,7 @@ iwnpNamedPorts
       . _Default
       . _Coerce
 
--- | The URL of the instance.
+-- | [Output Only] The URL of the instance.
 iwnpInstance :: Lens' InstanceWithNamedPorts (Maybe Text)
 iwnpInstance
   = lens _iwnpInstance (\ s a -> s{_iwnpInstance = a})
@@ -2275,6 +2360,7 @@ instanceReference =
     { _irInstance = Nothing
     }
 
+-- | The URL for a specific instance.
 irInstance :: Lens' InstanceReference (Maybe Text)
 irInstance
   = lens _irInstance (\ s a -> s{_irInstance = a})
@@ -2419,7 +2505,7 @@ instance ToJSON OperationsScopedList where
                  [("warning" .=) <$> _oslWarning,
                   ("operations" .=) <$> _oslOperations])
 
--- | The named port information. For example: .
+-- | The named port. For example: .
 --
 -- /See:/ 'namedPort' smart constructor.
 data NamedPort = NamedPort
@@ -2442,7 +2528,8 @@ namedPort =
     , _npPort = Nothing
     }
 
--- | The name for this NamedPort.
+-- | The name for this named port. The name must be 1-63 characters long, and
+-- comply with RFC1035.
 npName :: Lens' NamedPort (Maybe Text)
 npName = lens _npName (\ s a -> s{_npName = a})
 
@@ -2584,27 +2671,27 @@ igmalNextPageToken
   = lens _igmalNextPageToken
       (\ s a -> s{_igmalNextPageToken = a})
 
--- | [Output Only] Type of the resource. Always
+-- | [Output Only] The resource type, which is always
 -- compute#instanceGroupManagerAggregatedList for an aggregated list of
 -- managed instance groups.
 igmalKind :: Lens' InstanceGroupManagerAggregatedList Text
 igmalKind
   = lens _igmalKind (\ s a -> s{_igmalKind = a})
 
--- | A map of filtered managed instance group lists.
+-- | [Output Only] A map of filtered managed instance group lists.
 igmalItems :: Lens' InstanceGroupManagerAggregatedList (Maybe InstanceGroupManagerAggregatedListItems)
 igmalItems
   = lens _igmalItems (\ s a -> s{_igmalItems = a})
 
--- | [Output Only] The URL for this aggregated list of managed instance
--- groups. The server defines this URL.
+-- | [Output Only] The URL for this resource type. The server generates this
+-- URL.
 igmalSelfLink :: Lens' InstanceGroupManagerAggregatedList (Maybe Text)
 igmalSelfLink
   = lens _igmalSelfLink
       (\ s a -> s{_igmalSelfLink = a})
 
 -- | [Output Only] A unique identifier for this aggregated list of managed
--- instance groups. The server defines this identifier.
+-- instance groups. The server generates this identifier.
 igmalId :: Lens' InstanceGroupManagerAggregatedList (Maybe Text)
 igmalId = lens _igmalId (\ s a -> s{_igmalId = a})
 
@@ -2985,7 +3072,7 @@ targetPool =
     }
 
 -- | Sesssion affinity option, must be one of the following values: NONE:
--- Connections from the same client IP may go to any instance in the pool;
+-- Connections from the same client IP may go to any instance in the pool.
 -- CLIENT_IP: Connections from the same client IP will go to the same
 -- instance in the pool while that instance remains healthy.
 -- CLIENT_IP_PROTO: Connections from the same client IP with the same IP
@@ -3166,7 +3253,7 @@ ilNextPageToken
 ilKind :: Lens' ImageList Text
 ilKind = lens _ilKind (\ s a -> s{_ilKind = a})
 
--- | A list of Image resources.
+-- | [Output Only] A list of Image resources.
 ilItems :: Lens' ImageList [Image]
 ilItems
   = lens _ilItems (\ s a -> s{_ilItems = a}) . _Default
@@ -3332,13 +3419,12 @@ frIPAddress :: Lens' ForwardingRule (Maybe Text)
 frIPAddress
   = lens _frIPAddress (\ s a -> s{_frIPAddress = a})
 
--- | Type of the resource.
+-- | [Output Only] Type of the resource. Always compute#forwardingRule.
 frKind :: Lens' ForwardingRule Text
 frKind = lens _frKind (\ s a -> s{_frKind = a})
 
--- | Applicable only when \`IPProtocol\` is TCP, UDP, or SCTP, only packets
+-- | Applicable only when IPProtocol is TCP, UDP, or SCTP, only packets
 -- addressed to ports in the specified range will be forwarded to target.
--- If portRange is left empty (default value), all ports are forwarded.
 -- Forwarding rules with the same \`[IPAddress, IPProtocol]\` pair must
 -- have disjoint port ranges.
 frPortRange :: Lens' ForwardingRule (Maybe Text)
@@ -3888,7 +3974,7 @@ oStartTime :: Lens' Operation (Maybe Text)
 oStartTime
   = lens _oStartTime (\ s a -> s{_oStartTime = a})
 
--- | [Output Only] Type of the resource. Always compute#Operation for
+-- | [Output Only] Type of the resource. Always compute#operation for
 -- Operation resources.
 oKind :: Lens' Operation Text
 oKind = lens _oKind (\ s a -> s{_oKind = a})
@@ -3960,7 +4046,8 @@ oEndTime = lens _oEndTime (\ s a -> s{_oEndTime = a})
 oId :: Lens' Operation (Maybe Word64)
 oId = lens _oId (\ s a -> s{_oId = a})
 
--- | [Output Only] Type of the operation, such as insert, update, and delete.
+-- | [Output Only] Type of the operation, such as insert,
+-- compute.instanceGroups.update, or compute.instanceGroups.delete.
 oOperationType :: Lens' Operation (Maybe Text)
 oOperationType
   = lens _oOperationType
@@ -4580,9 +4667,9 @@ instanceGroupManager =
 igmKind :: Lens' InstanceGroupManager Text
 igmKind = lens _igmKind (\ s a -> s{_igmKind = a})
 
--- | [Output Only] The fingerprint of the target pools information, which is
--- a hash of the contents. This field is used for optimistic locking when
--- updating the target pool entries.
+-- | [Output Only] The fingerprint of the target pools information. You can
+-- use this optional field for optimistic locking when you update the
+-- target pool entries.
 igmFingerprint :: Lens' InstanceGroupManager (Maybe Word8)
 igmFingerprint
   = lens _igmFingerprint
@@ -4597,7 +4684,7 @@ igmBaseInstanceName
   = lens _igmBaseInstanceName
       (\ s a -> s{_igmBaseInstanceName = a})
 
--- | The URL of the zone where the managed instance group is located.
+-- | The name of the zone where the managed instance group is located.
 igmZone :: Lens' InstanceGroupManager (Maybe Text)
 igmZone = lens _igmZone (\ s a -> s{_igmZone = a})
 
@@ -4617,13 +4704,15 @@ igmTargetSize
   = lens _igmTargetSize
       (\ s a -> s{_igmTargetSize = a})
 
--- | [Output Only] Server-defined URL for this managed instance group.
+-- | [Output Only] The URL for this managed instance group. The server
+-- defines this URL.
 igmSelfLink :: Lens' InstanceGroupManager (Maybe Text)
 igmSelfLink
   = lens _igmSelfLink (\ s a -> s{_igmSelfLink = a})
 
 -- | [Output Only] The list of instance actions and the number of instances
--- in this managed instance group that are scheduled for those actions.
+-- in this managed instance group that are scheduled for each of those
+-- actions.
 igmCurrentActions :: Lens' InstanceGroupManager (Maybe InstanceGroupManagerActionsSummary)
 igmCurrentActions
   = lens _igmCurrentActions
@@ -4641,14 +4730,14 @@ igmCreationTimestamp
   = lens _igmCreationTimestamp
       (\ s a -> s{_igmCreationTimestamp = a})
 
--- | [Output Only] A unique identifier for this managed instance group. The
--- server defines this identifier.
+-- | [Output Only] A unique identifier for this resource type. The server
+-- generates this identifier.
 igmId :: Lens' InstanceGroupManager (Maybe Word64)
 igmId = lens _igmId (\ s a -> s{_igmId = a})
 
--- | The URLs of all TargetPool resources to which new instances in the
--- instanceGroup field are added. Updating the target pool values does not
--- affect existing instances.
+-- | The URLs for all TargetPool resources to which instances in the
+-- instanceGroup field are added. The target pools automatically apply to
+-- all of the instances in the managed instance group.
 igmTargetPools :: Lens' InstanceGroupManager [Text]
 igmTargetPools
   = lens _igmTargetPools
@@ -4662,7 +4751,7 @@ igmDescription
   = lens _igmDescription
       (\ s a -> s{_igmDescription = a})
 
--- | [Output Only] The URL of the InstanceGroup resource.
+-- | [Output Only] The URL of the Instance Group resource.
 igmInstanceGroup :: Lens' InstanceGroupManager (Maybe Text)
 igmInstanceGroup
   = lens _igmInstanceGroup
@@ -4725,7 +4814,7 @@ instanceGroupsRemoveInstancesRequest =
     { _igrirInstances = Nothing
     }
 
--- | The instances to remove from the instance group.
+-- | The list of instances to remove from the instance group.
 igrirInstances :: Lens' InstanceGroupsRemoveInstancesRequest [InstanceReference]
 igrirInstances
   = lens _igrirInstances
@@ -4887,8 +4976,8 @@ instance ToJSON AutoscalersScopedListWarning where
                   ("code" .=) <$> _aslwCode,
                   ("message" .=) <$> _aslwMessage])
 
--- | Encountered errors during the last attempt to create or delete the
--- instance.
+-- | [Output Only] Encountered errors during the last attempt to create or
+-- delete the instance.
 --
 -- /See:/ 'managedInstanceLastAttemptErrors' smart constructor.
 newtype ManagedInstanceLastAttemptErrors = ManagedInstanceLastAttemptErrors
@@ -5276,7 +5365,7 @@ instanceGroupManagersListManagedInstancesResponse =
     { _igmlmirManagedInstances = Nothing
     }
 
--- | List of managed instances. If empty - all instances are listed.
+-- | [Output Only] The list of instances in the managed instance group.
 igmlmirManagedInstances :: Lens' InstanceGroupManagersListManagedInstancesResponse [ManagedInstance]
 igmlmirManagedInstances
   = lens _igmlmirManagedInstances
@@ -5366,12 +5455,7 @@ ipServiceAccounts
       . _Default
       . _Coerce
 
--- | An array of network access configurations for this interface. This
--- specifies how this interface is configured to interact with other
--- network services, such as connecting to the internet. Currently,
--- ONE_TO_ONE_NAT is the only supported access configuration. If you do not
--- specify any access configurations, the instances that are created from
--- this template will have no external internet access.
+-- | An array of network access configurations for this interface.
 ipNetworkInterfaces :: Lens' InstanceProperties [NetworkInterface]
 ipNetworkInterfaces
   = lens _ipNetworkInterfaces
@@ -5393,7 +5477,7 @@ ipMetadata :: Lens' InstanceProperties (Maybe Metadata)
 ipMetadata
   = lens _ipMetadata (\ s a -> s{_ipMetadata = a})
 
--- | A list of scheduling options for the instances that are created from
+-- | Specifies the scheduling options for the instances that are created from
 -- this template.
 ipScheduling :: Lens' InstanceProperties (Maybe Scheduling)
 ipScheduling
@@ -5406,11 +5490,12 @@ ipDisks
   = lens _ipDisks (\ s a -> s{_ipDisks = a}) . _Default
       . _Coerce
 
--- | A boolean that specifies if instances created from this template can
--- send packets with source IP addresses other than their own or receive
--- packets with destination IP addresses other than their own. If you use
--- these instances as an IP gateway or as the next-hop in a Route resource,
--- specify true. Otherwise, specify false.
+-- | Enables instances created based on this template to send packets with
+-- source IP addresses other than their own and receive packets with
+-- destination IP addresses other than their own. If these instances will
+-- be used as an IP gateway or it will be set as the next-hop in a Route
+-- resource, specify true. If unsure, leave this set to false. See the
+-- canIpForward documentation for more information.
 ipCanIPForward :: Lens' InstanceProperties (Maybe Bool)
 ipCanIPForward
   = lens _ipCanIPForward
@@ -5830,7 +5915,7 @@ itlNextPageToken
 itlKind :: Lens' InstanceTemplateList Text
 itlKind = lens _itlKind (\ s a -> s{_itlKind = a})
 
--- | A list of InstanceTemplate resources.
+-- | [Output Only] list of InstanceTemplate resources.
 itlItems :: Lens' InstanceTemplateList [InstanceTemplate]
 itlItems
   = lens _itlItems (\ s a -> s{_itlItems = a}) .
@@ -6031,6 +6116,88 @@ instance ToJSON TargetVPNGatewayList where
                   ("items" .=) <$> _tvglItems,
                   ("selfLink" .=) <$> _tvglSelfLink,
                   ("id" .=) <$> _tvglId])
+
+-- | Contains a list of SslCertificate resources.
+--
+-- /See:/ 'sslCertificateList' smart constructor.
+data SSLCertificateList = SSLCertificateList
+    { _sclNextPageToken :: !(Maybe Text)
+    , _sclKind          :: !Text
+    , _sclItems         :: !(Maybe [SSLCertificate])
+    , _sclSelfLink      :: !(Maybe Text)
+    , _sclId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SSLCertificateList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sclNextPageToken'
+--
+-- * 'sclKind'
+--
+-- * 'sclItems'
+--
+-- * 'sclSelfLink'
+--
+-- * 'sclId'
+sslCertificateList
+    :: SSLCertificateList
+sslCertificateList =
+    SSLCertificateList
+    { _sclNextPageToken = Nothing
+    , _sclKind = "compute#sslCertificateList"
+    , _sclItems = Nothing
+    , _sclSelfLink = Nothing
+    , _sclId = Nothing
+    }
+
+-- | [Output Only] A token used to continue a truncated list request.
+sclNextPageToken :: Lens' SSLCertificateList (Maybe Text)
+sclNextPageToken
+  = lens _sclNextPageToken
+      (\ s a -> s{_sclNextPageToken = a})
+
+-- | Type of resource.
+sclKind :: Lens' SSLCertificateList Text
+sclKind = lens _sclKind (\ s a -> s{_sclKind = a})
+
+-- | A list of SslCertificate resources.
+sclItems :: Lens' SSLCertificateList [SSLCertificate]
+sclItems
+  = lens _sclItems (\ s a -> s{_sclItems = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] Server-defined URL for this resource.
+sclSelfLink :: Lens' SSLCertificateList (Maybe Text)
+sclSelfLink
+  = lens _sclSelfLink (\ s a -> s{_sclSelfLink = a})
+
+-- | [Output Only] Unique identifier for the resource. Defined by the server.
+sclId :: Lens' SSLCertificateList (Maybe Text)
+sclId = lens _sclId (\ s a -> s{_sclId = a})
+
+instance FromJSON SSLCertificateList where
+        parseJSON
+          = withObject "SSLCertificateList"
+              (\ o ->
+                 SSLCertificateList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#sslCertificateList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON SSLCertificateList where
+        toJSON SSLCertificateList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _sclNextPageToken,
+                  Just ("kind" .= _sclKind),
+                  ("items" .=) <$> _sclItems,
+                  ("selfLink" .=) <$> _sclSelfLink,
+                  ("id" .=) <$> _sclId])
 
 --
 -- /See:/ 'firewallAllowedItem' smart constructor.
@@ -6707,7 +6874,7 @@ instanceGroupManagersRecreateInstancesRequest =
     { _igmrirInstances = Nothing
     }
 
--- | The names of one or more instances to recreate.
+-- | The URL for one or more instances to recreate.
 igmrirInstances :: Lens' InstanceGroupManagersRecreateInstancesRequest [Text]
 igmrirInstances
   = lens _igmrirInstances
@@ -6903,14 +7070,14 @@ igalItems :: Lens' InstanceGroupAggregatedList (Maybe InstanceGroupAggregatedLis
 igalItems
   = lens _igalItems (\ s a -> s{_igalItems = a})
 
--- | [Output Only] A unique identifier for this aggregated list of instance
--- groups. The server defines this identifier.
+-- | [Output Only] The URL for this resource type. The server generates this
+-- URL.
 igalSelfLink :: Lens' InstanceGroupAggregatedList (Maybe Text)
 igalSelfLink
   = lens _igalSelfLink (\ s a -> s{_igalSelfLink = a})
 
 -- | [Output Only] A unique identifier for this aggregated list of instance
--- groups. The server defines this identifier.
+-- groups. The server generates this identifier.
 igalId :: Lens' InstanceGroupAggregatedList (Maybe Text)
 igalId = lens _igalId (\ s a -> s{_igalId = a})
 
@@ -7221,6 +7388,51 @@ instance ToJSON
                  [("value" .=) <$> _tvgslwdiValue,
                   ("key" .=) <$> _tvgslwdiKey])
 
+--
+-- /See:/ 'targetHTTPSProxiesSetSSLCertificatesRequest' smart constructor.
+newtype TargetHTTPSProxiesSetSSLCertificatesRequest = TargetHTTPSProxiesSetSSLCertificatesRequest
+    { _thpsscrSSLCertificates :: Maybe [Text]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetHTTPSProxiesSetSSLCertificatesRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'thpsscrSSLCertificates'
+targetHTTPSProxiesSetSSLCertificatesRequest
+    :: TargetHTTPSProxiesSetSSLCertificatesRequest
+targetHTTPSProxiesSetSSLCertificatesRequest =
+    TargetHTTPSProxiesSetSSLCertificatesRequest
+    { _thpsscrSSLCertificates = Nothing
+    }
+
+-- | New set of URLs to SslCertificate resources to associate with this
+-- TargetHttpProxy. Currently exactly one ssl certificate must be
+-- specified.
+thpsscrSSLCertificates :: Lens' TargetHTTPSProxiesSetSSLCertificatesRequest [Text]
+thpsscrSSLCertificates
+  = lens _thpsscrSSLCertificates
+      (\ s a -> s{_thpsscrSSLCertificates = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         TargetHTTPSProxiesSetSSLCertificatesRequest where
+        parseJSON
+          = withObject
+              "TargetHTTPSProxiesSetSSLCertificatesRequest"
+              (\ o ->
+                 TargetHTTPSProxiesSetSSLCertificatesRequest <$>
+                   (o .:? "sslCertificates" .!= mempty))
+
+instance ToJSON
+         TargetHTTPSProxiesSetSSLCertificatesRequest where
+        toJSON
+          TargetHTTPSProxiesSetSSLCertificatesRequest{..}
+          = object
+              (catMaybes
+                 [("sslCertificates" .=) <$> _thpsscrSSLCertificates])
+
 -- | An Instance Template resource.
 --
 -- /See:/ 'instanceTemplate' smart constructor.
@@ -7275,8 +7487,13 @@ itSelfLink :: Lens' InstanceTemplate (Maybe Text)
 itSelfLink
   = lens _itSelfLink (\ s a -> s{_itSelfLink = a})
 
--- | The name of the instance template. The name must be 1-63 characters
--- long, and comply with RFC1035.
+-- | Name of the resource; provided by the client when the resource is
+-- created. The name must be 1-63 characters long, and comply with RFC1035.
+-- Specifically, the name must be 1-63 characters long and match the
+-- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
+-- character must be a lowercase letter, and all following characters must
+-- be a dash, lowercase letter, or digit, except the last character, which
+-- cannot be a dash.
 itName :: Lens' InstanceTemplate (Maybe Text)
 itName = lens _itName (\ s a -> s{_itName = a})
 
@@ -7298,7 +7515,7 @@ itDescription
   = lens _itDescription
       (\ s a -> s{_itDescription = a})
 
--- | The instance properties for the instance template resource.
+-- | The instance properties for this instance template.
 itProperties :: Lens' InstanceTemplate (Maybe InstanceProperties)
 itProperties
   = lens _itProperties (\ s a -> s{_itProperties = a})
@@ -7590,6 +7807,133 @@ instance ToJSON URLMapsValidateResponse where
         toJSON URLMapsValidateResponse{..}
           = object (catMaybes [("result" .=) <$> _umvrResult])
 
+-- | An SslCertificate resource. This resource provides a mechanism to upload
+-- an SSL key and certificate to global HTTPS loadbalancer to serve secure
+-- connections.
+--
+-- /See:/ 'sslCertificate' smart constructor.
+data SSLCertificate = SSLCertificate
+    { _scPrivateKey        :: !(Maybe Text)
+    , _scKind              :: !Text
+    , _scSelfLink          :: !(Maybe Text)
+    , _scName              :: !(Maybe Text)
+    , _scCreationTimestamp :: !(Maybe Text)
+    , _scId                :: !(Maybe Word64)
+    , _scCertificate       :: !(Maybe Text)
+    , _scDescription       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SSLCertificate' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'scPrivateKey'
+--
+-- * 'scKind'
+--
+-- * 'scSelfLink'
+--
+-- * 'scName'
+--
+-- * 'scCreationTimestamp'
+--
+-- * 'scId'
+--
+-- * 'scCertificate'
+--
+-- * 'scDescription'
+sslCertificate
+    :: SSLCertificate
+sslCertificate =
+    SSLCertificate
+    { _scPrivateKey = Nothing
+    , _scKind = "compute#sslCertificate"
+    , _scSelfLink = Nothing
+    , _scName = Nothing
+    , _scCreationTimestamp = Nothing
+    , _scId = Nothing
+    , _scCertificate = Nothing
+    , _scDescription = Nothing
+    }
+
+-- | A write-only private key in PEM format. Only insert RPCs will include
+-- this field.
+scPrivateKey :: Lens' SSLCertificate (Maybe Text)
+scPrivateKey
+  = lens _scPrivateKey (\ s a -> s{_scPrivateKey = a})
+
+-- | [Output Only] Type of the resource. Always compute#sslCertificate for
+-- SSL certificates.
+scKind :: Lens' SSLCertificate Text
+scKind = lens _scKind (\ s a -> s{_scKind = a})
+
+-- | [Output only] Server-defined URL for the resource.
+scSelfLink :: Lens' SSLCertificate (Maybe Text)
+scSelfLink
+  = lens _scSelfLink (\ s a -> s{_scSelfLink = a})
+
+-- | Name of the resource. Provided by the client when the resource is
+-- created. The name must be 1-63 characters long, and comply with RFC1035.
+-- Specifically, the name must be 1-63 characters long and match the
+-- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
+-- character must be a lowercase letter, and all following characters must
+-- be a dash, lowercase letter, or digit, except the last character, which
+-- cannot be a dash.
+scName :: Lens' SSLCertificate (Maybe Text)
+scName = lens _scName (\ s a -> s{_scName = a})
+
+-- | [Output Only] Creation timestamp in RFC3339 text format.
+scCreationTimestamp :: Lens' SSLCertificate (Maybe Text)
+scCreationTimestamp
+  = lens _scCreationTimestamp
+      (\ s a -> s{_scCreationTimestamp = a})
+
+-- | [Output Only] Unique identifier for the resource. Defined by the server.
+scId :: Lens' SSLCertificate (Maybe Word64)
+scId = lens _scId (\ s a -> s{_scId = a})
+
+-- | A local certificate file. The certificate must be in PEM format. The
+-- certificate chain must be no greater than 5 certs long. The chain must
+-- include at least one intermediate cert.
+scCertificate :: Lens' SSLCertificate (Maybe Text)
+scCertificate
+  = lens _scCertificate
+      (\ s a -> s{_scCertificate = a})
+
+-- | An optional textual description of the resource. Provided by the client
+-- when the resource is created.
+scDescription :: Lens' SSLCertificate (Maybe Text)
+scDescription
+  = lens _scDescription
+      (\ s a -> s{_scDescription = a})
+
+instance FromJSON SSLCertificate where
+        parseJSON
+          = withObject "SSLCertificate"
+              (\ o ->
+                 SSLCertificate <$>
+                   (o .:? "privateKey") <*>
+                     (o .:? "kind" .!= "compute#sslCertificate")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "certificate")
+                     <*> (o .:? "description"))
+
+instance ToJSON SSLCertificate where
+        toJSON SSLCertificate{..}
+          = object
+              (catMaybes
+                 [("privateKey" .=) <$> _scPrivateKey,
+                  Just ("kind" .= _scKind),
+                  ("selfLink" .=) <$> _scSelfLink,
+                  ("name" .=) <$> _scName,
+                  ("creationTimestamp" .=) <$> _scCreationTimestamp,
+                  ("id" .=) <$> _scId,
+                  ("certificate" .=) <$> _scCertificate,
+                  ("description" .=) <$> _scDescription])
+
 --
 -- /See:/ 'urlMapReference' smart constructor.
 newtype URLMapReference = URLMapReference
@@ -7868,31 +8212,46 @@ managedInstance =
     , _miInstance = Nothing
     }
 
--- | Information about the last attempt to create or delete the instance.
+-- | [Output Only] Information about the last attempt to create or delete the
+-- instance.
 miLastAttempt :: Lens' ManagedInstance (Maybe ManagedInstanceLastAttempt)
 miLastAttempt
   = lens _miLastAttempt
       (\ s a -> s{_miLastAttempt = a})
 
--- | The current action that the managed instance group has scheduled for the
--- instance.
+-- | [Output Only] The current action that the managed instance group has
+-- scheduled for the instance. Possible values: - NONE The instance is
+-- running, and the managed instance group does not have any scheduled
+-- actions for this instance. - CREATING The managed instance group is
+-- creating this instance. - RECREATING The managed instance group is
+-- recreating this instance. - DELETING The managed instance group is
+-- permanently deleting this instance. - ABANDONING The managed instance
+-- group is abandoning this instance. The instance will be removed from the
+-- instance group and from any target pools that are associated with this
+-- group. - RESTARTING The managed instance group is restarting the
+-- instance. - REFRESHING The managed instance group is applying
+-- configuration changes to the instance without stopping it. For example,
+-- the group can update the target pool list for an instance without
+-- stopping that instance.
 miCurrentAction :: Lens' ManagedInstance (Maybe ManagedInstanceCurrentAction)
 miCurrentAction
   = lens _miCurrentAction
       (\ s a -> s{_miCurrentAction = a})
 
--- | The unique identifier for this resource (empty when instance does not
--- exist).
+-- | [Output only] The unique identifier for this resource. This field is
+-- empty when instance does not exist.
 miId :: Lens' ManagedInstance (Maybe Word64)
 miId = lens _miId (\ s a -> s{_miId = a})
 
--- | The status of the instance (empty when instance does not exist).
+-- | [Output Only] The status of the instance. This field is empty when the
+-- instance does not exist.
 miInstanceStatus :: Lens' ManagedInstance (Maybe ManagedInstanceInstanceStatus)
 miInstanceStatus
   = lens _miInstanceStatus
       (\ s a -> s{_miInstanceStatus = a})
 
--- | The URL of the instance (set even though instance does not exist yet).
+-- | [Output Only] The URL of the instance. The URL can exist even if the
+-- instance has not yet been created.
 miInstance :: Lens' ManagedInstance (Maybe Text)
 miInstance
   = lens _miInstance (\ s a -> s{_miInstance = a})
@@ -7917,7 +8276,7 @@ instance ToJSON ManagedInstance where
                   ("instanceStatus" .=) <$> _miInstanceStatus,
                   ("instance" .=) <$> _miInstance])
 
--- | A map of filtered managed instance group lists.
+-- | [Output Only] A map of filtered managed instance group lists.
 --
 -- /See:/ 'instanceGroupManagerAggregatedListItems' smart constructor.
 newtype InstanceGroupManagerAggregatedListItems = InstanceGroupManagerAggregatedListItems
@@ -7937,7 +8296,8 @@ instanceGroupManagerAggregatedListItems pIgmaliAddtional_ =
     { _igmaliAddtional = pIgmaliAddtional_
     }
 
--- | The name of the scope that contains this set of managed instance groups.
+-- | [Output Only] The name of the scope that contains this set of managed
+-- instance groups.
 igmaliAddtional :: Lens' InstanceGroupManagerAggregatedListItems (HashMap Text InstanceGroupManagersScopedList)
 igmaliAddtional
   = lens _igmaliAddtional
@@ -7974,7 +8334,8 @@ instanceGroupManagersDeleteInstancesRequest =
     { _igmdirInstances = Nothing
     }
 
--- | The names of one or more instances to delete.
+-- | The list of instances to delete from this managed instance group.
+-- Specify one or more instance URLs.
 igmdirInstances :: Lens' InstanceGroupManagersDeleteInstancesRequest [Text]
 igmdirInstances
   = lens _igmdirInstances
@@ -8395,7 +8756,7 @@ igmasRestarting
       (\ s a -> s{_igmasRestarting = a})
 
 -- | [Output Only] The number of instances in the managed instance group that
--- currently have no scheduled actions.
+-- are running and have no scheduled actions.
 igmasNone :: Lens' InstanceGroupManagerActionsSummary (Maybe Int32)
 igmasNone
   = lens _igmasNone (\ s a -> s{_igmasNone = a})
@@ -8426,9 +8787,9 @@ igmasRecreating
   = lens _igmasRecreating
       (\ s a -> s{_igmasRecreating = a})
 
--- | [Output Only] Total number of instances in the managed instance group
--- that are scheduled to be abandoned. Abandoning an instance removes it
--- from the managed instance group without deleting it.
+-- | [Output Only] The total number of instances in the managed instance
+-- group that are scheduled to be abandoned. Abandoning an instance removes
+-- it from the managed instance group without deleting it.
 igmasAbandoning :: Lens' InstanceGroupManagerActionsSummary (Maybe Int32)
 igmasAbandoning
   = lens _igmasAbandoning
@@ -9015,6 +9376,9 @@ adDeviceName :: Lens' AttachedDisk (Maybe Text)
 adDeviceName
   = lens _adDeviceName (\ s a -> s{_adDeviceName = a})
 
+-- | Specifies the disk interface to use for attaching this disk, either SCSI
+-- or NVME. The default is SCSI. For performance characteristics of SCSI
+-- over NVMe, see Local SSD performance.
 adInterface :: Lens' AttachedDisk (Maybe AttachedDiskInterface)
 adInterface
   = lens _adInterface (\ s a -> s{_adInterface = a})
@@ -10751,7 +11115,7 @@ thttppURLMap :: Lens' TargetHTTPProxy (Maybe Text)
 thttppURLMap
   = lens _thttppURLMap (\ s a -> s{_thttppURLMap = a})
 
--- | [Output Only] Type of resource. Always compute#Operation for Operation
+-- | [Output Only] Type of resource. Always compute#operation for Operation
 -- resources.
 thttppKind :: Lens' TargetHTTPProxy Text
 thttppKind
@@ -11197,8 +11561,8 @@ igliNextPageToken
 igliKind :: Lens' InstanceGroupsListInstances Text
 igliKind = lens _igliKind (\ s a -> s{_igliKind = a})
 
--- | A list of InstanceWithNamedPorts resources, which contains all named
--- ports for the given instance.
+-- | [Output Only] A list of instances and any named ports that are assigned
+-- to those instances.
 igliItems :: Lens' InstanceGroupsListInstances [InstanceWithNamedPorts]
 igliItems
   = lens _igliItems (\ s a -> s{_igliItems = a}) .
@@ -11206,13 +11570,13 @@ igliItems
       . _Coerce
 
 -- | [Output Only] The URL for this list of instance groups. The server
--- defines this URL.
+-- generates this URL.
 igliSelfLink :: Lens' InstanceGroupsListInstances (Maybe Text)
 igliSelfLink
   = lens _igliSelfLink (\ s a -> s{_igliSelfLink = a})
 
 -- | [Output Only] A unique identifier for this list of instance groups. The
--- server defines this identifier.
+-- server generates this identifier.
 igliId :: Lens' InstanceGroupsListInstances (Maybe Text)
 igliId = lens _igliId (\ s a -> s{_igliId = a})
 
@@ -12363,20 +12727,21 @@ instanceGroupManagersSetTargetPoolsRequest =
     , _igmstprTargetPools = Nothing
     }
 
--- | The fingerprint of the target pools information, which is a hash of the
--- contents. This field is used for optimistic locking when updating the
--- target pool entries.
+-- | The fingerprint of the target pools information. Use this optional
+-- property to prevent conflicts when multiple users change the target
+-- pools settings concurrently. Obtain the fingerprint with the
+-- instanceGroupManagers.get method. Then, include the fingerprint in your
+-- request to ensure that you do not overwrite changes that were applied
+-- from another concurrent request.
 igmstprFingerprint :: Lens' InstanceGroupManagersSetTargetPoolsRequest (Maybe Word8)
 igmstprFingerprint
   = lens _igmstprFingerprint
       (\ s a -> s{_igmstprFingerprint = a})
 
 -- | The list of target pool URLs that instances in this managed instance
--- group belong to. When the managed instance group creates new instances,
--- the group automatically adds those instances to the target pools that
--- are specified in this parameter. Changing the value of this parameter
--- does not change the target pools of existing instances in this managed
--- instance group.
+-- group belong to. The managed instance group applies these target pools
+-- to all of the instances in the group. Existing instances and new
+-- instances in the group all receive these target pool settings.
 igmstprTargetPools :: Lens' InstanceGroupManagersSetTargetPoolsRequest [Text]
 igmstprTargetPools
   = lens _igmstprTargetPools
@@ -12401,6 +12766,88 @@ instance ToJSON
               (catMaybes
                  [("fingerprint" .=) <$> _igmstprFingerprint,
                   ("targetPools" .=) <$> _igmstprTargetPools])
+
+-- | Contains a list of HttpsHealthCheck resources.
+--
+-- /See:/ 'httpsHealthCheckList' smart constructor.
+data HTTPSHealthCheckList = HTTPSHealthCheckList
+    { _hhclNextPageToken :: !(Maybe Text)
+    , _hhclKind          :: !Text
+    , _hhclItems         :: !(Maybe [HTTPSHealthCheck])
+    , _hhclSelfLink      :: !(Maybe Text)
+    , _hhclId            :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'HTTPSHealthCheckList' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hhclNextPageToken'
+--
+-- * 'hhclKind'
+--
+-- * 'hhclItems'
+--
+-- * 'hhclSelfLink'
+--
+-- * 'hhclId'
+httpsHealthCheckList
+    :: HTTPSHealthCheckList
+httpsHealthCheckList =
+    HTTPSHealthCheckList
+    { _hhclNextPageToken = Nothing
+    , _hhclKind = "compute#httpsHealthCheckList"
+    , _hhclItems = Nothing
+    , _hhclSelfLink = Nothing
+    , _hhclId = Nothing
+    }
+
+-- | [Output Only] A token used to continue a truncated list request.
+hhclNextPageToken :: Lens' HTTPSHealthCheckList (Maybe Text)
+hhclNextPageToken
+  = lens _hhclNextPageToken
+      (\ s a -> s{_hhclNextPageToken = a})
+
+-- | Type of resource.
+hhclKind :: Lens' HTTPSHealthCheckList Text
+hhclKind = lens _hhclKind (\ s a -> s{_hhclKind = a})
+
+-- | A list of HttpsHealthCheck resources.
+hhclItems :: Lens' HTTPSHealthCheckList [HTTPSHealthCheck]
+hhclItems
+  = lens _hhclItems (\ s a -> s{_hhclItems = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] Server-defined URL for this resource.
+hhclSelfLink :: Lens' HTTPSHealthCheckList (Maybe Text)
+hhclSelfLink
+  = lens _hhclSelfLink (\ s a -> s{_hhclSelfLink = a})
+
+-- | [Output Only] Unique identifier for the resource; defined by the server.
+hhclId :: Lens' HTTPSHealthCheckList (Maybe Text)
+hhclId = lens _hhclId (\ s a -> s{_hhclId = a})
+
+instance FromJSON HTTPSHealthCheckList where
+        parseJSON
+          = withObject "HTTPSHealthCheckList"
+              (\ o ->
+                 HTTPSHealthCheckList <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "compute#httpsHealthCheckList")
+                     <*> (o .:? "items" .!= mempty)
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "id"))
+
+instance ToJSON HTTPSHealthCheckList where
+        toJSON HTTPSHealthCheckList{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _hhclNextPageToken,
+                  Just ("kind" .= _hhclKind),
+                  ("items" .=) <$> _hhclItems,
+                  ("selfLink" .=) <$> _hhclSelfLink,
+                  ("id" .=) <$> _hhclId])
 
 --
 -- /See:/ 'operationErrorErrorsItem' smart constructor.
@@ -12683,8 +13130,8 @@ managedInstanceLastAttempt =
     { _milaErrors = Nothing
     }
 
--- | Encountered errors during the last attempt to create or delete the
--- instance.
+-- | [Output Only] Encountered errors during the last attempt to create or
+-- delete the instance.
 milaErrors :: Lens' ManagedInstanceLastAttempt (Maybe ManagedInstanceLastAttemptErrors)
 milaErrors
   = lens _milaErrors (\ s a -> s{_milaErrors = a})
@@ -13176,9 +13623,9 @@ hostRule =
     , _hrPathMatcher = Nothing
     }
 
--- | The list of host patterns to match. They must be valid hostnames except
--- that they may start with *. or *-. The * acts like a glob and will match
--- any string of atoms (separated by .s and -s) to the left.
+-- | The list of host patterns to match. They must be valid hostnames, except
+-- * will match any string of ([a-z0-9-.]*). In that case, * must be the
+-- first character and must be followed in the pattern by either - or ..
 hrHosts :: Lens' HostRule [Text]
 hrHosts
   = lens _hrHosts (\ s a -> s{_hrHosts = a}) . _Default
@@ -13190,8 +13637,8 @@ hrDescription
   = lens _hrDescription
       (\ s a -> s{_hrDescription = a})
 
--- | The name of the PathMatcher to match the path portion of the URL, if the
--- this hostRule matches the URL\'s host portion.
+-- | The name of the PathMatcher to use to match the path portion of the URL
+-- if the hostRule matches the URL\'s host portion.
 hrPathMatcher :: Lens' HostRule (Maybe Text)
 hrPathMatcher
   = lens _hrPathMatcher
@@ -13334,25 +13781,25 @@ ig1Size = lens _ig1Size (\ s a -> s{_ig1Size = a})
 ig1Kind :: Lens' InstanceGroup Text
 ig1Kind = lens _ig1Kind (\ s a -> s{_ig1Kind = a})
 
--- | [Output Only] The fingerprint of the named ports information. The system
--- uses this fingerprint to detect conflicts when multiple users change the
--- named ports information concurrently.
+-- | [Output Only] The fingerprint of the named ports. The system uses this
+-- fingerprint to detect conflicts when multiple users change the named
+-- ports concurrently.
 ig1Fingerprint :: Lens' InstanceGroup (Maybe Word8)
 ig1Fingerprint
   = lens _ig1Fingerprint
       (\ s a -> s{_ig1Fingerprint = a})
 
--- | The URL of the network to which all instances in the instance group
--- belong.
+-- | [Output Only] The URL of the network to which all instances in the
+-- instance group belong.
 ig1Network :: Lens' InstanceGroup (Maybe Text)
 ig1Network
   = lens _ig1Network (\ s a -> s{_ig1Network = a})
 
--- | The URL of the zone where the instance group is located.
+-- | [Output Only] The URL of the zone where the instance group is located.
 ig1Zone :: Lens' InstanceGroup (Maybe Text)
 ig1Zone = lens _ig1Zone (\ s a -> s{_ig1Zone = a})
 
--- | [Output Only] The URL for this instance group. The server defines this
+-- | [Output Only] The URL for this instance group. The server generates this
 -- URL.
 ig1SelfLink :: Lens' InstanceGroup (Maybe Text)
 ig1SelfLink
@@ -13370,8 +13817,8 @@ ig1CreationTimestamp
   = lens _ig1CreationTimestamp
       (\ s a -> s{_ig1CreationTimestamp = a})
 
--- | [Output Only] A unique identifier for this instance group. The server
--- defines this identifier.
+-- | [Output Only] A unique identifier for this resource type. The server
+-- generates this identifier.
 ig1Id :: Lens' InstanceGroup (Maybe Word64)
 ig1Id = lens _ig1Id (\ s a -> s{_ig1Id = a})
 
@@ -13381,10 +13828,10 @@ ig1Description
   = lens _ig1Description
       (\ s a -> s{_ig1Description = a})
 
--- | Assigns a name to a port number. For example: {name: ?http?, port: 80}
+-- | Assigns a name to a port number. For example: {name: \"http\", port: 80}
 -- This allows the system to reference ports by the assigned name instead
 -- of a port number. Named ports can also contain multiple ports. For
--- example: [{name: ?http?, port: 80},{name: \"http\", port: 8080}] Named
+-- example: [{name: \"http\", port: 80},{name: \"http\", port: 8080}] Named
 -- ports apply to all instances in this instance group.
 ig1NamedPorts :: Lens' InstanceGroup [NamedPort]
 ig1NamedPorts
@@ -13761,6 +14208,132 @@ instance ToJSON MetadataItemsItem where
           = object
               (catMaybes
                  [("value" .=) <$> _miiValue, ("key" .=) <$> _miiKey])
+
+-- | A TargetHttpsProxy resource. This resource defines an HTTPS proxy.
+--
+-- /See:/ 'targetHTTPSProxy' smart constructor.
+data TargetHTTPSProxy = TargetHTTPSProxy
+    { _thpURLMap            :: !(Maybe Text)
+    , _thpSSLCertificates   :: !(Maybe [Text])
+    , _thpKind              :: !Text
+    , _thpSelfLink          :: !(Maybe Text)
+    , _thpName              :: !(Maybe Text)
+    , _thpCreationTimestamp :: !(Maybe Text)
+    , _thpId                :: !(Maybe Word64)
+    , _thpDescription       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetHTTPSProxy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'thpURLMap'
+--
+-- * 'thpSSLCertificates'
+--
+-- * 'thpKind'
+--
+-- * 'thpSelfLink'
+--
+-- * 'thpName'
+--
+-- * 'thpCreationTimestamp'
+--
+-- * 'thpId'
+--
+-- * 'thpDescription'
+targetHTTPSProxy
+    :: TargetHTTPSProxy
+targetHTTPSProxy =
+    TargetHTTPSProxy
+    { _thpURLMap = Nothing
+    , _thpSSLCertificates = Nothing
+    , _thpKind = "compute#targetHttpsProxy"
+    , _thpSelfLink = Nothing
+    , _thpName = Nothing
+    , _thpCreationTimestamp = Nothing
+    , _thpId = Nothing
+    , _thpDescription = Nothing
+    }
+
+-- | URL to the UrlMap resource that defines the mapping from URL to the
+-- BackendService.
+thpURLMap :: Lens' TargetHTTPSProxy (Maybe Text)
+thpURLMap
+  = lens _thpURLMap (\ s a -> s{_thpURLMap = a})
+
+-- | URLs to SslCertificate resources that are used to authenticate
+-- connections to Backends. Currently exactly one SSL certificate must be
+-- specified.
+thpSSLCertificates :: Lens' TargetHTTPSProxy [Text]
+thpSSLCertificates
+  = lens _thpSSLCertificates
+      (\ s a -> s{_thpSSLCertificates = a})
+      . _Default
+      . _Coerce
+
+-- | Type of the resource.
+thpKind :: Lens' TargetHTTPSProxy Text
+thpKind = lens _thpKind (\ s a -> s{_thpKind = a})
+
+-- | [Output Only] Server-defined URL for the resource.
+thpSelfLink :: Lens' TargetHTTPSProxy (Maybe Text)
+thpSelfLink
+  = lens _thpSelfLink (\ s a -> s{_thpSelfLink = a})
+
+-- | Name of the resource. Provided by the client when the resource is
+-- created. The name must be 1-63 characters long, and comply with RFC1035.
+-- Specifically, the name must be 1-63 characters long and match the
+-- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
+-- character must be a lowercase letter, and all following characters must
+-- be a dash, lowercase letter, or digit, except the last character, which
+-- cannot be a dash.
+thpName :: Lens' TargetHTTPSProxy (Maybe Text)
+thpName = lens _thpName (\ s a -> s{_thpName = a})
+
+-- | [Output Only] Creation timestamp in RFC3339 text format.
+thpCreationTimestamp :: Lens' TargetHTTPSProxy (Maybe Text)
+thpCreationTimestamp
+  = lens _thpCreationTimestamp
+      (\ s a -> s{_thpCreationTimestamp = a})
+
+-- | [Output Only] Unique identifier for the resource; defined by the server.
+thpId :: Lens' TargetHTTPSProxy (Maybe Word64)
+thpId = lens _thpId (\ s a -> s{_thpId = a})
+
+-- | An optional textual description of the resource. Provided by the client
+-- when the resource is created.
+thpDescription :: Lens' TargetHTTPSProxy (Maybe Text)
+thpDescription
+  = lens _thpDescription
+      (\ s a -> s{_thpDescription = a})
+
+instance FromJSON TargetHTTPSProxy where
+        parseJSON
+          = withObject "TargetHTTPSProxy"
+              (\ o ->
+                 TargetHTTPSProxy <$>
+                   (o .:? "urlMap") <*>
+                     (o .:? "sslCertificates" .!= mempty)
+                     <*> (o .:? "kind" .!= "compute#targetHttpsProxy")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "description"))
+
+instance ToJSON TargetHTTPSProxy where
+        toJSON TargetHTTPSProxy{..}
+          = object
+              (catMaybes
+                 [("urlMap" .=) <$> _thpURLMap,
+                  ("sslCertificates" .=) <$> _thpSSLCertificates,
+                  Just ("kind" .= _thpKind),
+                  ("selfLink" .=) <$> _thpSelfLink,
+                  ("name" .=) <$> _thpName,
+                  ("creationTimestamp" .=) <$> _thpCreationTimestamp,
+                  ("id" .=) <$> _thpId,
+                  ("description" .=) <$> _thpDescription])
 
 --
 -- /See:/ 'targetVPNGatewaysScopedList' smart constructor.
@@ -14292,6 +14865,193 @@ instance ToJSON InstanceGroupsScopedList where
               (catMaybes
                  [("warning" .=) <$> _igslWarning,
                   ("instanceGroups" .=) <$> _igslInstanceGroups])
+
+-- | An HttpsHealthCheck resource. This resource defines a template for how
+-- individual instances should be checked for health, via HTTPS.
+--
+-- /See:/ 'httpsHealthCheck' smart constructor.
+data HTTPSHealthCheck = HTTPSHealthCheck
+    { _hhcHealthyThreshold   :: !(Maybe Int32)
+    , _hhcKind               :: !Text
+    , _hhcRequestPath        :: !(Maybe Text)
+    , _hhcSelfLink           :: !(Maybe Text)
+    , _hhcCheckIntervalSec   :: !(Maybe Int32)
+    , _hhcName               :: !(Maybe Text)
+    , _hhcCreationTimestamp  :: !(Maybe Text)
+    , _hhcId                 :: !(Maybe Word64)
+    , _hhcHost               :: !(Maybe Text)
+    , _hhcTimeoutSec         :: !(Maybe Int32)
+    , _hhcDescription        :: !(Maybe Text)
+    , _hhcUnhealthyThreshold :: !(Maybe Int32)
+    , _hhcPort               :: !(Maybe Int32)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'HTTPSHealthCheck' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'hhcHealthyThreshold'
+--
+-- * 'hhcKind'
+--
+-- * 'hhcRequestPath'
+--
+-- * 'hhcSelfLink'
+--
+-- * 'hhcCheckIntervalSec'
+--
+-- * 'hhcName'
+--
+-- * 'hhcCreationTimestamp'
+--
+-- * 'hhcId'
+--
+-- * 'hhcHost'
+--
+-- * 'hhcTimeoutSec'
+--
+-- * 'hhcDescription'
+--
+-- * 'hhcUnhealthyThreshold'
+--
+-- * 'hhcPort'
+httpsHealthCheck
+    :: HTTPSHealthCheck
+httpsHealthCheck =
+    HTTPSHealthCheck
+    { _hhcHealthyThreshold = Nothing
+    , _hhcKind = "compute#httpsHealthCheck"
+    , _hhcRequestPath = Nothing
+    , _hhcSelfLink = Nothing
+    , _hhcCheckIntervalSec = Nothing
+    , _hhcName = Nothing
+    , _hhcCreationTimestamp = Nothing
+    , _hhcId = Nothing
+    , _hhcHost = Nothing
+    , _hhcTimeoutSec = Nothing
+    , _hhcDescription = Nothing
+    , _hhcUnhealthyThreshold = Nothing
+    , _hhcPort = Nothing
+    }
+
+-- | A so-far unhealthy instance will be marked healthy after this many
+-- consecutive successes. The default value is 2.
+hhcHealthyThreshold :: Lens' HTTPSHealthCheck (Maybe Int32)
+hhcHealthyThreshold
+  = lens _hhcHealthyThreshold
+      (\ s a -> s{_hhcHealthyThreshold = a})
+
+-- | Type of the resource.
+hhcKind :: Lens' HTTPSHealthCheck Text
+hhcKind = lens _hhcKind (\ s a -> s{_hhcKind = a})
+
+-- | The request path of the HTTPS health check request. The default value is
+-- \"\/\".
+hhcRequestPath :: Lens' HTTPSHealthCheck (Maybe Text)
+hhcRequestPath
+  = lens _hhcRequestPath
+      (\ s a -> s{_hhcRequestPath = a})
+
+-- | [Output Only] Server-defined URL for the resource.
+hhcSelfLink :: Lens' HTTPSHealthCheck (Maybe Text)
+hhcSelfLink
+  = lens _hhcSelfLink (\ s a -> s{_hhcSelfLink = a})
+
+-- | How often (in seconds) to send a health check. The default value is 5
+-- seconds.
+hhcCheckIntervalSec :: Lens' HTTPSHealthCheck (Maybe Int32)
+hhcCheckIntervalSec
+  = lens _hhcCheckIntervalSec
+      (\ s a -> s{_hhcCheckIntervalSec = a})
+
+-- | Name of the resource. Provided by the client when the resource is
+-- created. The name must be 1-63 characters long, and comply with RFC1035.
+-- Specifically, the name must be 1-63 characters long and match the
+-- regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first
+-- character must be a lowercase letter, and all following characters must
+-- be a dash, lowercase letter, or digit, except the last character, which
+-- cannot be a dash.
+hhcName :: Lens' HTTPSHealthCheck (Maybe Text)
+hhcName = lens _hhcName (\ s a -> s{_hhcName = a})
+
+-- | [Output Only] Creation timestamp in RFC3339 text format.
+hhcCreationTimestamp :: Lens' HTTPSHealthCheck (Maybe Text)
+hhcCreationTimestamp
+  = lens _hhcCreationTimestamp
+      (\ s a -> s{_hhcCreationTimestamp = a})
+
+-- | [Output Only] Unique identifier for the resource; defined by the server.
+hhcId :: Lens' HTTPSHealthCheck (Maybe Word64)
+hhcId = lens _hhcId (\ s a -> s{_hhcId = a})
+
+-- | The value of the host header in the HTTPS health check request. If left
+-- empty (default value), the public IP on behalf of which this health
+-- check is performed will be used.
+hhcHost :: Lens' HTTPSHealthCheck (Maybe Text)
+hhcHost = lens _hhcHost (\ s a -> s{_hhcHost = a})
+
+-- | How long (in seconds) to wait before claiming failure. The default value
+-- is 5 seconds. It is invalid for timeoutSec to have a greater value than
+-- checkIntervalSec.
+hhcTimeoutSec :: Lens' HTTPSHealthCheck (Maybe Int32)
+hhcTimeoutSec
+  = lens _hhcTimeoutSec
+      (\ s a -> s{_hhcTimeoutSec = a})
+
+-- | An optional textual description of the resource; provided by the client
+-- when the resource is created.
+hhcDescription :: Lens' HTTPSHealthCheck (Maybe Text)
+hhcDescription
+  = lens _hhcDescription
+      (\ s a -> s{_hhcDescription = a})
+
+-- | A so-far healthy instance will be marked unhealthy after this many
+-- consecutive failures. The default value is 2.
+hhcUnhealthyThreshold :: Lens' HTTPSHealthCheck (Maybe Int32)
+hhcUnhealthyThreshold
+  = lens _hhcUnhealthyThreshold
+      (\ s a -> s{_hhcUnhealthyThreshold = a})
+
+-- | The TCP port number for the HTTPS health check request. The default
+-- value is 443.
+hhcPort :: Lens' HTTPSHealthCheck (Maybe Int32)
+hhcPort = lens _hhcPort (\ s a -> s{_hhcPort = a})
+
+instance FromJSON HTTPSHealthCheck where
+        parseJSON
+          = withObject "HTTPSHealthCheck"
+              (\ o ->
+                 HTTPSHealthCheck <$>
+                   (o .:? "healthyThreshold") <*>
+                     (o .:? "kind" .!= "compute#httpsHealthCheck")
+                     <*> (o .:? "requestPath")
+                     <*> (o .:? "selfLink")
+                     <*> (o .:? "checkIntervalSec")
+                     <*> (o .:? "name")
+                     <*> (o .:? "creationTimestamp")
+                     <*> (o .:? "id")
+                     <*> (o .:? "host")
+                     <*> (o .:? "timeoutSec")
+                     <*> (o .:? "description")
+                     <*> (o .:? "unhealthyThreshold")
+                     <*> (o .:? "port"))
+
+instance ToJSON HTTPSHealthCheck where
+        toJSON HTTPSHealthCheck{..}
+          = object
+              (catMaybes
+                 [("healthyThreshold" .=) <$> _hhcHealthyThreshold,
+                  Just ("kind" .= _hhcKind),
+                  ("requestPath" .=) <$> _hhcRequestPath,
+                  ("selfLink" .=) <$> _hhcSelfLink,
+                  ("checkIntervalSec" .=) <$> _hhcCheckIntervalSec,
+                  ("name" .=) <$> _hhcName,
+                  ("creationTimestamp" .=) <$> _hhcCreationTimestamp,
+                  ("id" .=) <$> _hhcId, ("host" .=) <$> _hhcHost,
+                  ("timeoutSec" .=) <$> _hhcTimeoutSec,
+                  ("description" .=) <$> _hhcDescription,
+                  ("unhealthyThreshold" .=) <$> _hhcUnhealthyThreshold,
+                  ("port" .=) <$> _hhcPort])
 
 -- | [Output Only] A map of scoped vpn tunnel lists.
 --
@@ -14842,7 +15602,7 @@ instance ToJSON Instance where
 
 -- | A matcher for the path portion of the URL. The BackendService from the
 -- longest-matched rule will serve the URL. If no rule was matched, the
--- default_service will be used.
+-- default service will be used.
 --
 -- /See:/ 'pathMatcher' smart constructor.
 data PathMatcher = PathMatcher

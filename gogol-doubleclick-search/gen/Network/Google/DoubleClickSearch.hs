@@ -149,6 +149,7 @@ module Network.Google.DoubleClickSearch
     , racsGroupByColumn
     , racsCustomMetricName
     , racsEndDate
+    , racsProductReportPerspective
     , racsStartDate
     , racsHeaderText
     , racsPlatformSource

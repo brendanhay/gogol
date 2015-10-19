@@ -22,9 +22,8 @@
 --
 -- | Returns a list of aliases for a course. This method returns the
 -- following error codes: * \`PERMISSION_DENIED\` if the requesting user is
--- not permitted to access the course or for [general user permission
--- errors][User Permission Errors]. * \`NOT_FOUND\` if the course does not
--- exist.
+-- not permitted to access the course or for access errors. * \`NOT_FOUND\`
+-- if the course does not exist.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesAliasesList@.
 module Network.Google.Resource.Classroom.Courses.Aliases.List
@@ -73,9 +72,8 @@ type CoursesAliasesListResource =
 
 -- | Returns a list of aliases for a course. This method returns the
 -- following error codes: * \`PERMISSION_DENIED\` if the requesting user is
--- not permitted to access the course or for [general user permission
--- errors][User Permission Errors]. * \`NOT_FOUND\` if the course does not
--- exist.
+-- not permitted to access the course or for access errors. * \`NOT_FOUND\`
+-- if the course does not exist.
 --
 -- /See:/ 'coursesAliasesList'' smart constructor.
 data CoursesAliasesList' = CoursesAliasesList'
@@ -146,8 +144,7 @@ calPp :: Lens' CoursesAliasesList' Bool
 calPp = lens _calPp (\ s a -> s{_calPp = a})
 
 -- | The identifier of the course. This identifier can be either the
--- Classroom-assigned identifier or an
--- [alias][google.classroom.v1.CourseAlias].
+-- Classroom-assigned identifier or an alias.
 calCourseId :: Lens' CoursesAliasesList' Text
 calCourseId
   = lens _calCourseId (\ s a -> s{_calCourseId = a})
@@ -170,12 +167,9 @@ calBearerToken
   = lens _calBearerToken
       (\ s a -> s{_calBearerToken = a})
 
--- | [nextPageToken][google.classroom.v1.ListCourseAliasesResponse.next_page_token]
--- value returned from a previous
--- [list][google.classroom.v1.Courses.ListCourseAliases] call, indicating
--- that the subsequent page of results should be returned. The
--- [list][google.classroom.v1.Courses.ListCourseAliases] request must be
--- otherwise identical to the one that resulted in this token.
+-- | nextPageToken value returned from a previous list call, indicating that
+-- the subsequent page of results should be returned. The list request must
+-- be otherwise identical to the one that resulted in this token.
 calPageToken :: Lens' CoursesAliasesList' (Maybe Text)
 calPageToken
   = lens _calPageToken (\ s a -> s{_calPageToken = a})

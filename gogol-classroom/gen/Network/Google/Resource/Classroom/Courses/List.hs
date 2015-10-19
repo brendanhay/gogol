@@ -22,10 +22,9 @@
 --
 -- | Returns a list of courses that the requesting user is permitted to view,
 -- restricted to those that match the request. This method returns the
--- following error codes: * \`PERMISSION_DENIED\` for [general user
--- permission errors][User Permission Errors]. * \`INVALID_ARGUMENT\` if
--- the query argument is malformed. * \`NOT_FOUND\` if any users specified
--- in the query arguments do not exist.
+-- following error codes: * \`PERMISSION_DENIED\` for access errors. *
+-- \`INVALID_ARGUMENT\` if the query argument is malformed. * \`NOT_FOUND\`
+-- if any users specified in the query arguments do not exist.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesList@.
 module Network.Google.Resource.Classroom.Courses.List
@@ -75,10 +74,9 @@ type CoursesListResource =
 
 -- | Returns a list of courses that the requesting user is permitted to view,
 -- restricted to those that match the request. This method returns the
--- following error codes: * \`PERMISSION_DENIED\` for [general user
--- permission errors][User Permission Errors]. * \`INVALID_ARGUMENT\` if
--- the query argument is malformed. * \`NOT_FOUND\` if any users specified
--- in the query arguments do not exist.
+-- following error codes: * \`PERMISSION_DENIED\` for access errors. *
+-- \`INVALID_ARGUMENT\` if the query argument is malformed. * \`NOT_FOUND\`
+-- if any users specified in the query arguments do not exist.
 --
 -- /See:/ 'coursesList'' smart constructor.
 data CoursesList' = CoursesList'
@@ -184,12 +182,9 @@ clBearerToken
   = lens _clBearerToken
       (\ s a -> s{_clBearerToken = a})
 
--- | [nextPageToken][google.classroom.v1.ListCoursesResponse.next_page_token]
--- value returned from a previous
--- [list][google.classroom.v1.Courses.ListCourses] call, indicating that
--- the subsequent page of results should be returned. The
--- [list][google.classroom.v1.Courses.ListCourses] request must be
--- otherwise identical to the one that resulted in this token.
+-- | nextPageToken value returned from a previous list call, indicating that
+-- the subsequent page of results should be returned. The list request must
+-- be otherwise identical to the one that resulted in this token.
 clPageToken :: Lens' CoursesList' (Maybe Text)
 clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})

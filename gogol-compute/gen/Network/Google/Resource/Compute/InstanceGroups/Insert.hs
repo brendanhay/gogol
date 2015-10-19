@@ -89,7 +89,7 @@ igiProject :: Lens' InstanceGroupsInsert' Text
 igiProject
   = lens _igiProject (\ s a -> s{_igiProject = a})
 
--- | The URL of the zone where the instance group is located.
+-- | The name of the zone where you want to create the instance group.
 igiZone :: Lens' InstanceGroupsInsert' Text
 igiZone = lens _igiZone (\ s a -> s{_igiZone = a})
 

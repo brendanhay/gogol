@@ -94,42 +94,6 @@ instance ToJSON ListFoldersResponse where
         toJSON ListFoldersResponse{..}
           = object (catMaybes [("folders" .=) <$> _lfrFolders])
 
--- | List Rules Response.
---
--- /See:/ 'listRulesResponse' smart constructor.
-newtype ListRulesResponse = ListRulesResponse
-    { _lrrRules :: Maybe [Rule]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListRulesResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lrrRules'
-listRulesResponse
-    :: ListRulesResponse
-listRulesResponse =
-    ListRulesResponse
-    { _lrrRules = Nothing
-    }
-
--- | All GTM Rules of a GTM Container.
-lrrRules :: Lens' ListRulesResponse [Rule]
-lrrRules
-  = lens _lrrRules (\ s a -> s{_lrrRules = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ListRulesResponse where
-        parseJSON
-          = withObject "ListRulesResponse"
-              (\ o ->
-                 ListRulesResponse <$> (o .:? "rules" .!= mempty))
-
-instance ToJSON ListRulesResponse where
-        toJSON ListRulesResponse{..}
-          = object (catMaybes [("rules" .=) <$> _lrrRules])
-
 -- | Publish container version response.
 --
 -- /See:/ 'publishContainerVersionResponse' smart constructor.
@@ -2410,42 +2374,6 @@ instance ToJSON ListTagsResponse where
         toJSON ListTagsResponse{..}
           = object (catMaybes [("tags" .=) <$> _ltrTags])
 
--- | List Macros Response.
---
--- /See:/ 'listMacrosResponse' smart constructor.
-newtype ListMacrosResponse = ListMacrosResponse
-    { _lmrMacros :: Maybe [Macro]
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ListMacrosResponse' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'lmrMacros'
-listMacrosResponse
-    :: ListMacrosResponse
-listMacrosResponse =
-    ListMacrosResponse
-    { _lmrMacros = Nothing
-    }
-
--- | All GTM Macros of a GTM Container.
-lmrMacros :: Lens' ListMacrosResponse [Macro]
-lmrMacros
-  = lens _lmrMacros (\ s a -> s{_lmrMacros = a}) .
-      _Default
-      . _Coerce
-
-instance FromJSON ListMacrosResponse where
-        parseJSON
-          = withObject "ListMacrosResponse"
-              (\ o ->
-                 ListMacrosResponse <$> (o .:? "macros" .!= mempty))
-
-instance ToJSON ListMacrosResponse where
-        toJSON ListMacrosResponse{..}
-          = object (catMaybes [("macros" .=) <$> _lmrMacros])
-
 -- | Represents a Google Tag Manager Folder\'s contents.
 --
 -- /See:/ 'folderEntities' smart constructor.
@@ -2540,7 +2468,7 @@ cType = lens _cType (\ s a -> s{_cType = a})
 -- | A list of named parameters (key\/value), depending on the condition\'s
 -- type. Notes: - For binary operators, include parameters named arg0 and
 -- arg1 for specifying the left and right operands, respectively. - At this
--- time, the left operand (arg0) must be a reference to a macro. - For
+-- time, the left operand (arg0) must be a reference to a variable. - For
 -- case-insensitive Regex matching, include a boolean parameter named
 -- ignore_case that is set to true. If not specified or set to any other
 -- value, the matching will be case sensitive. - To negate an operator,
@@ -2659,8 +2587,8 @@ pList
   = lens _pList (\ s a -> s{_pList = a}) . _Default .
       _Coerce
 
--- | A parameter\'s value (may contain macro references such as
--- \"{{myMacro}}\") as appropriate to the specified type.
+-- | A parameter\'s value (may contain variable references such as
+-- \"{{myVariable}}\") as appropriate to the specified type.
 pValue :: Lens' Parameter (Maybe Text)
 pValue = lens _pValue (\ s a -> s{_pValue = a})
 
@@ -2680,8 +2608,8 @@ pKey = lens _pKey (\ s a -> s{_pKey = a})
 -- represents a 64-bit signed integer value, in base 10 - list: A list of
 -- parameters should be specified - map: A map of parameters should be
 -- specified - template: The value represents any text; this can include
--- macro references (even macro references that might return non-string
--- types)
+-- variable references (even variable references that might return
+-- non-string types)
 pType :: Lens' Parameter (Maybe ParameterType)
 pType = lens _pType (\ s a -> s{_pType = a})
 

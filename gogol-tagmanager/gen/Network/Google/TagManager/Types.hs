@@ -37,11 +37,6 @@ module Network.Google.TagManager.Types
     , listFoldersResponse
     , lfrFolders
 
-    -- * ListRulesResponse
-    , ListRulesResponse
-    , listRulesResponse
-    , lrrRules
-
     -- * PublishContainerVersionResponse
     , PublishContainerVersionResponse
     , publishContainerVersionResponse
@@ -297,11 +292,6 @@ module Network.Google.TagManager.Types
     , ListTagsResponse
     , listTagsResponse
     , ltrTags
-
-    -- * ListMacrosResponse
-    , ListMacrosResponse
-    , listMacrosResponse
-    , lmrMacros
 
     -- * FolderEntities
     , FolderEntities

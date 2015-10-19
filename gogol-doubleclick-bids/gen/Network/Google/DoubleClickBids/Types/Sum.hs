@@ -81,6 +81,8 @@ data ParametersType
       -- ^ @TYPE_NIELSEN_AUDIENCE_PROFILE@
     | TypeNielsenDailyReachBuild
       -- ^ @TYPE_NIELSEN_DAILY_REACH_BUILD@
+    | TypeNielsenOnlineGlobalMarket
+      -- ^ @TYPE_NIELSEN_ONLINE_GLOBAL_MARKET@
     | TypeNielsenSite
       -- ^ @TYPE_NIELSEN_SITE@
     | TypeOrderId
@@ -122,6 +124,7 @@ instance FromText ParametersType where
         "TYPE_KEYWORD" -> Just TypeKeyword
         "TYPE_NIELSEN_AUDIENCE_PROFILE" -> Just TypeNielsenAudienceProFile
         "TYPE_NIELSEN_DAILY_REACH_BUILD" -> Just TypeNielsenDailyReachBuild
+        "TYPE_NIELSEN_ONLINE_GLOBAL_MARKET" -> Just TypeNielsenOnlineGlobalMarket
         "TYPE_NIELSEN_SITE" -> Just TypeNielsenSite
         "TYPE_ORDER_ID" -> Just TypeOrderId
         "TYPE_PAGE_CATEGORY" -> Just TypePageCategory
@@ -151,6 +154,7 @@ instance ToText ParametersType where
         TypeKeyword -> "TYPE_KEYWORD"
         TypeNielsenAudienceProFile -> "TYPE_NIELSEN_AUDIENCE_PROFILE"
         TypeNielsenDailyReachBuild -> "TYPE_NIELSEN_DAILY_REACH_BUILD"
+        TypeNielsenOnlineGlobalMarket -> "TYPE_NIELSEN_ONLINE_GLOBAL_MARKET"
         TypeNielsenSite -> "TYPE_NIELSEN_SITE"
         TypeOrderId -> "TYPE_ORDER_ID"
         TypePageCategory -> "TYPE_PAGE_CATEGORY"
@@ -425,6 +429,18 @@ data ParametersMetricsItem
       -- ^ @METRIC_FEE20_PARTNER@
     | MetricFEE20Usd
       -- ^ @METRIC_FEE20_USD@
+    | MetricFEE21Advertiser
+      -- ^ @METRIC_FEE21_ADVERTISER@
+    | MetricFEE21Partner
+      -- ^ @METRIC_FEE21_PARTNER@
+    | MetricFEE21Usd
+      -- ^ @METRIC_FEE21_USD@
+    | MetricFEE22Advertiser
+      -- ^ @METRIC_FEE22_ADVERTISER@
+    | MetricFEE22Partner
+      -- ^ @METRIC_FEE22_PARTNER@
+    | MetricFEE22Usd
+      -- ^ @METRIC_FEE22_USD@
     | MetricFEE2Advertiser
       -- ^ @METRIC_FEE2_ADVERTISER@
     | MetricFEE2Partner
@@ -523,6 +539,12 @@ data ParametersMetricsItem
       -- ^ @METRIC_MEDIA_COST_PARTNER@
     | MetricMediaCostUsd
       -- ^ @METRIC_MEDIA_COST_USD@
+    | MetricMediaCostViewableEcpmAdvertiser
+      -- ^ @METRIC_MEDIA_COST_VIEWABLE_ECPM_ADVERTISER@
+    | MetricMediaCostViewableEcpmPartner
+      -- ^ @METRIC_MEDIA_COST_VIEWABLE_ECPM_PARTNER@
+    | MetricMediaCostViewableEcpmUsd
+      -- ^ @METRIC_MEDIA_COST_VIEWABLE_ECPM_USD@
     | MetricMediaFEE1Advertiser
       -- ^ @METRIC_MEDIA_FEE1_ADVERTISER@
     | MetricMediaFEE1Partner
@@ -603,6 +625,12 @@ data ParametersMetricsItem
       -- ^ @METRIC_PROFIT_PARTNER@
     | MetricProfitUsd
       -- ^ @METRIC_PROFIT_USD@
+    | MetricProfitViewableEcpmAdvertiser
+      -- ^ @METRIC_PROFIT_VIEWABLE_ECPM_ADVERTISER@
+    | MetricProfitViewableEcpmPartner
+      -- ^ @METRIC_PROFIT_VIEWABLE_ECPM_PARTNER@
+    | MetricProfitViewableEcpmUsd
+      -- ^ @METRIC_PROFIT_VIEWABLE_ECPM_USD@
     | MetricRevenueAdvertiser
       -- ^ @METRIC_REVENUE_ADVERTISER@
     | MetricRevenueEcpapcAdvertiser
@@ -645,6 +673,12 @@ data ParametersMetricsItem
       -- ^ @METRIC_REVENUE_PARTNER@
     | MetricRevenueUsd
       -- ^ @METRIC_REVENUE_USD@
+    | MetricRevenueViewableEcpmAdvertiser
+      -- ^ @METRIC_REVENUE_VIEWABLE_ECPM_ADVERTISER@
+    | MetricRevenueViewableEcpmPartner
+      -- ^ @METRIC_REVENUE_VIEWABLE_ECPM_PARTNER@
+    | MetricRevenueViewableEcpmUsd
+      -- ^ @METRIC_REVENUE_VIEWABLE_ECPM_USD@
     | MetricRichMediaVideoCompletions
       -- ^ @METRIC_RICH_MEDIA_VIDEO_COMPLETIONS@
     | MetricRichMediaVideoFirstQuartileCompletes
@@ -713,12 +747,42 @@ data ParametersMetricsItem
       -- ^ @METRIC_TOTAL_MEDIA_COST_PARTNER@
     | MetricTotalMediaCostUsd
       -- ^ @METRIC_TOTAL_MEDIA_COST_USD@
+    | MetricTotalMediaCostViewableEcpmAdvertiser
+      -- ^ @METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_ADVERTISER@
+    | MetricTotalMediaCostViewableEcpmPartner
+      -- ^ @METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_PARTNER@
+    | MetricTotalMediaCostViewableEcpmUsd
+      -- ^ @METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_USD@
+    | MetricTrueviewConversionCostManyPerViewAdvertiser
+      -- ^ @METRIC_TRUEVIEW_CONVERSION_COST_MANY_PER_VIEW_ADVERTISER@
+    | MetricTrueviewConversionCostManyPerViewPartner
+      -- ^ @METRIC_TRUEVIEW_CONVERSION_COST_MANY_PER_VIEW_PARTNER@
+    | MetricTrueviewConversionCostManyPerViewUsd
+      -- ^ @METRIC_TRUEVIEW_CONVERSION_COST_MANY_PER_VIEW_USD@
+    | MetricTrueviewConversionCostOnePerViewAdvertiser
+      -- ^ @METRIC_TRUEVIEW_CONVERSION_COST_ONE_PER_VIEW_ADVERTISER@
+    | MetricTrueviewConversionCostOnePerViewPartner
+      -- ^ @METRIC_TRUEVIEW_CONVERSION_COST_ONE_PER_VIEW_PARTNER@
+    | MetricTrueviewConversionCostOnePerViewUsd
+      -- ^ @METRIC_TRUEVIEW_CONVERSION_COST_ONE_PER_VIEW_USD@
     | MetricTrueviewConversionManyPerView
       -- ^ @METRIC_TRUEVIEW_CONVERSION_MANY_PER_VIEW@
     | MetricTrueviewConversionOnePerView
       -- ^ @METRIC_TRUEVIEW_CONVERSION_ONE_PER_VIEW@
     | MetricTrueviewConversionRateOnePerView
       -- ^ @METRIC_TRUEVIEW_CONVERSION_RATE_ONE_PER_VIEW@
+    | MetricTrueviewConversionValueManyPerViewAdvertiser
+      -- ^ @METRIC_TRUEVIEW_CONVERSION_VALUE_MANY_PER_VIEW_ADVERTISER@
+    | MetricTrueviewConversionValueManyPerViewPartner
+      -- ^ @METRIC_TRUEVIEW_CONVERSION_VALUE_MANY_PER_VIEW_PARTNER@
+    | MetricTrueviewConversionValueManyPerViewUsd
+      -- ^ @METRIC_TRUEVIEW_CONVERSION_VALUE_MANY_PER_VIEW_USD@
+    | MetricTrueviewConversionValueOnePerViewAdvertiser
+      -- ^ @METRIC_TRUEVIEW_CONVERSION_VALUE_ONE_PER_VIEW_ADVERTISER@
+    | MetricTrueviewConversionValueOnePerViewPartner
+      -- ^ @METRIC_TRUEVIEW_CONVERSION_VALUE_ONE_PER_VIEW_PARTNER@
+    | MetricTrueviewConversionValueOnePerViewUsd
+      -- ^ @METRIC_TRUEVIEW_CONVERSION_VALUE_ONE_PER_VIEW_USD@
     | MetricTrueviewCostConversionManyPerViewRatio
       -- ^ @METRIC_TRUEVIEW_COST_CONVERSION_MANY_PER_VIEW_RATIO@
     | MetricTrueviewCostConversionOnePerViewRatio
@@ -747,6 +811,12 @@ data ParametersMetricsItem
       -- ^ @METRIC_TRUEVIEW_LOST_IS_RANK@
     | MetricTrueviewTotalConversionValue
       -- ^ @METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUE@
+    | MetricTrueviewTotalConversionValuesAdvertiser
+      -- ^ @METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUES_ADVERTISER@
+    | MetricTrueviewTotalConversionValuesPartner
+      -- ^ @METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUES_PARTNER@
+    | MetricTrueviewTotalConversionValuesUsd
+      -- ^ @METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUES_USD@
     | MetricTrueviewUniqueViewers
       -- ^ @METRIC_TRUEVIEW_UNIQUE_VIEWERS@
     | MetricTrueviewValueConversionManyPerViewRatio
@@ -842,6 +912,12 @@ instance FromText ParametersMetricsItem where
         "METRIC_FEE20_ADVERTISER" -> Just MetricFEE20Advertiser
         "METRIC_FEE20_PARTNER" -> Just MetricFEE20Partner
         "METRIC_FEE20_USD" -> Just MetricFEE20Usd
+        "METRIC_FEE21_ADVERTISER" -> Just MetricFEE21Advertiser
+        "METRIC_FEE21_PARTNER" -> Just MetricFEE21Partner
+        "METRIC_FEE21_USD" -> Just MetricFEE21Usd
+        "METRIC_FEE22_ADVERTISER" -> Just MetricFEE22Advertiser
+        "METRIC_FEE22_PARTNER" -> Just MetricFEE22Partner
+        "METRIC_FEE22_USD" -> Just MetricFEE22Usd
         "METRIC_FEE2_ADVERTISER" -> Just MetricFEE2Advertiser
         "METRIC_FEE2_PARTNER" -> Just MetricFEE2Partner
         "METRIC_FEE2_USD" -> Just MetricFEE2Usd
@@ -891,6 +967,9 @@ instance FromText ParametersMetricsItem where
         "METRIC_MEDIA_COST_ECPM_USD" -> Just MetricMediaCostEcpmUsd
         "METRIC_MEDIA_COST_PARTNER" -> Just MetricMediaCostPartner
         "METRIC_MEDIA_COST_USD" -> Just MetricMediaCostUsd
+        "METRIC_MEDIA_COST_VIEWABLE_ECPM_ADVERTISER" -> Just MetricMediaCostViewableEcpmAdvertiser
+        "METRIC_MEDIA_COST_VIEWABLE_ECPM_PARTNER" -> Just MetricMediaCostViewableEcpmPartner
+        "METRIC_MEDIA_COST_VIEWABLE_ECPM_USD" -> Just MetricMediaCostViewableEcpmUsd
         "METRIC_MEDIA_FEE1_ADVERTISER" -> Just MetricMediaFEE1Advertiser
         "METRIC_MEDIA_FEE1_PARTNER" -> Just MetricMediaFEE1Partner
         "METRIC_MEDIA_FEE1_USD" -> Just MetricMediaFEE1Usd
@@ -931,6 +1010,9 @@ instance FromText ParametersMetricsItem where
         "METRIC_PROFIT_MARGIN" -> Just MetricProfitMargin
         "METRIC_PROFIT_PARTNER" -> Just MetricProfitPartner
         "METRIC_PROFIT_USD" -> Just MetricProfitUsd
+        "METRIC_PROFIT_VIEWABLE_ECPM_ADVERTISER" -> Just MetricProfitViewableEcpmAdvertiser
+        "METRIC_PROFIT_VIEWABLE_ECPM_PARTNER" -> Just MetricProfitViewableEcpmPartner
+        "METRIC_PROFIT_VIEWABLE_ECPM_USD" -> Just MetricProfitViewableEcpmUsd
         "METRIC_REVENUE_ADVERTISER" -> Just MetricRevenueAdvertiser
         "METRIC_REVENUE_ECPAPC_ADVERTISER" -> Just MetricRevenueEcpapcAdvertiser
         "METRIC_REVENUE_ECPAPC_PARTNER" -> Just MetricRevenueEcpapcPartner
@@ -952,6 +1034,9 @@ instance FromText ParametersMetricsItem where
         "METRIC_REVENUE_ECPM_USD" -> Just MetricRevenueEcpmUsd
         "METRIC_REVENUE_PARTNER" -> Just MetricRevenuePartner
         "METRIC_REVENUE_USD" -> Just MetricRevenueUsd
+        "METRIC_REVENUE_VIEWABLE_ECPM_ADVERTISER" -> Just MetricRevenueViewableEcpmAdvertiser
+        "METRIC_REVENUE_VIEWABLE_ECPM_PARTNER" -> Just MetricRevenueViewableEcpmPartner
+        "METRIC_REVENUE_VIEWABLE_ECPM_USD" -> Just MetricRevenueViewableEcpmUsd
         "METRIC_RICH_MEDIA_VIDEO_COMPLETIONS" -> Just MetricRichMediaVideoCompletions
         "METRIC_RICH_MEDIA_VIDEO_FIRST_QUARTILE_COMPLETES" -> Just MetricRichMediaVideoFirstQuartileCompletes
         "METRIC_RICH_MEDIA_VIDEO_FULL_SCREENS" -> Just MetricRichMediaVideoFullScreens
@@ -986,9 +1071,24 @@ instance FromText ParametersMetricsItem where
         "METRIC_TOTAL_MEDIA_COST_ECPM_USD" -> Just MetricTotalMediaCostEcpmUsd
         "METRIC_TOTAL_MEDIA_COST_PARTNER" -> Just MetricTotalMediaCostPartner
         "METRIC_TOTAL_MEDIA_COST_USD" -> Just MetricTotalMediaCostUsd
+        "METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_ADVERTISER" -> Just MetricTotalMediaCostViewableEcpmAdvertiser
+        "METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_PARTNER" -> Just MetricTotalMediaCostViewableEcpmPartner
+        "METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_USD" -> Just MetricTotalMediaCostViewableEcpmUsd
+        "METRIC_TRUEVIEW_CONVERSION_COST_MANY_PER_VIEW_ADVERTISER" -> Just MetricTrueviewConversionCostManyPerViewAdvertiser
+        "METRIC_TRUEVIEW_CONVERSION_COST_MANY_PER_VIEW_PARTNER" -> Just MetricTrueviewConversionCostManyPerViewPartner
+        "METRIC_TRUEVIEW_CONVERSION_COST_MANY_PER_VIEW_USD" -> Just MetricTrueviewConversionCostManyPerViewUsd
+        "METRIC_TRUEVIEW_CONVERSION_COST_ONE_PER_VIEW_ADVERTISER" -> Just MetricTrueviewConversionCostOnePerViewAdvertiser
+        "METRIC_TRUEVIEW_CONVERSION_COST_ONE_PER_VIEW_PARTNER" -> Just MetricTrueviewConversionCostOnePerViewPartner
+        "METRIC_TRUEVIEW_CONVERSION_COST_ONE_PER_VIEW_USD" -> Just MetricTrueviewConversionCostOnePerViewUsd
         "METRIC_TRUEVIEW_CONVERSION_MANY_PER_VIEW" -> Just MetricTrueviewConversionManyPerView
         "METRIC_TRUEVIEW_CONVERSION_ONE_PER_VIEW" -> Just MetricTrueviewConversionOnePerView
         "METRIC_TRUEVIEW_CONVERSION_RATE_ONE_PER_VIEW" -> Just MetricTrueviewConversionRateOnePerView
+        "METRIC_TRUEVIEW_CONVERSION_VALUE_MANY_PER_VIEW_ADVERTISER" -> Just MetricTrueviewConversionValueManyPerViewAdvertiser
+        "METRIC_TRUEVIEW_CONVERSION_VALUE_MANY_PER_VIEW_PARTNER" -> Just MetricTrueviewConversionValueManyPerViewPartner
+        "METRIC_TRUEVIEW_CONVERSION_VALUE_MANY_PER_VIEW_USD" -> Just MetricTrueviewConversionValueManyPerViewUsd
+        "METRIC_TRUEVIEW_CONVERSION_VALUE_ONE_PER_VIEW_ADVERTISER" -> Just MetricTrueviewConversionValueOnePerViewAdvertiser
+        "METRIC_TRUEVIEW_CONVERSION_VALUE_ONE_PER_VIEW_PARTNER" -> Just MetricTrueviewConversionValueOnePerViewPartner
+        "METRIC_TRUEVIEW_CONVERSION_VALUE_ONE_PER_VIEW_USD" -> Just MetricTrueviewConversionValueOnePerViewUsd
         "METRIC_TRUEVIEW_COST_CONVERSION_MANY_PER_VIEW_RATIO" -> Just MetricTrueviewCostConversionManyPerViewRatio
         "METRIC_TRUEVIEW_COST_CONVERSION_ONE_PER_VIEW_RATIO" -> Just MetricTrueviewCostConversionOnePerViewRatio
         "METRIC_TRUEVIEW_CPV_ADVERTISER" -> Just MetricTrueviewCpvAdvertiser
@@ -1003,6 +1103,9 @@ instance FromText ParametersMetricsItem where
         "METRIC_TRUEVIEW_LOST_IS_BUDGET" -> Just MetricTrueviewLostIsBudget
         "METRIC_TRUEVIEW_LOST_IS_RANK" -> Just MetricTrueviewLostIsRank
         "METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUE" -> Just MetricTrueviewTotalConversionValue
+        "METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUES_ADVERTISER" -> Just MetricTrueviewTotalConversionValuesAdvertiser
+        "METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUES_PARTNER" -> Just MetricTrueviewTotalConversionValuesPartner
+        "METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUES_USD" -> Just MetricTrueviewTotalConversionValuesUsd
         "METRIC_TRUEVIEW_UNIQUE_VIEWERS" -> Just MetricTrueviewUniqueViewers
         "METRIC_TRUEVIEW_VALUE_CONVERSION_MANY_PER_VIEW_RATIO" -> Just MetricTrueviewValueConversionManyPerViewRatio
         "METRIC_TRUEVIEW_VALUE_CONVERSION_ONE_PER_VIEW_RATIO" -> Just MetricTrueviewValueConversionOnePerViewRatio
@@ -1085,6 +1188,12 @@ instance ToText ParametersMetricsItem where
         MetricFEE20Advertiser -> "METRIC_FEE20_ADVERTISER"
         MetricFEE20Partner -> "METRIC_FEE20_PARTNER"
         MetricFEE20Usd -> "METRIC_FEE20_USD"
+        MetricFEE21Advertiser -> "METRIC_FEE21_ADVERTISER"
+        MetricFEE21Partner -> "METRIC_FEE21_PARTNER"
+        MetricFEE21Usd -> "METRIC_FEE21_USD"
+        MetricFEE22Advertiser -> "METRIC_FEE22_ADVERTISER"
+        MetricFEE22Partner -> "METRIC_FEE22_PARTNER"
+        MetricFEE22Usd -> "METRIC_FEE22_USD"
         MetricFEE2Advertiser -> "METRIC_FEE2_ADVERTISER"
         MetricFEE2Partner -> "METRIC_FEE2_PARTNER"
         MetricFEE2Usd -> "METRIC_FEE2_USD"
@@ -1134,6 +1243,9 @@ instance ToText ParametersMetricsItem where
         MetricMediaCostEcpmUsd -> "METRIC_MEDIA_COST_ECPM_USD"
         MetricMediaCostPartner -> "METRIC_MEDIA_COST_PARTNER"
         MetricMediaCostUsd -> "METRIC_MEDIA_COST_USD"
+        MetricMediaCostViewableEcpmAdvertiser -> "METRIC_MEDIA_COST_VIEWABLE_ECPM_ADVERTISER"
+        MetricMediaCostViewableEcpmPartner -> "METRIC_MEDIA_COST_VIEWABLE_ECPM_PARTNER"
+        MetricMediaCostViewableEcpmUsd -> "METRIC_MEDIA_COST_VIEWABLE_ECPM_USD"
         MetricMediaFEE1Advertiser -> "METRIC_MEDIA_FEE1_ADVERTISER"
         MetricMediaFEE1Partner -> "METRIC_MEDIA_FEE1_PARTNER"
         MetricMediaFEE1Usd -> "METRIC_MEDIA_FEE1_USD"
@@ -1174,6 +1286,9 @@ instance ToText ParametersMetricsItem where
         MetricProfitMargin -> "METRIC_PROFIT_MARGIN"
         MetricProfitPartner -> "METRIC_PROFIT_PARTNER"
         MetricProfitUsd -> "METRIC_PROFIT_USD"
+        MetricProfitViewableEcpmAdvertiser -> "METRIC_PROFIT_VIEWABLE_ECPM_ADVERTISER"
+        MetricProfitViewableEcpmPartner -> "METRIC_PROFIT_VIEWABLE_ECPM_PARTNER"
+        MetricProfitViewableEcpmUsd -> "METRIC_PROFIT_VIEWABLE_ECPM_USD"
         MetricRevenueAdvertiser -> "METRIC_REVENUE_ADVERTISER"
         MetricRevenueEcpapcAdvertiser -> "METRIC_REVENUE_ECPAPC_ADVERTISER"
         MetricRevenueEcpapcPartner -> "METRIC_REVENUE_ECPAPC_PARTNER"
@@ -1195,6 +1310,9 @@ instance ToText ParametersMetricsItem where
         MetricRevenueEcpmUsd -> "METRIC_REVENUE_ECPM_USD"
         MetricRevenuePartner -> "METRIC_REVENUE_PARTNER"
         MetricRevenueUsd -> "METRIC_REVENUE_USD"
+        MetricRevenueViewableEcpmAdvertiser -> "METRIC_REVENUE_VIEWABLE_ECPM_ADVERTISER"
+        MetricRevenueViewableEcpmPartner -> "METRIC_REVENUE_VIEWABLE_ECPM_PARTNER"
+        MetricRevenueViewableEcpmUsd -> "METRIC_REVENUE_VIEWABLE_ECPM_USD"
         MetricRichMediaVideoCompletions -> "METRIC_RICH_MEDIA_VIDEO_COMPLETIONS"
         MetricRichMediaVideoFirstQuartileCompletes -> "METRIC_RICH_MEDIA_VIDEO_FIRST_QUARTILE_COMPLETES"
         MetricRichMediaVideoFullScreens -> "METRIC_RICH_MEDIA_VIDEO_FULL_SCREENS"
@@ -1229,9 +1347,24 @@ instance ToText ParametersMetricsItem where
         MetricTotalMediaCostEcpmUsd -> "METRIC_TOTAL_MEDIA_COST_ECPM_USD"
         MetricTotalMediaCostPartner -> "METRIC_TOTAL_MEDIA_COST_PARTNER"
         MetricTotalMediaCostUsd -> "METRIC_TOTAL_MEDIA_COST_USD"
+        MetricTotalMediaCostViewableEcpmAdvertiser -> "METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_ADVERTISER"
+        MetricTotalMediaCostViewableEcpmPartner -> "METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_PARTNER"
+        MetricTotalMediaCostViewableEcpmUsd -> "METRIC_TOTAL_MEDIA_COST_VIEWABLE_ECPM_USD"
+        MetricTrueviewConversionCostManyPerViewAdvertiser -> "METRIC_TRUEVIEW_CONVERSION_COST_MANY_PER_VIEW_ADVERTISER"
+        MetricTrueviewConversionCostManyPerViewPartner -> "METRIC_TRUEVIEW_CONVERSION_COST_MANY_PER_VIEW_PARTNER"
+        MetricTrueviewConversionCostManyPerViewUsd -> "METRIC_TRUEVIEW_CONVERSION_COST_MANY_PER_VIEW_USD"
+        MetricTrueviewConversionCostOnePerViewAdvertiser -> "METRIC_TRUEVIEW_CONVERSION_COST_ONE_PER_VIEW_ADVERTISER"
+        MetricTrueviewConversionCostOnePerViewPartner -> "METRIC_TRUEVIEW_CONVERSION_COST_ONE_PER_VIEW_PARTNER"
+        MetricTrueviewConversionCostOnePerViewUsd -> "METRIC_TRUEVIEW_CONVERSION_COST_ONE_PER_VIEW_USD"
         MetricTrueviewConversionManyPerView -> "METRIC_TRUEVIEW_CONVERSION_MANY_PER_VIEW"
         MetricTrueviewConversionOnePerView -> "METRIC_TRUEVIEW_CONVERSION_ONE_PER_VIEW"
         MetricTrueviewConversionRateOnePerView -> "METRIC_TRUEVIEW_CONVERSION_RATE_ONE_PER_VIEW"
+        MetricTrueviewConversionValueManyPerViewAdvertiser -> "METRIC_TRUEVIEW_CONVERSION_VALUE_MANY_PER_VIEW_ADVERTISER"
+        MetricTrueviewConversionValueManyPerViewPartner -> "METRIC_TRUEVIEW_CONVERSION_VALUE_MANY_PER_VIEW_PARTNER"
+        MetricTrueviewConversionValueManyPerViewUsd -> "METRIC_TRUEVIEW_CONVERSION_VALUE_MANY_PER_VIEW_USD"
+        MetricTrueviewConversionValueOnePerViewAdvertiser -> "METRIC_TRUEVIEW_CONVERSION_VALUE_ONE_PER_VIEW_ADVERTISER"
+        MetricTrueviewConversionValueOnePerViewPartner -> "METRIC_TRUEVIEW_CONVERSION_VALUE_ONE_PER_VIEW_PARTNER"
+        MetricTrueviewConversionValueOnePerViewUsd -> "METRIC_TRUEVIEW_CONVERSION_VALUE_ONE_PER_VIEW_USD"
         MetricTrueviewCostConversionManyPerViewRatio -> "METRIC_TRUEVIEW_COST_CONVERSION_MANY_PER_VIEW_RATIO"
         MetricTrueviewCostConversionOnePerViewRatio -> "METRIC_TRUEVIEW_COST_CONVERSION_ONE_PER_VIEW_RATIO"
         MetricTrueviewCpvAdvertiser -> "METRIC_TRUEVIEW_CPV_ADVERTISER"
@@ -1246,6 +1379,9 @@ instance ToText ParametersMetricsItem where
         MetricTrueviewLostIsBudget -> "METRIC_TRUEVIEW_LOST_IS_BUDGET"
         MetricTrueviewLostIsRank -> "METRIC_TRUEVIEW_LOST_IS_RANK"
         MetricTrueviewTotalConversionValue -> "METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUE"
+        MetricTrueviewTotalConversionValuesAdvertiser -> "METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUES_ADVERTISER"
+        MetricTrueviewTotalConversionValuesPartner -> "METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUES_PARTNER"
+        MetricTrueviewTotalConversionValuesUsd -> "METRIC_TRUEVIEW_TOTAL_CONVERSION_VALUES_USD"
         MetricTrueviewUniqueViewers -> "METRIC_TRUEVIEW_UNIQUE_VIEWERS"
         MetricTrueviewValueConversionManyPerViewRatio -> "METRIC_TRUEVIEW_VALUE_CONVERSION_MANY_PER_VIEW_RATIO"
         MetricTrueviewValueConversionOnePerViewRatio -> "METRIC_TRUEVIEW_VALUE_CONVERSION_ONE_PER_VIEW_RATIO"
@@ -1307,6 +1443,34 @@ instance FromJSON QueryScheduleFrequency where
 instance ToJSON QueryScheduleFrequency where
     toJSON = toJSONText
 
+-- | File specification (column names, types, order) in which the line items
+-- will be returned. Default to EWF.
+data DownloadLineItemsRequestFileSpec
+    = Ewf
+      -- ^ @EWF@
+    | Sdf
+      -- ^ @SDF@
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable DownloadLineItemsRequestFileSpec
+
+instance FromText DownloadLineItemsRequestFileSpec where
+    fromText = \case
+        "EWF" -> Just Ewf
+        "SDF" -> Just Sdf
+        _ -> Nothing
+
+instance ToText DownloadLineItemsRequestFileSpec where
+    toText = \case
+        Ewf -> "EWF"
+        Sdf -> "SDF"
+
+instance FromJSON DownloadLineItemsRequestFileSpec where
+    parseJSON = parseJSONText "DownloadLineItemsRequestFileSpec"
+
+instance ToJSON DownloadLineItemsRequestFileSpec where
+    toJSON = toJSONText
+
 -- | Format the line items are in. Default to CSV.
 data UploadLineItemsRequestFormat
     = ULIRFCSV
@@ -1362,12 +1526,16 @@ data FilterPairType
       -- ^ @FILTER_CONVERSION_DELAY@
     | FilterCountry
       -- ^ @FILTER_COUNTRY@
+    | FilterCreativeHeight
+      -- ^ @FILTER_CREATIVE_HEIGHT@
     | FilterCreativeId
       -- ^ @FILTER_CREATIVE_ID@
     | FilterCreativeSize
       -- ^ @FILTER_CREATIVE_SIZE@
     | FilterCreativeType
       -- ^ @FILTER_CREATIVE_TYPE@
+    | FilterCreativeWidth
+      -- ^ @FILTER_CREATIVE_WIDTH@
     | FilterDataProvider
       -- ^ @FILTER_DATA_PROVIDER@
     | FilterDate
@@ -1511,9 +1679,11 @@ instance FromText FilterPairType where
         "FILTER_CITY" -> Just FilterCity
         "FILTER_CONVERSION_DELAY" -> Just FilterConversionDelay
         "FILTER_COUNTRY" -> Just FilterCountry
+        "FILTER_CREATIVE_HEIGHT" -> Just FilterCreativeHeight
         "FILTER_CREATIVE_ID" -> Just FilterCreativeId
         "FILTER_CREATIVE_SIZE" -> Just FilterCreativeSize
         "FILTER_CREATIVE_TYPE" -> Just FilterCreativeType
+        "FILTER_CREATIVE_WIDTH" -> Just FilterCreativeWidth
         "FILTER_DATA_PROVIDER" -> Just FilterDataProvider
         "FILTER_DATE" -> Just FilterDate
         "FILTER_DAY_OF_WEEK" -> Just FilterDayOfWeek
@@ -1594,9 +1764,11 @@ instance ToText FilterPairType where
         FilterCity -> "FILTER_CITY"
         FilterConversionDelay -> "FILTER_CONVERSION_DELAY"
         FilterCountry -> "FILTER_COUNTRY"
+        FilterCreativeHeight -> "FILTER_CREATIVE_HEIGHT"
         FilterCreativeId -> "FILTER_CREATIVE_ID"
         FilterCreativeSize -> "FILTER_CREATIVE_SIZE"
         FilterCreativeType -> "FILTER_CREATIVE_TYPE"
+        FilterCreativeWidth -> "FILTER_CREATIVE_WIDTH"
         FilterDataProvider -> "FILTER_DATA_PROVIDER"
         FilterDate -> "FILTER_DATE"
         FilterDayOfWeek -> "FILTER_DAY_OF_WEEK"
@@ -1818,12 +1990,16 @@ data ParametersGroupBysItem
       -- ^ @FILTER_CONVERSION_DELAY@
     | PGBIFilterCountry
       -- ^ @FILTER_COUNTRY@
+    | PGBIFilterCreativeHeight
+      -- ^ @FILTER_CREATIVE_HEIGHT@
     | PGBIFilterCreativeId
       -- ^ @FILTER_CREATIVE_ID@
     | PGBIFilterCreativeSize
       -- ^ @FILTER_CREATIVE_SIZE@
     | PGBIFilterCreativeType
       -- ^ @FILTER_CREATIVE_TYPE@
+    | PGBIFilterCreativeWidth
+      -- ^ @FILTER_CREATIVE_WIDTH@
     | PGBIFilterDataProvider
       -- ^ @FILTER_DATA_PROVIDER@
     | PGBIFilterDate
@@ -1967,9 +2143,11 @@ instance FromText ParametersGroupBysItem where
         "FILTER_CITY" -> Just PGBIFilterCity
         "FILTER_CONVERSION_DELAY" -> Just PGBIFilterConversionDelay
         "FILTER_COUNTRY" -> Just PGBIFilterCountry
+        "FILTER_CREATIVE_HEIGHT" -> Just PGBIFilterCreativeHeight
         "FILTER_CREATIVE_ID" -> Just PGBIFilterCreativeId
         "FILTER_CREATIVE_SIZE" -> Just PGBIFilterCreativeSize
         "FILTER_CREATIVE_TYPE" -> Just PGBIFilterCreativeType
+        "FILTER_CREATIVE_WIDTH" -> Just PGBIFilterCreativeWidth
         "FILTER_DATA_PROVIDER" -> Just PGBIFilterDataProvider
         "FILTER_DATE" -> Just PGBIFilterDate
         "FILTER_DAY_OF_WEEK" -> Just PGBIFilterDayOfWeek
@@ -2050,9 +2228,11 @@ instance ToText ParametersGroupBysItem where
         PGBIFilterCity -> "FILTER_CITY"
         PGBIFilterConversionDelay -> "FILTER_CONVERSION_DELAY"
         PGBIFilterCountry -> "FILTER_COUNTRY"
+        PGBIFilterCreativeHeight -> "FILTER_CREATIVE_HEIGHT"
         PGBIFilterCreativeId -> "FILTER_CREATIVE_ID"
         PGBIFilterCreativeSize -> "FILTER_CREATIVE_SIZE"
         PGBIFilterCreativeType -> "FILTER_CREATIVE_TYPE"
+        PGBIFilterCreativeWidth -> "FILTER_CREATIVE_WIDTH"
         PGBIFilterDataProvider -> "FILTER_DATA_PROVIDER"
         PGBIFilterDate -> "FILTER_DATE"
         PGBIFilterDayOfWeek -> "FILTER_DAY_OF_WEEK"

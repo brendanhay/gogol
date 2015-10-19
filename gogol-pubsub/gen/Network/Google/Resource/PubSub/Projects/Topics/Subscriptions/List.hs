@@ -160,9 +160,10 @@ ptslBearerToken
   = lens _ptslBearerToken
       (\ s a -> s{_ptslBearerToken = a})
 
--- | The value returned by the last ListTopicSubscriptionsResponse; indicates
--- that this is a continuation of a prior ListTopicSubscriptions call, and
--- that the system should return the next page of data.
+-- | The value returned by the last \`ListTopicSubscriptionsResponse\`;
+-- indicates that this is a continuation of a prior
+-- \`ListTopicSubscriptions\` call, and that the system should return the
+-- next page of data.
 ptslPageToken :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Text)
 ptslPageToken
   = lens _ptslPageToken

@@ -598,12 +598,12 @@ cUpdateTime
   = lens _cUpdateTime (\ s a -> s{_cUpdateTime = a})
 
 -- | The identifier of the owner of a course. When specified as a parameter
--- of a [create course request][google.classroom.v1.Courses.CreateCourse],
--- this field is required. The identifier can be one of the following: *
--- the numeric identifier for the user * the email address of the user *
--- the string literal \`\"me\"\`, indicating the requesting user This must
--- be set in a create request. Specifying this field in a course update
--- mask will result in an \`INVALID_ARGUMENT\` error.
+-- of a create course request, this field is required. The identifier can
+-- be one of the following: * the numeric identifier for the user * the
+-- email address of the user * the string literal \`\"me\"\`, indicating
+-- the requesting user This must be set in a create request. Specifying
+-- this field in a course update mask will result in an
+-- \`INVALID_ARGUMENT\` error.
 cOwnerId :: Lens' Course (Maybe Text)
 cOwnerId = lens _cOwnerId (\ s a -> s{_cOwnerId = a})
 
@@ -613,13 +613,11 @@ cOwnerId = lens _cOwnerId (\ s a -> s{_cOwnerId = a})
 cName :: Lens' Course (Maybe Text)
 cName = lens _cName (\ s a -> s{_cName = a})
 
--- | Identifier for this course assigned by Classroom. When [creating a
--- course][google.classroom.v1.Courses.CreateCourse], you may optionally
--- set this identifier to an [alias
--- string][google.classroom.v1.CourseAlias] in the request to create a
--- corresponding alias. The \`id\` is still assigned by Classroom and
--- cannot be updated after the course is created. Specifying this field in
--- a course update mask will result in an error.
+-- | Identifier for this course assigned by Classroom. When creating a
+-- course, you may optionally set this identifier to an alias string in the
+-- request to create a corresponding alias. The \`id\` is still assigned by
+-- Classroom and cannot be updated after the course is created. Specifying
+-- this field in a course update mask will result in an error.
 cId :: Lens' Course (Maybe Text)
 cId = lens _cId (\ s a -> s{_cId = a})
 

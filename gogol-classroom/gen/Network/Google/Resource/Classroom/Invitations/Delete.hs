@@ -22,9 +22,8 @@
 --
 -- | Deletes an invitation. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to delete
--- the requested invitation or for [general user permission errors][User
--- Permission Errors]. * \`NOT_FOUND\` if no invitation exists with the
--- requested ID.
+-- the requested invitation or for access errors. * \`NOT_FOUND\` if no
+-- invitation exists with the requested ID.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomInvitationsDelete@.
 module Network.Google.Resource.Classroom.Invitations.Delete
@@ -67,9 +66,8 @@ type InvitationsDeleteResource =
 
 -- | Deletes an invitation. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to delete
--- the requested invitation or for [general user permission errors][User
--- Permission Errors]. * \`NOT_FOUND\` if no invitation exists with the
--- requested ID.
+-- the requested invitation or for access errors. * \`NOT_FOUND\` if no
+-- invitation exists with the requested ID.
 --
 -- /See:/ 'invitationsDelete'' smart constructor.
 data InvitationsDelete' = InvitationsDelete'

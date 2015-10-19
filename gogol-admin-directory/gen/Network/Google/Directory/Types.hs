@@ -19,6 +19,7 @@ module Network.Google.Directory.Types
       directoryService
 
     -- * OAuth Scopes
+    , adminDirectoryRolemanagementReadonlyScope
     , adminDirectoryGroupReadonlyScope
     , adminDirectoryDeviceChromeosReadonlyScope
     , adminDirectoryDeviceChromeosScope
@@ -26,10 +27,15 @@ module Network.Google.Directory.Types
     , adminDirectoryGroupMemberReadonlyScope
     , adminDirectoryUserAliasScope
     , adminDirectoryDeviceMobileActionScope
+    , adminDirectoryDomainReadonlyScope
     , adminDirectoryUserschemaScope
     , adminDirectoryUserschemaReadonlyScope
+    , adminDirectoryDomainScope
+    , adminDirectoryRolemanagementScope
     , adminDirectoryGroupScope
     , adminDirectoryOrgunitReadonlyScope
+    , adminDirectoryCustomerScope
+    , adminDirectoryCustomerReadonlyScope
     , adminDirectoryOrgunitScope
     , adminDirectoryUserReadonlyScope
     , adminDirectoryUserAliasReadonlyScope
@@ -74,6 +80,13 @@ module Network.Google.Directory.Types
     -- * UsersListEvent
     , UsersListEvent (..)
 
+    -- * Privileges
+    , Privileges
+    , privileges
+    , pEtag
+    , pKind
+    , pItems
+
     -- * Groups
     , Groups
     , groups
@@ -85,8 +98,35 @@ module Network.Google.Directory.Types
     -- * UsersAliasesListEvent
     , UsersAliasesListEvent (..)
 
+    -- * RoleAssignments
+    , RoleAssignments
+    , roleAssignments
+    , raEtag
+    , raNextPageToken
+    , raKind
+    , raItems
+
+    -- * Privilege
+    , Privilege
+    , privilege
+    , priEtag
+    , priIsOuScopable
+    , priKind
+    , priServiceName
+    , priServiceId
+    , priPrivilegeName
+    , priChildPrivileges
+
     -- * UsersAliasesWatchEvent
     , UsersAliasesWatchEvent (..)
+
+    -- * Roles
+    , Roles
+    , roles
+    , rEtag
+    , rNextPageToken
+    , rKind
+    , rItems
 
     -- * UsersWatchEvent
     , UsersWatchEvent (..)
@@ -107,6 +147,30 @@ module Network.Google.Directory.Types
     , uaType
     , uaCustomType
     , uaSourceIsStructured
+
+    -- * CustomerPostalAddress
+    , CustomerPostalAddress
+    , customerPostalAddress
+    , cpaOrganizationName
+    , cpaPostalCode
+    , cpaAddressLine1
+    , cpaLocality
+    , cpaContactName
+    , cpaAddressLine2
+    , cpaCountryCode
+    , cpaRegion
+    , cpaAddressLine3
+
+    -- * RoleAssignment
+    , RoleAssignment
+    , roleAssignment
+    , rolEtag
+    , rolScopeType
+    , rolKind
+    , rolAssignedTo
+    , rolRoleId
+    , rolRoleAssignmentId
+    , rolOrgUnitId
 
     -- * Group
     , Group
@@ -230,6 +294,13 @@ module Network.Google.Directory.Types
     , userCustomSchemas
     , ucsAddtional
 
+    -- * DomainAliases
+    , DomainAliases
+    , domainAliases
+    , daEtag
+    , daKind
+    , daDomainAliases
+
     -- * Aliases
     , Aliases
     , aliases
@@ -300,6 +371,16 @@ module Network.Google.Directory.Types
     , codruiEmail
     , codruiType
 
+    -- * DomainAlias
+    , DomainAlias
+    , domainAlias
+    , dCreationTime
+    , dEtag
+    , dKind
+    , dVerified
+    , dDomainAliasName
+    , dParentDomainName
+
     -- * Alias
     , Alias
     , alias
@@ -362,6 +443,31 @@ module Network.Google.Directory.Types
 
     -- * MobileDevicesListProjection
     , MobileDevicesListProjection (..)
+
+    -- * Role
+    , Role
+    , role
+    , rrEtag
+    , rrKind
+    , rrRoleName
+    , rrIsSystemRole
+    , rrRoleId
+    , rrRoleDescription
+    , rrIsSuperAdminRole
+    , rrRolePrivileges
+
+    -- * Customer
+    , Customer
+    , customer
+    , cusEtag
+    , cusKind
+    , cusAlternateEmail
+    , cusCustomerDomain
+    , cusPhoneNumber
+    , cusLanguage
+    , cusId
+    , cusCustomerCreationTime
+    , cusPostalAddress
 
     -- * MobileDeviceApplicationsItem
     , MobileDeviceApplicationsItem
@@ -526,6 +632,17 @@ module Network.Google.Directory.Types
     , userCustomProperties
     , ucpAddtional
 
+    -- * Domains
+    , Domains
+    , domains
+    , domCreationTime
+    , domEtag
+    , domKind
+    , domDomainAliases
+    , domVerified
+    , domDomainName
+    , domIsPrimary
+
     -- * ChromeosDevicesListOrderBy
     , ChromeosDevicesListOrderBy (..)
 
@@ -595,6 +712,19 @@ module Network.Google.Directory.Types
 
     -- * UsersGetViewType
     , UsersGetViewType (..)
+
+    -- * RoleRolePrivilegesItem
+    , RoleRolePrivilegesItem
+    , roleRolePrivilegesItem
+    , rrpiServiceId
+    , rrpiPrivilegeName
+
+    -- * Domains2
+    , Domains2
+    , domains2
+    , ddEtag
+    , ddKind
+    , ddDomains
     ) where
 
 import           Network.Google.Directory.Types.Product
@@ -607,6 +737,10 @@ directoryService
   = defaultService (ServiceId "admin:directory_v1")
       "www.googleapis.com"
       "admin/directory/v1/"
+
+-- | View delegated admin roles for your domain
+adminDirectoryRolemanagementReadonlyScope :: OAuthScope
+adminDirectoryRolemanagementReadonlyScope = "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly";
 
 -- | View groups on your domain
 adminDirectoryGroupReadonlyScope :: OAuthScope
@@ -636,6 +770,10 @@ adminDirectoryUserAliasScope = "https://www.googleapis.com/auth/admin.directory.
 adminDirectoryDeviceMobileActionScope :: OAuthScope
 adminDirectoryDeviceMobileActionScope = "https://www.googleapis.com/auth/admin.directory.device.mobile.action";
 
+-- | View domains related to your customers
+adminDirectoryDomainReadonlyScope :: OAuthScope
+adminDirectoryDomainReadonlyScope = "https://www.googleapis.com/auth/admin.directory.domain.readonly";
+
 -- | View and manage the provisioning of user schemas on your domain
 adminDirectoryUserschemaScope :: OAuthScope
 adminDirectoryUserschemaScope = "https://www.googleapis.com/auth/admin.directory.userschema";
@@ -644,6 +782,14 @@ adminDirectoryUserschemaScope = "https://www.googleapis.com/auth/admin.directory
 adminDirectoryUserschemaReadonlyScope :: OAuthScope
 adminDirectoryUserschemaReadonlyScope = "https://www.googleapis.com/auth/admin.directory.userschema.readonly";
 
+-- | View and manage the provisioning of domains for your customers
+adminDirectoryDomainScope :: OAuthScope
+adminDirectoryDomainScope = "https://www.googleapis.com/auth/admin.directory.domain";
+
+-- | Manage delegated admin roles for your domain
+adminDirectoryRolemanagementScope :: OAuthScope
+adminDirectoryRolemanagementScope = "https://www.googleapis.com/auth/admin.directory.rolemanagement";
+
 -- | View and manage the provisioning of groups on your domain
 adminDirectoryGroupScope :: OAuthScope
 adminDirectoryGroupScope = "https://www.googleapis.com/auth/admin.directory.group";
@@ -651,6 +797,14 @@ adminDirectoryGroupScope = "https://www.googleapis.com/auth/admin.directory.grou
 -- | View organization units on your domain
 adminDirectoryOrgunitReadonlyScope :: OAuthScope
 adminDirectoryOrgunitReadonlyScope = "https://www.googleapis.com/auth/admin.directory.orgunit.readonly";
+
+-- | View and manage customer related information
+adminDirectoryCustomerScope :: OAuthScope
+adminDirectoryCustomerScope = "https://www.googleapis.com/auth/admin.directory.customer";
+
+-- | View customer related information
+adminDirectoryCustomerReadonlyScope :: OAuthScope
+adminDirectoryCustomerReadonlyScope = "https://www.googleapis.com/auth/admin.directory.customer.readonly";
 
 -- | View and manage organization units on your domain
 adminDirectoryOrgunitScope :: OAuthScope

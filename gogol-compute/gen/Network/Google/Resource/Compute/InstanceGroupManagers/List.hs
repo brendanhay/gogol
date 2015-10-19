@@ -100,7 +100,7 @@ igmlProject :: Lens' InstanceGroupManagersList' Text
 igmlProject
   = lens _igmlProject (\ s a -> s{_igmlProject = a})
 
--- | The URL of the zone where the managed instance group is located.
+-- | The name of the zone where the managed instance group is located.
 igmlZone :: Lens' InstanceGroupManagersList' Text
 igmlZone = lens _igmlZone (\ s a -> s{_igmlZone = a})
 

@@ -156,9 +156,9 @@ ptsipBearerToken
   = lens _ptsipBearerToken
       (\ s a -> s{_ptsipBearerToken = a})
 
--- | REQUIRED: The resource for which policy is being specified. Resource is
--- usually specified as a path, such as,
--- projects\/{project}\/zones\/{zone}\/disks\/{disk}.
+-- | REQUIRED: The resource for which policy is being specified. \`resource\`
+-- is usually specified as a path, such as,
+-- \`projects\/{project}\/zones\/{zone}\/disks\/{disk}\`.
 ptsipResource :: Lens' ProjectsTopicsSetIAMPolicy' Text
 ptsipResource
   = lens _ptsipResource

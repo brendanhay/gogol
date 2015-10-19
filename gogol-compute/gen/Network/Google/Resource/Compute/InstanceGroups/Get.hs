@@ -86,7 +86,7 @@ iggProject :: Lens' InstanceGroupsGet' Text
 iggProject
   = lens _iggProject (\ s a -> s{_iggProject = a})
 
--- | The URL of the zone where the instance group is located.
+-- | The name of the zone where the instance group is located.
 iggZone :: Lens' InstanceGroupsGet' Text
 iggZone = lens _iggZone (\ s a -> s{_iggZone = a})
 

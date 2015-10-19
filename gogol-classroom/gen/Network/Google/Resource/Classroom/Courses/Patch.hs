@@ -22,10 +22,11 @@
 --
 -- | Updates one or more fields in a course. This method returns the
 -- following error codes: * \`PERMISSION_DENIED\` if the requesting user is
--- not permitted to modify the requested course or for [general user
--- permission errors][User Permission Errors]. * \`NOT_FOUND\` if no course
--- exists with the requested ID. * \`INVALID_ARGUMENT\` if invalid fields
--- are specified in the update mask or if no update mask is supplied.
+-- not permitted to modify the requested course or for access errors. *
+-- \`NOT_FOUND\` if no course exists with the requested ID. *
+-- \`INVALID_ARGUMENT\` if invalid fields are specified in the update mask
+-- or if no update mask is supplied. * \`FAILED_PRECONDITION\` for the
+-- following request errors: * CourseNotModifiable
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesPatch@.
 module Network.Google.Resource.Classroom.Courses.Patch
@@ -72,10 +73,11 @@ type CoursesPatchResource =
 
 -- | Updates one or more fields in a course. This method returns the
 -- following error codes: * \`PERMISSION_DENIED\` if the requesting user is
--- not permitted to modify the requested course or for [general user
--- permission errors][User Permission Errors]. * \`NOT_FOUND\` if no course
--- exists with the requested ID. * \`INVALID_ARGUMENT\` if invalid fields
--- are specified in the update mask or if no update mask is supplied.
+-- not permitted to modify the requested course or for access errors. *
+-- \`NOT_FOUND\` if no course exists with the requested ID. *
+-- \`INVALID_ARGUMENT\` if invalid fields are specified in the update mask
+-- or if no update mask is supplied. * \`FAILED_PRECONDITION\` for the
+-- following request errors: * CourseNotModifiable
 --
 -- /See:/ 'coursesPatch'' smart constructor.
 data CoursesPatch' = CoursesPatch'
@@ -179,8 +181,7 @@ cpBearerToken
       (\ s a -> s{_cpBearerToken = a})
 
 -- | Identifier of the course to update. This identifier can be either the
--- Classroom-assigned identifier or an
--- [alias][google.classroom.v1.CourseAlias].
+-- Classroom-assigned identifier or an alias.
 cpId :: Lens' CoursesPatch' Text
 cpId = lens _cpId (\ s a -> s{_cpId = a})
 

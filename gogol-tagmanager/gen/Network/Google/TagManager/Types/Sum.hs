@@ -278,8 +278,12 @@ instance ToJSON ContainerEnabledBuiltInVariableItem where
 data ContainerUsageContextItem
     = Android
       -- ^ @android@
+    | ANDROIdSDK5
+      -- ^ @androidSdk5@
     | Ios
       -- ^ @ios@
+    | IOSSDK5
+      -- ^ @iosSdk5@
     | Web
       -- ^ @web@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -289,14 +293,18 @@ instance Hashable ContainerUsageContextItem
 instance FromText ContainerUsageContextItem where
     fromText = \case
         "android" -> Just Android
+        "androidSdk5" -> Just ANDROIdSDK5
         "ios" -> Just Ios
+        "iosSdk5" -> Just IOSSDK5
         "web" -> Just Web
         _ -> Nothing
 
 instance ToText ContainerUsageContextItem where
     toText = \case
         Android -> "android"
+        ANDROIdSDK5 -> "androidSdk5"
         Ios -> "ios"
+        IOSSDK5 -> "iosSdk5"
         Web -> "web"
 
 instance FromJSON ContainerUsageContextItem where
@@ -442,8 +450,8 @@ instance ToJSON TagTagFiringOption where
 -- represents a 64-bit signed integer value, in base 10 - list: A list of
 -- parameters should be specified - map: A map of parameters should be
 -- specified - template: The value represents any text; this can include
--- macro references (even macro references that might return non-string
--- types)
+-- variable references (even variable references that might return
+-- non-string types)
 data ParameterType
     = Boolean
       -- ^ @boolean@

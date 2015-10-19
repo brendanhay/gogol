@@ -50,14 +50,14 @@ pushConfig =
 -- message. This attribute indicates the version of the data expected by
 -- the endpoint. This controls the shape of the envelope (i.e. its fields
 -- and metadata). The endpoint version is based on the version of the
--- Pub\/Sub API. If not present during the CreateSubscription call, it will
--- default to the version of the API used to make such call. If not present
--- during a ModifyPushConfig call, its value will not be changed.
--- GetSubscription calls will always return a valid version, even if the
--- subscription was created without this attribute. The possible values for
--- this attribute are: * \`v1beta1\`: uses the push format defined in the
--- v1beta1 Pub\/Sub API. * \`v1\` or \`v1beta2\`: uses the push format
--- defined in the v1 Pub\/Sub API.
+-- Pub\/Sub API. If not present during the \`CreateSubscription\` call, it
+-- will default to the version of the API used to make such call. If not
+-- present during a \`ModifyPushConfig\` call, its value will not be
+-- changed. \`GetSubscription\` calls will always return a valid version,
+-- even if the subscription was created without this attribute. The
+-- possible values for this attribute are: * \`v1beta1\`: uses the push
+-- format defined in the v1beta1 Pub\/Sub API. * \`v1\` or \`v1beta2\`:
+-- uses the push format defined in the v1 Pub\/Sub API.
 pcAttributes :: Lens' PushConfig (Maybe PushConfigAttributes)
 pcAttributes
   = lens _pcAttributes (\ s a -> s{_pcAttributes = a})
@@ -161,9 +161,9 @@ madrAckIds
 
 -- | The new ack deadline with respect to the time this request was sent to
 -- the Pub\/Sub system. Must be >= 0. For example, if the value is 10, the
--- new ack deadline will expire 10 seconds after the ModifyAckDeadline call
--- was made. Specifying zero may immediately make the message available for
--- another pull request.
+-- new ack deadline will expire 10 seconds after the \`ModifyAckDeadline\`
+-- call was made. Specifying zero may immediately make the message
+-- available for another pull request.
 madrAckDeadlineSeconds :: Lens' ModifyAckDeadlineRequest (Maybe Int32)
 madrAckDeadlineSeconds
   = lens _madrAckDeadlineSeconds
@@ -204,10 +204,10 @@ modifyPushConfigRequest =
     { _mpcrPushConfig = Nothing
     }
 
--- | The push configuration for future deliveries. An empty pushConfig
+-- | The push configuration for future deliveries. An empty \`pushConfig\`
 -- indicates that the Pub\/Sub system should stop pushing messages from the
 -- given subscription and allow messages to be pulled and acknowledged -
--- effectively pausing the subscription if Pull is not called.
+-- effectively pausing the subscription if \`Pull\` is not called.
 mpcrPushConfig :: Lens' ModifyPushConfigRequest (Maybe PushConfig)
 mpcrPushConfig
   = lens _mpcrPushConfig
@@ -288,8 +288,9 @@ pmAttributes
 
 -- | ID of this message assigned by the server at publication time.
 -- Guaranteed to be unique within the topic. This value may be read by a
--- subscriber that receives a PubsubMessage via a Pull call or a push
--- delivery. It must not be populated by a publisher in a Publish call.
+-- subscriber that receives a \`PubsubMessage\` via a \`Pull\` call or a
+-- push delivery. It must not be populated by a publisher in a \`Publish\`
+-- call.
 pmMessageId :: Lens' PubsubMessage (Maybe Text)
 pmMessageId
   = lens _pmMessageId (\ s a -> s{_pmMessageId = a})
@@ -310,7 +311,7 @@ instance ToJSON PubsubMessage where
                   ("attributes" .=) <$> _pmAttributes,
                   ("messageId" .=) <$> _pmMessageId])
 
--- | Response for the ListTopicSubscriptions method.
+-- | Response for the \`ListTopicSubscriptions\` method.
 --
 -- /See:/ 'listTopicSubscriptionsResponse' smart constructor.
 data ListTopicSubscriptionsResponse = ListTopicSubscriptionsResponse
@@ -335,7 +336,7 @@ listTopicSubscriptionsResponse =
 
 -- | If not empty, indicates that there may be more subscriptions that match
 -- the request; this value should be passed in a new
--- ListTopicSubscriptionsRequest to get more subscriptions.
+-- \`ListTopicSubscriptionsRequest\` to get more subscriptions.
 ltsrNextPageToken :: Lens' ListTopicSubscriptionsResponse (Maybe Text)
 ltsrNextPageToken
   = lens _ltsrNextPageToken
@@ -365,7 +366,7 @@ instance ToJSON ListTopicSubscriptionsResponse where
                  [("nextPageToken" .=) <$> _ltsrNextPageToken,
                   ("subscriptions" .=) <$> _ltsrSubscriptions])
 
--- | Response for the ListTopics method.
+-- | Response for the \`ListTopics\` method.
 --
 -- /See:/ 'listTopicsResponse' smart constructor.
 data ListTopicsResponse = ListTopicsResponse
@@ -389,7 +390,7 @@ listTopicsResponse =
     }
 
 -- | If not empty, indicates that there may be more topics that match the
--- request; this value should be passed in a new ListTopicsRequest.
+-- request; this value should be passed in a new \`ListTopicsRequest\`.
 ltrNextPageToken :: Lens' ListTopicsResponse (Maybe Text)
 ltrNextPageToken
   = lens _ltrNextPageToken
@@ -417,7 +418,7 @@ instance ToJSON ListTopicsResponse where
                  [("nextPageToken" .=) <$> _ltrNextPageToken,
                   ("topics" .=) <$> _ltrTopics])
 
--- | Response for the Pull method.
+-- | Response for the \`Pull\` method.
 --
 -- /See:/ 'pullResponse' smart constructor.
 newtype PullResponse = PullResponse
@@ -438,8 +439,8 @@ pullResponse =
 
 -- | Received Pub\/Sub messages. The Pub\/Sub system will return zero
 -- messages if there are no more available in the backlog. The Pub\/Sub
--- system may return fewer than the maxMessages requested even if there are
--- more messages available in the backlog.
+-- system may return fewer than the \`maxMessages\` requested even if there
+-- are more messages available in the backlog.
 prReceivedMessages :: Lens' PullResponse [ReceivedMessage]
 prReceivedMessages
   = lens _prReceivedMessages
@@ -479,10 +480,10 @@ setIAMPolicyRequest =
     { _siprPolicy = Nothing
     }
 
--- | REQUIRED: The complete policy to be applied to the \'resource\'. The
--- size of the policy is limited to a few 10s of KB. An empty policy is in
--- general a valid policy but certain services (like Projects) might reject
--- them.
+-- | REQUIRED: The complete policy to be applied to the \`resource\`. The
+-- size of the policy is limited to a few 10s of KB. An empty policy is a
+-- valid policy but certain Cloud Platform services (such as Projects)
+-- might reject them.
 siprPolicy :: Lens' SetIAMPolicyRequest (Maybe Policy)
 siprPolicy
   = lens _siprPolicy (\ s a -> s{_siprPolicy = a})
@@ -534,7 +535,7 @@ instance ToJSON Topic where
         toJSON Topic{..}
           = object (catMaybes [("name" .=) <$> _tName])
 
--- | Request for the Pull method.
+-- | Request for the \`Pull\` method.
 --
 -- /See:/ 'pullRequest' smart constructor.
 data PullRequest = PullRequest
@@ -565,10 +566,10 @@ prMaxMessages
       (\ s a -> s{_prMaxMessages = a})
 
 -- | If this is specified as true the system will respond immediately even if
--- it is not able to return a message in the Pull response. Otherwise the
--- system is allowed to wait until at least one message is available rather
--- than returning no messages. The client may cancel the request if it does
--- not wish to wait any longer for the response.
+-- it is not able to return a message in the \`Pull\` response. Otherwise
+-- the system is allowed to wait until at least one message is available
+-- rather than returning no messages. The client may cancel the request if
+-- it does not wish to wait any longer for the response.
 prReturnImmediately :: Lens' PullRequest (Maybe Bool)
 prReturnImmediately
   = lens _prReturnImmediately
@@ -641,7 +642,7 @@ testIAMPermissionsRequest =
     { _tiprPermissions = Nothing
     }
 
--- | The set of permissions to check for the \'resource\'. Permissions with
+-- | The set of permissions to check for the \`resource\`. Permissions with
 -- wildcards (such as \'*\' or \'storage.*\') are not allowed.
 tiprPermissions :: Lens' TestIAMPermissionsRequest [Text]
 tiprPermissions
@@ -662,7 +663,7 @@ instance ToJSON TestIAMPermissionsRequest where
           = object
               (catMaybes [("permissions" .=) <$> _tiprPermissions])
 
--- | Response for the Publish method.
+-- | Response for the \`Publish\` method.
 --
 -- /See:/ 'publishResponse' smart constructor.
 newtype PublishResponse = PublishResponse
@@ -779,22 +780,19 @@ instance ToJSON TestIAMPermissionsResponse where
               (catMaybes
                  [("permissions" .=) <$> _tiamprPermissions])
 
--- | # Overview The \`Policy\` defines an access control policy language. It
--- is used to define policies that are attached to resources like files,
--- folders, VMs, etc. # Policy structure A \`Policy\` consists of a list of
--- bindings. A \`Binding\` binds a set of members to a role, where the
--- members include user accounts, user groups, user domains, and service
--- accounts. A \'role\' is a named set of permissions, defined by IAM. The
--- definition of a role is outside the policy. A permission check first
--- determines the roles that include the specified permission, and then
--- determines if the principal specified is a member of a binding to at
--- least one of these roles. The membership check is recursive when a group
--- is bound to a role. Policy examples: \`\`\` { \"bindings\": [ {
--- \"role\": \"roles\/owner\", \"members\": [ \"user:mike\'example.com\",
--- \"group:admins\'example.com\", \"domain:google.com\",
--- \"serviceAccount:frontend\'example.iam.gserviceaccounts.com\"] }, {
+-- | Defines an Identity and Access Management (IAM) policy. It is used to
+-- specify access control policies for Cloud Platform resources. A
+-- \`Policy\` consists of a list of \`bindings\`. A \`Binding\` binds a
+-- list of \`members\` to a \`role\`, where the members can be user
+-- accounts, Google groups, Google domains, and service accounts. A
+-- \`role\` is a named list of permissions defined by IAM. **Example** {
+-- \"bindings\": [ { \"role\": \"roles\/owner\", \"members\": [
+-- \"user:mike\'example.com\", \"group:admins\'example.com\",
+-- \"domain:google.com\",
+-- \"serviceAccount:my-other-app\'appspot.gserviceaccount.com\"] }, {
 -- \"role\": \"roles\/viewer\", \"members\": [\"user:sean\'example.com\"] }
--- ] } \`\`\`
+-- ] } For a description of IAM and its features, see the [IAM developer\'s
+-- guide](https:\/\/cloud.google.com\/iam).
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy
@@ -825,13 +823,13 @@ policy =
 pEtag :: Lens' Policy (Maybe Word8)
 pEtag = lens _pEtag (\ s a -> s{_pEtag = a})
 
--- | The policy language version. The version of the policy is represented by
--- the etag. The default version is 0.
+-- | Version of the \`Policy\`. The default version is 0.
 pVersion :: Lens' Policy (Maybe Int32)
 pVersion = lens _pVersion (\ s a -> s{_pVersion = a})
 
--- | It is an error to specify multiple bindings for the same role. It is an
--- error to specify a binding with no members.
+-- | Associates a list of \`members\` to a \`role\`. Multiple \`bindings\`
+-- must not be specified for the same \`role\`. \`bindings\` with no
+-- members will result in an error.
 pBindings :: Lens' Policy [Binding]
 pBindings
   = lens _pBindings (\ s a -> s{_pBindings = a}) .
@@ -861,14 +859,14 @@ instance ToJSON Policy where
 -- message. This attribute indicates the version of the data expected by
 -- the endpoint. This controls the shape of the envelope (i.e. its fields
 -- and metadata). The endpoint version is based on the version of the
--- Pub\/Sub API. If not present during the CreateSubscription call, it will
--- default to the version of the API used to make such call. If not present
--- during a ModifyPushConfig call, its value will not be changed.
--- GetSubscription calls will always return a valid version, even if the
--- subscription was created without this attribute. The possible values for
--- this attribute are: * \`v1beta1\`: uses the push format defined in the
--- v1beta1 Pub\/Sub API. * \`v1\` or \`v1beta2\`: uses the push format
--- defined in the v1 Pub\/Sub API.
+-- Pub\/Sub API. If not present during the \`CreateSubscription\` call, it
+-- will default to the version of the API used to make such call. If not
+-- present during a \`ModifyPushConfig\` call, its value will not be
+-- changed. \`GetSubscription\` calls will always return a valid version,
+-- even if the subscription was created without this attribute. The
+-- possible values for this attribute are: * \`v1beta1\`: uses the push
+-- format defined in the v1beta1 Pub\/Sub API. * \`v1\` or \`v1beta2\`:
+-- uses the push format defined in the v1 Pub\/Sub API.
 --
 -- /See:/ 'pushConfigAttributes' smart constructor.
 newtype PushConfigAttributes = PushConfigAttributes
@@ -932,7 +930,7 @@ subscription =
     }
 
 -- | If push delivery is used with this subscription, this field is used to
--- configure it. An empty pushConfig signifies that the subscriber will
+-- configure it. An empty \`pushConfig\` signifies that the subscriber will
 -- pull and ack messages using API methods.
 sPushConfig :: Lens' Subscription (Maybe PushConfig)
 sPushConfig
@@ -960,12 +958,12 @@ sName = lens _sName (\ s a -> s{_sName = a})
 -- acknowledged, it is an outstanding message and will not be delivered
 -- again during that time (on a best-effort basis). For pull delivery this
 -- value is used as the initial value for the ack deadline. To override
--- this value for a given message, call ModifyAckDeadline with the
--- corresponding ack_id. For push delivery, this value is also used to set
--- the request timeout for the call to the push endpoint. If the subscriber
--- never acknowledges the message, the Pub\/Sub system will eventually
--- redeliver the message. If this parameter is not set, the default value
--- of 10 seconds is used.
+-- this value for a given message, call \`ModifyAckDeadline\` with the
+-- corresponding \`ack_id\`. For push delivery, this value is also used to
+-- set the request timeout for the call to the push endpoint. If the
+-- subscriber never acknowledges the message, the Pub\/Sub system will
+-- eventually redeliver the message. If this parameter is not set, the
+-- default value of 10 seconds is used.
 sAckDeadlineSeconds :: Lens' Subscription (Maybe Int32)
 sAckDeadlineSeconds
   = lens _sAckDeadlineSeconds
@@ -988,7 +986,7 @@ instance ToJSON Subscription where
                   ("topic" .=) <$> _sTopic, ("name" .=) <$> _sName,
                   ("ackDeadlineSeconds" .=) <$> _sAckDeadlineSeconds])
 
--- | Response for the ListSubscriptions method.
+-- | Response for the \`ListSubscriptions\` method.
 --
 -- /See:/ 'listSubscriptionsResponse' smart constructor.
 data ListSubscriptionsResponse = ListSubscriptionsResponse
@@ -1013,7 +1011,7 @@ listSubscriptionsResponse =
 
 -- | If not empty, indicates that there may be more subscriptions that match
 -- the request; this value should be passed in a new
--- ListSubscriptionsRequest to get more subscriptions.
+-- \`ListSubscriptionsRequest\` to get more subscriptions.
 lsrNextPageToken :: Lens' ListSubscriptionsResponse (Maybe Text)
 lsrNextPageToken
   = lens _lsrNextPageToken
@@ -1042,7 +1040,7 @@ instance ToJSON ListSubscriptionsResponse where
                  [("nextPageToken" .=) <$> _lsrNextPageToken,
                   ("subscriptions" .=) <$> _lsrSubscriptions])
 
--- | Associates members with roles. See below for allowed formats of members.
+-- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
 data Binding = Binding
@@ -1065,22 +1063,28 @@ binding =
     , _bRole = Nothing
     }
 
--- | Format of member entries: 1. allUsers Matches any requesting principal
--- (users, service accounts or anonymous). 2. allAuthenticatedUsers Matches
--- any requesting authenticated principal (users or service accounts). 3.
--- user:{emailid} A google user account using an email address. For example
--- alice\'gmail.com, joe\'example.com 4. serviceAccount:{emailid} An
--- service account email. 5. group:{emailid} A google group with an email
--- address. For example auth-ti-cloud\'google.com 6. domain:{domain} A
--- Google Apps domain name. For example google.com, example.com
+-- | Specifies the identities requesting access for a Cloud Platform
+-- resource. \`members\` can have the following formats: * \`allUsers\`: A
+-- special identifier that represents anyone who is on the internet; with
+-- or without a Google account. * \`allAuthenticatedUsers\`: A special
+-- identifier that represents anyone who is authenticated with a Google
+-- account or a service account. * \`user:{emailid}\`: An email address
+-- that represents a specific Google account. For example,
+-- \`alice\'gmail.com\` or \`joe\'example.com\`. *
+-- \`serviceAccount:{emailid}\`: An email address that represents a service
+-- account. For example, \`my-other-app\'appspot.gserviceaccount.com\`. *
+-- \`group:{emailid}\`: An email address that represents a Google group.
+-- For example, \`admins\'example.com\`. * \`domain:{domain}\`: A Google
+-- Apps domain name that represents all the users of that domain. For
+-- example, \`google.com\` or \`example.com\`.
 bMembers :: Lens' Binding [Text]
 bMembers
   = lens _bMembers (\ s a -> s{_bMembers = a}) .
       _Default
       . _Coerce
 
--- | The name of the role to which the members should be bound. Examples:
--- \"roles\/viewer\", \"roles\/editor\", \"roles\/owner\". Required
+-- | Role that is assigned to \`members\`. For example, \`roles\/viewer\`,
+-- \`roles\/editor\`, or \`roles\/owner\`. Required
 bRole :: Lens' Binding (Maybe Text)
 bRole = lens _bRole (\ s a -> s{_bRole = a})
 
@@ -1118,7 +1122,8 @@ acknowledgeRequest =
     }
 
 -- | The acknowledgment ID for the messages being acknowledged that was
--- returned by the Pub\/Sub system in the Pull response. Must not be empty.
+-- returned by the Pub\/Sub system in the \`Pull\` response. Must not be
+-- empty.
 arAckIds :: Lens' AcknowledgeRequest [Text]
 arAckIds
   = lens _arAckIds (\ s a -> s{_arAckIds = a}) .

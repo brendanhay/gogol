@@ -157,6 +157,8 @@ instance ToJSON OperationWarningsItemCode where
 data BackendServiceProtocol
     = HTTP
       -- ^ @HTTP@
+    | HTTPS
+      -- ^ @HTTPS@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable BackendServiceProtocol
@@ -164,11 +166,13 @@ instance Hashable BackendServiceProtocol
 instance FromText BackendServiceProtocol where
     fromText = \case
         "HTTP" -> Just HTTP
+        "HTTPS" -> Just HTTPS
         _ -> Nothing
 
 instance ToText BackendServiceProtocol where
     toText = \case
         HTTP -> "HTTP"
+        HTTPS -> "HTTPS"
 
 instance FromJSON BackendServiceProtocol where
     parseJSON = parseJSONText "BackendServiceProtocol"
@@ -1027,8 +1031,20 @@ instance FromJSON DeprecationStatusState where
 instance ToJSON DeprecationStatusState where
     toJSON = toJSONText
 
--- | The current action that the managed instance group has scheduled for the
--- instance.
+-- | [Output Only] The current action that the managed instance group has
+-- scheduled for the instance. Possible values: - NONE The instance is
+-- running, and the managed instance group does not have any scheduled
+-- actions for this instance. - CREATING The managed instance group is
+-- creating this instance. - RECREATING The managed instance group is
+-- recreating this instance. - DELETING The managed instance group is
+-- permanently deleting this instance. - ABANDONING The managed instance
+-- group is abandoning this instance. The instance will be removed from the
+-- instance group and from any target pools that are associated with this
+-- group. - RESTARTING The managed instance group is restarting the
+-- instance. - REFRESHING The managed instance group is applying
+-- configuration changes to the instance without stopping it. For example,
+-- the group can update the target pool list for an instance without
+-- stopping that instance.
 data ManagedInstanceCurrentAction
     = MICAAbandoning
       -- ^ @ABANDONING@
@@ -1266,7 +1282,8 @@ instance FromJSON DiskStatus where
 instance ToJSON DiskStatus where
     toJSON = toJSONText
 
--- | The status of the instance (empty when instance does not exist).
+-- | [Output Only] The status of the instance. This field is empty when the
+-- instance does not exist.
 data ManagedInstanceInstanceStatus
     = MIISProvisioning
       -- ^ @PROVISIONING@
@@ -1562,6 +1579,9 @@ instance FromJSON InstanceGroupsListInstancesRequestInstanceState where
 instance ToJSON InstanceGroupsListInstancesRequestInstanceState where
     toJSON = toJSONText
 
+-- | Specifies the disk interface to use for attaching this disk, either SCSI
+-- or NVME. The default is SCSI. For performance characteristics of SCSI
+-- over NVMe, see Local SSD performance.
 data AttachedDiskInterface
     = Nvme
       -- ^ @NVME@
@@ -2157,7 +2177,7 @@ instance FromJSON InstanceGroupsScopedListWarningCode where
 instance ToJSON InstanceGroupsScopedListWarningCode where
     toJSON = toJSONText
 
--- | The status of the instance.
+-- | [Output Only] The status of the instance.
 data InstanceWithNamedPortsStatus
     = IWNPSProvisioning
       -- ^ @PROVISIONING@
@@ -2284,7 +2304,7 @@ instance ToJSON InstancesScopedListWarningCode where
     toJSON = toJSONText
 
 -- | Sesssion affinity option, must be one of the following values: NONE:
--- Connections from the same client IP may go to any instance in the pool;
+-- Connections from the same client IP may go to any instance in the pool.
 -- CLIENT_IP: Connections from the same client IP will go to the same
 -- instance in the pool while that instance remains healthy.
 -- CLIENT_IP_PROTO: Connections from the same client IP with the same IP

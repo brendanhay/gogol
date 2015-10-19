@@ -245,6 +245,7 @@ module Network.Google.IdentityToolkit.Types
     , varOAuthExpireIn
     , varAppInstallationURL
     , varAction
+    , varNeedEmail
     , varFederatedId
     , varAppScheme
     , varInputEmail

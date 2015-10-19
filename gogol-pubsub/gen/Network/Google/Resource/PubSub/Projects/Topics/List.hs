@@ -159,9 +159,9 @@ ptlBearerToken
   = lens _ptlBearerToken
       (\ s a -> s{_ptlBearerToken = a})
 
--- | The value returned by the last ListTopicsResponse; indicates that this
--- is a continuation of a prior ListTopics call, and that the system should
--- return the next page of data.
+-- | The value returned by the last \`ListTopicsResponse\`; indicates that
+-- this is a continuation of a prior \`ListTopics\` call, and that the
+-- system should return the next page of data.
 ptlPageToken :: Lens' ProjectsTopicsList' (Maybe Text)
 ptlPageToken
   = lens _ptlPageToken (\ s a -> s{_ptlPageToken = a})

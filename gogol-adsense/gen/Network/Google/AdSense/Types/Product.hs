@@ -1086,12 +1086,13 @@ instance ToJSON AdStyleFont where
 --
 -- /See:/ 'account' smart constructor.
 data Account = Account
-    { _accKind        :: !Text
-    , _accPremium     :: !(Maybe Bool)
-    , _accName        :: !(Maybe Text)
-    , _accId          :: !(Maybe Text)
-    , _accTimezone    :: !(Maybe Text)
-    , _accSubAccounts :: !(Maybe [Account])
+    { _accKind         :: !Text
+    , _accCreationTime :: !(Maybe Int64)
+    , _accPremium      :: !(Maybe Bool)
+    , _accName         :: !(Maybe Text)
+    , _accId           :: !(Maybe Text)
+    , _accTimezone     :: !(Maybe Text)
+    , _accSubAccounts  :: !(Maybe [Account])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
@@ -1099,6 +1100,8 @@ data Account = Account
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'accKind'
+--
+-- * 'accCreationTime'
 --
 -- * 'accPremium'
 --
@@ -1114,6 +1117,7 @@ account
 account =
     Account
     { _accKind = "adsense#account"
+    , _accCreationTime = Nothing
     , _accPremium = Nothing
     , _accName = Nothing
     , _accId = Nothing
@@ -1124,6 +1128,11 @@ account =
 -- | Kind of resource this is, in this case adsense#account.
 accKind :: Lens' Account Text
 accKind = lens _accKind (\ s a -> s{_accKind = a})
+
+accCreationTime :: Lens' Account (Maybe Int64)
+accCreationTime
+  = lens _accCreationTime
+      (\ s a -> s{_accCreationTime = a})
 
 -- | Whether this account is premium.
 accPremium :: Lens' Account (Maybe Bool)
@@ -1157,7 +1166,8 @@ instance FromJSON Account where
               (\ o ->
                  Account <$>
                    (o .:? "kind" .!= "adsense#account") <*>
-                     (o .:? "premium")
+                     (o .:? "creation_time")
+                     <*> (o .:? "premium")
                      <*> (o .:? "name")
                      <*> (o .:? "id")
                      <*> (o .:? "timezone")
@@ -1168,6 +1178,7 @@ instance ToJSON Account where
           = object
               (catMaybes
                  [Just ("kind" .= _accKind),
+                  ("creation_time" .=) <$> _accCreationTime,
                   ("premium" .=) <$> _accPremium,
                   ("name" .=) <$> _accName, ("id" .=) <$> _accId,
                   ("timezone" .=) <$> _accTimezone,

@@ -23,11 +23,11 @@
 -- | Creates a course. The user specified in \`ownerId\` is the owner of the
 -- created course and added as a teacher. This method returns the following
 -- error codes: * \`PERMISSION_DENIED\` if the requesting user is not
--- permitted to create courses or for [general user permission errors][User
--- Permission Errors]. * \`NOT_FOUND\` if the primary teacher is not a
--- valid user. * \`FAILED_PRECONDITION\` if the course owner\'s account is
--- disabled. * \`ALREADY_EXISTS\` if an alias was specified in the \`id\`
--- and already exists.
+-- permitted to create courses or for access errors. * \`NOT_FOUND\` if the
+-- primary teacher is not a valid user. * \`FAILED_PRECONDITION\` if the
+-- course owner\'s account is disabled or for the following request errors:
+-- * UserGroupsMembershipLimitReached * \`ALREADY_EXISTS\` if an alias was
+-- specified in the \`id\` and already exists.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesCreate@.
 module Network.Google.Resource.Classroom.Courses.Create
@@ -71,11 +71,11 @@ type CoursesCreateResource =
 -- | Creates a course. The user specified in \`ownerId\` is the owner of the
 -- created course and added as a teacher. This method returns the following
 -- error codes: * \`PERMISSION_DENIED\` if the requesting user is not
--- permitted to create courses or for [general user permission errors][User
--- Permission Errors]. * \`NOT_FOUND\` if the primary teacher is not a
--- valid user. * \`FAILED_PRECONDITION\` if the course owner\'s account is
--- disabled. * \`ALREADY_EXISTS\` if an alias was specified in the \`id\`
--- and already exists.
+-- permitted to create courses or for access errors. * \`NOT_FOUND\` if the
+-- primary teacher is not a valid user. * \`FAILED_PRECONDITION\` if the
+-- course owner\'s account is disabled or for the following request errors:
+-- * UserGroupsMembershipLimitReached * \`ALREADY_EXISTS\` if an alias was
+-- specified in the \`id\` and already exists.
 --
 -- /See:/ 'coursesCreate'' smart constructor.
 data CoursesCreate' = CoursesCreate'

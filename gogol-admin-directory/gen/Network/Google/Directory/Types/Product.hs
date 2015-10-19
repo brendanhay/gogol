@@ -297,6 +297,63 @@ instance ToJSON UserAbout where
                  [("value" .=) <$> _uaValue,
                   ("contentType" .=) <$> _uaContentType])
 
+-- | JSON response template for List privileges operation in Directory API.
+--
+-- /See:/ 'privileges' smart constructor.
+data Privileges = Privileges
+    { _pEtag  :: !(Maybe Text)
+    , _pKind  :: !Text
+    , _pItems :: !(Maybe [Privilege])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Privileges' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pEtag'
+--
+-- * 'pKind'
+--
+-- * 'pItems'
+privileges
+    :: Privileges
+privileges =
+    Privileges
+    { _pEtag = Nothing
+    , _pKind = "admin#directory#privileges"
+    , _pItems = Nothing
+    }
+
+-- | ETag of the resource.
+pEtag :: Lens' Privileges (Maybe Text)
+pEtag = lens _pEtag (\ s a -> s{_pEtag = a})
+
+-- | The type of the API resource. This is always admin#directory#privileges.
+pKind :: Lens' Privileges Text
+pKind = lens _pKind (\ s a -> s{_pKind = a})
+
+-- | A list of Privilege resources.
+pItems :: Lens' Privileges [Privilege]
+pItems
+  = lens _pItems (\ s a -> s{_pItems = a}) . _Default .
+      _Coerce
+
+instance FromJSON Privileges where
+        parseJSON
+          = withObject "Privileges"
+              (\ o ->
+                 Privileges <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#privileges")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Privileges where
+        toJSON Privileges{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _pEtag, Just ("kind" .= _pKind),
+                  ("items" .=) <$> _pItems])
+
 -- | JSON response template for List Groups operation in Directory API.
 --
 -- /See:/ 'groups' smart constructor.
@@ -364,6 +421,250 @@ instance ToJSON Groups where
                  [("groups" .=) <$> _gGroups, ("etag" .=) <$> _gEtag,
                   ("nextPageToken" .=) <$> _gNextPageToken,
                   Just ("kind" .= _gKind)])
+
+-- | JSON response template for List roleAssignments operation in Directory
+-- API.
+--
+-- /See:/ 'roleAssignments' smart constructor.
+data RoleAssignments = RoleAssignments
+    { _raEtag          :: !(Maybe Text)
+    , _raNextPageToken :: !(Maybe Text)
+    , _raKind          :: !Text
+    , _raItems         :: !(Maybe [RoleAssignment])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RoleAssignments' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'raEtag'
+--
+-- * 'raNextPageToken'
+--
+-- * 'raKind'
+--
+-- * 'raItems'
+roleAssignments
+    :: RoleAssignments
+roleAssignments =
+    RoleAssignments
+    { _raEtag = Nothing
+    , _raNextPageToken = Nothing
+    , _raKind = "admin#directory#roleAssignments"
+    , _raItems = Nothing
+    }
+
+-- | ETag of the resource.
+raEtag :: Lens' RoleAssignments (Maybe Text)
+raEtag = lens _raEtag (\ s a -> s{_raEtag = a})
+
+raNextPageToken :: Lens' RoleAssignments (Maybe Text)
+raNextPageToken
+  = lens _raNextPageToken
+      (\ s a -> s{_raNextPageToken = a})
+
+-- | The type of the API resource. This is always
+-- admin#directory#roleAssignments.
+raKind :: Lens' RoleAssignments Text
+raKind = lens _raKind (\ s a -> s{_raKind = a})
+
+-- | A list of RoleAssignment resources.
+raItems :: Lens' RoleAssignments [RoleAssignment]
+raItems
+  = lens _raItems (\ s a -> s{_raItems = a}) . _Default
+      . _Coerce
+
+instance FromJSON RoleAssignments where
+        parseJSON
+          = withObject "RoleAssignments"
+              (\ o ->
+                 RoleAssignments <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "admin#directory#roleAssignments")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON RoleAssignments where
+        toJSON RoleAssignments{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _raEtag,
+                  ("nextPageToken" .=) <$> _raNextPageToken,
+                  Just ("kind" .= _raKind), ("items" .=) <$> _raItems])
+
+-- | JSON template for privilege resource in Directory API.
+--
+-- /See:/ 'privilege' smart constructor.
+data Privilege = Privilege
+    { _priEtag            :: !(Maybe Text)
+    , _priIsOuScopable    :: !(Maybe Bool)
+    , _priKind            :: !Text
+    , _priServiceName     :: !(Maybe Text)
+    , _priServiceId       :: !(Maybe Text)
+    , _priPrivilegeName   :: !(Maybe Text)
+    , _priChildPrivileges :: !(Maybe [Privilege])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Privilege' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'priEtag'
+--
+-- * 'priIsOuScopable'
+--
+-- * 'priKind'
+--
+-- * 'priServiceName'
+--
+-- * 'priServiceId'
+--
+-- * 'priPrivilegeName'
+--
+-- * 'priChildPrivileges'
+privilege
+    :: Privilege
+privilege =
+    Privilege
+    { _priEtag = Nothing
+    , _priIsOuScopable = Nothing
+    , _priKind = "admin#directory#privilege"
+    , _priServiceName = Nothing
+    , _priServiceId = Nothing
+    , _priPrivilegeName = Nothing
+    , _priChildPrivileges = Nothing
+    }
+
+-- | ETag of the resource.
+priEtag :: Lens' Privilege (Maybe Text)
+priEtag = lens _priEtag (\ s a -> s{_priEtag = a})
+
+-- | If the privilege can be restricted to an organization unit.
+priIsOuScopable :: Lens' Privilege (Maybe Bool)
+priIsOuScopable
+  = lens _priIsOuScopable
+      (\ s a -> s{_priIsOuScopable = a})
+
+-- | The type of the API resource. This is always admin#directory#privilege.
+priKind :: Lens' Privilege Text
+priKind = lens _priKind (\ s a -> s{_priKind = a})
+
+-- | The name of the service this privilege is for.
+priServiceName :: Lens' Privilege (Maybe Text)
+priServiceName
+  = lens _priServiceName
+      (\ s a -> s{_priServiceName = a})
+
+-- | The obfuscated ID of the service this privilege is for.
+priServiceId :: Lens' Privilege (Maybe Text)
+priServiceId
+  = lens _priServiceId (\ s a -> s{_priServiceId = a})
+
+-- | The name of the privilege.
+priPrivilegeName :: Lens' Privilege (Maybe Text)
+priPrivilegeName
+  = lens _priPrivilegeName
+      (\ s a -> s{_priPrivilegeName = a})
+
+-- | A list of child privileges. Privileges for a service form a tree. Each
+-- privilege can have a list of child privileges; this list is empty for a
+-- leaf privilege.
+priChildPrivileges :: Lens' Privilege [Privilege]
+priChildPrivileges
+  = lens _priChildPrivileges
+      (\ s a -> s{_priChildPrivileges = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON Privilege where
+        parseJSON
+          = withObject "Privilege"
+              (\ o ->
+                 Privilege <$>
+                   (o .:? "etag") <*> (o .:? "isOuScopable") <*>
+                     (o .:? "kind" .!= "admin#directory#privilege")
+                     <*> (o .:? "serviceName")
+                     <*> (o .:? "serviceId")
+                     <*> (o .:? "privilegeName")
+                     <*> (o .:? "childPrivileges" .!= mempty))
+
+instance ToJSON Privilege where
+        toJSON Privilege{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _priEtag,
+                  ("isOuScopable" .=) <$> _priIsOuScopable,
+                  Just ("kind" .= _priKind),
+                  ("serviceName" .=) <$> _priServiceName,
+                  ("serviceId" .=) <$> _priServiceId,
+                  ("privilegeName" .=) <$> _priPrivilegeName,
+                  ("childPrivileges" .=) <$> _priChildPrivileges])
+
+-- | JSON response template for List roles operation in Directory API.
+--
+-- /See:/ 'roles' smart constructor.
+data Roles = Roles
+    { _rEtag          :: !(Maybe Text)
+    , _rNextPageToken :: !(Maybe Text)
+    , _rKind          :: !Text
+    , _rItems         :: !(Maybe [Role])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Roles' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rEtag'
+--
+-- * 'rNextPageToken'
+--
+-- * 'rKind'
+--
+-- * 'rItems'
+roles
+    :: Roles
+roles =
+    Roles
+    { _rEtag = Nothing
+    , _rNextPageToken = Nothing
+    , _rKind = "admin#directory#roles"
+    , _rItems = Nothing
+    }
+
+-- | ETag of the resource.
+rEtag :: Lens' Roles (Maybe Text)
+rEtag = lens _rEtag (\ s a -> s{_rEtag = a})
+
+rNextPageToken :: Lens' Roles (Maybe Text)
+rNextPageToken
+  = lens _rNextPageToken
+      (\ s a -> s{_rNextPageToken = a})
+
+-- | The type of the API resource. This is always admin#directory#roles.
+rKind :: Lens' Roles Text
+rKind = lens _rKind (\ s a -> s{_rKind = a})
+
+-- | A list of Role resources.
+rItems :: Lens' Roles [Role]
+rItems
+  = lens _rItems (\ s a -> s{_rItems = a}) . _Default .
+      _Coerce
+
+instance FromJSON Roles where
+        parseJSON
+          = withObject "Roles"
+              (\ o ->
+                 Roles <$>
+                   (o .:? "etag") <*> (o .:? "nextPageToken") <*>
+                     (o .:? "kind" .!= "admin#directory#roles")
+                     <*> (o .:? "items" .!= mempty))
+
+instance ToJSON Roles where
+        toJSON Roles{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _rEtag,
+                  ("nextPageToken" .=) <$> _rNextPageToken,
+                  Just ("kind" .= _rKind), ("items" .=) <$> _rItems])
 
 -- | JSON template for address.
 --
@@ -539,6 +840,248 @@ instance ToJSON UserAddress where
                   ("region" .=) <$> _uaRegion, ("type" .=) <$> _uaType,
                   ("customType" .=) <$> _uaCustomType,
                   ("sourceIsStructured" .=) <$> _uaSourceIsStructured])
+
+-- | JSON template for postal address of a customer.
+--
+-- /See:/ 'customerPostalAddress' smart constructor.
+data CustomerPostalAddress = CustomerPostalAddress
+    { _cpaOrganizationName :: !(Maybe Text)
+    , _cpaPostalCode       :: !(Maybe Text)
+    , _cpaAddressLine1     :: !(Maybe Text)
+    , _cpaLocality         :: !(Maybe Text)
+    , _cpaContactName      :: !(Maybe Text)
+    , _cpaAddressLine2     :: !(Maybe Text)
+    , _cpaCountryCode      :: !(Maybe Text)
+    , _cpaRegion           :: !(Maybe Text)
+    , _cpaAddressLine3     :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CustomerPostalAddress' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cpaOrganizationName'
+--
+-- * 'cpaPostalCode'
+--
+-- * 'cpaAddressLine1'
+--
+-- * 'cpaLocality'
+--
+-- * 'cpaContactName'
+--
+-- * 'cpaAddressLine2'
+--
+-- * 'cpaCountryCode'
+--
+-- * 'cpaRegion'
+--
+-- * 'cpaAddressLine3'
+customerPostalAddress
+    :: CustomerPostalAddress
+customerPostalAddress =
+    CustomerPostalAddress
+    { _cpaOrganizationName = Nothing
+    , _cpaPostalCode = Nothing
+    , _cpaAddressLine1 = Nothing
+    , _cpaLocality = Nothing
+    , _cpaContactName = Nothing
+    , _cpaAddressLine2 = Nothing
+    , _cpaCountryCode = Nothing
+    , _cpaRegion = Nothing
+    , _cpaAddressLine3 = Nothing
+    }
+
+-- | The company or company division name.
+cpaOrganizationName :: Lens' CustomerPostalAddress (Maybe Text)
+cpaOrganizationName
+  = lens _cpaOrganizationName
+      (\ s a -> s{_cpaOrganizationName = a})
+
+-- | The postal code. A postalCode example is a postal zip code such as
+-- 10009. This is in accordance with -
+-- http:\/\/portablecontacts.net\/draft-spec.html#address_element.
+cpaPostalCode :: Lens' CustomerPostalAddress (Maybe Text)
+cpaPostalCode
+  = lens _cpaPostalCode
+      (\ s a -> s{_cpaPostalCode = a})
+
+-- | A customer\'s physical address. The address can be composed of one to
+-- three lines.
+cpaAddressLine1 :: Lens' CustomerPostalAddress (Maybe Text)
+cpaAddressLine1
+  = lens _cpaAddressLine1
+      (\ s a -> s{_cpaAddressLine1 = a})
+
+-- | Name of the locality. An example of a locality value is the city of San
+-- Francisco.
+cpaLocality :: Lens' CustomerPostalAddress (Maybe Text)
+cpaLocality
+  = lens _cpaLocality (\ s a -> s{_cpaLocality = a})
+
+-- | The customer contact\'s name.
+cpaContactName :: Lens' CustomerPostalAddress (Maybe Text)
+cpaContactName
+  = lens _cpaContactName
+      (\ s a -> s{_cpaContactName = a})
+
+-- | Address line 2 of the address.
+cpaAddressLine2 :: Lens' CustomerPostalAddress (Maybe Text)
+cpaAddressLine2
+  = lens _cpaAddressLine2
+      (\ s a -> s{_cpaAddressLine2 = a})
+
+-- | This is a required property. For countryCode information see the ISO
+-- 3166 country code elements.
+cpaCountryCode :: Lens' CustomerPostalAddress (Maybe Text)
+cpaCountryCode
+  = lens _cpaCountryCode
+      (\ s a -> s{_cpaCountryCode = a})
+
+-- | Name of the region. An example of a region value is NY for the state of
+-- New York.
+cpaRegion :: Lens' CustomerPostalAddress (Maybe Text)
+cpaRegion
+  = lens _cpaRegion (\ s a -> s{_cpaRegion = a})
+
+-- | Address line 3 of the address.
+cpaAddressLine3 :: Lens' CustomerPostalAddress (Maybe Text)
+cpaAddressLine3
+  = lens _cpaAddressLine3
+      (\ s a -> s{_cpaAddressLine3 = a})
+
+instance FromJSON CustomerPostalAddress where
+        parseJSON
+          = withObject "CustomerPostalAddress"
+              (\ o ->
+                 CustomerPostalAddress <$>
+                   (o .:? "organizationName") <*> (o .:? "postalCode")
+                     <*> (o .:? "addressLine1")
+                     <*> (o .:? "locality")
+                     <*> (o .:? "contactName")
+                     <*> (o .:? "addressLine2")
+                     <*> (o .:? "countryCode")
+                     <*> (o .:? "region")
+                     <*> (o .:? "addressLine3"))
+
+instance ToJSON CustomerPostalAddress where
+        toJSON CustomerPostalAddress{..}
+          = object
+              (catMaybes
+                 [("organizationName" .=) <$> _cpaOrganizationName,
+                  ("postalCode" .=) <$> _cpaPostalCode,
+                  ("addressLine1" .=) <$> _cpaAddressLine1,
+                  ("locality" .=) <$> _cpaLocality,
+                  ("contactName" .=) <$> _cpaContactName,
+                  ("addressLine2" .=) <$> _cpaAddressLine2,
+                  ("countryCode" .=) <$> _cpaCountryCode,
+                  ("region" .=) <$> _cpaRegion,
+                  ("addressLine3" .=) <$> _cpaAddressLine3])
+
+-- | JSON template for roleAssignment resource in Directory API.
+--
+-- /See:/ 'roleAssignment' smart constructor.
+data RoleAssignment = RoleAssignment
+    { _rolEtag             :: !(Maybe Text)
+    , _rolScopeType        :: !(Maybe Text)
+    , _rolKind             :: !Text
+    , _rolAssignedTo       :: !(Maybe Text)
+    , _rolRoleId           :: !(Maybe Int64)
+    , _rolRoleAssignmentId :: !(Maybe Int64)
+    , _rolOrgUnitId        :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RoleAssignment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rolEtag'
+--
+-- * 'rolScopeType'
+--
+-- * 'rolKind'
+--
+-- * 'rolAssignedTo'
+--
+-- * 'rolRoleId'
+--
+-- * 'rolRoleAssignmentId'
+--
+-- * 'rolOrgUnitId'
+roleAssignment
+    :: RoleAssignment
+roleAssignment =
+    RoleAssignment
+    { _rolEtag = Nothing
+    , _rolScopeType = Nothing
+    , _rolKind = "admin#directory#roleAssignment"
+    , _rolAssignedTo = Nothing
+    , _rolRoleId = Nothing
+    , _rolRoleAssignmentId = Nothing
+    , _rolOrgUnitId = Nothing
+    }
+
+-- | ETag of the resource.
+rolEtag :: Lens' RoleAssignment (Maybe Text)
+rolEtag = lens _rolEtag (\ s a -> s{_rolEtag = a})
+
+-- | The scope in which this role is assigned. Possible values are: -
+-- CUSTOMER - ORG_UNIT
+rolScopeType :: Lens' RoleAssignment (Maybe Text)
+rolScopeType
+  = lens _rolScopeType (\ s a -> s{_rolScopeType = a})
+
+-- | The type of the API resource. This is always
+-- admin#directory#roleAssignment.
+rolKind :: Lens' RoleAssignment Text
+rolKind = lens _rolKind (\ s a -> s{_rolKind = a})
+
+-- | The unique ID of the user this role is assigned to.
+rolAssignedTo :: Lens' RoleAssignment (Maybe Text)
+rolAssignedTo
+  = lens _rolAssignedTo
+      (\ s a -> s{_rolAssignedTo = a})
+
+-- | The ID of the role that is assigned.
+rolRoleId :: Lens' RoleAssignment (Maybe Int64)
+rolRoleId
+  = lens _rolRoleId (\ s a -> s{_rolRoleId = a})
+
+-- | ID of this roleAssignment.
+rolRoleAssignmentId :: Lens' RoleAssignment (Maybe Int64)
+rolRoleAssignmentId
+  = lens _rolRoleAssignmentId
+      (\ s a -> s{_rolRoleAssignmentId = a})
+
+-- | If the role is restricted to an organization unit, this contains the ID
+-- for the organization unit the exercise of this role is restricted to.
+rolOrgUnitId :: Lens' RoleAssignment (Maybe Text)
+rolOrgUnitId
+  = lens _rolOrgUnitId (\ s a -> s{_rolOrgUnitId = a})
+
+instance FromJSON RoleAssignment where
+        parseJSON
+          = withObject "RoleAssignment"
+              (\ o ->
+                 RoleAssignment <$>
+                   (o .:? "etag") <*> (o .:? "scopeType") <*>
+                     (o .:? "kind" .!= "admin#directory#roleAssignment")
+                     <*> (o .:? "assignedTo")
+                     <*> (o .:? "roleId")
+                     <*> (o .:? "roleAssignmentId")
+                     <*> (o .:? "orgUnitId"))
+
+instance ToJSON RoleAssignment where
+        toJSON RoleAssignment{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _rolEtag,
+                  ("scopeType" .=) <$> _rolScopeType,
+                  Just ("kind" .= _rolKind),
+                  ("assignedTo" .=) <$> _rolAssignedTo,
+                  ("roleId" .=) <$> _rolRoleId,
+                  ("roleAssignmentId" .=) <$> _rolRoleAssignmentId,
+                  ("orgUnitId" .=) <$> _rolOrgUnitId])
 
 -- | JSON template for Group resource in Directory API.
 --
@@ -1530,6 +2073,65 @@ instance FromJSON UserCustomSchemas where
 instance ToJSON UserCustomSchemas where
         toJSON = toJSON . _ucsAddtional
 
+-- | JSON response template to list domain aliases in Directory API.
+--
+-- /See:/ 'domainAliases' smart constructor.
+data DomainAliases = DomainAliases
+    { _daEtag          :: !(Maybe Text)
+    , _daKind          :: !Text
+    , _daDomainAliases :: !(Maybe [DomainAlias])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DomainAliases' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'daEtag'
+--
+-- * 'daKind'
+--
+-- * 'daDomainAliases'
+domainAliases
+    :: DomainAliases
+domainAliases =
+    DomainAliases
+    { _daEtag = Nothing
+    , _daKind = "admin#directory#domainAliases"
+    , _daDomainAliases = Nothing
+    }
+
+-- | ETag of the resource.
+daEtag :: Lens' DomainAliases (Maybe Text)
+daEtag = lens _daEtag (\ s a -> s{_daEtag = a})
+
+-- | Kind of resource this is.
+daKind :: Lens' DomainAliases Text
+daKind = lens _daKind (\ s a -> s{_daKind = a})
+
+-- | List of domain alias objects.
+daDomainAliases :: Lens' DomainAliases [DomainAlias]
+daDomainAliases
+  = lens _daDomainAliases
+      (\ s a -> s{_daDomainAliases = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON DomainAliases where
+        parseJSON
+          = withObject "DomainAliases"
+              (\ o ->
+                 DomainAliases <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#domainAliases")
+                     <*> (o .:? "domainAliases" .!= mempty))
+
+instance ToJSON DomainAliases where
+        toJSON DomainAliases{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _daEtag, Just ("kind" .= _daKind),
+                  ("domainAliases" .=) <$> _daDomainAliases])
+
 -- | JSON response template to list aliases in Directory API.
 --
 -- /See:/ 'aliases' smart constructor.
@@ -2116,6 +2718,98 @@ instance ToJSON ChromeOSDeviceRecentUsersItem where
                  [("email" .=) <$> _codruiEmail,
                   ("type" .=) <$> _codruiType])
 
+-- | JSON template for Domain Alias object in Directory API.
+--
+-- /See:/ 'domainAlias' smart constructor.
+data DomainAlias = DomainAlias
+    { _dCreationTime     :: !(Maybe Int64)
+    , _dEtag             :: !(Maybe Text)
+    , _dKind             :: !Text
+    , _dVerified         :: !(Maybe Bool)
+    , _dDomainAliasName  :: !(Maybe Text)
+    , _dParentDomainName :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DomainAlias' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dCreationTime'
+--
+-- * 'dEtag'
+--
+-- * 'dKind'
+--
+-- * 'dVerified'
+--
+-- * 'dDomainAliasName'
+--
+-- * 'dParentDomainName'
+domainAlias
+    :: DomainAlias
+domainAlias =
+    DomainAlias
+    { _dCreationTime = Nothing
+    , _dEtag = Nothing
+    , _dKind = "admin#directory#domainAlias"
+    , _dVerified = Nothing
+    , _dDomainAliasName = Nothing
+    , _dParentDomainName = Nothing
+    }
+
+-- | The creation time of the domain alias. (Read-only).
+dCreationTime :: Lens' DomainAlias (Maybe Int64)
+dCreationTime
+  = lens _dCreationTime
+      (\ s a -> s{_dCreationTime = a})
+
+-- | ETag of the resource.
+dEtag :: Lens' DomainAlias (Maybe Text)
+dEtag = lens _dEtag (\ s a -> s{_dEtag = a})
+
+-- | Kind of resource this is.
+dKind :: Lens' DomainAlias Text
+dKind = lens _dKind (\ s a -> s{_dKind = a})
+
+-- | Indicates the verification state of a domain alias. (Read-only)
+dVerified :: Lens' DomainAlias (Maybe Bool)
+dVerified
+  = lens _dVerified (\ s a -> s{_dVerified = a})
+
+-- | The domain alias name.
+dDomainAliasName :: Lens' DomainAlias (Maybe Text)
+dDomainAliasName
+  = lens _dDomainAliasName
+      (\ s a -> s{_dDomainAliasName = a})
+
+-- | The parent domain name that the domain alias is associated with. This
+-- can either be a primary or secondary domain name within a customer.
+dParentDomainName :: Lens' DomainAlias (Maybe Text)
+dParentDomainName
+  = lens _dParentDomainName
+      (\ s a -> s{_dParentDomainName = a})
+
+instance FromJSON DomainAlias where
+        parseJSON
+          = withObject "DomainAlias"
+              (\ o ->
+                 DomainAlias <$>
+                   (o .:? "creationTime") <*> (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#domainAlias")
+                     <*> (o .:? "verified")
+                     <*> (o .:? "domainAliasName")
+                     <*> (o .:? "parentDomainName"))
+
+instance ToJSON DomainAlias where
+        toJSON DomainAlias{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _dCreationTime,
+                  ("etag" .=) <$> _dEtag, Just ("kind" .= _dKind),
+                  ("verified" .=) <$> _dVerified,
+                  ("domainAliasName" .=) <$> _dDomainAliasName,
+                  ("parentDomainName" .=) <$> _dParentDomainName])
+
 -- | JSON template for Alias object in Directory API.
 --
 -- /See:/ 'alias' smart constructor.
@@ -2693,6 +3387,252 @@ instance ToJSON User where
                   ("isMailboxSetup" .=) <$> _useIsMailboxSetup,
                   ("customSchemas" .=) <$> _useCustomSchemas,
                   ("suspensionReason" .=) <$> _useSuspensionReason])
+
+-- | JSON template for role resource in Directory API.
+--
+-- /See:/ 'role' smart constructor.
+data Role = Role
+    { _rrEtag             :: !(Maybe Text)
+    , _rrKind             :: !Text
+    , _rrRoleName         :: !(Maybe Text)
+    , _rrIsSystemRole     :: !(Maybe Bool)
+    , _rrRoleId           :: !(Maybe Int64)
+    , _rrRoleDescription  :: !(Maybe Text)
+    , _rrIsSuperAdminRole :: !(Maybe Bool)
+    , _rrRolePrivileges   :: !(Maybe [RoleRolePrivilegesItem])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Role' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrEtag'
+--
+-- * 'rrKind'
+--
+-- * 'rrRoleName'
+--
+-- * 'rrIsSystemRole'
+--
+-- * 'rrRoleId'
+--
+-- * 'rrRoleDescription'
+--
+-- * 'rrIsSuperAdminRole'
+--
+-- * 'rrRolePrivileges'
+role
+    :: Role
+role =
+    Role
+    { _rrEtag = Nothing
+    , _rrKind = "admin#directory#role"
+    , _rrRoleName = Nothing
+    , _rrIsSystemRole = Nothing
+    , _rrRoleId = Nothing
+    , _rrRoleDescription = Nothing
+    , _rrIsSuperAdminRole = Nothing
+    , _rrRolePrivileges = Nothing
+    }
+
+-- | ETag of the resource.
+rrEtag :: Lens' Role (Maybe Text)
+rrEtag = lens _rrEtag (\ s a -> s{_rrEtag = a})
+
+-- | The type of the API resource. This is always admin#directory#role.
+rrKind :: Lens' Role Text
+rrKind = lens _rrKind (\ s a -> s{_rrKind = a})
+
+-- | Name of the role.
+rrRoleName :: Lens' Role (Maybe Text)
+rrRoleName
+  = lens _rrRoleName (\ s a -> s{_rrRoleName = a})
+
+-- | Returns true if this is a pre-defined system role.
+rrIsSystemRole :: Lens' Role (Maybe Bool)
+rrIsSystemRole
+  = lens _rrIsSystemRole
+      (\ s a -> s{_rrIsSystemRole = a})
+
+-- | ID of the role.
+rrRoleId :: Lens' Role (Maybe Int64)
+rrRoleId = lens _rrRoleId (\ s a -> s{_rrRoleId = a})
+
+-- | A short description of the role.
+rrRoleDescription :: Lens' Role (Maybe Text)
+rrRoleDescription
+  = lens _rrRoleDescription
+      (\ s a -> s{_rrRoleDescription = a})
+
+-- | Returns true if the role is a super admin role.
+rrIsSuperAdminRole :: Lens' Role (Maybe Bool)
+rrIsSuperAdminRole
+  = lens _rrIsSuperAdminRole
+      (\ s a -> s{_rrIsSuperAdminRole = a})
+
+-- | The set of privileges that are granted to this role.
+rrRolePrivileges :: Lens' Role [RoleRolePrivilegesItem]
+rrRolePrivileges
+  = lens _rrRolePrivileges
+      (\ s a -> s{_rrRolePrivileges = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON Role where
+        parseJSON
+          = withObject "Role"
+              (\ o ->
+                 Role <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#role")
+                     <*> (o .:? "roleName")
+                     <*> (o .:? "isSystemRole")
+                     <*> (o .:? "roleId")
+                     <*> (o .:? "roleDescription")
+                     <*> (o .:? "isSuperAdminRole")
+                     <*> (o .:? "rolePrivileges" .!= mempty))
+
+instance ToJSON Role where
+        toJSON Role{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _rrEtag, Just ("kind" .= _rrKind),
+                  ("roleName" .=) <$> _rrRoleName,
+                  ("isSystemRole" .=) <$> _rrIsSystemRole,
+                  ("roleId" .=) <$> _rrRoleId,
+                  ("roleDescription" .=) <$> _rrRoleDescription,
+                  ("isSuperAdminRole" .=) <$> _rrIsSuperAdminRole,
+                  ("rolePrivileges" .=) <$> _rrRolePrivileges])
+
+-- | JSON template for Customer Resource object in Directory API.
+--
+-- /See:/ 'customer' smart constructor.
+data Customer = Customer
+    { _cusEtag                 :: !(Maybe Text)
+    , _cusKind                 :: !Text
+    , _cusAlternateEmail       :: !(Maybe Text)
+    , _cusCustomerDomain       :: !(Maybe Text)
+    , _cusPhoneNumber          :: !(Maybe Text)
+    , _cusLanguage             :: !(Maybe Text)
+    , _cusId                   :: !(Maybe Text)
+    , _cusCustomerCreationTime :: !(Maybe DateTime')
+    , _cusPostalAddress        :: !(Maybe CustomerPostalAddress)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Customer' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cusEtag'
+--
+-- * 'cusKind'
+--
+-- * 'cusAlternateEmail'
+--
+-- * 'cusCustomerDomain'
+--
+-- * 'cusPhoneNumber'
+--
+-- * 'cusLanguage'
+--
+-- * 'cusId'
+--
+-- * 'cusCustomerCreationTime'
+--
+-- * 'cusPostalAddress'
+customer
+    :: Customer
+customer =
+    Customer
+    { _cusEtag = Nothing
+    , _cusKind = "admin#directory#customer"
+    , _cusAlternateEmail = Nothing
+    , _cusCustomerDomain = Nothing
+    , _cusPhoneNumber = Nothing
+    , _cusLanguage = Nothing
+    , _cusId = Nothing
+    , _cusCustomerCreationTime = Nothing
+    , _cusPostalAddress = Nothing
+    }
+
+-- | ETag of the resource.
+cusEtag :: Lens' Customer (Maybe Text)
+cusEtag = lens _cusEtag (\ s a -> s{_cusEtag = a})
+
+-- | Identifies the resource as a customer. Value: admin#directory#customer
+cusKind :: Lens' Customer Text
+cusKind = lens _cusKind (\ s a -> s{_cusKind = a})
+
+-- | The customer\'s secondary contact email address. This email address
+-- cannot be on the same domain as the customerDomain
+cusAlternateEmail :: Lens' Customer (Maybe Text)
+cusAlternateEmail
+  = lens _cusAlternateEmail
+      (\ s a -> s{_cusAlternateEmail = a})
+
+-- | The customer\'s primary domain name string. Do not include the www
+-- prefix when creating a new customer.
+cusCustomerDomain :: Lens' Customer (Maybe Text)
+cusCustomerDomain
+  = lens _cusCustomerDomain
+      (\ s a -> s{_cusCustomerDomain = a})
+
+-- | The customer\'s contact phone number in E.164 format.
+cusPhoneNumber :: Lens' Customer (Maybe Text)
+cusPhoneNumber
+  = lens _cusPhoneNumber
+      (\ s a -> s{_cusPhoneNumber = a})
+
+-- | The customer\'s ISO 639-2 language code. The default value is en-US
+cusLanguage :: Lens' Customer (Maybe Text)
+cusLanguage
+  = lens _cusLanguage (\ s a -> s{_cusLanguage = a})
+
+-- | The unique ID for the customer\'s Google account. (Readonly)
+cusId :: Lens' Customer (Maybe Text)
+cusId = lens _cusId (\ s a -> s{_cusId = a})
+
+-- | The customer\'s creation time (Readonly)
+cusCustomerCreationTime :: Lens' Customer (Maybe UTCTime)
+cusCustomerCreationTime
+  = lens _cusCustomerCreationTime
+      (\ s a -> s{_cusCustomerCreationTime = a})
+      . mapping _DateTime
+
+-- | The customer\'s postal address information.
+cusPostalAddress :: Lens' Customer (Maybe CustomerPostalAddress)
+cusPostalAddress
+  = lens _cusPostalAddress
+      (\ s a -> s{_cusPostalAddress = a})
+
+instance FromJSON Customer where
+        parseJSON
+          = withObject "Customer"
+              (\ o ->
+                 Customer <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#customer")
+                     <*> (o .:? "alternateEmail")
+                     <*> (o .:? "customerDomain")
+                     <*> (o .:? "phoneNumber")
+                     <*> (o .:? "language")
+                     <*> (o .:? "id")
+                     <*> (o .:? "customerCreationTime")
+                     <*> (o .:? "postalAddress"))
+
+instance ToJSON Customer where
+        toJSON Customer{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _cusEtag, Just ("kind" .= _cusKind),
+                  ("alternateEmail" .=) <$> _cusAlternateEmail,
+                  ("customerDomain" .=) <$> _cusCustomerDomain,
+                  ("phoneNumber" .=) <$> _cusPhoneNumber,
+                  ("language" .=) <$> _cusLanguage,
+                  ("id" .=) <$> _cusId,
+                  ("customerCreationTime" .=) <$>
+                    _cusCustomerCreationTime,
+                  ("postalAddress" .=) <$> _cusPostalAddress])
 
 --
 -- /See:/ 'mobileDeviceApplicationsItem' smart constructor.
@@ -4012,6 +4952,110 @@ instance FromJSON UserCustomProperties where
 instance ToJSON UserCustomProperties where
         toJSON = toJSON . _ucpAddtional
 
+-- | JSON template for Domain object in Directory API.
+--
+-- /See:/ 'domains' smart constructor.
+data Domains = Domains
+    { _domCreationTime  :: !(Maybe Int64)
+    , _domEtag          :: !(Maybe Text)
+    , _domKind          :: !Text
+    , _domDomainAliases :: !(Maybe [DomainAlias])
+    , _domVerified      :: !(Maybe Bool)
+    , _domDomainName    :: !(Maybe Text)
+    , _domIsPrimary     :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Domains' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'domCreationTime'
+--
+-- * 'domEtag'
+--
+-- * 'domKind'
+--
+-- * 'domDomainAliases'
+--
+-- * 'domVerified'
+--
+-- * 'domDomainName'
+--
+-- * 'domIsPrimary'
+domains
+    :: Domains
+domains =
+    Domains
+    { _domCreationTime = Nothing
+    , _domEtag = Nothing
+    , _domKind = "admin#directory#domain"
+    , _domDomainAliases = Nothing
+    , _domVerified = Nothing
+    , _domDomainName = Nothing
+    , _domIsPrimary = Nothing
+    }
+
+-- | Creation time of the domain. (Read-only).
+domCreationTime :: Lens' Domains (Maybe Int64)
+domCreationTime
+  = lens _domCreationTime
+      (\ s a -> s{_domCreationTime = a})
+
+-- | ETag of the resource.
+domEtag :: Lens' Domains (Maybe Text)
+domEtag = lens _domEtag (\ s a -> s{_domEtag = a})
+
+-- | Kind of resource this is.
+domKind :: Lens' Domains Text
+domKind = lens _domKind (\ s a -> s{_domKind = a})
+
+-- | List of domain alias objects. (Read-only)
+domDomainAliases :: Lens' Domains [DomainAlias]
+domDomainAliases
+  = lens _domDomainAliases
+      (\ s a -> s{_domDomainAliases = a})
+      . _Default
+      . _Coerce
+
+-- | Indicates the verification state of a domain. (Read-only).
+domVerified :: Lens' Domains (Maybe Bool)
+domVerified
+  = lens _domVerified (\ s a -> s{_domVerified = a})
+
+-- | The domain name of the customer.
+domDomainName :: Lens' Domains (Maybe Text)
+domDomainName
+  = lens _domDomainName
+      (\ s a -> s{_domDomainName = a})
+
+-- | Indicates if the domain is a primary domain (Read-only).
+domIsPrimary :: Lens' Domains (Maybe Bool)
+domIsPrimary
+  = lens _domIsPrimary (\ s a -> s{_domIsPrimary = a})
+
+instance FromJSON Domains where
+        parseJSON
+          = withObject "Domains"
+              (\ o ->
+                 Domains <$>
+                   (o .:? "creationTime") <*> (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#domain")
+                     <*> (o .:? "domainAliases" .!= mempty)
+                     <*> (o .:? "verified")
+                     <*> (o .:? "domainName")
+                     <*> (o .:? "isPrimary"))
+
+instance ToJSON Domains where
+        toJSON Domains{..}
+          = object
+              (catMaybes
+                 [("creationTime" .=) <$> _domCreationTime,
+                  ("etag" .=) <$> _domEtag, Just ("kind" .= _domKind),
+                  ("domainAliases" .=) <$> _domDomainAliases,
+                  ("verified" .=) <$> _domVerified,
+                  ("domainName" .=) <$> _domDomainName,
+                  ("isPrimary" .=) <$> _domIsPrimary])
+
 -- | Template for notifications list response.
 --
 -- /See:/ 'notifications' smart constructor.
@@ -4500,3 +5544,109 @@ instance ToJSON Asps where
               (catMaybes
                  [("etag" .=) <$> _aspEtag, Just ("kind" .= _aspKind),
                   ("items" .=) <$> _aspItems])
+
+--
+-- /See:/ 'roleRolePrivilegesItem' smart constructor.
+data RoleRolePrivilegesItem = RoleRolePrivilegesItem
+    { _rrpiServiceId     :: !(Maybe Text)
+    , _rrpiPrivilegeName :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RoleRolePrivilegesItem' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrpiServiceId'
+--
+-- * 'rrpiPrivilegeName'
+roleRolePrivilegesItem
+    :: RoleRolePrivilegesItem
+roleRolePrivilegesItem =
+    RoleRolePrivilegesItem
+    { _rrpiServiceId = Nothing
+    , _rrpiPrivilegeName = Nothing
+    }
+
+-- | The obfuscated ID of the service this privilege is for.
+rrpiServiceId :: Lens' RoleRolePrivilegesItem (Maybe Text)
+rrpiServiceId
+  = lens _rrpiServiceId
+      (\ s a -> s{_rrpiServiceId = a})
+
+-- | The name of the privilege.
+rrpiPrivilegeName :: Lens' RoleRolePrivilegesItem (Maybe Text)
+rrpiPrivilegeName
+  = lens _rrpiPrivilegeName
+      (\ s a -> s{_rrpiPrivilegeName = a})
+
+instance FromJSON RoleRolePrivilegesItem where
+        parseJSON
+          = withObject "RoleRolePrivilegesItem"
+              (\ o ->
+                 RoleRolePrivilegesItem <$>
+                   (o .:? "serviceId") <*> (o .:? "privilegeName"))
+
+instance ToJSON RoleRolePrivilegesItem where
+        toJSON RoleRolePrivilegesItem{..}
+          = object
+              (catMaybes
+                 [("serviceId" .=) <$> _rrpiServiceId,
+                  ("privilegeName" .=) <$> _rrpiPrivilegeName])
+
+-- | JSON response template to list Domains in Directory API.
+--
+-- /See:/ 'domains2' smart constructor.
+data Domains2 = Domains2
+    { _ddEtag    :: !(Maybe Text)
+    , _ddKind    :: !Text
+    , _ddDomains :: !(Maybe [Domains])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Domains2' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ddEtag'
+--
+-- * 'ddKind'
+--
+-- * 'ddDomains'
+domains2
+    :: Domains2
+domains2 =
+    Domains2
+    { _ddEtag = Nothing
+    , _ddKind = "admin#directory#domains"
+    , _ddDomains = Nothing
+    }
+
+-- | ETag of the resource.
+ddEtag :: Lens' Domains2 (Maybe Text)
+ddEtag = lens _ddEtag (\ s a -> s{_ddEtag = a})
+
+-- | Kind of resource this is.
+ddKind :: Lens' Domains2 Text
+ddKind = lens _ddKind (\ s a -> s{_ddKind = a})
+
+-- | List of domain objects.
+ddDomains :: Lens' Domains2 [Domains]
+ddDomains
+  = lens _ddDomains (\ s a -> s{_ddDomains = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON Domains2 where
+        parseJSON
+          = withObject "Domains2"
+              (\ o ->
+                 Domains2 <$>
+                   (o .:? "etag") <*>
+                     (o .:? "kind" .!= "admin#directory#domains")
+                     <*> (o .:? "domains" .!= mempty))
+
+instance ToJSON Domains2 where
+        toJSON Domains2{..}
+          = object
+              (catMaybes
+                 [("etag" .=) <$> _ddEtag, Just ("kind" .= _ddKind),
+                  ("domains" .=) <$> _ddDomains])

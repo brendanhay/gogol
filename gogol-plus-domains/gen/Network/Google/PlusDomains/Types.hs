@@ -55,6 +55,16 @@ module Network.Google.PlusDomains.Types
     , commentPlusoners
     , cpTotalItems
 
+    -- * CommentActorClientSpecificActorInfo
+    , CommentActorClientSpecificActorInfo
+    , commentActorClientSpecificActorInfo
+    , cacsaiYouTubeActorInfo
+
+    -- * ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+    , ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+    , activityObjectActorClientSpecificActorInfoYouTubeActorInfo
+    , aoacsaiytaiChannelId
+
     -- * ActivityObjectPlusoners
     , ActivityObjectPlusoners
     , activityObjectPlusoners
@@ -102,6 +112,11 @@ module Network.Google.PlusDomains.Types
     , cDisplayName
     , cId
     , cDescription
+
+    -- * ActivityActorClientSpecificActorInfo
+    , ActivityActorClientSpecificActorInfo
+    , activityActorClientSpecificActorInfo
+    , aacsaiYouTubeActorInfo
 
     -- * Person
     , Person
@@ -169,6 +184,7 @@ module Network.Google.PlusDomains.Types
     -- * CommentActor
     , CommentActor
     , commentActor
+    , caClientSpecificActorInfo
     , caImage
     , caURL
     , caDisplayName
@@ -193,6 +209,7 @@ module Network.Google.PlusDomains.Types
     -- * ActivityObjectActor
     , ActivityObjectActor
     , activityObjectActor
+    , aoaClientSpecificActorInfo
     , aoaImage
     , aoaURL
     , aoaDisplayName
@@ -263,6 +280,11 @@ module Network.Google.PlusDomains.Types
     , activityObjectActorImage
     , aoaiURL
 
+    -- * CommentActorClientSpecificActorInfoYouTubeActorInfo
+    , CommentActorClientSpecificActorInfoYouTubeActorInfo
+    , commentActorClientSpecificActorInfoYouTubeActorInfo
+    , cacsaiytaiChannelId
+
     -- * Media
     , Media
     , media
@@ -306,6 +328,11 @@ module Network.Google.PlusDomains.Types
     , ActivityActorVerification
     , activityActorVerification
     , aavAdHocVerified
+
+    -- * ActivityObjectActorClientSpecificActorInfo
+    , ActivityObjectActorClientSpecificActorInfo
+    , activityObjectActorClientSpecificActorInfo
+    , aoacsaiYouTubeActorInfo
 
     -- * PeopleListCollection
     , PeopleListCollection (..)
@@ -357,6 +384,11 @@ module Network.Google.PlusDomains.Types
     , personImage
     , piURL
     , piIsDefault
+
+    -- * ActivityActorClientSpecificActorInfoYouTubeActorInfo
+    , ActivityActorClientSpecificActorInfoYouTubeActorInfo
+    , activityActorClientSpecificActorInfoYouTubeActorInfo
+    , aacsaiytaiChannelId
 
     -- * ActivityObjectStatusForViewer
     , ActivityObjectStatusForViewer
@@ -497,6 +529,7 @@ module Network.Google.PlusDomains.Types
     -- * ActivityActor
     , ActivityActor
     , activityActor
+    , aaClientSpecificActorInfo
     , aaImage
     , aaURL
     , aaName

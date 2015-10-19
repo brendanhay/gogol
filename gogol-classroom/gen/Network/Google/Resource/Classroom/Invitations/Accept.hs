@@ -24,9 +24,11 @@
 -- teachers or students (as appropriate) of the specified course. Only the
 -- invited user may accept an invitation. This method returns the following
 -- error codes: * \`PERMISSION_DENIED\` if the requesting user is not
--- permitted to accept the requested invitation or for [general user
--- permission errors][User Permission Errors]. * \`NOT_FOUND\` if no
--- invitation exists with the requested ID.
+-- permitted to accept the requested invitation or for access errors. *
+-- \`FAILED_PRECONDITION\` for the following request errors: *
+-- CourseMemberLimitReached * CourseNotModifiable *
+-- CourseTeacherLimitReached * UserGroupsMembershipLimitReached *
+-- \`NOT_FOUND\` if no invitation exists with the requested ID.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomInvitationsAccept@.
 module Network.Google.Resource.Classroom.Invitations.Accept
@@ -71,9 +73,11 @@ type InvitationsAcceptResource =
 -- teachers or students (as appropriate) of the specified course. Only the
 -- invited user may accept an invitation. This method returns the following
 -- error codes: * \`PERMISSION_DENIED\` if the requesting user is not
--- permitted to accept the requested invitation or for [general user
--- permission errors][User Permission Errors]. * \`NOT_FOUND\` if no
--- invitation exists with the requested ID.
+-- permitted to accept the requested invitation or for access errors. *
+-- \`FAILED_PRECONDITION\` for the following request errors: *
+-- CourseMemberLimitReached * CourseNotModifiable *
+-- CourseTeacherLimitReached * UserGroupsMembershipLimitReached *
+-- \`NOT_FOUND\` if no invitation exists with the requested ID.
 --
 -- /See:/ 'invitationsAccept'' smart constructor.
 data InvitationsAccept' = InvitationsAccept'

@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Removes a list of instances from an instance group.
+-- | Removes one or more instances from the specified instance group, but
+-- does not delete those instances.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsRemoveInstances@.
 module Network.Google.Resource.Compute.InstanceGroups.RemoveInstances
@@ -55,7 +56,8 @@ type InstanceGroupsRemoveInstancesResource =
                    ReqBody '[JSON] InstanceGroupsRemoveInstancesRequest
                      :> Post '[JSON] Operation
 
--- | Removes a list of instances from an instance group.
+-- | Removes one or more instances from the specified instance group, but
+-- does not delete those instances.
 --
 -- /See:/ 'instanceGroupsRemoveInstances'' smart constructor.
 data InstanceGroupsRemoveInstances' = InstanceGroupsRemoveInstances'
@@ -95,7 +97,7 @@ igriProject :: Lens' InstanceGroupsRemoveInstances' Text
 igriProject
   = lens _igriProject (\ s a -> s{_igriProject = a})
 
--- | The URL of the zone where the instance group is located.
+-- | The name of the zone where the instance group is located.
 igriZone :: Lens' InstanceGroupsRemoveInstances' Text
 igriZone = lens _igriZone (\ s a -> s{_igriZone = a})
 

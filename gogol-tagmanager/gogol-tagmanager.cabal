@@ -43,17 +43,7 @@ library
         , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.Get
         , Network.Google.Resource.TagManager.Accounts.Containers.List
-        , Network.Google.Resource.TagManager.Accounts.Containers.Macros.Create
-        , Network.Google.Resource.TagManager.Accounts.Containers.Macros.Delete
-        , Network.Google.Resource.TagManager.Accounts.Containers.Macros.Get
-        , Network.Google.Resource.TagManager.Accounts.Containers.Macros.List
-        , Network.Google.Resource.TagManager.Accounts.Containers.Macros.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
-        , Network.Google.Resource.TagManager.Accounts.Containers.Rules.Create
-        , Network.Google.Resource.TagManager.Accounts.Containers.Rules.Delete
-        , Network.Google.Resource.TagManager.Accounts.Containers.Rules.Get
-        , Network.Google.Resource.TagManager.Accounts.Containers.Rules.List
-        , Network.Google.Resource.TagManager.Accounts.Containers.Rules.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
         , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Delete
         , Network.Google.Resource.TagManager.Accounts.Containers.Tags.Get

@@ -26,6 +26,15 @@ module Network.Google.Compute.Types
     , computeReadonlyScope
     , devstorageFullControlScope
 
+    -- * TargetHTTPSProxyList
+    , TargetHTTPSProxyList
+    , targetHTTPSProxyList
+    , thplNextPageToken
+    , thplKind
+    , thplItems
+    , thplSelfLink
+    , thplId
+
     -- * AddressesScopedList
     , AddressesScopedList
     , addressesScopedList
@@ -731,6 +740,15 @@ module Network.Google.Compute.Types
     -- * TargetInstanceNATPolicy
     , TargetInstanceNATPolicy (..)
 
+    -- * SSLCertificateList
+    , SSLCertificateList
+    , sslCertificateList
+    , sclNextPageToken
+    , sclKind
+    , sclItems
+    , sclSelfLink
+    , sclId
+
     -- * FirewallAllowedItem
     , FirewallAllowedItem
     , firewallAllowedItem
@@ -865,6 +883,11 @@ module Network.Google.Compute.Types
     -- * TargetVPNGatewaysScopedListWarningCode
     , TargetVPNGatewaysScopedListWarningCode (..)
 
+    -- * TargetHTTPSProxiesSetSSLCertificatesRequest
+    , TargetHTTPSProxiesSetSSLCertificatesRequest
+    , targetHTTPSProxiesSetSSLCertificatesRequest
+    , thpsscrSSLCertificates
+
     -- * InstanceTemplate
     , InstanceTemplate
     , instanceTemplate
@@ -909,6 +932,18 @@ module Network.Google.Compute.Types
     , URLMapsValidateResponse
     , urlMapsValidateResponse
     , umvrResult
+
+    -- * SSLCertificate
+    , SSLCertificate
+    , sslCertificate
+    , scPrivateKey
+    , scKind
+    , scSelfLink
+    , scName
+    , scCreationTimestamp
+    , scId
+    , scCertificate
+    , scDescription
 
     -- * URLMapReference
     , URLMapReference
@@ -1479,6 +1514,15 @@ module Network.Google.Compute.Types
     , igmstprFingerprint
     , igmstprTargetPools
 
+    -- * HTTPSHealthCheckList
+    , HTTPSHealthCheckList
+    , httpsHealthCheckList
+    , hhclNextPageToken
+    , hhclKind
+    , hhclItems
+    , hhclSelfLink
+    , hhclId
+
     -- * OperationErrorErrorsItem
     , OperationErrorErrorsItem
     , operationErrorErrorsItem
@@ -1635,6 +1679,18 @@ module Network.Google.Compute.Types
     , miiValue
     , miiKey
 
+    -- * TargetHTTPSProxy
+    , TargetHTTPSProxy
+    , targetHTTPSProxy
+    , thpURLMap
+    , thpSSLCertificates
+    , thpKind
+    , thpSelfLink
+    , thpName
+    , thpCreationTimestamp
+    , thpId
+    , thpDescription
+
     -- * TargetVPNGatewaysScopedList
     , TargetVPNGatewaysScopedList
     , targetVPNGatewaysScopedList
@@ -1696,6 +1752,23 @@ module Network.Google.Compute.Types
     , instanceGroupsScopedList
     , igslWarning
     , igslInstanceGroups
+
+    -- * HTTPSHealthCheck
+    , HTTPSHealthCheck
+    , httpsHealthCheck
+    , hhcHealthyThreshold
+    , hhcKind
+    , hhcRequestPath
+    , hhcSelfLink
+    , hhcCheckIntervalSec
+    , hhcName
+    , hhcCreationTimestamp
+    , hhcId
+    , hhcHost
+    , hhcTimeoutSec
+    , hhcDescription
+    , hhcUnhealthyThreshold
+    , hhcPort
 
     -- * ImageRawDiskContainerType
     , ImageRawDiskContainerType (..)

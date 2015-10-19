@@ -87,7 +87,8 @@ brdProject :: Lens' BackupRunsDelete' Text
 brdProject
   = lens _brdProject (\ s a -> s{_brdProject = a})
 
--- | The ID of the Backup Run to delete.
+-- | The ID of the Backup Run to delete. To find a Backup Run ID, use the
+-- list method.
 brdId :: Lens' BackupRunsDelete' Int64
 brdId = lens _brdId (\ s a -> s{_brdId = a})
 

@@ -93,6 +93,7 @@ module Network.Google.SQLAdmin.Types
     , sReplicationType
     , sActivationPolicy
     , sSettingsVersion
+    , sDataDiskSizeGb
     , sAuthorizedGaeApplications
     , sKind
     , sPricingPlan
@@ -245,6 +246,11 @@ module Network.Google.SQLAdmin.Types
     , fType
     , fMinValue
 
+    -- * InstancesFailoverRequest
+    , InstancesFailoverRequest
+    , instancesFailoverRequest
+    , ifrFailoverContext
+
     -- * BackupRun
     , BackupRun
     , backupRun
@@ -330,8 +336,15 @@ module Network.Google.SQLAdmin.Types
     -- * ReplicaConfiguration
     , ReplicaConfiguration
     , replicaConfiguration
+    , rcFailoverTarget
     , rcKind
     , rcMysqlReplicaConfiguration
+
+    -- * FailoverContext
+    , FailoverContext
+    , failoverContext
+    , fcSettingsVersion
+    , fcKind
 
     -- * SSLCertsInsertResponse
     , SSLCertsInsertResponse

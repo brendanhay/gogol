@@ -21,9 +21,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- | Creates a subscription to a given topic for a given subscriber. If the
--- subscription already exists, returns ALREADY_EXISTS. If the
--- corresponding topic doesn\'t exist, returns NOT_FOUND. If the name is
--- not provided in the request, the server will assign a random name for
+-- subscription already exists, returns \`ALREADY_EXISTS\`. If the
+-- corresponding topic doesn\'t exist, returns \`NOT_FOUND\`. If the name
+-- is not provided in the request, the server will assign a random name for
 -- this subscription on the same project as the topic.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsCreate@.
@@ -68,9 +68,9 @@ type ProjectsSubscriptionsCreateResource =
                            Put '[JSON] Subscription
 
 -- | Creates a subscription to a given topic for a given subscriber. If the
--- subscription already exists, returns ALREADY_EXISTS. If the
--- corresponding topic doesn\'t exist, returns NOT_FOUND. If the name is
--- not provided in the request, the server will assign a random name for
+-- subscription already exists, returns \`ALREADY_EXISTS\`. If the
+-- corresponding topic doesn\'t exist, returns \`NOT_FOUND\`. If the name
+-- is not provided in the request, the server will assign a random name for
 -- this subscription on the same project as the topic.
 --
 -- /See:/ 'projectsSubscriptionsCreate'' smart constructor.

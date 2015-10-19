@@ -22,8 +22,8 @@
 --
 -- | Deletes an alias of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
--- to remove the alias or for [general user permission errors][User
--- Permission Errors]. * \`NOT_FOUND\` if the alias does not exist.
+-- to remove the alias or for access errors. * \`NOT_FOUND\` if the alias
+-- does not exist.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesAliasesDelete@.
 module Network.Google.Resource.Classroom.Courses.Aliases.Delete
@@ -69,8 +69,8 @@ type CoursesAliasesDeleteResource =
 
 -- | Deletes an alias of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
--- to remove the alias or for [general user permission errors][User
--- Permission Errors]. * \`NOT_FOUND\` if the alias does not exist.
+-- to remove the alias or for access errors. * \`NOT_FOUND\` if the alias
+-- does not exist.
 --
 -- /See:/ 'coursesAliasesDelete'' smart constructor.
 data CoursesAliasesDelete' = CoursesAliasesDelete'
@@ -138,8 +138,7 @@ cadPp :: Lens' CoursesAliasesDelete' Bool
 cadPp = lens _cadPp (\ s a -> s{_cadPp = a})
 
 -- | Identifier of the course whose alias should be deleted. This identifier
--- can be either the Classroom-assigned identifier or an
--- [alias][google.classroom.v1.CourseAlias].
+-- can be either the Classroom-assigned identifier or an alias.
 cadCourseId :: Lens' CoursesAliasesDelete' Text
 cadCourseId
   = lens _cadCourseId (\ s a -> s{_cadCourseId = a})

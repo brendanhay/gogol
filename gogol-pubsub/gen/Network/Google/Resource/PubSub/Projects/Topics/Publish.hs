@@ -20,9 +20,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Adds one or more messages to the topic. Returns NOT_FOUND if the topic
--- does not exist. The message payload must not be empty; it must contain
--- either a non-empty data field, or at least one attribute.
+-- | Adds one or more messages to the topic. Returns \`NOT_FOUND\` if the
+-- topic does not exist. The message payload must not be empty; it must
+-- contain either a non-empty data field, or at least one attribute.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsPublish@.
 module Network.Google.Resource.PubSub.Projects.Topics.Publish
@@ -65,9 +65,9 @@ type ProjectsTopicsPublishResource =
                          ReqBody '[JSON] PublishRequest :>
                            Post '[JSON] PublishResponse
 
--- | Adds one or more messages to the topic. Returns NOT_FOUND if the topic
--- does not exist. The message payload must not be empty; it must contain
--- either a non-empty data field, or at least one attribute.
+-- | Adds one or more messages to the topic. Returns \`NOT_FOUND\` if the
+-- topic does not exist. The message payload must not be empty; it must
+-- contain either a non-empty data field, or at least one attribute.
 --
 -- /See:/ 'projectsTopicsPublish'' smart constructor.
 data ProjectsTopicsPublish' = ProjectsTopicsPublish'

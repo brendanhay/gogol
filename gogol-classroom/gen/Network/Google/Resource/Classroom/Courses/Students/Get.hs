@@ -22,9 +22,9 @@
 --
 -- | Returns a student of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
--- to view students of this course or for [general user permission
--- errors][User Permission Errors]. * \`NOT_FOUND\` if no student of this
--- course has the requested ID or if the course does not exist.
+-- to view students of this course or for access errors. * \`NOT_FOUND\` if
+-- no student of this course has the requested ID or if the course does not
+-- exist.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesStudentsGet@.
 module Network.Google.Resource.Classroom.Courses.Students.Get
@@ -70,9 +70,9 @@ type CoursesStudentsGetResource =
 
 -- | Returns a student of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
--- to view students of this course or for [general user permission
--- errors][User Permission Errors]. * \`NOT_FOUND\` if no student of this
--- course has the requested ID or if the course does not exist.
+-- to view students of this course or for access errors. * \`NOT_FOUND\` if
+-- no student of this course has the requested ID or if the course does not
+-- exist.
 --
 -- /See:/ 'coursesStudentsGet'' smart constructor.
 data CoursesStudentsGet' = CoursesStudentsGet'
@@ -140,8 +140,7 @@ csgPp :: Lens' CoursesStudentsGet' Bool
 csgPp = lens _csgPp (\ s a -> s{_csgPp = a})
 
 -- | Identifier of the course. This identifier can be either the
--- Classroom-assigned identifier or an
--- [alias][google.classroom.v1.CourseAlias].
+-- Classroom-assigned identifier or an alias.
 csgCourseId :: Lens' CoursesStudentsGet' Text
 csgCourseId
   = lens _csgCourseId (\ s a -> s{_csgCourseId = a})

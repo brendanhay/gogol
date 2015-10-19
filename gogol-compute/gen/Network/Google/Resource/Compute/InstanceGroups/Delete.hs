@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the specified instance group.
+-- | Deletes the specified instance group. The instances in the group are not
+-- deleted.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsDelete@.
 module Network.Google.Resource.Compute.InstanceGroups.Delete
@@ -51,7 +52,8 @@ type InstanceGroupsDeleteResource =
              Capture "instanceGroup" Text :>
                QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the specified instance group.
+-- | Deletes the specified instance group. The instances in the group are not
+-- deleted.
 --
 -- /See:/ 'instanceGroupsDelete'' smart constructor.
 data InstanceGroupsDelete' = InstanceGroupsDelete'
@@ -86,7 +88,7 @@ igdProject :: Lens' InstanceGroupsDelete' Text
 igdProject
   = lens _igdProject (\ s a -> s{_igdProject = a})
 
--- | The URL of the zone where the instance group is located.
+-- | The name of the zone where the instance group is located.
 igdZone :: Lens' InstanceGroupsDelete' Text
 igdZone = lens _igdZone (\ s a -> s{_igdZone = a})
 

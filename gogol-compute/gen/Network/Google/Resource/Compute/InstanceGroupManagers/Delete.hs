@@ -20,7 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Deletes the specified managed instance group resource.
+-- | Deletes the specified managed instance group and all of the instances in
+-- that group.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersDelete@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.Delete
@@ -51,7 +52,8 @@ type InstanceGroupManagersDeleteResource =
              Capture "instanceGroupManager" Text :>
                QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
--- | Deletes the specified managed instance group resource.
+-- | Deletes the specified managed instance group and all of the instances in
+-- that group.
 --
 -- /See:/ 'instanceGroupManagersDelete'' smart constructor.
 data InstanceGroupManagersDelete' = InstanceGroupManagersDelete'
@@ -86,13 +88,13 @@ igmdProject :: Lens' InstanceGroupManagersDelete' Text
 igmdProject
   = lens _igmdProject (\ s a -> s{_igmdProject = a})
 
--- | The name of the instance group manager to delete.
+-- | The name of the managed instance group to delete.
 igmdInstanceGroupManager :: Lens' InstanceGroupManagersDelete' Text
 igmdInstanceGroupManager
   = lens _igmdInstanceGroupManager
       (\ s a -> s{_igmdInstanceGroupManager = a})
 
--- | The URL of the zone where the managed instance group is located.
+-- | The name of the zone where the managed instance group is located.
 igmdZone :: Lens' InstanceGroupManagersDelete' Text
 igmdZone = lens _igmdZone (\ s a -> s{_igmdZone = a})
 

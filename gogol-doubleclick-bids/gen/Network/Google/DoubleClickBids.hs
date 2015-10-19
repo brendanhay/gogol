@@ -108,6 +108,7 @@ module Network.Google.DoubleClickBids
     , downloadLineItemsRequest
     , dlirFilterType
     , dlirFormat
+    , dlirFileSpec
     , dlirFilterIds
 
     -- ** ListQueriesResponse
@@ -154,6 +155,9 @@ module Network.Google.DoubleClickBids
     , rsRowNumber
     , rsErrors
     , rsEntityId
+
+    -- ** DownloadLineItemsRequestFileSpec
+    , DownloadLineItemsRequestFileSpec (..)
 
     -- ** ReportKey
     , ReportKey

@@ -1,0 +1,96 @@
+{-# LANGUAGE DataKinds          #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE FlexibleInstances  #-}
+{-# LANGUAGE NoImplicitPrelude  #-}
+{-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
+{-# LANGUAGE TypeFamilies       #-}
+{-# LANGUAGE TypeOperators      #-}
+
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds      #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+
+-- |
+-- Module      : Network.Google.Resource.Directory.DomainAliases.Delete
+-- Copyright   : (c) 2015 Brendan Hay
+-- License     : Mozilla Public License, v. 2.0.
+-- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Stability   : auto-generated
+-- Portability : non-portable (GHC extensions)
+--
+-- | Deletes a Domain Alias of the customer.
+--
+-- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryDomainAliasesDelete@.
+module Network.Google.Resource.Directory.DomainAliases.Delete
+    (
+    -- * REST Resource
+      DomainAliasesDeleteResource
+
+    -- * Creating a Request
+    , domainAliasesDelete'
+    , DomainAliasesDelete'
+
+    -- * Request Lenses
+    , dadDomainAliasName
+    , dadCustomer
+    ) where
+
+import           Network.Google.Directory.Types
+import           Network.Google.Prelude
+
+-- | A resource alias for @DirectoryDomainAliasesDelete@ method which the
+-- 'DomainAliasesDelete'' request conforms to.
+type DomainAliasesDeleteResource =
+     "customer" :>
+       Capture "customer" Text :>
+         "domainaliases" :>
+           Capture "domainAliasName" Text :>
+             QueryParam "alt" AltJSON :> Delete '[JSON] ()
+
+-- | Deletes a Domain Alias of the customer.
+--
+-- /See:/ 'domainAliasesDelete'' smart constructor.
+data DomainAliasesDelete' = DomainAliasesDelete'
+    { _dadDomainAliasName :: !Text
+    , _dadCustomer        :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DomainAliasesDelete'' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dadDomainAliasName'
+--
+-- * 'dadCustomer'
+domainAliasesDelete'
+    :: Text -- ^ 'domainAliasName'
+    -> Text -- ^ 'customer'
+    -> DomainAliasesDelete'
+domainAliasesDelete' pDadDomainAliasName_ pDadCustomer_ =
+    DomainAliasesDelete'
+    { _dadDomainAliasName = pDadDomainAliasName_
+    , _dadCustomer = pDadCustomer_
+    }
+
+-- | Name of domain alias to be retrieved.
+dadDomainAliasName :: Lens' DomainAliasesDelete' Text
+dadDomainAliasName
+  = lens _dadDomainAliasName
+      (\ s a -> s{_dadDomainAliasName = a})
+
+-- | Immutable id of the Google Apps account.
+dadCustomer :: Lens' DomainAliasesDelete' Text
+dadCustomer
+  = lens _dadCustomer (\ s a -> s{_dadCustomer = a})
+
+instance GoogleRequest DomainAliasesDelete' where
+        type Rs DomainAliasesDelete' = ()
+        requestClient DomainAliasesDelete'{..}
+          = go _dadCustomer _dadDomainAliasName (Just AltJSON)
+              directoryService
+          where go
+                  = buildClient
+                      (Proxy :: Proxy DomainAliasesDeleteResource)
+                      mempty

@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Gets the access control policy for a resource. Is empty if the policy or
--- the resource does not exist.
+-- | Gets the access control policy for a \`resource\`. Is empty if the
+-- policy or the resource does not exist.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsGetIAMPolicy@.
 module Network.Google.Resource.PubSub.Projects.Topics.GetIAMPolicy
@@ -61,8 +61,8 @@ type ProjectsTopicsGetIAMPolicyResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
--- | Gets the access control policy for a resource. Is empty if the policy or
--- the resource does not exist.
+-- | Gets the access control policy for a \`resource\`. Is empty if the
+-- policy or the resource does not exist.
 --
 -- /See:/ 'projectsTopicsGetIAMPolicy'' smart constructor.
 data ProjectsTopicsGetIAMPolicy' = ProjectsTopicsGetIAMPolicy'
@@ -144,7 +144,7 @@ ptgipBearerToken
       (\ s a -> s{_ptgipBearerToken = a})
 
 -- | REQUIRED: The resource for which policy is being requested. Resource is
--- usually specified as a path, such as, projects\/{project}.
+-- usually specified as a path, such as, \`projects\/{project}\`.
 ptgipResource :: Lens' ProjectsTopicsGetIAMPolicy' Text
 ptgipResource
   = lens _ptgipResource

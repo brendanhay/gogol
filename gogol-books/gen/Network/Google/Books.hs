@@ -122,11 +122,17 @@ module Network.Google.Books
     -- ** BooksMyLibraryReadingPositionsSetPosition
     , module Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
 
+    -- ** BooksNotificationGet
+    , module Network.Google.Resource.Books.Notification.Get
+
     -- ** BooksOnboardingListCategories
     , module Network.Google.Resource.Books.Onboarding.ListCategories
 
     -- ** BooksOnboardingListCategoryVolumes
     , module Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
+
+    -- ** BooksPersonalizedstreamGet
+    , module Network.Google.Resource.Books.Personalizedstream.Get
 
     -- ** BooksPromoOfferAccept
     , module Network.Google.Resource.Books.PromoOffer.Accept
@@ -163,6 +169,7 @@ module Network.Google.Books
     -- ** Usersettings
     , Usersettings
     , usersettings
+    , uNotification
     , uKind
     , uNotesExport
 
@@ -190,6 +197,11 @@ module Network.Google.Books
     , adNextPageToken
     , adKind
     , adItems
+
+    -- ** UsersettingsNotificationMoreFromAuthors
+    , UsersettingsNotificationMoreFromAuthors
+    , usersettingsNotificationMoreFromAuthors
+    , unmfaOptedState
 
     -- ** Volumeannotations
     , Volumeannotations
@@ -284,6 +296,8 @@ module Network.Google.Books
     , vuiCopy
     , vuiUserUploadedVolumeInfo
     , vuiIsPurchased
+    , vuiEntitlementType
+    , vuiAcquisitionType
     , vuiRentalState
     , vuiIsPreOrdered
     , vuiReview
@@ -387,6 +401,15 @@ module Network.Google.Books
     , bTitle
     , bDescription
 
+    -- ** Notification
+    , Notification
+    , notification
+    , nKind
+    , nBody
+    , nLinkURL
+    , nIconURL
+    , nTitle
+
     -- ** VolumesListDownload
     , VolumesListDownload (..)
 
@@ -448,6 +471,16 @@ module Network.Google.Books
 
     -- ** VolumesAssociatedListAssociation
     , VolumesAssociatedListAssociation (..)
+
+    -- ** DiscoveryclustersClustersItemBanner_with_content_container
+    , DiscoveryclustersClustersItemBanner_with_content_container
+    , discoveryclustersClustersItemBanner_with_content_container
+    , dcibFillColorArgb
+    , dcibMoreButtonURL
+    , dcibTextColorArgb
+    , dcibMoreButtonText
+    , dcibImageURL
+    , dcibMaskColorArgb
 
     -- ** Volume
     , Volume
@@ -581,6 +614,11 @@ module Network.Google.Books
     -- ** VolumesListFilter
     , VolumesListFilter (..)
 
+    -- ** UsersettingsNotification
+    , UsersettingsNotification
+    , usersettingsNotification
+    , unMoreFromAuthors
+
     -- ** DictlayerDataDictWordsItemSensesItemSynonymsItem
     , DictlayerDataDictWordsItemSensesItemSynonymsItem
     , dictlayerDataDictWordsItemSensesItemSynonymsItem
@@ -622,6 +660,16 @@ module Network.Google.Books
     , DictlayerDataCommon
     , dictlayerDataCommon
     , ddcTitle
+
+    -- ** DiscoveryclustersClustersItem
+    , DiscoveryclustersClustersItem
+    , discoveryclustersClustersItem
+    , dciBannerWithContentContainer
+    , dciUid
+    , dciTotalVolumes
+    , dciSubTitle
+    , dciTitle
+    , dciVolumes
 
     -- ** VolumeSaleInfoRetailPrice
     , VolumeSaleInfoRetailPrice
@@ -741,6 +789,9 @@ module Network.Google.Books
     , aGbTextRange
     , aCfiRange
 
+    -- ** PersonalizedstreamGetMaxAllowedMaturityRating
+    , PersonalizedstreamGetMaxAllowedMaturityRating (..)
+
     -- ** VolumesListPrintType
     , VolumesListPrintType (..)
 
@@ -814,6 +865,13 @@ module Network.Google.Books
 
     -- ** VolumesMybooksListProcessingState
     , VolumesMybooksListProcessingState (..)
+
+    -- ** Discoveryclusters
+    , Discoveryclusters
+    , discoveryclusters
+    , dKind
+    , dTotalClusters
+    , dClusters
 
     -- ** UsersettingsNotesExport
     , UsersettingsNotesExport
@@ -979,8 +1037,10 @@ import           Network.Google.Resource.Books.MyLibrary.Bookshelves.RemoveVolum
 import           Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
 import           Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
 import           Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
+import           Network.Google.Resource.Books.Notification.Get
 import           Network.Google.Resource.Books.Onboarding.ListCategories
 import           Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
+import           Network.Google.Resource.Books.Personalizedstream.Get
 import           Network.Google.Resource.Books.PromoOffer.Accept
 import           Network.Google.Resource.Books.PromoOffer.Dismiss
 import           Network.Google.Resource.Books.PromoOffer.Get
@@ -998,8 +1058,9 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Books API service.
 type BooksAPI =
-     OnboardingListCategoriesResource :<|>
-       OnboardingListCategoryVolumesResource
+     NotificationGetResource :<|>
+       OnboardingListCategoriesResource
+       :<|> OnboardingListCategoryVolumesResource
        :<|> MyLibraryAnnotationsSummaryResource
        :<|> MyLibraryAnnotationsInsertResource
        :<|> MyLibraryAnnotationsListResource
@@ -1037,6 +1098,7 @@ type BooksAPI =
        :<|> BookshelvesVolumesListResource
        :<|> BookshelvesListResource
        :<|> BookshelvesGetResource
+       :<|> PersonalizedstreamGetResource
        :<|> MyConfigSyncVolumeLicensesResource
        :<|> MyConfigGetUserSettingsResource
        :<|> MyConfigRequestAccessResource

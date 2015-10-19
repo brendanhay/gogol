@@ -45,6 +45,17 @@ library
         , Network.Google.Resource.Directory.ChromeosDevices.List
         , Network.Google.Resource.Directory.ChromeosDevices.Patch
         , Network.Google.Resource.Directory.ChromeosDevices.Update
+        , Network.Google.Resource.Directory.Customers.Get
+        , Network.Google.Resource.Directory.Customers.Patch
+        , Network.Google.Resource.Directory.Customers.Update
+        , Network.Google.Resource.Directory.DomainAliases.Delete
+        , Network.Google.Resource.Directory.DomainAliases.Get
+        , Network.Google.Resource.Directory.DomainAliases.Insert
+        , Network.Google.Resource.Directory.DomainAliases.List
+        , Network.Google.Resource.Directory.Domains.Delete
+        , Network.Google.Resource.Directory.Domains.Get
+        , Network.Google.Resource.Directory.Domains.Insert
+        , Network.Google.Resource.Directory.Domains.List
         , Network.Google.Resource.Directory.Groups.Aliases.Delete
         , Network.Google.Resource.Directory.Groups.Aliases.Insert
         , Network.Google.Resource.Directory.Groups.Aliases.List
@@ -75,6 +86,17 @@ library
         , Network.Google.Resource.Directory.OrgUnits.List
         , Network.Google.Resource.Directory.OrgUnits.Patch
         , Network.Google.Resource.Directory.OrgUnits.Update
+        , Network.Google.Resource.Directory.Privileges.List
+        , Network.Google.Resource.Directory.RoleAssignments.Delete
+        , Network.Google.Resource.Directory.RoleAssignments.Get
+        , Network.Google.Resource.Directory.RoleAssignments.Insert
+        , Network.Google.Resource.Directory.RoleAssignments.List
+        , Network.Google.Resource.Directory.Roles.Delete
+        , Network.Google.Resource.Directory.Roles.Get
+        , Network.Google.Resource.Directory.Roles.Insert
+        , Network.Google.Resource.Directory.Roles.List
+        , Network.Google.Resource.Directory.Roles.Patch
+        , Network.Google.Resource.Directory.Roles.Update
         , Network.Google.Resource.Directory.Schemas.Delete
         , Network.Google.Resource.Directory.Schemas.Get
         , Network.Google.Resource.Directory.Schemas.Insert

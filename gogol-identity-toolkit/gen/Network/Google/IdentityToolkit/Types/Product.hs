@@ -2036,6 +2036,7 @@ data VerifyAssertionResponse = VerifyAssertionResponse
     , _varOAuthExpireIn          :: !(Maybe Int32)
     , _varAppInstallationURL     :: !(Maybe Text)
     , _varAction                 :: !(Maybe Text)
+    , _varNeedEmail              :: !(Maybe Bool)
     , _varFederatedId            :: !(Maybe Text)
     , _varAppScheme              :: !(Maybe Text)
     , _varInputEmail             :: !(Maybe Text)
@@ -2088,6 +2089,8 @@ data VerifyAssertionResponse = VerifyAssertionResponse
 --
 -- * 'varAction'
 --
+-- * 'varNeedEmail'
+--
 -- * 'varFederatedId'
 --
 -- * 'varAppScheme'
@@ -2135,6 +2138,7 @@ verifyAssertionResponse =
     , _varOAuthExpireIn = Nothing
     , _varAppInstallationURL = Nothing
     , _varAction = Nothing
+    , _varNeedEmail = Nothing
     , _varFederatedId = Nothing
     , _varAppScheme = Nothing
     , _varInputEmail = Nothing
@@ -2250,6 +2254,12 @@ varAction :: Lens' VerifyAssertionResponse (Maybe Text)
 varAction
   = lens _varAction (\ s a -> s{_varAction = a})
 
+-- | Whether need client to supply email to complete the federated login
+-- flow.
+varNeedEmail :: Lens' VerifyAssertionResponse (Maybe Bool)
+varNeedEmail
+  = lens _varNeedEmail (\ s a -> s{_varNeedEmail = a})
+
 -- | The unique ID identifies the IdP account.
 varFederatedId :: Lens' VerifyAssertionResponse (Maybe Text)
 varFederatedId
@@ -2353,6 +2363,7 @@ instance FromJSON VerifyAssertionResponse where
                      <*> (o .:? "oauthExpireIn")
                      <*> (o .:? "appInstallationUrl")
                      <*> (o .:? "action")
+                     <*> (o .:? "needEmail")
                      <*> (o .:? "federatedId")
                      <*> (o .:? "appScheme")
                      <*> (o .:? "inputEmail")
@@ -2388,6 +2399,7 @@ instance ToJSON VerifyAssertionResponse where
                   ("oauthExpireIn" .=) <$> _varOAuthExpireIn,
                   ("appInstallationUrl" .=) <$> _varAppInstallationURL,
                   ("action" .=) <$> _varAction,
+                  ("needEmail" .=) <$> _varNeedEmail,
                   ("federatedId" .=) <$> _varFederatedId,
                   ("appScheme" .=) <$> _varAppScheme,
                   ("inputEmail" .=) <$> _varInputEmail,

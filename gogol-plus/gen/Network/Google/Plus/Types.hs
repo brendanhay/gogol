@@ -40,6 +40,16 @@ module Network.Google.Plus.Types
     , commentPlusoners
     , cpTotalItems
 
+    -- * CommentActorClientSpecificActorInfo
+    , CommentActorClientSpecificActorInfo
+    , commentActorClientSpecificActorInfo
+    , cacsaiYouTubeActorInfo
+
+    -- * ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+    , ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+    , activityObjectActorClientSpecificActorInfoYouTubeActorInfo
+    , aoacsaiytaiChannelId
+
     -- * ActivityObjectPlusoners
     , ActivityObjectPlusoners
     , activityObjectPlusoners
@@ -82,6 +92,11 @@ module Network.Google.Plus.Types
     , personPlacesLivedItem
     , ppliValue
     , ppliPrimary
+
+    -- * ActivityActorClientSpecificActorInfo
+    , ActivityActorClientSpecificActorInfo
+    , activityActorClientSpecificActorInfo
+    , aacsaiYouTubeActorInfo
 
     -- * Person
     , Person
@@ -128,6 +143,7 @@ module Network.Google.Plus.Types
     -- * CommentActor
     , CommentActor
     , commentActor
+    , caClientSpecificActorInfo
     , caImage
     , caURL
     , caDisplayName
@@ -162,6 +178,7 @@ module Network.Google.Plus.Types
     -- * ActivityObjectActor
     , ActivityObjectActor
     , activityObjectActor
+    , aoaClientSpecificActorInfo
     , aoaImage
     , aoaURL
     , aoaDisplayName
@@ -212,6 +229,11 @@ module Network.Google.Plus.Types
     , ActivityObjectActorImage
     , activityObjectActorImage
     , aoaiURL
+
+    -- * CommentActorClientSpecificActorInfoYouTubeActorInfo
+    , CommentActorClientSpecificActorInfoYouTubeActorInfo
+    , commentActorClientSpecificActorInfoYouTubeActorInfo
+    , cacsaiytaiChannelId
 
     -- * PeopleListOrderBy
     , PeopleListOrderBy (..)
@@ -289,6 +311,11 @@ module Network.Google.Plus.Types
     , isDescription
     , isBirthDate
 
+    -- * ActivityObjectActorClientSpecificActorInfo
+    , ActivityObjectActorClientSpecificActorInfo
+    , activityObjectActorClientSpecificActorInfo
+    , aoacsaiYouTubeActorInfo
+
     -- * PeopleListCollection
     , PeopleListCollection (..)
 
@@ -338,6 +365,11 @@ module Network.Google.Plus.Types
     , personImage
     , piURL
     , piIsDefault
+
+    -- * ActivityActorClientSpecificActorInfoYouTubeActorInfo
+    , ActivityActorClientSpecificActorInfoYouTubeActorInfo
+    , activityActorClientSpecificActorInfoYouTubeActorInfo
+    , aacsaiytaiChannelId
 
     -- * PlusACLentryResource
     , PlusACLentryResource
@@ -464,6 +496,7 @@ module Network.Google.Plus.Types
     -- * ActivityActor
     , ActivityActor
     , activityActor
+    , aaClientSpecificActorInfo
     , aaImage
     , aaURL
     , aaName

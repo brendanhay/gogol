@@ -20,8 +20,13 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Retrieves the list of image resources available to the specified
--- project.
+-- | Retrieves the list of private images available to the specified project.
+-- Private images are images you create that belong to your project. This
+-- method does not get any images that belong to other projects, including
+-- publicly-available images, like Debian 7. If you want to get a list of
+-- publicly-available images, use this method to make a request to the
+-- respective image project, such as debian-cloud or windows-cloud. See
+-- Accessing images for more information.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeImagesList@.
 module Network.Google.Resource.Compute.Images.List
@@ -54,8 +59,13 @@ type ImagesListResource =
                QueryParam "maxResults" Word32 :>
                  QueryParam "alt" AltJSON :> Get '[JSON] ImageList
 
--- | Retrieves the list of image resources available to the specified
--- project.
+-- | Retrieves the list of private images available to the specified project.
+-- Private images are images you create that belong to your project. This
+-- method does not get any images that belong to other projects, including
+-- publicly-available images, like Debian 7. If you want to get a list of
+-- publicly-available images, use this method to make a request to the
+-- respective image project, such as debian-cloud or windows-cloud. See
+-- Accessing images for more information.
 --
 -- /See:/ 'imagesList'' smart constructor.
 data ImagesList' = ImagesList'

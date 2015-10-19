@@ -52,6 +52,39 @@ module Network.Google.Directory
     -- ** DirectoryChromeosDevicesUpdate
     , module Network.Google.Resource.Directory.ChromeosDevices.Update
 
+    -- ** DirectoryCustomersGet
+    , module Network.Google.Resource.Directory.Customers.Get
+
+    -- ** DirectoryCustomersPatch
+    , module Network.Google.Resource.Directory.Customers.Patch
+
+    -- ** DirectoryCustomersUpdate
+    , module Network.Google.Resource.Directory.Customers.Update
+
+    -- ** DirectoryDomainAliasesDelete
+    , module Network.Google.Resource.Directory.DomainAliases.Delete
+
+    -- ** DirectoryDomainAliasesGet
+    , module Network.Google.Resource.Directory.DomainAliases.Get
+
+    -- ** DirectoryDomainAliasesInsert
+    , module Network.Google.Resource.Directory.DomainAliases.Insert
+
+    -- ** DirectoryDomainAliasesList
+    , module Network.Google.Resource.Directory.DomainAliases.List
+
+    -- ** DirectoryDomainsDelete
+    , module Network.Google.Resource.Directory.Domains.Delete
+
+    -- ** DirectoryDomainsGet
+    , module Network.Google.Resource.Directory.Domains.Get
+
+    -- ** DirectoryDomainsInsert
+    , module Network.Google.Resource.Directory.Domains.Insert
+
+    -- ** DirectoryDomainsList
+    , module Network.Google.Resource.Directory.Domains.List
+
     -- ** DirectoryGroupsAliasesDelete
     , module Network.Google.Resource.Directory.Groups.Aliases.Delete
 
@@ -141,6 +174,39 @@ module Network.Google.Directory
 
     -- ** DirectoryOrgUnitsUpdate
     , module Network.Google.Resource.Directory.OrgUnits.Update
+
+    -- ** DirectoryPrivilegesList
+    , module Network.Google.Resource.Directory.Privileges.List
+
+    -- ** DirectoryRoleAssignmentsDelete
+    , module Network.Google.Resource.Directory.RoleAssignments.Delete
+
+    -- ** DirectoryRoleAssignmentsGet
+    , module Network.Google.Resource.Directory.RoleAssignments.Get
+
+    -- ** DirectoryRoleAssignmentsInsert
+    , module Network.Google.Resource.Directory.RoleAssignments.Insert
+
+    -- ** DirectoryRoleAssignmentsList
+    , module Network.Google.Resource.Directory.RoleAssignments.List
+
+    -- ** DirectoryRolesDelete
+    , module Network.Google.Resource.Directory.Roles.Delete
+
+    -- ** DirectoryRolesGet
+    , module Network.Google.Resource.Directory.Roles.Get
+
+    -- ** DirectoryRolesInsert
+    , module Network.Google.Resource.Directory.Roles.Insert
+
+    -- ** DirectoryRolesList
+    , module Network.Google.Resource.Directory.Roles.List
+
+    -- ** DirectoryRolesPatch
+    , module Network.Google.Resource.Directory.Roles.Patch
+
+    -- ** DirectoryRolesUpdate
+    , module Network.Google.Resource.Directory.Roles.Update
 
     -- ** DirectorySchemasDelete
     , module Network.Google.Resource.Directory.Schemas.Delete
@@ -266,6 +332,13 @@ module Network.Google.Directory
     -- ** UsersListEvent
     , UsersListEvent (..)
 
+    -- ** Privileges
+    , Privileges
+    , privileges
+    , pEtag
+    , pKind
+    , pItems
+
     -- ** Groups
     , Groups
     , groups
@@ -277,8 +350,35 @@ module Network.Google.Directory
     -- ** UsersAliasesListEvent
     , UsersAliasesListEvent (..)
 
+    -- ** RoleAssignments
+    , RoleAssignments
+    , roleAssignments
+    , raEtag
+    , raNextPageToken
+    , raKind
+    , raItems
+
+    -- ** Privilege
+    , Privilege
+    , privilege
+    , priEtag
+    , priIsOuScopable
+    , priKind
+    , priServiceName
+    , priServiceId
+    , priPrivilegeName
+    , priChildPrivileges
+
     -- ** UsersAliasesWatchEvent
     , UsersAliasesWatchEvent (..)
+
+    -- ** Roles
+    , Roles
+    , roles
+    , rEtag
+    , rNextPageToken
+    , rKind
+    , rItems
 
     -- ** UsersWatchEvent
     , UsersWatchEvent (..)
@@ -299,6 +399,30 @@ module Network.Google.Directory
     , uaType
     , uaCustomType
     , uaSourceIsStructured
+
+    -- ** CustomerPostalAddress
+    , CustomerPostalAddress
+    , customerPostalAddress
+    , cpaOrganizationName
+    , cpaPostalCode
+    , cpaAddressLine1
+    , cpaLocality
+    , cpaContactName
+    , cpaAddressLine2
+    , cpaCountryCode
+    , cpaRegion
+    , cpaAddressLine3
+
+    -- ** RoleAssignment
+    , RoleAssignment
+    , roleAssignment
+    , rolEtag
+    , rolScopeType
+    , rolKind
+    , rolAssignedTo
+    , rolRoleId
+    , rolRoleAssignmentId
+    , rolOrgUnitId
 
     -- ** Group
     , Group
@@ -422,6 +546,13 @@ module Network.Google.Directory
     , userCustomSchemas
     , ucsAddtional
 
+    -- ** DomainAliases
+    , DomainAliases
+    , domainAliases
+    , daEtag
+    , daKind
+    , daDomainAliases
+
     -- ** Aliases
     , Aliases
     , aliases
@@ -492,6 +623,16 @@ module Network.Google.Directory
     , codruiEmail
     , codruiType
 
+    -- ** DomainAlias
+    , DomainAlias
+    , domainAlias
+    , dCreationTime
+    , dEtag
+    , dKind
+    , dVerified
+    , dDomainAliasName
+    , dParentDomainName
+
     -- ** Alias
     , Alias
     , alias
@@ -554,6 +695,31 @@ module Network.Google.Directory
 
     -- ** MobileDevicesListProjection
     , MobileDevicesListProjection (..)
+
+    -- ** Role
+    , Role
+    , role
+    , rrEtag
+    , rrKind
+    , rrRoleName
+    , rrIsSystemRole
+    , rrRoleId
+    , rrRoleDescription
+    , rrIsSuperAdminRole
+    , rrRolePrivileges
+
+    -- ** Customer
+    , Customer
+    , customer
+    , cusEtag
+    , cusKind
+    , cusAlternateEmail
+    , cusCustomerDomain
+    , cusPhoneNumber
+    , cusLanguage
+    , cusId
+    , cusCustomerCreationTime
+    , cusPostalAddress
 
     -- ** MobileDeviceApplicationsItem
     , MobileDeviceApplicationsItem
@@ -718,6 +884,17 @@ module Network.Google.Directory
     , userCustomProperties
     , ucpAddtional
 
+    -- ** Domains
+    , Domains
+    , domains
+    , domCreationTime
+    , domEtag
+    , domKind
+    , domDomainAliases
+    , domVerified
+    , domDomainName
+    , domIsPrimary
+
     -- ** ChromeosDevicesListOrderBy
     , ChromeosDevicesListOrderBy (..)
 
@@ -787,6 +964,19 @@ module Network.Google.Directory
 
     -- ** UsersGetViewType
     , UsersGetViewType (..)
+
+    -- ** RoleRolePrivilegesItem
+    , RoleRolePrivilegesItem
+    , roleRolePrivilegesItem
+    , rrpiServiceId
+    , rrpiPrivilegeName
+
+    -- ** Domains2
+    , Domains2
+    , domains2
+    , ddEtag
+    , ddKind
+    , ddDomains
     ) where
 
 import           Network.Google.Directory.Types
@@ -799,6 +989,17 @@ import           Network.Google.Resource.Directory.ChromeosDevices.Get
 import           Network.Google.Resource.Directory.ChromeosDevices.List
 import           Network.Google.Resource.Directory.ChromeosDevices.Patch
 import           Network.Google.Resource.Directory.ChromeosDevices.Update
+import           Network.Google.Resource.Directory.Customers.Get
+import           Network.Google.Resource.Directory.Customers.Patch
+import           Network.Google.Resource.Directory.Customers.Update
+import           Network.Google.Resource.Directory.DomainAliases.Delete
+import           Network.Google.Resource.Directory.DomainAliases.Get
+import           Network.Google.Resource.Directory.DomainAliases.Insert
+import           Network.Google.Resource.Directory.DomainAliases.List
+import           Network.Google.Resource.Directory.Domains.Delete
+import           Network.Google.Resource.Directory.Domains.Get
+import           Network.Google.Resource.Directory.Domains.Insert
+import           Network.Google.Resource.Directory.Domains.List
 import           Network.Google.Resource.Directory.Groups.Aliases.Delete
 import           Network.Google.Resource.Directory.Groups.Aliases.Insert
 import           Network.Google.Resource.Directory.Groups.Aliases.List
@@ -829,6 +1030,17 @@ import           Network.Google.Resource.Directory.OrgUnits.Insert
 import           Network.Google.Resource.Directory.OrgUnits.List
 import           Network.Google.Resource.Directory.OrgUnits.Patch
 import           Network.Google.Resource.Directory.OrgUnits.Update
+import           Network.Google.Resource.Directory.Privileges.List
+import           Network.Google.Resource.Directory.RoleAssignments.Delete
+import           Network.Google.Resource.Directory.RoleAssignments.Get
+import           Network.Google.Resource.Directory.RoleAssignments.Insert
+import           Network.Google.Resource.Directory.RoleAssignments.List
+import           Network.Google.Resource.Directory.Roles.Delete
+import           Network.Google.Resource.Directory.Roles.Get
+import           Network.Google.Resource.Directory.Roles.Insert
+import           Network.Google.Resource.Directory.Roles.List
+import           Network.Google.Resource.Directory.Roles.Patch
+import           Network.Google.Resource.Directory.Roles.Update
 import           Network.Google.Resource.Directory.Schemas.Delete
 import           Network.Google.Resource.Directory.Schemas.Get
 import           Network.Google.Resource.Directory.Schemas.Insert
@@ -865,8 +1077,9 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Admin Directory API service.
 type DirectoryAPI =
-     GroupsAliasesInsertResource :<|>
-       GroupsAliasesListResource
+     PrivilegesListResource :<|>
+       GroupsAliasesInsertResource
+       :<|> GroupsAliasesListResource
        :<|> GroupsAliasesDeleteResource
        :<|> GroupsInsertResource
        :<|> GroupsListResource
@@ -874,6 +1087,19 @@ type DirectoryAPI =
        :<|> GroupsGetResource
        :<|> GroupsDeleteResource
        :<|> GroupsUpdateResource
+       :<|> RoleAssignmentsInsertResource
+       :<|> RoleAssignmentsListResource
+       :<|> RoleAssignmentsGetResource
+       :<|> RoleAssignmentsDeleteResource
+       :<|> RolesInsertResource
+       :<|> RolesListResource
+       :<|> RolesPatchResource
+       :<|> RolesGetResource
+       :<|> RolesDeleteResource
+       :<|> RolesUpdateResource
+       :<|> CustomersPatchResource
+       :<|> CustomersGetResource
+       :<|> CustomersUpdateResource
        :<|> UsersAliasesInsertResource
        :<|> UsersAliasesListResource
        :<|> UsersAliasesDeleteResource
@@ -900,6 +1126,10 @@ type DirectoryAPI =
        :<|> TokensListResource
        :<|> TokensGetResource
        :<|> TokensDeleteResource
+       :<|> DomainAliasesInsertResource
+       :<|> DomainAliasesListResource
+       :<|> DomainAliasesGetResource
+       :<|> DomainAliasesDeleteResource
        :<|> ChannelsStopResource
        :<|> MembersInsertResource
        :<|> MembersListResource
@@ -920,6 +1150,10 @@ type DirectoryAPI =
        :<|> VerificationCodesListResource
        :<|> VerificationCodesGenerateResource
        :<|> VerificationCodesInvalidateResource
+       :<|> DomainsInsertResource
+       :<|> DomainsListResource
+       :<|> DomainsGetResource
+       :<|> DomainsDeleteResource
        :<|> NotificationsListResource
        :<|> NotificationsPatchResource
        :<|> NotificationsGetResource

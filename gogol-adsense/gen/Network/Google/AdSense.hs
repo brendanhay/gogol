@@ -265,6 +265,7 @@ module Network.Google.AdSense
     , Account
     , account
     , accKind
+    , accCreationTime
     , accPremium
     , accName
     , accId

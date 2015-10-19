@@ -20,8 +20,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- | Recreates the specified instances. The instances are deleted, then
--- recreated using the managed instance group\'s current instance template.
+-- | Schedules a group action to recreate the specified instances in the
+-- managed instance group. The instances are deleted and recreated using
+-- the current instance template for the managed instance group. This
+-- operation is marked as DONE when the action is scheduled even if the
+-- instances have not yet been recreated. You must separately verify the
+-- status of the recreating action with the listmanagedinstances method.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersRecreateInstances@.
 module Network.Google.Resource.Compute.InstanceGroupManagers.RecreateInstances
@@ -57,8 +61,12 @@ type InstanceGroupManagersRecreateInstancesResource =
                      InstanceGroupManagersRecreateInstancesRequest
                      :> Post '[JSON] Operation
 
--- | Recreates the specified instances. The instances are deleted, then
--- recreated using the managed instance group\'s current instance template.
+-- | Schedules a group action to recreate the specified instances in the
+-- managed instance group. The instances are deleted and recreated using
+-- the current instance template for the managed instance group. This
+-- operation is marked as DONE when the action is scheduled even if the
+-- instances have not yet been recreated. You must separately verify the
+-- status of the recreating action with the listmanagedinstances method.
 --
 -- /See:/ 'instanceGroupManagersRecreateInstances'' smart constructor.
 data InstanceGroupManagersRecreateInstances' = InstanceGroupManagersRecreateInstances'
@@ -98,13 +106,13 @@ igmriProject :: Lens' InstanceGroupManagersRecreateInstances' Text
 igmriProject
   = lens _igmriProject (\ s a -> s{_igmriProject = a})
 
--- | The name of the instance group manager.
+-- | The name of the managed instance group.
 igmriInstanceGroupManager :: Lens' InstanceGroupManagersRecreateInstances' Text
 igmriInstanceGroupManager
   = lens _igmriInstanceGroupManager
       (\ s a -> s{_igmriInstanceGroupManager = a})
 
--- | The URL of the zone where the managed instance group is located.
+-- | The name of the zone where the managed instance group is located.
 igmriZone :: Lens' InstanceGroupManagersRecreateInstances' Text
 igmriZone
   = lens _igmriZone (\ s a -> s{_igmriZone = a})
