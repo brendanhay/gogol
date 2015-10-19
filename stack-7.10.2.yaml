@@ -31,6 +31,7 @@ packages:
   - gogol-books
   - gogol-civicinfo
   - gogol-classroom
+  - gogol-cloudtrace
   - gogol-compute
   - gogol-container
   - gogol-customsearch
@@ -90,3 +91,4 @@ packages:
   - gogol-webmaster-tools
   - gogol-youtube
   - gogol-youtube-analytics
+  - gogol-youtube-reporting

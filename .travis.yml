@@ -111,6 +111,8 @@ matrix:
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-classroom
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
+    - env: GHCVER=7.10.2 LIBRARY=gogol-cloudtrace
+      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-container
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-customsearch
@@ -218,6 +220,8 @@ matrix:
     - env: GHCVER=7.10.2 LIBRARY=gogol-youtube
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
     - env: GHCVER=7.10.2 LIBRARY=gogol-youtube-analytics
+      addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
+    - env: GHCVER=7.10.2 LIBRARY=gogol-youtube-reporting
       addons: { apt: { packages: [ghc-7.10.2], sources: [hvr-ghc] } }
 
     # Examples
