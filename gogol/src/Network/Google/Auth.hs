@@ -26,12 +26,7 @@ module Network.Google.Auth
    , Credentials (..)
    , Auth
 
-   -- ** Defaults
-   -- *** Metadata
-   , metadataHost
-   , metadataFlavorHeader
-   , metadataFlavorDesired
-
+   -- ** Default Constants
    -- *** GCE
    , checkGCEVar
 
@@ -72,37 +67,26 @@ import           Control.Monad
 import           Control.Monad.Catch
 import           Control.Monad.IO.Class
 import           Data.Aeson
-import           Data.ByteString        (ByteString)
-import qualified Data.ByteString.Lazy   as LBS
-import           Data.Char              (toLower)
-import           Data.Default.Class     (def)
-import qualified Data.Text              as Text
-import qualified Data.Text.Encoding     as Text
+import           Data.ByteString                 (ByteString)
+import qualified Data.ByteString.Lazy            as LBS
+import           Data.Default.Class              (def)
+import qualified Data.Text                       as Text
+import qualified Data.Text.Encoding              as Text
 import           Data.Time
 import           Data.Typeable
+import           Network.Google.Compute.Metadata
 import           Network.Google.Prelude
 import           Network.HTTP.Conduit
-import qualified Network.HTTP.Conduit   as Client
+import qualified Network.HTTP.Conduit            as Client
 import           Network.HTTP.Types
-import           System.Directory       (doesFileExist, getHomeDirectory)
-import           System.Environment     (lookupEnv)
-import           System.FilePath        ((</>))
-import           System.Info            (os)
+import           System.Directory                (doesFileExist,
+                                                  getHomeDirectory)
+import           System.Environment              (lookupEnv)
+import           System.FilePath                 ((</>))
+import           System.Info                     (os)
 
 accountsHost :: ByteString
 accountsHost = "accounts.google.com"
-
-metadataHost :: ByteString
-metadataHost = "metadata.google.internal"
-
-metadataFlavorHeader :: HeaderName
-metadataFlavorHeader = "Metadata-Flavor"
-
-metadataFlavorDesired :: ByteString
-metadataFlavorDesired = "Google"
-
-checkGCEVar :: String
-checkGCEVar = "NO_GCE_CHECK"
 
 -- | The environment variable name which can replace ~/.config if set.
 cloudSDKCredentialsDirVar :: String
@@ -215,7 +199,7 @@ getAuth m = \case
     FromAccount s -> fromAccount  m s
     Discover      ->
         catching _MissingFileError (fromFile m) $ \f -> do
-            p <- detectGCE m
+            p <- isGCE m
             unless p $
                 throwingM _MissingFileError f
             fromAccount m "default"
@@ -307,37 +291,6 @@ cloudSDKCredentialsPath = liftIO $ do
 -- default application credentials filepath.
 defaultCredentialsPath :: MonadIO m => m (Maybe FilePath)
 defaultCredentialsPath = liftIO (lookupEnv defaultCredentialsFileVar)
-
--- | Detect if the underlying host is running on GCE.
---
--- The environment variable @NO_GCE_CHECK@ can be set to @1@, @true@, @yes@, or @on@
--- to skip this check and always return @False@.
-detectGCE :: MonadIO m => Manager -> m Bool
-detectGCE m = liftIO $ do
-    p <- check <$> lookupEnv checkGCEVar
-    if p
-        then (success <$> httpLbs rq m) `catch` failure
-        else pure False
-  where
-    check Nothing  = True
-    check (Just x) = map toLower x `notElem` ["1", "true", "yes", "on"]
-
-    success rs =
-           fromEnum (responseStatus rs) == 200
-        && (lookup metadataFlavorHeader (responseHeaders rs)
-               == Just metadataFlavorDesired)
-
-    failure :: HttpException -> IO Bool
-    failure = const (pure False)
-
-    rq = def
-        { Client.host            = metadataHost
-        , Client.checkStatus     = \_ _ _ -> Nothing
-        , Client.responseTimeout = Just 1000000
-        , Client.requestHeaders  =
-            [ (metadataFlavorHeader, metadataFlavorDesired)
-            ]
-        }
 
 data User = User
     { _uId      :: !ClientId
@@ -433,16 +386,11 @@ instance RefreshToken ServiceId where
 
         refreshErr s e = throwM . TokenRefreshError s e
 
-        rq = def
-            { Client.host        = metadataHost
-            , Client.port        = 80
-            , Client.secure      = False
-            , Client.checkStatus = \_ _ _ -> Nothing
-            , Client.method      = "GET"
-            , Client.path        = "/computeMetadata/v1/instance/service-accounts/"
-                <> Text.encodeUtf8 (serviceIdToText sid)
-                <> "/token"
-            }
+        rq = metadataRequest
+           { Client.path = "instance/service-accounts/"
+               <> Text.encodeUtf8 (serviceIdToText sid)
+               <> "/token"
+           }
 
 perform :: (MonadIO m, MonadCatch m)
         => Manager

@@ -39,6 +39,7 @@ library
     exposed-modules:
           Network.Google
         , Network.Google.Auth
+        , Network.Google.Compute.Metadata
         , Network.Google.Env
 
     other-modules:
