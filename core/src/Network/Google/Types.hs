@@ -78,10 +78,10 @@ newtype OAuthToken = OAuthToken { tokenToBS :: ByteString }
 instance FromJSON OAuthToken where
     parseJSON = withText "oauth_token" (pure . OAuthToken . Text.encodeUtf8)
 
-newtype MediaDownload a = MediaDownload a
+newtype Download a = Download a
 
-_MediaDownload :: Iso' (MediaDownload a) a
-_MediaDownload = iso (\(MediaDownload x) -> x) MediaDownload
+_Download :: Iso' (Download a) a
+_Download = iso (\(Download x) -> x) Download
 
 _Coerce :: (Coercible a b, Coercible b a) => Iso' a b
 _Coerce = iso coerce coerce

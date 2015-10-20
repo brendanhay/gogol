@@ -175,10 +175,10 @@ send x = liftGoogle $ do
 -- to retrieve the streaming media.
 --
 -- Throws 'Error'.
-download :: (MonadGoogle m, GoogleRequest (MediaDownload a))
+download :: (MonadGoogle m, GoogleRequest (Download a))
          => a
-         -> m (Rs (MediaDownload a))
-download = send . MediaDownload
+         -> m (Rs (Download a))
+download = send . Download
 
 hoistError :: MonadThrow m => Either Error a -> m a
 hoistError = either (throwingM _Error) return
