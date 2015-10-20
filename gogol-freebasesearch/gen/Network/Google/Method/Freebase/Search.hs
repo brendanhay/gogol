@@ -378,9 +378,9 @@ instance GoogleRequest Search where
           where go :<|> _
                   = buildClient (Proxy :: Proxy SearchMethod) mempty
 
-instance GoogleRequest (MediaDownload Search) where
-        type Rs (MediaDownload Search) = Stream
-        requestClient (MediaDownload Search{..})
+instance GoogleRequest (Download Search) where
+        type Rs (Download Search) = Stream
+        requestClient (Download Search{..})
           = go (_sWithout ^. _Default) _sCursor
               (_sWith ^. _Default)
               (_sDomain ^. _Default)

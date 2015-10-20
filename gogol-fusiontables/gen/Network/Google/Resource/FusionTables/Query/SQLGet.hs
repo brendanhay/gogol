@@ -110,10 +110,9 @@ instance GoogleRequest QuerySQLGet where
                   = buildClient (Proxy :: Proxy QuerySQLGetResource)
                       mempty
 
-instance GoogleRequest (MediaDownload QuerySQLGet)
-         where
-        type Rs (MediaDownload QuerySQLGet) = Stream
-        requestClient (MediaDownload QuerySQLGet{..})
+instance GoogleRequest (Download QuerySQLGet) where
+        type Rs (Download QuerySQLGet) = Stream
+        requestClient (Download QuerySQLGet{..})
           = go (Just _qsqlgSQL) _qsqlgTyped _qsqlgHdrs
               (Just AltMedia)
               fusionTablesService

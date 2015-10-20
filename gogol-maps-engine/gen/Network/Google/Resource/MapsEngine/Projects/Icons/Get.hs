@@ -100,10 +100,10 @@ instance GoogleRequest ProjectsIconsGet where
                       (Proxy :: Proxy ProjectsIconsGetResource)
                       mempty
 
-instance GoogleRequest
-         (MediaDownload ProjectsIconsGet) where
-        type Rs (MediaDownload ProjectsIconsGet) = Stream
-        requestClient (MediaDownload ProjectsIconsGet{..})
+instance GoogleRequest (Download ProjectsIconsGet)
+         where
+        type Rs (Download ProjectsIconsGet) = Stream
+        requestClient (Download ProjectsIconsGet{..})
           = go _pigProjectId _pigId (Just AltMedia)
               mapsEngineService
           where _ :<|> go

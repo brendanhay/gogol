@@ -347,10 +347,9 @@ instance GoogleRequest ObjectsCopy where
                   = buildClient (Proxy :: Proxy ObjectsCopyResource)
                       mempty
 
-instance GoogleRequest (MediaDownload ObjectsCopy)
-         where
-        type Rs (MediaDownload ObjectsCopy) = Stream
-        requestClient (MediaDownload ObjectsCopy{..})
+instance GoogleRequest (Download ObjectsCopy) where
+        type Rs (Download ObjectsCopy) = Stream
+        requestClient (Download ObjectsCopy{..})
           = go _ocSourceBucket _ocSourceObject
               _ocDestinationBucket
               _ocDestinationObject

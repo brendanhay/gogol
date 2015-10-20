@@ -225,11 +225,9 @@ instance GoogleRequest AccountsReportsGenerate where
                       mempty
 
 instance GoogleRequest
-         (MediaDownload AccountsReportsGenerate) where
-        type Rs (MediaDownload AccountsReportsGenerate) =
-             Stream
-        requestClient
-          (MediaDownload AccountsReportsGenerate{..})
+         (Download AccountsReportsGenerate) where
+        type Rs (Download AccountsReportsGenerate) = Stream
+        requestClient (Download AccountsReportsGenerate{..})
           = go _argAccountId (Just _argStartDate)
               (Just _argEndDate)
               (_argDimension ^. _Default)

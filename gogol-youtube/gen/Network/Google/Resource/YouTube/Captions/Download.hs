@@ -161,10 +161,10 @@ instance GoogleRequest CaptionsDownload where
                       (Proxy :: Proxy CaptionsDownloadResource)
                       mempty
 
-instance GoogleRequest
-         (MediaDownload CaptionsDownload) where
-        type Rs (MediaDownload CaptionsDownload) = Stream
-        requestClient (MediaDownload CaptionsDownload{..})
+instance GoogleRequest (Download CaptionsDownload)
+         where
+        type Rs (Download CaptionsDownload) = Stream
+        requestClient (Download CaptionsDownload{..})
           = go _capaId _capaOnBehalfOf _capaTlang
               _capaOnBehalfOfContentOwner
               _capaTfmt

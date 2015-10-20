@@ -182,10 +182,9 @@ instance GoogleRequest MediaDownload where
                   = buildClient (Proxy :: Proxy MediaDownloadResource)
                       mempty
 
-instance GoogleRequest (MediaDownload MediaDownload)
-         where
-        type Rs (MediaDownload MediaDownload) = Stream
-        requestClient (MediaDownload MediaDownload{..})
+instance GoogleRequest (Download MediaDownload) where
+        type Rs (Download MediaDownload) = Stream
+        requestClient (Download MediaDownload{..})
           = go _mdResourceName _mdXgafv _mdUploadProtocol
               (Just _mdPp)
               _mdAccessToken
