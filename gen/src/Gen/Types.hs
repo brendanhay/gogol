@@ -334,7 +334,6 @@ initial s = Memo s mempty mempty res core mempty mempty mempty
     res = Set.fromList
         . mapMaybe (view iId)
         $ Map.elems (s ^. dSchemas)
-
     -- Types available in Network.Google.Prelude.
     core = Map.fromList
         [ ("Body",      SLit requiredInfo RqBody)
@@ -348,6 +347,14 @@ instance HasService Memo (Fix Schema) where
     service = context
 
 type AST = ExceptT Error (State Memo)
+
+reserveType :: Global -> AST Global
+reserveType g = do
+    p <- uses reserve (Set.member g)
+    pure $!
+        if p
+            then reference g "'"
+            else g
 
 reserveBranches :: AST ()
 reserveBranches = do

@@ -132,11 +132,13 @@ renderAPI s = do
 
 renderMethod :: Service a -> NS -> Suffix -> Method Solved -> AST Action
 renderMethod s root suf m@Method {..} = do
+    typ <- reserveType typ'
+
     x@Solved {..} <- getSolved typ
     Just d        <- renderSchema x
 
-    i  <- pp Print $ requestDecl  _unique _prefix alias url (props _schema) m
-    dl <- pp Print $ downloadDecl _unique _prefix alias url (props _schema) m
+    i   <- pp Print $ requestDecl  _unique _prefix alias url (props _schema) m
+    dl  <- pp Print $ downloadDecl _unique _prefix alias url (props _schema) m
 
     let is = i : [dl | _mSupportsMediaDownload]
 
@@ -144,7 +146,7 @@ renderMethod s root suf m@Method {..} = do
         <$> pp Print (verbAlias alias m)
         <*> pure (insts is d)
   where
-    (alias, typ, ns) = mname (_sCanonicalName s) suf _mId
+    (alias, typ', ns) = mname (_sCanonicalName s) suf _mId
 
     url = name (serviceName s)
 

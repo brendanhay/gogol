@@ -31,7 +31,6 @@ import qualified Data.HashSet         as Set
 import           Data.Maybe
 import           Data.Semigroup       ((<>))
 import qualified Data.Text            as Text
-import           Debug.Trace
 import           Gen.Formatting
 import           Gen.Types
 import           Prelude              hiding (sum)
@@ -153,9 +152,10 @@ method qs suf m@Method {..} = do
     ps <- Map.traverseWithKey (localParam (abbreviate _mId)) _mParameters
     cn <- use sCanonicalName
 
-    let (_, typ, _) = mname cn suf _mId
+    let (_, typ', _) = mname cn suf _mId
 
-    b  <- body typ
+    typ <- reserveType typ'
+    b   <- body typ
 
     let params = ps <> qs
         fields = Map.delete "alt" $ b (upload (Map.map _pParam params))
