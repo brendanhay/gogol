@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Campaigns.Update
       CampaignsUpdateResource
 
     -- * Creating a Request
-    , campaignsUpdate'
-    , CampaignsUpdate'
+    , campaignsUpdate
+    , CampaignsUpdate
 
     -- * Request Lenses
     , cuProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.campaigns.update@ method which the
--- 'CampaignsUpdate'' request conforms to.
+-- 'CampaignsUpdate' request conforms to.
 type CampaignsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type CampaignsUpdateResource =
 
 -- | Updates an existing campaign.
 --
--- /See:/ 'campaignsUpdate'' smart constructor.
-data CampaignsUpdate' = CampaignsUpdate'
+-- /See:/ 'campaignsUpdate' smart constructor.
+data CampaignsUpdate = CampaignsUpdate
     { _cuProFileId :: !Int64
     , _cuPayload   :: !Campaign
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CampaignsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CampaignsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cuProFileId'
 --
 -- * 'cuPayload'
-campaignsUpdate'
+campaignsUpdate
     :: Int64 -- ^ 'cuProFileId'
     -> Campaign -- ^ 'cuPayload'
-    -> CampaignsUpdate'
-campaignsUpdate' pCuProFileId_ pCuPayload_ =
-    CampaignsUpdate'
+    -> CampaignsUpdate
+campaignsUpdate pCuProFileId_ pCuPayload_ =
+    CampaignsUpdate
     { _cuProFileId = pCuProFileId_
     , _cuPayload = pCuPayload_
     }
 
 -- | User profile ID associated with this request.
-cuProFileId :: Lens' CampaignsUpdate' Int64
+cuProFileId :: Lens' CampaignsUpdate Int64
 cuProFileId
   = lens _cuProFileId (\ s a -> s{_cuProFileId = a})
 
 -- | Multipart request metadata.
-cuPayload :: Lens' CampaignsUpdate' Campaign
+cuPayload :: Lens' CampaignsUpdate Campaign
 cuPayload
   = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
-instance GoogleRequest CampaignsUpdate' where
-        type Rs CampaignsUpdate' = Campaign
-        requestClient CampaignsUpdate'{..}
+instance GoogleRequest CampaignsUpdate where
+        type Rs CampaignsUpdate = Campaign
+        requestClient CampaignsUpdate{..}
           = go _cuProFileId (Just AltJSON) _cuPayload
               dFAReportingService
           where go

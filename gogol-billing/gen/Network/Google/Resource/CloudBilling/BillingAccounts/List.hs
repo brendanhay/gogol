@@ -30,8 +30,8 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.List
       BillingAccountsListResource
 
     -- * Creating a Request
-    , billingAccountsList'
-    , BillingAccountsList'
+    , billingAccountsList
+    , BillingAccountsList
 
     -- * Request Lenses
     , balXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @cloudbilling.billingAccounts.list@ method which the
--- 'BillingAccountsList'' request conforms to.
+-- 'BillingAccountsList' request conforms to.
 type BillingAccountsListResource =
      "v1" :>
        "billingAccounts" :>
@@ -68,8 +68,8 @@ type BillingAccountsListResource =
 -- | Lists the billing accounts that the current authenticated user
 -- [owns](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
--- /See:/ 'billingAccountsList'' smart constructor.
-data BillingAccountsList' = BillingAccountsList'
+-- /See:/ 'billingAccountsList' smart constructor.
+data BillingAccountsList = BillingAccountsList
     { _balXgafv          :: !(Maybe Text)
     , _balUploadProtocol :: !(Maybe Text)
     , _balPp             :: !Bool
@@ -81,7 +81,7 @@ data BillingAccountsList' = BillingAccountsList'
     , _balCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BillingAccountsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'BillingAccountsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -102,10 +102,10 @@ data BillingAccountsList' = BillingAccountsList'
 -- * 'balPageSize'
 --
 -- * 'balCallback'
-billingAccountsList'
-    :: BillingAccountsList'
-billingAccountsList' =
-    BillingAccountsList'
+billingAccountsList
+    :: BillingAccountsList
+billingAccountsList =
+    BillingAccountsList
     { _balXgafv = Nothing
     , _balUploadProtocol = Nothing
     , _balPp = True
@@ -118,33 +118,33 @@ billingAccountsList' =
     }
 
 -- | V1 error format.
-balXgafv :: Lens' BillingAccountsList' (Maybe Text)
+balXgafv :: Lens' BillingAccountsList (Maybe Text)
 balXgafv = lens _balXgafv (\ s a -> s{_balXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-balUploadProtocol :: Lens' BillingAccountsList' (Maybe Text)
+balUploadProtocol :: Lens' BillingAccountsList (Maybe Text)
 balUploadProtocol
   = lens _balUploadProtocol
       (\ s a -> s{_balUploadProtocol = a})
 
 -- | Pretty-print response.
-balPp :: Lens' BillingAccountsList' Bool
+balPp :: Lens' BillingAccountsList Bool
 balPp = lens _balPp (\ s a -> s{_balPp = a})
 
 -- | OAuth access token.
-balAccessToken :: Lens' BillingAccountsList' (Maybe Text)
+balAccessToken :: Lens' BillingAccountsList (Maybe Text)
 balAccessToken
   = lens _balAccessToken
       (\ s a -> s{_balAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-balUploadType :: Lens' BillingAccountsList' (Maybe Text)
+balUploadType :: Lens' BillingAccountsList (Maybe Text)
 balUploadType
   = lens _balUploadType
       (\ s a -> s{_balUploadType = a})
 
 -- | OAuth bearer token.
-balBearerToken :: Lens' BillingAccountsList' (Maybe Text)
+balBearerToken :: Lens' BillingAccountsList (Maybe Text)
 balBearerToken
   = lens _balBearerToken
       (\ s a -> s{_balBearerToken = a})
@@ -153,25 +153,25 @@ balBearerToken
 -- \`next_page_token\` value returned from a previous
 -- \`ListBillingAccounts\` call. If unspecified, the first page of results
 -- is returned.
-balPageToken :: Lens' BillingAccountsList' (Maybe Text)
+balPageToken :: Lens' BillingAccountsList (Maybe Text)
 balPageToken
   = lens _balPageToken (\ s a -> s{_balPageToken = a})
 
 -- | Requested page size. The maximum page size is 100; this is also the
 -- default.
-balPageSize :: Lens' BillingAccountsList' (Maybe Int32)
+balPageSize :: Lens' BillingAccountsList (Maybe Int32)
 balPageSize
   = lens _balPageSize (\ s a -> s{_balPageSize = a})
 
 -- | JSONP
-balCallback :: Lens' BillingAccountsList' (Maybe Text)
+balCallback :: Lens' BillingAccountsList (Maybe Text)
 balCallback
   = lens _balCallback (\ s a -> s{_balCallback = a})
 
-instance GoogleRequest BillingAccountsList' where
-        type Rs BillingAccountsList' =
+instance GoogleRequest BillingAccountsList where
+        type Rs BillingAccountsList =
              ListBillingAccountsResponse
-        requestClient BillingAccountsList'{..}
+        requestClient BillingAccountsList{..}
           = go _balXgafv _balUploadProtocol (Just _balPp)
               _balAccessToken
               _balUploadType

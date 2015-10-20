@@ -29,19 +29,19 @@ module Network.Google.Resource.PlusDomains.Comments.Insert
       CommentsInsertResource
 
     -- * Creating a Request
-    , commentsInsert'
-    , CommentsInsert'
+    , commentsInsert
+    , CommentsInsert
 
     -- * Request Lenses
-    , ciActivityId
-    , ciPayload
+    , cActivityId
+    , cPayload
     ) where
 
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plusDomains.comments.insert@ method which the
--- 'CommentsInsert'' request conforms to.
+-- 'CommentsInsert' request conforms to.
 type CommentsInsertResource =
      "activities" :>
        Capture "activityId" Text :>
@@ -51,43 +51,42 @@ type CommentsInsertResource =
 
 -- | Create a new comment in reply to an activity.
 --
--- /See:/ 'commentsInsert'' smart constructor.
-data CommentsInsert' = CommentsInsert'
-    { _ciActivityId :: !Text
-    , _ciPayload    :: !Comment
+-- /See:/ 'commentsInsert' smart constructor.
+data CommentsInsert = CommentsInsert
+    { _cActivityId :: !Text
+    , _cPayload    :: !Comment
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ciActivityId'
+-- * 'cActivityId'
 --
--- * 'ciPayload'
-commentsInsert'
-    :: Text -- ^ 'ciActivityId'
-    -> Comment -- ^ 'ciPayload'
-    -> CommentsInsert'
-commentsInsert' pCiActivityId_ pCiPayload_ =
-    CommentsInsert'
-    { _ciActivityId = pCiActivityId_
-    , _ciPayload = pCiPayload_
+-- * 'cPayload'
+commentsInsert
+    :: Text -- ^ 'cActivityId'
+    -> Comment -- ^ 'cPayload'
+    -> CommentsInsert
+commentsInsert pCActivityId_ pCPayload_ =
+    CommentsInsert
+    { _cActivityId = pCActivityId_
+    , _cPayload = pCPayload_
     }
 
 -- | The ID of the activity to reply to.
-ciActivityId :: Lens' CommentsInsert' Text
-ciActivityId
-  = lens _ciActivityId (\ s a -> s{_ciActivityId = a})
+cActivityId :: Lens' CommentsInsert Text
+cActivityId
+  = lens _cActivityId (\ s a -> s{_cActivityId = a})
 
 -- | Multipart request metadata.
-ciPayload :: Lens' CommentsInsert' Comment
-ciPayload
-  = lens _ciPayload (\ s a -> s{_ciPayload = a})
+cPayload :: Lens' CommentsInsert Comment
+cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
 
-instance GoogleRequest CommentsInsert' where
-        type Rs CommentsInsert' = Comment
-        requestClient CommentsInsert'{..}
-          = go _ciActivityId (Just AltJSON) _ciPayload
+instance GoogleRequest CommentsInsert where
+        type Rs CommentsInsert = Comment
+        requestClient CommentsInsert{..}
+          = go _cActivityId (Just AltJSON) _cPayload
               plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy CommentsInsertResource)

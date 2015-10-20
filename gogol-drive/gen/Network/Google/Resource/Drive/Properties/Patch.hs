@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Properties.Patch
       PropertiesPatchResource
 
     -- * Creating a Request
-    , propertiesPatch'
-    , PropertiesPatch'
+    , propertiesPatch
+    , PropertiesPatch
 
     -- * Request Lenses
     , ppPropertyKey
@@ -43,7 +43,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.properties.patch@ method which the
--- 'PropertiesPatch'' request conforms to.
+-- 'PropertiesPatch' request conforms to.
 type PropertiesPatchResource =
      "files" :>
        Capture "fileId" Text :>
@@ -55,15 +55,15 @@ type PropertiesPatchResource =
 
 -- | Updates a property. This method supports patch semantics.
 --
--- /See:/ 'propertiesPatch'' smart constructor.
-data PropertiesPatch' = PropertiesPatch'
+-- /See:/ 'propertiesPatch' smart constructor.
+data PropertiesPatch = PropertiesPatch
     { _ppPropertyKey :: !Text
     , _ppVisibility  :: !Text
     , _ppPayload     :: !Property
     , _ppFileId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PropertiesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'PropertiesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,13 +74,13 @@ data PropertiesPatch' = PropertiesPatch'
 -- * 'ppPayload'
 --
 -- * 'ppFileId'
-propertiesPatch'
+propertiesPatch
     :: Text -- ^ 'ppPropertyKey'
     -> Property -- ^ 'ppPayload'
     -> Text -- ^ 'ppFileId'
-    -> PropertiesPatch'
-propertiesPatch' pPpPropertyKey_ pPpPayload_ pPpFileId_ =
-    PropertiesPatch'
+    -> PropertiesPatch
+propertiesPatch pPpPropertyKey_ pPpPayload_ pPpFileId_ =
+    PropertiesPatch
     { _ppPropertyKey = pPpPropertyKey_
     , _ppVisibility = "private"
     , _ppPayload = pPpPayload_
@@ -88,28 +88,28 @@ propertiesPatch' pPpPropertyKey_ pPpPayload_ pPpFileId_ =
     }
 
 -- | The key of the property.
-ppPropertyKey :: Lens' PropertiesPatch' Text
+ppPropertyKey :: Lens' PropertiesPatch Text
 ppPropertyKey
   = lens _ppPropertyKey
       (\ s a -> s{_ppPropertyKey = a})
 
 -- | The visibility of the property.
-ppVisibility :: Lens' PropertiesPatch' Text
+ppVisibility :: Lens' PropertiesPatch Text
 ppVisibility
   = lens _ppVisibility (\ s a -> s{_ppVisibility = a})
 
 -- | Multipart request metadata.
-ppPayload :: Lens' PropertiesPatch' Property
+ppPayload :: Lens' PropertiesPatch Property
 ppPayload
   = lens _ppPayload (\ s a -> s{_ppPayload = a})
 
 -- | The ID of the file.
-ppFileId :: Lens' PropertiesPatch' Text
+ppFileId :: Lens' PropertiesPatch Text
 ppFileId = lens _ppFileId (\ s a -> s{_ppFileId = a})
 
-instance GoogleRequest PropertiesPatch' where
-        type Rs PropertiesPatch' = Property
-        requestClient PropertiesPatch'{..}
+instance GoogleRequest PropertiesPatch where
+        type Rs PropertiesPatch = Property
+        requestClient PropertiesPatch{..}
           = go _ppFileId _ppPropertyKey (Just _ppVisibility)
               (Just AltJSON)
               _ppPayload

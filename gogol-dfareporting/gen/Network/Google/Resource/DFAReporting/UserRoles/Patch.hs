@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.UserRoles.Patch
       UserRolesPatchResource
 
     -- * Creating a Request
-    , userRolesPatch'
-    , UserRolesPatch'
+    , userRolesPatch
+    , UserRolesPatch
 
     -- * Request Lenses
     , urpProFileId
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.userRoles.patch@ method which the
--- 'UserRolesPatch'' request conforms to.
+-- 'UserRolesPatch' request conforms to.
 type UserRolesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -53,14 +53,14 @@ type UserRolesPatchResource =
 
 -- | Updates an existing user role. This method supports patch semantics.
 --
--- /See:/ 'userRolesPatch'' smart constructor.
-data UserRolesPatch' = UserRolesPatch'
+-- /See:/ 'userRolesPatch' smart constructor.
+data UserRolesPatch = UserRolesPatch
     { _urpProFileId :: !Int64
     , _urpPayload   :: !UserRole
     , _urpId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserRolesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'UserRolesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data UserRolesPatch' = UserRolesPatch'
 -- * 'urpPayload'
 --
 -- * 'urpId'
-userRolesPatch'
+userRolesPatch
     :: Int64 -- ^ 'urpProFileId'
     -> UserRole -- ^ 'urpPayload'
     -> Int64 -- ^ 'urpId'
-    -> UserRolesPatch'
-userRolesPatch' pUrpProFileId_ pUrpPayload_ pUrpId_ =
-    UserRolesPatch'
+    -> UserRolesPatch
+userRolesPatch pUrpProFileId_ pUrpPayload_ pUrpId_ =
+    UserRolesPatch
     { _urpProFileId = pUrpProFileId_
     , _urpPayload = pUrpPayload_
     , _urpId = pUrpId_
     }
 
 -- | User profile ID associated with this request.
-urpProFileId :: Lens' UserRolesPatch' Int64
+urpProFileId :: Lens' UserRolesPatch Int64
 urpProFileId
   = lens _urpProFileId (\ s a -> s{_urpProFileId = a})
 
 -- | Multipart request metadata.
-urpPayload :: Lens' UserRolesPatch' UserRole
+urpPayload :: Lens' UserRolesPatch UserRole
 urpPayload
   = lens _urpPayload (\ s a -> s{_urpPayload = a})
 
 -- | User role ID.
-urpId :: Lens' UserRolesPatch' Int64
+urpId :: Lens' UserRolesPatch Int64
 urpId = lens _urpId (\ s a -> s{_urpId = a})
 
-instance GoogleRequest UserRolesPatch' where
-        type Rs UserRolesPatch' = UserRole
-        requestClient UserRolesPatch'{..}
+instance GoogleRequest UserRolesPatch where
+        type Rs UserRolesPatch = UserRole
+        requestClient UserRolesPatch{..}
           = go _urpProFileId (Just _urpId) (Just AltJSON)
               _urpPayload
               dFAReportingService

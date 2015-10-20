@@ -30,8 +30,8 @@ module Network.Google.Resource.AdSense.Alerts.Delete
       AlertsDeleteResource
 
     -- * Creating a Request
-    , alertsDelete'
-    , AlertsDelete'
+    , alertsDelete
+    , AlertsDelete
 
     -- * Request Lenses
     , adAlertId
@@ -41,7 +41,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.alerts.delete@ method which the
--- 'AlertsDelete'' request conforms to.
+-- 'AlertsDelete' request conforms to.
 type AlertsDeleteResource =
      "alerts" :>
        Capture "alertId" Text :>
@@ -50,32 +50,32 @@ type AlertsDeleteResource =
 -- | Dismiss (delete) the specified alert from the publisher\'s AdSense
 -- account.
 --
--- /See:/ 'alertsDelete'' smart constructor.
-newtype AlertsDelete' = AlertsDelete'
+-- /See:/ 'alertsDelete' smart constructor.
+newtype AlertsDelete = AlertsDelete
     { _adAlertId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AlertsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'AlertsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'adAlertId'
-alertsDelete'
+alertsDelete
     :: Text -- ^ 'adAlertId'
-    -> AlertsDelete'
-alertsDelete' pAdAlertId_ =
-    AlertsDelete'
+    -> AlertsDelete
+alertsDelete pAdAlertId_ =
+    AlertsDelete
     { _adAlertId = pAdAlertId_
     }
 
 -- | Alert to delete.
-adAlertId :: Lens' AlertsDelete' Text
+adAlertId :: Lens' AlertsDelete Text
 adAlertId
   = lens _adAlertId (\ s a -> s{_adAlertId = a})
 
-instance GoogleRequest AlertsDelete' where
-        type Rs AlertsDelete' = ()
-        requestClient AlertsDelete'{..}
+instance GoogleRequest AlertsDelete where
+        type Rs AlertsDelete = ()
+        requestClient AlertsDelete{..}
           = go _adAlertId (Just AltJSON) adSenseService
           where go
                   = buildClient (Proxy :: Proxy AlertsDeleteResource)

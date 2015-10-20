@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Sites.Update
       SitesUpdateResource
 
     -- * Creating a Request
-    , sitesUpdate'
-    , SitesUpdate'
+    , sitesUpdate
+    , SitesUpdate
 
     -- * Request Lenses
     , suProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.sites.update@ method which the
--- 'SitesUpdate'' request conforms to.
+-- 'SitesUpdate' request conforms to.
 type SitesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type SitesUpdateResource =
 
 -- | Updates an existing site.
 --
--- /See:/ 'sitesUpdate'' smart constructor.
-data SitesUpdate' = SitesUpdate'
+-- /See:/ 'sitesUpdate' smart constructor.
+data SitesUpdate = SitesUpdate
     { _suProFileId :: !Int64
     , _suPayload   :: !Site
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SitesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'SitesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'suProFileId'
 --
 -- * 'suPayload'
-sitesUpdate'
+sitesUpdate
     :: Int64 -- ^ 'suProFileId'
     -> Site -- ^ 'suPayload'
-    -> SitesUpdate'
-sitesUpdate' pSuProFileId_ pSuPayload_ =
-    SitesUpdate'
+    -> SitesUpdate
+sitesUpdate pSuProFileId_ pSuPayload_ =
+    SitesUpdate
     { _suProFileId = pSuProFileId_
     , _suPayload = pSuPayload_
     }
 
 -- | User profile ID associated with this request.
-suProFileId :: Lens' SitesUpdate' Int64
+suProFileId :: Lens' SitesUpdate Int64
 suProFileId
   = lens _suProFileId (\ s a -> s{_suProFileId = a})
 
 -- | Multipart request metadata.
-suPayload :: Lens' SitesUpdate' Site
+suPayload :: Lens' SitesUpdate Site
 suPayload
   = lens _suPayload (\ s a -> s{_suPayload = a})
 
-instance GoogleRequest SitesUpdate' where
-        type Rs SitesUpdate' = Site
-        requestClient SitesUpdate'{..}
+instance GoogleRequest SitesUpdate where
+        type Rs SitesUpdate = Site
+        requestClient SitesUpdate{..}
           = go _suProFileId (Just AltJSON) _suPayload
               dFAReportingService
           where go

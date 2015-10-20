@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.List
       AccountsContainersVersionsListResource
 
     -- * Creating a Request
-    , accountsContainersVersionsList'
-    , AccountsContainersVersionsList'
+    , accountsContainersVersionsList
+    , AccountsContainersVersionsList
 
     -- * Request Lenses
     , acvlContainerId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.versions.list@ method which the
--- 'AccountsContainersVersionsList'' request conforms to.
+-- 'AccountsContainersVersionsList' request conforms to.
 type AccountsContainersVersionsListResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -55,14 +55,14 @@ type AccountsContainersVersionsListResource =
 
 -- | Lists all Container Versions of a GTM Container.
 --
--- /See:/ 'accountsContainersVersionsList'' smart constructor.
-data AccountsContainersVersionsList' = AccountsContainersVersionsList'
+-- /See:/ 'accountsContainersVersionsList' smart constructor.
+data AccountsContainersVersionsList = AccountsContainersVersionsList
     { _acvlContainerId :: !Text
     , _acvlHeaders     :: !Bool
     , _acvlAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersVersionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersVersionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,39 +71,39 @@ data AccountsContainersVersionsList' = AccountsContainersVersionsList'
 -- * 'acvlHeaders'
 --
 -- * 'acvlAccountId'
-accountsContainersVersionsList'
+accountsContainersVersionsList
     :: Text -- ^ 'acvlContainerId'
     -> Text -- ^ 'acvlAccountId'
-    -> AccountsContainersVersionsList'
-accountsContainersVersionsList' pAcvlContainerId_ pAcvlAccountId_ =
-    AccountsContainersVersionsList'
+    -> AccountsContainersVersionsList
+accountsContainersVersionsList pAcvlContainerId_ pAcvlAccountId_ =
+    AccountsContainersVersionsList
     { _acvlContainerId = pAcvlContainerId_
     , _acvlHeaders = False
     , _acvlAccountId = pAcvlAccountId_
     }
 
 -- | The GTM Container ID.
-acvlContainerId :: Lens' AccountsContainersVersionsList' Text
+acvlContainerId :: Lens' AccountsContainersVersionsList Text
 acvlContainerId
   = lens _acvlContainerId
       (\ s a -> s{_acvlContainerId = a})
 
 -- | Retrieve headers only when true.
-acvlHeaders :: Lens' AccountsContainersVersionsList' Bool
+acvlHeaders :: Lens' AccountsContainersVersionsList Bool
 acvlHeaders
   = lens _acvlHeaders (\ s a -> s{_acvlHeaders = a})
 
 -- | The GTM Account ID.
-acvlAccountId :: Lens' AccountsContainersVersionsList' Text
+acvlAccountId :: Lens' AccountsContainersVersionsList Text
 acvlAccountId
   = lens _acvlAccountId
       (\ s a -> s{_acvlAccountId = a})
 
-instance GoogleRequest
-         AccountsContainersVersionsList' where
-        type Rs AccountsContainersVersionsList' =
+instance GoogleRequest AccountsContainersVersionsList
+         where
+        type Rs AccountsContainersVersionsList =
              ListContainerVersionsResponse
-        requestClient AccountsContainersVersionsList'{..}
+        requestClient AccountsContainersVersionsList{..}
           = go _acvlAccountId _acvlContainerId
               (Just _acvlHeaders)
               (Just AltJSON)

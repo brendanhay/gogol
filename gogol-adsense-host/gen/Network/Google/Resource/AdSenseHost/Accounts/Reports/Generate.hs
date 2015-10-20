@@ -31,8 +31,8 @@ module Network.Google.Resource.AdSenseHost.Accounts.Reports.Generate
       AccountsReportsGenerateResource
 
     -- * Creating a Request
-    , accountsReportsGenerate'
-    , AccountsReportsGenerate'
+    , accountsReportsGenerate
+    , AccountsReportsGenerate
 
     -- * Request Lenses
     , argDimension
@@ -51,7 +51,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.accounts.reports.generate@ method which the
--- 'AccountsReportsGenerate'' request conforms to.
+-- 'AccountsReportsGenerate' request conforms to.
 type AccountsReportsGenerateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -71,8 +71,8 @@ type AccountsReportsGenerateResource =
 -- parameters. Returns the result as JSON; to retrieve output in CSV format
 -- specify \"alt=csv\" as a query parameter.
 --
--- /See:/ 'accountsReportsGenerate'' smart constructor.
-data AccountsReportsGenerate' = AccountsReportsGenerate'
+-- /See:/ 'accountsReportsGenerate' smart constructor.
+data AccountsReportsGenerate = AccountsReportsGenerate
     { _argDimension  :: !(Maybe [Text])
     , _argLocale     :: !(Maybe Text)
     , _argEndDate    :: !Text
@@ -85,7 +85,7 @@ data AccountsReportsGenerate' = AccountsReportsGenerate'
     , _argMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsReportsGenerate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsReportsGenerate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -108,13 +108,13 @@ data AccountsReportsGenerate' = AccountsReportsGenerate'
 -- * 'argStartIndex'
 --
 -- * 'argMaxResults'
-accountsReportsGenerate'
+accountsReportsGenerate
     :: Text -- ^ 'argEndDate'
     -> Text -- ^ 'argStartDate'
     -> Text -- ^ 'argAccountId'
-    -> AccountsReportsGenerate'
-accountsReportsGenerate' pArgEndDate_ pArgStartDate_ pArgAccountId_ =
-    AccountsReportsGenerate'
+    -> AccountsReportsGenerate
+accountsReportsGenerate pArgEndDate_ pArgStartDate_ pArgAccountId_ =
+    AccountsReportsGenerate
     { _argDimension = Nothing
     , _argLocale = Nothing
     , _argEndDate = pArgEndDate_
@@ -128,7 +128,7 @@ accountsReportsGenerate' pArgEndDate_ pArgStartDate_ pArgAccountId_ =
     }
 
 -- | Dimensions to base the report on.
-argDimension :: Lens' AccountsReportsGenerate' [Text]
+argDimension :: Lens' AccountsReportsGenerate [Text]
 argDimension
   = lens _argDimension (\ s a -> s{_argDimension = a})
       . _Default
@@ -136,28 +136,28 @@ argDimension
 
 -- | Optional locale to use for translating report output to a local
 -- language. Defaults to \"en_US\" if not specified.
-argLocale :: Lens' AccountsReportsGenerate' (Maybe Text)
+argLocale :: Lens' AccountsReportsGenerate (Maybe Text)
 argLocale
   = lens _argLocale (\ s a -> s{_argLocale = a})
 
 -- | End of the date range to report on in \"YYYY-MM-DD\" format, inclusive.
-argEndDate :: Lens' AccountsReportsGenerate' Text
+argEndDate :: Lens' AccountsReportsGenerate Text
 argEndDate
   = lens _argEndDate (\ s a -> s{_argEndDate = a})
 
 -- | Start of the date range to report on in \"YYYY-MM-DD\" format,
 -- inclusive.
-argStartDate :: Lens' AccountsReportsGenerate' Text
+argStartDate :: Lens' AccountsReportsGenerate Text
 argStartDate
   = lens _argStartDate (\ s a -> s{_argStartDate = a})
 
 -- | Hosted account upon which to report.
-argAccountId :: Lens' AccountsReportsGenerate' Text
+argAccountId :: Lens' AccountsReportsGenerate Text
 argAccountId
   = lens _argAccountId (\ s a -> s{_argAccountId = a})
 
 -- | Numeric columns to include in the report.
-argMetric :: Lens' AccountsReportsGenerate' [Text]
+argMetric :: Lens' AccountsReportsGenerate [Text]
 argMetric
   = lens _argMetric (\ s a -> s{_argMetric = a}) .
       _Default
@@ -166,33 +166,33 @@ argMetric
 -- | The name of a dimension or metric to sort the resulting report on,
 -- optionally prefixed with \"+\" to sort ascending or \"-\" to sort
 -- descending. If no prefix is specified, the column is sorted ascending.
-argSort :: Lens' AccountsReportsGenerate' [Text]
+argSort :: Lens' AccountsReportsGenerate [Text]
 argSort
   = lens _argSort (\ s a -> s{_argSort = a}) . _Default
       . _Coerce
 
 -- | Filters to be run on the report.
-argFilter :: Lens' AccountsReportsGenerate' [Text]
+argFilter :: Lens' AccountsReportsGenerate [Text]
 argFilter
   = lens _argFilter (\ s a -> s{_argFilter = a}) .
       _Default
       . _Coerce
 
 -- | Index of the first row of report data to return.
-argStartIndex :: Lens' AccountsReportsGenerate' (Maybe Word32)
+argStartIndex :: Lens' AccountsReportsGenerate (Maybe Word32)
 argStartIndex
   = lens _argStartIndex
       (\ s a -> s{_argStartIndex = a})
 
 -- | The maximum number of rows of report data to return.
-argMaxResults :: Lens' AccountsReportsGenerate' (Maybe Word32)
+argMaxResults :: Lens' AccountsReportsGenerate (Maybe Word32)
 argMaxResults
   = lens _argMaxResults
       (\ s a -> s{_argMaxResults = a})
 
-instance GoogleRequest AccountsReportsGenerate' where
-        type Rs AccountsReportsGenerate' = Report
-        requestClient AccountsReportsGenerate'{..}
+instance GoogleRequest AccountsReportsGenerate where
+        type Rs AccountsReportsGenerate = Report
+        requestClient AccountsReportsGenerate{..}
           = go _argAccountId (Just _argStartDate)
               (Just _argEndDate)
               (_argDimension ^. _Default)

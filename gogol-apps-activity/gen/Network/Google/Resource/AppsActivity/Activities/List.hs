@@ -34,8 +34,8 @@ module Network.Google.Resource.AppsActivity.Activities.List
       ActivitiesListResource
 
     -- * Creating a Request
-    , activitiesList'
-    , ActivitiesList'
+    , activitiesList
+    , ActivitiesList
 
     -- * Request Lenses
     , alDriveFileId
@@ -51,7 +51,7 @@ import           Network.Google.AppsActivity.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @appsactivity.activities.list@ method which the
--- 'ActivitiesList'' request conforms to.
+-- 'ActivitiesList' request conforms to.
 type ActivitiesListResource =
      "activities" :>
        QueryParam "drive.fileId" Text :>
@@ -73,8 +73,8 @@ type ActivitiesListResource =
 -- similar. A request is scoped to activities from a given Google service
 -- using the source parameter.
 --
--- /See:/ 'activitiesList'' smart constructor.
-data ActivitiesList' = ActivitiesList'
+-- /See:/ 'activitiesList' smart constructor.
+data ActivitiesList = ActivitiesList
     { _alDriveFileId      :: !(Maybe Text)
     , _alDriveAncestorId  :: !(Maybe Text)
     , _alGroupingStrategy :: !ActivitiesListGroupingStrategy
@@ -84,7 +84,7 @@ data ActivitiesList' = ActivitiesList'
     , _alPageSize         :: !Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -101,10 +101,10 @@ data ActivitiesList' = ActivitiesList'
 -- * 'alPageToken'
 --
 -- * 'alPageSize'
-activitiesList'
-    :: ActivitiesList'
-activitiesList' =
-    ActivitiesList'
+activitiesList
+    :: ActivitiesList
+activitiesList =
+    ActivitiesList
     { _alDriveFileId = Nothing
     , _alDriveAncestorId = Nothing
     , _alGroupingStrategy = DriveUi
@@ -115,49 +115,49 @@ activitiesList' =
     }
 
 -- | Identifies the Drive item to return activities for.
-alDriveFileId :: Lens' ActivitiesList' (Maybe Text)
+alDriveFileId :: Lens' ActivitiesList (Maybe Text)
 alDriveFileId
   = lens _alDriveFileId
       (\ s a -> s{_alDriveFileId = a})
 
 -- | Identifies the Drive folder containing the items for which to return
 -- activities.
-alDriveAncestorId :: Lens' ActivitiesList' (Maybe Text)
+alDriveAncestorId :: Lens' ActivitiesList (Maybe Text)
 alDriveAncestorId
   = lens _alDriveAncestorId
       (\ s a -> s{_alDriveAncestorId = a})
 
 -- | Indicates the strategy to use when grouping singleEvents items in the
 -- associated combinedEvent object.
-alGroupingStrategy :: Lens' ActivitiesList' ActivitiesListGroupingStrategy
+alGroupingStrategy :: Lens' ActivitiesList ActivitiesListGroupingStrategy
 alGroupingStrategy
   = lens _alGroupingStrategy
       (\ s a -> s{_alGroupingStrategy = a})
 
 -- | Indicates the user to return activity for. Use the special value me to
 -- indicate the currently authenticated user.
-alUserId :: Lens' ActivitiesList' Text
+alUserId :: Lens' ActivitiesList Text
 alUserId = lens _alUserId (\ s a -> s{_alUserId = a})
 
 -- | The Google service from which to return activities. Possible values of
 -- source are: - drive.google.com
-alSource :: Lens' ActivitiesList' (Maybe Text)
+alSource :: Lens' ActivitiesList (Maybe Text)
 alSource = lens _alSource (\ s a -> s{_alSource = a})
 
 -- | A token to retrieve a specific page of results.
-alPageToken :: Lens' ActivitiesList' (Maybe Text)
+alPageToken :: Lens' ActivitiesList (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | The maximum number of events to return on a page. The response includes
 -- a continuation token if there are more events.
-alPageSize :: Lens' ActivitiesList' Int32
+alPageSize :: Lens' ActivitiesList Int32
 alPageSize
   = lens _alPageSize (\ s a -> s{_alPageSize = a})
 
-instance GoogleRequest ActivitiesList' where
-        type Rs ActivitiesList' = ListActivitiesResponse
-        requestClient ActivitiesList'{..}
+instance GoogleRequest ActivitiesList where
+        type Rs ActivitiesList = ListActivitiesResponse
+        requestClient ActivitiesList{..}
           = go _alDriveFileId _alDriveAncestorId
               (Just _alGroupingStrategy)
               (Just _alUserId)

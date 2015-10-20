@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Regions.List
       RegionsListResource
 
     -- * Creating a Request
-    , regionsList'
-    , RegionsList'
+    , regionsList
+    , RegionsList
 
     -- * Request Lenses
     , rProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.regions.list@ method which the
--- 'RegionsList'' request conforms to.
+-- 'RegionsList' request conforms to.
 type RegionsListResource =
      Capture "project" Text :>
        "regions" :>
@@ -56,15 +56,15 @@ type RegionsListResource =
 -- | Retrieves the list of region resources available to the specified
 -- project.
 --
--- /See:/ 'regionsList'' smart constructor.
-data RegionsList' = RegionsList'
+-- /See:/ 'regionsList' smart constructor.
+data RegionsList = RegionsList
     { _rProject    :: !Text
     , _rFilter     :: !(Maybe Text)
     , _rPageToken  :: !(Maybe Text)
     , _rMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RegionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'RegionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,11 +75,11 @@ data RegionsList' = RegionsList'
 -- * 'rPageToken'
 --
 -- * 'rMaxResults'
-regionsList'
+regionsList
     :: Text -- ^ 'rProject'
-    -> RegionsList'
-regionsList' pRProject_ =
-    RegionsList'
+    -> RegionsList
+regionsList pRProject_ =
+    RegionsList
     { _rProject = pRProject_
     , _rFilter = Nothing
     , _rPageToken = Nothing
@@ -87,7 +87,7 @@ regionsList' pRProject_ =
     }
 
 -- | Project ID for this request.
-rProject :: Lens' RegionsList' Text
+rProject :: Lens' RegionsList Text
 rProject = lens _rProject (\ s a -> s{_rProject = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -101,24 +101,24 @@ rProject = lens _rProject (\ s a -> s{_rProject = a})
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-rFilter :: Lens' RegionsList' (Maybe Text)
+rFilter :: Lens' RegionsList (Maybe Text)
 rFilter = lens _rFilter (\ s a -> s{_rFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-rPageToken :: Lens' RegionsList' (Maybe Text)
+rPageToken :: Lens' RegionsList (Maybe Text)
 rPageToken
   = lens _rPageToken (\ s a -> s{_rPageToken = a})
 
 -- | Maximum count of results to be returned.
-rMaxResults :: Lens' RegionsList' Word32
+rMaxResults :: Lens' RegionsList Word32
 rMaxResults
   = lens _rMaxResults (\ s a -> s{_rMaxResults = a})
 
-instance GoogleRequest RegionsList' where
-        type Rs RegionsList' = RegionList
-        requestClient RegionsList'{..}
+instance GoogleRequest RegionsList where
+        type Rs RegionsList = RegionList
+        requestClient RegionsList{..}
           = go _rProject _rFilter _rPageToken
               (Just _rMaxResults)
               (Just AltJSON)

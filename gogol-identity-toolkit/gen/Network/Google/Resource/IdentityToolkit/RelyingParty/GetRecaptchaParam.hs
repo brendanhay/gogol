@@ -29,8 +29,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.GetRecaptchaParam
       RelyingPartyGetRecaptchaParamResource
 
     -- * Creating a Request
-    , relyingPartyGetRecaptchaParam'
-    , RelyingPartyGetRecaptchaParam'
+    , relyingPartyGetRecaptchaParam
+    , RelyingPartyGetRecaptchaParam
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.getRecaptchaParam@ method which the
--- 'RelyingPartyGetRecaptchaParam'' request conforms to.
+-- 'RelyingPartyGetRecaptchaParam' request conforms to.
 type RelyingPartyGetRecaptchaParamResource =
      "getRecaptchaParam" :>
        QueryParam "alt" AltJSON :>
@@ -46,22 +46,22 @@ type RelyingPartyGetRecaptchaParamResource =
 
 -- | Get recaptcha secure param.
 --
--- /See:/ 'relyingPartyGetRecaptchaParam'' smart constructor.
-data RelyingPartyGetRecaptchaParam' =
-    RelyingPartyGetRecaptchaParam'
+-- /See:/ 'relyingPartyGetRecaptchaParam' smart constructor.
+data RelyingPartyGetRecaptchaParam =
+    RelyingPartyGetRecaptchaParam
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RelyingPartyGetRecaptchaParam'' with the minimum fields required to make a request.
+-- | Creates a value of 'RelyingPartyGetRecaptchaParam' with the minimum fields required to make a request.
 --
-relyingPartyGetRecaptchaParam'
-    :: RelyingPartyGetRecaptchaParam'
-relyingPartyGetRecaptchaParam' = RelyingPartyGetRecaptchaParam'
+relyingPartyGetRecaptchaParam
+    :: RelyingPartyGetRecaptchaParam
+relyingPartyGetRecaptchaParam = RelyingPartyGetRecaptchaParam
 
-instance GoogleRequest RelyingPartyGetRecaptchaParam'
+instance GoogleRequest RelyingPartyGetRecaptchaParam
          where
-        type Rs RelyingPartyGetRecaptchaParam' =
+        type Rs RelyingPartyGetRecaptchaParam =
              GetRecaptchaParamResponse
-        requestClient RelyingPartyGetRecaptchaParam'{}
+        requestClient RelyingPartyGetRecaptchaParam{}
           = go (Just AltJSON) identityToolkitService
           where go
                   = buildClient

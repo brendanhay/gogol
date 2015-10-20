@@ -32,8 +32,8 @@ module Network.Google.Resource.BigQuery.Tables.Patch
       TablesPatchResource
 
     -- * Creating a Request
-    , tablesPatch'
-    , TablesPatch'
+    , tablesPatch
+    , TablesPatch
 
     -- * Request Lenses
     , tpPayload
@@ -46,7 +46,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.tables.patch@ method which the
--- 'TablesPatch'' request conforms to.
+-- 'TablesPatch' request conforms to.
 type TablesPatchResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -62,15 +62,15 @@ type TablesPatchResource =
 -- that are provided in the submitted table resource. This method supports
 -- patch semantics.
 --
--- /See:/ 'tablesPatch'' smart constructor.
-data TablesPatch' = TablesPatch'
+-- /See:/ 'tablesPatch' smart constructor.
+data TablesPatch = TablesPatch
     { _tpPayload   :: !Table
     , _tpDatasetId :: !Text
     , _tpProjectId :: !Text
     , _tpTableId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,14 +81,14 @@ data TablesPatch' = TablesPatch'
 -- * 'tpProjectId'
 --
 -- * 'tpTableId'
-tablesPatch'
+tablesPatch
     :: Table -- ^ 'tpPayload'
     -> Text -- ^ 'tpDatasetId'
     -> Text -- ^ 'tpProjectId'
     -> Text -- ^ 'tpTableId'
-    -> TablesPatch'
-tablesPatch' pTpPayload_ pTpDatasetId_ pTpProjectId_ pTpTableId_ =
-    TablesPatch'
+    -> TablesPatch
+tablesPatch pTpPayload_ pTpDatasetId_ pTpProjectId_ pTpTableId_ =
+    TablesPatch
     { _tpPayload = pTpPayload_
     , _tpDatasetId = pTpDatasetId_
     , _tpProjectId = pTpProjectId_
@@ -96,28 +96,28 @@ tablesPatch' pTpPayload_ pTpDatasetId_ pTpProjectId_ pTpTableId_ =
     }
 
 -- | Multipart request metadata.
-tpPayload :: Lens' TablesPatch' Table
+tpPayload :: Lens' TablesPatch Table
 tpPayload
   = lens _tpPayload (\ s a -> s{_tpPayload = a})
 
 -- | Dataset ID of the table to update
-tpDatasetId :: Lens' TablesPatch' Text
+tpDatasetId :: Lens' TablesPatch Text
 tpDatasetId
   = lens _tpDatasetId (\ s a -> s{_tpDatasetId = a})
 
 -- | Project ID of the table to update
-tpProjectId :: Lens' TablesPatch' Text
+tpProjectId :: Lens' TablesPatch Text
 tpProjectId
   = lens _tpProjectId (\ s a -> s{_tpProjectId = a})
 
 -- | Table ID of the table to update
-tpTableId :: Lens' TablesPatch' Text
+tpTableId :: Lens' TablesPatch Text
 tpTableId
   = lens _tpTableId (\ s a -> s{_tpTableId = a})
 
-instance GoogleRequest TablesPatch' where
-        type Rs TablesPatch' = Table
-        requestClient TablesPatch'{..}
+instance GoogleRequest TablesPatch where
+        type Rs TablesPatch = Table
+        requestClient TablesPatch{..}
           = go _tpProjectId _tpDatasetId _tpTableId
               (Just AltJSON)
               _tpPayload

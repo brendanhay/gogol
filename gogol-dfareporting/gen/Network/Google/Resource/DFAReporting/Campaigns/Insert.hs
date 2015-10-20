@@ -29,21 +29,21 @@ module Network.Google.Resource.DFAReporting.Campaigns.Insert
       CampaignsInsertResource
 
     -- * Creating a Request
-    , campaignsInsert'
-    , CampaignsInsert'
+    , campaignsInsert
+    , CampaignsInsert
 
     -- * Request Lenses
-    , ciProFileId
-    , ciPayload
-    , ciDefaultLandingPageURL
-    , ciDefaultLandingPageName
+    , camProFileId
+    , camPayload
+    , camDefaultLandingPageURL
+    , camDefaultLandingPageName
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.campaigns.insert@ method which the
--- 'CampaignsInsert'' request conforms to.
+-- 'CampaignsInsert' request conforms to.
 type CampaignsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -55,69 +55,69 @@ type CampaignsInsertResource =
 
 -- | Inserts a new campaign.
 --
--- /See:/ 'campaignsInsert'' smart constructor.
-data CampaignsInsert' = CampaignsInsert'
-    { _ciProFileId              :: !Int64
-    , _ciPayload                :: !Campaign
-    , _ciDefaultLandingPageURL  :: !Text
-    , _ciDefaultLandingPageName :: !Text
+-- /See:/ 'campaignsInsert' smart constructor.
+data CampaignsInsert = CampaignsInsert
+    { _camProFileId              :: !Int64
+    , _camPayload                :: !Campaign
+    , _camDefaultLandingPageURL  :: !Text
+    , _camDefaultLandingPageName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CampaignsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CampaignsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ciProFileId'
+-- * 'camProFileId'
 --
--- * 'ciPayload'
+-- * 'camPayload'
 --
--- * 'ciDefaultLandingPageURL'
+-- * 'camDefaultLandingPageURL'
 --
--- * 'ciDefaultLandingPageName'
-campaignsInsert'
-    :: Int64 -- ^ 'ciProFileId'
-    -> Campaign -- ^ 'ciPayload'
-    -> Text -- ^ 'ciDefaultLandingPageURL'
-    -> Text -- ^ 'ciDefaultLandingPageName'
-    -> CampaignsInsert'
-campaignsInsert' pCiProFileId_ pCiPayload_ pCiDefaultLandingPageURL_ pCiDefaultLandingPageName_ =
-    CampaignsInsert'
-    { _ciProFileId = pCiProFileId_
-    , _ciPayload = pCiPayload_
-    , _ciDefaultLandingPageURL = pCiDefaultLandingPageURL_
-    , _ciDefaultLandingPageName = pCiDefaultLandingPageName_
+-- * 'camDefaultLandingPageName'
+campaignsInsert
+    :: Int64 -- ^ 'camProFileId'
+    -> Campaign -- ^ 'camPayload'
+    -> Text -- ^ 'camDefaultLandingPageURL'
+    -> Text -- ^ 'camDefaultLandingPageName'
+    -> CampaignsInsert
+campaignsInsert pCamProFileId_ pCamPayload_ pCamDefaultLandingPageURL_ pCamDefaultLandingPageName_ =
+    CampaignsInsert
+    { _camProFileId = pCamProFileId_
+    , _camPayload = pCamPayload_
+    , _camDefaultLandingPageURL = pCamDefaultLandingPageURL_
+    , _camDefaultLandingPageName = pCamDefaultLandingPageName_
     }
 
 -- | User profile ID associated with this request.
-ciProFileId :: Lens' CampaignsInsert' Int64
-ciProFileId
-  = lens _ciProFileId (\ s a -> s{_ciProFileId = a})
+camProFileId :: Lens' CampaignsInsert Int64
+camProFileId
+  = lens _camProFileId (\ s a -> s{_camProFileId = a})
 
 -- | Multipart request metadata.
-ciPayload :: Lens' CampaignsInsert' Campaign
-ciPayload
-  = lens _ciPayload (\ s a -> s{_ciPayload = a})
+camPayload :: Lens' CampaignsInsert Campaign
+camPayload
+  = lens _camPayload (\ s a -> s{_camPayload = a})
 
 -- | Default landing page URL for this new campaign.
-ciDefaultLandingPageURL :: Lens' CampaignsInsert' Text
-ciDefaultLandingPageURL
-  = lens _ciDefaultLandingPageURL
-      (\ s a -> s{_ciDefaultLandingPageURL = a})
+camDefaultLandingPageURL :: Lens' CampaignsInsert Text
+camDefaultLandingPageURL
+  = lens _camDefaultLandingPageURL
+      (\ s a -> s{_camDefaultLandingPageURL = a})
 
 -- | Default landing page name for this new campaign. Must be less than 256
 -- characters long.
-ciDefaultLandingPageName :: Lens' CampaignsInsert' Text
-ciDefaultLandingPageName
-  = lens _ciDefaultLandingPageName
-      (\ s a -> s{_ciDefaultLandingPageName = a})
+camDefaultLandingPageName :: Lens' CampaignsInsert Text
+camDefaultLandingPageName
+  = lens _camDefaultLandingPageName
+      (\ s a -> s{_camDefaultLandingPageName = a})
 
-instance GoogleRequest CampaignsInsert' where
-        type Rs CampaignsInsert' = Campaign
-        requestClient CampaignsInsert'{..}
-          = go _ciProFileId (Just _ciDefaultLandingPageName)
-              (Just _ciDefaultLandingPageURL)
+instance GoogleRequest CampaignsInsert where
+        type Rs CampaignsInsert = Campaign
+        requestClient CampaignsInsert{..}
+          = go _camProFileId (Just _camDefaultLandingPageName)
+              (Just _camDefaultLandingPageURL)
               (Just AltJSON)
-              _ciPayload
+              _camPayload
               dFAReportingService
           where go
                   = buildClient

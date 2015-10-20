@@ -29,8 +29,8 @@ module Network.Google.Resource.Coordinate.Jobs.Get
       JobsGetResource
 
     -- * Creating a Request
-    , jobsGet'
-    , JobsGet'
+    , jobsGet
+    , JobsGet
 
     -- * Request Lenses
     , jgJobId
@@ -41,7 +41,7 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @coordinate.jobs.get@ method which the
--- 'JobsGet'' request conforms to.
+-- 'JobsGet' request conforms to.
 type JobsGetResource =
      "teams" :>
        Capture "teamId" Text :>
@@ -51,40 +51,40 @@ type JobsGetResource =
 
 -- | Retrieves a job, including all the changes made to the job.
 --
--- /See:/ 'jobsGet'' smart constructor.
-data JobsGet' = JobsGet'
+-- /See:/ 'jobsGet' smart constructor.
+data JobsGet = JobsGet
     { _jgJobId  :: !Word64
     , _jgTeamId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'JobsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'JobsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'jgJobId'
 --
 -- * 'jgTeamId'
-jobsGet'
+jobsGet
     :: Word64 -- ^ 'jgJobId'
     -> Text -- ^ 'jgTeamId'
-    -> JobsGet'
-jobsGet' pJgJobId_ pJgTeamId_ =
-    JobsGet'
+    -> JobsGet
+jobsGet pJgJobId_ pJgTeamId_ =
+    JobsGet
     { _jgJobId = pJgJobId_
     , _jgTeamId = pJgTeamId_
     }
 
 -- | Job number
-jgJobId :: Lens' JobsGet' Word64
+jgJobId :: Lens' JobsGet Word64
 jgJobId = lens _jgJobId (\ s a -> s{_jgJobId = a})
 
 -- | Team ID
-jgTeamId :: Lens' JobsGet' Text
+jgTeamId :: Lens' JobsGet Text
 jgTeamId = lens _jgTeamId (\ s a -> s{_jgTeamId = a})
 
-instance GoogleRequest JobsGet' where
-        type Rs JobsGet' = Job
-        requestClient JobsGet'{..}
+instance GoogleRequest JobsGet where
+        type Rs JobsGet = Job
+        requestClient JobsGet{..}
           = go _jgTeamId _jgJobId (Just AltJSON)
               mapsCoordinateService
           where go

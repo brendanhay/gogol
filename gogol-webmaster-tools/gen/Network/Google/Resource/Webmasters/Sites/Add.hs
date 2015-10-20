@@ -29,8 +29,8 @@ module Network.Google.Resource.Webmasters.Sites.Add
       SitesAddResource
 
     -- * Creating a Request
-    , sitesAdd'
-    , SitesAdd'
+    , sitesAdd
+    , SitesAdd
 
     -- * Request Lenses
     , saSiteURL
@@ -40,7 +40,7 @@ import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.sites.add@ method which the
--- 'SitesAdd'' request conforms to.
+-- 'SitesAdd' request conforms to.
 type SitesAddResource =
      "sites" :>
        Capture "siteUrl" Text :>
@@ -48,32 +48,32 @@ type SitesAddResource =
 
 -- | Adds a site to the set of the user\'s sites in Webmaster Tools.
 --
--- /See:/ 'sitesAdd'' smart constructor.
-newtype SitesAdd' = SitesAdd'
+-- /See:/ 'sitesAdd' smart constructor.
+newtype SitesAdd = SitesAdd
     { _saSiteURL :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SitesAdd'' with the minimum fields required to make a request.
+-- | Creates a value of 'SitesAdd' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'saSiteURL'
-sitesAdd'
+sitesAdd
     :: Text -- ^ 'saSiteURL'
-    -> SitesAdd'
-sitesAdd' pSaSiteURL_ =
-    SitesAdd'
+    -> SitesAdd
+sitesAdd pSaSiteURL_ =
+    SitesAdd
     { _saSiteURL = pSaSiteURL_
     }
 
 -- | The URL of the site to add.
-saSiteURL :: Lens' SitesAdd' Text
+saSiteURL :: Lens' SitesAdd Text
 saSiteURL
   = lens _saSiteURL (\ s a -> s{_saSiteURL = a})
 
-instance GoogleRequest SitesAdd' where
-        type Rs SitesAdd' = ()
-        requestClient SitesAdd'{..}
+instance GoogleRequest SitesAdd where
+        type Rs SitesAdd = ()
+        requestClient SitesAdd{..}
           = go _saSiteURL (Just AltJSON) webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitesAddResource)

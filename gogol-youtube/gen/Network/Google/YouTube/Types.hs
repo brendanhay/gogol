@@ -625,20 +625,20 @@ module Network.Google.YouTube.Types
     -- * Channel
     , Channel
     , channel
-    , cStatus
-    , cEtag
-    , cAuditDetails
-    , cContentOwnerDetails
-    , cSnippet
-    , cKind
-    , cTopicDetails
-    , cContentDetails
-    , cConversionPings
-    , cBrandingSettings
-    , cId
-    , cInvideoPromotion
-    , cStatistics
-    , cLocalizations
+    , chaStatus
+    , chaEtag
+    , chaAuditDetails
+    , chaContentOwnerDetails
+    , chaSnippet
+    , chaKind
+    , chaTopicDetails
+    , chaContentDetails
+    , chaConversionPings
+    , chaBrandingSettings
+    , chaId
+    , chaInvideoPromotion
+    , chaStatistics
+    , chaLocalizations
 
     -- * ChannelSectionTargeting
     , ChannelSectionTargeting
@@ -1122,11 +1122,11 @@ module Network.Google.YouTube.Types
     -- * CaptionListResponse
     , CaptionListResponse
     , captionListResponse
-    , clrlEtag
-    , clrlKind
-    , clrlItems
-    , clrlVisitorId
-    , clrlEventId
+    , cEtag
+    , cKind
+    , cItems
+    , cVisitorId
+    , cEventId
 
     -- * PlayListItemStatus
     , PlayListItemStatus

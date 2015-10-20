@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Groups.Aliases.Delete
       GroupsAliasesDeleteResource
 
     -- * Creating a Request
-    , groupsAliasesDelete'
-    , GroupsAliasesDelete'
+    , groupsAliasesDelete
+    , GroupsAliasesDelete
 
     -- * Request Lenses
     , gadGroupKey
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.groups.aliases.delete@ method which the
--- 'GroupsAliasesDelete'' request conforms to.
+-- 'GroupsAliasesDelete' request conforms to.
 type GroupsAliasesDeleteResource =
      "groups" :>
        Capture "groupKey" Text :>
@@ -51,41 +51,41 @@ type GroupsAliasesDeleteResource =
 
 -- | Remove a alias for the group
 --
--- /See:/ 'groupsAliasesDelete'' smart constructor.
-data GroupsAliasesDelete' = GroupsAliasesDelete'
+-- /See:/ 'groupsAliasesDelete' smart constructor.
+data GroupsAliasesDelete = GroupsAliasesDelete
     { _gadGroupKey :: !Text
     , _gadAlias    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GroupsAliasesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'GroupsAliasesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gadGroupKey'
 --
 -- * 'gadAlias'
-groupsAliasesDelete'
+groupsAliasesDelete
     :: Text -- ^ 'gadGroupKey'
     -> Text -- ^ 'gadAlias'
-    -> GroupsAliasesDelete'
-groupsAliasesDelete' pGadGroupKey_ pGadAlias_ =
-    GroupsAliasesDelete'
+    -> GroupsAliasesDelete
+groupsAliasesDelete pGadGroupKey_ pGadAlias_ =
+    GroupsAliasesDelete
     { _gadGroupKey = pGadGroupKey_
     , _gadAlias = pGadAlias_
     }
 
 -- | Email or immutable Id of the group
-gadGroupKey :: Lens' GroupsAliasesDelete' Text
+gadGroupKey :: Lens' GroupsAliasesDelete Text
 gadGroupKey
   = lens _gadGroupKey (\ s a -> s{_gadGroupKey = a})
 
 -- | The alias to be removed
-gadAlias :: Lens' GroupsAliasesDelete' Text
+gadAlias :: Lens' GroupsAliasesDelete Text
 gadAlias = lens _gadAlias (\ s a -> s{_gadAlias = a})
 
-instance GoogleRequest GroupsAliasesDelete' where
-        type Rs GroupsAliasesDelete' = ()
-        requestClient GroupsAliasesDelete'{..}
+instance GoogleRequest GroupsAliasesDelete where
+        type Rs GroupsAliasesDelete = ()
+        requestClient GroupsAliasesDelete{..}
           = go _gadGroupKey _gadAlias (Just AltJSON)
               directoryService
           where go

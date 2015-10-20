@@ -29,8 +29,8 @@ module Network.Google.Resource.Mirror.Timeline.Get
       TimelineGetResource
 
     -- * Creating a Request
-    , timelineGet'
-    , TimelineGet'
+    , timelineGet
+    , TimelineGet
 
     -- * Request Lenses
     , tgId
@@ -40,7 +40,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.timeline.get@ method which the
--- 'TimelineGet'' request conforms to.
+-- 'TimelineGet' request conforms to.
 type TimelineGetResource =
      "timeline" :>
        Capture "id" Text :>
@@ -48,31 +48,31 @@ type TimelineGetResource =
 
 -- | Gets a single timeline item by ID.
 --
--- /See:/ 'timelineGet'' smart constructor.
-newtype TimelineGet' = TimelineGet'
+-- /See:/ 'timelineGet' smart constructor.
+newtype TimelineGet = TimelineGet
     { _tgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TimelineGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TimelineGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tgId'
-timelineGet'
+timelineGet
     :: Text -- ^ 'tgId'
-    -> TimelineGet'
-timelineGet' pTgId_ =
-    TimelineGet'
+    -> TimelineGet
+timelineGet pTgId_ =
+    TimelineGet
     { _tgId = pTgId_
     }
 
 -- | The ID of the timeline item.
-tgId :: Lens' TimelineGet' Text
+tgId :: Lens' TimelineGet Text
 tgId = lens _tgId (\ s a -> s{_tgId = a})
 
-instance GoogleRequest TimelineGet' where
-        type Rs TimelineGet' = TimelineItem
-        requestClient TimelineGet'{..}
+instance GoogleRequest TimelineGet where
+        type Rs TimelineGet = TimelineItem
+        requestClient TimelineGet{..}
           = go _tgId (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy TimelineGetResource)

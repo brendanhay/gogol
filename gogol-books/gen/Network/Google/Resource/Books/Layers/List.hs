@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Layers.List
       LayersListResource
 
     -- * Creating a Request
-    , layersList'
-    , LayersList'
+    , layersList
+    , LayersList
 
     -- * Request Lenses
     , llContentVersion
@@ -44,7 +44,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.layers.list@ method which the
--- 'LayersList'' request conforms to.
+-- 'LayersList' request conforms to.
 type LayersListResource =
      "volumes" :>
        Capture "volumeId" Text :>
@@ -58,8 +58,8 @@ type LayersListResource =
 
 -- | List the layer summaries for a volume.
 --
--- /See:/ 'layersList'' smart constructor.
-data LayersList' = LayersList'
+-- /See:/ 'layersList' smart constructor.
+data LayersList = LayersList
     { _llContentVersion :: !(Maybe Text)
     , _llVolumeId       :: !Text
     , _llSource         :: !(Maybe Text)
@@ -67,7 +67,7 @@ data LayersList' = LayersList'
     , _llMaxResults     :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,11 +80,11 @@ data LayersList' = LayersList'
 -- * 'llPageToken'
 --
 -- * 'llMaxResults'
-layersList'
+layersList
     :: Text -- ^ 'llVolumeId'
-    -> LayersList'
-layersList' pLlVolumeId_ =
-    LayersList'
+    -> LayersList
+layersList pLlVolumeId_ =
+    LayersList
     { _llContentVersion = Nothing
     , _llVolumeId = pLlVolumeId_
     , _llSource = Nothing
@@ -93,33 +93,33 @@ layersList' pLlVolumeId_ =
     }
 
 -- | The content version for the requested volume.
-llContentVersion :: Lens' LayersList' (Maybe Text)
+llContentVersion :: Lens' LayersList (Maybe Text)
 llContentVersion
   = lens _llContentVersion
       (\ s a -> s{_llContentVersion = a})
 
 -- | The volume to retrieve layers for.
-llVolumeId :: Lens' LayersList' Text
+llVolumeId :: Lens' LayersList Text
 llVolumeId
   = lens _llVolumeId (\ s a -> s{_llVolumeId = a})
 
 -- | String to identify the originator of this request.
-llSource :: Lens' LayersList' (Maybe Text)
+llSource :: Lens' LayersList (Maybe Text)
 llSource = lens _llSource (\ s a -> s{_llSource = a})
 
 -- | The value of the nextToken from the previous page.
-llPageToken :: Lens' LayersList' (Maybe Text)
+llPageToken :: Lens' LayersList (Maybe Text)
 llPageToken
   = lens _llPageToken (\ s a -> s{_llPageToken = a})
 
 -- | Maximum number of results to return
-llMaxResults :: Lens' LayersList' (Maybe Word32)
+llMaxResults :: Lens' LayersList (Maybe Word32)
 llMaxResults
   = lens _llMaxResults (\ s a -> s{_llMaxResults = a})
 
-instance GoogleRequest LayersList' where
-        type Rs LayersList' = Layersummaries
-        requestClient LayersList'{..}
+instance GoogleRequest LayersList where
+        type Rs LayersList = Layersummaries
+        requestClient LayersList{..}
           = go _llVolumeId _llContentVersion _llSource
               _llPageToken
               _llMaxResults

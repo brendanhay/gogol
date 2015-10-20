@@ -29,8 +29,8 @@ module Network.Google.Resource.Autoscaler.Autoscalers.Insert
       AutoscalersInsertResource
 
     -- * Creating a Request
-    , autoscalersInsert'
-    , AutoscalersInsert'
+    , autoscalersInsert
+    , AutoscalersInsert
 
     -- * Request Lenses
     , aiProject
@@ -42,7 +42,7 @@ import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @autoscaler.autoscalers.insert@ method which the
--- 'AutoscalersInsert'' request conforms to.
+-- 'AutoscalersInsert' request conforms to.
 type AutoscalersInsertResource =
      "projects" :>
        Capture "project" Text :>
@@ -54,14 +54,14 @@ type AutoscalersInsertResource =
 
 -- | Adds new Autoscaler resource.
 --
--- /See:/ 'autoscalersInsert'' smart constructor.
-data AutoscalersInsert' = AutoscalersInsert'
+-- /See:/ 'autoscalersInsert' smart constructor.
+data AutoscalersInsert = AutoscalersInsert
     { _aiProject :: !Text
     , _aiZone    :: !Text
     , _aiPayload :: !Autoscaler
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AutoscalersInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'AutoscalersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,35 +70,35 @@ data AutoscalersInsert' = AutoscalersInsert'
 -- * 'aiZone'
 --
 -- * 'aiPayload'
-autoscalersInsert'
+autoscalersInsert
     :: Text -- ^ 'aiProject'
     -> Text -- ^ 'aiZone'
     -> Autoscaler -- ^ 'aiPayload'
-    -> AutoscalersInsert'
-autoscalersInsert' pAiProject_ pAiZone_ pAiPayload_ =
-    AutoscalersInsert'
+    -> AutoscalersInsert
+autoscalersInsert pAiProject_ pAiZone_ pAiPayload_ =
+    AutoscalersInsert
     { _aiProject = pAiProject_
     , _aiZone = pAiZone_
     , _aiPayload = pAiPayload_
     }
 
 -- | Project ID of Autoscaler resource.
-aiProject :: Lens' AutoscalersInsert' Text
+aiProject :: Lens' AutoscalersInsert Text
 aiProject
   = lens _aiProject (\ s a -> s{_aiProject = a})
 
 -- | Zone name of Autoscaler resource.
-aiZone :: Lens' AutoscalersInsert' Text
+aiZone :: Lens' AutoscalersInsert Text
 aiZone = lens _aiZone (\ s a -> s{_aiZone = a})
 
 -- | Multipart request metadata.
-aiPayload :: Lens' AutoscalersInsert' Autoscaler
+aiPayload :: Lens' AutoscalersInsert Autoscaler
 aiPayload
   = lens _aiPayload (\ s a -> s{_aiPayload = a})
 
-instance GoogleRequest AutoscalersInsert' where
-        type Rs AutoscalersInsert' = Operation
-        requestClient AutoscalersInsert'{..}
+instance GoogleRequest AutoscalersInsert where
+        type Rs AutoscalersInsert = Operation
+        requestClient AutoscalersInsert{..}
           = go _aiProject _aiZone (Just AltJSON) _aiPayload
               autoscalerService
           where go

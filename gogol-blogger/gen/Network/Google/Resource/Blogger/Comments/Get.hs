@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.Comments.Get
       CommentsGetResource
 
     -- * Creating a Request
-    , commentsGet'
-    , CommentsGet'
+    , commentsGet
+    , CommentsGet
 
     -- * Request Lenses
     , cgBlogId
@@ -43,7 +43,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.comments.get@ method which the
--- 'CommentsGet'' request conforms to.
+-- 'CommentsGet' request conforms to.
 type CommentsGetResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -56,15 +56,15 @@ type CommentsGetResource =
 
 -- | Gets one comment by ID.
 --
--- /See:/ 'commentsGet'' smart constructor.
-data CommentsGet' = CommentsGet'
+-- /See:/ 'commentsGet' smart constructor.
+data CommentsGet = CommentsGet
     { _cgBlogId    :: !Text
     , _cgView      :: !(Maybe CommentsGetView)
     , _cgPostId    :: !Text
     , _cgCommentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,13 +75,13 @@ data CommentsGet' = CommentsGet'
 -- * 'cgPostId'
 --
 -- * 'cgCommentId'
-commentsGet'
+commentsGet
     :: Text -- ^ 'cgBlogId'
     -> Text -- ^ 'cgPostId'
     -> Text -- ^ 'cgCommentId'
-    -> CommentsGet'
-commentsGet' pCgBlogId_ pCgPostId_ pCgCommentId_ =
-    CommentsGet'
+    -> CommentsGet
+commentsGet pCgBlogId_ pCgPostId_ pCgCommentId_ =
+    CommentsGet
     { _cgBlogId = pCgBlogId_
     , _cgView = Nothing
     , _cgPostId = pCgPostId_
@@ -89,28 +89,28 @@ commentsGet' pCgBlogId_ pCgPostId_ pCgCommentId_ =
     }
 
 -- | ID of the blog to containing the comment.
-cgBlogId :: Lens' CommentsGet' Text
+cgBlogId :: Lens' CommentsGet Text
 cgBlogId = lens _cgBlogId (\ s a -> s{_cgBlogId = a})
 
 -- | Access level for the requested comment (default: READER). Note that some
 -- comments will require elevated permissions, for example comments where
 -- the parent posts which is in a draft state, or comments that are pending
 -- moderation.
-cgView :: Lens' CommentsGet' (Maybe CommentsGetView)
+cgView :: Lens' CommentsGet (Maybe CommentsGetView)
 cgView = lens _cgView (\ s a -> s{_cgView = a})
 
 -- | ID of the post to fetch posts from.
-cgPostId :: Lens' CommentsGet' Text
+cgPostId :: Lens' CommentsGet Text
 cgPostId = lens _cgPostId (\ s a -> s{_cgPostId = a})
 
 -- | The ID of the comment to get.
-cgCommentId :: Lens' CommentsGet' Text
+cgCommentId :: Lens' CommentsGet Text
 cgCommentId
   = lens _cgCommentId (\ s a -> s{_cgCommentId = a})
 
-instance GoogleRequest CommentsGet' where
-        type Rs CommentsGet' = Comment
-        requestClient CommentsGet'{..}
+instance GoogleRequest CommentsGet where
+        type Rs CommentsGet = Comment
+        requestClient CommentsGet{..}
           = go _cgBlogId _cgPostId _cgCommentId _cgView
               (Just AltJSON)
               bloggerService

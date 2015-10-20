@@ -37,8 +37,8 @@ module Network.Google.Resource.Classroom.Invitations.Accept
       InvitationsAcceptResource
 
     -- * Creating a Request
-    , invitationsAccept'
-    , InvitationsAccept'
+    , invitationsAccept
+    , InvitationsAccept
 
     -- * Request Lenses
     , iaXgafv
@@ -55,7 +55,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.invitations.accept@ method which the
--- 'InvitationsAccept'' request conforms to.
+-- 'InvitationsAccept' request conforms to.
 type InvitationsAcceptResource =
      "v1" :>
        "invitations" :>
@@ -79,8 +79,8 @@ type InvitationsAcceptResource =
 -- CourseTeacherLimitReached * UserGroupsMembershipLimitReached *
 -- \`NOT_FOUND\` if no invitation exists with the requested ID.
 --
--- /See:/ 'invitationsAccept'' smart constructor.
-data InvitationsAccept' = InvitationsAccept'
+-- /See:/ 'invitationsAccept' smart constructor.
+data InvitationsAccept = InvitationsAccept
     { _iaXgafv          :: !(Maybe Text)
     , _iaUploadProtocol :: !(Maybe Text)
     , _iaPp             :: !Bool
@@ -91,7 +91,7 @@ data InvitationsAccept' = InvitationsAccept'
     , _iaCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InvitationsAccept'' with the minimum fields required to make a request.
+-- | Creates a value of 'InvitationsAccept' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -110,11 +110,11 @@ data InvitationsAccept' = InvitationsAccept'
 -- * 'iaId'
 --
 -- * 'iaCallback'
-invitationsAccept'
+invitationsAccept
     :: Text -- ^ 'iaId'
-    -> InvitationsAccept'
-invitationsAccept' pIaId_ =
-    InvitationsAccept'
+    -> InvitationsAccept
+invitationsAccept pIaId_ =
+    InvitationsAccept
     { _iaXgafv = Nothing
     , _iaUploadProtocol = Nothing
     , _iaPp = True
@@ -126,48 +126,48 @@ invitationsAccept' pIaId_ =
     }
 
 -- | V1 error format.
-iaXgafv :: Lens' InvitationsAccept' (Maybe Text)
+iaXgafv :: Lens' InvitationsAccept (Maybe Text)
 iaXgafv = lens _iaXgafv (\ s a -> s{_iaXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-iaUploadProtocol :: Lens' InvitationsAccept' (Maybe Text)
+iaUploadProtocol :: Lens' InvitationsAccept (Maybe Text)
 iaUploadProtocol
   = lens _iaUploadProtocol
       (\ s a -> s{_iaUploadProtocol = a})
 
 -- | Pretty-print response.
-iaPp :: Lens' InvitationsAccept' Bool
+iaPp :: Lens' InvitationsAccept Bool
 iaPp = lens _iaPp (\ s a -> s{_iaPp = a})
 
 -- | OAuth access token.
-iaAccessToken :: Lens' InvitationsAccept' (Maybe Text)
+iaAccessToken :: Lens' InvitationsAccept (Maybe Text)
 iaAccessToken
   = lens _iaAccessToken
       (\ s a -> s{_iaAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-iaUploadType :: Lens' InvitationsAccept' (Maybe Text)
+iaUploadType :: Lens' InvitationsAccept (Maybe Text)
 iaUploadType
   = lens _iaUploadType (\ s a -> s{_iaUploadType = a})
 
 -- | OAuth bearer token.
-iaBearerToken :: Lens' InvitationsAccept' (Maybe Text)
+iaBearerToken :: Lens' InvitationsAccept (Maybe Text)
 iaBearerToken
   = lens _iaBearerToken
       (\ s a -> s{_iaBearerToken = a})
 
 -- | Identifier of the invitation to accept.
-iaId :: Lens' InvitationsAccept' Text
+iaId :: Lens' InvitationsAccept Text
 iaId = lens _iaId (\ s a -> s{_iaId = a})
 
 -- | JSONP
-iaCallback :: Lens' InvitationsAccept' (Maybe Text)
+iaCallback :: Lens' InvitationsAccept (Maybe Text)
 iaCallback
   = lens _iaCallback (\ s a -> s{_iaCallback = a})
 
-instance GoogleRequest InvitationsAccept' where
-        type Rs InvitationsAccept' = Empty
-        requestClient InvitationsAccept'{..}
+instance GoogleRequest InvitationsAccept where
+        type Rs InvitationsAccept = Empty
+        requestClient InvitationsAccept{..}
           = go _iaId _iaXgafv _iaUploadProtocol (Just _iaPp)
               _iaAccessToken
               _iaUploadType

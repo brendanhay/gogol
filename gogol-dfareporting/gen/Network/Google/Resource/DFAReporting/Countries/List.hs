@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Countries.List
       CountriesListResource
 
     -- * Creating a Request
-    , countriesList'
-    , CountriesList'
+    , countriesList
+    , CountriesList
 
     -- * Request Lenses
     , couProFileId
@@ -40,7 +40,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.countries.list@ method which the
--- 'CountriesList'' request conforms to.
+-- 'CountriesList' request conforms to.
 type CountriesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -50,32 +50,32 @@ type CountriesListResource =
 
 -- | Retrieves a list of countries.
 --
--- /See:/ 'countriesList'' smart constructor.
-newtype CountriesList' = CountriesList'
+-- /See:/ 'countriesList' smart constructor.
+newtype CountriesList = CountriesList
     { _couProFileId :: Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CountriesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CountriesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'couProFileId'
-countriesList'
+countriesList
     :: Int64 -- ^ 'couProFileId'
-    -> CountriesList'
-countriesList' pCouProFileId_ =
-    CountriesList'
+    -> CountriesList
+countriesList pCouProFileId_ =
+    CountriesList
     { _couProFileId = pCouProFileId_
     }
 
 -- | User profile ID associated with this request.
-couProFileId :: Lens' CountriesList' Int64
+couProFileId :: Lens' CountriesList Int64
 couProFileId
   = lens _couProFileId (\ s a -> s{_couProFileId = a})
 
-instance GoogleRequest CountriesList' where
-        type Rs CountriesList' = CountriesListResponse
-        requestClient CountriesList'{..}
+instance GoogleRequest CountriesList where
+        type Rs CountriesList = CountriesListResponse
+        requestClient CountriesList{..}
           = go _couProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy CountriesListResource)

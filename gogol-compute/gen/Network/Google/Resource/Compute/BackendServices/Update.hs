@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.BackendServices.Update
       BackendServicesUpdateResource
 
     -- * Creating a Request
-    , backendServicesUpdate'
-    , BackendServicesUpdate'
+    , backendServicesUpdate
+    , BackendServicesUpdate
 
     -- * Request Lenses
     , bsuProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.backendServices.update@ method which the
--- 'BackendServicesUpdate'' request conforms to.
+-- 'BackendServicesUpdate' request conforms to.
 type BackendServicesUpdateResource =
      Capture "project" Text :>
        "global" :>
@@ -54,14 +54,14 @@ type BackendServicesUpdateResource =
 
 -- | Update the entire content of the BackendService resource.
 --
--- /See:/ 'backendServicesUpdate'' smart constructor.
-data BackendServicesUpdate' = BackendServicesUpdate'
+-- /See:/ 'backendServicesUpdate' smart constructor.
+data BackendServicesUpdate = BackendServicesUpdate
     { _bsuProject        :: !Text
     , _bsuPayload        :: !BackendService
     , _bsuBackendService :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BackendServicesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'BackendServicesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,37 +70,37 @@ data BackendServicesUpdate' = BackendServicesUpdate'
 -- * 'bsuPayload'
 --
 -- * 'bsuBackendService'
-backendServicesUpdate'
+backendServicesUpdate
     :: Text -- ^ 'bsuProject'
     -> BackendService -- ^ 'bsuPayload'
     -> Text -- ^ 'bsuBackendService'
-    -> BackendServicesUpdate'
-backendServicesUpdate' pBsuProject_ pBsuPayload_ pBsuBackendService_ =
-    BackendServicesUpdate'
+    -> BackendServicesUpdate
+backendServicesUpdate pBsuProject_ pBsuPayload_ pBsuBackendService_ =
+    BackendServicesUpdate
     { _bsuProject = pBsuProject_
     , _bsuPayload = pBsuPayload_
     , _bsuBackendService = pBsuBackendService_
     }
 
 -- | Name of the project scoping this request.
-bsuProject :: Lens' BackendServicesUpdate' Text
+bsuProject :: Lens' BackendServicesUpdate Text
 bsuProject
   = lens _bsuProject (\ s a -> s{_bsuProject = a})
 
 -- | Multipart request metadata.
-bsuPayload :: Lens' BackendServicesUpdate' BackendService
+bsuPayload :: Lens' BackendServicesUpdate BackendService
 bsuPayload
   = lens _bsuPayload (\ s a -> s{_bsuPayload = a})
 
 -- | Name of the BackendService resource to update.
-bsuBackendService :: Lens' BackendServicesUpdate' Text
+bsuBackendService :: Lens' BackendServicesUpdate Text
 bsuBackendService
   = lens _bsuBackendService
       (\ s a -> s{_bsuBackendService = a})
 
-instance GoogleRequest BackendServicesUpdate' where
-        type Rs BackendServicesUpdate' = Operation
-        requestClient BackendServicesUpdate'{..}
+instance GoogleRequest BackendServicesUpdate where
+        type Rs BackendServicesUpdate = Operation
+        requestClient BackendServicesUpdate{..}
           = go _bsuProject _bsuBackendService (Just AltJSON)
               _bsuPayload
               computeService

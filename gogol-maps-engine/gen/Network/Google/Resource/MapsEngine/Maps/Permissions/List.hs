@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Maps.Permissions.List
       MapsPermissionsListResource
 
     -- * Creating a Request
-    , mapsPermissionsList'
-    , MapsPermissionsList'
+    , mapsPermissionsList
+    , MapsPermissionsList
 
     -- * Request Lenses
     , mplId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.maps.permissions.list@ method which the
--- 'MapsPermissionsList'' request conforms to.
+-- 'MapsPermissionsList' request conforms to.
 type MapsPermissionsListResource =
      "maps" :>
        Capture "id" Text :>
@@ -50,32 +50,31 @@ type MapsPermissionsListResource =
 
 -- | Return all of the permissions for the specified asset.
 --
--- /See:/ 'mapsPermissionsList'' smart constructor.
-newtype MapsPermissionsList' = MapsPermissionsList'
+-- /See:/ 'mapsPermissionsList' smart constructor.
+newtype MapsPermissionsList = MapsPermissionsList
     { _mplId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MapsPermissionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'MapsPermissionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mplId'
-mapsPermissionsList'
+mapsPermissionsList
     :: Text -- ^ 'mplId'
-    -> MapsPermissionsList'
-mapsPermissionsList' pMplId_ =
-    MapsPermissionsList'
+    -> MapsPermissionsList
+mapsPermissionsList pMplId_ =
+    MapsPermissionsList
     { _mplId = pMplId_
     }
 
 -- | The ID of the asset whose permissions will be listed.
-mplId :: Lens' MapsPermissionsList' Text
+mplId :: Lens' MapsPermissionsList Text
 mplId = lens _mplId (\ s a -> s{_mplId = a})
 
-instance GoogleRequest MapsPermissionsList' where
-        type Rs MapsPermissionsList' =
-             PermissionsListResponse
-        requestClient MapsPermissionsList'{..}
+instance GoogleRequest MapsPermissionsList where
+        type Rs MapsPermissionsList = PermissionsListResponse
+        requestClient MapsPermissionsList{..}
           = go _mplId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

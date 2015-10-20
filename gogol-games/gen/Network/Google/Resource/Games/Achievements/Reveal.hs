@@ -30,8 +30,8 @@ module Network.Google.Resource.Games.Achievements.Reveal
       AchievementsRevealResource
 
     -- * Creating a Request
-    , achievementsReveal'
-    , AchievementsReveal'
+    , achievementsReveal
+    , AchievementsReveal
 
     -- * Request Lenses
     , arAchievementId
@@ -41,7 +41,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.achievements.reveal@ method which the
--- 'AchievementsReveal'' request conforms to.
+-- 'AchievementsReveal' request conforms to.
 type AchievementsRevealResource =
      "achievements" :>
        Capture "achievementId" Text :>
@@ -52,34 +52,34 @@ type AchievementsRevealResource =
 -- | Sets the state of the achievement with the given ID to REVEALED for the
 -- currently authenticated player.
 --
--- /See:/ 'achievementsReveal'' smart constructor.
-newtype AchievementsReveal' = AchievementsReveal'
+-- /See:/ 'achievementsReveal' smart constructor.
+newtype AchievementsReveal = AchievementsReveal
     { _arAchievementId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AchievementsReveal'' with the minimum fields required to make a request.
+-- | Creates a value of 'AchievementsReveal' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'arAchievementId'
-achievementsReveal'
+achievementsReveal
     :: Text -- ^ 'arAchievementId'
-    -> AchievementsReveal'
-achievementsReveal' pArAchievementId_ =
-    AchievementsReveal'
+    -> AchievementsReveal
+achievementsReveal pArAchievementId_ =
+    AchievementsReveal
     { _arAchievementId = pArAchievementId_
     }
 
 -- | The ID of the achievement used by this method.
-arAchievementId :: Lens' AchievementsReveal' Text
+arAchievementId :: Lens' AchievementsReveal Text
 arAchievementId
   = lens _arAchievementId
       (\ s a -> s{_arAchievementId = a})
 
-instance GoogleRequest AchievementsReveal' where
-        type Rs AchievementsReveal' =
+instance GoogleRequest AchievementsReveal where
+        type Rs AchievementsReveal =
              AchievementRevealResponse
-        requestClient AchievementsReveal'{..}
+        requestClient AchievementsReveal{..}
           = go _arAchievementId (Just AltJSON) gamesService
           where go
                   = buildClient

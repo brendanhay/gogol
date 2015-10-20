@@ -35,8 +35,8 @@ module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Up
       ControllerDebuggeesBreakpointsUpdateResource
 
     -- * Creating a Request
-    , controllerDebuggeesBreakpointsUpdate'
-    , ControllerDebuggeesBreakpointsUpdate'
+    , controllerDebuggeesBreakpointsUpdate
+    , ControllerDebuggeesBreakpointsUpdate
 
     -- * Request Lenses
     , cdbuXgafv
@@ -55,7 +55,7 @@ import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @clouddebugger.controller.debuggees.breakpoints.update@ method which the
--- 'ControllerDebuggeesBreakpointsUpdate'' request conforms to.
+-- 'ControllerDebuggeesBreakpointsUpdate' request conforms to.
 type ControllerDebuggeesBreakpointsUpdateResource =
      "v2" :>
        "controller" :>
@@ -82,8 +82,8 @@ type ControllerDebuggeesBreakpointsUpdateResource =
 -- are restricted to changes such as canonicalizing a value or snapping the
 -- location to the correct line of code.
 --
--- /See:/ 'controllerDebuggeesBreakpointsUpdate'' smart constructor.
-data ControllerDebuggeesBreakpointsUpdate' = ControllerDebuggeesBreakpointsUpdate'
+-- /See:/ 'controllerDebuggeesBreakpointsUpdate' smart constructor.
+data ControllerDebuggeesBreakpointsUpdate = ControllerDebuggeesBreakpointsUpdate
     { _cdbuXgafv          :: !(Maybe Text)
     , _cdbuUploadProtocol :: !(Maybe Text)
     , _cdbuPp             :: !Bool
@@ -96,7 +96,7 @@ data ControllerDebuggeesBreakpointsUpdate' = ControllerDebuggeesBreakpointsUpdat
     , _cdbuCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ControllerDebuggeesBreakpointsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ControllerDebuggeesBreakpointsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -119,13 +119,13 @@ data ControllerDebuggeesBreakpointsUpdate' = ControllerDebuggeesBreakpointsUpdat
 -- * 'cdbuDebuggeeId'
 --
 -- * 'cdbuCallback'
-controllerDebuggeesBreakpointsUpdate'
+controllerDebuggeesBreakpointsUpdate
     :: UpdateActiveBreakpointRequest -- ^ 'cdbuPayload'
     -> Text -- ^ 'cdbuId'
     -> Text -- ^ 'cdbuDebuggeeId'
-    -> ControllerDebuggeesBreakpointsUpdate'
-controllerDebuggeesBreakpointsUpdate' pCdbuPayload_ pCdbuId_ pCdbuDebuggeeId_ =
-    ControllerDebuggeesBreakpointsUpdate'
+    -> ControllerDebuggeesBreakpointsUpdate
+controllerDebuggeesBreakpointsUpdate pCdbuPayload_ pCdbuId_ pCdbuDebuggeeId_ =
+    ControllerDebuggeesBreakpointsUpdate
     { _cdbuXgafv = Nothing
     , _cdbuUploadProtocol = Nothing
     , _cdbuPp = True
@@ -139,64 +139,64 @@ controllerDebuggeesBreakpointsUpdate' pCdbuPayload_ pCdbuId_ pCdbuDebuggeeId_ =
     }
 
 -- | V1 error format.
-cdbuXgafv :: Lens' ControllerDebuggeesBreakpointsUpdate' (Maybe Text)
+cdbuXgafv :: Lens' ControllerDebuggeesBreakpointsUpdate (Maybe Text)
 cdbuXgafv
   = lens _cdbuXgafv (\ s a -> s{_cdbuXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-cdbuUploadProtocol :: Lens' ControllerDebuggeesBreakpointsUpdate' (Maybe Text)
+cdbuUploadProtocol :: Lens' ControllerDebuggeesBreakpointsUpdate (Maybe Text)
 cdbuUploadProtocol
   = lens _cdbuUploadProtocol
       (\ s a -> s{_cdbuUploadProtocol = a})
 
 -- | Pretty-print response.
-cdbuPp :: Lens' ControllerDebuggeesBreakpointsUpdate' Bool
+cdbuPp :: Lens' ControllerDebuggeesBreakpointsUpdate Bool
 cdbuPp = lens _cdbuPp (\ s a -> s{_cdbuPp = a})
 
 -- | OAuth access token.
-cdbuAccessToken :: Lens' ControllerDebuggeesBreakpointsUpdate' (Maybe Text)
+cdbuAccessToken :: Lens' ControllerDebuggeesBreakpointsUpdate (Maybe Text)
 cdbuAccessToken
   = lens _cdbuAccessToken
       (\ s a -> s{_cdbuAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-cdbuUploadType :: Lens' ControllerDebuggeesBreakpointsUpdate' (Maybe Text)
+cdbuUploadType :: Lens' ControllerDebuggeesBreakpointsUpdate (Maybe Text)
 cdbuUploadType
   = lens _cdbuUploadType
       (\ s a -> s{_cdbuUploadType = a})
 
 -- | Multipart request metadata.
-cdbuPayload :: Lens' ControllerDebuggeesBreakpointsUpdate' UpdateActiveBreakpointRequest
+cdbuPayload :: Lens' ControllerDebuggeesBreakpointsUpdate UpdateActiveBreakpointRequest
 cdbuPayload
   = lens _cdbuPayload (\ s a -> s{_cdbuPayload = a})
 
 -- | OAuth bearer token.
-cdbuBearerToken :: Lens' ControllerDebuggeesBreakpointsUpdate' (Maybe Text)
+cdbuBearerToken :: Lens' ControllerDebuggeesBreakpointsUpdate (Maybe Text)
 cdbuBearerToken
   = lens _cdbuBearerToken
       (\ s a -> s{_cdbuBearerToken = a})
 
 -- | Breakpoint identifier, unique in the scope of the debuggee.
-cdbuId :: Lens' ControllerDebuggeesBreakpointsUpdate' Text
+cdbuId :: Lens' ControllerDebuggeesBreakpointsUpdate Text
 cdbuId = lens _cdbuId (\ s a -> s{_cdbuId = a})
 
 -- | Identifies the debuggee being debugged.
-cdbuDebuggeeId :: Lens' ControllerDebuggeesBreakpointsUpdate' Text
+cdbuDebuggeeId :: Lens' ControllerDebuggeesBreakpointsUpdate Text
 cdbuDebuggeeId
   = lens _cdbuDebuggeeId
       (\ s a -> s{_cdbuDebuggeeId = a})
 
 -- | JSONP
-cdbuCallback :: Lens' ControllerDebuggeesBreakpointsUpdate' (Maybe Text)
+cdbuCallback :: Lens' ControllerDebuggeesBreakpointsUpdate (Maybe Text)
 cdbuCallback
   = lens _cdbuCallback (\ s a -> s{_cdbuCallback = a})
 
 instance GoogleRequest
-         ControllerDebuggeesBreakpointsUpdate' where
-        type Rs ControllerDebuggeesBreakpointsUpdate' =
+         ControllerDebuggeesBreakpointsUpdate where
+        type Rs ControllerDebuggeesBreakpointsUpdate =
              UpdateActiveBreakpointResponse
         requestClient
-          ControllerDebuggeesBreakpointsUpdate'{..}
+          ControllerDebuggeesBreakpointsUpdate{..}
           = go _cdbuDebuggeeId _cdbuId _cdbuXgafv
               _cdbuUploadProtocol
               (Just _cdbuPp)

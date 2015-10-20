@@ -32,8 +32,8 @@ module Network.Google.Resource.SQL.Instances.Patch
       InstancesPatchResource
 
     -- * Creating a Request
-    , instancesPatch'
-    , InstancesPatch'
+    , instancesPatch
+    , InstancesPatch
 
     -- * Request Lenses
     , ipProject
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.patch@ method which the
--- 'InstancesPatch'' request conforms to.
+-- 'InstancesPatch' request conforms to.
 type InstancesPatchResource =
      "projects" :>
        Capture "project" Text :>
@@ -60,14 +60,14 @@ type InstancesPatchResource =
 -- retain. For partial updates, use patch.. This method supports patch
 -- semantics.
 --
--- /See:/ 'instancesPatch'' smart constructor.
-data InstancesPatch' = InstancesPatch'
+-- /See:/ 'instancesPatch' smart constructor.
+data InstancesPatch = InstancesPatch
     { _ipProject  :: !Text
     , _ipPayload  :: !DatabaseInstance
     , _ipInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,36 +76,36 @@ data InstancesPatch' = InstancesPatch'
 -- * 'ipPayload'
 --
 -- * 'ipInstance'
-instancesPatch'
+instancesPatch
     :: Text -- ^ 'ipProject'
     -> DatabaseInstance -- ^ 'ipPayload'
     -> Text -- ^ 'ipInstance'
-    -> InstancesPatch'
-instancesPatch' pIpProject_ pIpPayload_ pIpInstance_ =
-    InstancesPatch'
+    -> InstancesPatch
+instancesPatch pIpProject_ pIpPayload_ pIpInstance_ =
+    InstancesPatch
     { _ipProject = pIpProject_
     , _ipPayload = pIpPayload_
     , _ipInstance = pIpInstance_
     }
 
 -- | Project ID of the project that contains the instance.
-ipProject :: Lens' InstancesPatch' Text
+ipProject :: Lens' InstancesPatch Text
 ipProject
   = lens _ipProject (\ s a -> s{_ipProject = a})
 
 -- | Multipart request metadata.
-ipPayload :: Lens' InstancesPatch' DatabaseInstance
+ipPayload :: Lens' InstancesPatch DatabaseInstance
 ipPayload
   = lens _ipPayload (\ s a -> s{_ipPayload = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-ipInstance :: Lens' InstancesPatch' Text
+ipInstance :: Lens' InstancesPatch Text
 ipInstance
   = lens _ipInstance (\ s a -> s{_ipInstance = a})
 
-instance GoogleRequest InstancesPatch' where
-        type Rs InstancesPatch' = Operation
-        requestClient InstancesPatch'{..}
+instance GoogleRequest InstancesPatch where
+        type Rs InstancesPatch = Operation
+        requestClient InstancesPatch{..}
           = go _ipProject _ipInstance (Just AltJSON) _ipPayload
               sQLAdminService
           where go

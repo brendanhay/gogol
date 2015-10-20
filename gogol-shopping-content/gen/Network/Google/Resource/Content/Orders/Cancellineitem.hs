@@ -29,20 +29,20 @@ module Network.Google.Resource.Content.Orders.Cancellineitem
       OrdersCancellineitemResource
 
     -- * Creating a Request
-    , ordersCancellineitem'
-    , OrdersCancellineitem'
+    , ordersCancellineitem
+    , OrdersCancellineitem
 
     -- * Request Lenses
-    , oMerchantId
-    , oPayload
-    , oOrderId
+    , ordMerchantId
+    , ordPayload
+    , ordOrderId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.cancellineitem@ method which the
--- 'OrdersCancellineitem'' request conforms to.
+-- 'OrdersCancellineitem' request conforms to.
 type OrdersCancellineitemResource =
      Capture "merchantId" Word64 :>
        "orders" :>
@@ -54,52 +54,56 @@ type OrdersCancellineitemResource =
 
 -- | Cancels a line item.
 --
--- /See:/ 'ordersCancellineitem'' smart constructor.
-data OrdersCancellineitem' = OrdersCancellineitem'
-    { _oMerchantId :: !Word64
-    , _oPayload    :: !OrdersCancelLineItemRequest
-    , _oOrderId    :: !Text
+-- /See:/ 'ordersCancellineitem' smart constructor.
+data OrdersCancellineitem = OrdersCancellineitem
+    { _ordMerchantId :: !Word64
+    , _ordPayload    :: !OrdersCancelLineItemRequest
+    , _ordOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersCancellineitem'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersCancellineitem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'oMerchantId'
+-- * 'ordMerchantId'
 --
--- * 'oPayload'
+-- * 'ordPayload'
 --
--- * 'oOrderId'
-ordersCancellineitem'
-    :: Word64 -- ^ 'oMerchantId'
-    -> OrdersCancelLineItemRequest -- ^ 'oPayload'
-    -> Text -- ^ 'oOrderId'
-    -> OrdersCancellineitem'
-ordersCancellineitem' pOMerchantId_ pOPayload_ pOOrderId_ =
-    OrdersCancellineitem'
-    { _oMerchantId = pOMerchantId_
-    , _oPayload = pOPayload_
-    , _oOrderId = pOOrderId_
+-- * 'ordOrderId'
+ordersCancellineitem
+    :: Word64 -- ^ 'ordMerchantId'
+    -> OrdersCancelLineItemRequest -- ^ 'ordPayload'
+    -> Text -- ^ 'ordOrderId'
+    -> OrdersCancellineitem
+ordersCancellineitem pOrdMerchantId_ pOrdPayload_ pOrdOrderId_ =
+    OrdersCancellineitem
+    { _ordMerchantId = pOrdMerchantId_
+    , _ordPayload = pOrdPayload_
+    , _ordOrderId = pOrdOrderId_
     }
 
 -- | The ID of the managing account.
-oMerchantId :: Lens' OrdersCancellineitem' Word64
-oMerchantId
-  = lens _oMerchantId (\ s a -> s{_oMerchantId = a})
+ordMerchantId :: Lens' OrdersCancellineitem Word64
+ordMerchantId
+  = lens _ordMerchantId
+      (\ s a -> s{_ordMerchantId = a})
 
 -- | Multipart request metadata.
-oPayload :: Lens' OrdersCancellineitem' OrdersCancelLineItemRequest
-oPayload = lens _oPayload (\ s a -> s{_oPayload = a})
+ordPayload :: Lens' OrdersCancellineitem OrdersCancelLineItemRequest
+ordPayload
+  = lens _ordPayload (\ s a -> s{_ordPayload = a})
 
 -- | The ID of the order.
-oOrderId :: Lens' OrdersCancellineitem' Text
-oOrderId = lens _oOrderId (\ s a -> s{_oOrderId = a})
+ordOrderId :: Lens' OrdersCancellineitem Text
+ordOrderId
+  = lens _ordOrderId (\ s a -> s{_ordOrderId = a})
 
-instance GoogleRequest OrdersCancellineitem' where
-        type Rs OrdersCancellineitem' =
+instance GoogleRequest OrdersCancellineitem where
+        type Rs OrdersCancellineitem =
              OrdersCancelLineItemResponse
-        requestClient OrdersCancellineitem'{..}
-          = go _oMerchantId _oOrderId (Just AltJSON) _oPayload
+        requestClient OrdersCancellineitem{..}
+          = go _ordMerchantId _ordOrderId (Just AltJSON)
+              _ordPayload
               shoppingContentService
           where go
                   = buildClient

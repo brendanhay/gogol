@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Update
       CreativeGroupsUpdateResource
 
     -- * Creating a Request
-    , creativeGroupsUpdate'
-    , CreativeGroupsUpdate'
+    , creativeGroupsUpdate
+    , CreativeGroupsUpdate
 
     -- * Request Lenses
     , cguProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creativeGroups.update@ method which the
--- 'CreativeGroupsUpdate'' request conforms to.
+-- 'CreativeGroupsUpdate' request conforms to.
 type CreativeGroupsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,42 +52,42 @@ type CreativeGroupsUpdateResource =
 
 -- | Updates an existing creative group.
 --
--- /See:/ 'creativeGroupsUpdate'' smart constructor.
-data CreativeGroupsUpdate' = CreativeGroupsUpdate'
+-- /See:/ 'creativeGroupsUpdate' smart constructor.
+data CreativeGroupsUpdate = CreativeGroupsUpdate
     { _cguProFileId :: !Int64
     , _cguPayload   :: !CreativeGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativeGroupsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CreativeGroupsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cguProFileId'
 --
 -- * 'cguPayload'
-creativeGroupsUpdate'
+creativeGroupsUpdate
     :: Int64 -- ^ 'cguProFileId'
     -> CreativeGroup -- ^ 'cguPayload'
-    -> CreativeGroupsUpdate'
-creativeGroupsUpdate' pCguProFileId_ pCguPayload_ =
-    CreativeGroupsUpdate'
+    -> CreativeGroupsUpdate
+creativeGroupsUpdate pCguProFileId_ pCguPayload_ =
+    CreativeGroupsUpdate
     { _cguProFileId = pCguProFileId_
     , _cguPayload = pCguPayload_
     }
 
 -- | User profile ID associated with this request.
-cguProFileId :: Lens' CreativeGroupsUpdate' Int64
+cguProFileId :: Lens' CreativeGroupsUpdate Int64
 cguProFileId
   = lens _cguProFileId (\ s a -> s{_cguProFileId = a})
 
 -- | Multipart request metadata.
-cguPayload :: Lens' CreativeGroupsUpdate' CreativeGroup
+cguPayload :: Lens' CreativeGroupsUpdate CreativeGroup
 cguPayload
   = lens _cguPayload (\ s a -> s{_cguPayload = a})
 
-instance GoogleRequest CreativeGroupsUpdate' where
-        type Rs CreativeGroupsUpdate' = CreativeGroup
-        requestClient CreativeGroupsUpdate'{..}
+instance GoogleRequest CreativeGroupsUpdate where
+        type Rs CreativeGroupsUpdate = CreativeGroup
+        requestClient CreativeGroupsUpdate{..}
           = go _cguProFileId (Just AltJSON) _cguPayload
               dFAReportingService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Layers.AnnotationData.Get
       LayersAnnotationDataGetResource
 
     -- * Creating a Request
-    , layersAnnotationDataGet'
-    , LayersAnnotationDataGet'
+    , layersAnnotationDataGet
+    , LayersAnnotationDataGet
 
     -- * Request Lenses
     , ladgW
@@ -49,7 +49,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.layers.annotationData.get@ method which the
--- 'LayersAnnotationDataGet'' request conforms to.
+-- 'LayersAnnotationDataGet' request conforms to.
 type LayersAnnotationDataGetResource =
      "volumes" :>
        Capture "volumeId" Text :>
@@ -69,8 +69,8 @@ type LayersAnnotationDataGetResource =
 
 -- | Gets the annotation data.
 --
--- /See:/ 'layersAnnotationDataGet'' smart constructor.
-data LayersAnnotationDataGet' = LayersAnnotationDataGet'
+-- /See:/ 'layersAnnotationDataGet' smart constructor.
+data LayersAnnotationDataGet = LayersAnnotationDataGet
     { _ladgW                   :: !(Maybe Int32)
     , _ladgScale               :: !(Maybe Int32)
     , _ladgLocale              :: !(Maybe Text)
@@ -83,7 +83,7 @@ data LayersAnnotationDataGet' = LayersAnnotationDataGet'
     , _ladgLayerId             :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersAnnotationDataGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersAnnotationDataGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -106,14 +106,14 @@ data LayersAnnotationDataGet' = LayersAnnotationDataGet'
 -- * 'ladgH'
 --
 -- * 'ladgLayerId'
-layersAnnotationDataGet'
+layersAnnotationDataGet
     :: Text -- ^ 'ladgContentVersion'
     -> Text -- ^ 'ladgAnnotationDataId'
     -> Text -- ^ 'ladgVolumeId'
     -> Text -- ^ 'ladgLayerId'
-    -> LayersAnnotationDataGet'
-layersAnnotationDataGet' pLadgContentVersion_ pLadgAnnotationDataId_ pLadgVolumeId_ pLadgLayerId_ =
-    LayersAnnotationDataGet'
+    -> LayersAnnotationDataGet
+layersAnnotationDataGet pLadgContentVersion_ pLadgAnnotationDataId_ pLadgVolumeId_ pLadgLayerId_ =
+    LayersAnnotationDataGet
     { _ladgW = Nothing
     , _ladgScale = Nothing
     , _ladgLocale = Nothing
@@ -128,61 +128,61 @@ layersAnnotationDataGet' pLadgContentVersion_ pLadgAnnotationDataId_ pLadgVolume
 
 -- | The requested pixel width for any images. If width is provided height
 -- must also be provided.
-ladgW :: Lens' LayersAnnotationDataGet' (Maybe Int32)
+ladgW :: Lens' LayersAnnotationDataGet (Maybe Int32)
 ladgW = lens _ladgW (\ s a -> s{_ladgW = a})
 
 -- | The requested scale for the image.
-ladgScale :: Lens' LayersAnnotationDataGet' (Maybe Int32)
+ladgScale :: Lens' LayersAnnotationDataGet (Maybe Int32)
 ladgScale
   = lens _ladgScale (\ s a -> s{_ladgScale = a})
 
 -- | The locale information for the data. ISO-639-1 language and ISO-3166-1
 -- country code. Ex: \'en_US\'.
-ladgLocale :: Lens' LayersAnnotationDataGet' (Maybe Text)
+ladgLocale :: Lens' LayersAnnotationDataGet (Maybe Text)
 ladgLocale
   = lens _ladgLocale (\ s a -> s{_ladgLocale = a})
 
 -- | The content version for the volume you are trying to retrieve.
-ladgContentVersion :: Lens' LayersAnnotationDataGet' Text
+ladgContentVersion :: Lens' LayersAnnotationDataGet Text
 ladgContentVersion
   = lens _ladgContentVersion
       (\ s a -> s{_ladgContentVersion = a})
 
 -- | For the dictionary layer. Whether or not to allow web definitions.
-ladgAllowWebDefinitions :: Lens' LayersAnnotationDataGet' (Maybe Bool)
+ladgAllowWebDefinitions :: Lens' LayersAnnotationDataGet (Maybe Bool)
 ladgAllowWebDefinitions
   = lens _ladgAllowWebDefinitions
       (\ s a -> s{_ladgAllowWebDefinitions = a})
 
 -- | The ID of the annotation data to retrieve.
-ladgAnnotationDataId :: Lens' LayersAnnotationDataGet' Text
+ladgAnnotationDataId :: Lens' LayersAnnotationDataGet Text
 ladgAnnotationDataId
   = lens _ladgAnnotationDataId
       (\ s a -> s{_ladgAnnotationDataId = a})
 
 -- | The volume to retrieve annotations for.
-ladgVolumeId :: Lens' LayersAnnotationDataGet' Text
+ladgVolumeId :: Lens' LayersAnnotationDataGet Text
 ladgVolumeId
   = lens _ladgVolumeId (\ s a -> s{_ladgVolumeId = a})
 
 -- | String to identify the originator of this request.
-ladgSource :: Lens' LayersAnnotationDataGet' (Maybe Text)
+ladgSource :: Lens' LayersAnnotationDataGet (Maybe Text)
 ladgSource
   = lens _ladgSource (\ s a -> s{_ladgSource = a})
 
 -- | The requested pixel height for any images. If height is provided width
 -- must also be provided.
-ladgH :: Lens' LayersAnnotationDataGet' (Maybe Int32)
+ladgH :: Lens' LayersAnnotationDataGet (Maybe Int32)
 ladgH = lens _ladgH (\ s a -> s{_ladgH = a})
 
 -- | The ID for the layer to get the annotations.
-ladgLayerId :: Lens' LayersAnnotationDataGet' Text
+ladgLayerId :: Lens' LayersAnnotationDataGet Text
 ladgLayerId
   = lens _ladgLayerId (\ s a -> s{_ladgLayerId = a})
 
-instance GoogleRequest LayersAnnotationDataGet' where
-        type Rs LayersAnnotationDataGet' = AnnotationData
-        requestClient LayersAnnotationDataGet'{..}
+instance GoogleRequest LayersAnnotationDataGet where
+        type Rs LayersAnnotationDataGet = AnnotationData
+        requestClient LayersAnnotationDataGet{..}
           = go _ladgVolumeId _ladgLayerId _ladgAnnotationDataId
               (Just _ladgContentVersion)
               _ladgW

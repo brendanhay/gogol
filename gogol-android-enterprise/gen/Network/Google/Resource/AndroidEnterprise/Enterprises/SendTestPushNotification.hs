@@ -30,8 +30,8 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.SendTestPushNotific
       EnterprisesSendTestPushNotificationResource
 
     -- * Creating a Request
-    , enterprisesSendTestPushNotification'
-    , EnterprisesSendTestPushNotification'
+    , enterprisesSendTestPushNotification
+    , EnterprisesSendTestPushNotification
 
     -- * Request Lenses
     , estpnEnterpriseId
@@ -41,7 +41,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.enterprises.sendTestPushNotification@ method which the
--- 'EnterprisesSendTestPushNotification'' request conforms to.
+-- 'EnterprisesSendTestPushNotification' request conforms to.
 type EnterprisesSendTestPushNotificationResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -53,36 +53,35 @@ type EnterprisesSendTestPushNotificationResource =
 -- | Sends a test push notification to validate the MDM integration with the
 -- Google Cloud Pub\/Sub service for this enterprise.
 --
--- /See:/ 'enterprisesSendTestPushNotification'' smart constructor.
-newtype EnterprisesSendTestPushNotification' = EnterprisesSendTestPushNotification'
+-- /See:/ 'enterprisesSendTestPushNotification' smart constructor.
+newtype EnterprisesSendTestPushNotification = EnterprisesSendTestPushNotification
     { _estpnEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EnterprisesSendTestPushNotification'' with the minimum fields required to make a request.
+-- | Creates a value of 'EnterprisesSendTestPushNotification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'estpnEnterpriseId'
-enterprisesSendTestPushNotification'
+enterprisesSendTestPushNotification
     :: Text -- ^ 'estpnEnterpriseId'
-    -> EnterprisesSendTestPushNotification'
-enterprisesSendTestPushNotification' pEstpnEnterpriseId_ =
-    EnterprisesSendTestPushNotification'
+    -> EnterprisesSendTestPushNotification
+enterprisesSendTestPushNotification pEstpnEnterpriseId_ =
+    EnterprisesSendTestPushNotification
     { _estpnEnterpriseId = pEstpnEnterpriseId_
     }
 
 -- | The ID of the enterprise.
-estpnEnterpriseId :: Lens' EnterprisesSendTestPushNotification' Text
+estpnEnterpriseId :: Lens' EnterprisesSendTestPushNotification Text
 estpnEnterpriseId
   = lens _estpnEnterpriseId
       (\ s a -> s{_estpnEnterpriseId = a})
 
 instance GoogleRequest
-         EnterprisesSendTestPushNotification' where
-        type Rs EnterprisesSendTestPushNotification' =
+         EnterprisesSendTestPushNotification where
+        type Rs EnterprisesSendTestPushNotification =
              EnterprisesSendTestPushNotificationResponse
-        requestClient
-          EnterprisesSendTestPushNotification'{..}
+        requestClient EnterprisesSendTestPushNotification{..}
           = go _estpnEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go

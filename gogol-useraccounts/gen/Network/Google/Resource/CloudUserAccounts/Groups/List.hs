@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudUserAccounts.Groups.List
       GroupsListResource
 
     -- * Creating a Request
-    , groupsList'
-    , GroupsList'
+    , groupsList
+    , GroupsList
 
     -- * Request Lenses
     , glOrderBy
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
 -- | A resource alias for @clouduseraccounts.groups.list@ method which the
--- 'GroupsList'' request conforms to.
+-- 'GroupsList' request conforms to.
 type GroupsListResource =
      Capture "project" Text :>
        "global" :>
@@ -57,8 +57,8 @@ type GroupsListResource =
 
 -- | Retrieves the list of groups contained within the specified project.
 --
--- /See:/ 'groupsList'' smart constructor.
-data GroupsList' = GroupsList'
+-- /See:/ 'groupsList' smart constructor.
+data GroupsList = GroupsList
     { _glOrderBy    :: !(Maybe Text)
     , _glProject    :: !Text
     , _glFilter     :: !(Maybe Text)
@@ -66,7 +66,7 @@ data GroupsList' = GroupsList'
     , _glMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GroupsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'GroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,11 +79,11 @@ data GroupsList' = GroupsList'
 -- * 'glPageToken'
 --
 -- * 'glMaxResults'
-groupsList'
+groupsList
     :: Text -- ^ 'glProject'
-    -> GroupsList'
-groupsList' pGlProject_ =
-    GroupsList'
+    -> GroupsList
+groupsList pGlProject_ =
+    GroupsList
     { _glOrderBy = Nothing
     , _glProject = pGlProject_
     , _glFilter = Nothing
@@ -99,12 +99,12 @@ groupsList' pGlProject_ =
 -- first). Use this to sort resources like operations so that the newest
 -- operation is returned first. Currently, only sorting by name or
 -- creationTimestamp desc is supported.
-glOrderBy :: Lens' GroupsList' (Maybe Text)
+glOrderBy :: Lens' GroupsList (Maybe Text)
 glOrderBy
   = lens _glOrderBy (\ s a -> s{_glOrderBy = a})
 
 -- | Project ID for this request.
-glProject :: Lens' GroupsList' Text
+glProject :: Lens' GroupsList Text
 glProject
   = lens _glProject (\ s a -> s{_glProject = a})
 
@@ -119,24 +119,24 @@ glProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-glFilter :: Lens' GroupsList' (Maybe Text)
+glFilter :: Lens' GroupsList (Maybe Text)
 glFilter = lens _glFilter (\ s a -> s{_glFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-glPageToken :: Lens' GroupsList' (Maybe Text)
+glPageToken :: Lens' GroupsList (Maybe Text)
 glPageToken
   = lens _glPageToken (\ s a -> s{_glPageToken = a})
 
 -- | Maximum count of results to be returned.
-glMaxResults :: Lens' GroupsList' Word32
+glMaxResults :: Lens' GroupsList Word32
 glMaxResults
   = lens _glMaxResults (\ s a -> s{_glMaxResults = a})
 
-instance GoogleRequest GroupsList' where
-        type Rs GroupsList' = GroupList
-        requestClient GroupsList'{..}
+instance GoogleRequest GroupsList where
+        type Rs GroupsList = GroupList
+        requestClient GroupsList{..}
           = go _glProject _glOrderBy _glFilter _glPageToken
               (Just _glMaxResults)
               (Just AltJSON)

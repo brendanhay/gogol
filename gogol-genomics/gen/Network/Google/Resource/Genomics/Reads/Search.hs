@@ -39,25 +39,25 @@ module Network.Google.Resource.Genomics.Reads.Search
       ReadsSearchResource
 
     -- * Creating a Request
-    , readsSearch'
-    , ReadsSearch'
+    , readsSearch
+    , ReadsSearch
 
     -- * Request Lenses
-    , rsXgafv
-    , rsUploadProtocol
-    , rsPp
-    , rsAccessToken
-    , rsUploadType
-    , rsPayload
-    , rsBearerToken
-    , rsCallback
+    , reaXgafv
+    , reaUploadProtocol
+    , reaPp
+    , reaAccessToken
+    , reaUploadType
+    , reaPayload
+    , reaBearerToken
+    , reaCallback
     ) where
 
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.reads.search@ method which the
--- 'ReadsSearch'' request conforms to.
+-- 'ReadsSearch' request conforms to.
 type ReadsSearchResource =
      "v1" :>
        "reads" :>
@@ -85,103 +85,104 @@ type ReadsSearchResource =
 -- genomic coordinates are returned in a deterministic order. Implements
 -- [GlobalAllianceApi.searchReads](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/readmethods.avdl#L85).
 --
--- /See:/ 'readsSearch'' smart constructor.
-data ReadsSearch' = ReadsSearch'
-    { _rsXgafv          :: !(Maybe Text)
-    , _rsUploadProtocol :: !(Maybe Text)
-    , _rsPp             :: !Bool
-    , _rsAccessToken    :: !(Maybe Text)
-    , _rsUploadType     :: !(Maybe Text)
-    , _rsPayload        :: !SearchReadsRequest
-    , _rsBearerToken    :: !(Maybe Text)
-    , _rsCallback       :: !(Maybe Text)
+-- /See:/ 'readsSearch' smart constructor.
+data ReadsSearch = ReadsSearch
+    { _reaXgafv          :: !(Maybe Text)
+    , _reaUploadProtocol :: !(Maybe Text)
+    , _reaPp             :: !Bool
+    , _reaAccessToken    :: !(Maybe Text)
+    , _reaUploadType     :: !(Maybe Text)
+    , _reaPayload        :: !SearchReadsRequest
+    , _reaBearerToken    :: !(Maybe Text)
+    , _reaCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReadsSearch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReadsSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rsXgafv'
+-- * 'reaXgafv'
 --
--- * 'rsUploadProtocol'
+-- * 'reaUploadProtocol'
 --
--- * 'rsPp'
+-- * 'reaPp'
 --
--- * 'rsAccessToken'
+-- * 'reaAccessToken'
 --
--- * 'rsUploadType'
+-- * 'reaUploadType'
 --
--- * 'rsPayload'
+-- * 'reaPayload'
 --
--- * 'rsBearerToken'
+-- * 'reaBearerToken'
 --
--- * 'rsCallback'
-readsSearch'
-    :: SearchReadsRequest -- ^ 'rsPayload'
-    -> ReadsSearch'
-readsSearch' pRsPayload_ =
-    ReadsSearch'
-    { _rsXgafv = Nothing
-    , _rsUploadProtocol = Nothing
-    , _rsPp = True
-    , _rsAccessToken = Nothing
-    , _rsUploadType = Nothing
-    , _rsPayload = pRsPayload_
-    , _rsBearerToken = Nothing
-    , _rsCallback = Nothing
+-- * 'reaCallback'
+readsSearch
+    :: SearchReadsRequest -- ^ 'reaPayload'
+    -> ReadsSearch
+readsSearch pReaPayload_ =
+    ReadsSearch
+    { _reaXgafv = Nothing
+    , _reaUploadProtocol = Nothing
+    , _reaPp = True
+    , _reaAccessToken = Nothing
+    , _reaUploadType = Nothing
+    , _reaPayload = pReaPayload_
+    , _reaBearerToken = Nothing
+    , _reaCallback = Nothing
     }
 
 -- | V1 error format.
-rsXgafv :: Lens' ReadsSearch' (Maybe Text)
-rsXgafv = lens _rsXgafv (\ s a -> s{_rsXgafv = a})
+reaXgafv :: Lens' ReadsSearch (Maybe Text)
+reaXgafv = lens _reaXgafv (\ s a -> s{_reaXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-rsUploadProtocol :: Lens' ReadsSearch' (Maybe Text)
-rsUploadProtocol
-  = lens _rsUploadProtocol
-      (\ s a -> s{_rsUploadProtocol = a})
+reaUploadProtocol :: Lens' ReadsSearch (Maybe Text)
+reaUploadProtocol
+  = lens _reaUploadProtocol
+      (\ s a -> s{_reaUploadProtocol = a})
 
 -- | Pretty-print response.
-rsPp :: Lens' ReadsSearch' Bool
-rsPp = lens _rsPp (\ s a -> s{_rsPp = a})
+reaPp :: Lens' ReadsSearch Bool
+reaPp = lens _reaPp (\ s a -> s{_reaPp = a})
 
 -- | OAuth access token.
-rsAccessToken :: Lens' ReadsSearch' (Maybe Text)
-rsAccessToken
-  = lens _rsAccessToken
-      (\ s a -> s{_rsAccessToken = a})
+reaAccessToken :: Lens' ReadsSearch (Maybe Text)
+reaAccessToken
+  = lens _reaAccessToken
+      (\ s a -> s{_reaAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-rsUploadType :: Lens' ReadsSearch' (Maybe Text)
-rsUploadType
-  = lens _rsUploadType (\ s a -> s{_rsUploadType = a})
+reaUploadType :: Lens' ReadsSearch (Maybe Text)
+reaUploadType
+  = lens _reaUploadType
+      (\ s a -> s{_reaUploadType = a})
 
 -- | Multipart request metadata.
-rsPayload :: Lens' ReadsSearch' SearchReadsRequest
-rsPayload
-  = lens _rsPayload (\ s a -> s{_rsPayload = a})
+reaPayload :: Lens' ReadsSearch SearchReadsRequest
+reaPayload
+  = lens _reaPayload (\ s a -> s{_reaPayload = a})
 
 -- | OAuth bearer token.
-rsBearerToken :: Lens' ReadsSearch' (Maybe Text)
-rsBearerToken
-  = lens _rsBearerToken
-      (\ s a -> s{_rsBearerToken = a})
+reaBearerToken :: Lens' ReadsSearch (Maybe Text)
+reaBearerToken
+  = lens _reaBearerToken
+      (\ s a -> s{_reaBearerToken = a})
 
 -- | JSONP
-rsCallback :: Lens' ReadsSearch' (Maybe Text)
-rsCallback
-  = lens _rsCallback (\ s a -> s{_rsCallback = a})
+reaCallback :: Lens' ReadsSearch (Maybe Text)
+reaCallback
+  = lens _reaCallback (\ s a -> s{_reaCallback = a})
 
-instance GoogleRequest ReadsSearch' where
-        type Rs ReadsSearch' = SearchReadsResponse
-        requestClient ReadsSearch'{..}
-          = go _rsXgafv _rsUploadProtocol (Just _rsPp)
-              _rsAccessToken
-              _rsUploadType
-              _rsBearerToken
-              _rsCallback
+instance GoogleRequest ReadsSearch where
+        type Rs ReadsSearch = SearchReadsResponse
+        requestClient ReadsSearch{..}
+          = go _reaXgafv _reaUploadProtocol (Just _reaPp)
+              _reaAccessToken
+              _reaUploadType
+              _reaBearerToken
+              _reaCallback
               (Just AltJSON)
-              _rsPayload
+              _reaPayload
               genomicsService
           where go
                   = buildClient (Proxy :: Proxy ReadsSearchResource)

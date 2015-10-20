@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Orders.Get
       OrdersGetResource
 
     -- * Creating a Request
-    , ordersGet'
-    , OrdersGet'
+    , ordersGet
+    , OrdersGet
 
     -- * Request Lenses
     , ogMerchantId
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.get@ method which the
--- 'OrdersGet'' request conforms to.
+-- 'OrdersGet' request conforms to.
 type OrdersGetResource =
      Capture "merchantId" Word64 :>
        "orders" :>
@@ -50,42 +50,42 @@ type OrdersGetResource =
 
 -- | Retrieves an order from your Merchant Center account.
 --
--- /See:/ 'ordersGet'' smart constructor.
-data OrdersGet' = OrdersGet'
+-- /See:/ 'ordersGet' smart constructor.
+data OrdersGet = OrdersGet
     { _ogMerchantId :: !Word64
     , _ogOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ogMerchantId'
 --
 -- * 'ogOrderId'
-ordersGet'
+ordersGet
     :: Word64 -- ^ 'ogMerchantId'
     -> Text -- ^ 'ogOrderId'
-    -> OrdersGet'
-ordersGet' pOgMerchantId_ pOgOrderId_ =
-    OrdersGet'
+    -> OrdersGet
+ordersGet pOgMerchantId_ pOgOrderId_ =
+    OrdersGet
     { _ogMerchantId = pOgMerchantId_
     , _ogOrderId = pOgOrderId_
     }
 
 -- | The ID of the managing account.
-ogMerchantId :: Lens' OrdersGet' Word64
+ogMerchantId :: Lens' OrdersGet Word64
 ogMerchantId
   = lens _ogMerchantId (\ s a -> s{_ogMerchantId = a})
 
 -- | The ID of the order.
-ogOrderId :: Lens' OrdersGet' Text
+ogOrderId :: Lens' OrdersGet Text
 ogOrderId
   = lens _ogOrderId (\ s a -> s{_ogOrderId = a})
 
-instance GoogleRequest OrdersGet' where
-        type Rs OrdersGet' = Order
-        requestClient OrdersGet'{..}
+instance GoogleRequest OrdersGet where
+        type Rs OrdersGet = Order
+        requestClient OrdersGet{..}
           = go _ogMerchantId _ogOrderId (Just AltJSON)
               shoppingContentService
           where go

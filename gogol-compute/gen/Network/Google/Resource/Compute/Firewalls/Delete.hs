@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Firewalls.Delete
       FirewallsDeleteResource
 
     -- * Creating a Request
-    , firewallsDelete'
-    , FirewallsDelete'
+    , firewallsDelete
+    , FirewallsDelete
 
     -- * Request Lenses
     , fdProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.firewalls.delete@ method which the
--- 'FirewallsDelete'' request conforms to.
+-- 'FirewallsDelete' request conforms to.
 type FirewallsDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,42 +51,42 @@ type FirewallsDeleteResource =
 
 -- | Deletes the specified firewall resource.
 --
--- /See:/ 'firewallsDelete'' smart constructor.
-data FirewallsDelete' = FirewallsDelete'
+-- /See:/ 'firewallsDelete' smart constructor.
+data FirewallsDelete = FirewallsDelete
     { _fdProject  :: !Text
     , _fdFirewall :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FirewallsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'FirewallsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fdProject'
 --
 -- * 'fdFirewall'
-firewallsDelete'
+firewallsDelete
     :: Text -- ^ 'fdProject'
     -> Text -- ^ 'fdFirewall'
-    -> FirewallsDelete'
-firewallsDelete' pFdProject_ pFdFirewall_ =
-    FirewallsDelete'
+    -> FirewallsDelete
+firewallsDelete pFdProject_ pFdFirewall_ =
+    FirewallsDelete
     { _fdProject = pFdProject_
     , _fdFirewall = pFdFirewall_
     }
 
 -- | Project ID for this request.
-fdProject :: Lens' FirewallsDelete' Text
+fdProject :: Lens' FirewallsDelete Text
 fdProject
   = lens _fdProject (\ s a -> s{_fdProject = a})
 
 -- | Name of the firewall resource to delete.
-fdFirewall :: Lens' FirewallsDelete' Text
+fdFirewall :: Lens' FirewallsDelete Text
 fdFirewall
   = lens _fdFirewall (\ s a -> s{_fdFirewall = a})
 
-instance GoogleRequest FirewallsDelete' where
-        type Rs FirewallsDelete' = Operation
-        requestClient FirewallsDelete'{..}
+instance GoogleRequest FirewallsDelete where
+        type Rs FirewallsDelete = Operation
+        requestClient FirewallsDelete{..}
           = go _fdProject _fdFirewall (Just AltJSON)
               computeService
           where go

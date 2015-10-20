@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Instances.SetScheduling
       InstancesSetSchedulingResource
 
     -- * Creating a Request
-    , instancesSetScheduling'
-    , InstancesSetScheduling'
+    , instancesSetScheduling
+    , InstancesSetScheduling
 
     -- * Request Lenses
     , issProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.setScheduling@ method which the
--- 'InstancesSetScheduling'' request conforms to.
+-- 'InstancesSetScheduling' request conforms to.
 type InstancesSetSchedulingResource =
      Capture "project" Text :>
        "zones" :>
@@ -56,15 +56,15 @@ type InstancesSetSchedulingResource =
 
 -- | Sets an instance\'s scheduling options.
 --
--- /See:/ 'instancesSetScheduling'' smart constructor.
-data InstancesSetScheduling' = InstancesSetScheduling'
+-- /See:/ 'instancesSetScheduling' smart constructor.
+data InstancesSetScheduling = InstancesSetScheduling
     { _issProject  :: !Text
     , _issZone     :: !Text
     , _issPayload  :: !Scheduling
     , _issInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesSetScheduling'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesSetScheduling' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,14 +75,14 @@ data InstancesSetScheduling' = InstancesSetScheduling'
 -- * 'issPayload'
 --
 -- * 'issInstance'
-instancesSetScheduling'
+instancesSetScheduling
     :: Text -- ^ 'issProject'
     -> Text -- ^ 'issZone'
     -> Scheduling -- ^ 'issPayload'
     -> Text -- ^ 'issInstance'
-    -> InstancesSetScheduling'
-instancesSetScheduling' pIssProject_ pIssZone_ pIssPayload_ pIssInstance_ =
-    InstancesSetScheduling'
+    -> InstancesSetScheduling
+instancesSetScheduling pIssProject_ pIssZone_ pIssPayload_ pIssInstance_ =
+    InstancesSetScheduling
     { _issProject = pIssProject_
     , _issZone = pIssZone_
     , _issPayload = pIssPayload_
@@ -90,27 +90,27 @@ instancesSetScheduling' pIssProject_ pIssZone_ pIssPayload_ pIssInstance_ =
     }
 
 -- | Project ID for this request.
-issProject :: Lens' InstancesSetScheduling' Text
+issProject :: Lens' InstancesSetScheduling Text
 issProject
   = lens _issProject (\ s a -> s{_issProject = a})
 
 -- | The name of the zone for this request.
-issZone :: Lens' InstancesSetScheduling' Text
+issZone :: Lens' InstancesSetScheduling Text
 issZone = lens _issZone (\ s a -> s{_issZone = a})
 
 -- | Multipart request metadata.
-issPayload :: Lens' InstancesSetScheduling' Scheduling
+issPayload :: Lens' InstancesSetScheduling Scheduling
 issPayload
   = lens _issPayload (\ s a -> s{_issPayload = a})
 
 -- | Instance name.
-issInstance :: Lens' InstancesSetScheduling' Text
+issInstance :: Lens' InstancesSetScheduling Text
 issInstance
   = lens _issInstance (\ s a -> s{_issInstance = a})
 
-instance GoogleRequest InstancesSetScheduling' where
-        type Rs InstancesSetScheduling' = Operation
-        requestClient InstancesSetScheduling'{..}
+instance GoogleRequest InstancesSetScheduling where
+        type Rs InstancesSetScheduling = Operation
+        requestClient InstancesSetScheduling{..}
           = go _issProject _issZone _issInstance (Just AltJSON)
               _issPayload
               computeService

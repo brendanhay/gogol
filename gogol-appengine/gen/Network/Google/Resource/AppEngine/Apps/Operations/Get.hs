@@ -31,8 +31,8 @@ module Network.Google.Resource.AppEngine.Apps.Operations.Get
       AppsOperationsGetResource
 
     -- * Creating a Request
-    , appsOperationsGet'
-    , AppsOperationsGet'
+    , appsOperationsGet
+    , AppsOperationsGet
 
     -- * Request Lenses
     , aogXgafv
@@ -50,7 +50,7 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.operations.get@ method which the
--- 'AppsOperationsGet'' request conforms to.
+-- 'AppsOperationsGet' request conforms to.
 type AppsOperationsGetResource =
      "v1beta4" :>
        "apps" :>
@@ -70,8 +70,8 @@ type AppsOperationsGetResource =
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ 'appsOperationsGet'' smart constructor.
-data AppsOperationsGet' = AppsOperationsGet'
+-- /See:/ 'appsOperationsGet' smart constructor.
+data AppsOperationsGet = AppsOperationsGet
     { _aogXgafv          :: !(Maybe Text)
     , _aogUploadProtocol :: !(Maybe Text)
     , _aogPp             :: !Bool
@@ -83,7 +83,7 @@ data AppsOperationsGet' = AppsOperationsGet'
     , _aogCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AppsOperationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AppsOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -104,12 +104,12 @@ data AppsOperationsGet' = AppsOperationsGet'
 -- * 'aogOperationsId'
 --
 -- * 'aogCallback'
-appsOperationsGet'
+appsOperationsGet
     :: Text -- ^ 'aogAppsId'
     -> Text -- ^ 'aogOperationsId'
-    -> AppsOperationsGet'
-appsOperationsGet' pAogAppsId_ pAogOperationsId_ =
-    AppsOperationsGet'
+    -> AppsOperationsGet
+appsOperationsGet pAogAppsId_ pAogOperationsId_ =
+    AppsOperationsGet
     { _aogXgafv = Nothing
     , _aogUploadProtocol = Nothing
     , _aogPp = True
@@ -122,56 +122,56 @@ appsOperationsGet' pAogAppsId_ pAogOperationsId_ =
     }
 
 -- | V1 error format.
-aogXgafv :: Lens' AppsOperationsGet' (Maybe Text)
+aogXgafv :: Lens' AppsOperationsGet (Maybe Text)
 aogXgafv = lens _aogXgafv (\ s a -> s{_aogXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-aogUploadProtocol :: Lens' AppsOperationsGet' (Maybe Text)
+aogUploadProtocol :: Lens' AppsOperationsGet (Maybe Text)
 aogUploadProtocol
   = lens _aogUploadProtocol
       (\ s a -> s{_aogUploadProtocol = a})
 
 -- | Pretty-print response.
-aogPp :: Lens' AppsOperationsGet' Bool
+aogPp :: Lens' AppsOperationsGet Bool
 aogPp = lens _aogPp (\ s a -> s{_aogPp = a})
 
 -- | OAuth access token.
-aogAccessToken :: Lens' AppsOperationsGet' (Maybe Text)
+aogAccessToken :: Lens' AppsOperationsGet (Maybe Text)
 aogAccessToken
   = lens _aogAccessToken
       (\ s a -> s{_aogAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-aogUploadType :: Lens' AppsOperationsGet' (Maybe Text)
+aogUploadType :: Lens' AppsOperationsGet (Maybe Text)
 aogUploadType
   = lens _aogUploadType
       (\ s a -> s{_aogUploadType = a})
 
 -- | OAuth bearer token.
-aogBearerToken :: Lens' AppsOperationsGet' (Maybe Text)
+aogBearerToken :: Lens' AppsOperationsGet (Maybe Text)
 aogBearerToken
   = lens _aogBearerToken
       (\ s a -> s{_aogBearerToken = a})
 
 -- | Part of \`name\`. The name of the operation resource.
-aogAppsId :: Lens' AppsOperationsGet' Text
+aogAppsId :: Lens' AppsOperationsGet Text
 aogAppsId
   = lens _aogAppsId (\ s a -> s{_aogAppsId = a})
 
 -- | Part of \`name\`. See documentation of \`appsId\`.
-aogOperationsId :: Lens' AppsOperationsGet' Text
+aogOperationsId :: Lens' AppsOperationsGet Text
 aogOperationsId
   = lens _aogOperationsId
       (\ s a -> s{_aogOperationsId = a})
 
 -- | JSONP
-aogCallback :: Lens' AppsOperationsGet' (Maybe Text)
+aogCallback :: Lens' AppsOperationsGet (Maybe Text)
 aogCallback
   = lens _aogCallback (\ s a -> s{_aogCallback = a})
 
-instance GoogleRequest AppsOperationsGet' where
-        type Rs AppsOperationsGet' = Operation
-        requestClient AppsOperationsGet'{..}
+instance GoogleRequest AppsOperationsGet where
+        type Rs AppsOperationsGet = Operation
+        requestClient AppsOperationsGet{..}
           = go _aogAppsId _aogOperationsId _aogXgafv
               _aogUploadProtocol
               (Just _aogPp)

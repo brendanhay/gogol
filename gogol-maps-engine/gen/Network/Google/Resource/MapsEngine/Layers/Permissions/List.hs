@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Layers.Permissions.List
       LayersPermissionsListResource
 
     -- * Creating a Request
-    , layersPermissionsList'
-    , LayersPermissionsList'
+    , layersPermissionsList
+    , LayersPermissionsList
 
     -- * Request Lenses
     , lplId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.layers.permissions.list@ method which the
--- 'LayersPermissionsList'' request conforms to.
+-- 'LayersPermissionsList' request conforms to.
 type LayersPermissionsListResource =
      "layers" :>
        Capture "id" Text :>
@@ -50,32 +50,32 @@ type LayersPermissionsListResource =
 
 -- | Return all of the permissions for the specified asset.
 --
--- /See:/ 'layersPermissionsList'' smart constructor.
-newtype LayersPermissionsList' = LayersPermissionsList'
+-- /See:/ 'layersPermissionsList' smart constructor.
+newtype LayersPermissionsList = LayersPermissionsList
     { _lplId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersPermissionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersPermissionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lplId'
-layersPermissionsList'
+layersPermissionsList
     :: Text -- ^ 'lplId'
-    -> LayersPermissionsList'
-layersPermissionsList' pLplId_ =
-    LayersPermissionsList'
+    -> LayersPermissionsList
+layersPermissionsList pLplId_ =
+    LayersPermissionsList
     { _lplId = pLplId_
     }
 
 -- | The ID of the asset whose permissions will be listed.
-lplId :: Lens' LayersPermissionsList' Text
+lplId :: Lens' LayersPermissionsList Text
 lplId = lens _lplId (\ s a -> s{_lplId = a})
 
-instance GoogleRequest LayersPermissionsList' where
-        type Rs LayersPermissionsList' =
+instance GoogleRequest LayersPermissionsList where
+        type Rs LayersPermissionsList =
              PermissionsListResponse
-        requestClient LayersPermissionsList'{..}
+        requestClient LayersPermissionsList{..}
           = go _lplId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

@@ -27,8 +27,8 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Get
       ClientAccessGetResource
 
     -- * Creating a Request
-    , clientAccessGet'
-    , ClientAccessGet'
+    , clientAccessGet
+    , ClientAccessGet
 
     -- * Request Lenses
     , cagSponsorAccountId
@@ -39,7 +39,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.clientaccess.get@ method which the
--- 'ClientAccessGet'' request conforms to.
+-- 'ClientAccessGet' request conforms to.
 type ClientAccessGetResource =
      "clientAccess" :>
        Capture "clientAccountId" Int64 :>
@@ -48,42 +48,42 @@ type ClientAccessGetResource =
              Get '[JSON] ClientAccessCapabilities
 
 --
--- /See:/ 'clientAccessGet'' smart constructor.
-data ClientAccessGet' = ClientAccessGet'
+-- /See:/ 'clientAccessGet' smart constructor.
+data ClientAccessGet = ClientAccessGet
     { _cagSponsorAccountId :: !Int32
     , _cagClientAccountId  :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ClientAccessGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ClientAccessGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cagSponsorAccountId'
 --
 -- * 'cagClientAccountId'
-clientAccessGet'
+clientAccessGet
     :: Int32 -- ^ 'cagSponsorAccountId'
     -> Int64 -- ^ 'cagClientAccountId'
-    -> ClientAccessGet'
-clientAccessGet' pCagSponsorAccountId_ pCagClientAccountId_ =
-    ClientAccessGet'
+    -> ClientAccessGet
+clientAccessGet pCagSponsorAccountId_ pCagClientAccountId_ =
+    ClientAccessGet
     { _cagSponsorAccountId = pCagSponsorAccountId_
     , _cagClientAccountId = pCagClientAccountId_
     }
 
-cagSponsorAccountId :: Lens' ClientAccessGet' Int32
+cagSponsorAccountId :: Lens' ClientAccessGet Int32
 cagSponsorAccountId
   = lens _cagSponsorAccountId
       (\ s a -> s{_cagSponsorAccountId = a})
 
-cagClientAccountId :: Lens' ClientAccessGet' Int64
+cagClientAccountId :: Lens' ClientAccessGet Int64
 cagClientAccountId
   = lens _cagClientAccountId
       (\ s a -> s{_cagClientAccountId = a})
 
-instance GoogleRequest ClientAccessGet' where
-        type Rs ClientAccessGet' = ClientAccessCapabilities
-        requestClient ClientAccessGet'{..}
+instance GoogleRequest ClientAccessGet where
+        type Rs ClientAccessGet = ClientAccessCapabilities
+        requestClient ClientAccessGet{..}
           = go _cagClientAccountId (Just _cagSponsorAccountId)
               (Just AltJSON)
               adExchangeBuyerService

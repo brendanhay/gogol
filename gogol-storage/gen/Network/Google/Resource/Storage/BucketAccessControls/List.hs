@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.BucketAccessControls.List
       BucketAccessControlsListResource
 
     -- * Creating a Request
-    , bucketAccessControlsList'
-    , BucketAccessControlsList'
+    , bucketAccessControlsList
+    , BucketAccessControlsList
 
     -- * Request Lenses
     , baclBucket
@@ -40,7 +40,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.bucketAccessControls.list@ method which the
--- 'BucketAccessControlsList'' request conforms to.
+-- 'BucketAccessControlsList' request conforms to.
 type BucketAccessControlsListResource =
      "b" :>
        Capture "bucket" Text :>
@@ -50,34 +50,33 @@ type BucketAccessControlsListResource =
 
 -- | Retrieves ACL entries on the specified bucket.
 --
--- /See:/ 'bucketAccessControlsList'' smart constructor.
-newtype BucketAccessControlsList' = BucketAccessControlsList'
+-- /See:/ 'bucketAccessControlsList' smart constructor.
+newtype BucketAccessControlsList = BucketAccessControlsList
     { _baclBucket :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BucketAccessControlsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'BucketAccessControlsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'baclBucket'
-bucketAccessControlsList'
+bucketAccessControlsList
     :: Text -- ^ 'baclBucket'
-    -> BucketAccessControlsList'
-bucketAccessControlsList' pBaclBucket_ =
-    BucketAccessControlsList'
+    -> BucketAccessControlsList
+bucketAccessControlsList pBaclBucket_ =
+    BucketAccessControlsList
     { _baclBucket = pBaclBucket_
     }
 
 -- | Name of a bucket.
-baclBucket :: Lens' BucketAccessControlsList' Text
+baclBucket :: Lens' BucketAccessControlsList Text
 baclBucket
   = lens _baclBucket (\ s a -> s{_baclBucket = a})
 
-instance GoogleRequest BucketAccessControlsList'
-         where
-        type Rs BucketAccessControlsList' =
+instance GoogleRequest BucketAccessControlsList where
+        type Rs BucketAccessControlsList =
              BucketAccessControls
-        requestClient BucketAccessControlsList'{..}
+        requestClient BucketAccessControlsList{..}
           = go _baclBucket (Just AltJSON) storageService
           where go
                   = buildClient

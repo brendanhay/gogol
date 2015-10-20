@@ -29,18 +29,18 @@ module Network.Google.Resource.Webmasters.Sites.Delete
       SitesDeleteResource
 
     -- * Creating a Request
-    , sitesDelete'
-    , SitesDelete'
+    , sitesDelete
+    , SitesDelete
 
     -- * Request Lenses
-    , sdSiteURL
+    , sSiteURL
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.sites.delete@ method which the
--- 'SitesDelete'' request conforms to.
+-- 'SitesDelete' request conforms to.
 type SitesDeleteResource =
      "sites" :>
        Capture "siteUrl" Text :>
@@ -48,34 +48,33 @@ type SitesDeleteResource =
 
 -- | Removes a site from the set of the user\'s Webmaster Tools sites.
 --
--- /See:/ 'sitesDelete'' smart constructor.
-newtype SitesDelete' = SitesDelete'
-    { _sdSiteURL :: Text
+-- /See:/ 'sitesDelete' smart constructor.
+newtype SitesDelete = SitesDelete
+    { _sSiteURL :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SitesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'SitesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sdSiteURL'
-sitesDelete'
-    :: Text -- ^ 'sdSiteURL'
-    -> SitesDelete'
-sitesDelete' pSdSiteURL_ =
-    SitesDelete'
-    { _sdSiteURL = pSdSiteURL_
+-- * 'sSiteURL'
+sitesDelete
+    :: Text -- ^ 'sSiteURL'
+    -> SitesDelete
+sitesDelete pSSiteURL_ =
+    SitesDelete
+    { _sSiteURL = pSSiteURL_
     }
 
 -- | The URI of the property as defined in Search Console. Examples:
 -- http:\/\/www.example.com\/ or android-app:\/\/com.example\/
-sdSiteURL :: Lens' SitesDelete' Text
-sdSiteURL
-  = lens _sdSiteURL (\ s a -> s{_sdSiteURL = a})
+sSiteURL :: Lens' SitesDelete Text
+sSiteURL = lens _sSiteURL (\ s a -> s{_sSiteURL = a})
 
-instance GoogleRequest SitesDelete' where
-        type Rs SitesDelete' = ()
-        requestClient SitesDelete'{..}
-          = go _sdSiteURL (Just AltJSON) webmasterToolsService
+instance GoogleRequest SitesDelete where
+        type Rs SitesDelete = ()
+        requestClient SitesDelete{..}
+          = go _sSiteURL (Just AltJSON) webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitesDeleteResource)
                       mempty

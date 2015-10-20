@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Disks.CreateSnapshot
       DisksCreateSnapshotResource
 
     -- * Creating a Request
-    , disksCreateSnapshot'
-    , DisksCreateSnapshot'
+    , disksCreateSnapshot
+    , DisksCreateSnapshot
 
     -- * Request Lenses
     , dcsProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.disks.createSnapshot@ method which the
--- 'DisksCreateSnapshot'' request conforms to.
+-- 'DisksCreateSnapshot' request conforms to.
 type DisksCreateSnapshotResource =
      Capture "project" Text :>
        "zones" :>
@@ -56,15 +56,15 @@ type DisksCreateSnapshotResource =
 
 -- | Creates a snapshot of this disk.
 --
--- /See:/ 'disksCreateSnapshot'' smart constructor.
-data DisksCreateSnapshot' = DisksCreateSnapshot'
+-- /See:/ 'disksCreateSnapshot' smart constructor.
+data DisksCreateSnapshot = DisksCreateSnapshot
     { _dcsProject :: !Text
     , _dcsDisk    :: !Text
     , _dcsZone    :: !Text
     , _dcsPayload :: !Snapshot
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DisksCreateSnapshot'' with the minimum fields required to make a request.
+-- | Creates a value of 'DisksCreateSnapshot' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,14 +75,14 @@ data DisksCreateSnapshot' = DisksCreateSnapshot'
 -- * 'dcsZone'
 --
 -- * 'dcsPayload'
-disksCreateSnapshot'
+disksCreateSnapshot
     :: Text -- ^ 'dcsProject'
     -> Text -- ^ 'dcsDisk'
     -> Text -- ^ 'dcsZone'
     -> Snapshot -- ^ 'dcsPayload'
-    -> DisksCreateSnapshot'
-disksCreateSnapshot' pDcsProject_ pDcsDisk_ pDcsZone_ pDcsPayload_ =
-    DisksCreateSnapshot'
+    -> DisksCreateSnapshot
+disksCreateSnapshot pDcsProject_ pDcsDisk_ pDcsZone_ pDcsPayload_ =
+    DisksCreateSnapshot
     { _dcsProject = pDcsProject_
     , _dcsDisk = pDcsDisk_
     , _dcsZone = pDcsZone_
@@ -90,26 +90,26 @@ disksCreateSnapshot' pDcsProject_ pDcsDisk_ pDcsZone_ pDcsPayload_ =
     }
 
 -- | Project ID for this request.
-dcsProject :: Lens' DisksCreateSnapshot' Text
+dcsProject :: Lens' DisksCreateSnapshot Text
 dcsProject
   = lens _dcsProject (\ s a -> s{_dcsProject = a})
 
 -- | Name of the persistent disk to snapshot.
-dcsDisk :: Lens' DisksCreateSnapshot' Text
+dcsDisk :: Lens' DisksCreateSnapshot Text
 dcsDisk = lens _dcsDisk (\ s a -> s{_dcsDisk = a})
 
 -- | The name of the zone for this request.
-dcsZone :: Lens' DisksCreateSnapshot' Text
+dcsZone :: Lens' DisksCreateSnapshot Text
 dcsZone = lens _dcsZone (\ s a -> s{_dcsZone = a})
 
 -- | Multipart request metadata.
-dcsPayload :: Lens' DisksCreateSnapshot' Snapshot
+dcsPayload :: Lens' DisksCreateSnapshot Snapshot
 dcsPayload
   = lens _dcsPayload (\ s a -> s{_dcsPayload = a})
 
-instance GoogleRequest DisksCreateSnapshot' where
-        type Rs DisksCreateSnapshot' = Operation
-        requestClient DisksCreateSnapshot'{..}
+instance GoogleRequest DisksCreateSnapshot where
+        type Rs DisksCreateSnapshot = Operation
+        requestClient DisksCreateSnapshot{..}
           = go _dcsProject _dcsZone _dcsDisk (Just AltJSON)
               _dcsPayload
               computeService

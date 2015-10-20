@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.ProFileUserLinks.List
       ManagementProFileUserLinksListResource
 
     -- * Creating a Request
-    , managementProFileUserLinksList'
-    , ManagementProFileUserLinksList'
+    , managementProFileUserLinksList
+    , ManagementProFileUserLinksList
 
     -- * Request Lenses
     , mpfullWebPropertyId
@@ -44,7 +44,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profileUserLinks.list@ method which the
--- 'ManagementProFileUserLinksList'' request conforms to.
+-- 'ManagementProFileUserLinksList' request conforms to.
 type ManagementProFileUserLinksListResource =
      "management" :>
        "accounts" :>
@@ -61,8 +61,8 @@ type ManagementProFileUserLinksListResource =
 
 -- | Lists profile-user links for a given view (profile).
 --
--- /See:/ 'managementProFileUserLinksList'' smart constructor.
-data ManagementProFileUserLinksList' = ManagementProFileUserLinksList'
+-- /See:/ 'managementProFileUserLinksList' smart constructor.
+data ManagementProFileUserLinksList = ManagementProFileUserLinksList
     { _mpfullWebPropertyId :: !Text
     , _mpfullProFileId     :: !Text
     , _mpfullAccountId     :: !Text
@@ -70,7 +70,7 @@ data ManagementProFileUserLinksList' = ManagementProFileUserLinksList'
     , _mpfullMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementProFileUserLinksList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementProFileUserLinksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -83,13 +83,13 @@ data ManagementProFileUserLinksList' = ManagementProFileUserLinksList'
 -- * 'mpfullStartIndex'
 --
 -- * 'mpfullMaxResults'
-managementProFileUserLinksList'
+managementProFileUserLinksList
     :: Text -- ^ 'mpfullWebPropertyId'
     -> Text -- ^ 'mpfullProFileId'
     -> Text -- ^ 'mpfullAccountId'
-    -> ManagementProFileUserLinksList'
-managementProFileUserLinksList' pMpfullWebPropertyId_ pMpfullProFileId_ pMpfullAccountId_ =
-    ManagementProFileUserLinksList'
+    -> ManagementProFileUserLinksList
+managementProFileUserLinksList pMpfullWebPropertyId_ pMpfullProFileId_ pMpfullAccountId_ =
+    ManagementProFileUserLinksList
     { _mpfullWebPropertyId = pMpfullWebPropertyId_
     , _mpfullProFileId = pMpfullProFileId_
     , _mpfullAccountId = pMpfullAccountId_
@@ -100,7 +100,7 @@ managementProFileUserLinksList' pMpfullWebPropertyId_ pMpfullProFileId_ pMpfullA
 -- | Web Property ID which the given view (profile) belongs to. Can either be
 -- a specific web property ID or \'~all\', which refers to all the web
 -- properties that user has access to.
-mpfullWebPropertyId :: Lens' ManagementProFileUserLinksList' Text
+mpfullWebPropertyId :: Lens' ManagementProFileUserLinksList Text
 mpfullWebPropertyId
   = lens _mpfullWebPropertyId
       (\ s a -> s{_mpfullWebPropertyId = a})
@@ -108,35 +108,35 @@ mpfullWebPropertyId
 -- | View (Profile) ID to retrieve the profile-user links for. Can either be
 -- a specific profile ID or \'~all\', which refers to all the profiles that
 -- user has access to.
-mpfullProFileId :: Lens' ManagementProFileUserLinksList' Text
+mpfullProFileId :: Lens' ManagementProFileUserLinksList Text
 mpfullProFileId
   = lens _mpfullProFileId
       (\ s a -> s{_mpfullProFileId = a})
 
 -- | Account ID which the given view (profile) belongs to.
-mpfullAccountId :: Lens' ManagementProFileUserLinksList' Text
+mpfullAccountId :: Lens' ManagementProFileUserLinksList Text
 mpfullAccountId
   = lens _mpfullAccountId
       (\ s a -> s{_mpfullAccountId = a})
 
 -- | An index of the first profile-user link to retrieve. Use this parameter
 -- as a pagination mechanism along with the max-results parameter.
-mpfullStartIndex :: Lens' ManagementProFileUserLinksList' (Maybe Int32)
+mpfullStartIndex :: Lens' ManagementProFileUserLinksList (Maybe Int32)
 mpfullStartIndex
   = lens _mpfullStartIndex
       (\ s a -> s{_mpfullStartIndex = a})
 
 -- | The maximum number of profile-user links to include in this response.
-mpfullMaxResults :: Lens' ManagementProFileUserLinksList' (Maybe Int32)
+mpfullMaxResults :: Lens' ManagementProFileUserLinksList (Maybe Int32)
 mpfullMaxResults
   = lens _mpfullMaxResults
       (\ s a -> s{_mpfullMaxResults = a})
 
-instance GoogleRequest
-         ManagementProFileUserLinksList' where
-        type Rs ManagementProFileUserLinksList' =
+instance GoogleRequest ManagementProFileUserLinksList
+         where
+        type Rs ManagementProFileUserLinksList =
              EntityUserLinks
-        requestClient ManagementProFileUserLinksList'{..}
+        requestClient ManagementProFileUserLinksList{..}
           = go _mpfullAccountId _mpfullWebPropertyId
               _mpfullProFileId
               _mpfullStartIndex

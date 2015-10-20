@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.Subscriptions.Delete
       SubscriptionsDeleteResource
 
     -- * Creating a Request
-    , subscriptionsDelete'
-    , SubscriptionsDelete'
+    , subscriptionsDelete
+    , SubscriptionsDelete
 
     -- * Request Lenses
     , sdId
@@ -40,7 +40,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.subscriptions.delete@ method which the
--- 'SubscriptionsDelete'' request conforms to.
+-- 'SubscriptionsDelete' request conforms to.
 type SubscriptionsDeleteResource =
      "subscriptions" :>
        QueryParam "id" Text :>
@@ -48,33 +48,33 @@ type SubscriptionsDeleteResource =
 
 -- | Deletes a subscription.
 --
--- /See:/ 'subscriptionsDelete'' smart constructor.
-newtype SubscriptionsDelete' = SubscriptionsDelete'
+-- /See:/ 'subscriptionsDelete' smart constructor.
+newtype SubscriptionsDelete = SubscriptionsDelete
     { _sdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubscriptionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sdId'
-subscriptionsDelete'
+subscriptionsDelete
     :: Text -- ^ 'sdId'
-    -> SubscriptionsDelete'
-subscriptionsDelete' pSdId_ =
-    SubscriptionsDelete'
+    -> SubscriptionsDelete
+subscriptionsDelete pSdId_ =
+    SubscriptionsDelete
     { _sdId = pSdId_
     }
 
 -- | The id parameter specifies the YouTube subscription ID for the resource
 -- that is being deleted. In a subscription resource, the id property
 -- specifies the YouTube subscription ID.
-sdId :: Lens' SubscriptionsDelete' Text
+sdId :: Lens' SubscriptionsDelete Text
 sdId = lens _sdId (\ s a -> s{_sdId = a})
 
-instance GoogleRequest SubscriptionsDelete' where
-        type Rs SubscriptionsDelete' = ()
-        requestClient SubscriptionsDelete'{..}
+instance GoogleRequest SubscriptionsDelete where
+        type Rs SubscriptionsDelete = ()
+        requestClient SubscriptionsDelete{..}
           = go (Just _sdId) (Just AltJSON) youTubeService
           where go
                   = buildClient

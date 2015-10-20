@@ -30,8 +30,8 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.Patch
       PlacementGroupsPatchResource
 
     -- * Creating a Request
-    , placementGroupsPatch'
-    , PlacementGroupsPatch'
+    , placementGroupsPatch
+    , PlacementGroupsPatch
 
     -- * Request Lenses
     , pgpProFileId
@@ -43,7 +43,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placementGroups.patch@ method which the
--- 'PlacementGroupsPatch'' request conforms to.
+-- 'PlacementGroupsPatch' request conforms to.
 type PlacementGroupsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -56,14 +56,14 @@ type PlacementGroupsPatchResource =
 -- | Updates an existing placement group. This method supports patch
 -- semantics.
 --
--- /See:/ 'placementGroupsPatch'' smart constructor.
-data PlacementGroupsPatch' = PlacementGroupsPatch'
+-- /See:/ 'placementGroupsPatch' smart constructor.
+data PlacementGroupsPatch = PlacementGroupsPatch
     { _pgpProFileId :: !Int64
     , _pgpPayload   :: !PlacementGroup
     , _pgpId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlacementGroupsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlacementGroupsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,35 +72,35 @@ data PlacementGroupsPatch' = PlacementGroupsPatch'
 -- * 'pgpPayload'
 --
 -- * 'pgpId'
-placementGroupsPatch'
+placementGroupsPatch
     :: Int64 -- ^ 'pgpProFileId'
     -> PlacementGroup -- ^ 'pgpPayload'
     -> Int64 -- ^ 'pgpId'
-    -> PlacementGroupsPatch'
-placementGroupsPatch' pPgpProFileId_ pPgpPayload_ pPgpId_ =
-    PlacementGroupsPatch'
+    -> PlacementGroupsPatch
+placementGroupsPatch pPgpProFileId_ pPgpPayload_ pPgpId_ =
+    PlacementGroupsPatch
     { _pgpProFileId = pPgpProFileId_
     , _pgpPayload = pPgpPayload_
     , _pgpId = pPgpId_
     }
 
 -- | User profile ID associated with this request.
-pgpProFileId :: Lens' PlacementGroupsPatch' Int64
+pgpProFileId :: Lens' PlacementGroupsPatch Int64
 pgpProFileId
   = lens _pgpProFileId (\ s a -> s{_pgpProFileId = a})
 
 -- | Multipart request metadata.
-pgpPayload :: Lens' PlacementGroupsPatch' PlacementGroup
+pgpPayload :: Lens' PlacementGroupsPatch PlacementGroup
 pgpPayload
   = lens _pgpPayload (\ s a -> s{_pgpPayload = a})
 
 -- | Placement group ID.
-pgpId :: Lens' PlacementGroupsPatch' Int64
+pgpId :: Lens' PlacementGroupsPatch Int64
 pgpId = lens _pgpId (\ s a -> s{_pgpId = a})
 
-instance GoogleRequest PlacementGroupsPatch' where
-        type Rs PlacementGroupsPatch' = PlacementGroup
-        requestClient PlacementGroupsPatch'{..}
+instance GoogleRequest PlacementGroupsPatch where
+        type Rs PlacementGroupsPatch = PlacementGroup
+        requestClient PlacementGroupsPatch{..}
           = go _pgpProFileId (Just _pgpId) (Just AltJSON)
               _pgpPayload
               dFAReportingService

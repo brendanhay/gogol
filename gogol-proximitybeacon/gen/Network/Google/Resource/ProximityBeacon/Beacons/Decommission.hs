@@ -32,25 +32,25 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Decommission
       BeaconsDecommissionResource
 
     -- * Creating a Request
-    , beaconsDecommission'
-    , BeaconsDecommission'
+    , beaconsDecommission
+    , BeaconsDecommission
 
     -- * Request Lenses
-    , bdXgafv
-    , bdUploadProtocol
-    , bdPp
-    , bdAccessToken
-    , bdBeaconName
-    , bdUploadType
-    , bdBearerToken
-    , bdCallback
+    , beaXgafv
+    , beaUploadProtocol
+    , beaPp
+    , beaAccessToken
+    , beaBeaconName
+    , beaUploadType
+    , beaBearerToken
+    , beaCallback
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.decommission@ method which the
--- 'BeaconsDecommission'' request conforms to.
+-- 'BeaconsDecommission' request conforms to.
 type BeaconsDecommissionResource =
      "v1beta1" :>
        CaptureMode "beaconName" "decommission" Text :>
@@ -68,102 +68,104 @@ type BeaconsDecommissionResource =
 -- permanent -- you will not be able to re-register a beacon with this ID
 -- again.
 --
--- /See:/ 'beaconsDecommission'' smart constructor.
-data BeaconsDecommission' = BeaconsDecommission'
-    { _bdXgafv          :: !(Maybe Text)
-    , _bdUploadProtocol :: !(Maybe Text)
-    , _bdPp             :: !Bool
-    , _bdAccessToken    :: !(Maybe Text)
-    , _bdBeaconName     :: !Text
-    , _bdUploadType     :: !(Maybe Text)
-    , _bdBearerToken    :: !(Maybe Text)
-    , _bdCallback       :: !(Maybe Text)
+-- /See:/ 'beaconsDecommission' smart constructor.
+data BeaconsDecommission = BeaconsDecommission
+    { _beaXgafv          :: !(Maybe Text)
+    , _beaUploadProtocol :: !(Maybe Text)
+    , _beaPp             :: !Bool
+    , _beaAccessToken    :: !(Maybe Text)
+    , _beaBeaconName     :: !Text
+    , _beaUploadType     :: !(Maybe Text)
+    , _beaBearerToken    :: !(Maybe Text)
+    , _beaCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BeaconsDecommission'' with the minimum fields required to make a request.
+-- | Creates a value of 'BeaconsDecommission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'bdXgafv'
+-- * 'beaXgafv'
 --
--- * 'bdUploadProtocol'
+-- * 'beaUploadProtocol'
 --
--- * 'bdPp'
+-- * 'beaPp'
 --
--- * 'bdAccessToken'
+-- * 'beaAccessToken'
 --
--- * 'bdBeaconName'
+-- * 'beaBeaconName'
 --
--- * 'bdUploadType'
+-- * 'beaUploadType'
 --
--- * 'bdBearerToken'
+-- * 'beaBearerToken'
 --
--- * 'bdCallback'
-beaconsDecommission'
-    :: Text -- ^ 'bdBeaconName'
-    -> BeaconsDecommission'
-beaconsDecommission' pBdBeaconName_ =
-    BeaconsDecommission'
-    { _bdXgafv = Nothing
-    , _bdUploadProtocol = Nothing
-    , _bdPp = True
-    , _bdAccessToken = Nothing
-    , _bdBeaconName = pBdBeaconName_
-    , _bdUploadType = Nothing
-    , _bdBearerToken = Nothing
-    , _bdCallback = Nothing
+-- * 'beaCallback'
+beaconsDecommission
+    :: Text -- ^ 'beaBeaconName'
+    -> BeaconsDecommission
+beaconsDecommission pBeaBeaconName_ =
+    BeaconsDecommission
+    { _beaXgafv = Nothing
+    , _beaUploadProtocol = Nothing
+    , _beaPp = True
+    , _beaAccessToken = Nothing
+    , _beaBeaconName = pBeaBeaconName_
+    , _beaUploadType = Nothing
+    , _beaBearerToken = Nothing
+    , _beaCallback = Nothing
     }
 
 -- | V1 error format.
-bdXgafv :: Lens' BeaconsDecommission' (Maybe Text)
-bdXgafv = lens _bdXgafv (\ s a -> s{_bdXgafv = a})
+beaXgafv :: Lens' BeaconsDecommission (Maybe Text)
+beaXgafv = lens _beaXgafv (\ s a -> s{_beaXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-bdUploadProtocol :: Lens' BeaconsDecommission' (Maybe Text)
-bdUploadProtocol
-  = lens _bdUploadProtocol
-      (\ s a -> s{_bdUploadProtocol = a})
+beaUploadProtocol :: Lens' BeaconsDecommission (Maybe Text)
+beaUploadProtocol
+  = lens _beaUploadProtocol
+      (\ s a -> s{_beaUploadProtocol = a})
 
 -- | Pretty-print response.
-bdPp :: Lens' BeaconsDecommission' Bool
-bdPp = lens _bdPp (\ s a -> s{_bdPp = a})
+beaPp :: Lens' BeaconsDecommission Bool
+beaPp = lens _beaPp (\ s a -> s{_beaPp = a})
 
 -- | OAuth access token.
-bdAccessToken :: Lens' BeaconsDecommission' (Maybe Text)
-bdAccessToken
-  = lens _bdAccessToken
-      (\ s a -> s{_bdAccessToken = a})
+beaAccessToken :: Lens' BeaconsDecommission (Maybe Text)
+beaAccessToken
+  = lens _beaAccessToken
+      (\ s a -> s{_beaAccessToken = a})
 
 -- | Beacon that should be decommissioned. Required.
-bdBeaconName :: Lens' BeaconsDecommission' Text
-bdBeaconName
-  = lens _bdBeaconName (\ s a -> s{_bdBeaconName = a})
+beaBeaconName :: Lens' BeaconsDecommission Text
+beaBeaconName
+  = lens _beaBeaconName
+      (\ s a -> s{_beaBeaconName = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-bdUploadType :: Lens' BeaconsDecommission' (Maybe Text)
-bdUploadType
-  = lens _bdUploadType (\ s a -> s{_bdUploadType = a})
+beaUploadType :: Lens' BeaconsDecommission (Maybe Text)
+beaUploadType
+  = lens _beaUploadType
+      (\ s a -> s{_beaUploadType = a})
 
 -- | OAuth bearer token.
-bdBearerToken :: Lens' BeaconsDecommission' (Maybe Text)
-bdBearerToken
-  = lens _bdBearerToken
-      (\ s a -> s{_bdBearerToken = a})
+beaBearerToken :: Lens' BeaconsDecommission (Maybe Text)
+beaBearerToken
+  = lens _beaBearerToken
+      (\ s a -> s{_beaBearerToken = a})
 
 -- | JSONP
-bdCallback :: Lens' BeaconsDecommission' (Maybe Text)
-bdCallback
-  = lens _bdCallback (\ s a -> s{_bdCallback = a})
+beaCallback :: Lens' BeaconsDecommission (Maybe Text)
+beaCallback
+  = lens _beaCallback (\ s a -> s{_beaCallback = a})
 
-instance GoogleRequest BeaconsDecommission' where
-        type Rs BeaconsDecommission' = Empty
-        requestClient BeaconsDecommission'{..}
-          = go _bdBeaconName _bdXgafv _bdUploadProtocol
-              (Just _bdPp)
-              _bdAccessToken
-              _bdUploadType
-              _bdBearerToken
-              _bdCallback
+instance GoogleRequest BeaconsDecommission where
+        type Rs BeaconsDecommission = Empty
+        requestClient BeaconsDecommission{..}
+          = go _beaBeaconName _beaXgafv _beaUploadProtocol
+              (Just _beaPp)
+              _beaAccessToken
+              _beaUploadType
+              _beaBearerToken
+              _beaCallback
               (Just AltJSON)
               proximityBeaconService
           where go

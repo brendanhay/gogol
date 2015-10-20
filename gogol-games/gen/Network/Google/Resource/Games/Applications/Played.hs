@@ -30,8 +30,8 @@ module Network.Google.Resource.Games.Applications.Played
       ApplicationsPlayedResource
 
     -- * Creating a Request
-    , applicationsPlayed'
-    , ApplicationsPlayed'
+    , applicationsPlayed
+    , ApplicationsPlayed
 
     ) where
 
@@ -39,7 +39,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.applications.played@ method which the
--- 'ApplicationsPlayed'' request conforms to.
+-- 'ApplicationsPlayed' request conforms to.
 type ApplicationsPlayedResource =
      "applications" :>
        "played" :>
@@ -48,20 +48,20 @@ type ApplicationsPlayedResource =
 -- | Indicate that the the currently authenticated user is playing your
 -- application.
 --
--- /See:/ 'applicationsPlayed'' smart constructor.
-data ApplicationsPlayed' =
-    ApplicationsPlayed'
+-- /See:/ 'applicationsPlayed' smart constructor.
+data ApplicationsPlayed =
+    ApplicationsPlayed
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ApplicationsPlayed'' with the minimum fields required to make a request.
+-- | Creates a value of 'ApplicationsPlayed' with the minimum fields required to make a request.
 --
-applicationsPlayed'
-    :: ApplicationsPlayed'
-applicationsPlayed' = ApplicationsPlayed'
+applicationsPlayed
+    :: ApplicationsPlayed
+applicationsPlayed = ApplicationsPlayed
 
-instance GoogleRequest ApplicationsPlayed' where
-        type Rs ApplicationsPlayed' = ()
-        requestClient ApplicationsPlayed'{}
+instance GoogleRequest ApplicationsPlayed where
+        type Rs ApplicationsPlayed = ()
+        requestClient ApplicationsPlayed{}
           = go (Just AltJSON) gamesService
           where go
                   = buildClient

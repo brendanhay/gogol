@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Properties.Delete
       PropertiesDeleteResource
 
     -- * Creating a Request
-    , propertiesDelete'
-    , PropertiesDelete'
+    , propertiesDelete
+    , PropertiesDelete
 
     -- * Request Lenses
     , pdPropertyKey
@@ -42,7 +42,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.properties.delete@ method which the
--- 'PropertiesDelete'' request conforms to.
+-- 'PropertiesDelete' request conforms to.
 type PropertiesDeleteResource =
      "files" :>
        Capture "fileId" Text :>
@@ -53,14 +53,14 @@ type PropertiesDeleteResource =
 
 -- | Deletes a property.
 --
--- /See:/ 'propertiesDelete'' smart constructor.
-data PropertiesDelete' = PropertiesDelete'
+-- /See:/ 'propertiesDelete' smart constructor.
+data PropertiesDelete = PropertiesDelete
     { _pdPropertyKey :: !Text
     , _pdVisibility  :: !Text
     , _pdFileId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PropertiesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'PropertiesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data PropertiesDelete' = PropertiesDelete'
 -- * 'pdVisibility'
 --
 -- * 'pdFileId'
-propertiesDelete'
+propertiesDelete
     :: Text -- ^ 'pdPropertyKey'
     -> Text -- ^ 'pdFileId'
-    -> PropertiesDelete'
-propertiesDelete' pPdPropertyKey_ pPdFileId_ =
-    PropertiesDelete'
+    -> PropertiesDelete
+propertiesDelete pPdPropertyKey_ pPdFileId_ =
+    PropertiesDelete
     { _pdPropertyKey = pPdPropertyKey_
     , _pdVisibility = "private"
     , _pdFileId = pPdFileId_
     }
 
 -- | The key of the property.
-pdPropertyKey :: Lens' PropertiesDelete' Text
+pdPropertyKey :: Lens' PropertiesDelete Text
 pdPropertyKey
   = lens _pdPropertyKey
       (\ s a -> s{_pdPropertyKey = a})
 
 -- | The visibility of the property.
-pdVisibility :: Lens' PropertiesDelete' Text
+pdVisibility :: Lens' PropertiesDelete Text
 pdVisibility
   = lens _pdVisibility (\ s a -> s{_pdVisibility = a})
 
 -- | The ID of the file.
-pdFileId :: Lens' PropertiesDelete' Text
+pdFileId :: Lens' PropertiesDelete Text
 pdFileId = lens _pdFileId (\ s a -> s{_pdFileId = a})
 
-instance GoogleRequest PropertiesDelete' where
-        type Rs PropertiesDelete' = ()
-        requestClient PropertiesDelete'{..}
+instance GoogleRequest PropertiesDelete where
+        type Rs PropertiesDelete = ()
+        requestClient PropertiesDelete{..}
           = go _pdFileId _pdPropertyKey (Just _pdVisibility)
               (Just AltJSON)
               driveService

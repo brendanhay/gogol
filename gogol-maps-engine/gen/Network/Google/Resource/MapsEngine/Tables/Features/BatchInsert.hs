@@ -35,8 +35,8 @@ module Network.Google.Resource.MapsEngine.Tables.Features.BatchInsert
       TablesFeaturesBatchInsertResource
 
     -- * Creating a Request
-    , tablesFeaturesBatchInsert'
-    , TablesFeaturesBatchInsert'
+    , tablesFeaturesBatchInsert
+    , TablesFeaturesBatchInsert
 
     -- * Request Lenses
     , tfbiPayload
@@ -47,7 +47,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.tables.features.batchInsert@ method which the
--- 'TablesFeaturesBatchInsert'' request conforms to.
+-- 'TablesFeaturesBatchInsert' request conforms to.
 type TablesFeaturesBatchInsertResource =
      "tables" :>
        Capture "id" Text :>
@@ -65,42 +65,42 @@ type TablesFeaturesBatchInsertResource =
 -- features, read Creating features in the Google Maps Engine developer\'s
 -- guide.
 --
--- /See:/ 'tablesFeaturesBatchInsert'' smart constructor.
-data TablesFeaturesBatchInsert' = TablesFeaturesBatchInsert'
+-- /See:/ 'tablesFeaturesBatchInsert' smart constructor.
+data TablesFeaturesBatchInsert = TablesFeaturesBatchInsert
     { _tfbiPayload :: !FeaturesBatchInsertRequest
     , _tfbiId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesFeaturesBatchInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesFeaturesBatchInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tfbiPayload'
 --
 -- * 'tfbiId'
-tablesFeaturesBatchInsert'
+tablesFeaturesBatchInsert
     :: FeaturesBatchInsertRequest -- ^ 'tfbiPayload'
     -> Text -- ^ 'tfbiId'
-    -> TablesFeaturesBatchInsert'
-tablesFeaturesBatchInsert' pTfbiPayload_ pTfbiId_ =
-    TablesFeaturesBatchInsert'
+    -> TablesFeaturesBatchInsert
+tablesFeaturesBatchInsert pTfbiPayload_ pTfbiId_ =
+    TablesFeaturesBatchInsert
     { _tfbiPayload = pTfbiPayload_
     , _tfbiId = pTfbiId_
     }
 
 -- | Multipart request metadata.
-tfbiPayload :: Lens' TablesFeaturesBatchInsert' FeaturesBatchInsertRequest
+tfbiPayload :: Lens' TablesFeaturesBatchInsert FeaturesBatchInsertRequest
 tfbiPayload
   = lens _tfbiPayload (\ s a -> s{_tfbiPayload = a})
 
 -- | The ID of the table to append the features to.
-tfbiId :: Lens' TablesFeaturesBatchInsert' Text
+tfbiId :: Lens' TablesFeaturesBatchInsert Text
 tfbiId = lens _tfbiId (\ s a -> s{_tfbiId = a})
 
-instance GoogleRequest TablesFeaturesBatchInsert'
+instance GoogleRequest TablesFeaturesBatchInsert
          where
-        type Rs TablesFeaturesBatchInsert' = ()
-        requestClient TablesFeaturesBatchInsert'{..}
+        type Rs TablesFeaturesBatchInsert = ()
+        requestClient TablesFeaturesBatchInsert{..}
           = go _tfbiId (Just AltJSON) _tfbiPayload
               mapsEngineService
           where go

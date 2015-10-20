@@ -31,8 +31,8 @@ module Network.Google.Resource.BigQuery.Datasets.Update
       DatasetsUpdateResource
 
     -- * Creating a Request
-    , datasetsUpdate'
-    , DatasetsUpdate'
+    , datasetsUpdate
+    , DatasetsUpdate
 
     -- * Request Lenses
     , duPayload
@@ -44,7 +44,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.datasets.update@ method which the
--- 'DatasetsUpdate'' request conforms to.
+-- 'DatasetsUpdate' request conforms to.
 type DatasetsUpdateResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -57,14 +57,14 @@ type DatasetsUpdateResource =
 -- the entire dataset resource, whereas the patch method only replaces
 -- fields that are provided in the submitted dataset resource.
 --
--- /See:/ 'datasetsUpdate'' smart constructor.
-data DatasetsUpdate' = DatasetsUpdate'
+-- /See:/ 'datasetsUpdate' smart constructor.
+data DatasetsUpdate = DatasetsUpdate
     { _duPayload   :: !Dataset
     , _duDatasetId :: !Text
     , _duProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,36 +73,36 @@ data DatasetsUpdate' = DatasetsUpdate'
 -- * 'duDatasetId'
 --
 -- * 'duProjectId'
-datasetsUpdate'
+datasetsUpdate
     :: Dataset -- ^ 'duPayload'
     -> Text -- ^ 'duDatasetId'
     -> Text -- ^ 'duProjectId'
-    -> DatasetsUpdate'
-datasetsUpdate' pDuPayload_ pDuDatasetId_ pDuProjectId_ =
-    DatasetsUpdate'
+    -> DatasetsUpdate
+datasetsUpdate pDuPayload_ pDuDatasetId_ pDuProjectId_ =
+    DatasetsUpdate
     { _duPayload = pDuPayload_
     , _duDatasetId = pDuDatasetId_
     , _duProjectId = pDuProjectId_
     }
 
 -- | Multipart request metadata.
-duPayload :: Lens' DatasetsUpdate' Dataset
+duPayload :: Lens' DatasetsUpdate Dataset
 duPayload
   = lens _duPayload (\ s a -> s{_duPayload = a})
 
 -- | Dataset ID of the dataset being updated
-duDatasetId :: Lens' DatasetsUpdate' Text
+duDatasetId :: Lens' DatasetsUpdate Text
 duDatasetId
   = lens _duDatasetId (\ s a -> s{_duDatasetId = a})
 
 -- | Project ID of the dataset being updated
-duProjectId :: Lens' DatasetsUpdate' Text
+duProjectId :: Lens' DatasetsUpdate Text
 duProjectId
   = lens _duProjectId (\ s a -> s{_duProjectId = a})
 
-instance GoogleRequest DatasetsUpdate' where
-        type Rs DatasetsUpdate' = Dataset
-        requestClient DatasetsUpdate'{..}
+instance GoogleRequest DatasetsUpdate where
+        type Rs DatasetsUpdate = Dataset
+        requestClient DatasetsUpdate{..}
           = go _duProjectId _duDatasetId (Just AltJSON)
               _duPayload
               bigQueryService

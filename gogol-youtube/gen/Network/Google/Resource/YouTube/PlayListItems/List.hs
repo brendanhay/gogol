@@ -31,8 +31,8 @@ module Network.Google.Resource.YouTube.PlayListItems.List
       PlayListItemsListResource
 
     -- * Creating a Request
-    , playListItemsList'
-    , PlayListItemsList'
+    , playListItemsList
+    , PlayListItemsList
 
     -- * Request Lenses
     , plilPart
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.playlistItems.list@ method which the
--- 'PlayListItemsList'' request conforms to.
+-- 'PlayListItemsList' request conforms to.
 type PlayListItemsListResource =
      "playlistItems" :>
        QueryParam "part" Text :>
@@ -65,8 +65,8 @@ type PlayListItemsListResource =
 -- parameters. You can retrieve all of the playlist items in a specified
 -- playlist or retrieve one or more playlist items by their unique IDs.
 --
--- /See:/ 'playListItemsList'' smart constructor.
-data PlayListItemsList' = PlayListItemsList'
+-- /See:/ 'playListItemsList' smart constructor.
+data PlayListItemsList = PlayListItemsList
     { _plilPart                   :: !Text
     , _plilOnBehalfOfContentOwner :: !(Maybe Text)
     , _plilVideoId                :: !(Maybe Text)
@@ -76,7 +76,7 @@ data PlayListItemsList' = PlayListItemsList'
     , _plilMaxResults             :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlayListItemsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayListItemsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -93,11 +93,11 @@ data PlayListItemsList' = PlayListItemsList'
 -- * 'plilPlayListId'
 --
 -- * 'plilMaxResults'
-playListItemsList'
+playListItemsList
     :: Text -- ^ 'plilPart'
-    -> PlayListItemsList'
-playListItemsList' pPlilPart_ =
-    PlayListItemsList'
+    -> PlayListItemsList
+playListItemsList pPlilPart_ =
+    PlayListItemsList
     { _plilPart = pPlilPart_
     , _plilOnBehalfOfContentOwner = Nothing
     , _plilVideoId = Nothing
@@ -115,7 +115,7 @@ playListItemsList' pPlilPart_ =
 -- including the title, description, position, and resourceId properties.
 -- As such, if you set part=snippet, the API response will contain all of
 -- those properties.
-plilPart :: Lens' PlayListItemsList' Text
+plilPart :: Lens' PlayListItemsList Text
 plilPart = lens _plilPart (\ s a -> s{_plilPart = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
@@ -128,26 +128,26 @@ plilPart = lens _plilPart (\ s a -> s{_plilPart = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-plilOnBehalfOfContentOwner :: Lens' PlayListItemsList' (Maybe Text)
+plilOnBehalfOfContentOwner :: Lens' PlayListItemsList (Maybe Text)
 plilOnBehalfOfContentOwner
   = lens _plilOnBehalfOfContentOwner
       (\ s a -> s{_plilOnBehalfOfContentOwner = a})
 
 -- | The videoId parameter specifies that the request should return only the
 -- playlist items that contain the specified video.
-plilVideoId :: Lens' PlayListItemsList' (Maybe Text)
+plilVideoId :: Lens' PlayListItemsList (Maybe Text)
 plilVideoId
   = lens _plilVideoId (\ s a -> s{_plilVideoId = a})
 
 -- | The id parameter specifies a comma-separated list of one or more unique
 -- playlist item IDs.
-plilId :: Lens' PlayListItemsList' (Maybe Text)
+plilId :: Lens' PlayListItemsList (Maybe Text)
 plilId = lens _plilId (\ s a -> s{_plilId = a})
 
 -- | The pageToken parameter identifies a specific page in the result set
 -- that should be returned. In an API response, the nextPageToken and
 -- prevPageToken properties identify other pages that could be retrieved.
-plilPageToken :: Lens' PlayListItemsList' (Maybe Text)
+plilPageToken :: Lens' PlayListItemsList (Maybe Text)
 plilPageToken
   = lens _plilPageToken
       (\ s a -> s{_plilPageToken = a})
@@ -156,21 +156,21 @@ plilPageToken
 -- which you want to retrieve playlist items. Note that even though this is
 -- an optional parameter, every request to retrieve playlist items must
 -- specify a value for either the id parameter or the playlistId parameter.
-plilPlayListId :: Lens' PlayListItemsList' (Maybe Text)
+plilPlayListId :: Lens' PlayListItemsList (Maybe Text)
 plilPlayListId
   = lens _plilPlayListId
       (\ s a -> s{_plilPlayListId = a})
 
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set.
-plilMaxResults :: Lens' PlayListItemsList' Word32
+plilMaxResults :: Lens' PlayListItemsList Word32
 plilMaxResults
   = lens _plilMaxResults
       (\ s a -> s{_plilMaxResults = a})
 
-instance GoogleRequest PlayListItemsList' where
-        type Rs PlayListItemsList' = PlayListItemListResponse
-        requestClient PlayListItemsList'{..}
+instance GoogleRequest PlayListItemsList where
+        type Rs PlayListItemsList = PlayListItemListResponse
+        requestClient PlayListItemsList{..}
           = go (Just _plilPart) _plilOnBehalfOfContentOwner
               _plilVideoId
               _plilId

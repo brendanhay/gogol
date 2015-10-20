@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.MobileDevices.List
       MobileDevicesListResource
 
     -- * Creating a Request
-    , mobileDevicesList'
-    , MobileDevicesList'
+    , mobileDevicesList
+    , MobileDevicesList
 
     -- * Request Lenses
     , mdlOrderBy
@@ -46,7 +46,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.mobiledevices.list@ method which the
--- 'MobileDevicesList'' request conforms to.
+-- 'MobileDevicesList' request conforms to.
 type MobileDevicesListResource =
      "customer" :>
        Capture "customerId" Text :>
@@ -63,8 +63,8 @@ type MobileDevicesListResource =
 
 -- | Retrieve all Mobile Devices of a customer (paginated)
 --
--- /See:/ 'mobileDevicesList'' smart constructor.
-data MobileDevicesList' = MobileDevicesList'
+-- /See:/ 'mobileDevicesList' smart constructor.
+data MobileDevicesList = MobileDevicesList
     { _mdlOrderBy    :: !(Maybe MobileDevicesListOrderBy)
     , _mdlCustomerId :: !Text
     , _mdlSortOrder  :: !(Maybe MobileDevicesListSortOrder)
@@ -74,7 +74,7 @@ data MobileDevicesList' = MobileDevicesList'
     , _mdlMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MobileDevicesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'MobileDevicesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -91,11 +91,11 @@ data MobileDevicesList' = MobileDevicesList'
 -- * 'mdlPageToken'
 --
 -- * 'mdlMaxResults'
-mobileDevicesList'
+mobileDevicesList
     :: Text -- ^ 'mdlCustomerId'
-    -> MobileDevicesList'
-mobileDevicesList' pMdlCustomerId_ =
-    MobileDevicesList'
+    -> MobileDevicesList
+mobileDevicesList pMdlCustomerId_ =
+    MobileDevicesList
     { _mdlOrderBy = Nothing
     , _mdlCustomerId = pMdlCustomerId_
     , _mdlSortOrder = Nothing
@@ -106,47 +106,47 @@ mobileDevicesList' pMdlCustomerId_ =
     }
 
 -- | Column to use for sorting results
-mdlOrderBy :: Lens' MobileDevicesList' (Maybe MobileDevicesListOrderBy)
+mdlOrderBy :: Lens' MobileDevicesList (Maybe MobileDevicesListOrderBy)
 mdlOrderBy
   = lens _mdlOrderBy (\ s a -> s{_mdlOrderBy = a})
 
 -- | Immutable id of the Google Apps account
-mdlCustomerId :: Lens' MobileDevicesList' Text
+mdlCustomerId :: Lens' MobileDevicesList Text
 mdlCustomerId
   = lens _mdlCustomerId
       (\ s a -> s{_mdlCustomerId = a})
 
 -- | Whether to return results in ascending or descending order. Only of use
 -- when orderBy is also used
-mdlSortOrder :: Lens' MobileDevicesList' (Maybe MobileDevicesListSortOrder)
+mdlSortOrder :: Lens' MobileDevicesList (Maybe MobileDevicesListSortOrder)
 mdlSortOrder
   = lens _mdlSortOrder (\ s a -> s{_mdlSortOrder = a})
 
 -- | Search string in the format given at
 -- http:\/\/support.google.com\/a\/bin\/answer.py?hl=en&answer=1408863#search
-mdlQuery :: Lens' MobileDevicesList' (Maybe Text)
+mdlQuery :: Lens' MobileDevicesList (Maybe Text)
 mdlQuery = lens _mdlQuery (\ s a -> s{_mdlQuery = a})
 
 -- | Restrict information returned to a set of selected fields.
-mdlProjection :: Lens' MobileDevicesList' (Maybe MobileDevicesListProjection)
+mdlProjection :: Lens' MobileDevicesList (Maybe MobileDevicesListProjection)
 mdlProjection
   = lens _mdlProjection
       (\ s a -> s{_mdlProjection = a})
 
 -- | Token to specify next page in the list
-mdlPageToken :: Lens' MobileDevicesList' (Maybe Text)
+mdlPageToken :: Lens' MobileDevicesList (Maybe Text)
 mdlPageToken
   = lens _mdlPageToken (\ s a -> s{_mdlPageToken = a})
 
 -- | Maximum number of results to return. Default is 100
-mdlMaxResults :: Lens' MobileDevicesList' (Maybe Int32)
+mdlMaxResults :: Lens' MobileDevicesList (Maybe Int32)
 mdlMaxResults
   = lens _mdlMaxResults
       (\ s a -> s{_mdlMaxResults = a})
 
-instance GoogleRequest MobileDevicesList' where
-        type Rs MobileDevicesList' = MobileDevices
-        requestClient MobileDevicesList'{..}
+instance GoogleRequest MobileDevicesList where
+        type Rs MobileDevicesList = MobileDevices
+        requestClient MobileDevicesList{..}
           = go _mdlCustomerId _mdlOrderBy _mdlSortOrder
               _mdlQuery
               _mdlProjection

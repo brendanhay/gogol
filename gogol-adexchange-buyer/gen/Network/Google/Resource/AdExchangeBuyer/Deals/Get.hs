@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.Deals.Get
       DealsGetResource
 
     -- * Creating a Request
-    , dealsGet'
-    , DealsGet'
+    , dealsGet
+    , DealsGet
 
     -- * Request Lenses
     , dgPayload
@@ -41,7 +41,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.deals.get@ method which the
--- 'DealsGet'' request conforms to.
+-- 'DealsGet' request conforms to.
 type DealsGetResource =
      "deals" :>
        Capture "dealId" Int64 :>
@@ -52,40 +52,40 @@ type DealsGetResource =
 
 -- | Gets the requested deal.
 --
--- /See:/ 'dealsGet'' smart constructor.
-data DealsGet' = DealsGet'
+-- /See:/ 'dealsGet' smart constructor.
+data DealsGet = DealsGet
     { _dgPayload :: !GetFinalizedNegotiationByExternalDealIdRequest
     , _dgDealId  :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DealsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'DealsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dgPayload'
 --
 -- * 'dgDealId'
-dealsGet'
+dealsGet
     :: GetFinalizedNegotiationByExternalDealIdRequest -- ^ 'dgPayload'
     -> Int64 -- ^ 'dgDealId'
-    -> DealsGet'
-dealsGet' pDgPayload_ pDgDealId_ =
-    DealsGet'
+    -> DealsGet
+dealsGet pDgPayload_ pDgDealId_ =
+    DealsGet
     { _dgPayload = pDgPayload_
     , _dgDealId = pDgDealId_
     }
 
 -- | Multipart request metadata.
-dgPayload :: Lens' DealsGet' GetFinalizedNegotiationByExternalDealIdRequest
+dgPayload :: Lens' DealsGet GetFinalizedNegotiationByExternalDealIdRequest
 dgPayload
   = lens _dgPayload (\ s a -> s{_dgPayload = a})
 
-dgDealId :: Lens' DealsGet' Int64
+dgDealId :: Lens' DealsGet Int64
 dgDealId = lens _dgDealId (\ s a -> s{_dgDealId = a})
 
-instance GoogleRequest DealsGet' where
-        type Rs DealsGet' = NegotiationDTO
-        requestClient DealsGet'{..}
+instance GoogleRequest DealsGet where
+        type Rs DealsGet = NegotiationDTO
+        requestClient DealsGet{..}
           = go _dgDealId (Just AltJSON) _dgPayload
               adExchangeBuyerService
           where go

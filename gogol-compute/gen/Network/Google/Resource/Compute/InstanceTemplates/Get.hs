@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.InstanceTemplates.Get
       InstanceTemplatesGetResource
 
     -- * Creating a Request
-    , instanceTemplatesGet'
-    , InstanceTemplatesGet'
+    , instanceTemplatesGet
+    , InstanceTemplatesGet
 
     -- * Request Lenses
     , itgProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceTemplates.get@ method which the
--- 'InstanceTemplatesGet'' request conforms to.
+-- 'InstanceTemplatesGet' request conforms to.
 type InstanceTemplatesGetResource =
      Capture "project" Text :>
        "global" :>
@@ -52,43 +52,43 @@ type InstanceTemplatesGetResource =
 
 -- | Returns the specified instance template resource.
 --
--- /See:/ 'instanceTemplatesGet'' smart constructor.
-data InstanceTemplatesGet' = InstanceTemplatesGet'
+-- /See:/ 'instanceTemplatesGet' smart constructor.
+data InstanceTemplatesGet = InstanceTemplatesGet
     { _itgProject          :: !Text
     , _itgInstanceTemplate :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceTemplatesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceTemplatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'itgProject'
 --
 -- * 'itgInstanceTemplate'
-instanceTemplatesGet'
+instanceTemplatesGet
     :: Text -- ^ 'itgProject'
     -> Text -- ^ 'itgInstanceTemplate'
-    -> InstanceTemplatesGet'
-instanceTemplatesGet' pItgProject_ pItgInstanceTemplate_ =
-    InstanceTemplatesGet'
+    -> InstanceTemplatesGet
+instanceTemplatesGet pItgProject_ pItgInstanceTemplate_ =
+    InstanceTemplatesGet
     { _itgProject = pItgProject_
     , _itgInstanceTemplate = pItgInstanceTemplate_
     }
 
 -- | The project ID for this request.
-itgProject :: Lens' InstanceTemplatesGet' Text
+itgProject :: Lens' InstanceTemplatesGet Text
 itgProject
   = lens _itgProject (\ s a -> s{_itgProject = a})
 
 -- | The name of the instance template.
-itgInstanceTemplate :: Lens' InstanceTemplatesGet' Text
+itgInstanceTemplate :: Lens' InstanceTemplatesGet Text
 itgInstanceTemplate
   = lens _itgInstanceTemplate
       (\ s a -> s{_itgInstanceTemplate = a})
 
-instance GoogleRequest InstanceTemplatesGet' where
-        type Rs InstanceTemplatesGet' = InstanceTemplate
-        requestClient InstanceTemplatesGet'{..}
+instance GoogleRequest InstanceTemplatesGet where
+        type Rs InstanceTemplatesGet = InstanceTemplate
+        requestClient InstanceTemplatesGet{..}
           = go _itgProject _itgInstanceTemplate (Just AltJSON)
               computeService
           where go

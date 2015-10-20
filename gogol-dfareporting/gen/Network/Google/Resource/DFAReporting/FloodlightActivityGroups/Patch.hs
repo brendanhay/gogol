@@ -30,8 +30,8 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Patch
       FloodlightActivityGroupsPatchResource
 
     -- * Creating a Request
-    , floodlightActivityGroupsPatch'
-    , FloodlightActivityGroupsPatch'
+    , floodlightActivityGroupsPatch
+    , FloodlightActivityGroupsPatch
 
     -- * Request Lenses
     , fagpProFileId
@@ -43,7 +43,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightActivityGroups.patch@ method which the
--- 'FloodlightActivityGroupsPatch'' request conforms to.
+-- 'FloodlightActivityGroupsPatch' request conforms to.
 type FloodlightActivityGroupsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -56,14 +56,14 @@ type FloodlightActivityGroupsPatchResource =
 -- | Updates an existing floodlight activity group. This method supports
 -- patch semantics.
 --
--- /See:/ 'floodlightActivityGroupsPatch'' smart constructor.
-data FloodlightActivityGroupsPatch' = FloodlightActivityGroupsPatch'
+-- /See:/ 'floodlightActivityGroupsPatch' smart constructor.
+data FloodlightActivityGroupsPatch = FloodlightActivityGroupsPatch
     { _fagpProFileId :: !Int64
     , _fagpPayload   :: !FloodlightActivityGroup
     , _fagpId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FloodlightActivityGroupsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'FloodlightActivityGroupsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,38 +72,38 @@ data FloodlightActivityGroupsPatch' = FloodlightActivityGroupsPatch'
 -- * 'fagpPayload'
 --
 -- * 'fagpId'
-floodlightActivityGroupsPatch'
+floodlightActivityGroupsPatch
     :: Int64 -- ^ 'fagpProFileId'
     -> FloodlightActivityGroup -- ^ 'fagpPayload'
     -> Int64 -- ^ 'fagpId'
-    -> FloodlightActivityGroupsPatch'
-floodlightActivityGroupsPatch' pFagpProFileId_ pFagpPayload_ pFagpId_ =
-    FloodlightActivityGroupsPatch'
+    -> FloodlightActivityGroupsPatch
+floodlightActivityGroupsPatch pFagpProFileId_ pFagpPayload_ pFagpId_ =
+    FloodlightActivityGroupsPatch
     { _fagpProFileId = pFagpProFileId_
     , _fagpPayload = pFagpPayload_
     , _fagpId = pFagpId_
     }
 
 -- | User profile ID associated with this request.
-fagpProFileId :: Lens' FloodlightActivityGroupsPatch' Int64
+fagpProFileId :: Lens' FloodlightActivityGroupsPatch Int64
 fagpProFileId
   = lens _fagpProFileId
       (\ s a -> s{_fagpProFileId = a})
 
 -- | Multipart request metadata.
-fagpPayload :: Lens' FloodlightActivityGroupsPatch' FloodlightActivityGroup
+fagpPayload :: Lens' FloodlightActivityGroupsPatch FloodlightActivityGroup
 fagpPayload
   = lens _fagpPayload (\ s a -> s{_fagpPayload = a})
 
 -- | Floodlight activity Group ID.
-fagpId :: Lens' FloodlightActivityGroupsPatch' Int64
+fagpId :: Lens' FloodlightActivityGroupsPatch Int64
 fagpId = lens _fagpId (\ s a -> s{_fagpId = a})
 
-instance GoogleRequest FloodlightActivityGroupsPatch'
+instance GoogleRequest FloodlightActivityGroupsPatch
          where
-        type Rs FloodlightActivityGroupsPatch' =
+        type Rs FloodlightActivityGroupsPatch =
              FloodlightActivityGroup
-        requestClient FloodlightActivityGroupsPatch'{..}
+        requestClient FloodlightActivityGroupsPatch{..}
           = go _fagpProFileId (Just _fagpId) (Just AltJSON)
               _fagpPayload
               dFAReportingService

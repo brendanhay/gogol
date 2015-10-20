@@ -29,8 +29,8 @@ module Network.Google.Resource.URLShortener.URL.List
       URLListResource
 
     -- * Creating a Request
-    , urlList'
-    , URLList'
+    , urlList
+    , URLList
 
     -- * Request Lenses
     , ulStartToken
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types
 
 -- | A resource alias for @urlshortener.url.list@ method which the
--- 'URLList'' request conforms to.
+-- 'URLList' request conforms to.
 type URLListResource =
      "url" :>
        "history" :>
@@ -51,40 +51,40 @@ type URLListResource =
 
 -- | Retrieves a list of URLs shortened by a user.
 --
--- /See:/ 'urlList'' smart constructor.
-data URLList' = URLList'
+-- /See:/ 'urlList' smart constructor.
+data URLList = URLList
     { _ulStartToken :: !(Maybe Text)
     , _ulProjection :: !(Maybe URLListProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'URLList'' with the minimum fields required to make a request.
+-- | Creates a value of 'URLList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ulStartToken'
 --
 -- * 'ulProjection'
-urlList'
-    :: URLList'
-urlList' =
-    URLList'
+urlList
+    :: URLList
+urlList =
+    URLList
     { _ulStartToken = Nothing
     , _ulProjection = Nothing
     }
 
 -- | Token for requesting successive pages of results.
-ulStartToken :: Lens' URLList' (Maybe Text)
+ulStartToken :: Lens' URLList (Maybe Text)
 ulStartToken
   = lens _ulStartToken (\ s a -> s{_ulStartToken = a})
 
 -- | Additional information to return.
-ulProjection :: Lens' URLList' (Maybe URLListProjection)
+ulProjection :: Lens' URLList (Maybe URLListProjection)
 ulProjection
   = lens _ulProjection (\ s a -> s{_ulProjection = a})
 
-instance GoogleRequest URLList' where
-        type Rs URLList' = URLHistory
-        requestClient URLList'{..}
+instance GoogleRequest URLList where
+        type Rs URLList = URLHistory
+        requestClient URLList{..}
           = go _ulStartToken _ulProjection (Just AltJSON)
               uRLShortenerService
           where go

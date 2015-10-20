@@ -29,8 +29,8 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Get
       AppsModulesGetResource
 
     -- * Creating a Request
-    , appsModulesGet'
-    , AppsModulesGet'
+    , appsModulesGet
+    , AppsModulesGet
 
     -- * Request Lenses
     , amgXgafv
@@ -48,7 +48,7 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.modules.get@ method which the
--- 'AppsModulesGet'' request conforms to.
+-- 'AppsModulesGet' request conforms to.
 type AppsModulesGetResource =
      "v1beta4" :>
        "apps" :>
@@ -66,8 +66,8 @@ type AppsModulesGetResource =
 
 -- | Gets the current configuration of the module.
 --
--- /See:/ 'appsModulesGet'' smart constructor.
-data AppsModulesGet' = AppsModulesGet'
+-- /See:/ 'appsModulesGet' smart constructor.
+data AppsModulesGet = AppsModulesGet
     { _amgXgafv          :: !(Maybe Text)
     , _amgUploadProtocol :: !(Maybe Text)
     , _amgPp             :: !Bool
@@ -79,7 +79,7 @@ data AppsModulesGet' = AppsModulesGet'
     , _amgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AppsModulesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AppsModulesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -100,12 +100,12 @@ data AppsModulesGet' = AppsModulesGet'
 -- * 'amgAppsId'
 --
 -- * 'amgCallback'
-appsModulesGet'
+appsModulesGet
     :: Text -- ^ 'amgModulesId'
     -> Text -- ^ 'amgAppsId'
-    -> AppsModulesGet'
-appsModulesGet' pAmgModulesId_ pAmgAppsId_ =
-    AppsModulesGet'
+    -> AppsModulesGet
+appsModulesGet pAmgModulesId_ pAmgAppsId_ =
+    AppsModulesGet
     { _amgXgafv = Nothing
     , _amgUploadProtocol = Nothing
     , _amgPp = True
@@ -118,56 +118,56 @@ appsModulesGet' pAmgModulesId_ pAmgAppsId_ =
     }
 
 -- | V1 error format.
-amgXgafv :: Lens' AppsModulesGet' (Maybe Text)
+amgXgafv :: Lens' AppsModulesGet (Maybe Text)
 amgXgafv = lens _amgXgafv (\ s a -> s{_amgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-amgUploadProtocol :: Lens' AppsModulesGet' (Maybe Text)
+amgUploadProtocol :: Lens' AppsModulesGet (Maybe Text)
 amgUploadProtocol
   = lens _amgUploadProtocol
       (\ s a -> s{_amgUploadProtocol = a})
 
 -- | Pretty-print response.
-amgPp :: Lens' AppsModulesGet' Bool
+amgPp :: Lens' AppsModulesGet Bool
 amgPp = lens _amgPp (\ s a -> s{_amgPp = a})
 
 -- | OAuth access token.
-amgAccessToken :: Lens' AppsModulesGet' (Maybe Text)
+amgAccessToken :: Lens' AppsModulesGet (Maybe Text)
 amgAccessToken
   = lens _amgAccessToken
       (\ s a -> s{_amgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-amgUploadType :: Lens' AppsModulesGet' (Maybe Text)
+amgUploadType :: Lens' AppsModulesGet (Maybe Text)
 amgUploadType
   = lens _amgUploadType
       (\ s a -> s{_amgUploadType = a})
 
 -- | Part of \`name\`. See documentation of \`appsId\`.
-amgModulesId :: Lens' AppsModulesGet' Text
+amgModulesId :: Lens' AppsModulesGet Text
 amgModulesId
   = lens _amgModulesId (\ s a -> s{_amgModulesId = a})
 
 -- | OAuth bearer token.
-amgBearerToken :: Lens' AppsModulesGet' (Maybe Text)
+amgBearerToken :: Lens' AppsModulesGet (Maybe Text)
 amgBearerToken
   = lens _amgBearerToken
       (\ s a -> s{_amgBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource requested. For example:
 -- \"apps\/myapp\/modules\/default\".
-amgAppsId :: Lens' AppsModulesGet' Text
+amgAppsId :: Lens' AppsModulesGet Text
 amgAppsId
   = lens _amgAppsId (\ s a -> s{_amgAppsId = a})
 
 -- | JSONP
-amgCallback :: Lens' AppsModulesGet' (Maybe Text)
+amgCallback :: Lens' AppsModulesGet (Maybe Text)
 amgCallback
   = lens _amgCallback (\ s a -> s{_amgCallback = a})
 
-instance GoogleRequest AppsModulesGet' where
-        type Rs AppsModulesGet' = Module
-        requestClient AppsModulesGet'{..}
+instance GoogleRequest AppsModulesGet where
+        type Rs AppsModulesGet = Module
+        requestClient AppsModulesGet{..}
           = go _amgAppsId _amgModulesId _amgXgafv
               _amgUploadProtocol
               (Just _amgPp)

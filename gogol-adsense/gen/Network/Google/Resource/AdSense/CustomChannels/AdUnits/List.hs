@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSense.CustomChannels.AdUnits.List
       CustomChannelsAdUnitsListResource
 
     -- * Creating a Request
-    , customChannelsAdUnitsList'
-    , CustomChannelsAdUnitsList'
+    , customChannelsAdUnitsList
+    , CustomChannelsAdUnitsList
 
     -- * Request Lenses
     , ccaulIncludeInactive
@@ -44,7 +44,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.customchannels.adunits.list@ method which the
--- 'CustomChannelsAdUnitsList'' request conforms to.
+-- 'CustomChannelsAdUnitsList' request conforms to.
 type CustomChannelsAdUnitsListResource =
      "adclients" :>
        Capture "adClientId" Text :>
@@ -58,8 +58,8 @@ type CustomChannelsAdUnitsListResource =
 
 -- | List all ad units in the specified custom channel.
 --
--- /See:/ 'customChannelsAdUnitsList'' smart constructor.
-data CustomChannelsAdUnitsList' = CustomChannelsAdUnitsList'
+-- /See:/ 'customChannelsAdUnitsList' smart constructor.
+data CustomChannelsAdUnitsList = CustomChannelsAdUnitsList
     { _ccaulIncludeInactive :: !(Maybe Bool)
     , _ccaulCustomChannelId :: !Text
     , _ccaulAdClientId      :: !Text
@@ -67,7 +67,7 @@ data CustomChannelsAdUnitsList' = CustomChannelsAdUnitsList'
     , _ccaulMaxResults      :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CustomChannelsAdUnitsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CustomChannelsAdUnitsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,12 +80,12 @@ data CustomChannelsAdUnitsList' = CustomChannelsAdUnitsList'
 -- * 'ccaulPageToken'
 --
 -- * 'ccaulMaxResults'
-customChannelsAdUnitsList'
+customChannelsAdUnitsList
     :: Text -- ^ 'ccaulCustomChannelId'
     -> Text -- ^ 'ccaulAdClientId'
-    -> CustomChannelsAdUnitsList'
-customChannelsAdUnitsList' pCcaulCustomChannelId_ pCcaulAdClientId_ =
-    CustomChannelsAdUnitsList'
+    -> CustomChannelsAdUnitsList
+customChannelsAdUnitsList pCcaulCustomChannelId_ pCcaulAdClientId_ =
+    CustomChannelsAdUnitsList
     { _ccaulIncludeInactive = Nothing
     , _ccaulCustomChannelId = pCcaulCustomChannelId_
     , _ccaulAdClientId = pCcaulAdClientId_
@@ -94,19 +94,19 @@ customChannelsAdUnitsList' pCcaulCustomChannelId_ pCcaulAdClientId_ =
     }
 
 -- | Whether to include inactive ad units. Default: true.
-ccaulIncludeInactive :: Lens' CustomChannelsAdUnitsList' (Maybe Bool)
+ccaulIncludeInactive :: Lens' CustomChannelsAdUnitsList (Maybe Bool)
 ccaulIncludeInactive
   = lens _ccaulIncludeInactive
       (\ s a -> s{_ccaulIncludeInactive = a})
 
 -- | Custom channel for which to list ad units.
-ccaulCustomChannelId :: Lens' CustomChannelsAdUnitsList' Text
+ccaulCustomChannelId :: Lens' CustomChannelsAdUnitsList Text
 ccaulCustomChannelId
   = lens _ccaulCustomChannelId
       (\ s a -> s{_ccaulCustomChannelId = a})
 
 -- | Ad client which contains the custom channel.
-ccaulAdClientId :: Lens' CustomChannelsAdUnitsList' Text
+ccaulAdClientId :: Lens' CustomChannelsAdUnitsList Text
 ccaulAdClientId
   = lens _ccaulAdClientId
       (\ s a -> s{_ccaulAdClientId = a})
@@ -114,22 +114,22 @@ ccaulAdClientId
 -- | A continuation token, used to page through ad units. To retrieve the
 -- next page, set this parameter to the value of \"nextPageToken\" from the
 -- previous response.
-ccaulPageToken :: Lens' CustomChannelsAdUnitsList' (Maybe Text)
+ccaulPageToken :: Lens' CustomChannelsAdUnitsList (Maybe Text)
 ccaulPageToken
   = lens _ccaulPageToken
       (\ s a -> s{_ccaulPageToken = a})
 
 -- | The maximum number of ad units to include in the response, used for
 -- paging.
-ccaulMaxResults :: Lens' CustomChannelsAdUnitsList' (Maybe Int32)
+ccaulMaxResults :: Lens' CustomChannelsAdUnitsList (Maybe Int32)
 ccaulMaxResults
   = lens _ccaulMaxResults
       (\ s a -> s{_ccaulMaxResults = a})
 
-instance GoogleRequest CustomChannelsAdUnitsList'
+instance GoogleRequest CustomChannelsAdUnitsList
          where
-        type Rs CustomChannelsAdUnitsList' = AdUnits
-        requestClient CustomChannelsAdUnitsList'{..}
+        type Rs CustomChannelsAdUnitsList = AdUnits
+        requestClient CustomChannelsAdUnitsList{..}
           = go _ccaulAdClientId _ccaulCustomChannelId
               _ccaulIncludeInactive
               _ccaulPageToken

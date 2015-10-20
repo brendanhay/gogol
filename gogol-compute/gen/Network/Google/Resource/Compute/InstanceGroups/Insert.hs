@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.InstanceGroups.Insert
       InstanceGroupsInsertResource
 
     -- * Creating a Request
-    , instanceGroupsInsert'
-    , InstanceGroupsInsert'
+    , instanceGroupsInsert
+    , InstanceGroupsInsert
 
     -- * Request Lenses
     , igiProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroups.insert@ method which the
--- 'InstanceGroupsInsert'' request conforms to.
+-- 'InstanceGroupsInsert' request conforms to.
 type InstanceGroupsInsertResource =
      Capture "project" Text :>
        "zones" :>
@@ -56,14 +56,14 @@ type InstanceGroupsInsertResource =
 -- | Creates an instance group in the specified project using the parameters
 -- that are included in the request.
 --
--- /See:/ 'instanceGroupsInsert'' smart constructor.
-data InstanceGroupsInsert' = InstanceGroupsInsert'
+-- /See:/ 'instanceGroupsInsert' smart constructor.
+data InstanceGroupsInsert = InstanceGroupsInsert
     { _igiProject :: !Text
     , _igiZone    :: !Text
     , _igiPayload :: !InstanceGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,35 +72,35 @@ data InstanceGroupsInsert' = InstanceGroupsInsert'
 -- * 'igiZone'
 --
 -- * 'igiPayload'
-instanceGroupsInsert'
+instanceGroupsInsert
     :: Text -- ^ 'igiProject'
     -> Text -- ^ 'igiZone'
     -> InstanceGroup -- ^ 'igiPayload'
-    -> InstanceGroupsInsert'
-instanceGroupsInsert' pIgiProject_ pIgiZone_ pIgiPayload_ =
-    InstanceGroupsInsert'
+    -> InstanceGroupsInsert
+instanceGroupsInsert pIgiProject_ pIgiZone_ pIgiPayload_ =
+    InstanceGroupsInsert
     { _igiProject = pIgiProject_
     , _igiZone = pIgiZone_
     , _igiPayload = pIgiPayload_
     }
 
 -- | The project ID for this request.
-igiProject :: Lens' InstanceGroupsInsert' Text
+igiProject :: Lens' InstanceGroupsInsert Text
 igiProject
   = lens _igiProject (\ s a -> s{_igiProject = a})
 
 -- | The name of the zone where you want to create the instance group.
-igiZone :: Lens' InstanceGroupsInsert' Text
+igiZone :: Lens' InstanceGroupsInsert Text
 igiZone = lens _igiZone (\ s a -> s{_igiZone = a})
 
 -- | Multipart request metadata.
-igiPayload :: Lens' InstanceGroupsInsert' InstanceGroup
+igiPayload :: Lens' InstanceGroupsInsert InstanceGroup
 igiPayload
   = lens _igiPayload (\ s a -> s{_igiPayload = a})
 
-instance GoogleRequest InstanceGroupsInsert' where
-        type Rs InstanceGroupsInsert' = Operation
-        requestClient InstanceGroupsInsert'{..}
+instance GoogleRequest InstanceGroupsInsert where
+        type Rs InstanceGroupsInsert = Operation
+        requestClient InstanceGroupsInsert{..}
           = go _igiProject _igiZone (Just AltJSON) _igiPayload
               computeService
           where go

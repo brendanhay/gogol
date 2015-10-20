@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.BackendServices.Insert
       BackendServicesInsertResource
 
     -- * Creating a Request
-    , backendServicesInsert'
-    , BackendServicesInsert'
+    , backendServicesInsert
+    , BackendServicesInsert
 
     -- * Request Lenses
     , bsiProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.backendServices.insert@ method which the
--- 'BackendServicesInsert'' request conforms to.
+-- 'BackendServicesInsert' request conforms to.
 type BackendServicesInsertResource =
      Capture "project" Text :>
        "global" :>
@@ -54,42 +54,42 @@ type BackendServicesInsertResource =
 -- | Creates a BackendService resource in the specified project using the
 -- data included in the request.
 --
--- /See:/ 'backendServicesInsert'' smart constructor.
-data BackendServicesInsert' = BackendServicesInsert'
+-- /See:/ 'backendServicesInsert' smart constructor.
+data BackendServicesInsert = BackendServicesInsert
     { _bsiProject :: !Text
     , _bsiPayload :: !BackendService
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BackendServicesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'BackendServicesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'bsiProject'
 --
 -- * 'bsiPayload'
-backendServicesInsert'
+backendServicesInsert
     :: Text -- ^ 'bsiProject'
     -> BackendService -- ^ 'bsiPayload'
-    -> BackendServicesInsert'
-backendServicesInsert' pBsiProject_ pBsiPayload_ =
-    BackendServicesInsert'
+    -> BackendServicesInsert
+backendServicesInsert pBsiProject_ pBsiPayload_ =
+    BackendServicesInsert
     { _bsiProject = pBsiProject_
     , _bsiPayload = pBsiPayload_
     }
 
 -- | Name of the project scoping this request.
-bsiProject :: Lens' BackendServicesInsert' Text
+bsiProject :: Lens' BackendServicesInsert Text
 bsiProject
   = lens _bsiProject (\ s a -> s{_bsiProject = a})
 
 -- | Multipart request metadata.
-bsiPayload :: Lens' BackendServicesInsert' BackendService
+bsiPayload :: Lens' BackendServicesInsert BackendService
 bsiPayload
   = lens _bsiPayload (\ s a -> s{_bsiPayload = a})
 
-instance GoogleRequest BackendServicesInsert' where
-        type Rs BackendServicesInsert' = Operation
-        requestClient BackendServicesInsert'{..}
+instance GoogleRequest BackendServicesInsert where
+        type Rs BackendServicesInsert = Operation
+        requestClient BackendServicesInsert{..}
           = go _bsiProject (Just AltJSON) _bsiPayload
               computeService
           where go

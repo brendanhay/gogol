@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Advertisers.Patch
       AdvertisersPatchResource
 
     -- * Creating a Request
-    , advertisersPatch'
-    , AdvertisersPatch'
+    , advertisersPatch
+    , AdvertisersPatch
 
     -- * Request Lenses
     , apProFileId
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.advertisers.patch@ method which the
--- 'AdvertisersPatch'' request conforms to.
+-- 'AdvertisersPatch' request conforms to.
 type AdvertisersPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -54,14 +54,14 @@ type AdvertisersPatchResource =
 
 -- | Updates an existing advertiser. This method supports patch semantics.
 --
--- /See:/ 'advertisersPatch'' smart constructor.
-data AdvertisersPatch' = AdvertisersPatch'
+-- /See:/ 'advertisersPatch' smart constructor.
+data AdvertisersPatch = AdvertisersPatch
     { _apProFileId :: !Int64
     , _apPayload   :: !Advertiser
     , _apId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdvertisersPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdvertisersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,35 +70,35 @@ data AdvertisersPatch' = AdvertisersPatch'
 -- * 'apPayload'
 --
 -- * 'apId'
-advertisersPatch'
+advertisersPatch
     :: Int64 -- ^ 'apProFileId'
     -> Advertiser -- ^ 'apPayload'
     -> Int64 -- ^ 'apId'
-    -> AdvertisersPatch'
-advertisersPatch' pApProFileId_ pApPayload_ pApId_ =
-    AdvertisersPatch'
+    -> AdvertisersPatch
+advertisersPatch pApProFileId_ pApPayload_ pApId_ =
+    AdvertisersPatch
     { _apProFileId = pApProFileId_
     , _apPayload = pApPayload_
     , _apId = pApId_
     }
 
 -- | User profile ID associated with this request.
-apProFileId :: Lens' AdvertisersPatch' Int64
+apProFileId :: Lens' AdvertisersPatch Int64
 apProFileId
   = lens _apProFileId (\ s a -> s{_apProFileId = a})
 
 -- | Multipart request metadata.
-apPayload :: Lens' AdvertisersPatch' Advertiser
+apPayload :: Lens' AdvertisersPatch Advertiser
 apPayload
   = lens _apPayload (\ s a -> s{_apPayload = a})
 
 -- | Advertiser ID.
-apId :: Lens' AdvertisersPatch' Int64
+apId :: Lens' AdvertisersPatch Int64
 apId = lens _apId (\ s a -> s{_apId = a})
 
-instance GoogleRequest AdvertisersPatch' where
-        type Rs AdvertisersPatch' = Advertiser
-        requestClient AdvertisersPatch'{..}
+instance GoogleRequest AdvertisersPatch where
+        type Rs AdvertisersPatch = Advertiser
+        requestClient AdvertisersPatch{..}
           = go _apProFileId (Just _apId) (Just AltJSON)
               _apPayload
               dFAReportingService

@@ -30,8 +30,8 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Update
       LiveBroadcastsUpdateResource
 
     -- * Creating a Request
-    , liveBroadcastsUpdate'
-    , LiveBroadcastsUpdate'
+    , liveBroadcastsUpdate
+    , LiveBroadcastsUpdate
 
     -- * Request Lenses
     , lbuPart
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveBroadcasts.update@ method which the
--- 'LiveBroadcastsUpdate'' request conforms to.
+-- 'LiveBroadcastsUpdate' request conforms to.
 type LiveBroadcastsUpdateResource =
      "liveBroadcasts" :>
        QueryParam "part" Text :>
@@ -57,15 +57,15 @@ type LiveBroadcastsUpdateResource =
 -- | Updates a broadcast. For example, you could modify the broadcast
 -- settings defined in the liveBroadcast resource\'s contentDetails object.
 --
--- /See:/ 'liveBroadcastsUpdate'' smart constructor.
-data LiveBroadcastsUpdate' = LiveBroadcastsUpdate'
+-- /See:/ 'liveBroadcastsUpdate' smart constructor.
+data LiveBroadcastsUpdate = LiveBroadcastsUpdate
     { _lbuPart                          :: !Text
     , _lbuPayload                       :: !LiveBroadcast
     , _lbuOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbuOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LiveBroadcastsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'LiveBroadcastsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,12 +76,12 @@ data LiveBroadcastsUpdate' = LiveBroadcastsUpdate'
 -- * 'lbuOnBehalfOfContentOwner'
 --
 -- * 'lbuOnBehalfOfContentOwnerChannel'
-liveBroadcastsUpdate'
+liveBroadcastsUpdate
     :: Text -- ^ 'lbuPart'
     -> LiveBroadcast -- ^ 'lbuPayload'
-    -> LiveBroadcastsUpdate'
-liveBroadcastsUpdate' pLbuPart_ pLbuPayload_ =
-    LiveBroadcastsUpdate'
+    -> LiveBroadcastsUpdate
+liveBroadcastsUpdate pLbuPart_ pLbuPayload_ =
+    LiveBroadcastsUpdate
     { _lbuPart = pLbuPart_
     , _lbuPayload = pLbuPayload_
     , _lbuOnBehalfOfContentOwner = Nothing
@@ -101,11 +101,11 @@ liveBroadcastsUpdate' pLbuPart_ pLbuPayload_ =
 -- updated to whatever value the request body specifies. If the request
 -- body does not specify a value, the existing privacy setting will be
 -- removed and the broadcast will revert to the default privacy setting.
-lbuPart :: Lens' LiveBroadcastsUpdate' Text
+lbuPart :: Lens' LiveBroadcastsUpdate Text
 lbuPart = lens _lbuPart (\ s a -> s{_lbuPart = a})
 
 -- | Multipart request metadata.
-lbuPayload :: Lens' LiveBroadcastsUpdate' LiveBroadcast
+lbuPayload :: Lens' LiveBroadcastsUpdate LiveBroadcast
 lbuPayload
   = lens _lbuPayload (\ s a -> s{_lbuPayload = a})
 
@@ -119,7 +119,7 @@ lbuPayload
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-lbuOnBehalfOfContentOwner :: Lens' LiveBroadcastsUpdate' (Maybe Text)
+lbuOnBehalfOfContentOwner :: Lens' LiveBroadcastsUpdate (Maybe Text)
 lbuOnBehalfOfContentOwner
   = lens _lbuOnBehalfOfContentOwner
       (\ s a -> s{_lbuOnBehalfOfContentOwner = a})
@@ -140,14 +140,14 @@ lbuOnBehalfOfContentOwner
 -- actions on behalf of the channel specified in the parameter value,
 -- without having to provide authentication credentials for each separate
 -- channel.
-lbuOnBehalfOfContentOwnerChannel :: Lens' LiveBroadcastsUpdate' (Maybe Text)
+lbuOnBehalfOfContentOwnerChannel :: Lens' LiveBroadcastsUpdate (Maybe Text)
 lbuOnBehalfOfContentOwnerChannel
   = lens _lbuOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lbuOnBehalfOfContentOwnerChannel = a})
 
-instance GoogleRequest LiveBroadcastsUpdate' where
-        type Rs LiveBroadcastsUpdate' = LiveBroadcast
-        requestClient LiveBroadcastsUpdate'{..}
+instance GoogleRequest LiveBroadcastsUpdate where
+        type Rs LiveBroadcastsUpdate = LiveBroadcast
+        requestClient LiveBroadcastsUpdate{..}
           = go (Just _lbuPart) _lbuOnBehalfOfContentOwner
               _lbuOnBehalfOfContentOwnerChannel
               (Just AltJSON)

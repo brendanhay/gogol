@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.List
       PlacementStrategiesListResource
 
     -- * Creating a Request
-    , placementStrategiesList'
-    , PlacementStrategiesList'
+    , placementStrategiesList
+    , PlacementStrategiesList
 
     -- * Request Lenses
     , pslSearchString
@@ -46,7 +46,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placementStrategies.list@ method which the
--- 'PlacementStrategiesList'' request conforms to.
+-- 'PlacementStrategiesList' request conforms to.
 type PlacementStrategiesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -66,8 +66,8 @@ type PlacementStrategiesListResource =
 
 -- | Retrieves a list of placement strategies, possibly filtered.
 --
--- /See:/ 'placementStrategiesList'' smart constructor.
-data PlacementStrategiesList' = PlacementStrategiesList'
+-- /See:/ 'placementStrategiesList' smart constructor.
+data PlacementStrategiesList = PlacementStrategiesList
     { _pslSearchString :: !(Maybe Text)
     , _pslIds          :: !(Maybe [Int64])
     , _pslProFileId    :: !Int64
@@ -77,7 +77,7 @@ data PlacementStrategiesList' = PlacementStrategiesList'
     , _pslMaxResults   :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlacementStrategiesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlacementStrategiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -94,11 +94,11 @@ data PlacementStrategiesList' = PlacementStrategiesList'
 -- * 'pslSortField'
 --
 -- * 'pslMaxResults'
-placementStrategiesList'
+placementStrategiesList
     :: Int64 -- ^ 'pslProFileId'
-    -> PlacementStrategiesList'
-placementStrategiesList' pPslProFileId_ =
-    PlacementStrategiesList'
+    -> PlacementStrategiesList
+placementStrategiesList pPslProFileId_ =
+    PlacementStrategiesList
     { _pslSearchString = Nothing
     , _pslIds = Nothing
     , _pslProFileId = pPslProFileId_
@@ -116,47 +116,47 @@ placementStrategiesList' pPslProFileId_ =
 -- example, a search string of \"placementstrategy\" will match objects
 -- with name \"my placementstrategy\", \"placementstrategy 2015\", or
 -- simply \"placementstrategy\".
-pslSearchString :: Lens' PlacementStrategiesList' (Maybe Text)
+pslSearchString :: Lens' PlacementStrategiesList (Maybe Text)
 pslSearchString
   = lens _pslSearchString
       (\ s a -> s{_pslSearchString = a})
 
 -- | Select only placement strategies with these IDs.
-pslIds :: Lens' PlacementStrategiesList' [Int64]
+pslIds :: Lens' PlacementStrategiesList [Int64]
 pslIds
   = lens _pslIds (\ s a -> s{_pslIds = a}) . _Default .
       _Coerce
 
 -- | User profile ID associated with this request.
-pslProFileId :: Lens' PlacementStrategiesList' Int64
+pslProFileId :: Lens' PlacementStrategiesList Int64
 pslProFileId
   = lens _pslProFileId (\ s a -> s{_pslProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-pslSortOrder :: Lens' PlacementStrategiesList' (Maybe PlacementStrategiesListSortOrder)
+pslSortOrder :: Lens' PlacementStrategiesList (Maybe PlacementStrategiesListSortOrder)
 pslSortOrder
   = lens _pslSortOrder (\ s a -> s{_pslSortOrder = a})
 
 -- | Value of the nextPageToken from the previous result page.
-pslPageToken :: Lens' PlacementStrategiesList' (Maybe Text)
+pslPageToken :: Lens' PlacementStrategiesList (Maybe Text)
 pslPageToken
   = lens _pslPageToken (\ s a -> s{_pslPageToken = a})
 
 -- | Field by which to sort the list.
-pslSortField :: Lens' PlacementStrategiesList' (Maybe PlacementStrategiesListSortField)
+pslSortField :: Lens' PlacementStrategiesList (Maybe PlacementStrategiesListSortField)
 pslSortField
   = lens _pslSortField (\ s a -> s{_pslSortField = a})
 
 -- | Maximum number of results to return.
-pslMaxResults :: Lens' PlacementStrategiesList' (Maybe Int32)
+pslMaxResults :: Lens' PlacementStrategiesList (Maybe Int32)
 pslMaxResults
   = lens _pslMaxResults
       (\ s a -> s{_pslMaxResults = a})
 
-instance GoogleRequest PlacementStrategiesList' where
-        type Rs PlacementStrategiesList' =
+instance GoogleRequest PlacementStrategiesList where
+        type Rs PlacementStrategiesList =
              PlacementStrategiesListResponse
-        requestClient PlacementStrategiesList'{..}
+        requestClient PlacementStrategiesList{..}
           = go _pslProFileId _pslSearchString
               (_pslIds ^. _Default)
               _pslSortOrder

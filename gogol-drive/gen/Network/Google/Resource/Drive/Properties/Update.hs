@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Properties.Update
       PropertiesUpdateResource
 
     -- * Creating a Request
-    , propertiesUpdate'
-    , PropertiesUpdate'
+    , propertiesUpdate
+    , PropertiesUpdate
 
     -- * Request Lenses
     , puPropertyKey
@@ -43,7 +43,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.properties.update@ method which the
--- 'PropertiesUpdate'' request conforms to.
+-- 'PropertiesUpdate' request conforms to.
 type PropertiesUpdateResource =
      "files" :>
        Capture "fileId" Text :>
@@ -55,15 +55,15 @@ type PropertiesUpdateResource =
 
 -- | Updates a property.
 --
--- /See:/ 'propertiesUpdate'' smart constructor.
-data PropertiesUpdate' = PropertiesUpdate'
+-- /See:/ 'propertiesUpdate' smart constructor.
+data PropertiesUpdate = PropertiesUpdate
     { _puPropertyKey :: !Text
     , _puVisibility  :: !Text
     , _puPayload     :: !Property
     , _puFileId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PropertiesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'PropertiesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,13 +74,13 @@ data PropertiesUpdate' = PropertiesUpdate'
 -- * 'puPayload'
 --
 -- * 'puFileId'
-propertiesUpdate'
+propertiesUpdate
     :: Text -- ^ 'puPropertyKey'
     -> Property -- ^ 'puPayload'
     -> Text -- ^ 'puFileId'
-    -> PropertiesUpdate'
-propertiesUpdate' pPuPropertyKey_ pPuPayload_ pPuFileId_ =
-    PropertiesUpdate'
+    -> PropertiesUpdate
+propertiesUpdate pPuPropertyKey_ pPuPayload_ pPuFileId_ =
+    PropertiesUpdate
     { _puPropertyKey = pPuPropertyKey_
     , _puVisibility = "private"
     , _puPayload = pPuPayload_
@@ -88,28 +88,28 @@ propertiesUpdate' pPuPropertyKey_ pPuPayload_ pPuFileId_ =
     }
 
 -- | The key of the property.
-puPropertyKey :: Lens' PropertiesUpdate' Text
+puPropertyKey :: Lens' PropertiesUpdate Text
 puPropertyKey
   = lens _puPropertyKey
       (\ s a -> s{_puPropertyKey = a})
 
 -- | The visibility of the property.
-puVisibility :: Lens' PropertiesUpdate' Text
+puVisibility :: Lens' PropertiesUpdate Text
 puVisibility
   = lens _puVisibility (\ s a -> s{_puVisibility = a})
 
 -- | Multipart request metadata.
-puPayload :: Lens' PropertiesUpdate' Property
+puPayload :: Lens' PropertiesUpdate Property
 puPayload
   = lens _puPayload (\ s a -> s{_puPayload = a})
 
 -- | The ID of the file.
-puFileId :: Lens' PropertiesUpdate' Text
+puFileId :: Lens' PropertiesUpdate Text
 puFileId = lens _puFileId (\ s a -> s{_puFileId = a})
 
-instance GoogleRequest PropertiesUpdate' where
-        type Rs PropertiesUpdate' = Property
-        requestClient PropertiesUpdate'{..}
+instance GoogleRequest PropertiesUpdate where
+        type Rs PropertiesUpdate = Property
+        requestClient PropertiesUpdate{..}
           = go _puFileId _puPropertyKey (Just _puVisibility)
               (Just AltJSON)
               _puPayload

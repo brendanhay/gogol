@@ -31,8 +31,8 @@ module Network.Google.Resource.PagespeedOnline.PagespeedAPI.RunPagespeed
       PagespeedAPIRunPagespeedResource
 
     -- * Creating a Request
-    , pagespeedAPIRunPagespeed'
-    , PagespeedAPIRunPagespeed'
+    , pagespeedAPIRunPagespeed
+    , PagespeedAPIRunPagespeed
 
     -- * Request Lenses
     , parpScreenshot
@@ -47,7 +47,7 @@ import           Network.Google.PageSpeed.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @pagespeedonline.pagespeedapi.runpagespeed@ method which the
--- 'PagespeedAPIRunPagespeed'' request conforms to.
+-- 'PagespeedAPIRunPagespeed' request conforms to.
 type PagespeedAPIRunPagespeedResource =
      "runPagespeed" :>
        QueryParam "url" Text :>
@@ -64,8 +64,8 @@ type PagespeedAPIRunPagespeedResource =
 -- PageSpeed scores, a list of suggestions to make that page faster, and
 -- other information.
 --
--- /See:/ 'pagespeedAPIRunPagespeed'' smart constructor.
-data PagespeedAPIRunPagespeed' = PagespeedAPIRunPagespeed'
+-- /See:/ 'pagespeedAPIRunPagespeed' smart constructor.
+data PagespeedAPIRunPagespeed = PagespeedAPIRunPagespeed
     { _parpScreenshot                :: !Bool
     , _parpLocale                    :: !(Maybe Text)
     , _parpURL                       :: !Text
@@ -74,7 +74,7 @@ data PagespeedAPIRunPagespeed' = PagespeedAPIRunPagespeed'
     , _parpRule                      :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PagespeedAPIRunPagespeed'' with the minimum fields required to make a request.
+-- | Creates a value of 'PagespeedAPIRunPagespeed' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -89,11 +89,11 @@ data PagespeedAPIRunPagespeed' = PagespeedAPIRunPagespeed'
 -- * 'parpStrategy'
 --
 -- * 'parpRule'
-pagespeedAPIRunPagespeed'
+pagespeedAPIRunPagespeed
     :: Text -- ^ 'parpURL'
-    -> PagespeedAPIRunPagespeed'
-pagespeedAPIRunPagespeed' pParpURL_ =
-    PagespeedAPIRunPagespeed'
+    -> PagespeedAPIRunPagespeed
+pagespeedAPIRunPagespeed pParpURL_ =
+    PagespeedAPIRunPagespeed
     { _parpScreenshot = False
     , _parpLocale = Nothing
     , _parpURL = pParpURL_
@@ -103,43 +103,42 @@ pagespeedAPIRunPagespeed' pParpURL_ =
     }
 
 -- | Indicates if binary data containing a screenshot should be included
-parpScreenshot :: Lens' PagespeedAPIRunPagespeed' Bool
+parpScreenshot :: Lens' PagespeedAPIRunPagespeed Bool
 parpScreenshot
   = lens _parpScreenshot
       (\ s a -> s{_parpScreenshot = a})
 
 -- | The locale used to localize formatted results
-parpLocale :: Lens' PagespeedAPIRunPagespeed' (Maybe Text)
+parpLocale :: Lens' PagespeedAPIRunPagespeed (Maybe Text)
 parpLocale
   = lens _parpLocale (\ s a -> s{_parpLocale = a})
 
 -- | The URL to fetch and analyze
-parpURL :: Lens' PagespeedAPIRunPagespeed' Text
+parpURL :: Lens' PagespeedAPIRunPagespeed Text
 parpURL = lens _parpURL (\ s a -> s{_parpURL = a})
 
 -- | Indicates if third party resources should be filtered out before
 -- PageSpeed analysis.
-parpFilterThirdPartyResources :: Lens' PagespeedAPIRunPagespeed' Bool
+parpFilterThirdPartyResources :: Lens' PagespeedAPIRunPagespeed Bool
 parpFilterThirdPartyResources
   = lens _parpFilterThirdPartyResources
       (\ s a -> s{_parpFilterThirdPartyResources = a})
 
 -- | The analysis strategy to use
-parpStrategy :: Lens' PagespeedAPIRunPagespeed' (Maybe PagespeedAPIRunPagespeedStrategy)
+parpStrategy :: Lens' PagespeedAPIRunPagespeed (Maybe PagespeedAPIRunPagespeedStrategy)
 parpStrategy
   = lens _parpStrategy (\ s a -> s{_parpStrategy = a})
 
 -- | A PageSpeed rule to run; if none are given, all rules are run
-parpRule :: Lens' PagespeedAPIRunPagespeed' [Text]
+parpRule :: Lens' PagespeedAPIRunPagespeed [Text]
 parpRule
   = lens _parpRule (\ s a -> s{_parpRule = a}) .
       _Default
       . _Coerce
 
-instance GoogleRequest PagespeedAPIRunPagespeed'
-         where
-        type Rs PagespeedAPIRunPagespeed' = Result
-        requestClient PagespeedAPIRunPagespeed'{..}
+instance GoogleRequest PagespeedAPIRunPagespeed where
+        type Rs PagespeedAPIRunPagespeed = Result
+        requestClient PagespeedAPIRunPagespeed{..}
           = go (Just _parpURL) (Just _parpScreenshot)
               _parpLocale
               (Just _parpFilterThirdPartyResources)

@@ -29,19 +29,19 @@ module Network.Google.Resource.Drive.Parents.Delete
       ParentsDeleteResource
 
     -- * Creating a Request
-    , parentsDelete'
-    , ParentsDelete'
+    , parentsDelete
+    , ParentsDelete
 
     -- * Request Lenses
-    , parFileId
-    , parParentId
+    , pddFileId
+    , pddParentId
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.parents.delete@ method which the
--- 'ParentsDelete'' request conforms to.
+-- 'ParentsDelete' request conforms to.
 type ParentsDeleteResource =
      "files" :>
        Capture "fileId" Text :>
@@ -51,43 +51,43 @@ type ParentsDeleteResource =
 
 -- | Removes a parent from a file.
 --
--- /See:/ 'parentsDelete'' smart constructor.
-data ParentsDelete' = ParentsDelete'
-    { _parFileId   :: !Text
-    , _parParentId :: !Text
+-- /See:/ 'parentsDelete' smart constructor.
+data ParentsDelete = ParentsDelete
+    { _pddFileId   :: !Text
+    , _pddParentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ParentsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ParentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'parFileId'
+-- * 'pddFileId'
 --
--- * 'parParentId'
-parentsDelete'
-    :: Text -- ^ 'parFileId'
-    -> Text -- ^ 'parParentId'
-    -> ParentsDelete'
-parentsDelete' pParFileId_ pParParentId_ =
-    ParentsDelete'
-    { _parFileId = pParFileId_
-    , _parParentId = pParParentId_
+-- * 'pddParentId'
+parentsDelete
+    :: Text -- ^ 'pddFileId'
+    -> Text -- ^ 'pddParentId'
+    -> ParentsDelete
+parentsDelete pPddFileId_ pPddParentId_ =
+    ParentsDelete
+    { _pddFileId = pPddFileId_
+    , _pddParentId = pPddParentId_
     }
 
 -- | The ID of the file.
-parFileId :: Lens' ParentsDelete' Text
-parFileId
-  = lens _parFileId (\ s a -> s{_parFileId = a})
+pddFileId :: Lens' ParentsDelete Text
+pddFileId
+  = lens _pddFileId (\ s a -> s{_pddFileId = a})
 
 -- | The ID of the parent.
-parParentId :: Lens' ParentsDelete' Text
-parParentId
-  = lens _parParentId (\ s a -> s{_parParentId = a})
+pddParentId :: Lens' ParentsDelete Text
+pddParentId
+  = lens _pddParentId (\ s a -> s{_pddParentId = a})
 
-instance GoogleRequest ParentsDelete' where
-        type Rs ParentsDelete' = ()
-        requestClient ParentsDelete'{..}
-          = go _parFileId _parParentId (Just AltJSON)
+instance GoogleRequest ParentsDelete where
+        type Rs ParentsDelete = ()
+        requestClient ParentsDelete{..}
+          = go _pddFileId _pddParentId (Just AltJSON)
               driveService
           where go
                   = buildClient (Proxy :: Proxy ParentsDeleteResource)

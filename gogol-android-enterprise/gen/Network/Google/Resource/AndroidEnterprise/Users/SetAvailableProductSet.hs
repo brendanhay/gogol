@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidEnterprise.Users.SetAvailableProductSet
       UsersSetAvailableProductSetResource
 
     -- * Creating a Request
-    , usersSetAvailableProductSet'
-    , UsersSetAvailableProductSet'
+    , usersSetAvailableProductSet
+    , UsersSetAvailableProductSet
 
     -- * Request Lenses
     , usapsEnterpriseId
@@ -42,7 +42,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.users.setAvailableProductSet@ method which the
--- 'UsersSetAvailableProductSet'' request conforms to.
+-- 'UsersSetAvailableProductSet' request conforms to.
 type UsersSetAvailableProductSetResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -54,14 +54,14 @@ type UsersSetAvailableProductSetResource =
 
 -- | Modifies the set of products a user is entitled to access.
 --
--- /See:/ 'usersSetAvailableProductSet'' smart constructor.
-data UsersSetAvailableProductSet' = UsersSetAvailableProductSet'
+-- /See:/ 'usersSetAvailableProductSet' smart constructor.
+data UsersSetAvailableProductSet = UsersSetAvailableProductSet
     { _usapsEnterpriseId :: !Text
     , _usapsPayload      :: !ProductSet
     , _usapsUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersSetAvailableProductSet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersSetAvailableProductSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,38 +70,38 @@ data UsersSetAvailableProductSet' = UsersSetAvailableProductSet'
 -- * 'usapsPayload'
 --
 -- * 'usapsUserId'
-usersSetAvailableProductSet'
+usersSetAvailableProductSet
     :: Text -- ^ 'usapsEnterpriseId'
     -> ProductSet -- ^ 'usapsPayload'
     -> Text -- ^ 'usapsUserId'
-    -> UsersSetAvailableProductSet'
-usersSetAvailableProductSet' pUsapsEnterpriseId_ pUsapsPayload_ pUsapsUserId_ =
-    UsersSetAvailableProductSet'
+    -> UsersSetAvailableProductSet
+usersSetAvailableProductSet pUsapsEnterpriseId_ pUsapsPayload_ pUsapsUserId_ =
+    UsersSetAvailableProductSet
     { _usapsEnterpriseId = pUsapsEnterpriseId_
     , _usapsPayload = pUsapsPayload_
     , _usapsUserId = pUsapsUserId_
     }
 
 -- | The ID of the enterprise.
-usapsEnterpriseId :: Lens' UsersSetAvailableProductSet' Text
+usapsEnterpriseId :: Lens' UsersSetAvailableProductSet Text
 usapsEnterpriseId
   = lens _usapsEnterpriseId
       (\ s a -> s{_usapsEnterpriseId = a})
 
 -- | Multipart request metadata.
-usapsPayload :: Lens' UsersSetAvailableProductSet' ProductSet
+usapsPayload :: Lens' UsersSetAvailableProductSet ProductSet
 usapsPayload
   = lens _usapsPayload (\ s a -> s{_usapsPayload = a})
 
 -- | The ID of the user.
-usapsUserId :: Lens' UsersSetAvailableProductSet' Text
+usapsUserId :: Lens' UsersSetAvailableProductSet Text
 usapsUserId
   = lens _usapsUserId (\ s a -> s{_usapsUserId = a})
 
-instance GoogleRequest UsersSetAvailableProductSet'
+instance GoogleRequest UsersSetAvailableProductSet
          where
-        type Rs UsersSetAvailableProductSet' = ProductSet
-        requestClient UsersSetAvailableProductSet'{..}
+        type Rs UsersSetAvailableProductSet = ProductSet
+        requestClient UsersSetAvailableProductSet{..}
           = go _usapsEnterpriseId _usapsUserId (Just AltJSON)
               _usapsPayload
               androidEnterpriseService

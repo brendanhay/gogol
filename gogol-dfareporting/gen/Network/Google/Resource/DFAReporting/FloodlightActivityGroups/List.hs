@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List
       FloodlightActivityGroupsListResource
 
     -- * Creating a Request
-    , floodlightActivityGroupsList'
-    , FloodlightActivityGroupsList'
+    , floodlightActivityGroupsList
+    , FloodlightActivityGroupsList
 
     -- * Request Lenses
     , faglFloodlightConfigurationId
@@ -49,7 +49,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightActivityGroups.list@ method which the
--- 'FloodlightActivityGroupsList'' request conforms to.
+-- 'FloodlightActivityGroupsList' request conforms to.
 type FloodlightActivityGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -72,8 +72,8 @@ type FloodlightActivityGroupsListResource =
 
 -- | Retrieves a list of floodlight activity groups, possibly filtered.
 --
--- /See:/ 'floodlightActivityGroupsList'' smart constructor.
-data FloodlightActivityGroupsList' = FloodlightActivityGroupsList'
+-- /See:/ 'floodlightActivityGroupsList' smart constructor.
+data FloodlightActivityGroupsList = FloodlightActivityGroupsList
     { _faglFloodlightConfigurationId :: !(Maybe Int64)
     , _faglAdvertiserId              :: !(Maybe Int64)
     , _faglSearchString              :: !(Maybe Text)
@@ -86,7 +86,7 @@ data FloodlightActivityGroupsList' = FloodlightActivityGroupsList'
     , _faglMaxResults                :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FloodlightActivityGroupsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'FloodlightActivityGroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -109,11 +109,11 @@ data FloodlightActivityGroupsList' = FloodlightActivityGroupsList'
 -- * 'faglType'
 --
 -- * 'faglMaxResults'
-floodlightActivityGroupsList'
+floodlightActivityGroupsList
     :: Int64 -- ^ 'faglProFileId'
-    -> FloodlightActivityGroupsList'
-floodlightActivityGroupsList' pFaglProFileId_ =
-    FloodlightActivityGroupsList'
+    -> FloodlightActivityGroupsList
+floodlightActivityGroupsList pFaglProFileId_ =
+    FloodlightActivityGroupsList
     { _faglFloodlightConfigurationId = Nothing
     , _faglAdvertiserId = Nothing
     , _faglSearchString = Nothing
@@ -129,7 +129,7 @@ floodlightActivityGroupsList' pFaglProFileId_ =
 -- | Select only floodlight activity groups with the specified floodlight
 -- configuration ID. Must specify either advertiserId, or
 -- floodlightConfigurationId for a non-empty result.
-faglFloodlightConfigurationId :: Lens' FloodlightActivityGroupsList' (Maybe Int64)
+faglFloodlightConfigurationId :: Lens' FloodlightActivityGroupsList (Maybe Int64)
 faglFloodlightConfigurationId
   = lens _faglFloodlightConfigurationId
       (\ s a -> s{_faglFloodlightConfigurationId = a})
@@ -137,7 +137,7 @@ faglFloodlightConfigurationId
 -- | Select only floodlight activity groups with the specified advertiser ID.
 -- Must specify either advertiserId or floodlightConfigurationId for a
 -- non-empty result.
-faglAdvertiserId :: Lens' FloodlightActivityGroupsList' (Maybe Int64)
+faglAdvertiserId :: Lens' FloodlightActivityGroupsList (Maybe Int64)
 faglAdvertiserId
   = lens _faglAdvertiserId
       (\ s a -> s{_faglAdvertiserId = a})
@@ -151,7 +151,7 @@ faglAdvertiserId
 -- example, a search string of \"floodlightactivitygroup\" will match
 -- objects with name \"my floodlightactivitygroup activity\",
 -- \"floodlightactivitygroup 2015\", or simply \"floodlightactivitygroup\".
-faglSearchString :: Lens' FloodlightActivityGroupsList' (Maybe Text)
+faglSearchString :: Lens' FloodlightActivityGroupsList (Maybe Text)
 faglSearchString
   = lens _faglSearchString
       (\ s a -> s{_faglSearchString = a})
@@ -159,51 +159,51 @@ faglSearchString
 -- | Select only floodlight activity groups with the specified IDs. Must
 -- specify either advertiserId or floodlightConfigurationId for a non-empty
 -- result.
-faglIds :: Lens' FloodlightActivityGroupsList' [Int64]
+faglIds :: Lens' FloodlightActivityGroupsList [Int64]
 faglIds
   = lens _faglIds (\ s a -> s{_faglIds = a}) . _Default
       . _Coerce
 
 -- | User profile ID associated with this request.
-faglProFileId :: Lens' FloodlightActivityGroupsList' Int64
+faglProFileId :: Lens' FloodlightActivityGroupsList Int64
 faglProFileId
   = lens _faglProFileId
       (\ s a -> s{_faglProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-faglSortOrder :: Lens' FloodlightActivityGroupsList' (Maybe FloodlightActivityGroupsListSortOrder)
+faglSortOrder :: Lens' FloodlightActivityGroupsList (Maybe FloodlightActivityGroupsListSortOrder)
 faglSortOrder
   = lens _faglSortOrder
       (\ s a -> s{_faglSortOrder = a})
 
 -- | Value of the nextPageToken from the previous result page.
-faglPageToken :: Lens' FloodlightActivityGroupsList' (Maybe Text)
+faglPageToken :: Lens' FloodlightActivityGroupsList (Maybe Text)
 faglPageToken
   = lens _faglPageToken
       (\ s a -> s{_faglPageToken = a})
 
 -- | Field by which to sort the list.
-faglSortField :: Lens' FloodlightActivityGroupsList' (Maybe FloodlightActivityGroupsListSortField)
+faglSortField :: Lens' FloodlightActivityGroupsList (Maybe FloodlightActivityGroupsListSortField)
 faglSortField
   = lens _faglSortField
       (\ s a -> s{_faglSortField = a})
 
 -- | Select only floodlight activity groups with the specified floodlight
 -- activity group type.
-faglType :: Lens' FloodlightActivityGroupsList' (Maybe FloodlightActivityGroupsListType)
+faglType :: Lens' FloodlightActivityGroupsList (Maybe FloodlightActivityGroupsListType)
 faglType = lens _faglType (\ s a -> s{_faglType = a})
 
 -- | Maximum number of results to return.
-faglMaxResults :: Lens' FloodlightActivityGroupsList' (Maybe Int32)
+faglMaxResults :: Lens' FloodlightActivityGroupsList (Maybe Int32)
 faglMaxResults
   = lens _faglMaxResults
       (\ s a -> s{_faglMaxResults = a})
 
-instance GoogleRequest FloodlightActivityGroupsList'
+instance GoogleRequest FloodlightActivityGroupsList
          where
-        type Rs FloodlightActivityGroupsList' =
+        type Rs FloodlightActivityGroupsList =
              FloodlightActivityGroupsListResponse
-        requestClient FloodlightActivityGroupsList'{..}
+        requestClient FloodlightActivityGroupsList{..}
           = go _faglProFileId _faglFloodlightConfigurationId
               _faglAdvertiserId
               _faglSearchString

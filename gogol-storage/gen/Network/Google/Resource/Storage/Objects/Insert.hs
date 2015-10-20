@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.Objects.Insert
       ObjectsInsertResource
 
     -- * Creating a Request
-    , objectsInsert'
-    , ObjectsInsert'
+    , objectsInsert
+    , ObjectsInsert
 
     -- * Request Lenses
     , oiIfMetagenerationMatch
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.insert@ method which the
--- 'ObjectsInsert'' request conforms to.
+-- 'ObjectsInsert' request conforms to.
 type ObjectsInsertResource =
      "b" :>
        Capture "bucket" Text :>
@@ -86,8 +86,8 @@ type ObjectsInsertResource =
 
 -- | Stores a new object and metadata.
 --
--- /See:/ 'objectsInsert'' smart constructor.
-data ObjectsInsert' = ObjectsInsert'
+-- /See:/ 'objectsInsert' smart constructor.
+data ObjectsInsert = ObjectsInsert
     { _oiIfMetagenerationMatch    :: !(Maybe Int64)
     , _oiIfGenerationNotMatch     :: !(Maybe Int64)
     , _oiIfGenerationMatch        :: !(Maybe Int64)
@@ -101,7 +101,7 @@ data ObjectsInsert' = ObjectsInsert'
     , _oiProjection               :: !(Maybe ObjectsInsertProjection)
     }
 
--- | Creates a value of 'ObjectsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ObjectsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -126,13 +126,13 @@ data ObjectsInsert' = ObjectsInsert'
 -- * 'oiContentEncoding'
 --
 -- * 'oiProjection'
-objectsInsert'
+objectsInsert
     :: Text -- ^ 'oiBucket'
     -> Object -- ^ 'oiPayload'
     -> Body -- ^ 'oiMedia'
-    -> ObjectsInsert'
-objectsInsert' pOiBucket_ pOiPayload_ pOiMedia_ =
-    ObjectsInsert'
+    -> ObjectsInsert
+objectsInsert pOiBucket_ pOiPayload_ pOiMedia_ =
+    ObjectsInsert
     { _oiIfMetagenerationMatch = Nothing
     , _oiIfGenerationNotMatch = Nothing
     , _oiIfGenerationMatch = Nothing
@@ -148,54 +148,54 @@ objectsInsert' pOiBucket_ pOiPayload_ pOiMedia_ =
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.
-oiIfMetagenerationMatch :: Lens' ObjectsInsert' (Maybe Int64)
+oiIfMetagenerationMatch :: Lens' ObjectsInsert (Maybe Int64)
 oiIfMetagenerationMatch
   = lens _oiIfMetagenerationMatch
       (\ s a -> s{_oiIfMetagenerationMatch = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation does not match the given value.
-oiIfGenerationNotMatch :: Lens' ObjectsInsert' (Maybe Int64)
+oiIfGenerationNotMatch :: Lens' ObjectsInsert (Maybe Int64)
 oiIfGenerationNotMatch
   = lens _oiIfGenerationNotMatch
       (\ s a -> s{_oiIfGenerationNotMatch = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation matches the given value.
-oiIfGenerationMatch :: Lens' ObjectsInsert' (Maybe Int64)
+oiIfGenerationMatch :: Lens' ObjectsInsert (Maybe Int64)
 oiIfGenerationMatch
   = lens _oiIfGenerationMatch
       (\ s a -> s{_oiIfGenerationMatch = a})
 
 -- | Apply a predefined set of access controls to this object.
-oiPredefinedACL :: Lens' ObjectsInsert' (Maybe ObjectsInsertPredefinedACL)
+oiPredefinedACL :: Lens' ObjectsInsert (Maybe ObjectsInsertPredefinedACL)
 oiPredefinedACL
   = lens _oiPredefinedACL
       (\ s a -> s{_oiPredefinedACL = a})
 
 -- | Name of the bucket in which to store the new object. Overrides the
 -- provided object metadata\'s bucket value, if any.
-oiBucket :: Lens' ObjectsInsert' Text
+oiBucket :: Lens' ObjectsInsert Text
 oiBucket = lens _oiBucket (\ s a -> s{_oiBucket = a})
 
 -- | Multipart request metadata.
-oiPayload :: Lens' ObjectsInsert' Object
+oiPayload :: Lens' ObjectsInsert Object
 oiPayload
   = lens _oiPayload (\ s a -> s{_oiPayload = a})
 
-oiMedia :: Lens' ObjectsInsert' Body
+oiMedia :: Lens' ObjectsInsert Body
 oiMedia = lens _oiMedia (\ s a -> s{_oiMedia = a})
 
 -- | Name of the object. Required when the object metadata is not otherwise
 -- provided. Overrides the object metadata\'s name value, if any. For
 -- information about how to URL encode object names to be path safe, see
 -- Encoding URI Path Parts.
-oiName :: Lens' ObjectsInsert' (Maybe Text)
+oiName :: Lens' ObjectsInsert (Maybe Text)
 oiName = lens _oiName (\ s a -> s{_oiName = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration does not match the given value.
-oiIfMetagenerationNotMatch :: Lens' ObjectsInsert' (Maybe Int64)
+oiIfMetagenerationNotMatch :: Lens' ObjectsInsert (Maybe Int64)
 oiIfMetagenerationNotMatch
   = lens _oiIfMetagenerationNotMatch
       (\ s a -> s{_oiIfMetagenerationNotMatch = a})
@@ -205,20 +205,20 @@ oiIfMetagenerationNotMatch
 -- contentEncoding metadata property. This can be useful when uploading an
 -- object with uploadType=media to indicate the encoding of the content
 -- being uploaded.
-oiContentEncoding :: Lens' ObjectsInsert' (Maybe Text)
+oiContentEncoding :: Lens' ObjectsInsert (Maybe Text)
 oiContentEncoding
   = lens _oiContentEncoding
       (\ s a -> s{_oiContentEncoding = a})
 
 -- | Set of properties to return. Defaults to noAcl, unless the object
 -- resource specifies the acl property, when it defaults to full.
-oiProjection :: Lens' ObjectsInsert' (Maybe ObjectsInsertProjection)
+oiProjection :: Lens' ObjectsInsert (Maybe ObjectsInsertProjection)
 oiProjection
   = lens _oiProjection (\ s a -> s{_oiProjection = a})
 
-instance GoogleRequest ObjectsInsert' where
-        type Rs ObjectsInsert' = Object
-        requestClient ObjectsInsert'{..}
+instance GoogleRequest ObjectsInsert where
+        type Rs ObjectsInsert = Object
+        requestClient ObjectsInsert{..}
           = go _oiBucket _oiIfMetagenerationMatch
               _oiIfGenerationNotMatch
               _oiIfGenerationMatch
@@ -235,10 +235,10 @@ instance GoogleRequest ObjectsInsert' where
                   = buildClient (Proxy :: Proxy ObjectsInsertResource)
                       mempty
 
-instance GoogleRequest (MediaDownload ObjectsInsert')
+instance GoogleRequest (MediaDownload ObjectsInsert)
          where
-        type Rs (MediaDownload ObjectsInsert') = Stream
-        requestClient (MediaDownload ObjectsInsert'{..})
+        type Rs (MediaDownload ObjectsInsert) = Stream
+        requestClient (MediaDownload ObjectsInsert{..})
           = go _oiBucket _oiIfMetagenerationMatch
               _oiIfGenerationNotMatch
               _oiIfGenerationMatch

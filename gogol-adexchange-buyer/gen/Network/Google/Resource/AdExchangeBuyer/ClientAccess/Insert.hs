@@ -27,8 +27,8 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Insert
       ClientAccessInsertResource
 
     -- * Creating a Request
-    , clientAccessInsert'
-    , ClientAccessInsert'
+    , clientAccessInsert
+    , ClientAccessInsert
 
     -- * Request Lenses
     , caiSponsorAccountId
@@ -40,7 +40,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.clientaccess.insert@ method which the
--- 'ClientAccessInsert'' request conforms to.
+-- 'ClientAccessInsert' request conforms to.
 type ClientAccessInsertResource =
      "clientAccess" :>
        QueryParam "sponsorAccountId" Int32 :>
@@ -50,14 +50,14 @@ type ClientAccessInsertResource =
                Post '[JSON] ClientAccessCapabilities
 
 --
--- /See:/ 'clientAccessInsert'' smart constructor.
-data ClientAccessInsert' = ClientAccessInsert'
+-- /See:/ 'clientAccessInsert' smart constructor.
+data ClientAccessInsert = ClientAccessInsert
     { _caiSponsorAccountId :: !(Maybe Int32)
     , _caiPayload          :: !ClientAccessCapabilities
     , _caiClientAccountId  :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ClientAccessInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ClientAccessInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -66,35 +66,34 @@ data ClientAccessInsert' = ClientAccessInsert'
 -- * 'caiPayload'
 --
 -- * 'caiClientAccountId'
-clientAccessInsert'
+clientAccessInsert
     :: ClientAccessCapabilities -- ^ 'caiPayload'
-    -> ClientAccessInsert'
-clientAccessInsert' pCaiPayload_ =
-    ClientAccessInsert'
+    -> ClientAccessInsert
+clientAccessInsert pCaiPayload_ =
+    ClientAccessInsert
     { _caiSponsorAccountId = Nothing
     , _caiPayload = pCaiPayload_
     , _caiClientAccountId = Nothing
     }
 
-caiSponsorAccountId :: Lens' ClientAccessInsert' (Maybe Int32)
+caiSponsorAccountId :: Lens' ClientAccessInsert (Maybe Int32)
 caiSponsorAccountId
   = lens _caiSponsorAccountId
       (\ s a -> s{_caiSponsorAccountId = a})
 
 -- | Multipart request metadata.
-caiPayload :: Lens' ClientAccessInsert' ClientAccessCapabilities
+caiPayload :: Lens' ClientAccessInsert ClientAccessCapabilities
 caiPayload
   = lens _caiPayload (\ s a -> s{_caiPayload = a})
 
-caiClientAccountId :: Lens' ClientAccessInsert' (Maybe Int64)
+caiClientAccountId :: Lens' ClientAccessInsert (Maybe Int64)
 caiClientAccountId
   = lens _caiClientAccountId
       (\ s a -> s{_caiClientAccountId = a})
 
-instance GoogleRequest ClientAccessInsert' where
-        type Rs ClientAccessInsert' =
-             ClientAccessCapabilities
-        requestClient ClientAccessInsert'{..}
+instance GoogleRequest ClientAccessInsert where
+        type Rs ClientAccessInsert = ClientAccessCapabilities
+        requestClient ClientAccessInsert{..}
           = go _caiSponsorAccountId _caiClientAccountId
               (Just AltJSON)
               _caiPayload

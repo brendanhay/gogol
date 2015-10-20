@@ -34,8 +34,8 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.SetTargetPools
       InstanceGroupManagersSetTargetPoolsResource
 
     -- * Creating a Request
-    , instanceGroupManagersSetTargetPools'
-    , InstanceGroupManagersSetTargetPools'
+    , instanceGroupManagersSetTargetPools
+    , InstanceGroupManagersSetTargetPools
 
     -- * Request Lenses
     , igmstpProject
@@ -48,7 +48,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroupManagers.setTargetPools@ method which the
--- 'InstanceGroupManagersSetTargetPools'' request conforms to.
+-- 'InstanceGroupManagersSetTargetPools' request conforms to.
 type InstanceGroupManagersSetTargetPoolsResource =
      Capture "project" Text :>
        "zones" :>
@@ -68,15 +68,15 @@ type InstanceGroupManagersSetTargetPoolsResource =
 -- added to their target pools. The change might take some time to apply to
 -- all of the instances in the group depending on the size of the group.
 --
--- /See:/ 'instanceGroupManagersSetTargetPools'' smart constructor.
-data InstanceGroupManagersSetTargetPools' = InstanceGroupManagersSetTargetPools'
+-- /See:/ 'instanceGroupManagersSetTargetPools' smart constructor.
+data InstanceGroupManagersSetTargetPools = InstanceGroupManagersSetTargetPools
     { _igmstpProject              :: !Text
     , _igmstpInstanceGroupManager :: !Text
     , _igmstpZone                 :: !Text
     , _igmstpPayload              :: !InstanceGroupManagersSetTargetPoolsRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupManagersSetTargetPools'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupManagersSetTargetPools' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -87,14 +87,14 @@ data InstanceGroupManagersSetTargetPools' = InstanceGroupManagersSetTargetPools'
 -- * 'igmstpZone'
 --
 -- * 'igmstpPayload'
-instanceGroupManagersSetTargetPools'
+instanceGroupManagersSetTargetPools
     :: Text -- ^ 'igmstpProject'
     -> Text -- ^ 'igmstpInstanceGroupManager'
     -> Text -- ^ 'igmstpZone'
     -> InstanceGroupManagersSetTargetPoolsRequest -- ^ 'igmstpPayload'
-    -> InstanceGroupManagersSetTargetPools'
-instanceGroupManagersSetTargetPools' pIgmstpProject_ pIgmstpInstanceGroupManager_ pIgmstpZone_ pIgmstpPayload_ =
-    InstanceGroupManagersSetTargetPools'
+    -> InstanceGroupManagersSetTargetPools
+instanceGroupManagersSetTargetPools pIgmstpProject_ pIgmstpInstanceGroupManager_ pIgmstpZone_ pIgmstpPayload_ =
+    InstanceGroupManagersSetTargetPools
     { _igmstpProject = pIgmstpProject_
     , _igmstpInstanceGroupManager = pIgmstpInstanceGroupManager_
     , _igmstpZone = pIgmstpZone_
@@ -102,34 +102,33 @@ instanceGroupManagersSetTargetPools' pIgmstpProject_ pIgmstpInstanceGroupManager
     }
 
 -- | The project ID for this request.
-igmstpProject :: Lens' InstanceGroupManagersSetTargetPools' Text
+igmstpProject :: Lens' InstanceGroupManagersSetTargetPools Text
 igmstpProject
   = lens _igmstpProject
       (\ s a -> s{_igmstpProject = a})
 
 -- | The name of the managed instance group.
-igmstpInstanceGroupManager :: Lens' InstanceGroupManagersSetTargetPools' Text
+igmstpInstanceGroupManager :: Lens' InstanceGroupManagersSetTargetPools Text
 igmstpInstanceGroupManager
   = lens _igmstpInstanceGroupManager
       (\ s a -> s{_igmstpInstanceGroupManager = a})
 
 -- | The name of the zone where the managed instance group is located.
-igmstpZone :: Lens' InstanceGroupManagersSetTargetPools' Text
+igmstpZone :: Lens' InstanceGroupManagersSetTargetPools Text
 igmstpZone
   = lens _igmstpZone (\ s a -> s{_igmstpZone = a})
 
 -- | Multipart request metadata.
-igmstpPayload :: Lens' InstanceGroupManagersSetTargetPools' InstanceGroupManagersSetTargetPoolsRequest
+igmstpPayload :: Lens' InstanceGroupManagersSetTargetPools InstanceGroupManagersSetTargetPoolsRequest
 igmstpPayload
   = lens _igmstpPayload
       (\ s a -> s{_igmstpPayload = a})
 
 instance GoogleRequest
-         InstanceGroupManagersSetTargetPools' where
-        type Rs InstanceGroupManagersSetTargetPools' =
+         InstanceGroupManagersSetTargetPools where
+        type Rs InstanceGroupManagersSetTargetPools =
              Operation
-        requestClient
-          InstanceGroupManagersSetTargetPools'{..}
+        requestClient InstanceGroupManagersSetTargetPools{..}
           = go _igmstpProject _igmstpZone
               _igmstpInstanceGroupManager
               (Just AltJSON)

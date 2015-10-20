@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Domains.List
       DomainsListResource
 
     -- * Creating a Request
-    , domainsList'
-    , DomainsList'
+    , domainsList
+    , DomainsList
 
     -- * Request Lenses
     , dlCustomer
@@ -40,7 +40,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.domains.list@ method which the
--- 'DomainsList'' request conforms to.
+-- 'DomainsList' request conforms to.
 type DomainsListResource =
      "customer" :>
        Capture "customer" Text :>
@@ -49,32 +49,32 @@ type DomainsListResource =
 
 -- | Lists the domains of the customer.
 --
--- /See:/ 'domainsList'' smart constructor.
-newtype DomainsList' = DomainsList'
+-- /See:/ 'domainsList' smart constructor.
+newtype DomainsList = DomainsList
     { _dlCustomer :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DomainsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'DomainsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dlCustomer'
-domainsList'
+domainsList
     :: Text -- ^ 'dlCustomer'
-    -> DomainsList'
-domainsList' pDlCustomer_ =
-    DomainsList'
+    -> DomainsList
+domainsList pDlCustomer_ =
+    DomainsList
     { _dlCustomer = pDlCustomer_
     }
 
 -- | Immutable id of the Google Apps account.
-dlCustomer :: Lens' DomainsList' Text
+dlCustomer :: Lens' DomainsList Text
 dlCustomer
   = lens _dlCustomer (\ s a -> s{_dlCustomer = a})
 
-instance GoogleRequest DomainsList' where
-        type Rs DomainsList' = Domains2
-        requestClient DomainsList'{..}
+instance GoogleRequest DomainsList where
+        type Rs DomainsList = Domains2
+        requestClient DomainsList{..}
           = go _dlCustomer (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy DomainsListResource)

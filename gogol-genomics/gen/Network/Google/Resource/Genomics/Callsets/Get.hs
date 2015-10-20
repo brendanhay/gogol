@@ -29,8 +29,8 @@ module Network.Google.Resource.Genomics.Callsets.Get
       CallsetsGetResource
 
     -- * Creating a Request
-    , callsetsGet'
-    , CallsetsGet'
+    , callsetsGet
+    , CallsetsGet
 
     -- * Request Lenses
     , cgXgafv
@@ -47,7 +47,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.callsets.get@ method which the
--- 'CallsetsGet'' request conforms to.
+-- 'CallsetsGet' request conforms to.
 type CallsetsGetResource =
      "v1" :>
        "callsets" :>
@@ -63,8 +63,8 @@ type CallsetsGetResource =
 
 -- | Gets a call set by ID.
 --
--- /See:/ 'callsetsGet'' smart constructor.
-data CallsetsGet' = CallsetsGet'
+-- /See:/ 'callsetsGet' smart constructor.
+data CallsetsGet = CallsetsGet
     { _cgXgafv          :: !(Maybe Text)
     , _cgUploadProtocol :: !(Maybe Text)
     , _cgPp             :: !Bool
@@ -75,7 +75,7 @@ data CallsetsGet' = CallsetsGet'
     , _cgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CallsetsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CallsetsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -94,11 +94,11 @@ data CallsetsGet' = CallsetsGet'
 -- * 'cgCallSetId'
 --
 -- * 'cgCallback'
-callsetsGet'
+callsetsGet
     :: Text -- ^ 'cgCallSetId'
-    -> CallsetsGet'
-callsetsGet' pCgCallSetId_ =
-    CallsetsGet'
+    -> CallsetsGet
+callsetsGet pCgCallSetId_ =
+    CallsetsGet
     { _cgXgafv = Nothing
     , _cgUploadProtocol = Nothing
     , _cgPp = True
@@ -110,49 +110,49 @@ callsetsGet' pCgCallSetId_ =
     }
 
 -- | V1 error format.
-cgXgafv :: Lens' CallsetsGet' (Maybe Text)
+cgXgafv :: Lens' CallsetsGet (Maybe Text)
 cgXgafv = lens _cgXgafv (\ s a -> s{_cgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-cgUploadProtocol :: Lens' CallsetsGet' (Maybe Text)
+cgUploadProtocol :: Lens' CallsetsGet (Maybe Text)
 cgUploadProtocol
   = lens _cgUploadProtocol
       (\ s a -> s{_cgUploadProtocol = a})
 
 -- | Pretty-print response.
-cgPp :: Lens' CallsetsGet' Bool
+cgPp :: Lens' CallsetsGet Bool
 cgPp = lens _cgPp (\ s a -> s{_cgPp = a})
 
 -- | OAuth access token.
-cgAccessToken :: Lens' CallsetsGet' (Maybe Text)
+cgAccessToken :: Lens' CallsetsGet (Maybe Text)
 cgAccessToken
   = lens _cgAccessToken
       (\ s a -> s{_cgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-cgUploadType :: Lens' CallsetsGet' (Maybe Text)
+cgUploadType :: Lens' CallsetsGet (Maybe Text)
 cgUploadType
   = lens _cgUploadType (\ s a -> s{_cgUploadType = a})
 
 -- | OAuth bearer token.
-cgBearerToken :: Lens' CallsetsGet' (Maybe Text)
+cgBearerToken :: Lens' CallsetsGet (Maybe Text)
 cgBearerToken
   = lens _cgBearerToken
       (\ s a -> s{_cgBearerToken = a})
 
 -- | The ID of the call set.
-cgCallSetId :: Lens' CallsetsGet' Text
+cgCallSetId :: Lens' CallsetsGet Text
 cgCallSetId
   = lens _cgCallSetId (\ s a -> s{_cgCallSetId = a})
 
 -- | JSONP
-cgCallback :: Lens' CallsetsGet' (Maybe Text)
+cgCallback :: Lens' CallsetsGet (Maybe Text)
 cgCallback
   = lens _cgCallback (\ s a -> s{_cgCallback = a})
 
-instance GoogleRequest CallsetsGet' where
-        type Rs CallsetsGet' = CallSet
-        requestClient CallsetsGet'{..}
+instance GoogleRequest CallsetsGet where
+        type Rs CallsetsGet = CallSet
+        requestClient CallsetsGet{..}
           = go _cgCallSetId _cgXgafv _cgUploadProtocol
               (Just _cgPp)
               _cgAccessToken

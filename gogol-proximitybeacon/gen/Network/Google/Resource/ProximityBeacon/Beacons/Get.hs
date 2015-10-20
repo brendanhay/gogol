@@ -29,8 +29,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Get
       BeaconsGetResource
 
     -- * Creating a Request
-    , beaconsGet'
-    , BeaconsGet'
+    , beaconsGet
+    , BeaconsGet
 
     -- * Request Lenses
     , bgXgafv
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.get@ method which the
--- 'BeaconsGet'' request conforms to.
+-- 'BeaconsGet' request conforms to.
 type BeaconsGetResource =
      "v1beta1" :>
        Capture "beaconName" Text :>
@@ -62,8 +62,8 @@ type BeaconsGetResource =
 
 -- | Returns detailed information about the specified beacon.
 --
--- /See:/ 'beaconsGet'' smart constructor.
-data BeaconsGet' = BeaconsGet'
+-- /See:/ 'beaconsGet' smart constructor.
+data BeaconsGet = BeaconsGet
     { _bgXgafv          :: !(Maybe Text)
     , _bgUploadProtocol :: !(Maybe Text)
     , _bgPp             :: !Bool
@@ -74,7 +74,7 @@ data BeaconsGet' = BeaconsGet'
     , _bgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BeaconsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'BeaconsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -93,11 +93,11 @@ data BeaconsGet' = BeaconsGet'
 -- * 'bgBearerToken'
 --
 -- * 'bgCallback'
-beaconsGet'
+beaconsGet
     :: Text -- ^ 'bgBeaconName'
-    -> BeaconsGet'
-beaconsGet' pBgBeaconName_ =
-    BeaconsGet'
+    -> BeaconsGet
+beaconsGet pBgBeaconName_ =
+    BeaconsGet
     { _bgXgafv = Nothing
     , _bgUploadProtocol = Nothing
     , _bgPp = True
@@ -109,49 +109,49 @@ beaconsGet' pBgBeaconName_ =
     }
 
 -- | V1 error format.
-bgXgafv :: Lens' BeaconsGet' (Maybe Text)
+bgXgafv :: Lens' BeaconsGet (Maybe Text)
 bgXgafv = lens _bgXgafv (\ s a -> s{_bgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-bgUploadProtocol :: Lens' BeaconsGet' (Maybe Text)
+bgUploadProtocol :: Lens' BeaconsGet (Maybe Text)
 bgUploadProtocol
   = lens _bgUploadProtocol
       (\ s a -> s{_bgUploadProtocol = a})
 
 -- | Pretty-print response.
-bgPp :: Lens' BeaconsGet' Bool
+bgPp :: Lens' BeaconsGet Bool
 bgPp = lens _bgPp (\ s a -> s{_bgPp = a})
 
 -- | OAuth access token.
-bgAccessToken :: Lens' BeaconsGet' (Maybe Text)
+bgAccessToken :: Lens' BeaconsGet (Maybe Text)
 bgAccessToken
   = lens _bgAccessToken
       (\ s a -> s{_bgAccessToken = a})
 
 -- | Beacon that is requested.
-bgBeaconName :: Lens' BeaconsGet' Text
+bgBeaconName :: Lens' BeaconsGet Text
 bgBeaconName
   = lens _bgBeaconName (\ s a -> s{_bgBeaconName = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-bgUploadType :: Lens' BeaconsGet' (Maybe Text)
+bgUploadType :: Lens' BeaconsGet (Maybe Text)
 bgUploadType
   = lens _bgUploadType (\ s a -> s{_bgUploadType = a})
 
 -- | OAuth bearer token.
-bgBearerToken :: Lens' BeaconsGet' (Maybe Text)
+bgBearerToken :: Lens' BeaconsGet (Maybe Text)
 bgBearerToken
   = lens _bgBearerToken
       (\ s a -> s{_bgBearerToken = a})
 
 -- | JSONP
-bgCallback :: Lens' BeaconsGet' (Maybe Text)
+bgCallback :: Lens' BeaconsGet (Maybe Text)
 bgCallback
   = lens _bgCallback (\ s a -> s{_bgCallback = a})
 
-instance GoogleRequest BeaconsGet' where
-        type Rs BeaconsGet' = Beacon
-        requestClient BeaconsGet'{..}
+instance GoogleRequest BeaconsGet where
+        type Rs BeaconsGet = Beacon
+        requestClient BeaconsGet{..}
           = go _bgBeaconName _bgXgafv _bgUploadProtocol
               (Just _bgPp)
               _bgAccessToken

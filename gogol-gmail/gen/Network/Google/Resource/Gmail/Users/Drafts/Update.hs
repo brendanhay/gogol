@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.Drafts.Update
       UsersDraftsUpdateResource
 
     -- * Creating a Request
-    , usersDraftsUpdate'
-    , UsersDraftsUpdate'
+    , usersDraftsUpdate
+    , UsersDraftsUpdate
 
     -- * Request Lenses
     , uduPayload
@@ -43,7 +43,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.drafts.update@ method which the
--- 'UsersDraftsUpdate'' request conforms to.
+-- 'UsersDraftsUpdate' request conforms to.
 type UsersDraftsUpdateResource =
      Capture "userId" Text :>
        "drafts" :>
@@ -54,15 +54,15 @@ type UsersDraftsUpdateResource =
 
 -- | Replaces a draft\'s content.
 --
--- /See:/ 'usersDraftsUpdate'' smart constructor.
-data UsersDraftsUpdate' = UsersDraftsUpdate'
+-- /See:/ 'usersDraftsUpdate' smart constructor.
+data UsersDraftsUpdate = UsersDraftsUpdate
     { _uduPayload :: !Draft
     , _uduUserId  :: !Text
     , _uduMedia   :: !Body
     , _uduId      :: !Text
     }
 
--- | Creates a value of 'UsersDraftsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersDraftsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,14 +73,14 @@ data UsersDraftsUpdate' = UsersDraftsUpdate'
 -- * 'uduMedia'
 --
 -- * 'uduId'
-usersDraftsUpdate'
+usersDraftsUpdate
     :: Draft -- ^ 'uduPayload'
     -> Text -- ^ 'uduMedia'
     -> Body -- ^ 'uduId'
     -> Text
-    -> UsersDraftsUpdate'
-usersDraftsUpdate' pUduPayload_ pUduUserId_ pUduMedia_ pUduId_ =
-    UsersDraftsUpdate'
+    -> UsersDraftsUpdate
+usersDraftsUpdate pUduPayload_ pUduUserId_ pUduMedia_ pUduId_ =
+    UsersDraftsUpdate
     { _uduPayload = pUduPayload_
     , _uduUserId = pUduUserId_
     , _uduMedia = pUduMedia_
@@ -88,26 +88,26 @@ usersDraftsUpdate' pUduPayload_ pUduUserId_ pUduMedia_ pUduId_ =
     }
 
 -- | Multipart request metadata.
-uduPayload :: Lens' UsersDraftsUpdate' Draft
+uduPayload :: Lens' UsersDraftsUpdate Draft
 uduPayload
   = lens _uduPayload (\ s a -> s{_uduPayload = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-uduUserId :: Lens' UsersDraftsUpdate' Text
+uduUserId :: Lens' UsersDraftsUpdate Text
 uduUserId
   = lens _uduUserId (\ s a -> s{_uduUserId = a})
 
-uduMedia :: Lens' UsersDraftsUpdate' Body
+uduMedia :: Lens' UsersDraftsUpdate Body
 uduMedia = lens _uduMedia (\ s a -> s{_uduMedia = a})
 
 -- | The ID of the draft to update.
-uduId :: Lens' UsersDraftsUpdate' Text
+uduId :: Lens' UsersDraftsUpdate Text
 uduId = lens _uduId (\ s a -> s{_uduId = a})
 
-instance GoogleRequest UsersDraftsUpdate' where
-        type Rs UsersDraftsUpdate' = Draft
-        requestClient UsersDraftsUpdate'{..}
+instance GoogleRequest UsersDraftsUpdate where
+        type Rs UsersDraftsUpdate = Draft
+        requestClient UsersDraftsUpdate{..}
           = go _uduUserId _uduId (Just AltJSON) _uduPayload
               _uduMedia
               gmailService

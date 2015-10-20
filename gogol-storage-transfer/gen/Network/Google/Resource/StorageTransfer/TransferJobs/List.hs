@@ -29,8 +29,8 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.List
       TransferJobsListResource
 
     -- * Creating a Request
-    , transferJobsList'
-    , TransferJobsList'
+    , transferJobsList
+    , TransferJobsList
 
     -- * Request Lenses
     , tjlXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferJobs.list@ method which the
--- 'TransferJobsList'' request conforms to.
+-- 'TransferJobsList' request conforms to.
 type TransferJobsListResource =
      "v1" :>
        "transferJobs" :>
@@ -68,8 +68,8 @@ type TransferJobsListResource =
 
 -- | Lists transfer jobs.
 --
--- /See:/ 'transferJobsList'' smart constructor.
-data TransferJobsList' = TransferJobsList'
+-- /See:/ 'transferJobsList' smart constructor.
+data TransferJobsList = TransferJobsList
     { _tjlXgafv          :: !(Maybe Text)
     , _tjlUploadProtocol :: !(Maybe Text)
     , _tjlPp             :: !Bool
@@ -82,7 +82,7 @@ data TransferJobsList' = TransferJobsList'
     , _tjlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TransferJobsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TransferJobsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -105,10 +105,10 @@ data TransferJobsList' = TransferJobsList'
 -- * 'tjlPageSize'
 --
 -- * 'tjlCallback'
-transferJobsList'
-    :: TransferJobsList'
-transferJobsList' =
-    TransferJobsList'
+transferJobsList
+    :: TransferJobsList
+transferJobsList =
+    TransferJobsList
     { _tjlXgafv = Nothing
     , _tjlUploadProtocol = Nothing
     , _tjlPp = True
@@ -122,33 +122,33 @@ transferJobsList' =
     }
 
 -- | V1 error format.
-tjlXgafv :: Lens' TransferJobsList' (Maybe Text)
+tjlXgafv :: Lens' TransferJobsList (Maybe Text)
 tjlXgafv = lens _tjlXgafv (\ s a -> s{_tjlXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-tjlUploadProtocol :: Lens' TransferJobsList' (Maybe Text)
+tjlUploadProtocol :: Lens' TransferJobsList (Maybe Text)
 tjlUploadProtocol
   = lens _tjlUploadProtocol
       (\ s a -> s{_tjlUploadProtocol = a})
 
 -- | Pretty-print response.
-tjlPp :: Lens' TransferJobsList' Bool
+tjlPp :: Lens' TransferJobsList Bool
 tjlPp = lens _tjlPp (\ s a -> s{_tjlPp = a})
 
 -- | OAuth access token.
-tjlAccessToken :: Lens' TransferJobsList' (Maybe Text)
+tjlAccessToken :: Lens' TransferJobsList (Maybe Text)
 tjlAccessToken
   = lens _tjlAccessToken
       (\ s a -> s{_tjlAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-tjlUploadType :: Lens' TransferJobsList' (Maybe Text)
+tjlUploadType :: Lens' TransferJobsList (Maybe Text)
 tjlUploadType
   = lens _tjlUploadType
       (\ s a -> s{_tjlUploadType = a})
 
 -- | OAuth bearer token.
-tjlBearerToken :: Lens' TransferJobsList' (Maybe Text)
+tjlBearerToken :: Lens' TransferJobsList (Maybe Text)
 tjlBearerToken
   = lens _tjlBearerToken
       (\ s a -> s{_tjlBearerToken = a})
@@ -161,28 +161,28 @@ tjlBearerToken
 -- specified with array notation. \`project_id\` is required. \`job_names\`
 -- and \`job_statuses\` are optional. The valid values for \`job_statuses\`
 -- are case-insensitive: \`ENABLED\`, \`DISABLED\`, and \`DELETED\`.
-tjlFilter :: Lens' TransferJobsList' (Maybe Text)
+tjlFilter :: Lens' TransferJobsList (Maybe Text)
 tjlFilter
   = lens _tjlFilter (\ s a -> s{_tjlFilter = a})
 
 -- | The list page token.
-tjlPageToken :: Lens' TransferJobsList' (Maybe Text)
+tjlPageToken :: Lens' TransferJobsList (Maybe Text)
 tjlPageToken
   = lens _tjlPageToken (\ s a -> s{_tjlPageToken = a})
 
 -- | The list page size. The max allowed value is 256.
-tjlPageSize :: Lens' TransferJobsList' (Maybe Int32)
+tjlPageSize :: Lens' TransferJobsList (Maybe Int32)
 tjlPageSize
   = lens _tjlPageSize (\ s a -> s{_tjlPageSize = a})
 
 -- | JSONP
-tjlCallback :: Lens' TransferJobsList' (Maybe Text)
+tjlCallback :: Lens' TransferJobsList (Maybe Text)
 tjlCallback
   = lens _tjlCallback (\ s a -> s{_tjlCallback = a})
 
-instance GoogleRequest TransferJobsList' where
-        type Rs TransferJobsList' = ListTransferJobsResponse
-        requestClient TransferJobsList'{..}
+instance GoogleRequest TransferJobsList where
+        type Rs TransferJobsList = ListTransferJobsResponse
+        requestClient TransferJobsList{..}
           = go _tjlXgafv _tjlUploadProtocol (Just _tjlPp)
               _tjlAccessToken
               _tjlUploadType

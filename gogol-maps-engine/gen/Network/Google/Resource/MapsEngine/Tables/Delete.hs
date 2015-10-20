@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Tables.Delete
       TablesDeleteResource
 
     -- * Creating a Request
-    , tablesDelete'
-    , TablesDelete'
+    , tablesDelete
+    , TablesDelete
 
     -- * Request Lenses
     , tdId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.tables.delete@ method which the
--- 'TablesDelete'' request conforms to.
+-- 'TablesDelete' request conforms to.
 type TablesDeleteResource =
      "tables" :>
        Capture "id" Text :>
@@ -48,33 +48,33 @@ type TablesDeleteResource =
 
 -- | Delete a table.
 --
--- /See:/ 'tablesDelete'' smart constructor.
-newtype TablesDelete' = TablesDelete'
+-- /See:/ 'tablesDelete' smart constructor.
+newtype TablesDelete = TablesDelete
     { _tdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tdId'
-tablesDelete'
+tablesDelete
     :: Text -- ^ 'tdId'
-    -> TablesDelete'
-tablesDelete' pTdId_ =
-    TablesDelete'
+    -> TablesDelete
+tablesDelete pTdId_ =
+    TablesDelete
     { _tdId = pTdId_
     }
 
 -- | The ID of the table. Only the table creator or project owner are
 -- permitted to delete. If the table is included in a layer, the request
 -- will fail. Remove it from all layers prior to deleting.
-tdId :: Lens' TablesDelete' Text
+tdId :: Lens' TablesDelete Text
 tdId = lens _tdId (\ s a -> s{_tdId = a})
 
-instance GoogleRequest TablesDelete' where
-        type Rs TablesDelete' = ()
-        requestClient TablesDelete'{..}
+instance GoogleRequest TablesDelete where
+        type Rs TablesDelete = ()
+        requestClient TablesDelete{..}
           = go _tdId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy TablesDeleteResource)

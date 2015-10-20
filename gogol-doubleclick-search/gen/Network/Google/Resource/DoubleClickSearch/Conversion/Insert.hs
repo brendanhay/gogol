@@ -29,8 +29,8 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.Insert
       ConversionInsertResource
 
     -- * Creating a Request
-    , conversionInsert'
-    , ConversionInsert'
+    , conversionInsert
+    , ConversionInsert
 
     -- * Request Lenses
     , ciPayload
@@ -40,7 +40,7 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @doubleclicksearch.conversion.insert@ method which the
--- 'ConversionInsert'' request conforms to.
+-- 'ConversionInsert' request conforms to.
 type ConversionInsertResource =
      "conversion" :>
        QueryParam "alt" AltJSON :>
@@ -49,32 +49,32 @@ type ConversionInsertResource =
 
 -- | Inserts a batch of new conversions into DoubleClick Search.
 --
--- /See:/ 'conversionInsert'' smart constructor.
-newtype ConversionInsert' = ConversionInsert'
+-- /See:/ 'conversionInsert' smart constructor.
+newtype ConversionInsert = ConversionInsert
     { _ciPayload :: ConversionList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ConversionInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ConversionInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ciPayload'
-conversionInsert'
+conversionInsert
     :: ConversionList -- ^ 'ciPayload'
-    -> ConversionInsert'
-conversionInsert' pCiPayload_ =
-    ConversionInsert'
+    -> ConversionInsert
+conversionInsert pCiPayload_ =
+    ConversionInsert
     { _ciPayload = pCiPayload_
     }
 
 -- | Multipart request metadata.
-ciPayload :: Lens' ConversionInsert' ConversionList
+ciPayload :: Lens' ConversionInsert ConversionList
 ciPayload
   = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
-instance GoogleRequest ConversionInsert' where
-        type Rs ConversionInsert' = ConversionList
-        requestClient ConversionInsert'{..}
+instance GoogleRequest ConversionInsert where
+        type Rs ConversionInsert = ConversionList
+        requestClient ConversionInsert{..}
           = go (Just AltJSON) _ciPayload
               doubleClickSearchService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.PlayListItems.Insert
       PlayListItemsInsertResource
 
     -- * Creating a Request
-    , playListItemsInsert'
-    , PlayListItemsInsert'
+    , playListItemsInsert
+    , PlayListItemsInsert
 
     -- * Request Lenses
     , pliiPart
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.playlistItems.insert@ method which the
--- 'PlayListItemsInsert'' request conforms to.
+-- 'PlayListItemsInsert' request conforms to.
 type PlayListItemsInsertResource =
      "playlistItems" :>
        QueryParam "part" Text :>
@@ -53,14 +53,14 @@ type PlayListItemsInsertResource =
 
 -- | Adds a resource to a playlist.
 --
--- /See:/ 'playListItemsInsert'' smart constructor.
-data PlayListItemsInsert' = PlayListItemsInsert'
+-- /See:/ 'playListItemsInsert' smart constructor.
+data PlayListItemsInsert = PlayListItemsInsert
     { _pliiPart                   :: !Text
     , _pliiPayload                :: !PlayListItem
     , _pliiOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlayListItemsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayListItemsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,12 +69,12 @@ data PlayListItemsInsert' = PlayListItemsInsert'
 -- * 'pliiPayload'
 --
 -- * 'pliiOnBehalfOfContentOwner'
-playListItemsInsert'
+playListItemsInsert
     :: Text -- ^ 'pliiPart'
     -> PlayListItem -- ^ 'pliiPayload'
-    -> PlayListItemsInsert'
-playListItemsInsert' pPliiPart_ pPliiPayload_ =
-    PlayListItemsInsert'
+    -> PlayListItemsInsert
+playListItemsInsert pPliiPart_ pPliiPayload_ =
+    PlayListItemsInsert
     { _pliiPart = pPliiPart_
     , _pliiPayload = pPliiPayload_
     , _pliiOnBehalfOfContentOwner = Nothing
@@ -83,11 +83,11 @@ playListItemsInsert' pPliiPart_ pPliiPayload_ =
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the
 -- properties that the API response will include.
-pliiPart :: Lens' PlayListItemsInsert' Text
+pliiPart :: Lens' PlayListItemsInsert Text
 pliiPart = lens _pliiPart (\ s a -> s{_pliiPart = a})
 
 -- | Multipart request metadata.
-pliiPayload :: Lens' PlayListItemsInsert' PlayListItem
+pliiPayload :: Lens' PlayListItemsInsert PlayListItem
 pliiPayload
   = lens _pliiPayload (\ s a -> s{_pliiPayload = a})
 
@@ -101,14 +101,14 @@ pliiPayload
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-pliiOnBehalfOfContentOwner :: Lens' PlayListItemsInsert' (Maybe Text)
+pliiOnBehalfOfContentOwner :: Lens' PlayListItemsInsert (Maybe Text)
 pliiOnBehalfOfContentOwner
   = lens _pliiOnBehalfOfContentOwner
       (\ s a -> s{_pliiOnBehalfOfContentOwner = a})
 
-instance GoogleRequest PlayListItemsInsert' where
-        type Rs PlayListItemsInsert' = PlayListItem
-        requestClient PlayListItemsInsert'{..}
+instance GoogleRequest PlayListItemsInsert where
+        type Rs PlayListItemsInsert = PlayListItem
+        requestClient PlayListItemsInsert{..}
           = go (Just _pliiPart) _pliiOnBehalfOfContentOwner
               (Just AltJSON)
               _pliiPayload

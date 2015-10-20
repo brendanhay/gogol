@@ -29,8 +29,8 @@ module Network.Google.Resource.GAN.Links.Insert
       LinksInsertResource
 
     -- * Creating a Request
-    , linksInsert'
-    , LinksInsert'
+    , linksInsert
+    , LinksInsert
 
     -- * Request Lenses
     , liPayload
@@ -42,7 +42,7 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gan.links.insert@ method which the
--- 'LinksInsert'' request conforms to.
+-- 'LinksInsert' request conforms to.
 type LinksInsertResource =
      Capture "role" LinksInsertRole :>
        Capture "roleId" Text :>
@@ -52,14 +52,14 @@ type LinksInsertResource =
 
 -- | Inserts a new link.
 --
--- /See:/ 'linksInsert'' smart constructor.
-data LinksInsert' = LinksInsert'
+-- /See:/ 'linksInsert' smart constructor.
+data LinksInsert = LinksInsert
     { _liPayload :: !Link
     , _liRoleId  :: !Text
     , _liRole    :: !LinksInsertRole
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LinksInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'LinksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,35 +68,35 @@ data LinksInsert' = LinksInsert'
 -- * 'liRoleId'
 --
 -- * 'liRole'
-linksInsert'
+linksInsert
     :: Link -- ^ 'liPayload'
     -> Text -- ^ 'liRoleId'
     -> LinksInsertRole -- ^ 'liRole'
-    -> LinksInsert'
-linksInsert' pLiPayload_ pLiRoleId_ pLiRole_ =
-    LinksInsert'
+    -> LinksInsert
+linksInsert pLiPayload_ pLiRoleId_ pLiRole_ =
+    LinksInsert
     { _liPayload = pLiPayload_
     , _liRoleId = pLiRoleId_
     , _liRole = pLiRole_
     }
 
 -- | Multipart request metadata.
-liPayload :: Lens' LinksInsert' Link
+liPayload :: Lens' LinksInsert Link
 liPayload
   = lens _liPayload (\ s a -> s{_liPayload = a})
 
 -- | The ID of the requesting advertiser or publisher.
-liRoleId :: Lens' LinksInsert' Text
+liRoleId :: Lens' LinksInsert Text
 liRoleId = lens _liRoleId (\ s a -> s{_liRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-liRole :: Lens' LinksInsert' LinksInsertRole
+liRole :: Lens' LinksInsert LinksInsertRole
 liRole = lens _liRole (\ s a -> s{_liRole = a})
 
-instance GoogleRequest LinksInsert' where
-        type Rs LinksInsert' = Link
-        requestClient LinksInsert'{..}
+instance GoogleRequest LinksInsert where
+        type Rs LinksInsert = Link
+        requestClient LinksInsert{..}
           = go _liRole _liRoleId (Just AltJSON) _liPayload
               affiliatesService
           where go

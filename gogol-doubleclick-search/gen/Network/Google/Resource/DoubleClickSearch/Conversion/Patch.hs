@@ -30,8 +30,8 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.Patch
       ConversionPatchResource
 
     -- * Creating a Request
-    , conversionPatch'
-    , ConversionPatch'
+    , conversionPatch
+    , ConversionPatch
 
     -- * Request Lenses
     , cpEngineAccountId
@@ -48,7 +48,7 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @doubleclicksearch.conversion.patch@ method which the
--- 'ConversionPatch'' request conforms to.
+-- 'ConversionPatch' request conforms to.
 type ConversionPatchResource =
      "conversion" :>
        QueryParam "advertiserId" Int64 :>
@@ -65,8 +65,8 @@ type ConversionPatchResource =
 -- | Updates a batch of conversions in DoubleClick Search. This method
 -- supports patch semantics.
 --
--- /See:/ 'conversionPatch'' smart constructor.
-data ConversionPatch' = ConversionPatch'
+-- /See:/ 'conversionPatch' smart constructor.
+data ConversionPatch = ConversionPatch
     { _cpEngineAccountId :: !Int64
     , _cpAgencyId        :: !Int64
     , _cpAdvertiserId    :: !Int64
@@ -77,7 +77,7 @@ data ConversionPatch' = ConversionPatch'
     , _cpRowCount        :: !Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ConversionPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ConversionPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -96,7 +96,7 @@ data ConversionPatch' = ConversionPatch'
 -- * 'cpStartRow'
 --
 -- * 'cpRowCount'
-conversionPatch'
+conversionPatch
     :: Int64 -- ^ 'cpEngineAccountId'
     -> Int64 -- ^ 'cpAgencyId'
     -> Int64 -- ^ 'cpAdvertiserId'
@@ -105,9 +105,9 @@ conversionPatch'
     -> Int32 -- ^ 'cpStartDate'
     -> Word32 -- ^ 'cpStartRow'
     -> Int32 -- ^ 'cpRowCount'
-    -> ConversionPatch'
-conversionPatch' pCpEngineAccountId_ pCpAgencyId_ pCpAdvertiserId_ pCpEndDate_ pCpPayload_ pCpStartDate_ pCpStartRow_ pCpRowCount_ =
-    ConversionPatch'
+    -> ConversionPatch
+conversionPatch pCpEngineAccountId_ pCpAgencyId_ pCpAdvertiserId_ pCpEndDate_ pCpPayload_ pCpStartDate_ pCpStartRow_ pCpRowCount_ =
+    ConversionPatch
     { _cpEngineAccountId = pCpEngineAccountId_
     , _cpAgencyId = pCpAgencyId_
     , _cpAdvertiserId = pCpAdvertiserId_
@@ -119,52 +119,52 @@ conversionPatch' pCpEngineAccountId_ pCpAgencyId_ pCpAdvertiserId_ pCpEndDate_ p
     }
 
 -- | Numeric ID of the engine account.
-cpEngineAccountId :: Lens' ConversionPatch' Int64
+cpEngineAccountId :: Lens' ConversionPatch Int64
 cpEngineAccountId
   = lens _cpEngineAccountId
       (\ s a -> s{_cpEngineAccountId = a})
 
 -- | Numeric ID of the agency.
-cpAgencyId :: Lens' ConversionPatch' Int64
+cpAgencyId :: Lens' ConversionPatch Int64
 cpAgencyId
   = lens _cpAgencyId (\ s a -> s{_cpAgencyId = a})
 
 -- | Numeric ID of the advertiser.
-cpAdvertiserId :: Lens' ConversionPatch' Int64
+cpAdvertiserId :: Lens' ConversionPatch Int64
 cpAdvertiserId
   = lens _cpAdvertiserId
       (\ s a -> s{_cpAdvertiserId = a})
 
 -- | Last date (inclusive) on which to retrieve conversions. Format is
 -- yyyymmdd.
-cpEndDate :: Lens' ConversionPatch' Int32
+cpEndDate :: Lens' ConversionPatch Int32
 cpEndDate
   = lens _cpEndDate (\ s a -> s{_cpEndDate = a})
 
 -- | Multipart request metadata.
-cpPayload :: Lens' ConversionPatch' ConversionList
+cpPayload :: Lens' ConversionPatch ConversionList
 cpPayload
   = lens _cpPayload (\ s a -> s{_cpPayload = a})
 
 -- | First date (inclusive) on which to retrieve conversions. Format is
 -- yyyymmdd.
-cpStartDate :: Lens' ConversionPatch' Int32
+cpStartDate :: Lens' ConversionPatch Int32
 cpStartDate
   = lens _cpStartDate (\ s a -> s{_cpStartDate = a})
 
 -- | The 0-based starting index for retrieving conversions results.
-cpStartRow :: Lens' ConversionPatch' Word32
+cpStartRow :: Lens' ConversionPatch Word32
 cpStartRow
   = lens _cpStartRow (\ s a -> s{_cpStartRow = a})
 
 -- | The number of conversions to return per call.
-cpRowCount :: Lens' ConversionPatch' Int32
+cpRowCount :: Lens' ConversionPatch Int32
 cpRowCount
   = lens _cpRowCount (\ s a -> s{_cpRowCount = a})
 
-instance GoogleRequest ConversionPatch' where
-        type Rs ConversionPatch' = ConversionList
-        requestClient ConversionPatch'{..}
+instance GoogleRequest ConversionPatch where
+        type Rs ConversionPatch = ConversionList
+        requestClient ConversionPatch{..}
           = go (Just _cpAdvertiserId) (Just _cpAgencyId)
               (Just _cpEndDate)
               (Just _cpEngineAccountId)

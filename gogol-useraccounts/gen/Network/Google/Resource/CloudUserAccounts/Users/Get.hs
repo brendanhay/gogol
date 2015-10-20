@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudUserAccounts.Users.Get
       UsersGetResource
 
     -- * Creating a Request
-    , usersGet'
-    , UsersGet'
+    , usersGet
+    , UsersGet
 
     -- * Request Lenses
     , ugProject
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
 -- | A resource alias for @clouduseraccounts.users.get@ method which the
--- 'UsersGet'' request conforms to.
+-- 'UsersGet' request conforms to.
 type UsersGetResource =
      Capture "project" Text :>
        "global" :>
@@ -51,41 +51,41 @@ type UsersGetResource =
 
 -- | Returns the specified User resource.
 --
--- /See:/ 'usersGet'' smart constructor.
-data UsersGet' = UsersGet'
+-- /See:/ 'usersGet' smart constructor.
+data UsersGet = UsersGet
     { _ugProject :: !Text
     , _ugUser    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ugProject'
 --
 -- * 'ugUser'
-usersGet'
+usersGet
     :: Text -- ^ 'ugProject'
     -> Text -- ^ 'ugUser'
-    -> UsersGet'
-usersGet' pUgProject_ pUgUser_ =
-    UsersGet'
+    -> UsersGet
+usersGet pUgProject_ pUgUser_ =
+    UsersGet
     { _ugProject = pUgProject_
     , _ugUser = pUgUser_
     }
 
 -- | Project ID for this request.
-ugProject :: Lens' UsersGet' Text
+ugProject :: Lens' UsersGet Text
 ugProject
   = lens _ugProject (\ s a -> s{_ugProject = a})
 
 -- | Name of the user resource to return.
-ugUser :: Lens' UsersGet' Text
+ugUser :: Lens' UsersGet Text
 ugUser = lens _ugUser (\ s a -> s{_ugUser = a})
 
-instance GoogleRequest UsersGet' where
-        type Rs UsersGet' = User
-        requestClient UsersGet'{..}
+instance GoogleRequest UsersGet where
+        type Rs UsersGet = User
+        requestClient UsersGet{..}
           = go _ugProject _ugUser (Just AltJSON)
               userAccountsService
           where go

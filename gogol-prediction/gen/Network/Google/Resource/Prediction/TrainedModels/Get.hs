@@ -29,8 +29,8 @@ module Network.Google.Resource.Prediction.TrainedModels.Get
       TrainedModelsGetResource
 
     -- * Creating a Request
-    , trainedModelsGet'
-    , TrainedModelsGet'
+    , trainedModelsGet
+    , TrainedModelsGet
 
     -- * Request Lenses
     , tmgProject
@@ -41,7 +41,7 @@ import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @prediction.trainedmodels.get@ method which the
--- 'TrainedModelsGet'' request conforms to.
+-- 'TrainedModelsGet' request conforms to.
 type TrainedModelsGetResource =
      Capture "project" Text :>
        "trainedmodels" :>
@@ -50,41 +50,41 @@ type TrainedModelsGetResource =
 
 -- | Check training status of your model.
 --
--- /See:/ 'trainedModelsGet'' smart constructor.
-data TrainedModelsGet' = TrainedModelsGet'
+-- /See:/ 'trainedModelsGet' smart constructor.
+data TrainedModelsGet = TrainedModelsGet
     { _tmgProject :: !Text
     , _tmgId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TrainedModelsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TrainedModelsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tmgProject'
 --
 -- * 'tmgId'
-trainedModelsGet'
+trainedModelsGet
     :: Text -- ^ 'tmgProject'
     -> Text -- ^ 'tmgId'
-    -> TrainedModelsGet'
-trainedModelsGet' pTmgProject_ pTmgId_ =
-    TrainedModelsGet'
+    -> TrainedModelsGet
+trainedModelsGet pTmgProject_ pTmgId_ =
+    TrainedModelsGet
     { _tmgProject = pTmgProject_
     , _tmgId = pTmgId_
     }
 
 -- | The project associated with the model.
-tmgProject :: Lens' TrainedModelsGet' Text
+tmgProject :: Lens' TrainedModelsGet Text
 tmgProject
   = lens _tmgProject (\ s a -> s{_tmgProject = a})
 
 -- | The unique name for the predictive model.
-tmgId :: Lens' TrainedModelsGet' Text
+tmgId :: Lens' TrainedModelsGet Text
 tmgId = lens _tmgId (\ s a -> s{_tmgId = a})
 
-instance GoogleRequest TrainedModelsGet' where
-        type Rs TrainedModelsGet' = Insert2
-        requestClient TrainedModelsGet'{..}
+instance GoogleRequest TrainedModelsGet where
+        type Rs TrainedModelsGet = Insert2
+        requestClient TrainedModelsGet{..}
           = go _tmgProject _tmgId (Just AltJSON)
               predictionService
           where go

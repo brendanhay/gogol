@@ -30,8 +30,8 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Rollback
       RollingUpdatesRollbackResource
 
     -- * Creating a Request
-    , rollingUpdatesRollback'
-    , RollingUpdatesRollback'
+    , rollingUpdatesRollback
+    , RollingUpdatesRollback
 
     -- * Request Lenses
     , rurRollingUpdate
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.rollingUpdates.rollback@ method which the
--- 'RollingUpdatesRollback'' request conforms to.
+-- 'RollingUpdatesRollback' request conforms to.
 type RollingUpdatesRollbackResource =
      Capture "project" Text :>
        "zones" :>
@@ -56,14 +56,14 @@ type RollingUpdatesRollbackResource =
 -- | Rolls back the update in state from ROLLING_FORWARD or PAUSED. Has no
 -- effect if invoked when the state of the update is ROLLED_BACK.
 --
--- /See:/ 'rollingUpdatesRollback'' smart constructor.
-data RollingUpdatesRollback' = RollingUpdatesRollback'
+-- /See:/ 'rollingUpdatesRollback' smart constructor.
+data RollingUpdatesRollback = RollingUpdatesRollback
     { _rurRollingUpdate :: !Text
     , _rurProject       :: !Text
     , _rurZone          :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RollingUpdatesRollback'' with the minimum fields required to make a request.
+-- | Creates a value of 'RollingUpdatesRollback' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,36 +72,36 @@ data RollingUpdatesRollback' = RollingUpdatesRollback'
 -- * 'rurProject'
 --
 -- * 'rurZone'
-rollingUpdatesRollback'
+rollingUpdatesRollback
     :: Text -- ^ 'rurRollingUpdate'
     -> Text -- ^ 'rurProject'
     -> Text -- ^ 'rurZone'
-    -> RollingUpdatesRollback'
-rollingUpdatesRollback' pRurRollingUpdate_ pRurProject_ pRurZone_ =
-    RollingUpdatesRollback'
+    -> RollingUpdatesRollback
+rollingUpdatesRollback pRurRollingUpdate_ pRurProject_ pRurZone_ =
+    RollingUpdatesRollback
     { _rurRollingUpdate = pRurRollingUpdate_
     , _rurProject = pRurProject_
     , _rurZone = pRurZone_
     }
 
 -- | The name of the update.
-rurRollingUpdate :: Lens' RollingUpdatesRollback' Text
+rurRollingUpdate :: Lens' RollingUpdatesRollback Text
 rurRollingUpdate
   = lens _rurRollingUpdate
       (\ s a -> s{_rurRollingUpdate = a})
 
 -- | The Google Developers Console project name.
-rurProject :: Lens' RollingUpdatesRollback' Text
+rurProject :: Lens' RollingUpdatesRollback Text
 rurProject
   = lens _rurProject (\ s a -> s{_rurProject = a})
 
 -- | The name of the zone in which the update\'s target resides.
-rurZone :: Lens' RollingUpdatesRollback' Text
+rurZone :: Lens' RollingUpdatesRollback Text
 rurZone = lens _rurZone (\ s a -> s{_rurZone = a})
 
-instance GoogleRequest RollingUpdatesRollback' where
-        type Rs RollingUpdatesRollback' = Operation
-        requestClient RollingUpdatesRollback'{..}
+instance GoogleRequest RollingUpdatesRollback where
+        type Rs RollingUpdatesRollback = Operation
+        requestClient RollingUpdatesRollback{..}
           = go _rurProject _rurZone _rurRollingUpdate
               (Just AltJSON)
               replicaPoolUpdaterService

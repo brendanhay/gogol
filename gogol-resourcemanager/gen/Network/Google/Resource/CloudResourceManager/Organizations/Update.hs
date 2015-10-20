@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudResourceManager.Organizations.Update
       OrganizationsUpdateResource
 
     -- * Creating a Request
-    , organizationsUpdate'
-    , OrganizationsUpdate'
+    , organizationsUpdate
+    , OrganizationsUpdate
 
     -- * Request Lenses
     , ouXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.organizations.update@ method which the
--- 'OrganizationsUpdate'' request conforms to.
+-- 'OrganizationsUpdate' request conforms to.
 type OrganizationsUpdateResource =
      "v1beta1" :>
        "organizations" :>
@@ -66,8 +66,8 @@ type OrganizationsUpdateResource =
 
 -- | Updates an Organization resource.
 --
--- /See:/ 'organizationsUpdate'' smart constructor.
-data OrganizationsUpdate' = OrganizationsUpdate'
+-- /See:/ 'organizationsUpdate' smart constructor.
+data OrganizationsUpdate = OrganizationsUpdate
     { _ouXgafv          :: !(Maybe Text)
     , _ouUploadProtocol :: !(Maybe Text)
     , _ouPp             :: !Bool
@@ -79,7 +79,7 @@ data OrganizationsUpdate' = OrganizationsUpdate'
     , _ouCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrganizationsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrganizationsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -100,12 +100,12 @@ data OrganizationsUpdate' = OrganizationsUpdate'
 -- * 'ouOrganizationId'
 --
 -- * 'ouCallback'
-organizationsUpdate'
+organizationsUpdate
     :: Organization -- ^ 'ouPayload'
     -> Text -- ^ 'ouOrganizationId'
-    -> OrganizationsUpdate'
-organizationsUpdate' pOuPayload_ pOuOrganizationId_ =
-    OrganizationsUpdate'
+    -> OrganizationsUpdate
+organizationsUpdate pOuPayload_ pOuOrganizationId_ =
+    OrganizationsUpdate
     { _ouXgafv = Nothing
     , _ouUploadProtocol = Nothing
     , _ouPp = True
@@ -118,37 +118,37 @@ organizationsUpdate' pOuPayload_ pOuOrganizationId_ =
     }
 
 -- | V1 error format.
-ouXgafv :: Lens' OrganizationsUpdate' (Maybe Text)
+ouXgafv :: Lens' OrganizationsUpdate (Maybe Text)
 ouXgafv = lens _ouXgafv (\ s a -> s{_ouXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ouUploadProtocol :: Lens' OrganizationsUpdate' (Maybe Text)
+ouUploadProtocol :: Lens' OrganizationsUpdate (Maybe Text)
 ouUploadProtocol
   = lens _ouUploadProtocol
       (\ s a -> s{_ouUploadProtocol = a})
 
 -- | Pretty-print response.
-ouPp :: Lens' OrganizationsUpdate' Bool
+ouPp :: Lens' OrganizationsUpdate Bool
 ouPp = lens _ouPp (\ s a -> s{_ouPp = a})
 
 -- | OAuth access token.
-ouAccessToken :: Lens' OrganizationsUpdate' (Maybe Text)
+ouAccessToken :: Lens' OrganizationsUpdate (Maybe Text)
 ouAccessToken
   = lens _ouAccessToken
       (\ s a -> s{_ouAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ouUploadType :: Lens' OrganizationsUpdate' (Maybe Text)
+ouUploadType :: Lens' OrganizationsUpdate (Maybe Text)
 ouUploadType
   = lens _ouUploadType (\ s a -> s{_ouUploadType = a})
 
 -- | Multipart request metadata.
-ouPayload :: Lens' OrganizationsUpdate' Organization
+ouPayload :: Lens' OrganizationsUpdate Organization
 ouPayload
   = lens _ouPayload (\ s a -> s{_ouPayload = a})
 
 -- | OAuth bearer token.
-ouBearerToken :: Lens' OrganizationsUpdate' (Maybe Text)
+ouBearerToken :: Lens' OrganizationsUpdate (Maybe Text)
 ouBearerToken
   = lens _ouBearerToken
       (\ s a -> s{_ouBearerToken = a})
@@ -156,19 +156,19 @@ ouBearerToken
 -- | An immutable id for the Organization that is assigned on creation. This
 -- should be omitted when creating a new Organization. This field is
 -- read-only.
-ouOrganizationId :: Lens' OrganizationsUpdate' Text
+ouOrganizationId :: Lens' OrganizationsUpdate Text
 ouOrganizationId
   = lens _ouOrganizationId
       (\ s a -> s{_ouOrganizationId = a})
 
 -- | JSONP
-ouCallback :: Lens' OrganizationsUpdate' (Maybe Text)
+ouCallback :: Lens' OrganizationsUpdate (Maybe Text)
 ouCallback
   = lens _ouCallback (\ s a -> s{_ouCallback = a})
 
-instance GoogleRequest OrganizationsUpdate' where
-        type Rs OrganizationsUpdate' = Organization
-        requestClient OrganizationsUpdate'{..}
+instance GoogleRequest OrganizationsUpdate where
+        type Rs OrganizationsUpdate = Organization
+        requestClient OrganizationsUpdate{..}
           = go _ouOrganizationId _ouXgafv _ouUploadProtocol
               (Just _ouPp)
               _ouAccessToken

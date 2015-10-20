@@ -33,8 +33,8 @@ module Network.Google.Resource.Fitness.Users.DataSources.Update
       UsersDataSourcesUpdateResource
 
     -- * Creating a Request
-    , usersDataSourcesUpdate'
-    , UsersDataSourcesUpdate'
+    , usersDataSourcesUpdate
+    , UsersDataSourcesUpdate
 
     -- * Request Lenses
     , udsuDataSourceId
@@ -46,7 +46,7 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fitness.users.dataSources.update@ method which the
--- 'UsersDataSourcesUpdate'' request conforms to.
+-- 'UsersDataSourcesUpdate' request conforms to.
 type UsersDataSourcesUpdateResource =
      Capture "userId" Text :>
        "dataSources" :>
@@ -60,14 +60,14 @@ type UsersDataSourcesUpdateResource =
 -- unique data stream ID and separate data source. Data sources are
 -- identified by their data stream ID.
 --
--- /See:/ 'usersDataSourcesUpdate'' smart constructor.
-data UsersDataSourcesUpdate' = UsersDataSourcesUpdate'
+-- /See:/ 'usersDataSourcesUpdate' smart constructor.
+data UsersDataSourcesUpdate = UsersDataSourcesUpdate
     { _udsuDataSourceId :: !Text
     , _udsuPayload      :: !DataSource
     , _udsuUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersDataSourcesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersDataSourcesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,38 +76,38 @@ data UsersDataSourcesUpdate' = UsersDataSourcesUpdate'
 -- * 'udsuPayload'
 --
 -- * 'udsuUserId'
-usersDataSourcesUpdate'
+usersDataSourcesUpdate
     :: Text -- ^ 'udsuDataSourceId'
     -> DataSource -- ^ 'udsuPayload'
     -> Text -- ^ 'udsuUserId'
-    -> UsersDataSourcesUpdate'
-usersDataSourcesUpdate' pUdsuDataSourceId_ pUdsuPayload_ pUdsuUserId_ =
-    UsersDataSourcesUpdate'
+    -> UsersDataSourcesUpdate
+usersDataSourcesUpdate pUdsuDataSourceId_ pUdsuPayload_ pUdsuUserId_ =
+    UsersDataSourcesUpdate
     { _udsuDataSourceId = pUdsuDataSourceId_
     , _udsuPayload = pUdsuPayload_
     , _udsuUserId = pUdsuUserId_
     }
 
 -- | The data stream ID of the data source to update.
-udsuDataSourceId :: Lens' UsersDataSourcesUpdate' Text
+udsuDataSourceId :: Lens' UsersDataSourcesUpdate Text
 udsuDataSourceId
   = lens _udsuDataSourceId
       (\ s a -> s{_udsuDataSourceId = a})
 
 -- | Multipart request metadata.
-udsuPayload :: Lens' UsersDataSourcesUpdate' DataSource
+udsuPayload :: Lens' UsersDataSourcesUpdate DataSource
 udsuPayload
   = lens _udsuPayload (\ s a -> s{_udsuPayload = a})
 
 -- | Update the data source for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
-udsuUserId :: Lens' UsersDataSourcesUpdate' Text
+udsuUserId :: Lens' UsersDataSourcesUpdate Text
 udsuUserId
   = lens _udsuUserId (\ s a -> s{_udsuUserId = a})
 
-instance GoogleRequest UsersDataSourcesUpdate' where
-        type Rs UsersDataSourcesUpdate' = DataSource
-        requestClient UsersDataSourcesUpdate'{..}
+instance GoogleRequest UsersDataSourcesUpdate where
+        type Rs UsersDataSourcesUpdate = DataSource
+        requestClient UsersDataSourcesUpdate{..}
           = go _udsuUserId _udsuDataSourceId (Just AltJSON)
               _udsuPayload
               fitnessService

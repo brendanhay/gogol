@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Scores.ResetAll
       ScoresResetAllResource
 
     -- * Creating a Request
-    , scoresResetAll'
-    , ScoresResetAll'
+    , scoresResetAll
+    , ScoresResetAll
 
     ) where
 
@@ -40,7 +40,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.scores.resetAll@ method which the
--- 'ScoresResetAll'' request conforms to.
+-- 'ScoresResetAll' request conforms to.
 type ScoresResetAllResource =
      "scores" :>
        "reset" :>
@@ -51,20 +51,20 @@ type ScoresResetAllResource =
 -- players. This method is only accessible to whitelisted tester accounts
 -- for your application.
 --
--- /See:/ 'scoresResetAll'' smart constructor.
-data ScoresResetAll' =
-    ScoresResetAll'
+-- /See:/ 'scoresResetAll' smart constructor.
+data ScoresResetAll =
+    ScoresResetAll
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ScoresResetAll'' with the minimum fields required to make a request.
+-- | Creates a value of 'ScoresResetAll' with the minimum fields required to make a request.
 --
-scoresResetAll'
-    :: ScoresResetAll'
-scoresResetAll' = ScoresResetAll'
+scoresResetAll
+    :: ScoresResetAll
+scoresResetAll = ScoresResetAll
 
-instance GoogleRequest ScoresResetAll' where
-        type Rs ScoresResetAll' = PlayerScoreResetAllResponse
-        requestClient ScoresResetAll'{}
+instance GoogleRequest ScoresResetAll where
+        type Rs ScoresResetAll = PlayerScoreResetAllResponse
+        requestClient ScoresResetAll{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy ScoresResetAllResource)

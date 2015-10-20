@@ -30,8 +30,8 @@ module Network.Google.Resource.AdSenseHost.AssociationSessions.Verify
       AssociationSessionsVerifyResource
 
     -- * Creating a Request
-    , associationSessionsVerify'
-    , AssociationSessionsVerify'
+    , associationSessionsVerify
+    , AssociationSessionsVerify
 
     -- * Request Lenses
     , asvToken
@@ -41,7 +41,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.associationsessions.verify@ method which the
--- 'AssociationSessionsVerify'' request conforms to.
+-- 'AssociationSessionsVerify' request conforms to.
 type AssociationSessionsVerifyResource =
      "associationsessions" :>
        "verify" :>
@@ -52,33 +52,33 @@ type AssociationSessionsVerifyResource =
 -- | Verify an association session after the association callback returns
 -- from AdSense signup.
 --
--- /See:/ 'associationSessionsVerify'' smart constructor.
-newtype AssociationSessionsVerify' = AssociationSessionsVerify'
+-- /See:/ 'associationSessionsVerify' smart constructor.
+newtype AssociationSessionsVerify = AssociationSessionsVerify
     { _asvToken :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AssociationSessionsVerify'' with the minimum fields required to make a request.
+-- | Creates a value of 'AssociationSessionsVerify' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'asvToken'
-associationSessionsVerify'
+associationSessionsVerify
     :: Text -- ^ 'asvToken'
-    -> AssociationSessionsVerify'
-associationSessionsVerify' pAsvToken_ =
-    AssociationSessionsVerify'
+    -> AssociationSessionsVerify
+associationSessionsVerify pAsvToken_ =
+    AssociationSessionsVerify
     { _asvToken = pAsvToken_
     }
 
 -- | The token returned to the association callback URL.
-asvToken :: Lens' AssociationSessionsVerify' Text
+asvToken :: Lens' AssociationSessionsVerify Text
 asvToken = lens _asvToken (\ s a -> s{_asvToken = a})
 
-instance GoogleRequest AssociationSessionsVerify'
+instance GoogleRequest AssociationSessionsVerify
          where
-        type Rs AssociationSessionsVerify' =
+        type Rs AssociationSessionsVerify =
              AssociationSession
-        requestClient AssociationSessionsVerify'{..}
+        requestClient AssociationSessionsVerify{..}
           = go (Just _asvToken) (Just AltJSON)
               adSenseHostService
           where go

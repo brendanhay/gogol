@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.Update
       CustomChannelsUpdateResource
 
     -- * Creating a Request
-    , customChannelsUpdate'
-    , CustomChannelsUpdate'
+    , customChannelsUpdate
+    , CustomChannelsUpdate
 
     -- * Request Lenses
     , ccuPayload
@@ -41,7 +41,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.customchannels.update@ method which the
--- 'CustomChannelsUpdate'' request conforms to.
+-- 'CustomChannelsUpdate' request conforms to.
 type CustomChannelsUpdateResource =
      "adclients" :>
        Capture "adClientId" Text :>
@@ -52,43 +52,43 @@ type CustomChannelsUpdateResource =
 
 -- | Update a custom channel in the host AdSense account.
 --
--- /See:/ 'customChannelsUpdate'' smart constructor.
-data CustomChannelsUpdate' = CustomChannelsUpdate'
+-- /See:/ 'customChannelsUpdate' smart constructor.
+data CustomChannelsUpdate = CustomChannelsUpdate
     { _ccuPayload    :: !CustomChannel
     , _ccuAdClientId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CustomChannelsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CustomChannelsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ccuPayload'
 --
 -- * 'ccuAdClientId'
-customChannelsUpdate'
+customChannelsUpdate
     :: CustomChannel -- ^ 'ccuPayload'
     -> Text -- ^ 'ccuAdClientId'
-    -> CustomChannelsUpdate'
-customChannelsUpdate' pCcuPayload_ pCcuAdClientId_ =
-    CustomChannelsUpdate'
+    -> CustomChannelsUpdate
+customChannelsUpdate pCcuPayload_ pCcuAdClientId_ =
+    CustomChannelsUpdate
     { _ccuPayload = pCcuPayload_
     , _ccuAdClientId = pCcuAdClientId_
     }
 
 -- | Multipart request metadata.
-ccuPayload :: Lens' CustomChannelsUpdate' CustomChannel
+ccuPayload :: Lens' CustomChannelsUpdate CustomChannel
 ccuPayload
   = lens _ccuPayload (\ s a -> s{_ccuPayload = a})
 
 -- | Ad client in which the custom channel will be updated.
-ccuAdClientId :: Lens' CustomChannelsUpdate' Text
+ccuAdClientId :: Lens' CustomChannelsUpdate Text
 ccuAdClientId
   = lens _ccuAdClientId
       (\ s a -> s{_ccuAdClientId = a})
 
-instance GoogleRequest CustomChannelsUpdate' where
-        type Rs CustomChannelsUpdate' = CustomChannel
-        requestClient CustomChannelsUpdate'{..}
+instance GoogleRequest CustomChannelsUpdate where
+        type Rs CustomChannelsUpdate = CustomChannel
+        requestClient CustomChannelsUpdate{..}
           = go _ccuAdClientId (Just AltJSON) _ccuPayload
               adSenseHostService
           where go

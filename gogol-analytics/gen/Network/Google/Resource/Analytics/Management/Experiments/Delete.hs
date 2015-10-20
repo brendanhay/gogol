@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Experiments.Delete
       ManagementExperimentsDeleteResource
 
     -- * Creating a Request
-    , managementExperimentsDelete'
-    , ManagementExperimentsDelete'
+    , managementExperimentsDelete
+    , ManagementExperimentsDelete
 
     -- * Request Lenses
     , medWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.experiments.delete@ method which the
--- 'ManagementExperimentsDelete'' request conforms to.
+-- 'ManagementExperimentsDelete' request conforms to.
 type ManagementExperimentsDeleteResource =
      "management" :>
        "accounts" :>
@@ -58,15 +58,15 @@ type ManagementExperimentsDeleteResource =
 
 -- | Delete an experiment.
 --
--- /See:/ 'managementExperimentsDelete'' smart constructor.
-data ManagementExperimentsDelete' = ManagementExperimentsDelete'
+-- /See:/ 'managementExperimentsDelete' smart constructor.
+data ManagementExperimentsDelete = ManagementExperimentsDelete
     { _medWebPropertyId :: !Text
     , _medProFileId     :: !Text
     , _medAccountId     :: !Text
     , _medExperimentId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementExperimentsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementExperimentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data ManagementExperimentsDelete' = ManagementExperimentsDelete'
 -- * 'medAccountId'
 --
 -- * 'medExperimentId'
-managementExperimentsDelete'
+managementExperimentsDelete
     :: Text -- ^ 'medWebPropertyId'
     -> Text -- ^ 'medProFileId'
     -> Text -- ^ 'medAccountId'
     -> Text -- ^ 'medExperimentId'
-    -> ManagementExperimentsDelete'
-managementExperimentsDelete' pMedWebPropertyId_ pMedProFileId_ pMedAccountId_ pMedExperimentId_ =
-    ManagementExperimentsDelete'
+    -> ManagementExperimentsDelete
+managementExperimentsDelete pMedWebPropertyId_ pMedProFileId_ pMedAccountId_ pMedExperimentId_ =
+    ManagementExperimentsDelete
     { _medWebPropertyId = pMedWebPropertyId_
     , _medProFileId = pMedProFileId_
     , _medAccountId = pMedAccountId_
@@ -92,31 +92,31 @@ managementExperimentsDelete' pMedWebPropertyId_ pMedProFileId_ pMedAccountId_ pM
     }
 
 -- | Web property ID to which the experiment belongs
-medWebPropertyId :: Lens' ManagementExperimentsDelete' Text
+medWebPropertyId :: Lens' ManagementExperimentsDelete Text
 medWebPropertyId
   = lens _medWebPropertyId
       (\ s a -> s{_medWebPropertyId = a})
 
 -- | View (Profile) ID to which the experiment belongs
-medProFileId :: Lens' ManagementExperimentsDelete' Text
+medProFileId :: Lens' ManagementExperimentsDelete Text
 medProFileId
   = lens _medProFileId (\ s a -> s{_medProFileId = a})
 
 -- | Account ID to which the experiment belongs
-medAccountId :: Lens' ManagementExperimentsDelete' Text
+medAccountId :: Lens' ManagementExperimentsDelete Text
 medAccountId
   = lens _medAccountId (\ s a -> s{_medAccountId = a})
 
 -- | ID of the experiment to delete
-medExperimentId :: Lens' ManagementExperimentsDelete' Text
+medExperimentId :: Lens' ManagementExperimentsDelete Text
 medExperimentId
   = lens _medExperimentId
       (\ s a -> s{_medExperimentId = a})
 
-instance GoogleRequest ManagementExperimentsDelete'
+instance GoogleRequest ManagementExperimentsDelete
          where
-        type Rs ManagementExperimentsDelete' = ()
-        requestClient ManagementExperimentsDelete'{..}
+        type Rs ManagementExperimentsDelete = ()
+        requestClient ManagementExperimentsDelete{..}
           = go _medAccountId _medWebPropertyId _medProFileId
               _medExperimentId
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSense.AdUnits.Get
       AdUnitsGetResource
 
     -- * Creating a Request
-    , adUnitsGet'
-    , AdUnitsGet'
+    , adUnitsGet
+    , AdUnitsGet
 
     -- * Request Lenses
     , augAdUnitId
@@ -41,7 +41,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.adunits.get@ method which the
--- 'AdUnitsGet'' request conforms to.
+-- 'AdUnitsGet' request conforms to.
 type AdUnitsGetResource =
      "adclients" :>
        Capture "adClientId" Text :>
@@ -51,43 +51,43 @@ type AdUnitsGetResource =
 
 -- | Gets the specified ad unit in the specified ad client.
 --
--- /See:/ 'adUnitsGet'' smart constructor.
-data AdUnitsGet' = AdUnitsGet'
+-- /See:/ 'adUnitsGet' smart constructor.
+data AdUnitsGet = AdUnitsGet
     { _augAdUnitId   :: !Text
     , _augAdClientId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdUnitsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdUnitsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'augAdUnitId'
 --
 -- * 'augAdClientId'
-adUnitsGet'
+adUnitsGet
     :: Text -- ^ 'augAdUnitId'
     -> Text -- ^ 'augAdClientId'
-    -> AdUnitsGet'
-adUnitsGet' pAugAdUnitId_ pAugAdClientId_ =
-    AdUnitsGet'
+    -> AdUnitsGet
+adUnitsGet pAugAdUnitId_ pAugAdClientId_ =
+    AdUnitsGet
     { _augAdUnitId = pAugAdUnitId_
     , _augAdClientId = pAugAdClientId_
     }
 
 -- | Ad unit to retrieve.
-augAdUnitId :: Lens' AdUnitsGet' Text
+augAdUnitId :: Lens' AdUnitsGet Text
 augAdUnitId
   = lens _augAdUnitId (\ s a -> s{_augAdUnitId = a})
 
 -- | Ad client for which to get the ad unit.
-augAdClientId :: Lens' AdUnitsGet' Text
+augAdClientId :: Lens' AdUnitsGet Text
 augAdClientId
   = lens _augAdClientId
       (\ s a -> s{_augAdClientId = a})
 
-instance GoogleRequest AdUnitsGet' where
-        type Rs AdUnitsGet' = AdUnit
-        requestClient AdUnitsGet'{..}
+instance GoogleRequest AdUnitsGet where
+        type Rs AdUnitsGet = AdUnit
+        requestClient AdUnitsGet{..}
           = go _augAdClientId _augAdUnitId (Just AltJSON)
               adSenseService
           where go

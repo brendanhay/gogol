@@ -30,8 +30,8 @@ module Network.Google.Resource.BigQuery.Tables.List
       TablesListResource
 
     -- * Creating a Request
-    , tablesList'
-    , TablesList'
+    , tablesList
+    , TablesList
 
     -- * Request Lenses
     , tlDatasetId
@@ -44,7 +44,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.tables.list@ method which the
--- 'TablesList'' request conforms to.
+-- 'TablesList' request conforms to.
 type TablesListResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -58,15 +58,15 @@ type TablesListResource =
 -- | Lists all tables in the specified dataset. Requires the READER dataset
 -- role.
 --
--- /See:/ 'tablesList'' smart constructor.
-data TablesList' = TablesList'
+-- /See:/ 'tablesList' smart constructor.
+data TablesList = TablesList
     { _tlDatasetId  :: !Text
     , _tlPageToken  :: !(Maybe Text)
     , _tlProjectId  :: !Text
     , _tlMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,12 +77,12 @@ data TablesList' = TablesList'
 -- * 'tlProjectId'
 --
 -- * 'tlMaxResults'
-tablesList'
+tablesList
     :: Text -- ^ 'tlDatasetId'
     -> Text -- ^ 'tlProjectId'
-    -> TablesList'
-tablesList' pTlDatasetId_ pTlProjectId_ =
-    TablesList'
+    -> TablesList
+tablesList pTlDatasetId_ pTlProjectId_ =
+    TablesList
     { _tlDatasetId = pTlDatasetId_
     , _tlPageToken = Nothing
     , _tlProjectId = pTlProjectId_
@@ -90,29 +90,29 @@ tablesList' pTlDatasetId_ pTlProjectId_ =
     }
 
 -- | Dataset ID of the tables to list
-tlDatasetId :: Lens' TablesList' Text
+tlDatasetId :: Lens' TablesList Text
 tlDatasetId
   = lens _tlDatasetId (\ s a -> s{_tlDatasetId = a})
 
 -- | Page token, returned by a previous call, to request the next page of
 -- results
-tlPageToken :: Lens' TablesList' (Maybe Text)
+tlPageToken :: Lens' TablesList (Maybe Text)
 tlPageToken
   = lens _tlPageToken (\ s a -> s{_tlPageToken = a})
 
 -- | Project ID of the tables to list
-tlProjectId :: Lens' TablesList' Text
+tlProjectId :: Lens' TablesList Text
 tlProjectId
   = lens _tlProjectId (\ s a -> s{_tlProjectId = a})
 
 -- | Maximum number of results to return
-tlMaxResults :: Lens' TablesList' (Maybe Word32)
+tlMaxResults :: Lens' TablesList (Maybe Word32)
 tlMaxResults
   = lens _tlMaxResults (\ s a -> s{_tlMaxResults = a})
 
-instance GoogleRequest TablesList' where
-        type Rs TablesList' = TableList
-        requestClient TablesList'{..}
+instance GoogleRequest TablesList where
+        type Rs TablesList = TableList
+        requestClient TablesList{..}
           = go _tlProjectId _tlDatasetId _tlPageToken
               _tlMaxResults
               (Just AltJSON)

@@ -30,8 +30,8 @@ module Network.Google.Resource.SQL.BackupRuns.List
       BackupRunsListResource
 
     -- * Creating a Request
-    , backupRunsList'
-    , BackupRunsList'
+    , backupRunsList
+    , BackupRunsList
 
     -- * Request Lenses
     , brlProject
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.backupRuns.list@ method which the
--- 'BackupRunsList'' request conforms to.
+-- 'BackupRunsList' request conforms to.
 type BackupRunsListResource =
      "projects" :>
        Capture "project" Text :>
@@ -59,15 +59,15 @@ type BackupRunsListResource =
 -- | Lists all backup runs associated with a given instance and configuration
 -- in the reverse chronological order of the enqueued time.
 --
--- /See:/ 'backupRunsList'' smart constructor.
-data BackupRunsList' = BackupRunsList'
+-- /See:/ 'backupRunsList' smart constructor.
+data BackupRunsList = BackupRunsList
     { _brlProject    :: !Text
     , _brlPageToken  :: !(Maybe Text)
     , _brlMaxResults :: !(Maybe Int32)
     , _brlInstance   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BackupRunsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'BackupRunsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -78,12 +78,12 @@ data BackupRunsList' = BackupRunsList'
 -- * 'brlMaxResults'
 --
 -- * 'brlInstance'
-backupRunsList'
+backupRunsList
     :: Text -- ^ 'brlProject'
     -> Text -- ^ 'brlInstance'
-    -> BackupRunsList'
-backupRunsList' pBrlProject_ pBrlInstance_ =
-    BackupRunsList'
+    -> BackupRunsList
+backupRunsList pBrlProject_ pBrlInstance_ =
+    BackupRunsList
     { _brlProject = pBrlProject_
     , _brlPageToken = Nothing
     , _brlMaxResults = Nothing
@@ -91,30 +91,30 @@ backupRunsList' pBrlProject_ pBrlInstance_ =
     }
 
 -- | Project ID of the project that contains the instance.
-brlProject :: Lens' BackupRunsList' Text
+brlProject :: Lens' BackupRunsList Text
 brlProject
   = lens _brlProject (\ s a -> s{_brlProject = a})
 
 -- | A previously-returned page token representing part of the larger set of
 -- results to view.
-brlPageToken :: Lens' BackupRunsList' (Maybe Text)
+brlPageToken :: Lens' BackupRunsList (Maybe Text)
 brlPageToken
   = lens _brlPageToken (\ s a -> s{_brlPageToken = a})
 
 -- | Maximum number of backup runs per response.
-brlMaxResults :: Lens' BackupRunsList' (Maybe Int32)
+brlMaxResults :: Lens' BackupRunsList (Maybe Int32)
 brlMaxResults
   = lens _brlMaxResults
       (\ s a -> s{_brlMaxResults = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-brlInstance :: Lens' BackupRunsList' Text
+brlInstance :: Lens' BackupRunsList Text
 brlInstance
   = lens _brlInstance (\ s a -> s{_brlInstance = a})
 
-instance GoogleRequest BackupRunsList' where
-        type Rs BackupRunsList' = BackupRunsListResponse
-        requestClient BackupRunsList'{..}
+instance GoogleRequest BackupRunsList where
+        type Rs BackupRunsList = BackupRunsListResponse
+        requestClient BackupRunsList{..}
           = go _brlProject _brlInstance _brlPageToken
               _brlMaxResults
               (Just AltJSON)

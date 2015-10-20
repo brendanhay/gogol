@@ -29,8 +29,8 @@ module Network.Google.Resource.Plus.Comments.List
       CommentsListResource
 
     -- * Creating a Request
-    , commentsList'
-    , CommentsList'
+    , commentsList
+    , CommentsList
 
     -- * Request Lenses
     , clActivityId
@@ -43,7 +43,7 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plus.comments.list@ method which the
--- 'CommentsList'' request conforms to.
+-- 'CommentsList' request conforms to.
 type CommentsListResource =
      "activities" :>
        Capture "activityId" Text :>
@@ -55,15 +55,15 @@ type CommentsListResource =
 
 -- | List all of the comments for an activity.
 --
--- /See:/ 'commentsList'' smart constructor.
-data CommentsList' = CommentsList'
+-- /See:/ 'commentsList' smart constructor.
+data CommentsList = CommentsList
     { _clActivityId :: !Text
     , _clSortOrder  :: !CommentsListSortOrder
     , _clPageToken  :: !(Maybe Text)
     , _clMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,11 +74,11 @@ data CommentsList' = CommentsList'
 -- * 'clPageToken'
 --
 -- * 'clMaxResults'
-commentsList'
+commentsList
     :: Text -- ^ 'clActivityId'
-    -> CommentsList'
-commentsList' pClActivityId_ =
-    CommentsList'
+    -> CommentsList
+commentsList pClActivityId_ =
+    CommentsList
     { _clActivityId = pClActivityId_
     , _clSortOrder = Ascending
     , _clPageToken = Nothing
@@ -86,32 +86,32 @@ commentsList' pClActivityId_ =
     }
 
 -- | The ID of the activity to get comments for.
-clActivityId :: Lens' CommentsList' Text
+clActivityId :: Lens' CommentsList Text
 clActivityId
   = lens _clActivityId (\ s a -> s{_clActivityId = a})
 
 -- | The order in which to sort the list of comments.
-clSortOrder :: Lens' CommentsList' CommentsListSortOrder
+clSortOrder :: Lens' CommentsList CommentsListSortOrder
 clSortOrder
   = lens _clSortOrder (\ s a -> s{_clSortOrder = a})
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
 -- \"nextPageToken\" from the previous response.
-clPageToken :: Lens' CommentsList' (Maybe Text)
+clPageToken :: Lens' CommentsList (Maybe Text)
 clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
 -- | The maximum number of comments to include in the response, which is used
 -- for paging. For any response, the actual number returned might be less
 -- than the specified maxResults.
-clMaxResults :: Lens' CommentsList' Word32
+clMaxResults :: Lens' CommentsList Word32
 clMaxResults
   = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
 
-instance GoogleRequest CommentsList' where
-        type Rs CommentsList' = CommentFeed
-        requestClient CommentsList'{..}
+instance GoogleRequest CommentsList where
+        type Rs CommentsList = CommentFeed
+        requestClient CommentsList{..}
           = go _clActivityId (Just _clSortOrder) _clPageToken
               (Just _clMaxResults)
               (Just AltJSON)

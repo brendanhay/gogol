@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Domains.Delete
       DomainsDeleteResource
 
     -- * Creating a Request
-    , domainsDelete'
-    , DomainsDelete'
+    , domainsDelete
+    , DomainsDelete
 
     -- * Request Lenses
     , ddCustomer
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.domains.delete@ method which the
--- 'DomainsDelete'' request conforms to.
+-- 'DomainsDelete' request conforms to.
 type DomainsDeleteResource =
      "customer" :>
        Capture "customer" Text :>
@@ -51,42 +51,42 @@ type DomainsDeleteResource =
 
 -- | Deletes a domain of the customer.
 --
--- /See:/ 'domainsDelete'' smart constructor.
-data DomainsDelete' = DomainsDelete'
+-- /See:/ 'domainsDelete' smart constructor.
+data DomainsDelete = DomainsDelete
     { _ddCustomer   :: !Text
     , _ddDomainName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DomainsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'DomainsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ddCustomer'
 --
 -- * 'ddDomainName'
-domainsDelete'
+domainsDelete
     :: Text -- ^ 'ddCustomer'
     -> Text -- ^ 'ddDomainName'
-    -> DomainsDelete'
-domainsDelete' pDdCustomer_ pDdDomainName_ =
-    DomainsDelete'
+    -> DomainsDelete
+domainsDelete pDdCustomer_ pDdDomainName_ =
+    DomainsDelete
     { _ddCustomer = pDdCustomer_
     , _ddDomainName = pDdDomainName_
     }
 
 -- | Immutable id of the Google Apps account.
-ddCustomer :: Lens' DomainsDelete' Text
+ddCustomer :: Lens' DomainsDelete Text
 ddCustomer
   = lens _ddCustomer (\ s a -> s{_ddCustomer = a})
 
 -- | Name of domain to be deleted
-ddDomainName :: Lens' DomainsDelete' Text
+ddDomainName :: Lens' DomainsDelete Text
 ddDomainName
   = lens _ddDomainName (\ s a -> s{_ddDomainName = a})
 
-instance GoogleRequest DomainsDelete' where
-        type Rs DomainsDelete' = ()
-        requestClient DomainsDelete'{..}
+instance GoogleRequest DomainsDelete where
+        type Rs DomainsDelete = ()
+        requestClient DomainsDelete{..}
           = go _ddCustomer _ddDomainName (Just AltJSON)
               directoryService
           where go

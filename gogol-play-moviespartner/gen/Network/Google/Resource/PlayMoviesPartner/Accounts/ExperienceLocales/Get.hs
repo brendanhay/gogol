@@ -31,8 +31,8 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
       AccountsExperienceLocalesGetResource
 
     -- * Creating a Request
-    , accountsExperienceLocalesGet'
-    , AccountsExperienceLocalesGet'
+    , accountsExperienceLocalesGet
+    , AccountsExperienceLocalesGet
 
     -- * Request Lenses
     , aelgXgafv
@@ -50,7 +50,7 @@ import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @playmoviespartner.accounts.experienceLocales.get@ method which the
--- 'AccountsExperienceLocalesGet'' request conforms to.
+-- 'AccountsExperienceLocalesGet' request conforms to.
 type AccountsExperienceLocalesGetResource =
      "v1" :>
        "accounts" :>
@@ -71,8 +71,8 @@ type AccountsExperienceLocalesGetResource =
 -- Authorization rules_ and _Get methods rules_ for more information about
 -- this method.
 --
--- /See:/ 'accountsExperienceLocalesGet'' smart constructor.
-data AccountsExperienceLocalesGet' = AccountsExperienceLocalesGet'
+-- /See:/ 'accountsExperienceLocalesGet' smart constructor.
+data AccountsExperienceLocalesGet = AccountsExperienceLocalesGet
     { _aelgXgafv          :: !(Maybe Text)
     , _aelgUploadProtocol :: !(Maybe Text)
     , _aelgPp             :: !Bool
@@ -84,7 +84,7 @@ data AccountsExperienceLocalesGet' = AccountsExperienceLocalesGet'
     , _aelgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsExperienceLocalesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsExperienceLocalesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -105,12 +105,12 @@ data AccountsExperienceLocalesGet' = AccountsExperienceLocalesGet'
 -- * 'aelgBearerToken'
 --
 -- * 'aelgCallback'
-accountsExperienceLocalesGet'
+accountsExperienceLocalesGet
     :: Text -- ^ 'aelgElId'
     -> Text -- ^ 'aelgAccountId'
-    -> AccountsExperienceLocalesGet'
-accountsExperienceLocalesGet' pAelgElId_ pAelgAccountId_ =
-    AccountsExperienceLocalesGet'
+    -> AccountsExperienceLocalesGet
+accountsExperienceLocalesGet pAelgElId_ pAelgAccountId_ =
+    AccountsExperienceLocalesGet
     { _aelgXgafv = Nothing
     , _aelgUploadProtocol = Nothing
     , _aelgPp = True
@@ -123,58 +123,58 @@ accountsExperienceLocalesGet' pAelgElId_ pAelgAccountId_ =
     }
 
 -- | V1 error format.
-aelgXgafv :: Lens' AccountsExperienceLocalesGet' (Maybe Text)
+aelgXgafv :: Lens' AccountsExperienceLocalesGet (Maybe Text)
 aelgXgafv
   = lens _aelgXgafv (\ s a -> s{_aelgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-aelgUploadProtocol :: Lens' AccountsExperienceLocalesGet' (Maybe Text)
+aelgUploadProtocol :: Lens' AccountsExperienceLocalesGet (Maybe Text)
 aelgUploadProtocol
   = lens _aelgUploadProtocol
       (\ s a -> s{_aelgUploadProtocol = a})
 
 -- | Pretty-print response.
-aelgPp :: Lens' AccountsExperienceLocalesGet' Bool
+aelgPp :: Lens' AccountsExperienceLocalesGet Bool
 aelgPp = lens _aelgPp (\ s a -> s{_aelgPp = a})
 
 -- | OAuth access token.
-aelgAccessToken :: Lens' AccountsExperienceLocalesGet' (Maybe Text)
+aelgAccessToken :: Lens' AccountsExperienceLocalesGet (Maybe Text)
 aelgAccessToken
   = lens _aelgAccessToken
       (\ s a -> s{_aelgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-aelgUploadType :: Lens' AccountsExperienceLocalesGet' (Maybe Text)
+aelgUploadType :: Lens' AccountsExperienceLocalesGet (Maybe Text)
 aelgUploadType
   = lens _aelgUploadType
       (\ s a -> s{_aelgUploadType = a})
 
 -- | REQUIRED. ExperienceLocale ID, as defined by Google.
-aelgElId :: Lens' AccountsExperienceLocalesGet' Text
+aelgElId :: Lens' AccountsExperienceLocalesGet Text
 aelgElId = lens _aelgElId (\ s a -> s{_aelgElId = a})
 
 -- | REQUIRED. See _General rules_ for more information about this field.
-aelgAccountId :: Lens' AccountsExperienceLocalesGet' Text
+aelgAccountId :: Lens' AccountsExperienceLocalesGet Text
 aelgAccountId
   = lens _aelgAccountId
       (\ s a -> s{_aelgAccountId = a})
 
 -- | OAuth bearer token.
-aelgBearerToken :: Lens' AccountsExperienceLocalesGet' (Maybe Text)
+aelgBearerToken :: Lens' AccountsExperienceLocalesGet (Maybe Text)
 aelgBearerToken
   = lens _aelgBearerToken
       (\ s a -> s{_aelgBearerToken = a})
 
 -- | JSONP
-aelgCallback :: Lens' AccountsExperienceLocalesGet' (Maybe Text)
+aelgCallback :: Lens' AccountsExperienceLocalesGet (Maybe Text)
 aelgCallback
   = lens _aelgCallback (\ s a -> s{_aelgCallback = a})
 
-instance GoogleRequest AccountsExperienceLocalesGet'
+instance GoogleRequest AccountsExperienceLocalesGet
          where
-        type Rs AccountsExperienceLocalesGet' =
+        type Rs AccountsExperienceLocalesGet =
              ExperienceLocale
-        requestClient AccountsExperienceLocalesGet'{..}
+        requestClient AccountsExperienceLocalesGet{..}
           = go _aelgAccountId _aelgElId _aelgXgafv
               _aelgUploadProtocol
               (Just _aelgPp)

@@ -29,20 +29,20 @@ module Network.Google.Resource.MapsEngine.Layers.Parents.List
       LayersParentsListResource
 
     -- * Creating a Request
-    , layersParentsList'
-    , LayersParentsList'
+    , layersParentsList
+    , LayersParentsList
 
     -- * Request Lenses
-    , lplpId
-    , lplpPageToken
-    , lplpMaxResults
+    , lId
+    , lPageToken
+    , lMaxResults
     ) where
 
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.layers.parents.list@ method which the
--- 'LayersParentsList'' request conforms to.
+-- 'LayersParentsList' request conforms to.
 type LayersParentsListResource =
      "layers" :>
        Capture "id" Text :>
@@ -54,56 +54,53 @@ type LayersParentsListResource =
 
 -- | Return all parent ids of the specified layer.
 --
--- /See:/ 'layersParentsList'' smart constructor.
-data LayersParentsList' = LayersParentsList'
-    { _lplpId         :: !Text
-    , _lplpPageToken  :: !(Maybe Text)
-    , _lplpMaxResults :: !(Maybe Word32)
+-- /See:/ 'layersParentsList' smart constructor.
+data LayersParentsList = LayersParentsList
+    { _lId         :: !Text
+    , _lPageToken  :: !(Maybe Text)
+    , _lMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersParentsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersParentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lplpId'
+-- * 'lId'
 --
--- * 'lplpPageToken'
+-- * 'lPageToken'
 --
--- * 'lplpMaxResults'
-layersParentsList'
-    :: Text -- ^ 'lplpId'
-    -> LayersParentsList'
-layersParentsList' pLplpId_ =
-    LayersParentsList'
-    { _lplpId = pLplpId_
-    , _lplpPageToken = Nothing
-    , _lplpMaxResults = Nothing
+-- * 'lMaxResults'
+layersParentsList
+    :: Text -- ^ 'lId'
+    -> LayersParentsList
+layersParentsList pLId_ =
+    LayersParentsList
+    { _lId = pLId_
+    , _lPageToken = Nothing
+    , _lMaxResults = Nothing
     }
 
 -- | The ID of the layer whose parents will be listed.
-lplpId :: Lens' LayersParentsList' Text
-lplpId = lens _lplpId (\ s a -> s{_lplpId = a})
+lId :: Lens' LayersParentsList Text
+lId = lens _lId (\ s a -> s{_lId = a})
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
 -- nextPageToken from the previous response.
-lplpPageToken :: Lens' LayersParentsList' (Maybe Text)
-lplpPageToken
-  = lens _lplpPageToken
-      (\ s a -> s{_lplpPageToken = a})
+lPageToken :: Lens' LayersParentsList (Maybe Text)
+lPageToken
+  = lens _lPageToken (\ s a -> s{_lPageToken = a})
 
 -- | The maximum number of items to include in a single response page. The
 -- maximum supported value is 50.
-lplpMaxResults :: Lens' LayersParentsList' (Maybe Word32)
-lplpMaxResults
-  = lens _lplpMaxResults
-      (\ s a -> s{_lplpMaxResults = a})
+lMaxResults :: Lens' LayersParentsList (Maybe Word32)
+lMaxResults
+  = lens _lMaxResults (\ s a -> s{_lMaxResults = a})
 
-instance GoogleRequest LayersParentsList' where
-        type Rs LayersParentsList' = ParentsListResponse
-        requestClient LayersParentsList'{..}
-          = go _lplpId _lplpPageToken _lplpMaxResults
-              (Just AltJSON)
+instance GoogleRequest LayersParentsList where
+        type Rs LayersParentsList = ParentsListResponse
+        requestClient LayersParentsList{..}
+          = go _lId _lPageToken _lMaxResults (Just AltJSON)
               mapsEngineService
           where go
                   = buildClient

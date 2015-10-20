@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSense.Savedadstyles.List
       SavedadstylesListResource
 
     -- * Creating a Request
-    , savedadstylesList'
-    , SavedadstylesList'
+    , savedadstylesList
+    , SavedadstylesList
 
     -- * Request Lenses
     , slPageToken
@@ -41,7 +41,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.savedadstyles.list@ method which the
--- 'SavedadstylesList'' request conforms to.
+-- 'SavedadstylesList' request conforms to.
 type SavedadstylesListResource =
      "savedadstyles" :>
        QueryParam "pageToken" Text :>
@@ -50,23 +50,23 @@ type SavedadstylesListResource =
 
 -- | List all saved ad styles in the user\'s account.
 --
--- /See:/ 'savedadstylesList'' smart constructor.
-data SavedadstylesList' = SavedadstylesList'
+-- /See:/ 'savedadstylesList' smart constructor.
+data SavedadstylesList = SavedadstylesList
     { _slPageToken  :: !(Maybe Text)
     , _slMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SavedadstylesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'SavedadstylesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'slPageToken'
 --
 -- * 'slMaxResults'
-savedadstylesList'
-    :: SavedadstylesList'
-savedadstylesList' =
-    SavedadstylesList'
+savedadstylesList
+    :: SavedadstylesList
+savedadstylesList =
+    SavedadstylesList
     { _slPageToken = Nothing
     , _slMaxResults = Nothing
     }
@@ -74,19 +74,19 @@ savedadstylesList' =
 -- | A continuation token, used to page through saved ad styles. To retrieve
 -- the next page, set this parameter to the value of \"nextPageToken\" from
 -- the previous response.
-slPageToken :: Lens' SavedadstylesList' (Maybe Text)
+slPageToken :: Lens' SavedadstylesList (Maybe Text)
 slPageToken
   = lens _slPageToken (\ s a -> s{_slPageToken = a})
 
 -- | The maximum number of saved ad styles to include in the response, used
 -- for paging.
-slMaxResults :: Lens' SavedadstylesList' (Maybe Int32)
+slMaxResults :: Lens' SavedadstylesList (Maybe Int32)
 slMaxResults
   = lens _slMaxResults (\ s a -> s{_slMaxResults = a})
 
-instance GoogleRequest SavedadstylesList' where
-        type Rs SavedadstylesList' = SavedAdStyles
-        requestClient SavedadstylesList'{..}
+instance GoogleRequest SavedadstylesList where
+        type Rs SavedadstylesList = SavedAdStyles
+        requestClient SavedadstylesList{..}
           = go _slPageToken _slMaxResults (Just AltJSON)
               adSenseService
           where go

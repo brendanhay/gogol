@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Notifications.Update
       NotificationsUpdateResource
 
     -- * Creating a Request
-    , notificationsUpdate'
-    , NotificationsUpdate'
+    , notificationsUpdate
+    , NotificationsUpdate
 
     -- * Request Lenses
     , nuPayload
@@ -42,7 +42,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.notifications.update@ method which the
--- 'NotificationsUpdate'' request conforms to.
+-- 'NotificationsUpdate' request conforms to.
 type NotificationsUpdateResource =
      "customer" :>
        Capture "customer" Text :>
@@ -54,14 +54,14 @@ type NotificationsUpdateResource =
 
 -- | Updates a notification.
 --
--- /See:/ 'notificationsUpdate'' smart constructor.
-data NotificationsUpdate' = NotificationsUpdate'
+-- /See:/ 'notificationsUpdate' smart constructor.
+data NotificationsUpdate = NotificationsUpdate
     { _nuPayload        :: !Notification
     , _nuCustomer       :: !Text
     , _nuNotificationId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'NotificationsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'NotificationsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,37 +70,37 @@ data NotificationsUpdate' = NotificationsUpdate'
 -- * 'nuCustomer'
 --
 -- * 'nuNotificationId'
-notificationsUpdate'
+notificationsUpdate
     :: Notification -- ^ 'nuPayload'
     -> Text -- ^ 'nuCustomer'
     -> Text -- ^ 'nuNotificationId'
-    -> NotificationsUpdate'
-notificationsUpdate' pNuPayload_ pNuCustomer_ pNuNotificationId_ =
-    NotificationsUpdate'
+    -> NotificationsUpdate
+notificationsUpdate pNuPayload_ pNuCustomer_ pNuNotificationId_ =
+    NotificationsUpdate
     { _nuPayload = pNuPayload_
     , _nuCustomer = pNuCustomer_
     , _nuNotificationId = pNuNotificationId_
     }
 
 -- | Multipart request metadata.
-nuPayload :: Lens' NotificationsUpdate' Notification
+nuPayload :: Lens' NotificationsUpdate Notification
 nuPayload
   = lens _nuPayload (\ s a -> s{_nuPayload = a})
 
 -- | The unique ID for the customer\'s Google account.
-nuCustomer :: Lens' NotificationsUpdate' Text
+nuCustomer :: Lens' NotificationsUpdate Text
 nuCustomer
   = lens _nuCustomer (\ s a -> s{_nuCustomer = a})
 
 -- | The unique ID of the notification.
-nuNotificationId :: Lens' NotificationsUpdate' Text
+nuNotificationId :: Lens' NotificationsUpdate Text
 nuNotificationId
   = lens _nuNotificationId
       (\ s a -> s{_nuNotificationId = a})
 
-instance GoogleRequest NotificationsUpdate' where
-        type Rs NotificationsUpdate' = Notification
-        requestClient NotificationsUpdate'{..}
+instance GoogleRequest NotificationsUpdate where
+        type Rs NotificationsUpdate = Notification
+        requestClient NotificationsUpdate{..}
           = go _nuCustomer _nuNotificationId (Just AltJSON)
               _nuPayload
               directoryService

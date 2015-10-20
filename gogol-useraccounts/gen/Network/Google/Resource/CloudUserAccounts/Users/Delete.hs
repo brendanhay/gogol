@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudUserAccounts.Users.Delete
       UsersDeleteResource
 
     -- * Creating a Request
-    , usersDelete'
-    , UsersDelete'
+    , usersDelete
+    , UsersDelete
 
     -- * Request Lenses
     , udProject
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
 -- | A resource alias for @clouduseraccounts.users.delete@ method which the
--- 'UsersDelete'' request conforms to.
+-- 'UsersDelete' request conforms to.
 type UsersDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,41 +51,41 @@ type UsersDeleteResource =
 
 -- | Deletes the specified User resource.
 --
--- /See:/ 'usersDelete'' smart constructor.
-data UsersDelete' = UsersDelete'
+-- /See:/ 'usersDelete' smart constructor.
+data UsersDelete = UsersDelete
     { _udProject :: !Text
     , _udUser    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'udProject'
 --
 -- * 'udUser'
-usersDelete'
+usersDelete
     :: Text -- ^ 'udProject'
     -> Text -- ^ 'udUser'
-    -> UsersDelete'
-usersDelete' pUdProject_ pUdUser_ =
-    UsersDelete'
+    -> UsersDelete
+usersDelete pUdProject_ pUdUser_ =
+    UsersDelete
     { _udProject = pUdProject_
     , _udUser = pUdUser_
     }
 
 -- | Project ID for this request.
-udProject :: Lens' UsersDelete' Text
+udProject :: Lens' UsersDelete Text
 udProject
   = lens _udProject (\ s a -> s{_udProject = a})
 
 -- | Name of the user resource to delete.
-udUser :: Lens' UsersDelete' Text
+udUser :: Lens' UsersDelete Text
 udUser = lens _udUser (\ s a -> s{_udUser = a})
 
-instance GoogleRequest UsersDelete' where
-        type Rs UsersDelete' = Operation
-        requestClient UsersDelete'{..}
+instance GoogleRequest UsersDelete where
+        type Rs UsersDelete = Operation
+        requestClient UsersDelete{..}
           = go _udProject _udUser (Just AltJSON)
               userAccountsService
           where go

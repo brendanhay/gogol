@@ -34,8 +34,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
       ProjectsSubscriptionsAcknowledgeResource
 
     -- * Creating a Request
-    , projectsSubscriptionsAcknowledge'
-    , ProjectsSubscriptionsAcknowledge'
+    , projectsSubscriptionsAcknowledge
+    , ProjectsSubscriptionsAcknowledge
 
     -- * Request Lenses
     , psaXgafv
@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.acknowledge@ method which the
--- 'ProjectsSubscriptionsAcknowledge'' request conforms to.
+-- 'ProjectsSubscriptionsAcknowledge' request conforms to.
 type ProjectsSubscriptionsAcknowledgeResource =
      "v1" :>
        CaptureMode "subscription" "acknowledge" Text :>
@@ -75,8 +75,8 @@ type ProjectsSubscriptionsAcknowledgeResource =
 -- later. Acknowledging a message more than once will not result in an
 -- error.
 --
--- /See:/ 'projectsSubscriptionsAcknowledge'' smart constructor.
-data ProjectsSubscriptionsAcknowledge' = ProjectsSubscriptionsAcknowledge'
+-- /See:/ 'projectsSubscriptionsAcknowledge' smart constructor.
+data ProjectsSubscriptionsAcknowledge = ProjectsSubscriptionsAcknowledge
     { _psaXgafv          :: !(Maybe Text)
     , _psaUploadProtocol :: !(Maybe Text)
     , _psaPp             :: !Bool
@@ -88,7 +88,7 @@ data ProjectsSubscriptionsAcknowledge' = ProjectsSubscriptionsAcknowledge'
     , _psaCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsSubscriptionsAcknowledge'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsSubscriptionsAcknowledge' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -109,12 +109,12 @@ data ProjectsSubscriptionsAcknowledge' = ProjectsSubscriptionsAcknowledge'
 -- * 'psaSubscription'
 --
 -- * 'psaCallback'
-projectsSubscriptionsAcknowledge'
+projectsSubscriptionsAcknowledge
     :: AcknowledgeRequest -- ^ 'psaPayload'
     -> Text -- ^ 'psaSubscription'
-    -> ProjectsSubscriptionsAcknowledge'
-projectsSubscriptionsAcknowledge' pPsaPayload_ pPsaSubscription_ =
-    ProjectsSubscriptionsAcknowledge'
+    -> ProjectsSubscriptionsAcknowledge
+projectsSubscriptionsAcknowledge pPsaPayload_ pPsaSubscription_ =
+    ProjectsSubscriptionsAcknowledge
     { _psaXgafv = Nothing
     , _psaUploadProtocol = Nothing
     , _psaPp = True
@@ -127,57 +127,57 @@ projectsSubscriptionsAcknowledge' pPsaPayload_ pPsaSubscription_ =
     }
 
 -- | V1 error format.
-psaXgafv :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Text)
+psaXgafv :: Lens' ProjectsSubscriptionsAcknowledge (Maybe Text)
 psaXgafv = lens _psaXgafv (\ s a -> s{_psaXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-psaUploadProtocol :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Text)
+psaUploadProtocol :: Lens' ProjectsSubscriptionsAcknowledge (Maybe Text)
 psaUploadProtocol
   = lens _psaUploadProtocol
       (\ s a -> s{_psaUploadProtocol = a})
 
 -- | Pretty-print response.
-psaPp :: Lens' ProjectsSubscriptionsAcknowledge' Bool
+psaPp :: Lens' ProjectsSubscriptionsAcknowledge Bool
 psaPp = lens _psaPp (\ s a -> s{_psaPp = a})
 
 -- | OAuth access token.
-psaAccessToken :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Text)
+psaAccessToken :: Lens' ProjectsSubscriptionsAcknowledge (Maybe Text)
 psaAccessToken
   = lens _psaAccessToken
       (\ s a -> s{_psaAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-psaUploadType :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Text)
+psaUploadType :: Lens' ProjectsSubscriptionsAcknowledge (Maybe Text)
 psaUploadType
   = lens _psaUploadType
       (\ s a -> s{_psaUploadType = a})
 
 -- | Multipart request metadata.
-psaPayload :: Lens' ProjectsSubscriptionsAcknowledge' AcknowledgeRequest
+psaPayload :: Lens' ProjectsSubscriptionsAcknowledge AcknowledgeRequest
 psaPayload
   = lens _psaPayload (\ s a -> s{_psaPayload = a})
 
 -- | OAuth bearer token.
-psaBearerToken :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Text)
+psaBearerToken :: Lens' ProjectsSubscriptionsAcknowledge (Maybe Text)
 psaBearerToken
   = lens _psaBearerToken
       (\ s a -> s{_psaBearerToken = a})
 
 -- | The subscription whose message is being acknowledged.
-psaSubscription :: Lens' ProjectsSubscriptionsAcknowledge' Text
+psaSubscription :: Lens' ProjectsSubscriptionsAcknowledge Text
 psaSubscription
   = lens _psaSubscription
       (\ s a -> s{_psaSubscription = a})
 
 -- | JSONP
-psaCallback :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Text)
+psaCallback :: Lens' ProjectsSubscriptionsAcknowledge (Maybe Text)
 psaCallback
   = lens _psaCallback (\ s a -> s{_psaCallback = a})
 
 instance GoogleRequest
-         ProjectsSubscriptionsAcknowledge' where
-        type Rs ProjectsSubscriptionsAcknowledge' = Empty
-        requestClient ProjectsSubscriptionsAcknowledge'{..}
+         ProjectsSubscriptionsAcknowledge where
+        type Rs ProjectsSubscriptionsAcknowledge = Empty
+        requestClient ProjectsSubscriptionsAcknowledge{..}
           = go _psaSubscription _psaXgafv _psaUploadProtocol
               (Just _psaPp)
               _psaAccessToken

@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.LiveStreams.List
       LiveStreamsListResource
 
     -- * Creating a Request
-    , liveStreamsList'
-    , LiveStreamsList'
+    , liveStreamsList
+    , LiveStreamsList
 
     -- * Request Lenses
     , lslPart
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveStreams.list@ method which the
--- 'LiveStreamsList'' request conforms to.
+-- 'LiveStreamsList' request conforms to.
 type LiveStreamsListResource =
      "liveStreams" :>
        QueryParam "part" Text :>
@@ -61,8 +61,8 @@ type LiveStreamsListResource =
 
 -- | Returns a list of video streams that match the API request parameters.
 --
--- /See:/ 'liveStreamsList'' smart constructor.
-data LiveStreamsList' = LiveStreamsList'
+-- /See:/ 'liveStreamsList' smart constructor.
+data LiveStreamsList = LiveStreamsList
     { _lslPart                          :: !Text
     , _lslMine                          :: !(Maybe Bool)
     , _lslOnBehalfOfContentOwner        :: !(Maybe Text)
@@ -72,7 +72,7 @@ data LiveStreamsList' = LiveStreamsList'
     , _lslMaxResults                    :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LiveStreamsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'LiveStreamsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -89,11 +89,11 @@ data LiveStreamsList' = LiveStreamsList'
 -- * 'lslPageToken'
 --
 -- * 'lslMaxResults'
-liveStreamsList'
+liveStreamsList
     :: Text -- ^ 'lslPart'
-    -> LiveStreamsList'
-liveStreamsList' pLslPart_ =
-    LiveStreamsList'
+    -> LiveStreamsList
+liveStreamsList pLslPart_ =
+    LiveStreamsList
     { _lslPart = pLslPart_
     , _lslMine = Nothing
     , _lslOnBehalfOfContentOwner = Nothing
@@ -107,13 +107,13 @@ liveStreamsList' pLslPart_ =
 -- liveStream resource properties that the API response will include. The
 -- part names that you can include in the parameter value are id, snippet,
 -- cdn, and status.
-lslPart :: Lens' LiveStreamsList' Text
+lslPart :: Lens' LiveStreamsList Text
 lslPart = lens _lslPart (\ s a -> s{_lslPart = a})
 
 -- | The mine parameter can be used to instruct the API to only return
 -- streams owned by the authenticated user. Set the parameter value to true
 -- to only retrieve your own streams.
-lslMine :: Lens' LiveStreamsList' (Maybe Bool)
+lslMine :: Lens' LiveStreamsList (Maybe Bool)
 lslMine = lens _lslMine (\ s a -> s{_lslMine = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
@@ -126,7 +126,7 @@ lslMine = lens _lslMine (\ s a -> s{_lslMine = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-lslOnBehalfOfContentOwner :: Lens' LiveStreamsList' (Maybe Text)
+lslOnBehalfOfContentOwner :: Lens' LiveStreamsList (Maybe Text)
 lslOnBehalfOfContentOwner
   = lens _lslOnBehalfOfContentOwner
       (\ s a -> s{_lslOnBehalfOfContentOwner = a})
@@ -147,7 +147,7 @@ lslOnBehalfOfContentOwner
 -- actions on behalf of the channel specified in the parameter value,
 -- without having to provide authentication credentials for each separate
 -- channel.
-lslOnBehalfOfContentOwnerChannel :: Lens' LiveStreamsList' (Maybe Text)
+lslOnBehalfOfContentOwnerChannel :: Lens' LiveStreamsList (Maybe Text)
 lslOnBehalfOfContentOwnerChannel
   = lens _lslOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lslOnBehalfOfContentOwnerChannel = a})
@@ -155,26 +155,26 @@ lslOnBehalfOfContentOwnerChannel
 -- | The id parameter specifies a comma-separated list of YouTube stream IDs
 -- that identify the streams being retrieved. In a liveStream resource, the
 -- id property specifies the stream\'s ID.
-lslId :: Lens' LiveStreamsList' (Maybe Text)
+lslId :: Lens' LiveStreamsList (Maybe Text)
 lslId = lens _lslId (\ s a -> s{_lslId = a})
 
 -- | The pageToken parameter identifies a specific page in the result set
 -- that should be returned. In an API response, the nextPageToken and
 -- prevPageToken properties identify other pages that could be retrieved.
-lslPageToken :: Lens' LiveStreamsList' (Maybe Text)
+lslPageToken :: Lens' LiveStreamsList (Maybe Text)
 lslPageToken
   = lens _lslPageToken (\ s a -> s{_lslPageToken = a})
 
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set.
-lslMaxResults :: Lens' LiveStreamsList' Word32
+lslMaxResults :: Lens' LiveStreamsList Word32
 lslMaxResults
   = lens _lslMaxResults
       (\ s a -> s{_lslMaxResults = a})
 
-instance GoogleRequest LiveStreamsList' where
-        type Rs LiveStreamsList' = LiveStreamListResponse
-        requestClient LiveStreamsList'{..}
+instance GoogleRequest LiveStreamsList where
+        type Rs LiveStreamsList = LiveStreamListResponse
+        requestClient LiveStreamsList{..}
           = go (Just _lslPart) _lslMine
               _lslOnBehalfOfContentOwner
               _lslOnBehalfOfContentOwnerChannel

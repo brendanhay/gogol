@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.ChannelSections.Update
       ChannelSectionsUpdateResource
 
     -- * Creating a Request
-    , channelSectionsUpdate'
-    , ChannelSectionsUpdate'
+    , channelSectionsUpdate
+    , ChannelSectionsUpdate
 
     -- * Request Lenses
     , csuPart
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.channelSections.update@ method which the
--- 'ChannelSectionsUpdate'' request conforms to.
+-- 'ChannelSectionsUpdate' request conforms to.
 type ChannelSectionsUpdateResource =
      "channelSections" :>
        QueryParam "part" Text :>
@@ -53,14 +53,14 @@ type ChannelSectionsUpdateResource =
 
 -- | Update a channelSection.
 --
--- /See:/ 'channelSectionsUpdate'' smart constructor.
-data ChannelSectionsUpdate' = ChannelSectionsUpdate'
+-- /See:/ 'channelSectionsUpdate' smart constructor.
+data ChannelSectionsUpdate = ChannelSectionsUpdate
     { _csuPart                   :: !Text
     , _csuPayload                :: !ChannelSection
     , _csuOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChannelSectionsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChannelSectionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,12 +69,12 @@ data ChannelSectionsUpdate' = ChannelSectionsUpdate'
 -- * 'csuPayload'
 --
 -- * 'csuOnBehalfOfContentOwner'
-channelSectionsUpdate'
+channelSectionsUpdate
     :: Text -- ^ 'csuPart'
     -> ChannelSection -- ^ 'csuPayload'
-    -> ChannelSectionsUpdate'
-channelSectionsUpdate' pCsuPart_ pCsuPayload_ =
-    ChannelSectionsUpdate'
+    -> ChannelSectionsUpdate
+channelSectionsUpdate pCsuPart_ pCsuPayload_ =
+    ChannelSectionsUpdate
     { _csuPart = pCsuPart_
     , _csuPayload = pCsuPayload_
     , _csuOnBehalfOfContentOwner = Nothing
@@ -84,11 +84,11 @@ channelSectionsUpdate' pCsuPart_ pCsuPayload_ =
 -- the properties that the write operation will set as well as the
 -- properties that the API response will include. The part names that you
 -- can include in the parameter value are snippet and contentDetails.
-csuPart :: Lens' ChannelSectionsUpdate' Text
+csuPart :: Lens' ChannelSectionsUpdate Text
 csuPart = lens _csuPart (\ s a -> s{_csuPart = a})
 
 -- | Multipart request metadata.
-csuPayload :: Lens' ChannelSectionsUpdate' ChannelSection
+csuPayload :: Lens' ChannelSectionsUpdate ChannelSection
 csuPayload
   = lens _csuPayload (\ s a -> s{_csuPayload = a})
 
@@ -102,14 +102,14 @@ csuPayload
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-csuOnBehalfOfContentOwner :: Lens' ChannelSectionsUpdate' (Maybe Text)
+csuOnBehalfOfContentOwner :: Lens' ChannelSectionsUpdate (Maybe Text)
 csuOnBehalfOfContentOwner
   = lens _csuOnBehalfOfContentOwner
       (\ s a -> s{_csuOnBehalfOfContentOwner = a})
 
-instance GoogleRequest ChannelSectionsUpdate' where
-        type Rs ChannelSectionsUpdate' = ChannelSection
-        requestClient ChannelSectionsUpdate'{..}
+instance GoogleRequest ChannelSectionsUpdate where
+        type Rs ChannelSectionsUpdate = ChannelSection
+        requestClient ChannelSectionsUpdate{..}
           = go (Just _csuPart) _csuOnBehalfOfContentOwner
               (Just AltJSON)
               _csuPayload

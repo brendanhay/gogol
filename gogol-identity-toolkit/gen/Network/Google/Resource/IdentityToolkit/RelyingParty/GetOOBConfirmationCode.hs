@@ -29,8 +29,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.GetOOBConfirmationCo
       RelyingPartyGetOOBConfirmationCodeResource
 
     -- * Creating a Request
-    , relyingPartyGetOOBConfirmationCode'
-    , RelyingPartyGetOOBConfirmationCode'
+    , relyingPartyGetOOBConfirmationCode
+    , RelyingPartyGetOOBConfirmationCode
 
     -- * Request Lenses
     , rpgoobccPayload
@@ -40,7 +40,7 @@ import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.getOobConfirmationCode@ method which the
--- 'RelyingPartyGetOOBConfirmationCode'' request conforms to.
+-- 'RelyingPartyGetOOBConfirmationCode' request conforms to.
 type RelyingPartyGetOOBConfirmationCodeResource =
      "getOobConfirmationCode" :>
        QueryParam "alt" AltJSON :>
@@ -49,35 +49,35 @@ type RelyingPartyGetOOBConfirmationCodeResource =
 
 -- | Get a code for user action confirmation.
 --
--- /See:/ 'relyingPartyGetOOBConfirmationCode'' smart constructor.
-newtype RelyingPartyGetOOBConfirmationCode' = RelyingPartyGetOOBConfirmationCode'
+-- /See:/ 'relyingPartyGetOOBConfirmationCode' smart constructor.
+newtype RelyingPartyGetOOBConfirmationCode = RelyingPartyGetOOBConfirmationCode
     { _rpgoobccPayload :: RelyingParty
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RelyingPartyGetOOBConfirmationCode'' with the minimum fields required to make a request.
+-- | Creates a value of 'RelyingPartyGetOOBConfirmationCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rpgoobccPayload'
-relyingPartyGetOOBConfirmationCode'
+relyingPartyGetOOBConfirmationCode
     :: RelyingParty -- ^ 'rpgoobccPayload'
-    -> RelyingPartyGetOOBConfirmationCode'
-relyingPartyGetOOBConfirmationCode' pRpgoobccPayload_ =
-    RelyingPartyGetOOBConfirmationCode'
+    -> RelyingPartyGetOOBConfirmationCode
+relyingPartyGetOOBConfirmationCode pRpgoobccPayload_ =
+    RelyingPartyGetOOBConfirmationCode
     { _rpgoobccPayload = pRpgoobccPayload_
     }
 
 -- | Multipart request metadata.
-rpgoobccPayload :: Lens' RelyingPartyGetOOBConfirmationCode' RelyingParty
+rpgoobccPayload :: Lens' RelyingPartyGetOOBConfirmationCode RelyingParty
 rpgoobccPayload
   = lens _rpgoobccPayload
       (\ s a -> s{_rpgoobccPayload = a})
 
 instance GoogleRequest
-         RelyingPartyGetOOBConfirmationCode' where
-        type Rs RelyingPartyGetOOBConfirmationCode' =
+         RelyingPartyGetOOBConfirmationCode where
+        type Rs RelyingPartyGetOOBConfirmationCode =
              GetOOBConfirmationCodeResponse
-        requestClient RelyingPartyGetOOBConfirmationCode'{..}
+        requestClient RelyingPartyGetOOBConfirmationCode{..}
           = go (Just AltJSON) _rpgoobccPayload
               identityToolkitService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidPublisher.InAppProducts.Insert
       InAppProductsInsertResource
 
     -- * Creating a Request
-    , inAppProductsInsert'
-    , InAppProductsInsert'
+    , inAppProductsInsert
+    , InAppProductsInsert
 
     -- * Request Lenses
     , iapiAutoConvertMissingPrices
@@ -42,7 +42,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.inappproducts.insert@ method which the
--- 'InAppProductsInsert'' request conforms to.
+-- 'InAppProductsInsert' request conforms to.
 type InAppProductsInsertResource =
      Capture "packageName" Text :>
        "inappproducts" :>
@@ -53,14 +53,14 @@ type InAppProductsInsertResource =
 
 -- | Creates a new in-app product for an app.
 --
--- /See:/ 'inAppProductsInsert'' smart constructor.
-data InAppProductsInsert' = InAppProductsInsert'
+-- /See:/ 'inAppProductsInsert' smart constructor.
+data InAppProductsInsert = InAppProductsInsert
     { _iapiAutoConvertMissingPrices :: !(Maybe Bool)
     , _iapiPackageName              :: !Text
     , _iapiPayload                  :: !InAppProduct
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InAppProductsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'InAppProductsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,12 +69,12 @@ data InAppProductsInsert' = InAppProductsInsert'
 -- * 'iapiPackageName'
 --
 -- * 'iapiPayload'
-inAppProductsInsert'
+inAppProductsInsert
     :: Text -- ^ 'iapiPackageName'
     -> InAppProduct -- ^ 'iapiPayload'
-    -> InAppProductsInsert'
-inAppProductsInsert' pIapiPackageName_ pIapiPayload_ =
-    InAppProductsInsert'
+    -> InAppProductsInsert
+inAppProductsInsert pIapiPackageName_ pIapiPayload_ =
+    InAppProductsInsert
     { _iapiAutoConvertMissingPrices = Nothing
     , _iapiPackageName = pIapiPackageName_
     , _iapiPayload = pIapiPayload_
@@ -84,25 +84,25 @@ inAppProductsInsert' pIapiPackageName_ pIapiPayload_ =
 -- don\'t have a price specified for this in-app product will be auto
 -- converted to the target currency based on the default price. Defaults to
 -- false.
-iapiAutoConvertMissingPrices :: Lens' InAppProductsInsert' (Maybe Bool)
+iapiAutoConvertMissingPrices :: Lens' InAppProductsInsert (Maybe Bool)
 iapiAutoConvertMissingPrices
   = lens _iapiAutoConvertMissingPrices
       (\ s a -> s{_iapiAutoConvertMissingPrices = a})
 
 -- | Unique identifier for the Android app; for example, \"com.spiffygame\".
-iapiPackageName :: Lens' InAppProductsInsert' Text
+iapiPackageName :: Lens' InAppProductsInsert Text
 iapiPackageName
   = lens _iapiPackageName
       (\ s a -> s{_iapiPackageName = a})
 
 -- | Multipart request metadata.
-iapiPayload :: Lens' InAppProductsInsert' InAppProduct
+iapiPayload :: Lens' InAppProductsInsert InAppProduct
 iapiPayload
   = lens _iapiPayload (\ s a -> s{_iapiPayload = a})
 
-instance GoogleRequest InAppProductsInsert' where
-        type Rs InAppProductsInsert' = InAppProduct
-        requestClient InAppProductsInsert'{..}
+instance GoogleRequest InAppProductsInsert where
+        type Rs InAppProductsInsert = InAppProduct
+        requestClient InAppProductsInsert{..}
           = go _iapiPackageName _iapiAutoConvertMissingPrices
               (Just AltJSON)
               _iapiPayload

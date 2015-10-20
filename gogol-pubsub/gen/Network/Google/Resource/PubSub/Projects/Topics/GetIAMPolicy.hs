@@ -30,8 +30,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.GetIAMPolicy
       ProjectsTopicsGetIAMPolicyResource
 
     -- * Creating a Request
-    , projectsTopicsGetIAMPolicy'
-    , ProjectsTopicsGetIAMPolicy'
+    , projectsTopicsGetIAMPolicy
+    , ProjectsTopicsGetIAMPolicy
 
     -- * Request Lenses
     , ptgipXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.getIamPolicy@ method which the
--- 'ProjectsTopicsGetIAMPolicy'' request conforms to.
+-- 'ProjectsTopicsGetIAMPolicy' request conforms to.
 type ProjectsTopicsGetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
@@ -64,8 +64,8 @@ type ProjectsTopicsGetIAMPolicyResource =
 -- | Gets the access control policy for a \`resource\`. Is empty if the
 -- policy or the resource does not exist.
 --
--- /See:/ 'projectsTopicsGetIAMPolicy'' smart constructor.
-data ProjectsTopicsGetIAMPolicy' = ProjectsTopicsGetIAMPolicy'
+-- /See:/ 'projectsTopicsGetIAMPolicy' smart constructor.
+data ProjectsTopicsGetIAMPolicy = ProjectsTopicsGetIAMPolicy
     { _ptgipXgafv          :: !(Maybe Text)
     , _ptgipUploadProtocol :: !(Maybe Text)
     , _ptgipPp             :: !Bool
@@ -76,7 +76,7 @@ data ProjectsTopicsGetIAMPolicy' = ProjectsTopicsGetIAMPolicy'
     , _ptgipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsTopicsGetIAMPolicy'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsTopicsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -95,11 +95,11 @@ data ProjectsTopicsGetIAMPolicy' = ProjectsTopicsGetIAMPolicy'
 -- * 'ptgipResource'
 --
 -- * 'ptgipCallback'
-projectsTopicsGetIAMPolicy'
+projectsTopicsGetIAMPolicy
     :: Text -- ^ 'ptgipResource'
-    -> ProjectsTopicsGetIAMPolicy'
-projectsTopicsGetIAMPolicy' pPtgipResource_ =
-    ProjectsTopicsGetIAMPolicy'
+    -> ProjectsTopicsGetIAMPolicy
+projectsTopicsGetIAMPolicy pPtgipResource_ =
+    ProjectsTopicsGetIAMPolicy
     { _ptgipXgafv = Nothing
     , _ptgipUploadProtocol = Nothing
     , _ptgipPp = True
@@ -111,55 +111,55 @@ projectsTopicsGetIAMPolicy' pPtgipResource_ =
     }
 
 -- | V1 error format.
-ptgipXgafv :: Lens' ProjectsTopicsGetIAMPolicy' (Maybe Text)
+ptgipXgafv :: Lens' ProjectsTopicsGetIAMPolicy (Maybe Text)
 ptgipXgafv
   = lens _ptgipXgafv (\ s a -> s{_ptgipXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ptgipUploadProtocol :: Lens' ProjectsTopicsGetIAMPolicy' (Maybe Text)
+ptgipUploadProtocol :: Lens' ProjectsTopicsGetIAMPolicy (Maybe Text)
 ptgipUploadProtocol
   = lens _ptgipUploadProtocol
       (\ s a -> s{_ptgipUploadProtocol = a})
 
 -- | Pretty-print response.
-ptgipPp :: Lens' ProjectsTopicsGetIAMPolicy' Bool
+ptgipPp :: Lens' ProjectsTopicsGetIAMPolicy Bool
 ptgipPp = lens _ptgipPp (\ s a -> s{_ptgipPp = a})
 
 -- | OAuth access token.
-ptgipAccessToken :: Lens' ProjectsTopicsGetIAMPolicy' (Maybe Text)
+ptgipAccessToken :: Lens' ProjectsTopicsGetIAMPolicy (Maybe Text)
 ptgipAccessToken
   = lens _ptgipAccessToken
       (\ s a -> s{_ptgipAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ptgipUploadType :: Lens' ProjectsTopicsGetIAMPolicy' (Maybe Text)
+ptgipUploadType :: Lens' ProjectsTopicsGetIAMPolicy (Maybe Text)
 ptgipUploadType
   = lens _ptgipUploadType
       (\ s a -> s{_ptgipUploadType = a})
 
 -- | OAuth bearer token.
-ptgipBearerToken :: Lens' ProjectsTopicsGetIAMPolicy' (Maybe Text)
+ptgipBearerToken :: Lens' ProjectsTopicsGetIAMPolicy (Maybe Text)
 ptgipBearerToken
   = lens _ptgipBearerToken
       (\ s a -> s{_ptgipBearerToken = a})
 
 -- | REQUIRED: The resource for which policy is being requested. Resource is
 -- usually specified as a path, such as, \`projects\/{project}\`.
-ptgipResource :: Lens' ProjectsTopicsGetIAMPolicy' Text
+ptgipResource :: Lens' ProjectsTopicsGetIAMPolicy Text
 ptgipResource
   = lens _ptgipResource
       (\ s a -> s{_ptgipResource = a})
 
 -- | JSONP
-ptgipCallback :: Lens' ProjectsTopicsGetIAMPolicy' (Maybe Text)
+ptgipCallback :: Lens' ProjectsTopicsGetIAMPolicy (Maybe Text)
 ptgipCallback
   = lens _ptgipCallback
       (\ s a -> s{_ptgipCallback = a})
 
-instance GoogleRequest ProjectsTopicsGetIAMPolicy'
+instance GoogleRequest ProjectsTopicsGetIAMPolicy
          where
-        type Rs ProjectsTopicsGetIAMPolicy' = Policy
-        requestClient ProjectsTopicsGetIAMPolicy'{..}
+        type Rs ProjectsTopicsGetIAMPolicy = Policy
+        requestClient ProjectsTopicsGetIAMPolicy{..}
           = go _ptgipResource _ptgipXgafv _ptgipUploadProtocol
               (Just _ptgipPp)
               _ptgipAccessToken

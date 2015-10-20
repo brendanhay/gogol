@@ -30,28 +30,28 @@ module Network.Google.Resource.YouTube.Channels.List
       ChannelsListResource
 
     -- * Creating a Request
-    , channelsList'
-    , ChannelsList'
+    , channelsList
+    , ChannelsList
 
     -- * Request Lenses
-    , clPart
-    , clMine
-    , clForUsername
-    , clHl
-    , clOnBehalfOfContentOwner
-    , clCategoryId
-    , clId
-    , clMySubscribers
-    , clPageToken
-    , clManagedByMe
-    , clMaxResults
+    , cPart
+    , cMine
+    , cForUsername
+    , cHl
+    , cOnBehalfOfContentOwner
+    , cCategoryId
+    , cId
+    , cMySubscribers
+    , cPageToken
+    , cManagedByMe
+    , cMaxResults
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.channels.list@ method which the
--- 'ChannelsList'' request conforms to.
+-- 'ChannelsList' request conforms to.
 type ChannelsListResource =
      "channels" :>
        QueryParam "part" Text :>
@@ -71,62 +71,62 @@ type ChannelsListResource =
 -- | Returns a collection of zero or more channel resources that match the
 -- request criteria.
 --
--- /See:/ 'channelsList'' smart constructor.
-data ChannelsList' = ChannelsList'
-    { _clPart                   :: !Text
-    , _clMine                   :: !(Maybe Bool)
-    , _clForUsername            :: !(Maybe Text)
-    , _clHl                     :: !(Maybe Text)
-    , _clOnBehalfOfContentOwner :: !(Maybe Text)
-    , _clCategoryId             :: !(Maybe Text)
-    , _clId                     :: !(Maybe Text)
-    , _clMySubscribers          :: !(Maybe Bool)
-    , _clPageToken              :: !(Maybe Text)
-    , _clManagedByMe            :: !(Maybe Bool)
-    , _clMaxResults             :: !Word32
+-- /See:/ 'channelsList' smart constructor.
+data ChannelsList = ChannelsList
+    { _cPart                   :: !Text
+    , _cMine                   :: !(Maybe Bool)
+    , _cForUsername            :: !(Maybe Text)
+    , _cHl                     :: !(Maybe Text)
+    , _cOnBehalfOfContentOwner :: !(Maybe Text)
+    , _cCategoryId             :: !(Maybe Text)
+    , _cId                     :: !(Maybe Text)
+    , _cMySubscribers          :: !(Maybe Bool)
+    , _cPageToken              :: !(Maybe Text)
+    , _cManagedByMe            :: !(Maybe Bool)
+    , _cMaxResults             :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChannelsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChannelsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'clPart'
+-- * 'cPart'
 --
--- * 'clMine'
+-- * 'cMine'
 --
--- * 'clForUsername'
+-- * 'cForUsername'
 --
--- * 'clHl'
+-- * 'cHl'
 --
--- * 'clOnBehalfOfContentOwner'
+-- * 'cOnBehalfOfContentOwner'
 --
--- * 'clCategoryId'
+-- * 'cCategoryId'
 --
--- * 'clId'
+-- * 'cId'
 --
--- * 'clMySubscribers'
+-- * 'cMySubscribers'
 --
--- * 'clPageToken'
+-- * 'cPageToken'
 --
--- * 'clManagedByMe'
+-- * 'cManagedByMe'
 --
--- * 'clMaxResults'
-channelsList'
-    :: Text -- ^ 'clPart'
-    -> ChannelsList'
-channelsList' pClPart_ =
-    ChannelsList'
-    { _clPart = pClPart_
-    , _clMine = Nothing
-    , _clForUsername = Nothing
-    , _clHl = Nothing
-    , _clOnBehalfOfContentOwner = Nothing
-    , _clCategoryId = Nothing
-    , _clId = Nothing
-    , _clMySubscribers = Nothing
-    , _clPageToken = Nothing
-    , _clManagedByMe = Nothing
-    , _clMaxResults = 5
+-- * 'cMaxResults'
+channelsList
+    :: Text -- ^ 'cPart'
+    -> ChannelsList
+channelsList pCPart_ =
+    ChannelsList
+    { _cPart = pCPart_
+    , _cMine = Nothing
+    , _cForUsername = Nothing
+    , _cHl = Nothing
+    , _cOnBehalfOfContentOwner = Nothing
+    , _cCategoryId = Nothing
+    , _cId = Nothing
+    , _cMySubscribers = Nothing
+    , _cPageToken = Nothing
+    , _cManagedByMe = Nothing
+    , _cMaxResults = 5
     }
 
 -- | The part parameter specifies a comma-separated list of one or more
@@ -136,25 +136,24 @@ channelsList' pClPart_ =
 -- channel resource, the contentDetails property contains other properties,
 -- such as the uploads properties. As such, if you set part=contentDetails,
 -- the API response will also contain all of those nested properties.
-clPart :: Lens' ChannelsList' Text
-clPart = lens _clPart (\ s a -> s{_clPart = a})
+cPart :: Lens' ChannelsList Text
+cPart = lens _cPart (\ s a -> s{_cPart = a})
 
 -- | Set this parameter\'s value to true to instruct the API to only return
 -- channels owned by the authenticated user.
-clMine :: Lens' ChannelsList' (Maybe Bool)
-clMine = lens _clMine (\ s a -> s{_clMine = a})
+cMine :: Lens' ChannelsList (Maybe Bool)
+cMine = lens _cMine (\ s a -> s{_cMine = a})
 
 -- | The forUsername parameter specifies a YouTube username, thereby
 -- requesting the channel associated with that username.
-clForUsername :: Lens' ChannelsList' (Maybe Text)
-clForUsername
-  = lens _clForUsername
-      (\ s a -> s{_clForUsername = a})
+cForUsername :: Lens' ChannelsList (Maybe Text)
+cForUsername
+  = lens _cForUsername (\ s a -> s{_cForUsername = a})
 
 -- | The hl parameter should be used for filter out the properties that are
 -- not in the given language. Used for the brandingSettings part.
-clHl :: Lens' ChannelsList' (Maybe Text)
-clHl = lens _clHl (\ s a -> s{_clHl = a})
+cHl :: Lens' ChannelsList (Maybe Text)
+cHl = lens _cHl (\ s a -> s{_cHl = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -166,36 +165,36 @@ clHl = lens _clHl (\ s a -> s{_clHl = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-clOnBehalfOfContentOwner :: Lens' ChannelsList' (Maybe Text)
-clOnBehalfOfContentOwner
-  = lens _clOnBehalfOfContentOwner
-      (\ s a -> s{_clOnBehalfOfContentOwner = a})
+cOnBehalfOfContentOwner :: Lens' ChannelsList (Maybe Text)
+cOnBehalfOfContentOwner
+  = lens _cOnBehalfOfContentOwner
+      (\ s a -> s{_cOnBehalfOfContentOwner = a})
 
 -- | The categoryId parameter specifies a YouTube guide category, thereby
 -- requesting YouTube channels associated with that category.
-clCategoryId :: Lens' ChannelsList' (Maybe Text)
-clCategoryId
-  = lens _clCategoryId (\ s a -> s{_clCategoryId = a})
+cCategoryId :: Lens' ChannelsList (Maybe Text)
+cCategoryId
+  = lens _cCategoryId (\ s a -> s{_cCategoryId = a})
 
 -- | The id parameter specifies a comma-separated list of the YouTube channel
 -- ID(s) for the resource(s) that are being retrieved. In a channel
 -- resource, the id property specifies the channel\'s YouTube channel ID.
-clId :: Lens' ChannelsList' (Maybe Text)
-clId = lens _clId (\ s a -> s{_clId = a})
+cId :: Lens' ChannelsList (Maybe Text)
+cId = lens _cId (\ s a -> s{_cId = a})
 
 -- | Use the subscriptions.list method and its mySubscribers parameter to
 -- retrieve a list of subscribers to the authenticated user\'s channel.
-clMySubscribers :: Lens' ChannelsList' (Maybe Bool)
-clMySubscribers
-  = lens _clMySubscribers
-      (\ s a -> s{_clMySubscribers = a})
+cMySubscribers :: Lens' ChannelsList (Maybe Bool)
+cMySubscribers
+  = lens _cMySubscribers
+      (\ s a -> s{_cMySubscribers = a})
 
 -- | The pageToken parameter identifies a specific page in the result set
 -- that should be returned. In an API response, the nextPageToken and
 -- prevPageToken properties identify other pages that could be retrieved.
-clPageToken :: Lens' ChannelsList' (Maybe Text)
-clPageToken
-  = lens _clPageToken (\ s a -> s{_clPageToken = a})
+cPageToken :: Lens' ChannelsList (Maybe Text)
+cPageToken
+  = lens _cPageToken (\ s a -> s{_cPageToken = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. Set this parameter\'s value to true to instruct the API to
@@ -203,28 +202,27 @@ clPageToken
 -- onBehalfOfContentOwner parameter specifies. The user must be
 -- authenticated as a CMS account linked to the specified content owner and
 -- onBehalfOfContentOwner must be provided.
-clManagedByMe :: Lens' ChannelsList' (Maybe Bool)
-clManagedByMe
-  = lens _clManagedByMe
-      (\ s a -> s{_clManagedByMe = a})
+cManagedByMe :: Lens' ChannelsList (Maybe Bool)
+cManagedByMe
+  = lens _cManagedByMe (\ s a -> s{_cManagedByMe = a})
 
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set.
-clMaxResults :: Lens' ChannelsList' Word32
-clMaxResults
-  = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
+cMaxResults :: Lens' ChannelsList Word32
+cMaxResults
+  = lens _cMaxResults (\ s a -> s{_cMaxResults = a})
 
-instance GoogleRequest ChannelsList' where
-        type Rs ChannelsList' = ChannelListResponse
-        requestClient ChannelsList'{..}
-          = go (Just _clPart) _clMine _clForUsername _clHl
-              _clOnBehalfOfContentOwner
-              _clCategoryId
-              _clId
-              _clMySubscribers
-              _clPageToken
-              _clManagedByMe
-              (Just _clMaxResults)
+instance GoogleRequest ChannelsList where
+        type Rs ChannelsList = ChannelListResponse
+        requestClient ChannelsList{..}
+          = go (Just _cPart) _cMine _cForUsername _cHl
+              _cOnBehalfOfContentOwner
+              _cCategoryId
+              _cId
+              _cMySubscribers
+              _cPageToken
+              _cManagedByMe
+              (Just _cMaxResults)
               (Just AltJSON)
               youTubeService
           where go

@@ -30,8 +30,8 @@ module Network.Google.Resource.AndroidEnterprise.GrouplicenseUsers.List
       GrouplicenseUsersListResource
 
     -- * Creating a Request
-    , grouplicenseUsersList'
-    , GrouplicenseUsersList'
+    , grouplicenseUsersList
+    , GrouplicenseUsersList
 
     -- * Request Lenses
     , gulEnterpriseId
@@ -42,7 +42,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.grouplicenseusers.list@ method which the
--- 'GrouplicenseUsersList'' request conforms to.
+-- 'GrouplicenseUsersList' request conforms to.
 type GrouplicenseUsersListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -55,46 +55,46 @@ type GrouplicenseUsersListResource =
 -- | Retrieves the IDs of the users who have been granted entitlements under
 -- the license.
 --
--- /See:/ 'grouplicenseUsersList'' smart constructor.
-data GrouplicenseUsersList' = GrouplicenseUsersList'
+-- /See:/ 'grouplicenseUsersList' smart constructor.
+data GrouplicenseUsersList = GrouplicenseUsersList
     { _gulEnterpriseId   :: !Text
     , _gulGroupLicenseId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GrouplicenseUsersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'GrouplicenseUsersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gulEnterpriseId'
 --
 -- * 'gulGroupLicenseId'
-grouplicenseUsersList'
+grouplicenseUsersList
     :: Text -- ^ 'gulEnterpriseId'
     -> Text -- ^ 'gulGroupLicenseId'
-    -> GrouplicenseUsersList'
-grouplicenseUsersList' pGulEnterpriseId_ pGulGroupLicenseId_ =
-    GrouplicenseUsersList'
+    -> GrouplicenseUsersList
+grouplicenseUsersList pGulEnterpriseId_ pGulGroupLicenseId_ =
+    GrouplicenseUsersList
     { _gulEnterpriseId = pGulEnterpriseId_
     , _gulGroupLicenseId = pGulGroupLicenseId_
     }
 
 -- | The ID of the enterprise.
-gulEnterpriseId :: Lens' GrouplicenseUsersList' Text
+gulEnterpriseId :: Lens' GrouplicenseUsersList Text
 gulEnterpriseId
   = lens _gulEnterpriseId
       (\ s a -> s{_gulEnterpriseId = a})
 
 -- | The ID of the product the group license is for, e.g.
 -- \"app:com.google.android.gm\".
-gulGroupLicenseId :: Lens' GrouplicenseUsersList' Text
+gulGroupLicenseId :: Lens' GrouplicenseUsersList Text
 gulGroupLicenseId
   = lens _gulGroupLicenseId
       (\ s a -> s{_gulGroupLicenseId = a})
 
-instance GoogleRequest GrouplicenseUsersList' where
-        type Rs GrouplicenseUsersList' =
+instance GoogleRequest GrouplicenseUsersList where
+        type Rs GrouplicenseUsersList =
              GroupLicenseUsersListResponse
-        requestClient GrouplicenseUsersList'{..}
+        requestClient GrouplicenseUsersList{..}
           = go _gulEnterpriseId _gulGroupLicenseId
               (Just AltJSON)
               androidEnterpriseService

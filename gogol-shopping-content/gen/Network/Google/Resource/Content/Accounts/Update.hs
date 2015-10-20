@@ -29,21 +29,21 @@ module Network.Google.Resource.Content.Accounts.Update
       AccountsUpdateResource
 
     -- * Creating a Request
-    , accountsUpdate'
-    , AccountsUpdate'
+    , accountsUpdate
+    , AccountsUpdate
 
     -- * Request Lenses
-    , auMerchantId
-    , auPayload
-    , auAccountId
-    , auDryRun
+    , au1MerchantId
+    , au1Payload
+    , au1AccountId
+    , au1DryRun
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accounts.update@ method which the
--- 'AccountsUpdate'' request conforms to.
+-- 'AccountsUpdate' request conforms to.
 type AccountsUpdateResource =
      Capture "merchantId" Word64 :>
        "accounts" :>
@@ -54,63 +54,65 @@ type AccountsUpdateResource =
 
 -- | Updates a Merchant Center account.
 --
--- /See:/ 'accountsUpdate'' smart constructor.
-data AccountsUpdate' = AccountsUpdate'
-    { _auMerchantId :: !Word64
-    , _auPayload    :: !Account
-    , _auAccountId  :: !Word64
-    , _auDryRun     :: !(Maybe Bool)
+-- /See:/ 'accountsUpdate' smart constructor.
+data AccountsUpdate = AccountsUpdate
+    { _au1MerchantId :: !Word64
+    , _au1Payload    :: !Account
+    , _au1AccountId  :: !Word64
+    , _au1DryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'auMerchantId'
+-- * 'au1MerchantId'
 --
--- * 'auPayload'
+-- * 'au1Payload'
 --
--- * 'auAccountId'
+-- * 'au1AccountId'
 --
--- * 'auDryRun'
-accountsUpdate'
-    :: Word64 -- ^ 'auMerchantId'
-    -> Account -- ^ 'auPayload'
-    -> Word64 -- ^ 'auAccountId'
-    -> AccountsUpdate'
-accountsUpdate' pAuMerchantId_ pAuPayload_ pAuAccountId_ =
-    AccountsUpdate'
-    { _auMerchantId = pAuMerchantId_
-    , _auPayload = pAuPayload_
-    , _auAccountId = pAuAccountId_
-    , _auDryRun = Nothing
+-- * 'au1DryRun'
+accountsUpdate
+    :: Word64 -- ^ 'au1MerchantId'
+    -> Account -- ^ 'au1Payload'
+    -> Word64 -- ^ 'au1AccountId'
+    -> AccountsUpdate
+accountsUpdate pAu1MerchantId_ pAu1Payload_ pAu1AccountId_ =
+    AccountsUpdate
+    { _au1MerchantId = pAu1MerchantId_
+    , _au1Payload = pAu1Payload_
+    , _au1AccountId = pAu1AccountId_
+    , _au1DryRun = Nothing
     }
 
 -- | The ID of the managing account.
-auMerchantId :: Lens' AccountsUpdate' Word64
-auMerchantId
-  = lens _auMerchantId (\ s a -> s{_auMerchantId = a})
+au1MerchantId :: Lens' AccountsUpdate Word64
+au1MerchantId
+  = lens _au1MerchantId
+      (\ s a -> s{_au1MerchantId = a})
 
 -- | Multipart request metadata.
-auPayload :: Lens' AccountsUpdate' Account
-auPayload
-  = lens _auPayload (\ s a -> s{_auPayload = a})
+au1Payload :: Lens' AccountsUpdate Account
+au1Payload
+  = lens _au1Payload (\ s a -> s{_au1Payload = a})
 
 -- | The ID of the account.
-auAccountId :: Lens' AccountsUpdate' Word64
-auAccountId
-  = lens _auAccountId (\ s a -> s{_auAccountId = a})
+au1AccountId :: Lens' AccountsUpdate Word64
+au1AccountId
+  = lens _au1AccountId (\ s a -> s{_au1AccountId = a})
 
 -- | Flag to run the request in dry-run mode.
-auDryRun :: Lens' AccountsUpdate' (Maybe Bool)
-auDryRun = lens _auDryRun (\ s a -> s{_auDryRun = a})
+au1DryRun :: Lens' AccountsUpdate (Maybe Bool)
+au1DryRun
+  = lens _au1DryRun (\ s a -> s{_au1DryRun = a})
 
-instance GoogleRequest AccountsUpdate' where
-        type Rs AccountsUpdate' = Account
-        requestClient AccountsUpdate'{..}
-          = go _auMerchantId _auAccountId _auDryRun
+instance GoogleRequest AccountsUpdate where
+        type Rs AccountsUpdate = Account
+        requestClient AccountsUpdate{..}
+          = go _au1MerchantId _au1AccountId _au1DryRun
               (Just AltJSON)
-              _auPayload
+              _au1Payload
               shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy AccountsUpdateResource)

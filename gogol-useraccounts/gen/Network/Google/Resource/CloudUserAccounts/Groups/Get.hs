@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudUserAccounts.Groups.Get
       GroupsGetResource
 
     -- * Creating a Request
-    , groupsGet'
-    , GroupsGet'
+    , groupsGet
+    , GroupsGet
 
     -- * Request Lenses
     , ggProject
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
 -- | A resource alias for @clouduseraccounts.groups.get@ method which the
--- 'GroupsGet'' request conforms to.
+-- 'GroupsGet' request conforms to.
 type GroupsGetResource =
      Capture "project" Text :>
        "global" :>
@@ -51,42 +51,42 @@ type GroupsGetResource =
 
 -- | Returns the specified Group resource.
 --
--- /See:/ 'groupsGet'' smart constructor.
-data GroupsGet' = GroupsGet'
+-- /See:/ 'groupsGet' smart constructor.
+data GroupsGet = GroupsGet
     { _ggProject   :: !Text
     , _ggGroupName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GroupsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'GroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ggProject'
 --
 -- * 'ggGroupName'
-groupsGet'
+groupsGet
     :: Text -- ^ 'ggProject'
     -> Text -- ^ 'ggGroupName'
-    -> GroupsGet'
-groupsGet' pGgProject_ pGgGroupName_ =
-    GroupsGet'
+    -> GroupsGet
+groupsGet pGgProject_ pGgGroupName_ =
+    GroupsGet
     { _ggProject = pGgProject_
     , _ggGroupName = pGgGroupName_
     }
 
 -- | Project ID for this request.
-ggProject :: Lens' GroupsGet' Text
+ggProject :: Lens' GroupsGet Text
 ggProject
   = lens _ggProject (\ s a -> s{_ggProject = a})
 
 -- | Name of the Group resource to return.
-ggGroupName :: Lens' GroupsGet' Text
+ggGroupName :: Lens' GroupsGet Text
 ggGroupName
   = lens _ggGroupName (\ s a -> s{_ggGroupName = a})
 
-instance GoogleRequest GroupsGet' where
-        type Rs GroupsGet' = Group
-        requestClient GroupsGet'{..}
+instance GoogleRequest GroupsGet where
+        type Rs GroupsGet = Group
+        requestClient GroupsGet{..}
           = go _ggProject _ggGroupName (Just AltJSON)
               userAccountsService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.FusionTables.Column.Insert
       ColumnInsertResource
 
     -- * Creating a Request
-    , columnInsert'
-    , ColumnInsert'
+    , columnInsert
+    , ColumnInsert
 
     -- * Request Lenses
     , ciPayload
@@ -41,7 +41,7 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.column.insert@ method which the
--- 'ColumnInsert'' request conforms to.
+-- 'ColumnInsert' request conforms to.
 type ColumnInsertResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -51,42 +51,42 @@ type ColumnInsertResource =
 
 -- | Adds a new column to the table.
 --
--- /See:/ 'columnInsert'' smart constructor.
-data ColumnInsert' = ColumnInsert'
+-- /See:/ 'columnInsert' smart constructor.
+data ColumnInsert = ColumnInsert
     { _ciPayload :: !Column
     , _ciTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ColumnInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ColumnInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ciPayload'
 --
 -- * 'ciTableId'
-columnInsert'
+columnInsert
     :: Column -- ^ 'ciPayload'
     -> Text -- ^ 'ciTableId'
-    -> ColumnInsert'
-columnInsert' pCiPayload_ pCiTableId_ =
-    ColumnInsert'
+    -> ColumnInsert
+columnInsert pCiPayload_ pCiTableId_ =
+    ColumnInsert
     { _ciPayload = pCiPayload_
     , _ciTableId = pCiTableId_
     }
 
 -- | Multipart request metadata.
-ciPayload :: Lens' ColumnInsert' Column
+ciPayload :: Lens' ColumnInsert Column
 ciPayload
   = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
 -- | Table for which a new column is being added.
-ciTableId :: Lens' ColumnInsert' Text
+ciTableId :: Lens' ColumnInsert Text
 ciTableId
   = lens _ciTableId (\ s a -> s{_ciTableId = a})
 
-instance GoogleRequest ColumnInsert' where
-        type Rs ColumnInsert' = Column
-        requestClient ColumnInsert'{..}
+instance GoogleRequest ColumnInsert where
+        type Rs ColumnInsert = Column
+        requestClient ColumnInsert{..}
           = go _ciTableId (Just AltJSON) _ciPayload
               fusionTablesService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Routes.Get
       RoutesGetResource
 
     -- * Creating a Request
-    , routesGet'
-    , RoutesGet'
+    , routesGet
+    , RoutesGet
 
     -- * Request Lenses
     , rouProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.routes.get@ method which the
--- 'RoutesGet'' request conforms to.
+-- 'RoutesGet' request conforms to.
 type RoutesGetResource =
      Capture "project" Text :>
        "global" :>
@@ -51,41 +51,41 @@ type RoutesGetResource =
 
 -- | Returns the specified route resource.
 --
--- /See:/ 'routesGet'' smart constructor.
-data RoutesGet' = RoutesGet'
+-- /See:/ 'routesGet' smart constructor.
+data RoutesGet = RoutesGet
     { _rouProject :: !Text
     , _rouRoute   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoutesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'RoutesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rouProject'
 --
 -- * 'rouRoute'
-routesGet'
+routesGet
     :: Text -- ^ 'rouProject'
     -> Text -- ^ 'rouRoute'
-    -> RoutesGet'
-routesGet' pRouProject_ pRouRoute_ =
-    RoutesGet'
+    -> RoutesGet
+routesGet pRouProject_ pRouRoute_ =
+    RoutesGet
     { _rouProject = pRouProject_
     , _rouRoute = pRouRoute_
     }
 
 -- | Name of the project scoping this request.
-rouProject :: Lens' RoutesGet' Text
+rouProject :: Lens' RoutesGet Text
 rouProject
   = lens _rouProject (\ s a -> s{_rouProject = a})
 
 -- | Name of the route resource to return.
-rouRoute :: Lens' RoutesGet' Text
+rouRoute :: Lens' RoutesGet Text
 rouRoute = lens _rouRoute (\ s a -> s{_rouRoute = a})
 
-instance GoogleRequest RoutesGet' where
-        type Rs RoutesGet' = Route
-        requestClient RoutesGet'{..}
+instance GoogleRequest RoutesGet where
+        type Rs RoutesGet = Route
+        requestClient RoutesGet{..}
           = go _rouProject _rouRoute (Just AltJSON)
               computeService
           where go

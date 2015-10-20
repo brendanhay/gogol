@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.List
       AccountsPreferredDealsListResource
 
     -- * Creating a Request
-    , accountsPreferredDealsList'
-    , AccountsPreferredDealsList'
+    , accountsPreferredDealsList
+    , AccountsPreferredDealsList
 
     -- * Request Lenses
     , apdlAccountId
@@ -40,7 +40,7 @@ import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangeseller.accounts.preferreddeals.list@ method which the
--- 'AccountsPreferredDealsList'' request conforms to.
+-- 'AccountsPreferredDealsList' request conforms to.
 type AccountsPreferredDealsListResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -50,34 +50,34 @@ type AccountsPreferredDealsListResource =
 
 -- | List the preferred deals for this Ad Exchange account.
 --
--- /See:/ 'accountsPreferredDealsList'' smart constructor.
-newtype AccountsPreferredDealsList' = AccountsPreferredDealsList'
+-- /See:/ 'accountsPreferredDealsList' smart constructor.
+newtype AccountsPreferredDealsList = AccountsPreferredDealsList
     { _apdlAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsPreferredDealsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsPreferredDealsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'apdlAccountId'
-accountsPreferredDealsList'
+accountsPreferredDealsList
     :: Text -- ^ 'apdlAccountId'
-    -> AccountsPreferredDealsList'
-accountsPreferredDealsList' pApdlAccountId_ =
-    AccountsPreferredDealsList'
+    -> AccountsPreferredDealsList
+accountsPreferredDealsList pApdlAccountId_ =
+    AccountsPreferredDealsList
     { _apdlAccountId = pApdlAccountId_
     }
 
 -- | Account owning the deals.
-apdlAccountId :: Lens' AccountsPreferredDealsList' Text
+apdlAccountId :: Lens' AccountsPreferredDealsList Text
 apdlAccountId
   = lens _apdlAccountId
       (\ s a -> s{_apdlAccountId = a})
 
-instance GoogleRequest AccountsPreferredDealsList'
+instance GoogleRequest AccountsPreferredDealsList
          where
-        type Rs AccountsPreferredDealsList' = PreferredDeals
-        requestClient AccountsPreferredDealsList'{..}
+        type Rs AccountsPreferredDealsList = PreferredDeals
+        requestClient AccountsPreferredDealsList{..}
           = go _apdlAccountId (Just AltJSON)
               adExchangeSellerService
           where go

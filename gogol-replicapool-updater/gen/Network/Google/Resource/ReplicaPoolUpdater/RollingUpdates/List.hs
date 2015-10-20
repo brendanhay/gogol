@@ -30,8 +30,8 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.List
       RollingUpdatesListResource
 
     -- * Creating a Request
-    , rollingUpdatesList'
-    , RollingUpdatesList'
+    , rollingUpdatesList
+    , RollingUpdatesList
 
     -- * Request Lenses
     , rulProject
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.rollingUpdates.list@ method which the
--- 'RollingUpdatesList'' request conforms to.
+-- 'RollingUpdatesList' request conforms to.
 type RollingUpdatesListResource =
      Capture "project" Text :>
        "zones" :>
@@ -60,8 +60,8 @@ type RollingUpdatesListResource =
 -- | Lists recent updates for a given managed instance group, in reverse
 -- chronological order and paginated format.
 --
--- /See:/ 'rollingUpdatesList'' smart constructor.
-data RollingUpdatesList' = RollingUpdatesList'
+-- /See:/ 'rollingUpdatesList' smart constructor.
+data RollingUpdatesList = RollingUpdatesList
     { _rulProject    :: !Text
     , _rulZone       :: !Text
     , _rulFilter     :: !(Maybe Text)
@@ -69,7 +69,7 @@ data RollingUpdatesList' = RollingUpdatesList'
     , _rulMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RollingUpdatesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'RollingUpdatesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,12 +82,12 @@ data RollingUpdatesList' = RollingUpdatesList'
 -- * 'rulPageToken'
 --
 -- * 'rulMaxResults'
-rollingUpdatesList'
+rollingUpdatesList
     :: Text -- ^ 'rulProject'
     -> Text -- ^ 'rulZone'
-    -> RollingUpdatesList'
-rollingUpdatesList' pRulProject_ pRulZone_ =
-    RollingUpdatesList'
+    -> RollingUpdatesList
+rollingUpdatesList pRulProject_ pRulZone_ =
+    RollingUpdatesList
     { _rulProject = pRulProject_
     , _rulZone = pRulZone_
     , _rulFilter = Nothing
@@ -96,35 +96,35 @@ rollingUpdatesList' pRulProject_ pRulZone_ =
     }
 
 -- | The Google Developers Console project name.
-rulProject :: Lens' RollingUpdatesList' Text
+rulProject :: Lens' RollingUpdatesList Text
 rulProject
   = lens _rulProject (\ s a -> s{_rulProject = a})
 
 -- | The name of the zone in which the update\'s target resides.
-rulZone :: Lens' RollingUpdatesList' Text
+rulZone :: Lens' RollingUpdatesList Text
 rulZone = lens _rulZone (\ s a -> s{_rulZone = a})
 
 -- | Optional. Filter expression for filtering listed resources.
-rulFilter :: Lens' RollingUpdatesList' (Maybe Text)
+rulFilter :: Lens' RollingUpdatesList (Maybe Text)
 rulFilter
   = lens _rulFilter (\ s a -> s{_rulFilter = a})
 
 -- | Optional. Tag returned by a previous list request truncated by
 -- maxResults. Used to continue a previous list request.
-rulPageToken :: Lens' RollingUpdatesList' (Maybe Text)
+rulPageToken :: Lens' RollingUpdatesList (Maybe Text)
 rulPageToken
   = lens _rulPageToken (\ s a -> s{_rulPageToken = a})
 
 -- | Optional. Maximum count of results to be returned. Maximum value is 500
 -- and default value is 500.
-rulMaxResults :: Lens' RollingUpdatesList' Word32
+rulMaxResults :: Lens' RollingUpdatesList Word32
 rulMaxResults
   = lens _rulMaxResults
       (\ s a -> s{_rulMaxResults = a})
 
-instance GoogleRequest RollingUpdatesList' where
-        type Rs RollingUpdatesList' = RollingUpdateList
-        requestClient RollingUpdatesList'{..}
+instance GoogleRequest RollingUpdatesList where
+        type Rs RollingUpdatesList = RollingUpdateList
+        requestClient RollingUpdatesList{..}
           = go _rulProject _rulZone _rulFilter _rulPageToken
               (Just _rulMaxResults)
               (Just AltJSON)

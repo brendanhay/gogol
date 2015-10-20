@@ -29,19 +29,19 @@ module Network.Google.Resource.DFAReporting.Accounts.Update
       AccountsUpdateResource
 
     -- * Creating a Request
-    , accountsUpdate'
-    , AccountsUpdate'
+    , accountsUpdate
+    , AccountsUpdate
 
     -- * Request Lenses
-    , auProFileId
-    , auPayload
+    , auuProFileId
+    , auuPayload
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accounts.update@ method which the
--- 'AccountsUpdate'' request conforms to.
+-- 'AccountsUpdate' request conforms to.
 type AccountsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,43 +51,43 @@ type AccountsUpdateResource =
 
 -- | Updates an existing account.
 --
--- /See:/ 'accountsUpdate'' smart constructor.
-data AccountsUpdate' = AccountsUpdate'
-    { _auProFileId :: !Int64
-    , _auPayload   :: !Account
+-- /See:/ 'accountsUpdate' smart constructor.
+data AccountsUpdate = AccountsUpdate
+    { _auuProFileId :: !Int64
+    , _auuPayload   :: !Account
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'auProFileId'
+-- * 'auuProFileId'
 --
--- * 'auPayload'
-accountsUpdate'
-    :: Int64 -- ^ 'auProFileId'
-    -> Account -- ^ 'auPayload'
-    -> AccountsUpdate'
-accountsUpdate' pAuProFileId_ pAuPayload_ =
-    AccountsUpdate'
-    { _auProFileId = pAuProFileId_
-    , _auPayload = pAuPayload_
+-- * 'auuPayload'
+accountsUpdate
+    :: Int64 -- ^ 'auuProFileId'
+    -> Account -- ^ 'auuPayload'
+    -> AccountsUpdate
+accountsUpdate pAuuProFileId_ pAuuPayload_ =
+    AccountsUpdate
+    { _auuProFileId = pAuuProFileId_
+    , _auuPayload = pAuuPayload_
     }
 
 -- | User profile ID associated with this request.
-auProFileId :: Lens' AccountsUpdate' Int64
-auProFileId
-  = lens _auProFileId (\ s a -> s{_auProFileId = a})
+auuProFileId :: Lens' AccountsUpdate Int64
+auuProFileId
+  = lens _auuProFileId (\ s a -> s{_auuProFileId = a})
 
 -- | Multipart request metadata.
-auPayload :: Lens' AccountsUpdate' Account
-auPayload
-  = lens _auPayload (\ s a -> s{_auPayload = a})
+auuPayload :: Lens' AccountsUpdate Account
+auuPayload
+  = lens _auuPayload (\ s a -> s{_auuPayload = a})
 
-instance GoogleRequest AccountsUpdate' where
-        type Rs AccountsUpdate' = Account
-        requestClient AccountsUpdate'{..}
-          = go _auProFileId (Just AltJSON) _auPayload
+instance GoogleRequest AccountsUpdate where
+        type Rs AccountsUpdate = Account
+        requestClient AccountsUpdate{..}
+          = go _auuProFileId (Just AltJSON) _auuPayload
               dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy AccountsUpdateResource)

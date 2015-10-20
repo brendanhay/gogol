@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.PromoOffer.Dismiss
       PromoOfferDismissResource
 
     -- * Creating a Request
-    , promoOfferDismiss'
-    , PromoOfferDismiss'
+    , promoOfferDismiss
+    , PromoOfferDismiss
 
     -- * Request Lenses
     , podManufacturer
@@ -46,7 +46,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.promooffer.dismiss@ method which the
--- 'PromoOfferDismiss'' request conforms to.
+-- 'PromoOfferDismiss' request conforms to.
 type PromoOfferDismissResource =
      "promooffer" :>
        "dismiss" :>
@@ -61,8 +61,8 @@ type PromoOfferDismissResource =
 
 -- |
 --
--- /See:/ 'promoOfferDismiss'' smart constructor.
-data PromoOfferDismiss' = PromoOfferDismiss'
+-- /See:/ 'promoOfferDismiss' smart constructor.
+data PromoOfferDismiss = PromoOfferDismiss
     { _podManufacturer :: !(Maybe Text)
     , _podSerial       :: !(Maybe Text)
     , _podDevice       :: !(Maybe Text)
@@ -72,7 +72,7 @@ data PromoOfferDismiss' = PromoOfferDismiss'
     , _podAndroidId    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PromoOfferDismiss'' with the minimum fields required to make a request.
+-- | Creates a value of 'PromoOfferDismiss' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -89,10 +89,10 @@ data PromoOfferDismiss' = PromoOfferDismiss'
 -- * 'podProduct'
 --
 -- * 'podAndroidId'
-promoOfferDismiss'
-    :: PromoOfferDismiss'
-promoOfferDismiss' =
-    PromoOfferDismiss'
+promoOfferDismiss
+    :: PromoOfferDismiss
+promoOfferDismiss =
+    PromoOfferDismiss
     { _podManufacturer = Nothing
     , _podSerial = Nothing
     , _podDevice = Nothing
@@ -103,43 +103,43 @@ promoOfferDismiss' =
     }
 
 -- | device manufacturer
-podManufacturer :: Lens' PromoOfferDismiss' (Maybe Text)
+podManufacturer :: Lens' PromoOfferDismiss (Maybe Text)
 podManufacturer
   = lens _podManufacturer
       (\ s a -> s{_podManufacturer = a})
 
 -- | device serial
-podSerial :: Lens' PromoOfferDismiss' (Maybe Text)
+podSerial :: Lens' PromoOfferDismiss (Maybe Text)
 podSerial
   = lens _podSerial (\ s a -> s{_podSerial = a})
 
 -- | device device
-podDevice :: Lens' PromoOfferDismiss' (Maybe Text)
+podDevice :: Lens' PromoOfferDismiss (Maybe Text)
 podDevice
   = lens _podDevice (\ s a -> s{_podDevice = a})
 
 -- | device model
-podModel :: Lens' PromoOfferDismiss' (Maybe Text)
+podModel :: Lens' PromoOfferDismiss (Maybe Text)
 podModel = lens _podModel (\ s a -> s{_podModel = a})
 
 -- | Offer to dimiss
-podOfferId :: Lens' PromoOfferDismiss' (Maybe Text)
+podOfferId :: Lens' PromoOfferDismiss (Maybe Text)
 podOfferId
   = lens _podOfferId (\ s a -> s{_podOfferId = a})
 
 -- | device product
-podProduct :: Lens' PromoOfferDismiss' (Maybe Text)
+podProduct :: Lens' PromoOfferDismiss (Maybe Text)
 podProduct
   = lens _podProduct (\ s a -> s{_podProduct = a})
 
 -- | device android_id
-podAndroidId :: Lens' PromoOfferDismiss' (Maybe Text)
+podAndroidId :: Lens' PromoOfferDismiss (Maybe Text)
 podAndroidId
   = lens _podAndroidId (\ s a -> s{_podAndroidId = a})
 
-instance GoogleRequest PromoOfferDismiss' where
-        type Rs PromoOfferDismiss' = ()
-        requestClient PromoOfferDismiss'{..}
+instance GoogleRequest PromoOfferDismiss where
+        type Rs PromoOfferDismiss = ()
+        requestClient PromoOfferDismiss{..}
           = go _podManufacturer _podSerial _podDevice _podModel
               _podOfferId
               _podProduct

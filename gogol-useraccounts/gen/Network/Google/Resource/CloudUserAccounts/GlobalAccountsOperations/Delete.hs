@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.Delete
       GlobalAccountsOperationsDeleteResource
 
     -- * Creating a Request
-    , globalAccountsOperationsDelete'
-    , GlobalAccountsOperationsDelete'
+    , globalAccountsOperationsDelete
+    , GlobalAccountsOperationsDelete
 
     -- * Request Lenses
     , gaodProject
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
 -- | A resource alias for @clouduseraccounts.globalAccountsOperations.delete@ method which the
--- 'GlobalAccountsOperationsDelete'' request conforms to.
+-- 'GlobalAccountsOperationsDelete' request conforms to.
 type GlobalAccountsOperationsDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,44 +51,44 @@ type GlobalAccountsOperationsDeleteResource =
 
 -- | Deletes the specified operation resource.
 --
--- /See:/ 'globalAccountsOperationsDelete'' smart constructor.
-data GlobalAccountsOperationsDelete' = GlobalAccountsOperationsDelete'
+-- /See:/ 'globalAccountsOperationsDelete' smart constructor.
+data GlobalAccountsOperationsDelete = GlobalAccountsOperationsDelete
     { _gaodProject   :: !Text
     , _gaodOperation :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GlobalAccountsOperationsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'GlobalAccountsOperationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gaodProject'
 --
 -- * 'gaodOperation'
-globalAccountsOperationsDelete'
+globalAccountsOperationsDelete
     :: Text -- ^ 'gaodProject'
     -> Text -- ^ 'gaodOperation'
-    -> GlobalAccountsOperationsDelete'
-globalAccountsOperationsDelete' pGaodProject_ pGaodOperation_ =
-    GlobalAccountsOperationsDelete'
+    -> GlobalAccountsOperationsDelete
+globalAccountsOperationsDelete pGaodProject_ pGaodOperation_ =
+    GlobalAccountsOperationsDelete
     { _gaodProject = pGaodProject_
     , _gaodOperation = pGaodOperation_
     }
 
 -- | Project ID for this request.
-gaodProject :: Lens' GlobalAccountsOperationsDelete' Text
+gaodProject :: Lens' GlobalAccountsOperationsDelete Text
 gaodProject
   = lens _gaodProject (\ s a -> s{_gaodProject = a})
 
 -- | Name of the Operations resource to delete.
-gaodOperation :: Lens' GlobalAccountsOperationsDelete' Text
+gaodOperation :: Lens' GlobalAccountsOperationsDelete Text
 gaodOperation
   = lens _gaodOperation
       (\ s a -> s{_gaodOperation = a})
 
-instance GoogleRequest
-         GlobalAccountsOperationsDelete' where
-        type Rs GlobalAccountsOperationsDelete' = ()
-        requestClient GlobalAccountsOperationsDelete'{..}
+instance GoogleRequest GlobalAccountsOperationsDelete
+         where
+        type Rs GlobalAccountsOperationsDelete = ()
+        requestClient GlobalAccountsOperationsDelete{..}
           = go _gaodProject _gaodOperation (Just AltJSON)
               userAccountsService
           where go

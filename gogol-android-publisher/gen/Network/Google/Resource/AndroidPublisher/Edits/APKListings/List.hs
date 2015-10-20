@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKListings.List
       EditsAPKListingsListResource
 
     -- * Creating a Request
-    , editsAPKListingsList'
-    , EditsAPKListingsList'
+    , editsAPKListingsList
+    , EditsAPKListingsList
 
     -- * Request Lenses
     , eapkllPackageName
@@ -42,7 +42,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.apklistings.list@ method which the
--- 'EditsAPKListingsList'' request conforms to.
+-- 'EditsAPKListingsList' request conforms to.
 type EditsAPKListingsListResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -55,14 +55,14 @@ type EditsAPKListingsListResource =
 
 -- | Lists all the APK-specific localized listings for a specified APK.
 --
--- /See:/ 'editsAPKListingsList'' smart constructor.
-data EditsAPKListingsList' = EditsAPKListingsList'
+-- /See:/ 'editsAPKListingsList' smart constructor.
+data EditsAPKListingsList = EditsAPKListingsList
     { _eapkllPackageName    :: !Text
     , _eapkllAPKVersionCode :: !Int32
     , _eapkllEditId         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsAPKListingsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsAPKListingsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,13 +71,13 @@ data EditsAPKListingsList' = EditsAPKListingsList'
 -- * 'eapkllAPKVersionCode'
 --
 -- * 'eapkllEditId'
-editsAPKListingsList'
+editsAPKListingsList
     :: Text -- ^ 'eapkllPackageName'
     -> Int32 -- ^ 'eapkllAPKVersionCode'
     -> Text -- ^ 'eapkllEditId'
-    -> EditsAPKListingsList'
-editsAPKListingsList' pEapkllPackageName_ pEapkllAPKVersionCode_ pEapkllEditId_ =
-    EditsAPKListingsList'
+    -> EditsAPKListingsList
+editsAPKListingsList pEapkllPackageName_ pEapkllAPKVersionCode_ pEapkllEditId_ =
+    EditsAPKListingsList
     { _eapkllPackageName = pEapkllPackageName_
     , _eapkllAPKVersionCode = pEapkllAPKVersionCode_
     , _eapkllEditId = pEapkllEditId_
@@ -85,27 +85,27 @@ editsAPKListingsList' pEapkllPackageName_ pEapkllAPKVersionCode_ pEapkllEditId_ 
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eapkllPackageName :: Lens' EditsAPKListingsList' Text
+eapkllPackageName :: Lens' EditsAPKListingsList Text
 eapkllPackageName
   = lens _eapkllPackageName
       (\ s a -> s{_eapkllPackageName = a})
 
 -- | The APK version code whose APK-specific listings should be read or
 -- modified.
-eapkllAPKVersionCode :: Lens' EditsAPKListingsList' Int32
+eapkllAPKVersionCode :: Lens' EditsAPKListingsList Int32
 eapkllAPKVersionCode
   = lens _eapkllAPKVersionCode
       (\ s a -> s{_eapkllAPKVersionCode = a})
 
 -- | Unique identifier for this edit.
-eapkllEditId :: Lens' EditsAPKListingsList' Text
+eapkllEditId :: Lens' EditsAPKListingsList Text
 eapkllEditId
   = lens _eapkllEditId (\ s a -> s{_eapkllEditId = a})
 
-instance GoogleRequest EditsAPKListingsList' where
-        type Rs EditsAPKListingsList' =
+instance GoogleRequest EditsAPKListingsList where
+        type Rs EditsAPKListingsList =
              APKListingsListResponse
-        requestClient EditsAPKListingsList'{..}
+        requestClient EditsAPKListingsList{..}
           = go _eapkllPackageName _eapkllEditId
               _eapkllAPKVersionCode
               (Just AltJSON)

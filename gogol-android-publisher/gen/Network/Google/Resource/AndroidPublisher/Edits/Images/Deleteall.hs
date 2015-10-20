@@ -29,21 +29,21 @@ module Network.Google.Resource.AndroidPublisher.Edits.Images.Deleteall
       EditsImagesDeleteallResource
 
     -- * Creating a Request
-    , editsImagesDeleteall'
-    , EditsImagesDeleteall'
+    , editsImagesDeleteall
+    , EditsImagesDeleteall
 
     -- * Request Lenses
-    , eidiPackageName
-    , eidiImageType
-    , eidiLanguage
-    , eidiEditId
+    , ediPackageName
+    , ediImageType
+    , ediLanguage
+    , ediEditId
     ) where
 
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.images.deleteall@ method which the
--- 'EditsImagesDeleteall'' request conforms to.
+-- 'EditsImagesDeleteall' request conforms to.
 type EditsImagesDeleteallResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -56,69 +56,68 @@ type EditsImagesDeleteallResource =
 
 -- | Deletes all images for the specified language and image type.
 --
--- /See:/ 'editsImagesDeleteall'' smart constructor.
-data EditsImagesDeleteall' = EditsImagesDeleteall'
-    { _eidiPackageName :: !Text
-    , _eidiImageType   :: !EditsImagesDeleteallImageType
-    , _eidiLanguage    :: !Text
-    , _eidiEditId      :: !Text
+-- /See:/ 'editsImagesDeleteall' smart constructor.
+data EditsImagesDeleteall = EditsImagesDeleteall
+    { _ediPackageName :: !Text
+    , _ediImageType   :: !EditsImagesDeleteallImageType
+    , _ediLanguage    :: !Text
+    , _ediEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsImagesDeleteall'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsImagesDeleteall' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eidiPackageName'
+-- * 'ediPackageName'
 --
--- * 'eidiImageType'
+-- * 'ediImageType'
 --
--- * 'eidiLanguage'
+-- * 'ediLanguage'
 --
--- * 'eidiEditId'
-editsImagesDeleteall'
-    :: Text -- ^ 'eidiPackageName'
-    -> EditsImagesDeleteallImageType -- ^ 'eidiImageType'
-    -> Text -- ^ 'eidiLanguage'
-    -> Text -- ^ 'eidiEditId'
-    -> EditsImagesDeleteall'
-editsImagesDeleteall' pEidiPackageName_ pEidiImageType_ pEidiLanguage_ pEidiEditId_ =
-    EditsImagesDeleteall'
-    { _eidiPackageName = pEidiPackageName_
-    , _eidiImageType = pEidiImageType_
-    , _eidiLanguage = pEidiLanguage_
-    , _eidiEditId = pEidiEditId_
+-- * 'ediEditId'
+editsImagesDeleteall
+    :: Text -- ^ 'ediPackageName'
+    -> EditsImagesDeleteallImageType -- ^ 'ediImageType'
+    -> Text -- ^ 'ediLanguage'
+    -> Text -- ^ 'ediEditId'
+    -> EditsImagesDeleteall
+editsImagesDeleteall pEdiPackageName_ pEdiImageType_ pEdiLanguage_ pEdiEditId_ =
+    EditsImagesDeleteall
+    { _ediPackageName = pEdiPackageName_
+    , _ediImageType = pEdiImageType_
+    , _ediLanguage = pEdiLanguage_
+    , _ediEditId = pEdiEditId_
     }
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eidiPackageName :: Lens' EditsImagesDeleteall' Text
-eidiPackageName
-  = lens _eidiPackageName
-      (\ s a -> s{_eidiPackageName = a})
+ediPackageName :: Lens' EditsImagesDeleteall Text
+ediPackageName
+  = lens _ediPackageName
+      (\ s a -> s{_ediPackageName = a})
 
-eidiImageType :: Lens' EditsImagesDeleteall' EditsImagesDeleteallImageType
-eidiImageType
-  = lens _eidiImageType
-      (\ s a -> s{_eidiImageType = a})
+ediImageType :: Lens' EditsImagesDeleteall EditsImagesDeleteallImageType
+ediImageType
+  = lens _ediImageType (\ s a -> s{_ediImageType = a})
 
 -- | The language code (a BCP-47 language tag) of the localized listing whose
 -- images are to read or modified. For example, to select Austrian German,
 -- pass \"de-AT\".
-eidiLanguage :: Lens' EditsImagesDeleteall' Text
-eidiLanguage
-  = lens _eidiLanguage (\ s a -> s{_eidiLanguage = a})
+ediLanguage :: Lens' EditsImagesDeleteall Text
+ediLanguage
+  = lens _ediLanguage (\ s a -> s{_ediLanguage = a})
 
 -- | Unique identifier for this edit.
-eidiEditId :: Lens' EditsImagesDeleteall' Text
-eidiEditId
-  = lens _eidiEditId (\ s a -> s{_eidiEditId = a})
+ediEditId :: Lens' EditsImagesDeleteall Text
+ediEditId
+  = lens _ediEditId (\ s a -> s{_ediEditId = a})
 
-instance GoogleRequest EditsImagesDeleteall' where
-        type Rs EditsImagesDeleteall' =
+instance GoogleRequest EditsImagesDeleteall where
+        type Rs EditsImagesDeleteall =
              ImagesDeleteAllResponse
-        requestClient EditsImagesDeleteall'{..}
-          = go _eidiPackageName _eidiEditId _eidiLanguage
-              _eidiImageType
+        requestClient EditsImagesDeleteall{..}
+          = go _ediPackageName _ediEditId _ediLanguage
+              _ediImageType
               (Just AltJSON)
               androidPublisherService
           where go

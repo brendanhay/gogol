@@ -29,18 +29,18 @@ module Network.Google.Resource.Cloudlatencytest.Statscollection.Updatestats
       StatscollectionUpdatestatsResource
 
     -- * Creating a Request
-    , statscollectionUpdatestats'
-    , StatscollectionUpdatestats'
+    , statscollectionUpdatestats
+    , StatscollectionUpdatestats
 
     -- * Request Lenses
-    , sPayload
+    , suPayload
     ) where
 
 import           Network.Google.LatencyTest.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @cloudlatencytest.statscollection.updatestats@ method which the
--- 'StatscollectionUpdatestats'' request conforms to.
+-- 'StatscollectionUpdatestats' request conforms to.
 type StatscollectionUpdatestatsResource =
      "updatestats" :>
        QueryParam "alt" AltJSON :>
@@ -48,33 +48,34 @@ type StatscollectionUpdatestatsResource =
 
 -- | RPC to update the new TCP stats.
 --
--- /See:/ 'statscollectionUpdatestats'' smart constructor.
-newtype StatscollectionUpdatestats' = StatscollectionUpdatestats'
-    { _sPayload :: Stats
+-- /See:/ 'statscollectionUpdatestats' smart constructor.
+newtype StatscollectionUpdatestats = StatscollectionUpdatestats
+    { _suPayload :: Stats
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'StatscollectionUpdatestats'' with the minimum fields required to make a request.
+-- | Creates a value of 'StatscollectionUpdatestats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sPayload'
-statscollectionUpdatestats'
-    :: Stats -- ^ 'sPayload'
-    -> StatscollectionUpdatestats'
-statscollectionUpdatestats' pSPayload_ =
-    StatscollectionUpdatestats'
-    { _sPayload = pSPayload_
+-- * 'suPayload'
+statscollectionUpdatestats
+    :: Stats -- ^ 'suPayload'
+    -> StatscollectionUpdatestats
+statscollectionUpdatestats pSuPayload_ =
+    StatscollectionUpdatestats
+    { _suPayload = pSuPayload_
     }
 
 -- | Multipart request metadata.
-sPayload :: Lens' StatscollectionUpdatestats' Stats
-sPayload = lens _sPayload (\ s a -> s{_sPayload = a})
+suPayload :: Lens' StatscollectionUpdatestats Stats
+suPayload
+  = lens _suPayload (\ s a -> s{_suPayload = a})
 
-instance GoogleRequest StatscollectionUpdatestats'
+instance GoogleRequest StatscollectionUpdatestats
          where
-        type Rs StatscollectionUpdatestats' = StatsReply
-        requestClient StatscollectionUpdatestats'{..}
-          = go (Just AltJSON) _sPayload latencyTestService
+        type Rs StatscollectionUpdatestats = StatsReply
+        requestClient StatscollectionUpdatestats{..}
+          = go (Just AltJSON) _suPayload latencyTestService
           where go
                   = buildClient
                       (Proxy :: Proxy StatscollectionUpdatestatsResource)

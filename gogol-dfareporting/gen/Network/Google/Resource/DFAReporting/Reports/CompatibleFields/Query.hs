@@ -31,8 +31,8 @@ module Network.Google.Resource.DFAReporting.Reports.CompatibleFields.Query
       ReportsCompatibleFieldsQueryResource
 
     -- * Creating a Request
-    , reportsCompatibleFieldsQuery'
-    , ReportsCompatibleFieldsQuery'
+    , reportsCompatibleFieldsQuery
+    , ReportsCompatibleFieldsQuery
 
     -- * Request Lenses
     , rcfqProFileId
@@ -43,7 +43,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.reports.compatibleFields.query@ method which the
--- 'ReportsCompatibleFieldsQuery'' request conforms to.
+-- 'ReportsCompatibleFieldsQuery' request conforms to.
 type ReportsCompatibleFieldsQueryResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -58,45 +58,45 @@ type ReportsCompatibleFieldsQueryResource =
 -- sections of a report criteria, given the fields already selected in the
 -- input report and user permissions.
 --
--- /See:/ 'reportsCompatibleFieldsQuery'' smart constructor.
-data ReportsCompatibleFieldsQuery' = ReportsCompatibleFieldsQuery'
+-- /See:/ 'reportsCompatibleFieldsQuery' smart constructor.
+data ReportsCompatibleFieldsQuery = ReportsCompatibleFieldsQuery
     { _rcfqProFileId :: !Int64
     , _rcfqPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReportsCompatibleFieldsQuery'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportsCompatibleFieldsQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rcfqProFileId'
 --
 -- * 'rcfqPayload'
-reportsCompatibleFieldsQuery'
+reportsCompatibleFieldsQuery
     :: Int64 -- ^ 'rcfqProFileId'
     -> Report -- ^ 'rcfqPayload'
-    -> ReportsCompatibleFieldsQuery'
-reportsCompatibleFieldsQuery' pRcfqProFileId_ pRcfqPayload_ =
-    ReportsCompatibleFieldsQuery'
+    -> ReportsCompatibleFieldsQuery
+reportsCompatibleFieldsQuery pRcfqProFileId_ pRcfqPayload_ =
+    ReportsCompatibleFieldsQuery
     { _rcfqProFileId = pRcfqProFileId_
     , _rcfqPayload = pRcfqPayload_
     }
 
 -- | The DFA user profile ID.
-rcfqProFileId :: Lens' ReportsCompatibleFieldsQuery' Int64
+rcfqProFileId :: Lens' ReportsCompatibleFieldsQuery Int64
 rcfqProFileId
   = lens _rcfqProFileId
       (\ s a -> s{_rcfqProFileId = a})
 
 -- | Multipart request metadata.
-rcfqPayload :: Lens' ReportsCompatibleFieldsQuery' Report
+rcfqPayload :: Lens' ReportsCompatibleFieldsQuery Report
 rcfqPayload
   = lens _rcfqPayload (\ s a -> s{_rcfqPayload = a})
 
-instance GoogleRequest ReportsCompatibleFieldsQuery'
+instance GoogleRequest ReportsCompatibleFieldsQuery
          where
-        type Rs ReportsCompatibleFieldsQuery' =
+        type Rs ReportsCompatibleFieldsQuery =
              CompatibleFields
-        requestClient ReportsCompatibleFieldsQuery'{..}
+        requestClient ReportsCompatibleFieldsQuery{..}
           = go _rcfqProFileId (Just AltJSON) _rcfqPayload
               dFAReportingService
           where go

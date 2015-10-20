@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.PlayLists.Delete
       PlayListsDeleteResource
 
     -- * Creating a Request
-    , playListsDelete'
-    , PlayListsDelete'
+    , playListsDelete
+    , PlayListsDelete
 
     -- * Request Lenses
     , pldOnBehalfOfContentOwner
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.playlists.delete@ method which the
--- 'PlayListsDelete'' request conforms to.
+-- 'PlayListsDelete' request conforms to.
 type PlayListsDeleteResource =
      "playlists" :>
        QueryParam "id" Text :>
@@ -50,24 +50,24 @@ type PlayListsDeleteResource =
 
 -- | Deletes a playlist.
 --
--- /See:/ 'playListsDelete'' smart constructor.
-data PlayListsDelete' = PlayListsDelete'
+-- /See:/ 'playListsDelete' smart constructor.
+data PlayListsDelete = PlayListsDelete
     { _pldOnBehalfOfContentOwner :: !(Maybe Text)
     , _pldId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlayListsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayListsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pldOnBehalfOfContentOwner'
 --
 -- * 'pldId'
-playListsDelete'
+playListsDelete
     :: Text -- ^ 'pldId'
-    -> PlayListsDelete'
-playListsDelete' pPldId_ =
-    PlayListsDelete'
+    -> PlayListsDelete
+playListsDelete pPldId_ =
+    PlayListsDelete
     { _pldOnBehalfOfContentOwner = Nothing
     , _pldId = pPldId_
     }
@@ -82,7 +82,7 @@ playListsDelete' pPldId_ =
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-pldOnBehalfOfContentOwner :: Lens' PlayListsDelete' (Maybe Text)
+pldOnBehalfOfContentOwner :: Lens' PlayListsDelete (Maybe Text)
 pldOnBehalfOfContentOwner
   = lens _pldOnBehalfOfContentOwner
       (\ s a -> s{_pldOnBehalfOfContentOwner = a})
@@ -90,12 +90,12 @@ pldOnBehalfOfContentOwner
 -- | The id parameter specifies the YouTube playlist ID for the playlist that
 -- is being deleted. In a playlist resource, the id property specifies the
 -- playlist\'s ID.
-pldId :: Lens' PlayListsDelete' Text
+pldId :: Lens' PlayListsDelete Text
 pldId = lens _pldId (\ s a -> s{_pldId = a})
 
-instance GoogleRequest PlayListsDelete' where
-        type Rs PlayListsDelete' = ()
-        requestClient PlayListsDelete'{..}
+instance GoogleRequest PlayListsDelete where
+        type Rs PlayListsDelete = ()
+        requestClient PlayListsDelete{..}
           = go (Just _pldId) _pldOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeService

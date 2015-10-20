@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.Update
       MyLibraryAnnotationsUpdateResource
 
     -- * Creating a Request
-    , myLibraryAnnotationsUpdate'
-    , MyLibraryAnnotationsUpdate'
+    , myLibraryAnnotationsUpdate
+    , MyLibraryAnnotationsUpdate
 
     -- * Request Lenses
     , mlauPayload
@@ -42,7 +42,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.annotations.update@ method which the
--- 'MyLibraryAnnotationsUpdate'' request conforms to.
+-- 'MyLibraryAnnotationsUpdate' request conforms to.
 type MyLibraryAnnotationsUpdateResource =
      "mylibrary" :>
        "annotations" :>
@@ -53,14 +53,14 @@ type MyLibraryAnnotationsUpdateResource =
 
 -- | Updates an existing annotation.
 --
--- /See:/ 'myLibraryAnnotationsUpdate'' smart constructor.
-data MyLibraryAnnotationsUpdate' = MyLibraryAnnotationsUpdate'
+-- /See:/ 'myLibraryAnnotationsUpdate' smart constructor.
+data MyLibraryAnnotationsUpdate = MyLibraryAnnotationsUpdate
     { _mlauPayload      :: !Annotation
     , _mlauAnnotationId :: !Text
     , _mlauSource       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MyLibraryAnnotationsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'MyLibraryAnnotationsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,37 +69,37 @@ data MyLibraryAnnotationsUpdate' = MyLibraryAnnotationsUpdate'
 -- * 'mlauAnnotationId'
 --
 -- * 'mlauSource'
-myLibraryAnnotationsUpdate'
+myLibraryAnnotationsUpdate
     :: Annotation -- ^ 'mlauPayload'
     -> Text -- ^ 'mlauAnnotationId'
-    -> MyLibraryAnnotationsUpdate'
-myLibraryAnnotationsUpdate' pMlauPayload_ pMlauAnnotationId_ =
-    MyLibraryAnnotationsUpdate'
+    -> MyLibraryAnnotationsUpdate
+myLibraryAnnotationsUpdate pMlauPayload_ pMlauAnnotationId_ =
+    MyLibraryAnnotationsUpdate
     { _mlauPayload = pMlauPayload_
     , _mlauAnnotationId = pMlauAnnotationId_
     , _mlauSource = Nothing
     }
 
 -- | Multipart request metadata.
-mlauPayload :: Lens' MyLibraryAnnotationsUpdate' Annotation
+mlauPayload :: Lens' MyLibraryAnnotationsUpdate Annotation
 mlauPayload
   = lens _mlauPayload (\ s a -> s{_mlauPayload = a})
 
 -- | The ID for the annotation to update.
-mlauAnnotationId :: Lens' MyLibraryAnnotationsUpdate' Text
+mlauAnnotationId :: Lens' MyLibraryAnnotationsUpdate Text
 mlauAnnotationId
   = lens _mlauAnnotationId
       (\ s a -> s{_mlauAnnotationId = a})
 
 -- | String to identify the originator of this request.
-mlauSource :: Lens' MyLibraryAnnotationsUpdate' (Maybe Text)
+mlauSource :: Lens' MyLibraryAnnotationsUpdate (Maybe Text)
 mlauSource
   = lens _mlauSource (\ s a -> s{_mlauSource = a})
 
-instance GoogleRequest MyLibraryAnnotationsUpdate'
+instance GoogleRequest MyLibraryAnnotationsUpdate
          where
-        type Rs MyLibraryAnnotationsUpdate' = Annotation
-        requestClient MyLibraryAnnotationsUpdate'{..}
+        type Rs MyLibraryAnnotationsUpdate = Annotation
+        requestClient MyLibraryAnnotationsUpdate{..}
           = go _mlauAnnotationId _mlauSource (Just AltJSON)
               _mlauPayload
               booksService

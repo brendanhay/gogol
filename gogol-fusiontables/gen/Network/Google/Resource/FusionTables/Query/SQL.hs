@@ -30,8 +30,8 @@ module Network.Google.Resource.FusionTables.Query.SQL
       QuerySQLResource
 
     -- * Creating a Request
-    , querySQL'
-    , QuerySQL'
+    , querySQL
+    , QuerySQL
 
     -- * Request Lenses
     , qsqlTyped
@@ -43,7 +43,7 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.query.sql@ method which the
--- 'QuerySQL'' request conforms to.
+-- 'QuerySQL' request conforms to.
 type QuerySQLResource =
      "query" :>
        QueryParam "sql" Text :>
@@ -61,14 +61,14 @@ type QuerySQLResource =
 -- | Executes a Fusion Tables SQL statement, which can be any of - SELECT -
 -- INSERT - UPDATE - DELETE - SHOW - DESCRIBE - CREATE statement.
 --
--- /See:/ 'querySQL'' smart constructor.
-data QuerySQL' = QuerySQL'
+-- /See:/ 'querySQL' smart constructor.
+data QuerySQL = QuerySQL
     { _qsqlTyped :: !(Maybe Bool)
     , _qsqlHdrs  :: !(Maybe Bool)
     , _qsqlSQL   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'QuerySQL'' with the minimum fields required to make a request.
+-- | Creates a value of 'QuerySQL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,11 +77,11 @@ data QuerySQL' = QuerySQL'
 -- * 'qsqlHdrs'
 --
 -- * 'qsqlSQL'
-querySQL'
+querySQL
     :: Text -- ^ 'qsqlSQL'
-    -> QuerySQL'
-querySQL' pQsqlSQL_ =
-    QuerySQL'
+    -> QuerySQL
+querySQL pQsqlSQL_ =
+    QuerySQL
     { _qsqlTyped = Nothing
     , _qsqlHdrs = Nothing
     , _qsqlSQL = pQsqlSQL_
@@ -89,22 +89,22 @@ querySQL' pQsqlSQL_ =
 
 -- | Whether typed values are returned in the (JSON) response: numbers for
 -- numeric values and parsed geometries for KML values. Default is true.
-qsqlTyped :: Lens' QuerySQL' (Maybe Bool)
+qsqlTyped :: Lens' QuerySQL (Maybe Bool)
 qsqlTyped
   = lens _qsqlTyped (\ s a -> s{_qsqlTyped = a})
 
 -- | Whether column names are included in the first row. Default is true.
-qsqlHdrs :: Lens' QuerySQL' (Maybe Bool)
+qsqlHdrs :: Lens' QuerySQL (Maybe Bool)
 qsqlHdrs = lens _qsqlHdrs (\ s a -> s{_qsqlHdrs = a})
 
 -- | A Fusion Tables SQL statement, which can be any of - SELECT - INSERT -
 -- UPDATE - DELETE - SHOW - DESCRIBE - CREATE
-qsqlSQL :: Lens' QuerySQL' Text
+qsqlSQL :: Lens' QuerySQL Text
 qsqlSQL = lens _qsqlSQL (\ s a -> s{_qsqlSQL = a})
 
-instance GoogleRequest QuerySQL' where
-        type Rs QuerySQL' = SQLresponse
-        requestClient QuerySQL'{..}
+instance GoogleRequest QuerySQL where
+        type Rs QuerySQL = SQLresponse
+        requestClient QuerySQL{..}
           = go (Just _qsqlSQL) _qsqlTyped _qsqlHdrs
               (Just AltJSON)
               fusionTablesService
@@ -112,10 +112,9 @@ instance GoogleRequest QuerySQL' where
                   = buildClient (Proxy :: Proxy QuerySQLResource)
                       mempty
 
-instance GoogleRequest (MediaDownload QuerySQL')
-         where
-        type Rs (MediaDownload QuerySQL') = Stream
-        requestClient (MediaDownload QuerySQL'{..})
+instance GoogleRequest (MediaDownload QuerySQL) where
+        type Rs (MediaDownload QuerySQL) = Stream
+        requestClient (MediaDownload QuerySQL{..})
           = go (Just _qsqlSQL) _qsqlTyped _qsqlHdrs
               (Just AltMedia)
               fusionTablesService

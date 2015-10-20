@@ -35,8 +35,8 @@ module Network.Google.Resource.CloudMonitoring.Timeseries.Write
       TimeseriesWriteResource
 
     -- * Creating a Request
-    , timeseriesWrite'
-    , TimeseriesWrite'
+    , timeseriesWrite
+    , TimeseriesWrite
 
     -- * Request Lenses
     , twProject
@@ -47,7 +47,7 @@ import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @cloudmonitoring.timeseries.write@ method which the
--- 'TimeseriesWrite'' request conforms to.
+-- 'TimeseriesWrite' request conforms to.
 type TimeseriesWriteResource =
      Capture "project" Text :>
        "timeseries:write" :>
@@ -63,43 +63,43 @@ type TimeseriesWriteResource =
 -- Therefore, users should make sure that points of a time series are
 -- written sequentially in the order of their end time.
 --
--- /See:/ 'timeseriesWrite'' smart constructor.
-data TimeseriesWrite' = TimeseriesWrite'
+-- /See:/ 'timeseriesWrite' smart constructor.
+data TimeseriesWrite = TimeseriesWrite
     { _twProject :: !Text
     , _twPayload :: !WriteTimeseriesRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TimeseriesWrite'' with the minimum fields required to make a request.
+-- | Creates a value of 'TimeseriesWrite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'twProject'
 --
 -- * 'twPayload'
-timeseriesWrite'
+timeseriesWrite
     :: Text -- ^ 'twProject'
     -> WriteTimeseriesRequest -- ^ 'twPayload'
-    -> TimeseriesWrite'
-timeseriesWrite' pTwProject_ pTwPayload_ =
-    TimeseriesWrite'
+    -> TimeseriesWrite
+timeseriesWrite pTwProject_ pTwPayload_ =
+    TimeseriesWrite
     { _twProject = pTwProject_
     , _twPayload = pTwPayload_
     }
 
 -- | The project ID. The value can be the numeric project ID or string-based
 -- project name.
-twProject :: Lens' TimeseriesWrite' Text
+twProject :: Lens' TimeseriesWrite Text
 twProject
   = lens _twProject (\ s a -> s{_twProject = a})
 
 -- | Multipart request metadata.
-twPayload :: Lens' TimeseriesWrite' WriteTimeseriesRequest
+twPayload :: Lens' TimeseriesWrite WriteTimeseriesRequest
 twPayload
   = lens _twPayload (\ s a -> s{_twPayload = a})
 
-instance GoogleRequest TimeseriesWrite' where
-        type Rs TimeseriesWrite' = WriteTimeseriesResponse
-        requestClient TimeseriesWrite'{..}
+instance GoogleRequest TimeseriesWrite where
+        type Rs TimeseriesWrite = WriteTimeseriesResponse
+        requestClient TimeseriesWrite{..}
           = go _twProject (Just AltJSON) _twPayload
               monitoringService
           where go

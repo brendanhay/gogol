@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.MachineTypes.AggregatedList
       MachineTypesAggregatedListResource
 
     -- * Creating a Request
-    , machineTypesAggregatedList'
-    , MachineTypesAggregatedList'
+    , machineTypesAggregatedList
+    , MachineTypesAggregatedList
 
     -- * Request Lenses
     , mtalProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.machineTypes.aggregatedList@ method which the
--- 'MachineTypesAggregatedList'' request conforms to.
+-- 'MachineTypesAggregatedList' request conforms to.
 type MachineTypesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
@@ -56,15 +56,15 @@ type MachineTypesAggregatedListResource =
 
 -- | Retrieves the list of machine type resources grouped by scope.
 --
--- /See:/ 'machineTypesAggregatedList'' smart constructor.
-data MachineTypesAggregatedList' = MachineTypesAggregatedList'
+-- /See:/ 'machineTypesAggregatedList' smart constructor.
+data MachineTypesAggregatedList = MachineTypesAggregatedList
     { _mtalProject    :: !Text
     , _mtalFilter     :: !(Maybe Text)
     , _mtalPageToken  :: !(Maybe Text)
     , _mtalMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MachineTypesAggregatedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'MachineTypesAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,11 +75,11 @@ data MachineTypesAggregatedList' = MachineTypesAggregatedList'
 -- * 'mtalPageToken'
 --
 -- * 'mtalMaxResults'
-machineTypesAggregatedList'
+machineTypesAggregatedList
     :: Text -- ^ 'mtalProject'
-    -> MachineTypesAggregatedList'
-machineTypesAggregatedList' pMtalProject_ =
-    MachineTypesAggregatedList'
+    -> MachineTypesAggregatedList
+machineTypesAggregatedList pMtalProject_ =
+    MachineTypesAggregatedList
     { _mtalProject = pMtalProject_
     , _mtalFilter = Nothing
     , _mtalPageToken = Nothing
@@ -87,7 +87,7 @@ machineTypesAggregatedList' pMtalProject_ =
     }
 
 -- | Project ID for this request.
-mtalProject :: Lens' MachineTypesAggregatedList' Text
+mtalProject :: Lens' MachineTypesAggregatedList Text
 mtalProject
   = lens _mtalProject (\ s a -> s{_mtalProject = a})
 
@@ -102,29 +102,29 @@ mtalProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-mtalFilter :: Lens' MachineTypesAggregatedList' (Maybe Text)
+mtalFilter :: Lens' MachineTypesAggregatedList (Maybe Text)
 mtalFilter
   = lens _mtalFilter (\ s a -> s{_mtalFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-mtalPageToken :: Lens' MachineTypesAggregatedList' (Maybe Text)
+mtalPageToken :: Lens' MachineTypesAggregatedList (Maybe Text)
 mtalPageToken
   = lens _mtalPageToken
       (\ s a -> s{_mtalPageToken = a})
 
 -- | Maximum count of results to be returned.
-mtalMaxResults :: Lens' MachineTypesAggregatedList' Word32
+mtalMaxResults :: Lens' MachineTypesAggregatedList Word32
 mtalMaxResults
   = lens _mtalMaxResults
       (\ s a -> s{_mtalMaxResults = a})
 
-instance GoogleRequest MachineTypesAggregatedList'
+instance GoogleRequest MachineTypesAggregatedList
          where
-        type Rs MachineTypesAggregatedList' =
+        type Rs MachineTypesAggregatedList =
              MachineTypeAggregatedList
-        requestClient MachineTypesAggregatedList'{..}
+        requestClient MachineTypesAggregatedList{..}
           = go _mtalProject _mtalFilter _mtalPageToken
               (Just _mtalMaxResults)
               (Just AltJSON)

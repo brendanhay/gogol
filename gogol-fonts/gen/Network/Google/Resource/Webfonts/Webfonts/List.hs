@@ -30,8 +30,8 @@ module Network.Google.Resource.Webfonts.Webfonts.List
       WebfontsListResource
 
     -- * Creating a Request
-    , webfontsList'
-    , WebfontsList'
+    , webfontsList
+    , WebfontsList
 
     -- * Request Lenses
     , wlSort
@@ -41,7 +41,7 @@ import           Network.Google.Fonts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @webfonts.webfonts.list@ method which the
--- 'WebfontsList'' request conforms to.
+-- 'WebfontsList' request conforms to.
 type WebfontsListResource =
      "webfonts" :>
        QueryParam "sort" WebfontsListSort :>
@@ -50,30 +50,30 @@ type WebfontsListResource =
 -- | Retrieves the list of fonts currently served by the Google Fonts
 -- Developer API
 --
--- /See:/ 'webfontsList'' smart constructor.
-newtype WebfontsList' = WebfontsList'
+-- /See:/ 'webfontsList' smart constructor.
+newtype WebfontsList = WebfontsList
     { _wlSort :: Maybe WebfontsListSort
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'WebfontsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'WebfontsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'wlSort'
-webfontsList'
-    :: WebfontsList'
-webfontsList' =
-    WebfontsList'
+webfontsList
+    :: WebfontsList
+webfontsList =
+    WebfontsList
     { _wlSort = Nothing
     }
 
 -- | Enables sorting of the list
-wlSort :: Lens' WebfontsList' (Maybe WebfontsListSort)
+wlSort :: Lens' WebfontsList (Maybe WebfontsListSort)
 wlSort = lens _wlSort (\ s a -> s{_wlSort = a})
 
-instance GoogleRequest WebfontsList' where
-        type Rs WebfontsList' = WebfontList
-        requestClient WebfontsList'{..}
+instance GoogleRequest WebfontsList where
+        type Rs WebfontsList = WebfontList
+        requestClient WebfontsList{..}
           = go _wlSort (Just AltJSON) fontsService
           where go
                   = buildClient (Proxy :: Proxy WebfontsListResource)

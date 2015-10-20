@@ -31,8 +31,8 @@ module Network.Google.Resource.Genomics.References.Bases.List
       ReferencesBasesListResource
 
     -- * Creating a Request
-    , referencesBasesList'
-    , ReferencesBasesList'
+    , referencesBasesList
+    , ReferencesBasesList
 
     -- * Request Lenses
     , rblXgafv
@@ -53,7 +53,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.references.bases.list@ method which the
--- 'ReferencesBasesList'' request conforms to.
+-- 'ReferencesBasesList' request conforms to.
 type ReferencesBasesListResource =
      "v1" :>
        "references" :>
@@ -77,8 +77,8 @@ type ReferencesBasesListResource =
 -- Implements
 -- [GlobalAllianceApi.getReferenceBases](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L221).
 --
--- /See:/ 'referencesBasesList'' smart constructor.
-data ReferencesBasesList' = ReferencesBasesList'
+-- /See:/ 'referencesBasesList' smart constructor.
+data ReferencesBasesList = ReferencesBasesList
     { _rblXgafv          :: !(Maybe Text)
     , _rblUploadProtocol :: !(Maybe Text)
     , _rblPp             :: !Bool
@@ -93,7 +93,7 @@ data ReferencesBasesList' = ReferencesBasesList'
     , _rblCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReferencesBasesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReferencesBasesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -120,11 +120,11 @@ data ReferencesBasesList' = ReferencesBasesList'
 -- * 'rblPageSize'
 --
 -- * 'rblCallback'
-referencesBasesList'
+referencesBasesList
     :: Text -- ^ 'rblReferenceId'
-    -> ReferencesBasesList'
-referencesBasesList' pRblReferenceId_ =
-    ReferencesBasesList'
+    -> ReferencesBasesList
+referencesBasesList pRblReferenceId_ =
+    ReferencesBasesList
     { _rblXgafv = Nothing
     , _rblUploadProtocol = Nothing
     , _rblPp = True
@@ -140,72 +140,72 @@ referencesBasesList' pRblReferenceId_ =
     }
 
 -- | V1 error format.
-rblXgafv :: Lens' ReferencesBasesList' (Maybe Text)
+rblXgafv :: Lens' ReferencesBasesList (Maybe Text)
 rblXgafv = lens _rblXgafv (\ s a -> s{_rblXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-rblUploadProtocol :: Lens' ReferencesBasesList' (Maybe Text)
+rblUploadProtocol :: Lens' ReferencesBasesList (Maybe Text)
 rblUploadProtocol
   = lens _rblUploadProtocol
       (\ s a -> s{_rblUploadProtocol = a})
 
 -- | Pretty-print response.
-rblPp :: Lens' ReferencesBasesList' Bool
+rblPp :: Lens' ReferencesBasesList Bool
 rblPp = lens _rblPp (\ s a -> s{_rblPp = a})
 
 -- | OAuth access token.
-rblAccessToken :: Lens' ReferencesBasesList' (Maybe Text)
+rblAccessToken :: Lens' ReferencesBasesList (Maybe Text)
 rblAccessToken
   = lens _rblAccessToken
       (\ s a -> s{_rblAccessToken = a})
 
 -- | The start position (0-based) of this query. Defaults to 0.
-rblStart :: Lens' ReferencesBasesList' (Maybe Int64)
+rblStart :: Lens' ReferencesBasesList (Maybe Int64)
 rblStart = lens _rblStart (\ s a -> s{_rblStart = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-rblUploadType :: Lens' ReferencesBasesList' (Maybe Text)
+rblUploadType :: Lens' ReferencesBasesList (Maybe Text)
 rblUploadType
   = lens _rblUploadType
       (\ s a -> s{_rblUploadType = a})
 
 -- | The ID of the reference.
-rblReferenceId :: Lens' ReferencesBasesList' Text
+rblReferenceId :: Lens' ReferencesBasesList Text
 rblReferenceId
   = lens _rblReferenceId
       (\ s a -> s{_rblReferenceId = a})
 
 -- | OAuth bearer token.
-rblBearerToken :: Lens' ReferencesBasesList' (Maybe Text)
+rblBearerToken :: Lens' ReferencesBasesList (Maybe Text)
 rblBearerToken
   = lens _rblBearerToken
       (\ s a -> s{_rblBearerToken = a})
 
 -- | The end position (0-based, exclusive) of this query. Defaults to the
 -- length of this reference.
-rblEnd :: Lens' ReferencesBasesList' (Maybe Int64)
+rblEnd :: Lens' ReferencesBasesList (Maybe Int64)
 rblEnd = lens _rblEnd (\ s a -> s{_rblEnd = a})
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
 -- \`nextPageToken\` from the previous response.
-rblPageToken :: Lens' ReferencesBasesList' (Maybe Text)
+rblPageToken :: Lens' ReferencesBasesList (Maybe Text)
 rblPageToken
   = lens _rblPageToken (\ s a -> s{_rblPageToken = a})
 
 -- | Specifies the maximum number of bases to return in a single page.
-rblPageSize :: Lens' ReferencesBasesList' (Maybe Int32)
+rblPageSize :: Lens' ReferencesBasesList (Maybe Int32)
 rblPageSize
   = lens _rblPageSize (\ s a -> s{_rblPageSize = a})
 
 -- | JSONP
-rblCallback :: Lens' ReferencesBasesList' (Maybe Text)
+rblCallback :: Lens' ReferencesBasesList (Maybe Text)
 rblCallback
   = lens _rblCallback (\ s a -> s{_rblCallback = a})
 
-instance GoogleRequest ReferencesBasesList' where
-        type Rs ReferencesBasesList' = ListBasesResponse
-        requestClient ReferencesBasesList'{..}
+instance GoogleRequest ReferencesBasesList where
+        type Rs ReferencesBasesList = ListBasesResponse
+        requestClient ReferencesBasesList{..}
           = go _rblReferenceId _rblXgafv _rblUploadProtocol
               (Just _rblPp)
               _rblAccessToken

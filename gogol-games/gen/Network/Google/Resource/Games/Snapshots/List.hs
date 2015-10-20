@@ -30,8 +30,8 @@ module Network.Google.Resource.Games.Snapshots.List
       SnapshotsListResource
 
     -- * Creating a Request
-    , snapshotsList'
-    , SnapshotsList'
+    , snapshotsList
+    , SnapshotsList
 
     -- * Request Lenses
     , slLanguage
@@ -44,7 +44,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.snapshots.list@ method which the
--- 'SnapshotsList'' request conforms to.
+-- 'SnapshotsList' request conforms to.
 type SnapshotsListResource =
      "players" :>
        Capture "playerId" Text :>
@@ -58,15 +58,15 @@ type SnapshotsListResource =
 -- | Retrieves a list of snapshots created by your application for the player
 -- corresponding to the player ID.
 --
--- /See:/ 'snapshotsList'' smart constructor.
-data SnapshotsList' = SnapshotsList'
+-- /See:/ 'snapshotsList' smart constructor.
+data SnapshotsList = SnapshotsList
     { _slLanguage   :: !(Maybe Text)
     , _slPageToken  :: !(Maybe Text)
     , _slPlayerId   :: !Text
     , _slMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SnapshotsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'SnapshotsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,11 +77,11 @@ data SnapshotsList' = SnapshotsList'
 -- * 'slPlayerId'
 --
 -- * 'slMaxResults'
-snapshotsList'
+snapshotsList
     :: Text -- ^ 'slPlayerId'
-    -> SnapshotsList'
-snapshotsList' pSlPlayerId_ =
-    SnapshotsList'
+    -> SnapshotsList
+snapshotsList pSlPlayerId_ =
+    SnapshotsList
     { _slLanguage = Nothing
     , _slPageToken = Nothing
     , _slPlayerId = pSlPlayerId_
@@ -89,31 +89,31 @@ snapshotsList' pSlPlayerId_ =
     }
 
 -- | The preferred language to use for strings returned by this method.
-slLanguage :: Lens' SnapshotsList' (Maybe Text)
+slLanguage :: Lens' SnapshotsList (Maybe Text)
 slLanguage
   = lens _slLanguage (\ s a -> s{_slLanguage = a})
 
 -- | The token returned by the previous request.
-slPageToken :: Lens' SnapshotsList' (Maybe Text)
+slPageToken :: Lens' SnapshotsList (Maybe Text)
 slPageToken
   = lens _slPageToken (\ s a -> s{_slPageToken = a})
 
 -- | A player ID. A value of me may be used in place of the authenticated
 -- player\'s ID.
-slPlayerId :: Lens' SnapshotsList' Text
+slPlayerId :: Lens' SnapshotsList Text
 slPlayerId
   = lens _slPlayerId (\ s a -> s{_slPlayerId = a})
 
 -- | The maximum number of snapshot resources to return in the response, used
 -- for paging. For any response, the actual number of snapshot resources
 -- returned may be less than the specified maxResults.
-slMaxResults :: Lens' SnapshotsList' (Maybe Int32)
+slMaxResults :: Lens' SnapshotsList (Maybe Int32)
 slMaxResults
   = lens _slMaxResults (\ s a -> s{_slMaxResults = a})
 
-instance GoogleRequest SnapshotsList' where
-        type Rs SnapshotsList' = SnapshotListResponse
-        requestClient SnapshotsList'{..}
+instance GoogleRequest SnapshotsList where
+        type Rs SnapshotsList = SnapshotListResponse
+        requestClient SnapshotsList{..}
           = go _slPlayerId _slLanguage _slPageToken
               _slMaxResults
               (Just AltJSON)

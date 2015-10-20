@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.Labels.Create
       UsersLabelsCreateResource
 
     -- * Creating a Request
-    , usersLabelsCreate'
-    , UsersLabelsCreate'
+    , usersLabelsCreate
+    , UsersLabelsCreate
 
     -- * Request Lenses
     , ulcPayload
@@ -41,7 +41,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.labels.create@ method which the
--- 'UsersLabelsCreate'' request conforms to.
+-- 'UsersLabelsCreate' request conforms to.
 type UsersLabelsCreateResource =
      Capture "userId" Text :>
        "labels" :>
@@ -50,43 +50,43 @@ type UsersLabelsCreateResource =
 
 -- | Creates a new label.
 --
--- /See:/ 'usersLabelsCreate'' smart constructor.
-data UsersLabelsCreate' = UsersLabelsCreate'
+-- /See:/ 'usersLabelsCreate' smart constructor.
+data UsersLabelsCreate = UsersLabelsCreate
     { _ulcPayload :: !Label
     , _ulcUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersLabelsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersLabelsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ulcPayload'
 --
 -- * 'ulcUserId'
-usersLabelsCreate'
+usersLabelsCreate
     :: Label -- ^ 'ulcPayload'
     -> Text
-    -> UsersLabelsCreate'
-usersLabelsCreate' pUlcPayload_ pUlcUserId_ =
-    UsersLabelsCreate'
+    -> UsersLabelsCreate
+usersLabelsCreate pUlcPayload_ pUlcUserId_ =
+    UsersLabelsCreate
     { _ulcPayload = pUlcPayload_
     , _ulcUserId = pUlcUserId_
     }
 
 -- | Multipart request metadata.
-ulcPayload :: Lens' UsersLabelsCreate' Label
+ulcPayload :: Lens' UsersLabelsCreate Label
 ulcPayload
   = lens _ulcPayload (\ s a -> s{_ulcPayload = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-ulcUserId :: Lens' UsersLabelsCreate' Text
+ulcUserId :: Lens' UsersLabelsCreate Text
 ulcUserId
   = lens _ulcUserId (\ s a -> s{_ulcUserId = a})
 
-instance GoogleRequest UsersLabelsCreate' where
-        type Rs UsersLabelsCreate' = Label
-        requestClient UsersLabelsCreate'{..}
+instance GoogleRequest UsersLabelsCreate where
+        type Rs UsersLabelsCreate = Label
+        requestClient UsersLabelsCreate{..}
           = go _ulcUserId (Just AltJSON) _ulcPayload
               gmailService
           where go

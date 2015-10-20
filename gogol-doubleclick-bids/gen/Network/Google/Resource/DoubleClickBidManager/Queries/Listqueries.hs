@@ -29,8 +29,8 @@ module Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
       QueriesListqueriesResource
 
     -- * Creating a Request
-    , queriesListqueries'
-    , QueriesListqueries'
+    , queriesListqueries
+    , QueriesListqueries
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @doubleclickbidmanager.queries.listqueries@ method which the
--- 'QueriesListqueries'' request conforms to.
+-- 'QueriesListqueries' request conforms to.
 type QueriesListqueriesResource =
      "queries" :>
        QueryParam "alt" AltJSON :>
@@ -46,20 +46,20 @@ type QueriesListqueriesResource =
 
 -- | Retrieves stored queries.
 --
--- /See:/ 'queriesListqueries'' smart constructor.
-data QueriesListqueries' =
-    QueriesListqueries'
+-- /See:/ 'queriesListqueries' smart constructor.
+data QueriesListqueries =
+    QueriesListqueries
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'QueriesListqueries'' with the minimum fields required to make a request.
+-- | Creates a value of 'QueriesListqueries' with the minimum fields required to make a request.
 --
-queriesListqueries'
-    :: QueriesListqueries'
-queriesListqueries' = QueriesListqueries'
+queriesListqueries
+    :: QueriesListqueries
+queriesListqueries = QueriesListqueries
 
-instance GoogleRequest QueriesListqueries' where
-        type Rs QueriesListqueries' = ListQueriesResponse
-        requestClient QueriesListqueries'{}
+instance GoogleRequest QueriesListqueries where
+        type Rs QueriesListqueries = ListQueriesResponse
+        requestClient QueriesListqueries{}
           = go (Just AltJSON) doubleClickBidsService
           where go
                   = buildClient

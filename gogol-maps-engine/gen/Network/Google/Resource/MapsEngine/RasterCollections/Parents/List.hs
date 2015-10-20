@@ -29,20 +29,20 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Parents.List
       RasterCollectionsParentsListResource
 
     -- * Creating a Request
-    , rasterCollectionsParentsList'
-    , RasterCollectionsParentsList'
+    , rasterCollectionsParentsList
+    , RasterCollectionsParentsList
 
     -- * Request Lenses
-    , rcplId
-    , rcplPageToken
-    , rcplMaxResults
+    , rcplcId
+    , rcplcPageToken
+    , rcplcMaxResults
     ) where
 
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasterCollections.parents.list@ method which the
--- 'RasterCollectionsParentsList'' request conforms to.
+-- 'RasterCollectionsParentsList' request conforms to.
 type RasterCollectionsParentsListResource =
      "rasterCollections" :>
        Capture "id" Text :>
@@ -54,57 +54,57 @@ type RasterCollectionsParentsListResource =
 
 -- | Return all parent ids of the specified raster collection.
 --
--- /See:/ 'rasterCollectionsParentsList'' smart constructor.
-data RasterCollectionsParentsList' = RasterCollectionsParentsList'
-    { _rcplId         :: !Text
-    , _rcplPageToken  :: !(Maybe Text)
-    , _rcplMaxResults :: !(Maybe Word32)
+-- /See:/ 'rasterCollectionsParentsList' smart constructor.
+data RasterCollectionsParentsList = RasterCollectionsParentsList
+    { _rcplcId         :: !Text
+    , _rcplcPageToken  :: !(Maybe Text)
+    , _rcplcMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RasterCollectionsParentsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'RasterCollectionsParentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcplId'
+-- * 'rcplcId'
 --
--- * 'rcplPageToken'
+-- * 'rcplcPageToken'
 --
--- * 'rcplMaxResults'
-rasterCollectionsParentsList'
-    :: Text -- ^ 'rcplId'
-    -> RasterCollectionsParentsList'
-rasterCollectionsParentsList' pRcplId_ =
-    RasterCollectionsParentsList'
-    { _rcplId = pRcplId_
-    , _rcplPageToken = Nothing
-    , _rcplMaxResults = Nothing
+-- * 'rcplcMaxResults'
+rasterCollectionsParentsList
+    :: Text -- ^ 'rcplcId'
+    -> RasterCollectionsParentsList
+rasterCollectionsParentsList pRcplcId_ =
+    RasterCollectionsParentsList
+    { _rcplcId = pRcplcId_
+    , _rcplcPageToken = Nothing
+    , _rcplcMaxResults = Nothing
     }
 
 -- | The ID of the raster collection whose parents will be listed.
-rcplId :: Lens' RasterCollectionsParentsList' Text
-rcplId = lens _rcplId (\ s a -> s{_rcplId = a})
+rcplcId :: Lens' RasterCollectionsParentsList Text
+rcplcId = lens _rcplcId (\ s a -> s{_rcplcId = a})
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
 -- nextPageToken from the previous response.
-rcplPageToken :: Lens' RasterCollectionsParentsList' (Maybe Text)
-rcplPageToken
-  = lens _rcplPageToken
-      (\ s a -> s{_rcplPageToken = a})
+rcplcPageToken :: Lens' RasterCollectionsParentsList (Maybe Text)
+rcplcPageToken
+  = lens _rcplcPageToken
+      (\ s a -> s{_rcplcPageToken = a})
 
 -- | The maximum number of items to include in a single response page. The
 -- maximum supported value is 50.
-rcplMaxResults :: Lens' RasterCollectionsParentsList' (Maybe Word32)
-rcplMaxResults
-  = lens _rcplMaxResults
-      (\ s a -> s{_rcplMaxResults = a})
+rcplcMaxResults :: Lens' RasterCollectionsParentsList (Maybe Word32)
+rcplcMaxResults
+  = lens _rcplcMaxResults
+      (\ s a -> s{_rcplcMaxResults = a})
 
-instance GoogleRequest RasterCollectionsParentsList'
+instance GoogleRequest RasterCollectionsParentsList
          where
-        type Rs RasterCollectionsParentsList' =
+        type Rs RasterCollectionsParentsList =
              ParentsListResponse
-        requestClient RasterCollectionsParentsList'{..}
-          = go _rcplId _rcplPageToken _rcplMaxResults
+        requestClient RasterCollectionsParentsList{..}
+          = go _rcplcId _rcplcPageToken _rcplcMaxResults
               (Just AltJSON)
               mapsEngineService
           where go

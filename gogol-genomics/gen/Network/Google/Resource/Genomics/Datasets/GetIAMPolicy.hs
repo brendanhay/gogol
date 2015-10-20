@@ -31,8 +31,8 @@ module Network.Google.Resource.Genomics.Datasets.GetIAMPolicy
       DatasetsGetIAMPolicyResource
 
     -- * Creating a Request
-    , datasetsGetIAMPolicy'
-    , DatasetsGetIAMPolicy'
+    , datasetsGetIAMPolicy
+    , DatasetsGetIAMPolicy
 
     -- * Request Lenses
     , dgipXgafv
@@ -50,7 +50,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.datasets.getIamPolicy@ method which the
--- 'DatasetsGetIAMPolicy'' request conforms to.
+-- 'DatasetsGetIAMPolicy' request conforms to.
 type DatasetsGetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
@@ -69,8 +69,8 @@ type DatasetsGetIAMPolicyResource =
 -- or the resource does not exist. See Getting a Policy for more
 -- information.
 --
--- /See:/ 'datasetsGetIAMPolicy'' smart constructor.
-data DatasetsGetIAMPolicy' = DatasetsGetIAMPolicy'
+-- /See:/ 'datasetsGetIAMPolicy' smart constructor.
+data DatasetsGetIAMPolicy = DatasetsGetIAMPolicy
     { _dgipXgafv          :: !(Maybe Text)
     , _dgipUploadProtocol :: !(Maybe Text)
     , _dgipPp             :: !Bool
@@ -82,7 +82,7 @@ data DatasetsGetIAMPolicy' = DatasetsGetIAMPolicy'
     , _dgipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsGetIAMPolicy'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -103,12 +103,12 @@ data DatasetsGetIAMPolicy' = DatasetsGetIAMPolicy'
 -- * 'dgipResource'
 --
 -- * 'dgipCallback'
-datasetsGetIAMPolicy'
+datasetsGetIAMPolicy
     :: GetIAMPolicyRequest -- ^ 'dgipPayload'
     -> Text -- ^ 'dgipResource'
-    -> DatasetsGetIAMPolicy'
-datasetsGetIAMPolicy' pDgipPayload_ pDgipResource_ =
-    DatasetsGetIAMPolicy'
+    -> DatasetsGetIAMPolicy
+datasetsGetIAMPolicy pDgipPayload_ pDgipResource_ =
+    DatasetsGetIAMPolicy
     { _dgipXgafv = Nothing
     , _dgipUploadProtocol = Nothing
     , _dgipPp = True
@@ -121,57 +121,57 @@ datasetsGetIAMPolicy' pDgipPayload_ pDgipResource_ =
     }
 
 -- | V1 error format.
-dgipXgafv :: Lens' DatasetsGetIAMPolicy' (Maybe Text)
+dgipXgafv :: Lens' DatasetsGetIAMPolicy (Maybe Text)
 dgipXgafv
   = lens _dgipXgafv (\ s a -> s{_dgipXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-dgipUploadProtocol :: Lens' DatasetsGetIAMPolicy' (Maybe Text)
+dgipUploadProtocol :: Lens' DatasetsGetIAMPolicy (Maybe Text)
 dgipUploadProtocol
   = lens _dgipUploadProtocol
       (\ s a -> s{_dgipUploadProtocol = a})
 
 -- | Pretty-print response.
-dgipPp :: Lens' DatasetsGetIAMPolicy' Bool
+dgipPp :: Lens' DatasetsGetIAMPolicy Bool
 dgipPp = lens _dgipPp (\ s a -> s{_dgipPp = a})
 
 -- | OAuth access token.
-dgipAccessToken :: Lens' DatasetsGetIAMPolicy' (Maybe Text)
+dgipAccessToken :: Lens' DatasetsGetIAMPolicy (Maybe Text)
 dgipAccessToken
   = lens _dgipAccessToken
       (\ s a -> s{_dgipAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-dgipUploadType :: Lens' DatasetsGetIAMPolicy' (Maybe Text)
+dgipUploadType :: Lens' DatasetsGetIAMPolicy (Maybe Text)
 dgipUploadType
   = lens _dgipUploadType
       (\ s a -> s{_dgipUploadType = a})
 
 -- | Multipart request metadata.
-dgipPayload :: Lens' DatasetsGetIAMPolicy' GetIAMPolicyRequest
+dgipPayload :: Lens' DatasetsGetIAMPolicy GetIAMPolicyRequest
 dgipPayload
   = lens _dgipPayload (\ s a -> s{_dgipPayload = a})
 
 -- | OAuth bearer token.
-dgipBearerToken :: Lens' DatasetsGetIAMPolicy' (Maybe Text)
+dgipBearerToken :: Lens' DatasetsGetIAMPolicy (Maybe Text)
 dgipBearerToken
   = lens _dgipBearerToken
       (\ s a -> s{_dgipBearerToken = a})
 
 -- | REQUIRED: The resource for which policy is being specified. Format is
 -- \`datasets\/\`.
-dgipResource :: Lens' DatasetsGetIAMPolicy' Text
+dgipResource :: Lens' DatasetsGetIAMPolicy Text
 dgipResource
   = lens _dgipResource (\ s a -> s{_dgipResource = a})
 
 -- | JSONP
-dgipCallback :: Lens' DatasetsGetIAMPolicy' (Maybe Text)
+dgipCallback :: Lens' DatasetsGetIAMPolicy (Maybe Text)
 dgipCallback
   = lens _dgipCallback (\ s a -> s{_dgipCallback = a})
 
-instance GoogleRequest DatasetsGetIAMPolicy' where
-        type Rs DatasetsGetIAMPolicy' = Policy
-        requestClient DatasetsGetIAMPolicy'{..}
+instance GoogleRequest DatasetsGetIAMPolicy where
+        type Rs DatasetsGetIAMPolicy = Policy
+        requestClient DatasetsGetIAMPolicy{..}
           = go _dgipResource _dgipXgafv _dgipUploadProtocol
               (Just _dgipPp)
               _dgipAccessToken

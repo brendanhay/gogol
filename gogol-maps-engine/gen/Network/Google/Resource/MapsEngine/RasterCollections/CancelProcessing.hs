@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.RasterCollections.CancelProcessing
       RasterCollectionsCancelProcessingResource
 
     -- * Creating a Request
-    , rasterCollectionsCancelProcessing'
-    , RasterCollectionsCancelProcessing'
+    , rasterCollectionsCancelProcessing
+    , RasterCollectionsCancelProcessing
 
     -- * Request Lenses
     , rccpId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasterCollections.cancelProcessing@ method which the
--- 'RasterCollectionsCancelProcessing'' request conforms to.
+-- 'RasterCollectionsCancelProcessing' request conforms to.
 type RasterCollectionsCancelProcessingResource =
      "rasterCollections" :>
        Capture "id" Text :>
@@ -50,33 +50,33 @@ type RasterCollectionsCancelProcessingResource =
 
 -- | Cancel processing on a raster collection asset.
 --
--- /See:/ 'rasterCollectionsCancelProcessing'' smart constructor.
-newtype RasterCollectionsCancelProcessing' = RasterCollectionsCancelProcessing'
+-- /See:/ 'rasterCollectionsCancelProcessing' smart constructor.
+newtype RasterCollectionsCancelProcessing = RasterCollectionsCancelProcessing
     { _rccpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RasterCollectionsCancelProcessing'' with the minimum fields required to make a request.
+-- | Creates a value of 'RasterCollectionsCancelProcessing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rccpId'
-rasterCollectionsCancelProcessing'
+rasterCollectionsCancelProcessing
     :: Text -- ^ 'rccpId'
-    -> RasterCollectionsCancelProcessing'
-rasterCollectionsCancelProcessing' pRccpId_ =
-    RasterCollectionsCancelProcessing'
+    -> RasterCollectionsCancelProcessing
+rasterCollectionsCancelProcessing pRccpId_ =
+    RasterCollectionsCancelProcessing
     { _rccpId = pRccpId_
     }
 
 -- | The ID of the raster collection.
-rccpId :: Lens' RasterCollectionsCancelProcessing' Text
+rccpId :: Lens' RasterCollectionsCancelProcessing Text
 rccpId = lens _rccpId (\ s a -> s{_rccpId = a})
 
 instance GoogleRequest
-         RasterCollectionsCancelProcessing' where
-        type Rs RasterCollectionsCancelProcessing' =
+         RasterCollectionsCancelProcessing where
+        type Rs RasterCollectionsCancelProcessing =
              ProcessResponse
-        requestClient RasterCollectionsCancelProcessing'{..}
+        requestClient RasterCollectionsCancelProcessing{..}
           = go _rccpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

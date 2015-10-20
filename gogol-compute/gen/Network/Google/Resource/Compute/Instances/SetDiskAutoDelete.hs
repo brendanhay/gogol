@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
       InstancesSetDiskAutoDeleteResource
 
     -- * Creating a Request
-    , instancesSetDiskAutoDelete'
-    , InstancesSetDiskAutoDelete'
+    , instancesSetDiskAutoDelete
+    , InstancesSetDiskAutoDelete
 
     -- * Request Lenses
     , isdadProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.setDiskAutoDelete@ method which the
--- 'InstancesSetDiskAutoDelete'' request conforms to.
+-- 'InstancesSetDiskAutoDelete' request conforms to.
 type InstancesSetDiskAutoDeleteResource =
      Capture "project" Text :>
        "zones" :>
@@ -58,8 +58,8 @@ type InstancesSetDiskAutoDeleteResource =
 
 -- | Sets the auto-delete flag for a disk attached to an instance.
 --
--- /See:/ 'instancesSetDiskAutoDelete'' smart constructor.
-data InstancesSetDiskAutoDelete' = InstancesSetDiskAutoDelete'
+-- /See:/ 'instancesSetDiskAutoDelete' smart constructor.
+data InstancesSetDiskAutoDelete = InstancesSetDiskAutoDelete
     { _isdadProject    :: !Text
     , _isdadAutoDelete :: !Bool
     , _isdadZone       :: !Text
@@ -67,7 +67,7 @@ data InstancesSetDiskAutoDelete' = InstancesSetDiskAutoDelete'
     , _isdadInstance   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesSetDiskAutoDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesSetDiskAutoDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,15 +80,15 @@ data InstancesSetDiskAutoDelete' = InstancesSetDiskAutoDelete'
 -- * 'isdadDeviceName'
 --
 -- * 'isdadInstance'
-instancesSetDiskAutoDelete'
+instancesSetDiskAutoDelete
     :: Text -- ^ 'isdadProject'
     -> Bool -- ^ 'isdadAutoDelete'
     -> Text -- ^ 'isdadZone'
     -> Text -- ^ 'isdadDeviceName'
     -> Text -- ^ 'isdadInstance'
-    -> InstancesSetDiskAutoDelete'
-instancesSetDiskAutoDelete' pIsdadProject_ pIsdadAutoDelete_ pIsdadZone_ pIsdadDeviceName_ pIsdadInstance_ =
-    InstancesSetDiskAutoDelete'
+    -> InstancesSetDiskAutoDelete
+instancesSetDiskAutoDelete pIsdadProject_ pIsdadAutoDelete_ pIsdadZone_ pIsdadDeviceName_ pIsdadInstance_ =
+    InstancesSetDiskAutoDelete
     { _isdadProject = pIsdadProject_
     , _isdadAutoDelete = pIsdadAutoDelete_
     , _isdadZone = pIsdadZone_
@@ -97,37 +97,37 @@ instancesSetDiskAutoDelete' pIsdadProject_ pIsdadAutoDelete_ pIsdadZone_ pIsdadD
     }
 
 -- | Project ID for this request.
-isdadProject :: Lens' InstancesSetDiskAutoDelete' Text
+isdadProject :: Lens' InstancesSetDiskAutoDelete Text
 isdadProject
   = lens _isdadProject (\ s a -> s{_isdadProject = a})
 
 -- | Whether to auto-delete the disk when the instance is deleted.
-isdadAutoDelete :: Lens' InstancesSetDiskAutoDelete' Bool
+isdadAutoDelete :: Lens' InstancesSetDiskAutoDelete Bool
 isdadAutoDelete
   = lens _isdadAutoDelete
       (\ s a -> s{_isdadAutoDelete = a})
 
 -- | The name of the zone for this request.
-isdadZone :: Lens' InstancesSetDiskAutoDelete' Text
+isdadZone :: Lens' InstancesSetDiskAutoDelete Text
 isdadZone
   = lens _isdadZone (\ s a -> s{_isdadZone = a})
 
 -- | The device name of the disk to modify.
-isdadDeviceName :: Lens' InstancesSetDiskAutoDelete' Text
+isdadDeviceName :: Lens' InstancesSetDiskAutoDelete Text
 isdadDeviceName
   = lens _isdadDeviceName
       (\ s a -> s{_isdadDeviceName = a})
 
 -- | The instance name.
-isdadInstance :: Lens' InstancesSetDiskAutoDelete' Text
+isdadInstance :: Lens' InstancesSetDiskAutoDelete Text
 isdadInstance
   = lens _isdadInstance
       (\ s a -> s{_isdadInstance = a})
 
-instance GoogleRequest InstancesSetDiskAutoDelete'
+instance GoogleRequest InstancesSetDiskAutoDelete
          where
-        type Rs InstancesSetDiskAutoDelete' = Operation
-        requestClient InstancesSetDiskAutoDelete'{..}
+        type Rs InstancesSetDiskAutoDelete = Operation
+        requestClient InstancesSetDiskAutoDelete{..}
           = go _isdadProject _isdadZone _isdadInstance
               (Just _isdadAutoDelete)
               (Just _isdadDeviceName)

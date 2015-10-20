@@ -29,19 +29,19 @@ module Network.Google.Resource.Games.TurnBasedMatches.Decline
       TurnBasedMatchesDeclineResource
 
     -- * Creating a Request
-    , turnBasedMatchesDecline'
-    , TurnBasedMatchesDecline'
+    , turnBasedMatchesDecline
+    , TurnBasedMatchesDecline
 
     -- * Request Lenses
-    , tLanguage
-    , tMatchId
+    , tbmdLanguage
+    , tbmdMatchId
     ) where
 
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.turnBasedMatches.decline@ method which the
--- 'TurnBasedMatchesDecline'' request conforms to.
+-- 'TurnBasedMatchesDecline' request conforms to.
 type TurnBasedMatchesDeclineResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
@@ -52,41 +52,43 @@ type TurnBasedMatchesDeclineResource =
 
 -- | Decline an invitation to play a turn-based match.
 --
--- /See:/ 'turnBasedMatchesDecline'' smart constructor.
-data TurnBasedMatchesDecline' = TurnBasedMatchesDecline'
-    { _tLanguage :: !(Maybe Text)
-    , _tMatchId  :: !Text
+-- /See:/ 'turnBasedMatchesDecline' smart constructor.
+data TurnBasedMatchesDecline = TurnBasedMatchesDecline
+    { _tbmdLanguage :: !(Maybe Text)
+    , _tbmdMatchId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TurnBasedMatchesDecline'' with the minimum fields required to make a request.
+-- | Creates a value of 'TurnBasedMatchesDecline' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tLanguage'
+-- * 'tbmdLanguage'
 --
--- * 'tMatchId'
-turnBasedMatchesDecline'
-    :: Text -- ^ 'tMatchId'
-    -> TurnBasedMatchesDecline'
-turnBasedMatchesDecline' pTMatchId_ =
-    TurnBasedMatchesDecline'
-    { _tLanguage = Nothing
-    , _tMatchId = pTMatchId_
+-- * 'tbmdMatchId'
+turnBasedMatchesDecline
+    :: Text -- ^ 'tbmdMatchId'
+    -> TurnBasedMatchesDecline
+turnBasedMatchesDecline pTbmdMatchId_ =
+    TurnBasedMatchesDecline
+    { _tbmdLanguage = Nothing
+    , _tbmdMatchId = pTbmdMatchId_
     }
 
 -- | The preferred language to use for strings returned by this method.
-tLanguage :: Lens' TurnBasedMatchesDecline' (Maybe Text)
-tLanguage
-  = lens _tLanguage (\ s a -> s{_tLanguage = a})
+tbmdLanguage :: Lens' TurnBasedMatchesDecline (Maybe Text)
+tbmdLanguage
+  = lens _tbmdLanguage (\ s a -> s{_tbmdLanguage = a})
 
 -- | The ID of the match.
-tMatchId :: Lens' TurnBasedMatchesDecline' Text
-tMatchId = lens _tMatchId (\ s a -> s{_tMatchId = a})
+tbmdMatchId :: Lens' TurnBasedMatchesDecline Text
+tbmdMatchId
+  = lens _tbmdMatchId (\ s a -> s{_tbmdMatchId = a})
 
-instance GoogleRequest TurnBasedMatchesDecline' where
-        type Rs TurnBasedMatchesDecline' = TurnBasedMatch
-        requestClient TurnBasedMatchesDecline'{..}
-          = go _tMatchId _tLanguage (Just AltJSON) gamesService
+instance GoogleRequest TurnBasedMatchesDecline where
+        type Rs TurnBasedMatchesDecline = TurnBasedMatch
+        requestClient TurnBasedMatchesDecline{..}
+          = go _tbmdMatchId _tbmdLanguage (Just AltJSON)
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy TurnBasedMatchesDeclineResource)

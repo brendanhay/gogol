@@ -29,18 +29,18 @@ module Network.Google.Resource.MapsEngine.Layers.Process
       LayersProcessResource
 
     -- * Creating a Request
-    , layersProcess'
-    , LayersProcess'
+    , layersProcess
+    , LayersProcess
 
     -- * Request Lenses
-    , lpId
+    , lpsId
     ) where
 
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.layers.process@ method which the
--- 'LayersProcess'' request conforms to.
+-- 'LayersProcess' request conforms to.
 type LayersProcessResource =
      "layers" :>
        Capture "id" Text :>
@@ -50,32 +50,32 @@ type LayersProcessResource =
 
 -- | Process a layer asset.
 --
--- /See:/ 'layersProcess'' smart constructor.
-newtype LayersProcess' = LayersProcess'
-    { _lpId :: Text
+-- /See:/ 'layersProcess' smart constructor.
+newtype LayersProcess = LayersProcess
+    { _lpsId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersProcess'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersProcess' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lpId'
-layersProcess'
-    :: Text -- ^ 'lpId'
-    -> LayersProcess'
-layersProcess' pLpId_ =
-    LayersProcess'
-    { _lpId = pLpId_
+-- * 'lpsId'
+layersProcess
+    :: Text -- ^ 'lpsId'
+    -> LayersProcess
+layersProcess pLpsId_ =
+    LayersProcess
+    { _lpsId = pLpsId_
     }
 
 -- | The ID of the layer.
-lpId :: Lens' LayersProcess' Text
-lpId = lens _lpId (\ s a -> s{_lpId = a})
+lpsId :: Lens' LayersProcess Text
+lpsId = lens _lpsId (\ s a -> s{_lpsId = a})
 
-instance GoogleRequest LayersProcess' where
-        type Rs LayersProcess' = ProcessResponse
-        requestClient LayersProcess'{..}
-          = go _lpId (Just AltJSON) mapsEngineService
+instance GoogleRequest LayersProcess where
+        type Rs LayersProcess = ProcessResponse
+        requestClient LayersProcess{..}
+          = go _lpsId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy LayersProcessResource)
                       mempty

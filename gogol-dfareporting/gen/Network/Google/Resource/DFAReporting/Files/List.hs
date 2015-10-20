@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Files.List
       FilesListResource
 
     -- * Creating a Request
-    , filesList'
-    , FilesList'
+    , filesList
+    , FilesList
 
     -- * Request Lenses
     , flProFileId
@@ -45,7 +45,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.files.list@ method which the
--- 'FilesList'' request conforms to.
+-- 'FilesList' request conforms to.
 type FilesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -59,8 +59,8 @@ type FilesListResource =
 
 -- | Lists files for a user profile.
 --
--- /See:/ 'filesList'' smart constructor.
-data FilesList' = FilesList'
+-- /See:/ 'filesList' smart constructor.
+data FilesList = FilesList
     { _flProFileId  :: !Int64
     , _flSortOrder  :: !FilesListSortOrder
     , _flScope      :: !FilesListScope
@@ -69,7 +69,7 @@ data FilesList' = FilesList'
     , _flMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FilesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'FilesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -84,11 +84,11 @@ data FilesList' = FilesList'
 -- * 'flSortField'
 --
 -- * 'flMaxResults'
-filesList'
+filesList
     :: Int64 -- ^ 'flProFileId'
-    -> FilesList'
-filesList' pFlProFileId_ =
-    FilesList'
+    -> FilesList
+filesList pFlProFileId_ =
+    FilesList
     { _flProFileId = pFlProFileId_
     , _flSortOrder = FLSODescending
     , _flScope = FLSMine
@@ -98,37 +98,37 @@ filesList' pFlProFileId_ =
     }
 
 -- | The DFA profile ID.
-flProFileId :: Lens' FilesList' Int64
+flProFileId :: Lens' FilesList Int64
 flProFileId
   = lens _flProFileId (\ s a -> s{_flProFileId = a})
 
 -- | Order of sorted results, default is \'DESCENDING\'.
-flSortOrder :: Lens' FilesList' FilesListSortOrder
+flSortOrder :: Lens' FilesList FilesListSortOrder
 flSortOrder
   = lens _flSortOrder (\ s a -> s{_flSortOrder = a})
 
 -- | The scope that defines which results are returned, default is \'MINE\'.
-flScope :: Lens' FilesList' FilesListScope
+flScope :: Lens' FilesList FilesListScope
 flScope = lens _flScope (\ s a -> s{_flScope = a})
 
 -- | The value of the nextToken from the previous result page.
-flPageToken :: Lens' FilesList' (Maybe Text)
+flPageToken :: Lens' FilesList (Maybe Text)
 flPageToken
   = lens _flPageToken (\ s a -> s{_flPageToken = a})
 
 -- | The field by which to sort the list.
-flSortField :: Lens' FilesList' FilesListSortField
+flSortField :: Lens' FilesList FilesListSortField
 flSortField
   = lens _flSortField (\ s a -> s{_flSortField = a})
 
 -- | Maximum number of results to return.
-flMaxResults :: Lens' FilesList' (Maybe Int32)
+flMaxResults :: Lens' FilesList (Maybe Int32)
 flMaxResults
   = lens _flMaxResults (\ s a -> s{_flMaxResults = a})
 
-instance GoogleRequest FilesList' where
-        type Rs FilesList' = FileList
-        requestClient FilesList'{..}
+instance GoogleRequest FilesList where
+        type Rs FilesList = FileList
+        requestClient FilesList{..}
           = go _flProFileId (Just _flSortOrder) (Just _flScope)
               _flPageToken
               (Just _flSortField)

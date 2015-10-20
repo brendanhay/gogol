@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.UnSampledReports.Insert
       ManagementUnSampledReportsInsertResource
 
     -- * Creating a Request
-    , managementUnSampledReportsInsert'
-    , ManagementUnSampledReportsInsert'
+    , managementUnSampledReportsInsert
+    , ManagementUnSampledReportsInsert
 
     -- * Request Lenses
     , musriWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.unsampledReports.insert@ method which the
--- 'ManagementUnSampledReportsInsert'' request conforms to.
+-- 'ManagementUnSampledReportsInsert' request conforms to.
 type ManagementUnSampledReportsInsertResource =
      "management" :>
        "accounts" :>
@@ -59,15 +59,15 @@ type ManagementUnSampledReportsInsertResource =
 
 -- | Create a new unsampled report.
 --
--- /See:/ 'managementUnSampledReportsInsert'' smart constructor.
-data ManagementUnSampledReportsInsert' = ManagementUnSampledReportsInsert'
+-- /See:/ 'managementUnSampledReportsInsert' smart constructor.
+data ManagementUnSampledReportsInsert = ManagementUnSampledReportsInsert
     { _musriWebPropertyId :: !Text
     , _musriProFileId     :: !Text
     , _musriPayload       :: !UnSampledReport
     , _musriAccountId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementUnSampledReportsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementUnSampledReportsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -78,14 +78,14 @@ data ManagementUnSampledReportsInsert' = ManagementUnSampledReportsInsert'
 -- * 'musriPayload'
 --
 -- * 'musriAccountId'
-managementUnSampledReportsInsert'
+managementUnSampledReportsInsert
     :: Text -- ^ 'musriWebPropertyId'
     -> Text -- ^ 'musriProFileId'
     -> UnSampledReport -- ^ 'musriPayload'
     -> Text -- ^ 'musriAccountId'
-    -> ManagementUnSampledReportsInsert'
-managementUnSampledReportsInsert' pMusriWebPropertyId_ pMusriProFileId_ pMusriPayload_ pMusriAccountId_ =
-    ManagementUnSampledReportsInsert'
+    -> ManagementUnSampledReportsInsert
+managementUnSampledReportsInsert pMusriWebPropertyId_ pMusriProFileId_ pMusriPayload_ pMusriAccountId_ =
+    ManagementUnSampledReportsInsert
     { _musriWebPropertyId = pMusriWebPropertyId_
     , _musriProFileId = pMusriProFileId_
     , _musriPayload = pMusriPayload_
@@ -93,33 +93,33 @@ managementUnSampledReportsInsert' pMusriWebPropertyId_ pMusriProFileId_ pMusriPa
     }
 
 -- | Web property ID to create the unsampled report for.
-musriWebPropertyId :: Lens' ManagementUnSampledReportsInsert' Text
+musriWebPropertyId :: Lens' ManagementUnSampledReportsInsert Text
 musriWebPropertyId
   = lens _musriWebPropertyId
       (\ s a -> s{_musriWebPropertyId = a})
 
 -- | View (Profile) ID to create the unsampled report for.
-musriProFileId :: Lens' ManagementUnSampledReportsInsert' Text
+musriProFileId :: Lens' ManagementUnSampledReportsInsert Text
 musriProFileId
   = lens _musriProFileId
       (\ s a -> s{_musriProFileId = a})
 
 -- | Multipart request metadata.
-musriPayload :: Lens' ManagementUnSampledReportsInsert' UnSampledReport
+musriPayload :: Lens' ManagementUnSampledReportsInsert UnSampledReport
 musriPayload
   = lens _musriPayload (\ s a -> s{_musriPayload = a})
 
 -- | Account ID to create the unsampled report for.
-musriAccountId :: Lens' ManagementUnSampledReportsInsert' Text
+musriAccountId :: Lens' ManagementUnSampledReportsInsert Text
 musriAccountId
   = lens _musriAccountId
       (\ s a -> s{_musriAccountId = a})
 
 instance GoogleRequest
-         ManagementUnSampledReportsInsert' where
-        type Rs ManagementUnSampledReportsInsert' =
+         ManagementUnSampledReportsInsert where
+        type Rs ManagementUnSampledReportsInsert =
              UnSampledReport
-        requestClient ManagementUnSampledReportsInsert'{..}
+        requestClient ManagementUnSampledReportsInsert{..}
           = go _musriAccountId _musriWebPropertyId
               _musriProFileId
               (Just AltJSON)

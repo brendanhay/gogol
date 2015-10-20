@@ -29,8 +29,8 @@ module Network.Google.Resource.Mirror.Timeline.Attachments.List
       TimelineAttachmentsListResource
 
     -- * Creating a Request
-    , timelineAttachmentsList'
-    , TimelineAttachmentsList'
+    , timelineAttachmentsList
+    , TimelineAttachmentsList
 
     -- * Request Lenses
     , talItemId
@@ -40,7 +40,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.timeline.attachments.list@ method which the
--- 'TimelineAttachmentsList'' request conforms to.
+-- 'TimelineAttachmentsList' request conforms to.
 type TimelineAttachmentsListResource =
      "timeline" :>
        Capture "itemId" Text :>
@@ -50,33 +50,33 @@ type TimelineAttachmentsListResource =
 
 -- | Returns a list of attachments for a timeline item.
 --
--- /See:/ 'timelineAttachmentsList'' smart constructor.
-newtype TimelineAttachmentsList' = TimelineAttachmentsList'
+-- /See:/ 'timelineAttachmentsList' smart constructor.
+newtype TimelineAttachmentsList = TimelineAttachmentsList
     { _talItemId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TimelineAttachmentsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TimelineAttachmentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'talItemId'
-timelineAttachmentsList'
+timelineAttachmentsList
     :: Text -- ^ 'talItemId'
-    -> TimelineAttachmentsList'
-timelineAttachmentsList' pTalItemId_ =
-    TimelineAttachmentsList'
+    -> TimelineAttachmentsList
+timelineAttachmentsList pTalItemId_ =
+    TimelineAttachmentsList
     { _talItemId = pTalItemId_
     }
 
 -- | The ID of the timeline item whose attachments should be listed.
-talItemId :: Lens' TimelineAttachmentsList' Text
+talItemId :: Lens' TimelineAttachmentsList Text
 talItemId
   = lens _talItemId (\ s a -> s{_talItemId = a})
 
-instance GoogleRequest TimelineAttachmentsList' where
-        type Rs TimelineAttachmentsList' =
+instance GoogleRequest TimelineAttachmentsList where
+        type Rs TimelineAttachmentsList =
              AttachmentsListResponse
-        requestClient TimelineAttachmentsList'{..}
+        requestClient TimelineAttachmentsList{..}
           = go _talItemId (Just AltJSON) mirrorService
           where go
                   = buildClient

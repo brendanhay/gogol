@@ -30,8 +30,8 @@ module Network.Google.Resource.Plus.Moments.Insert
       MomentsInsertResource
 
     -- * Creating a Request
-    , momentsInsert'
-    , MomentsInsert'
+    , momentsInsert
+    , MomentsInsert
 
     -- * Request Lenses
     , miCollection
@@ -44,7 +44,7 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plus.moments.insert@ method which the
--- 'MomentsInsert'' request conforms to.
+-- 'MomentsInsert' request conforms to.
 type MomentsInsertResource =
      "people" :>
        Capture "userId" Text :>
@@ -57,15 +57,15 @@ type MomentsInsertResource =
 -- | Record a moment representing a user\'s action such as making a purchase
 -- or commenting on a blog.
 --
--- /See:/ 'momentsInsert'' smart constructor.
-data MomentsInsert' = MomentsInsert'
+-- /See:/ 'momentsInsert' smart constructor.
+data MomentsInsert = MomentsInsert
     { _miCollection :: !MomentsInsertCollection
     , _miPayload    :: !Moment
     , _miDebug      :: !(Maybe Bool)
     , _miUserId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MomentsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'MomentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,13 +76,13 @@ data MomentsInsert' = MomentsInsert'
 -- * 'miDebug'
 --
 -- * 'miUserId'
-momentsInsert'
+momentsInsert
     :: MomentsInsertCollection -- ^ 'miCollection'
     -> Moment -- ^ 'miPayload'
     -> Text -- ^ 'miUserId'
-    -> MomentsInsert'
-momentsInsert' pMiCollection_ pMiPayload_ pMiUserId_ =
-    MomentsInsert'
+    -> MomentsInsert
+momentsInsert pMiCollection_ pMiPayload_ pMiUserId_ =
+    MomentsInsert
     { _miCollection = pMiCollection_
     , _miPayload = pMiPayload_
     , _miDebug = Nothing
@@ -90,27 +90,27 @@ momentsInsert' pMiCollection_ pMiPayload_ pMiUserId_ =
     }
 
 -- | The collection to which to write moments.
-miCollection :: Lens' MomentsInsert' MomentsInsertCollection
+miCollection :: Lens' MomentsInsert MomentsInsertCollection
 miCollection
   = lens _miCollection (\ s a -> s{_miCollection = a})
 
 -- | Multipart request metadata.
-miPayload :: Lens' MomentsInsert' Moment
+miPayload :: Lens' MomentsInsert Moment
 miPayload
   = lens _miPayload (\ s a -> s{_miPayload = a})
 
 -- | Return the moment as written. Should be used only for debugging.
-miDebug :: Lens' MomentsInsert' (Maybe Bool)
+miDebug :: Lens' MomentsInsert (Maybe Bool)
 miDebug = lens _miDebug (\ s a -> s{_miDebug = a})
 
 -- | The ID of the user to record actions for. The only valid values are
 -- \"me\" and the ID of the authenticated user.
-miUserId :: Lens' MomentsInsert' Text
+miUserId :: Lens' MomentsInsert Text
 miUserId = lens _miUserId (\ s a -> s{_miUserId = a})
 
-instance GoogleRequest MomentsInsert' where
-        type Rs MomentsInsert' = Moment
-        requestClient MomentsInsert'{..}
+instance GoogleRequest MomentsInsert where
+        type Rs MomentsInsert = Moment
+        requestClient MomentsInsert{..}
           = go _miUserId _miCollection _miDebug (Just AltJSON)
               _miPayload
               plusService

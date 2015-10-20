@@ -29,20 +29,20 @@ module Network.Google.Resource.PlusDomains.Circles.List
       CirclesListResource
 
     -- * Creating a Request
-    , circlesList'
-    , CirclesList'
+    , circlesList
+    , CirclesList
 
     -- * Request Lenses
-    , clUserId
-    , clPageToken
-    , clMaxResults
+    , cUserId
+    , cPageToken
+    , cMaxResults
     ) where
 
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plusDomains.circles.list@ method which the
--- 'CirclesList'' request conforms to.
+-- 'CirclesList' request conforms to.
 type CirclesListResource =
      "people" :>
        Capture "userId" Text :>
@@ -53,55 +53,55 @@ type CirclesListResource =
 
 -- | List all of the circles for a user.
 --
--- /See:/ 'circlesList'' smart constructor.
-data CirclesList' = CirclesList'
-    { _clUserId     :: !Text
-    , _clPageToken  :: !(Maybe Text)
-    , _clMaxResults :: !Word32
+-- /See:/ 'circlesList' smart constructor.
+data CirclesList = CirclesList
+    { _cUserId     :: !Text
+    , _cPageToken  :: !(Maybe Text)
+    , _cMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CirclesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CirclesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'clUserId'
+-- * 'cUserId'
 --
--- * 'clPageToken'
+-- * 'cPageToken'
 --
--- * 'clMaxResults'
-circlesList'
-    :: Text -- ^ 'clUserId'
-    -> CirclesList'
-circlesList' pClUserId_ =
-    CirclesList'
-    { _clUserId = pClUserId_
-    , _clPageToken = Nothing
-    , _clMaxResults = 20
+-- * 'cMaxResults'
+circlesList
+    :: Text -- ^ 'cUserId'
+    -> CirclesList
+circlesList pCUserId_ =
+    CirclesList
+    { _cUserId = pCUserId_
+    , _cPageToken = Nothing
+    , _cMaxResults = 20
     }
 
 -- | The ID of the user to get circles for. The special value \"me\" can be
 -- used to indicate the authenticated user.
-clUserId :: Lens' CirclesList' Text
-clUserId = lens _clUserId (\ s a -> s{_clUserId = a})
+cUserId :: Lens' CirclesList Text
+cUserId = lens _cUserId (\ s a -> s{_cUserId = a})
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
 -- \"nextPageToken\" from the previous response.
-clPageToken :: Lens' CirclesList' (Maybe Text)
-clPageToken
-  = lens _clPageToken (\ s a -> s{_clPageToken = a})
+cPageToken :: Lens' CirclesList (Maybe Text)
+cPageToken
+  = lens _cPageToken (\ s a -> s{_cPageToken = a})
 
 -- | The maximum number of circles to include in the response, which is used
 -- for paging. For any response, the actual number returned might be less
 -- than the specified maxResults.
-clMaxResults :: Lens' CirclesList' Word32
-clMaxResults
-  = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
+cMaxResults :: Lens' CirclesList Word32
+cMaxResults
+  = lens _cMaxResults (\ s a -> s{_cMaxResults = a})
 
-instance GoogleRequest CirclesList' where
-        type Rs CirclesList' = CircleFeed
-        requestClient CirclesList'{..}
-          = go _clUserId _clPageToken (Just _clMaxResults)
+instance GoogleRequest CirclesList where
+        type Rs CirclesList = CircleFeed
+        requestClient CirclesList{..}
+          = go _cUserId _cPageToken (Just _cMaxResults)
               (Just AltJSON)
               plusDomainsService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Delete
       ManagementProFileFilterLinksDeleteResource
 
     -- * Creating a Request
-    , managementProFileFilterLinksDelete'
-    , ManagementProFileFilterLinksDelete'
+    , managementProFileFilterLinksDelete
+    , ManagementProFileFilterLinksDelete
 
     -- * Request Lenses
     , mpffldWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profileFilterLinks.delete@ method which the
--- 'ManagementProFileFilterLinksDelete'' request conforms to.
+-- 'ManagementProFileFilterLinksDelete' request conforms to.
 type ManagementProFileFilterLinksDeleteResource =
      "management" :>
        "accounts" :>
@@ -58,15 +58,15 @@ type ManagementProFileFilterLinksDeleteResource =
 
 -- | Delete a profile filter link.
 --
--- /See:/ 'managementProFileFilterLinksDelete'' smart constructor.
-data ManagementProFileFilterLinksDelete' = ManagementProFileFilterLinksDelete'
+-- /See:/ 'managementProFileFilterLinksDelete' smart constructor.
+data ManagementProFileFilterLinksDelete = ManagementProFileFilterLinksDelete
     { _mpffldWebPropertyId :: !Text
     , _mpffldProFileId     :: !Text
     , _mpffldAccountId     :: !Text
     , _mpffldLinkId        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementProFileFilterLinksDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementProFileFilterLinksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data ManagementProFileFilterLinksDelete' = ManagementProFileFilterLinksDelete'
 -- * 'mpffldAccountId'
 --
 -- * 'mpffldLinkId'
-managementProFileFilterLinksDelete'
+managementProFileFilterLinksDelete
     :: Text -- ^ 'mpffldWebPropertyId'
     -> Text -- ^ 'mpffldProFileId'
     -> Text -- ^ 'mpffldAccountId'
     -> Text -- ^ 'mpffldLinkId'
-    -> ManagementProFileFilterLinksDelete'
-managementProFileFilterLinksDelete' pMpffldWebPropertyId_ pMpffldProFileId_ pMpffldAccountId_ pMpffldLinkId_ =
-    ManagementProFileFilterLinksDelete'
+    -> ManagementProFileFilterLinksDelete
+managementProFileFilterLinksDelete pMpffldWebPropertyId_ pMpffldProFileId_ pMpffldAccountId_ pMpffldLinkId_ =
+    ManagementProFileFilterLinksDelete
     { _mpffldWebPropertyId = pMpffldWebPropertyId_
     , _mpffldProFileId = pMpffldProFileId_
     , _mpffldAccountId = pMpffldAccountId_
@@ -92,32 +92,32 @@ managementProFileFilterLinksDelete' pMpffldWebPropertyId_ pMpffldProFileId_ pMpf
     }
 
 -- | Web property Id to which the profile filter link belongs.
-mpffldWebPropertyId :: Lens' ManagementProFileFilterLinksDelete' Text
+mpffldWebPropertyId :: Lens' ManagementProFileFilterLinksDelete Text
 mpffldWebPropertyId
   = lens _mpffldWebPropertyId
       (\ s a -> s{_mpffldWebPropertyId = a})
 
 -- | Profile ID to which the filter link belongs.
-mpffldProFileId :: Lens' ManagementProFileFilterLinksDelete' Text
+mpffldProFileId :: Lens' ManagementProFileFilterLinksDelete Text
 mpffldProFileId
   = lens _mpffldProFileId
       (\ s a -> s{_mpffldProFileId = a})
 
 -- | Account ID to which the profile filter link belongs.
-mpffldAccountId :: Lens' ManagementProFileFilterLinksDelete' Text
+mpffldAccountId :: Lens' ManagementProFileFilterLinksDelete Text
 mpffldAccountId
   = lens _mpffldAccountId
       (\ s a -> s{_mpffldAccountId = a})
 
 -- | ID of the profile filter link to delete.
-mpffldLinkId :: Lens' ManagementProFileFilterLinksDelete' Text
+mpffldLinkId :: Lens' ManagementProFileFilterLinksDelete Text
 mpffldLinkId
   = lens _mpffldLinkId (\ s a -> s{_mpffldLinkId = a})
 
 instance GoogleRequest
-         ManagementProFileFilterLinksDelete' where
-        type Rs ManagementProFileFilterLinksDelete' = ()
-        requestClient ManagementProFileFilterLinksDelete'{..}
+         ManagementProFileFilterLinksDelete where
+        type Rs ManagementProFileFilterLinksDelete = ()
+        requestClient ManagementProFileFilterLinksDelete{..}
           = go _mpffldAccountId _mpffldWebPropertyId
               _mpffldProFileId
               _mpffldLinkId

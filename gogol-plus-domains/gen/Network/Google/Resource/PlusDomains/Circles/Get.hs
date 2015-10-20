@@ -29,8 +29,8 @@ module Network.Google.Resource.PlusDomains.Circles.Get
       CirclesGetResource
 
     -- * Creating a Request
-    , circlesGet'
-    , CirclesGet'
+    , circlesGet
+    , CirclesGet
 
     -- * Request Lenses
     , cgCircleId
@@ -40,7 +40,7 @@ import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plusDomains.circles.get@ method which the
--- 'CirclesGet'' request conforms to.
+-- 'CirclesGet' request conforms to.
 type CirclesGetResource =
      "circles" :>
        Capture "circleId" Text :>
@@ -48,32 +48,32 @@ type CirclesGetResource =
 
 -- | Get a circle.
 --
--- /See:/ 'circlesGet'' smart constructor.
-newtype CirclesGet' = CirclesGet'
+-- /See:/ 'circlesGet' smart constructor.
+newtype CirclesGet = CirclesGet
     { _cgCircleId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CirclesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CirclesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cgCircleId'
-circlesGet'
+circlesGet
     :: Text -- ^ 'cgCircleId'
-    -> CirclesGet'
-circlesGet' pCgCircleId_ =
-    CirclesGet'
+    -> CirclesGet
+circlesGet pCgCircleId_ =
+    CirclesGet
     { _cgCircleId = pCgCircleId_
     }
 
 -- | The ID of the circle to get.
-cgCircleId :: Lens' CirclesGet' Text
+cgCircleId :: Lens' CirclesGet Text
 cgCircleId
   = lens _cgCircleId (\ s a -> s{_cgCircleId = a})
 
-instance GoogleRequest CirclesGet' where
-        type Rs CirclesGet' = Circle
-        requestClient CirclesGet'{..}
+instance GoogleRequest CirclesGet where
+        type Rs CirclesGet = Circle
+        requestClient CirclesGet{..}
           = go _cgCircleId (Just AltJSON) plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy CirclesGetResource)

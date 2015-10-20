@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.Threads.List
       UsersThreadsListResource
 
     -- * Creating a Request
-    , usersThreadsList'
-    , UsersThreadsList'
+    , usersThreadsList
+    , UsersThreadsList
 
     -- * Request Lenses
     , utlQ
@@ -45,7 +45,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.threads.list@ method which the
--- 'UsersThreadsList'' request conforms to.
+-- 'UsersThreadsList' request conforms to.
 type UsersThreadsListResource =
      Capture "userId" Text :>
        "threads" :>
@@ -59,8 +59,8 @@ type UsersThreadsListResource =
 
 -- | Lists the threads in the user\'s mailbox.
 --
--- /See:/ 'usersThreadsList'' smart constructor.
-data UsersThreadsList' = UsersThreadsList'
+-- /See:/ 'usersThreadsList' smart constructor.
+data UsersThreadsList = UsersThreadsList
     { _utlQ                :: !(Maybe Text)
     , _utlUserId           :: !Text
     , _utlIncludeSpamTrash :: !Bool
@@ -69,7 +69,7 @@ data UsersThreadsList' = UsersThreadsList'
     , _utlMaxResults       :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersThreadsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersThreadsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -84,11 +84,11 @@ data UsersThreadsList' = UsersThreadsList'
 -- * 'utlPageToken'
 --
 -- * 'utlMaxResults'
-usersThreadsList'
+usersThreadsList
     :: Text
-    -> UsersThreadsList'
-usersThreadsList' pUtlUserId_ =
-    UsersThreadsList'
+    -> UsersThreadsList
+usersThreadsList pUtlUserId_ =
+    UsersThreadsList
     { _utlQ = Nothing
     , _utlUserId = pUtlUserId_
     , _utlIncludeSpamTrash = False
@@ -100,43 +100,43 @@ usersThreadsList' pUtlUserId_ =
 -- | Only return threads matching the specified query. Supports the same
 -- query format as the Gmail search box. For example,
 -- \"from:someuser\'example.com rfc822msgid: is:unread\".
-utlQ :: Lens' UsersThreadsList' (Maybe Text)
+utlQ :: Lens' UsersThreadsList (Maybe Text)
 utlQ = lens _utlQ (\ s a -> s{_utlQ = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-utlUserId :: Lens' UsersThreadsList' Text
+utlUserId :: Lens' UsersThreadsList Text
 utlUserId
   = lens _utlUserId (\ s a -> s{_utlUserId = a})
 
 -- | Include threads from SPAM and TRASH in the results.
-utlIncludeSpamTrash :: Lens' UsersThreadsList' Bool
+utlIncludeSpamTrash :: Lens' UsersThreadsList Bool
 utlIncludeSpamTrash
   = lens _utlIncludeSpamTrash
       (\ s a -> s{_utlIncludeSpamTrash = a})
 
 -- | Only return threads with labels that match all of the specified label
 -- IDs.
-utlLabelIds :: Lens' UsersThreadsList' [Text]
+utlLabelIds :: Lens' UsersThreadsList [Text]
 utlLabelIds
   = lens _utlLabelIds (\ s a -> s{_utlLabelIds = a}) .
       _Default
       . _Coerce
 
 -- | Page token to retrieve a specific page of results in the list.
-utlPageToken :: Lens' UsersThreadsList' (Maybe Text)
+utlPageToken :: Lens' UsersThreadsList (Maybe Text)
 utlPageToken
   = lens _utlPageToken (\ s a -> s{_utlPageToken = a})
 
 -- | Maximum number of threads to return.
-utlMaxResults :: Lens' UsersThreadsList' Word32
+utlMaxResults :: Lens' UsersThreadsList Word32
 utlMaxResults
   = lens _utlMaxResults
       (\ s a -> s{_utlMaxResults = a})
 
-instance GoogleRequest UsersThreadsList' where
-        type Rs UsersThreadsList' = ListThreadsResponse
-        requestClient UsersThreadsList'{..}
+instance GoogleRequest UsersThreadsList where
+        type Rs UsersThreadsList = ListThreadsResponse
+        requestClient UsersThreadsList{..}
           = go _utlUserId _utlQ (Just _utlIncludeSpamTrash)
               (_utlLabelIds ^. _Default)
               _utlPageToken

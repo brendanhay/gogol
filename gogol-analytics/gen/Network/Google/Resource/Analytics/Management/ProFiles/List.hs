@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.ProFiles.List
       ManagementProFilesListResource
 
     -- * Creating a Request
-    , managementProFilesList'
-    , ManagementProFilesList'
+    , managementProFilesList
+    , ManagementProFilesList
 
     -- * Request Lenses
     , mpflWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profiles.list@ method which the
--- 'ManagementProFilesList'' request conforms to.
+-- 'ManagementProFilesList' request conforms to.
 type ManagementProFilesListResource =
      "management" :>
        "accounts" :>
@@ -57,15 +57,15 @@ type ManagementProFilesListResource =
 
 -- | Lists views (profiles) to which the user has access.
 --
--- /See:/ 'managementProFilesList'' smart constructor.
-data ManagementProFilesList' = ManagementProFilesList'
+-- /See:/ 'managementProFilesList' smart constructor.
+data ManagementProFilesList = ManagementProFilesList
     { _mpflWebPropertyId :: !Text
     , _mpflAccountId     :: !Text
     , _mpflStartIndex    :: !(Maybe Int32)
     , _mpflMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementProFilesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementProFilesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,12 +76,12 @@ data ManagementProFilesList' = ManagementProFilesList'
 -- * 'mpflStartIndex'
 --
 -- * 'mpflMaxResults'
-managementProFilesList'
+managementProFilesList
     :: Text -- ^ 'mpflWebPropertyId'
     -> Text -- ^ 'mpflAccountId'
-    -> ManagementProFilesList'
-managementProFilesList' pMpflWebPropertyId_ pMpflAccountId_ =
-    ManagementProFilesList'
+    -> ManagementProFilesList
+managementProFilesList pMpflWebPropertyId_ pMpflAccountId_ =
+    ManagementProFilesList
     { _mpflWebPropertyId = pMpflWebPropertyId_
     , _mpflAccountId = pMpflAccountId_
     , _mpflStartIndex = Nothing
@@ -91,7 +91,7 @@ managementProFilesList' pMpflWebPropertyId_ pMpflAccountId_ =
 -- | Web property ID for the views (profiles) to retrieve. Can either be a
 -- specific web property ID or \'~all\', which refers to all the web
 -- properties to which the user has access.
-mpflWebPropertyId :: Lens' ManagementProFilesList' Text
+mpflWebPropertyId :: Lens' ManagementProFilesList Text
 mpflWebPropertyId
   = lens _mpflWebPropertyId
       (\ s a -> s{_mpflWebPropertyId = a})
@@ -99,27 +99,27 @@ mpflWebPropertyId
 -- | Account ID for the view (profiles) to retrieve. Can either be a specific
 -- account ID or \'~all\', which refers to all the accounts to which the
 -- user has access.
-mpflAccountId :: Lens' ManagementProFilesList' Text
+mpflAccountId :: Lens' ManagementProFilesList Text
 mpflAccountId
   = lens _mpflAccountId
       (\ s a -> s{_mpflAccountId = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
-mpflStartIndex :: Lens' ManagementProFilesList' (Maybe Int32)
+mpflStartIndex :: Lens' ManagementProFilesList (Maybe Int32)
 mpflStartIndex
   = lens _mpflStartIndex
       (\ s a -> s{_mpflStartIndex = a})
 
 -- | The maximum number of views (profiles) to include in this response.
-mpflMaxResults :: Lens' ManagementProFilesList' (Maybe Int32)
+mpflMaxResults :: Lens' ManagementProFilesList (Maybe Int32)
 mpflMaxResults
   = lens _mpflMaxResults
       (\ s a -> s{_mpflMaxResults = a})
 
-instance GoogleRequest ManagementProFilesList' where
-        type Rs ManagementProFilesList' = ProFiles
-        requestClient ManagementProFilesList'{..}
+instance GoogleRequest ManagementProFilesList where
+        type Rs ManagementProFilesList = ProFiles
+        requestClient ManagementProFilesList{..}
           = go _mpflAccountId _mpflWebPropertyId
               _mpflStartIndex
               _mpflMaxResults

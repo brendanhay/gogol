@@ -29,8 +29,8 @@ module Network.Google.Resource.Autoscaler.ZoneOperations.Get
       ZoneOperationsGetResource
 
     -- * Creating a Request
-    , zoneOperationsGet'
-    , ZoneOperationsGet'
+    , zoneOperationsGet
+    , ZoneOperationsGet
 
     -- * Request Lenses
     , zogProject
@@ -42,7 +42,7 @@ import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @autoscaler.zoneOperations.get@ method which the
--- 'ZoneOperationsGet'' request conforms to.
+-- 'ZoneOperationsGet' request conforms to.
 type ZoneOperationsGetResource =
      Capture "project" Text :>
        "zones" :>
@@ -53,14 +53,14 @@ type ZoneOperationsGetResource =
 
 -- | Retrieves the specified zone-specific operation resource.
 --
--- /See:/ 'zoneOperationsGet'' smart constructor.
-data ZoneOperationsGet' = ZoneOperationsGet'
+-- /See:/ 'zoneOperationsGet' smart constructor.
+data ZoneOperationsGet = ZoneOperationsGet
     { _zogProject   :: !Text
     , _zogOperation :: !Text
     , _zogZone      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ZoneOperationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ZoneOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,32 +69,32 @@ data ZoneOperationsGet' = ZoneOperationsGet'
 -- * 'zogOperation'
 --
 -- * 'zogZone'
-zoneOperationsGet'
+zoneOperationsGet
     :: Text -- ^ 'zogProject'
     -> Text -- ^ 'zogOperation'
     -> Text -- ^ 'zogZone'
-    -> ZoneOperationsGet'
-zoneOperationsGet' pZogProject_ pZogOperation_ pZogZone_ =
-    ZoneOperationsGet'
+    -> ZoneOperationsGet
+zoneOperationsGet pZogProject_ pZogOperation_ pZogZone_ =
+    ZoneOperationsGet
     { _zogProject = pZogProject_
     , _zogOperation = pZogOperation_
     , _zogZone = pZogZone_
     }
 
-zogProject :: Lens' ZoneOperationsGet' Text
+zogProject :: Lens' ZoneOperationsGet Text
 zogProject
   = lens _zogProject (\ s a -> s{_zogProject = a})
 
-zogOperation :: Lens' ZoneOperationsGet' Text
+zogOperation :: Lens' ZoneOperationsGet Text
 zogOperation
   = lens _zogOperation (\ s a -> s{_zogOperation = a})
 
-zogZone :: Lens' ZoneOperationsGet' Text
+zogZone :: Lens' ZoneOperationsGet Text
 zogZone = lens _zogZone (\ s a -> s{_zogZone = a})
 
-instance GoogleRequest ZoneOperationsGet' where
-        type Rs ZoneOperationsGet' = Operation
-        requestClient ZoneOperationsGet'{..}
+instance GoogleRequest ZoneOperationsGet where
+        type Rs ZoneOperationsGet = Operation
+        requestClient ZoneOperationsGet{..}
           = go _zogProject _zogZone _zogOperation
               (Just AltJSON)
               autoscalerService

@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.EventTags.Get
       EventTagsGetResource
 
     -- * Creating a Request
-    , eventTagsGet'
-    , EventTagsGet'
+    , eventTagsGet
+    , EventTagsGet
 
     -- * Request Lenses
     , etgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.eventTags.get@ method which the
--- 'EventTagsGet'' request conforms to.
+-- 'EventTagsGet' request conforms to.
 type EventTagsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,41 +51,41 @@ type EventTagsGetResource =
 
 -- | Gets one event tag by ID.
 --
--- /See:/ 'eventTagsGet'' smart constructor.
-data EventTagsGet' = EventTagsGet'
+-- /See:/ 'eventTagsGet' smart constructor.
+data EventTagsGet = EventTagsGet
     { _etgProFileId :: !Int64
     , _etgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventTagsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventTagsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'etgProFileId'
 --
 -- * 'etgId'
-eventTagsGet'
+eventTagsGet
     :: Int64 -- ^ 'etgProFileId'
     -> Int64 -- ^ 'etgId'
-    -> EventTagsGet'
-eventTagsGet' pEtgProFileId_ pEtgId_ =
-    EventTagsGet'
+    -> EventTagsGet
+eventTagsGet pEtgProFileId_ pEtgId_ =
+    EventTagsGet
     { _etgProFileId = pEtgProFileId_
     , _etgId = pEtgId_
     }
 
 -- | User profile ID associated with this request.
-etgProFileId :: Lens' EventTagsGet' Int64
+etgProFileId :: Lens' EventTagsGet Int64
 etgProFileId
   = lens _etgProFileId (\ s a -> s{_etgProFileId = a})
 
 -- | Event tag ID.
-etgId :: Lens' EventTagsGet' Int64
+etgId :: Lens' EventTagsGet Int64
 etgId = lens _etgId (\ s a -> s{_etgId = a})
 
-instance GoogleRequest EventTagsGet' where
-        type Rs EventTagsGet' = EventTag
-        requestClient EventTagsGet'{..}
+instance GoogleRequest EventTagsGet where
+        type Rs EventTagsGet = EventTag
+        requestClient EventTagsGet{..}
           = go _etgProFileId _etgId (Just AltJSON)
               dFAReportingService
           where go

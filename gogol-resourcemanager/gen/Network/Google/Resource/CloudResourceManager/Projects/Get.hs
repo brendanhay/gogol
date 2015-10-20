@@ -31,8 +31,8 @@ module Network.Google.Resource.CloudResourceManager.Projects.Get
       ProjectsGetResource
 
     -- * Creating a Request
-    , projectsGet'
-    , ProjectsGet'
+    , projectsGet
+    , ProjectsGet
 
     -- * Request Lenses
     , pgXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.projects.get@ method which the
--- 'ProjectsGet'' request conforms to.
+-- 'ProjectsGet' request conforms to.
 type ProjectsGetResource =
      "v1beta1" :>
        "projects" :>
@@ -67,8 +67,8 @@ type ProjectsGetResource =
 -- example, \`my-project-123\`). The caller must have read permissions for
 -- this project.
 --
--- /See:/ 'projectsGet'' smart constructor.
-data ProjectsGet' = ProjectsGet'
+-- /See:/ 'projectsGet' smart constructor.
+data ProjectsGet = ProjectsGet
     { _pgXgafv          :: !(Maybe Text)
     , _pgUploadProtocol :: !(Maybe Text)
     , _pgPp             :: !Bool
@@ -79,7 +79,7 @@ data ProjectsGet' = ProjectsGet'
     , _pgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -98,11 +98,11 @@ data ProjectsGet' = ProjectsGet'
 -- * 'pgProjectId'
 --
 -- * 'pgCallback'
-projectsGet'
+projectsGet
     :: Text -- ^ 'pgProjectId'
-    -> ProjectsGet'
-projectsGet' pPgProjectId_ =
-    ProjectsGet'
+    -> ProjectsGet
+projectsGet pPgProjectId_ =
+    ProjectsGet
     { _pgXgafv = Nothing
     , _pgUploadProtocol = Nothing
     , _pgPp = True
@@ -114,49 +114,49 @@ projectsGet' pPgProjectId_ =
     }
 
 -- | V1 error format.
-pgXgafv :: Lens' ProjectsGet' (Maybe Text)
+pgXgafv :: Lens' ProjectsGet (Maybe Text)
 pgXgafv = lens _pgXgafv (\ s a -> s{_pgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pgUploadProtocol :: Lens' ProjectsGet' (Maybe Text)
+pgUploadProtocol :: Lens' ProjectsGet (Maybe Text)
 pgUploadProtocol
   = lens _pgUploadProtocol
       (\ s a -> s{_pgUploadProtocol = a})
 
 -- | Pretty-print response.
-pgPp :: Lens' ProjectsGet' Bool
+pgPp :: Lens' ProjectsGet Bool
 pgPp = lens _pgPp (\ s a -> s{_pgPp = a})
 
 -- | OAuth access token.
-pgAccessToken :: Lens' ProjectsGet' (Maybe Text)
+pgAccessToken :: Lens' ProjectsGet (Maybe Text)
 pgAccessToken
   = lens _pgAccessToken
       (\ s a -> s{_pgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pgUploadType :: Lens' ProjectsGet' (Maybe Text)
+pgUploadType :: Lens' ProjectsGet (Maybe Text)
 pgUploadType
   = lens _pgUploadType (\ s a -> s{_pgUploadType = a})
 
 -- | OAuth bearer token.
-pgBearerToken :: Lens' ProjectsGet' (Maybe Text)
+pgBearerToken :: Lens' ProjectsGet (Maybe Text)
 pgBearerToken
   = lens _pgBearerToken
       (\ s a -> s{_pgBearerToken = a})
 
 -- | The project ID (for example, \`my-project-123\`). Required.
-pgProjectId :: Lens' ProjectsGet' Text
+pgProjectId :: Lens' ProjectsGet Text
 pgProjectId
   = lens _pgProjectId (\ s a -> s{_pgProjectId = a})
 
 -- | JSONP
-pgCallback :: Lens' ProjectsGet' (Maybe Text)
+pgCallback :: Lens' ProjectsGet (Maybe Text)
 pgCallback
   = lens _pgCallback (\ s a -> s{_pgCallback = a})
 
-instance GoogleRequest ProjectsGet' where
-        type Rs ProjectsGet' = Project
-        requestClient ProjectsGet'{..}
+instance GoogleRequest ProjectsGet where
+        type Rs ProjectsGet = Project
+        requestClient ProjectsGet{..}
           = go _pgProjectId _pgXgafv _pgUploadProtocol
               (Just _pgPp)
               _pgAccessToken

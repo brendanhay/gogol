@@ -30,8 +30,8 @@ module Network.Google.Resource.Storage.Objects.Compose
       ObjectsComposeResource
 
     -- * Creating a Request
-    , objectsCompose'
-    , ObjectsCompose'
+    , objectsCompose
+    , ObjectsCompose
 
     -- * Request Lenses
     , oDestinationPredefinedACL
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.compose@ method which the
--- 'ObjectsCompose'' request conforms to.
+-- 'ObjectsCompose' request conforms to.
 type ObjectsComposeResource =
      "b" :>
        Capture "destinationBucket" Text :>
@@ -78,8 +78,8 @@ type ObjectsComposeResource =
 -- | Concatenates a list of existing objects into a new object in the same
 -- bucket.
 --
--- /See:/ 'objectsCompose'' smart constructor.
-data ObjectsCompose' = ObjectsCompose'
+-- /See:/ 'objectsCompose' smart constructor.
+data ObjectsCompose = ObjectsCompose
     { _oDestinationPredefinedACL :: !(Maybe ObjectsComposeDestinationPredefinedACL)
     , _oIfMetagenerationMatch    :: !(Maybe Int64)
     , _oIfGenerationMatch        :: !(Maybe Int64)
@@ -88,7 +88,7 @@ data ObjectsCompose' = ObjectsCompose'
     , _oDestinationObject        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ObjectsCompose'' with the minimum fields required to make a request.
+-- | Creates a value of 'ObjectsCompose' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -103,13 +103,13 @@ data ObjectsCompose' = ObjectsCompose'
 -- * 'oDestinationBucket'
 --
 -- * 'oDestinationObject'
-objectsCompose'
+objectsCompose
     :: ComposeRequest -- ^ 'oPayload'
     -> Text -- ^ 'oDestinationBucket'
     -> Text -- ^ 'oDestinationObject'
-    -> ObjectsCompose'
-objectsCompose' pOPayload_ pODestinationBucket_ pODestinationObject_ =
-    ObjectsCompose'
+    -> ObjectsCompose
+objectsCompose pOPayload_ pODestinationBucket_ pODestinationObject_ =
+    ObjectsCompose
     { _oDestinationPredefinedACL = Nothing
     , _oIfMetagenerationMatch = Nothing
     , _oIfGenerationMatch = Nothing
@@ -119,45 +119,45 @@ objectsCompose' pOPayload_ pODestinationBucket_ pODestinationObject_ =
     }
 
 -- | Apply a predefined set of access controls to the destination object.
-oDestinationPredefinedACL :: Lens' ObjectsCompose' (Maybe ObjectsComposeDestinationPredefinedACL)
+oDestinationPredefinedACL :: Lens' ObjectsCompose (Maybe ObjectsComposeDestinationPredefinedACL)
 oDestinationPredefinedACL
   = lens _oDestinationPredefinedACL
       (\ s a -> s{_oDestinationPredefinedACL = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.
-oIfMetagenerationMatch :: Lens' ObjectsCompose' (Maybe Int64)
+oIfMetagenerationMatch :: Lens' ObjectsCompose (Maybe Int64)
 oIfMetagenerationMatch
   = lens _oIfMetagenerationMatch
       (\ s a -> s{_oIfMetagenerationMatch = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation matches the given value.
-oIfGenerationMatch :: Lens' ObjectsCompose' (Maybe Int64)
+oIfGenerationMatch :: Lens' ObjectsCompose (Maybe Int64)
 oIfGenerationMatch
   = lens _oIfGenerationMatch
       (\ s a -> s{_oIfGenerationMatch = a})
 
 -- | Multipart request metadata.
-oPayload :: Lens' ObjectsCompose' ComposeRequest
+oPayload :: Lens' ObjectsCompose ComposeRequest
 oPayload = lens _oPayload (\ s a -> s{_oPayload = a})
 
 -- | Name of the bucket in which to store the new object.
-oDestinationBucket :: Lens' ObjectsCompose' Text
+oDestinationBucket :: Lens' ObjectsCompose Text
 oDestinationBucket
   = lens _oDestinationBucket
       (\ s a -> s{_oDestinationBucket = a})
 
 -- | Name of the new object. For information about how to URL encode object
 -- names to be path safe, see Encoding URI Path Parts.
-oDestinationObject :: Lens' ObjectsCompose' Text
+oDestinationObject :: Lens' ObjectsCompose Text
 oDestinationObject
   = lens _oDestinationObject
       (\ s a -> s{_oDestinationObject = a})
 
-instance GoogleRequest ObjectsCompose' where
-        type Rs ObjectsCompose' = Object
-        requestClient ObjectsCompose'{..}
+instance GoogleRequest ObjectsCompose where
+        type Rs ObjectsCompose = Object
+        requestClient ObjectsCompose{..}
           = go _oDestinationBucket _oDestinationObject
               _oDestinationPredefinedACL
               _oIfMetagenerationMatch
@@ -169,10 +169,10 @@ instance GoogleRequest ObjectsCompose' where
                   = buildClient (Proxy :: Proxy ObjectsComposeResource)
                       mempty
 
-instance GoogleRequest
-         (MediaDownload ObjectsCompose') where
-        type Rs (MediaDownload ObjectsCompose') = Stream
-        requestClient (MediaDownload ObjectsCompose'{..})
+instance GoogleRequest (MediaDownload ObjectsCompose)
+         where
+        type Rs (MediaDownload ObjectsCompose) = Stream
+        requestClient (MediaDownload ObjectsCompose{..})
           = go _oDestinationBucket _oDestinationObject
               _oDestinationPredefinedACL
               _oIfMetagenerationMatch

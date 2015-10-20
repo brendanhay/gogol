@@ -29,25 +29,25 @@ module Network.Google.Resource.Genomics.Readgroupsets.Get
       ReadgroupsetsGetResource
 
     -- * Creating a Request
-    , readgroupsetsGet'
-    , ReadgroupsetsGet'
+    , readgroupsetsGet
+    , ReadgroupsetsGet
 
     -- * Request Lenses
-    , rgXgafv
-    , rgReadGroupSetId
-    , rgUploadProtocol
-    , rgPp
-    , rgAccessToken
-    , rgUploadType
-    , rgBearerToken
-    , rgCallback
+    , rXgafv
+    , rReadGroupSetId
+    , rUploadProtocol
+    , rPp
+    , rAccessToken
+    , rUploadType
+    , rBearerToken
+    , rCallback
     ) where
 
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.readgroupsets.get@ method which the
--- 'ReadgroupsetsGet'' request conforms to.
+-- 'ReadgroupsetsGet' request conforms to.
 type ReadgroupsetsGetResource =
      "v1" :>
        "readgroupsets" :>
@@ -63,103 +63,101 @@ type ReadgroupsetsGetResource =
 
 -- | Gets a read group set by ID.
 --
--- /See:/ 'readgroupsetsGet'' smart constructor.
-data ReadgroupsetsGet' = ReadgroupsetsGet'
-    { _rgXgafv          :: !(Maybe Text)
-    , _rgReadGroupSetId :: !Text
-    , _rgUploadProtocol :: !(Maybe Text)
-    , _rgPp             :: !Bool
-    , _rgAccessToken    :: !(Maybe Text)
-    , _rgUploadType     :: !(Maybe Text)
-    , _rgBearerToken    :: !(Maybe Text)
-    , _rgCallback       :: !(Maybe Text)
+-- /See:/ 'readgroupsetsGet' smart constructor.
+data ReadgroupsetsGet = ReadgroupsetsGet
+    { _rXgafv          :: !(Maybe Text)
+    , _rReadGroupSetId :: !Text
+    , _rUploadProtocol :: !(Maybe Text)
+    , _rPp             :: !Bool
+    , _rAccessToken    :: !(Maybe Text)
+    , _rUploadType     :: !(Maybe Text)
+    , _rBearerToken    :: !(Maybe Text)
+    , _rCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReadgroupsetsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReadgroupsetsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rgXgafv'
+-- * 'rXgafv'
 --
--- * 'rgReadGroupSetId'
+-- * 'rReadGroupSetId'
 --
--- * 'rgUploadProtocol'
+-- * 'rUploadProtocol'
 --
--- * 'rgPp'
+-- * 'rPp'
 --
--- * 'rgAccessToken'
+-- * 'rAccessToken'
 --
--- * 'rgUploadType'
+-- * 'rUploadType'
 --
--- * 'rgBearerToken'
+-- * 'rBearerToken'
 --
--- * 'rgCallback'
-readgroupsetsGet'
-    :: Text -- ^ 'rgReadGroupSetId'
-    -> ReadgroupsetsGet'
-readgroupsetsGet' pRgReadGroupSetId_ =
-    ReadgroupsetsGet'
-    { _rgXgafv = Nothing
-    , _rgReadGroupSetId = pRgReadGroupSetId_
-    , _rgUploadProtocol = Nothing
-    , _rgPp = True
-    , _rgAccessToken = Nothing
-    , _rgUploadType = Nothing
-    , _rgBearerToken = Nothing
-    , _rgCallback = Nothing
+-- * 'rCallback'
+readgroupsetsGet
+    :: Text -- ^ 'rReadGroupSetId'
+    -> ReadgroupsetsGet
+readgroupsetsGet pRReadGroupSetId_ =
+    ReadgroupsetsGet
+    { _rXgafv = Nothing
+    , _rReadGroupSetId = pRReadGroupSetId_
+    , _rUploadProtocol = Nothing
+    , _rPp = True
+    , _rAccessToken = Nothing
+    , _rUploadType = Nothing
+    , _rBearerToken = Nothing
+    , _rCallback = Nothing
     }
 
 -- | V1 error format.
-rgXgafv :: Lens' ReadgroupsetsGet' (Maybe Text)
-rgXgafv = lens _rgXgafv (\ s a -> s{_rgXgafv = a})
+rXgafv :: Lens' ReadgroupsetsGet (Maybe Text)
+rXgafv = lens _rXgafv (\ s a -> s{_rXgafv = a})
 
 -- | The ID of the read group set.
-rgReadGroupSetId :: Lens' ReadgroupsetsGet' Text
-rgReadGroupSetId
-  = lens _rgReadGroupSetId
-      (\ s a -> s{_rgReadGroupSetId = a})
+rReadGroupSetId :: Lens' ReadgroupsetsGet Text
+rReadGroupSetId
+  = lens _rReadGroupSetId
+      (\ s a -> s{_rReadGroupSetId = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-rgUploadProtocol :: Lens' ReadgroupsetsGet' (Maybe Text)
-rgUploadProtocol
-  = lens _rgUploadProtocol
-      (\ s a -> s{_rgUploadProtocol = a})
+rUploadProtocol :: Lens' ReadgroupsetsGet (Maybe Text)
+rUploadProtocol
+  = lens _rUploadProtocol
+      (\ s a -> s{_rUploadProtocol = a})
 
 -- | Pretty-print response.
-rgPp :: Lens' ReadgroupsetsGet' Bool
-rgPp = lens _rgPp (\ s a -> s{_rgPp = a})
+rPp :: Lens' ReadgroupsetsGet Bool
+rPp = lens _rPp (\ s a -> s{_rPp = a})
 
 -- | OAuth access token.
-rgAccessToken :: Lens' ReadgroupsetsGet' (Maybe Text)
-rgAccessToken
-  = lens _rgAccessToken
-      (\ s a -> s{_rgAccessToken = a})
+rAccessToken :: Lens' ReadgroupsetsGet (Maybe Text)
+rAccessToken
+  = lens _rAccessToken (\ s a -> s{_rAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-rgUploadType :: Lens' ReadgroupsetsGet' (Maybe Text)
-rgUploadType
-  = lens _rgUploadType (\ s a -> s{_rgUploadType = a})
+rUploadType :: Lens' ReadgroupsetsGet (Maybe Text)
+rUploadType
+  = lens _rUploadType (\ s a -> s{_rUploadType = a})
 
 -- | OAuth bearer token.
-rgBearerToken :: Lens' ReadgroupsetsGet' (Maybe Text)
-rgBearerToken
-  = lens _rgBearerToken
-      (\ s a -> s{_rgBearerToken = a})
+rBearerToken :: Lens' ReadgroupsetsGet (Maybe Text)
+rBearerToken
+  = lens _rBearerToken (\ s a -> s{_rBearerToken = a})
 
 -- | JSONP
-rgCallback :: Lens' ReadgroupsetsGet' (Maybe Text)
-rgCallback
-  = lens _rgCallback (\ s a -> s{_rgCallback = a})
+rCallback :: Lens' ReadgroupsetsGet (Maybe Text)
+rCallback
+  = lens _rCallback (\ s a -> s{_rCallback = a})
 
-instance GoogleRequest ReadgroupsetsGet' where
-        type Rs ReadgroupsetsGet' = ReadGroupSet
-        requestClient ReadgroupsetsGet'{..}
-          = go _rgReadGroupSetId _rgXgafv _rgUploadProtocol
-              (Just _rgPp)
-              _rgAccessToken
-              _rgUploadType
-              _rgBearerToken
-              _rgCallback
+instance GoogleRequest ReadgroupsetsGet where
+        type Rs ReadgroupsetsGet = ReadGroupSet
+        requestClient ReadgroupsetsGet{..}
+          = go _rReadGroupSetId _rXgafv _rUploadProtocol
+              (Just _rPp)
+              _rAccessToken
+              _rUploadType
+              _rBearerToken
+              _rCallback
               (Just AltJSON)
               genomicsService
           where go

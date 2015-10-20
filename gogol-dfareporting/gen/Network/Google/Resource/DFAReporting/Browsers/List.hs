@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Browsers.List
       BrowsersListResource
 
     -- * Creating a Request
-    , browsersList'
-    , BrowsersList'
+    , browsersList
+    , BrowsersList
 
     -- * Request Lenses
     , blProFileId
@@ -40,7 +40,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.browsers.list@ method which the
--- 'BrowsersList'' request conforms to.
+-- 'BrowsersList' request conforms to.
 type BrowsersListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -50,32 +50,32 @@ type BrowsersListResource =
 
 -- | Retrieves a list of browsers.
 --
--- /See:/ 'browsersList'' smart constructor.
-newtype BrowsersList' = BrowsersList'
+-- /See:/ 'browsersList' smart constructor.
+newtype BrowsersList = BrowsersList
     { _blProFileId :: Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BrowsersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'BrowsersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'blProFileId'
-browsersList'
+browsersList
     :: Int64 -- ^ 'blProFileId'
-    -> BrowsersList'
-browsersList' pBlProFileId_ =
-    BrowsersList'
+    -> BrowsersList
+browsersList pBlProFileId_ =
+    BrowsersList
     { _blProFileId = pBlProFileId_
     }
 
 -- | User profile ID associated with this request.
-blProFileId :: Lens' BrowsersList' Int64
+blProFileId :: Lens' BrowsersList Int64
 blProFileId
   = lens _blProFileId (\ s a -> s{_blProFileId = a})
 
-instance GoogleRequest BrowsersList' where
-        type Rs BrowsersList' = BrowsersListResponse
-        requestClient BrowsersList'{..}
+instance GoogleRequest BrowsersList where
+        type Rs BrowsersList = BrowsersListResponse
+        requestClient BrowsersList{..}
           = go _blProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy BrowsersListResource)

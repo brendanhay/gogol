@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Update
       AccountsUpdateResource
 
     -- * Creating a Request
-    , accountsUpdate'
-    , AccountsUpdate'
+    , accountsUpdate
+    , AccountsUpdate
 
     -- * Request Lenses
     , auFingerprint
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.update@ method which the
--- 'AccountsUpdate'' request conforms to.
+-- 'AccountsUpdate' request conforms to.
 type AccountsUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -52,14 +52,14 @@ type AccountsUpdateResource =
 
 -- | Updates a GTM Account.
 --
--- /See:/ 'accountsUpdate'' smart constructor.
-data AccountsUpdate' = AccountsUpdate'
+-- /See:/ 'accountsUpdate' smart constructor.
+data AccountsUpdate = AccountsUpdate
     { _auFingerprint :: !(Maybe Text)
     , _auPayload     :: !Account
     , _auAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,12 +68,12 @@ data AccountsUpdate' = AccountsUpdate'
 -- * 'auPayload'
 --
 -- * 'auAccountId'
-accountsUpdate'
+accountsUpdate
     :: Account -- ^ 'auPayload'
     -> Text -- ^ 'auAccountId'
-    -> AccountsUpdate'
-accountsUpdate' pAuPayload_ pAuAccountId_ =
-    AccountsUpdate'
+    -> AccountsUpdate
+accountsUpdate pAuPayload_ pAuAccountId_ =
+    AccountsUpdate
     { _auFingerprint = Nothing
     , _auPayload = pAuPayload_
     , _auAccountId = pAuAccountId_
@@ -81,24 +81,24 @@ accountsUpdate' pAuPayload_ pAuAccountId_ =
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- account in storage.
-auFingerprint :: Lens' AccountsUpdate' (Maybe Text)
+auFingerprint :: Lens' AccountsUpdate (Maybe Text)
 auFingerprint
   = lens _auFingerprint
       (\ s a -> s{_auFingerprint = a})
 
 -- | Multipart request metadata.
-auPayload :: Lens' AccountsUpdate' Account
+auPayload :: Lens' AccountsUpdate Account
 auPayload
   = lens _auPayload (\ s a -> s{_auPayload = a})
 
 -- | The GTM Account ID.
-auAccountId :: Lens' AccountsUpdate' Text
+auAccountId :: Lens' AccountsUpdate Text
 auAccountId
   = lens _auAccountId (\ s a -> s{_auAccountId = a})
 
-instance GoogleRequest AccountsUpdate' where
-        type Rs AccountsUpdate' = Account
-        requestClient AccountsUpdate'{..}
+instance GoogleRequest AccountsUpdate where
+        type Rs AccountsUpdate = Account
+        requestClient AccountsUpdate{..}
           = go _auAccountId _auFingerprint (Just AltJSON)
               _auPayload
               tagManagerService

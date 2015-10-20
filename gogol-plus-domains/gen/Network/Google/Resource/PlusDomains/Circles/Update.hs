@@ -29,8 +29,8 @@ module Network.Google.Resource.PlusDomains.Circles.Update
       CirclesUpdateResource
 
     -- * Creating a Request
-    , circlesUpdate'
-    , CirclesUpdate'
+    , circlesUpdate
+    , CirclesUpdate
 
     -- * Request Lenses
     , cuPayload
@@ -41,7 +41,7 @@ import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plusDomains.circles.update@ method which the
--- 'CirclesUpdate'' request conforms to.
+-- 'CirclesUpdate' request conforms to.
 type CirclesUpdateResource =
      "circles" :>
        Capture "circleId" Text :>
@@ -50,42 +50,42 @@ type CirclesUpdateResource =
 
 -- | Update a circle\'s description.
 --
--- /See:/ 'circlesUpdate'' smart constructor.
-data CirclesUpdate' = CirclesUpdate'
+-- /See:/ 'circlesUpdate' smart constructor.
+data CirclesUpdate = CirclesUpdate
     { _cuPayload  :: !Circle
     , _cuCircleId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CirclesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CirclesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cuPayload'
 --
 -- * 'cuCircleId'
-circlesUpdate'
+circlesUpdate
     :: Circle -- ^ 'cuPayload'
     -> Text -- ^ 'cuCircleId'
-    -> CirclesUpdate'
-circlesUpdate' pCuPayload_ pCuCircleId_ =
-    CirclesUpdate'
+    -> CirclesUpdate
+circlesUpdate pCuPayload_ pCuCircleId_ =
+    CirclesUpdate
     { _cuPayload = pCuPayload_
     , _cuCircleId = pCuCircleId_
     }
 
 -- | Multipart request metadata.
-cuPayload :: Lens' CirclesUpdate' Circle
+cuPayload :: Lens' CirclesUpdate Circle
 cuPayload
   = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
 -- | The ID of the circle to update.
-cuCircleId :: Lens' CirclesUpdate' Text
+cuCircleId :: Lens' CirclesUpdate Text
 cuCircleId
   = lens _cuCircleId (\ s a -> s{_cuCircleId = a})
 
-instance GoogleRequest CirclesUpdate' where
-        type Rs CirclesUpdate' = Circle
-        requestClient CirclesUpdate'{..}
+instance GoogleRequest CirclesUpdate where
+        type Rs CirclesUpdate = Circle
+        requestClient CirclesUpdate{..}
           = go _cuCircleId (Just AltJSON) _cuPayload
               plusDomainsService
           where go

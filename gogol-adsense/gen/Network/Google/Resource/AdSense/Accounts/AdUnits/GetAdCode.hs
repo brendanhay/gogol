@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSense.Accounts.AdUnits.GetAdCode
       AccountsAdUnitsGetAdCodeResource
 
     -- * Creating a Request
-    , accountsAdUnitsGetAdCode'
-    , AccountsAdUnitsGetAdCode'
+    , accountsAdUnitsGetAdCode
+    , AccountsAdUnitsGetAdCode
 
     -- * Request Lenses
     , aaugacAdUnitId
@@ -42,7 +42,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.adunits.getAdCode@ method which the
--- 'AccountsAdUnitsGetAdCode'' request conforms to.
+-- 'AccountsAdUnitsGetAdCode' request conforms to.
 type AccountsAdUnitsGetAdCodeResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -55,14 +55,14 @@ type AccountsAdUnitsGetAdCodeResource =
 
 -- | Get ad code for the specified ad unit.
 --
--- /See:/ 'accountsAdUnitsGetAdCode'' smart constructor.
-data AccountsAdUnitsGetAdCode' = AccountsAdUnitsGetAdCode'
+-- /See:/ 'accountsAdUnitsGetAdCode' smart constructor.
+data AccountsAdUnitsGetAdCode = AccountsAdUnitsGetAdCode
     { _aaugacAdUnitId   :: !Text
     , _aaugacAdClientId :: !Text
     , _aaugacAccountId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsAdUnitsGetAdCode'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsAdUnitsGetAdCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,40 +71,39 @@ data AccountsAdUnitsGetAdCode' = AccountsAdUnitsGetAdCode'
 -- * 'aaugacAdClientId'
 --
 -- * 'aaugacAccountId'
-accountsAdUnitsGetAdCode'
+accountsAdUnitsGetAdCode
     :: Text -- ^ 'aaugacAdUnitId'
     -> Text -- ^ 'aaugacAdClientId'
     -> Text -- ^ 'aaugacAccountId'
-    -> AccountsAdUnitsGetAdCode'
-accountsAdUnitsGetAdCode' pAaugacAdUnitId_ pAaugacAdClientId_ pAaugacAccountId_ =
-    AccountsAdUnitsGetAdCode'
+    -> AccountsAdUnitsGetAdCode
+accountsAdUnitsGetAdCode pAaugacAdUnitId_ pAaugacAdClientId_ pAaugacAccountId_ =
+    AccountsAdUnitsGetAdCode
     { _aaugacAdUnitId = pAaugacAdUnitId_
     , _aaugacAdClientId = pAaugacAdClientId_
     , _aaugacAccountId = pAaugacAccountId_
     }
 
 -- | Ad unit to get the code for.
-aaugacAdUnitId :: Lens' AccountsAdUnitsGetAdCode' Text
+aaugacAdUnitId :: Lens' AccountsAdUnitsGetAdCode Text
 aaugacAdUnitId
   = lens _aaugacAdUnitId
       (\ s a -> s{_aaugacAdUnitId = a})
 
 -- | Ad client with contains the ad unit.
-aaugacAdClientId :: Lens' AccountsAdUnitsGetAdCode' Text
+aaugacAdClientId :: Lens' AccountsAdUnitsGetAdCode Text
 aaugacAdClientId
   = lens _aaugacAdClientId
       (\ s a -> s{_aaugacAdClientId = a})
 
 -- | Account which contains the ad client.
-aaugacAccountId :: Lens' AccountsAdUnitsGetAdCode' Text
+aaugacAccountId :: Lens' AccountsAdUnitsGetAdCode Text
 aaugacAccountId
   = lens _aaugacAccountId
       (\ s a -> s{_aaugacAccountId = a})
 
-instance GoogleRequest AccountsAdUnitsGetAdCode'
-         where
-        type Rs AccountsAdUnitsGetAdCode' = AdCode
-        requestClient AccountsAdUnitsGetAdCode'{..}
+instance GoogleRequest AccountsAdUnitsGetAdCode where
+        type Rs AccountsAdUnitsGetAdCode = AdCode
+        requestClient AccountsAdUnitsGetAdCode{..}
           = go _aaugacAccountId _aaugacAdClientId
               _aaugacAdUnitId
               (Just AltJSON)

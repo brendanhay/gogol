@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.AccountPermissionGroups.Get
       AccountPermissionGroupsGetResource
 
     -- * Creating a Request
-    , accountPermissionGroupsGet'
-    , AccountPermissionGroupsGet'
+    , accountPermissionGroupsGet
+    , AccountPermissionGroupsGet
 
     -- * Request Lenses
     , apggProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accountPermissionGroups.get@ method which the
--- 'AccountPermissionGroupsGet'' request conforms to.
+-- 'AccountPermissionGroupsGet' request conforms to.
 type AccountPermissionGroupsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,44 +52,44 @@ type AccountPermissionGroupsGetResource =
 
 -- | Gets one account permission group by ID.
 --
--- /See:/ 'accountPermissionGroupsGet'' smart constructor.
-data AccountPermissionGroupsGet' = AccountPermissionGroupsGet'
+-- /See:/ 'accountPermissionGroupsGet' smart constructor.
+data AccountPermissionGroupsGet = AccountPermissionGroupsGet
     { _apggProFileId :: !Int64
     , _apggId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountPermissionGroupsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountPermissionGroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'apggProFileId'
 --
 -- * 'apggId'
-accountPermissionGroupsGet'
+accountPermissionGroupsGet
     :: Int64 -- ^ 'apggProFileId'
     -> Int64 -- ^ 'apggId'
-    -> AccountPermissionGroupsGet'
-accountPermissionGroupsGet' pApggProFileId_ pApggId_ =
-    AccountPermissionGroupsGet'
+    -> AccountPermissionGroupsGet
+accountPermissionGroupsGet pApggProFileId_ pApggId_ =
+    AccountPermissionGroupsGet
     { _apggProFileId = pApggProFileId_
     , _apggId = pApggId_
     }
 
 -- | User profile ID associated with this request.
-apggProFileId :: Lens' AccountPermissionGroupsGet' Int64
+apggProFileId :: Lens' AccountPermissionGroupsGet Int64
 apggProFileId
   = lens _apggProFileId
       (\ s a -> s{_apggProFileId = a})
 
 -- | Account permission group ID.
-apggId :: Lens' AccountPermissionGroupsGet' Int64
+apggId :: Lens' AccountPermissionGroupsGet Int64
 apggId = lens _apggId (\ s a -> s{_apggId = a})
 
-instance GoogleRequest AccountPermissionGroupsGet'
+instance GoogleRequest AccountPermissionGroupsGet
          where
-        type Rs AccountPermissionGroupsGet' =
+        type Rs AccountPermissionGroupsGet =
              AccountPermissionGroup
-        requestClient AccountPermissionGroupsGet'{..}
+        requestClient AccountPermissionGroupsGet{..}
           = go _apggProFileId _apggId (Just AltJSON)
               dFAReportingService
           where go

@@ -31,8 +31,8 @@ module Network.Google.Resource.Tasks.Tasks.Move
       TasksMoveResource
 
     -- * Creating a Request
-    , tasksMove'
-    , TasksMove'
+    , tasksMove
+    , TasksMove
 
     -- * Request Lenses
     , tmParent
@@ -45,7 +45,7 @@ import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasks.move@ method which the
--- 'TasksMove'' request conforms to.
+-- 'TasksMove' request conforms to.
 type TasksMoveResource =
      "lists" :>
        Capture "tasklist" Text :>
@@ -60,15 +60,15 @@ type TasksMoveResource =
 -- include putting it as a child task under a new parent and\/or move it to
 -- a different position among its sibling tasks.
 --
--- /See:/ 'tasksMove'' smart constructor.
-data TasksMove' = TasksMove'
+-- /See:/ 'tasksMove' smart constructor.
+data TasksMove = TasksMove
     { _tmParent   :: !(Maybe Text)
     , _tmTaskList :: !Text
     , _tmTask     :: !Text
     , _tmPrevious :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TasksMove'' with the minimum fields required to make a request.
+-- | Creates a value of 'TasksMove' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,12 +79,12 @@ data TasksMove' = TasksMove'
 -- * 'tmTask'
 --
 -- * 'tmPrevious'
-tasksMove'
+tasksMove
     :: Text -- ^ 'tmTaskList'
     -> Text -- ^ 'tmTask'
-    -> TasksMove'
-tasksMove' pTmTaskList_ pTmTask_ =
-    TasksMove'
+    -> TasksMove
+tasksMove pTmTaskList_ pTmTask_ =
+    TasksMove
     { _tmParent = Nothing
     , _tmTaskList = pTmTaskList_
     , _tmTask = pTmTask_
@@ -93,27 +93,27 @@ tasksMove' pTmTaskList_ pTmTask_ =
 
 -- | New parent task identifier. If the task is moved to the top level, this
 -- parameter is omitted. Optional.
-tmParent :: Lens' TasksMove' (Maybe Text)
+tmParent :: Lens' TasksMove (Maybe Text)
 tmParent = lens _tmParent (\ s a -> s{_tmParent = a})
 
 -- | Task list identifier.
-tmTaskList :: Lens' TasksMove' Text
+tmTaskList :: Lens' TasksMove Text
 tmTaskList
   = lens _tmTaskList (\ s a -> s{_tmTaskList = a})
 
 -- | Task identifier.
-tmTask :: Lens' TasksMove' Text
+tmTask :: Lens' TasksMove Text
 tmTask = lens _tmTask (\ s a -> s{_tmTask = a})
 
 -- | New previous sibling task identifier. If the task is moved to the first
 -- position among its siblings, this parameter is omitted. Optional.
-tmPrevious :: Lens' TasksMove' (Maybe Text)
+tmPrevious :: Lens' TasksMove (Maybe Text)
 tmPrevious
   = lens _tmPrevious (\ s a -> s{_tmPrevious = a})
 
-instance GoogleRequest TasksMove' where
-        type Rs TasksMove' = Task
-        requestClient TasksMove'{..}
+instance GoogleRequest TasksMove where
+        type Rs TasksMove = Task
+        requestClient TasksMove{..}
           = go _tmTaskList _tmTask _tmParent _tmPrevious
               (Just AltJSON)
               appsTasksService

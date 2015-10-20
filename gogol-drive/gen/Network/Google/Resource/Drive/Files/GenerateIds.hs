@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Files.GenerateIds
       FilesGenerateIdsResource
 
     -- * Creating a Request
-    , filesGenerateIds'
-    , FilesGenerateIds'
+    , filesGenerateIds
+    , FilesGenerateIds
 
     -- * Request Lenses
     , fgiSpace
@@ -41,7 +41,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.files.generateIds@ method which the
--- 'FilesGenerateIds'' request conforms to.
+-- 'FilesGenerateIds' request conforms to.
 type FilesGenerateIdsResource =
      "files" :>
        "generateIds" :>
@@ -51,41 +51,41 @@ type FilesGenerateIdsResource =
 
 -- | Generates a set of file IDs which can be provided in insert requests.
 --
--- /See:/ 'filesGenerateIds'' smart constructor.
-data FilesGenerateIds' = FilesGenerateIds'
+-- /See:/ 'filesGenerateIds' smart constructor.
+data FilesGenerateIds = FilesGenerateIds
     { _fgiSpace      :: !Text
     , _fgiMaxResults :: !Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FilesGenerateIds'' with the minimum fields required to make a request.
+-- | Creates a value of 'FilesGenerateIds' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fgiSpace'
 --
 -- * 'fgiMaxResults'
-filesGenerateIds'
-    :: FilesGenerateIds'
-filesGenerateIds' =
-    FilesGenerateIds'
+filesGenerateIds
+    :: FilesGenerateIds
+filesGenerateIds =
+    FilesGenerateIds
     { _fgiSpace = "drive"
     , _fgiMaxResults = 10
     }
 
 -- | The space in which the IDs can be used to create new files. Supported
 -- values are \'drive\' and \'appDataFolder\'.
-fgiSpace :: Lens' FilesGenerateIds' Text
+fgiSpace :: Lens' FilesGenerateIds Text
 fgiSpace = lens _fgiSpace (\ s a -> s{_fgiSpace = a})
 
 -- | Maximum number of IDs to return.
-fgiMaxResults :: Lens' FilesGenerateIds' Int32
+fgiMaxResults :: Lens' FilesGenerateIds Int32
 fgiMaxResults
   = lens _fgiMaxResults
       (\ s a -> s{_fgiMaxResults = a})
 
-instance GoogleRequest FilesGenerateIds' where
-        type Rs FilesGenerateIds' = GeneratedIds
-        requestClient FilesGenerateIds'{..}
+instance GoogleRequest FilesGenerateIds where
+        type Rs FilesGenerateIds = GeneratedIds
+        requestClient FilesGenerateIds{..}
           = go (Just _fgiSpace) (Just _fgiMaxResults)
               (Just AltJSON)
               driveService

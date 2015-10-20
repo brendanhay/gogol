@@ -30,8 +30,8 @@ module Network.Google.Resource.Storage.Objects.Rewrite
       ObjectsRewriteResource
 
     -- * Creating a Request
-    , objectsRewrite'
-    , ObjectsRewrite'
+    , objectsRewrite
+    , ObjectsRewrite
 
     -- * Request Lenses
     , orDestinationPredefinedACL
@@ -58,7 +58,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.rewrite@ method which the
--- 'ObjectsRewrite'' request conforms to.
+-- 'ObjectsRewrite' request conforms to.
 type ObjectsRewriteResource =
      "b" :>
        Capture "sourceBucket" Text :>
@@ -102,8 +102,8 @@ type ObjectsRewriteResource =
 -- | Rewrites a source object to a destination object. Optionally overrides
 -- metadata.
 --
--- /See:/ 'objectsRewrite'' smart constructor.
-data ObjectsRewrite' = ObjectsRewrite'
+-- /See:/ 'objectsRewrite' smart constructor.
+data ObjectsRewrite = ObjectsRewrite
     { _orDestinationPredefinedACL       :: !(Maybe ObjectsRewriteDestinationPredefinedACL)
     , _orIfSourceGenerationMatch        :: !(Maybe Int64)
     , _orIfMetagenerationMatch          :: !(Maybe Int64)
@@ -124,7 +124,7 @@ data ObjectsRewrite' = ObjectsRewrite'
     , _orDestinationObject              :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ObjectsRewrite'' with the minimum fields required to make a request.
+-- | Creates a value of 'ObjectsRewrite' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -163,15 +163,15 @@ data ObjectsRewrite' = ObjectsRewrite'
 -- * 'orRewriteToken'
 --
 -- * 'orDestinationObject'
-objectsRewrite'
+objectsRewrite
     :: Text -- ^ 'orSourceObject'
     -> Text -- ^ 'orSourceBucket'
     -> Object -- ^ 'orPayload'
     -> Text -- ^ 'orDestinationBucket'
     -> Text -- ^ 'orDestinationObject'
-    -> ObjectsRewrite'
-objectsRewrite' pOrSourceObject_ pOrSourceBucket_ pOrPayload_ pOrDestinationBucket_ pOrDestinationObject_ =
-    ObjectsRewrite'
+    -> ObjectsRewrite
+objectsRewrite pOrSourceObject_ pOrSourceBucket_ pOrPayload_ pOrDestinationBucket_ pOrDestinationObject_ =
+    ObjectsRewrite
     { _orDestinationPredefinedACL = Nothing
     , _orIfSourceGenerationMatch = Nothing
     , _orIfMetagenerationMatch = Nothing
@@ -193,56 +193,56 @@ objectsRewrite' pOrSourceObject_ pOrSourceBucket_ pOrPayload_ pOrDestinationBuck
     }
 
 -- | Apply a predefined set of access controls to the destination object.
-orDestinationPredefinedACL :: Lens' ObjectsRewrite' (Maybe ObjectsRewriteDestinationPredefinedACL)
+orDestinationPredefinedACL :: Lens' ObjectsRewrite (Maybe ObjectsRewriteDestinationPredefinedACL)
 orDestinationPredefinedACL
   = lens _orDestinationPredefinedACL
       (\ s a -> s{_orDestinationPredefinedACL = a})
 
 -- | Makes the operation conditional on whether the source object\'s
 -- generation matches the given value.
-orIfSourceGenerationMatch :: Lens' ObjectsRewrite' (Maybe Int64)
+orIfSourceGenerationMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfSourceGenerationMatch
   = lens _orIfSourceGenerationMatch
       (\ s a -> s{_orIfSourceGenerationMatch = a})
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current metageneration matches the given value.
-orIfMetagenerationMatch :: Lens' ObjectsRewrite' (Maybe Int64)
+orIfMetagenerationMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfMetagenerationMatch
   = lens _orIfMetagenerationMatch
       (\ s a -> s{_orIfMetagenerationMatch = a})
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current generation does not match the given value.
-orIfGenerationNotMatch :: Lens' ObjectsRewrite' (Maybe Int64)
+orIfGenerationNotMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfGenerationNotMatch
   = lens _orIfGenerationNotMatch
       (\ s a -> s{_orIfGenerationNotMatch = a})
 
 -- | Makes the operation conditional on whether the source object\'s current
 -- metageneration does not match the given value.
-orIfSourceMetagenerationNotMatch :: Lens' ObjectsRewrite' (Maybe Int64)
+orIfSourceMetagenerationNotMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfSourceMetagenerationNotMatch
   = lens _orIfSourceMetagenerationNotMatch
       (\ s a -> s{_orIfSourceMetagenerationNotMatch = a})
 
 -- | Makes the operation conditional on whether the source object\'s current
 -- metageneration matches the given value.
-orIfSourceMetagenerationMatch :: Lens' ObjectsRewrite' (Maybe Int64)
+orIfSourceMetagenerationMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfSourceMetagenerationMatch
   = lens _orIfSourceMetagenerationMatch
       (\ s a -> s{_orIfSourceMetagenerationMatch = a})
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current generation matches the given value.
-orIfGenerationMatch :: Lens' ObjectsRewrite' (Maybe Int64)
+orIfGenerationMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfGenerationMatch
   = lens _orIfGenerationMatch
       (\ s a -> s{_orIfGenerationMatch = a})
 
 -- | Name of the source object. For information about how to URL encode
 -- object names to be path safe, see Encoding URI Path Parts.
-orSourceObject :: Lens' ObjectsRewrite' Text
+orSourceObject :: Lens' ObjectsRewrite Text
 orSourceObject
   = lens _orSourceObject
       (\ s a -> s{_orSourceObject = a})
@@ -254,52 +254,52 @@ orSourceObject
 -- the source and destination span locations and\/or storage classes.
 -- Finally, this value must not change across rewrite calls else you\'ll
 -- get an error that the rewriteToken is invalid.
-orMaxBytesRewrittenPerCall :: Lens' ObjectsRewrite' (Maybe Int64)
+orMaxBytesRewrittenPerCall :: Lens' ObjectsRewrite (Maybe Int64)
 orMaxBytesRewrittenPerCall
   = lens _orMaxBytesRewrittenPerCall
       (\ s a -> s{_orMaxBytesRewrittenPerCall = a})
 
 -- | Name of the bucket in which to find the source object.
-orSourceBucket :: Lens' ObjectsRewrite' Text
+orSourceBucket :: Lens' ObjectsRewrite Text
 orSourceBucket
   = lens _orSourceBucket
       (\ s a -> s{_orSourceBucket = a})
 
 -- | Multipart request metadata.
-orPayload :: Lens' ObjectsRewrite' Object
+orPayload :: Lens' ObjectsRewrite Object
 orPayload
   = lens _orPayload (\ s a -> s{_orPayload = a})
 
 -- | Name of the bucket in which to store the new object. Overrides the
 -- provided object metadata\'s bucket value, if any.
-orDestinationBucket :: Lens' ObjectsRewrite' Text
+orDestinationBucket :: Lens' ObjectsRewrite Text
 orDestinationBucket
   = lens _orDestinationBucket
       (\ s a -> s{_orDestinationBucket = a})
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current metageneration does not match the given value.
-orIfMetagenerationNotMatch :: Lens' ObjectsRewrite' (Maybe Int64)
+orIfMetagenerationNotMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfMetagenerationNotMatch
   = lens _orIfMetagenerationNotMatch
       (\ s a -> s{_orIfMetagenerationNotMatch = a})
 
 -- | Makes the operation conditional on whether the source object\'s
 -- generation does not match the given value.
-orIfSourceGenerationNotMatch :: Lens' ObjectsRewrite' (Maybe Int64)
+orIfSourceGenerationNotMatch :: Lens' ObjectsRewrite (Maybe Int64)
 orIfSourceGenerationNotMatch
   = lens _orIfSourceGenerationNotMatch
       (\ s a -> s{_orIfSourceGenerationNotMatch = a})
 
 -- | Set of properties to return. Defaults to noAcl, unless the object
 -- resource specifies the acl property, when it defaults to full.
-orProjection :: Lens' ObjectsRewrite' (Maybe ObjectsRewriteProjection)
+orProjection :: Lens' ObjectsRewrite (Maybe ObjectsRewriteProjection)
 orProjection
   = lens _orProjection (\ s a -> s{_orProjection = a})
 
 -- | If present, selects a specific revision of the source object (as opposed
 -- to the latest version, the default).
-orSourceGeneration :: Lens' ObjectsRewrite' (Maybe Int64)
+orSourceGeneration :: Lens' ObjectsRewrite (Maybe Int64)
 orSourceGeneration
   = lens _orSourceGeneration
       (\ s a -> s{_orSourceGeneration = a})
@@ -309,7 +309,7 @@ orSourceGeneration
 -- true. Calls that provide a rewriteToken can omit all other request
 -- fields, but if included those fields must match the values provided in
 -- the first rewrite request.
-orRewriteToken :: Lens' ObjectsRewrite' (Maybe Text)
+orRewriteToken :: Lens' ObjectsRewrite (Maybe Text)
 orRewriteToken
   = lens _orRewriteToken
       (\ s a -> s{_orRewriteToken = a})
@@ -318,14 +318,14 @@ orRewriteToken
 -- otherwise provided. Overrides the object metadata\'s name value, if any.
 -- For information about how to URL encode object names to be path safe,
 -- see Encoding URI Path Parts.
-orDestinationObject :: Lens' ObjectsRewrite' Text
+orDestinationObject :: Lens' ObjectsRewrite Text
 orDestinationObject
   = lens _orDestinationObject
       (\ s a -> s{_orDestinationObject = a})
 
-instance GoogleRequest ObjectsRewrite' where
-        type Rs ObjectsRewrite' = RewriteResponse
-        requestClient ObjectsRewrite'{..}
+instance GoogleRequest ObjectsRewrite where
+        type Rs ObjectsRewrite = RewriteResponse
+        requestClient ObjectsRewrite{..}
           = go _orSourceBucket _orSourceObject
               _orDestinationBucket
               _orDestinationObject

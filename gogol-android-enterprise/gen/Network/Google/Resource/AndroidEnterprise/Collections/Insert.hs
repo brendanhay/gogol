@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidEnterprise.Collections.Insert
       CollectionsInsertResource
 
     -- * Creating a Request
-    , collectionsInsert'
-    , CollectionsInsert'
+    , collectionsInsert
+    , CollectionsInsert
 
     -- * Request Lenses
     , ciEnterpriseId
@@ -41,7 +41,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.collections.insert@ method which the
--- 'CollectionsInsert'' request conforms to.
+-- 'CollectionsInsert' request conforms to.
 type CollectionsInsertResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -51,43 +51,43 @@ type CollectionsInsertResource =
 
 -- | Creates a new collection.
 --
--- /See:/ 'collectionsInsert'' smart constructor.
-data CollectionsInsert' = CollectionsInsert'
+-- /See:/ 'collectionsInsert' smart constructor.
+data CollectionsInsert = CollectionsInsert
     { _ciEnterpriseId :: !Text
     , _ciPayload      :: !Collection
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CollectionsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CollectionsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ciEnterpriseId'
 --
 -- * 'ciPayload'
-collectionsInsert'
+collectionsInsert
     :: Text -- ^ 'ciEnterpriseId'
     -> Collection -- ^ 'ciPayload'
-    -> CollectionsInsert'
-collectionsInsert' pCiEnterpriseId_ pCiPayload_ =
-    CollectionsInsert'
+    -> CollectionsInsert
+collectionsInsert pCiEnterpriseId_ pCiPayload_ =
+    CollectionsInsert
     { _ciEnterpriseId = pCiEnterpriseId_
     , _ciPayload = pCiPayload_
     }
 
 -- | The ID of the enterprise.
-ciEnterpriseId :: Lens' CollectionsInsert' Text
+ciEnterpriseId :: Lens' CollectionsInsert Text
 ciEnterpriseId
   = lens _ciEnterpriseId
       (\ s a -> s{_ciEnterpriseId = a})
 
 -- | Multipart request metadata.
-ciPayload :: Lens' CollectionsInsert' Collection
+ciPayload :: Lens' CollectionsInsert Collection
 ciPayload
   = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
-instance GoogleRequest CollectionsInsert' where
-        type Rs CollectionsInsert' = Collection
-        requestClient CollectionsInsert'{..}
+instance GoogleRequest CollectionsInsert where
+        type Rs CollectionsInsert = Collection
+        requestClient CollectionsInsert{..}
           = go _ciEnterpriseId (Just AltJSON) _ciPayload
               androidEnterpriseService
           where go

@@ -29,19 +29,19 @@ module Network.Google.Resource.Webmasters.Sitemaps.Delete
       SitemapsDeleteResource
 
     -- * Creating a Request
-    , sitemapsDelete'
-    , SitemapsDelete'
+    , sitemapsDelete
+    , SitemapsDelete
 
     -- * Request Lenses
-    , sitFeedpath
-    , sitSiteURL
+    , sdFeedpath
+    , sdSiteURL
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.sitemaps.delete@ method which the
--- 'SitemapsDelete'' request conforms to.
+-- 'SitemapsDelete' request conforms to.
 type SitemapsDeleteResource =
      "sites" :>
        Capture "siteUrl" Text :>
@@ -51,45 +51,45 @@ type SitemapsDeleteResource =
 
 -- | Deletes a sitemap from this site.
 --
--- /See:/ 'sitemapsDelete'' smart constructor.
-data SitemapsDelete' = SitemapsDelete'
-    { _sitFeedpath :: !Text
-    , _sitSiteURL  :: !Text
+-- /See:/ 'sitemapsDelete' smart constructor.
+data SitemapsDelete = SitemapsDelete
+    { _sdFeedpath :: !Text
+    , _sdSiteURL  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SitemapsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'SitemapsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sitFeedpath'
+-- * 'sdFeedpath'
 --
--- * 'sitSiteURL'
-sitemapsDelete'
-    :: Text -- ^ 'sitFeedpath'
-    -> Text -- ^ 'sitSiteURL'
-    -> SitemapsDelete'
-sitemapsDelete' pSitFeedpath_ pSitSiteURL_ =
-    SitemapsDelete'
-    { _sitFeedpath = pSitFeedpath_
-    , _sitSiteURL = pSitSiteURL_
+-- * 'sdSiteURL'
+sitemapsDelete
+    :: Text -- ^ 'sdFeedpath'
+    -> Text -- ^ 'sdSiteURL'
+    -> SitemapsDelete
+sitemapsDelete pSdFeedpath_ pSdSiteURL_ =
+    SitemapsDelete
+    { _sdFeedpath = pSdFeedpath_
+    , _sdSiteURL = pSdSiteURL_
     }
 
 -- | The URL of the actual sitemap. For example:
 -- http:\/\/www.example.com\/sitemap.xml
-sitFeedpath :: Lens' SitemapsDelete' Text
-sitFeedpath
-  = lens _sitFeedpath (\ s a -> s{_sitFeedpath = a})
+sdFeedpath :: Lens' SitemapsDelete Text
+sdFeedpath
+  = lens _sdFeedpath (\ s a -> s{_sdFeedpath = a})
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/
-sitSiteURL :: Lens' SitemapsDelete' Text
-sitSiteURL
-  = lens _sitSiteURL (\ s a -> s{_sitSiteURL = a})
+sdSiteURL :: Lens' SitemapsDelete Text
+sdSiteURL
+  = lens _sdSiteURL (\ s a -> s{_sdSiteURL = a})
 
-instance GoogleRequest SitemapsDelete' where
-        type Rs SitemapsDelete' = ()
-        requestClient SitemapsDelete'{..}
-          = go _sitSiteURL _sitFeedpath (Just AltJSON)
+instance GoogleRequest SitemapsDelete where
+        type Rs SitemapsDelete = ()
+        requestClient SitemapsDelete{..}
+          = go _sdSiteURL _sdFeedpath (Just AltJSON)
               webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitemapsDeleteResource)

@@ -34,8 +34,8 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.ListManagedInstance
       InstanceGroupManagersListManagedInstancesResource
 
     -- * Creating a Request
-    , instanceGroupManagersListManagedInstances'
-    , InstanceGroupManagersListManagedInstances'
+    , instanceGroupManagersListManagedInstances
+    , InstanceGroupManagersListManagedInstances
 
     -- * Request Lenses
     , igmlmiProject
@@ -47,7 +47,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroupManagers.listManagedInstances@ method which the
--- 'InstanceGroupManagersListManagedInstances'' request conforms to.
+-- 'InstanceGroupManagersListManagedInstances' request conforms to.
 type InstanceGroupManagersListManagedInstancesResource
      =
      Capture "project" Text :>
@@ -67,14 +67,14 @@ type InstanceGroupManagersListManagedInstancesResource
 -- If a previous action failed, the list displays the errors for that
 -- failed action.
 --
--- /See:/ 'instanceGroupManagersListManagedInstances'' smart constructor.
-data InstanceGroupManagersListManagedInstances' = InstanceGroupManagersListManagedInstances'
+-- /See:/ 'instanceGroupManagersListManagedInstances' smart constructor.
+data InstanceGroupManagersListManagedInstances = InstanceGroupManagersListManagedInstances
     { _igmlmiProject              :: !Text
     , _igmlmiInstanceGroupManager :: !Text
     , _igmlmiZone                 :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupManagersListManagedInstances'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupManagersListManagedInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -83,41 +83,41 @@ data InstanceGroupManagersListManagedInstances' = InstanceGroupManagersListManag
 -- * 'igmlmiInstanceGroupManager'
 --
 -- * 'igmlmiZone'
-instanceGroupManagersListManagedInstances'
+instanceGroupManagersListManagedInstances
     :: Text -- ^ 'igmlmiProject'
     -> Text -- ^ 'igmlmiInstanceGroupManager'
     -> Text -- ^ 'igmlmiZone'
-    -> InstanceGroupManagersListManagedInstances'
-instanceGroupManagersListManagedInstances' pIgmlmiProject_ pIgmlmiInstanceGroupManager_ pIgmlmiZone_ =
-    InstanceGroupManagersListManagedInstances'
+    -> InstanceGroupManagersListManagedInstances
+instanceGroupManagersListManagedInstances pIgmlmiProject_ pIgmlmiInstanceGroupManager_ pIgmlmiZone_ =
+    InstanceGroupManagersListManagedInstances
     { _igmlmiProject = pIgmlmiProject_
     , _igmlmiInstanceGroupManager = pIgmlmiInstanceGroupManager_
     , _igmlmiZone = pIgmlmiZone_
     }
 
 -- | The project ID for this request.
-igmlmiProject :: Lens' InstanceGroupManagersListManagedInstances' Text
+igmlmiProject :: Lens' InstanceGroupManagersListManagedInstances Text
 igmlmiProject
   = lens _igmlmiProject
       (\ s a -> s{_igmlmiProject = a})
 
 -- | The name of the managed instance group.
-igmlmiInstanceGroupManager :: Lens' InstanceGroupManagersListManagedInstances' Text
+igmlmiInstanceGroupManager :: Lens' InstanceGroupManagersListManagedInstances Text
 igmlmiInstanceGroupManager
   = lens _igmlmiInstanceGroupManager
       (\ s a -> s{_igmlmiInstanceGroupManager = a})
 
 -- | The name of the zone where the managed instance group is located.
-igmlmiZone :: Lens' InstanceGroupManagersListManagedInstances' Text
+igmlmiZone :: Lens' InstanceGroupManagersListManagedInstances Text
 igmlmiZone
   = lens _igmlmiZone (\ s a -> s{_igmlmiZone = a})
 
 instance GoogleRequest
-         InstanceGroupManagersListManagedInstances' where
-        type Rs InstanceGroupManagersListManagedInstances' =
+         InstanceGroupManagersListManagedInstances where
+        type Rs InstanceGroupManagersListManagedInstances =
              InstanceGroupManagersListManagedInstancesResponse
         requestClient
-          InstanceGroupManagersListManagedInstances'{..}
+          InstanceGroupManagersListManagedInstances{..}
           = go _igmlmiProject _igmlmiZone
               _igmlmiInstanceGroupManager
               (Just AltJSON)

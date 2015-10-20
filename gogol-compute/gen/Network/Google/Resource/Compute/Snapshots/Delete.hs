@@ -33,8 +33,8 @@ module Network.Google.Resource.Compute.Snapshots.Delete
       SnapshotsDeleteResource
 
     -- * Creating a Request
-    , snapshotsDelete'
-    , SnapshotsDelete'
+    , snapshotsDelete
+    , SnapshotsDelete
 
     -- * Request Lenses
     , sdSnapshot
@@ -45,7 +45,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.snapshots.delete@ method which the
--- 'SnapshotsDelete'' request conforms to.
+-- 'SnapshotsDelete' request conforms to.
 type SnapshotsDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -59,42 +59,42 @@ type SnapshotsDeleteResource =
 -- needed for subsequent snapshots, the data will be moved to the next
 -- corresponding snapshot. For more information, see Deleting snaphots.
 --
--- /See:/ 'snapshotsDelete'' smart constructor.
-data SnapshotsDelete' = SnapshotsDelete'
+-- /See:/ 'snapshotsDelete' smart constructor.
+data SnapshotsDelete = SnapshotsDelete
     { _sdSnapshot :: !Text
     , _sdProject  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SnapshotsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'SnapshotsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sdSnapshot'
 --
 -- * 'sdProject'
-snapshotsDelete'
+snapshotsDelete
     :: Text -- ^ 'sdSnapshot'
     -> Text -- ^ 'sdProject'
-    -> SnapshotsDelete'
-snapshotsDelete' pSdSnapshot_ pSdProject_ =
-    SnapshotsDelete'
+    -> SnapshotsDelete
+snapshotsDelete pSdSnapshot_ pSdProject_ =
+    SnapshotsDelete
     { _sdSnapshot = pSdSnapshot_
     , _sdProject = pSdProject_
     }
 
 -- | Name of the Snapshot resource to delete.
-sdSnapshot :: Lens' SnapshotsDelete' Text
+sdSnapshot :: Lens' SnapshotsDelete Text
 sdSnapshot
   = lens _sdSnapshot (\ s a -> s{_sdSnapshot = a})
 
 -- | Name of the project scoping this request.
-sdProject :: Lens' SnapshotsDelete' Text
+sdProject :: Lens' SnapshotsDelete Text
 sdProject
   = lens _sdProject (\ s a -> s{_sdProject = a})
 
-instance GoogleRequest SnapshotsDelete' where
-        type Rs SnapshotsDelete' = Operation
-        requestClient SnapshotsDelete'{..}
+instance GoogleRequest SnapshotsDelete where
+        type Rs SnapshotsDelete = Operation
+        requestClient SnapshotsDelete{..}
           = go _sdProject _sdSnapshot (Just AltJSON)
               computeService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.DirectorySiteContacts.Get
       DirectorySiteContactsGetResource
 
     -- * Creating a Request
-    , directorySiteContactsGet'
-    , DirectorySiteContactsGet'
+    , directorySiteContactsGet
+    , DirectorySiteContactsGet
 
     -- * Request Lenses
     , dscgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.directorySiteContacts.get@ method which the
--- 'DirectorySiteContactsGet'' request conforms to.
+-- 'DirectorySiteContactsGet' request conforms to.
 type DirectorySiteContactsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,44 +52,43 @@ type DirectorySiteContactsGetResource =
 
 -- | Gets one directory site contact by ID.
 --
--- /See:/ 'directorySiteContactsGet'' smart constructor.
-data DirectorySiteContactsGet' = DirectorySiteContactsGet'
+-- /See:/ 'directorySiteContactsGet' smart constructor.
+data DirectorySiteContactsGet = DirectorySiteContactsGet
     { _dscgProFileId :: !Int64
     , _dscgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DirectorySiteContactsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'DirectorySiteContactsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dscgProFileId'
 --
 -- * 'dscgId'
-directorySiteContactsGet'
+directorySiteContactsGet
     :: Int64 -- ^ 'dscgProFileId'
     -> Int64 -- ^ 'dscgId'
-    -> DirectorySiteContactsGet'
-directorySiteContactsGet' pDscgProFileId_ pDscgId_ =
-    DirectorySiteContactsGet'
+    -> DirectorySiteContactsGet
+directorySiteContactsGet pDscgProFileId_ pDscgId_ =
+    DirectorySiteContactsGet
     { _dscgProFileId = pDscgProFileId_
     , _dscgId = pDscgId_
     }
 
 -- | User profile ID associated with this request.
-dscgProFileId :: Lens' DirectorySiteContactsGet' Int64
+dscgProFileId :: Lens' DirectorySiteContactsGet Int64
 dscgProFileId
   = lens _dscgProFileId
       (\ s a -> s{_dscgProFileId = a})
 
 -- | Directory site contact ID.
-dscgId :: Lens' DirectorySiteContactsGet' Int64
+dscgId :: Lens' DirectorySiteContactsGet Int64
 dscgId = lens _dscgId (\ s a -> s{_dscgId = a})
 
-instance GoogleRequest DirectorySiteContactsGet'
-         where
-        type Rs DirectorySiteContactsGet' =
+instance GoogleRequest DirectorySiteContactsGet where
+        type Rs DirectorySiteContactsGet =
              DirectorySiteContact
-        requestClient DirectorySiteContactsGet'{..}
+        requestClient DirectorySiteContactsGet{..}
           = go _dscgProFileId _dscgId (Just AltJSON)
               dFAReportingService
           where go

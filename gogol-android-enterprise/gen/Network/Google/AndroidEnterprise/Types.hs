@@ -121,11 +121,11 @@ module Network.Google.AndroidEnterprise.Types
     -- * Collection
     , Collection
     , collection
-    , cKind
-    , cCollectionId
-    , cVisibility
-    , cName
-    , cProductId
+    , colKind
+    , colCollectionId
+    , colVisibility
+    , colName
+    , colProductId
 
     -- * ProductSet
     , ProductSet
@@ -195,16 +195,16 @@ module Network.Google.AndroidEnterprise.Types
     -- * Product
     , Product
     , product
-    , proAuthorName
-    , proKind
-    , proWorkDetailsURL
-    , proRequiresContainerApp
-    , proAppVersion
-    , proDistributionChannel
-    , proIconURL
-    , proTitle
-    , proProductId
-    , proDetailsURL
+    , pAuthorName
+    , pKind
+    , pWorkDetailsURL
+    , pRequiresContainerApp
+    , pAppVersion
+    , pDistributionChannel
+    , pIconURL
+    , pTitle
+    , pProductId
+    , pDetailsURL
 
     -- * EntitlementsListResponse
     , EntitlementsListResponse
@@ -222,10 +222,10 @@ module Network.Google.AndroidEnterprise.Types
     -- * Permission
     , Permission
     , permission
-    , pKind
-    , pName
-    , pDescription
-    , pPermissionId
+    , perKind
+    , perName
+    , perDescription
+    , perPermissionId
 
     -- * ProductsApproveRequest
     , ProductsApproveRequest

@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Insert
       ContentCategoriesInsertResource
 
     -- * Creating a Request
-    , contentCategoriesInsert'
-    , ContentCategoriesInsert'
+    , contentCategoriesInsert
+    , ContentCategoriesInsert
 
     -- * Request Lenses
     , cciProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.contentCategories.insert@ method which the
--- 'ContentCategoriesInsert'' request conforms to.
+-- 'ContentCategoriesInsert' request conforms to.
 type ContentCategoriesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,42 +52,42 @@ type ContentCategoriesInsertResource =
 
 -- | Inserts a new content category.
 --
--- /See:/ 'contentCategoriesInsert'' smart constructor.
-data ContentCategoriesInsert' = ContentCategoriesInsert'
+-- /See:/ 'contentCategoriesInsert' smart constructor.
+data ContentCategoriesInsert = ContentCategoriesInsert
     { _cciProFileId :: !Int64
     , _cciPayload   :: !ContentCategory
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ContentCategoriesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ContentCategoriesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cciProFileId'
 --
 -- * 'cciPayload'
-contentCategoriesInsert'
+contentCategoriesInsert
     :: Int64 -- ^ 'cciProFileId'
     -> ContentCategory -- ^ 'cciPayload'
-    -> ContentCategoriesInsert'
-contentCategoriesInsert' pCciProFileId_ pCciPayload_ =
-    ContentCategoriesInsert'
+    -> ContentCategoriesInsert
+contentCategoriesInsert pCciProFileId_ pCciPayload_ =
+    ContentCategoriesInsert
     { _cciProFileId = pCciProFileId_
     , _cciPayload = pCciPayload_
     }
 
 -- | User profile ID associated with this request.
-cciProFileId :: Lens' ContentCategoriesInsert' Int64
+cciProFileId :: Lens' ContentCategoriesInsert Int64
 cciProFileId
   = lens _cciProFileId (\ s a -> s{_cciProFileId = a})
 
 -- | Multipart request metadata.
-cciPayload :: Lens' ContentCategoriesInsert' ContentCategory
+cciPayload :: Lens' ContentCategoriesInsert ContentCategory
 cciPayload
   = lens _cciPayload (\ s a -> s{_cciPayload = a})
 
-instance GoogleRequest ContentCategoriesInsert' where
-        type Rs ContentCategoriesInsert' = ContentCategory
-        requestClient ContentCategoriesInsert'{..}
+instance GoogleRequest ContentCategoriesInsert where
+        type Rs ContentCategoriesInsert = ContentCategory
+        requestClient ContentCategoriesInsert{..}
           = go _cciProFileId (Just AltJSON) _cciPayload
               dFAReportingService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Resume
       TransferOperationsResumeResource
 
     -- * Creating a Request
-    , transferOperationsResume'
-    , TransferOperationsResume'
+    , transferOperationsResume
+    , TransferOperationsResume
 
     -- * Request Lenses
     , torXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferOperations.resume@ method which the
--- 'TransferOperationsResume'' request conforms to.
+-- 'TransferOperationsResume' request conforms to.
 type TransferOperationsResumeResource =
      "v1" :>
        CaptureMode "name" "resume" Text :>
@@ -65,8 +65,8 @@ type TransferOperationsResumeResource =
 
 -- | Resumes a transfer operation that is paused.
 --
--- /See:/ 'transferOperationsResume'' smart constructor.
-data TransferOperationsResume' = TransferOperationsResume'
+-- /See:/ 'transferOperationsResume' smart constructor.
+data TransferOperationsResume = TransferOperationsResume
     { _torXgafv          :: !(Maybe Text)
     , _torUploadProtocol :: !(Maybe Text)
     , _torPp             :: !Bool
@@ -78,7 +78,7 @@ data TransferOperationsResume' = TransferOperationsResume'
     , _torCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TransferOperationsResume'' with the minimum fields required to make a request.
+-- | Creates a value of 'TransferOperationsResume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -99,12 +99,12 @@ data TransferOperationsResume' = TransferOperationsResume'
 -- * 'torName'
 --
 -- * 'torCallback'
-transferOperationsResume'
+transferOperationsResume
     :: ResumeTransferOperationRequest -- ^ 'torPayload'
     -> Text -- ^ 'torName'
-    -> TransferOperationsResume'
-transferOperationsResume' pTorPayload_ pTorName_ =
-    TransferOperationsResume'
+    -> TransferOperationsResume
+transferOperationsResume pTorPayload_ pTorName_ =
+    TransferOperationsResume
     { _torXgafv = Nothing
     , _torUploadProtocol = Nothing
     , _torPp = True
@@ -117,55 +117,54 @@ transferOperationsResume' pTorPayload_ pTorName_ =
     }
 
 -- | V1 error format.
-torXgafv :: Lens' TransferOperationsResume' (Maybe Text)
+torXgafv :: Lens' TransferOperationsResume (Maybe Text)
 torXgafv = lens _torXgafv (\ s a -> s{_torXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-torUploadProtocol :: Lens' TransferOperationsResume' (Maybe Text)
+torUploadProtocol :: Lens' TransferOperationsResume (Maybe Text)
 torUploadProtocol
   = lens _torUploadProtocol
       (\ s a -> s{_torUploadProtocol = a})
 
 -- | Pretty-print response.
-torPp :: Lens' TransferOperationsResume' Bool
+torPp :: Lens' TransferOperationsResume Bool
 torPp = lens _torPp (\ s a -> s{_torPp = a})
 
 -- | OAuth access token.
-torAccessToken :: Lens' TransferOperationsResume' (Maybe Text)
+torAccessToken :: Lens' TransferOperationsResume (Maybe Text)
 torAccessToken
   = lens _torAccessToken
       (\ s a -> s{_torAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-torUploadType :: Lens' TransferOperationsResume' (Maybe Text)
+torUploadType :: Lens' TransferOperationsResume (Maybe Text)
 torUploadType
   = lens _torUploadType
       (\ s a -> s{_torUploadType = a})
 
 -- | Multipart request metadata.
-torPayload :: Lens' TransferOperationsResume' ResumeTransferOperationRequest
+torPayload :: Lens' TransferOperationsResume ResumeTransferOperationRequest
 torPayload
   = lens _torPayload (\ s a -> s{_torPayload = a})
 
 -- | OAuth bearer token.
-torBearerToken :: Lens' TransferOperationsResume' (Maybe Text)
+torBearerToken :: Lens' TransferOperationsResume (Maybe Text)
 torBearerToken
   = lens _torBearerToken
       (\ s a -> s{_torBearerToken = a})
 
 -- | The name of the transfer operation. Required.
-torName :: Lens' TransferOperationsResume' Text
+torName :: Lens' TransferOperationsResume Text
 torName = lens _torName (\ s a -> s{_torName = a})
 
 -- | JSONP
-torCallback :: Lens' TransferOperationsResume' (Maybe Text)
+torCallback :: Lens' TransferOperationsResume (Maybe Text)
 torCallback
   = lens _torCallback (\ s a -> s{_torCallback = a})
 
-instance GoogleRequest TransferOperationsResume'
-         where
-        type Rs TransferOperationsResume' = Empty
-        requestClient TransferOperationsResume'{..}
+instance GoogleRequest TransferOperationsResume where
+        type Rs TransferOperationsResume = Empty
+        requestClient TransferOperationsResume{..}
           = go _torName _torXgafv _torUploadProtocol
               (Just _torPp)
               _torAccessToken

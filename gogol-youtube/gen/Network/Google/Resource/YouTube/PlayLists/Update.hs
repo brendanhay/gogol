@@ -30,8 +30,8 @@ module Network.Google.Resource.YouTube.PlayLists.Update
       PlayListsUpdateResource
 
     -- * Creating a Request
-    , playListsUpdate'
-    , PlayListsUpdate'
+    , playListsUpdate
+    , PlayListsUpdate
 
     -- * Request Lenses
     , pluPart
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.playlists.update@ method which the
--- 'PlayListsUpdate'' request conforms to.
+-- 'PlayListsUpdate' request conforms to.
 type PlayListsUpdateResource =
      "playlists" :>
        QueryParam "part" Text :>
@@ -54,14 +54,14 @@ type PlayListsUpdateResource =
 -- | Modifies a playlist. For example, you could change a playlist\'s title,
 -- description, or privacy status.
 --
--- /See:/ 'playListsUpdate'' smart constructor.
-data PlayListsUpdate' = PlayListsUpdate'
+-- /See:/ 'playListsUpdate' smart constructor.
+data PlayListsUpdate = PlayListsUpdate
     { _pluPart                   :: !Text
     , _pluPayload                :: !PlayList
     , _pluOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlayListsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayListsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,12 +70,12 @@ data PlayListsUpdate' = PlayListsUpdate'
 -- * 'pluPayload'
 --
 -- * 'pluOnBehalfOfContentOwner'
-playListsUpdate'
+playListsUpdate
     :: Text -- ^ 'pluPart'
     -> PlayList -- ^ 'pluPayload'
-    -> PlayListsUpdate'
-playListsUpdate' pPluPart_ pPluPayload_ =
-    PlayListsUpdate'
+    -> PlayListsUpdate
+playListsUpdate pPluPart_ pPluPayload_ =
+    PlayListsUpdate
     { _pluPart = pPluPart_
     , _pluPayload = pPluPayload_
     , _pluOnBehalfOfContentOwner = Nothing
@@ -90,11 +90,11 @@ playListsUpdate' pPluPart_ pPluPayload_ =
 -- included in the request body. If the request does not specify a value
 -- for the snippet.description property, the playlist\'s existing
 -- description will be deleted.
-pluPart :: Lens' PlayListsUpdate' Text
+pluPart :: Lens' PlayListsUpdate Text
 pluPart = lens _pluPart (\ s a -> s{_pluPart = a})
 
 -- | Multipart request metadata.
-pluPayload :: Lens' PlayListsUpdate' PlayList
+pluPayload :: Lens' PlayListsUpdate PlayList
 pluPayload
   = lens _pluPayload (\ s a -> s{_pluPayload = a})
 
@@ -108,14 +108,14 @@ pluPayload
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-pluOnBehalfOfContentOwner :: Lens' PlayListsUpdate' (Maybe Text)
+pluOnBehalfOfContentOwner :: Lens' PlayListsUpdate (Maybe Text)
 pluOnBehalfOfContentOwner
   = lens _pluOnBehalfOfContentOwner
       (\ s a -> s{_pluOnBehalfOfContentOwner = a})
 
-instance GoogleRequest PlayListsUpdate' where
-        type Rs PlayListsUpdate' = PlayList
-        requestClient PlayListsUpdate'{..}
+instance GoogleRequest PlayListsUpdate where
+        type Rs PlayListsUpdate = PlayList
+        requestClient PlayListsUpdate{..}
           = go (Just _pluPart) _pluOnBehalfOfContentOwner
               (Just AltJSON)
               _pluPayload

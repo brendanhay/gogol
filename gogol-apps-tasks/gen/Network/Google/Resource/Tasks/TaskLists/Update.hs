@@ -29,8 +29,8 @@ module Network.Google.Resource.Tasks.TaskLists.Update
       TaskListsUpdateResource
 
     -- * Creating a Request
-    , taskListsUpdate'
-    , TaskListsUpdate'
+    , taskListsUpdate
+    , TaskListsUpdate
 
     -- * Request Lenses
     , tluPayload
@@ -41,7 +41,7 @@ import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasklists.update@ method which the
--- 'TaskListsUpdate'' request conforms to.
+-- 'TaskListsUpdate' request conforms to.
 type TaskListsUpdateResource =
      "users" :>
        "@me" :>
@@ -52,42 +52,42 @@ type TaskListsUpdateResource =
 
 -- | Updates the authenticated user\'s specified task list.
 --
--- /See:/ 'taskListsUpdate'' smart constructor.
-data TaskListsUpdate' = TaskListsUpdate'
+-- /See:/ 'taskListsUpdate' smart constructor.
+data TaskListsUpdate = TaskListsUpdate
     { _tluPayload  :: !TaskList
     , _tluTaskList :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TaskListsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'TaskListsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tluPayload'
 --
 -- * 'tluTaskList'
-taskListsUpdate'
+taskListsUpdate
     :: TaskList -- ^ 'tluPayload'
     -> Text -- ^ 'tluTaskList'
-    -> TaskListsUpdate'
-taskListsUpdate' pTluPayload_ pTluTaskList_ =
-    TaskListsUpdate'
+    -> TaskListsUpdate
+taskListsUpdate pTluPayload_ pTluTaskList_ =
+    TaskListsUpdate
     { _tluPayload = pTluPayload_
     , _tluTaskList = pTluTaskList_
     }
 
 -- | Multipart request metadata.
-tluPayload :: Lens' TaskListsUpdate' TaskList
+tluPayload :: Lens' TaskListsUpdate TaskList
 tluPayload
   = lens _tluPayload (\ s a -> s{_tluPayload = a})
 
 -- | Task list identifier.
-tluTaskList :: Lens' TaskListsUpdate' Text
+tluTaskList :: Lens' TaskListsUpdate Text
 tluTaskList
   = lens _tluTaskList (\ s a -> s{_tluTaskList = a})
 
-instance GoogleRequest TaskListsUpdate' where
-        type Rs TaskListsUpdate' = TaskList
-        requestClient TaskListsUpdate'{..}
+instance GoogleRequest TaskListsUpdate where
+        type Rs TaskListsUpdate = TaskList
+        requestClient TaskListsUpdate{..}
           = go _tluTaskList (Just AltJSON) _tluPayload
               appsTasksService
           where go

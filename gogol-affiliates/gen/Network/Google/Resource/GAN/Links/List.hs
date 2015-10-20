@@ -29,8 +29,8 @@ module Network.Google.Resource.GAN.Links.List
       LinksListResource
 
     -- * Creating a Request
-    , linksList'
-    , LinksList'
+    , linksList
+    , LinksList
 
     -- * Request Lenses
     , llCreateDateMax
@@ -54,7 +54,7 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gan.links.list@ method which the
--- 'LinksList'' request conforms to.
+-- 'LinksList' request conforms to.
 type LinksListResource =
      Capture "role" LinksListRole :>
        Capture "roleId" Text :>
@@ -79,8 +79,8 @@ type LinksListResource =
 
 -- | Retrieves all links that match the query parameters.
 --
--- /See:/ 'linksList'' smart constructor.
-data LinksList' = LinksList'
+-- /See:/ 'linksList' smart constructor.
+data LinksList = LinksList
     { _llCreateDateMax      :: !(Maybe Text)
     , _llAuthorship         :: !(Maybe LinksListAuthorship)
     , _llAssetSize          :: !(Maybe [Text])
@@ -98,7 +98,7 @@ data LinksList' = LinksList'
     , _llMaxResults         :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LinksList'' with the minimum fields required to make a request.
+-- | Creates a value of 'LinksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -131,12 +131,12 @@ data LinksList' = LinksList'
 -- * 'llStartDateMin'
 --
 -- * 'llMaxResults'
-linksList'
+linksList
     :: Text -- ^ 'llRoleId'
     -> LinksListRole -- ^ 'llRole'
-    -> LinksList'
-linksList' pLlRoleId_ pLlRole_ =
-    LinksList'
+    -> LinksList
+linksList pLlRoleId_ pLlRole_ =
+    LinksList
     { _llCreateDateMax = Nothing
     , _llAuthorship = Nothing
     , _llAssetSize = Nothing
@@ -155,32 +155,32 @@ linksList' pLlRoleId_ pLlRole_ =
     }
 
 -- | The end of the create date range.
-llCreateDateMax :: Lens' LinksList' (Maybe Text)
+llCreateDateMax :: Lens' LinksList (Maybe Text)
 llCreateDateMax
   = lens _llCreateDateMax
       (\ s a -> s{_llCreateDateMax = a})
 
 -- | The role of the author of the link.
-llAuthorship :: Lens' LinksList' (Maybe LinksListAuthorship)
+llAuthorship :: Lens' LinksList (Maybe LinksListAuthorship)
 llAuthorship
   = lens _llAuthorship (\ s a -> s{_llAuthorship = a})
 
 -- | The size of the given asset.
-llAssetSize :: Lens' LinksList' [Text]
+llAssetSize :: Lens' LinksList [Text]
 llAssetSize
   = lens _llAssetSize (\ s a -> s{_llAssetSize = a}) .
       _Default
       . _Coerce
 
 -- | The status of the relationship.
-llRelationshipStatus :: Lens' LinksList' (Maybe LinksListRelationshipStatus)
+llRelationshipStatus :: Lens' LinksList (Maybe LinksListRelationshipStatus)
 llRelationshipStatus
   = lens _llRelationshipStatus
       (\ s a -> s{_llRelationshipStatus = a})
 
 -- | Limits the resulting links to the ones belonging to the listed
 -- advertisers.
-llAdvertiserId :: Lens' LinksList' [Int64]
+llAdvertiserId :: Lens' LinksList [Int64]
 llAdvertiserId
   = lens _llAdvertiserId
       (\ s a -> s{_llAdvertiserId = a})
@@ -189,12 +189,12 @@ llAdvertiserId
 
 -- | Field for full text search across title and merchandising text, supports
 -- link id search.
-llSearchText :: Lens' LinksList' (Maybe Text)
+llSearchText :: Lens' LinksList (Maybe Text)
 llSearchText
   = lens _llSearchText (\ s a -> s{_llSearchText = a})
 
 -- | The promotion type.
-llPromotionType :: Lens' LinksList' [LinksListPromotionType]
+llPromotionType :: Lens' LinksList [LinksListPromotionType]
 llPromotionType
   = lens _llPromotionType
       (\ s a -> s{_llPromotionType = a})
@@ -202,50 +202,50 @@ llPromotionType
       . _Coerce
 
 -- | The ID of the requesting advertiser or publisher.
-llRoleId :: Lens' LinksList' Text
+llRoleId :: Lens' LinksList Text
 llRoleId = lens _llRoleId (\ s a -> s{_llRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-llRole :: Lens' LinksList' LinksListRole
+llRole :: Lens' LinksList LinksListRole
 llRole = lens _llRole (\ s a -> s{_llRole = a})
 
 -- | The beginning of the create date range.
-llCreateDateMin :: Lens' LinksList' (Maybe Text)
+llCreateDateMin :: Lens' LinksList (Maybe Text)
 llCreateDateMin
   = lens _llCreateDateMin
       (\ s a -> s{_llCreateDateMin = a})
 
 -- | The type of the link.
-llLinkType :: Lens' LinksList' (Maybe LinksListLinkType)
+llLinkType :: Lens' LinksList (Maybe LinksListLinkType)
 llLinkType
   = lens _llLinkType (\ s a -> s{_llLinkType = a})
 
 -- | The value of \'nextPageToken\' from the previous page. Optional.
-llPageToken :: Lens' LinksList' (Maybe Text)
+llPageToken :: Lens' LinksList (Maybe Text)
 llPageToken
   = lens _llPageToken (\ s a -> s{_llPageToken = a})
 
 -- | The end of the start date range.
-llStartDateMax :: Lens' LinksList' (Maybe Text)
+llStartDateMax :: Lens' LinksList (Maybe Text)
 llStartDateMax
   = lens _llStartDateMax
       (\ s a -> s{_llStartDateMax = a})
 
 -- | The beginning of the start date range.
-llStartDateMin :: Lens' LinksList' (Maybe Text)
+llStartDateMin :: Lens' LinksList (Maybe Text)
 llStartDateMin
   = lens _llStartDateMin
       (\ s a -> s{_llStartDateMin = a})
 
 -- | Max number of items to return in this page. Optional. Defaults to 20.
-llMaxResults :: Lens' LinksList' (Maybe Word32)
+llMaxResults :: Lens' LinksList (Maybe Word32)
 llMaxResults
   = lens _llMaxResults (\ s a -> s{_llMaxResults = a})
 
-instance GoogleRequest LinksList' where
-        type Rs LinksList' = Links
-        requestClient LinksList'{..}
+instance GoogleRequest LinksList where
+        type Rs LinksList = Links
+        requestClient LinksList{..}
           = go _llRole _llRoleId _llCreateDateMax _llAuthorship
               (_llAssetSize ^. _Default)
               _llRelationshipStatus

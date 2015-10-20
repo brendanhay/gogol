@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Countries.Get
       CountriesGetResource
 
     -- * Creating a Request
-    , countriesGet'
-    , CountriesGet'
+    , countriesGet
+    , CountriesGet
 
     -- * Request Lenses
     , cgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.countries.get@ method which the
--- 'CountriesGet'' request conforms to.
+-- 'CountriesGet' request conforms to.
 type CountriesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,41 +51,41 @@ type CountriesGetResource =
 
 -- | Gets one country by ID.
 --
--- /See:/ 'countriesGet'' smart constructor.
-data CountriesGet' = CountriesGet'
+-- /See:/ 'countriesGet' smart constructor.
+data CountriesGet = CountriesGet
     { _cgProFileId :: !Int64
     , _cgDartId    :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CountriesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CountriesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cgProFileId'
 --
 -- * 'cgDartId'
-countriesGet'
+countriesGet
     :: Int64 -- ^ 'cgProFileId'
     -> Int64 -- ^ 'cgDartId'
-    -> CountriesGet'
-countriesGet' pCgProFileId_ pCgDartId_ =
-    CountriesGet'
+    -> CountriesGet
+countriesGet pCgProFileId_ pCgDartId_ =
+    CountriesGet
     { _cgProFileId = pCgProFileId_
     , _cgDartId = pCgDartId_
     }
 
 -- | User profile ID associated with this request.
-cgProFileId :: Lens' CountriesGet' Int64
+cgProFileId :: Lens' CountriesGet Int64
 cgProFileId
   = lens _cgProFileId (\ s a -> s{_cgProFileId = a})
 
 -- | Country DART ID.
-cgDartId :: Lens' CountriesGet' Int64
+cgDartId :: Lens' CountriesGet Int64
 cgDartId = lens _cgDartId (\ s a -> s{_cgDartId = a})
 
-instance GoogleRequest CountriesGet' where
-        type Rs CountriesGet' = Country
-        requestClient CountriesGet'{..}
+instance GoogleRequest CountriesGet where
+        type Rs CountriesGet = Country
+        requestClient CountriesGet{..}
           = go _cgProFileId _cgDartId (Just AltJSON)
               dFAReportingService
           where go

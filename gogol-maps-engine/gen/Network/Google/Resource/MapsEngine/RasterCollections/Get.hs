@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Get
       RasterCollectionsGetResource
 
     -- * Creating a Request
-    , rasterCollectionsGet'
-    , RasterCollectionsGet'
+    , rasterCollectionsGet
+    , RasterCollectionsGet
 
     -- * Request Lenses
     , rcgId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasterCollections.get@ method which the
--- 'RasterCollectionsGet'' request conforms to.
+-- 'RasterCollectionsGet' request conforms to.
 type RasterCollectionsGetResource =
      "rasterCollections" :>
        Capture "id" Text :>
@@ -49,31 +49,31 @@ type RasterCollectionsGetResource =
 
 -- | Return metadata for a particular raster collection.
 --
--- /See:/ 'rasterCollectionsGet'' smart constructor.
-newtype RasterCollectionsGet' = RasterCollectionsGet'
+-- /See:/ 'rasterCollectionsGet' smart constructor.
+newtype RasterCollectionsGet = RasterCollectionsGet
     { _rcgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RasterCollectionsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'RasterCollectionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rcgId'
-rasterCollectionsGet'
+rasterCollectionsGet
     :: Text -- ^ 'rcgId'
-    -> RasterCollectionsGet'
-rasterCollectionsGet' pRcgId_ =
-    RasterCollectionsGet'
+    -> RasterCollectionsGet
+rasterCollectionsGet pRcgId_ =
+    RasterCollectionsGet
     { _rcgId = pRcgId_
     }
 
 -- | The ID of the raster collection.
-rcgId :: Lens' RasterCollectionsGet' Text
+rcgId :: Lens' RasterCollectionsGet Text
 rcgId = lens _rcgId (\ s a -> s{_rcgId = a})
 
-instance GoogleRequest RasterCollectionsGet' where
-        type Rs RasterCollectionsGet' = RasterCollection
-        requestClient RasterCollectionsGet'{..}
+instance GoogleRequest RasterCollectionsGet where
+        type Rs RasterCollectionsGet = RasterCollection
+        requestClient RasterCollectionsGet{..}
           = go _rcgId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

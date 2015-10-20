@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.AddVolume
       MyLibraryBookshelvesAddVolumeResource
 
     -- * Creating a Request
-    , myLibraryBookshelvesAddVolume'
-    , MyLibraryBookshelvesAddVolume'
+    , myLibraryBookshelvesAddVolume
+    , MyLibraryBookshelvesAddVolume
 
     -- * Request Lenses
     , mlbavReason
@@ -43,7 +43,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.bookshelves.addVolume@ method which the
--- 'MyLibraryBookshelvesAddVolume'' request conforms to.
+-- 'MyLibraryBookshelvesAddVolume' request conforms to.
 type MyLibraryBookshelvesAddVolumeResource =
      "mylibrary" :>
        "bookshelves" :>
@@ -58,15 +58,15 @@ type MyLibraryBookshelvesAddVolumeResource =
 
 -- | Adds a volume to a bookshelf.
 --
--- /See:/ 'myLibraryBookshelvesAddVolume'' smart constructor.
-data MyLibraryBookshelvesAddVolume' = MyLibraryBookshelvesAddVolume'
+-- /See:/ 'myLibraryBookshelvesAddVolume' smart constructor.
+data MyLibraryBookshelvesAddVolume = MyLibraryBookshelvesAddVolume
     { _mlbavReason   :: !(Maybe MyLibraryBookshelvesAddVolumeReason)
     , _mlbavShelf    :: !Text
     , _mlbavVolumeId :: !Text
     , _mlbavSource   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MyLibraryBookshelvesAddVolume'' with the minimum fields required to make a request.
+-- | Creates a value of 'MyLibraryBookshelvesAddVolume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,12 +77,12 @@ data MyLibraryBookshelvesAddVolume' = MyLibraryBookshelvesAddVolume'
 -- * 'mlbavVolumeId'
 --
 -- * 'mlbavSource'
-myLibraryBookshelvesAddVolume'
+myLibraryBookshelvesAddVolume
     :: Text -- ^ 'mlbavShelf'
     -> Text -- ^ 'mlbavVolumeId'
-    -> MyLibraryBookshelvesAddVolume'
-myLibraryBookshelvesAddVolume' pMlbavShelf_ pMlbavVolumeId_ =
-    MyLibraryBookshelvesAddVolume'
+    -> MyLibraryBookshelvesAddVolume
+myLibraryBookshelvesAddVolume pMlbavShelf_ pMlbavVolumeId_ =
+    MyLibraryBookshelvesAddVolume
     { _mlbavReason = Nothing
     , _mlbavShelf = pMlbavShelf_
     , _mlbavVolumeId = pMlbavVolumeId_
@@ -90,30 +90,30 @@ myLibraryBookshelvesAddVolume' pMlbavShelf_ pMlbavVolumeId_ =
     }
 
 -- | The reason for which the book is added to the library.
-mlbavReason :: Lens' MyLibraryBookshelvesAddVolume' (Maybe MyLibraryBookshelvesAddVolumeReason)
+mlbavReason :: Lens' MyLibraryBookshelvesAddVolume (Maybe MyLibraryBookshelvesAddVolumeReason)
 mlbavReason
   = lens _mlbavReason (\ s a -> s{_mlbavReason = a})
 
 -- | ID of bookshelf to which to add a volume.
-mlbavShelf :: Lens' MyLibraryBookshelvesAddVolume' Text
+mlbavShelf :: Lens' MyLibraryBookshelvesAddVolume Text
 mlbavShelf
   = lens _mlbavShelf (\ s a -> s{_mlbavShelf = a})
 
 -- | ID of volume to add.
-mlbavVolumeId :: Lens' MyLibraryBookshelvesAddVolume' Text
+mlbavVolumeId :: Lens' MyLibraryBookshelvesAddVolume Text
 mlbavVolumeId
   = lens _mlbavVolumeId
       (\ s a -> s{_mlbavVolumeId = a})
 
 -- | String to identify the originator of this request.
-mlbavSource :: Lens' MyLibraryBookshelvesAddVolume' (Maybe Text)
+mlbavSource :: Lens' MyLibraryBookshelvesAddVolume (Maybe Text)
 mlbavSource
   = lens _mlbavSource (\ s a -> s{_mlbavSource = a})
 
-instance GoogleRequest MyLibraryBookshelvesAddVolume'
+instance GoogleRequest MyLibraryBookshelvesAddVolume
          where
-        type Rs MyLibraryBookshelvesAddVolume' = ()
-        requestClient MyLibraryBookshelvesAddVolume'{..}
+        type Rs MyLibraryBookshelvesAddVolume = ()
+        requestClient MyLibraryBookshelvesAddVolume{..}
           = go _mlbavShelf (Just _mlbavVolumeId) _mlbavReason
               _mlbavSource
               (Just AltJSON)

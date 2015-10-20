@@ -29,19 +29,19 @@ module Network.Google.Resource.Content.Productstatuses.Get
       ProductstatusesGetResource
 
     -- * Creating a Request
-    , productstatusesGet'
-    , ProductstatusesGet'
+    , productstatusesGet
+    , ProductstatusesGet
 
     -- * Request Lenses
-    , pggMerchantId
-    , pggProductId
+    , pgMerchantId
+    , pgProductId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.productstatuses.get@ method which the
--- 'ProductstatusesGet'' request conforms to.
+-- 'ProductstatusesGet' request conforms to.
 type ProductstatusesGetResource =
      Capture "merchantId" Word64 :>
        "productstatuses" :>
@@ -50,44 +50,43 @@ type ProductstatusesGetResource =
 
 -- | Gets the status of a product from your Merchant Center account.
 --
--- /See:/ 'productstatusesGet'' smart constructor.
-data ProductstatusesGet' = ProductstatusesGet'
-    { _pggMerchantId :: !Word64
-    , _pggProductId  :: !Text
+-- /See:/ 'productstatusesGet' smart constructor.
+data ProductstatusesGet = ProductstatusesGet
+    { _pgMerchantId :: !Word64
+    , _pgProductId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductstatusesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProductstatusesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pggMerchantId'
+-- * 'pgMerchantId'
 --
--- * 'pggProductId'
-productstatusesGet'
-    :: Word64 -- ^ 'pggMerchantId'
-    -> Text -- ^ 'pggProductId'
-    -> ProductstatusesGet'
-productstatusesGet' pPggMerchantId_ pPggProductId_ =
-    ProductstatusesGet'
-    { _pggMerchantId = pPggMerchantId_
-    , _pggProductId = pPggProductId_
+-- * 'pgProductId'
+productstatusesGet
+    :: Word64 -- ^ 'pgMerchantId'
+    -> Text -- ^ 'pgProductId'
+    -> ProductstatusesGet
+productstatusesGet pPgMerchantId_ pPgProductId_ =
+    ProductstatusesGet
+    { _pgMerchantId = pPgMerchantId_
+    , _pgProductId = pPgProductId_
     }
 
 -- | The ID of the managing account.
-pggMerchantId :: Lens' ProductstatusesGet' Word64
-pggMerchantId
-  = lens _pggMerchantId
-      (\ s a -> s{_pggMerchantId = a})
+pgMerchantId :: Lens' ProductstatusesGet Word64
+pgMerchantId
+  = lens _pgMerchantId (\ s a -> s{_pgMerchantId = a})
 
 -- | The ID of the product.
-pggProductId :: Lens' ProductstatusesGet' Text
-pggProductId
-  = lens _pggProductId (\ s a -> s{_pggProductId = a})
+pgProductId :: Lens' ProductstatusesGet Text
+pgProductId
+  = lens _pgProductId (\ s a -> s{_pgProductId = a})
 
-instance GoogleRequest ProductstatusesGet' where
-        type Rs ProductstatusesGet' = ProductStatus
-        requestClient ProductstatusesGet'{..}
-          = go _pggMerchantId _pggProductId (Just AltJSON)
+instance GoogleRequest ProductstatusesGet where
+        type Rs ProductstatusesGet = ProductStatus
+        requestClient ProductstatusesGet{..}
+          = go _pgMerchantId _pgProductId (Just AltJSON)
               shoppingContentService
           where go
                   = buildClient

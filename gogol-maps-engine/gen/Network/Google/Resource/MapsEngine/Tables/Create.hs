@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Tables.Create
       TablesCreateResource
 
     -- * Creating a Request
-    , tablesCreate'
-    , TablesCreate'
+    , tablesCreate
+    , TablesCreate
 
     -- * Request Lenses
     , tcPayload
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.tables.create@ method which the
--- 'TablesCreate'' request conforms to.
+-- 'TablesCreate' request conforms to.
 type TablesCreateResource =
      "tables" :>
        QueryParam "alt" AltJSON :>
@@ -48,32 +48,32 @@ type TablesCreateResource =
 
 -- | Create a table asset.
 --
--- /See:/ 'tablesCreate'' smart constructor.
-newtype TablesCreate' = TablesCreate'
+-- /See:/ 'tablesCreate' smart constructor.
+newtype TablesCreate = TablesCreate
     { _tcPayload :: Table
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tcPayload'
-tablesCreate'
+tablesCreate
     :: Table -- ^ 'tcPayload'
-    -> TablesCreate'
-tablesCreate' pTcPayload_ =
-    TablesCreate'
+    -> TablesCreate
+tablesCreate pTcPayload_ =
+    TablesCreate
     { _tcPayload = pTcPayload_
     }
 
 -- | Multipart request metadata.
-tcPayload :: Lens' TablesCreate' Table
+tcPayload :: Lens' TablesCreate Table
 tcPayload
   = lens _tcPayload (\ s a -> s{_tcPayload = a})
 
-instance GoogleRequest TablesCreate' where
-        type Rs TablesCreate' = Table
-        requestClient TablesCreate'{..}
+instance GoogleRequest TablesCreate where
+        type Rs TablesCreate = Table
+        requestClient TablesCreate{..}
           = go (Just AltJSON) _tcPayload mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy TablesCreateResource)

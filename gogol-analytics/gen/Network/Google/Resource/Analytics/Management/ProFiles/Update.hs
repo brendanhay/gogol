@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Update
       ManagementProFilesUpdateResource
 
     -- * Creating a Request
-    , managementProFilesUpdate'
-    , ManagementProFilesUpdate'
+    , managementProFilesUpdate
+    , ManagementProFilesUpdate
 
     -- * Request Lenses
     , mpfuWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profiles.update@ method which the
--- 'ManagementProFilesUpdate'' request conforms to.
+-- 'ManagementProFilesUpdate' request conforms to.
 type ManagementProFilesUpdateResource =
      "management" :>
        "accounts" :>
@@ -57,15 +57,15 @@ type ManagementProFilesUpdateResource =
 
 -- | Updates an existing view (profile).
 --
--- /See:/ 'managementProFilesUpdate'' smart constructor.
-data ManagementProFilesUpdate' = ManagementProFilesUpdate'
+-- /See:/ 'managementProFilesUpdate' smart constructor.
+data ManagementProFilesUpdate = ManagementProFilesUpdate
     { _mpfuWebPropertyId :: !Text
     , _mpfuProFileId     :: !Text
     , _mpfuPayload       :: !ProFile
     , _mpfuAccountId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementProFilesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementProFilesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,14 +76,14 @@ data ManagementProFilesUpdate' = ManagementProFilesUpdate'
 -- * 'mpfuPayload'
 --
 -- * 'mpfuAccountId'
-managementProFilesUpdate'
+managementProFilesUpdate
     :: Text -- ^ 'mpfuWebPropertyId'
     -> Text -- ^ 'mpfuProFileId'
     -> ProFile -- ^ 'mpfuPayload'
     -> Text -- ^ 'mpfuAccountId'
-    -> ManagementProFilesUpdate'
-managementProFilesUpdate' pMpfuWebPropertyId_ pMpfuProFileId_ pMpfuPayload_ pMpfuAccountId_ =
-    ManagementProFilesUpdate'
+    -> ManagementProFilesUpdate
+managementProFilesUpdate pMpfuWebPropertyId_ pMpfuProFileId_ pMpfuPayload_ pMpfuAccountId_ =
+    ManagementProFilesUpdate
     { _mpfuWebPropertyId = pMpfuWebPropertyId_
     , _mpfuProFileId = pMpfuProFileId_
     , _mpfuPayload = pMpfuPayload_
@@ -91,32 +91,31 @@ managementProFilesUpdate' pMpfuWebPropertyId_ pMpfuProFileId_ pMpfuPayload_ pMpf
     }
 
 -- | Web property ID to which the view (profile) belongs
-mpfuWebPropertyId :: Lens' ManagementProFilesUpdate' Text
+mpfuWebPropertyId :: Lens' ManagementProFilesUpdate Text
 mpfuWebPropertyId
   = lens _mpfuWebPropertyId
       (\ s a -> s{_mpfuWebPropertyId = a})
 
 -- | ID of the view (profile) to be updated.
-mpfuProFileId :: Lens' ManagementProFilesUpdate' Text
+mpfuProFileId :: Lens' ManagementProFilesUpdate Text
 mpfuProFileId
   = lens _mpfuProFileId
       (\ s a -> s{_mpfuProFileId = a})
 
 -- | Multipart request metadata.
-mpfuPayload :: Lens' ManagementProFilesUpdate' ProFile
+mpfuPayload :: Lens' ManagementProFilesUpdate ProFile
 mpfuPayload
   = lens _mpfuPayload (\ s a -> s{_mpfuPayload = a})
 
 -- | Account ID to which the view (profile) belongs
-mpfuAccountId :: Lens' ManagementProFilesUpdate' Text
+mpfuAccountId :: Lens' ManagementProFilesUpdate Text
 mpfuAccountId
   = lens _mpfuAccountId
       (\ s a -> s{_mpfuAccountId = a})
 
-instance GoogleRequest ManagementProFilesUpdate'
-         where
-        type Rs ManagementProFilesUpdate' = ProFile
-        requestClient ManagementProFilesUpdate'{..}
+instance GoogleRequest ManagementProFilesUpdate where
+        type Rs ManagementProFilesUpdate = ProFile
+        requestClient ManagementProFilesUpdate{..}
           = go _mpfuAccountId _mpfuWebPropertyId _mpfuProFileId
               (Just AltJSON)
               _mpfuPayload

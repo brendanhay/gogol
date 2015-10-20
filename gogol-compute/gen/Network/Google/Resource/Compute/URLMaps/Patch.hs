@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.URLMaps.Patch
       URLMapsPatchResource
 
     -- * Creating a Request
-    , urlMapsPatch'
-    , URLMapsPatch'
+    , urlMapsPatch
+    , URLMapsPatch
 
     -- * Request Lenses
     , umpURLMap
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.urlMaps.patch@ method which the
--- 'URLMapsPatch'' request conforms to.
+-- 'URLMapsPatch' request conforms to.
 type URLMapsPatchResource =
      Capture "project" Text :>
        "global" :>
@@ -55,14 +55,14 @@ type URLMapsPatchResource =
 -- | Update the entire content of the UrlMap resource. This method supports
 -- patch semantics.
 --
--- /See:/ 'urlMapsPatch'' smart constructor.
-data URLMapsPatch' = URLMapsPatch'
+-- /See:/ 'urlMapsPatch' smart constructor.
+data URLMapsPatch = URLMapsPatch
     { _umpURLMap  :: !Text
     , _umpProject :: !Text
     , _umpPayload :: !URLMap
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'URLMapsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'URLMapsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,36 +71,36 @@ data URLMapsPatch' = URLMapsPatch'
 -- * 'umpProject'
 --
 -- * 'umpPayload'
-urlMapsPatch'
+urlMapsPatch
     :: Text -- ^ 'umpURLMap'
     -> Text -- ^ 'umpProject'
     -> URLMap -- ^ 'umpPayload'
-    -> URLMapsPatch'
-urlMapsPatch' pUmpURLMap_ pUmpProject_ pUmpPayload_ =
-    URLMapsPatch'
+    -> URLMapsPatch
+urlMapsPatch pUmpURLMap_ pUmpProject_ pUmpPayload_ =
+    URLMapsPatch
     { _umpURLMap = pUmpURLMap_
     , _umpProject = pUmpProject_
     , _umpPayload = pUmpPayload_
     }
 
 -- | Name of the UrlMap resource to update.
-umpURLMap :: Lens' URLMapsPatch' Text
+umpURLMap :: Lens' URLMapsPatch Text
 umpURLMap
   = lens _umpURLMap (\ s a -> s{_umpURLMap = a})
 
 -- | Name of the project scoping this request.
-umpProject :: Lens' URLMapsPatch' Text
+umpProject :: Lens' URLMapsPatch Text
 umpProject
   = lens _umpProject (\ s a -> s{_umpProject = a})
 
 -- | Multipart request metadata.
-umpPayload :: Lens' URLMapsPatch' URLMap
+umpPayload :: Lens' URLMapsPatch URLMap
 umpPayload
   = lens _umpPayload (\ s a -> s{_umpPayload = a})
 
-instance GoogleRequest URLMapsPatch' where
-        type Rs URLMapsPatch' = Operation
-        requestClient URLMapsPatch'{..}
+instance GoogleRequest URLMapsPatch where
+        type Rs URLMapsPatch = Operation
+        requestClient URLMapsPatch{..}
           = go _umpProject _umpURLMap (Just AltJSON)
               _umpPayload
               computeService

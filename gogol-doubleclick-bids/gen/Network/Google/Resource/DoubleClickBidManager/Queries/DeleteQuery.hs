@@ -29,8 +29,8 @@ module Network.Google.Resource.DoubleClickBidManager.Queries.DeleteQuery
       QueriesDeleteQueryResource
 
     -- * Creating a Request
-    , queriesDeleteQuery'
-    , QueriesDeleteQuery'
+    , queriesDeleteQuery
+    , QueriesDeleteQuery
 
     -- * Request Lenses
     , qdqQueryId
@@ -40,7 +40,7 @@ import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @doubleclickbidmanager.queries.deletequery@ method which the
--- 'QueriesDeleteQuery'' request conforms to.
+-- 'QueriesDeleteQuery' request conforms to.
 type QueriesDeleteQueryResource =
      "query" :>
        Capture "queryId" Int64 :>
@@ -48,32 +48,32 @@ type QueriesDeleteQueryResource =
 
 -- | Deletes a stored query as well as the associated stored reports.
 --
--- /See:/ 'queriesDeleteQuery'' smart constructor.
-newtype QueriesDeleteQuery' = QueriesDeleteQuery'
+-- /See:/ 'queriesDeleteQuery' smart constructor.
+newtype QueriesDeleteQuery = QueriesDeleteQuery
     { _qdqQueryId :: Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'QueriesDeleteQuery'' with the minimum fields required to make a request.
+-- | Creates a value of 'QueriesDeleteQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'qdqQueryId'
-queriesDeleteQuery'
+queriesDeleteQuery
     :: Int64 -- ^ 'qdqQueryId'
-    -> QueriesDeleteQuery'
-queriesDeleteQuery' pQdqQueryId_ =
-    QueriesDeleteQuery'
+    -> QueriesDeleteQuery
+queriesDeleteQuery pQdqQueryId_ =
+    QueriesDeleteQuery
     { _qdqQueryId = pQdqQueryId_
     }
 
 -- | Query ID to delete.
-qdqQueryId :: Lens' QueriesDeleteQuery' Int64
+qdqQueryId :: Lens' QueriesDeleteQuery Int64
 qdqQueryId
   = lens _qdqQueryId (\ s a -> s{_qdqQueryId = a})
 
-instance GoogleRequest QueriesDeleteQuery' where
-        type Rs QueriesDeleteQuery' = ()
-        requestClient QueriesDeleteQuery'{..}
+instance GoogleRequest QueriesDeleteQuery where
+        type Rs QueriesDeleteQuery = ()
+        requestClient QueriesDeleteQuery{..}
           = go _qdqQueryId (Just AltJSON)
               doubleClickBidsService
           where go

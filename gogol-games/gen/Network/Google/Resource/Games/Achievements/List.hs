@@ -30,8 +30,8 @@ module Network.Google.Resource.Games.Achievements.List
       AchievementsListResource
 
     -- * Creating a Request
-    , achievementsList'
-    , AchievementsList'
+    , achievementsList
+    , AchievementsList
 
     -- * Request Lenses
     , alState
@@ -45,7 +45,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.achievements.list@ method which the
--- 'AchievementsList'' request conforms to.
+-- 'AchievementsList' request conforms to.
 type AchievementsListResource =
      "players" :>
        Capture "playerId" Text :>
@@ -60,8 +60,8 @@ type AchievementsListResource =
 -- | Lists the progress for all your application\'s achievements for the
 -- currently authenticated player.
 --
--- /See:/ 'achievementsList'' smart constructor.
-data AchievementsList' = AchievementsList'
+-- /See:/ 'achievementsList' smart constructor.
+data AchievementsList = AchievementsList
     { _alState      :: !(Maybe AchievementsListState)
     , _alLanguage   :: !(Maybe Text)
     , _alPageToken  :: !(Maybe Text)
@@ -69,7 +69,7 @@ data AchievementsList' = AchievementsList'
     , _alMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AchievementsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AchievementsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,11 +82,11 @@ data AchievementsList' = AchievementsList'
 -- * 'alPlayerId'
 --
 -- * 'alMaxResults'
-achievementsList'
+achievementsList
     :: Text -- ^ 'alPlayerId'
-    -> AchievementsList'
-achievementsList' pAlPlayerId_ =
-    AchievementsList'
+    -> AchievementsList
+achievementsList pAlPlayerId_ =
+    AchievementsList
     { _alState = Nothing
     , _alLanguage = Nothing
     , _alPageToken = Nothing
@@ -96,36 +96,36 @@ achievementsList' pAlPlayerId_ =
 
 -- | Tells the server to return only achievements with the specified state.
 -- If this parameter isn\'t specified, all achievements are returned.
-alState :: Lens' AchievementsList' (Maybe AchievementsListState)
+alState :: Lens' AchievementsList (Maybe AchievementsListState)
 alState = lens _alState (\ s a -> s{_alState = a})
 
 -- | The preferred language to use for strings returned by this method.
-alLanguage :: Lens' AchievementsList' (Maybe Text)
+alLanguage :: Lens' AchievementsList (Maybe Text)
 alLanguage
   = lens _alLanguage (\ s a -> s{_alLanguage = a})
 
 -- | The token returned by the previous request.
-alPageToken :: Lens' AchievementsList' (Maybe Text)
+alPageToken :: Lens' AchievementsList (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | A player ID. A value of me may be used in place of the authenticated
 -- player\'s ID.
-alPlayerId :: Lens' AchievementsList' Text
+alPlayerId :: Lens' AchievementsList Text
 alPlayerId
   = lens _alPlayerId (\ s a -> s{_alPlayerId = a})
 
 -- | The maximum number of achievement resources to return in the response,
 -- used for paging. For any response, the actual number of achievement
 -- resources returned may be less than the specified maxResults.
-alMaxResults :: Lens' AchievementsList' (Maybe Int32)
+alMaxResults :: Lens' AchievementsList (Maybe Int32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
-instance GoogleRequest AchievementsList' where
-        type Rs AchievementsList' =
+instance GoogleRequest AchievementsList where
+        type Rs AchievementsList =
              PlayerAchievementListResponse
-        requestClient AchievementsList'{..}
+        requestClient AchievementsList{..}
           = go _alPlayerId _alState _alLanguage _alPageToken
               _alMaxResults
               (Just AltJSON)

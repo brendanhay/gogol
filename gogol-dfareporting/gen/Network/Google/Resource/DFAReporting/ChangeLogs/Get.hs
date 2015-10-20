@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.ChangeLogs.Get
       ChangeLogsGetResource
 
     -- * Creating a Request
-    , changeLogsGet'
-    , ChangeLogsGet'
+    , changeLogsGet
+    , ChangeLogsGet
 
     -- * Request Lenses
     , clgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.changeLogs.get@ method which the
--- 'ChangeLogsGet'' request conforms to.
+-- 'ChangeLogsGet' request conforms to.
 type ChangeLogsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,41 +51,41 @@ type ChangeLogsGetResource =
 
 -- | Gets one change log by ID.
 --
--- /See:/ 'changeLogsGet'' smart constructor.
-data ChangeLogsGet' = ChangeLogsGet'
+-- /See:/ 'changeLogsGet' smart constructor.
+data ChangeLogsGet = ChangeLogsGet
     { _clgProFileId :: !Int64
     , _clgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChangeLogsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChangeLogsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'clgProFileId'
 --
 -- * 'clgId'
-changeLogsGet'
+changeLogsGet
     :: Int64 -- ^ 'clgProFileId'
     -> Int64 -- ^ 'clgId'
-    -> ChangeLogsGet'
-changeLogsGet' pClgProFileId_ pClgId_ =
-    ChangeLogsGet'
+    -> ChangeLogsGet
+changeLogsGet pClgProFileId_ pClgId_ =
+    ChangeLogsGet
     { _clgProFileId = pClgProFileId_
     , _clgId = pClgId_
     }
 
 -- | User profile ID associated with this request.
-clgProFileId :: Lens' ChangeLogsGet' Int64
+clgProFileId :: Lens' ChangeLogsGet Int64
 clgProFileId
   = lens _clgProFileId (\ s a -> s{_clgProFileId = a})
 
 -- | Change log ID.
-clgId :: Lens' ChangeLogsGet' Int64
+clgId :: Lens' ChangeLogsGet Int64
 clgId = lens _clgId (\ s a -> s{_clgId = a})
 
-instance GoogleRequest ChangeLogsGet' where
-        type Rs ChangeLogsGet' = ChangeLog
-        requestClient ChangeLogsGet'{..}
+instance GoogleRequest ChangeLogsGet where
+        type Rs ChangeLogsGet = ChangeLog
+        requestClient ChangeLogsGet{..}
           = go _clgProFileId _clgId (Just AltJSON)
               dFAReportingService
           where go

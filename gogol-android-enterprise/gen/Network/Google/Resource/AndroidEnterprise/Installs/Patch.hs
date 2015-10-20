@@ -31,8 +31,8 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Patch
       InstallsPatchResource
 
     -- * Creating a Request
-    , installsPatch'
-    , InstallsPatch'
+    , installsPatch
+    , InstallsPatch
 
     -- * Request Lenses
     , ipEnterpriseId
@@ -46,7 +46,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.installs.patch@ method which the
--- 'InstallsPatch'' request conforms to.
+-- 'InstallsPatch' request conforms to.
 type InstallsPatchResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -63,8 +63,8 @@ type InstallsPatchResource =
 -- is already installed then it is updated to the latest version if
 -- necessary. This method supports patch semantics.
 --
--- /See:/ 'installsPatch'' smart constructor.
-data InstallsPatch' = InstallsPatch'
+-- /See:/ 'installsPatch' smart constructor.
+data InstallsPatch = InstallsPatch
     { _ipEnterpriseId :: !Text
     , _ipPayload      :: !Install
     , _ipUserId       :: !Text
@@ -72,7 +72,7 @@ data InstallsPatch' = InstallsPatch'
     , _ipDeviceId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstallsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstallsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -85,15 +85,15 @@ data InstallsPatch' = InstallsPatch'
 -- * 'ipInstallId'
 --
 -- * 'ipDeviceId'
-installsPatch'
+installsPatch
     :: Text -- ^ 'ipEnterpriseId'
     -> Install -- ^ 'ipPayload'
     -> Text -- ^ 'ipUserId'
     -> Text -- ^ 'ipInstallId'
     -> Text -- ^ 'ipDeviceId'
-    -> InstallsPatch'
-installsPatch' pIpEnterpriseId_ pIpPayload_ pIpUserId_ pIpInstallId_ pIpDeviceId_ =
-    InstallsPatch'
+    -> InstallsPatch
+installsPatch pIpEnterpriseId_ pIpPayload_ pIpUserId_ pIpInstallId_ pIpDeviceId_ =
+    InstallsPatch
     { _ipEnterpriseId = pIpEnterpriseId_
     , _ipPayload = pIpPayload_
     , _ipUserId = pIpUserId_
@@ -102,34 +102,34 @@ installsPatch' pIpEnterpriseId_ pIpPayload_ pIpUserId_ pIpInstallId_ pIpDeviceId
     }
 
 -- | The ID of the enterprise.
-ipEnterpriseId :: Lens' InstallsPatch' Text
+ipEnterpriseId :: Lens' InstallsPatch Text
 ipEnterpriseId
   = lens _ipEnterpriseId
       (\ s a -> s{_ipEnterpriseId = a})
 
 -- | Multipart request metadata.
-ipPayload :: Lens' InstallsPatch' Install
+ipPayload :: Lens' InstallsPatch Install
 ipPayload
   = lens _ipPayload (\ s a -> s{_ipPayload = a})
 
 -- | The ID of the user.
-ipUserId :: Lens' InstallsPatch' Text
+ipUserId :: Lens' InstallsPatch Text
 ipUserId = lens _ipUserId (\ s a -> s{_ipUserId = a})
 
 -- | The ID of the product represented by the install, e.g.
 -- \"app:com.google.android.gm\".
-ipInstallId :: Lens' InstallsPatch' Text
+ipInstallId :: Lens' InstallsPatch Text
 ipInstallId
   = lens _ipInstallId (\ s a -> s{_ipInstallId = a})
 
 -- | The Android ID of the device.
-ipDeviceId :: Lens' InstallsPatch' Text
+ipDeviceId :: Lens' InstallsPatch Text
 ipDeviceId
   = lens _ipDeviceId (\ s a -> s{_ipDeviceId = a})
 
-instance GoogleRequest InstallsPatch' where
-        type Rs InstallsPatch' = Install
-        requestClient InstallsPatch'{..}
+instance GoogleRequest InstallsPatch where
+        type Rs InstallsPatch = Install
+        requestClient InstallsPatch{..}
           = go _ipEnterpriseId _ipUserId _ipDeviceId
               _ipInstallId
               (Just AltJSON)

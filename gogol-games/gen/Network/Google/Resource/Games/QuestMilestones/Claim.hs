@@ -31,8 +31,8 @@ module Network.Google.Resource.Games.QuestMilestones.Claim
       QuestMilestonesClaimResource
 
     -- * Creating a Request
-    , questMilestonesClaim'
-    , QuestMilestonesClaim'
+    , questMilestonesClaim
+    , QuestMilestonesClaim
 
     -- * Request Lenses
     , qmcRequestId
@@ -44,7 +44,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.questMilestones.claim@ method which the
--- 'QuestMilestonesClaim'' request conforms to.
+-- 'QuestMilestonesClaim' request conforms to.
 type QuestMilestonesClaimResource =
      "quests" :>
        Capture "questId" Text :>
@@ -58,14 +58,14 @@ type QuestMilestonesClaimResource =
 -- the quest corresponding to questId has been claimed by the currently
 -- authorized user.
 --
--- /See:/ 'questMilestonesClaim'' smart constructor.
-data QuestMilestonesClaim' = QuestMilestonesClaim'
+-- /See:/ 'questMilestonesClaim' smart constructor.
+data QuestMilestonesClaim = QuestMilestonesClaim
     { _qmcRequestId   :: !Int64
     , _qmcMilestoneId :: !Text
     , _qmcQuestId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'QuestMilestonesClaim'' with the minimum fields required to make a request.
+-- | Creates a value of 'QuestMilestonesClaim' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,13 +74,13 @@ data QuestMilestonesClaim' = QuestMilestonesClaim'
 -- * 'qmcMilestoneId'
 --
 -- * 'qmcQuestId'
-questMilestonesClaim'
+questMilestonesClaim
     :: Int64 -- ^ 'qmcRequestId'
     -> Text -- ^ 'qmcMilestoneId'
     -> Text -- ^ 'qmcQuestId'
-    -> QuestMilestonesClaim'
-questMilestonesClaim' pQmcRequestId_ pQmcMilestoneId_ pQmcQuestId_ =
-    QuestMilestonesClaim'
+    -> QuestMilestonesClaim
+questMilestonesClaim pQmcRequestId_ pQmcMilestoneId_ pQmcQuestId_ =
+    QuestMilestonesClaim
     { _qmcRequestId = pQmcRequestId_
     , _qmcMilestoneId = pQmcMilestoneId_
     , _qmcQuestId = pQmcQuestId_
@@ -88,24 +88,24 @@ questMilestonesClaim' pQmcRequestId_ pQmcMilestoneId_ pQmcQuestId_ =
 
 -- | A numeric ID to ensure that the request is handled correctly across
 -- retries. Your client application must generate this ID randomly.
-qmcRequestId :: Lens' QuestMilestonesClaim' Int64
+qmcRequestId :: Lens' QuestMilestonesClaim Int64
 qmcRequestId
   = lens _qmcRequestId (\ s a -> s{_qmcRequestId = a})
 
 -- | The ID of the milestone.
-qmcMilestoneId :: Lens' QuestMilestonesClaim' Text
+qmcMilestoneId :: Lens' QuestMilestonesClaim Text
 qmcMilestoneId
   = lens _qmcMilestoneId
       (\ s a -> s{_qmcMilestoneId = a})
 
 -- | The ID of the quest.
-qmcQuestId :: Lens' QuestMilestonesClaim' Text
+qmcQuestId :: Lens' QuestMilestonesClaim Text
 qmcQuestId
   = lens _qmcQuestId (\ s a -> s{_qmcQuestId = a})
 
-instance GoogleRequest QuestMilestonesClaim' where
-        type Rs QuestMilestonesClaim' = ()
-        requestClient QuestMilestonesClaim'{..}
+instance GoogleRequest QuestMilestonesClaim where
+        type Rs QuestMilestonesClaim = ()
+        requestClient QuestMilestonesClaim{..}
           = go _qmcQuestId _qmcMilestoneId (Just _qmcRequestId)
               (Just AltJSON)
               gamesService

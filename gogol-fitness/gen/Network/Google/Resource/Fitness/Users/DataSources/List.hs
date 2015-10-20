@@ -32,8 +32,8 @@ module Network.Google.Resource.Fitness.Users.DataSources.List
       UsersDataSourcesListResource
 
     -- * Creating a Request
-    , usersDataSourcesList'
-    , UsersDataSourcesList'
+    , usersDataSourcesList
+    , UsersDataSourcesList
 
     -- * Request Lenses
     , udslDataTypeName
@@ -44,7 +44,7 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fitness.users.dataSources.list@ method which the
--- 'UsersDataSourcesList'' request conforms to.
+-- 'UsersDataSourcesList' request conforms to.
 type UsersDataSourcesListResource =
      Capture "userId" Text :>
        "dataSources" :>
@@ -57,31 +57,31 @@ type UsersDataSourcesListResource =
 -- private data sources that are only visible to other developers or calls
 -- using other scopes.
 --
--- /See:/ 'usersDataSourcesList'' smart constructor.
-data UsersDataSourcesList' = UsersDataSourcesList'
+-- /See:/ 'usersDataSourcesList' smart constructor.
+data UsersDataSourcesList = UsersDataSourcesList
     { _udslDataTypeName :: !(Maybe [Text])
     , _udslUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersDataSourcesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersDataSourcesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'udslDataTypeName'
 --
 -- * 'udslUserId'
-usersDataSourcesList'
+usersDataSourcesList
     :: Text -- ^ 'udslUserId'
-    -> UsersDataSourcesList'
-usersDataSourcesList' pUdslUserId_ =
-    UsersDataSourcesList'
+    -> UsersDataSourcesList
+usersDataSourcesList pUdslUserId_ =
+    UsersDataSourcesList
     { _udslDataTypeName = Nothing
     , _udslUserId = pUdslUserId_
     }
 
 -- | The names of data types to include in the list. If not specified, all
 -- data sources will be returned.
-udslDataTypeName :: Lens' UsersDataSourcesList' [Text]
+udslDataTypeName :: Lens' UsersDataSourcesList [Text]
 udslDataTypeName
   = lens _udslDataTypeName
       (\ s a -> s{_udslDataTypeName = a})
@@ -90,14 +90,14 @@ udslDataTypeName
 
 -- | List data sources for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
-udslUserId :: Lens' UsersDataSourcesList' Text
+udslUserId :: Lens' UsersDataSourcesList Text
 udslUserId
   = lens _udslUserId (\ s a -> s{_udslUserId = a})
 
-instance GoogleRequest UsersDataSourcesList' where
-        type Rs UsersDataSourcesList' =
+instance GoogleRequest UsersDataSourcesList where
+        type Rs UsersDataSourcesList =
              ListDataSourcesResponse
-        requestClient UsersDataSourcesList'{..}
+        requestClient UsersDataSourcesList{..}
           = go _udslUserId (_udslDataTypeName ^. _Default)
               (Just AltJSON)
               fitnessService

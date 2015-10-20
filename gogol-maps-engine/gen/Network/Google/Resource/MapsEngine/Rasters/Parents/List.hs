@@ -29,20 +29,20 @@ module Network.Google.Resource.MapsEngine.Rasters.Parents.List
       RastersParentsListResource
 
     -- * Creating a Request
-    , rastersParentsList'
-    , RastersParentsList'
+    , rastersParentsList
+    , RastersParentsList
 
     -- * Request Lenses
-    , rasId
-    , rasPageToken
-    , rasMaxResults
+    , rId
+    , rPageToken
+    , rMaxResults
     ) where
 
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasters.parents.list@ method which the
--- 'RastersParentsList'' request conforms to.
+-- 'RastersParentsList' request conforms to.
 type RastersParentsListResource =
      "rasters" :>
        Capture "id" Text :>
@@ -54,55 +54,53 @@ type RastersParentsListResource =
 
 -- | Return all parent ids of the specified rasters.
 --
--- /See:/ 'rastersParentsList'' smart constructor.
-data RastersParentsList' = RastersParentsList'
-    { _rasId         :: !Text
-    , _rasPageToken  :: !(Maybe Text)
-    , _rasMaxResults :: !(Maybe Word32)
+-- /See:/ 'rastersParentsList' smart constructor.
+data RastersParentsList = RastersParentsList
+    { _rId         :: !Text
+    , _rPageToken  :: !(Maybe Text)
+    , _rMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RastersParentsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'RastersParentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rasId'
+-- * 'rId'
 --
--- * 'rasPageToken'
+-- * 'rPageToken'
 --
--- * 'rasMaxResults'
-rastersParentsList'
-    :: Text -- ^ 'rasId'
-    -> RastersParentsList'
-rastersParentsList' pRasId_ =
-    RastersParentsList'
-    { _rasId = pRasId_
-    , _rasPageToken = Nothing
-    , _rasMaxResults = Nothing
+-- * 'rMaxResults'
+rastersParentsList
+    :: Text -- ^ 'rId'
+    -> RastersParentsList
+rastersParentsList pRId_ =
+    RastersParentsList
+    { _rId = pRId_
+    , _rPageToken = Nothing
+    , _rMaxResults = Nothing
     }
 
 -- | The ID of the rasters whose parents will be listed.
-rasId :: Lens' RastersParentsList' Text
-rasId = lens _rasId (\ s a -> s{_rasId = a})
+rId :: Lens' RastersParentsList Text
+rId = lens _rId (\ s a -> s{_rId = a})
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
 -- nextPageToken from the previous response.
-rasPageToken :: Lens' RastersParentsList' (Maybe Text)
-rasPageToken
-  = lens _rasPageToken (\ s a -> s{_rasPageToken = a})
+rPageToken :: Lens' RastersParentsList (Maybe Text)
+rPageToken
+  = lens _rPageToken (\ s a -> s{_rPageToken = a})
 
 -- | The maximum number of items to include in a single response page. The
 -- maximum supported value is 50.
-rasMaxResults :: Lens' RastersParentsList' (Maybe Word32)
-rasMaxResults
-  = lens _rasMaxResults
-      (\ s a -> s{_rasMaxResults = a})
+rMaxResults :: Lens' RastersParentsList (Maybe Word32)
+rMaxResults
+  = lens _rMaxResults (\ s a -> s{_rMaxResults = a})
 
-instance GoogleRequest RastersParentsList' where
-        type Rs RastersParentsList' = ParentsListResponse
-        requestClient RastersParentsList'{..}
-          = go _rasId _rasPageToken _rasMaxResults
-              (Just AltJSON)
+instance GoogleRequest RastersParentsList where
+        type Rs RastersParentsList = ParentsListResponse
+        requestClient RastersParentsList{..}
+          = go _rId _rPageToken _rMaxResults (Just AltJSON)
               mapsEngineService
           where go
                   = buildClient

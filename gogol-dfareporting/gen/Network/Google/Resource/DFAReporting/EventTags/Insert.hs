@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.EventTags.Insert
       EventTagsInsertResource
 
     -- * Creating a Request
-    , eventTagsInsert'
-    , EventTagsInsert'
+    , eventTagsInsert
+    , EventTagsInsert
 
     -- * Request Lenses
     , etiProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.eventTags.insert@ method which the
--- 'EventTagsInsert'' request conforms to.
+-- 'EventTagsInsert' request conforms to.
 type EventTagsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type EventTagsInsertResource =
 
 -- | Inserts a new event tag.
 --
--- /See:/ 'eventTagsInsert'' smart constructor.
-data EventTagsInsert' = EventTagsInsert'
+-- /See:/ 'eventTagsInsert' smart constructor.
+data EventTagsInsert = EventTagsInsert
     { _etiProFileId :: !Int64
     , _etiPayload   :: !EventTag
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventTagsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventTagsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'etiProFileId'
 --
 -- * 'etiPayload'
-eventTagsInsert'
+eventTagsInsert
     :: Int64 -- ^ 'etiProFileId'
     -> EventTag -- ^ 'etiPayload'
-    -> EventTagsInsert'
-eventTagsInsert' pEtiProFileId_ pEtiPayload_ =
-    EventTagsInsert'
+    -> EventTagsInsert
+eventTagsInsert pEtiProFileId_ pEtiPayload_ =
+    EventTagsInsert
     { _etiProFileId = pEtiProFileId_
     , _etiPayload = pEtiPayload_
     }
 
 -- | User profile ID associated with this request.
-etiProFileId :: Lens' EventTagsInsert' Int64
+etiProFileId :: Lens' EventTagsInsert Int64
 etiProFileId
   = lens _etiProFileId (\ s a -> s{_etiProFileId = a})
 
 -- | Multipart request metadata.
-etiPayload :: Lens' EventTagsInsert' EventTag
+etiPayload :: Lens' EventTagsInsert EventTag
 etiPayload
   = lens _etiPayload (\ s a -> s{_etiPayload = a})
 
-instance GoogleRequest EventTagsInsert' where
-        type Rs EventTagsInsert' = EventTag
-        requestClient EventTagsInsert'{..}
+instance GoogleRequest EventTagsInsert where
+        type Rs EventTagsInsert = EventTag
+        requestClient EventTagsInsert{..}
           = go _etiProFileId (Just AltJSON) _etiPayload
               dFAReportingService
           where go

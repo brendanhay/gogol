@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
       MarketplaceDealsListResource
 
     -- * Creating a Request
-    , marketplaceDealsList'
-    , MarketplaceDealsList'
+    , marketplaceDealsList
+    , MarketplaceDealsList
 
     -- * Request Lenses
     , mdlOrderId
@@ -40,7 +40,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.marketplacedeals.list@ method which the
--- 'MarketplaceDealsList'' request conforms to.
+-- 'MarketplaceDealsList' request conforms to.
 type MarketplaceDealsListResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
@@ -50,32 +50,32 @@ type MarketplaceDealsListResource =
 
 -- | List all the deals for a given order
 --
--- /See:/ 'marketplaceDealsList'' smart constructor.
-newtype MarketplaceDealsList' = MarketplaceDealsList'
+-- /See:/ 'marketplaceDealsList' smart constructor.
+newtype MarketplaceDealsList = MarketplaceDealsList
     { _mdlOrderId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MarketplaceDealsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'MarketplaceDealsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mdlOrderId'
-marketplaceDealsList'
+marketplaceDealsList
     :: Text -- ^ 'mdlOrderId'
-    -> MarketplaceDealsList'
-marketplaceDealsList' pMdlOrderId_ =
-    MarketplaceDealsList'
+    -> MarketplaceDealsList
+marketplaceDealsList pMdlOrderId_ =
+    MarketplaceDealsList
     { _mdlOrderId = pMdlOrderId_
     }
 
 -- | The orderId to get deals for.
-mdlOrderId :: Lens' MarketplaceDealsList' Text
+mdlOrderId :: Lens' MarketplaceDealsList Text
 mdlOrderId
   = lens _mdlOrderId (\ s a -> s{_mdlOrderId = a})
 
-instance GoogleRequest MarketplaceDealsList' where
-        type Rs MarketplaceDealsList' = GetOrderDealsResponse
-        requestClient MarketplaceDealsList'{..}
+instance GoogleRequest MarketplaceDealsList where
+        type Rs MarketplaceDealsList = GetOrderDealsResponse
+        requestClient MarketplaceDealsList{..}
           = go _mdlOrderId (Just AltJSON)
               adExchangeBuyerService
           where go

@@ -27,8 +27,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKs.Upload
       EditsAPKsUploadResource
 
     -- * Creating a Request
-    , editsAPKsUpload'
-    , EditsAPKsUpload'
+    , editsAPKsUpload
+    , EditsAPKsUpload
 
     -- * Request Lenses
     , eapkuPackageName
@@ -40,7 +40,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.apks.upload@ method which the
--- 'EditsAPKsUpload'' request conforms to.
+-- 'EditsAPKsUpload' request conforms to.
 type EditsAPKsUploadResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -50,14 +50,14 @@ type EditsAPKsUploadResource =
                ReqBody '[OctetStream] Body :> Post '[JSON] APK
 
 --
--- /See:/ 'editsAPKsUpload'' smart constructor.
-data EditsAPKsUpload' = EditsAPKsUpload'
+-- /See:/ 'editsAPKsUpload' smart constructor.
+data EditsAPKsUpload = EditsAPKsUpload
     { _eapkuPackageName :: !Text
     , _eapkuMedia       :: !Body
     , _eapkuEditId      :: !Text
     }
 
--- | Creates a value of 'EditsAPKsUpload'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsAPKsUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -66,13 +66,13 @@ data EditsAPKsUpload' = EditsAPKsUpload'
 -- * 'eapkuMedia'
 --
 -- * 'eapkuEditId'
-editsAPKsUpload'
+editsAPKsUpload
     :: Text -- ^ 'eapkuPackageName'
     -> Body -- ^ 'eapkuMedia'
     -> Text -- ^ 'eapkuEditId'
-    -> EditsAPKsUpload'
-editsAPKsUpload' pEapkuPackageName_ pEapkuMedia_ pEapkuEditId_ =
-    EditsAPKsUpload'
+    -> EditsAPKsUpload
+editsAPKsUpload pEapkuPackageName_ pEapkuMedia_ pEapkuEditId_ =
+    EditsAPKsUpload
     { _eapkuPackageName = pEapkuPackageName_
     , _eapkuMedia = pEapkuMedia_
     , _eapkuEditId = pEapkuEditId_
@@ -80,23 +80,23 @@ editsAPKsUpload' pEapkuPackageName_ pEapkuMedia_ pEapkuEditId_ =
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eapkuPackageName :: Lens' EditsAPKsUpload' Text
+eapkuPackageName :: Lens' EditsAPKsUpload Text
 eapkuPackageName
   = lens _eapkuPackageName
       (\ s a -> s{_eapkuPackageName = a})
 
-eapkuMedia :: Lens' EditsAPKsUpload' Body
+eapkuMedia :: Lens' EditsAPKsUpload Body
 eapkuMedia
   = lens _eapkuMedia (\ s a -> s{_eapkuMedia = a})
 
 -- | Unique identifier for this edit.
-eapkuEditId :: Lens' EditsAPKsUpload' Text
+eapkuEditId :: Lens' EditsAPKsUpload Text
 eapkuEditId
   = lens _eapkuEditId (\ s a -> s{_eapkuEditId = a})
 
-instance GoogleRequest EditsAPKsUpload' where
-        type Rs EditsAPKsUpload' = APK
-        requestClient EditsAPKsUpload'{..}
+instance GoogleRequest EditsAPKsUpload where
+        type Rs EditsAPKsUpload = APK
+        requestClient EditsAPKsUpload{..}
           = go _eapkuPackageName _eapkuEditId (Just AltJSON)
               _eapkuMedia
               androidPublisherService

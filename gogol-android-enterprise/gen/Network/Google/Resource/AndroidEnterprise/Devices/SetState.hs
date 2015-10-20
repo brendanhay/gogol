@@ -33,8 +33,8 @@ module Network.Google.Resource.AndroidEnterprise.Devices.SetState
       DevicesSetStateResource
 
     -- * Creating a Request
-    , devicesSetState'
-    , DevicesSetState'
+    , devicesSetState
+    , DevicesSetState
 
     -- * Request Lenses
     , dssEnterpriseId
@@ -47,7 +47,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.devices.setState@ method which the
--- 'DevicesSetState'' request conforms to.
+-- 'DevicesSetState' request conforms to.
 type DevicesSetStateResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -66,15 +66,15 @@ type DevicesSetStateResource =
 -- Otherwise, the device state is ignored and all devices are allowed
 -- access to Google services.
 --
--- /See:/ 'devicesSetState'' smart constructor.
-data DevicesSetState' = DevicesSetState'
+-- /See:/ 'devicesSetState' smart constructor.
+data DevicesSetState = DevicesSetState
     { _dssEnterpriseId :: !Text
     , _dssPayload      :: !DeviceState
     , _dssUserId       :: !Text
     , _dssDeviceId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DevicesSetState'' with the minimum fields required to make a request.
+-- | Creates a value of 'DevicesSetState' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -85,14 +85,14 @@ data DevicesSetState' = DevicesSetState'
 -- * 'dssUserId'
 --
 -- * 'dssDeviceId'
-devicesSetState'
+devicesSetState
     :: Text -- ^ 'dssEnterpriseId'
     -> DeviceState -- ^ 'dssPayload'
     -> Text -- ^ 'dssUserId'
     -> Text -- ^ 'dssDeviceId'
-    -> DevicesSetState'
-devicesSetState' pDssEnterpriseId_ pDssPayload_ pDssUserId_ pDssDeviceId_ =
-    DevicesSetState'
+    -> DevicesSetState
+devicesSetState pDssEnterpriseId_ pDssPayload_ pDssUserId_ pDssDeviceId_ =
+    DevicesSetState
     { _dssEnterpriseId = pDssEnterpriseId_
     , _dssPayload = pDssPayload_
     , _dssUserId = pDssUserId_
@@ -100,29 +100,29 @@ devicesSetState' pDssEnterpriseId_ pDssPayload_ pDssUserId_ pDssDeviceId_ =
     }
 
 -- | The ID of the enterprise.
-dssEnterpriseId :: Lens' DevicesSetState' Text
+dssEnterpriseId :: Lens' DevicesSetState Text
 dssEnterpriseId
   = lens _dssEnterpriseId
       (\ s a -> s{_dssEnterpriseId = a})
 
 -- | Multipart request metadata.
-dssPayload :: Lens' DevicesSetState' DeviceState
+dssPayload :: Lens' DevicesSetState DeviceState
 dssPayload
   = lens _dssPayload (\ s a -> s{_dssPayload = a})
 
 -- | The ID of the user.
-dssUserId :: Lens' DevicesSetState' Text
+dssUserId :: Lens' DevicesSetState Text
 dssUserId
   = lens _dssUserId (\ s a -> s{_dssUserId = a})
 
 -- | The ID of the device.
-dssDeviceId :: Lens' DevicesSetState' Text
+dssDeviceId :: Lens' DevicesSetState Text
 dssDeviceId
   = lens _dssDeviceId (\ s a -> s{_dssDeviceId = a})
 
-instance GoogleRequest DevicesSetState' where
-        type Rs DevicesSetState' = DeviceState
-        requestClient DevicesSetState'{..}
+instance GoogleRequest DevicesSetState where
+        type Rs DevicesSetState = DeviceState
+        requestClient DevicesSetState{..}
           = go _dssEnterpriseId _dssUserId _dssDeviceId
               (Just AltJSON)
               _dssPayload

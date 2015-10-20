@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Roles.Patch
       RolesPatchResource
 
     -- * Creating a Request
-    , rolesPatch'
-    , RolesPatch'
+    , rolesPatch
+    , RolesPatch
 
     -- * Request Lenses
     , rpPayload
@@ -42,7 +42,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.roles.patch@ method which the
--- 'RolesPatch'' request conforms to.
+-- 'RolesPatch' request conforms to.
 type RolesPatchResource =
      "customer" :>
        Capture "customer" Text :>
@@ -53,14 +53,14 @@ type RolesPatchResource =
 
 -- | Updates a role. This method supports patch semantics.
 --
--- /See:/ 'rolesPatch'' smart constructor.
-data RolesPatch' = RolesPatch'
+-- /See:/ 'rolesPatch' smart constructor.
+data RolesPatch = RolesPatch
     { _rpPayload  :: !Role
     , _rpRoleId   :: !Text
     , _rpCustomer :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RolesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'RolesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data RolesPatch' = RolesPatch'
 -- * 'rpRoleId'
 --
 -- * 'rpCustomer'
-rolesPatch'
+rolesPatch
     :: Role -- ^ 'rpPayload'
     -> Text -- ^ 'rpRoleId'
     -> Text -- ^ 'rpCustomer'
-    -> RolesPatch'
-rolesPatch' pRpPayload_ pRpRoleId_ pRpCustomer_ =
-    RolesPatch'
+    -> RolesPatch
+rolesPatch pRpPayload_ pRpRoleId_ pRpCustomer_ =
+    RolesPatch
     { _rpPayload = pRpPayload_
     , _rpRoleId = pRpRoleId_
     , _rpCustomer = pRpCustomer_
     }
 
 -- | Multipart request metadata.
-rpPayload :: Lens' RolesPatch' Role
+rpPayload :: Lens' RolesPatch Role
 rpPayload
   = lens _rpPayload (\ s a -> s{_rpPayload = a})
 
 -- | Immutable ID of the role.
-rpRoleId :: Lens' RolesPatch' Text
+rpRoleId :: Lens' RolesPatch Text
 rpRoleId = lens _rpRoleId (\ s a -> s{_rpRoleId = a})
 
 -- | Immutable ID of the Google Apps account.
-rpCustomer :: Lens' RolesPatch' Text
+rpCustomer :: Lens' RolesPatch Text
 rpCustomer
   = lens _rpCustomer (\ s a -> s{_rpCustomer = a})
 
-instance GoogleRequest RolesPatch' where
-        type Rs RolesPatch' = Role
-        requestClient RolesPatch'{..}
+instance GoogleRequest RolesPatch where
+        type Rs RolesPatch = Role
+        requestClient RolesPatch{..}
           = go _rpCustomer _rpRoleId (Just AltJSON) _rpPayload
               directoryService
           where go

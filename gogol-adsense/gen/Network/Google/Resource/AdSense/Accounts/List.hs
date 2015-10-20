@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSense.Accounts.List
       AccountsListResource
 
     -- * Creating a Request
-    , accountsList'
-    , AccountsList'
+    , accountsList
+    , AccountsList
 
     -- * Request Lenses
     , alPageToken
@@ -41,7 +41,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.list@ method which the
--- 'AccountsList'' request conforms to.
+-- 'AccountsList' request conforms to.
 type AccountsListResource =
      "accounts" :>
        QueryParam "pageToken" Text :>
@@ -50,23 +50,23 @@ type AccountsListResource =
 
 -- | List all accounts available to this AdSense account.
 --
--- /See:/ 'accountsList'' smart constructor.
-data AccountsList' = AccountsList'
+-- /See:/ 'accountsList' smart constructor.
+data AccountsList = AccountsList
     { _alPageToken  :: !(Maybe Text)
     , _alMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'alPageToken'
 --
 -- * 'alMaxResults'
-accountsList'
-    :: AccountsList'
-accountsList' =
-    AccountsList'
+accountsList
+    :: AccountsList
+accountsList =
+    AccountsList
     { _alPageToken = Nothing
     , _alMaxResults = Nothing
     }
@@ -74,19 +74,19 @@ accountsList' =
 -- | A continuation token, used to page through accounts. To retrieve the
 -- next page, set this parameter to the value of \"nextPageToken\" from the
 -- previous response.
-alPageToken :: Lens' AccountsList' (Maybe Text)
+alPageToken :: Lens' AccountsList (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | The maximum number of accounts to include in the response, used for
 -- paging.
-alMaxResults :: Lens' AccountsList' (Maybe Int32)
+alMaxResults :: Lens' AccountsList (Maybe Int32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
-instance GoogleRequest AccountsList' where
-        type Rs AccountsList' = Accounts
-        requestClient AccountsList'{..}
+instance GoogleRequest AccountsList where
+        type Rs AccountsList = Accounts
+        requestClient AccountsList{..}
           = go _alPageToken _alMaxResults (Just AltJSON)
               adSenseService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Dele
       DebuggerDebuggeesBreakpointsDeleteResource
 
     -- * Creating a Request
-    , debuggerDebuggeesBreakpointsDelete'
-    , DebuggerDebuggeesBreakpointsDelete'
+    , debuggerDebuggeesBreakpointsDelete
+    , DebuggerDebuggeesBreakpointsDelete
 
     -- * Request Lenses
     , ddbdXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @clouddebugger.debugger.debuggees.breakpoints.delete@ method which the
--- 'DebuggerDebuggeesBreakpointsDelete'' request conforms to.
+-- 'DebuggerDebuggeesBreakpointsDelete' request conforms to.
 type DebuggerDebuggeesBreakpointsDeleteResource =
      "v2" :>
        "debugger" :>
@@ -67,8 +67,8 @@ type DebuggerDebuggeesBreakpointsDeleteResource =
 
 -- | Deletes the breakpoint from the debuggee.
 --
--- /See:/ 'debuggerDebuggeesBreakpointsDelete'' smart constructor.
-data DebuggerDebuggeesBreakpointsDelete' = DebuggerDebuggeesBreakpointsDelete'
+-- /See:/ 'debuggerDebuggeesBreakpointsDelete' smart constructor.
+data DebuggerDebuggeesBreakpointsDelete = DebuggerDebuggeesBreakpointsDelete
     { _ddbdXgafv          :: !(Maybe Text)
     , _ddbdUploadProtocol :: !(Maybe Text)
     , _ddbdPp             :: !Bool
@@ -80,7 +80,7 @@ data DebuggerDebuggeesBreakpointsDelete' = DebuggerDebuggeesBreakpointsDelete'
     , _ddbdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DebuggerDebuggeesBreakpointsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'DebuggerDebuggeesBreakpointsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -101,12 +101,12 @@ data DebuggerDebuggeesBreakpointsDelete' = DebuggerDebuggeesBreakpointsDelete'
 -- * 'ddbdDebuggeeId'
 --
 -- * 'ddbdCallback'
-debuggerDebuggeesBreakpointsDelete'
+debuggerDebuggeesBreakpointsDelete
     :: Text -- ^ 'ddbdBreakpointId'
     -> Text -- ^ 'ddbdDebuggeeId'
-    -> DebuggerDebuggeesBreakpointsDelete'
-debuggerDebuggeesBreakpointsDelete' pDdbdBreakpointId_ pDdbdDebuggeeId_ =
-    DebuggerDebuggeesBreakpointsDelete'
+    -> DebuggerDebuggeesBreakpointsDelete
+debuggerDebuggeesBreakpointsDelete pDdbdBreakpointId_ pDdbdDebuggeeId_ =
+    DebuggerDebuggeesBreakpointsDelete
     { _ddbdXgafv = Nothing
     , _ddbdUploadProtocol = Nothing
     , _ddbdPp = True
@@ -119,59 +119,59 @@ debuggerDebuggeesBreakpointsDelete' pDdbdBreakpointId_ pDdbdDebuggeeId_ =
     }
 
 -- | V1 error format.
-ddbdXgafv :: Lens' DebuggerDebuggeesBreakpointsDelete' (Maybe Text)
+ddbdXgafv :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Text)
 ddbdXgafv
   = lens _ddbdXgafv (\ s a -> s{_ddbdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ddbdUploadProtocol :: Lens' DebuggerDebuggeesBreakpointsDelete' (Maybe Text)
+ddbdUploadProtocol :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Text)
 ddbdUploadProtocol
   = lens _ddbdUploadProtocol
       (\ s a -> s{_ddbdUploadProtocol = a})
 
 -- | Pretty-print response.
-ddbdPp :: Lens' DebuggerDebuggeesBreakpointsDelete' Bool
+ddbdPp :: Lens' DebuggerDebuggeesBreakpointsDelete Bool
 ddbdPp = lens _ddbdPp (\ s a -> s{_ddbdPp = a})
 
 -- | OAuth access token.
-ddbdAccessToken :: Lens' DebuggerDebuggeesBreakpointsDelete' (Maybe Text)
+ddbdAccessToken :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Text)
 ddbdAccessToken
   = lens _ddbdAccessToken
       (\ s a -> s{_ddbdAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ddbdUploadType :: Lens' DebuggerDebuggeesBreakpointsDelete' (Maybe Text)
+ddbdUploadType :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Text)
 ddbdUploadType
   = lens _ddbdUploadType
       (\ s a -> s{_ddbdUploadType = a})
 
 -- | The breakpoint to delete.
-ddbdBreakpointId :: Lens' DebuggerDebuggeesBreakpointsDelete' Text
+ddbdBreakpointId :: Lens' DebuggerDebuggeesBreakpointsDelete Text
 ddbdBreakpointId
   = lens _ddbdBreakpointId
       (\ s a -> s{_ddbdBreakpointId = a})
 
 -- | OAuth bearer token.
-ddbdBearerToken :: Lens' DebuggerDebuggeesBreakpointsDelete' (Maybe Text)
+ddbdBearerToken :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Text)
 ddbdBearerToken
   = lens _ddbdBearerToken
       (\ s a -> s{_ddbdBearerToken = a})
 
 -- | The debuggee id to delete the breakpoint from.
-ddbdDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsDelete' Text
+ddbdDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsDelete Text
 ddbdDebuggeeId
   = lens _ddbdDebuggeeId
       (\ s a -> s{_ddbdDebuggeeId = a})
 
 -- | JSONP
-ddbdCallback :: Lens' DebuggerDebuggeesBreakpointsDelete' (Maybe Text)
+ddbdCallback :: Lens' DebuggerDebuggeesBreakpointsDelete (Maybe Text)
 ddbdCallback
   = lens _ddbdCallback (\ s a -> s{_ddbdCallback = a})
 
 instance GoogleRequest
-         DebuggerDebuggeesBreakpointsDelete' where
-        type Rs DebuggerDebuggeesBreakpointsDelete' = Empty
-        requestClient DebuggerDebuggeesBreakpointsDelete'{..}
+         DebuggerDebuggeesBreakpointsDelete where
+        type Rs DebuggerDebuggeesBreakpointsDelete = Empty
+        requestClient DebuggerDebuggeesBreakpointsDelete{..}
           = go _ddbdDebuggeeId _ddbdBreakpointId _ddbdXgafv
               _ddbdUploadProtocol
               (Just _ddbdPp)

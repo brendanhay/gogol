@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Delete
       ContentCategoriesDeleteResource
 
     -- * Creating a Request
-    , contentCategoriesDelete'
-    , ContentCategoriesDelete'
+    , contentCategoriesDelete
+    , ContentCategoriesDelete
 
     -- * Request Lenses
     , ccdProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.contentCategories.delete@ method which the
--- 'ContentCategoriesDelete'' request conforms to.
+-- 'ContentCategoriesDelete' request conforms to.
 type ContentCategoriesDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,41 +51,41 @@ type ContentCategoriesDeleteResource =
 
 -- | Deletes an existing content category.
 --
--- /See:/ 'contentCategoriesDelete'' smart constructor.
-data ContentCategoriesDelete' = ContentCategoriesDelete'
+-- /See:/ 'contentCategoriesDelete' smart constructor.
+data ContentCategoriesDelete = ContentCategoriesDelete
     { _ccdProFileId :: !Int64
     , _ccdId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ContentCategoriesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ContentCategoriesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ccdProFileId'
 --
 -- * 'ccdId'
-contentCategoriesDelete'
+contentCategoriesDelete
     :: Int64 -- ^ 'ccdProFileId'
     -> Int64 -- ^ 'ccdId'
-    -> ContentCategoriesDelete'
-contentCategoriesDelete' pCcdProFileId_ pCcdId_ =
-    ContentCategoriesDelete'
+    -> ContentCategoriesDelete
+contentCategoriesDelete pCcdProFileId_ pCcdId_ =
+    ContentCategoriesDelete
     { _ccdProFileId = pCcdProFileId_
     , _ccdId = pCcdId_
     }
 
 -- | User profile ID associated with this request.
-ccdProFileId :: Lens' ContentCategoriesDelete' Int64
+ccdProFileId :: Lens' ContentCategoriesDelete Int64
 ccdProFileId
   = lens _ccdProFileId (\ s a -> s{_ccdProFileId = a})
 
 -- | Content category ID.
-ccdId :: Lens' ContentCategoriesDelete' Int64
+ccdId :: Lens' ContentCategoriesDelete Int64
 ccdId = lens _ccdId (\ s a -> s{_ccdId = a})
 
-instance GoogleRequest ContentCategoriesDelete' where
-        type Rs ContentCategoriesDelete' = ()
-        requestClient ContentCategoriesDelete'{..}
+instance GoogleRequest ContentCategoriesDelete where
+        type Rs ContentCategoriesDelete = ()
+        requestClient ContentCategoriesDelete{..}
           = go _ccdProFileId _ccdId (Just AltJSON)
               dFAReportingService
           where go

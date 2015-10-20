@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Notifications.Patch
       NotificationsPatchResource
 
     -- * Creating a Request
-    , notificationsPatch'
-    , NotificationsPatch'
+    , notificationsPatch
+    , NotificationsPatch
 
     -- * Request Lenses
     , npPayload
@@ -42,7 +42,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.notifications.patch@ method which the
--- 'NotificationsPatch'' request conforms to.
+-- 'NotificationsPatch' request conforms to.
 type NotificationsPatchResource =
      "customer" :>
        Capture "customer" Text :>
@@ -54,14 +54,14 @@ type NotificationsPatchResource =
 
 -- | Updates a notification. This method supports patch semantics.
 --
--- /See:/ 'notificationsPatch'' smart constructor.
-data NotificationsPatch' = NotificationsPatch'
+-- /See:/ 'notificationsPatch' smart constructor.
+data NotificationsPatch = NotificationsPatch
     { _npPayload        :: !Notification
     , _npCustomer       :: !Text
     , _npNotificationId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'NotificationsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'NotificationsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,37 +70,37 @@ data NotificationsPatch' = NotificationsPatch'
 -- * 'npCustomer'
 --
 -- * 'npNotificationId'
-notificationsPatch'
+notificationsPatch
     :: Notification -- ^ 'npPayload'
     -> Text -- ^ 'npCustomer'
     -> Text -- ^ 'npNotificationId'
-    -> NotificationsPatch'
-notificationsPatch' pNpPayload_ pNpCustomer_ pNpNotificationId_ =
-    NotificationsPatch'
+    -> NotificationsPatch
+notificationsPatch pNpPayload_ pNpCustomer_ pNpNotificationId_ =
+    NotificationsPatch
     { _npPayload = pNpPayload_
     , _npCustomer = pNpCustomer_
     , _npNotificationId = pNpNotificationId_
     }
 
 -- | Multipart request metadata.
-npPayload :: Lens' NotificationsPatch' Notification
+npPayload :: Lens' NotificationsPatch Notification
 npPayload
   = lens _npPayload (\ s a -> s{_npPayload = a})
 
 -- | The unique ID for the customer\'s Google account.
-npCustomer :: Lens' NotificationsPatch' Text
+npCustomer :: Lens' NotificationsPatch Text
 npCustomer
   = lens _npCustomer (\ s a -> s{_npCustomer = a})
 
 -- | The unique ID of the notification.
-npNotificationId :: Lens' NotificationsPatch' Text
+npNotificationId :: Lens' NotificationsPatch Text
 npNotificationId
   = lens _npNotificationId
       (\ s a -> s{_npNotificationId = a})
 
-instance GoogleRequest NotificationsPatch' where
-        type Rs NotificationsPatch' = Notification
-        requestClient NotificationsPatch'{..}
+instance GoogleRequest NotificationsPatch where
+        type Rs NotificationsPatch = Notification
+        requestClient NotificationsPatch{..}
           = go _npCustomer _npNotificationId (Just AltJSON)
               _npPayload
               directoryService

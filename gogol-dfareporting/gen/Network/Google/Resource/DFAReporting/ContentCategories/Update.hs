@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Update
       ContentCategoriesUpdateResource
 
     -- * Creating a Request
-    , contentCategoriesUpdate'
-    , ContentCategoriesUpdate'
+    , contentCategoriesUpdate
+    , ContentCategoriesUpdate
 
     -- * Request Lenses
     , ccuProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.contentCategories.update@ method which the
--- 'ContentCategoriesUpdate'' request conforms to.
+-- 'ContentCategoriesUpdate' request conforms to.
 type ContentCategoriesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,42 +52,42 @@ type ContentCategoriesUpdateResource =
 
 -- | Updates an existing content category.
 --
--- /See:/ 'contentCategoriesUpdate'' smart constructor.
-data ContentCategoriesUpdate' = ContentCategoriesUpdate'
+-- /See:/ 'contentCategoriesUpdate' smart constructor.
+data ContentCategoriesUpdate = ContentCategoriesUpdate
     { _ccuProFileId :: !Int64
     , _ccuPayload   :: !ContentCategory
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ContentCategoriesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ContentCategoriesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ccuProFileId'
 --
 -- * 'ccuPayload'
-contentCategoriesUpdate'
+contentCategoriesUpdate
     :: Int64 -- ^ 'ccuProFileId'
     -> ContentCategory -- ^ 'ccuPayload'
-    -> ContentCategoriesUpdate'
-contentCategoriesUpdate' pCcuProFileId_ pCcuPayload_ =
-    ContentCategoriesUpdate'
+    -> ContentCategoriesUpdate
+contentCategoriesUpdate pCcuProFileId_ pCcuPayload_ =
+    ContentCategoriesUpdate
     { _ccuProFileId = pCcuProFileId_
     , _ccuPayload = pCcuPayload_
     }
 
 -- | User profile ID associated with this request.
-ccuProFileId :: Lens' ContentCategoriesUpdate' Int64
+ccuProFileId :: Lens' ContentCategoriesUpdate Int64
 ccuProFileId
   = lens _ccuProFileId (\ s a -> s{_ccuProFileId = a})
 
 -- | Multipart request metadata.
-ccuPayload :: Lens' ContentCategoriesUpdate' ContentCategory
+ccuPayload :: Lens' ContentCategoriesUpdate ContentCategory
 ccuPayload
   = lens _ccuPayload (\ s a -> s{_ccuPayload = a})
 
-instance GoogleRequest ContentCategoriesUpdate' where
-        type Rs ContentCategoriesUpdate' = ContentCategory
-        requestClient ContentCategoriesUpdate'{..}
+instance GoogleRequest ContentCategoriesUpdate where
+        type Rs ContentCategoriesUpdate = ContentCategory
+        requestClient ContentCategoriesUpdate{..}
           = go _ccuProFileId (Just AltJSON) _ccuPayload
               dFAReportingService
           where go

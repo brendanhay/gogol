@@ -29,8 +29,8 @@ module Network.Google.Resource.Partners.Companies.Leads.Create
       CompaniesLeadsCreateResource
 
     -- * Creating a Request
-    , companiesLeadsCreate'
-    , CompaniesLeadsCreate'
+    , companiesLeadsCreate
+    , CompaniesLeadsCreate
 
     -- * Request Lenses
     , clcXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @partners.companies.leads.create@ method which the
--- 'CompaniesLeadsCreate'' request conforms to.
+-- 'CompaniesLeadsCreate' request conforms to.
 type CompaniesLeadsCreateResource =
      "v2" :>
        "companies" :>
@@ -67,8 +67,8 @@ type CompaniesLeadsCreateResource =
 
 -- | Creates an advertiser lead for the given company ID.
 --
--- /See:/ 'companiesLeadsCreate'' smart constructor.
-data CompaniesLeadsCreate' = CompaniesLeadsCreate'
+-- /See:/ 'companiesLeadsCreate' smart constructor.
+data CompaniesLeadsCreate = CompaniesLeadsCreate
     { _clcXgafv          :: !(Maybe Text)
     , _clcUploadProtocol :: !(Maybe Text)
     , _clcCompanyId      :: !Text
@@ -80,7 +80,7 @@ data CompaniesLeadsCreate' = CompaniesLeadsCreate'
     , _clcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CompaniesLeadsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CompaniesLeadsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -101,12 +101,12 @@ data CompaniesLeadsCreate' = CompaniesLeadsCreate'
 -- * 'clcBearerToken'
 --
 -- * 'clcCallback'
-companiesLeadsCreate'
+companiesLeadsCreate
     :: Text -- ^ 'clcCompanyId'
     -> CreateLeadRequest -- ^ 'clcPayload'
-    -> CompaniesLeadsCreate'
-companiesLeadsCreate' pClcCompanyId_ pClcPayload_ =
-    CompaniesLeadsCreate'
+    -> CompaniesLeadsCreate
+companiesLeadsCreate pClcCompanyId_ pClcPayload_ =
+    CompaniesLeadsCreate
     { _clcXgafv = Nothing
     , _clcUploadProtocol = Nothing
     , _clcCompanyId = pClcCompanyId_
@@ -119,55 +119,55 @@ companiesLeadsCreate' pClcCompanyId_ pClcPayload_ =
     }
 
 -- | V1 error format.
-clcXgafv :: Lens' CompaniesLeadsCreate' (Maybe Text)
+clcXgafv :: Lens' CompaniesLeadsCreate (Maybe Text)
 clcXgafv = lens _clcXgafv (\ s a -> s{_clcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-clcUploadProtocol :: Lens' CompaniesLeadsCreate' (Maybe Text)
+clcUploadProtocol :: Lens' CompaniesLeadsCreate (Maybe Text)
 clcUploadProtocol
   = lens _clcUploadProtocol
       (\ s a -> s{_clcUploadProtocol = a})
 
 -- | The ID of the company to contact.
-clcCompanyId :: Lens' CompaniesLeadsCreate' Text
+clcCompanyId :: Lens' CompaniesLeadsCreate Text
 clcCompanyId
   = lens _clcCompanyId (\ s a -> s{_clcCompanyId = a})
 
 -- | Pretty-print response.
-clcPp :: Lens' CompaniesLeadsCreate' Bool
+clcPp :: Lens' CompaniesLeadsCreate Bool
 clcPp = lens _clcPp (\ s a -> s{_clcPp = a})
 
 -- | OAuth access token.
-clcAccessToken :: Lens' CompaniesLeadsCreate' (Maybe Text)
+clcAccessToken :: Lens' CompaniesLeadsCreate (Maybe Text)
 clcAccessToken
   = lens _clcAccessToken
       (\ s a -> s{_clcAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-clcUploadType :: Lens' CompaniesLeadsCreate' (Maybe Text)
+clcUploadType :: Lens' CompaniesLeadsCreate (Maybe Text)
 clcUploadType
   = lens _clcUploadType
       (\ s a -> s{_clcUploadType = a})
 
 -- | Multipart request metadata.
-clcPayload :: Lens' CompaniesLeadsCreate' CreateLeadRequest
+clcPayload :: Lens' CompaniesLeadsCreate CreateLeadRequest
 clcPayload
   = lens _clcPayload (\ s a -> s{_clcPayload = a})
 
 -- | OAuth bearer token.
-clcBearerToken :: Lens' CompaniesLeadsCreate' (Maybe Text)
+clcBearerToken :: Lens' CompaniesLeadsCreate (Maybe Text)
 clcBearerToken
   = lens _clcBearerToken
       (\ s a -> s{_clcBearerToken = a})
 
 -- | JSONP
-clcCallback :: Lens' CompaniesLeadsCreate' (Maybe Text)
+clcCallback :: Lens' CompaniesLeadsCreate (Maybe Text)
 clcCallback
   = lens _clcCallback (\ s a -> s{_clcCallback = a})
 
-instance GoogleRequest CompaniesLeadsCreate' where
-        type Rs CompaniesLeadsCreate' = CreateLeadResponse
-        requestClient CompaniesLeadsCreate'{..}
+instance GoogleRequest CompaniesLeadsCreate where
+        type Rs CompaniesLeadsCreate = CreateLeadResponse
+        requestClient CompaniesLeadsCreate{..}
           = go _clcCompanyId _clcXgafv _clcUploadProtocol
               (Just _clcPp)
               _clcAccessToken

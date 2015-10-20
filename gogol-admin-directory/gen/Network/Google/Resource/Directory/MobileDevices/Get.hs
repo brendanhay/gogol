@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.MobileDevices.Get
       MobileDevicesGetResource
 
     -- * Creating a Request
-    , mobileDevicesGet'
-    , MobileDevicesGet'
+    , mobileDevicesGet
+    , MobileDevicesGet
 
     -- * Request Lenses
     , mdgResourceId
@@ -42,7 +42,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.mobiledevices.get@ method which the
--- 'MobileDevicesGet'' request conforms to.
+-- 'MobileDevicesGet' request conforms to.
 type MobileDevicesGetResource =
      "customer" :>
        Capture "customerId" Text :>
@@ -54,14 +54,14 @@ type MobileDevicesGetResource =
 
 -- | Retrieve Mobile Device
 --
--- /See:/ 'mobileDevicesGet'' smart constructor.
-data MobileDevicesGet' = MobileDevicesGet'
+-- /See:/ 'mobileDevicesGet' smart constructor.
+data MobileDevicesGet = MobileDevicesGet
     { _mdgResourceId :: !Text
     , _mdgCustomerId :: !Text
     , _mdgProjection :: !(Maybe MobileDevicesGetProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MobileDevicesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'MobileDevicesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,38 +70,38 @@ data MobileDevicesGet' = MobileDevicesGet'
 -- * 'mdgCustomerId'
 --
 -- * 'mdgProjection'
-mobileDevicesGet'
+mobileDevicesGet
     :: Text -- ^ 'mdgResourceId'
     -> Text -- ^ 'mdgCustomerId'
-    -> MobileDevicesGet'
-mobileDevicesGet' pMdgResourceId_ pMdgCustomerId_ =
-    MobileDevicesGet'
+    -> MobileDevicesGet
+mobileDevicesGet pMdgResourceId_ pMdgCustomerId_ =
+    MobileDevicesGet
     { _mdgResourceId = pMdgResourceId_
     , _mdgCustomerId = pMdgCustomerId_
     , _mdgProjection = Nothing
     }
 
 -- | Immutable id of Mobile Device
-mdgResourceId :: Lens' MobileDevicesGet' Text
+mdgResourceId :: Lens' MobileDevicesGet Text
 mdgResourceId
   = lens _mdgResourceId
       (\ s a -> s{_mdgResourceId = a})
 
 -- | Immutable id of the Google Apps account
-mdgCustomerId :: Lens' MobileDevicesGet' Text
+mdgCustomerId :: Lens' MobileDevicesGet Text
 mdgCustomerId
   = lens _mdgCustomerId
       (\ s a -> s{_mdgCustomerId = a})
 
 -- | Restrict information returned to a set of selected fields.
-mdgProjection :: Lens' MobileDevicesGet' (Maybe MobileDevicesGetProjection)
+mdgProjection :: Lens' MobileDevicesGet (Maybe MobileDevicesGetProjection)
 mdgProjection
   = lens _mdgProjection
       (\ s a -> s{_mdgProjection = a})
 
-instance GoogleRequest MobileDevicesGet' where
-        type Rs MobileDevicesGet' = MobileDevice
-        requestClient MobileDevicesGet'{..}
+instance GoogleRequest MobileDevicesGet where
+        type Rs MobileDevicesGet = MobileDevice
+        requestClient MobileDevicesGet{..}
           = go _mdgCustomerId _mdgResourceId _mdgProjection
               (Just AltJSON)
               directoryService

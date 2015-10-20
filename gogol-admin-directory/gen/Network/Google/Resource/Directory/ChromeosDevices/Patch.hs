@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.ChromeosDevices.Patch
       ChromeosDevicesPatchResource
 
     -- * Creating a Request
-    , chromeosDevicesPatch'
-    , ChromeosDevicesPatch'
+    , chromeosDevicesPatch
+    , ChromeosDevicesPatch
 
     -- * Request Lenses
     , cdpPayload
@@ -43,7 +43,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.chromeosdevices.patch@ method which the
--- 'ChromeosDevicesPatch'' request conforms to.
+-- 'ChromeosDevicesPatch' request conforms to.
 type ChromeosDevicesPatchResource =
      "customer" :>
        Capture "customerId" Text :>
@@ -59,15 +59,15 @@ type ChromeosDevicesPatchResource =
 
 -- | Update Chrome OS Device. This method supports patch semantics.
 --
--- /See:/ 'chromeosDevicesPatch'' smart constructor.
-data ChromeosDevicesPatch' = ChromeosDevicesPatch'
+-- /See:/ 'chromeosDevicesPatch' smart constructor.
+data ChromeosDevicesPatch = ChromeosDevicesPatch
     { _cdpPayload    :: !ChromeOSDevice
     , _cdpCustomerId :: !Text
     , _cdpDeviceId   :: !Text
     , _cdpProjection :: !(Maybe ChromeosDevicesPatchProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChromeosDevicesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChromeosDevicesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -78,13 +78,13 @@ data ChromeosDevicesPatch' = ChromeosDevicesPatch'
 -- * 'cdpDeviceId'
 --
 -- * 'cdpProjection'
-chromeosDevicesPatch'
+chromeosDevicesPatch
     :: ChromeOSDevice -- ^ 'cdpPayload'
     -> Text -- ^ 'cdpCustomerId'
     -> Text -- ^ 'cdpDeviceId'
-    -> ChromeosDevicesPatch'
-chromeosDevicesPatch' pCdpPayload_ pCdpCustomerId_ pCdpDeviceId_ =
-    ChromeosDevicesPatch'
+    -> ChromeosDevicesPatch
+chromeosDevicesPatch pCdpPayload_ pCdpCustomerId_ pCdpDeviceId_ =
+    ChromeosDevicesPatch
     { _cdpPayload = pCdpPayload_
     , _cdpCustomerId = pCdpCustomerId_
     , _cdpDeviceId = pCdpDeviceId_
@@ -92,30 +92,30 @@ chromeosDevicesPatch' pCdpPayload_ pCdpCustomerId_ pCdpDeviceId_ =
     }
 
 -- | Multipart request metadata.
-cdpPayload :: Lens' ChromeosDevicesPatch' ChromeOSDevice
+cdpPayload :: Lens' ChromeosDevicesPatch ChromeOSDevice
 cdpPayload
   = lens _cdpPayload (\ s a -> s{_cdpPayload = a})
 
 -- | Immutable id of the Google Apps account
-cdpCustomerId :: Lens' ChromeosDevicesPatch' Text
+cdpCustomerId :: Lens' ChromeosDevicesPatch Text
 cdpCustomerId
   = lens _cdpCustomerId
       (\ s a -> s{_cdpCustomerId = a})
 
 -- | Immutable id of Chrome OS Device
-cdpDeviceId :: Lens' ChromeosDevicesPatch' Text
+cdpDeviceId :: Lens' ChromeosDevicesPatch Text
 cdpDeviceId
   = lens _cdpDeviceId (\ s a -> s{_cdpDeviceId = a})
 
 -- | Restrict information returned to a set of selected fields.
-cdpProjection :: Lens' ChromeosDevicesPatch' (Maybe ChromeosDevicesPatchProjection)
+cdpProjection :: Lens' ChromeosDevicesPatch (Maybe ChromeosDevicesPatchProjection)
 cdpProjection
   = lens _cdpProjection
       (\ s a -> s{_cdpProjection = a})
 
-instance GoogleRequest ChromeosDevicesPatch' where
-        type Rs ChromeosDevicesPatch' = ChromeOSDevice
-        requestClient ChromeosDevicesPatch'{..}
+instance GoogleRequest ChromeosDevicesPatch where
+        type Rs ChromeosDevicesPatch = ChromeOSDevice
+        requestClient ChromeosDevicesPatch{..}
           = go _cdpCustomerId _cdpDeviceId _cdpProjection
               (Just AltJSON)
               _cdpPayload

@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Permissions.Patch
       PermissionsPatchResource
 
     -- * Creating a Request
-    , permissionsPatch'
-    , PermissionsPatch'
+    , permissionsPatch
+    , PermissionsPatch
 
     -- * Request Lenses
     , pppPayload
@@ -43,7 +43,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.permissions.patch@ method which the
--- 'PermissionsPatch'' request conforms to.
+-- 'PermissionsPatch' request conforms to.
 type PermissionsPatchResource =
      "files" :>
        Capture "fileId" Text :>
@@ -56,15 +56,15 @@ type PermissionsPatchResource =
 
 -- | Updates a permission using patch semantics.
 --
--- /See:/ 'permissionsPatch'' smart constructor.
-data PermissionsPatch' = PermissionsPatch'
+-- /See:/ 'permissionsPatch' smart constructor.
+data PermissionsPatch = PermissionsPatch
     { _pppPayload           :: !Permission
     , _pppTransferOwnership :: !Bool
     , _pppFileId            :: !Text
     , _pppPermissionId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PermissionsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'PermissionsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,13 +75,13 @@ data PermissionsPatch' = PermissionsPatch'
 -- * 'pppFileId'
 --
 -- * 'pppPermissionId'
-permissionsPatch'
+permissionsPatch
     :: Permission -- ^ 'pppPayload'
     -> Text -- ^ 'pppFileId'
     -> Text -- ^ 'pppPermissionId'
-    -> PermissionsPatch'
-permissionsPatch' pPppPayload_ pPppFileId_ pPppPermissionId_ =
-    PermissionsPatch'
+    -> PermissionsPatch
+permissionsPatch pPppPayload_ pPppFileId_ pPppPermissionId_ =
+    PermissionsPatch
     { _pppPayload = pPppPayload_
     , _pppTransferOwnership = False
     , _pppFileId = pPppFileId_
@@ -89,31 +89,31 @@ permissionsPatch' pPppPayload_ pPppFileId_ pPppPermissionId_ =
     }
 
 -- | Multipart request metadata.
-pppPayload :: Lens' PermissionsPatch' Permission
+pppPayload :: Lens' PermissionsPatch Permission
 pppPayload
   = lens _pppPayload (\ s a -> s{_pppPayload = a})
 
 -- | Whether changing a role to \'owner\' downgrades the current owners to
 -- writers. Does nothing if the specified role is not \'owner\'.
-pppTransferOwnership :: Lens' PermissionsPatch' Bool
+pppTransferOwnership :: Lens' PermissionsPatch Bool
 pppTransferOwnership
   = lens _pppTransferOwnership
       (\ s a -> s{_pppTransferOwnership = a})
 
 -- | The ID for the file.
-pppFileId :: Lens' PermissionsPatch' Text
+pppFileId :: Lens' PermissionsPatch Text
 pppFileId
   = lens _pppFileId (\ s a -> s{_pppFileId = a})
 
 -- | The ID for the permission.
-pppPermissionId :: Lens' PermissionsPatch' Text
+pppPermissionId :: Lens' PermissionsPatch Text
 pppPermissionId
   = lens _pppPermissionId
       (\ s a -> s{_pppPermissionId = a})
 
-instance GoogleRequest PermissionsPatch' where
-        type Rs PermissionsPatch' = Permission
-        requestClient PermissionsPatch'{..}
+instance GoogleRequest PermissionsPatch where
+        type Rs PermissionsPatch = Permission
+        requestClient PermissionsPatch{..}
           = go _pppFileId _pppPermissionId
               (Just _pppTransferOwnership)
               (Just AltJSON)

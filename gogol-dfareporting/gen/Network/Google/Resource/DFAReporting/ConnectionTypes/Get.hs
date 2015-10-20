@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.ConnectionTypes.Get
       ConnectionTypesGetResource
 
     -- * Creating a Request
-    , connectionTypesGet'
-    , ConnectionTypesGet'
+    , connectionTypesGet
+    , ConnectionTypesGet
 
     -- * Request Lenses
     , ctgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.connectionTypes.get@ method which the
--- 'ConnectionTypesGet'' request conforms to.
+-- 'ConnectionTypesGet' request conforms to.
 type ConnectionTypesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,41 +52,41 @@ type ConnectionTypesGetResource =
 
 -- | Gets one connection type by ID.
 --
--- /See:/ 'connectionTypesGet'' smart constructor.
-data ConnectionTypesGet' = ConnectionTypesGet'
+-- /See:/ 'connectionTypesGet' smart constructor.
+data ConnectionTypesGet = ConnectionTypesGet
     { _ctgProFileId :: !Int64
     , _ctgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ConnectionTypesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ConnectionTypesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ctgProFileId'
 --
 -- * 'ctgId'
-connectionTypesGet'
+connectionTypesGet
     :: Int64 -- ^ 'ctgProFileId'
     -> Int64 -- ^ 'ctgId'
-    -> ConnectionTypesGet'
-connectionTypesGet' pCtgProFileId_ pCtgId_ =
-    ConnectionTypesGet'
+    -> ConnectionTypesGet
+connectionTypesGet pCtgProFileId_ pCtgId_ =
+    ConnectionTypesGet
     { _ctgProFileId = pCtgProFileId_
     , _ctgId = pCtgId_
     }
 
 -- | User profile ID associated with this request.
-ctgProFileId :: Lens' ConnectionTypesGet' Int64
+ctgProFileId :: Lens' ConnectionTypesGet Int64
 ctgProFileId
   = lens _ctgProFileId (\ s a -> s{_ctgProFileId = a})
 
 -- | Connection type ID.
-ctgId :: Lens' ConnectionTypesGet' Int64
+ctgId :: Lens' ConnectionTypesGet Int64
 ctgId = lens _ctgId (\ s a -> s{_ctgId = a})
 
-instance GoogleRequest ConnectionTypesGet' where
-        type Rs ConnectionTypesGet' = ConnectionType
-        requestClient ConnectionTypesGet'{..}
+instance GoogleRequest ConnectionTypesGet where
+        type Rs ConnectionTypesGet = ConnectionType
+        requestClient ConnectionTypesGet{..}
           = go _ctgProFileId _ctgId (Just AltJSON)
               dFAReportingService
           where go

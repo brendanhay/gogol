@@ -29,8 +29,8 @@ module Network.Google.Resource.URLShortener.URL.Insert
       URLInsertResource
 
     -- * Creating a Request
-    , urlInsert'
-    , URLInsert'
+    , urlInsert
+    , URLInsert
 
     -- * Request Lenses
     , uiPayload
@@ -40,7 +40,7 @@ import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types
 
 -- | A resource alias for @urlshortener.url.insert@ method which the
--- 'URLInsert'' request conforms to.
+-- 'URLInsert' request conforms to.
 type URLInsertResource =
      "url" :>
        QueryParam "alt" AltJSON :>
@@ -48,32 +48,32 @@ type URLInsertResource =
 
 -- | Creates a new short URL.
 --
--- /See:/ 'urlInsert'' smart constructor.
-newtype URLInsert' = URLInsert'
+-- /See:/ 'urlInsert' smart constructor.
+newtype URLInsert = URLInsert
     { _uiPayload :: URL
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'URLInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'URLInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'uiPayload'
-urlInsert'
+urlInsert
     :: URL -- ^ 'uiPayload'
-    -> URLInsert'
-urlInsert' pUiPayload_ =
-    URLInsert'
+    -> URLInsert
+urlInsert pUiPayload_ =
+    URLInsert
     { _uiPayload = pUiPayload_
     }
 
 -- | Multipart request metadata.
-uiPayload :: Lens' URLInsert' URL
+uiPayload :: Lens' URLInsert URL
 uiPayload
   = lens _uiPayload (\ s a -> s{_uiPayload = a})
 
-instance GoogleRequest URLInsert' where
-        type Rs URLInsert' = URL
-        requestClient URLInsert'{..}
+instance GoogleRequest URLInsert where
+        type Rs URLInsert = URL
+        requestClient URLInsert{..}
           = go (Just AltJSON) _uiPayload uRLShortenerService
           where go
                   = buildClient (Proxy :: Proxy URLInsertResource)

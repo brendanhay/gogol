@@ -29,8 +29,8 @@ module Network.Google.Resource.Reseller.Subscriptions.Suspend
       SubscriptionsSuspendResource
 
     -- * Creating a Request
-    , subscriptionsSuspend'
-    , SubscriptionsSuspend'
+    , subscriptionsSuspend
+    , SubscriptionsSuspend
 
     -- * Request Lenses
     , ssCustomerId
@@ -41,7 +41,7 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @reseller.subscriptions.suspend@ method which the
--- 'SubscriptionsSuspend'' request conforms to.
+-- 'SubscriptionsSuspend' request conforms to.
 type SubscriptionsSuspendResource =
      "customers" :>
        Capture "customerId" Text :>
@@ -52,43 +52,43 @@ type SubscriptionsSuspendResource =
 
 -- | Suspends an active subscription
 --
--- /See:/ 'subscriptionsSuspend'' smart constructor.
-data SubscriptionsSuspend' = SubscriptionsSuspend'
+-- /See:/ 'subscriptionsSuspend' smart constructor.
+data SubscriptionsSuspend = SubscriptionsSuspend
     { _ssCustomerId     :: !Text
     , _ssSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionsSuspend'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubscriptionsSuspend' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ssCustomerId'
 --
 -- * 'ssSubscriptionId'
-subscriptionsSuspend'
+subscriptionsSuspend
     :: Text -- ^ 'ssCustomerId'
     -> Text -- ^ 'ssSubscriptionId'
-    -> SubscriptionsSuspend'
-subscriptionsSuspend' pSsCustomerId_ pSsSubscriptionId_ =
-    SubscriptionsSuspend'
+    -> SubscriptionsSuspend
+subscriptionsSuspend pSsCustomerId_ pSsSubscriptionId_ =
+    SubscriptionsSuspend
     { _ssCustomerId = pSsCustomerId_
     , _ssSubscriptionId = pSsSubscriptionId_
     }
 
 -- | Id of the Customer
-ssCustomerId :: Lens' SubscriptionsSuspend' Text
+ssCustomerId :: Lens' SubscriptionsSuspend Text
 ssCustomerId
   = lens _ssCustomerId (\ s a -> s{_ssCustomerId = a})
 
 -- | Id of the subscription, which is unique for a customer
-ssSubscriptionId :: Lens' SubscriptionsSuspend' Text
+ssSubscriptionId :: Lens' SubscriptionsSuspend Text
 ssSubscriptionId
   = lens _ssSubscriptionId
       (\ s a -> s{_ssSubscriptionId = a})
 
-instance GoogleRequest SubscriptionsSuspend' where
-        type Rs SubscriptionsSuspend' = Subscription
-        requestClient SubscriptionsSuspend'{..}
+instance GoogleRequest SubscriptionsSuspend where
+        type Rs SubscriptionsSuspend = Subscription
+        requestClient SubscriptionsSuspend{..}
           = go _ssCustomerId _ssSubscriptionId (Just AltJSON)
               appsResellerService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Mirror.Timeline.Attachments.Insert
       TimelineAttachmentsInsertResource
 
     -- * Creating a Request
-    , timelineAttachmentsInsert'
-    , TimelineAttachmentsInsert'
+    , timelineAttachmentsInsert
+    , TimelineAttachmentsInsert
 
     -- * Request Lenses
     , taiItemId
@@ -41,7 +41,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.timeline.attachments.insert@ method which the
--- 'TimelineAttachmentsInsert'' request conforms to.
+-- 'TimelineAttachmentsInsert' request conforms to.
 type TimelineAttachmentsInsertResource =
      "timeline" :>
        Capture "itemId" Text :>
@@ -52,41 +52,41 @@ type TimelineAttachmentsInsertResource =
 
 -- | Adds a new attachment to a timeline item.
 --
--- /See:/ 'timelineAttachmentsInsert'' smart constructor.
-data TimelineAttachmentsInsert' = TimelineAttachmentsInsert'
+-- /See:/ 'timelineAttachmentsInsert' smart constructor.
+data TimelineAttachmentsInsert = TimelineAttachmentsInsert
     { _taiItemId :: !Text
     , _taiMedia  :: !Body
     }
 
--- | Creates a value of 'TimelineAttachmentsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'TimelineAttachmentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'taiItemId'
 --
 -- * 'taiMedia'
-timelineAttachmentsInsert'
+timelineAttachmentsInsert
     :: Text -- ^ 'taiItemId'
     -> Body -- ^ 'taiMedia'
-    -> TimelineAttachmentsInsert'
-timelineAttachmentsInsert' pTaiItemId_ pTaiMedia_ =
-    TimelineAttachmentsInsert'
+    -> TimelineAttachmentsInsert
+timelineAttachmentsInsert pTaiItemId_ pTaiMedia_ =
+    TimelineAttachmentsInsert
     { _taiItemId = pTaiItemId_
     , _taiMedia = pTaiMedia_
     }
 
 -- | The ID of the timeline item the attachment belongs to.
-taiItemId :: Lens' TimelineAttachmentsInsert' Text
+taiItemId :: Lens' TimelineAttachmentsInsert Text
 taiItemId
   = lens _taiItemId (\ s a -> s{_taiItemId = a})
 
-taiMedia :: Lens' TimelineAttachmentsInsert' Body
+taiMedia :: Lens' TimelineAttachmentsInsert Body
 taiMedia = lens _taiMedia (\ s a -> s{_taiMedia = a})
 
-instance GoogleRequest TimelineAttachmentsInsert'
+instance GoogleRequest TimelineAttachmentsInsert
          where
-        type Rs TimelineAttachmentsInsert' = Attachment
-        requestClient TimelineAttachmentsInsert'{..}
+        type Rs TimelineAttachmentsInsert = Attachment
+        requestClient TimelineAttachmentsInsert{..}
           = go _taiItemId (Just AltJSON) _taiMedia
               mirrorService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.Insert
       EditsInsertResource
 
     -- * Creating a Request
-    , editsInsert'
-    , EditsInsert'
+    , editsInsert
+    , EditsInsert
 
     -- * Request Lenses
     , eiPackageName
@@ -41,7 +41,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.insert@ method which the
--- 'EditsInsert'' request conforms to.
+-- 'EditsInsert' request conforms to.
 type EditsInsertResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -50,44 +50,44 @@ type EditsInsertResource =
 
 -- | Creates a new edit for an app, populated with the app\'s current state.
 --
--- /See:/ 'editsInsert'' smart constructor.
-data EditsInsert' = EditsInsert'
+-- /See:/ 'editsInsert' smart constructor.
+data EditsInsert = EditsInsert
     { _eiPackageName :: !Text
     , _eiPayload     :: !AppEdit
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'eiPackageName'
 --
 -- * 'eiPayload'
-editsInsert'
+editsInsert
     :: Text -- ^ 'eiPackageName'
     -> AppEdit -- ^ 'eiPayload'
-    -> EditsInsert'
-editsInsert' pEiPackageName_ pEiPayload_ =
-    EditsInsert'
+    -> EditsInsert
+editsInsert pEiPackageName_ pEiPayload_ =
+    EditsInsert
     { _eiPackageName = pEiPackageName_
     , _eiPayload = pEiPayload_
     }
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eiPackageName :: Lens' EditsInsert' Text
+eiPackageName :: Lens' EditsInsert Text
 eiPackageName
   = lens _eiPackageName
       (\ s a -> s{_eiPackageName = a})
 
 -- | Multipart request metadata.
-eiPayload :: Lens' EditsInsert' AppEdit
+eiPayload :: Lens' EditsInsert AppEdit
 eiPayload
   = lens _eiPayload (\ s a -> s{_eiPayload = a})
 
-instance GoogleRequest EditsInsert' where
-        type Rs EditsInsert' = AppEdit
-        requestClient EditsInsert'{..}
+instance GoogleRequest EditsInsert where
+        type Rs EditsInsert = AppEdit
+        requestClient EditsInsert{..}
           = go _eiPackageName (Just AltJSON) _eiPayload
               androidPublisherService
           where go

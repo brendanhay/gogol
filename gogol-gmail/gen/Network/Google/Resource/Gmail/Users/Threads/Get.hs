@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.Threads.Get
       UsersThreadsGetResource
 
     -- * Creating a Request
-    , usersThreadsGet'
-    , UsersThreadsGet'
+    , usersThreadsGet
+    , UsersThreadsGet
 
     -- * Request Lenses
     , utgFormat
@@ -43,7 +43,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.threads.get@ method which the
--- 'UsersThreadsGet'' request conforms to.
+-- 'UsersThreadsGet' request conforms to.
 type UsersThreadsGetResource =
      Capture "userId" Text :>
        "threads" :>
@@ -54,15 +54,15 @@ type UsersThreadsGetResource =
 
 -- | Gets the specified thread.
 --
--- /See:/ 'usersThreadsGet'' smart constructor.
-data UsersThreadsGet' = UsersThreadsGet'
+-- /See:/ 'usersThreadsGet' smart constructor.
+data UsersThreadsGet = UsersThreadsGet
     { _utgFormat          :: !UsersThreadsGetFormat
     , _utgUserId          :: !Text
     , _utgId              :: !Text
     , _utgMetadataHeaders :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersThreadsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersThreadsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,12 +73,12 @@ data UsersThreadsGet' = UsersThreadsGet'
 -- * 'utgId'
 --
 -- * 'utgMetadataHeaders'
-usersThreadsGet'
+usersThreadsGet
     :: Text -- ^ 'utgId'
     -> Text
-    -> UsersThreadsGet'
-usersThreadsGet' pUtgUserId_ pUtgId_ =
-    UsersThreadsGet'
+    -> UsersThreadsGet
+usersThreadsGet pUtgUserId_ pUtgId_ =
+    UsersThreadsGet
     { _utgFormat = UTGFFull
     , _utgUserId = pUtgUserId_
     , _utgId = pUtgId_
@@ -86,31 +86,31 @@ usersThreadsGet' pUtgUserId_ pUtgId_ =
     }
 
 -- | The format to return the messages in.
-utgFormat :: Lens' UsersThreadsGet' UsersThreadsGetFormat
+utgFormat :: Lens' UsersThreadsGet UsersThreadsGetFormat
 utgFormat
   = lens _utgFormat (\ s a -> s{_utgFormat = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-utgUserId :: Lens' UsersThreadsGet' Text
+utgUserId :: Lens' UsersThreadsGet Text
 utgUserId
   = lens _utgUserId (\ s a -> s{_utgUserId = a})
 
 -- | The ID of the thread to retrieve.
-utgId :: Lens' UsersThreadsGet' Text
+utgId :: Lens' UsersThreadsGet Text
 utgId = lens _utgId (\ s a -> s{_utgId = a})
 
 -- | When given and format is METADATA, only include headers specified.
-utgMetadataHeaders :: Lens' UsersThreadsGet' [Text]
+utgMetadataHeaders :: Lens' UsersThreadsGet [Text]
 utgMetadataHeaders
   = lens _utgMetadataHeaders
       (\ s a -> s{_utgMetadataHeaders = a})
       . _Default
       . _Coerce
 
-instance GoogleRequest UsersThreadsGet' where
-        type Rs UsersThreadsGet' = Thread
-        requestClient UsersThreadsGet'{..}
+instance GoogleRequest UsersThreadsGet where
+        type Rs UsersThreadsGet = Thread
+        requestClient UsersThreadsGet{..}
           = go _utgUserId _utgId (Just _utgFormat)
               (_utgMetadataHeaders ^. _Default)
               (Just AltJSON)

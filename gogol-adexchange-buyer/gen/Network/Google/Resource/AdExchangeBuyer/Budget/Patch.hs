@@ -31,8 +31,8 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Patch
       BudgetPatchResource
 
     -- * Creating a Request
-    , budgetPatch'
-    , BudgetPatch'
+    , budgetPatch
+    , BudgetPatch
 
     -- * Request Lenses
     , bpPayload
@@ -44,7 +44,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.budget.patch@ method which the
--- 'BudgetPatch'' request conforms to.
+-- 'BudgetPatch' request conforms to.
 type BudgetPatchResource =
      "billinginfo" :>
        Capture "accountId" Int64 :>
@@ -56,14 +56,14 @@ type BudgetPatchResource =
 -- accountId and billingId, with the budget amount in the request. This
 -- method supports patch semantics.
 --
--- /See:/ 'budgetPatch'' smart constructor.
-data BudgetPatch' = BudgetPatch'
+-- /See:/ 'budgetPatch' smart constructor.
+data BudgetPatch = BudgetPatch
     { _bpPayload   :: !Budget
     , _bpAccountId :: !Int64
     , _bpBillingId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BudgetPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'BudgetPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,36 +72,36 @@ data BudgetPatch' = BudgetPatch'
 -- * 'bpAccountId'
 --
 -- * 'bpBillingId'
-budgetPatch'
+budgetPatch
     :: Budget -- ^ 'bpPayload'
     -> Int64 -- ^ 'bpAccountId'
     -> Int64 -- ^ 'bpBillingId'
-    -> BudgetPatch'
-budgetPatch' pBpPayload_ pBpAccountId_ pBpBillingId_ =
-    BudgetPatch'
+    -> BudgetPatch
+budgetPatch pBpPayload_ pBpAccountId_ pBpBillingId_ =
+    BudgetPatch
     { _bpPayload = pBpPayload_
     , _bpAccountId = pBpAccountId_
     , _bpBillingId = pBpBillingId_
     }
 
 -- | Multipart request metadata.
-bpPayload :: Lens' BudgetPatch' Budget
+bpPayload :: Lens' BudgetPatch Budget
 bpPayload
   = lens _bpPayload (\ s a -> s{_bpPayload = a})
 
 -- | The account id associated with the budget being updated.
-bpAccountId :: Lens' BudgetPatch' Int64
+bpAccountId :: Lens' BudgetPatch Int64
 bpAccountId
   = lens _bpAccountId (\ s a -> s{_bpAccountId = a})
 
 -- | The billing id associated with the budget being updated.
-bpBillingId :: Lens' BudgetPatch' Int64
+bpBillingId :: Lens' BudgetPatch Int64
 bpBillingId
   = lens _bpBillingId (\ s a -> s{_bpBillingId = a})
 
-instance GoogleRequest BudgetPatch' where
-        type Rs BudgetPatch' = Budget
-        requestClient BudgetPatch'{..}
+instance GoogleRequest BudgetPatch where
+        type Rs BudgetPatch = Budget
+        requestClient BudgetPatch{..}
           = go _bpAccountId _bpBillingId (Just AltJSON)
               _bpPayload
               adExchangeBuyerService

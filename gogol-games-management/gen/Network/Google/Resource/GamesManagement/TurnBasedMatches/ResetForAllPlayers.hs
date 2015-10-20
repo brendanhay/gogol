@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.TurnBasedMatches.ResetForAllPlaye
       TurnBasedMatchesResetForAllPlayersResource
 
     -- * Creating a Request
-    , turnBasedMatchesResetForAllPlayers'
-    , TurnBasedMatchesResetForAllPlayers'
+    , turnBasedMatchesResetForAllPlayers
+    , TurnBasedMatchesResetForAllPlayers
 
     ) where
 
@@ -40,7 +40,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.turnBasedMatches.resetForAllPlayers@ method which the
--- 'TurnBasedMatchesResetForAllPlayers'' request conforms to.
+-- 'TurnBasedMatchesResetForAllPlayers' request conforms to.
 type TurnBasedMatchesResetForAllPlayersResource =
      "turnbasedmatches" :>
        "resetForAllPlayers" :>
@@ -50,21 +50,21 @@ type TurnBasedMatchesResetForAllPlayersResource =
 -- whitelisted tester accounts for your application. This method is only
 -- available to user accounts for your developer console.
 --
--- /See:/ 'turnBasedMatchesResetForAllPlayers'' smart constructor.
-data TurnBasedMatchesResetForAllPlayers' =
-    TurnBasedMatchesResetForAllPlayers'
+-- /See:/ 'turnBasedMatchesResetForAllPlayers' smart constructor.
+data TurnBasedMatchesResetForAllPlayers =
+    TurnBasedMatchesResetForAllPlayers
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TurnBasedMatchesResetForAllPlayers'' with the minimum fields required to make a request.
+-- | Creates a value of 'TurnBasedMatchesResetForAllPlayers' with the minimum fields required to make a request.
 --
-turnBasedMatchesResetForAllPlayers'
-    :: TurnBasedMatchesResetForAllPlayers'
-turnBasedMatchesResetForAllPlayers' = TurnBasedMatchesResetForAllPlayers'
+turnBasedMatchesResetForAllPlayers
+    :: TurnBasedMatchesResetForAllPlayers
+turnBasedMatchesResetForAllPlayers = TurnBasedMatchesResetForAllPlayers
 
 instance GoogleRequest
-         TurnBasedMatchesResetForAllPlayers' where
-        type Rs TurnBasedMatchesResetForAllPlayers' = ()
-        requestClient TurnBasedMatchesResetForAllPlayers'{}
+         TurnBasedMatchesResetForAllPlayers where
+        type Rs TurnBasedMatchesResetForAllPlayers = ()
+        requestClient TurnBasedMatchesResetForAllPlayers{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

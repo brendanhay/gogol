@@ -30,20 +30,20 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Refund
       PurchasesSubscriptionsRefundResource
 
     -- * Creating a Request
-    , purchasesSubscriptionsRefund'
-    , PurchasesSubscriptionsRefund'
+    , purchasesSubscriptionsRefund
+    , PurchasesSubscriptionsRefund
 
     -- * Request Lenses
-    , pPackageName
-    , pToken
-    , pSubscriptionId
+    , psrPackageName
+    , psrToken
+    , psrSubscriptionId
     ) where
 
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.purchases.subscriptions.refund@ method which the
--- 'PurchasesSubscriptionsRefund'' request conforms to.
+-- 'PurchasesSubscriptionsRefund' request conforms to.
 type PurchasesSubscriptionsRefundResource =
      Capture "packageName" Text :>
        "purchases" :>
@@ -56,56 +56,57 @@ type PurchasesSubscriptionsRefundResource =
 -- | Refunds a user\'s subscription purchase, but the subscription remains
 -- valid until its expiration time and it will continue to recur.
 --
--- /See:/ 'purchasesSubscriptionsRefund'' smart constructor.
-data PurchasesSubscriptionsRefund' = PurchasesSubscriptionsRefund'
-    { _pPackageName    :: !Text
-    , _pToken          :: !Text
-    , _pSubscriptionId :: !Text
+-- /See:/ 'purchasesSubscriptionsRefund' smart constructor.
+data PurchasesSubscriptionsRefund = PurchasesSubscriptionsRefund
+    { _psrPackageName    :: !Text
+    , _psrToken          :: !Text
+    , _psrSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PurchasesSubscriptionsRefund'' with the minimum fields required to make a request.
+-- | Creates a value of 'PurchasesSubscriptionsRefund' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pPackageName'
+-- * 'psrPackageName'
 --
--- * 'pToken'
+-- * 'psrToken'
 --
--- * 'pSubscriptionId'
-purchasesSubscriptionsRefund'
-    :: Text -- ^ 'pPackageName'
-    -> Text -- ^ 'pToken'
-    -> Text -- ^ 'pSubscriptionId'
-    -> PurchasesSubscriptionsRefund'
-purchasesSubscriptionsRefund' pPPackageName_ pPToken_ pPSubscriptionId_ =
-    PurchasesSubscriptionsRefund'
-    { _pPackageName = pPPackageName_
-    , _pToken = pPToken_
-    , _pSubscriptionId = pPSubscriptionId_
+-- * 'psrSubscriptionId'
+purchasesSubscriptionsRefund
+    :: Text -- ^ 'psrPackageName'
+    -> Text -- ^ 'psrToken'
+    -> Text -- ^ 'psrSubscriptionId'
+    -> PurchasesSubscriptionsRefund
+purchasesSubscriptionsRefund pPsrPackageName_ pPsrToken_ pPsrSubscriptionId_ =
+    PurchasesSubscriptionsRefund
+    { _psrPackageName = pPsrPackageName_
+    , _psrToken = pPsrToken_
+    , _psrSubscriptionId = pPsrSubscriptionId_
     }
 
 -- | The package name of the application for which this subscription was
 -- purchased (for example, \'com.some.thing\').
-pPackageName :: Lens' PurchasesSubscriptionsRefund' Text
-pPackageName
-  = lens _pPackageName (\ s a -> s{_pPackageName = a})
+psrPackageName :: Lens' PurchasesSubscriptionsRefund Text
+psrPackageName
+  = lens _psrPackageName
+      (\ s a -> s{_psrPackageName = a})
 
 -- | The token provided to the user\'s device when the subscription was
 -- purchased.
-pToken :: Lens' PurchasesSubscriptionsRefund' Text
-pToken = lens _pToken (\ s a -> s{_pToken = a})
+psrToken :: Lens' PurchasesSubscriptionsRefund Text
+psrToken = lens _psrToken (\ s a -> s{_psrToken = a})
 
 -- | The purchased subscription ID (for example, \'monthly001\').
-pSubscriptionId :: Lens' PurchasesSubscriptionsRefund' Text
-pSubscriptionId
-  = lens _pSubscriptionId
-      (\ s a -> s{_pSubscriptionId = a})
+psrSubscriptionId :: Lens' PurchasesSubscriptionsRefund Text
+psrSubscriptionId
+  = lens _psrSubscriptionId
+      (\ s a -> s{_psrSubscriptionId = a})
 
-instance GoogleRequest PurchasesSubscriptionsRefund'
+instance GoogleRequest PurchasesSubscriptionsRefund
          where
-        type Rs PurchasesSubscriptionsRefund' = ()
-        requestClient PurchasesSubscriptionsRefund'{..}
-          = go _pPackageName _pSubscriptionId _pToken
+        type Rs PurchasesSubscriptionsRefund = ()
+        requestClient PurchasesSubscriptionsRefund{..}
+          = go _psrPackageName _psrSubscriptionId _psrToken
               (Just AltJSON)
               androidPublisherService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Delete
       PlacementStrategiesDeleteResource
 
     -- * Creating a Request
-    , placementStrategiesDelete'
-    , PlacementStrategiesDelete'
+    , placementStrategiesDelete
+    , PlacementStrategiesDelete
 
     -- * Request Lenses
     , psdProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placementStrategies.delete@ method which the
--- 'PlacementStrategiesDelete'' request conforms to.
+-- 'PlacementStrategiesDelete' request conforms to.
 type PlacementStrategiesDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type PlacementStrategiesDeleteResource =
 
 -- | Deletes an existing placement strategy.
 --
--- /See:/ 'placementStrategiesDelete'' smart constructor.
-data PlacementStrategiesDelete' = PlacementStrategiesDelete'
+-- /See:/ 'placementStrategiesDelete' smart constructor.
+data PlacementStrategiesDelete = PlacementStrategiesDelete
     { _psdProFileId :: !Int64
     , _psdId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlacementStrategiesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlacementStrategiesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'psdProFileId'
 --
 -- * 'psdId'
-placementStrategiesDelete'
+placementStrategiesDelete
     :: Int64 -- ^ 'psdProFileId'
     -> Int64 -- ^ 'psdId'
-    -> PlacementStrategiesDelete'
-placementStrategiesDelete' pPsdProFileId_ pPsdId_ =
-    PlacementStrategiesDelete'
+    -> PlacementStrategiesDelete
+placementStrategiesDelete pPsdProFileId_ pPsdId_ =
+    PlacementStrategiesDelete
     { _psdProFileId = pPsdProFileId_
     , _psdId = pPsdId_
     }
 
 -- | User profile ID associated with this request.
-psdProFileId :: Lens' PlacementStrategiesDelete' Int64
+psdProFileId :: Lens' PlacementStrategiesDelete Int64
 psdProFileId
   = lens _psdProFileId (\ s a -> s{_psdProFileId = a})
 
 -- | Placement strategy ID.
-psdId :: Lens' PlacementStrategiesDelete' Int64
+psdId :: Lens' PlacementStrategiesDelete Int64
 psdId = lens _psdId (\ s a -> s{_psdId = a})
 
-instance GoogleRequest PlacementStrategiesDelete'
+instance GoogleRequest PlacementStrategiesDelete
          where
-        type Rs PlacementStrategiesDelete' = ()
-        requestClient PlacementStrategiesDelete'{..}
+        type Rs PlacementStrategiesDelete = ()
+        requestClient PlacementStrategiesDelete{..}
           = go _psdProFileId _psdId (Just AltJSON)
               dFAReportingService
           where go

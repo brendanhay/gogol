@@ -34,8 +34,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
       BeaconsAttachmentsBatchDeleteResource
 
     -- * Creating a Request
-    , beaconsAttachmentsBatchDelete'
-    , BeaconsAttachmentsBatchDelete'
+    , beaconsAttachmentsBatchDelete
+    , BeaconsAttachmentsBatchDelete
 
     -- * Request Lenses
     , babdXgafv
@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.attachments.batchDelete@ method which the
--- 'BeaconsAttachmentsBatchDelete'' request conforms to.
+-- 'BeaconsAttachmentsBatchDelete' request conforms to.
 type BeaconsAttachmentsBatchDeleteResource =
      "v1beta1" :>
        Capture "beaconName" Text :>
@@ -76,8 +76,8 @@ type BeaconsAttachmentsBatchDeleteResource =
 -- beacon will be deleted. You also may explicitly specify \`*\/*\` to
 -- delete all.
 --
--- /See:/ 'beaconsAttachmentsBatchDelete'' smart constructor.
-data BeaconsAttachmentsBatchDelete' = BeaconsAttachmentsBatchDelete'
+-- /See:/ 'beaconsAttachmentsBatchDelete' smart constructor.
+data BeaconsAttachmentsBatchDelete = BeaconsAttachmentsBatchDelete
     { _babdXgafv          :: !(Maybe Text)
     , _babdUploadProtocol :: !(Maybe Text)
     , _babdPp             :: !Bool
@@ -89,7 +89,7 @@ data BeaconsAttachmentsBatchDelete' = BeaconsAttachmentsBatchDelete'
     , _babdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BeaconsAttachmentsBatchDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'BeaconsAttachmentsBatchDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -110,11 +110,11 @@ data BeaconsAttachmentsBatchDelete' = BeaconsAttachmentsBatchDelete'
 -- * 'babdNamespacedType'
 --
 -- * 'babdCallback'
-beaconsAttachmentsBatchDelete'
+beaconsAttachmentsBatchDelete
     :: Text -- ^ 'babdBeaconName'
-    -> BeaconsAttachmentsBatchDelete'
-beaconsAttachmentsBatchDelete' pBabdBeaconName_ =
-    BeaconsAttachmentsBatchDelete'
+    -> BeaconsAttachmentsBatchDelete
+beaconsAttachmentsBatchDelete pBabdBeaconName_ =
+    BeaconsAttachmentsBatchDelete
     { _babdXgafv = Nothing
     , _babdUploadProtocol = Nothing
     , _babdPp = True
@@ -127,40 +127,40 @@ beaconsAttachmentsBatchDelete' pBabdBeaconName_ =
     }
 
 -- | V1 error format.
-babdXgafv :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Text)
+babdXgafv :: Lens' BeaconsAttachmentsBatchDelete (Maybe Text)
 babdXgafv
   = lens _babdXgafv (\ s a -> s{_babdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-babdUploadProtocol :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Text)
+babdUploadProtocol :: Lens' BeaconsAttachmentsBatchDelete (Maybe Text)
 babdUploadProtocol
   = lens _babdUploadProtocol
       (\ s a -> s{_babdUploadProtocol = a})
 
 -- | Pretty-print response.
-babdPp :: Lens' BeaconsAttachmentsBatchDelete' Bool
+babdPp :: Lens' BeaconsAttachmentsBatchDelete Bool
 babdPp = lens _babdPp (\ s a -> s{_babdPp = a})
 
 -- | OAuth access token.
-babdAccessToken :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Text)
+babdAccessToken :: Lens' BeaconsAttachmentsBatchDelete (Maybe Text)
 babdAccessToken
   = lens _babdAccessToken
       (\ s a -> s{_babdAccessToken = a})
 
 -- | The beacon whose attachments are to be deleted. Required.
-babdBeaconName :: Lens' BeaconsAttachmentsBatchDelete' Text
+babdBeaconName :: Lens' BeaconsAttachmentsBatchDelete Text
 babdBeaconName
   = lens _babdBeaconName
       (\ s a -> s{_babdBeaconName = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-babdUploadType :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Text)
+babdUploadType :: Lens' BeaconsAttachmentsBatchDelete (Maybe Text)
 babdUploadType
   = lens _babdUploadType
       (\ s a -> s{_babdUploadType = a})
 
 -- | OAuth bearer token.
-babdBearerToken :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Text)
+babdBearerToken :: Lens' BeaconsAttachmentsBatchDelete (Maybe Text)
 babdBearerToken
   = lens _babdBearerToken
       (\ s a -> s{_babdBearerToken = a})
@@ -168,21 +168,21 @@ babdBearerToken
 -- | Specifies the namespace and type of attachments to delete in
 -- \`namespace\/type\` format. Accepts \`*\/*\` to specify \"all types in
 -- all namespaces\". Optional.
-babdNamespacedType :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Text)
+babdNamespacedType :: Lens' BeaconsAttachmentsBatchDelete (Maybe Text)
 babdNamespacedType
   = lens _babdNamespacedType
       (\ s a -> s{_babdNamespacedType = a})
 
 -- | JSONP
-babdCallback :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Text)
+babdCallback :: Lens' BeaconsAttachmentsBatchDelete (Maybe Text)
 babdCallback
   = lens _babdCallback (\ s a -> s{_babdCallback = a})
 
-instance GoogleRequest BeaconsAttachmentsBatchDelete'
+instance GoogleRequest BeaconsAttachmentsBatchDelete
          where
-        type Rs BeaconsAttachmentsBatchDelete' =
+        type Rs BeaconsAttachmentsBatchDelete =
              DeleteAttachmentsResponse
-        requestClient BeaconsAttachmentsBatchDelete'{..}
+        requestClient BeaconsAttachmentsBatchDelete{..}
           = go _babdBeaconName _babdXgafv _babdUploadProtocol
               (Just _babdPp)
               _babdAccessToken

@@ -30,8 +30,8 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Get
       LeaderboardConfigurationsGetResource
 
     -- * Creating a Request
-    , leaderboardConfigurationsGet'
-    , LeaderboardConfigurationsGet'
+    , leaderboardConfigurationsGet
+    , LeaderboardConfigurationsGet
 
     -- * Request Lenses
     , lcgLeaderboardId
@@ -41,7 +41,7 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.leaderboardConfigurations.get@ method which the
--- 'LeaderboardConfigurationsGet'' request conforms to.
+-- 'LeaderboardConfigurationsGet' request conforms to.
 type LeaderboardConfigurationsGetResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
@@ -51,35 +51,35 @@ type LeaderboardConfigurationsGetResource =
 -- | Retrieves the metadata of the leaderboard configuration with the given
 -- ID.
 --
--- /See:/ 'leaderboardConfigurationsGet'' smart constructor.
-newtype LeaderboardConfigurationsGet' = LeaderboardConfigurationsGet'
+-- /See:/ 'leaderboardConfigurationsGet' smart constructor.
+newtype LeaderboardConfigurationsGet = LeaderboardConfigurationsGet
     { _lcgLeaderboardId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LeaderboardConfigurationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'LeaderboardConfigurationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lcgLeaderboardId'
-leaderboardConfigurationsGet'
+leaderboardConfigurationsGet
     :: Text -- ^ 'lcgLeaderboardId'
-    -> LeaderboardConfigurationsGet'
-leaderboardConfigurationsGet' pLcgLeaderboardId_ =
-    LeaderboardConfigurationsGet'
+    -> LeaderboardConfigurationsGet
+leaderboardConfigurationsGet pLcgLeaderboardId_ =
+    LeaderboardConfigurationsGet
     { _lcgLeaderboardId = pLcgLeaderboardId_
     }
 
 -- | The ID of the leaderboard.
-lcgLeaderboardId :: Lens' LeaderboardConfigurationsGet' Text
+lcgLeaderboardId :: Lens' LeaderboardConfigurationsGet Text
 lcgLeaderboardId
   = lens _lcgLeaderboardId
       (\ s a -> s{_lcgLeaderboardId = a})
 
-instance GoogleRequest LeaderboardConfigurationsGet'
+instance GoogleRequest LeaderboardConfigurationsGet
          where
-        type Rs LeaderboardConfigurationsGet' =
+        type Rs LeaderboardConfigurationsGet =
              LeaderboardConfiguration
-        requestClient LeaderboardConfigurationsGet'{..}
+        requestClient LeaderboardConfigurationsGet{..}
           = go _lcgLeaderboardId (Just AltJSON)
               gamesConfigurationService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Instances.AttachDisk
       InstancesAttachDiskResource
 
     -- * Creating a Request
-    , instancesAttachDisk'
-    , InstancesAttachDisk'
+    , instancesAttachDisk
+    , InstancesAttachDisk
 
     -- * Request Lenses
     , iadProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.attachDisk@ method which the
--- 'InstancesAttachDisk'' request conforms to.
+-- 'InstancesAttachDisk' request conforms to.
 type InstancesAttachDiskResource =
      Capture "project" Text :>
        "zones" :>
@@ -57,15 +57,15 @@ type InstancesAttachDiskResource =
 
 -- | Attaches a Disk resource to an instance.
 --
--- /See:/ 'instancesAttachDisk'' smart constructor.
-data InstancesAttachDisk' = InstancesAttachDisk'
+-- /See:/ 'instancesAttachDisk' smart constructor.
+data InstancesAttachDisk = InstancesAttachDisk
     { _iadProject  :: !Text
     , _iadZone     :: !Text
     , _iadPayload  :: !AttachedDisk
     , _iadInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesAttachDisk'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesAttachDisk' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,14 +76,14 @@ data InstancesAttachDisk' = InstancesAttachDisk'
 -- * 'iadPayload'
 --
 -- * 'iadInstance'
-instancesAttachDisk'
+instancesAttachDisk
     :: Text -- ^ 'iadProject'
     -> Text -- ^ 'iadZone'
     -> AttachedDisk -- ^ 'iadPayload'
     -> Text -- ^ 'iadInstance'
-    -> InstancesAttachDisk'
-instancesAttachDisk' pIadProject_ pIadZone_ pIadPayload_ pIadInstance_ =
-    InstancesAttachDisk'
+    -> InstancesAttachDisk
+instancesAttachDisk pIadProject_ pIadZone_ pIadPayload_ pIadInstance_ =
+    InstancesAttachDisk
     { _iadProject = pIadProject_
     , _iadZone = pIadZone_
     , _iadPayload = pIadPayload_
@@ -91,27 +91,27 @@ instancesAttachDisk' pIadProject_ pIadZone_ pIadPayload_ pIadInstance_ =
     }
 
 -- | Project ID for this request.
-iadProject :: Lens' InstancesAttachDisk' Text
+iadProject :: Lens' InstancesAttachDisk Text
 iadProject
   = lens _iadProject (\ s a -> s{_iadProject = a})
 
 -- | The name of the zone for this request.
-iadZone :: Lens' InstancesAttachDisk' Text
+iadZone :: Lens' InstancesAttachDisk Text
 iadZone = lens _iadZone (\ s a -> s{_iadZone = a})
 
 -- | Multipart request metadata.
-iadPayload :: Lens' InstancesAttachDisk' AttachedDisk
+iadPayload :: Lens' InstancesAttachDisk AttachedDisk
 iadPayload
   = lens _iadPayload (\ s a -> s{_iadPayload = a})
 
 -- | Instance name.
-iadInstance :: Lens' InstancesAttachDisk' Text
+iadInstance :: Lens' InstancesAttachDisk Text
 iadInstance
   = lens _iadInstance (\ s a -> s{_iadInstance = a})
 
-instance GoogleRequest InstancesAttachDisk' where
-        type Rs InstancesAttachDisk' = Operation
-        requestClient InstancesAttachDisk'{..}
+instance GoogleRequest InstancesAttachDisk where
+        type Rs InstancesAttachDisk = Operation
+        requestClient InstancesAttachDisk{..}
           = go _iadProject _iadZone _iadInstance (Just AltJSON)
               _iadPayload
               computeService

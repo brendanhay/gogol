@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Instances.SetMetadata
       InstancesSetMetadataResource
 
     -- * Creating a Request
-    , instancesSetMetadata'
-    , InstancesSetMetadata'
+    , instancesSetMetadata
+    , InstancesSetMetadata
 
     -- * Request Lenses
     , ismProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.setMetadata@ method which the
--- 'InstancesSetMetadata'' request conforms to.
+-- 'InstancesSetMetadata' request conforms to.
 type InstancesSetMetadataResource =
      Capture "project" Text :>
        "zones" :>
@@ -58,15 +58,15 @@ type InstancesSetMetadataResource =
 -- | Sets metadata for the specified instance to the data included in the
 -- request.
 --
--- /See:/ 'instancesSetMetadata'' smart constructor.
-data InstancesSetMetadata' = InstancesSetMetadata'
+-- /See:/ 'instancesSetMetadata' smart constructor.
+data InstancesSetMetadata = InstancesSetMetadata
     { _ismProject  :: !Text
     , _ismZone     :: !Text
     , _ismPayload  :: !Metadata
     , _ismInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesSetMetadata'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesSetMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data InstancesSetMetadata' = InstancesSetMetadata'
 -- * 'ismPayload'
 --
 -- * 'ismInstance'
-instancesSetMetadata'
+instancesSetMetadata
     :: Text -- ^ 'ismProject'
     -> Text -- ^ 'ismZone'
     -> Metadata -- ^ 'ismPayload'
     -> Text -- ^ 'ismInstance'
-    -> InstancesSetMetadata'
-instancesSetMetadata' pIsmProject_ pIsmZone_ pIsmPayload_ pIsmInstance_ =
-    InstancesSetMetadata'
+    -> InstancesSetMetadata
+instancesSetMetadata pIsmProject_ pIsmZone_ pIsmPayload_ pIsmInstance_ =
+    InstancesSetMetadata
     { _ismProject = pIsmProject_
     , _ismZone = pIsmZone_
     , _ismPayload = pIsmPayload_
@@ -92,27 +92,27 @@ instancesSetMetadata' pIsmProject_ pIsmZone_ pIsmPayload_ pIsmInstance_ =
     }
 
 -- | Project ID for this request.
-ismProject :: Lens' InstancesSetMetadata' Text
+ismProject :: Lens' InstancesSetMetadata Text
 ismProject
   = lens _ismProject (\ s a -> s{_ismProject = a})
 
 -- | The name of the zone for this request.
-ismZone :: Lens' InstancesSetMetadata' Text
+ismZone :: Lens' InstancesSetMetadata Text
 ismZone = lens _ismZone (\ s a -> s{_ismZone = a})
 
 -- | Multipart request metadata.
-ismPayload :: Lens' InstancesSetMetadata' Metadata
+ismPayload :: Lens' InstancesSetMetadata Metadata
 ismPayload
   = lens _ismPayload (\ s a -> s{_ismPayload = a})
 
 -- | Name of the instance scoping this request.
-ismInstance :: Lens' InstancesSetMetadata' Text
+ismInstance :: Lens' InstancesSetMetadata Text
 ismInstance
   = lens _ismInstance (\ s a -> s{_ismInstance = a})
 
-instance GoogleRequest InstancesSetMetadata' where
-        type Rs InstancesSetMetadata' = Operation
-        requestClient InstancesSetMetadata'{..}
+instance GoogleRequest InstancesSetMetadata where
+        type Rs InstancesSetMetadata = Operation
+        requestClient InstancesSetMetadata{..}
           = go _ismProject _ismZone _ismInstance (Just AltJSON)
               _ismPayload
               computeService

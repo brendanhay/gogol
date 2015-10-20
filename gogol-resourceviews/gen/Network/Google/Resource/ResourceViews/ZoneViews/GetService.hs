@@ -29,8 +29,8 @@ module Network.Google.Resource.ResourceViews.ZoneViews.GetService
       ZoneViewsGetServiceResource
 
     -- * Creating a Request
-    , zoneViewsGetService'
-    , ZoneViewsGetService'
+    , zoneViewsGetService
+    , ZoneViewsGetService
 
     -- * Request Lenses
     , zvgsResourceView
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
 -- | A resource alias for @resourceviews.zoneViews.getService@ method which the
--- 'ZoneViewsGetService'' request conforms to.
+-- 'ZoneViewsGetService' request conforms to.
 type ZoneViewsGetServiceResource =
      Capture "project" Text :>
        "zones" :>
@@ -57,15 +57,15 @@ type ZoneViewsGetServiceResource =
 
 -- | Get the service information of a resource view or a resource.
 --
--- /See:/ 'zoneViewsGetService'' smart constructor.
-data ZoneViewsGetService' = ZoneViewsGetService'
+-- /See:/ 'zoneViewsGetService' smart constructor.
+data ZoneViewsGetService = ZoneViewsGetService
     { _zvgsResourceView :: !Text
     , _zvgsResourceName :: !(Maybe Text)
     , _zvgsProject      :: !Text
     , _zvgsZone         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ZoneViewsGetService'' with the minimum fields required to make a request.
+-- | Creates a value of 'ZoneViewsGetService' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,13 +76,13 @@ data ZoneViewsGetService' = ZoneViewsGetService'
 -- * 'zvgsProject'
 --
 -- * 'zvgsZone'
-zoneViewsGetService'
+zoneViewsGetService
     :: Text -- ^ 'zvgsResourceView'
     -> Text -- ^ 'zvgsProject'
     -> Text -- ^ 'zvgsZone'
-    -> ZoneViewsGetService'
-zoneViewsGetService' pZvgsResourceView_ pZvgsProject_ pZvgsZone_ =
-    ZoneViewsGetService'
+    -> ZoneViewsGetService
+zoneViewsGetService pZvgsResourceView_ pZvgsProject_ pZvgsZone_ =
+    ZoneViewsGetService
     { _zvgsResourceView = pZvgsResourceView_
     , _zvgsResourceName = Nothing
     , _zvgsProject = pZvgsProject_
@@ -90,31 +90,31 @@ zoneViewsGetService' pZvgsResourceView_ pZvgsProject_ pZvgsZone_ =
     }
 
 -- | The name of the resource view.
-zvgsResourceView :: Lens' ZoneViewsGetService' Text
+zvgsResourceView :: Lens' ZoneViewsGetService Text
 zvgsResourceView
   = lens _zvgsResourceView
       (\ s a -> s{_zvgsResourceView = a})
 
 -- | The name of the resource if user wants to get the service information of
 -- the resource.
-zvgsResourceName :: Lens' ZoneViewsGetService' (Maybe Text)
+zvgsResourceName :: Lens' ZoneViewsGetService (Maybe Text)
 zvgsResourceName
   = lens _zvgsResourceName
       (\ s a -> s{_zvgsResourceName = a})
 
 -- | The project name of the resource view.
-zvgsProject :: Lens' ZoneViewsGetService' Text
+zvgsProject :: Lens' ZoneViewsGetService Text
 zvgsProject
   = lens _zvgsProject (\ s a -> s{_zvgsProject = a})
 
 -- | The zone name of the resource view.
-zvgsZone :: Lens' ZoneViewsGetService' Text
+zvgsZone :: Lens' ZoneViewsGetService Text
 zvgsZone = lens _zvgsZone (\ s a -> s{_zvgsZone = a})
 
-instance GoogleRequest ZoneViewsGetService' where
-        type Rs ZoneViewsGetService' =
+instance GoogleRequest ZoneViewsGetService where
+        type Rs ZoneViewsGetService =
              ZoneViewsGetServiceResponse
-        requestClient ZoneViewsGetService'{..}
+        requestClient ZoneViewsGetService{..}
           = go _zvgsProject _zvgsZone _zvgsResourceView
               _zvgsResourceName
               (Just AltJSON)

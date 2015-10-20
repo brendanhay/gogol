@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.Creatives.Insert
       CreativesInsertResource
 
     -- * Creating a Request
-    , creativesInsert'
-    , CreativesInsert'
+    , creativesInsert
+    , CreativesInsert
 
     -- * Request Lenses
     , ciPayload
@@ -40,7 +40,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.creatives.insert@ method which the
--- 'CreativesInsert'' request conforms to.
+-- 'CreativesInsert' request conforms to.
 type CreativesInsertResource =
      "creatives" :>
        QueryParam "alt" AltJSON :>
@@ -48,32 +48,32 @@ type CreativesInsertResource =
 
 -- | Submit a new creative.
 --
--- /See:/ 'creativesInsert'' smart constructor.
-newtype CreativesInsert' = CreativesInsert'
+-- /See:/ 'creativesInsert' smart constructor.
+newtype CreativesInsert = CreativesInsert
     { _ciPayload :: Creative
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CreativesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ciPayload'
-creativesInsert'
+creativesInsert
     :: Creative -- ^ 'ciPayload'
-    -> CreativesInsert'
-creativesInsert' pCiPayload_ =
-    CreativesInsert'
+    -> CreativesInsert
+creativesInsert pCiPayload_ =
+    CreativesInsert
     { _ciPayload = pCiPayload_
     }
 
 -- | Multipart request metadata.
-ciPayload :: Lens' CreativesInsert' Creative
+ciPayload :: Lens' CreativesInsert Creative
 ciPayload
   = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
-instance GoogleRequest CreativesInsert' where
-        type Rs CreativesInsert' = Creative
-        requestClient CreativesInsert'{..}
+instance GoogleRequest CreativesInsert where
+        type Rs CreativesInsert = Creative
+        requestClient CreativesInsert{..}
           = go (Just AltJSON) _ciPayload adExchangeBuyerService
           where go
                   = buildClient

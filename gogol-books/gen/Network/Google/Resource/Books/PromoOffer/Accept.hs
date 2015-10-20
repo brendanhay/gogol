@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.PromoOffer.Accept
       PromoOfferAcceptResource
 
     -- * Creating a Request
-    , promoOfferAccept'
-    , PromoOfferAccept'
+    , promoOfferAccept
+    , PromoOfferAccept
 
     -- * Request Lenses
     , poaManufacturer
@@ -47,7 +47,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.promooffer.accept@ method which the
--- 'PromoOfferAccept'' request conforms to.
+-- 'PromoOfferAccept' request conforms to.
 type PromoOfferAcceptResource =
      "promooffer" :>
        "accept" :>
@@ -63,8 +63,8 @@ type PromoOfferAcceptResource =
 
 -- |
 --
--- /See:/ 'promoOfferAccept'' smart constructor.
-data PromoOfferAccept' = PromoOfferAccept'
+-- /See:/ 'promoOfferAccept' smart constructor.
+data PromoOfferAccept = PromoOfferAccept
     { _poaManufacturer :: !(Maybe Text)
     , _poaSerial       :: !(Maybe Text)
     , _poaDevice       :: !(Maybe Text)
@@ -75,7 +75,7 @@ data PromoOfferAccept' = PromoOfferAccept'
     , _poaAndroidId    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PromoOfferAccept'' with the minimum fields required to make a request.
+-- | Creates a value of 'PromoOfferAccept' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -94,10 +94,10 @@ data PromoOfferAccept' = PromoOfferAccept'
 -- * 'poaProduct'
 --
 -- * 'poaAndroidId'
-promoOfferAccept'
-    :: PromoOfferAccept'
-promoOfferAccept' =
-    PromoOfferAccept'
+promoOfferAccept
+    :: PromoOfferAccept
+promoOfferAccept =
+    PromoOfferAccept
     { _poaManufacturer = Nothing
     , _poaSerial = Nothing
     , _poaDevice = Nothing
@@ -109,47 +109,47 @@ promoOfferAccept' =
     }
 
 -- | device manufacturer
-poaManufacturer :: Lens' PromoOfferAccept' (Maybe Text)
+poaManufacturer :: Lens' PromoOfferAccept (Maybe Text)
 poaManufacturer
   = lens _poaManufacturer
       (\ s a -> s{_poaManufacturer = a})
 
 -- | device serial
-poaSerial :: Lens' PromoOfferAccept' (Maybe Text)
+poaSerial :: Lens' PromoOfferAccept (Maybe Text)
 poaSerial
   = lens _poaSerial (\ s a -> s{_poaSerial = a})
 
 -- | device device
-poaDevice :: Lens' PromoOfferAccept' (Maybe Text)
+poaDevice :: Lens' PromoOfferAccept (Maybe Text)
 poaDevice
   = lens _poaDevice (\ s a -> s{_poaDevice = a})
 
 -- | device model
-poaModel :: Lens' PromoOfferAccept' (Maybe Text)
+poaModel :: Lens' PromoOfferAccept (Maybe Text)
 poaModel = lens _poaModel (\ s a -> s{_poaModel = a})
 
 -- | Volume id to exercise the offer
-poaVolumeId :: Lens' PromoOfferAccept' (Maybe Text)
+poaVolumeId :: Lens' PromoOfferAccept (Maybe Text)
 poaVolumeId
   = lens _poaVolumeId (\ s a -> s{_poaVolumeId = a})
 
-poaOfferId :: Lens' PromoOfferAccept' (Maybe Text)
+poaOfferId :: Lens' PromoOfferAccept (Maybe Text)
 poaOfferId
   = lens _poaOfferId (\ s a -> s{_poaOfferId = a})
 
 -- | device product
-poaProduct :: Lens' PromoOfferAccept' (Maybe Text)
+poaProduct :: Lens' PromoOfferAccept (Maybe Text)
 poaProduct
   = lens _poaProduct (\ s a -> s{_poaProduct = a})
 
 -- | device android_id
-poaAndroidId :: Lens' PromoOfferAccept' (Maybe Text)
+poaAndroidId :: Lens' PromoOfferAccept (Maybe Text)
 poaAndroidId
   = lens _poaAndroidId (\ s a -> s{_poaAndroidId = a})
 
-instance GoogleRequest PromoOfferAccept' where
-        type Rs PromoOfferAccept' = ()
-        requestClient PromoOfferAccept'{..}
+instance GoogleRequest PromoOfferAccept where
+        type Rs PromoOfferAccept = ()
+        requestClient PromoOfferAccept{..}
           = go _poaManufacturer _poaSerial _poaDevice _poaModel
               _poaVolumeId
               _poaOfferId

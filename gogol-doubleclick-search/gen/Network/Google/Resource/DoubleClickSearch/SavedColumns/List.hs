@@ -29,8 +29,8 @@ module Network.Google.Resource.DoubleClickSearch.SavedColumns.List
       SavedColumnsListResource
 
     -- * Creating a Request
-    , savedColumnsList'
-    , SavedColumnsList'
+    , savedColumnsList
+    , SavedColumnsList
 
     -- * Request Lenses
     , sclAgencyId
@@ -41,7 +41,7 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @doubleclicksearch.savedColumns.list@ method which the
--- 'SavedColumnsList'' request conforms to.
+-- 'SavedColumnsList' request conforms to.
 type SavedColumnsListResource =
      "agency" :>
        Capture "agencyId" Int64 :>
@@ -53,43 +53,43 @@ type SavedColumnsListResource =
 
 -- | Retrieve the list of saved columns for a specified advertiser.
 --
--- /See:/ 'savedColumnsList'' smart constructor.
-data SavedColumnsList' = SavedColumnsList'
+-- /See:/ 'savedColumnsList' smart constructor.
+data SavedColumnsList = SavedColumnsList
     { _sclAgencyId     :: !Int64
     , _sclAdvertiserId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SavedColumnsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'SavedColumnsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sclAgencyId'
 --
 -- * 'sclAdvertiserId'
-savedColumnsList'
+savedColumnsList
     :: Int64 -- ^ 'sclAgencyId'
     -> Int64 -- ^ 'sclAdvertiserId'
-    -> SavedColumnsList'
-savedColumnsList' pSclAgencyId_ pSclAdvertiserId_ =
-    SavedColumnsList'
+    -> SavedColumnsList
+savedColumnsList pSclAgencyId_ pSclAdvertiserId_ =
+    SavedColumnsList
     { _sclAgencyId = pSclAgencyId_
     , _sclAdvertiserId = pSclAdvertiserId_
     }
 
 -- | DS ID of the agency.
-sclAgencyId :: Lens' SavedColumnsList' Int64
+sclAgencyId :: Lens' SavedColumnsList Int64
 sclAgencyId
   = lens _sclAgencyId (\ s a -> s{_sclAgencyId = a})
 
 -- | DS ID of the advertiser.
-sclAdvertiserId :: Lens' SavedColumnsList' Int64
+sclAdvertiserId :: Lens' SavedColumnsList Int64
 sclAdvertiserId
   = lens _sclAdvertiserId
       (\ s a -> s{_sclAdvertiserId = a})
 
-instance GoogleRequest SavedColumnsList' where
-        type Rs SavedColumnsList' = SavedColumnList
-        requestClient SavedColumnsList'{..}
+instance GoogleRequest SavedColumnsList where
+        type Rs SavedColumnsList = SavedColumnList
+        requestClient SavedColumnsList{..}
           = go _sclAgencyId _sclAdvertiserId (Just AltJSON)
               doubleClickSearchService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.AchievementDefinitions.List
       AchievementDefinitionsListResource
 
     -- * Creating a Request
-    , achievementDefinitionsList'
-    , AchievementDefinitionsList'
+    , achievementDefinitionsList
+    , AchievementDefinitionsList
 
     -- * Request Lenses
     , adlLanguage
@@ -42,7 +42,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.achievementDefinitions.list@ method which the
--- 'AchievementDefinitionsList'' request conforms to.
+-- 'AchievementDefinitionsList' request conforms to.
 type AchievementDefinitionsListResource =
      "achievements" :>
        QueryParam "language" Text :>
@@ -53,14 +53,14 @@ type AchievementDefinitionsListResource =
 
 -- | Lists all the achievement definitions for your application.
 --
--- /See:/ 'achievementDefinitionsList'' smart constructor.
-data AchievementDefinitionsList' = AchievementDefinitionsList'
+-- /See:/ 'achievementDefinitionsList' smart constructor.
+data AchievementDefinitionsList = AchievementDefinitionsList
     { _adlLanguage   :: !(Maybe Text)
     , _adlPageToken  :: !(Maybe Text)
     , _adlMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AchievementDefinitionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AchievementDefinitionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,38 +69,38 @@ data AchievementDefinitionsList' = AchievementDefinitionsList'
 -- * 'adlPageToken'
 --
 -- * 'adlMaxResults'
-achievementDefinitionsList'
-    :: AchievementDefinitionsList'
-achievementDefinitionsList' =
-    AchievementDefinitionsList'
+achievementDefinitionsList
+    :: AchievementDefinitionsList
+achievementDefinitionsList =
+    AchievementDefinitionsList
     { _adlLanguage = Nothing
     , _adlPageToken = Nothing
     , _adlMaxResults = Nothing
     }
 
 -- | The preferred language to use for strings returned by this method.
-adlLanguage :: Lens' AchievementDefinitionsList' (Maybe Text)
+adlLanguage :: Lens' AchievementDefinitionsList (Maybe Text)
 adlLanguage
   = lens _adlLanguage (\ s a -> s{_adlLanguage = a})
 
 -- | The token returned by the previous request.
-adlPageToken :: Lens' AchievementDefinitionsList' (Maybe Text)
+adlPageToken :: Lens' AchievementDefinitionsList (Maybe Text)
 adlPageToken
   = lens _adlPageToken (\ s a -> s{_adlPageToken = a})
 
 -- | The maximum number of achievement resources to return in the response,
 -- used for paging. For any response, the actual number of achievement
 -- resources returned may be less than the specified maxResults.
-adlMaxResults :: Lens' AchievementDefinitionsList' (Maybe Int32)
+adlMaxResults :: Lens' AchievementDefinitionsList (Maybe Int32)
 adlMaxResults
   = lens _adlMaxResults
       (\ s a -> s{_adlMaxResults = a})
 
-instance GoogleRequest AchievementDefinitionsList'
+instance GoogleRequest AchievementDefinitionsList
          where
-        type Rs AchievementDefinitionsList' =
+        type Rs AchievementDefinitionsList =
              AchievementDefinitionsListResponse
-        requestClient AchievementDefinitionsList'{..}
+        requestClient AchievementDefinitionsList{..}
           = go _adlLanguage _adlPageToken _adlMaxResults
               (Just AltJSON)
               gamesService

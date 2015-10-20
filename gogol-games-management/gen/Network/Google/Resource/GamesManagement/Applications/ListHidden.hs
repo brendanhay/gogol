@@ -30,8 +30,8 @@ module Network.Google.Resource.GamesManagement.Applications.ListHidden
       ApplicationsListHiddenResource
 
     -- * Creating a Request
-    , applicationsListHidden'
-    , ApplicationsListHidden'
+    , applicationsListHidden
+    , ApplicationsListHidden
 
     -- * Request Lenses
     , alhApplicationId
@@ -43,7 +43,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.applications.listHidden@ method which the
--- 'ApplicationsListHidden'' request conforms to.
+-- 'ApplicationsListHidden' request conforms to.
 type ApplicationsListHiddenResource =
      "applications" :>
        Capture "applicationId" Text :>
@@ -57,14 +57,14 @@ type ApplicationsListHiddenResource =
 -- | Get the list of players hidden from the given application. This method
 -- is only available to user accounts for your developer console.
 --
--- /See:/ 'applicationsListHidden'' smart constructor.
-data ApplicationsListHidden' = ApplicationsListHidden'
+-- /See:/ 'applicationsListHidden' smart constructor.
+data ApplicationsListHidden = ApplicationsListHidden
     { _alhApplicationId :: !Text
     , _alhPageToken     :: !(Maybe Text)
     , _alhMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ApplicationsListHidden'' with the minimum fields required to make a request.
+-- | Creates a value of 'ApplicationsListHidden' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,38 +73,38 @@ data ApplicationsListHidden' = ApplicationsListHidden'
 -- * 'alhPageToken'
 --
 -- * 'alhMaxResults'
-applicationsListHidden'
+applicationsListHidden
     :: Text -- ^ 'alhApplicationId'
-    -> ApplicationsListHidden'
-applicationsListHidden' pAlhApplicationId_ =
-    ApplicationsListHidden'
+    -> ApplicationsListHidden
+applicationsListHidden pAlhApplicationId_ =
+    ApplicationsListHidden
     { _alhApplicationId = pAlhApplicationId_
     , _alhPageToken = Nothing
     , _alhMaxResults = Nothing
     }
 
 -- | The application ID from the Google Play developer console.
-alhApplicationId :: Lens' ApplicationsListHidden' Text
+alhApplicationId :: Lens' ApplicationsListHidden Text
 alhApplicationId
   = lens _alhApplicationId
       (\ s a -> s{_alhApplicationId = a})
 
 -- | The token returned by the previous request.
-alhPageToken :: Lens' ApplicationsListHidden' (Maybe Text)
+alhPageToken :: Lens' ApplicationsListHidden (Maybe Text)
 alhPageToken
   = lens _alhPageToken (\ s a -> s{_alhPageToken = a})
 
 -- | The maximum number of player resources to return in the response, used
 -- for paging. For any response, the actual number of player resources
 -- returned may be less than the specified maxResults.
-alhMaxResults :: Lens' ApplicationsListHidden' (Maybe Int32)
+alhMaxResults :: Lens' ApplicationsListHidden (Maybe Int32)
 alhMaxResults
   = lens _alhMaxResults
       (\ s a -> s{_alhMaxResults = a})
 
-instance GoogleRequest ApplicationsListHidden' where
-        type Rs ApplicationsListHidden' = HiddenPlayerList
-        requestClient ApplicationsListHidden'{..}
+instance GoogleRequest ApplicationsListHidden where
+        type Rs ApplicationsListHidden = HiddenPlayerList
+        requestClient ApplicationsListHidden{..}
           = go _alhApplicationId _alhPageToken _alhMaxResults
               (Just AltJSON)
               gamesManagementService

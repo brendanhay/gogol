@@ -29,20 +29,20 @@ module Network.Google.Resource.Content.Datafeedstatuses.List
       DatafeedstatusesListResource
 
     -- * Creating a Request
-    , datafeedstatusesList'
-    , DatafeedstatusesList'
+    , datafeedstatusesList
+    , DatafeedstatusesList
 
     -- * Request Lenses
-    , dllMerchantId
-    , dllPageToken
-    , dllMaxResults
+    , dlMerchantId
+    , dlPageToken
+    , dlMaxResults
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.datafeedstatuses.list@ method which the
--- 'DatafeedstatusesList'' request conforms to.
+-- 'DatafeedstatusesList' request conforms to.
 type DatafeedstatusesListResource =
      Capture "merchantId" Word64 :>
        "datafeedstatuses" :>
@@ -53,55 +53,53 @@ type DatafeedstatusesListResource =
 
 -- | Lists the statuses of the datafeeds in your Merchant Center account.
 --
--- /See:/ 'datafeedstatusesList'' smart constructor.
-data DatafeedstatusesList' = DatafeedstatusesList'
-    { _dllMerchantId :: !Word64
-    , _dllPageToken  :: !(Maybe Text)
-    , _dllMaxResults :: !(Maybe Word32)
+-- /See:/ 'datafeedstatusesList' smart constructor.
+data DatafeedstatusesList = DatafeedstatusesList
+    { _dlMerchantId :: !Word64
+    , _dlPageToken  :: !(Maybe Text)
+    , _dlMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatafeedstatusesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatafeedstatusesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dllMerchantId'
+-- * 'dlMerchantId'
 --
--- * 'dllPageToken'
+-- * 'dlPageToken'
 --
--- * 'dllMaxResults'
-datafeedstatusesList'
-    :: Word64 -- ^ 'dllMerchantId'
-    -> DatafeedstatusesList'
-datafeedstatusesList' pDllMerchantId_ =
-    DatafeedstatusesList'
-    { _dllMerchantId = pDllMerchantId_
-    , _dllPageToken = Nothing
-    , _dllMaxResults = Nothing
+-- * 'dlMaxResults'
+datafeedstatusesList
+    :: Word64 -- ^ 'dlMerchantId'
+    -> DatafeedstatusesList
+datafeedstatusesList pDlMerchantId_ =
+    DatafeedstatusesList
+    { _dlMerchantId = pDlMerchantId_
+    , _dlPageToken = Nothing
+    , _dlMaxResults = Nothing
     }
 
 -- | The ID of the managing account.
-dllMerchantId :: Lens' DatafeedstatusesList' Word64
-dllMerchantId
-  = lens _dllMerchantId
-      (\ s a -> s{_dllMerchantId = a})
+dlMerchantId :: Lens' DatafeedstatusesList Word64
+dlMerchantId
+  = lens _dlMerchantId (\ s a -> s{_dlMerchantId = a})
 
 -- | The token returned by the previous request.
-dllPageToken :: Lens' DatafeedstatusesList' (Maybe Text)
-dllPageToken
-  = lens _dllPageToken (\ s a -> s{_dllPageToken = a})
+dlPageToken :: Lens' DatafeedstatusesList (Maybe Text)
+dlPageToken
+  = lens _dlPageToken (\ s a -> s{_dlPageToken = a})
 
 -- | The maximum number of products to return in the response, used for
 -- paging.
-dllMaxResults :: Lens' DatafeedstatusesList' (Maybe Word32)
-dllMaxResults
-  = lens _dllMaxResults
-      (\ s a -> s{_dllMaxResults = a})
+dlMaxResults :: Lens' DatafeedstatusesList (Maybe Word32)
+dlMaxResults
+  = lens _dlMaxResults (\ s a -> s{_dlMaxResults = a})
 
-instance GoogleRequest DatafeedstatusesList' where
-        type Rs DatafeedstatusesList' =
+instance GoogleRequest DatafeedstatusesList where
+        type Rs DatafeedstatusesList =
              DatafeedstatusesListResponse
-        requestClient DatafeedstatusesList'{..}
-          = go _dllMerchantId _dllPageToken _dllMaxResults
+        requestClient DatafeedstatusesList{..}
+          = go _dlMerchantId _dlPageToken _dlMaxResults
               (Just AltJSON)
               shoppingContentService
           where go

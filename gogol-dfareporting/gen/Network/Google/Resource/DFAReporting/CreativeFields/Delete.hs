@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Delete
       CreativeFieldsDeleteResource
 
     -- * Creating a Request
-    , creativeFieldsDelete'
-    , CreativeFieldsDelete'
+    , creativeFieldsDelete
+    , CreativeFieldsDelete
 
     -- * Request Lenses
     , cfdProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creativeFields.delete@ method which the
--- 'CreativeFieldsDelete'' request conforms to.
+-- 'CreativeFieldsDelete' request conforms to.
 type CreativeFieldsDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,41 +51,41 @@ type CreativeFieldsDeleteResource =
 
 -- | Deletes an existing creative field.
 --
--- /See:/ 'creativeFieldsDelete'' smart constructor.
-data CreativeFieldsDelete' = CreativeFieldsDelete'
+-- /See:/ 'creativeFieldsDelete' smart constructor.
+data CreativeFieldsDelete = CreativeFieldsDelete
     { _cfdProFileId :: !Int64
     , _cfdId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativeFieldsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'CreativeFieldsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cfdProFileId'
 --
 -- * 'cfdId'
-creativeFieldsDelete'
+creativeFieldsDelete
     :: Int64 -- ^ 'cfdProFileId'
     -> Int64 -- ^ 'cfdId'
-    -> CreativeFieldsDelete'
-creativeFieldsDelete' pCfdProFileId_ pCfdId_ =
-    CreativeFieldsDelete'
+    -> CreativeFieldsDelete
+creativeFieldsDelete pCfdProFileId_ pCfdId_ =
+    CreativeFieldsDelete
     { _cfdProFileId = pCfdProFileId_
     , _cfdId = pCfdId_
     }
 
 -- | User profile ID associated with this request.
-cfdProFileId :: Lens' CreativeFieldsDelete' Int64
+cfdProFileId :: Lens' CreativeFieldsDelete Int64
 cfdProFileId
   = lens _cfdProFileId (\ s a -> s{_cfdProFileId = a})
 
 -- | Creative Field ID
-cfdId :: Lens' CreativeFieldsDelete' Int64
+cfdId :: Lens' CreativeFieldsDelete Int64
 cfdId = lens _cfdId (\ s a -> s{_cfdId = a})
 
-instance GoogleRequest CreativeFieldsDelete' where
-        type Rs CreativeFieldsDelete' = ()
-        requestClient CreativeFieldsDelete'{..}
+instance GoogleRequest CreativeFieldsDelete where
+        type Rs CreativeFieldsDelete = ()
+        requestClient CreativeFieldsDelete{..}
           = go _cfdProFileId _cfdId (Just AltJSON)
               dFAReportingService
           where go

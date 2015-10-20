@@ -29,8 +29,8 @@ module Network.Google.Resource.Webmasters.Sites.List
       SitesListResource
 
     -- * Creating a Request
-    , sitesList'
-    , SitesList'
+    , sitesList
+    , SitesList
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.sites.list@ method which the
--- 'SitesList'' request conforms to.
+-- 'SitesList' request conforms to.
 type SitesListResource =
      "sites" :>
        QueryParam "alt" AltJSON :>
@@ -46,20 +46,20 @@ type SitesListResource =
 
 -- | Lists the user\'s Webmaster Tools sites.
 --
--- /See:/ 'sitesList'' smart constructor.
-data SitesList' =
-    SitesList'
+-- /See:/ 'sitesList' smart constructor.
+data SitesList =
+    SitesList
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SitesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'SitesList' with the minimum fields required to make a request.
 --
-sitesList'
-    :: SitesList'
-sitesList' = SitesList'
+sitesList
+    :: SitesList
+sitesList = SitesList
 
-instance GoogleRequest SitesList' where
-        type Rs SitesList' = SitesListResponse
-        requestClient SitesList'{}
+instance GoogleRequest SitesList where
+        type Rs SitesList = SitesListResponse
+        requestClient SitesList{}
           = go (Just AltJSON) webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitesListResource)

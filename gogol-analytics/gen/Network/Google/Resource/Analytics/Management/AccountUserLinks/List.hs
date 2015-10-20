@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.List
       ManagementAccountUserLinksListResource
 
     -- * Creating a Request
-    , managementAccountUserLinksList'
-    , ManagementAccountUserLinksList'
+    , managementAccountUserLinksList
+    , ManagementAccountUserLinksList
 
     -- * Request Lenses
     , maullAccountId
@@ -42,7 +42,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.accountUserLinks.list@ method which the
--- 'ManagementAccountUserLinksList'' request conforms to.
+-- 'ManagementAccountUserLinksList' request conforms to.
 type ManagementAccountUserLinksListResource =
      "management" :>
        "accounts" :>
@@ -55,14 +55,14 @@ type ManagementAccountUserLinksListResource =
 
 -- | Lists account-user links for a given account.
 --
--- /See:/ 'managementAccountUserLinksList'' smart constructor.
-data ManagementAccountUserLinksList' = ManagementAccountUserLinksList'
+-- /See:/ 'managementAccountUserLinksList' smart constructor.
+data ManagementAccountUserLinksList = ManagementAccountUserLinksList
     { _maullAccountId  :: !Text
     , _maullStartIndex :: !(Maybe Int32)
     , _maullMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementAccountUserLinksList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementAccountUserLinksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,40 +71,40 @@ data ManagementAccountUserLinksList' = ManagementAccountUserLinksList'
 -- * 'maullStartIndex'
 --
 -- * 'maullMaxResults'
-managementAccountUserLinksList'
+managementAccountUserLinksList
     :: Text -- ^ 'maullAccountId'
-    -> ManagementAccountUserLinksList'
-managementAccountUserLinksList' pMaullAccountId_ =
-    ManagementAccountUserLinksList'
+    -> ManagementAccountUserLinksList
+managementAccountUserLinksList pMaullAccountId_ =
+    ManagementAccountUserLinksList
     { _maullAccountId = pMaullAccountId_
     , _maullStartIndex = Nothing
     , _maullMaxResults = Nothing
     }
 
 -- | Account ID to retrieve the user links for.
-maullAccountId :: Lens' ManagementAccountUserLinksList' Text
+maullAccountId :: Lens' ManagementAccountUserLinksList Text
 maullAccountId
   = lens _maullAccountId
       (\ s a -> s{_maullAccountId = a})
 
 -- | An index of the first account-user link to retrieve. Use this parameter
 -- as a pagination mechanism along with the max-results parameter.
-maullStartIndex :: Lens' ManagementAccountUserLinksList' (Maybe Int32)
+maullStartIndex :: Lens' ManagementAccountUserLinksList (Maybe Int32)
 maullStartIndex
   = lens _maullStartIndex
       (\ s a -> s{_maullStartIndex = a})
 
 -- | The maximum number of account-user links to include in this response.
-maullMaxResults :: Lens' ManagementAccountUserLinksList' (Maybe Int32)
+maullMaxResults :: Lens' ManagementAccountUserLinksList (Maybe Int32)
 maullMaxResults
   = lens _maullMaxResults
       (\ s a -> s{_maullMaxResults = a})
 
-instance GoogleRequest
-         ManagementAccountUserLinksList' where
-        type Rs ManagementAccountUserLinksList' =
+instance GoogleRequest ManagementAccountUserLinksList
+         where
+        type Rs ManagementAccountUserLinksList =
              EntityUserLinks
-        requestClient ManagementAccountUserLinksList'{..}
+        requestClient ManagementAccountUserLinksList{..}
           = go _maullAccountId _maullStartIndex
               _maullMaxResults
               (Just AltJSON)

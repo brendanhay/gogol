@@ -29,8 +29,8 @@ module Network.Google.Resource.Discovery.APIs.List
       APIsListResource
 
     -- * Creating a Request
-    , apisList'
-    , APIsList'
+    , apisList
+    , APIsList
 
     -- * Request Lenses
     , alPreferred
@@ -41,7 +41,7 @@ import           Network.Google.Discovery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @discovery.apis.list@ method which the
--- 'APIsList'' request conforms to.
+-- 'APIsList' request conforms to.
 type APIsListResource =
      "apis" :>
        QueryParam "preferred" Bool :>
@@ -50,39 +50,39 @@ type APIsListResource =
 
 -- | Retrieve the list of APIs supported at this endpoint.
 --
--- /See:/ 'apisList'' smart constructor.
-data APIsList' = APIsList'
+-- /See:/ 'apisList' smart constructor.
+data APIsList = APIsList
     { _alPreferred :: !Bool
     , _alName      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'APIsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'APIsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'alPreferred'
 --
 -- * 'alName'
-apisList'
-    :: APIsList'
-apisList' =
-    APIsList'
+apisList
+    :: APIsList
+apisList =
+    APIsList
     { _alPreferred = False
     , _alName = Nothing
     }
 
 -- | Return only the preferred version of an API.
-alPreferred :: Lens' APIsList' Bool
+alPreferred :: Lens' APIsList Bool
 alPreferred
   = lens _alPreferred (\ s a -> s{_alPreferred = a})
 
 -- | Only include APIs with the given name.
-alName :: Lens' APIsList' (Maybe Text)
+alName :: Lens' APIsList (Maybe Text)
 alName = lens _alName (\ s a -> s{_alName = a})
 
-instance GoogleRequest APIsList' where
-        type Rs APIsList' = DirectoryList
-        requestClient APIsList'{..}
+instance GoogleRequest APIsList where
+        type Rs APIsList = DirectoryList
+        requestClient APIsList{..}
           = go (Just _alPreferred) _alName (Just AltJSON)
               discoveryService
           where go

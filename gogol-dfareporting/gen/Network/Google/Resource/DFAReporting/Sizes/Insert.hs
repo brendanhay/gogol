@@ -29,19 +29,19 @@ module Network.Google.Resource.DFAReporting.Sizes.Insert
       SizesInsertResource
 
     -- * Creating a Request
-    , sizesInsert'
-    , SizesInsert'
+    , sizesInsert
+    , SizesInsert
 
     -- * Request Lenses
-    , sProFileId
-    , sPayload
+    , siProFileId
+    , siPayload
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.sizes.insert@ method which the
--- 'SizesInsert'' request conforms to.
+-- 'SizesInsert' request conforms to.
 type SizesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,43 @@ type SizesInsertResource =
 
 -- | Inserts a new size.
 --
--- /See:/ 'sizesInsert'' smart constructor.
-data SizesInsert' = SizesInsert'
-    { _sProFileId :: !Int64
-    , _sPayload   :: !Size
+-- /See:/ 'sizesInsert' smart constructor.
+data SizesInsert = SizesInsert
+    { _siProFileId :: !Int64
+    , _siPayload   :: !Size
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SizesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'SizesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sProFileId'
+-- * 'siProFileId'
 --
--- * 'sPayload'
-sizesInsert'
-    :: Int64 -- ^ 'sProFileId'
-    -> Size -- ^ 'sPayload'
-    -> SizesInsert'
-sizesInsert' pSProFileId_ pSPayload_ =
-    SizesInsert'
-    { _sProFileId = pSProFileId_
-    , _sPayload = pSPayload_
+-- * 'siPayload'
+sizesInsert
+    :: Int64 -- ^ 'siProFileId'
+    -> Size -- ^ 'siPayload'
+    -> SizesInsert
+sizesInsert pSiProFileId_ pSiPayload_ =
+    SizesInsert
+    { _siProFileId = pSiProFileId_
+    , _siPayload = pSiPayload_
     }
 
 -- | User profile ID associated with this request.
-sProFileId :: Lens' SizesInsert' Int64
-sProFileId
-  = lens _sProFileId (\ s a -> s{_sProFileId = a})
+siProFileId :: Lens' SizesInsert Int64
+siProFileId
+  = lens _siProFileId (\ s a -> s{_siProFileId = a})
 
 -- | Multipart request metadata.
-sPayload :: Lens' SizesInsert' Size
-sPayload = lens _sPayload (\ s a -> s{_sPayload = a})
+siPayload :: Lens' SizesInsert Size
+siPayload
+  = lens _siPayload (\ s a -> s{_siPayload = a})
 
-instance GoogleRequest SizesInsert' where
-        type Rs SizesInsert' = Size
-        requestClient SizesInsert'{..}
-          = go _sProFileId (Just AltJSON) _sPayload
+instance GoogleRequest SizesInsert where
+        type Rs SizesInsert = Size
+        requestClient SizesInsert{..}
+          = go _siProFileId (Just AltJSON) _siPayload
               dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy SizesInsertResource)

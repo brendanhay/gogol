@@ -30,8 +30,8 @@ module Network.Google.Resource.DFAReporting.AccountUserProFiles.Patch
       AccountUserProFilesPatchResource
 
     -- * Creating a Request
-    , accountUserProFilesPatch'
-    , AccountUserProFilesPatch'
+    , accountUserProFilesPatch
+    , AccountUserProFilesPatch
 
     -- * Request Lenses
     , aupfpProFileId
@@ -43,7 +43,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accountUserProfiles.patch@ method which the
--- 'AccountUserProFilesPatch'' request conforms to.
+-- 'AccountUserProFilesPatch' request conforms to.
 type AccountUserProFilesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -56,14 +56,14 @@ type AccountUserProFilesPatchResource =
 -- | Updates an existing account user profile. This method supports patch
 -- semantics.
 --
--- /See:/ 'accountUserProFilesPatch'' smart constructor.
-data AccountUserProFilesPatch' = AccountUserProFilesPatch'
+-- /See:/ 'accountUserProFilesPatch' smart constructor.
+data AccountUserProFilesPatch = AccountUserProFilesPatch
     { _aupfpProFileId :: !Int64
     , _aupfpPayload   :: !AccountUserProFile
     , _aupfpId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountUserProFilesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountUserProFilesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,38 +72,36 @@ data AccountUserProFilesPatch' = AccountUserProFilesPatch'
 -- * 'aupfpPayload'
 --
 -- * 'aupfpId'
-accountUserProFilesPatch'
+accountUserProFilesPatch
     :: Int64 -- ^ 'aupfpProFileId'
     -> AccountUserProFile -- ^ 'aupfpPayload'
     -> Int64 -- ^ 'aupfpId'
-    -> AccountUserProFilesPatch'
-accountUserProFilesPatch' pAupfpProFileId_ pAupfpPayload_ pAupfpId_ =
-    AccountUserProFilesPatch'
+    -> AccountUserProFilesPatch
+accountUserProFilesPatch pAupfpProFileId_ pAupfpPayload_ pAupfpId_ =
+    AccountUserProFilesPatch
     { _aupfpProFileId = pAupfpProFileId_
     , _aupfpPayload = pAupfpPayload_
     , _aupfpId = pAupfpId_
     }
 
 -- | User profile ID associated with this request.
-aupfpProFileId :: Lens' AccountUserProFilesPatch' Int64
+aupfpProFileId :: Lens' AccountUserProFilesPatch Int64
 aupfpProFileId
   = lens _aupfpProFileId
       (\ s a -> s{_aupfpProFileId = a})
 
 -- | Multipart request metadata.
-aupfpPayload :: Lens' AccountUserProFilesPatch' AccountUserProFile
+aupfpPayload :: Lens' AccountUserProFilesPatch AccountUserProFile
 aupfpPayload
   = lens _aupfpPayload (\ s a -> s{_aupfpPayload = a})
 
 -- | User profile ID.
-aupfpId :: Lens' AccountUserProFilesPatch' Int64
+aupfpId :: Lens' AccountUserProFilesPatch Int64
 aupfpId = lens _aupfpId (\ s a -> s{_aupfpId = a})
 
-instance GoogleRequest AccountUserProFilesPatch'
-         where
-        type Rs AccountUserProFilesPatch' =
-             AccountUserProFile
-        requestClient AccountUserProFilesPatch'{..}
+instance GoogleRequest AccountUserProFilesPatch where
+        type Rs AccountUserProFilesPatch = AccountUserProFile
+        requestClient AccountUserProFilesPatch{..}
           = go _aupfpProFileId (Just _aupfpId) (Just AltJSON)
               _aupfpPayload
               dFAReportingService

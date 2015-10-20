@@ -30,8 +30,8 @@ module Network.Google.Resource.Directory.VerificationCodes.List
       VerificationCodesListResource
 
     -- * Creating a Request
-    , verificationCodesList'
-    , VerificationCodesList'
+    , verificationCodesList
+    , VerificationCodesList
 
     -- * Request Lenses
     , vclUserKey
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.verificationCodes.list@ method which the
--- 'VerificationCodesList'' request conforms to.
+-- 'VerificationCodesList' request conforms to.
 type VerificationCodesListResource =
      "users" :>
        Capture "userKey" Text :>
@@ -52,33 +52,33 @@ type VerificationCodesListResource =
 -- | Returns the current set of valid backup verification codes for the
 -- specified user.
 --
--- /See:/ 'verificationCodesList'' smart constructor.
-newtype VerificationCodesList' = VerificationCodesList'
+-- /See:/ 'verificationCodesList' smart constructor.
+newtype VerificationCodesList = VerificationCodesList
     { _vclUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VerificationCodesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'VerificationCodesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'vclUserKey'
-verificationCodesList'
+verificationCodesList
     :: Text -- ^ 'vclUserKey'
-    -> VerificationCodesList'
-verificationCodesList' pVclUserKey_ =
-    VerificationCodesList'
+    -> VerificationCodesList
+verificationCodesList pVclUserKey_ =
+    VerificationCodesList
     { _vclUserKey = pVclUserKey_
     }
 
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.
-vclUserKey :: Lens' VerificationCodesList' Text
+vclUserKey :: Lens' VerificationCodesList Text
 vclUserKey
   = lens _vclUserKey (\ s a -> s{_vclUserKey = a})
 
-instance GoogleRequest VerificationCodesList' where
-        type Rs VerificationCodesList' = VerificationCodes
-        requestClient VerificationCodesList'{..}
+instance GoogleRequest VerificationCodesList where
+        type Rs VerificationCodesList = VerificationCodes
+        requestClient VerificationCodesList{..}
           = go _vclUserKey (Just AltJSON) directoryService
           where go
                   = buildClient

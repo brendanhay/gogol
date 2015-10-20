@@ -31,8 +31,8 @@ module Network.Google.Resource.Blogger.PostUserInfos.Get
       PostUserInfosGetResource
 
     -- * Creating a Request
-    , postUserInfosGet'
-    , PostUserInfosGet'
+    , postUserInfosGet
+    , PostUserInfosGet
 
     -- * Request Lenses
     , puigBlogId
@@ -45,7 +45,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.postUserInfos.get@ method which the
--- 'PostUserInfosGet'' request conforms to.
+-- 'PostUserInfosGet' request conforms to.
 type PostUserInfosGetResource =
      "users" :>
        Capture "userId" Text :>
@@ -60,15 +60,15 @@ type PostUserInfosGetResource =
 -- info contains per-user information about the post, such as access
 -- rights, specific to the user.
 --
--- /See:/ 'postUserInfosGet'' smart constructor.
-data PostUserInfosGet' = PostUserInfosGet'
+-- /See:/ 'postUserInfosGet' smart constructor.
+data PostUserInfosGet = PostUserInfosGet
     { _puigBlogId      :: !Text
     , _puigMaxComments :: !(Maybe Word32)
     , _puigUserId      :: !Text
     , _puigPostId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PostUserInfosGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PostUserInfosGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,13 +79,13 @@ data PostUserInfosGet' = PostUserInfosGet'
 -- * 'puigUserId'
 --
 -- * 'puigPostId'
-postUserInfosGet'
+postUserInfosGet
     :: Text -- ^ 'puigBlogId'
     -> Text -- ^ 'puigUserId'
     -> Text -- ^ 'puigPostId'
-    -> PostUserInfosGet'
-postUserInfosGet' pPuigBlogId_ pPuigUserId_ pPuigPostId_ =
-    PostUserInfosGet'
+    -> PostUserInfosGet
+postUserInfosGet pPuigBlogId_ pPuigUserId_ pPuigPostId_ =
+    PostUserInfosGet
     { _puigBlogId = pPuigBlogId_
     , _puigMaxComments = Nothing
     , _puigUserId = pPuigUserId_
@@ -93,30 +93,30 @@ postUserInfosGet' pPuigBlogId_ pPuigUserId_ pPuigPostId_ =
     }
 
 -- | The ID of the blog.
-puigBlogId :: Lens' PostUserInfosGet' Text
+puigBlogId :: Lens' PostUserInfosGet Text
 puigBlogId
   = lens _puigBlogId (\ s a -> s{_puigBlogId = a})
 
 -- | Maximum number of comments to pull back on a post.
-puigMaxComments :: Lens' PostUserInfosGet' (Maybe Word32)
+puigMaxComments :: Lens' PostUserInfosGet (Maybe Word32)
 puigMaxComments
   = lens _puigMaxComments
       (\ s a -> s{_puigMaxComments = a})
 
 -- | ID of the user for the per-user information to be fetched. Either the
 -- word \'self\' (sans quote marks) or the user\'s profile identifier.
-puigUserId :: Lens' PostUserInfosGet' Text
+puigUserId :: Lens' PostUserInfosGet Text
 puigUserId
   = lens _puigUserId (\ s a -> s{_puigUserId = a})
 
 -- | The ID of the post to get.
-puigPostId :: Lens' PostUserInfosGet' Text
+puigPostId :: Lens' PostUserInfosGet Text
 puigPostId
   = lens _puigPostId (\ s a -> s{_puigPostId = a})
 
-instance GoogleRequest PostUserInfosGet' where
-        type Rs PostUserInfosGet' = PostUserInfo
-        requestClient PostUserInfosGet'{..}
+instance GoogleRequest PostUserInfosGet where
+        type Rs PostUserInfosGet = PostUserInfo
+        requestClient PostUserInfosGet{..}
           = go _puigUserId _puigBlogId _puigPostId
               _puigMaxComments
               (Just AltJSON)

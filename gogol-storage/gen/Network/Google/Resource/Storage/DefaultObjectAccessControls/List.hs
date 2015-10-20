@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.List
       DefaultObjectAccessControlsListResource
 
     -- * Creating a Request
-    , defaultObjectAccessControlsList'
-    , DefaultObjectAccessControlsList'
+    , defaultObjectAccessControlsList
+    , DefaultObjectAccessControlsList
 
     -- * Request Lenses
     , doaclIfMetagenerationMatch
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.defaultObjectAccessControls.list@ method which the
--- 'DefaultObjectAccessControlsList'' request conforms to.
+-- 'DefaultObjectAccessControlsList' request conforms to.
 type DefaultObjectAccessControlsListResource =
      "b" :>
        Capture "bucket" Text :>
@@ -54,14 +54,14 @@ type DefaultObjectAccessControlsListResource =
 
 -- | Retrieves default object ACL entries on the specified bucket.
 --
--- /See:/ 'defaultObjectAccessControlsList'' smart constructor.
-data DefaultObjectAccessControlsList' = DefaultObjectAccessControlsList'
+-- /See:/ 'defaultObjectAccessControlsList' smart constructor.
+data DefaultObjectAccessControlsList = DefaultObjectAccessControlsList
     { _doaclIfMetagenerationMatch    :: !(Maybe Int64)
     , _doaclBucket                   :: !Text
     , _doaclIfMetagenerationNotMatch :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DefaultObjectAccessControlsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'DefaultObjectAccessControlsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,11 +70,11 @@ data DefaultObjectAccessControlsList' = DefaultObjectAccessControlsList'
 -- * 'doaclBucket'
 --
 -- * 'doaclIfMetagenerationNotMatch'
-defaultObjectAccessControlsList'
+defaultObjectAccessControlsList
     :: Text -- ^ 'doaclBucket'
-    -> DefaultObjectAccessControlsList'
-defaultObjectAccessControlsList' pDoaclBucket_ =
-    DefaultObjectAccessControlsList'
+    -> DefaultObjectAccessControlsList
+defaultObjectAccessControlsList pDoaclBucket_ =
+    DefaultObjectAccessControlsList
     { _doaclIfMetagenerationMatch = Nothing
     , _doaclBucket = pDoaclBucket_
     , _doaclIfMetagenerationNotMatch = Nothing
@@ -82,28 +82,28 @@ defaultObjectAccessControlsList' pDoaclBucket_ =
 
 -- | If present, only return default ACL listing if the bucket\'s current
 -- metageneration matches this value.
-doaclIfMetagenerationMatch :: Lens' DefaultObjectAccessControlsList' (Maybe Int64)
+doaclIfMetagenerationMatch :: Lens' DefaultObjectAccessControlsList (Maybe Int64)
 doaclIfMetagenerationMatch
   = lens _doaclIfMetagenerationMatch
       (\ s a -> s{_doaclIfMetagenerationMatch = a})
 
 -- | Name of a bucket.
-doaclBucket :: Lens' DefaultObjectAccessControlsList' Text
+doaclBucket :: Lens' DefaultObjectAccessControlsList Text
 doaclBucket
   = lens _doaclBucket (\ s a -> s{_doaclBucket = a})
 
 -- | If present, only return default ACL listing if the bucket\'s current
 -- metageneration does not match the given value.
-doaclIfMetagenerationNotMatch :: Lens' DefaultObjectAccessControlsList' (Maybe Int64)
+doaclIfMetagenerationNotMatch :: Lens' DefaultObjectAccessControlsList (Maybe Int64)
 doaclIfMetagenerationNotMatch
   = lens _doaclIfMetagenerationNotMatch
       (\ s a -> s{_doaclIfMetagenerationNotMatch = a})
 
 instance GoogleRequest
-         DefaultObjectAccessControlsList' where
-        type Rs DefaultObjectAccessControlsList' =
+         DefaultObjectAccessControlsList where
+        type Rs DefaultObjectAccessControlsList =
              ObjectAccessControls
-        requestClient DefaultObjectAccessControlsList'{..}
+        requestClient DefaultObjectAccessControlsList{..}
           = go _doaclBucket _doaclIfMetagenerationMatch
               _doaclIfMetagenerationNotMatch
               (Just AltJSON)

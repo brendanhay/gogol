@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Regions.Get
       RegionsGetResource
 
     -- * Creating a Request
-    , regionsGet'
-    , RegionsGet'
+    , regionsGet
+    , RegionsGet
 
     -- * Request Lenses
     , rgProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.regions.get@ method which the
--- 'RegionsGet'' request conforms to.
+-- 'RegionsGet' request conforms to.
 type RegionsGetResource =
      Capture "project" Text :>
        "regions" :>
@@ -50,41 +50,41 @@ type RegionsGetResource =
 
 -- | Returns the specified region resource.
 --
--- /See:/ 'regionsGet'' smart constructor.
-data RegionsGet' = RegionsGet'
+-- /See:/ 'regionsGet' smart constructor.
+data RegionsGet = RegionsGet
     { _rgProject :: !Text
     , _rgRegion  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RegionsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'RegionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rgProject'
 --
 -- * 'rgRegion'
-regionsGet'
+regionsGet
     :: Text -- ^ 'rgProject'
     -> Text -- ^ 'rgRegion'
-    -> RegionsGet'
-regionsGet' pRgProject_ pRgRegion_ =
-    RegionsGet'
+    -> RegionsGet
+regionsGet pRgProject_ pRgRegion_ =
+    RegionsGet
     { _rgProject = pRgProject_
     , _rgRegion = pRgRegion_
     }
 
 -- | Project ID for this request.
-rgProject :: Lens' RegionsGet' Text
+rgProject :: Lens' RegionsGet Text
 rgProject
   = lens _rgProject (\ s a -> s{_rgProject = a})
 
 -- | Name of the region resource to return.
-rgRegion :: Lens' RegionsGet' Text
+rgRegion :: Lens' RegionsGet Text
 rgRegion = lens _rgRegion (\ s a -> s{_rgRegion = a})
 
-instance GoogleRequest RegionsGet' where
-        type Rs RegionsGet' = Region
-        requestClient RegionsGet'{..}
+instance GoogleRequest RegionsGet where
+        type Rs RegionsGet = Region
+        requestClient RegionsGet{..}
           = go _rgProject _rgRegion (Just AltJSON)
               computeService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Networks.Get
       NetworksGetResource
 
     -- * Creating a Request
-    , networksGet'
-    , NetworksGet'
+    , networksGet
+    , NetworksGet
 
     -- * Request Lenses
     , ngProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.networks.get@ method which the
--- 'NetworksGet'' request conforms to.
+-- 'NetworksGet' request conforms to.
 type NetworksGetResource =
      Capture "project" Text :>
        "global" :>
@@ -51,42 +51,42 @@ type NetworksGetResource =
 
 -- | Returns the specified network resource.
 --
--- /See:/ 'networksGet'' smart constructor.
-data NetworksGet' = NetworksGet'
+-- /See:/ 'networksGet' smart constructor.
+data NetworksGet = NetworksGet
     { _ngProject :: !Text
     , _ngNetwork :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'NetworksGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'NetworksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ngProject'
 --
 -- * 'ngNetwork'
-networksGet'
+networksGet
     :: Text -- ^ 'ngProject'
     -> Text -- ^ 'ngNetwork'
-    -> NetworksGet'
-networksGet' pNgProject_ pNgNetwork_ =
-    NetworksGet'
+    -> NetworksGet
+networksGet pNgProject_ pNgNetwork_ =
+    NetworksGet
     { _ngProject = pNgProject_
     , _ngNetwork = pNgNetwork_
     }
 
 -- | Project ID for this request.
-ngProject :: Lens' NetworksGet' Text
+ngProject :: Lens' NetworksGet Text
 ngProject
   = lens _ngProject (\ s a -> s{_ngProject = a})
 
 -- | Name of the network resource to return.
-ngNetwork :: Lens' NetworksGet' Text
+ngNetwork :: Lens' NetworksGet Text
 ngNetwork
   = lens _ngNetwork (\ s a -> s{_ngNetwork = a})
 
-instance GoogleRequest NetworksGet' where
-        type Rs NetworksGet' = Network
-        requestClient NetworksGet'{..}
+instance GoogleRequest NetworksGet where
+        type Rs NetworksGet = Network
+        requestClient NetworksGet{..}
           = go _ngProject _ngNetwork (Just AltJSON)
               computeService
           where go

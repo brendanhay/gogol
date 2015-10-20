@@ -29,8 +29,8 @@ module Network.Google.Resource.DoubleClickBidManager.Queries.CreateQuery
       QueriesCreateQueryResource
 
     -- * Creating a Request
-    , queriesCreateQuery'
-    , QueriesCreateQuery'
+    , queriesCreateQuery
+    , QueriesCreateQuery
 
     -- * Request Lenses
     , qcqPayload
@@ -40,7 +40,7 @@ import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @doubleclickbidmanager.queries.createquery@ method which the
--- 'QueriesCreateQuery'' request conforms to.
+-- 'QueriesCreateQuery' request conforms to.
 type QueriesCreateQueryResource =
      "query" :>
        QueryParam "alt" AltJSON :>
@@ -48,32 +48,32 @@ type QueriesCreateQueryResource =
 
 -- | Creates a query.
 --
--- /See:/ 'queriesCreateQuery'' smart constructor.
-newtype QueriesCreateQuery' = QueriesCreateQuery'
+-- /See:/ 'queriesCreateQuery' smart constructor.
+newtype QueriesCreateQuery = QueriesCreateQuery
     { _qcqPayload :: Query
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'QueriesCreateQuery'' with the minimum fields required to make a request.
+-- | Creates a value of 'QueriesCreateQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'qcqPayload'
-queriesCreateQuery'
+queriesCreateQuery
     :: Query -- ^ 'qcqPayload'
-    -> QueriesCreateQuery'
-queriesCreateQuery' pQcqPayload_ =
-    QueriesCreateQuery'
+    -> QueriesCreateQuery
+queriesCreateQuery pQcqPayload_ =
+    QueriesCreateQuery
     { _qcqPayload = pQcqPayload_
     }
 
 -- | Multipart request metadata.
-qcqPayload :: Lens' QueriesCreateQuery' Query
+qcqPayload :: Lens' QueriesCreateQuery Query
 qcqPayload
   = lens _qcqPayload (\ s a -> s{_qcqPayload = a})
 
-instance GoogleRequest QueriesCreateQuery' where
-        type Rs QueriesCreateQuery' = Query
-        requestClient QueriesCreateQuery'{..}
+instance GoogleRequest QueriesCreateQuery where
+        type Rs QueriesCreateQuery = Query
+        requestClient QueriesCreateQuery{..}
           = go (Just AltJSON) _qcqPayload
               doubleClickBidsService
           where go

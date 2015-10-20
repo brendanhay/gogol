@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.OrgUnits.Delete
       OrgUnitsDeleteResource
 
     -- * Creating a Request
-    , orgUnitsDelete'
-    , OrgUnitsDelete'
+    , orgUnitsDelete
+    , OrgUnitsDelete
 
     -- * Request Lenses
     , oudOrgUnitPath
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.orgunits.delete@ method which the
--- 'OrgUnitsDelete'' request conforms to.
+-- 'OrgUnitsDelete' request conforms to.
 type OrgUnitsDeleteResource =
      "customer" :>
        Capture "customerId" Text :>
@@ -51,45 +51,45 @@ type OrgUnitsDeleteResource =
 
 -- | Remove Organization Unit
 --
--- /See:/ 'orgUnitsDelete'' smart constructor.
-data OrgUnitsDelete' = OrgUnitsDelete'
+-- /See:/ 'orgUnitsDelete' smart constructor.
+data OrgUnitsDelete = OrgUnitsDelete
     { _oudOrgUnitPath :: ![Text]
     , _oudCustomerId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrgUnitsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrgUnitsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'oudOrgUnitPath'
 --
 -- * 'oudCustomerId'
-orgUnitsDelete'
+orgUnitsDelete
     :: [Text] -- ^ 'oudOrgUnitPath'
     -> Text -- ^ 'oudCustomerId'
-    -> OrgUnitsDelete'
-orgUnitsDelete' pOudOrgUnitPath_ pOudCustomerId_ =
-    OrgUnitsDelete'
+    -> OrgUnitsDelete
+orgUnitsDelete pOudOrgUnitPath_ pOudCustomerId_ =
+    OrgUnitsDelete
     { _oudOrgUnitPath = pOudOrgUnitPath_
     , _oudCustomerId = pOudCustomerId_
     }
 
 -- | Full path of the organization unit or its Id
-oudOrgUnitPath :: Lens' OrgUnitsDelete' [Text]
+oudOrgUnitPath :: Lens' OrgUnitsDelete [Text]
 oudOrgUnitPath
   = lens _oudOrgUnitPath
       (\ s a -> s{_oudOrgUnitPath = a})
       . _Coerce
 
 -- | Immutable id of the Google Apps account
-oudCustomerId :: Lens' OrgUnitsDelete' Text
+oudCustomerId :: Lens' OrgUnitsDelete Text
 oudCustomerId
   = lens _oudCustomerId
       (\ s a -> s{_oudCustomerId = a})
 
-instance GoogleRequest OrgUnitsDelete' where
-        type Rs OrgUnitsDelete' = ()
-        requestClient OrgUnitsDelete'{..}
+instance GoogleRequest OrgUnitsDelete where
+        type Rs OrgUnitsDelete = ()
+        requestClient OrgUnitsDelete{..}
           = go _oudCustomerId _oudOrgUnitPath (Just AltJSON)
               directoryService
           where go

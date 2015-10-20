@@ -29,8 +29,8 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Patch
       LicenseAssignmentsPatchResource
 
     -- * Creating a Request
-    , licenseAssignmentsPatch'
-    , LicenseAssignmentsPatch'
+    , licenseAssignmentsPatch
+    , LicenseAssignmentsPatch
 
     -- * Request Lenses
     , lapSKUId
@@ -43,7 +43,7 @@ import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @licensing.licenseAssignments.patch@ method which the
--- 'LicenseAssignmentsPatch'' request conforms to.
+-- 'LicenseAssignmentsPatch' request conforms to.
 type LicenseAssignmentsPatchResource =
      Capture "productId" Text :>
        "sku" :>
@@ -56,15 +56,15 @@ type LicenseAssignmentsPatchResource =
 
 -- | Assign License. This method supports patch semantics.
 --
--- /See:/ 'licenseAssignmentsPatch'' smart constructor.
-data LicenseAssignmentsPatch' = LicenseAssignmentsPatch'
+-- /See:/ 'licenseAssignmentsPatch' smart constructor.
+data LicenseAssignmentsPatch = LicenseAssignmentsPatch
     { _lapSKUId     :: !Text
     , _lapPayload   :: !LicenseAssignment
     , _lapUserId    :: !Text
     , _lapProductId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LicenseAssignmentsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'LicenseAssignmentsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,14 +75,14 @@ data LicenseAssignmentsPatch' = LicenseAssignmentsPatch'
 -- * 'lapUserId'
 --
 -- * 'lapProductId'
-licenseAssignmentsPatch'
+licenseAssignmentsPatch
     :: Text -- ^ 'lapSKUId'
     -> LicenseAssignment -- ^ 'lapPayload'
     -> Text -- ^ 'lapUserId'
     -> Text -- ^ 'lapProductId'
-    -> LicenseAssignmentsPatch'
-licenseAssignmentsPatch' pLapSKUId_ pLapPayload_ pLapUserId_ pLapProductId_ =
-    LicenseAssignmentsPatch'
+    -> LicenseAssignmentsPatch
+licenseAssignmentsPatch pLapSKUId_ pLapPayload_ pLapUserId_ pLapProductId_ =
+    LicenseAssignmentsPatch
     { _lapSKUId = pLapSKUId_
     , _lapPayload = pLapPayload_
     , _lapUserId = pLapUserId_
@@ -90,27 +90,27 @@ licenseAssignmentsPatch' pLapSKUId_ pLapPayload_ pLapUserId_ pLapProductId_ =
     }
 
 -- | Name for sku for which license would be revoked
-lapSKUId :: Lens' LicenseAssignmentsPatch' Text
+lapSKUId :: Lens' LicenseAssignmentsPatch Text
 lapSKUId = lens _lapSKUId (\ s a -> s{_lapSKUId = a})
 
 -- | Multipart request metadata.
-lapPayload :: Lens' LicenseAssignmentsPatch' LicenseAssignment
+lapPayload :: Lens' LicenseAssignmentsPatch LicenseAssignment
 lapPayload
   = lens _lapPayload (\ s a -> s{_lapPayload = a})
 
 -- | email id or unique Id of the user
-lapUserId :: Lens' LicenseAssignmentsPatch' Text
+lapUserId :: Lens' LicenseAssignmentsPatch Text
 lapUserId
   = lens _lapUserId (\ s a -> s{_lapUserId = a})
 
 -- | Name for product
-lapProductId :: Lens' LicenseAssignmentsPatch' Text
+lapProductId :: Lens' LicenseAssignmentsPatch Text
 lapProductId
   = lens _lapProductId (\ s a -> s{_lapProductId = a})
 
-instance GoogleRequest LicenseAssignmentsPatch' where
-        type Rs LicenseAssignmentsPatch' = LicenseAssignment
-        requestClient LicenseAssignmentsPatch'{..}
+instance GoogleRequest LicenseAssignmentsPatch where
+        type Rs LicenseAssignmentsPatch = LicenseAssignment
+        requestClient LicenseAssignmentsPatch{..}
           = go _lapProductId _lapSKUId _lapUserId
               (Just AltJSON)
               _lapPayload

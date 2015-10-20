@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Addresses.AggregatedList
       AddressesAggregatedListResource
 
     -- * Creating a Request
-    , addressesAggregatedList'
-    , AddressesAggregatedList'
+    , addressesAggregatedList
+    , AddressesAggregatedList
 
     -- * Request Lenses
     , aalProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.addresses.aggregatedList@ method which the
--- 'AddressesAggregatedList'' request conforms to.
+-- 'AddressesAggregatedList' request conforms to.
 type AddressesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
@@ -56,15 +56,15 @@ type AddressesAggregatedListResource =
 
 -- | Retrieves the list of addresses grouped by scope.
 --
--- /See:/ 'addressesAggregatedList'' smart constructor.
-data AddressesAggregatedList' = AddressesAggregatedList'
+-- /See:/ 'addressesAggregatedList' smart constructor.
+data AddressesAggregatedList = AddressesAggregatedList
     { _aalProject    :: !Text
     , _aalFilter     :: !(Maybe Text)
     , _aalPageToken  :: !(Maybe Text)
     , _aalMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AddressesAggregatedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AddressesAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,11 +75,11 @@ data AddressesAggregatedList' = AddressesAggregatedList'
 -- * 'aalPageToken'
 --
 -- * 'aalMaxResults'
-addressesAggregatedList'
+addressesAggregatedList
     :: Text -- ^ 'aalProject'
-    -> AddressesAggregatedList'
-addressesAggregatedList' pAalProject_ =
-    AddressesAggregatedList'
+    -> AddressesAggregatedList
+addressesAggregatedList pAalProject_ =
+    AddressesAggregatedList
     { _aalProject = pAalProject_
     , _aalFilter = Nothing
     , _aalPageToken = Nothing
@@ -87,7 +87,7 @@ addressesAggregatedList' pAalProject_ =
     }
 
 -- | Project ID for this request.
-aalProject :: Lens' AddressesAggregatedList' Text
+aalProject :: Lens' AddressesAggregatedList Text
 aalProject
   = lens _aalProject (\ s a -> s{_aalProject = a})
 
@@ -102,27 +102,27 @@ aalProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-aalFilter :: Lens' AddressesAggregatedList' (Maybe Text)
+aalFilter :: Lens' AddressesAggregatedList (Maybe Text)
 aalFilter
   = lens _aalFilter (\ s a -> s{_aalFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-aalPageToken :: Lens' AddressesAggregatedList' (Maybe Text)
+aalPageToken :: Lens' AddressesAggregatedList (Maybe Text)
 aalPageToken
   = lens _aalPageToken (\ s a -> s{_aalPageToken = a})
 
 -- | Maximum count of results to be returned.
-aalMaxResults :: Lens' AddressesAggregatedList' Word32
+aalMaxResults :: Lens' AddressesAggregatedList Word32
 aalMaxResults
   = lens _aalMaxResults
       (\ s a -> s{_aalMaxResults = a})
 
-instance GoogleRequest AddressesAggregatedList' where
-        type Rs AddressesAggregatedList' =
+instance GoogleRequest AddressesAggregatedList where
+        type Rs AddressesAggregatedList =
              AddressAggregatedList
-        requestClient AddressesAggregatedList'{..}
+        requestClient AddressesAggregatedList{..}
           = go _aalProject _aalFilter _aalPageToken
               (Just _aalMaxResults)
               (Just AltJSON)

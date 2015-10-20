@@ -30,8 +30,8 @@ module Network.Google.Resource.Tasks.TaskLists.Insert
       TaskListsInsertResource
 
     -- * Creating a Request
-    , taskListsInsert'
-    , TaskListsInsert'
+    , taskListsInsert
+    , TaskListsInsert
 
     -- * Request Lenses
     , tliPayload
@@ -41,7 +41,7 @@ import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasklists.insert@ method which the
--- 'TaskListsInsert'' request conforms to.
+-- 'TaskListsInsert' request conforms to.
 type TaskListsInsertResource =
      "users" :>
        "@me" :>
@@ -52,32 +52,32 @@ type TaskListsInsertResource =
 -- | Creates a new task list and adds it to the authenticated user\'s task
 -- lists.
 --
--- /See:/ 'taskListsInsert'' smart constructor.
-newtype TaskListsInsert' = TaskListsInsert'
+-- /See:/ 'taskListsInsert' smart constructor.
+newtype TaskListsInsert = TaskListsInsert
     { _tliPayload :: TaskList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TaskListsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'TaskListsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tliPayload'
-taskListsInsert'
+taskListsInsert
     :: TaskList -- ^ 'tliPayload'
-    -> TaskListsInsert'
-taskListsInsert' pTliPayload_ =
-    TaskListsInsert'
+    -> TaskListsInsert
+taskListsInsert pTliPayload_ =
+    TaskListsInsert
     { _tliPayload = pTliPayload_
     }
 
 -- | Multipart request metadata.
-tliPayload :: Lens' TaskListsInsert' TaskList
+tliPayload :: Lens' TaskListsInsert TaskList
 tliPayload
   = lens _tliPayload (\ s a -> s{_tliPayload = a})
 
-instance GoogleRequest TaskListsInsert' where
-        type Rs TaskListsInsert' = TaskList
-        requestClient TaskListsInsert'{..}
+instance GoogleRequest TaskListsInsert where
+        type Rs TaskListsInsert = TaskList
+        requestClient TaskListsInsert{..}
           = go (Just AltJSON) _tliPayload appsTasksService
           where go
                   = buildClient

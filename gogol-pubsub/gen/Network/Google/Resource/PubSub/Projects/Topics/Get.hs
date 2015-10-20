@@ -29,8 +29,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.Get
       ProjectsTopicsGetResource
 
     -- * Creating a Request
-    , projectsTopicsGet'
-    , ProjectsTopicsGet'
+    , projectsTopicsGet
+    , ProjectsTopicsGet
 
     -- * Request Lenses
     , ptgXgafv
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.get@ method which the
--- 'ProjectsTopicsGet'' request conforms to.
+-- 'ProjectsTopicsGet' request conforms to.
 type ProjectsTopicsGetResource =
      "v1" :>
        Capture "topic" Text :>
@@ -62,8 +62,8 @@ type ProjectsTopicsGetResource =
 
 -- | Gets the configuration of a topic.
 --
--- /See:/ 'projectsTopicsGet'' smart constructor.
-data ProjectsTopicsGet' = ProjectsTopicsGet'
+-- /See:/ 'projectsTopicsGet' smart constructor.
+data ProjectsTopicsGet = ProjectsTopicsGet
     { _ptgXgafv          :: !(Maybe Text)
     , _ptgUploadProtocol :: !(Maybe Text)
     , _ptgPp             :: !Bool
@@ -74,7 +74,7 @@ data ProjectsTopicsGet' = ProjectsTopicsGet'
     , _ptgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsTopicsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsTopicsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -93,11 +93,11 @@ data ProjectsTopicsGet' = ProjectsTopicsGet'
 -- * 'ptgBearerToken'
 --
 -- * 'ptgCallback'
-projectsTopicsGet'
+projectsTopicsGet
     :: Text -- ^ 'ptgTopic'
-    -> ProjectsTopicsGet'
-projectsTopicsGet' pPtgTopic_ =
-    ProjectsTopicsGet'
+    -> ProjectsTopicsGet
+projectsTopicsGet pPtgTopic_ =
+    ProjectsTopicsGet
     { _ptgXgafv = Nothing
     , _ptgUploadProtocol = Nothing
     , _ptgPp = True
@@ -109,49 +109,49 @@ projectsTopicsGet' pPtgTopic_ =
     }
 
 -- | V1 error format.
-ptgXgafv :: Lens' ProjectsTopicsGet' (Maybe Text)
+ptgXgafv :: Lens' ProjectsTopicsGet (Maybe Text)
 ptgXgafv = lens _ptgXgafv (\ s a -> s{_ptgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ptgUploadProtocol :: Lens' ProjectsTopicsGet' (Maybe Text)
+ptgUploadProtocol :: Lens' ProjectsTopicsGet (Maybe Text)
 ptgUploadProtocol
   = lens _ptgUploadProtocol
       (\ s a -> s{_ptgUploadProtocol = a})
 
 -- | Pretty-print response.
-ptgPp :: Lens' ProjectsTopicsGet' Bool
+ptgPp :: Lens' ProjectsTopicsGet Bool
 ptgPp = lens _ptgPp (\ s a -> s{_ptgPp = a})
 
 -- | OAuth access token.
-ptgAccessToken :: Lens' ProjectsTopicsGet' (Maybe Text)
+ptgAccessToken :: Lens' ProjectsTopicsGet (Maybe Text)
 ptgAccessToken
   = lens _ptgAccessToken
       (\ s a -> s{_ptgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ptgUploadType :: Lens' ProjectsTopicsGet' (Maybe Text)
+ptgUploadType :: Lens' ProjectsTopicsGet (Maybe Text)
 ptgUploadType
   = lens _ptgUploadType
       (\ s a -> s{_ptgUploadType = a})
 
 -- | The name of the topic to get.
-ptgTopic :: Lens' ProjectsTopicsGet' Text
+ptgTopic :: Lens' ProjectsTopicsGet Text
 ptgTopic = lens _ptgTopic (\ s a -> s{_ptgTopic = a})
 
 -- | OAuth bearer token.
-ptgBearerToken :: Lens' ProjectsTopicsGet' (Maybe Text)
+ptgBearerToken :: Lens' ProjectsTopicsGet (Maybe Text)
 ptgBearerToken
   = lens _ptgBearerToken
       (\ s a -> s{_ptgBearerToken = a})
 
 -- | JSONP
-ptgCallback :: Lens' ProjectsTopicsGet' (Maybe Text)
+ptgCallback :: Lens' ProjectsTopicsGet (Maybe Text)
 ptgCallback
   = lens _ptgCallback (\ s a -> s{_ptgCallback = a})
 
-instance GoogleRequest ProjectsTopicsGet' where
-        type Rs ProjectsTopicsGet' = Topic
-        requestClient ProjectsTopicsGet'{..}
+instance GoogleRequest ProjectsTopicsGet where
+        type Rs ProjectsTopicsGet = Topic
+        requestClient ProjectsTopicsGet{..}
           = go _ptgTopic _ptgXgafv _ptgUploadProtocol
               (Just _ptgPp)
               _ptgAccessToken

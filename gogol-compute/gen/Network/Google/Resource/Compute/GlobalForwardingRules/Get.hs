@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.GlobalForwardingRules.Get
       GlobalForwardingRulesGetResource
 
     -- * Creating a Request
-    , globalForwardingRulesGet'
-    , GlobalForwardingRulesGet'
+    , globalForwardingRulesGet
+    , GlobalForwardingRulesGet
 
     -- * Request Lenses
     , gfrgProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.globalForwardingRules.get@ method which the
--- 'GlobalForwardingRulesGet'' request conforms to.
+-- 'GlobalForwardingRulesGet' request conforms to.
 type GlobalForwardingRulesGetResource =
      Capture "project" Text :>
        "global" :>
@@ -52,44 +52,43 @@ type GlobalForwardingRulesGetResource =
 
 -- | Returns the specified ForwardingRule resource.
 --
--- /See:/ 'globalForwardingRulesGet'' smart constructor.
-data GlobalForwardingRulesGet' = GlobalForwardingRulesGet'
+-- /See:/ 'globalForwardingRulesGet' smart constructor.
+data GlobalForwardingRulesGet = GlobalForwardingRulesGet
     { _gfrgProject        :: !Text
     , _gfrgForwardingRule :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GlobalForwardingRulesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'GlobalForwardingRulesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gfrgProject'
 --
 -- * 'gfrgForwardingRule'
-globalForwardingRulesGet'
+globalForwardingRulesGet
     :: Text -- ^ 'gfrgProject'
     -> Text -- ^ 'gfrgForwardingRule'
-    -> GlobalForwardingRulesGet'
-globalForwardingRulesGet' pGfrgProject_ pGfrgForwardingRule_ =
-    GlobalForwardingRulesGet'
+    -> GlobalForwardingRulesGet
+globalForwardingRulesGet pGfrgProject_ pGfrgForwardingRule_ =
+    GlobalForwardingRulesGet
     { _gfrgProject = pGfrgProject_
     , _gfrgForwardingRule = pGfrgForwardingRule_
     }
 
 -- | Name of the project scoping this request.
-gfrgProject :: Lens' GlobalForwardingRulesGet' Text
+gfrgProject :: Lens' GlobalForwardingRulesGet Text
 gfrgProject
   = lens _gfrgProject (\ s a -> s{_gfrgProject = a})
 
 -- | Name of the ForwardingRule resource to return.
-gfrgForwardingRule :: Lens' GlobalForwardingRulesGet' Text
+gfrgForwardingRule :: Lens' GlobalForwardingRulesGet Text
 gfrgForwardingRule
   = lens _gfrgForwardingRule
       (\ s a -> s{_gfrgForwardingRule = a})
 
-instance GoogleRequest GlobalForwardingRulesGet'
-         where
-        type Rs GlobalForwardingRulesGet' = ForwardingRule
-        requestClient GlobalForwardingRulesGet'{..}
+instance GoogleRequest GlobalForwardingRulesGet where
+        type Rs GlobalForwardingRulesGet = ForwardingRule
+        requestClient GlobalForwardingRulesGet{..}
           = go _gfrgProject _gfrgForwardingRule (Just AltJSON)
               computeService
           where go

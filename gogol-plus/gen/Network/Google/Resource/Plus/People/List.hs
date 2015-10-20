@@ -29,8 +29,8 @@ module Network.Google.Resource.Plus.People.List
       PeopleListResource
 
     -- * Creating a Request
-    , peopleList'
-    , PeopleList'
+    , peopleList
+    , PeopleList
 
     -- * Request Lenses
     , plOrderBy
@@ -44,7 +44,7 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plus.people.list@ method which the
--- 'PeopleList'' request conforms to.
+-- 'PeopleList' request conforms to.
 type PeopleListResource =
      "people" :>
        Capture "userId" Text :>
@@ -57,8 +57,8 @@ type PeopleListResource =
 
 -- | List all of the people in the specified collection.
 --
--- /See:/ 'peopleList'' smart constructor.
-data PeopleList' = PeopleList'
+-- /See:/ 'peopleList' smart constructor.
+data PeopleList = PeopleList
     { _plOrderBy    :: !(Maybe PeopleListOrderBy)
     , _plCollection :: !PeopleListCollection
     , _plUserId     :: !Text
@@ -66,7 +66,7 @@ data PeopleList' = PeopleList'
     , _plMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PeopleList'' with the minimum fields required to make a request.
+-- | Creates a value of 'PeopleList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,12 +79,12 @@ data PeopleList' = PeopleList'
 -- * 'plPageToken'
 --
 -- * 'plMaxResults'
-peopleList'
+peopleList
     :: PeopleListCollection -- ^ 'plCollection'
     -> Text -- ^ 'plUserId'
-    -> PeopleList'
-peopleList' pPlCollection_ pPlUserId_ =
-    PeopleList'
+    -> PeopleList
+peopleList pPlCollection_ pPlUserId_ =
+    PeopleList
     { _plOrderBy = Nothing
     , _plCollection = pPlCollection_
     , _plUserId = pPlUserId_
@@ -93,37 +93,37 @@ peopleList' pPlCollection_ pPlUserId_ =
     }
 
 -- | The order to return people in.
-plOrderBy :: Lens' PeopleList' (Maybe PeopleListOrderBy)
+plOrderBy :: Lens' PeopleList (Maybe PeopleListOrderBy)
 plOrderBy
   = lens _plOrderBy (\ s a -> s{_plOrderBy = a})
 
 -- | The collection of people to list.
-plCollection :: Lens' PeopleList' PeopleListCollection
+plCollection :: Lens' PeopleList PeopleListCollection
 plCollection
   = lens _plCollection (\ s a -> s{_plCollection = a})
 
 -- | Get the collection of people for the person identified. Use \"me\" to
 -- indicate the authenticated user.
-plUserId :: Lens' PeopleList' Text
+plUserId :: Lens' PeopleList Text
 plUserId = lens _plUserId (\ s a -> s{_plUserId = a})
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
 -- \"nextPageToken\" from the previous response.
-plPageToken :: Lens' PeopleList' (Maybe Text)
+plPageToken :: Lens' PeopleList (Maybe Text)
 plPageToken
   = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
 -- | The maximum number of people to include in the response, which is used
 -- for paging. For any response, the actual number returned might be less
 -- than the specified maxResults.
-plMaxResults :: Lens' PeopleList' Word32
+plMaxResults :: Lens' PeopleList Word32
 plMaxResults
   = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
 
-instance GoogleRequest PeopleList' where
-        type Rs PeopleList' = PeopleFeed
-        requestClient PeopleList'{..}
+instance GoogleRequest PeopleList where
+        type Rs PeopleList = PeopleFeed
+        requestClient PeopleList{..}
           = go _plUserId _plCollection _plOrderBy _plPageToken
               (Just _plMaxResults)
               (Just AltJSON)

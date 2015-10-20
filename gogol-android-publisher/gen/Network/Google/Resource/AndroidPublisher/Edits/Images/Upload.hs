@@ -30,8 +30,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.Images.Upload
       EditsImagesUploadResource
 
     -- * Creating a Request
-    , editsImagesUpload'
-    , EditsImagesUpload'
+    , editsImagesUpload
+    , EditsImagesUpload
 
     -- * Request Lenses
     , eiuPackageName
@@ -45,7 +45,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.images.upload@ method which the
--- 'EditsImagesUpload'' request conforms to.
+-- 'EditsImagesUpload' request conforms to.
 type EditsImagesUploadResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -60,8 +60,8 @@ type EditsImagesUploadResource =
 -- | Uploads a new image and adds it to the list of images for the specified
 -- language and image type.
 --
--- /See:/ 'editsImagesUpload'' smart constructor.
-data EditsImagesUpload' = EditsImagesUpload'
+-- /See:/ 'editsImagesUpload' smart constructor.
+data EditsImagesUpload = EditsImagesUpload
     { _eiuPackageName :: !Text
     , _eiuMedia       :: !Body
     , _eiuImageType   :: !EditsImagesUploadImageType
@@ -69,7 +69,7 @@ data EditsImagesUpload' = EditsImagesUpload'
     , _eiuEditId      :: !Text
     }
 
--- | Creates a value of 'EditsImagesUpload'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsImagesUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,15 +82,15 @@ data EditsImagesUpload' = EditsImagesUpload'
 -- * 'eiuLanguage'
 --
 -- * 'eiuEditId'
-editsImagesUpload'
+editsImagesUpload
     :: Text -- ^ 'eiuPackageName'
     -> Body -- ^ 'eiuMedia'
     -> EditsImagesUploadImageType -- ^ 'eiuImageType'
     -> Text -- ^ 'eiuLanguage'
     -> Text -- ^ 'eiuEditId'
-    -> EditsImagesUpload'
-editsImagesUpload' pEiuPackageName_ pEiuMedia_ pEiuImageType_ pEiuLanguage_ pEiuEditId_ =
-    EditsImagesUpload'
+    -> EditsImagesUpload
+editsImagesUpload pEiuPackageName_ pEiuMedia_ pEiuImageType_ pEiuLanguage_ pEiuEditId_ =
+    EditsImagesUpload
     { _eiuPackageName = pEiuPackageName_
     , _eiuMedia = pEiuMedia_
     , _eiuImageType = pEiuImageType_
@@ -100,33 +100,33 @@ editsImagesUpload' pEiuPackageName_ pEiuMedia_ pEiuImageType_ pEiuLanguage_ pEiu
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eiuPackageName :: Lens' EditsImagesUpload' Text
+eiuPackageName :: Lens' EditsImagesUpload Text
 eiuPackageName
   = lens _eiuPackageName
       (\ s a -> s{_eiuPackageName = a})
 
-eiuMedia :: Lens' EditsImagesUpload' Body
+eiuMedia :: Lens' EditsImagesUpload Body
 eiuMedia = lens _eiuMedia (\ s a -> s{_eiuMedia = a})
 
-eiuImageType :: Lens' EditsImagesUpload' EditsImagesUploadImageType
+eiuImageType :: Lens' EditsImagesUpload EditsImagesUploadImageType
 eiuImageType
   = lens _eiuImageType (\ s a -> s{_eiuImageType = a})
 
 -- | The language code (a BCP-47 language tag) of the localized listing whose
 -- images are to read or modified. For example, to select Austrian German,
 -- pass \"de-AT\".
-eiuLanguage :: Lens' EditsImagesUpload' Text
+eiuLanguage :: Lens' EditsImagesUpload Text
 eiuLanguage
   = lens _eiuLanguage (\ s a -> s{_eiuLanguage = a})
 
 -- | Unique identifier for this edit.
-eiuEditId :: Lens' EditsImagesUpload' Text
+eiuEditId :: Lens' EditsImagesUpload Text
 eiuEditId
   = lens _eiuEditId (\ s a -> s{_eiuEditId = a})
 
-instance GoogleRequest EditsImagesUpload' where
-        type Rs EditsImagesUpload' = ImagesUploadResponse
-        requestClient EditsImagesUpload'{..}
+instance GoogleRequest EditsImagesUpload where
+        type Rs EditsImagesUpload = ImagesUploadResponse
+        requestClient EditsImagesUpload{..}
           = go _eiuPackageName _eiuEditId _eiuLanguage
               _eiuImageType
               (Just AltJSON)

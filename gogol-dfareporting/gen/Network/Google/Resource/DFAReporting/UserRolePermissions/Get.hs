@@ -29,19 +29,19 @@ module Network.Google.Resource.DFAReporting.UserRolePermissions.Get
       UserRolePermissionsGetResource
 
     -- * Creating a Request
-    , userRolePermissionsGet'
-    , UserRolePermissionsGet'
+    , userRolePermissionsGet
+    , UserRolePermissionsGet
 
     -- * Request Lenses
-    , urpgProFileId
-    , urpgId
+    , uProFileId
+    , uId
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.userRolePermissions.get@ method which the
--- 'UserRolePermissionsGet'' request conforms to.
+-- 'UserRolePermissionsGet' request conforms to.
 type UserRolePermissionsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,43 +52,42 @@ type UserRolePermissionsGetResource =
 
 -- | Gets one user role permission by ID.
 --
--- /See:/ 'userRolePermissionsGet'' smart constructor.
-data UserRolePermissionsGet' = UserRolePermissionsGet'
-    { _urpgProFileId :: !Int64
-    , _urpgId        :: !Int64
+-- /See:/ 'userRolePermissionsGet' smart constructor.
+data UserRolePermissionsGet = UserRolePermissionsGet
+    { _uProFileId :: !Int64
+    , _uId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserRolePermissionsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UserRolePermissionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'urpgProFileId'
+-- * 'uProFileId'
 --
--- * 'urpgId'
-userRolePermissionsGet'
-    :: Int64 -- ^ 'urpgProFileId'
-    -> Int64 -- ^ 'urpgId'
-    -> UserRolePermissionsGet'
-userRolePermissionsGet' pUrpgProFileId_ pUrpgId_ =
-    UserRolePermissionsGet'
-    { _urpgProFileId = pUrpgProFileId_
-    , _urpgId = pUrpgId_
+-- * 'uId'
+userRolePermissionsGet
+    :: Int64 -- ^ 'uProFileId'
+    -> Int64 -- ^ 'uId'
+    -> UserRolePermissionsGet
+userRolePermissionsGet pUProFileId_ pUId_ =
+    UserRolePermissionsGet
+    { _uProFileId = pUProFileId_
+    , _uId = pUId_
     }
 
 -- | User profile ID associated with this request.
-urpgProFileId :: Lens' UserRolePermissionsGet' Int64
-urpgProFileId
-  = lens _urpgProFileId
-      (\ s a -> s{_urpgProFileId = a})
+uProFileId :: Lens' UserRolePermissionsGet Int64
+uProFileId
+  = lens _uProFileId (\ s a -> s{_uProFileId = a})
 
 -- | User role permission ID.
-urpgId :: Lens' UserRolePermissionsGet' Int64
-urpgId = lens _urpgId (\ s a -> s{_urpgId = a})
+uId :: Lens' UserRolePermissionsGet Int64
+uId = lens _uId (\ s a -> s{_uId = a})
 
-instance GoogleRequest UserRolePermissionsGet' where
-        type Rs UserRolePermissionsGet' = UserRolePermission
-        requestClient UserRolePermissionsGet'{..}
-          = go _urpgProFileId _urpgId (Just AltJSON)
+instance GoogleRequest UserRolePermissionsGet where
+        type Rs UserRolePermissionsGet = UserRolePermission
+        requestClient UserRolePermissionsGet{..}
+          = go _uProFileId _uId (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient

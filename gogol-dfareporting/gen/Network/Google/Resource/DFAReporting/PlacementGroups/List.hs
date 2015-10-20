@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.List
       PlacementGroupsListResource
 
     -- * Creating a Request
-    , placementGroupsList'
-    , PlacementGroupsList'
+    , placementGroupsList
+    , PlacementGroupsList
 
     -- * Request Lenses
     , pglPlacementStrategyIds
@@ -59,7 +59,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placementGroups.list@ method which the
--- 'PlacementGroupsList'' request conforms to.
+-- 'PlacementGroupsList' request conforms to.
 type PlacementGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -96,8 +96,8 @@ type PlacementGroupsListResource =
 
 -- | Retrieves a list of placement groups, possibly filtered.
 --
--- /See:/ 'placementGroupsList'' smart constructor.
-data PlacementGroupsList' = PlacementGroupsList'
+-- /See:/ 'placementGroupsList' smart constructor.
+data PlacementGroupsList = PlacementGroupsList
     { _pglPlacementStrategyIds :: !(Maybe [Int64])
     , _pglContentCategoryIds   :: !(Maybe [Int64])
     , _pglMaxEndDate           :: !(Maybe Text)
@@ -120,7 +120,7 @@ data PlacementGroupsList' = PlacementGroupsList'
     , _pglMinEndDate           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlacementGroupsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlacementGroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -163,11 +163,11 @@ data PlacementGroupsList' = PlacementGroupsList'
 -- * 'pglMaxResults'
 --
 -- * 'pglMinEndDate'
-placementGroupsList'
+placementGroupsList
     :: Int64 -- ^ 'pglProFileId'
-    -> PlacementGroupsList'
-placementGroupsList' pPglProFileId_ =
-    PlacementGroupsList'
+    -> PlacementGroupsList
+placementGroupsList pPglProFileId_ =
+    PlacementGroupsList
     { _pglPlacementStrategyIds = Nothing
     , _pglContentCategoryIds = Nothing
     , _pglMaxEndDate = Nothing
@@ -192,7 +192,7 @@ placementGroupsList' pPglProFileId_ =
 
 -- | Select only placement groups that are associated with these placement
 -- strategies.
-pglPlacementStrategyIds :: Lens' PlacementGroupsList' [Int64]
+pglPlacementStrategyIds :: Lens' PlacementGroupsList [Int64]
 pglPlacementStrategyIds
   = lens _pglPlacementStrategyIds
       (\ s a -> s{_pglPlacementStrategyIds = a})
@@ -201,7 +201,7 @@ pglPlacementStrategyIds
 
 -- | Select only placement groups that are associated with these content
 -- categories.
-pglContentCategoryIds :: Lens' PlacementGroupsList' [Int64]
+pglContentCategoryIds :: Lens' PlacementGroupsList [Int64]
 pglContentCategoryIds
   = lens _pglContentCategoryIds
       (\ s a -> s{_pglContentCategoryIds = a})
@@ -211,13 +211,13 @@ pglContentCategoryIds
 -- | Select only placements or placement groups whose end date is on or
 -- before the specified maxEndDate. The date should be formatted as
 -- \"yyyy-MM-dd\".
-pglMaxEndDate :: Lens' PlacementGroupsList' (Maybe Text)
+pglMaxEndDate :: Lens' PlacementGroupsList (Maybe Text)
 pglMaxEndDate
   = lens _pglMaxEndDate
       (\ s a -> s{_pglMaxEndDate = a})
 
 -- | Select only placement groups that belong to these campaigns.
-pglCampaignIds :: Lens' PlacementGroupsList' [Int64]
+pglCampaignIds :: Lens' PlacementGroupsList [Int64]
 pglCampaignIds
   = lens _pglCampaignIds
       (\ s a -> s{_pglCampaignIds = a})
@@ -225,7 +225,7 @@ pglCampaignIds
       . _Coerce
 
 -- | Select only placement groups with these pricing types.
-pglPricingTypes :: Lens' PlacementGroupsList' [PlacementGroupsListPricingTypes]
+pglPricingTypes :: Lens' PlacementGroupsList [PlacementGroupsListPricingTypes]
 pglPricingTypes
   = lens _pglPricingTypes
       (\ s a -> s{_pglPricingTypes = a})
@@ -240,19 +240,19 @@ pglPricingTypes
 -- example, a search string of \"placementgroup\" will match placement
 -- groups with name \"my placementgroup\", \"placementgroup 2015\", or
 -- simply \"placementgroup\".
-pglSearchString :: Lens' PlacementGroupsList' (Maybe Text)
+pglSearchString :: Lens' PlacementGroupsList (Maybe Text)
 pglSearchString
   = lens _pglSearchString
       (\ s a -> s{_pglSearchString = a})
 
 -- | Select only placement groups with these IDs.
-pglIds :: Lens' PlacementGroupsList' [Int64]
+pglIds :: Lens' PlacementGroupsList [Int64]
 pglIds
   = lens _pglIds (\ s a -> s{_pglIds = a}) . _Default .
       _Coerce
 
 -- | User profile ID associated with this request.
-pglProFileId :: Lens' PlacementGroupsList' Int64
+pglProFileId :: Lens' PlacementGroupsList Int64
 pglProFileId
   = lens _pglProFileId (\ s a -> s{_pglProFileId = a})
 
@@ -262,14 +262,14 @@ pglProFileId
 -- as a single pricing point but also assumes that all the tags in it will
 -- be served at the same time. A roadblock requires one of its assigned
 -- placements to be marked as primary for reporting.
-pglPlacementGroupType :: Lens' PlacementGroupsList' (Maybe PlacementGroupsListPlacementGroupType)
+pglPlacementGroupType :: Lens' PlacementGroupsList (Maybe PlacementGroupsListPlacementGroupType)
 pglPlacementGroupType
   = lens _pglPlacementGroupType
       (\ s a -> s{_pglPlacementGroupType = a})
 
 -- | Select only placement groups that are associated with these directory
 -- sites.
-pglDirectorySiteIds :: Lens' PlacementGroupsList' [Int64]
+pglDirectorySiteIds :: Lens' PlacementGroupsList [Int64]
 pglDirectorySiteIds
   = lens _pglDirectorySiteIds
       (\ s a -> s{_pglDirectorySiteIds = a})
@@ -277,37 +277,37 @@ pglDirectorySiteIds
       . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
-pglSortOrder :: Lens' PlacementGroupsList' (Maybe PlacementGroupsListSortOrder)
+pglSortOrder :: Lens' PlacementGroupsList (Maybe PlacementGroupsListSortOrder)
 pglSortOrder
   = lens _pglSortOrder (\ s a -> s{_pglSortOrder = a})
 
 -- | Select only placement groups that are associated with these sites.
-pglSiteIds :: Lens' PlacementGroupsList' [Int64]
+pglSiteIds :: Lens' PlacementGroupsList [Int64]
 pglSiteIds
   = lens _pglSiteIds (\ s a -> s{_pglSiteIds = a}) .
       _Default
       . _Coerce
 
 -- | Value of the nextPageToken from the previous result page.
-pglPageToken :: Lens' PlacementGroupsList' (Maybe Text)
+pglPageToken :: Lens' PlacementGroupsList (Maybe Text)
 pglPageToken
   = lens _pglPageToken (\ s a -> s{_pglPageToken = a})
 
 -- | Field by which to sort the list.
-pglSortField :: Lens' PlacementGroupsList' (Maybe PlacementGroupsListSortField)
+pglSortField :: Lens' PlacementGroupsList (Maybe PlacementGroupsListSortField)
 pglSortField
   = lens _pglSortField (\ s a -> s{_pglSortField = a})
 
 -- | Select only placements or placement groups whose start date is on or
 -- before the specified maxStartDate. The date should be formatted as
 -- \"yyyy-MM-dd\".
-pglMaxStartDate :: Lens' PlacementGroupsList' (Maybe Text)
+pglMaxStartDate :: Lens' PlacementGroupsList (Maybe Text)
 pglMaxStartDate
   = lens _pglMaxStartDate
       (\ s a -> s{_pglMaxStartDate = a})
 
 -- | Select only placement groups that belong to these advertisers.
-pglAdvertiserIds :: Lens' PlacementGroupsList' [Int64]
+pglAdvertiserIds :: Lens' PlacementGroupsList [Int64]
 pglAdvertiserIds
   = lens _pglAdvertiserIds
       (\ s a -> s{_pglAdvertiserIds = a})
@@ -317,19 +317,19 @@ pglAdvertiserIds
 -- | Select only placements or placement groups whose start date is on or
 -- after the specified minStartDate. The date should be formatted as
 -- \"yyyy-MM-dd\".
-pglMinStartDate :: Lens' PlacementGroupsList' (Maybe Text)
+pglMinStartDate :: Lens' PlacementGroupsList (Maybe Text)
 pglMinStartDate
   = lens _pglMinStartDate
       (\ s a -> s{_pglMinStartDate = a})
 
 -- | Select only archived placements. Don\'t set this field to select both
 -- archived and non-archived placements.
-pglArchived :: Lens' PlacementGroupsList' (Maybe Bool)
+pglArchived :: Lens' PlacementGroupsList (Maybe Bool)
 pglArchived
   = lens _pglArchived (\ s a -> s{_pglArchived = a})
 
 -- | Maximum number of results to return.
-pglMaxResults :: Lens' PlacementGroupsList' (Maybe Int32)
+pglMaxResults :: Lens' PlacementGroupsList (Maybe Int32)
 pglMaxResults
   = lens _pglMaxResults
       (\ s a -> s{_pglMaxResults = a})
@@ -337,15 +337,15 @@ pglMaxResults
 -- | Select only placements or placement groups whose end date is on or after
 -- the specified minEndDate. The date should be formatted as
 -- \"yyyy-MM-dd\".
-pglMinEndDate :: Lens' PlacementGroupsList' (Maybe Text)
+pglMinEndDate :: Lens' PlacementGroupsList (Maybe Text)
 pglMinEndDate
   = lens _pglMinEndDate
       (\ s a -> s{_pglMinEndDate = a})
 
-instance GoogleRequest PlacementGroupsList' where
-        type Rs PlacementGroupsList' =
+instance GoogleRequest PlacementGroupsList where
+        type Rs PlacementGroupsList =
              PlacementGroupsListResponse
-        requestClient PlacementGroupsList'{..}
+        requestClient PlacementGroupsList{..}
           = go _pglProFileId
               (_pglPlacementStrategyIds ^. _Default)
               (_pglContentCategoryIds ^. _Default)

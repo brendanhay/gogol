@@ -29,8 +29,8 @@ module Network.Google.Resource.Coordinate.Jobs.List
       JobsListResource
 
     -- * Creating a Request
-    , jobsList'
-    , JobsList'
+    , jobsList
+    , JobsList
 
     -- * Request Lenses
     , jlTeamId
@@ -44,7 +44,7 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @coordinate.jobs.list@ method which the
--- 'JobsList'' request conforms to.
+-- 'JobsList' request conforms to.
 type JobsListResource =
      "teams" :>
        Capture "teamId" Text :>
@@ -58,8 +58,8 @@ type JobsListResource =
 
 -- | Retrieves jobs created or modified since the given timestamp.
 --
--- /See:/ 'jobsList'' smart constructor.
-data JobsList' = JobsList'
+-- /See:/ 'jobsList' smart constructor.
+data JobsList = JobsList
     { _jlTeamId                 :: !Text
     , _jlMinModifiedTimestampMs :: !(Maybe Word64)
     , _jlOmitJobChanges         :: !(Maybe Bool)
@@ -67,7 +67,7 @@ data JobsList' = JobsList'
     , _jlMaxResults             :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'JobsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'JobsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,11 +80,11 @@ data JobsList' = JobsList'
 -- * 'jlPageToken'
 --
 -- * 'jlMaxResults'
-jobsList'
+jobsList
     :: Text -- ^ 'jlTeamId'
-    -> JobsList'
-jobsList' pJlTeamId_ =
-    JobsList'
+    -> JobsList
+jobsList pJlTeamId_ =
+    JobsList
     { _jlTeamId = pJlTeamId_
     , _jlMinModifiedTimestampMs = Nothing
     , _jlOmitJobChanges = Nothing
@@ -93,34 +93,34 @@ jobsList' pJlTeamId_ =
     }
 
 -- | Team ID
-jlTeamId :: Lens' JobsList' Text
+jlTeamId :: Lens' JobsList Text
 jlTeamId = lens _jlTeamId (\ s a -> s{_jlTeamId = a})
 
 -- | Minimum time a job was modified in milliseconds since epoch.
-jlMinModifiedTimestampMs :: Lens' JobsList' (Maybe Word64)
+jlMinModifiedTimestampMs :: Lens' JobsList (Maybe Word64)
 jlMinModifiedTimestampMs
   = lens _jlMinModifiedTimestampMs
       (\ s a -> s{_jlMinModifiedTimestampMs = a})
 
 -- | Whether to omit detail job history information.
-jlOmitJobChanges :: Lens' JobsList' (Maybe Bool)
+jlOmitJobChanges :: Lens' JobsList (Maybe Bool)
 jlOmitJobChanges
   = lens _jlOmitJobChanges
       (\ s a -> s{_jlOmitJobChanges = a})
 
 -- | Continuation token
-jlPageToken :: Lens' JobsList' (Maybe Text)
+jlPageToken :: Lens' JobsList (Maybe Text)
 jlPageToken
   = lens _jlPageToken (\ s a -> s{_jlPageToken = a})
 
 -- | Maximum number of results to return in one page.
-jlMaxResults :: Lens' JobsList' (Maybe Word32)
+jlMaxResults :: Lens' JobsList (Maybe Word32)
 jlMaxResults
   = lens _jlMaxResults (\ s a -> s{_jlMaxResults = a})
 
-instance GoogleRequest JobsList' where
-        type Rs JobsList' = JobListResponse
-        requestClient JobsList'{..}
+instance GoogleRequest JobsList where
+        type Rs JobsList = JobListResponse
+        requestClient JobsList{..}
           = go _jlTeamId _jlMinModifiedTimestampMs
               _jlOmitJobChanges
               _jlPageToken

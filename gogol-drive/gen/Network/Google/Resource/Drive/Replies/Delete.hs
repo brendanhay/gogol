@@ -29,20 +29,20 @@ module Network.Google.Resource.Drive.Replies.Delete
       RepliesDeleteResource
 
     -- * Creating a Request
-    , repliesDelete'
-    , RepliesDelete'
+    , repliesDelete
+    , RepliesDelete
 
     -- * Request Lenses
-    , rddReplyId
-    , rddFileId
-    , rddCommentId
+    , rdReplyId
+    , rdFileId
+    , rdCommentId
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.replies.delete@ method which the
--- 'RepliesDelete'' request conforms to.
+-- 'RepliesDelete' request conforms to.
 type RepliesDeleteResource =
      "files" :>
        Capture "fileId" Text :>
@@ -54,54 +54,52 @@ type RepliesDeleteResource =
 
 -- | Deletes a reply.
 --
--- /See:/ 'repliesDelete'' smart constructor.
-data RepliesDelete' = RepliesDelete'
-    { _rddReplyId   :: !Text
-    , _rddFileId    :: !Text
-    , _rddCommentId :: !Text
+-- /See:/ 'repliesDelete' smart constructor.
+data RepliesDelete = RepliesDelete
+    { _rdReplyId   :: !Text
+    , _rdFileId    :: !Text
+    , _rdCommentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RepliesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'RepliesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rddReplyId'
+-- * 'rdReplyId'
 --
--- * 'rddFileId'
+-- * 'rdFileId'
 --
--- * 'rddCommentId'
-repliesDelete'
-    :: Text -- ^ 'rddReplyId'
-    -> Text -- ^ 'rddFileId'
-    -> Text -- ^ 'rddCommentId'
-    -> RepliesDelete'
-repliesDelete' pRddReplyId_ pRddFileId_ pRddCommentId_ =
-    RepliesDelete'
-    { _rddReplyId = pRddReplyId_
-    , _rddFileId = pRddFileId_
-    , _rddCommentId = pRddCommentId_
+-- * 'rdCommentId'
+repliesDelete
+    :: Text -- ^ 'rdReplyId'
+    -> Text -- ^ 'rdFileId'
+    -> Text -- ^ 'rdCommentId'
+    -> RepliesDelete
+repliesDelete pRdReplyId_ pRdFileId_ pRdCommentId_ =
+    RepliesDelete
+    { _rdReplyId = pRdReplyId_
+    , _rdFileId = pRdFileId_
+    , _rdCommentId = pRdCommentId_
     }
 
 -- | The ID of the reply.
-rddReplyId :: Lens' RepliesDelete' Text
-rddReplyId
-  = lens _rddReplyId (\ s a -> s{_rddReplyId = a})
+rdReplyId :: Lens' RepliesDelete Text
+rdReplyId
+  = lens _rdReplyId (\ s a -> s{_rdReplyId = a})
 
 -- | The ID of the file.
-rddFileId :: Lens' RepliesDelete' Text
-rddFileId
-  = lens _rddFileId (\ s a -> s{_rddFileId = a})
+rdFileId :: Lens' RepliesDelete Text
+rdFileId = lens _rdFileId (\ s a -> s{_rdFileId = a})
 
 -- | The ID of the comment.
-rddCommentId :: Lens' RepliesDelete' Text
-rddCommentId
-  = lens _rddCommentId (\ s a -> s{_rddCommentId = a})
+rdCommentId :: Lens' RepliesDelete Text
+rdCommentId
+  = lens _rdCommentId (\ s a -> s{_rdCommentId = a})
 
-instance GoogleRequest RepliesDelete' where
-        type Rs RepliesDelete' = ()
-        requestClient RepliesDelete'{..}
-          = go _rddFileId _rddCommentId _rddReplyId
-              (Just AltJSON)
+instance GoogleRequest RepliesDelete where
+        type Rs RepliesDelete = ()
+        requestClient RepliesDelete{..}
+          = go _rdFileId _rdCommentId _rdReplyId (Just AltJSON)
               driveService
           where go
                   = buildClient (Proxy :: Proxy RepliesDeleteResource)

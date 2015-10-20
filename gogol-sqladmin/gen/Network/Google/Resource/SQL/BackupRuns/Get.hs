@@ -29,8 +29,8 @@ module Network.Google.Resource.SQL.BackupRuns.Get
       BackupRunsGetResource
 
     -- * Creating a Request
-    , backupRunsGet'
-    , BackupRunsGet'
+    , backupRunsGet
+    , BackupRunsGet
 
     -- * Request Lenses
     , brgProject
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.backupRuns.get@ method which the
--- 'BackupRunsGet'' request conforms to.
+-- 'BackupRunsGet' request conforms to.
 type BackupRunsGetResource =
      "projects" :>
        Capture "project" Text :>
@@ -54,14 +54,14 @@ type BackupRunsGetResource =
 
 -- | Retrieves a resource containing information about a backup run.
 --
--- /See:/ 'backupRunsGet'' smart constructor.
-data BackupRunsGet' = BackupRunsGet'
+-- /See:/ 'backupRunsGet' smart constructor.
+data BackupRunsGet = BackupRunsGet
     { _brgProject  :: !Text
     , _brgId       :: !Int64
     , _brgInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BackupRunsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'BackupRunsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,35 +70,35 @@ data BackupRunsGet' = BackupRunsGet'
 -- * 'brgId'
 --
 -- * 'brgInstance'
-backupRunsGet'
+backupRunsGet
     :: Text -- ^ 'brgProject'
     -> Int64 -- ^ 'brgId'
     -> Text -- ^ 'brgInstance'
-    -> BackupRunsGet'
-backupRunsGet' pBrgProject_ pBrgId_ pBrgInstance_ =
-    BackupRunsGet'
+    -> BackupRunsGet
+backupRunsGet pBrgProject_ pBrgId_ pBrgInstance_ =
+    BackupRunsGet
     { _brgProject = pBrgProject_
     , _brgId = pBrgId_
     , _brgInstance = pBrgInstance_
     }
 
 -- | Project ID of the project that contains the instance.
-brgProject :: Lens' BackupRunsGet' Text
+brgProject :: Lens' BackupRunsGet Text
 brgProject
   = lens _brgProject (\ s a -> s{_brgProject = a})
 
 -- | The ID of this Backup Run.
-brgId :: Lens' BackupRunsGet' Int64
+brgId :: Lens' BackupRunsGet Int64
 brgId = lens _brgId (\ s a -> s{_brgId = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-brgInstance :: Lens' BackupRunsGet' Text
+brgInstance :: Lens' BackupRunsGet Text
 brgInstance
   = lens _brgInstance (\ s a -> s{_brgInstance = a})
 
-instance GoogleRequest BackupRunsGet' where
-        type Rs BackupRunsGet' = BackupRun
-        requestClient BackupRunsGet'{..}
+instance GoogleRequest BackupRunsGet where
+        type Rs BackupRunsGet = BackupRun
+        requestClient BackupRunsGet{..}
           = go _brgProject _brgInstance _brgId (Just AltJSON)
               sQLAdminService
           where go

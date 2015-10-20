@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Update
       FloodlightConfigurationsUpdateResource
 
     -- * Creating a Request
-    , floodlightConfigurationsUpdate'
-    , FloodlightConfigurationsUpdate'
+    , floodlightConfigurationsUpdate
+    , FloodlightConfigurationsUpdate
 
     -- * Request Lenses
     , fcuProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightConfigurations.update@ method which the
--- 'FloodlightConfigurationsUpdate'' request conforms to.
+-- 'FloodlightConfigurationsUpdate' request conforms to.
 type FloodlightConfigurationsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,44 +52,44 @@ type FloodlightConfigurationsUpdateResource =
 
 -- | Updates an existing floodlight configuration.
 --
--- /See:/ 'floodlightConfigurationsUpdate'' smart constructor.
-data FloodlightConfigurationsUpdate' = FloodlightConfigurationsUpdate'
+-- /See:/ 'floodlightConfigurationsUpdate' smart constructor.
+data FloodlightConfigurationsUpdate = FloodlightConfigurationsUpdate
     { _fcuProFileId :: !Int64
     , _fcuPayload   :: !FloodlightConfiguration
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FloodlightConfigurationsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'FloodlightConfigurationsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fcuProFileId'
 --
 -- * 'fcuPayload'
-floodlightConfigurationsUpdate'
+floodlightConfigurationsUpdate
     :: Int64 -- ^ 'fcuProFileId'
     -> FloodlightConfiguration -- ^ 'fcuPayload'
-    -> FloodlightConfigurationsUpdate'
-floodlightConfigurationsUpdate' pFcuProFileId_ pFcuPayload_ =
-    FloodlightConfigurationsUpdate'
+    -> FloodlightConfigurationsUpdate
+floodlightConfigurationsUpdate pFcuProFileId_ pFcuPayload_ =
+    FloodlightConfigurationsUpdate
     { _fcuProFileId = pFcuProFileId_
     , _fcuPayload = pFcuPayload_
     }
 
 -- | User profile ID associated with this request.
-fcuProFileId :: Lens' FloodlightConfigurationsUpdate' Int64
+fcuProFileId :: Lens' FloodlightConfigurationsUpdate Int64
 fcuProFileId
   = lens _fcuProFileId (\ s a -> s{_fcuProFileId = a})
 
 -- | Multipart request metadata.
-fcuPayload :: Lens' FloodlightConfigurationsUpdate' FloodlightConfiguration
+fcuPayload :: Lens' FloodlightConfigurationsUpdate FloodlightConfiguration
 fcuPayload
   = lens _fcuPayload (\ s a -> s{_fcuPayload = a})
 
-instance GoogleRequest
-         FloodlightConfigurationsUpdate' where
-        type Rs FloodlightConfigurationsUpdate' =
+instance GoogleRequest FloodlightConfigurationsUpdate
+         where
+        type Rs FloodlightConfigurationsUpdate =
              FloodlightConfiguration
-        requestClient FloodlightConfigurationsUpdate'{..}
+        requestClient FloodlightConfigurationsUpdate{..}
           = go _fcuProFileId (Just AltJSON) _fcuPayload
               dFAReportingService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.GAN.CcOffers.List
       CcOffersListResource
 
     -- * Creating a Request
-    , ccOffersList'
-    , CcOffersList'
+    , ccOffersList
+    , CcOffersList
 
     -- * Request Lenses
     , colAdvertiser
@@ -42,7 +42,7 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gan.ccOffers.list@ method which the
--- 'CcOffersList'' request conforms to.
+-- 'CcOffersList' request conforms to.
 type CcOffersListResource =
      "publishers" :>
        Capture "publisher" Text :>
@@ -53,14 +53,14 @@ type CcOffersListResource =
 
 -- | Retrieves credit card offers for the given publisher.
 --
--- /See:/ 'ccOffersList'' smart constructor.
-data CcOffersList' = CcOffersList'
+-- /See:/ 'ccOffersList' smart constructor.
+data CcOffersList = CcOffersList
     { _colAdvertiser :: !(Maybe [Text])
     , _colProjection :: !(Maybe CcOffersListProjection)
     , _colPublisher  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CcOffersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CcOffersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,11 +69,11 @@ data CcOffersList' = CcOffersList'
 -- * 'colProjection'
 --
 -- * 'colPublisher'
-ccOffersList'
+ccOffersList
     :: Text -- ^ 'colPublisher'
-    -> CcOffersList'
-ccOffersList' pColPublisher_ =
-    CcOffersList'
+    -> CcOffersList
+ccOffersList pColPublisher_ =
+    CcOffersList
     { _colAdvertiser = Nothing
     , _colProjection = Nothing
     , _colPublisher = pColPublisher_
@@ -81,7 +81,7 @@ ccOffersList' pColPublisher_ =
 
 -- | The advertiser ID of a card issuer whose offers to include. Optional,
 -- may be repeated.
-colAdvertiser :: Lens' CcOffersList' [Text]
+colAdvertiser :: Lens' CcOffersList [Text]
 colAdvertiser
   = lens _colAdvertiser
       (\ s a -> s{_colAdvertiser = a})
@@ -89,19 +89,19 @@ colAdvertiser
       . _Coerce
 
 -- | The set of fields to return.
-colProjection :: Lens' CcOffersList' (Maybe CcOffersListProjection)
+colProjection :: Lens' CcOffersList (Maybe CcOffersListProjection)
 colProjection
   = lens _colProjection
       (\ s a -> s{_colProjection = a})
 
 -- | The ID of the publisher in question.
-colPublisher :: Lens' CcOffersList' Text
+colPublisher :: Lens' CcOffersList Text
 colPublisher
   = lens _colPublisher (\ s a -> s{_colPublisher = a})
 
-instance GoogleRequest CcOffersList' where
-        type Rs CcOffersList' = CcOffers
-        requestClient CcOffersList'{..}
+instance GoogleRequest CcOffersList where
+        type Rs CcOffersList = CcOffers
+        requestClient CcOffersList{..}
           = go _colPublisher (_colAdvertiser ^. _Default)
               _colProjection
               (Just AltJSON)

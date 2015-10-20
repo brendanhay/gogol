@@ -33,8 +33,8 @@ module Network.Google.Resource.YouTube.Activities.List
       ActivitiesListResource
 
     -- * Creating a Request
-    , activitiesList'
-    , ActivitiesList'
+    , activitiesList
+    , ActivitiesList
 
     -- * Request Lenses
     , alPublishedAfter
@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.activities.list@ method which the
--- 'ActivitiesList'' request conforms to.
+-- 'ActivitiesList' request conforms to.
 type ActivitiesListResource =
      "activities" :>
        QueryParam "part" Text :>
@@ -73,8 +73,8 @@ type ActivitiesListResource =
 -- Google+ friends, or the YouTube home page feed, which is customized for
 -- each user.
 --
--- /See:/ 'activitiesList'' smart constructor.
-data ActivitiesList' = ActivitiesList'
+-- /See:/ 'activitiesList' smart constructor.
+data ActivitiesList = ActivitiesList
     { _alPublishedAfter  :: !(Maybe DateTime')
     , _alPart            :: !Text
     , _alHome            :: !(Maybe Bool)
@@ -86,7 +86,7 @@ data ActivitiesList' = ActivitiesList'
     , _alPublishedBefore :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -107,11 +107,11 @@ data ActivitiesList' = ActivitiesList'
 -- * 'alMaxResults'
 --
 -- * 'alPublishedBefore'
-activitiesList'
+activitiesList
     :: Text -- ^ 'alPart'
-    -> ActivitiesList'
-activitiesList' pAlPart_ =
-    ActivitiesList'
+    -> ActivitiesList
+activitiesList pAlPart_ =
+    ActivitiesList
     { _alPublishedAfter = Nothing
     , _alPart = pAlPart_
     , _alHome = Nothing
@@ -129,7 +129,7 @@ activitiesList' pAlPart_ =
 -- then any activities that occurred that day will be included in the
 -- result set. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ)
 -- format.
-alPublishedAfter :: Lens' ActivitiesList' (Maybe UTCTime)
+alPublishedAfter :: Lens' ActivitiesList (Maybe UTCTime)
 alPublishedAfter
   = lens _alPublishedAfter
       (\ s a -> s{_alPublishedAfter = a})
@@ -143,17 +143,17 @@ alPublishedAfter
 -- identify the type of activity, a display title for the activity, and so
 -- forth. If you set part=snippet, the API response will also contain all
 -- of those nested properties.
-alPart :: Lens' ActivitiesList' Text
+alPart :: Lens' ActivitiesList Text
 alPart = lens _alPart (\ s a -> s{_alPart = a})
 
 -- | Set this parameter\'s value to true to retrieve the activity feed that
 -- displays on the YouTube home page for the currently authenticated user.
-alHome :: Lens' ActivitiesList' (Maybe Bool)
+alHome :: Lens' ActivitiesList (Maybe Bool)
 alHome = lens _alHome (\ s a -> s{_alHome = a})
 
 -- | Set this parameter\'s value to true to retrieve a feed of the
 -- authenticated user\'s activities.
-alMine :: Lens' ActivitiesList' (Maybe Bool)
+alMine :: Lens' ActivitiesList (Maybe Bool)
 alMine = lens _alMine (\ s a -> s{_alMine = a})
 
 -- | The regionCode parameter instructs the API to return results for the
@@ -161,26 +161,26 @@ alMine = lens _alMine (\ s a -> s{_alMine = a})
 -- code. YouTube uses this value when the authorized user\'s previous
 -- activity on YouTube does not provide enough information to generate the
 -- activity feed.
-alRegionCode :: Lens' ActivitiesList' (Maybe Text)
+alRegionCode :: Lens' ActivitiesList (Maybe Text)
 alRegionCode
   = lens _alRegionCode (\ s a -> s{_alRegionCode = a})
 
 -- | The channelId parameter specifies a unique YouTube channel ID. The API
 -- will then return a list of that channel\'s activities.
-alChannelId :: Lens' ActivitiesList' (Maybe Text)
+alChannelId :: Lens' ActivitiesList (Maybe Text)
 alChannelId
   = lens _alChannelId (\ s a -> s{_alChannelId = a})
 
 -- | The pageToken parameter identifies a specific page in the result set
 -- that should be returned. In an API response, the nextPageToken and
 -- prevPageToken properties identify other pages that could be retrieved.
-alPageToken :: Lens' ActivitiesList' (Maybe Text)
+alPageToken :: Lens' ActivitiesList (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set.
-alMaxResults :: Lens' ActivitiesList' Word32
+alMaxResults :: Lens' ActivitiesList Word32
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
@@ -190,15 +190,15 @@ alMaxResults
 -- then any activities that occurred that day will be excluded from the
 -- result set. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ)
 -- format.
-alPublishedBefore :: Lens' ActivitiesList' (Maybe UTCTime)
+alPublishedBefore :: Lens' ActivitiesList (Maybe UTCTime)
 alPublishedBefore
   = lens _alPublishedBefore
       (\ s a -> s{_alPublishedBefore = a})
       . mapping _DateTime
 
-instance GoogleRequest ActivitiesList' where
-        type Rs ActivitiesList' = ActivityListResponse
-        requestClient ActivitiesList'{..}
+instance GoogleRequest ActivitiesList where
+        type Rs ActivitiesList = ActivityListResponse
+        requestClient ActivitiesList{..}
           = go (Just _alPart) _alPublishedAfter _alHome _alMine
               _alRegionCode
               _alChannelId

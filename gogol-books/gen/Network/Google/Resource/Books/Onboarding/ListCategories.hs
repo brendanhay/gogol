@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Onboarding.ListCategories
       OnboardingListCategoriesResource
 
     -- * Creating a Request
-    , onboardingListCategories'
-    , OnboardingListCategories'
+    , onboardingListCategories
+    , OnboardingListCategories
 
     -- * Request Lenses
     , olcLocale
@@ -40,7 +40,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.onboarding.listCategories@ method which the
--- 'OnboardingListCategories'' request conforms to.
+-- 'OnboardingListCategories' request conforms to.
 type OnboardingListCategoriesResource =
      "onboarding" :>
        "listCategories" :>
@@ -49,33 +49,32 @@ type OnboardingListCategoriesResource =
 
 -- | List categories for onboarding experience.
 --
--- /See:/ 'onboardingListCategories'' smart constructor.
-newtype OnboardingListCategories' = OnboardingListCategories'
+-- /See:/ 'onboardingListCategories' smart constructor.
+newtype OnboardingListCategories = OnboardingListCategories
     { _olcLocale :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OnboardingListCategories'' with the minimum fields required to make a request.
+-- | Creates a value of 'OnboardingListCategories' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'olcLocale'
-onboardingListCategories'
-    :: OnboardingListCategories'
-onboardingListCategories' =
-    OnboardingListCategories'
+onboardingListCategories
+    :: OnboardingListCategories
+onboardingListCategories =
+    OnboardingListCategories
     { _olcLocale = Nothing
     }
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Default is en-US if
 -- unset.
-olcLocale :: Lens' OnboardingListCategories' (Maybe Text)
+olcLocale :: Lens' OnboardingListCategories (Maybe Text)
 olcLocale
   = lens _olcLocale (\ s a -> s{_olcLocale = a})
 
-instance GoogleRequest OnboardingListCategories'
-         where
-        type Rs OnboardingListCategories' = Category
-        requestClient OnboardingListCategories'{..}
+instance GoogleRequest OnboardingListCategories where
+        type Rs OnboardingListCategories = Category
+        requestClient OnboardingListCategories{..}
           = go _olcLocale (Just AltJSON) booksService
           where go
                   = buildClient

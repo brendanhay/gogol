@@ -31,8 +31,8 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
       AccountsStoreInfosCountryGetResource
 
     -- * Creating a Request
-    , accountsStoreInfosCountryGet'
-    , AccountsStoreInfosCountryGet'
+    , accountsStoreInfosCountryGet
+    , AccountsStoreInfosCountryGet
 
     -- * Request Lenses
     , asicgXgafv
@@ -51,7 +51,7 @@ import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @playmoviespartner.accounts.storeInfos.country.get@ method which the
--- 'AccountsStoreInfosCountryGet'' request conforms to.
+-- 'AccountsStoreInfosCountryGet' request conforms to.
 type AccountsStoreInfosCountryGetResource =
      "v1" :>
        "accounts" :>
@@ -74,8 +74,8 @@ type AccountsStoreInfosCountryGetResource =
 -- Authorization rules_ and _Get methods rules_ for more information about
 -- this method.
 --
--- /See:/ 'accountsStoreInfosCountryGet'' smart constructor.
-data AccountsStoreInfosCountryGet' = AccountsStoreInfosCountryGet'
+-- /See:/ 'accountsStoreInfosCountryGet' smart constructor.
+data AccountsStoreInfosCountryGet = AccountsStoreInfosCountryGet
     { _asicgXgafv          :: !(Maybe Text)
     , _asicgUploadProtocol :: !(Maybe Text)
     , _asicgCountry        :: !Text
@@ -88,7 +88,7 @@ data AccountsStoreInfosCountryGet' = AccountsStoreInfosCountryGet'
     , _asicgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsStoreInfosCountryGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsStoreInfosCountryGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -111,13 +111,13 @@ data AccountsStoreInfosCountryGet' = AccountsStoreInfosCountryGet'
 -- * 'asicgBearerToken'
 --
 -- * 'asicgCallback'
-accountsStoreInfosCountryGet'
+accountsStoreInfosCountryGet
     :: Text -- ^ 'asicgCountry'
     -> Text -- ^ 'asicgVideoId'
     -> Text -- ^ 'asicgAccountId'
-    -> AccountsStoreInfosCountryGet'
-accountsStoreInfosCountryGet' pAsicgCountry_ pAsicgVideoId_ pAsicgAccountId_ =
-    AccountsStoreInfosCountryGet'
+    -> AccountsStoreInfosCountryGet
+accountsStoreInfosCountryGet pAsicgCountry_ pAsicgVideoId_ pAsicgAccountId_ =
+    AccountsStoreInfosCountryGet
     { _asicgXgafv = Nothing
     , _asicgUploadProtocol = Nothing
     , _asicgCountry = pAsicgCountry_
@@ -131,64 +131,64 @@ accountsStoreInfosCountryGet' pAsicgCountry_ pAsicgVideoId_ pAsicgAccountId_ =
     }
 
 -- | V1 error format.
-asicgXgafv :: Lens' AccountsStoreInfosCountryGet' (Maybe Text)
+asicgXgafv :: Lens' AccountsStoreInfosCountryGet (Maybe Text)
 asicgXgafv
   = lens _asicgXgafv (\ s a -> s{_asicgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-asicgUploadProtocol :: Lens' AccountsStoreInfosCountryGet' (Maybe Text)
+asicgUploadProtocol :: Lens' AccountsStoreInfosCountryGet (Maybe Text)
 asicgUploadProtocol
   = lens _asicgUploadProtocol
       (\ s a -> s{_asicgUploadProtocol = a})
 
 -- | REQUIRED. Edit country.
-asicgCountry :: Lens' AccountsStoreInfosCountryGet' Text
+asicgCountry :: Lens' AccountsStoreInfosCountryGet Text
 asicgCountry
   = lens _asicgCountry (\ s a -> s{_asicgCountry = a})
 
 -- | Pretty-print response.
-asicgPp :: Lens' AccountsStoreInfosCountryGet' Bool
+asicgPp :: Lens' AccountsStoreInfosCountryGet Bool
 asicgPp = lens _asicgPp (\ s a -> s{_asicgPp = a})
 
 -- | OAuth access token.
-asicgAccessToken :: Lens' AccountsStoreInfosCountryGet' (Maybe Text)
+asicgAccessToken :: Lens' AccountsStoreInfosCountryGet (Maybe Text)
 asicgAccessToken
   = lens _asicgAccessToken
       (\ s a -> s{_asicgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-asicgUploadType :: Lens' AccountsStoreInfosCountryGet' (Maybe Text)
+asicgUploadType :: Lens' AccountsStoreInfosCountryGet (Maybe Text)
 asicgUploadType
   = lens _asicgUploadType
       (\ s a -> s{_asicgUploadType = a})
 
 -- | REQUIRED. Video ID.
-asicgVideoId :: Lens' AccountsStoreInfosCountryGet' Text
+asicgVideoId :: Lens' AccountsStoreInfosCountryGet Text
 asicgVideoId
   = lens _asicgVideoId (\ s a -> s{_asicgVideoId = a})
 
 -- | REQUIRED. See _General rules_ for more information about this field.
-asicgAccountId :: Lens' AccountsStoreInfosCountryGet' Text
+asicgAccountId :: Lens' AccountsStoreInfosCountryGet Text
 asicgAccountId
   = lens _asicgAccountId
       (\ s a -> s{_asicgAccountId = a})
 
 -- | OAuth bearer token.
-asicgBearerToken :: Lens' AccountsStoreInfosCountryGet' (Maybe Text)
+asicgBearerToken :: Lens' AccountsStoreInfosCountryGet (Maybe Text)
 asicgBearerToken
   = lens _asicgBearerToken
       (\ s a -> s{_asicgBearerToken = a})
 
 -- | JSONP
-asicgCallback :: Lens' AccountsStoreInfosCountryGet' (Maybe Text)
+asicgCallback :: Lens' AccountsStoreInfosCountryGet (Maybe Text)
 asicgCallback
   = lens _asicgCallback
       (\ s a -> s{_asicgCallback = a})
 
-instance GoogleRequest AccountsStoreInfosCountryGet'
+instance GoogleRequest AccountsStoreInfosCountryGet
          where
-        type Rs AccountsStoreInfosCountryGet' = StoreInfo
-        requestClient AccountsStoreInfosCountryGet'{..}
+        type Rs AccountsStoreInfosCountryGet = StoreInfo
+        requestClient AccountsStoreInfosCountryGet{..}
           = go _asicgAccountId _asicgVideoId _asicgCountry
               _asicgXgafv
               _asicgUploadProtocol

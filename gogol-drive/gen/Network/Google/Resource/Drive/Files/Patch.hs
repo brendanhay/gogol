@@ -30,8 +30,8 @@ module Network.Google.Resource.Drive.Files.Patch
       FilesPatchResource
 
     -- * Creating a Request
-    , filesPatch'
-    , FilesPatch'
+    , filesPatch
+    , FilesPatch
 
     -- * Request Lenses
     , fpNewRevision
@@ -55,7 +55,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.files.patch@ method which the
--- 'FilesPatch'' request conforms to.
+-- 'FilesPatch' request conforms to.
 type FilesPatchResource =
      "files" :>
        Capture "fileId" Text :>
@@ -80,8 +80,8 @@ type FilesPatchResource =
 -- | Updates file metadata and\/or content. This method supports patch
 -- semantics.
 --
--- /See:/ 'filesPatch'' smart constructor.
-data FilesPatch' = FilesPatch'
+-- /See:/ 'filesPatch' smart constructor.
+data FilesPatch = FilesPatch
     { _fpNewRevision               :: !Bool
     , _fpPinned                    :: !Bool
     , _fpTimedTextLanguage         :: !(Maybe Text)
@@ -99,7 +99,7 @@ data FilesPatch' = FilesPatch'
     , _fpOCR                       :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FilesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'FilesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -132,12 +132,12 @@ data FilesPatch' = FilesPatch'
 -- * 'fpAddParents'
 --
 -- * 'fpOCR'
-filesPatch'
+filesPatch
     :: File -- ^ 'fpPayload'
     -> Text -- ^ 'fpFileId'
-    -> FilesPatch'
-filesPatch' pFpPayload_ pFpFileId_ =
-    FilesPatch'
+    -> FilesPatch
+filesPatch pFpPayload_ pFpFileId_ =
+    FilesPatch
     { _fpNewRevision = True
     , _fpPinned = False
     , _fpTimedTextLanguage = Nothing
@@ -162,92 +162,92 @@ filesPatch' pFpPayload_ pFpFileId_ =
 -- indefinitely, using additional storage quota, up to a maximum of 200
 -- revisions. For details on how revisions are retained, see the Drive Help
 -- Center.
-fpNewRevision :: Lens' FilesPatch' Bool
+fpNewRevision :: Lens' FilesPatch Bool
 fpNewRevision
   = lens _fpNewRevision
       (\ s a -> s{_fpNewRevision = a})
 
 -- | Whether to pin the new revision. A file can have a maximum of 200 pinned
 -- revisions.
-fpPinned :: Lens' FilesPatch' Bool
+fpPinned :: Lens' FilesPatch Bool
 fpPinned = lens _fpPinned (\ s a -> s{_fpPinned = a})
 
 -- | The language of the timed text.
-fpTimedTextLanguage :: Lens' FilesPatch' (Maybe Text)
+fpTimedTextLanguage :: Lens' FilesPatch (Maybe Text)
 fpTimedTextLanguage
   = lens _fpTimedTextLanguage
       (\ s a -> s{_fpTimedTextLanguage = a})
 
 -- | Multipart request metadata.
-fpPayload :: Lens' FilesPatch' File
+fpPayload :: Lens' FilesPatch File
 fpPayload
   = lens _fpPayload (\ s a -> s{_fpPayload = a})
 
 -- | Whether to update the view date after successfully updating the file.
-fpUpdateViewedDate :: Lens' FilesPatch' Bool
+fpUpdateViewedDate :: Lens' FilesPatch Bool
 fpUpdateViewedDate
   = lens _fpUpdateViewedDate
       (\ s a -> s{_fpUpdateViewedDate = a})
 
 -- | Comma-separated list of parent IDs to remove.
-fpRemoveParents :: Lens' FilesPatch' (Maybe Text)
+fpRemoveParents :: Lens' FilesPatch (Maybe Text)
 fpRemoveParents
   = lens _fpRemoveParents
       (\ s a -> s{_fpRemoveParents = a})
 
 -- | Determines the behavior in which modifiedDate is updated. This overrides
 -- setModifiedDate.
-fpModifiedDateBehavior :: Lens' FilesPatch' (Maybe FilesPatchModifiedDateBehavior)
+fpModifiedDateBehavior :: Lens' FilesPatch (Maybe FilesPatchModifiedDateBehavior)
 fpModifiedDateBehavior
   = lens _fpModifiedDateBehavior
       (\ s a -> s{_fpModifiedDateBehavior = a})
 
 -- | Whether to use the content as indexable text.
-fpUseContentAsIndexableText :: Lens' FilesPatch' Bool
+fpUseContentAsIndexableText :: Lens' FilesPatch Bool
 fpUseContentAsIndexableText
   = lens _fpUseContentAsIndexableText
       (\ s a -> s{_fpUseContentAsIndexableText = a})
 
 -- | The timed text track name.
-fpTimedTextTrackName :: Lens' FilesPatch' (Maybe Text)
+fpTimedTextTrackName :: Lens' FilesPatch (Maybe Text)
 fpTimedTextTrackName
   = lens _fpTimedTextTrackName
       (\ s a -> s{_fpTimedTextTrackName = a})
 
 -- | If ocr is true, hints at the language to use. Valid values are BCP 47
 -- codes.
-fpOCRLanguage :: Lens' FilesPatch' (Maybe Text)
+fpOCRLanguage :: Lens' FilesPatch (Maybe Text)
 fpOCRLanguage
   = lens _fpOCRLanguage
       (\ s a -> s{_fpOCRLanguage = a})
 
 -- | This parameter is deprecated and has no function.
-fpConvert :: Lens' FilesPatch' Bool
+fpConvert :: Lens' FilesPatch Bool
 fpConvert
   = lens _fpConvert (\ s a -> s{_fpConvert = a})
 
 -- | Whether to set the modified date with the supplied modified date.
-fpSetModifiedDate :: Lens' FilesPatch' Bool
+fpSetModifiedDate :: Lens' FilesPatch Bool
 fpSetModifiedDate
   = lens _fpSetModifiedDate
       (\ s a -> s{_fpSetModifiedDate = a})
 
 -- | The ID of the file to update.
-fpFileId :: Lens' FilesPatch' Text
+fpFileId :: Lens' FilesPatch Text
 fpFileId = lens _fpFileId (\ s a -> s{_fpFileId = a})
 
 -- | Comma-separated list of parent IDs to add.
-fpAddParents :: Lens' FilesPatch' (Maybe Text)
+fpAddParents :: Lens' FilesPatch (Maybe Text)
 fpAddParents
   = lens _fpAddParents (\ s a -> s{_fpAddParents = a})
 
 -- | Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.
-fpOCR :: Lens' FilesPatch' Bool
+fpOCR :: Lens' FilesPatch Bool
 fpOCR = lens _fpOCR (\ s a -> s{_fpOCR = a})
 
-instance GoogleRequest FilesPatch' where
-        type Rs FilesPatch' = File
-        requestClient FilesPatch'{..}
+instance GoogleRequest FilesPatch where
+        type Rs FilesPatch = File
+        requestClient FilesPatch{..}
           = go _fpFileId (Just _fpNewRevision) (Just _fpPinned)
               _fpTimedTextLanguage
               (Just _fpUpdateViewedDate)

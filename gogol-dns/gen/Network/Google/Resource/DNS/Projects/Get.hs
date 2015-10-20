@@ -29,8 +29,8 @@ module Network.Google.Resource.DNS.Projects.Get
       ProjectsGetResource
 
     -- * Creating a Request
-    , projectsGet'
-    , ProjectsGet'
+    , projectsGet
+    , ProjectsGet
 
     -- * Request Lenses
     , pgProject
@@ -40,39 +40,39 @@ import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dns.projects.get@ method which the
--- 'ProjectsGet'' request conforms to.
+-- 'ProjectsGet' request conforms to.
 type ProjectsGetResource =
      Capture "project" Text :>
        QueryParam "alt" AltJSON :> Get '[JSON] Project
 
 -- | Fetch the representation of an existing Project.
 --
--- /See:/ 'projectsGet'' smart constructor.
-newtype ProjectsGet' = ProjectsGet'
+-- /See:/ 'projectsGet' smart constructor.
+newtype ProjectsGet = ProjectsGet
     { _pgProject :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pgProject'
-projectsGet'
+projectsGet
     :: Text -- ^ 'pgProject'
-    -> ProjectsGet'
-projectsGet' pPgProject_ =
-    ProjectsGet'
+    -> ProjectsGet
+projectsGet pPgProject_ =
+    ProjectsGet
     { _pgProject = pPgProject_
     }
 
 -- | Identifies the project addressed by this request.
-pgProject :: Lens' ProjectsGet' Text
+pgProject :: Lens' ProjectsGet Text
 pgProject
   = lens _pgProject (\ s a -> s{_pgProject = a})
 
-instance GoogleRequest ProjectsGet' where
-        type Rs ProjectsGet' = Project
-        requestClient ProjectsGet'{..}
+instance GoogleRequest ProjectsGet where
+        type Rs ProjectsGet = Project
+        requestClient ProjectsGet{..}
           = go _pgProject (Just AltJSON) dNSService
           where go
                   = buildClient (Proxy :: Proxy ProjectsGetResource)

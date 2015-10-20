@@ -29,21 +29,21 @@ module Network.Google.Resource.Drive.Permissions.Insert
       PermissionsInsertResource
 
     -- * Creating a Request
-    , permissionsInsert'
-    , PermissionsInsert'
+    , permissionsInsert
+    , PermissionsInsert
 
     -- * Request Lenses
-    , piPayload
-    , piEmailMessage
-    , piFileId
-    , piSendNotificationEmails
+    , piiPayload
+    , piiEmailMessage
+    , piiFileId
+    , piiSendNotificationEmails
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.permissions.insert@ method which the
--- 'PermissionsInsert'' request conforms to.
+-- 'PermissionsInsert' request conforms to.
 type PermissionsInsertResource =
      "files" :>
        Capture "fileId" Text :>
@@ -55,66 +55,67 @@ type PermissionsInsertResource =
 
 -- | Inserts a permission for a file.
 --
--- /See:/ 'permissionsInsert'' smart constructor.
-data PermissionsInsert' = PermissionsInsert'
-    { _piPayload                :: !Permission
-    , _piEmailMessage           :: !(Maybe Text)
-    , _piFileId                 :: !Text
-    , _piSendNotificationEmails :: !Bool
+-- /See:/ 'permissionsInsert' smart constructor.
+data PermissionsInsert = PermissionsInsert
+    { _piiPayload                :: !Permission
+    , _piiEmailMessage           :: !(Maybe Text)
+    , _piiFileId                 :: !Text
+    , _piiSendNotificationEmails :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PermissionsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'PermissionsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'piPayload'
+-- * 'piiPayload'
 --
--- * 'piEmailMessage'
+-- * 'piiEmailMessage'
 --
--- * 'piFileId'
+-- * 'piiFileId'
 --
--- * 'piSendNotificationEmails'
-permissionsInsert'
-    :: Permission -- ^ 'piPayload'
-    -> Text -- ^ 'piFileId'
-    -> PermissionsInsert'
-permissionsInsert' pPiPayload_ pPiFileId_ =
-    PermissionsInsert'
-    { _piPayload = pPiPayload_
-    , _piEmailMessage = Nothing
-    , _piFileId = pPiFileId_
-    , _piSendNotificationEmails = True
+-- * 'piiSendNotificationEmails'
+permissionsInsert
+    :: Permission -- ^ 'piiPayload'
+    -> Text -- ^ 'piiFileId'
+    -> PermissionsInsert
+permissionsInsert pPiiPayload_ pPiiFileId_ =
+    PermissionsInsert
+    { _piiPayload = pPiiPayload_
+    , _piiEmailMessage = Nothing
+    , _piiFileId = pPiiFileId_
+    , _piiSendNotificationEmails = True
     }
 
 -- | Multipart request metadata.
-piPayload :: Lens' PermissionsInsert' Permission
-piPayload
-  = lens _piPayload (\ s a -> s{_piPayload = a})
+piiPayload :: Lens' PermissionsInsert Permission
+piiPayload
+  = lens _piiPayload (\ s a -> s{_piiPayload = a})
 
 -- | A custom message to include in notification emails.
-piEmailMessage :: Lens' PermissionsInsert' (Maybe Text)
-piEmailMessage
-  = lens _piEmailMessage
-      (\ s a -> s{_piEmailMessage = a})
+piiEmailMessage :: Lens' PermissionsInsert (Maybe Text)
+piiEmailMessage
+  = lens _piiEmailMessage
+      (\ s a -> s{_piiEmailMessage = a})
 
 -- | The ID for the file.
-piFileId :: Lens' PermissionsInsert' Text
-piFileId = lens _piFileId (\ s a -> s{_piFileId = a})
+piiFileId :: Lens' PermissionsInsert Text
+piiFileId
+  = lens _piiFileId (\ s a -> s{_piiFileId = a})
 
 -- | Whether to send notification emails when sharing to users or groups.
 -- This parameter is ignored and an email is sent if the role is owner.
-piSendNotificationEmails :: Lens' PermissionsInsert' Bool
-piSendNotificationEmails
-  = lens _piSendNotificationEmails
-      (\ s a -> s{_piSendNotificationEmails = a})
+piiSendNotificationEmails :: Lens' PermissionsInsert Bool
+piiSendNotificationEmails
+  = lens _piiSendNotificationEmails
+      (\ s a -> s{_piiSendNotificationEmails = a})
 
-instance GoogleRequest PermissionsInsert' where
-        type Rs PermissionsInsert' = Permission
-        requestClient PermissionsInsert'{..}
-          = go _piFileId _piEmailMessage
-              (Just _piSendNotificationEmails)
+instance GoogleRequest PermissionsInsert where
+        type Rs PermissionsInsert = Permission
+        requestClient PermissionsInsert{..}
+          = go _piiFileId _piiEmailMessage
+              (Just _piiSendNotificationEmails)
               (Just AltJSON)
-              _piPayload
+              _piiPayload
               driveService
           where go
                   = buildClient

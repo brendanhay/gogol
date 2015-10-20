@@ -30,8 +30,8 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Reports.List
       JobsReportsListResource
 
     -- * Creating a Request
-    , jobsReportsList'
-    , JobsReportsList'
+    , jobsReportsList
+    , JobsReportsList
 
     -- * Request Lenses
     , jrlXgafv
@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeReporting.Types
 
 -- | A resource alias for @youtubereporting.jobs.reports.list@ method which the
--- 'JobsReportsList'' request conforms to.
+-- 'JobsReportsList' request conforms to.
 type JobsReportsListResource =
      "v1" :>
        "jobs" :>
@@ -73,8 +73,8 @@ type JobsReportsListResource =
 -- | Lists reports created by a specific job. Returns NOT_FOUND if the job
 -- does not exist.
 --
--- /See:/ 'jobsReportsList'' smart constructor.
-data JobsReportsList' = JobsReportsList'
+-- /See:/ 'jobsReportsList' smart constructor.
+data JobsReportsList = JobsReportsList
     { _jrlXgafv                  :: !(Maybe Text)
     , _jrlJobId                  :: !Text
     , _jrlUploadProtocol         :: !(Maybe Text)
@@ -88,7 +88,7 @@ data JobsReportsList' = JobsReportsList'
     , _jrlCallback               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'JobsReportsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'JobsReportsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -113,11 +113,11 @@ data JobsReportsList' = JobsReportsList'
 -- * 'jrlPageSize'
 --
 -- * 'jrlCallback'
-jobsReportsList'
+jobsReportsList
     :: Text -- ^ 'jrlJobId'
-    -> JobsReportsList'
-jobsReportsList' pJrlJobId_ =
-    JobsReportsList'
+    -> JobsReportsList
+jobsReportsList pJrlJobId_ =
+    JobsReportsList
     { _jrlXgafv = Nothing
     , _jrlJobId = pJrlJobId_
     , _jrlUploadProtocol = Nothing
@@ -132,44 +132,44 @@ jobsReportsList' pJrlJobId_ =
     }
 
 -- | V1 error format.
-jrlXgafv :: Lens' JobsReportsList' (Maybe Text)
+jrlXgafv :: Lens' JobsReportsList (Maybe Text)
 jrlXgafv = lens _jrlXgafv (\ s a -> s{_jrlXgafv = a})
 
 -- | The ID of the job.
-jrlJobId :: Lens' JobsReportsList' Text
+jrlJobId :: Lens' JobsReportsList Text
 jrlJobId = lens _jrlJobId (\ s a -> s{_jrlJobId = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-jrlUploadProtocol :: Lens' JobsReportsList' (Maybe Text)
+jrlUploadProtocol :: Lens' JobsReportsList (Maybe Text)
 jrlUploadProtocol
   = lens _jrlUploadProtocol
       (\ s a -> s{_jrlUploadProtocol = a})
 
 -- | Pretty-print response.
-jrlPp :: Lens' JobsReportsList' Bool
+jrlPp :: Lens' JobsReportsList Bool
 jrlPp = lens _jrlPp (\ s a -> s{_jrlPp = a})
 
 -- | OAuth access token.
-jrlAccessToken :: Lens' JobsReportsList' (Maybe Text)
+jrlAccessToken :: Lens' JobsReportsList (Maybe Text)
 jrlAccessToken
   = lens _jrlAccessToken
       (\ s a -> s{_jrlAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-jrlUploadType :: Lens' JobsReportsList' (Maybe Text)
+jrlUploadType :: Lens' JobsReportsList (Maybe Text)
 jrlUploadType
   = lens _jrlUploadType
       (\ s a -> s{_jrlUploadType = a})
 
 -- | The content owner\'s external ID on which behalf the user is acting on.
 -- If not set, the user is acting for himself (his own channel).
-jrlOnBehalfOfContentOwner :: Lens' JobsReportsList' (Maybe Text)
+jrlOnBehalfOfContentOwner :: Lens' JobsReportsList (Maybe Text)
 jrlOnBehalfOfContentOwner
   = lens _jrlOnBehalfOfContentOwner
       (\ s a -> s{_jrlOnBehalfOfContentOwner = a})
 
 -- | OAuth bearer token.
-jrlBearerToken :: Lens' JobsReportsList' (Maybe Text)
+jrlBearerToken :: Lens' JobsReportsList (Maybe Text)
 jrlBearerToken
   = lens _jrlBearerToken
       (\ s a -> s{_jrlBearerToken = a})
@@ -177,24 +177,24 @@ jrlBearerToken
 -- | A token identifying a page of results the server should return.
 -- Typically, this is the value of ListReportsResponse.next_page_token
 -- returned in response to the previous call to the \`ListReports\` method.
-jrlPageToken :: Lens' JobsReportsList' (Maybe Text)
+jrlPageToken :: Lens' JobsReportsList (Maybe Text)
 jrlPageToken
   = lens _jrlPageToken (\ s a -> s{_jrlPageToken = a})
 
 -- | Requested page size. Server may return fewer report types than
 -- requested. If unspecified, server will pick an appropriate default.
-jrlPageSize :: Lens' JobsReportsList' (Maybe Int32)
+jrlPageSize :: Lens' JobsReportsList (Maybe Int32)
 jrlPageSize
   = lens _jrlPageSize (\ s a -> s{_jrlPageSize = a})
 
 -- | JSONP
-jrlCallback :: Lens' JobsReportsList' (Maybe Text)
+jrlCallback :: Lens' JobsReportsList (Maybe Text)
 jrlCallback
   = lens _jrlCallback (\ s a -> s{_jrlCallback = a})
 
-instance GoogleRequest JobsReportsList' where
-        type Rs JobsReportsList' = ListReportsResponse
-        requestClient JobsReportsList'{..}
+instance GoogleRequest JobsReportsList where
+        type Rs JobsReportsList = ListReportsResponse
+        requestClient JobsReportsList{..}
           = go _jrlJobId _jrlXgafv _jrlUploadProtocol
               (Just _jrlPp)
               _jrlAccessToken

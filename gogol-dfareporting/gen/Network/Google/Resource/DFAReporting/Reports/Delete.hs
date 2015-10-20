@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Reports.Delete
       ReportsDeleteResource
 
     -- * Creating a Request
-    , reportsDelete'
-    , ReportsDelete'
+    , reportsDelete
+    , ReportsDelete
 
     -- * Request Lenses
     , rdReportId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.reports.delete@ method which the
--- 'ReportsDelete'' request conforms to.
+-- 'ReportsDelete' request conforms to.
 type ReportsDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type ReportsDeleteResource =
 
 -- | Deletes a report by its ID.
 --
--- /See:/ 'reportsDelete'' smart constructor.
-data ReportsDelete' = ReportsDelete'
+-- /See:/ 'reportsDelete' smart constructor.
+data ReportsDelete = ReportsDelete
     { _rdReportId  :: !Int64
     , _rdProFileId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReportsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rdReportId'
 --
 -- * 'rdProFileId'
-reportsDelete'
+reportsDelete
     :: Int64 -- ^ 'rdReportId'
     -> Int64 -- ^ 'rdProFileId'
-    -> ReportsDelete'
-reportsDelete' pRdReportId_ pRdProFileId_ =
-    ReportsDelete'
+    -> ReportsDelete
+reportsDelete pRdReportId_ pRdProFileId_ =
+    ReportsDelete
     { _rdReportId = pRdReportId_
     , _rdProFileId = pRdProFileId_
     }
 
 -- | The ID of the report.
-rdReportId :: Lens' ReportsDelete' Int64
+rdReportId :: Lens' ReportsDelete Int64
 rdReportId
   = lens _rdReportId (\ s a -> s{_rdReportId = a})
 
 -- | The DFA user profile ID.
-rdProFileId :: Lens' ReportsDelete' Int64
+rdProFileId :: Lens' ReportsDelete Int64
 rdProFileId
   = lens _rdProFileId (\ s a -> s{_rdProFileId = a})
 
-instance GoogleRequest ReportsDelete' where
-        type Rs ReportsDelete' = ()
-        requestClient ReportsDelete'{..}
+instance GoogleRequest ReportsDelete where
+        type Rs ReportsDelete = ()
+        requestClient ReportsDelete{..}
           = go _rdProFileId _rdReportId (Just AltJSON)
               dFAReportingService
           where go

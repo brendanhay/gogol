@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.SSLCertificates.Delete
       SSLCertificatesDeleteResource
 
     -- * Creating a Request
-    , sslCertificatesDelete'
-    , SSLCertificatesDelete'
+    , sslCertificatesDelete
+    , SSLCertificatesDelete
 
     -- * Request Lenses
     , scdProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.sslCertificates.delete@ method which the
--- 'SSLCertificatesDelete'' request conforms to.
+-- 'SSLCertificatesDelete' request conforms to.
 type SSLCertificatesDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,43 +51,43 @@ type SSLCertificatesDeleteResource =
 
 -- | Deletes the specified SslCertificate resource.
 --
--- /See:/ 'sslCertificatesDelete'' smart constructor.
-data SSLCertificatesDelete' = SSLCertificatesDelete'
+-- /See:/ 'sslCertificatesDelete' smart constructor.
+data SSLCertificatesDelete = SSLCertificatesDelete
     { _scdProject        :: !Text
     , _scdSSLCertificate :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SSLCertificatesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'SSLCertificatesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'scdProject'
 --
 -- * 'scdSSLCertificate'
-sslCertificatesDelete'
+sslCertificatesDelete
     :: Text -- ^ 'scdProject'
     -> Text -- ^ 'scdSSLCertificate'
-    -> SSLCertificatesDelete'
-sslCertificatesDelete' pScdProject_ pScdSSLCertificate_ =
-    SSLCertificatesDelete'
+    -> SSLCertificatesDelete
+sslCertificatesDelete pScdProject_ pScdSSLCertificate_ =
+    SSLCertificatesDelete
     { _scdProject = pScdProject_
     , _scdSSLCertificate = pScdSSLCertificate_
     }
 
 -- | Name of the project scoping this request.
-scdProject :: Lens' SSLCertificatesDelete' Text
+scdProject :: Lens' SSLCertificatesDelete Text
 scdProject
   = lens _scdProject (\ s a -> s{_scdProject = a})
 
 -- | Name of the SslCertificate resource to delete.
-scdSSLCertificate :: Lens' SSLCertificatesDelete' Text
+scdSSLCertificate :: Lens' SSLCertificatesDelete Text
 scdSSLCertificate
   = lens _scdSSLCertificate
       (\ s a -> s{_scdSSLCertificate = a})
 
-instance GoogleRequest SSLCertificatesDelete' where
-        type Rs SSLCertificatesDelete' = Operation
-        requestClient SSLCertificatesDelete'{..}
+instance GoogleRequest SSLCertificatesDelete where
+        type Rs SSLCertificatesDelete = Operation
+        requestClient SSLCertificatesDelete{..}
           = go _scdProject _scdSSLCertificate (Just AltJSON)
               computeService
           where go

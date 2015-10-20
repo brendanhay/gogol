@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.BucketAccessControls.Insert
       BucketAccessControlsInsertResource
 
     -- * Creating a Request
-    , bucketAccessControlsInsert'
-    , BucketAccessControlsInsert'
+    , bucketAccessControlsInsert
+    , BucketAccessControlsInsert
 
     -- * Request Lenses
     , baciBucket
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.bucketAccessControls.insert@ method which the
--- 'BucketAccessControlsInsert'' request conforms to.
+-- 'BucketAccessControlsInsert' request conforms to.
 type BucketAccessControlsInsertResource =
      "b" :>
        Capture "bucket" Text :>
@@ -52,44 +52,44 @@ type BucketAccessControlsInsertResource =
 
 -- | Creates a new ACL entry on the specified bucket.
 --
--- /See:/ 'bucketAccessControlsInsert'' smart constructor.
-data BucketAccessControlsInsert' = BucketAccessControlsInsert'
+-- /See:/ 'bucketAccessControlsInsert' smart constructor.
+data BucketAccessControlsInsert = BucketAccessControlsInsert
     { _baciBucket  :: !Text
     , _baciPayload :: !BucketAccessControl
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BucketAccessControlsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'BucketAccessControlsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'baciBucket'
 --
 -- * 'baciPayload'
-bucketAccessControlsInsert'
+bucketAccessControlsInsert
     :: Text -- ^ 'baciBucket'
     -> BucketAccessControl -- ^ 'baciPayload'
-    -> BucketAccessControlsInsert'
-bucketAccessControlsInsert' pBaciBucket_ pBaciPayload_ =
-    BucketAccessControlsInsert'
+    -> BucketAccessControlsInsert
+bucketAccessControlsInsert pBaciBucket_ pBaciPayload_ =
+    BucketAccessControlsInsert
     { _baciBucket = pBaciBucket_
     , _baciPayload = pBaciPayload_
     }
 
 -- | Name of a bucket.
-baciBucket :: Lens' BucketAccessControlsInsert' Text
+baciBucket :: Lens' BucketAccessControlsInsert Text
 baciBucket
   = lens _baciBucket (\ s a -> s{_baciBucket = a})
 
 -- | Multipart request metadata.
-baciPayload :: Lens' BucketAccessControlsInsert' BucketAccessControl
+baciPayload :: Lens' BucketAccessControlsInsert BucketAccessControl
 baciPayload
   = lens _baciPayload (\ s a -> s{_baciPayload = a})
 
-instance GoogleRequest BucketAccessControlsInsert'
+instance GoogleRequest BucketAccessControlsInsert
          where
-        type Rs BucketAccessControlsInsert' =
+        type Rs BucketAccessControlsInsert =
              BucketAccessControl
-        requestClient BucketAccessControlsInsert'{..}
+        requestClient BucketAccessControlsInsert{..}
           = go _baciBucket (Just AltJSON) _baciPayload
               storageService
           where go

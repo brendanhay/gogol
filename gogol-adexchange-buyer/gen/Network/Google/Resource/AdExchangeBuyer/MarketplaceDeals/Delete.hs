@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Delete
       MarketplaceDealsDeleteResource
 
     -- * Creating a Request
-    , marketplaceDealsDelete'
-    , MarketplaceDealsDelete'
+    , marketplaceDealsDelete
+    , MarketplaceDealsDelete
 
     -- * Request Lenses
     , mddPayload
@@ -41,7 +41,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.marketplacedeals.delete@ method which the
--- 'MarketplaceDealsDelete'' request conforms to.
+-- 'MarketplaceDealsDelete' request conforms to.
 type MarketplaceDealsDeleteResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
@@ -53,43 +53,43 @@ type MarketplaceDealsDeleteResource =
 
 -- | Delete the specified deals from the order
 --
--- /See:/ 'marketplaceDealsDelete'' smart constructor.
-data MarketplaceDealsDelete' = MarketplaceDealsDelete'
+-- /See:/ 'marketplaceDealsDelete' smart constructor.
+data MarketplaceDealsDelete = MarketplaceDealsDelete
     { _mddPayload :: !DeleteOrderDealsRequest
     , _mddOrderId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MarketplaceDealsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'MarketplaceDealsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mddPayload'
 --
 -- * 'mddOrderId'
-marketplaceDealsDelete'
+marketplaceDealsDelete
     :: DeleteOrderDealsRequest -- ^ 'mddPayload'
     -> Text -- ^ 'mddOrderId'
-    -> MarketplaceDealsDelete'
-marketplaceDealsDelete' pMddPayload_ pMddOrderId_ =
-    MarketplaceDealsDelete'
+    -> MarketplaceDealsDelete
+marketplaceDealsDelete pMddPayload_ pMddOrderId_ =
+    MarketplaceDealsDelete
     { _mddPayload = pMddPayload_
     , _mddOrderId = pMddOrderId_
     }
 
 -- | Multipart request metadata.
-mddPayload :: Lens' MarketplaceDealsDelete' DeleteOrderDealsRequest
+mddPayload :: Lens' MarketplaceDealsDelete DeleteOrderDealsRequest
 mddPayload
   = lens _mddPayload (\ s a -> s{_mddPayload = a})
 
 -- | The orderId to delete deals from.
-mddOrderId :: Lens' MarketplaceDealsDelete' Text
+mddOrderId :: Lens' MarketplaceDealsDelete Text
 mddOrderId
   = lens _mddOrderId (\ s a -> s{_mddOrderId = a})
 
-instance GoogleRequest MarketplaceDealsDelete' where
-        type Rs MarketplaceDealsDelete' =
+instance GoogleRequest MarketplaceDealsDelete where
+        type Rs MarketplaceDealsDelete =
              DeleteOrderDealsResponse
-        requestClient MarketplaceDealsDelete'{..}
+        requestClient MarketplaceDealsDelete{..}
           = go _mddOrderId (Just AltJSON) _mddPayload
               adExchangeBuyerService
           where go

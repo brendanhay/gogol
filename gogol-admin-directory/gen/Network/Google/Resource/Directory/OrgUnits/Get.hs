@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.OrgUnits.Get
       OrgUnitsGetResource
 
     -- * Creating a Request
-    , orgUnitsGet'
-    , OrgUnitsGet'
+    , orgUnitsGet
+    , OrgUnitsGet
 
     -- * Request Lenses
     , ougOrgUnitPath
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.orgunits.get@ method which the
--- 'OrgUnitsGet'' request conforms to.
+-- 'OrgUnitsGet' request conforms to.
 type OrgUnitsGetResource =
      "customer" :>
        Capture "customerId" Text :>
@@ -51,45 +51,45 @@ type OrgUnitsGetResource =
 
 -- | Retrieve Organization Unit
 --
--- /See:/ 'orgUnitsGet'' smart constructor.
-data OrgUnitsGet' = OrgUnitsGet'
+-- /See:/ 'orgUnitsGet' smart constructor.
+data OrgUnitsGet = OrgUnitsGet
     { _ougOrgUnitPath :: ![Text]
     , _ougCustomerId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrgUnitsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrgUnitsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ougOrgUnitPath'
 --
 -- * 'ougCustomerId'
-orgUnitsGet'
+orgUnitsGet
     :: [Text] -- ^ 'ougOrgUnitPath'
     -> Text -- ^ 'ougCustomerId'
-    -> OrgUnitsGet'
-orgUnitsGet' pOugOrgUnitPath_ pOugCustomerId_ =
-    OrgUnitsGet'
+    -> OrgUnitsGet
+orgUnitsGet pOugOrgUnitPath_ pOugCustomerId_ =
+    OrgUnitsGet
     { _ougOrgUnitPath = pOugOrgUnitPath_
     , _ougCustomerId = pOugCustomerId_
     }
 
 -- | Full path of the organization unit or its Id
-ougOrgUnitPath :: Lens' OrgUnitsGet' [Text]
+ougOrgUnitPath :: Lens' OrgUnitsGet [Text]
 ougOrgUnitPath
   = lens _ougOrgUnitPath
       (\ s a -> s{_ougOrgUnitPath = a})
       . _Coerce
 
 -- | Immutable id of the Google Apps account
-ougCustomerId :: Lens' OrgUnitsGet' Text
+ougCustomerId :: Lens' OrgUnitsGet Text
 ougCustomerId
   = lens _ougCustomerId
       (\ s a -> s{_ougCustomerId = a})
 
-instance GoogleRequest OrgUnitsGet' where
-        type Rs OrgUnitsGet' = OrgUnit
-        requestClient OrgUnitsGet'{..}
+instance GoogleRequest OrgUnitsGet where
+        type Rs OrgUnitsGet = OrgUnit
+        requestClient OrgUnitsGet{..}
           = go _ougCustomerId _ougOrgUnitPath (Just AltJSON)
               directoryService
           where go

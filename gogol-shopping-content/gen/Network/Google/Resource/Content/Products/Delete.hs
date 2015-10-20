@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Products.Delete
       ProductsDeleteResource
 
     -- * Creating a Request
-    , productsDelete'
-    , ProductsDelete'
+    , productsDelete
+    , ProductsDelete
 
     -- * Request Lenses
     , pdMerchantId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.products.delete@ method which the
--- 'ProductsDelete'' request conforms to.
+-- 'ProductsDelete' request conforms to.
 type ProductsDeleteResource =
      Capture "merchantId" Word64 :>
        "products" :>
@@ -52,14 +52,14 @@ type ProductsDeleteResource =
 
 -- | Deletes a product from your Merchant Center account.
 --
--- /See:/ 'productsDelete'' smart constructor.
-data ProductsDelete' = ProductsDelete'
+-- /See:/ 'productsDelete' smart constructor.
+data ProductsDelete = ProductsDelete
     { _pdMerchantId :: !Word64
     , _pdProductId  :: !Text
     , _pdDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProductsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,34 +68,34 @@ data ProductsDelete' = ProductsDelete'
 -- * 'pdProductId'
 --
 -- * 'pdDryRun'
-productsDelete'
+productsDelete
     :: Word64 -- ^ 'pdMerchantId'
     -> Text -- ^ 'pdProductId'
-    -> ProductsDelete'
-productsDelete' pPdMerchantId_ pPdProductId_ =
-    ProductsDelete'
+    -> ProductsDelete
+productsDelete pPdMerchantId_ pPdProductId_ =
+    ProductsDelete
     { _pdMerchantId = pPdMerchantId_
     , _pdProductId = pPdProductId_
     , _pdDryRun = Nothing
     }
 
 -- | The ID of the managing account.
-pdMerchantId :: Lens' ProductsDelete' Word64
+pdMerchantId :: Lens' ProductsDelete Word64
 pdMerchantId
   = lens _pdMerchantId (\ s a -> s{_pdMerchantId = a})
 
 -- | The ID of the product.
-pdProductId :: Lens' ProductsDelete' Text
+pdProductId :: Lens' ProductsDelete Text
 pdProductId
   = lens _pdProductId (\ s a -> s{_pdProductId = a})
 
 -- | Flag to run the request in dry-run mode.
-pdDryRun :: Lens' ProductsDelete' (Maybe Bool)
+pdDryRun :: Lens' ProductsDelete (Maybe Bool)
 pdDryRun = lens _pdDryRun (\ s a -> s{_pdDryRun = a})
 
-instance GoogleRequest ProductsDelete' where
-        type Rs ProductsDelete' = ()
-        requestClient ProductsDelete'{..}
+instance GoogleRequest ProductsDelete where
+        type Rs ProductsDelete = ()
+        requestClient ProductsDelete{..}
           = go _pdMerchantId _pdProductId _pdDryRun
               (Just AltJSON)
               shoppingContentService

@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Inse
       ManagementWebPropertyAdWordsLinksInsertResource
 
     -- * Creating a Request
-    , managementWebPropertyAdWordsLinksInsert'
-    , ManagementWebPropertyAdWordsLinksInsert'
+    , managementWebPropertyAdWordsLinksInsert
+    , ManagementWebPropertyAdWordsLinksInsert
 
     -- * Request Lenses
     , mwpawliWebPropertyId
@@ -42,7 +42,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webPropertyAdWordsLinks.insert@ method which the
--- 'ManagementWebPropertyAdWordsLinksInsert'' request conforms to.
+-- 'ManagementWebPropertyAdWordsLinksInsert' request conforms to.
 type ManagementWebPropertyAdWordsLinksInsertResource
      =
      "management" :>
@@ -57,14 +57,14 @@ type ManagementWebPropertyAdWordsLinksInsertResource
 
 -- | Creates a webProperty-AdWords link.
 --
--- /See:/ 'managementWebPropertyAdWordsLinksInsert'' smart constructor.
-data ManagementWebPropertyAdWordsLinksInsert' = ManagementWebPropertyAdWordsLinksInsert'
+-- /See:/ 'managementWebPropertyAdWordsLinksInsert' smart constructor.
+data ManagementWebPropertyAdWordsLinksInsert = ManagementWebPropertyAdWordsLinksInsert
     { _mwpawliWebPropertyId :: !Text
     , _mwpawliPayload       :: !EntityAdWordsLink
     , _mwpawliAccountId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementWebPropertyAdWordsLinksInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementWebPropertyAdWordsLinksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,42 +73,42 @@ data ManagementWebPropertyAdWordsLinksInsert' = ManagementWebPropertyAdWordsLink
 -- * 'mwpawliPayload'
 --
 -- * 'mwpawliAccountId'
-managementWebPropertyAdWordsLinksInsert'
+managementWebPropertyAdWordsLinksInsert
     :: Text -- ^ 'mwpawliWebPropertyId'
     -> EntityAdWordsLink -- ^ 'mwpawliPayload'
     -> Text -- ^ 'mwpawliAccountId'
-    -> ManagementWebPropertyAdWordsLinksInsert'
-managementWebPropertyAdWordsLinksInsert' pMwpawliWebPropertyId_ pMwpawliPayload_ pMwpawliAccountId_ =
-    ManagementWebPropertyAdWordsLinksInsert'
+    -> ManagementWebPropertyAdWordsLinksInsert
+managementWebPropertyAdWordsLinksInsert pMwpawliWebPropertyId_ pMwpawliPayload_ pMwpawliAccountId_ =
+    ManagementWebPropertyAdWordsLinksInsert
     { _mwpawliWebPropertyId = pMwpawliWebPropertyId_
     , _mwpawliPayload = pMwpawliPayload_
     , _mwpawliAccountId = pMwpawliAccountId_
     }
 
 -- | Web property ID to create the link for.
-mwpawliWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksInsert' Text
+mwpawliWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksInsert Text
 mwpawliWebPropertyId
   = lens _mwpawliWebPropertyId
       (\ s a -> s{_mwpawliWebPropertyId = a})
 
 -- | Multipart request metadata.
-mwpawliPayload :: Lens' ManagementWebPropertyAdWordsLinksInsert' EntityAdWordsLink
+mwpawliPayload :: Lens' ManagementWebPropertyAdWordsLinksInsert EntityAdWordsLink
 mwpawliPayload
   = lens _mwpawliPayload
       (\ s a -> s{_mwpawliPayload = a})
 
 -- | ID of the Google Analytics account to create the link for.
-mwpawliAccountId :: Lens' ManagementWebPropertyAdWordsLinksInsert' Text
+mwpawliAccountId :: Lens' ManagementWebPropertyAdWordsLinksInsert Text
 mwpawliAccountId
   = lens _mwpawliAccountId
       (\ s a -> s{_mwpawliAccountId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyAdWordsLinksInsert' where
-        type Rs ManagementWebPropertyAdWordsLinksInsert' =
+         ManagementWebPropertyAdWordsLinksInsert where
+        type Rs ManagementWebPropertyAdWordsLinksInsert =
              EntityAdWordsLink
         requestClient
-          ManagementWebPropertyAdWordsLinksInsert'{..}
+          ManagementWebPropertyAdWordsLinksInsert{..}
           = go _mwpawliAccountId _mwpawliWebPropertyId
               (Just AltJSON)
               _mwpawliPayload

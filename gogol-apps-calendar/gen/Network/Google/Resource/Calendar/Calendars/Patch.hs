@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.Calendars.Patch
       CalendarsPatchResource
 
     -- * Creating a Request
-    , calendarsPatch'
-    , CalendarsPatch'
+    , calendarsPatch
+    , CalendarsPatch
 
     -- * Request Lenses
     , cpCalendarId
@@ -41,7 +41,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendars.patch@ method which the
--- 'CalendarsPatch'' request conforms to.
+-- 'CalendarsPatch' request conforms to.
 type CalendarsPatchResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -50,25 +50,25 @@ type CalendarsPatchResource =
 
 -- | Updates metadata for a calendar. This method supports patch semantics.
 --
--- /See:/ 'calendarsPatch'' smart constructor.
-data CalendarsPatch' = CalendarsPatch'
+-- /See:/ 'calendarsPatch' smart constructor.
+data CalendarsPatch = CalendarsPatch
     { _cpCalendarId :: !Text
     , _cpPayload    :: !Calendar
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CalendarsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'CalendarsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cpCalendarId'
 --
 -- * 'cpPayload'
-calendarsPatch'
+calendarsPatch
     :: Text -- ^ 'cpCalendarId'
     -> Calendar -- ^ 'cpPayload'
-    -> CalendarsPatch'
-calendarsPatch' pCpCalendarId_ pCpPayload_ =
-    CalendarsPatch'
+    -> CalendarsPatch
+calendarsPatch pCpCalendarId_ pCpPayload_ =
+    CalendarsPatch
     { _cpCalendarId = pCpCalendarId_
     , _cpPayload = pCpPayload_
     }
@@ -76,18 +76,18 @@ calendarsPatch' pCpCalendarId_ pCpPayload_ =
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-cpCalendarId :: Lens' CalendarsPatch' Text
+cpCalendarId :: Lens' CalendarsPatch Text
 cpCalendarId
   = lens _cpCalendarId (\ s a -> s{_cpCalendarId = a})
 
 -- | Multipart request metadata.
-cpPayload :: Lens' CalendarsPatch' Calendar
+cpPayload :: Lens' CalendarsPatch Calendar
 cpPayload
   = lens _cpPayload (\ s a -> s{_cpPayload = a})
 
-instance GoogleRequest CalendarsPatch' where
-        type Rs CalendarsPatch' = Calendar
-        requestClient CalendarsPatch'{..}
+instance GoogleRequest CalendarsPatch where
+        type Rs CalendarsPatch = Calendar
+        requestClient CalendarsPatch{..}
           = go _cpCalendarId (Just AltJSON) _cpPayload
               appsCalendarService
           where go

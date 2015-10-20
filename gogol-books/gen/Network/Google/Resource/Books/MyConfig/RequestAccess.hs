@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.MyConfig.RequestAccess
       MyConfigRequestAccessResource
 
     -- * Creating a Request
-    , myConfigRequestAccess'
-    , MyConfigRequestAccess'
+    , myConfigRequestAccess
+    , MyConfigRequestAccess
 
     -- * Request Lenses
     , mcraCpksver
@@ -45,7 +45,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.myconfig.requestAccess@ method which the
--- 'MyConfigRequestAccess'' request conforms to.
+-- 'MyConfigRequestAccess' request conforms to.
 type MyConfigRequestAccessResource =
      "myconfig" :>
        "requestAccess" :>
@@ -62,8 +62,8 @@ type MyConfigRequestAccessResource =
 
 -- | Request concurrent and download access restrictions.
 --
--- /See:/ 'myConfigRequestAccess'' smart constructor.
-data MyConfigRequestAccess' = MyConfigRequestAccess'
+-- /See:/ 'myConfigRequestAccess' smart constructor.
+data MyConfigRequestAccess = MyConfigRequestAccess
     { _mcraCpksver      :: !Text
     , _mcraLocale       :: !(Maybe Text)
     , _mcraLicenseTypes :: !(Maybe MyConfigRequestAccessLicenseTypes)
@@ -72,7 +72,7 @@ data MyConfigRequestAccess' = MyConfigRequestAccess'
     , _mcraNonce        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MyConfigRequestAccess'' with the minimum fields required to make a request.
+-- | Creates a value of 'MyConfigRequestAccess' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -87,14 +87,14 @@ data MyConfigRequestAccess' = MyConfigRequestAccess'
 -- * 'mcraSource'
 --
 -- * 'mcraNonce'
-myConfigRequestAccess'
+myConfigRequestAccess
     :: Text -- ^ 'mcraCpksver'
     -> Text -- ^ 'mcraVolumeId'
     -> Text -- ^ 'mcraSource'
     -> Text -- ^ 'mcraNonce'
-    -> MyConfigRequestAccess'
-myConfigRequestAccess' pMcraCpksver_ pMcraVolumeId_ pMcraSource_ pMcraNonce_ =
-    MyConfigRequestAccess'
+    -> MyConfigRequestAccess
+myConfigRequestAccess pMcraCpksver_ pMcraVolumeId_ pMcraSource_ pMcraNonce_ =
+    MyConfigRequestAccess
     { _mcraCpksver = pMcraCpksver_
     , _mcraLocale = Nothing
     , _mcraLicenseTypes = Nothing
@@ -104,40 +104,40 @@ myConfigRequestAccess' pMcraCpksver_ pMcraVolumeId_ pMcraSource_ pMcraNonce_ =
     }
 
 -- | The device\/version ID from which to request the restrictions.
-mcraCpksver :: Lens' MyConfigRequestAccess' Text
+mcraCpksver :: Lens' MyConfigRequestAccess Text
 mcraCpksver
   = lens _mcraCpksver (\ s a -> s{_mcraCpksver = a})
 
 -- | ISO-639-1, ISO-3166-1 codes for message localization, i.e. en_US.
-mcraLocale :: Lens' MyConfigRequestAccess' (Maybe Text)
+mcraLocale :: Lens' MyConfigRequestAccess (Maybe Text)
 mcraLocale
   = lens _mcraLocale (\ s a -> s{_mcraLocale = a})
 
 -- | The type of access license to request. If not specified, the default is
 -- BOTH.
-mcraLicenseTypes :: Lens' MyConfigRequestAccess' (Maybe MyConfigRequestAccessLicenseTypes)
+mcraLicenseTypes :: Lens' MyConfigRequestAccess (Maybe MyConfigRequestAccessLicenseTypes)
 mcraLicenseTypes
   = lens _mcraLicenseTypes
       (\ s a -> s{_mcraLicenseTypes = a})
 
 -- | The volume to request concurrent\/download restrictions for.
-mcraVolumeId :: Lens' MyConfigRequestAccess' Text
+mcraVolumeId :: Lens' MyConfigRequestAccess Text
 mcraVolumeId
   = lens _mcraVolumeId (\ s a -> s{_mcraVolumeId = a})
 
 -- | String to identify the originator of this request.
-mcraSource :: Lens' MyConfigRequestAccess' Text
+mcraSource :: Lens' MyConfigRequestAccess Text
 mcraSource
   = lens _mcraSource (\ s a -> s{_mcraSource = a})
 
 -- | The client nonce value.
-mcraNonce :: Lens' MyConfigRequestAccess' Text
+mcraNonce :: Lens' MyConfigRequestAccess Text
 mcraNonce
   = lens _mcraNonce (\ s a -> s{_mcraNonce = a})
 
-instance GoogleRequest MyConfigRequestAccess' where
-        type Rs MyConfigRequestAccess' = RequestAccess
-        requestClient MyConfigRequestAccess'{..}
+instance GoogleRequest MyConfigRequestAccess where
+        type Rs MyConfigRequestAccess = RequestAccess
+        requestClient MyConfigRequestAccess{..}
           = go (Just _mcraSource) (Just _mcraVolumeId)
               (Just _mcraNonce)
               (Just _mcraCpksver)

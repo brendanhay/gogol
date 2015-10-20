@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.RegionOperations.List
       RegionOperationsListResource
 
     -- * Creating a Request
-    , regionOperationsList'
-    , RegionOperationsList'
+    , regionOperationsList
+    , RegionOperationsList
 
     -- * Request Lenses
     , rolProject
@@ -45,7 +45,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.regionOperations.list@ method which the
--- 'RegionOperationsList'' request conforms to.
+-- 'RegionOperationsList' request conforms to.
 type RegionOperationsListResource =
      Capture "project" Text :>
        "regions" :>
@@ -59,8 +59,8 @@ type RegionOperationsListResource =
 -- | Retrieves the list of Operation resources contained within the specified
 -- region.
 --
--- /See:/ 'regionOperationsList'' smart constructor.
-data RegionOperationsList' = RegionOperationsList'
+-- /See:/ 'regionOperationsList' smart constructor.
+data RegionOperationsList = RegionOperationsList
     { _rolProject    :: !Text
     , _rolFilter     :: !(Maybe Text)
     , _rolRegion     :: !Text
@@ -68,7 +68,7 @@ data RegionOperationsList' = RegionOperationsList'
     , _rolMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RegionOperationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'RegionOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,12 +81,12 @@ data RegionOperationsList' = RegionOperationsList'
 -- * 'rolPageToken'
 --
 -- * 'rolMaxResults'
-regionOperationsList'
+regionOperationsList
     :: Text -- ^ 'rolProject'
     -> Text -- ^ 'rolRegion'
-    -> RegionOperationsList'
-regionOperationsList' pRolProject_ pRolRegion_ =
-    RegionOperationsList'
+    -> RegionOperationsList
+regionOperationsList pRolProject_ pRolRegion_ =
+    RegionOperationsList
     { _rolProject = pRolProject_
     , _rolFilter = Nothing
     , _rolRegion = pRolRegion_
@@ -95,7 +95,7 @@ regionOperationsList' pRolProject_ pRolRegion_ =
     }
 
 -- | Project ID for this request.
-rolProject :: Lens' RegionOperationsList' Text
+rolProject :: Lens' RegionOperationsList Text
 rolProject
   = lens _rolProject (\ s a -> s{_rolProject = a})
 
@@ -110,31 +110,31 @@ rolProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-rolFilter :: Lens' RegionOperationsList' (Maybe Text)
+rolFilter :: Lens' RegionOperationsList (Maybe Text)
 rolFilter
   = lens _rolFilter (\ s a -> s{_rolFilter = a})
 
 -- | Name of the region scoping this request.
-rolRegion :: Lens' RegionOperationsList' Text
+rolRegion :: Lens' RegionOperationsList Text
 rolRegion
   = lens _rolRegion (\ s a -> s{_rolRegion = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-rolPageToken :: Lens' RegionOperationsList' (Maybe Text)
+rolPageToken :: Lens' RegionOperationsList (Maybe Text)
 rolPageToken
   = lens _rolPageToken (\ s a -> s{_rolPageToken = a})
 
 -- | Maximum count of results to be returned.
-rolMaxResults :: Lens' RegionOperationsList' Word32
+rolMaxResults :: Lens' RegionOperationsList Word32
 rolMaxResults
   = lens _rolMaxResults
       (\ s a -> s{_rolMaxResults = a})
 
-instance GoogleRequest RegionOperationsList' where
-        type Rs RegionOperationsList' = OperationList
-        requestClient RegionOperationsList'{..}
+instance GoogleRequest RegionOperationsList where
+        type Rs RegionOperationsList = OperationList
+        requestClient RegionOperationsList{..}
           = go _rolProject _rolRegion _rolFilter _rolPageToken
               (Just _rolMaxResults)
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Get
       JobsGetResource
 
     -- * Creating a Request
-    , jobsGet'
-    , JobsGet'
+    , jobsGet
+    , JobsGet
 
     -- * Request Lenses
     , jgXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeReporting.Types
 
 -- | A resource alias for @youtubereporting.jobs.get@ method which the
--- 'JobsGet'' request conforms to.
+-- 'JobsGet' request conforms to.
 type JobsGetResource =
      "v1" :>
        "jobs" :>
@@ -65,8 +65,8 @@ type JobsGetResource =
 
 -- | Gets a job.
 --
--- /See:/ 'jobsGet'' smart constructor.
-data JobsGet' = JobsGet'
+-- /See:/ 'jobsGet' smart constructor.
+data JobsGet = JobsGet
     { _jgXgafv                  :: !(Maybe Text)
     , _jgJobId                  :: !Text
     , _jgUploadProtocol         :: !(Maybe Text)
@@ -78,7 +78,7 @@ data JobsGet' = JobsGet'
     , _jgCallback               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'JobsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'JobsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -99,11 +99,11 @@ data JobsGet' = JobsGet'
 -- * 'jgBearerToken'
 --
 -- * 'jgCallback'
-jobsGet'
+jobsGet
     :: Text -- ^ 'jgJobId'
-    -> JobsGet'
-jobsGet' pJgJobId_ =
-    JobsGet'
+    -> JobsGet
+jobsGet pJgJobId_ =
+    JobsGet
     { _jgXgafv = Nothing
     , _jgJobId = pJgJobId_
     , _jgUploadProtocol = Nothing
@@ -116,55 +116,55 @@ jobsGet' pJgJobId_ =
     }
 
 -- | V1 error format.
-jgXgafv :: Lens' JobsGet' (Maybe Text)
+jgXgafv :: Lens' JobsGet (Maybe Text)
 jgXgafv = lens _jgXgafv (\ s a -> s{_jgXgafv = a})
 
 -- | The ID of the job to retrieve.
-jgJobId :: Lens' JobsGet' Text
+jgJobId :: Lens' JobsGet Text
 jgJobId = lens _jgJobId (\ s a -> s{_jgJobId = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-jgUploadProtocol :: Lens' JobsGet' (Maybe Text)
+jgUploadProtocol :: Lens' JobsGet (Maybe Text)
 jgUploadProtocol
   = lens _jgUploadProtocol
       (\ s a -> s{_jgUploadProtocol = a})
 
 -- | Pretty-print response.
-jgPp :: Lens' JobsGet' Bool
+jgPp :: Lens' JobsGet Bool
 jgPp = lens _jgPp (\ s a -> s{_jgPp = a})
 
 -- | OAuth access token.
-jgAccessToken :: Lens' JobsGet' (Maybe Text)
+jgAccessToken :: Lens' JobsGet (Maybe Text)
 jgAccessToken
   = lens _jgAccessToken
       (\ s a -> s{_jgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-jgUploadType :: Lens' JobsGet' (Maybe Text)
+jgUploadType :: Lens' JobsGet (Maybe Text)
 jgUploadType
   = lens _jgUploadType (\ s a -> s{_jgUploadType = a})
 
 -- | The content owner\'s external ID on which behalf the user is acting on.
 -- If not set, the user is acting for himself (his own channel).
-jgOnBehalfOfContentOwner :: Lens' JobsGet' (Maybe Text)
+jgOnBehalfOfContentOwner :: Lens' JobsGet (Maybe Text)
 jgOnBehalfOfContentOwner
   = lens _jgOnBehalfOfContentOwner
       (\ s a -> s{_jgOnBehalfOfContentOwner = a})
 
 -- | OAuth bearer token.
-jgBearerToken :: Lens' JobsGet' (Maybe Text)
+jgBearerToken :: Lens' JobsGet (Maybe Text)
 jgBearerToken
   = lens _jgBearerToken
       (\ s a -> s{_jgBearerToken = a})
 
 -- | JSONP
-jgCallback :: Lens' JobsGet' (Maybe Text)
+jgCallback :: Lens' JobsGet (Maybe Text)
 jgCallback
   = lens _jgCallback (\ s a -> s{_jgCallback = a})
 
-instance GoogleRequest JobsGet' where
-        type Rs JobsGet' = Job
-        requestClient JobsGet'{..}
+instance GoogleRequest JobsGet where
+        type Rs JobsGet = Job
+        requestClient JobsGet{..}
           = go _jgJobId _jgXgafv _jgUploadProtocol (Just _jgPp)
               _jgAccessToken
               _jgUploadType

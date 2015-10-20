@@ -30,19 +30,19 @@ module Network.Google.Resource.Games.Rooms.Decline
       RoomsDeclineResource
 
     -- * Creating a Request
-    , roomsDecline'
-    , RoomsDecline'
+    , roomsDecline
+    , RoomsDecline
 
     -- * Request Lenses
-    , rdRoomId
-    , rdLanguage
+    , rooRoomId
+    , rooLanguage
     ) where
 
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.rooms.decline@ method which the
--- 'RoomsDecline'' request conforms to.
+-- 'RoomsDecline' request conforms to.
 type RoomsDeclineResource =
      "rooms" :>
        Capture "roomId" Text :>
@@ -53,41 +53,42 @@ type RoomsDeclineResource =
 -- | Decline an invitation to join a room. For internal use by the Games SDK
 -- only. Calling this method directly is unsupported.
 --
--- /See:/ 'roomsDecline'' smart constructor.
-data RoomsDecline' = RoomsDecline'
-    { _rdRoomId   :: !Text
-    , _rdLanguage :: !(Maybe Text)
+-- /See:/ 'roomsDecline' smart constructor.
+data RoomsDecline = RoomsDecline
+    { _rooRoomId   :: !Text
+    , _rooLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoomsDecline'' with the minimum fields required to make a request.
+-- | Creates a value of 'RoomsDecline' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rdRoomId'
+-- * 'rooRoomId'
 --
--- * 'rdLanguage'
-roomsDecline'
-    :: Text -- ^ 'rdRoomId'
-    -> RoomsDecline'
-roomsDecline' pRdRoomId_ =
-    RoomsDecline'
-    { _rdRoomId = pRdRoomId_
-    , _rdLanguage = Nothing
+-- * 'rooLanguage'
+roomsDecline
+    :: Text -- ^ 'rooRoomId'
+    -> RoomsDecline
+roomsDecline pRooRoomId_ =
+    RoomsDecline
+    { _rooRoomId = pRooRoomId_
+    , _rooLanguage = Nothing
     }
 
 -- | The ID of the room.
-rdRoomId :: Lens' RoomsDecline' Text
-rdRoomId = lens _rdRoomId (\ s a -> s{_rdRoomId = a})
+rooRoomId :: Lens' RoomsDecline Text
+rooRoomId
+  = lens _rooRoomId (\ s a -> s{_rooRoomId = a})
 
 -- | The preferred language to use for strings returned by this method.
-rdLanguage :: Lens' RoomsDecline' (Maybe Text)
-rdLanguage
-  = lens _rdLanguage (\ s a -> s{_rdLanguage = a})
+rooLanguage :: Lens' RoomsDecline (Maybe Text)
+rooLanguage
+  = lens _rooLanguage (\ s a -> s{_rooLanguage = a})
 
-instance GoogleRequest RoomsDecline' where
-        type Rs RoomsDecline' = Room
-        requestClient RoomsDecline'{..}
-          = go _rdRoomId _rdLanguage (Just AltJSON)
+instance GoogleRequest RoomsDecline where
+        type Rs RoomsDecline = Room
+        requestClient RoomsDecline{..}
+          = go _rooRoomId _rooLanguage (Just AltJSON)
               gamesService
           where go
                   = buildClient (Proxy :: Proxy RoomsDeclineResource)

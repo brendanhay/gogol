@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.InstanceTemplates.List
       InstanceTemplatesListResource
 
     -- * Creating a Request
-    , instanceTemplatesList'
-    , InstanceTemplatesList'
+    , instanceTemplatesList
+    , InstanceTemplatesList
 
     -- * Request Lenses
     , itlProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceTemplates.list@ method which the
--- 'InstanceTemplatesList'' request conforms to.
+-- 'InstanceTemplatesList' request conforms to.
 type InstanceTemplatesListResource =
      Capture "project" Text :>
        "global" :>
@@ -58,15 +58,15 @@ type InstanceTemplatesListResource =
 -- | Retrieves a list of instance templates that are contained within the
 -- specified project and zone.
 --
--- /See:/ 'instanceTemplatesList'' smart constructor.
-data InstanceTemplatesList' = InstanceTemplatesList'
+-- /See:/ 'instanceTemplatesList' smart constructor.
+data InstanceTemplatesList = InstanceTemplatesList
     { _itlProject    :: !Text
     , _itlFilter     :: !(Maybe Text)
     , _itlPageToken  :: !(Maybe Text)
     , _itlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceTemplatesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceTemplatesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,11 +77,11 @@ data InstanceTemplatesList' = InstanceTemplatesList'
 -- * 'itlPageToken'
 --
 -- * 'itlMaxResults'
-instanceTemplatesList'
+instanceTemplatesList
     :: Text -- ^ 'itlProject'
-    -> InstanceTemplatesList'
-instanceTemplatesList' pItlProject_ =
-    InstanceTemplatesList'
+    -> InstanceTemplatesList
+instanceTemplatesList pItlProject_ =
+    InstanceTemplatesList
     { _itlProject = pItlProject_
     , _itlFilter = Nothing
     , _itlPageToken = Nothing
@@ -89,7 +89,7 @@ instanceTemplatesList' pItlProject_ =
     }
 
 -- | The project ID for this request.
-itlProject :: Lens' InstanceTemplatesList' Text
+itlProject :: Lens' InstanceTemplatesList Text
 itlProject
   = lens _itlProject (\ s a -> s{_itlProject = a})
 
@@ -104,26 +104,26 @@ itlProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-itlFilter :: Lens' InstanceTemplatesList' (Maybe Text)
+itlFilter :: Lens' InstanceTemplatesList (Maybe Text)
 itlFilter
   = lens _itlFilter (\ s a -> s{_itlFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-itlPageToken :: Lens' InstanceTemplatesList' (Maybe Text)
+itlPageToken :: Lens' InstanceTemplatesList (Maybe Text)
 itlPageToken
   = lens _itlPageToken (\ s a -> s{_itlPageToken = a})
 
 -- | Maximum count of results to be returned.
-itlMaxResults :: Lens' InstanceTemplatesList' Word32
+itlMaxResults :: Lens' InstanceTemplatesList Word32
 itlMaxResults
   = lens _itlMaxResults
       (\ s a -> s{_itlMaxResults = a})
 
-instance GoogleRequest InstanceTemplatesList' where
-        type Rs InstanceTemplatesList' = InstanceTemplateList
-        requestClient InstanceTemplatesList'{..}
+instance GoogleRequest InstanceTemplatesList where
+        type Rs InstanceTemplatesList = InstanceTemplateList
+        requestClient InstanceTemplatesList{..}
           = go _itlProject _itlFilter _itlPageToken
               (Just _itlMaxResults)
               (Just AltJSON)

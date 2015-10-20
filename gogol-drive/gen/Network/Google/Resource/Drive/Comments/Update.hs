@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Comments.Update
       CommentsUpdateResource
 
     -- * Creating a Request
-    , commentsUpdate'
-    , CommentsUpdate'
+    , commentsUpdate
+    , CommentsUpdate
 
     -- * Request Lenses
     , cuPayload
@@ -42,7 +42,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.comments.update@ method which the
--- 'CommentsUpdate'' request conforms to.
+-- 'CommentsUpdate' request conforms to.
 type CommentsUpdateResource =
      "files" :>
        Capture "fileId" Text :>
@@ -53,14 +53,14 @@ type CommentsUpdateResource =
 
 -- | Updates an existing comment.
 --
--- /See:/ 'commentsUpdate'' smart constructor.
-data CommentsUpdate' = CommentsUpdate'
+-- /See:/ 'commentsUpdate' smart constructor.
+data CommentsUpdate = CommentsUpdate
     { _cuPayload   :: !Comment
     , _cuFileId    :: !Text
     , _cuCommentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data CommentsUpdate' = CommentsUpdate'
 -- * 'cuFileId'
 --
 -- * 'cuCommentId'
-commentsUpdate'
+commentsUpdate
     :: Comment -- ^ 'cuPayload'
     -> Text -- ^ 'cuFileId'
     -> Text -- ^ 'cuCommentId'
-    -> CommentsUpdate'
-commentsUpdate' pCuPayload_ pCuFileId_ pCuCommentId_ =
-    CommentsUpdate'
+    -> CommentsUpdate
+commentsUpdate pCuPayload_ pCuFileId_ pCuCommentId_ =
+    CommentsUpdate
     { _cuPayload = pCuPayload_
     , _cuFileId = pCuFileId_
     , _cuCommentId = pCuCommentId_
     }
 
 -- | Multipart request metadata.
-cuPayload :: Lens' CommentsUpdate' Comment
+cuPayload :: Lens' CommentsUpdate Comment
 cuPayload
   = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
 -- | The ID of the file.
-cuFileId :: Lens' CommentsUpdate' Text
+cuFileId :: Lens' CommentsUpdate Text
 cuFileId = lens _cuFileId (\ s a -> s{_cuFileId = a})
 
 -- | The ID of the comment.
-cuCommentId :: Lens' CommentsUpdate' Text
+cuCommentId :: Lens' CommentsUpdate Text
 cuCommentId
   = lens _cuCommentId (\ s a -> s{_cuCommentId = a})
 
-instance GoogleRequest CommentsUpdate' where
-        type Rs CommentsUpdate' = Comment
-        requestClient CommentsUpdate'{..}
+instance GoogleRequest CommentsUpdate where
+        type Rs CommentsUpdate = Comment
+        requestClient CommentsUpdate{..}
           = go _cuFileId _cuCommentId (Just AltJSON) _cuPayload
               driveService
           where go

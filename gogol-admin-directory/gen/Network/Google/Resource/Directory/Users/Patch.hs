@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Users.Patch
       UsersPatchResource
 
     -- * Creating a Request
-    , usersPatch'
-    , UsersPatch'
+    , usersPatch
+    , UsersPatch
 
     -- * Request Lenses
     , upPayload
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.users.patch@ method which the
--- 'UsersPatch'' request conforms to.
+-- 'UsersPatch' request conforms to.
 type UsersPatchResource =
      "users" :>
        Capture "userKey" Text :>
@@ -50,43 +50,43 @@ type UsersPatchResource =
 
 -- | update user. This method supports patch semantics.
 --
--- /See:/ 'usersPatch'' smart constructor.
-data UsersPatch' = UsersPatch'
+-- /See:/ 'usersPatch' smart constructor.
+data UsersPatch = UsersPatch
     { _upPayload :: !User
     , _upUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'upPayload'
 --
 -- * 'upUserKey'
-usersPatch'
+usersPatch
     :: User -- ^ 'upPayload'
     -> Text -- ^ 'upUserKey'
-    -> UsersPatch'
-usersPatch' pUpPayload_ pUpUserKey_ =
-    UsersPatch'
+    -> UsersPatch
+usersPatch pUpPayload_ pUpUserKey_ =
+    UsersPatch
     { _upPayload = pUpPayload_
     , _upUserKey = pUpUserKey_
     }
 
 -- | Multipart request metadata.
-upPayload :: Lens' UsersPatch' User
+upPayload :: Lens' UsersPatch User
 upPayload
   = lens _upPayload (\ s a -> s{_upPayload = a})
 
 -- | Email or immutable Id of the user. If Id, it should match with id of
 -- user object
-upUserKey :: Lens' UsersPatch' Text
+upUserKey :: Lens' UsersPatch Text
 upUserKey
   = lens _upUserKey (\ s a -> s{_upUserKey = a})
 
-instance GoogleRequest UsersPatch' where
-        type Rs UsersPatch' = User
-        requestClient UsersPatch'{..}
+instance GoogleRequest UsersPatch where
+        type Rs UsersPatch = User
+        requestClient UsersPatch{..}
           = go _upUserKey (Just AltJSON) _upPayload
               directoryService
           where go

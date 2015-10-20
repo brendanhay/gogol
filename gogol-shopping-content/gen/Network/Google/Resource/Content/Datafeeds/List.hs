@@ -29,20 +29,20 @@ module Network.Google.Resource.Content.Datafeeds.List
       DatafeedsListResource
 
     -- * Creating a Request
-    , datafeedsList'
-    , DatafeedsList'
+    , datafeedsList
+    , DatafeedsList
 
     -- * Request Lenses
-    , dlMerchantId
-    , dlPageToken
-    , dlMaxResults
+    , datMerchantId
+    , datPageToken
+    , datMaxResults
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.datafeeds.list@ method which the
--- 'DatafeedsList'' request conforms to.
+-- 'DatafeedsList' request conforms to.
 type DatafeedsListResource =
      Capture "merchantId" Word64 :>
        "datafeeds" :>
@@ -53,52 +53,54 @@ type DatafeedsListResource =
 
 -- | Lists the datafeeds in your Merchant Center account.
 --
--- /See:/ 'datafeedsList'' smart constructor.
-data DatafeedsList' = DatafeedsList'
-    { _dlMerchantId :: !Word64
-    , _dlPageToken  :: !(Maybe Text)
-    , _dlMaxResults :: !(Maybe Word32)
+-- /See:/ 'datafeedsList' smart constructor.
+data DatafeedsList = DatafeedsList
+    { _datMerchantId :: !Word64
+    , _datPageToken  :: !(Maybe Text)
+    , _datMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatafeedsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatafeedsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dlMerchantId'
+-- * 'datMerchantId'
 --
--- * 'dlPageToken'
+-- * 'datPageToken'
 --
--- * 'dlMaxResults'
-datafeedsList'
-    :: Word64 -- ^ 'dlMerchantId'
-    -> DatafeedsList'
-datafeedsList' pDlMerchantId_ =
-    DatafeedsList'
-    { _dlMerchantId = pDlMerchantId_
-    , _dlPageToken = Nothing
-    , _dlMaxResults = Nothing
+-- * 'datMaxResults'
+datafeedsList
+    :: Word64 -- ^ 'datMerchantId'
+    -> DatafeedsList
+datafeedsList pDatMerchantId_ =
+    DatafeedsList
+    { _datMerchantId = pDatMerchantId_
+    , _datPageToken = Nothing
+    , _datMaxResults = Nothing
     }
 
 -- | The ID of the managing account.
-dlMerchantId :: Lens' DatafeedsList' Word64
-dlMerchantId
-  = lens _dlMerchantId (\ s a -> s{_dlMerchantId = a})
+datMerchantId :: Lens' DatafeedsList Word64
+datMerchantId
+  = lens _datMerchantId
+      (\ s a -> s{_datMerchantId = a})
 
 -- | The token returned by the previous request.
-dlPageToken :: Lens' DatafeedsList' (Maybe Text)
-dlPageToken
-  = lens _dlPageToken (\ s a -> s{_dlPageToken = a})
+datPageToken :: Lens' DatafeedsList (Maybe Text)
+datPageToken
+  = lens _datPageToken (\ s a -> s{_datPageToken = a})
 
 -- | The maximum number of products to return in the response, used for
 -- paging.
-dlMaxResults :: Lens' DatafeedsList' (Maybe Word32)
-dlMaxResults
-  = lens _dlMaxResults (\ s a -> s{_dlMaxResults = a})
+datMaxResults :: Lens' DatafeedsList (Maybe Word32)
+datMaxResults
+  = lens _datMaxResults
+      (\ s a -> s{_datMaxResults = a})
 
-instance GoogleRequest DatafeedsList' where
-        type Rs DatafeedsList' = DatafeedsListResponse
-        requestClient DatafeedsList'{..}
-          = go _dlMerchantId _dlPageToken _dlMaxResults
+instance GoogleRequest DatafeedsList where
+        type Rs DatafeedsList = DatafeedsListResponse
+        requestClient DatafeedsList{..}
+          = go _datMerchantId _datPageToken _datMaxResults
               (Just AltJSON)
               shoppingContentService
           where go

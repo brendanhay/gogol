@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Changes.Get
       ChangesGetResource
 
     -- * Creating a Request
-    , changesGet'
-    , ChangesGet'
+    , changesGet
+    , ChangesGet
 
     -- * Request Lenses
     , cgChangeId
@@ -40,7 +40,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.changes.get@ method which the
--- 'ChangesGet'' request conforms to.
+-- 'ChangesGet' request conforms to.
 type ChangesGetResource =
      "changes" :>
        Capture "changeId" Text :>
@@ -48,32 +48,32 @@ type ChangesGetResource =
 
 -- | Gets a specific change.
 --
--- /See:/ 'changesGet'' smart constructor.
-newtype ChangesGet' = ChangesGet'
+-- /See:/ 'changesGet' smart constructor.
+newtype ChangesGet = ChangesGet
     { _cgChangeId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChangesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChangesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cgChangeId'
-changesGet'
+changesGet
     :: Text -- ^ 'cgChangeId'
-    -> ChangesGet'
-changesGet' pCgChangeId_ =
-    ChangesGet'
+    -> ChangesGet
+changesGet pCgChangeId_ =
+    ChangesGet
     { _cgChangeId = pCgChangeId_
     }
 
 -- | The ID of the change.
-cgChangeId :: Lens' ChangesGet' Text
+cgChangeId :: Lens' ChangesGet Text
 cgChangeId
   = lens _cgChangeId (\ s a -> s{_cgChangeId = a})
 
-instance GoogleRequest ChangesGet' where
-        type Rs ChangesGet' = Change
-        requestClient ChangesGet'{..}
+instance GoogleRequest ChangesGet where
+        type Rs ChangesGet = Change
+        requestClient ChangesGet{..}
           = go _cgChangeId (Just AltJSON) driveService
           where go
                   = buildClient (Proxy :: Proxy ChangesGetResource)

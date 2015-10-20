@@ -29,8 +29,8 @@ module Network.Google.Resource.SQL.Instances.StartReplica
       InstancesStartReplicaResource
 
     -- * Creating a Request
-    , instancesStartReplica'
-    , InstancesStartReplica'
+    , instancesStartReplica
+    , InstancesStartReplica
 
     -- * Request Lenses
     , iProject
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.startReplica@ method which the
--- 'InstancesStartReplica'' request conforms to.
+-- 'InstancesStartReplica' request conforms to.
 type InstancesStartReplicaResource =
      "projects" :>
        Capture "project" Text :>
@@ -52,41 +52,41 @@ type InstancesStartReplicaResource =
 
 -- | Starts the replication in the read replica instance.
 --
--- /See:/ 'instancesStartReplica'' smart constructor.
-data InstancesStartReplica' = InstancesStartReplica'
+-- /See:/ 'instancesStartReplica' smart constructor.
+data InstancesStartReplica = InstancesStartReplica
     { _iProject  :: !Text
     , _iInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesStartReplica'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesStartReplica' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'iProject'
 --
 -- * 'iInstance'
-instancesStartReplica'
+instancesStartReplica
     :: Text -- ^ 'iProject'
     -> Text -- ^ 'iInstance'
-    -> InstancesStartReplica'
-instancesStartReplica' pIProject_ pIInstance_ =
-    InstancesStartReplica'
+    -> InstancesStartReplica
+instancesStartReplica pIProject_ pIInstance_ =
+    InstancesStartReplica
     { _iProject = pIProject_
     , _iInstance = pIInstance_
     }
 
 -- | ID of the project that contains the read replica.
-iProject :: Lens' InstancesStartReplica' Text
+iProject :: Lens' InstancesStartReplica Text
 iProject = lens _iProject (\ s a -> s{_iProject = a})
 
 -- | Cloud SQL read replica instance name.
-iInstance :: Lens' InstancesStartReplica' Text
+iInstance :: Lens' InstancesStartReplica Text
 iInstance
   = lens _iInstance (\ s a -> s{_iInstance = a})
 
-instance GoogleRequest InstancesStartReplica' where
-        type Rs InstancesStartReplica' = Operation
-        requestClient InstancesStartReplica'{..}
+instance GoogleRequest InstancesStartReplica where
+        type Rs InstancesStartReplica = Operation
+        requestClient InstancesStartReplica{..}
           = go _iProject _iInstance (Just AltJSON)
               sQLAdminService
           where go

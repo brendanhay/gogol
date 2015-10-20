@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Events.ResetAll
       EventsResetAllResource
 
     -- * Creating a Request
-    , eventsResetAll'
-    , EventsResetAll'
+    , eventsResetAll
+    , EventsResetAll
 
     ) where
 
@@ -40,7 +40,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.events.resetAll@ method which the
--- 'EventsResetAll'' request conforms to.
+-- 'EventsResetAll' request conforms to.
 type EventsResetAllResource =
      "events" :>
        "reset" :>
@@ -50,20 +50,20 @@ type EventsResetAllResource =
 -- player. This method is only accessible to whitelisted tester accounts
 -- for your application. All quests for this player will also be reset.
 --
--- /See:/ 'eventsResetAll'' smart constructor.
-data EventsResetAll' =
-    EventsResetAll'
+-- /See:/ 'eventsResetAll' smart constructor.
+data EventsResetAll =
+    EventsResetAll
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventsResetAll'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventsResetAll' with the minimum fields required to make a request.
 --
-eventsResetAll'
-    :: EventsResetAll'
-eventsResetAll' = EventsResetAll'
+eventsResetAll
+    :: EventsResetAll
+eventsResetAll = EventsResetAll
 
-instance GoogleRequest EventsResetAll' where
-        type Rs EventsResetAll' = ()
-        requestClient EventsResetAll'{}
+instance GoogleRequest EventsResetAll where
+        type Rs EventsResetAll = ()
+        requestClient EventsResetAll{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy EventsResetAllResource)

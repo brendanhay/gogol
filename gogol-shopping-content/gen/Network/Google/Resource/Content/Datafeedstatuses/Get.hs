@@ -29,19 +29,19 @@ module Network.Google.Resource.Content.Datafeedstatuses.Get
       DatafeedstatusesGetResource
 
     -- * Creating a Request
-    , datafeedstatusesGet'
-    , DatafeedstatusesGet'
+    , datafeedstatusesGet
+    , DatafeedstatusesGet
 
     -- * Request Lenses
-    , dMerchantId
-    , dDatafeedId
+    , dggMerchantId
+    , dggDatafeedId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.datafeedstatuses.get@ method which the
--- 'DatafeedstatusesGet'' request conforms to.
+-- 'DatafeedstatusesGet' request conforms to.
 type DatafeedstatusesGetResource =
      Capture "merchantId" Word64 :>
        "datafeedstatuses" :>
@@ -51,41 +51,43 @@ type DatafeedstatusesGetResource =
 
 -- | Retrieves the status of a datafeed from your Merchant Center account.
 --
--- /See:/ 'datafeedstatusesGet'' smart constructor.
-data DatafeedstatusesGet' = DatafeedstatusesGet'
-    { _dMerchantId :: !Word64
-    , _dDatafeedId :: !Word64
+-- /See:/ 'datafeedstatusesGet' smart constructor.
+data DatafeedstatusesGet = DatafeedstatusesGet
+    { _dggMerchantId :: !Word64
+    , _dggDatafeedId :: !Word64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatafeedstatusesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatafeedstatusesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dMerchantId'
+-- * 'dggMerchantId'
 --
--- * 'dDatafeedId'
-datafeedstatusesGet'
-    :: Word64 -- ^ 'dMerchantId'
-    -> Word64 -- ^ 'dDatafeedId'
-    -> DatafeedstatusesGet'
-datafeedstatusesGet' pDMerchantId_ pDDatafeedId_ =
-    DatafeedstatusesGet'
-    { _dMerchantId = pDMerchantId_
-    , _dDatafeedId = pDDatafeedId_
+-- * 'dggDatafeedId'
+datafeedstatusesGet
+    :: Word64 -- ^ 'dggMerchantId'
+    -> Word64 -- ^ 'dggDatafeedId'
+    -> DatafeedstatusesGet
+datafeedstatusesGet pDggMerchantId_ pDggDatafeedId_ =
+    DatafeedstatusesGet
+    { _dggMerchantId = pDggMerchantId_
+    , _dggDatafeedId = pDggDatafeedId_
     }
 
-dMerchantId :: Lens' DatafeedstatusesGet' Word64
-dMerchantId
-  = lens _dMerchantId (\ s a -> s{_dMerchantId = a})
+dggMerchantId :: Lens' DatafeedstatusesGet Word64
+dggMerchantId
+  = lens _dggMerchantId
+      (\ s a -> s{_dggMerchantId = a})
 
-dDatafeedId :: Lens' DatafeedstatusesGet' Word64
-dDatafeedId
-  = lens _dDatafeedId (\ s a -> s{_dDatafeedId = a})
+dggDatafeedId :: Lens' DatafeedstatusesGet Word64
+dggDatafeedId
+  = lens _dggDatafeedId
+      (\ s a -> s{_dggDatafeedId = a})
 
-instance GoogleRequest DatafeedstatusesGet' where
-        type Rs DatafeedstatusesGet' = DatafeedStatus
-        requestClient DatafeedstatusesGet'{..}
-          = go _dMerchantId _dDatafeedId (Just AltJSON)
+instance GoogleRequest DatafeedstatusesGet where
+        type Rs DatafeedstatusesGet = DatafeedStatus
+        requestClient DatafeedstatusesGet{..}
+          = go _dggMerchantId _dggDatafeedId (Just AltJSON)
               shoppingContentService
           where go
                   = buildClient

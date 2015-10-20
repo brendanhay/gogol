@@ -31,8 +31,8 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Delete
       InstallsDeleteResource
 
     -- * Creating a Request
-    , installsDelete'
-    , InstallsDelete'
+    , installsDelete
+    , InstallsDelete
 
     -- * Request Lenses
     , idEnterpriseId
@@ -45,7 +45,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.installs.delete@ method which the
--- 'InstallsDelete'' request conforms to.
+-- 'InstallsDelete' request conforms to.
 type InstallsDeleteResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -61,15 +61,15 @@ type InstallsDeleteResource =
 -- still show the app as installed on the device until it is actually
 -- removed.
 --
--- /See:/ 'installsDelete'' smart constructor.
-data InstallsDelete' = InstallsDelete'
+-- /See:/ 'installsDelete' smart constructor.
+data InstallsDelete = InstallsDelete
     { _idEnterpriseId :: !Text
     , _idUserId       :: !Text
     , _idInstallId    :: !Text
     , _idDeviceId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstallsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstallsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,14 +80,14 @@ data InstallsDelete' = InstallsDelete'
 -- * 'idInstallId'
 --
 -- * 'idDeviceId'
-installsDelete'
+installsDelete
     :: Text -- ^ 'idEnterpriseId'
     -> Text -- ^ 'idUserId'
     -> Text -- ^ 'idInstallId'
     -> Text -- ^ 'idDeviceId'
-    -> InstallsDelete'
-installsDelete' pIdEnterpriseId_ pIdUserId_ pIdInstallId_ pIdDeviceId_ =
-    InstallsDelete'
+    -> InstallsDelete
+installsDelete pIdEnterpriseId_ pIdUserId_ pIdInstallId_ pIdDeviceId_ =
+    InstallsDelete
     { _idEnterpriseId = pIdEnterpriseId_
     , _idUserId = pIdUserId_
     , _idInstallId = pIdInstallId_
@@ -95,29 +95,29 @@ installsDelete' pIdEnterpriseId_ pIdUserId_ pIdInstallId_ pIdDeviceId_ =
     }
 
 -- | The ID of the enterprise.
-idEnterpriseId :: Lens' InstallsDelete' Text
+idEnterpriseId :: Lens' InstallsDelete Text
 idEnterpriseId
   = lens _idEnterpriseId
       (\ s a -> s{_idEnterpriseId = a})
 
 -- | The ID of the user.
-idUserId :: Lens' InstallsDelete' Text
+idUserId :: Lens' InstallsDelete Text
 idUserId = lens _idUserId (\ s a -> s{_idUserId = a})
 
 -- | The ID of the product represented by the install, e.g.
 -- \"app:com.google.android.gm\".
-idInstallId :: Lens' InstallsDelete' Text
+idInstallId :: Lens' InstallsDelete Text
 idInstallId
   = lens _idInstallId (\ s a -> s{_idInstallId = a})
 
 -- | The Android ID of the device.
-idDeviceId :: Lens' InstallsDelete' Text
+idDeviceId :: Lens' InstallsDelete Text
 idDeviceId
   = lens _idDeviceId (\ s a -> s{_idDeviceId = a})
 
-instance GoogleRequest InstallsDelete' where
-        type Rs InstallsDelete' = ()
-        requestClient InstallsDelete'{..}
+instance GoogleRequest InstallsDelete where
+        type Rs InstallsDelete = ()
+        requestClient InstallsDelete{..}
           = go _idEnterpriseId _idUserId _idDeviceId
               _idInstallId
               (Just AltJSON)

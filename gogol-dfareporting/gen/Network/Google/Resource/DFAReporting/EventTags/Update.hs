@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.EventTags.Update
       EventTagsUpdateResource
 
     -- * Creating a Request
-    , eventTagsUpdate'
-    , EventTagsUpdate'
+    , eventTagsUpdate
+    , EventTagsUpdate
 
     -- * Request Lenses
     , etuProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.eventTags.update@ method which the
--- 'EventTagsUpdate'' request conforms to.
+-- 'EventTagsUpdate' request conforms to.
 type EventTagsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type EventTagsUpdateResource =
 
 -- | Updates an existing event tag.
 --
--- /See:/ 'eventTagsUpdate'' smart constructor.
-data EventTagsUpdate' = EventTagsUpdate'
+-- /See:/ 'eventTagsUpdate' smart constructor.
+data EventTagsUpdate = EventTagsUpdate
     { _etuProFileId :: !Int64
     , _etuPayload   :: !EventTag
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventTagsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventTagsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'etuProFileId'
 --
 -- * 'etuPayload'
-eventTagsUpdate'
+eventTagsUpdate
     :: Int64 -- ^ 'etuProFileId'
     -> EventTag -- ^ 'etuPayload'
-    -> EventTagsUpdate'
-eventTagsUpdate' pEtuProFileId_ pEtuPayload_ =
-    EventTagsUpdate'
+    -> EventTagsUpdate
+eventTagsUpdate pEtuProFileId_ pEtuPayload_ =
+    EventTagsUpdate
     { _etuProFileId = pEtuProFileId_
     , _etuPayload = pEtuPayload_
     }
 
 -- | User profile ID associated with this request.
-etuProFileId :: Lens' EventTagsUpdate' Int64
+etuProFileId :: Lens' EventTagsUpdate Int64
 etuProFileId
   = lens _etuProFileId (\ s a -> s{_etuProFileId = a})
 
 -- | Multipart request metadata.
-etuPayload :: Lens' EventTagsUpdate' EventTag
+etuPayload :: Lens' EventTagsUpdate EventTag
 etuPayload
   = lens _etuPayload (\ s a -> s{_etuPayload = a})
 
-instance GoogleRequest EventTagsUpdate' where
-        type Rs EventTagsUpdate' = EventTag
-        requestClient EventTagsUpdate'{..}
+instance GoogleRequest EventTagsUpdate where
+        type Rs EventTagsUpdate = EventTag
+        requestClient EventTagsUpdate{..}
           = go _etuProFileId (Just AltJSON) _etuPayload
               dFAReportingService
           where go

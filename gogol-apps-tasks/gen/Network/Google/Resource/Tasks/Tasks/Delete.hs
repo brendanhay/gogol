@@ -29,8 +29,8 @@ module Network.Google.Resource.Tasks.Tasks.Delete
       TasksDeleteResource
 
     -- * Creating a Request
-    , tasksDelete'
-    , TasksDelete'
+    , tasksDelete
+    , TasksDelete
 
     -- * Request Lenses
     , tdTaskList
@@ -41,7 +41,7 @@ import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasks.delete@ method which the
--- 'TasksDelete'' request conforms to.
+-- 'TasksDelete' request conforms to.
 type TasksDeleteResource =
      "lists" :>
        Capture "tasklist" Text :>
@@ -51,41 +51,41 @@ type TasksDeleteResource =
 
 -- | Deletes the specified task from the task list.
 --
--- /See:/ 'tasksDelete'' smart constructor.
-data TasksDelete' = TasksDelete'
+-- /See:/ 'tasksDelete' smart constructor.
+data TasksDelete = TasksDelete
     { _tdTaskList :: !Text
     , _tdTask     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TasksDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'TasksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tdTaskList'
 --
 -- * 'tdTask'
-tasksDelete'
+tasksDelete
     :: Text -- ^ 'tdTaskList'
     -> Text -- ^ 'tdTask'
-    -> TasksDelete'
-tasksDelete' pTdTaskList_ pTdTask_ =
-    TasksDelete'
+    -> TasksDelete
+tasksDelete pTdTaskList_ pTdTask_ =
+    TasksDelete
     { _tdTaskList = pTdTaskList_
     , _tdTask = pTdTask_
     }
 
 -- | Task list identifier.
-tdTaskList :: Lens' TasksDelete' Text
+tdTaskList :: Lens' TasksDelete Text
 tdTaskList
   = lens _tdTaskList (\ s a -> s{_tdTaskList = a})
 
 -- | Task identifier.
-tdTask :: Lens' TasksDelete' Text
+tdTask :: Lens' TasksDelete Text
 tdTask = lens _tdTask (\ s a -> s{_tdTask = a})
 
-instance GoogleRequest TasksDelete' where
-        type Rs TasksDelete' = ()
-        requestClient TasksDelete'{..}
+instance GoogleRequest TasksDelete where
+        type Rs TasksDelete = ()
+        requestClient TasksDelete{..}
           = go _tdTaskList _tdTask (Just AltJSON)
               appsTasksService
           where go

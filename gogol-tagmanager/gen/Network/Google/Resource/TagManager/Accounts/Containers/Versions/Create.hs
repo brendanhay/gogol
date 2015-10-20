@@ -29,20 +29,20 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Create
       AccountsContainersVersionsCreateResource
 
     -- * Creating a Request
-    , accountsContainersVersionsCreate'
-    , AccountsContainersVersionsCreate'
+    , accountsContainersVersionsCreate
+    , AccountsContainersVersionsCreate
 
     -- * Request Lenses
-    , acvcContainerId
-    , acvcPayload
-    , acvcAccountId
+    , aContainerId
+    , aPayload
+    , aAccountId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.versions.create@ method which the
--- 'AccountsContainersVersionsCreate'' request conforms to.
+-- 'AccountsContainersVersionsCreate' request conforms to.
 type AccountsContainersVersionsCreateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -56,58 +56,55 @@ type AccountsContainersVersionsCreateResource =
 
 -- | Creates a Container Version.
 --
--- /See:/ 'accountsContainersVersionsCreate'' smart constructor.
-data AccountsContainersVersionsCreate' = AccountsContainersVersionsCreate'
-    { _acvcContainerId :: !Text
-    , _acvcPayload     :: !CreateContainerVersionRequestVersionOptions
-    , _acvcAccountId   :: !Text
+-- /See:/ 'accountsContainersVersionsCreate' smart constructor.
+data AccountsContainersVersionsCreate = AccountsContainersVersionsCreate
+    { _aContainerId :: !Text
+    , _aPayload     :: !CreateContainerVersionRequestVersionOptions
+    , _aAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersVersionsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersVersionsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acvcContainerId'
+-- * 'aContainerId'
 --
--- * 'acvcPayload'
+-- * 'aPayload'
 --
--- * 'acvcAccountId'
-accountsContainersVersionsCreate'
-    :: Text -- ^ 'acvcContainerId'
-    -> CreateContainerVersionRequestVersionOptions -- ^ 'acvcPayload'
-    -> Text -- ^ 'acvcAccountId'
-    -> AccountsContainersVersionsCreate'
-accountsContainersVersionsCreate' pAcvcContainerId_ pAcvcPayload_ pAcvcAccountId_ =
-    AccountsContainersVersionsCreate'
-    { _acvcContainerId = pAcvcContainerId_
-    , _acvcPayload = pAcvcPayload_
-    , _acvcAccountId = pAcvcAccountId_
+-- * 'aAccountId'
+accountsContainersVersionsCreate
+    :: Text -- ^ 'aContainerId'
+    -> CreateContainerVersionRequestVersionOptions -- ^ 'aPayload'
+    -> Text -- ^ 'aAccountId'
+    -> AccountsContainersVersionsCreate
+accountsContainersVersionsCreate pAContainerId_ pAPayload_ pAAccountId_ =
+    AccountsContainersVersionsCreate
+    { _aContainerId = pAContainerId_
+    , _aPayload = pAPayload_
+    , _aAccountId = pAAccountId_
     }
 
 -- | The GTM Container ID.
-acvcContainerId :: Lens' AccountsContainersVersionsCreate' Text
-acvcContainerId
-  = lens _acvcContainerId
-      (\ s a -> s{_acvcContainerId = a})
+aContainerId :: Lens' AccountsContainersVersionsCreate Text
+aContainerId
+  = lens _aContainerId (\ s a -> s{_aContainerId = a})
 
 -- | Multipart request metadata.
-acvcPayload :: Lens' AccountsContainersVersionsCreate' CreateContainerVersionRequestVersionOptions
-acvcPayload
-  = lens _acvcPayload (\ s a -> s{_acvcPayload = a})
+aPayload :: Lens' AccountsContainersVersionsCreate CreateContainerVersionRequestVersionOptions
+aPayload = lens _aPayload (\ s a -> s{_aPayload = a})
 
 -- | The GTM Account ID.
-acvcAccountId :: Lens' AccountsContainersVersionsCreate' Text
-acvcAccountId
-  = lens _acvcAccountId
-      (\ s a -> s{_acvcAccountId = a})
+aAccountId :: Lens' AccountsContainersVersionsCreate Text
+aAccountId
+  = lens _aAccountId (\ s a -> s{_aAccountId = a})
 
 instance GoogleRequest
-         AccountsContainersVersionsCreate' where
-        type Rs AccountsContainersVersionsCreate' =
+         AccountsContainersVersionsCreate where
+        type Rs AccountsContainersVersionsCreate =
              CreateContainerVersionResponse
-        requestClient AccountsContainersVersionsCreate'{..}
-          = go _acvcAccountId _acvcContainerId (Just AltJSON)
-              _acvcPayload
+        requestClient AccountsContainersVersionsCreate{..}
+          = go _aAccountId _aContainerId (Just AltJSON)
+              _aPayload
               tagManagerService
           where go
                   = buildClient

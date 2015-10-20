@@ -29,8 +29,8 @@ module Network.Google.Resource.Tasks.Tasks.List
       TasksListResource
 
     -- * Creating a Request
-    , tasksList'
-    , TasksList'
+    , tasksList
+    , TasksList
 
     -- * Request Lenses
     , tlDueMax
@@ -50,7 +50,7 @@ import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasks.list@ method which the
--- 'TasksList'' request conforms to.
+-- 'TasksList' request conforms to.
 type TasksListResource =
      "lists" :>
        Capture "tasklist" Text :>
@@ -69,8 +69,8 @@ type TasksListResource =
 
 -- | Returns all tasks in the specified task list.
 --
--- /See:/ 'tasksList'' smart constructor.
-data TasksList' = TasksList'
+-- /See:/ 'tasksList' smart constructor.
+data TasksList = TasksList
     { _tlDueMax        :: !(Maybe Text)
     , _tlShowDeleted   :: !(Maybe Bool)
     , _tlShowCompleted :: !(Maybe Bool)
@@ -84,7 +84,7 @@ data TasksList' = TasksList'
     , _tlMaxResults    :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TasksList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TasksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -109,11 +109,11 @@ data TasksList' = TasksList'
 -- * 'tlPageToken'
 --
 -- * 'tlMaxResults'
-tasksList'
+tasksList
     :: Text -- ^ 'tlTaskList'
-    -> TasksList'
-tasksList' pTlTaskList_ =
-    TasksList'
+    -> TasksList
+tasksList pTlTaskList_ =
+    TasksList
     { _tlDueMax = Nothing
     , _tlShowDeleted = Nothing
     , _tlShowCompleted = Nothing
@@ -129,37 +129,37 @@ tasksList' pTlTaskList_ =
 
 -- | Upper bound for a task\'s due date (as a RFC 3339 timestamp) to filter
 -- by. Optional. The default is not to filter by due date.
-tlDueMax :: Lens' TasksList' (Maybe Text)
+tlDueMax :: Lens' TasksList (Maybe Text)
 tlDueMax = lens _tlDueMax (\ s a -> s{_tlDueMax = a})
 
 -- | Flag indicating whether deleted tasks are returned in the result.
 -- Optional. The default is False.
-tlShowDeleted :: Lens' TasksList' (Maybe Bool)
+tlShowDeleted :: Lens' TasksList (Maybe Bool)
 tlShowDeleted
   = lens _tlShowDeleted
       (\ s a -> s{_tlShowDeleted = a})
 
 -- | Flag indicating whether completed tasks are returned in the result.
 -- Optional. The default is True.
-tlShowCompleted :: Lens' TasksList' (Maybe Bool)
+tlShowCompleted :: Lens' TasksList (Maybe Bool)
 tlShowCompleted
   = lens _tlShowCompleted
       (\ s a -> s{_tlShowCompleted = a})
 
 -- | Lower bound for a task\'s due date (as a RFC 3339 timestamp) to filter
 -- by. Optional. The default is not to filter by due date.
-tlDueMin :: Lens' TasksList' (Maybe Text)
+tlDueMin :: Lens' TasksList (Maybe Text)
 tlDueMin = lens _tlDueMin (\ s a -> s{_tlDueMin = a})
 
 -- | Flag indicating whether hidden tasks are returned in the result.
 -- Optional. The default is False.
-tlShowHidden :: Lens' TasksList' (Maybe Bool)
+tlShowHidden :: Lens' TasksList (Maybe Bool)
 tlShowHidden
   = lens _tlShowHidden (\ s a -> s{_tlShowHidden = a})
 
 -- | Upper bound for a task\'s completion date (as a RFC 3339 timestamp) to
 -- filter by. Optional. The default is not to filter by completion date.
-tlCompletedMax :: Lens' TasksList' (Maybe Text)
+tlCompletedMax :: Lens' TasksList (Maybe Text)
 tlCompletedMax
   = lens _tlCompletedMax
       (\ s a -> s{_tlCompletedMax = a})
@@ -167,36 +167,36 @@ tlCompletedMax
 -- | Lower bound for a task\'s last modification time (as a RFC 3339
 -- timestamp) to filter by. Optional. The default is not to filter by last
 -- modification time.
-tlUpdatedMin :: Lens' TasksList' (Maybe Text)
+tlUpdatedMin :: Lens' TasksList (Maybe Text)
 tlUpdatedMin
   = lens _tlUpdatedMin (\ s a -> s{_tlUpdatedMin = a})
 
 -- | Task list identifier.
-tlTaskList :: Lens' TasksList' Text
+tlTaskList :: Lens' TasksList Text
 tlTaskList
   = lens _tlTaskList (\ s a -> s{_tlTaskList = a})
 
 -- | Lower bound for a task\'s completion date (as a RFC 3339 timestamp) to
 -- filter by. Optional. The default is not to filter by completion date.
-tlCompletedMin :: Lens' TasksList' (Maybe Text)
+tlCompletedMin :: Lens' TasksList (Maybe Text)
 tlCompletedMin
   = lens _tlCompletedMin
       (\ s a -> s{_tlCompletedMin = a})
 
 -- | Token specifying the result page to return. Optional.
-tlPageToken :: Lens' TasksList' (Maybe Text)
+tlPageToken :: Lens' TasksList (Maybe Text)
 tlPageToken
   = lens _tlPageToken (\ s a -> s{_tlPageToken = a})
 
 -- | Maximum number of task lists returned on one page. Optional. The default
 -- is 100.
-tlMaxResults :: Lens' TasksList' (Maybe Int64)
+tlMaxResults :: Lens' TasksList (Maybe Int64)
 tlMaxResults
   = lens _tlMaxResults (\ s a -> s{_tlMaxResults = a})
 
-instance GoogleRequest TasksList' where
-        type Rs TasksList' = Tasks
-        requestClient TasksList'{..}
+instance GoogleRequest TasksList where
+        type Rs TasksList = Tasks
+        requestClient TasksList{..}
           = go _tlTaskList _tlDueMax _tlShowDeleted
               _tlShowCompleted
               _tlDueMin

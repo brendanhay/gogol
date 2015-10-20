@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.OrderDocuments.List
       OrderDocumentsListResource
 
     -- * Creating a Request
-    , orderDocumentsList'
-    , OrderDocumentsList'
+    , orderDocumentsList
+    , OrderDocumentsList
 
     -- * Request Lenses
     , odlSearchString
@@ -50,7 +50,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.orderDocuments.list@ method which the
--- 'OrderDocumentsList'' request conforms to.
+-- 'OrderDocumentsList' request conforms to.
 type OrderDocumentsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -71,8 +71,8 @@ type OrderDocumentsListResource =
 
 -- | Retrieves a list of order documents, possibly filtered.
 --
--- /See:/ 'orderDocumentsList'' smart constructor.
-data OrderDocumentsList' = OrderDocumentsList'
+-- /See:/ 'orderDocumentsList' smart constructor.
+data OrderDocumentsList = OrderDocumentsList
     { _odlSearchString :: !(Maybe Text)
     , _odlIds          :: !(Maybe [Int64])
     , _odlProFileId    :: !Int64
@@ -86,7 +86,7 @@ data OrderDocumentsList' = OrderDocumentsList'
     , _odlMaxResults   :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrderDocumentsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrderDocumentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -111,12 +111,12 @@ data OrderDocumentsList' = OrderDocumentsList'
 -- * 'odlSiteId'
 --
 -- * 'odlMaxResults'
-orderDocumentsList'
+orderDocumentsList
     :: Int64 -- ^ 'odlProFileId'
     -> Int64 -- ^ 'odlProjectId'
-    -> OrderDocumentsList'
-orderDocumentsList' pOdlProFileId_ pOdlProjectId_ =
-    OrderDocumentsList'
+    -> OrderDocumentsList
+orderDocumentsList pOdlProFileId_ pOdlProjectId_ =
+    OrderDocumentsList
     { _odlSearchString = Nothing
     , _odlIds = Nothing
     , _odlProFileId = pOdlProFileId_
@@ -138,44 +138,44 @@ orderDocumentsList' pOdlProFileId_ pOdlProjectId_ =
 -- example, a search string of \"orderdocument\" will match order documents
 -- with name \"my orderdocument\", \"orderdocument 2015\", or simply
 -- \"orderdocument\".
-odlSearchString :: Lens' OrderDocumentsList' (Maybe Text)
+odlSearchString :: Lens' OrderDocumentsList (Maybe Text)
 odlSearchString
   = lens _odlSearchString
       (\ s a -> s{_odlSearchString = a})
 
 -- | Select only order documents with these IDs.
-odlIds :: Lens' OrderDocumentsList' [Int64]
+odlIds :: Lens' OrderDocumentsList [Int64]
 odlIds
   = lens _odlIds (\ s a -> s{_odlIds = a}) . _Default .
       _Coerce
 
 -- | User profile ID associated with this request.
-odlProFileId :: Lens' OrderDocumentsList' Int64
+odlProFileId :: Lens' OrderDocumentsList Int64
 odlProFileId
   = lens _odlProFileId (\ s a -> s{_odlProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-odlSortOrder :: Lens' OrderDocumentsList' (Maybe OrderDocumentsListSortOrder)
+odlSortOrder :: Lens' OrderDocumentsList (Maybe OrderDocumentsListSortOrder)
 odlSortOrder
   = lens _odlSortOrder (\ s a -> s{_odlSortOrder = a})
 
 -- | Value of the nextPageToken from the previous result page.
-odlPageToken :: Lens' OrderDocumentsList' (Maybe Text)
+odlPageToken :: Lens' OrderDocumentsList (Maybe Text)
 odlPageToken
   = lens _odlPageToken (\ s a -> s{_odlPageToken = a})
 
 -- | Project ID for order documents.
-odlProjectId :: Lens' OrderDocumentsList' Int64
+odlProjectId :: Lens' OrderDocumentsList Int64
 odlProjectId
   = lens _odlProjectId (\ s a -> s{_odlProjectId = a})
 
 -- | Field by which to sort the list.
-odlSortField :: Lens' OrderDocumentsList' (Maybe OrderDocumentsListSortField)
+odlSortField :: Lens' OrderDocumentsList (Maybe OrderDocumentsListSortField)
 odlSortField
   = lens _odlSortField (\ s a -> s{_odlSortField = a})
 
 -- | Select only order documents for specified orders.
-odlOrderId :: Lens' OrderDocumentsList' [Int64]
+odlOrderId :: Lens' OrderDocumentsList [Int64]
 odlOrderId
   = lens _odlOrderId (\ s a -> s{_odlOrderId = a}) .
       _Default
@@ -183,27 +183,27 @@ odlOrderId
 
 -- | Select only order documents that have been approved by at least one
 -- user.
-odlApproved :: Lens' OrderDocumentsList' (Maybe Bool)
+odlApproved :: Lens' OrderDocumentsList (Maybe Bool)
 odlApproved
   = lens _odlApproved (\ s a -> s{_odlApproved = a})
 
 -- | Select only order documents that are associated with these sites.
-odlSiteId :: Lens' OrderDocumentsList' [Int64]
+odlSiteId :: Lens' OrderDocumentsList [Int64]
 odlSiteId
   = lens _odlSiteId (\ s a -> s{_odlSiteId = a}) .
       _Default
       . _Coerce
 
 -- | Maximum number of results to return.
-odlMaxResults :: Lens' OrderDocumentsList' (Maybe Int32)
+odlMaxResults :: Lens' OrderDocumentsList (Maybe Int32)
 odlMaxResults
   = lens _odlMaxResults
       (\ s a -> s{_odlMaxResults = a})
 
-instance GoogleRequest OrderDocumentsList' where
-        type Rs OrderDocumentsList' =
+instance GoogleRequest OrderDocumentsList where
+        type Rs OrderDocumentsList =
              OrderDocumentsListResponse
-        requestClient OrderDocumentsList'{..}
+        requestClient OrderDocumentsList{..}
           = go _odlProFileId _odlProjectId _odlSearchString
               (_odlIds ^. _Default)
               _odlSortOrder

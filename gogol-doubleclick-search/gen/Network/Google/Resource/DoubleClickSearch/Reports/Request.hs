@@ -29,8 +29,8 @@ module Network.Google.Resource.DoubleClickSearch.Reports.Request
       ReportsRequestResource
 
     -- * Creating a Request
-    , reportsRequest'
-    , ReportsRequest'
+    , reportsRequest
+    , ReportsRequest
 
     -- * Request Lenses
     , rrPayload
@@ -40,7 +40,7 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @doubleclicksearch.reports.request@ method which the
--- 'ReportsRequest'' request conforms to.
+-- 'ReportsRequest' request conforms to.
 type ReportsRequestResource =
      "reports" :>
        QueryParam "alt" AltJSON :>
@@ -48,32 +48,32 @@ type ReportsRequestResource =
 
 -- | Inserts a report request into the reporting system.
 --
--- /See:/ 'reportsRequest'' smart constructor.
-newtype ReportsRequest' = ReportsRequest'
+-- /See:/ 'reportsRequest' smart constructor.
+newtype ReportsRequest = ReportsRequest
     { _rrPayload :: ReportRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReportsRequest'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportsRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rrPayload'
-reportsRequest'
+reportsRequest
     :: ReportRequest -- ^ 'rrPayload'
-    -> ReportsRequest'
-reportsRequest' pRrPayload_ =
-    ReportsRequest'
+    -> ReportsRequest
+reportsRequest pRrPayload_ =
+    ReportsRequest
     { _rrPayload = pRrPayload_
     }
 
 -- | Multipart request metadata.
-rrPayload :: Lens' ReportsRequest' ReportRequest
+rrPayload :: Lens' ReportsRequest ReportRequest
 rrPayload
   = lens _rrPayload (\ s a -> s{_rrPayload = a})
 
-instance GoogleRequest ReportsRequest' where
-        type Rs ReportsRequest' = Report
-        requestClient ReportsRequest'{..}
+instance GoogleRequest ReportsRequest where
+        type Rs ReportsRequest = Report
+        requestClient ReportsRequest{..}
           = go (Just AltJSON) _rrPayload
               doubleClickSearchService
           where go

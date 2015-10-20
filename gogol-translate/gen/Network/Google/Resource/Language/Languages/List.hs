@@ -29,8 +29,8 @@ module Network.Google.Resource.Language.Languages.List
       LanguagesListResource
 
     -- * Creating a Request
-    , languagesList'
-    , LanguagesList'
+    , languagesList
+    , LanguagesList
 
     -- * Request Lenses
     , llTarget
@@ -40,7 +40,7 @@ import           Network.Google.Prelude
 import           Network.Google.Translate.Types
 
 -- | A resource alias for @language.languages.list@ method which the
--- 'LanguagesList'' request conforms to.
+-- 'LanguagesList' request conforms to.
 type LanguagesListResource =
      "v2" :>
        "languages" :>
@@ -50,31 +50,31 @@ type LanguagesListResource =
 
 -- | List the source\/target languages supported by the API
 --
--- /See:/ 'languagesList'' smart constructor.
-newtype LanguagesList' = LanguagesList'
+-- /See:/ 'languagesList' smart constructor.
+newtype LanguagesList = LanguagesList
     { _llTarget :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LanguagesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'LanguagesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'llTarget'
-languagesList'
-    :: LanguagesList'
-languagesList' =
-    LanguagesList'
+languagesList
+    :: LanguagesList
+languagesList =
+    LanguagesList
     { _llTarget = Nothing
     }
 
 -- | the language and collation in which the localized results should be
 -- returned
-llTarget :: Lens' LanguagesList' (Maybe Text)
+llTarget :: Lens' LanguagesList (Maybe Text)
 llTarget = lens _llTarget (\ s a -> s{_llTarget = a})
 
-instance GoogleRequest LanguagesList' where
-        type Rs LanguagesList' = LanguagesListResponse
-        requestClient LanguagesList'{..}
+instance GoogleRequest LanguagesList where
+        type Rs LanguagesList = LanguagesListResponse
+        requestClient LanguagesList{..}
           = go _llTarget (Just AltJSON) translateService
           where go
                   = buildClient (Proxy :: Proxy LanguagesListResource)

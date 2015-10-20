@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.RemoveVolume
       MyLibraryBookshelvesRemoveVolumeResource
 
     -- * Creating a Request
-    , myLibraryBookshelvesRemoveVolume'
-    , MyLibraryBookshelvesRemoveVolume'
+    , myLibraryBookshelvesRemoveVolume
+    , MyLibraryBookshelvesRemoveVolume
 
     -- * Request Lenses
     , mlbrvReason
@@ -43,7 +43,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.bookshelves.removeVolume@ method which the
--- 'MyLibraryBookshelvesRemoveVolume'' request conforms to.
+-- 'MyLibraryBookshelvesRemoveVolume' request conforms to.
 type MyLibraryBookshelvesRemoveVolumeResource =
      "mylibrary" :>
        "bookshelves" :>
@@ -58,15 +58,15 @@ type MyLibraryBookshelvesRemoveVolumeResource =
 
 -- | Removes a volume from a bookshelf.
 --
--- /See:/ 'myLibraryBookshelvesRemoveVolume'' smart constructor.
-data MyLibraryBookshelvesRemoveVolume' = MyLibraryBookshelvesRemoveVolume'
+-- /See:/ 'myLibraryBookshelvesRemoveVolume' smart constructor.
+data MyLibraryBookshelvesRemoveVolume = MyLibraryBookshelvesRemoveVolume
     { _mlbrvReason   :: !(Maybe MyLibraryBookshelvesRemoveVolumeReason)
     , _mlbrvShelf    :: !Text
     , _mlbrvVolumeId :: !Text
     , _mlbrvSource   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MyLibraryBookshelvesRemoveVolume'' with the minimum fields required to make a request.
+-- | Creates a value of 'MyLibraryBookshelvesRemoveVolume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,12 +77,12 @@ data MyLibraryBookshelvesRemoveVolume' = MyLibraryBookshelvesRemoveVolume'
 -- * 'mlbrvVolumeId'
 --
 -- * 'mlbrvSource'
-myLibraryBookshelvesRemoveVolume'
+myLibraryBookshelvesRemoveVolume
     :: Text -- ^ 'mlbrvShelf'
     -> Text -- ^ 'mlbrvVolumeId'
-    -> MyLibraryBookshelvesRemoveVolume'
-myLibraryBookshelvesRemoveVolume' pMlbrvShelf_ pMlbrvVolumeId_ =
-    MyLibraryBookshelvesRemoveVolume'
+    -> MyLibraryBookshelvesRemoveVolume
+myLibraryBookshelvesRemoveVolume pMlbrvShelf_ pMlbrvVolumeId_ =
+    MyLibraryBookshelvesRemoveVolume
     { _mlbrvReason = Nothing
     , _mlbrvShelf = pMlbrvShelf_
     , _mlbrvVolumeId = pMlbrvVolumeId_
@@ -90,30 +90,30 @@ myLibraryBookshelvesRemoveVolume' pMlbrvShelf_ pMlbrvVolumeId_ =
     }
 
 -- | The reason for which the book is removed from the library.
-mlbrvReason :: Lens' MyLibraryBookshelvesRemoveVolume' (Maybe MyLibraryBookshelvesRemoveVolumeReason)
+mlbrvReason :: Lens' MyLibraryBookshelvesRemoveVolume (Maybe MyLibraryBookshelvesRemoveVolumeReason)
 mlbrvReason
   = lens _mlbrvReason (\ s a -> s{_mlbrvReason = a})
 
 -- | ID of bookshelf from which to remove a volume.
-mlbrvShelf :: Lens' MyLibraryBookshelvesRemoveVolume' Text
+mlbrvShelf :: Lens' MyLibraryBookshelvesRemoveVolume Text
 mlbrvShelf
   = lens _mlbrvShelf (\ s a -> s{_mlbrvShelf = a})
 
 -- | ID of volume to remove.
-mlbrvVolumeId :: Lens' MyLibraryBookshelvesRemoveVolume' Text
+mlbrvVolumeId :: Lens' MyLibraryBookshelvesRemoveVolume Text
 mlbrvVolumeId
   = lens _mlbrvVolumeId
       (\ s a -> s{_mlbrvVolumeId = a})
 
 -- | String to identify the originator of this request.
-mlbrvSource :: Lens' MyLibraryBookshelvesRemoveVolume' (Maybe Text)
+mlbrvSource :: Lens' MyLibraryBookshelvesRemoveVolume (Maybe Text)
 mlbrvSource
   = lens _mlbrvSource (\ s a -> s{_mlbrvSource = a})
 
 instance GoogleRequest
-         MyLibraryBookshelvesRemoveVolume' where
-        type Rs MyLibraryBookshelvesRemoveVolume' = ()
-        requestClient MyLibraryBookshelvesRemoveVolume'{..}
+         MyLibraryBookshelvesRemoveVolume where
+        type Rs MyLibraryBookshelvesRemoveVolume = ()
+        requestClient MyLibraryBookshelvesRemoveVolume{..}
           = go _mlbrvShelf (Just _mlbrvVolumeId) _mlbrvReason
               _mlbrvSource
               (Just AltJSON)

@@ -31,8 +31,8 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.List
       AccountsOrdersListResource
 
     -- * Creating a Request
-    , accountsOrdersList'
-    , AccountsOrdersList'
+    , accountsOrdersList
+    , AccountsOrdersList
 
     -- * Request Lenses
     , aolStatus
@@ -56,7 +56,7 @@ import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @playmoviespartner.accounts.orders.list@ method which the
--- 'AccountsOrdersList'' request conforms to.
+-- 'AccountsOrdersList' request conforms to.
 type AccountsOrdersListResource =
      "v1" :>
        "accounts" :>
@@ -83,8 +83,8 @@ type AccountsOrdersListResource =
 -- Authorization rules_ and _List methods rules_ for more information about
 -- this method.
 --
--- /See:/ 'accountsOrdersList'' smart constructor.
-data AccountsOrdersList' = AccountsOrdersList'
+-- /See:/ 'accountsOrdersList' smart constructor.
+data AccountsOrdersList = AccountsOrdersList
     { _aolStatus         :: !(Maybe [Text])
     , _aolPphNames       :: !(Maybe [Text])
     , _aolXgafv          :: !(Maybe Text)
@@ -102,7 +102,7 @@ data AccountsOrdersList' = AccountsOrdersList'
     , _aolCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsOrdersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsOrdersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -135,11 +135,11 @@ data AccountsOrdersList' = AccountsOrdersList'
 -- * 'aolPageSize'
 --
 -- * 'aolCallback'
-accountsOrdersList'
+accountsOrdersList
     :: Text -- ^ 'aolAccountId'
-    -> AccountsOrdersList'
-accountsOrdersList' pAolAccountId_ =
-    AccountsOrdersList'
+    -> AccountsOrdersList
+accountsOrdersList pAolAccountId_ =
+    AccountsOrdersList
     { _aolStatus = Nothing
     , _aolPphNames = Nothing
     , _aolXgafv = Nothing
@@ -158,25 +158,25 @@ accountsOrdersList' pAolAccountId_ =
     }
 
 -- | Filter Orders that match one of the given status.
-aolStatus :: Lens' AccountsOrdersList' [Text]
+aolStatus :: Lens' AccountsOrdersList [Text]
 aolStatus
   = lens _aolStatus (\ s a -> s{_aolStatus = a}) .
       _Default
       . _Coerce
 
 -- | See _List methods rules_ for info about this field.
-aolPphNames :: Lens' AccountsOrdersList' [Text]
+aolPphNames :: Lens' AccountsOrdersList [Text]
 aolPphNames
   = lens _aolPphNames (\ s a -> s{_aolPphNames = a}) .
       _Default
       . _Coerce
 
 -- | V1 error format.
-aolXgafv :: Lens' AccountsOrdersList' (Maybe Text)
+aolXgafv :: Lens' AccountsOrdersList (Maybe Text)
 aolXgafv = lens _aolXgafv (\ s a -> s{_aolXgafv = a})
 
 -- | See _List methods rules_ for info about this field.
-aolStudioNames :: Lens' AccountsOrdersList' [Text]
+aolStudioNames :: Lens' AccountsOrdersList [Text]
 aolStudioNames
   = lens _aolStudioNames
       (\ s a -> s{_aolStudioNames = a})
@@ -184,66 +184,66 @@ aolStudioNames
       . _Coerce
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-aolUploadProtocol :: Lens' AccountsOrdersList' (Maybe Text)
+aolUploadProtocol :: Lens' AccountsOrdersList (Maybe Text)
 aolUploadProtocol
   = lens _aolUploadProtocol
       (\ s a -> s{_aolUploadProtocol = a})
 
 -- | Pretty-print response.
-aolPp :: Lens' AccountsOrdersList' Bool
+aolPp :: Lens' AccountsOrdersList Bool
 aolPp = lens _aolPp (\ s a -> s{_aolPp = a})
 
 -- | OAuth access token.
-aolAccessToken :: Lens' AccountsOrdersList' (Maybe Text)
+aolAccessToken :: Lens' AccountsOrdersList (Maybe Text)
 aolAccessToken
   = lens _aolAccessToken
       (\ s a -> s{_aolAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-aolUploadType :: Lens' AccountsOrdersList' (Maybe Text)
+aolUploadType :: Lens' AccountsOrdersList (Maybe Text)
 aolUploadType
   = lens _aolUploadType
       (\ s a -> s{_aolUploadType = a})
 
 -- | Filter Orders that match a case-insensitive, partner-specific custom id.
-aolCustomId :: Lens' AccountsOrdersList' (Maybe Text)
+aolCustomId :: Lens' AccountsOrdersList (Maybe Text)
 aolCustomId
   = lens _aolCustomId (\ s a -> s{_aolCustomId = a})
 
 -- | REQUIRED. See _General rules_ for more information about this field.
-aolAccountId :: Lens' AccountsOrdersList' Text
+aolAccountId :: Lens' AccountsOrdersList Text
 aolAccountId
   = lens _aolAccountId (\ s a -> s{_aolAccountId = a})
 
 -- | OAuth bearer token.
-aolBearerToken :: Lens' AccountsOrdersList' (Maybe Text)
+aolBearerToken :: Lens' AccountsOrdersList (Maybe Text)
 aolBearerToken
   = lens _aolBearerToken
       (\ s a -> s{_aolBearerToken = a})
 
 -- | Filter Orders that match a title name (case-insensitive, sub-string
 -- match).
-aolName :: Lens' AccountsOrdersList' (Maybe Text)
+aolName :: Lens' AccountsOrdersList (Maybe Text)
 aolName = lens _aolName (\ s a -> s{_aolName = a})
 
 -- | See _List methods rules_ for info about this field.
-aolPageToken :: Lens' AccountsOrdersList' (Maybe Text)
+aolPageToken :: Lens' AccountsOrdersList (Maybe Text)
 aolPageToken
   = lens _aolPageToken (\ s a -> s{_aolPageToken = a})
 
 -- | See _List methods rules_ for info about this field.
-aolPageSize :: Lens' AccountsOrdersList' (Maybe Int32)
+aolPageSize :: Lens' AccountsOrdersList (Maybe Int32)
 aolPageSize
   = lens _aolPageSize (\ s a -> s{_aolPageSize = a})
 
 -- | JSONP
-aolCallback :: Lens' AccountsOrdersList' (Maybe Text)
+aolCallback :: Lens' AccountsOrdersList (Maybe Text)
 aolCallback
   = lens _aolCallback (\ s a -> s{_aolCallback = a})
 
-instance GoogleRequest AccountsOrdersList' where
-        type Rs AccountsOrdersList' = ListOrdersResponse
-        requestClient AccountsOrdersList'{..}
+instance GoogleRequest AccountsOrdersList where
+        type Rs AccountsOrdersList = ListOrdersResponse
+        requestClient AccountsOrdersList{..}
           = go _aolAccountId (_aolStatus ^. _Default)
               (_aolPphNames ^. _Default)
               _aolXgafv

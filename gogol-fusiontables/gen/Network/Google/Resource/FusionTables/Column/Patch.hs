@@ -30,8 +30,8 @@ module Network.Google.Resource.FusionTables.Column.Patch
       ColumnPatchResource
 
     -- * Creating a Request
-    , columnPatch'
-    , ColumnPatch'
+    , columnPatch
+    , ColumnPatch
 
     -- * Request Lenses
     , cpPayload
@@ -43,7 +43,7 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.column.patch@ method which the
--- 'ColumnPatch'' request conforms to.
+-- 'ColumnPatch' request conforms to.
 type ColumnPatchResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -55,14 +55,14 @@ type ColumnPatchResource =
 -- | Updates the name or type of an existing column. This method supports
 -- patch semantics.
 --
--- /See:/ 'columnPatch'' smart constructor.
-data ColumnPatch' = ColumnPatch'
+-- /See:/ 'columnPatch' smart constructor.
+data ColumnPatch = ColumnPatch
     { _cpPayload  :: !Column
     , _cpTableId  :: !Text
     , _cpColumnId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ColumnPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ColumnPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,36 +71,36 @@ data ColumnPatch' = ColumnPatch'
 -- * 'cpTableId'
 --
 -- * 'cpColumnId'
-columnPatch'
+columnPatch
     :: Column -- ^ 'cpPayload'
     -> Text -- ^ 'cpTableId'
     -> Text -- ^ 'cpColumnId'
-    -> ColumnPatch'
-columnPatch' pCpPayload_ pCpTableId_ pCpColumnId_ =
-    ColumnPatch'
+    -> ColumnPatch
+columnPatch pCpPayload_ pCpTableId_ pCpColumnId_ =
+    ColumnPatch
     { _cpPayload = pCpPayload_
     , _cpTableId = pCpTableId_
     , _cpColumnId = pCpColumnId_
     }
 
 -- | Multipart request metadata.
-cpPayload :: Lens' ColumnPatch' Column
+cpPayload :: Lens' ColumnPatch Column
 cpPayload
   = lens _cpPayload (\ s a -> s{_cpPayload = a})
 
 -- | Table for which the column is being updated.
-cpTableId :: Lens' ColumnPatch' Text
+cpTableId :: Lens' ColumnPatch Text
 cpTableId
   = lens _cpTableId (\ s a -> s{_cpTableId = a})
 
 -- | Name or identifier for the column that is being updated.
-cpColumnId :: Lens' ColumnPatch' Text
+cpColumnId :: Lens' ColumnPatch Text
 cpColumnId
   = lens _cpColumnId (\ s a -> s{_cpColumnId = a})
 
-instance GoogleRequest ColumnPatch' where
-        type Rs ColumnPatch' = Column
-        requestClient ColumnPatch'{..}
+instance GoogleRequest ColumnPatch where
+        type Rs ColumnPatch = Column
+        requestClient ColumnPatch{..}
           = go _cpTableId _cpColumnId (Just AltJSON) _cpPayload
               fusionTablesService
           where go

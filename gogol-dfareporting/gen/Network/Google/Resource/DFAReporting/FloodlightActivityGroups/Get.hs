@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Get
       FloodlightActivityGroupsGetResource
 
     -- * Creating a Request
-    , floodlightActivityGroupsGet'
-    , FloodlightActivityGroupsGet'
+    , floodlightActivityGroupsGet
+    , FloodlightActivityGroupsGet
 
     -- * Request Lenses
     , faggProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightActivityGroups.get@ method which the
--- 'FloodlightActivityGroupsGet'' request conforms to.
+-- 'FloodlightActivityGroupsGet' request conforms to.
 type FloodlightActivityGroupsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,44 +52,44 @@ type FloodlightActivityGroupsGetResource =
 
 -- | Gets one floodlight activity group by ID.
 --
--- /See:/ 'floodlightActivityGroupsGet'' smart constructor.
-data FloodlightActivityGroupsGet' = FloodlightActivityGroupsGet'
+-- /See:/ 'floodlightActivityGroupsGet' smart constructor.
+data FloodlightActivityGroupsGet = FloodlightActivityGroupsGet
     { _faggProFileId :: !Int64
     , _faggId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FloodlightActivityGroupsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'FloodlightActivityGroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'faggProFileId'
 --
 -- * 'faggId'
-floodlightActivityGroupsGet'
+floodlightActivityGroupsGet
     :: Int64 -- ^ 'faggProFileId'
     -> Int64 -- ^ 'faggId'
-    -> FloodlightActivityGroupsGet'
-floodlightActivityGroupsGet' pFaggProFileId_ pFaggId_ =
-    FloodlightActivityGroupsGet'
+    -> FloodlightActivityGroupsGet
+floodlightActivityGroupsGet pFaggProFileId_ pFaggId_ =
+    FloodlightActivityGroupsGet
     { _faggProFileId = pFaggProFileId_
     , _faggId = pFaggId_
     }
 
 -- | User profile ID associated with this request.
-faggProFileId :: Lens' FloodlightActivityGroupsGet' Int64
+faggProFileId :: Lens' FloodlightActivityGroupsGet Int64
 faggProFileId
   = lens _faggProFileId
       (\ s a -> s{_faggProFileId = a})
 
 -- | Floodlight activity Group ID.
-faggId :: Lens' FloodlightActivityGroupsGet' Int64
+faggId :: Lens' FloodlightActivityGroupsGet Int64
 faggId = lens _faggId (\ s a -> s{_faggId = a})
 
-instance GoogleRequest FloodlightActivityGroupsGet'
+instance GoogleRequest FloodlightActivityGroupsGet
          where
-        type Rs FloodlightActivityGroupsGet' =
+        type Rs FloodlightActivityGroupsGet =
              FloodlightActivityGroup
-        requestClient FloodlightActivityGroupsGet'{..}
+        requestClient FloodlightActivityGroupsGet{..}
           = go _faggProFileId _faggId (Just AltJSON)
               dFAReportingService
           where go

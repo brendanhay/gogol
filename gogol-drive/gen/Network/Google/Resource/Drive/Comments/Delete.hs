@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Comments.Delete
       CommentsDeleteResource
 
     -- * Creating a Request
-    , commentsDelete'
-    , CommentsDelete'
+    , commentsDelete
+    , CommentsDelete
 
     -- * Request Lenses
     , cdFileId
@@ -41,7 +41,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.comments.delete@ method which the
--- 'CommentsDelete'' request conforms to.
+-- 'CommentsDelete' request conforms to.
 type CommentsDeleteResource =
      "files" :>
        Capture "fileId" Text :>
@@ -51,41 +51,41 @@ type CommentsDeleteResource =
 
 -- | Deletes a comment.
 --
--- /See:/ 'commentsDelete'' smart constructor.
-data CommentsDelete' = CommentsDelete'
+-- /See:/ 'commentsDelete' smart constructor.
+data CommentsDelete = CommentsDelete
     { _cdFileId    :: !Text
     , _cdCommentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cdFileId'
 --
 -- * 'cdCommentId'
-commentsDelete'
+commentsDelete
     :: Text -- ^ 'cdFileId'
     -> Text -- ^ 'cdCommentId'
-    -> CommentsDelete'
-commentsDelete' pCdFileId_ pCdCommentId_ =
-    CommentsDelete'
+    -> CommentsDelete
+commentsDelete pCdFileId_ pCdCommentId_ =
+    CommentsDelete
     { _cdFileId = pCdFileId_
     , _cdCommentId = pCdCommentId_
     }
 
 -- | The ID of the file.
-cdFileId :: Lens' CommentsDelete' Text
+cdFileId :: Lens' CommentsDelete Text
 cdFileId = lens _cdFileId (\ s a -> s{_cdFileId = a})
 
 -- | The ID of the comment.
-cdCommentId :: Lens' CommentsDelete' Text
+cdCommentId :: Lens' CommentsDelete Text
 cdCommentId
   = lens _cdCommentId (\ s a -> s{_cdCommentId = a})
 
-instance GoogleRequest CommentsDelete' where
-        type Rs CommentsDelete' = ()
-        requestClient CommentsDelete'{..}
+instance GoogleRequest CommentsDelete where
+        type Rs CommentsDelete = ()
+        requestClient CommentsDelete{..}
           = go _cdFileId _cdCommentId (Just AltJSON)
               driveService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Segments.List
       ManagementSegmentsListResource
 
     -- * Creating a Request
-    , managementSegmentsList'
-    , ManagementSegmentsList'
+    , managementSegmentsList
+    , ManagementSegmentsList
 
     -- * Request Lenses
     , mslStartIndex
@@ -41,7 +41,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.segments.list@ method which the
--- 'ManagementSegmentsList'' request conforms to.
+-- 'ManagementSegmentsList' request conforms to.
 type ManagementSegmentsListResource =
      "management" :>
        "segments" :>
@@ -51,43 +51,43 @@ type ManagementSegmentsListResource =
 
 -- | Lists segments to which the user has access.
 --
--- /See:/ 'managementSegmentsList'' smart constructor.
-data ManagementSegmentsList' = ManagementSegmentsList'
+-- /See:/ 'managementSegmentsList' smart constructor.
+data ManagementSegmentsList = ManagementSegmentsList
     { _mslStartIndex :: !(Maybe Int32)
     , _mslMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementSegmentsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementSegmentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mslStartIndex'
 --
 -- * 'mslMaxResults'
-managementSegmentsList'
-    :: ManagementSegmentsList'
-managementSegmentsList' =
-    ManagementSegmentsList'
+managementSegmentsList
+    :: ManagementSegmentsList
+managementSegmentsList =
+    ManagementSegmentsList
     { _mslStartIndex = Nothing
     , _mslMaxResults = Nothing
     }
 
 -- | An index of the first segment to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
-mslStartIndex :: Lens' ManagementSegmentsList' (Maybe Int32)
+mslStartIndex :: Lens' ManagementSegmentsList (Maybe Int32)
 mslStartIndex
   = lens _mslStartIndex
       (\ s a -> s{_mslStartIndex = a})
 
 -- | The maximum number of segments to include in this response.
-mslMaxResults :: Lens' ManagementSegmentsList' (Maybe Int32)
+mslMaxResults :: Lens' ManagementSegmentsList (Maybe Int32)
 mslMaxResults
   = lens _mslMaxResults
       (\ s a -> s{_mslMaxResults = a})
 
-instance GoogleRequest ManagementSegmentsList' where
-        type Rs ManagementSegmentsList' = Segments
-        requestClient ManagementSegmentsList'{..}
+instance GoogleRequest ManagementSegmentsList where
+        type Rs ManagementSegmentsList = Segments
+        requestClient ManagementSegmentsList{..}
           = go _mslStartIndex _mslMaxResults (Just AltJSON)
               analyticsService
           where go

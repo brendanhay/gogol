@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.GlobalOperations.List
       GlobalOperationsListResource
 
     -- * Creating a Request
-    , globalOperationsList'
-    , GlobalOperationsList'
+    , globalOperationsList
+    , GlobalOperationsList
 
     -- * Request Lenses
     , golProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.globalOperations.list@ method which the
--- 'GlobalOperationsList'' request conforms to.
+-- 'GlobalOperationsList' request conforms to.
 type GlobalOperationsListResource =
      Capture "project" Text :>
        "global" :>
@@ -57,15 +57,15 @@ type GlobalOperationsListResource =
 -- | Retrieves the list of Operation resources contained within the specified
 -- project.
 --
--- /See:/ 'globalOperationsList'' smart constructor.
-data GlobalOperationsList' = GlobalOperationsList'
+-- /See:/ 'globalOperationsList' smart constructor.
+data GlobalOperationsList = GlobalOperationsList
     { _golProject    :: !Text
     , _golFilter     :: !(Maybe Text)
     , _golPageToken  :: !(Maybe Text)
     , _golMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GlobalOperationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'GlobalOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,11 +76,11 @@ data GlobalOperationsList' = GlobalOperationsList'
 -- * 'golPageToken'
 --
 -- * 'golMaxResults'
-globalOperationsList'
+globalOperationsList
     :: Text -- ^ 'golProject'
-    -> GlobalOperationsList'
-globalOperationsList' pGolProject_ =
-    GlobalOperationsList'
+    -> GlobalOperationsList
+globalOperationsList pGolProject_ =
+    GlobalOperationsList
     { _golProject = pGolProject_
     , _golFilter = Nothing
     , _golPageToken = Nothing
@@ -88,7 +88,7 @@ globalOperationsList' pGolProject_ =
     }
 
 -- | Project ID for this request.
-golProject :: Lens' GlobalOperationsList' Text
+golProject :: Lens' GlobalOperationsList Text
 golProject
   = lens _golProject (\ s a -> s{_golProject = a})
 
@@ -103,26 +103,26 @@ golProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-golFilter :: Lens' GlobalOperationsList' (Maybe Text)
+golFilter :: Lens' GlobalOperationsList (Maybe Text)
 golFilter
   = lens _golFilter (\ s a -> s{_golFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-golPageToken :: Lens' GlobalOperationsList' (Maybe Text)
+golPageToken :: Lens' GlobalOperationsList (Maybe Text)
 golPageToken
   = lens _golPageToken (\ s a -> s{_golPageToken = a})
 
 -- | Maximum count of results to be returned.
-golMaxResults :: Lens' GlobalOperationsList' Word32
+golMaxResults :: Lens' GlobalOperationsList Word32
 golMaxResults
   = lens _golMaxResults
       (\ s a -> s{_golMaxResults = a})
 
-instance GoogleRequest GlobalOperationsList' where
-        type Rs GlobalOperationsList' = OperationList
-        requestClient GlobalOperationsList'{..}
+instance GoogleRequest GlobalOperationsList where
+        type Rs GlobalOperationsList = OperationList
+        requestClient GlobalOperationsList{..}
           = go _golProject _golFilter _golPageToken
               (Just _golMaxResults)
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.SQL.Instances.Restart
       InstancesRestartResource
 
     -- * Creating a Request
-    , instancesRestart'
-    , InstancesRestart'
+    , instancesRestart
+    , InstancesRestart
 
     -- * Request Lenses
     , irProject
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.restart@ method which the
--- 'InstancesRestart'' request conforms to.
+-- 'InstancesRestart' request conforms to.
 type InstancesRestartResource =
      "projects" :>
        Capture "project" Text :>
@@ -52,42 +52,42 @@ type InstancesRestartResource =
 
 -- | Restarts a Cloud SQL instance.
 --
--- /See:/ 'instancesRestart'' smart constructor.
-data InstancesRestart' = InstancesRestart'
+-- /See:/ 'instancesRestart' smart constructor.
+data InstancesRestart = InstancesRestart
     { _irProject  :: !Text
     , _irInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesRestart'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesRestart' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'irProject'
 --
 -- * 'irInstance'
-instancesRestart'
+instancesRestart
     :: Text -- ^ 'irProject'
     -> Text -- ^ 'irInstance'
-    -> InstancesRestart'
-instancesRestart' pIrProject_ pIrInstance_ =
-    InstancesRestart'
+    -> InstancesRestart
+instancesRestart pIrProject_ pIrInstance_ =
+    InstancesRestart
     { _irProject = pIrProject_
     , _irInstance = pIrInstance_
     }
 
 -- | Project ID of the project that contains the instance to be restarted.
-irProject :: Lens' InstancesRestart' Text
+irProject :: Lens' InstancesRestart Text
 irProject
   = lens _irProject (\ s a -> s{_irProject = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-irInstance :: Lens' InstancesRestart' Text
+irInstance :: Lens' InstancesRestart Text
 irInstance
   = lens _irInstance (\ s a -> s{_irInstance = a})
 
-instance GoogleRequest InstancesRestart' where
-        type Rs InstancesRestart' = Operation
-        requestClient InstancesRestart'{..}
+instance GoogleRequest InstancesRestart where
+        type Rs InstancesRestart = Operation
+        requestClient InstancesRestart{..}
           = go _irProject _irInstance (Just AltJSON)
               sQLAdminService
           where go

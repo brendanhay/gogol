@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Replies.Get
       RepliesGetResource
 
     -- * Creating a Request
-    , repliesGet'
-    , RepliesGet'
+    , repliesGet
+    , RepliesGet
 
     -- * Request Lenses
     , rgReplyId
@@ -43,7 +43,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.replies.get@ method which the
--- 'RepliesGet'' request conforms to.
+-- 'RepliesGet' request conforms to.
 type RepliesGetResource =
      "files" :>
        Capture "fileId" Text :>
@@ -56,15 +56,15 @@ type RepliesGetResource =
 
 -- | Gets a reply.
 --
--- /See:/ 'repliesGet'' smart constructor.
-data RepliesGet' = RepliesGet'
+-- /See:/ 'repliesGet' smart constructor.
+data RepliesGet = RepliesGet
     { _rgReplyId        :: !Text
     , _rgFileId         :: !Text
     , _rgCommentId      :: !Text
     , _rgIncludeDeleted :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RepliesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'RepliesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,13 +75,13 @@ data RepliesGet' = RepliesGet'
 -- * 'rgCommentId'
 --
 -- * 'rgIncludeDeleted'
-repliesGet'
+repliesGet
     :: Text -- ^ 'rgReplyId'
     -> Text -- ^ 'rgFileId'
     -> Text -- ^ 'rgCommentId'
-    -> RepliesGet'
-repliesGet' pRgReplyId_ pRgFileId_ pRgCommentId_ =
-    RepliesGet'
+    -> RepliesGet
+repliesGet pRgReplyId_ pRgFileId_ pRgCommentId_ =
+    RepliesGet
     { _rgReplyId = pRgReplyId_
     , _rgFileId = pRgFileId_
     , _rgCommentId = pRgCommentId_
@@ -89,28 +89,28 @@ repliesGet' pRgReplyId_ pRgFileId_ pRgCommentId_ =
     }
 
 -- | The ID of the reply.
-rgReplyId :: Lens' RepliesGet' Text
+rgReplyId :: Lens' RepliesGet Text
 rgReplyId
   = lens _rgReplyId (\ s a -> s{_rgReplyId = a})
 
 -- | The ID of the file.
-rgFileId :: Lens' RepliesGet' Text
+rgFileId :: Lens' RepliesGet Text
 rgFileId = lens _rgFileId (\ s a -> s{_rgFileId = a})
 
 -- | The ID of the comment.
-rgCommentId :: Lens' RepliesGet' Text
+rgCommentId :: Lens' RepliesGet Text
 rgCommentId
   = lens _rgCommentId (\ s a -> s{_rgCommentId = a})
 
 -- | If set, this will succeed when retrieving a deleted reply.
-rgIncludeDeleted :: Lens' RepliesGet' Bool
+rgIncludeDeleted :: Lens' RepliesGet Bool
 rgIncludeDeleted
   = lens _rgIncludeDeleted
       (\ s a -> s{_rgIncludeDeleted = a})
 
-instance GoogleRequest RepliesGet' where
-        type Rs RepliesGet' = CommentReply
-        requestClient RepliesGet'{..}
+instance GoogleRequest RepliesGet where
+        type Rs RepliesGet = CommentReply
+        requestClient RepliesGet{..}
           = go _rgFileId _rgCommentId _rgReplyId
               (Just _rgIncludeDeleted)
               (Just AltJSON)

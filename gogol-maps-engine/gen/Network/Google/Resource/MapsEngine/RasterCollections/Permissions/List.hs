@@ -29,18 +29,18 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Permissions.List
       RasterCollectionsPermissionsListResource
 
     -- * Creating a Request
-    , rasterCollectionsPermissionsList'
-    , RasterCollectionsPermissionsList'
+    , rasterCollectionsPermissionsList
+    , RasterCollectionsPermissionsList
 
     -- * Request Lenses
-    , rcplcId
+    , rcplId
     ) where
 
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasterCollections.permissions.list@ method which the
--- 'RasterCollectionsPermissionsList'' request conforms to.
+-- 'RasterCollectionsPermissionsList' request conforms to.
 type RasterCollectionsPermissionsListResource =
      "rasterCollections" :>
        Capture "id" Text :>
@@ -50,34 +50,34 @@ type RasterCollectionsPermissionsListResource =
 
 -- | Return all of the permissions for the specified asset.
 --
--- /See:/ 'rasterCollectionsPermissionsList'' smart constructor.
-newtype RasterCollectionsPermissionsList' = RasterCollectionsPermissionsList'
-    { _rcplcId :: Text
+-- /See:/ 'rasterCollectionsPermissionsList' smart constructor.
+newtype RasterCollectionsPermissionsList = RasterCollectionsPermissionsList
+    { _rcplId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RasterCollectionsPermissionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'RasterCollectionsPermissionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcplcId'
-rasterCollectionsPermissionsList'
-    :: Text -- ^ 'rcplcId'
-    -> RasterCollectionsPermissionsList'
-rasterCollectionsPermissionsList' pRcplcId_ =
-    RasterCollectionsPermissionsList'
-    { _rcplcId = pRcplcId_
+-- * 'rcplId'
+rasterCollectionsPermissionsList
+    :: Text -- ^ 'rcplId'
+    -> RasterCollectionsPermissionsList
+rasterCollectionsPermissionsList pRcplId_ =
+    RasterCollectionsPermissionsList
+    { _rcplId = pRcplId_
     }
 
 -- | The ID of the asset whose permissions will be listed.
-rcplcId :: Lens' RasterCollectionsPermissionsList' Text
-rcplcId = lens _rcplcId (\ s a -> s{_rcplcId = a})
+rcplId :: Lens' RasterCollectionsPermissionsList Text
+rcplId = lens _rcplId (\ s a -> s{_rcplId = a})
 
 instance GoogleRequest
-         RasterCollectionsPermissionsList' where
-        type Rs RasterCollectionsPermissionsList' =
+         RasterCollectionsPermissionsList where
+        type Rs RasterCollectionsPermissionsList =
              PermissionsListResponse
-        requestClient RasterCollectionsPermissionsList'{..}
-          = go _rcplcId (Just AltJSON) mapsEngineService
+        requestClient RasterCollectionsPermissionsList{..}
+          = go _rcplId (Just AltJSON) mapsEngineService
           where go
                   = buildClient
                       (Proxy ::

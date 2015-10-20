@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.Summary
       MyLibraryAnnotationsSummaryResource
 
     -- * Creating a Request
-    , myLibraryAnnotationsSummary'
-    , MyLibraryAnnotationsSummary'
+    , myLibraryAnnotationsSummary
+    , MyLibraryAnnotationsSummary
 
     -- * Request Lenses
     , mlasLayerIds
@@ -41,7 +41,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.annotations.summary@ method which the
--- 'MyLibraryAnnotationsSummary'' request conforms to.
+-- 'MyLibraryAnnotationsSummary' request conforms to.
 type MyLibraryAnnotationsSummaryResource =
      "mylibrary" :>
        "annotations" :>
@@ -53,45 +53,45 @@ type MyLibraryAnnotationsSummaryResource =
 
 -- | Gets the summary of specified layers.
 --
--- /See:/ 'myLibraryAnnotationsSummary'' smart constructor.
-data MyLibraryAnnotationsSummary' = MyLibraryAnnotationsSummary'
+-- /See:/ 'myLibraryAnnotationsSummary' smart constructor.
+data MyLibraryAnnotationsSummary = MyLibraryAnnotationsSummary
     { _mlasLayerIds :: ![Text]
     , _mlasVolumeId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MyLibraryAnnotationsSummary'' with the minimum fields required to make a request.
+-- | Creates a value of 'MyLibraryAnnotationsSummary' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mlasLayerIds'
 --
 -- * 'mlasVolumeId'
-myLibraryAnnotationsSummary'
+myLibraryAnnotationsSummary
     :: [Text] -- ^ 'mlasLayerIds'
     -> Text -- ^ 'mlasVolumeId'
-    -> MyLibraryAnnotationsSummary'
-myLibraryAnnotationsSummary' pMlasLayerIds_ pMlasVolumeId_ =
-    MyLibraryAnnotationsSummary'
+    -> MyLibraryAnnotationsSummary
+myLibraryAnnotationsSummary pMlasLayerIds_ pMlasVolumeId_ =
+    MyLibraryAnnotationsSummary
     { _mlasLayerIds = pMlasLayerIds_
     , _mlasVolumeId = pMlasVolumeId_
     }
 
 -- | Array of layer IDs to get the summary for.
-mlasLayerIds :: Lens' MyLibraryAnnotationsSummary' [Text]
+mlasLayerIds :: Lens' MyLibraryAnnotationsSummary [Text]
 mlasLayerIds
   = lens _mlasLayerIds (\ s a -> s{_mlasLayerIds = a})
       . _Coerce
 
 -- | Volume id to get the summary for.
-mlasVolumeId :: Lens' MyLibraryAnnotationsSummary' Text
+mlasVolumeId :: Lens' MyLibraryAnnotationsSummary Text
 mlasVolumeId
   = lens _mlasVolumeId (\ s a -> s{_mlasVolumeId = a})
 
-instance GoogleRequest MyLibraryAnnotationsSummary'
+instance GoogleRequest MyLibraryAnnotationsSummary
          where
-        type Rs MyLibraryAnnotationsSummary' =
+        type Rs MyLibraryAnnotationsSummary =
              AnnotationsSummary
-        requestClient MyLibraryAnnotationsSummary'{..}
+        requestClient MyLibraryAnnotationsSummary{..}
           = go _mlasLayerIds (Just _mlasVolumeId)
               (Just AltJSON)
               booksService

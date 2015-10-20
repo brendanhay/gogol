@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Insert
       FloodlightActivityGroupsInsertResource
 
     -- * Creating a Request
-    , floodlightActivityGroupsInsert'
-    , FloodlightActivityGroupsInsert'
+    , floodlightActivityGroupsInsert
+    , FloodlightActivityGroupsInsert
 
     -- * Request Lenses
     , fagiProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightActivityGroups.insert@ method which the
--- 'FloodlightActivityGroupsInsert'' request conforms to.
+-- 'FloodlightActivityGroupsInsert' request conforms to.
 type FloodlightActivityGroupsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,45 +52,45 @@ type FloodlightActivityGroupsInsertResource =
 
 -- | Inserts a new floodlight activity group.
 --
--- /See:/ 'floodlightActivityGroupsInsert'' smart constructor.
-data FloodlightActivityGroupsInsert' = FloodlightActivityGroupsInsert'
+-- /See:/ 'floodlightActivityGroupsInsert' smart constructor.
+data FloodlightActivityGroupsInsert = FloodlightActivityGroupsInsert
     { _fagiProFileId :: !Int64
     , _fagiPayload   :: !FloodlightActivityGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FloodlightActivityGroupsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'FloodlightActivityGroupsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fagiProFileId'
 --
 -- * 'fagiPayload'
-floodlightActivityGroupsInsert'
+floodlightActivityGroupsInsert
     :: Int64 -- ^ 'fagiProFileId'
     -> FloodlightActivityGroup -- ^ 'fagiPayload'
-    -> FloodlightActivityGroupsInsert'
-floodlightActivityGroupsInsert' pFagiProFileId_ pFagiPayload_ =
-    FloodlightActivityGroupsInsert'
+    -> FloodlightActivityGroupsInsert
+floodlightActivityGroupsInsert pFagiProFileId_ pFagiPayload_ =
+    FloodlightActivityGroupsInsert
     { _fagiProFileId = pFagiProFileId_
     , _fagiPayload = pFagiPayload_
     }
 
 -- | User profile ID associated with this request.
-fagiProFileId :: Lens' FloodlightActivityGroupsInsert' Int64
+fagiProFileId :: Lens' FloodlightActivityGroupsInsert Int64
 fagiProFileId
   = lens _fagiProFileId
       (\ s a -> s{_fagiProFileId = a})
 
 -- | Multipart request metadata.
-fagiPayload :: Lens' FloodlightActivityGroupsInsert' FloodlightActivityGroup
+fagiPayload :: Lens' FloodlightActivityGroupsInsert FloodlightActivityGroup
 fagiPayload
   = lens _fagiPayload (\ s a -> s{_fagiPayload = a})
 
-instance GoogleRequest
-         FloodlightActivityGroupsInsert' where
-        type Rs FloodlightActivityGroupsInsert' =
+instance GoogleRequest FloodlightActivityGroupsInsert
+         where
+        type Rs FloodlightActivityGroupsInsert =
              FloodlightActivityGroup
-        requestClient FloodlightActivityGroupsInsert'{..}
+        requestClient FloodlightActivityGroupsInsert{..}
           = go _fagiProFileId (Just AltJSON) _fagiPayload
               dFAReportingService
           where go

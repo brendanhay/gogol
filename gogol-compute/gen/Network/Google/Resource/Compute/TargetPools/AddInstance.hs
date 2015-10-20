@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.TargetPools.AddInstance
       TargetPoolsAddInstanceResource
 
     -- * Creating a Request
-    , targetPoolsAddInstance'
-    , TargetPoolsAddInstance'
+    , targetPoolsAddInstance
+    , TargetPoolsAddInstance
 
     -- * Request Lenses
     , tpaiProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.addInstance@ method which the
--- 'TargetPoolsAddInstance'' request conforms to.
+-- 'TargetPoolsAddInstance' request conforms to.
 type TargetPoolsAddInstanceResource =
      Capture "project" Text :>
        "regions" :>
@@ -57,15 +57,15 @@ type TargetPoolsAddInstanceResource =
 
 -- | Adds instance url to targetPool.
 --
--- /See:/ 'targetPoolsAddInstance'' smart constructor.
-data TargetPoolsAddInstance' = TargetPoolsAddInstance'
+-- /See:/ 'targetPoolsAddInstance' smart constructor.
+data TargetPoolsAddInstance = TargetPoolsAddInstance
     { _tpaiProject    :: !Text
     , _tpaiTargetPool :: !Text
     , _tpaiPayload    :: !TargetPoolsAddInstanceRequest
     , _tpaiRegion     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetPoolsAddInstance'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetPoolsAddInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,43 +76,43 @@ data TargetPoolsAddInstance' = TargetPoolsAddInstance'
 -- * 'tpaiPayload'
 --
 -- * 'tpaiRegion'
-targetPoolsAddInstance'
+targetPoolsAddInstance
     :: Text -- ^ 'tpaiProject'
     -> Text -- ^ 'tpaiTargetPool'
     -> TargetPoolsAddInstanceRequest -- ^ 'tpaiPayload'
     -> Text -- ^ 'tpaiRegion'
-    -> TargetPoolsAddInstance'
-targetPoolsAddInstance' pTpaiProject_ pTpaiTargetPool_ pTpaiPayload_ pTpaiRegion_ =
-    TargetPoolsAddInstance'
+    -> TargetPoolsAddInstance
+targetPoolsAddInstance pTpaiProject_ pTpaiTargetPool_ pTpaiPayload_ pTpaiRegion_ =
+    TargetPoolsAddInstance
     { _tpaiProject = pTpaiProject_
     , _tpaiTargetPool = pTpaiTargetPool_
     , _tpaiPayload = pTpaiPayload_
     , _tpaiRegion = pTpaiRegion_
     }
 
-tpaiProject :: Lens' TargetPoolsAddInstance' Text
+tpaiProject :: Lens' TargetPoolsAddInstance Text
 tpaiProject
   = lens _tpaiProject (\ s a -> s{_tpaiProject = a})
 
 -- | Name of the TargetPool resource to which instance_url is to be added.
-tpaiTargetPool :: Lens' TargetPoolsAddInstance' Text
+tpaiTargetPool :: Lens' TargetPoolsAddInstance Text
 tpaiTargetPool
   = lens _tpaiTargetPool
       (\ s a -> s{_tpaiTargetPool = a})
 
 -- | Multipart request metadata.
-tpaiPayload :: Lens' TargetPoolsAddInstance' TargetPoolsAddInstanceRequest
+tpaiPayload :: Lens' TargetPoolsAddInstance TargetPoolsAddInstanceRequest
 tpaiPayload
   = lens _tpaiPayload (\ s a -> s{_tpaiPayload = a})
 
 -- | Name of the region scoping this request.
-tpaiRegion :: Lens' TargetPoolsAddInstance' Text
+tpaiRegion :: Lens' TargetPoolsAddInstance Text
 tpaiRegion
   = lens _tpaiRegion (\ s a -> s{_tpaiRegion = a})
 
-instance GoogleRequest TargetPoolsAddInstance' where
-        type Rs TargetPoolsAddInstance' = Operation
-        requestClient TargetPoolsAddInstance'{..}
+instance GoogleRequest TargetPoolsAddInstance where
+        type Rs TargetPoolsAddInstance = Operation
+        requestClient TargetPoolsAddInstance{..}
           = go _tpaiProject _tpaiRegion _tpaiTargetPool
               (Just AltJSON)
               _tpaiPayload

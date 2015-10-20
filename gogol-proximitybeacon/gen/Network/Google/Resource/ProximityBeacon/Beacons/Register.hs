@@ -31,8 +31,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Register
       BeaconsRegisterResource
 
     -- * Creating a Request
-    , beaconsRegister'
-    , BeaconsRegister'
+    , beaconsRegister
+    , BeaconsRegister
 
     -- * Request Lenses
     , brXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.register@ method which the
--- 'BeaconsRegister'' request conforms to.
+-- 'BeaconsRegister' request conforms to.
 type BeaconsRegisterResource =
      "v1beta1" :>
        "beacons:register" :>
@@ -67,8 +67,8 @@ type BeaconsRegisterResource =
 -- These IDs are unique within the system. An ID can be registered only
 -- once.
 --
--- /See:/ 'beaconsRegister'' smart constructor.
-data BeaconsRegister' = BeaconsRegister'
+-- /See:/ 'beaconsRegister' smart constructor.
+data BeaconsRegister = BeaconsRegister
     { _brXgafv          :: !(Maybe Text)
     , _brUploadProtocol :: !(Maybe Text)
     , _brPp             :: !Bool
@@ -79,7 +79,7 @@ data BeaconsRegister' = BeaconsRegister'
     , _brCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BeaconsRegister'' with the minimum fields required to make a request.
+-- | Creates a value of 'BeaconsRegister' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -98,11 +98,11 @@ data BeaconsRegister' = BeaconsRegister'
 -- * 'brBearerToken'
 --
 -- * 'brCallback'
-beaconsRegister'
+beaconsRegister
     :: Beacon -- ^ 'brPayload'
-    -> BeaconsRegister'
-beaconsRegister' pBrPayload_ =
-    BeaconsRegister'
+    -> BeaconsRegister
+beaconsRegister pBrPayload_ =
+    BeaconsRegister
     { _brXgafv = Nothing
     , _brUploadProtocol = Nothing
     , _brPp = True
@@ -114,49 +114,49 @@ beaconsRegister' pBrPayload_ =
     }
 
 -- | V1 error format.
-brXgafv :: Lens' BeaconsRegister' (Maybe Text)
+brXgafv :: Lens' BeaconsRegister (Maybe Text)
 brXgafv = lens _brXgafv (\ s a -> s{_brXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-brUploadProtocol :: Lens' BeaconsRegister' (Maybe Text)
+brUploadProtocol :: Lens' BeaconsRegister (Maybe Text)
 brUploadProtocol
   = lens _brUploadProtocol
       (\ s a -> s{_brUploadProtocol = a})
 
 -- | Pretty-print response.
-brPp :: Lens' BeaconsRegister' Bool
+brPp :: Lens' BeaconsRegister Bool
 brPp = lens _brPp (\ s a -> s{_brPp = a})
 
 -- | OAuth access token.
-brAccessToken :: Lens' BeaconsRegister' (Maybe Text)
+brAccessToken :: Lens' BeaconsRegister (Maybe Text)
 brAccessToken
   = lens _brAccessToken
       (\ s a -> s{_brAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-brUploadType :: Lens' BeaconsRegister' (Maybe Text)
+brUploadType :: Lens' BeaconsRegister (Maybe Text)
 brUploadType
   = lens _brUploadType (\ s a -> s{_brUploadType = a})
 
 -- | Multipart request metadata.
-brPayload :: Lens' BeaconsRegister' Beacon
+brPayload :: Lens' BeaconsRegister Beacon
 brPayload
   = lens _brPayload (\ s a -> s{_brPayload = a})
 
 -- | OAuth bearer token.
-brBearerToken :: Lens' BeaconsRegister' (Maybe Text)
+brBearerToken :: Lens' BeaconsRegister (Maybe Text)
 brBearerToken
   = lens _brBearerToken
       (\ s a -> s{_brBearerToken = a})
 
 -- | JSONP
-brCallback :: Lens' BeaconsRegister' (Maybe Text)
+brCallback :: Lens' BeaconsRegister (Maybe Text)
 brCallback
   = lens _brCallback (\ s a -> s{_brCallback = a})
 
-instance GoogleRequest BeaconsRegister' where
-        type Rs BeaconsRegister' = Beacon
-        requestClient BeaconsRegister'{..}
+instance GoogleRequest BeaconsRegister where
+        type Rs BeaconsRegister = Beacon
+        requestClient BeaconsRegister{..}
           = go _brXgafv _brUploadProtocol (Just _brPp)
               _brAccessToken
               _brUploadType

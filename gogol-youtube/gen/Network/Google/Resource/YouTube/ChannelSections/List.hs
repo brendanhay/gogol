@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.ChannelSections.List
       ChannelSectionsListResource
 
     -- * Creating a Request
-    , channelSectionsList'
-    , ChannelSectionsList'
+    , channelSectionsList
+    , ChannelSectionsList
 
     -- * Request Lenses
     , cslPart
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.channelSections.list@ method which the
--- 'ChannelSectionsList'' request conforms to.
+-- 'ChannelSectionsList' request conforms to.
 type ChannelSectionsListResource =
      "channelSections" :>
        QueryParam "part" Text :>
@@ -59,8 +59,8 @@ type ChannelSectionsListResource =
 
 -- | Returns channelSection resources that match the API request criteria.
 --
--- /See:/ 'channelSectionsList'' smart constructor.
-data ChannelSectionsList' = ChannelSectionsList'
+-- /See:/ 'channelSectionsList' smart constructor.
+data ChannelSectionsList = ChannelSectionsList
     { _cslPart                   :: !Text
     , _cslMine                   :: !(Maybe Bool)
     , _cslChannelId              :: !(Maybe Text)
@@ -69,7 +69,7 @@ data ChannelSectionsList' = ChannelSectionsList'
     , _cslId                     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChannelSectionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChannelSectionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -84,11 +84,11 @@ data ChannelSectionsList' = ChannelSectionsList'
 -- * 'cslOnBehalfOfContentOwner'
 --
 -- * 'cslId'
-channelSectionsList'
+channelSectionsList
     :: Text -- ^ 'cslPart'
-    -> ChannelSectionsList'
-channelSectionsList' pCslPart_ =
-    ChannelSectionsList'
+    -> ChannelSectionsList
+channelSectionsList pCslPart_ =
+    ChannelSectionsList
     { _cslPart = pCslPart_
     , _cslMine = Nothing
     , _cslChannelId = Nothing
@@ -106,17 +106,17 @@ channelSectionsList' pCslPart_ =
 -- property contains other properties, such as a display title for the
 -- channelSection. If you set part=snippet, the API response will also
 -- contain all of those nested properties.
-cslPart :: Lens' ChannelSectionsList' Text
+cslPart :: Lens' ChannelSectionsList Text
 cslPart = lens _cslPart (\ s a -> s{_cslPart = a})
 
 -- | Set this parameter\'s value to true to retrieve a feed of the
 -- authenticated user\'s channelSections.
-cslMine :: Lens' ChannelSectionsList' (Maybe Bool)
+cslMine :: Lens' ChannelSectionsList (Maybe Bool)
 cslMine = lens _cslMine (\ s a -> s{_cslMine = a})
 
 -- | The channelId parameter specifies a YouTube channel ID. The API will
 -- only return that channel\'s channelSections.
-cslChannelId :: Lens' ChannelSectionsList' (Maybe Text)
+cslChannelId :: Lens' ChannelSectionsList (Maybe Text)
 cslChannelId
   = lens _cslChannelId (\ s a -> s{_cslChannelId = a})
 
@@ -128,7 +128,7 @@ cslChannelId
 -- titles are available. Channel owners can provide localized channel
 -- section titles using either the channelSections.insert or
 -- channelSections.update method.
-cslHl :: Lens' ChannelSectionsList' (Maybe Text)
+cslHl :: Lens' ChannelSectionsList (Maybe Text)
 cslHl = lens _cslHl (\ s a -> s{_cslHl = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
@@ -141,7 +141,7 @@ cslHl = lens _cslHl (\ s a -> s{_cslHl = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-cslOnBehalfOfContentOwner :: Lens' ChannelSectionsList' (Maybe Text)
+cslOnBehalfOfContentOwner :: Lens' ChannelSectionsList (Maybe Text)
 cslOnBehalfOfContentOwner
   = lens _cslOnBehalfOfContentOwner
       (\ s a -> s{_cslOnBehalfOfContentOwner = a})
@@ -150,13 +150,13 @@ cslOnBehalfOfContentOwner
 -- channelSection ID(s) for the resource(s) that are being retrieved. In a
 -- channelSection resource, the id property specifies the YouTube
 -- channelSection ID.
-cslId :: Lens' ChannelSectionsList' (Maybe Text)
+cslId :: Lens' ChannelSectionsList (Maybe Text)
 cslId = lens _cslId (\ s a -> s{_cslId = a})
 
-instance GoogleRequest ChannelSectionsList' where
-        type Rs ChannelSectionsList' =
+instance GoogleRequest ChannelSectionsList where
+        type Rs ChannelSectionsList =
              ChannelSectionListResponse
-        requestClient ChannelSectionsList'{..}
+        requestClient ChannelSectionsList{..}
           = go (Just _cslPart) _cslMine _cslChannelId _cslHl
               _cslOnBehalfOfContentOwner
               _cslId

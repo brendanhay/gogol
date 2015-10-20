@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Layers.Create
       LayersCreateResource
 
     -- * Creating a Request
-    , layersCreate'
-    , LayersCreate'
+    , layersCreate
+    , LayersCreate
 
     -- * Request Lenses
     , lcProcess
@@ -41,7 +41,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.layers.create@ method which the
--- 'LayersCreate'' request conforms to.
+-- 'LayersCreate' request conforms to.
 type LayersCreateResource =
      "layers" :>
        QueryParam "process" Bool :>
@@ -50,41 +50,41 @@ type LayersCreateResource =
 
 -- | Create a layer asset.
 --
--- /See:/ 'layersCreate'' smart constructor.
-data LayersCreate' = LayersCreate'
+-- /See:/ 'layersCreate' smart constructor.
+data LayersCreate = LayersCreate
     { _lcProcess :: !(Maybe Bool)
     , _lcPayload :: !Layer
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lcProcess'
 --
 -- * 'lcPayload'
-layersCreate'
+layersCreate
     :: Layer -- ^ 'lcPayload'
-    -> LayersCreate'
-layersCreate' pLcPayload_ =
-    LayersCreate'
+    -> LayersCreate
+layersCreate pLcPayload_ =
+    LayersCreate
     { _lcProcess = Nothing
     , _lcPayload = pLcPayload_
     }
 
 -- | Whether to queue the created layer for processing.
-lcProcess :: Lens' LayersCreate' (Maybe Bool)
+lcProcess :: Lens' LayersCreate (Maybe Bool)
 lcProcess
   = lens _lcProcess (\ s a -> s{_lcProcess = a})
 
 -- | Multipart request metadata.
-lcPayload :: Lens' LayersCreate' Layer
+lcPayload :: Lens' LayersCreate Layer
 lcPayload
   = lens _lcPayload (\ s a -> s{_lcPayload = a})
 
-instance GoogleRequest LayersCreate' where
-        type Rs LayersCreate' = Layer
-        requestClient LayersCreate'{..}
+instance GoogleRequest LayersCreate where
+        type Rs LayersCreate = Layer
+        requestClient LayersCreate{..}
           = go _lcProcess (Just AltJSON) _lcPayload
               mapsEngineService
           where go

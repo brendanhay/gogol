@@ -29,8 +29,8 @@ module Network.Google.Resource.Container.Projects.Zones.Operations.List
       ProjectsZonesOperationsListResource
 
     -- * Creating a Request
-    , projectsZonesOperationsList'
-    , ProjectsZonesOperationsList'
+    , projectsZonesOperationsList
+    , ProjectsZonesOperationsList
 
     -- * Request Lenses
     , pzolXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.operations.list@ method which the
--- 'ProjectsZonesOperationsList'' request conforms to.
+-- 'ProjectsZonesOperationsList' request conforms to.
 type ProjectsZonesOperationsListResource =
      "v1" :>
        "projects" :>
@@ -68,8 +68,8 @@ type ProjectsZonesOperationsListResource =
 
 -- | Lists all operations in a project in a specific zone or all zones.
 --
--- /See:/ 'projectsZonesOperationsList'' smart constructor.
-data ProjectsZonesOperationsList' = ProjectsZonesOperationsList'
+-- /See:/ 'projectsZonesOperationsList' smart constructor.
+data ProjectsZonesOperationsList = ProjectsZonesOperationsList
     { _pzolXgafv          :: !(Maybe Text)
     , _pzolUploadProtocol :: !(Maybe Text)
     , _pzolPp             :: !Bool
@@ -81,7 +81,7 @@ data ProjectsZonesOperationsList' = ProjectsZonesOperationsList'
     , _pzolCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsZonesOperationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsZonesOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -102,12 +102,12 @@ data ProjectsZonesOperationsList' = ProjectsZonesOperationsList'
 -- * 'pzolProjectId'
 --
 -- * 'pzolCallback'
-projectsZonesOperationsList'
+projectsZonesOperationsList
     :: Text -- ^ 'pzolZone'
     -> Text -- ^ 'pzolProjectId'
-    -> ProjectsZonesOperationsList'
-projectsZonesOperationsList' pPzolZone_ pPzolProjectId_ =
-    ProjectsZonesOperationsList'
+    -> ProjectsZonesOperationsList
+projectsZonesOperationsList pPzolZone_ pPzolProjectId_ =
+    ProjectsZonesOperationsList
     { _pzolXgafv = Nothing
     , _pzolUploadProtocol = Nothing
     , _pzolPp = True
@@ -120,28 +120,28 @@ projectsZonesOperationsList' pPzolZone_ pPzolProjectId_ =
     }
 
 -- | V1 error format.
-pzolXgafv :: Lens' ProjectsZonesOperationsList' (Maybe Text)
+pzolXgafv :: Lens' ProjectsZonesOperationsList (Maybe Text)
 pzolXgafv
   = lens _pzolXgafv (\ s a -> s{_pzolXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pzolUploadProtocol :: Lens' ProjectsZonesOperationsList' (Maybe Text)
+pzolUploadProtocol :: Lens' ProjectsZonesOperationsList (Maybe Text)
 pzolUploadProtocol
   = lens _pzolUploadProtocol
       (\ s a -> s{_pzolUploadProtocol = a})
 
 -- | Pretty-print response.
-pzolPp :: Lens' ProjectsZonesOperationsList' Bool
+pzolPp :: Lens' ProjectsZonesOperationsList Bool
 pzolPp = lens _pzolPp (\ s a -> s{_pzolPp = a})
 
 -- | OAuth access token.
-pzolAccessToken :: Lens' ProjectsZonesOperationsList' (Maybe Text)
+pzolAccessToken :: Lens' ProjectsZonesOperationsList (Maybe Text)
 pzolAccessToken
   = lens _pzolAccessToken
       (\ s a -> s{_pzolAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pzolUploadType :: Lens' ProjectsZonesOperationsList' (Maybe Text)
+pzolUploadType :: Lens' ProjectsZonesOperationsList (Maybe Text)
 pzolUploadType
   = lens _pzolUploadType
       (\ s a -> s{_pzolUploadType = a})
@@ -149,32 +149,32 @@ pzolUploadType
 -- | The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) to return operations for, or
 -- \"-\" for all zones.
-pzolZone :: Lens' ProjectsZonesOperationsList' Text
+pzolZone :: Lens' ProjectsZonesOperationsList Text
 pzolZone = lens _pzolZone (\ s a -> s{_pzolZone = a})
 
 -- | OAuth bearer token.
-pzolBearerToken :: Lens' ProjectsZonesOperationsList' (Maybe Text)
+pzolBearerToken :: Lens' ProjectsZonesOperationsList (Maybe Text)
 pzolBearerToken
   = lens _pzolBearerToken
       (\ s a -> s{_pzolBearerToken = a})
 
 -- | The Google Developers Console [project ID or project
 -- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
-pzolProjectId :: Lens' ProjectsZonesOperationsList' Text
+pzolProjectId :: Lens' ProjectsZonesOperationsList Text
 pzolProjectId
   = lens _pzolProjectId
       (\ s a -> s{_pzolProjectId = a})
 
 -- | JSONP
-pzolCallback :: Lens' ProjectsZonesOperationsList' (Maybe Text)
+pzolCallback :: Lens' ProjectsZonesOperationsList (Maybe Text)
 pzolCallback
   = lens _pzolCallback (\ s a -> s{_pzolCallback = a})
 
-instance GoogleRequest ProjectsZonesOperationsList'
+instance GoogleRequest ProjectsZonesOperationsList
          where
-        type Rs ProjectsZonesOperationsList' =
+        type Rs ProjectsZonesOperationsList =
              ListOperationsResponse
-        requestClient ProjectsZonesOperationsList'{..}
+        requestClient ProjectsZonesOperationsList{..}
           = go _pzolProjectId _pzolZone _pzolXgafv
               _pzolUploadProtocol
               (Just _pzolPp)

@@ -29,8 +29,8 @@ module Network.Google.Resource.ResourceViews.ZoneViews.Get
       ZoneViewsGetResource
 
     -- * Creating a Request
-    , zoneViewsGet'
-    , ZoneViewsGet'
+    , zoneViewsGet
+    , ZoneViewsGet
 
     -- * Request Lenses
     , zvgResourceView
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
 -- | A resource alias for @resourceviews.zoneViews.get@ method which the
--- 'ZoneViewsGet'' request conforms to.
+-- 'ZoneViewsGet' request conforms to.
 type ZoneViewsGetResource =
      Capture "project" Text :>
        "zones" :>
@@ -53,14 +53,14 @@ type ZoneViewsGetResource =
 
 -- | Get the information of a zonal resource view.
 --
--- /See:/ 'zoneViewsGet'' smart constructor.
-data ZoneViewsGet' = ZoneViewsGet'
+-- /See:/ 'zoneViewsGet' smart constructor.
+data ZoneViewsGet = ZoneViewsGet
     { _zvgResourceView :: !Text
     , _zvgProject      :: !Text
     , _zvgZone         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ZoneViewsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ZoneViewsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,36 @@ data ZoneViewsGet' = ZoneViewsGet'
 -- * 'zvgProject'
 --
 -- * 'zvgZone'
-zoneViewsGet'
+zoneViewsGet
     :: Text -- ^ 'zvgResourceView'
     -> Text -- ^ 'zvgProject'
     -> Text -- ^ 'zvgZone'
-    -> ZoneViewsGet'
-zoneViewsGet' pZvgResourceView_ pZvgProject_ pZvgZone_ =
-    ZoneViewsGet'
+    -> ZoneViewsGet
+zoneViewsGet pZvgResourceView_ pZvgProject_ pZvgZone_ =
+    ZoneViewsGet
     { _zvgResourceView = pZvgResourceView_
     , _zvgProject = pZvgProject_
     , _zvgZone = pZvgZone_
     }
 
 -- | The name of the resource view.
-zvgResourceView :: Lens' ZoneViewsGet' Text
+zvgResourceView :: Lens' ZoneViewsGet Text
 zvgResourceView
   = lens _zvgResourceView
       (\ s a -> s{_zvgResourceView = a})
 
 -- | The project name of the resource view.
-zvgProject :: Lens' ZoneViewsGet' Text
+zvgProject :: Lens' ZoneViewsGet Text
 zvgProject
   = lens _zvgProject (\ s a -> s{_zvgProject = a})
 
 -- | The zone name of the resource view.
-zvgZone :: Lens' ZoneViewsGet' Text
+zvgZone :: Lens' ZoneViewsGet Text
 zvgZone = lens _zvgZone (\ s a -> s{_zvgZone = a})
 
-instance GoogleRequest ZoneViewsGet' where
-        type Rs ZoneViewsGet' = ResourceView
-        requestClient ZoneViewsGet'{..}
+instance GoogleRequest ZoneViewsGet where
+        type Rs ZoneViewsGet = ResourceView
+        requestClient ZoneViewsGet{..}
           = go _zvgProject _zvgZone _zvgResourceView
               (Just AltJSON)
               resourceViewsService

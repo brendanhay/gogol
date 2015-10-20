@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Update
       MarketplaceDealsUpdateResource
 
     -- * Creating a Request
-    , marketplaceDealsUpdate'
-    , MarketplaceDealsUpdate'
+    , marketplaceDealsUpdate
+    , MarketplaceDealsUpdate
 
     -- * Request Lenses
     , mduPayload
@@ -41,7 +41,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.marketplacedeals.update@ method which the
--- 'MarketplaceDealsUpdate'' request conforms to.
+-- 'MarketplaceDealsUpdate' request conforms to.
 type MarketplaceDealsUpdateResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
@@ -53,43 +53,43 @@ type MarketplaceDealsUpdateResource =
 
 -- | Replaces all the deals in the order with the passed in deals
 --
--- /See:/ 'marketplaceDealsUpdate'' smart constructor.
-data MarketplaceDealsUpdate' = MarketplaceDealsUpdate'
+-- /See:/ 'marketplaceDealsUpdate' smart constructor.
+data MarketplaceDealsUpdate = MarketplaceDealsUpdate
     { _mduPayload :: !EditAllOrderDealsRequest
     , _mduOrderId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MarketplaceDealsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'MarketplaceDealsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mduPayload'
 --
 -- * 'mduOrderId'
-marketplaceDealsUpdate'
+marketplaceDealsUpdate
     :: EditAllOrderDealsRequest -- ^ 'mduPayload'
     -> Text -- ^ 'mduOrderId'
-    -> MarketplaceDealsUpdate'
-marketplaceDealsUpdate' pMduPayload_ pMduOrderId_ =
-    MarketplaceDealsUpdate'
+    -> MarketplaceDealsUpdate
+marketplaceDealsUpdate pMduPayload_ pMduOrderId_ =
+    MarketplaceDealsUpdate
     { _mduPayload = pMduPayload_
     , _mduOrderId = pMduOrderId_
     }
 
 -- | Multipart request metadata.
-mduPayload :: Lens' MarketplaceDealsUpdate' EditAllOrderDealsRequest
+mduPayload :: Lens' MarketplaceDealsUpdate EditAllOrderDealsRequest
 mduPayload
   = lens _mduPayload (\ s a -> s{_mduPayload = a})
 
 -- | The orderId to edit deals on.
-mduOrderId :: Lens' MarketplaceDealsUpdate' Text
+mduOrderId :: Lens' MarketplaceDealsUpdate Text
 mduOrderId
   = lens _mduOrderId (\ s a -> s{_mduOrderId = a})
 
-instance GoogleRequest MarketplaceDealsUpdate' where
-        type Rs MarketplaceDealsUpdate' =
+instance GoogleRequest MarketplaceDealsUpdate where
+        type Rs MarketplaceDealsUpdate =
              EditAllOrderDealsResponse
-        requestClient MarketplaceDealsUpdate'{..}
+        requestClient MarketplaceDealsUpdate{..}
           = go _mduOrderId (Just AltJSON) _mduPayload
               adExchangeBuyerService
           where go

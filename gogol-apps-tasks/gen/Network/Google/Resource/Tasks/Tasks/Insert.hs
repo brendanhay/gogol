@@ -29,8 +29,8 @@ module Network.Google.Resource.Tasks.Tasks.Insert
       TasksInsertResource
 
     -- * Creating a Request
-    , tasksInsert'
-    , TasksInsert'
+    , tasksInsert
+    , TasksInsert
 
     -- * Request Lenses
     , tiParent
@@ -43,7 +43,7 @@ import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasks.insert@ method which the
--- 'TasksInsert'' request conforms to.
+-- 'TasksInsert' request conforms to.
 type TasksInsertResource =
      "lists" :>
        Capture "tasklist" Text :>
@@ -55,15 +55,15 @@ type TasksInsertResource =
 
 -- | Creates a new task on the specified task list.
 --
--- /See:/ 'tasksInsert'' smart constructor.
-data TasksInsert' = TasksInsert'
+-- /See:/ 'tasksInsert' smart constructor.
+data TasksInsert = TasksInsert
     { _tiParent   :: !(Maybe Text)
     , _tiPayload  :: !Task
     , _tiTaskList :: !Text
     , _tiPrevious :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TasksInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'TasksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,12 +74,12 @@ data TasksInsert' = TasksInsert'
 -- * 'tiTaskList'
 --
 -- * 'tiPrevious'
-tasksInsert'
+tasksInsert
     :: Task -- ^ 'tiPayload'
     -> Text -- ^ 'tiTaskList'
-    -> TasksInsert'
-tasksInsert' pTiPayload_ pTiTaskList_ =
-    TasksInsert'
+    -> TasksInsert
+tasksInsert pTiPayload_ pTiTaskList_ =
+    TasksInsert
     { _tiParent = Nothing
     , _tiPayload = pTiPayload_
     , _tiTaskList = pTiTaskList_
@@ -88,28 +88,28 @@ tasksInsert' pTiPayload_ pTiTaskList_ =
 
 -- | Parent task identifier. If the task is created at the top level, this
 -- parameter is omitted. Optional.
-tiParent :: Lens' TasksInsert' (Maybe Text)
+tiParent :: Lens' TasksInsert (Maybe Text)
 tiParent = lens _tiParent (\ s a -> s{_tiParent = a})
 
 -- | Multipart request metadata.
-tiPayload :: Lens' TasksInsert' Task
+tiPayload :: Lens' TasksInsert Task
 tiPayload
   = lens _tiPayload (\ s a -> s{_tiPayload = a})
 
 -- | Task list identifier.
-tiTaskList :: Lens' TasksInsert' Text
+tiTaskList :: Lens' TasksInsert Text
 tiTaskList
   = lens _tiTaskList (\ s a -> s{_tiTaskList = a})
 
 -- | Previous sibling task identifier. If the task is created at the first
 -- position among its siblings, this parameter is omitted. Optional.
-tiPrevious :: Lens' TasksInsert' (Maybe Text)
+tiPrevious :: Lens' TasksInsert (Maybe Text)
 tiPrevious
   = lens _tiPrevious (\ s a -> s{_tiPrevious = a})
 
-instance GoogleRequest TasksInsert' where
-        type Rs TasksInsert' = Task
-        requestClient TasksInsert'{..}
+instance GoogleRequest TasksInsert where
+        type Rs TasksInsert = Task
+        requestClient TasksInsert{..}
           = go _tiTaskList _tiParent _tiPrevious (Just AltJSON)
               _tiPayload
               appsTasksService

@@ -30,8 +30,8 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Get
       PurchasesSubscriptionsGetResource
 
     -- * Creating a Request
-    , purchasesSubscriptionsGet'
-    , PurchasesSubscriptionsGet'
+    , purchasesSubscriptionsGet
+    , PurchasesSubscriptionsGet
 
     -- * Request Lenses
     , psgPackageName
@@ -43,7 +43,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.purchases.subscriptions.get@ method which the
--- 'PurchasesSubscriptionsGet'' request conforms to.
+-- 'PurchasesSubscriptionsGet' request conforms to.
 type PurchasesSubscriptionsGetResource =
      Capture "packageName" Text :>
        "purchases" :>
@@ -57,14 +57,14 @@ type PurchasesSubscriptionsGetResource =
 -- | Checks whether a user\'s subscription purchase is valid and returns its
 -- expiry time.
 --
--- /See:/ 'purchasesSubscriptionsGet'' smart constructor.
-data PurchasesSubscriptionsGet' = PurchasesSubscriptionsGet'
+-- /See:/ 'purchasesSubscriptionsGet' smart constructor.
+data PurchasesSubscriptionsGet = PurchasesSubscriptionsGet
     { _psgPackageName    :: !Text
     , _psgToken          :: !Text
     , _psgSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PurchasesSubscriptionsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PurchasesSubscriptionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,13 +73,13 @@ data PurchasesSubscriptionsGet' = PurchasesSubscriptionsGet'
 -- * 'psgToken'
 --
 -- * 'psgSubscriptionId'
-purchasesSubscriptionsGet'
+purchasesSubscriptionsGet
     :: Text -- ^ 'psgPackageName'
     -> Text -- ^ 'psgToken'
     -> Text -- ^ 'psgSubscriptionId'
-    -> PurchasesSubscriptionsGet'
-purchasesSubscriptionsGet' pPsgPackageName_ pPsgToken_ pPsgSubscriptionId_ =
-    PurchasesSubscriptionsGet'
+    -> PurchasesSubscriptionsGet
+purchasesSubscriptionsGet pPsgPackageName_ pPsgToken_ pPsgSubscriptionId_ =
+    PurchasesSubscriptionsGet
     { _psgPackageName = pPsgPackageName_
     , _psgToken = pPsgToken_
     , _psgSubscriptionId = pPsgSubscriptionId_
@@ -87,27 +87,27 @@ purchasesSubscriptionsGet' pPsgPackageName_ pPsgToken_ pPsgSubscriptionId_ =
 
 -- | The package name of the application for which this subscription was
 -- purchased (for example, \'com.some.thing\').
-psgPackageName :: Lens' PurchasesSubscriptionsGet' Text
+psgPackageName :: Lens' PurchasesSubscriptionsGet Text
 psgPackageName
   = lens _psgPackageName
       (\ s a -> s{_psgPackageName = a})
 
 -- | The token provided to the user\'s device when the subscription was
 -- purchased.
-psgToken :: Lens' PurchasesSubscriptionsGet' Text
+psgToken :: Lens' PurchasesSubscriptionsGet Text
 psgToken = lens _psgToken (\ s a -> s{_psgToken = a})
 
 -- | The purchased subscription ID (for example, \'monthly001\').
-psgSubscriptionId :: Lens' PurchasesSubscriptionsGet' Text
+psgSubscriptionId :: Lens' PurchasesSubscriptionsGet Text
 psgSubscriptionId
   = lens _psgSubscriptionId
       (\ s a -> s{_psgSubscriptionId = a})
 
-instance GoogleRequest PurchasesSubscriptionsGet'
+instance GoogleRequest PurchasesSubscriptionsGet
          where
-        type Rs PurchasesSubscriptionsGet' =
+        type Rs PurchasesSubscriptionsGet =
              SubscriptionPurchase
-        requestClient PurchasesSubscriptionsGet'{..}
+        requestClient PurchasesSubscriptionsGet{..}
           = go _psgPackageName _psgSubscriptionId _psgToken
               (Just AltJSON)
               androidPublisherService

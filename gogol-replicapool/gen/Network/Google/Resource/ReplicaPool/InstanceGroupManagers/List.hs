@@ -30,8 +30,8 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.List
       InstanceGroupManagersListResource
 
     -- * Creating a Request
-    , instanceGroupManagersList'
-    , InstanceGroupManagersList'
+    , instanceGroupManagersList
+    , InstanceGroupManagersList
 
     -- * Request Lenses
     , igmlProject
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.instanceGroupManagers.list@ method which the
--- 'InstanceGroupManagersList'' request conforms to.
+-- 'InstanceGroupManagersList' request conforms to.
 type InstanceGroupManagersListResource =
      Capture "project" Text :>
        "zones" :>
@@ -60,8 +60,8 @@ type InstanceGroupManagersListResource =
 -- | Retrieves the list of Instance Group Manager resources contained within
 -- the specified zone.
 --
--- /See:/ 'instanceGroupManagersList'' smart constructor.
-data InstanceGroupManagersList' = InstanceGroupManagersList'
+-- /See:/ 'instanceGroupManagersList' smart constructor.
+data InstanceGroupManagersList = InstanceGroupManagersList
     { _igmlProject    :: !Text
     , _igmlZone       :: !Text
     , _igmlFilter     :: !(Maybe Text)
@@ -69,7 +69,7 @@ data InstanceGroupManagersList' = InstanceGroupManagersList'
     , _igmlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupManagersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupManagersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,12 +82,12 @@ data InstanceGroupManagersList' = InstanceGroupManagersList'
 -- * 'igmlPageToken'
 --
 -- * 'igmlMaxResults'
-instanceGroupManagersList'
+instanceGroupManagersList
     :: Text -- ^ 'igmlProject'
     -> Text -- ^ 'igmlZone'
-    -> InstanceGroupManagersList'
-instanceGroupManagersList' pIgmlProject_ pIgmlZone_ =
-    InstanceGroupManagersList'
+    -> InstanceGroupManagersList
+instanceGroupManagersList pIgmlProject_ pIgmlZone_ =
+    InstanceGroupManagersList
     { _igmlProject = pIgmlProject_
     , _igmlZone = pIgmlZone_
     , _igmlFilter = Nothing
@@ -96,38 +96,38 @@ instanceGroupManagersList' pIgmlProject_ pIgmlZone_ =
     }
 
 -- | The Google Developers Console project name.
-igmlProject :: Lens' InstanceGroupManagersList' Text
+igmlProject :: Lens' InstanceGroupManagersList Text
 igmlProject
   = lens _igmlProject (\ s a -> s{_igmlProject = a})
 
 -- | The name of the zone in which the instance group manager resides.
-igmlZone :: Lens' InstanceGroupManagersList' Text
+igmlZone :: Lens' InstanceGroupManagersList Text
 igmlZone = lens _igmlZone (\ s a -> s{_igmlZone = a})
 
 -- | Optional. Filter expression for filtering listed resources.
-igmlFilter :: Lens' InstanceGroupManagersList' (Maybe Text)
+igmlFilter :: Lens' InstanceGroupManagersList (Maybe Text)
 igmlFilter
   = lens _igmlFilter (\ s a -> s{_igmlFilter = a})
 
 -- | Optional. Tag returned by a previous list request truncated by
 -- maxResults. Used to continue a previous list request.
-igmlPageToken :: Lens' InstanceGroupManagersList' (Maybe Text)
+igmlPageToken :: Lens' InstanceGroupManagersList (Maybe Text)
 igmlPageToken
   = lens _igmlPageToken
       (\ s a -> s{_igmlPageToken = a})
 
 -- | Optional. Maximum count of results to be returned. Maximum value is 500
 -- and default value is 500.
-igmlMaxResults :: Lens' InstanceGroupManagersList' Word32
+igmlMaxResults :: Lens' InstanceGroupManagersList Word32
 igmlMaxResults
   = lens _igmlMaxResults
       (\ s a -> s{_igmlMaxResults = a})
 
-instance GoogleRequest InstanceGroupManagersList'
+instance GoogleRequest InstanceGroupManagersList
          where
-        type Rs InstanceGroupManagersList' =
+        type Rs InstanceGroupManagersList =
              InstanceGroupManagerList
-        requestClient InstanceGroupManagersList'{..}
+        requestClient InstanceGroupManagersList{..}
           = go _igmlProject _igmlZone _igmlFilter
               _igmlPageToken
               (Just _igmlMaxResults)

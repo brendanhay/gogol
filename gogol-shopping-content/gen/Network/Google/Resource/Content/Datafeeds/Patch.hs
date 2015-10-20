@@ -30,8 +30,8 @@ module Network.Google.Resource.Content.Datafeeds.Patch
       DatafeedsPatchResource
 
     -- * Creating a Request
-    , datafeedsPatch'
-    , DatafeedsPatch'
+    , datafeedsPatch
+    , DatafeedsPatch
 
     -- * Request Lenses
     , dpMerchantId
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.datafeeds.patch@ method which the
--- 'DatafeedsPatch'' request conforms to.
+-- 'DatafeedsPatch' request conforms to.
 type DatafeedsPatchResource =
      Capture "merchantId" Word64 :>
        "datafeeds" :>
@@ -56,15 +56,15 @@ type DatafeedsPatchResource =
 -- | Updates a datafeed of your Merchant Center account. This method supports
 -- patch semantics.
 --
--- /See:/ 'datafeedsPatch'' smart constructor.
-data DatafeedsPatch' = DatafeedsPatch'
+-- /See:/ 'datafeedsPatch' smart constructor.
+data DatafeedsPatch = DatafeedsPatch
     { _dpMerchantId :: !Word64
     , _dpPayload    :: !Datafeed
     , _dpDatafeedId :: !Word64
     , _dpDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatafeedsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatafeedsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,39 +75,39 @@ data DatafeedsPatch' = DatafeedsPatch'
 -- * 'dpDatafeedId'
 --
 -- * 'dpDryRun'
-datafeedsPatch'
+datafeedsPatch
     :: Word64 -- ^ 'dpMerchantId'
     -> Datafeed -- ^ 'dpPayload'
     -> Word64 -- ^ 'dpDatafeedId'
-    -> DatafeedsPatch'
-datafeedsPatch' pDpMerchantId_ pDpPayload_ pDpDatafeedId_ =
-    DatafeedsPatch'
+    -> DatafeedsPatch
+datafeedsPatch pDpMerchantId_ pDpPayload_ pDpDatafeedId_ =
+    DatafeedsPatch
     { _dpMerchantId = pDpMerchantId_
     , _dpPayload = pDpPayload_
     , _dpDatafeedId = pDpDatafeedId_
     , _dpDryRun = Nothing
     }
 
-dpMerchantId :: Lens' DatafeedsPatch' Word64
+dpMerchantId :: Lens' DatafeedsPatch Word64
 dpMerchantId
   = lens _dpMerchantId (\ s a -> s{_dpMerchantId = a})
 
 -- | Multipart request metadata.
-dpPayload :: Lens' DatafeedsPatch' Datafeed
+dpPayload :: Lens' DatafeedsPatch Datafeed
 dpPayload
   = lens _dpPayload (\ s a -> s{_dpPayload = a})
 
-dpDatafeedId :: Lens' DatafeedsPatch' Word64
+dpDatafeedId :: Lens' DatafeedsPatch Word64
 dpDatafeedId
   = lens _dpDatafeedId (\ s a -> s{_dpDatafeedId = a})
 
 -- | Flag to run the request in dry-run mode.
-dpDryRun :: Lens' DatafeedsPatch' (Maybe Bool)
+dpDryRun :: Lens' DatafeedsPatch (Maybe Bool)
 dpDryRun = lens _dpDryRun (\ s a -> s{_dpDryRun = a})
 
-instance GoogleRequest DatafeedsPatch' where
-        type Rs DatafeedsPatch' = Datafeed
-        requestClient DatafeedsPatch'{..}
+instance GoogleRequest DatafeedsPatch where
+        type Rs DatafeedsPatch = Datafeed
+        requestClient DatafeedsPatch{..}
           = go _dpMerchantId _dpDatafeedId _dpDryRun
               (Just AltJSON)
               _dpPayload

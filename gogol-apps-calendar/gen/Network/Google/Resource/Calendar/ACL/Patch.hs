@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.ACL.Patch
       ACLPatchResource
 
     -- * Creating a Request
-    , aclPatch'
-    , ACLPatch'
+    , aclPatch
+    , ACLPatch
 
     -- * Request Lenses
     , apCalendarId
@@ -42,7 +42,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.acl.patch@ method which the
--- 'ACLPatch'' request conforms to.
+-- 'ACLPatch' request conforms to.
 type ACLPatchResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -53,14 +53,14 @@ type ACLPatchResource =
 
 -- | Updates an access control rule. This method supports patch semantics.
 --
--- /See:/ 'aclPatch'' smart constructor.
-data ACLPatch' = ACLPatch'
+-- /See:/ 'aclPatch' smart constructor.
+data ACLPatch = ACLPatch
     { _apCalendarId :: !Text
     , _apRuleId     :: !Text
     , _apPayload    :: !ACLRule
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ACLPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ACLPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,13 +69,13 @@ data ACLPatch' = ACLPatch'
 -- * 'apRuleId'
 --
 -- * 'apPayload'
-aclPatch'
+aclPatch
     :: Text -- ^ 'apCalendarId'
     -> Text -- ^ 'apRuleId'
     -> ACLRule -- ^ 'apPayload'
-    -> ACLPatch'
-aclPatch' pApCalendarId_ pApRuleId_ pApPayload_ =
-    ACLPatch'
+    -> ACLPatch
+aclPatch pApCalendarId_ pApRuleId_ pApPayload_ =
+    ACLPatch
     { _apCalendarId = pApCalendarId_
     , _apRuleId = pApRuleId_
     , _apPayload = pApPayload_
@@ -84,22 +84,22 @@ aclPatch' pApCalendarId_ pApRuleId_ pApPayload_ =
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-apCalendarId :: Lens' ACLPatch' Text
+apCalendarId :: Lens' ACLPatch Text
 apCalendarId
   = lens _apCalendarId (\ s a -> s{_apCalendarId = a})
 
 -- | ACL rule identifier.
-apRuleId :: Lens' ACLPatch' Text
+apRuleId :: Lens' ACLPatch Text
 apRuleId = lens _apRuleId (\ s a -> s{_apRuleId = a})
 
 -- | Multipart request metadata.
-apPayload :: Lens' ACLPatch' ACLRule
+apPayload :: Lens' ACLPatch ACLRule
 apPayload
   = lens _apPayload (\ s a -> s{_apPayload = a})
 
-instance GoogleRequest ACLPatch' where
-        type Rs ACLPatch' = ACLRule
-        requestClient ACLPatch'{..}
+instance GoogleRequest ACLPatch where
+        type Rs ACLPatch = ACLRule
+        requestClient ACLPatch{..}
           = go _apCalendarId _apRuleId (Just AltJSON)
               _apPayload
               appsCalendarService

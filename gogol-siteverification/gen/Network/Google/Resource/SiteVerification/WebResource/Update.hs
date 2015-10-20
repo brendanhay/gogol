@@ -29,8 +29,8 @@ module Network.Google.Resource.SiteVerification.WebResource.Update
       WebResourceUpdateResource
 
     -- * Creating a Request
-    , webResourceUpdate'
-    , WebResourceUpdate'
+    , webResourceUpdate
+    , WebResourceUpdate
 
     -- * Request Lenses
     , wruPayload
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.update@ method which the
--- 'WebResourceUpdate'' request conforms to.
+-- 'WebResourceUpdate' request conforms to.
 type WebResourceUpdateResource =
      "webResource" :>
        Capture "id" Text :>
@@ -51,42 +51,42 @@ type WebResourceUpdateResource =
 
 -- | Modify the list of owners for your website or domain.
 --
--- /See:/ 'webResourceUpdate'' smart constructor.
-data WebResourceUpdate' = WebResourceUpdate'
+-- /See:/ 'webResourceUpdate' smart constructor.
+data WebResourceUpdate = WebResourceUpdate
     { _wruPayload :: !SiteVerificationWebResourceResource
     , _wruId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'WebResourceUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'WebResourceUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'wruPayload'
 --
 -- * 'wruId'
-webResourceUpdate'
+webResourceUpdate
     :: SiteVerificationWebResourceResource -- ^ 'wruPayload'
     -> Text -- ^ 'wruId'
-    -> WebResourceUpdate'
-webResourceUpdate' pWruPayload_ pWruId_ =
-    WebResourceUpdate'
+    -> WebResourceUpdate
+webResourceUpdate pWruPayload_ pWruId_ =
+    WebResourceUpdate
     { _wruPayload = pWruPayload_
     , _wruId = pWruId_
     }
 
 -- | Multipart request metadata.
-wruPayload :: Lens' WebResourceUpdate' SiteVerificationWebResourceResource
+wruPayload :: Lens' WebResourceUpdate SiteVerificationWebResourceResource
 wruPayload
   = lens _wruPayload (\ s a -> s{_wruPayload = a})
 
 -- | The id of a verified site or domain.
-wruId :: Lens' WebResourceUpdate' Text
+wruId :: Lens' WebResourceUpdate Text
 wruId = lens _wruId (\ s a -> s{_wruId = a})
 
-instance GoogleRequest WebResourceUpdate' where
-        type Rs WebResourceUpdate' =
+instance GoogleRequest WebResourceUpdate where
+        type Rs WebResourceUpdate =
              SiteVerificationWebResourceResource
-        requestClient WebResourceUpdate'{..}
+        requestClient WebResourceUpdate{..}
           = go _wruId (Just AltJSON) _wruPayload
               siteVerificationService
           where go

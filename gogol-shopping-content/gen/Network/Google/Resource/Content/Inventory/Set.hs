@@ -31,8 +31,8 @@ module Network.Google.Resource.Content.Inventory.Set
       InventorySetResource
 
     -- * Creating a Request
-    , inventorySet'
-    , InventorySet'
+    , inventorySet
+    , InventorySet
 
     -- * Request Lenses
     , isMerchantId
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.inventory.set@ method which the
--- 'InventorySet'' request conforms to.
+-- 'InventorySet' request conforms to.
 type InventorySetResource =
      Capture "merchantId" Word64 :>
        "inventory" :>
@@ -62,8 +62,8 @@ type InventorySetResource =
 -- account. This operation does not update the expiration date of the
 -- product.
 --
--- /See:/ 'inventorySet'' smart constructor.
-data InventorySet' = InventorySet'
+-- /See:/ 'inventorySet' smart constructor.
+data InventorySet = InventorySet
     { _isMerchantId :: !Word64
     , _isStoreCode  :: !Text
     , _isPayload    :: !InventorySetRequest
@@ -71,7 +71,7 @@ data InventorySet' = InventorySet'
     , _isDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InventorySet'' with the minimum fields required to make a request.
+-- | Creates a value of 'InventorySet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -84,14 +84,14 @@ data InventorySet' = InventorySet'
 -- * 'isProductId'
 --
 -- * 'isDryRun'
-inventorySet'
+inventorySet
     :: Word64 -- ^ 'isMerchantId'
     -> Text -- ^ 'isStoreCode'
     -> InventorySetRequest -- ^ 'isPayload'
     -> Text -- ^ 'isProductId'
-    -> InventorySet'
-inventorySet' pIsMerchantId_ pIsStoreCode_ pIsPayload_ pIsProductId_ =
-    InventorySet'
+    -> InventorySet
+inventorySet pIsMerchantId_ pIsStoreCode_ pIsPayload_ pIsProductId_ =
+    InventorySet
     { _isMerchantId = pIsMerchantId_
     , _isStoreCode = pIsStoreCode_
     , _isPayload = pIsPayload_
@@ -100,33 +100,33 @@ inventorySet' pIsMerchantId_ pIsStoreCode_ pIsPayload_ pIsProductId_ =
     }
 
 -- | The ID of the managing account.
-isMerchantId :: Lens' InventorySet' Word64
+isMerchantId :: Lens' InventorySet Word64
 isMerchantId
   = lens _isMerchantId (\ s a -> s{_isMerchantId = a})
 
 -- | The code of the store for which to update price and availability. Use
 -- online to update price and availability of an online product.
-isStoreCode :: Lens' InventorySet' Text
+isStoreCode :: Lens' InventorySet Text
 isStoreCode
   = lens _isStoreCode (\ s a -> s{_isStoreCode = a})
 
 -- | Multipart request metadata.
-isPayload :: Lens' InventorySet' InventorySetRequest
+isPayload :: Lens' InventorySet InventorySetRequest
 isPayload
   = lens _isPayload (\ s a -> s{_isPayload = a})
 
 -- | The ID of the product for which to update price and availability.
-isProductId :: Lens' InventorySet' Text
+isProductId :: Lens' InventorySet Text
 isProductId
   = lens _isProductId (\ s a -> s{_isProductId = a})
 
 -- | Flag to run the request in dry-run mode.
-isDryRun :: Lens' InventorySet' (Maybe Bool)
+isDryRun :: Lens' InventorySet (Maybe Bool)
 isDryRun = lens _isDryRun (\ s a -> s{_isDryRun = a})
 
-instance GoogleRequest InventorySet' where
-        type Rs InventorySet' = InventorySetResponse
-        requestClient InventorySet'{..}
+instance GoogleRequest InventorySet where
+        type Rs InventorySet = InventorySetResponse
+        requestClient InventorySet{..}
           = go _isMerchantId _isStoreCode _isProductId
               _isDryRun
               (Just AltJSON)

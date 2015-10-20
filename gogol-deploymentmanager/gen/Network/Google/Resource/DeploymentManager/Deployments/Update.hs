@@ -30,8 +30,8 @@ module Network.Google.Resource.DeploymentManager.Deployments.Update
       DeploymentsUpdateResource
 
     -- * Creating a Request
-    , deploymentsUpdate'
-    , DeploymentsUpdate'
+    , deploymentsUpdate
+    , DeploymentsUpdate
 
     -- * Request Lenses
     , duCreatePolicy
@@ -46,7 +46,7 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @deploymentmanager.deployments.update@ method which the
--- 'DeploymentsUpdate'' request conforms to.
+-- 'DeploymentsUpdate' request conforms to.
 type DeploymentsUpdateResource =
      Capture "project" Text :>
        "global" :>
@@ -65,8 +65,8 @@ type DeploymentsUpdateResource =
 -- | Updates a deployment and all of the resources described by the
 -- deployment manifest.
 --
--- /See:/ 'deploymentsUpdate'' smart constructor.
-data DeploymentsUpdate' = DeploymentsUpdate'
+-- /See:/ 'deploymentsUpdate' smart constructor.
+data DeploymentsUpdate = DeploymentsUpdate
     { _duCreatePolicy :: !DeploymentsUpdateCreatePolicy
     , _duProject      :: !Text
     , _duPayload      :: !Deployment
@@ -75,7 +75,7 @@ data DeploymentsUpdate' = DeploymentsUpdate'
     , _duDeployment   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DeploymentsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'DeploymentsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -90,13 +90,13 @@ data DeploymentsUpdate' = DeploymentsUpdate'
 -- * 'duPreview'
 --
 -- * 'duDeployment'
-deploymentsUpdate'
+deploymentsUpdate
     :: Text -- ^ 'duProject'
     -> Deployment -- ^ 'duPayload'
     -> Text -- ^ 'duDeployment'
-    -> DeploymentsUpdate'
-deploymentsUpdate' pDuProject_ pDuPayload_ pDuDeployment_ =
-    DeploymentsUpdate'
+    -> DeploymentsUpdate
+deploymentsUpdate pDuProject_ pDuPayload_ pDuDeployment_ =
+    DeploymentsUpdate
     { _duCreatePolicy = CreateOrAcquire
     , _duProject = pDuProject_
     , _duPayload = pDuPayload_
@@ -106,23 +106,23 @@ deploymentsUpdate' pDuProject_ pDuPayload_ pDuDeployment_ =
     }
 
 -- | Sets the policy to use for creating new resources.
-duCreatePolicy :: Lens' DeploymentsUpdate' DeploymentsUpdateCreatePolicy
+duCreatePolicy :: Lens' DeploymentsUpdate DeploymentsUpdateCreatePolicy
 duCreatePolicy
   = lens _duCreatePolicy
       (\ s a -> s{_duCreatePolicy = a})
 
 -- | The project ID for this request.
-duProject :: Lens' DeploymentsUpdate' Text
+duProject :: Lens' DeploymentsUpdate Text
 duProject
   = lens _duProject (\ s a -> s{_duProject = a})
 
 -- | Multipart request metadata.
-duPayload :: Lens' DeploymentsUpdate' Deployment
+duPayload :: Lens' DeploymentsUpdate Deployment
 duPayload
   = lens _duPayload (\ s a -> s{_duPayload = a})
 
 -- | Sets the policy to use for deleting resources.
-duDeletePolicy :: Lens' DeploymentsUpdate' DeploymentsUpdateDeletePolicy
+duDeletePolicy :: Lens' DeploymentsUpdate DeploymentsUpdateDeletePolicy
 duDeletePolicy
   = lens _duDeletePolicy
       (\ s a -> s{_duDeletePolicy = a})
@@ -137,18 +137,18 @@ duDeletePolicy
 -- cancelPreview() to remove the preview altogether. Note that the
 -- deployment will still exist after you cancel the preview and you must
 -- separately delete this deployment if you want to remove it.
-duPreview :: Lens' DeploymentsUpdate' Bool
+duPreview :: Lens' DeploymentsUpdate Bool
 duPreview
   = lens _duPreview (\ s a -> s{_duPreview = a})
 
 -- | The name of the deployment for this request.
-duDeployment :: Lens' DeploymentsUpdate' Text
+duDeployment :: Lens' DeploymentsUpdate Text
 duDeployment
   = lens _duDeployment (\ s a -> s{_duDeployment = a})
 
-instance GoogleRequest DeploymentsUpdate' where
-        type Rs DeploymentsUpdate' = Operation
-        requestClient DeploymentsUpdate'{..}
+instance GoogleRequest DeploymentsUpdate where
+        type Rs DeploymentsUpdate = Operation
+        requestClient DeploymentsUpdate{..}
           = go _duProject _duDeployment (Just _duCreatePolicy)
               (Just _duDeletePolicy)
               (Just _duPreview)

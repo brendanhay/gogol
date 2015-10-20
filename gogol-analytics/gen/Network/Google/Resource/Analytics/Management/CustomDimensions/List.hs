@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.List
       ManagementCustomDimensionsListResource
 
     -- * Creating a Request
-    , managementCustomDimensionsList'
-    , ManagementCustomDimensionsList'
+    , managementCustomDimensionsList
+    , ManagementCustomDimensionsList
 
     -- * Request Lenses
     , mcdlWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.customDimensions.list@ method which the
--- 'ManagementCustomDimensionsList'' request conforms to.
+-- 'ManagementCustomDimensionsList' request conforms to.
 type ManagementCustomDimensionsListResource =
      "management" :>
        "accounts" :>
@@ -58,15 +58,15 @@ type ManagementCustomDimensionsListResource =
 
 -- | Lists custom dimensions to which the user has access.
 --
--- /See:/ 'managementCustomDimensionsList'' smart constructor.
-data ManagementCustomDimensionsList' = ManagementCustomDimensionsList'
+-- /See:/ 'managementCustomDimensionsList' smart constructor.
+data ManagementCustomDimensionsList = ManagementCustomDimensionsList
     { _mcdlWebPropertyId :: !Text
     , _mcdlAccountId     :: !Text
     , _mcdlStartIndex    :: !(Maybe Int32)
     , _mcdlMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementCustomDimensionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementCustomDimensionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,12 +77,12 @@ data ManagementCustomDimensionsList' = ManagementCustomDimensionsList'
 -- * 'mcdlStartIndex'
 --
 -- * 'mcdlMaxResults'
-managementCustomDimensionsList'
+managementCustomDimensionsList
     :: Text -- ^ 'mcdlWebPropertyId'
     -> Text -- ^ 'mcdlAccountId'
-    -> ManagementCustomDimensionsList'
-managementCustomDimensionsList' pMcdlWebPropertyId_ pMcdlAccountId_ =
-    ManagementCustomDimensionsList'
+    -> ManagementCustomDimensionsList
+managementCustomDimensionsList pMcdlWebPropertyId_ pMcdlAccountId_ =
+    ManagementCustomDimensionsList
     { _mcdlWebPropertyId = pMcdlWebPropertyId_
     , _mcdlAccountId = pMcdlAccountId_
     , _mcdlStartIndex = Nothing
@@ -90,35 +90,35 @@ managementCustomDimensionsList' pMcdlWebPropertyId_ pMcdlAccountId_ =
     }
 
 -- | Web property ID for the custom dimensions to retrieve.
-mcdlWebPropertyId :: Lens' ManagementCustomDimensionsList' Text
+mcdlWebPropertyId :: Lens' ManagementCustomDimensionsList Text
 mcdlWebPropertyId
   = lens _mcdlWebPropertyId
       (\ s a -> s{_mcdlWebPropertyId = a})
 
 -- | Account ID for the custom dimensions to retrieve.
-mcdlAccountId :: Lens' ManagementCustomDimensionsList' Text
+mcdlAccountId :: Lens' ManagementCustomDimensionsList Text
 mcdlAccountId
   = lens _mcdlAccountId
       (\ s a -> s{_mcdlAccountId = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
-mcdlStartIndex :: Lens' ManagementCustomDimensionsList' (Maybe Int32)
+mcdlStartIndex :: Lens' ManagementCustomDimensionsList (Maybe Int32)
 mcdlStartIndex
   = lens _mcdlStartIndex
       (\ s a -> s{_mcdlStartIndex = a})
 
 -- | The maximum number of custom dimensions to include in this response.
-mcdlMaxResults :: Lens' ManagementCustomDimensionsList' (Maybe Int32)
+mcdlMaxResults :: Lens' ManagementCustomDimensionsList (Maybe Int32)
 mcdlMaxResults
   = lens _mcdlMaxResults
       (\ s a -> s{_mcdlMaxResults = a})
 
-instance GoogleRequest
-         ManagementCustomDimensionsList' where
-        type Rs ManagementCustomDimensionsList' =
+instance GoogleRequest ManagementCustomDimensionsList
+         where
+        type Rs ManagementCustomDimensionsList =
              CustomDimensions
-        requestClient ManagementCustomDimensionsList'{..}
+        requestClient ManagementCustomDimensionsList{..}
           = go _mcdlAccountId _mcdlWebPropertyId
               _mcdlStartIndex
               _mcdlMaxResults

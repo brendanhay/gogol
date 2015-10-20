@@ -29,8 +29,8 @@ module Network.Google.Resource.Reseller.Customers.Insert
       CustomersInsertResource
 
     -- * Creating a Request
-    , customersInsert'
-    , CustomersInsert'
+    , customersInsert
+    , CustomersInsert
 
     -- * Request Lenses
     , ciPayload
@@ -41,7 +41,7 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @reseller.customers.insert@ method which the
--- 'CustomersInsert'' request conforms to.
+-- 'CustomersInsert' request conforms to.
 type CustomersInsertResource =
      "customers" :>
        QueryParam "customerAuthToken" Text :>
@@ -50,44 +50,44 @@ type CustomersInsertResource =
 
 -- | Creates a customer resource if one does not already exist.
 --
--- /See:/ 'customersInsert'' smart constructor.
-data CustomersInsert' = CustomersInsert'
+-- /See:/ 'customersInsert' smart constructor.
+data CustomersInsert = CustomersInsert
     { _ciPayload           :: !Customer
     , _ciCustomerAuthToken :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CustomersInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CustomersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ciPayload'
 --
 -- * 'ciCustomerAuthToken'
-customersInsert'
+customersInsert
     :: Customer -- ^ 'ciPayload'
-    -> CustomersInsert'
-customersInsert' pCiPayload_ =
-    CustomersInsert'
+    -> CustomersInsert
+customersInsert pCiPayload_ =
+    CustomersInsert
     { _ciPayload = pCiPayload_
     , _ciCustomerAuthToken = Nothing
     }
 
 -- | Multipart request metadata.
-ciPayload :: Lens' CustomersInsert' Customer
+ciPayload :: Lens' CustomersInsert Customer
 ciPayload
   = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
 -- | An auth token needed for inserting a customer for which domain already
 -- exists. Can be generated at
 -- https:\/\/www.google.com\/a\/cpanel\/\/TransferToken. Optional.
-ciCustomerAuthToken :: Lens' CustomersInsert' (Maybe Text)
+ciCustomerAuthToken :: Lens' CustomersInsert (Maybe Text)
 ciCustomerAuthToken
   = lens _ciCustomerAuthToken
       (\ s a -> s{_ciCustomerAuthToken = a})
 
-instance GoogleRequest CustomersInsert' where
-        type Rs CustomersInsert' = Customer
-        requestClient CustomersInsert'{..}
+instance GoogleRequest CustomersInsert where
+        type Rs CustomersInsert = Customer
+        requestClient CustomersInsert{..}
           = go _ciCustomerAuthToken (Just AltJSON) _ciPayload
               appsResellerService
           where go

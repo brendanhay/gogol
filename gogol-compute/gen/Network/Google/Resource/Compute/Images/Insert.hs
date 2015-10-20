@@ -30,19 +30,19 @@ module Network.Google.Resource.Compute.Images.Insert
       ImagesInsertResource
 
     -- * Creating a Request
-    , imagesInsert'
-    , ImagesInsert'
+    , imagesInsert
+    , ImagesInsert
 
     -- * Request Lenses
-    , iProject
-    , iPayload
+    , iiProject
+    , iiPayload
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.images.insert@ method which the
--- 'ImagesInsert'' request conforms to.
+-- 'ImagesInsert' request conforms to.
 type ImagesInsertResource =
      Capture "project" Text :>
        "global" :>
@@ -53,41 +53,43 @@ type ImagesInsertResource =
 -- | Creates an image resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'imagesInsert'' smart constructor.
-data ImagesInsert' = ImagesInsert'
-    { _iProject :: !Text
-    , _iPayload :: !Image
+-- /See:/ 'imagesInsert' smart constructor.
+data ImagesInsert = ImagesInsert
+    { _iiProject :: !Text
+    , _iiPayload :: !Image
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ImagesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ImagesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iProject'
+-- * 'iiProject'
 --
--- * 'iPayload'
-imagesInsert'
-    :: Text -- ^ 'iProject'
-    -> Image -- ^ 'iPayload'
-    -> ImagesInsert'
-imagesInsert' pIProject_ pIPayload_ =
-    ImagesInsert'
-    { _iProject = pIProject_
-    , _iPayload = pIPayload_
+-- * 'iiPayload'
+imagesInsert
+    :: Text -- ^ 'iiProject'
+    -> Image -- ^ 'iiPayload'
+    -> ImagesInsert
+imagesInsert pIiProject_ pIiPayload_ =
+    ImagesInsert
+    { _iiProject = pIiProject_
+    , _iiPayload = pIiPayload_
     }
 
 -- | Project ID for this request.
-iProject :: Lens' ImagesInsert' Text
-iProject = lens _iProject (\ s a -> s{_iProject = a})
+iiProject :: Lens' ImagesInsert Text
+iiProject
+  = lens _iiProject (\ s a -> s{_iiProject = a})
 
 -- | Multipart request metadata.
-iPayload :: Lens' ImagesInsert' Image
-iPayload = lens _iPayload (\ s a -> s{_iPayload = a})
+iiPayload :: Lens' ImagesInsert Image
+iiPayload
+  = lens _iiPayload (\ s a -> s{_iiPayload = a})
 
-instance GoogleRequest ImagesInsert' where
-        type Rs ImagesInsert' = Operation
-        requestClient ImagesInsert'{..}
-          = go _iProject (Just AltJSON) _iPayload
+instance GoogleRequest ImagesInsert where
+        type Rs ImagesInsert = Operation
+        requestClient ImagesInsert{..}
+          = go _iiProject (Just AltJSON) _iiPayload
               computeService
           where go
                   = buildClient (Proxy :: Proxy ImagesInsertResource)

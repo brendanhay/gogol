@@ -31,8 +31,8 @@ module Network.Google.Resource.Games.Rooms.ReportStatus
       RoomsReportStatusResource
 
     -- * Creating a Request
-    , roomsReportStatus'
-    , RoomsReportStatus'
+    , roomsReportStatus
+    , RoomsReportStatus
 
     -- * Request Lenses
     , rrsPayload
@@ -44,7 +44,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.rooms.reportStatus@ method which the
--- 'RoomsReportStatus'' request conforms to.
+-- 'RoomsReportStatus' request conforms to.
 type RoomsReportStatusResource =
      "rooms" :>
        Capture "roomId" Text :>
@@ -58,14 +58,14 @@ type RoomsReportStatusResource =
 -- internal use by the Games SDK only. Calling this method directly is
 -- unsupported.
 --
--- /See:/ 'roomsReportStatus'' smart constructor.
-data RoomsReportStatus' = RoomsReportStatus'
+-- /See:/ 'roomsReportStatus' smart constructor.
+data RoomsReportStatus = RoomsReportStatus
     { _rrsPayload  :: !RoomP2PStatuses
     , _rrsRoomId   :: !Text
     , _rrsLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoomsReportStatus'' with the minimum fields required to make a request.
+-- | Creates a value of 'RoomsReportStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,35 +74,35 @@ data RoomsReportStatus' = RoomsReportStatus'
 -- * 'rrsRoomId'
 --
 -- * 'rrsLanguage'
-roomsReportStatus'
+roomsReportStatus
     :: RoomP2PStatuses -- ^ 'rrsPayload'
     -> Text -- ^ 'rrsRoomId'
-    -> RoomsReportStatus'
-roomsReportStatus' pRrsPayload_ pRrsRoomId_ =
-    RoomsReportStatus'
+    -> RoomsReportStatus
+roomsReportStatus pRrsPayload_ pRrsRoomId_ =
+    RoomsReportStatus
     { _rrsPayload = pRrsPayload_
     , _rrsRoomId = pRrsRoomId_
     , _rrsLanguage = Nothing
     }
 
 -- | Multipart request metadata.
-rrsPayload :: Lens' RoomsReportStatus' RoomP2PStatuses
+rrsPayload :: Lens' RoomsReportStatus RoomP2PStatuses
 rrsPayload
   = lens _rrsPayload (\ s a -> s{_rrsPayload = a})
 
 -- | The ID of the room.
-rrsRoomId :: Lens' RoomsReportStatus' Text
+rrsRoomId :: Lens' RoomsReportStatus Text
 rrsRoomId
   = lens _rrsRoomId (\ s a -> s{_rrsRoomId = a})
 
 -- | The preferred language to use for strings returned by this method.
-rrsLanguage :: Lens' RoomsReportStatus' (Maybe Text)
+rrsLanguage :: Lens' RoomsReportStatus (Maybe Text)
 rrsLanguage
   = lens _rrsLanguage (\ s a -> s{_rrsLanguage = a})
 
-instance GoogleRequest RoomsReportStatus' where
-        type Rs RoomsReportStatus' = RoomStatus
-        requestClient RoomsReportStatus'{..}
+instance GoogleRequest RoomsReportStatus where
+        type Rs RoomsReportStatus = RoomStatus
+        requestClient RoomsReportStatus{..}
           = go _rrsRoomId _rrsLanguage (Just AltJSON)
               _rrsPayload
               gamesService

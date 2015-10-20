@@ -29,22 +29,22 @@ module Network.Google.Resource.Blogger.Pages.Patch
       PagesPatchResource
 
     -- * Creating a Request
-    , pagesPatch'
-    , PagesPatch'
+    , pagesPatch
+    , PagesPatch
 
     -- * Request Lenses
-    , pagaBlogId
-    , pagaPageId
-    , pagaPayload
-    , pagaRevert
-    , pagaPublish
+    , ppBlogId
+    , ppPageId
+    , ppPayload
+    , ppRevert
+    , ppPublish
     ) where
 
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.pages.patch@ method which the
--- 'PagesPatch'' request conforms to.
+-- 'PagesPatch' request conforms to.
 type PagesPatchResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -57,75 +57,72 @@ type PagesPatchResource =
 
 -- | Update a page. This method supports patch semantics.
 --
--- /See:/ 'pagesPatch'' smart constructor.
-data PagesPatch' = PagesPatch'
-    { _pagaBlogId  :: !Text
-    , _pagaPageId  :: !Text
-    , _pagaPayload :: !Page
-    , _pagaRevert  :: !(Maybe Bool)
-    , _pagaPublish :: !(Maybe Bool)
+-- /See:/ 'pagesPatch' smart constructor.
+data PagesPatch = PagesPatch
+    { _ppBlogId  :: !Text
+    , _ppPageId  :: !Text
+    , _ppPayload :: !Page
+    , _ppRevert  :: !(Maybe Bool)
+    , _ppPublish :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PagesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'PagesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pagaBlogId'
+-- * 'ppBlogId'
 --
--- * 'pagaPageId'
+-- * 'ppPageId'
 --
--- * 'pagaPayload'
+-- * 'ppPayload'
 --
--- * 'pagaRevert'
+-- * 'ppRevert'
 --
--- * 'pagaPublish'
-pagesPatch'
-    :: Text -- ^ 'pagaBlogId'
-    -> Text -- ^ 'pagaPageId'
-    -> Page -- ^ 'pagaPayload'
-    -> PagesPatch'
-pagesPatch' pPagaBlogId_ pPagaPageId_ pPagaPayload_ =
-    PagesPatch'
-    { _pagaBlogId = pPagaBlogId_
-    , _pagaPageId = pPagaPageId_
-    , _pagaPayload = pPagaPayload_
-    , _pagaRevert = Nothing
-    , _pagaPublish = Nothing
+-- * 'ppPublish'
+pagesPatch
+    :: Text -- ^ 'ppBlogId'
+    -> Text -- ^ 'ppPageId'
+    -> Page -- ^ 'ppPayload'
+    -> PagesPatch
+pagesPatch pPpBlogId_ pPpPageId_ pPpPayload_ =
+    PagesPatch
+    { _ppBlogId = pPpBlogId_
+    , _ppPageId = pPpPageId_
+    , _ppPayload = pPpPayload_
+    , _ppRevert = Nothing
+    , _ppPublish = Nothing
     }
 
 -- | The ID of the Blog.
-pagaBlogId :: Lens' PagesPatch' Text
-pagaBlogId
-  = lens _pagaBlogId (\ s a -> s{_pagaBlogId = a})
+ppBlogId :: Lens' PagesPatch Text
+ppBlogId = lens _ppBlogId (\ s a -> s{_ppBlogId = a})
 
 -- | The ID of the Page.
-pagaPageId :: Lens' PagesPatch' Text
-pagaPageId
-  = lens _pagaPageId (\ s a -> s{_pagaPageId = a})
+ppPageId :: Lens' PagesPatch Text
+ppPageId = lens _ppPageId (\ s a -> s{_ppPageId = a})
 
 -- | Multipart request metadata.
-pagaPayload :: Lens' PagesPatch' Page
-pagaPayload
-  = lens _pagaPayload (\ s a -> s{_pagaPayload = a})
+ppPayload :: Lens' PagesPatch Page
+ppPayload
+  = lens _ppPayload (\ s a -> s{_ppPayload = a})
 
 -- | Whether a revert action should be performed when the page is updated
 -- (default: false).
-pagaRevert :: Lens' PagesPatch' (Maybe Bool)
-pagaRevert
-  = lens _pagaRevert (\ s a -> s{_pagaRevert = a})
+ppRevert :: Lens' PagesPatch (Maybe Bool)
+ppRevert = lens _ppRevert (\ s a -> s{_ppRevert = a})
 
 -- | Whether a publish action should be performed when the page is updated
 -- (default: false).
-pagaPublish :: Lens' PagesPatch' (Maybe Bool)
-pagaPublish
-  = lens _pagaPublish (\ s a -> s{_pagaPublish = a})
+ppPublish :: Lens' PagesPatch (Maybe Bool)
+ppPublish
+  = lens _ppPublish (\ s a -> s{_ppPublish = a})
 
-instance GoogleRequest PagesPatch' where
-        type Rs PagesPatch' = Page
-        requestClient PagesPatch'{..}
-          = go _pagaBlogId _pagaPageId _pagaRevert _pagaPublish
+instance GoogleRequest PagesPatch where
+        type Rs PagesPatch = Page
+        requestClient PagesPatch{..}
+          = go _ppBlogId _ppPageId _ppRevert _ppPublish
               (Just AltJSON)
-              _pagaPayload
+              _ppPayload
               bloggerService
           where go
                   = buildClient (Proxy :: Proxy PagesPatchResource)

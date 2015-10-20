@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.Get
       HTTPHealthChecksGetResource
 
     -- * Creating a Request
-    , hTTPHealthChecksGet'
-    , HTTPHealthChecksGet'
+    , hTTPHealthChecksGet
+    , HTTPHealthChecksGet
 
     -- * Request Lenses
     , httphcgProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.httpHealthChecks.get@ method which the
--- 'HTTPHealthChecksGet'' request conforms to.
+-- 'HTTPHealthChecksGet' request conforms to.
 type HTTPHealthChecksGetResource =
      Capture "project" Text :>
        "global" :>
@@ -52,44 +52,44 @@ type HTTPHealthChecksGetResource =
 
 -- | Returns the specified HttpHealthCheck resource.
 --
--- /See:/ 'hTTPHealthChecksGet'' smart constructor.
-data HTTPHealthChecksGet' = HTTPHealthChecksGet'
+-- /See:/ 'hTTPHealthChecksGet' smart constructor.
+data HTTPHealthChecksGet = HTTPHealthChecksGet
     { _httphcgProject         :: !Text
     , _httphcgHTTPHealthCheck :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'HTTPHealthChecksGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'HTTPHealthChecksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'httphcgProject'
 --
 -- * 'httphcgHTTPHealthCheck'
-hTTPHealthChecksGet'
+hTTPHealthChecksGet
     :: Text -- ^ 'httphcgProject'
     -> Text -- ^ 'httphcgHTTPHealthCheck'
-    -> HTTPHealthChecksGet'
-hTTPHealthChecksGet' pHttphcgProject_ pHttphcgHTTPHealthCheck_ =
-    HTTPHealthChecksGet'
+    -> HTTPHealthChecksGet
+hTTPHealthChecksGet pHttphcgProject_ pHttphcgHTTPHealthCheck_ =
+    HTTPHealthChecksGet
     { _httphcgProject = pHttphcgProject_
     , _httphcgHTTPHealthCheck = pHttphcgHTTPHealthCheck_
     }
 
 -- | Name of the project scoping this request.
-httphcgProject :: Lens' HTTPHealthChecksGet' Text
+httphcgProject :: Lens' HTTPHealthChecksGet Text
 httphcgProject
   = lens _httphcgProject
       (\ s a -> s{_httphcgProject = a})
 
 -- | Name of the HttpHealthCheck resource to return.
-httphcgHTTPHealthCheck :: Lens' HTTPHealthChecksGet' Text
+httphcgHTTPHealthCheck :: Lens' HTTPHealthChecksGet Text
 httphcgHTTPHealthCheck
   = lens _httphcgHTTPHealthCheck
       (\ s a -> s{_httphcgHTTPHealthCheck = a})
 
-instance GoogleRequest HTTPHealthChecksGet' where
-        type Rs HTTPHealthChecksGet' = HTTPHealthCheck
-        requestClient HTTPHealthChecksGet'{..}
+instance GoogleRequest HTTPHealthChecksGet where
+        type Rs HTTPHealthChecksGet = HTTPHealthCheck
+        requestClient HTTPHealthChecksGet{..}
           = go _httphcgProject _httphcgHTTPHealthCheck
               (Just AltJSON)
               computeService

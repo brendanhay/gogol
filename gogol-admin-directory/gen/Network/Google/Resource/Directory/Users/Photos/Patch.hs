@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Users.Photos.Patch
       UsersPhotosPatchResource
 
     -- * Creating a Request
-    , usersPhotosPatch'
-    , UsersPhotosPatch'
+    , usersPhotosPatch
+    , UsersPhotosPatch
 
     -- * Request Lenses
     , uppPayload
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.users.photos.patch@ method which the
--- 'UsersPhotosPatch'' request conforms to.
+-- 'UsersPhotosPatch' request conforms to.
 type UsersPhotosPatchResource =
      "users" :>
        Capture "userKey" Text :>
@@ -52,42 +52,42 @@ type UsersPhotosPatchResource =
 
 -- | Add a photo for the user. This method supports patch semantics.
 --
--- /See:/ 'usersPhotosPatch'' smart constructor.
-data UsersPhotosPatch' = UsersPhotosPatch'
+-- /See:/ 'usersPhotosPatch' smart constructor.
+data UsersPhotosPatch = UsersPhotosPatch
     { _uppPayload :: !UserPhoto
     , _uppUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersPhotosPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersPhotosPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'uppPayload'
 --
 -- * 'uppUserKey'
-usersPhotosPatch'
+usersPhotosPatch
     :: UserPhoto -- ^ 'uppPayload'
     -> Text -- ^ 'uppUserKey'
-    -> UsersPhotosPatch'
-usersPhotosPatch' pUppPayload_ pUppUserKey_ =
-    UsersPhotosPatch'
+    -> UsersPhotosPatch
+usersPhotosPatch pUppPayload_ pUppUserKey_ =
+    UsersPhotosPatch
     { _uppPayload = pUppPayload_
     , _uppUserKey = pUppUserKey_
     }
 
 -- | Multipart request metadata.
-uppPayload :: Lens' UsersPhotosPatch' UserPhoto
+uppPayload :: Lens' UsersPhotosPatch UserPhoto
 uppPayload
   = lens _uppPayload (\ s a -> s{_uppPayload = a})
 
 -- | Email or immutable Id of the user
-uppUserKey :: Lens' UsersPhotosPatch' Text
+uppUserKey :: Lens' UsersPhotosPatch Text
 uppUserKey
   = lens _uppUserKey (\ s a -> s{_uppUserKey = a})
 
-instance GoogleRequest UsersPhotosPatch' where
-        type Rs UsersPhotosPatch' = UserPhoto
-        requestClient UsersPhotosPatch'{..}
+instance GoogleRequest UsersPhotosPatch where
+        type Rs UsersPhotosPatch = UserPhoto
+        requestClient UsersPhotosPatch{..}
           = go _uppUserKey (Just AltJSON) _uppPayload
               directoryService
           where go

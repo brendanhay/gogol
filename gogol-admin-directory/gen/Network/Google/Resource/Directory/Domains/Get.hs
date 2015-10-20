@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Domains.Get
       DomainsGetResource
 
     -- * Creating a Request
-    , domainsGet'
-    , DomainsGet'
+    , domainsGet
+    , DomainsGet
 
     -- * Request Lenses
     , dgCustomer
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.domains.get@ method which the
--- 'DomainsGet'' request conforms to.
+-- 'DomainsGet' request conforms to.
 type DomainsGetResource =
      "customer" :>
        Capture "customer" Text :>
@@ -51,42 +51,42 @@ type DomainsGetResource =
 
 -- | Retrives a domain of the customer.
 --
--- /See:/ 'domainsGet'' smart constructor.
-data DomainsGet' = DomainsGet'
+-- /See:/ 'domainsGet' smart constructor.
+data DomainsGet = DomainsGet
     { _dgCustomer   :: !Text
     , _dgDomainName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DomainsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'DomainsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dgCustomer'
 --
 -- * 'dgDomainName'
-domainsGet'
+domainsGet
     :: Text -- ^ 'dgCustomer'
     -> Text -- ^ 'dgDomainName'
-    -> DomainsGet'
-domainsGet' pDgCustomer_ pDgDomainName_ =
-    DomainsGet'
+    -> DomainsGet
+domainsGet pDgCustomer_ pDgDomainName_ =
+    DomainsGet
     { _dgCustomer = pDgCustomer_
     , _dgDomainName = pDgDomainName_
     }
 
 -- | Immutable id of the Google Apps account.
-dgCustomer :: Lens' DomainsGet' Text
+dgCustomer :: Lens' DomainsGet Text
 dgCustomer
   = lens _dgCustomer (\ s a -> s{_dgCustomer = a})
 
 -- | Name of domain to be retrieved
-dgDomainName :: Lens' DomainsGet' Text
+dgDomainName :: Lens' DomainsGet Text
 dgDomainName
   = lens _dgDomainName (\ s a -> s{_dgDomainName = a})
 
-instance GoogleRequest DomainsGet' where
-        type Rs DomainsGet' = Domains
-        requestClient DomainsGet'{..}
+instance GoogleRequest DomainsGet where
+        type Rs DomainsGet = Domains
+        requestClient DomainsGet{..}
           = go _dgCustomer _dgDomainName (Just AltJSON)
               directoryService
           where go

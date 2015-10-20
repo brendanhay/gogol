@@ -29,8 +29,8 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Update
       LicenseAssignmentsUpdateResource
 
     -- * Creating a Request
-    , licenseAssignmentsUpdate'
-    , LicenseAssignmentsUpdate'
+    , licenseAssignmentsUpdate
+    , LicenseAssignmentsUpdate
 
     -- * Request Lenses
     , lauSKUId
@@ -43,7 +43,7 @@ import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @licensing.licenseAssignments.update@ method which the
--- 'LicenseAssignmentsUpdate'' request conforms to.
+-- 'LicenseAssignmentsUpdate' request conforms to.
 type LicenseAssignmentsUpdateResource =
      Capture "productId" Text :>
        "sku" :>
@@ -56,15 +56,15 @@ type LicenseAssignmentsUpdateResource =
 
 -- | Assign License.
 --
--- /See:/ 'licenseAssignmentsUpdate'' smart constructor.
-data LicenseAssignmentsUpdate' = LicenseAssignmentsUpdate'
+-- /See:/ 'licenseAssignmentsUpdate' smart constructor.
+data LicenseAssignmentsUpdate = LicenseAssignmentsUpdate
     { _lauSKUId     :: !Text
     , _lauPayload   :: !LicenseAssignment
     , _lauUserId    :: !Text
     , _lauProductId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LicenseAssignmentsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'LicenseAssignmentsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,14 +75,14 @@ data LicenseAssignmentsUpdate' = LicenseAssignmentsUpdate'
 -- * 'lauUserId'
 --
 -- * 'lauProductId'
-licenseAssignmentsUpdate'
+licenseAssignmentsUpdate
     :: Text -- ^ 'lauSKUId'
     -> LicenseAssignment -- ^ 'lauPayload'
     -> Text -- ^ 'lauUserId'
     -> Text -- ^ 'lauProductId'
-    -> LicenseAssignmentsUpdate'
-licenseAssignmentsUpdate' pLauSKUId_ pLauPayload_ pLauUserId_ pLauProductId_ =
-    LicenseAssignmentsUpdate'
+    -> LicenseAssignmentsUpdate
+licenseAssignmentsUpdate pLauSKUId_ pLauPayload_ pLauUserId_ pLauProductId_ =
+    LicenseAssignmentsUpdate
     { _lauSKUId = pLauSKUId_
     , _lauPayload = pLauPayload_
     , _lauUserId = pLauUserId_
@@ -90,28 +90,27 @@ licenseAssignmentsUpdate' pLauSKUId_ pLauPayload_ pLauUserId_ pLauProductId_ =
     }
 
 -- | Name for sku for which license would be revoked
-lauSKUId :: Lens' LicenseAssignmentsUpdate' Text
+lauSKUId :: Lens' LicenseAssignmentsUpdate Text
 lauSKUId = lens _lauSKUId (\ s a -> s{_lauSKUId = a})
 
 -- | Multipart request metadata.
-lauPayload :: Lens' LicenseAssignmentsUpdate' LicenseAssignment
+lauPayload :: Lens' LicenseAssignmentsUpdate LicenseAssignment
 lauPayload
   = lens _lauPayload (\ s a -> s{_lauPayload = a})
 
 -- | email id or unique Id of the user
-lauUserId :: Lens' LicenseAssignmentsUpdate' Text
+lauUserId :: Lens' LicenseAssignmentsUpdate Text
 lauUserId
   = lens _lauUserId (\ s a -> s{_lauUserId = a})
 
 -- | Name for product
-lauProductId :: Lens' LicenseAssignmentsUpdate' Text
+lauProductId :: Lens' LicenseAssignmentsUpdate Text
 lauProductId
   = lens _lauProductId (\ s a -> s{_lauProductId = a})
 
-instance GoogleRequest LicenseAssignmentsUpdate'
-         where
-        type Rs LicenseAssignmentsUpdate' = LicenseAssignment
-        requestClient LicenseAssignmentsUpdate'{..}
+instance GoogleRequest LicenseAssignmentsUpdate where
+        type Rs LicenseAssignmentsUpdate = LicenseAssignment
+        requestClient LicenseAssignmentsUpdate{..}
           = go _lauProductId _lauSKUId _lauUserId
               (Just AltJSON)
               _lauPayload

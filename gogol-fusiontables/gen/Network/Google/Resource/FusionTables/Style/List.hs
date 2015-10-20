@@ -29,8 +29,8 @@ module Network.Google.Resource.FusionTables.Style.List
       StyleListResource
 
     -- * Creating a Request
-    , styleList'
-    , StyleList'
+    , styleList
+    , StyleList
 
     -- * Request Lenses
     , slPageToken
@@ -42,7 +42,7 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.style.list@ method which the
--- 'StyleList'' request conforms to.
+-- 'StyleList' request conforms to.
 type StyleListResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -54,14 +54,14 @@ type StyleListResource =
 
 -- | Retrieves a list of styles.
 --
--- /See:/ 'styleList'' smart constructor.
-data StyleList' = StyleList'
+-- /See:/ 'styleList' smart constructor.
+data StyleList = StyleList
     { _slPageToken  :: !(Maybe Text)
     , _slTableId    :: !Text
     , _slMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'StyleList'' with the minimum fields required to make a request.
+-- | Creates a value of 'StyleList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,34 +70,34 @@ data StyleList' = StyleList'
 -- * 'slTableId'
 --
 -- * 'slMaxResults'
-styleList'
+styleList
     :: Text -- ^ 'slTableId'
-    -> StyleList'
-styleList' pSlTableId_ =
-    StyleList'
+    -> StyleList
+styleList pSlTableId_ =
+    StyleList
     { _slPageToken = Nothing
     , _slTableId = pSlTableId_
     , _slMaxResults = Nothing
     }
 
 -- | Continuation token specifying which result page to return. Optional.
-slPageToken :: Lens' StyleList' (Maybe Text)
+slPageToken :: Lens' StyleList (Maybe Text)
 slPageToken
   = lens _slPageToken (\ s a -> s{_slPageToken = a})
 
 -- | Table whose styles are being listed
-slTableId :: Lens' StyleList' Text
+slTableId :: Lens' StyleList Text
 slTableId
   = lens _slTableId (\ s a -> s{_slTableId = a})
 
 -- | Maximum number of styles to return. Optional. Default is 5.
-slMaxResults :: Lens' StyleList' (Maybe Word32)
+slMaxResults :: Lens' StyleList (Maybe Word32)
 slMaxResults
   = lens _slMaxResults (\ s a -> s{_slMaxResults = a})
 
-instance GoogleRequest StyleList' where
-        type Rs StyleList' = StyleSettingList
-        requestClient StyleList'{..}
+instance GoogleRequest StyleList where
+        type Rs StyleList = StyleSettingList
+        requestClient StyleList{..}
           = go _slTableId _slPageToken _slMaxResults
               (Just AltJSON)
               fusionTablesService

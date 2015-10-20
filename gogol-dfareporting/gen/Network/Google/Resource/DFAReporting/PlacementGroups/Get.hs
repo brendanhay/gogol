@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.Get
       PlacementGroupsGetResource
 
     -- * Creating a Request
-    , placementGroupsGet'
-    , PlacementGroupsGet'
+    , placementGroupsGet
+    , PlacementGroupsGet
 
     -- * Request Lenses
     , pggProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placementGroups.get@ method which the
--- 'PlacementGroupsGet'' request conforms to.
+-- 'PlacementGroupsGet' request conforms to.
 type PlacementGroupsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,41 +52,41 @@ type PlacementGroupsGetResource =
 
 -- | Gets one placement group by ID.
 --
--- /See:/ 'placementGroupsGet'' smart constructor.
-data PlacementGroupsGet' = PlacementGroupsGet'
+-- /See:/ 'placementGroupsGet' smart constructor.
+data PlacementGroupsGet = PlacementGroupsGet
     { _pggProFileId :: !Int64
     , _pggId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlacementGroupsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlacementGroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pggProFileId'
 --
 -- * 'pggId'
-placementGroupsGet'
+placementGroupsGet
     :: Int64 -- ^ 'pggProFileId'
     -> Int64 -- ^ 'pggId'
-    -> PlacementGroupsGet'
-placementGroupsGet' pPggProFileId_ pPggId_ =
-    PlacementGroupsGet'
+    -> PlacementGroupsGet
+placementGroupsGet pPggProFileId_ pPggId_ =
+    PlacementGroupsGet
     { _pggProFileId = pPggProFileId_
     , _pggId = pPggId_
     }
 
 -- | User profile ID associated with this request.
-pggProFileId :: Lens' PlacementGroupsGet' Int64
+pggProFileId :: Lens' PlacementGroupsGet Int64
 pggProFileId
   = lens _pggProFileId (\ s a -> s{_pggProFileId = a})
 
 -- | Placement group ID.
-pggId :: Lens' PlacementGroupsGet' Int64
+pggId :: Lens' PlacementGroupsGet Int64
 pggId = lens _pggId (\ s a -> s{_pggId = a})
 
-instance GoogleRequest PlacementGroupsGet' where
-        type Rs PlacementGroupsGet' = PlacementGroup
-        requestClient PlacementGroupsGet'{..}
+instance GoogleRequest PlacementGroupsGet where
+        type Rs PlacementGroupsGet = PlacementGroup
+        requestClient PlacementGroupsGet{..}
           = go _pggProFileId _pggId (Just AltJSON)
               dFAReportingService
           where go

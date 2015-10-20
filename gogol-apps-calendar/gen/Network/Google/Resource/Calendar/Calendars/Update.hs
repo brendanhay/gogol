@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.Calendars.Update
       CalendarsUpdateResource
 
     -- * Creating a Request
-    , calendarsUpdate'
-    , CalendarsUpdate'
+    , calendarsUpdate
+    , CalendarsUpdate
 
     -- * Request Lenses
     , cuCalendarId
@@ -41,7 +41,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendars.update@ method which the
--- 'CalendarsUpdate'' request conforms to.
+-- 'CalendarsUpdate' request conforms to.
 type CalendarsUpdateResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -50,25 +50,25 @@ type CalendarsUpdateResource =
 
 -- | Updates metadata for a calendar.
 --
--- /See:/ 'calendarsUpdate'' smart constructor.
-data CalendarsUpdate' = CalendarsUpdate'
+-- /See:/ 'calendarsUpdate' smart constructor.
+data CalendarsUpdate = CalendarsUpdate
     { _cuCalendarId :: !Text
     , _cuPayload    :: !Calendar
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CalendarsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CalendarsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cuCalendarId'
 --
 -- * 'cuPayload'
-calendarsUpdate'
+calendarsUpdate
     :: Text -- ^ 'cuCalendarId'
     -> Calendar -- ^ 'cuPayload'
-    -> CalendarsUpdate'
-calendarsUpdate' pCuCalendarId_ pCuPayload_ =
-    CalendarsUpdate'
+    -> CalendarsUpdate
+calendarsUpdate pCuCalendarId_ pCuPayload_ =
+    CalendarsUpdate
     { _cuCalendarId = pCuCalendarId_
     , _cuPayload = pCuPayload_
     }
@@ -76,18 +76,18 @@ calendarsUpdate' pCuCalendarId_ pCuPayload_ =
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-cuCalendarId :: Lens' CalendarsUpdate' Text
+cuCalendarId :: Lens' CalendarsUpdate Text
 cuCalendarId
   = lens _cuCalendarId (\ s a -> s{_cuCalendarId = a})
 
 -- | Multipart request metadata.
-cuPayload :: Lens' CalendarsUpdate' Calendar
+cuPayload :: Lens' CalendarsUpdate Calendar
 cuPayload
   = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
-instance GoogleRequest CalendarsUpdate' where
-        type Rs CalendarsUpdate' = Calendar
-        requestClient CalendarsUpdate'{..}
+instance GoogleRequest CalendarsUpdate where
+        type Rs CalendarsUpdate = Calendar
+        requestClient CalendarsUpdate{..}
           = go _cuCalendarId (Just AltJSON) _cuPayload
               appsCalendarService
           where go

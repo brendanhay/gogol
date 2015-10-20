@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Delete
       AccountsContainersVariablesDeleteResource
 
     -- * Creating a Request
-    , accountsContainersVariablesDelete'
-    , AccountsContainersVariablesDelete'
+    , accountsContainersVariablesDelete
+    , AccountsContainersVariablesDelete
 
     -- * Request Lenses
     , acvdContainerId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.variables.delete@ method which the
--- 'AccountsContainersVariablesDelete'' request conforms to.
+-- 'AccountsContainersVariablesDelete' request conforms to.
 type AccountsContainersVariablesDeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -54,14 +54,14 @@ type AccountsContainersVariablesDeleteResource =
 
 -- | Deletes a GTM Variable.
 --
--- /See:/ 'accountsContainersVariablesDelete'' smart constructor.
-data AccountsContainersVariablesDelete' = AccountsContainersVariablesDelete'
+-- /See:/ 'accountsContainersVariablesDelete' smart constructor.
+data AccountsContainersVariablesDelete = AccountsContainersVariablesDelete
     { _acvdContainerId :: !Text
     , _acvdVariableId  :: !Text
     , _acvdAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersVariablesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersVariablesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,40 +70,40 @@ data AccountsContainersVariablesDelete' = AccountsContainersVariablesDelete'
 -- * 'acvdVariableId'
 --
 -- * 'acvdAccountId'
-accountsContainersVariablesDelete'
+accountsContainersVariablesDelete
     :: Text -- ^ 'acvdContainerId'
     -> Text -- ^ 'acvdVariableId'
     -> Text -- ^ 'acvdAccountId'
-    -> AccountsContainersVariablesDelete'
-accountsContainersVariablesDelete' pAcvdContainerId_ pAcvdVariableId_ pAcvdAccountId_ =
-    AccountsContainersVariablesDelete'
+    -> AccountsContainersVariablesDelete
+accountsContainersVariablesDelete pAcvdContainerId_ pAcvdVariableId_ pAcvdAccountId_ =
+    AccountsContainersVariablesDelete
     { _acvdContainerId = pAcvdContainerId_
     , _acvdVariableId = pAcvdVariableId_
     , _acvdAccountId = pAcvdAccountId_
     }
 
 -- | The GTM Container ID.
-acvdContainerId :: Lens' AccountsContainersVariablesDelete' Text
+acvdContainerId :: Lens' AccountsContainersVariablesDelete Text
 acvdContainerId
   = lens _acvdContainerId
       (\ s a -> s{_acvdContainerId = a})
 
 -- | The GTM Variable ID.
-acvdVariableId :: Lens' AccountsContainersVariablesDelete' Text
+acvdVariableId :: Lens' AccountsContainersVariablesDelete Text
 acvdVariableId
   = lens _acvdVariableId
       (\ s a -> s{_acvdVariableId = a})
 
 -- | The GTM Account ID.
-acvdAccountId :: Lens' AccountsContainersVariablesDelete' Text
+acvdAccountId :: Lens' AccountsContainersVariablesDelete Text
 acvdAccountId
   = lens _acvdAccountId
       (\ s a -> s{_acvdAccountId = a})
 
 instance GoogleRequest
-         AccountsContainersVariablesDelete' where
-        type Rs AccountsContainersVariablesDelete' = ()
-        requestClient AccountsContainersVariablesDelete'{..}
+         AccountsContainersVariablesDelete where
+        type Rs AccountsContainersVariablesDelete = ()
+        requestClient AccountsContainersVariablesDelete{..}
           = go _acvdAccountId _acvdContainerId _acvdVariableId
               (Just AltJSON)
               tagManagerService

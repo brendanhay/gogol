@@ -30,8 +30,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Get
       EditsAPKListingsGetResource
 
     -- * Creating a Request
-    , editsAPKListingsGet'
-    , EditsAPKListingsGet'
+    , editsAPKListingsGet
+    , EditsAPKListingsGet
 
     -- * Request Lenses
     , eapklgPackageName
@@ -44,7 +44,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.apklistings.get@ method which the
--- 'EditsAPKListingsGet'' request conforms to.
+-- 'EditsAPKListingsGet' request conforms to.
 type EditsAPKListingsGetResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -58,15 +58,15 @@ type EditsAPKListingsGetResource =
 -- | Fetches the APK-specific localized listing for a specified APK and
 -- language code.
 --
--- /See:/ 'editsAPKListingsGet'' smart constructor.
-data EditsAPKListingsGet' = EditsAPKListingsGet'
+-- /See:/ 'editsAPKListingsGet' smart constructor.
+data EditsAPKListingsGet = EditsAPKListingsGet
     { _eapklgPackageName    :: !Text
     , _eapklgAPKVersionCode :: !Int32
     , _eapklgLanguage       :: !Text
     , _eapklgEditId         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsAPKListingsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsAPKListingsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data EditsAPKListingsGet' = EditsAPKListingsGet'
 -- * 'eapklgLanguage'
 --
 -- * 'eapklgEditId'
-editsAPKListingsGet'
+editsAPKListingsGet
     :: Text -- ^ 'eapklgPackageName'
     -> Int32 -- ^ 'eapklgAPKVersionCode'
     -> Text -- ^ 'eapklgLanguage'
     -> Text -- ^ 'eapklgEditId'
-    -> EditsAPKListingsGet'
-editsAPKListingsGet' pEapklgPackageName_ pEapklgAPKVersionCode_ pEapklgLanguage_ pEapklgEditId_ =
-    EditsAPKListingsGet'
+    -> EditsAPKListingsGet
+editsAPKListingsGet pEapklgPackageName_ pEapklgAPKVersionCode_ pEapklgLanguage_ pEapklgEditId_ =
+    EditsAPKListingsGet
     { _eapklgPackageName = pEapklgPackageName_
     , _eapklgAPKVersionCode = pEapklgAPKVersionCode_
     , _eapklgLanguage = pEapklgLanguage_
@@ -93,14 +93,14 @@ editsAPKListingsGet' pEapklgPackageName_ pEapklgAPKVersionCode_ pEapklgLanguage_
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eapklgPackageName :: Lens' EditsAPKListingsGet' Text
+eapklgPackageName :: Lens' EditsAPKListingsGet Text
 eapklgPackageName
   = lens _eapklgPackageName
       (\ s a -> s{_eapklgPackageName = a})
 
 -- | The APK version code whose APK-specific listings should be read or
 -- modified.
-eapklgAPKVersionCode :: Lens' EditsAPKListingsGet' Int32
+eapklgAPKVersionCode :: Lens' EditsAPKListingsGet Int32
 eapklgAPKVersionCode
   = lens _eapklgAPKVersionCode
       (\ s a -> s{_eapklgAPKVersionCode = a})
@@ -108,19 +108,19 @@ eapklgAPKVersionCode
 -- | The language code (a BCP-47 language tag) of the APK-specific localized
 -- listing to read or modify. For example, to select Austrian German, pass
 -- \"de-AT\".
-eapklgLanguage :: Lens' EditsAPKListingsGet' Text
+eapklgLanguage :: Lens' EditsAPKListingsGet Text
 eapklgLanguage
   = lens _eapklgLanguage
       (\ s a -> s{_eapklgLanguage = a})
 
 -- | Unique identifier for this edit.
-eapklgEditId :: Lens' EditsAPKListingsGet' Text
+eapklgEditId :: Lens' EditsAPKListingsGet Text
 eapklgEditId
   = lens _eapklgEditId (\ s a -> s{_eapklgEditId = a})
 
-instance GoogleRequest EditsAPKListingsGet' where
-        type Rs EditsAPKListingsGet' = APKListing
-        requestClient EditsAPKListingsGet'{..}
+instance GoogleRequest EditsAPKListingsGet where
+        type Rs EditsAPKListingsGet = APKListing
+        requestClient EditsAPKListingsGet{..}
           = go _eapklgPackageName _eapklgEditId
               _eapklgAPKVersionCode
               _eapklgLanguage

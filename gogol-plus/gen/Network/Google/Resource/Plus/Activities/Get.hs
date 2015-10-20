@@ -29,8 +29,8 @@ module Network.Google.Resource.Plus.Activities.Get
       ActivitiesGetResource
 
     -- * Creating a Request
-    , activitiesGet'
-    , ActivitiesGet'
+    , activitiesGet
+    , ActivitiesGet
 
     -- * Request Lenses
     , agActivityId
@@ -40,7 +40,7 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plus.activities.get@ method which the
--- 'ActivitiesGet'' request conforms to.
+-- 'ActivitiesGet' request conforms to.
 type ActivitiesGetResource =
      "activities" :>
        Capture "activityId" Text :>
@@ -48,32 +48,32 @@ type ActivitiesGetResource =
 
 -- | Get an activity.
 --
--- /See:/ 'activitiesGet'' smart constructor.
-newtype ActivitiesGet' = ActivitiesGet'
+-- /See:/ 'activitiesGet' smart constructor.
+newtype ActivitiesGet = ActivitiesGet
     { _agActivityId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ActivitiesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivitiesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'agActivityId'
-activitiesGet'
+activitiesGet
     :: Text -- ^ 'agActivityId'
-    -> ActivitiesGet'
-activitiesGet' pAgActivityId_ =
-    ActivitiesGet'
+    -> ActivitiesGet
+activitiesGet pAgActivityId_ =
+    ActivitiesGet
     { _agActivityId = pAgActivityId_
     }
 
 -- | The ID of the activity to get.
-agActivityId :: Lens' ActivitiesGet' Text
+agActivityId :: Lens' ActivitiesGet Text
 agActivityId
   = lens _agActivityId (\ s a -> s{_agActivityId = a})
 
-instance GoogleRequest ActivitiesGet' where
-        type Rs ActivitiesGet' = Activity
-        requestClient ActivitiesGet'{..}
+instance GoogleRequest ActivitiesGet where
+        type Rs ActivitiesGet = Activity
+        requestClient ActivitiesGet{..}
           = go _agActivityId (Just AltJSON) plusService
           where go
                   = buildClient (Proxy :: Proxy ActivitiesGetResource)

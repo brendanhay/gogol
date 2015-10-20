@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.OrderDocuments.Get
       OrderDocumentsGetResource
 
     -- * Creating a Request
-    , orderDocumentsGet'
-    , OrderDocumentsGet'
+    , orderDocumentsGet
+    , OrderDocumentsGet
 
     -- * Request Lenses
     , odgProFileId
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.orderDocuments.get@ method which the
--- 'OrderDocumentsGet'' request conforms to.
+-- 'OrderDocumentsGet' request conforms to.
 type OrderDocumentsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -54,14 +54,14 @@ type OrderDocumentsGetResource =
 
 -- | Gets one order document by ID.
 --
--- /See:/ 'orderDocumentsGet'' smart constructor.
-data OrderDocumentsGet' = OrderDocumentsGet'
+-- /See:/ 'orderDocumentsGet' smart constructor.
+data OrderDocumentsGet = OrderDocumentsGet
     { _odgProFileId :: !Int64
     , _odgId        :: !Int64
     , _odgProjectId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrderDocumentsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrderDocumentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,35 +70,35 @@ data OrderDocumentsGet' = OrderDocumentsGet'
 -- * 'odgId'
 --
 -- * 'odgProjectId'
-orderDocumentsGet'
+orderDocumentsGet
     :: Int64 -- ^ 'odgProFileId'
     -> Int64 -- ^ 'odgId'
     -> Int64 -- ^ 'odgProjectId'
-    -> OrderDocumentsGet'
-orderDocumentsGet' pOdgProFileId_ pOdgId_ pOdgProjectId_ =
-    OrderDocumentsGet'
+    -> OrderDocumentsGet
+orderDocumentsGet pOdgProFileId_ pOdgId_ pOdgProjectId_ =
+    OrderDocumentsGet
     { _odgProFileId = pOdgProFileId_
     , _odgId = pOdgId_
     , _odgProjectId = pOdgProjectId_
     }
 
 -- | User profile ID associated with this request.
-odgProFileId :: Lens' OrderDocumentsGet' Int64
+odgProFileId :: Lens' OrderDocumentsGet Int64
 odgProFileId
   = lens _odgProFileId (\ s a -> s{_odgProFileId = a})
 
 -- | Order document ID.
-odgId :: Lens' OrderDocumentsGet' Int64
+odgId :: Lens' OrderDocumentsGet Int64
 odgId = lens _odgId (\ s a -> s{_odgId = a})
 
 -- | Project ID for order documents.
-odgProjectId :: Lens' OrderDocumentsGet' Int64
+odgProjectId :: Lens' OrderDocumentsGet Int64
 odgProjectId
   = lens _odgProjectId (\ s a -> s{_odgProjectId = a})
 
-instance GoogleRequest OrderDocumentsGet' where
-        type Rs OrderDocumentsGet' = OrderDocument
-        requestClient OrderDocumentsGet'{..}
+instance GoogleRequest OrderDocumentsGet where
+        type Rs OrderDocumentsGet = OrderDocument
+        requestClient OrderDocumentsGet{..}
           = go _odgProFileId _odgProjectId _odgId
               (Just AltJSON)
               dFAReportingService

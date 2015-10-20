@@ -29,19 +29,19 @@ module Network.Google.Resource.Compute.Images.Get
       ImagesGetResource
 
     -- * Creating a Request
-    , imagesGet'
-    , ImagesGet'
+    , imagesGet
+    , ImagesGet
 
     -- * Request Lenses
-    , imaImage
-    , imaProject
+    , iImage
+    , iProject
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.images.get@ method which the
--- 'ImagesGet'' request conforms to.
+-- 'ImagesGet' request conforms to.
 type ImagesGetResource =
      Capture "project" Text :>
        "global" :>
@@ -51,43 +51,41 @@ type ImagesGetResource =
 
 -- | Returns the specified image resource.
 --
--- /See:/ 'imagesGet'' smart constructor.
-data ImagesGet' = ImagesGet'
-    { _imaImage   :: !Text
-    , _imaProject :: !Text
+-- /See:/ 'imagesGet' smart constructor.
+data ImagesGet = ImagesGet
+    { _iImage   :: !Text
+    , _iProject :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ImagesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ImagesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'imaImage'
+-- * 'iImage'
 --
--- * 'imaProject'
-imagesGet'
-    :: Text -- ^ 'imaImage'
-    -> Text -- ^ 'imaProject'
-    -> ImagesGet'
-imagesGet' pImaImage_ pImaProject_ =
-    ImagesGet'
-    { _imaImage = pImaImage_
-    , _imaProject = pImaProject_
+-- * 'iProject'
+imagesGet
+    :: Text -- ^ 'iImage'
+    -> Text -- ^ 'iProject'
+    -> ImagesGet
+imagesGet pIImage_ pIProject_ =
+    ImagesGet
+    { _iImage = pIImage_
+    , _iProject = pIProject_
     }
 
 -- | Name of the image resource to return.
-imaImage :: Lens' ImagesGet' Text
-imaImage = lens _imaImage (\ s a -> s{_imaImage = a})
+iImage :: Lens' ImagesGet Text
+iImage = lens _iImage (\ s a -> s{_iImage = a})
 
 -- | Project ID for this request.
-imaProject :: Lens' ImagesGet' Text
-imaProject
-  = lens _imaProject (\ s a -> s{_imaProject = a})
+iProject :: Lens' ImagesGet Text
+iProject = lens _iProject (\ s a -> s{_iProject = a})
 
-instance GoogleRequest ImagesGet' where
-        type Rs ImagesGet' = Image
-        requestClient ImagesGet'{..}
-          = go _imaProject _imaImage (Just AltJSON)
-              computeService
+instance GoogleRequest ImagesGet where
+        type Rs ImagesGet = Image
+        requestClient ImagesGet{..}
+          = go _iProject _iImage (Just AltJSON) computeService
           where go
                   = buildClient (Proxy :: Proxy ImagesGetResource)
                       mempty

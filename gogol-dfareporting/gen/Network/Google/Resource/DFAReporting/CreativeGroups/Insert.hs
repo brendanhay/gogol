@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Insert
       CreativeGroupsInsertResource
 
     -- * Creating a Request
-    , creativeGroupsInsert'
-    , CreativeGroupsInsert'
+    , creativeGroupsInsert
+    , CreativeGroupsInsert
 
     -- * Request Lenses
     , cgiProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creativeGroups.insert@ method which the
--- 'CreativeGroupsInsert'' request conforms to.
+-- 'CreativeGroupsInsert' request conforms to.
 type CreativeGroupsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,42 +52,42 @@ type CreativeGroupsInsertResource =
 
 -- | Inserts a new creative group.
 --
--- /See:/ 'creativeGroupsInsert'' smart constructor.
-data CreativeGroupsInsert' = CreativeGroupsInsert'
+-- /See:/ 'creativeGroupsInsert' smart constructor.
+data CreativeGroupsInsert = CreativeGroupsInsert
     { _cgiProFileId :: !Int64
     , _cgiPayload   :: !CreativeGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativeGroupsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CreativeGroupsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cgiProFileId'
 --
 -- * 'cgiPayload'
-creativeGroupsInsert'
+creativeGroupsInsert
     :: Int64 -- ^ 'cgiProFileId'
     -> CreativeGroup -- ^ 'cgiPayload'
-    -> CreativeGroupsInsert'
-creativeGroupsInsert' pCgiProFileId_ pCgiPayload_ =
-    CreativeGroupsInsert'
+    -> CreativeGroupsInsert
+creativeGroupsInsert pCgiProFileId_ pCgiPayload_ =
+    CreativeGroupsInsert
     { _cgiProFileId = pCgiProFileId_
     , _cgiPayload = pCgiPayload_
     }
 
 -- | User profile ID associated with this request.
-cgiProFileId :: Lens' CreativeGroupsInsert' Int64
+cgiProFileId :: Lens' CreativeGroupsInsert Int64
 cgiProFileId
   = lens _cgiProFileId (\ s a -> s{_cgiProFileId = a})
 
 -- | Multipart request metadata.
-cgiPayload :: Lens' CreativeGroupsInsert' CreativeGroup
+cgiPayload :: Lens' CreativeGroupsInsert CreativeGroup
 cgiPayload
   = lens _cgiPayload (\ s a -> s{_cgiPayload = a})
 
-instance GoogleRequest CreativeGroupsInsert' where
-        type Rs CreativeGroupsInsert' = CreativeGroup
-        requestClient CreativeGroupsInsert'{..}
+instance GoogleRequest CreativeGroupsInsert where
+        type Rs CreativeGroupsInsert = CreativeGroup
+        requestClient CreativeGroupsInsert{..}
           = go _cgiProFileId (Just AltJSON) _cgiPayload
               dFAReportingService
           where go

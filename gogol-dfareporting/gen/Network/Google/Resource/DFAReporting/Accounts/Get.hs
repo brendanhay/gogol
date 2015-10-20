@@ -29,19 +29,19 @@ module Network.Google.Resource.DFAReporting.Accounts.Get
       AccountsGetResource
 
     -- * Creating a Request
-    , accountsGet'
-    , AccountsGet'
+    , accountsGet
+    , AccountsGet
 
     -- * Request Lenses
-    , ag1ProFileId
-    , ag1Id
+    , aggProFileId
+    , aggId
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accounts.get@ method which the
--- 'AccountsGet'' request conforms to.
+-- 'AccountsGet' request conforms to.
 type AccountsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type AccountsGetResource =
 
 -- | Gets one account by ID.
 --
--- /See:/ 'accountsGet'' smart constructor.
-data AccountsGet' = AccountsGet'
-    { _ag1ProFileId :: !Int64
-    , _ag1Id        :: !Int64
+-- /See:/ 'accountsGet' smart constructor.
+data AccountsGet = AccountsGet
+    { _aggProFileId :: !Int64
+    , _aggId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ag1ProFileId'
+-- * 'aggProFileId'
 --
--- * 'ag1Id'
-accountsGet'
-    :: Int64 -- ^ 'ag1ProFileId'
-    -> Int64 -- ^ 'ag1Id'
-    -> AccountsGet'
-accountsGet' pAg1ProFileId_ pAg1Id_ =
-    AccountsGet'
-    { _ag1ProFileId = pAg1ProFileId_
-    , _ag1Id = pAg1Id_
+-- * 'aggId'
+accountsGet
+    :: Int64 -- ^ 'aggProFileId'
+    -> Int64 -- ^ 'aggId'
+    -> AccountsGet
+accountsGet pAggProFileId_ pAggId_ =
+    AccountsGet
+    { _aggProFileId = pAggProFileId_
+    , _aggId = pAggId_
     }
 
 -- | User profile ID associated with this request.
-ag1ProFileId :: Lens' AccountsGet' Int64
-ag1ProFileId
-  = lens _ag1ProFileId (\ s a -> s{_ag1ProFileId = a})
+aggProFileId :: Lens' AccountsGet Int64
+aggProFileId
+  = lens _aggProFileId (\ s a -> s{_aggProFileId = a})
 
 -- | Account ID.
-ag1Id :: Lens' AccountsGet' Int64
-ag1Id = lens _ag1Id (\ s a -> s{_ag1Id = a})
+aggId :: Lens' AccountsGet Int64
+aggId = lens _aggId (\ s a -> s{_aggId = a})
 
-instance GoogleRequest AccountsGet' where
-        type Rs AccountsGet' = Account
-        requestClient AccountsGet'{..}
-          = go _ag1ProFileId _ag1Id (Just AltJSON)
+instance GoogleRequest AccountsGet where
+        type Rs AccountsGet = Account
+        requestClient AccountsGet{..}
+          = go _aggProFileId _aggId (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy AccountsGetResource)

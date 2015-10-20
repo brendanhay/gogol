@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Comments.Get
       CommentsGetResource
 
     -- * Creating a Request
-    , commentsGet'
-    , CommentsGet'
+    , commentsGet
+    , CommentsGet
 
     -- * Request Lenses
     , cgFileId
@@ -42,7 +42,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.comments.get@ method which the
--- 'CommentsGet'' request conforms to.
+-- 'CommentsGet' request conforms to.
 type CommentsGetResource =
      "files" :>
        Capture "fileId" Text :>
@@ -53,14 +53,14 @@ type CommentsGetResource =
 
 -- | Gets a comment by ID.
 --
--- /See:/ 'commentsGet'' smart constructor.
-data CommentsGet' = CommentsGet'
+-- /See:/ 'commentsGet' smart constructor.
+data CommentsGet = CommentsGet
     { _cgFileId         :: !Text
     , _cgCommentId      :: !Text
     , _cgIncludeDeleted :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,36 @@ data CommentsGet' = CommentsGet'
 -- * 'cgCommentId'
 --
 -- * 'cgIncludeDeleted'
-commentsGet'
+commentsGet
     :: Text -- ^ 'cgFileId'
     -> Text -- ^ 'cgCommentId'
-    -> CommentsGet'
-commentsGet' pCgFileId_ pCgCommentId_ =
-    CommentsGet'
+    -> CommentsGet
+commentsGet pCgFileId_ pCgCommentId_ =
+    CommentsGet
     { _cgFileId = pCgFileId_
     , _cgCommentId = pCgCommentId_
     , _cgIncludeDeleted = False
     }
 
 -- | The ID of the file.
-cgFileId :: Lens' CommentsGet' Text
+cgFileId :: Lens' CommentsGet Text
 cgFileId = lens _cgFileId (\ s a -> s{_cgFileId = a})
 
 -- | The ID of the comment.
-cgCommentId :: Lens' CommentsGet' Text
+cgCommentId :: Lens' CommentsGet Text
 cgCommentId
   = lens _cgCommentId (\ s a -> s{_cgCommentId = a})
 
 -- | If set, this will succeed when retrieving a deleted comment, and will
 -- include any deleted replies.
-cgIncludeDeleted :: Lens' CommentsGet' Bool
+cgIncludeDeleted :: Lens' CommentsGet Bool
 cgIncludeDeleted
   = lens _cgIncludeDeleted
       (\ s a -> s{_cgIncludeDeleted = a})
 
-instance GoogleRequest CommentsGet' where
-        type Rs CommentsGet' = Comment
-        requestClient CommentsGet'{..}
+instance GoogleRequest CommentsGet where
+        type Rs CommentsGet = Comment
+        requestClient CommentsGet{..}
           = go _cgFileId _cgCommentId (Just _cgIncludeDeleted)
               (Just AltJSON)
               driveService

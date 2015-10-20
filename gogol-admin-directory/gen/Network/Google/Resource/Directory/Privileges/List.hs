@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Privileges.List
       PrivilegesListResource
 
     -- * Creating a Request
-    , privilegesList'
-    , PrivilegesList'
+    , privilegesList
+    , PrivilegesList
 
     -- * Request Lenses
     , plCustomer
@@ -40,7 +40,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.privileges.list@ method which the
--- 'PrivilegesList'' request conforms to.
+-- 'PrivilegesList' request conforms to.
 type PrivilegesListResource =
      "customer" :>
        Capture "customer" Text :>
@@ -51,32 +51,32 @@ type PrivilegesListResource =
 
 -- | Retrieves a paginated list of all privileges for a customer.
 --
--- /See:/ 'privilegesList'' smart constructor.
-newtype PrivilegesList' = PrivilegesList'
+-- /See:/ 'privilegesList' smart constructor.
+newtype PrivilegesList = PrivilegesList
     { _plCustomer :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PrivilegesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'PrivilegesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'plCustomer'
-privilegesList'
+privilegesList
     :: Text -- ^ 'plCustomer'
-    -> PrivilegesList'
-privilegesList' pPlCustomer_ =
-    PrivilegesList'
+    -> PrivilegesList
+privilegesList pPlCustomer_ =
+    PrivilegesList
     { _plCustomer = pPlCustomer_
     }
 
 -- | Immutable ID of the Google Apps account.
-plCustomer :: Lens' PrivilegesList' Text
+plCustomer :: Lens' PrivilegesList Text
 plCustomer
   = lens _plCustomer (\ s a -> s{_plCustomer = a})
 
-instance GoogleRequest PrivilegesList' where
-        type Rs PrivilegesList' = Privileges
-        requestClient PrivilegesList'{..}
+instance GoogleRequest PrivilegesList where
+        type Rs PrivilegesList = Privileges
+        requestClient PrivilegesList{..}
           = go _plCustomer (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy PrivilegesListResource)

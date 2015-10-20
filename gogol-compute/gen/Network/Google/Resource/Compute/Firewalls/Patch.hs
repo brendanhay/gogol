@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Firewalls.Patch
       FirewallsPatchResource
 
     -- * Creating a Request
-    , firewallsPatch'
-    , FirewallsPatch'
+    , firewallsPatch
+    , FirewallsPatch
 
     -- * Request Lenses
     , fpProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.firewalls.patch@ method which the
--- 'FirewallsPatch'' request conforms to.
+-- 'FirewallsPatch' request conforms to.
 type FirewallsPatchResource =
      Capture "project" Text :>
        "global" :>
@@ -55,14 +55,14 @@ type FirewallsPatchResource =
 -- | Updates the specified firewall resource with the data included in the
 -- request. This method supports patch semantics.
 --
--- /See:/ 'firewallsPatch'' smart constructor.
-data FirewallsPatch' = FirewallsPatch'
+-- /See:/ 'firewallsPatch' smart constructor.
+data FirewallsPatch = FirewallsPatch
     { _fpProject  :: !Text
     , _fpPayload  :: !Firewall
     , _fpFirewall :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FirewallsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'FirewallsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,36 +71,36 @@ data FirewallsPatch' = FirewallsPatch'
 -- * 'fpPayload'
 --
 -- * 'fpFirewall'
-firewallsPatch'
+firewallsPatch
     :: Text -- ^ 'fpProject'
     -> Firewall -- ^ 'fpPayload'
     -> Text -- ^ 'fpFirewall'
-    -> FirewallsPatch'
-firewallsPatch' pFpProject_ pFpPayload_ pFpFirewall_ =
-    FirewallsPatch'
+    -> FirewallsPatch
+firewallsPatch pFpProject_ pFpPayload_ pFpFirewall_ =
+    FirewallsPatch
     { _fpProject = pFpProject_
     , _fpPayload = pFpPayload_
     , _fpFirewall = pFpFirewall_
     }
 
 -- | Project ID for this request.
-fpProject :: Lens' FirewallsPatch' Text
+fpProject :: Lens' FirewallsPatch Text
 fpProject
   = lens _fpProject (\ s a -> s{_fpProject = a})
 
 -- | Multipart request metadata.
-fpPayload :: Lens' FirewallsPatch' Firewall
+fpPayload :: Lens' FirewallsPatch Firewall
 fpPayload
   = lens _fpPayload (\ s a -> s{_fpPayload = a})
 
 -- | Name of the firewall resource to update.
-fpFirewall :: Lens' FirewallsPatch' Text
+fpFirewall :: Lens' FirewallsPatch Text
 fpFirewall
   = lens _fpFirewall (\ s a -> s{_fpFirewall = a})
 
-instance GoogleRequest FirewallsPatch' where
-        type Rs FirewallsPatch' = Operation
-        requestClient FirewallsPatch'{..}
+instance GoogleRequest FirewallsPatch where
+        type Rs FirewallsPatch = Operation
+        requestClient FirewallsPatch{..}
           = go _fpProject _fpFirewall (Just AltJSON) _fpPayload
               computeService
           where go

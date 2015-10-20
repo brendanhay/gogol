@@ -36,8 +36,8 @@ module Network.Google.Resource.Fitness.Users.DataSources.Create
       UsersDataSourcesCreateResource
 
     -- * Creating a Request
-    , usersDataSourcesCreate'
-    , UsersDataSourcesCreate'
+    , usersDataSourcesCreate
+    , UsersDataSourcesCreate
 
     -- * Request Lenses
     , udscPayload
@@ -48,7 +48,7 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fitness.users.dataSources.create@ method which the
--- 'UsersDataSourcesCreate'' request conforms to.
+-- 'UsersDataSourcesCreate' request conforms to.
 type UsersDataSourcesCreateResource =
      Capture "userId" Text :>
        "dataSources" :>
@@ -64,43 +64,43 @@ type UsersDataSourcesCreateResource =
 -- data source is included. This developer project number is obfuscated
 -- when read by any other developer reading public data types.
 --
--- /See:/ 'usersDataSourcesCreate'' smart constructor.
-data UsersDataSourcesCreate' = UsersDataSourcesCreate'
+-- /See:/ 'usersDataSourcesCreate' smart constructor.
+data UsersDataSourcesCreate = UsersDataSourcesCreate
     { _udscPayload :: !DataSource
     , _udscUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersDataSourcesCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersDataSourcesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'udscPayload'
 --
 -- * 'udscUserId'
-usersDataSourcesCreate'
+usersDataSourcesCreate
     :: DataSource -- ^ 'udscPayload'
     -> Text -- ^ 'udscUserId'
-    -> UsersDataSourcesCreate'
-usersDataSourcesCreate' pUdscPayload_ pUdscUserId_ =
-    UsersDataSourcesCreate'
+    -> UsersDataSourcesCreate
+usersDataSourcesCreate pUdscPayload_ pUdscUserId_ =
+    UsersDataSourcesCreate
     { _udscPayload = pUdscPayload_
     , _udscUserId = pUdscUserId_
     }
 
 -- | Multipart request metadata.
-udscPayload :: Lens' UsersDataSourcesCreate' DataSource
+udscPayload :: Lens' UsersDataSourcesCreate DataSource
 udscPayload
   = lens _udscPayload (\ s a -> s{_udscPayload = a})
 
 -- | Create the data source for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
-udscUserId :: Lens' UsersDataSourcesCreate' Text
+udscUserId :: Lens' UsersDataSourcesCreate Text
 udscUserId
   = lens _udscUserId (\ s a -> s{_udscUserId = a})
 
-instance GoogleRequest UsersDataSourcesCreate' where
-        type Rs UsersDataSourcesCreate' = DataSource
-        requestClient UsersDataSourcesCreate'{..}
+instance GoogleRequest UsersDataSourcesCreate where
+        type Rs UsersDataSourcesCreate = DataSource
+        requestClient UsersDataSourcesCreate{..}
           = go _udscUserId (Just AltJSON) _udscPayload
               fitnessService
           where go

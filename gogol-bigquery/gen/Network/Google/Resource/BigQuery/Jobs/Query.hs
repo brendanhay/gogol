@@ -30,8 +30,8 @@ module Network.Google.Resource.BigQuery.Jobs.Query
       JobsQueryResource
 
     -- * Creating a Request
-    , jobsQuery'
-    , JobsQuery'
+    , jobsQuery
+    , JobsQuery
 
     -- * Request Lenses
     , jqPayload
@@ -42,7 +42,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.jobs.query@ method which the
--- 'JobsQuery'' request conforms to.
+-- 'JobsQuery' request conforms to.
 type JobsQueryResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -54,42 +54,42 @@ type JobsQueryResource =
 -- | Runs a BigQuery SQL query synchronously and returns query results if the
 -- query completes within a specified timeout.
 --
--- /See:/ 'jobsQuery'' smart constructor.
-data JobsQuery' = JobsQuery'
+-- /See:/ 'jobsQuery' smart constructor.
+data JobsQuery = JobsQuery
     { _jqPayload   :: !QueryRequest
     , _jqProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'JobsQuery'' with the minimum fields required to make a request.
+-- | Creates a value of 'JobsQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'jqPayload'
 --
 -- * 'jqProjectId'
-jobsQuery'
+jobsQuery
     :: QueryRequest -- ^ 'jqPayload'
     -> Text -- ^ 'jqProjectId'
-    -> JobsQuery'
-jobsQuery' pJqPayload_ pJqProjectId_ =
-    JobsQuery'
+    -> JobsQuery
+jobsQuery pJqPayload_ pJqProjectId_ =
+    JobsQuery
     { _jqPayload = pJqPayload_
     , _jqProjectId = pJqProjectId_
     }
 
 -- | Multipart request metadata.
-jqPayload :: Lens' JobsQuery' QueryRequest
+jqPayload :: Lens' JobsQuery QueryRequest
 jqPayload
   = lens _jqPayload (\ s a -> s{_jqPayload = a})
 
 -- | Project ID of the project billed for the query
-jqProjectId :: Lens' JobsQuery' Text
+jqProjectId :: Lens' JobsQuery Text
 jqProjectId
   = lens _jqProjectId (\ s a -> s{_jqProjectId = a})
 
-instance GoogleRequest JobsQuery' where
-        type Rs JobsQuery' = QueryResponse
-        requestClient JobsQuery'{..}
+instance GoogleRequest JobsQuery where
+        type Rs JobsQuery = QueryResponse
+        requestClient JobsQuery{..}
           = go _jqProjectId (Just AltJSON) _jqPayload
               bigQueryService
           where go

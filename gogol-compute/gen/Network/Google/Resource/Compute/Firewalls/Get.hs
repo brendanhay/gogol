@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Firewalls.Get
       FirewallsGetResource
 
     -- * Creating a Request
-    , firewallsGet'
-    , FirewallsGet'
+    , firewallsGet
+    , FirewallsGet
 
     -- * Request Lenses
     , fgProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.firewalls.get@ method which the
--- 'FirewallsGet'' request conforms to.
+-- 'FirewallsGet' request conforms to.
 type FirewallsGetResource =
      Capture "project" Text :>
        "global" :>
@@ -51,42 +51,42 @@ type FirewallsGetResource =
 
 -- | Returns the specified firewall resource.
 --
--- /See:/ 'firewallsGet'' smart constructor.
-data FirewallsGet' = FirewallsGet'
+-- /See:/ 'firewallsGet' smart constructor.
+data FirewallsGet = FirewallsGet
     { _fgProject  :: !Text
     , _fgFirewall :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FirewallsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'FirewallsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fgProject'
 --
 -- * 'fgFirewall'
-firewallsGet'
+firewallsGet
     :: Text -- ^ 'fgProject'
     -> Text -- ^ 'fgFirewall'
-    -> FirewallsGet'
-firewallsGet' pFgProject_ pFgFirewall_ =
-    FirewallsGet'
+    -> FirewallsGet
+firewallsGet pFgProject_ pFgFirewall_ =
+    FirewallsGet
     { _fgProject = pFgProject_
     , _fgFirewall = pFgFirewall_
     }
 
 -- | Project ID for this request.
-fgProject :: Lens' FirewallsGet' Text
+fgProject :: Lens' FirewallsGet Text
 fgProject
   = lens _fgProject (\ s a -> s{_fgProject = a})
 
 -- | Name of the firewall resource to return.
-fgFirewall :: Lens' FirewallsGet' Text
+fgFirewall :: Lens' FirewallsGet Text
 fgFirewall
   = lens _fgFirewall (\ s a -> s{_fgFirewall = a})
 
-instance GoogleRequest FirewallsGet' where
-        type Rs FirewallsGet' = Firewall
-        requestClient FirewallsGet'{..}
+instance GoogleRequest FirewallsGet where
+        type Rs FirewallsGet = Firewall
+        requestClient FirewallsGet{..}
           = go _fgProject _fgFirewall (Just AltJSON)
               computeService
           where go

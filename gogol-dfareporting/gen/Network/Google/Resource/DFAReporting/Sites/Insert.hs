@@ -29,19 +29,19 @@ module Network.Google.Resource.DFAReporting.Sites.Insert
       SitesInsertResource
 
     -- * Creating a Request
-    , sitesInsert'
-    , SitesInsert'
+    , sitesInsert
+    , SitesInsert
 
     -- * Request Lenses
-    , siProFileId
-    , siPayload
+    , sProFileId
+    , sPayload
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.sites.insert@ method which the
--- 'SitesInsert'' request conforms to.
+-- 'SitesInsert' request conforms to.
 type SitesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,43 +51,42 @@ type SitesInsertResource =
 
 -- | Inserts a new site.
 --
--- /See:/ 'sitesInsert'' smart constructor.
-data SitesInsert' = SitesInsert'
-    { _siProFileId :: !Int64
-    , _siPayload   :: !Site
+-- /See:/ 'sitesInsert' smart constructor.
+data SitesInsert = SitesInsert
+    { _sProFileId :: !Int64
+    , _sPayload   :: !Site
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SitesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'SitesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'siProFileId'
+-- * 'sProFileId'
 --
--- * 'siPayload'
-sitesInsert'
-    :: Int64 -- ^ 'siProFileId'
-    -> Site -- ^ 'siPayload'
-    -> SitesInsert'
-sitesInsert' pSiProFileId_ pSiPayload_ =
-    SitesInsert'
-    { _siProFileId = pSiProFileId_
-    , _siPayload = pSiPayload_
+-- * 'sPayload'
+sitesInsert
+    :: Int64 -- ^ 'sProFileId'
+    -> Site -- ^ 'sPayload'
+    -> SitesInsert
+sitesInsert pSProFileId_ pSPayload_ =
+    SitesInsert
+    { _sProFileId = pSProFileId_
+    , _sPayload = pSPayload_
     }
 
 -- | User profile ID associated with this request.
-siProFileId :: Lens' SitesInsert' Int64
-siProFileId
-  = lens _siProFileId (\ s a -> s{_siProFileId = a})
+sProFileId :: Lens' SitesInsert Int64
+sProFileId
+  = lens _sProFileId (\ s a -> s{_sProFileId = a})
 
 -- | Multipart request metadata.
-siPayload :: Lens' SitesInsert' Site
-siPayload
-  = lens _siPayload (\ s a -> s{_siPayload = a})
+sPayload :: Lens' SitesInsert Site
+sPayload = lens _sPayload (\ s a -> s{_sPayload = a})
 
-instance GoogleRequest SitesInsert' where
-        type Rs SitesInsert' = Site
-        requestClient SitesInsert'{..}
-          = go _siProFileId (Just AltJSON) _siPayload
+instance GoogleRequest SitesInsert where
+        type Rs SitesInsert = Site
+        requestClient SitesInsert{..}
+          = go _sProFileId (Just AltJSON) _sPayload
               dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy SitesInsertResource)

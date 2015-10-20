@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set
       DebuggerDebuggeesBreakpointsSetResource
 
     -- * Creating a Request
-    , debuggerDebuggeesBreakpointsSet'
-    , DebuggerDebuggeesBreakpointsSet'
+    , debuggerDebuggeesBreakpointsSet
+    , DebuggerDebuggeesBreakpointsSet
 
     -- * Request Lenses
     , ddbsXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @clouddebugger.debugger.debuggees.breakpoints.set@ method which the
--- 'DebuggerDebuggeesBreakpointsSet'' request conforms to.
+-- 'DebuggerDebuggeesBreakpointsSet' request conforms to.
 type DebuggerDebuggeesBreakpointsSetResource =
      "v2" :>
        "debugger" :>
@@ -69,8 +69,8 @@ type DebuggerDebuggeesBreakpointsSetResource =
 
 -- | Sets the breakpoint to the debuggee.
 --
--- /See:/ 'debuggerDebuggeesBreakpointsSet'' smart constructor.
-data DebuggerDebuggeesBreakpointsSet' = DebuggerDebuggeesBreakpointsSet'
+-- /See:/ 'debuggerDebuggeesBreakpointsSet' smart constructor.
+data DebuggerDebuggeesBreakpointsSet = DebuggerDebuggeesBreakpointsSet
     { _ddbsXgafv          :: !(Maybe Text)
     , _ddbsUploadProtocol :: !(Maybe Text)
     , _ddbsPp             :: !Bool
@@ -82,7 +82,7 @@ data DebuggerDebuggeesBreakpointsSet' = DebuggerDebuggeesBreakpointsSet'
     , _ddbsCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DebuggerDebuggeesBreakpointsSet'' with the minimum fields required to make a request.
+-- | Creates a value of 'DebuggerDebuggeesBreakpointsSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -103,12 +103,12 @@ data DebuggerDebuggeesBreakpointsSet' = DebuggerDebuggeesBreakpointsSet'
 -- * 'ddbsDebuggeeId'
 --
 -- * 'ddbsCallback'
-debuggerDebuggeesBreakpointsSet'
+debuggerDebuggeesBreakpointsSet
     :: Breakpoint -- ^ 'ddbsPayload'
     -> Text -- ^ 'ddbsDebuggeeId'
-    -> DebuggerDebuggeesBreakpointsSet'
-debuggerDebuggeesBreakpointsSet' pDdbsPayload_ pDdbsDebuggeeId_ =
-    DebuggerDebuggeesBreakpointsSet'
+    -> DebuggerDebuggeesBreakpointsSet
+debuggerDebuggeesBreakpointsSet pDdbsPayload_ pDdbsDebuggeeId_ =
+    DebuggerDebuggeesBreakpointsSet
     { _ddbsXgafv = Nothing
     , _ddbsUploadProtocol = Nothing
     , _ddbsPp = True
@@ -121,59 +121,59 @@ debuggerDebuggeesBreakpointsSet' pDdbsPayload_ pDdbsDebuggeeId_ =
     }
 
 -- | V1 error format.
-ddbsXgafv :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe Text)
+ddbsXgafv :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe Text)
 ddbsXgafv
   = lens _ddbsXgafv (\ s a -> s{_ddbsXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ddbsUploadProtocol :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe Text)
+ddbsUploadProtocol :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe Text)
 ddbsUploadProtocol
   = lens _ddbsUploadProtocol
       (\ s a -> s{_ddbsUploadProtocol = a})
 
 -- | Pretty-print response.
-ddbsPp :: Lens' DebuggerDebuggeesBreakpointsSet' Bool
+ddbsPp :: Lens' DebuggerDebuggeesBreakpointsSet Bool
 ddbsPp = lens _ddbsPp (\ s a -> s{_ddbsPp = a})
 
 -- | OAuth access token.
-ddbsAccessToken :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe Text)
+ddbsAccessToken :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe Text)
 ddbsAccessToken
   = lens _ddbsAccessToken
       (\ s a -> s{_ddbsAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ddbsUploadType :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe Text)
+ddbsUploadType :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe Text)
 ddbsUploadType
   = lens _ddbsUploadType
       (\ s a -> s{_ddbsUploadType = a})
 
 -- | Multipart request metadata.
-ddbsPayload :: Lens' DebuggerDebuggeesBreakpointsSet' Breakpoint
+ddbsPayload :: Lens' DebuggerDebuggeesBreakpointsSet Breakpoint
 ddbsPayload
   = lens _ddbsPayload (\ s a -> s{_ddbsPayload = a})
 
 -- | OAuth bearer token.
-ddbsBearerToken :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe Text)
+ddbsBearerToken :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe Text)
 ddbsBearerToken
   = lens _ddbsBearerToken
       (\ s a -> s{_ddbsBearerToken = a})
 
 -- | The debuggee id to set the breakpoint to.
-ddbsDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsSet' Text
+ddbsDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsSet Text
 ddbsDebuggeeId
   = lens _ddbsDebuggeeId
       (\ s a -> s{_ddbsDebuggeeId = a})
 
 -- | JSONP
-ddbsCallback :: Lens' DebuggerDebuggeesBreakpointsSet' (Maybe Text)
+ddbsCallback :: Lens' DebuggerDebuggeesBreakpointsSet (Maybe Text)
 ddbsCallback
   = lens _ddbsCallback (\ s a -> s{_ddbsCallback = a})
 
 instance GoogleRequest
-         DebuggerDebuggeesBreakpointsSet' where
-        type Rs DebuggerDebuggeesBreakpointsSet' =
+         DebuggerDebuggeesBreakpointsSet where
+        type Rs DebuggerDebuggeesBreakpointsSet =
              SetBreakpointResponse
-        requestClient DebuggerDebuggeesBreakpointsSet'{..}
+        requestClient DebuggerDebuggeesBreakpointsSet{..}
           = go _ddbsDebuggeeId _ddbsXgafv _ddbsUploadProtocol
               (Just _ddbsPp)
               _ddbsAccessToken

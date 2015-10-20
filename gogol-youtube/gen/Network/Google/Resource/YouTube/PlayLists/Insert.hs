@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.PlayLists.Insert
       PlayListsInsertResource
 
     -- * Creating a Request
-    , playListsInsert'
-    , PlayListsInsert'
+    , playListsInsert
+    , PlayListsInsert
 
     -- * Request Lenses
     , pliPart
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.playlists.insert@ method which the
--- 'PlayListsInsert'' request conforms to.
+-- 'PlayListsInsert' request conforms to.
 type PlayListsInsertResource =
      "playlists" :>
        QueryParam "part" Text :>
@@ -54,15 +54,15 @@ type PlayListsInsertResource =
 
 -- | Creates a playlist.
 --
--- /See:/ 'playListsInsert'' smart constructor.
-data PlayListsInsert' = PlayListsInsert'
+-- /See:/ 'playListsInsert' smart constructor.
+data PlayListsInsert = PlayListsInsert
     { _pliPart                          :: !Text
     , _pliPayload                       :: !PlayList
     , _pliOnBehalfOfContentOwner        :: !(Maybe Text)
     , _pliOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlayListsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayListsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,12 +73,12 @@ data PlayListsInsert' = PlayListsInsert'
 -- * 'pliOnBehalfOfContentOwner'
 --
 -- * 'pliOnBehalfOfContentOwnerChannel'
-playListsInsert'
+playListsInsert
     :: Text -- ^ 'pliPart'
     -> PlayList -- ^ 'pliPayload'
-    -> PlayListsInsert'
-playListsInsert' pPliPart_ pPliPayload_ =
-    PlayListsInsert'
+    -> PlayListsInsert
+playListsInsert pPliPart_ pPliPayload_ =
+    PlayListsInsert
     { _pliPart = pPliPart_
     , _pliPayload = pPliPayload_
     , _pliOnBehalfOfContentOwner = Nothing
@@ -88,11 +88,11 @@ playListsInsert' pPliPart_ pPliPayload_ =
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the
 -- properties that the API response will include.
-pliPart :: Lens' PlayListsInsert' Text
+pliPart :: Lens' PlayListsInsert Text
 pliPart = lens _pliPart (\ s a -> s{_pliPart = a})
 
 -- | Multipart request metadata.
-pliPayload :: Lens' PlayListsInsert' PlayList
+pliPayload :: Lens' PlayListsInsert PlayList
 pliPayload
   = lens _pliPayload (\ s a -> s{_pliPayload = a})
 
@@ -106,7 +106,7 @@ pliPayload
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-pliOnBehalfOfContentOwner :: Lens' PlayListsInsert' (Maybe Text)
+pliOnBehalfOfContentOwner :: Lens' PlayListsInsert (Maybe Text)
 pliOnBehalfOfContentOwner
   = lens _pliOnBehalfOfContentOwner
       (\ s a -> s{_pliOnBehalfOfContentOwner = a})
@@ -127,14 +127,14 @@ pliOnBehalfOfContentOwner
 -- actions on behalf of the channel specified in the parameter value,
 -- without having to provide authentication credentials for each separate
 -- channel.
-pliOnBehalfOfContentOwnerChannel :: Lens' PlayListsInsert' (Maybe Text)
+pliOnBehalfOfContentOwnerChannel :: Lens' PlayListsInsert (Maybe Text)
 pliOnBehalfOfContentOwnerChannel
   = lens _pliOnBehalfOfContentOwnerChannel
       (\ s a -> s{_pliOnBehalfOfContentOwnerChannel = a})
 
-instance GoogleRequest PlayListsInsert' where
-        type Rs PlayListsInsert' = PlayList
-        requestClient PlayListsInsert'{..}
+instance GoogleRequest PlayListsInsert where
+        type Rs PlayListsInsert = PlayList
+        requestClient PlayListsInsert{..}
           = go (Just _pliPart) _pliOnBehalfOfContentOwner
               _pliOnBehalfOfContentOwnerChannel
               (Just AltJSON)

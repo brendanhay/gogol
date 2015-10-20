@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.Leaderboards.Get
       LeaderboardsGetResource
 
     -- * Creating a Request
-    , leaderboardsGet'
-    , LeaderboardsGet'
+    , leaderboardsGet
+    , LeaderboardsGet
 
     -- * Request Lenses
     , lgLeaderboardId
@@ -41,7 +41,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.leaderboards.get@ method which the
--- 'LeaderboardsGet'' request conforms to.
+-- 'LeaderboardsGet' request conforms to.
 type LeaderboardsGetResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
@@ -50,42 +50,42 @@ type LeaderboardsGetResource =
 
 -- | Retrieves the metadata of the leaderboard with the given ID.
 --
--- /See:/ 'leaderboardsGet'' smart constructor.
-data LeaderboardsGet' = LeaderboardsGet'
+-- /See:/ 'leaderboardsGet' smart constructor.
+data LeaderboardsGet = LeaderboardsGet
     { _lgLeaderboardId :: !Text
     , _lgLanguage      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LeaderboardsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'LeaderboardsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lgLeaderboardId'
 --
 -- * 'lgLanguage'
-leaderboardsGet'
+leaderboardsGet
     :: Text -- ^ 'lgLeaderboardId'
-    -> LeaderboardsGet'
-leaderboardsGet' pLgLeaderboardId_ =
-    LeaderboardsGet'
+    -> LeaderboardsGet
+leaderboardsGet pLgLeaderboardId_ =
+    LeaderboardsGet
     { _lgLeaderboardId = pLgLeaderboardId_
     , _lgLanguage = Nothing
     }
 
 -- | The ID of the leaderboard.
-lgLeaderboardId :: Lens' LeaderboardsGet' Text
+lgLeaderboardId :: Lens' LeaderboardsGet Text
 lgLeaderboardId
   = lens _lgLeaderboardId
       (\ s a -> s{_lgLeaderboardId = a})
 
 -- | The preferred language to use for strings returned by this method.
-lgLanguage :: Lens' LeaderboardsGet' (Maybe Text)
+lgLanguage :: Lens' LeaderboardsGet (Maybe Text)
 lgLanguage
   = lens _lgLanguage (\ s a -> s{_lgLanguage = a})
 
-instance GoogleRequest LeaderboardsGet' where
-        type Rs LeaderboardsGet' = Leaderboard
-        requestClient LeaderboardsGet'{..}
+instance GoogleRequest LeaderboardsGet where
+        type Rs LeaderboardsGet = Leaderboard
+        requestClient LeaderboardsGet{..}
           = go _lgLeaderboardId _lgLanguage (Just AltJSON)
               gamesService
           where go

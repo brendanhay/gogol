@@ -30,19 +30,19 @@ module Network.Google.Resource.Content.Accountshipping.Custombatch
       AccountshippingCustombatchResource
 
     -- * Creating a Request
-    , accountshippingCustombatch'
-    , AccountshippingCustombatch'
+    , accountshippingCustombatch
+    , AccountshippingCustombatch
 
     -- * Request Lenses
-    , acccPayload
-    , acccDryRun
+    , acPayload
+    , acDryRun
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accountshipping.custombatch@ method which the
--- 'AccountshippingCustombatch'' request conforms to.
+-- 'AccountshippingCustombatch' request conforms to.
 type AccountshippingCustombatchResource =
      "accountshipping" :>
        "batch" :>
@@ -54,44 +54,43 @@ type AccountshippingCustombatchResource =
 -- | Retrieves and updates the shipping settings of multiple accounts in a
 -- single request.
 --
--- /See:/ 'accountshippingCustombatch'' smart constructor.
-data AccountshippingCustombatch' = AccountshippingCustombatch'
-    { _acccPayload :: !AccountshippingCustomBatchRequest
-    , _acccDryRun  :: !(Maybe Bool)
+-- /See:/ 'accountshippingCustombatch' smart constructor.
+data AccountshippingCustombatch = AccountshippingCustombatch
+    { _acPayload :: !AccountshippingCustomBatchRequest
+    , _acDryRun  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountshippingCustombatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountshippingCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acccPayload'
+-- * 'acPayload'
 --
--- * 'acccDryRun'
-accountshippingCustombatch'
-    :: AccountshippingCustomBatchRequest -- ^ 'acccPayload'
-    -> AccountshippingCustombatch'
-accountshippingCustombatch' pAcccPayload_ =
-    AccountshippingCustombatch'
-    { _acccPayload = pAcccPayload_
-    , _acccDryRun = Nothing
+-- * 'acDryRun'
+accountshippingCustombatch
+    :: AccountshippingCustomBatchRequest -- ^ 'acPayload'
+    -> AccountshippingCustombatch
+accountshippingCustombatch pAcPayload_ =
+    AccountshippingCustombatch
+    { _acPayload = pAcPayload_
+    , _acDryRun = Nothing
     }
 
 -- | Multipart request metadata.
-acccPayload :: Lens' AccountshippingCustombatch' AccountshippingCustomBatchRequest
-acccPayload
-  = lens _acccPayload (\ s a -> s{_acccPayload = a})
+acPayload :: Lens' AccountshippingCustombatch AccountshippingCustomBatchRequest
+acPayload
+  = lens _acPayload (\ s a -> s{_acPayload = a})
 
 -- | Flag to run the request in dry-run mode.
-acccDryRun :: Lens' AccountshippingCustombatch' (Maybe Bool)
-acccDryRun
-  = lens _acccDryRun (\ s a -> s{_acccDryRun = a})
+acDryRun :: Lens' AccountshippingCustombatch (Maybe Bool)
+acDryRun = lens _acDryRun (\ s a -> s{_acDryRun = a})
 
-instance GoogleRequest AccountshippingCustombatch'
+instance GoogleRequest AccountshippingCustombatch
          where
-        type Rs AccountshippingCustombatch' =
+        type Rs AccountshippingCustombatch =
              AccountshippingCustomBatchResponse
-        requestClient AccountshippingCustombatch'{..}
-          = go _acccDryRun (Just AltJSON) _acccPayload
+        requestClient AccountshippingCustombatch{..}
+          = go _acDryRun (Just AltJSON) _acPayload
               shoppingContentService
           where go
                   = buildClient

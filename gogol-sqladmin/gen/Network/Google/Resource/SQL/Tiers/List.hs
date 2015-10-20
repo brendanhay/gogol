@@ -30,8 +30,8 @@ module Network.Google.Resource.SQL.Tiers.List
       TiersListResource
 
     -- * Creating a Request
-    , tiersList'
-    , TiersList'
+    , tiersList
+    , TiersList
 
     -- * Request Lenses
     , tlProject
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.tiers.list@ method which the
--- 'TiersList'' request conforms to.
+-- 'TiersList' request conforms to.
 type TiersListResource =
      "projects" :>
        Capture "project" Text :>
@@ -52,32 +52,32 @@ type TiersListResource =
 -- | Lists all available service tiers for Google Cloud SQL, for example D1,
 -- D2. For related information, see Pricing.
 --
--- /See:/ 'tiersList'' smart constructor.
-newtype TiersList' = TiersList'
+-- /See:/ 'tiersList' smart constructor.
+newtype TiersList = TiersList
     { _tlProject :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TiersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TiersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tlProject'
-tiersList'
+tiersList
     :: Text -- ^ 'tlProject'
-    -> TiersList'
-tiersList' pTlProject_ =
-    TiersList'
+    -> TiersList
+tiersList pTlProject_ =
+    TiersList
     { _tlProject = pTlProject_
     }
 
 -- | Project ID of the project for which to list tiers.
-tlProject :: Lens' TiersList' Text
+tlProject :: Lens' TiersList Text
 tlProject
   = lens _tlProject (\ s a -> s{_tlProject = a})
 
-instance GoogleRequest TiersList' where
-        type Rs TiersList' = TiersListResponse
-        requestClient TiersList'{..}
+instance GoogleRequest TiersList where
+        type Rs TiersList = TiersListResponse
+        requestClient TiersList{..}
           = go _tlProject (Just AltJSON) sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy TiersListResource)

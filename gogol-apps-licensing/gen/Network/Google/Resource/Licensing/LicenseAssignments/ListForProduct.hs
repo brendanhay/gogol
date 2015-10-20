@@ -29,8 +29,8 @@ module Network.Google.Resource.Licensing.LicenseAssignments.ListForProduct
       LicenseAssignmentsListForProductResource
 
     -- * Creating a Request
-    , licenseAssignmentsListForProduct'
-    , LicenseAssignmentsListForProduct'
+    , licenseAssignmentsListForProduct
+    , LicenseAssignmentsListForProduct
 
     -- * Request Lenses
     , lalfpCustomerId
@@ -43,7 +43,7 @@ import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @licensing.licenseAssignments.listForProduct@ method which the
--- 'LicenseAssignmentsListForProduct'' request conforms to.
+-- 'LicenseAssignmentsListForProduct' request conforms to.
 type LicenseAssignmentsListForProductResource =
      Capture "productId" Text :>
        "users" :>
@@ -55,15 +55,15 @@ type LicenseAssignmentsListForProductResource =
 
 -- | List license assignments for given product of the customer.
 --
--- /See:/ 'licenseAssignmentsListForProduct'' smart constructor.
-data LicenseAssignmentsListForProduct' = LicenseAssignmentsListForProduct'
+-- /See:/ 'licenseAssignmentsListForProduct' smart constructor.
+data LicenseAssignmentsListForProduct = LicenseAssignmentsListForProduct
     { _lalfpCustomerId :: !Text
     , _lalfpPageToken  :: !Text
     , _lalfpProductId  :: !Text
     , _lalfpMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LicenseAssignmentsListForProduct'' with the minimum fields required to make a request.
+-- | Creates a value of 'LicenseAssignmentsListForProduct' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,12 +74,12 @@ data LicenseAssignmentsListForProduct' = LicenseAssignmentsListForProduct'
 -- * 'lalfpProductId'
 --
 -- * 'lalfpMaxResults'
-licenseAssignmentsListForProduct'
+licenseAssignmentsListForProduct
     :: Text -- ^ 'lalfpCustomerId'
     -> Text -- ^ 'lalfpProductId'
-    -> LicenseAssignmentsListForProduct'
-licenseAssignmentsListForProduct' pLalfpCustomerId_ pLalfpProductId_ =
-    LicenseAssignmentsListForProduct'
+    -> LicenseAssignmentsListForProduct
+licenseAssignmentsListForProduct pLalfpCustomerId_ pLalfpProductId_ =
+    LicenseAssignmentsListForProduct
     { _lalfpCustomerId = pLalfpCustomerId_
     , _lalfpPageToken = ""
     , _lalfpProductId = pLalfpProductId_
@@ -88,36 +88,36 @@ licenseAssignmentsListForProduct' pLalfpCustomerId_ pLalfpProductId_ =
 
 -- | CustomerId represents the customer for whom licenseassignments are
 -- queried
-lalfpCustomerId :: Lens' LicenseAssignmentsListForProduct' Text
+lalfpCustomerId :: Lens' LicenseAssignmentsListForProduct Text
 lalfpCustomerId
   = lens _lalfpCustomerId
       (\ s a -> s{_lalfpCustomerId = a})
 
 -- | Token to fetch the next page.Optional. By default server will return
 -- first page
-lalfpPageToken :: Lens' LicenseAssignmentsListForProduct' Text
+lalfpPageToken :: Lens' LicenseAssignmentsListForProduct Text
 lalfpPageToken
   = lens _lalfpPageToken
       (\ s a -> s{_lalfpPageToken = a})
 
 -- | Name for product
-lalfpProductId :: Lens' LicenseAssignmentsListForProduct' Text
+lalfpProductId :: Lens' LicenseAssignmentsListForProduct Text
 lalfpProductId
   = lens _lalfpProductId
       (\ s a -> s{_lalfpProductId = a})
 
 -- | Maximum number of campaigns to return at one time. Must be positive.
 -- Optional. Default value is 100.
-lalfpMaxResults :: Lens' LicenseAssignmentsListForProduct' Word32
+lalfpMaxResults :: Lens' LicenseAssignmentsListForProduct Word32
 lalfpMaxResults
   = lens _lalfpMaxResults
       (\ s a -> s{_lalfpMaxResults = a})
 
 instance GoogleRequest
-         LicenseAssignmentsListForProduct' where
-        type Rs LicenseAssignmentsListForProduct' =
+         LicenseAssignmentsListForProduct where
+        type Rs LicenseAssignmentsListForProduct =
              LicenseAssignmentList
-        requestClient LicenseAssignmentsListForProduct'{..}
+        requestClient LicenseAssignmentsListForProduct{..}
           = go _lalfpProductId (Just _lalfpCustomerId)
               (Just _lalfpPageToken)
               (Just _lalfpMaxResults)

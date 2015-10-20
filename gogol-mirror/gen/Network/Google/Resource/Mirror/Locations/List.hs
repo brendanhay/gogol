@@ -29,8 +29,8 @@ module Network.Google.Resource.Mirror.Locations.List
       LocationsListResource
 
     -- * Creating a Request
-    , locationsList'
-    , LocationsList'
+    , locationsList
+    , LocationsList
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.locations.list@ method which the
--- 'LocationsList'' request conforms to.
+-- 'LocationsList' request conforms to.
 type LocationsListResource =
      "locations" :>
        QueryParam "alt" AltJSON :>
@@ -46,20 +46,20 @@ type LocationsListResource =
 
 -- | Retrieves a list of locations for the user.
 --
--- /See:/ 'locationsList'' smart constructor.
-data LocationsList' =
-    LocationsList'
+-- /See:/ 'locationsList' smart constructor.
+data LocationsList =
+    LocationsList
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LocationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'LocationsList' with the minimum fields required to make a request.
 --
-locationsList'
-    :: LocationsList'
-locationsList' = LocationsList'
+locationsList
+    :: LocationsList
+locationsList = LocationsList
 
-instance GoogleRequest LocationsList' where
-        type Rs LocationsList' = LocationsListResponse
-        requestClient LocationsList'{}
+instance GoogleRequest LocationsList where
+        type Rs LocationsList = LocationsListResponse
+        requestClient LocationsList{}
           = go (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy LocationsListResource)

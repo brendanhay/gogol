@@ -29,8 +29,8 @@ module Network.Google.Resource.Tasks.TaskLists.Get
       TaskListsGetResource
 
     -- * Creating a Request
-    , taskListsGet'
-    , TaskListsGet'
+    , taskListsGet
+    , TaskListsGet
 
     -- * Request Lenses
     , tlgTaskList
@@ -40,7 +40,7 @@ import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasklists.get@ method which the
--- 'TaskListsGet'' request conforms to.
+-- 'TaskListsGet' request conforms to.
 type TaskListsGetResource =
      "users" :>
        "@me" :>
@@ -50,32 +50,32 @@ type TaskListsGetResource =
 
 -- | Returns the authenticated user\'s specified task list.
 --
--- /See:/ 'taskListsGet'' smart constructor.
-newtype TaskListsGet' = TaskListsGet'
+-- /See:/ 'taskListsGet' smart constructor.
+newtype TaskListsGet = TaskListsGet
     { _tlgTaskList :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TaskListsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TaskListsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tlgTaskList'
-taskListsGet'
+taskListsGet
     :: Text -- ^ 'tlgTaskList'
-    -> TaskListsGet'
-taskListsGet' pTlgTaskList_ =
-    TaskListsGet'
+    -> TaskListsGet
+taskListsGet pTlgTaskList_ =
+    TaskListsGet
     { _tlgTaskList = pTlgTaskList_
     }
 
 -- | Task list identifier.
-tlgTaskList :: Lens' TaskListsGet' Text
+tlgTaskList :: Lens' TaskListsGet Text
 tlgTaskList
   = lens _tlgTaskList (\ s a -> s{_tlgTaskList = a})
 
-instance GoogleRequest TaskListsGet' where
-        type Rs TaskListsGet' = TaskList
-        requestClient TaskListsGet'{..}
+instance GoogleRequest TaskListsGet where
+        type Rs TaskListsGet = TaskList
+        requestClient TaskListsGet{..}
           = go _tlgTaskList (Just AltJSON) appsTasksService
           where go
                   = buildClient (Proxy :: Proxy TaskListsGetResource)

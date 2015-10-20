@@ -29,8 +29,8 @@ module Network.Google.Resource.DoubleClickBidManager.Lineitems.Uploadlineitems
       LineitemsUploadlineitemsResource
 
     -- * Creating a Request
-    , lineitemsUploadlineitems'
-    , LineitemsUploadlineitems'
+    , lineitemsUploadlineitems
+    , LineitemsUploadlineitems
 
     -- * Request Lenses
     , luPayload
@@ -40,7 +40,7 @@ import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @doubleclickbidmanager.lineitems.uploadlineitems@ method which the
--- 'LineitemsUploadlineitems'' request conforms to.
+-- 'LineitemsUploadlineitems' request conforms to.
 type LineitemsUploadlineitemsResource =
      "lineitems" :>
        "uploadlineitems" :>
@@ -50,34 +50,33 @@ type LineitemsUploadlineitemsResource =
 
 -- | Uploads line items in CSV format.
 --
--- /See:/ 'lineitemsUploadlineitems'' smart constructor.
-newtype LineitemsUploadlineitems' = LineitemsUploadlineitems'
+-- /See:/ 'lineitemsUploadlineitems' smart constructor.
+newtype LineitemsUploadlineitems = LineitemsUploadlineitems
     { _luPayload :: UploadLineItemsRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LineitemsUploadlineitems'' with the minimum fields required to make a request.
+-- | Creates a value of 'LineitemsUploadlineitems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'luPayload'
-lineitemsUploadlineitems'
+lineitemsUploadlineitems
     :: UploadLineItemsRequest -- ^ 'luPayload'
-    -> LineitemsUploadlineitems'
-lineitemsUploadlineitems' pLuPayload_ =
-    LineitemsUploadlineitems'
+    -> LineitemsUploadlineitems
+lineitemsUploadlineitems pLuPayload_ =
+    LineitemsUploadlineitems
     { _luPayload = pLuPayload_
     }
 
 -- | Multipart request metadata.
-luPayload :: Lens' LineitemsUploadlineitems' UploadLineItemsRequest
+luPayload :: Lens' LineitemsUploadlineitems UploadLineItemsRequest
 luPayload
   = lens _luPayload (\ s a -> s{_luPayload = a})
 
-instance GoogleRequest LineitemsUploadlineitems'
-         where
-        type Rs LineitemsUploadlineitems' =
+instance GoogleRequest LineitemsUploadlineitems where
+        type Rs LineitemsUploadlineitems =
              UploadLineItemsResponse
-        requestClient LineitemsUploadlineitems'{..}
+        requestClient LineitemsUploadlineitems{..}
           = go (Just AltJSON) _luPayload doubleClickBidsService
           where go
                   = buildClient

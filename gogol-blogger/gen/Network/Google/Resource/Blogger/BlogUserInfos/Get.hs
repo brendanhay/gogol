@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.BlogUserInfos.Get
       BlogUserInfosGetResource
 
     -- * Creating a Request
-    , blogUserInfosGet'
-    , BlogUserInfosGet'
+    , blogUserInfosGet
+    , BlogUserInfosGet
 
     -- * Request Lenses
     , buigBlogId
@@ -42,7 +42,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.blogUserInfos.get@ method which the
--- 'BlogUserInfosGet'' request conforms to.
+-- 'BlogUserInfosGet' request conforms to.
 type BlogUserInfosGetResource =
      "users" :>
        Capture "userId" Text :>
@@ -53,14 +53,14 @@ type BlogUserInfosGetResource =
 
 -- | Gets one blog and user info pair by blogId and userId.
 --
--- /See:/ 'blogUserInfosGet'' smart constructor.
-data BlogUserInfosGet' = BlogUserInfosGet'
+-- /See:/ 'blogUserInfosGet' smart constructor.
+data BlogUserInfosGet = BlogUserInfosGet
     { _buigBlogId   :: !Text
     , _buigUserId   :: !Text
     , _buigMaxPosts :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BlogUserInfosGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'BlogUserInfosGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,36 @@ data BlogUserInfosGet' = BlogUserInfosGet'
 -- * 'buigUserId'
 --
 -- * 'buigMaxPosts'
-blogUserInfosGet'
+blogUserInfosGet
     :: Text -- ^ 'buigBlogId'
     -> Text -- ^ 'buigUserId'
-    -> BlogUserInfosGet'
-blogUserInfosGet' pBuigBlogId_ pBuigUserId_ =
-    BlogUserInfosGet'
+    -> BlogUserInfosGet
+blogUserInfosGet pBuigBlogId_ pBuigUserId_ =
+    BlogUserInfosGet
     { _buigBlogId = pBuigBlogId_
     , _buigUserId = pBuigUserId_
     , _buigMaxPosts = Nothing
     }
 
 -- | The ID of the blog to get.
-buigBlogId :: Lens' BlogUserInfosGet' Text
+buigBlogId :: Lens' BlogUserInfosGet Text
 buigBlogId
   = lens _buigBlogId (\ s a -> s{_buigBlogId = a})
 
 -- | ID of the user whose blogs are to be fetched. Either the word \'self\'
 -- (sans quote marks) or the user\'s profile identifier.
-buigUserId :: Lens' BlogUserInfosGet' Text
+buigUserId :: Lens' BlogUserInfosGet Text
 buigUserId
   = lens _buigUserId (\ s a -> s{_buigUserId = a})
 
 -- | Maximum number of posts to pull back with the blog.
-buigMaxPosts :: Lens' BlogUserInfosGet' (Maybe Word32)
+buigMaxPosts :: Lens' BlogUserInfosGet (Maybe Word32)
 buigMaxPosts
   = lens _buigMaxPosts (\ s a -> s{_buigMaxPosts = a})
 
-instance GoogleRequest BlogUserInfosGet' where
-        type Rs BlogUserInfosGet' = BlogUserInfo
-        requestClient BlogUserInfosGet'{..}
+instance GoogleRequest BlogUserInfosGet where
+        type Rs BlogUserInfosGet = BlogUserInfo
+        requestClient BlogUserInfosGet{..}
           = go _buigUserId _buigBlogId _buigMaxPosts
               (Just AltJSON)
               bloggerService

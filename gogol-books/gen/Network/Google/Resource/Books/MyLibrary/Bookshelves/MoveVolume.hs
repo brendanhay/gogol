@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume
       MyLibraryBookshelvesMoveVolumeResource
 
     -- * Creating a Request
-    , myLibraryBookshelvesMoveVolume'
-    , MyLibraryBookshelvesMoveVolume'
+    , myLibraryBookshelvesMoveVolume
+    , MyLibraryBookshelvesMoveVolume
 
     -- * Request Lenses
     , mlbmvShelf
@@ -43,7 +43,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.bookshelves.moveVolume@ method which the
--- 'MyLibraryBookshelvesMoveVolume'' request conforms to.
+-- 'MyLibraryBookshelvesMoveVolume' request conforms to.
 type MyLibraryBookshelvesMoveVolumeResource =
      "mylibrary" :>
        "bookshelves" :>
@@ -56,15 +56,15 @@ type MyLibraryBookshelvesMoveVolumeResource =
 
 -- | Moves a volume within a bookshelf.
 --
--- /See:/ 'myLibraryBookshelvesMoveVolume'' smart constructor.
-data MyLibraryBookshelvesMoveVolume' = MyLibraryBookshelvesMoveVolume'
+-- /See:/ 'myLibraryBookshelvesMoveVolume' smart constructor.
+data MyLibraryBookshelvesMoveVolume = MyLibraryBookshelvesMoveVolume
     { _mlbmvShelf          :: !Text
     , _mlbmvVolumeId       :: !Text
     , _mlbmvSource         :: !(Maybe Text)
     , _mlbmvVolumePosition :: !Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MyLibraryBookshelvesMoveVolume'' with the minimum fields required to make a request.
+-- | Creates a value of 'MyLibraryBookshelvesMoveVolume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,13 +75,13 @@ data MyLibraryBookshelvesMoveVolume' = MyLibraryBookshelvesMoveVolume'
 -- * 'mlbmvSource'
 --
 -- * 'mlbmvVolumePosition'
-myLibraryBookshelvesMoveVolume'
+myLibraryBookshelvesMoveVolume
     :: Text -- ^ 'mlbmvShelf'
     -> Text -- ^ 'mlbmvVolumeId'
     -> Int32 -- ^ 'mlbmvVolumePosition'
-    -> MyLibraryBookshelvesMoveVolume'
-myLibraryBookshelvesMoveVolume' pMlbmvShelf_ pMlbmvVolumeId_ pMlbmvVolumePosition_ =
-    MyLibraryBookshelvesMoveVolume'
+    -> MyLibraryBookshelvesMoveVolume
+myLibraryBookshelvesMoveVolume pMlbmvShelf_ pMlbmvVolumeId_ pMlbmvVolumePosition_ =
+    MyLibraryBookshelvesMoveVolume
     { _mlbmvShelf = pMlbmvShelf_
     , _mlbmvVolumeId = pMlbmvVolumeId_
     , _mlbmvSource = Nothing
@@ -89,32 +89,32 @@ myLibraryBookshelvesMoveVolume' pMlbmvShelf_ pMlbmvVolumeId_ pMlbmvVolumePositio
     }
 
 -- | ID of bookshelf with the volume.
-mlbmvShelf :: Lens' MyLibraryBookshelvesMoveVolume' Text
+mlbmvShelf :: Lens' MyLibraryBookshelvesMoveVolume Text
 mlbmvShelf
   = lens _mlbmvShelf (\ s a -> s{_mlbmvShelf = a})
 
 -- | ID of volume to move.
-mlbmvVolumeId :: Lens' MyLibraryBookshelvesMoveVolume' Text
+mlbmvVolumeId :: Lens' MyLibraryBookshelvesMoveVolume Text
 mlbmvVolumeId
   = lens _mlbmvVolumeId
       (\ s a -> s{_mlbmvVolumeId = a})
 
 -- | String to identify the originator of this request.
-mlbmvSource :: Lens' MyLibraryBookshelvesMoveVolume' (Maybe Text)
+mlbmvSource :: Lens' MyLibraryBookshelvesMoveVolume (Maybe Text)
 mlbmvSource
   = lens _mlbmvSource (\ s a -> s{_mlbmvSource = a})
 
 -- | Position on shelf to move the item (0 puts the item before the current
 -- first item, 1 puts it between the first and the second and so on.)
-mlbmvVolumePosition :: Lens' MyLibraryBookshelvesMoveVolume' Int32
+mlbmvVolumePosition :: Lens' MyLibraryBookshelvesMoveVolume Int32
 mlbmvVolumePosition
   = lens _mlbmvVolumePosition
       (\ s a -> s{_mlbmvVolumePosition = a})
 
-instance GoogleRequest
-         MyLibraryBookshelvesMoveVolume' where
-        type Rs MyLibraryBookshelvesMoveVolume' = ()
-        requestClient MyLibraryBookshelvesMoveVolume'{..}
+instance GoogleRequest MyLibraryBookshelvesMoveVolume
+         where
+        type Rs MyLibraryBookshelvesMoveVolume = ()
+        requestClient MyLibraryBookshelvesMoveVolume{..}
           = go _mlbmvShelf (Just _mlbmvVolumeId)
               (Just _mlbmvVolumePosition)
               _mlbmvSource

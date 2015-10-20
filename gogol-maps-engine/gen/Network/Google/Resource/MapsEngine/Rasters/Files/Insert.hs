@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Rasters.Files.Insert
       RastersFilesInsertResource
 
     -- * Creating a Request
-    , rastersFilesInsert'
-    , RastersFilesInsert'
+    , rastersFilesInsert
+    , RastersFilesInsert
 
     -- * Request Lenses
     , rfiMedia
@@ -42,7 +42,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasters.files.insert@ method which the
--- 'RastersFilesInsert'' request conforms to.
+-- 'RastersFilesInsert' request conforms to.
 type RastersFilesInsertResource =
      "rasters" :>
        Capture "id" Text :>
@@ -53,14 +53,14 @@ type RastersFilesInsertResource =
 
 -- | Upload a file to a raster asset.
 --
--- /See:/ 'rastersFilesInsert'' smart constructor.
-data RastersFilesInsert' = RastersFilesInsert'
+-- /See:/ 'rastersFilesInsert' smart constructor.
+data RastersFilesInsert = RastersFilesInsert
     { _rfiMedia    :: !Body
     , _rfiId       :: !Text
     , _rfiFilename :: !Text
     }
 
--- | Creates a value of 'RastersFilesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'RastersFilesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,33 +69,33 @@ data RastersFilesInsert' = RastersFilesInsert'
 -- * 'rfiId'
 --
 -- * 'rfiFilename'
-rastersFilesInsert'
+rastersFilesInsert
     :: Body -- ^ 'rfiMedia'
     -> Text -- ^ 'rfiId'
     -> Text -- ^ 'rfiFilename'
-    -> RastersFilesInsert'
-rastersFilesInsert' pRfiMedia_ pRfiId_ pRfiFilename_ =
-    RastersFilesInsert'
+    -> RastersFilesInsert
+rastersFilesInsert pRfiMedia_ pRfiId_ pRfiFilename_ =
+    RastersFilesInsert
     { _rfiMedia = pRfiMedia_
     , _rfiId = pRfiId_
     , _rfiFilename = pRfiFilename_
     }
 
-rfiMedia :: Lens' RastersFilesInsert' Body
+rfiMedia :: Lens' RastersFilesInsert Body
 rfiMedia = lens _rfiMedia (\ s a -> s{_rfiMedia = a})
 
 -- | The ID of the raster asset.
-rfiId :: Lens' RastersFilesInsert' Text
+rfiId :: Lens' RastersFilesInsert Text
 rfiId = lens _rfiId (\ s a -> s{_rfiId = a})
 
 -- | The file name of this uploaded file.
-rfiFilename :: Lens' RastersFilesInsert' Text
+rfiFilename :: Lens' RastersFilesInsert Text
 rfiFilename
   = lens _rfiFilename (\ s a -> s{_rfiFilename = a})
 
-instance GoogleRequest RastersFilesInsert' where
-        type Rs RastersFilesInsert' = ()
-        requestClient RastersFilesInsert'{..}
+instance GoogleRequest RastersFilesInsert where
+        type Rs RastersFilesInsert = ()
+        requestClient RastersFilesInsert{..}
           = go _rfiId (Just _rfiFilename) (Just AltJSON)
               _rfiMedia
               mapsEngineService

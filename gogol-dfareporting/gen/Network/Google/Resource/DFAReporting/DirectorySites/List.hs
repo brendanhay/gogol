@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.DirectorySites.List
       DirectorySitesListResource
 
     -- * Creating a Request
-    , directorySitesList'
-    , DirectorySitesList'
+    , directorySitesList
+    , DirectorySitesList
 
     -- * Request Lenses
     , dslSearchString
@@ -53,7 +53,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.directorySites.list@ method which the
--- 'DirectorySitesList'' request conforms to.
+-- 'DirectorySitesList' request conforms to.
 type DirectorySitesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -76,8 +76,8 @@ type DirectorySitesListResource =
 
 -- | Retrieves a list of directory sites, possibly filtered.
 --
--- /See:/ 'directorySitesList'' smart constructor.
-data DirectorySitesList' = DirectorySitesList'
+-- /See:/ 'directorySitesList' smart constructor.
+data DirectorySitesList = DirectorySitesList
     { _dslSearchString                   :: !(Maybe Text)
     , _dslAcceptsInterstitialPlacements  :: !(Maybe Bool)
     , _dslAcceptsPublisherPaidPlacements :: !(Maybe Bool)
@@ -94,7 +94,7 @@ data DirectorySitesList' = DirectorySitesList'
     , _dslDfpNetworkCode                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DirectorySitesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'DirectorySitesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -125,11 +125,11 @@ data DirectorySitesList' = DirectorySitesList'
 -- * 'dslParentId'
 --
 -- * 'dslDfpNetworkCode'
-directorySitesList'
+directorySitesList
     :: Int64 -- ^ 'dslProFileId'
-    -> DirectorySitesList'
-directorySitesList' pDslProFileId_ =
-    DirectorySitesList'
+    -> DirectorySitesList
+directorySitesList pDslProFileId_ =
+    DirectorySitesList
     { _dslSearchString = Nothing
     , _dslAcceptsInterstitialPlacements = Nothing
     , _dslAcceptsPublisherPaidPlacements = Nothing
@@ -154,90 +154,90 @@ directorySitesList' pDslProFileId_ =
 -- example, a search string of \"directory site\" will match objects with
 -- name \"my directory site\", \"directory site 2015\" or simply,
 -- \"directory site\".
-dslSearchString :: Lens' DirectorySitesList' (Maybe Text)
+dslSearchString :: Lens' DirectorySitesList (Maybe Text)
 dslSearchString
   = lens _dslSearchString
       (\ s a -> s{_dslSearchString = a})
 
 -- | This search filter is no longer supported and will have no effect on the
 -- results returned.
-dslAcceptsInterstitialPlacements :: Lens' DirectorySitesList' (Maybe Bool)
+dslAcceptsInterstitialPlacements :: Lens' DirectorySitesList (Maybe Bool)
 dslAcceptsInterstitialPlacements
   = lens _dslAcceptsInterstitialPlacements
       (\ s a -> s{_dslAcceptsInterstitialPlacements = a})
 
 -- | Select only directory sites that accept publisher paid placements. This
 -- field can be left blank.
-dslAcceptsPublisherPaidPlacements :: Lens' DirectorySitesList' (Maybe Bool)
+dslAcceptsPublisherPaidPlacements :: Lens' DirectorySitesList (Maybe Bool)
 dslAcceptsPublisherPaidPlacements
   = lens _dslAcceptsPublisherPaidPlacements
       (\ s a -> s{_dslAcceptsPublisherPaidPlacements = a})
 
 -- | Select only directory sites with these IDs.
-dslIds :: Lens' DirectorySitesList' [Int64]
+dslIds :: Lens' DirectorySitesList [Int64]
 dslIds
   = lens _dslIds (\ s a -> s{_dslIds = a}) . _Default .
       _Coerce
 
 -- | User profile ID associated with this request.
-dslProFileId :: Lens' DirectorySitesList' Int64
+dslProFileId :: Lens' DirectorySitesList Int64
 dslProFileId
   = lens _dslProFileId (\ s a -> s{_dslProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-dslSortOrder :: Lens' DirectorySitesList' (Maybe DirectorySitesListSortOrder)
+dslSortOrder :: Lens' DirectorySitesList (Maybe DirectorySitesListSortOrder)
 dslSortOrder
   = lens _dslSortOrder (\ s a -> s{_dslSortOrder = a})
 
 -- | Select only active directory sites. Leave blank to retrieve both active
 -- and inactive directory sites.
-dslActive :: Lens' DirectorySitesList' (Maybe Bool)
+dslActive :: Lens' DirectorySitesList (Maybe Bool)
 dslActive
   = lens _dslActive (\ s a -> s{_dslActive = a})
 
 -- | Select only directory sites with this country ID.
-dslCountryId :: Lens' DirectorySitesList' (Maybe Int64)
+dslCountryId :: Lens' DirectorySitesList (Maybe Int64)
 dslCountryId
   = lens _dslCountryId (\ s a -> s{_dslCountryId = a})
 
 -- | Value of the nextPageToken from the previous result page.
-dslPageToken :: Lens' DirectorySitesList' (Maybe Text)
+dslPageToken :: Lens' DirectorySitesList (Maybe Text)
 dslPageToken
   = lens _dslPageToken (\ s a -> s{_dslPageToken = a})
 
 -- | Field by which to sort the list.
-dslSortField :: Lens' DirectorySitesList' (Maybe DirectorySitesListSortField)
+dslSortField :: Lens' DirectorySitesList (Maybe DirectorySitesListSortField)
 dslSortField
   = lens _dslSortField (\ s a -> s{_dslSortField = a})
 
 -- | This search filter is no longer supported and will have no effect on the
 -- results returned.
-dslAcceptsInStreamVideoPlacements :: Lens' DirectorySitesList' (Maybe Bool)
+dslAcceptsInStreamVideoPlacements :: Lens' DirectorySitesList (Maybe Bool)
 dslAcceptsInStreamVideoPlacements
   = lens _dslAcceptsInStreamVideoPlacements
       (\ s a -> s{_dslAcceptsInStreamVideoPlacements = a})
 
 -- | Maximum number of results to return.
-dslMaxResults :: Lens' DirectorySitesList' (Maybe Int32)
+dslMaxResults :: Lens' DirectorySitesList (Maybe Int32)
 dslMaxResults
   = lens _dslMaxResults
       (\ s a -> s{_dslMaxResults = a})
 
 -- | Select only directory sites with this parent ID.
-dslParentId :: Lens' DirectorySitesList' (Maybe Int64)
+dslParentId :: Lens' DirectorySitesList (Maybe Int64)
 dslParentId
   = lens _dslParentId (\ s a -> s{_dslParentId = a})
 
 -- | Select only directory sites with this DFP network code.
-dslDfpNetworkCode :: Lens' DirectorySitesList' (Maybe Text)
+dslDfpNetworkCode :: Lens' DirectorySitesList (Maybe Text)
 dslDfpNetworkCode
   = lens _dslDfpNetworkCode
       (\ s a -> s{_dslDfpNetworkCode = a})
 
-instance GoogleRequest DirectorySitesList' where
-        type Rs DirectorySitesList' =
+instance GoogleRequest DirectorySitesList where
+        type Rs DirectorySitesList =
              DirectorySitesListResponse
-        requestClient DirectorySitesList'{..}
+        requestClient DirectorySitesList{..}
           = go _dslProFileId _dslSearchString
               _dslAcceptsInterstitialPlacements
               _dslAcceptsPublisherPaidPlacements

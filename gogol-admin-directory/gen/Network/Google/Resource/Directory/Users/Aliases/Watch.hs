@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Users.Aliases.Watch
       UsersAliasesWatchResource
 
     -- * Creating a Request
-    , usersAliasesWatch'
-    , UsersAliasesWatch'
+    , usersAliasesWatch
+    , UsersAliasesWatch
 
     -- * Request Lenses
     , uawEvent
@@ -42,7 +42,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.users.aliases.watch@ method which the
--- 'UsersAliasesWatch'' request conforms to.
+-- 'UsersAliasesWatch' request conforms to.
 type UsersAliasesWatchResource =
      "users" :>
        Capture "userKey" Text :>
@@ -54,14 +54,14 @@ type UsersAliasesWatchResource =
 
 -- | Watch for changes in user aliases list
 --
--- /See:/ 'usersAliasesWatch'' smart constructor.
-data UsersAliasesWatch' = UsersAliasesWatch'
+-- /See:/ 'usersAliasesWatch' smart constructor.
+data UsersAliasesWatch = UsersAliasesWatch
     { _uawEvent   :: !(Maybe UsersAliasesWatchEvent)
     , _uawPayload :: !Channel
     , _uawUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersAliasesWatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersAliasesWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,34 +70,34 @@ data UsersAliasesWatch' = UsersAliasesWatch'
 -- * 'uawPayload'
 --
 -- * 'uawUserKey'
-usersAliasesWatch'
+usersAliasesWatch
     :: Channel -- ^ 'uawPayload'
     -> Text -- ^ 'uawUserKey'
-    -> UsersAliasesWatch'
-usersAliasesWatch' pUawPayload_ pUawUserKey_ =
-    UsersAliasesWatch'
+    -> UsersAliasesWatch
+usersAliasesWatch pUawPayload_ pUawUserKey_ =
+    UsersAliasesWatch
     { _uawEvent = Nothing
     , _uawPayload = pUawPayload_
     , _uawUserKey = pUawUserKey_
     }
 
 -- | Event on which subscription is intended (if subscribing)
-uawEvent :: Lens' UsersAliasesWatch' (Maybe UsersAliasesWatchEvent)
+uawEvent :: Lens' UsersAliasesWatch (Maybe UsersAliasesWatchEvent)
 uawEvent = lens _uawEvent (\ s a -> s{_uawEvent = a})
 
 -- | Multipart request metadata.
-uawPayload :: Lens' UsersAliasesWatch' Channel
+uawPayload :: Lens' UsersAliasesWatch Channel
 uawPayload
   = lens _uawPayload (\ s a -> s{_uawPayload = a})
 
 -- | Email or immutable Id of the user
-uawUserKey :: Lens' UsersAliasesWatch' Text
+uawUserKey :: Lens' UsersAliasesWatch Text
 uawUserKey
   = lens _uawUserKey (\ s a -> s{_uawUserKey = a})
 
-instance GoogleRequest UsersAliasesWatch' where
-        type Rs UsersAliasesWatch' = Channel
-        requestClient UsersAliasesWatch'{..}
+instance GoogleRequest UsersAliasesWatch where
+        type Rs UsersAliasesWatch = Channel
+        requestClient UsersAliasesWatch{..}
           = go _uawUserKey _uawEvent (Just AltJSON) _uawPayload
               directoryService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Volumes.List
       VolumesListResource
 
     -- * Creating a Request
-    , volumesList'
-    , VolumesList'
+    , volumesList
+    , VolumesList
 
     -- * Request Lenses
     , vlOrderBy
@@ -52,7 +52,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.volumes.list@ method which the
--- 'VolumesList'' request conforms to.
+-- 'VolumesList' request conforms to.
 type VolumesListResource =
      "volumes" :>
        QueryParam "q" Text :>
@@ -74,8 +74,8 @@ type VolumesListResource =
 
 -- | Performs a book search.
 --
--- /See:/ 'volumesList'' smart constructor.
-data VolumesList' = VolumesList'
+-- /See:/ 'volumesList' smart constructor.
+data VolumesList = VolumesList
     { _vlOrderBy         :: !(Maybe VolumesListOrderBy)
     , _vlLibraryRestrict :: !(Maybe VolumesListLibraryRestrict)
     , _vlPartner         :: !(Maybe Text)
@@ -91,7 +91,7 @@ data VolumesList' = VolumesList'
     , _vlPrintType       :: !(Maybe VolumesListPrintType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'VolumesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -120,11 +120,11 @@ data VolumesList' = VolumesList'
 -- * 'vlShowPreOrders'
 --
 -- * 'vlPrintType'
-volumesList'
+volumesList
     :: Text -- ^ 'vlQ'
-    -> VolumesList'
-volumesList' pVlQ_ =
-    VolumesList'
+    -> VolumesList
+volumesList pVlQ_ =
+    VolumesList
     { _vlOrderBy = Nothing
     , _vlLibraryRestrict = Nothing
     , _vlPartner = Nothing
@@ -141,73 +141,73 @@ volumesList' pVlQ_ =
     }
 
 -- | Sort search results.
-vlOrderBy :: Lens' VolumesList' (Maybe VolumesListOrderBy)
+vlOrderBy :: Lens' VolumesList (Maybe VolumesListOrderBy)
 vlOrderBy
   = lens _vlOrderBy (\ s a -> s{_vlOrderBy = a})
 
 -- | Restrict search to this user\'s library.
-vlLibraryRestrict :: Lens' VolumesList' (Maybe VolumesListLibraryRestrict)
+vlLibraryRestrict :: Lens' VolumesList (Maybe VolumesListLibraryRestrict)
 vlLibraryRestrict
   = lens _vlLibraryRestrict
       (\ s a -> s{_vlLibraryRestrict = a})
 
 -- | Restrict and brand results for partner ID.
-vlPartner :: Lens' VolumesList' (Maybe Text)
+vlPartner :: Lens' VolumesList (Maybe Text)
 vlPartner
   = lens _vlPartner (\ s a -> s{_vlPartner = a})
 
 -- | Full-text search query string.
-vlQ :: Lens' VolumesList' Text
+vlQ :: Lens' VolumesList Text
 vlQ = lens _vlQ (\ s a -> s{_vlQ = a})
 
 -- | Restrict to volumes by download availability.
-vlDownload :: Lens' VolumesList' (Maybe VolumesListDownload)
+vlDownload :: Lens' VolumesList (Maybe VolumesListDownload)
 vlDownload
   = lens _vlDownload (\ s a -> s{_vlDownload = a})
 
 -- | String to identify the originator of this request.
-vlSource :: Lens' VolumesList' (Maybe Text)
+vlSource :: Lens' VolumesList (Maybe Text)
 vlSource = lens _vlSource (\ s a -> s{_vlSource = a})
 
 -- | Restrict information returned to a set of selected fields.
-vlProjection :: Lens' VolumesList' (Maybe VolumesListProjection)
+vlProjection :: Lens' VolumesList (Maybe VolumesListProjection)
 vlProjection
   = lens _vlProjection (\ s a -> s{_vlProjection = a})
 
 -- | Filter search results.
-vlFilter :: Lens' VolumesList' (Maybe VolumesListFilter)
+vlFilter :: Lens' VolumesList (Maybe VolumesListFilter)
 vlFilter = lens _vlFilter (\ s a -> s{_vlFilter = a})
 
 -- | Restrict results to books with this language code.
-vlLangRestrict :: Lens' VolumesList' (Maybe Text)
+vlLangRestrict :: Lens' VolumesList (Maybe Text)
 vlLangRestrict
   = lens _vlLangRestrict
       (\ s a -> s{_vlLangRestrict = a})
 
 -- | Index of the first result to return (starts at 0)
-vlStartIndex :: Lens' VolumesList' (Maybe Word32)
+vlStartIndex :: Lens' VolumesList (Maybe Word32)
 vlStartIndex
   = lens _vlStartIndex (\ s a -> s{_vlStartIndex = a})
 
 -- | Maximum number of results to return.
-vlMaxResults :: Lens' VolumesList' (Maybe Word32)
+vlMaxResults :: Lens' VolumesList (Maybe Word32)
 vlMaxResults
   = lens _vlMaxResults (\ s a -> s{_vlMaxResults = a})
 
 -- | Set to true to show books available for preorder. Defaults to false.
-vlShowPreOrders :: Lens' VolumesList' (Maybe Bool)
+vlShowPreOrders :: Lens' VolumesList (Maybe Bool)
 vlShowPreOrders
   = lens _vlShowPreOrders
       (\ s a -> s{_vlShowPreOrders = a})
 
 -- | Restrict to books or magazines.
-vlPrintType :: Lens' VolumesList' (Maybe VolumesListPrintType)
+vlPrintType :: Lens' VolumesList (Maybe VolumesListPrintType)
 vlPrintType
   = lens _vlPrintType (\ s a -> s{_vlPrintType = a})
 
-instance GoogleRequest VolumesList' where
-        type Rs VolumesList' = Volumes
-        requestClient VolumesList'{..}
+instance GoogleRequest VolumesList where
+        type Rs VolumesList = Volumes
+        requestClient VolumesList{..}
           = go (Just _vlQ) _vlOrderBy _vlLibraryRestrict
               _vlPartner
               _vlDownload

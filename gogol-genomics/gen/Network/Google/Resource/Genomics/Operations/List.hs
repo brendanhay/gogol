@@ -29,8 +29,8 @@ module Network.Google.Resource.Genomics.Operations.List
       OperationsListResource
 
     -- * Creating a Request
-    , operationsList'
-    , OperationsList'
+    , operationsList
+    , OperationsList
 
     -- * Request Lenses
     , olXgafv
@@ -50,7 +50,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.operations.list@ method which the
--- 'OperationsList'' request conforms to.
+-- 'OperationsList' request conforms to.
 type OperationsListResource =
      "v1" :>
        Capture "name" Text :>
@@ -69,8 +69,8 @@ type OperationsListResource =
 
 -- | Lists operations that match the specified filter in the request.
 --
--- /See:/ 'operationsList'' smart constructor.
-data OperationsList' = OperationsList'
+-- /See:/ 'operationsList' smart constructor.
+data OperationsList = OperationsList
     { _olXgafv          :: !(Maybe Text)
     , _olUploadProtocol :: !(Maybe Text)
     , _olPp             :: !Bool
@@ -84,7 +84,7 @@ data OperationsList' = OperationsList'
     , _olCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -109,11 +109,11 @@ data OperationsList' = OperationsList'
 -- * 'olPageSize'
 --
 -- * 'olCallback'
-operationsList'
+operationsList
     :: Text -- ^ 'olName'
-    -> OperationsList'
-operationsList' pOlName_ =
-    OperationsList'
+    -> OperationsList
+operationsList pOlName_ =
+    OperationsList
     { _olXgafv = Nothing
     , _olUploadProtocol = Nothing
     , _olPp = True
@@ -128,38 +128,38 @@ operationsList' pOlName_ =
     }
 
 -- | V1 error format.
-olXgafv :: Lens' OperationsList' (Maybe Text)
+olXgafv :: Lens' OperationsList (Maybe Text)
 olXgafv = lens _olXgafv (\ s a -> s{_olXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-olUploadProtocol :: Lens' OperationsList' (Maybe Text)
+olUploadProtocol :: Lens' OperationsList (Maybe Text)
 olUploadProtocol
   = lens _olUploadProtocol
       (\ s a -> s{_olUploadProtocol = a})
 
 -- | Pretty-print response.
-olPp :: Lens' OperationsList' Bool
+olPp :: Lens' OperationsList Bool
 olPp = lens _olPp (\ s a -> s{_olPp = a})
 
 -- | OAuth access token.
-olAccessToken :: Lens' OperationsList' (Maybe Text)
+olAccessToken :: Lens' OperationsList (Maybe Text)
 olAccessToken
   = lens _olAccessToken
       (\ s a -> s{_olAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-olUploadType :: Lens' OperationsList' (Maybe Text)
+olUploadType :: Lens' OperationsList (Maybe Text)
 olUploadType
   = lens _olUploadType (\ s a -> s{_olUploadType = a})
 
 -- | OAuth bearer token.
-olBearerToken :: Lens' OperationsList' (Maybe Text)
+olBearerToken :: Lens' OperationsList (Maybe Text)
 olBearerToken
   = lens _olBearerToken
       (\ s a -> s{_olBearerToken = a})
 
 -- | The name of the operation collection.
-olName :: Lens' OperationsList' Text
+olName :: Lens' OperationsList Text
 olName = lens _olName (\ s a -> s{_olName = a})
 
 -- | A string for filtering Operations. The following filter fields are
@@ -169,28 +169,28 @@ olName = lens _olName (\ s a -> s{_olName = a})
 -- [epoch](http:\/\/en.wikipedia.org\/wiki\/Unix_time). Can use \`>=\`
 -- and\/or \`= 1432140000\` * \`projectId = my-project AND createTime >=
 -- 1432140000 AND createTime \<= 1432150000 AND status = RUNNING\`
-olFilter :: Lens' OperationsList' (Maybe Text)
+olFilter :: Lens' OperationsList (Maybe Text)
 olFilter = lens _olFilter (\ s a -> s{_olFilter = a})
 
 -- | The standard list page token.
-olPageToken :: Lens' OperationsList' (Maybe Text)
+olPageToken :: Lens' OperationsList (Maybe Text)
 olPageToken
   = lens _olPageToken (\ s a -> s{_olPageToken = a})
 
 -- | The maximum number of results to return. If unspecified, defaults to
 -- 256. The maximum value is 2048.
-olPageSize :: Lens' OperationsList' (Maybe Int32)
+olPageSize :: Lens' OperationsList (Maybe Int32)
 olPageSize
   = lens _olPageSize (\ s a -> s{_olPageSize = a})
 
 -- | JSONP
-olCallback :: Lens' OperationsList' (Maybe Text)
+olCallback :: Lens' OperationsList (Maybe Text)
 olCallback
   = lens _olCallback (\ s a -> s{_olCallback = a})
 
-instance GoogleRequest OperationsList' where
-        type Rs OperationsList' = ListOperationsResponse
-        requestClient OperationsList'{..}
+instance GoogleRequest OperationsList where
+        type Rs OperationsList = ListOperationsResponse
+        requestClient OperationsList{..}
           = go _olName _olXgafv _olUploadProtocol (Just _olPp)
               _olAccessToken
               _olUploadType

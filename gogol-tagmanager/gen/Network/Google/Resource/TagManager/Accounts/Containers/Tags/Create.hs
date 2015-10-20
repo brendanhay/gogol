@@ -29,20 +29,20 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
       AccountsContainersTagsCreateResource
 
     -- * Creating a Request
-    , accountsContainersTagsCreate'
-    , AccountsContainersTagsCreate'
+    , accountsContainersTagsCreate
+    , AccountsContainersTagsCreate
 
     -- * Request Lenses
-    , actcContainerId
-    , actcPayload
-    , actcAccountId
+    , actccContainerId
+    , actccPayload
+    , actccAccountId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.tags.create@ method which the
--- 'AccountsContainersTagsCreate'' request conforms to.
+-- 'AccountsContainersTagsCreate' request conforms to.
 type AccountsContainersTagsCreateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -54,57 +54,57 @@ type AccountsContainersTagsCreateResource =
 
 -- | Creates a GTM Tag.
 --
--- /See:/ 'accountsContainersTagsCreate'' smart constructor.
-data AccountsContainersTagsCreate' = AccountsContainersTagsCreate'
-    { _actcContainerId :: !Text
-    , _actcPayload     :: !Tag
-    , _actcAccountId   :: !Text
+-- /See:/ 'accountsContainersTagsCreate' smart constructor.
+data AccountsContainersTagsCreate = AccountsContainersTagsCreate
+    { _actccContainerId :: !Text
+    , _actccPayload     :: !Tag
+    , _actccAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersTagsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersTagsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'actcContainerId'
+-- * 'actccContainerId'
 --
--- * 'actcPayload'
+-- * 'actccPayload'
 --
--- * 'actcAccountId'
-accountsContainersTagsCreate'
-    :: Text -- ^ 'actcContainerId'
-    -> Tag -- ^ 'actcPayload'
-    -> Text -- ^ 'actcAccountId'
-    -> AccountsContainersTagsCreate'
-accountsContainersTagsCreate' pActcContainerId_ pActcPayload_ pActcAccountId_ =
-    AccountsContainersTagsCreate'
-    { _actcContainerId = pActcContainerId_
-    , _actcPayload = pActcPayload_
-    , _actcAccountId = pActcAccountId_
+-- * 'actccAccountId'
+accountsContainersTagsCreate
+    :: Text -- ^ 'actccContainerId'
+    -> Tag -- ^ 'actccPayload'
+    -> Text -- ^ 'actccAccountId'
+    -> AccountsContainersTagsCreate
+accountsContainersTagsCreate pActccContainerId_ pActccPayload_ pActccAccountId_ =
+    AccountsContainersTagsCreate
+    { _actccContainerId = pActccContainerId_
+    , _actccPayload = pActccPayload_
+    , _actccAccountId = pActccAccountId_
     }
 
 -- | The GTM Container ID.
-actcContainerId :: Lens' AccountsContainersTagsCreate' Text
-actcContainerId
-  = lens _actcContainerId
-      (\ s a -> s{_actcContainerId = a})
+actccContainerId :: Lens' AccountsContainersTagsCreate Text
+actccContainerId
+  = lens _actccContainerId
+      (\ s a -> s{_actccContainerId = a})
 
 -- | Multipart request metadata.
-actcPayload :: Lens' AccountsContainersTagsCreate' Tag
-actcPayload
-  = lens _actcPayload (\ s a -> s{_actcPayload = a})
+actccPayload :: Lens' AccountsContainersTagsCreate Tag
+actccPayload
+  = lens _actccPayload (\ s a -> s{_actccPayload = a})
 
 -- | The GTM Account ID.
-actcAccountId :: Lens' AccountsContainersTagsCreate' Text
-actcAccountId
-  = lens _actcAccountId
-      (\ s a -> s{_actcAccountId = a})
+actccAccountId :: Lens' AccountsContainersTagsCreate Text
+actccAccountId
+  = lens _actccAccountId
+      (\ s a -> s{_actccAccountId = a})
 
-instance GoogleRequest AccountsContainersTagsCreate'
+instance GoogleRequest AccountsContainersTagsCreate
          where
-        type Rs AccountsContainersTagsCreate' = Tag
-        requestClient AccountsContainersTagsCreate'{..}
-          = go _actcAccountId _actcContainerId (Just AltJSON)
-              _actcPayload
+        type Rs AccountsContainersTagsCreate = Tag
+        requestClient AccountsContainersTagsCreate{..}
+          = go _actccAccountId _actccContainerId (Just AltJSON)
+              _actccPayload
               tagManagerService
           where go
                   = buildClient

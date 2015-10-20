@@ -30,8 +30,8 @@ module Network.Google.Resource.Gmail.Users.Drafts.Send
       UsersDraftsSendResource
 
     -- * Creating a Request
-    , usersDraftsSend'
-    , UsersDraftsSend'
+    , usersDraftsSend
+    , UsersDraftsSend
 
     -- * Request Lenses
     , udsPayload
@@ -43,7 +43,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.drafts.send@ method which the
--- 'UsersDraftsSend'' request conforms to.
+-- 'UsersDraftsSend' request conforms to.
 type UsersDraftsSendResource =
      Capture "userId" Text :>
        "drafts" :>
@@ -55,14 +55,14 @@ type UsersDraftsSendResource =
 -- | Sends the specified, existing draft to the recipients in the To, Cc, and
 -- Bcc headers.
 --
--- /See:/ 'usersDraftsSend'' smart constructor.
-data UsersDraftsSend' = UsersDraftsSend'
+-- /See:/ 'usersDraftsSend' smart constructor.
+data UsersDraftsSend = UsersDraftsSend
     { _udsPayload :: !Draft
     , _udsUserId  :: !Text
     , _udsMedia   :: !Body
     }
 
--- | Creates a value of 'UsersDraftsSend'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersDraftsSend' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,35 +71,35 @@ data UsersDraftsSend' = UsersDraftsSend'
 -- * 'udsUserId'
 --
 -- * 'udsMedia'
-usersDraftsSend'
+usersDraftsSend
     :: Draft -- ^ 'udsPayload'
     -> Text -- ^ 'udsMedia'
     -> Body
-    -> UsersDraftsSend'
-usersDraftsSend' pUdsPayload_ pUdsUserId_ pUdsMedia_ =
-    UsersDraftsSend'
+    -> UsersDraftsSend
+usersDraftsSend pUdsPayload_ pUdsUserId_ pUdsMedia_ =
+    UsersDraftsSend
     { _udsPayload = pUdsPayload_
     , _udsUserId = pUdsUserId_
     , _udsMedia = pUdsMedia_
     }
 
 -- | Multipart request metadata.
-udsPayload :: Lens' UsersDraftsSend' Draft
+udsPayload :: Lens' UsersDraftsSend Draft
 udsPayload
   = lens _udsPayload (\ s a -> s{_udsPayload = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-udsUserId :: Lens' UsersDraftsSend' Text
+udsUserId :: Lens' UsersDraftsSend Text
 udsUserId
   = lens _udsUserId (\ s a -> s{_udsUserId = a})
 
-udsMedia :: Lens' UsersDraftsSend' Body
+udsMedia :: Lens' UsersDraftsSend Body
 udsMedia = lens _udsMedia (\ s a -> s{_udsMedia = a})
 
-instance GoogleRequest UsersDraftsSend' where
-        type Rs UsersDraftsSend' = Message
-        requestClient UsersDraftsSend'{..}
+instance GoogleRequest UsersDraftsSend where
+        type Rs UsersDraftsSend = Message
+        requestClient UsersDraftsSend{..}
           = go _udsUserId (Just AltJSON) _udsPayload _udsMedia
               gmailService
           where go

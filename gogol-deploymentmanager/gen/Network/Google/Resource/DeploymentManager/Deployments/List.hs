@@ -29,8 +29,8 @@ module Network.Google.Resource.DeploymentManager.Deployments.List
       DeploymentsListResource
 
     -- * Creating a Request
-    , deploymentsList'
-    , DeploymentsList'
+    , deploymentsList
+    , DeploymentsList
 
     -- * Request Lenses
     , dlProject
@@ -43,7 +43,7 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @deploymentmanager.deployments.list@ method which the
--- 'DeploymentsList'' request conforms to.
+-- 'DeploymentsList' request conforms to.
 type DeploymentsListResource =
      Capture "project" Text :>
        "global" :>
@@ -56,15 +56,15 @@ type DeploymentsListResource =
 
 -- | Lists all deployments for a given project.
 --
--- /See:/ 'deploymentsList'' smart constructor.
-data DeploymentsList' = DeploymentsList'
+-- /See:/ 'deploymentsList' smart constructor.
+data DeploymentsList = DeploymentsList
     { _dlProject    :: !Text
     , _dlFilter     :: !(Maybe Text)
     , _dlPageToken  :: !(Maybe Text)
     , _dlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DeploymentsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'DeploymentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,11 +75,11 @@ data DeploymentsList' = DeploymentsList'
 -- * 'dlPageToken'
 --
 -- * 'dlMaxResults'
-deploymentsList'
+deploymentsList
     :: Text -- ^ 'dlProject'
-    -> DeploymentsList'
-deploymentsList' pDlProject_ =
-    DeploymentsList'
+    -> DeploymentsList
+deploymentsList pDlProject_ =
+    DeploymentsList
     { _dlProject = pDlProject_
     , _dlFilter = Nothing
     , _dlPageToken = Nothing
@@ -87,7 +87,7 @@ deploymentsList' pDlProject_ =
     }
 
 -- | The project ID for this request.
-dlProject :: Lens' DeploymentsList' Text
+dlProject :: Lens' DeploymentsList Text
 dlProject
   = lens _dlProject (\ s a -> s{_dlProject = a})
 
@@ -102,24 +102,24 @@ dlProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-dlFilter :: Lens' DeploymentsList' (Maybe Text)
+dlFilter :: Lens' DeploymentsList (Maybe Text)
 dlFilter = lens _dlFilter (\ s a -> s{_dlFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-dlPageToken :: Lens' DeploymentsList' (Maybe Text)
+dlPageToken :: Lens' DeploymentsList (Maybe Text)
 dlPageToken
   = lens _dlPageToken (\ s a -> s{_dlPageToken = a})
 
 -- | Maximum count of results to be returned.
-dlMaxResults :: Lens' DeploymentsList' Word32
+dlMaxResults :: Lens' DeploymentsList Word32
 dlMaxResults
   = lens _dlMaxResults (\ s a -> s{_dlMaxResults = a})
 
-instance GoogleRequest DeploymentsList' where
-        type Rs DeploymentsList' = DeploymentsListResponse
-        requestClient DeploymentsList'{..}
+instance GoogleRequest DeploymentsList where
+        type Rs DeploymentsList = DeploymentsListResponse
+        requestClient DeploymentsList{..}
           = go _dlProject _dlFilter _dlPageToken
               (Just _dlMaxResults)
               (Just AltJSON)

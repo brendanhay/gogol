@@ -29,8 +29,8 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.List
       AchievementConfigurationsListResource
 
     -- * Creating a Request
-    , achievementConfigurationsList'
-    , AchievementConfigurationsList'
+    , achievementConfigurationsList
+    , AchievementConfigurationsList
 
     -- * Request Lenses
     , aclApplicationId
@@ -42,7 +42,7 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.achievementConfigurations.list@ method which the
--- 'AchievementConfigurationsList'' request conforms to.
+-- 'AchievementConfigurationsList' request conforms to.
 type AchievementConfigurationsListResource =
      "applications" :>
        Capture "applicationId" Text :>
@@ -54,14 +54,14 @@ type AchievementConfigurationsListResource =
 
 -- | Returns a list of the achievement configurations in this application.
 --
--- /See:/ 'achievementConfigurationsList'' smart constructor.
-data AchievementConfigurationsList' = AchievementConfigurationsList'
+-- /See:/ 'achievementConfigurationsList' smart constructor.
+data AchievementConfigurationsList = AchievementConfigurationsList
     { _aclApplicationId :: !Text
     , _aclPageToken     :: !(Maybe Text)
     , _aclMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AchievementConfigurationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AchievementConfigurationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,40 +70,40 @@ data AchievementConfigurationsList' = AchievementConfigurationsList'
 -- * 'aclPageToken'
 --
 -- * 'aclMaxResults'
-achievementConfigurationsList'
+achievementConfigurationsList
     :: Text -- ^ 'aclApplicationId'
-    -> AchievementConfigurationsList'
-achievementConfigurationsList' pAclApplicationId_ =
-    AchievementConfigurationsList'
+    -> AchievementConfigurationsList
+achievementConfigurationsList pAclApplicationId_ =
+    AchievementConfigurationsList
     { _aclApplicationId = pAclApplicationId_
     , _aclPageToken = Nothing
     , _aclMaxResults = Nothing
     }
 
 -- | The application ID from the Google Play developer console.
-aclApplicationId :: Lens' AchievementConfigurationsList' Text
+aclApplicationId :: Lens' AchievementConfigurationsList Text
 aclApplicationId
   = lens _aclApplicationId
       (\ s a -> s{_aclApplicationId = a})
 
 -- | The token returned by the previous request.
-aclPageToken :: Lens' AchievementConfigurationsList' (Maybe Text)
+aclPageToken :: Lens' AchievementConfigurationsList (Maybe Text)
 aclPageToken
   = lens _aclPageToken (\ s a -> s{_aclPageToken = a})
 
 -- | The maximum number of resource configurations to return in the response,
 -- used for paging. For any response, the actual number of resources
 -- returned may be less than the specified maxResults.
-aclMaxResults :: Lens' AchievementConfigurationsList' (Maybe Int32)
+aclMaxResults :: Lens' AchievementConfigurationsList (Maybe Int32)
 aclMaxResults
   = lens _aclMaxResults
       (\ s a -> s{_aclMaxResults = a})
 
-instance GoogleRequest AchievementConfigurationsList'
+instance GoogleRequest AchievementConfigurationsList
          where
-        type Rs AchievementConfigurationsList' =
+        type Rs AchievementConfigurationsList =
              AchievementConfigurationListResponse
-        requestClient AchievementConfigurationsList'{..}
+        requestClient AchievementConfigurationsList{..}
           = go _aclApplicationId _aclPageToken _aclMaxResults
               (Just AltJSON)
               gamesConfigurationService

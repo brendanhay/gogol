@@ -29,20 +29,20 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Get
       AccountsContainersTriggersGetResource
 
     -- * Creating a Request
-    , accountsContainersTriggersGet'
-    , AccountsContainersTriggersGet'
+    , accountsContainersTriggersGet
+    , AccountsContainersTriggersGet
 
     -- * Request Lenses
-    , actgContainerId
-    , actgTriggerId
-    , actgAccountId
+    , actgcContainerId
+    , actgcTriggerId
+    , actgcAccountId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.triggers.get@ method which the
--- 'AccountsContainersTriggersGet'' request conforms to.
+-- 'AccountsContainersTriggersGet' request conforms to.
 type AccountsContainersTriggersGetResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -54,57 +54,58 @@ type AccountsContainersTriggersGetResource =
 
 -- | Gets a GTM Trigger.
 --
--- /See:/ 'accountsContainersTriggersGet'' smart constructor.
-data AccountsContainersTriggersGet' = AccountsContainersTriggersGet'
-    { _actgContainerId :: !Text
-    , _actgTriggerId   :: !Text
-    , _actgAccountId   :: !Text
+-- /See:/ 'accountsContainersTriggersGet' smart constructor.
+data AccountsContainersTriggersGet = AccountsContainersTriggersGet
+    { _actgcContainerId :: !Text
+    , _actgcTriggerId   :: !Text
+    , _actgcAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersTriggersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersTriggersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'actgContainerId'
+-- * 'actgcContainerId'
 --
--- * 'actgTriggerId'
+-- * 'actgcTriggerId'
 --
--- * 'actgAccountId'
-accountsContainersTriggersGet'
-    :: Text -- ^ 'actgContainerId'
-    -> Text -- ^ 'actgTriggerId'
-    -> Text -- ^ 'actgAccountId'
-    -> AccountsContainersTriggersGet'
-accountsContainersTriggersGet' pActgContainerId_ pActgTriggerId_ pActgAccountId_ =
-    AccountsContainersTriggersGet'
-    { _actgContainerId = pActgContainerId_
-    , _actgTriggerId = pActgTriggerId_
-    , _actgAccountId = pActgAccountId_
+-- * 'actgcAccountId'
+accountsContainersTriggersGet
+    :: Text -- ^ 'actgcContainerId'
+    -> Text -- ^ 'actgcTriggerId'
+    -> Text -- ^ 'actgcAccountId'
+    -> AccountsContainersTriggersGet
+accountsContainersTriggersGet pActgcContainerId_ pActgcTriggerId_ pActgcAccountId_ =
+    AccountsContainersTriggersGet
+    { _actgcContainerId = pActgcContainerId_
+    , _actgcTriggerId = pActgcTriggerId_
+    , _actgcAccountId = pActgcAccountId_
     }
 
 -- | The GTM Container ID.
-actgContainerId :: Lens' AccountsContainersTriggersGet' Text
-actgContainerId
-  = lens _actgContainerId
-      (\ s a -> s{_actgContainerId = a})
+actgcContainerId :: Lens' AccountsContainersTriggersGet Text
+actgcContainerId
+  = lens _actgcContainerId
+      (\ s a -> s{_actgcContainerId = a})
 
 -- | The GTM Trigger ID.
-actgTriggerId :: Lens' AccountsContainersTriggersGet' Text
-actgTriggerId
-  = lens _actgTriggerId
-      (\ s a -> s{_actgTriggerId = a})
+actgcTriggerId :: Lens' AccountsContainersTriggersGet Text
+actgcTriggerId
+  = lens _actgcTriggerId
+      (\ s a -> s{_actgcTriggerId = a})
 
 -- | The GTM Account ID.
-actgAccountId :: Lens' AccountsContainersTriggersGet' Text
-actgAccountId
-  = lens _actgAccountId
-      (\ s a -> s{_actgAccountId = a})
+actgcAccountId :: Lens' AccountsContainersTriggersGet Text
+actgcAccountId
+  = lens _actgcAccountId
+      (\ s a -> s{_actgcAccountId = a})
 
-instance GoogleRequest AccountsContainersTriggersGet'
+instance GoogleRequest AccountsContainersTriggersGet
          where
-        type Rs AccountsContainersTriggersGet' = Trigger
-        requestClient AccountsContainersTriggersGet'{..}
-          = go _actgAccountId _actgContainerId _actgTriggerId
+        type Rs AccountsContainersTriggersGet = Trigger
+        requestClient AccountsContainersTriggersGet{..}
+          = go _actgcAccountId _actgcContainerId
+              _actgcTriggerId
               (Just AltJSON)
               tagManagerService
           where go

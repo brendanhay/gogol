@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.List
       ManagementWebPropertyUserLinksListResource
 
     -- * Creating a Request
-    , managementWebPropertyUserLinksList'
-    , ManagementWebPropertyUserLinksList'
+    , managementWebPropertyUserLinksList
+    , ManagementWebPropertyUserLinksList
 
     -- * Request Lenses
     , mwpullWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webpropertyUserLinks.list@ method which the
--- 'ManagementWebPropertyUserLinksList'' request conforms to.
+-- 'ManagementWebPropertyUserLinksList' request conforms to.
 type ManagementWebPropertyUserLinksListResource =
      "management" :>
        "accounts" :>
@@ -58,15 +58,15 @@ type ManagementWebPropertyUserLinksListResource =
 
 -- | Lists webProperty-user links for a given web property.
 --
--- /See:/ 'managementWebPropertyUserLinksList'' smart constructor.
-data ManagementWebPropertyUserLinksList' = ManagementWebPropertyUserLinksList'
+-- /See:/ 'managementWebPropertyUserLinksList' smart constructor.
+data ManagementWebPropertyUserLinksList = ManagementWebPropertyUserLinksList
     { _mwpullWebPropertyId :: !Text
     , _mwpullAccountId     :: !Text
     , _mwpullStartIndex    :: !(Maybe Int32)
     , _mwpullMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementWebPropertyUserLinksList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementWebPropertyUserLinksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,12 +77,12 @@ data ManagementWebPropertyUserLinksList' = ManagementWebPropertyUserLinksList'
 -- * 'mwpullStartIndex'
 --
 -- * 'mwpullMaxResults'
-managementWebPropertyUserLinksList'
+managementWebPropertyUserLinksList
     :: Text -- ^ 'mwpullWebPropertyId'
     -> Text -- ^ 'mwpullAccountId'
-    -> ManagementWebPropertyUserLinksList'
-managementWebPropertyUserLinksList' pMwpullWebPropertyId_ pMwpullAccountId_ =
-    ManagementWebPropertyUserLinksList'
+    -> ManagementWebPropertyUserLinksList
+managementWebPropertyUserLinksList pMwpullWebPropertyId_ pMwpullAccountId_ =
+    ManagementWebPropertyUserLinksList
     { _mwpullWebPropertyId = pMwpullWebPropertyId_
     , _mwpullAccountId = pMwpullAccountId_
     , _mwpullStartIndex = Nothing
@@ -92,13 +92,13 @@ managementWebPropertyUserLinksList' pMwpullWebPropertyId_ pMwpullAccountId_ =
 -- | Web Property ID for the webProperty-user links to retrieve. Can either
 -- be a specific web property ID or \'~all\', which refers to all the web
 -- properties that user has access to.
-mwpullWebPropertyId :: Lens' ManagementWebPropertyUserLinksList' Text
+mwpullWebPropertyId :: Lens' ManagementWebPropertyUserLinksList Text
 mwpullWebPropertyId
   = lens _mwpullWebPropertyId
       (\ s a -> s{_mwpullWebPropertyId = a})
 
 -- | Account ID which the given web property belongs to.
-mwpullAccountId :: Lens' ManagementWebPropertyUserLinksList' Text
+mwpullAccountId :: Lens' ManagementWebPropertyUserLinksList Text
 mwpullAccountId
   = lens _mwpullAccountId
       (\ s a -> s{_mwpullAccountId = a})
@@ -106,23 +106,23 @@ mwpullAccountId
 -- | An index of the first webProperty-user link to retrieve. Use this
 -- parameter as a pagination mechanism along with the max-results
 -- parameter.
-mwpullStartIndex :: Lens' ManagementWebPropertyUserLinksList' (Maybe Int32)
+mwpullStartIndex :: Lens' ManagementWebPropertyUserLinksList (Maybe Int32)
 mwpullStartIndex
   = lens _mwpullStartIndex
       (\ s a -> s{_mwpullStartIndex = a})
 
 -- | The maximum number of webProperty-user Links to include in this
 -- response.
-mwpullMaxResults :: Lens' ManagementWebPropertyUserLinksList' (Maybe Int32)
+mwpullMaxResults :: Lens' ManagementWebPropertyUserLinksList (Maybe Int32)
 mwpullMaxResults
   = lens _mwpullMaxResults
       (\ s a -> s{_mwpullMaxResults = a})
 
 instance GoogleRequest
-         ManagementWebPropertyUserLinksList' where
-        type Rs ManagementWebPropertyUserLinksList' =
+         ManagementWebPropertyUserLinksList where
+        type Rs ManagementWebPropertyUserLinksList =
              EntityUserLinks
-        requestClient ManagementWebPropertyUserLinksList'{..}
+        requestClient ManagementWebPropertyUserLinksList{..}
           = go _mwpullAccountId _mwpullWebPropertyId
               _mwpullStartIndex
               _mwpullMaxResults

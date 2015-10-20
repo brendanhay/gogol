@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Get
       FloodlightActivitiesGetResource
 
     -- * Creating a Request
-    , floodlightActivitiesGet'
-    , FloodlightActivitiesGet'
+    , floodlightActivitiesGet
+    , FloodlightActivitiesGet
 
     -- * Request Lenses
     , fProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightActivities.get@ method which the
--- 'FloodlightActivitiesGet'' request conforms to.
+-- 'FloodlightActivitiesGet' request conforms to.
 type FloodlightActivitiesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,41 +52,41 @@ type FloodlightActivitiesGetResource =
 
 -- | Gets one floodlight activity by ID.
 --
--- /See:/ 'floodlightActivitiesGet'' smart constructor.
-data FloodlightActivitiesGet' = FloodlightActivitiesGet'
+-- /See:/ 'floodlightActivitiesGet' smart constructor.
+data FloodlightActivitiesGet = FloodlightActivitiesGet
     { _fProFileId :: !Int64
     , _fId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FloodlightActivitiesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'FloodlightActivitiesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fProFileId'
 --
 -- * 'fId'
-floodlightActivitiesGet'
+floodlightActivitiesGet
     :: Int64 -- ^ 'fProFileId'
     -> Int64 -- ^ 'fId'
-    -> FloodlightActivitiesGet'
-floodlightActivitiesGet' pFProFileId_ pFId_ =
-    FloodlightActivitiesGet'
+    -> FloodlightActivitiesGet
+floodlightActivitiesGet pFProFileId_ pFId_ =
+    FloodlightActivitiesGet
     { _fProFileId = pFProFileId_
     , _fId = pFId_
     }
 
 -- | User profile ID associated with this request.
-fProFileId :: Lens' FloodlightActivitiesGet' Int64
+fProFileId :: Lens' FloodlightActivitiesGet Int64
 fProFileId
   = lens _fProFileId (\ s a -> s{_fProFileId = a})
 
 -- | Floodlight activity ID.
-fId :: Lens' FloodlightActivitiesGet' Int64
+fId :: Lens' FloodlightActivitiesGet Int64
 fId = lens _fId (\ s a -> s{_fId = a})
 
-instance GoogleRequest FloodlightActivitiesGet' where
-        type Rs FloodlightActivitiesGet' = FloodlightActivity
-        requestClient FloodlightActivitiesGet'{..}
+instance GoogleRequest FloodlightActivitiesGet where
+        type Rs FloodlightActivitiesGet = FloodlightActivity
+        requestClient FloodlightActivitiesGet{..}
           = go _fProFileId _fId (Just AltJSON)
               dFAReportingService
           where go

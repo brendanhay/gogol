@@ -29,19 +29,19 @@ module Network.Google.Resource.SQL.Instances.Insert
       InstancesInsertResource
 
     -- * Creating a Request
-    , instancesInsert'
-    , InstancesInsert'
+    , instancesInsert
+    , InstancesInsert
 
     -- * Request Lenses
-    , iiProject
-    , iiPayload
+    , insProject
+    , insPayload
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.insert@ method which the
--- 'InstancesInsert'' request conforms to.
+-- 'InstancesInsert' request conforms to.
 type InstancesInsertResource =
      "projects" :>
        Capture "project" Text :>
@@ -52,44 +52,44 @@ type InstancesInsertResource =
 
 -- | Creates a new Cloud SQL instance.
 --
--- /See:/ 'instancesInsert'' smart constructor.
-data InstancesInsert' = InstancesInsert'
-    { _iiProject :: !Text
-    , _iiPayload :: !DatabaseInstance
+-- /See:/ 'instancesInsert' smart constructor.
+data InstancesInsert = InstancesInsert
+    { _insProject :: !Text
+    , _insPayload :: !DatabaseInstance
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iiProject'
+-- * 'insProject'
 --
--- * 'iiPayload'
-instancesInsert'
-    :: Text -- ^ 'iiProject'
-    -> DatabaseInstance -- ^ 'iiPayload'
-    -> InstancesInsert'
-instancesInsert' pIiProject_ pIiPayload_ =
-    InstancesInsert'
-    { _iiProject = pIiProject_
-    , _iiPayload = pIiPayload_
+-- * 'insPayload'
+instancesInsert
+    :: Text -- ^ 'insProject'
+    -> DatabaseInstance -- ^ 'insPayload'
+    -> InstancesInsert
+instancesInsert pInsProject_ pInsPayload_ =
+    InstancesInsert
+    { _insProject = pInsProject_
+    , _insPayload = pInsPayload_
     }
 
 -- | Project ID of the project to which the newly created Cloud SQL instances
 -- should belong.
-iiProject :: Lens' InstancesInsert' Text
-iiProject
-  = lens _iiProject (\ s a -> s{_iiProject = a})
+insProject :: Lens' InstancesInsert Text
+insProject
+  = lens _insProject (\ s a -> s{_insProject = a})
 
 -- | Multipart request metadata.
-iiPayload :: Lens' InstancesInsert' DatabaseInstance
-iiPayload
-  = lens _iiPayload (\ s a -> s{_iiPayload = a})
+insPayload :: Lens' InstancesInsert DatabaseInstance
+insPayload
+  = lens _insPayload (\ s a -> s{_insPayload = a})
 
-instance GoogleRequest InstancesInsert' where
-        type Rs InstancesInsert' = Operation
-        requestClient InstancesInsert'{..}
-          = go _iiProject (Just AltJSON) _iiPayload
+instance GoogleRequest InstancesInsert where
+        type Rs InstancesInsert = Operation
+        requestClient InstancesInsert{..}
+          = go _insProject (Just AltJSON) _insPayload
               sQLAdminService
           where go
                   = buildClient

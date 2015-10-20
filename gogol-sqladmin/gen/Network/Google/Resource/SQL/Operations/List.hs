@@ -30,8 +30,8 @@ module Network.Google.Resource.SQL.Operations.List
       OperationsListResource
 
     -- * Creating a Request
-    , operationsList'
-    , OperationsList'
+    , operationsList
+    , OperationsList
 
     -- * Request Lenses
     , olProject
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.operations.list@ method which the
--- 'OperationsList'' request conforms to.
+-- 'OperationsList' request conforms to.
 type OperationsListResource =
      "projects" :>
        Capture "project" Text :>
@@ -58,15 +58,15 @@ type OperationsListResource =
 -- | Lists all instance operations that have been performed on the given
 -- Cloud SQL instance in the reverse chronological order of the start time.
 --
--- /See:/ 'operationsList'' smart constructor.
-data OperationsList' = OperationsList'
+-- /See:/ 'operationsList' smart constructor.
+data OperationsList = OperationsList
     { _olProject    :: !Text
     , _olPageToken  :: !(Maybe Text)
     , _olMaxResults :: !(Maybe Word32)
     , _olInstance   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,12 +77,12 @@ data OperationsList' = OperationsList'
 -- * 'olMaxResults'
 --
 -- * 'olInstance'
-operationsList'
+operationsList
     :: Text -- ^ 'olProject'
     -> Text -- ^ 'olInstance'
-    -> OperationsList'
-operationsList' pOlProject_ pOlInstance_ =
-    OperationsList'
+    -> OperationsList
+operationsList pOlProject_ pOlInstance_ =
+    OperationsList
     { _olProject = pOlProject_
     , _olPageToken = Nothing
     , _olMaxResults = Nothing
@@ -90,29 +90,29 @@ operationsList' pOlProject_ pOlInstance_ =
     }
 
 -- | Project ID of the project that contains the instance.
-olProject :: Lens' OperationsList' Text
+olProject :: Lens' OperationsList Text
 olProject
   = lens _olProject (\ s a -> s{_olProject = a})
 
 -- | A previously-returned page token representing part of the larger set of
 -- results to view.
-olPageToken :: Lens' OperationsList' (Maybe Text)
+olPageToken :: Lens' OperationsList (Maybe Text)
 olPageToken
   = lens _olPageToken (\ s a -> s{_olPageToken = a})
 
 -- | Maximum number of operations per response.
-olMaxResults :: Lens' OperationsList' (Maybe Word32)
+olMaxResults :: Lens' OperationsList (Maybe Word32)
 olMaxResults
   = lens _olMaxResults (\ s a -> s{_olMaxResults = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-olInstance :: Lens' OperationsList' Text
+olInstance :: Lens' OperationsList Text
 olInstance
   = lens _olInstance (\ s a -> s{_olInstance = a})
 
-instance GoogleRequest OperationsList' where
-        type Rs OperationsList' = OperationsListResponse
-        requestClient OperationsList'{..}
+instance GoogleRequest OperationsList where
+        type Rs OperationsList = OperationsListResponse
+        requestClient OperationsList{..}
           = go _olProject (Just _olInstance) _olPageToken
               _olMaxResults
               (Just AltJSON)

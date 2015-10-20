@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.Offers.List
       OffersListResource
 
     -- * Creating a Request
-    , offersList'
-    , OffersList'
+    , offersList
+    , OffersList
 
     -- * Request Lenses
     , olPayload
@@ -40,7 +40,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.offers.list@ method which the
--- 'OffersList'' request conforms to.
+-- 'OffersList' request conforms to.
 type OffersListResource =
      "offers" :>
        QueryParam "alt" AltJSON :>
@@ -49,32 +49,32 @@ type OffersListResource =
 
 -- | Lists all offers the authenticated user has access to.
 --
--- /See:/ 'offersList'' smart constructor.
-newtype OffersList' = OffersList'
+-- /See:/ 'offersList' smart constructor.
+newtype OffersList = OffersList
     { _olPayload :: ListOffersRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OffersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'OffersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'olPayload'
-offersList'
+offersList
     :: ListOffersRequest -- ^ 'olPayload'
-    -> OffersList'
-offersList' pOlPayload_ =
-    OffersList'
+    -> OffersList
+offersList pOlPayload_ =
+    OffersList
     { _olPayload = pOlPayload_
     }
 
 -- | Multipart request metadata.
-olPayload :: Lens' OffersList' ListOffersRequest
+olPayload :: Lens' OffersList ListOffersRequest
 olPayload
   = lens _olPayload (\ s a -> s{_olPayload = a})
 
-instance GoogleRequest OffersList' where
-        type Rs OffersList' = ListOffersResponse
-        requestClient OffersList'{..}
+instance GoogleRequest OffersList where
+        type Rs OffersList = ListOffersResponse
+        requestClient OffersList{..}
           = go (Just AltJSON) _olPayload adExchangeBuyerService
           where go
                   = buildClient (Proxy :: Proxy OffersListResource)

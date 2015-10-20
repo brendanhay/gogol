@@ -29,22 +29,22 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Update
       AccountsContainersVariablesUpdateResource
 
     -- * Creating a Request
-    , accountsContainersVariablesUpdate'
-    , AccountsContainersVariablesUpdate'
+    , accountsContainersVariablesUpdate
+    , AccountsContainersVariablesUpdate
 
     -- * Request Lenses
-    , aContainerId
-    , aFingerprint
-    , aVariableId
-    , aPayload
-    , aAccountId
+    , acvuContainerId
+    , acvuFingerprint
+    , acvuVariableId
+    , acvuPayload
+    , acvuAccountId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.variables.update@ method which the
--- 'AccountsContainersVariablesUpdate'' request conforms to.
+-- 'AccountsContainersVariablesUpdate' request conforms to.
 type AccountsContainersVariablesUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -58,76 +58,81 @@ type AccountsContainersVariablesUpdateResource =
 
 -- | Updates a GTM Variable.
 --
--- /See:/ 'accountsContainersVariablesUpdate'' smart constructor.
-data AccountsContainersVariablesUpdate' = AccountsContainersVariablesUpdate'
-    { _aContainerId :: !Text
-    , _aFingerprint :: !(Maybe Text)
-    , _aVariableId  :: !Text
-    , _aPayload     :: !Variable
-    , _aAccountId   :: !Text
+-- /See:/ 'accountsContainersVariablesUpdate' smart constructor.
+data AccountsContainersVariablesUpdate = AccountsContainersVariablesUpdate
+    { _acvuContainerId :: !Text
+    , _acvuFingerprint :: !(Maybe Text)
+    , _acvuVariableId  :: !Text
+    , _acvuPayload     :: !Variable
+    , _acvuAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersVariablesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersVariablesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aContainerId'
+-- * 'acvuContainerId'
 --
--- * 'aFingerprint'
+-- * 'acvuFingerprint'
 --
--- * 'aVariableId'
+-- * 'acvuVariableId'
 --
--- * 'aPayload'
+-- * 'acvuPayload'
 --
--- * 'aAccountId'
-accountsContainersVariablesUpdate'
-    :: Text -- ^ 'aContainerId'
-    -> Text -- ^ 'aVariableId'
-    -> Variable -- ^ 'aPayload'
-    -> Text -- ^ 'aAccountId'
-    -> AccountsContainersVariablesUpdate'
-accountsContainersVariablesUpdate' pAContainerId_ pAVariableId_ pAPayload_ pAAccountId_ =
-    AccountsContainersVariablesUpdate'
-    { _aContainerId = pAContainerId_
-    , _aFingerprint = Nothing
-    , _aVariableId = pAVariableId_
-    , _aPayload = pAPayload_
-    , _aAccountId = pAAccountId_
+-- * 'acvuAccountId'
+accountsContainersVariablesUpdate
+    :: Text -- ^ 'acvuContainerId'
+    -> Text -- ^ 'acvuVariableId'
+    -> Variable -- ^ 'acvuPayload'
+    -> Text -- ^ 'acvuAccountId'
+    -> AccountsContainersVariablesUpdate
+accountsContainersVariablesUpdate pAcvuContainerId_ pAcvuVariableId_ pAcvuPayload_ pAcvuAccountId_ =
+    AccountsContainersVariablesUpdate
+    { _acvuContainerId = pAcvuContainerId_
+    , _acvuFingerprint = Nothing
+    , _acvuVariableId = pAcvuVariableId_
+    , _acvuPayload = pAcvuPayload_
+    , _acvuAccountId = pAcvuAccountId_
     }
 
 -- | The GTM Container ID.
-aContainerId :: Lens' AccountsContainersVariablesUpdate' Text
-aContainerId
-  = lens _aContainerId (\ s a -> s{_aContainerId = a})
+acvuContainerId :: Lens' AccountsContainersVariablesUpdate Text
+acvuContainerId
+  = lens _acvuContainerId
+      (\ s a -> s{_acvuContainerId = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- variable in storage.
-aFingerprint :: Lens' AccountsContainersVariablesUpdate' (Maybe Text)
-aFingerprint
-  = lens _aFingerprint (\ s a -> s{_aFingerprint = a})
+acvuFingerprint :: Lens' AccountsContainersVariablesUpdate (Maybe Text)
+acvuFingerprint
+  = lens _acvuFingerprint
+      (\ s a -> s{_acvuFingerprint = a})
 
 -- | The GTM Variable ID.
-aVariableId :: Lens' AccountsContainersVariablesUpdate' Text
-aVariableId
-  = lens _aVariableId (\ s a -> s{_aVariableId = a})
+acvuVariableId :: Lens' AccountsContainersVariablesUpdate Text
+acvuVariableId
+  = lens _acvuVariableId
+      (\ s a -> s{_acvuVariableId = a})
 
 -- | Multipart request metadata.
-aPayload :: Lens' AccountsContainersVariablesUpdate' Variable
-aPayload = lens _aPayload (\ s a -> s{_aPayload = a})
+acvuPayload :: Lens' AccountsContainersVariablesUpdate Variable
+acvuPayload
+  = lens _acvuPayload (\ s a -> s{_acvuPayload = a})
 
 -- | The GTM Account ID.
-aAccountId :: Lens' AccountsContainersVariablesUpdate' Text
-aAccountId
-  = lens _aAccountId (\ s a -> s{_aAccountId = a})
+acvuAccountId :: Lens' AccountsContainersVariablesUpdate Text
+acvuAccountId
+  = lens _acvuAccountId
+      (\ s a -> s{_acvuAccountId = a})
 
 instance GoogleRequest
-         AccountsContainersVariablesUpdate' where
-        type Rs AccountsContainersVariablesUpdate' = Variable
-        requestClient AccountsContainersVariablesUpdate'{..}
-          = go _aAccountId _aContainerId _aVariableId
-              _aFingerprint
+         AccountsContainersVariablesUpdate where
+        type Rs AccountsContainersVariablesUpdate = Variable
+        requestClient AccountsContainersVariablesUpdate{..}
+          = go _acvuAccountId _acvuContainerId _acvuVariableId
+              _acvuFingerprint
               (Just AltJSON)
-              _aPayload
+              _acvuPayload
               tagManagerService
           where go
                   = buildClient

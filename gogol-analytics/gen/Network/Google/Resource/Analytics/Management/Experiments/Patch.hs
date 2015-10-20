@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Experiments.Patch
       ManagementExperimentsPatchResource
 
     -- * Creating a Request
-    , managementExperimentsPatch'
-    , ManagementExperimentsPatch'
+    , managementExperimentsPatch
+    , ManagementExperimentsPatch
 
     -- * Request Lenses
     , mepWebPropertyId
@@ -44,7 +44,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.experiments.patch@ method which the
--- 'ManagementExperimentsPatch'' request conforms to.
+-- 'ManagementExperimentsPatch' request conforms to.
 type ManagementExperimentsPatchResource =
      "management" :>
        "accounts" :>
@@ -61,8 +61,8 @@ type ManagementExperimentsPatchResource =
 
 -- | Update an existing experiment. This method supports patch semantics.
 --
--- /See:/ 'managementExperimentsPatch'' smart constructor.
-data ManagementExperimentsPatch' = ManagementExperimentsPatch'
+-- /See:/ 'managementExperimentsPatch' smart constructor.
+data ManagementExperimentsPatch = ManagementExperimentsPatch
     { _mepWebPropertyId :: !Text
     , _mepProFileId     :: !Text
     , _mepPayload       :: !Experiment
@@ -70,7 +70,7 @@ data ManagementExperimentsPatch' = ManagementExperimentsPatch'
     , _mepExperimentId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementExperimentsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementExperimentsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -83,15 +83,15 @@ data ManagementExperimentsPatch' = ManagementExperimentsPatch'
 -- * 'mepAccountId'
 --
 -- * 'mepExperimentId'
-managementExperimentsPatch'
+managementExperimentsPatch
     :: Text -- ^ 'mepWebPropertyId'
     -> Text -- ^ 'mepProFileId'
     -> Experiment -- ^ 'mepPayload'
     -> Text -- ^ 'mepAccountId'
     -> Text -- ^ 'mepExperimentId'
-    -> ManagementExperimentsPatch'
-managementExperimentsPatch' pMepWebPropertyId_ pMepProFileId_ pMepPayload_ pMepAccountId_ pMepExperimentId_ =
-    ManagementExperimentsPatch'
+    -> ManagementExperimentsPatch
+managementExperimentsPatch pMepWebPropertyId_ pMepProFileId_ pMepPayload_ pMepAccountId_ pMepExperimentId_ =
+    ManagementExperimentsPatch
     { _mepWebPropertyId = pMepWebPropertyId_
     , _mepProFileId = pMepProFileId_
     , _mepPayload = pMepPayload_
@@ -100,36 +100,36 @@ managementExperimentsPatch' pMepWebPropertyId_ pMepProFileId_ pMepPayload_ pMepA
     }
 
 -- | Web property ID of the experiment to update.
-mepWebPropertyId :: Lens' ManagementExperimentsPatch' Text
+mepWebPropertyId :: Lens' ManagementExperimentsPatch Text
 mepWebPropertyId
   = lens _mepWebPropertyId
       (\ s a -> s{_mepWebPropertyId = a})
 
 -- | View (Profile) ID of the experiment to update.
-mepProFileId :: Lens' ManagementExperimentsPatch' Text
+mepProFileId :: Lens' ManagementExperimentsPatch Text
 mepProFileId
   = lens _mepProFileId (\ s a -> s{_mepProFileId = a})
 
 -- | Multipart request metadata.
-mepPayload :: Lens' ManagementExperimentsPatch' Experiment
+mepPayload :: Lens' ManagementExperimentsPatch Experiment
 mepPayload
   = lens _mepPayload (\ s a -> s{_mepPayload = a})
 
 -- | Account ID of the experiment to update.
-mepAccountId :: Lens' ManagementExperimentsPatch' Text
+mepAccountId :: Lens' ManagementExperimentsPatch Text
 mepAccountId
   = lens _mepAccountId (\ s a -> s{_mepAccountId = a})
 
 -- | Experiment ID of the experiment to update.
-mepExperimentId :: Lens' ManagementExperimentsPatch' Text
+mepExperimentId :: Lens' ManagementExperimentsPatch Text
 mepExperimentId
   = lens _mepExperimentId
       (\ s a -> s{_mepExperimentId = a})
 
-instance GoogleRequest ManagementExperimentsPatch'
+instance GoogleRequest ManagementExperimentsPatch
          where
-        type Rs ManagementExperimentsPatch' = Experiment
-        requestClient ManagementExperimentsPatch'{..}
+        type Rs ManagementExperimentsPatch = Experiment
+        requestClient ManagementExperimentsPatch{..}
           = go _mepAccountId _mepWebPropertyId _mepProFileId
               _mepExperimentId
               (Just AltJSON)

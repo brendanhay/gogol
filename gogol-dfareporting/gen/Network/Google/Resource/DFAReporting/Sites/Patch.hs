@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Sites.Patch
       SitesPatchResource
 
     -- * Creating a Request
-    , sitesPatch'
-    , SitesPatch'
+    , sitesPatch
+    , SitesPatch
 
     -- * Request Lenses
     , spProFileId
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.sites.patch@ method which the
--- 'SitesPatch'' request conforms to.
+-- 'SitesPatch' request conforms to.
 type SitesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -53,14 +53,14 @@ type SitesPatchResource =
 
 -- | Updates an existing site. This method supports patch semantics.
 --
--- /See:/ 'sitesPatch'' smart constructor.
-data SitesPatch' = SitesPatch'
+-- /See:/ 'sitesPatch' smart constructor.
+data SitesPatch = SitesPatch
     { _spProFileId :: !Int64
     , _spPayload   :: !Site
     , _spId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SitesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'SitesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data SitesPatch' = SitesPatch'
 -- * 'spPayload'
 --
 -- * 'spId'
-sitesPatch'
+sitesPatch
     :: Int64 -- ^ 'spProFileId'
     -> Site -- ^ 'spPayload'
     -> Int64 -- ^ 'spId'
-    -> SitesPatch'
-sitesPatch' pSpProFileId_ pSpPayload_ pSpId_ =
-    SitesPatch'
+    -> SitesPatch
+sitesPatch pSpProFileId_ pSpPayload_ pSpId_ =
+    SitesPatch
     { _spProFileId = pSpProFileId_
     , _spPayload = pSpPayload_
     , _spId = pSpId_
     }
 
 -- | User profile ID associated with this request.
-spProFileId :: Lens' SitesPatch' Int64
+spProFileId :: Lens' SitesPatch Int64
 spProFileId
   = lens _spProFileId (\ s a -> s{_spProFileId = a})
 
 -- | Multipart request metadata.
-spPayload :: Lens' SitesPatch' Site
+spPayload :: Lens' SitesPatch Site
 spPayload
   = lens _spPayload (\ s a -> s{_spPayload = a})
 
 -- | Site ID.
-spId :: Lens' SitesPatch' Int64
+spId :: Lens' SitesPatch Int64
 spId = lens _spId (\ s a -> s{_spId = a})
 
-instance GoogleRequest SitesPatch' where
-        type Rs SitesPatch' = Site
-        requestClient SitesPatch'{..}
+instance GoogleRequest SitesPatch where
+        type Rs SitesPatch = Site
+        requestClient SitesPatch{..}
           = go _spProFileId (Just _spId) (Just AltJSON)
               _spPayload
               dFAReportingService

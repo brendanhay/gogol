@@ -29,8 +29,8 @@ module Network.Google.Resource.DNS.ResourceRecordSets.List
       ResourceRecordSetsListResource
 
     -- * Creating a Request
-    , resourceRecordSetsList'
-    , ResourceRecordSetsList'
+    , resourceRecordSetsList
+    , ResourceRecordSetsList
 
     -- * Request Lenses
     , rrslProject
@@ -45,7 +45,7 @@ import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dns.resourceRecordSets.list@ method which the
--- 'ResourceRecordSetsList'' request conforms to.
+-- 'ResourceRecordSetsList' request conforms to.
 type ResourceRecordSetsListResource =
      Capture "project" Text :>
        "managedZones" :>
@@ -60,8 +60,8 @@ type ResourceRecordSetsListResource =
 
 -- | Enumerate ResourceRecordSets that have been created but not yet deleted.
 --
--- /See:/ 'resourceRecordSetsList'' smart constructor.
-data ResourceRecordSetsList' = ResourceRecordSetsList'
+-- /See:/ 'resourceRecordSetsList' smart constructor.
+data ResourceRecordSetsList = ResourceRecordSetsList
     { _rrslProject     :: !Text
     , _rrslName        :: !(Maybe Text)
     , _rrslPageToken   :: !(Maybe Text)
@@ -70,7 +70,7 @@ data ResourceRecordSetsList' = ResourceRecordSetsList'
     , _rrslMaxResults  :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ResourceRecordSetsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ResourceRecordSetsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -85,12 +85,12 @@ data ResourceRecordSetsList' = ResourceRecordSetsList'
 -- * 'rrslManagedZone'
 --
 -- * 'rrslMaxResults'
-resourceRecordSetsList'
+resourceRecordSetsList
     :: Text -- ^ 'rrslProject'
     -> Text -- ^ 'rrslManagedZone'
-    -> ResourceRecordSetsList'
-resourceRecordSetsList' pRrslProject_ pRrslManagedZone_ =
-    ResourceRecordSetsList'
+    -> ResourceRecordSetsList
+resourceRecordSetsList pRrslProject_ pRrslManagedZone_ =
+    ResourceRecordSetsList
     { _rrslProject = pRrslProject_
     , _rrslName = Nothing
     , _rrslPageToken = Nothing
@@ -100,45 +100,45 @@ resourceRecordSetsList' pRrslProject_ pRrslManagedZone_ =
     }
 
 -- | Identifies the project addressed by this request.
-rrslProject :: Lens' ResourceRecordSetsList' Text
+rrslProject :: Lens' ResourceRecordSetsList Text
 rrslProject
   = lens _rrslProject (\ s a -> s{_rrslProject = a})
 
 -- | Restricts the list to return only records with this fully qualified
 -- domain name.
-rrslName :: Lens' ResourceRecordSetsList' (Maybe Text)
+rrslName :: Lens' ResourceRecordSetsList (Maybe Text)
 rrslName = lens _rrslName (\ s a -> s{_rrslName = a})
 
 -- | Optional. A tag returned by a previous list request that was truncated.
 -- Use this parameter to continue a previous list request.
-rrslPageToken :: Lens' ResourceRecordSetsList' (Maybe Text)
+rrslPageToken :: Lens' ResourceRecordSetsList (Maybe Text)
 rrslPageToken
   = lens _rrslPageToken
       (\ s a -> s{_rrslPageToken = a})
 
 -- | Restricts the list to return only records of this type. If present, the
 -- \"name\" parameter must also be present.
-rrslType :: Lens' ResourceRecordSetsList' (Maybe Text)
+rrslType :: Lens' ResourceRecordSetsList (Maybe Text)
 rrslType = lens _rrslType (\ s a -> s{_rrslType = a})
 
 -- | Identifies the managed zone addressed by this request. Can be the
 -- managed zone name or id.
-rrslManagedZone :: Lens' ResourceRecordSetsList' Text
+rrslManagedZone :: Lens' ResourceRecordSetsList Text
 rrslManagedZone
   = lens _rrslManagedZone
       (\ s a -> s{_rrslManagedZone = a})
 
 -- | Optional. Maximum number of results to be returned. If unspecified, the
 -- server will decide how many results to return.
-rrslMaxResults :: Lens' ResourceRecordSetsList' (Maybe Int32)
+rrslMaxResults :: Lens' ResourceRecordSetsList (Maybe Int32)
 rrslMaxResults
   = lens _rrslMaxResults
       (\ s a -> s{_rrslMaxResults = a})
 
-instance GoogleRequest ResourceRecordSetsList' where
-        type Rs ResourceRecordSetsList' =
+instance GoogleRequest ResourceRecordSetsList where
+        type Rs ResourceRecordSetsList =
              ResourceRecordSetsListResponse
-        requestClient ResourceRecordSetsList'{..}
+        requestClient ResourceRecordSetsList{..}
           = go _rrslProject _rrslManagedZone _rrslName
               _rrslPageToken
               _rrslType

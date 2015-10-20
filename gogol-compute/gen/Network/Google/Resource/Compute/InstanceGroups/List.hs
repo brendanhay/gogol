@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.InstanceGroups.List
       InstanceGroupsListResource
 
     -- * Creating a Request
-    , instanceGroupsList'
-    , InstanceGroupsList'
+    , instanceGroupsList
+    , InstanceGroupsList
 
     -- * Request Lenses
     , iglProject
@@ -45,7 +45,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroups.list@ method which the
--- 'InstanceGroupsList'' request conforms to.
+-- 'InstanceGroupsList' request conforms to.
 type InstanceGroupsListResource =
      Capture "project" Text :>
        "zones" :>
@@ -60,8 +60,8 @@ type InstanceGroupsListResource =
 -- | Retrieves the list of instance groups that are located in the specified
 -- project and zone.
 --
--- /See:/ 'instanceGroupsList'' smart constructor.
-data InstanceGroupsList' = InstanceGroupsList'
+-- /See:/ 'instanceGroupsList' smart constructor.
+data InstanceGroupsList = InstanceGroupsList
     { _iglProject    :: !Text
     , _iglZone       :: !Text
     , _iglFilter     :: !(Maybe Text)
@@ -69,7 +69,7 @@ data InstanceGroupsList' = InstanceGroupsList'
     , _iglMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,12 +82,12 @@ data InstanceGroupsList' = InstanceGroupsList'
 -- * 'iglPageToken'
 --
 -- * 'iglMaxResults'
-instanceGroupsList'
+instanceGroupsList
     :: Text -- ^ 'iglProject'
     -> Text -- ^ 'iglZone'
-    -> InstanceGroupsList'
-instanceGroupsList' pIglProject_ pIglZone_ =
-    InstanceGroupsList'
+    -> InstanceGroupsList
+instanceGroupsList pIglProject_ pIglZone_ =
+    InstanceGroupsList
     { _iglProject = pIglProject_
     , _iglZone = pIglZone_
     , _iglFilter = Nothing
@@ -96,12 +96,12 @@ instanceGroupsList' pIglProject_ pIglZone_ =
     }
 
 -- | The project ID for this request.
-iglProject :: Lens' InstanceGroupsList' Text
+iglProject :: Lens' InstanceGroupsList Text
 iglProject
   = lens _iglProject (\ s a -> s{_iglProject = a})
 
 -- | The name of the zone where the instance group is located.
-iglZone :: Lens' InstanceGroupsList' Text
+iglZone :: Lens' InstanceGroupsList Text
 iglZone = lens _iglZone (\ s a -> s{_iglZone = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -115,26 +115,26 @@ iglZone = lens _iglZone (\ s a -> s{_iglZone = a})
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-iglFilter :: Lens' InstanceGroupsList' (Maybe Text)
+iglFilter :: Lens' InstanceGroupsList (Maybe Text)
 iglFilter
   = lens _iglFilter (\ s a -> s{_iglFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-iglPageToken :: Lens' InstanceGroupsList' (Maybe Text)
+iglPageToken :: Lens' InstanceGroupsList (Maybe Text)
 iglPageToken
   = lens _iglPageToken (\ s a -> s{_iglPageToken = a})
 
 -- | Maximum count of results to be returned.
-iglMaxResults :: Lens' InstanceGroupsList' Word32
+iglMaxResults :: Lens' InstanceGroupsList Word32
 iglMaxResults
   = lens _iglMaxResults
       (\ s a -> s{_iglMaxResults = a})
 
-instance GoogleRequest InstanceGroupsList' where
-        type Rs InstanceGroupsList' = InstanceGroupList
-        requestClient InstanceGroupsList'{..}
+instance GoogleRequest InstanceGroupsList where
+        type Rs InstanceGroupsList = InstanceGroupList
+        requestClient InstanceGroupsList{..}
           = go _iglProject _iglZone _iglFilter _iglPageToken
               (Just _iglMaxResults)
               (Just AltJSON)

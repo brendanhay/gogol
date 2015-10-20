@@ -29,20 +29,20 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Create
       AccountsContainersVariablesCreateResource
 
     -- * Creating a Request
-    , accountsContainersVariablesCreate'
-    , AccountsContainersVariablesCreate'
+    , accountsContainersVariablesCreate
+    , AccountsContainersVariablesCreate
 
     -- * Request Lenses
-    , acvccContainerId
-    , acvccPayload
-    , acvccAccountId
+    , acvcContainerId
+    , acvcPayload
+    , acvcAccountId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.variables.create@ method which the
--- 'AccountsContainersVariablesCreate'' request conforms to.
+-- 'AccountsContainersVariablesCreate' request conforms to.
 type AccountsContainersVariablesCreateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -54,57 +54,57 @@ type AccountsContainersVariablesCreateResource =
 
 -- | Creates a GTM Variable.
 --
--- /See:/ 'accountsContainersVariablesCreate'' smart constructor.
-data AccountsContainersVariablesCreate' = AccountsContainersVariablesCreate'
-    { _acvccContainerId :: !Text
-    , _acvccPayload     :: !Variable
-    , _acvccAccountId   :: !Text
+-- /See:/ 'accountsContainersVariablesCreate' smart constructor.
+data AccountsContainersVariablesCreate = AccountsContainersVariablesCreate
+    { _acvcContainerId :: !Text
+    , _acvcPayload     :: !Variable
+    , _acvcAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersVariablesCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersVariablesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acvccContainerId'
+-- * 'acvcContainerId'
 --
--- * 'acvccPayload'
+-- * 'acvcPayload'
 --
--- * 'acvccAccountId'
-accountsContainersVariablesCreate'
-    :: Text -- ^ 'acvccContainerId'
-    -> Variable -- ^ 'acvccPayload'
-    -> Text -- ^ 'acvccAccountId'
-    -> AccountsContainersVariablesCreate'
-accountsContainersVariablesCreate' pAcvccContainerId_ pAcvccPayload_ pAcvccAccountId_ =
-    AccountsContainersVariablesCreate'
-    { _acvccContainerId = pAcvccContainerId_
-    , _acvccPayload = pAcvccPayload_
-    , _acvccAccountId = pAcvccAccountId_
+-- * 'acvcAccountId'
+accountsContainersVariablesCreate
+    :: Text -- ^ 'acvcContainerId'
+    -> Variable -- ^ 'acvcPayload'
+    -> Text -- ^ 'acvcAccountId'
+    -> AccountsContainersVariablesCreate
+accountsContainersVariablesCreate pAcvcContainerId_ pAcvcPayload_ pAcvcAccountId_ =
+    AccountsContainersVariablesCreate
+    { _acvcContainerId = pAcvcContainerId_
+    , _acvcPayload = pAcvcPayload_
+    , _acvcAccountId = pAcvcAccountId_
     }
 
 -- | The GTM Container ID.
-acvccContainerId :: Lens' AccountsContainersVariablesCreate' Text
-acvccContainerId
-  = lens _acvccContainerId
-      (\ s a -> s{_acvccContainerId = a})
+acvcContainerId :: Lens' AccountsContainersVariablesCreate Text
+acvcContainerId
+  = lens _acvcContainerId
+      (\ s a -> s{_acvcContainerId = a})
 
 -- | Multipart request metadata.
-acvccPayload :: Lens' AccountsContainersVariablesCreate' Variable
-acvccPayload
-  = lens _acvccPayload (\ s a -> s{_acvccPayload = a})
+acvcPayload :: Lens' AccountsContainersVariablesCreate Variable
+acvcPayload
+  = lens _acvcPayload (\ s a -> s{_acvcPayload = a})
 
 -- | The GTM Account ID.
-acvccAccountId :: Lens' AccountsContainersVariablesCreate' Text
-acvccAccountId
-  = lens _acvccAccountId
-      (\ s a -> s{_acvccAccountId = a})
+acvcAccountId :: Lens' AccountsContainersVariablesCreate Text
+acvcAccountId
+  = lens _acvcAccountId
+      (\ s a -> s{_acvcAccountId = a})
 
 instance GoogleRequest
-         AccountsContainersVariablesCreate' where
-        type Rs AccountsContainersVariablesCreate' = Variable
-        requestClient AccountsContainersVariablesCreate'{..}
-          = go _acvccAccountId _acvccContainerId (Just AltJSON)
-              _acvccPayload
+         AccountsContainersVariablesCreate where
+        type Rs AccountsContainersVariablesCreate = Variable
+        requestClient AccountsContainersVariablesCreate{..}
+          = go _acvcAccountId _acvcContainerId (Just AltJSON)
+              _acvcPayload
               tagManagerService
           where go
                   = buildClient

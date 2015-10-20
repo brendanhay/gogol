@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.UserRoles.Update
       UserRolesUpdateResource
 
     -- * Creating a Request
-    , userRolesUpdate'
-    , UserRolesUpdate'
+    , userRolesUpdate
+    , UserRolesUpdate
 
     -- * Request Lenses
     , uruProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.userRoles.update@ method which the
--- 'UserRolesUpdate'' request conforms to.
+-- 'UserRolesUpdate' request conforms to.
 type UserRolesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type UserRolesUpdateResource =
 
 -- | Updates an existing user role.
 --
--- /See:/ 'userRolesUpdate'' smart constructor.
-data UserRolesUpdate' = UserRolesUpdate'
+-- /See:/ 'userRolesUpdate' smart constructor.
+data UserRolesUpdate = UserRolesUpdate
     { _uruProFileId :: !Int64
     , _uruPayload   :: !UserRole
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserRolesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'UserRolesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'uruProFileId'
 --
 -- * 'uruPayload'
-userRolesUpdate'
+userRolesUpdate
     :: Int64 -- ^ 'uruProFileId'
     -> UserRole -- ^ 'uruPayload'
-    -> UserRolesUpdate'
-userRolesUpdate' pUruProFileId_ pUruPayload_ =
-    UserRolesUpdate'
+    -> UserRolesUpdate
+userRolesUpdate pUruProFileId_ pUruPayload_ =
+    UserRolesUpdate
     { _uruProFileId = pUruProFileId_
     , _uruPayload = pUruPayload_
     }
 
 -- | User profile ID associated with this request.
-uruProFileId :: Lens' UserRolesUpdate' Int64
+uruProFileId :: Lens' UserRolesUpdate Int64
 uruProFileId
   = lens _uruProFileId (\ s a -> s{_uruProFileId = a})
 
 -- | Multipart request metadata.
-uruPayload :: Lens' UserRolesUpdate' UserRole
+uruPayload :: Lens' UserRolesUpdate UserRole
 uruPayload
   = lens _uruPayload (\ s a -> s{_uruPayload = a})
 
-instance GoogleRequest UserRolesUpdate' where
-        type Rs UserRolesUpdate' = UserRole
-        requestClient UserRolesUpdate'{..}
+instance GoogleRequest UserRolesUpdate where
+        type Rs UserRolesUpdate = UserRole
+        requestClient UserRolesUpdate{..}
           = go _uruProFileId (Just AltJSON) _uruPayload
               dFAReportingService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.FusionTables.Query.SQLGet
       QuerySQLGetResource
 
     -- * Creating a Request
-    , querySQLGet'
-    , QuerySQLGet'
+    , querySQLGet
+    , QuerySQLGet
 
     -- * Request Lenses
     , qsqlgTyped
@@ -42,7 +42,7 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.query.sqlGet@ method which the
--- 'QuerySQLGet'' request conforms to.
+-- 'QuerySQLGet' request conforms to.
 type QuerySQLGetResource =
      "query" :>
        QueryParam "sql" Text :>
@@ -59,14 +59,14 @@ type QuerySQLGetResource =
 
 -- | Executes a SQL statement which can be any of - SELECT - SHOW - DESCRIBE
 --
--- /See:/ 'querySQLGet'' smart constructor.
-data QuerySQLGet' = QuerySQLGet'
+-- /See:/ 'querySQLGet' smart constructor.
+data QuerySQLGet = QuerySQLGet
     { _qsqlgTyped :: !(Maybe Bool)
     , _qsqlgHdrs  :: !(Maybe Bool)
     , _qsqlgSQL   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'QuerySQLGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'QuerySQLGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,11 +75,11 @@ data QuerySQLGet' = QuerySQLGet'
 -- * 'qsqlgHdrs'
 --
 -- * 'qsqlgSQL'
-querySQLGet'
+querySQLGet
     :: Text -- ^ 'qsqlgSQL'
-    -> QuerySQLGet'
-querySQLGet' pQsqlgSQL_ =
-    QuerySQLGet'
+    -> QuerySQLGet
+querySQLGet pQsqlgSQL_ =
+    QuerySQLGet
     { _qsqlgTyped = Nothing
     , _qsqlgHdrs = Nothing
     , _qsqlgSQL = pQsqlgSQL_
@@ -87,22 +87,22 @@ querySQLGet' pQsqlgSQL_ =
 
 -- | Whether typed values are returned in the (JSON) response: numbers for
 -- numeric values and parsed geometries for KML values. Default is true.
-qsqlgTyped :: Lens' QuerySQLGet' (Maybe Bool)
+qsqlgTyped :: Lens' QuerySQLGet (Maybe Bool)
 qsqlgTyped
   = lens _qsqlgTyped (\ s a -> s{_qsqlgTyped = a})
 
 -- | Whether column names are included (in the first row). Default is true.
-qsqlgHdrs :: Lens' QuerySQLGet' (Maybe Bool)
+qsqlgHdrs :: Lens' QuerySQLGet (Maybe Bool)
 qsqlgHdrs
   = lens _qsqlgHdrs (\ s a -> s{_qsqlgHdrs = a})
 
 -- | A SQL statement which can be any of - SELECT - SHOW - DESCRIBE
-qsqlgSQL :: Lens' QuerySQLGet' Text
+qsqlgSQL :: Lens' QuerySQLGet Text
 qsqlgSQL = lens _qsqlgSQL (\ s a -> s{_qsqlgSQL = a})
 
-instance GoogleRequest QuerySQLGet' where
-        type Rs QuerySQLGet' = SQLresponse
-        requestClient QuerySQLGet'{..}
+instance GoogleRequest QuerySQLGet where
+        type Rs QuerySQLGet = SQLresponse
+        requestClient QuerySQLGet{..}
           = go (Just _qsqlgSQL) _qsqlgTyped _qsqlgHdrs
               (Just AltJSON)
               fusionTablesService
@@ -110,10 +110,10 @@ instance GoogleRequest QuerySQLGet' where
                   = buildClient (Proxy :: Proxy QuerySQLGetResource)
                       mempty
 
-instance GoogleRequest (MediaDownload QuerySQLGet')
+instance GoogleRequest (MediaDownload QuerySQLGet)
          where
-        type Rs (MediaDownload QuerySQLGet') = Stream
-        requestClient (MediaDownload QuerySQLGet'{..})
+        type Rs (MediaDownload QuerySQLGet) = Stream
+        requestClient (MediaDownload QuerySQLGet{..})
           = go (Just _qsqlgSQL) _qsqlgTyped _qsqlgHdrs
               (Just AltMedia)
               fusionTablesService

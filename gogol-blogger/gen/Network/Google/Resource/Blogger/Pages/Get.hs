@@ -29,20 +29,20 @@ module Network.Google.Resource.Blogger.Pages.Get
       PagesGetResource
 
     -- * Creating a Request
-    , pagesGet'
-    , PagesGet'
+    , pagesGet
+    , PagesGet
 
     -- * Request Lenses
-    , pggBlogId
-    , pggPageId
-    , pggView
+    , pgBlogId
+    , pgPageId
+    , pgView
     ) where
 
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.pages.get@ method which the
--- 'PagesGet'' request conforms to.
+-- 'PagesGet' request conforms to.
 type PagesGetResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -53,50 +53,48 @@ type PagesGetResource =
 
 -- | Gets one blog page by ID.
 --
--- /See:/ 'pagesGet'' smart constructor.
-data PagesGet' = PagesGet'
-    { _pggBlogId :: !Text
-    , _pggPageId :: !Text
-    , _pggView   :: !(Maybe PagesGetView)
+-- /See:/ 'pagesGet' smart constructor.
+data PagesGet = PagesGet
+    { _pgBlogId :: !Text
+    , _pgPageId :: !Text
+    , _pgView   :: !(Maybe PagesGetView)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PagesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PagesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pggBlogId'
+-- * 'pgBlogId'
 --
--- * 'pggPageId'
+-- * 'pgPageId'
 --
--- * 'pggView'
-pagesGet'
-    :: Text -- ^ 'pggBlogId'
-    -> Text -- ^ 'pggPageId'
-    -> PagesGet'
-pagesGet' pPggBlogId_ pPggPageId_ =
-    PagesGet'
-    { _pggBlogId = pPggBlogId_
-    , _pggPageId = pPggPageId_
-    , _pggView = Nothing
+-- * 'pgView'
+pagesGet
+    :: Text -- ^ 'pgBlogId'
+    -> Text -- ^ 'pgPageId'
+    -> PagesGet
+pagesGet pPgBlogId_ pPgPageId_ =
+    PagesGet
+    { _pgBlogId = pPgBlogId_
+    , _pgPageId = pPgPageId_
+    , _pgView = Nothing
     }
 
 -- | ID of the blog containing the page.
-pggBlogId :: Lens' PagesGet' Text
-pggBlogId
-  = lens _pggBlogId (\ s a -> s{_pggBlogId = a})
+pgBlogId :: Lens' PagesGet Text
+pgBlogId = lens _pgBlogId (\ s a -> s{_pgBlogId = a})
 
 -- | The ID of the page to get.
-pggPageId :: Lens' PagesGet' Text
-pggPageId
-  = lens _pggPageId (\ s a -> s{_pggPageId = a})
+pgPageId :: Lens' PagesGet Text
+pgPageId = lens _pgPageId (\ s a -> s{_pgPageId = a})
 
-pggView :: Lens' PagesGet' (Maybe PagesGetView)
-pggView = lens _pggView (\ s a -> s{_pggView = a})
+pgView :: Lens' PagesGet (Maybe PagesGetView)
+pgView = lens _pgView (\ s a -> s{_pgView = a})
 
-instance GoogleRequest PagesGet' where
-        type Rs PagesGet' = Page
-        requestClient PagesGet'{..}
-          = go _pggBlogId _pggPageId _pggView (Just AltJSON)
+instance GoogleRequest PagesGet where
+        type Rs PagesGet = Page
+        requestClient PagesGet{..}
+          = go _pgBlogId _pgPageId _pgView (Just AltJSON)
               bloggerService
           where go
                   = buildClient (Proxy :: Proxy PagesGetResource)

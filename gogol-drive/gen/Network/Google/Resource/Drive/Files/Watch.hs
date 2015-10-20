@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Files.Watch
       FilesWatchResource
 
     -- * Creating a Request
-    , filesWatch'
-    , FilesWatch'
+    , filesWatch
+    , FilesWatch
 
     -- * Request Lenses
     , fwPayload
@@ -45,7 +45,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.files.watch@ method which the
--- 'FilesWatch'' request conforms to.
+-- 'FilesWatch' request conforms to.
 type FilesWatchResource =
      "files" :>
        Capture "fileId" Text :>
@@ -69,8 +69,8 @@ type FilesWatchResource =
 
 -- | Subscribe to changes on a file
 --
--- /See:/ 'filesWatch'' smart constructor.
-data FilesWatch' = FilesWatch'
+-- /See:/ 'filesWatch' smart constructor.
+data FilesWatch = FilesWatch
     { _fwPayload          :: !Channel
     , _fwUpdateViewedDate :: !Bool
     , _fwProjection       :: !(Maybe FilesWatchProjection)
@@ -79,7 +79,7 @@ data FilesWatch' = FilesWatch'
     , _fwRevisionId       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FilesWatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'FilesWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -94,12 +94,12 @@ data FilesWatch' = FilesWatch'
 -- * 'fwFileId'
 --
 -- * 'fwRevisionId'
-filesWatch'
+filesWatch
     :: Channel -- ^ 'fwPayload'
     -> Text -- ^ 'fwFileId'
-    -> FilesWatch'
-filesWatch' pFwPayload_ pFwFileId_ =
-    FilesWatch'
+    -> FilesWatch
+filesWatch pFwPayload_ pFwFileId_ =
+    FilesWatch
     { _fwPayload = pFwPayload_
     , _fwUpdateViewedDate = False
     , _fwProjection = Nothing
@@ -109,42 +109,42 @@ filesWatch' pFwPayload_ pFwFileId_ =
     }
 
 -- | Multipart request metadata.
-fwPayload :: Lens' FilesWatch' Channel
+fwPayload :: Lens' FilesWatch Channel
 fwPayload
   = lens _fwPayload (\ s a -> s{_fwPayload = a})
 
 -- | Deprecated: Use files.update with modifiedDateBehavior=noChange,
 -- updateViewedDate=true and an empty request body.
-fwUpdateViewedDate :: Lens' FilesWatch' Bool
+fwUpdateViewedDate :: Lens' FilesWatch Bool
 fwUpdateViewedDate
   = lens _fwUpdateViewedDate
       (\ s a -> s{_fwUpdateViewedDate = a})
 
 -- | This parameter is deprecated and has no function.
-fwProjection :: Lens' FilesWatch' (Maybe FilesWatchProjection)
+fwProjection :: Lens' FilesWatch (Maybe FilesWatchProjection)
 fwProjection
   = lens _fwProjection (\ s a -> s{_fwProjection = a})
 
 -- | Whether the user is acknowledging the risk of downloading known malware
 -- or other abusive files.
-fwAcknowledgeAbuse :: Lens' FilesWatch' Bool
+fwAcknowledgeAbuse :: Lens' FilesWatch Bool
 fwAcknowledgeAbuse
   = lens _fwAcknowledgeAbuse
       (\ s a -> s{_fwAcknowledgeAbuse = a})
 
 -- | The ID for the file in question.
-fwFileId :: Lens' FilesWatch' Text
+fwFileId :: Lens' FilesWatch Text
 fwFileId = lens _fwFileId (\ s a -> s{_fwFileId = a})
 
 -- | Specifies the Revision ID that should be downloaded. Ignored unless
 -- alt=media is specified.
-fwRevisionId :: Lens' FilesWatch' (Maybe Text)
+fwRevisionId :: Lens' FilesWatch (Maybe Text)
 fwRevisionId
   = lens _fwRevisionId (\ s a -> s{_fwRevisionId = a})
 
-instance GoogleRequest FilesWatch' where
-        type Rs FilesWatch' = Channel
-        requestClient FilesWatch'{..}
+instance GoogleRequest FilesWatch where
+        type Rs FilesWatch = Channel
+        requestClient FilesWatch{..}
           = go _fwFileId (Just _fwUpdateViewedDate)
               _fwProjection
               (Just _fwAcknowledgeAbuse)
@@ -156,10 +156,10 @@ instance GoogleRequest FilesWatch' where
                   = buildClient (Proxy :: Proxy FilesWatchResource)
                       mempty
 
-instance GoogleRequest (MediaDownload FilesWatch')
+instance GoogleRequest (MediaDownload FilesWatch)
          where
-        type Rs (MediaDownload FilesWatch') = Stream
-        requestClient (MediaDownload FilesWatch'{..})
+        type Rs (MediaDownload FilesWatch) = Stream
+        requestClient (MediaDownload FilesWatch{..})
           = go _fwFileId (Just _fwUpdateViewedDate)
               _fwProjection
               (Just _fwAcknowledgeAbuse)

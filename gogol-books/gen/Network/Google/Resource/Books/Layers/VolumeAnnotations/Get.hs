@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
       LayersVolumeAnnotationsGetResource
 
     -- * Creating a Request
-    , layersVolumeAnnotationsGet'
-    , LayersVolumeAnnotationsGet'
+    , layersVolumeAnnotationsGet
+    , LayersVolumeAnnotationsGet
 
     -- * Request Lenses
     , lvagLocale
@@ -44,7 +44,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.layers.volumeAnnotations.get@ method which the
--- 'LayersVolumeAnnotationsGet'' request conforms to.
+-- 'LayersVolumeAnnotationsGet' request conforms to.
 type LayersVolumeAnnotationsGetResource =
      "volumes" :>
        Capture "volumeId" Text :>
@@ -59,8 +59,8 @@ type LayersVolumeAnnotationsGetResource =
 
 -- | Gets the volume annotation.
 --
--- /See:/ 'layersVolumeAnnotationsGet'' smart constructor.
-data LayersVolumeAnnotationsGet' = LayersVolumeAnnotationsGet'
+-- /See:/ 'layersVolumeAnnotationsGet' smart constructor.
+data LayersVolumeAnnotationsGet = LayersVolumeAnnotationsGet
     { _lvagLocale       :: !(Maybe Text)
     , _lvagAnnotationId :: !Text
     , _lvagVolumeId     :: !Text
@@ -68,7 +68,7 @@ data LayersVolumeAnnotationsGet' = LayersVolumeAnnotationsGet'
     , _lvagLayerId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersVolumeAnnotationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersVolumeAnnotationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,13 +81,13 @@ data LayersVolumeAnnotationsGet' = LayersVolumeAnnotationsGet'
 -- * 'lvagSource'
 --
 -- * 'lvagLayerId'
-layersVolumeAnnotationsGet'
+layersVolumeAnnotationsGet
     :: Text -- ^ 'lvagAnnotationId'
     -> Text -- ^ 'lvagVolumeId'
     -> Text -- ^ 'lvagLayerId'
-    -> LayersVolumeAnnotationsGet'
-layersVolumeAnnotationsGet' pLvagAnnotationId_ pLvagVolumeId_ pLvagLayerId_ =
-    LayersVolumeAnnotationsGet'
+    -> LayersVolumeAnnotationsGet
+layersVolumeAnnotationsGet pLvagAnnotationId_ pLvagVolumeId_ pLvagLayerId_ =
+    LayersVolumeAnnotationsGet
     { _lvagLocale = Nothing
     , _lvagAnnotationId = pLvagAnnotationId_
     , _lvagVolumeId = pLvagVolumeId_
@@ -97,36 +97,35 @@ layersVolumeAnnotationsGet' pLvagAnnotationId_ pLvagVolumeId_ pLvagLayerId_ =
 
 -- | The locale information for the data. ISO-639-1 language and ISO-3166-1
 -- country code. Ex: \'en_US\'.
-lvagLocale :: Lens' LayersVolumeAnnotationsGet' (Maybe Text)
+lvagLocale :: Lens' LayersVolumeAnnotationsGet (Maybe Text)
 lvagLocale
   = lens _lvagLocale (\ s a -> s{_lvagLocale = a})
 
 -- | The ID of the volume annotation to retrieve.
-lvagAnnotationId :: Lens' LayersVolumeAnnotationsGet' Text
+lvagAnnotationId :: Lens' LayersVolumeAnnotationsGet Text
 lvagAnnotationId
   = lens _lvagAnnotationId
       (\ s a -> s{_lvagAnnotationId = a})
 
 -- | The volume to retrieve annotations for.
-lvagVolumeId :: Lens' LayersVolumeAnnotationsGet' Text
+lvagVolumeId :: Lens' LayersVolumeAnnotationsGet Text
 lvagVolumeId
   = lens _lvagVolumeId (\ s a -> s{_lvagVolumeId = a})
 
 -- | String to identify the originator of this request.
-lvagSource :: Lens' LayersVolumeAnnotationsGet' (Maybe Text)
+lvagSource :: Lens' LayersVolumeAnnotationsGet (Maybe Text)
 lvagSource
   = lens _lvagSource (\ s a -> s{_lvagSource = a})
 
 -- | The ID for the layer to get the annotations.
-lvagLayerId :: Lens' LayersVolumeAnnotationsGet' Text
+lvagLayerId :: Lens' LayersVolumeAnnotationsGet Text
 lvagLayerId
   = lens _lvagLayerId (\ s a -> s{_lvagLayerId = a})
 
-instance GoogleRequest LayersVolumeAnnotationsGet'
+instance GoogleRequest LayersVolumeAnnotationsGet
          where
-        type Rs LayersVolumeAnnotationsGet' =
-             Volumeannotation
-        requestClient LayersVolumeAnnotationsGet'{..}
+        type Rs LayersVolumeAnnotationsGet = Volumeannotation
+        requestClient LayersVolumeAnnotationsGet{..}
           = go _lvagVolumeId _lvagLayerId _lvagAnnotationId
               _lvagLocale
               _lvagSource

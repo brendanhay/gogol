@@ -29,8 +29,8 @@ module Network.Google.Resource.Autoscaler.Autoscalers.List
       AutoscalersListResource
 
     -- * Creating a Request
-    , autoscalersList'
-    , AutoscalersList'
+    , autoscalersList
+    , AutoscalersList
 
     -- * Request Lenses
     , alProject
@@ -44,7 +44,7 @@ import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @autoscaler.autoscalers.list@ method which the
--- 'AutoscalersList'' request conforms to.
+-- 'AutoscalersList' request conforms to.
 type AutoscalersListResource =
      "projects" :>
        Capture "project" Text :>
@@ -59,8 +59,8 @@ type AutoscalersListResource =
 
 -- | Lists all Autoscaler resources in this zone.
 --
--- /See:/ 'autoscalersList'' smart constructor.
-data AutoscalersList' = AutoscalersList'
+-- /See:/ 'autoscalersList' smart constructor.
+data AutoscalersList = AutoscalersList
     { _alProject    :: !Text
     , _alZone       :: !Text
     , _alFilter     :: !(Maybe Text)
@@ -68,7 +68,7 @@ data AutoscalersList' = AutoscalersList'
     , _alMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AutoscalersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AutoscalersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,12 +81,12 @@ data AutoscalersList' = AutoscalersList'
 -- * 'alPageToken'
 --
 -- * 'alMaxResults'
-autoscalersList'
+autoscalersList
     :: Text -- ^ 'alProject'
     -> Text -- ^ 'alZone'
-    -> AutoscalersList'
-autoscalersList' pAlProject_ pAlZone_ =
-    AutoscalersList'
+    -> AutoscalersList
+autoscalersList pAlProject_ pAlZone_ =
+    AutoscalersList
     { _alProject = pAlProject_
     , _alZone = pAlZone_
     , _alFilter = Nothing
@@ -95,28 +95,28 @@ autoscalersList' pAlProject_ pAlZone_ =
     }
 
 -- | Project ID of Autoscaler resource.
-alProject :: Lens' AutoscalersList' Text
+alProject :: Lens' AutoscalersList Text
 alProject
   = lens _alProject (\ s a -> s{_alProject = a})
 
 -- | Zone name of Autoscaler resource.
-alZone :: Lens' AutoscalersList' Text
+alZone :: Lens' AutoscalersList Text
 alZone = lens _alZone (\ s a -> s{_alZone = a})
 
-alFilter :: Lens' AutoscalersList' (Maybe Text)
+alFilter :: Lens' AutoscalersList (Maybe Text)
 alFilter = lens _alFilter (\ s a -> s{_alFilter = a})
 
-alPageToken :: Lens' AutoscalersList' (Maybe Text)
+alPageToken :: Lens' AutoscalersList (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
-alMaxResults :: Lens' AutoscalersList' Word32
+alMaxResults :: Lens' AutoscalersList Word32
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
-instance GoogleRequest AutoscalersList' where
-        type Rs AutoscalersList' = AutoscalerListResponse
-        requestClient AutoscalersList'{..}
+instance GoogleRequest AutoscalersList where
+        type Rs AutoscalersList = AutoscalerListResponse
+        requestClient AutoscalersList{..}
           = go _alProject _alZone _alFilter _alPageToken
               (Just _alMaxResults)
               (Just AltJSON)

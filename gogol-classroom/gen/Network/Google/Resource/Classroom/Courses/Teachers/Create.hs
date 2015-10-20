@@ -37,8 +37,8 @@ module Network.Google.Resource.Classroom.Courses.Teachers.Create
       CoursesTeachersCreateResource
 
     -- * Creating a Request
-    , coursesTeachersCreate'
-    , CoursesTeachersCreate'
+    , coursesTeachersCreate
+    , CoursesTeachersCreate
 
     -- * Request Lenses
     , ctcXgafv
@@ -56,7 +56,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.teachers.create@ method which the
--- 'CoursesTeachersCreate'' request conforms to.
+-- 'CoursesTeachersCreate' request conforms to.
 type CoursesTeachersCreateResource =
      "v1" :>
        "courses" :>
@@ -82,8 +82,8 @@ type CoursesTeachersCreateResource =
 -- \`ALREADY_EXISTS\` if the user is already a teacher or student in the
 -- course.
 --
--- /See:/ 'coursesTeachersCreate'' smart constructor.
-data CoursesTeachersCreate' = CoursesTeachersCreate'
+-- /See:/ 'coursesTeachersCreate' smart constructor.
+data CoursesTeachersCreate = CoursesTeachersCreate
     { _ctcXgafv          :: !(Maybe Text)
     , _ctcUploadProtocol :: !(Maybe Text)
     , _ctcPp             :: !Bool
@@ -95,7 +95,7 @@ data CoursesTeachersCreate' = CoursesTeachersCreate'
     , _ctcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CoursesTeachersCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CoursesTeachersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -116,12 +116,12 @@ data CoursesTeachersCreate' = CoursesTeachersCreate'
 -- * 'ctcBearerToken'
 --
 -- * 'ctcCallback'
-coursesTeachersCreate'
+coursesTeachersCreate
     :: Text -- ^ 'ctcCourseId'
     -> Teacher -- ^ 'ctcPayload'
-    -> CoursesTeachersCreate'
-coursesTeachersCreate' pCtcCourseId_ pCtcPayload_ =
-    CoursesTeachersCreate'
+    -> CoursesTeachersCreate
+coursesTeachersCreate pCtcCourseId_ pCtcPayload_ =
+    CoursesTeachersCreate
     { _ctcXgafv = Nothing
     , _ctcUploadProtocol = Nothing
     , _ctcPp = True
@@ -134,56 +134,56 @@ coursesTeachersCreate' pCtcCourseId_ pCtcPayload_ =
     }
 
 -- | V1 error format.
-ctcXgafv :: Lens' CoursesTeachersCreate' (Maybe Text)
+ctcXgafv :: Lens' CoursesTeachersCreate (Maybe Text)
 ctcXgafv = lens _ctcXgafv (\ s a -> s{_ctcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ctcUploadProtocol :: Lens' CoursesTeachersCreate' (Maybe Text)
+ctcUploadProtocol :: Lens' CoursesTeachersCreate (Maybe Text)
 ctcUploadProtocol
   = lens _ctcUploadProtocol
       (\ s a -> s{_ctcUploadProtocol = a})
 
 -- | Pretty-print response.
-ctcPp :: Lens' CoursesTeachersCreate' Bool
+ctcPp :: Lens' CoursesTeachersCreate Bool
 ctcPp = lens _ctcPp (\ s a -> s{_ctcPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
-ctcCourseId :: Lens' CoursesTeachersCreate' Text
+ctcCourseId :: Lens' CoursesTeachersCreate Text
 ctcCourseId
   = lens _ctcCourseId (\ s a -> s{_ctcCourseId = a})
 
 -- | OAuth access token.
-ctcAccessToken :: Lens' CoursesTeachersCreate' (Maybe Text)
+ctcAccessToken :: Lens' CoursesTeachersCreate (Maybe Text)
 ctcAccessToken
   = lens _ctcAccessToken
       (\ s a -> s{_ctcAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ctcUploadType :: Lens' CoursesTeachersCreate' (Maybe Text)
+ctcUploadType :: Lens' CoursesTeachersCreate (Maybe Text)
 ctcUploadType
   = lens _ctcUploadType
       (\ s a -> s{_ctcUploadType = a})
 
 -- | Multipart request metadata.
-ctcPayload :: Lens' CoursesTeachersCreate' Teacher
+ctcPayload :: Lens' CoursesTeachersCreate Teacher
 ctcPayload
   = lens _ctcPayload (\ s a -> s{_ctcPayload = a})
 
 -- | OAuth bearer token.
-ctcBearerToken :: Lens' CoursesTeachersCreate' (Maybe Text)
+ctcBearerToken :: Lens' CoursesTeachersCreate (Maybe Text)
 ctcBearerToken
   = lens _ctcBearerToken
       (\ s a -> s{_ctcBearerToken = a})
 
 -- | JSONP
-ctcCallback :: Lens' CoursesTeachersCreate' (Maybe Text)
+ctcCallback :: Lens' CoursesTeachersCreate (Maybe Text)
 ctcCallback
   = lens _ctcCallback (\ s a -> s{_ctcCallback = a})
 
-instance GoogleRequest CoursesTeachersCreate' where
-        type Rs CoursesTeachersCreate' = Teacher
-        requestClient CoursesTeachersCreate'{..}
+instance GoogleRequest CoursesTeachersCreate where
+        type Rs CoursesTeachersCreate = Teacher
+        requestClient CoursesTeachersCreate{..}
           = go _ctcCourseId _ctcXgafv _ctcUploadProtocol
               (Just _ctcPp)
               _ctcAccessToken

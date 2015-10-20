@@ -30,8 +30,8 @@ module Network.Google.Resource.SQL.SSLCerts.Delete
       SSLCertsDeleteResource
 
     -- * Creating a Request
-    , sslCertsDelete'
-    , SSLCertsDelete'
+    , sslCertsDelete
+    , SSLCertsDelete
 
     -- * Request Lenses
     , scdProject
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.sslCerts.delete@ method which the
--- 'SSLCertsDelete'' request conforms to.
+-- 'SSLCertsDelete' request conforms to.
 type SSLCertsDeleteResource =
      "projects" :>
        Capture "project" Text :>
@@ -56,14 +56,14 @@ type SSLCertsDeleteResource =
 -- | Deletes the SSL certificate. The change will not take effect until the
 -- instance is restarted.
 --
--- /See:/ 'sslCertsDelete'' smart constructor.
-data SSLCertsDelete' = SSLCertsDelete'
+-- /See:/ 'sslCertsDelete' smart constructor.
+data SSLCertsDelete = SSLCertsDelete
     { _scdProject         :: !Text
     , _scdSha1Fingerprint :: !Text
     , _scdInstance        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SSLCertsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'SSLCertsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,37 +72,37 @@ data SSLCertsDelete' = SSLCertsDelete'
 -- * 'scdSha1Fingerprint'
 --
 -- * 'scdInstance'
-sslCertsDelete'
+sslCertsDelete
     :: Text -- ^ 'scdProject'
     -> Text -- ^ 'scdSha1Fingerprint'
     -> Text -- ^ 'scdInstance'
-    -> SSLCertsDelete'
-sslCertsDelete' pScdProject_ pScdSha1Fingerprint_ pScdInstance_ =
-    SSLCertsDelete'
+    -> SSLCertsDelete
+sslCertsDelete pScdProject_ pScdSha1Fingerprint_ pScdInstance_ =
+    SSLCertsDelete
     { _scdProject = pScdProject_
     , _scdSha1Fingerprint = pScdSha1Fingerprint_
     , _scdInstance = pScdInstance_
     }
 
 -- | Project ID of the project that contains the instance to be deleted.
-scdProject :: Lens' SSLCertsDelete' Text
+scdProject :: Lens' SSLCertsDelete Text
 scdProject
   = lens _scdProject (\ s a -> s{_scdProject = a})
 
 -- | Sha1 FingerPrint.
-scdSha1Fingerprint :: Lens' SSLCertsDelete' Text
+scdSha1Fingerprint :: Lens' SSLCertsDelete Text
 scdSha1Fingerprint
   = lens _scdSha1Fingerprint
       (\ s a -> s{_scdSha1Fingerprint = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-scdInstance :: Lens' SSLCertsDelete' Text
+scdInstance :: Lens' SSLCertsDelete Text
 scdInstance
   = lens _scdInstance (\ s a -> s{_scdInstance = a})
 
-instance GoogleRequest SSLCertsDelete' where
-        type Rs SSLCertsDelete' = Operation
-        requestClient SSLCertsDelete'{..}
+instance GoogleRequest SSLCertsDelete where
+        type Rs SSLCertsDelete = Operation
+        requestClient SSLCertsDelete{..}
           = go _scdProject _scdInstance _scdSha1Fingerprint
               (Just AltJSON)
               sQLAdminService

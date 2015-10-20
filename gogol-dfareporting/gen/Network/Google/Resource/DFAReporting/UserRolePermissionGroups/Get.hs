@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.UserRolePermissionGroups.Get
       UserRolePermissionGroupsGetResource
 
     -- * Creating a Request
-    , userRolePermissionGroupsGet'
-    , UserRolePermissionGroupsGet'
+    , userRolePermissionGroupsGet
+    , UserRolePermissionGroupsGet
 
     -- * Request Lenses
     , urpggProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.userRolePermissionGroups.get@ method which the
--- 'UserRolePermissionGroupsGet'' request conforms to.
+-- 'UserRolePermissionGroupsGet' request conforms to.
 type UserRolePermissionGroupsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,44 +52,44 @@ type UserRolePermissionGroupsGetResource =
 
 -- | Gets one user role permission group by ID.
 --
--- /See:/ 'userRolePermissionGroupsGet'' smart constructor.
-data UserRolePermissionGroupsGet' = UserRolePermissionGroupsGet'
+-- /See:/ 'userRolePermissionGroupsGet' smart constructor.
+data UserRolePermissionGroupsGet = UserRolePermissionGroupsGet
     { _urpggProFileId :: !Int64
     , _urpggId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserRolePermissionGroupsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UserRolePermissionGroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'urpggProFileId'
 --
 -- * 'urpggId'
-userRolePermissionGroupsGet'
+userRolePermissionGroupsGet
     :: Int64 -- ^ 'urpggProFileId'
     -> Int64 -- ^ 'urpggId'
-    -> UserRolePermissionGroupsGet'
-userRolePermissionGroupsGet' pUrpggProFileId_ pUrpggId_ =
-    UserRolePermissionGroupsGet'
+    -> UserRolePermissionGroupsGet
+userRolePermissionGroupsGet pUrpggProFileId_ pUrpggId_ =
+    UserRolePermissionGroupsGet
     { _urpggProFileId = pUrpggProFileId_
     , _urpggId = pUrpggId_
     }
 
 -- | User profile ID associated with this request.
-urpggProFileId :: Lens' UserRolePermissionGroupsGet' Int64
+urpggProFileId :: Lens' UserRolePermissionGroupsGet Int64
 urpggProFileId
   = lens _urpggProFileId
       (\ s a -> s{_urpggProFileId = a})
 
 -- | User role permission group ID.
-urpggId :: Lens' UserRolePermissionGroupsGet' Int64
+urpggId :: Lens' UserRolePermissionGroupsGet Int64
 urpggId = lens _urpggId (\ s a -> s{_urpggId = a})
 
-instance GoogleRequest UserRolePermissionGroupsGet'
+instance GoogleRequest UserRolePermissionGroupsGet
          where
-        type Rs UserRolePermissionGroupsGet' =
+        type Rs UserRolePermissionGroupsGet =
              UserRolePermissionGroup
-        requestClient UserRolePermissionGroupsGet'{..}
+        requestClient UserRolePermissionGroupsGet{..}
           = go _urpggProFileId _urpggId (Just AltJSON)
               dFAReportingService
           where go

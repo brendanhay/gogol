@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.Watermarks.Unset
       WatermarksUnsetResource
 
     -- * Creating a Request
-    , watermarksUnset'
-    , WatermarksUnset'
+    , watermarksUnset
+    , WatermarksUnset
 
     -- * Request Lenses
     , wuChannelId
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.watermarks.unset@ method which the
--- 'WatermarksUnset'' request conforms to.
+-- 'WatermarksUnset' request conforms to.
 type WatermarksUnsetResource =
      "watermarks" :>
        "unset" :>
@@ -51,31 +51,31 @@ type WatermarksUnsetResource =
 
 -- | Deletes a channel\'s watermark image.
 --
--- /See:/ 'watermarksUnset'' smart constructor.
-data WatermarksUnset' = WatermarksUnset'
+-- /See:/ 'watermarksUnset' smart constructor.
+data WatermarksUnset = WatermarksUnset
     { _wuChannelId              :: !Text
     , _wuOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'WatermarksUnset'' with the minimum fields required to make a request.
+-- | Creates a value of 'WatermarksUnset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'wuChannelId'
 --
 -- * 'wuOnBehalfOfContentOwner'
-watermarksUnset'
+watermarksUnset
     :: Text -- ^ 'wuChannelId'
-    -> WatermarksUnset'
-watermarksUnset' pWuChannelId_ =
-    WatermarksUnset'
+    -> WatermarksUnset
+watermarksUnset pWuChannelId_ =
+    WatermarksUnset
     { _wuChannelId = pWuChannelId_
     , _wuOnBehalfOfContentOwner = Nothing
     }
 
 -- | The channelId parameter specifies the YouTube channel ID for which the
 -- watermark is being unset.
-wuChannelId :: Lens' WatermarksUnset' Text
+wuChannelId :: Lens' WatermarksUnset Text
 wuChannelId
   = lens _wuChannelId (\ s a -> s{_wuChannelId = a})
 
@@ -89,14 +89,14 @@ wuChannelId
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-wuOnBehalfOfContentOwner :: Lens' WatermarksUnset' (Maybe Text)
+wuOnBehalfOfContentOwner :: Lens' WatermarksUnset (Maybe Text)
 wuOnBehalfOfContentOwner
   = lens _wuOnBehalfOfContentOwner
       (\ s a -> s{_wuOnBehalfOfContentOwner = a})
 
-instance GoogleRequest WatermarksUnset' where
-        type Rs WatermarksUnset' = ()
-        requestClient WatermarksUnset'{..}
+instance GoogleRequest WatermarksUnset where
+        type Rs WatermarksUnset = ()
+        requestClient WatermarksUnset{..}
           = go (Just _wuChannelId) _wuOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeService

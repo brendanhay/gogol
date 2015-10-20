@@ -29,22 +29,22 @@ module Network.Google.Resource.DFAReporting.Cities.List
       CitiesListResource
 
     -- * Creating a Request
-    , citiesList'
-    , CitiesList'
+    , citiesList
+    , CitiesList
 
     -- * Request Lenses
-    , cRegionDartIds
-    , cProFileId
-    , cNamePrefix
-    , cCountryDartIds
-    , cDartIds
+    , citRegionDartIds
+    , citProFileId
+    , citNamePrefix
+    , citCountryDartIds
+    , citDartIds
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.cities.list@ method which the
--- 'CitiesList'' request conforms to.
+-- 'CitiesList' request conforms to.
 type CitiesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -58,80 +58,81 @@ type CitiesListResource =
 
 -- | Retrieves a list of cities, possibly filtered.
 --
--- /See:/ 'citiesList'' smart constructor.
-data CitiesList' = CitiesList'
-    { _cRegionDartIds  :: !(Maybe [Int64])
-    , _cProFileId      :: !Int64
-    , _cNamePrefix     :: !(Maybe Text)
-    , _cCountryDartIds :: !(Maybe [Int64])
-    , _cDartIds        :: !(Maybe [Int64])
+-- /See:/ 'citiesList' smart constructor.
+data CitiesList = CitiesList
+    { _citRegionDartIds  :: !(Maybe [Int64])
+    , _citProFileId      :: !Int64
+    , _citNamePrefix     :: !(Maybe Text)
+    , _citCountryDartIds :: !(Maybe [Int64])
+    , _citDartIds        :: !(Maybe [Int64])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CitiesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CitiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cRegionDartIds'
+-- * 'citRegionDartIds'
 --
--- * 'cProFileId'
+-- * 'citProFileId'
 --
--- * 'cNamePrefix'
+-- * 'citNamePrefix'
 --
--- * 'cCountryDartIds'
+-- * 'citCountryDartIds'
 --
--- * 'cDartIds'
-citiesList'
-    :: Int64 -- ^ 'cProFileId'
-    -> CitiesList'
-citiesList' pCProFileId_ =
-    CitiesList'
-    { _cRegionDartIds = Nothing
-    , _cProFileId = pCProFileId_
-    , _cNamePrefix = Nothing
-    , _cCountryDartIds = Nothing
-    , _cDartIds = Nothing
+-- * 'citDartIds'
+citiesList
+    :: Int64 -- ^ 'citProFileId'
+    -> CitiesList
+citiesList pCitProFileId_ =
+    CitiesList
+    { _citRegionDartIds = Nothing
+    , _citProFileId = pCitProFileId_
+    , _citNamePrefix = Nothing
+    , _citCountryDartIds = Nothing
+    , _citDartIds = Nothing
     }
 
 -- | Select only cities from these regions.
-cRegionDartIds :: Lens' CitiesList' [Int64]
-cRegionDartIds
-  = lens _cRegionDartIds
-      (\ s a -> s{_cRegionDartIds = a})
+citRegionDartIds :: Lens' CitiesList [Int64]
+citRegionDartIds
+  = lens _citRegionDartIds
+      (\ s a -> s{_citRegionDartIds = a})
       . _Default
       . _Coerce
 
 -- | User profile ID associated with this request.
-cProFileId :: Lens' CitiesList' Int64
-cProFileId
-  = lens _cProFileId (\ s a -> s{_cProFileId = a})
+citProFileId :: Lens' CitiesList Int64
+citProFileId
+  = lens _citProFileId (\ s a -> s{_citProFileId = a})
 
 -- | Select only cities with names starting with this prefix.
-cNamePrefix :: Lens' CitiesList' (Maybe Text)
-cNamePrefix
-  = lens _cNamePrefix (\ s a -> s{_cNamePrefix = a})
+citNamePrefix :: Lens' CitiesList (Maybe Text)
+citNamePrefix
+  = lens _citNamePrefix
+      (\ s a -> s{_citNamePrefix = a})
 
 -- | Select only cities from these countries.
-cCountryDartIds :: Lens' CitiesList' [Int64]
-cCountryDartIds
-  = lens _cCountryDartIds
-      (\ s a -> s{_cCountryDartIds = a})
+citCountryDartIds :: Lens' CitiesList [Int64]
+citCountryDartIds
+  = lens _citCountryDartIds
+      (\ s a -> s{_citCountryDartIds = a})
       . _Default
       . _Coerce
 
 -- | Select only cities with these DART IDs.
-cDartIds :: Lens' CitiesList' [Int64]
-cDartIds
-  = lens _cDartIds (\ s a -> s{_cDartIds = a}) .
+citDartIds :: Lens' CitiesList [Int64]
+citDartIds
+  = lens _citDartIds (\ s a -> s{_citDartIds = a}) .
       _Default
       . _Coerce
 
-instance GoogleRequest CitiesList' where
-        type Rs CitiesList' = CitiesListResponse
-        requestClient CitiesList'{..}
-          = go _cProFileId (_cRegionDartIds ^. _Default)
-              _cNamePrefix
-              (_cCountryDartIds ^. _Default)
-              (_cDartIds ^. _Default)
+instance GoogleRequest CitiesList where
+        type Rs CitiesList = CitiesListResponse
+        requestClient CitiesList{..}
+          = go _citProFileId (_citRegionDartIds ^. _Default)
+              _citNamePrefix
+              (_citCountryDartIds ^. _Default)
+              (_citDartIds ^. _Default)
               (Just AltJSON)
               dFAReportingService
           where go

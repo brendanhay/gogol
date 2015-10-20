@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.AdClients.List
       AccountsAdClientsListResource
 
     -- * Creating a Request
-    , accountsAdClientsList'
-    , AccountsAdClientsList'
+    , accountsAdClientsList
+    , AccountsAdClientsList
 
     -- * Request Lenses
     , aaclAccountId
@@ -42,7 +42,7 @@ import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangeseller.accounts.adclients.list@ method which the
--- 'AccountsAdClientsList'' request conforms to.
+-- 'AccountsAdClientsList' request conforms to.
 type AccountsAdClientsListResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -53,14 +53,14 @@ type AccountsAdClientsListResource =
 
 -- | List all ad clients in this Ad Exchange account.
 --
--- /See:/ 'accountsAdClientsList'' smart constructor.
-data AccountsAdClientsList' = AccountsAdClientsList'
+-- /See:/ 'accountsAdClientsList' smart constructor.
+data AccountsAdClientsList = AccountsAdClientsList
     { _aaclAccountId  :: !Text
     , _aaclPageToken  :: !(Maybe Text)
     , _aaclMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsAdClientsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsAdClientsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,18 +69,18 @@ data AccountsAdClientsList' = AccountsAdClientsList'
 -- * 'aaclPageToken'
 --
 -- * 'aaclMaxResults'
-accountsAdClientsList'
+accountsAdClientsList
     :: Text -- ^ 'aaclAccountId'
-    -> AccountsAdClientsList'
-accountsAdClientsList' pAaclAccountId_ =
-    AccountsAdClientsList'
+    -> AccountsAdClientsList
+accountsAdClientsList pAaclAccountId_ =
+    AccountsAdClientsList
     { _aaclAccountId = pAaclAccountId_
     , _aaclPageToken = Nothing
     , _aaclMaxResults = Nothing
     }
 
 -- | Account to which the ad client belongs.
-aaclAccountId :: Lens' AccountsAdClientsList' Text
+aaclAccountId :: Lens' AccountsAdClientsList Text
 aaclAccountId
   = lens _aaclAccountId
       (\ s a -> s{_aaclAccountId = a})
@@ -88,21 +88,21 @@ aaclAccountId
 -- | A continuation token, used to page through ad clients. To retrieve the
 -- next page, set this parameter to the value of \"nextPageToken\" from the
 -- previous response.
-aaclPageToken :: Lens' AccountsAdClientsList' (Maybe Text)
+aaclPageToken :: Lens' AccountsAdClientsList (Maybe Text)
 aaclPageToken
   = lens _aaclPageToken
       (\ s a -> s{_aaclPageToken = a})
 
 -- | The maximum number of ad clients to include in the response, used for
 -- paging.
-aaclMaxResults :: Lens' AccountsAdClientsList' (Maybe Word32)
+aaclMaxResults :: Lens' AccountsAdClientsList (Maybe Word32)
 aaclMaxResults
   = lens _aaclMaxResults
       (\ s a -> s{_aaclMaxResults = a})
 
-instance GoogleRequest AccountsAdClientsList' where
-        type Rs AccountsAdClientsList' = AdClients
-        requestClient AccountsAdClientsList'{..}
+instance GoogleRequest AccountsAdClientsList where
+        type Rs AccountsAdClientsList = AdClients
+        requestClient AccountsAdClientsList{..}
           = go _aaclAccountId _aaclPageToken _aaclMaxResults
               (Just AltJSON)
               adExchangeSellerService

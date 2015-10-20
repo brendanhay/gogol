@@ -27,8 +27,8 @@ module Network.Google.Method.OAuth2.GetCertForOpenIdConnect
       GetCertForOpenIdConnectMethod
 
     -- * Creating a Request
-    , getCertForOpenIdConnect'
-    , GetCertForOpenIdConnect'
+    , getCertForOpenIdConnect
+    , GetCertForOpenIdConnect
 
     ) where
 
@@ -36,7 +36,7 @@ import           Network.Google.OAuth2.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @oauth2.getCertForOpenIdConnect@ method which the
--- 'GetCertForOpenIdConnect'' request conforms to.
+-- 'GetCertForOpenIdConnect' request conforms to.
 type GetCertForOpenIdConnectMethod =
      "oauth2" :>
        "v2" :>
@@ -44,20 +44,20 @@ type GetCertForOpenIdConnectMethod =
            QueryParam "alt" AltJSON :> Get '[JSON] JWK
 
 --
--- /See:/ 'getCertForOpenIdConnect'' smart constructor.
-data GetCertForOpenIdConnect' =
-    GetCertForOpenIdConnect'
+-- /See:/ 'getCertForOpenIdConnect' smart constructor.
+data GetCertForOpenIdConnect =
+    GetCertForOpenIdConnect
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GetCertForOpenIdConnect'' with the minimum fields required to make a request.
+-- | Creates a value of 'GetCertForOpenIdConnect' with the minimum fields required to make a request.
 --
-getCertForOpenIdConnect'
-    :: GetCertForOpenIdConnect'
-getCertForOpenIdConnect' = GetCertForOpenIdConnect'
+getCertForOpenIdConnect
+    :: GetCertForOpenIdConnect
+getCertForOpenIdConnect = GetCertForOpenIdConnect
 
-instance GoogleRequest GetCertForOpenIdConnect' where
-        type Rs GetCertForOpenIdConnect' = JWK
-        requestClient GetCertForOpenIdConnect'{}
+instance GoogleRequest GetCertForOpenIdConnect where
+        type Rs GetCertForOpenIdConnect = JWK
+        requestClient GetCertForOpenIdConnect{}
           = go (Just AltJSON) oAuth2Service
           where go
                   = buildClient

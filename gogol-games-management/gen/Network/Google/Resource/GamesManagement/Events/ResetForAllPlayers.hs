@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Events.ResetForAllPlayers
       EventsResetForAllPlayersResource
 
     -- * Creating a Request
-    , eventsResetForAllPlayers'
-    , EventsResetForAllPlayers'
+    , eventsResetForAllPlayers
+    , EventsResetForAllPlayers
 
     -- * Request Lenses
     , erfapEventId
@@ -42,7 +42,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.events.resetForAllPlayers@ method which the
--- 'EventsResetForAllPlayers'' request conforms to.
+-- 'EventsResetForAllPlayers' request conforms to.
 type EventsResetForAllPlayersResource =
      "events" :>
        Capture "eventId" Text :>
@@ -53,33 +53,32 @@ type EventsResetForAllPlayersResource =
 -- available to user accounts for your developer console. Only draft events
 -- can be reset. All quests that use the event will also be reset.
 --
--- /See:/ 'eventsResetForAllPlayers'' smart constructor.
-newtype EventsResetForAllPlayers' = EventsResetForAllPlayers'
+-- /See:/ 'eventsResetForAllPlayers' smart constructor.
+newtype EventsResetForAllPlayers = EventsResetForAllPlayers
     { _erfapEventId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventsResetForAllPlayers'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventsResetForAllPlayers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'erfapEventId'
-eventsResetForAllPlayers'
+eventsResetForAllPlayers
     :: Text -- ^ 'erfapEventId'
-    -> EventsResetForAllPlayers'
-eventsResetForAllPlayers' pErfapEventId_ =
-    EventsResetForAllPlayers'
+    -> EventsResetForAllPlayers
+eventsResetForAllPlayers pErfapEventId_ =
+    EventsResetForAllPlayers
     { _erfapEventId = pErfapEventId_
     }
 
 -- | The ID of the event.
-erfapEventId :: Lens' EventsResetForAllPlayers' Text
+erfapEventId :: Lens' EventsResetForAllPlayers Text
 erfapEventId
   = lens _erfapEventId (\ s a -> s{_erfapEventId = a})
 
-instance GoogleRequest EventsResetForAllPlayers'
-         where
-        type Rs EventsResetForAllPlayers' = ()
-        requestClient EventsResetForAllPlayers'{..}
+instance GoogleRequest EventsResetForAllPlayers where
+        type Rs EventsResetForAllPlayers = ()
+        requestClient EventsResetForAllPlayers{..}
           = go _erfapEventId (Just AltJSON)
               gamesManagementService
           where go

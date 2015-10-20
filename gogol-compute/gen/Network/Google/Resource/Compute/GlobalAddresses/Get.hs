@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.GlobalAddresses.Get
       GlobalAddressesGetResource
 
     -- * Creating a Request
-    , globalAddressesGet'
-    , GlobalAddressesGet'
+    , globalAddressesGet
+    , GlobalAddressesGet
 
     -- * Request Lenses
     , gagProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.globalAddresses.get@ method which the
--- 'GlobalAddressesGet'' request conforms to.
+-- 'GlobalAddressesGet' request conforms to.
 type GlobalAddressesGetResource =
      Capture "project" Text :>
        "global" :>
@@ -51,42 +51,42 @@ type GlobalAddressesGetResource =
 
 -- | Returns the specified address resource.
 --
--- /See:/ 'globalAddressesGet'' smart constructor.
-data GlobalAddressesGet' = GlobalAddressesGet'
+-- /See:/ 'globalAddressesGet' smart constructor.
+data GlobalAddressesGet = GlobalAddressesGet
     { _gagProject :: !Text
     , _gagAddress :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GlobalAddressesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'GlobalAddressesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gagProject'
 --
 -- * 'gagAddress'
-globalAddressesGet'
+globalAddressesGet
     :: Text -- ^ 'gagProject'
     -> Text -- ^ 'gagAddress'
-    -> GlobalAddressesGet'
-globalAddressesGet' pGagProject_ pGagAddress_ =
-    GlobalAddressesGet'
+    -> GlobalAddressesGet
+globalAddressesGet pGagProject_ pGagAddress_ =
+    GlobalAddressesGet
     { _gagProject = pGagProject_
     , _gagAddress = pGagAddress_
     }
 
 -- | Project ID for this request.
-gagProject :: Lens' GlobalAddressesGet' Text
+gagProject :: Lens' GlobalAddressesGet Text
 gagProject
   = lens _gagProject (\ s a -> s{_gagProject = a})
 
 -- | Name of the address resource to return.
-gagAddress :: Lens' GlobalAddressesGet' Text
+gagAddress :: Lens' GlobalAddressesGet Text
 gagAddress
   = lens _gagAddress (\ s a -> s{_gagAddress = a})
 
-instance GoogleRequest GlobalAddressesGet' where
-        type Rs GlobalAddressesGet' = Address
-        requestClient GlobalAddressesGet'{..}
+instance GoogleRequest GlobalAddressesGet where
+        type Rs GlobalAddressesGet = Address
+        requestClient GlobalAddressesGet{..}
           = go _gagProject _gagAddress (Just AltJSON)
               computeService
           where go

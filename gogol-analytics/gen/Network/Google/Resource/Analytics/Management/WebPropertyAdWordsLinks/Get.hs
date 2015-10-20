@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Get
       ManagementWebPropertyAdWordsLinksGetResource
 
     -- * Creating a Request
-    , managementWebPropertyAdWordsLinksGet'
-    , ManagementWebPropertyAdWordsLinksGet'
+    , managementWebPropertyAdWordsLinksGet
+    , ManagementWebPropertyAdWordsLinksGet
 
     -- * Request Lenses
     , mwpawlgWebPropertyId
@@ -42,7 +42,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webPropertyAdWordsLinks.get@ method which the
--- 'ManagementWebPropertyAdWordsLinksGet'' request conforms to.
+-- 'ManagementWebPropertyAdWordsLinksGet' request conforms to.
 type ManagementWebPropertyAdWordsLinksGetResource =
      "management" :>
        "accounts" :>
@@ -56,14 +56,14 @@ type ManagementWebPropertyAdWordsLinksGetResource =
 
 -- | Returns a web property-AdWords link to which the user has access.
 --
--- /See:/ 'managementWebPropertyAdWordsLinksGet'' smart constructor.
-data ManagementWebPropertyAdWordsLinksGet' = ManagementWebPropertyAdWordsLinksGet'
+-- /See:/ 'managementWebPropertyAdWordsLinksGet' smart constructor.
+data ManagementWebPropertyAdWordsLinksGet = ManagementWebPropertyAdWordsLinksGet
     { _mwpawlgWebPropertyId            :: !Text
     , _mwpawlgAccountId                :: !Text
     , _mwpawlgWebPropertyAdWordsLinkId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementWebPropertyAdWordsLinksGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementWebPropertyAdWordsLinksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,42 +72,42 @@ data ManagementWebPropertyAdWordsLinksGet' = ManagementWebPropertyAdWordsLinksGe
 -- * 'mwpawlgAccountId'
 --
 -- * 'mwpawlgWebPropertyAdWordsLinkId'
-managementWebPropertyAdWordsLinksGet'
+managementWebPropertyAdWordsLinksGet
     :: Text -- ^ 'mwpawlgWebPropertyId'
     -> Text -- ^ 'mwpawlgAccountId'
     -> Text -- ^ 'mwpawlgWebPropertyAdWordsLinkId'
-    -> ManagementWebPropertyAdWordsLinksGet'
-managementWebPropertyAdWordsLinksGet' pMwpawlgWebPropertyId_ pMwpawlgAccountId_ pMwpawlgWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksGet'
+    -> ManagementWebPropertyAdWordsLinksGet
+managementWebPropertyAdWordsLinksGet pMwpawlgWebPropertyId_ pMwpawlgAccountId_ pMwpawlgWebPropertyAdWordsLinkId_ =
+    ManagementWebPropertyAdWordsLinksGet
     { _mwpawlgWebPropertyId = pMwpawlgWebPropertyId_
     , _mwpawlgAccountId = pMwpawlgAccountId_
     , _mwpawlgWebPropertyAdWordsLinkId = pMwpawlgWebPropertyAdWordsLinkId_
     }
 
 -- | Web property ID to retrieve the AdWords link for.
-mwpawlgWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksGet' Text
+mwpawlgWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksGet Text
 mwpawlgWebPropertyId
   = lens _mwpawlgWebPropertyId
       (\ s a -> s{_mwpawlgWebPropertyId = a})
 
 -- | ID of the account which the given web property belongs to.
-mwpawlgAccountId :: Lens' ManagementWebPropertyAdWordsLinksGet' Text
+mwpawlgAccountId :: Lens' ManagementWebPropertyAdWordsLinksGet Text
 mwpawlgAccountId
   = lens _mwpawlgAccountId
       (\ s a -> s{_mwpawlgAccountId = a})
 
 -- | Web property-AdWords link ID.
-mwpawlgWebPropertyAdWordsLinkId :: Lens' ManagementWebPropertyAdWordsLinksGet' Text
+mwpawlgWebPropertyAdWordsLinkId :: Lens' ManagementWebPropertyAdWordsLinksGet Text
 mwpawlgWebPropertyAdWordsLinkId
   = lens _mwpawlgWebPropertyAdWordsLinkId
       (\ s a -> s{_mwpawlgWebPropertyAdWordsLinkId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyAdWordsLinksGet' where
-        type Rs ManagementWebPropertyAdWordsLinksGet' =
+         ManagementWebPropertyAdWordsLinksGet where
+        type Rs ManagementWebPropertyAdWordsLinksGet =
              EntityAdWordsLink
         requestClient
-          ManagementWebPropertyAdWordsLinksGet'{..}
+          ManagementWebPropertyAdWordsLinksGet{..}
           = go _mwpawlgAccountId _mwpawlgWebPropertyId
               _mwpawlgWebPropertyAdWordsLinkId
               (Just AltJSON)

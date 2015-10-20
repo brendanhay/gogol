@@ -27,8 +27,8 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.List
       ClientAccessListResource
 
     -- * Creating a Request
-    , clientAccessList'
-    , ClientAccessList'
+    , clientAccessList
+    , ClientAccessList
 
     -- * Request Lenses
     , calPayload
@@ -38,7 +38,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.clientaccess.list@ method which the
--- 'ClientAccessList'' request conforms to.
+-- 'ClientAccessList' request conforms to.
 type ClientAccessListResource =
      "clientAccess" :>
        QueryParam "alt" AltJSON :>
@@ -46,33 +46,33 @@ type ClientAccessListResource =
            :> Get '[JSON] ListClientAccessCapabilitiesResponse
 
 --
--- /See:/ 'clientAccessList'' smart constructor.
-newtype ClientAccessList' = ClientAccessList'
+-- /See:/ 'clientAccessList' smart constructor.
+newtype ClientAccessList = ClientAccessList
     { _calPayload :: ListClientAccessCapabilitiesRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ClientAccessList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ClientAccessList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'calPayload'
-clientAccessList'
+clientAccessList
     :: ListClientAccessCapabilitiesRequest -- ^ 'calPayload'
-    -> ClientAccessList'
-clientAccessList' pCalPayload_ =
-    ClientAccessList'
+    -> ClientAccessList
+clientAccessList pCalPayload_ =
+    ClientAccessList
     { _calPayload = pCalPayload_
     }
 
 -- | Multipart request metadata.
-calPayload :: Lens' ClientAccessList' ListClientAccessCapabilitiesRequest
+calPayload :: Lens' ClientAccessList ListClientAccessCapabilitiesRequest
 calPayload
   = lens _calPayload (\ s a -> s{_calPayload = a})
 
-instance GoogleRequest ClientAccessList' where
-        type Rs ClientAccessList' =
+instance GoogleRequest ClientAccessList where
+        type Rs ClientAccessList =
              ListClientAccessCapabilitiesResponse
-        requestClient ClientAccessList'{..}
+        requestClient ClientAccessList{..}
           = go (Just AltJSON) _calPayload
               adExchangeBuyerService
           where go

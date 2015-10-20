@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Users.Photos.Update
       UsersPhotosUpdateResource
 
     -- * Creating a Request
-    , usersPhotosUpdate'
-    , UsersPhotosUpdate'
+    , usersPhotosUpdate
+    , UsersPhotosUpdate
 
     -- * Request Lenses
     , upuPayload
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.users.photos.update@ method which the
--- 'UsersPhotosUpdate'' request conforms to.
+-- 'UsersPhotosUpdate' request conforms to.
 type UsersPhotosUpdateResource =
      "users" :>
        Capture "userKey" Text :>
@@ -52,42 +52,42 @@ type UsersPhotosUpdateResource =
 
 -- | Add a photo for the user
 --
--- /See:/ 'usersPhotosUpdate'' smart constructor.
-data UsersPhotosUpdate' = UsersPhotosUpdate'
+-- /See:/ 'usersPhotosUpdate' smart constructor.
+data UsersPhotosUpdate = UsersPhotosUpdate
     { _upuPayload :: !UserPhoto
     , _upuUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersPhotosUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersPhotosUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'upuPayload'
 --
 -- * 'upuUserKey'
-usersPhotosUpdate'
+usersPhotosUpdate
     :: UserPhoto -- ^ 'upuPayload'
     -> Text -- ^ 'upuUserKey'
-    -> UsersPhotosUpdate'
-usersPhotosUpdate' pUpuPayload_ pUpuUserKey_ =
-    UsersPhotosUpdate'
+    -> UsersPhotosUpdate
+usersPhotosUpdate pUpuPayload_ pUpuUserKey_ =
+    UsersPhotosUpdate
     { _upuPayload = pUpuPayload_
     , _upuUserKey = pUpuUserKey_
     }
 
 -- | Multipart request metadata.
-upuPayload :: Lens' UsersPhotosUpdate' UserPhoto
+upuPayload :: Lens' UsersPhotosUpdate UserPhoto
 upuPayload
   = lens _upuPayload (\ s a -> s{_upuPayload = a})
 
 -- | Email or immutable Id of the user
-upuUserKey :: Lens' UsersPhotosUpdate' Text
+upuUserKey :: Lens' UsersPhotosUpdate Text
 upuUserKey
   = lens _upuUserKey (\ s a -> s{_upuUserKey = a})
 
-instance GoogleRequest UsersPhotosUpdate' where
-        type Rs UsersPhotosUpdate' = UserPhoto
-        requestClient UsersPhotosUpdate'{..}
+instance GoogleRequest UsersPhotosUpdate where
+        type Rs UsersPhotosUpdate = UserPhoto
+        requestClient UsersPhotosUpdate{..}
           = go _upuUserKey (Just AltJSON) _upuPayload
               directoryService
           where go

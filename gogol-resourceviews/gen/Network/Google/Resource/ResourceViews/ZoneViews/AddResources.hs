@@ -29,8 +29,8 @@ module Network.Google.Resource.ResourceViews.ZoneViews.AddResources
       ZoneViewsAddResourcesResource
 
     -- * Creating a Request
-    , zoneViewsAddResources'
-    , ZoneViewsAddResources'
+    , zoneViewsAddResources
+    , ZoneViewsAddResources
 
     -- * Request Lenses
     , zvarResourceView
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
 -- | A resource alias for @resourceviews.zoneViews.addResources@ method which the
--- 'ZoneViewsAddResources'' request conforms to.
+-- 'ZoneViewsAddResources' request conforms to.
 type ZoneViewsAddResourcesResource =
      Capture "project" Text :>
        "zones" :>
@@ -57,15 +57,15 @@ type ZoneViewsAddResourcesResource =
 
 -- | Add resources to the view.
 --
--- /See:/ 'zoneViewsAddResources'' smart constructor.
-data ZoneViewsAddResources' = ZoneViewsAddResources'
+-- /See:/ 'zoneViewsAddResources' smart constructor.
+data ZoneViewsAddResources = ZoneViewsAddResources
     { _zvarResourceView :: !Text
     , _zvarProject      :: !Text
     , _zvarZone         :: !Text
     , _zvarPayload      :: !ZoneViewsAddResourcesRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ZoneViewsAddResources'' with the minimum fields required to make a request.
+-- | Creates a value of 'ZoneViewsAddResources' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,14 +76,14 @@ data ZoneViewsAddResources' = ZoneViewsAddResources'
 -- * 'zvarZone'
 --
 -- * 'zvarPayload'
-zoneViewsAddResources'
+zoneViewsAddResources
     :: Text -- ^ 'zvarResourceView'
     -> Text -- ^ 'zvarProject'
     -> Text -- ^ 'zvarZone'
     -> ZoneViewsAddResourcesRequest -- ^ 'zvarPayload'
-    -> ZoneViewsAddResources'
-zoneViewsAddResources' pZvarResourceView_ pZvarProject_ pZvarZone_ pZvarPayload_ =
-    ZoneViewsAddResources'
+    -> ZoneViewsAddResources
+zoneViewsAddResources pZvarResourceView_ pZvarProject_ pZvarZone_ pZvarPayload_ =
+    ZoneViewsAddResources
     { _zvarResourceView = pZvarResourceView_
     , _zvarProject = pZvarProject_
     , _zvarZone = pZvarZone_
@@ -91,28 +91,28 @@ zoneViewsAddResources' pZvarResourceView_ pZvarProject_ pZvarZone_ pZvarPayload_
     }
 
 -- | The name of the resource view.
-zvarResourceView :: Lens' ZoneViewsAddResources' Text
+zvarResourceView :: Lens' ZoneViewsAddResources Text
 zvarResourceView
   = lens _zvarResourceView
       (\ s a -> s{_zvarResourceView = a})
 
 -- | The project name of the resource view.
-zvarProject :: Lens' ZoneViewsAddResources' Text
+zvarProject :: Lens' ZoneViewsAddResources Text
 zvarProject
   = lens _zvarProject (\ s a -> s{_zvarProject = a})
 
 -- | The zone name of the resource view.
-zvarZone :: Lens' ZoneViewsAddResources' Text
+zvarZone :: Lens' ZoneViewsAddResources Text
 zvarZone = lens _zvarZone (\ s a -> s{_zvarZone = a})
 
 -- | Multipart request metadata.
-zvarPayload :: Lens' ZoneViewsAddResources' ZoneViewsAddResourcesRequest
+zvarPayload :: Lens' ZoneViewsAddResources ZoneViewsAddResourcesRequest
 zvarPayload
   = lens _zvarPayload (\ s a -> s{_zvarPayload = a})
 
-instance GoogleRequest ZoneViewsAddResources' where
-        type Rs ZoneViewsAddResources' = Operation
-        requestClient ZoneViewsAddResources'{..}
+instance GoogleRequest ZoneViewsAddResources where
+        type Rs ZoneViewsAddResources = Operation
+        requestClient ZoneViewsAddResources{..}
           = go _zvarProject _zvarZone _zvarResourceView
               (Just AltJSON)
               _zvarPayload

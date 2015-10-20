@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Create
       AccountsContainersFoldersCreateResource
 
     -- * Creating a Request
-    , accountsContainersFoldersCreate'
-    , AccountsContainersFoldersCreate'
+    , accountsContainersFoldersCreate
+    , AccountsContainersFoldersCreate
 
     -- * Request Lenses
     , acfcContainerId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.folders.create@ method which the
--- 'AccountsContainersFoldersCreate'' request conforms to.
+-- 'AccountsContainersFoldersCreate' request conforms to.
 type AccountsContainersFoldersCreateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -54,14 +54,14 @@ type AccountsContainersFoldersCreateResource =
 
 -- | Creates a GTM Folder.
 --
--- /See:/ 'accountsContainersFoldersCreate'' smart constructor.
-data AccountsContainersFoldersCreate' = AccountsContainersFoldersCreate'
+-- /See:/ 'accountsContainersFoldersCreate' smart constructor.
+data AccountsContainersFoldersCreate = AccountsContainersFoldersCreate
     { _acfcContainerId :: !Text
     , _acfcPayload     :: !Folder
     , _acfcAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersFoldersCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersFoldersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,39 +70,39 @@ data AccountsContainersFoldersCreate' = AccountsContainersFoldersCreate'
 -- * 'acfcPayload'
 --
 -- * 'acfcAccountId'
-accountsContainersFoldersCreate'
+accountsContainersFoldersCreate
     :: Text -- ^ 'acfcContainerId'
     -> Folder -- ^ 'acfcPayload'
     -> Text -- ^ 'acfcAccountId'
-    -> AccountsContainersFoldersCreate'
-accountsContainersFoldersCreate' pAcfcContainerId_ pAcfcPayload_ pAcfcAccountId_ =
-    AccountsContainersFoldersCreate'
+    -> AccountsContainersFoldersCreate
+accountsContainersFoldersCreate pAcfcContainerId_ pAcfcPayload_ pAcfcAccountId_ =
+    AccountsContainersFoldersCreate
     { _acfcContainerId = pAcfcContainerId_
     , _acfcPayload = pAcfcPayload_
     , _acfcAccountId = pAcfcAccountId_
     }
 
 -- | The GTM Container ID.
-acfcContainerId :: Lens' AccountsContainersFoldersCreate' Text
+acfcContainerId :: Lens' AccountsContainersFoldersCreate Text
 acfcContainerId
   = lens _acfcContainerId
       (\ s a -> s{_acfcContainerId = a})
 
 -- | Multipart request metadata.
-acfcPayload :: Lens' AccountsContainersFoldersCreate' Folder
+acfcPayload :: Lens' AccountsContainersFoldersCreate Folder
 acfcPayload
   = lens _acfcPayload (\ s a -> s{_acfcPayload = a})
 
 -- | The GTM Account ID.
-acfcAccountId :: Lens' AccountsContainersFoldersCreate' Text
+acfcAccountId :: Lens' AccountsContainersFoldersCreate Text
 acfcAccountId
   = lens _acfcAccountId
       (\ s a -> s{_acfcAccountId = a})
 
 instance GoogleRequest
-         AccountsContainersFoldersCreate' where
-        type Rs AccountsContainersFoldersCreate' = Folder
-        requestClient AccountsContainersFoldersCreate'{..}
+         AccountsContainersFoldersCreate where
+        type Rs AccountsContainersFoldersCreate = Folder
+        requestClient AccountsContainersFoldersCreate{..}
           = go _acfcAccountId _acfcContainerId (Just AltJSON)
               _acfcPayload
               tagManagerService

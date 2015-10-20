@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Roles.Insert
       RolesInsertResource
 
     -- * Creating a Request
-    , rolesInsert'
-    , RolesInsert'
+    , rolesInsert
+    , RolesInsert
 
     -- * Request Lenses
     , riPayload
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.roles.insert@ method which the
--- 'RolesInsert'' request conforms to.
+-- 'RolesInsert' request conforms to.
 type RolesInsertResource =
      "customer" :>
        Capture "customer" Text :>
@@ -51,42 +51,42 @@ type RolesInsertResource =
 
 -- | Creates a role.
 --
--- /See:/ 'rolesInsert'' smart constructor.
-data RolesInsert' = RolesInsert'
+-- /See:/ 'rolesInsert' smart constructor.
+data RolesInsert = RolesInsert
     { _riPayload  :: !Role
     , _riCustomer :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RolesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'RolesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'riPayload'
 --
 -- * 'riCustomer'
-rolesInsert'
+rolesInsert
     :: Role -- ^ 'riPayload'
     -> Text -- ^ 'riCustomer'
-    -> RolesInsert'
-rolesInsert' pRiPayload_ pRiCustomer_ =
-    RolesInsert'
+    -> RolesInsert
+rolesInsert pRiPayload_ pRiCustomer_ =
+    RolesInsert
     { _riPayload = pRiPayload_
     , _riCustomer = pRiCustomer_
     }
 
 -- | Multipart request metadata.
-riPayload :: Lens' RolesInsert' Role
+riPayload :: Lens' RolesInsert Role
 riPayload
   = lens _riPayload (\ s a -> s{_riPayload = a})
 
 -- | Immutable ID of the Google Apps account.
-riCustomer :: Lens' RolesInsert' Text
+riCustomer :: Lens' RolesInsert Text
 riCustomer
   = lens _riCustomer (\ s a -> s{_riCustomer = a})
 
-instance GoogleRequest RolesInsert' where
-        type Rs RolesInsert' = Role
-        requestClient RolesInsert'{..}
+instance GoogleRequest RolesInsert where
+        type Rs RolesInsert = Role
+        requestClient RolesInsert{..}
           = go _riCustomer (Just AltJSON) _riPayload
               directoryService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSense.Accounts.Savedadstyles.List
       AccountsSavedadstylesListResource
 
     -- * Creating a Request
-    , accountsSavedadstylesList'
-    , AccountsSavedadstylesList'
+    , accountsSavedadstylesList
+    , AccountsSavedadstylesList
 
     -- * Request Lenses
     , aslAccountId
@@ -42,7 +42,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.savedadstyles.list@ method which the
--- 'AccountsSavedadstylesList'' request conforms to.
+-- 'AccountsSavedadstylesList' request conforms to.
 type AccountsSavedadstylesListResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -53,14 +53,14 @@ type AccountsSavedadstylesListResource =
 
 -- | List all saved ad styles in the specified account.
 --
--- /See:/ 'accountsSavedadstylesList'' smart constructor.
-data AccountsSavedadstylesList' = AccountsSavedadstylesList'
+-- /See:/ 'accountsSavedadstylesList' smart constructor.
+data AccountsSavedadstylesList = AccountsSavedadstylesList
     { _aslAccountId  :: !Text
     , _aslPageToken  :: !(Maybe Text)
     , _aslMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsSavedadstylesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsSavedadstylesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,39 +69,39 @@ data AccountsSavedadstylesList' = AccountsSavedadstylesList'
 -- * 'aslPageToken'
 --
 -- * 'aslMaxResults'
-accountsSavedadstylesList'
+accountsSavedadstylesList
     :: Text -- ^ 'aslAccountId'
-    -> AccountsSavedadstylesList'
-accountsSavedadstylesList' pAslAccountId_ =
-    AccountsSavedadstylesList'
+    -> AccountsSavedadstylesList
+accountsSavedadstylesList pAslAccountId_ =
+    AccountsSavedadstylesList
     { _aslAccountId = pAslAccountId_
     , _aslPageToken = Nothing
     , _aslMaxResults = Nothing
     }
 
 -- | Account for which to list saved ad styles.
-aslAccountId :: Lens' AccountsSavedadstylesList' Text
+aslAccountId :: Lens' AccountsSavedadstylesList Text
 aslAccountId
   = lens _aslAccountId (\ s a -> s{_aslAccountId = a})
 
 -- | A continuation token, used to page through saved ad styles. To retrieve
 -- the next page, set this parameter to the value of \"nextPageToken\" from
 -- the previous response.
-aslPageToken :: Lens' AccountsSavedadstylesList' (Maybe Text)
+aslPageToken :: Lens' AccountsSavedadstylesList (Maybe Text)
 aslPageToken
   = lens _aslPageToken (\ s a -> s{_aslPageToken = a})
 
 -- | The maximum number of saved ad styles to include in the response, used
 -- for paging.
-aslMaxResults :: Lens' AccountsSavedadstylesList' (Maybe Int32)
+aslMaxResults :: Lens' AccountsSavedadstylesList (Maybe Int32)
 aslMaxResults
   = lens _aslMaxResults
       (\ s a -> s{_aslMaxResults = a})
 
-instance GoogleRequest AccountsSavedadstylesList'
+instance GoogleRequest AccountsSavedadstylesList
          where
-        type Rs AccountsSavedadstylesList' = SavedAdStyles
-        requestClient AccountsSavedadstylesList'{..}
+        type Rs AccountsSavedadstylesList = SavedAdStyles
+        requestClient AccountsSavedadstylesList{..}
           = go _aslAccountId _aslPageToken _aslMaxResults
               (Just AltJSON)
               adSenseService

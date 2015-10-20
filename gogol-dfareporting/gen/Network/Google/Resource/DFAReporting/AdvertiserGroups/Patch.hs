@@ -30,8 +30,8 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Patch
       AdvertiserGroupsPatchResource
 
     -- * Creating a Request
-    , advertiserGroupsPatch'
-    , AdvertiserGroupsPatch'
+    , advertiserGroupsPatch
+    , AdvertiserGroupsPatch
 
     -- * Request Lenses
     , agpProFileId
@@ -43,7 +43,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.advertiserGroups.patch@ method which the
--- 'AdvertiserGroupsPatch'' request conforms to.
+-- 'AdvertiserGroupsPatch' request conforms to.
 type AdvertiserGroupsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -56,14 +56,14 @@ type AdvertiserGroupsPatchResource =
 -- | Updates an existing advertiser group. This method supports patch
 -- semantics.
 --
--- /See:/ 'advertiserGroupsPatch'' smart constructor.
-data AdvertiserGroupsPatch' = AdvertiserGroupsPatch'
+-- /See:/ 'advertiserGroupsPatch' smart constructor.
+data AdvertiserGroupsPatch = AdvertiserGroupsPatch
     { _agpProFileId :: !Int64
     , _agpPayload   :: !AdvertiserGroup
     , _agpId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdvertiserGroupsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdvertiserGroupsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,35 +72,35 @@ data AdvertiserGroupsPatch' = AdvertiserGroupsPatch'
 -- * 'agpPayload'
 --
 -- * 'agpId'
-advertiserGroupsPatch'
+advertiserGroupsPatch
     :: Int64 -- ^ 'agpProFileId'
     -> AdvertiserGroup -- ^ 'agpPayload'
     -> Int64 -- ^ 'agpId'
-    -> AdvertiserGroupsPatch'
-advertiserGroupsPatch' pAgpProFileId_ pAgpPayload_ pAgpId_ =
-    AdvertiserGroupsPatch'
+    -> AdvertiserGroupsPatch
+advertiserGroupsPatch pAgpProFileId_ pAgpPayload_ pAgpId_ =
+    AdvertiserGroupsPatch
     { _agpProFileId = pAgpProFileId_
     , _agpPayload = pAgpPayload_
     , _agpId = pAgpId_
     }
 
 -- | User profile ID associated with this request.
-agpProFileId :: Lens' AdvertiserGroupsPatch' Int64
+agpProFileId :: Lens' AdvertiserGroupsPatch Int64
 agpProFileId
   = lens _agpProFileId (\ s a -> s{_agpProFileId = a})
 
 -- | Multipart request metadata.
-agpPayload :: Lens' AdvertiserGroupsPatch' AdvertiserGroup
+agpPayload :: Lens' AdvertiserGroupsPatch AdvertiserGroup
 agpPayload
   = lens _agpPayload (\ s a -> s{_agpPayload = a})
 
 -- | Advertiser group ID.
-agpId :: Lens' AdvertiserGroupsPatch' Int64
+agpId :: Lens' AdvertiserGroupsPatch Int64
 agpId = lens _agpId (\ s a -> s{_agpId = a})
 
-instance GoogleRequest AdvertiserGroupsPatch' where
-        type Rs AdvertiserGroupsPatch' = AdvertiserGroup
-        requestClient AdvertiserGroupsPatch'{..}
+instance GoogleRequest AdvertiserGroupsPatch where
+        type Rs AdvertiserGroupsPatch = AdvertiserGroup
+        requestClient AdvertiserGroupsPatch{..}
           = go _agpProFileId (Just _agpId) (Just AltJSON)
               _agpPayload
               dFAReportingService

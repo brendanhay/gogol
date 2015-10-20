@@ -32,8 +32,8 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Bind
       LiveBroadcastsBindResource
 
     -- * Creating a Request
-    , liveBroadcastsBind'
-    , LiveBroadcastsBind'
+    , liveBroadcastsBind
+    , LiveBroadcastsBind
 
     -- * Request Lenses
     , lbbPart
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveBroadcasts.bind@ method which the
--- 'LiveBroadcastsBind'' request conforms to.
+-- 'LiveBroadcastsBind' request conforms to.
 type LiveBroadcastsBindResource =
      "liveBroadcasts" :>
        "bind" :>
@@ -64,8 +64,8 @@ type LiveBroadcastsBindResource =
 -- video stream, though a video stream may be bound to more than one
 -- broadcast.
 --
--- /See:/ 'liveBroadcastsBind'' smart constructor.
-data LiveBroadcastsBind' = LiveBroadcastsBind'
+-- /See:/ 'liveBroadcastsBind' smart constructor.
+data LiveBroadcastsBind = LiveBroadcastsBind
     { _lbbPart                          :: !Text
     , _lbbOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbbOnBehalfOfContentOwnerChannel :: !(Maybe Text)
@@ -73,7 +73,7 @@ data LiveBroadcastsBind' = LiveBroadcastsBind'
     , _lbbStreamId                      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LiveBroadcastsBind'' with the minimum fields required to make a request.
+-- | Creates a value of 'LiveBroadcastsBind' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -86,12 +86,12 @@ data LiveBroadcastsBind' = LiveBroadcastsBind'
 -- * 'lbbId'
 --
 -- * 'lbbStreamId'
-liveBroadcastsBind'
+liveBroadcastsBind
     :: Text -- ^ 'lbbPart'
     -> Text -- ^ 'lbbId'
-    -> LiveBroadcastsBind'
-liveBroadcastsBind' pLbbPart_ pLbbId_ =
-    LiveBroadcastsBind'
+    -> LiveBroadcastsBind
+liveBroadcastsBind pLbbPart_ pLbbId_ =
+    LiveBroadcastsBind
     { _lbbPart = pLbbPart_
     , _lbbOnBehalfOfContentOwner = Nothing
     , _lbbOnBehalfOfContentOwnerChannel = Nothing
@@ -103,7 +103,7 @@ liveBroadcastsBind' pLbbPart_ pLbbId_ =
 -- liveBroadcast resource properties that the API response will include.
 -- The part names that you can include in the parameter value are id,
 -- snippet, contentDetails, and status.
-lbbPart :: Lens' LiveBroadcastsBind' Text
+lbbPart :: Lens' LiveBroadcastsBind Text
 lbbPart = lens _lbbPart (\ s a -> s{_lbbPart = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
@@ -116,7 +116,7 @@ lbbPart = lens _lbbPart (\ s a -> s{_lbbPart = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-lbbOnBehalfOfContentOwner :: Lens' LiveBroadcastsBind' (Maybe Text)
+lbbOnBehalfOfContentOwner :: Lens' LiveBroadcastsBind (Maybe Text)
 lbbOnBehalfOfContentOwner
   = lens _lbbOnBehalfOfContentOwner
       (\ s a -> s{_lbbOnBehalfOfContentOwner = a})
@@ -137,27 +137,27 @@ lbbOnBehalfOfContentOwner
 -- actions on behalf of the channel specified in the parameter value,
 -- without having to provide authentication credentials for each separate
 -- channel.
-lbbOnBehalfOfContentOwnerChannel :: Lens' LiveBroadcastsBind' (Maybe Text)
+lbbOnBehalfOfContentOwnerChannel :: Lens' LiveBroadcastsBind (Maybe Text)
 lbbOnBehalfOfContentOwnerChannel
   = lens _lbbOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lbbOnBehalfOfContentOwnerChannel = a})
 
 -- | The id parameter specifies the unique ID of the broadcast that is being
 -- bound to a video stream.
-lbbId :: Lens' LiveBroadcastsBind' Text
+lbbId :: Lens' LiveBroadcastsBind Text
 lbbId = lens _lbbId (\ s a -> s{_lbbId = a})
 
 -- | The streamId parameter specifies the unique ID of the video stream that
 -- is being bound to a broadcast. If this parameter is omitted, the API
 -- will remove any existing binding between the broadcast and a video
 -- stream.
-lbbStreamId :: Lens' LiveBroadcastsBind' (Maybe Text)
+lbbStreamId :: Lens' LiveBroadcastsBind (Maybe Text)
 lbbStreamId
   = lens _lbbStreamId (\ s a -> s{_lbbStreamId = a})
 
-instance GoogleRequest LiveBroadcastsBind' where
-        type Rs LiveBroadcastsBind' = LiveBroadcast
-        requestClient LiveBroadcastsBind'{..}
+instance GoogleRequest LiveBroadcastsBind where
+        type Rs LiveBroadcastsBind = LiveBroadcast
+        requestClient LiveBroadcastsBind{..}
           = go (Just _lbbId) (Just _lbbPart)
               _lbbOnBehalfOfContentOwner
               _lbbOnBehalfOfContentOwnerChannel

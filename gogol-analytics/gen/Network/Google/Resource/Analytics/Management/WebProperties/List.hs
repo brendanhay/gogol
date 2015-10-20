@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.WebProperties.List
       ManagementWebPropertiesListResource
 
     -- * Creating a Request
-    , managementWebPropertiesList'
-    , ManagementWebPropertiesList'
+    , managementWebPropertiesList
+    , ManagementWebPropertiesList
 
     -- * Request Lenses
     , mwplAccountId
@@ -42,7 +42,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webproperties.list@ method which the
--- 'ManagementWebPropertiesList'' request conforms to.
+-- 'ManagementWebPropertiesList' request conforms to.
 type ManagementWebPropertiesListResource =
      "management" :>
        "accounts" :>
@@ -54,14 +54,14 @@ type ManagementWebPropertiesListResource =
 
 -- | Lists web properties to which the user has access.
 --
--- /See:/ 'managementWebPropertiesList'' smart constructor.
-data ManagementWebPropertiesList' = ManagementWebPropertiesList'
+-- /See:/ 'managementWebPropertiesList' smart constructor.
+data ManagementWebPropertiesList = ManagementWebPropertiesList
     { _mwplAccountId  :: !Text
     , _mwplStartIndex :: !(Maybe Int32)
     , _mwplMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementWebPropertiesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementWebPropertiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,11 +70,11 @@ data ManagementWebPropertiesList' = ManagementWebPropertiesList'
 -- * 'mwplStartIndex'
 --
 -- * 'mwplMaxResults'
-managementWebPropertiesList'
+managementWebPropertiesList
     :: Text -- ^ 'mwplAccountId'
-    -> ManagementWebPropertiesList'
-managementWebPropertiesList' pMwplAccountId_ =
-    ManagementWebPropertiesList'
+    -> ManagementWebPropertiesList
+managementWebPropertiesList pMwplAccountId_ =
+    ManagementWebPropertiesList
     { _mwplAccountId = pMwplAccountId_
     , _mwplStartIndex = Nothing
     , _mwplMaxResults = Nothing
@@ -83,28 +83,28 @@ managementWebPropertiesList' pMwplAccountId_ =
 -- | Account ID to retrieve web properties for. Can either be a specific
 -- account ID or \'~all\', which refers to all the accounts that user has
 -- access to.
-mwplAccountId :: Lens' ManagementWebPropertiesList' Text
+mwplAccountId :: Lens' ManagementWebPropertiesList Text
 mwplAccountId
   = lens _mwplAccountId
       (\ s a -> s{_mwplAccountId = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
-mwplStartIndex :: Lens' ManagementWebPropertiesList' (Maybe Int32)
+mwplStartIndex :: Lens' ManagementWebPropertiesList (Maybe Int32)
 mwplStartIndex
   = lens _mwplStartIndex
       (\ s a -> s{_mwplStartIndex = a})
 
 -- | The maximum number of web properties to include in this response.
-mwplMaxResults :: Lens' ManagementWebPropertiesList' (Maybe Int32)
+mwplMaxResults :: Lens' ManagementWebPropertiesList (Maybe Int32)
 mwplMaxResults
   = lens _mwplMaxResults
       (\ s a -> s{_mwplMaxResults = a})
 
-instance GoogleRequest ManagementWebPropertiesList'
+instance GoogleRequest ManagementWebPropertiesList
          where
-        type Rs ManagementWebPropertiesList' = WebProperties
-        requestClient ManagementWebPropertiesList'{..}
+        type Rs ManagementWebPropertiesList = WebProperties
+        requestClient ManagementWebPropertiesList{..}
           = go _mwplAccountId _mwplStartIndex _mwplMaxResults
               (Just AltJSON)
               analyticsService

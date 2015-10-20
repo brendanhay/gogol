@@ -31,8 +31,8 @@ module Network.Google.Resource.YouTube.Comments.SetModerationStatus
       CommentsSetModerationStatusResource
 
     -- * Creating a Request
-    , commentsSetModerationStatus'
-    , CommentsSetModerationStatus'
+    , commentsSetModerationStatus
+    , CommentsSetModerationStatus
 
     -- * Request Lenses
     , csmsBanAuthor
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.comments.setModerationStatus@ method which the
--- 'CommentsSetModerationStatus'' request conforms to.
+-- 'CommentsSetModerationStatus' request conforms to.
 type CommentsSetModerationStatusResource =
      "comments" :>
        "setModerationStatus" :>
@@ -59,14 +59,14 @@ type CommentsSetModerationStatusResource =
 -- be authorized by the owner of the channel or video associated with the
 -- comments.
 --
--- /See:/ 'commentsSetModerationStatus'' smart constructor.
-data CommentsSetModerationStatus' = CommentsSetModerationStatus'
+-- /See:/ 'commentsSetModerationStatus' smart constructor.
+data CommentsSetModerationStatus = CommentsSetModerationStatus
     { _csmsBanAuthor        :: !Bool
     , _csmsModerationStatus :: !CommentsSetModerationStatusModerationStatus
     , _csmsId               :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsSetModerationStatus'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsSetModerationStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,12 +75,12 @@ data CommentsSetModerationStatus' = CommentsSetModerationStatus'
 -- * 'csmsModerationStatus'
 --
 -- * 'csmsId'
-commentsSetModerationStatus'
+commentsSetModerationStatus
     :: CommentsSetModerationStatusModerationStatus -- ^ 'csmsModerationStatus'
     -> Text -- ^ 'csmsId'
-    -> CommentsSetModerationStatus'
-commentsSetModerationStatus' pCsmsModerationStatus_ pCsmsId_ =
-    CommentsSetModerationStatus'
+    -> CommentsSetModerationStatus
+commentsSetModerationStatus pCsmsModerationStatus_ pCsmsId_ =
+    CommentsSetModerationStatus
     { _csmsBanAuthor = False
     , _csmsModerationStatus = pCsmsModerationStatus_
     , _csmsId = pCsmsId_
@@ -90,26 +90,26 @@ commentsSetModerationStatus' pCsmsModerationStatus_ pCsmsId_ =
 -- reject any additional comments written by the comment\'s author. Set the
 -- parameter value to true to ban the author. Note: This parameter is only
 -- valid if the moderationStatus parameter is also set to rejected.
-csmsBanAuthor :: Lens' CommentsSetModerationStatus' Bool
+csmsBanAuthor :: Lens' CommentsSetModerationStatus Bool
 csmsBanAuthor
   = lens _csmsBanAuthor
       (\ s a -> s{_csmsBanAuthor = a})
 
 -- | Identifies the new moderation status of the specified comments.
-csmsModerationStatus :: Lens' CommentsSetModerationStatus' CommentsSetModerationStatusModerationStatus
+csmsModerationStatus :: Lens' CommentsSetModerationStatus CommentsSetModerationStatusModerationStatus
 csmsModerationStatus
   = lens _csmsModerationStatus
       (\ s a -> s{_csmsModerationStatus = a})
 
 -- | The id parameter specifies a comma-separated list of IDs that identify
 -- the comments for which you are updating the moderation status.
-csmsId :: Lens' CommentsSetModerationStatus' Text
+csmsId :: Lens' CommentsSetModerationStatus Text
 csmsId = lens _csmsId (\ s a -> s{_csmsId = a})
 
-instance GoogleRequest CommentsSetModerationStatus'
+instance GoogleRequest CommentsSetModerationStatus
          where
-        type Rs CommentsSetModerationStatus' = ()
-        requestClient CommentsSetModerationStatus'{..}
+        type Rs CommentsSetModerationStatus = ()
+        requestClient CommentsSetModerationStatus{..}
           = go (Just _csmsId) (Just _csmsModerationStatus)
               (Just _csmsBanAuthor)
               (Just AltJSON)

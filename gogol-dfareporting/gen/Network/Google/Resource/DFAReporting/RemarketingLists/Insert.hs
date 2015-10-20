@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Insert
       RemarketingListsInsertResource
 
     -- * Creating a Request
-    , remarketingListsInsert'
-    , RemarketingListsInsert'
+    , remarketingListsInsert
+    , RemarketingListsInsert
 
     -- * Request Lenses
     , rliProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.remarketingLists.insert@ method which the
--- 'RemarketingListsInsert'' request conforms to.
+-- 'RemarketingListsInsert' request conforms to.
 type RemarketingListsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,42 +52,42 @@ type RemarketingListsInsertResource =
 
 -- | Inserts a new remarketing list.
 --
--- /See:/ 'remarketingListsInsert'' smart constructor.
-data RemarketingListsInsert' = RemarketingListsInsert'
+-- /See:/ 'remarketingListsInsert' smart constructor.
+data RemarketingListsInsert = RemarketingListsInsert
     { _rliProFileId :: !Int64
     , _rliPayload   :: !RemarketingList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RemarketingListsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'RemarketingListsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rliProFileId'
 --
 -- * 'rliPayload'
-remarketingListsInsert'
+remarketingListsInsert
     :: Int64 -- ^ 'rliProFileId'
     -> RemarketingList -- ^ 'rliPayload'
-    -> RemarketingListsInsert'
-remarketingListsInsert' pRliProFileId_ pRliPayload_ =
-    RemarketingListsInsert'
+    -> RemarketingListsInsert
+remarketingListsInsert pRliProFileId_ pRliPayload_ =
+    RemarketingListsInsert
     { _rliProFileId = pRliProFileId_
     , _rliPayload = pRliPayload_
     }
 
 -- | User profile ID associated with this request.
-rliProFileId :: Lens' RemarketingListsInsert' Int64
+rliProFileId :: Lens' RemarketingListsInsert Int64
 rliProFileId
   = lens _rliProFileId (\ s a -> s{_rliProFileId = a})
 
 -- | Multipart request metadata.
-rliPayload :: Lens' RemarketingListsInsert' RemarketingList
+rliPayload :: Lens' RemarketingListsInsert RemarketingList
 rliPayload
   = lens _rliPayload (\ s a -> s{_rliPayload = a})
 
-instance GoogleRequest RemarketingListsInsert' where
-        type Rs RemarketingListsInsert' = RemarketingList
-        requestClient RemarketingListsInsert'{..}
+instance GoogleRequest RemarketingListsInsert where
+        type Rs RemarketingListsInsert = RemarketingList
+        requestClient RemarketingListsInsert{..}
           = go _rliProFileId (Just AltJSON) _rliPayload
               dFAReportingService
           where go

@@ -34,8 +34,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Update
       BeaconsUpdateResource
 
     -- * Creating a Request
-    , beaconsUpdate'
-    , BeaconsUpdate'
+    , beaconsUpdate
+    , BeaconsUpdate
 
     -- * Request Lenses
     , buXgafv
@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.update@ method which the
--- 'BeaconsUpdate'' request conforms to.
+-- 'BeaconsUpdate' request conforms to.
 type BeaconsUpdateResource =
      "v1beta1" :>
        Capture "beaconName" Text :>
@@ -74,8 +74,8 @@ type BeaconsUpdateResource =
 -- method will be silently ignored. To update beacon status, use the
 -- separate methods on this API for (de)activation and decommissioning.
 --
--- /See:/ 'beaconsUpdate'' smart constructor.
-data BeaconsUpdate' = BeaconsUpdate'
+-- /See:/ 'beaconsUpdate' smart constructor.
+data BeaconsUpdate = BeaconsUpdate
     { _buXgafv          :: !(Maybe Text)
     , _buUploadProtocol :: !(Maybe Text)
     , _buPp             :: !Bool
@@ -87,7 +87,7 @@ data BeaconsUpdate' = BeaconsUpdate'
     , _buCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BeaconsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'BeaconsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -108,12 +108,12 @@ data BeaconsUpdate' = BeaconsUpdate'
 -- * 'buBearerToken'
 --
 -- * 'buCallback'
-beaconsUpdate'
+beaconsUpdate
     :: Text -- ^ 'buBeaconName'
     -> Beacon -- ^ 'buPayload'
-    -> BeaconsUpdate'
-beaconsUpdate' pBuBeaconName_ pBuPayload_ =
-    BeaconsUpdate'
+    -> BeaconsUpdate
+beaconsUpdate pBuBeaconName_ pBuPayload_ =
+    BeaconsUpdate
     { _buXgafv = Nothing
     , _buUploadProtocol = Nothing
     , _buPp = True
@@ -126,21 +126,21 @@ beaconsUpdate' pBuBeaconName_ pBuPayload_ =
     }
 
 -- | V1 error format.
-buXgafv :: Lens' BeaconsUpdate' (Maybe Text)
+buXgafv :: Lens' BeaconsUpdate (Maybe Text)
 buXgafv = lens _buXgafv (\ s a -> s{_buXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-buUploadProtocol :: Lens' BeaconsUpdate' (Maybe Text)
+buUploadProtocol :: Lens' BeaconsUpdate (Maybe Text)
 buUploadProtocol
   = lens _buUploadProtocol
       (\ s a -> s{_buUploadProtocol = a})
 
 -- | Pretty-print response.
-buPp :: Lens' BeaconsUpdate' Bool
+buPp :: Lens' BeaconsUpdate Bool
 buPp = lens _buPp (\ s a -> s{_buPp = a})
 
 -- | OAuth access token.
-buAccessToken :: Lens' BeaconsUpdate' (Maybe Text)
+buAccessToken :: Lens' BeaconsUpdate (Maybe Text)
 buAccessToken
   = lens _buAccessToken
       (\ s a -> s{_buAccessToken = a})
@@ -151,34 +151,34 @@ buAccessToken
 -- \`3\` for Eddystone, \`1\` for iBeacon, or \`5\` for AltBeacon. This
 -- field must be left empty when registering. After reading a beacon,
 -- clients can use the name for future operations.
-buBeaconName :: Lens' BeaconsUpdate' Text
+buBeaconName :: Lens' BeaconsUpdate Text
 buBeaconName
   = lens _buBeaconName (\ s a -> s{_buBeaconName = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-buUploadType :: Lens' BeaconsUpdate' (Maybe Text)
+buUploadType :: Lens' BeaconsUpdate (Maybe Text)
 buUploadType
   = lens _buUploadType (\ s a -> s{_buUploadType = a})
 
 -- | Multipart request metadata.
-buPayload :: Lens' BeaconsUpdate' Beacon
+buPayload :: Lens' BeaconsUpdate Beacon
 buPayload
   = lens _buPayload (\ s a -> s{_buPayload = a})
 
 -- | OAuth bearer token.
-buBearerToken :: Lens' BeaconsUpdate' (Maybe Text)
+buBearerToken :: Lens' BeaconsUpdate (Maybe Text)
 buBearerToken
   = lens _buBearerToken
       (\ s a -> s{_buBearerToken = a})
 
 -- | JSONP
-buCallback :: Lens' BeaconsUpdate' (Maybe Text)
+buCallback :: Lens' BeaconsUpdate (Maybe Text)
 buCallback
   = lens _buCallback (\ s a -> s{_buCallback = a})
 
-instance GoogleRequest BeaconsUpdate' where
-        type Rs BeaconsUpdate' = Beacon
-        requestClient BeaconsUpdate'{..}
+instance GoogleRequest BeaconsUpdate where
+        type Rs BeaconsUpdate = Beacon
+        requestClient BeaconsUpdate{..}
           = go _buBeaconName _buXgafv _buUploadProtocol
               (Just _buPp)
               _buAccessToken

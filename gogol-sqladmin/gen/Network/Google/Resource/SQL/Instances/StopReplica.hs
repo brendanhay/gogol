@@ -29,8 +29,8 @@ module Network.Google.Resource.SQL.Instances.StopReplica
       InstancesStopReplicaResource
 
     -- * Creating a Request
-    , instancesStopReplica'
-    , InstancesStopReplica'
+    , instancesStopReplica
+    , InstancesStopReplica
 
     -- * Request Lenses
     , isrProject
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.stopReplica@ method which the
--- 'InstancesStopReplica'' request conforms to.
+-- 'InstancesStopReplica' request conforms to.
 type InstancesStopReplicaResource =
      "projects" :>
        Capture "project" Text :>
@@ -52,42 +52,42 @@ type InstancesStopReplicaResource =
 
 -- | Stops the replication in the read replica instance.
 --
--- /See:/ 'instancesStopReplica'' smart constructor.
-data InstancesStopReplica' = InstancesStopReplica'
+-- /See:/ 'instancesStopReplica' smart constructor.
+data InstancesStopReplica = InstancesStopReplica
     { _isrProject  :: !Text
     , _isrInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesStopReplica'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesStopReplica' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'isrProject'
 --
 -- * 'isrInstance'
-instancesStopReplica'
+instancesStopReplica
     :: Text -- ^ 'isrProject'
     -> Text -- ^ 'isrInstance'
-    -> InstancesStopReplica'
-instancesStopReplica' pIsrProject_ pIsrInstance_ =
-    InstancesStopReplica'
+    -> InstancesStopReplica
+instancesStopReplica pIsrProject_ pIsrInstance_ =
+    InstancesStopReplica
     { _isrProject = pIsrProject_
     , _isrInstance = pIsrInstance_
     }
 
 -- | ID of the project that contains the read replica.
-isrProject :: Lens' InstancesStopReplica' Text
+isrProject :: Lens' InstancesStopReplica Text
 isrProject
   = lens _isrProject (\ s a -> s{_isrProject = a})
 
 -- | Cloud SQL read replica instance name.
-isrInstance :: Lens' InstancesStopReplica' Text
+isrInstance :: Lens' InstancesStopReplica Text
 isrInstance
   = lens _isrInstance (\ s a -> s{_isrInstance = a})
 
-instance GoogleRequest InstancesStopReplica' where
-        type Rs InstancesStopReplica' = Operation
-        requestClient InstancesStopReplica'{..}
+instance GoogleRequest InstancesStopReplica where
+        type Rs InstancesStopReplica = Operation
+        requestClient InstancesStopReplica{..}
           = go _isrProject _isrInstance (Just AltJSON)
               sQLAdminService
           where go

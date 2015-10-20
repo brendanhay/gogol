@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Accounts.AuthInfo
       AccountsAuthInfoResource
 
     -- * Creating a Request
-    , accountsAuthInfo'
-    , AccountsAuthInfo'
+    , accountsAuthInfo
+    , AccountsAuthInfo
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accounts.authinfo@ method which the
--- 'AccountsAuthInfo'' request conforms to.
+-- 'AccountsAuthInfo' request conforms to.
 type AccountsAuthInfoResource =
      "accounts" :>
        "authinfo" :>
@@ -47,20 +47,20 @@ type AccountsAuthInfoResource =
 
 -- | Returns information about the authenticated user.
 --
--- /See:/ 'accountsAuthInfo'' smart constructor.
-data AccountsAuthInfo' =
-    AccountsAuthInfo'
+-- /See:/ 'accountsAuthInfo' smart constructor.
+data AccountsAuthInfo =
+    AccountsAuthInfo
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsAuthInfo'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsAuthInfo' with the minimum fields required to make a request.
 --
-accountsAuthInfo'
-    :: AccountsAuthInfo'
-accountsAuthInfo' = AccountsAuthInfo'
+accountsAuthInfo
+    :: AccountsAuthInfo
+accountsAuthInfo = AccountsAuthInfo
 
-instance GoogleRequest AccountsAuthInfo' where
-        type Rs AccountsAuthInfo' = AccountsAuthInfoResponse
-        requestClient AccountsAuthInfo'{}
+instance GoogleRequest AccountsAuthInfo where
+        type Rs AccountsAuthInfo = AccountsAuthInfoResponse
+        requestClient AccountsAuthInfo{}
           = go (Just AltJSON) shoppingContentService
           where go
                   = buildClient

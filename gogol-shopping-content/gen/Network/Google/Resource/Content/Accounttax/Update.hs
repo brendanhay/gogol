@@ -29,21 +29,21 @@ module Network.Google.Resource.Content.Accounttax.Update
       AccounttaxUpdateResource
 
     -- * Creating a Request
-    , accounttaxUpdate'
-    , AccounttaxUpdate'
+    , accounttaxUpdate
+    , AccounttaxUpdate
 
     -- * Request Lenses
-    , aMerchantId
-    , aPayload
-    , aAccountId
-    , aDryRun
+    , auuMerchantId
+    , auuPayload
+    , auuAccountId
+    , auuDryRun
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accounttax.update@ method which the
--- 'AccounttaxUpdate'' request conforms to.
+-- 'AccounttaxUpdate' request conforms to.
 type AccounttaxUpdateResource =
      Capture "merchantId" Word64 :>
        "accounttax" :>
@@ -54,61 +54,65 @@ type AccounttaxUpdateResource =
 
 -- | Updates the tax settings of the account.
 --
--- /See:/ 'accounttaxUpdate'' smart constructor.
-data AccounttaxUpdate' = AccounttaxUpdate'
-    { _aMerchantId :: !Word64
-    , _aPayload    :: !AccountTax
-    , _aAccountId  :: !Word64
-    , _aDryRun     :: !(Maybe Bool)
+-- /See:/ 'accounttaxUpdate' smart constructor.
+data AccounttaxUpdate = AccounttaxUpdate
+    { _auuMerchantId :: !Word64
+    , _auuPayload    :: !AccountTax
+    , _auuAccountId  :: !Word64
+    , _auuDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccounttaxUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccounttaxUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aMerchantId'
+-- * 'auuMerchantId'
 --
--- * 'aPayload'
+-- * 'auuPayload'
 --
--- * 'aAccountId'
+-- * 'auuAccountId'
 --
--- * 'aDryRun'
-accounttaxUpdate'
-    :: Word64 -- ^ 'aMerchantId'
-    -> AccountTax -- ^ 'aPayload'
-    -> Word64 -- ^ 'aAccountId'
-    -> AccounttaxUpdate'
-accounttaxUpdate' pAMerchantId_ pAPayload_ pAAccountId_ =
-    AccounttaxUpdate'
-    { _aMerchantId = pAMerchantId_
-    , _aPayload = pAPayload_
-    , _aAccountId = pAAccountId_
-    , _aDryRun = Nothing
+-- * 'auuDryRun'
+accounttaxUpdate
+    :: Word64 -- ^ 'auuMerchantId'
+    -> AccountTax -- ^ 'auuPayload'
+    -> Word64 -- ^ 'auuAccountId'
+    -> AccounttaxUpdate
+accounttaxUpdate pAuuMerchantId_ pAuuPayload_ pAuuAccountId_ =
+    AccounttaxUpdate
+    { _auuMerchantId = pAuuMerchantId_
+    , _auuPayload = pAuuPayload_
+    , _auuAccountId = pAuuAccountId_
+    , _auuDryRun = Nothing
     }
 
 -- | The ID of the managing account.
-aMerchantId :: Lens' AccounttaxUpdate' Word64
-aMerchantId
-  = lens _aMerchantId (\ s a -> s{_aMerchantId = a})
+auuMerchantId :: Lens' AccounttaxUpdate Word64
+auuMerchantId
+  = lens _auuMerchantId
+      (\ s a -> s{_auuMerchantId = a})
 
 -- | Multipart request metadata.
-aPayload :: Lens' AccounttaxUpdate' AccountTax
-aPayload = lens _aPayload (\ s a -> s{_aPayload = a})
+auuPayload :: Lens' AccounttaxUpdate AccountTax
+auuPayload
+  = lens _auuPayload (\ s a -> s{_auuPayload = a})
 
 -- | The ID of the account for which to get\/update account tax settings.
-aAccountId :: Lens' AccounttaxUpdate' Word64
-aAccountId
-  = lens _aAccountId (\ s a -> s{_aAccountId = a})
+auuAccountId :: Lens' AccounttaxUpdate Word64
+auuAccountId
+  = lens _auuAccountId (\ s a -> s{_auuAccountId = a})
 
 -- | Flag to run the request in dry-run mode.
-aDryRun :: Lens' AccounttaxUpdate' (Maybe Bool)
-aDryRun = lens _aDryRun (\ s a -> s{_aDryRun = a})
+auuDryRun :: Lens' AccounttaxUpdate (Maybe Bool)
+auuDryRun
+  = lens _auuDryRun (\ s a -> s{_auuDryRun = a})
 
-instance GoogleRequest AccounttaxUpdate' where
-        type Rs AccounttaxUpdate' = AccountTax
-        requestClient AccounttaxUpdate'{..}
-          = go _aMerchantId _aAccountId _aDryRun (Just AltJSON)
-              _aPayload
+instance GoogleRequest AccounttaxUpdate where
+        type Rs AccounttaxUpdate = AccountTax
+        requestClient AccounttaxUpdate{..}
+          = go _auuMerchantId _auuAccountId _auuDryRun
+              (Just AltJSON)
+              _auuPayload
               shoppingContentService
           where go
                   = buildClient

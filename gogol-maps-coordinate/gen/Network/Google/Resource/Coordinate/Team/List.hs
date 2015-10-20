@@ -29,8 +29,8 @@ module Network.Google.Resource.Coordinate.Team.List
       TeamListResource
 
     -- * Creating a Request
-    , teamList'
-    , TeamList'
+    , teamList
+    , TeamList
 
     -- * Request Lenses
     , tlDispatcher
@@ -42,7 +42,7 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @coordinate.team.list@ method which the
--- 'TeamList'' request conforms to.
+-- 'TeamList' request conforms to.
 type TeamListResource =
      "teams" :>
        QueryParam "dispatcher" Bool :>
@@ -53,14 +53,14 @@ type TeamListResource =
 
 -- | Retrieves a list of teams for a user.
 --
--- /See:/ 'teamList'' smart constructor.
-data TeamList' = TeamList'
+-- /See:/ 'teamList' smart constructor.
+data TeamList = TeamList
     { _tlDispatcher :: !(Maybe Bool)
     , _tlAdmin      :: !(Maybe Bool)
     , _tlWorker     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TeamList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TeamList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,31 +69,31 @@ data TeamList' = TeamList'
 -- * 'tlAdmin'
 --
 -- * 'tlWorker'
-teamList'
-    :: TeamList'
-teamList' =
-    TeamList'
+teamList
+    :: TeamList
+teamList =
+    TeamList
     { _tlDispatcher = Nothing
     , _tlAdmin = Nothing
     , _tlWorker = Nothing
     }
 
 -- | Whether to include teams for which the user has the Dispatcher role.
-tlDispatcher :: Lens' TeamList' (Maybe Bool)
+tlDispatcher :: Lens' TeamList (Maybe Bool)
 tlDispatcher
   = lens _tlDispatcher (\ s a -> s{_tlDispatcher = a})
 
 -- | Whether to include teams for which the user has the Admin role.
-tlAdmin :: Lens' TeamList' (Maybe Bool)
+tlAdmin :: Lens' TeamList (Maybe Bool)
 tlAdmin = lens _tlAdmin (\ s a -> s{_tlAdmin = a})
 
 -- | Whether to include teams for which the user has the Worker role.
-tlWorker :: Lens' TeamList' (Maybe Bool)
+tlWorker :: Lens' TeamList (Maybe Bool)
 tlWorker = lens _tlWorker (\ s a -> s{_tlWorker = a})
 
-instance GoogleRequest TeamList' where
-        type Rs TeamList' = TeamListResponse
-        requestClient TeamList'{..}
+instance GoogleRequest TeamList where
+        type Rs TeamList = TeamListResponse
+        requestClient TeamList{..}
           = go _tlDispatcher _tlAdmin _tlWorker (Just AltJSON)
               mapsCoordinateService
           where go

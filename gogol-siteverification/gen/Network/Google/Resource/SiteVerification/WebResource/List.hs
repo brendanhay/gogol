@@ -29,8 +29,8 @@ module Network.Google.Resource.SiteVerification.WebResource.List
       WebResourceListResource
 
     -- * Creating a Request
-    , webResourceList'
-    , WebResourceList'
+    , webResourceList
+    , WebResourceList
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.list@ method which the
--- 'WebResourceList'' request conforms to.
+-- 'WebResourceList' request conforms to.
 type WebResourceListResource =
      "webResource" :>
        QueryParam "alt" AltJSON :>
@@ -46,21 +46,21 @@ type WebResourceListResource =
 
 -- | Get the list of your verified websites and domains.
 --
--- /See:/ 'webResourceList'' smart constructor.
-data WebResourceList' =
-    WebResourceList'
+-- /See:/ 'webResourceList' smart constructor.
+data WebResourceList =
+    WebResourceList
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'WebResourceList'' with the minimum fields required to make a request.
+-- | Creates a value of 'WebResourceList' with the minimum fields required to make a request.
 --
-webResourceList'
-    :: WebResourceList'
-webResourceList' = WebResourceList'
+webResourceList
+    :: WebResourceList
+webResourceList = WebResourceList
 
-instance GoogleRequest WebResourceList' where
-        type Rs WebResourceList' =
+instance GoogleRequest WebResourceList where
+        type Rs WebResourceList =
              SiteVerificationWebResourceListResponse
-        requestClient WebResourceList'{}
+        requestClient WebResourceList{}
           = go (Just AltJSON) siteVerificationService
           where go
                   = buildClient

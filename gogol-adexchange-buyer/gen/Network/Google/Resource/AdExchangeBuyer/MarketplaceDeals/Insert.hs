@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Insert
       MarketplaceDealsInsertResource
 
     -- * Creating a Request
-    , marketplaceDealsInsert'
-    , MarketplaceDealsInsert'
+    , marketplaceDealsInsert
+    , MarketplaceDealsInsert
 
     -- * Request Lenses
     , mdiPayload
@@ -41,7 +41,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.marketplacedeals.insert@ method which the
--- 'MarketplaceDealsInsert'' request conforms to.
+-- 'MarketplaceDealsInsert' request conforms to.
 type MarketplaceDealsInsertResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
@@ -53,43 +53,43 @@ type MarketplaceDealsInsertResource =
 
 -- | Add new deals for the specified order
 --
--- /See:/ 'marketplaceDealsInsert'' smart constructor.
-data MarketplaceDealsInsert' = MarketplaceDealsInsert'
+-- /See:/ 'marketplaceDealsInsert' smart constructor.
+data MarketplaceDealsInsert = MarketplaceDealsInsert
     { _mdiPayload :: !AddOrderDealsRequest
     , _mdiOrderId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MarketplaceDealsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'MarketplaceDealsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mdiPayload'
 --
 -- * 'mdiOrderId'
-marketplaceDealsInsert'
+marketplaceDealsInsert
     :: AddOrderDealsRequest -- ^ 'mdiPayload'
     -> Text -- ^ 'mdiOrderId'
-    -> MarketplaceDealsInsert'
-marketplaceDealsInsert' pMdiPayload_ pMdiOrderId_ =
-    MarketplaceDealsInsert'
+    -> MarketplaceDealsInsert
+marketplaceDealsInsert pMdiPayload_ pMdiOrderId_ =
+    MarketplaceDealsInsert
     { _mdiPayload = pMdiPayload_
     , _mdiOrderId = pMdiOrderId_
     }
 
 -- | Multipart request metadata.
-mdiPayload :: Lens' MarketplaceDealsInsert' AddOrderDealsRequest
+mdiPayload :: Lens' MarketplaceDealsInsert AddOrderDealsRequest
 mdiPayload
   = lens _mdiPayload (\ s a -> s{_mdiPayload = a})
 
 -- | OrderId for which deals need to be added.
-mdiOrderId :: Lens' MarketplaceDealsInsert' Text
+mdiOrderId :: Lens' MarketplaceDealsInsert Text
 mdiOrderId
   = lens _mdiOrderId (\ s a -> s{_mdiOrderId = a})
 
-instance GoogleRequest MarketplaceDealsInsert' where
-        type Rs MarketplaceDealsInsert' =
+instance GoogleRequest MarketplaceDealsInsert where
+        type Rs MarketplaceDealsInsert =
              AddOrderDealsResponse
-        requestClient MarketplaceDealsInsert'{..}
+        requestClient MarketplaceDealsInsert{..}
           = go _mdiOrderId (Just AltJSON) _mdiPayload
               adExchangeBuyerService
           where go

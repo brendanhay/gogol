@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Zones.Get
       ZonesGetResource
 
     -- * Creating a Request
-    , zonesGet'
-    , ZonesGet'
+    , zonesGet
+    , ZonesGet
 
     -- * Request Lenses
     , zgProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.zones.get@ method which the
--- 'ZonesGet'' request conforms to.
+-- 'ZonesGet' request conforms to.
 type ZonesGetResource =
      Capture "project" Text :>
        "zones" :>
@@ -50,41 +50,41 @@ type ZonesGetResource =
 
 -- | Returns the specified zone resource.
 --
--- /See:/ 'zonesGet'' smart constructor.
-data ZonesGet' = ZonesGet'
+-- /See:/ 'zonesGet' smart constructor.
+data ZonesGet = ZonesGet
     { _zgProject :: !Text
     , _zgZone    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ZonesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ZonesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'zgProject'
 --
 -- * 'zgZone'
-zonesGet'
+zonesGet
     :: Text -- ^ 'zgProject'
     -> Text -- ^ 'zgZone'
-    -> ZonesGet'
-zonesGet' pZgProject_ pZgZone_ =
-    ZonesGet'
+    -> ZonesGet
+zonesGet pZgProject_ pZgZone_ =
+    ZonesGet
     { _zgProject = pZgProject_
     , _zgZone = pZgZone_
     }
 
 -- | Project ID for this request.
-zgProject :: Lens' ZonesGet' Text
+zgProject :: Lens' ZonesGet Text
 zgProject
   = lens _zgProject (\ s a -> s{_zgProject = a})
 
 -- | Name of the zone resource to return.
-zgZone :: Lens' ZonesGet' Text
+zgZone :: Lens' ZonesGet Text
 zgZone = lens _zgZone (\ s a -> s{_zgZone = a})
 
-instance GoogleRequest ZonesGet' where
-        type Rs ZonesGet' = Zone
-        requestClient ZonesGet'{..}
+instance GoogleRequest ZonesGet where
+        type Rs ZonesGet = Zone
+        requestClient ZonesGet{..}
           = go _zgProject _zgZone (Just AltJSON) computeService
           where go
                   = buildClient (Proxy :: Proxy ZonesGetResource)

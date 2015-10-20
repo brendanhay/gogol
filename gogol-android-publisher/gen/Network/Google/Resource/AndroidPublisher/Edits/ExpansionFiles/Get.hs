@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Get
       EditsExpansionFilesGetResource
 
     -- * Creating a Request
-    , editsExpansionFilesGet'
-    , EditsExpansionFilesGet'
+    , editsExpansionFilesGet
+    , EditsExpansionFilesGet
 
     -- * Request Lenses
     , eefgPackageName
@@ -43,7 +43,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.expansionfiles.get@ method which the
--- 'EditsExpansionFilesGet'' request conforms to.
+-- 'EditsExpansionFilesGet' request conforms to.
 type EditsExpansionFilesGetResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -58,15 +58,15 @@ type EditsExpansionFilesGetResource =
 
 -- | Fetches the Expansion File configuration for the APK specified.
 --
--- /See:/ 'editsExpansionFilesGet'' smart constructor.
-data EditsExpansionFilesGet' = EditsExpansionFilesGet'
+-- /See:/ 'editsExpansionFilesGet' smart constructor.
+data EditsExpansionFilesGet = EditsExpansionFilesGet
     { _eefgPackageName       :: !Text
     , _eefgAPKVersionCode    :: !Int32
     , _eefgExpansionFileType :: !EditsExpansionFilesGetExpansionFileType
     , _eefgEditId            :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsExpansionFilesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsExpansionFilesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data EditsExpansionFilesGet' = EditsExpansionFilesGet'
 -- * 'eefgExpansionFileType'
 --
 -- * 'eefgEditId'
-editsExpansionFilesGet'
+editsExpansionFilesGet
     :: Text -- ^ 'eefgPackageName'
     -> Int32 -- ^ 'eefgAPKVersionCode'
     -> EditsExpansionFilesGetExpansionFileType -- ^ 'eefgExpansionFileType'
     -> Text -- ^ 'eefgEditId'
-    -> EditsExpansionFilesGet'
-editsExpansionFilesGet' pEefgPackageName_ pEefgAPKVersionCode_ pEefgExpansionFileType_ pEefgEditId_ =
-    EditsExpansionFilesGet'
+    -> EditsExpansionFilesGet
+editsExpansionFilesGet pEefgPackageName_ pEefgAPKVersionCode_ pEefgExpansionFileType_ pEefgEditId_ =
+    EditsExpansionFilesGet
     { _eefgPackageName = pEefgPackageName_
     , _eefgAPKVersionCode = pEefgAPKVersionCode_
     , _eefgExpansionFileType = pEefgExpansionFileType_
@@ -93,31 +93,31 @@ editsExpansionFilesGet' pEefgPackageName_ pEefgAPKVersionCode_ pEefgExpansionFil
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eefgPackageName :: Lens' EditsExpansionFilesGet' Text
+eefgPackageName :: Lens' EditsExpansionFilesGet Text
 eefgPackageName
   = lens _eefgPackageName
       (\ s a -> s{_eefgPackageName = a})
 
 -- | The version code of the APK whose Expansion File configuration is being
 -- read or modified.
-eefgAPKVersionCode :: Lens' EditsExpansionFilesGet' Int32
+eefgAPKVersionCode :: Lens' EditsExpansionFilesGet Int32
 eefgAPKVersionCode
   = lens _eefgAPKVersionCode
       (\ s a -> s{_eefgAPKVersionCode = a})
 
-eefgExpansionFileType :: Lens' EditsExpansionFilesGet' EditsExpansionFilesGetExpansionFileType
+eefgExpansionFileType :: Lens' EditsExpansionFilesGet EditsExpansionFilesGetExpansionFileType
 eefgExpansionFileType
   = lens _eefgExpansionFileType
       (\ s a -> s{_eefgExpansionFileType = a})
 
 -- | Unique identifier for this edit.
-eefgEditId :: Lens' EditsExpansionFilesGet' Text
+eefgEditId :: Lens' EditsExpansionFilesGet Text
 eefgEditId
   = lens _eefgEditId (\ s a -> s{_eefgEditId = a})
 
-instance GoogleRequest EditsExpansionFilesGet' where
-        type Rs EditsExpansionFilesGet' = ExpansionFile
-        requestClient EditsExpansionFilesGet'{..}
+instance GoogleRequest EditsExpansionFilesGet where
+        type Rs EditsExpansionFilesGet = ExpansionFile
+        requestClient EditsExpansionFilesGet{..}
           = go _eefgPackageName _eefgEditId _eefgAPKVersionCode
               _eefgExpansionFileType
               (Just AltJSON)

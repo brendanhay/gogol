@@ -29,8 +29,8 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Inse
       LeaderboardConfigurationsInsertResource
 
     -- * Creating a Request
-    , leaderboardConfigurationsInsert'
-    , LeaderboardConfigurationsInsert'
+    , leaderboardConfigurationsInsert
+    , LeaderboardConfigurationsInsert
 
     -- * Request Lenses
     , lciPayload
@@ -41,7 +41,7 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.leaderboardConfigurations.insert@ method which the
--- 'LeaderboardConfigurationsInsert'' request conforms to.
+-- 'LeaderboardConfigurationsInsert' request conforms to.
 type LeaderboardConfigurationsInsertResource =
      "applications" :>
        Capture "applicationId" Text :>
@@ -52,45 +52,45 @@ type LeaderboardConfigurationsInsertResource =
 
 -- | Insert a new leaderboard configuration in this application.
 --
--- /See:/ 'leaderboardConfigurationsInsert'' smart constructor.
-data LeaderboardConfigurationsInsert' = LeaderboardConfigurationsInsert'
+-- /See:/ 'leaderboardConfigurationsInsert' smart constructor.
+data LeaderboardConfigurationsInsert = LeaderboardConfigurationsInsert
     { _lciPayload       :: !LeaderboardConfiguration
     , _lciApplicationId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LeaderboardConfigurationsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'LeaderboardConfigurationsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lciPayload'
 --
 -- * 'lciApplicationId'
-leaderboardConfigurationsInsert'
+leaderboardConfigurationsInsert
     :: LeaderboardConfiguration -- ^ 'lciPayload'
     -> Text -- ^ 'lciApplicationId'
-    -> LeaderboardConfigurationsInsert'
-leaderboardConfigurationsInsert' pLciPayload_ pLciApplicationId_ =
-    LeaderboardConfigurationsInsert'
+    -> LeaderboardConfigurationsInsert
+leaderboardConfigurationsInsert pLciPayload_ pLciApplicationId_ =
+    LeaderboardConfigurationsInsert
     { _lciPayload = pLciPayload_
     , _lciApplicationId = pLciApplicationId_
     }
 
 -- | Multipart request metadata.
-lciPayload :: Lens' LeaderboardConfigurationsInsert' LeaderboardConfiguration
+lciPayload :: Lens' LeaderboardConfigurationsInsert LeaderboardConfiguration
 lciPayload
   = lens _lciPayload (\ s a -> s{_lciPayload = a})
 
 -- | The application ID from the Google Play developer console.
-lciApplicationId :: Lens' LeaderboardConfigurationsInsert' Text
+lciApplicationId :: Lens' LeaderboardConfigurationsInsert Text
 lciApplicationId
   = lens _lciApplicationId
       (\ s a -> s{_lciApplicationId = a})
 
 instance GoogleRequest
-         LeaderboardConfigurationsInsert' where
-        type Rs LeaderboardConfigurationsInsert' =
+         LeaderboardConfigurationsInsert where
+        type Rs LeaderboardConfigurationsInsert =
              LeaderboardConfiguration
-        requestClient LeaderboardConfigurationsInsert'{..}
+        requestClient LeaderboardConfigurationsInsert{..}
           = go _lciApplicationId (Just AltJSON) _lciPayload
               gamesConfigurationService
           where go

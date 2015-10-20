@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSenseHost.URLChannels.Insert
       URLChannelsInsertResource
 
     -- * Creating a Request
-    , urlChannelsInsert'
-    , URLChannelsInsert'
+    , urlChannelsInsert
+    , URLChannelsInsert
 
     -- * Request Lenses
     , uciPayload
@@ -41,7 +41,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.urlchannels.insert@ method which the
--- 'URLChannelsInsert'' request conforms to.
+-- 'URLChannelsInsert' request conforms to.
 type URLChannelsInsertResource =
      "adclients" :>
        Capture "adClientId" Text :>
@@ -51,43 +51,43 @@ type URLChannelsInsertResource =
 
 -- | Add a new URL channel to the host AdSense account.
 --
--- /See:/ 'urlChannelsInsert'' smart constructor.
-data URLChannelsInsert' = URLChannelsInsert'
+-- /See:/ 'urlChannelsInsert' smart constructor.
+data URLChannelsInsert = URLChannelsInsert
     { _uciPayload    :: !URLChannel
     , _uciAdClientId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'URLChannelsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'URLChannelsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'uciPayload'
 --
 -- * 'uciAdClientId'
-urlChannelsInsert'
+urlChannelsInsert
     :: URLChannel -- ^ 'uciPayload'
     -> Text -- ^ 'uciAdClientId'
-    -> URLChannelsInsert'
-urlChannelsInsert' pUciPayload_ pUciAdClientId_ =
-    URLChannelsInsert'
+    -> URLChannelsInsert
+urlChannelsInsert pUciPayload_ pUciAdClientId_ =
+    URLChannelsInsert
     { _uciPayload = pUciPayload_
     , _uciAdClientId = pUciAdClientId_
     }
 
 -- | Multipart request metadata.
-uciPayload :: Lens' URLChannelsInsert' URLChannel
+uciPayload :: Lens' URLChannelsInsert URLChannel
 uciPayload
   = lens _uciPayload (\ s a -> s{_uciPayload = a})
 
 -- | Ad client to which the new URL channel will be added.
-uciAdClientId :: Lens' URLChannelsInsert' Text
+uciAdClientId :: Lens' URLChannelsInsert Text
 uciAdClientId
   = lens _uciAdClientId
       (\ s a -> s{_uciAdClientId = a})
 
-instance GoogleRequest URLChannelsInsert' where
-        type Rs URLChannelsInsert' = URLChannel
-        requestClient URLChannelsInsert'{..}
+instance GoogleRequest URLChannelsInsert where
+        type Rs URLChannelsInsert = URLChannel
+        requestClient URLChannelsInsert{..}
           = go _uciAdClientId (Just AltJSON) _uciPayload
               adSenseHostService
           where go

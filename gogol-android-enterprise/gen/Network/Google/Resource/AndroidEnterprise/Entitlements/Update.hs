@@ -29,22 +29,22 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Update
       EntitlementsUpdateResource
 
     -- * Creating a Request
-    , entitlementsUpdate'
-    , EntitlementsUpdate'
+    , entitlementsUpdate
+    , EntitlementsUpdate
 
     -- * Request Lenses
-    , entEntitlementId
-    , entEnterpriseId
-    , entPayload
-    , entInstall
-    , entUserId
+    , euEntitlementId
+    , euEnterpriseId
+    , euPayload
+    , euInstall
+    , euUserId
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.entitlements.update@ method which the
--- 'EntitlementsUpdate'' request conforms to.
+-- 'EntitlementsUpdate' request conforms to.
 type EntitlementsUpdateResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -59,80 +59,79 @@ type EntitlementsUpdateResource =
 
 -- | Adds or updates an entitlement to an app for a user.
 --
--- /See:/ 'entitlementsUpdate'' smart constructor.
-data EntitlementsUpdate' = EntitlementsUpdate'
-    { _entEntitlementId :: !Text
-    , _entEnterpriseId  :: !Text
-    , _entPayload       :: !Entitlement
-    , _entInstall       :: !(Maybe Bool)
-    , _entUserId        :: !Text
+-- /See:/ 'entitlementsUpdate' smart constructor.
+data EntitlementsUpdate = EntitlementsUpdate
+    { _euEntitlementId :: !Text
+    , _euEnterpriseId  :: !Text
+    , _euPayload       :: !Entitlement
+    , _euInstall       :: !(Maybe Bool)
+    , _euUserId        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EntitlementsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'EntitlementsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'entEntitlementId'
+-- * 'euEntitlementId'
 --
--- * 'entEnterpriseId'
+-- * 'euEnterpriseId'
 --
--- * 'entPayload'
+-- * 'euPayload'
 --
--- * 'entInstall'
+-- * 'euInstall'
 --
--- * 'entUserId'
-entitlementsUpdate'
-    :: Text -- ^ 'entEntitlementId'
-    -> Text -- ^ 'entEnterpriseId'
-    -> Entitlement -- ^ 'entPayload'
-    -> Text -- ^ 'entUserId'
-    -> EntitlementsUpdate'
-entitlementsUpdate' pEntEntitlementId_ pEntEnterpriseId_ pEntPayload_ pEntUserId_ =
-    EntitlementsUpdate'
-    { _entEntitlementId = pEntEntitlementId_
-    , _entEnterpriseId = pEntEnterpriseId_
-    , _entPayload = pEntPayload_
-    , _entInstall = Nothing
-    , _entUserId = pEntUserId_
+-- * 'euUserId'
+entitlementsUpdate
+    :: Text -- ^ 'euEntitlementId'
+    -> Text -- ^ 'euEnterpriseId'
+    -> Entitlement -- ^ 'euPayload'
+    -> Text -- ^ 'euUserId'
+    -> EntitlementsUpdate
+entitlementsUpdate pEuEntitlementId_ pEuEnterpriseId_ pEuPayload_ pEuUserId_ =
+    EntitlementsUpdate
+    { _euEntitlementId = pEuEntitlementId_
+    , _euEnterpriseId = pEuEnterpriseId_
+    , _euPayload = pEuPayload_
+    , _euInstall = Nothing
+    , _euUserId = pEuUserId_
     }
 
 -- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
-entEntitlementId :: Lens' EntitlementsUpdate' Text
-entEntitlementId
-  = lens _entEntitlementId
-      (\ s a -> s{_entEntitlementId = a})
+euEntitlementId :: Lens' EntitlementsUpdate Text
+euEntitlementId
+  = lens _euEntitlementId
+      (\ s a -> s{_euEntitlementId = a})
 
 -- | The ID of the enterprise.
-entEnterpriseId :: Lens' EntitlementsUpdate' Text
-entEnterpriseId
-  = lens _entEnterpriseId
-      (\ s a -> s{_entEnterpriseId = a})
+euEnterpriseId :: Lens' EntitlementsUpdate Text
+euEnterpriseId
+  = lens _euEnterpriseId
+      (\ s a -> s{_euEnterpriseId = a})
 
 -- | Multipart request metadata.
-entPayload :: Lens' EntitlementsUpdate' Entitlement
-entPayload
-  = lens _entPayload (\ s a -> s{_entPayload = a})
+euPayload :: Lens' EntitlementsUpdate Entitlement
+euPayload
+  = lens _euPayload (\ s a -> s{_euPayload = a})
 
 -- | Set to true to also install the product on all the user\'s devices where
 -- possible. Failure to install on one or more devices will not prevent
 -- this operation from returning successfully, as long as the entitlement
 -- was successfully assigned to the user.
-entInstall :: Lens' EntitlementsUpdate' (Maybe Bool)
-entInstall
-  = lens _entInstall (\ s a -> s{_entInstall = a})
+euInstall :: Lens' EntitlementsUpdate (Maybe Bool)
+euInstall
+  = lens _euInstall (\ s a -> s{_euInstall = a})
 
 -- | The ID of the user.
-entUserId :: Lens' EntitlementsUpdate' Text
-entUserId
-  = lens _entUserId (\ s a -> s{_entUserId = a})
+euUserId :: Lens' EntitlementsUpdate Text
+euUserId = lens _euUserId (\ s a -> s{_euUserId = a})
 
-instance GoogleRequest EntitlementsUpdate' where
-        type Rs EntitlementsUpdate' = Entitlement
-        requestClient EntitlementsUpdate'{..}
-          = go _entEnterpriseId _entUserId _entEntitlementId
-              _entInstall
+instance GoogleRequest EntitlementsUpdate where
+        type Rs EntitlementsUpdate = Entitlement
+        requestClient EntitlementsUpdate{..}
+          = go _euEnterpriseId _euUserId _euEntitlementId
+              _euInstall
               (Just AltJSON)
-              _entPayload
+              _euPayload
               androidEnterpriseService
           where go
                   = buildClient

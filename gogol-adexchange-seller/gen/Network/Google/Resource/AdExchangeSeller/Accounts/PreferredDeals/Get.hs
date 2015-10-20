@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.Get
       AccountsPreferredDealsGetResource
 
     -- * Creating a Request
-    , accountsPreferredDealsGet'
-    , AccountsPreferredDealsGet'
+    , accountsPreferredDealsGet
+    , AccountsPreferredDealsGet
 
     -- * Request Lenses
     , apdgDealId
@@ -41,7 +41,7 @@ import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangeseller.accounts.preferreddeals.get@ method which the
--- 'AccountsPreferredDealsGet'' request conforms to.
+-- 'AccountsPreferredDealsGet' request conforms to.
 type AccountsPreferredDealsGetResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -51,44 +51,44 @@ type AccountsPreferredDealsGetResource =
 
 -- | Get information about the selected Ad Exchange Preferred Deal.
 --
--- /See:/ 'accountsPreferredDealsGet'' smart constructor.
-data AccountsPreferredDealsGet' = AccountsPreferredDealsGet'
+-- /See:/ 'accountsPreferredDealsGet' smart constructor.
+data AccountsPreferredDealsGet = AccountsPreferredDealsGet
     { _apdgDealId    :: !Text
     , _apdgAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsPreferredDealsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsPreferredDealsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'apdgDealId'
 --
 -- * 'apdgAccountId'
-accountsPreferredDealsGet'
+accountsPreferredDealsGet
     :: Text -- ^ 'apdgDealId'
     -> Text -- ^ 'apdgAccountId'
-    -> AccountsPreferredDealsGet'
-accountsPreferredDealsGet' pApdgDealId_ pApdgAccountId_ =
-    AccountsPreferredDealsGet'
+    -> AccountsPreferredDealsGet
+accountsPreferredDealsGet pApdgDealId_ pApdgAccountId_ =
+    AccountsPreferredDealsGet
     { _apdgDealId = pApdgDealId_
     , _apdgAccountId = pApdgAccountId_
     }
 
 -- | Preferred deal to get information about.
-apdgDealId :: Lens' AccountsPreferredDealsGet' Text
+apdgDealId :: Lens' AccountsPreferredDealsGet Text
 apdgDealId
   = lens _apdgDealId (\ s a -> s{_apdgDealId = a})
 
 -- | Account owning the deal.
-apdgAccountId :: Lens' AccountsPreferredDealsGet' Text
+apdgAccountId :: Lens' AccountsPreferredDealsGet Text
 apdgAccountId
   = lens _apdgAccountId
       (\ s a -> s{_apdgAccountId = a})
 
-instance GoogleRequest AccountsPreferredDealsGet'
+instance GoogleRequest AccountsPreferredDealsGet
          where
-        type Rs AccountsPreferredDealsGet' = PreferredDeal
-        requestClient AccountsPreferredDealsGet'{..}
+        type Rs AccountsPreferredDealsGet = PreferredDeal
+        requestClient AccountsPreferredDealsGet{..}
           = go _apdgAccountId _apdgDealId (Just AltJSON)
               adExchangeSellerService
           where go

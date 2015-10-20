@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.TargetVPNGateways.AggregatedList
       TargetVPNGatewaysAggregatedListResource
 
     -- * Creating a Request
-    , targetVPNGatewaysAggregatedList'
-    , TargetVPNGatewaysAggregatedList'
+    , targetVPNGatewaysAggregatedList
+    , TargetVPNGatewaysAggregatedList
 
     -- * Request Lenses
     , tvgalProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetVpnGateways.aggregatedList@ method which the
--- 'TargetVPNGatewaysAggregatedList'' request conforms to.
+-- 'TargetVPNGatewaysAggregatedList' request conforms to.
 type TargetVPNGatewaysAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
@@ -56,15 +56,15 @@ type TargetVPNGatewaysAggregatedListResource =
 
 -- | Retrieves the list of target VPN gateways grouped by scope.
 --
--- /See:/ 'targetVPNGatewaysAggregatedList'' smart constructor.
-data TargetVPNGatewaysAggregatedList' = TargetVPNGatewaysAggregatedList'
+-- /See:/ 'targetVPNGatewaysAggregatedList' smart constructor.
+data TargetVPNGatewaysAggregatedList = TargetVPNGatewaysAggregatedList
     { _tvgalProject    :: !Text
     , _tvgalFilter     :: !(Maybe Text)
     , _tvgalPageToken  :: !(Maybe Text)
     , _tvgalMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetVPNGatewaysAggregatedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetVPNGatewaysAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,11 +75,11 @@ data TargetVPNGatewaysAggregatedList' = TargetVPNGatewaysAggregatedList'
 -- * 'tvgalPageToken'
 --
 -- * 'tvgalMaxResults'
-targetVPNGatewaysAggregatedList'
+targetVPNGatewaysAggregatedList
     :: Text -- ^ 'tvgalProject'
-    -> TargetVPNGatewaysAggregatedList'
-targetVPNGatewaysAggregatedList' pTvgalProject_ =
-    TargetVPNGatewaysAggregatedList'
+    -> TargetVPNGatewaysAggregatedList
+targetVPNGatewaysAggregatedList pTvgalProject_ =
+    TargetVPNGatewaysAggregatedList
     { _tvgalProject = pTvgalProject_
     , _tvgalFilter = Nothing
     , _tvgalPageToken = Nothing
@@ -87,7 +87,7 @@ targetVPNGatewaysAggregatedList' pTvgalProject_ =
     }
 
 -- | Project ID for this request.
-tvgalProject :: Lens' TargetVPNGatewaysAggregatedList' Text
+tvgalProject :: Lens' TargetVPNGatewaysAggregatedList Text
 tvgalProject
   = lens _tvgalProject (\ s a -> s{_tvgalProject = a})
 
@@ -102,29 +102,29 @@ tvgalProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-tvgalFilter :: Lens' TargetVPNGatewaysAggregatedList' (Maybe Text)
+tvgalFilter :: Lens' TargetVPNGatewaysAggregatedList (Maybe Text)
 tvgalFilter
   = lens _tvgalFilter (\ s a -> s{_tvgalFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-tvgalPageToken :: Lens' TargetVPNGatewaysAggregatedList' (Maybe Text)
+tvgalPageToken :: Lens' TargetVPNGatewaysAggregatedList (Maybe Text)
 tvgalPageToken
   = lens _tvgalPageToken
       (\ s a -> s{_tvgalPageToken = a})
 
 -- | Maximum count of results to be returned.
-tvgalMaxResults :: Lens' TargetVPNGatewaysAggregatedList' Word32
+tvgalMaxResults :: Lens' TargetVPNGatewaysAggregatedList Word32
 tvgalMaxResults
   = lens _tvgalMaxResults
       (\ s a -> s{_tvgalMaxResults = a})
 
 instance GoogleRequest
-         TargetVPNGatewaysAggregatedList' where
-        type Rs TargetVPNGatewaysAggregatedList' =
+         TargetVPNGatewaysAggregatedList where
+        type Rs TargetVPNGatewaysAggregatedList =
              TargetVPNGatewayAggregatedList
-        requestClient TargetVPNGatewaysAggregatedList'{..}
+        requestClient TargetVPNGatewaysAggregatedList{..}
           = go _tvgalProject _tvgalFilter _tvgalPageToken
               (Just _tvgalMaxResults)
               (Just AltJSON)

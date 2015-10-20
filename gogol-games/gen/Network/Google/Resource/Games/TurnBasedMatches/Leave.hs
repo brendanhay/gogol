@@ -30,19 +30,19 @@ module Network.Google.Resource.Games.TurnBasedMatches.Leave
       TurnBasedMatchesLeaveResource
 
     -- * Creating a Request
-    , turnBasedMatchesLeave'
-    , TurnBasedMatchesLeave'
+    , turnBasedMatchesLeave
+    , TurnBasedMatchesLeave
 
     -- * Request Lenses
-    , turLanguage
-    , turMatchId
+    , tbmlLanguage
+    , tbmlMatchId
     ) where
 
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.turnBasedMatches.leave@ method which the
--- 'TurnBasedMatchesLeave'' request conforms to.
+-- 'TurnBasedMatchesLeave' request conforms to.
 type TurnBasedMatchesLeaveResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
@@ -54,42 +54,42 @@ type TurnBasedMatchesLeaveResource =
 -- | Leave a turn-based match when it is not the current player\'s turn,
 -- without canceling the match.
 --
--- /See:/ 'turnBasedMatchesLeave'' smart constructor.
-data TurnBasedMatchesLeave' = TurnBasedMatchesLeave'
-    { _turLanguage :: !(Maybe Text)
-    , _turMatchId  :: !Text
+-- /See:/ 'turnBasedMatchesLeave' smart constructor.
+data TurnBasedMatchesLeave = TurnBasedMatchesLeave
+    { _tbmlLanguage :: !(Maybe Text)
+    , _tbmlMatchId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TurnBasedMatchesLeave'' with the minimum fields required to make a request.
+-- | Creates a value of 'TurnBasedMatchesLeave' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'turLanguage'
+-- * 'tbmlLanguage'
 --
--- * 'turMatchId'
-turnBasedMatchesLeave'
-    :: Text -- ^ 'turMatchId'
-    -> TurnBasedMatchesLeave'
-turnBasedMatchesLeave' pTurMatchId_ =
-    TurnBasedMatchesLeave'
-    { _turLanguage = Nothing
-    , _turMatchId = pTurMatchId_
+-- * 'tbmlMatchId'
+turnBasedMatchesLeave
+    :: Text -- ^ 'tbmlMatchId'
+    -> TurnBasedMatchesLeave
+turnBasedMatchesLeave pTbmlMatchId_ =
+    TurnBasedMatchesLeave
+    { _tbmlLanguage = Nothing
+    , _tbmlMatchId = pTbmlMatchId_
     }
 
 -- | The preferred language to use for strings returned by this method.
-turLanguage :: Lens' TurnBasedMatchesLeave' (Maybe Text)
-turLanguage
-  = lens _turLanguage (\ s a -> s{_turLanguage = a})
+tbmlLanguage :: Lens' TurnBasedMatchesLeave (Maybe Text)
+tbmlLanguage
+  = lens _tbmlLanguage (\ s a -> s{_tbmlLanguage = a})
 
 -- | The ID of the match.
-turMatchId :: Lens' TurnBasedMatchesLeave' Text
-turMatchId
-  = lens _turMatchId (\ s a -> s{_turMatchId = a})
+tbmlMatchId :: Lens' TurnBasedMatchesLeave Text
+tbmlMatchId
+  = lens _tbmlMatchId (\ s a -> s{_tbmlMatchId = a})
 
-instance GoogleRequest TurnBasedMatchesLeave' where
-        type Rs TurnBasedMatchesLeave' = TurnBasedMatch
-        requestClient TurnBasedMatchesLeave'{..}
-          = go _turMatchId _turLanguage (Just AltJSON)
+instance GoogleRequest TurnBasedMatchesLeave where
+        type Rs TurnBasedMatchesLeave = TurnBasedMatch
+        requestClient TurnBasedMatchesLeave{..}
+          = go _tbmlMatchId _tbmlLanguage (Just AltJSON)
               gamesService
           where go
                   = buildClient

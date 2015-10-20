@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.Insert
       PlacementGroupsInsertResource
 
     -- * Creating a Request
-    , placementGroupsInsert'
-    , PlacementGroupsInsert'
+    , placementGroupsInsert
+    , PlacementGroupsInsert
 
     -- * Request Lenses
     , pgiProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placementGroups.insert@ method which the
--- 'PlacementGroupsInsert'' request conforms to.
+-- 'PlacementGroupsInsert' request conforms to.
 type PlacementGroupsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,42 +52,42 @@ type PlacementGroupsInsertResource =
 
 -- | Inserts a new placement group.
 --
--- /See:/ 'placementGroupsInsert'' smart constructor.
-data PlacementGroupsInsert' = PlacementGroupsInsert'
+-- /See:/ 'placementGroupsInsert' smart constructor.
+data PlacementGroupsInsert = PlacementGroupsInsert
     { _pgiProFileId :: !Int64
     , _pgiPayload   :: !PlacementGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlacementGroupsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlacementGroupsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pgiProFileId'
 --
 -- * 'pgiPayload'
-placementGroupsInsert'
+placementGroupsInsert
     :: Int64 -- ^ 'pgiProFileId'
     -> PlacementGroup -- ^ 'pgiPayload'
-    -> PlacementGroupsInsert'
-placementGroupsInsert' pPgiProFileId_ pPgiPayload_ =
-    PlacementGroupsInsert'
+    -> PlacementGroupsInsert
+placementGroupsInsert pPgiProFileId_ pPgiPayload_ =
+    PlacementGroupsInsert
     { _pgiProFileId = pPgiProFileId_
     , _pgiPayload = pPgiPayload_
     }
 
 -- | User profile ID associated with this request.
-pgiProFileId :: Lens' PlacementGroupsInsert' Int64
+pgiProFileId :: Lens' PlacementGroupsInsert Int64
 pgiProFileId
   = lens _pgiProFileId (\ s a -> s{_pgiProFileId = a})
 
 -- | Multipart request metadata.
-pgiPayload :: Lens' PlacementGroupsInsert' PlacementGroup
+pgiPayload :: Lens' PlacementGroupsInsert PlacementGroup
 pgiPayload
   = lens _pgiPayload (\ s a -> s{_pgiPayload = a})
 
-instance GoogleRequest PlacementGroupsInsert' where
-        type Rs PlacementGroupsInsert' = PlacementGroup
-        requestClient PlacementGroupsInsert'{..}
+instance GoogleRequest PlacementGroupsInsert where
+        type Rs PlacementGroupsInsert = PlacementGroup
+        requestClient PlacementGroupsInsert{..}
           = go _pgiProFileId (Just AltJSON) _pgiPayload
               dFAReportingService
           where go

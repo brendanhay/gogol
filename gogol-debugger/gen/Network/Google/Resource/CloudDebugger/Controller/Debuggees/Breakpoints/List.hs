@@ -38,8 +38,8 @@ module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Li
       ControllerDebuggeesBreakpointsListResource
 
     -- * Creating a Request
-    , controllerDebuggeesBreakpointsList'
-    , ControllerDebuggeesBreakpointsList'
+    , controllerDebuggeesBreakpointsList
+    , ControllerDebuggeesBreakpointsList
 
     -- * Request Lenses
     , cdblXgafv
@@ -57,7 +57,7 @@ import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @clouddebugger.controller.debuggees.breakpoints.list@ method which the
--- 'ControllerDebuggeesBreakpointsList'' request conforms to.
+-- 'ControllerDebuggeesBreakpointsList' request conforms to.
 type ControllerDebuggeesBreakpointsListResource =
      "v2" :>
        "controller" :>
@@ -86,8 +86,8 @@ type ControllerDebuggeesBreakpointsListResource =
 -- complete until the controller removes them from the active list to avoid
 -- setting those breakpoints again.
 --
--- /See:/ 'controllerDebuggeesBreakpointsList'' smart constructor.
-data ControllerDebuggeesBreakpointsList' = ControllerDebuggeesBreakpointsList'
+-- /See:/ 'controllerDebuggeesBreakpointsList' smart constructor.
+data ControllerDebuggeesBreakpointsList = ControllerDebuggeesBreakpointsList
     { _cdblXgafv          :: !(Maybe Text)
     , _cdblUploadProtocol :: !(Maybe Text)
     , _cdblPp             :: !Bool
@@ -99,7 +99,7 @@ data ControllerDebuggeesBreakpointsList' = ControllerDebuggeesBreakpointsList'
     , _cdblCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ControllerDebuggeesBreakpointsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ControllerDebuggeesBreakpointsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -120,11 +120,11 @@ data ControllerDebuggeesBreakpointsList' = ControllerDebuggeesBreakpointsList'
 -- * 'cdblDebuggeeId'
 --
 -- * 'cdblCallback'
-controllerDebuggeesBreakpointsList'
+controllerDebuggeesBreakpointsList
     :: Text -- ^ 'cdblDebuggeeId'
-    -> ControllerDebuggeesBreakpointsList'
-controllerDebuggeesBreakpointsList' pCdblDebuggeeId_ =
-    ControllerDebuggeesBreakpointsList'
+    -> ControllerDebuggeesBreakpointsList
+controllerDebuggeesBreakpointsList pCdblDebuggeeId_ =
+    ControllerDebuggeesBreakpointsList
     { _cdblXgafv = Nothing
     , _cdblUploadProtocol = Nothing
     , _cdblPp = True
@@ -137,34 +137,34 @@ controllerDebuggeesBreakpointsList' pCdblDebuggeeId_ =
     }
 
 -- | V1 error format.
-cdblXgafv :: Lens' ControllerDebuggeesBreakpointsList' (Maybe Text)
+cdblXgafv :: Lens' ControllerDebuggeesBreakpointsList (Maybe Text)
 cdblXgafv
   = lens _cdblXgafv (\ s a -> s{_cdblXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-cdblUploadProtocol :: Lens' ControllerDebuggeesBreakpointsList' (Maybe Text)
+cdblUploadProtocol :: Lens' ControllerDebuggeesBreakpointsList (Maybe Text)
 cdblUploadProtocol
   = lens _cdblUploadProtocol
       (\ s a -> s{_cdblUploadProtocol = a})
 
 -- | Pretty-print response.
-cdblPp :: Lens' ControllerDebuggeesBreakpointsList' Bool
+cdblPp :: Lens' ControllerDebuggeesBreakpointsList Bool
 cdblPp = lens _cdblPp (\ s a -> s{_cdblPp = a})
 
 -- | OAuth access token.
-cdblAccessToken :: Lens' ControllerDebuggeesBreakpointsList' (Maybe Text)
+cdblAccessToken :: Lens' ControllerDebuggeesBreakpointsList (Maybe Text)
 cdblAccessToken
   = lens _cdblAccessToken
       (\ s a -> s{_cdblAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-cdblUploadType :: Lens' ControllerDebuggeesBreakpointsList' (Maybe Text)
+cdblUploadType :: Lens' ControllerDebuggeesBreakpointsList (Maybe Text)
 cdblUploadType
   = lens _cdblUploadType
       (\ s a -> s{_cdblUploadType = a})
 
 -- | OAuth bearer token.
-cdblBearerToken :: Lens' ControllerDebuggeesBreakpointsList' (Maybe Text)
+cdblBearerToken :: Lens' ControllerDebuggeesBreakpointsList (Maybe Text)
 cdblBearerToken
   = lens _cdblBearerToken
       (\ s a -> s{_cdblBearerToken = a})
@@ -174,27 +174,27 @@ cdblBearerToken
 -- expired. The value should be set from the last returned response. The
 -- error code google.rpc.Code.ABORTED is returned on wait timeout (which
 -- does not require the agent to re-register with the server)
-cdblWaitToken :: Lens' ControllerDebuggeesBreakpointsList' (Maybe Text)
+cdblWaitToken :: Lens' ControllerDebuggeesBreakpointsList (Maybe Text)
 cdblWaitToken
   = lens _cdblWaitToken
       (\ s a -> s{_cdblWaitToken = a})
 
 -- | Identifies the debuggee.
-cdblDebuggeeId :: Lens' ControllerDebuggeesBreakpointsList' Text
+cdblDebuggeeId :: Lens' ControllerDebuggeesBreakpointsList Text
 cdblDebuggeeId
   = lens _cdblDebuggeeId
       (\ s a -> s{_cdblDebuggeeId = a})
 
 -- | JSONP
-cdblCallback :: Lens' ControllerDebuggeesBreakpointsList' (Maybe Text)
+cdblCallback :: Lens' ControllerDebuggeesBreakpointsList (Maybe Text)
 cdblCallback
   = lens _cdblCallback (\ s a -> s{_cdblCallback = a})
 
 instance GoogleRequest
-         ControllerDebuggeesBreakpointsList' where
-        type Rs ControllerDebuggeesBreakpointsList' =
+         ControllerDebuggeesBreakpointsList where
+        type Rs ControllerDebuggeesBreakpointsList =
              ListActiveBreakpointsResponse
-        requestClient ControllerDebuggeesBreakpointsList'{..}
+        requestClient ControllerDebuggeesBreakpointsList{..}
           = go _cdblDebuggeeId _cdblXgafv _cdblUploadProtocol
               (Just _cdblPp)
               _cdblAccessToken

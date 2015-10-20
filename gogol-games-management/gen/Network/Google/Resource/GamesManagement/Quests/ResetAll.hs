@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Quests.ResetAll
       QuestsResetAllResource
 
     -- * Creating a Request
-    , questsResetAll'
-    , QuestsResetAll'
+    , questsResetAll
+    , QuestsResetAll
 
     ) where
 
@@ -40,7 +40,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.quests.resetAll@ method which the
--- 'QuestsResetAll'' request conforms to.
+-- 'QuestsResetAll' request conforms to.
 type QuestsResetAllResource =
      "quests" :>
        "reset" :>
@@ -50,20 +50,20 @@ type QuestsResetAllResource =
 -- player. This method is only accessible to whitelisted tester accounts
 -- for your application.
 --
--- /See:/ 'questsResetAll'' smart constructor.
-data QuestsResetAll' =
-    QuestsResetAll'
+-- /See:/ 'questsResetAll' smart constructor.
+data QuestsResetAll =
+    QuestsResetAll
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'QuestsResetAll'' with the minimum fields required to make a request.
+-- | Creates a value of 'QuestsResetAll' with the minimum fields required to make a request.
 --
-questsResetAll'
-    :: QuestsResetAll'
-questsResetAll' = QuestsResetAll'
+questsResetAll
+    :: QuestsResetAll
+questsResetAll = QuestsResetAll
 
-instance GoogleRequest QuestsResetAll' where
-        type Rs QuestsResetAll' = ()
-        requestClient QuestsResetAll'{}
+instance GoogleRequest QuestsResetAll where
+        type Rs QuestsResetAll = ()
+        requestClient QuestsResetAll{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy QuestsResetAllResource)

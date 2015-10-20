@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.BucketAccessControls.Update
       BucketAccessControlsUpdateResource
 
     -- * Creating a Request
-    , bucketAccessControlsUpdate'
-    , BucketAccessControlsUpdate'
+    , bucketAccessControlsUpdate
+    , BucketAccessControlsUpdate
 
     -- * Request Lenses
     , bacuBucket
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.bucketAccessControls.update@ method which the
--- 'BucketAccessControlsUpdate'' request conforms to.
+-- 'BucketAccessControlsUpdate' request conforms to.
 type BucketAccessControlsUpdateResource =
      "b" :>
        Capture "bucket" Text :>
@@ -54,14 +54,14 @@ type BucketAccessControlsUpdateResource =
 
 -- | Updates an ACL entry on the specified bucket.
 --
--- /See:/ 'bucketAccessControlsUpdate'' smart constructor.
-data BucketAccessControlsUpdate' = BucketAccessControlsUpdate'
+-- /See:/ 'bucketAccessControlsUpdate' smart constructor.
+data BucketAccessControlsUpdate = BucketAccessControlsUpdate
     { _bacuBucket  :: !Text
     , _bacuPayload :: !BucketAccessControl
     , _bacuEntity  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BucketAccessControlsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'BucketAccessControlsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,40 +70,40 @@ data BucketAccessControlsUpdate' = BucketAccessControlsUpdate'
 -- * 'bacuPayload'
 --
 -- * 'bacuEntity'
-bucketAccessControlsUpdate'
+bucketAccessControlsUpdate
     :: Text -- ^ 'bacuBucket'
     -> BucketAccessControl -- ^ 'bacuPayload'
     -> Text -- ^ 'bacuEntity'
-    -> BucketAccessControlsUpdate'
-bucketAccessControlsUpdate' pBacuBucket_ pBacuPayload_ pBacuEntity_ =
-    BucketAccessControlsUpdate'
+    -> BucketAccessControlsUpdate
+bucketAccessControlsUpdate pBacuBucket_ pBacuPayload_ pBacuEntity_ =
+    BucketAccessControlsUpdate
     { _bacuBucket = pBacuBucket_
     , _bacuPayload = pBacuPayload_
     , _bacuEntity = pBacuEntity_
     }
 
 -- | Name of a bucket.
-bacuBucket :: Lens' BucketAccessControlsUpdate' Text
+bacuBucket :: Lens' BucketAccessControlsUpdate Text
 bacuBucket
   = lens _bacuBucket (\ s a -> s{_bacuBucket = a})
 
 -- | Multipart request metadata.
-bacuPayload :: Lens' BucketAccessControlsUpdate' BucketAccessControl
+bacuPayload :: Lens' BucketAccessControlsUpdate BucketAccessControl
 bacuPayload
   = lens _bacuPayload (\ s a -> s{_bacuPayload = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
 -- allAuthenticatedUsers.
-bacuEntity :: Lens' BucketAccessControlsUpdate' Text
+bacuEntity :: Lens' BucketAccessControlsUpdate Text
 bacuEntity
   = lens _bacuEntity (\ s a -> s{_bacuEntity = a})
 
-instance GoogleRequest BucketAccessControlsUpdate'
+instance GoogleRequest BucketAccessControlsUpdate
          where
-        type Rs BucketAccessControlsUpdate' =
+        type Rs BucketAccessControlsUpdate =
              BucketAccessControl
-        requestClient BucketAccessControlsUpdate'{..}
+        requestClient BucketAccessControlsUpdate{..}
           = go _bacuBucket _bacuEntity (Just AltJSON)
               _bacuPayload
               storageService

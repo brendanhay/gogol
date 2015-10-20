@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Permissions.Get
       PermissionsGetResource
 
     -- * Creating a Request
-    , permissionsGet'
-    , PermissionsGet'
+    , permissionsGet
+    , PermissionsGet
 
     -- * Request Lenses
     , pggFileId
@@ -41,7 +41,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.permissions.get@ method which the
--- 'PermissionsGet'' request conforms to.
+-- 'PermissionsGet' request conforms to.
 type PermissionsGetResource =
      "files" :>
        Capture "fileId" Text :>
@@ -51,43 +51,43 @@ type PermissionsGetResource =
 
 -- | Gets a permission by ID.
 --
--- /See:/ 'permissionsGet'' smart constructor.
-data PermissionsGet' = PermissionsGet'
+-- /See:/ 'permissionsGet' smart constructor.
+data PermissionsGet = PermissionsGet
     { _pggFileId       :: !Text
     , _pggPermissionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PermissionsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PermissionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pggFileId'
 --
 -- * 'pggPermissionId'
-permissionsGet'
+permissionsGet
     :: Text -- ^ 'pggFileId'
     -> Text -- ^ 'pggPermissionId'
-    -> PermissionsGet'
-permissionsGet' pPggFileId_ pPggPermissionId_ =
-    PermissionsGet'
+    -> PermissionsGet
+permissionsGet pPggFileId_ pPggPermissionId_ =
+    PermissionsGet
     { _pggFileId = pPggFileId_
     , _pggPermissionId = pPggPermissionId_
     }
 
 -- | The ID for the file.
-pggFileId :: Lens' PermissionsGet' Text
+pggFileId :: Lens' PermissionsGet Text
 pggFileId
   = lens _pggFileId (\ s a -> s{_pggFileId = a})
 
 -- | The ID for the permission.
-pggPermissionId :: Lens' PermissionsGet' Text
+pggPermissionId :: Lens' PermissionsGet Text
 pggPermissionId
   = lens _pggPermissionId
       (\ s a -> s{_pggPermissionId = a})
 
-instance GoogleRequest PermissionsGet' where
-        type Rs PermissionsGet' = Permission
-        requestClient PermissionsGet'{..}
+instance GoogleRequest PermissionsGet where
+        type Rs PermissionsGet = Permission
+        requestClient PermissionsGet{..}
           = go _pggFileId _pggPermissionId (Just AltJSON)
               driveService
           where go

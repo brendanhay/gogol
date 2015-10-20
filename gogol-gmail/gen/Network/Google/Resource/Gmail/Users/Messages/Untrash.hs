@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.Messages.Untrash
       UsersMessagesUntrashResource
 
     -- * Creating a Request
-    , usersMessagesUntrash'
-    , UsersMessagesUntrash'
+    , usersMessagesUntrash
+    , UsersMessagesUntrash
 
     -- * Request Lenses
     , umuUserId
@@ -41,7 +41,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.messages.untrash@ method which the
--- 'UsersMessagesUntrash'' request conforms to.
+-- 'UsersMessagesUntrash' request conforms to.
 type UsersMessagesUntrashResource =
      Capture "userId" Text :>
        "messages" :>
@@ -51,42 +51,42 @@ type UsersMessagesUntrashResource =
 
 -- | Removes the specified message from the trash.
 --
--- /See:/ 'usersMessagesUntrash'' smart constructor.
-data UsersMessagesUntrash' = UsersMessagesUntrash'
+-- /See:/ 'usersMessagesUntrash' smart constructor.
+data UsersMessagesUntrash = UsersMessagesUntrash
     { _umuUserId :: !Text
     , _umuId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersMessagesUntrash'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersMessagesUntrash' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'umuUserId'
 --
 -- * 'umuId'
-usersMessagesUntrash'
+usersMessagesUntrash
     :: Text -- ^ 'umuId'
     -> Text
-    -> UsersMessagesUntrash'
-usersMessagesUntrash' pUmuUserId_ pUmuId_ =
-    UsersMessagesUntrash'
+    -> UsersMessagesUntrash
+usersMessagesUntrash pUmuUserId_ pUmuId_ =
+    UsersMessagesUntrash
     { _umuUserId = pUmuUserId_
     , _umuId = pUmuId_
     }
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-umuUserId :: Lens' UsersMessagesUntrash' Text
+umuUserId :: Lens' UsersMessagesUntrash Text
 umuUserId
   = lens _umuUserId (\ s a -> s{_umuUserId = a})
 
 -- | The ID of the message to remove from Trash.
-umuId :: Lens' UsersMessagesUntrash' Text
+umuId :: Lens' UsersMessagesUntrash Text
 umuId = lens _umuId (\ s a -> s{_umuId = a})
 
-instance GoogleRequest UsersMessagesUntrash' where
-        type Rs UsersMessagesUntrash' = Message
-        requestClient UsersMessagesUntrash'{..}
+instance GoogleRequest UsersMessagesUntrash where
+        type Rs UsersMessagesUntrash = Message
+        requestClient UsersMessagesUntrash{..}
           = go _umuUserId _umuId (Just AltJSON) gmailService
           where go
                   = buildClient

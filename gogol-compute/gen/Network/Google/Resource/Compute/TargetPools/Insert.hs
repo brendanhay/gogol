@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.TargetPools.Insert
       TargetPoolsInsertResource
 
     -- * Creating a Request
-    , targetPoolsInsert'
-    , TargetPoolsInsert'
+    , targetPoolsInsert
+    , TargetPoolsInsert
 
     -- * Request Lenses
     , tpiProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.insert@ method which the
--- 'TargetPoolsInsert'' request conforms to.
+-- 'TargetPoolsInsert' request conforms to.
 type TargetPoolsInsertResource =
      Capture "project" Text :>
        "regions" :>
@@ -55,14 +55,14 @@ type TargetPoolsInsertResource =
 -- | Creates a TargetPool resource in the specified project and region using
 -- the data included in the request.
 --
--- /See:/ 'targetPoolsInsert'' smart constructor.
-data TargetPoolsInsert' = TargetPoolsInsert'
+-- /See:/ 'targetPoolsInsert' smart constructor.
+data TargetPoolsInsert = TargetPoolsInsert
     { _tpiProject :: !Text
     , _tpiPayload :: !TargetPool
     , _tpiRegion  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetPoolsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetPoolsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,36 +71,36 @@ data TargetPoolsInsert' = TargetPoolsInsert'
 -- * 'tpiPayload'
 --
 -- * 'tpiRegion'
-targetPoolsInsert'
+targetPoolsInsert
     :: Text -- ^ 'tpiProject'
     -> TargetPool -- ^ 'tpiPayload'
     -> Text -- ^ 'tpiRegion'
-    -> TargetPoolsInsert'
-targetPoolsInsert' pTpiProject_ pTpiPayload_ pTpiRegion_ =
-    TargetPoolsInsert'
+    -> TargetPoolsInsert
+targetPoolsInsert pTpiProject_ pTpiPayload_ pTpiRegion_ =
+    TargetPoolsInsert
     { _tpiProject = pTpiProject_
     , _tpiPayload = pTpiPayload_
     , _tpiRegion = pTpiRegion_
     }
 
 -- | Name of the project scoping this request.
-tpiProject :: Lens' TargetPoolsInsert' Text
+tpiProject :: Lens' TargetPoolsInsert Text
 tpiProject
   = lens _tpiProject (\ s a -> s{_tpiProject = a})
 
 -- | Multipart request metadata.
-tpiPayload :: Lens' TargetPoolsInsert' TargetPool
+tpiPayload :: Lens' TargetPoolsInsert TargetPool
 tpiPayload
   = lens _tpiPayload (\ s a -> s{_tpiPayload = a})
 
 -- | Name of the region scoping this request.
-tpiRegion :: Lens' TargetPoolsInsert' Text
+tpiRegion :: Lens' TargetPoolsInsert Text
 tpiRegion
   = lens _tpiRegion (\ s a -> s{_tpiRegion = a})
 
-instance GoogleRequest TargetPoolsInsert' where
-        type Rs TargetPoolsInsert' = Operation
-        requestClient TargetPoolsInsert'{..}
+instance GoogleRequest TargetPoolsInsert where
+        type Rs TargetPoolsInsert = Operation
+        requestClient TargetPoolsInsert{..}
           = go _tpiProject _tpiRegion (Just AltJSON)
               _tpiPayload
               computeService

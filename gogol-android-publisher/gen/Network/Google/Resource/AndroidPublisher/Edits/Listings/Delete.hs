@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.Delete
       EditsListingsDeleteResource
 
     -- * Creating a Request
-    , editsListingsDelete'
-    , EditsListingsDelete'
+    , editsListingsDelete
+    , EditsListingsDelete
 
     -- * Request Lenses
     , eldPackageName
@@ -42,7 +42,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.listings.delete@ method which the
--- 'EditsListingsDelete'' request conforms to.
+-- 'EditsListingsDelete' request conforms to.
 type EditsListingsDeleteResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -53,14 +53,14 @@ type EditsListingsDeleteResource =
 
 -- | Deletes the specified localized store listing from an edit.
 --
--- /See:/ 'editsListingsDelete'' smart constructor.
-data EditsListingsDelete' = EditsListingsDelete'
+-- /See:/ 'editsListingsDelete' smart constructor.
+data EditsListingsDelete = EditsListingsDelete
     { _eldPackageName :: !Text
     , _eldLanguage    :: !Text
     , _eldEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsListingsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsListingsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,13 +69,13 @@ data EditsListingsDelete' = EditsListingsDelete'
 -- * 'eldLanguage'
 --
 -- * 'eldEditId'
-editsListingsDelete'
+editsListingsDelete
     :: Text -- ^ 'eldPackageName'
     -> Text -- ^ 'eldLanguage'
     -> Text -- ^ 'eldEditId'
-    -> EditsListingsDelete'
-editsListingsDelete' pEldPackageName_ pEldLanguage_ pEldEditId_ =
-    EditsListingsDelete'
+    -> EditsListingsDelete
+editsListingsDelete pEldPackageName_ pEldLanguage_ pEldEditId_ =
+    EditsListingsDelete
     { _eldPackageName = pEldPackageName_
     , _eldLanguage = pEldLanguage_
     , _eldEditId = pEldEditId_
@@ -83,25 +83,25 @@ editsListingsDelete' pEldPackageName_ pEldLanguage_ pEldEditId_ =
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eldPackageName :: Lens' EditsListingsDelete' Text
+eldPackageName :: Lens' EditsListingsDelete Text
 eldPackageName
   = lens _eldPackageName
       (\ s a -> s{_eldPackageName = a})
 
 -- | The language code (a BCP-47 language tag) of the localized listing to
 -- read or modify. For example, to select Austrian German, pass \"de-AT\".
-eldLanguage :: Lens' EditsListingsDelete' Text
+eldLanguage :: Lens' EditsListingsDelete Text
 eldLanguage
   = lens _eldLanguage (\ s a -> s{_eldLanguage = a})
 
 -- | Unique identifier for this edit.
-eldEditId :: Lens' EditsListingsDelete' Text
+eldEditId :: Lens' EditsListingsDelete Text
 eldEditId
   = lens _eldEditId (\ s a -> s{_eldEditId = a})
 
-instance GoogleRequest EditsListingsDelete' where
-        type Rs EditsListingsDelete' = ()
-        requestClient EditsListingsDelete'{..}
+instance GoogleRequest EditsListingsDelete where
+        type Rs EditsListingsDelete = ()
+        requestClient EditsListingsDelete{..}
           = go _eldPackageName _eldEditId _eldLanguage
               (Just AltJSON)
               androidPublisherService

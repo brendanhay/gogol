@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.AccountPermissionGroups.List
       AccountPermissionGroupsListResource
 
     -- * Creating a Request
-    , accountPermissionGroupsList'
-    , AccountPermissionGroupsList'
+    , accountPermissionGroupsList
+    , AccountPermissionGroupsList
 
     -- * Request Lenses
     , apglProFileId
@@ -40,7 +40,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accountPermissionGroups.list@ method which the
--- 'AccountPermissionGroupsList'' request conforms to.
+-- 'AccountPermissionGroupsList' request conforms to.
 type AccountPermissionGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -50,35 +50,35 @@ type AccountPermissionGroupsListResource =
 
 -- | Retrieves the list of account permission groups.
 --
--- /See:/ 'accountPermissionGroupsList'' smart constructor.
-newtype AccountPermissionGroupsList' = AccountPermissionGroupsList'
+-- /See:/ 'accountPermissionGroupsList' smart constructor.
+newtype AccountPermissionGroupsList = AccountPermissionGroupsList
     { _apglProFileId :: Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountPermissionGroupsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountPermissionGroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'apglProFileId'
-accountPermissionGroupsList'
+accountPermissionGroupsList
     :: Int64 -- ^ 'apglProFileId'
-    -> AccountPermissionGroupsList'
-accountPermissionGroupsList' pApglProFileId_ =
-    AccountPermissionGroupsList'
+    -> AccountPermissionGroupsList
+accountPermissionGroupsList pApglProFileId_ =
+    AccountPermissionGroupsList
     { _apglProFileId = pApglProFileId_
     }
 
 -- | User profile ID associated with this request.
-apglProFileId :: Lens' AccountPermissionGroupsList' Int64
+apglProFileId :: Lens' AccountPermissionGroupsList Int64
 apglProFileId
   = lens _apglProFileId
       (\ s a -> s{_apglProFileId = a})
 
-instance GoogleRequest AccountPermissionGroupsList'
+instance GoogleRequest AccountPermissionGroupsList
          where
-        type Rs AccountPermissionGroupsList' =
+        type Rs AccountPermissionGroupsList =
              AccountPermissionGroupsListResponse
-        requestClient AccountPermissionGroupsList'{..}
+        requestClient AccountPermissionGroupsList{..}
           = go _apglProFileId (Just AltJSON)
               dFAReportingService
           where go

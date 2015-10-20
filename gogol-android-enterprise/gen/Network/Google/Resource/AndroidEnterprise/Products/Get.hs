@@ -29,20 +29,20 @@ module Network.Google.Resource.AndroidEnterprise.Products.Get
       ProductsGetResource
 
     -- * Creating a Request
-    , productsGet'
-    , ProductsGet'
+    , productsGet
+    , ProductsGet
 
     -- * Request Lenses
-    , pEnterpriseId
-    , pLanguage
-    , pProductId
+    , proEnterpriseId
+    , proLanguage
+    , proProductId
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.products.get@ method which the
--- 'ProductsGet'' request conforms to.
+-- 'ProductsGet' request conforms to.
 type ProductsGetResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -53,54 +53,54 @@ type ProductsGetResource =
 
 -- | Retrieves details of a product for display to an enterprise admin.
 --
--- /See:/ 'productsGet'' smart constructor.
-data ProductsGet' = ProductsGet'
-    { _pEnterpriseId :: !Text
-    , _pLanguage     :: !(Maybe Text)
-    , _pProductId    :: !Text
+-- /See:/ 'productsGet' smart constructor.
+data ProductsGet = ProductsGet
+    { _proEnterpriseId :: !Text
+    , _proLanguage     :: !(Maybe Text)
+    , _proProductId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProductsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pEnterpriseId'
+-- * 'proEnterpriseId'
 --
--- * 'pLanguage'
+-- * 'proLanguage'
 --
--- * 'pProductId'
-productsGet'
-    :: Text -- ^ 'pEnterpriseId'
-    -> Text -- ^ 'pProductId'
-    -> ProductsGet'
-productsGet' pPEnterpriseId_ pPProductId_ =
-    ProductsGet'
-    { _pEnterpriseId = pPEnterpriseId_
-    , _pLanguage = Nothing
-    , _pProductId = pPProductId_
+-- * 'proProductId'
+productsGet
+    :: Text -- ^ 'proEnterpriseId'
+    -> Text -- ^ 'proProductId'
+    -> ProductsGet
+productsGet pProEnterpriseId_ pProProductId_ =
+    ProductsGet
+    { _proEnterpriseId = pProEnterpriseId_
+    , _proLanguage = Nothing
+    , _proProductId = pProProductId_
     }
 
 -- | The ID of the enterprise.
-pEnterpriseId :: Lens' ProductsGet' Text
-pEnterpriseId
-  = lens _pEnterpriseId
-      (\ s a -> s{_pEnterpriseId = a})
+proEnterpriseId :: Lens' ProductsGet Text
+proEnterpriseId
+  = lens _proEnterpriseId
+      (\ s a -> s{_proEnterpriseId = a})
 
 -- | The BCP47 tag for the user\'s preferred language (e.g. \"en-US\",
 -- \"de\").
-pLanguage :: Lens' ProductsGet' (Maybe Text)
-pLanguage
-  = lens _pLanguage (\ s a -> s{_pLanguage = a})
+proLanguage :: Lens' ProductsGet (Maybe Text)
+proLanguage
+  = lens _proLanguage (\ s a -> s{_proLanguage = a})
 
 -- | The ID of the product, e.g. \"app:com.google.android.gm\".
-pProductId :: Lens' ProductsGet' Text
-pProductId
-  = lens _pProductId (\ s a -> s{_pProductId = a})
+proProductId :: Lens' ProductsGet Text
+proProductId
+  = lens _proProductId (\ s a -> s{_proProductId = a})
 
-instance GoogleRequest ProductsGet' where
-        type Rs ProductsGet' = Product
-        requestClient ProductsGet'{..}
-          = go _pEnterpriseId _pProductId _pLanguage
+instance GoogleRequest ProductsGet where
+        type Rs ProductsGet = Product
+        requestClient ProductsGet{..}
+          = go _proEnterpriseId _proProductId _proLanguage
               (Just AltJSON)
               androidEnterpriseService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.Details.Update
       EditsDetailsUpdateResource
 
     -- * Creating a Request
-    , editsDetailsUpdate'
-    , EditsDetailsUpdate'
+    , editsDetailsUpdate
+    , EditsDetailsUpdate
 
     -- * Request Lenses
     , eduPackageName
@@ -42,7 +42,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.details.update@ method which the
--- 'EditsDetailsUpdate'' request conforms to.
+-- 'EditsDetailsUpdate' request conforms to.
 type EditsDetailsUpdateResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -53,14 +53,14 @@ type EditsDetailsUpdateResource =
 
 -- | Updates app details for this edit.
 --
--- /See:/ 'editsDetailsUpdate'' smart constructor.
-data EditsDetailsUpdate' = EditsDetailsUpdate'
+-- /See:/ 'editsDetailsUpdate' smart constructor.
+data EditsDetailsUpdate = EditsDetailsUpdate
     { _eduPackageName :: !Text
     , _eduPayload     :: !AppDetails
     , _eduEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsDetailsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsDetailsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,13 +69,13 @@ data EditsDetailsUpdate' = EditsDetailsUpdate'
 -- * 'eduPayload'
 --
 -- * 'eduEditId'
-editsDetailsUpdate'
+editsDetailsUpdate
     :: Text -- ^ 'eduPackageName'
     -> AppDetails -- ^ 'eduPayload'
     -> Text -- ^ 'eduEditId'
-    -> EditsDetailsUpdate'
-editsDetailsUpdate' pEduPackageName_ pEduPayload_ pEduEditId_ =
-    EditsDetailsUpdate'
+    -> EditsDetailsUpdate
+editsDetailsUpdate pEduPackageName_ pEduPayload_ pEduEditId_ =
+    EditsDetailsUpdate
     { _eduPackageName = pEduPackageName_
     , _eduPayload = pEduPayload_
     , _eduEditId = pEduEditId_
@@ -83,24 +83,24 @@ editsDetailsUpdate' pEduPackageName_ pEduPayload_ pEduEditId_ =
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eduPackageName :: Lens' EditsDetailsUpdate' Text
+eduPackageName :: Lens' EditsDetailsUpdate Text
 eduPackageName
   = lens _eduPackageName
       (\ s a -> s{_eduPackageName = a})
 
 -- | Multipart request metadata.
-eduPayload :: Lens' EditsDetailsUpdate' AppDetails
+eduPayload :: Lens' EditsDetailsUpdate AppDetails
 eduPayload
   = lens _eduPayload (\ s a -> s{_eduPayload = a})
 
 -- | Unique identifier for this edit.
-eduEditId :: Lens' EditsDetailsUpdate' Text
+eduEditId :: Lens' EditsDetailsUpdate Text
 eduEditId
   = lens _eduEditId (\ s a -> s{_eduEditId = a})
 
-instance GoogleRequest EditsDetailsUpdate' where
-        type Rs EditsDetailsUpdate' = AppDetails
-        requestClient EditsDetailsUpdate'{..}
+instance GoogleRequest EditsDetailsUpdate where
+        type Rs EditsDetailsUpdate = AppDetails
+        requestClient EditsDetailsUpdate{..}
           = go _eduPackageName _eduEditId (Just AltJSON)
               _eduPayload
               androidPublisherService

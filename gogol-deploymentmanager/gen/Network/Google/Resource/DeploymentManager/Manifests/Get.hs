@@ -29,8 +29,8 @@ module Network.Google.Resource.DeploymentManager.Manifests.Get
       ManifestsGetResource
 
     -- * Creating a Request
-    , manifestsGet'
-    , ManifestsGet'
+    , manifestsGet
+    , ManifestsGet
 
     -- * Request Lenses
     , mgProject
@@ -42,7 +42,7 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @deploymentmanager.manifests.get@ method which the
--- 'ManifestsGet'' request conforms to.
+-- 'ManifestsGet' request conforms to.
 type ManifestsGetResource =
      Capture "project" Text :>
        "global" :>
@@ -54,14 +54,14 @@ type ManifestsGetResource =
 
 -- | Gets information about a specific manifest.
 --
--- /See:/ 'manifestsGet'' smart constructor.
-data ManifestsGet' = ManifestsGet'
+-- /See:/ 'manifestsGet' smart constructor.
+data ManifestsGet = ManifestsGet
     { _mgProject    :: !Text
     , _mgManifest   :: !Text
     , _mgDeployment :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManifestsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManifestsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,36 +70,36 @@ data ManifestsGet' = ManifestsGet'
 -- * 'mgManifest'
 --
 -- * 'mgDeployment'
-manifestsGet'
+manifestsGet
     :: Text -- ^ 'mgProject'
     -> Text -- ^ 'mgManifest'
     -> Text -- ^ 'mgDeployment'
-    -> ManifestsGet'
-manifestsGet' pMgProject_ pMgManifest_ pMgDeployment_ =
-    ManifestsGet'
+    -> ManifestsGet
+manifestsGet pMgProject_ pMgManifest_ pMgDeployment_ =
+    ManifestsGet
     { _mgProject = pMgProject_
     , _mgManifest = pMgManifest_
     , _mgDeployment = pMgDeployment_
     }
 
 -- | The project ID for this request.
-mgProject :: Lens' ManifestsGet' Text
+mgProject :: Lens' ManifestsGet Text
 mgProject
   = lens _mgProject (\ s a -> s{_mgProject = a})
 
 -- | The name of the manifest for this request.
-mgManifest :: Lens' ManifestsGet' Text
+mgManifest :: Lens' ManifestsGet Text
 mgManifest
   = lens _mgManifest (\ s a -> s{_mgManifest = a})
 
 -- | The name of the deployment for this request.
-mgDeployment :: Lens' ManifestsGet' Text
+mgDeployment :: Lens' ManifestsGet Text
 mgDeployment
   = lens _mgDeployment (\ s a -> s{_mgDeployment = a})
 
-instance GoogleRequest ManifestsGet' where
-        type Rs ManifestsGet' = Manifest
-        requestClient ManifestsGet'{..}
+instance GoogleRequest ManifestsGet where
+        type Rs ManifestsGet = Manifest
+        requestClient ManifestsGet{..}
           = go _mgProject _mgDeployment _mgManifest
               (Just AltJSON)
               deploymentManagerService

@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.TurnBasedMatches.Join
       TurnBasedMatchesJoinResource
 
     -- * Creating a Request
-    , turnBasedMatchesJoin'
-    , TurnBasedMatchesJoin'
+    , turnBasedMatchesJoin
+    , TurnBasedMatchesJoin
 
     -- * Request Lenses
     , tbmjLanguage
@@ -41,7 +41,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.turnBasedMatches.join@ method which the
--- 'TurnBasedMatchesJoin'' request conforms to.
+-- 'TurnBasedMatchesJoin' request conforms to.
 type TurnBasedMatchesJoinResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
@@ -52,41 +52,41 @@ type TurnBasedMatchesJoinResource =
 
 -- | Join a turn-based match.
 --
--- /See:/ 'turnBasedMatchesJoin'' smart constructor.
-data TurnBasedMatchesJoin' = TurnBasedMatchesJoin'
+-- /See:/ 'turnBasedMatchesJoin' smart constructor.
+data TurnBasedMatchesJoin = TurnBasedMatchesJoin
     { _tbmjLanguage :: !(Maybe Text)
     , _tbmjMatchId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TurnBasedMatchesJoin'' with the minimum fields required to make a request.
+-- | Creates a value of 'TurnBasedMatchesJoin' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tbmjLanguage'
 --
 -- * 'tbmjMatchId'
-turnBasedMatchesJoin'
+turnBasedMatchesJoin
     :: Text -- ^ 'tbmjMatchId'
-    -> TurnBasedMatchesJoin'
-turnBasedMatchesJoin' pTbmjMatchId_ =
-    TurnBasedMatchesJoin'
+    -> TurnBasedMatchesJoin
+turnBasedMatchesJoin pTbmjMatchId_ =
+    TurnBasedMatchesJoin
     { _tbmjLanguage = Nothing
     , _tbmjMatchId = pTbmjMatchId_
     }
 
 -- | The preferred language to use for strings returned by this method.
-tbmjLanguage :: Lens' TurnBasedMatchesJoin' (Maybe Text)
+tbmjLanguage :: Lens' TurnBasedMatchesJoin (Maybe Text)
 tbmjLanguage
   = lens _tbmjLanguage (\ s a -> s{_tbmjLanguage = a})
 
 -- | The ID of the match.
-tbmjMatchId :: Lens' TurnBasedMatchesJoin' Text
+tbmjMatchId :: Lens' TurnBasedMatchesJoin Text
 tbmjMatchId
   = lens _tbmjMatchId (\ s a -> s{_tbmjMatchId = a})
 
-instance GoogleRequest TurnBasedMatchesJoin' where
-        type Rs TurnBasedMatchesJoin' = TurnBasedMatch
-        requestClient TurnBasedMatchesJoin'{..}
+instance GoogleRequest TurnBasedMatchesJoin where
+        type Rs TurnBasedMatchesJoin = TurnBasedMatch
+        requestClient TurnBasedMatchesJoin{..}
           = go _tbmjMatchId _tbmjLanguage (Just AltJSON)
               gamesService
           where go

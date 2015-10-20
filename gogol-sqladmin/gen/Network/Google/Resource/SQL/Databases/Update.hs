@@ -30,8 +30,8 @@ module Network.Google.Resource.SQL.Databases.Update
       DatabasesUpdateResource
 
     -- * Creating a Request
-    , databasesUpdate'
-    , DatabasesUpdate'
+    , databasesUpdate
+    , DatabasesUpdate
 
     -- * Request Lenses
     , duProject
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.databases.update@ method which the
--- 'DatabasesUpdate'' request conforms to.
+-- 'DatabasesUpdate' request conforms to.
 type DatabasesUpdateResource =
      "projects" :>
        Capture "project" Text :>
@@ -58,15 +58,15 @@ type DatabasesUpdateResource =
 -- | Updates a resource containing information about a database inside a
 -- Cloud SQL instance.
 --
--- /See:/ 'databasesUpdate'' smart constructor.
-data DatabasesUpdate' = DatabasesUpdate'
+-- /See:/ 'databasesUpdate' smart constructor.
+data DatabasesUpdate = DatabasesUpdate
     { _duProject  :: !Text
     , _duDatabase :: !Text
     , _duPayload  :: !Database
     , _duInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatabasesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatabasesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data DatabasesUpdate' = DatabasesUpdate'
 -- * 'duPayload'
 --
 -- * 'duInstance'
-databasesUpdate'
+databasesUpdate
     :: Text -- ^ 'duProject'
     -> Text -- ^ 'duDatabase'
     -> Database -- ^ 'duPayload'
     -> Text -- ^ 'duInstance'
-    -> DatabasesUpdate'
-databasesUpdate' pDuProject_ pDuDatabase_ pDuPayload_ pDuInstance_ =
-    DatabasesUpdate'
+    -> DatabasesUpdate
+databasesUpdate pDuProject_ pDuDatabase_ pDuPayload_ pDuInstance_ =
+    DatabasesUpdate
     { _duProject = pDuProject_
     , _duDatabase = pDuDatabase_
     , _duPayload = pDuPayload_
@@ -92,28 +92,28 @@ databasesUpdate' pDuProject_ pDuDatabase_ pDuPayload_ pDuInstance_ =
     }
 
 -- | Project ID of the project that contains the instance.
-duProject :: Lens' DatabasesUpdate' Text
+duProject :: Lens' DatabasesUpdate Text
 duProject
   = lens _duProject (\ s a -> s{_duProject = a})
 
 -- | Name of the database to be updated in the instance.
-duDatabase :: Lens' DatabasesUpdate' Text
+duDatabase :: Lens' DatabasesUpdate Text
 duDatabase
   = lens _duDatabase (\ s a -> s{_duDatabase = a})
 
 -- | Multipart request metadata.
-duPayload :: Lens' DatabasesUpdate' Database
+duPayload :: Lens' DatabasesUpdate Database
 duPayload
   = lens _duPayload (\ s a -> s{_duPayload = a})
 
 -- | Database instance ID. This does not include the project ID.
-duInstance :: Lens' DatabasesUpdate' Text
+duInstance :: Lens' DatabasesUpdate Text
 duInstance
   = lens _duInstance (\ s a -> s{_duInstance = a})
 
-instance GoogleRequest DatabasesUpdate' where
-        type Rs DatabasesUpdate' = Operation
-        requestClient DatabasesUpdate'{..}
+instance GoogleRequest DatabasesUpdate where
+        type Rs DatabasesUpdate = Operation
+        requestClient DatabasesUpdate{..}
           = go _duProject _duInstance _duDatabase
               (Just AltJSON)
               _duPayload

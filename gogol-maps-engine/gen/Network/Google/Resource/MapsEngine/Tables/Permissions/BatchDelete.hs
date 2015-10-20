@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Tables.Permissions.BatchDelete
       TablesPermissionsBatchDeleteResource
 
     -- * Creating a Request
-    , tablesPermissionsBatchDelete'
-    , TablesPermissionsBatchDelete'
+    , tablesPermissionsBatchDelete
+    , TablesPermissionsBatchDelete
 
     -- * Request Lenses
     , tpbdPayload
@@ -41,7 +41,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.tables.permissions.batchDelete@ method which the
--- 'TablesPermissionsBatchDelete'' request conforms to.
+-- 'TablesPermissionsBatchDelete' request conforms to.
 type TablesPermissionsBatchDeleteResource =
      "tables" :>
        Capture "id" Text :>
@@ -53,43 +53,43 @@ type TablesPermissionsBatchDeleteResource =
 
 -- | Remove permission entries from an already existing asset.
 --
--- /See:/ 'tablesPermissionsBatchDelete'' smart constructor.
-data TablesPermissionsBatchDelete' = TablesPermissionsBatchDelete'
+-- /See:/ 'tablesPermissionsBatchDelete' smart constructor.
+data TablesPermissionsBatchDelete = TablesPermissionsBatchDelete
     { _tpbdPayload :: !PermissionsBatchDeleteRequest
     , _tpbdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesPermissionsBatchDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesPermissionsBatchDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tpbdPayload'
 --
 -- * 'tpbdId'
-tablesPermissionsBatchDelete'
+tablesPermissionsBatchDelete
     :: PermissionsBatchDeleteRequest -- ^ 'tpbdPayload'
     -> Text -- ^ 'tpbdId'
-    -> TablesPermissionsBatchDelete'
-tablesPermissionsBatchDelete' pTpbdPayload_ pTpbdId_ =
-    TablesPermissionsBatchDelete'
+    -> TablesPermissionsBatchDelete
+tablesPermissionsBatchDelete pTpbdPayload_ pTpbdId_ =
+    TablesPermissionsBatchDelete
     { _tpbdPayload = pTpbdPayload_
     , _tpbdId = pTpbdId_
     }
 
 -- | Multipart request metadata.
-tpbdPayload :: Lens' TablesPermissionsBatchDelete' PermissionsBatchDeleteRequest
+tpbdPayload :: Lens' TablesPermissionsBatchDelete PermissionsBatchDeleteRequest
 tpbdPayload
   = lens _tpbdPayload (\ s a -> s{_tpbdPayload = a})
 
 -- | The ID of the asset from which permissions will be removed.
-tpbdId :: Lens' TablesPermissionsBatchDelete' Text
+tpbdId :: Lens' TablesPermissionsBatchDelete Text
 tpbdId = lens _tpbdId (\ s a -> s{_tpbdId = a})
 
-instance GoogleRequest TablesPermissionsBatchDelete'
+instance GoogleRequest TablesPermissionsBatchDelete
          where
-        type Rs TablesPermissionsBatchDelete' =
+        type Rs TablesPermissionsBatchDelete =
              PermissionsBatchDeleteResponse
-        requestClient TablesPermissionsBatchDelete'{..}
+        requestClient TablesPermissionsBatchDelete{..}
           = go _tpbdId (Just AltJSON) _tpbdPayload
               mapsEngineService
           where go

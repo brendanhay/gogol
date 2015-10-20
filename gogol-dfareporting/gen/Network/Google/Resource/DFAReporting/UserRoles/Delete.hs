@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.UserRoles.Delete
       UserRolesDeleteResource
 
     -- * Creating a Request
-    , userRolesDelete'
-    , UserRolesDelete'
+    , userRolesDelete
+    , UserRolesDelete
 
     -- * Request Lenses
     , urdProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.userRoles.delete@ method which the
--- 'UserRolesDelete'' request conforms to.
+-- 'UserRolesDelete' request conforms to.
 type UserRolesDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,41 +51,41 @@ type UserRolesDeleteResource =
 
 -- | Deletes an existing user role.
 --
--- /See:/ 'userRolesDelete'' smart constructor.
-data UserRolesDelete' = UserRolesDelete'
+-- /See:/ 'userRolesDelete' smart constructor.
+data UserRolesDelete = UserRolesDelete
     { _urdProFileId :: !Int64
     , _urdId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserRolesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'UserRolesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'urdProFileId'
 --
 -- * 'urdId'
-userRolesDelete'
+userRolesDelete
     :: Int64 -- ^ 'urdProFileId'
     -> Int64 -- ^ 'urdId'
-    -> UserRolesDelete'
-userRolesDelete' pUrdProFileId_ pUrdId_ =
-    UserRolesDelete'
+    -> UserRolesDelete
+userRolesDelete pUrdProFileId_ pUrdId_ =
+    UserRolesDelete
     { _urdProFileId = pUrdProFileId_
     , _urdId = pUrdId_
     }
 
 -- | User profile ID associated with this request.
-urdProFileId :: Lens' UserRolesDelete' Int64
+urdProFileId :: Lens' UserRolesDelete Int64
 urdProFileId
   = lens _urdProFileId (\ s a -> s{_urdProFileId = a})
 
 -- | User role ID.
-urdId :: Lens' UserRolesDelete' Int64
+urdId :: Lens' UserRolesDelete Int64
 urdId = lens _urdId (\ s a -> s{_urdId = a})
 
-instance GoogleRequest UserRolesDelete' where
-        type Rs UserRolesDelete' = ()
-        requestClient UserRolesDelete'{..}
+instance GoogleRequest UserRolesDelete where
+        type Rs UserRolesDelete = ()
+        requestClient UserRolesDelete{..}
           = go _urdProFileId _urdId (Just AltJSON)
               dFAReportingService
           where go

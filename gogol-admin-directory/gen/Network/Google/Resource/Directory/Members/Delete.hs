@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Members.Delete
       MembersDeleteResource
 
     -- * Creating a Request
-    , membersDelete'
-    , MembersDelete'
+    , membersDelete
+    , MembersDelete
 
     -- * Request Lenses
     , mdMemberKey
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.members.delete@ method which the
--- 'MembersDelete'' request conforms to.
+-- 'MembersDelete' request conforms to.
 type MembersDeleteResource =
      "groups" :>
        Capture "groupKey" Text :>
@@ -51,42 +51,42 @@ type MembersDeleteResource =
 
 -- | Remove membership.
 --
--- /See:/ 'membersDelete'' smart constructor.
-data MembersDelete' = MembersDelete'
+-- /See:/ 'membersDelete' smart constructor.
+data MembersDelete = MembersDelete
     { _mdMemberKey :: !Text
     , _mdGroupKey  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MembersDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'MembersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mdMemberKey'
 --
 -- * 'mdGroupKey'
-membersDelete'
+membersDelete
     :: Text -- ^ 'mdMemberKey'
     -> Text -- ^ 'mdGroupKey'
-    -> MembersDelete'
-membersDelete' pMdMemberKey_ pMdGroupKey_ =
-    MembersDelete'
+    -> MembersDelete
+membersDelete pMdMemberKey_ pMdGroupKey_ =
+    MembersDelete
     { _mdMemberKey = pMdMemberKey_
     , _mdGroupKey = pMdGroupKey_
     }
 
 -- | Email or immutable Id of the member
-mdMemberKey :: Lens' MembersDelete' Text
+mdMemberKey :: Lens' MembersDelete Text
 mdMemberKey
   = lens _mdMemberKey (\ s a -> s{_mdMemberKey = a})
 
 -- | Email or immutable Id of the group
-mdGroupKey :: Lens' MembersDelete' Text
+mdGroupKey :: Lens' MembersDelete Text
 mdGroupKey
   = lens _mdGroupKey (\ s a -> s{_mdGroupKey = a})
 
-instance GoogleRequest MembersDelete' where
-        type Rs MembersDelete' = ()
-        requestClient MembersDelete'{..}
+instance GoogleRequest MembersDelete where
+        type Rs MembersDelete = ()
+        requestClient MembersDelete{..}
           = go _mdGroupKey _mdMemberKey (Just AltJSON)
               directoryService
           where go

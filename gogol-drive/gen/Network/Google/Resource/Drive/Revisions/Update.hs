@@ -29,20 +29,20 @@ module Network.Google.Resource.Drive.Revisions.Update
       RevisionsUpdateResource
 
     -- * Creating a Request
-    , revisionsUpdate'
-    , RevisionsUpdate'
+    , revisionsUpdate
+    , RevisionsUpdate
 
     -- * Request Lenses
-    , ruPayload
-    , ruFileId
-    , ruRevisionId
+    , revPayload
+    , revFileId
+    , revRevisionId
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.revisions.update@ method which the
--- 'RevisionsUpdate'' request conforms to.
+-- 'RevisionsUpdate' request conforms to.
 type RevisionsUpdateResource =
      "files" :>
        Capture "fileId" Text :>
@@ -53,53 +53,55 @@ type RevisionsUpdateResource =
 
 -- | Updates a revision.
 --
--- /See:/ 'revisionsUpdate'' smart constructor.
-data RevisionsUpdate' = RevisionsUpdate'
-    { _ruPayload    :: !Revision
-    , _ruFileId     :: !Text
-    , _ruRevisionId :: !Text
+-- /See:/ 'revisionsUpdate' smart constructor.
+data RevisionsUpdate = RevisionsUpdate
+    { _revPayload    :: !Revision
+    , _revFileId     :: !Text
+    , _revRevisionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RevisionsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'RevisionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ruPayload'
+-- * 'revPayload'
 --
--- * 'ruFileId'
+-- * 'revFileId'
 --
--- * 'ruRevisionId'
-revisionsUpdate'
-    :: Revision -- ^ 'ruPayload'
-    -> Text -- ^ 'ruFileId'
-    -> Text -- ^ 'ruRevisionId'
-    -> RevisionsUpdate'
-revisionsUpdate' pRuPayload_ pRuFileId_ pRuRevisionId_ =
-    RevisionsUpdate'
-    { _ruPayload = pRuPayload_
-    , _ruFileId = pRuFileId_
-    , _ruRevisionId = pRuRevisionId_
+-- * 'revRevisionId'
+revisionsUpdate
+    :: Revision -- ^ 'revPayload'
+    -> Text -- ^ 'revFileId'
+    -> Text -- ^ 'revRevisionId'
+    -> RevisionsUpdate
+revisionsUpdate pRevPayload_ pRevFileId_ pRevRevisionId_ =
+    RevisionsUpdate
+    { _revPayload = pRevPayload_
+    , _revFileId = pRevFileId_
+    , _revRevisionId = pRevRevisionId_
     }
 
 -- | Multipart request metadata.
-ruPayload :: Lens' RevisionsUpdate' Revision
-ruPayload
-  = lens _ruPayload (\ s a -> s{_ruPayload = a})
+revPayload :: Lens' RevisionsUpdate Revision
+revPayload
+  = lens _revPayload (\ s a -> s{_revPayload = a})
 
 -- | The ID for the file.
-ruFileId :: Lens' RevisionsUpdate' Text
-ruFileId = lens _ruFileId (\ s a -> s{_ruFileId = a})
+revFileId :: Lens' RevisionsUpdate Text
+revFileId
+  = lens _revFileId (\ s a -> s{_revFileId = a})
 
 -- | The ID for the revision.
-ruRevisionId :: Lens' RevisionsUpdate' Text
-ruRevisionId
-  = lens _ruRevisionId (\ s a -> s{_ruRevisionId = a})
+revRevisionId :: Lens' RevisionsUpdate Text
+revRevisionId
+  = lens _revRevisionId
+      (\ s a -> s{_revRevisionId = a})
 
-instance GoogleRequest RevisionsUpdate' where
-        type Rs RevisionsUpdate' = Revision
-        requestClient RevisionsUpdate'{..}
-          = go _ruFileId _ruRevisionId (Just AltJSON)
-              _ruPayload
+instance GoogleRequest RevisionsUpdate where
+        type Rs RevisionsUpdate = Revision
+        requestClient RevisionsUpdate{..}
+          = go _revFileId _revRevisionId (Just AltJSON)
+              _revPayload
               driveService
           where go
                   = buildClient

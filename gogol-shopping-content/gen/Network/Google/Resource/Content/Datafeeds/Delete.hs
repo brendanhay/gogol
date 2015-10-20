@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Datafeeds.Delete
       DatafeedsDeleteResource
 
     -- * Creating a Request
-    , datafeedsDelete'
-    , DatafeedsDelete'
+    , datafeedsDelete
+    , DatafeedsDelete
 
     -- * Request Lenses
     , ddMerchantId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.datafeeds.delete@ method which the
--- 'DatafeedsDelete'' request conforms to.
+-- 'DatafeedsDelete' request conforms to.
 type DatafeedsDeleteResource =
      Capture "merchantId" Word64 :>
        "datafeeds" :>
@@ -52,14 +52,14 @@ type DatafeedsDeleteResource =
 
 -- | Deletes a datafeed from your Merchant Center account.
 --
--- /See:/ 'datafeedsDelete'' smart constructor.
-data DatafeedsDelete' = DatafeedsDelete'
+-- /See:/ 'datafeedsDelete' smart constructor.
+data DatafeedsDelete = DatafeedsDelete
     { _ddMerchantId :: !Word64
     , _ddDatafeedId :: !Word64
     , _ddDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatafeedsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatafeedsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,32 +68,32 @@ data DatafeedsDelete' = DatafeedsDelete'
 -- * 'ddDatafeedId'
 --
 -- * 'ddDryRun'
-datafeedsDelete'
+datafeedsDelete
     :: Word64 -- ^ 'ddMerchantId'
     -> Word64 -- ^ 'ddDatafeedId'
-    -> DatafeedsDelete'
-datafeedsDelete' pDdMerchantId_ pDdDatafeedId_ =
-    DatafeedsDelete'
+    -> DatafeedsDelete
+datafeedsDelete pDdMerchantId_ pDdDatafeedId_ =
+    DatafeedsDelete
     { _ddMerchantId = pDdMerchantId_
     , _ddDatafeedId = pDdDatafeedId_
     , _ddDryRun = Nothing
     }
 
-ddMerchantId :: Lens' DatafeedsDelete' Word64
+ddMerchantId :: Lens' DatafeedsDelete Word64
 ddMerchantId
   = lens _ddMerchantId (\ s a -> s{_ddMerchantId = a})
 
-ddDatafeedId :: Lens' DatafeedsDelete' Word64
+ddDatafeedId :: Lens' DatafeedsDelete Word64
 ddDatafeedId
   = lens _ddDatafeedId (\ s a -> s{_ddDatafeedId = a})
 
 -- | Flag to run the request in dry-run mode.
-ddDryRun :: Lens' DatafeedsDelete' (Maybe Bool)
+ddDryRun :: Lens' DatafeedsDelete (Maybe Bool)
 ddDryRun = lens _ddDryRun (\ s a -> s{_ddDryRun = a})
 
-instance GoogleRequest DatafeedsDelete' where
-        type Rs DatafeedsDelete' = ()
-        requestClient DatafeedsDelete'{..}
+instance GoogleRequest DatafeedsDelete where
+        type Rs DatafeedsDelete = ()
+        requestClient DatafeedsDelete{..}
           = go _ddMerchantId _ddDatafeedId _ddDryRun
               (Just AltJSON)
               shoppingContentService

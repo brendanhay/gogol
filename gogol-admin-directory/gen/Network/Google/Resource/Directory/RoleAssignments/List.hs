@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.RoleAssignments.List
       RoleAssignmentsListResource
 
     -- * Creating a Request
-    , roleAssignmentsList'
-    , RoleAssignmentsList'
+    , roleAssignmentsList
+    , RoleAssignmentsList
 
     -- * Request Lenses
     , ralRoleId
@@ -44,7 +44,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.roleAssignments.list@ method which the
--- 'RoleAssignmentsList'' request conforms to.
+-- 'RoleAssignmentsList' request conforms to.
 type RoleAssignmentsListResource =
      "customer" :>
        Capture "customer" Text :>
@@ -58,8 +58,8 @@ type RoleAssignmentsListResource =
 
 -- | Retrieves a paginated list of all roleAssignments.
 --
--- /See:/ 'roleAssignmentsList'' smart constructor.
-data RoleAssignmentsList' = RoleAssignmentsList'
+-- /See:/ 'roleAssignmentsList' smart constructor.
+data RoleAssignmentsList = RoleAssignmentsList
     { _ralRoleId     :: !(Maybe Text)
     , _ralCustomer   :: !Text
     , _ralPageToken  :: !(Maybe Text)
@@ -67,7 +67,7 @@ data RoleAssignmentsList' = RoleAssignmentsList'
     , _ralMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoleAssignmentsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'RoleAssignmentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,11 +80,11 @@ data RoleAssignmentsList' = RoleAssignmentsList'
 -- * 'ralUserKey'
 --
 -- * 'ralMaxResults'
-roleAssignmentsList'
+roleAssignmentsList
     :: Text -- ^ 'ralCustomer'
-    -> RoleAssignmentsList'
-roleAssignmentsList' pRalCustomer_ =
-    RoleAssignmentsList'
+    -> RoleAssignmentsList
+roleAssignmentsList pRalCustomer_ =
+    RoleAssignmentsList
     { _ralRoleId = Nothing
     , _ralCustomer = pRalCustomer_
     , _ralPageToken = Nothing
@@ -94,36 +94,36 @@ roleAssignmentsList' pRalCustomer_ =
 
 -- | Immutable ID of a role. If included in the request, returns only role
 -- assignments containing this role ID.
-ralRoleId :: Lens' RoleAssignmentsList' (Maybe Text)
+ralRoleId :: Lens' RoleAssignmentsList (Maybe Text)
 ralRoleId
   = lens _ralRoleId (\ s a -> s{_ralRoleId = a})
 
 -- | Immutable ID of the Google Apps account.
-ralCustomer :: Lens' RoleAssignmentsList' Text
+ralCustomer :: Lens' RoleAssignmentsList Text
 ralCustomer
   = lens _ralCustomer (\ s a -> s{_ralCustomer = a})
 
 -- | Token to specify the next page in the list.
-ralPageToken :: Lens' RoleAssignmentsList' (Maybe Text)
+ralPageToken :: Lens' RoleAssignmentsList (Maybe Text)
 ralPageToken
   = lens _ralPageToken (\ s a -> s{_ralPageToken = a})
 
 -- | The user\'s primary email address, alias email address, or unique user
 -- ID. If included in the request, returns role assignments only for this
 -- user.
-ralUserKey :: Lens' RoleAssignmentsList' (Maybe Text)
+ralUserKey :: Lens' RoleAssignmentsList (Maybe Text)
 ralUserKey
   = lens _ralUserKey (\ s a -> s{_ralUserKey = a})
 
 -- | Maximum number of results to return.
-ralMaxResults :: Lens' RoleAssignmentsList' (Maybe Int32)
+ralMaxResults :: Lens' RoleAssignmentsList (Maybe Int32)
 ralMaxResults
   = lens _ralMaxResults
       (\ s a -> s{_ralMaxResults = a})
 
-instance GoogleRequest RoleAssignmentsList' where
-        type Rs RoleAssignmentsList' = RoleAssignments
-        requestClient RoleAssignmentsList'{..}
+instance GoogleRequest RoleAssignmentsList where
+        type Rs RoleAssignmentsList = RoleAssignments
+        requestClient RoleAssignmentsList{..}
           = go _ralCustomer _ralRoleId _ralPageToken
               _ralUserKey
               _ralMaxResults

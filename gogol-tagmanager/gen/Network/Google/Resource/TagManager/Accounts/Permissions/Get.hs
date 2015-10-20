@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.Get
       AccountsPermissionsGetResource
 
     -- * Creating a Request
-    , accountsPermissionsGet'
-    , AccountsPermissionsGet'
+    , accountsPermissionsGet
+    , AccountsPermissionsGet
 
     -- * Request Lenses
     , apgAccountId
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.permissions.get@ method which the
--- 'AccountsPermissionsGet'' request conforms to.
+-- 'AccountsPermissionsGet' request conforms to.
 type AccountsPermissionsGetResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -51,43 +51,43 @@ type AccountsPermissionsGetResource =
 
 -- | Gets a user\'s Account & Container Permissions.
 --
--- /See:/ 'accountsPermissionsGet'' smart constructor.
-data AccountsPermissionsGet' = AccountsPermissionsGet'
+-- /See:/ 'accountsPermissionsGet' smart constructor.
+data AccountsPermissionsGet = AccountsPermissionsGet
     { _apgAccountId    :: !Text
     , _apgPermissionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsPermissionsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsPermissionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'apgAccountId'
 --
 -- * 'apgPermissionId'
-accountsPermissionsGet'
+accountsPermissionsGet
     :: Text -- ^ 'apgAccountId'
     -> Text -- ^ 'apgPermissionId'
-    -> AccountsPermissionsGet'
-accountsPermissionsGet' pApgAccountId_ pApgPermissionId_ =
-    AccountsPermissionsGet'
+    -> AccountsPermissionsGet
+accountsPermissionsGet pApgAccountId_ pApgPermissionId_ =
+    AccountsPermissionsGet
     { _apgAccountId = pApgAccountId_
     , _apgPermissionId = pApgPermissionId_
     }
 
 -- | The GTM Account ID.
-apgAccountId :: Lens' AccountsPermissionsGet' Text
+apgAccountId :: Lens' AccountsPermissionsGet Text
 apgAccountId
   = lens _apgAccountId (\ s a -> s{_apgAccountId = a})
 
 -- | The GTM User ID.
-apgPermissionId :: Lens' AccountsPermissionsGet' Text
+apgPermissionId :: Lens' AccountsPermissionsGet Text
 apgPermissionId
   = lens _apgPermissionId
       (\ s a -> s{_apgPermissionId = a})
 
-instance GoogleRequest AccountsPermissionsGet' where
-        type Rs AccountsPermissionsGet' = UserAccess
-        requestClient AccountsPermissionsGet'{..}
+instance GoogleRequest AccountsPermissionsGet where
+        type Rs AccountsPermissionsGet = UserAccess
+        requestClient AccountsPermissionsGet{..}
           = go _apgAccountId _apgPermissionId (Just AltJSON)
               tagManagerService
           where go

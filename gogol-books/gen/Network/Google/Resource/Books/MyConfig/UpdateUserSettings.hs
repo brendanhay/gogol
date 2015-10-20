@@ -31,8 +31,8 @@ module Network.Google.Resource.Books.MyConfig.UpdateUserSettings
       MyConfigUpdateUserSettingsResource
 
     -- * Creating a Request
-    , myConfigUpdateUserSettings'
-    , MyConfigUpdateUserSettings'
+    , myConfigUpdateUserSettings
+    , MyConfigUpdateUserSettings
 
     -- * Request Lenses
     , mcuusPayload
@@ -42,7 +42,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.myconfig.updateUserSettings@ method which the
--- 'MyConfigUpdateUserSettings'' request conforms to.
+-- 'MyConfigUpdateUserSettings' request conforms to.
 type MyConfigUpdateUserSettingsResource =
      "myconfig" :>
        "updateUserSettings" :>
@@ -54,33 +54,33 @@ type MyConfigUpdateUserSettingsResource =
 -- overwrite the existing sub-object stored in the server. Unspecified
 -- sub-objects will retain the existing value.
 --
--- /See:/ 'myConfigUpdateUserSettings'' smart constructor.
-newtype MyConfigUpdateUserSettings' = MyConfigUpdateUserSettings'
+-- /See:/ 'myConfigUpdateUserSettings' smart constructor.
+newtype MyConfigUpdateUserSettings = MyConfigUpdateUserSettings
     { _mcuusPayload :: Usersettings
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MyConfigUpdateUserSettings'' with the minimum fields required to make a request.
+-- | Creates a value of 'MyConfigUpdateUserSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mcuusPayload'
-myConfigUpdateUserSettings'
+myConfigUpdateUserSettings
     :: Usersettings -- ^ 'mcuusPayload'
-    -> MyConfigUpdateUserSettings'
-myConfigUpdateUserSettings' pMcuusPayload_ =
-    MyConfigUpdateUserSettings'
+    -> MyConfigUpdateUserSettings
+myConfigUpdateUserSettings pMcuusPayload_ =
+    MyConfigUpdateUserSettings
     { _mcuusPayload = pMcuusPayload_
     }
 
 -- | Multipart request metadata.
-mcuusPayload :: Lens' MyConfigUpdateUserSettings' Usersettings
+mcuusPayload :: Lens' MyConfigUpdateUserSettings Usersettings
 mcuusPayload
   = lens _mcuusPayload (\ s a -> s{_mcuusPayload = a})
 
-instance GoogleRequest MyConfigUpdateUserSettings'
+instance GoogleRequest MyConfigUpdateUserSettings
          where
-        type Rs MyConfigUpdateUserSettings' = Usersettings
-        requestClient MyConfigUpdateUserSettings'{..}
+        type Rs MyConfigUpdateUserSettings = Usersettings
+        requestClient MyConfigUpdateUserSettings{..}
           = go (Just AltJSON) _mcuusPayload booksService
           where go
                   = buildClient

@@ -29,8 +29,8 @@ module Network.Google.Resource.Genomics.Datasets.Delete
       DatasetsDeleteResource
 
     -- * Creating a Request
-    , datasetsDelete'
-    , DatasetsDelete'
+    , datasetsDelete
+    , DatasetsDelete
 
     -- * Request Lenses
     , ddXgafv
@@ -47,7 +47,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.datasets.delete@ method which the
--- 'DatasetsDelete'' request conforms to.
+-- 'DatasetsDelete' request conforms to.
 type DatasetsDeleteResource =
      "v1" :>
        "datasets" :>
@@ -63,8 +63,8 @@ type DatasetsDeleteResource =
 
 -- | Deletes a dataset.
 --
--- /See:/ 'datasetsDelete'' smart constructor.
-data DatasetsDelete' = DatasetsDelete'
+-- /See:/ 'datasetsDelete' smart constructor.
+data DatasetsDelete = DatasetsDelete
     { _ddXgafv          :: !(Maybe Text)
     , _ddUploadProtocol :: !(Maybe Text)
     , _ddPp             :: !Bool
@@ -75,7 +75,7 @@ data DatasetsDelete' = DatasetsDelete'
     , _ddCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -94,11 +94,11 @@ data DatasetsDelete' = DatasetsDelete'
 -- * 'ddDatasetId'
 --
 -- * 'ddCallback'
-datasetsDelete'
+datasetsDelete
     :: Text -- ^ 'ddDatasetId'
-    -> DatasetsDelete'
-datasetsDelete' pDdDatasetId_ =
-    DatasetsDelete'
+    -> DatasetsDelete
+datasetsDelete pDdDatasetId_ =
+    DatasetsDelete
     { _ddXgafv = Nothing
     , _ddUploadProtocol = Nothing
     , _ddPp = True
@@ -110,49 +110,49 @@ datasetsDelete' pDdDatasetId_ =
     }
 
 -- | V1 error format.
-ddXgafv :: Lens' DatasetsDelete' (Maybe Text)
+ddXgafv :: Lens' DatasetsDelete (Maybe Text)
 ddXgafv = lens _ddXgafv (\ s a -> s{_ddXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ddUploadProtocol :: Lens' DatasetsDelete' (Maybe Text)
+ddUploadProtocol :: Lens' DatasetsDelete (Maybe Text)
 ddUploadProtocol
   = lens _ddUploadProtocol
       (\ s a -> s{_ddUploadProtocol = a})
 
 -- | Pretty-print response.
-ddPp :: Lens' DatasetsDelete' Bool
+ddPp :: Lens' DatasetsDelete Bool
 ddPp = lens _ddPp (\ s a -> s{_ddPp = a})
 
 -- | OAuth access token.
-ddAccessToken :: Lens' DatasetsDelete' (Maybe Text)
+ddAccessToken :: Lens' DatasetsDelete (Maybe Text)
 ddAccessToken
   = lens _ddAccessToken
       (\ s a -> s{_ddAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ddUploadType :: Lens' DatasetsDelete' (Maybe Text)
+ddUploadType :: Lens' DatasetsDelete (Maybe Text)
 ddUploadType
   = lens _ddUploadType (\ s a -> s{_ddUploadType = a})
 
 -- | OAuth bearer token.
-ddBearerToken :: Lens' DatasetsDelete' (Maybe Text)
+ddBearerToken :: Lens' DatasetsDelete (Maybe Text)
 ddBearerToken
   = lens _ddBearerToken
       (\ s a -> s{_ddBearerToken = a})
 
 -- | The ID of the dataset to be deleted.
-ddDatasetId :: Lens' DatasetsDelete' Text
+ddDatasetId :: Lens' DatasetsDelete Text
 ddDatasetId
   = lens _ddDatasetId (\ s a -> s{_ddDatasetId = a})
 
 -- | JSONP
-ddCallback :: Lens' DatasetsDelete' (Maybe Text)
+ddCallback :: Lens' DatasetsDelete (Maybe Text)
 ddCallback
   = lens _ddCallback (\ s a -> s{_ddCallback = a})
 
-instance GoogleRequest DatasetsDelete' where
-        type Rs DatasetsDelete' = Empty
-        requestClient DatasetsDelete'{..}
+instance GoogleRequest DatasetsDelete where
+        type Rs DatasetsDelete = Empty
+        requestClient DatasetsDelete{..}
           = go _ddDatasetId _ddXgafv _ddUploadProtocol
               (Just _ddPp)
               _ddAccessToken

@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Projects.List
       ProjectsListResource
 
     -- * Creating a Request
-    , projectsList'
-    , ProjectsList'
+    , projectsList
+    , ProjectsList
 
     -- * Request Lenses
     , plSearchString
@@ -47,7 +47,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.projects.list@ method which the
--- 'ProjectsList'' request conforms to.
+-- 'ProjectsList' request conforms to.
 type ProjectsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -64,8 +64,8 @@ type ProjectsListResource =
 
 -- | Retrieves a list of projects, possibly filtered.
 --
--- /See:/ 'projectsList'' smart constructor.
-data ProjectsList' = ProjectsList'
+-- /See:/ 'projectsList' smart constructor.
+data ProjectsList = ProjectsList
     { _plSearchString  :: !(Maybe Text)
     , _plIds           :: !(Maybe [Int64])
     , _plProFileId     :: !Int64
@@ -76,7 +76,7 @@ data ProjectsList' = ProjectsList'
     , _plMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -95,11 +95,11 @@ data ProjectsList' = ProjectsList'
 -- * 'plAdvertiserIds'
 --
 -- * 'plMaxResults'
-projectsList'
+projectsList
     :: Int64 -- ^ 'plProFileId'
-    -> ProjectsList'
-projectsList' pPlProFileId_ =
-    ProjectsList'
+    -> ProjectsList
+projectsList pPlProFileId_ =
+    ProjectsList
     { _plSearchString = Nothing
     , _plIds = Nothing
     , _plProFileId = pPlProFileId_
@@ -117,39 +117,39 @@ projectsList' pPlProFileId_ =
 -- and the end of the search string. For example, a search string of
 -- \"project\" will match projects with name \"my project\", \"project
 -- 2015\", or simply \"project\".
-plSearchString :: Lens' ProjectsList' (Maybe Text)
+plSearchString :: Lens' ProjectsList (Maybe Text)
 plSearchString
   = lens _plSearchString
       (\ s a -> s{_plSearchString = a})
 
 -- | Select only projects with these IDs.
-plIds :: Lens' ProjectsList' [Int64]
+plIds :: Lens' ProjectsList [Int64]
 plIds
   = lens _plIds (\ s a -> s{_plIds = a}) . _Default .
       _Coerce
 
 -- | User profile ID associated with this request.
-plProFileId :: Lens' ProjectsList' Int64
+plProFileId :: Lens' ProjectsList Int64
 plProFileId
   = lens _plProFileId (\ s a -> s{_plProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-plSortOrder :: Lens' ProjectsList' (Maybe ProjectsListSortOrder)
+plSortOrder :: Lens' ProjectsList (Maybe ProjectsListSortOrder)
 plSortOrder
   = lens _plSortOrder (\ s a -> s{_plSortOrder = a})
 
 -- | Value of the nextPageToken from the previous result page.
-plPageToken :: Lens' ProjectsList' (Maybe Text)
+plPageToken :: Lens' ProjectsList (Maybe Text)
 plPageToken
   = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
 -- | Field by which to sort the list.
-plSortField :: Lens' ProjectsList' (Maybe ProjectsListSortField)
+plSortField :: Lens' ProjectsList (Maybe ProjectsListSortField)
 plSortField
   = lens _plSortField (\ s a -> s{_plSortField = a})
 
 -- | Select only projects with these advertiser IDs.
-plAdvertiserIds :: Lens' ProjectsList' [Int64]
+plAdvertiserIds :: Lens' ProjectsList [Int64]
 plAdvertiserIds
   = lens _plAdvertiserIds
       (\ s a -> s{_plAdvertiserIds = a})
@@ -157,13 +157,13 @@ plAdvertiserIds
       . _Coerce
 
 -- | Maximum number of results to return.
-plMaxResults :: Lens' ProjectsList' (Maybe Int32)
+plMaxResults :: Lens' ProjectsList (Maybe Int32)
 plMaxResults
   = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
 
-instance GoogleRequest ProjectsList' where
-        type Rs ProjectsList' = ProjectsListResponse
-        requestClient ProjectsList'{..}
+instance GoogleRequest ProjectsList where
+        type Rs ProjectsList = ProjectsListResponse
+        requestClient ProjectsList{..}
           = go _plProFileId _plSearchString
               (_plIds ^. _Default)
               _plSortOrder

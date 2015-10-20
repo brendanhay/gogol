@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Routes.List
       RoutesListResource
 
     -- * Creating a Request
-    , routesList'
-    , RoutesList'
+    , routesList
+    , RoutesList
 
     -- * Request Lenses
     , rlProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.routes.list@ method which the
--- 'RoutesList'' request conforms to.
+-- 'RoutesList' request conforms to.
 type RoutesListResource =
      Capture "project" Text :>
        "global" :>
@@ -57,15 +57,15 @@ type RoutesListResource =
 -- | Retrieves the list of route resources available to the specified
 -- project.
 --
--- /See:/ 'routesList'' smart constructor.
-data RoutesList' = RoutesList'
+-- /See:/ 'routesList' smart constructor.
+data RoutesList = RoutesList
     { _rlProject    :: !Text
     , _rlFilter     :: !(Maybe Text)
     , _rlPageToken  :: !(Maybe Text)
     , _rlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoutesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'RoutesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,11 +76,11 @@ data RoutesList' = RoutesList'
 -- * 'rlPageToken'
 --
 -- * 'rlMaxResults'
-routesList'
+routesList
     :: Text -- ^ 'rlProject'
-    -> RoutesList'
-routesList' pRlProject_ =
-    RoutesList'
+    -> RoutesList
+routesList pRlProject_ =
+    RoutesList
     { _rlProject = pRlProject_
     , _rlFilter = Nothing
     , _rlPageToken = Nothing
@@ -88,7 +88,7 @@ routesList' pRlProject_ =
     }
 
 -- | Name of the project scoping this request.
-rlProject :: Lens' RoutesList' Text
+rlProject :: Lens' RoutesList Text
 rlProject
   = lens _rlProject (\ s a -> s{_rlProject = a})
 
@@ -103,24 +103,24 @@ rlProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-rlFilter :: Lens' RoutesList' (Maybe Text)
+rlFilter :: Lens' RoutesList (Maybe Text)
 rlFilter = lens _rlFilter (\ s a -> s{_rlFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-rlPageToken :: Lens' RoutesList' (Maybe Text)
+rlPageToken :: Lens' RoutesList (Maybe Text)
 rlPageToken
   = lens _rlPageToken (\ s a -> s{_rlPageToken = a})
 
 -- | Maximum count of results to be returned.
-rlMaxResults :: Lens' RoutesList' Word32
+rlMaxResults :: Lens' RoutesList Word32
 rlMaxResults
   = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
 
-instance GoogleRequest RoutesList' where
-        type Rs RoutesList' = RouteList
-        requestClient RoutesList'{..}
+instance GoogleRequest RoutesList where
+        type Rs RoutesList = RouteList
+        requestClient RoutesList{..}
           = go _rlProject _rlFilter _rlPageToken
               (Just _rlMaxResults)
               (Just AltJSON)

@@ -869,7 +869,7 @@ module Network.Google.Compute
     -- ** InstanceReference
     , InstanceReference
     , instanceReference
-    , irInstance
+    , iInstance
 
     -- ** OperationAggregatedList
     , OperationAggregatedList
@@ -2197,17 +2197,17 @@ module Network.Google.Compute
     -- ** InstanceGroup
     , InstanceGroup
     , instanceGroup
-    , ig1Size
-    , ig1Kind
-    , ig1Fingerprint
-    , ig1Network
-    , ig1Zone
-    , ig1SelfLink
-    , ig1Name
-    , ig1CreationTimestamp
-    , ig1Id
-    , ig1Description
-    , ig1NamedPorts
+    , iiSize
+    , iiKind
+    , iiFingerprint
+    , iiNetwork
+    , iiZone
+    , iiSelfLink
+    , iiName
+    , iiCreationTimestamp
+    , iiId
+    , iiDescription
+    , iiNamedPorts
 
     -- ** InstanceWithNamedPortsStatus
     , InstanceWithNamedPortsStatus (..)
@@ -2383,24 +2383,24 @@ module Network.Google.Compute
     -- ** Instance
     , Instance
     , instance'
-    , i1Status
-    , i1ServiceAccounts
-    , i1NetworkInterfaces
-    , i1Kind
-    , i1Zone
-    , i1CPUPlatform
-    , i1SelfLink
-    , i1Name
-    , i1StatusMessage
-    , i1CreationTimestamp
-    , i1MachineType
-    , i1Metadata
-    , i1Id
-    , i1Scheduling
-    , i1Disks
-    , i1CanIPForward
-    , i1Description
-    , i1Tags
+    , insnStatus
+    , insnServiceAccounts
+    , insnNetworkInterfaces
+    , insnKind
+    , insnZone
+    , insnCPUPlatform
+    , insnSelfLink
+    , insnName
+    , insnStatusMessage
+    , insnCreationTimestamp
+    , insnMachineType
+    , insnMetadata
+    , insnId
+    , insnScheduling
+    , insnDisks
+    , insnCanIPForward
+    , insnDescription
+    , insnTags
 
     -- ** PathMatcher
     , PathMatcher

@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTubeReporting.ReportTypes.List
       ReportTypesListResource
 
     -- * Creating a Request
-    , reportTypesList'
-    , ReportTypesList'
+    , reportTypesList
+    , ReportTypesList
 
     -- * Request Lenses
     , rtlXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeReporting.Types
 
 -- | A resource alias for @youtubereporting.reportTypes.list@ method which the
--- 'ReportTypesList'' request conforms to.
+-- 'ReportTypesList' request conforms to.
 type ReportTypesListResource =
      "v1" :>
        "reportTypes" :>
@@ -68,8 +68,8 @@ type ReportTypesListResource =
 
 -- | Lists report types.
 --
--- /See:/ 'reportTypesList'' smart constructor.
-data ReportTypesList' = ReportTypesList'
+-- /See:/ 'reportTypesList' smart constructor.
+data ReportTypesList = ReportTypesList
     { _rtlXgafv                  :: !(Maybe Text)
     , _rtlUploadProtocol         :: !(Maybe Text)
     , _rtlPp                     :: !Bool
@@ -82,7 +82,7 @@ data ReportTypesList' = ReportTypesList'
     , _rtlCallback               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReportTypesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportTypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -105,10 +105,10 @@ data ReportTypesList' = ReportTypesList'
 -- * 'rtlPageSize'
 --
 -- * 'rtlCallback'
-reportTypesList'
-    :: ReportTypesList'
-reportTypesList' =
-    ReportTypesList'
+reportTypesList
+    :: ReportTypesList
+reportTypesList =
+    ReportTypesList
     { _rtlXgafv = Nothing
     , _rtlUploadProtocol = Nothing
     , _rtlPp = True
@@ -122,40 +122,40 @@ reportTypesList' =
     }
 
 -- | V1 error format.
-rtlXgafv :: Lens' ReportTypesList' (Maybe Text)
+rtlXgafv :: Lens' ReportTypesList (Maybe Text)
 rtlXgafv = lens _rtlXgafv (\ s a -> s{_rtlXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-rtlUploadProtocol :: Lens' ReportTypesList' (Maybe Text)
+rtlUploadProtocol :: Lens' ReportTypesList (Maybe Text)
 rtlUploadProtocol
   = lens _rtlUploadProtocol
       (\ s a -> s{_rtlUploadProtocol = a})
 
 -- | Pretty-print response.
-rtlPp :: Lens' ReportTypesList' Bool
+rtlPp :: Lens' ReportTypesList Bool
 rtlPp = lens _rtlPp (\ s a -> s{_rtlPp = a})
 
 -- | OAuth access token.
-rtlAccessToken :: Lens' ReportTypesList' (Maybe Text)
+rtlAccessToken :: Lens' ReportTypesList (Maybe Text)
 rtlAccessToken
   = lens _rtlAccessToken
       (\ s a -> s{_rtlAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-rtlUploadType :: Lens' ReportTypesList' (Maybe Text)
+rtlUploadType :: Lens' ReportTypesList (Maybe Text)
 rtlUploadType
   = lens _rtlUploadType
       (\ s a -> s{_rtlUploadType = a})
 
 -- | The content owner\'s external ID on which behalf the user is acting on.
 -- If not set, the user is acting for himself (his own channel).
-rtlOnBehalfOfContentOwner :: Lens' ReportTypesList' (Maybe Text)
+rtlOnBehalfOfContentOwner :: Lens' ReportTypesList (Maybe Text)
 rtlOnBehalfOfContentOwner
   = lens _rtlOnBehalfOfContentOwner
       (\ s a -> s{_rtlOnBehalfOfContentOwner = a})
 
 -- | OAuth bearer token.
-rtlBearerToken :: Lens' ReportTypesList' (Maybe Text)
+rtlBearerToken :: Lens' ReportTypesList (Maybe Text)
 rtlBearerToken
   = lens _rtlBearerToken
       (\ s a -> s{_rtlBearerToken = a})
@@ -164,24 +164,24 @@ rtlBearerToken
 -- Typically, this is the value of ListReportTypesResponse.next_page_token
 -- returned in response to the previous call to the \`ListReportTypes\`
 -- method.
-rtlPageToken :: Lens' ReportTypesList' (Maybe Text)
+rtlPageToken :: Lens' ReportTypesList (Maybe Text)
 rtlPageToken
   = lens _rtlPageToken (\ s a -> s{_rtlPageToken = a})
 
 -- | Requested page size. Server may return fewer report types than
 -- requested. If unspecified, server will pick an appropriate default.
-rtlPageSize :: Lens' ReportTypesList' (Maybe Int32)
+rtlPageSize :: Lens' ReportTypesList (Maybe Int32)
 rtlPageSize
   = lens _rtlPageSize (\ s a -> s{_rtlPageSize = a})
 
 -- | JSONP
-rtlCallback :: Lens' ReportTypesList' (Maybe Text)
+rtlCallback :: Lens' ReportTypesList (Maybe Text)
 rtlCallback
   = lens _rtlCallback (\ s a -> s{_rtlCallback = a})
 
-instance GoogleRequest ReportTypesList' where
-        type Rs ReportTypesList' = ListReportTypesResponse
-        requestClient ReportTypesList'{..}
+instance GoogleRequest ReportTypesList where
+        type Rs ReportTypesList = ListReportTypesResponse
+        requestClient ReportTypesList{..}
           = go _rtlXgafv _rtlUploadProtocol (Just _rtlPp)
               _rtlAccessToken
               _rtlUploadType

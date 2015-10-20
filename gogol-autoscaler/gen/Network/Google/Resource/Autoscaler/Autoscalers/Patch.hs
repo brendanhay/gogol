@@ -30,8 +30,8 @@ module Network.Google.Resource.Autoscaler.Autoscalers.Patch
       AutoscalersPatchResource
 
     -- * Creating a Request
-    , autoscalersPatch'
-    , AutoscalersPatch'
+    , autoscalersPatch
+    , AutoscalersPatch
 
     -- * Request Lenses
     , apProject
@@ -44,7 +44,7 @@ import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @autoscaler.autoscalers.patch@ method which the
--- 'AutoscalersPatch'' request conforms to.
+-- 'AutoscalersPatch' request conforms to.
 type AutoscalersPatchResource =
      "projects" :>
        Capture "project" Text :>
@@ -58,15 +58,15 @@ type AutoscalersPatchResource =
 -- | Update the entire content of the Autoscaler resource. This method
 -- supports patch semantics.
 --
--- /See:/ 'autoscalersPatch'' smart constructor.
-data AutoscalersPatch' = AutoscalersPatch'
+-- /See:/ 'autoscalersPatch' smart constructor.
+data AutoscalersPatch = AutoscalersPatch
     { _apProject    :: !Text
     , _apZone       :: !Text
     , _apPayload    :: !Autoscaler
     , _apAutoscaler :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AutoscalersPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'AutoscalersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data AutoscalersPatch' = AutoscalersPatch'
 -- * 'apPayload'
 --
 -- * 'apAutoscaler'
-autoscalersPatch'
+autoscalersPatch
     :: Text -- ^ 'apProject'
     -> Text -- ^ 'apZone'
     -> Autoscaler -- ^ 'apPayload'
     -> Text -- ^ 'apAutoscaler'
-    -> AutoscalersPatch'
-autoscalersPatch' pApProject_ pApZone_ pApPayload_ pApAutoscaler_ =
-    AutoscalersPatch'
+    -> AutoscalersPatch
+autoscalersPatch pApProject_ pApZone_ pApPayload_ pApAutoscaler_ =
+    AutoscalersPatch
     { _apProject = pApProject_
     , _apZone = pApZone_
     , _apPayload = pApPayload_
@@ -92,27 +92,27 @@ autoscalersPatch' pApProject_ pApZone_ pApPayload_ pApAutoscaler_ =
     }
 
 -- | Project ID of Autoscaler resource.
-apProject :: Lens' AutoscalersPatch' Text
+apProject :: Lens' AutoscalersPatch Text
 apProject
   = lens _apProject (\ s a -> s{_apProject = a})
 
 -- | Zone name of Autoscaler resource.
-apZone :: Lens' AutoscalersPatch' Text
+apZone :: Lens' AutoscalersPatch Text
 apZone = lens _apZone (\ s a -> s{_apZone = a})
 
 -- | Multipart request metadata.
-apPayload :: Lens' AutoscalersPatch' Autoscaler
+apPayload :: Lens' AutoscalersPatch Autoscaler
 apPayload
   = lens _apPayload (\ s a -> s{_apPayload = a})
 
 -- | Name of the Autoscaler resource.
-apAutoscaler :: Lens' AutoscalersPatch' Text
+apAutoscaler :: Lens' AutoscalersPatch Text
 apAutoscaler
   = lens _apAutoscaler (\ s a -> s{_apAutoscaler = a})
 
-instance GoogleRequest AutoscalersPatch' where
-        type Rs AutoscalersPatch' = Operation
-        requestClient AutoscalersPatch'{..}
+instance GoogleRequest AutoscalersPatch where
+        type Rs AutoscalersPatch = Operation
+        requestClient AutoscalersPatch{..}
           = go _apProject _apZone _apAutoscaler (Just AltJSON)
               _apPayload
               autoscalerService

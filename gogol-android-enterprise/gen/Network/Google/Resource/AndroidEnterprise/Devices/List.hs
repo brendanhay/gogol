@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidEnterprise.Devices.List
       DevicesListResource
 
     -- * Creating a Request
-    , devicesList'
-    , DevicesList'
+    , devicesList
+    , DevicesList
 
     -- * Request Lenses
     , dlEnterpriseId
@@ -41,7 +41,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.devices.list@ method which the
--- 'DevicesList'' request conforms to.
+-- 'DevicesList' request conforms to.
 type DevicesListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -53,42 +53,42 @@ type DevicesListResource =
 
 -- | Retrieves the IDs of all of a user\'s devices.
 --
--- /See:/ 'devicesList'' smart constructor.
-data DevicesList' = DevicesList'
+-- /See:/ 'devicesList' smart constructor.
+data DevicesList = DevicesList
     { _dlEnterpriseId :: !Text
     , _dlUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DevicesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'DevicesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dlEnterpriseId'
 --
 -- * 'dlUserId'
-devicesList'
+devicesList
     :: Text -- ^ 'dlEnterpriseId'
     -> Text -- ^ 'dlUserId'
-    -> DevicesList'
-devicesList' pDlEnterpriseId_ pDlUserId_ =
-    DevicesList'
+    -> DevicesList
+devicesList pDlEnterpriseId_ pDlUserId_ =
+    DevicesList
     { _dlEnterpriseId = pDlEnterpriseId_
     , _dlUserId = pDlUserId_
     }
 
 -- | The ID of the enterprise.
-dlEnterpriseId :: Lens' DevicesList' Text
+dlEnterpriseId :: Lens' DevicesList Text
 dlEnterpriseId
   = lens _dlEnterpriseId
       (\ s a -> s{_dlEnterpriseId = a})
 
 -- | The ID of the user.
-dlUserId :: Lens' DevicesList' Text
+dlUserId :: Lens' DevicesList Text
 dlUserId = lens _dlUserId (\ s a -> s{_dlUserId = a})
 
-instance GoogleRequest DevicesList' where
-        type Rs DevicesList' = DevicesListResponse
-        requestClient DevicesList'{..}
+instance GoogleRequest DevicesList where
+        type Rs DevicesList = DevicesListResponse
+        requestClient DevicesList{..}
           = go _dlEnterpriseId _dlUserId (Just AltJSON)
               androidEnterpriseService
           where go

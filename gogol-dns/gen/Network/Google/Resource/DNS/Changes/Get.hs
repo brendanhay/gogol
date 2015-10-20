@@ -29,8 +29,8 @@ module Network.Google.Resource.DNS.Changes.Get
       ChangesGetResource
 
     -- * Creating a Request
-    , changesGet'
-    , ChangesGet'
+    , changesGet
+    , ChangesGet
 
     -- * Request Lenses
     , cgProject
@@ -42,7 +42,7 @@ import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dns.changes.get@ method which the
--- 'ChangesGet'' request conforms to.
+-- 'ChangesGet' request conforms to.
 type ChangesGetResource =
      Capture "project" Text :>
        "managedZones" :>
@@ -53,14 +53,14 @@ type ChangesGetResource =
 
 -- | Fetch the representation of an existing Change.
 --
--- /See:/ 'changesGet'' smart constructor.
-data ChangesGet' = ChangesGet'
+-- /See:/ 'changesGet' smart constructor.
+data ChangesGet = ChangesGet
     { _cgProject     :: !Text
     , _cgChangeId    :: !Text
     , _cgManagedZone :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChangesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChangesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,39 +69,39 @@ data ChangesGet' = ChangesGet'
 -- * 'cgChangeId'
 --
 -- * 'cgManagedZone'
-changesGet'
+changesGet
     :: Text -- ^ 'cgProject'
     -> Text -- ^ 'cgChangeId'
     -> Text -- ^ 'cgManagedZone'
-    -> ChangesGet'
-changesGet' pCgProject_ pCgChangeId_ pCgManagedZone_ =
-    ChangesGet'
+    -> ChangesGet
+changesGet pCgProject_ pCgChangeId_ pCgManagedZone_ =
+    ChangesGet
     { _cgProject = pCgProject_
     , _cgChangeId = pCgChangeId_
     , _cgManagedZone = pCgManagedZone_
     }
 
 -- | Identifies the project addressed by this request.
-cgProject :: Lens' ChangesGet' Text
+cgProject :: Lens' ChangesGet Text
 cgProject
   = lens _cgProject (\ s a -> s{_cgProject = a})
 
 -- | The identifier of the requested change, from a previous
 -- ResourceRecordSetsChangeResponse.
-cgChangeId :: Lens' ChangesGet' Text
+cgChangeId :: Lens' ChangesGet Text
 cgChangeId
   = lens _cgChangeId (\ s a -> s{_cgChangeId = a})
 
 -- | Identifies the managed zone addressed by this request. Can be the
 -- managed zone name or id.
-cgManagedZone :: Lens' ChangesGet' Text
+cgManagedZone :: Lens' ChangesGet Text
 cgManagedZone
   = lens _cgManagedZone
       (\ s a -> s{_cgManagedZone = a})
 
-instance GoogleRequest ChangesGet' where
-        type Rs ChangesGet' = Change
-        requestClient ChangesGet'{..}
+instance GoogleRequest ChangesGet where
+        type Rs ChangesGet = Change
+        requestClient ChangesGet{..}
           = go _cgProject _cgManagedZone _cgChangeId
               (Just AltJSON)
               dNSService

@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Insert
       AdvertiserGroupsInsertResource
 
     -- * Creating a Request
-    , advertiserGroupsInsert'
-    , AdvertiserGroupsInsert'
+    , advertiserGroupsInsert
+    , AdvertiserGroupsInsert
 
     -- * Request Lenses
     , agiProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.advertiserGroups.insert@ method which the
--- 'AdvertiserGroupsInsert'' request conforms to.
+-- 'AdvertiserGroupsInsert' request conforms to.
 type AdvertiserGroupsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,42 +52,42 @@ type AdvertiserGroupsInsertResource =
 
 -- | Inserts a new advertiser group.
 --
--- /See:/ 'advertiserGroupsInsert'' smart constructor.
-data AdvertiserGroupsInsert' = AdvertiserGroupsInsert'
+-- /See:/ 'advertiserGroupsInsert' smart constructor.
+data AdvertiserGroupsInsert = AdvertiserGroupsInsert
     { _agiProFileId :: !Int64
     , _agiPayload   :: !AdvertiserGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdvertiserGroupsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdvertiserGroupsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'agiProFileId'
 --
 -- * 'agiPayload'
-advertiserGroupsInsert'
+advertiserGroupsInsert
     :: Int64 -- ^ 'agiProFileId'
     -> AdvertiserGroup -- ^ 'agiPayload'
-    -> AdvertiserGroupsInsert'
-advertiserGroupsInsert' pAgiProFileId_ pAgiPayload_ =
-    AdvertiserGroupsInsert'
+    -> AdvertiserGroupsInsert
+advertiserGroupsInsert pAgiProFileId_ pAgiPayload_ =
+    AdvertiserGroupsInsert
     { _agiProFileId = pAgiProFileId_
     , _agiPayload = pAgiPayload_
     }
 
 -- | User profile ID associated with this request.
-agiProFileId :: Lens' AdvertiserGroupsInsert' Int64
+agiProFileId :: Lens' AdvertiserGroupsInsert Int64
 agiProFileId
   = lens _agiProFileId (\ s a -> s{_agiProFileId = a})
 
 -- | Multipart request metadata.
-agiPayload :: Lens' AdvertiserGroupsInsert' AdvertiserGroup
+agiPayload :: Lens' AdvertiserGroupsInsert AdvertiserGroup
 agiPayload
   = lens _agiPayload (\ s a -> s{_agiPayload = a})
 
-instance GoogleRequest AdvertiserGroupsInsert' where
-        type Rs AdvertiserGroupsInsert' = AdvertiserGroup
-        requestClient AdvertiserGroupsInsert'{..}
+instance GoogleRequest AdvertiserGroupsInsert where
+        type Rs AdvertiserGroupsInsert = AdvertiserGroup
+        requestClient AdvertiserGroupsInsert{..}
           = go _agiProFileId (Just AltJSON) _agiPayload
               dFAReportingService
           where go

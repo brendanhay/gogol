@@ -30,8 +30,8 @@ module Network.Google.Resource.Genomics.Datasets.SetIAMPolicy
       DatasetsSetIAMPolicyResource
 
     -- * Creating a Request
-    , datasetsSetIAMPolicy'
-    , DatasetsSetIAMPolicy'
+    , datasetsSetIAMPolicy
+    , DatasetsSetIAMPolicy
 
     -- * Request Lenses
     , dsipXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.datasets.setIamPolicy@ method which the
--- 'DatasetsSetIAMPolicy'' request conforms to.
+-- 'DatasetsSetIAMPolicy' request conforms to.
 type DatasetsSetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "setIamPolicy" Text :>
@@ -67,8 +67,8 @@ type DatasetsSetIAMPolicyResource =
 -- | Sets the access control policy on the specified dataset. Replaces any
 -- existing policy. See Setting a Policy for more information.
 --
--- /See:/ 'datasetsSetIAMPolicy'' smart constructor.
-data DatasetsSetIAMPolicy' = DatasetsSetIAMPolicy'
+-- /See:/ 'datasetsSetIAMPolicy' smart constructor.
+data DatasetsSetIAMPolicy = DatasetsSetIAMPolicy
     { _dsipXgafv          :: !(Maybe Text)
     , _dsipUploadProtocol :: !(Maybe Text)
     , _dsipPp             :: !Bool
@@ -80,7 +80,7 @@ data DatasetsSetIAMPolicy' = DatasetsSetIAMPolicy'
     , _dsipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsSetIAMPolicy'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -101,12 +101,12 @@ data DatasetsSetIAMPolicy' = DatasetsSetIAMPolicy'
 -- * 'dsipResource'
 --
 -- * 'dsipCallback'
-datasetsSetIAMPolicy'
+datasetsSetIAMPolicy
     :: SetIAMPolicyRequest -- ^ 'dsipPayload'
     -> Text -- ^ 'dsipResource'
-    -> DatasetsSetIAMPolicy'
-datasetsSetIAMPolicy' pDsipPayload_ pDsipResource_ =
-    DatasetsSetIAMPolicy'
+    -> DatasetsSetIAMPolicy
+datasetsSetIAMPolicy pDsipPayload_ pDsipResource_ =
+    DatasetsSetIAMPolicy
     { _dsipXgafv = Nothing
     , _dsipUploadProtocol = Nothing
     , _dsipPp = True
@@ -119,57 +119,57 @@ datasetsSetIAMPolicy' pDsipPayload_ pDsipResource_ =
     }
 
 -- | V1 error format.
-dsipXgafv :: Lens' DatasetsSetIAMPolicy' (Maybe Text)
+dsipXgafv :: Lens' DatasetsSetIAMPolicy (Maybe Text)
 dsipXgafv
   = lens _dsipXgafv (\ s a -> s{_dsipXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-dsipUploadProtocol :: Lens' DatasetsSetIAMPolicy' (Maybe Text)
+dsipUploadProtocol :: Lens' DatasetsSetIAMPolicy (Maybe Text)
 dsipUploadProtocol
   = lens _dsipUploadProtocol
       (\ s a -> s{_dsipUploadProtocol = a})
 
 -- | Pretty-print response.
-dsipPp :: Lens' DatasetsSetIAMPolicy' Bool
+dsipPp :: Lens' DatasetsSetIAMPolicy Bool
 dsipPp = lens _dsipPp (\ s a -> s{_dsipPp = a})
 
 -- | OAuth access token.
-dsipAccessToken :: Lens' DatasetsSetIAMPolicy' (Maybe Text)
+dsipAccessToken :: Lens' DatasetsSetIAMPolicy (Maybe Text)
 dsipAccessToken
   = lens _dsipAccessToken
       (\ s a -> s{_dsipAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-dsipUploadType :: Lens' DatasetsSetIAMPolicy' (Maybe Text)
+dsipUploadType :: Lens' DatasetsSetIAMPolicy (Maybe Text)
 dsipUploadType
   = lens _dsipUploadType
       (\ s a -> s{_dsipUploadType = a})
 
 -- | Multipart request metadata.
-dsipPayload :: Lens' DatasetsSetIAMPolicy' SetIAMPolicyRequest
+dsipPayload :: Lens' DatasetsSetIAMPolicy SetIAMPolicyRequest
 dsipPayload
   = lens _dsipPayload (\ s a -> s{_dsipPayload = a})
 
 -- | OAuth bearer token.
-dsipBearerToken :: Lens' DatasetsSetIAMPolicy' (Maybe Text)
+dsipBearerToken :: Lens' DatasetsSetIAMPolicy (Maybe Text)
 dsipBearerToken
   = lens _dsipBearerToken
       (\ s a -> s{_dsipBearerToken = a})
 
 -- | REQUIRED: The resource for which policy is being specified. Format is
 -- \`datasets\/\`.
-dsipResource :: Lens' DatasetsSetIAMPolicy' Text
+dsipResource :: Lens' DatasetsSetIAMPolicy Text
 dsipResource
   = lens _dsipResource (\ s a -> s{_dsipResource = a})
 
 -- | JSONP
-dsipCallback :: Lens' DatasetsSetIAMPolicy' (Maybe Text)
+dsipCallback :: Lens' DatasetsSetIAMPolicy (Maybe Text)
 dsipCallback
   = lens _dsipCallback (\ s a -> s{_dsipCallback = a})
 
-instance GoogleRequest DatasetsSetIAMPolicy' where
-        type Rs DatasetsSetIAMPolicy' = Policy
-        requestClient DatasetsSetIAMPolicy'{..}
+instance GoogleRequest DatasetsSetIAMPolicy where
+        type Rs DatasetsSetIAMPolicy = Policy
+        requestClient DatasetsSetIAMPolicy{..}
           = go _dsipResource _dsipXgafv _dsipUploadProtocol
               (Just _dsipPp)
               _dsipAccessToken

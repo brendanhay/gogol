@@ -30,8 +30,8 @@ module Network.Google.Resource.PlusDomains.Circles.AddPeople
       CirclesAddPeopleResource
 
     -- * Creating a Request
-    , circlesAddPeople'
-    , CirclesAddPeople'
+    , circlesAddPeople
+    , CirclesAddPeople
 
     -- * Request Lenses
     , capEmail
@@ -43,7 +43,7 @@ import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plusDomains.circles.addPeople@ method which the
--- 'CirclesAddPeople'' request conforms to.
+-- 'CirclesAddPeople' request conforms to.
 type CirclesAddPeopleResource =
      "circles" :>
        Capture "circleId" Text :>
@@ -55,14 +55,14 @@ type CirclesAddPeopleResource =
 -- | Add a person to a circle. Google+ limits certain circle operations,
 -- including the number of circle adds. Learn More.
 --
--- /See:/ 'circlesAddPeople'' smart constructor.
-data CirclesAddPeople' = CirclesAddPeople'
+-- /See:/ 'circlesAddPeople' smart constructor.
+data CirclesAddPeople = CirclesAddPeople
     { _capEmail    :: !(Maybe [Text])
     , _capUserId   :: !(Maybe [Text])
     , _capCircleId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CirclesAddPeople'' with the minimum fields required to make a request.
+-- | Creates a value of 'CirclesAddPeople' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,38 +71,38 @@ data CirclesAddPeople' = CirclesAddPeople'
 -- * 'capUserId'
 --
 -- * 'capCircleId'
-circlesAddPeople'
+circlesAddPeople
     :: Text -- ^ 'capCircleId'
-    -> CirclesAddPeople'
-circlesAddPeople' pCapCircleId_ =
-    CirclesAddPeople'
+    -> CirclesAddPeople
+circlesAddPeople pCapCircleId_ =
+    CirclesAddPeople
     { _capEmail = Nothing
     , _capUserId = Nothing
     , _capCircleId = pCapCircleId_
     }
 
 -- | Email of the people to add to the circle. Optional, can be repeated.
-capEmail :: Lens' CirclesAddPeople' [Text]
+capEmail :: Lens' CirclesAddPeople [Text]
 capEmail
   = lens _capEmail (\ s a -> s{_capEmail = a}) .
       _Default
       . _Coerce
 
 -- | IDs of the people to add to the circle. Optional, can be repeated.
-capUserId :: Lens' CirclesAddPeople' [Text]
+capUserId :: Lens' CirclesAddPeople [Text]
 capUserId
   = lens _capUserId (\ s a -> s{_capUserId = a}) .
       _Default
       . _Coerce
 
 -- | The ID of the circle to add the person to.
-capCircleId :: Lens' CirclesAddPeople' Text
+capCircleId :: Lens' CirclesAddPeople Text
 capCircleId
   = lens _capCircleId (\ s a -> s{_capCircleId = a})
 
-instance GoogleRequest CirclesAddPeople' where
-        type Rs CirclesAddPeople' = Circle
-        requestClient CirclesAddPeople'{..}
+instance GoogleRequest CirclesAddPeople where
+        type Rs CirclesAddPeople = Circle
+        requestClient CirclesAddPeople{..}
           = go _capCircleId (_capEmail ^. _Default)
               (_capUserId ^. _Default)
               (Just AltJSON)

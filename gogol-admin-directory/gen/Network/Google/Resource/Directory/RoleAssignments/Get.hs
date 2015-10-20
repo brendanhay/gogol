@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.RoleAssignments.Get
       RoleAssignmentsGetResource
 
     -- * Creating a Request
-    , roleAssignmentsGet'
-    , RoleAssignmentsGet'
+    , roleAssignmentsGet
+    , RoleAssignmentsGet
 
     -- * Request Lenses
     , ragCustomer
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.roleAssignments.get@ method which the
--- 'RoleAssignmentsGet'' request conforms to.
+-- 'RoleAssignmentsGet' request conforms to.
 type RoleAssignmentsGetResource =
      "customer" :>
        Capture "customer" Text :>
@@ -52,43 +52,43 @@ type RoleAssignmentsGetResource =
 
 -- | Retrieve a role assignment.
 --
--- /See:/ 'roleAssignmentsGet'' smart constructor.
-data RoleAssignmentsGet' = RoleAssignmentsGet'
+-- /See:/ 'roleAssignmentsGet' smart constructor.
+data RoleAssignmentsGet = RoleAssignmentsGet
     { _ragCustomer         :: !Text
     , _ragRoleAssignmentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoleAssignmentsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'RoleAssignmentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ragCustomer'
 --
 -- * 'ragRoleAssignmentId'
-roleAssignmentsGet'
+roleAssignmentsGet
     :: Text -- ^ 'ragCustomer'
     -> Text -- ^ 'ragRoleAssignmentId'
-    -> RoleAssignmentsGet'
-roleAssignmentsGet' pRagCustomer_ pRagRoleAssignmentId_ =
-    RoleAssignmentsGet'
+    -> RoleAssignmentsGet
+roleAssignmentsGet pRagCustomer_ pRagRoleAssignmentId_ =
+    RoleAssignmentsGet
     { _ragCustomer = pRagCustomer_
     , _ragRoleAssignmentId = pRagRoleAssignmentId_
     }
 
 -- | Immutable ID of the Google Apps account.
-ragCustomer :: Lens' RoleAssignmentsGet' Text
+ragCustomer :: Lens' RoleAssignmentsGet Text
 ragCustomer
   = lens _ragCustomer (\ s a -> s{_ragCustomer = a})
 
 -- | Immutable ID of the role assignment.
-ragRoleAssignmentId :: Lens' RoleAssignmentsGet' Text
+ragRoleAssignmentId :: Lens' RoleAssignmentsGet Text
 ragRoleAssignmentId
   = lens _ragRoleAssignmentId
       (\ s a -> s{_ragRoleAssignmentId = a})
 
-instance GoogleRequest RoleAssignmentsGet' where
-        type Rs RoleAssignmentsGet' = RoleAssignment
-        requestClient RoleAssignmentsGet'{..}
+instance GoogleRequest RoleAssignmentsGet where
+        type Rs RoleAssignmentsGet = RoleAssignment
+        requestClient RoleAssignmentsGet{..}
           = go _ragCustomer _ragRoleAssignmentId (Just AltJSON)
               directoryService
           where go

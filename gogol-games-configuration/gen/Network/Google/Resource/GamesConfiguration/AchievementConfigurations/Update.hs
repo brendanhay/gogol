@@ -29,8 +29,8 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Upda
       AchievementConfigurationsUpdateResource
 
     -- * Creating a Request
-    , achievementConfigurationsUpdate'
-    , AchievementConfigurationsUpdate'
+    , achievementConfigurationsUpdate
+    , AchievementConfigurationsUpdate
 
     -- * Request Lenses
     , acuAchievementId
@@ -41,7 +41,7 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.achievementConfigurations.update@ method which the
--- 'AchievementConfigurationsUpdate'' request conforms to.
+-- 'AchievementConfigurationsUpdate' request conforms to.
 type AchievementConfigurationsUpdateResource =
      "achievements" :>
        Capture "achievementId" Text :>
@@ -51,45 +51,45 @@ type AchievementConfigurationsUpdateResource =
 
 -- | Update the metadata of the achievement configuration with the given ID.
 --
--- /See:/ 'achievementConfigurationsUpdate'' smart constructor.
-data AchievementConfigurationsUpdate' = AchievementConfigurationsUpdate'
+-- /See:/ 'achievementConfigurationsUpdate' smart constructor.
+data AchievementConfigurationsUpdate = AchievementConfigurationsUpdate
     { _acuAchievementId :: !Text
     , _acuPayload       :: !AchievementConfiguration
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AchievementConfigurationsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AchievementConfigurationsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'acuAchievementId'
 --
 -- * 'acuPayload'
-achievementConfigurationsUpdate'
+achievementConfigurationsUpdate
     :: Text -- ^ 'acuAchievementId'
     -> AchievementConfiguration -- ^ 'acuPayload'
-    -> AchievementConfigurationsUpdate'
-achievementConfigurationsUpdate' pAcuAchievementId_ pAcuPayload_ =
-    AchievementConfigurationsUpdate'
+    -> AchievementConfigurationsUpdate
+achievementConfigurationsUpdate pAcuAchievementId_ pAcuPayload_ =
+    AchievementConfigurationsUpdate
     { _acuAchievementId = pAcuAchievementId_
     , _acuPayload = pAcuPayload_
     }
 
 -- | The ID of the achievement used by this method.
-acuAchievementId :: Lens' AchievementConfigurationsUpdate' Text
+acuAchievementId :: Lens' AchievementConfigurationsUpdate Text
 acuAchievementId
   = lens _acuAchievementId
       (\ s a -> s{_acuAchievementId = a})
 
 -- | Multipart request metadata.
-acuPayload :: Lens' AchievementConfigurationsUpdate' AchievementConfiguration
+acuPayload :: Lens' AchievementConfigurationsUpdate AchievementConfiguration
 acuPayload
   = lens _acuPayload (\ s a -> s{_acuPayload = a})
 
 instance GoogleRequest
-         AchievementConfigurationsUpdate' where
-        type Rs AchievementConfigurationsUpdate' =
+         AchievementConfigurationsUpdate where
+        type Rs AchievementConfigurationsUpdate =
              AchievementConfiguration
-        requestClient AchievementConfigurationsUpdate'{..}
+        requestClient AchievementConfigurationsUpdate{..}
           = go _acuAchievementId (Just AltJSON) _acuPayload
               gamesConfigurationService
           where go

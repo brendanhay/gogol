@@ -31,8 +31,8 @@ module Network.Google.Resource.BigQuery.Jobs.Cancel
       JobsCancelResource
 
     -- * Creating a Request
-    , jobsCancel'
-    , JobsCancel'
+    , jobsCancel
+    , JobsCancel
 
     -- * Request Lenses
     , jcJobId
@@ -43,7 +43,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.jobs.cancel@ method which the
--- 'JobsCancel'' request conforms to.
+-- 'JobsCancel' request conforms to.
 type JobsCancelResource =
      "project" :>
        Capture "projectId" Text :>
@@ -57,41 +57,41 @@ type JobsCancelResource =
 -- the client will need to poll for the job status to see if the cancel
 -- completed successfully. Cancelled jobs may still incur costs.
 --
--- /See:/ 'jobsCancel'' smart constructor.
-data JobsCancel' = JobsCancel'
+-- /See:/ 'jobsCancel' smart constructor.
+data JobsCancel = JobsCancel
     { _jcJobId     :: !Text
     , _jcProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'JobsCancel'' with the minimum fields required to make a request.
+-- | Creates a value of 'JobsCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'jcJobId'
 --
 -- * 'jcProjectId'
-jobsCancel'
+jobsCancel
     :: Text -- ^ 'jcJobId'
     -> Text -- ^ 'jcProjectId'
-    -> JobsCancel'
-jobsCancel' pJcJobId_ pJcProjectId_ =
-    JobsCancel'
+    -> JobsCancel
+jobsCancel pJcJobId_ pJcProjectId_ =
+    JobsCancel
     { _jcJobId = pJcJobId_
     , _jcProjectId = pJcProjectId_
     }
 
 -- | Job ID of the job to cancel
-jcJobId :: Lens' JobsCancel' Text
+jcJobId :: Lens' JobsCancel Text
 jcJobId = lens _jcJobId (\ s a -> s{_jcJobId = a})
 
 -- | Project ID of the job to cancel
-jcProjectId :: Lens' JobsCancel' Text
+jcProjectId :: Lens' JobsCancel Text
 jcProjectId
   = lens _jcProjectId (\ s a -> s{_jcProjectId = a})
 
-instance GoogleRequest JobsCancel' where
-        type Rs JobsCancel' = JobCancelResponse
-        requestClient JobsCancel'{..}
+instance GoogleRequest JobsCancel where
+        type Rs JobsCancel = JobCancelResponse
+        requestClient JobsCancel{..}
           = go _jcProjectId _jcJobId (Just AltJSON)
               bigQueryService
           where go

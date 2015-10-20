@@ -29,8 +29,8 @@ module Network.Google.Resource.DeploymentManager.Resources.Get
       ResourcesGetResource
 
     -- * Creating a Request
-    , resourcesGet'
-    , ResourcesGet'
+    , resourcesGet
+    , ResourcesGet
 
     -- * Request Lenses
     , rgProject
@@ -42,7 +42,7 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @deploymentmanager.resources.get@ method which the
--- 'ResourcesGet'' request conforms to.
+-- 'ResourcesGet' request conforms to.
 type ResourcesGetResource =
      Capture "project" Text :>
        "global" :>
@@ -54,14 +54,14 @@ type ResourcesGetResource =
 
 -- | Gets information about a single resource.
 --
--- /See:/ 'resourcesGet'' smart constructor.
-data ResourcesGet' = ResourcesGet'
+-- /See:/ 'resourcesGet' smart constructor.
+data ResourcesGet = ResourcesGet
     { _rgProject    :: !Text
     , _rgResource   :: !Text
     , _rgDeployment :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ResourcesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ResourcesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,36 +70,36 @@ data ResourcesGet' = ResourcesGet'
 -- * 'rgResource'
 --
 -- * 'rgDeployment'
-resourcesGet'
+resourcesGet
     :: Text -- ^ 'rgProject'
     -> Text -- ^ 'rgResource'
     -> Text -- ^ 'rgDeployment'
-    -> ResourcesGet'
-resourcesGet' pRgProject_ pRgResource_ pRgDeployment_ =
-    ResourcesGet'
+    -> ResourcesGet
+resourcesGet pRgProject_ pRgResource_ pRgDeployment_ =
+    ResourcesGet
     { _rgProject = pRgProject_
     , _rgResource = pRgResource_
     , _rgDeployment = pRgDeployment_
     }
 
 -- | The project ID for this request.
-rgProject :: Lens' ResourcesGet' Text
+rgProject :: Lens' ResourcesGet Text
 rgProject
   = lens _rgProject (\ s a -> s{_rgProject = a})
 
 -- | The name of the resource for this request.
-rgResource :: Lens' ResourcesGet' Text
+rgResource :: Lens' ResourcesGet Text
 rgResource
   = lens _rgResource (\ s a -> s{_rgResource = a})
 
 -- | The name of the deployment for this request.
-rgDeployment :: Lens' ResourcesGet' Text
+rgDeployment :: Lens' ResourcesGet Text
 rgDeployment
   = lens _rgDeployment (\ s a -> s{_rgDeployment = a})
 
-instance GoogleRequest ResourcesGet' where
-        type Rs ResourcesGet' = Resource
-        requestClient ResourcesGet'{..}
+instance GoogleRequest ResourcesGet where
+        type Rs ResourcesGet = Resource
+        requestClient ResourcesGet{..}
           = go _rgProject _rgDeployment _rgResource
               (Just AltJSON)
               deploymentManagerService

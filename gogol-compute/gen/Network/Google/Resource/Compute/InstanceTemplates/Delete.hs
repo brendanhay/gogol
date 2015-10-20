@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.InstanceTemplates.Delete
       InstanceTemplatesDeleteResource
 
     -- * Creating a Request
-    , instanceTemplatesDelete'
-    , InstanceTemplatesDelete'
+    , instanceTemplatesDelete
+    , InstanceTemplatesDelete
 
     -- * Request Lenses
     , itdProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceTemplates.delete@ method which the
--- 'InstanceTemplatesDelete'' request conforms to.
+-- 'InstanceTemplatesDelete' request conforms to.
 type InstanceTemplatesDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,43 +51,43 @@ type InstanceTemplatesDeleteResource =
 
 -- | Deletes the specified instance template.
 --
--- /See:/ 'instanceTemplatesDelete'' smart constructor.
-data InstanceTemplatesDelete' = InstanceTemplatesDelete'
+-- /See:/ 'instanceTemplatesDelete' smart constructor.
+data InstanceTemplatesDelete = InstanceTemplatesDelete
     { _itdProject          :: !Text
     , _itdInstanceTemplate :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceTemplatesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceTemplatesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'itdProject'
 --
 -- * 'itdInstanceTemplate'
-instanceTemplatesDelete'
+instanceTemplatesDelete
     :: Text -- ^ 'itdProject'
     -> Text -- ^ 'itdInstanceTemplate'
-    -> InstanceTemplatesDelete'
-instanceTemplatesDelete' pItdProject_ pItdInstanceTemplate_ =
-    InstanceTemplatesDelete'
+    -> InstanceTemplatesDelete
+instanceTemplatesDelete pItdProject_ pItdInstanceTemplate_ =
+    InstanceTemplatesDelete
     { _itdProject = pItdProject_
     , _itdInstanceTemplate = pItdInstanceTemplate_
     }
 
 -- | The project ID for this request.
-itdProject :: Lens' InstanceTemplatesDelete' Text
+itdProject :: Lens' InstanceTemplatesDelete Text
 itdProject
   = lens _itdProject (\ s a -> s{_itdProject = a})
 
 -- | The name of the instance template to delete.
-itdInstanceTemplate :: Lens' InstanceTemplatesDelete' Text
+itdInstanceTemplate :: Lens' InstanceTemplatesDelete Text
 itdInstanceTemplate
   = lens _itdInstanceTemplate
       (\ s a -> s{_itdInstanceTemplate = a})
 
-instance GoogleRequest InstanceTemplatesDelete' where
-        type Rs InstanceTemplatesDelete' = Operation
-        requestClient InstanceTemplatesDelete'{..}
+instance GoogleRequest InstanceTemplatesDelete where
+        type Rs InstanceTemplatesDelete = Operation
+        requestClient InstanceTemplatesDelete{..}
           = go _itdProject _itdInstanceTemplate (Just AltJSON)
               computeService
           where go

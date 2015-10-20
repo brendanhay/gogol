@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Images.Deprecate
       ImagesDeprecateResource
 
     -- * Creating a Request
-    , imagesDeprecate'
-    , ImagesDeprecate'
+    , imagesDeprecate
+    , ImagesDeprecate
 
     -- * Request Lenses
     , imamImage
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.images.deprecate@ method which the
--- 'ImagesDeprecate'' request conforms to.
+-- 'ImagesDeprecate' request conforms to.
 type ImagesDeprecateResource =
      Capture "project" Text :>
        "global" :>
@@ -57,14 +57,14 @@ type ImagesDeprecateResource =
 -- | Sets the deprecation status of an image. If an empty request body is
 -- given, clears the deprecation status instead.
 --
--- /See:/ 'imagesDeprecate'' smart constructor.
-data ImagesDeprecate' = ImagesDeprecate'
+-- /See:/ 'imagesDeprecate' smart constructor.
+data ImagesDeprecate = ImagesDeprecate
     { _imamImage   :: !Text
     , _imamProject :: !Text
     , _imamPayload :: !DeprecationStatus
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ImagesDeprecate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ImagesDeprecate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,36 +73,36 @@ data ImagesDeprecate' = ImagesDeprecate'
 -- * 'imamProject'
 --
 -- * 'imamPayload'
-imagesDeprecate'
+imagesDeprecate
     :: Text -- ^ 'imamImage'
     -> Text -- ^ 'imamProject'
     -> DeprecationStatus -- ^ 'imamPayload'
-    -> ImagesDeprecate'
-imagesDeprecate' pImamImage_ pImamProject_ pImamPayload_ =
-    ImagesDeprecate'
+    -> ImagesDeprecate
+imagesDeprecate pImamImage_ pImamProject_ pImamPayload_ =
+    ImagesDeprecate
     { _imamImage = pImamImage_
     , _imamProject = pImamProject_
     , _imamPayload = pImamPayload_
     }
 
 -- | Image name.
-imamImage :: Lens' ImagesDeprecate' Text
+imamImage :: Lens' ImagesDeprecate Text
 imamImage
   = lens _imamImage (\ s a -> s{_imamImage = a})
 
 -- | Project ID for this request.
-imamProject :: Lens' ImagesDeprecate' Text
+imamProject :: Lens' ImagesDeprecate Text
 imamProject
   = lens _imamProject (\ s a -> s{_imamProject = a})
 
 -- | Multipart request metadata.
-imamPayload :: Lens' ImagesDeprecate' DeprecationStatus
+imamPayload :: Lens' ImagesDeprecate DeprecationStatus
 imamPayload
   = lens _imamPayload (\ s a -> s{_imamPayload = a})
 
-instance GoogleRequest ImagesDeprecate' where
-        type Rs ImagesDeprecate' = Operation
-        requestClient ImagesDeprecate'{..}
+instance GoogleRequest ImagesDeprecate where
+        type Rs ImagesDeprecate = Operation
+        requestClient ImagesDeprecate{..}
           = go _imamProject _imamImage (Just AltJSON)
               _imamPayload
               computeService

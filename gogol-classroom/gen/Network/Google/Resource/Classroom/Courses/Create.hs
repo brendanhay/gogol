@@ -36,8 +36,8 @@ module Network.Google.Resource.Classroom.Courses.Create
       CoursesCreateResource
 
     -- * Creating a Request
-    , coursesCreate'
-    , CoursesCreate'
+    , coursesCreate
+    , CoursesCreate
 
     -- * Request Lenses
     , ccXgafv
@@ -54,7 +54,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.create@ method which the
--- 'CoursesCreate'' request conforms to.
+-- 'CoursesCreate' request conforms to.
 type CoursesCreateResource =
      "v1" :>
        "courses" :>
@@ -77,8 +77,8 @@ type CoursesCreateResource =
 -- * UserGroupsMembershipLimitReached * \`ALREADY_EXISTS\` if an alias was
 -- specified in the \`id\` and already exists.
 --
--- /See:/ 'coursesCreate'' smart constructor.
-data CoursesCreate' = CoursesCreate'
+-- /See:/ 'coursesCreate' smart constructor.
+data CoursesCreate = CoursesCreate
     { _ccXgafv          :: !(Maybe Text)
     , _ccUploadProtocol :: !(Maybe Text)
     , _ccPp             :: !Bool
@@ -89,7 +89,7 @@ data CoursesCreate' = CoursesCreate'
     , _ccCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CoursesCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CoursesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -108,11 +108,11 @@ data CoursesCreate' = CoursesCreate'
 -- * 'ccBearerToken'
 --
 -- * 'ccCallback'
-coursesCreate'
+coursesCreate
     :: Course -- ^ 'ccPayload'
-    -> CoursesCreate'
-coursesCreate' pCcPayload_ =
-    CoursesCreate'
+    -> CoursesCreate
+coursesCreate pCcPayload_ =
+    CoursesCreate
     { _ccXgafv = Nothing
     , _ccUploadProtocol = Nothing
     , _ccPp = True
@@ -124,49 +124,49 @@ coursesCreate' pCcPayload_ =
     }
 
 -- | V1 error format.
-ccXgafv :: Lens' CoursesCreate' (Maybe Text)
+ccXgafv :: Lens' CoursesCreate (Maybe Text)
 ccXgafv = lens _ccXgafv (\ s a -> s{_ccXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ccUploadProtocol :: Lens' CoursesCreate' (Maybe Text)
+ccUploadProtocol :: Lens' CoursesCreate (Maybe Text)
 ccUploadProtocol
   = lens _ccUploadProtocol
       (\ s a -> s{_ccUploadProtocol = a})
 
 -- | Pretty-print response.
-ccPp :: Lens' CoursesCreate' Bool
+ccPp :: Lens' CoursesCreate Bool
 ccPp = lens _ccPp (\ s a -> s{_ccPp = a})
 
 -- | OAuth access token.
-ccAccessToken :: Lens' CoursesCreate' (Maybe Text)
+ccAccessToken :: Lens' CoursesCreate (Maybe Text)
 ccAccessToken
   = lens _ccAccessToken
       (\ s a -> s{_ccAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ccUploadType :: Lens' CoursesCreate' (Maybe Text)
+ccUploadType :: Lens' CoursesCreate (Maybe Text)
 ccUploadType
   = lens _ccUploadType (\ s a -> s{_ccUploadType = a})
 
 -- | Multipart request metadata.
-ccPayload :: Lens' CoursesCreate' Course
+ccPayload :: Lens' CoursesCreate Course
 ccPayload
   = lens _ccPayload (\ s a -> s{_ccPayload = a})
 
 -- | OAuth bearer token.
-ccBearerToken :: Lens' CoursesCreate' (Maybe Text)
+ccBearerToken :: Lens' CoursesCreate (Maybe Text)
 ccBearerToken
   = lens _ccBearerToken
       (\ s a -> s{_ccBearerToken = a})
 
 -- | JSONP
-ccCallback :: Lens' CoursesCreate' (Maybe Text)
+ccCallback :: Lens' CoursesCreate (Maybe Text)
 ccCallback
   = lens _ccCallback (\ s a -> s{_ccCallback = a})
 
-instance GoogleRequest CoursesCreate' where
-        type Rs CoursesCreate' = Course
-        requestClient CoursesCreate'{..}
+instance GoogleRequest CoursesCreate where
+        type Rs CoursesCreate = Course
+        requestClient CoursesCreate{..}
           = go _ccXgafv _ccUploadProtocol (Just _ccPp)
               _ccAccessToken
               _ccUploadType

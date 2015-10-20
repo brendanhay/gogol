@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.ChannelSections.Insert
       ChannelSectionsInsertResource
 
     -- * Creating a Request
-    , channelSectionsInsert'
-    , ChannelSectionsInsert'
+    , channelSectionsInsert
+    , ChannelSectionsInsert
 
     -- * Request Lenses
     , csiPart
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.channelSections.insert@ method which the
--- 'ChannelSectionsInsert'' request conforms to.
+-- 'ChannelSectionsInsert' request conforms to.
 type ChannelSectionsInsertResource =
      "channelSections" :>
        QueryParam "part" Text :>
@@ -55,15 +55,15 @@ type ChannelSectionsInsertResource =
 
 -- | Adds a channelSection for the authenticated user\'s channel.
 --
--- /See:/ 'channelSectionsInsert'' smart constructor.
-data ChannelSectionsInsert' = ChannelSectionsInsert'
+-- /See:/ 'channelSectionsInsert' smart constructor.
+data ChannelSectionsInsert = ChannelSectionsInsert
     { _csiPart                          :: !Text
     , _csiPayload                       :: !ChannelSection
     , _csiOnBehalfOfContentOwner        :: !(Maybe Text)
     , _csiOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChannelSectionsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChannelSectionsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,12 +74,12 @@ data ChannelSectionsInsert' = ChannelSectionsInsert'
 -- * 'csiOnBehalfOfContentOwner'
 --
 -- * 'csiOnBehalfOfContentOwnerChannel'
-channelSectionsInsert'
+channelSectionsInsert
     :: Text -- ^ 'csiPart'
     -> ChannelSection -- ^ 'csiPayload'
-    -> ChannelSectionsInsert'
-channelSectionsInsert' pCsiPart_ pCsiPayload_ =
-    ChannelSectionsInsert'
+    -> ChannelSectionsInsert
+channelSectionsInsert pCsiPart_ pCsiPayload_ =
+    ChannelSectionsInsert
     { _csiPart = pCsiPart_
     , _csiPayload = pCsiPayload_
     , _csiOnBehalfOfContentOwner = Nothing
@@ -90,11 +90,11 @@ channelSectionsInsert' pCsiPart_ pCsiPayload_ =
 -- the properties that the write operation will set as well as the
 -- properties that the API response will include. The part names that you
 -- can include in the parameter value are snippet and contentDetails.
-csiPart :: Lens' ChannelSectionsInsert' Text
+csiPart :: Lens' ChannelSectionsInsert Text
 csiPart = lens _csiPart (\ s a -> s{_csiPart = a})
 
 -- | Multipart request metadata.
-csiPayload :: Lens' ChannelSectionsInsert' ChannelSection
+csiPayload :: Lens' ChannelSectionsInsert ChannelSection
 csiPayload
   = lens _csiPayload (\ s a -> s{_csiPayload = a})
 
@@ -108,7 +108,7 @@ csiPayload
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-csiOnBehalfOfContentOwner :: Lens' ChannelSectionsInsert' (Maybe Text)
+csiOnBehalfOfContentOwner :: Lens' ChannelSectionsInsert (Maybe Text)
 csiOnBehalfOfContentOwner
   = lens _csiOnBehalfOfContentOwner
       (\ s a -> s{_csiOnBehalfOfContentOwner = a})
@@ -129,14 +129,14 @@ csiOnBehalfOfContentOwner
 -- actions on behalf of the channel specified in the parameter value,
 -- without having to provide authentication credentials for each separate
 -- channel.
-csiOnBehalfOfContentOwnerChannel :: Lens' ChannelSectionsInsert' (Maybe Text)
+csiOnBehalfOfContentOwnerChannel :: Lens' ChannelSectionsInsert (Maybe Text)
 csiOnBehalfOfContentOwnerChannel
   = lens _csiOnBehalfOfContentOwnerChannel
       (\ s a -> s{_csiOnBehalfOfContentOwnerChannel = a})
 
-instance GoogleRequest ChannelSectionsInsert' where
-        type Rs ChannelSectionsInsert' = ChannelSection
-        requestClient ChannelSectionsInsert'{..}
+instance GoogleRequest ChannelSectionsInsert where
+        type Rs ChannelSectionsInsert = ChannelSection
+        requestClient ChannelSectionsInsert{..}
           = go (Just _csiPart) _csiOnBehalfOfContentOwner
               _csiOnBehalfOfContentOwnerChannel
               (Just AltJSON)

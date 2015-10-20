@@ -30,8 +30,8 @@ module Network.Google.Resource.SQL.Databases.Patch
       DatabasesPatchResource
 
     -- * Creating a Request
-    , databasesPatch'
-    , DatabasesPatch'
+    , databasesPatch
+    , DatabasesPatch
 
     -- * Request Lenses
     , dpProject
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.databases.patch@ method which the
--- 'DatabasesPatch'' request conforms to.
+-- 'DatabasesPatch' request conforms to.
 type DatabasesPatchResource =
      "projects" :>
        Capture "project" Text :>
@@ -58,15 +58,15 @@ type DatabasesPatchResource =
 -- | Updates a resource containing information about a database inside a
 -- Cloud SQL instance. This method supports patch semantics.
 --
--- /See:/ 'databasesPatch'' smart constructor.
-data DatabasesPatch' = DatabasesPatch'
+-- /See:/ 'databasesPatch' smart constructor.
+data DatabasesPatch = DatabasesPatch
     { _dpProject  :: !Text
     , _dpDatabase :: !Text
     , _dpPayload  :: !Database
     , _dpInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatabasesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatabasesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data DatabasesPatch' = DatabasesPatch'
 -- * 'dpPayload'
 --
 -- * 'dpInstance'
-databasesPatch'
+databasesPatch
     :: Text -- ^ 'dpProject'
     -> Text -- ^ 'dpDatabase'
     -> Database -- ^ 'dpPayload'
     -> Text -- ^ 'dpInstance'
-    -> DatabasesPatch'
-databasesPatch' pDpProject_ pDpDatabase_ pDpPayload_ pDpInstance_ =
-    DatabasesPatch'
+    -> DatabasesPatch
+databasesPatch pDpProject_ pDpDatabase_ pDpPayload_ pDpInstance_ =
+    DatabasesPatch
     { _dpProject = pDpProject_
     , _dpDatabase = pDpDatabase_
     , _dpPayload = pDpPayload_
@@ -92,28 +92,28 @@ databasesPatch' pDpProject_ pDpDatabase_ pDpPayload_ pDpInstance_ =
     }
 
 -- | Project ID of the project that contains the instance.
-dpProject :: Lens' DatabasesPatch' Text
+dpProject :: Lens' DatabasesPatch Text
 dpProject
   = lens _dpProject (\ s a -> s{_dpProject = a})
 
 -- | Name of the database to be updated in the instance.
-dpDatabase :: Lens' DatabasesPatch' Text
+dpDatabase :: Lens' DatabasesPatch Text
 dpDatabase
   = lens _dpDatabase (\ s a -> s{_dpDatabase = a})
 
 -- | Multipart request metadata.
-dpPayload :: Lens' DatabasesPatch' Database
+dpPayload :: Lens' DatabasesPatch Database
 dpPayload
   = lens _dpPayload (\ s a -> s{_dpPayload = a})
 
 -- | Database instance ID. This does not include the project ID.
-dpInstance :: Lens' DatabasesPatch' Text
+dpInstance :: Lens' DatabasesPatch Text
 dpInstance
   = lens _dpInstance (\ s a -> s{_dpInstance = a})
 
-instance GoogleRequest DatabasesPatch' where
-        type Rs DatabasesPatch' = Operation
-        requestClient DatabasesPatch'{..}
+instance GoogleRequest DatabasesPatch where
+        type Rs DatabasesPatch = Operation
+        requestClient DatabasesPatch{..}
           = go _dpProject _dpInstance _dpDatabase
               (Just AltJSON)
               _dpPayload

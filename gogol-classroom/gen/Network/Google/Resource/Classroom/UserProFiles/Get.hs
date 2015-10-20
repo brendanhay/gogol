@@ -32,8 +32,8 @@ module Network.Google.Resource.Classroom.UserProFiles.Get
       UserProFilesGetResource
 
     -- * Creating a Request
-    , userProFilesGet'
-    , UserProFilesGet'
+    , userProFilesGet
+    , UserProFilesGet
 
     -- * Request Lenses
     , upfgXgafv
@@ -50,7 +50,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.userProfiles.get@ method which the
--- 'UserProFilesGet'' request conforms to.
+-- 'UserProFilesGet' request conforms to.
 type UserProFilesGetResource =
      "v1" :>
        "userProfiles" :>
@@ -69,8 +69,8 @@ type UserProFilesGetResource =
 -- this user profile or if no profile exists with the requested ID or for
 -- access errors.
 --
--- /See:/ 'userProFilesGet'' smart constructor.
-data UserProFilesGet' = UserProFilesGet'
+-- /See:/ 'userProFilesGet' smart constructor.
+data UserProFilesGet = UserProFilesGet
     { _upfgXgafv          :: !(Maybe Text)
     , _upfgUploadProtocol :: !(Maybe Text)
     , _upfgPp             :: !Bool
@@ -81,7 +81,7 @@ data UserProFilesGet' = UserProFilesGet'
     , _upfgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserProFilesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UserProFilesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -100,11 +100,11 @@ data UserProFilesGet' = UserProFilesGet'
 -- * 'upfgBearerToken'
 --
 -- * 'upfgCallback'
-userProFilesGet'
+userProFilesGet
     :: Text -- ^ 'upfgUserId'
-    -> UserProFilesGet'
-userProFilesGet' pUpfgUserId_ =
-    UserProFilesGet'
+    -> UserProFilesGet
+userProFilesGet pUpfgUserId_ =
+    UserProFilesGet
     { _upfgXgafv = Nothing
     , _upfgUploadProtocol = Nothing
     , _upfgPp = True
@@ -116,28 +116,28 @@ userProFilesGet' pUpfgUserId_ =
     }
 
 -- | V1 error format.
-upfgXgafv :: Lens' UserProFilesGet' (Maybe Text)
+upfgXgafv :: Lens' UserProFilesGet (Maybe Text)
 upfgXgafv
   = lens _upfgXgafv (\ s a -> s{_upfgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-upfgUploadProtocol :: Lens' UserProFilesGet' (Maybe Text)
+upfgUploadProtocol :: Lens' UserProFilesGet (Maybe Text)
 upfgUploadProtocol
   = lens _upfgUploadProtocol
       (\ s a -> s{_upfgUploadProtocol = a})
 
 -- | Pretty-print response.
-upfgPp :: Lens' UserProFilesGet' Bool
+upfgPp :: Lens' UserProFilesGet Bool
 upfgPp = lens _upfgPp (\ s a -> s{_upfgPp = a})
 
 -- | OAuth access token.
-upfgAccessToken :: Lens' UserProFilesGet' (Maybe Text)
+upfgAccessToken :: Lens' UserProFilesGet (Maybe Text)
 upfgAccessToken
   = lens _upfgAccessToken
       (\ s a -> s{_upfgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-upfgUploadType :: Lens' UserProFilesGet' (Maybe Text)
+upfgUploadType :: Lens' UserProFilesGet (Maybe Text)
 upfgUploadType
   = lens _upfgUploadType
       (\ s a -> s{_upfgUploadType = a})
@@ -145,24 +145,24 @@ upfgUploadType
 -- | Identifier of the profile to return. The identifier can be one of the
 -- following: * the numeric identifier for the user * the email address of
 -- the user * the string literal \`\"me\"\`, indicating the requesting user
-upfgUserId :: Lens' UserProFilesGet' Text
+upfgUserId :: Lens' UserProFilesGet Text
 upfgUserId
   = lens _upfgUserId (\ s a -> s{_upfgUserId = a})
 
 -- | OAuth bearer token.
-upfgBearerToken :: Lens' UserProFilesGet' (Maybe Text)
+upfgBearerToken :: Lens' UserProFilesGet (Maybe Text)
 upfgBearerToken
   = lens _upfgBearerToken
       (\ s a -> s{_upfgBearerToken = a})
 
 -- | JSONP
-upfgCallback :: Lens' UserProFilesGet' (Maybe Text)
+upfgCallback :: Lens' UserProFilesGet (Maybe Text)
 upfgCallback
   = lens _upfgCallback (\ s a -> s{_upfgCallback = a})
 
-instance GoogleRequest UserProFilesGet' where
-        type Rs UserProFilesGet' = UserProFile
-        requestClient UserProFilesGet'{..}
+instance GoogleRequest UserProFilesGet where
+        type Rs UserProFilesGet = UserProFile
+        requestClient UserProFilesGet{..}
           = go _upfgUserId _upfgXgafv _upfgUploadProtocol
               (Just _upfgPp)
               _upfgAccessToken

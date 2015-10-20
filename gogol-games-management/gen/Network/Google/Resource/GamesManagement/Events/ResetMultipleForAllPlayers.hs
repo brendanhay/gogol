@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Events.ResetMultipleForAllPlayers
       EventsResetMultipleForAllPlayersResource
 
     -- * Creating a Request
-    , eventsResetMultipleForAllPlayers'
-    , EventsResetMultipleForAllPlayers'
+    , eventsResetMultipleForAllPlayers
+    , EventsResetMultipleForAllPlayers
 
     -- * Request Lenses
     , ermfapPayload
@@ -42,7 +42,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.events.resetMultipleForAllPlayers@ method which the
--- 'EventsResetMultipleForAllPlayers'' request conforms to.
+-- 'EventsResetMultipleForAllPlayers' request conforms to.
 type EventsResetMultipleForAllPlayersResource =
      "events" :>
        "resetMultipleForAllPlayers" :>
@@ -54,34 +54,34 @@ type EventsResetMultipleForAllPlayersResource =
 -- available to user accounts for your developer console. Only draft events
 -- may be reset. All quests that use any of the events will also be reset.
 --
--- /See:/ 'eventsResetMultipleForAllPlayers'' smart constructor.
-newtype EventsResetMultipleForAllPlayers' = EventsResetMultipleForAllPlayers'
+-- /See:/ 'eventsResetMultipleForAllPlayers' smart constructor.
+newtype EventsResetMultipleForAllPlayers = EventsResetMultipleForAllPlayers
     { _ermfapPayload :: EventsResetMultipleForAllRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventsResetMultipleForAllPlayers'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventsResetMultipleForAllPlayers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ermfapPayload'
-eventsResetMultipleForAllPlayers'
+eventsResetMultipleForAllPlayers
     :: EventsResetMultipleForAllRequest -- ^ 'ermfapPayload'
-    -> EventsResetMultipleForAllPlayers'
-eventsResetMultipleForAllPlayers' pErmfapPayload_ =
-    EventsResetMultipleForAllPlayers'
+    -> EventsResetMultipleForAllPlayers
+eventsResetMultipleForAllPlayers pErmfapPayload_ =
+    EventsResetMultipleForAllPlayers
     { _ermfapPayload = pErmfapPayload_
     }
 
 -- | Multipart request metadata.
-ermfapPayload :: Lens' EventsResetMultipleForAllPlayers' EventsResetMultipleForAllRequest
+ermfapPayload :: Lens' EventsResetMultipleForAllPlayers EventsResetMultipleForAllRequest
 ermfapPayload
   = lens _ermfapPayload
       (\ s a -> s{_ermfapPayload = a})
 
 instance GoogleRequest
-         EventsResetMultipleForAllPlayers' where
-        type Rs EventsResetMultipleForAllPlayers' = ()
-        requestClient EventsResetMultipleForAllPlayers'{..}
+         EventsResetMultipleForAllPlayers where
+        type Rs EventsResetMultipleForAllPlayers = ()
+        requestClient EventsResetMultipleForAllPlayers{..}
           = go (Just AltJSON) _ermfapPayload
               gamesManagementService
           where go

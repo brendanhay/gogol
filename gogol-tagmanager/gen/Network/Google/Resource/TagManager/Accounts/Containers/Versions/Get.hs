@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Get
       AccountsContainersVersionsGetResource
 
     -- * Creating a Request
-    , accountsContainersVersionsGet'
-    , AccountsContainersVersionsGet'
+    , accountsContainersVersionsGet
+    , AccountsContainersVersionsGet
 
     -- * Request Lenses
     , acvgcContainerId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.versions.get@ method which the
--- 'AccountsContainersVersionsGet'' request conforms to.
+-- 'AccountsContainersVersionsGet' request conforms to.
 type AccountsContainersVersionsGetResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -55,14 +55,14 @@ type AccountsContainersVersionsGetResource =
 
 -- | Gets a Container Version.
 --
--- /See:/ 'accountsContainersVersionsGet'' smart constructor.
-data AccountsContainersVersionsGet' = AccountsContainersVersionsGet'
+-- /See:/ 'accountsContainersVersionsGet' smart constructor.
+data AccountsContainersVersionsGet = AccountsContainersVersionsGet
     { _acvgcContainerId        :: !Text
     , _acvgcContainerVersionId :: !Text
     , _acvgcAccountId          :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersVersionsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersVersionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,42 +71,42 @@ data AccountsContainersVersionsGet' = AccountsContainersVersionsGet'
 -- * 'acvgcContainerVersionId'
 --
 -- * 'acvgcAccountId'
-accountsContainersVersionsGet'
+accountsContainersVersionsGet
     :: Text -- ^ 'acvgcContainerId'
     -> Text -- ^ 'acvgcContainerVersionId'
     -> Text -- ^ 'acvgcAccountId'
-    -> AccountsContainersVersionsGet'
-accountsContainersVersionsGet' pAcvgcContainerId_ pAcvgcContainerVersionId_ pAcvgcAccountId_ =
-    AccountsContainersVersionsGet'
+    -> AccountsContainersVersionsGet
+accountsContainersVersionsGet pAcvgcContainerId_ pAcvgcContainerVersionId_ pAcvgcAccountId_ =
+    AccountsContainersVersionsGet
     { _acvgcContainerId = pAcvgcContainerId_
     , _acvgcContainerVersionId = pAcvgcContainerVersionId_
     , _acvgcAccountId = pAcvgcAccountId_
     }
 
 -- | The GTM Container ID.
-acvgcContainerId :: Lens' AccountsContainersVersionsGet' Text
+acvgcContainerId :: Lens' AccountsContainersVersionsGet Text
 acvgcContainerId
   = lens _acvgcContainerId
       (\ s a -> s{_acvgcContainerId = a})
 
 -- | The GTM Container Version ID. Specify published to retrieve the
 -- currently published version.
-acvgcContainerVersionId :: Lens' AccountsContainersVersionsGet' Text
+acvgcContainerVersionId :: Lens' AccountsContainersVersionsGet Text
 acvgcContainerVersionId
   = lens _acvgcContainerVersionId
       (\ s a -> s{_acvgcContainerVersionId = a})
 
 -- | The GTM Account ID.
-acvgcAccountId :: Lens' AccountsContainersVersionsGet' Text
+acvgcAccountId :: Lens' AccountsContainersVersionsGet Text
 acvgcAccountId
   = lens _acvgcAccountId
       (\ s a -> s{_acvgcAccountId = a})
 
-instance GoogleRequest AccountsContainersVersionsGet'
+instance GoogleRequest AccountsContainersVersionsGet
          where
-        type Rs AccountsContainersVersionsGet' =
+        type Rs AccountsContainersVersionsGet =
              ContainerVersion
-        requestClient AccountsContainersVersionsGet'{..}
+        requestClient AccountsContainersVersionsGet{..}
           = go _acvgcAccountId _acvgcContainerId
               _acvgcContainerVersionId
               (Just AltJSON)

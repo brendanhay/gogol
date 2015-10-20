@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.Calendars.Get
       CalendarsGetResource
 
     -- * Creating a Request
-    , calendarsGet'
-    , CalendarsGet'
+    , calendarsGet
+    , CalendarsGet
 
     -- * Request Lenses
     , cgCalendarId
@@ -40,7 +40,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendars.get@ method which the
--- 'CalendarsGet'' request conforms to.
+-- 'CalendarsGet' request conforms to.
 type CalendarsGetResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -48,34 +48,34 @@ type CalendarsGetResource =
 
 -- | Returns metadata for a calendar.
 --
--- /See:/ 'calendarsGet'' smart constructor.
-newtype CalendarsGet' = CalendarsGet'
+-- /See:/ 'calendarsGet' smart constructor.
+newtype CalendarsGet = CalendarsGet
     { _cgCalendarId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CalendarsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CalendarsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cgCalendarId'
-calendarsGet'
+calendarsGet
     :: Text -- ^ 'cgCalendarId'
-    -> CalendarsGet'
-calendarsGet' pCgCalendarId_ =
-    CalendarsGet'
+    -> CalendarsGet
+calendarsGet pCgCalendarId_ =
+    CalendarsGet
     { _cgCalendarId = pCgCalendarId_
     }
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-cgCalendarId :: Lens' CalendarsGet' Text
+cgCalendarId :: Lens' CalendarsGet Text
 cgCalendarId
   = lens _cgCalendarId (\ s a -> s{_cgCalendarId = a})
 
-instance GoogleRequest CalendarsGet' where
-        type Rs CalendarsGet' = Calendar
-        requestClient CalendarsGet'{..}
+instance GoogleRequest CalendarsGet where
+        type Rs CalendarsGet = Calendar
+        requestClient CalendarsGet{..}
           = go _cgCalendarId (Just AltJSON) appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy CalendarsGetResource)

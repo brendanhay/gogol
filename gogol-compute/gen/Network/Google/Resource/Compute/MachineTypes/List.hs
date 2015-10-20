@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.MachineTypes.List
       MachineTypesListResource
 
     -- * Creating a Request
-    , machineTypesList'
-    , MachineTypesList'
+    , machineTypesList
+    , MachineTypesList
 
     -- * Request Lenses
     , mtlProject
@@ -45,7 +45,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.machineTypes.list@ method which the
--- 'MachineTypesList'' request conforms to.
+-- 'MachineTypesList' request conforms to.
 type MachineTypesListResource =
      Capture "project" Text :>
        "zones" :>
@@ -60,8 +60,8 @@ type MachineTypesListResource =
 -- | Retrieves the list of machine type resources available to the specified
 -- project.
 --
--- /See:/ 'machineTypesList'' smart constructor.
-data MachineTypesList' = MachineTypesList'
+-- /See:/ 'machineTypesList' smart constructor.
+data MachineTypesList = MachineTypesList
     { _mtlProject    :: !Text
     , _mtlZone       :: !Text
     , _mtlFilter     :: !(Maybe Text)
@@ -69,7 +69,7 @@ data MachineTypesList' = MachineTypesList'
     , _mtlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MachineTypesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'MachineTypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,12 +82,12 @@ data MachineTypesList' = MachineTypesList'
 -- * 'mtlPageToken'
 --
 -- * 'mtlMaxResults'
-machineTypesList'
+machineTypesList
     :: Text -- ^ 'mtlProject'
     -> Text -- ^ 'mtlZone'
-    -> MachineTypesList'
-machineTypesList' pMtlProject_ pMtlZone_ =
-    MachineTypesList'
+    -> MachineTypesList
+machineTypesList pMtlProject_ pMtlZone_ =
+    MachineTypesList
     { _mtlProject = pMtlProject_
     , _mtlZone = pMtlZone_
     , _mtlFilter = Nothing
@@ -96,12 +96,12 @@ machineTypesList' pMtlProject_ pMtlZone_ =
     }
 
 -- | Project ID for this request.
-mtlProject :: Lens' MachineTypesList' Text
+mtlProject :: Lens' MachineTypesList Text
 mtlProject
   = lens _mtlProject (\ s a -> s{_mtlProject = a})
 
 -- | The name of the zone for this request.
-mtlZone :: Lens' MachineTypesList' Text
+mtlZone :: Lens' MachineTypesList Text
 mtlZone = lens _mtlZone (\ s a -> s{_mtlZone = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -115,26 +115,26 @@ mtlZone = lens _mtlZone (\ s a -> s{_mtlZone = a})
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-mtlFilter :: Lens' MachineTypesList' (Maybe Text)
+mtlFilter :: Lens' MachineTypesList (Maybe Text)
 mtlFilter
   = lens _mtlFilter (\ s a -> s{_mtlFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-mtlPageToken :: Lens' MachineTypesList' (Maybe Text)
+mtlPageToken :: Lens' MachineTypesList (Maybe Text)
 mtlPageToken
   = lens _mtlPageToken (\ s a -> s{_mtlPageToken = a})
 
 -- | Maximum count of results to be returned.
-mtlMaxResults :: Lens' MachineTypesList' Word32
+mtlMaxResults :: Lens' MachineTypesList Word32
 mtlMaxResults
   = lens _mtlMaxResults
       (\ s a -> s{_mtlMaxResults = a})
 
-instance GoogleRequest MachineTypesList' where
-        type Rs MachineTypesList' = MachineTypeList
-        requestClient MachineTypesList'{..}
+instance GoogleRequest MachineTypesList where
+        type Rs MachineTypesList = MachineTypeList
+        requestClient MachineTypesList{..}
           = go _mtlProject _mtlZone _mtlFilter _mtlPageToken
               (Just _mtlMaxResults)
               (Just AltJSON)

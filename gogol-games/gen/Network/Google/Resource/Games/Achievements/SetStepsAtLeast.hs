@@ -32,8 +32,8 @@ module Network.Google.Resource.Games.Achievements.SetStepsAtLeast
       AchievementsSetStepsAtLeastResource
 
     -- * Creating a Request
-    , achievementsSetStepsAtLeast'
-    , AchievementsSetStepsAtLeast'
+    , achievementsSetStepsAtLeast
+    , AchievementsSetStepsAtLeast
 
     -- * Request Lenses
     , assalAchievementId
@@ -44,7 +44,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.achievements.setStepsAtLeast@ method which the
--- 'AchievementsSetStepsAtLeast'' request conforms to.
+-- 'AchievementsSetStepsAtLeast' request conforms to.
 type AchievementsSetStepsAtLeastResource =
      "achievements" :>
        Capture "achievementId" Text :>
@@ -58,45 +58,45 @@ type AchievementsSetStepsAtLeastResource =
 -- of steps that the player already gained for the achievement, the
 -- achievement is not modified.
 --
--- /See:/ 'achievementsSetStepsAtLeast'' smart constructor.
-data AchievementsSetStepsAtLeast' = AchievementsSetStepsAtLeast'
+-- /See:/ 'achievementsSetStepsAtLeast' smart constructor.
+data AchievementsSetStepsAtLeast = AchievementsSetStepsAtLeast
     { _assalAchievementId :: !Text
     , _assalSteps         :: !Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AchievementsSetStepsAtLeast'' with the minimum fields required to make a request.
+-- | Creates a value of 'AchievementsSetStepsAtLeast' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'assalAchievementId'
 --
 -- * 'assalSteps'
-achievementsSetStepsAtLeast'
+achievementsSetStepsAtLeast
     :: Text -- ^ 'assalAchievementId'
     -> Int32 -- ^ 'assalSteps'
-    -> AchievementsSetStepsAtLeast'
-achievementsSetStepsAtLeast' pAssalAchievementId_ pAssalSteps_ =
-    AchievementsSetStepsAtLeast'
+    -> AchievementsSetStepsAtLeast
+achievementsSetStepsAtLeast pAssalAchievementId_ pAssalSteps_ =
+    AchievementsSetStepsAtLeast
     { _assalAchievementId = pAssalAchievementId_
     , _assalSteps = pAssalSteps_
     }
 
 -- | The ID of the achievement used by this method.
-assalAchievementId :: Lens' AchievementsSetStepsAtLeast' Text
+assalAchievementId :: Lens' AchievementsSetStepsAtLeast Text
 assalAchievementId
   = lens _assalAchievementId
       (\ s a -> s{_assalAchievementId = a})
 
 -- | The minimum value to set the steps to.
-assalSteps :: Lens' AchievementsSetStepsAtLeast' Int32
+assalSteps :: Lens' AchievementsSetStepsAtLeast Int32
 assalSteps
   = lens _assalSteps (\ s a -> s{_assalSteps = a})
 
-instance GoogleRequest AchievementsSetStepsAtLeast'
+instance GoogleRequest AchievementsSetStepsAtLeast
          where
-        type Rs AchievementsSetStepsAtLeast' =
+        type Rs AchievementsSetStepsAtLeast =
              AchievementSetStepsAtLeastResponse
-        requestClient AchievementsSetStepsAtLeast'{..}
+        requestClient AchievementsSetStepsAtLeast{..}
           = go _assalAchievementId (Just _assalSteps)
               (Just AltJSON)
               gamesService

@@ -29,8 +29,8 @@ module Network.Google.Resource.Prediction.TrainedModels.Predict
       TrainedModelsPredictResource
 
     -- * Creating a Request
-    , trainedModelsPredict'
-    , TrainedModelsPredict'
+    , trainedModelsPredict
+    , TrainedModelsPredict
 
     -- * Request Lenses
     , tmpProject
@@ -42,7 +42,7 @@ import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @prediction.trainedmodels.predict@ method which the
--- 'TrainedModelsPredict'' request conforms to.
+-- 'TrainedModelsPredict' request conforms to.
 type TrainedModelsPredictResource =
      Capture "project" Text :>
        "trainedmodels" :>
@@ -53,14 +53,14 @@ type TrainedModelsPredictResource =
 
 -- | Submit model id and request a prediction.
 --
--- /See:/ 'trainedModelsPredict'' smart constructor.
-data TrainedModelsPredict' = TrainedModelsPredict'
+-- /See:/ 'trainedModelsPredict' smart constructor.
+data TrainedModelsPredict = TrainedModelsPredict
     { _tmpProject :: !Text
     , _tmpPayload :: !Input
     , _tmpId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TrainedModelsPredict'' with the minimum fields required to make a request.
+-- | Creates a value of 'TrainedModelsPredict' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data TrainedModelsPredict' = TrainedModelsPredict'
 -- * 'tmpPayload'
 --
 -- * 'tmpId'
-trainedModelsPredict'
+trainedModelsPredict
     :: Text -- ^ 'tmpProject'
     -> Input -- ^ 'tmpPayload'
     -> Text -- ^ 'tmpId'
-    -> TrainedModelsPredict'
-trainedModelsPredict' pTmpProject_ pTmpPayload_ pTmpId_ =
-    TrainedModelsPredict'
+    -> TrainedModelsPredict
+trainedModelsPredict pTmpProject_ pTmpPayload_ pTmpId_ =
+    TrainedModelsPredict
     { _tmpProject = pTmpProject_
     , _tmpPayload = pTmpPayload_
     , _tmpId = pTmpId_
     }
 
 -- | The project associated with the model.
-tmpProject :: Lens' TrainedModelsPredict' Text
+tmpProject :: Lens' TrainedModelsPredict Text
 tmpProject
   = lens _tmpProject (\ s a -> s{_tmpProject = a})
 
 -- | Multipart request metadata.
-tmpPayload :: Lens' TrainedModelsPredict' Input
+tmpPayload :: Lens' TrainedModelsPredict Input
 tmpPayload
   = lens _tmpPayload (\ s a -> s{_tmpPayload = a})
 
 -- | The unique name for the predictive model.
-tmpId :: Lens' TrainedModelsPredict' Text
+tmpId :: Lens' TrainedModelsPredict Text
 tmpId = lens _tmpId (\ s a -> s{_tmpId = a})
 
-instance GoogleRequest TrainedModelsPredict' where
-        type Rs TrainedModelsPredict' = Output
-        requestClient TrainedModelsPredict'{..}
+instance GoogleRequest TrainedModelsPredict where
+        type Rs TrainedModelsPredict = Output
+        requestClient TrainedModelsPredict{..}
           = go _tmpProject _tmpId (Just AltJSON) _tmpPayload
               predictionService
           where go

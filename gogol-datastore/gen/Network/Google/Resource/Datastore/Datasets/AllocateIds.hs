@@ -30,8 +30,8 @@ module Network.Google.Resource.Datastore.Datasets.AllocateIds
       DatasetsAllocateIdsResource
 
     -- * Creating a Request
-    , datasetsAllocateIds'
-    , DatasetsAllocateIds'
+    , datasetsAllocateIds
+    , DatasetsAllocateIds
 
     -- * Request Lenses
     , daiPayload
@@ -42,7 +42,7 @@ import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @datastore.datasets.allocateIds@ method which the
--- 'DatasetsAllocateIds'' request conforms to.
+-- 'DatasetsAllocateIds' request conforms to.
 type DatasetsAllocateIdsResource =
      Capture "datasetId" Text :>
        "allocateIds" :>
@@ -53,42 +53,42 @@ type DatasetsAllocateIdsResource =
 -- | Allocate IDs for incomplete keys (useful for referencing an entity
 -- before it is inserted).
 --
--- /See:/ 'datasetsAllocateIds'' smart constructor.
-data DatasetsAllocateIds' = DatasetsAllocateIds'
+-- /See:/ 'datasetsAllocateIds' smart constructor.
+data DatasetsAllocateIds = DatasetsAllocateIds
     { _daiPayload   :: !AllocateIdsRequest
     , _daiDatasetId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsAllocateIds'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsAllocateIds' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'daiPayload'
 --
 -- * 'daiDatasetId'
-datasetsAllocateIds'
+datasetsAllocateIds
     :: AllocateIdsRequest -- ^ 'daiPayload'
     -> Text -- ^ 'daiDatasetId'
-    -> DatasetsAllocateIds'
-datasetsAllocateIds' pDaiPayload_ pDaiDatasetId_ =
-    DatasetsAllocateIds'
+    -> DatasetsAllocateIds
+datasetsAllocateIds pDaiPayload_ pDaiDatasetId_ =
+    DatasetsAllocateIds
     { _daiPayload = pDaiPayload_
     , _daiDatasetId = pDaiDatasetId_
     }
 
 -- | Multipart request metadata.
-daiPayload :: Lens' DatasetsAllocateIds' AllocateIdsRequest
+daiPayload :: Lens' DatasetsAllocateIds AllocateIdsRequest
 daiPayload
   = lens _daiPayload (\ s a -> s{_daiPayload = a})
 
 -- | Identifies the dataset.
-daiDatasetId :: Lens' DatasetsAllocateIds' Text
+daiDatasetId :: Lens' DatasetsAllocateIds Text
 daiDatasetId
   = lens _daiDatasetId (\ s a -> s{_daiDatasetId = a})
 
-instance GoogleRequest DatasetsAllocateIds' where
-        type Rs DatasetsAllocateIds' = AllocateIdsResponse
-        requestClient DatasetsAllocateIds'{..}
+instance GoogleRequest DatasetsAllocateIds where
+        type Rs DatasetsAllocateIds = AllocateIdsResponse
+        requestClient DatasetsAllocateIds{..}
           = go _daiDatasetId (Just AltJSON) _daiPayload
               datastoreService
           where go

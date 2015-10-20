@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.DiskTypes.List
       DiskTypesListResource
 
     -- * Creating a Request
-    , diskTypesList'
-    , DiskTypesList'
+    , diskTypesList
+    , DiskTypesList
 
     -- * Request Lenses
     , dtlProject
@@ -45,7 +45,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.diskTypes.list@ method which the
--- 'DiskTypesList'' request conforms to.
+-- 'DiskTypesList' request conforms to.
 type DiskTypesListResource =
      Capture "project" Text :>
        "zones" :>
@@ -59,8 +59,8 @@ type DiskTypesListResource =
 -- | Retrieves the list of disk type resources available to the specified
 -- project.
 --
--- /See:/ 'diskTypesList'' smart constructor.
-data DiskTypesList' = DiskTypesList'
+-- /See:/ 'diskTypesList' smart constructor.
+data DiskTypesList = DiskTypesList
     { _dtlProject    :: !Text
     , _dtlZone       :: !Text
     , _dtlFilter     :: !(Maybe Text)
@@ -68,7 +68,7 @@ data DiskTypesList' = DiskTypesList'
     , _dtlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DiskTypesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'DiskTypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,12 +81,12 @@ data DiskTypesList' = DiskTypesList'
 -- * 'dtlPageToken'
 --
 -- * 'dtlMaxResults'
-diskTypesList'
+diskTypesList
     :: Text -- ^ 'dtlProject'
     -> Text -- ^ 'dtlZone'
-    -> DiskTypesList'
-diskTypesList' pDtlProject_ pDtlZone_ =
-    DiskTypesList'
+    -> DiskTypesList
+diskTypesList pDtlProject_ pDtlZone_ =
+    DiskTypesList
     { _dtlProject = pDtlProject_
     , _dtlZone = pDtlZone_
     , _dtlFilter = Nothing
@@ -95,12 +95,12 @@ diskTypesList' pDtlProject_ pDtlZone_ =
     }
 
 -- | Project ID for this request.
-dtlProject :: Lens' DiskTypesList' Text
+dtlProject :: Lens' DiskTypesList Text
 dtlProject
   = lens _dtlProject (\ s a -> s{_dtlProject = a})
 
 -- | The name of the zone for this request.
-dtlZone :: Lens' DiskTypesList' Text
+dtlZone :: Lens' DiskTypesList Text
 dtlZone = lens _dtlZone (\ s a -> s{_dtlZone = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -114,26 +114,26 @@ dtlZone = lens _dtlZone (\ s a -> s{_dtlZone = a})
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-dtlFilter :: Lens' DiskTypesList' (Maybe Text)
+dtlFilter :: Lens' DiskTypesList (Maybe Text)
 dtlFilter
   = lens _dtlFilter (\ s a -> s{_dtlFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-dtlPageToken :: Lens' DiskTypesList' (Maybe Text)
+dtlPageToken :: Lens' DiskTypesList (Maybe Text)
 dtlPageToken
   = lens _dtlPageToken (\ s a -> s{_dtlPageToken = a})
 
 -- | Maximum count of results to be returned.
-dtlMaxResults :: Lens' DiskTypesList' Word32
+dtlMaxResults :: Lens' DiskTypesList Word32
 dtlMaxResults
   = lens _dtlMaxResults
       (\ s a -> s{_dtlMaxResults = a})
 
-instance GoogleRequest DiskTypesList' where
-        type Rs DiskTypesList' = DiskTypeList
-        requestClient DiskTypesList'{..}
+instance GoogleRequest DiskTypesList where
+        type Rs DiskTypesList = DiskTypeList
+        requestClient DiskTypesList{..}
           = go _dtlProject _dtlZone _dtlFilter _dtlPageToken
               (Just _dtlMaxResults)
               (Just AltJSON)

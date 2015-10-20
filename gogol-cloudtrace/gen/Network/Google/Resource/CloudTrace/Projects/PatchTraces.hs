@@ -32,8 +32,8 @@ module Network.Google.Resource.CloudTrace.Projects.PatchTraces
       ProjectsPatchTracesResource
 
     -- * Creating a Request
-    , projectsPatchTraces'
-    , ProjectsPatchTraces'
+    , projectsPatchTraces
+    , ProjectsPatchTraces
 
     -- * Request Lenses
     , pptXgafv
@@ -51,7 +51,7 @@ import           Network.Google.CloudTrace.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @cloudtrace.projects.patchTraces@ method which the
--- 'ProjectsPatchTraces'' request conforms to.
+-- 'ProjectsPatchTraces' request conforms to.
 type ProjectsPatchTracesResource =
      "v1" :>
        "projects" :>
@@ -72,8 +72,8 @@ type ProjectsPatchTracesResource =
 -- are overwritten by the update, and any additional fields in an update
 -- are merged with the existing trace data.
 --
--- /See:/ 'projectsPatchTraces'' smart constructor.
-data ProjectsPatchTraces' = ProjectsPatchTraces'
+-- /See:/ 'projectsPatchTraces' smart constructor.
+data ProjectsPatchTraces = ProjectsPatchTraces
     { _pptXgafv          :: !(Maybe Text)
     , _pptUploadProtocol :: !(Maybe Text)
     , _pptPp             :: !Bool
@@ -85,7 +85,7 @@ data ProjectsPatchTraces' = ProjectsPatchTraces'
     , _pptCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsPatchTraces'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsPatchTraces' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -106,12 +106,12 @@ data ProjectsPatchTraces' = ProjectsPatchTraces'
 -- * 'pptProjectId'
 --
 -- * 'pptCallback'
-projectsPatchTraces'
+projectsPatchTraces
     :: Traces -- ^ 'pptPayload'
     -> Text -- ^ 'pptProjectId'
-    -> ProjectsPatchTraces'
-projectsPatchTraces' pPptPayload_ pPptProjectId_ =
-    ProjectsPatchTraces'
+    -> ProjectsPatchTraces
+projectsPatchTraces pPptPayload_ pPptProjectId_ =
+    ProjectsPatchTraces
     { _pptXgafv = Nothing
     , _pptUploadProtocol = Nothing
     , _pptPp = True
@@ -124,55 +124,55 @@ projectsPatchTraces' pPptPayload_ pPptProjectId_ =
     }
 
 -- | V1 error format.
-pptXgafv :: Lens' ProjectsPatchTraces' (Maybe Text)
+pptXgafv :: Lens' ProjectsPatchTraces (Maybe Text)
 pptXgafv = lens _pptXgafv (\ s a -> s{_pptXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pptUploadProtocol :: Lens' ProjectsPatchTraces' (Maybe Text)
+pptUploadProtocol :: Lens' ProjectsPatchTraces (Maybe Text)
 pptUploadProtocol
   = lens _pptUploadProtocol
       (\ s a -> s{_pptUploadProtocol = a})
 
 -- | Pretty-print response.
-pptPp :: Lens' ProjectsPatchTraces' Bool
+pptPp :: Lens' ProjectsPatchTraces Bool
 pptPp = lens _pptPp (\ s a -> s{_pptPp = a})
 
 -- | OAuth access token.
-pptAccessToken :: Lens' ProjectsPatchTraces' (Maybe Text)
+pptAccessToken :: Lens' ProjectsPatchTraces (Maybe Text)
 pptAccessToken
   = lens _pptAccessToken
       (\ s a -> s{_pptAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pptUploadType :: Lens' ProjectsPatchTraces' (Maybe Text)
+pptUploadType :: Lens' ProjectsPatchTraces (Maybe Text)
 pptUploadType
   = lens _pptUploadType
       (\ s a -> s{_pptUploadType = a})
 
 -- | Multipart request metadata.
-pptPayload :: Lens' ProjectsPatchTraces' Traces
+pptPayload :: Lens' ProjectsPatchTraces Traces
 pptPayload
   = lens _pptPayload (\ s a -> s{_pptPayload = a})
 
 -- | OAuth bearer token.
-pptBearerToken :: Lens' ProjectsPatchTraces' (Maybe Text)
+pptBearerToken :: Lens' ProjectsPatchTraces (Maybe Text)
 pptBearerToken
   = lens _pptBearerToken
       (\ s a -> s{_pptBearerToken = a})
 
 -- | The project id of the trace to patch.
-pptProjectId :: Lens' ProjectsPatchTraces' Text
+pptProjectId :: Lens' ProjectsPatchTraces Text
 pptProjectId
   = lens _pptProjectId (\ s a -> s{_pptProjectId = a})
 
 -- | JSONP
-pptCallback :: Lens' ProjectsPatchTraces' (Maybe Text)
+pptCallback :: Lens' ProjectsPatchTraces (Maybe Text)
 pptCallback
   = lens _pptCallback (\ s a -> s{_pptCallback = a})
 
-instance GoogleRequest ProjectsPatchTraces' where
-        type Rs ProjectsPatchTraces' = Empty
-        requestClient ProjectsPatchTraces'{..}
+instance GoogleRequest ProjectsPatchTraces where
+        type Rs ProjectsPatchTraces = Empty
+        requestClient ProjectsPatchTraces{..}
           = go _pptProjectId _pptXgafv _pptUploadProtocol
               (Just _pptPp)
               _pptAccessToken

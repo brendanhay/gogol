@@ -30,8 +30,8 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Defer
       PurchasesSubscriptionsDeferResource
 
     -- * Creating a Request
-    , purchasesSubscriptionsDefer'
-    , PurchasesSubscriptionsDefer'
+    , purchasesSubscriptionsDefer
+    , PurchasesSubscriptionsDefer
 
     -- * Request Lenses
     , psdPackageName
@@ -44,7 +44,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.purchases.subscriptions.defer@ method which the
--- 'PurchasesSubscriptionsDefer'' request conforms to.
+-- 'PurchasesSubscriptionsDefer' request conforms to.
 type PurchasesSubscriptionsDeferResource =
      Capture "packageName" Text :>
        "purchases" :>
@@ -59,15 +59,15 @@ type PurchasesSubscriptionsDeferResource =
 -- | Defers a user\'s subscription purchase until a specified future
 -- expiration time.
 --
--- /See:/ 'purchasesSubscriptionsDefer'' smart constructor.
-data PurchasesSubscriptionsDefer' = PurchasesSubscriptionsDefer'
+-- /See:/ 'purchasesSubscriptionsDefer' smart constructor.
+data PurchasesSubscriptionsDefer = PurchasesSubscriptionsDefer
     { _psdPackageName    :: !Text
     , _psdToken          :: !Text
     , _psdPayload        :: !SubscriptionPurchasesDeferRequest
     , _psdSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PurchasesSubscriptionsDefer'' with the minimum fields required to make a request.
+-- | Creates a value of 'PurchasesSubscriptionsDefer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -78,14 +78,14 @@ data PurchasesSubscriptionsDefer' = PurchasesSubscriptionsDefer'
 -- * 'psdPayload'
 --
 -- * 'psdSubscriptionId'
-purchasesSubscriptionsDefer'
+purchasesSubscriptionsDefer
     :: Text -- ^ 'psdPackageName'
     -> Text -- ^ 'psdToken'
     -> SubscriptionPurchasesDeferRequest -- ^ 'psdPayload'
     -> Text -- ^ 'psdSubscriptionId'
-    -> PurchasesSubscriptionsDefer'
-purchasesSubscriptionsDefer' pPsdPackageName_ pPsdToken_ pPsdPayload_ pPsdSubscriptionId_ =
-    PurchasesSubscriptionsDefer'
+    -> PurchasesSubscriptionsDefer
+purchasesSubscriptionsDefer pPsdPackageName_ pPsdToken_ pPsdPayload_ pPsdSubscriptionId_ =
+    PurchasesSubscriptionsDefer
     { _psdPackageName = pPsdPackageName_
     , _psdToken = pPsdToken_
     , _psdPayload = pPsdPayload_
@@ -94,32 +94,32 @@ purchasesSubscriptionsDefer' pPsdPackageName_ pPsdToken_ pPsdPayload_ pPsdSubscr
 
 -- | The package name of the application for which this subscription was
 -- purchased (for example, \'com.some.thing\').
-psdPackageName :: Lens' PurchasesSubscriptionsDefer' Text
+psdPackageName :: Lens' PurchasesSubscriptionsDefer Text
 psdPackageName
   = lens _psdPackageName
       (\ s a -> s{_psdPackageName = a})
 
 -- | The token provided to the user\'s device when the subscription was
 -- purchased.
-psdToken :: Lens' PurchasesSubscriptionsDefer' Text
+psdToken :: Lens' PurchasesSubscriptionsDefer Text
 psdToken = lens _psdToken (\ s a -> s{_psdToken = a})
 
 -- | Multipart request metadata.
-psdPayload :: Lens' PurchasesSubscriptionsDefer' SubscriptionPurchasesDeferRequest
+psdPayload :: Lens' PurchasesSubscriptionsDefer SubscriptionPurchasesDeferRequest
 psdPayload
   = lens _psdPayload (\ s a -> s{_psdPayload = a})
 
 -- | The purchased subscription ID (for example, \'monthly001\').
-psdSubscriptionId :: Lens' PurchasesSubscriptionsDefer' Text
+psdSubscriptionId :: Lens' PurchasesSubscriptionsDefer Text
 psdSubscriptionId
   = lens _psdSubscriptionId
       (\ s a -> s{_psdSubscriptionId = a})
 
-instance GoogleRequest PurchasesSubscriptionsDefer'
+instance GoogleRequest PurchasesSubscriptionsDefer
          where
-        type Rs PurchasesSubscriptionsDefer' =
+        type Rs PurchasesSubscriptionsDefer =
              SubscriptionPurchasesDeferResponse
-        requestClient PurchasesSubscriptionsDefer'{..}
+        requestClient PurchasesSubscriptionsDefer{..}
           = go _psdPackageName _psdSubscriptionId _psdToken
               (Just AltJSON)
               _psdPayload

@@ -29,19 +29,19 @@ module Network.Google.Resource.FusionTables.Template.Delete
       TemplateDeleteResource
 
     -- * Creating a Request
-    , templateDelete'
-    , TemplateDelete'
+    , templateDelete
+    , TemplateDelete
 
     -- * Request Lenses
-    , tddTemplateId
-    , tddTableId
+    , tTemplateId
+    , tTableId
     ) where
 
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.template.delete@ method which the
--- 'TemplateDelete'' request conforms to.
+-- 'TemplateDelete' request conforms to.
 type TemplateDeleteResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -51,44 +51,42 @@ type TemplateDeleteResource =
 
 -- | Deletes a template
 --
--- /See:/ 'templateDelete'' smart constructor.
-data TemplateDelete' = TemplateDelete'
-    { _tddTemplateId :: !Int32
-    , _tddTableId    :: !Text
+-- /See:/ 'templateDelete' smart constructor.
+data TemplateDelete = TemplateDelete
+    { _tTemplateId :: !Int32
+    , _tTableId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TemplateDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'TemplateDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tddTemplateId'
+-- * 'tTemplateId'
 --
--- * 'tddTableId'
-templateDelete'
-    :: Int32 -- ^ 'tddTemplateId'
-    -> Text -- ^ 'tddTableId'
-    -> TemplateDelete'
-templateDelete' pTddTemplateId_ pTddTableId_ =
-    TemplateDelete'
-    { _tddTemplateId = pTddTemplateId_
-    , _tddTableId = pTddTableId_
+-- * 'tTableId'
+templateDelete
+    :: Int32 -- ^ 'tTemplateId'
+    -> Text -- ^ 'tTableId'
+    -> TemplateDelete
+templateDelete pTTemplateId_ pTTableId_ =
+    TemplateDelete
+    { _tTemplateId = pTTemplateId_
+    , _tTableId = pTTableId_
     }
 
 -- | Identifier for the template which is being deleted
-tddTemplateId :: Lens' TemplateDelete' Int32
-tddTemplateId
-  = lens _tddTemplateId
-      (\ s a -> s{_tddTemplateId = a})
+tTemplateId :: Lens' TemplateDelete Int32
+tTemplateId
+  = lens _tTemplateId (\ s a -> s{_tTemplateId = a})
 
 -- | Table from which the template is being deleted
-tddTableId :: Lens' TemplateDelete' Text
-tddTableId
-  = lens _tddTableId (\ s a -> s{_tddTableId = a})
+tTableId :: Lens' TemplateDelete Text
+tTableId = lens _tTableId (\ s a -> s{_tTableId = a})
 
-instance GoogleRequest TemplateDelete' where
-        type Rs TemplateDelete' = ()
-        requestClient TemplateDelete'{..}
-          = go _tddTableId _tddTemplateId (Just AltJSON)
+instance GoogleRequest TemplateDelete where
+        type Rs TemplateDelete = ()
+        requestClient TemplateDelete{..}
+          = go _tTableId _tTemplateId (Just AltJSON)
               fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TemplateDeleteResource)

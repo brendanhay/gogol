@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Instances.DeleteAccessConfig
       InstancesDeleteAccessConfigResource
 
     -- * Creating a Request
-    , instancesDeleteAccessConfig'
-    , InstancesDeleteAccessConfig'
+    , instancesDeleteAccessConfig
+    , InstancesDeleteAccessConfig
 
     -- * Request Lenses
     , idacProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.deleteAccessConfig@ method which the
--- 'InstancesDeleteAccessConfig'' request conforms to.
+-- 'InstancesDeleteAccessConfig' request conforms to.
 type InstancesDeleteAccessConfigResource =
      Capture "project" Text :>
        "zones" :>
@@ -58,8 +58,8 @@ type InstancesDeleteAccessConfigResource =
 
 -- | Deletes an access config from an instance\'s network interface.
 --
--- /See:/ 'instancesDeleteAccessConfig'' smart constructor.
-data InstancesDeleteAccessConfig' = InstancesDeleteAccessConfig'
+-- /See:/ 'instancesDeleteAccessConfig' smart constructor.
+data InstancesDeleteAccessConfig = InstancesDeleteAccessConfig
     { _idacProject          :: !Text
     , _idacNetworkInterface :: !Text
     , _idacZone             :: !Text
@@ -67,7 +67,7 @@ data InstancesDeleteAccessConfig' = InstancesDeleteAccessConfig'
     , _idacInstance         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesDeleteAccessConfig'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesDeleteAccessConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,15 +80,15 @@ data InstancesDeleteAccessConfig' = InstancesDeleteAccessConfig'
 -- * 'idacAccessConfig'
 --
 -- * 'idacInstance'
-instancesDeleteAccessConfig'
+instancesDeleteAccessConfig
     :: Text -- ^ 'idacProject'
     -> Text -- ^ 'idacNetworkInterface'
     -> Text -- ^ 'idacZone'
     -> Text -- ^ 'idacAccessConfig'
     -> Text -- ^ 'idacInstance'
-    -> InstancesDeleteAccessConfig'
-instancesDeleteAccessConfig' pIdacProject_ pIdacNetworkInterface_ pIdacZone_ pIdacAccessConfig_ pIdacInstance_ =
-    InstancesDeleteAccessConfig'
+    -> InstancesDeleteAccessConfig
+instancesDeleteAccessConfig pIdacProject_ pIdacNetworkInterface_ pIdacZone_ pIdacAccessConfig_ pIdacInstance_ =
+    InstancesDeleteAccessConfig
     { _idacProject = pIdacProject_
     , _idacNetworkInterface = pIdacNetworkInterface_
     , _idacZone = pIdacZone_
@@ -97,35 +97,35 @@ instancesDeleteAccessConfig' pIdacProject_ pIdacNetworkInterface_ pIdacZone_ pId
     }
 
 -- | Project ID for this request.
-idacProject :: Lens' InstancesDeleteAccessConfig' Text
+idacProject :: Lens' InstancesDeleteAccessConfig Text
 idacProject
   = lens _idacProject (\ s a -> s{_idacProject = a})
 
 -- | The name of the network interface.
-idacNetworkInterface :: Lens' InstancesDeleteAccessConfig' Text
+idacNetworkInterface :: Lens' InstancesDeleteAccessConfig Text
 idacNetworkInterface
   = lens _idacNetworkInterface
       (\ s a -> s{_idacNetworkInterface = a})
 
 -- | The name of the zone for this request.
-idacZone :: Lens' InstancesDeleteAccessConfig' Text
+idacZone :: Lens' InstancesDeleteAccessConfig Text
 idacZone = lens _idacZone (\ s a -> s{_idacZone = a})
 
 -- | The name of the access config to delete.
-idacAccessConfig :: Lens' InstancesDeleteAccessConfig' Text
+idacAccessConfig :: Lens' InstancesDeleteAccessConfig Text
 idacAccessConfig
   = lens _idacAccessConfig
       (\ s a -> s{_idacAccessConfig = a})
 
 -- | The instance name for this request.
-idacInstance :: Lens' InstancesDeleteAccessConfig' Text
+idacInstance :: Lens' InstancesDeleteAccessConfig Text
 idacInstance
   = lens _idacInstance (\ s a -> s{_idacInstance = a})
 
-instance GoogleRequest InstancesDeleteAccessConfig'
+instance GoogleRequest InstancesDeleteAccessConfig
          where
-        type Rs InstancesDeleteAccessConfig' = Operation
-        requestClient InstancesDeleteAccessConfig'{..}
+        type Rs InstancesDeleteAccessConfig = Operation
+        requestClient InstancesDeleteAccessConfig{..}
           = go _idacProject _idacZone _idacInstance
               (Just _idacAccessConfig)
               (Just _idacNetworkInterface)

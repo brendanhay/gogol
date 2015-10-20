@@ -29,19 +29,19 @@ module Network.Google.Resource.Content.Accounts.Get
       AccountsGetResource
 
     -- * Creating a Request
-    , accountsGet'
-    , AccountsGet'
+    , accountsGet
+    , AccountsGet
 
     -- * Request Lenses
-    , ag1MerchantId
-    , ag1AccountId
+    , agMerchantId
+    , agAccountId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accounts.get@ method which the
--- 'AccountsGet'' request conforms to.
+-- 'AccountsGet' request conforms to.
 type AccountsGetResource =
      Capture "merchantId" Word64 :>
        "accounts" :>
@@ -50,44 +50,43 @@ type AccountsGetResource =
 
 -- | Retrieves a Merchant Center account.
 --
--- /See:/ 'accountsGet'' smart constructor.
-data AccountsGet' = AccountsGet'
-    { _ag1MerchantId :: !Word64
-    , _ag1AccountId  :: !Word64
+-- /See:/ 'accountsGet' smart constructor.
+data AccountsGet = AccountsGet
+    { _agMerchantId :: !Word64
+    , _agAccountId  :: !Word64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ag1MerchantId'
+-- * 'agMerchantId'
 --
--- * 'ag1AccountId'
-accountsGet'
-    :: Word64 -- ^ 'ag1MerchantId'
-    -> Word64 -- ^ 'ag1AccountId'
-    -> AccountsGet'
-accountsGet' pAg1MerchantId_ pAg1AccountId_ =
-    AccountsGet'
-    { _ag1MerchantId = pAg1MerchantId_
-    , _ag1AccountId = pAg1AccountId_
+-- * 'agAccountId'
+accountsGet
+    :: Word64 -- ^ 'agMerchantId'
+    -> Word64 -- ^ 'agAccountId'
+    -> AccountsGet
+accountsGet pAgMerchantId_ pAgAccountId_ =
+    AccountsGet
+    { _agMerchantId = pAgMerchantId_
+    , _agAccountId = pAgAccountId_
     }
 
 -- | The ID of the managing account.
-ag1MerchantId :: Lens' AccountsGet' Word64
-ag1MerchantId
-  = lens _ag1MerchantId
-      (\ s a -> s{_ag1MerchantId = a})
+agMerchantId :: Lens' AccountsGet Word64
+agMerchantId
+  = lens _agMerchantId (\ s a -> s{_agMerchantId = a})
 
 -- | The ID of the account.
-ag1AccountId :: Lens' AccountsGet' Word64
-ag1AccountId
-  = lens _ag1AccountId (\ s a -> s{_ag1AccountId = a})
+agAccountId :: Lens' AccountsGet Word64
+agAccountId
+  = lens _agAccountId (\ s a -> s{_agAccountId = a})
 
-instance GoogleRequest AccountsGet' where
-        type Rs AccountsGet' = Account
-        requestClient AccountsGet'{..}
-          = go _ag1MerchantId _ag1AccountId (Just AltJSON)
+instance GoogleRequest AccountsGet where
+        type Rs AccountsGet = Account
+        requestClient AccountsGet{..}
+          = go _agMerchantId _agAccountId (Just AltJSON)
               shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy AccountsGetResource)

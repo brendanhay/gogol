@@ -29,18 +29,18 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.Unenroll
       EnterprisesUnenrollResource
 
     -- * Creating a Request
-    , enterprisesUnenroll'
-    , EnterprisesUnenroll'
+    , enterprisesUnenroll
+    , EnterprisesUnenroll
 
     -- * Request Lenses
-    , euEnterpriseId
+    , euuEnterpriseId
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.enterprises.unenroll@ method which the
--- 'EnterprisesUnenroll'' request conforms to.
+-- 'EnterprisesUnenroll' request conforms to.
 type EnterprisesUnenrollResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -49,34 +49,34 @@ type EnterprisesUnenrollResource =
 
 -- | Unenrolls an enterprise from the calling MDM.
 --
--- /See:/ 'enterprisesUnenroll'' smart constructor.
-newtype EnterprisesUnenroll' = EnterprisesUnenroll'
-    { _euEnterpriseId :: Text
+-- /See:/ 'enterprisesUnenroll' smart constructor.
+newtype EnterprisesUnenroll = EnterprisesUnenroll
+    { _euuEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EnterprisesUnenroll'' with the minimum fields required to make a request.
+-- | Creates a value of 'EnterprisesUnenroll' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'euEnterpriseId'
-enterprisesUnenroll'
-    :: Text -- ^ 'euEnterpriseId'
-    -> EnterprisesUnenroll'
-enterprisesUnenroll' pEuEnterpriseId_ =
-    EnterprisesUnenroll'
-    { _euEnterpriseId = pEuEnterpriseId_
+-- * 'euuEnterpriseId'
+enterprisesUnenroll
+    :: Text -- ^ 'euuEnterpriseId'
+    -> EnterprisesUnenroll
+enterprisesUnenroll pEuuEnterpriseId_ =
+    EnterprisesUnenroll
+    { _euuEnterpriseId = pEuuEnterpriseId_
     }
 
 -- | The ID of the enterprise.
-euEnterpriseId :: Lens' EnterprisesUnenroll' Text
-euEnterpriseId
-  = lens _euEnterpriseId
-      (\ s a -> s{_euEnterpriseId = a})
+euuEnterpriseId :: Lens' EnterprisesUnenroll Text
+euuEnterpriseId
+  = lens _euuEnterpriseId
+      (\ s a -> s{_euuEnterpriseId = a})
 
-instance GoogleRequest EnterprisesUnenroll' where
-        type Rs EnterprisesUnenroll' = ()
-        requestClient EnterprisesUnenroll'{..}
-          = go _euEnterpriseId (Just AltJSON)
+instance GoogleRequest EnterprisesUnenroll where
+        type Rs EnterprisesUnenroll = ()
+        requestClient EnterprisesUnenroll{..}
+          = go _euuEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient

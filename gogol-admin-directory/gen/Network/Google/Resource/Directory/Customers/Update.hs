@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Customers.Update
       CustomersUpdateResource
 
     -- * Creating a Request
-    , customersUpdate'
-    , CustomersUpdate'
+    , customersUpdate
+    , CustomersUpdate
 
     -- * Request Lenses
     , cuCustomerKey
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.customers.update@ method which the
--- 'CustomersUpdate'' request conforms to.
+-- 'CustomersUpdate' request conforms to.
 type CustomersUpdateResource =
      "customers" :>
        Capture "customerKey" Text :>
@@ -50,43 +50,43 @@ type CustomersUpdateResource =
 
 -- | Updates a customer.
 --
--- /See:/ 'customersUpdate'' smart constructor.
-data CustomersUpdate' = CustomersUpdate'
+-- /See:/ 'customersUpdate' smart constructor.
+data CustomersUpdate = CustomersUpdate
     { _cuCustomerKey :: !Text
     , _cuPayload     :: !Customer
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CustomersUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CustomersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cuCustomerKey'
 --
 -- * 'cuPayload'
-customersUpdate'
+customersUpdate
     :: Text -- ^ 'cuCustomerKey'
     -> Customer -- ^ 'cuPayload'
-    -> CustomersUpdate'
-customersUpdate' pCuCustomerKey_ pCuPayload_ =
-    CustomersUpdate'
+    -> CustomersUpdate
+customersUpdate pCuCustomerKey_ pCuPayload_ =
+    CustomersUpdate
     { _cuCustomerKey = pCuCustomerKey_
     , _cuPayload = pCuPayload_
     }
 
 -- | Id of the customer to be updated
-cuCustomerKey :: Lens' CustomersUpdate' Text
+cuCustomerKey :: Lens' CustomersUpdate Text
 cuCustomerKey
   = lens _cuCustomerKey
       (\ s a -> s{_cuCustomerKey = a})
 
 -- | Multipart request metadata.
-cuPayload :: Lens' CustomersUpdate' Customer
+cuPayload :: Lens' CustomersUpdate Customer
 cuPayload
   = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
-instance GoogleRequest CustomersUpdate' where
-        type Rs CustomersUpdate' = Customer
-        requestClient CustomersUpdate'{..}
+instance GoogleRequest CustomersUpdate where
+        type Rs CustomersUpdate = Customer
+        requestClient CustomersUpdate{..}
           = go _cuCustomerKey (Just AltJSON) _cuPayload
               directoryService
           where go

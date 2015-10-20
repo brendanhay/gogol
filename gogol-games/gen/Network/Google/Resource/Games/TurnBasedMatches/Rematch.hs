@@ -32,8 +32,8 @@ module Network.Google.Resource.Games.TurnBasedMatches.Rematch
       TurnBasedMatchesRematchResource
 
     -- * Creating a Request
-    , turnBasedMatchesRematch'
-    , TurnBasedMatchesRematch'
+    , turnBasedMatchesRematch
+    , TurnBasedMatchesRematch
 
     -- * Request Lenses
     , tbmrRequestId
@@ -45,7 +45,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.turnBasedMatches.rematch@ method which the
--- 'TurnBasedMatchesRematch'' request conforms to.
+-- 'TurnBasedMatchesRematch' request conforms to.
 type TurnBasedMatchesRematchResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
@@ -60,14 +60,14 @@ type TurnBasedMatchesRematchResource =
 -- their list; the player must have called Finish first. Returns the newly
 -- created match; it will be the caller\'s turn.
 --
--- /See:/ 'turnBasedMatchesRematch'' smart constructor.
-data TurnBasedMatchesRematch' = TurnBasedMatchesRematch'
+-- /See:/ 'turnBasedMatchesRematch' smart constructor.
+data TurnBasedMatchesRematch = TurnBasedMatchesRematch
     { _tbmrRequestId :: !(Maybe Int64)
     , _tbmrLanguage  :: !(Maybe Text)
     , _tbmrMatchId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TurnBasedMatchesRematch'' with the minimum fields required to make a request.
+-- | Creates a value of 'TurnBasedMatchesRematch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,11 +76,11 @@ data TurnBasedMatchesRematch' = TurnBasedMatchesRematch'
 -- * 'tbmrLanguage'
 --
 -- * 'tbmrMatchId'
-turnBasedMatchesRematch'
+turnBasedMatchesRematch
     :: Text -- ^ 'tbmrMatchId'
-    -> TurnBasedMatchesRematch'
-turnBasedMatchesRematch' pTbmrMatchId_ =
-    TurnBasedMatchesRematch'
+    -> TurnBasedMatchesRematch
+turnBasedMatchesRematch pTbmrMatchId_ =
+    TurnBasedMatchesRematch
     { _tbmrRequestId = Nothing
     , _tbmrLanguage = Nothing
     , _tbmrMatchId = pTbmrMatchId_
@@ -89,25 +89,25 @@ turnBasedMatchesRematch' pTbmrMatchId_ =
 -- | A randomly generated numeric ID for each request specified by the
 -- caller. This number is used at the server to ensure that the request is
 -- handled correctly across retries.
-tbmrRequestId :: Lens' TurnBasedMatchesRematch' (Maybe Int64)
+tbmrRequestId :: Lens' TurnBasedMatchesRematch (Maybe Int64)
 tbmrRequestId
   = lens _tbmrRequestId
       (\ s a -> s{_tbmrRequestId = a})
 
 -- | The preferred language to use for strings returned by this method.
-tbmrLanguage :: Lens' TurnBasedMatchesRematch' (Maybe Text)
+tbmrLanguage :: Lens' TurnBasedMatchesRematch (Maybe Text)
 tbmrLanguage
   = lens _tbmrLanguage (\ s a -> s{_tbmrLanguage = a})
 
 -- | The ID of the match.
-tbmrMatchId :: Lens' TurnBasedMatchesRematch' Text
+tbmrMatchId :: Lens' TurnBasedMatchesRematch Text
 tbmrMatchId
   = lens _tbmrMatchId (\ s a -> s{_tbmrMatchId = a})
 
-instance GoogleRequest TurnBasedMatchesRematch' where
-        type Rs TurnBasedMatchesRematch' =
+instance GoogleRequest TurnBasedMatchesRematch where
+        type Rs TurnBasedMatchesRematch =
              TurnBasedMatchRematch
-        requestClient TurnBasedMatchesRematch'{..}
+        requestClient TurnBasedMatchesRematch{..}
           = go _tbmrMatchId _tbmrRequestId _tbmrLanguage
               (Just AltJSON)
               gamesService

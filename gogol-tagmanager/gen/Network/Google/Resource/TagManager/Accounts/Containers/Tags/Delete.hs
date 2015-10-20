@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Delete
       AccountsContainersTagsDeleteResource
 
     -- * Creating a Request
-    , accountsContainersTagsDelete'
-    , AccountsContainersTagsDelete'
+    , accountsContainersTagsDelete
+    , AccountsContainersTagsDelete
 
     -- * Request Lenses
     , actdcContainerId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.tags.delete@ method which the
--- 'AccountsContainersTagsDelete'' request conforms to.
+-- 'AccountsContainersTagsDelete' request conforms to.
 type AccountsContainersTagsDeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -54,14 +54,14 @@ type AccountsContainersTagsDeleteResource =
 
 -- | Deletes a GTM Tag.
 --
--- /See:/ 'accountsContainersTagsDelete'' smart constructor.
-data AccountsContainersTagsDelete' = AccountsContainersTagsDelete'
+-- /See:/ 'accountsContainersTagsDelete' smart constructor.
+data AccountsContainersTagsDelete = AccountsContainersTagsDelete
     { _actdcContainerId :: !Text
     , _actdcAccountId   :: !Text
     , _actdcTagId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersTagsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersTagsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,39 +70,39 @@ data AccountsContainersTagsDelete' = AccountsContainersTagsDelete'
 -- * 'actdcAccountId'
 --
 -- * 'actdcTagId'
-accountsContainersTagsDelete'
+accountsContainersTagsDelete
     :: Text -- ^ 'actdcContainerId'
     -> Text -- ^ 'actdcAccountId'
     -> Text -- ^ 'actdcTagId'
-    -> AccountsContainersTagsDelete'
-accountsContainersTagsDelete' pActdcContainerId_ pActdcAccountId_ pActdcTagId_ =
-    AccountsContainersTagsDelete'
+    -> AccountsContainersTagsDelete
+accountsContainersTagsDelete pActdcContainerId_ pActdcAccountId_ pActdcTagId_ =
+    AccountsContainersTagsDelete
     { _actdcContainerId = pActdcContainerId_
     , _actdcAccountId = pActdcAccountId_
     , _actdcTagId = pActdcTagId_
     }
 
 -- | The GTM Container ID.
-actdcContainerId :: Lens' AccountsContainersTagsDelete' Text
+actdcContainerId :: Lens' AccountsContainersTagsDelete Text
 actdcContainerId
   = lens _actdcContainerId
       (\ s a -> s{_actdcContainerId = a})
 
 -- | The GTM Account ID.
-actdcAccountId :: Lens' AccountsContainersTagsDelete' Text
+actdcAccountId :: Lens' AccountsContainersTagsDelete Text
 actdcAccountId
   = lens _actdcAccountId
       (\ s a -> s{_actdcAccountId = a})
 
 -- | The GTM Tag ID.
-actdcTagId :: Lens' AccountsContainersTagsDelete' Text
+actdcTagId :: Lens' AccountsContainersTagsDelete Text
 actdcTagId
   = lens _actdcTagId (\ s a -> s{_actdcTagId = a})
 
-instance GoogleRequest AccountsContainersTagsDelete'
+instance GoogleRequest AccountsContainersTagsDelete
          where
-        type Rs AccountsContainersTagsDelete' = ()
-        requestClient AccountsContainersTagsDelete'{..}
+        type Rs AccountsContainersTagsDelete = ()
+        requestClient AccountsContainersTagsDelete{..}
           = go _actdcAccountId _actdcContainerId _actdcTagId
               (Just AltJSON)
               tagManagerService

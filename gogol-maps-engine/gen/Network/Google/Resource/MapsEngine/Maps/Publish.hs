@@ -29,19 +29,19 @@ module Network.Google.Resource.MapsEngine.Maps.Publish
       MapsPublishResource
 
     -- * Creating a Request
-    , mapsPublish'
-    , MapsPublish'
+    , mapsPublish
+    , MapsPublish
 
     -- * Request Lenses
-    , mForce
-    , mId
+    , mapForce
+    , mapId
     ) where
 
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.maps.publish@ method which the
--- 'MapsPublish'' request conforms to.
+-- 'MapsPublish' request conforms to.
 type MapsPublishResource =
      "maps" :>
        Capture "id" Text :>
@@ -52,42 +52,43 @@ type MapsPublishResource =
 
 -- | Publish a map asset.
 --
--- /See:/ 'mapsPublish'' smart constructor.
-data MapsPublish' = MapsPublish'
-    { _mForce :: !(Maybe Bool)
-    , _mId    :: !Text
+-- /See:/ 'mapsPublish' smart constructor.
+data MapsPublish = MapsPublish
+    { _mapForce :: !(Maybe Bool)
+    , _mapId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MapsPublish'' with the minimum fields required to make a request.
+-- | Creates a value of 'MapsPublish' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mForce'
+-- * 'mapForce'
 --
--- * 'mId'
-mapsPublish'
-    :: Text -- ^ 'mId'
-    -> MapsPublish'
-mapsPublish' pMId_ =
-    MapsPublish'
-    { _mForce = Nothing
-    , _mId = pMId_
+-- * 'mapId'
+mapsPublish
+    :: Text -- ^ 'mapId'
+    -> MapsPublish
+mapsPublish pMapId_ =
+    MapsPublish
+    { _mapForce = Nothing
+    , _mapId = pMapId_
     }
 
 -- | If set to true, the API will allow publication of the map even if it\'s
 -- out of date. If false, the map must have a processingStatus of complete
 -- before publishing.
-mForce :: Lens' MapsPublish' (Maybe Bool)
-mForce = lens _mForce (\ s a -> s{_mForce = a})
+mapForce :: Lens' MapsPublish (Maybe Bool)
+mapForce = lens _mapForce (\ s a -> s{_mapForce = a})
 
 -- | The ID of the map.
-mId :: Lens' MapsPublish' Text
-mId = lens _mId (\ s a -> s{_mId = a})
+mapId :: Lens' MapsPublish Text
+mapId = lens _mapId (\ s a -> s{_mapId = a})
 
-instance GoogleRequest MapsPublish' where
-        type Rs MapsPublish' = PublishResponse
-        requestClient MapsPublish'{..}
-          = go _mId _mForce (Just AltJSON) mapsEngineService
+instance GoogleRequest MapsPublish where
+        type Rs MapsPublish = PublishResponse
+        requestClient MapsPublish{..}
+          = go _mapId _mapForce (Just AltJSON)
+              mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy MapsPublishResource)
                       mempty

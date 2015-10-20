@@ -30,22 +30,22 @@ module Network.Google.Resource.Compute.Instances.List
       InstancesListResource
 
     -- * Creating a Request
-    , instancesList'
-    , InstancesList'
+    , instancesList
+    , InstancesList
 
     -- * Request Lenses
-    , illProject
-    , illZone
-    , illFilter
-    , illPageToken
-    , illMaxResults
+    , ilProject
+    , ilZone
+    , ilFilter
+    , ilPageToken
+    , ilMaxResults
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.list@ method which the
--- 'InstancesList'' request conforms to.
+-- 'InstancesList' request conforms to.
 type InstancesListResource =
      Capture "project" Text :>
        "zones" :>
@@ -59,49 +59,49 @@ type InstancesListResource =
 -- | Retrieves the list of instance resources contained within the specified
 -- zone.
 --
--- /See:/ 'instancesList'' smart constructor.
-data InstancesList' = InstancesList'
-    { _illProject    :: !Text
-    , _illZone       :: !Text
-    , _illFilter     :: !(Maybe Text)
-    , _illPageToken  :: !(Maybe Text)
-    , _illMaxResults :: !Word32
+-- /See:/ 'instancesList' smart constructor.
+data InstancesList = InstancesList
+    { _ilProject    :: !Text
+    , _ilZone       :: !Text
+    , _ilFilter     :: !(Maybe Text)
+    , _ilPageToken  :: !(Maybe Text)
+    , _ilMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'illProject'
+-- * 'ilProject'
 --
--- * 'illZone'
+-- * 'ilZone'
 --
--- * 'illFilter'
+-- * 'ilFilter'
 --
--- * 'illPageToken'
+-- * 'ilPageToken'
 --
--- * 'illMaxResults'
-instancesList'
-    :: Text -- ^ 'illProject'
-    -> Text -- ^ 'illZone'
-    -> InstancesList'
-instancesList' pIllProject_ pIllZone_ =
-    InstancesList'
-    { _illProject = pIllProject_
-    , _illZone = pIllZone_
-    , _illFilter = Nothing
-    , _illPageToken = Nothing
-    , _illMaxResults = 500
+-- * 'ilMaxResults'
+instancesList
+    :: Text -- ^ 'ilProject'
+    -> Text -- ^ 'ilZone'
+    -> InstancesList
+instancesList pIlProject_ pIlZone_ =
+    InstancesList
+    { _ilProject = pIlProject_
+    , _ilZone = pIlZone_
+    , _ilFilter = Nothing
+    , _ilPageToken = Nothing
+    , _ilMaxResults = 500
     }
 
 -- | Project ID for this request.
-illProject :: Lens' InstancesList' Text
-illProject
-  = lens _illProject (\ s a -> s{_illProject = a})
+ilProject :: Lens' InstancesList Text
+ilProject
+  = lens _ilProject (\ s a -> s{_ilProject = a})
 
 -- | The name of the zone for this request.
-illZone :: Lens' InstancesList' Text
-illZone = lens _illZone (\ s a -> s{_illZone = a})
+ilZone :: Lens' InstancesList Text
+ilZone = lens _ilZone (\ s a -> s{_ilZone = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -114,28 +114,26 @@ illZone = lens _illZone (\ s a -> s{_illZone = a})
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-illFilter :: Lens' InstancesList' (Maybe Text)
-illFilter
-  = lens _illFilter (\ s a -> s{_illFilter = a})
+ilFilter :: Lens' InstancesList (Maybe Text)
+ilFilter = lens _ilFilter (\ s a -> s{_ilFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-illPageToken :: Lens' InstancesList' (Maybe Text)
-illPageToken
-  = lens _illPageToken (\ s a -> s{_illPageToken = a})
+ilPageToken :: Lens' InstancesList (Maybe Text)
+ilPageToken
+  = lens _ilPageToken (\ s a -> s{_ilPageToken = a})
 
 -- | Maximum count of results to be returned.
-illMaxResults :: Lens' InstancesList' Word32
-illMaxResults
-  = lens _illMaxResults
-      (\ s a -> s{_illMaxResults = a})
+ilMaxResults :: Lens' InstancesList Word32
+ilMaxResults
+  = lens _ilMaxResults (\ s a -> s{_ilMaxResults = a})
 
-instance GoogleRequest InstancesList' where
-        type Rs InstancesList' = InstanceList
-        requestClient InstancesList'{..}
-          = go _illProject _illZone _illFilter _illPageToken
-              (Just _illMaxResults)
+instance GoogleRequest InstancesList where
+        type Rs InstancesList = InstanceList
+        requestClient InstancesList{..}
+          = go _ilProject _ilZone _ilFilter _ilPageToken
+              (Just _ilMaxResults)
               (Just AltJSON)
               computeService
           where go

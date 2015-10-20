@@ -29,8 +29,8 @@ module Network.Google.Resource.Tasks.TaskLists.Delete
       TaskListsDeleteResource
 
     -- * Creating a Request
-    , taskListsDelete'
-    , TaskListsDelete'
+    , taskListsDelete
+    , TaskListsDelete
 
     -- * Request Lenses
     , tldTaskList
@@ -40,7 +40,7 @@ import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasklists.delete@ method which the
--- 'TaskListsDelete'' request conforms to.
+-- 'TaskListsDelete' request conforms to.
 type TaskListsDeleteResource =
      "users" :>
        "@me" :>
@@ -50,32 +50,32 @@ type TaskListsDeleteResource =
 
 -- | Deletes the authenticated user\'s specified task list.
 --
--- /See:/ 'taskListsDelete'' smart constructor.
-newtype TaskListsDelete' = TaskListsDelete'
+-- /See:/ 'taskListsDelete' smart constructor.
+newtype TaskListsDelete = TaskListsDelete
     { _tldTaskList :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TaskListsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'TaskListsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tldTaskList'
-taskListsDelete'
+taskListsDelete
     :: Text -- ^ 'tldTaskList'
-    -> TaskListsDelete'
-taskListsDelete' pTldTaskList_ =
-    TaskListsDelete'
+    -> TaskListsDelete
+taskListsDelete pTldTaskList_ =
+    TaskListsDelete
     { _tldTaskList = pTldTaskList_
     }
 
 -- | Task list identifier.
-tldTaskList :: Lens' TaskListsDelete' Text
+tldTaskList :: Lens' TaskListsDelete Text
 tldTaskList
   = lens _tldTaskList (\ s a -> s{_tldTaskList = a})
 
-instance GoogleRequest TaskListsDelete' where
-        type Rs TaskListsDelete' = ()
-        requestClient TaskListsDelete'{..}
+instance GoogleRequest TaskListsDelete where
+        type Rs TaskListsDelete = ()
+        requestClient TaskListsDelete{..}
           = go _tldTaskList (Just AltJSON) appsTasksService
           where go
                   = buildClient

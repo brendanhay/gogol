@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Layers.Get
       LayersGetResource
 
     -- * Creating a Request
-    , layersGet'
-    , LayersGet'
+    , layersGet
+    , LayersGet
 
     -- * Request Lenses
     , lgVersion
@@ -41,7 +41,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.layers.get@ method which the
--- 'LayersGet'' request conforms to.
+-- 'LayersGet' request conforms to.
 type LayersGetResource =
      "layers" :>
        Capture "id" Text :>
@@ -50,24 +50,24 @@ type LayersGetResource =
 
 -- | Return metadata for a particular layer.
 --
--- /See:/ 'layersGet'' smart constructor.
-data LayersGet' = LayersGet'
+-- /See:/ 'layersGet' smart constructor.
+data LayersGet = LayersGet
     { _lgVersion :: !(Maybe LayersGetVersion)
     , _lgId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lgVersion'
 --
 -- * 'lgId'
-layersGet'
+layersGet
     :: Text -- ^ 'lgId'
-    -> LayersGet'
-layersGet' pLgId_ =
-    LayersGet'
+    -> LayersGet
+layersGet pLgId_ =
+    LayersGet
     { _lgVersion = Nothing
     , _lgId = pLgId_
     }
@@ -76,17 +76,17 @@ layersGet' pLgId_ =
 -- should be returned. When version is set to published, the published
 -- version of the layer will be returned. Please use the
 -- layers.getPublished endpoint instead.
-lgVersion :: Lens' LayersGet' (Maybe LayersGetVersion)
+lgVersion :: Lens' LayersGet (Maybe LayersGetVersion)
 lgVersion
   = lens _lgVersion (\ s a -> s{_lgVersion = a})
 
 -- | The ID of the layer.
-lgId :: Lens' LayersGet' Text
+lgId :: Lens' LayersGet Text
 lgId = lens _lgId (\ s a -> s{_lgId = a})
 
-instance GoogleRequest LayersGet' where
-        type Rs LayersGet' = Layer
-        requestClient LayersGet'{..}
+instance GoogleRequest LayersGet where
+        type Rs LayersGet = Layer
+        requestClient LayersGet{..}
           = go _lgId _lgVersion (Just AltJSON)
               mapsEngineService
           where go

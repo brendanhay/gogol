@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.RoleAssignments.Delete
       RoleAssignmentsDeleteResource
 
     -- * Creating a Request
-    , roleAssignmentsDelete'
-    , RoleAssignmentsDelete'
+    , roleAssignmentsDelete
+    , RoleAssignmentsDelete
 
     -- * Request Lenses
     , radCustomer
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.roleAssignments.delete@ method which the
--- 'RoleAssignmentsDelete'' request conforms to.
+-- 'RoleAssignmentsDelete' request conforms to.
 type RoleAssignmentsDeleteResource =
      "customer" :>
        Capture "customer" Text :>
@@ -51,43 +51,43 @@ type RoleAssignmentsDeleteResource =
 
 -- | Deletes a role assignment.
 --
--- /See:/ 'roleAssignmentsDelete'' smart constructor.
-data RoleAssignmentsDelete' = RoleAssignmentsDelete'
+-- /See:/ 'roleAssignmentsDelete' smart constructor.
+data RoleAssignmentsDelete = RoleAssignmentsDelete
     { _radCustomer         :: !Text
     , _radRoleAssignmentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoleAssignmentsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'RoleAssignmentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'radCustomer'
 --
 -- * 'radRoleAssignmentId'
-roleAssignmentsDelete'
+roleAssignmentsDelete
     :: Text -- ^ 'radCustomer'
     -> Text -- ^ 'radRoleAssignmentId'
-    -> RoleAssignmentsDelete'
-roleAssignmentsDelete' pRadCustomer_ pRadRoleAssignmentId_ =
-    RoleAssignmentsDelete'
+    -> RoleAssignmentsDelete
+roleAssignmentsDelete pRadCustomer_ pRadRoleAssignmentId_ =
+    RoleAssignmentsDelete
     { _radCustomer = pRadCustomer_
     , _radRoleAssignmentId = pRadRoleAssignmentId_
     }
 
 -- | Immutable ID of the Google Apps account.
-radCustomer :: Lens' RoleAssignmentsDelete' Text
+radCustomer :: Lens' RoleAssignmentsDelete Text
 radCustomer
   = lens _radCustomer (\ s a -> s{_radCustomer = a})
 
 -- | Immutable ID of the role assignment.
-radRoleAssignmentId :: Lens' RoleAssignmentsDelete' Text
+radRoleAssignmentId :: Lens' RoleAssignmentsDelete Text
 radRoleAssignmentId
   = lens _radRoleAssignmentId
       (\ s a -> s{_radRoleAssignmentId = a})
 
-instance GoogleRequest RoleAssignmentsDelete' where
-        type Rs RoleAssignmentsDelete' = ()
-        requestClient RoleAssignmentsDelete'{..}
+instance GoogleRequest RoleAssignmentsDelete where
+        type Rs RoleAssignmentsDelete = ()
+        requestClient RoleAssignmentsDelete{..}
           = go _radCustomer _radRoleAssignmentId (Just AltJSON)
               directoryService
           where go

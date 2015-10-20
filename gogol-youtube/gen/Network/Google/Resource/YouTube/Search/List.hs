@@ -32,8 +32,8 @@ module Network.Google.Resource.YouTube.Search.List
       SearchListResource
 
     -- * Creating a Request
-    , searchList'
-    , SearchList'
+    , searchList
+    , SearchList
 
     -- * Request Lenses
     , slPublishedAfter
@@ -73,7 +73,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.search.list@ method which the
--- 'SearchList'' request conforms to.
+-- 'SearchList' request conforms to.
 type SearchListResource =
      "search" :>
        QueryParam "part" Text :>
@@ -152,8 +152,8 @@ type SearchListResource =
 -- matching video, channel, and playlist resources, but you can also
 -- configure queries to only retrieve a specific type of resource.
 --
--- /See:/ 'searchList'' smart constructor.
-data SearchList' = SearchList'
+-- /See:/ 'searchList' smart constructor.
+data SearchList = SearchList
     { _slPublishedAfter         :: !(Maybe DateTime')
     , _slVideoDefinition        :: !(Maybe SearchListVideoDefinition)
     , _slPart                   :: !Text
@@ -187,7 +187,7 @@ data SearchList' = SearchList'
     , _slVideoDimension         :: !(Maybe SearchListVideoDimension)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SearchList'' with the minimum fields required to make a request.
+-- | Creates a value of 'SearchList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -252,11 +252,11 @@ data SearchList' = SearchList'
 -- * 'slVideoType'
 --
 -- * 'slVideoDimension'
-searchList'
+searchList
     :: Text -- ^ 'slPart'
-    -> SearchList'
-searchList' pSlPart_ =
-    SearchList'
+    -> SearchList
+searchList pSlPart_ =
+    SearchList
     { _slPublishedAfter = Nothing
     , _slVideoDefinition = Nothing
     , _slPart = pSlPart_
@@ -293,7 +293,7 @@ searchList' pSlPart_ =
 -- | The publishedAfter parameter indicates that the API response should only
 -- contain resources created after the specified time. The value is an RFC
 -- 3339 formatted date-time value (1970-01-01T00:00:00Z).
-slPublishedAfter :: Lens' SearchList' (Maybe UTCTime)
+slPublishedAfter :: Lens' SearchList (Maybe UTCTime)
 slPublishedAfter
   = lens _slPublishedAfter
       (\ s a -> s{_slPublishedAfter = a})
@@ -305,7 +305,7 @@ slPublishedAfter
 -- resolutions, like 1080p, might also be available. If you specify a value
 -- for this parameter, you must also set the type parameter\'s value to
 -- video.
-slVideoDefinition :: Lens' SearchList' (Maybe SearchListVideoDefinition)
+slVideoDefinition :: Lens' SearchList (Maybe SearchListVideoDefinition)
 slVideoDefinition
   = lens _slVideoDefinition
       (\ s a -> s{_slVideoDefinition = a})
@@ -313,13 +313,13 @@ slVideoDefinition
 -- | The part parameter specifies a comma-separated list of one or more
 -- search resource properties that the API response will include. Set the
 -- parameter value to snippet.
-slPart :: Lens' SearchList' Text
+slPart :: Lens' SearchList Text
 slPart = lens _slPart (\ s a -> s{_slPart = a})
 
 -- | The videoDuration parameter filters video search results based on their
 -- duration. If you specify a value for this parameter, you must also set
 -- the type parameter\'s value to video.
-slVideoDuration :: Lens' SearchList' (Maybe SearchListVideoDuration)
+slVideoDuration :: Lens' SearchList (Maybe SearchListVideoDuration)
 slVideoDuration
   = lens _slVideoDuration
       (\ s a -> s{_slVideoDuration = a})
@@ -328,7 +328,7 @@ slVideoDuration
 -- search results based on whether they have captions. If you specify a
 -- value for this parameter, you must also set the type parameter\'s value
 -- to video.
-slVideoCaption :: Lens' SearchList' (Maybe SearchListVideoCaption)
+slVideoCaption :: Lens' SearchList (Maybe SearchListVideoCaption)
 slVideoCaption
   = lens _slVideoCaption
       (\ s a -> s{_slVideoCaption = a})
@@ -338,7 +338,7 @@ slVideoCaption
 -- either the Creative Commons license or the standard YouTube license to
 -- each of their videos. If you specify a value for this parameter, you
 -- must also set the type parameter\'s value to video.
-slVideoLicense :: Lens' SearchList' (Maybe SearchListVideoLicense)
+slVideoLicense :: Lens' SearchList (Maybe SearchListVideoLicense)
 slVideoLicense
   = lens _slVideoLicense
       (\ s a -> s{_slVideoLicense = a})
@@ -346,7 +346,7 @@ slVideoLicense
 -- | The regionCode parameter instructs the API to return search results for
 -- the specified country. The parameter value is an ISO 3166-1 alpha-2
 -- country code.
-slRegionCode :: Lens' SearchList' (Maybe Text)
+slRegionCode :: Lens' SearchList (Maybe Text)
 slRegionCode
   = lens _slRegionCode (\ s a -> s{_slRegionCode = a})
 
@@ -356,7 +356,7 @@ slRegionCode
 -- Therefore, a developer can restrict results to videos uploaded through
 -- the developer\'s own app or website but not to videos uploaded through
 -- other apps or sites.
-slForDeveloper :: Lens' SearchList' (Maybe Bool)
+slForDeveloper :: Lens' SearchList (Maybe Bool)
 slForDeveloper
   = lens _slForDeveloper
       (\ s a -> s{_slForDeveloper = a})
@@ -372,7 +372,7 @@ slForDeveloper
 -- video to still be included in the search results.The API returns an
 -- error if your request specifies a value for the location parameter but
 -- does not also specify a value for the locationRadius parameter.
-slLocation :: Lens' SearchList' (Maybe Text)
+slLocation :: Lens' SearchList (Maybe Text)
 slLocation
   = lens _slLocation (\ s a -> s{_slLocation = a})
 
@@ -383,7 +383,7 @@ slLocation
 -- values include 1500m, 5km, 10000ft, and 0.75mi. The API does not support
 -- locationRadius parameter values larger than 1000 kilometers. Note: See
 -- the definition of the location parameter for more information.
-slLocationRadius :: Lens' SearchList' (Maybe Text)
+slLocationRadius :: Lens' SearchList (Maybe Text)
 slLocationRadius
   = lens _slLocationRadius
       (\ s a -> s{_slLocationRadius = a})
@@ -394,14 +394,14 @@ slLocationRadius
 -- onBehalfOfContentOwner parameter. The user must be authenticated using a
 -- CMS account linked to the specified content owner and
 -- onBehalfOfContentOwner must be provided.
-slForContentOwner :: Lens' SearchList' (Maybe Bool)
+slForContentOwner :: Lens' SearchList (Maybe Bool)
 slForContentOwner
   = lens _slForContentOwner
       (\ s a -> s{_slForContentOwner = a})
 
 -- | The channelId parameter indicates that the API response should only
 -- contain resources created by the channel
-slChannelId :: Lens' SearchList' (Maybe Text)
+slChannelId :: Lens' SearchList (Maybe Text)
 slChannelId
   = lens _slChannelId (\ s a -> s{_slChannelId = a})
 
@@ -414,20 +414,20 @@ slChannelId
 -- \"fishing\", set the q parameter value to boating|sailing -fishing. Note
 -- that the pipe character must be URL-escaped when it is sent in your API
 -- request. The URL-escaped value for the pipe character is %7C.
-slQ :: Lens' SearchList' (Maybe Text)
+slQ :: Lens' SearchList (Maybe Text)
 slQ = lens _slQ (\ s a -> s{_slQ = a})
 
 -- | The forMine parameter restricts the search to only retrieve videos owned
 -- by the authenticated user. If you set this parameter to true, then the
 -- type parameter\'s value must also be set to video.
-slForMine :: Lens' SearchList' (Maybe Bool)
+slForMine :: Lens' SearchList (Maybe Bool)
 slForMine
   = lens _slForMine (\ s a -> s{_slForMine = a})
 
 -- | The videoEmbeddable parameter lets you to restrict a search to only
 -- videos that can be embedded into a webpage. If you specify a value for
 -- this parameter, you must also set the type parameter\'s value to video.
-slVideoEmbeddable :: Lens' SearchList' (Maybe SearchListVideoEmbeddable)
+slVideoEmbeddable :: Lens' SearchList (Maybe SearchListVideoEmbeddable)
 slVideoEmbeddable
   = lens _slVideoEmbeddable
       (\ s a -> s{_slVideoEmbeddable = a})
@@ -435,7 +435,7 @@ slVideoEmbeddable
 -- | The eventType parameter restricts a search to broadcast events. If you
 -- specify a value for this parameter, you must also set the type
 -- parameter\'s value to video.
-slEventType :: Lens' SearchList' (Maybe SearchListEventType)
+slEventType :: Lens' SearchList (Maybe SearchListEventType)
 slEventType
   = lens _slEventType (\ s a -> s{_slEventType = a})
 
@@ -449,7 +449,7 @@ slEventType
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-slOnBehalfOfContentOwner :: Lens' SearchList' (Maybe Text)
+slOnBehalfOfContentOwner :: Lens' SearchList (Maybe Text)
 slOnBehalfOfContentOwner
   = lens _slOnBehalfOfContentOwner
       (\ s a -> s{_slOnBehalfOfContentOwner = a})
@@ -457,7 +457,7 @@ slOnBehalfOfContentOwner
 -- | The videoCategoryId parameter filters video search results based on
 -- their category. If you specify a value for this parameter, you must also
 -- set the type parameter\'s value to video.
-slVideoCategoryId :: Lens' SearchList' (Maybe Text)
+slVideoCategoryId :: Lens' SearchList (Maybe Text)
 slVideoCategoryId
   = lens _slVideoCategoryId
       (\ s a -> s{_slVideoCategoryId = a})
@@ -465,13 +465,13 @@ slVideoCategoryId
 -- | The topicId parameter indicates that the API response should only
 -- contain resources associated with the specified topic. The value
 -- identifies a Freebase topic ID.
-slTopicId :: Lens' SearchList' (Maybe Text)
+slTopicId :: Lens' SearchList (Maybe Text)
 slTopicId
   = lens _slTopicId (\ s a -> s{_slTopicId = a})
 
 -- | The safeSearch parameter indicates whether the search results should
 -- include restricted content as well as standard content.
-slSafeSearch :: Lens' SearchList' (Maybe SearchListSafeSearch)
+slSafeSearch :: Lens' SearchList (Maybe SearchListSafeSearch)
 slSafeSearch
   = lens _slSafeSearch (\ s a -> s{_slSafeSearch = a})
 
@@ -479,7 +479,7 @@ slSafeSearch
 -- videos that can be played outside youtube.com. If you specify a value
 -- for this parameter, you must also set the type parameter\'s value to
 -- video.
-slVideoSyndicated :: Lens' SearchList' (Maybe SearchListVideoSyndicated)
+slVideoSyndicated :: Lens' SearchList (Maybe SearchListVideoSyndicated)
 slVideoSyndicated
   = lens _slVideoSyndicated
       (\ s a -> s{_slVideoSyndicated = a})
@@ -488,7 +488,7 @@ slVideoSyndicated
 -- related to the video that the parameter value identifies. The parameter
 -- value must be set to a YouTube video ID and, if you are using this
 -- parameter, the type parameter must be set to video.
-slRelatedToVideoId :: Lens' SearchList' (Maybe Text)
+slRelatedToVideoId :: Lens' SearchList (Maybe Text)
 slRelatedToVideoId
   = lens _slRelatedToVideoId
       (\ s a -> s{_slRelatedToVideoId = a})
@@ -496,19 +496,19 @@ slRelatedToVideoId
 -- | The pageToken parameter identifies a specific page in the result set
 -- that should be returned. In an API response, the nextPageToken and
 -- prevPageToken properties identify other pages that could be retrieved.
-slPageToken :: Lens' SearchList' (Maybe Text)
+slPageToken :: Lens' SearchList (Maybe Text)
 slPageToken
   = lens _slPageToken (\ s a -> s{_slPageToken = a})
 
 -- | The type parameter restricts a search query to only retrieve a
 -- particular type of resource. The value is a comma-separated list of
 -- resource types.
-slType :: Lens' SearchList' Text
+slType :: Lens' SearchList Text
 slType = lens _slType (\ s a -> s{_slType = a})
 
 -- | The channelType parameter lets you restrict a search to a particular
 -- type of channel.
-slChannelType :: Lens' SearchList' (Maybe SearchListChannelType)
+slChannelType :: Lens' SearchList (Maybe SearchListChannelType)
 slChannelType
   = lens _slChannelType
       (\ s a -> s{_slChannelType = a})
@@ -519,26 +519,26 @@ slChannelType
 -- should use the values zh-Hans for simplified Chinese and zh-Hant for
 -- traditional Chinese. Please note that results in other languages will
 -- still be returned if they are highly relevant to the search query term.
-slRelevanceLanguage :: Lens' SearchList' (Maybe Text)
+slRelevanceLanguage :: Lens' SearchList (Maybe Text)
 slRelevanceLanguage
   = lens _slRelevanceLanguage
       (\ s a -> s{_slRelevanceLanguage = a})
 
 -- | The order parameter specifies the method that will be used to order
 -- resources in the API response.
-slOrder :: Lens' SearchList' SearchListOrder
+slOrder :: Lens' SearchList SearchListOrder
 slOrder = lens _slOrder (\ s a -> s{_slOrder = a})
 
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set.
-slMaxResults :: Lens' SearchList' Word32
+slMaxResults :: Lens' SearchList Word32
 slMaxResults
   = lens _slMaxResults (\ s a -> s{_slMaxResults = a})
 
 -- | The publishedBefore parameter indicates that the API response should
 -- only contain resources created before the specified time. The value is
 -- an RFC 3339 formatted date-time value (1970-01-01T00:00:00Z).
-slPublishedBefore :: Lens' SearchList' (Maybe UTCTime)
+slPublishedBefore :: Lens' SearchList (Maybe UTCTime)
 slPublishedBefore
   = lens _slPublishedBefore
       (\ s a -> s{_slPublishedBefore = a})
@@ -547,21 +547,21 @@ slPublishedBefore
 -- | The videoType parameter lets you restrict a search to a particular type
 -- of videos. If you specify a value for this parameter, you must also set
 -- the type parameter\'s value to video.
-slVideoType :: Lens' SearchList' (Maybe SearchListVideoType)
+slVideoType :: Lens' SearchList (Maybe SearchListVideoType)
 slVideoType
   = lens _slVideoType (\ s a -> s{_slVideoType = a})
 
 -- | The videoDimension parameter lets you restrict a search to only retrieve
 -- 2D or 3D videos. If you specify a value for this parameter, you must
 -- also set the type parameter\'s value to video.
-slVideoDimension :: Lens' SearchList' (Maybe SearchListVideoDimension)
+slVideoDimension :: Lens' SearchList (Maybe SearchListVideoDimension)
 slVideoDimension
   = lens _slVideoDimension
       (\ s a -> s{_slVideoDimension = a})
 
-instance GoogleRequest SearchList' where
-        type Rs SearchList' = SearchListResponse
-        requestClient SearchList'{..}
+instance GoogleRequest SearchList where
+        type Rs SearchList = SearchListResponse
+        requestClient SearchList{..}
           = go (Just _slPart) _slPublishedAfter
               _slVideoDefinition
               _slVideoDuration

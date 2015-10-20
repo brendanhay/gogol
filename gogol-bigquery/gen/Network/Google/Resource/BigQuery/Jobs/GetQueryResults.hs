@@ -29,8 +29,8 @@ module Network.Google.Resource.BigQuery.Jobs.GetQueryResults
       JobsGetQueryResultsResource
 
     -- * Creating a Request
-    , jobsGetQueryResults'
-    , JobsGetQueryResults'
+    , jobsGetQueryResults
+    , JobsGetQueryResults
 
     -- * Request Lenses
     , jgqrJobId
@@ -45,7 +45,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.jobs.getQueryResults@ method which the
--- 'JobsGetQueryResults'' request conforms to.
+-- 'JobsGetQueryResults' request conforms to.
 type JobsGetQueryResultsResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -60,8 +60,8 @@ type JobsGetQueryResultsResource =
 
 -- | Retrieves the results of a query job.
 --
--- /See:/ 'jobsGetQueryResults'' smart constructor.
-data JobsGetQueryResults' = JobsGetQueryResults'
+-- /See:/ 'jobsGetQueryResults' smart constructor.
+data JobsGetQueryResults = JobsGetQueryResults
     { _jgqrJobId      :: !Text
     , _jgqrTimeoutMs  :: !(Maybe Word32)
     , _jgqrPageToken  :: !(Maybe Text)
@@ -70,7 +70,7 @@ data JobsGetQueryResults' = JobsGetQueryResults'
     , _jgqrMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'JobsGetQueryResults'' with the minimum fields required to make a request.
+-- | Creates a value of 'JobsGetQueryResults' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -85,12 +85,12 @@ data JobsGetQueryResults' = JobsGetQueryResults'
 -- * 'jgqrStartIndex'
 --
 -- * 'jgqrMaxResults'
-jobsGetQueryResults'
+jobsGetQueryResults
     :: Text -- ^ 'jgqrJobId'
     -> Text -- ^ 'jgqrProjectId'
-    -> JobsGetQueryResults'
-jobsGetQueryResults' pJgqrJobId_ pJgqrProjectId_ =
-    JobsGetQueryResults'
+    -> JobsGetQueryResults
+jobsGetQueryResults pJgqrJobId_ pJgqrProjectId_ =
+    JobsGetQueryResults
     { _jgqrJobId = pJgqrJobId_
     , _jgqrTimeoutMs = Nothing
     , _jgqrPageToken = Nothing
@@ -100,47 +100,46 @@ jobsGetQueryResults' pJgqrJobId_ pJgqrProjectId_ =
     }
 
 -- | Job ID of the query job
-jgqrJobId :: Lens' JobsGetQueryResults' Text
+jgqrJobId :: Lens' JobsGetQueryResults Text
 jgqrJobId
   = lens _jgqrJobId (\ s a -> s{_jgqrJobId = a})
 
 -- | How long to wait for the query to complete, in milliseconds, before
 -- returning. Default is 10 seconds. If the timeout passes before the job
 -- completes, the \'jobComplete\' field in the response will be false
-jgqrTimeoutMs :: Lens' JobsGetQueryResults' (Maybe Word32)
+jgqrTimeoutMs :: Lens' JobsGetQueryResults (Maybe Word32)
 jgqrTimeoutMs
   = lens _jgqrTimeoutMs
       (\ s a -> s{_jgqrTimeoutMs = a})
 
 -- | Page token, returned by a previous call, to request the next page of
 -- results
-jgqrPageToken :: Lens' JobsGetQueryResults' (Maybe Text)
+jgqrPageToken :: Lens' JobsGetQueryResults (Maybe Text)
 jgqrPageToken
   = lens _jgqrPageToken
       (\ s a -> s{_jgqrPageToken = a})
 
 -- | Project ID of the query job
-jgqrProjectId :: Lens' JobsGetQueryResults' Text
+jgqrProjectId :: Lens' JobsGetQueryResults Text
 jgqrProjectId
   = lens _jgqrProjectId
       (\ s a -> s{_jgqrProjectId = a})
 
 -- | Zero-based index of the starting row
-jgqrStartIndex :: Lens' JobsGetQueryResults' (Maybe Word64)
+jgqrStartIndex :: Lens' JobsGetQueryResults (Maybe Word64)
 jgqrStartIndex
   = lens _jgqrStartIndex
       (\ s a -> s{_jgqrStartIndex = a})
 
 -- | Maximum number of results to read
-jgqrMaxResults :: Lens' JobsGetQueryResults' (Maybe Word32)
+jgqrMaxResults :: Lens' JobsGetQueryResults (Maybe Word32)
 jgqrMaxResults
   = lens _jgqrMaxResults
       (\ s a -> s{_jgqrMaxResults = a})
 
-instance GoogleRequest JobsGetQueryResults' where
-        type Rs JobsGetQueryResults' =
-             GetQueryResultsResponse
-        requestClient JobsGetQueryResults'{..}
+instance GoogleRequest JobsGetQueryResults where
+        type Rs JobsGetQueryResults = GetQueryResultsResponse
+        requestClient JobsGetQueryResults{..}
           = go _jgqrProjectId _jgqrJobId _jgqrTimeoutMs
               _jgqrPageToken
               _jgqrStartIndex

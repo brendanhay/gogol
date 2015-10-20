@@ -29,8 +29,8 @@ module Network.Google.Resource.DataTransfer.Transfers.Get
       TransfersGetResource
 
     -- * Creating a Request
-    , transfersGet'
-    , TransfersGet'
+    , transfersGet
+    , TransfersGet
 
     -- * Request Lenses
     , tgDataTransferId
@@ -40,7 +40,7 @@ import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @datatransfer.transfers.get@ method which the
--- 'TransfersGet'' request conforms to.
+-- 'TransfersGet' request conforms to.
 type TransfersGetResource =
      "transfers" :>
        Capture "dataTransferId" Text :>
@@ -48,34 +48,34 @@ type TransfersGetResource =
 
 -- | Retrieves a data transfer request by its resource ID.
 --
--- /See:/ 'transfersGet'' smart constructor.
-newtype TransfersGet' = TransfersGet'
+-- /See:/ 'transfersGet' smart constructor.
+newtype TransfersGet = TransfersGet
     { _tgDataTransferId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TransfersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TransfersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tgDataTransferId'
-transfersGet'
+transfersGet
     :: Text -- ^ 'tgDataTransferId'
-    -> TransfersGet'
-transfersGet' pTgDataTransferId_ =
-    TransfersGet'
+    -> TransfersGet
+transfersGet pTgDataTransferId_ =
+    TransfersGet
     { _tgDataTransferId = pTgDataTransferId_
     }
 
 -- | ID of the resource to be retrieved. This is returned in the response
 -- from the insert method.
-tgDataTransferId :: Lens' TransfersGet' Text
+tgDataTransferId :: Lens' TransfersGet Text
 tgDataTransferId
   = lens _tgDataTransferId
       (\ s a -> s{_tgDataTransferId = a})
 
-instance GoogleRequest TransfersGet' where
-        type Rs TransfersGet' = DataTransfer
-        requestClient TransfersGet'{..}
+instance GoogleRequest TransfersGet where
+        type Rs TransfersGet = DataTransfer
+        requestClient TransfersGet{..}
           = go _tgDataTransferId (Just AltJSON)
               dataTransferService
           where go

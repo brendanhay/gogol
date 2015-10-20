@@ -4423,155 +4423,158 @@ instance ToJSON LiveStreamConfigurationIssue where
 --
 -- /See:/ 'channel' smart constructor.
 data Channel = Channel
-    { _cStatus              :: !(Maybe ChannelStatus)
-    , _cEtag                :: !(Maybe Text)
-    , _cAuditDetails        :: !(Maybe ChannelAuditDetails)
-    , _cContentOwnerDetails :: !(Maybe ChannelContentOwnerDetails)
-    , _cSnippet             :: !(Maybe ChannelSnippet)
-    , _cKind                :: !Text
-    , _cTopicDetails        :: !(Maybe ChannelTopicDetails)
-    , _cContentDetails      :: !(Maybe ChannelContentDetails)
-    , _cConversionPings     :: !(Maybe ChannelConversionPings)
-    , _cBrandingSettings    :: !(Maybe ChannelBrandingSettings)
-    , _cId                  :: !(Maybe Text)
-    , _cInvideoPromotion    :: !(Maybe InvideoPromotion)
-    , _cStatistics          :: !(Maybe ChannelStatistics)
-    , _cLocalizations       :: !(Maybe ChannelLocalizations)
+    { _chaStatus              :: !(Maybe ChannelStatus)
+    , _chaEtag                :: !(Maybe Text)
+    , _chaAuditDetails        :: !(Maybe ChannelAuditDetails)
+    , _chaContentOwnerDetails :: !(Maybe ChannelContentOwnerDetails)
+    , _chaSnippet             :: !(Maybe ChannelSnippet)
+    , _chaKind                :: !Text
+    , _chaTopicDetails        :: !(Maybe ChannelTopicDetails)
+    , _chaContentDetails      :: !(Maybe ChannelContentDetails)
+    , _chaConversionPings     :: !(Maybe ChannelConversionPings)
+    , _chaBrandingSettings    :: !(Maybe ChannelBrandingSettings)
+    , _chaId                  :: !(Maybe Text)
+    , _chaInvideoPromotion    :: !(Maybe InvideoPromotion)
+    , _chaStatistics          :: !(Maybe ChannelStatistics)
+    , _chaLocalizations       :: !(Maybe ChannelLocalizations)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Channel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cStatus'
+-- * 'chaStatus'
 --
--- * 'cEtag'
+-- * 'chaEtag'
 --
--- * 'cAuditDetails'
+-- * 'chaAuditDetails'
 --
--- * 'cContentOwnerDetails'
+-- * 'chaContentOwnerDetails'
 --
--- * 'cSnippet'
+-- * 'chaSnippet'
 --
--- * 'cKind'
+-- * 'chaKind'
 --
--- * 'cTopicDetails'
+-- * 'chaTopicDetails'
 --
--- * 'cContentDetails'
+-- * 'chaContentDetails'
 --
--- * 'cConversionPings'
+-- * 'chaConversionPings'
 --
--- * 'cBrandingSettings'
+-- * 'chaBrandingSettings'
 --
--- * 'cId'
+-- * 'chaId'
 --
--- * 'cInvideoPromotion'
+-- * 'chaInvideoPromotion'
 --
--- * 'cStatistics'
+-- * 'chaStatistics'
 --
--- * 'cLocalizations'
+-- * 'chaLocalizations'
 channel
     :: Channel
 channel =
     Channel
-    { _cStatus = Nothing
-    , _cEtag = Nothing
-    , _cAuditDetails = Nothing
-    , _cContentOwnerDetails = Nothing
-    , _cSnippet = Nothing
-    , _cKind = "youtube#channel"
-    , _cTopicDetails = Nothing
-    , _cContentDetails = Nothing
-    , _cConversionPings = Nothing
-    , _cBrandingSettings = Nothing
-    , _cId = Nothing
-    , _cInvideoPromotion = Nothing
-    , _cStatistics = Nothing
-    , _cLocalizations = Nothing
+    { _chaStatus = Nothing
+    , _chaEtag = Nothing
+    , _chaAuditDetails = Nothing
+    , _chaContentOwnerDetails = Nothing
+    , _chaSnippet = Nothing
+    , _chaKind = "youtube#channel"
+    , _chaTopicDetails = Nothing
+    , _chaContentDetails = Nothing
+    , _chaConversionPings = Nothing
+    , _chaBrandingSettings = Nothing
+    , _chaId = Nothing
+    , _chaInvideoPromotion = Nothing
+    , _chaStatistics = Nothing
+    , _chaLocalizations = Nothing
     }
 
 -- | The status object encapsulates information about the privacy status of
 -- the channel.
-cStatus :: Lens' Channel (Maybe ChannelStatus)
-cStatus = lens _cStatus (\ s a -> s{_cStatus = a})
+chaStatus :: Lens' Channel (Maybe ChannelStatus)
+chaStatus
+  = lens _chaStatus (\ s a -> s{_chaStatus = a})
 
 -- | Etag of this resource.
-cEtag :: Lens' Channel (Maybe Text)
-cEtag = lens _cEtag (\ s a -> s{_cEtag = a})
+chaEtag :: Lens' Channel (Maybe Text)
+chaEtag = lens _chaEtag (\ s a -> s{_chaEtag = a})
 
 -- | The auditionDetails object encapsulates channel data that is relevant
 -- for YouTube Partners during the audition process.
-cAuditDetails :: Lens' Channel (Maybe ChannelAuditDetails)
-cAuditDetails
-  = lens _cAuditDetails
-      (\ s a -> s{_cAuditDetails = a})
+chaAuditDetails :: Lens' Channel (Maybe ChannelAuditDetails)
+chaAuditDetails
+  = lens _chaAuditDetails
+      (\ s a -> s{_chaAuditDetails = a})
 
 -- | The contentOwnerDetails object encapsulates channel data that is
 -- relevant for YouTube Partners linked with the channel.
-cContentOwnerDetails :: Lens' Channel (Maybe ChannelContentOwnerDetails)
-cContentOwnerDetails
-  = lens _cContentOwnerDetails
-      (\ s a -> s{_cContentOwnerDetails = a})
+chaContentOwnerDetails :: Lens' Channel (Maybe ChannelContentOwnerDetails)
+chaContentOwnerDetails
+  = lens _chaContentOwnerDetails
+      (\ s a -> s{_chaContentOwnerDetails = a})
 
 -- | The snippet object contains basic details about the channel, such as its
 -- title, description, and thumbnail images.
-cSnippet :: Lens' Channel (Maybe ChannelSnippet)
-cSnippet = lens _cSnippet (\ s a -> s{_cSnippet = a})
+chaSnippet :: Lens' Channel (Maybe ChannelSnippet)
+chaSnippet
+  = lens _chaSnippet (\ s a -> s{_chaSnippet = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"youtube#channel\".
-cKind :: Lens' Channel Text
-cKind = lens _cKind (\ s a -> s{_cKind = a})
+chaKind :: Lens' Channel Text
+chaKind = lens _chaKind (\ s a -> s{_chaKind = a})
 
 -- | The topicDetails object encapsulates information about Freebase topics
 -- associated with the channel.
-cTopicDetails :: Lens' Channel (Maybe ChannelTopicDetails)
-cTopicDetails
-  = lens _cTopicDetails
-      (\ s a -> s{_cTopicDetails = a})
+chaTopicDetails :: Lens' Channel (Maybe ChannelTopicDetails)
+chaTopicDetails
+  = lens _chaTopicDetails
+      (\ s a -> s{_chaTopicDetails = a})
 
 -- | The contentDetails object encapsulates information about the channel\'s
 -- content.
-cContentDetails :: Lens' Channel (Maybe ChannelContentDetails)
-cContentDetails
-  = lens _cContentDetails
-      (\ s a -> s{_cContentDetails = a})
+chaContentDetails :: Lens' Channel (Maybe ChannelContentDetails)
+chaContentDetails
+  = lens _chaContentDetails
+      (\ s a -> s{_chaContentDetails = a})
 
 -- | The conversionPings object encapsulates information about conversion
 -- pings that need to be respected by the channel.
-cConversionPings :: Lens' Channel (Maybe ChannelConversionPings)
-cConversionPings
-  = lens _cConversionPings
-      (\ s a -> s{_cConversionPings = a})
+chaConversionPings :: Lens' Channel (Maybe ChannelConversionPings)
+chaConversionPings
+  = lens _chaConversionPings
+      (\ s a -> s{_chaConversionPings = a})
 
 -- | The brandingSettings object encapsulates information about the branding
 -- of the channel.
-cBrandingSettings :: Lens' Channel (Maybe ChannelBrandingSettings)
-cBrandingSettings
-  = lens _cBrandingSettings
-      (\ s a -> s{_cBrandingSettings = a})
+chaBrandingSettings :: Lens' Channel (Maybe ChannelBrandingSettings)
+chaBrandingSettings
+  = lens _chaBrandingSettings
+      (\ s a -> s{_chaBrandingSettings = a})
 
 -- | The ID that YouTube uses to uniquely identify the channel.
-cId :: Lens' Channel (Maybe Text)
-cId = lens _cId (\ s a -> s{_cId = a})
+chaId :: Lens' Channel (Maybe Text)
+chaId = lens _chaId (\ s a -> s{_chaId = a})
 
 -- | The invideoPromotion object encapsulates information about promotion
 -- campaign associated with the channel.
-cInvideoPromotion :: Lens' Channel (Maybe InvideoPromotion)
-cInvideoPromotion
-  = lens _cInvideoPromotion
-      (\ s a -> s{_cInvideoPromotion = a})
+chaInvideoPromotion :: Lens' Channel (Maybe InvideoPromotion)
+chaInvideoPromotion
+  = lens _chaInvideoPromotion
+      (\ s a -> s{_chaInvideoPromotion = a})
 
 -- | The statistics object encapsulates statistics for the channel.
-cStatistics :: Lens' Channel (Maybe ChannelStatistics)
-cStatistics
-  = lens _cStatistics (\ s a -> s{_cStatistics = a})
+chaStatistics :: Lens' Channel (Maybe ChannelStatistics)
+chaStatistics
+  = lens _chaStatistics
+      (\ s a -> s{_chaStatistics = a})
 
 -- | Localizations for different languages
-cLocalizations :: Lens' Channel (Maybe ChannelLocalizations)
-cLocalizations
-  = lens _cLocalizations
-      (\ s a -> s{_cLocalizations = a})
+chaLocalizations :: Lens' Channel (Maybe ChannelLocalizations)
+chaLocalizations
+  = lens _chaLocalizations
+      (\ s a -> s{_chaLocalizations = a})
 
 instance FromJSON Channel where
         parseJSON
@@ -4596,19 +4599,21 @@ instance ToJSON Channel where
         toJSON Channel{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _cStatus, ("etag" .=) <$> _cEtag,
-                  ("auditDetails" .=) <$> _cAuditDetails,
-                  ("contentOwnerDetails" .=) <$> _cContentOwnerDetails,
-                  ("snippet" .=) <$> _cSnippet,
-                  Just ("kind" .= _cKind),
-                  ("topicDetails" .=) <$> _cTopicDetails,
-                  ("contentDetails" .=) <$> _cContentDetails,
-                  ("conversionPings" .=) <$> _cConversionPings,
-                  ("brandingSettings" .=) <$> _cBrandingSettings,
-                  ("id" .=) <$> _cId,
-                  ("invideoPromotion" .=) <$> _cInvideoPromotion,
-                  ("statistics" .=) <$> _cStatistics,
-                  ("localizations" .=) <$> _cLocalizations])
+                 [("status" .=) <$> _chaStatus,
+                  ("etag" .=) <$> _chaEtag,
+                  ("auditDetails" .=) <$> _chaAuditDetails,
+                  ("contentOwnerDetails" .=) <$>
+                    _chaContentOwnerDetails,
+                  ("snippet" .=) <$> _chaSnippet,
+                  Just ("kind" .= _chaKind),
+                  ("topicDetails" .=) <$> _chaTopicDetails,
+                  ("contentDetails" .=) <$> _chaContentDetails,
+                  ("conversionPings" .=) <$> _chaConversionPings,
+                  ("brandingSettings" .=) <$> _chaBrandingSettings,
+                  ("id" .=) <$> _chaId,
+                  ("invideoPromotion" .=) <$> _chaInvideoPromotion,
+                  ("statistics" .=) <$> _chaStatistics,
+                  ("localizations" .=) <$> _chaLocalizations])
 
 -- | ChannelSection targeting setting.
 --
@@ -8028,63 +8033,60 @@ instance ToJSON GuideCategorySnippet where
 --
 -- /See:/ 'captionListResponse' smart constructor.
 data CaptionListResponse = CaptionListResponse
-    { _clrlEtag      :: !(Maybe Text)
-    , _clrlKind      :: !Text
-    , _clrlItems     :: !(Maybe [Caption])
-    , _clrlVisitorId :: !(Maybe Text)
-    , _clrlEventId   :: !(Maybe Text)
+    { _cEtag      :: !(Maybe Text)
+    , _cKind      :: !Text
+    , _cItems     :: !(Maybe [Caption])
+    , _cVisitorId :: !(Maybe Text)
+    , _cEventId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'clrlEtag'
+-- * 'cEtag'
 --
--- * 'clrlKind'
+-- * 'cKind'
 --
--- * 'clrlItems'
+-- * 'cItems'
 --
--- * 'clrlVisitorId'
+-- * 'cVisitorId'
 --
--- * 'clrlEventId'
+-- * 'cEventId'
 captionListResponse
     :: CaptionListResponse
 captionListResponse =
     CaptionListResponse
-    { _clrlEtag = Nothing
-    , _clrlKind = "youtube#captionListResponse"
-    , _clrlItems = Nothing
-    , _clrlVisitorId = Nothing
-    , _clrlEventId = Nothing
+    { _cEtag = Nothing
+    , _cKind = "youtube#captionListResponse"
+    , _cItems = Nothing
+    , _cVisitorId = Nothing
+    , _cEventId = Nothing
     }
 
 -- | Etag of this resource.
-clrlEtag :: Lens' CaptionListResponse (Maybe Text)
-clrlEtag = lens _clrlEtag (\ s a -> s{_clrlEtag = a})
+cEtag :: Lens' CaptionListResponse (Maybe Text)
+cEtag = lens _cEtag (\ s a -> s{_cEtag = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"youtube#captionListResponse\".
-clrlKind :: Lens' CaptionListResponse Text
-clrlKind = lens _clrlKind (\ s a -> s{_clrlKind = a})
+cKind :: Lens' CaptionListResponse Text
+cKind = lens _cKind (\ s a -> s{_cKind = a})
 
 -- | A list of captions that match the request criteria.
-clrlItems :: Lens' CaptionListResponse [Caption]
-clrlItems
-  = lens _clrlItems (\ s a -> s{_clrlItems = a}) .
-      _Default
-      . _Coerce
+cItems :: Lens' CaptionListResponse [Caption]
+cItems
+  = lens _cItems (\ s a -> s{_cItems = a}) . _Default .
+      _Coerce
 
 -- | The visitorId identifies the visitor.
-clrlVisitorId :: Lens' CaptionListResponse (Maybe Text)
-clrlVisitorId
-  = lens _clrlVisitorId
-      (\ s a -> s{_clrlVisitorId = a})
+cVisitorId :: Lens' CaptionListResponse (Maybe Text)
+cVisitorId
+  = lens _cVisitorId (\ s a -> s{_cVisitorId = a})
 
 -- | Serialized EventId of the request which produced this response.
-clrlEventId :: Lens' CaptionListResponse (Maybe Text)
-clrlEventId
-  = lens _clrlEventId (\ s a -> s{_clrlEventId = a})
+cEventId :: Lens' CaptionListResponse (Maybe Text)
+cEventId = lens _cEventId (\ s a -> s{_cEventId = a})
 
 instance FromJSON CaptionListResponse where
         parseJSON
@@ -8101,11 +8103,10 @@ instance ToJSON CaptionListResponse where
         toJSON CaptionListResponse{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _clrlEtag,
-                  Just ("kind" .= _clrlKind),
-                  ("items" .=) <$> _clrlItems,
-                  ("visitorId" .=) <$> _clrlVisitorId,
-                  ("eventId" .=) <$> _clrlEventId])
+                 [("etag" .=) <$> _cEtag, Just ("kind" .= _cKind),
+                  ("items" .=) <$> _cItems,
+                  ("visitorId" .=) <$> _cVisitorId,
+                  ("eventId" .=) <$> _cEventId])
 
 -- | Information about the playlist item\'s privacy status.
 --

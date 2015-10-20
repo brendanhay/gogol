@@ -30,8 +30,8 @@ module Network.Google.Resource.AndroidEnterprise.Products.Approve
       ProductsApproveResource
 
     -- * Creating a Request
-    , productsApprove'
-    , ProductsApprove'
+    , productsApprove
+    , ProductsApprove
 
     -- * Request Lenses
     , paEnterpriseId
@@ -43,7 +43,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.products.approve@ method which the
--- 'ProductsApprove'' request conforms to.
+-- 'ProductsApprove' request conforms to.
 type ProductsApproveResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -57,14 +57,14 @@ type ProductsApproveResource =
 -- | Approves the specified product (and the relevant app permissions, if
 -- any).
 --
--- /See:/ 'productsApprove'' smart constructor.
-data ProductsApprove' = ProductsApprove'
+-- /See:/ 'productsApprove' smart constructor.
+data ProductsApprove = ProductsApprove
     { _paEnterpriseId :: !Text
     , _paPayload      :: !ProductsApproveRequest
     , _paProductId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductsApprove'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProductsApprove' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,37 +73,37 @@ data ProductsApprove' = ProductsApprove'
 -- * 'paPayload'
 --
 -- * 'paProductId'
-productsApprove'
+productsApprove
     :: Text -- ^ 'paEnterpriseId'
     -> ProductsApproveRequest -- ^ 'paPayload'
     -> Text -- ^ 'paProductId'
-    -> ProductsApprove'
-productsApprove' pPaEnterpriseId_ pPaPayload_ pPaProductId_ =
-    ProductsApprove'
+    -> ProductsApprove
+productsApprove pPaEnterpriseId_ pPaPayload_ pPaProductId_ =
+    ProductsApprove
     { _paEnterpriseId = pPaEnterpriseId_
     , _paPayload = pPaPayload_
     , _paProductId = pPaProductId_
     }
 
 -- | The ID of the enterprise.
-paEnterpriseId :: Lens' ProductsApprove' Text
+paEnterpriseId :: Lens' ProductsApprove Text
 paEnterpriseId
   = lens _paEnterpriseId
       (\ s a -> s{_paEnterpriseId = a})
 
 -- | Multipart request metadata.
-paPayload :: Lens' ProductsApprove' ProductsApproveRequest
+paPayload :: Lens' ProductsApprove ProductsApproveRequest
 paPayload
   = lens _paPayload (\ s a -> s{_paPayload = a})
 
 -- | The ID of the product.
-paProductId :: Lens' ProductsApprove' Text
+paProductId :: Lens' ProductsApprove Text
 paProductId
   = lens _paProductId (\ s a -> s{_paProductId = a})
 
-instance GoogleRequest ProductsApprove' where
-        type Rs ProductsApprove' = ()
-        requestClient ProductsApprove'{..}
+instance GoogleRequest ProductsApprove where
+        type Rs ProductsApprove = ()
+        requestClient ProductsApprove{..}
           = go _paEnterpriseId _paProductId (Just AltJSON)
               _paPayload
               androidEnterpriseService

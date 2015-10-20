@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Projects.Get
       ProjectsGetResource
 
     -- * Creating a Request
-    , projectsGet'
-    , ProjectsGet'
+    , projectsGet
+    , ProjectsGet
 
     -- * Request Lenses
     , proProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.projects.get@ method which the
--- 'ProjectsGet'' request conforms to.
+-- 'ProjectsGet' request conforms to.
 type ProjectsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,41 +51,41 @@ type ProjectsGetResource =
 
 -- | Gets one project by ID.
 --
--- /See:/ 'projectsGet'' smart constructor.
-data ProjectsGet' = ProjectsGet'
+-- /See:/ 'projectsGet' smart constructor.
+data ProjectsGet = ProjectsGet
     { _proProFileId :: !Int64
     , _proId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'proProFileId'
 --
 -- * 'proId'
-projectsGet'
+projectsGet
     :: Int64 -- ^ 'proProFileId'
     -> Int64 -- ^ 'proId'
-    -> ProjectsGet'
-projectsGet' pProProFileId_ pProId_ =
-    ProjectsGet'
+    -> ProjectsGet
+projectsGet pProProFileId_ pProId_ =
+    ProjectsGet
     { _proProFileId = pProProFileId_
     , _proId = pProId_
     }
 
 -- | User profile ID associated with this request.
-proProFileId :: Lens' ProjectsGet' Int64
+proProFileId :: Lens' ProjectsGet Int64
 proProFileId
   = lens _proProFileId (\ s a -> s{_proProFileId = a})
 
 -- | Project ID.
-proId :: Lens' ProjectsGet' Int64
+proId :: Lens' ProjectsGet Int64
 proId = lens _proId (\ s a -> s{_proId = a})
 
-instance GoogleRequest ProjectsGet' where
-        type Rs ProjectsGet' = Project
-        requestClient ProjectsGet'{..}
+instance GoogleRequest ProjectsGet where
+        type Rs ProjectsGet = Project
+        requestClient ProjectsGet{..}
           = go _proProFileId _proId (Just AltJSON)
               dFAReportingService
           where go

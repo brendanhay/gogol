@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.Pages.Delete
       PagesDeleteResource
 
     -- * Creating a Request
-    , pagesDelete'
-    , PagesDelete'
+    , pagesDelete
+    , PagesDelete
 
     -- * Request Lenses
     , pddBlogId
@@ -41,7 +41,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.pages.delete@ method which the
--- 'PagesDelete'' request conforms to.
+-- 'PagesDelete' request conforms to.
 type PagesDeleteResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -51,42 +51,42 @@ type PagesDeleteResource =
 
 -- | Delete a page by ID.
 --
--- /See:/ 'pagesDelete'' smart constructor.
-data PagesDelete' = PagesDelete'
+-- /See:/ 'pagesDelete' smart constructor.
+data PagesDelete = PagesDelete
     { _pddBlogId :: !Text
     , _pddPageId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PagesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'PagesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pddBlogId'
 --
 -- * 'pddPageId'
-pagesDelete'
+pagesDelete
     :: Text -- ^ 'pddBlogId'
     -> Text -- ^ 'pddPageId'
-    -> PagesDelete'
-pagesDelete' pPddBlogId_ pPddPageId_ =
-    PagesDelete'
+    -> PagesDelete
+pagesDelete pPddBlogId_ pPddPageId_ =
+    PagesDelete
     { _pddBlogId = pPddBlogId_
     , _pddPageId = pPddPageId_
     }
 
 -- | The ID of the Blog.
-pddBlogId :: Lens' PagesDelete' Text
+pddBlogId :: Lens' PagesDelete Text
 pddBlogId
   = lens _pddBlogId (\ s a -> s{_pddBlogId = a})
 
 -- | The ID of the Page.
-pddPageId :: Lens' PagesDelete' Text
+pddPageId :: Lens' PagesDelete Text
 pddPageId
   = lens _pddPageId (\ s a -> s{_pddPageId = a})
 
-instance GoogleRequest PagesDelete' where
-        type Rs PagesDelete' = ()
-        requestClient PagesDelete'{..}
+instance GoogleRequest PagesDelete where
+        type Rs PagesDelete = ()
+        requestClient PagesDelete{..}
           = go _pddBlogId _pddPageId (Just AltJSON)
               bloggerService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Update
       AccountsAdUnitsUpdateResource
 
     -- * Creating a Request
-    , accountsAdUnitsUpdate'
-    , AccountsAdUnitsUpdate'
+    , accountsAdUnitsUpdate
+    , AccountsAdUnitsUpdate
 
     -- * Request Lenses
     , aauuPayload
@@ -42,7 +42,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.accounts.adunits.update@ method which the
--- 'AccountsAdUnitsUpdate'' request conforms to.
+-- 'AccountsAdUnitsUpdate' request conforms to.
 type AccountsAdUnitsUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -54,14 +54,14 @@ type AccountsAdUnitsUpdateResource =
 
 -- | Update the supplied ad unit in the specified publisher AdSense account.
 --
--- /See:/ 'accountsAdUnitsUpdate'' smart constructor.
-data AccountsAdUnitsUpdate' = AccountsAdUnitsUpdate'
+-- /See:/ 'accountsAdUnitsUpdate' smart constructor.
+data AccountsAdUnitsUpdate = AccountsAdUnitsUpdate
     { _aauuPayload    :: !AdUnit
     , _aauuAdClientId :: !Text
     , _aauuAccountId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsAdUnitsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsAdUnitsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,38 +70,38 @@ data AccountsAdUnitsUpdate' = AccountsAdUnitsUpdate'
 -- * 'aauuAdClientId'
 --
 -- * 'aauuAccountId'
-accountsAdUnitsUpdate'
+accountsAdUnitsUpdate
     :: AdUnit -- ^ 'aauuPayload'
     -> Text -- ^ 'aauuAdClientId'
     -> Text -- ^ 'aauuAccountId'
-    -> AccountsAdUnitsUpdate'
-accountsAdUnitsUpdate' pAauuPayload_ pAauuAdClientId_ pAauuAccountId_ =
-    AccountsAdUnitsUpdate'
+    -> AccountsAdUnitsUpdate
+accountsAdUnitsUpdate pAauuPayload_ pAauuAdClientId_ pAauuAccountId_ =
+    AccountsAdUnitsUpdate
     { _aauuPayload = pAauuPayload_
     , _aauuAdClientId = pAauuAdClientId_
     , _aauuAccountId = pAauuAccountId_
     }
 
 -- | Multipart request metadata.
-aauuPayload :: Lens' AccountsAdUnitsUpdate' AdUnit
+aauuPayload :: Lens' AccountsAdUnitsUpdate AdUnit
 aauuPayload
   = lens _aauuPayload (\ s a -> s{_aauuPayload = a})
 
 -- | Ad client which contains the ad unit.
-aauuAdClientId :: Lens' AccountsAdUnitsUpdate' Text
+aauuAdClientId :: Lens' AccountsAdUnitsUpdate Text
 aauuAdClientId
   = lens _aauuAdClientId
       (\ s a -> s{_aauuAdClientId = a})
 
 -- | Account which contains the ad client.
-aauuAccountId :: Lens' AccountsAdUnitsUpdate' Text
+aauuAccountId :: Lens' AccountsAdUnitsUpdate Text
 aauuAccountId
   = lens _aauuAccountId
       (\ s a -> s{_aauuAccountId = a})
 
-instance GoogleRequest AccountsAdUnitsUpdate' where
-        type Rs AccountsAdUnitsUpdate' = AdUnit
-        requestClient AccountsAdUnitsUpdate'{..}
+instance GoogleRequest AccountsAdUnitsUpdate where
+        type Rs AccountsAdUnitsUpdate = AdUnit
+        requestClient AccountsAdUnitsUpdate{..}
           = go _aauuAccountId _aauuAdClientId (Just AltJSON)
               _aauuPayload
               adSenseHostService

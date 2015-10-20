@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.ACL.Get
       ACLGetResource
 
     -- * Creating a Request
-    , aclGet'
-    , ACLGet'
+    , aclGet
+    , ACLGet
 
     -- * Request Lenses
     , agCalendarId
@@ -41,7 +41,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.acl.get@ method which the
--- 'ACLGet'' request conforms to.
+-- 'ACLGet' request conforms to.
 type ACLGetResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -51,25 +51,25 @@ type ACLGetResource =
 
 -- | Returns an access control rule.
 --
--- /See:/ 'aclGet'' smart constructor.
-data ACLGet' = ACLGet'
+-- /See:/ 'aclGet' smart constructor.
+data ACLGet = ACLGet
     { _agCalendarId :: !Text
     , _agRuleId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ACLGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ACLGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'agCalendarId'
 --
 -- * 'agRuleId'
-aclGet'
+aclGet
     :: Text -- ^ 'agCalendarId'
     -> Text -- ^ 'agRuleId'
-    -> ACLGet'
-aclGet' pAgCalendarId_ pAgRuleId_ =
-    ACLGet'
+    -> ACLGet
+aclGet pAgCalendarId_ pAgRuleId_ =
+    ACLGet
     { _agCalendarId = pAgCalendarId_
     , _agRuleId = pAgRuleId_
     }
@@ -77,17 +77,17 @@ aclGet' pAgCalendarId_ pAgRuleId_ =
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-agCalendarId :: Lens' ACLGet' Text
+agCalendarId :: Lens' ACLGet Text
 agCalendarId
   = lens _agCalendarId (\ s a -> s{_agCalendarId = a})
 
 -- | ACL rule identifier.
-agRuleId :: Lens' ACLGet' Text
+agRuleId :: Lens' ACLGet Text
 agRuleId = lens _agRuleId (\ s a -> s{_agRuleId = a})
 
-instance GoogleRequest ACLGet' where
-        type Rs ACLGet' = ACLRule
-        requestClient ACLGet'{..}
+instance GoogleRequest ACLGet where
+        type Rs ACLGet = ACLRule
+        requestClient ACLGet{..}
           = go _agCalendarId _agRuleId (Just AltJSON)
               appsCalendarService
           where go

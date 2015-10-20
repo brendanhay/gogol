@@ -30,8 +30,8 @@ module Network.Google.Resource.YouTube.LiveStreams.Insert
       LiveStreamsInsertResource
 
     -- * Creating a Request
-    , liveStreamsInsert'
-    , LiveStreamsInsert'
+    , liveStreamsInsert
+    , LiveStreamsInsert
 
     -- * Request Lenses
     , lsiPart
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveStreams.insert@ method which the
--- 'LiveStreamsInsert'' request conforms to.
+-- 'LiveStreamsInsert' request conforms to.
 type LiveStreamsInsertResource =
      "liveStreams" :>
        QueryParam "part" Text :>
@@ -56,15 +56,15 @@ type LiveStreamsInsertResource =
 -- | Creates a video stream. The stream enables you to send your video to
 -- YouTube, which can then broadcast the video to your audience.
 --
--- /See:/ 'liveStreamsInsert'' smart constructor.
-data LiveStreamsInsert' = LiveStreamsInsert'
+-- /See:/ 'liveStreamsInsert' smart constructor.
+data LiveStreamsInsert = LiveStreamsInsert
     { _lsiPart                          :: !Text
     , _lsiPayload                       :: !LiveStream
     , _lsiOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lsiOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LiveStreamsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'LiveStreamsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,12 +75,12 @@ data LiveStreamsInsert' = LiveStreamsInsert'
 -- * 'lsiOnBehalfOfContentOwner'
 --
 -- * 'lsiOnBehalfOfContentOwnerChannel'
-liveStreamsInsert'
+liveStreamsInsert
     :: Text -- ^ 'lsiPart'
     -> LiveStream -- ^ 'lsiPayload'
-    -> LiveStreamsInsert'
-liveStreamsInsert' pLsiPart_ pLsiPayload_ =
-    LiveStreamsInsert'
+    -> LiveStreamsInsert
+liveStreamsInsert pLsiPart_ pLsiPayload_ =
+    LiveStreamsInsert
     { _lsiPart = pLsiPart_
     , _lsiPayload = pLsiPayload_
     , _lsiOnBehalfOfContentOwner = Nothing
@@ -91,11 +91,11 @@ liveStreamsInsert' pLsiPart_ pLsiPayload_ =
 -- the properties that the write operation will set as well as the
 -- properties that the API response will include. The part properties that
 -- you can include in the parameter value are id, snippet, cdn, and status.
-lsiPart :: Lens' LiveStreamsInsert' Text
+lsiPart :: Lens' LiveStreamsInsert Text
 lsiPart = lens _lsiPart (\ s a -> s{_lsiPart = a})
 
 -- | Multipart request metadata.
-lsiPayload :: Lens' LiveStreamsInsert' LiveStream
+lsiPayload :: Lens' LiveStreamsInsert LiveStream
 lsiPayload
   = lens _lsiPayload (\ s a -> s{_lsiPayload = a})
 
@@ -109,7 +109,7 @@ lsiPayload
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-lsiOnBehalfOfContentOwner :: Lens' LiveStreamsInsert' (Maybe Text)
+lsiOnBehalfOfContentOwner :: Lens' LiveStreamsInsert (Maybe Text)
 lsiOnBehalfOfContentOwner
   = lens _lsiOnBehalfOfContentOwner
       (\ s a -> s{_lsiOnBehalfOfContentOwner = a})
@@ -130,14 +130,14 @@ lsiOnBehalfOfContentOwner
 -- actions on behalf of the channel specified in the parameter value,
 -- without having to provide authentication credentials for each separate
 -- channel.
-lsiOnBehalfOfContentOwnerChannel :: Lens' LiveStreamsInsert' (Maybe Text)
+lsiOnBehalfOfContentOwnerChannel :: Lens' LiveStreamsInsert (Maybe Text)
 lsiOnBehalfOfContentOwnerChannel
   = lens _lsiOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lsiOnBehalfOfContentOwnerChannel = a})
 
-instance GoogleRequest LiveStreamsInsert' where
-        type Rs LiveStreamsInsert' = LiveStream
-        requestClient LiveStreamsInsert'{..}
+instance GoogleRequest LiveStreamsInsert where
+        type Rs LiveStreamsInsert = LiveStream
+        requestClient LiveStreamsInsert{..}
           = go (Just _lsiPart) _lsiOnBehalfOfContentOwner
               _lsiOnBehalfOfContentOwnerChannel
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTubeAnalytics.Groups.Insert
       GroupsInsertResource
 
     -- * Creating a Request
-    , groupsInsert'
-    , GroupsInsert'
+    , groupsInsert
+    , GroupsInsert
 
     -- * Request Lenses
     , giPayload
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @youtubeAnalytics.groups.insert@ method which the
--- 'GroupsInsert'' request conforms to.
+-- 'GroupsInsert' request conforms to.
 type GroupsInsertResource =
      "groups" :>
        QueryParam "onBehalfOfContentOwner" Text :>
@@ -50,30 +50,30 @@ type GroupsInsertResource =
 
 -- | Creates a group.
 --
--- /See:/ 'groupsInsert'' smart constructor.
-data GroupsInsert' = GroupsInsert'
+-- /See:/ 'groupsInsert' smart constructor.
+data GroupsInsert = GroupsInsert
     { _giPayload                :: !Group
     , _giOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GroupsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'GroupsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'giPayload'
 --
 -- * 'giOnBehalfOfContentOwner'
-groupsInsert'
+groupsInsert
     :: Group -- ^ 'giPayload'
-    -> GroupsInsert'
-groupsInsert' pGiPayload_ =
-    GroupsInsert'
+    -> GroupsInsert
+groupsInsert pGiPayload_ =
+    GroupsInsert
     { _giPayload = pGiPayload_
     , _giOnBehalfOfContentOwner = Nothing
     }
 
 -- | Multipart request metadata.
-giPayload :: Lens' GroupsInsert' Group
+giPayload :: Lens' GroupsInsert Group
 giPayload
   = lens _giPayload (\ s a -> s{_giPayload = a})
 
@@ -87,14 +87,14 @@ giPayload
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-giOnBehalfOfContentOwner :: Lens' GroupsInsert' (Maybe Text)
+giOnBehalfOfContentOwner :: Lens' GroupsInsert (Maybe Text)
 giOnBehalfOfContentOwner
   = lens _giOnBehalfOfContentOwner
       (\ s a -> s{_giOnBehalfOfContentOwner = a})
 
-instance GoogleRequest GroupsInsert' where
-        type Rs GroupsInsert' = Group
-        requestClient GroupsInsert'{..}
+instance GoogleRequest GroupsInsert where
+        type Rs GroupsInsert = Group
+        requestClient GroupsInsert{..}
           = go _giOnBehalfOfContentOwner (Just AltJSON)
               _giPayload
               youTubeAnalyticsService

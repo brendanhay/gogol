@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.TurnBasedMatches.Get
       TurnBasedMatchesGetResource
 
     -- * Creating a Request
-    , turnBasedMatchesGet'
-    , TurnBasedMatchesGet'
+    , turnBasedMatchesGet
+    , TurnBasedMatchesGet
 
     -- * Request Lenses
     , tbmgIncludeMatchData
@@ -42,7 +42,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.turnBasedMatches.get@ method which the
--- 'TurnBasedMatchesGet'' request conforms to.
+-- 'TurnBasedMatchesGet' request conforms to.
 type TurnBasedMatchesGetResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
@@ -53,14 +53,14 @@ type TurnBasedMatchesGetResource =
 
 -- | Get the data for a turn-based match.
 --
--- /See:/ 'turnBasedMatchesGet'' smart constructor.
-data TurnBasedMatchesGet' = TurnBasedMatchesGet'
+-- /See:/ 'turnBasedMatchesGet' smart constructor.
+data TurnBasedMatchesGet = TurnBasedMatchesGet
     { _tbmgIncludeMatchData :: !(Maybe Bool)
     , _tbmgLanguage         :: !(Maybe Text)
     , _tbmgMatchId          :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TurnBasedMatchesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TurnBasedMatchesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data TurnBasedMatchesGet' = TurnBasedMatchesGet'
 -- * 'tbmgLanguage'
 --
 -- * 'tbmgMatchId'
-turnBasedMatchesGet'
+turnBasedMatchesGet
     :: Text -- ^ 'tbmgMatchId'
-    -> TurnBasedMatchesGet'
-turnBasedMatchesGet' pTbmgMatchId_ =
-    TurnBasedMatchesGet'
+    -> TurnBasedMatchesGet
+turnBasedMatchesGet pTbmgMatchId_ =
+    TurnBasedMatchesGet
     { _tbmgIncludeMatchData = Nothing
     , _tbmgLanguage = Nothing
     , _tbmgMatchId = pTbmgMatchId_
     }
 
 -- | Get match data along with metadata.
-tbmgIncludeMatchData :: Lens' TurnBasedMatchesGet' (Maybe Bool)
+tbmgIncludeMatchData :: Lens' TurnBasedMatchesGet (Maybe Bool)
 tbmgIncludeMatchData
   = lens _tbmgIncludeMatchData
       (\ s a -> s{_tbmgIncludeMatchData = a})
 
 -- | The preferred language to use for strings returned by this method.
-tbmgLanguage :: Lens' TurnBasedMatchesGet' (Maybe Text)
+tbmgLanguage :: Lens' TurnBasedMatchesGet (Maybe Text)
 tbmgLanguage
   = lens _tbmgLanguage (\ s a -> s{_tbmgLanguage = a})
 
 -- | The ID of the match.
-tbmgMatchId :: Lens' TurnBasedMatchesGet' Text
+tbmgMatchId :: Lens' TurnBasedMatchesGet Text
 tbmgMatchId
   = lens _tbmgMatchId (\ s a -> s{_tbmgMatchId = a})
 
-instance GoogleRequest TurnBasedMatchesGet' where
-        type Rs TurnBasedMatchesGet' = TurnBasedMatch
-        requestClient TurnBasedMatchesGet'{..}
+instance GoogleRequest TurnBasedMatchesGet where
+        type Rs TurnBasedMatchesGet = TurnBasedMatch
+        requestClient TurnBasedMatchesGet{..}
           = go _tbmgMatchId _tbmgIncludeMatchData _tbmgLanguage
               (Just AltJSON)
               gamesService

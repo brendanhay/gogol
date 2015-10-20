@@ -30,18 +30,18 @@ module Network.Google.Resource.Games.Rooms.Dismiss
       RoomsDismissResource
 
     -- * Creating a Request
-    , roomsDismiss'
-    , RoomsDismiss'
+    , roomsDismiss
+    , RoomsDismiss
 
     -- * Request Lenses
-    , rooRoomId
+    , rdRoomId
     ) where
 
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.rooms.dismiss@ method which the
--- 'RoomsDismiss'' request conforms to.
+-- 'RoomsDismiss' request conforms to.
 type RoomsDismissResource =
      "rooms" :>
        Capture "roomId" Text :>
@@ -51,33 +51,32 @@ type RoomsDismissResource =
 -- | Dismiss an invitation to join a room. For internal use by the Games SDK
 -- only. Calling this method directly is unsupported.
 --
--- /See:/ 'roomsDismiss'' smart constructor.
-newtype RoomsDismiss' = RoomsDismiss'
-    { _rooRoomId :: Text
+-- /See:/ 'roomsDismiss' smart constructor.
+newtype RoomsDismiss = RoomsDismiss
+    { _rdRoomId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoomsDismiss'' with the minimum fields required to make a request.
+-- | Creates a value of 'RoomsDismiss' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rooRoomId'
-roomsDismiss'
-    :: Text -- ^ 'rooRoomId'
-    -> RoomsDismiss'
-roomsDismiss' pRooRoomId_ =
-    RoomsDismiss'
-    { _rooRoomId = pRooRoomId_
+-- * 'rdRoomId'
+roomsDismiss
+    :: Text -- ^ 'rdRoomId'
+    -> RoomsDismiss
+roomsDismiss pRdRoomId_ =
+    RoomsDismiss
+    { _rdRoomId = pRdRoomId_
     }
 
 -- | The ID of the room.
-rooRoomId :: Lens' RoomsDismiss' Text
-rooRoomId
-  = lens _rooRoomId (\ s a -> s{_rooRoomId = a})
+rdRoomId :: Lens' RoomsDismiss Text
+rdRoomId = lens _rdRoomId (\ s a -> s{_rdRoomId = a})
 
-instance GoogleRequest RoomsDismiss' where
-        type Rs RoomsDismiss' = ()
-        requestClient RoomsDismiss'{..}
-          = go _rooRoomId (Just AltJSON) gamesService
+instance GoogleRequest RoomsDismiss where
+        type Rs RoomsDismiss = ()
+        requestClient RoomsDismiss{..}
+          = go _rdRoomId (Just AltJSON) gamesService
           where go
                   = buildClient (Proxy :: Proxy RoomsDismissResource)
                       mempty

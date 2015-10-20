@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Reports.Get
       ReportsGetResource
 
     -- * Creating a Request
-    , reportsGet'
-    , ReportsGet'
+    , reportsGet
+    , ReportsGet
 
     -- * Request Lenses
     , rgReportId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.reports.get@ method which the
--- 'ReportsGet'' request conforms to.
+-- 'ReportsGet' request conforms to.
 type ReportsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type ReportsGetResource =
 
 -- | Retrieves a report by its ID.
 --
--- /See:/ 'reportsGet'' smart constructor.
-data ReportsGet' = ReportsGet'
+-- /See:/ 'reportsGet' smart constructor.
+data ReportsGet = ReportsGet
     { _rgReportId  :: !Int64
     , _rgProFileId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReportsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rgReportId'
 --
 -- * 'rgProFileId'
-reportsGet'
+reportsGet
     :: Int64 -- ^ 'rgReportId'
     -> Int64 -- ^ 'rgProFileId'
-    -> ReportsGet'
-reportsGet' pRgReportId_ pRgProFileId_ =
-    ReportsGet'
+    -> ReportsGet
+reportsGet pRgReportId_ pRgProFileId_ =
+    ReportsGet
     { _rgReportId = pRgReportId_
     , _rgProFileId = pRgProFileId_
     }
 
 -- | The ID of the report.
-rgReportId :: Lens' ReportsGet' Int64
+rgReportId :: Lens' ReportsGet Int64
 rgReportId
   = lens _rgReportId (\ s a -> s{_rgReportId = a})
 
 -- | The DFA user profile ID.
-rgProFileId :: Lens' ReportsGet' Int64
+rgProFileId :: Lens' ReportsGet Int64
 rgProFileId
   = lens _rgProFileId (\ s a -> s{_rgProFileId = a})
 
-instance GoogleRequest ReportsGet' where
-        type Rs ReportsGet' = Report
-        requestClient ReportsGet'{..}
+instance GoogleRequest ReportsGet where
+        type Rs ReportsGet = Report
+        requestClient ReportsGet{..}
           = go _rgProFileId _rgReportId (Just AltJSON)
               dFAReportingService
           where go

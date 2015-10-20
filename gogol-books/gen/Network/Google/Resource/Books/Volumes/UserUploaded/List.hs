@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Volumes.UserUploaded.List
       VolumesUserUploadedListResource
 
     -- * Creating a Request
-    , volumesUserUploadedList'
-    , VolumesUserUploadedList'
+    , volumesUserUploadedList
+    , VolumesUserUploadedList
 
     -- * Request Lenses
     , vuulProcessingState
@@ -45,7 +45,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.volumes.useruploaded.list@ method which the
--- 'VolumesUserUploadedList'' request conforms to.
+-- 'VolumesUserUploadedList' request conforms to.
 type VolumesUserUploadedListResource =
      "volumes" :>
        "useruploaded" :>
@@ -61,8 +61,8 @@ type VolumesUserUploadedListResource =
 
 -- | Return a list of books uploaded by the current user.
 --
--- /See:/ 'volumesUserUploadedList'' smart constructor.
-data VolumesUserUploadedList' = VolumesUserUploadedList'
+-- /See:/ 'volumesUserUploadedList' smart constructor.
+data VolumesUserUploadedList = VolumesUserUploadedList
     { _vuulProcessingState :: !(Maybe [VolumesUserUploadedListProcessingState])
     , _vuulLocale          :: !(Maybe Text)
     , _vuulVolumeId        :: !(Maybe [Text])
@@ -71,7 +71,7 @@ data VolumesUserUploadedList' = VolumesUserUploadedList'
     , _vuulMaxResults      :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumesUserUploadedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'VolumesUserUploadedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -86,10 +86,10 @@ data VolumesUserUploadedList' = VolumesUserUploadedList'
 -- * 'vuulStartIndex'
 --
 -- * 'vuulMaxResults'
-volumesUserUploadedList'
-    :: VolumesUserUploadedList'
-volumesUserUploadedList' =
-    VolumesUserUploadedList'
+volumesUserUploadedList
+    :: VolumesUserUploadedList
+volumesUserUploadedList =
+    VolumesUserUploadedList
     { _vuulProcessingState = Nothing
     , _vuulLocale = Nothing
     , _vuulVolumeId = Nothing
@@ -99,7 +99,7 @@ volumesUserUploadedList' =
     }
 
 -- | The processing state of the user uploaded volumes to be returned.
-vuulProcessingState :: Lens' VolumesUserUploadedList' [VolumesUserUploadedListProcessingState]
+vuulProcessingState :: Lens' VolumesUserUploadedList [VolumesUserUploadedListProcessingState]
 vuulProcessingState
   = lens _vuulProcessingState
       (\ s a -> s{_vuulProcessingState = a})
@@ -108,38 +108,38 @@ vuulProcessingState
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Ex: \'en_US\'. Used for
 -- generating recommendations.
-vuulLocale :: Lens' VolumesUserUploadedList' (Maybe Text)
+vuulLocale :: Lens' VolumesUserUploadedList (Maybe Text)
 vuulLocale
   = lens _vuulLocale (\ s a -> s{_vuulLocale = a})
 
 -- | The ids of the volumes to be returned. If not specified all that match
 -- the processingState are returned.
-vuulVolumeId :: Lens' VolumesUserUploadedList' [Text]
+vuulVolumeId :: Lens' VolumesUserUploadedList [Text]
 vuulVolumeId
   = lens _vuulVolumeId (\ s a -> s{_vuulVolumeId = a})
       . _Default
       . _Coerce
 
 -- | String to identify the originator of this request.
-vuulSource :: Lens' VolumesUserUploadedList' (Maybe Text)
+vuulSource :: Lens' VolumesUserUploadedList (Maybe Text)
 vuulSource
   = lens _vuulSource (\ s a -> s{_vuulSource = a})
 
 -- | Index of the first result to return (starts at 0)
-vuulStartIndex :: Lens' VolumesUserUploadedList' (Maybe Word32)
+vuulStartIndex :: Lens' VolumesUserUploadedList (Maybe Word32)
 vuulStartIndex
   = lens _vuulStartIndex
       (\ s a -> s{_vuulStartIndex = a})
 
 -- | Maximum number of results to return.
-vuulMaxResults :: Lens' VolumesUserUploadedList' (Maybe Word32)
+vuulMaxResults :: Lens' VolumesUserUploadedList (Maybe Word32)
 vuulMaxResults
   = lens _vuulMaxResults
       (\ s a -> s{_vuulMaxResults = a})
 
-instance GoogleRequest VolumesUserUploadedList' where
-        type Rs VolumesUserUploadedList' = Volumes
-        requestClient VolumesUserUploadedList'{..}
+instance GoogleRequest VolumesUserUploadedList where
+        type Rs VolumesUserUploadedList = Volumes
+        requestClient VolumesUserUploadedList{..}
           = go (_vuulProcessingState ^. _Default) _vuulLocale
               (_vuulVolumeId ^. _Default)
               _vuulSource

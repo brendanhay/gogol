@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.FreeBusy.Query
       FreeBusyQueryResource
 
     -- * Creating a Request
-    , freeBusyQuery'
-    , FreeBusyQuery'
+    , freeBusyQuery
+    , FreeBusyQuery
 
     -- * Request Lenses
     , fbqPayload
@@ -40,7 +40,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.freebusy.query@ method which the
--- 'FreeBusyQuery'' request conforms to.
+-- 'FreeBusyQuery' request conforms to.
 type FreeBusyQueryResource =
      "freeBusy" :>
        QueryParam "alt" AltJSON :>
@@ -49,32 +49,32 @@ type FreeBusyQueryResource =
 
 -- | Returns free\/busy information for a set of calendars.
 --
--- /See:/ 'freeBusyQuery'' smart constructor.
-newtype FreeBusyQuery' = FreeBusyQuery'
+-- /See:/ 'freeBusyQuery' smart constructor.
+newtype FreeBusyQuery = FreeBusyQuery
     { _fbqPayload :: FreeBusyRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FreeBusyQuery'' with the minimum fields required to make a request.
+-- | Creates a value of 'FreeBusyQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fbqPayload'
-freeBusyQuery'
+freeBusyQuery
     :: FreeBusyRequest -- ^ 'fbqPayload'
-    -> FreeBusyQuery'
-freeBusyQuery' pFbqPayload_ =
-    FreeBusyQuery'
+    -> FreeBusyQuery
+freeBusyQuery pFbqPayload_ =
+    FreeBusyQuery
     { _fbqPayload = pFbqPayload_
     }
 
 -- | Multipart request metadata.
-fbqPayload :: Lens' FreeBusyQuery' FreeBusyRequest
+fbqPayload :: Lens' FreeBusyQuery FreeBusyRequest
 fbqPayload
   = lens _fbqPayload (\ s a -> s{_fbqPayload = a})
 
-instance GoogleRequest FreeBusyQuery' where
-        type Rs FreeBusyQuery' = FreeBusyResponse
-        requestClient FreeBusyQuery'{..}
+instance GoogleRequest FreeBusyQuery where
+        type Rs FreeBusyQuery = FreeBusyResponse
+        requestClient FreeBusyQuery{..}
           = go (Just AltJSON) _fbqPayload appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy FreeBusyQueryResource)

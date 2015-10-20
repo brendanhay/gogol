@@ -30,8 +30,8 @@ module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.MarkAsFixed
       URLCrawlErrorsSamplesMarkAsFixedResource
 
     -- * Creating a Request
-    , urlCrawlErrorsSamplesMarkAsFixed'
-    , URLCrawlErrorsSamplesMarkAsFixed'
+    , urlCrawlErrorsSamplesMarkAsFixed
+    , URLCrawlErrorsSamplesMarkAsFixed
 
     -- * Request Lenses
     , ucesmafPlatform
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.urlcrawlerrorssamples.markAsFixed@ method which the
--- 'URLCrawlErrorsSamplesMarkAsFixed'' request conforms to.
+-- 'URLCrawlErrorsSamplesMarkAsFixed' request conforms to.
 type URLCrawlErrorsSamplesMarkAsFixedResource =
      "sites" :>
        Capture "siteUrl" Text :>
@@ -60,15 +60,15 @@ type URLCrawlErrorsSamplesMarkAsFixedResource =
 -- | Marks the provided site\'s sample URL as fixed, and removes it from the
 -- samples list.
 --
--- /See:/ 'urlCrawlErrorsSamplesMarkAsFixed'' smart constructor.
-data URLCrawlErrorsSamplesMarkAsFixed' = URLCrawlErrorsSamplesMarkAsFixed'
+-- /See:/ 'urlCrawlErrorsSamplesMarkAsFixed' smart constructor.
+data URLCrawlErrorsSamplesMarkAsFixed = URLCrawlErrorsSamplesMarkAsFixed
     { _ucesmafPlatform :: !URLCrawlErrorsSamplesMarkAsFixedPlatform
     , _ucesmafCategory :: !URLCrawlErrorsSamplesMarkAsFixedCategory
     , _ucesmafSiteURL  :: !Text
     , _ucesmafURL      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'URLCrawlErrorsSamplesMarkAsFixed'' with the minimum fields required to make a request.
+-- | Creates a value of 'URLCrawlErrorsSamplesMarkAsFixed' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,14 +79,14 @@ data URLCrawlErrorsSamplesMarkAsFixed' = URLCrawlErrorsSamplesMarkAsFixed'
 -- * 'ucesmafSiteURL'
 --
 -- * 'ucesmafURL'
-urlCrawlErrorsSamplesMarkAsFixed'
+urlCrawlErrorsSamplesMarkAsFixed
     :: URLCrawlErrorsSamplesMarkAsFixedPlatform -- ^ 'ucesmafPlatform'
     -> URLCrawlErrorsSamplesMarkAsFixedCategory -- ^ 'ucesmafCategory'
     -> Text -- ^ 'ucesmafSiteURL'
     -> Text -- ^ 'ucesmafURL'
-    -> URLCrawlErrorsSamplesMarkAsFixed'
-urlCrawlErrorsSamplesMarkAsFixed' pUcesmafPlatform_ pUcesmafCategory_ pUcesmafSiteURL_ pUcesmafURL_ =
-    URLCrawlErrorsSamplesMarkAsFixed'
+    -> URLCrawlErrorsSamplesMarkAsFixed
+urlCrawlErrorsSamplesMarkAsFixed pUcesmafPlatform_ pUcesmafCategory_ pUcesmafSiteURL_ pUcesmafURL_ =
+    URLCrawlErrorsSamplesMarkAsFixed
     { _ucesmafPlatform = pUcesmafPlatform_
     , _ucesmafCategory = pUcesmafCategory_
     , _ucesmafSiteURL = pUcesmafSiteURL_
@@ -94,20 +94,20 @@ urlCrawlErrorsSamplesMarkAsFixed' pUcesmafPlatform_ pUcesmafCategory_ pUcesmafSi
     }
 
 -- | The user agent type (platform) that made the request. For example: web
-ucesmafPlatform :: Lens' URLCrawlErrorsSamplesMarkAsFixed' URLCrawlErrorsSamplesMarkAsFixedPlatform
+ucesmafPlatform :: Lens' URLCrawlErrorsSamplesMarkAsFixed URLCrawlErrorsSamplesMarkAsFixedPlatform
 ucesmafPlatform
   = lens _ucesmafPlatform
       (\ s a -> s{_ucesmafPlatform = a})
 
 -- | The crawl error category. For example: authPermissions
-ucesmafCategory :: Lens' URLCrawlErrorsSamplesMarkAsFixed' URLCrawlErrorsSamplesMarkAsFixedCategory
+ucesmafCategory :: Lens' URLCrawlErrorsSamplesMarkAsFixed URLCrawlErrorsSamplesMarkAsFixedCategory
 ucesmafCategory
   = lens _ucesmafCategory
       (\ s a -> s{_ucesmafCategory = a})
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/
-ucesmafSiteURL :: Lens' URLCrawlErrorsSamplesMarkAsFixed' Text
+ucesmafSiteURL :: Lens' URLCrawlErrorsSamplesMarkAsFixed Text
 ucesmafSiteURL
   = lens _ucesmafSiteURL
       (\ s a -> s{_ucesmafSiteURL = a})
@@ -116,14 +116,14 @@ ucesmafSiteURL
 -- of the URLs returned by list(). For example, for the URL
 -- https:\/\/www.example.com\/pagename on the site
 -- https:\/\/www.example.com\/, the url value is pagename
-ucesmafURL :: Lens' URLCrawlErrorsSamplesMarkAsFixed' Text
+ucesmafURL :: Lens' URLCrawlErrorsSamplesMarkAsFixed Text
 ucesmafURL
   = lens _ucesmafURL (\ s a -> s{_ucesmafURL = a})
 
 instance GoogleRequest
-         URLCrawlErrorsSamplesMarkAsFixed' where
-        type Rs URLCrawlErrorsSamplesMarkAsFixed' = ()
-        requestClient URLCrawlErrorsSamplesMarkAsFixed'{..}
+         URLCrawlErrorsSamplesMarkAsFixed where
+        type Rs URLCrawlErrorsSamplesMarkAsFixed = ()
+        requestClient URLCrawlErrorsSamplesMarkAsFixed{..}
           = go _ucesmafSiteURL _ucesmafURL
               (Just _ucesmafCategory)
               (Just _ucesmafPlatform)

@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Reports.Update
       ReportsUpdateResource
 
     -- * Creating a Request
-    , reportsUpdate'
-    , ReportsUpdate'
+    , reportsUpdate
+    , ReportsUpdate
 
     -- * Request Lenses
     , ruReportId
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.reports.update@ method which the
--- 'ReportsUpdate'' request conforms to.
+-- 'ReportsUpdate' request conforms to.
 type ReportsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -53,14 +53,14 @@ type ReportsUpdateResource =
 
 -- | Updates a report.
 --
--- /See:/ 'reportsUpdate'' smart constructor.
-data ReportsUpdate' = ReportsUpdate'
+-- /See:/ 'reportsUpdate' smart constructor.
+data ReportsUpdate = ReportsUpdate
     { _ruReportId  :: !Int64
     , _ruProFileId :: !Int64
     , _ruPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReportsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,36 @@ data ReportsUpdate' = ReportsUpdate'
 -- * 'ruProFileId'
 --
 -- * 'ruPayload'
-reportsUpdate'
+reportsUpdate
     :: Int64 -- ^ 'ruReportId'
     -> Int64 -- ^ 'ruProFileId'
     -> Report -- ^ 'ruPayload'
-    -> ReportsUpdate'
-reportsUpdate' pRuReportId_ pRuProFileId_ pRuPayload_ =
-    ReportsUpdate'
+    -> ReportsUpdate
+reportsUpdate pRuReportId_ pRuProFileId_ pRuPayload_ =
+    ReportsUpdate
     { _ruReportId = pRuReportId_
     , _ruProFileId = pRuProFileId_
     , _ruPayload = pRuPayload_
     }
 
 -- | The ID of the report.
-ruReportId :: Lens' ReportsUpdate' Int64
+ruReportId :: Lens' ReportsUpdate Int64
 ruReportId
   = lens _ruReportId (\ s a -> s{_ruReportId = a})
 
 -- | The DFA user profile ID.
-ruProFileId :: Lens' ReportsUpdate' Int64
+ruProFileId :: Lens' ReportsUpdate Int64
 ruProFileId
   = lens _ruProFileId (\ s a -> s{_ruProFileId = a})
 
 -- | Multipart request metadata.
-ruPayload :: Lens' ReportsUpdate' Report
+ruPayload :: Lens' ReportsUpdate Report
 ruPayload
   = lens _ruPayload (\ s a -> s{_ruPayload = a})
 
-instance GoogleRequest ReportsUpdate' where
-        type Rs ReportsUpdate' = Report
-        requestClient ReportsUpdate'{..}
+instance GoogleRequest ReportsUpdate where
+        type Rs ReportsUpdate = Report
+        requestClient ReportsUpdate{..}
           = go _ruProFileId _ruReportId (Just AltJSON)
               _ruPayload
               dFAReportingService

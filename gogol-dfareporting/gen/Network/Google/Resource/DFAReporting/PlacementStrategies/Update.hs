@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Update
       PlacementStrategiesUpdateResource
 
     -- * Creating a Request
-    , placementStrategiesUpdate'
-    , PlacementStrategiesUpdate'
+    , placementStrategiesUpdate
+    , PlacementStrategiesUpdate
 
     -- * Request Lenses
     , psuProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placementStrategies.update@ method which the
--- 'PlacementStrategiesUpdate'' request conforms to.
+-- 'PlacementStrategiesUpdate' request conforms to.
 type PlacementStrategiesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,44 +52,43 @@ type PlacementStrategiesUpdateResource =
 
 -- | Updates an existing placement strategy.
 --
--- /See:/ 'placementStrategiesUpdate'' smart constructor.
-data PlacementStrategiesUpdate' = PlacementStrategiesUpdate'
+-- /See:/ 'placementStrategiesUpdate' smart constructor.
+data PlacementStrategiesUpdate = PlacementStrategiesUpdate
     { _psuProFileId :: !Int64
     , _psuPayload   :: !PlacementStrategy
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlacementStrategiesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlacementStrategiesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'psuProFileId'
 --
 -- * 'psuPayload'
-placementStrategiesUpdate'
+placementStrategiesUpdate
     :: Int64 -- ^ 'psuProFileId'
     -> PlacementStrategy -- ^ 'psuPayload'
-    -> PlacementStrategiesUpdate'
-placementStrategiesUpdate' pPsuProFileId_ pPsuPayload_ =
-    PlacementStrategiesUpdate'
+    -> PlacementStrategiesUpdate
+placementStrategiesUpdate pPsuProFileId_ pPsuPayload_ =
+    PlacementStrategiesUpdate
     { _psuProFileId = pPsuProFileId_
     , _psuPayload = pPsuPayload_
     }
 
 -- | User profile ID associated with this request.
-psuProFileId :: Lens' PlacementStrategiesUpdate' Int64
+psuProFileId :: Lens' PlacementStrategiesUpdate Int64
 psuProFileId
   = lens _psuProFileId (\ s a -> s{_psuProFileId = a})
 
 -- | Multipart request metadata.
-psuPayload :: Lens' PlacementStrategiesUpdate' PlacementStrategy
+psuPayload :: Lens' PlacementStrategiesUpdate PlacementStrategy
 psuPayload
   = lens _psuPayload (\ s a -> s{_psuPayload = a})
 
-instance GoogleRequest PlacementStrategiesUpdate'
+instance GoogleRequest PlacementStrategiesUpdate
          where
-        type Rs PlacementStrategiesUpdate' =
-             PlacementStrategy
-        requestClient PlacementStrategiesUpdate'{..}
+        type Rs PlacementStrategiesUpdate = PlacementStrategy
+        requestClient PlacementStrategiesUpdate{..}
           = go _psuProFileId (Just AltJSON) _psuPayload
               dFAReportingService
           where go

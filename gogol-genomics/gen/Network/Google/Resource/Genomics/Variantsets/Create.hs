@@ -31,8 +31,8 @@ module Network.Google.Resource.Genomics.Variantsets.Create
       VariantsetsCreateResource
 
     -- * Creating a Request
-    , variantsetsCreate'
-    , VariantsetsCreate'
+    , variantsetsCreate
+    , VariantsetsCreate
 
     -- * Request Lenses
     , vcXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.variantsets.create@ method which the
--- 'VariantsetsCreate'' request conforms to.
+-- 'VariantsetsCreate' request conforms to.
 type VariantsetsCreateResource =
      "v1" :>
        "variantsets" :>
@@ -67,8 +67,8 @@ type VariantsetsCreateResource =
 -- \`datasetId\` set - all other fields are optional. Note that the \`id\`
 -- field will be ignored, as this is assigned by the server.
 --
--- /See:/ 'variantsetsCreate'' smart constructor.
-data VariantsetsCreate' = VariantsetsCreate'
+-- /See:/ 'variantsetsCreate' smart constructor.
+data VariantsetsCreate = VariantsetsCreate
     { _vcXgafv          :: !(Maybe Text)
     , _vcUploadProtocol :: !(Maybe Text)
     , _vcPp             :: !Bool
@@ -79,7 +79,7 @@ data VariantsetsCreate' = VariantsetsCreate'
     , _vcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VariantsetsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'VariantsetsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -98,11 +98,11 @@ data VariantsetsCreate' = VariantsetsCreate'
 -- * 'vcBearerToken'
 --
 -- * 'vcCallback'
-variantsetsCreate'
+variantsetsCreate
     :: VariantSet -- ^ 'vcPayload'
-    -> VariantsetsCreate'
-variantsetsCreate' pVcPayload_ =
-    VariantsetsCreate'
+    -> VariantsetsCreate
+variantsetsCreate pVcPayload_ =
+    VariantsetsCreate
     { _vcXgafv = Nothing
     , _vcUploadProtocol = Nothing
     , _vcPp = True
@@ -114,49 +114,49 @@ variantsetsCreate' pVcPayload_ =
     }
 
 -- | V1 error format.
-vcXgafv :: Lens' VariantsetsCreate' (Maybe Text)
+vcXgafv :: Lens' VariantsetsCreate (Maybe Text)
 vcXgafv = lens _vcXgafv (\ s a -> s{_vcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-vcUploadProtocol :: Lens' VariantsetsCreate' (Maybe Text)
+vcUploadProtocol :: Lens' VariantsetsCreate (Maybe Text)
 vcUploadProtocol
   = lens _vcUploadProtocol
       (\ s a -> s{_vcUploadProtocol = a})
 
 -- | Pretty-print response.
-vcPp :: Lens' VariantsetsCreate' Bool
+vcPp :: Lens' VariantsetsCreate Bool
 vcPp = lens _vcPp (\ s a -> s{_vcPp = a})
 
 -- | OAuth access token.
-vcAccessToken :: Lens' VariantsetsCreate' (Maybe Text)
+vcAccessToken :: Lens' VariantsetsCreate (Maybe Text)
 vcAccessToken
   = lens _vcAccessToken
       (\ s a -> s{_vcAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-vcUploadType :: Lens' VariantsetsCreate' (Maybe Text)
+vcUploadType :: Lens' VariantsetsCreate (Maybe Text)
 vcUploadType
   = lens _vcUploadType (\ s a -> s{_vcUploadType = a})
 
 -- | Multipart request metadata.
-vcPayload :: Lens' VariantsetsCreate' VariantSet
+vcPayload :: Lens' VariantsetsCreate VariantSet
 vcPayload
   = lens _vcPayload (\ s a -> s{_vcPayload = a})
 
 -- | OAuth bearer token.
-vcBearerToken :: Lens' VariantsetsCreate' (Maybe Text)
+vcBearerToken :: Lens' VariantsetsCreate (Maybe Text)
 vcBearerToken
   = lens _vcBearerToken
       (\ s a -> s{_vcBearerToken = a})
 
 -- | JSONP
-vcCallback :: Lens' VariantsetsCreate' (Maybe Text)
+vcCallback :: Lens' VariantsetsCreate (Maybe Text)
 vcCallback
   = lens _vcCallback (\ s a -> s{_vcCallback = a})
 
-instance GoogleRequest VariantsetsCreate' where
-        type Rs VariantsetsCreate' = VariantSet
-        requestClient VariantsetsCreate'{..}
+instance GoogleRequest VariantsetsCreate where
+        type Rs VariantsetsCreate = VariantSet
+        requestClient VariantsetsCreate{..}
           = go _vcXgafv _vcUploadProtocol (Just _vcPp)
               _vcAccessToken
               _vcUploadType

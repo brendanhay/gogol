@@ -32,8 +32,8 @@ module Network.Google.Resource.Classroom.Invitations.Delete
       InvitationsDeleteResource
 
     -- * Creating a Request
-    , invitationsDelete'
-    , InvitationsDelete'
+    , invitationsDelete
+    , InvitationsDelete
 
     -- * Request Lenses
     , idXgafv
@@ -50,7 +50,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.invitations.delete@ method which the
--- 'InvitationsDelete'' request conforms to.
+-- 'InvitationsDelete' request conforms to.
 type InvitationsDeleteResource =
      "v1" :>
        "invitations" :>
@@ -69,8 +69,8 @@ type InvitationsDeleteResource =
 -- the requested invitation or for access errors. * \`NOT_FOUND\` if no
 -- invitation exists with the requested ID.
 --
--- /See:/ 'invitationsDelete'' smart constructor.
-data InvitationsDelete' = InvitationsDelete'
+-- /See:/ 'invitationsDelete' smart constructor.
+data InvitationsDelete = InvitationsDelete
     { _idXgafv          :: !(Maybe Text)
     , _idUploadProtocol :: !(Maybe Text)
     , _idPp             :: !Bool
@@ -81,7 +81,7 @@ data InvitationsDelete' = InvitationsDelete'
     , _idCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InvitationsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'InvitationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -100,11 +100,11 @@ data InvitationsDelete' = InvitationsDelete'
 -- * 'idId'
 --
 -- * 'idCallback'
-invitationsDelete'
+invitationsDelete
     :: Text -- ^ 'idId'
-    -> InvitationsDelete'
-invitationsDelete' pIdId_ =
-    InvitationsDelete'
+    -> InvitationsDelete
+invitationsDelete pIdId_ =
+    InvitationsDelete
     { _idXgafv = Nothing
     , _idUploadProtocol = Nothing
     , _idPp = True
@@ -116,48 +116,48 @@ invitationsDelete' pIdId_ =
     }
 
 -- | V1 error format.
-idXgafv :: Lens' InvitationsDelete' (Maybe Text)
+idXgafv :: Lens' InvitationsDelete (Maybe Text)
 idXgafv = lens _idXgafv (\ s a -> s{_idXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-idUploadProtocol :: Lens' InvitationsDelete' (Maybe Text)
+idUploadProtocol :: Lens' InvitationsDelete (Maybe Text)
 idUploadProtocol
   = lens _idUploadProtocol
       (\ s a -> s{_idUploadProtocol = a})
 
 -- | Pretty-print response.
-idPp :: Lens' InvitationsDelete' Bool
+idPp :: Lens' InvitationsDelete Bool
 idPp = lens _idPp (\ s a -> s{_idPp = a})
 
 -- | OAuth access token.
-idAccessToken :: Lens' InvitationsDelete' (Maybe Text)
+idAccessToken :: Lens' InvitationsDelete (Maybe Text)
 idAccessToken
   = lens _idAccessToken
       (\ s a -> s{_idAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-idUploadType :: Lens' InvitationsDelete' (Maybe Text)
+idUploadType :: Lens' InvitationsDelete (Maybe Text)
 idUploadType
   = lens _idUploadType (\ s a -> s{_idUploadType = a})
 
 -- | OAuth bearer token.
-idBearerToken :: Lens' InvitationsDelete' (Maybe Text)
+idBearerToken :: Lens' InvitationsDelete (Maybe Text)
 idBearerToken
   = lens _idBearerToken
       (\ s a -> s{_idBearerToken = a})
 
 -- | Identifier of the invitation to delete.
-idId :: Lens' InvitationsDelete' Text
+idId :: Lens' InvitationsDelete Text
 idId = lens _idId (\ s a -> s{_idId = a})
 
 -- | JSONP
-idCallback :: Lens' InvitationsDelete' (Maybe Text)
+idCallback :: Lens' InvitationsDelete (Maybe Text)
 idCallback
   = lens _idCallback (\ s a -> s{_idCallback = a})
 
-instance GoogleRequest InvitationsDelete' where
-        type Rs InvitationsDelete' = Empty
-        requestClient InvitationsDelete'{..}
+instance GoogleRequest InvitationsDelete where
+        type Rs InvitationsDelete = Empty
+        requestClient InvitationsDelete{..}
           = go _idId _idXgafv _idUploadProtocol (Just _idPp)
               _idAccessToken
               _idUploadType

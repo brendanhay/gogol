@@ -30,8 +30,8 @@ module Network.Google.Resource.BigQuery.Tables.Delete
       TablesDeleteResource
 
     -- * Creating a Request
-    , tablesDelete'
-    , TablesDelete'
+    , tablesDelete
+    , TablesDelete
 
     -- * Request Lenses
     , tdDatasetId
@@ -43,7 +43,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.tables.delete@ method which the
--- 'TablesDelete'' request conforms to.
+-- 'TablesDelete' request conforms to.
 type TablesDeleteResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -56,14 +56,14 @@ type TablesDeleteResource =
 -- | Deletes the table specified by tableId from the dataset. If the table
 -- contains data, all the data will be deleted.
 --
--- /See:/ 'tablesDelete'' smart constructor.
-data TablesDelete' = TablesDelete'
+-- /See:/ 'tablesDelete' smart constructor.
+data TablesDelete = TablesDelete
     { _tdDatasetId :: !Text
     , _tdProjectId :: !Text
     , _tdTableId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,36 +72,36 @@ data TablesDelete' = TablesDelete'
 -- * 'tdProjectId'
 --
 -- * 'tdTableId'
-tablesDelete'
+tablesDelete
     :: Text -- ^ 'tdDatasetId'
     -> Text -- ^ 'tdProjectId'
     -> Text -- ^ 'tdTableId'
-    -> TablesDelete'
-tablesDelete' pTdDatasetId_ pTdProjectId_ pTdTableId_ =
-    TablesDelete'
+    -> TablesDelete
+tablesDelete pTdDatasetId_ pTdProjectId_ pTdTableId_ =
+    TablesDelete
     { _tdDatasetId = pTdDatasetId_
     , _tdProjectId = pTdProjectId_
     , _tdTableId = pTdTableId_
     }
 
 -- | Dataset ID of the table to delete
-tdDatasetId :: Lens' TablesDelete' Text
+tdDatasetId :: Lens' TablesDelete Text
 tdDatasetId
   = lens _tdDatasetId (\ s a -> s{_tdDatasetId = a})
 
 -- | Project ID of the table to delete
-tdProjectId :: Lens' TablesDelete' Text
+tdProjectId :: Lens' TablesDelete Text
 tdProjectId
   = lens _tdProjectId (\ s a -> s{_tdProjectId = a})
 
 -- | Table ID of the table to delete
-tdTableId :: Lens' TablesDelete' Text
+tdTableId :: Lens' TablesDelete Text
 tdTableId
   = lens _tdTableId (\ s a -> s{_tdTableId = a})
 
-instance GoogleRequest TablesDelete' where
-        type Rs TablesDelete' = ()
-        requestClient TablesDelete'{..}
+instance GoogleRequest TablesDelete where
+        type Rs TablesDelete = ()
+        requestClient TablesDelete{..}
           = go _tdProjectId _tdDatasetId _tdTableId
               (Just AltJSON)
               bigQueryService

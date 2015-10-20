@@ -616,139 +616,140 @@ instance ToJSON Dataset where
 --
 -- /See:/ 'read'' smart constructor.
 data Read' = Read'
-    { _rFragmentLength            :: !(Maybe Int32)
-    , _rDuplicateFragment         :: !(Maybe Bool)
-    , _rReadGroupSetId            :: !(Maybe Text)
-    , _rNextMatePosition          :: !(Maybe Position)
-    , _rFailedVendorQualityChecks :: !(Maybe Bool)
-    , _rAlignment                 :: !(Maybe LinearAlignment)
-    , _rFragmentName              :: !(Maybe Text)
-    , _rNumberReads               :: !(Maybe Int32)
-    , _rId                        :: !(Maybe Text)
-    , _rSecondaryAlignment        :: !(Maybe Bool)
-    , _rReadGroupId               :: !(Maybe Text)
-    , _rSupplementaryAlignment    :: !(Maybe Bool)
-    , _rAlignedSequence           :: !(Maybe Text)
-    , _rProperPlacement           :: !(Maybe Bool)
-    , _rInfo                      :: !(Maybe ReadInfo)
-    , _rReadNumber                :: !(Maybe Int32)
-    , _rAlignedQuality            :: !(Maybe [Int32])
+    { _reaFragmentLength            :: !(Maybe Int32)
+    , _reaDuplicateFragment         :: !(Maybe Bool)
+    , _reaReadGroupSetId            :: !(Maybe Text)
+    , _reaNextMatePosition          :: !(Maybe Position)
+    , _reaFailedVendorQualityChecks :: !(Maybe Bool)
+    , _reaAlignment                 :: !(Maybe LinearAlignment)
+    , _reaFragmentName              :: !(Maybe Text)
+    , _reaNumberReads               :: !(Maybe Int32)
+    , _reaId                        :: !(Maybe Text)
+    , _reaSecondaryAlignment        :: !(Maybe Bool)
+    , _reaReadGroupId               :: !(Maybe Text)
+    , _reaSupplementaryAlignment    :: !(Maybe Bool)
+    , _reaAlignedSequence           :: !(Maybe Text)
+    , _reaProperPlacement           :: !(Maybe Bool)
+    , _reaInfo                      :: !(Maybe ReadInfo)
+    , _reaReadNumber                :: !(Maybe Int32)
+    , _reaAlignedQuality            :: !(Maybe [Int32])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Read' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rFragmentLength'
+-- * 'reaFragmentLength'
 --
--- * 'rDuplicateFragment'
+-- * 'reaDuplicateFragment'
 --
--- * 'rReadGroupSetId'
+-- * 'reaReadGroupSetId'
 --
--- * 'rNextMatePosition'
+-- * 'reaNextMatePosition'
 --
--- * 'rFailedVendorQualityChecks'
+-- * 'reaFailedVendorQualityChecks'
 --
--- * 'rAlignment'
+-- * 'reaAlignment'
 --
--- * 'rFragmentName'
+-- * 'reaFragmentName'
 --
--- * 'rNumberReads'
+-- * 'reaNumberReads'
 --
--- * 'rId'
+-- * 'reaId'
 --
--- * 'rSecondaryAlignment'
+-- * 'reaSecondaryAlignment'
 --
--- * 'rReadGroupId'
+-- * 'reaReadGroupId'
 --
--- * 'rSupplementaryAlignment'
+-- * 'reaSupplementaryAlignment'
 --
--- * 'rAlignedSequence'
+-- * 'reaAlignedSequence'
 --
--- * 'rProperPlacement'
+-- * 'reaProperPlacement'
 --
--- * 'rInfo'
+-- * 'reaInfo'
 --
--- * 'rReadNumber'
+-- * 'reaReadNumber'
 --
--- * 'rAlignedQuality'
+-- * 'reaAlignedQuality'
 read'
     :: Read'
 read' =
     Read'
-    { _rFragmentLength = Nothing
-    , _rDuplicateFragment = Nothing
-    , _rReadGroupSetId = Nothing
-    , _rNextMatePosition = Nothing
-    , _rFailedVendorQualityChecks = Nothing
-    , _rAlignment = Nothing
-    , _rFragmentName = Nothing
-    , _rNumberReads = Nothing
-    , _rId = Nothing
-    , _rSecondaryAlignment = Nothing
-    , _rReadGroupId = Nothing
-    , _rSupplementaryAlignment = Nothing
-    , _rAlignedSequence = Nothing
-    , _rProperPlacement = Nothing
-    , _rInfo = Nothing
-    , _rReadNumber = Nothing
-    , _rAlignedQuality = Nothing
+    { _reaFragmentLength = Nothing
+    , _reaDuplicateFragment = Nothing
+    , _reaReadGroupSetId = Nothing
+    , _reaNextMatePosition = Nothing
+    , _reaFailedVendorQualityChecks = Nothing
+    , _reaAlignment = Nothing
+    , _reaFragmentName = Nothing
+    , _reaNumberReads = Nothing
+    , _reaId = Nothing
+    , _reaSecondaryAlignment = Nothing
+    , _reaReadGroupId = Nothing
+    , _reaSupplementaryAlignment = Nothing
+    , _reaAlignedSequence = Nothing
+    , _reaProperPlacement = Nothing
+    , _reaInfo = Nothing
+    , _reaReadNumber = Nothing
+    , _reaAlignedQuality = Nothing
     }
 
 -- | The observed length of the fragment, equivalent to TLEN in SAM.
-rFragmentLength :: Lens' Read' (Maybe Int32)
-rFragmentLength
-  = lens _rFragmentLength
-      (\ s a -> s{_rFragmentLength = a})
+reaFragmentLength :: Lens' Read' (Maybe Int32)
+reaFragmentLength
+  = lens _reaFragmentLength
+      (\ s a -> s{_reaFragmentLength = a})
 
 -- | The fragment is a PCR or optical duplicate (SAM flag 0x400)
-rDuplicateFragment :: Lens' Read' (Maybe Bool)
-rDuplicateFragment
-  = lens _rDuplicateFragment
-      (\ s a -> s{_rDuplicateFragment = a})
+reaDuplicateFragment :: Lens' Read' (Maybe Bool)
+reaDuplicateFragment
+  = lens _reaDuplicateFragment
+      (\ s a -> s{_reaDuplicateFragment = a})
 
 -- | The ID of the read group set this read belongs to. (Every read must
 -- belong to exactly one read group set.)
-rReadGroupSetId :: Lens' Read' (Maybe Text)
-rReadGroupSetId
-  = lens _rReadGroupSetId
-      (\ s a -> s{_rReadGroupSetId = a})
+reaReadGroupSetId :: Lens' Read' (Maybe Text)
+reaReadGroupSetId
+  = lens _reaReadGroupSetId
+      (\ s a -> s{_reaReadGroupSetId = a})
 
 -- | The mapping of the primary alignment of the
 -- \`(readNumber+1)%numberReads\` read in the fragment. It replaces mate
 -- position and mate strand in SAM.
-rNextMatePosition :: Lens' Read' (Maybe Position)
-rNextMatePosition
-  = lens _rNextMatePosition
-      (\ s a -> s{_rNextMatePosition = a})
+reaNextMatePosition :: Lens' Read' (Maybe Position)
+reaNextMatePosition
+  = lens _reaNextMatePosition
+      (\ s a -> s{_reaNextMatePosition = a})
 
 -- | SAM flag 0x200
-rFailedVendorQualityChecks :: Lens' Read' (Maybe Bool)
-rFailedVendorQualityChecks
-  = lens _rFailedVendorQualityChecks
-      (\ s a -> s{_rFailedVendorQualityChecks = a})
+reaFailedVendorQualityChecks :: Lens' Read' (Maybe Bool)
+reaFailedVendorQualityChecks
+  = lens _reaFailedVendorQualityChecks
+      (\ s a -> s{_reaFailedVendorQualityChecks = a})
 
 -- | The linear alignment for this alignment record. This field will be null
 -- if the read is unmapped.
-rAlignment :: Lens' Read' (Maybe LinearAlignment)
-rAlignment
-  = lens _rAlignment (\ s a -> s{_rAlignment = a})
+reaAlignment :: Lens' Read' (Maybe LinearAlignment)
+reaAlignment
+  = lens _reaAlignment (\ s a -> s{_reaAlignment = a})
 
 -- | The fragment name. Equivalent to QNAME (query template name) in SAM.
-rFragmentName :: Lens' Read' (Maybe Text)
-rFragmentName
-  = lens _rFragmentName
-      (\ s a -> s{_rFragmentName = a})
+reaFragmentName :: Lens' Read' (Maybe Text)
+reaFragmentName
+  = lens _reaFragmentName
+      (\ s a -> s{_reaFragmentName = a})
 
 -- | The number of reads in the fragment (extension to SAM flag 0x1).
-rNumberReads :: Lens' Read' (Maybe Int32)
-rNumberReads
-  = lens _rNumberReads (\ s a -> s{_rNumberReads = a})
+reaNumberReads :: Lens' Read' (Maybe Int32)
+reaNumberReads
+  = lens _reaNumberReads
+      (\ s a -> s{_reaNumberReads = a})
 
 -- | The server-generated read ID, unique across all reads. This is different
 -- from the \`fragmentName\`.
-rId :: Lens' Read' (Maybe Text)
-rId = lens _rId (\ s a -> s{_rId = a})
+reaId :: Lens' Read' (Maybe Text)
+reaId = lens _reaId (\ s a -> s{_reaId = a})
 
 -- | Whether this alignment is secondary. Equivalent to SAM flag 0x100. A
 -- secondary alignment represents an alternative to the primary alignment
@@ -756,16 +757,17 @@ rId = lens _rId (\ s a -> s{_rId = a})
 -- map ambiguously to multiple coordinates in the genome. By convention,
 -- each read has one and only one alignment where both
 -- \`secondaryAlignment\` and \`supplementaryAlignment\` are false.
-rSecondaryAlignment :: Lens' Read' (Maybe Bool)
-rSecondaryAlignment
-  = lens _rSecondaryAlignment
-      (\ s a -> s{_rSecondaryAlignment = a})
+reaSecondaryAlignment :: Lens' Read' (Maybe Bool)
+reaSecondaryAlignment
+  = lens _reaSecondaryAlignment
+      (\ s a -> s{_reaSecondaryAlignment = a})
 
 -- | The ID of the read group this read belongs to. (Every read must belong
 -- to exactly one read group.)
-rReadGroupId :: Lens' Read' (Maybe Text)
-rReadGroupId
-  = lens _rReadGroupId (\ s a -> s{_rReadGroupId = a})
+reaReadGroupId :: Lens' Read' (Maybe Text)
+reaReadGroupId
+  = lens _reaReadGroupId
+      (\ s a -> s{_reaReadGroupId = a})
 
 -- | Whether this alignment is supplementary. Equivalent to SAM flag 0x800.
 -- Supplementary alignments are used in the representation of a chimeric
@@ -778,10 +780,10 @@ rReadGroupId
 -- read will be hard clipped. The \`alignedSequence\` and
 -- \`alignedQuality\` fields in the alignment record will only represent
 -- the bases for its respective linear alignment.
-rSupplementaryAlignment :: Lens' Read' (Maybe Bool)
-rSupplementaryAlignment
-  = lens _rSupplementaryAlignment
-      (\ s a -> s{_rSupplementaryAlignment = a})
+reaSupplementaryAlignment :: Lens' Read' (Maybe Bool)
+reaSupplementaryAlignment
+  = lens _reaSupplementaryAlignment
+      (\ s a -> s{_reaSupplementaryAlignment = a})
 
 -- | The bases of the read sequence contained in this alignment record,
 -- *without CIGAR operations applied*. \`alignedSequence\` and
@@ -790,28 +792,29 @@ rSupplementaryAlignment
 -- alignment, or if the read was trimmed. When this occurs, the CIGAR for
 -- this read will begin\/end with a hard clip operator that will indicate
 -- the length of the excised sequence.
-rAlignedSequence :: Lens' Read' (Maybe Text)
-rAlignedSequence
-  = lens _rAlignedSequence
-      (\ s a -> s{_rAlignedSequence = a})
+reaAlignedSequence :: Lens' Read' (Maybe Text)
+reaAlignedSequence
+  = lens _reaAlignedSequence
+      (\ s a -> s{_reaAlignedSequence = a})
 
 -- | The orientation and the distance between reads from the fragment are
 -- consistent with the sequencing protocol (SAM flag 0x2)
-rProperPlacement :: Lens' Read' (Maybe Bool)
-rProperPlacement
-  = lens _rProperPlacement
-      (\ s a -> s{_rProperPlacement = a})
+reaProperPlacement :: Lens' Read' (Maybe Bool)
+reaProperPlacement
+  = lens _reaProperPlacement
+      (\ s a -> s{_reaProperPlacement = a})
 
 -- | A map of additional read alignment information. This must be of the form
 -- map (string key mapping to a list of string values).
-rInfo :: Lens' Read' (Maybe ReadInfo)
-rInfo = lens _rInfo (\ s a -> s{_rInfo = a})
+reaInfo :: Lens' Read' (Maybe ReadInfo)
+reaInfo = lens _reaInfo (\ s a -> s{_reaInfo = a})
 
 -- | The read number in sequencing. 0-based and less than numberReads. This
 -- field replaces SAM flag 0x40 and 0x80.
-rReadNumber :: Lens' Read' (Maybe Int32)
-rReadNumber
-  = lens _rReadNumber (\ s a -> s{_rReadNumber = a})
+reaReadNumber :: Lens' Read' (Maybe Int32)
+reaReadNumber
+  = lens _reaReadNumber
+      (\ s a -> s{_reaReadNumber = a})
 
 -- | The quality of the read sequence contained in this alignment record.
 -- \`alignedSequence\` and \`alignedQuality\` may be shorter than the full
@@ -819,10 +822,10 @@ rReadNumber
 -- chimeric alignment, or if the read was trimmed. When this occurs, the
 -- CIGAR for this read will begin\/end with a hard clip operator that will
 -- indicate the length of the excised sequence.
-rAlignedQuality :: Lens' Read' [Int32]
-rAlignedQuality
-  = lens _rAlignedQuality
-      (\ s a -> s{_rAlignedQuality = a})
+reaAlignedQuality :: Lens' Read' [Int32]
+reaAlignedQuality
+  = lens _reaAlignedQuality
+      (\ s a -> s{_reaAlignedQuality = a})
       . _Default
       . _Coerce
 
@@ -853,25 +856,25 @@ instance ToJSON Read' where
         toJSON Read'{..}
           = object
               (catMaybes
-                 [("fragmentLength" .=) <$> _rFragmentLength,
-                  ("duplicateFragment" .=) <$> _rDuplicateFragment,
-                  ("readGroupSetId" .=) <$> _rReadGroupSetId,
-                  ("nextMatePosition" .=) <$> _rNextMatePosition,
+                 [("fragmentLength" .=) <$> _reaFragmentLength,
+                  ("duplicateFragment" .=) <$> _reaDuplicateFragment,
+                  ("readGroupSetId" .=) <$> _reaReadGroupSetId,
+                  ("nextMatePosition" .=) <$> _reaNextMatePosition,
                   ("failedVendorQualityChecks" .=) <$>
-                    _rFailedVendorQualityChecks,
-                  ("alignment" .=) <$> _rAlignment,
-                  ("fragmentName" .=) <$> _rFragmentName,
-                  ("numberReads" .=) <$> _rNumberReads,
-                  ("id" .=) <$> _rId,
-                  ("secondaryAlignment" .=) <$> _rSecondaryAlignment,
-                  ("readGroupId" .=) <$> _rReadGroupId,
+                    _reaFailedVendorQualityChecks,
+                  ("alignment" .=) <$> _reaAlignment,
+                  ("fragmentName" .=) <$> _reaFragmentName,
+                  ("numberReads" .=) <$> _reaNumberReads,
+                  ("id" .=) <$> _reaId,
+                  ("secondaryAlignment" .=) <$> _reaSecondaryAlignment,
+                  ("readGroupId" .=) <$> _reaReadGroupId,
                   ("supplementaryAlignment" .=) <$>
-                    _rSupplementaryAlignment,
-                  ("alignedSequence" .=) <$> _rAlignedSequence,
-                  ("properPlacement" .=) <$> _rProperPlacement,
-                  ("info" .=) <$> _rInfo,
-                  ("readNumber" .=) <$> _rReadNumber,
-                  ("alignedQuality" .=) <$> _rAlignedQuality])
+                    _reaSupplementaryAlignment,
+                  ("alignedSequence" .=) <$> _reaAlignedSequence,
+                  ("properPlacement" .=) <$> _reaProperPlacement,
+                  ("info" .=) <$> _reaInfo,
+                  ("readNumber" .=) <$> _reaReadNumber,
+                  ("alignedQuality" .=) <$> _reaAlignedQuality])
 
 -- | A call represents the determination of genotype with respect to a
 -- particular variant. It may include associated information such as
@@ -998,120 +1001,119 @@ instance ToJSON VariantCall where
 --
 -- /See:/ 'readGroup' smart constructor.
 data ReadGroup = ReadGroup
-    { _rgReferenceSetId      :: !(Maybe Text)
-    , _rgPrograms            :: !(Maybe [Program])
-    , _rgExperiment          :: !(Maybe Experiment)
-    , _rgName                :: !(Maybe Text)
-    , _rgDatasetId           :: !(Maybe Text)
-    , _rgId                  :: !(Maybe Text)
-    , _rgSampleId            :: !(Maybe Text)
-    , _rgPredictedInsertSize :: !(Maybe Int32)
-    , _rgDescription         :: !(Maybe Text)
-    , _rgInfo                :: !(Maybe ReadGroupInfo)
+    { _rReferenceSetId      :: !(Maybe Text)
+    , _rPrograms            :: !(Maybe [Program])
+    , _rExperiment          :: !(Maybe Experiment)
+    , _rName                :: !(Maybe Text)
+    , _rDatasetId           :: !(Maybe Text)
+    , _rId                  :: !(Maybe Text)
+    , _rSampleId            :: !(Maybe Text)
+    , _rPredictedInsertSize :: !(Maybe Int32)
+    , _rDescription         :: !(Maybe Text)
+    , _rInfo                :: !(Maybe ReadGroupInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rgReferenceSetId'
+-- * 'rReferenceSetId'
 --
--- * 'rgPrograms'
+-- * 'rPrograms'
 --
--- * 'rgExperiment'
+-- * 'rExperiment'
 --
--- * 'rgName'
+-- * 'rName'
 --
--- * 'rgDatasetId'
+-- * 'rDatasetId'
 --
--- * 'rgId'
+-- * 'rId'
 --
--- * 'rgSampleId'
+-- * 'rSampleId'
 --
--- * 'rgPredictedInsertSize'
+-- * 'rPredictedInsertSize'
 --
--- * 'rgDescription'
+-- * 'rDescription'
 --
--- * 'rgInfo'
+-- * 'rInfo'
 readGroup
     :: ReadGroup
 readGroup =
     ReadGroup
-    { _rgReferenceSetId = Nothing
-    , _rgPrograms = Nothing
-    , _rgExperiment = Nothing
-    , _rgName = Nothing
-    , _rgDatasetId = Nothing
-    , _rgId = Nothing
-    , _rgSampleId = Nothing
-    , _rgPredictedInsertSize = Nothing
-    , _rgDescription = Nothing
-    , _rgInfo = Nothing
+    { _rReferenceSetId = Nothing
+    , _rPrograms = Nothing
+    , _rExperiment = Nothing
+    , _rName = Nothing
+    , _rDatasetId = Nothing
+    , _rId = Nothing
+    , _rSampleId = Nothing
+    , _rPredictedInsertSize = Nothing
+    , _rDescription = Nothing
+    , _rInfo = Nothing
     }
 
 -- | The reference set the reads in this read group are aligned to. Required
 -- if there are any read alignments.
-rgReferenceSetId :: Lens' ReadGroup (Maybe Text)
-rgReferenceSetId
-  = lens _rgReferenceSetId
-      (\ s a -> s{_rgReferenceSetId = a})
+rReferenceSetId :: Lens' ReadGroup (Maybe Text)
+rReferenceSetId
+  = lens _rReferenceSetId
+      (\ s a -> s{_rReferenceSetId = a})
 
 -- | The programs used to generate this read group. Programs are always
 -- identical for all read groups within a read group set. For this reason,
 -- only the first read group in a returned set will have this field
 -- populated.
-rgPrograms :: Lens' ReadGroup [Program]
-rgPrograms
-  = lens _rgPrograms (\ s a -> s{_rgPrograms = a}) .
+rPrograms :: Lens' ReadGroup [Program]
+rPrograms
+  = lens _rPrograms (\ s a -> s{_rPrograms = a}) .
       _Default
       . _Coerce
 
 -- | The experiment used to generate this read group.
-rgExperiment :: Lens' ReadGroup (Maybe Experiment)
-rgExperiment
-  = lens _rgExperiment (\ s a -> s{_rgExperiment = a})
+rExperiment :: Lens' ReadGroup (Maybe Experiment)
+rExperiment
+  = lens _rExperiment (\ s a -> s{_rExperiment = a})
 
 -- | The read group name. This corresponds to the \'RG ID field in the SAM
 -- spec.
-rgName :: Lens' ReadGroup (Maybe Text)
-rgName = lens _rgName (\ s a -> s{_rgName = a})
+rName :: Lens' ReadGroup (Maybe Text)
+rName = lens _rName (\ s a -> s{_rName = a})
 
 -- | The ID of the dataset this read group belongs to.
-rgDatasetId :: Lens' ReadGroup (Maybe Text)
-rgDatasetId
-  = lens _rgDatasetId (\ s a -> s{_rgDatasetId = a})
+rDatasetId :: Lens' ReadGroup (Maybe Text)
+rDatasetId
+  = lens _rDatasetId (\ s a -> s{_rDatasetId = a})
 
 -- | The server-generated read group ID, unique for all read groups. Note:
 -- This is different than the \`\'RG ID\` field in the SAM spec. For that
 -- value, see the \`name\` field.
-rgId :: Lens' ReadGroup (Maybe Text)
-rgId = lens _rgId (\ s a -> s{_rgId = a})
+rId :: Lens' ReadGroup (Maybe Text)
+rId = lens _rId (\ s a -> s{_rId = a})
 
 -- | The sample this read group\'s data was generated from. Note: This is not
 -- an actual ID within this repository, but rather an identifier for a
 -- sample which may be meaningful to some external system.
-rgSampleId :: Lens' ReadGroup (Maybe Text)
-rgSampleId
-  = lens _rgSampleId (\ s a -> s{_rgSampleId = a})
+rSampleId :: Lens' ReadGroup (Maybe Text)
+rSampleId
+  = lens _rSampleId (\ s a -> s{_rSampleId = a})
 
 -- | The predicted insert size of this read group. The insert size is the
 -- length the sequenced DNA fragment from end-to-end, not including the
 -- adapters.
-rgPredictedInsertSize :: Lens' ReadGroup (Maybe Int32)
-rgPredictedInsertSize
-  = lens _rgPredictedInsertSize
-      (\ s a -> s{_rgPredictedInsertSize = a})
+rPredictedInsertSize :: Lens' ReadGroup (Maybe Int32)
+rPredictedInsertSize
+  = lens _rPredictedInsertSize
+      (\ s a -> s{_rPredictedInsertSize = a})
 
 -- | A free-form text description of this read group.
-rgDescription :: Lens' ReadGroup (Maybe Text)
-rgDescription
-  = lens _rgDescription
-      (\ s a -> s{_rgDescription = a})
+rDescription :: Lens' ReadGroup (Maybe Text)
+rDescription
+  = lens _rDescription (\ s a -> s{_rDescription = a})
 
 -- | A map of additional read group information. This must be of the form map
 -- (string key mapping to a list of string values).
-rgInfo :: Lens' ReadGroup (Maybe ReadGroupInfo)
-rgInfo = lens _rgInfo (\ s a -> s{_rgInfo = a})
+rInfo :: Lens' ReadGroup (Maybe ReadGroupInfo)
+rInfo = lens _rInfo (\ s a -> s{_rInfo = a})
 
 instance FromJSON ReadGroup where
         parseJSON
@@ -1133,16 +1135,15 @@ instance ToJSON ReadGroup where
         toJSON ReadGroup{..}
           = object
               (catMaybes
-                 [("referenceSetId" .=) <$> _rgReferenceSetId,
-                  ("programs" .=) <$> _rgPrograms,
-                  ("experiment" .=) <$> _rgExperiment,
-                  ("name" .=) <$> _rgName,
-                  ("datasetId" .=) <$> _rgDatasetId,
-                  ("id" .=) <$> _rgId, ("sampleId" .=) <$> _rgSampleId,
-                  ("predictedInsertSize" .=) <$>
-                    _rgPredictedInsertSize,
-                  ("description" .=) <$> _rgDescription,
-                  ("info" .=) <$> _rgInfo])
+                 [("referenceSetId" .=) <$> _rReferenceSetId,
+                  ("programs" .=) <$> _rPrograms,
+                  ("experiment" .=) <$> _rExperiment,
+                  ("name" .=) <$> _rName,
+                  ("datasetId" .=) <$> _rDatasetId, ("id" .=) <$> _rId,
+                  ("sampleId" .=) <$> _rSampleId,
+                  ("predictedInsertSize" .=) <$> _rPredictedInsertSize,
+                  ("description" .=) <$> _rDescription,
+                  ("info" .=) <$> _rInfo])
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.

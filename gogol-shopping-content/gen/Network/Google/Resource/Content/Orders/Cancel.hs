@@ -29,20 +29,20 @@ module Network.Google.Resource.Content.Orders.Cancel
       OrdersCancelResource
 
     -- * Creating a Request
-    , ordersCancel'
-    , OrdersCancel'
+    , ordersCancel
+    , OrdersCancel
 
     -- * Request Lenses
-    , ocMerchantId
-    , ocPayload
-    , ocOrderId
+    , occMerchantId
+    , occPayload
+    , occOrderId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.cancel@ method which the
--- 'OrdersCancel'' request conforms to.
+-- 'OrdersCancel' request conforms to.
 type OrdersCancelResource =
      Capture "merchantId" Word64 :>
        "orders" :>
@@ -54,54 +54,55 @@ type OrdersCancelResource =
 
 -- | Cancels all line items in an order.
 --
--- /See:/ 'ordersCancel'' smart constructor.
-data OrdersCancel' = OrdersCancel'
-    { _ocMerchantId :: !Word64
-    , _ocPayload    :: !OrdersCancelRequest
-    , _ocOrderId    :: !Text
+-- /See:/ 'ordersCancel' smart constructor.
+data OrdersCancel = OrdersCancel
+    { _occMerchantId :: !Word64
+    , _occPayload    :: !OrdersCancelRequest
+    , _occOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersCancel'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ocMerchantId'
+-- * 'occMerchantId'
 --
--- * 'ocPayload'
+-- * 'occPayload'
 --
--- * 'ocOrderId'
-ordersCancel'
-    :: Word64 -- ^ 'ocMerchantId'
-    -> OrdersCancelRequest -- ^ 'ocPayload'
-    -> Text -- ^ 'ocOrderId'
-    -> OrdersCancel'
-ordersCancel' pOcMerchantId_ pOcPayload_ pOcOrderId_ =
-    OrdersCancel'
-    { _ocMerchantId = pOcMerchantId_
-    , _ocPayload = pOcPayload_
-    , _ocOrderId = pOcOrderId_
+-- * 'occOrderId'
+ordersCancel
+    :: Word64 -- ^ 'occMerchantId'
+    -> OrdersCancelRequest -- ^ 'occPayload'
+    -> Text -- ^ 'occOrderId'
+    -> OrdersCancel
+ordersCancel pOccMerchantId_ pOccPayload_ pOccOrderId_ =
+    OrdersCancel
+    { _occMerchantId = pOccMerchantId_
+    , _occPayload = pOccPayload_
+    , _occOrderId = pOccOrderId_
     }
 
 -- | The ID of the managing account.
-ocMerchantId :: Lens' OrdersCancel' Word64
-ocMerchantId
-  = lens _ocMerchantId (\ s a -> s{_ocMerchantId = a})
+occMerchantId :: Lens' OrdersCancel Word64
+occMerchantId
+  = lens _occMerchantId
+      (\ s a -> s{_occMerchantId = a})
 
 -- | Multipart request metadata.
-ocPayload :: Lens' OrdersCancel' OrdersCancelRequest
-ocPayload
-  = lens _ocPayload (\ s a -> s{_ocPayload = a})
+occPayload :: Lens' OrdersCancel OrdersCancelRequest
+occPayload
+  = lens _occPayload (\ s a -> s{_occPayload = a})
 
 -- | The ID of the order to cancel.
-ocOrderId :: Lens' OrdersCancel' Text
-ocOrderId
-  = lens _ocOrderId (\ s a -> s{_ocOrderId = a})
+occOrderId :: Lens' OrdersCancel Text
+occOrderId
+  = lens _occOrderId (\ s a -> s{_occOrderId = a})
 
-instance GoogleRequest OrdersCancel' where
-        type Rs OrdersCancel' = OrdersCancelResponse
-        requestClient OrdersCancel'{..}
-          = go _ocMerchantId _ocOrderId (Just AltJSON)
-              _ocPayload
+instance GoogleRequest OrdersCancel where
+        type Rs OrdersCancel = OrdersCancelResponse
+        requestClient OrdersCancel{..}
+          = go _occMerchantId _occOrderId (Just AltJSON)
+              _occPayload
               shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy OrdersCancelResource)

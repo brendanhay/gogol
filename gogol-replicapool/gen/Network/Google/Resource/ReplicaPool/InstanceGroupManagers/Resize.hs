@@ -32,8 +32,8 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Resize
       InstanceGroupManagersResizeResource
 
     -- * Creating a Request
-    , instanceGroupManagersResize'
-    , InstanceGroupManagersResize'
+    , instanceGroupManagersResize
+    , InstanceGroupManagersResize
 
     -- * Request Lenses
     , igmrProject
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.instanceGroupManagers.resize@ method which the
--- 'InstanceGroupManagersResize'' request conforms to.
+-- 'InstanceGroupManagersResize' request conforms to.
 type InstanceGroupManagersResizeResource =
      Capture "project" Text :>
        "zones" :>
@@ -62,15 +62,15 @@ type InstanceGroupManagersResizeResource =
 -- down, instances are removed in the order outlined in Resizing a managed
 -- instance group.
 --
--- /See:/ 'instanceGroupManagersResize'' smart constructor.
-data InstanceGroupManagersResize' = InstanceGroupManagersResize'
+-- /See:/ 'instanceGroupManagersResize' smart constructor.
+data InstanceGroupManagersResize = InstanceGroupManagersResize
     { _igmrProject              :: !Text
     , _igmrSize                 :: !Int32
     , _igmrInstanceGroupManager :: !Text
     , _igmrZone                 :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupManagersResize'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupManagersResize' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,14 +81,14 @@ data InstanceGroupManagersResize' = InstanceGroupManagersResize'
 -- * 'igmrInstanceGroupManager'
 --
 -- * 'igmrZone'
-instanceGroupManagersResize'
+instanceGroupManagersResize
     :: Text -- ^ 'igmrProject'
     -> Int32 -- ^ 'igmrSize'
     -> Text -- ^ 'igmrInstanceGroupManager'
     -> Text -- ^ 'igmrZone'
-    -> InstanceGroupManagersResize'
-instanceGroupManagersResize' pIgmrProject_ pIgmrSize_ pIgmrInstanceGroupManager_ pIgmrZone_ =
-    InstanceGroupManagersResize'
+    -> InstanceGroupManagersResize
+instanceGroupManagersResize pIgmrProject_ pIgmrSize_ pIgmrInstanceGroupManager_ pIgmrZone_ =
+    InstanceGroupManagersResize
     { _igmrProject = pIgmrProject_
     , _igmrSize = pIgmrSize_
     , _igmrInstanceGroupManager = pIgmrInstanceGroupManager_
@@ -96,28 +96,28 @@ instanceGroupManagersResize' pIgmrProject_ pIgmrSize_ pIgmrInstanceGroupManager_
     }
 
 -- | The Google Developers Console project name.
-igmrProject :: Lens' InstanceGroupManagersResize' Text
+igmrProject :: Lens' InstanceGroupManagersResize Text
 igmrProject
   = lens _igmrProject (\ s a -> s{_igmrProject = a})
 
 -- | Number of instances that should exist in this Instance Group Manager.
-igmrSize :: Lens' InstanceGroupManagersResize' Int32
+igmrSize :: Lens' InstanceGroupManagersResize Int32
 igmrSize = lens _igmrSize (\ s a -> s{_igmrSize = a})
 
 -- | The name of the instance group manager.
-igmrInstanceGroupManager :: Lens' InstanceGroupManagersResize' Text
+igmrInstanceGroupManager :: Lens' InstanceGroupManagersResize Text
 igmrInstanceGroupManager
   = lens _igmrInstanceGroupManager
       (\ s a -> s{_igmrInstanceGroupManager = a})
 
 -- | The name of the zone in which the instance group manager resides.
-igmrZone :: Lens' InstanceGroupManagersResize' Text
+igmrZone :: Lens' InstanceGroupManagersResize Text
 igmrZone = lens _igmrZone (\ s a -> s{_igmrZone = a})
 
-instance GoogleRequest InstanceGroupManagersResize'
+instance GoogleRequest InstanceGroupManagersResize
          where
-        type Rs InstanceGroupManagersResize' = Operation
-        requestClient InstanceGroupManagersResize'{..}
+        type Rs InstanceGroupManagersResize = Operation
+        requestClient InstanceGroupManagersResize{..}
           = go _igmrProject _igmrZone _igmrInstanceGroupManager
               (Just _igmrSize)
               (Just AltJSON)

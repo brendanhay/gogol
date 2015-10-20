@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.ContentCategories.List
       ContentCategoriesListResource
 
     -- * Creating a Request
-    , contentCategoriesList'
-    , ContentCategoriesList'
+    , contentCategoriesList
+    , ContentCategoriesList
 
     -- * Request Lenses
     , cclSearchString
@@ -46,7 +46,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.contentCategories.list@ method which the
--- 'ContentCategoriesList'' request conforms to.
+-- 'ContentCategoriesList' request conforms to.
 type ContentCategoriesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -64,8 +64,8 @@ type ContentCategoriesListResource =
 
 -- | Retrieves a list of content categories, possibly filtered.
 --
--- /See:/ 'contentCategoriesList'' smart constructor.
-data ContentCategoriesList' = ContentCategoriesList'
+-- /See:/ 'contentCategoriesList' smart constructor.
+data ContentCategoriesList = ContentCategoriesList
     { _cclSearchString :: !(Maybe Text)
     , _cclIds          :: !(Maybe [Int64])
     , _cclProFileId    :: !Int64
@@ -75,7 +75,7 @@ data ContentCategoriesList' = ContentCategoriesList'
     , _cclMaxResults   :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ContentCategoriesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ContentCategoriesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -92,11 +92,11 @@ data ContentCategoriesList' = ContentCategoriesList'
 -- * 'cclSortField'
 --
 -- * 'cclMaxResults'
-contentCategoriesList'
+contentCategoriesList
     :: Int64 -- ^ 'cclProFileId'
-    -> ContentCategoriesList'
-contentCategoriesList' pCclProFileId_ =
-    ContentCategoriesList'
+    -> ContentCategoriesList
+contentCategoriesList pCclProFileId_ =
+    ContentCategoriesList
     { _cclSearchString = Nothing
     , _cclIds = Nothing
     , _cclProFileId = pCclProFileId_
@@ -114,47 +114,47 @@ contentCategoriesList' pCclProFileId_ =
 -- search string of \"contentcategory\" will match objects with name \"my
 -- contentcategory\", \"contentcategory 2015\", or simply
 -- \"contentcategory\".
-cclSearchString :: Lens' ContentCategoriesList' (Maybe Text)
+cclSearchString :: Lens' ContentCategoriesList (Maybe Text)
 cclSearchString
   = lens _cclSearchString
       (\ s a -> s{_cclSearchString = a})
 
 -- | Select only content categories with these IDs.
-cclIds :: Lens' ContentCategoriesList' [Int64]
+cclIds :: Lens' ContentCategoriesList [Int64]
 cclIds
   = lens _cclIds (\ s a -> s{_cclIds = a}) . _Default .
       _Coerce
 
 -- | User profile ID associated with this request.
-cclProFileId :: Lens' ContentCategoriesList' Int64
+cclProFileId :: Lens' ContentCategoriesList Int64
 cclProFileId
   = lens _cclProFileId (\ s a -> s{_cclProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-cclSortOrder :: Lens' ContentCategoriesList' (Maybe ContentCategoriesListSortOrder)
+cclSortOrder :: Lens' ContentCategoriesList (Maybe ContentCategoriesListSortOrder)
 cclSortOrder
   = lens _cclSortOrder (\ s a -> s{_cclSortOrder = a})
 
 -- | Value of the nextPageToken from the previous result page.
-cclPageToken :: Lens' ContentCategoriesList' (Maybe Text)
+cclPageToken :: Lens' ContentCategoriesList (Maybe Text)
 cclPageToken
   = lens _cclPageToken (\ s a -> s{_cclPageToken = a})
 
 -- | Field by which to sort the list.
-cclSortField :: Lens' ContentCategoriesList' (Maybe ContentCategoriesListSortField)
+cclSortField :: Lens' ContentCategoriesList (Maybe ContentCategoriesListSortField)
 cclSortField
   = lens _cclSortField (\ s a -> s{_cclSortField = a})
 
 -- | Maximum number of results to return.
-cclMaxResults :: Lens' ContentCategoriesList' (Maybe Int32)
+cclMaxResults :: Lens' ContentCategoriesList (Maybe Int32)
 cclMaxResults
   = lens _cclMaxResults
       (\ s a -> s{_cclMaxResults = a})
 
-instance GoogleRequest ContentCategoriesList' where
-        type Rs ContentCategoriesList' =
+instance GoogleRequest ContentCategoriesList where
+        type Rs ContentCategoriesList =
              ContentCategoriesListResponse
-        requestClient ContentCategoriesList'{..}
+        requestClient ContentCategoriesList{..}
           = go _cclProFileId _cclSearchString
               (_cclIds ^. _Default)
               _cclSortOrder

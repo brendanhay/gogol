@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Update
       FloodlightActivityGroupsUpdateResource
 
     -- * Creating a Request
-    , floodlightActivityGroupsUpdate'
-    , FloodlightActivityGroupsUpdate'
+    , floodlightActivityGroupsUpdate
+    , FloodlightActivityGroupsUpdate
 
     -- * Request Lenses
     , faguProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightActivityGroups.update@ method which the
--- 'FloodlightActivityGroupsUpdate'' request conforms to.
+-- 'FloodlightActivityGroupsUpdate' request conforms to.
 type FloodlightActivityGroupsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,45 +52,45 @@ type FloodlightActivityGroupsUpdateResource =
 
 -- | Updates an existing floodlight activity group.
 --
--- /See:/ 'floodlightActivityGroupsUpdate'' smart constructor.
-data FloodlightActivityGroupsUpdate' = FloodlightActivityGroupsUpdate'
+-- /See:/ 'floodlightActivityGroupsUpdate' smart constructor.
+data FloodlightActivityGroupsUpdate = FloodlightActivityGroupsUpdate
     { _faguProFileId :: !Int64
     , _faguPayload   :: !FloodlightActivityGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FloodlightActivityGroupsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'FloodlightActivityGroupsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'faguProFileId'
 --
 -- * 'faguPayload'
-floodlightActivityGroupsUpdate'
+floodlightActivityGroupsUpdate
     :: Int64 -- ^ 'faguProFileId'
     -> FloodlightActivityGroup -- ^ 'faguPayload'
-    -> FloodlightActivityGroupsUpdate'
-floodlightActivityGroupsUpdate' pFaguProFileId_ pFaguPayload_ =
-    FloodlightActivityGroupsUpdate'
+    -> FloodlightActivityGroupsUpdate
+floodlightActivityGroupsUpdate pFaguProFileId_ pFaguPayload_ =
+    FloodlightActivityGroupsUpdate
     { _faguProFileId = pFaguProFileId_
     , _faguPayload = pFaguPayload_
     }
 
 -- | User profile ID associated with this request.
-faguProFileId :: Lens' FloodlightActivityGroupsUpdate' Int64
+faguProFileId :: Lens' FloodlightActivityGroupsUpdate Int64
 faguProFileId
   = lens _faguProFileId
       (\ s a -> s{_faguProFileId = a})
 
 -- | Multipart request metadata.
-faguPayload :: Lens' FloodlightActivityGroupsUpdate' FloodlightActivityGroup
+faguPayload :: Lens' FloodlightActivityGroupsUpdate FloodlightActivityGroup
 faguPayload
   = lens _faguPayload (\ s a -> s{_faguPayload = a})
 
-instance GoogleRequest
-         FloodlightActivityGroupsUpdate' where
-        type Rs FloodlightActivityGroupsUpdate' =
+instance GoogleRequest FloodlightActivityGroupsUpdate
+         where
+        type Rs FloodlightActivityGroupsUpdate =
              FloodlightActivityGroup
-        requestClient FloodlightActivityGroupsUpdate'{..}
+        requestClient FloodlightActivityGroupsUpdate{..}
           = go _faguProFileId (Just AltJSON) _faguPayload
               dFAReportingService
           where go

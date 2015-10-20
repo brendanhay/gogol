@@ -32,8 +32,8 @@ module Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
       SSLCertsCreateEphemeralResource
 
     -- * Creating a Request
-    , sslCertsCreateEphemeral'
-    , SSLCertsCreateEphemeral'
+    , sslCertsCreateEphemeral
+    , SSLCertsCreateEphemeral
 
     -- * Request Lenses
     , scceProject
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.sslCerts.createEphemeral@ method which the
--- 'SSLCertsCreateEphemeral'' request conforms to.
+-- 'SSLCertsCreateEphemeral' request conforms to.
 type SSLCertsCreateEphemeralResource =
      "projects" :>
        Capture "project" Text :>
@@ -61,14 +61,14 @@ type SSLCertsCreateEphemeralResource =
 -- may use the certificate to authenticate as themselves when connecting to
 -- the database.
 --
--- /See:/ 'sslCertsCreateEphemeral'' smart constructor.
-data SSLCertsCreateEphemeral' = SSLCertsCreateEphemeral'
+-- /See:/ 'sslCertsCreateEphemeral' smart constructor.
+data SSLCertsCreateEphemeral = SSLCertsCreateEphemeral
     { _scceProject  :: !Text
     , _sccePayload  :: !SSLCertsCreateEphemeralRequest
     , _scceInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SSLCertsCreateEphemeral'' with the minimum fields required to make a request.
+-- | Creates a value of 'SSLCertsCreateEphemeral' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,36 +77,36 @@ data SSLCertsCreateEphemeral' = SSLCertsCreateEphemeral'
 -- * 'sccePayload'
 --
 -- * 'scceInstance'
-sslCertsCreateEphemeral'
+sslCertsCreateEphemeral
     :: Text -- ^ 'scceProject'
     -> SSLCertsCreateEphemeralRequest -- ^ 'sccePayload'
     -> Text -- ^ 'scceInstance'
-    -> SSLCertsCreateEphemeral'
-sslCertsCreateEphemeral' pScceProject_ pSccePayload_ pScceInstance_ =
-    SSLCertsCreateEphemeral'
+    -> SSLCertsCreateEphemeral
+sslCertsCreateEphemeral pScceProject_ pSccePayload_ pScceInstance_ =
+    SSLCertsCreateEphemeral
     { _scceProject = pScceProject_
     , _sccePayload = pSccePayload_
     , _scceInstance = pScceInstance_
     }
 
 -- | Project ID of the Cloud SQL project.
-scceProject :: Lens' SSLCertsCreateEphemeral' Text
+scceProject :: Lens' SSLCertsCreateEphemeral Text
 scceProject
   = lens _scceProject (\ s a -> s{_scceProject = a})
 
 -- | Multipart request metadata.
-sccePayload :: Lens' SSLCertsCreateEphemeral' SSLCertsCreateEphemeralRequest
+sccePayload :: Lens' SSLCertsCreateEphemeral SSLCertsCreateEphemeralRequest
 sccePayload
   = lens _sccePayload (\ s a -> s{_sccePayload = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-scceInstance :: Lens' SSLCertsCreateEphemeral' Text
+scceInstance :: Lens' SSLCertsCreateEphemeral Text
 scceInstance
   = lens _scceInstance (\ s a -> s{_scceInstance = a})
 
-instance GoogleRequest SSLCertsCreateEphemeral' where
-        type Rs SSLCertsCreateEphemeral' = SSLCert
-        requestClient SSLCertsCreateEphemeral'{..}
+instance GoogleRequest SSLCertsCreateEphemeral where
+        type Rs SSLCertsCreateEphemeral = SSLCert
+        requestClient SSLCertsCreateEphemeral{..}
           = go _scceProject _scceInstance (Just AltJSON)
               _sccePayload
               sQLAdminService

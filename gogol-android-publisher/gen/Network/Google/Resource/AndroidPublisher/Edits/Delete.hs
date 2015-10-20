@@ -31,8 +31,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.Delete
       EditsDeleteResource
 
     -- * Creating a Request
-    , editsDelete'
-    , EditsDelete'
+    , editsDelete
+    , EditsDelete
 
     -- * Request Lenses
     , edPackageName
@@ -43,7 +43,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.delete@ method which the
--- 'EditsDelete'' request conforms to.
+-- 'EditsDelete' request conforms to.
 type EditsDeleteResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -54,43 +54,43 @@ type EditsDeleteResource =
 -- delete any of your previous edits so this method need only be called if
 -- you want to preemptively abandon an edit.
 --
--- /See:/ 'editsDelete'' smart constructor.
-data EditsDelete' = EditsDelete'
+-- /See:/ 'editsDelete' smart constructor.
+data EditsDelete = EditsDelete
     { _edPackageName :: !Text
     , _edEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'edPackageName'
 --
 -- * 'edEditId'
-editsDelete'
+editsDelete
     :: Text -- ^ 'edPackageName'
     -> Text -- ^ 'edEditId'
-    -> EditsDelete'
-editsDelete' pEdPackageName_ pEdEditId_ =
-    EditsDelete'
+    -> EditsDelete
+editsDelete pEdPackageName_ pEdEditId_ =
+    EditsDelete
     { _edPackageName = pEdPackageName_
     , _edEditId = pEdEditId_
     }
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-edPackageName :: Lens' EditsDelete' Text
+edPackageName :: Lens' EditsDelete Text
 edPackageName
   = lens _edPackageName
       (\ s a -> s{_edPackageName = a})
 
 -- | Unique identifier for this edit.
-edEditId :: Lens' EditsDelete' Text
+edEditId :: Lens' EditsDelete Text
 edEditId = lens _edEditId (\ s a -> s{_edEditId = a})
 
-instance GoogleRequest EditsDelete' where
-        type Rs EditsDelete' = ()
-        requestClient EditsDelete'{..}
+instance GoogleRequest EditsDelete where
+        type Rs EditsDelete = ()
+        requestClient EditsDelete{..}
           = go _edPackageName _edEditId (Just AltJSON)
               androidPublisherService
           where go

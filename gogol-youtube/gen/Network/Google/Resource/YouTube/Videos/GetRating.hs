@@ -30,8 +30,8 @@ module Network.Google.Resource.YouTube.Videos.GetRating
       VideosGetRatingResource
 
     -- * Creating a Request
-    , videosGetRating'
-    , VideosGetRating'
+    , videosGetRating
+    , VideosGetRating
 
     -- * Request Lenses
     , vgrOnBehalfOfContentOwner
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.videos.getRating@ method which the
--- 'VideosGetRating'' request conforms to.
+-- 'VideosGetRating' request conforms to.
 type VideosGetRatingResource =
      "videos" :>
        "getRating" :>
@@ -54,24 +54,24 @@ type VideosGetRatingResource =
 -- | Retrieves the ratings that the authorized user gave to a list of
 -- specified videos.
 --
--- /See:/ 'videosGetRating'' smart constructor.
-data VideosGetRating' = VideosGetRating'
+-- /See:/ 'videosGetRating' smart constructor.
+data VideosGetRating = VideosGetRating
     { _vgrOnBehalfOfContentOwner :: !(Maybe Text)
     , _vgrId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VideosGetRating'' with the minimum fields required to make a request.
+-- | Creates a value of 'VideosGetRating' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'vgrOnBehalfOfContentOwner'
 --
 -- * 'vgrId'
-videosGetRating'
+videosGetRating
     :: Text -- ^ 'vgrId'
-    -> VideosGetRating'
-videosGetRating' pVgrId_ =
-    VideosGetRating'
+    -> VideosGetRating
+videosGetRating pVgrId_ =
+    VideosGetRating
     { _vgrOnBehalfOfContentOwner = Nothing
     , _vgrId = pVgrId_
     }
@@ -86,7 +86,7 @@ videosGetRating' pVgrId_ =
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-vgrOnBehalfOfContentOwner :: Lens' VideosGetRating' (Maybe Text)
+vgrOnBehalfOfContentOwner :: Lens' VideosGetRating (Maybe Text)
 vgrOnBehalfOfContentOwner
   = lens _vgrOnBehalfOfContentOwner
       (\ s a -> s{_vgrOnBehalfOfContentOwner = a})
@@ -94,12 +94,12 @@ vgrOnBehalfOfContentOwner
 -- | The id parameter specifies a comma-separated list of the YouTube video
 -- ID(s) for the resource(s) for which you are retrieving rating data. In a
 -- video resource, the id property specifies the video\'s ID.
-vgrId :: Lens' VideosGetRating' Text
+vgrId :: Lens' VideosGetRating Text
 vgrId = lens _vgrId (\ s a -> s{_vgrId = a})
 
-instance GoogleRequest VideosGetRating' where
-        type Rs VideosGetRating' = VideoGetRatingResponse
-        requestClient VideosGetRating'{..}
+instance GoogleRequest VideosGetRating where
+        type Rs VideosGetRating = VideoGetRatingResponse
+        requestClient VideosGetRating{..}
           = go (Just _vgrId) _vgrOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeService

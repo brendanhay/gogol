@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.List
       CreativeGroupsListResource
 
     -- * Creating a Request
-    , creativeGroupsList'
-    , CreativeGroupsList'
+    , creativeGroupsList
+    , CreativeGroupsList
 
     -- * Request Lenses
     , cglSearchString
@@ -48,7 +48,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creativeGroups.list@ method which the
--- 'CreativeGroupsList'' request conforms to.
+-- 'CreativeGroupsList' request conforms to.
 type CreativeGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -66,8 +66,8 @@ type CreativeGroupsListResource =
 
 -- | Retrieves a list of creative groups, possibly filtered.
 --
--- /See:/ 'creativeGroupsList'' smart constructor.
-data CreativeGroupsList' = CreativeGroupsList'
+-- /See:/ 'creativeGroupsList' smart constructor.
+data CreativeGroupsList = CreativeGroupsList
     { _cglSearchString  :: !(Maybe Text)
     , _cglIds           :: !(Maybe [Int64])
     , _cglProFileId     :: !Int64
@@ -79,7 +79,7 @@ data CreativeGroupsList' = CreativeGroupsList'
     , _cglMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativeGroupsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CreativeGroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -100,11 +100,11 @@ data CreativeGroupsList' = CreativeGroupsList'
 -- * 'cglAdvertiserIds'
 --
 -- * 'cglMaxResults'
-creativeGroupsList'
+creativeGroupsList
     :: Int64 -- ^ 'cglProFileId'
-    -> CreativeGroupsList'
-creativeGroupsList' pCglProFileId_ =
-    CreativeGroupsList'
+    -> CreativeGroupsList
+creativeGroupsList pCglProFileId_ =
+    CreativeGroupsList
     { _cglSearchString = Nothing
     , _cglIds = Nothing
     , _cglProFileId = pCglProFileId_
@@ -124,45 +124,45 @@ creativeGroupsList' pCglProFileId_ =
 -- example, a search string of \"creativegroup\" will match creative groups
 -- with the name \"my creativegroup\", \"creativegroup 2015\", or simply
 -- \"creativegroup\".
-cglSearchString :: Lens' CreativeGroupsList' (Maybe Text)
+cglSearchString :: Lens' CreativeGroupsList (Maybe Text)
 cglSearchString
   = lens _cglSearchString
       (\ s a -> s{_cglSearchString = a})
 
 -- | Select only creative groups with these IDs.
-cglIds :: Lens' CreativeGroupsList' [Int64]
+cglIds :: Lens' CreativeGroupsList [Int64]
 cglIds
   = lens _cglIds (\ s a -> s{_cglIds = a}) . _Default .
       _Coerce
 
 -- | User profile ID associated with this request.
-cglProFileId :: Lens' CreativeGroupsList' Int64
+cglProFileId :: Lens' CreativeGroupsList Int64
 cglProFileId
   = lens _cglProFileId (\ s a -> s{_cglProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-cglSortOrder :: Lens' CreativeGroupsList' (Maybe CreativeGroupsListSortOrder)
+cglSortOrder :: Lens' CreativeGroupsList (Maybe CreativeGroupsListSortOrder)
 cglSortOrder
   = lens _cglSortOrder (\ s a -> s{_cglSortOrder = a})
 
 -- | Select only creative groups that belong to this subgroup.
-cglGroupNumber :: Lens' CreativeGroupsList' (Maybe Int32)
+cglGroupNumber :: Lens' CreativeGroupsList (Maybe Int32)
 cglGroupNumber
   = lens _cglGroupNumber
       (\ s a -> s{_cglGroupNumber = a})
 
 -- | Value of the nextPageToken from the previous result page.
-cglPageToken :: Lens' CreativeGroupsList' (Maybe Text)
+cglPageToken :: Lens' CreativeGroupsList (Maybe Text)
 cglPageToken
   = lens _cglPageToken (\ s a -> s{_cglPageToken = a})
 
 -- | Field by which to sort the list.
-cglSortField :: Lens' CreativeGroupsList' (Maybe CreativeGroupsListSortField)
+cglSortField :: Lens' CreativeGroupsList (Maybe CreativeGroupsListSortField)
 cglSortField
   = lens _cglSortField (\ s a -> s{_cglSortField = a})
 
 -- | Select only creative groups that belong to these advertisers.
-cglAdvertiserIds :: Lens' CreativeGroupsList' [Int64]
+cglAdvertiserIds :: Lens' CreativeGroupsList [Int64]
 cglAdvertiserIds
   = lens _cglAdvertiserIds
       (\ s a -> s{_cglAdvertiserIds = a})
@@ -170,15 +170,15 @@ cglAdvertiserIds
       . _Coerce
 
 -- | Maximum number of results to return.
-cglMaxResults :: Lens' CreativeGroupsList' (Maybe Int32)
+cglMaxResults :: Lens' CreativeGroupsList (Maybe Int32)
 cglMaxResults
   = lens _cglMaxResults
       (\ s a -> s{_cglMaxResults = a})
 
-instance GoogleRequest CreativeGroupsList' where
-        type Rs CreativeGroupsList' =
+instance GoogleRequest CreativeGroupsList where
+        type Rs CreativeGroupsList =
              CreativeGroupsListResponse
-        requestClient CreativeGroupsList'{..}
+        requestClient CreativeGroupsList{..}
           = go _cglProFileId _cglSearchString
               (_cglIds ^. _Default)
               _cglSortOrder

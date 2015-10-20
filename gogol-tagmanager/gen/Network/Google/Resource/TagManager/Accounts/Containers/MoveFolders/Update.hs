@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.MoveFolders.Update
       AccountsContainersMoveFoldersUpdateResource
 
     -- * Creating a Request
-    , accountsContainersMoveFoldersUpdate'
-    , AccountsContainersMoveFoldersUpdate'
+    , accountsContainersMoveFoldersUpdate
+    , AccountsContainersMoveFoldersUpdate
 
     -- * Request Lenses
     , acmfuContainerId
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.move_folders.update@ method which the
--- 'AccountsContainersMoveFoldersUpdate'' request conforms to.
+-- 'AccountsContainersMoveFoldersUpdate' request conforms to.
 type AccountsContainersMoveFoldersUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -60,8 +60,8 @@ type AccountsContainersMoveFoldersUpdateResource =
 
 -- | Moves entities to a GTM Folder.
 --
--- /See:/ 'accountsContainersMoveFoldersUpdate'' smart constructor.
-data AccountsContainersMoveFoldersUpdate' = AccountsContainersMoveFoldersUpdate'
+-- /See:/ 'accountsContainersMoveFoldersUpdate' smart constructor.
+data AccountsContainersMoveFoldersUpdate = AccountsContainersMoveFoldersUpdate
     { _acmfuContainerId :: !Text
     , _acmfuTriggerId   :: !(Maybe [Text])
     , _acmfuVariableId  :: !(Maybe [Text])
@@ -70,7 +70,7 @@ data AccountsContainersMoveFoldersUpdate' = AccountsContainersMoveFoldersUpdate'
     , _acmfuTagId       :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersMoveFoldersUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersMoveFoldersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -85,13 +85,13 @@ data AccountsContainersMoveFoldersUpdate' = AccountsContainersMoveFoldersUpdate'
 -- * 'acmfuAccountId'
 --
 -- * 'acmfuTagId'
-accountsContainersMoveFoldersUpdate'
+accountsContainersMoveFoldersUpdate
     :: Text -- ^ 'acmfuContainerId'
     -> Text -- ^ 'acmfuFolderId'
     -> Text -- ^ 'acmfuAccountId'
-    -> AccountsContainersMoveFoldersUpdate'
-accountsContainersMoveFoldersUpdate' pAcmfuContainerId_ pAcmfuFolderId_ pAcmfuAccountId_ =
-    AccountsContainersMoveFoldersUpdate'
+    -> AccountsContainersMoveFoldersUpdate
+accountsContainersMoveFoldersUpdate pAcmfuContainerId_ pAcmfuFolderId_ pAcmfuAccountId_ =
+    AccountsContainersMoveFoldersUpdate
     { _acmfuContainerId = pAcmfuContainerId_
     , _acmfuTriggerId = Nothing
     , _acmfuVariableId = Nothing
@@ -101,13 +101,13 @@ accountsContainersMoveFoldersUpdate' pAcmfuContainerId_ pAcmfuFolderId_ pAcmfuAc
     }
 
 -- | The GTM Container ID.
-acmfuContainerId :: Lens' AccountsContainersMoveFoldersUpdate' Text
+acmfuContainerId :: Lens' AccountsContainersMoveFoldersUpdate Text
 acmfuContainerId
   = lens _acmfuContainerId
       (\ s a -> s{_acmfuContainerId = a})
 
 -- | The triggers to be moved to the folder.
-acmfuTriggerId :: Lens' AccountsContainersMoveFoldersUpdate' [Text]
+acmfuTriggerId :: Lens' AccountsContainersMoveFoldersUpdate [Text]
 acmfuTriggerId
   = lens _acmfuTriggerId
       (\ s a -> s{_acmfuTriggerId = a})
@@ -115,7 +115,7 @@ acmfuTriggerId
       . _Coerce
 
 -- | The variables to be moved to the folder.
-acmfuVariableId :: Lens' AccountsContainersMoveFoldersUpdate' [Text]
+acmfuVariableId :: Lens' AccountsContainersMoveFoldersUpdate [Text]
 acmfuVariableId
   = lens _acmfuVariableId
       (\ s a -> s{_acmfuVariableId = a})
@@ -123,29 +123,28 @@ acmfuVariableId
       . _Coerce
 
 -- | The GTM Folder ID.
-acmfuFolderId :: Lens' AccountsContainersMoveFoldersUpdate' Text
+acmfuFolderId :: Lens' AccountsContainersMoveFoldersUpdate Text
 acmfuFolderId
   = lens _acmfuFolderId
       (\ s a -> s{_acmfuFolderId = a})
 
 -- | The GTM Account ID.
-acmfuAccountId :: Lens' AccountsContainersMoveFoldersUpdate' Text
+acmfuAccountId :: Lens' AccountsContainersMoveFoldersUpdate Text
 acmfuAccountId
   = lens _acmfuAccountId
       (\ s a -> s{_acmfuAccountId = a})
 
 -- | The tags to be moved to the folder.
-acmfuTagId :: Lens' AccountsContainersMoveFoldersUpdate' [Text]
+acmfuTagId :: Lens' AccountsContainersMoveFoldersUpdate [Text]
 acmfuTagId
   = lens _acmfuTagId (\ s a -> s{_acmfuTagId = a}) .
       _Default
       . _Coerce
 
 instance GoogleRequest
-         AccountsContainersMoveFoldersUpdate' where
-        type Rs AccountsContainersMoveFoldersUpdate' = ()
-        requestClient
-          AccountsContainersMoveFoldersUpdate'{..}
+         AccountsContainersMoveFoldersUpdate where
+        type Rs AccountsContainersMoveFoldersUpdate = ()
+        requestClient AccountsContainersMoveFoldersUpdate{..}
           = go _acmfuAccountId _acmfuContainerId _acmfuFolderId
               (_acmfuTriggerId ^. _Default)
               (_acmfuVariableId ^. _Default)

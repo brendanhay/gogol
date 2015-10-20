@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.Messages.List
       UsersMessagesListResource
 
     -- * Creating a Request
-    , usersMessagesList'
-    , UsersMessagesList'
+    , usersMessagesList
+    , UsersMessagesList
 
     -- * Request Lenses
     , umlQ
@@ -45,7 +45,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.messages.list@ method which the
--- 'UsersMessagesList'' request conforms to.
+-- 'UsersMessagesList' request conforms to.
 type UsersMessagesListResource =
      Capture "userId" Text :>
        "messages" :>
@@ -59,8 +59,8 @@ type UsersMessagesListResource =
 
 -- | Lists the messages in the user\'s mailbox.
 --
--- /See:/ 'usersMessagesList'' smart constructor.
-data UsersMessagesList' = UsersMessagesList'
+-- /See:/ 'usersMessagesList' smart constructor.
+data UsersMessagesList = UsersMessagesList
     { _umlQ                :: !(Maybe Text)
     , _umlUserId           :: !Text
     , _umlIncludeSpamTrash :: !Bool
@@ -69,7 +69,7 @@ data UsersMessagesList' = UsersMessagesList'
     , _umlMaxResults       :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersMessagesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersMessagesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -84,11 +84,11 @@ data UsersMessagesList' = UsersMessagesList'
 -- * 'umlPageToken'
 --
 -- * 'umlMaxResults'
-usersMessagesList'
+usersMessagesList
     :: Text
-    -> UsersMessagesList'
-usersMessagesList' pUmlUserId_ =
-    UsersMessagesList'
+    -> UsersMessagesList
+usersMessagesList pUmlUserId_ =
+    UsersMessagesList
     { _umlQ = Nothing
     , _umlUserId = pUmlUserId_
     , _umlIncludeSpamTrash = False
@@ -100,43 +100,43 @@ usersMessagesList' pUmlUserId_ =
 -- | Only return messages matching the specified query. Supports the same
 -- query format as the Gmail search box. For example,
 -- \"from:someuser\'example.com rfc822msgid: is:unread\".
-umlQ :: Lens' UsersMessagesList' (Maybe Text)
+umlQ :: Lens' UsersMessagesList (Maybe Text)
 umlQ = lens _umlQ (\ s a -> s{_umlQ = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-umlUserId :: Lens' UsersMessagesList' Text
+umlUserId :: Lens' UsersMessagesList Text
 umlUserId
   = lens _umlUserId (\ s a -> s{_umlUserId = a})
 
 -- | Include messages from SPAM and TRASH in the results.
-umlIncludeSpamTrash :: Lens' UsersMessagesList' Bool
+umlIncludeSpamTrash :: Lens' UsersMessagesList Bool
 umlIncludeSpamTrash
   = lens _umlIncludeSpamTrash
       (\ s a -> s{_umlIncludeSpamTrash = a})
 
 -- | Only return messages with labels that match all of the specified label
 -- IDs.
-umlLabelIds :: Lens' UsersMessagesList' [Text]
+umlLabelIds :: Lens' UsersMessagesList [Text]
 umlLabelIds
   = lens _umlLabelIds (\ s a -> s{_umlLabelIds = a}) .
       _Default
       . _Coerce
 
 -- | Page token to retrieve a specific page of results in the list.
-umlPageToken :: Lens' UsersMessagesList' (Maybe Text)
+umlPageToken :: Lens' UsersMessagesList (Maybe Text)
 umlPageToken
   = lens _umlPageToken (\ s a -> s{_umlPageToken = a})
 
 -- | Maximum number of messages to return.
-umlMaxResults :: Lens' UsersMessagesList' Word32
+umlMaxResults :: Lens' UsersMessagesList Word32
 umlMaxResults
   = lens _umlMaxResults
       (\ s a -> s{_umlMaxResults = a})
 
-instance GoogleRequest UsersMessagesList' where
-        type Rs UsersMessagesList' = ListMessagesResponse
-        requestClient UsersMessagesList'{..}
+instance GoogleRequest UsersMessagesList where
+        type Rs UsersMessagesList = ListMessagesResponse
+        requestClient UsersMessagesList{..}
           = go _umlUserId _umlQ (Just _umlIncludeSpamTrash)
               (_umlLabelIds ^. _Default)
               _umlPageToken

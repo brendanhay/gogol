@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.GlobalAddresses.Delete
       GlobalAddressesDeleteResource
 
     -- * Creating a Request
-    , globalAddressesDelete'
-    , GlobalAddressesDelete'
+    , globalAddressesDelete
+    , GlobalAddressesDelete
 
     -- * Request Lenses
     , gadProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.globalAddresses.delete@ method which the
--- 'GlobalAddressesDelete'' request conforms to.
+-- 'GlobalAddressesDelete' request conforms to.
 type GlobalAddressesDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,42 +51,42 @@ type GlobalAddressesDeleteResource =
 
 -- | Deletes the specified address resource.
 --
--- /See:/ 'globalAddressesDelete'' smart constructor.
-data GlobalAddressesDelete' = GlobalAddressesDelete'
+-- /See:/ 'globalAddressesDelete' smart constructor.
+data GlobalAddressesDelete = GlobalAddressesDelete
     { _gadProject :: !Text
     , _gadAddress :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GlobalAddressesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'GlobalAddressesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gadProject'
 --
 -- * 'gadAddress'
-globalAddressesDelete'
+globalAddressesDelete
     :: Text -- ^ 'gadProject'
     -> Text -- ^ 'gadAddress'
-    -> GlobalAddressesDelete'
-globalAddressesDelete' pGadProject_ pGadAddress_ =
-    GlobalAddressesDelete'
+    -> GlobalAddressesDelete
+globalAddressesDelete pGadProject_ pGadAddress_ =
+    GlobalAddressesDelete
     { _gadProject = pGadProject_
     , _gadAddress = pGadAddress_
     }
 
 -- | Project ID for this request.
-gadProject :: Lens' GlobalAddressesDelete' Text
+gadProject :: Lens' GlobalAddressesDelete Text
 gadProject
   = lens _gadProject (\ s a -> s{_gadProject = a})
 
 -- | Name of the address resource to delete.
-gadAddress :: Lens' GlobalAddressesDelete' Text
+gadAddress :: Lens' GlobalAddressesDelete Text
 gadAddress
   = lens _gadAddress (\ s a -> s{_gadAddress = a})
 
-instance GoogleRequest GlobalAddressesDelete' where
-        type Rs GlobalAddressesDelete' = Operation
-        requestClient GlobalAddressesDelete'{..}
+instance GoogleRequest GlobalAddressesDelete where
+        type Rs GlobalAddressesDelete = Operation
+        requestClient GlobalAddressesDelete{..}
           = go _gadProject _gadAddress (Just AltJSON)
               computeService
           where go

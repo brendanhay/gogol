@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudUserAccounts.Groups.Delete
       GroupsDeleteResource
 
     -- * Creating a Request
-    , groupsDelete'
-    , GroupsDelete'
+    , groupsDelete
+    , GroupsDelete
 
     -- * Request Lenses
     , gdProject
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
 -- | A resource alias for @clouduseraccounts.groups.delete@ method which the
--- 'GroupsDelete'' request conforms to.
+-- 'GroupsDelete' request conforms to.
 type GroupsDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,42 +51,42 @@ type GroupsDeleteResource =
 
 -- | Deletes the specified Group resource.
 --
--- /See:/ 'groupsDelete'' smart constructor.
-data GroupsDelete' = GroupsDelete'
+-- /See:/ 'groupsDelete' smart constructor.
+data GroupsDelete = GroupsDelete
     { _gdProject   :: !Text
     , _gdGroupName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GroupsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'GroupsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gdProject'
 --
 -- * 'gdGroupName'
-groupsDelete'
+groupsDelete
     :: Text -- ^ 'gdProject'
     -> Text -- ^ 'gdGroupName'
-    -> GroupsDelete'
-groupsDelete' pGdProject_ pGdGroupName_ =
-    GroupsDelete'
+    -> GroupsDelete
+groupsDelete pGdProject_ pGdGroupName_ =
+    GroupsDelete
     { _gdProject = pGdProject_
     , _gdGroupName = pGdGroupName_
     }
 
 -- | Project ID for this request.
-gdProject :: Lens' GroupsDelete' Text
+gdProject :: Lens' GroupsDelete Text
 gdProject
   = lens _gdProject (\ s a -> s{_gdProject = a})
 
 -- | Name of the Group resource to delete.
-gdGroupName :: Lens' GroupsDelete' Text
+gdGroupName :: Lens' GroupsDelete Text
 gdGroupName
   = lens _gdGroupName (\ s a -> s{_gdGroupName = a})
 
-instance GoogleRequest GroupsDelete' where
-        type Rs GroupsDelete' = Operation
-        requestClient GroupsDelete'{..}
+instance GoogleRequest GroupsDelete where
+        type Rs GroupsDelete = Operation
+        requestClient GroupsDelete{..}
           = go _gdProject _gdGroupName (Just AltJSON)
               userAccountsService
           where go

@@ -30,8 +30,8 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Patch
       ContentCategoriesPatchResource
 
     -- * Creating a Request
-    , contentCategoriesPatch'
-    , ContentCategoriesPatch'
+    , contentCategoriesPatch
+    , ContentCategoriesPatch
 
     -- * Request Lenses
     , ccpProFileId
@@ -43,7 +43,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.contentCategories.patch@ method which the
--- 'ContentCategoriesPatch'' request conforms to.
+-- 'ContentCategoriesPatch' request conforms to.
 type ContentCategoriesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -56,14 +56,14 @@ type ContentCategoriesPatchResource =
 -- | Updates an existing content category. This method supports patch
 -- semantics.
 --
--- /See:/ 'contentCategoriesPatch'' smart constructor.
-data ContentCategoriesPatch' = ContentCategoriesPatch'
+-- /See:/ 'contentCategoriesPatch' smart constructor.
+data ContentCategoriesPatch = ContentCategoriesPatch
     { _ccpProFileId :: !Int64
     , _ccpPayload   :: !ContentCategory
     , _ccpId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ContentCategoriesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ContentCategoriesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,35 +72,35 @@ data ContentCategoriesPatch' = ContentCategoriesPatch'
 -- * 'ccpPayload'
 --
 -- * 'ccpId'
-contentCategoriesPatch'
+contentCategoriesPatch
     :: Int64 -- ^ 'ccpProFileId'
     -> ContentCategory -- ^ 'ccpPayload'
     -> Int64 -- ^ 'ccpId'
-    -> ContentCategoriesPatch'
-contentCategoriesPatch' pCcpProFileId_ pCcpPayload_ pCcpId_ =
-    ContentCategoriesPatch'
+    -> ContentCategoriesPatch
+contentCategoriesPatch pCcpProFileId_ pCcpPayload_ pCcpId_ =
+    ContentCategoriesPatch
     { _ccpProFileId = pCcpProFileId_
     , _ccpPayload = pCcpPayload_
     , _ccpId = pCcpId_
     }
 
 -- | User profile ID associated with this request.
-ccpProFileId :: Lens' ContentCategoriesPatch' Int64
+ccpProFileId :: Lens' ContentCategoriesPatch Int64
 ccpProFileId
   = lens _ccpProFileId (\ s a -> s{_ccpProFileId = a})
 
 -- | Multipart request metadata.
-ccpPayload :: Lens' ContentCategoriesPatch' ContentCategory
+ccpPayload :: Lens' ContentCategoriesPatch ContentCategory
 ccpPayload
   = lens _ccpPayload (\ s a -> s{_ccpPayload = a})
 
 -- | Content category ID.
-ccpId :: Lens' ContentCategoriesPatch' Int64
+ccpId :: Lens' ContentCategoriesPatch Int64
 ccpId = lens _ccpId (\ s a -> s{_ccpId = a})
 
-instance GoogleRequest ContentCategoriesPatch' where
-        type Rs ContentCategoriesPatch' = ContentCategory
-        requestClient ContentCategoriesPatch'{..}
+instance GoogleRequest ContentCategoriesPatch where
+        type Rs ContentCategoriesPatch = ContentCategory
+        requestClient ContentCategoriesPatch{..}
           = go _ccpProFileId (Just _ccpId) (Just AltJSON)
               _ccpPayload
               dFAReportingService

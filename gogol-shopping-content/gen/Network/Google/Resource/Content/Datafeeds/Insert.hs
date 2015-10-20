@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Datafeeds.Insert
       DatafeedsInsertResource
 
     -- * Creating a Request
-    , datafeedsInsert'
-    , DatafeedsInsert'
+    , datafeedsInsert
+    , DatafeedsInsert
 
     -- * Request Lenses
     , diMerchantId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.datafeeds.insert@ method which the
--- 'DatafeedsInsert'' request conforms to.
+-- 'DatafeedsInsert' request conforms to.
 type DatafeedsInsertResource =
      Capture "merchantId" Word64 :>
        "datafeeds" :>
@@ -52,14 +52,14 @@ type DatafeedsInsertResource =
 
 -- | Registers a datafeed with your Merchant Center account.
 --
--- /See:/ 'datafeedsInsert'' smart constructor.
-data DatafeedsInsert' = DatafeedsInsert'
+-- /See:/ 'datafeedsInsert' smart constructor.
+data DatafeedsInsert = DatafeedsInsert
     { _diMerchantId :: !Word64
     , _diPayload    :: !Datafeed
     , _diDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatafeedsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatafeedsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,33 +68,33 @@ data DatafeedsInsert' = DatafeedsInsert'
 -- * 'diPayload'
 --
 -- * 'diDryRun'
-datafeedsInsert'
+datafeedsInsert
     :: Word64 -- ^ 'diMerchantId'
     -> Datafeed -- ^ 'diPayload'
-    -> DatafeedsInsert'
-datafeedsInsert' pDiMerchantId_ pDiPayload_ =
-    DatafeedsInsert'
+    -> DatafeedsInsert
+datafeedsInsert pDiMerchantId_ pDiPayload_ =
+    DatafeedsInsert
     { _diMerchantId = pDiMerchantId_
     , _diPayload = pDiPayload_
     , _diDryRun = Nothing
     }
 
-diMerchantId :: Lens' DatafeedsInsert' Word64
+diMerchantId :: Lens' DatafeedsInsert Word64
 diMerchantId
   = lens _diMerchantId (\ s a -> s{_diMerchantId = a})
 
 -- | Multipart request metadata.
-diPayload :: Lens' DatafeedsInsert' Datafeed
+diPayload :: Lens' DatafeedsInsert Datafeed
 diPayload
   = lens _diPayload (\ s a -> s{_diPayload = a})
 
 -- | Flag to run the request in dry-run mode.
-diDryRun :: Lens' DatafeedsInsert' (Maybe Bool)
+diDryRun :: Lens' DatafeedsInsert (Maybe Bool)
 diDryRun = lens _diDryRun (\ s a -> s{_diDryRun = a})
 
-instance GoogleRequest DatafeedsInsert' where
-        type Rs DatafeedsInsert' = Datafeed
-        requestClient DatafeedsInsert'{..}
+instance GoogleRequest DatafeedsInsert where
+        type Rs DatafeedsInsert = Datafeed
+        requestClient DatafeedsInsert{..}
           = go _diMerchantId _diDryRun (Just AltJSON)
               _diPayload
               shoppingContentService

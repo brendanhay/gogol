@@ -32,8 +32,8 @@ module Network.Google.Resource.GAN.Links.Get
       LinksGetResource
 
     -- * Creating a Request
-    , linksGet'
-    , LinksGet'
+    , linksGet
+    , LinksGet
 
     -- * Request Lenses
     , lgRoleId
@@ -45,7 +45,7 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gan.links.get@ method which the
--- 'LinksGet'' request conforms to.
+-- 'LinksGet' request conforms to.
 type LinksGetResource =
      Capture "role" LinksGetRole :>
        Capture "roleId" Text :>
@@ -58,14 +58,14 @@ type LinksGetResource =
 -- own links. Publishers can look up visible links or links belonging to
 -- advertisers they are in a relationship with.
 --
--- /See:/ 'linksGet'' smart constructor.
-data LinksGet' = LinksGet'
+-- /See:/ 'linksGet' smart constructor.
+data LinksGet = LinksGet
     { _lgRoleId :: !Text
     , _lgRole   :: !LinksGetRole
     , _lgLinkId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LinksGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'LinksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,34 +74,34 @@ data LinksGet' = LinksGet'
 -- * 'lgRole'
 --
 -- * 'lgLinkId'
-linksGet'
+linksGet
     :: Text -- ^ 'lgRoleId'
     -> LinksGetRole -- ^ 'lgRole'
     -> Int64 -- ^ 'lgLinkId'
-    -> LinksGet'
-linksGet' pLgRoleId_ pLgRole_ pLgLinkId_ =
-    LinksGet'
+    -> LinksGet
+linksGet pLgRoleId_ pLgRole_ pLgLinkId_ =
+    LinksGet
     { _lgRoleId = pLgRoleId_
     , _lgRole = pLgRole_
     , _lgLinkId = pLgLinkId_
     }
 
 -- | The ID of the requesting advertiser or publisher.
-lgRoleId :: Lens' LinksGet' Text
+lgRoleId :: Lens' LinksGet Text
 lgRoleId = lens _lgRoleId (\ s a -> s{_lgRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-lgRole :: Lens' LinksGet' LinksGetRole
+lgRole :: Lens' LinksGet LinksGetRole
 lgRole = lens _lgRole (\ s a -> s{_lgRole = a})
 
 -- | The ID of the link to look up.
-lgLinkId :: Lens' LinksGet' Int64
+lgLinkId :: Lens' LinksGet Int64
 lgLinkId = lens _lgLinkId (\ s a -> s{_lgLinkId = a})
 
-instance GoogleRequest LinksGet' where
-        type Rs LinksGet' = Link
-        requestClient LinksGet'{..}
+instance GoogleRequest LinksGet where
+        type Rs LinksGet = Link
+        requestClient LinksGet{..}
           = go _lgRole _lgRoleId _lgLinkId (Just AltJSON)
               affiliatesService
           where go

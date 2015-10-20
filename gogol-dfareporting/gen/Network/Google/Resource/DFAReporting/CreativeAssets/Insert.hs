@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.CreativeAssets.Insert
       CreativeAssetsInsertResource
 
     -- * Creating a Request
-    , creativeAssetsInsert'
-    , CreativeAssetsInsert'
+    , creativeAssetsInsert
+    , CreativeAssetsInsert
 
     -- * Request Lenses
     , caiAdvertiserId
@@ -43,7 +43,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creativeAssets.insert@ method which the
--- 'CreativeAssetsInsert'' request conforms to.
+-- 'CreativeAssetsInsert' request conforms to.
 type CreativeAssetsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -56,15 +56,15 @@ type CreativeAssetsInsertResource =
 
 -- | Inserts a new creative asset.
 --
--- /See:/ 'creativeAssetsInsert'' smart constructor.
-data CreativeAssetsInsert' = CreativeAssetsInsert'
+-- /See:/ 'creativeAssetsInsert' smart constructor.
+data CreativeAssetsInsert = CreativeAssetsInsert
     { _caiAdvertiserId :: !Int64
     , _caiProFileId    :: !Int64
     , _caiPayload      :: !CreativeAssetMetadata
     , _caiMedia        :: !Body
     }
 
--- | Creates a value of 'CreativeAssetsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CreativeAssetsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,14 +75,14 @@ data CreativeAssetsInsert' = CreativeAssetsInsert'
 -- * 'caiPayload'
 --
 -- * 'caiMedia'
-creativeAssetsInsert'
+creativeAssetsInsert
     :: Int64 -- ^ 'caiAdvertiserId'
     -> Int64 -- ^ 'caiProFileId'
     -> CreativeAssetMetadata -- ^ 'caiPayload'
     -> Body -- ^ 'caiMedia'
-    -> CreativeAssetsInsert'
-creativeAssetsInsert' pCaiAdvertiserId_ pCaiProFileId_ pCaiPayload_ pCaiMedia_ =
-    CreativeAssetsInsert'
+    -> CreativeAssetsInsert
+creativeAssetsInsert pCaiAdvertiserId_ pCaiProFileId_ pCaiPayload_ pCaiMedia_ =
+    CreativeAssetsInsert
     { _caiAdvertiserId = pCaiAdvertiserId_
     , _caiProFileId = pCaiProFileId_
     , _caiPayload = pCaiPayload_
@@ -90,27 +90,27 @@ creativeAssetsInsert' pCaiAdvertiserId_ pCaiProFileId_ pCaiPayload_ pCaiMedia_ =
     }
 
 -- | Advertiser ID of this creative. This is a required field.
-caiAdvertiserId :: Lens' CreativeAssetsInsert' Int64
+caiAdvertiserId :: Lens' CreativeAssetsInsert Int64
 caiAdvertiserId
   = lens _caiAdvertiserId
       (\ s a -> s{_caiAdvertiserId = a})
 
 -- | User profile ID associated with this request.
-caiProFileId :: Lens' CreativeAssetsInsert' Int64
+caiProFileId :: Lens' CreativeAssetsInsert Int64
 caiProFileId
   = lens _caiProFileId (\ s a -> s{_caiProFileId = a})
 
 -- | Multipart request metadata.
-caiPayload :: Lens' CreativeAssetsInsert' CreativeAssetMetadata
+caiPayload :: Lens' CreativeAssetsInsert CreativeAssetMetadata
 caiPayload
   = lens _caiPayload (\ s a -> s{_caiPayload = a})
 
-caiMedia :: Lens' CreativeAssetsInsert' Body
+caiMedia :: Lens' CreativeAssetsInsert Body
 caiMedia = lens _caiMedia (\ s a -> s{_caiMedia = a})
 
-instance GoogleRequest CreativeAssetsInsert' where
-        type Rs CreativeAssetsInsert' = CreativeAssetMetadata
-        requestClient CreativeAssetsInsert'{..}
+instance GoogleRequest CreativeAssetsInsert where
+        type Rs CreativeAssetsInsert = CreativeAssetMetadata
+        requestClient CreativeAssetsInsert{..}
           = go _caiProFileId _caiAdvertiserId (Just AltJSON)
               _caiPayload
               _caiMedia

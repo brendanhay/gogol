@@ -30,21 +30,21 @@ module Network.Google.Resource.Content.Accountshipping.Patch
       AccountshippingPatchResource
 
     -- * Creating a Request
-    , accountshippingPatch'
-    , AccountshippingPatch'
+    , accountshippingPatch
+    , AccountshippingPatch
 
     -- * Request Lenses
-    , apMerchantId
-    , apPayload
-    , apAccountId
-    , apDryRun
+    , ap1MerchantId
+    , ap1Payload
+    , ap1AccountId
+    , ap1DryRun
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accountshipping.patch@ method which the
--- 'AccountshippingPatch'' request conforms to.
+-- 'AccountshippingPatch' request conforms to.
 type AccountshippingPatchResource =
      Capture "merchantId" Word64 :>
        "accountshipping" :>
@@ -57,64 +57,66 @@ type AccountshippingPatchResource =
 -- | Updates the shipping settings of the account. This method supports patch
 -- semantics.
 --
--- /See:/ 'accountshippingPatch'' smart constructor.
-data AccountshippingPatch' = AccountshippingPatch'
-    { _apMerchantId :: !Word64
-    , _apPayload    :: !AccountShipping
-    , _apAccountId  :: !Word64
-    , _apDryRun     :: !(Maybe Bool)
+-- /See:/ 'accountshippingPatch' smart constructor.
+data AccountshippingPatch = AccountshippingPatch
+    { _ap1MerchantId :: !Word64
+    , _ap1Payload    :: !AccountShipping
+    , _ap1AccountId  :: !Word64
+    , _ap1DryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountshippingPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountshippingPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'apMerchantId'
+-- * 'ap1MerchantId'
 --
--- * 'apPayload'
+-- * 'ap1Payload'
 --
--- * 'apAccountId'
+-- * 'ap1AccountId'
 --
--- * 'apDryRun'
-accountshippingPatch'
-    :: Word64 -- ^ 'apMerchantId'
-    -> AccountShipping -- ^ 'apPayload'
-    -> Word64 -- ^ 'apAccountId'
-    -> AccountshippingPatch'
-accountshippingPatch' pApMerchantId_ pApPayload_ pApAccountId_ =
-    AccountshippingPatch'
-    { _apMerchantId = pApMerchantId_
-    , _apPayload = pApPayload_
-    , _apAccountId = pApAccountId_
-    , _apDryRun = Nothing
+-- * 'ap1DryRun'
+accountshippingPatch
+    :: Word64 -- ^ 'ap1MerchantId'
+    -> AccountShipping -- ^ 'ap1Payload'
+    -> Word64 -- ^ 'ap1AccountId'
+    -> AccountshippingPatch
+accountshippingPatch pAp1MerchantId_ pAp1Payload_ pAp1AccountId_ =
+    AccountshippingPatch
+    { _ap1MerchantId = pAp1MerchantId_
+    , _ap1Payload = pAp1Payload_
+    , _ap1AccountId = pAp1AccountId_
+    , _ap1DryRun = Nothing
     }
 
 -- | The ID of the managing account.
-apMerchantId :: Lens' AccountshippingPatch' Word64
-apMerchantId
-  = lens _apMerchantId (\ s a -> s{_apMerchantId = a})
+ap1MerchantId :: Lens' AccountshippingPatch Word64
+ap1MerchantId
+  = lens _ap1MerchantId
+      (\ s a -> s{_ap1MerchantId = a})
 
 -- | Multipart request metadata.
-apPayload :: Lens' AccountshippingPatch' AccountShipping
-apPayload
-  = lens _apPayload (\ s a -> s{_apPayload = a})
+ap1Payload :: Lens' AccountshippingPatch AccountShipping
+ap1Payload
+  = lens _ap1Payload (\ s a -> s{_ap1Payload = a})
 
 -- | The ID of the account for which to get\/update account shipping
 -- settings.
-apAccountId :: Lens' AccountshippingPatch' Word64
-apAccountId
-  = lens _apAccountId (\ s a -> s{_apAccountId = a})
+ap1AccountId :: Lens' AccountshippingPatch Word64
+ap1AccountId
+  = lens _ap1AccountId (\ s a -> s{_ap1AccountId = a})
 
 -- | Flag to run the request in dry-run mode.
-apDryRun :: Lens' AccountshippingPatch' (Maybe Bool)
-apDryRun = lens _apDryRun (\ s a -> s{_apDryRun = a})
+ap1DryRun :: Lens' AccountshippingPatch (Maybe Bool)
+ap1DryRun
+  = lens _ap1DryRun (\ s a -> s{_ap1DryRun = a})
 
-instance GoogleRequest AccountshippingPatch' where
-        type Rs AccountshippingPatch' = AccountShipping
-        requestClient AccountshippingPatch'{..}
-          = go _apMerchantId _apAccountId _apDryRun
+instance GoogleRequest AccountshippingPatch where
+        type Rs AccountshippingPatch = AccountShipping
+        requestClient AccountshippingPatch{..}
+          = go _ap1MerchantId _ap1AccountId _ap1DryRun
               (Just AltJSON)
-              _apPayload
+              _ap1Payload
               shoppingContentService
           where go
                   = buildClient

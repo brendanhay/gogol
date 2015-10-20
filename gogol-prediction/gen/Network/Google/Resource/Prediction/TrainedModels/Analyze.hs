@@ -29,8 +29,8 @@ module Network.Google.Resource.Prediction.TrainedModels.Analyze
       TrainedModelsAnalyzeResource
 
     -- * Creating a Request
-    , trainedModelsAnalyze'
-    , TrainedModelsAnalyze'
+    , trainedModelsAnalyze
+    , TrainedModelsAnalyze
 
     -- * Request Lenses
     , tmaProject
@@ -41,7 +41,7 @@ import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @prediction.trainedmodels.analyze@ method which the
--- 'TrainedModelsAnalyze'' request conforms to.
+-- 'TrainedModelsAnalyze' request conforms to.
 type TrainedModelsAnalyzeResource =
      Capture "project" Text :>
        "trainedmodels" :>
@@ -51,41 +51,41 @@ type TrainedModelsAnalyzeResource =
 
 -- | Get analysis of the model and the data the model was trained on.
 --
--- /See:/ 'trainedModelsAnalyze'' smart constructor.
-data TrainedModelsAnalyze' = TrainedModelsAnalyze'
+-- /See:/ 'trainedModelsAnalyze' smart constructor.
+data TrainedModelsAnalyze = TrainedModelsAnalyze
     { _tmaProject :: !Text
     , _tmaId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TrainedModelsAnalyze'' with the minimum fields required to make a request.
+-- | Creates a value of 'TrainedModelsAnalyze' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tmaProject'
 --
 -- * 'tmaId'
-trainedModelsAnalyze'
+trainedModelsAnalyze
     :: Text -- ^ 'tmaProject'
     -> Text -- ^ 'tmaId'
-    -> TrainedModelsAnalyze'
-trainedModelsAnalyze' pTmaProject_ pTmaId_ =
-    TrainedModelsAnalyze'
+    -> TrainedModelsAnalyze
+trainedModelsAnalyze pTmaProject_ pTmaId_ =
+    TrainedModelsAnalyze
     { _tmaProject = pTmaProject_
     , _tmaId = pTmaId_
     }
 
 -- | The project associated with the model.
-tmaProject :: Lens' TrainedModelsAnalyze' Text
+tmaProject :: Lens' TrainedModelsAnalyze Text
 tmaProject
   = lens _tmaProject (\ s a -> s{_tmaProject = a})
 
 -- | The unique name for the predictive model.
-tmaId :: Lens' TrainedModelsAnalyze' Text
+tmaId :: Lens' TrainedModelsAnalyze Text
 tmaId = lens _tmaId (\ s a -> s{_tmaId = a})
 
-instance GoogleRequest TrainedModelsAnalyze' where
-        type Rs TrainedModelsAnalyze' = Analyze
-        requestClient TrainedModelsAnalyze'{..}
+instance GoogleRequest TrainedModelsAnalyze where
+        type Rs TrainedModelsAnalyze = Analyze
+        requestClient TrainedModelsAnalyze{..}
           = go _tmaProject _tmaId (Just AltJSON)
               predictionService
           where go

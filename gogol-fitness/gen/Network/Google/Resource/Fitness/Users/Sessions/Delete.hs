@@ -29,8 +29,8 @@ module Network.Google.Resource.Fitness.Users.Sessions.Delete
       UsersSessionsDeleteResource
 
     -- * Creating a Request
-    , usersSessionsDelete'
-    , UsersSessionsDelete'
+    , usersSessionsDelete
+    , UsersSessionsDelete
 
     -- * Request Lenses
     , usdUserId
@@ -42,7 +42,7 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fitness.users.sessions.delete@ method which the
--- 'UsersSessionsDelete'' request conforms to.
+-- 'UsersSessionsDelete' request conforms to.
 type UsersSessionsDeleteResource =
      Capture "userId" Text :>
        "sessions" :>
@@ -52,14 +52,14 @@ type UsersSessionsDeleteResource =
 
 -- | Deletes a session specified by the given session ID.
 --
--- /See:/ 'usersSessionsDelete'' smart constructor.
-data UsersSessionsDelete' = UsersSessionsDelete'
+-- /See:/ 'usersSessionsDelete' smart constructor.
+data UsersSessionsDelete = UsersSessionsDelete
     { _usdUserId            :: !Text
     , _usdCurrentTimeMillis :: !(Maybe Int64)
     , _usdSessionId         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersSessionsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersSessionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,12 +68,12 @@ data UsersSessionsDelete' = UsersSessionsDelete'
 -- * 'usdCurrentTimeMillis'
 --
 -- * 'usdSessionId'
-usersSessionsDelete'
+usersSessionsDelete
     :: Text -- ^ 'usdUserId'
     -> Text -- ^ 'usdSessionId'
-    -> UsersSessionsDelete'
-usersSessionsDelete' pUsdUserId_ pUsdSessionId_ =
-    UsersSessionsDelete'
+    -> UsersSessionsDelete
+usersSessionsDelete pUsdUserId_ pUsdSessionId_ =
+    UsersSessionsDelete
     { _usdUserId = pUsdUserId_
     , _usdCurrentTimeMillis = Nothing
     , _usdSessionId = pUsdSessionId_
@@ -81,24 +81,24 @@ usersSessionsDelete' pUsdUserId_ pUsdSessionId_ =
 
 -- | Delete a session for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
-usdUserId :: Lens' UsersSessionsDelete' Text
+usdUserId :: Lens' UsersSessionsDelete Text
 usdUserId
   = lens _usdUserId (\ s a -> s{_usdUserId = a})
 
 -- | The client\'s current time in milliseconds since epoch.
-usdCurrentTimeMillis :: Lens' UsersSessionsDelete' (Maybe Int64)
+usdCurrentTimeMillis :: Lens' UsersSessionsDelete (Maybe Int64)
 usdCurrentTimeMillis
   = lens _usdCurrentTimeMillis
       (\ s a -> s{_usdCurrentTimeMillis = a})
 
 -- | The ID of the session to be deleted.
-usdSessionId :: Lens' UsersSessionsDelete' Text
+usdSessionId :: Lens' UsersSessionsDelete Text
 usdSessionId
   = lens _usdSessionId (\ s a -> s{_usdSessionId = a})
 
-instance GoogleRequest UsersSessionsDelete' where
-        type Rs UsersSessionsDelete' = ()
-        requestClient UsersSessionsDelete'{..}
+instance GoogleRequest UsersSessionsDelete where
+        type Rs UsersSessionsDelete = ()
+        requestClient UsersSessionsDelete{..}
           = go _usdUserId _usdSessionId _usdCurrentTimeMillis
               (Just AltJSON)
               fitnessService

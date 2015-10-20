@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Replies.Patch
       RepliesPatchResource
 
     -- * Creating a Request
-    , repliesPatch'
-    , RepliesPatch'
+    , repliesPatch
+    , RepliesPatch
 
     -- * Request Lenses
     , rpPayload
@@ -43,7 +43,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.replies.patch@ method which the
--- 'RepliesPatch'' request conforms to.
+-- 'RepliesPatch' request conforms to.
 type RepliesPatchResource =
      "files" :>
        Capture "fileId" Text :>
@@ -57,15 +57,15 @@ type RepliesPatchResource =
 
 -- | Updates an existing reply. This method supports patch semantics.
 --
--- /See:/ 'repliesPatch'' smart constructor.
-data RepliesPatch' = RepliesPatch'
+-- /See:/ 'repliesPatch' smart constructor.
+data RepliesPatch = RepliesPatch
     { _rpPayload   :: !CommentReply
     , _rpReplyId   :: !Text
     , _rpFileId    :: !Text
     , _rpCommentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RepliesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'RepliesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,14 +76,14 @@ data RepliesPatch' = RepliesPatch'
 -- * 'rpFileId'
 --
 -- * 'rpCommentId'
-repliesPatch'
+repliesPatch
     :: CommentReply -- ^ 'rpPayload'
     -> Text -- ^ 'rpReplyId'
     -> Text -- ^ 'rpFileId'
     -> Text -- ^ 'rpCommentId'
-    -> RepliesPatch'
-repliesPatch' pRpPayload_ pRpReplyId_ pRpFileId_ pRpCommentId_ =
-    RepliesPatch'
+    -> RepliesPatch
+repliesPatch pRpPayload_ pRpReplyId_ pRpFileId_ pRpCommentId_ =
+    RepliesPatch
     { _rpPayload = pRpPayload_
     , _rpReplyId = pRpReplyId_
     , _rpFileId = pRpFileId_
@@ -91,27 +91,27 @@ repliesPatch' pRpPayload_ pRpReplyId_ pRpFileId_ pRpCommentId_ =
     }
 
 -- | Multipart request metadata.
-rpPayload :: Lens' RepliesPatch' CommentReply
+rpPayload :: Lens' RepliesPatch CommentReply
 rpPayload
   = lens _rpPayload (\ s a -> s{_rpPayload = a})
 
 -- | The ID of the reply.
-rpReplyId :: Lens' RepliesPatch' Text
+rpReplyId :: Lens' RepliesPatch Text
 rpReplyId
   = lens _rpReplyId (\ s a -> s{_rpReplyId = a})
 
 -- | The ID of the file.
-rpFileId :: Lens' RepliesPatch' Text
+rpFileId :: Lens' RepliesPatch Text
 rpFileId = lens _rpFileId (\ s a -> s{_rpFileId = a})
 
 -- | The ID of the comment.
-rpCommentId :: Lens' RepliesPatch' Text
+rpCommentId :: Lens' RepliesPatch Text
 rpCommentId
   = lens _rpCommentId (\ s a -> s{_rpCommentId = a})
 
-instance GoogleRequest RepliesPatch' where
-        type Rs RepliesPatch' = CommentReply
-        requestClient RepliesPatch'{..}
+instance GoogleRequest RepliesPatch where
+        type Rs RepliesPatch = CommentReply
+        requestClient RepliesPatch{..}
           = go _rpFileId _rpCommentId _rpReplyId (Just AltJSON)
               _rpPayload
               driveService

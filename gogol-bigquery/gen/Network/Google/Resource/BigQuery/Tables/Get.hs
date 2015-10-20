@@ -31,8 +31,8 @@ module Network.Google.Resource.BigQuery.Tables.Get
       TablesGetResource
 
     -- * Creating a Request
-    , tablesGet'
-    , TablesGet'
+    , tablesGet
+    , TablesGet
 
     -- * Request Lenses
     , tgDatasetId
@@ -44,7 +44,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.tables.get@ method which the
--- 'TablesGet'' request conforms to.
+-- 'TablesGet' request conforms to.
 type TablesGetResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -58,14 +58,14 @@ type TablesGetResource =
 -- return the data in the table, it only returns the table resource, which
 -- describes the structure of this table.
 --
--- /See:/ 'tablesGet'' smart constructor.
-data TablesGet' = TablesGet'
+-- /See:/ 'tablesGet' smart constructor.
+data TablesGet = TablesGet
     { _tgDatasetId :: !Text
     , _tgProjectId :: !Text
     , _tgTableId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,36 +74,36 @@ data TablesGet' = TablesGet'
 -- * 'tgProjectId'
 --
 -- * 'tgTableId'
-tablesGet'
+tablesGet
     :: Text -- ^ 'tgDatasetId'
     -> Text -- ^ 'tgProjectId'
     -> Text -- ^ 'tgTableId'
-    -> TablesGet'
-tablesGet' pTgDatasetId_ pTgProjectId_ pTgTableId_ =
-    TablesGet'
+    -> TablesGet
+tablesGet pTgDatasetId_ pTgProjectId_ pTgTableId_ =
+    TablesGet
     { _tgDatasetId = pTgDatasetId_
     , _tgProjectId = pTgProjectId_
     , _tgTableId = pTgTableId_
     }
 
 -- | Dataset ID of the requested table
-tgDatasetId :: Lens' TablesGet' Text
+tgDatasetId :: Lens' TablesGet Text
 tgDatasetId
   = lens _tgDatasetId (\ s a -> s{_tgDatasetId = a})
 
 -- | Project ID of the requested table
-tgProjectId :: Lens' TablesGet' Text
+tgProjectId :: Lens' TablesGet Text
 tgProjectId
   = lens _tgProjectId (\ s a -> s{_tgProjectId = a})
 
 -- | Table ID of the requested table
-tgTableId :: Lens' TablesGet' Text
+tgTableId :: Lens' TablesGet Text
 tgTableId
   = lens _tgTableId (\ s a -> s{_tgTableId = a})
 
-instance GoogleRequest TablesGet' where
-        type Rs TablesGet' = Table
-        requestClient TablesGet'{..}
+instance GoogleRequest TablesGet where
+        type Rs TablesGet = Table
+        requestClient TablesGet{..}
           = go _tgProjectId _tgDatasetId _tgTableId
               (Just AltJSON)
               bigQueryService

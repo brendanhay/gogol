@@ -30,8 +30,8 @@ module Network.Google.Resource.AdSenseHost.AssociationSessions.Start
       AssociationSessionsStartResource
 
     -- * Creating a Request
-    , associationSessionsStart'
-    , AssociationSessionsStart'
+    , associationSessionsStart
+    , AssociationSessionsStart
 
     -- * Request Lenses
     , assWebsiteLocale
@@ -44,7 +44,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.associationsessions.start@ method which the
--- 'AssociationSessionsStart'' request conforms to.
+-- 'AssociationSessionsStart' request conforms to.
 type AssociationSessionsStartResource =
      "associationsessions" :>
        "start" :>
@@ -60,15 +60,15 @@ type AssociationSessionsStartResource =
 -- | Create an association session for initiating an association with an
 -- AdSense user.
 --
--- /See:/ 'associationSessionsStart'' smart constructor.
-data AssociationSessionsStart' = AssociationSessionsStart'
+-- /See:/ 'associationSessionsStart' smart constructor.
+data AssociationSessionsStart = AssociationSessionsStart
     { _assWebsiteLocale :: !(Maybe Text)
     , _assUserLocale    :: !(Maybe Text)
     , _assWebsiteURL    :: !Text
     , _assProductCode   :: ![AssociationSessionsStartProductCode]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AssociationSessionsStart'' with the minimum fields required to make a request.
+-- | Creates a value of 'AssociationSessionsStart' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,12 +79,12 @@ data AssociationSessionsStart' = AssociationSessionsStart'
 -- * 'assWebsiteURL'
 --
 -- * 'assProductCode'
-associationSessionsStart'
+associationSessionsStart
     :: Text -- ^ 'assWebsiteURL'
     -> [AssociationSessionsStartProductCode] -- ^ 'assProductCode'
-    -> AssociationSessionsStart'
-associationSessionsStart' pAssWebsiteURL_ pAssProductCode_ =
-    AssociationSessionsStart'
+    -> AssociationSessionsStart
+associationSessionsStart pAssWebsiteURL_ pAssProductCode_ =
+    AssociationSessionsStart
     { _assWebsiteLocale = Nothing
     , _assUserLocale = Nothing
     , _assWebsiteURL = pAssWebsiteURL_
@@ -92,35 +92,33 @@ associationSessionsStart' pAssWebsiteURL_ pAssProductCode_ =
     }
 
 -- | The locale of the user\'s hosted website.
-assWebsiteLocale :: Lens' AssociationSessionsStart' (Maybe Text)
+assWebsiteLocale :: Lens' AssociationSessionsStart (Maybe Text)
 assWebsiteLocale
   = lens _assWebsiteLocale
       (\ s a -> s{_assWebsiteLocale = a})
 
 -- | The preferred locale of the user.
-assUserLocale :: Lens' AssociationSessionsStart' (Maybe Text)
+assUserLocale :: Lens' AssociationSessionsStart (Maybe Text)
 assUserLocale
   = lens _assUserLocale
       (\ s a -> s{_assUserLocale = a})
 
 -- | The URL of the user\'s hosted website.
-assWebsiteURL :: Lens' AssociationSessionsStart' Text
+assWebsiteURL :: Lens' AssociationSessionsStart Text
 assWebsiteURL
   = lens _assWebsiteURL
       (\ s a -> s{_assWebsiteURL = a})
 
 -- | Products to associate with the user.
-assProductCode :: Lens' AssociationSessionsStart' [AssociationSessionsStartProductCode]
+assProductCode :: Lens' AssociationSessionsStart [AssociationSessionsStartProductCode]
 assProductCode
   = lens _assProductCode
       (\ s a -> s{_assProductCode = a})
       . _Coerce
 
-instance GoogleRequest AssociationSessionsStart'
-         where
-        type Rs AssociationSessionsStart' =
-             AssociationSession
-        requestClient AssociationSessionsStart'{..}
+instance GoogleRequest AssociationSessionsStart where
+        type Rs AssociationSessionsStart = AssociationSession
+        requestClient AssociationSessionsStart{..}
           = go _assProductCode (Just _assWebsiteURL)
               _assWebsiteLocale
               _assUserLocale

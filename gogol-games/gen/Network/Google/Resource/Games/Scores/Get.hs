@@ -33,8 +33,8 @@ module Network.Google.Resource.Games.Scores.Get
       ScoresGetResource
 
     -- * Creating a Request
-    , scoresGet'
-    , ScoresGet'
+    , scoresGet
+    , ScoresGet
 
     -- * Request Lenses
     , sgTimeSpan
@@ -50,7 +50,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.scores.get@ method which the
--- 'ScoresGet'' request conforms to.
+-- 'ScoresGet' request conforms to.
 type ScoresGetResource =
      "players" :>
        Capture "playerId" Text :>
@@ -72,8 +72,8 @@ type ScoresGetResource =
 -- You cannot ask for \'ALL\' leaderboards and \'ALL\' timeSpans in the
 -- same request; only one parameter may be set to \'ALL\'.
 --
--- /See:/ 'scoresGet'' smart constructor.
-data ScoresGet' = ScoresGet'
+-- /See:/ 'scoresGet' smart constructor.
+data ScoresGet = ScoresGet
     { _sgTimeSpan        :: !ScoresGetTimeSpan
     , _sgLeaderboardId   :: !Text
     , _sgIncludeRankType :: !(Maybe ScoresGetIncludeRankType)
@@ -83,7 +83,7 @@ data ScoresGet' = ScoresGet'
     , _sgMaxResults      :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ScoresGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ScoresGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -100,13 +100,13 @@ data ScoresGet' = ScoresGet'
 -- * 'sgPlayerId'
 --
 -- * 'sgMaxResults'
-scoresGet'
+scoresGet
     :: ScoresGetTimeSpan -- ^ 'sgTimeSpan'
     -> Text -- ^ 'sgLeaderboardId'
     -> Text -- ^ 'sgPlayerId'
-    -> ScoresGet'
-scoresGet' pSgTimeSpan_ pSgLeaderboardId_ pSgPlayerId_ =
-    ScoresGet'
+    -> ScoresGet
+scoresGet pSgTimeSpan_ pSgLeaderboardId_ pSgPlayerId_ =
+    ScoresGet
     { _sgTimeSpan = pSgTimeSpan_
     , _sgLeaderboardId = pSgLeaderboardId_
     , _sgIncludeRankType = Nothing
@@ -117,51 +117,51 @@ scoresGet' pSgTimeSpan_ pSgLeaderboardId_ pSgPlayerId_ =
     }
 
 -- | The time span for the scores and ranks you\'re requesting.
-sgTimeSpan :: Lens' ScoresGet' ScoresGetTimeSpan
+sgTimeSpan :: Lens' ScoresGet ScoresGetTimeSpan
 sgTimeSpan
   = lens _sgTimeSpan (\ s a -> s{_sgTimeSpan = a})
 
 -- | The ID of the leaderboard. Can be set to \'ALL\' to retrieve data for
 -- all leaderboards for this application.
-sgLeaderboardId :: Lens' ScoresGet' Text
+sgLeaderboardId :: Lens' ScoresGet Text
 sgLeaderboardId
   = lens _sgLeaderboardId
       (\ s a -> s{_sgLeaderboardId = a})
 
 -- | The types of ranks to return. If the parameter is omitted, no ranks will
 -- be returned.
-sgIncludeRankType :: Lens' ScoresGet' (Maybe ScoresGetIncludeRankType)
+sgIncludeRankType :: Lens' ScoresGet (Maybe ScoresGetIncludeRankType)
 sgIncludeRankType
   = lens _sgIncludeRankType
       (\ s a -> s{_sgIncludeRankType = a})
 
 -- | The preferred language to use for strings returned by this method.
-sgLanguage :: Lens' ScoresGet' (Maybe Text)
+sgLanguage :: Lens' ScoresGet (Maybe Text)
 sgLanguage
   = lens _sgLanguage (\ s a -> s{_sgLanguage = a})
 
 -- | The token returned by the previous request.
-sgPageToken :: Lens' ScoresGet' (Maybe Text)
+sgPageToken :: Lens' ScoresGet (Maybe Text)
 sgPageToken
   = lens _sgPageToken (\ s a -> s{_sgPageToken = a})
 
 -- | A player ID. A value of me may be used in place of the authenticated
 -- player\'s ID.
-sgPlayerId :: Lens' ScoresGet' Text
+sgPlayerId :: Lens' ScoresGet Text
 sgPlayerId
   = lens _sgPlayerId (\ s a -> s{_sgPlayerId = a})
 
 -- | The maximum number of leaderboard scores to return in the response. For
 -- any response, the actual number of leaderboard scores returned may be
 -- less than the specified maxResults.
-sgMaxResults :: Lens' ScoresGet' (Maybe Int32)
+sgMaxResults :: Lens' ScoresGet (Maybe Int32)
 sgMaxResults
   = lens _sgMaxResults (\ s a -> s{_sgMaxResults = a})
 
-instance GoogleRequest ScoresGet' where
-        type Rs ScoresGet' =
+instance GoogleRequest ScoresGet where
+        type Rs ScoresGet =
              PlayerLeaderboardScoreListResponse
-        requestClient ScoresGet'{..}
+        requestClient ScoresGet{..}
           = go _sgPlayerId _sgLeaderboardId _sgTimeSpan
               _sgIncludeRankType
               _sgLanguage

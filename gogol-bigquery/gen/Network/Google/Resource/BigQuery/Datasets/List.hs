@@ -30,8 +30,8 @@ module Network.Google.Resource.BigQuery.Datasets.List
       DatasetsListResource
 
     -- * Creating a Request
-    , datasetsList'
-    , DatasetsList'
+    , datasetsList
+    , DatasetsList
 
     -- * Request Lenses
     , dlAll
@@ -44,7 +44,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.datasets.list@ method which the
--- 'DatasetsList'' request conforms to.
+-- 'DatasetsList' request conforms to.
 type DatasetsListResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -57,15 +57,15 @@ type DatasetsListResource =
 -- | Lists all datasets in the specified project to which you have been
 -- granted the READER dataset role.
 --
--- /See:/ 'datasetsList'' smart constructor.
-data DatasetsList' = DatasetsList'
+-- /See:/ 'datasetsList' smart constructor.
+data DatasetsList = DatasetsList
     { _dlAll        :: !(Maybe Bool)
     , _dlPageToken  :: !(Maybe Text)
     , _dlProjectId  :: !Text
     , _dlMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,11 +76,11 @@ data DatasetsList' = DatasetsList'
 -- * 'dlProjectId'
 --
 -- * 'dlMaxResults'
-datasetsList'
+datasetsList
     :: Text -- ^ 'dlProjectId'
-    -> DatasetsList'
-datasetsList' pDlProjectId_ =
-    DatasetsList'
+    -> DatasetsList
+datasetsList pDlProjectId_ =
+    DatasetsList
     { _dlAll = Nothing
     , _dlPageToken = Nothing
     , _dlProjectId = pDlProjectId_
@@ -88,28 +88,28 @@ datasetsList' pDlProjectId_ =
     }
 
 -- | Whether to list all datasets, including hidden ones
-dlAll :: Lens' DatasetsList' (Maybe Bool)
+dlAll :: Lens' DatasetsList (Maybe Bool)
 dlAll = lens _dlAll (\ s a -> s{_dlAll = a})
 
 -- | Page token, returned by a previous call, to request the next page of
 -- results
-dlPageToken :: Lens' DatasetsList' (Maybe Text)
+dlPageToken :: Lens' DatasetsList (Maybe Text)
 dlPageToken
   = lens _dlPageToken (\ s a -> s{_dlPageToken = a})
 
 -- | Project ID of the datasets to be listed
-dlProjectId :: Lens' DatasetsList' Text
+dlProjectId :: Lens' DatasetsList Text
 dlProjectId
   = lens _dlProjectId (\ s a -> s{_dlProjectId = a})
 
 -- | The maximum number of results to return
-dlMaxResults :: Lens' DatasetsList' (Maybe Word32)
+dlMaxResults :: Lens' DatasetsList (Maybe Word32)
 dlMaxResults
   = lens _dlMaxResults (\ s a -> s{_dlMaxResults = a})
 
-instance GoogleRequest DatasetsList' where
-        type Rs DatasetsList' = DatasetList
-        requestClient DatasetsList'{..}
+instance GoogleRequest DatasetsList where
+        type Rs DatasetsList = DatasetList
+        requestClient DatasetsList{..}
           = go _dlProjectId _dlAll _dlPageToken _dlMaxResults
               (Just AltJSON)
               bigQueryService

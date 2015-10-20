@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.InventoryItems.Get
       InventoryItemsGetResource
 
     -- * Creating a Request
-    , inventoryItemsGet'
-    , InventoryItemsGet'
+    , inventoryItemsGet
+    , InventoryItemsGet
 
     -- * Request Lenses
     , iigProFileId
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.inventoryItems.get@ method which the
--- 'InventoryItemsGet'' request conforms to.
+-- 'InventoryItemsGet' request conforms to.
 type InventoryItemsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -54,14 +54,14 @@ type InventoryItemsGetResource =
 
 -- | Gets one inventory item by ID.
 --
--- /See:/ 'inventoryItemsGet'' smart constructor.
-data InventoryItemsGet' = InventoryItemsGet'
+-- /See:/ 'inventoryItemsGet' smart constructor.
+data InventoryItemsGet = InventoryItemsGet
     { _iigProFileId :: !Int64
     , _iigId        :: !Int64
     , _iigProjectId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InventoryItemsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'InventoryItemsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,35 +70,35 @@ data InventoryItemsGet' = InventoryItemsGet'
 -- * 'iigId'
 --
 -- * 'iigProjectId'
-inventoryItemsGet'
+inventoryItemsGet
     :: Int64 -- ^ 'iigProFileId'
     -> Int64 -- ^ 'iigId'
     -> Int64 -- ^ 'iigProjectId'
-    -> InventoryItemsGet'
-inventoryItemsGet' pIigProFileId_ pIigId_ pIigProjectId_ =
-    InventoryItemsGet'
+    -> InventoryItemsGet
+inventoryItemsGet pIigProFileId_ pIigId_ pIigProjectId_ =
+    InventoryItemsGet
     { _iigProFileId = pIigProFileId_
     , _iigId = pIigId_
     , _iigProjectId = pIigProjectId_
     }
 
 -- | User profile ID associated with this request.
-iigProFileId :: Lens' InventoryItemsGet' Int64
+iigProFileId :: Lens' InventoryItemsGet Int64
 iigProFileId
   = lens _iigProFileId (\ s a -> s{_iigProFileId = a})
 
 -- | Inventory item ID.
-iigId :: Lens' InventoryItemsGet' Int64
+iigId :: Lens' InventoryItemsGet Int64
 iigId = lens _iigId (\ s a -> s{_iigId = a})
 
 -- | Project ID for order documents.
-iigProjectId :: Lens' InventoryItemsGet' Int64
+iigProjectId :: Lens' InventoryItemsGet Int64
 iigProjectId
   = lens _iigProjectId (\ s a -> s{_iigProjectId = a})
 
-instance GoogleRequest InventoryItemsGet' where
-        type Rs InventoryItemsGet' = InventoryItem
-        requestClient InventoryItemsGet'{..}
+instance GoogleRequest InventoryItemsGet where
+        type Rs InventoryItemsGet = InventoryItem
+        requestClient InventoryItemsGet{..}
           = go _iigProFileId _iigProjectId _iigId
               (Just AltJSON)
               dFAReportingService

@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Get
       AccountsGetResource
 
     -- * Creating a Request
-    , accountsGet'
-    , AccountsGet'
+    , accountsGet
+    , AccountsGet
 
     -- * Request Lenses
     , agAccountId
@@ -40,7 +40,7 @@ import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangeseller.accounts.get@ method which the
--- 'AccountsGet'' request conforms to.
+-- 'AccountsGet' request conforms to.
 type AccountsGetResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -48,32 +48,32 @@ type AccountsGetResource =
 
 -- | Get information about the selected Ad Exchange account.
 --
--- /See:/ 'accountsGet'' smart constructor.
-newtype AccountsGet' = AccountsGet'
+-- /See:/ 'accountsGet' smart constructor.
+newtype AccountsGet = AccountsGet
     { _agAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'agAccountId'
-accountsGet'
+accountsGet
     :: Text -- ^ 'agAccountId'
-    -> AccountsGet'
-accountsGet' pAgAccountId_ =
-    AccountsGet'
+    -> AccountsGet
+accountsGet pAgAccountId_ =
+    AccountsGet
     { _agAccountId = pAgAccountId_
     }
 
 -- | Account to get information about. Tip: \'myaccount\' is a valid ID.
-agAccountId :: Lens' AccountsGet' Text
+agAccountId :: Lens' AccountsGet Text
 agAccountId
   = lens _agAccountId (\ s a -> s{_agAccountId = a})
 
-instance GoogleRequest AccountsGet' where
-        type Rs AccountsGet' = Account
-        requestClient AccountsGet'{..}
+instance GoogleRequest AccountsGet where
+        type Rs AccountsGet = Account
+        requestClient AccountsGet{..}
           = go _agAccountId (Just AltJSON)
               adExchangeSellerService
           where go

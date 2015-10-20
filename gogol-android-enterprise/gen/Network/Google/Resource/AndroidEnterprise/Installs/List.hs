@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidEnterprise.Installs.List
       InstallsListResource
 
     -- * Creating a Request
-    , installsList'
-    , InstallsList'
+    , installsList
+    , InstallsList
 
     -- * Request Lenses
     , ilEnterpriseId
@@ -42,7 +42,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.installs.list@ method which the
--- 'InstallsList'' request conforms to.
+-- 'InstallsList' request conforms to.
 type InstallsListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -56,14 +56,14 @@ type InstallsListResource =
 
 -- | Retrieves the details of all apps installed on the specified device.
 --
--- /See:/ 'installsList'' smart constructor.
-data InstallsList' = InstallsList'
+-- /See:/ 'installsList' smart constructor.
+data InstallsList = InstallsList
     { _ilEnterpriseId :: !Text
     , _ilUserId       :: !Text
     , _ilDeviceId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstallsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstallsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,36 +72,36 @@ data InstallsList' = InstallsList'
 -- * 'ilUserId'
 --
 -- * 'ilDeviceId'
-installsList'
+installsList
     :: Text -- ^ 'ilEnterpriseId'
     -> Text -- ^ 'ilUserId'
     -> Text -- ^ 'ilDeviceId'
-    -> InstallsList'
-installsList' pIlEnterpriseId_ pIlUserId_ pIlDeviceId_ =
-    InstallsList'
+    -> InstallsList
+installsList pIlEnterpriseId_ pIlUserId_ pIlDeviceId_ =
+    InstallsList
     { _ilEnterpriseId = pIlEnterpriseId_
     , _ilUserId = pIlUserId_
     , _ilDeviceId = pIlDeviceId_
     }
 
 -- | The ID of the enterprise.
-ilEnterpriseId :: Lens' InstallsList' Text
+ilEnterpriseId :: Lens' InstallsList Text
 ilEnterpriseId
   = lens _ilEnterpriseId
       (\ s a -> s{_ilEnterpriseId = a})
 
 -- | The ID of the user.
-ilUserId :: Lens' InstallsList' Text
+ilUserId :: Lens' InstallsList Text
 ilUserId = lens _ilUserId (\ s a -> s{_ilUserId = a})
 
 -- | The Android ID of the device.
-ilDeviceId :: Lens' InstallsList' Text
+ilDeviceId :: Lens' InstallsList Text
 ilDeviceId
   = lens _ilDeviceId (\ s a -> s{_ilDeviceId = a})
 
-instance GoogleRequest InstallsList' where
-        type Rs InstallsList' = InstallsListResponse
-        requestClient InstallsList'{..}
+instance GoogleRequest InstallsList where
+        type Rs InstallsList = InstallsListResponse
+        requestClient InstallsList{..}
           = go _ilEnterpriseId _ilUserId _ilDeviceId
               (Just AltJSON)
               androidEnterpriseService

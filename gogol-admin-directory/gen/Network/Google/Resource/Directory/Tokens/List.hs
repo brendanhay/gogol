@@ -30,8 +30,8 @@ module Network.Google.Resource.Directory.Tokens.List
       TokensListResource
 
     -- * Creating a Request
-    , tokensList'
-    , TokensList'
+    , tokensList
+    , TokensList
 
     -- * Request Lenses
     , tlUserKey
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.tokens.list@ method which the
--- 'TokensList'' request conforms to.
+-- 'TokensList' request conforms to.
 type TokensListResource =
      "users" :>
        Capture "userKey" Text :>
@@ -51,33 +51,33 @@ type TokensListResource =
 -- | Returns the set of tokens specified user has issued to 3rd party
 -- applications.
 --
--- /See:/ 'tokensList'' smart constructor.
-newtype TokensList' = TokensList'
+-- /See:/ 'tokensList' smart constructor.
+newtype TokensList = TokensList
     { _tlUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TokensList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TokensList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tlUserKey'
-tokensList'
+tokensList
     :: Text -- ^ 'tlUserKey'
-    -> TokensList'
-tokensList' pTlUserKey_ =
-    TokensList'
+    -> TokensList
+tokensList pTlUserKey_ =
+    TokensList
     { _tlUserKey = pTlUserKey_
     }
 
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.
-tlUserKey :: Lens' TokensList' Text
+tlUserKey :: Lens' TokensList Text
 tlUserKey
   = lens _tlUserKey (\ s a -> s{_tlUserKey = a})
 
-instance GoogleRequest TokensList' where
-        type Rs TokensList' = Tokens
-        requestClient TokensList'{..}
+instance GoogleRequest TokensList where
+        type Rs TokensList = Tokens
+        requestClient TokensList{..}
           = go _tlUserKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy TokensListResource)

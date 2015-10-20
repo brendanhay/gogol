@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.Captions.Insert
       CaptionsInsertResource
 
     -- * Creating a Request
-    , captionsInsert'
-    , CaptionsInsert'
+    , captionsInsert
+    , CaptionsInsert
 
     -- * Request Lenses
     , ciOnBehalfOf
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.captions.insert@ method which the
--- 'CaptionsInsert'' request conforms to.
+-- 'CaptionsInsert' request conforms to.
 type CaptionsInsertResource =
      "captions" :>
        QueryParam "part" Text :>
@@ -58,8 +58,8 @@ type CaptionsInsertResource =
 
 -- | Uploads a caption track.
 --
--- /See:/ 'captionsInsert'' smart constructor.
-data CaptionsInsert' = CaptionsInsert'
+-- /See:/ 'captionsInsert' smart constructor.
+data CaptionsInsert = CaptionsInsert
     { _ciOnBehalfOf             :: !(Maybe Text)
     , _ciPart                   :: !Text
     , _ciPayload                :: !Caption
@@ -68,7 +68,7 @@ data CaptionsInsert' = CaptionsInsert'
     , _ciSync                   :: !(Maybe Bool)
     }
 
--- | Creates a value of 'CaptionsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CaptionsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -83,13 +83,13 @@ data CaptionsInsert' = CaptionsInsert'
 -- * 'ciOnBehalfOfContentOwner'
 --
 -- * 'ciSync'
-captionsInsert'
+captionsInsert
     :: Text -- ^ 'ciPart'
     -> Caption -- ^ 'ciPayload'
     -> Body -- ^ 'ciMedia'
-    -> CaptionsInsert'
-captionsInsert' pCiPart_ pCiPayload_ pCiMedia_ =
-    CaptionsInsert'
+    -> CaptionsInsert
+captionsInsert pCiPart_ pCiPayload_ pCiMedia_ =
+    CaptionsInsert
     { _ciOnBehalfOf = Nothing
     , _ciPart = pCiPart_
     , _ciPayload = pCiPayload_
@@ -100,21 +100,21 @@ captionsInsert' pCiPart_ pCiPayload_ pCiMedia_ =
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
 -- of
-ciOnBehalfOf :: Lens' CaptionsInsert' (Maybe Text)
+ciOnBehalfOf :: Lens' CaptionsInsert (Maybe Text)
 ciOnBehalfOf
   = lens _ciOnBehalfOf (\ s a -> s{_ciOnBehalfOf = a})
 
 -- | The part parameter specifies the caption resource parts that the API
 -- response will include. Set the parameter value to snippet.
-ciPart :: Lens' CaptionsInsert' Text
+ciPart :: Lens' CaptionsInsert Text
 ciPart = lens _ciPart (\ s a -> s{_ciPart = a})
 
 -- | Multipart request metadata.
-ciPayload :: Lens' CaptionsInsert' Caption
+ciPayload :: Lens' CaptionsInsert Caption
 ciPayload
   = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
-ciMedia :: Lens' CaptionsInsert' Body
+ciMedia :: Lens' CaptionsInsert Body
 ciMedia = lens _ciMedia (\ s a -> s{_ciMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
@@ -127,7 +127,7 @@ ciMedia = lens _ciMedia (\ s a -> s{_ciMedia = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The actual CMS account that the user authenticates with must be
 -- linked to the specified YouTube content owner.
-ciOnBehalfOfContentOwner :: Lens' CaptionsInsert' (Maybe Text)
+ciOnBehalfOfContentOwner :: Lens' CaptionsInsert (Maybe Text)
 ciOnBehalfOfContentOwner
   = lens _ciOnBehalfOfContentOwner
       (\ s a -> s{_ciOnBehalfOfContentOwner = a})
@@ -139,12 +139,12 @@ ciOnBehalfOfContentOwner
 -- You should set the sync parameter to true if you are uploading a
 -- transcript, which has no time codes, or if you suspect the time codes in
 -- your file are incorrect and want YouTube to try to fix them.
-ciSync :: Lens' CaptionsInsert' (Maybe Bool)
+ciSync :: Lens' CaptionsInsert (Maybe Bool)
 ciSync = lens _ciSync (\ s a -> s{_ciSync = a})
 
-instance GoogleRequest CaptionsInsert' where
-        type Rs CaptionsInsert' = Caption
-        requestClient CaptionsInsert'{..}
+instance GoogleRequest CaptionsInsert where
+        type Rs CaptionsInsert = Caption
+        requestClient CaptionsInsert{..}
           = go (Just _ciPart) _ciOnBehalfOf
               _ciOnBehalfOfContentOwner
               _ciSync

@@ -29,8 +29,8 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create
       AppsModulesVersionsCreateResource
 
     -- * Creating a Request
-    , appsModulesVersionsCreate'
-    , AppsModulesVersionsCreate'
+    , appsModulesVersionsCreate
+    , AppsModulesVersionsCreate
 
     -- * Request Lenses
     , amvcXgafv
@@ -49,7 +49,7 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.modules.versions.create@ method which the
--- 'AppsModulesVersionsCreate'' request conforms to.
+-- 'AppsModulesVersionsCreate' request conforms to.
 type AppsModulesVersionsCreateResource =
      "v1beta4" :>
        "apps" :>
@@ -70,8 +70,8 @@ type AppsModulesVersionsCreateResource =
 
 -- | Deploys new code and resource files to a version.
 --
--- /See:/ 'appsModulesVersionsCreate'' smart constructor.
-data AppsModulesVersionsCreate' = AppsModulesVersionsCreate'
+-- /See:/ 'appsModulesVersionsCreate' smart constructor.
+data AppsModulesVersionsCreate = AppsModulesVersionsCreate
     { _amvcXgafv          :: !(Maybe Text)
     , _amvcUploadProtocol :: !(Maybe Text)
     , _amvcPp             :: !Bool
@@ -84,7 +84,7 @@ data AppsModulesVersionsCreate' = AppsModulesVersionsCreate'
     , _amvcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AppsModulesVersionsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AppsModulesVersionsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -107,13 +107,13 @@ data AppsModulesVersionsCreate' = AppsModulesVersionsCreate'
 -- * 'amvcAppsId'
 --
 -- * 'amvcCallback'
-appsModulesVersionsCreate'
+appsModulesVersionsCreate
     :: Version -- ^ 'amvcPayload'
     -> Text -- ^ 'amvcModulesId'
     -> Text -- ^ 'amvcAppsId'
-    -> AppsModulesVersionsCreate'
-appsModulesVersionsCreate' pAmvcPayload_ pAmvcModulesId_ pAmvcAppsId_ =
-    AppsModulesVersionsCreate'
+    -> AppsModulesVersionsCreate
+appsModulesVersionsCreate pAmvcPayload_ pAmvcModulesId_ pAmvcAppsId_ =
+    AppsModulesVersionsCreate
     { _amvcXgafv = Nothing
     , _amvcUploadProtocol = Nothing
     , _amvcPp = True
@@ -127,64 +127,64 @@ appsModulesVersionsCreate' pAmvcPayload_ pAmvcModulesId_ pAmvcAppsId_ =
     }
 
 -- | V1 error format.
-amvcXgafv :: Lens' AppsModulesVersionsCreate' (Maybe Text)
+amvcXgafv :: Lens' AppsModulesVersionsCreate (Maybe Text)
 amvcXgafv
   = lens _amvcXgafv (\ s a -> s{_amvcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-amvcUploadProtocol :: Lens' AppsModulesVersionsCreate' (Maybe Text)
+amvcUploadProtocol :: Lens' AppsModulesVersionsCreate (Maybe Text)
 amvcUploadProtocol
   = lens _amvcUploadProtocol
       (\ s a -> s{_amvcUploadProtocol = a})
 
 -- | Pretty-print response.
-amvcPp :: Lens' AppsModulesVersionsCreate' Bool
+amvcPp :: Lens' AppsModulesVersionsCreate Bool
 amvcPp = lens _amvcPp (\ s a -> s{_amvcPp = a})
 
 -- | OAuth access token.
-amvcAccessToken :: Lens' AppsModulesVersionsCreate' (Maybe Text)
+amvcAccessToken :: Lens' AppsModulesVersionsCreate (Maybe Text)
 amvcAccessToken
   = lens _amvcAccessToken
       (\ s a -> s{_amvcAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-amvcUploadType :: Lens' AppsModulesVersionsCreate' (Maybe Text)
+amvcUploadType :: Lens' AppsModulesVersionsCreate (Maybe Text)
 amvcUploadType
   = lens _amvcUploadType
       (\ s a -> s{_amvcUploadType = a})
 
 -- | Multipart request metadata.
-amvcPayload :: Lens' AppsModulesVersionsCreate' Version
+amvcPayload :: Lens' AppsModulesVersionsCreate Version
 amvcPayload
   = lens _amvcPayload (\ s a -> s{_amvcPayload = a})
 
 -- | Part of \`name\`. See documentation of \`appsId\`.
-amvcModulesId :: Lens' AppsModulesVersionsCreate' Text
+amvcModulesId :: Lens' AppsModulesVersionsCreate Text
 amvcModulesId
   = lens _amvcModulesId
       (\ s a -> s{_amvcModulesId = a})
 
 -- | OAuth bearer token.
-amvcBearerToken :: Lens' AppsModulesVersionsCreate' (Maybe Text)
+amvcBearerToken :: Lens' AppsModulesVersionsCreate (Maybe Text)
 amvcBearerToken
   = lens _amvcBearerToken
       (\ s a -> s{_amvcBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource to update. For example:
 -- \"apps\/myapp\/modules\/default\".
-amvcAppsId :: Lens' AppsModulesVersionsCreate' Text
+amvcAppsId :: Lens' AppsModulesVersionsCreate Text
 amvcAppsId
   = lens _amvcAppsId (\ s a -> s{_amvcAppsId = a})
 
 -- | JSONP
-amvcCallback :: Lens' AppsModulesVersionsCreate' (Maybe Text)
+amvcCallback :: Lens' AppsModulesVersionsCreate (Maybe Text)
 amvcCallback
   = lens _amvcCallback (\ s a -> s{_amvcCallback = a})
 
-instance GoogleRequest AppsModulesVersionsCreate'
+instance GoogleRequest AppsModulesVersionsCreate
          where
-        type Rs AppsModulesVersionsCreate' = Operation
-        requestClient AppsModulesVersionsCreate'{..}
+        type Rs AppsModulesVersionsCreate = Operation
+        requestClient AppsModulesVersionsCreate{..}
           = go _amvcAppsId _amvcModulesId _amvcXgafv
               _amvcUploadProtocol
               (Just _amvcPp)

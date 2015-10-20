@@ -30,8 +30,8 @@ module Network.Google.Resource.AppState.States.Get
       StatesGetResource
 
     -- * Creating a Request
-    , statesGet'
-    , StatesGet'
+    , statesGet
+    , StatesGet
 
     -- * Request Lenses
     , sgStateKey
@@ -41,7 +41,7 @@ import           Network.Google.AppState.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @appstate.states.get@ method which the
--- 'StatesGet'' request conforms to.
+-- 'StatesGet' request conforms to.
 type StatesGetResource =
      "states" :>
        Capture "stateKey" Int32 :>
@@ -50,32 +50,32 @@ type StatesGetResource =
 -- | Retrieves the data corresponding to the passed key. If the key does not
 -- exist on the server, an HTTP 404 will be returned.
 --
--- /See:/ 'statesGet'' smart constructor.
-newtype StatesGet' = StatesGet'
+-- /See:/ 'statesGet' smart constructor.
+newtype StatesGet = StatesGet
     { _sgStateKey :: Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'StatesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'StatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sgStateKey'
-statesGet'
+statesGet
     :: Int32 -- ^ 'sgStateKey'
-    -> StatesGet'
-statesGet' pSgStateKey_ =
-    StatesGet'
+    -> StatesGet
+statesGet pSgStateKey_ =
+    StatesGet
     { _sgStateKey = pSgStateKey_
     }
 
 -- | The key for the data to be retrieved.
-sgStateKey :: Lens' StatesGet' Int32
+sgStateKey :: Lens' StatesGet Int32
 sgStateKey
   = lens _sgStateKey (\ s a -> s{_sgStateKey = a})
 
-instance GoogleRequest StatesGet' where
-        type Rs StatesGet' = GetResponse
-        requestClient StatesGet'{..}
+instance GoogleRequest StatesGet where
+        type Rs StatesGet = GetResponse
+        requestClient StatesGet{..}
           = go _sgStateKey (Just AltJSON) appStateService
           where go
                   = buildClient (Proxy :: Proxy StatesGetResource)

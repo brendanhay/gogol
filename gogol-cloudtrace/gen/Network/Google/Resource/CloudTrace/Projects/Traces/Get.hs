@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudTrace.Projects.Traces.Get
       ProjectsTracesGetResource
 
     -- * Creating a Request
-    , projectsTracesGet'
-    , ProjectsTracesGet'
+    , projectsTracesGet
+    , ProjectsTracesGet
 
     -- * Request Lenses
     , ptgTraceId
@@ -48,7 +48,7 @@ import           Network.Google.CloudTrace.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @cloudtrace.projects.traces.get@ method which the
--- 'ProjectsTracesGet'' request conforms to.
+-- 'ProjectsTracesGet' request conforms to.
 type ProjectsTracesGetResource =
      "v1" :>
        "projects" :>
@@ -66,8 +66,8 @@ type ProjectsTracesGetResource =
 
 -- | Gets one trace by id.
 --
--- /See:/ 'projectsTracesGet'' smart constructor.
-data ProjectsTracesGet' = ProjectsTracesGet'
+-- /See:/ 'projectsTracesGet' smart constructor.
+data ProjectsTracesGet = ProjectsTracesGet
     { _ptgTraceId        :: !Text
     , _ptgXgafv          :: !(Maybe Text)
     , _ptgUploadProtocol :: !(Maybe Text)
@@ -79,7 +79,7 @@ data ProjectsTracesGet' = ProjectsTracesGet'
     , _ptgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsTracesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsTracesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -100,12 +100,12 @@ data ProjectsTracesGet' = ProjectsTracesGet'
 -- * 'ptgProjectId'
 --
 -- * 'ptgCallback'
-projectsTracesGet'
+projectsTracesGet
     :: Text -- ^ 'ptgTraceId'
     -> Text -- ^ 'ptgProjectId'
-    -> ProjectsTracesGet'
-projectsTracesGet' pPtgTraceId_ pPtgProjectId_ =
-    ProjectsTracesGet'
+    -> ProjectsTracesGet
+projectsTracesGet pPtgTraceId_ pPtgProjectId_ =
+    ProjectsTracesGet
     { _ptgTraceId = pPtgTraceId_
     , _ptgXgafv = Nothing
     , _ptgUploadProtocol = Nothing
@@ -118,55 +118,55 @@ projectsTracesGet' pPtgTraceId_ pPtgProjectId_ =
     }
 
 -- | The trace id of the trace to return.
-ptgTraceId :: Lens' ProjectsTracesGet' Text
+ptgTraceId :: Lens' ProjectsTracesGet Text
 ptgTraceId
   = lens _ptgTraceId (\ s a -> s{_ptgTraceId = a})
 
 -- | V1 error format.
-ptgXgafv :: Lens' ProjectsTracesGet' (Maybe Text)
+ptgXgafv :: Lens' ProjectsTracesGet (Maybe Text)
 ptgXgafv = lens _ptgXgafv (\ s a -> s{_ptgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ptgUploadProtocol :: Lens' ProjectsTracesGet' (Maybe Text)
+ptgUploadProtocol :: Lens' ProjectsTracesGet (Maybe Text)
 ptgUploadProtocol
   = lens _ptgUploadProtocol
       (\ s a -> s{_ptgUploadProtocol = a})
 
 -- | Pretty-print response.
-ptgPp :: Lens' ProjectsTracesGet' Bool
+ptgPp :: Lens' ProjectsTracesGet Bool
 ptgPp = lens _ptgPp (\ s a -> s{_ptgPp = a})
 
 -- | OAuth access token.
-ptgAccessToken :: Lens' ProjectsTracesGet' (Maybe Text)
+ptgAccessToken :: Lens' ProjectsTracesGet (Maybe Text)
 ptgAccessToken
   = lens _ptgAccessToken
       (\ s a -> s{_ptgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ptgUploadType :: Lens' ProjectsTracesGet' (Maybe Text)
+ptgUploadType :: Lens' ProjectsTracesGet (Maybe Text)
 ptgUploadType
   = lens _ptgUploadType
       (\ s a -> s{_ptgUploadType = a})
 
 -- | OAuth bearer token.
-ptgBearerToken :: Lens' ProjectsTracesGet' (Maybe Text)
+ptgBearerToken :: Lens' ProjectsTracesGet (Maybe Text)
 ptgBearerToken
   = lens _ptgBearerToken
       (\ s a -> s{_ptgBearerToken = a})
 
 -- | The project id of the trace to return.
-ptgProjectId :: Lens' ProjectsTracesGet' Text
+ptgProjectId :: Lens' ProjectsTracesGet Text
 ptgProjectId
   = lens _ptgProjectId (\ s a -> s{_ptgProjectId = a})
 
 -- | JSONP
-ptgCallback :: Lens' ProjectsTracesGet' (Maybe Text)
+ptgCallback :: Lens' ProjectsTracesGet (Maybe Text)
 ptgCallback
   = lens _ptgCallback (\ s a -> s{_ptgCallback = a})
 
-instance GoogleRequest ProjectsTracesGet' where
-        type Rs ProjectsTracesGet' = Trace
-        requestClient ProjectsTracesGet'{..}
+instance GoogleRequest ProjectsTracesGet where
+        type Rs ProjectsTracesGet = Trace
+        requestClient ProjectsTracesGet{..}
           = go _ptgProjectId _ptgTraceId _ptgXgafv
               _ptgUploadProtocol
               (Just _ptgPp)

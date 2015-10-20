@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Networks.Delete
       NetworksDeleteResource
 
     -- * Creating a Request
-    , networksDelete'
-    , NetworksDelete'
+    , networksDelete
+    , NetworksDelete
 
     -- * Request Lenses
     , ndProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.networks.delete@ method which the
--- 'NetworksDelete'' request conforms to.
+-- 'NetworksDelete' request conforms to.
 type NetworksDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,42 +51,42 @@ type NetworksDeleteResource =
 
 -- | Deletes the specified network resource.
 --
--- /See:/ 'networksDelete'' smart constructor.
-data NetworksDelete' = NetworksDelete'
+-- /See:/ 'networksDelete' smart constructor.
+data NetworksDelete = NetworksDelete
     { _ndProject :: !Text
     , _ndNetwork :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'NetworksDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'NetworksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ndProject'
 --
 -- * 'ndNetwork'
-networksDelete'
+networksDelete
     :: Text -- ^ 'ndProject'
     -> Text -- ^ 'ndNetwork'
-    -> NetworksDelete'
-networksDelete' pNdProject_ pNdNetwork_ =
-    NetworksDelete'
+    -> NetworksDelete
+networksDelete pNdProject_ pNdNetwork_ =
+    NetworksDelete
     { _ndProject = pNdProject_
     , _ndNetwork = pNdNetwork_
     }
 
 -- | Project ID for this request.
-ndProject :: Lens' NetworksDelete' Text
+ndProject :: Lens' NetworksDelete Text
 ndProject
   = lens _ndProject (\ s a -> s{_ndProject = a})
 
 -- | Name of the network resource to delete.
-ndNetwork :: Lens' NetworksDelete' Text
+ndNetwork :: Lens' NetworksDelete Text
 ndNetwork
   = lens _ndNetwork (\ s a -> s{_ndNetwork = a})
 
-instance GoogleRequest NetworksDelete' where
-        type Rs NetworksDelete' = Operation
-        requestClient NetworksDelete'{..}
+instance GoogleRequest NetworksDelete where
+        type Rs NetworksDelete = Operation
+        requestClient NetworksDelete{..}
           = go _ndProject _ndNetwork (Just AltJSON)
               computeService
           where go

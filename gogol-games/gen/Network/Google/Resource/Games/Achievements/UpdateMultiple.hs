@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.Achievements.UpdateMultiple
       AchievementsUpdateMultipleResource
 
     -- * Creating a Request
-    , achievementsUpdateMultiple'
-    , AchievementsUpdateMultiple'
+    , achievementsUpdateMultiple
+    , AchievementsUpdateMultiple
 
     -- * Request Lenses
     , aumPayload
@@ -40,7 +40,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.achievements.updateMultiple@ method which the
--- 'AchievementsUpdateMultiple'' request conforms to.
+-- 'AchievementsUpdateMultiple' request conforms to.
 type AchievementsUpdateMultipleResource =
      "achievements" :>
        "updateMultiple" :>
@@ -50,34 +50,34 @@ type AchievementsUpdateMultipleResource =
 
 -- | Updates multiple achievements for the currently authenticated player.
 --
--- /See:/ 'achievementsUpdateMultiple'' smart constructor.
-newtype AchievementsUpdateMultiple' = AchievementsUpdateMultiple'
+-- /See:/ 'achievementsUpdateMultiple' smart constructor.
+newtype AchievementsUpdateMultiple = AchievementsUpdateMultiple
     { _aumPayload :: AchievementUpdateMultipleRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AchievementsUpdateMultiple'' with the minimum fields required to make a request.
+-- | Creates a value of 'AchievementsUpdateMultiple' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aumPayload'
-achievementsUpdateMultiple'
+achievementsUpdateMultiple
     :: AchievementUpdateMultipleRequest -- ^ 'aumPayload'
-    -> AchievementsUpdateMultiple'
-achievementsUpdateMultiple' pAumPayload_ =
-    AchievementsUpdateMultiple'
+    -> AchievementsUpdateMultiple
+achievementsUpdateMultiple pAumPayload_ =
+    AchievementsUpdateMultiple
     { _aumPayload = pAumPayload_
     }
 
 -- | Multipart request metadata.
-aumPayload :: Lens' AchievementsUpdateMultiple' AchievementUpdateMultipleRequest
+aumPayload :: Lens' AchievementsUpdateMultiple AchievementUpdateMultipleRequest
 aumPayload
   = lens _aumPayload (\ s a -> s{_aumPayload = a})
 
-instance GoogleRequest AchievementsUpdateMultiple'
+instance GoogleRequest AchievementsUpdateMultiple
          where
-        type Rs AchievementsUpdateMultiple' =
+        type Rs AchievementsUpdateMultiple =
              AchievementUpdateMultipleResponse
-        requestClient AchievementsUpdateMultiple'{..}
+        requestClient AchievementsUpdateMultiple{..}
           = go (Just AltJSON) _aumPayload gamesService
           where go
                   = buildClient

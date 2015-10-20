@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudUserAccounts.Groups.AddMember
       GroupsAddMemberResource
 
     -- * Creating a Request
-    , groupsAddMember'
-    , GroupsAddMember'
+    , groupsAddMember
+    , GroupsAddMember
 
     -- * Request Lenses
     , gamProject
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
 -- | A resource alias for @clouduseraccounts.groups.addMember@ method which the
--- 'GroupsAddMember'' request conforms to.
+-- 'GroupsAddMember' request conforms to.
 type GroupsAddMemberResource =
      Capture "project" Text :>
        "global" :>
@@ -55,14 +55,14 @@ type GroupsAddMemberResource =
 
 -- | Adds users to the specified group.
 --
--- /See:/ 'groupsAddMember'' smart constructor.
-data GroupsAddMember' = GroupsAddMember'
+-- /See:/ 'groupsAddMember' smart constructor.
+data GroupsAddMember = GroupsAddMember
     { _gamProject   :: !Text
     , _gamPayload   :: !GroupsAddMemberRequest
     , _gamGroupName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GroupsAddMember'' with the minimum fields required to make a request.
+-- | Creates a value of 'GroupsAddMember' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,36 +71,36 @@ data GroupsAddMember' = GroupsAddMember'
 -- * 'gamPayload'
 --
 -- * 'gamGroupName'
-groupsAddMember'
+groupsAddMember
     :: Text -- ^ 'gamProject'
     -> GroupsAddMemberRequest -- ^ 'gamPayload'
     -> Text -- ^ 'gamGroupName'
-    -> GroupsAddMember'
-groupsAddMember' pGamProject_ pGamPayload_ pGamGroupName_ =
-    GroupsAddMember'
+    -> GroupsAddMember
+groupsAddMember pGamProject_ pGamPayload_ pGamGroupName_ =
+    GroupsAddMember
     { _gamProject = pGamProject_
     , _gamPayload = pGamPayload_
     , _gamGroupName = pGamGroupName_
     }
 
 -- | Project ID for this request.
-gamProject :: Lens' GroupsAddMember' Text
+gamProject :: Lens' GroupsAddMember Text
 gamProject
   = lens _gamProject (\ s a -> s{_gamProject = a})
 
 -- | Multipart request metadata.
-gamPayload :: Lens' GroupsAddMember' GroupsAddMemberRequest
+gamPayload :: Lens' GroupsAddMember GroupsAddMemberRequest
 gamPayload
   = lens _gamPayload (\ s a -> s{_gamPayload = a})
 
 -- | Name of the group for this request.
-gamGroupName :: Lens' GroupsAddMember' Text
+gamGroupName :: Lens' GroupsAddMember Text
 gamGroupName
   = lens _gamGroupName (\ s a -> s{_gamGroupName = a})
 
-instance GoogleRequest GroupsAddMember' where
-        type Rs GroupsAddMember' = Operation
-        requestClient GroupsAddMember'{..}
+instance GoogleRequest GroupsAddMember where
+        type Rs GroupsAddMember = Operation
+        requestClient GroupsAddMember{..}
           = go _gamProject _gamGroupName (Just AltJSON)
               _gamPayload
               userAccountsService

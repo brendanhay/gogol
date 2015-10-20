@@ -29,8 +29,8 @@ module Network.Google.Resource.Autoscaler.Zones.List
       ZonesListResource
 
     -- * Creating a Request
-    , zonesList'
-    , ZonesList'
+    , zonesList
+    , ZonesList
 
     -- * Request Lenses
     , zlProject
@@ -43,7 +43,7 @@ import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @autoscaler.zones.list@ method which the
--- 'ZonesList'' request conforms to.
+-- 'ZonesList' request conforms to.
 type ZonesListResource =
      Capture "project" Text :>
        "zones" :>
@@ -54,15 +54,15 @@ type ZonesListResource =
 
 -- |
 --
--- /See:/ 'zonesList'' smart constructor.
-data ZonesList' = ZonesList'
+-- /See:/ 'zonesList' smart constructor.
+data ZonesList = ZonesList
     { _zlProject    :: !Text
     , _zlFilter     :: !(Maybe Text)
     , _zlPageToken  :: !(Maybe Text)
     , _zlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ZonesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ZonesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,35 +73,35 @@ data ZonesList' = ZonesList'
 -- * 'zlPageToken'
 --
 -- * 'zlMaxResults'
-zonesList'
+zonesList
     :: Text -- ^ 'zlProject'
-    -> ZonesList'
-zonesList' pZlProject_ =
-    ZonesList'
+    -> ZonesList
+zonesList pZlProject_ =
+    ZonesList
     { _zlProject = pZlProject_
     , _zlFilter = Nothing
     , _zlPageToken = Nothing
     , _zlMaxResults = 500
     }
 
-zlProject :: Lens' ZonesList' Text
+zlProject :: Lens' ZonesList Text
 zlProject
   = lens _zlProject (\ s a -> s{_zlProject = a})
 
-zlFilter :: Lens' ZonesList' (Maybe Text)
+zlFilter :: Lens' ZonesList (Maybe Text)
 zlFilter = lens _zlFilter (\ s a -> s{_zlFilter = a})
 
-zlPageToken :: Lens' ZonesList' (Maybe Text)
+zlPageToken :: Lens' ZonesList (Maybe Text)
 zlPageToken
   = lens _zlPageToken (\ s a -> s{_zlPageToken = a})
 
-zlMaxResults :: Lens' ZonesList' Word32
+zlMaxResults :: Lens' ZonesList Word32
 zlMaxResults
   = lens _zlMaxResults (\ s a -> s{_zlMaxResults = a})
 
-instance GoogleRequest ZonesList' where
-        type Rs ZonesList' = ZoneList
-        requestClient ZonesList'{..}
+instance GoogleRequest ZonesList where
+        type Rs ZonesList = ZoneList
+        requestClient ZonesList{..}
           = go _zlProject _zlFilter _zlPageToken
               (Just _zlMaxResults)
               (Just AltJSON)

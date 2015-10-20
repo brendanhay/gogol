@@ -27,8 +27,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.Testers.Update
       EditsTestersUpdateResource
 
     -- * Creating a Request
-    , editsTestersUpdate'
-    , EditsTestersUpdate'
+    , editsTestersUpdate
+    , EditsTestersUpdate
 
     -- * Request Lenses
     , etutTrack
@@ -41,7 +41,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.testers.update@ method which the
--- 'EditsTestersUpdate'' request conforms to.
+-- 'EditsTestersUpdate' request conforms to.
 type EditsTestersUpdateResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -52,15 +52,15 @@ type EditsTestersUpdateResource =
                  ReqBody '[JSON] Testers :> Put '[JSON] Testers
 
 --
--- /See:/ 'editsTestersUpdate'' smart constructor.
-data EditsTestersUpdate' = EditsTestersUpdate'
+-- /See:/ 'editsTestersUpdate' smart constructor.
+data EditsTestersUpdate = EditsTestersUpdate
     { _etutTrack       :: !EditsTestersUpdateTrack
     , _etutPackageName :: !Text
     , _etutPayload     :: !Testers
     , _etutEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsTestersUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsTestersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,44 +71,44 @@ data EditsTestersUpdate' = EditsTestersUpdate'
 -- * 'etutPayload'
 --
 -- * 'etutEditId'
-editsTestersUpdate'
+editsTestersUpdate
     :: EditsTestersUpdateTrack -- ^ 'etutTrack'
     -> Text -- ^ 'etutPackageName'
     -> Testers -- ^ 'etutPayload'
     -> Text -- ^ 'etutEditId'
-    -> EditsTestersUpdate'
-editsTestersUpdate' pEtutTrack_ pEtutPackageName_ pEtutPayload_ pEtutEditId_ =
-    EditsTestersUpdate'
+    -> EditsTestersUpdate
+editsTestersUpdate pEtutTrack_ pEtutPackageName_ pEtutPayload_ pEtutEditId_ =
+    EditsTestersUpdate
     { _etutTrack = pEtutTrack_
     , _etutPackageName = pEtutPackageName_
     , _etutPayload = pEtutPayload_
     , _etutEditId = pEtutEditId_
     }
 
-etutTrack :: Lens' EditsTestersUpdate' EditsTestersUpdateTrack
+etutTrack :: Lens' EditsTestersUpdate EditsTestersUpdateTrack
 etutTrack
   = lens _etutTrack (\ s a -> s{_etutTrack = a})
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-etutPackageName :: Lens' EditsTestersUpdate' Text
+etutPackageName :: Lens' EditsTestersUpdate Text
 etutPackageName
   = lens _etutPackageName
       (\ s a -> s{_etutPackageName = a})
 
 -- | Multipart request metadata.
-etutPayload :: Lens' EditsTestersUpdate' Testers
+etutPayload :: Lens' EditsTestersUpdate Testers
 etutPayload
   = lens _etutPayload (\ s a -> s{_etutPayload = a})
 
 -- | Unique identifier for this edit.
-etutEditId :: Lens' EditsTestersUpdate' Text
+etutEditId :: Lens' EditsTestersUpdate Text
 etutEditId
   = lens _etutEditId (\ s a -> s{_etutEditId = a})
 
-instance GoogleRequest EditsTestersUpdate' where
-        type Rs EditsTestersUpdate' = Testers
-        requestClient EditsTestersUpdate'{..}
+instance GoogleRequest EditsTestersUpdate where
+        type Rs EditsTestersUpdate = Testers
+        requestClient EditsTestersUpdate{..}
           = go _etutPackageName _etutEditId _etutTrack
               (Just AltJSON)
               _etutPayload

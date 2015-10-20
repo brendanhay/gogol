@@ -29,8 +29,8 @@ module Network.Google.Resource.TaskQueue.Tasks.Delete
       TasksDeleteResource
 
     -- * Creating a Request
-    , tasksDelete'
-    , TasksDelete'
+    , tasksDelete
+    , TasksDelete
 
     -- * Request Lenses
     , tdTaskqueue
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
 -- | A resource alias for @taskqueue.tasks.delete@ method which the
--- 'TasksDelete'' request conforms to.
+-- 'TasksDelete' request conforms to.
 type TasksDeleteResource =
      Capture "project" Text :>
        "taskqueues" :>
@@ -53,14 +53,14 @@ type TasksDeleteResource =
 
 -- | Delete a task from a TaskQueue.
 --
--- /See:/ 'tasksDelete'' smart constructor.
-data TasksDelete' = TasksDelete'
+-- /See:/ 'tasksDelete' smart constructor.
+data TasksDelete = TasksDelete
     { _tdTaskqueue :: !Text
     , _tdProject   :: !Text
     , _tdTask      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TasksDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'TasksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data TasksDelete' = TasksDelete'
 -- * 'tdProject'
 --
 -- * 'tdTask'
-tasksDelete'
+tasksDelete
     :: Text -- ^ 'tdTaskqueue'
     -> Text -- ^ 'tdProject'
     -> Text -- ^ 'tdTask'
-    -> TasksDelete'
-tasksDelete' pTdTaskqueue_ pTdProject_ pTdTask_ =
-    TasksDelete'
+    -> TasksDelete
+tasksDelete pTdTaskqueue_ pTdProject_ pTdTask_ =
+    TasksDelete
     { _tdTaskqueue = pTdTaskqueue_
     , _tdProject = pTdProject_
     , _tdTask = pTdTask_
     }
 
 -- | The taskqueue to delete a task from.
-tdTaskqueue :: Lens' TasksDelete' Text
+tdTaskqueue :: Lens' TasksDelete Text
 tdTaskqueue
   = lens _tdTaskqueue (\ s a -> s{_tdTaskqueue = a})
 
 -- | The project under which the queue lies.
-tdProject :: Lens' TasksDelete' Text
+tdProject :: Lens' TasksDelete Text
 tdProject
   = lens _tdProject (\ s a -> s{_tdProject = a})
 
 -- | The id of the task to delete.
-tdTask :: Lens' TasksDelete' Text
+tdTask :: Lens' TasksDelete Text
 tdTask = lens _tdTask (\ s a -> s{_tdTask = a})
 
-instance GoogleRequest TasksDelete' where
-        type Rs TasksDelete' = ()
-        requestClient TasksDelete'{..}
+instance GoogleRequest TasksDelete where
+        type Rs TasksDelete = ()
+        requestClient TasksDelete{..}
           = go _tdProject _tdTaskqueue _tdTask (Just AltJSON)
               taskQueueService
           where go

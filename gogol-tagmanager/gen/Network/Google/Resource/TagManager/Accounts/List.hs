@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.List
       AccountsListResource
 
     -- * Creating a Request
-    , accountsList'
-    , AccountsList'
+    , accountsList
+    , AccountsList
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.list@ method which the
--- 'AccountsList'' request conforms to.
+-- 'AccountsList' request conforms to.
 type AccountsListResource =
      "accounts" :>
        QueryParam "alt" AltJSON :>
@@ -46,20 +46,20 @@ type AccountsListResource =
 
 -- | Lists all GTM Accounts that a user has access to.
 --
--- /See:/ 'accountsList'' smart constructor.
-data AccountsList' =
-    AccountsList'
+-- /See:/ 'accountsList' smart constructor.
+data AccountsList =
+    AccountsList
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
-accountsList'
-    :: AccountsList'
-accountsList' = AccountsList'
+accountsList
+    :: AccountsList
+accountsList = AccountsList
 
-instance GoogleRequest AccountsList' where
-        type Rs AccountsList' = ListAccountsResponse
-        requestClient AccountsList'{}
+instance GoogleRequest AccountsList where
+        type Rs AccountsList = ListAccountsResponse
+        requestClient AccountsList{}
           = go (Just AltJSON) tagManagerService
           where go
                   = buildClient (Proxy :: Proxy AccountsListResource)

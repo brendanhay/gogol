@@ -29,8 +29,8 @@ module Network.Google.Resource.Mirror.Contacts.Insert
       ContactsInsertResource
 
     -- * Creating a Request
-    , contactsInsert'
-    , ContactsInsert'
+    , contactsInsert
+    , ContactsInsert
 
     -- * Request Lenses
     , ciPayload
@@ -40,7 +40,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.contacts.insert@ method which the
--- 'ContactsInsert'' request conforms to.
+-- 'ContactsInsert' request conforms to.
 type ContactsInsertResource =
      "contacts" :>
        QueryParam "alt" AltJSON :>
@@ -48,32 +48,32 @@ type ContactsInsertResource =
 
 -- | Inserts a new contact.
 --
--- /See:/ 'contactsInsert'' smart constructor.
-newtype ContactsInsert' = ContactsInsert'
+-- /See:/ 'contactsInsert' smart constructor.
+newtype ContactsInsert = ContactsInsert
     { _ciPayload :: Contact
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ContactsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ContactsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ciPayload'
-contactsInsert'
+contactsInsert
     :: Contact -- ^ 'ciPayload'
-    -> ContactsInsert'
-contactsInsert' pCiPayload_ =
-    ContactsInsert'
+    -> ContactsInsert
+contactsInsert pCiPayload_ =
+    ContactsInsert
     { _ciPayload = pCiPayload_
     }
 
 -- | Multipart request metadata.
-ciPayload :: Lens' ContactsInsert' Contact
+ciPayload :: Lens' ContactsInsert Contact
 ciPayload
   = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
-instance GoogleRequest ContactsInsert' where
-        type Rs ContactsInsert' = Contact
-        requestClient ContactsInsert'{..}
+instance GoogleRequest ContactsInsert where
+        type Rs ContactsInsert = Contact
+        requestClient ContactsInsert{..}
           = go (Just AltJSON) _ciPayload mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsInsertResource)

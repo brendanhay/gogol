@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Notifications.Delete
       NotificationsDeleteResource
 
     -- * Creating a Request
-    , notificationsDelete'
-    , NotificationsDelete'
+    , notificationsDelete
+    , NotificationsDelete
 
     -- * Request Lenses
     , ndCustomer
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.notifications.delete@ method which the
--- 'NotificationsDelete'' request conforms to.
+-- 'NotificationsDelete' request conforms to.
 type NotificationsDeleteResource =
      "customer" :>
        Capture "customer" Text :>
@@ -51,44 +51,44 @@ type NotificationsDeleteResource =
 
 -- | Deletes a notification
 --
--- /See:/ 'notificationsDelete'' smart constructor.
-data NotificationsDelete' = NotificationsDelete'
+-- /See:/ 'notificationsDelete' smart constructor.
+data NotificationsDelete = NotificationsDelete
     { _ndCustomer       :: !Text
     , _ndNotificationId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'NotificationsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'NotificationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ndCustomer'
 --
 -- * 'ndNotificationId'
-notificationsDelete'
+notificationsDelete
     :: Text -- ^ 'ndCustomer'
     -> Text -- ^ 'ndNotificationId'
-    -> NotificationsDelete'
-notificationsDelete' pNdCustomer_ pNdNotificationId_ =
-    NotificationsDelete'
+    -> NotificationsDelete
+notificationsDelete pNdCustomer_ pNdNotificationId_ =
+    NotificationsDelete
     { _ndCustomer = pNdCustomer_
     , _ndNotificationId = pNdNotificationId_
     }
 
 -- | The unique ID for the customer\'s Google account. The customerId is also
 -- returned as part of the Users resource.
-ndCustomer :: Lens' NotificationsDelete' Text
+ndCustomer :: Lens' NotificationsDelete Text
 ndCustomer
   = lens _ndCustomer (\ s a -> s{_ndCustomer = a})
 
 -- | The unique ID of the notification.
-ndNotificationId :: Lens' NotificationsDelete' Text
+ndNotificationId :: Lens' NotificationsDelete Text
 ndNotificationId
   = lens _ndNotificationId
       (\ s a -> s{_ndNotificationId = a})
 
-instance GoogleRequest NotificationsDelete' where
-        type Rs NotificationsDelete' = ()
-        requestClient NotificationsDelete'{..}
+instance GoogleRequest NotificationsDelete where
+        type Rs NotificationsDelete = ()
+        requestClient NotificationsDelete{..}
           = go _ndCustomer _ndNotificationId (Just AltJSON)
               directoryService
           where go

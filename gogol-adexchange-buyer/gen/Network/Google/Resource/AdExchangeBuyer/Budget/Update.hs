@@ -30,8 +30,8 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Update
       BudgetUpdateResource
 
     -- * Creating a Request
-    , budgetUpdate'
-    , BudgetUpdate'
+    , budgetUpdate
+    , BudgetUpdate
 
     -- * Request Lenses
     , buPayload
@@ -43,7 +43,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.budget.update@ method which the
--- 'BudgetUpdate'' request conforms to.
+-- 'BudgetUpdate' request conforms to.
 type BudgetUpdateResource =
      "billinginfo" :>
        Capture "accountId" Int64 :>
@@ -54,14 +54,14 @@ type BudgetUpdateResource =
 -- | Updates the budget amount for the budget of the adgroup specified by the
 -- accountId and billingId, with the budget amount in the request.
 --
--- /See:/ 'budgetUpdate'' smart constructor.
-data BudgetUpdate' = BudgetUpdate'
+-- /See:/ 'budgetUpdate' smart constructor.
+data BudgetUpdate = BudgetUpdate
     { _buPayload   :: !Budget
     , _buAccountId :: !Int64
     , _buBillingId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BudgetUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'BudgetUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,36 +70,36 @@ data BudgetUpdate' = BudgetUpdate'
 -- * 'buAccountId'
 --
 -- * 'buBillingId'
-budgetUpdate'
+budgetUpdate
     :: Budget -- ^ 'buPayload'
     -> Int64 -- ^ 'buAccountId'
     -> Int64 -- ^ 'buBillingId'
-    -> BudgetUpdate'
-budgetUpdate' pBuPayload_ pBuAccountId_ pBuBillingId_ =
-    BudgetUpdate'
+    -> BudgetUpdate
+budgetUpdate pBuPayload_ pBuAccountId_ pBuBillingId_ =
+    BudgetUpdate
     { _buPayload = pBuPayload_
     , _buAccountId = pBuAccountId_
     , _buBillingId = pBuBillingId_
     }
 
 -- | Multipart request metadata.
-buPayload :: Lens' BudgetUpdate' Budget
+buPayload :: Lens' BudgetUpdate Budget
 buPayload
   = lens _buPayload (\ s a -> s{_buPayload = a})
 
 -- | The account id associated with the budget being updated.
-buAccountId :: Lens' BudgetUpdate' Int64
+buAccountId :: Lens' BudgetUpdate Int64
 buAccountId
   = lens _buAccountId (\ s a -> s{_buAccountId = a})
 
 -- | The billing id associated with the budget being updated.
-buBillingId :: Lens' BudgetUpdate' Int64
+buBillingId :: Lens' BudgetUpdate Int64
 buBillingId
   = lens _buBillingId (\ s a -> s{_buBillingId = a})
 
-instance GoogleRequest BudgetUpdate' where
-        type Rs BudgetUpdate' = Budget
-        requestClient BudgetUpdate'{..}
+instance GoogleRequest BudgetUpdate where
+        type Rs BudgetUpdate = Budget
+        requestClient BudgetUpdate{..}
           = go _buAccountId _buBillingId (Just AltJSON)
               _buPayload
               adExchangeBuyerService

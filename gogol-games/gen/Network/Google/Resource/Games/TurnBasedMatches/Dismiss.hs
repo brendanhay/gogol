@@ -30,18 +30,18 @@ module Network.Google.Resource.Games.TurnBasedMatches.Dismiss
       TurnBasedMatchesDismissResource
 
     -- * Creating a Request
-    , turnBasedMatchesDismiss'
-    , TurnBasedMatchesDismiss'
+    , turnBasedMatchesDismiss
+    , TurnBasedMatchesDismiss
 
     -- * Request Lenses
-    , tbmdMatchId
+    , tMatchId
     ) where
 
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.turnBasedMatches.dismiss@ method which the
--- 'TurnBasedMatchesDismiss'' request conforms to.
+-- 'TurnBasedMatchesDismiss' request conforms to.
 type TurnBasedMatchesDismissResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
@@ -51,33 +51,32 @@ type TurnBasedMatchesDismissResource =
 -- | Dismiss a turn-based match from the match list. The match will no longer
 -- show up in the list and will not generate notifications.
 --
--- /See:/ 'turnBasedMatchesDismiss'' smart constructor.
-newtype TurnBasedMatchesDismiss' = TurnBasedMatchesDismiss'
-    { _tbmdMatchId :: Text
+-- /See:/ 'turnBasedMatchesDismiss' smart constructor.
+newtype TurnBasedMatchesDismiss = TurnBasedMatchesDismiss
+    { _tMatchId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TurnBasedMatchesDismiss'' with the minimum fields required to make a request.
+-- | Creates a value of 'TurnBasedMatchesDismiss' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tbmdMatchId'
-turnBasedMatchesDismiss'
-    :: Text -- ^ 'tbmdMatchId'
-    -> TurnBasedMatchesDismiss'
-turnBasedMatchesDismiss' pTbmdMatchId_ =
-    TurnBasedMatchesDismiss'
-    { _tbmdMatchId = pTbmdMatchId_
+-- * 'tMatchId'
+turnBasedMatchesDismiss
+    :: Text -- ^ 'tMatchId'
+    -> TurnBasedMatchesDismiss
+turnBasedMatchesDismiss pTMatchId_ =
+    TurnBasedMatchesDismiss
+    { _tMatchId = pTMatchId_
     }
 
 -- | The ID of the match.
-tbmdMatchId :: Lens' TurnBasedMatchesDismiss' Text
-tbmdMatchId
-  = lens _tbmdMatchId (\ s a -> s{_tbmdMatchId = a})
+tMatchId :: Lens' TurnBasedMatchesDismiss Text
+tMatchId = lens _tMatchId (\ s a -> s{_tMatchId = a})
 
-instance GoogleRequest TurnBasedMatchesDismiss' where
-        type Rs TurnBasedMatchesDismiss' = ()
-        requestClient TurnBasedMatchesDismiss'{..}
-          = go _tbmdMatchId (Just AltJSON) gamesService
+instance GoogleRequest TurnBasedMatchesDismiss where
+        type Rs TurnBasedMatchesDismiss = ()
+        requestClient TurnBasedMatchesDismiss{..}
+          = go _tMatchId (Just AltJSON) gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy TurnBasedMatchesDismissResource)

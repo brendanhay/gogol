@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Revisions.Patch
       RevisionsPatchResource
 
     -- * Creating a Request
-    , revisionsPatch'
-    , RevisionsPatch'
+    , revisionsPatch
+    , RevisionsPatch
 
     -- * Request Lenses
     , rppPayload
@@ -42,7 +42,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.revisions.patch@ method which the
--- 'RevisionsPatch'' request conforms to.
+-- 'RevisionsPatch' request conforms to.
 type RevisionsPatchResource =
      "files" :>
        Capture "fileId" Text :>
@@ -53,14 +53,14 @@ type RevisionsPatchResource =
 
 -- | Updates a revision. This method supports patch semantics.
 --
--- /See:/ 'revisionsPatch'' smart constructor.
-data RevisionsPatch' = RevisionsPatch'
+-- /See:/ 'revisionsPatch' smart constructor.
+data RevisionsPatch = RevisionsPatch
     { _rppPayload    :: !Revision
     , _rppFileId     :: !Text
     , _rppRevisionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RevisionsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'RevisionsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,37 +69,37 @@ data RevisionsPatch' = RevisionsPatch'
 -- * 'rppFileId'
 --
 -- * 'rppRevisionId'
-revisionsPatch'
+revisionsPatch
     :: Revision -- ^ 'rppPayload'
     -> Text -- ^ 'rppFileId'
     -> Text -- ^ 'rppRevisionId'
-    -> RevisionsPatch'
-revisionsPatch' pRppPayload_ pRppFileId_ pRppRevisionId_ =
-    RevisionsPatch'
+    -> RevisionsPatch
+revisionsPatch pRppPayload_ pRppFileId_ pRppRevisionId_ =
+    RevisionsPatch
     { _rppPayload = pRppPayload_
     , _rppFileId = pRppFileId_
     , _rppRevisionId = pRppRevisionId_
     }
 
 -- | Multipart request metadata.
-rppPayload :: Lens' RevisionsPatch' Revision
+rppPayload :: Lens' RevisionsPatch Revision
 rppPayload
   = lens _rppPayload (\ s a -> s{_rppPayload = a})
 
 -- | The ID for the file.
-rppFileId :: Lens' RevisionsPatch' Text
+rppFileId :: Lens' RevisionsPatch Text
 rppFileId
   = lens _rppFileId (\ s a -> s{_rppFileId = a})
 
 -- | The ID for the revision.
-rppRevisionId :: Lens' RevisionsPatch' Text
+rppRevisionId :: Lens' RevisionsPatch Text
 rppRevisionId
   = lens _rppRevisionId
       (\ s a -> s{_rppRevisionId = a})
 
-instance GoogleRequest RevisionsPatch' where
-        type Rs RevisionsPatch' = Revision
-        requestClient RevisionsPatch'{..}
+instance GoogleRequest RevisionsPatch where
+        type Rs RevisionsPatch = Revision
+        requestClient RevisionsPatch{..}
           = go _rppFileId _rppRevisionId (Just AltJSON)
               _rppPayload
               driveService

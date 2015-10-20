@@ -29,8 +29,8 @@ module Network.Google.Resource.Webmasters.Sitemaps.Submit
       SitemapsSubmitResource
 
     -- * Creating a Request
-    , sitemapsSubmit'
-    , SitemapsSubmit'
+    , sitemapsSubmit
+    , SitemapsSubmit
 
     -- * Request Lenses
     , ssFeedpath
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.sitemaps.submit@ method which the
--- 'SitemapsSubmit'' request conforms to.
+-- 'SitemapsSubmit' request conforms to.
 type SitemapsSubmitResource =
      "sites" :>
        Capture "siteUrl" Text :>
@@ -51,44 +51,44 @@ type SitemapsSubmitResource =
 
 -- | Submits a sitemap for a site.
 --
--- /See:/ 'sitemapsSubmit'' smart constructor.
-data SitemapsSubmit' = SitemapsSubmit'
+-- /See:/ 'sitemapsSubmit' smart constructor.
+data SitemapsSubmit = SitemapsSubmit
     { _ssFeedpath :: !Text
     , _ssSiteURL  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SitemapsSubmit'' with the minimum fields required to make a request.
+-- | Creates a value of 'SitemapsSubmit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ssFeedpath'
 --
 -- * 'ssSiteURL'
-sitemapsSubmit'
+sitemapsSubmit
     :: Text -- ^ 'ssFeedpath'
     -> Text -- ^ 'ssSiteURL'
-    -> SitemapsSubmit'
-sitemapsSubmit' pSsFeedpath_ pSsSiteURL_ =
-    SitemapsSubmit'
+    -> SitemapsSubmit
+sitemapsSubmit pSsFeedpath_ pSsSiteURL_ =
+    SitemapsSubmit
     { _ssFeedpath = pSsFeedpath_
     , _ssSiteURL = pSsSiteURL_
     }
 
 -- | The URL of the sitemap to add. For example:
 -- http:\/\/www.example.com\/sitemap.xml
-ssFeedpath :: Lens' SitemapsSubmit' Text
+ssFeedpath :: Lens' SitemapsSubmit Text
 ssFeedpath
   = lens _ssFeedpath (\ s a -> s{_ssFeedpath = a})
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/
-ssSiteURL :: Lens' SitemapsSubmit' Text
+ssSiteURL :: Lens' SitemapsSubmit Text
 ssSiteURL
   = lens _ssSiteURL (\ s a -> s{_ssSiteURL = a})
 
-instance GoogleRequest SitemapsSubmit' where
-        type Rs SitemapsSubmit' = ()
-        requestClient SitemapsSubmit'{..}
+instance GoogleRequest SitemapsSubmit where
+        type Rs SitemapsSubmit = ()
+        requestClient SitemapsSubmit{..}
           = go _ssSiteURL _ssFeedpath (Just AltJSON)
               webmasterToolsService
           where go

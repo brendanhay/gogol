@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.GlobalForwardingRules.List
       GlobalForwardingRulesListResource
 
     -- * Creating a Request
-    , globalForwardingRulesList'
-    , GlobalForwardingRulesList'
+    , globalForwardingRulesList
+    , GlobalForwardingRulesList
 
     -- * Request Lenses
     , gfrlProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.globalForwardingRules.list@ method which the
--- 'GlobalForwardingRulesList'' request conforms to.
+-- 'GlobalForwardingRulesList' request conforms to.
 type GlobalForwardingRulesListResource =
      Capture "project" Text :>
        "global" :>
@@ -58,15 +58,15 @@ type GlobalForwardingRulesListResource =
 -- | Retrieves the list of ForwardingRule resources available to the
 -- specified project.
 --
--- /See:/ 'globalForwardingRulesList'' smart constructor.
-data GlobalForwardingRulesList' = GlobalForwardingRulesList'
+-- /See:/ 'globalForwardingRulesList' smart constructor.
+data GlobalForwardingRulesList = GlobalForwardingRulesList
     { _gfrlProject    :: !Text
     , _gfrlFilter     :: !(Maybe Text)
     , _gfrlPageToken  :: !(Maybe Text)
     , _gfrlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GlobalForwardingRulesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'GlobalForwardingRulesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,11 +77,11 @@ data GlobalForwardingRulesList' = GlobalForwardingRulesList'
 -- * 'gfrlPageToken'
 --
 -- * 'gfrlMaxResults'
-globalForwardingRulesList'
+globalForwardingRulesList
     :: Text -- ^ 'gfrlProject'
-    -> GlobalForwardingRulesList'
-globalForwardingRulesList' pGfrlProject_ =
-    GlobalForwardingRulesList'
+    -> GlobalForwardingRulesList
+globalForwardingRulesList pGfrlProject_ =
+    GlobalForwardingRulesList
     { _gfrlProject = pGfrlProject_
     , _gfrlFilter = Nothing
     , _gfrlPageToken = Nothing
@@ -89,7 +89,7 @@ globalForwardingRulesList' pGfrlProject_ =
     }
 
 -- | Name of the project scoping this request.
-gfrlProject :: Lens' GlobalForwardingRulesList' Text
+gfrlProject :: Lens' GlobalForwardingRulesList Text
 gfrlProject
   = lens _gfrlProject (\ s a -> s{_gfrlProject = a})
 
@@ -104,29 +104,29 @@ gfrlProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-gfrlFilter :: Lens' GlobalForwardingRulesList' (Maybe Text)
+gfrlFilter :: Lens' GlobalForwardingRulesList (Maybe Text)
 gfrlFilter
   = lens _gfrlFilter (\ s a -> s{_gfrlFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-gfrlPageToken :: Lens' GlobalForwardingRulesList' (Maybe Text)
+gfrlPageToken :: Lens' GlobalForwardingRulesList (Maybe Text)
 gfrlPageToken
   = lens _gfrlPageToken
       (\ s a -> s{_gfrlPageToken = a})
 
 -- | Maximum count of results to be returned.
-gfrlMaxResults :: Lens' GlobalForwardingRulesList' Word32
+gfrlMaxResults :: Lens' GlobalForwardingRulesList Word32
 gfrlMaxResults
   = lens _gfrlMaxResults
       (\ s a -> s{_gfrlMaxResults = a})
 
-instance GoogleRequest GlobalForwardingRulesList'
+instance GoogleRequest GlobalForwardingRulesList
          where
-        type Rs GlobalForwardingRulesList' =
+        type Rs GlobalForwardingRulesList =
              ForwardingRuleList
-        requestClient GlobalForwardingRulesList'{..}
+        requestClient GlobalForwardingRulesList{..}
           = go _gfrlProject _gfrlFilter _gfrlPageToken
               (Just _gfrlMaxResults)
               (Just AltJSON)

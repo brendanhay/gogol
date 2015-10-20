@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.ForwardingRules.SetTarget
       ForwardingRulesSetTargetResource
 
     -- * Creating a Request
-    , forwardingRulesSetTarget'
-    , ForwardingRulesSetTarget'
+    , forwardingRulesSetTarget
+    , ForwardingRulesSetTarget
 
     -- * Request Lenses
     , frstProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.forwardingRules.setTarget@ method which the
--- 'ForwardingRulesSetTarget'' request conforms to.
+-- 'ForwardingRulesSetTarget' request conforms to.
 type ForwardingRulesSetTargetResource =
      Capture "project" Text :>
        "regions" :>
@@ -57,15 +57,15 @@ type ForwardingRulesSetTargetResource =
 
 -- | Changes target url for forwarding rule.
 --
--- /See:/ 'forwardingRulesSetTarget'' smart constructor.
-data ForwardingRulesSetTarget' = ForwardingRulesSetTarget'
+-- /See:/ 'forwardingRulesSetTarget' smart constructor.
+data ForwardingRulesSetTarget = ForwardingRulesSetTarget
     { _frstProject        :: !Text
     , _frstForwardingRule :: !Text
     , _frstPayload        :: !TargetReference
     , _frstRegion         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ForwardingRulesSetTarget'' with the minimum fields required to make a request.
+-- | Creates a value of 'ForwardingRulesSetTarget' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,14 +76,14 @@ data ForwardingRulesSetTarget' = ForwardingRulesSetTarget'
 -- * 'frstPayload'
 --
 -- * 'frstRegion'
-forwardingRulesSetTarget'
+forwardingRulesSetTarget
     :: Text -- ^ 'frstProject'
     -> Text -- ^ 'frstForwardingRule'
     -> TargetReference -- ^ 'frstPayload'
     -> Text -- ^ 'frstRegion'
-    -> ForwardingRulesSetTarget'
-forwardingRulesSetTarget' pFrstProject_ pFrstForwardingRule_ pFrstPayload_ pFrstRegion_ =
-    ForwardingRulesSetTarget'
+    -> ForwardingRulesSetTarget
+forwardingRulesSetTarget pFrstProject_ pFrstForwardingRule_ pFrstPayload_ pFrstRegion_ =
+    ForwardingRulesSetTarget
     { _frstProject = pFrstProject_
     , _frstForwardingRule = pFrstForwardingRule_
     , _frstPayload = pFrstPayload_
@@ -91,30 +91,29 @@ forwardingRulesSetTarget' pFrstProject_ pFrstForwardingRule_ pFrstPayload_ pFrst
     }
 
 -- | Name of the project scoping this request.
-frstProject :: Lens' ForwardingRulesSetTarget' Text
+frstProject :: Lens' ForwardingRulesSetTarget Text
 frstProject
   = lens _frstProject (\ s a -> s{_frstProject = a})
 
 -- | Name of the ForwardingRule resource in which target is to be set.
-frstForwardingRule :: Lens' ForwardingRulesSetTarget' Text
+frstForwardingRule :: Lens' ForwardingRulesSetTarget Text
 frstForwardingRule
   = lens _frstForwardingRule
       (\ s a -> s{_frstForwardingRule = a})
 
 -- | Multipart request metadata.
-frstPayload :: Lens' ForwardingRulesSetTarget' TargetReference
+frstPayload :: Lens' ForwardingRulesSetTarget TargetReference
 frstPayload
   = lens _frstPayload (\ s a -> s{_frstPayload = a})
 
 -- | Name of the region scoping this request.
-frstRegion :: Lens' ForwardingRulesSetTarget' Text
+frstRegion :: Lens' ForwardingRulesSetTarget Text
 frstRegion
   = lens _frstRegion (\ s a -> s{_frstRegion = a})
 
-instance GoogleRequest ForwardingRulesSetTarget'
-         where
-        type Rs ForwardingRulesSetTarget' = Operation
-        requestClient ForwardingRulesSetTarget'{..}
+instance GoogleRequest ForwardingRulesSetTarget where
+        type Rs ForwardingRulesSetTarget = Operation
+        requestClient ForwardingRulesSetTarget{..}
           = go _frstProject _frstRegion _frstForwardingRule
               (Just AltJSON)
               _frstPayload

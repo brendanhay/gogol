@@ -31,8 +31,8 @@ module Network.Google.Resource.MapsEngine.Rasters.Permissions.BatchUpdate
       RastersPermissionsBatchUpdateResource
 
     -- * Creating a Request
-    , rastersPermissionsBatchUpdate'
-    , RastersPermissionsBatchUpdate'
+    , rastersPermissionsBatchUpdate
+    , RastersPermissionsBatchUpdate
 
     -- * Request Lenses
     , rpbuPayload
@@ -43,7 +43,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasters.permissions.batchUpdate@ method which the
--- 'RastersPermissionsBatchUpdate'' request conforms to.
+-- 'RastersPermissionsBatchUpdate' request conforms to.
 type RastersPermissionsBatchUpdateResource =
      "rasters" :>
        Capture "id" Text :>
@@ -57,43 +57,43 @@ type RastersPermissionsBatchUpdateResource =
 -- can hold up to 20 different permission entries. Each batchInsert request
 -- is atomic.
 --
--- /See:/ 'rastersPermissionsBatchUpdate'' smart constructor.
-data RastersPermissionsBatchUpdate' = RastersPermissionsBatchUpdate'
+-- /See:/ 'rastersPermissionsBatchUpdate' smart constructor.
+data RastersPermissionsBatchUpdate = RastersPermissionsBatchUpdate
     { _rpbuPayload :: !PermissionsBatchUpdateRequest
     , _rpbuId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RastersPermissionsBatchUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'RastersPermissionsBatchUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rpbuPayload'
 --
 -- * 'rpbuId'
-rastersPermissionsBatchUpdate'
+rastersPermissionsBatchUpdate
     :: PermissionsBatchUpdateRequest -- ^ 'rpbuPayload'
     -> Text -- ^ 'rpbuId'
-    -> RastersPermissionsBatchUpdate'
-rastersPermissionsBatchUpdate' pRpbuPayload_ pRpbuId_ =
-    RastersPermissionsBatchUpdate'
+    -> RastersPermissionsBatchUpdate
+rastersPermissionsBatchUpdate pRpbuPayload_ pRpbuId_ =
+    RastersPermissionsBatchUpdate
     { _rpbuPayload = pRpbuPayload_
     , _rpbuId = pRpbuId_
     }
 
 -- | Multipart request metadata.
-rpbuPayload :: Lens' RastersPermissionsBatchUpdate' PermissionsBatchUpdateRequest
+rpbuPayload :: Lens' RastersPermissionsBatchUpdate PermissionsBatchUpdateRequest
 rpbuPayload
   = lens _rpbuPayload (\ s a -> s{_rpbuPayload = a})
 
 -- | The ID of the asset to which permissions will be added.
-rpbuId :: Lens' RastersPermissionsBatchUpdate' Text
+rpbuId :: Lens' RastersPermissionsBatchUpdate Text
 rpbuId = lens _rpbuId (\ s a -> s{_rpbuId = a})
 
-instance GoogleRequest RastersPermissionsBatchUpdate'
+instance GoogleRequest RastersPermissionsBatchUpdate
          where
-        type Rs RastersPermissionsBatchUpdate' =
+        type Rs RastersPermissionsBatchUpdate =
              PermissionsBatchUpdateResponse
-        requestClient RastersPermissionsBatchUpdate'{..}
+        requestClient RastersPermissionsBatchUpdate{..}
           = go _rpbuId (Just AltJSON) _rpbuPayload
               mapsEngineService
           where go

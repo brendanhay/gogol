@@ -31,20 +31,20 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
       PurchasesSubscriptionsRevokeResource
 
     -- * Creating a Request
-    , purchasesSubscriptionsRevoke'
-    , PurchasesSubscriptionsRevoke'
+    , purchasesSubscriptionsRevoke
+    , PurchasesSubscriptionsRevoke
 
     -- * Request Lenses
-    , psrPackageName
-    , psrToken
-    , psrSubscriptionId
+    , pPackageName
+    , pToken
+    , pSubscriptionId
     ) where
 
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.purchases.subscriptions.revoke@ method which the
--- 'PurchasesSubscriptionsRevoke'' request conforms to.
+-- 'PurchasesSubscriptionsRevoke' request conforms to.
 type PurchasesSubscriptionsRevokeResource =
      Capture "packageName" Text :>
        "purchases" :>
@@ -58,57 +58,56 @@ type PurchasesSubscriptionsRevokeResource =
 -- to the subscription will be terminated immediately and it will stop
 -- recurring.
 --
--- /See:/ 'purchasesSubscriptionsRevoke'' smart constructor.
-data PurchasesSubscriptionsRevoke' = PurchasesSubscriptionsRevoke'
-    { _psrPackageName    :: !Text
-    , _psrToken          :: !Text
-    , _psrSubscriptionId :: !Text
+-- /See:/ 'purchasesSubscriptionsRevoke' smart constructor.
+data PurchasesSubscriptionsRevoke = PurchasesSubscriptionsRevoke
+    { _pPackageName    :: !Text
+    , _pToken          :: !Text
+    , _pSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PurchasesSubscriptionsRevoke'' with the minimum fields required to make a request.
+-- | Creates a value of 'PurchasesSubscriptionsRevoke' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'psrPackageName'
+-- * 'pPackageName'
 --
--- * 'psrToken'
+-- * 'pToken'
 --
--- * 'psrSubscriptionId'
-purchasesSubscriptionsRevoke'
-    :: Text -- ^ 'psrPackageName'
-    -> Text -- ^ 'psrToken'
-    -> Text -- ^ 'psrSubscriptionId'
-    -> PurchasesSubscriptionsRevoke'
-purchasesSubscriptionsRevoke' pPsrPackageName_ pPsrToken_ pPsrSubscriptionId_ =
-    PurchasesSubscriptionsRevoke'
-    { _psrPackageName = pPsrPackageName_
-    , _psrToken = pPsrToken_
-    , _psrSubscriptionId = pPsrSubscriptionId_
+-- * 'pSubscriptionId'
+purchasesSubscriptionsRevoke
+    :: Text -- ^ 'pPackageName'
+    -> Text -- ^ 'pToken'
+    -> Text -- ^ 'pSubscriptionId'
+    -> PurchasesSubscriptionsRevoke
+purchasesSubscriptionsRevoke pPPackageName_ pPToken_ pPSubscriptionId_ =
+    PurchasesSubscriptionsRevoke
+    { _pPackageName = pPPackageName_
+    , _pToken = pPToken_
+    , _pSubscriptionId = pPSubscriptionId_
     }
 
 -- | The package name of the application for which this subscription was
 -- purchased (for example, \'com.some.thing\').
-psrPackageName :: Lens' PurchasesSubscriptionsRevoke' Text
-psrPackageName
-  = lens _psrPackageName
-      (\ s a -> s{_psrPackageName = a})
+pPackageName :: Lens' PurchasesSubscriptionsRevoke Text
+pPackageName
+  = lens _pPackageName (\ s a -> s{_pPackageName = a})
 
 -- | The token provided to the user\'s device when the subscription was
 -- purchased.
-psrToken :: Lens' PurchasesSubscriptionsRevoke' Text
-psrToken = lens _psrToken (\ s a -> s{_psrToken = a})
+pToken :: Lens' PurchasesSubscriptionsRevoke Text
+pToken = lens _pToken (\ s a -> s{_pToken = a})
 
 -- | The purchased subscription ID (for example, \'monthly001\').
-psrSubscriptionId :: Lens' PurchasesSubscriptionsRevoke' Text
-psrSubscriptionId
-  = lens _psrSubscriptionId
-      (\ s a -> s{_psrSubscriptionId = a})
+pSubscriptionId :: Lens' PurchasesSubscriptionsRevoke Text
+pSubscriptionId
+  = lens _pSubscriptionId
+      (\ s a -> s{_pSubscriptionId = a})
 
-instance GoogleRequest PurchasesSubscriptionsRevoke'
+instance GoogleRequest PurchasesSubscriptionsRevoke
          where
-        type Rs PurchasesSubscriptionsRevoke' = ()
-        requestClient PurchasesSubscriptionsRevoke'{..}
-          = go _psrPackageName _psrSubscriptionId _psrToken
+        type Rs PurchasesSubscriptionsRevoke = ()
+        requestClient PurchasesSubscriptionsRevoke{..}
+          = go _pPackageName _pSubscriptionId _pToken
               (Just AltJSON)
               androidPublisherService
           where go

@@ -33,8 +33,8 @@ module Network.Google.Resource.BigQuery.Jobs.List
       JobsListResource
 
     -- * Creating a Request
-    , jobsList'
-    , JobsList'
+    , jobsList
+    , JobsList
 
     -- * Request Lenses
     , jlStateFilter
@@ -49,7 +49,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.jobs.list@ method which the
--- 'JobsList'' request conforms to.
+-- 'JobsList' request conforms to.
 type JobsListResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -67,8 +67,8 @@ type JobsListResource =
 -- Requires the Can View project role, or the Is Owner project role if you
 -- set the allUsers property.
 --
--- /See:/ 'jobsList'' smart constructor.
-data JobsList' = JobsList'
+-- /See:/ 'jobsList' smart constructor.
+data JobsList = JobsList
     { _jlStateFilter :: !(Maybe [JobsListStateFilter])
     , _jlProjection  :: !(Maybe JobsListProjection)
     , _jlPageToken   :: !(Maybe Text)
@@ -77,7 +77,7 @@ data JobsList' = JobsList'
     , _jlMaxResults  :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'JobsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'JobsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -92,11 +92,11 @@ data JobsList' = JobsList'
 -- * 'jlAllUsers'
 --
 -- * 'jlMaxResults'
-jobsList'
+jobsList
     :: Text -- ^ 'jlProjectId'
-    -> JobsList'
-jobsList' pJlProjectId_ =
-    JobsList'
+    -> JobsList
+jobsList pJlProjectId_ =
+    JobsList
     { _jlStateFilter = Nothing
     , _jlProjection = Nothing
     , _jlPageToken = Nothing
@@ -106,7 +106,7 @@ jobsList' pJlProjectId_ =
     }
 
 -- | Filter for job state
-jlStateFilter :: Lens' JobsList' [JobsListStateFilter]
+jlStateFilter :: Lens' JobsList [JobsListStateFilter]
 jlStateFilter
   = lens _jlStateFilter
       (\ s a -> s{_jlStateFilter = a})
@@ -114,34 +114,34 @@ jlStateFilter
       . _Coerce
 
 -- | Restrict information returned to a set of selected fields
-jlProjection :: Lens' JobsList' (Maybe JobsListProjection)
+jlProjection :: Lens' JobsList (Maybe JobsListProjection)
 jlProjection
   = lens _jlProjection (\ s a -> s{_jlProjection = a})
 
 -- | Page token, returned by a previous call, to request the next page of
 -- results
-jlPageToken :: Lens' JobsList' (Maybe Text)
+jlPageToken :: Lens' JobsList (Maybe Text)
 jlPageToken
   = lens _jlPageToken (\ s a -> s{_jlPageToken = a})
 
 -- | Project ID of the jobs to list
-jlProjectId :: Lens' JobsList' Text
+jlProjectId :: Lens' JobsList Text
 jlProjectId
   = lens _jlProjectId (\ s a -> s{_jlProjectId = a})
 
 -- | Whether to display jobs owned by all users in the project. Default false
-jlAllUsers :: Lens' JobsList' (Maybe Bool)
+jlAllUsers :: Lens' JobsList (Maybe Bool)
 jlAllUsers
   = lens _jlAllUsers (\ s a -> s{_jlAllUsers = a})
 
 -- | Maximum number of results to return
-jlMaxResults :: Lens' JobsList' (Maybe Word32)
+jlMaxResults :: Lens' JobsList (Maybe Word32)
 jlMaxResults
   = lens _jlMaxResults (\ s a -> s{_jlMaxResults = a})
 
-instance GoogleRequest JobsList' where
-        type Rs JobsList' = JobList
-        requestClient JobsList'{..}
+instance GoogleRequest JobsList where
+        type Rs JobsList = JobList
+        requestClient JobsList{..}
           = go _jlProjectId (_jlStateFilter ^. _Default)
               _jlProjection
               _jlPageToken

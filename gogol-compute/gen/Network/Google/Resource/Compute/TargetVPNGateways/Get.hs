@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.TargetVPNGateways.Get
       TargetVPNGatewaysGetResource
 
     -- * Creating a Request
-    , targetVPNGatewaysGet'
-    , TargetVPNGatewaysGet'
+    , targetVPNGatewaysGet
+    , TargetVPNGatewaysGet
 
     -- * Request Lenses
     , tvggProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetVpnGateways.get@ method which the
--- 'TargetVPNGatewaysGet'' request conforms to.
+-- 'TargetVPNGatewaysGet' request conforms to.
 type TargetVPNGatewaysGetResource =
      Capture "project" Text :>
        "regions" :>
@@ -54,14 +54,14 @@ type TargetVPNGatewaysGetResource =
 
 -- | Returns the specified TargetVpnGateway resource.
 --
--- /See:/ 'targetVPNGatewaysGet'' smart constructor.
-data TargetVPNGatewaysGet' = TargetVPNGatewaysGet'
+-- /See:/ 'targetVPNGatewaysGet' smart constructor.
+data TargetVPNGatewaysGet = TargetVPNGatewaysGet
     { _tvggProject          :: !Text
     , _tvggTargetVPNGateway :: !Text
     , _tvggRegion           :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetVPNGatewaysGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetVPNGatewaysGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,37 +70,37 @@ data TargetVPNGatewaysGet' = TargetVPNGatewaysGet'
 -- * 'tvggTargetVPNGateway'
 --
 -- * 'tvggRegion'
-targetVPNGatewaysGet'
+targetVPNGatewaysGet
     :: Text -- ^ 'tvggProject'
     -> Text -- ^ 'tvggTargetVPNGateway'
     -> Text -- ^ 'tvggRegion'
-    -> TargetVPNGatewaysGet'
-targetVPNGatewaysGet' pTvggProject_ pTvggTargetVPNGateway_ pTvggRegion_ =
-    TargetVPNGatewaysGet'
+    -> TargetVPNGatewaysGet
+targetVPNGatewaysGet pTvggProject_ pTvggTargetVPNGateway_ pTvggRegion_ =
+    TargetVPNGatewaysGet
     { _tvggProject = pTvggProject_
     , _tvggTargetVPNGateway = pTvggTargetVPNGateway_
     , _tvggRegion = pTvggRegion_
     }
 
 -- | Project ID for this request.
-tvggProject :: Lens' TargetVPNGatewaysGet' Text
+tvggProject :: Lens' TargetVPNGatewaysGet Text
 tvggProject
   = lens _tvggProject (\ s a -> s{_tvggProject = a})
 
 -- | Name of the TargetVpnGateway resource to return.
-tvggTargetVPNGateway :: Lens' TargetVPNGatewaysGet' Text
+tvggTargetVPNGateway :: Lens' TargetVPNGatewaysGet Text
 tvggTargetVPNGateway
   = lens _tvggTargetVPNGateway
       (\ s a -> s{_tvggTargetVPNGateway = a})
 
 -- | The name of the region for this request.
-tvggRegion :: Lens' TargetVPNGatewaysGet' Text
+tvggRegion :: Lens' TargetVPNGatewaysGet Text
 tvggRegion
   = lens _tvggRegion (\ s a -> s{_tvggRegion = a})
 
-instance GoogleRequest TargetVPNGatewaysGet' where
-        type Rs TargetVPNGatewaysGet' = TargetVPNGateway
-        requestClient TargetVPNGatewaysGet'{..}
+instance GoogleRequest TargetVPNGatewaysGet where
+        type Rs TargetVPNGatewaysGet = TargetVPNGateway
+        requestClient TargetVPNGatewaysGet{..}
           = go _tvggProject _tvggRegion _tvggTargetVPNGateway
               (Just AltJSON)
               computeService

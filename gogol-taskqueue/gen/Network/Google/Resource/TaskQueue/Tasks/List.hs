@@ -29,8 +29,8 @@ module Network.Google.Resource.TaskQueue.Tasks.List
       TasksListResource
 
     -- * Creating a Request
-    , tasksList'
-    , TasksList'
+    , tasksList
+    , TasksList
 
     -- * Request Lenses
     , tTaskqueue
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
 -- | A resource alias for @taskqueue.tasks.list@ method which the
--- 'TasksList'' request conforms to.
+-- 'TasksList' request conforms to.
 type TasksListResource =
      Capture "project" Text :>
        "taskqueues" :>
@@ -51,41 +51,41 @@ type TasksListResource =
 
 -- | List Tasks in a TaskQueue
 --
--- /See:/ 'tasksList'' smart constructor.
-data TasksList' = TasksList'
+-- /See:/ 'tasksList' smart constructor.
+data TasksList = TasksList
     { _tTaskqueue :: !Text
     , _tProject   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TasksList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TasksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tTaskqueue'
 --
 -- * 'tProject'
-tasksList'
+tasksList
     :: Text -- ^ 'tTaskqueue'
     -> Text -- ^ 'tProject'
-    -> TasksList'
-tasksList' pTTaskqueue_ pTProject_ =
-    TasksList'
+    -> TasksList
+tasksList pTTaskqueue_ pTProject_ =
+    TasksList
     { _tTaskqueue = pTTaskqueue_
     , _tProject = pTProject_
     }
 
 -- | The id of the taskqueue to list tasks from.
-tTaskqueue :: Lens' TasksList' Text
+tTaskqueue :: Lens' TasksList Text
 tTaskqueue
   = lens _tTaskqueue (\ s a -> s{_tTaskqueue = a})
 
 -- | The project under which the queue lies.
-tProject :: Lens' TasksList' Text
+tProject :: Lens' TasksList Text
 tProject = lens _tProject (\ s a -> s{_tProject = a})
 
-instance GoogleRequest TasksList' where
-        type Rs TasksList' = Tasks2
-        requestClient TasksList'{..}
+instance GoogleRequest TasksList where
+        type Rs TasksList = Tasks2
+        requestClient TasksList{..}
           = go _tProject _tTaskqueue (Just AltJSON)
               taskQueueService
           where go

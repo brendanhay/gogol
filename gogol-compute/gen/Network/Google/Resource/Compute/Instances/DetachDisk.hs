@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Instances.DetachDisk
       InstancesDetachDiskResource
 
     -- * Creating a Request
-    , instancesDetachDisk'
-    , InstancesDetachDisk'
+    , instancesDetachDisk
+    , InstancesDetachDisk
 
     -- * Request Lenses
     , iddProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.detachDisk@ method which the
--- 'InstancesDetachDisk'' request conforms to.
+-- 'InstancesDetachDisk' request conforms to.
 type InstancesDetachDiskResource =
      Capture "project" Text :>
        "zones" :>
@@ -56,15 +56,15 @@ type InstancesDetachDiskResource =
 
 -- | Detaches a disk from an instance.
 --
--- /See:/ 'instancesDetachDisk'' smart constructor.
-data InstancesDetachDisk' = InstancesDetachDisk'
+-- /See:/ 'instancesDetachDisk' smart constructor.
+data InstancesDetachDisk = InstancesDetachDisk
     { _iddProject    :: !Text
     , _iddZone       :: !Text
     , _iddDeviceName :: !Text
     , _iddInstance   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesDetachDisk'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesDetachDisk' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,14 +75,14 @@ data InstancesDetachDisk' = InstancesDetachDisk'
 -- * 'iddDeviceName'
 --
 -- * 'iddInstance'
-instancesDetachDisk'
+instancesDetachDisk
     :: Text -- ^ 'iddProject'
     -> Text -- ^ 'iddZone'
     -> Text -- ^ 'iddDeviceName'
     -> Text -- ^ 'iddInstance'
-    -> InstancesDetachDisk'
-instancesDetachDisk' pIddProject_ pIddZone_ pIddDeviceName_ pIddInstance_ =
-    InstancesDetachDisk'
+    -> InstancesDetachDisk
+instancesDetachDisk pIddProject_ pIddZone_ pIddDeviceName_ pIddInstance_ =
+    InstancesDetachDisk
     { _iddProject = pIddProject_
     , _iddZone = pIddZone_
     , _iddDeviceName = pIddDeviceName_
@@ -90,28 +90,28 @@ instancesDetachDisk' pIddProject_ pIddZone_ pIddDeviceName_ pIddInstance_ =
     }
 
 -- | Project ID for this request.
-iddProject :: Lens' InstancesDetachDisk' Text
+iddProject :: Lens' InstancesDetachDisk Text
 iddProject
   = lens _iddProject (\ s a -> s{_iddProject = a})
 
 -- | The name of the zone for this request.
-iddZone :: Lens' InstancesDetachDisk' Text
+iddZone :: Lens' InstancesDetachDisk Text
 iddZone = lens _iddZone (\ s a -> s{_iddZone = a})
 
 -- | Disk device name to detach.
-iddDeviceName :: Lens' InstancesDetachDisk' Text
+iddDeviceName :: Lens' InstancesDetachDisk Text
 iddDeviceName
   = lens _iddDeviceName
       (\ s a -> s{_iddDeviceName = a})
 
 -- | Instance name.
-iddInstance :: Lens' InstancesDetachDisk' Text
+iddInstance :: Lens' InstancesDetachDisk Text
 iddInstance
   = lens _iddInstance (\ s a -> s{_iddInstance = a})
 
-instance GoogleRequest InstancesDetachDisk' where
-        type Rs InstancesDetachDisk' = Operation
-        requestClient InstancesDetachDisk'{..}
+instance GoogleRequest InstancesDetachDisk where
+        type Rs InstancesDetachDisk = Operation
+        requestClient InstancesDetachDisk{..}
           = go _iddProject _iddZone _iddInstance
               (Just _iddDeviceName)
               (Just AltJSON)

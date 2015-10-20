@@ -29,8 +29,8 @@ module Network.Google.Resource.SQL.Instances.Clone
       InstancesCloneResource
 
     -- * Creating a Request
-    , instancesClone'
-    , InstancesClone'
+    , instancesClone
+    , InstancesClone
 
     -- * Request Lenses
     , icProject
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.clone@ method which the
--- 'InstancesClone'' request conforms to.
+-- 'InstancesClone' request conforms to.
 type InstancesCloneResource =
      "projects" :>
        Capture "project" Text :>
@@ -55,14 +55,14 @@ type InstancesCloneResource =
 
 -- | Creates a Cloud SQL instance as a clone of the source instance.
 --
--- /See:/ 'instancesClone'' smart constructor.
-data InstancesClone' = InstancesClone'
+-- /See:/ 'instancesClone' smart constructor.
+data InstancesClone = InstancesClone
     { _icProject  :: !Text
     , _icPayload  :: !InstancesCloneRequest
     , _icInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesClone'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesClone' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,37 +71,37 @@ data InstancesClone' = InstancesClone'
 -- * 'icPayload'
 --
 -- * 'icInstance'
-instancesClone'
+instancesClone
     :: Text -- ^ 'icProject'
     -> InstancesCloneRequest -- ^ 'icPayload'
     -> Text -- ^ 'icInstance'
-    -> InstancesClone'
-instancesClone' pIcProject_ pIcPayload_ pIcInstance_ =
-    InstancesClone'
+    -> InstancesClone
+instancesClone pIcProject_ pIcPayload_ pIcInstance_ =
+    InstancesClone
     { _icProject = pIcProject_
     , _icPayload = pIcPayload_
     , _icInstance = pIcInstance_
     }
 
 -- | Project ID of the source as well as the clone Cloud SQL instance.
-icProject :: Lens' InstancesClone' Text
+icProject :: Lens' InstancesClone Text
 icProject
   = lens _icProject (\ s a -> s{_icProject = a})
 
 -- | Multipart request metadata.
-icPayload :: Lens' InstancesClone' InstancesCloneRequest
+icPayload :: Lens' InstancesClone InstancesCloneRequest
 icPayload
   = lens _icPayload (\ s a -> s{_icPayload = a})
 
 -- | The ID of the Cloud SQL instance to be cloned (source). This does not
 -- include the project ID.
-icInstance :: Lens' InstancesClone' Text
+icInstance :: Lens' InstancesClone Text
 icInstance
   = lens _icInstance (\ s a -> s{_icInstance = a})
 
-instance GoogleRequest InstancesClone' where
-        type Rs InstancesClone' = Operation
-        requestClient InstancesClone'{..}
+instance GoogleRequest InstancesClone where
+        type Rs InstancesClone = Operation
+        requestClient InstancesClone{..}
           = go _icProject _icInstance (Just AltJSON) _icPayload
               sQLAdminService
           where go

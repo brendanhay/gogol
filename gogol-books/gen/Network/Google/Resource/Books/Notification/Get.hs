@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Notification.Get
       NotificationGetResource
 
     -- * Creating a Request
-    , notificationGet'
-    , NotificationGet'
+    , notificationGet
+    , NotificationGet
 
     -- * Request Lenses
     , ngLocale
@@ -42,7 +42,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.notification.get@ method which the
--- 'NotificationGet'' request conforms to.
+-- 'NotificationGet' request conforms to.
 type NotificationGetResource =
      "notification" :>
        "get" :>
@@ -53,14 +53,14 @@ type NotificationGetResource =
 
 -- | Returns notification details for a given notification id.
 --
--- /See:/ 'notificationGet'' smart constructor.
-data NotificationGet' = NotificationGet'
+-- /See:/ 'notificationGet' smart constructor.
+data NotificationGet = NotificationGet
     { _ngLocale         :: !(Maybe Text)
     , _ngNotificationId :: !Text
     , _ngSource         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'NotificationGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'NotificationGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,11 +69,11 @@ data NotificationGet' = NotificationGet'
 -- * 'ngNotificationId'
 --
 -- * 'ngSource'
-notificationGet'
+notificationGet
     :: Text -- ^ 'ngNotificationId'
-    -> NotificationGet'
-notificationGet' pNgNotificationId_ =
-    NotificationGet'
+    -> NotificationGet
+notificationGet pNgNotificationId_ =
+    NotificationGet
     { _ngLocale = Nothing
     , _ngNotificationId = pNgNotificationId_
     , _ngSource = Nothing
@@ -81,22 +81,22 @@ notificationGet' pNgNotificationId_ =
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Ex: \'en_US\'. Used for
 -- generating notification title and body.
-ngLocale :: Lens' NotificationGet' (Maybe Text)
+ngLocale :: Lens' NotificationGet (Maybe Text)
 ngLocale = lens _ngLocale (\ s a -> s{_ngLocale = a})
 
 -- | String to identify the notification.
-ngNotificationId :: Lens' NotificationGet' Text
+ngNotificationId :: Lens' NotificationGet Text
 ngNotificationId
   = lens _ngNotificationId
       (\ s a -> s{_ngNotificationId = a})
 
 -- | String to identify the originator of this request.
-ngSource :: Lens' NotificationGet' (Maybe Text)
+ngSource :: Lens' NotificationGet (Maybe Text)
 ngSource = lens _ngSource (\ s a -> s{_ngSource = a})
 
-instance GoogleRequest NotificationGet' where
-        type Rs NotificationGet' = Notification
-        requestClient NotificationGet'{..}
+instance GoogleRequest NotificationGet where
+        type Rs NotificationGet = Notification
+        requestClient NotificationGet{..}
           = go (Just _ngNotificationId) _ngLocale _ngSource
               (Just AltJSON)
               booksService

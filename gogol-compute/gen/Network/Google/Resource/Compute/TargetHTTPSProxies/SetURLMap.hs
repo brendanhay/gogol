@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.TargetHTTPSProxies.SetURLMap
       TargetHTTPSProxiesSetURLMapResource
 
     -- * Creating a Request
-    , targetHTTPSProxiesSetURLMap'
-    , TargetHTTPSProxiesSetURLMap'
+    , targetHTTPSProxiesSetURLMap
+    , TargetHTTPSProxiesSetURLMap
 
     -- * Request Lenses
     , thpsumProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetHttpsProxies.setUrlMap@ method which the
--- 'TargetHTTPSProxiesSetURLMap'' request conforms to.
+-- 'TargetHTTPSProxiesSetURLMap' request conforms to.
 type TargetHTTPSProxiesSetURLMapResource =
      Capture "project" Text :>
        "targetHttpsProxies" :>
@@ -54,14 +54,14 @@ type TargetHTTPSProxiesSetURLMapResource =
 
 -- | Changes the URL map for TargetHttpsProxy.
 --
--- /See:/ 'targetHTTPSProxiesSetURLMap'' smart constructor.
-data TargetHTTPSProxiesSetURLMap' = TargetHTTPSProxiesSetURLMap'
+-- /See:/ 'targetHTTPSProxiesSetURLMap' smart constructor.
+data TargetHTTPSProxiesSetURLMap = TargetHTTPSProxiesSetURLMap
     { _thpsumProject          :: !Text
     , _thpsumPayload          :: !URLMapReference
     , _thpsumTargetHTTPSProxy :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetHTTPSProxiesSetURLMap'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetHTTPSProxiesSetURLMap' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,40 +70,40 @@ data TargetHTTPSProxiesSetURLMap' = TargetHTTPSProxiesSetURLMap'
 -- * 'thpsumPayload'
 --
 -- * 'thpsumTargetHTTPSProxy'
-targetHTTPSProxiesSetURLMap'
+targetHTTPSProxiesSetURLMap
     :: Text -- ^ 'thpsumProject'
     -> URLMapReference -- ^ 'thpsumPayload'
     -> Text -- ^ 'thpsumTargetHTTPSProxy'
-    -> TargetHTTPSProxiesSetURLMap'
-targetHTTPSProxiesSetURLMap' pThpsumProject_ pThpsumPayload_ pThpsumTargetHTTPSProxy_ =
-    TargetHTTPSProxiesSetURLMap'
+    -> TargetHTTPSProxiesSetURLMap
+targetHTTPSProxiesSetURLMap pThpsumProject_ pThpsumPayload_ pThpsumTargetHTTPSProxy_ =
+    TargetHTTPSProxiesSetURLMap
     { _thpsumProject = pThpsumProject_
     , _thpsumPayload = pThpsumPayload_
     , _thpsumTargetHTTPSProxy = pThpsumTargetHTTPSProxy_
     }
 
 -- | Name of the project scoping this request.
-thpsumProject :: Lens' TargetHTTPSProxiesSetURLMap' Text
+thpsumProject :: Lens' TargetHTTPSProxiesSetURLMap Text
 thpsumProject
   = lens _thpsumProject
       (\ s a -> s{_thpsumProject = a})
 
 -- | Multipart request metadata.
-thpsumPayload :: Lens' TargetHTTPSProxiesSetURLMap' URLMapReference
+thpsumPayload :: Lens' TargetHTTPSProxiesSetURLMap URLMapReference
 thpsumPayload
   = lens _thpsumPayload
       (\ s a -> s{_thpsumPayload = a})
 
 -- | Name of the TargetHttpsProxy resource whose URL map is to be set.
-thpsumTargetHTTPSProxy :: Lens' TargetHTTPSProxiesSetURLMap' Text
+thpsumTargetHTTPSProxy :: Lens' TargetHTTPSProxiesSetURLMap Text
 thpsumTargetHTTPSProxy
   = lens _thpsumTargetHTTPSProxy
       (\ s a -> s{_thpsumTargetHTTPSProxy = a})
 
-instance GoogleRequest TargetHTTPSProxiesSetURLMap'
+instance GoogleRequest TargetHTTPSProxiesSetURLMap
          where
-        type Rs TargetHTTPSProxiesSetURLMap' = Operation
-        requestClient TargetHTTPSProxiesSetURLMap'{..}
+        type Rs TargetHTTPSProxiesSetURLMap = Operation
+        requestClient TargetHTTPSProxiesSetURLMap{..}
           = go _thpsumProject _thpsumTargetHTTPSProxy
               (Just AltJSON)
               _thpsumPayload

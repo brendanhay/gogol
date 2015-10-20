@@ -35,21 +35,21 @@ module Network.Google.Resource.Compute.Images.List
       ImagesListResource
 
     -- * Creating a Request
-    , imagesList'
-    , ImagesList'
+    , imagesList
+    , ImagesList
 
     -- * Request Lenses
-    , ilProject
-    , ilFilter
-    , ilPageToken
-    , ilMaxResults
+    , illProject
+    , illFilter
+    , illPageToken
+    , illMaxResults
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.images.list@ method which the
--- 'ImagesList'' request conforms to.
+-- 'ImagesList' request conforms to.
 type ImagesListResource =
      Capture "project" Text :>
        "global" :>
@@ -67,40 +67,40 @@ type ImagesListResource =
 -- respective image project, such as debian-cloud or windows-cloud. See
 -- Accessing images for more information.
 --
--- /See:/ 'imagesList'' smart constructor.
-data ImagesList' = ImagesList'
-    { _ilProject    :: !Text
-    , _ilFilter     :: !(Maybe Text)
-    , _ilPageToken  :: !(Maybe Text)
-    , _ilMaxResults :: !Word32
+-- /See:/ 'imagesList' smart constructor.
+data ImagesList = ImagesList
+    { _illProject    :: !Text
+    , _illFilter     :: !(Maybe Text)
+    , _illPageToken  :: !(Maybe Text)
+    , _illMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ImagesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ImagesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ilProject'
+-- * 'illProject'
 --
--- * 'ilFilter'
+-- * 'illFilter'
 --
--- * 'ilPageToken'
+-- * 'illPageToken'
 --
--- * 'ilMaxResults'
-imagesList'
-    :: Text -- ^ 'ilProject'
-    -> ImagesList'
-imagesList' pIlProject_ =
-    ImagesList'
-    { _ilProject = pIlProject_
-    , _ilFilter = Nothing
-    , _ilPageToken = Nothing
-    , _ilMaxResults = 500
+-- * 'illMaxResults'
+imagesList
+    :: Text -- ^ 'illProject'
+    -> ImagesList
+imagesList pIllProject_ =
+    ImagesList
+    { _illProject = pIllProject_
+    , _illFilter = Nothing
+    , _illPageToken = Nothing
+    , _illMaxResults = 500
     }
 
 -- | Project ID for this request.
-ilProject :: Lens' ImagesList' Text
-ilProject
-  = lens _ilProject (\ s a -> s{_ilProject = a})
+illProject :: Lens' ImagesList Text
+illProject
+  = lens _illProject (\ s a -> s{_illProject = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -113,26 +113,28 @@ ilProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-ilFilter :: Lens' ImagesList' (Maybe Text)
-ilFilter = lens _ilFilter (\ s a -> s{_ilFilter = a})
+illFilter :: Lens' ImagesList (Maybe Text)
+illFilter
+  = lens _illFilter (\ s a -> s{_illFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-ilPageToken :: Lens' ImagesList' (Maybe Text)
-ilPageToken
-  = lens _ilPageToken (\ s a -> s{_ilPageToken = a})
+illPageToken :: Lens' ImagesList (Maybe Text)
+illPageToken
+  = lens _illPageToken (\ s a -> s{_illPageToken = a})
 
 -- | Maximum count of results to be returned.
-ilMaxResults :: Lens' ImagesList' Word32
-ilMaxResults
-  = lens _ilMaxResults (\ s a -> s{_ilMaxResults = a})
+illMaxResults :: Lens' ImagesList Word32
+illMaxResults
+  = lens _illMaxResults
+      (\ s a -> s{_illMaxResults = a})
 
-instance GoogleRequest ImagesList' where
-        type Rs ImagesList' = ImageList
-        requestClient ImagesList'{..}
-          = go _ilProject _ilFilter _ilPageToken
-              (Just _ilMaxResults)
+instance GoogleRequest ImagesList where
+        type Rs ImagesList = ImageList
+        requestClient ImagesList{..}
+          = go _illProject _illFilter _illPageToken
+              (Just _illMaxResults)
               (Just AltJSON)
               computeService
           where go

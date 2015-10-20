@@ -30,20 +30,20 @@ module Network.Google.Resource.Compute.Instances.Start
       InstancesStartResource
 
     -- * Creating a Request
-    , instancesStart'
-    , InstancesStart'
+    , instancesStart
+    , InstancesStart
 
     -- * Request Lenses
-    , insnProject
-    , insnZone
-    , insnInstance
+    , insProject
+    , insZone
+    , insInstance
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.start@ method which the
--- 'InstancesStart'' request conforms to.
+-- 'InstancesStart' request conforms to.
 type InstancesStartResource =
      Capture "project" Text :>
        "zones" :>
@@ -56,53 +56,52 @@ type InstancesStartResource =
 -- | This method starts an instance that was stopped using the using the
 -- instances().stop method. For more information, see Restart an instance.
 --
--- /See:/ 'instancesStart'' smart constructor.
-data InstancesStart' = InstancesStart'
-    { _insnProject  :: !Text
-    , _insnZone     :: !Text
-    , _insnInstance :: !Text
+-- /See:/ 'instancesStart' smart constructor.
+data InstancesStart = InstancesStart
+    { _insProject  :: !Text
+    , _insZone     :: !Text
+    , _insInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesStart'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesStart' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'insnProject'
+-- * 'insProject'
 --
--- * 'insnZone'
+-- * 'insZone'
 --
--- * 'insnInstance'
-instancesStart'
-    :: Text -- ^ 'insnProject'
-    -> Text -- ^ 'insnZone'
-    -> Text -- ^ 'insnInstance'
-    -> InstancesStart'
-instancesStart' pInsnProject_ pInsnZone_ pInsnInstance_ =
-    InstancesStart'
-    { _insnProject = pInsnProject_
-    , _insnZone = pInsnZone_
-    , _insnInstance = pInsnInstance_
+-- * 'insInstance'
+instancesStart
+    :: Text -- ^ 'insProject'
+    -> Text -- ^ 'insZone'
+    -> Text -- ^ 'insInstance'
+    -> InstancesStart
+instancesStart pInsProject_ pInsZone_ pInsInstance_ =
+    InstancesStart
+    { _insProject = pInsProject_
+    , _insZone = pInsZone_
+    , _insInstance = pInsInstance_
     }
 
 -- | Project ID for this request.
-insnProject :: Lens' InstancesStart' Text
-insnProject
-  = lens _insnProject (\ s a -> s{_insnProject = a})
+insProject :: Lens' InstancesStart Text
+insProject
+  = lens _insProject (\ s a -> s{_insProject = a})
 
 -- | The name of the zone for this request.
-insnZone :: Lens' InstancesStart' Text
-insnZone = lens _insnZone (\ s a -> s{_insnZone = a})
+insZone :: Lens' InstancesStart Text
+insZone = lens _insZone (\ s a -> s{_insZone = a})
 
 -- | Name of the instance resource to start.
-insnInstance :: Lens' InstancesStart' Text
-insnInstance
-  = lens _insnInstance (\ s a -> s{_insnInstance = a})
+insInstance :: Lens' InstancesStart Text
+insInstance
+  = lens _insInstance (\ s a -> s{_insInstance = a})
 
-instance GoogleRequest InstancesStart' where
-        type Rs InstancesStart' = Operation
-        requestClient InstancesStart'{..}
-          = go _insnProject _insnZone _insnInstance
-              (Just AltJSON)
+instance GoogleRequest InstancesStart where
+        type Rs InstancesStart = Operation
+        requestClient InstancesStart{..}
+          = go _insProject _insZone _insInstance (Just AltJSON)
               computeService
           where go
                   = buildClient (Proxy :: Proxy InstancesStartResource)

@@ -29,40 +29,40 @@ module Network.Google.Resource.DFAReporting.Placements.List
       PlacementsListResource
 
     -- * Creating a Request
-    , placementsList'
-    , PlacementsList'
+    , placementsList
+    , PlacementsList
 
     -- * Request Lenses
-    , plaPlacementStrategyIds
-    , plaContentCategoryIds
-    , plaMaxEndDate
-    , plaCampaignIds
-    , plaPricingTypes
-    , plaSearchString
-    , plaSizeIds
-    , plaIds
-    , plaProFileId
-    , plaGroupIds
-    , plaDirectorySiteIds
-    , plaSortOrder
-    , plaPaymentSource
-    , plaSiteIds
-    , plaPageToken
-    , plaSortField
-    , plaCompatibilities
-    , plaMaxStartDate
-    , plaAdvertiserIds
-    , plaMinStartDate
-    , plaArchived
-    , plaMaxResults
-    , plaMinEndDate
+    , pPlacementStrategyIds
+    , pContentCategoryIds
+    , pMaxEndDate
+    , pCampaignIds
+    , pPricingTypes
+    , pSearchString
+    , pSizeIds
+    , pIds
+    , pProFileId
+    , pGroupIds
+    , pDirectorySiteIds
+    , pSortOrder
+    , pPaymentSource
+    , pSiteIds
+    , pPageToken
+    , pSortField
+    , pCompatibilities
+    , pMaxStartDate
+    , pAdvertiserIds
+    , pMinStartDate
+    , pArchived
+    , pMaxResults
+    , pMinEndDate
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placements.list@ method which the
--- 'PlacementsList'' request conforms to.
+-- 'PlacementsList' request conforms to.
 type PlacementsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -107,151 +107,149 @@ type PlacementsListResource =
 
 -- | Retrieves a list of placements, possibly filtered.
 --
--- /See:/ 'placementsList'' smart constructor.
-data PlacementsList' = PlacementsList'
-    { _plaPlacementStrategyIds :: !(Maybe [Int64])
-    , _plaContentCategoryIds   :: !(Maybe [Int64])
-    , _plaMaxEndDate           :: !(Maybe Text)
-    , _plaCampaignIds          :: !(Maybe [Int64])
-    , _plaPricingTypes         :: !(Maybe [PlacementsListPricingTypes])
-    , _plaSearchString         :: !(Maybe Text)
-    , _plaSizeIds              :: !(Maybe [Int64])
-    , _plaIds                  :: !(Maybe [Int64])
-    , _plaProFileId            :: !Int64
-    , _plaGroupIds             :: !(Maybe [Int64])
-    , _plaDirectorySiteIds     :: !(Maybe [Int64])
-    , _plaSortOrder            :: !(Maybe PlacementsListSortOrder)
-    , _plaPaymentSource        :: !(Maybe PlacementsListPaymentSource)
-    , _plaSiteIds              :: !(Maybe [Int64])
-    , _plaPageToken            :: !(Maybe Text)
-    , _plaSortField            :: !(Maybe PlacementsListSortField)
-    , _plaCompatibilities      :: !(Maybe [PlacementsListCompatibilities])
-    , _plaMaxStartDate         :: !(Maybe Text)
-    , _plaAdvertiserIds        :: !(Maybe [Int64])
-    , _plaMinStartDate         :: !(Maybe Text)
-    , _plaArchived             :: !(Maybe Bool)
-    , _plaMaxResults           :: !(Maybe Int32)
-    , _plaMinEndDate           :: !(Maybe Text)
+-- /See:/ 'placementsList' smart constructor.
+data PlacementsList = PlacementsList
+    { _pPlacementStrategyIds :: !(Maybe [Int64])
+    , _pContentCategoryIds   :: !(Maybe [Int64])
+    , _pMaxEndDate           :: !(Maybe Text)
+    , _pCampaignIds          :: !(Maybe [Int64])
+    , _pPricingTypes         :: !(Maybe [PlacementsListPricingTypes])
+    , _pSearchString         :: !(Maybe Text)
+    , _pSizeIds              :: !(Maybe [Int64])
+    , _pIds                  :: !(Maybe [Int64])
+    , _pProFileId            :: !Int64
+    , _pGroupIds             :: !(Maybe [Int64])
+    , _pDirectorySiteIds     :: !(Maybe [Int64])
+    , _pSortOrder            :: !(Maybe PlacementsListSortOrder)
+    , _pPaymentSource        :: !(Maybe PlacementsListPaymentSource)
+    , _pSiteIds              :: !(Maybe [Int64])
+    , _pPageToken            :: !(Maybe Text)
+    , _pSortField            :: !(Maybe PlacementsListSortField)
+    , _pCompatibilities      :: !(Maybe [PlacementsListCompatibilities])
+    , _pMaxStartDate         :: !(Maybe Text)
+    , _pAdvertiserIds        :: !(Maybe [Int64])
+    , _pMinStartDate         :: !(Maybe Text)
+    , _pArchived             :: !(Maybe Bool)
+    , _pMaxResults           :: !(Maybe Int32)
+    , _pMinEndDate           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlacementsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlacementsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'plaPlacementStrategyIds'
+-- * 'pPlacementStrategyIds'
 --
--- * 'plaContentCategoryIds'
+-- * 'pContentCategoryIds'
 --
--- * 'plaMaxEndDate'
+-- * 'pMaxEndDate'
 --
--- * 'plaCampaignIds'
+-- * 'pCampaignIds'
 --
--- * 'plaPricingTypes'
+-- * 'pPricingTypes'
 --
--- * 'plaSearchString'
+-- * 'pSearchString'
 --
--- * 'plaSizeIds'
+-- * 'pSizeIds'
 --
--- * 'plaIds'
+-- * 'pIds'
 --
--- * 'plaProFileId'
+-- * 'pProFileId'
 --
--- * 'plaGroupIds'
+-- * 'pGroupIds'
 --
--- * 'plaDirectorySiteIds'
+-- * 'pDirectorySiteIds'
 --
--- * 'plaSortOrder'
+-- * 'pSortOrder'
 --
--- * 'plaPaymentSource'
+-- * 'pPaymentSource'
 --
--- * 'plaSiteIds'
+-- * 'pSiteIds'
 --
--- * 'plaPageToken'
+-- * 'pPageToken'
 --
--- * 'plaSortField'
+-- * 'pSortField'
 --
--- * 'plaCompatibilities'
+-- * 'pCompatibilities'
 --
--- * 'plaMaxStartDate'
+-- * 'pMaxStartDate'
 --
--- * 'plaAdvertiserIds'
+-- * 'pAdvertiserIds'
 --
--- * 'plaMinStartDate'
+-- * 'pMinStartDate'
 --
--- * 'plaArchived'
+-- * 'pArchived'
 --
--- * 'plaMaxResults'
+-- * 'pMaxResults'
 --
--- * 'plaMinEndDate'
-placementsList'
-    :: Int64 -- ^ 'plaProFileId'
-    -> PlacementsList'
-placementsList' pPlaProFileId_ =
-    PlacementsList'
-    { _plaPlacementStrategyIds = Nothing
-    , _plaContentCategoryIds = Nothing
-    , _plaMaxEndDate = Nothing
-    , _plaCampaignIds = Nothing
-    , _plaPricingTypes = Nothing
-    , _plaSearchString = Nothing
-    , _plaSizeIds = Nothing
-    , _plaIds = Nothing
-    , _plaProFileId = pPlaProFileId_
-    , _plaGroupIds = Nothing
-    , _plaDirectorySiteIds = Nothing
-    , _plaSortOrder = Nothing
-    , _plaPaymentSource = Nothing
-    , _plaSiteIds = Nothing
-    , _plaPageToken = Nothing
-    , _plaSortField = Nothing
-    , _plaCompatibilities = Nothing
-    , _plaMaxStartDate = Nothing
-    , _plaAdvertiserIds = Nothing
-    , _plaMinStartDate = Nothing
-    , _plaArchived = Nothing
-    , _plaMaxResults = Nothing
-    , _plaMinEndDate = Nothing
+-- * 'pMinEndDate'
+placementsList
+    :: Int64 -- ^ 'pProFileId'
+    -> PlacementsList
+placementsList pPProFileId_ =
+    PlacementsList
+    { _pPlacementStrategyIds = Nothing
+    , _pContentCategoryIds = Nothing
+    , _pMaxEndDate = Nothing
+    , _pCampaignIds = Nothing
+    , _pPricingTypes = Nothing
+    , _pSearchString = Nothing
+    , _pSizeIds = Nothing
+    , _pIds = Nothing
+    , _pProFileId = pPProFileId_
+    , _pGroupIds = Nothing
+    , _pDirectorySiteIds = Nothing
+    , _pSortOrder = Nothing
+    , _pPaymentSource = Nothing
+    , _pSiteIds = Nothing
+    , _pPageToken = Nothing
+    , _pSortField = Nothing
+    , _pCompatibilities = Nothing
+    , _pMaxStartDate = Nothing
+    , _pAdvertiserIds = Nothing
+    , _pMinStartDate = Nothing
+    , _pArchived = Nothing
+    , _pMaxResults = Nothing
+    , _pMinEndDate = Nothing
     }
 
 -- | Select only placements that are associated with these placement
 -- strategies.
-plaPlacementStrategyIds :: Lens' PlacementsList' [Int64]
-plaPlacementStrategyIds
-  = lens _plaPlacementStrategyIds
-      (\ s a -> s{_plaPlacementStrategyIds = a})
+pPlacementStrategyIds :: Lens' PlacementsList [Int64]
+pPlacementStrategyIds
+  = lens _pPlacementStrategyIds
+      (\ s a -> s{_pPlacementStrategyIds = a})
       . _Default
       . _Coerce
 
 -- | Select only placements that are associated with these content
 -- categories.
-plaContentCategoryIds :: Lens' PlacementsList' [Int64]
-plaContentCategoryIds
-  = lens _plaContentCategoryIds
-      (\ s a -> s{_plaContentCategoryIds = a})
+pContentCategoryIds :: Lens' PlacementsList [Int64]
+pContentCategoryIds
+  = lens _pContentCategoryIds
+      (\ s a -> s{_pContentCategoryIds = a})
       . _Default
       . _Coerce
 
 -- | Select only placements or placement groups whose end date is on or
 -- before the specified maxEndDate. The date should be formatted as
 -- \"yyyy-MM-dd\".
-plaMaxEndDate :: Lens' PlacementsList' (Maybe Text)
-plaMaxEndDate
-  = lens _plaMaxEndDate
-      (\ s a -> s{_plaMaxEndDate = a})
+pMaxEndDate :: Lens' PlacementsList (Maybe Text)
+pMaxEndDate
+  = lens _pMaxEndDate (\ s a -> s{_pMaxEndDate = a})
 
 -- | Select only placements that belong to these campaigns.
-plaCampaignIds :: Lens' PlacementsList' [Int64]
-plaCampaignIds
-  = lens _plaCampaignIds
-      (\ s a -> s{_plaCampaignIds = a})
+pCampaignIds :: Lens' PlacementsList [Int64]
+pCampaignIds
+  = lens _pCampaignIds (\ s a -> s{_pCampaignIds = a})
       . _Default
       . _Coerce
 
 -- | Select only placements with these pricing types.
-plaPricingTypes :: Lens' PlacementsList' [PlacementsListPricingTypes]
-plaPricingTypes
-  = lens _plaPricingTypes
-      (\ s a -> s{_plaPricingTypes = a})
+pPricingTypes :: Lens' PlacementsList [PlacementsListPricingTypes]
+pPricingTypes
+  = lens _pPricingTypes
+      (\ s a -> s{_pPricingTypes = a})
       . _Default
       . _Coerce
 
@@ -262,154 +260,151 @@ plaPricingTypes
 -- at the start and the end of the search string. For example, a search
 -- string of \"placement\" will match placements with name \"my
 -- placement\", \"placement 2015\", or simply \"placement\".
-plaSearchString :: Lens' PlacementsList' (Maybe Text)
-plaSearchString
-  = lens _plaSearchString
-      (\ s a -> s{_plaSearchString = a})
+pSearchString :: Lens' PlacementsList (Maybe Text)
+pSearchString
+  = lens _pSearchString
+      (\ s a -> s{_pSearchString = a})
 
 -- | Select only placements that are associated with these sizes.
-plaSizeIds :: Lens' PlacementsList' [Int64]
-plaSizeIds
-  = lens _plaSizeIds (\ s a -> s{_plaSizeIds = a}) .
+pSizeIds :: Lens' PlacementsList [Int64]
+pSizeIds
+  = lens _pSizeIds (\ s a -> s{_pSizeIds = a}) .
       _Default
       . _Coerce
 
 -- | Select only placements with these IDs.
-plaIds :: Lens' PlacementsList' [Int64]
-plaIds
-  = lens _plaIds (\ s a -> s{_plaIds = a}) . _Default .
+pIds :: Lens' PlacementsList [Int64]
+pIds
+  = lens _pIds (\ s a -> s{_pIds = a}) . _Default .
       _Coerce
 
 -- | User profile ID associated with this request.
-plaProFileId :: Lens' PlacementsList' Int64
-plaProFileId
-  = lens _plaProFileId (\ s a -> s{_plaProFileId = a})
+pProFileId :: Lens' PlacementsList Int64
+pProFileId
+  = lens _pProFileId (\ s a -> s{_pProFileId = a})
 
 -- | Select only placements that belong to these placement groups.
-plaGroupIds :: Lens' PlacementsList' [Int64]
-plaGroupIds
-  = lens _plaGroupIds (\ s a -> s{_plaGroupIds = a}) .
+pGroupIds :: Lens' PlacementsList [Int64]
+pGroupIds
+  = lens _pGroupIds (\ s a -> s{_pGroupIds = a}) .
       _Default
       . _Coerce
 
 -- | Select only placements that are associated with these directory sites.
-plaDirectorySiteIds :: Lens' PlacementsList' [Int64]
-plaDirectorySiteIds
-  = lens _plaDirectorySiteIds
-      (\ s a -> s{_plaDirectorySiteIds = a})
+pDirectorySiteIds :: Lens' PlacementsList [Int64]
+pDirectorySiteIds
+  = lens _pDirectorySiteIds
+      (\ s a -> s{_pDirectorySiteIds = a})
       . _Default
       . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
-plaSortOrder :: Lens' PlacementsList' (Maybe PlacementsListSortOrder)
-plaSortOrder
-  = lens _plaSortOrder (\ s a -> s{_plaSortOrder = a})
+pSortOrder :: Lens' PlacementsList (Maybe PlacementsListSortOrder)
+pSortOrder
+  = lens _pSortOrder (\ s a -> s{_pSortOrder = a})
 
 -- | Select only placements with this payment source.
-plaPaymentSource :: Lens' PlacementsList' (Maybe PlacementsListPaymentSource)
-plaPaymentSource
-  = lens _plaPaymentSource
-      (\ s a -> s{_plaPaymentSource = a})
+pPaymentSource :: Lens' PlacementsList (Maybe PlacementsListPaymentSource)
+pPaymentSource
+  = lens _pPaymentSource
+      (\ s a -> s{_pPaymentSource = a})
 
 -- | Select only placements that are associated with these sites.
-plaSiteIds :: Lens' PlacementsList' [Int64]
-plaSiteIds
-  = lens _plaSiteIds (\ s a -> s{_plaSiteIds = a}) .
+pSiteIds :: Lens' PlacementsList [Int64]
+pSiteIds
+  = lens _pSiteIds (\ s a -> s{_pSiteIds = a}) .
       _Default
       . _Coerce
 
 -- | Value of the nextPageToken from the previous result page.
-plaPageToken :: Lens' PlacementsList' (Maybe Text)
-plaPageToken
-  = lens _plaPageToken (\ s a -> s{_plaPageToken = a})
+pPageToken :: Lens' PlacementsList (Maybe Text)
+pPageToken
+  = lens _pPageToken (\ s a -> s{_pPageToken = a})
 
 -- | Field by which to sort the list.
-plaSortField :: Lens' PlacementsList' (Maybe PlacementsListSortField)
-plaSortField
-  = lens _plaSortField (\ s a -> s{_plaSortField = a})
+pSortField :: Lens' PlacementsList (Maybe PlacementsListSortField)
+pSortField
+  = lens _pSortField (\ s a -> s{_pSortField = a})
 
 -- | Select only placements that are associated with these compatibilities.
 -- WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on
 -- mobile devices for regular or interstitial ads respectively. APP and
 -- APP_INTERSTITIAL are for rendering in mobile apps.IN_STREAM_VIDEO refers
 -- to rendering in in-stream video ads developed with the VAST standard.
-plaCompatibilities :: Lens' PlacementsList' [PlacementsListCompatibilities]
-plaCompatibilities
-  = lens _plaCompatibilities
-      (\ s a -> s{_plaCompatibilities = a})
+pCompatibilities :: Lens' PlacementsList [PlacementsListCompatibilities]
+pCompatibilities
+  = lens _pCompatibilities
+      (\ s a -> s{_pCompatibilities = a})
       . _Default
       . _Coerce
 
 -- | Select only placements or placement groups whose start date is on or
 -- before the specified maxStartDate. The date should be formatted as
 -- \"yyyy-MM-dd\".
-plaMaxStartDate :: Lens' PlacementsList' (Maybe Text)
-plaMaxStartDate
-  = lens _plaMaxStartDate
-      (\ s a -> s{_plaMaxStartDate = a})
+pMaxStartDate :: Lens' PlacementsList (Maybe Text)
+pMaxStartDate
+  = lens _pMaxStartDate
+      (\ s a -> s{_pMaxStartDate = a})
 
 -- | Select only placements that belong to these advertisers.
-plaAdvertiserIds :: Lens' PlacementsList' [Int64]
-plaAdvertiserIds
-  = lens _plaAdvertiserIds
-      (\ s a -> s{_plaAdvertiserIds = a})
+pAdvertiserIds :: Lens' PlacementsList [Int64]
+pAdvertiserIds
+  = lens _pAdvertiserIds
+      (\ s a -> s{_pAdvertiserIds = a})
       . _Default
       . _Coerce
 
 -- | Select only placements or placement groups whose start date is on or
 -- after the specified minStartDate. The date should be formatted as
 -- \"yyyy-MM-dd\".
-plaMinStartDate :: Lens' PlacementsList' (Maybe Text)
-plaMinStartDate
-  = lens _plaMinStartDate
-      (\ s a -> s{_plaMinStartDate = a})
+pMinStartDate :: Lens' PlacementsList (Maybe Text)
+pMinStartDate
+  = lens _pMinStartDate
+      (\ s a -> s{_pMinStartDate = a})
 
 -- | Select only archived placements. Don\'t set this field to select both
 -- archived and non-archived placements.
-plaArchived :: Lens' PlacementsList' (Maybe Bool)
-plaArchived
-  = lens _plaArchived (\ s a -> s{_plaArchived = a})
+pArchived :: Lens' PlacementsList (Maybe Bool)
+pArchived
+  = lens _pArchived (\ s a -> s{_pArchived = a})
 
 -- | Maximum number of results to return.
-plaMaxResults :: Lens' PlacementsList' (Maybe Int32)
-plaMaxResults
-  = lens _plaMaxResults
-      (\ s a -> s{_plaMaxResults = a})
+pMaxResults :: Lens' PlacementsList (Maybe Int32)
+pMaxResults
+  = lens _pMaxResults (\ s a -> s{_pMaxResults = a})
 
 -- | Select only placements or placement groups whose end date is on or after
 -- the specified minEndDate. The date should be formatted as
 -- \"yyyy-MM-dd\".
-plaMinEndDate :: Lens' PlacementsList' (Maybe Text)
-plaMinEndDate
-  = lens _plaMinEndDate
-      (\ s a -> s{_plaMinEndDate = a})
+pMinEndDate :: Lens' PlacementsList (Maybe Text)
+pMinEndDate
+  = lens _pMinEndDate (\ s a -> s{_pMinEndDate = a})
 
-instance GoogleRequest PlacementsList' where
-        type Rs PlacementsList' = PlacementsListResponse
-        requestClient PlacementsList'{..}
-          = go _plaProFileId
-              (_plaPlacementStrategyIds ^. _Default)
-              (_plaContentCategoryIds ^. _Default)
-              _plaMaxEndDate
-              (_plaCampaignIds ^. _Default)
-              (_plaPricingTypes ^. _Default)
-              _plaSearchString
-              (_plaSizeIds ^. _Default)
-              (_plaIds ^. _Default)
-              (_plaGroupIds ^. _Default)
-              (_plaDirectorySiteIds ^. _Default)
-              _plaSortOrder
-              _plaPaymentSource
-              (_plaSiteIds ^. _Default)
-              _plaPageToken
-              _plaSortField
-              (_plaCompatibilities ^. _Default)
-              _plaMaxStartDate
-              (_plaAdvertiserIds ^. _Default)
-              _plaMinStartDate
-              _plaArchived
-              _plaMaxResults
-              _plaMinEndDate
+instance GoogleRequest PlacementsList where
+        type Rs PlacementsList = PlacementsListResponse
+        requestClient PlacementsList{..}
+          = go _pProFileId (_pPlacementStrategyIds ^. _Default)
+              (_pContentCategoryIds ^. _Default)
+              _pMaxEndDate
+              (_pCampaignIds ^. _Default)
+              (_pPricingTypes ^. _Default)
+              _pSearchString
+              (_pSizeIds ^. _Default)
+              (_pIds ^. _Default)
+              (_pGroupIds ^. _Default)
+              (_pDirectorySiteIds ^. _Default)
+              _pSortOrder
+              _pPaymentSource
+              (_pSiteIds ^. _Default)
+              _pPageToken
+              _pSortField
+              (_pCompatibilities ^. _Default)
+              _pMaxStartDate
+              (_pAdvertiserIds ^. _Default)
+              _pMinStartDate
+              _pArchived
+              _pMaxResults
+              _pMinEndDate
               (Just AltJSON)
               dFAReportingService
           where go

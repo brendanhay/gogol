@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTubeAnalytics.BatchReportDefinitions.List
       BatchReportDefinitionsListResource
 
     -- * Creating a Request
-    , batchReportDefinitionsList'
-    , BatchReportDefinitionsList'
+    , batchReportDefinitionsList
+    , BatchReportDefinitionsList
 
     -- * Request Lenses
     , brdlOnBehalfOfContentOwner
@@ -40,7 +40,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @youtubeAnalytics.batchReportDefinitions.list@ method which the
--- 'BatchReportDefinitionsList'' request conforms to.
+-- 'BatchReportDefinitionsList' request conforms to.
 type BatchReportDefinitionsListResource =
      "batchReportDefinitions" :>
        QueryParam "onBehalfOfContentOwner" Text :>
@@ -49,36 +49,36 @@ type BatchReportDefinitionsListResource =
 
 -- | Retrieves a list of available batch report definitions.
 --
--- /See:/ 'batchReportDefinitionsList'' smart constructor.
-newtype BatchReportDefinitionsList' = BatchReportDefinitionsList'
+-- /See:/ 'batchReportDefinitionsList' smart constructor.
+newtype BatchReportDefinitionsList = BatchReportDefinitionsList
     { _brdlOnBehalfOfContentOwner :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BatchReportDefinitionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'BatchReportDefinitionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'brdlOnBehalfOfContentOwner'
-batchReportDefinitionsList'
+batchReportDefinitionsList
     :: Text -- ^ 'brdlOnBehalfOfContentOwner'
-    -> BatchReportDefinitionsList'
-batchReportDefinitionsList' pBrdlOnBehalfOfContentOwner_ =
-    BatchReportDefinitionsList'
+    -> BatchReportDefinitionsList
+batchReportDefinitionsList pBrdlOnBehalfOfContentOwner_ =
+    BatchReportDefinitionsList
     { _brdlOnBehalfOfContentOwner = pBrdlOnBehalfOfContentOwner_
     }
 
 -- | The onBehalfOfContentOwner parameter identifies the content owner that
 -- the user is acting on behalf of.
-brdlOnBehalfOfContentOwner :: Lens' BatchReportDefinitionsList' Text
+brdlOnBehalfOfContentOwner :: Lens' BatchReportDefinitionsList Text
 brdlOnBehalfOfContentOwner
   = lens _brdlOnBehalfOfContentOwner
       (\ s a -> s{_brdlOnBehalfOfContentOwner = a})
 
-instance GoogleRequest BatchReportDefinitionsList'
+instance GoogleRequest BatchReportDefinitionsList
          where
-        type Rs BatchReportDefinitionsList' =
+        type Rs BatchReportDefinitionsList =
              BatchReportDefinitionList
-        requestClient BatchReportDefinitionsList'{..}
+        requestClient BatchReportDefinitionsList{..}
           = go (Just _brdlOnBehalfOfContentOwner)
               (Just AltJSON)
               youTubeAnalyticsService

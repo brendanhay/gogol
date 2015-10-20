@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.Watch
       UsersWatchResource
 
     -- * Creating a Request
-    , usersWatch'
-    , UsersWatch'
+    , usersWatch
+    , UsersWatch
 
     -- * Request Lenses
     , uwPayload
@@ -41,7 +41,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.watch@ method which the
--- 'UsersWatch'' request conforms to.
+-- 'UsersWatch' request conforms to.
 type UsersWatchResource =
      Capture "userId" Text :>
        "watch" :>
@@ -51,42 +51,42 @@ type UsersWatchResource =
 
 -- | Set up or update a push notification watch on the given user mailbox.
 --
--- /See:/ 'usersWatch'' smart constructor.
-data UsersWatch' = UsersWatch'
+-- /See:/ 'usersWatch' smart constructor.
+data UsersWatch = UsersWatch
     { _uwPayload :: !WatchRequest
     , _uwUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersWatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'uwPayload'
 --
 -- * 'uwUserId'
-usersWatch'
+usersWatch
     :: WatchRequest -- ^ 'uwPayload'
     -> Text
-    -> UsersWatch'
-usersWatch' pUwPayload_ pUwUserId_ =
-    UsersWatch'
+    -> UsersWatch
+usersWatch pUwPayload_ pUwUserId_ =
+    UsersWatch
     { _uwPayload = pUwPayload_
     , _uwUserId = pUwUserId_
     }
 
 -- | Multipart request metadata.
-uwPayload :: Lens' UsersWatch' WatchRequest
+uwPayload :: Lens' UsersWatch WatchRequest
 uwPayload
   = lens _uwPayload (\ s a -> s{_uwPayload = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-uwUserId :: Lens' UsersWatch' Text
+uwUserId :: Lens' UsersWatch Text
 uwUserId = lens _uwUserId (\ s a -> s{_uwUserId = a})
 
-instance GoogleRequest UsersWatch' where
-        type Rs UsersWatch' = WatchResponse
-        requestClient UsersWatch'{..}
+instance GoogleRequest UsersWatch where
+        type Rs UsersWatch = WatchResponse
+        requestClient UsersWatch{..}
           = go _uwUserId (Just AltJSON) _uwPayload gmailService
           where go
                   = buildClient (Proxy :: Proxy UsersWatchResource)

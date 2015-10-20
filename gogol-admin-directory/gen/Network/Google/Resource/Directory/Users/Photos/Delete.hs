@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Users.Photos.Delete
       UsersPhotosDeleteResource
 
     -- * Creating a Request
-    , usersPhotosDelete'
-    , UsersPhotosDelete'
+    , usersPhotosDelete
+    , UsersPhotosDelete
 
     -- * Request Lenses
     , updUserKey
@@ -40,7 +40,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.users.photos.delete@ method which the
--- 'UsersPhotosDelete'' request conforms to.
+-- 'UsersPhotosDelete' request conforms to.
 type UsersPhotosDeleteResource =
      "users" :>
        Capture "userKey" Text :>
@@ -50,32 +50,32 @@ type UsersPhotosDeleteResource =
 
 -- | Remove photos for the user
 --
--- /See:/ 'usersPhotosDelete'' smart constructor.
-newtype UsersPhotosDelete' = UsersPhotosDelete'
+-- /See:/ 'usersPhotosDelete' smart constructor.
+newtype UsersPhotosDelete = UsersPhotosDelete
     { _updUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersPhotosDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersPhotosDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'updUserKey'
-usersPhotosDelete'
+usersPhotosDelete
     :: Text -- ^ 'updUserKey'
-    -> UsersPhotosDelete'
-usersPhotosDelete' pUpdUserKey_ =
-    UsersPhotosDelete'
+    -> UsersPhotosDelete
+usersPhotosDelete pUpdUserKey_ =
+    UsersPhotosDelete
     { _updUserKey = pUpdUserKey_
     }
 
 -- | Email or immutable Id of the user
-updUserKey :: Lens' UsersPhotosDelete' Text
+updUserKey :: Lens' UsersPhotosDelete Text
 updUserKey
   = lens _updUserKey (\ s a -> s{_updUserKey = a})
 
-instance GoogleRequest UsersPhotosDelete' where
-        type Rs UsersPhotosDelete' = ()
-        requestClient UsersPhotosDelete'{..}
+instance GoogleRequest UsersPhotosDelete where
+        type Rs UsersPhotosDelete = ()
+        requestClient UsersPhotosDelete{..}
           = go _updUserKey (Just AltJSON) directoryService
           where go
                   = buildClient

@@ -30,8 +30,8 @@ module Network.Google.Resource.Games.Events.Record
       EventsRecordResource
 
     -- * Creating a Request
-    , eventsRecord'
-    , EventsRecord'
+    , eventsRecord
+    , EventsRecord
 
     -- * Request Lenses
     , erPayload
@@ -42,7 +42,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.events.record@ method which the
--- 'EventsRecord'' request conforms to.
+-- 'EventsRecord' request conforms to.
 type EventsRecordResource =
      "events" :>
        QueryParam "language" Text :>
@@ -53,41 +53,41 @@ type EventsRecordResource =
 -- | Records a batch of changes to the number of times events have occurred
 -- for the currently authenticated user of this application.
 --
--- /See:/ 'eventsRecord'' smart constructor.
-data EventsRecord' = EventsRecord'
+-- /See:/ 'eventsRecord' smart constructor.
+data EventsRecord = EventsRecord
     { _erPayload  :: !EventRecordRequest
     , _erLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventsRecord'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventsRecord' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'erPayload'
 --
 -- * 'erLanguage'
-eventsRecord'
+eventsRecord
     :: EventRecordRequest -- ^ 'erPayload'
-    -> EventsRecord'
-eventsRecord' pErPayload_ =
-    EventsRecord'
+    -> EventsRecord
+eventsRecord pErPayload_ =
+    EventsRecord
     { _erPayload = pErPayload_
     , _erLanguage = Nothing
     }
 
 -- | Multipart request metadata.
-erPayload :: Lens' EventsRecord' EventRecordRequest
+erPayload :: Lens' EventsRecord EventRecordRequest
 erPayload
   = lens _erPayload (\ s a -> s{_erPayload = a})
 
 -- | The preferred language to use for strings returned by this method.
-erLanguage :: Lens' EventsRecord' (Maybe Text)
+erLanguage :: Lens' EventsRecord (Maybe Text)
 erLanguage
   = lens _erLanguage (\ s a -> s{_erLanguage = a})
 
-instance GoogleRequest EventsRecord' where
-        type Rs EventsRecord' = EventUpdateResponse
-        requestClient EventsRecord'{..}
+instance GoogleRequest EventsRecord where
+        type Rs EventsRecord = EventUpdateResponse
+        requestClient EventsRecord{..}
           = go _erLanguage (Just AltJSON) _erPayload
               gamesService
           where go

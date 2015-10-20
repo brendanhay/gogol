@@ -30,8 +30,8 @@ module Network.Google.Resource.Content.Orders.AdvancetestOrder
       OrdersAdvancetestOrderResource
 
     -- * Creating a Request
-    , ordersAdvancetestOrder'
-    , OrdersAdvancetestOrder'
+    , ordersAdvancetestOrder
+    , OrdersAdvancetestOrder
 
     -- * Request Lenses
     , oaoMerchantId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.advancetestorder@ method which the
--- 'OrdersAdvancetestOrder'' request conforms to.
+-- 'OrdersAdvancetestOrder' request conforms to.
 type OrdersAdvancetestOrderResource =
      Capture "merchantId" Word64 :>
        "testorders" :>
@@ -54,44 +54,44 @@ type OrdersAdvancetestOrderResource =
 -- | Sandbox only. Moves a test order from state \"inProgress\" to state
 -- \"pendingShipment\".
 --
--- /See:/ 'ordersAdvancetestOrder'' smart constructor.
-data OrdersAdvancetestOrder' = OrdersAdvancetestOrder'
+-- /See:/ 'ordersAdvancetestOrder' smart constructor.
+data OrdersAdvancetestOrder = OrdersAdvancetestOrder
     { _oaoMerchantId :: !Word64
     , _oaoOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersAdvancetestOrder'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersAdvancetestOrder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'oaoMerchantId'
 --
 -- * 'oaoOrderId'
-ordersAdvancetestOrder'
+ordersAdvancetestOrder
     :: Word64 -- ^ 'oaoMerchantId'
     -> Text -- ^ 'oaoOrderId'
-    -> OrdersAdvancetestOrder'
-ordersAdvancetestOrder' pOaoMerchantId_ pOaoOrderId_ =
-    OrdersAdvancetestOrder'
+    -> OrdersAdvancetestOrder
+ordersAdvancetestOrder pOaoMerchantId_ pOaoOrderId_ =
+    OrdersAdvancetestOrder
     { _oaoMerchantId = pOaoMerchantId_
     , _oaoOrderId = pOaoOrderId_
     }
 
 -- | The ID of the managing account.
-oaoMerchantId :: Lens' OrdersAdvancetestOrder' Word64
+oaoMerchantId :: Lens' OrdersAdvancetestOrder Word64
 oaoMerchantId
   = lens _oaoMerchantId
       (\ s a -> s{_oaoMerchantId = a})
 
 -- | The ID of the test order to modify.
-oaoOrderId :: Lens' OrdersAdvancetestOrder' Text
+oaoOrderId :: Lens' OrdersAdvancetestOrder Text
 oaoOrderId
   = lens _oaoOrderId (\ s a -> s{_oaoOrderId = a})
 
-instance GoogleRequest OrdersAdvancetestOrder' where
-        type Rs OrdersAdvancetestOrder' =
+instance GoogleRequest OrdersAdvancetestOrder where
+        type Rs OrdersAdvancetestOrder =
              OrdersAdvanceTestOrderResponse
-        requestClient OrdersAdvancetestOrder'{..}
+        requestClient OrdersAdvancetestOrder{..}
           = go _oaoMerchantId _oaoOrderId (Just AltJSON)
               shoppingContentService
           where go

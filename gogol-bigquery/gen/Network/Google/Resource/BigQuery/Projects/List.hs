@@ -29,8 +29,8 @@ module Network.Google.Resource.BigQuery.Projects.List
       ProjectsListResource
 
     -- * Creating a Request
-    , projectsList'
-    , ProjectsList'
+    , projectsList
+    , ProjectsList
 
     -- * Request Lenses
     , plPageToken
@@ -41,7 +41,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.projects.list@ method which the
--- 'ProjectsList'' request conforms to.
+-- 'ProjectsList' request conforms to.
 type ProjectsListResource =
      "projects" :>
        QueryParam "pageToken" Text :>
@@ -50,41 +50,41 @@ type ProjectsListResource =
 
 -- | Lists all projects to which you have been granted any project role.
 --
--- /See:/ 'projectsList'' smart constructor.
-data ProjectsList' = ProjectsList'
+-- /See:/ 'projectsList' smart constructor.
+data ProjectsList = ProjectsList
     { _plPageToken  :: !(Maybe Text)
     , _plMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'plPageToken'
 --
 -- * 'plMaxResults'
-projectsList'
-    :: ProjectsList'
-projectsList' =
-    ProjectsList'
+projectsList
+    :: ProjectsList
+projectsList =
+    ProjectsList
     { _plPageToken = Nothing
     , _plMaxResults = Nothing
     }
 
 -- | Page token, returned by a previous call, to request the next page of
 -- results
-plPageToken :: Lens' ProjectsList' (Maybe Text)
+plPageToken :: Lens' ProjectsList (Maybe Text)
 plPageToken
   = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
 -- | Maximum number of results to return
-plMaxResults :: Lens' ProjectsList' (Maybe Word32)
+plMaxResults :: Lens' ProjectsList (Maybe Word32)
 plMaxResults
   = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
 
-instance GoogleRequest ProjectsList' where
-        type Rs ProjectsList' = ProjectList
-        requestClient ProjectsList'{..}
+instance GoogleRequest ProjectsList where
+        type Rs ProjectsList = ProjectList
+        requestClient ProjectsList{..}
           = go _plPageToken _plMaxResults (Just AltJSON)
               bigQueryService
           where go

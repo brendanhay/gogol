@@ -29,8 +29,8 @@ module Network.Google.Resource.Coordinate.Location.List
       LocationListResource
 
     -- * Creating a Request
-    , locationList'
-    , LocationList'
+    , locationList
+    , LocationList
 
     -- * Request Lenses
     , llWorkerEmail
@@ -44,7 +44,7 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @coordinate.location.list@ method which the
--- 'LocationList'' request conforms to.
+-- 'LocationList' request conforms to.
 type LocationListResource =
      "teams" :>
        Capture "teamId" Text :>
@@ -59,8 +59,8 @@ type LocationListResource =
 
 -- | Retrieves a list of locations for a worker.
 --
--- /See:/ 'locationList'' smart constructor.
-data LocationList' = LocationList'
+-- /See:/ 'locationList' smart constructor.
+data LocationList = LocationList
     { _llWorkerEmail      :: !Text
     , _llStartTimestampMs :: !Word64
     , _llTeamId           :: !Text
@@ -68,7 +68,7 @@ data LocationList' = LocationList'
     , _llMaxResults       :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LocationList'' with the minimum fields required to make a request.
+-- | Creates a value of 'LocationList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,13 +81,13 @@ data LocationList' = LocationList'
 -- * 'llPageToken'
 --
 -- * 'llMaxResults'
-locationList'
+locationList
     :: Text -- ^ 'llWorkerEmail'
     -> Word64 -- ^ 'llStartTimestampMs'
     -> Text -- ^ 'llTeamId'
-    -> LocationList'
-locationList' pLlWorkerEmail_ pLlStartTimestampMs_ pLlTeamId_ =
-    LocationList'
+    -> LocationList
+locationList pLlWorkerEmail_ pLlStartTimestampMs_ pLlTeamId_ =
+    LocationList
     { _llWorkerEmail = pLlWorkerEmail_
     , _llStartTimestampMs = pLlStartTimestampMs_
     , _llTeamId = pLlTeamId_
@@ -96,34 +96,34 @@ locationList' pLlWorkerEmail_ pLlStartTimestampMs_ pLlTeamId_ =
     }
 
 -- | Worker email address.
-llWorkerEmail :: Lens' LocationList' Text
+llWorkerEmail :: Lens' LocationList Text
 llWorkerEmail
   = lens _llWorkerEmail
       (\ s a -> s{_llWorkerEmail = a})
 
 -- | Start timestamp in milliseconds since the epoch.
-llStartTimestampMs :: Lens' LocationList' Word64
+llStartTimestampMs :: Lens' LocationList Word64
 llStartTimestampMs
   = lens _llStartTimestampMs
       (\ s a -> s{_llStartTimestampMs = a})
 
 -- | Team ID
-llTeamId :: Lens' LocationList' Text
+llTeamId :: Lens' LocationList Text
 llTeamId = lens _llTeamId (\ s a -> s{_llTeamId = a})
 
 -- | Continuation token
-llPageToken :: Lens' LocationList' (Maybe Text)
+llPageToken :: Lens' LocationList (Maybe Text)
 llPageToken
   = lens _llPageToken (\ s a -> s{_llPageToken = a})
 
 -- | Maximum number of results to return in one page.
-llMaxResults :: Lens' LocationList' (Maybe Word32)
+llMaxResults :: Lens' LocationList (Maybe Word32)
 llMaxResults
   = lens _llMaxResults (\ s a -> s{_llMaxResults = a})
 
-instance GoogleRequest LocationList' where
-        type Rs LocationList' = LocationListResponse
-        requestClient LocationList'{..}
+instance GoogleRequest LocationList where
+        type Rs LocationList = LocationListResponse
+        requestClient LocationList{..}
           = go _llTeamId _llWorkerEmail
               (Just _llStartTimestampMs)
               _llPageToken

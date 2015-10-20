@@ -953,47 +953,47 @@ instance ToJSON GroupLicensesListResponse where
 --
 -- /See:/ 'collection' smart constructor.
 data Collection = Collection
-    { _cKind         :: !Text
-    , _cCollectionId :: !(Maybe Text)
-    , _cVisibility   :: !(Maybe Text)
-    , _cName         :: !(Maybe Text)
-    , _cProductId    :: !(Maybe [Text])
+    { _colKind         :: !Text
+    , _colCollectionId :: !(Maybe Text)
+    , _colVisibility   :: !(Maybe Text)
+    , _colName         :: !(Maybe Text)
+    , _colProductId    :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Collection' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cKind'
+-- * 'colKind'
 --
--- * 'cCollectionId'
+-- * 'colCollectionId'
 --
--- * 'cVisibility'
+-- * 'colVisibility'
 --
--- * 'cName'
+-- * 'colName'
 --
--- * 'cProductId'
+-- * 'colProductId'
 collection
     :: Collection
 collection =
     Collection
-    { _cKind = "androidenterprise#collection"
-    , _cCollectionId = Nothing
-    , _cVisibility = Nothing
-    , _cName = Nothing
-    , _cProductId = Nothing
+    { _colKind = "androidenterprise#collection"
+    , _colCollectionId = Nothing
+    , _colVisibility = Nothing
+    , _colName = Nothing
+    , _colProductId = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#collection\".
-cKind :: Lens' Collection Text
-cKind = lens _cKind (\ s a -> s{_cKind = a})
+colKind :: Lens' Collection Text
+colKind = lens _colKind (\ s a -> s{_colKind = a})
 
 -- | Arbitrary unique ID, allocated by the API on creation.
-cCollectionId :: Lens' Collection (Maybe Text)
-cCollectionId
-  = lens _cCollectionId
-      (\ s a -> s{_cCollectionId = a})
+colCollectionId :: Lens' Collection (Maybe Text)
+colCollectionId
+  = lens _colCollectionId
+      (\ s a -> s{_colCollectionId = a})
 
 -- | Whether this collection is visible to all users, or only to the users
 -- that have been granted access through the \"Collectionviewers\" API.
@@ -1001,21 +1001,22 @@ cCollectionId
 -- should always be set to \"viewersOnly\", as the \"allUsers\" option will
 -- bypass the \"availableProductSet\" for all users within a domain. The
 -- \"allUsers\" setting is deprecated, and will be removed.
-cVisibility :: Lens' Collection (Maybe Text)
-cVisibility
-  = lens _cVisibility (\ s a -> s{_cVisibility = a})
+colVisibility :: Lens' Collection (Maybe Text)
+colVisibility
+  = lens _colVisibility
+      (\ s a -> s{_colVisibility = a})
 
 -- | A user-friendly name for the collection (should be unique), e.g.
 -- \"Accounting apps\".
-cName :: Lens' Collection (Maybe Text)
-cName = lens _cName (\ s a -> s{_cName = a})
+colName :: Lens' Collection (Maybe Text)
+colName = lens _colName (\ s a -> s{_colName = a})
 
 -- | The IDs of the products in the collection, in the order in which they
 -- should be displayed.
-cProductId :: Lens' Collection [Text]
-cProductId
-  = lens _cProductId (\ s a -> s{_cProductId = a}) .
-      _Default
+colProductId :: Lens' Collection [Text]
+colProductId
+  = lens _colProductId (\ s a -> s{_colProductId = a})
+      . _Default
       . _Coerce
 
 instance FromJSON Collection where
@@ -1033,11 +1034,11 @@ instance ToJSON Collection where
         toJSON Collection{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _cKind),
-                  ("collectionId" .=) <$> _cCollectionId,
-                  ("visibility" .=) <$> _cVisibility,
-                  ("name" .=) <$> _cName,
-                  ("productId" .=) <$> _cProductId])
+                 [Just ("kind" .= _colKind),
+                  ("collectionId" .=) <$> _colCollectionId,
+                  ("visibility" .=) <$> _colVisibility,
+                  ("name" .=) <$> _colName,
+                  ("productId" .=) <$> _colProductId])
 
 -- | A set of products.
 --
@@ -1660,89 +1661,87 @@ instance ToJSON Enterprise where
 --
 -- /See:/ 'product' smart constructor.
 data Product = Product
-    { _proAuthorName           :: !(Maybe Text)
-    , _proKind                 :: !Text
-    , _proWorkDetailsURL       :: !(Maybe Text)
-    , _proRequiresContainerApp :: !(Maybe Bool)
-    , _proAppVersion           :: !(Maybe [AppVersion])
-    , _proDistributionChannel  :: !(Maybe Text)
-    , _proIconURL              :: !(Maybe Text)
-    , _proTitle                :: !(Maybe Text)
-    , _proProductId            :: !(Maybe Text)
-    , _proDetailsURL           :: !(Maybe Text)
+    { _pAuthorName           :: !(Maybe Text)
+    , _pKind                 :: !Text
+    , _pWorkDetailsURL       :: !(Maybe Text)
+    , _pRequiresContainerApp :: !(Maybe Bool)
+    , _pAppVersion           :: !(Maybe [AppVersion])
+    , _pDistributionChannel  :: !(Maybe Text)
+    , _pIconURL              :: !(Maybe Text)
+    , _pTitle                :: !(Maybe Text)
+    , _pProductId            :: !(Maybe Text)
+    , _pDetailsURL           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Product' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'proAuthorName'
+-- * 'pAuthorName'
 --
--- * 'proKind'
+-- * 'pKind'
 --
--- * 'proWorkDetailsURL'
+-- * 'pWorkDetailsURL'
 --
--- * 'proRequiresContainerApp'
+-- * 'pRequiresContainerApp'
 --
--- * 'proAppVersion'
+-- * 'pAppVersion'
 --
--- * 'proDistributionChannel'
+-- * 'pDistributionChannel'
 --
--- * 'proIconURL'
+-- * 'pIconURL'
 --
--- * 'proTitle'
+-- * 'pTitle'
 --
--- * 'proProductId'
+-- * 'pProductId'
 --
--- * 'proDetailsURL'
+-- * 'pDetailsURL'
 product
     :: Product
 product =
     Product
-    { _proAuthorName = Nothing
-    , _proKind = "androidenterprise#product"
-    , _proWorkDetailsURL = Nothing
-    , _proRequiresContainerApp = Nothing
-    , _proAppVersion = Nothing
-    , _proDistributionChannel = Nothing
-    , _proIconURL = Nothing
-    , _proTitle = Nothing
-    , _proProductId = Nothing
-    , _proDetailsURL = Nothing
+    { _pAuthorName = Nothing
+    , _pKind = "androidenterprise#product"
+    , _pWorkDetailsURL = Nothing
+    , _pRequiresContainerApp = Nothing
+    , _pAppVersion = Nothing
+    , _pDistributionChannel = Nothing
+    , _pIconURL = Nothing
+    , _pTitle = Nothing
+    , _pProductId = Nothing
+    , _pDetailsURL = Nothing
     }
 
 -- | The name of the author of the product (e.g. the app developer).
-proAuthorName :: Lens' Product (Maybe Text)
-proAuthorName
-  = lens _proAuthorName
-      (\ s a -> s{_proAuthorName = a})
+pAuthorName :: Lens' Product (Maybe Text)
+pAuthorName
+  = lens _pAuthorName (\ s a -> s{_pAuthorName = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#product\".
-proKind :: Lens' Product Text
-proKind = lens _proKind (\ s a -> s{_proKind = a})
+pKind :: Lens' Product Text
+pKind = lens _pKind (\ s a -> s{_pKind = a})
 
 -- | A link to the Google Play for Work details page for the product, for use
 -- by an Enterprise administrator.
-proWorkDetailsURL :: Lens' Product (Maybe Text)
-proWorkDetailsURL
-  = lens _proWorkDetailsURL
-      (\ s a -> s{_proWorkDetailsURL = a})
+pWorkDetailsURL :: Lens' Product (Maybe Text)
+pWorkDetailsURL
+  = lens _pWorkDetailsURL
+      (\ s a -> s{_pWorkDetailsURL = a})
 
 -- | Whether this app can only be installed on devices using the Android for
 -- Work container app.
-proRequiresContainerApp :: Lens' Product (Maybe Bool)
-proRequiresContainerApp
-  = lens _proRequiresContainerApp
-      (\ s a -> s{_proRequiresContainerApp = a})
+pRequiresContainerApp :: Lens' Product (Maybe Bool)
+pRequiresContainerApp
+  = lens _pRequiresContainerApp
+      (\ s a -> s{_pRequiresContainerApp = a})
 
 -- | App versions currently available for this product. The returned list
 -- contains only public versions. Alpha and beta versions are not included.
-proAppVersion :: Lens' Product [AppVersion]
-proAppVersion
-  = lens _proAppVersion
-      (\ s a -> s{_proAppVersion = a})
-      . _Default
+pAppVersion :: Lens' Product [AppVersion]
+pAppVersion
+  = lens _pAppVersion (\ s a -> s{_pAppVersion = a}) .
+      _Default
       . _Coerce
 
 -- | How and to whom the package is made available. The value
@@ -1752,31 +1751,29 @@ proAppVersion
 -- to an enterprise) but hosted by Google. The value privateSelfHosted
 -- means that the package is a private app (restricted to an enterprise)
 -- and is privately hosted.
-proDistributionChannel :: Lens' Product (Maybe Text)
-proDistributionChannel
-  = lens _proDistributionChannel
-      (\ s a -> s{_proDistributionChannel = a})
+pDistributionChannel :: Lens' Product (Maybe Text)
+pDistributionChannel
+  = lens _pDistributionChannel
+      (\ s a -> s{_pDistributionChannel = a})
 
 -- | A link to an image that can be used as an icon for the product.
-proIconURL :: Lens' Product (Maybe Text)
-proIconURL
-  = lens _proIconURL (\ s a -> s{_proIconURL = a})
+pIconURL :: Lens' Product (Maybe Text)
+pIconURL = lens _pIconURL (\ s a -> s{_pIconURL = a})
 
 -- | The name of the product.
-proTitle :: Lens' Product (Maybe Text)
-proTitle = lens _proTitle (\ s a -> s{_proTitle = a})
+pTitle :: Lens' Product (Maybe Text)
+pTitle = lens _pTitle (\ s a -> s{_pTitle = a})
 
 -- | A string of the form app:. For example, app:com.google.android.gm
 -- represents the Gmail app.
-proProductId :: Lens' Product (Maybe Text)
-proProductId
-  = lens _proProductId (\ s a -> s{_proProductId = a})
+pProductId :: Lens' Product (Maybe Text)
+pProductId
+  = lens _pProductId (\ s a -> s{_pProductId = a})
 
 -- | A link to the (consumer) Google Play details page for the product.
-proDetailsURL :: Lens' Product (Maybe Text)
-proDetailsURL
-  = lens _proDetailsURL
-      (\ s a -> s{_proDetailsURL = a})
+pDetailsURL :: Lens' Product (Maybe Text)
+pDetailsURL
+  = lens _pDetailsURL (\ s a -> s{_pDetailsURL = a})
 
 instance FromJSON Product where
         parseJSON
@@ -1798,18 +1795,17 @@ instance ToJSON Product where
         toJSON Product{..}
           = object
               (catMaybes
-                 [("authorName" .=) <$> _proAuthorName,
-                  Just ("kind" .= _proKind),
-                  ("workDetailsUrl" .=) <$> _proWorkDetailsURL,
+                 [("authorName" .=) <$> _pAuthorName,
+                  Just ("kind" .= _pKind),
+                  ("workDetailsUrl" .=) <$> _pWorkDetailsURL,
                   ("requiresContainerApp" .=) <$>
-                    _proRequiresContainerApp,
-                  ("appVersion" .=) <$> _proAppVersion,
-                  ("distributionChannel" .=) <$>
-                    _proDistributionChannel,
-                  ("iconUrl" .=) <$> _proIconURL,
-                  ("title" .=) <$> _proTitle,
-                  ("productId" .=) <$> _proProductId,
-                  ("detailsUrl" .=) <$> _proDetailsURL])
+                    _pRequiresContainerApp,
+                  ("appVersion" .=) <$> _pAppVersion,
+                  ("distributionChannel" .=) <$> _pDistributionChannel,
+                  ("iconUrl" .=) <$> _pIconURL,
+                  ("title" .=) <$> _pTitle,
+                  ("productId" .=) <$> _pProductId,
+                  ("detailsUrl" .=) <$> _pDetailsURL])
 
 -- | The entitlement resources for the user.
 --
@@ -1939,53 +1935,54 @@ instance ToJSON ProductPermissions where
 --
 -- /See:/ 'permission' smart constructor.
 data Permission = Permission
-    { _pKind         :: !Text
-    , _pName         :: !(Maybe Text)
-    , _pDescription  :: !(Maybe Text)
-    , _pPermissionId :: !(Maybe Text)
+    { _perKind         :: !Text
+    , _perName         :: !(Maybe Text)
+    , _perDescription  :: !(Maybe Text)
+    , _perPermissionId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Permission' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pKind'
+-- * 'perKind'
 --
--- * 'pName'
+-- * 'perName'
 --
--- * 'pDescription'
+-- * 'perDescription'
 --
--- * 'pPermissionId'
+-- * 'perPermissionId'
 permission
     :: Permission
 permission =
     Permission
-    { _pKind = "androidenterprise#permission"
-    , _pName = Nothing
-    , _pDescription = Nothing
-    , _pPermissionId = Nothing
+    { _perKind = "androidenterprise#permission"
+    , _perName = Nothing
+    , _perDescription = Nothing
+    , _perPermissionId = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"androidenterprise#permission\".
-pKind :: Lens' Permission Text
-pKind = lens _pKind (\ s a -> s{_pKind = a})
+perKind :: Lens' Permission Text
+perKind = lens _perKind (\ s a -> s{_perKind = a})
 
 -- | The name of the permission.
-pName :: Lens' Permission (Maybe Text)
-pName = lens _pName (\ s a -> s{_pName = a})
+perName :: Lens' Permission (Maybe Text)
+perName = lens _perName (\ s a -> s{_perName = a})
 
 -- | A longer description of the permissions giving more details of what it
 -- affects.
-pDescription :: Lens' Permission (Maybe Text)
-pDescription
-  = lens _pDescription (\ s a -> s{_pDescription = a})
+perDescription :: Lens' Permission (Maybe Text)
+perDescription
+  = lens _perDescription
+      (\ s a -> s{_perDescription = a})
 
 -- | An opaque string uniquely identifying the permission.
-pPermissionId :: Lens' Permission (Maybe Text)
-pPermissionId
-  = lens _pPermissionId
-      (\ s a -> s{_pPermissionId = a})
+perPermissionId :: Lens' Permission (Maybe Text)
+perPermissionId
+  = lens _perPermissionId
+      (\ s a -> s{_perPermissionId = a})
 
 instance FromJSON Permission where
         parseJSON
@@ -2001,9 +1998,9 @@ instance ToJSON Permission where
         toJSON Permission{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _pKind), ("name" .=) <$> _pName,
-                  ("description" .=) <$> _pDescription,
-                  ("permissionId" .=) <$> _pPermissionId])
+                 [Just ("kind" .= _perKind), ("name" .=) <$> _perName,
+                  ("description" .=) <$> _perDescription,
+                  ("permissionId" .=) <$> _perPermissionId])
 
 --
 -- /See:/ 'productsApproveRequest' smart constructor.

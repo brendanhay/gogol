@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.Pages.List
       PagesListResource
 
     -- * Creating a Request
-    , pagesList'
-    , PagesList'
+    , pagesList
+    , PagesList
 
     -- * Request Lenses
     , plStatus
@@ -45,7 +45,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.pages.list@ method which the
--- 'PagesList'' request conforms to.
+-- 'PagesList' request conforms to.
 type PagesListResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -59,8 +59,8 @@ type PagesListResource =
 
 -- | Retrieves the pages for a blog, optionally including non-LIVE statuses.
 --
--- /See:/ 'pagesList'' smart constructor.
-data PagesList' = PagesList'
+-- /See:/ 'pagesList' smart constructor.
+data PagesList = PagesList
     { _plStatus      :: !(Maybe [PagesListStatus])
     , _plBlogId      :: !Text
     , _plFetchBodies :: !(Maybe Bool)
@@ -69,7 +69,7 @@ data PagesList' = PagesList'
     , _plMaxResults  :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PagesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'PagesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -84,11 +84,11 @@ data PagesList' = PagesList'
 -- * 'plPageToken'
 --
 -- * 'plMaxResults'
-pagesList'
+pagesList
     :: Text -- ^ 'plBlogId'
-    -> PagesList'
-pagesList' pPlBlogId_ =
-    PagesList'
+    -> PagesList
+pagesList pPlBlogId_ =
+    PagesList
     { _plStatus = Nothing
     , _plBlogId = pPlBlogId_
     , _plFetchBodies = Nothing
@@ -97,40 +97,40 @@ pagesList' pPlBlogId_ =
     , _plMaxResults = Nothing
     }
 
-plStatus :: Lens' PagesList' [PagesListStatus]
+plStatus :: Lens' PagesList [PagesListStatus]
 plStatus
   = lens _plStatus (\ s a -> s{_plStatus = a}) .
       _Default
       . _Coerce
 
 -- | ID of the blog to fetch Pages from.
-plBlogId :: Lens' PagesList' Text
+plBlogId :: Lens' PagesList Text
 plBlogId = lens _plBlogId (\ s a -> s{_plBlogId = a})
 
 -- | Whether to retrieve the Page bodies.
-plFetchBodies :: Lens' PagesList' (Maybe Bool)
+plFetchBodies :: Lens' PagesList (Maybe Bool)
 plFetchBodies
   = lens _plFetchBodies
       (\ s a -> s{_plFetchBodies = a})
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
-plView :: Lens' PagesList' (Maybe PagesListView)
+plView :: Lens' PagesList (Maybe PagesListView)
 plView = lens _plView (\ s a -> s{_plView = a})
 
 -- | Continuation token if the request is paged.
-plPageToken :: Lens' PagesList' (Maybe Text)
+plPageToken :: Lens' PagesList (Maybe Text)
 plPageToken
   = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
 -- | Maximum number of Pages to fetch.
-plMaxResults :: Lens' PagesList' (Maybe Word32)
+plMaxResults :: Lens' PagesList (Maybe Word32)
 plMaxResults
   = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
 
-instance GoogleRequest PagesList' where
-        type Rs PagesList' = PageList
-        requestClient PagesList'{..}
+instance GoogleRequest PagesList where
+        type Rs PagesList = PageList
+        requestClient PagesList{..}
           = go _plBlogId (_plStatus ^. _Default) _plFetchBodies
               _plView
               _plPageToken

@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Uploads.DeleteUploadData
       ManagementUploadsDeleteUploadDataResource
 
     -- * Creating a Request
-    , managementUploadsDeleteUploadData'
-    , ManagementUploadsDeleteUploadData'
+    , managementUploadsDeleteUploadData
+    , ManagementUploadsDeleteUploadData
 
     -- * Request Lenses
     , mududWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.uploads.deleteUploadData@ method which the
--- 'ManagementUploadsDeleteUploadData'' request conforms to.
+-- 'ManagementUploadsDeleteUploadData' request conforms to.
 type ManagementUploadsDeleteUploadDataResource =
      "management" :>
        "accounts" :>
@@ -60,15 +60,15 @@ type ManagementUploadsDeleteUploadDataResource =
 
 -- | Delete data associated with a previous upload.
 --
--- /See:/ 'managementUploadsDeleteUploadData'' smart constructor.
-data ManagementUploadsDeleteUploadData' = ManagementUploadsDeleteUploadData'
+-- /See:/ 'managementUploadsDeleteUploadData' smart constructor.
+data ManagementUploadsDeleteUploadData = ManagementUploadsDeleteUploadData
     { _mududWebPropertyId      :: !Text
     , _mududCustomDataSourceId :: !Text
     , _mududPayload            :: !AnalyticsDataimportDeleteUploadDataRequest
     , _mududAccountId          :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementUploadsDeleteUploadData'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementUploadsDeleteUploadData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,14 +79,14 @@ data ManagementUploadsDeleteUploadData' = ManagementUploadsDeleteUploadData'
 -- * 'mududPayload'
 --
 -- * 'mududAccountId'
-managementUploadsDeleteUploadData'
+managementUploadsDeleteUploadData
     :: Text -- ^ 'mududWebPropertyId'
     -> Text -- ^ 'mududCustomDataSourceId'
     -> AnalyticsDataimportDeleteUploadDataRequest -- ^ 'mududPayload'
     -> Text -- ^ 'mududAccountId'
-    -> ManagementUploadsDeleteUploadData'
-managementUploadsDeleteUploadData' pMududWebPropertyId_ pMududCustomDataSourceId_ pMududPayload_ pMududAccountId_ =
-    ManagementUploadsDeleteUploadData'
+    -> ManagementUploadsDeleteUploadData
+managementUploadsDeleteUploadData pMududWebPropertyId_ pMududCustomDataSourceId_ pMududPayload_ pMududAccountId_ =
+    ManagementUploadsDeleteUploadData
     { _mududWebPropertyId = pMududWebPropertyId_
     , _mududCustomDataSourceId = pMududCustomDataSourceId_
     , _mududPayload = pMududPayload_
@@ -94,32 +94,32 @@ managementUploadsDeleteUploadData' pMududWebPropertyId_ pMududCustomDataSourceId
     }
 
 -- | Web property Id for the uploads to be deleted.
-mududWebPropertyId :: Lens' ManagementUploadsDeleteUploadData' Text
+mududWebPropertyId :: Lens' ManagementUploadsDeleteUploadData Text
 mududWebPropertyId
   = lens _mududWebPropertyId
       (\ s a -> s{_mududWebPropertyId = a})
 
 -- | Custom data source Id for the uploads to be deleted.
-mududCustomDataSourceId :: Lens' ManagementUploadsDeleteUploadData' Text
+mududCustomDataSourceId :: Lens' ManagementUploadsDeleteUploadData Text
 mududCustomDataSourceId
   = lens _mududCustomDataSourceId
       (\ s a -> s{_mududCustomDataSourceId = a})
 
 -- | Multipart request metadata.
-mududPayload :: Lens' ManagementUploadsDeleteUploadData' AnalyticsDataimportDeleteUploadDataRequest
+mududPayload :: Lens' ManagementUploadsDeleteUploadData AnalyticsDataimportDeleteUploadDataRequest
 mududPayload
   = lens _mududPayload (\ s a -> s{_mududPayload = a})
 
 -- | Account Id for the uploads to be deleted.
-mududAccountId :: Lens' ManagementUploadsDeleteUploadData' Text
+mududAccountId :: Lens' ManagementUploadsDeleteUploadData Text
 mududAccountId
   = lens _mududAccountId
       (\ s a -> s{_mududAccountId = a})
 
 instance GoogleRequest
-         ManagementUploadsDeleteUploadData' where
-        type Rs ManagementUploadsDeleteUploadData' = ()
-        requestClient ManagementUploadsDeleteUploadData'{..}
+         ManagementUploadsDeleteUploadData where
+        type Rs ManagementUploadsDeleteUploadData = ()
+        requestClient ManagementUploadsDeleteUploadData{..}
           = go _mududAccountId _mududWebPropertyId
               _mududCustomDataSourceId
               (Just AltJSON)

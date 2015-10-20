@@ -31,8 +31,8 @@ module Network.Google.Resource.AndroidEnterprise.Users.GenerateToken
       UsersGenerateTokenResource
 
     -- * Creating a Request
-    , usersGenerateToken'
-    , UsersGenerateToken'
+    , usersGenerateToken
+    , UsersGenerateToken
 
     -- * Request Lenses
     , ugtEnterpriseId
@@ -43,7 +43,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.users.generateToken@ method which the
--- 'UsersGenerateToken'' request conforms to.
+-- 'UsersGenerateToken' request conforms to.
 type UsersGenerateTokenResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -56,43 +56,43 @@ type UsersGenerateTokenResource =
 -- their work account in the Android Setup Wizard. Revokes any previously
 -- generated token.
 --
--- /See:/ 'usersGenerateToken'' smart constructor.
-data UsersGenerateToken' = UsersGenerateToken'
+-- /See:/ 'usersGenerateToken' smart constructor.
+data UsersGenerateToken = UsersGenerateToken
     { _ugtEnterpriseId :: !Text
     , _ugtUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersGenerateToken'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersGenerateToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ugtEnterpriseId'
 --
 -- * 'ugtUserId'
-usersGenerateToken'
+usersGenerateToken
     :: Text -- ^ 'ugtEnterpriseId'
     -> Text -- ^ 'ugtUserId'
-    -> UsersGenerateToken'
-usersGenerateToken' pUgtEnterpriseId_ pUgtUserId_ =
-    UsersGenerateToken'
+    -> UsersGenerateToken
+usersGenerateToken pUgtEnterpriseId_ pUgtUserId_ =
+    UsersGenerateToken
     { _ugtEnterpriseId = pUgtEnterpriseId_
     , _ugtUserId = pUgtUserId_
     }
 
 -- | The ID of the enterprise.
-ugtEnterpriseId :: Lens' UsersGenerateToken' Text
+ugtEnterpriseId :: Lens' UsersGenerateToken Text
 ugtEnterpriseId
   = lens _ugtEnterpriseId
       (\ s a -> s{_ugtEnterpriseId = a})
 
 -- | The ID of the user.
-ugtUserId :: Lens' UsersGenerateToken' Text
+ugtUserId :: Lens' UsersGenerateToken Text
 ugtUserId
   = lens _ugtUserId (\ s a -> s{_ugtUserId = a})
 
-instance GoogleRequest UsersGenerateToken' where
-        type Rs UsersGenerateToken' = UserToken
-        requestClient UsersGenerateToken'{..}
+instance GoogleRequest UsersGenerateToken where
+        type Rs UsersGenerateToken = UserToken
+        requestClient UsersGenerateToken{..}
           = go _ugtEnterpriseId _ugtUserId (Just AltJSON)
               androidEnterpriseService
           where go

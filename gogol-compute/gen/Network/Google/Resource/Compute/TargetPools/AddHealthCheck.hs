@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.TargetPools.AddHealthCheck
       TargetPoolsAddHealthCheckResource
 
     -- * Creating a Request
-    , targetPoolsAddHealthCheck'
-    , TargetPoolsAddHealthCheck'
+    , targetPoolsAddHealthCheck
+    , TargetPoolsAddHealthCheck
 
     -- * Request Lenses
     , tpahcProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.addHealthCheck@ method which the
--- 'TargetPoolsAddHealthCheck'' request conforms to.
+-- 'TargetPoolsAddHealthCheck' request conforms to.
 type TargetPoolsAddHealthCheckResource =
      Capture "project" Text :>
        "regions" :>
@@ -57,15 +57,15 @@ type TargetPoolsAddHealthCheckResource =
 
 -- | Adds health check URL to targetPool.
 --
--- /See:/ 'targetPoolsAddHealthCheck'' smart constructor.
-data TargetPoolsAddHealthCheck' = TargetPoolsAddHealthCheck'
+-- /See:/ 'targetPoolsAddHealthCheck' smart constructor.
+data TargetPoolsAddHealthCheck = TargetPoolsAddHealthCheck
     { _tpahcProject    :: !Text
     , _tpahcTargetPool :: !Text
     , _tpahcPayload    :: !TargetPoolsAddHealthCheckRequest
     , _tpahcRegion     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetPoolsAddHealthCheck'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetPoolsAddHealthCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,45 +76,45 @@ data TargetPoolsAddHealthCheck' = TargetPoolsAddHealthCheck'
 -- * 'tpahcPayload'
 --
 -- * 'tpahcRegion'
-targetPoolsAddHealthCheck'
+targetPoolsAddHealthCheck
     :: Text -- ^ 'tpahcProject'
     -> Text -- ^ 'tpahcTargetPool'
     -> TargetPoolsAddHealthCheckRequest -- ^ 'tpahcPayload'
     -> Text -- ^ 'tpahcRegion'
-    -> TargetPoolsAddHealthCheck'
-targetPoolsAddHealthCheck' pTpahcProject_ pTpahcTargetPool_ pTpahcPayload_ pTpahcRegion_ =
-    TargetPoolsAddHealthCheck'
+    -> TargetPoolsAddHealthCheck
+targetPoolsAddHealthCheck pTpahcProject_ pTpahcTargetPool_ pTpahcPayload_ pTpahcRegion_ =
+    TargetPoolsAddHealthCheck
     { _tpahcProject = pTpahcProject_
     , _tpahcTargetPool = pTpahcTargetPool_
     , _tpahcPayload = pTpahcPayload_
     , _tpahcRegion = pTpahcRegion_
     }
 
-tpahcProject :: Lens' TargetPoolsAddHealthCheck' Text
+tpahcProject :: Lens' TargetPoolsAddHealthCheck Text
 tpahcProject
   = lens _tpahcProject (\ s a -> s{_tpahcProject = a})
 
 -- | Name of the TargetPool resource to which health_check_url is to be
 -- added.
-tpahcTargetPool :: Lens' TargetPoolsAddHealthCheck' Text
+tpahcTargetPool :: Lens' TargetPoolsAddHealthCheck Text
 tpahcTargetPool
   = lens _tpahcTargetPool
       (\ s a -> s{_tpahcTargetPool = a})
 
 -- | Multipart request metadata.
-tpahcPayload :: Lens' TargetPoolsAddHealthCheck' TargetPoolsAddHealthCheckRequest
+tpahcPayload :: Lens' TargetPoolsAddHealthCheck TargetPoolsAddHealthCheckRequest
 tpahcPayload
   = lens _tpahcPayload (\ s a -> s{_tpahcPayload = a})
 
 -- | Name of the region scoping this request.
-tpahcRegion :: Lens' TargetPoolsAddHealthCheck' Text
+tpahcRegion :: Lens' TargetPoolsAddHealthCheck Text
 tpahcRegion
   = lens _tpahcRegion (\ s a -> s{_tpahcRegion = a})
 
-instance GoogleRequest TargetPoolsAddHealthCheck'
+instance GoogleRequest TargetPoolsAddHealthCheck
          where
-        type Rs TargetPoolsAddHealthCheck' = Operation
-        requestClient TargetPoolsAddHealthCheck'{..}
+        type Rs TargetPoolsAddHealthCheck = Operation
+        requestClient TargetPoolsAddHealthCheck{..}
           = go _tpahcProject _tpahcRegion _tpahcTargetPool
               (Just AltJSON)
               _tpahcPayload

@@ -31,8 +31,8 @@ module Network.Google.Resource.Content.Inventory.Custombatch
       InventoryCustombatchResource
 
     -- * Creating a Request
-    , inventoryCustombatch'
-    , InventoryCustombatch'
+    , inventoryCustombatch
+    , InventoryCustombatch
 
     -- * Request Lenses
     , icPayload
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.inventory.custombatch@ method which the
--- 'InventoryCustombatch'' request conforms to.
+-- 'InventoryCustombatch' request conforms to.
 type InventoryCustombatchResource =
      "inventory" :>
        "batch" :>
@@ -56,41 +56,41 @@ type InventoryCustombatchResource =
 -- single request. This operation does not update the expiration date of
 -- the products.
 --
--- /See:/ 'inventoryCustombatch'' smart constructor.
-data InventoryCustombatch' = InventoryCustombatch'
+-- /See:/ 'inventoryCustombatch' smart constructor.
+data InventoryCustombatch = InventoryCustombatch
     { _icPayload :: !InventoryCustomBatchRequest
     , _icDryRun  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InventoryCustombatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'InventoryCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'icPayload'
 --
 -- * 'icDryRun'
-inventoryCustombatch'
+inventoryCustombatch
     :: InventoryCustomBatchRequest -- ^ 'icPayload'
-    -> InventoryCustombatch'
-inventoryCustombatch' pIcPayload_ =
-    InventoryCustombatch'
+    -> InventoryCustombatch
+inventoryCustombatch pIcPayload_ =
+    InventoryCustombatch
     { _icPayload = pIcPayload_
     , _icDryRun = Nothing
     }
 
 -- | Multipart request metadata.
-icPayload :: Lens' InventoryCustombatch' InventoryCustomBatchRequest
+icPayload :: Lens' InventoryCustombatch InventoryCustomBatchRequest
 icPayload
   = lens _icPayload (\ s a -> s{_icPayload = a})
 
 -- | Flag to run the request in dry-run mode.
-icDryRun :: Lens' InventoryCustombatch' (Maybe Bool)
+icDryRun :: Lens' InventoryCustombatch (Maybe Bool)
 icDryRun = lens _icDryRun (\ s a -> s{_icDryRun = a})
 
-instance GoogleRequest InventoryCustombatch' where
-        type Rs InventoryCustombatch' =
+instance GoogleRequest InventoryCustombatch where
+        type Rs InventoryCustombatch =
              InventoryCustomBatchResponse
-        requestClient InventoryCustombatch'{..}
+        requestClient InventoryCustombatch{..}
           = go _icDryRun (Just AltJSON) _icPayload
               shoppingContentService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.CloudLoading.DeleteBook
       CloudLoadingDeleteBookResource
 
     -- * Creating a Request
-    , cloudLoadingDeleteBook'
-    , CloudLoadingDeleteBook'
+    , cloudLoadingDeleteBook
+    , CloudLoadingDeleteBook
 
     -- * Request Lenses
     , cldbVolumeId
@@ -40,7 +40,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.cloudloading.deleteBook@ method which the
--- 'CloudLoadingDeleteBook'' request conforms to.
+-- 'CloudLoadingDeleteBook' request conforms to.
 type CloudLoadingDeleteBookResource =
      "cloudloading" :>
        "deleteBook" :>
@@ -49,32 +49,32 @@ type CloudLoadingDeleteBookResource =
 
 -- | Remove the book and its contents
 --
--- /See:/ 'cloudLoadingDeleteBook'' smart constructor.
-newtype CloudLoadingDeleteBook' = CloudLoadingDeleteBook'
+-- /See:/ 'cloudLoadingDeleteBook' smart constructor.
+newtype CloudLoadingDeleteBook = CloudLoadingDeleteBook
     { _cldbVolumeId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CloudLoadingDeleteBook'' with the minimum fields required to make a request.
+-- | Creates a value of 'CloudLoadingDeleteBook' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cldbVolumeId'
-cloudLoadingDeleteBook'
+cloudLoadingDeleteBook
     :: Text -- ^ 'cldbVolumeId'
-    -> CloudLoadingDeleteBook'
-cloudLoadingDeleteBook' pCldbVolumeId_ =
-    CloudLoadingDeleteBook'
+    -> CloudLoadingDeleteBook
+cloudLoadingDeleteBook pCldbVolumeId_ =
+    CloudLoadingDeleteBook
     { _cldbVolumeId = pCldbVolumeId_
     }
 
 -- | The id of the book to be removed.
-cldbVolumeId :: Lens' CloudLoadingDeleteBook' Text
+cldbVolumeId :: Lens' CloudLoadingDeleteBook Text
 cldbVolumeId
   = lens _cldbVolumeId (\ s a -> s{_cldbVolumeId = a})
 
-instance GoogleRequest CloudLoadingDeleteBook' where
-        type Rs CloudLoadingDeleteBook' = ()
-        requestClient CloudLoadingDeleteBook'{..}
+instance GoogleRequest CloudLoadingDeleteBook where
+        type Rs CloudLoadingDeleteBook = ()
+        requestClient CloudLoadingDeleteBook{..}
           = go (Just _cldbVolumeId) (Just AltJSON) booksService
           where go
                   = buildClient

@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.Colors.Get
       ColorsGetResource
 
     -- * Creating a Request
-    , colorsGet'
-    , ColorsGet'
+    , colorsGet
+    , ColorsGet
 
     ) where
 
@@ -38,27 +38,27 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.colors.get@ method which the
--- 'ColorsGet'' request conforms to.
+-- 'ColorsGet' request conforms to.
 type ColorsGetResource =
      "colors" :>
        QueryParam "alt" AltJSON :> Get '[JSON] Colors
 
 -- | Returns the color definitions for calendars and events.
 --
--- /See:/ 'colorsGet'' smart constructor.
-data ColorsGet' =
-    ColorsGet'
+-- /See:/ 'colorsGet' smart constructor.
+data ColorsGet =
+    ColorsGet
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ColorsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ColorsGet' with the minimum fields required to make a request.
 --
-colorsGet'
-    :: ColorsGet'
-colorsGet' = ColorsGet'
+colorsGet
+    :: ColorsGet
+colorsGet = ColorsGet
 
-instance GoogleRequest ColorsGet' where
-        type Rs ColorsGet' = Colors
-        requestClient ColorsGet'{}
+instance GoogleRequest ColorsGet where
+        type Rs ColorsGet = Colors
+        requestClient ColorsGet{}
           = go (Just AltJSON) appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy ColorsGetResource)

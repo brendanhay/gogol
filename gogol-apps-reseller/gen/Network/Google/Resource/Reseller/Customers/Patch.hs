@@ -30,8 +30,8 @@ module Network.Google.Resource.Reseller.Customers.Patch
       CustomersPatchResource
 
     -- * Creating a Request
-    , customersPatch'
-    , CustomersPatch'
+    , customersPatch
+    , CustomersPatch
 
     -- * Request Lenses
     , cpPayload
@@ -42,7 +42,7 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @reseller.customers.patch@ method which the
--- 'CustomersPatch'' request conforms to.
+-- 'CustomersPatch' request conforms to.
 type CustomersPatchResource =
      "customers" :>
        Capture "customerId" Text :>
@@ -52,42 +52,42 @@ type CustomersPatchResource =
 -- | Update a customer resource if one it exists and is owned by the
 -- reseller. This method supports patch semantics.
 --
--- /See:/ 'customersPatch'' smart constructor.
-data CustomersPatch' = CustomersPatch'
+-- /See:/ 'customersPatch' smart constructor.
+data CustomersPatch = CustomersPatch
     { _cpPayload    :: !Customer
     , _cpCustomerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CustomersPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'CustomersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cpPayload'
 --
 -- * 'cpCustomerId'
-customersPatch'
+customersPatch
     :: Customer -- ^ 'cpPayload'
     -> Text -- ^ 'cpCustomerId'
-    -> CustomersPatch'
-customersPatch' pCpPayload_ pCpCustomerId_ =
-    CustomersPatch'
+    -> CustomersPatch
+customersPatch pCpPayload_ pCpCustomerId_ =
+    CustomersPatch
     { _cpPayload = pCpPayload_
     , _cpCustomerId = pCpCustomerId_
     }
 
 -- | Multipart request metadata.
-cpPayload :: Lens' CustomersPatch' Customer
+cpPayload :: Lens' CustomersPatch Customer
 cpPayload
   = lens _cpPayload (\ s a -> s{_cpPayload = a})
 
 -- | Id of the Customer
-cpCustomerId :: Lens' CustomersPatch' Text
+cpCustomerId :: Lens' CustomersPatch Text
 cpCustomerId
   = lens _cpCustomerId (\ s a -> s{_cpCustomerId = a})
 
-instance GoogleRequest CustomersPatch' where
-        type Rs CustomersPatch' = Customer
-        requestClient CustomersPatch'{..}
+instance GoogleRequest CustomersPatch where
+        type Rs CustomersPatch = Customer
+        requestClient CustomersPatch{..}
           = go _cpCustomerId (Just AltJSON) _cpPayload
               appsResellerService
           where go

@@ -31,8 +31,8 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
       AccountsStoreInfosListResource
 
     -- * Creating a Request
-    , accountsStoreInfosList'
-    , AccountsStoreInfosList'
+    , accountsStoreInfosList
+    , AccountsStoreInfosList
 
     -- * Request Lenses
     , asilPphNames
@@ -57,7 +57,7 @@ import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @playmoviespartner.accounts.storeInfos.list@ method which the
--- 'AccountsStoreInfosList'' request conforms to.
+-- 'AccountsStoreInfosList' request conforms to.
 type AccountsStoreInfosListResource =
      "v1" :>
        "accounts" :>
@@ -85,8 +85,8 @@ type AccountsStoreInfosListResource =
 -- Authorization rules_ and _List methods rules_ for more information about
 -- this method.
 --
--- /See:/ 'accountsStoreInfosList'' smart constructor.
-data AccountsStoreInfosList' = AccountsStoreInfosList'
+-- /See:/ 'accountsStoreInfosList' smart constructor.
+data AccountsStoreInfosList = AccountsStoreInfosList
     { _asilPphNames       :: !(Maybe [Text])
     , _asilXgafv          :: !(Maybe Text)
     , _asilStudioNames    :: !(Maybe [Text])
@@ -105,7 +105,7 @@ data AccountsStoreInfosList' = AccountsStoreInfosList'
     , _asilCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsStoreInfosList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsStoreInfosList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -140,11 +140,11 @@ data AccountsStoreInfosList' = AccountsStoreInfosList'
 -- * 'asilPageSize'
 --
 -- * 'asilCallback'
-accountsStoreInfosList'
+accountsStoreInfosList
     :: Text -- ^ 'asilAccountId'
-    -> AccountsStoreInfosList'
-accountsStoreInfosList' pAsilAccountId_ =
-    AccountsStoreInfosList'
+    -> AccountsStoreInfosList
+accountsStoreInfosList pAsilAccountId_ =
+    AccountsStoreInfosList
     { _asilPphNames = Nothing
     , _asilXgafv = Nothing
     , _asilStudioNames = Nothing
@@ -164,19 +164,19 @@ accountsStoreInfosList' pAsilAccountId_ =
     }
 
 -- | See _List methods rules_ for info about this field.
-asilPphNames :: Lens' AccountsStoreInfosList' [Text]
+asilPphNames :: Lens' AccountsStoreInfosList [Text]
 asilPphNames
   = lens _asilPphNames (\ s a -> s{_asilPphNames = a})
       . _Default
       . _Coerce
 
 -- | V1 error format.
-asilXgafv :: Lens' AccountsStoreInfosList' (Maybe Text)
+asilXgafv :: Lens' AccountsStoreInfosList (Maybe Text)
 asilXgafv
   = lens _asilXgafv (\ s a -> s{_asilXgafv = a})
 
 -- | See _List methods rules_ for info about this field.
-asilStudioNames :: Lens' AccountsStoreInfosList' [Text]
+asilStudioNames :: Lens' AccountsStoreInfosList [Text]
 asilStudioNames
   = lens _asilStudioNames
       (\ s a -> s{_asilStudioNames = a})
@@ -184,30 +184,30 @@ asilStudioNames
       . _Coerce
 
 -- | Filter StoreInfos that match any of the given \`video_id\`s.
-asilVideoIds :: Lens' AccountsStoreInfosList' [Text]
+asilVideoIds :: Lens' AccountsStoreInfosList [Text]
 asilVideoIds
   = lens _asilVideoIds (\ s a -> s{_asilVideoIds = a})
       . _Default
       . _Coerce
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-asilUploadProtocol :: Lens' AccountsStoreInfosList' (Maybe Text)
+asilUploadProtocol :: Lens' AccountsStoreInfosList (Maybe Text)
 asilUploadProtocol
   = lens _asilUploadProtocol
       (\ s a -> s{_asilUploadProtocol = a})
 
 -- | Pretty-print response.
-asilPp :: Lens' AccountsStoreInfosList' Bool
+asilPp :: Lens' AccountsStoreInfosList Bool
 asilPp = lens _asilPp (\ s a -> s{_asilPp = a})
 
 -- | OAuth access token.
-asilAccessToken :: Lens' AccountsStoreInfosList' (Maybe Text)
+asilAccessToken :: Lens' AccountsStoreInfosList (Maybe Text)
 asilAccessToken
   = lens _asilAccessToken
       (\ s a -> s{_asilAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-asilUploadType :: Lens' AccountsStoreInfosList' (Maybe Text)
+asilUploadType :: Lens' AccountsStoreInfosList (Maybe Text)
 asilUploadType
   = lens _asilUploadType
       (\ s a -> s{_asilUploadType = a})
@@ -215,7 +215,7 @@ asilUploadType
 -- | Filter StoreInfos that match (case-insensitive) any of the given country
 -- codes, using the \"ISO 3166-1 alpha-2\" format (examples: \"US\",
 -- \"us\", \"Us\").
-asilCountries :: Lens' AccountsStoreInfosList' [Text]
+asilCountries :: Lens' AccountsStoreInfosList [Text]
 asilCountries
   = lens _asilCountries
       (\ s a -> s{_asilCountries = a})
@@ -225,47 +225,47 @@ asilCountries
 -- | Filter StoreInfos that match a given \`video_id\`. NOTE: this field is
 -- deprecated and will be removed on V2; \`video_ids\` should be used
 -- instead.
-asilVideoId :: Lens' AccountsStoreInfosList' (Maybe Text)
+asilVideoId :: Lens' AccountsStoreInfosList (Maybe Text)
 asilVideoId
   = lens _asilVideoId (\ s a -> s{_asilVideoId = a})
 
 -- | REQUIRED. See _General rules_ for more information about this field.
-asilAccountId :: Lens' AccountsStoreInfosList' Text
+asilAccountId :: Lens' AccountsStoreInfosList Text
 asilAccountId
   = lens _asilAccountId
       (\ s a -> s{_asilAccountId = a})
 
 -- | OAuth bearer token.
-asilBearerToken :: Lens' AccountsStoreInfosList' (Maybe Text)
+asilBearerToken :: Lens' AccountsStoreInfosList (Maybe Text)
 asilBearerToken
   = lens _asilBearerToken
       (\ s a -> s{_asilBearerToken = a})
 
 -- | Filter StoreInfos that match a case-insensitive substring of the default
 -- name.
-asilName :: Lens' AccountsStoreInfosList' (Maybe Text)
+asilName :: Lens' AccountsStoreInfosList (Maybe Text)
 asilName = lens _asilName (\ s a -> s{_asilName = a})
 
 -- | See _List methods rules_ for info about this field.
-asilPageToken :: Lens' AccountsStoreInfosList' (Maybe Text)
+asilPageToken :: Lens' AccountsStoreInfosList (Maybe Text)
 asilPageToken
   = lens _asilPageToken
       (\ s a -> s{_asilPageToken = a})
 
 -- | See _List methods rules_ for info about this field.
-asilPageSize :: Lens' AccountsStoreInfosList' (Maybe Int32)
+asilPageSize :: Lens' AccountsStoreInfosList (Maybe Int32)
 asilPageSize
   = lens _asilPageSize (\ s a -> s{_asilPageSize = a})
 
 -- | JSONP
-asilCallback :: Lens' AccountsStoreInfosList' (Maybe Text)
+asilCallback :: Lens' AccountsStoreInfosList (Maybe Text)
 asilCallback
   = lens _asilCallback (\ s a -> s{_asilCallback = a})
 
-instance GoogleRequest AccountsStoreInfosList' where
-        type Rs AccountsStoreInfosList' =
+instance GoogleRequest AccountsStoreInfosList where
+        type Rs AccountsStoreInfosList =
              ListStoreInfosResponse
-        requestClient AccountsStoreInfosList'{..}
+        requestClient AccountsStoreInfosList{..}
           = go _asilAccountId (_asilPphNames ^. _Default)
               _asilXgafv
               (_asilStudioNames ^. _Default)

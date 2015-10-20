@@ -29,8 +29,8 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.Create
       TransferJobsCreateResource
 
     -- * Creating a Request
-    , transferJobsCreate'
-    , TransferJobsCreate'
+    , transferJobsCreate
+    , TransferJobsCreate
 
     -- * Request Lenses
     , tjcXgafv
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferJobs.create@ method which the
--- 'TransferJobsCreate'' request conforms to.
+-- 'TransferJobsCreate' request conforms to.
 type TransferJobsCreateResource =
      "v1" :>
        "transferJobs" :>
@@ -64,8 +64,8 @@ type TransferJobsCreateResource =
 
 -- | Creates a transfer job that runs periodically.
 --
--- /See:/ 'transferJobsCreate'' smart constructor.
-data TransferJobsCreate' = TransferJobsCreate'
+-- /See:/ 'transferJobsCreate' smart constructor.
+data TransferJobsCreate = TransferJobsCreate
     { _tjcXgafv          :: !(Maybe Text)
     , _tjcUploadProtocol :: !(Maybe Text)
     , _tjcPp             :: !Bool
@@ -76,7 +76,7 @@ data TransferJobsCreate' = TransferJobsCreate'
     , _tjcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TransferJobsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'TransferJobsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -95,11 +95,11 @@ data TransferJobsCreate' = TransferJobsCreate'
 -- * 'tjcBearerToken'
 --
 -- * 'tjcCallback'
-transferJobsCreate'
+transferJobsCreate
     :: TransferJob -- ^ 'tjcPayload'
-    -> TransferJobsCreate'
-transferJobsCreate' pTjcPayload_ =
-    TransferJobsCreate'
+    -> TransferJobsCreate
+transferJobsCreate pTjcPayload_ =
+    TransferJobsCreate
     { _tjcXgafv = Nothing
     , _tjcUploadProtocol = Nothing
     , _tjcPp = True
@@ -111,50 +111,50 @@ transferJobsCreate' pTjcPayload_ =
     }
 
 -- | V1 error format.
-tjcXgafv :: Lens' TransferJobsCreate' (Maybe Text)
+tjcXgafv :: Lens' TransferJobsCreate (Maybe Text)
 tjcXgafv = lens _tjcXgafv (\ s a -> s{_tjcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-tjcUploadProtocol :: Lens' TransferJobsCreate' (Maybe Text)
+tjcUploadProtocol :: Lens' TransferJobsCreate (Maybe Text)
 tjcUploadProtocol
   = lens _tjcUploadProtocol
       (\ s a -> s{_tjcUploadProtocol = a})
 
 -- | Pretty-print response.
-tjcPp :: Lens' TransferJobsCreate' Bool
+tjcPp :: Lens' TransferJobsCreate Bool
 tjcPp = lens _tjcPp (\ s a -> s{_tjcPp = a})
 
 -- | OAuth access token.
-tjcAccessToken :: Lens' TransferJobsCreate' (Maybe Text)
+tjcAccessToken :: Lens' TransferJobsCreate (Maybe Text)
 tjcAccessToken
   = lens _tjcAccessToken
       (\ s a -> s{_tjcAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-tjcUploadType :: Lens' TransferJobsCreate' (Maybe Text)
+tjcUploadType :: Lens' TransferJobsCreate (Maybe Text)
 tjcUploadType
   = lens _tjcUploadType
       (\ s a -> s{_tjcUploadType = a})
 
 -- | Multipart request metadata.
-tjcPayload :: Lens' TransferJobsCreate' TransferJob
+tjcPayload :: Lens' TransferJobsCreate TransferJob
 tjcPayload
   = lens _tjcPayload (\ s a -> s{_tjcPayload = a})
 
 -- | OAuth bearer token.
-tjcBearerToken :: Lens' TransferJobsCreate' (Maybe Text)
+tjcBearerToken :: Lens' TransferJobsCreate (Maybe Text)
 tjcBearerToken
   = lens _tjcBearerToken
       (\ s a -> s{_tjcBearerToken = a})
 
 -- | JSONP
-tjcCallback :: Lens' TransferJobsCreate' (Maybe Text)
+tjcCallback :: Lens' TransferJobsCreate (Maybe Text)
 tjcCallback
   = lens _tjcCallback (\ s a -> s{_tjcCallback = a})
 
-instance GoogleRequest TransferJobsCreate' where
-        type Rs TransferJobsCreate' = TransferJob
-        requestClient TransferJobsCreate'{..}
+instance GoogleRequest TransferJobsCreate where
+        type Rs TransferJobsCreate = TransferJob
+        requestClient TransferJobsCreate{..}
           = go _tjcXgafv _tjcUploadProtocol (Just _tjcPp)
               _tjcAccessToken
               _tjcUploadType

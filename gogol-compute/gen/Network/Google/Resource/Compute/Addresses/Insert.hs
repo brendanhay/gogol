@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Addresses.Insert
       AddressesInsertResource
 
     -- * Creating a Request
-    , addressesInsert'
-    , AddressesInsert'
+    , addressesInsert
+    , AddressesInsert
 
     -- * Request Lenses
     , aiProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.addresses.insert@ method which the
--- 'AddressesInsert'' request conforms to.
+-- 'AddressesInsert' request conforms to.
 type AddressesInsertResource =
      Capture "project" Text :>
        "regions" :>
@@ -55,14 +55,14 @@ type AddressesInsertResource =
 -- | Creates an address resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'addressesInsert'' smart constructor.
-data AddressesInsert' = AddressesInsert'
+-- /See:/ 'addressesInsert' smart constructor.
+data AddressesInsert = AddressesInsert
     { _aiProject :: !Text
     , _aiPayload :: !Address
     , _aiRegion  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AddressesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'AddressesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,35 +71,35 @@ data AddressesInsert' = AddressesInsert'
 -- * 'aiPayload'
 --
 -- * 'aiRegion'
-addressesInsert'
+addressesInsert
     :: Text -- ^ 'aiProject'
     -> Address -- ^ 'aiPayload'
     -> Text -- ^ 'aiRegion'
-    -> AddressesInsert'
-addressesInsert' pAiProject_ pAiPayload_ pAiRegion_ =
-    AddressesInsert'
+    -> AddressesInsert
+addressesInsert pAiProject_ pAiPayload_ pAiRegion_ =
+    AddressesInsert
     { _aiProject = pAiProject_
     , _aiPayload = pAiPayload_
     , _aiRegion = pAiRegion_
     }
 
 -- | Project ID for this request.
-aiProject :: Lens' AddressesInsert' Text
+aiProject :: Lens' AddressesInsert Text
 aiProject
   = lens _aiProject (\ s a -> s{_aiProject = a})
 
 -- | Multipart request metadata.
-aiPayload :: Lens' AddressesInsert' Address
+aiPayload :: Lens' AddressesInsert Address
 aiPayload
   = lens _aiPayload (\ s a -> s{_aiPayload = a})
 
 -- | The name of the region for this request.
-aiRegion :: Lens' AddressesInsert' Text
+aiRegion :: Lens' AddressesInsert Text
 aiRegion = lens _aiRegion (\ s a -> s{_aiRegion = a})
 
-instance GoogleRequest AddressesInsert' where
-        type Rs AddressesInsert' = Operation
-        requestClient AddressesInsert'{..}
+instance GoogleRequest AddressesInsert where
+        type Rs AddressesInsert = Operation
+        requestClient AddressesInsert{..}
           = go _aiProject _aiRegion (Just AltJSON) _aiPayload
               computeService
           where go

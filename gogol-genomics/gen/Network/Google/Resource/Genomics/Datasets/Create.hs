@@ -29,8 +29,8 @@ module Network.Google.Resource.Genomics.Datasets.Create
       DatasetsCreateResource
 
     -- * Creating a Request
-    , datasetsCreate'
-    , DatasetsCreate'
+    , datasetsCreate
+    , DatasetsCreate
 
     -- * Request Lenses
     , dcXgafv
@@ -47,7 +47,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.datasets.create@ method which the
--- 'DatasetsCreate'' request conforms to.
+-- 'DatasetsCreate' request conforms to.
 type DatasetsCreateResource =
      "v1" :>
        "datasets" :>
@@ -63,8 +63,8 @@ type DatasetsCreateResource =
 
 -- | Creates a new dataset.
 --
--- /See:/ 'datasetsCreate'' smart constructor.
-data DatasetsCreate' = DatasetsCreate'
+-- /See:/ 'datasetsCreate' smart constructor.
+data DatasetsCreate = DatasetsCreate
     { _dcXgafv          :: !(Maybe Text)
     , _dcUploadProtocol :: !(Maybe Text)
     , _dcPp             :: !Bool
@@ -75,7 +75,7 @@ data DatasetsCreate' = DatasetsCreate'
     , _dcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -94,11 +94,11 @@ data DatasetsCreate' = DatasetsCreate'
 -- * 'dcBearerToken'
 --
 -- * 'dcCallback'
-datasetsCreate'
+datasetsCreate
     :: Dataset -- ^ 'dcPayload'
-    -> DatasetsCreate'
-datasetsCreate' pDcPayload_ =
-    DatasetsCreate'
+    -> DatasetsCreate
+datasetsCreate pDcPayload_ =
+    DatasetsCreate
     { _dcXgafv = Nothing
     , _dcUploadProtocol = Nothing
     , _dcPp = True
@@ -110,49 +110,49 @@ datasetsCreate' pDcPayload_ =
     }
 
 -- | V1 error format.
-dcXgafv :: Lens' DatasetsCreate' (Maybe Text)
+dcXgafv :: Lens' DatasetsCreate (Maybe Text)
 dcXgafv = lens _dcXgafv (\ s a -> s{_dcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-dcUploadProtocol :: Lens' DatasetsCreate' (Maybe Text)
+dcUploadProtocol :: Lens' DatasetsCreate (Maybe Text)
 dcUploadProtocol
   = lens _dcUploadProtocol
       (\ s a -> s{_dcUploadProtocol = a})
 
 -- | Pretty-print response.
-dcPp :: Lens' DatasetsCreate' Bool
+dcPp :: Lens' DatasetsCreate Bool
 dcPp = lens _dcPp (\ s a -> s{_dcPp = a})
 
 -- | OAuth access token.
-dcAccessToken :: Lens' DatasetsCreate' (Maybe Text)
+dcAccessToken :: Lens' DatasetsCreate (Maybe Text)
 dcAccessToken
   = lens _dcAccessToken
       (\ s a -> s{_dcAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-dcUploadType :: Lens' DatasetsCreate' (Maybe Text)
+dcUploadType :: Lens' DatasetsCreate (Maybe Text)
 dcUploadType
   = lens _dcUploadType (\ s a -> s{_dcUploadType = a})
 
 -- | Multipart request metadata.
-dcPayload :: Lens' DatasetsCreate' Dataset
+dcPayload :: Lens' DatasetsCreate Dataset
 dcPayload
   = lens _dcPayload (\ s a -> s{_dcPayload = a})
 
 -- | OAuth bearer token.
-dcBearerToken :: Lens' DatasetsCreate' (Maybe Text)
+dcBearerToken :: Lens' DatasetsCreate (Maybe Text)
 dcBearerToken
   = lens _dcBearerToken
       (\ s a -> s{_dcBearerToken = a})
 
 -- | JSONP
-dcCallback :: Lens' DatasetsCreate' (Maybe Text)
+dcCallback :: Lens' DatasetsCreate (Maybe Text)
 dcCallback
   = lens _dcCallback (\ s a -> s{_dcCallback = a})
 
-instance GoogleRequest DatasetsCreate' where
-        type Rs DatasetsCreate' = Dataset
-        requestClient DatasetsCreate'{..}
+instance GoogleRequest DatasetsCreate where
+        type Rs DatasetsCreate = Dataset
+        requestClient DatasetsCreate{..}
           = go _dcXgafv _dcUploadProtocol (Just _dcPp)
               _dcAccessToken
               _dcUploadType

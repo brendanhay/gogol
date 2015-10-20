@@ -30,8 +30,8 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Patc
       AchievementConfigurationsPatchResource
 
     -- * Creating a Request
-    , achievementConfigurationsPatch'
-    , AchievementConfigurationsPatch'
+    , achievementConfigurationsPatch
+    , AchievementConfigurationsPatch
 
     -- * Request Lenses
     , acpAchievementId
@@ -42,7 +42,7 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.achievementConfigurations.patch@ method which the
--- 'AchievementConfigurationsPatch'' request conforms to.
+-- 'AchievementConfigurationsPatch' request conforms to.
 type AchievementConfigurationsPatchResource =
      "achievements" :>
        Capture "achievementId" Text :>
@@ -53,45 +53,45 @@ type AchievementConfigurationsPatchResource =
 -- | Update the metadata of the achievement configuration with the given ID.
 -- This method supports patch semantics.
 --
--- /See:/ 'achievementConfigurationsPatch'' smart constructor.
-data AchievementConfigurationsPatch' = AchievementConfigurationsPatch'
+-- /See:/ 'achievementConfigurationsPatch' smart constructor.
+data AchievementConfigurationsPatch = AchievementConfigurationsPatch
     { _acpAchievementId :: !Text
     , _acpPayload       :: !AchievementConfiguration
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AchievementConfigurationsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'AchievementConfigurationsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'acpAchievementId'
 --
 -- * 'acpPayload'
-achievementConfigurationsPatch'
+achievementConfigurationsPatch
     :: Text -- ^ 'acpAchievementId'
     -> AchievementConfiguration -- ^ 'acpPayload'
-    -> AchievementConfigurationsPatch'
-achievementConfigurationsPatch' pAcpAchievementId_ pAcpPayload_ =
-    AchievementConfigurationsPatch'
+    -> AchievementConfigurationsPatch
+achievementConfigurationsPatch pAcpAchievementId_ pAcpPayload_ =
+    AchievementConfigurationsPatch
     { _acpAchievementId = pAcpAchievementId_
     , _acpPayload = pAcpPayload_
     }
 
 -- | The ID of the achievement used by this method.
-acpAchievementId :: Lens' AchievementConfigurationsPatch' Text
+acpAchievementId :: Lens' AchievementConfigurationsPatch Text
 acpAchievementId
   = lens _acpAchievementId
       (\ s a -> s{_acpAchievementId = a})
 
 -- | Multipart request metadata.
-acpPayload :: Lens' AchievementConfigurationsPatch' AchievementConfiguration
+acpPayload :: Lens' AchievementConfigurationsPatch AchievementConfiguration
 acpPayload
   = lens _acpPayload (\ s a -> s{_acpPayload = a})
 
-instance GoogleRequest
-         AchievementConfigurationsPatch' where
-        type Rs AchievementConfigurationsPatch' =
+instance GoogleRequest AchievementConfigurationsPatch
+         where
+        type Rs AchievementConfigurationsPatch =
              AchievementConfiguration
-        requestClient AchievementConfigurationsPatch'{..}
+        requestClient AchievementConfigurationsPatch{..}
           = go _acpAchievementId (Just AltJSON) _acpPayload
               gamesConfigurationService
           where go

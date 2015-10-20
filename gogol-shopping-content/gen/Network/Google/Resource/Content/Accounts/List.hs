@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Accounts.List
       AccountsListResource
 
     -- * Creating a Request
-    , accountsList'
-    , AccountsList'
+    , accountsList
+    , AccountsList
 
     -- * Request Lenses
     , alMerchantId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accounts.list@ method which the
--- 'AccountsList'' request conforms to.
+-- 'AccountsList' request conforms to.
 type AccountsListResource =
      Capture "merchantId" Word64 :>
        "accounts" :>
@@ -53,14 +53,14 @@ type AccountsListResource =
 
 -- | Lists the sub-accounts in your Merchant Center account.
 --
--- /See:/ 'accountsList'' smart constructor.
-data AccountsList' = AccountsList'
+-- /See:/ 'accountsList' smart constructor.
+data AccountsList = AccountsList
     { _alMerchantId :: !Word64
     , _alPageToken  :: !(Maybe Text)
     , _alMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data AccountsList' = AccountsList'
 -- * 'alPageToken'
 --
 -- * 'alMaxResults'
-accountsList'
+accountsList
     :: Word64 -- ^ 'alMerchantId'
-    -> AccountsList'
-accountsList' pAlMerchantId_ =
-    AccountsList'
+    -> AccountsList
+accountsList pAlMerchantId_ =
+    AccountsList
     { _alMerchantId = pAlMerchantId_
     , _alPageToken = Nothing
     , _alMaxResults = Nothing
     }
 
 -- | The ID of the managing account.
-alMerchantId :: Lens' AccountsList' Word64
+alMerchantId :: Lens' AccountsList Word64
 alMerchantId
   = lens _alMerchantId (\ s a -> s{_alMerchantId = a})
 
 -- | The token returned by the previous request.
-alPageToken :: Lens' AccountsList' (Maybe Text)
+alPageToken :: Lens' AccountsList (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | The maximum number of accounts to return in the response, used for
 -- paging.
-alMaxResults :: Lens' AccountsList' (Maybe Word32)
+alMaxResults :: Lens' AccountsList (Maybe Word32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
-instance GoogleRequest AccountsList' where
-        type Rs AccountsList' = AccountsListResponse
-        requestClient AccountsList'{..}
+instance GoogleRequest AccountsList where
+        type Rs AccountsList = AccountsListResponse
+        requestClient AccountsList{..}
           = go _alMerchantId _alPageToken _alMaxResults
               (Just AltJSON)
               shoppingContentService

@@ -29,8 +29,8 @@ module Network.Google.Resource.SQL.Flags.List
       FlagsListResource
 
     -- * Creating a Request
-    , flagsList'
-    , FlagsList'
+    , flagsList
+    , FlagsList
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.flags.list@ method which the
--- 'FlagsList'' request conforms to.
+-- 'FlagsList' request conforms to.
 type FlagsListResource =
      "flags" :>
        QueryParam "alt" AltJSON :>
@@ -46,20 +46,20 @@ type FlagsListResource =
 
 -- | List all available database flags for Google Cloud SQL instances.
 --
--- /See:/ 'flagsList'' smart constructor.
-data FlagsList' =
-    FlagsList'
+-- /See:/ 'flagsList' smart constructor.
+data FlagsList =
+    FlagsList
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FlagsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'FlagsList' with the minimum fields required to make a request.
 --
-flagsList'
-    :: FlagsList'
-flagsList' = FlagsList'
+flagsList
+    :: FlagsList
+flagsList = FlagsList
 
-instance GoogleRequest FlagsList' where
-        type Rs FlagsList' = FlagsListResponse
-        requestClient FlagsList'{}
+instance GoogleRequest FlagsList where
+        type Rs FlagsList = FlagsListResponse
+        requestClient FlagsList{}
           = go (Just AltJSON) sQLAdminService
           where go
                   = buildClient (Proxy :: Proxy FlagsListResource)

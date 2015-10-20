@@ -32,8 +32,8 @@ module Network.Google.Resource.BigQuery.Datasets.Patch
       DatasetsPatchResource
 
     -- * Creating a Request
-    , datasetsPatch'
-    , DatasetsPatch'
+    , datasetsPatch
+    , DatasetsPatch
 
     -- * Request Lenses
     , dpPayload
@@ -45,7 +45,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.datasets.patch@ method which the
--- 'DatasetsPatch'' request conforms to.
+-- 'DatasetsPatch' request conforms to.
 type DatasetsPatchResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -59,14 +59,14 @@ type DatasetsPatchResource =
 -- fields that are provided in the submitted dataset resource. This method
 -- supports patch semantics.
 --
--- /See:/ 'datasetsPatch'' smart constructor.
-data DatasetsPatch' = DatasetsPatch'
+-- /See:/ 'datasetsPatch' smart constructor.
+data DatasetsPatch = DatasetsPatch
     { _dpPayload   :: !Dataset
     , _dpDatasetId :: !Text
     , _dpProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,36 +75,36 @@ data DatasetsPatch' = DatasetsPatch'
 -- * 'dpDatasetId'
 --
 -- * 'dpProjectId'
-datasetsPatch'
+datasetsPatch
     :: Dataset -- ^ 'dpPayload'
     -> Text -- ^ 'dpDatasetId'
     -> Text -- ^ 'dpProjectId'
-    -> DatasetsPatch'
-datasetsPatch' pDpPayload_ pDpDatasetId_ pDpProjectId_ =
-    DatasetsPatch'
+    -> DatasetsPatch
+datasetsPatch pDpPayload_ pDpDatasetId_ pDpProjectId_ =
+    DatasetsPatch
     { _dpPayload = pDpPayload_
     , _dpDatasetId = pDpDatasetId_
     , _dpProjectId = pDpProjectId_
     }
 
 -- | Multipart request metadata.
-dpPayload :: Lens' DatasetsPatch' Dataset
+dpPayload :: Lens' DatasetsPatch Dataset
 dpPayload
   = lens _dpPayload (\ s a -> s{_dpPayload = a})
 
 -- | Dataset ID of the dataset being updated
-dpDatasetId :: Lens' DatasetsPatch' Text
+dpDatasetId :: Lens' DatasetsPatch Text
 dpDatasetId
   = lens _dpDatasetId (\ s a -> s{_dpDatasetId = a})
 
 -- | Project ID of the dataset being updated
-dpProjectId :: Lens' DatasetsPatch' Text
+dpProjectId :: Lens' DatasetsPatch Text
 dpProjectId
   = lens _dpProjectId (\ s a -> s{_dpProjectId = a})
 
-instance GoogleRequest DatasetsPatch' where
-        type Rs DatasetsPatch' = Dataset
-        requestClient DatasetsPatch'{..}
+instance GoogleRequest DatasetsPatch where
+        type Rs DatasetsPatch = Dataset
+        requestClient DatasetsPatch{..}
           = go _dpProjectId _dpDatasetId (Just AltJSON)
               _dpPayload
               bigQueryService

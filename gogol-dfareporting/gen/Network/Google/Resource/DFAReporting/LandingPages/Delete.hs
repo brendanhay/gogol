@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.LandingPages.Delete
       LandingPagesDeleteResource
 
     -- * Creating a Request
-    , landingPagesDelete'
-    , LandingPagesDelete'
+    , landingPagesDelete
+    , LandingPagesDelete
 
     -- * Request Lenses
     , lpdCampaignId
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.landingPages.delete@ method which the
--- 'LandingPagesDelete'' request conforms to.
+-- 'LandingPagesDelete' request conforms to.
 type LandingPagesDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -54,14 +54,14 @@ type LandingPagesDeleteResource =
 
 -- | Deletes an existing campaign landing page.
 --
--- /See:/ 'landingPagesDelete'' smart constructor.
-data LandingPagesDelete' = LandingPagesDelete'
+-- /See:/ 'landingPagesDelete' smart constructor.
+data LandingPagesDelete = LandingPagesDelete
     { _lpdCampaignId :: !Int64
     , _lpdProFileId  :: !Int64
     , _lpdId         :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LandingPagesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'LandingPagesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,36 +70,36 @@ data LandingPagesDelete' = LandingPagesDelete'
 -- * 'lpdProFileId'
 --
 -- * 'lpdId'
-landingPagesDelete'
+landingPagesDelete
     :: Int64 -- ^ 'lpdCampaignId'
     -> Int64 -- ^ 'lpdProFileId'
     -> Int64 -- ^ 'lpdId'
-    -> LandingPagesDelete'
-landingPagesDelete' pLpdCampaignId_ pLpdProFileId_ pLpdId_ =
-    LandingPagesDelete'
+    -> LandingPagesDelete
+landingPagesDelete pLpdCampaignId_ pLpdProFileId_ pLpdId_ =
+    LandingPagesDelete
     { _lpdCampaignId = pLpdCampaignId_
     , _lpdProFileId = pLpdProFileId_
     , _lpdId = pLpdId_
     }
 
 -- | Landing page campaign ID.
-lpdCampaignId :: Lens' LandingPagesDelete' Int64
+lpdCampaignId :: Lens' LandingPagesDelete Int64
 lpdCampaignId
   = lens _lpdCampaignId
       (\ s a -> s{_lpdCampaignId = a})
 
 -- | User profile ID associated with this request.
-lpdProFileId :: Lens' LandingPagesDelete' Int64
+lpdProFileId :: Lens' LandingPagesDelete Int64
 lpdProFileId
   = lens _lpdProFileId (\ s a -> s{_lpdProFileId = a})
 
 -- | Landing page ID.
-lpdId :: Lens' LandingPagesDelete' Int64
+lpdId :: Lens' LandingPagesDelete Int64
 lpdId = lens _lpdId (\ s a -> s{_lpdId = a})
 
-instance GoogleRequest LandingPagesDelete' where
-        type Rs LandingPagesDelete' = ()
-        requestClient LandingPagesDelete'{..}
+instance GoogleRequest LandingPagesDelete where
+        type Rs LandingPagesDelete = ()
+        requestClient LandingPagesDelete{..}
           = go _lpdProFileId _lpdCampaignId _lpdId
               (Just AltJSON)
               dFAReportingService

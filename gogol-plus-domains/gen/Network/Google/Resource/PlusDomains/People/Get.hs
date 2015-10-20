@@ -29,8 +29,8 @@ module Network.Google.Resource.PlusDomains.People.Get
       PeopleGetResource
 
     -- * Creating a Request
-    , peopleGet'
-    , PeopleGet'
+    , peopleGet
+    , PeopleGet
 
     -- * Request Lenses
     , pgUserId
@@ -40,7 +40,7 @@ import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plusDomains.people.get@ method which the
--- 'PeopleGet'' request conforms to.
+-- 'PeopleGet' request conforms to.
 type PeopleGetResource =
      "people" :>
        Capture "userId" Text :>
@@ -48,32 +48,32 @@ type PeopleGetResource =
 
 -- | Get a person\'s profile.
 --
--- /See:/ 'peopleGet'' smart constructor.
-newtype PeopleGet' = PeopleGet'
+-- /See:/ 'peopleGet' smart constructor.
+newtype PeopleGet = PeopleGet
     { _pgUserId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PeopleGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PeopleGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pgUserId'
-peopleGet'
+peopleGet
     :: Text -- ^ 'pgUserId'
-    -> PeopleGet'
-peopleGet' pPgUserId_ =
-    PeopleGet'
+    -> PeopleGet
+peopleGet pPgUserId_ =
+    PeopleGet
     { _pgUserId = pPgUserId_
     }
 
 -- | The ID of the person to get the profile for. The special value \"me\"
 -- can be used to indicate the authenticated user.
-pgUserId :: Lens' PeopleGet' Text
+pgUserId :: Lens' PeopleGet Text
 pgUserId = lens _pgUserId (\ s a -> s{_pgUserId = a})
 
-instance GoogleRequest PeopleGet' where
-        type Rs PeopleGet' = Person
-        requestClient PeopleGet'{..}
+instance GoogleRequest PeopleGet where
+        type Rs PeopleGet = Person
+        requestClient PeopleGet{..}
           = go _pgUserId (Just AltJSON) plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy PeopleGetResource)

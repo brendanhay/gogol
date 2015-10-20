@@ -29,8 +29,8 @@ module Network.Google.Resource.FusionTables.Table.ImportRows
       TableImportRowsResource
 
     -- * Creating a Request
-    , tableImportRows'
-    , TableImportRows'
+    , tableImportRows
+    , TableImportRows
 
     -- * Request Lenses
     , tirStartLine
@@ -46,7 +46,7 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.table.importRows@ method which the
--- 'TableImportRows'' request conforms to.
+-- 'TableImportRows' request conforms to.
 type TableImportRowsResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -61,8 +61,8 @@ type TableImportRowsResource =
 
 -- | Imports more rows into a table.
 --
--- /See:/ 'tableImportRows'' smart constructor.
-data TableImportRows' = TableImportRows'
+-- /See:/ 'tableImportRows' smart constructor.
+data TableImportRows = TableImportRows
     { _tirStartLine :: !(Maybe Int32)
     , _tirEndLine   :: !(Maybe Int32)
     , _tirMedia     :: !Body
@@ -72,7 +72,7 @@ data TableImportRows' = TableImportRows'
     , _tirIsStrict  :: !(Maybe Bool)
     }
 
--- | Creates a value of 'TableImportRows'' with the minimum fields required to make a request.
+-- | Creates a value of 'TableImportRows' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -89,12 +89,12 @@ data TableImportRows' = TableImportRows'
 -- * 'tirEncoding'
 --
 -- * 'tirIsStrict'
-tableImportRows'
+tableImportRows
     :: Body -- ^ 'tirMedia'
     -> Text -- ^ 'tirTableId'
-    -> TableImportRows'
-tableImportRows' pTirMedia_ pTirTableId_ =
-    TableImportRows'
+    -> TableImportRows
+tableImportRows pTirMedia_ pTirTableId_ =
+    TableImportRows
     { _tirStartLine = Nothing
     , _tirEndLine = Nothing
     , _tirMedia = pTirMedia_
@@ -106,7 +106,7 @@ tableImportRows' pTirMedia_ pTirTableId_ =
 
 -- | The index of the first line from which to start importing, inclusive.
 -- Default is 0.
-tirStartLine :: Lens' TableImportRows' (Maybe Int32)
+tirStartLine :: Lens' TableImportRows (Maybe Int32)
 tirStartLine
   = lens _tirStartLine (\ s a -> s{_tirStartLine = a})
 
@@ -114,40 +114,40 @@ tirStartLine
 -- import the entire file. If endLine is negative, it is an offset from the
 -- end of the file; the imported content will exclude the last endLine
 -- lines.
-tirEndLine :: Lens' TableImportRows' (Maybe Int32)
+tirEndLine :: Lens' TableImportRows (Maybe Int32)
 tirEndLine
   = lens _tirEndLine (\ s a -> s{_tirEndLine = a})
 
-tirMedia :: Lens' TableImportRows' Body
+tirMedia :: Lens' TableImportRows Body
 tirMedia = lens _tirMedia (\ s a -> s{_tirMedia = a})
 
 -- | The table into which new rows are being imported.
-tirTableId :: Lens' TableImportRows' Text
+tirTableId :: Lens' TableImportRows Text
 tirTableId
   = lens _tirTableId (\ s a -> s{_tirTableId = a})
 
 -- | The delimiter used to separate cell values. This can only consist of a
 -- single character. Default is ,.
-tirDelimiter :: Lens' TableImportRows' (Maybe Text)
+tirDelimiter :: Lens' TableImportRows (Maybe Text)
 tirDelimiter
   = lens _tirDelimiter (\ s a -> s{_tirDelimiter = a})
 
 -- | The encoding of the content. Default is UTF-8. Use auto-detect if you
 -- are unsure of the encoding.
-tirEncoding :: Lens' TableImportRows' (Maybe Text)
+tirEncoding :: Lens' TableImportRows (Maybe Text)
 tirEncoding
   = lens _tirEncoding (\ s a -> s{_tirEncoding = a})
 
 -- | Whether the imported CSV must have the same number of values for each
 -- row. If false, rows with fewer values will be padded with empty values.
 -- Default is true.
-tirIsStrict :: Lens' TableImportRows' (Maybe Bool)
+tirIsStrict :: Lens' TableImportRows (Maybe Bool)
 tirIsStrict
   = lens _tirIsStrict (\ s a -> s{_tirIsStrict = a})
 
-instance GoogleRequest TableImportRows' where
-        type Rs TableImportRows' = Import
-        requestClient TableImportRows'{..}
+instance GoogleRequest TableImportRows where
+        type Rs TableImportRows = Import
+        requestClient TableImportRows{..}
           = go _tirTableId _tirStartLine _tirEndLine
               _tirDelimiter
               _tirEncoding

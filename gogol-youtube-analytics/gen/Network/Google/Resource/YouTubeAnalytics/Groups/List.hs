@@ -31,8 +31,8 @@ module Network.Google.Resource.YouTubeAnalytics.Groups.List
       GroupsListResource
 
     -- * Creating a Request
-    , groupsList'
-    , GroupsList'
+    , groupsList
+    , GroupsList
 
     -- * Request Lenses
     , glMine
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @youtubeAnalytics.groups.list@ method which the
--- 'GroupsList'' request conforms to.
+-- 'GroupsList' request conforms to.
 type GroupsListResource =
      "groups" :>
        QueryParam "mine" Bool :>
@@ -57,14 +57,14 @@ type GroupsListResource =
 -- For example, you can retrieve all groups that the authenticated user
 -- owns, or you can retrieve one or more groups by their unique IDs.
 --
--- /See:/ 'groupsList'' smart constructor.
-data GroupsList' = GroupsList'
+-- /See:/ 'groupsList' smart constructor.
+data GroupsList = GroupsList
     { _glMine                   :: !(Maybe Bool)
     , _glOnBehalfOfContentOwner :: !(Maybe Text)
     , _glId                     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GroupsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'GroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,10 +73,10 @@ data GroupsList' = GroupsList'
 -- * 'glOnBehalfOfContentOwner'
 --
 -- * 'glId'
-groupsList'
-    :: GroupsList'
-groupsList' =
-    GroupsList'
+groupsList
+    :: GroupsList
+groupsList =
+    GroupsList
     { _glMine = Nothing
     , _glOnBehalfOfContentOwner = Nothing
     , _glId = Nothing
@@ -84,7 +84,7 @@ groupsList' =
 
 -- | Set this parameter\'s value to true to instruct the API to only return
 -- groups owned by the authenticated user.
-glMine :: Lens' GroupsList' (Maybe Bool)
+glMine :: Lens' GroupsList (Maybe Bool)
 glMine = lens _glMine (\ s a -> s{_glMine = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
@@ -97,7 +97,7 @@ glMine = lens _glMine (\ s a -> s{_glMine = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-glOnBehalfOfContentOwner :: Lens' GroupsList' (Maybe Text)
+glOnBehalfOfContentOwner :: Lens' GroupsList (Maybe Text)
 glOnBehalfOfContentOwner
   = lens _glOnBehalfOfContentOwner
       (\ s a -> s{_glOnBehalfOfContentOwner = a})
@@ -105,12 +105,12 @@ glOnBehalfOfContentOwner
 -- | The id parameter specifies a comma-separated list of the YouTube group
 -- ID(s) for the resource(s) that are being retrieved. In a group resource,
 -- the id property specifies the group\'s YouTube group ID.
-glId :: Lens' GroupsList' (Maybe Text)
+glId :: Lens' GroupsList (Maybe Text)
 glId = lens _glId (\ s a -> s{_glId = a})
 
-instance GoogleRequest GroupsList' where
-        type Rs GroupsList' = GroupListResponse
-        requestClient GroupsList'{..}
+instance GoogleRequest GroupsList where
+        type Rs GroupsList = GroupListResponse
+        requestClient GroupsList{..}
           = go _glMine _glOnBehalfOfContentOwner _glId
               (Just AltJSON)
               youTubeAnalyticsService

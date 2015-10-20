@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Tables.Features.BatchDelete
       TablesFeaturesBatchDeleteResource
 
     -- * Creating a Request
-    , tablesFeaturesBatchDelete'
-    , TablesFeaturesBatchDelete'
+    , tablesFeaturesBatchDelete
+    , TablesFeaturesBatchDelete
 
     -- * Request Lenses
     , tfbdPayload
@@ -41,7 +41,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.tables.features.batchDelete@ method which the
--- 'TablesFeaturesBatchDelete'' request conforms to.
+-- 'TablesFeaturesBatchDelete' request conforms to.
 type TablesFeaturesBatchDeleteResource =
      "tables" :>
        Capture "id" Text :>
@@ -53,42 +53,42 @@ type TablesFeaturesBatchDeleteResource =
 
 -- | Delete all features matching the given IDs.
 --
--- /See:/ 'tablesFeaturesBatchDelete'' smart constructor.
-data TablesFeaturesBatchDelete' = TablesFeaturesBatchDelete'
+-- /See:/ 'tablesFeaturesBatchDelete' smart constructor.
+data TablesFeaturesBatchDelete = TablesFeaturesBatchDelete
     { _tfbdPayload :: !FeaturesBatchDeleteRequest
     , _tfbdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesFeaturesBatchDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesFeaturesBatchDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tfbdPayload'
 --
 -- * 'tfbdId'
-tablesFeaturesBatchDelete'
+tablesFeaturesBatchDelete
     :: FeaturesBatchDeleteRequest -- ^ 'tfbdPayload'
     -> Text -- ^ 'tfbdId'
-    -> TablesFeaturesBatchDelete'
-tablesFeaturesBatchDelete' pTfbdPayload_ pTfbdId_ =
-    TablesFeaturesBatchDelete'
+    -> TablesFeaturesBatchDelete
+tablesFeaturesBatchDelete pTfbdPayload_ pTfbdId_ =
+    TablesFeaturesBatchDelete
     { _tfbdPayload = pTfbdPayload_
     , _tfbdId = pTfbdId_
     }
 
 -- | Multipart request metadata.
-tfbdPayload :: Lens' TablesFeaturesBatchDelete' FeaturesBatchDeleteRequest
+tfbdPayload :: Lens' TablesFeaturesBatchDelete FeaturesBatchDeleteRequest
 tfbdPayload
   = lens _tfbdPayload (\ s a -> s{_tfbdPayload = a})
 
 -- | The ID of the table that contains the features to be deleted.
-tfbdId :: Lens' TablesFeaturesBatchDelete' Text
+tfbdId :: Lens' TablesFeaturesBatchDelete Text
 tfbdId = lens _tfbdId (\ s a -> s{_tfbdId = a})
 
-instance GoogleRequest TablesFeaturesBatchDelete'
+instance GoogleRequest TablesFeaturesBatchDelete
          where
-        type Rs TablesFeaturesBatchDelete' = ()
-        requestClient TablesFeaturesBatchDelete'{..}
+        type Rs TablesFeaturesBatchDelete = ()
+        requestClient TablesFeaturesBatchDelete{..}
           = go _tfbdId (Just AltJSON) _tfbdPayload
               mapsEngineService
           where go

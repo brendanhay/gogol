@@ -29,21 +29,21 @@ module Network.Google.Resource.Drive.Permissions.Update
       PermissionsUpdateResource
 
     -- * Creating a Request
-    , permissionsUpdate'
-    , PermissionsUpdate'
+    , permissionsUpdate
+    , PermissionsUpdate
 
     -- * Request Lenses
-    , puuPayload
-    , puuTransferOwnership
-    , puuFileId
-    , puuPermissionId
+    , perPayload
+    , perTransferOwnership
+    , perFileId
+    , perPermissionId
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.permissions.update@ method which the
--- 'PermissionsUpdate'' request conforms to.
+-- 'PermissionsUpdate' request conforms to.
 type PermissionsUpdateResource =
      "files" :>
        Capture "fileId" Text :>
@@ -55,68 +55,68 @@ type PermissionsUpdateResource =
 
 -- | Updates a permission.
 --
--- /See:/ 'permissionsUpdate'' smart constructor.
-data PermissionsUpdate' = PermissionsUpdate'
-    { _puuPayload           :: !Permission
-    , _puuTransferOwnership :: !Bool
-    , _puuFileId            :: !Text
-    , _puuPermissionId      :: !Text
+-- /See:/ 'permissionsUpdate' smart constructor.
+data PermissionsUpdate = PermissionsUpdate
+    { _perPayload           :: !Permission
+    , _perTransferOwnership :: !Bool
+    , _perFileId            :: !Text
+    , _perPermissionId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PermissionsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'PermissionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'puuPayload'
+-- * 'perPayload'
 --
--- * 'puuTransferOwnership'
+-- * 'perTransferOwnership'
 --
--- * 'puuFileId'
+-- * 'perFileId'
 --
--- * 'puuPermissionId'
-permissionsUpdate'
-    :: Permission -- ^ 'puuPayload'
-    -> Text -- ^ 'puuFileId'
-    -> Text -- ^ 'puuPermissionId'
-    -> PermissionsUpdate'
-permissionsUpdate' pPuuPayload_ pPuuFileId_ pPuuPermissionId_ =
-    PermissionsUpdate'
-    { _puuPayload = pPuuPayload_
-    , _puuTransferOwnership = False
-    , _puuFileId = pPuuFileId_
-    , _puuPermissionId = pPuuPermissionId_
+-- * 'perPermissionId'
+permissionsUpdate
+    :: Permission -- ^ 'perPayload'
+    -> Text -- ^ 'perFileId'
+    -> Text -- ^ 'perPermissionId'
+    -> PermissionsUpdate
+permissionsUpdate pPerPayload_ pPerFileId_ pPerPermissionId_ =
+    PermissionsUpdate
+    { _perPayload = pPerPayload_
+    , _perTransferOwnership = False
+    , _perFileId = pPerFileId_
+    , _perPermissionId = pPerPermissionId_
     }
 
 -- | Multipart request metadata.
-puuPayload :: Lens' PermissionsUpdate' Permission
-puuPayload
-  = lens _puuPayload (\ s a -> s{_puuPayload = a})
+perPayload :: Lens' PermissionsUpdate Permission
+perPayload
+  = lens _perPayload (\ s a -> s{_perPayload = a})
 
 -- | Whether changing a role to \'owner\' downgrades the current owners to
 -- writers. Does nothing if the specified role is not \'owner\'.
-puuTransferOwnership :: Lens' PermissionsUpdate' Bool
-puuTransferOwnership
-  = lens _puuTransferOwnership
-      (\ s a -> s{_puuTransferOwnership = a})
+perTransferOwnership :: Lens' PermissionsUpdate Bool
+perTransferOwnership
+  = lens _perTransferOwnership
+      (\ s a -> s{_perTransferOwnership = a})
 
 -- | The ID for the file.
-puuFileId :: Lens' PermissionsUpdate' Text
-puuFileId
-  = lens _puuFileId (\ s a -> s{_puuFileId = a})
+perFileId :: Lens' PermissionsUpdate Text
+perFileId
+  = lens _perFileId (\ s a -> s{_perFileId = a})
 
 -- | The ID for the permission.
-puuPermissionId :: Lens' PermissionsUpdate' Text
-puuPermissionId
-  = lens _puuPermissionId
-      (\ s a -> s{_puuPermissionId = a})
+perPermissionId :: Lens' PermissionsUpdate Text
+perPermissionId
+  = lens _perPermissionId
+      (\ s a -> s{_perPermissionId = a})
 
-instance GoogleRequest PermissionsUpdate' where
-        type Rs PermissionsUpdate' = Permission
-        requestClient PermissionsUpdate'{..}
-          = go _puuFileId _puuPermissionId
-              (Just _puuTransferOwnership)
+instance GoogleRequest PermissionsUpdate where
+        type Rs PermissionsUpdate = Permission
+        requestClient PermissionsUpdate{..}
+          = go _perFileId _perPermissionId
+              (Just _perTransferOwnership)
               (Just AltJSON)
-              _puuPayload
+              _perPayload
               driveService
           where go
                   = buildClient

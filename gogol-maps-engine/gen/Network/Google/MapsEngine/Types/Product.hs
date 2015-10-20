@@ -2510,194 +2510,192 @@ instance ToJSON BOrder where
 --
 -- /See:/ 'map'' smart constructor.
 data Map = Map
-    { _mapaCreationTime              :: !(Maybe DateTime')
-    , _mapaWritersCanEditPermissions :: !(Maybe Bool)
-    , _mapaEtag                      :: !(Maybe Text)
-    , _mapaDefaultViewport           :: !(Maybe [Double])
-    , _mapaContents                  :: !(Maybe [MapItem])
-    , _mapaPublishingStatus          :: !(Maybe MapPublishingStatus)
-    , _mapaCreatorEmail              :: !(Maybe Text)
-    , _mapaLastModifiedTime          :: !(Maybe DateTime')
-    , _mapaLastModifierEmail         :: !(Maybe Text)
-    , _mapaVersions                  :: !(Maybe [Text])
-    , _mapaName                      :: !(Maybe Text)
-    , _mapaBbox                      :: !(Maybe [Double])
-    , _mapaProcessingStatus          :: !(Maybe MapProcessingStatus)
-    , _mapaId                        :: !(Maybe Text)
-    , _mapaProjectId                 :: !(Maybe Text)
-    , _mapaDraftAccessList           :: !(Maybe Text)
-    , _mapaPublishedAccessList       :: !(Maybe Text)
-    , _mapaDescription               :: !(Maybe Text)
-    , _mapaTags                      :: !(Maybe [Text])
+    { _mCreationTime              :: !(Maybe DateTime')
+    , _mWritersCanEditPermissions :: !(Maybe Bool)
+    , _mEtag                      :: !(Maybe Text)
+    , _mDefaultViewport           :: !(Maybe [Double])
+    , _mContents                  :: !(Maybe [MapItem])
+    , _mPublishingStatus          :: !(Maybe MapPublishingStatus)
+    , _mCreatorEmail              :: !(Maybe Text)
+    , _mLastModifiedTime          :: !(Maybe DateTime')
+    , _mLastModifierEmail         :: !(Maybe Text)
+    , _mVersions                  :: !(Maybe [Text])
+    , _mName                      :: !(Maybe Text)
+    , _mBbox                      :: !(Maybe [Double])
+    , _mProcessingStatus          :: !(Maybe MapProcessingStatus)
+    , _mId                        :: !(Maybe Text)
+    , _mProjectId                 :: !(Maybe Text)
+    , _mDraftAccessList           :: !(Maybe Text)
+    , _mPublishedAccessList       :: !(Maybe Text)
+    , _mDescription               :: !(Maybe Text)
+    , _mTags                      :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Map' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mapaCreationTime'
+-- * 'mCreationTime'
 --
--- * 'mapaWritersCanEditPermissions'
+-- * 'mWritersCanEditPermissions'
 --
--- * 'mapaEtag'
+-- * 'mEtag'
 --
--- * 'mapaDefaultViewport'
+-- * 'mDefaultViewport'
 --
--- * 'mapaContents'
+-- * 'mContents'
 --
--- * 'mapaPublishingStatus'
+-- * 'mPublishingStatus'
 --
--- * 'mapaCreatorEmail'
+-- * 'mCreatorEmail'
 --
--- * 'mapaLastModifiedTime'
+-- * 'mLastModifiedTime'
 --
--- * 'mapaLastModifierEmail'
+-- * 'mLastModifierEmail'
 --
--- * 'mapaVersions'
+-- * 'mVersions'
 --
--- * 'mapaName'
+-- * 'mName'
 --
--- * 'mapaBbox'
+-- * 'mBbox'
 --
--- * 'mapaProcessingStatus'
+-- * 'mProcessingStatus'
 --
--- * 'mapaId'
+-- * 'mId'
 --
--- * 'mapaProjectId'
+-- * 'mProjectId'
 --
--- * 'mapaDraftAccessList'
+-- * 'mDraftAccessList'
 --
--- * 'mapaPublishedAccessList'
+-- * 'mPublishedAccessList'
 --
--- * 'mapaDescription'
+-- * 'mDescription'
 --
--- * 'mapaTags'
+-- * 'mTags'
 map'
     :: Map
 map' =
     Map
-    { _mapaCreationTime = Nothing
-    , _mapaWritersCanEditPermissions = Nothing
-    , _mapaEtag = Nothing
-    , _mapaDefaultViewport = Nothing
-    , _mapaContents = Nothing
-    , _mapaPublishingStatus = Nothing
-    , _mapaCreatorEmail = Nothing
-    , _mapaLastModifiedTime = Nothing
-    , _mapaLastModifierEmail = Nothing
-    , _mapaVersions = Nothing
-    , _mapaName = Nothing
-    , _mapaBbox = Nothing
-    , _mapaProcessingStatus = Nothing
-    , _mapaId = Nothing
-    , _mapaProjectId = Nothing
-    , _mapaDraftAccessList = Nothing
-    , _mapaPublishedAccessList = Nothing
-    , _mapaDescription = Nothing
-    , _mapaTags = Nothing
+    { _mCreationTime = Nothing
+    , _mWritersCanEditPermissions = Nothing
+    , _mEtag = Nothing
+    , _mDefaultViewport = Nothing
+    , _mContents = Nothing
+    , _mPublishingStatus = Nothing
+    , _mCreatorEmail = Nothing
+    , _mLastModifiedTime = Nothing
+    , _mLastModifierEmail = Nothing
+    , _mVersions = Nothing
+    , _mName = Nothing
+    , _mBbox = Nothing
+    , _mProcessingStatus = Nothing
+    , _mId = Nothing
+    , _mProjectId = Nothing
+    , _mDraftAccessList = Nothing
+    , _mPublishedAccessList = Nothing
+    , _mDescription = Nothing
+    , _mTags = Nothing
     }
 
 -- | The creation time of this map. The value is an RFC 3339 formatted
 -- date-time value (e.g. 1970-01-01T00:00:00Z).
-mapaCreationTime :: Lens' Map (Maybe UTCTime)
-mapaCreationTime
-  = lens _mapaCreationTime
-      (\ s a -> s{_mapaCreationTime = a})
+mCreationTime :: Lens' Map (Maybe UTCTime)
+mCreationTime
+  = lens _mCreationTime
+      (\ s a -> s{_mCreationTime = a})
       . mapping _DateTime
 
 -- | If true, WRITERs of the asset are able to edit the asset permissions.
-mapaWritersCanEditPermissions :: Lens' Map (Maybe Bool)
-mapaWritersCanEditPermissions
-  = lens _mapaWritersCanEditPermissions
-      (\ s a -> s{_mapaWritersCanEditPermissions = a})
+mWritersCanEditPermissions :: Lens' Map (Maybe Bool)
+mWritersCanEditPermissions
+  = lens _mWritersCanEditPermissions
+      (\ s a -> s{_mWritersCanEditPermissions = a})
 
 -- | The ETag, used to refer to the current version of the asset.
-mapaEtag :: Lens' Map (Maybe Text)
-mapaEtag = lens _mapaEtag (\ s a -> s{_mapaEtag = a})
+mEtag :: Lens' Map (Maybe Text)
+mEtag = lens _mEtag (\ s a -> s{_mEtag = a})
 
 -- | An array of four numbers (west, south, east, north) which defines the
 -- rectangular bounding box of the default viewport. The numbers represent
 -- latitude and longitude in decimal degrees.
-mapaDefaultViewport :: Lens' Map [Double]
-mapaDefaultViewport
-  = lens _mapaDefaultViewport
-      (\ s a -> s{_mapaDefaultViewport = a})
+mDefaultViewport :: Lens' Map [Double]
+mDefaultViewport
+  = lens _mDefaultViewport
+      (\ s a -> s{_mDefaultViewport = a})
       . _Default
       . _Coerce
 
 -- | The contents of this Map.
-mapaContents :: Lens' Map [MapItem]
-mapaContents
-  = lens _mapaContents (\ s a -> s{_mapaContents = a})
-      . _Default
+mContents :: Lens' Map [MapItem]
+mContents
+  = lens _mContents (\ s a -> s{_mContents = a}) .
+      _Default
       . _Coerce
 
 -- | The publishing status of this map.
-mapaPublishingStatus :: Lens' Map (Maybe MapPublishingStatus)
-mapaPublishingStatus
-  = lens _mapaPublishingStatus
-      (\ s a -> s{_mapaPublishingStatus = a})
+mPublishingStatus :: Lens' Map (Maybe MapPublishingStatus)
+mPublishingStatus
+  = lens _mPublishingStatus
+      (\ s a -> s{_mPublishingStatus = a})
 
 -- | The email address of the creator of this map. This is only returned on
 -- GET requests and not LIST requests.
-mapaCreatorEmail :: Lens' Map (Maybe Text)
-mapaCreatorEmail
-  = lens _mapaCreatorEmail
-      (\ s a -> s{_mapaCreatorEmail = a})
+mCreatorEmail :: Lens' Map (Maybe Text)
+mCreatorEmail
+  = lens _mCreatorEmail
+      (\ s a -> s{_mCreatorEmail = a})
 
 -- | The last modified time of this map. The value is an RFC 3339 formatted
 -- date-time value (e.g. 1970-01-01T00:00:00Z).
-mapaLastModifiedTime :: Lens' Map (Maybe UTCTime)
-mapaLastModifiedTime
-  = lens _mapaLastModifiedTime
-      (\ s a -> s{_mapaLastModifiedTime = a})
+mLastModifiedTime :: Lens' Map (Maybe UTCTime)
+mLastModifiedTime
+  = lens _mLastModifiedTime
+      (\ s a -> s{_mLastModifiedTime = a})
       . mapping _DateTime
 
 -- | The email address of the last modifier of this map. This is only
 -- returned on GET requests and not LIST requests.
-mapaLastModifierEmail :: Lens' Map (Maybe Text)
-mapaLastModifierEmail
-  = lens _mapaLastModifierEmail
-      (\ s a -> s{_mapaLastModifierEmail = a})
+mLastModifierEmail :: Lens' Map (Maybe Text)
+mLastModifierEmail
+  = lens _mLastModifierEmail
+      (\ s a -> s{_mLastModifierEmail = a})
 
 -- | Deprecated: An array containing the available versions of this Map.
 -- Currently may only contain \"published\". The publishingStatus field
 -- should be used instead.
-mapaVersions :: Lens' Map [Text]
-mapaVersions
-  = lens _mapaVersions (\ s a -> s{_mapaVersions = a})
-      . _Default
+mVersions :: Lens' Map [Text]
+mVersions
+  = lens _mVersions (\ s a -> s{_mVersions = a}) .
+      _Default
       . _Coerce
 
 -- | The name of this Map, supplied by the author.
-mapaName :: Lens' Map (Maybe Text)
-mapaName = lens _mapaName (\ s a -> s{_mapaName = a})
+mName :: Lens' Map (Maybe Text)
+mName = lens _mName (\ s a -> s{_mName = a})
 
 -- | A rectangular bounding box which contains all of the data in this Map.
 -- The box is expressed as \\\"west, south, east, north\\\". The numbers
 -- represent latitude and longitude in decimal degrees.
-mapaBbox :: Lens' Map [Double]
-mapaBbox
-  = lens _mapaBbox (\ s a -> s{_mapaBbox = a}) .
-      _Default
-      . _Coerce
+mBbox :: Lens' Map [Double]
+mBbox
+  = lens _mBbox (\ s a -> s{_mBbox = a}) . _Default .
+      _Coerce
 
 -- | The processing status of this map. Map processing is automatically
 -- started once a map becomes ready for processing.
-mapaProcessingStatus :: Lens' Map (Maybe MapProcessingStatus)
-mapaProcessingStatus
-  = lens _mapaProcessingStatus
-      (\ s a -> s{_mapaProcessingStatus = a})
+mProcessingStatus :: Lens' Map (Maybe MapProcessingStatus)
+mProcessingStatus
+  = lens _mProcessingStatus
+      (\ s a -> s{_mProcessingStatus = a})
 
 -- | A globally unique ID, used to refer to this Map.
-mapaId :: Lens' Map (Maybe Text)
-mapaId = lens _mapaId (\ s a -> s{_mapaId = a})
+mId :: Lens' Map (Maybe Text)
+mId = lens _mId (\ s a -> s{_mId = a})
 
 -- | The ID of the project that this Map is in.
-mapaProjectId :: Lens' Map (Maybe Text)
-mapaProjectId
-  = lens _mapaProjectId
-      (\ s a -> s{_mapaProjectId = a})
+mProjectId :: Lens' Map (Maybe Text)
+mProjectId
+  = lens _mProjectId (\ s a -> s{_mProjectId = a})
 
 -- | Deprecated: The name of an access list of the Map Editor type. The user
 -- on whose behalf the request is being sent must be an editor on that
@@ -2708,10 +2706,10 @@ mapaProjectId
 -- July 14th, 2014, you will not be able to send API requests that include
 -- access lists. Note: This is an input field only. It is not returned in
 -- response to a list or get request.
-mapaDraftAccessList :: Lens' Map (Maybe Text)
-mapaDraftAccessList
-  = lens _mapaDraftAccessList
-      (\ s a -> s{_mapaDraftAccessList = a})
+mDraftAccessList :: Lens' Map (Maybe Text)
+mDraftAccessList
+  = lens _mDraftAccessList
+      (\ s a -> s{_mDraftAccessList = a})
 
 -- | Deprecated: The access list to whom view permissions are granted. The
 -- value must be the name of a Maps Engine access list of the Map Viewer
@@ -2722,23 +2720,21 @@ mapaDraftAccessList
 -- GME account\/project after July 14th, 2014, you will not be able to send
 -- API requests that include access lists. This is an input field only. It
 -- is not returned in response to a list or get request.
-mapaPublishedAccessList :: Lens' Map (Maybe Text)
-mapaPublishedAccessList
-  = lens _mapaPublishedAccessList
-      (\ s a -> s{_mapaPublishedAccessList = a})
+mPublishedAccessList :: Lens' Map (Maybe Text)
+mPublishedAccessList
+  = lens _mPublishedAccessList
+      (\ s a -> s{_mPublishedAccessList = a})
 
 -- | The description of this Map, supplied by the author.
-mapaDescription :: Lens' Map (Maybe Text)
-mapaDescription
-  = lens _mapaDescription
-      (\ s a -> s{_mapaDescription = a})
+mDescription :: Lens' Map (Maybe Text)
+mDescription
+  = lens _mDescription (\ s a -> s{_mDescription = a})
 
 -- | Tags of this Map.
-mapaTags :: Lens' Map [Text]
-mapaTags
-  = lens _mapaTags (\ s a -> s{_mapaTags = a}) .
-      _Default
-      . _Coerce
+mTags :: Lens' Map [Text]
+mTags
+  = lens _mTags (\ s a -> s{_mTags = a}) . _Default .
+      _Coerce
 
 instance FromJSON Map where
         parseJSON
@@ -2769,26 +2765,24 @@ instance ToJSON Map where
         toJSON Map{..}
           = object
               (catMaybes
-                 [("creationTime" .=) <$> _mapaCreationTime,
+                 [("creationTime" .=) <$> _mCreationTime,
                   ("writersCanEditPermissions" .=) <$>
-                    _mapaWritersCanEditPermissions,
-                  ("etag" .=) <$> _mapaEtag,
-                  ("defaultViewport" .=) <$> _mapaDefaultViewport,
-                  ("contents" .=) <$> _mapaContents,
-                  ("publishingStatus" .=) <$> _mapaPublishingStatus,
-                  ("creatorEmail" .=) <$> _mapaCreatorEmail,
-                  ("lastModifiedTime" .=) <$> _mapaLastModifiedTime,
-                  ("lastModifierEmail" .=) <$> _mapaLastModifierEmail,
-                  ("versions" .=) <$> _mapaVersions,
-                  ("name" .=) <$> _mapaName, ("bbox" .=) <$> _mapaBbox,
-                  ("processingStatus" .=) <$> _mapaProcessingStatus,
-                  ("id" .=) <$> _mapaId,
-                  ("projectId" .=) <$> _mapaProjectId,
-                  ("draftAccessList" .=) <$> _mapaDraftAccessList,
-                  ("publishedAccessList" .=) <$>
-                    _mapaPublishedAccessList,
-                  ("description" .=) <$> _mapaDescription,
-                  ("tags" .=) <$> _mapaTags])
+                    _mWritersCanEditPermissions,
+                  ("etag" .=) <$> _mEtag,
+                  ("defaultViewport" .=) <$> _mDefaultViewport,
+                  ("contents" .=) <$> _mContents,
+                  ("publishingStatus" .=) <$> _mPublishingStatus,
+                  ("creatorEmail" .=) <$> _mCreatorEmail,
+                  ("lastModifiedTime" .=) <$> _mLastModifiedTime,
+                  ("lastModifierEmail" .=) <$> _mLastModifierEmail,
+                  ("versions" .=) <$> _mVersions,
+                  ("name" .=) <$> _mName, ("bbox" .=) <$> _mBbox,
+                  ("processingStatus" .=) <$> _mProcessingStatus,
+                  ("id" .=) <$> _mId, ("projectId" .=) <$> _mProjectId,
+                  ("draftAccessList" .=) <$> _mDraftAccessList,
+                  ("publishedAccessList" .=) <$> _mPublishedAccessList,
+                  ("description" .=) <$> _mDescription,
+                  ("tags" .=) <$> _mTags])
 
 -- | The response returned by a call to rasterCollections.rasters.List.
 --
@@ -3414,158 +3408,156 @@ instance ToJSON GeoJSONMultiPolygon where
 --
 -- /See:/ 'layer' smart constructor.
 data Layer = Layer
-    { _layaCreationTime              :: !(Maybe DateTime')
-    , _layaWritersCanEditPermissions :: !(Maybe Bool)
-    , _layaStyle                     :: !(Maybe VectorStyle)
-    , _layaEtag                      :: !(Maybe Text)
-    , _layaDatasourceType            :: !(Maybe LayerDatasourceType)
-    , _layaPublishingStatus          :: !(Maybe LayerPublishingStatus)
-    , _layaCreatorEmail              :: !(Maybe Text)
-    , _layaLayerType                 :: !(Maybe LayerLayerType)
-    , _layaLastModifiedTime          :: !(Maybe DateTime')
-    , _layaDatasources               :: !(Maybe [Datasource])
-    , _layaLastModifierEmail         :: !(Maybe Text)
-    , _layaName                      :: !(Maybe Text)
-    , _layaBbox                      :: !(Maybe [Double])
-    , _layaProcessingStatus          :: !(Maybe LayerProcessingStatus)
-    , _layaId                        :: !(Maybe Text)
-    , _layaProjectId                 :: !(Maybe Text)
-    , _layaDraftAccessList           :: !(Maybe Text)
-    , _layaPublishedAccessList       :: !(Maybe Text)
-    , _layaDescription               :: !(Maybe Text)
-    , _layaTags                      :: !(Maybe [Text])
+    { _layCreationTime              :: !(Maybe DateTime')
+    , _layWritersCanEditPermissions :: !(Maybe Bool)
+    , _layStyle                     :: !(Maybe VectorStyle)
+    , _layEtag                      :: !(Maybe Text)
+    , _layDatasourceType            :: !(Maybe LayerDatasourceType)
+    , _layPublishingStatus          :: !(Maybe LayerPublishingStatus)
+    , _layCreatorEmail              :: !(Maybe Text)
+    , _layLayerType                 :: !(Maybe LayerLayerType)
+    , _layLastModifiedTime          :: !(Maybe DateTime')
+    , _layDatasources               :: !(Maybe [Datasource])
+    , _layLastModifierEmail         :: !(Maybe Text)
+    , _layName                      :: !(Maybe Text)
+    , _layBbox                      :: !(Maybe [Double])
+    , _layProcessingStatus          :: !(Maybe LayerProcessingStatus)
+    , _layId                        :: !(Maybe Text)
+    , _layProjectId                 :: !(Maybe Text)
+    , _layDraftAccessList           :: !(Maybe Text)
+    , _layPublishedAccessList       :: !(Maybe Text)
+    , _layDescription               :: !(Maybe Text)
+    , _layTags                      :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Layer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'layaCreationTime'
+-- * 'layCreationTime'
 --
--- * 'layaWritersCanEditPermissions'
+-- * 'layWritersCanEditPermissions'
 --
--- * 'layaStyle'
+-- * 'layStyle'
 --
--- * 'layaEtag'
+-- * 'layEtag'
 --
--- * 'layaDatasourceType'
+-- * 'layDatasourceType'
 --
--- * 'layaPublishingStatus'
+-- * 'layPublishingStatus'
 --
--- * 'layaCreatorEmail'
+-- * 'layCreatorEmail'
 --
--- * 'layaLayerType'
+-- * 'layLayerType'
 --
--- * 'layaLastModifiedTime'
+-- * 'layLastModifiedTime'
 --
--- * 'layaDatasources'
+-- * 'layDatasources'
 --
--- * 'layaLastModifierEmail'
+-- * 'layLastModifierEmail'
 --
--- * 'layaName'
+-- * 'layName'
 --
--- * 'layaBbox'
+-- * 'layBbox'
 --
--- * 'layaProcessingStatus'
+-- * 'layProcessingStatus'
 --
--- * 'layaId'
+-- * 'layId'
 --
--- * 'layaProjectId'
+-- * 'layProjectId'
 --
--- * 'layaDraftAccessList'
+-- * 'layDraftAccessList'
 --
--- * 'layaPublishedAccessList'
+-- * 'layPublishedAccessList'
 --
--- * 'layaDescription'
+-- * 'layDescription'
 --
--- * 'layaTags'
+-- * 'layTags'
 layer
     :: Layer
 layer =
     Layer
-    { _layaCreationTime = Nothing
-    , _layaWritersCanEditPermissions = Nothing
-    , _layaStyle = Nothing
-    , _layaEtag = Nothing
-    , _layaDatasourceType = Nothing
-    , _layaPublishingStatus = Nothing
-    , _layaCreatorEmail = Nothing
-    , _layaLayerType = Nothing
-    , _layaLastModifiedTime = Nothing
-    , _layaDatasources = Nothing
-    , _layaLastModifierEmail = Nothing
-    , _layaName = Nothing
-    , _layaBbox = Nothing
-    , _layaProcessingStatus = Nothing
-    , _layaId = Nothing
-    , _layaProjectId = Nothing
-    , _layaDraftAccessList = Nothing
-    , _layaPublishedAccessList = Nothing
-    , _layaDescription = Nothing
-    , _layaTags = Nothing
+    { _layCreationTime = Nothing
+    , _layWritersCanEditPermissions = Nothing
+    , _layStyle = Nothing
+    , _layEtag = Nothing
+    , _layDatasourceType = Nothing
+    , _layPublishingStatus = Nothing
+    , _layCreatorEmail = Nothing
+    , _layLayerType = Nothing
+    , _layLastModifiedTime = Nothing
+    , _layDatasources = Nothing
+    , _layLastModifierEmail = Nothing
+    , _layName = Nothing
+    , _layBbox = Nothing
+    , _layProcessingStatus = Nothing
+    , _layId = Nothing
+    , _layProjectId = Nothing
+    , _layDraftAccessList = Nothing
+    , _layPublishedAccessList = Nothing
+    , _layDescription = Nothing
+    , _layTags = Nothing
     }
 
 -- | The creation time of this layer. The value is an RFC 3339 formatted
 -- date-time value (e.g. 1970-01-01T00:00:00Z).
-layaCreationTime :: Lens' Layer (Maybe UTCTime)
-layaCreationTime
-  = lens _layaCreationTime
-      (\ s a -> s{_layaCreationTime = a})
+layCreationTime :: Lens' Layer (Maybe UTCTime)
+layCreationTime
+  = lens _layCreationTime
+      (\ s a -> s{_layCreationTime = a})
       . mapping _DateTime
 
 -- | If true, WRITERs of the asset are able to edit the asset permissions.
-layaWritersCanEditPermissions :: Lens' Layer (Maybe Bool)
-layaWritersCanEditPermissions
-  = lens _layaWritersCanEditPermissions
-      (\ s a -> s{_layaWritersCanEditPermissions = a})
+layWritersCanEditPermissions :: Lens' Layer (Maybe Bool)
+layWritersCanEditPermissions
+  = lens _layWritersCanEditPermissions
+      (\ s a -> s{_layWritersCanEditPermissions = a})
 
 -- | The styling information for a vector layer. Note: Style information is
 -- returned in response to a get request but not a list request. After
 -- requesting a list of layers, you\'ll need to send a get request to
 -- retrieve the VectorStyles for each layer.
-layaStyle :: Lens' Layer (Maybe VectorStyle)
-layaStyle
-  = lens _layaStyle (\ s a -> s{_layaStyle = a})
+layStyle :: Lens' Layer (Maybe VectorStyle)
+layStyle = lens _layStyle (\ s a -> s{_layStyle = a})
 
 -- | The ETag, used to refer to the current version of the asset.
-layaEtag :: Lens' Layer (Maybe Text)
-layaEtag = lens _layaEtag (\ s a -> s{_layaEtag = a})
+layEtag :: Lens' Layer (Maybe Text)
+layEtag = lens _layEtag (\ s a -> s{_layEtag = a})
 
 -- | Deprecated: The type of the datasources used to build this Layer. Note:
 -- This has been replaced by layerType, but is still available for now to
 -- maintain backward compatibility.
-layaDatasourceType :: Lens' Layer (Maybe LayerDatasourceType)
-layaDatasourceType
-  = lens _layaDatasourceType
-      (\ s a -> s{_layaDatasourceType = a})
+layDatasourceType :: Lens' Layer (Maybe LayerDatasourceType)
+layDatasourceType
+  = lens _layDatasourceType
+      (\ s a -> s{_layDatasourceType = a})
 
 -- | The publishing status of this layer.
-layaPublishingStatus :: Lens' Layer (Maybe LayerPublishingStatus)
-layaPublishingStatus
-  = lens _layaPublishingStatus
-      (\ s a -> s{_layaPublishingStatus = a})
+layPublishingStatus :: Lens' Layer (Maybe LayerPublishingStatus)
+layPublishingStatus
+  = lens _layPublishingStatus
+      (\ s a -> s{_layPublishingStatus = a})
 
 -- | The email address of the creator of this layer. This is only returned on
 -- GET requests and not LIST requests.
-layaCreatorEmail :: Lens' Layer (Maybe Text)
-layaCreatorEmail
-  = lens _layaCreatorEmail
-      (\ s a -> s{_layaCreatorEmail = a})
+layCreatorEmail :: Lens' Layer (Maybe Text)
+layCreatorEmail
+  = lens _layCreatorEmail
+      (\ s a -> s{_layCreatorEmail = a})
 
 -- | The type of the datasources used to build this Layer. This should be
 -- used instead of datasourceType. At least one of layerType and
 -- datasourceType and must be specified, but layerType takes precedence.
-layaLayerType :: Lens' Layer (Maybe LayerLayerType)
-layaLayerType
-  = lens _layaLayerType
-      (\ s a -> s{_layaLayerType = a})
+layLayerType :: Lens' Layer (Maybe LayerLayerType)
+layLayerType
+  = lens _layLayerType (\ s a -> s{_layLayerType = a})
 
 -- | The last modified time of this layer. The value is an RFC 3339 formatted
 -- date-time value (e.g. 1970-01-01T00:00:00Z).
-layaLastModifiedTime :: Lens' Layer (Maybe UTCTime)
-layaLastModifiedTime
-  = lens _layaLastModifiedTime
-      (\ s a -> s{_layaLastModifiedTime = a})
+layLastModifiedTime :: Lens' Layer (Maybe UTCTime)
+layLastModifiedTime
+  = lens _layLastModifiedTime
+      (\ s a -> s{_layLastModifiedTime = a})
       . mapping _DateTime
 
 -- | An array of datasources used to build this layer. If layerType is
@@ -3574,48 +3566,46 @@ layaLastModifiedTime
 -- RasterCollection. If layerType is \"vector\", or layerType is not
 -- specified and datasourceType is \"table\" then each element in this
 -- array is a reference to a Vector Table.
-layaDatasources :: Lens' Layer [Datasource]
-layaDatasources
-  = lens _layaDatasources
-      (\ s a -> s{_layaDatasources = a})
+layDatasources :: Lens' Layer [Datasource]
+layDatasources
+  = lens _layDatasources
+      (\ s a -> s{_layDatasources = a})
       . _Default
       . _Coerce
 
 -- | The email address of the last modifier of this layer. This is only
 -- returned on GET requests and not LIST requests.
-layaLastModifierEmail :: Lens' Layer (Maybe Text)
-layaLastModifierEmail
-  = lens _layaLastModifierEmail
-      (\ s a -> s{_layaLastModifierEmail = a})
+layLastModifierEmail :: Lens' Layer (Maybe Text)
+layLastModifierEmail
+  = lens _layLastModifierEmail
+      (\ s a -> s{_layLastModifierEmail = a})
 
 -- | The name of this Layer, supplied by the author.
-layaName :: Lens' Layer (Maybe Text)
-layaName = lens _layaName (\ s a -> s{_layaName = a})
+layName :: Lens' Layer (Maybe Text)
+layName = lens _layName (\ s a -> s{_layName = a})
 
 -- | A rectangular bounding box which contains all of the data in this Layer.
 -- The box is expressed as \\\"west, south, east, north\\\". The numbers
 -- represent latitude and longitude in decimal degrees.
-layaBbox :: Lens' Layer [Double]
-layaBbox
-  = lens _layaBbox (\ s a -> s{_layaBbox = a}) .
-      _Default
+layBbox :: Lens' Layer [Double]
+layBbox
+  = lens _layBbox (\ s a -> s{_layBbox = a}) . _Default
       . _Coerce
 
 -- | The processing status of this layer.
-layaProcessingStatus :: Lens' Layer (Maybe LayerProcessingStatus)
-layaProcessingStatus
-  = lens _layaProcessingStatus
-      (\ s a -> s{_layaProcessingStatus = a})
+layProcessingStatus :: Lens' Layer (Maybe LayerProcessingStatus)
+layProcessingStatus
+  = lens _layProcessingStatus
+      (\ s a -> s{_layProcessingStatus = a})
 
 -- | A globally unique ID, used to refer to this Layer.
-layaId :: Lens' Layer (Maybe Text)
-layaId = lens _layaId (\ s a -> s{_layaId = a})
+layId :: Lens' Layer (Maybe Text)
+layId = lens _layId (\ s a -> s{_layId = a})
 
 -- | The ID of the project that this Layer is in.
-layaProjectId :: Lens' Layer (Maybe Text)
-layaProjectId
-  = lens _layaProjectId
-      (\ s a -> s{_layaProjectId = a})
+layProjectId :: Lens' Layer (Maybe Text)
+layProjectId
+  = lens _layProjectId (\ s a -> s{_layProjectId = a})
 
 -- | Deprecated: The name of an access list of the Map Editor type. The user
 -- on whose behalf the request is being sent must be an editor on that
@@ -3626,10 +3616,10 @@ layaProjectId
 -- July 14th, 2014, you will not be able to send API requests that include
 -- access lists. Note: This is an input field only. It is not returned in
 -- response to a list or get request.
-layaDraftAccessList :: Lens' Layer (Maybe Text)
-layaDraftAccessList
-  = lens _layaDraftAccessList
-      (\ s a -> s{_layaDraftAccessList = a})
+layDraftAccessList :: Lens' Layer (Maybe Text)
+layDraftAccessList
+  = lens _layDraftAccessList
+      (\ s a -> s{_layDraftAccessList = a})
 
 -- | Deprecated: The access list to whom view permissions are granted. The
 -- value must be the name of a Maps Engine access list of the Map Viewer
@@ -3640,22 +3630,21 @@ layaDraftAccessList
 -- GME account\/project after July 14th, 2014, you will not be able to send
 -- API requests that include access lists. Note: This is an input field
 -- only. It is not returned in response to a list or get request.
-layaPublishedAccessList :: Lens' Layer (Maybe Text)
-layaPublishedAccessList
-  = lens _layaPublishedAccessList
-      (\ s a -> s{_layaPublishedAccessList = a})
+layPublishedAccessList :: Lens' Layer (Maybe Text)
+layPublishedAccessList
+  = lens _layPublishedAccessList
+      (\ s a -> s{_layPublishedAccessList = a})
 
 -- | The description of this Layer, supplied by the author.
-layaDescription :: Lens' Layer (Maybe Text)
-layaDescription
-  = lens _layaDescription
-      (\ s a -> s{_layaDescription = a})
+layDescription :: Lens' Layer (Maybe Text)
+layDescription
+  = lens _layDescription
+      (\ s a -> s{_layDescription = a})
 
 -- | Tags of this Layer.
-layaTags :: Lens' Layer [Text]
-layaTags
-  = lens _layaTags (\ s a -> s{_layaTags = a}) .
-      _Default
+layTags :: Lens' Layer [Text]
+layTags
+  = lens _layTags (\ s a -> s{_layTags = a}) . _Default
       . _Coerce
 
 instance FromJSON Layer where
@@ -3688,27 +3677,26 @@ instance ToJSON Layer where
         toJSON Layer{..}
           = object
               (catMaybes
-                 [("creationTime" .=) <$> _layaCreationTime,
+                 [("creationTime" .=) <$> _layCreationTime,
                   ("writersCanEditPermissions" .=) <$>
-                    _layaWritersCanEditPermissions,
-                  ("style" .=) <$> _layaStyle,
-                  ("etag" .=) <$> _layaEtag,
-                  ("datasourceType" .=) <$> _layaDatasourceType,
-                  ("publishingStatus" .=) <$> _layaPublishingStatus,
-                  ("creatorEmail" .=) <$> _layaCreatorEmail,
-                  ("layerType" .=) <$> _layaLayerType,
-                  ("lastModifiedTime" .=) <$> _layaLastModifiedTime,
-                  ("datasources" .=) <$> _layaDatasources,
-                  ("lastModifierEmail" .=) <$> _layaLastModifierEmail,
-                  ("name" .=) <$> _layaName, ("bbox" .=) <$> _layaBbox,
-                  ("processingStatus" .=) <$> _layaProcessingStatus,
-                  ("id" .=) <$> _layaId,
-                  ("projectId" .=) <$> _layaProjectId,
-                  ("draftAccessList" .=) <$> _layaDraftAccessList,
+                    _layWritersCanEditPermissions,
+                  ("style" .=) <$> _layStyle, ("etag" .=) <$> _layEtag,
+                  ("datasourceType" .=) <$> _layDatasourceType,
+                  ("publishingStatus" .=) <$> _layPublishingStatus,
+                  ("creatorEmail" .=) <$> _layCreatorEmail,
+                  ("layerType" .=) <$> _layLayerType,
+                  ("lastModifiedTime" .=) <$> _layLastModifiedTime,
+                  ("datasources" .=) <$> _layDatasources,
+                  ("lastModifierEmail" .=) <$> _layLastModifierEmail,
+                  ("name" .=) <$> _layName, ("bbox" .=) <$> _layBbox,
+                  ("processingStatus" .=) <$> _layProcessingStatus,
+                  ("id" .=) <$> _layId,
+                  ("projectId" .=) <$> _layProjectId,
+                  ("draftAccessList" .=) <$> _layDraftAccessList,
                   ("publishedAccessList" .=) <$>
-                    _layaPublishedAccessList,
-                  ("description" .=) <$> _layaDescription,
-                  ("tags" .=) <$> _layaTags])
+                    _layPublishedAccessList,
+                  ("description" .=) <$> _layDescription,
+                  ("tags" .=) <$> _layTags])
 
 -- | Style for points.
 --
@@ -4223,168 +4211,170 @@ instance ToJSON PublishedLayer where
 --
 -- /See:/ 'table' smart constructor.
 data Table = Table
-    { _ttCreationTime              :: !(Maybe DateTime')
-    , _ttWritersCanEditPermissions :: !(Maybe Bool)
-    , _ttEtag                      :: !(Maybe Text)
-    , _ttCreatorEmail              :: !(Maybe Text)
-    , _ttLastModifiedTime          :: !(Maybe DateTime')
-    , _ttSchema                    :: !(Maybe Schema)
-    , _ttLastModifierEmail         :: !(Maybe Text)
-    , _ttName                      :: !(Maybe Text)
-    , _ttBbox                      :: !(Maybe [Double])
-    , _ttProcessingStatus          :: !(Maybe TableProcessingStatus)
-    , _ttFiles                     :: !(Maybe [File])
-    , _ttId                        :: !(Maybe Text)
-    , _ttProjectId                 :: !(Maybe Text)
-    , _ttDraftAccessList           :: !(Maybe Text)
-    , _ttPublishedAccessList       :: !(Maybe Text)
-    , _ttSourceEncoding            :: !Text
-    , _ttDescription               :: !(Maybe Text)
-    , _ttTags                      :: !(Maybe [Text])
+    { _tabCreationTime              :: !(Maybe DateTime')
+    , _tabWritersCanEditPermissions :: !(Maybe Bool)
+    , _tabEtag                      :: !(Maybe Text)
+    , _tabCreatorEmail              :: !(Maybe Text)
+    , _tabLastModifiedTime          :: !(Maybe DateTime')
+    , _tabSchema                    :: !(Maybe Schema)
+    , _tabLastModifierEmail         :: !(Maybe Text)
+    , _tabName                      :: !(Maybe Text)
+    , _tabBbox                      :: !(Maybe [Double])
+    , _tabProcessingStatus          :: !(Maybe TableProcessingStatus)
+    , _tabFiles                     :: !(Maybe [File])
+    , _tabId                        :: !(Maybe Text)
+    , _tabProjectId                 :: !(Maybe Text)
+    , _tabDraftAccessList           :: !(Maybe Text)
+    , _tabPublishedAccessList       :: !(Maybe Text)
+    , _tabSourceEncoding            :: !Text
+    , _tabDescription               :: !(Maybe Text)
+    , _tabTags                      :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Table' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ttCreationTime'
+-- * 'tabCreationTime'
 --
--- * 'ttWritersCanEditPermissions'
+-- * 'tabWritersCanEditPermissions'
 --
--- * 'ttEtag'
+-- * 'tabEtag'
 --
--- * 'ttCreatorEmail'
+-- * 'tabCreatorEmail'
 --
--- * 'ttLastModifiedTime'
+-- * 'tabLastModifiedTime'
 --
--- * 'ttSchema'
+-- * 'tabSchema'
 --
--- * 'ttLastModifierEmail'
+-- * 'tabLastModifierEmail'
 --
--- * 'ttName'
+-- * 'tabName'
 --
--- * 'ttBbox'
+-- * 'tabBbox'
 --
--- * 'ttProcessingStatus'
+-- * 'tabProcessingStatus'
 --
--- * 'ttFiles'
+-- * 'tabFiles'
 --
--- * 'ttId'
+-- * 'tabId'
 --
--- * 'ttProjectId'
+-- * 'tabProjectId'
 --
--- * 'ttDraftAccessList'
+-- * 'tabDraftAccessList'
 --
--- * 'ttPublishedAccessList'
+-- * 'tabPublishedAccessList'
 --
--- * 'ttSourceEncoding'
+-- * 'tabSourceEncoding'
 --
--- * 'ttDescription'
+-- * 'tabDescription'
 --
--- * 'ttTags'
+-- * 'tabTags'
 table
     :: Table
 table =
     Table
-    { _ttCreationTime = Nothing
-    , _ttWritersCanEditPermissions = Nothing
-    , _ttEtag = Nothing
-    , _ttCreatorEmail = Nothing
-    , _ttLastModifiedTime = Nothing
-    , _ttSchema = Nothing
-    , _ttLastModifierEmail = Nothing
-    , _ttName = Nothing
-    , _ttBbox = Nothing
-    , _ttProcessingStatus = Nothing
-    , _ttFiles = Nothing
-    , _ttId = Nothing
-    , _ttProjectId = Nothing
-    , _ttDraftAccessList = Nothing
-    , _ttPublishedAccessList = Nothing
-    , _ttSourceEncoding = "UTF-8"
-    , _ttDescription = Nothing
-    , _ttTags = Nothing
+    { _tabCreationTime = Nothing
+    , _tabWritersCanEditPermissions = Nothing
+    , _tabEtag = Nothing
+    , _tabCreatorEmail = Nothing
+    , _tabLastModifiedTime = Nothing
+    , _tabSchema = Nothing
+    , _tabLastModifierEmail = Nothing
+    , _tabName = Nothing
+    , _tabBbox = Nothing
+    , _tabProcessingStatus = Nothing
+    , _tabFiles = Nothing
+    , _tabId = Nothing
+    , _tabProjectId = Nothing
+    , _tabDraftAccessList = Nothing
+    , _tabPublishedAccessList = Nothing
+    , _tabSourceEncoding = "UTF-8"
+    , _tabDescription = Nothing
+    , _tabTags = Nothing
     }
 
 -- | The creation time of this table. The value is an RFC 3339 formatted
 -- date-time value (e.g. 1970-01-01T00:00:00Z).
-ttCreationTime :: Lens' Table (Maybe UTCTime)
-ttCreationTime
-  = lens _ttCreationTime
-      (\ s a -> s{_ttCreationTime = a})
+tabCreationTime :: Lens' Table (Maybe UTCTime)
+tabCreationTime
+  = lens _tabCreationTime
+      (\ s a -> s{_tabCreationTime = a})
       . mapping _DateTime
 
 -- | If true, WRITERs of the asset are able to edit the asset permissions.
-ttWritersCanEditPermissions :: Lens' Table (Maybe Bool)
-ttWritersCanEditPermissions
-  = lens _ttWritersCanEditPermissions
-      (\ s a -> s{_ttWritersCanEditPermissions = a})
+tabWritersCanEditPermissions :: Lens' Table (Maybe Bool)
+tabWritersCanEditPermissions
+  = lens _tabWritersCanEditPermissions
+      (\ s a -> s{_tabWritersCanEditPermissions = a})
 
 -- | The ETag, used to refer to the current version of the asset.
-ttEtag :: Lens' Table (Maybe Text)
-ttEtag = lens _ttEtag (\ s a -> s{_ttEtag = a})
+tabEtag :: Lens' Table (Maybe Text)
+tabEtag = lens _tabEtag (\ s a -> s{_tabEtag = a})
 
 -- | The email address of the creator of this table. This is only returned on
 -- GET requests and not LIST requests.
-ttCreatorEmail :: Lens' Table (Maybe Text)
-ttCreatorEmail
-  = lens _ttCreatorEmail
-      (\ s a -> s{_ttCreatorEmail = a})
+tabCreatorEmail :: Lens' Table (Maybe Text)
+tabCreatorEmail
+  = lens _tabCreatorEmail
+      (\ s a -> s{_tabCreatorEmail = a})
 
 -- | The last modified time of this table. The value is an RFC 3339 formatted
 -- date-time value (e.g. 1970-01-01T00:00:00Z).
-ttLastModifiedTime :: Lens' Table (Maybe UTCTime)
-ttLastModifiedTime
-  = lens _ttLastModifiedTime
-      (\ s a -> s{_ttLastModifiedTime = a})
+tabLastModifiedTime :: Lens' Table (Maybe UTCTime)
+tabLastModifiedTime
+  = lens _tabLastModifiedTime
+      (\ s a -> s{_tabLastModifiedTime = a})
       . mapping _DateTime
 
 -- | The schema for this table. Note: The schema is returned in response to a
 -- get request but not a list request. After requesting a list of tables,
 -- you\'ll need to send a get request to retrieve the schema for each
 -- table.
-ttSchema :: Lens' Table (Maybe Schema)
-ttSchema = lens _ttSchema (\ s a -> s{_ttSchema = a})
+tabSchema :: Lens' Table (Maybe Schema)
+tabSchema
+  = lens _tabSchema (\ s a -> s{_tabSchema = a})
 
 -- | The email address of the last modifier of this table. This is only
 -- returned on GET requests and not LIST requests.
-ttLastModifierEmail :: Lens' Table (Maybe Text)
-ttLastModifierEmail
-  = lens _ttLastModifierEmail
-      (\ s a -> s{_ttLastModifierEmail = a})
+tabLastModifierEmail :: Lens' Table (Maybe Text)
+tabLastModifierEmail
+  = lens _tabLastModifierEmail
+      (\ s a -> s{_tabLastModifierEmail = a})
 
 -- | The name of this table, supplied by the author.
-ttName :: Lens' Table (Maybe Text)
-ttName = lens _ttName (\ s a -> s{_ttName = a})
+tabName :: Lens' Table (Maybe Text)
+tabName = lens _tabName (\ s a -> s{_tabName = a})
 
 -- | A rectangular bounding box which contains all of the data in this Table.
 -- The box is expressed as \\\"west, south, east, north\\\". The numbers
 -- represent latitude and longitude in decimal degrees.
-ttBbox :: Lens' Table [Double]
-ttBbox
-  = lens _ttBbox (\ s a -> s{_ttBbox = a}) . _Default .
-      _Coerce
+tabBbox :: Lens' Table [Double]
+tabBbox
+  = lens _tabBbox (\ s a -> s{_tabBbox = a}) . _Default
+      . _Coerce
 
 -- | The processing status of this table.
-ttProcessingStatus :: Lens' Table (Maybe TableProcessingStatus)
-ttProcessingStatus
-  = lens _ttProcessingStatus
-      (\ s a -> s{_ttProcessingStatus = a})
+tabProcessingStatus :: Lens' Table (Maybe TableProcessingStatus)
+tabProcessingStatus
+  = lens _tabProcessingStatus
+      (\ s a -> s{_tabProcessingStatus = a})
 
 -- | The files associated with this table.
-ttFiles :: Lens' Table [File]
-ttFiles
-  = lens _ttFiles (\ s a -> s{_ttFiles = a}) . _Default
+tabFiles :: Lens' Table [File]
+tabFiles
+  = lens _tabFiles (\ s a -> s{_tabFiles = a}) .
+      _Default
       . _Coerce
 
 -- | A globally unique ID, used to refer to this table.
-ttId :: Lens' Table (Maybe Text)
-ttId = lens _ttId (\ s a -> s{_ttId = a})
+tabId :: Lens' Table (Maybe Text)
+tabId = lens _tabId (\ s a -> s{_tabId = a})
 
 -- | The ID of the project to which the table belongs.
-ttProjectId :: Lens' Table (Maybe Text)
-ttProjectId
-  = lens _ttProjectId (\ s a -> s{_ttProjectId = a})
+tabProjectId :: Lens' Table (Maybe Text)
+tabProjectId
+  = lens _tabProjectId (\ s a -> s{_tabProjectId = a})
 
 -- | Deprecated: The name of an access list of the Map Editor type. The user
 -- on whose behalf the request is being sent must be an editor on that
@@ -4395,10 +4385,10 @@ ttProjectId
 -- July 14th, 2014, you will not be able to send API requests that include
 -- access lists. Note: This is an input field only. It is not returned in
 -- response to a list or get request.
-ttDraftAccessList :: Lens' Table (Maybe Text)
-ttDraftAccessList
-  = lens _ttDraftAccessList
-      (\ s a -> s{_ttDraftAccessList = a})
+tabDraftAccessList :: Lens' Table (Maybe Text)
+tabDraftAccessList
+  = lens _tabDraftAccessList
+      (\ s a -> s{_tabDraftAccessList = a})
 
 -- | Deprecated: The access list to whom view permissions are granted. The
 -- value must be the name of a Maps Engine access list of the Map Viewer
@@ -4409,31 +4399,31 @@ ttDraftAccessList
 -- GME account\/project after July 14th, 2014, you will not be able to send
 -- API requests that include access lists. Note: This is an input field
 -- only. It is not returned in response to a list or get request.
-ttPublishedAccessList :: Lens' Table (Maybe Text)
-ttPublishedAccessList
-  = lens _ttPublishedAccessList
-      (\ s a -> s{_ttPublishedAccessList = a})
+tabPublishedAccessList :: Lens' Table (Maybe Text)
+tabPublishedAccessList
+  = lens _tabPublishedAccessList
+      (\ s a -> s{_tabPublishedAccessList = a})
 
 -- | Encoding of the uploaded files. Valid values include UTF-8, CP1251, ISO
 -- 8859-1, and Shift_JIS.
-ttSourceEncoding :: Lens' Table Text
-ttSourceEncoding
-  = lens _ttSourceEncoding
-      (\ s a -> s{_ttSourceEncoding = a})
+tabSourceEncoding :: Lens' Table Text
+tabSourceEncoding
+  = lens _tabSourceEncoding
+      (\ s a -> s{_tabSourceEncoding = a})
 
 -- | The description of this table, supplied by the author.
-ttDescription :: Lens' Table (Maybe Text)
-ttDescription
-  = lens _ttDescription
-      (\ s a -> s{_ttDescription = a})
+tabDescription :: Lens' Table (Maybe Text)
+tabDescription
+  = lens _tabDescription
+      (\ s a -> s{_tabDescription = a})
 
 -- | An array of text strings, with each string representing a tag. More
 -- information about tags can be found in the Tagging data article of the
 -- Maps Engine help center.
-ttTags :: Lens' Table [Text]
-ttTags
-  = lens _ttTags (\ s a -> s{_ttTags = a}) . _Default .
-      _Coerce
+tabTags :: Lens' Table [Text]
+tabTags
+  = lens _tabTags (\ s a -> s{_tabTags = a}) . _Default
+      . _Coerce
 
 instance FromJSON Table where
         parseJSON
@@ -4463,24 +4453,24 @@ instance ToJSON Table where
         toJSON Table{..}
           = object
               (catMaybes
-                 [("creationTime" .=) <$> _ttCreationTime,
+                 [("creationTime" .=) <$> _tabCreationTime,
                   ("writersCanEditPermissions" .=) <$>
-                    _ttWritersCanEditPermissions,
-                  ("etag" .=) <$> _ttEtag,
-                  ("creatorEmail" .=) <$> _ttCreatorEmail,
-                  ("lastModifiedTime" .=) <$> _ttLastModifiedTime,
-                  ("schema" .=) <$> _ttSchema,
-                  ("lastModifierEmail" .=) <$> _ttLastModifierEmail,
-                  ("name" .=) <$> _ttName, ("bbox" .=) <$> _ttBbox,
-                  ("processingStatus" .=) <$> _ttProcessingStatus,
-                  ("files" .=) <$> _ttFiles, ("id" .=) <$> _ttId,
-                  ("projectId" .=) <$> _ttProjectId,
-                  ("draftAccessList" .=) <$> _ttDraftAccessList,
+                    _tabWritersCanEditPermissions,
+                  ("etag" .=) <$> _tabEtag,
+                  ("creatorEmail" .=) <$> _tabCreatorEmail,
+                  ("lastModifiedTime" .=) <$> _tabLastModifiedTime,
+                  ("schema" .=) <$> _tabSchema,
+                  ("lastModifierEmail" .=) <$> _tabLastModifierEmail,
+                  ("name" .=) <$> _tabName, ("bbox" .=) <$> _tabBbox,
+                  ("processingStatus" .=) <$> _tabProcessingStatus,
+                  ("files" .=) <$> _tabFiles, ("id" .=) <$> _tabId,
+                  ("projectId" .=) <$> _tabProjectId,
+                  ("draftAccessList" .=) <$> _tabDraftAccessList,
                   ("publishedAccessList" .=) <$>
-                    _ttPublishedAccessList,
-                  Just ("sourceEncoding" .= _ttSourceEncoding),
-                  ("description" .=) <$> _ttDescription,
-                  ("tags" .=) <$> _ttTags])
+                    _tabPublishedAccessList,
+                  Just ("sourceEncoding" .= _tabSourceEncoding),
+                  ("description" .=) <$> _tabDescription,
+                  ("tags" .=) <$> _tabTags])
 
 -- | A single File, which is a component of an Asset.
 --

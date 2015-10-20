@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Bookshelves.Get
       BookshelvesGetResource
 
     -- * Creating a Request
-    , bookshelvesGet'
-    , BookshelvesGet'
+    , bookshelvesGet
+    , BookshelvesGet
 
     -- * Request Lenses
     , bgUserId
@@ -42,7 +42,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.bookshelves.get@ method which the
--- 'BookshelvesGet'' request conforms to.
+-- 'BookshelvesGet' request conforms to.
 type BookshelvesGetResource =
      "users" :>
        Capture "userId" Text :>
@@ -53,14 +53,14 @@ type BookshelvesGetResource =
 
 -- | Retrieves metadata for a specific bookshelf for the specified user.
 --
--- /See:/ 'bookshelvesGet'' smart constructor.
-data BookshelvesGet' = BookshelvesGet'
+-- /See:/ 'bookshelvesGet' smart constructor.
+data BookshelvesGet = BookshelvesGet
     { _bgUserId :: !Text
     , _bgShelf  :: !Text
     , _bgSource :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BookshelvesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'BookshelvesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,32 +69,32 @@ data BookshelvesGet' = BookshelvesGet'
 -- * 'bgShelf'
 --
 -- * 'bgSource'
-bookshelvesGet'
+bookshelvesGet
     :: Text -- ^ 'bgUserId'
     -> Text -- ^ 'bgShelf'
-    -> BookshelvesGet'
-bookshelvesGet' pBgUserId_ pBgShelf_ =
-    BookshelvesGet'
+    -> BookshelvesGet
+bookshelvesGet pBgUserId_ pBgShelf_ =
+    BookshelvesGet
     { _bgUserId = pBgUserId_
     , _bgShelf = pBgShelf_
     , _bgSource = Nothing
     }
 
 -- | ID of user for whom to retrieve bookshelves.
-bgUserId :: Lens' BookshelvesGet' Text
+bgUserId :: Lens' BookshelvesGet Text
 bgUserId = lens _bgUserId (\ s a -> s{_bgUserId = a})
 
 -- | ID of bookshelf to retrieve.
-bgShelf :: Lens' BookshelvesGet' Text
+bgShelf :: Lens' BookshelvesGet Text
 bgShelf = lens _bgShelf (\ s a -> s{_bgShelf = a})
 
 -- | String to identify the originator of this request.
-bgSource :: Lens' BookshelvesGet' (Maybe Text)
+bgSource :: Lens' BookshelvesGet (Maybe Text)
 bgSource = lens _bgSource (\ s a -> s{_bgSource = a})
 
-instance GoogleRequest BookshelvesGet' where
-        type Rs BookshelvesGet' = Bookshelf
-        requestClient BookshelvesGet'{..}
+instance GoogleRequest BookshelvesGet where
+        type Rs BookshelvesGet = Bookshelf
+        requestClient BookshelvesGet{..}
           = go _bgUserId _bgShelf _bgSource (Just AltJSON)
               booksService
           where go

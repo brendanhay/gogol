@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.CalendarList.Watch
       CalendarListWatchResource
 
     -- * Creating a Request
-    , calendarListWatch'
-    , CalendarListWatch'
+    , calendarListWatch
+    , CalendarListWatch
 
     -- * Request Lenses
     , clwSyncToken
@@ -46,7 +46,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendarList.watch@ method which the
--- 'CalendarListWatch'' request conforms to.
+-- 'CalendarListWatch' request conforms to.
 type CalendarListWatchResource =
      "users" :>
        "me" :>
@@ -65,8 +65,8 @@ type CalendarListWatchResource =
 
 -- | Watch for changes to CalendarList resources.
 --
--- /See:/ 'calendarListWatch'' smart constructor.
-data CalendarListWatch' = CalendarListWatch'
+-- /See:/ 'calendarListWatch' smart constructor.
+data CalendarListWatch = CalendarListWatch
     { _clwSyncToken     :: !(Maybe Text)
     , _clwMinAccessRole :: !(Maybe CalendarListWatchMinAccessRole)
     , _clwShowDeleted   :: !(Maybe Bool)
@@ -76,7 +76,7 @@ data CalendarListWatch' = CalendarListWatch'
     , _clwMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CalendarListWatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'CalendarListWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -93,11 +93,11 @@ data CalendarListWatch' = CalendarListWatch'
 -- * 'clwPageToken'
 --
 -- * 'clwMaxResults'
-calendarListWatch'
+calendarListWatch
     :: Channel -- ^ 'clwPayload'
-    -> CalendarListWatch'
-calendarListWatch' pClwPayload_ =
-    CalendarListWatch'
+    -> CalendarListWatch
+calendarListWatch pClwPayload_ =
+    CalendarListWatch
     { _clwSyncToken = Nothing
     , _clwMinAccessRole = Nothing
     , _clwShowDeleted = Nothing
@@ -120,51 +120,51 @@ calendarListWatch' pClwPayload_ =
 -- storage and perform a full synchronization without any syncToken. Learn
 -- more about incremental synchronization. Optional. The default is to
 -- return all entries.
-clwSyncToken :: Lens' CalendarListWatch' (Maybe Text)
+clwSyncToken :: Lens' CalendarListWatch (Maybe Text)
 clwSyncToken
   = lens _clwSyncToken (\ s a -> s{_clwSyncToken = a})
 
 -- | The minimum access role for the user in the returned entries. Optional.
 -- The default is no restriction.
-clwMinAccessRole :: Lens' CalendarListWatch' (Maybe CalendarListWatchMinAccessRole)
+clwMinAccessRole :: Lens' CalendarListWatch (Maybe CalendarListWatchMinAccessRole)
 clwMinAccessRole
   = lens _clwMinAccessRole
       (\ s a -> s{_clwMinAccessRole = a})
 
 -- | Whether to include deleted calendar list entries in the result.
 -- Optional. The default is False.
-clwShowDeleted :: Lens' CalendarListWatch' (Maybe Bool)
+clwShowDeleted :: Lens' CalendarListWatch (Maybe Bool)
 clwShowDeleted
   = lens _clwShowDeleted
       (\ s a -> s{_clwShowDeleted = a})
 
 -- | Multipart request metadata.
-clwPayload :: Lens' CalendarListWatch' Channel
+clwPayload :: Lens' CalendarListWatch Channel
 clwPayload
   = lens _clwPayload (\ s a -> s{_clwPayload = a})
 
 -- | Whether to show hidden entries. Optional. The default is False.
-clwShowHidden :: Lens' CalendarListWatch' (Maybe Bool)
+clwShowHidden :: Lens' CalendarListWatch (Maybe Bool)
 clwShowHidden
   = lens _clwShowHidden
       (\ s a -> s{_clwShowHidden = a})
 
 -- | Token specifying which result page to return. Optional.
-clwPageToken :: Lens' CalendarListWatch' (Maybe Text)
+clwPageToken :: Lens' CalendarListWatch (Maybe Text)
 clwPageToken
   = lens _clwPageToken (\ s a -> s{_clwPageToken = a})
 
 -- | Maximum number of entries returned on one result page. By default the
 -- value is 100 entries. The page size can never be larger than 250
 -- entries. Optional.
-clwMaxResults :: Lens' CalendarListWatch' (Maybe Int32)
+clwMaxResults :: Lens' CalendarListWatch (Maybe Int32)
 clwMaxResults
   = lens _clwMaxResults
       (\ s a -> s{_clwMaxResults = a})
 
-instance GoogleRequest CalendarListWatch' where
-        type Rs CalendarListWatch' = Channel
-        requestClient CalendarListWatch'{..}
+instance GoogleRequest CalendarListWatch where
+        type Rs CalendarListWatch = Channel
+        requestClient CalendarListWatch{..}
           = go _clwSyncToken _clwMinAccessRole _clwShowDeleted
               _clwShowHidden
               _clwPageToken

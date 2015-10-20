@@ -29,8 +29,8 @@ module Network.Google.Resource.FusionTables.Style.Patch
       StylePatchResource
 
     -- * Creating a Request
-    , stylePatch'
-    , StylePatch'
+    , stylePatch
+    , StylePatch
 
     -- * Request Lenses
     , spPayload
@@ -42,7 +42,7 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.style.patch@ method which the
--- 'StylePatch'' request conforms to.
+-- 'StylePatch' request conforms to.
 type StylePatchResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -54,14 +54,14 @@ type StylePatchResource =
 
 -- | Updates an existing style. This method supports patch semantics.
 --
--- /See:/ 'stylePatch'' smart constructor.
-data StylePatch' = StylePatch'
+-- /See:/ 'stylePatch' smart constructor.
+data StylePatch = StylePatch
     { _spPayload :: !StyleSetting
     , _spStyleId :: !Int32
     , _spTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'StylePatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'StylePatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,36 +70,36 @@ data StylePatch' = StylePatch'
 -- * 'spStyleId'
 --
 -- * 'spTableId'
-stylePatch'
+stylePatch
     :: StyleSetting -- ^ 'spPayload'
     -> Int32 -- ^ 'spStyleId'
     -> Text -- ^ 'spTableId'
-    -> StylePatch'
-stylePatch' pSpPayload_ pSpStyleId_ pSpTableId_ =
-    StylePatch'
+    -> StylePatch
+stylePatch pSpPayload_ pSpStyleId_ pSpTableId_ =
+    StylePatch
     { _spPayload = pSpPayload_
     , _spStyleId = pSpStyleId_
     , _spTableId = pSpTableId_
     }
 
 -- | Multipart request metadata.
-spPayload :: Lens' StylePatch' StyleSetting
+spPayload :: Lens' StylePatch StyleSetting
 spPayload
   = lens _spPayload (\ s a -> s{_spPayload = a})
 
 -- | Identifier (within a table) for the style being updated.
-spStyleId :: Lens' StylePatch' Int32
+spStyleId :: Lens' StylePatch Int32
 spStyleId
   = lens _spStyleId (\ s a -> s{_spStyleId = a})
 
 -- | Table whose style is being updated.
-spTableId :: Lens' StylePatch' Text
+spTableId :: Lens' StylePatch Text
 spTableId
   = lens _spTableId (\ s a -> s{_spTableId = a})
 
-instance GoogleRequest StylePatch' where
-        type Rs StylePatch' = StyleSetting
-        requestClient StylePatch'{..}
+instance GoogleRequest StylePatch where
+        type Rs StylePatch = StyleSetting
+        requestClient StylePatch{..}
           = go _spTableId _spStyleId (Just AltJSON) _spPayload
               fusionTablesService
           where go

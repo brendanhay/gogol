@@ -30,8 +30,8 @@ module Network.Google.Resource.Games.Quests.List
       QuestsListResource
 
     -- * Creating a Request
-    , questsList'
-    , QuestsList'
+    , questsList
+    , QuestsList
 
     -- * Request Lenses
     , qlLanguage
@@ -44,7 +44,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.quests.list@ method which the
--- 'QuestsList'' request conforms to.
+-- 'QuestsList' request conforms to.
 type QuestsListResource =
      "players" :>
        Capture "playerId" Text :>
@@ -58,15 +58,15 @@ type QuestsListResource =
 -- | Get a list of quests for your application and the currently
 -- authenticated player.
 --
--- /See:/ 'questsList'' smart constructor.
-data QuestsList' = QuestsList'
+-- /See:/ 'questsList' smart constructor.
+data QuestsList = QuestsList
     { _qlLanguage   :: !(Maybe Text)
     , _qlPageToken  :: !(Maybe Text)
     , _qlPlayerId   :: !Text
     , _qlMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'QuestsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'QuestsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,11 +77,11 @@ data QuestsList' = QuestsList'
 -- * 'qlPlayerId'
 --
 -- * 'qlMaxResults'
-questsList'
+questsList
     :: Text -- ^ 'qlPlayerId'
-    -> QuestsList'
-questsList' pQlPlayerId_ =
-    QuestsList'
+    -> QuestsList
+questsList pQlPlayerId_ =
+    QuestsList
     { _qlLanguage = Nothing
     , _qlPageToken = Nothing
     , _qlPlayerId = pQlPlayerId_
@@ -89,18 +89,18 @@ questsList' pQlPlayerId_ =
     }
 
 -- | The preferred language to use for strings returned by this method.
-qlLanguage :: Lens' QuestsList' (Maybe Text)
+qlLanguage :: Lens' QuestsList (Maybe Text)
 qlLanguage
   = lens _qlLanguage (\ s a -> s{_qlLanguage = a})
 
 -- | The token returned by the previous request.
-qlPageToken :: Lens' QuestsList' (Maybe Text)
+qlPageToken :: Lens' QuestsList (Maybe Text)
 qlPageToken
   = lens _qlPageToken (\ s a -> s{_qlPageToken = a})
 
 -- | A player ID. A value of me may be used in place of the authenticated
 -- player\'s ID.
-qlPlayerId :: Lens' QuestsList' Text
+qlPlayerId :: Lens' QuestsList Text
 qlPlayerId
   = lens _qlPlayerId (\ s a -> s{_qlPlayerId = a})
 
@@ -108,13 +108,13 @@ qlPlayerId
 -- for paging. For any response, the actual number of quest resources
 -- returned may be less than the specified maxResults. Acceptable values
 -- are 1 to 50, inclusive. (Default: 50).
-qlMaxResults :: Lens' QuestsList' (Maybe Int32)
+qlMaxResults :: Lens' QuestsList (Maybe Int32)
 qlMaxResults
   = lens _qlMaxResults (\ s a -> s{_qlMaxResults = a})
 
-instance GoogleRequest QuestsList' where
-        type Rs QuestsList' = QuestListResponse
-        requestClient QuestsList'{..}
+instance GoogleRequest QuestsList where
+        type Rs QuestsList = QuestListResponse
+        requestClient QuestsList{..}
           = go _qlPlayerId _qlLanguage _qlPageToken
               _qlMaxResults
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.ACL.List
       ACLListResource
 
     -- * Creating a Request
-    , aclList'
-    , ACLList'
+    , aclList
+    , ACLList
 
     -- * Request Lenses
     , alSyncToken
@@ -44,7 +44,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.acl.list@ method which the
--- 'ACLList'' request conforms to.
+-- 'ACLList' request conforms to.
 type ACLListResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -57,8 +57,8 @@ type ACLListResource =
 
 -- | Returns the rules in the access control list for the calendar.
 --
--- /See:/ 'aclList'' smart constructor.
-data ACLList' = ACLList'
+-- /See:/ 'aclList' smart constructor.
+data ACLList = ACLList
     { _alSyncToken   :: !(Maybe Text)
     , _alCalendarId  :: !Text
     , _alShowDeleted :: !(Maybe Bool)
@@ -66,7 +66,7 @@ data ACLList' = ACLList'
     , _alMaxResults  :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ACLList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ACLList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,11 +79,11 @@ data ACLList' = ACLList'
 -- * 'alPageToken'
 --
 -- * 'alMaxResults'
-aclList'
+aclList
     :: Text -- ^ 'alCalendarId'
-    -> ACLList'
-aclList' pAlCalendarId_ =
-    ACLList'
+    -> ACLList
+aclList pAlCalendarId_ =
+    ACLList
     { _alSyncToken = Nothing
     , _alCalendarId = pAlCalendarId_
     , _alShowDeleted = Nothing
@@ -100,40 +100,40 @@ aclList' pAlCalendarId_ =
 -- client should clear its storage and perform a full synchronization
 -- without any syncToken. Learn more about incremental synchronization.
 -- Optional. The default is to return all entries.
-alSyncToken :: Lens' ACLList' (Maybe Text)
+alSyncToken :: Lens' ACLList (Maybe Text)
 alSyncToken
   = lens _alSyncToken (\ s a -> s{_alSyncToken = a})
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-alCalendarId :: Lens' ACLList' Text
+alCalendarId :: Lens' ACLList Text
 alCalendarId
   = lens _alCalendarId (\ s a -> s{_alCalendarId = a})
 
 -- | Whether to include deleted ACLs in the result. Deleted ACLs are
 -- represented by role equal to \"none\". Deleted ACLs will always be
 -- included if syncToken is provided. Optional. The default is False.
-alShowDeleted :: Lens' ACLList' (Maybe Bool)
+alShowDeleted :: Lens' ACLList (Maybe Bool)
 alShowDeleted
   = lens _alShowDeleted
       (\ s a -> s{_alShowDeleted = a})
 
 -- | Token specifying which result page to return. Optional.
-alPageToken :: Lens' ACLList' (Maybe Text)
+alPageToken :: Lens' ACLList (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | Maximum number of entries returned on one result page. By default the
 -- value is 100 entries. The page size can never be larger than 250
 -- entries. Optional.
-alMaxResults :: Lens' ACLList' (Maybe Int32)
+alMaxResults :: Lens' ACLList (Maybe Int32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
-instance GoogleRequest ACLList' where
-        type Rs ACLList' = ACL
-        requestClient ACLList'{..}
+instance GoogleRequest ACLList where
+        type Rs ACLList = ACL
+        requestClient ACLList{..}
           = go _alCalendarId _alSyncToken _alShowDeleted
               _alPageToken
               _alMaxResults

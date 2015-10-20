@@ -30,8 +30,8 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Delete
       ObjectAccessControlsDeleteResource
 
     -- * Creating a Request
-    , objectAccessControlsDelete'
-    , ObjectAccessControlsDelete'
+    , objectAccessControlsDelete
+    , ObjectAccessControlsDelete
 
     -- * Request Lenses
     , oacdBucket
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objectAccessControls.delete@ method which the
--- 'ObjectAccessControlsDelete'' request conforms to.
+-- 'ObjectAccessControlsDelete' request conforms to.
 type ObjectAccessControlsDeleteResource =
      "b" :>
        Capture "bucket" Text :>
@@ -58,15 +58,15 @@ type ObjectAccessControlsDeleteResource =
 -- | Permanently deletes the ACL entry for the specified entity on the
 -- specified object.
 --
--- /See:/ 'objectAccessControlsDelete'' smart constructor.
-data ObjectAccessControlsDelete' = ObjectAccessControlsDelete'
+-- /See:/ 'objectAccessControlsDelete' smart constructor.
+data ObjectAccessControlsDelete = ObjectAccessControlsDelete
     { _oacdBucket     :: !Text
     , _oacdObject     :: !Text
     , _oacdEntity     :: !Text
     , _oacdGeneration :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ObjectAccessControlsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ObjectAccessControlsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,13 +77,13 @@ data ObjectAccessControlsDelete' = ObjectAccessControlsDelete'
 -- * 'oacdEntity'
 --
 -- * 'oacdGeneration'
-objectAccessControlsDelete'
+objectAccessControlsDelete
     :: Text -- ^ 'oacdBucket'
     -> Text -- ^ 'oacdObject'
     -> Text -- ^ 'oacdEntity'
-    -> ObjectAccessControlsDelete'
-objectAccessControlsDelete' pOacdBucket_ pOacdObject_ pOacdEntity_ =
-    ObjectAccessControlsDelete'
+    -> ObjectAccessControlsDelete
+objectAccessControlsDelete pOacdBucket_ pOacdObject_ pOacdEntity_ =
+    ObjectAccessControlsDelete
     { _oacdBucket = pOacdBucket_
     , _oacdObject = pOacdObject_
     , _oacdEntity = pOacdEntity_
@@ -91,34 +91,34 @@ objectAccessControlsDelete' pOacdBucket_ pOacdObject_ pOacdEntity_ =
     }
 
 -- | Name of a bucket.
-oacdBucket :: Lens' ObjectAccessControlsDelete' Text
+oacdBucket :: Lens' ObjectAccessControlsDelete Text
 oacdBucket
   = lens _oacdBucket (\ s a -> s{_oacdBucket = a})
 
 -- | Name of the object. For information about how to URL encode object names
 -- to be path safe, see Encoding URI Path Parts.
-oacdObject :: Lens' ObjectAccessControlsDelete' Text
+oacdObject :: Lens' ObjectAccessControlsDelete Text
 oacdObject
   = lens _oacdObject (\ s a -> s{_oacdObject = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
 -- allAuthenticatedUsers.
-oacdEntity :: Lens' ObjectAccessControlsDelete' Text
+oacdEntity :: Lens' ObjectAccessControlsDelete Text
 oacdEntity
   = lens _oacdEntity (\ s a -> s{_oacdEntity = a})
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
-oacdGeneration :: Lens' ObjectAccessControlsDelete' (Maybe Int64)
+oacdGeneration :: Lens' ObjectAccessControlsDelete (Maybe Int64)
 oacdGeneration
   = lens _oacdGeneration
       (\ s a -> s{_oacdGeneration = a})
 
-instance GoogleRequest ObjectAccessControlsDelete'
+instance GoogleRequest ObjectAccessControlsDelete
          where
-        type Rs ObjectAccessControlsDelete' = ()
-        requestClient ObjectAccessControlsDelete'{..}
+        type Rs ObjectAccessControlsDelete = ()
+        requestClient ObjectAccessControlsDelete{..}
           = go _oacdBucket _oacdObject _oacdEntity
               _oacdGeneration
               (Just AltJSON)

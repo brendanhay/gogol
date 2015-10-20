@@ -29,8 +29,8 @@ module Network.Google.Resource.Reseller.Subscriptions.StartPaidService
       SubscriptionsStartPaidServiceResource
 
     -- * Creating a Request
-    , subscriptionsStartPaidService'
-    , SubscriptionsStartPaidService'
+    , subscriptionsStartPaidService
+    , SubscriptionsStartPaidService
 
     -- * Request Lenses
     , sspsCustomerId
@@ -41,7 +41,7 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @reseller.subscriptions.startPaidService@ method which the
--- 'SubscriptionsStartPaidService'' request conforms to.
+-- 'SubscriptionsStartPaidService' request conforms to.
 type SubscriptionsStartPaidServiceResource =
      "customers" :>
        Capture "customerId" Text :>
@@ -52,45 +52,45 @@ type SubscriptionsStartPaidServiceResource =
 
 -- | Starts paid service of a trial subscription
 --
--- /See:/ 'subscriptionsStartPaidService'' smart constructor.
-data SubscriptionsStartPaidService' = SubscriptionsStartPaidService'
+-- /See:/ 'subscriptionsStartPaidService' smart constructor.
+data SubscriptionsStartPaidService = SubscriptionsStartPaidService
     { _sspsCustomerId     :: !Text
     , _sspsSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionsStartPaidService'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubscriptionsStartPaidService' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sspsCustomerId'
 --
 -- * 'sspsSubscriptionId'
-subscriptionsStartPaidService'
+subscriptionsStartPaidService
     :: Text -- ^ 'sspsCustomerId'
     -> Text -- ^ 'sspsSubscriptionId'
-    -> SubscriptionsStartPaidService'
-subscriptionsStartPaidService' pSspsCustomerId_ pSspsSubscriptionId_ =
-    SubscriptionsStartPaidService'
+    -> SubscriptionsStartPaidService
+subscriptionsStartPaidService pSspsCustomerId_ pSspsSubscriptionId_ =
+    SubscriptionsStartPaidService
     { _sspsCustomerId = pSspsCustomerId_
     , _sspsSubscriptionId = pSspsSubscriptionId_
     }
 
 -- | Id of the Customer
-sspsCustomerId :: Lens' SubscriptionsStartPaidService' Text
+sspsCustomerId :: Lens' SubscriptionsStartPaidService Text
 sspsCustomerId
   = lens _sspsCustomerId
       (\ s a -> s{_sspsCustomerId = a})
 
 -- | Id of the subscription, which is unique for a customer
-sspsSubscriptionId :: Lens' SubscriptionsStartPaidService' Text
+sspsSubscriptionId :: Lens' SubscriptionsStartPaidService Text
 sspsSubscriptionId
   = lens _sspsSubscriptionId
       (\ s a -> s{_sspsSubscriptionId = a})
 
-instance GoogleRequest SubscriptionsStartPaidService'
+instance GoogleRequest SubscriptionsStartPaidService
          where
-        type Rs SubscriptionsStartPaidService' = Subscription
-        requestClient SubscriptionsStartPaidService'{..}
+        type Rs SubscriptionsStartPaidService = Subscription
+        requestClient SubscriptionsStartPaidService{..}
           = go _sspsCustomerId _sspsSubscriptionId
               (Just AltJSON)
               appsResellerService

@@ -31,8 +31,8 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Insert
       ManagementWebPropertiesInsertResource
 
     -- * Creating a Request
-    , managementWebPropertiesInsert'
-    , ManagementWebPropertiesInsert'
+    , managementWebPropertiesInsert
+    , ManagementWebPropertiesInsert
 
     -- * Request Lenses
     , mwpiPayload
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webproperties.insert@ method which the
--- 'ManagementWebPropertiesInsert'' request conforms to.
+-- 'ManagementWebPropertiesInsert' request conforms to.
 type ManagementWebPropertiesInsertResource =
      "management" :>
        "accounts" :>
@@ -57,44 +57,44 @@ type ManagementWebPropertiesInsertResource =
 -- properties are visible in the Google Analytics interface only if they
 -- have at least one profile.
 --
--- /See:/ 'managementWebPropertiesInsert'' smart constructor.
-data ManagementWebPropertiesInsert' = ManagementWebPropertiesInsert'
+-- /See:/ 'managementWebPropertiesInsert' smart constructor.
+data ManagementWebPropertiesInsert = ManagementWebPropertiesInsert
     { _mwpiPayload   :: !WebProperty
     , _mwpiAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementWebPropertiesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementWebPropertiesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mwpiPayload'
 --
 -- * 'mwpiAccountId'
-managementWebPropertiesInsert'
+managementWebPropertiesInsert
     :: WebProperty -- ^ 'mwpiPayload'
     -> Text -- ^ 'mwpiAccountId'
-    -> ManagementWebPropertiesInsert'
-managementWebPropertiesInsert' pMwpiPayload_ pMwpiAccountId_ =
-    ManagementWebPropertiesInsert'
+    -> ManagementWebPropertiesInsert
+managementWebPropertiesInsert pMwpiPayload_ pMwpiAccountId_ =
+    ManagementWebPropertiesInsert
     { _mwpiPayload = pMwpiPayload_
     , _mwpiAccountId = pMwpiAccountId_
     }
 
 -- | Multipart request metadata.
-mwpiPayload :: Lens' ManagementWebPropertiesInsert' WebProperty
+mwpiPayload :: Lens' ManagementWebPropertiesInsert WebProperty
 mwpiPayload
   = lens _mwpiPayload (\ s a -> s{_mwpiPayload = a})
 
 -- | Account ID to create the web property for.
-mwpiAccountId :: Lens' ManagementWebPropertiesInsert' Text
+mwpiAccountId :: Lens' ManagementWebPropertiesInsert Text
 mwpiAccountId
   = lens _mwpiAccountId
       (\ s a -> s{_mwpiAccountId = a})
 
-instance GoogleRequest ManagementWebPropertiesInsert'
+instance GoogleRequest ManagementWebPropertiesInsert
          where
-        type Rs ManagementWebPropertiesInsert' = WebProperty
-        requestClient ManagementWebPropertiesInsert'{..}
+        type Rs ManagementWebPropertiesInsert = WebProperty
+        requestClient ManagementWebPropertiesInsert{..}
           = go _mwpiAccountId (Just AltJSON) _mwpiPayload
               analyticsService
           where go

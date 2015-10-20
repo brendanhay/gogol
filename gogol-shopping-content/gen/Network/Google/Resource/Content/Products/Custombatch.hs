@@ -29,19 +29,19 @@ module Network.Google.Resource.Content.Products.Custombatch
       ProductsCustombatchResource
 
     -- * Creating a Request
-    , productsCustombatch'
-    , ProductsCustombatch'
+    , productsCustombatch
+    , ProductsCustombatch
 
     -- * Request Lenses
-    , pPayload
-    , pDryRun
+    , pcPayload
+    , pcDryRun
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.products.custombatch@ method which the
--- 'ProductsCustombatch'' request conforms to.
+-- 'ProductsCustombatch' request conforms to.
 type ProductsCustombatchResource =
      "products" :>
        "batch" :>
@@ -52,41 +52,42 @@ type ProductsCustombatchResource =
 
 -- | Retrieves, inserts, and deletes multiple products in a single request.
 --
--- /See:/ 'productsCustombatch'' smart constructor.
-data ProductsCustombatch' = ProductsCustombatch'
-    { _pPayload :: !ProductsCustomBatchRequest
-    , _pDryRun  :: !(Maybe Bool)
+-- /See:/ 'productsCustombatch' smart constructor.
+data ProductsCustombatch = ProductsCustombatch
+    { _pcPayload :: !ProductsCustomBatchRequest
+    , _pcDryRun  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductsCustombatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProductsCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pPayload'
+-- * 'pcPayload'
 --
--- * 'pDryRun'
-productsCustombatch'
-    :: ProductsCustomBatchRequest -- ^ 'pPayload'
-    -> ProductsCustombatch'
-productsCustombatch' pPPayload_ =
-    ProductsCustombatch'
-    { _pPayload = pPPayload_
-    , _pDryRun = Nothing
+-- * 'pcDryRun'
+productsCustombatch
+    :: ProductsCustomBatchRequest -- ^ 'pcPayload'
+    -> ProductsCustombatch
+productsCustombatch pPcPayload_ =
+    ProductsCustombatch
+    { _pcPayload = pPcPayload_
+    , _pcDryRun = Nothing
     }
 
 -- | Multipart request metadata.
-pPayload :: Lens' ProductsCustombatch' ProductsCustomBatchRequest
-pPayload = lens _pPayload (\ s a -> s{_pPayload = a})
+pcPayload :: Lens' ProductsCustombatch ProductsCustomBatchRequest
+pcPayload
+  = lens _pcPayload (\ s a -> s{_pcPayload = a})
 
 -- | Flag to run the request in dry-run mode.
-pDryRun :: Lens' ProductsCustombatch' (Maybe Bool)
-pDryRun = lens _pDryRun (\ s a -> s{_pDryRun = a})
+pcDryRun :: Lens' ProductsCustombatch (Maybe Bool)
+pcDryRun = lens _pcDryRun (\ s a -> s{_pcDryRun = a})
 
-instance GoogleRequest ProductsCustombatch' where
-        type Rs ProductsCustombatch' =
+instance GoogleRequest ProductsCustombatch where
+        type Rs ProductsCustombatch =
              ProductsCustomBatchResponse
-        requestClient ProductsCustombatch'{..}
-          = go _pDryRun (Just AltJSON) _pPayload
+        requestClient ProductsCustombatch{..}
+          = go _pcDryRun (Just AltJSON) _pcPayload
               shoppingContentService
           where go
                   = buildClient

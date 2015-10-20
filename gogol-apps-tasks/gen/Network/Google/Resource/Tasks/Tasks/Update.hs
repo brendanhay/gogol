@@ -29,8 +29,8 @@ module Network.Google.Resource.Tasks.Tasks.Update
       TasksUpdateResource
 
     -- * Creating a Request
-    , tasksUpdate'
-    , TasksUpdate'
+    , tasksUpdate
+    , TasksUpdate
 
     -- * Request Lenses
     , tuPayload
@@ -42,7 +42,7 @@ import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasks.update@ method which the
--- 'TasksUpdate'' request conforms to.
+-- 'TasksUpdate' request conforms to.
 type TasksUpdateResource =
      "lists" :>
        Capture "tasklist" Text :>
@@ -53,14 +53,14 @@ type TasksUpdateResource =
 
 -- | Updates the specified task.
 --
--- /See:/ 'tasksUpdate'' smart constructor.
-data TasksUpdate' = TasksUpdate'
+-- /See:/ 'tasksUpdate' smart constructor.
+data TasksUpdate = TasksUpdate
     { _tuPayload  :: !Task
     , _tuTaskList :: !Text
     , _tuTask     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TasksUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'TasksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data TasksUpdate' = TasksUpdate'
 -- * 'tuTaskList'
 --
 -- * 'tuTask'
-tasksUpdate'
+tasksUpdate
     :: Task -- ^ 'tuPayload'
     -> Text -- ^ 'tuTaskList'
     -> Text -- ^ 'tuTask'
-    -> TasksUpdate'
-tasksUpdate' pTuPayload_ pTuTaskList_ pTuTask_ =
-    TasksUpdate'
+    -> TasksUpdate
+tasksUpdate pTuPayload_ pTuTaskList_ pTuTask_ =
+    TasksUpdate
     { _tuPayload = pTuPayload_
     , _tuTaskList = pTuTaskList_
     , _tuTask = pTuTask_
     }
 
 -- | Multipart request metadata.
-tuPayload :: Lens' TasksUpdate' Task
+tuPayload :: Lens' TasksUpdate Task
 tuPayload
   = lens _tuPayload (\ s a -> s{_tuPayload = a})
 
 -- | Task list identifier.
-tuTaskList :: Lens' TasksUpdate' Text
+tuTaskList :: Lens' TasksUpdate Text
 tuTaskList
   = lens _tuTaskList (\ s a -> s{_tuTaskList = a})
 
 -- | Task identifier.
-tuTask :: Lens' TasksUpdate' Text
+tuTask :: Lens' TasksUpdate Text
 tuTask = lens _tuTask (\ s a -> s{_tuTask = a})
 
-instance GoogleRequest TasksUpdate' where
-        type Rs TasksUpdate' = Task
-        requestClient TasksUpdate'{..}
+instance GoogleRequest TasksUpdate where
+        type Rs TasksUpdate = Task
+        requestClient TasksUpdate{..}
           = go _tuTaskList _tuTask (Just AltJSON) _tuPayload
               appsTasksService
           where go

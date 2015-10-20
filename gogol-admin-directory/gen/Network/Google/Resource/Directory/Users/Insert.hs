@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Users.Insert
       UsersInsertResource
 
     -- * Creating a Request
-    , usersInsert'
-    , UsersInsert'
+    , usersInsert
+    , UsersInsert
 
     -- * Request Lenses
     , uiPayload
@@ -40,7 +40,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.users.insert@ method which the
--- 'UsersInsert'' request conforms to.
+-- 'UsersInsert' request conforms to.
 type UsersInsertResource =
      "users" :>
        QueryParam "alt" AltJSON :>
@@ -48,32 +48,32 @@ type UsersInsertResource =
 
 -- | create user.
 --
--- /See:/ 'usersInsert'' smart constructor.
-newtype UsersInsert' = UsersInsert'
+-- /See:/ 'usersInsert' smart constructor.
+newtype UsersInsert = UsersInsert
     { _uiPayload :: User
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'uiPayload'
-usersInsert'
+usersInsert
     :: User -- ^ 'uiPayload'
-    -> UsersInsert'
-usersInsert' pUiPayload_ =
-    UsersInsert'
+    -> UsersInsert
+usersInsert pUiPayload_ =
+    UsersInsert
     { _uiPayload = pUiPayload_
     }
 
 -- | Multipart request metadata.
-uiPayload :: Lens' UsersInsert' User
+uiPayload :: Lens' UsersInsert User
 uiPayload
   = lens _uiPayload (\ s a -> s{_uiPayload = a})
 
-instance GoogleRequest UsersInsert' where
-        type Rs UsersInsert' = User
-        requestClient UsersInsert'{..}
+instance GoogleRequest UsersInsert where
+        type Rs UsersInsert = User
+        requestClient UsersInsert{..}
           = go (Just AltJSON) _uiPayload directoryService
           where go
                   = buildClient (Proxy :: Proxy UsersInsertResource)

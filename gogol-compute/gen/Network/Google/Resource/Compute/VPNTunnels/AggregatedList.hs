@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.VPNTunnels.AggregatedList
       VPNTunnelsAggregatedListResource
 
     -- * Creating a Request
-    , vpnTunnelsAggregatedList'
-    , VPNTunnelsAggregatedList'
+    , vpnTunnelsAggregatedList
+    , VPNTunnelsAggregatedList
 
     -- * Request Lenses
     , vtalProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.vpnTunnels.aggregatedList@ method which the
--- 'VPNTunnelsAggregatedList'' request conforms to.
+-- 'VPNTunnelsAggregatedList' request conforms to.
 type VPNTunnelsAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
@@ -56,15 +56,15 @@ type VPNTunnelsAggregatedListResource =
 
 -- | Retrieves the list of VPN tunnels grouped by scope.
 --
--- /See:/ 'vpnTunnelsAggregatedList'' smart constructor.
-data VPNTunnelsAggregatedList' = VPNTunnelsAggregatedList'
+-- /See:/ 'vpnTunnelsAggregatedList' smart constructor.
+data VPNTunnelsAggregatedList = VPNTunnelsAggregatedList
     { _vtalProject    :: !Text
     , _vtalFilter     :: !(Maybe Text)
     , _vtalPageToken  :: !(Maybe Text)
     , _vtalMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VPNTunnelsAggregatedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'VPNTunnelsAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,11 +75,11 @@ data VPNTunnelsAggregatedList' = VPNTunnelsAggregatedList'
 -- * 'vtalPageToken'
 --
 -- * 'vtalMaxResults'
-vpnTunnelsAggregatedList'
+vpnTunnelsAggregatedList
     :: Text -- ^ 'vtalProject'
-    -> VPNTunnelsAggregatedList'
-vpnTunnelsAggregatedList' pVtalProject_ =
-    VPNTunnelsAggregatedList'
+    -> VPNTunnelsAggregatedList
+vpnTunnelsAggregatedList pVtalProject_ =
+    VPNTunnelsAggregatedList
     { _vtalProject = pVtalProject_
     , _vtalFilter = Nothing
     , _vtalPageToken = Nothing
@@ -87,7 +87,7 @@ vpnTunnelsAggregatedList' pVtalProject_ =
     }
 
 -- | Project ID for this request.
-vtalProject :: Lens' VPNTunnelsAggregatedList' Text
+vtalProject :: Lens' VPNTunnelsAggregatedList Text
 vtalProject
   = lens _vtalProject (\ s a -> s{_vtalProject = a})
 
@@ -102,29 +102,28 @@ vtalProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-vtalFilter :: Lens' VPNTunnelsAggregatedList' (Maybe Text)
+vtalFilter :: Lens' VPNTunnelsAggregatedList (Maybe Text)
 vtalFilter
   = lens _vtalFilter (\ s a -> s{_vtalFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-vtalPageToken :: Lens' VPNTunnelsAggregatedList' (Maybe Text)
+vtalPageToken :: Lens' VPNTunnelsAggregatedList (Maybe Text)
 vtalPageToken
   = lens _vtalPageToken
       (\ s a -> s{_vtalPageToken = a})
 
 -- | Maximum count of results to be returned.
-vtalMaxResults :: Lens' VPNTunnelsAggregatedList' Word32
+vtalMaxResults :: Lens' VPNTunnelsAggregatedList Word32
 vtalMaxResults
   = lens _vtalMaxResults
       (\ s a -> s{_vtalMaxResults = a})
 
-instance GoogleRequest VPNTunnelsAggregatedList'
-         where
-        type Rs VPNTunnelsAggregatedList' =
+instance GoogleRequest VPNTunnelsAggregatedList where
+        type Rs VPNTunnelsAggregatedList =
              VPNTunnelAggregatedList
-        requestClient VPNTunnelsAggregatedList'{..}
+        requestClient VPNTunnelsAggregatedList{..}
           = go _vtalProject _vtalFilter _vtalPageToken
               (Just _vtalMaxResults)
               (Just AltJSON)

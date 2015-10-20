@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.Messages.Trash
       UsersMessagesTrashResource
 
     -- * Creating a Request
-    , usersMessagesTrash'
-    , UsersMessagesTrash'
+    , usersMessagesTrash
+    , UsersMessagesTrash
 
     -- * Request Lenses
     , umtUserId
@@ -41,7 +41,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.messages.trash@ method which the
--- 'UsersMessagesTrash'' request conforms to.
+-- 'UsersMessagesTrash' request conforms to.
 type UsersMessagesTrashResource =
      Capture "userId" Text :>
        "messages" :>
@@ -51,42 +51,42 @@ type UsersMessagesTrashResource =
 
 -- | Moves the specified message to the trash.
 --
--- /See:/ 'usersMessagesTrash'' smart constructor.
-data UsersMessagesTrash' = UsersMessagesTrash'
+-- /See:/ 'usersMessagesTrash' smart constructor.
+data UsersMessagesTrash = UsersMessagesTrash
     { _umtUserId :: !Text
     , _umtId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersMessagesTrash'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersMessagesTrash' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'umtUserId'
 --
 -- * 'umtId'
-usersMessagesTrash'
+usersMessagesTrash
     :: Text -- ^ 'umtId'
     -> Text
-    -> UsersMessagesTrash'
-usersMessagesTrash' pUmtUserId_ pUmtId_ =
-    UsersMessagesTrash'
+    -> UsersMessagesTrash
+usersMessagesTrash pUmtUserId_ pUmtId_ =
+    UsersMessagesTrash
     { _umtUserId = pUmtUserId_
     , _umtId = pUmtId_
     }
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-umtUserId :: Lens' UsersMessagesTrash' Text
+umtUserId :: Lens' UsersMessagesTrash Text
 umtUserId
   = lens _umtUserId (\ s a -> s{_umtUserId = a})
 
 -- | The ID of the message to Trash.
-umtId :: Lens' UsersMessagesTrash' Text
+umtId :: Lens' UsersMessagesTrash Text
 umtId = lens _umtId (\ s a -> s{_umtId = a})
 
-instance GoogleRequest UsersMessagesTrash' where
-        type Rs UsersMessagesTrash' = Message
-        requestClient UsersMessagesTrash'{..}
+instance GoogleRequest UsersMessagesTrash where
+        type Rs UsersMessagesTrash = Message
+        requestClient UsersMessagesTrash{..}
           = go _umtUserId _umtId (Just AltJSON) gmailService
           where go
                   = buildClient

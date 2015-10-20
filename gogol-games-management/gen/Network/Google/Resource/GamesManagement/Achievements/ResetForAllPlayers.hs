@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Achievements.ResetForAllPlayers
       AchievementsResetForAllPlayersResource
 
     -- * Creating a Request
-    , achievementsResetForAllPlayers'
-    , AchievementsResetForAllPlayers'
+    , achievementsResetForAllPlayers
+    , AchievementsResetForAllPlayers
 
     -- * Request Lenses
     , arfapAchievementId
@@ -42,7 +42,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.achievements.resetForAllPlayers@ method which the
--- 'AchievementsResetForAllPlayers'' request conforms to.
+-- 'AchievementsResetForAllPlayers' request conforms to.
 type AchievementsResetForAllPlayersResource =
      "achievements" :>
        Capture "achievementId" Text :>
@@ -53,34 +53,34 @@ type AchievementsResetForAllPlayersResource =
 -- only available to user accounts for your developer console. Only draft
 -- achievements can be reset.
 --
--- /See:/ 'achievementsResetForAllPlayers'' smart constructor.
-newtype AchievementsResetForAllPlayers' = AchievementsResetForAllPlayers'
+-- /See:/ 'achievementsResetForAllPlayers' smart constructor.
+newtype AchievementsResetForAllPlayers = AchievementsResetForAllPlayers
     { _arfapAchievementId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AchievementsResetForAllPlayers'' with the minimum fields required to make a request.
+-- | Creates a value of 'AchievementsResetForAllPlayers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'arfapAchievementId'
-achievementsResetForAllPlayers'
+achievementsResetForAllPlayers
     :: Text -- ^ 'arfapAchievementId'
-    -> AchievementsResetForAllPlayers'
-achievementsResetForAllPlayers' pArfapAchievementId_ =
-    AchievementsResetForAllPlayers'
+    -> AchievementsResetForAllPlayers
+achievementsResetForAllPlayers pArfapAchievementId_ =
+    AchievementsResetForAllPlayers
     { _arfapAchievementId = pArfapAchievementId_
     }
 
 -- | The ID of the achievement used by this method.
-arfapAchievementId :: Lens' AchievementsResetForAllPlayers' Text
+arfapAchievementId :: Lens' AchievementsResetForAllPlayers Text
 arfapAchievementId
   = lens _arfapAchievementId
       (\ s a -> s{_arfapAchievementId = a})
 
-instance GoogleRequest
-         AchievementsResetForAllPlayers' where
-        type Rs AchievementsResetForAllPlayers' = ()
-        requestClient AchievementsResetForAllPlayers'{..}
+instance GoogleRequest AchievementsResetForAllPlayers
+         where
+        type Rs AchievementsResetForAllPlayers = ()
+        requestClient AchievementsResetForAllPlayers{..}
           = go _arfapAchievementId (Just AltJSON)
               gamesManagementService
           where go

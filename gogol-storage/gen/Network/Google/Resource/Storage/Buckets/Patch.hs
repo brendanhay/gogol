@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.Buckets.Patch
       BucketsPatchResource
 
     -- * Creating a Request
-    , bucketsPatch'
-    , BucketsPatch'
+    , bucketsPatch
+    , BucketsPatch
 
     -- * Request Lenses
     , bpIfMetagenerationMatch
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.buckets.patch@ method which the
--- 'BucketsPatch'' request conforms to.
+-- 'BucketsPatch' request conforms to.
 type BucketsPatchResource =
      "b" :>
        Capture "bucket" Text :>
@@ -63,8 +63,8 @@ type BucketsPatchResource =
 
 -- | Updates a bucket. This method supports patch semantics.
 --
--- /See:/ 'bucketsPatch'' smart constructor.
-data BucketsPatch' = BucketsPatch'
+-- /See:/ 'bucketsPatch' smart constructor.
+data BucketsPatch = BucketsPatch
     { _bpIfMetagenerationMatch      :: !(Maybe Int64)
     , _bpPredefinedACL              :: !(Maybe BucketsPatchPredefinedACL)
     , _bpBucket                     :: !Text
@@ -74,7 +74,7 @@ data BucketsPatch' = BucketsPatch'
     , _bpProjection                 :: !(Maybe BucketsPatchProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BucketsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'BucketsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -91,12 +91,12 @@ data BucketsPatch' = BucketsPatch'
 -- * 'bpIfMetagenerationNotMatch'
 --
 -- * 'bpProjection'
-bucketsPatch'
+bucketsPatch
     :: Text -- ^ 'bpBucket'
     -> Bucket -- ^ 'bpPayload'
-    -> BucketsPatch'
-bucketsPatch' pBpBucket_ pBpPayload_ =
-    BucketsPatch'
+    -> BucketsPatch
+bucketsPatch pBpBucket_ pBpPayload_ =
+    BucketsPatch
     { _bpIfMetagenerationMatch = Nothing
     , _bpPredefinedACL = Nothing
     , _bpBucket = pBpBucket_
@@ -108,47 +108,47 @@ bucketsPatch' pBpBucket_ pBpPayload_ =
 
 -- | Makes the return of the bucket metadata conditional on whether the
 -- bucket\'s current metageneration matches the given value.
-bpIfMetagenerationMatch :: Lens' BucketsPatch' (Maybe Int64)
+bpIfMetagenerationMatch :: Lens' BucketsPatch (Maybe Int64)
 bpIfMetagenerationMatch
   = lens _bpIfMetagenerationMatch
       (\ s a -> s{_bpIfMetagenerationMatch = a})
 
 -- | Apply a predefined set of access controls to this bucket.
-bpPredefinedACL :: Lens' BucketsPatch' (Maybe BucketsPatchPredefinedACL)
+bpPredefinedACL :: Lens' BucketsPatch (Maybe BucketsPatchPredefinedACL)
 bpPredefinedACL
   = lens _bpPredefinedACL
       (\ s a -> s{_bpPredefinedACL = a})
 
 -- | Name of a bucket.
-bpBucket :: Lens' BucketsPatch' Text
+bpBucket :: Lens' BucketsPatch Text
 bpBucket = lens _bpBucket (\ s a -> s{_bpBucket = a})
 
 -- | Multipart request metadata.
-bpPayload :: Lens' BucketsPatch' Bucket
+bpPayload :: Lens' BucketsPatch Bucket
 bpPayload
   = lens _bpPayload (\ s a -> s{_bpPayload = a})
 
 -- | Apply a predefined set of default object access controls to this bucket.
-bpPredefinedDefaultObjectACL :: Lens' BucketsPatch' (Maybe BucketsPatchPredefinedDefaultObjectACL)
+bpPredefinedDefaultObjectACL :: Lens' BucketsPatch (Maybe BucketsPatchPredefinedDefaultObjectACL)
 bpPredefinedDefaultObjectACL
   = lens _bpPredefinedDefaultObjectACL
       (\ s a -> s{_bpPredefinedDefaultObjectACL = a})
 
 -- | Makes the return of the bucket metadata conditional on whether the
 -- bucket\'s current metageneration does not match the given value.
-bpIfMetagenerationNotMatch :: Lens' BucketsPatch' (Maybe Int64)
+bpIfMetagenerationNotMatch :: Lens' BucketsPatch (Maybe Int64)
 bpIfMetagenerationNotMatch
   = lens _bpIfMetagenerationNotMatch
       (\ s a -> s{_bpIfMetagenerationNotMatch = a})
 
 -- | Set of properties to return. Defaults to full.
-bpProjection :: Lens' BucketsPatch' (Maybe BucketsPatchProjection)
+bpProjection :: Lens' BucketsPatch (Maybe BucketsPatchProjection)
 bpProjection
   = lens _bpProjection (\ s a -> s{_bpProjection = a})
 
-instance GoogleRequest BucketsPatch' where
-        type Rs BucketsPatch' = Bucket
-        requestClient BucketsPatch'{..}
+instance GoogleRequest BucketsPatch where
+        type Rs BucketsPatch = Bucket
+        requestClient BucketsPatch{..}
           = go _bpBucket _bpIfMetagenerationMatch
               _bpPredefinedACL
               _bpPredefinedDefaultObjectACL

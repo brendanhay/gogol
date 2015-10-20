@@ -30,20 +30,20 @@ module Network.Google.Resource.Blogger.Posts.Publish
       PostsPublishResource
 
     -- * Creating a Request
-    , postsPublish'
-    , PostsPublish'
+    , postsPublish
+    , PostsPublish
 
     -- * Request Lenses
-    , posPublishDate
-    , posBlogId
-    , posPostId
+    , pppPublishDate
+    , pppBlogId
+    , pppPostId
     ) where
 
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.posts.publish@ method which the
--- 'PostsPublish'' request conforms to.
+-- 'PostsPublish' request conforms to.
 type PostsPublishResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -56,57 +56,57 @@ type PostsPublishResource =
 -- | Publishes a draft post, optionally at the specific time of the given
 -- publishDate parameter.
 --
--- /See:/ 'postsPublish'' smart constructor.
-data PostsPublish' = PostsPublish'
-    { _posPublishDate :: !(Maybe DateTime')
-    , _posBlogId      :: !Text
-    , _posPostId      :: !Text
+-- /See:/ 'postsPublish' smart constructor.
+data PostsPublish = PostsPublish
+    { _pppPublishDate :: !(Maybe DateTime')
+    , _pppBlogId      :: !Text
+    , _pppPostId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PostsPublish'' with the minimum fields required to make a request.
+-- | Creates a value of 'PostsPublish' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'posPublishDate'
+-- * 'pppPublishDate'
 --
--- * 'posBlogId'
+-- * 'pppBlogId'
 --
--- * 'posPostId'
-postsPublish'
-    :: Text -- ^ 'posBlogId'
-    -> Text -- ^ 'posPostId'
-    -> PostsPublish'
-postsPublish' pPosBlogId_ pPosPostId_ =
-    PostsPublish'
-    { _posPublishDate = Nothing
-    , _posBlogId = pPosBlogId_
-    , _posPostId = pPosPostId_
+-- * 'pppPostId'
+postsPublish
+    :: Text -- ^ 'pppBlogId'
+    -> Text -- ^ 'pppPostId'
+    -> PostsPublish
+postsPublish pPppBlogId_ pPppPostId_ =
+    PostsPublish
+    { _pppPublishDate = Nothing
+    , _pppBlogId = pPppBlogId_
+    , _pppPostId = pPppPostId_
     }
 
 -- | Optional date and time to schedule the publishing of the Blog. If no
 -- publishDate parameter is given, the post is either published at the a
 -- previously saved schedule date (if present), or the current time. If a
 -- future date is given, the post will be scheduled to be published.
-posPublishDate :: Lens' PostsPublish' (Maybe UTCTime)
-posPublishDate
-  = lens _posPublishDate
-      (\ s a -> s{_posPublishDate = a})
+pppPublishDate :: Lens' PostsPublish (Maybe UTCTime)
+pppPublishDate
+  = lens _pppPublishDate
+      (\ s a -> s{_pppPublishDate = a})
       . mapping _DateTime
 
 -- | The ID of the Blog.
-posBlogId :: Lens' PostsPublish' Text
-posBlogId
-  = lens _posBlogId (\ s a -> s{_posBlogId = a})
+pppBlogId :: Lens' PostsPublish Text
+pppBlogId
+  = lens _pppBlogId (\ s a -> s{_pppBlogId = a})
 
 -- | The ID of the Post.
-posPostId :: Lens' PostsPublish' Text
-posPostId
-  = lens _posPostId (\ s a -> s{_posPostId = a})
+pppPostId :: Lens' PostsPublish Text
+pppPostId
+  = lens _pppPostId (\ s a -> s{_pppPostId = a})
 
-instance GoogleRequest PostsPublish' where
-        type Rs PostsPublish' = Post'
-        requestClient PostsPublish'{..}
-          = go _posBlogId _posPostId _posPublishDate
+instance GoogleRequest PostsPublish where
+        type Rs PostsPublish = Post'
+        requestClient PostsPublish{..}
+          = go _pppBlogId _pppPostId _pppPublishDate
               (Just AltJSON)
               bloggerService
           where go

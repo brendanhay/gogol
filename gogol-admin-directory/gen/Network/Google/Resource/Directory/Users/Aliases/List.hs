@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Users.Aliases.List
       UsersAliasesListResource
 
     -- * Creating a Request
-    , usersAliasesList'
-    , UsersAliasesList'
+    , usersAliasesList
+    , UsersAliasesList
 
     -- * Request Lenses
     , ualEvent
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.users.aliases.list@ method which the
--- 'UsersAliasesList'' request conforms to.
+-- 'UsersAliasesList' request conforms to.
 type UsersAliasesListResource =
      "users" :>
        Capture "userKey" Text :>
@@ -51,40 +51,40 @@ type UsersAliasesListResource =
 
 -- | List all aliases for a user
 --
--- /See:/ 'usersAliasesList'' smart constructor.
-data UsersAliasesList' = UsersAliasesList'
+-- /See:/ 'usersAliasesList' smart constructor.
+data UsersAliasesList = UsersAliasesList
     { _ualEvent   :: !(Maybe UsersAliasesListEvent)
     , _ualUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersAliasesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersAliasesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ualEvent'
 --
 -- * 'ualUserKey'
-usersAliasesList'
+usersAliasesList
     :: Text -- ^ 'ualUserKey'
-    -> UsersAliasesList'
-usersAliasesList' pUalUserKey_ =
-    UsersAliasesList'
+    -> UsersAliasesList
+usersAliasesList pUalUserKey_ =
+    UsersAliasesList
     { _ualEvent = Nothing
     , _ualUserKey = pUalUserKey_
     }
 
 -- | Event on which subscription is intended (if subscribing)
-ualEvent :: Lens' UsersAliasesList' (Maybe UsersAliasesListEvent)
+ualEvent :: Lens' UsersAliasesList (Maybe UsersAliasesListEvent)
 ualEvent = lens _ualEvent (\ s a -> s{_ualEvent = a})
 
 -- | Email or immutable Id of the user
-ualUserKey :: Lens' UsersAliasesList' Text
+ualUserKey :: Lens' UsersAliasesList Text
 ualUserKey
   = lens _ualUserKey (\ s a -> s{_ualUserKey = a})
 
-instance GoogleRequest UsersAliasesList' where
-        type Rs UsersAliasesList' = Aliases
-        requestClient UsersAliasesList'{..}
+instance GoogleRequest UsersAliasesList where
+        type Rs UsersAliasesList = Aliases
+        requestClient UsersAliasesList{..}
           = go _ualUserKey _ualEvent (Just AltJSON)
               directoryService
           where go

@@ -31,8 +31,8 @@ module Network.Google.Resource.Spectrum.Paws.GetSpectrum
       PawsGetSpectrumResource
 
     -- * Creating a Request
-    , pawsGetSpectrum'
-    , PawsGetSpectrum'
+    , pawsGetSpectrum
+    , PawsGetSpectrum
 
     -- * Request Lenses
     , pgsPayload
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
 -- | A resource alias for @spectrum.paws.getSpectrum@ method which the
--- 'PawsGetSpectrum'' request conforms to.
+-- 'PawsGetSpectrum' request conforms to.
 type PawsGetSpectrumResource =
      "getSpectrum" :>
        QueryParam "alt" AltJSON :>
@@ -53,32 +53,32 @@ type PawsGetSpectrumResource =
 -- location. Requests from a fixed-mode device must include owner
 -- information so the device can be registered with the database.
 --
--- /See:/ 'pawsGetSpectrum'' smart constructor.
-newtype PawsGetSpectrum' = PawsGetSpectrum'
+-- /See:/ 'pawsGetSpectrum' smart constructor.
+newtype PawsGetSpectrum = PawsGetSpectrum
     { _pgsPayload :: PawsGetSpectrumRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PawsGetSpectrum'' with the minimum fields required to make a request.
+-- | Creates a value of 'PawsGetSpectrum' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pgsPayload'
-pawsGetSpectrum'
+pawsGetSpectrum
     :: PawsGetSpectrumRequest -- ^ 'pgsPayload'
-    -> PawsGetSpectrum'
-pawsGetSpectrum' pPgsPayload_ =
-    PawsGetSpectrum'
+    -> PawsGetSpectrum
+pawsGetSpectrum pPgsPayload_ =
+    PawsGetSpectrum
     { _pgsPayload = pPgsPayload_
     }
 
 -- | Multipart request metadata.
-pgsPayload :: Lens' PawsGetSpectrum' PawsGetSpectrumRequest
+pgsPayload :: Lens' PawsGetSpectrum PawsGetSpectrumRequest
 pgsPayload
   = lens _pgsPayload (\ s a -> s{_pgsPayload = a})
 
-instance GoogleRequest PawsGetSpectrum' where
-        type Rs PawsGetSpectrum' = PawsGetSpectrumResponse
-        requestClient PawsGetSpectrum'{..}
+instance GoogleRequest PawsGetSpectrum where
+        type Rs PawsGetSpectrum = PawsGetSpectrumResponse
+        requestClient PawsGetSpectrum{..}
           = go (Just AltJSON) _pgsPayload spectrumService
           where go
                   = buildClient

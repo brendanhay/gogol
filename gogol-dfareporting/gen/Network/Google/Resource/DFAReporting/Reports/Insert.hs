@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Reports.Insert
       ReportsInsertResource
 
     -- * Creating a Request
-    , reportsInsert'
-    , ReportsInsert'
+    , reportsInsert
+    , ReportsInsert
 
     -- * Request Lenses
     , riProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.reports.insert@ method which the
--- 'ReportsInsert'' request conforms to.
+-- 'ReportsInsert' request conforms to.
 type ReportsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type ReportsInsertResource =
 
 -- | Creates a report.
 --
--- /See:/ 'reportsInsert'' smart constructor.
-data ReportsInsert' = ReportsInsert'
+-- /See:/ 'reportsInsert' smart constructor.
+data ReportsInsert = ReportsInsert
     { _riProFileId :: !Int64
     , _riPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReportsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'riProFileId'
 --
 -- * 'riPayload'
-reportsInsert'
+reportsInsert
     :: Int64 -- ^ 'riProFileId'
     -> Report -- ^ 'riPayload'
-    -> ReportsInsert'
-reportsInsert' pRiProFileId_ pRiPayload_ =
-    ReportsInsert'
+    -> ReportsInsert
+reportsInsert pRiProFileId_ pRiPayload_ =
+    ReportsInsert
     { _riProFileId = pRiProFileId_
     , _riPayload = pRiPayload_
     }
 
 -- | The DFA user profile ID.
-riProFileId :: Lens' ReportsInsert' Int64
+riProFileId :: Lens' ReportsInsert Int64
 riProFileId
   = lens _riProFileId (\ s a -> s{_riProFileId = a})
 
 -- | Multipart request metadata.
-riPayload :: Lens' ReportsInsert' Report
+riPayload :: Lens' ReportsInsert Report
 riPayload
   = lens _riPayload (\ s a -> s{_riPayload = a})
 
-instance GoogleRequest ReportsInsert' where
-        type Rs ReportsInsert' = Report
-        requestClient ReportsInsert'{..}
+instance GoogleRequest ReportsInsert where
+        type Rs ReportsInsert = Report
+        requestClient ReportsInsert{..}
           = go _riProFileId (Just AltJSON) _riPayload
               dFAReportingService
           where go

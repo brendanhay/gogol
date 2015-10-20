@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.LandingPages.List
       LandingPagesListResource
 
     -- * Creating a Request
-    , landingPagesList'
-    , LandingPagesList'
+    , landingPagesList
+    , LandingPagesList
 
     -- * Request Lenses
     , lplCampaignId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.landingPages.list@ method which the
--- 'LandingPagesList'' request conforms to.
+-- 'LandingPagesList' request conforms to.
 type LandingPagesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -53,43 +53,43 @@ type LandingPagesListResource =
 
 -- | Retrieves the list of landing pages for the specified campaign.
 --
--- /See:/ 'landingPagesList'' smart constructor.
-data LandingPagesList' = LandingPagesList'
+-- /See:/ 'landingPagesList' smart constructor.
+data LandingPagesList = LandingPagesList
     { _lplCampaignId :: !Int64
     , _lplProFileId  :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LandingPagesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'LandingPagesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lplCampaignId'
 --
 -- * 'lplProFileId'
-landingPagesList'
+landingPagesList
     :: Int64 -- ^ 'lplCampaignId'
     -> Int64 -- ^ 'lplProFileId'
-    -> LandingPagesList'
-landingPagesList' pLplCampaignId_ pLplProFileId_ =
-    LandingPagesList'
+    -> LandingPagesList
+landingPagesList pLplCampaignId_ pLplProFileId_ =
+    LandingPagesList
     { _lplCampaignId = pLplCampaignId_
     , _lplProFileId = pLplProFileId_
     }
 
 -- | Landing page campaign ID.
-lplCampaignId :: Lens' LandingPagesList' Int64
+lplCampaignId :: Lens' LandingPagesList Int64
 lplCampaignId
   = lens _lplCampaignId
       (\ s a -> s{_lplCampaignId = a})
 
 -- | User profile ID associated with this request.
-lplProFileId :: Lens' LandingPagesList' Int64
+lplProFileId :: Lens' LandingPagesList Int64
 lplProFileId
   = lens _lplProFileId (\ s a -> s{_lplProFileId = a})
 
-instance GoogleRequest LandingPagesList' where
-        type Rs LandingPagesList' = LandingPagesListResponse
-        requestClient LandingPagesList'{..}
+instance GoogleRequest LandingPagesList where
+        type Rs LandingPagesList = LandingPagesListResponse
+        requestClient LandingPagesList{..}
           = go _lplProFileId _lplCampaignId (Just AltJSON)
               dFAReportingService
           where go

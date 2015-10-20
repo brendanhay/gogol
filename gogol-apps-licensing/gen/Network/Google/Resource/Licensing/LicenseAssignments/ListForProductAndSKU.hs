@@ -29,8 +29,8 @@ module Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSKU
       LicenseAssignmentsListForProductAndSKUResource
 
     -- * Creating a Request
-    , licenseAssignmentsListForProductAndSKU'
-    , LicenseAssignmentsListForProductAndSKU'
+    , licenseAssignmentsListForProductAndSKU
+    , LicenseAssignmentsListForProductAndSKU
 
     -- * Request Lenses
     , lalfpaskuSKUId
@@ -44,7 +44,7 @@ import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @licensing.licenseAssignments.listForProductAndSku@ method which the
--- 'LicenseAssignmentsListForProductAndSKU'' request conforms to.
+-- 'LicenseAssignmentsListForProductAndSKU' request conforms to.
 type LicenseAssignmentsListForProductAndSKUResource =
      Capture "productId" Text :>
        "sku" :>
@@ -58,8 +58,8 @@ type LicenseAssignmentsListForProductAndSKUResource =
 
 -- | List license assignments for given product and sku of the customer.
 --
--- /See:/ 'licenseAssignmentsListForProductAndSKU'' smart constructor.
-data LicenseAssignmentsListForProductAndSKU' = LicenseAssignmentsListForProductAndSKU'
+-- /See:/ 'licenseAssignmentsListForProductAndSKU' smart constructor.
+data LicenseAssignmentsListForProductAndSKU = LicenseAssignmentsListForProductAndSKU
     { _lalfpaskuSKUId      :: !Text
     , _lalfpaskuCustomerId :: !Text
     , _lalfpaskuPageToken  :: !Text
@@ -67,7 +67,7 @@ data LicenseAssignmentsListForProductAndSKU' = LicenseAssignmentsListForProductA
     , _lalfpaskuMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LicenseAssignmentsListForProductAndSKU'' with the minimum fields required to make a request.
+-- | Creates a value of 'LicenseAssignmentsListForProductAndSKU' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,13 +80,13 @@ data LicenseAssignmentsListForProductAndSKU' = LicenseAssignmentsListForProductA
 -- * 'lalfpaskuProductId'
 --
 -- * 'lalfpaskuMaxResults'
-licenseAssignmentsListForProductAndSKU'
+licenseAssignmentsListForProductAndSKU
     :: Text -- ^ 'lalfpaskuSKUId'
     -> Text -- ^ 'lalfpaskuCustomerId'
     -> Text -- ^ 'lalfpaskuProductId'
-    -> LicenseAssignmentsListForProductAndSKU'
-licenseAssignmentsListForProductAndSKU' pLalfpaskuSKUId_ pLalfpaskuCustomerId_ pLalfpaskuProductId_ =
-    LicenseAssignmentsListForProductAndSKU'
+    -> LicenseAssignmentsListForProductAndSKU
+licenseAssignmentsListForProductAndSKU pLalfpaskuSKUId_ pLalfpaskuCustomerId_ pLalfpaskuProductId_ =
+    LicenseAssignmentsListForProductAndSKU
     { _lalfpaskuSKUId = pLalfpaskuSKUId_
     , _lalfpaskuCustomerId = pLalfpaskuCustomerId_
     , _lalfpaskuPageToken = ""
@@ -95,44 +95,44 @@ licenseAssignmentsListForProductAndSKU' pLalfpaskuSKUId_ pLalfpaskuCustomerId_ p
     }
 
 -- | Name for sku
-lalfpaskuSKUId :: Lens' LicenseAssignmentsListForProductAndSKU' Text
+lalfpaskuSKUId :: Lens' LicenseAssignmentsListForProductAndSKU Text
 lalfpaskuSKUId
   = lens _lalfpaskuSKUId
       (\ s a -> s{_lalfpaskuSKUId = a})
 
 -- | CustomerId represents the customer for whom licenseassignments are
 -- queried
-lalfpaskuCustomerId :: Lens' LicenseAssignmentsListForProductAndSKU' Text
+lalfpaskuCustomerId :: Lens' LicenseAssignmentsListForProductAndSKU Text
 lalfpaskuCustomerId
   = lens _lalfpaskuCustomerId
       (\ s a -> s{_lalfpaskuCustomerId = a})
 
 -- | Token to fetch the next page.Optional. By default server will return
 -- first page
-lalfpaskuPageToken :: Lens' LicenseAssignmentsListForProductAndSKU' Text
+lalfpaskuPageToken :: Lens' LicenseAssignmentsListForProductAndSKU Text
 lalfpaskuPageToken
   = lens _lalfpaskuPageToken
       (\ s a -> s{_lalfpaskuPageToken = a})
 
 -- | Name for product
-lalfpaskuProductId :: Lens' LicenseAssignmentsListForProductAndSKU' Text
+lalfpaskuProductId :: Lens' LicenseAssignmentsListForProductAndSKU Text
 lalfpaskuProductId
   = lens _lalfpaskuProductId
       (\ s a -> s{_lalfpaskuProductId = a})
 
 -- | Maximum number of campaigns to return at one time. Must be positive.
 -- Optional. Default value is 100.
-lalfpaskuMaxResults :: Lens' LicenseAssignmentsListForProductAndSKU' Word32
+lalfpaskuMaxResults :: Lens' LicenseAssignmentsListForProductAndSKU Word32
 lalfpaskuMaxResults
   = lens _lalfpaskuMaxResults
       (\ s a -> s{_lalfpaskuMaxResults = a})
 
 instance GoogleRequest
-         LicenseAssignmentsListForProductAndSKU' where
-        type Rs LicenseAssignmentsListForProductAndSKU' =
+         LicenseAssignmentsListForProductAndSKU where
+        type Rs LicenseAssignmentsListForProductAndSKU =
              LicenseAssignmentList
         requestClient
-          LicenseAssignmentsListForProductAndSKU'{..}
+          LicenseAssignmentsListForProductAndSKU{..}
           = go _lalfpaskuProductId _lalfpaskuSKUId
               (Just _lalfpaskuCustomerId)
               (Just _lalfpaskuPageToken)

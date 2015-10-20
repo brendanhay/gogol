@@ -29,8 +29,8 @@ module Network.Google.Resource.BigQuery.Datasets.Get
       DatasetsGetResource
 
     -- * Creating a Request
-    , datasetsGet'
-    , DatasetsGet'
+    , datasetsGet
+    , DatasetsGet
 
     -- * Request Lenses
     , dgDatasetId
@@ -41,7 +41,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.datasets.get@ method which the
--- 'DatasetsGet'' request conforms to.
+-- 'DatasetsGet' request conforms to.
 type DatasetsGetResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -51,42 +51,42 @@ type DatasetsGetResource =
 
 -- | Returns the dataset specified by datasetID.
 --
--- /See:/ 'datasetsGet'' smart constructor.
-data DatasetsGet' = DatasetsGet'
+-- /See:/ 'datasetsGet' smart constructor.
+data DatasetsGet = DatasetsGet
     { _dgDatasetId :: !Text
     , _dgProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dgDatasetId'
 --
 -- * 'dgProjectId'
-datasetsGet'
+datasetsGet
     :: Text -- ^ 'dgDatasetId'
     -> Text -- ^ 'dgProjectId'
-    -> DatasetsGet'
-datasetsGet' pDgDatasetId_ pDgProjectId_ =
-    DatasetsGet'
+    -> DatasetsGet
+datasetsGet pDgDatasetId_ pDgProjectId_ =
+    DatasetsGet
     { _dgDatasetId = pDgDatasetId_
     , _dgProjectId = pDgProjectId_
     }
 
 -- | Dataset ID of the requested dataset
-dgDatasetId :: Lens' DatasetsGet' Text
+dgDatasetId :: Lens' DatasetsGet Text
 dgDatasetId
   = lens _dgDatasetId (\ s a -> s{_dgDatasetId = a})
 
 -- | Project ID of the requested dataset
-dgProjectId :: Lens' DatasetsGet' Text
+dgProjectId :: Lens' DatasetsGet Text
 dgProjectId
   = lens _dgProjectId (\ s a -> s{_dgProjectId = a})
 
-instance GoogleRequest DatasetsGet' where
-        type Rs DatasetsGet' = Dataset
-        requestClient DatasetsGet'{..}
+instance GoogleRequest DatasetsGet where
+        type Rs DatasetsGet = Dataset
+        requestClient DatasetsGet{..}
           = go _dgProjectId _dgDatasetId (Just AltJSON)
               bigQueryService
           where go

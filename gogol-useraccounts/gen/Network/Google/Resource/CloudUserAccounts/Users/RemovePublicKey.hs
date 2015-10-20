@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudUserAccounts.Users.RemovePublicKey
       UsersRemovePublicKeyResource
 
     -- * Creating a Request
-    , usersRemovePublicKey'
-    , UsersRemovePublicKey'
+    , usersRemovePublicKey
+    , UsersRemovePublicKey
 
     -- * Request Lenses
     , urpkProject
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
 -- | A resource alias for @clouduseraccounts.users.removePublicKey@ method which the
--- 'UsersRemovePublicKey'' request conforms to.
+-- 'UsersRemovePublicKey' request conforms to.
 type UsersRemovePublicKeyResource =
      Capture "project" Text :>
        "global" :>
@@ -54,14 +54,14 @@ type UsersRemovePublicKeyResource =
 
 -- | Removes the specified public key from the user.
 --
--- /See:/ 'usersRemovePublicKey'' smart constructor.
-data UsersRemovePublicKey' = UsersRemovePublicKey'
+-- /See:/ 'usersRemovePublicKey' smart constructor.
+data UsersRemovePublicKey = UsersRemovePublicKey
     { _urpkProject     :: !Text
     , _urpkFingerprint :: !Text
     , _urpkUser        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersRemovePublicKey'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersRemovePublicKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,38 +70,38 @@ data UsersRemovePublicKey' = UsersRemovePublicKey'
 -- * 'urpkFingerprint'
 --
 -- * 'urpkUser'
-usersRemovePublicKey'
+usersRemovePublicKey
     :: Text -- ^ 'urpkProject'
     -> Text -- ^ 'urpkFingerprint'
     -> Text -- ^ 'urpkUser'
-    -> UsersRemovePublicKey'
-usersRemovePublicKey' pUrpkProject_ pUrpkFingerprint_ pUrpkUser_ =
-    UsersRemovePublicKey'
+    -> UsersRemovePublicKey
+usersRemovePublicKey pUrpkProject_ pUrpkFingerprint_ pUrpkUser_ =
+    UsersRemovePublicKey
     { _urpkProject = pUrpkProject_
     , _urpkFingerprint = pUrpkFingerprint_
     , _urpkUser = pUrpkUser_
     }
 
 -- | Project ID for this request.
-urpkProject :: Lens' UsersRemovePublicKey' Text
+urpkProject :: Lens' UsersRemovePublicKey Text
 urpkProject
   = lens _urpkProject (\ s a -> s{_urpkProject = a})
 
 -- | The fingerprint of the public key to delete. Public keys are identified
 -- by their fingerprint, which is defined by RFC4716 to be the MD5 digest
 -- of the public key.
-urpkFingerprint :: Lens' UsersRemovePublicKey' Text
+urpkFingerprint :: Lens' UsersRemovePublicKey Text
 urpkFingerprint
   = lens _urpkFingerprint
       (\ s a -> s{_urpkFingerprint = a})
 
 -- | Name of the user for this request.
-urpkUser :: Lens' UsersRemovePublicKey' Text
+urpkUser :: Lens' UsersRemovePublicKey Text
 urpkUser = lens _urpkUser (\ s a -> s{_urpkUser = a})
 
-instance GoogleRequest UsersRemovePublicKey' where
-        type Rs UsersRemovePublicKey' = Operation
-        requestClient UsersRemovePublicKey'{..}
+instance GoogleRequest UsersRemovePublicKey where
+        type Rs UsersRemovePublicKey = Operation
+        requestClient UsersRemovePublicKey{..}
           = go _urpkProject _urpkUser (Just _urpkFingerprint)
               (Just AltJSON)
               userAccountsService

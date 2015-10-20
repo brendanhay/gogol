@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.GetProFile
       UsersGetProFileResource
 
     -- * Creating a Request
-    , usersGetProFile'
-    , UsersGetProFile'
+    , usersGetProFile
+    , UsersGetProFile
 
     -- * Request Lenses
     , ugpfUserId
@@ -40,7 +40,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.getProfile@ method which the
--- 'UsersGetProFile'' request conforms to.
+-- 'UsersGetProFile' request conforms to.
 type UsersGetProFileResource =
      Capture "userId" Text :>
        "profile" :>
@@ -48,33 +48,33 @@ type UsersGetProFileResource =
 
 -- | Gets the current user\'s Gmail profile.
 --
--- /See:/ 'usersGetProFile'' smart constructor.
-newtype UsersGetProFile' = UsersGetProFile'
+-- /See:/ 'usersGetProFile' smart constructor.
+newtype UsersGetProFile = UsersGetProFile
     { _ugpfUserId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersGetProFile'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersGetProFile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ugpfUserId'
-usersGetProFile'
+usersGetProFile
     :: Text
-    -> UsersGetProFile'
-usersGetProFile' pUgpfUserId_ =
-    UsersGetProFile'
+    -> UsersGetProFile
+usersGetProFile pUgpfUserId_ =
+    UsersGetProFile
     { _ugpfUserId = pUgpfUserId_
     }
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-ugpfUserId :: Lens' UsersGetProFile' Text
+ugpfUserId :: Lens' UsersGetProFile Text
 ugpfUserId
   = lens _ugpfUserId (\ s a -> s{_ugpfUserId = a})
 
-instance GoogleRequest UsersGetProFile' where
-        type Rs UsersGetProFile' = ProFile
-        requestClient UsersGetProFile'{..}
+instance GoogleRequest UsersGetProFile where
+        type Rs UsersGetProFile = ProFile
+        requestClient UsersGetProFile{..}
           = go _ugpfUserId (Just AltJSON) gmailService
           where go
                   = buildClient

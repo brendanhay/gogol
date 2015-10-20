@@ -29,19 +29,19 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Get
       CreativeGroupsGetResource
 
     -- * Creating a Request
-    , creativeGroupsGet'
-    , CreativeGroupsGet'
+    , creativeGroupsGet
+    , CreativeGroupsGet
 
     -- * Request Lenses
-    , cggProFileId
-    , cggId
+    , cgggProFileId
+    , cgggId
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creativeGroups.get@ method which the
--- 'CreativeGroupsGet'' request conforms to.
+-- 'CreativeGroupsGet' request conforms to.
 type CreativeGroupsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,43 @@ type CreativeGroupsGetResource =
 
 -- | Gets one creative group by ID.
 --
--- /See:/ 'creativeGroupsGet'' smart constructor.
-data CreativeGroupsGet' = CreativeGroupsGet'
-    { _cggProFileId :: !Int64
-    , _cggId        :: !Int64
+-- /See:/ 'creativeGroupsGet' smart constructor.
+data CreativeGroupsGet = CreativeGroupsGet
+    { _cgggProFileId :: !Int64
+    , _cgggId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativeGroupsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CreativeGroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cggProFileId'
+-- * 'cgggProFileId'
 --
--- * 'cggId'
-creativeGroupsGet'
-    :: Int64 -- ^ 'cggProFileId'
-    -> Int64 -- ^ 'cggId'
-    -> CreativeGroupsGet'
-creativeGroupsGet' pCggProFileId_ pCggId_ =
-    CreativeGroupsGet'
-    { _cggProFileId = pCggProFileId_
-    , _cggId = pCggId_
+-- * 'cgggId'
+creativeGroupsGet
+    :: Int64 -- ^ 'cgggProFileId'
+    -> Int64 -- ^ 'cgggId'
+    -> CreativeGroupsGet
+creativeGroupsGet pCgggProFileId_ pCgggId_ =
+    CreativeGroupsGet
+    { _cgggProFileId = pCgggProFileId_
+    , _cgggId = pCgggId_
     }
 
 -- | User profile ID associated with this request.
-cggProFileId :: Lens' CreativeGroupsGet' Int64
-cggProFileId
-  = lens _cggProFileId (\ s a -> s{_cggProFileId = a})
+cgggProFileId :: Lens' CreativeGroupsGet Int64
+cgggProFileId
+  = lens _cgggProFileId
+      (\ s a -> s{_cgggProFileId = a})
 
 -- | Creative group ID.
-cggId :: Lens' CreativeGroupsGet' Int64
-cggId = lens _cggId (\ s a -> s{_cggId = a})
+cgggId :: Lens' CreativeGroupsGet Int64
+cgggId = lens _cgggId (\ s a -> s{_cgggId = a})
 
-instance GoogleRequest CreativeGroupsGet' where
-        type Rs CreativeGroupsGet' = CreativeGroup
-        requestClient CreativeGroupsGet'{..}
-          = go _cggProFileId _cggId (Just AltJSON)
+instance GoogleRequest CreativeGroupsGet where
+        type Rs CreativeGroupsGet = CreativeGroup
+        requestClient CreativeGroupsGet{..}
+          = go _cgggProFileId _cgggId (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient

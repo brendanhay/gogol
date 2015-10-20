@@ -31,8 +31,8 @@ module Network.Google.Resource.CloudResourceManager.Projects.SetIAMPolicy
       ProjectsSetIAMPolicyResource
 
     -- * Creating a Request
-    , projectsSetIAMPolicy'
-    , ProjectsSetIAMPolicy'
+    , projectsSetIAMPolicy
+    , ProjectsSetIAMPolicy
 
     -- * Request Lenses
     , psipXgafv
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.projects.setIamPolicy@ method which the
--- 'ProjectsSetIAMPolicy'' request conforms to.
+-- 'ProjectsSetIAMPolicy' request conforms to.
 type ProjectsSetIAMPolicyResource =
      "v1beta1" :>
        "projects" :>
@@ -70,8 +70,8 @@ type ProjectsSetIAMPolicyResource =
 -- currently support \'domain:\' prefixed members in a Binding of a Policy.
 -- Calling this method requires enabling the App Engine Admin API.
 --
--- /See:/ 'projectsSetIAMPolicy'' smart constructor.
-data ProjectsSetIAMPolicy' = ProjectsSetIAMPolicy'
+-- /See:/ 'projectsSetIAMPolicy' smart constructor.
+data ProjectsSetIAMPolicy = ProjectsSetIAMPolicy
     { _psipXgafv          :: !(Maybe Text)
     , _psipUploadProtocol :: !(Maybe Text)
     , _psipPp             :: !Bool
@@ -83,7 +83,7 @@ data ProjectsSetIAMPolicy' = ProjectsSetIAMPolicy'
     , _psipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsSetIAMPolicy'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -104,12 +104,12 @@ data ProjectsSetIAMPolicy' = ProjectsSetIAMPolicy'
 -- * 'psipResource'
 --
 -- * 'psipCallback'
-projectsSetIAMPolicy'
+projectsSetIAMPolicy
     :: SetIAMPolicyRequest -- ^ 'psipPayload'
     -> Text -- ^ 'psipResource'
-    -> ProjectsSetIAMPolicy'
-projectsSetIAMPolicy' pPsipPayload_ pPsipResource_ =
-    ProjectsSetIAMPolicy'
+    -> ProjectsSetIAMPolicy
+projectsSetIAMPolicy pPsipPayload_ pPsipResource_ =
+    ProjectsSetIAMPolicy
     { _psipXgafv = Nothing
     , _psipUploadProtocol = Nothing
     , _psipPp = True
@@ -122,39 +122,39 @@ projectsSetIAMPolicy' pPsipPayload_ pPsipResource_ =
     }
 
 -- | V1 error format.
-psipXgafv :: Lens' ProjectsSetIAMPolicy' (Maybe Text)
+psipXgafv :: Lens' ProjectsSetIAMPolicy (Maybe Text)
 psipXgafv
   = lens _psipXgafv (\ s a -> s{_psipXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-psipUploadProtocol :: Lens' ProjectsSetIAMPolicy' (Maybe Text)
+psipUploadProtocol :: Lens' ProjectsSetIAMPolicy (Maybe Text)
 psipUploadProtocol
   = lens _psipUploadProtocol
       (\ s a -> s{_psipUploadProtocol = a})
 
 -- | Pretty-print response.
-psipPp :: Lens' ProjectsSetIAMPolicy' Bool
+psipPp :: Lens' ProjectsSetIAMPolicy Bool
 psipPp = lens _psipPp (\ s a -> s{_psipPp = a})
 
 -- | OAuth access token.
-psipAccessToken :: Lens' ProjectsSetIAMPolicy' (Maybe Text)
+psipAccessToken :: Lens' ProjectsSetIAMPolicy (Maybe Text)
 psipAccessToken
   = lens _psipAccessToken
       (\ s a -> s{_psipAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-psipUploadType :: Lens' ProjectsSetIAMPolicy' (Maybe Text)
+psipUploadType :: Lens' ProjectsSetIAMPolicy (Maybe Text)
 psipUploadType
   = lens _psipUploadType
       (\ s a -> s{_psipUploadType = a})
 
 -- | Multipart request metadata.
-psipPayload :: Lens' ProjectsSetIAMPolicy' SetIAMPolicyRequest
+psipPayload :: Lens' ProjectsSetIAMPolicy SetIAMPolicyRequest
 psipPayload
   = lens _psipPayload (\ s a -> s{_psipPayload = a})
 
 -- | OAuth bearer token.
-psipBearerToken :: Lens' ProjectsSetIAMPolicy' (Maybe Text)
+psipBearerToken :: Lens' ProjectsSetIAMPolicy (Maybe Text)
 psipBearerToken
   = lens _psipBearerToken
       (\ s a -> s{_psipBearerToken = a})
@@ -162,18 +162,18 @@ psipBearerToken
 -- | REQUIRED: The resource for which policy is being specified. \`resource\`
 -- is usually specified as a path, such as,
 -- \`projects\/{project}\/zones\/{zone}\/disks\/{disk}\`.
-psipResource :: Lens' ProjectsSetIAMPolicy' Text
+psipResource :: Lens' ProjectsSetIAMPolicy Text
 psipResource
   = lens _psipResource (\ s a -> s{_psipResource = a})
 
 -- | JSONP
-psipCallback :: Lens' ProjectsSetIAMPolicy' (Maybe Text)
+psipCallback :: Lens' ProjectsSetIAMPolicy (Maybe Text)
 psipCallback
   = lens _psipCallback (\ s a -> s{_psipCallback = a})
 
-instance GoogleRequest ProjectsSetIAMPolicy' where
-        type Rs ProjectsSetIAMPolicy' = Policy
-        requestClient ProjectsSetIAMPolicy'{..}
+instance GoogleRequest ProjectsSetIAMPolicy where
+        type Rs ProjectsSetIAMPolicy = Policy
+        requestClient ProjectsSetIAMPolicy{..}
           = go _psipResource _psipXgafv _psipUploadProtocol
               (Just _psipPp)
               _psipAccessToken

@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Permissions.GetIdForEmail
       PermissionsGetIdForEmailResource
 
     -- * Creating a Request
-    , permissionsGetIdForEmail'
-    , PermissionsGetIdForEmail'
+    , permissionsGetIdForEmail
+    , PermissionsGetIdForEmail
 
     -- * Request Lenses
     , pgifeEmail
@@ -40,7 +40,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.permissions.getIdForEmail@ method which the
--- 'PermissionsGetIdForEmail'' request conforms to.
+-- 'PermissionsGetIdForEmail' request conforms to.
 type PermissionsGetIdForEmailResource =
      "permissionIds" :>
        Capture "email" Text :>
@@ -48,33 +48,32 @@ type PermissionsGetIdForEmailResource =
 
 -- | Returns the permission ID for an email address.
 --
--- /See:/ 'permissionsGetIdForEmail'' smart constructor.
-newtype PermissionsGetIdForEmail' = PermissionsGetIdForEmail'
+-- /See:/ 'permissionsGetIdForEmail' smart constructor.
+newtype PermissionsGetIdForEmail = PermissionsGetIdForEmail
     { _pgifeEmail :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PermissionsGetIdForEmail'' with the minimum fields required to make a request.
+-- | Creates a value of 'PermissionsGetIdForEmail' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pgifeEmail'
-permissionsGetIdForEmail'
+permissionsGetIdForEmail
     :: Text -- ^ 'pgifeEmail'
-    -> PermissionsGetIdForEmail'
-permissionsGetIdForEmail' pPgifeEmail_ =
-    PermissionsGetIdForEmail'
+    -> PermissionsGetIdForEmail
+permissionsGetIdForEmail pPgifeEmail_ =
+    PermissionsGetIdForEmail
     { _pgifeEmail = pPgifeEmail_
     }
 
 -- | The email address for which to return a permission ID
-pgifeEmail :: Lens' PermissionsGetIdForEmail' Text
+pgifeEmail :: Lens' PermissionsGetIdForEmail Text
 pgifeEmail
   = lens _pgifeEmail (\ s a -> s{_pgifeEmail = a})
 
-instance GoogleRequest PermissionsGetIdForEmail'
-         where
-        type Rs PermissionsGetIdForEmail' = PermissionId
-        requestClient PermissionsGetIdForEmail'{..}
+instance GoogleRequest PermissionsGetIdForEmail where
+        type Rs PermissionsGetIdForEmail = PermissionId
+        requestClient PermissionsGetIdForEmail{..}
           = go _pgifeEmail (Just AltJSON) driveService
           where go
                   = buildClient

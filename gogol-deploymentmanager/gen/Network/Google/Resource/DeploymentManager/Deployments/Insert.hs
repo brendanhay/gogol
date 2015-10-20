@@ -30,8 +30,8 @@ module Network.Google.Resource.DeploymentManager.Deployments.Insert
       DeploymentsInsertResource
 
     -- * Creating a Request
-    , deploymentsInsert'
-    , DeploymentsInsert'
+    , deploymentsInsert
+    , DeploymentsInsert
 
     -- * Request Lenses
     , diProject
@@ -43,7 +43,7 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @deploymentmanager.deployments.insert@ method which the
--- 'DeploymentsInsert'' request conforms to.
+-- 'DeploymentsInsert' request conforms to.
 type DeploymentsInsertResource =
      Capture "project" Text :>
        "global" :>
@@ -55,14 +55,14 @@ type DeploymentsInsertResource =
 -- | Creates a deployment and all of the resources described by the
 -- deployment manifest.
 --
--- /See:/ 'deploymentsInsert'' smart constructor.
-data DeploymentsInsert' = DeploymentsInsert'
+-- /See:/ 'deploymentsInsert' smart constructor.
+data DeploymentsInsert = DeploymentsInsert
     { _diProject :: !Text
     , _diPayload :: !Deployment
     , _diPreview :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DeploymentsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'DeploymentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,24 +71,24 @@ data DeploymentsInsert' = DeploymentsInsert'
 -- * 'diPayload'
 --
 -- * 'diPreview'
-deploymentsInsert'
+deploymentsInsert
     :: Text -- ^ 'diProject'
     -> Deployment -- ^ 'diPayload'
-    -> DeploymentsInsert'
-deploymentsInsert' pDiProject_ pDiPayload_ =
-    DeploymentsInsert'
+    -> DeploymentsInsert
+deploymentsInsert pDiProject_ pDiPayload_ =
+    DeploymentsInsert
     { _diProject = pDiProject_
     , _diPayload = pDiPayload_
     , _diPreview = Nothing
     }
 
 -- | The project ID for this request.
-diProject :: Lens' DeploymentsInsert' Text
+diProject :: Lens' DeploymentsInsert Text
 diProject
   = lens _diProject (\ s a -> s{_diProject = a})
 
 -- | Multipart request metadata.
-diPayload :: Lens' DeploymentsInsert' Deployment
+diPayload :: Lens' DeploymentsInsert Deployment
 diPayload
   = lens _diPayload (\ s a -> s{_diPayload = a})
 
@@ -100,13 +100,13 @@ diPayload
 -- altogether. Note that the deployment will still exist after you cancel
 -- the preview and you must separately delete this deployment if you want
 -- to remove it.
-diPreview :: Lens' DeploymentsInsert' (Maybe Bool)
+diPreview :: Lens' DeploymentsInsert (Maybe Bool)
 diPreview
   = lens _diPreview (\ s a -> s{_diPreview = a})
 
-instance GoogleRequest DeploymentsInsert' where
-        type Rs DeploymentsInsert' = Operation
-        requestClient DeploymentsInsert'{..}
+instance GoogleRequest DeploymentsInsert where
+        type Rs DeploymentsInsert = Operation
+        requestClient DeploymentsInsert{..}
           = go _diProject _diPreview (Just AltJSON) _diPayload
               deploymentManagerService
           where go

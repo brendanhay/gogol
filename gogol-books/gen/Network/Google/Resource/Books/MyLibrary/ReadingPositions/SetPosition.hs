@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
       MyLibraryReadingPositionsSetPositionResource
 
     -- * Creating a Request
-    , myLibraryReadingPositionsSetPosition'
-    , MyLibraryReadingPositionsSetPosition'
+    , myLibraryReadingPositionsSetPosition
+    , MyLibraryReadingPositionsSetPosition
 
     -- * Request Lenses
     , mlrpspDeviceCookie
@@ -46,7 +46,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.readingpositions.setPosition@ method which the
--- 'MyLibraryReadingPositionsSetPosition'' request conforms to.
+-- 'MyLibraryReadingPositionsSetPosition' request conforms to.
 type MyLibraryReadingPositionsSetPositionResource =
      "mylibrary" :>
        "readingpositions" :>
@@ -64,8 +64,8 @@ type MyLibraryReadingPositionsSetPositionResource =
 
 -- | Sets my reading position information for a volume.
 --
--- /See:/ 'myLibraryReadingPositionsSetPosition'' smart constructor.
-data MyLibraryReadingPositionsSetPosition' = MyLibraryReadingPositionsSetPosition'
+-- /See:/ 'myLibraryReadingPositionsSetPosition' smart constructor.
+data MyLibraryReadingPositionsSetPosition = MyLibraryReadingPositionsSetPosition
     { _mlrpspDeviceCookie   :: !(Maybe Text)
     , _mlrpspContentVersion :: !(Maybe Text)
     , _mlrpspAction         :: !(Maybe MyLibraryReadingPositionsSetPositionAction)
@@ -75,7 +75,7 @@ data MyLibraryReadingPositionsSetPosition' = MyLibraryReadingPositionsSetPositio
     , _mlrpspPosition       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MyLibraryReadingPositionsSetPosition'' with the minimum fields required to make a request.
+-- | Creates a value of 'MyLibraryReadingPositionsSetPosition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -92,13 +92,13 @@ data MyLibraryReadingPositionsSetPosition' = MyLibraryReadingPositionsSetPositio
 -- * 'mlrpspTimestamp'
 --
 -- * 'mlrpspPosition'
-myLibraryReadingPositionsSetPosition'
+myLibraryReadingPositionsSetPosition
     :: Text -- ^ 'mlrpspVolumeId'
     -> Text -- ^ 'mlrpspTimestamp'
     -> Text -- ^ 'mlrpspPosition'
-    -> MyLibraryReadingPositionsSetPosition'
-myLibraryReadingPositionsSetPosition' pMlrpspVolumeId_ pMlrpspTimestamp_ pMlrpspPosition_ =
-    MyLibraryReadingPositionsSetPosition'
+    -> MyLibraryReadingPositionsSetPosition
+myLibraryReadingPositionsSetPosition pMlrpspVolumeId_ pMlrpspTimestamp_ pMlrpspPosition_ =
+    MyLibraryReadingPositionsSetPosition
     { _mlrpspDeviceCookie = Nothing
     , _mlrpspContentVersion = Nothing
     , _mlrpspAction = Nothing
@@ -109,50 +109,50 @@ myLibraryReadingPositionsSetPosition' pMlrpspVolumeId_ pMlrpspTimestamp_ pMlrpsp
     }
 
 -- | Random persistent device cookie optional on set position.
-mlrpspDeviceCookie :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe Text)
+mlrpspDeviceCookie :: Lens' MyLibraryReadingPositionsSetPosition (Maybe Text)
 mlrpspDeviceCookie
   = lens _mlrpspDeviceCookie
       (\ s a -> s{_mlrpspDeviceCookie = a})
 
 -- | Volume content version for which this reading position applies.
-mlrpspContentVersion :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe Text)
+mlrpspContentVersion :: Lens' MyLibraryReadingPositionsSetPosition (Maybe Text)
 mlrpspContentVersion
   = lens _mlrpspContentVersion
       (\ s a -> s{_mlrpspContentVersion = a})
 
 -- | Action that caused this reading position to be set.
-mlrpspAction :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe MyLibraryReadingPositionsSetPositionAction)
+mlrpspAction :: Lens' MyLibraryReadingPositionsSetPosition (Maybe MyLibraryReadingPositionsSetPositionAction)
 mlrpspAction
   = lens _mlrpspAction (\ s a -> s{_mlrpspAction = a})
 
 -- | ID of volume for which to update the reading position.
-mlrpspVolumeId :: Lens' MyLibraryReadingPositionsSetPosition' Text
+mlrpspVolumeId :: Lens' MyLibraryReadingPositionsSetPosition Text
 mlrpspVolumeId
   = lens _mlrpspVolumeId
       (\ s a -> s{_mlrpspVolumeId = a})
 
 -- | String to identify the originator of this request.
-mlrpspSource :: Lens' MyLibraryReadingPositionsSetPosition' (Maybe Text)
+mlrpspSource :: Lens' MyLibraryReadingPositionsSetPosition (Maybe Text)
 mlrpspSource
   = lens _mlrpspSource (\ s a -> s{_mlrpspSource = a})
 
 -- | RFC 3339 UTC format timestamp associated with this reading position.
-mlrpspTimestamp :: Lens' MyLibraryReadingPositionsSetPosition' Text
+mlrpspTimestamp :: Lens' MyLibraryReadingPositionsSetPosition Text
 mlrpspTimestamp
   = lens _mlrpspTimestamp
       (\ s a -> s{_mlrpspTimestamp = a})
 
 -- | Position string for the new volume reading position.
-mlrpspPosition :: Lens' MyLibraryReadingPositionsSetPosition' Text
+mlrpspPosition :: Lens' MyLibraryReadingPositionsSetPosition Text
 mlrpspPosition
   = lens _mlrpspPosition
       (\ s a -> s{_mlrpspPosition = a})
 
 instance GoogleRequest
-         MyLibraryReadingPositionsSetPosition' where
-        type Rs MyLibraryReadingPositionsSetPosition' = ()
+         MyLibraryReadingPositionsSetPosition where
+        type Rs MyLibraryReadingPositionsSetPosition = ()
         requestClient
-          MyLibraryReadingPositionsSetPosition'{..}
+          MyLibraryReadingPositionsSetPosition{..}
           = go _mlrpspVolumeId (Just _mlrpspTimestamp)
               (Just _mlrpspPosition)
               _mlrpspDeviceCookie

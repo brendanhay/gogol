@@ -30,8 +30,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Update
       EditsAPKListingsUpdateResource
 
     -- * Creating a Request
-    , editsAPKListingsUpdate'
-    , EditsAPKListingsUpdate'
+    , editsAPKListingsUpdate
+    , EditsAPKListingsUpdate
 
     -- * Request Lenses
     , eapkluPackageName
@@ -45,7 +45,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.apklistings.update@ method which the
--- 'EditsAPKListingsUpdate'' request conforms to.
+-- 'EditsAPKListingsUpdate' request conforms to.
 type EditsAPKListingsUpdateResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -60,8 +60,8 @@ type EditsAPKListingsUpdateResource =
 -- | Updates or creates the APK-specific localized listing for a specified
 -- APK and language code.
 --
--- /See:/ 'editsAPKListingsUpdate'' smart constructor.
-data EditsAPKListingsUpdate' = EditsAPKListingsUpdate'
+-- /See:/ 'editsAPKListingsUpdate' smart constructor.
+data EditsAPKListingsUpdate = EditsAPKListingsUpdate
     { _eapkluPackageName    :: !Text
     , _eapkluAPKVersionCode :: !Int32
     , _eapkluPayload        :: !APKListing
@@ -69,7 +69,7 @@ data EditsAPKListingsUpdate' = EditsAPKListingsUpdate'
     , _eapkluEditId         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsAPKListingsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsAPKListingsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,15 +82,15 @@ data EditsAPKListingsUpdate' = EditsAPKListingsUpdate'
 -- * 'eapkluLanguage'
 --
 -- * 'eapkluEditId'
-editsAPKListingsUpdate'
+editsAPKListingsUpdate
     :: Text -- ^ 'eapkluPackageName'
     -> Int32 -- ^ 'eapkluAPKVersionCode'
     -> APKListing -- ^ 'eapkluPayload'
     -> Text -- ^ 'eapkluLanguage'
     -> Text -- ^ 'eapkluEditId'
-    -> EditsAPKListingsUpdate'
-editsAPKListingsUpdate' pEapkluPackageName_ pEapkluAPKVersionCode_ pEapkluPayload_ pEapkluLanguage_ pEapkluEditId_ =
-    EditsAPKListingsUpdate'
+    -> EditsAPKListingsUpdate
+editsAPKListingsUpdate pEapkluPackageName_ pEapkluAPKVersionCode_ pEapkluPayload_ pEapkluLanguage_ pEapkluEditId_ =
+    EditsAPKListingsUpdate
     { _eapkluPackageName = pEapkluPackageName_
     , _eapkluAPKVersionCode = pEapkluAPKVersionCode_
     , _eapkluPayload = pEapkluPayload_
@@ -100,20 +100,20 @@ editsAPKListingsUpdate' pEapkluPackageName_ pEapkluAPKVersionCode_ pEapkluPayloa
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eapkluPackageName :: Lens' EditsAPKListingsUpdate' Text
+eapkluPackageName :: Lens' EditsAPKListingsUpdate Text
 eapkluPackageName
   = lens _eapkluPackageName
       (\ s a -> s{_eapkluPackageName = a})
 
 -- | The APK version code whose APK-specific listings should be read or
 -- modified.
-eapkluAPKVersionCode :: Lens' EditsAPKListingsUpdate' Int32
+eapkluAPKVersionCode :: Lens' EditsAPKListingsUpdate Int32
 eapkluAPKVersionCode
   = lens _eapkluAPKVersionCode
       (\ s a -> s{_eapkluAPKVersionCode = a})
 
 -- | Multipart request metadata.
-eapkluPayload :: Lens' EditsAPKListingsUpdate' APKListing
+eapkluPayload :: Lens' EditsAPKListingsUpdate APKListing
 eapkluPayload
   = lens _eapkluPayload
       (\ s a -> s{_eapkluPayload = a})
@@ -121,19 +121,19 @@ eapkluPayload
 -- | The language code (a BCP-47 language tag) of the APK-specific localized
 -- listing to read or modify. For example, to select Austrian German, pass
 -- \"de-AT\".
-eapkluLanguage :: Lens' EditsAPKListingsUpdate' Text
+eapkluLanguage :: Lens' EditsAPKListingsUpdate Text
 eapkluLanguage
   = lens _eapkluLanguage
       (\ s a -> s{_eapkluLanguage = a})
 
 -- | Unique identifier for this edit.
-eapkluEditId :: Lens' EditsAPKListingsUpdate' Text
+eapkluEditId :: Lens' EditsAPKListingsUpdate Text
 eapkluEditId
   = lens _eapkluEditId (\ s a -> s{_eapkluEditId = a})
 
-instance GoogleRequest EditsAPKListingsUpdate' where
-        type Rs EditsAPKListingsUpdate' = APKListing
-        requestClient EditsAPKListingsUpdate'{..}
+instance GoogleRequest EditsAPKListingsUpdate where
+        type Rs EditsAPKListingsUpdate = APKListing
+        requestClient EditsAPKListingsUpdate{..}
           = go _eapkluPackageName _eapkluEditId
               _eapkluAPKVersionCode
               _eapkluLanguage

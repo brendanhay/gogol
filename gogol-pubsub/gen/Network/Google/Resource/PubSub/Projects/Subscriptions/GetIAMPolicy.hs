@@ -30,8 +30,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPolicy
       ProjectsSubscriptionsGetIAMPolicyResource
 
     -- * Creating a Request
-    , projectsSubscriptionsGetIAMPolicy'
-    , ProjectsSubscriptionsGetIAMPolicy'
+    , projectsSubscriptionsGetIAMPolicy
+    , ProjectsSubscriptionsGetIAMPolicy
 
     -- * Request Lenses
     , psgipXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.getIamPolicy@ method which the
--- 'ProjectsSubscriptionsGetIAMPolicy'' request conforms to.
+-- 'ProjectsSubscriptionsGetIAMPolicy' request conforms to.
 type ProjectsSubscriptionsGetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "getIamPolicy" Text :>
@@ -64,8 +64,8 @@ type ProjectsSubscriptionsGetIAMPolicyResource =
 -- | Gets the access control policy for a \`resource\`. Is empty if the
 -- policy or the resource does not exist.
 --
--- /See:/ 'projectsSubscriptionsGetIAMPolicy'' smart constructor.
-data ProjectsSubscriptionsGetIAMPolicy' = ProjectsSubscriptionsGetIAMPolicy'
+-- /See:/ 'projectsSubscriptionsGetIAMPolicy' smart constructor.
+data ProjectsSubscriptionsGetIAMPolicy = ProjectsSubscriptionsGetIAMPolicy
     { _psgipXgafv          :: !(Maybe Text)
     , _psgipUploadProtocol :: !(Maybe Text)
     , _psgipPp             :: !Bool
@@ -76,7 +76,7 @@ data ProjectsSubscriptionsGetIAMPolicy' = ProjectsSubscriptionsGetIAMPolicy'
     , _psgipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsSubscriptionsGetIAMPolicy'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsSubscriptionsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -95,11 +95,11 @@ data ProjectsSubscriptionsGetIAMPolicy' = ProjectsSubscriptionsGetIAMPolicy'
 -- * 'psgipResource'
 --
 -- * 'psgipCallback'
-projectsSubscriptionsGetIAMPolicy'
+projectsSubscriptionsGetIAMPolicy
     :: Text -- ^ 'psgipResource'
-    -> ProjectsSubscriptionsGetIAMPolicy'
-projectsSubscriptionsGetIAMPolicy' pPsgipResource_ =
-    ProjectsSubscriptionsGetIAMPolicy'
+    -> ProjectsSubscriptionsGetIAMPolicy
+projectsSubscriptionsGetIAMPolicy pPsgipResource_ =
+    ProjectsSubscriptionsGetIAMPolicy
     { _psgipXgafv = Nothing
     , _psgipUploadProtocol = Nothing
     , _psgipPp = True
@@ -111,55 +111,55 @@ projectsSubscriptionsGetIAMPolicy' pPsgipResource_ =
     }
 
 -- | V1 error format.
-psgipXgafv :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe Text)
+psgipXgafv :: Lens' ProjectsSubscriptionsGetIAMPolicy (Maybe Text)
 psgipXgafv
   = lens _psgipXgafv (\ s a -> s{_psgipXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-psgipUploadProtocol :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe Text)
+psgipUploadProtocol :: Lens' ProjectsSubscriptionsGetIAMPolicy (Maybe Text)
 psgipUploadProtocol
   = lens _psgipUploadProtocol
       (\ s a -> s{_psgipUploadProtocol = a})
 
 -- | Pretty-print response.
-psgipPp :: Lens' ProjectsSubscriptionsGetIAMPolicy' Bool
+psgipPp :: Lens' ProjectsSubscriptionsGetIAMPolicy Bool
 psgipPp = lens _psgipPp (\ s a -> s{_psgipPp = a})
 
 -- | OAuth access token.
-psgipAccessToken :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe Text)
+psgipAccessToken :: Lens' ProjectsSubscriptionsGetIAMPolicy (Maybe Text)
 psgipAccessToken
   = lens _psgipAccessToken
       (\ s a -> s{_psgipAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-psgipUploadType :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe Text)
+psgipUploadType :: Lens' ProjectsSubscriptionsGetIAMPolicy (Maybe Text)
 psgipUploadType
   = lens _psgipUploadType
       (\ s a -> s{_psgipUploadType = a})
 
 -- | OAuth bearer token.
-psgipBearerToken :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe Text)
+psgipBearerToken :: Lens' ProjectsSubscriptionsGetIAMPolicy (Maybe Text)
 psgipBearerToken
   = lens _psgipBearerToken
       (\ s a -> s{_psgipBearerToken = a})
 
 -- | REQUIRED: The resource for which policy is being requested. Resource is
 -- usually specified as a path, such as, \`projects\/{project}\`.
-psgipResource :: Lens' ProjectsSubscriptionsGetIAMPolicy' Text
+psgipResource :: Lens' ProjectsSubscriptionsGetIAMPolicy Text
 psgipResource
   = lens _psgipResource
       (\ s a -> s{_psgipResource = a})
 
 -- | JSONP
-psgipCallback :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe Text)
+psgipCallback :: Lens' ProjectsSubscriptionsGetIAMPolicy (Maybe Text)
 psgipCallback
   = lens _psgipCallback
       (\ s a -> s{_psgipCallback = a})
 
 instance GoogleRequest
-         ProjectsSubscriptionsGetIAMPolicy' where
-        type Rs ProjectsSubscriptionsGetIAMPolicy' = Policy
-        requestClient ProjectsSubscriptionsGetIAMPolicy'{..}
+         ProjectsSubscriptionsGetIAMPolicy where
+        type Rs ProjectsSubscriptionsGetIAMPolicy = Policy
+        requestClient ProjectsSubscriptionsGetIAMPolicy{..}
           = go _psgipResource _psgipXgafv _psgipUploadProtocol
               (Just _psgipPp)
               _psgipAccessToken

@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Instances.AddAccessConfig
       InstancesAddAccessConfigResource
 
     -- * Creating a Request
-    , instancesAddAccessConfig'
-    , InstancesAddAccessConfig'
+    , instancesAddAccessConfig
+    , InstancesAddAccessConfig
 
     -- * Request Lenses
     , iaacProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.addAccessConfig@ method which the
--- 'InstancesAddAccessConfig'' request conforms to.
+-- 'InstancesAddAccessConfig' request conforms to.
 type InstancesAddAccessConfigResource =
      Capture "project" Text :>
        "zones" :>
@@ -59,8 +59,8 @@ type InstancesAddAccessConfigResource =
 
 -- | Adds an access config to an instance\'s network interface.
 --
--- /See:/ 'instancesAddAccessConfig'' smart constructor.
-data InstancesAddAccessConfig' = InstancesAddAccessConfig'
+-- /See:/ 'instancesAddAccessConfig' smart constructor.
+data InstancesAddAccessConfig = InstancesAddAccessConfig
     { _iaacProject          :: !Text
     , _iaacNetworkInterface :: !Text
     , _iaacZone             :: !Text
@@ -68,7 +68,7 @@ data InstancesAddAccessConfig' = InstancesAddAccessConfig'
     , _iaacInstance         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesAddAccessConfig'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesAddAccessConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,15 +81,15 @@ data InstancesAddAccessConfig' = InstancesAddAccessConfig'
 -- * 'iaacPayload'
 --
 -- * 'iaacInstance'
-instancesAddAccessConfig'
+instancesAddAccessConfig
     :: Text -- ^ 'iaacProject'
     -> Text -- ^ 'iaacNetworkInterface'
     -> Text -- ^ 'iaacZone'
     -> AccessConfig -- ^ 'iaacPayload'
     -> Text -- ^ 'iaacInstance'
-    -> InstancesAddAccessConfig'
-instancesAddAccessConfig' pIaacProject_ pIaacNetworkInterface_ pIaacZone_ pIaacPayload_ pIaacInstance_ =
-    InstancesAddAccessConfig'
+    -> InstancesAddAccessConfig
+instancesAddAccessConfig pIaacProject_ pIaacNetworkInterface_ pIaacZone_ pIaacPayload_ pIaacInstance_ =
+    InstancesAddAccessConfig
     { _iaacProject = pIaacProject_
     , _iaacNetworkInterface = pIaacNetworkInterface_
     , _iaacZone = pIaacZone_
@@ -98,34 +98,33 @@ instancesAddAccessConfig' pIaacProject_ pIaacNetworkInterface_ pIaacZone_ pIaacP
     }
 
 -- | Project ID for this request.
-iaacProject :: Lens' InstancesAddAccessConfig' Text
+iaacProject :: Lens' InstancesAddAccessConfig Text
 iaacProject
   = lens _iaacProject (\ s a -> s{_iaacProject = a})
 
 -- | The name of the network interface to add to this instance.
-iaacNetworkInterface :: Lens' InstancesAddAccessConfig' Text
+iaacNetworkInterface :: Lens' InstancesAddAccessConfig Text
 iaacNetworkInterface
   = lens _iaacNetworkInterface
       (\ s a -> s{_iaacNetworkInterface = a})
 
 -- | The name of the zone for this request.
-iaacZone :: Lens' InstancesAddAccessConfig' Text
+iaacZone :: Lens' InstancesAddAccessConfig Text
 iaacZone = lens _iaacZone (\ s a -> s{_iaacZone = a})
 
 -- | Multipart request metadata.
-iaacPayload :: Lens' InstancesAddAccessConfig' AccessConfig
+iaacPayload :: Lens' InstancesAddAccessConfig AccessConfig
 iaacPayload
   = lens _iaacPayload (\ s a -> s{_iaacPayload = a})
 
 -- | The instance name for this request.
-iaacInstance :: Lens' InstancesAddAccessConfig' Text
+iaacInstance :: Lens' InstancesAddAccessConfig Text
 iaacInstance
   = lens _iaacInstance (\ s a -> s{_iaacInstance = a})
 
-instance GoogleRequest InstancesAddAccessConfig'
-         where
-        type Rs InstancesAddAccessConfig' = Operation
-        requestClient InstancesAddAccessConfig'{..}
+instance GoogleRequest InstancesAddAccessConfig where
+        type Rs InstancesAddAccessConfig = Operation
+        requestClient InstancesAddAccessConfig{..}
           = go _iaacProject _iaacZone _iaacInstance
               (Just _iaacNetworkInterface)
               (Just AltJSON)

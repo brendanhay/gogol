@@ -29,8 +29,8 @@ module Network.Google.Resource.Language.Translations.List
       TranslationsListResource
 
     -- * Creating a Request
-    , translationsList'
-    , TranslationsList'
+    , translationsList
+    , TranslationsList
 
     -- * Request Lenses
     , tlFormat
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.Translate.Types
 
 -- | A resource alias for @language.translations.list@ method which the
--- 'TranslationsList'' request conforms to.
+-- 'TranslationsList' request conforms to.
 type TranslationsListResource =
      "v2" :>
        QueryParams "q" Text :>
@@ -57,8 +57,8 @@ type TranslationsListResource =
 
 -- | Returns text translations from one language to another.
 --
--- /See:/ 'translationsList'' smart constructor.
-data TranslationsList' = TranslationsList'
+-- /See:/ 'translationsList' smart constructor.
+data TranslationsList = TranslationsList
     { _tlFormat :: !(Maybe TranslationsListFormat)
     , _tlQ      :: ![Text]
     , _tlSource :: !(Maybe Text)
@@ -66,7 +66,7 @@ data TranslationsList' = TranslationsList'
     , _tlTarget :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TranslationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TranslationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,12 +79,12 @@ data TranslationsList' = TranslationsList'
 -- * 'tlCid'
 --
 -- * 'tlTarget'
-translationsList'
+translationsList
     :: [Text] -- ^ 'tlQ'
     -> Text -- ^ 'tlTarget'
-    -> TranslationsList'
-translationsList' pTlQ_ pTlTarget_ =
-    TranslationsList'
+    -> TranslationsList
+translationsList pTlQ_ pTlTarget_ =
+    TranslationsList
     { _tlFormat = Nothing
     , _tlQ = pTlQ_
     , _tlSource = Nothing
@@ -93,30 +93,30 @@ translationsList' pTlQ_ pTlTarget_ =
     }
 
 -- | The format of the text
-tlFormat :: Lens' TranslationsList' (Maybe TranslationsListFormat)
+tlFormat :: Lens' TranslationsList (Maybe TranslationsListFormat)
 tlFormat = lens _tlFormat (\ s a -> s{_tlFormat = a})
 
 -- | The text to translate
-tlQ :: Lens' TranslationsList' [Text]
+tlQ :: Lens' TranslationsList [Text]
 tlQ = lens _tlQ (\ s a -> s{_tlQ = a}) . _Coerce
 
 -- | The source language of the text
-tlSource :: Lens' TranslationsList' (Maybe Text)
+tlSource :: Lens' TranslationsList (Maybe Text)
 tlSource = lens _tlSource (\ s a -> s{_tlSource = a})
 
 -- | The customization id for translate
-tlCid :: Lens' TranslationsList' [Text]
+tlCid :: Lens' TranslationsList [Text]
 tlCid
   = lens _tlCid (\ s a -> s{_tlCid = a}) . _Default .
       _Coerce
 
 -- | The target language into which the text should be translated
-tlTarget :: Lens' TranslationsList' Text
+tlTarget :: Lens' TranslationsList Text
 tlTarget = lens _tlTarget (\ s a -> s{_tlTarget = a})
 
-instance GoogleRequest TranslationsList' where
-        type Rs TranslationsList' = TranslationsListResponse
-        requestClient TranslationsList'{..}
+instance GoogleRequest TranslationsList where
+        type Rs TranslationsList = TranslationsListResponse
+        requestClient TranslationsList{..}
           = go _tlQ (Just _tlTarget) _tlFormat _tlSource
               (_tlCid ^. _Default)
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.Settings.Get
       SettingsGetResource
 
     -- * Creating a Request
-    , settingsGet'
-    , SettingsGet'
+    , settingsGet
+    , SettingsGet
 
     -- * Request Lenses
     , sgSetting
@@ -40,7 +40,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.settings.get@ method which the
--- 'SettingsGet'' request conforms to.
+-- 'SettingsGet' request conforms to.
 type SettingsGetResource =
      "users" :>
        "me" :>
@@ -50,32 +50,32 @@ type SettingsGetResource =
 
 -- | Returns a single user setting.
 --
--- /See:/ 'settingsGet'' smart constructor.
-newtype SettingsGet' = SettingsGet'
+-- /See:/ 'settingsGet' smart constructor.
+newtype SettingsGet = SettingsGet
     { _sgSetting :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SettingsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'SettingsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sgSetting'
-settingsGet'
+settingsGet
     :: Text -- ^ 'sgSetting'
-    -> SettingsGet'
-settingsGet' pSgSetting_ =
-    SettingsGet'
+    -> SettingsGet
+settingsGet pSgSetting_ =
+    SettingsGet
     { _sgSetting = pSgSetting_
     }
 
 -- | The id of the user setting.
-sgSetting :: Lens' SettingsGet' Text
+sgSetting :: Lens' SettingsGet Text
 sgSetting
   = lens _sgSetting (\ s a -> s{_sgSetting = a})
 
-instance GoogleRequest SettingsGet' where
-        type Rs SettingsGet' = Setting
-        requestClient SettingsGet'{..}
+instance GoogleRequest SettingsGet where
+        type Rs SettingsGet = Setting
+        requestClient SettingsGet{..}
           = go _sgSetting (Just AltJSON) appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy SettingsGetResource)

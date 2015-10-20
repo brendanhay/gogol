@@ -29,8 +29,8 @@ module Network.Google.Resource.DoubleClickSearch.Reports.Get
       ReportsGetResource
 
     -- * Creating a Request
-    , reportsGet'
-    , ReportsGet'
+    , reportsGet
+    , ReportsGet
 
     -- * Request Lenses
     , rgReportId
@@ -40,7 +40,7 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @doubleclicksearch.reports.get@ method which the
--- 'ReportsGet'' request conforms to.
+-- 'ReportsGet' request conforms to.
 type ReportsGetResource =
      "reports" :>
        Capture "reportId" Text :>
@@ -48,32 +48,32 @@ type ReportsGetResource =
 
 -- | Polls for the status of a report request.
 --
--- /See:/ 'reportsGet'' smart constructor.
-newtype ReportsGet' = ReportsGet'
+-- /See:/ 'reportsGet' smart constructor.
+newtype ReportsGet = ReportsGet
     { _rgReportId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReportsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rgReportId'
-reportsGet'
+reportsGet
     :: Text -- ^ 'rgReportId'
-    -> ReportsGet'
-reportsGet' pRgReportId_ =
-    ReportsGet'
+    -> ReportsGet
+reportsGet pRgReportId_ =
+    ReportsGet
     { _rgReportId = pRgReportId_
     }
 
 -- | ID of the report request being polled.
-rgReportId :: Lens' ReportsGet' Text
+rgReportId :: Lens' ReportsGet Text
 rgReportId
   = lens _rgReportId (\ s a -> s{_rgReportId = a})
 
-instance GoogleRequest ReportsGet' where
-        type Rs ReportsGet' = Report
-        requestClient ReportsGet'{..}
+instance GoogleRequest ReportsGet where
+        type Rs ReportsGet = Report
+        requestClient ReportsGet{..}
           = go _rgReportId (Just AltJSON)
               doubleClickSearchService
           where go

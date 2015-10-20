@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.Delete
       CustomChannelsDeleteResource
 
     -- * Creating a Request
-    , customChannelsDelete'
-    , CustomChannelsDelete'
+    , customChannelsDelete
+    , CustomChannelsDelete
 
     -- * Request Lenses
     , ccdCustomChannelId
@@ -41,7 +41,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.customchannels.delete@ method which the
--- 'CustomChannelsDelete'' request conforms to.
+-- 'CustomChannelsDelete' request conforms to.
 type CustomChannelsDeleteResource =
      "adclients" :>
        Capture "adClientId" Text :>
@@ -52,44 +52,44 @@ type CustomChannelsDeleteResource =
 
 -- | Delete a specific custom channel from the host AdSense account.
 --
--- /See:/ 'customChannelsDelete'' smart constructor.
-data CustomChannelsDelete' = CustomChannelsDelete'
+-- /See:/ 'customChannelsDelete' smart constructor.
+data CustomChannelsDelete = CustomChannelsDelete
     { _ccdCustomChannelId :: !Text
     , _ccdAdClientId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CustomChannelsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'CustomChannelsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ccdCustomChannelId'
 --
 -- * 'ccdAdClientId'
-customChannelsDelete'
+customChannelsDelete
     :: Text -- ^ 'ccdCustomChannelId'
     -> Text -- ^ 'ccdAdClientId'
-    -> CustomChannelsDelete'
-customChannelsDelete' pCcdCustomChannelId_ pCcdAdClientId_ =
-    CustomChannelsDelete'
+    -> CustomChannelsDelete
+customChannelsDelete pCcdCustomChannelId_ pCcdAdClientId_ =
+    CustomChannelsDelete
     { _ccdCustomChannelId = pCcdCustomChannelId_
     , _ccdAdClientId = pCcdAdClientId_
     }
 
 -- | Custom channel to delete.
-ccdCustomChannelId :: Lens' CustomChannelsDelete' Text
+ccdCustomChannelId :: Lens' CustomChannelsDelete Text
 ccdCustomChannelId
   = lens _ccdCustomChannelId
       (\ s a -> s{_ccdCustomChannelId = a})
 
 -- | Ad client from which to delete the custom channel.
-ccdAdClientId :: Lens' CustomChannelsDelete' Text
+ccdAdClientId :: Lens' CustomChannelsDelete Text
 ccdAdClientId
   = lens _ccdAdClientId
       (\ s a -> s{_ccdAdClientId = a})
 
-instance GoogleRequest CustomChannelsDelete' where
-        type Rs CustomChannelsDelete' = CustomChannel
-        requestClient CustomChannelsDelete'{..}
+instance GoogleRequest CustomChannelsDelete where
+        type Rs CustomChannelsDelete = CustomChannel
+        requestClient CustomChannelsDelete{..}
           = go _ccdAdClientId _ccdCustomChannelId
               (Just AltJSON)
               adSenseHostService

@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Tables.Permissions.List
       TablesPermissionsListResource
 
     -- * Creating a Request
-    , tablesPermissionsList'
-    , TablesPermissionsList'
+    , tablesPermissionsList
+    , TablesPermissionsList
 
     -- * Request Lenses
     , tplId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.tables.permissions.list@ method which the
--- 'TablesPermissionsList'' request conforms to.
+-- 'TablesPermissionsList' request conforms to.
 type TablesPermissionsListResource =
      "tables" :>
        Capture "id" Text :>
@@ -50,32 +50,32 @@ type TablesPermissionsListResource =
 
 -- | Return all of the permissions for the specified asset.
 --
--- /See:/ 'tablesPermissionsList'' smart constructor.
-newtype TablesPermissionsList' = TablesPermissionsList'
+-- /See:/ 'tablesPermissionsList' smart constructor.
+newtype TablesPermissionsList = TablesPermissionsList
     { _tplId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesPermissionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesPermissionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tplId'
-tablesPermissionsList'
+tablesPermissionsList
     :: Text -- ^ 'tplId'
-    -> TablesPermissionsList'
-tablesPermissionsList' pTplId_ =
-    TablesPermissionsList'
+    -> TablesPermissionsList
+tablesPermissionsList pTplId_ =
+    TablesPermissionsList
     { _tplId = pTplId_
     }
 
 -- | The ID of the asset whose permissions will be listed.
-tplId :: Lens' TablesPermissionsList' Text
+tplId :: Lens' TablesPermissionsList Text
 tplId = lens _tplId (\ s a -> s{_tplId = a})
 
-instance GoogleRequest TablesPermissionsList' where
-        type Rs TablesPermissionsList' =
+instance GoogleRequest TablesPermissionsList where
+        type Rs TablesPermissionsList =
              PermissionsListResponse
-        requestClient TablesPermissionsList'{..}
+        requestClient TablesPermissionsList{..}
           = go _tplId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

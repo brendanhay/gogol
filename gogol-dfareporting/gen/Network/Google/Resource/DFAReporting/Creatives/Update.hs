@@ -29,19 +29,19 @@ module Network.Google.Resource.DFAReporting.Creatives.Update
       CreativesUpdateResource
 
     -- * Creating a Request
-    , creativesUpdate'
-    , CreativesUpdate'
+    , creativesUpdate
+    , CreativesUpdate
 
     -- * Request Lenses
-    , cuuProFileId
-    , cuuPayload
+    , creProFileId
+    , crePayload
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creatives.update@ method which the
--- 'CreativesUpdate'' request conforms to.
+-- 'CreativesUpdate' request conforms to.
 type CreativesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,43 +51,43 @@ type CreativesUpdateResource =
 
 -- | Updates an existing creative.
 --
--- /See:/ 'creativesUpdate'' smart constructor.
-data CreativesUpdate' = CreativesUpdate'
-    { _cuuProFileId :: !Int64
-    , _cuuPayload   :: !Creative
+-- /See:/ 'creativesUpdate' smart constructor.
+data CreativesUpdate = CreativesUpdate
+    { _creProFileId :: !Int64
+    , _crePayload   :: !Creative
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CreativesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cuuProFileId'
+-- * 'creProFileId'
 --
--- * 'cuuPayload'
-creativesUpdate'
-    :: Int64 -- ^ 'cuuProFileId'
-    -> Creative -- ^ 'cuuPayload'
-    -> CreativesUpdate'
-creativesUpdate' pCuuProFileId_ pCuuPayload_ =
-    CreativesUpdate'
-    { _cuuProFileId = pCuuProFileId_
-    , _cuuPayload = pCuuPayload_
+-- * 'crePayload'
+creativesUpdate
+    :: Int64 -- ^ 'creProFileId'
+    -> Creative -- ^ 'crePayload'
+    -> CreativesUpdate
+creativesUpdate pCreProFileId_ pCrePayload_ =
+    CreativesUpdate
+    { _creProFileId = pCreProFileId_
+    , _crePayload = pCrePayload_
     }
 
 -- | User profile ID associated with this request.
-cuuProFileId :: Lens' CreativesUpdate' Int64
-cuuProFileId
-  = lens _cuuProFileId (\ s a -> s{_cuuProFileId = a})
+creProFileId :: Lens' CreativesUpdate Int64
+creProFileId
+  = lens _creProFileId (\ s a -> s{_creProFileId = a})
 
 -- | Multipart request metadata.
-cuuPayload :: Lens' CreativesUpdate' Creative
-cuuPayload
-  = lens _cuuPayload (\ s a -> s{_cuuPayload = a})
+crePayload :: Lens' CreativesUpdate Creative
+crePayload
+  = lens _crePayload (\ s a -> s{_crePayload = a})
 
-instance GoogleRequest CreativesUpdate' where
-        type Rs CreativesUpdate' = Creative
-        requestClient CreativesUpdate'{..}
-          = go _cuuProFileId (Just AltJSON) _cuuPayload
+instance GoogleRequest CreativesUpdate where
+        type Rs CreativesUpdate = Creative
+        requestClient CreativesUpdate{..}
+          = go _creProFileId (Just AltJSON) _crePayload
               dFAReportingService
           where go
                   = buildClient

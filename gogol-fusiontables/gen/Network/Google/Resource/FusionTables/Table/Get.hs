@@ -29,18 +29,18 @@ module Network.Google.Resource.FusionTables.Table.Get
       TableGetResource
 
     -- * Creating a Request
-    , tableGet'
-    , TableGet'
+    , tableGet
+    , TableGet
 
     -- * Request Lenses
-    , tabTableId
+    , tgTableId
     ) where
 
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.table.get@ method which the
--- 'TableGet'' request conforms to.
+-- 'TableGet' request conforms to.
 type TableGetResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -48,33 +48,33 @@ type TableGetResource =
 
 -- | Retrieves a specific table by its ID.
 --
--- /See:/ 'tableGet'' smart constructor.
-newtype TableGet' = TableGet'
-    { _tabTableId :: Text
+-- /See:/ 'tableGet' smart constructor.
+newtype TableGet = TableGet
+    { _tgTableId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TableGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TableGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tabTableId'
-tableGet'
-    :: Text -- ^ 'tabTableId'
-    -> TableGet'
-tableGet' pTabTableId_ =
-    TableGet'
-    { _tabTableId = pTabTableId_
+-- * 'tgTableId'
+tableGet
+    :: Text -- ^ 'tgTableId'
+    -> TableGet
+tableGet pTgTableId_ =
+    TableGet
+    { _tgTableId = pTgTableId_
     }
 
 -- | Identifier for the table being requested.
-tabTableId :: Lens' TableGet' Text
-tabTableId
-  = lens _tabTableId (\ s a -> s{_tabTableId = a})
+tgTableId :: Lens' TableGet Text
+tgTableId
+  = lens _tgTableId (\ s a -> s{_tgTableId = a})
 
-instance GoogleRequest TableGet' where
-        type Rs TableGet' = Table
-        requestClient TableGet'{..}
-          = go _tabTableId (Just AltJSON) fusionTablesService
+instance GoogleRequest TableGet where
+        type Rs TableGet = Table
+        requestClient TableGet{..}
+          = go _tgTableId (Just AltJSON) fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TableGetResource)
                       mempty

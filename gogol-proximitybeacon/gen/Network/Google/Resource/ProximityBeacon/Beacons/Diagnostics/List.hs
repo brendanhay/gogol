@@ -31,8 +31,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
       BeaconsDiagnosticsListResource
 
     -- * Creating a Request
-    , beaconsDiagnosticsList'
-    , BeaconsDiagnosticsList'
+    , beaconsDiagnosticsList
+    , BeaconsDiagnosticsList
 
     -- * Request Lenses
     , bdlXgafv
@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.diagnostics.list@ method which the
--- 'BeaconsDiagnosticsList'' request conforms to.
+-- 'BeaconsDiagnosticsList' request conforms to.
 type BeaconsDiagnosticsListResource =
      "v1beta1" :>
        Capture "beaconName" Text :>
@@ -74,8 +74,8 @@ type BeaconsDiagnosticsListResource =
 -- for all the beacons owned by your Google Developers Console project by
 -- using the beacon name \`beacons\/-\`.
 --
--- /See:/ 'beaconsDiagnosticsList'' smart constructor.
-data BeaconsDiagnosticsList' = BeaconsDiagnosticsList'
+-- /See:/ 'beaconsDiagnosticsList' smart constructor.
+data BeaconsDiagnosticsList = BeaconsDiagnosticsList
     { _bdlXgafv          :: !(Maybe Text)
     , _bdlUploadProtocol :: !(Maybe Text)
     , _bdlPp             :: !Bool
@@ -89,7 +89,7 @@ data BeaconsDiagnosticsList' = BeaconsDiagnosticsList'
     , _bdlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BeaconsDiagnosticsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'BeaconsDiagnosticsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -114,11 +114,11 @@ data BeaconsDiagnosticsList' = BeaconsDiagnosticsList'
 -- * 'bdlAlertFilter'
 --
 -- * 'bdlCallback'
-beaconsDiagnosticsList'
+beaconsDiagnosticsList
     :: Text -- ^ 'bdlBeaconName'
-    -> BeaconsDiagnosticsList'
-beaconsDiagnosticsList' pBdlBeaconName_ =
-    BeaconsDiagnosticsList'
+    -> BeaconsDiagnosticsList
+beaconsDiagnosticsList pBdlBeaconName_ =
+    BeaconsDiagnosticsList
     { _bdlXgafv = Nothing
     , _bdlUploadProtocol = Nothing
     , _bdlPp = True
@@ -133,71 +133,71 @@ beaconsDiagnosticsList' pBdlBeaconName_ =
     }
 
 -- | V1 error format.
-bdlXgafv :: Lens' BeaconsDiagnosticsList' (Maybe Text)
+bdlXgafv :: Lens' BeaconsDiagnosticsList (Maybe Text)
 bdlXgafv = lens _bdlXgafv (\ s a -> s{_bdlXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-bdlUploadProtocol :: Lens' BeaconsDiagnosticsList' (Maybe Text)
+bdlUploadProtocol :: Lens' BeaconsDiagnosticsList (Maybe Text)
 bdlUploadProtocol
   = lens _bdlUploadProtocol
       (\ s a -> s{_bdlUploadProtocol = a})
 
 -- | Pretty-print response.
-bdlPp :: Lens' BeaconsDiagnosticsList' Bool
+bdlPp :: Lens' BeaconsDiagnosticsList Bool
 bdlPp = lens _bdlPp (\ s a -> s{_bdlPp = a})
 
 -- | OAuth access token.
-bdlAccessToken :: Lens' BeaconsDiagnosticsList' (Maybe Text)
+bdlAccessToken :: Lens' BeaconsDiagnosticsList (Maybe Text)
 bdlAccessToken
   = lens _bdlAccessToken
       (\ s a -> s{_bdlAccessToken = a})
 
 -- | Beacon that the diagnostics are for.
-bdlBeaconName :: Lens' BeaconsDiagnosticsList' Text
+bdlBeaconName :: Lens' BeaconsDiagnosticsList Text
 bdlBeaconName
   = lens _bdlBeaconName
       (\ s a -> s{_bdlBeaconName = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-bdlUploadType :: Lens' BeaconsDiagnosticsList' (Maybe Text)
+bdlUploadType :: Lens' BeaconsDiagnosticsList (Maybe Text)
 bdlUploadType
   = lens _bdlUploadType
       (\ s a -> s{_bdlUploadType = a})
 
 -- | OAuth bearer token.
-bdlBearerToken :: Lens' BeaconsDiagnosticsList' (Maybe Text)
+bdlBearerToken :: Lens' BeaconsDiagnosticsList (Maybe Text)
 bdlBearerToken
   = lens _bdlBearerToken
       (\ s a -> s{_bdlBearerToken = a})
 
 -- | Requests results that occur after the \`page_token\`, obtained from the
 -- response to a previous request. Optional.
-bdlPageToken :: Lens' BeaconsDiagnosticsList' (Maybe Text)
+bdlPageToken :: Lens' BeaconsDiagnosticsList (Maybe Text)
 bdlPageToken
   = lens _bdlPageToken (\ s a -> s{_bdlPageToken = a})
 
 -- | Specifies the maximum number of results to return. Defaults to 10.
 -- Maximum 1000. Optional.
-bdlPageSize :: Lens' BeaconsDiagnosticsList' (Maybe Int32)
+bdlPageSize :: Lens' BeaconsDiagnosticsList (Maybe Int32)
 bdlPageSize
   = lens _bdlPageSize (\ s a -> s{_bdlPageSize = a})
 
 -- | Requests only beacons that have the given alert. For example, to find
 -- beacons that have low batteries use \`alert_filter=LOW_BATTERY\`.
-bdlAlertFilter :: Lens' BeaconsDiagnosticsList' (Maybe Text)
+bdlAlertFilter :: Lens' BeaconsDiagnosticsList (Maybe Text)
 bdlAlertFilter
   = lens _bdlAlertFilter
       (\ s a -> s{_bdlAlertFilter = a})
 
 -- | JSONP
-bdlCallback :: Lens' BeaconsDiagnosticsList' (Maybe Text)
+bdlCallback :: Lens' BeaconsDiagnosticsList (Maybe Text)
 bdlCallback
   = lens _bdlCallback (\ s a -> s{_bdlCallback = a})
 
-instance GoogleRequest BeaconsDiagnosticsList' where
-        type Rs BeaconsDiagnosticsList' =
+instance GoogleRequest BeaconsDiagnosticsList where
+        type Rs BeaconsDiagnosticsList =
              ListDiagnosticsResponse
-        requestClient BeaconsDiagnosticsList'{..}
+        requestClient BeaconsDiagnosticsList{..}
           = go _bdlBeaconName _bdlXgafv _bdlUploadProtocol
               (Just _bdlPp)
               _bdlAccessToken

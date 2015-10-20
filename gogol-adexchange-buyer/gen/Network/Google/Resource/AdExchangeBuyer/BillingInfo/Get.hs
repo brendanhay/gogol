@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.BillingInfo.Get
       BillingInfoGetResource
 
     -- * Creating a Request
-    , billingInfoGet'
-    , BillingInfoGet'
+    , billingInfoGet
+    , BillingInfoGet
 
     -- * Request Lenses
     , bigAccountId
@@ -40,7 +40,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.billingInfo.get@ method which the
--- 'BillingInfoGet'' request conforms to.
+-- 'BillingInfoGet' request conforms to.
 type BillingInfoGetResource =
      "billinginfo" :>
        Capture "accountId" Int32 :>
@@ -48,32 +48,32 @@ type BillingInfoGetResource =
 
 -- | Returns the billing information for one account specified by account ID.
 --
--- /See:/ 'billingInfoGet'' smart constructor.
-newtype BillingInfoGet' = BillingInfoGet'
+-- /See:/ 'billingInfoGet' smart constructor.
+newtype BillingInfoGet = BillingInfoGet
     { _bigAccountId :: Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BillingInfoGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'BillingInfoGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'bigAccountId'
-billingInfoGet'
+billingInfoGet
     :: Int32 -- ^ 'bigAccountId'
-    -> BillingInfoGet'
-billingInfoGet' pBigAccountId_ =
-    BillingInfoGet'
+    -> BillingInfoGet
+billingInfoGet pBigAccountId_ =
+    BillingInfoGet
     { _bigAccountId = pBigAccountId_
     }
 
 -- | The account id.
-bigAccountId :: Lens' BillingInfoGet' Int32
+bigAccountId :: Lens' BillingInfoGet Int32
 bigAccountId
   = lens _bigAccountId (\ s a -> s{_bigAccountId = a})
 
-instance GoogleRequest BillingInfoGet' where
-        type Rs BillingInfoGet' = BillingInfo
-        requestClient BillingInfoGet'{..}
+instance GoogleRequest BillingInfoGet where
+        type Rs BillingInfoGet = BillingInfo
+        requestClient BillingInfoGet{..}
           = go _bigAccountId (Just AltJSON)
               adExchangeBuyerService
           where go

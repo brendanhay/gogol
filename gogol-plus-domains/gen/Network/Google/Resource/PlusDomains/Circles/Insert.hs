@@ -29,19 +29,19 @@ module Network.Google.Resource.PlusDomains.Circles.Insert
       CirclesInsertResource
 
     -- * Creating a Request
-    , circlesInsert'
-    , CirclesInsert'
+    , circlesInsert
+    , CirclesInsert
 
     -- * Request Lenses
-    , cPayload
-    , cUserId
+    , ciPayload
+    , ciUserId
     ) where
 
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plusDomains.circles.insert@ method which the
--- 'CirclesInsert'' request conforms to.
+-- 'CirclesInsert' request conforms to.
 type CirclesInsertResource =
      "people" :>
        Capture "userId" Text :>
@@ -51,42 +51,43 @@ type CirclesInsertResource =
 
 -- | Create a new circle for the authenticated user.
 --
--- /See:/ 'circlesInsert'' smart constructor.
-data CirclesInsert' = CirclesInsert'
-    { _cPayload :: !Circle
-    , _cUserId  :: !Text
+-- /See:/ 'circlesInsert' smart constructor.
+data CirclesInsert = CirclesInsert
+    { _ciPayload :: !Circle
+    , _ciUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CirclesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CirclesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cPayload'
+-- * 'ciPayload'
 --
--- * 'cUserId'
-circlesInsert'
-    :: Circle -- ^ 'cPayload'
-    -> Text -- ^ 'cUserId'
-    -> CirclesInsert'
-circlesInsert' pCPayload_ pCUserId_ =
-    CirclesInsert'
-    { _cPayload = pCPayload_
-    , _cUserId = pCUserId_
+-- * 'ciUserId'
+circlesInsert
+    :: Circle -- ^ 'ciPayload'
+    -> Text -- ^ 'ciUserId'
+    -> CirclesInsert
+circlesInsert pCiPayload_ pCiUserId_ =
+    CirclesInsert
+    { _ciPayload = pCiPayload_
+    , _ciUserId = pCiUserId_
     }
 
 -- | Multipart request metadata.
-cPayload :: Lens' CirclesInsert' Circle
-cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
+ciPayload :: Lens' CirclesInsert Circle
+ciPayload
+  = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
 -- | The ID of the user to create the circle on behalf of. The value \"me\"
 -- can be used to indicate the authenticated user.
-cUserId :: Lens' CirclesInsert' Text
-cUserId = lens _cUserId (\ s a -> s{_cUserId = a})
+ciUserId :: Lens' CirclesInsert Text
+ciUserId = lens _ciUserId (\ s a -> s{_ciUserId = a})
 
-instance GoogleRequest CirclesInsert' where
-        type Rs CirclesInsert' = Circle
-        requestClient CirclesInsert'{..}
-          = go _cUserId (Just AltJSON) _cPayload
+instance GoogleRequest CirclesInsert where
+        type Rs CirclesInsert = Circle
+        requestClient CirclesInsert{..}
+          = go _ciUserId (Just AltJSON) _ciPayload
               plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy CirclesInsertResource)

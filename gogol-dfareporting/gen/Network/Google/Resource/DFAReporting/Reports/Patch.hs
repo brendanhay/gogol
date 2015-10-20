@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Reports.Patch
       ReportsPatchResource
 
     -- * Creating a Request
-    , reportsPatch'
-    , ReportsPatch'
+    , reportsPatch
+    , ReportsPatch
 
     -- * Request Lenses
     , rpReportId
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.reports.patch@ method which the
--- 'ReportsPatch'' request conforms to.
+-- 'ReportsPatch' request conforms to.
 type ReportsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -53,14 +53,14 @@ type ReportsPatchResource =
 
 -- | Updates a report. This method supports patch semantics.
 --
--- /See:/ 'reportsPatch'' smart constructor.
-data ReportsPatch' = ReportsPatch'
+-- /See:/ 'reportsPatch' smart constructor.
+data ReportsPatch = ReportsPatch
     { _rpReportId  :: !Int64
     , _rpProFileId :: !Int64
     , _rpPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReportsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,36 @@ data ReportsPatch' = ReportsPatch'
 -- * 'rpProFileId'
 --
 -- * 'rpPayload'
-reportsPatch'
+reportsPatch
     :: Int64 -- ^ 'rpReportId'
     -> Int64 -- ^ 'rpProFileId'
     -> Report -- ^ 'rpPayload'
-    -> ReportsPatch'
-reportsPatch' pRpReportId_ pRpProFileId_ pRpPayload_ =
-    ReportsPatch'
+    -> ReportsPatch
+reportsPatch pRpReportId_ pRpProFileId_ pRpPayload_ =
+    ReportsPatch
     { _rpReportId = pRpReportId_
     , _rpProFileId = pRpProFileId_
     , _rpPayload = pRpPayload_
     }
 
 -- | The ID of the report.
-rpReportId :: Lens' ReportsPatch' Int64
+rpReportId :: Lens' ReportsPatch Int64
 rpReportId
   = lens _rpReportId (\ s a -> s{_rpReportId = a})
 
 -- | The DFA user profile ID.
-rpProFileId :: Lens' ReportsPatch' Int64
+rpProFileId :: Lens' ReportsPatch Int64
 rpProFileId
   = lens _rpProFileId (\ s a -> s{_rpProFileId = a})
 
 -- | Multipart request metadata.
-rpPayload :: Lens' ReportsPatch' Report
+rpPayload :: Lens' ReportsPatch Report
 rpPayload
   = lens _rpPayload (\ s a -> s{_rpPayload = a})
 
-instance GoogleRequest ReportsPatch' where
-        type Rs ReportsPatch' = Report
-        requestClient ReportsPatch'{..}
+instance GoogleRequest ReportsPatch where
+        type Rs ReportsPatch = Report
+        requestClient ReportsPatch{..}
           = go _rpProFileId _rpReportId (Just AltJSON)
               _rpPayload
               dFAReportingService

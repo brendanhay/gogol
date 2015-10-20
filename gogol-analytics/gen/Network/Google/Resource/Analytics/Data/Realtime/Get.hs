@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Data.Realtime.Get
       DataRealtimeGetResource
 
     -- * Creating a Request
-    , dataRealtimeGet'
-    , DataRealtimeGet'
+    , dataRealtimeGet
+    , DataRealtimeGet
 
     -- * Request Lenses
     , drgMetrics
@@ -45,7 +45,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.data.realtime.get@ method which the
--- 'DataRealtimeGet'' request conforms to.
+-- 'DataRealtimeGet' request conforms to.
 type DataRealtimeGetResource =
      "data" :>
        "realtime" :>
@@ -59,8 +59,8 @@ type DataRealtimeGetResource =
 
 -- | Returns real time data for a view (profile).
 --
--- /See:/ 'dataRealtimeGet'' smart constructor.
-data DataRealtimeGet' = DataRealtimeGet'
+-- /See:/ 'dataRealtimeGet' smart constructor.
+data DataRealtimeGet = DataRealtimeGet
     { _drgMetrics    :: !Text
     , _drgFilters    :: !(Maybe Text)
     , _drgIds        :: !Text
@@ -69,7 +69,7 @@ data DataRealtimeGet' = DataRealtimeGet'
     , _drgMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DataRealtimeGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'DataRealtimeGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -84,12 +84,12 @@ data DataRealtimeGet' = DataRealtimeGet'
 -- * 'drgDimensions'
 --
 -- * 'drgMaxResults'
-dataRealtimeGet'
+dataRealtimeGet
     :: Text -- ^ 'drgMetrics'
     -> Text -- ^ 'drgIds'
-    -> DataRealtimeGet'
-dataRealtimeGet' pDrgMetrics_ pDrgIds_ =
-    DataRealtimeGet'
+    -> DataRealtimeGet
+dataRealtimeGet pDrgMetrics_ pDrgIds_ =
+    DataRealtimeGet
     { _drgMetrics = pDrgMetrics_
     , _drgFilters = Nothing
     , _drgIds = pDrgIds_
@@ -100,42 +100,42 @@ dataRealtimeGet' pDrgMetrics_ pDrgIds_ =
 
 -- | A comma-separated list of real time metrics. E.g., \'rt:activeUsers\'.
 -- At least one metric must be specified.
-drgMetrics :: Lens' DataRealtimeGet' Text
+drgMetrics :: Lens' DataRealtimeGet Text
 drgMetrics
   = lens _drgMetrics (\ s a -> s{_drgMetrics = a})
 
 -- | A comma-separated list of dimension or metric filters to be applied to
 -- real time data.
-drgFilters :: Lens' DataRealtimeGet' (Maybe Text)
+drgFilters :: Lens' DataRealtimeGet (Maybe Text)
 drgFilters
   = lens _drgFilters (\ s a -> s{_drgFilters = a})
 
 -- | Unique table ID for retrieving real time data. Table ID is of the form
 -- ga:XXXX, where XXXX is the Analytics view (profile) ID.
-drgIds :: Lens' DataRealtimeGet' Text
+drgIds :: Lens' DataRealtimeGet Text
 drgIds = lens _drgIds (\ s a -> s{_drgIds = a})
 
 -- | A comma-separated list of dimensions or metrics that determine the sort
 -- order for real time data.
-drgSort :: Lens' DataRealtimeGet' (Maybe Text)
+drgSort :: Lens' DataRealtimeGet (Maybe Text)
 drgSort = lens _drgSort (\ s a -> s{_drgSort = a})
 
 -- | A comma-separated list of real time dimensions. E.g.,
 -- \'rt:medium,rt:city\'.
-drgDimensions :: Lens' DataRealtimeGet' (Maybe Text)
+drgDimensions :: Lens' DataRealtimeGet (Maybe Text)
 drgDimensions
   = lens _drgDimensions
       (\ s a -> s{_drgDimensions = a})
 
 -- | The maximum number of entries to include in this feed.
-drgMaxResults :: Lens' DataRealtimeGet' (Maybe Int32)
+drgMaxResults :: Lens' DataRealtimeGet (Maybe Int32)
 drgMaxResults
   = lens _drgMaxResults
       (\ s a -> s{_drgMaxResults = a})
 
-instance GoogleRequest DataRealtimeGet' where
-        type Rs DataRealtimeGet' = RealtimeData
-        requestClient DataRealtimeGet'{..}
+instance GoogleRequest DataRealtimeGet where
+        type Rs DataRealtimeGet = RealtimeData
+        requestClient DataRealtimeGet{..}
           = go (Just _drgIds) (Just _drgMetrics) _drgFilters
               _drgSort
               _drgDimensions

@@ -30,20 +30,20 @@ module Network.Google.Resource.Calendar.Events.Import
       EventsImportResource
 
     -- * Creating a Request
-    , eventsImport'
-    , EventsImport'
+    , eventsImport
+    , EventsImport
 
     -- * Request Lenses
-    , eCalendarId
-    , ePayload
-    , eSupportsAttachments
+    , eiCalendarId
+    , eiPayload
+    , eiSupportsAttachments
     ) where
 
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.import@ method which the
--- 'EventsImport'' request conforms to.
+-- 'EventsImport' request conforms to.
 type EventsImportResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -56,57 +56,58 @@ type EventsImportResource =
 -- | Imports an event. This operation is used to add a private copy of an
 -- existing event to a calendar.
 --
--- /See:/ 'eventsImport'' smart constructor.
-data EventsImport' = EventsImport'
-    { _eCalendarId          :: !Text
-    , _ePayload             :: !Event
-    , _eSupportsAttachments :: !(Maybe Bool)
+-- /See:/ 'eventsImport' smart constructor.
+data EventsImport = EventsImport
+    { _eiCalendarId          :: !Text
+    , _eiPayload             :: !Event
+    , _eiSupportsAttachments :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventsImport'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventsImport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eCalendarId'
+-- * 'eiCalendarId'
 --
--- * 'ePayload'
+-- * 'eiPayload'
 --
--- * 'eSupportsAttachments'
-eventsImport'
-    :: Text -- ^ 'eCalendarId'
-    -> Event -- ^ 'ePayload'
-    -> EventsImport'
-eventsImport' pECalendarId_ pEPayload_ =
-    EventsImport'
-    { _eCalendarId = pECalendarId_
-    , _ePayload = pEPayload_
-    , _eSupportsAttachments = Nothing
+-- * 'eiSupportsAttachments'
+eventsImport
+    :: Text -- ^ 'eiCalendarId'
+    -> Event -- ^ 'eiPayload'
+    -> EventsImport
+eventsImport pEiCalendarId_ pEiPayload_ =
+    EventsImport
+    { _eiCalendarId = pEiCalendarId_
+    , _eiPayload = pEiPayload_
+    , _eiSupportsAttachments = Nothing
     }
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-eCalendarId :: Lens' EventsImport' Text
-eCalendarId
-  = lens _eCalendarId (\ s a -> s{_eCalendarId = a})
+eiCalendarId :: Lens' EventsImport Text
+eiCalendarId
+  = lens _eiCalendarId (\ s a -> s{_eiCalendarId = a})
 
 -- | Multipart request metadata.
-ePayload :: Lens' EventsImport' Event
-ePayload = lens _ePayload (\ s a -> s{_ePayload = a})
+eiPayload :: Lens' EventsImport Event
+eiPayload
+  = lens _eiPayload (\ s a -> s{_eiPayload = a})
 
 -- | Whether API client performing operation supports event attachments.
 -- Optional. The default is False.
-eSupportsAttachments :: Lens' EventsImport' (Maybe Bool)
-eSupportsAttachments
-  = lens _eSupportsAttachments
-      (\ s a -> s{_eSupportsAttachments = a})
+eiSupportsAttachments :: Lens' EventsImport (Maybe Bool)
+eiSupportsAttachments
+  = lens _eiSupportsAttachments
+      (\ s a -> s{_eiSupportsAttachments = a})
 
-instance GoogleRequest EventsImport' where
-        type Rs EventsImport' = Event
-        requestClient EventsImport'{..}
-          = go _eCalendarId _eSupportsAttachments
+instance GoogleRequest EventsImport where
+        type Rs EventsImport = Event
+        requestClient EventsImport{..}
+          = go _eiCalendarId _eiSupportsAttachments
               (Just AltJSON)
-              _ePayload
+              _eiPayload
               appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy EventsImportResource)

@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.Commit
       EditsCommitResource
 
     -- * Creating a Request
-    , editsCommit'
-    , EditsCommit'
+    , editsCommit
+    , EditsCommit
 
     -- * Request Lenses
     , ecPackageName
@@ -41,7 +41,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.commit@ method which the
--- 'EditsCommit'' request conforms to.
+-- 'EditsCommit' request conforms to.
 type EditsCommitResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -50,43 +50,43 @@ type EditsCommitResource =
 
 -- | Commits\/applies the changes made in this edit back to the app.
 --
--- /See:/ 'editsCommit'' smart constructor.
-data EditsCommit' = EditsCommit'
+-- /See:/ 'editsCommit' smart constructor.
+data EditsCommit = EditsCommit
     { _ecPackageName :: !Text
     , _ecEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsCommit'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsCommit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ecPackageName'
 --
 -- * 'ecEditId'
-editsCommit'
+editsCommit
     :: Text -- ^ 'ecPackageName'
     -> Text -- ^ 'ecEditId'
-    -> EditsCommit'
-editsCommit' pEcPackageName_ pEcEditId_ =
-    EditsCommit'
+    -> EditsCommit
+editsCommit pEcPackageName_ pEcEditId_ =
+    EditsCommit
     { _ecPackageName = pEcPackageName_
     , _ecEditId = pEcEditId_
     }
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-ecPackageName :: Lens' EditsCommit' Text
+ecPackageName :: Lens' EditsCommit Text
 ecPackageName
   = lens _ecPackageName
       (\ s a -> s{_ecPackageName = a})
 
 -- | Unique identifier for this edit.
-ecEditId :: Lens' EditsCommit' Text
+ecEditId :: Lens' EditsCommit Text
 ecEditId = lens _ecEditId (\ s a -> s{_ecEditId = a})
 
-instance GoogleRequest EditsCommit' where
-        type Rs EditsCommit' = AppEdit
-        requestClient EditsCommit'{..}
+instance GoogleRequest EditsCommit where
+        type Rs EditsCommit = AppEdit
+        requestClient EditsCommit{..}
           = go _ecPackageName _ecEditId (Just AltJSON)
               androidPublisherService
           where go

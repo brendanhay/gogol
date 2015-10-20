@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.TargetVPNGateways.Delete
       TargetVPNGatewaysDeleteResource
 
     -- * Creating a Request
-    , targetVPNGatewaysDelete'
-    , TargetVPNGatewaysDelete'
+    , targetVPNGatewaysDelete
+    , TargetVPNGatewaysDelete
 
     -- * Request Lenses
     , tvgdProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetVpnGateways.delete@ method which the
--- 'TargetVPNGatewaysDelete'' request conforms to.
+-- 'TargetVPNGatewaysDelete' request conforms to.
 type TargetVPNGatewaysDeleteResource =
      Capture "project" Text :>
        "regions" :>
@@ -53,14 +53,14 @@ type TargetVPNGatewaysDeleteResource =
 
 -- | Deletes the specified TargetVpnGateway resource.
 --
--- /See:/ 'targetVPNGatewaysDelete'' smart constructor.
-data TargetVPNGatewaysDelete' = TargetVPNGatewaysDelete'
+-- /See:/ 'targetVPNGatewaysDelete' smart constructor.
+data TargetVPNGatewaysDelete = TargetVPNGatewaysDelete
     { _tvgdProject          :: !Text
     , _tvgdTargetVPNGateway :: !Text
     , _tvgdRegion           :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetVPNGatewaysDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetVPNGatewaysDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,37 +69,37 @@ data TargetVPNGatewaysDelete' = TargetVPNGatewaysDelete'
 -- * 'tvgdTargetVPNGateway'
 --
 -- * 'tvgdRegion'
-targetVPNGatewaysDelete'
+targetVPNGatewaysDelete
     :: Text -- ^ 'tvgdProject'
     -> Text -- ^ 'tvgdTargetVPNGateway'
     -> Text -- ^ 'tvgdRegion'
-    -> TargetVPNGatewaysDelete'
-targetVPNGatewaysDelete' pTvgdProject_ pTvgdTargetVPNGateway_ pTvgdRegion_ =
-    TargetVPNGatewaysDelete'
+    -> TargetVPNGatewaysDelete
+targetVPNGatewaysDelete pTvgdProject_ pTvgdTargetVPNGateway_ pTvgdRegion_ =
+    TargetVPNGatewaysDelete
     { _tvgdProject = pTvgdProject_
     , _tvgdTargetVPNGateway = pTvgdTargetVPNGateway_
     , _tvgdRegion = pTvgdRegion_
     }
 
 -- | Project ID for this request.
-tvgdProject :: Lens' TargetVPNGatewaysDelete' Text
+tvgdProject :: Lens' TargetVPNGatewaysDelete Text
 tvgdProject
   = lens _tvgdProject (\ s a -> s{_tvgdProject = a})
 
 -- | Name of the TargetVpnGateway resource to delete.
-tvgdTargetVPNGateway :: Lens' TargetVPNGatewaysDelete' Text
+tvgdTargetVPNGateway :: Lens' TargetVPNGatewaysDelete Text
 tvgdTargetVPNGateway
   = lens _tvgdTargetVPNGateway
       (\ s a -> s{_tvgdTargetVPNGateway = a})
 
 -- | The name of the region for this request.
-tvgdRegion :: Lens' TargetVPNGatewaysDelete' Text
+tvgdRegion :: Lens' TargetVPNGatewaysDelete Text
 tvgdRegion
   = lens _tvgdRegion (\ s a -> s{_tvgdRegion = a})
 
-instance GoogleRequest TargetVPNGatewaysDelete' where
-        type Rs TargetVPNGatewaysDelete' = Operation
-        requestClient TargetVPNGatewaysDelete'{..}
+instance GoogleRequest TargetVPNGatewaysDelete where
+        type Rs TargetVPNGatewaysDelete = Operation
+        requestClient TargetVPNGatewaysDelete{..}
           = go _tvgdProject _tvgdRegion _tvgdTargetVPNGateway
               (Just AltJSON)
               computeService

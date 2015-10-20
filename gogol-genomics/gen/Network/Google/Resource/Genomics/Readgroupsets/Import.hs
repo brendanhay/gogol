@@ -38,8 +38,8 @@ module Network.Google.Resource.Genomics.Readgroupsets.Import
       ReadgroupsetsImportResource
 
     -- * Creating a Request
-    , readgroupsetsImport'
-    , ReadgroupsetsImport'
+    , readgroupsetsImport
+    , ReadgroupsetsImport
 
     -- * Request Lenses
     , riXgafv
@@ -56,7 +56,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.readgroupsets.import@ method which the
--- 'ReadgroupsetsImport'' request conforms to.
+-- 'ReadgroupsetsImport' request conforms to.
 type ReadgroupsetsImportResource =
      "v1" :>
        "readgroupsets:import" :>
@@ -82,8 +82,8 @@ type ReadgroupsetsImportResource =
 -- reads will be stripped of positional information (reference name and
 -- position)
 --
--- /See:/ 'readgroupsetsImport'' smart constructor.
-data ReadgroupsetsImport' = ReadgroupsetsImport'
+-- /See:/ 'readgroupsetsImport' smart constructor.
+data ReadgroupsetsImport = ReadgroupsetsImport
     { _riXgafv          :: !(Maybe Text)
     , _riUploadProtocol :: !(Maybe Text)
     , _riPp             :: !Bool
@@ -94,7 +94,7 @@ data ReadgroupsetsImport' = ReadgroupsetsImport'
     , _riCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReadgroupsetsImport'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReadgroupsetsImport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -113,11 +113,11 @@ data ReadgroupsetsImport' = ReadgroupsetsImport'
 -- * 'riBearerToken'
 --
 -- * 'riCallback'
-readgroupsetsImport'
+readgroupsetsImport
     :: ImportReadGroupSetsRequest -- ^ 'riPayload'
-    -> ReadgroupsetsImport'
-readgroupsetsImport' pRiPayload_ =
-    ReadgroupsetsImport'
+    -> ReadgroupsetsImport
+readgroupsetsImport pRiPayload_ =
+    ReadgroupsetsImport
     { _riXgafv = Nothing
     , _riUploadProtocol = Nothing
     , _riPp = True
@@ -129,49 +129,49 @@ readgroupsetsImport' pRiPayload_ =
     }
 
 -- | V1 error format.
-riXgafv :: Lens' ReadgroupsetsImport' (Maybe Text)
+riXgafv :: Lens' ReadgroupsetsImport (Maybe Text)
 riXgafv = lens _riXgafv (\ s a -> s{_riXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-riUploadProtocol :: Lens' ReadgroupsetsImport' (Maybe Text)
+riUploadProtocol :: Lens' ReadgroupsetsImport (Maybe Text)
 riUploadProtocol
   = lens _riUploadProtocol
       (\ s a -> s{_riUploadProtocol = a})
 
 -- | Pretty-print response.
-riPp :: Lens' ReadgroupsetsImport' Bool
+riPp :: Lens' ReadgroupsetsImport Bool
 riPp = lens _riPp (\ s a -> s{_riPp = a})
 
 -- | OAuth access token.
-riAccessToken :: Lens' ReadgroupsetsImport' (Maybe Text)
+riAccessToken :: Lens' ReadgroupsetsImport (Maybe Text)
 riAccessToken
   = lens _riAccessToken
       (\ s a -> s{_riAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-riUploadType :: Lens' ReadgroupsetsImport' (Maybe Text)
+riUploadType :: Lens' ReadgroupsetsImport (Maybe Text)
 riUploadType
   = lens _riUploadType (\ s a -> s{_riUploadType = a})
 
 -- | Multipart request metadata.
-riPayload :: Lens' ReadgroupsetsImport' ImportReadGroupSetsRequest
+riPayload :: Lens' ReadgroupsetsImport ImportReadGroupSetsRequest
 riPayload
   = lens _riPayload (\ s a -> s{_riPayload = a})
 
 -- | OAuth bearer token.
-riBearerToken :: Lens' ReadgroupsetsImport' (Maybe Text)
+riBearerToken :: Lens' ReadgroupsetsImport (Maybe Text)
 riBearerToken
   = lens _riBearerToken
       (\ s a -> s{_riBearerToken = a})
 
 -- | JSONP
-riCallback :: Lens' ReadgroupsetsImport' (Maybe Text)
+riCallback :: Lens' ReadgroupsetsImport (Maybe Text)
 riCallback
   = lens _riCallback (\ s a -> s{_riCallback = a})
 
-instance GoogleRequest ReadgroupsetsImport' where
-        type Rs ReadgroupsetsImport' = Operation
-        requestClient ReadgroupsetsImport'{..}
+instance GoogleRequest ReadgroupsetsImport where
+        type Rs ReadgroupsetsImport = Operation
+        requestClient ReadgroupsetsImport{..}
           = go _riXgafv _riUploadProtocol (Just _riPp)
               _riAccessToken
               _riUploadType

@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSense.Accounts.CustomChannels.AdUnits.List
       AccountsCustomChannelsAdUnitsListResource
 
     -- * Creating a Request
-    , accountsCustomChannelsAdUnitsList'
-    , AccountsCustomChannelsAdUnitsList'
+    , accountsCustomChannelsAdUnitsList
+    , AccountsCustomChannelsAdUnitsList
 
     -- * Request Lenses
     , accaulIncludeInactive
@@ -45,7 +45,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.customchannels.adunits.list@ method which the
--- 'AccountsCustomChannelsAdUnitsList'' request conforms to.
+-- 'AccountsCustomChannelsAdUnitsList' request conforms to.
 type AccountsCustomChannelsAdUnitsListResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -61,8 +61,8 @@ type AccountsCustomChannelsAdUnitsListResource =
 
 -- | List all ad units in the specified custom channel.
 --
--- /See:/ 'accountsCustomChannelsAdUnitsList'' smart constructor.
-data AccountsCustomChannelsAdUnitsList' = AccountsCustomChannelsAdUnitsList'
+-- /See:/ 'accountsCustomChannelsAdUnitsList' smart constructor.
+data AccountsCustomChannelsAdUnitsList = AccountsCustomChannelsAdUnitsList
     { _accaulIncludeInactive :: !(Maybe Bool)
     , _accaulCustomChannelId :: !Text
     , _accaulAdClientId      :: !Text
@@ -71,7 +71,7 @@ data AccountsCustomChannelsAdUnitsList' = AccountsCustomChannelsAdUnitsList'
     , _accaulMaxResults      :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsCustomChannelsAdUnitsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsCustomChannelsAdUnitsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -86,13 +86,13 @@ data AccountsCustomChannelsAdUnitsList' = AccountsCustomChannelsAdUnitsList'
 -- * 'accaulPageToken'
 --
 -- * 'accaulMaxResults'
-accountsCustomChannelsAdUnitsList'
+accountsCustomChannelsAdUnitsList
     :: Text -- ^ 'accaulCustomChannelId'
     -> Text -- ^ 'accaulAdClientId'
     -> Text -- ^ 'accaulAccountId'
-    -> AccountsCustomChannelsAdUnitsList'
-accountsCustomChannelsAdUnitsList' pAccaulCustomChannelId_ pAccaulAdClientId_ pAccaulAccountId_ =
-    AccountsCustomChannelsAdUnitsList'
+    -> AccountsCustomChannelsAdUnitsList
+accountsCustomChannelsAdUnitsList pAccaulCustomChannelId_ pAccaulAdClientId_ pAccaulAccountId_ =
+    AccountsCustomChannelsAdUnitsList
     { _accaulIncludeInactive = Nothing
     , _accaulCustomChannelId = pAccaulCustomChannelId_
     , _accaulAdClientId = pAccaulAdClientId_
@@ -102,25 +102,25 @@ accountsCustomChannelsAdUnitsList' pAccaulCustomChannelId_ pAccaulAdClientId_ pA
     }
 
 -- | Whether to include inactive ad units. Default: true.
-accaulIncludeInactive :: Lens' AccountsCustomChannelsAdUnitsList' (Maybe Bool)
+accaulIncludeInactive :: Lens' AccountsCustomChannelsAdUnitsList (Maybe Bool)
 accaulIncludeInactive
   = lens _accaulIncludeInactive
       (\ s a -> s{_accaulIncludeInactive = a})
 
 -- | Custom channel for which to list ad units.
-accaulCustomChannelId :: Lens' AccountsCustomChannelsAdUnitsList' Text
+accaulCustomChannelId :: Lens' AccountsCustomChannelsAdUnitsList Text
 accaulCustomChannelId
   = lens _accaulCustomChannelId
       (\ s a -> s{_accaulCustomChannelId = a})
 
 -- | Ad client which contains the custom channel.
-accaulAdClientId :: Lens' AccountsCustomChannelsAdUnitsList' Text
+accaulAdClientId :: Lens' AccountsCustomChannelsAdUnitsList Text
 accaulAdClientId
   = lens _accaulAdClientId
       (\ s a -> s{_accaulAdClientId = a})
 
 -- | Account to which the ad client belongs.
-accaulAccountId :: Lens' AccountsCustomChannelsAdUnitsList' Text
+accaulAccountId :: Lens' AccountsCustomChannelsAdUnitsList Text
 accaulAccountId
   = lens _accaulAccountId
       (\ s a -> s{_accaulAccountId = a})
@@ -128,22 +128,22 @@ accaulAccountId
 -- | A continuation token, used to page through ad units. To retrieve the
 -- next page, set this parameter to the value of \"nextPageToken\" from the
 -- previous response.
-accaulPageToken :: Lens' AccountsCustomChannelsAdUnitsList' (Maybe Text)
+accaulPageToken :: Lens' AccountsCustomChannelsAdUnitsList (Maybe Text)
 accaulPageToken
   = lens _accaulPageToken
       (\ s a -> s{_accaulPageToken = a})
 
 -- | The maximum number of ad units to include in the response, used for
 -- paging.
-accaulMaxResults :: Lens' AccountsCustomChannelsAdUnitsList' (Maybe Int32)
+accaulMaxResults :: Lens' AccountsCustomChannelsAdUnitsList (Maybe Int32)
 accaulMaxResults
   = lens _accaulMaxResults
       (\ s a -> s{_accaulMaxResults = a})
 
 instance GoogleRequest
-         AccountsCustomChannelsAdUnitsList' where
-        type Rs AccountsCustomChannelsAdUnitsList' = AdUnits
-        requestClient AccountsCustomChannelsAdUnitsList'{..}
+         AccountsCustomChannelsAdUnitsList where
+        type Rs AccountsCustomChannelsAdUnitsList = AdUnits
+        requestClient AccountsCustomChannelsAdUnitsList{..}
           = go _accaulAccountId _accaulAdClientId
               _accaulCustomChannelId
               _accaulIncludeInactive

@@ -29,8 +29,8 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
       ProjectsJobsMessagesListResource
 
     -- * Creating a Request
-    , projectsJobsMessagesList'
-    , ProjectsJobsMessagesList'
+    , projectsJobsMessagesList
+    , ProjectsJobsMessagesList
 
     -- * Request Lenses
     , pjmlXgafv
@@ -53,7 +53,7 @@ import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.jobs.messages.list@ method which the
--- 'ProjectsJobsMessagesList'' request conforms to.
+-- 'ProjectsJobsMessagesList' request conforms to.
 type ProjectsJobsMessagesListResource =
      "v1b3" :>
        "projects" :>
@@ -78,8 +78,8 @@ type ProjectsJobsMessagesListResource =
 
 -- | Request the job status.
 --
--- /See:/ 'projectsJobsMessagesList'' smart constructor.
-data ProjectsJobsMessagesList' = ProjectsJobsMessagesList'
+-- /See:/ 'projectsJobsMessagesList' smart constructor.
+data ProjectsJobsMessagesList = ProjectsJobsMessagesList
     { _pjmlXgafv             :: !(Maybe Text)
     , _pjmlJobId             :: !Text
     , _pjmlUploadProtocol    :: !(Maybe Text)
@@ -96,7 +96,7 @@ data ProjectsJobsMessagesList' = ProjectsJobsMessagesList'
     , _pjmlCallback          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsJobsMessagesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsJobsMessagesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -127,12 +127,12 @@ data ProjectsJobsMessagesList' = ProjectsJobsMessagesList'
 -- * 'pjmlPageSize'
 --
 -- * 'pjmlCallback'
-projectsJobsMessagesList'
+projectsJobsMessagesList
     :: Text -- ^ 'pjmlJobId'
     -> Text -- ^ 'pjmlProjectId'
-    -> ProjectsJobsMessagesList'
-projectsJobsMessagesList' pPjmlJobId_ pPjmlProjectId_ =
-    ProjectsJobsMessagesList'
+    -> ProjectsJobsMessagesList
+projectsJobsMessagesList pPjmlJobId_ pPjmlProjectId_ =
+    ProjectsJobsMessagesList
     { _pjmlXgafv = Nothing
     , _pjmlJobId = pPjmlJobId_
     , _pjmlUploadProtocol = Nothing
@@ -150,71 +150,71 @@ projectsJobsMessagesList' pPjmlJobId_ pPjmlProjectId_ =
     }
 
 -- | V1 error format.
-pjmlXgafv :: Lens' ProjectsJobsMessagesList' (Maybe Text)
+pjmlXgafv :: Lens' ProjectsJobsMessagesList (Maybe Text)
 pjmlXgafv
   = lens _pjmlXgafv (\ s a -> s{_pjmlXgafv = a})
 
 -- | The job to get messages about.
-pjmlJobId :: Lens' ProjectsJobsMessagesList' Text
+pjmlJobId :: Lens' ProjectsJobsMessagesList Text
 pjmlJobId
   = lens _pjmlJobId (\ s a -> s{_pjmlJobId = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pjmlUploadProtocol :: Lens' ProjectsJobsMessagesList' (Maybe Text)
+pjmlUploadProtocol :: Lens' ProjectsJobsMessagesList (Maybe Text)
 pjmlUploadProtocol
   = lens _pjmlUploadProtocol
       (\ s a -> s{_pjmlUploadProtocol = a})
 
 -- | If specified, return only messages with timestamps >= start_time. The
 -- default is the job creation time (i.e. beginning of messages).
-pjmlStartTime :: Lens' ProjectsJobsMessagesList' (Maybe Text)
+pjmlStartTime :: Lens' ProjectsJobsMessagesList (Maybe Text)
 pjmlStartTime
   = lens _pjmlStartTime
       (\ s a -> s{_pjmlStartTime = a})
 
 -- | Pretty-print response.
-pjmlPp :: Lens' ProjectsJobsMessagesList' Bool
+pjmlPp :: Lens' ProjectsJobsMessagesList Bool
 pjmlPp = lens _pjmlPp (\ s a -> s{_pjmlPp = a})
 
 -- | OAuth access token.
-pjmlAccessToken :: Lens' ProjectsJobsMessagesList' (Maybe Text)
+pjmlAccessToken :: Lens' ProjectsJobsMessagesList (Maybe Text)
 pjmlAccessToken
   = lens _pjmlAccessToken
       (\ s a -> s{_pjmlAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pjmlUploadType :: Lens' ProjectsJobsMessagesList' (Maybe Text)
+pjmlUploadType :: Lens' ProjectsJobsMessagesList (Maybe Text)
 pjmlUploadType
   = lens _pjmlUploadType
       (\ s a -> s{_pjmlUploadType = a})
 
 -- | OAuth bearer token.
-pjmlBearerToken :: Lens' ProjectsJobsMessagesList' (Maybe Text)
+pjmlBearerToken :: Lens' ProjectsJobsMessagesList (Maybe Text)
 pjmlBearerToken
   = lens _pjmlBearerToken
       (\ s a -> s{_pjmlBearerToken = a})
 
 -- | Return only messages with timestamps \< end_time. The default is now
 -- (i.e. return up to the latest messages available).
-pjmlEndTime :: Lens' ProjectsJobsMessagesList' (Maybe Text)
+pjmlEndTime :: Lens' ProjectsJobsMessagesList (Maybe Text)
 pjmlEndTime
   = lens _pjmlEndTime (\ s a -> s{_pjmlEndTime = a})
 
 -- | Filter to only get messages with importance >= level
-pjmlMinimumImportance :: Lens' ProjectsJobsMessagesList' (Maybe Text)
+pjmlMinimumImportance :: Lens' ProjectsJobsMessagesList (Maybe Text)
 pjmlMinimumImportance
   = lens _pjmlMinimumImportance
       (\ s a -> s{_pjmlMinimumImportance = a})
 
 -- | If supplied, this should be the value of next_page_token returned by an
 -- earlier call. This will cause the next page of results to be returned.
-pjmlPageToken :: Lens' ProjectsJobsMessagesList' (Maybe Text)
+pjmlPageToken :: Lens' ProjectsJobsMessagesList (Maybe Text)
 pjmlPageToken
   = lens _pjmlPageToken
       (\ s a -> s{_pjmlPageToken = a})
 
 -- | A project id.
-pjmlProjectId :: Lens' ProjectsJobsMessagesList' Text
+pjmlProjectId :: Lens' ProjectsJobsMessagesList Text
 pjmlProjectId
   = lens _pjmlProjectId
       (\ s a -> s{_pjmlProjectId = a})
@@ -222,20 +222,19 @@ pjmlProjectId
 -- | If specified, determines the maximum number of messages to return. If
 -- unspecified, the service may choose an appropriate default, or may
 -- return an arbitrarily large number of results.
-pjmlPageSize :: Lens' ProjectsJobsMessagesList' (Maybe Int32)
+pjmlPageSize :: Lens' ProjectsJobsMessagesList (Maybe Int32)
 pjmlPageSize
   = lens _pjmlPageSize (\ s a -> s{_pjmlPageSize = a})
 
 -- | JSONP
-pjmlCallback :: Lens' ProjectsJobsMessagesList' (Maybe Text)
+pjmlCallback :: Lens' ProjectsJobsMessagesList (Maybe Text)
 pjmlCallback
   = lens _pjmlCallback (\ s a -> s{_pjmlCallback = a})
 
-instance GoogleRequest ProjectsJobsMessagesList'
-         where
-        type Rs ProjectsJobsMessagesList' =
+instance GoogleRequest ProjectsJobsMessagesList where
+        type Rs ProjectsJobsMessagesList =
              ListJobMessagesResponse
-        requestClient ProjectsJobsMessagesList'{..}
+        requestClient ProjectsJobsMessagesList{..}
           = go _pjmlProjectId _pjmlJobId _pjmlXgafv
               _pjmlUploadProtocol
               _pjmlStartTime

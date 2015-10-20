@@ -31,8 +31,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.Publish
       ProjectsTopicsPublishResource
 
     -- * Creating a Request
-    , projectsTopicsPublish'
-    , ProjectsTopicsPublish'
+    , projectsTopicsPublish
+    , ProjectsTopicsPublish
 
     -- * Request Lenses
     , ptpXgafv
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.publish@ method which the
--- 'ProjectsTopicsPublish'' request conforms to.
+-- 'ProjectsTopicsPublish' request conforms to.
 type ProjectsTopicsPublishResource =
      "v1" :>
        CaptureMode "topic" "publish" Text :>
@@ -69,8 +69,8 @@ type ProjectsTopicsPublishResource =
 -- topic does not exist. The message payload must not be empty; it must
 -- contain either a non-empty data field, or at least one attribute.
 --
--- /See:/ 'projectsTopicsPublish'' smart constructor.
-data ProjectsTopicsPublish' = ProjectsTopicsPublish'
+-- /See:/ 'projectsTopicsPublish' smart constructor.
+data ProjectsTopicsPublish = ProjectsTopicsPublish
     { _ptpXgafv          :: !(Maybe Text)
     , _ptpUploadProtocol :: !(Maybe Text)
     , _ptpPp             :: !Bool
@@ -82,7 +82,7 @@ data ProjectsTopicsPublish' = ProjectsTopicsPublish'
     , _ptpCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsTopicsPublish'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsTopicsPublish' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -103,12 +103,12 @@ data ProjectsTopicsPublish' = ProjectsTopicsPublish'
 -- * 'ptpBearerToken'
 --
 -- * 'ptpCallback'
-projectsTopicsPublish'
+projectsTopicsPublish
     :: PublishRequest -- ^ 'ptpPayload'
     -> Text -- ^ 'ptpTopic'
-    -> ProjectsTopicsPublish'
-projectsTopicsPublish' pPtpPayload_ pPtpTopic_ =
-    ProjectsTopicsPublish'
+    -> ProjectsTopicsPublish
+projectsTopicsPublish pPtpPayload_ pPtpTopic_ =
+    ProjectsTopicsPublish
     { _ptpXgafv = Nothing
     , _ptpUploadProtocol = Nothing
     , _ptpPp = True
@@ -121,54 +121,54 @@ projectsTopicsPublish' pPtpPayload_ pPtpTopic_ =
     }
 
 -- | V1 error format.
-ptpXgafv :: Lens' ProjectsTopicsPublish' (Maybe Text)
+ptpXgafv :: Lens' ProjectsTopicsPublish (Maybe Text)
 ptpXgafv = lens _ptpXgafv (\ s a -> s{_ptpXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ptpUploadProtocol :: Lens' ProjectsTopicsPublish' (Maybe Text)
+ptpUploadProtocol :: Lens' ProjectsTopicsPublish (Maybe Text)
 ptpUploadProtocol
   = lens _ptpUploadProtocol
       (\ s a -> s{_ptpUploadProtocol = a})
 
 -- | Pretty-print response.
-ptpPp :: Lens' ProjectsTopicsPublish' Bool
+ptpPp :: Lens' ProjectsTopicsPublish Bool
 ptpPp = lens _ptpPp (\ s a -> s{_ptpPp = a})
 
 -- | OAuth access token.
-ptpAccessToken :: Lens' ProjectsTopicsPublish' (Maybe Text)
+ptpAccessToken :: Lens' ProjectsTopicsPublish (Maybe Text)
 ptpAccessToken
   = lens _ptpAccessToken
       (\ s a -> s{_ptpAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ptpUploadType :: Lens' ProjectsTopicsPublish' (Maybe Text)
+ptpUploadType :: Lens' ProjectsTopicsPublish (Maybe Text)
 ptpUploadType
   = lens _ptpUploadType
       (\ s a -> s{_ptpUploadType = a})
 
 -- | Multipart request metadata.
-ptpPayload :: Lens' ProjectsTopicsPublish' PublishRequest
+ptpPayload :: Lens' ProjectsTopicsPublish PublishRequest
 ptpPayload
   = lens _ptpPayload (\ s a -> s{_ptpPayload = a})
 
 -- | The messages in the request will be published on this topic.
-ptpTopic :: Lens' ProjectsTopicsPublish' Text
+ptpTopic :: Lens' ProjectsTopicsPublish Text
 ptpTopic = lens _ptpTopic (\ s a -> s{_ptpTopic = a})
 
 -- | OAuth bearer token.
-ptpBearerToken :: Lens' ProjectsTopicsPublish' (Maybe Text)
+ptpBearerToken :: Lens' ProjectsTopicsPublish (Maybe Text)
 ptpBearerToken
   = lens _ptpBearerToken
       (\ s a -> s{_ptpBearerToken = a})
 
 -- | JSONP
-ptpCallback :: Lens' ProjectsTopicsPublish' (Maybe Text)
+ptpCallback :: Lens' ProjectsTopicsPublish (Maybe Text)
 ptpCallback
   = lens _ptpCallback (\ s a -> s{_ptpCallback = a})
 
-instance GoogleRequest ProjectsTopicsPublish' where
-        type Rs ProjectsTopicsPublish' = PublishResponse
-        requestClient ProjectsTopicsPublish'{..}
+instance GoogleRequest ProjectsTopicsPublish where
+        type Rs ProjectsTopicsPublish = PublishResponse
+        requestClient ProjectsTopicsPublish{..}
           = go _ptpTopic _ptpXgafv _ptpUploadProtocol
               (Just _ptpPp)
               _ptpAccessToken

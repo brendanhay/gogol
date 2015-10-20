@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.DirectorySites.Get
       DirectorySitesGetResource
 
     -- * Creating a Request
-    , directorySitesGet'
-    , DirectorySitesGet'
+    , directorySitesGet
+    , DirectorySitesGet
 
     -- * Request Lenses
     , dsgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.directorySites.get@ method which the
--- 'DirectorySitesGet'' request conforms to.
+-- 'DirectorySitesGet' request conforms to.
 type DirectorySitesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,41 +51,41 @@ type DirectorySitesGetResource =
 
 -- | Gets one directory site by ID.
 --
--- /See:/ 'directorySitesGet'' smart constructor.
-data DirectorySitesGet' = DirectorySitesGet'
+-- /See:/ 'directorySitesGet' smart constructor.
+data DirectorySitesGet = DirectorySitesGet
     { _dsgProFileId :: !Int64
     , _dsgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DirectorySitesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'DirectorySitesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dsgProFileId'
 --
 -- * 'dsgId'
-directorySitesGet'
+directorySitesGet
     :: Int64 -- ^ 'dsgProFileId'
     -> Int64 -- ^ 'dsgId'
-    -> DirectorySitesGet'
-directorySitesGet' pDsgProFileId_ pDsgId_ =
-    DirectorySitesGet'
+    -> DirectorySitesGet
+directorySitesGet pDsgProFileId_ pDsgId_ =
+    DirectorySitesGet
     { _dsgProFileId = pDsgProFileId_
     , _dsgId = pDsgId_
     }
 
 -- | User profile ID associated with this request.
-dsgProFileId :: Lens' DirectorySitesGet' Int64
+dsgProFileId :: Lens' DirectorySitesGet Int64
 dsgProFileId
   = lens _dsgProFileId (\ s a -> s{_dsgProFileId = a})
 
 -- | Directory site ID.
-dsgId :: Lens' DirectorySitesGet' Int64
+dsgId :: Lens' DirectorySitesGet Int64
 dsgId = lens _dsgId (\ s a -> s{_dsgId = a})
 
-instance GoogleRequest DirectorySitesGet' where
-        type Rs DirectorySitesGet' = DirectorySite
-        requestClient DirectorySitesGet'{..}
+instance GoogleRequest DirectorySitesGet where
+        type Rs DirectorySitesGet = DirectorySite
+        requestClient DirectorySitesGet{..}
           = go _dsgProFileId _dsgId (Just AltJSON)
               dFAReportingService
           where go

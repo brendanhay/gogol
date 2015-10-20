@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Routes.Insert
       RoutesInsertResource
 
     -- * Creating a Request
-    , routesInsert'
-    , RoutesInsert'
+    , routesInsert
+    , RoutesInsert
 
     -- * Request Lenses
     , riProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.routes.insert@ method which the
--- 'RoutesInsert'' request conforms to.
+-- 'RoutesInsert' request conforms to.
 type RoutesInsertResource =
      Capture "project" Text :>
        "global" :>
@@ -53,42 +53,42 @@ type RoutesInsertResource =
 -- | Creates a route resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'routesInsert'' smart constructor.
-data RoutesInsert' = RoutesInsert'
+-- /See:/ 'routesInsert' smart constructor.
+data RoutesInsert = RoutesInsert
     { _riProject :: !Text
     , _riPayload :: !Route
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoutesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'RoutesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'riProject'
 --
 -- * 'riPayload'
-routesInsert'
+routesInsert
     :: Text -- ^ 'riProject'
     -> Route -- ^ 'riPayload'
-    -> RoutesInsert'
-routesInsert' pRiProject_ pRiPayload_ =
-    RoutesInsert'
+    -> RoutesInsert
+routesInsert pRiProject_ pRiPayload_ =
+    RoutesInsert
     { _riProject = pRiProject_
     , _riPayload = pRiPayload_
     }
 
 -- | Name of the project scoping this request.
-riProject :: Lens' RoutesInsert' Text
+riProject :: Lens' RoutesInsert Text
 riProject
   = lens _riProject (\ s a -> s{_riProject = a})
 
 -- | Multipart request metadata.
-riPayload :: Lens' RoutesInsert' Route
+riPayload :: Lens' RoutesInsert Route
 riPayload
   = lens _riPayload (\ s a -> s{_riPayload = a})
 
-instance GoogleRequest RoutesInsert' where
-        type Rs RoutesInsert' = Operation
-        requestClient RoutesInsert'{..}
+instance GoogleRequest RoutesInsert where
+        type Rs RoutesInsert = Operation
+        requestClient RoutesInsert{..}
           = go _riProject (Just AltJSON) _riPayload
               computeService
           where go

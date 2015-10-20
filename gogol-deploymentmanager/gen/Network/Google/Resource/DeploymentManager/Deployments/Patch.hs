@@ -30,8 +30,8 @@ module Network.Google.Resource.DeploymentManager.Deployments.Patch
       DeploymentsPatchResource
 
     -- * Creating a Request
-    , deploymentsPatch'
-    , DeploymentsPatch'
+    , deploymentsPatch
+    , DeploymentsPatch
 
     -- * Request Lenses
     , dpCreatePolicy
@@ -46,7 +46,7 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @deploymentmanager.deployments.patch@ method which the
--- 'DeploymentsPatch'' request conforms to.
+-- 'DeploymentsPatch' request conforms to.
 type DeploymentsPatchResource =
      Capture "project" Text :>
        "global" :>
@@ -65,8 +65,8 @@ type DeploymentsPatchResource =
 -- | Updates a deployment and all of the resources described by the
 -- deployment manifest. This method supports patch semantics.
 --
--- /See:/ 'deploymentsPatch'' smart constructor.
-data DeploymentsPatch' = DeploymentsPatch'
+-- /See:/ 'deploymentsPatch' smart constructor.
+data DeploymentsPatch = DeploymentsPatch
     { _dpCreatePolicy :: !DeploymentsPatchCreatePolicy
     , _dpProject      :: !Text
     , _dpPayload      :: !Deployment
@@ -75,7 +75,7 @@ data DeploymentsPatch' = DeploymentsPatch'
     , _dpDeployment   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DeploymentsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'DeploymentsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -90,13 +90,13 @@ data DeploymentsPatch' = DeploymentsPatch'
 -- * 'dpPreview'
 --
 -- * 'dpDeployment'
-deploymentsPatch'
+deploymentsPatch
     :: Text -- ^ 'dpProject'
     -> Deployment -- ^ 'dpPayload'
     -> Text -- ^ 'dpDeployment'
-    -> DeploymentsPatch'
-deploymentsPatch' pDpProject_ pDpPayload_ pDpDeployment_ =
-    DeploymentsPatch'
+    -> DeploymentsPatch
+deploymentsPatch pDpProject_ pDpPayload_ pDpDeployment_ =
+    DeploymentsPatch
     { _dpCreatePolicy = DPCPCreateOrAcquire
     , _dpProject = pDpProject_
     , _dpPayload = pDpPayload_
@@ -106,23 +106,23 @@ deploymentsPatch' pDpProject_ pDpPayload_ pDpDeployment_ =
     }
 
 -- | Sets the policy to use for creating new resources.
-dpCreatePolicy :: Lens' DeploymentsPatch' DeploymentsPatchCreatePolicy
+dpCreatePolicy :: Lens' DeploymentsPatch DeploymentsPatchCreatePolicy
 dpCreatePolicy
   = lens _dpCreatePolicy
       (\ s a -> s{_dpCreatePolicy = a})
 
 -- | The project ID for this request.
-dpProject :: Lens' DeploymentsPatch' Text
+dpProject :: Lens' DeploymentsPatch Text
 dpProject
   = lens _dpProject (\ s a -> s{_dpProject = a})
 
 -- | Multipart request metadata.
-dpPayload :: Lens' DeploymentsPatch' Deployment
+dpPayload :: Lens' DeploymentsPatch Deployment
 dpPayload
   = lens _dpPayload (\ s a -> s{_dpPayload = a})
 
 -- | Sets the policy to use for deleting resources.
-dpDeletePolicy :: Lens' DeploymentsPatch' DeploymentsPatchDeletePolicy
+dpDeletePolicy :: Lens' DeploymentsPatch DeploymentsPatchDeletePolicy
 dpDeletePolicy
   = lens _dpDeletePolicy
       (\ s a -> s{_dpDeletePolicy = a})
@@ -137,18 +137,18 @@ dpDeletePolicy
 -- cancelPreview() to remove the preview altogether. Note that the
 -- deployment will still exist after you cancel the preview and you must
 -- separately delete this deployment if you want to remove it.
-dpPreview :: Lens' DeploymentsPatch' Bool
+dpPreview :: Lens' DeploymentsPatch Bool
 dpPreview
   = lens _dpPreview (\ s a -> s{_dpPreview = a})
 
 -- | The name of the deployment for this request.
-dpDeployment :: Lens' DeploymentsPatch' Text
+dpDeployment :: Lens' DeploymentsPatch Text
 dpDeployment
   = lens _dpDeployment (\ s a -> s{_dpDeployment = a})
 
-instance GoogleRequest DeploymentsPatch' where
-        type Rs DeploymentsPatch' = Operation
-        requestClient DeploymentsPatch'{..}
+instance GoogleRequest DeploymentsPatch where
+        type Rs DeploymentsPatch = Operation
+        requestClient DeploymentsPatch{..}
           = go _dpProject _dpDeployment (Just _dpCreatePolicy)
               (Just _dpDeletePolicy)
               (Just _dpPreview)

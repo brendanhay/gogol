@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudTrace.Projects.Traces.List
       ProjectsTracesListResource
 
     -- * Creating a Request
-    , projectsTracesList'
-    , ProjectsTracesList'
+    , projectsTracesList
+    , ProjectsTracesList
 
     -- * Request Lenses
     , ptlXgafv
@@ -54,7 +54,7 @@ import           Network.Google.CloudTrace.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @cloudtrace.projects.traces.list@ method which the
--- 'ProjectsTracesList'' request conforms to.
+-- 'ProjectsTracesList' request conforms to.
 type ProjectsTracesListResource =
      "v1" :>
        "projects" :>
@@ -79,8 +79,8 @@ type ProjectsTracesListResource =
 
 -- | List traces matching the filter expression.
 --
--- /See:/ 'projectsTracesList'' smart constructor.
-data ProjectsTracesList' = ProjectsTracesList'
+-- /See:/ 'projectsTracesList' smart constructor.
+data ProjectsTracesList = ProjectsTracesList
     { _ptlXgafv          :: !(Maybe Text)
     , _ptlUploadProtocol :: !(Maybe Text)
     , _ptlOrderBy        :: !(Maybe Text)
@@ -98,7 +98,7 @@ data ProjectsTracesList' = ProjectsTracesList'
     , _ptlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsTracesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsTracesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -131,11 +131,11 @@ data ProjectsTracesList' = ProjectsTracesList'
 -- * 'ptlPageSize'
 --
 -- * 'ptlCallback'
-projectsTracesList'
+projectsTracesList
     :: Text -- ^ 'ptlProjectId'
-    -> ProjectsTracesList'
-projectsTracesList' pPtlProjectId_ =
-    ProjectsTracesList'
+    -> ProjectsTracesList
+projectsTracesList pPtlProjectId_ =
+    ProjectsTracesList
     { _ptlXgafv = Nothing
     , _ptlUploadProtocol = Nothing
     , _ptlOrderBy = Nothing
@@ -154,11 +154,11 @@ projectsTracesList' pPtlProjectId_ =
     }
 
 -- | V1 error format.
-ptlXgafv :: Lens' ProjectsTracesList' (Maybe Text)
+ptlXgafv :: Lens' ProjectsTracesList (Maybe Text)
 ptlXgafv = lens _ptlXgafv (\ s a -> s{_ptlXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ptlUploadProtocol :: Lens' ProjectsTracesList' (Maybe Text)
+ptlUploadProtocol :: Lens' ProjectsTracesList (Maybe Text)
 ptlUploadProtocol
   = lens _ptlUploadProtocol
       (\ s a -> s{_ptlUploadProtocol = a})
@@ -169,78 +169,78 @@ ptlUploadProtocol
 -- root span) start (start_time field of root span) Descending order can be
 -- specified by appending \"desc\" to the sort field: name desc Only one
 -- sort field is permitted, though this may change in the future.
-ptlOrderBy :: Lens' ProjectsTracesList' (Maybe Text)
+ptlOrderBy :: Lens' ProjectsTracesList (Maybe Text)
 ptlOrderBy
   = lens _ptlOrderBy (\ s a -> s{_ptlOrderBy = a})
 
 -- | End of the time interval (inclusive).
-ptlStartTime :: Lens' ProjectsTracesList' (Maybe Text)
+ptlStartTime :: Lens' ProjectsTracesList (Maybe Text)
 ptlStartTime
   = lens _ptlStartTime (\ s a -> s{_ptlStartTime = a})
 
 -- | Pretty-print response.
-ptlPp :: Lens' ProjectsTracesList' Bool
+ptlPp :: Lens' ProjectsTracesList Bool
 ptlPp = lens _ptlPp (\ s a -> s{_ptlPp = a})
 
 -- | OAuth access token.
-ptlAccessToken :: Lens' ProjectsTracesList' (Maybe Text)
+ptlAccessToken :: Lens' ProjectsTracesList (Maybe Text)
 ptlAccessToken
   = lens _ptlAccessToken
       (\ s a -> s{_ptlAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ptlUploadType :: Lens' ProjectsTracesList' (Maybe Text)
+ptlUploadType :: Lens' ProjectsTracesList (Maybe Text)
 ptlUploadType
   = lens _ptlUploadType
       (\ s a -> s{_ptlUploadType = a})
 
 -- | OAuth bearer token.
-ptlBearerToken :: Lens' ProjectsTracesList' (Maybe Text)
+ptlBearerToken :: Lens' ProjectsTracesList (Maybe Text)
 ptlBearerToken
   = lens _ptlBearerToken
       (\ s a -> s{_ptlBearerToken = a})
 
 -- | Start of the time interval (exclusive).
-ptlEndTime :: Lens' ProjectsTracesList' (Maybe Text)
+ptlEndTime :: Lens' ProjectsTracesList (Maybe Text)
 ptlEndTime
   = lens _ptlEndTime (\ s a -> s{_ptlEndTime = a})
 
 -- | ViewType specifies the projection of the result.
-ptlView :: Lens' ProjectsTracesList' (Maybe Text)
+ptlView :: Lens' ProjectsTracesList (Maybe Text)
 ptlView = lens _ptlView (\ s a -> s{_ptlView = a})
 
 -- | An optional filter for the request.
-ptlFilter :: Lens' ProjectsTracesList' (Maybe Text)
+ptlFilter :: Lens' ProjectsTracesList (Maybe Text)
 ptlFilter
   = lens _ptlFilter (\ s a -> s{_ptlFilter = a})
 
 -- | The token identifying the page of results to return from the ListTraces
 -- method. If present, this value is should be taken from the
 -- next_page_token field of a previous ListTracesResponse.
-ptlPageToken :: Lens' ProjectsTracesList' (Maybe Text)
+ptlPageToken :: Lens' ProjectsTracesList (Maybe Text)
 ptlPageToken
   = lens _ptlPageToken (\ s a -> s{_ptlPageToken = a})
 
 -- | The stringified-version of the project id.
-ptlProjectId :: Lens' ProjectsTracesList' Text
+ptlProjectId :: Lens' ProjectsTracesList Text
 ptlProjectId
   = lens _ptlProjectId (\ s a -> s{_ptlProjectId = a})
 
 -- | Maximum number of topics to return. If not specified or \<= 0, the
 -- implementation will select a reasonable value. The implemenation may
 -- always return fewer than the requested page_size.
-ptlPageSize :: Lens' ProjectsTracesList' (Maybe Int32)
+ptlPageSize :: Lens' ProjectsTracesList (Maybe Int32)
 ptlPageSize
   = lens _ptlPageSize (\ s a -> s{_ptlPageSize = a})
 
 -- | JSONP
-ptlCallback :: Lens' ProjectsTracesList' (Maybe Text)
+ptlCallback :: Lens' ProjectsTracesList (Maybe Text)
 ptlCallback
   = lens _ptlCallback (\ s a -> s{_ptlCallback = a})
 
-instance GoogleRequest ProjectsTracesList' where
-        type Rs ProjectsTracesList' = ListTracesResponse
-        requestClient ProjectsTracesList'{..}
+instance GoogleRequest ProjectsTracesList where
+        type Rs ProjectsTracesList = ListTracesResponse
+        requestClient ProjectsTracesList{..}
           = go _ptlProjectId _ptlXgafv _ptlUploadProtocol
               _ptlOrderBy
               _ptlStartTime

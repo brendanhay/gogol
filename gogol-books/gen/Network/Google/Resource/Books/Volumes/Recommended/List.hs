@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Volumes.Recommended.List
       VolumesRecommendedListResource
 
     -- * Creating a Request
-    , volumesRecommendedList'
-    , VolumesRecommendedList'
+    , volumesRecommendedList
+    , VolumesRecommendedList
 
     -- * Request Lenses
     , vrlLocale
@@ -42,7 +42,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.volumes.recommended.list@ method which the
--- 'VolumesRecommendedList'' request conforms to.
+-- 'VolumesRecommendedList' request conforms to.
 type VolumesRecommendedListResource =
      "volumes" :>
        "recommended" :>
@@ -55,14 +55,14 @@ type VolumesRecommendedListResource =
 
 -- | Return a list of recommended books for the current user.
 --
--- /See:/ 'volumesRecommendedList'' smart constructor.
-data VolumesRecommendedList' = VolumesRecommendedList'
+-- /See:/ 'volumesRecommendedList' smart constructor.
+data VolumesRecommendedList = VolumesRecommendedList
     { _vrlLocale                   :: !(Maybe Text)
     , _vrlMaxAllowedMaturityRating :: !(Maybe VolumesRecommendedListMaxAllowedMaturityRating)
     , _vrlSource                   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumesRecommendedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'VolumesRecommendedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,10 +71,10 @@ data VolumesRecommendedList' = VolumesRecommendedList'
 -- * 'vrlMaxAllowedMaturityRating'
 --
 -- * 'vrlSource'
-volumesRecommendedList'
-    :: VolumesRecommendedList'
-volumesRecommendedList' =
-    VolumesRecommendedList'
+volumesRecommendedList
+    :: VolumesRecommendedList
+volumesRecommendedList =
+    VolumesRecommendedList
     { _vrlLocale = Nothing
     , _vrlMaxAllowedMaturityRating = Nothing
     , _vrlSource = Nothing
@@ -82,25 +82,25 @@ volumesRecommendedList' =
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Ex: \'en_US\'. Used for
 -- generating recommendations.
-vrlLocale :: Lens' VolumesRecommendedList' (Maybe Text)
+vrlLocale :: Lens' VolumesRecommendedList (Maybe Text)
 vrlLocale
   = lens _vrlLocale (\ s a -> s{_vrlLocale = a})
 
 -- | The maximum allowed maturity rating of returned recommendations. Books
 -- with a higher maturity rating are filtered out.
-vrlMaxAllowedMaturityRating :: Lens' VolumesRecommendedList' (Maybe VolumesRecommendedListMaxAllowedMaturityRating)
+vrlMaxAllowedMaturityRating :: Lens' VolumesRecommendedList (Maybe VolumesRecommendedListMaxAllowedMaturityRating)
 vrlMaxAllowedMaturityRating
   = lens _vrlMaxAllowedMaturityRating
       (\ s a -> s{_vrlMaxAllowedMaturityRating = a})
 
 -- | String to identify the originator of this request.
-vrlSource :: Lens' VolumesRecommendedList' (Maybe Text)
+vrlSource :: Lens' VolumesRecommendedList (Maybe Text)
 vrlSource
   = lens _vrlSource (\ s a -> s{_vrlSource = a})
 
-instance GoogleRequest VolumesRecommendedList' where
-        type Rs VolumesRecommendedList' = Volumes
-        requestClient VolumesRecommendedList'{..}
+instance GoogleRequest VolumesRecommendedList where
+        type Rs VolumesRecommendedList = Volumes
+        requestClient VolumesRecommendedList{..}
           = go _vrlLocale _vrlMaxAllowedMaturityRating
               _vrlSource
               (Just AltJSON)

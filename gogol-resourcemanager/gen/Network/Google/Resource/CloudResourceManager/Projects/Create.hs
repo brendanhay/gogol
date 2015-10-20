@@ -32,8 +32,8 @@ module Network.Google.Resource.CloudResourceManager.Projects.Create
       ProjectsCreateResource
 
     -- * Creating a Request
-    , projectsCreate'
-    , ProjectsCreate'
+    , projectsCreate
+    , ProjectsCreate
 
     -- * Request Lenses
     , pcXgafv
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.projects.create@ method which the
--- 'ProjectsCreate'' request conforms to.
+-- 'ProjectsCreate' request conforms to.
 type ProjectsCreateResource =
      "v1beta1" :>
        "projects" :>
@@ -69,8 +69,8 @@ type ProjectsCreateResource =
 -- others to read or update the project. Several APIs are activated
 -- automatically for the project, including Google Cloud Storage.
 --
--- /See:/ 'projectsCreate'' smart constructor.
-data ProjectsCreate' = ProjectsCreate'
+-- /See:/ 'projectsCreate' smart constructor.
+data ProjectsCreate = ProjectsCreate
     { _pcXgafv          :: !(Maybe Text)
     , _pcUploadProtocol :: !(Maybe Text)
     , _pcPp             :: !Bool
@@ -81,7 +81,7 @@ data ProjectsCreate' = ProjectsCreate'
     , _pcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -100,11 +100,11 @@ data ProjectsCreate' = ProjectsCreate'
 -- * 'pcBearerToken'
 --
 -- * 'pcCallback'
-projectsCreate'
+projectsCreate
     :: Project -- ^ 'pcPayload'
-    -> ProjectsCreate'
-projectsCreate' pPcPayload_ =
-    ProjectsCreate'
+    -> ProjectsCreate
+projectsCreate pPcPayload_ =
+    ProjectsCreate
     { _pcXgafv = Nothing
     , _pcUploadProtocol = Nothing
     , _pcPp = True
@@ -116,49 +116,49 @@ projectsCreate' pPcPayload_ =
     }
 
 -- | V1 error format.
-pcXgafv :: Lens' ProjectsCreate' (Maybe Text)
+pcXgafv :: Lens' ProjectsCreate (Maybe Text)
 pcXgafv = lens _pcXgafv (\ s a -> s{_pcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pcUploadProtocol :: Lens' ProjectsCreate' (Maybe Text)
+pcUploadProtocol :: Lens' ProjectsCreate (Maybe Text)
 pcUploadProtocol
   = lens _pcUploadProtocol
       (\ s a -> s{_pcUploadProtocol = a})
 
 -- | Pretty-print response.
-pcPp :: Lens' ProjectsCreate' Bool
+pcPp :: Lens' ProjectsCreate Bool
 pcPp = lens _pcPp (\ s a -> s{_pcPp = a})
 
 -- | OAuth access token.
-pcAccessToken :: Lens' ProjectsCreate' (Maybe Text)
+pcAccessToken :: Lens' ProjectsCreate (Maybe Text)
 pcAccessToken
   = lens _pcAccessToken
       (\ s a -> s{_pcAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pcUploadType :: Lens' ProjectsCreate' (Maybe Text)
+pcUploadType :: Lens' ProjectsCreate (Maybe Text)
 pcUploadType
   = lens _pcUploadType (\ s a -> s{_pcUploadType = a})
 
 -- | Multipart request metadata.
-pcPayload :: Lens' ProjectsCreate' Project
+pcPayload :: Lens' ProjectsCreate Project
 pcPayload
   = lens _pcPayload (\ s a -> s{_pcPayload = a})
 
 -- | OAuth bearer token.
-pcBearerToken :: Lens' ProjectsCreate' (Maybe Text)
+pcBearerToken :: Lens' ProjectsCreate (Maybe Text)
 pcBearerToken
   = lens _pcBearerToken
       (\ s a -> s{_pcBearerToken = a})
 
 -- | JSONP
-pcCallback :: Lens' ProjectsCreate' (Maybe Text)
+pcCallback :: Lens' ProjectsCreate (Maybe Text)
 pcCallback
   = lens _pcCallback (\ s a -> s{_pcCallback = a})
 
-instance GoogleRequest ProjectsCreate' where
-        type Rs ProjectsCreate' = Project
-        requestClient ProjectsCreate'{..}
+instance GoogleRequest ProjectsCreate where
+        type Rs ProjectsCreate = Project
+        requestClient ProjectsCreate{..}
           = go _pcXgafv _pcUploadProtocol (Just _pcPp)
               _pcAccessToken
               _pcUploadType

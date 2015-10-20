@@ -29,8 +29,8 @@ module Network.Google.Resource.Fitness.Users.DataSources.Get
       UsersDataSourcesGetResource
 
     -- * Creating a Request
-    , usersDataSourcesGet'
-    , UsersDataSourcesGet'
+    , usersDataSourcesGet
+    , UsersDataSourcesGet
 
     -- * Request Lenses
     , udsgDataSourceId
@@ -41,7 +41,7 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fitness.users.dataSources.get@ method which the
--- 'UsersDataSourcesGet'' request conforms to.
+-- 'UsersDataSourcesGet' request conforms to.
 type UsersDataSourcesGetResource =
      Capture "userId" Text :>
        "dataSources" :>
@@ -50,44 +50,44 @@ type UsersDataSourcesGetResource =
 
 -- | Returns a data source identified by a data stream ID.
 --
--- /See:/ 'usersDataSourcesGet'' smart constructor.
-data UsersDataSourcesGet' = UsersDataSourcesGet'
+-- /See:/ 'usersDataSourcesGet' smart constructor.
+data UsersDataSourcesGet = UsersDataSourcesGet
     { _udsgDataSourceId :: !Text
     , _udsgUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersDataSourcesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersDataSourcesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'udsgDataSourceId'
 --
 -- * 'udsgUserId'
-usersDataSourcesGet'
+usersDataSourcesGet
     :: Text -- ^ 'udsgDataSourceId'
     -> Text -- ^ 'udsgUserId'
-    -> UsersDataSourcesGet'
-usersDataSourcesGet' pUdsgDataSourceId_ pUdsgUserId_ =
-    UsersDataSourcesGet'
+    -> UsersDataSourcesGet
+usersDataSourcesGet pUdsgDataSourceId_ pUdsgUserId_ =
+    UsersDataSourcesGet
     { _udsgDataSourceId = pUdsgDataSourceId_
     , _udsgUserId = pUdsgUserId_
     }
 
 -- | The data stream ID of the data source to retrieve.
-udsgDataSourceId :: Lens' UsersDataSourcesGet' Text
+udsgDataSourceId :: Lens' UsersDataSourcesGet Text
 udsgDataSourceId
   = lens _udsgDataSourceId
       (\ s a -> s{_udsgDataSourceId = a})
 
 -- | Retrieve a data source for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
-udsgUserId :: Lens' UsersDataSourcesGet' Text
+udsgUserId :: Lens' UsersDataSourcesGet Text
 udsgUserId
   = lens _udsgUserId (\ s a -> s{_udsgUserId = a})
 
-instance GoogleRequest UsersDataSourcesGet' where
-        type Rs UsersDataSourcesGet' = DataSource
-        requestClient UsersDataSourcesGet'{..}
+instance GoogleRequest UsersDataSourcesGet where
+        type Rs UsersDataSourcesGet = DataSource
+        requestClient UsersDataSourcesGet{..}
           = go _udsgUserId _udsgDataSourceId (Just AltJSON)
               fitnessService
           where go

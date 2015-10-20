@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.Events.List
       EventsListResource
 
     -- * Creating a Request
-    , eventsList'
-    , EventsList'
+    , eventsList
+    , EventsList
 
     -- * Request Lenses
     , elSyncToken
@@ -57,7 +57,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.list@ method which the
--- 'EventsList'' request conforms to.
+-- 'EventsList' request conforms to.
 type EventsListResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -84,8 +84,8 @@ type EventsListResource =
 
 -- | Returns events on the specified calendar.
 --
--- /See:/ 'eventsList'' smart constructor.
-data EventsList' = EventsList'
+-- /See:/ 'eventsList' smart constructor.
+data EventsList = EventsList
     { _elSyncToken               :: !(Maybe Text)
     , _elCalendarId              :: !Text
     , _elTimeMin                 :: !(Maybe DateTime')
@@ -106,7 +106,7 @@ data EventsList' = EventsList'
     , _elTimeMax                 :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -145,11 +145,11 @@ data EventsList' = EventsList'
 -- * 'elAlwaysIncludeEmail'
 --
 -- * 'elTimeMax'
-eventsList'
+eventsList
     :: Text -- ^ 'elCalendarId'
-    -> EventsList'
-eventsList' pElCalendarId_ =
-    EventsList'
+    -> EventsList
+eventsList pElCalendarId_ =
+    EventsList
     { _elSyncToken = Nothing
     , _elCalendarId = pElCalendarId_
     , _elTimeMin = Nothing
@@ -183,14 +183,14 @@ eventsList' pElCalendarId_ =
 -- perform a full synchronization without any syncToken. Learn more about
 -- incremental synchronization. Optional. The default is to return all
 -- entries.
-elSyncToken :: Lens' EventsList' (Maybe Text)
+elSyncToken :: Lens' EventsList (Maybe Text)
 elSyncToken
   = lens _elSyncToken (\ s a -> s{_elSyncToken = a})
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-elCalendarId :: Lens' EventsList' Text
+elCalendarId :: Lens' EventsList Text
 elCalendarId
   = lens _elCalendarId (\ s a -> s{_elCalendarId = a})
 
@@ -198,21 +198,21 @@ elCalendarId
 -- The default is not to filter by end time. Must be an RFC3339 timestamp
 -- with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00,
 -- 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.
-elTimeMin :: Lens' EventsList' (Maybe UTCTime)
+elTimeMin :: Lens' EventsList (Maybe UTCTime)
 elTimeMin
   = lens _elTimeMin (\ s a -> s{_elTimeMin = a}) .
       mapping _DateTime
 
 -- | The order of the events returned in the result. Optional. The default is
 -- an unspecified, stable order.
-elOrderBy :: Lens' EventsList' (Maybe EventsListOrderBy)
+elOrderBy :: Lens' EventsList (Maybe EventsListOrderBy)
 elOrderBy
   = lens _elOrderBy (\ s a -> s{_elOrderBy = a})
 
 -- | Whether to expand recurring events into instances and only return single
 -- one-off events and instances of recurring events, but not the underlying
 -- recurring events themselves. Optional. The default is False.
-elSingleEvents :: Lens' EventsList' (Maybe Bool)
+elSingleEvents :: Lens' EventsList (Maybe Bool)
 elSingleEvents
   = lens _elSingleEvents
       (\ s a -> s{_elSingleEvents = a})
@@ -220,7 +220,7 @@ elSingleEvents
 -- | Extended properties constraint specified as propertyName=value. Matches
 -- only private properties. This parameter might be repeated multiple times
 -- to return events that match all given constraints.
-elPrivateExtendedProperty :: Lens' EventsList' [Text]
+elPrivateExtendedProperty :: Lens' EventsList [Text]
 elPrivateExtendedProperty
   = lens _elPrivateExtendedProperty
       (\ s a -> s{_elPrivateExtendedProperty = a})
@@ -233,20 +233,20 @@ elPrivateExtendedProperty
 -- singleEvents are both False. If showDeleted and singleEvents are both
 -- True, only single instances of deleted events (but not the underlying
 -- recurring events) are returned. Optional. The default is False.
-elShowDeleted :: Lens' EventsList' (Maybe Bool)
+elShowDeleted :: Lens' EventsList (Maybe Bool)
 elShowDeleted
   = lens _elShowDeleted
       (\ s a -> s{_elShowDeleted = a})
 
 -- | Free text search terms to find events that match these terms in any
 -- field, except for extended properties. Optional.
-elQ :: Lens' EventsList' (Maybe Text)
+elQ :: Lens' EventsList (Maybe Text)
 elQ = lens _elQ (\ s a -> s{_elQ = a})
 
 -- | Extended properties constraint specified as propertyName=value. Matches
 -- only shared properties. This parameter might be repeated multiple times
 -- to return events that match all given constraints.
-elSharedExtendedProperty :: Lens' EventsList' [Text]
+elSharedExtendedProperty :: Lens' EventsList [Text]
 elSharedExtendedProperty
   = lens _elSharedExtendedProperty
       (\ s a -> s{_elSharedExtendedProperty = a})
@@ -256,14 +256,14 @@ elSharedExtendedProperty
 -- | The maximum number of attendees to include in the response. If there are
 -- more than the specified number of attendees, only the participant is
 -- returned. Optional.
-elMaxAttendees :: Lens' EventsList' (Maybe Int32)
+elMaxAttendees :: Lens' EventsList (Maybe Int32)
 elMaxAttendees
   = lens _elMaxAttendees
       (\ s a -> s{_elMaxAttendees = a})
 
 -- | Specifies event ID in the iCalendar format to be included in the
 -- response. Optional.
-elICalUId :: Lens' EventsList' (Maybe Text)
+elICalUId :: Lens' EventsList (Maybe Text)
 elICalUId
   = lens _elICalUId (\ s a -> s{_elICalUId = a})
 
@@ -271,25 +271,25 @@ elICalUId
 -- timestamp) to filter by. When specified, entries deleted since this time
 -- will always be included regardless of showDeleted. Optional. The default
 -- is not to filter by last modification time.
-elUpdatedMin :: Lens' EventsList' (Maybe UTCTime)
+elUpdatedMin :: Lens' EventsList (Maybe UTCTime)
 elUpdatedMin
   = lens _elUpdatedMin (\ s a -> s{_elUpdatedMin = a})
       . mapping _DateTime
 
 -- | Token specifying which result page to return. Optional.
-elPageToken :: Lens' EventsList' (Maybe Text)
+elPageToken :: Lens' EventsList (Maybe Text)
 elPageToken
   = lens _elPageToken (\ s a -> s{_elPageToken = a})
 
 -- | Time zone used in the response. Optional. The default is the time zone
 -- of the calendar.
-elTimeZone :: Lens' EventsList' (Maybe Text)
+elTimeZone :: Lens' EventsList (Maybe Text)
 elTimeZone
   = lens _elTimeZone (\ s a -> s{_elTimeZone = a})
 
 -- | Whether to include hidden invitations in the result. Optional. The
 -- default is False.
-elShowHiddenInvitations :: Lens' EventsList' (Maybe Bool)
+elShowHiddenInvitations :: Lens' EventsList (Maybe Bool)
 elShowHiddenInvitations
   = lens _elShowHiddenInvitations
       (\ s a -> s{_elShowHiddenInvitations = a})
@@ -297,7 +297,7 @@ elShowHiddenInvitations
 -- | Maximum number of events returned on one result page. By default the
 -- value is 250 events. The page size can never be larger than 2500 events.
 -- Optional.
-elMaxResults :: Lens' EventsList' (Maybe Int32)
+elMaxResults :: Lens' EventsList (Maybe Int32)
 elMaxResults
   = lens _elMaxResults (\ s a -> s{_elMaxResults = a})
 
@@ -307,7 +307,7 @@ elMaxResults
 -- is discouraged and should only be used by clients which cannot handle
 -- the absence of an email address value in the mentioned places. Optional.
 -- The default is False.
-elAlwaysIncludeEmail :: Lens' EventsList' (Maybe Bool)
+elAlwaysIncludeEmail :: Lens' EventsList (Maybe Bool)
 elAlwaysIncludeEmail
   = lens _elAlwaysIncludeEmail
       (\ s a -> s{_elAlwaysIncludeEmail = a})
@@ -317,14 +317,14 @@ elAlwaysIncludeEmail
 -- timestamp with mandatory time zone offset, e.g.,
 -- 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be
 -- provided but will be ignored.
-elTimeMax :: Lens' EventsList' (Maybe UTCTime)
+elTimeMax :: Lens' EventsList (Maybe UTCTime)
 elTimeMax
   = lens _elTimeMax (\ s a -> s{_elTimeMax = a}) .
       mapping _DateTime
 
-instance GoogleRequest EventsList' where
-        type Rs EventsList' = Events
-        requestClient EventsList'{..}
+instance GoogleRequest EventsList where
+        type Rs EventsList = Events
+        requestClient EventsList{..}
           = go _elCalendarId _elSyncToken _elTimeMin _elOrderBy
               _elSingleEvents
               (_elPrivateExtendedProperty ^. _Default)

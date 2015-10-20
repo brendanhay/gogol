@@ -498,11 +498,11 @@ module Network.Google.ShoppingContent
     -- ** AccountsCustomBatchRequestEntry
     , AccountsCustomBatchRequestEntry
     , accountsCustomBatchRequestEntry
-    , acbrecMerchantId
-    , acbrecAccount
-    , acbrecAccountId
-    , acbrecMethod
-    , acbrecBatchId
+    , accMerchantId
+    , accAccount
+    , accAccountId
+    , accMethod
+    , accBatchId
 
     -- ** Weight
     , Weight
@@ -698,10 +698,10 @@ module Network.Google.ShoppingContent
     -- ** AccountstatusesCustomBatchRequestEntry
     , AccountstatusesCustomBatchRequestEntry
     , accountstatusesCustomBatchRequestEntry
-    , aaMerchantId
-    , aaAccountId
-    , aaMethod
-    , aaBatchId
+    , acbrecMerchantId
+    , acbrecAccountId
+    , acbrecMethod
+    , acbrecBatchId
 
     -- ** ProductstatusesCustomBatchResponseEntry
     , ProductstatusesCustomBatchResponseEntry
@@ -738,11 +738,11 @@ module Network.Google.ShoppingContent
     -- ** AccountshippingCustomBatchRequestEntry
     , AccountshippingCustomBatchRequestEntry
     , accountshippingCustomBatchRequestEntry
-    , acccMerchantId
-    , acccAccountId
-    , acccMethod
-    , acccAccountShipping
-    , acccBatchId
+    , aaMerchantId
+    , aaAccountId
+    , aaMethod
+    , aaAccountShipping
+    , aaBatchId
 
     -- ** AccountsCustomBatchRequest
     , AccountsCustomBatchRequest
@@ -864,10 +864,10 @@ module Network.Google.ShoppingContent
     -- ** DatafeedstatusesCustomBatchRequestEntry
     , DatafeedstatusesCustomBatchRequestEntry
     , datafeedstatusesCustomBatchRequestEntry
-    , datMerchantId
-    , datMethod
-    , datDatafeedId
-    , datBatchId
+    , dMerchantId
+    , dMethod
+    , dDatafeedId
+    , dBatchId
 
     -- ** OrderCustomer
     , OrderCustomer
@@ -986,9 +986,9 @@ module Network.Google.ShoppingContent
     -- ** DatafeedstatusesCustomBatchResponseEntry
     , DatafeedstatusesCustomBatchResponseEntry
     , datafeedstatusesCustomBatchResponseEntry
-    , dErrors
-    , dDatafeedStatus
-    , dBatchId
+    , datErrors
+    , datDatafeedStatus
+    , datBatchId
 
     -- ** OrderRefund
     , OrderRefund
@@ -1169,9 +1169,9 @@ module Network.Google.ShoppingContent
     -- ** AccountstatusesCustomBatchResponseEntry
     , AccountstatusesCustomBatchResponseEntry
     , accountstatusesCustomBatchResponseEntry
-    , accAccountStatus
-    , accErrors
-    , accBatchId
+    , acccAccountStatus
+    , acccErrors
+    , acccBatchId
 
     -- ** InventorySetResponse
     , InventorySetResponse

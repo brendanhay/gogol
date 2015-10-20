@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.VPNTunnels.List
       VPNTunnelsListResource
 
     -- * Creating a Request
-    , vpnTunnelsList'
-    , VPNTunnelsList'
+    , vpnTunnelsList
+    , VPNTunnelsList
 
     -- * Request Lenses
     , vtlProject
@@ -45,7 +45,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.vpnTunnels.list@ method which the
--- 'VPNTunnelsList'' request conforms to.
+-- 'VPNTunnelsList' request conforms to.
 type VPNTunnelsListResource =
      Capture "project" Text :>
        "regions" :>
@@ -59,8 +59,8 @@ type VPNTunnelsListResource =
 -- | Retrieves the list of VpnTunnel resources contained in the specified
 -- project and region.
 --
--- /See:/ 'vpnTunnelsList'' smart constructor.
-data VPNTunnelsList' = VPNTunnelsList'
+-- /See:/ 'vpnTunnelsList' smart constructor.
+data VPNTunnelsList = VPNTunnelsList
     { _vtlProject    :: !Text
     , _vtlFilter     :: !(Maybe Text)
     , _vtlRegion     :: !Text
@@ -68,7 +68,7 @@ data VPNTunnelsList' = VPNTunnelsList'
     , _vtlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VPNTunnelsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'VPNTunnelsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,12 +81,12 @@ data VPNTunnelsList' = VPNTunnelsList'
 -- * 'vtlPageToken'
 --
 -- * 'vtlMaxResults'
-vpnTunnelsList'
+vpnTunnelsList
     :: Text -- ^ 'vtlProject'
     -> Text -- ^ 'vtlRegion'
-    -> VPNTunnelsList'
-vpnTunnelsList' pVtlProject_ pVtlRegion_ =
-    VPNTunnelsList'
+    -> VPNTunnelsList
+vpnTunnelsList pVtlProject_ pVtlRegion_ =
+    VPNTunnelsList
     { _vtlProject = pVtlProject_
     , _vtlFilter = Nothing
     , _vtlRegion = pVtlRegion_
@@ -95,7 +95,7 @@ vpnTunnelsList' pVtlProject_ pVtlRegion_ =
     }
 
 -- | Project ID for this request.
-vtlProject :: Lens' VPNTunnelsList' Text
+vtlProject :: Lens' VPNTunnelsList Text
 vtlProject
   = lens _vtlProject (\ s a -> s{_vtlProject = a})
 
@@ -110,31 +110,31 @@ vtlProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-vtlFilter :: Lens' VPNTunnelsList' (Maybe Text)
+vtlFilter :: Lens' VPNTunnelsList (Maybe Text)
 vtlFilter
   = lens _vtlFilter (\ s a -> s{_vtlFilter = a})
 
 -- | The name of the region for this request.
-vtlRegion :: Lens' VPNTunnelsList' Text
+vtlRegion :: Lens' VPNTunnelsList Text
 vtlRegion
   = lens _vtlRegion (\ s a -> s{_vtlRegion = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-vtlPageToken :: Lens' VPNTunnelsList' (Maybe Text)
+vtlPageToken :: Lens' VPNTunnelsList (Maybe Text)
 vtlPageToken
   = lens _vtlPageToken (\ s a -> s{_vtlPageToken = a})
 
 -- | Maximum count of results to be returned.
-vtlMaxResults :: Lens' VPNTunnelsList' Word32
+vtlMaxResults :: Lens' VPNTunnelsList Word32
 vtlMaxResults
   = lens _vtlMaxResults
       (\ s a -> s{_vtlMaxResults = a})
 
-instance GoogleRequest VPNTunnelsList' where
-        type Rs VPNTunnelsList' = VPNTunnelList
-        requestClient VPNTunnelsList'{..}
+instance GoogleRequest VPNTunnelsList where
+        type Rs VPNTunnelsList = VPNTunnelList
+        requestClient VPNTunnelsList{..}
           = go _vtlProject _vtlRegion _vtlFilter _vtlPageToken
               (Just _vtlMaxResults)
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.CivicInfo.Divisions.Search
       DivisionsSearchResource
 
     -- * Creating a Request
-    , divisionsSearch'
-    , DivisionsSearch'
+    , divisionsSearch
+    , DivisionsSearch
 
     -- * Request Lenses
     , dsQuery
@@ -40,7 +40,7 @@ import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @civicinfo.divisions.search@ method which the
--- 'DivisionsSearch'' request conforms to.
+-- 'DivisionsSearch' request conforms to.
 type DivisionsSearchResource =
      "divisions" :>
        QueryParam "query" Text :>
@@ -49,20 +49,20 @@ type DivisionsSearchResource =
 
 -- | Searches for political divisions by their natural name or OCD ID.
 --
--- /See:/ 'divisionsSearch'' smart constructor.
-newtype DivisionsSearch' = DivisionsSearch'
+-- /See:/ 'divisionsSearch' smart constructor.
+newtype DivisionsSearch = DivisionsSearch
     { _dsQuery :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DivisionsSearch'' with the minimum fields required to make a request.
+-- | Creates a value of 'DivisionsSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dsQuery'
-divisionsSearch'
-    :: DivisionsSearch'
-divisionsSearch' =
-    DivisionsSearch'
+divisionsSearch
+    :: DivisionsSearch
+divisionsSearch =
+    DivisionsSearch
     { _dsQuery = Nothing
     }
 
@@ -71,12 +71,12 @@ divisionsSearch' =
 -- required patterns. In addition to that, most query operators of the
 -- Apache Lucene library are supported. See
 -- http:\/\/lucene.apache.org\/core\/2_9_4\/queryparsersyntax.html
-dsQuery :: Lens' DivisionsSearch' (Maybe Text)
+dsQuery :: Lens' DivisionsSearch (Maybe Text)
 dsQuery = lens _dsQuery (\ s a -> s{_dsQuery = a})
 
-instance GoogleRequest DivisionsSearch' where
-        type Rs DivisionsSearch' = DivisionSearchResponse
-        requestClient DivisionsSearch'{..}
+instance GoogleRequest DivisionsSearch where
+        type Rs DivisionsSearch = DivisionSearchResponse
+        requestClient DivisionsSearch{..}
           = go _dsQuery (Just AltJSON) civicInfoService
           where go
                   = buildClient

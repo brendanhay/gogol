@@ -29,8 +29,8 @@ module Network.Google.Resource.ResourceViews.ZoneViews.ListResources
       ZoneViewsListResourcesResource
 
     -- * Creating a Request
-    , zoneViewsListResources'
-    , ZoneViewsListResources'
+    , zoneViewsListResources
+    , ZoneViewsListResources
 
     -- * Request Lenses
     , zvlrResourceView
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
 -- | A resource alias for @resourceviews.zoneViews.listResources@ method which the
--- 'ZoneViewsListResources'' request conforms to.
+-- 'ZoneViewsListResources' request conforms to.
 type ZoneViewsListResourcesResource =
      Capture "project" Text :>
        "zones" :>
@@ -67,8 +67,8 @@ type ZoneViewsListResourcesResource =
 
 -- | List the resources of the resource view.
 --
--- /See:/ 'zoneViewsListResources'' smart constructor.
-data ZoneViewsListResources' = ZoneViewsListResources'
+-- /See:/ 'zoneViewsListResources' smart constructor.
+data ZoneViewsListResources = ZoneViewsListResources
     { _zvlrResourceView :: !Text
     , _zvlrListState    :: !ZoneViewsListResourcesListState
     , _zvlrProject      :: !Text
@@ -79,7 +79,7 @@ data ZoneViewsListResources' = ZoneViewsListResources'
     , _zvlrMaxResults   :: !Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ZoneViewsListResources'' with the minimum fields required to make a request.
+-- | Creates a value of 'ZoneViewsListResources' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -98,13 +98,13 @@ data ZoneViewsListResources' = ZoneViewsListResources'
 -- * 'zvlrPageToken'
 --
 -- * 'zvlrMaxResults'
-zoneViewsListResources'
+zoneViewsListResources
     :: Text -- ^ 'zvlrResourceView'
     -> Text -- ^ 'zvlrProject'
     -> Text -- ^ 'zvlrZone'
-    -> ZoneViewsListResources'
-zoneViewsListResources' pZvlrResourceView_ pZvlrProject_ pZvlrZone_ =
-    ZoneViewsListResources'
+    -> ZoneViewsListResources
+zoneViewsListResources pZvlrResourceView_ pZvlrProject_ pZvlrZone_ =
+    ZoneViewsListResources
     { _zvlrResourceView = pZvlrResourceView_
     , _zvlrListState = All
     , _zvlrProject = pZvlrProject_
@@ -116,36 +116,36 @@ zoneViewsListResources' pZvlrResourceView_ pZvlrProject_ pZvlrZone_ =
     }
 
 -- | The name of the resource view.
-zvlrResourceView :: Lens' ZoneViewsListResources' Text
+zvlrResourceView :: Lens' ZoneViewsListResources Text
 zvlrResourceView
   = lens _zvlrResourceView
       (\ s a -> s{_zvlrResourceView = a})
 
 -- | The state of the instance to list. By default, it lists all instances.
-zvlrListState :: Lens' ZoneViewsListResources' ZoneViewsListResourcesListState
+zvlrListState :: Lens' ZoneViewsListResources ZoneViewsListResourcesListState
 zvlrListState
   = lens _zvlrListState
       (\ s a -> s{_zvlrListState = a})
 
 -- | The project name of the resource view.
-zvlrProject :: Lens' ZoneViewsListResources' Text
+zvlrProject :: Lens' ZoneViewsListResources Text
 zvlrProject
   = lens _zvlrProject (\ s a -> s{_zvlrProject = a})
 
 -- | The requested format of the return value. It can be URL or URL_PORT. A
 -- JSON object will be included in the response based on the format. The
 -- default format is NONE, which results in no JSON in the response.
-zvlrFormat :: Lens' ZoneViewsListResources' (Maybe ZoneViewsListResourcesFormat)
+zvlrFormat :: Lens' ZoneViewsListResources (Maybe ZoneViewsListResourcesFormat)
 zvlrFormat
   = lens _zvlrFormat (\ s a -> s{_zvlrFormat = a})
 
 -- | The zone name of the resource view.
-zvlrZone :: Lens' ZoneViewsListResources' Text
+zvlrZone :: Lens' ZoneViewsListResources Text
 zvlrZone = lens _zvlrZone (\ s a -> s{_zvlrZone = a})
 
 -- | The service name to return in the response. It is optional and if it is
 -- not set, all the service end points will be returned.
-zvlrServiceName :: Lens' ZoneViewsListResources' (Maybe Text)
+zvlrServiceName :: Lens' ZoneViewsListResources (Maybe Text)
 zvlrServiceName
   = lens _zvlrServiceName
       (\ s a -> s{_zvlrServiceName = a})
@@ -153,22 +153,22 @@ zvlrServiceName
 -- | Specifies a nextPageToken returned by a previous list request. This
 -- token can be used to request the next page of results from a previous
 -- list request.
-zvlrPageToken :: Lens' ZoneViewsListResources' (Maybe Text)
+zvlrPageToken :: Lens' ZoneViewsListResources (Maybe Text)
 zvlrPageToken
   = lens _zvlrPageToken
       (\ s a -> s{_zvlrPageToken = a})
 
 -- | Maximum count of results to be returned. Acceptable values are 0 to
 -- 5000, inclusive. (Default: 5000)
-zvlrMaxResults :: Lens' ZoneViewsListResources' Int32
+zvlrMaxResults :: Lens' ZoneViewsListResources Int32
 zvlrMaxResults
   = lens _zvlrMaxResults
       (\ s a -> s{_zvlrMaxResults = a})
 
-instance GoogleRequest ZoneViewsListResources' where
-        type Rs ZoneViewsListResources' =
+instance GoogleRequest ZoneViewsListResources where
+        type Rs ZoneViewsListResources =
              ZoneViewsListResourcesResponse
-        requestClient ZoneViewsListResources'{..}
+        requestClient ZoneViewsListResources{..}
           = go _zvlrProject _zvlrZone _zvlrResourceView
               (Just _zvlrListState)
               _zvlrFormat

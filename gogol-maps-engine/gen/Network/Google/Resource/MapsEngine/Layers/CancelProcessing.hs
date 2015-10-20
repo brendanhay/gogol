@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Layers.CancelProcessing
       LayersCancelProcessingResource
 
     -- * Creating a Request
-    , layersCancelProcessing'
-    , LayersCancelProcessing'
+    , layersCancelProcessing
+    , LayersCancelProcessing
 
     -- * Request Lenses
     , lcpId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.layers.cancelProcessing@ method which the
--- 'LayersCancelProcessing'' request conforms to.
+-- 'LayersCancelProcessing' request conforms to.
 type LayersCancelProcessingResource =
      "layers" :>
        Capture "id" Text :>
@@ -50,31 +50,31 @@ type LayersCancelProcessingResource =
 
 -- | Cancel processing on a layer asset.
 --
--- /See:/ 'layersCancelProcessing'' smart constructor.
-newtype LayersCancelProcessing' = LayersCancelProcessing'
+-- /See:/ 'layersCancelProcessing' smart constructor.
+newtype LayersCancelProcessing = LayersCancelProcessing
     { _lcpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersCancelProcessing'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersCancelProcessing' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lcpId'
-layersCancelProcessing'
+layersCancelProcessing
     :: Text -- ^ 'lcpId'
-    -> LayersCancelProcessing'
-layersCancelProcessing' pLcpId_ =
-    LayersCancelProcessing'
+    -> LayersCancelProcessing
+layersCancelProcessing pLcpId_ =
+    LayersCancelProcessing
     { _lcpId = pLcpId_
     }
 
 -- | The ID of the layer.
-lcpId :: Lens' LayersCancelProcessing' Text
+lcpId :: Lens' LayersCancelProcessing Text
 lcpId = lens _lcpId (\ s a -> s{_lcpId = a})
 
-instance GoogleRequest LayersCancelProcessing' where
-        type Rs LayersCancelProcessing' = ProcessResponse
-        requestClient LayersCancelProcessing'{..}
+instance GoogleRequest LayersCancelProcessing where
+        type Rs LayersCancelProcessing = ProcessResponse
+        requestClient LayersCancelProcessing{..}
           = go _lcpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

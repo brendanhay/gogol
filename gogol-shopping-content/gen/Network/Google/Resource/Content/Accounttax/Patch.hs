@@ -30,8 +30,8 @@ module Network.Google.Resource.Content.Accounttax.Patch
       AccounttaxPatchResource
 
     -- * Creating a Request
-    , accounttaxPatch'
-    , AccounttaxPatch'
+    , accounttaxPatch
+    , AccounttaxPatch
 
     -- * Request Lenses
     , appMerchantId
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accounttax.patch@ method which the
--- 'AccounttaxPatch'' request conforms to.
+-- 'AccounttaxPatch' request conforms to.
 type AccounttaxPatchResource =
      Capture "merchantId" Word64 :>
        "accounttax" :>
@@ -57,15 +57,15 @@ type AccounttaxPatchResource =
 -- | Updates the tax settings of the account. This method supports patch
 -- semantics.
 --
--- /See:/ 'accounttaxPatch'' smart constructor.
-data AccounttaxPatch' = AccounttaxPatch'
+-- /See:/ 'accounttaxPatch' smart constructor.
+data AccounttaxPatch = AccounttaxPatch
     { _appMerchantId :: !Word64
     , _appPayload    :: !AccountTax
     , _appAccountId  :: !Word64
     , _appDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccounttaxPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccounttaxPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,13 +76,13 @@ data AccounttaxPatch' = AccounttaxPatch'
 -- * 'appAccountId'
 --
 -- * 'appDryRun'
-accounttaxPatch'
+accounttaxPatch
     :: Word64 -- ^ 'appMerchantId'
     -> AccountTax -- ^ 'appPayload'
     -> Word64 -- ^ 'appAccountId'
-    -> AccounttaxPatch'
-accounttaxPatch' pAppMerchantId_ pAppPayload_ pAppAccountId_ =
-    AccounttaxPatch'
+    -> AccounttaxPatch
+accounttaxPatch pAppMerchantId_ pAppPayload_ pAppAccountId_ =
+    AccounttaxPatch
     { _appMerchantId = pAppMerchantId_
     , _appPayload = pAppPayload_
     , _appAccountId = pAppAccountId_
@@ -90,29 +90,29 @@ accounttaxPatch' pAppMerchantId_ pAppPayload_ pAppAccountId_ =
     }
 
 -- | The ID of the managing account.
-appMerchantId :: Lens' AccounttaxPatch' Word64
+appMerchantId :: Lens' AccounttaxPatch Word64
 appMerchantId
   = lens _appMerchantId
       (\ s a -> s{_appMerchantId = a})
 
 -- | Multipart request metadata.
-appPayload :: Lens' AccounttaxPatch' AccountTax
+appPayload :: Lens' AccounttaxPatch AccountTax
 appPayload
   = lens _appPayload (\ s a -> s{_appPayload = a})
 
 -- | The ID of the account for which to get\/update account tax settings.
-appAccountId :: Lens' AccounttaxPatch' Word64
+appAccountId :: Lens' AccounttaxPatch Word64
 appAccountId
   = lens _appAccountId (\ s a -> s{_appAccountId = a})
 
 -- | Flag to run the request in dry-run mode.
-appDryRun :: Lens' AccounttaxPatch' (Maybe Bool)
+appDryRun :: Lens' AccounttaxPatch (Maybe Bool)
 appDryRun
   = lens _appDryRun (\ s a -> s{_appDryRun = a})
 
-instance GoogleRequest AccounttaxPatch' where
-        type Rs AccounttaxPatch' = AccountTax
-        requestClient AccounttaxPatch'{..}
+instance GoogleRequest AccounttaxPatch where
+        type Rs AccounttaxPatch = AccountTax
+        requestClient AccounttaxPatch{..}
           = go _appMerchantId _appAccountId _appDryRun
               (Just AltJSON)
               _appPayload

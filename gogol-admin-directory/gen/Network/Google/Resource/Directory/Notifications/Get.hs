@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Notifications.Get
       NotificationsGetResource
 
     -- * Creating a Request
-    , notificationsGet'
-    , NotificationsGet'
+    , notificationsGet
+    , NotificationsGet
 
     -- * Request Lenses
     , ngCustomer
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.notifications.get@ method which the
--- 'NotificationsGet'' request conforms to.
+-- 'NotificationsGet' request conforms to.
 type NotificationsGetResource =
      "customer" :>
        Capture "customer" Text :>
@@ -51,44 +51,44 @@ type NotificationsGetResource =
 
 -- | Retrieves a notification.
 --
--- /See:/ 'notificationsGet'' smart constructor.
-data NotificationsGet' = NotificationsGet'
+-- /See:/ 'notificationsGet' smart constructor.
+data NotificationsGet = NotificationsGet
     { _ngCustomer       :: !Text
     , _ngNotificationId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'NotificationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'NotificationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ngCustomer'
 --
 -- * 'ngNotificationId'
-notificationsGet'
+notificationsGet
     :: Text -- ^ 'ngCustomer'
     -> Text -- ^ 'ngNotificationId'
-    -> NotificationsGet'
-notificationsGet' pNgCustomer_ pNgNotificationId_ =
-    NotificationsGet'
+    -> NotificationsGet
+notificationsGet pNgCustomer_ pNgNotificationId_ =
+    NotificationsGet
     { _ngCustomer = pNgCustomer_
     , _ngNotificationId = pNgNotificationId_
     }
 
 -- | The unique ID for the customer\'s Google account. The customerId is also
 -- returned as part of the Users resource.
-ngCustomer :: Lens' NotificationsGet' Text
+ngCustomer :: Lens' NotificationsGet Text
 ngCustomer
   = lens _ngCustomer (\ s a -> s{_ngCustomer = a})
 
 -- | The unique ID of the notification.
-ngNotificationId :: Lens' NotificationsGet' Text
+ngNotificationId :: Lens' NotificationsGet Text
 ngNotificationId
   = lens _ngNotificationId
       (\ s a -> s{_ngNotificationId = a})
 
-instance GoogleRequest NotificationsGet' where
-        type Rs NotificationsGet' = Notification
-        requestClient NotificationsGet'{..}
+instance GoogleRequest NotificationsGet where
+        type Rs NotificationsGet = Notification
+        requestClient NotificationsGet{..}
           = go _ngCustomer _ngNotificationId (Just AltJSON)
               directoryService
           where go

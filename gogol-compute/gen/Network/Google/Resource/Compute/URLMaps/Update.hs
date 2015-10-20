@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.URLMaps.Update
       URLMapsUpdateResource
 
     -- * Creating a Request
-    , urlMapsUpdate'
-    , URLMapsUpdate'
+    , urlMapsUpdate
+    , URLMapsUpdate
 
     -- * Request Lenses
     , umuURLMap
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.urlMaps.update@ method which the
--- 'URLMapsUpdate'' request conforms to.
+-- 'URLMapsUpdate' request conforms to.
 type URLMapsUpdateResource =
      Capture "project" Text :>
        "global" :>
@@ -53,14 +53,14 @@ type URLMapsUpdateResource =
 
 -- | Update the entire content of the UrlMap resource.
 --
--- /See:/ 'urlMapsUpdate'' smart constructor.
-data URLMapsUpdate' = URLMapsUpdate'
+-- /See:/ 'urlMapsUpdate' smart constructor.
+data URLMapsUpdate = URLMapsUpdate
     { _umuURLMap  :: !Text
     , _umuProject :: !Text
     , _umuPayload :: !URLMap
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'URLMapsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'URLMapsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,36 @@ data URLMapsUpdate' = URLMapsUpdate'
 -- * 'umuProject'
 --
 -- * 'umuPayload'
-urlMapsUpdate'
+urlMapsUpdate
     :: Text -- ^ 'umuURLMap'
     -> Text -- ^ 'umuProject'
     -> URLMap -- ^ 'umuPayload'
-    -> URLMapsUpdate'
-urlMapsUpdate' pUmuURLMap_ pUmuProject_ pUmuPayload_ =
-    URLMapsUpdate'
+    -> URLMapsUpdate
+urlMapsUpdate pUmuURLMap_ pUmuProject_ pUmuPayload_ =
+    URLMapsUpdate
     { _umuURLMap = pUmuURLMap_
     , _umuProject = pUmuProject_
     , _umuPayload = pUmuPayload_
     }
 
 -- | Name of the UrlMap resource to update.
-umuURLMap :: Lens' URLMapsUpdate' Text
+umuURLMap :: Lens' URLMapsUpdate Text
 umuURLMap
   = lens _umuURLMap (\ s a -> s{_umuURLMap = a})
 
 -- | Name of the project scoping this request.
-umuProject :: Lens' URLMapsUpdate' Text
+umuProject :: Lens' URLMapsUpdate Text
 umuProject
   = lens _umuProject (\ s a -> s{_umuProject = a})
 
 -- | Multipart request metadata.
-umuPayload :: Lens' URLMapsUpdate' URLMap
+umuPayload :: Lens' URLMapsUpdate URLMap
 umuPayload
   = lens _umuPayload (\ s a -> s{_umuPayload = a})
 
-instance GoogleRequest URLMapsUpdate' where
-        type Rs URLMapsUpdate' = Operation
-        requestClient URLMapsUpdate'{..}
+instance GoogleRequest URLMapsUpdate where
+        type Rs URLMapsUpdate = Operation
+        requestClient URLMapsUpdate{..}
           = go _umuProject _umuURLMap (Just AltJSON)
               _umuPayload
               computeService

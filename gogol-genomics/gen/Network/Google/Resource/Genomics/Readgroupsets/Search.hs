@@ -30,25 +30,25 @@ module Network.Google.Resource.Genomics.Readgroupsets.Search
       ReadgroupsetsSearchResource
 
     -- * Creating a Request
-    , readgroupsetsSearch'
-    , ReadgroupsetsSearch'
+    , readgroupsetsSearch
+    , ReadgroupsetsSearch
 
     -- * Request Lenses
-    , reaXgafv
-    , reaUploadProtocol
-    , reaPp
-    , reaAccessToken
-    , reaUploadType
-    , reaPayload
-    , reaBearerToken
-    , reaCallback
+    , rssXgafv
+    , rssUploadProtocol
+    , rssPp
+    , rssAccessToken
+    , rssUploadType
+    , rssPayload
+    , rssBearerToken
+    , rssCallback
     ) where
 
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.readgroupsets.search@ method which the
--- 'ReadgroupsetsSearch'' request conforms to.
+-- 'ReadgroupsetsSearch' request conforms to.
 type ReadgroupsetsSearchResource =
      "v1" :>
        "readgroupsets" :>
@@ -67,105 +67,105 @@ type ReadgroupsetsSearchResource =
 -- | Searches for read group sets matching the criteria. Implements
 -- [GlobalAllianceApi.searchReadGroupSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/readmethods.avdl#L135).
 --
--- /See:/ 'readgroupsetsSearch'' smart constructor.
-data ReadgroupsetsSearch' = ReadgroupsetsSearch'
-    { _reaXgafv          :: !(Maybe Text)
-    , _reaUploadProtocol :: !(Maybe Text)
-    , _reaPp             :: !Bool
-    , _reaAccessToken    :: !(Maybe Text)
-    , _reaUploadType     :: !(Maybe Text)
-    , _reaPayload        :: !SearchReadGroupSetsRequest
-    , _reaBearerToken    :: !(Maybe Text)
-    , _reaCallback       :: !(Maybe Text)
+-- /See:/ 'readgroupsetsSearch' smart constructor.
+data ReadgroupsetsSearch = ReadgroupsetsSearch
+    { _rssXgafv          :: !(Maybe Text)
+    , _rssUploadProtocol :: !(Maybe Text)
+    , _rssPp             :: !Bool
+    , _rssAccessToken    :: !(Maybe Text)
+    , _rssUploadType     :: !(Maybe Text)
+    , _rssPayload        :: !SearchReadGroupSetsRequest
+    , _rssBearerToken    :: !(Maybe Text)
+    , _rssCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReadgroupsetsSearch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReadgroupsetsSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'reaXgafv'
+-- * 'rssXgafv'
 --
--- * 'reaUploadProtocol'
+-- * 'rssUploadProtocol'
 --
--- * 'reaPp'
+-- * 'rssPp'
 --
--- * 'reaAccessToken'
+-- * 'rssAccessToken'
 --
--- * 'reaUploadType'
+-- * 'rssUploadType'
 --
--- * 'reaPayload'
+-- * 'rssPayload'
 --
--- * 'reaBearerToken'
+-- * 'rssBearerToken'
 --
--- * 'reaCallback'
-readgroupsetsSearch'
-    :: SearchReadGroupSetsRequest -- ^ 'reaPayload'
-    -> ReadgroupsetsSearch'
-readgroupsetsSearch' pReaPayload_ =
-    ReadgroupsetsSearch'
-    { _reaXgafv = Nothing
-    , _reaUploadProtocol = Nothing
-    , _reaPp = True
-    , _reaAccessToken = Nothing
-    , _reaUploadType = Nothing
-    , _reaPayload = pReaPayload_
-    , _reaBearerToken = Nothing
-    , _reaCallback = Nothing
+-- * 'rssCallback'
+readgroupsetsSearch
+    :: SearchReadGroupSetsRequest -- ^ 'rssPayload'
+    -> ReadgroupsetsSearch
+readgroupsetsSearch pRssPayload_ =
+    ReadgroupsetsSearch
+    { _rssXgafv = Nothing
+    , _rssUploadProtocol = Nothing
+    , _rssPp = True
+    , _rssAccessToken = Nothing
+    , _rssUploadType = Nothing
+    , _rssPayload = pRssPayload_
+    , _rssBearerToken = Nothing
+    , _rssCallback = Nothing
     }
 
 -- | V1 error format.
-reaXgafv :: Lens' ReadgroupsetsSearch' (Maybe Text)
-reaXgafv = lens _reaXgafv (\ s a -> s{_reaXgafv = a})
+rssXgafv :: Lens' ReadgroupsetsSearch (Maybe Text)
+rssXgafv = lens _rssXgafv (\ s a -> s{_rssXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-reaUploadProtocol :: Lens' ReadgroupsetsSearch' (Maybe Text)
-reaUploadProtocol
-  = lens _reaUploadProtocol
-      (\ s a -> s{_reaUploadProtocol = a})
+rssUploadProtocol :: Lens' ReadgroupsetsSearch (Maybe Text)
+rssUploadProtocol
+  = lens _rssUploadProtocol
+      (\ s a -> s{_rssUploadProtocol = a})
 
 -- | Pretty-print response.
-reaPp :: Lens' ReadgroupsetsSearch' Bool
-reaPp = lens _reaPp (\ s a -> s{_reaPp = a})
+rssPp :: Lens' ReadgroupsetsSearch Bool
+rssPp = lens _rssPp (\ s a -> s{_rssPp = a})
 
 -- | OAuth access token.
-reaAccessToken :: Lens' ReadgroupsetsSearch' (Maybe Text)
-reaAccessToken
-  = lens _reaAccessToken
-      (\ s a -> s{_reaAccessToken = a})
+rssAccessToken :: Lens' ReadgroupsetsSearch (Maybe Text)
+rssAccessToken
+  = lens _rssAccessToken
+      (\ s a -> s{_rssAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-reaUploadType :: Lens' ReadgroupsetsSearch' (Maybe Text)
-reaUploadType
-  = lens _reaUploadType
-      (\ s a -> s{_reaUploadType = a})
+rssUploadType :: Lens' ReadgroupsetsSearch (Maybe Text)
+rssUploadType
+  = lens _rssUploadType
+      (\ s a -> s{_rssUploadType = a})
 
 -- | Multipart request metadata.
-reaPayload :: Lens' ReadgroupsetsSearch' SearchReadGroupSetsRequest
-reaPayload
-  = lens _reaPayload (\ s a -> s{_reaPayload = a})
+rssPayload :: Lens' ReadgroupsetsSearch SearchReadGroupSetsRequest
+rssPayload
+  = lens _rssPayload (\ s a -> s{_rssPayload = a})
 
 -- | OAuth bearer token.
-reaBearerToken :: Lens' ReadgroupsetsSearch' (Maybe Text)
-reaBearerToken
-  = lens _reaBearerToken
-      (\ s a -> s{_reaBearerToken = a})
+rssBearerToken :: Lens' ReadgroupsetsSearch (Maybe Text)
+rssBearerToken
+  = lens _rssBearerToken
+      (\ s a -> s{_rssBearerToken = a})
 
 -- | JSONP
-reaCallback :: Lens' ReadgroupsetsSearch' (Maybe Text)
-reaCallback
-  = lens _reaCallback (\ s a -> s{_reaCallback = a})
+rssCallback :: Lens' ReadgroupsetsSearch (Maybe Text)
+rssCallback
+  = lens _rssCallback (\ s a -> s{_rssCallback = a})
 
-instance GoogleRequest ReadgroupsetsSearch' where
-        type Rs ReadgroupsetsSearch' =
+instance GoogleRequest ReadgroupsetsSearch where
+        type Rs ReadgroupsetsSearch =
              SearchReadGroupSetsResponse
-        requestClient ReadgroupsetsSearch'{..}
-          = go _reaXgafv _reaUploadProtocol (Just _reaPp)
-              _reaAccessToken
-              _reaUploadType
-              _reaBearerToken
-              _reaCallback
+        requestClient ReadgroupsetsSearch{..}
+          = go _rssXgafv _rssUploadProtocol (Just _rssPp)
+              _rssAccessToken
+              _rssUploadType
+              _rssBearerToken
+              _rssCallback
               (Just AltJSON)
-              _reaPayload
+              _rssPayload
               genomicsService
           where go
                   = buildClient

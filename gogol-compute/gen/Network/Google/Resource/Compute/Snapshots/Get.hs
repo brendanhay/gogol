@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Snapshots.Get
       SnapshotsGetResource
 
     -- * Creating a Request
-    , snapshotsGet'
-    , SnapshotsGet'
+    , snapshotsGet
+    , SnapshotsGet
 
     -- * Request Lenses
     , sgSnapshot
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.snapshots.get@ method which the
--- 'SnapshotsGet'' request conforms to.
+-- 'SnapshotsGet' request conforms to.
 type SnapshotsGetResource =
      Capture "project" Text :>
        "global" :>
@@ -51,42 +51,42 @@ type SnapshotsGetResource =
 
 -- | Returns the specified Snapshot resource.
 --
--- /See:/ 'snapshotsGet'' smart constructor.
-data SnapshotsGet' = SnapshotsGet'
+-- /See:/ 'snapshotsGet' smart constructor.
+data SnapshotsGet = SnapshotsGet
     { _sgSnapshot :: !Text
     , _sgProject  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SnapshotsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'SnapshotsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sgSnapshot'
 --
 -- * 'sgProject'
-snapshotsGet'
+snapshotsGet
     :: Text -- ^ 'sgSnapshot'
     -> Text -- ^ 'sgProject'
-    -> SnapshotsGet'
-snapshotsGet' pSgSnapshot_ pSgProject_ =
-    SnapshotsGet'
+    -> SnapshotsGet
+snapshotsGet pSgSnapshot_ pSgProject_ =
+    SnapshotsGet
     { _sgSnapshot = pSgSnapshot_
     , _sgProject = pSgProject_
     }
 
 -- | Name of the Snapshot resource to return.
-sgSnapshot :: Lens' SnapshotsGet' Text
+sgSnapshot :: Lens' SnapshotsGet Text
 sgSnapshot
   = lens _sgSnapshot (\ s a -> s{_sgSnapshot = a})
 
 -- | Name of the project scoping this request.
-sgProject :: Lens' SnapshotsGet' Text
+sgProject :: Lens' SnapshotsGet Text
 sgProject
   = lens _sgProject (\ s a -> s{_sgProject = a})
 
-instance GoogleRequest SnapshotsGet' where
-        type Rs SnapshotsGet' = Snapshot
-        requestClient SnapshotsGet'{..}
+instance GoogleRequest SnapshotsGet where
+        type Rs SnapshotsGet = Snapshot
+        requestClient SnapshotsGet{..}
           = go _sgProject _sgSnapshot (Just AltJSON)
               computeService
           where go

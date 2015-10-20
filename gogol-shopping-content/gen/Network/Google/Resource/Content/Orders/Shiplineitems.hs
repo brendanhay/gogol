@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Orders.Shiplineitems
       OrdersShiplineitemsResource
 
     -- * Creating a Request
-    , ordersShiplineitems'
-    , OrdersShiplineitems'
+    , ordersShiplineitems
+    , OrdersShiplineitems
 
     -- * Request Lenses
     , osMerchantId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.shiplineitems@ method which the
--- 'OrdersShiplineitems'' request conforms to.
+-- 'OrdersShiplineitems' request conforms to.
 type OrdersShiplineitemsResource =
      Capture "merchantId" Word64 :>
        "orders" :>
@@ -54,14 +54,14 @@ type OrdersShiplineitemsResource =
 
 -- | Marks line item(s) as shipped.
 --
--- /See:/ 'ordersShiplineitems'' smart constructor.
-data OrdersShiplineitems' = OrdersShiplineitems'
+-- /See:/ 'ordersShiplineitems' smart constructor.
+data OrdersShiplineitems = OrdersShiplineitems
     { _osMerchantId :: !Word64
     , _osPayload    :: !OrdersShipLineItemsRequest
     , _osOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersShiplineitems'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersShiplineitems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,37 +70,37 @@ data OrdersShiplineitems' = OrdersShiplineitems'
 -- * 'osPayload'
 --
 -- * 'osOrderId'
-ordersShiplineitems'
+ordersShiplineitems
     :: Word64 -- ^ 'osMerchantId'
     -> OrdersShipLineItemsRequest -- ^ 'osPayload'
     -> Text -- ^ 'osOrderId'
-    -> OrdersShiplineitems'
-ordersShiplineitems' pOsMerchantId_ pOsPayload_ pOsOrderId_ =
-    OrdersShiplineitems'
+    -> OrdersShiplineitems
+ordersShiplineitems pOsMerchantId_ pOsPayload_ pOsOrderId_ =
+    OrdersShiplineitems
     { _osMerchantId = pOsMerchantId_
     , _osPayload = pOsPayload_
     , _osOrderId = pOsOrderId_
     }
 
 -- | The ID of the managing account.
-osMerchantId :: Lens' OrdersShiplineitems' Word64
+osMerchantId :: Lens' OrdersShiplineitems Word64
 osMerchantId
   = lens _osMerchantId (\ s a -> s{_osMerchantId = a})
 
 -- | Multipart request metadata.
-osPayload :: Lens' OrdersShiplineitems' OrdersShipLineItemsRequest
+osPayload :: Lens' OrdersShiplineitems OrdersShipLineItemsRequest
 osPayload
   = lens _osPayload (\ s a -> s{_osPayload = a})
 
 -- | The ID of the order.
-osOrderId :: Lens' OrdersShiplineitems' Text
+osOrderId :: Lens' OrdersShiplineitems Text
 osOrderId
   = lens _osOrderId (\ s a -> s{_osOrderId = a})
 
-instance GoogleRequest OrdersShiplineitems' where
-        type Rs OrdersShiplineitems' =
+instance GoogleRequest OrdersShiplineitems where
+        type Rs OrdersShiplineitems =
              OrdersShipLineItemsResponse
-        requestClient OrdersShiplineitems'{..}
+        requestClient OrdersShiplineitems{..}
           = go _osMerchantId _osOrderId (Just AltJSON)
               _osPayload
               shoppingContentService

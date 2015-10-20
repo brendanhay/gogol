@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
       AccountsContainersVersionsPublishResource
 
     -- * Creating a Request
-    , accountsContainersVersionsPublish'
-    , AccountsContainersVersionsPublish'
+    , accountsContainersVersionsPublish
+    , AccountsContainersVersionsPublish
 
     -- * Request Lenses
     , acvpContainerId
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.versions.publish@ method which the
--- 'AccountsContainersVersionsPublish'' request conforms to.
+-- 'AccountsContainersVersionsPublish' request conforms to.
 type AccountsContainersVersionsPublishResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -58,15 +58,15 @@ type AccountsContainersVersionsPublishResource =
 
 -- | Publishes a Container Version.
 --
--- /See:/ 'accountsContainersVersionsPublish'' smart constructor.
-data AccountsContainersVersionsPublish' = AccountsContainersVersionsPublish'
+-- /See:/ 'accountsContainersVersionsPublish' smart constructor.
+data AccountsContainersVersionsPublish = AccountsContainersVersionsPublish
     { _acvpContainerId        :: !Text
     , _acvpFingerprint        :: !(Maybe Text)
     , _acvpContainerVersionId :: !Text
     , _acvpAccountId          :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersVersionsPublish'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersVersionsPublish' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,13 +77,13 @@ data AccountsContainersVersionsPublish' = AccountsContainersVersionsPublish'
 -- * 'acvpContainerVersionId'
 --
 -- * 'acvpAccountId'
-accountsContainersVersionsPublish'
+accountsContainersVersionsPublish
     :: Text -- ^ 'acvpContainerId'
     -> Text -- ^ 'acvpContainerVersionId'
     -> Text -- ^ 'acvpAccountId'
-    -> AccountsContainersVersionsPublish'
-accountsContainersVersionsPublish' pAcvpContainerId_ pAcvpContainerVersionId_ pAcvpAccountId_ =
-    AccountsContainersVersionsPublish'
+    -> AccountsContainersVersionsPublish
+accountsContainersVersionsPublish pAcvpContainerId_ pAcvpContainerVersionId_ pAcvpAccountId_ =
+    AccountsContainersVersionsPublish
     { _acvpContainerId = pAcvpContainerId_
     , _acvpFingerprint = Nothing
     , _acvpContainerVersionId = pAcvpContainerVersionId_
@@ -91,35 +91,35 @@ accountsContainersVersionsPublish' pAcvpContainerId_ pAcvpContainerVersionId_ pA
     }
 
 -- | The GTM Container ID.
-acvpContainerId :: Lens' AccountsContainersVersionsPublish' Text
+acvpContainerId :: Lens' AccountsContainersVersionsPublish Text
 acvpContainerId
   = lens _acvpContainerId
       (\ s a -> s{_acvpContainerId = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- container version in storage.
-acvpFingerprint :: Lens' AccountsContainersVersionsPublish' (Maybe Text)
+acvpFingerprint :: Lens' AccountsContainersVersionsPublish (Maybe Text)
 acvpFingerprint
   = lens _acvpFingerprint
       (\ s a -> s{_acvpFingerprint = a})
 
 -- | The GTM Container Version ID.
-acvpContainerVersionId :: Lens' AccountsContainersVersionsPublish' Text
+acvpContainerVersionId :: Lens' AccountsContainersVersionsPublish Text
 acvpContainerVersionId
   = lens _acvpContainerVersionId
       (\ s a -> s{_acvpContainerVersionId = a})
 
 -- | The GTM Account ID.
-acvpAccountId :: Lens' AccountsContainersVersionsPublish' Text
+acvpAccountId :: Lens' AccountsContainersVersionsPublish Text
 acvpAccountId
   = lens _acvpAccountId
       (\ s a -> s{_acvpAccountId = a})
 
 instance GoogleRequest
-         AccountsContainersVersionsPublish' where
-        type Rs AccountsContainersVersionsPublish' =
+         AccountsContainersVersionsPublish where
+        type Rs AccountsContainersVersionsPublish =
              PublishContainerVersionResponse
-        requestClient AccountsContainersVersionsPublish'{..}
+        requestClient AccountsContainersVersionsPublish{..}
           = go _acvpAccountId _acvpContainerId
               _acvpContainerVersionId
               _acvpFingerprint

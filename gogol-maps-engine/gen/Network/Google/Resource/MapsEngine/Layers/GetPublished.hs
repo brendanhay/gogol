@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Layers.GetPublished
       LayersGetPublishedResource
 
     -- * Creating a Request
-    , layersGetPublished'
-    , LayersGetPublished'
+    , layersGetPublished
+    , LayersGetPublished
 
     -- * Request Lenses
     , lgpId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.layers.getPublished@ method which the
--- 'LayersGetPublished'' request conforms to.
+-- 'LayersGetPublished' request conforms to.
 type LayersGetPublishedResource =
      "layers" :>
        Capture "id" Text :>
@@ -50,31 +50,31 @@ type LayersGetPublishedResource =
 
 -- | Return the published metadata for a particular layer.
 --
--- /See:/ 'layersGetPublished'' smart constructor.
-newtype LayersGetPublished' = LayersGetPublished'
+-- /See:/ 'layersGetPublished' smart constructor.
+newtype LayersGetPublished = LayersGetPublished
     { _lgpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersGetPublished'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersGetPublished' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lgpId'
-layersGetPublished'
+layersGetPublished
     :: Text -- ^ 'lgpId'
-    -> LayersGetPublished'
-layersGetPublished' pLgpId_ =
-    LayersGetPublished'
+    -> LayersGetPublished
+layersGetPublished pLgpId_ =
+    LayersGetPublished
     { _lgpId = pLgpId_
     }
 
 -- | The ID of the layer.
-lgpId :: Lens' LayersGetPublished' Text
+lgpId :: Lens' LayersGetPublished Text
 lgpId = lens _lgpId (\ s a -> s{_lgpId = a})
 
-instance GoogleRequest LayersGetPublished' where
-        type Rs LayersGetPublished' = PublishedLayer
-        requestClient LayersGetPublished'{..}
+instance GoogleRequest LayersGetPublished where
+        type Rs LayersGetPublished = PublishedLayer
+        requestClient LayersGetPublished{..}
           = go _lgpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

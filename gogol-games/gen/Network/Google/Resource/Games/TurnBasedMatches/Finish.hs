@@ -31,8 +31,8 @@ module Network.Google.Resource.Games.TurnBasedMatches.Finish
       TurnBasedMatchesFinishResource
 
     -- * Creating a Request
-    , turnBasedMatchesFinish'
-    , TurnBasedMatchesFinish'
+    , turnBasedMatchesFinish
+    , TurnBasedMatchesFinish
 
     -- * Request Lenses
     , tbmfPayload
@@ -44,7 +44,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.turnBasedMatches.finish@ method which the
--- 'TurnBasedMatchesFinish'' request conforms to.
+-- 'TurnBasedMatchesFinish' request conforms to.
 type TurnBasedMatchesFinishResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
@@ -58,14 +58,14 @@ type TurnBasedMatchesFinishResource =
 -- all results are in. Only the player whose turn it is may make the first
 -- call to Finish, and can pass in the final match state.
 --
--- /See:/ 'turnBasedMatchesFinish'' smart constructor.
-data TurnBasedMatchesFinish' = TurnBasedMatchesFinish'
+-- /See:/ 'turnBasedMatchesFinish' smart constructor.
+data TurnBasedMatchesFinish = TurnBasedMatchesFinish
     { _tbmfPayload  :: !TurnBasedMatchResults
     , _tbmfLanguage :: !(Maybe Text)
     , _tbmfMatchId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TurnBasedMatchesFinish'' with the minimum fields required to make a request.
+-- | Creates a value of 'TurnBasedMatchesFinish' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,35 +74,35 @@ data TurnBasedMatchesFinish' = TurnBasedMatchesFinish'
 -- * 'tbmfLanguage'
 --
 -- * 'tbmfMatchId'
-turnBasedMatchesFinish'
+turnBasedMatchesFinish
     :: TurnBasedMatchResults -- ^ 'tbmfPayload'
     -> Text -- ^ 'tbmfMatchId'
-    -> TurnBasedMatchesFinish'
-turnBasedMatchesFinish' pTbmfPayload_ pTbmfMatchId_ =
-    TurnBasedMatchesFinish'
+    -> TurnBasedMatchesFinish
+turnBasedMatchesFinish pTbmfPayload_ pTbmfMatchId_ =
+    TurnBasedMatchesFinish
     { _tbmfPayload = pTbmfPayload_
     , _tbmfLanguage = Nothing
     , _tbmfMatchId = pTbmfMatchId_
     }
 
 -- | Multipart request metadata.
-tbmfPayload :: Lens' TurnBasedMatchesFinish' TurnBasedMatchResults
+tbmfPayload :: Lens' TurnBasedMatchesFinish TurnBasedMatchResults
 tbmfPayload
   = lens _tbmfPayload (\ s a -> s{_tbmfPayload = a})
 
 -- | The preferred language to use for strings returned by this method.
-tbmfLanguage :: Lens' TurnBasedMatchesFinish' (Maybe Text)
+tbmfLanguage :: Lens' TurnBasedMatchesFinish (Maybe Text)
 tbmfLanguage
   = lens _tbmfLanguage (\ s a -> s{_tbmfLanguage = a})
 
 -- | The ID of the match.
-tbmfMatchId :: Lens' TurnBasedMatchesFinish' Text
+tbmfMatchId :: Lens' TurnBasedMatchesFinish Text
 tbmfMatchId
   = lens _tbmfMatchId (\ s a -> s{_tbmfMatchId = a})
 
-instance GoogleRequest TurnBasedMatchesFinish' where
-        type Rs TurnBasedMatchesFinish' = TurnBasedMatch
-        requestClient TurnBasedMatchesFinish'{..}
+instance GoogleRequest TurnBasedMatchesFinish where
+        type Rs TurnBasedMatchesFinish = TurnBasedMatch
+        requestClient TurnBasedMatchesFinish{..}
           = go _tbmfMatchId _tbmfLanguage (Just AltJSON)
               _tbmfPayload
               gamesService

@@ -32,21 +32,21 @@ module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Patch
       CollectionviewersPatchResource
 
     -- * Creating a Request
-    , collectionviewersPatch'
-    , CollectionviewersPatch'
+    , collectionviewersPatch
+    , CollectionviewersPatch
 
     -- * Request Lenses
-    , cpEnterpriseId
-    , cpCollectionId
-    , cpPayload
-    , cpUserId
+    , cppEnterpriseId
+    , cppCollectionId
+    , cppPayload
+    , cppUserId
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.collectionviewers.patch@ method which the
--- 'CollectionviewersPatch'' request conforms to.
+-- 'CollectionviewersPatch' request conforms to.
 type CollectionviewersPatchResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -62,66 +62,67 @@ type CollectionviewersPatchResource =
 -- only such users will see the collection. This method supports patch
 -- semantics.
 --
--- /See:/ 'collectionviewersPatch'' smart constructor.
-data CollectionviewersPatch' = CollectionviewersPatch'
-    { _cpEnterpriseId :: !Text
-    , _cpCollectionId :: !Text
-    , _cpPayload      :: !User
-    , _cpUserId       :: !Text
+-- /See:/ 'collectionviewersPatch' smart constructor.
+data CollectionviewersPatch = CollectionviewersPatch
+    { _cppEnterpriseId :: !Text
+    , _cppCollectionId :: !Text
+    , _cppPayload      :: !User
+    , _cppUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CollectionviewersPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'CollectionviewersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cpEnterpriseId'
+-- * 'cppEnterpriseId'
 --
--- * 'cpCollectionId'
+-- * 'cppCollectionId'
 --
--- * 'cpPayload'
+-- * 'cppPayload'
 --
--- * 'cpUserId'
-collectionviewersPatch'
-    :: Text -- ^ 'cpEnterpriseId'
-    -> Text -- ^ 'cpCollectionId'
-    -> User -- ^ 'cpPayload'
-    -> Text -- ^ 'cpUserId'
-    -> CollectionviewersPatch'
-collectionviewersPatch' pCpEnterpriseId_ pCpCollectionId_ pCpPayload_ pCpUserId_ =
-    CollectionviewersPatch'
-    { _cpEnterpriseId = pCpEnterpriseId_
-    , _cpCollectionId = pCpCollectionId_
-    , _cpPayload = pCpPayload_
-    , _cpUserId = pCpUserId_
+-- * 'cppUserId'
+collectionviewersPatch
+    :: Text -- ^ 'cppEnterpriseId'
+    -> Text -- ^ 'cppCollectionId'
+    -> User -- ^ 'cppPayload'
+    -> Text -- ^ 'cppUserId'
+    -> CollectionviewersPatch
+collectionviewersPatch pCppEnterpriseId_ pCppCollectionId_ pCppPayload_ pCppUserId_ =
+    CollectionviewersPatch
+    { _cppEnterpriseId = pCppEnterpriseId_
+    , _cppCollectionId = pCppCollectionId_
+    , _cppPayload = pCppPayload_
+    , _cppUserId = pCppUserId_
     }
 
 -- | The ID of the enterprise.
-cpEnterpriseId :: Lens' CollectionviewersPatch' Text
-cpEnterpriseId
-  = lens _cpEnterpriseId
-      (\ s a -> s{_cpEnterpriseId = a})
+cppEnterpriseId :: Lens' CollectionviewersPatch Text
+cppEnterpriseId
+  = lens _cppEnterpriseId
+      (\ s a -> s{_cppEnterpriseId = a})
 
 -- | The ID of the collection.
-cpCollectionId :: Lens' CollectionviewersPatch' Text
-cpCollectionId
-  = lens _cpCollectionId
-      (\ s a -> s{_cpCollectionId = a})
+cppCollectionId :: Lens' CollectionviewersPatch Text
+cppCollectionId
+  = lens _cppCollectionId
+      (\ s a -> s{_cppCollectionId = a})
 
 -- | Multipart request metadata.
-cpPayload :: Lens' CollectionviewersPatch' User
-cpPayload
-  = lens _cpPayload (\ s a -> s{_cpPayload = a})
+cppPayload :: Lens' CollectionviewersPatch User
+cppPayload
+  = lens _cppPayload (\ s a -> s{_cppPayload = a})
 
 -- | The ID of the user.
-cpUserId :: Lens' CollectionviewersPatch' Text
-cpUserId = lens _cpUserId (\ s a -> s{_cpUserId = a})
+cppUserId :: Lens' CollectionviewersPatch Text
+cppUserId
+  = lens _cppUserId (\ s a -> s{_cppUserId = a})
 
-instance GoogleRequest CollectionviewersPatch' where
-        type Rs CollectionviewersPatch' = User
-        requestClient CollectionviewersPatch'{..}
-          = go _cpEnterpriseId _cpCollectionId _cpUserId
+instance GoogleRequest CollectionviewersPatch where
+        type Rs CollectionviewersPatch = User
+        requestClient CollectionviewersPatch{..}
+          = go _cppEnterpriseId _cppCollectionId _cppUserId
               (Just AltJSON)
-              _cpPayload
+              _cppPayload
               androidEnterpriseService
           where go
                   = buildClient

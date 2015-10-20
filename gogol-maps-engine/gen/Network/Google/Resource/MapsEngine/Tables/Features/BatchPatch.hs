@@ -40,8 +40,8 @@ module Network.Google.Resource.MapsEngine.Tables.Features.BatchPatch
       TablesFeaturesBatchPatchResource
 
     -- * Creating a Request
-    , tablesFeaturesBatchPatch'
-    , TablesFeaturesBatchPatch'
+    , tablesFeaturesBatchPatch
+    , TablesFeaturesBatchPatch
 
     -- * Request Lenses
     , tfbpPayload
@@ -52,7 +52,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.tables.features.batchPatch@ method which the
--- 'TablesFeaturesBatchPatch'' request conforms to.
+-- 'TablesFeaturesBatchPatch' request conforms to.
 type TablesFeaturesBatchPatchResource =
      "tables" :>
        Capture "id" Text :>
@@ -75,42 +75,41 @@ type TablesFeaturesBatchPatchResource =
 -- deletes that property. For more information about updating features,
 -- read Updating features in the Google Maps Engine developer\'s guide.
 --
--- /See:/ 'tablesFeaturesBatchPatch'' smart constructor.
-data TablesFeaturesBatchPatch' = TablesFeaturesBatchPatch'
+-- /See:/ 'tablesFeaturesBatchPatch' smart constructor.
+data TablesFeaturesBatchPatch = TablesFeaturesBatchPatch
     { _tfbpPayload :: !FeaturesBatchPatchRequest
     , _tfbpId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesFeaturesBatchPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesFeaturesBatchPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tfbpPayload'
 --
 -- * 'tfbpId'
-tablesFeaturesBatchPatch'
+tablesFeaturesBatchPatch
     :: FeaturesBatchPatchRequest -- ^ 'tfbpPayload'
     -> Text -- ^ 'tfbpId'
-    -> TablesFeaturesBatchPatch'
-tablesFeaturesBatchPatch' pTfbpPayload_ pTfbpId_ =
-    TablesFeaturesBatchPatch'
+    -> TablesFeaturesBatchPatch
+tablesFeaturesBatchPatch pTfbpPayload_ pTfbpId_ =
+    TablesFeaturesBatchPatch
     { _tfbpPayload = pTfbpPayload_
     , _tfbpId = pTfbpId_
     }
 
 -- | Multipart request metadata.
-tfbpPayload :: Lens' TablesFeaturesBatchPatch' FeaturesBatchPatchRequest
+tfbpPayload :: Lens' TablesFeaturesBatchPatch FeaturesBatchPatchRequest
 tfbpPayload
   = lens _tfbpPayload (\ s a -> s{_tfbpPayload = a})
 
 -- | The ID of the table containing the features to be patched.
-tfbpId :: Lens' TablesFeaturesBatchPatch' Text
+tfbpId :: Lens' TablesFeaturesBatchPatch Text
 tfbpId = lens _tfbpId (\ s a -> s{_tfbpId = a})
 
-instance GoogleRequest TablesFeaturesBatchPatch'
-         where
-        type Rs TablesFeaturesBatchPatch' = ()
-        requestClient TablesFeaturesBatchPatch'{..}
+instance GoogleRequest TablesFeaturesBatchPatch where
+        type Rs TablesFeaturesBatchPatch = ()
+        requestClient TablesFeaturesBatchPatch{..}
           = go _tfbpId (Just AltJSON) _tfbpPayload
               mapsEngineService
           where go

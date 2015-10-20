@@ -29,19 +29,19 @@ module Network.Google.Resource.Directory.Users.Update
       UsersUpdateResource
 
     -- * Creating a Request
-    , usersUpdate'
-    , UsersUpdate'
+    , usersUpdate
+    , UsersUpdate
 
     -- * Request Lenses
-    , uuPayload
-    , uuUserKey
+    , uPayload
+    , uUserKey
     ) where
 
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.users.update@ method which the
--- 'UsersUpdate'' request conforms to.
+-- 'UsersUpdate' request conforms to.
 type UsersUpdateResource =
      "users" :>
        Capture "userKey" Text :>
@@ -50,44 +50,42 @@ type UsersUpdateResource =
 
 -- | update user
 --
--- /See:/ 'usersUpdate'' smart constructor.
-data UsersUpdate' = UsersUpdate'
-    { _uuPayload :: !User
-    , _uuUserKey :: !Text
+-- /See:/ 'usersUpdate' smart constructor.
+data UsersUpdate = UsersUpdate
+    { _uPayload :: !User
+    , _uUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uuPayload'
+-- * 'uPayload'
 --
--- * 'uuUserKey'
-usersUpdate'
-    :: User -- ^ 'uuPayload'
-    -> Text -- ^ 'uuUserKey'
-    -> UsersUpdate'
-usersUpdate' pUuPayload_ pUuUserKey_ =
-    UsersUpdate'
-    { _uuPayload = pUuPayload_
-    , _uuUserKey = pUuUserKey_
+-- * 'uUserKey'
+usersUpdate
+    :: User -- ^ 'uPayload'
+    -> Text -- ^ 'uUserKey'
+    -> UsersUpdate
+usersUpdate pUPayload_ pUUserKey_ =
+    UsersUpdate
+    { _uPayload = pUPayload_
+    , _uUserKey = pUUserKey_
     }
 
 -- | Multipart request metadata.
-uuPayload :: Lens' UsersUpdate' User
-uuPayload
-  = lens _uuPayload (\ s a -> s{_uuPayload = a})
+uPayload :: Lens' UsersUpdate User
+uPayload = lens _uPayload (\ s a -> s{_uPayload = a})
 
 -- | Email or immutable Id of the user. If Id, it should match with id of
 -- user object
-uuUserKey :: Lens' UsersUpdate' Text
-uuUserKey
-  = lens _uuUserKey (\ s a -> s{_uuUserKey = a})
+uUserKey :: Lens' UsersUpdate Text
+uUserKey = lens _uUserKey (\ s a -> s{_uUserKey = a})
 
-instance GoogleRequest UsersUpdate' where
-        type Rs UsersUpdate' = User
-        requestClient UsersUpdate'{..}
-          = go _uuUserKey (Just AltJSON) _uuPayload
+instance GoogleRequest UsersUpdate where
+        type Rs UsersUpdate = User
+        requestClient UsersUpdate{..}
+          = go _uUserKey (Just AltJSON) _uPayload
               directoryService
           where go
                   = buildClient (Proxy :: Proxy UsersUpdateResource)

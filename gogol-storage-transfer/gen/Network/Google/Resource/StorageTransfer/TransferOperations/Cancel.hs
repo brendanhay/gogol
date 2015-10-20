@@ -30,8 +30,8 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
       TransferOperationsCancelResource
 
     -- * Creating a Request
-    , transferOperationsCancel'
-    , TransferOperationsCancel'
+    , transferOperationsCancel
+    , TransferOperationsCancel
 
     -- * Request Lenses
     , tocXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferOperations.cancel@ method which the
--- 'TransferOperationsCancel'' request conforms to.
+-- 'TransferOperationsCancel' request conforms to.
 type TransferOperationsCancelResource =
      "v1" :>
        CaptureMode "name" "cancel" Text :>
@@ -64,8 +64,8 @@ type TransferOperationsCancelResource =
 -- | Cancels a transfer. Use the get method to check whether the cancellation
 -- succeeded or whether the operation completed despite cancellation.
 --
--- /See:/ 'transferOperationsCancel'' smart constructor.
-data TransferOperationsCancel' = TransferOperationsCancel'
+-- /See:/ 'transferOperationsCancel' smart constructor.
+data TransferOperationsCancel = TransferOperationsCancel
     { _tocXgafv          :: !(Maybe Text)
     , _tocUploadProtocol :: !(Maybe Text)
     , _tocPp             :: !Bool
@@ -76,7 +76,7 @@ data TransferOperationsCancel' = TransferOperationsCancel'
     , _tocCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TransferOperationsCancel'' with the minimum fields required to make a request.
+-- | Creates a value of 'TransferOperationsCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -95,11 +95,11 @@ data TransferOperationsCancel' = TransferOperationsCancel'
 -- * 'tocName'
 --
 -- * 'tocCallback'
-transferOperationsCancel'
+transferOperationsCancel
     :: Text -- ^ 'tocName'
-    -> TransferOperationsCancel'
-transferOperationsCancel' pTocName_ =
-    TransferOperationsCancel'
+    -> TransferOperationsCancel
+transferOperationsCancel pTocName_ =
+    TransferOperationsCancel
     { _tocXgafv = Nothing
     , _tocUploadProtocol = Nothing
     , _tocPp = True
@@ -111,50 +111,49 @@ transferOperationsCancel' pTocName_ =
     }
 
 -- | V1 error format.
-tocXgafv :: Lens' TransferOperationsCancel' (Maybe Text)
+tocXgafv :: Lens' TransferOperationsCancel (Maybe Text)
 tocXgafv = lens _tocXgafv (\ s a -> s{_tocXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-tocUploadProtocol :: Lens' TransferOperationsCancel' (Maybe Text)
+tocUploadProtocol :: Lens' TransferOperationsCancel (Maybe Text)
 tocUploadProtocol
   = lens _tocUploadProtocol
       (\ s a -> s{_tocUploadProtocol = a})
 
 -- | Pretty-print response.
-tocPp :: Lens' TransferOperationsCancel' Bool
+tocPp :: Lens' TransferOperationsCancel Bool
 tocPp = lens _tocPp (\ s a -> s{_tocPp = a})
 
 -- | OAuth access token.
-tocAccessToken :: Lens' TransferOperationsCancel' (Maybe Text)
+tocAccessToken :: Lens' TransferOperationsCancel (Maybe Text)
 tocAccessToken
   = lens _tocAccessToken
       (\ s a -> s{_tocAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-tocUploadType :: Lens' TransferOperationsCancel' (Maybe Text)
+tocUploadType :: Lens' TransferOperationsCancel (Maybe Text)
 tocUploadType
   = lens _tocUploadType
       (\ s a -> s{_tocUploadType = a})
 
 -- | OAuth bearer token.
-tocBearerToken :: Lens' TransferOperationsCancel' (Maybe Text)
+tocBearerToken :: Lens' TransferOperationsCancel (Maybe Text)
 tocBearerToken
   = lens _tocBearerToken
       (\ s a -> s{_tocBearerToken = a})
 
 -- | The name of the operation resource to be cancelled.
-tocName :: Lens' TransferOperationsCancel' Text
+tocName :: Lens' TransferOperationsCancel Text
 tocName = lens _tocName (\ s a -> s{_tocName = a})
 
 -- | JSONP
-tocCallback :: Lens' TransferOperationsCancel' (Maybe Text)
+tocCallback :: Lens' TransferOperationsCancel (Maybe Text)
 tocCallback
   = lens _tocCallback (\ s a -> s{_tocCallback = a})
 
-instance GoogleRequest TransferOperationsCancel'
-         where
-        type Rs TransferOperationsCancel' = Empty
-        requestClient TransferOperationsCancel'{..}
+instance GoogleRequest TransferOperationsCancel where
+        type Rs TransferOperationsCancel = Empty
+        requestClient TransferOperationsCancel{..}
           = go _tocName _tocXgafv _tocUploadProtocol
               (Just _tocPp)
               _tocAccessToken

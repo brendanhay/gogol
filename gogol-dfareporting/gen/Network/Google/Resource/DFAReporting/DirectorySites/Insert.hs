@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.DirectorySites.Insert
       DirectorySitesInsertResource
 
     -- * Creating a Request
-    , directorySitesInsert'
-    , DirectorySitesInsert'
+    , directorySitesInsert
+    , DirectorySitesInsert
 
     -- * Request Lenses
     , dsiProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.directorySites.insert@ method which the
--- 'DirectorySitesInsert'' request conforms to.
+-- 'DirectorySitesInsert' request conforms to.
 type DirectorySitesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,42 +52,42 @@ type DirectorySitesInsertResource =
 
 -- | Inserts a new directory site.
 --
--- /See:/ 'directorySitesInsert'' smart constructor.
-data DirectorySitesInsert' = DirectorySitesInsert'
+-- /See:/ 'directorySitesInsert' smart constructor.
+data DirectorySitesInsert = DirectorySitesInsert
     { _dsiProFileId :: !Int64
     , _dsiPayload   :: !DirectorySite
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DirectorySitesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'DirectorySitesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dsiProFileId'
 --
 -- * 'dsiPayload'
-directorySitesInsert'
+directorySitesInsert
     :: Int64 -- ^ 'dsiProFileId'
     -> DirectorySite -- ^ 'dsiPayload'
-    -> DirectorySitesInsert'
-directorySitesInsert' pDsiProFileId_ pDsiPayload_ =
-    DirectorySitesInsert'
+    -> DirectorySitesInsert
+directorySitesInsert pDsiProFileId_ pDsiPayload_ =
+    DirectorySitesInsert
     { _dsiProFileId = pDsiProFileId_
     , _dsiPayload = pDsiPayload_
     }
 
 -- | User profile ID associated with this request.
-dsiProFileId :: Lens' DirectorySitesInsert' Int64
+dsiProFileId :: Lens' DirectorySitesInsert Int64
 dsiProFileId
   = lens _dsiProFileId (\ s a -> s{_dsiProFileId = a})
 
 -- | Multipart request metadata.
-dsiPayload :: Lens' DirectorySitesInsert' DirectorySite
+dsiPayload :: Lens' DirectorySitesInsert DirectorySite
 dsiPayload
   = lens _dsiPayload (\ s a -> s{_dsiPayload = a})
 
-instance GoogleRequest DirectorySitesInsert' where
-        type Rs DirectorySitesInsert' = DirectorySite
-        requestClient DirectorySitesInsert'{..}
+instance GoogleRequest DirectorySitesInsert where
+        type Rs DirectorySitesInsert = DirectorySite
+        requestClient DirectorySitesInsert{..}
           = go _dsiProFileId (Just AltJSON) _dsiPayload
               dFAReportingService
           where go

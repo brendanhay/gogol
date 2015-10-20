@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.ForwardingRules.List
       ForwardingRulesListResource
 
     -- * Creating a Request
-    , forwardingRulesList'
-    , ForwardingRulesList'
+    , forwardingRulesList
+    , ForwardingRulesList
 
     -- * Request Lenses
     , frlProject
@@ -45,7 +45,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.forwardingRules.list@ method which the
--- 'ForwardingRulesList'' request conforms to.
+-- 'ForwardingRulesList' request conforms to.
 type ForwardingRulesListResource =
      Capture "project" Text :>
        "regions" :>
@@ -60,8 +60,8 @@ type ForwardingRulesListResource =
 -- | Retrieves the list of ForwardingRule resources available to the
 -- specified project and region.
 --
--- /See:/ 'forwardingRulesList'' smart constructor.
-data ForwardingRulesList' = ForwardingRulesList'
+-- /See:/ 'forwardingRulesList' smart constructor.
+data ForwardingRulesList = ForwardingRulesList
     { _frlProject    :: !Text
     , _frlFilter     :: !(Maybe Text)
     , _frlRegion     :: !Text
@@ -69,7 +69,7 @@ data ForwardingRulesList' = ForwardingRulesList'
     , _frlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ForwardingRulesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ForwardingRulesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,12 +82,12 @@ data ForwardingRulesList' = ForwardingRulesList'
 -- * 'frlPageToken'
 --
 -- * 'frlMaxResults'
-forwardingRulesList'
+forwardingRulesList
     :: Text -- ^ 'frlProject'
     -> Text -- ^ 'frlRegion'
-    -> ForwardingRulesList'
-forwardingRulesList' pFrlProject_ pFrlRegion_ =
-    ForwardingRulesList'
+    -> ForwardingRulesList
+forwardingRulesList pFrlProject_ pFrlRegion_ =
+    ForwardingRulesList
     { _frlProject = pFrlProject_
     , _frlFilter = Nothing
     , _frlRegion = pFrlRegion_
@@ -96,7 +96,7 @@ forwardingRulesList' pFrlProject_ pFrlRegion_ =
     }
 
 -- | Name of the project scoping this request.
-frlProject :: Lens' ForwardingRulesList' Text
+frlProject :: Lens' ForwardingRulesList Text
 frlProject
   = lens _frlProject (\ s a -> s{_frlProject = a})
 
@@ -111,31 +111,31 @@ frlProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-frlFilter :: Lens' ForwardingRulesList' (Maybe Text)
+frlFilter :: Lens' ForwardingRulesList (Maybe Text)
 frlFilter
   = lens _frlFilter (\ s a -> s{_frlFilter = a})
 
 -- | Name of the region scoping this request.
-frlRegion :: Lens' ForwardingRulesList' Text
+frlRegion :: Lens' ForwardingRulesList Text
 frlRegion
   = lens _frlRegion (\ s a -> s{_frlRegion = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-frlPageToken :: Lens' ForwardingRulesList' (Maybe Text)
+frlPageToken :: Lens' ForwardingRulesList (Maybe Text)
 frlPageToken
   = lens _frlPageToken (\ s a -> s{_frlPageToken = a})
 
 -- | Maximum count of results to be returned.
-frlMaxResults :: Lens' ForwardingRulesList' Word32
+frlMaxResults :: Lens' ForwardingRulesList Word32
 frlMaxResults
   = lens _frlMaxResults
       (\ s a -> s{_frlMaxResults = a})
 
-instance GoogleRequest ForwardingRulesList' where
-        type Rs ForwardingRulesList' = ForwardingRuleList
-        requestClient ForwardingRulesList'{..}
+instance GoogleRequest ForwardingRulesList where
+        type Rs ForwardingRulesList = ForwardingRuleList
+        requestClient ForwardingRulesList{..}
           = go _frlProject _frlRegion _frlFilter _frlPageToken
               (Just _frlMaxResults)
               (Just AltJSON)

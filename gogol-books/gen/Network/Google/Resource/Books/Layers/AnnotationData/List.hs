@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Layers.AnnotationData.List
       LayersAnnotationDataListResource
 
     -- * Creating a Request
-    , layersAnnotationDataList'
-    , LayersAnnotationDataList'
+    , layersAnnotationDataList
+    , LayersAnnotationDataList
 
     -- * Request Lenses
     , ladlW
@@ -52,7 +52,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.layers.annotationData.list@ method which the
--- 'LayersAnnotationDataList'' request conforms to.
+-- 'LayersAnnotationDataList' request conforms to.
 type LayersAnnotationDataListResource =
      "volumes" :>
        Capture "volumeId" Text :>
@@ -75,8 +75,8 @@ type LayersAnnotationDataListResource =
 
 -- | Gets the annotation data for a volume and layer.
 --
--- /See:/ 'layersAnnotationDataList'' smart constructor.
-data LayersAnnotationDataList' = LayersAnnotationDataList'
+-- /See:/ 'layersAnnotationDataList' smart constructor.
+data LayersAnnotationDataList = LayersAnnotationDataList
     { _ladlW                :: !(Maybe Int32)
     , _ladlScale            :: !(Maybe Int32)
     , _ladlLocale           :: !(Maybe Text)
@@ -92,7 +92,7 @@ data LayersAnnotationDataList' = LayersAnnotationDataList'
     , _ladlMaxResults       :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersAnnotationDataList'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersAnnotationDataList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -121,13 +121,13 @@ data LayersAnnotationDataList' = LayersAnnotationDataList'
 -- * 'ladlLayerId'
 --
 -- * 'ladlMaxResults'
-layersAnnotationDataList'
+layersAnnotationDataList
     :: Text -- ^ 'ladlContentVersion'
     -> Text -- ^ 'ladlVolumeId'
     -> Text -- ^ 'ladlLayerId'
-    -> LayersAnnotationDataList'
-layersAnnotationDataList' pLadlContentVersion_ pLadlVolumeId_ pLadlLayerId_ =
-    LayersAnnotationDataList'
+    -> LayersAnnotationDataList
+layersAnnotationDataList pLadlContentVersion_ pLadlVolumeId_ pLadlLayerId_ =
+    LayersAnnotationDataList
     { _ladlW = Nothing
     , _ladlScale = Nothing
     , _ladlLocale = Nothing
@@ -145,43 +145,43 @@ layersAnnotationDataList' pLadlContentVersion_ pLadlVolumeId_ pLadlLayerId_ =
 
 -- | The requested pixel width for any images. If width is provided height
 -- must also be provided.
-ladlW :: Lens' LayersAnnotationDataList' (Maybe Int32)
+ladlW :: Lens' LayersAnnotationDataList (Maybe Int32)
 ladlW = lens _ladlW (\ s a -> s{_ladlW = a})
 
 -- | The requested scale for the image.
-ladlScale :: Lens' LayersAnnotationDataList' (Maybe Int32)
+ladlScale :: Lens' LayersAnnotationDataList (Maybe Int32)
 ladlScale
   = lens _ladlScale (\ s a -> s{_ladlScale = a})
 
 -- | The locale information for the data. ISO-639-1 language and ISO-3166-1
 -- country code. Ex: \'en_US\'.
-ladlLocale :: Lens' LayersAnnotationDataList' (Maybe Text)
+ladlLocale :: Lens' LayersAnnotationDataList (Maybe Text)
 ladlLocale
   = lens _ladlLocale (\ s a -> s{_ladlLocale = a})
 
 -- | The content version for the requested volume.
-ladlContentVersion :: Lens' LayersAnnotationDataList' Text
+ladlContentVersion :: Lens' LayersAnnotationDataList Text
 ladlContentVersion
   = lens _ladlContentVersion
       (\ s a -> s{_ladlContentVersion = a})
 
 -- | RFC 3339 timestamp to restrict to items updated prior to this timestamp
 -- (exclusive).
-ladlUpdatedMax :: Lens' LayersAnnotationDataList' (Maybe Text)
+ladlUpdatedMax :: Lens' LayersAnnotationDataList (Maybe Text)
 ladlUpdatedMax
   = lens _ladlUpdatedMax
       (\ s a -> s{_ladlUpdatedMax = a})
 
 -- | RFC 3339 timestamp to restrict to items updated since this timestamp
 -- (inclusive).
-ladlUpdatedMin :: Lens' LayersAnnotationDataList' (Maybe Text)
+ladlUpdatedMin :: Lens' LayersAnnotationDataList (Maybe Text)
 ladlUpdatedMin
   = lens _ladlUpdatedMin
       (\ s a -> s{_ladlUpdatedMin = a})
 
 -- | The list of Annotation Data Ids to retrieve. Pagination is ignored if
 -- this is set.
-ladlAnnotationDataId :: Lens' LayersAnnotationDataList' [Text]
+ladlAnnotationDataId :: Lens' LayersAnnotationDataList [Text]
 ladlAnnotationDataId
   = lens _ladlAnnotationDataId
       (\ s a -> s{_ladlAnnotationDataId = a})
@@ -189,41 +189,40 @@ ladlAnnotationDataId
       . _Coerce
 
 -- | The volume to retrieve annotation data for.
-ladlVolumeId :: Lens' LayersAnnotationDataList' Text
+ladlVolumeId :: Lens' LayersAnnotationDataList Text
 ladlVolumeId
   = lens _ladlVolumeId (\ s a -> s{_ladlVolumeId = a})
 
 -- | String to identify the originator of this request.
-ladlSource :: Lens' LayersAnnotationDataList' (Maybe Text)
+ladlSource :: Lens' LayersAnnotationDataList (Maybe Text)
 ladlSource
   = lens _ladlSource (\ s a -> s{_ladlSource = a})
 
 -- | The requested pixel height for any images. If height is provided width
 -- must also be provided.
-ladlH :: Lens' LayersAnnotationDataList' (Maybe Int32)
+ladlH :: Lens' LayersAnnotationDataList (Maybe Int32)
 ladlH = lens _ladlH (\ s a -> s{_ladlH = a})
 
 -- | The value of the nextToken from the previous page.
-ladlPageToken :: Lens' LayersAnnotationDataList' (Maybe Text)
+ladlPageToken :: Lens' LayersAnnotationDataList (Maybe Text)
 ladlPageToken
   = lens _ladlPageToken
       (\ s a -> s{_ladlPageToken = a})
 
 -- | The ID for the layer to get the annotation data.
-ladlLayerId :: Lens' LayersAnnotationDataList' Text
+ladlLayerId :: Lens' LayersAnnotationDataList Text
 ladlLayerId
   = lens _ladlLayerId (\ s a -> s{_ladlLayerId = a})
 
 -- | Maximum number of results to return
-ladlMaxResults :: Lens' LayersAnnotationDataList' (Maybe Word32)
+ladlMaxResults :: Lens' LayersAnnotationDataList (Maybe Word32)
 ladlMaxResults
   = lens _ladlMaxResults
       (\ s a -> s{_ladlMaxResults = a})
 
-instance GoogleRequest LayersAnnotationDataList'
-         where
-        type Rs LayersAnnotationDataList' = AnnotationsData
-        requestClient LayersAnnotationDataList'{..}
+instance GoogleRequest LayersAnnotationDataList where
+        type Rs LayersAnnotationDataList = AnnotationsData
+        requestClient LayersAnnotationDataList{..}
           = go _ladlVolumeId _ladlLayerId
               (Just _ladlContentVersion)
               _ladlW

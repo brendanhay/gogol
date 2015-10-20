@@ -29,19 +29,19 @@ module Network.Google.Resource.FusionTables.Template.Insert
       TemplateInsertResource
 
     -- * Creating a Request
-    , templateInsert'
-    , TemplateInsert'
+    , templateInsert
+    , TemplateInsert
 
     -- * Request Lenses
-    , tiPayload
-    , tiTableId
+    , temPayload
+    , temTableId
     ) where
 
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.template.insert@ method which the
--- 'TemplateInsert'' request conforms to.
+-- 'TemplateInsert' request conforms to.
 type TemplateInsertResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -51,43 +51,43 @@ type TemplateInsertResource =
 
 -- | Creates a new template for the table.
 --
--- /See:/ 'templateInsert'' smart constructor.
-data TemplateInsert' = TemplateInsert'
-    { _tiPayload :: !Template
-    , _tiTableId :: !Text
+-- /See:/ 'templateInsert' smart constructor.
+data TemplateInsert = TemplateInsert
+    { _temPayload :: !Template
+    , _temTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TemplateInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'TemplateInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tiPayload'
+-- * 'temPayload'
 --
--- * 'tiTableId'
-templateInsert'
-    :: Template -- ^ 'tiPayload'
-    -> Text -- ^ 'tiTableId'
-    -> TemplateInsert'
-templateInsert' pTiPayload_ pTiTableId_ =
-    TemplateInsert'
-    { _tiPayload = pTiPayload_
-    , _tiTableId = pTiTableId_
+-- * 'temTableId'
+templateInsert
+    :: Template -- ^ 'temPayload'
+    -> Text -- ^ 'temTableId'
+    -> TemplateInsert
+templateInsert pTemPayload_ pTemTableId_ =
+    TemplateInsert
+    { _temPayload = pTemPayload_
+    , _temTableId = pTemTableId_
     }
 
 -- | Multipart request metadata.
-tiPayload :: Lens' TemplateInsert' Template
-tiPayload
-  = lens _tiPayload (\ s a -> s{_tiPayload = a})
+temPayload :: Lens' TemplateInsert Template
+temPayload
+  = lens _temPayload (\ s a -> s{_temPayload = a})
 
 -- | Table for which a new template is being created
-tiTableId :: Lens' TemplateInsert' Text
-tiTableId
-  = lens _tiTableId (\ s a -> s{_tiTableId = a})
+temTableId :: Lens' TemplateInsert Text
+temTableId
+  = lens _temTableId (\ s a -> s{_temTableId = a})
 
-instance GoogleRequest TemplateInsert' where
-        type Rs TemplateInsert' = Template
-        requestClient TemplateInsert'{..}
-          = go _tiTableId (Just AltJSON) _tiPayload
+instance GoogleRequest TemplateInsert where
+        type Rs TemplateInsert = Template
+        requestClient TemplateInsert{..}
+          = go _temTableId (Just AltJSON) _temPayload
               fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TemplateInsertResource)

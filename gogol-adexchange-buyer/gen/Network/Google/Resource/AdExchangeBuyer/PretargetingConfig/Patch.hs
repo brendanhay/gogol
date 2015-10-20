@@ -30,8 +30,8 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Patch
       PretargetingConfigPatchResource
 
     -- * Creating a Request
-    , pretargetingConfigPatch'
-    , PretargetingConfigPatch'
+    , pretargetingConfigPatch
+    , PretargetingConfigPatch
 
     -- * Request Lenses
     , pcpPayload
@@ -43,7 +43,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.pretargetingConfig.patch@ method which the
--- 'PretargetingConfigPatch'' request conforms to.
+-- 'PretargetingConfigPatch' request conforms to.
 type PretargetingConfigPatchResource =
      "pretargetingconfigs" :>
        Capture "accountId" Int64 :>
@@ -55,14 +55,14 @@ type PretargetingConfigPatchResource =
 -- | Updates an existing pretargeting config. This method supports patch
 -- semantics.
 --
--- /See:/ 'pretargetingConfigPatch'' smart constructor.
-data PretargetingConfigPatch' = PretargetingConfigPatch'
+-- /See:/ 'pretargetingConfigPatch' smart constructor.
+data PretargetingConfigPatch = PretargetingConfigPatch
     { _pcpPayload   :: !PretargetingConfig
     , _pcpAccountId :: !Int64
     , _pcpConfigId  :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PretargetingConfigPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'PretargetingConfigPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,36 +71,36 @@ data PretargetingConfigPatch' = PretargetingConfigPatch'
 -- * 'pcpAccountId'
 --
 -- * 'pcpConfigId'
-pretargetingConfigPatch'
+pretargetingConfigPatch
     :: PretargetingConfig -- ^ 'pcpPayload'
     -> Int64 -- ^ 'pcpAccountId'
     -> Int64 -- ^ 'pcpConfigId'
-    -> PretargetingConfigPatch'
-pretargetingConfigPatch' pPcpPayload_ pPcpAccountId_ pPcpConfigId_ =
-    PretargetingConfigPatch'
+    -> PretargetingConfigPatch
+pretargetingConfigPatch pPcpPayload_ pPcpAccountId_ pPcpConfigId_ =
+    PretargetingConfigPatch
     { _pcpPayload = pPcpPayload_
     , _pcpAccountId = pPcpAccountId_
     , _pcpConfigId = pPcpConfigId_
     }
 
 -- | Multipart request metadata.
-pcpPayload :: Lens' PretargetingConfigPatch' PretargetingConfig
+pcpPayload :: Lens' PretargetingConfigPatch PretargetingConfig
 pcpPayload
   = lens _pcpPayload (\ s a -> s{_pcpPayload = a})
 
 -- | The account id to update the pretargeting config for.
-pcpAccountId :: Lens' PretargetingConfigPatch' Int64
+pcpAccountId :: Lens' PretargetingConfigPatch Int64
 pcpAccountId
   = lens _pcpAccountId (\ s a -> s{_pcpAccountId = a})
 
 -- | The specific id of the configuration to update.
-pcpConfigId :: Lens' PretargetingConfigPatch' Int64
+pcpConfigId :: Lens' PretargetingConfigPatch Int64
 pcpConfigId
   = lens _pcpConfigId (\ s a -> s{_pcpConfigId = a})
 
-instance GoogleRequest PretargetingConfigPatch' where
-        type Rs PretargetingConfigPatch' = PretargetingConfig
-        requestClient PretargetingConfigPatch'{..}
+instance GoogleRequest PretargetingConfigPatch where
+        type Rs PretargetingConfigPatch = PretargetingConfig
+        requestClient PretargetingConfigPatch{..}
           = go _pcpAccountId _pcpConfigId (Just AltJSON)
               _pcpPayload
               adExchangeBuyerService

@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.UserRolePermissions.List
       UserRolePermissionsListResource
 
     -- * Creating a Request
-    , userRolePermissionsList'
-    , UserRolePermissionsList'
+    , userRolePermissionsList
+    , UserRolePermissionsList
 
     -- * Request Lenses
     , urplIds
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.userRolePermissions.list@ method which the
--- 'UserRolePermissionsList'' request conforms to.
+-- 'UserRolePermissionsList' request conforms to.
 type UserRolePermissionsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,44 +52,44 @@ type UserRolePermissionsListResource =
 
 -- | Gets a list of user role permissions, possibly filtered.
 --
--- /See:/ 'userRolePermissionsList'' smart constructor.
-data UserRolePermissionsList' = UserRolePermissionsList'
+-- /See:/ 'userRolePermissionsList' smart constructor.
+data UserRolePermissionsList = UserRolePermissionsList
     { _urplIds       :: !(Maybe [Int64])
     , _urplProFileId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserRolePermissionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'UserRolePermissionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'urplIds'
 --
 -- * 'urplProFileId'
-userRolePermissionsList'
+userRolePermissionsList
     :: Int64 -- ^ 'urplProFileId'
-    -> UserRolePermissionsList'
-userRolePermissionsList' pUrplProFileId_ =
-    UserRolePermissionsList'
+    -> UserRolePermissionsList
+userRolePermissionsList pUrplProFileId_ =
+    UserRolePermissionsList
     { _urplIds = Nothing
     , _urplProFileId = pUrplProFileId_
     }
 
 -- | Select only user role permissions with these IDs.
-urplIds :: Lens' UserRolePermissionsList' [Int64]
+urplIds :: Lens' UserRolePermissionsList [Int64]
 urplIds
   = lens _urplIds (\ s a -> s{_urplIds = a}) . _Default
       . _Coerce
 
 -- | User profile ID associated with this request.
-urplProFileId :: Lens' UserRolePermissionsList' Int64
+urplProFileId :: Lens' UserRolePermissionsList Int64
 urplProFileId
   = lens _urplProFileId
       (\ s a -> s{_urplProFileId = a})
 
-instance GoogleRequest UserRolePermissionsList' where
-        type Rs UserRolePermissionsList' =
+instance GoogleRequest UserRolePermissionsList where
+        type Rs UserRolePermissionsList =
              UserRolePermissionsListResponse
-        requestClient UserRolePermissionsList'{..}
+        requestClient UserRolePermissionsList{..}
           = go _urplProFileId (_urplIds ^. _Default)
               (Just AltJSON)
               dFAReportingService

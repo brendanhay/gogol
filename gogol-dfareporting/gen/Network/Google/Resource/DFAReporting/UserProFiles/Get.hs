@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.UserProFiles.Get
       UserProFilesGetResource
 
     -- * Creating a Request
-    , userProFilesGet'
-    , UserProFilesGet'
+    , userProFilesGet
+    , UserProFilesGet
 
     -- * Request Lenses
     , upfgProFileId
@@ -40,7 +40,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.userProfiles.get@ method which the
--- 'UserProFilesGet'' request conforms to.
+-- 'UserProFilesGet' request conforms to.
 type UserProFilesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -48,33 +48,33 @@ type UserProFilesGetResource =
 
 -- | Gets one user profile by ID.
 --
--- /See:/ 'userProFilesGet'' smart constructor.
-newtype UserProFilesGet' = UserProFilesGet'
+-- /See:/ 'userProFilesGet' smart constructor.
+newtype UserProFilesGet = UserProFilesGet
     { _upfgProFileId :: Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserProFilesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UserProFilesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'upfgProFileId'
-userProFilesGet'
+userProFilesGet
     :: Int64 -- ^ 'upfgProFileId'
-    -> UserProFilesGet'
-userProFilesGet' pUpfgProFileId_ =
-    UserProFilesGet'
+    -> UserProFilesGet
+userProFilesGet pUpfgProFileId_ =
+    UserProFilesGet
     { _upfgProFileId = pUpfgProFileId_
     }
 
 -- | The user profile ID.
-upfgProFileId :: Lens' UserProFilesGet' Int64
+upfgProFileId :: Lens' UserProFilesGet Int64
 upfgProFileId
   = lens _upfgProFileId
       (\ s a -> s{_upfgProFileId = a})
 
-instance GoogleRequest UserProFilesGet' where
-        type Rs UserProFilesGet' = UserProFile
-        requestClient UserProFilesGet'{..}
+instance GoogleRequest UserProFilesGet where
+        type Rs UserProFilesGet = UserProFile
+        requestClient UserProFilesGet{..}
           = go _upfgProFileId (Just AltJSON)
               dFAReportingService
           where go

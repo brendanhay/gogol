@@ -29,21 +29,21 @@ module Network.Google.Resource.Content.Accounts.Patch
       AccountsPatchResource
 
     -- * Creating a Request
-    , accountsPatch'
-    , AccountsPatch'
+    , accountsPatch
+    , AccountsPatch
 
     -- * Request Lenses
-    , ap1MerchantId
-    , ap1Payload
-    , ap1AccountId
-    , ap1DryRun
+    , apMerchantId
+    , apPayload
+    , apAccountId
+    , apDryRun
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accounts.patch@ method which the
--- 'AccountsPatch'' request conforms to.
+-- 'AccountsPatch' request conforms to.
 type AccountsPatchResource =
      Capture "merchantId" Word64 :>
        "accounts" :>
@@ -54,65 +54,63 @@ type AccountsPatchResource =
 
 -- | Updates a Merchant Center account. This method supports patch semantics.
 --
--- /See:/ 'accountsPatch'' smart constructor.
-data AccountsPatch' = AccountsPatch'
-    { _ap1MerchantId :: !Word64
-    , _ap1Payload    :: !Account
-    , _ap1AccountId  :: !Word64
-    , _ap1DryRun     :: !(Maybe Bool)
+-- /See:/ 'accountsPatch' smart constructor.
+data AccountsPatch = AccountsPatch
+    { _apMerchantId :: !Word64
+    , _apPayload    :: !Account
+    , _apAccountId  :: !Word64
+    , _apDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ap1MerchantId'
+-- * 'apMerchantId'
 --
--- * 'ap1Payload'
+-- * 'apPayload'
 --
--- * 'ap1AccountId'
+-- * 'apAccountId'
 --
--- * 'ap1DryRun'
-accountsPatch'
-    :: Word64 -- ^ 'ap1MerchantId'
-    -> Account -- ^ 'ap1Payload'
-    -> Word64 -- ^ 'ap1AccountId'
-    -> AccountsPatch'
-accountsPatch' pAp1MerchantId_ pAp1Payload_ pAp1AccountId_ =
-    AccountsPatch'
-    { _ap1MerchantId = pAp1MerchantId_
-    , _ap1Payload = pAp1Payload_
-    , _ap1AccountId = pAp1AccountId_
-    , _ap1DryRun = Nothing
+-- * 'apDryRun'
+accountsPatch
+    :: Word64 -- ^ 'apMerchantId'
+    -> Account -- ^ 'apPayload'
+    -> Word64 -- ^ 'apAccountId'
+    -> AccountsPatch
+accountsPatch pApMerchantId_ pApPayload_ pApAccountId_ =
+    AccountsPatch
+    { _apMerchantId = pApMerchantId_
+    , _apPayload = pApPayload_
+    , _apAccountId = pApAccountId_
+    , _apDryRun = Nothing
     }
 
 -- | The ID of the managing account.
-ap1MerchantId :: Lens' AccountsPatch' Word64
-ap1MerchantId
-  = lens _ap1MerchantId
-      (\ s a -> s{_ap1MerchantId = a})
+apMerchantId :: Lens' AccountsPatch Word64
+apMerchantId
+  = lens _apMerchantId (\ s a -> s{_apMerchantId = a})
 
 -- | Multipart request metadata.
-ap1Payload :: Lens' AccountsPatch' Account
-ap1Payload
-  = lens _ap1Payload (\ s a -> s{_ap1Payload = a})
+apPayload :: Lens' AccountsPatch Account
+apPayload
+  = lens _apPayload (\ s a -> s{_apPayload = a})
 
 -- | The ID of the account.
-ap1AccountId :: Lens' AccountsPatch' Word64
-ap1AccountId
-  = lens _ap1AccountId (\ s a -> s{_ap1AccountId = a})
+apAccountId :: Lens' AccountsPatch Word64
+apAccountId
+  = lens _apAccountId (\ s a -> s{_apAccountId = a})
 
 -- | Flag to run the request in dry-run mode.
-ap1DryRun :: Lens' AccountsPatch' (Maybe Bool)
-ap1DryRun
-  = lens _ap1DryRun (\ s a -> s{_ap1DryRun = a})
+apDryRun :: Lens' AccountsPatch (Maybe Bool)
+apDryRun = lens _apDryRun (\ s a -> s{_apDryRun = a})
 
-instance GoogleRequest AccountsPatch' where
-        type Rs AccountsPatch' = Account
-        requestClient AccountsPatch'{..}
-          = go _ap1MerchantId _ap1AccountId _ap1DryRun
+instance GoogleRequest AccountsPatch where
+        type Rs AccountsPatch = Account
+        requestClient AccountsPatch{..}
+          = go _apMerchantId _apAccountId _apDryRun
               (Just AltJSON)
-              _ap1Payload
+              _apPayload
               shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy AccountsPatchResource)

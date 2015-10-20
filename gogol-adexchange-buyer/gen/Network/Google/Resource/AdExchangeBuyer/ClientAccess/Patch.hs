@@ -27,8 +27,8 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Patch
       ClientAccessPatchResource
 
     -- * Creating a Request
-    , clientAccessPatch'
-    , ClientAccessPatch'
+    , clientAccessPatch
+    , ClientAccessPatch
 
     -- * Request Lenses
     , capSponsorAccountId
@@ -40,7 +40,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.clientaccess.patch@ method which the
--- 'ClientAccessPatch'' request conforms to.
+-- 'ClientAccessPatch' request conforms to.
 type ClientAccessPatchResource =
      "clientAccess" :>
        Capture "clientAccountId" Int64 :>
@@ -50,14 +50,14 @@ type ClientAccessPatchResource =
                Patch '[JSON] ClientAccessCapabilities
 
 --
--- /See:/ 'clientAccessPatch'' smart constructor.
-data ClientAccessPatch' = ClientAccessPatch'
+-- /See:/ 'clientAccessPatch' smart constructor.
+data ClientAccessPatch = ClientAccessPatch
     { _capSponsorAccountId :: !Int32
     , _capPayload          :: !ClientAccessCapabilities
     , _capClientAccountId  :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ClientAccessPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ClientAccessPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -66,36 +66,36 @@ data ClientAccessPatch' = ClientAccessPatch'
 -- * 'capPayload'
 --
 -- * 'capClientAccountId'
-clientAccessPatch'
+clientAccessPatch
     :: Int32 -- ^ 'capSponsorAccountId'
     -> ClientAccessCapabilities -- ^ 'capPayload'
     -> Int64 -- ^ 'capClientAccountId'
-    -> ClientAccessPatch'
-clientAccessPatch' pCapSponsorAccountId_ pCapPayload_ pCapClientAccountId_ =
-    ClientAccessPatch'
+    -> ClientAccessPatch
+clientAccessPatch pCapSponsorAccountId_ pCapPayload_ pCapClientAccountId_ =
+    ClientAccessPatch
     { _capSponsorAccountId = pCapSponsorAccountId_
     , _capPayload = pCapPayload_
     , _capClientAccountId = pCapClientAccountId_
     }
 
-capSponsorAccountId :: Lens' ClientAccessPatch' Int32
+capSponsorAccountId :: Lens' ClientAccessPatch Int32
 capSponsorAccountId
   = lens _capSponsorAccountId
       (\ s a -> s{_capSponsorAccountId = a})
 
 -- | Multipart request metadata.
-capPayload :: Lens' ClientAccessPatch' ClientAccessCapabilities
+capPayload :: Lens' ClientAccessPatch ClientAccessCapabilities
 capPayload
   = lens _capPayload (\ s a -> s{_capPayload = a})
 
-capClientAccountId :: Lens' ClientAccessPatch' Int64
+capClientAccountId :: Lens' ClientAccessPatch Int64
 capClientAccountId
   = lens _capClientAccountId
       (\ s a -> s{_capClientAccountId = a})
 
-instance GoogleRequest ClientAccessPatch' where
-        type Rs ClientAccessPatch' = ClientAccessCapabilities
-        requestClient ClientAccessPatch'{..}
+instance GoogleRequest ClientAccessPatch where
+        type Rs ClientAccessPatch = ClientAccessCapabilities
+        requestClient ClientAccessPatch{..}
           = go _capClientAccountId (Just _capSponsorAccountId)
               (Just AltJSON)
               _capPayload

@@ -30,8 +30,8 @@ module Network.Google.Resource.SiteVerification.WebResource.Patch
       WebResourcePatchResource
 
     -- * Creating a Request
-    , webResourcePatch'
-    , WebResourcePatch'
+    , webResourcePatch
+    , WebResourcePatch
 
     -- * Request Lenses
     , wrpPayload
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.patch@ method which the
--- 'WebResourcePatch'' request conforms to.
+-- 'WebResourcePatch' request conforms to.
 type WebResourcePatchResource =
      "webResource" :>
        Capture "id" Text :>
@@ -53,42 +53,42 @@ type WebResourcePatchResource =
 -- | Modify the list of owners for your website or domain. This method
 -- supports patch semantics.
 --
--- /See:/ 'webResourcePatch'' smart constructor.
-data WebResourcePatch' = WebResourcePatch'
+-- /See:/ 'webResourcePatch' smart constructor.
+data WebResourcePatch = WebResourcePatch
     { _wrpPayload :: !SiteVerificationWebResourceResource
     , _wrpId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'WebResourcePatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'WebResourcePatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'wrpPayload'
 --
 -- * 'wrpId'
-webResourcePatch'
+webResourcePatch
     :: SiteVerificationWebResourceResource -- ^ 'wrpPayload'
     -> Text -- ^ 'wrpId'
-    -> WebResourcePatch'
-webResourcePatch' pWrpPayload_ pWrpId_ =
-    WebResourcePatch'
+    -> WebResourcePatch
+webResourcePatch pWrpPayload_ pWrpId_ =
+    WebResourcePatch
     { _wrpPayload = pWrpPayload_
     , _wrpId = pWrpId_
     }
 
 -- | Multipart request metadata.
-wrpPayload :: Lens' WebResourcePatch' SiteVerificationWebResourceResource
+wrpPayload :: Lens' WebResourcePatch SiteVerificationWebResourceResource
 wrpPayload
   = lens _wrpPayload (\ s a -> s{_wrpPayload = a})
 
 -- | The id of a verified site or domain.
-wrpId :: Lens' WebResourcePatch' Text
+wrpId :: Lens' WebResourcePatch Text
 wrpId = lens _wrpId (\ s a -> s{_wrpId = a})
 
-instance GoogleRequest WebResourcePatch' where
-        type Rs WebResourcePatch' =
+instance GoogleRequest WebResourcePatch where
+        type Rs WebResourcePatch =
              SiteVerificationWebResourceResource
-        requestClient WebResourcePatch'{..}
+        requestClient WebResourcePatch{..}
           = go _wrpId (Just AltJSON) _wrpPayload
               siteVerificationService
           where go

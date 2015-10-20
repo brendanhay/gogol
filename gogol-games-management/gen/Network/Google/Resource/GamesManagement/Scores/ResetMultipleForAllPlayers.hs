@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Scores.ResetMultipleForAllPlayers
       ScoresResetMultipleForAllPlayersResource
 
     -- * Creating a Request
-    , scoresResetMultipleForAllPlayers'
-    , ScoresResetMultipleForAllPlayers'
+    , scoresResetMultipleForAllPlayers
+    , ScoresResetMultipleForAllPlayers
 
     -- * Request Lenses
     , srmfapPayload
@@ -42,7 +42,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.scores.resetMultipleForAllPlayers@ method which the
--- 'ScoresResetMultipleForAllPlayers'' request conforms to.
+-- 'ScoresResetMultipleForAllPlayers' request conforms to.
 type ScoresResetMultipleForAllPlayersResource =
      "scores" :>
        "resetMultipleForAllPlayers" :>
@@ -54,34 +54,34 @@ type ScoresResetMultipleForAllPlayersResource =
 -- This method is only available to user accounts for your developer
 -- console. Only draft leaderboards may be reset.
 --
--- /See:/ 'scoresResetMultipleForAllPlayers'' smart constructor.
-newtype ScoresResetMultipleForAllPlayers' = ScoresResetMultipleForAllPlayers'
+-- /See:/ 'scoresResetMultipleForAllPlayers' smart constructor.
+newtype ScoresResetMultipleForAllPlayers = ScoresResetMultipleForAllPlayers
     { _srmfapPayload :: ScoresResetMultipleForAllRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ScoresResetMultipleForAllPlayers'' with the minimum fields required to make a request.
+-- | Creates a value of 'ScoresResetMultipleForAllPlayers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'srmfapPayload'
-scoresResetMultipleForAllPlayers'
+scoresResetMultipleForAllPlayers
     :: ScoresResetMultipleForAllRequest -- ^ 'srmfapPayload'
-    -> ScoresResetMultipleForAllPlayers'
-scoresResetMultipleForAllPlayers' pSrmfapPayload_ =
-    ScoresResetMultipleForAllPlayers'
+    -> ScoresResetMultipleForAllPlayers
+scoresResetMultipleForAllPlayers pSrmfapPayload_ =
+    ScoresResetMultipleForAllPlayers
     { _srmfapPayload = pSrmfapPayload_
     }
 
 -- | Multipart request metadata.
-srmfapPayload :: Lens' ScoresResetMultipleForAllPlayers' ScoresResetMultipleForAllRequest
+srmfapPayload :: Lens' ScoresResetMultipleForAllPlayers ScoresResetMultipleForAllRequest
 srmfapPayload
   = lens _srmfapPayload
       (\ s a -> s{_srmfapPayload = a})
 
 instance GoogleRequest
-         ScoresResetMultipleForAllPlayers' where
-        type Rs ScoresResetMultipleForAllPlayers' = ()
-        requestClient ScoresResetMultipleForAllPlayers'{..}
+         ScoresResetMultipleForAllPlayers where
+        type Rs ScoresResetMultipleForAllPlayers = ()
+        requestClient ScoresResetMultipleForAllPlayers{..}
           = go (Just AltJSON) _srmfapPayload
               gamesManagementService
           where go

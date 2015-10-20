@@ -30,8 +30,8 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.Get
       ConversionGetResource
 
     -- * Creating a Request
-    , conversionGet'
-    , ConversionGet'
+    , conversionGet
+    , ConversionGet
 
     -- * Request Lenses
     , cgAdGroupId
@@ -51,7 +51,7 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @doubleclicksearch.conversion.get@ method which the
--- 'ConversionGet'' request conforms to.
+-- 'ConversionGet' request conforms to.
 type ConversionGetResource =
      "agency" :>
        Capture "agencyId" Int64 :>
@@ -74,8 +74,8 @@ type ConversionGetResource =
 -- | Retrieves a list of conversions from a DoubleClick Search engine
 -- account.
 --
--- /See:/ 'conversionGet'' smart constructor.
-data ConversionGet' = ConversionGet'
+-- /See:/ 'conversionGet' smart constructor.
+data ConversionGet = ConversionGet
     { _cgAdGroupId       :: !(Maybe Int64)
     , _cgEngineAccountId :: !Int64
     , _cgAgencyId        :: !Int64
@@ -89,7 +89,7 @@ data ConversionGet' = ConversionGet'
     , _cgRowCount        :: !Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ConversionGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ConversionGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -114,7 +114,7 @@ data ConversionGet' = ConversionGet'
 -- * 'cgAdId'
 --
 -- * 'cgRowCount'
-conversionGet'
+conversionGet
     :: Int64 -- ^ 'cgEngineAccountId'
     -> Int64 -- ^ 'cgAgencyId'
     -> Int64 -- ^ 'cgAdvertiserId'
@@ -122,9 +122,9 @@ conversionGet'
     -> Int32 -- ^ 'cgStartDate'
     -> Word32 -- ^ 'cgStartRow'
     -> Int32 -- ^ 'cgRowCount'
-    -> ConversionGet'
-conversionGet' pCgEngineAccountId_ pCgAgencyId_ pCgAdvertiserId_ pCgEndDate_ pCgStartDate_ pCgStartRow_ pCgRowCount_ =
-    ConversionGet'
+    -> ConversionGet
+conversionGet pCgEngineAccountId_ pCgAgencyId_ pCgAdvertiserId_ pCgEndDate_ pCgStartDate_ pCgStartRow_ pCgRowCount_ =
+    ConversionGet
     { _cgAdGroupId = Nothing
     , _cgEngineAccountId = pCgEngineAccountId_
     , _cgAgencyId = pCgAgencyId_
@@ -139,67 +139,67 @@ conversionGet' pCgEngineAccountId_ pCgAgencyId_ pCgAdvertiserId_ pCgEndDate_ pCg
     }
 
 -- | Numeric ID of the ad group.
-cgAdGroupId :: Lens' ConversionGet' (Maybe Int64)
+cgAdGroupId :: Lens' ConversionGet (Maybe Int64)
 cgAdGroupId
   = lens _cgAdGroupId (\ s a -> s{_cgAdGroupId = a})
 
 -- | Numeric ID of the engine account.
-cgEngineAccountId :: Lens' ConversionGet' Int64
+cgEngineAccountId :: Lens' ConversionGet Int64
 cgEngineAccountId
   = lens _cgEngineAccountId
       (\ s a -> s{_cgEngineAccountId = a})
 
 -- | Numeric ID of the agency.
-cgAgencyId :: Lens' ConversionGet' Int64
+cgAgencyId :: Lens' ConversionGet Int64
 cgAgencyId
   = lens _cgAgencyId (\ s a -> s{_cgAgencyId = a})
 
 -- | Numeric ID of the advertiser.
-cgAdvertiserId :: Lens' ConversionGet' Int64
+cgAdvertiserId :: Lens' ConversionGet Int64
 cgAdvertiserId
   = lens _cgAdvertiserId
       (\ s a -> s{_cgAdvertiserId = a})
 
 -- | Last date (inclusive) on which to retrieve conversions. Format is
 -- yyyymmdd.
-cgEndDate :: Lens' ConversionGet' Int32
+cgEndDate :: Lens' ConversionGet Int32
 cgEndDate
   = lens _cgEndDate (\ s a -> s{_cgEndDate = a})
 
 -- | Numeric ID of the campaign.
-cgCampaignId :: Lens' ConversionGet' (Maybe Int64)
+cgCampaignId :: Lens' ConversionGet (Maybe Int64)
 cgCampaignId
   = lens _cgCampaignId (\ s a -> s{_cgCampaignId = a})
 
 -- | Numeric ID of the criterion.
-cgCriterionId :: Lens' ConversionGet' (Maybe Int64)
+cgCriterionId :: Lens' ConversionGet (Maybe Int64)
 cgCriterionId
   = lens _cgCriterionId
       (\ s a -> s{_cgCriterionId = a})
 
 -- | First date (inclusive) on which to retrieve conversions. Format is
 -- yyyymmdd.
-cgStartDate :: Lens' ConversionGet' Int32
+cgStartDate :: Lens' ConversionGet Int32
 cgStartDate
   = lens _cgStartDate (\ s a -> s{_cgStartDate = a})
 
 -- | The 0-based starting index for retrieving conversions results.
-cgStartRow :: Lens' ConversionGet' Word32
+cgStartRow :: Lens' ConversionGet Word32
 cgStartRow
   = lens _cgStartRow (\ s a -> s{_cgStartRow = a})
 
 -- | Numeric ID of the ad.
-cgAdId :: Lens' ConversionGet' (Maybe Int64)
+cgAdId :: Lens' ConversionGet (Maybe Int64)
 cgAdId = lens _cgAdId (\ s a -> s{_cgAdId = a})
 
 -- | The number of conversions to return per call.
-cgRowCount :: Lens' ConversionGet' Int32
+cgRowCount :: Lens' ConversionGet Int32
 cgRowCount
   = lens _cgRowCount (\ s a -> s{_cgRowCount = a})
 
-instance GoogleRequest ConversionGet' where
-        type Rs ConversionGet' = ConversionList
-        requestClient ConversionGet'{..}
+instance GoogleRequest ConversionGet where
+        type Rs ConversionGet = ConversionList
+        requestClient ConversionGet{..}
           = go _cgAgencyId _cgAdvertiserId _cgEngineAccountId
               (Just _cgEndDate)
               (Just _cgRowCount)

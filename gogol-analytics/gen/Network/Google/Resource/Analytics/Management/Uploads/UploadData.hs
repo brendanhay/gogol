@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Uploads.UploadData
       ManagementUploadsUploadDataResource
 
     -- * Creating a Request
-    , managementUploadsUploadData'
-    , ManagementUploadsUploadData'
+    , managementUploadsUploadData
+    , ManagementUploadsUploadData
 
     -- * Request Lenses
     , muudWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.uploads.uploadData@ method which the
--- 'ManagementUploadsUploadData'' request conforms to.
+-- 'ManagementUploadsUploadData' request conforms to.
 type ManagementUploadsUploadDataResource =
      "management" :>
        "accounts" :>
@@ -58,15 +58,15 @@ type ManagementUploadsUploadDataResource =
 
 -- | Upload data for a custom data source.
 --
--- /See:/ 'managementUploadsUploadData'' smart constructor.
-data ManagementUploadsUploadData' = ManagementUploadsUploadData'
+-- /See:/ 'managementUploadsUploadData' smart constructor.
+data ManagementUploadsUploadData = ManagementUploadsUploadData
     { _muudWebPropertyId      :: !Text
     , _muudCustomDataSourceId :: !Text
     , _muudMedia              :: !Body
     , _muudAccountId          :: !Text
     }
 
--- | Creates a value of 'ManagementUploadsUploadData'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementUploadsUploadData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data ManagementUploadsUploadData' = ManagementUploadsUploadData'
 -- * 'muudMedia'
 --
 -- * 'muudAccountId'
-managementUploadsUploadData'
+managementUploadsUploadData
     :: Text -- ^ 'muudWebPropertyId'
     -> Text -- ^ 'muudCustomDataSourceId'
     -> Body -- ^ 'muudMedia'
     -> Text -- ^ 'muudAccountId'
-    -> ManagementUploadsUploadData'
-managementUploadsUploadData' pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudMedia_ pMuudAccountId_ =
-    ManagementUploadsUploadData'
+    -> ManagementUploadsUploadData
+managementUploadsUploadData pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudMedia_ pMuudAccountId_ =
+    ManagementUploadsUploadData
     { _muudWebPropertyId = pMuudWebPropertyId_
     , _muudCustomDataSourceId = pMuudCustomDataSourceId_
     , _muudMedia = pMuudMedia_
@@ -92,31 +92,31 @@ managementUploadsUploadData' pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudM
     }
 
 -- | Web property UA-string associated with the upload.
-muudWebPropertyId :: Lens' ManagementUploadsUploadData' Text
+muudWebPropertyId :: Lens' ManagementUploadsUploadData Text
 muudWebPropertyId
   = lens _muudWebPropertyId
       (\ s a -> s{_muudWebPropertyId = a})
 
 -- | Custom data source Id to which the data being uploaded belongs.
-muudCustomDataSourceId :: Lens' ManagementUploadsUploadData' Text
+muudCustomDataSourceId :: Lens' ManagementUploadsUploadData Text
 muudCustomDataSourceId
   = lens _muudCustomDataSourceId
       (\ s a -> s{_muudCustomDataSourceId = a})
 
-muudMedia :: Lens' ManagementUploadsUploadData' Body
+muudMedia :: Lens' ManagementUploadsUploadData Body
 muudMedia
   = lens _muudMedia (\ s a -> s{_muudMedia = a})
 
 -- | Account Id associated with the upload.
-muudAccountId :: Lens' ManagementUploadsUploadData' Text
+muudAccountId :: Lens' ManagementUploadsUploadData Text
 muudAccountId
   = lens _muudAccountId
       (\ s a -> s{_muudAccountId = a})
 
-instance GoogleRequest ManagementUploadsUploadData'
+instance GoogleRequest ManagementUploadsUploadData
          where
-        type Rs ManagementUploadsUploadData' = Upload
-        requestClient ManagementUploadsUploadData'{..}
+        type Rs ManagementUploadsUploadData = Upload
+        requestClient ManagementUploadsUploadData{..}
           = go _muudAccountId _muudWebPropertyId
               _muudCustomDataSourceId
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.GlobalOperations.AggregatedList
       GlobalOperationsAggregatedListResource
 
     -- * Creating a Request
-    , globalOperationsAggregatedList'
-    , GlobalOperationsAggregatedList'
+    , globalOperationsAggregatedList
+    , GlobalOperationsAggregatedList
 
     -- * Request Lenses
     , goalProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.globalOperations.aggregatedList@ method which the
--- 'GlobalOperationsAggregatedList'' request conforms to.
+-- 'GlobalOperationsAggregatedList' request conforms to.
 type GlobalOperationsAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
@@ -56,15 +56,15 @@ type GlobalOperationsAggregatedListResource =
 
 -- | Retrieves the list of all operations grouped by scope.
 --
--- /See:/ 'globalOperationsAggregatedList'' smart constructor.
-data GlobalOperationsAggregatedList' = GlobalOperationsAggregatedList'
+-- /See:/ 'globalOperationsAggregatedList' smart constructor.
+data GlobalOperationsAggregatedList = GlobalOperationsAggregatedList
     { _goalProject    :: !Text
     , _goalFilter     :: !(Maybe Text)
     , _goalPageToken  :: !(Maybe Text)
     , _goalMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GlobalOperationsAggregatedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'GlobalOperationsAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,11 +75,11 @@ data GlobalOperationsAggregatedList' = GlobalOperationsAggregatedList'
 -- * 'goalPageToken'
 --
 -- * 'goalMaxResults'
-globalOperationsAggregatedList'
+globalOperationsAggregatedList
     :: Text -- ^ 'goalProject'
-    -> GlobalOperationsAggregatedList'
-globalOperationsAggregatedList' pGoalProject_ =
-    GlobalOperationsAggregatedList'
+    -> GlobalOperationsAggregatedList
+globalOperationsAggregatedList pGoalProject_ =
+    GlobalOperationsAggregatedList
     { _goalProject = pGoalProject_
     , _goalFilter = Nothing
     , _goalPageToken = Nothing
@@ -87,7 +87,7 @@ globalOperationsAggregatedList' pGoalProject_ =
     }
 
 -- | Project ID for this request.
-goalProject :: Lens' GlobalOperationsAggregatedList' Text
+goalProject :: Lens' GlobalOperationsAggregatedList Text
 goalProject
   = lens _goalProject (\ s a -> s{_goalProject = a})
 
@@ -102,29 +102,29 @@ goalProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-goalFilter :: Lens' GlobalOperationsAggregatedList' (Maybe Text)
+goalFilter :: Lens' GlobalOperationsAggregatedList (Maybe Text)
 goalFilter
   = lens _goalFilter (\ s a -> s{_goalFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-goalPageToken :: Lens' GlobalOperationsAggregatedList' (Maybe Text)
+goalPageToken :: Lens' GlobalOperationsAggregatedList (Maybe Text)
 goalPageToken
   = lens _goalPageToken
       (\ s a -> s{_goalPageToken = a})
 
 -- | Maximum count of results to be returned.
-goalMaxResults :: Lens' GlobalOperationsAggregatedList' Word32
+goalMaxResults :: Lens' GlobalOperationsAggregatedList Word32
 goalMaxResults
   = lens _goalMaxResults
       (\ s a -> s{_goalMaxResults = a})
 
-instance GoogleRequest
-         GlobalOperationsAggregatedList' where
-        type Rs GlobalOperationsAggregatedList' =
+instance GoogleRequest GlobalOperationsAggregatedList
+         where
+        type Rs GlobalOperationsAggregatedList =
              OperationAggregatedList
-        requestClient GlobalOperationsAggregatedList'{..}
+        requestClient GlobalOperationsAggregatedList{..}
           = go _goalProject _goalFilter _goalPageToken
               (Just _goalMaxResults)
               (Just AltJSON)

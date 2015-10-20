@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSense.Reports.Saved.List
       ReportsSavedListResource
 
     -- * Creating a Request
-    , reportsSavedList'
-    , ReportsSavedList'
+    , reportsSavedList
+    , ReportsSavedList
 
     -- * Request Lenses
     , rslPageToken
@@ -41,7 +41,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.reports.saved.list@ method which the
--- 'ReportsSavedList'' request conforms to.
+-- 'ReportsSavedList' request conforms to.
 type ReportsSavedListResource =
      "reports" :>
        "saved" :>
@@ -51,23 +51,23 @@ type ReportsSavedListResource =
 
 -- | List all saved reports in this AdSense account.
 --
--- /See:/ 'reportsSavedList'' smart constructor.
-data ReportsSavedList' = ReportsSavedList'
+-- /See:/ 'reportsSavedList' smart constructor.
+data ReportsSavedList = ReportsSavedList
     { _rslPageToken  :: !(Maybe Text)
     , _rslMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReportsSavedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportsSavedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rslPageToken'
 --
 -- * 'rslMaxResults'
-reportsSavedList'
-    :: ReportsSavedList'
-reportsSavedList' =
-    ReportsSavedList'
+reportsSavedList
+    :: ReportsSavedList
+reportsSavedList =
+    ReportsSavedList
     { _rslPageToken = Nothing
     , _rslMaxResults = Nothing
     }
@@ -75,20 +75,20 @@ reportsSavedList' =
 -- | A continuation token, used to page through saved reports. To retrieve
 -- the next page, set this parameter to the value of \"nextPageToken\" from
 -- the previous response.
-rslPageToken :: Lens' ReportsSavedList' (Maybe Text)
+rslPageToken :: Lens' ReportsSavedList (Maybe Text)
 rslPageToken
   = lens _rslPageToken (\ s a -> s{_rslPageToken = a})
 
 -- | The maximum number of saved reports to include in the response, used for
 -- paging.
-rslMaxResults :: Lens' ReportsSavedList' (Maybe Int32)
+rslMaxResults :: Lens' ReportsSavedList (Maybe Int32)
 rslMaxResults
   = lens _rslMaxResults
       (\ s a -> s{_rslMaxResults = a})
 
-instance GoogleRequest ReportsSavedList' where
-        type Rs ReportsSavedList' = SavedReports
-        requestClient ReportsSavedList'{..}
+instance GoogleRequest ReportsSavedList where
+        type Rs ReportsSavedList = SavedReports
+        requestClient ReportsSavedList{..}
           = go _rslPageToken _rslMaxResults (Just AltJSON)
               adSenseService
           where go

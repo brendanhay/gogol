@@ -30,8 +30,8 @@ module Network.Google.Resource.Reports.UserUsageReport.Get
       UserUsageReportGetResource
 
     -- * Creating a Request
-    , userUsageReportGet'
-    , UserUsageReportGet'
+    , userUsageReportGet
+    , UserUsageReportGet
 
     -- * Request Lenses
     , uurgFilters
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.Reports.Types
 
 -- | A resource alias for @reports.userUsageReport.get@ method which the
--- 'UserUsageReportGet'' request conforms to.
+-- 'UserUsageReportGet' request conforms to.
 type UserUsageReportGetResource =
      "usage" :>
        "users" :>
@@ -64,8 +64,8 @@ type UserUsageReportGetResource =
 -- | Retrieves a report which is a collection of properties \/ statistics for
 -- a set of users.
 --
--- /See:/ 'userUsageReportGet'' smart constructor.
-data UserUsageReportGet' = UserUsageReportGet'
+-- /See:/ 'userUsageReportGet' smart constructor.
+data UserUsageReportGet = UserUsageReportGet
     { _uurgFilters    :: !(Maybe Text)
     , _uurgCustomerId :: !(Maybe Text)
     , _uurgDate       :: !Text
@@ -75,7 +75,7 @@ data UserUsageReportGet' = UserUsageReportGet'
     , _uurgMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserUsageReportGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UserUsageReportGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -92,12 +92,12 @@ data UserUsageReportGet' = UserUsageReportGet'
 -- * 'uurgUserKey'
 --
 -- * 'uurgMaxResults'
-userUsageReportGet'
+userUsageReportGet
     :: Text -- ^ 'uurgDate'
     -> Text -- ^ 'uurgUserKey'
-    -> UserUsageReportGet'
-userUsageReportGet' pUurgDate_ pUurgUserKey_ =
-    UserUsageReportGet'
+    -> UserUsageReportGet
+userUsageReportGet pUurgDate_ pUurgUserKey_ =
+    UserUsageReportGet
     { _uurgFilters = Nothing
     , _uurgCustomerId = Nothing
     , _uurgDate = pUurgDate_
@@ -108,49 +108,49 @@ userUsageReportGet' pUurgDate_ pUurgUserKey_ =
     }
 
 -- | Represents the set of filters including parameter operator value.
-uurgFilters :: Lens' UserUsageReportGet' (Maybe Text)
+uurgFilters :: Lens' UserUsageReportGet (Maybe Text)
 uurgFilters
   = lens _uurgFilters (\ s a -> s{_uurgFilters = a})
 
 -- | Represents the customer for which the data is to be fetched.
-uurgCustomerId :: Lens' UserUsageReportGet' (Maybe Text)
+uurgCustomerId :: Lens' UserUsageReportGet (Maybe Text)
 uurgCustomerId
   = lens _uurgCustomerId
       (\ s a -> s{_uurgCustomerId = a})
 
 -- | Represents the date in yyyy-mm-dd format for which the data is to be
 -- fetched.
-uurgDate :: Lens' UserUsageReportGet' Text
+uurgDate :: Lens' UserUsageReportGet Text
 uurgDate = lens _uurgDate (\ s a -> s{_uurgDate = a})
 
 -- | Represents the application name, parameter name pairs to fetch in csv as
 -- app_name1:param_name1, app_name2:param_name2.
-uurgParameters :: Lens' UserUsageReportGet' (Maybe Text)
+uurgParameters :: Lens' UserUsageReportGet (Maybe Text)
 uurgParameters
   = lens _uurgParameters
       (\ s a -> s{_uurgParameters = a})
 
 -- | Token to specify next page.
-uurgPageToken :: Lens' UserUsageReportGet' (Maybe Text)
+uurgPageToken :: Lens' UserUsageReportGet (Maybe Text)
 uurgPageToken
   = lens _uurgPageToken
       (\ s a -> s{_uurgPageToken = a})
 
 -- | Represents the profile id or the user email for which the data should be
 -- filtered.
-uurgUserKey :: Lens' UserUsageReportGet' Text
+uurgUserKey :: Lens' UserUsageReportGet Text
 uurgUserKey
   = lens _uurgUserKey (\ s a -> s{_uurgUserKey = a})
 
 -- | Maximum number of results to return. Maximum allowed is 1000
-uurgMaxResults :: Lens' UserUsageReportGet' (Maybe Word32)
+uurgMaxResults :: Lens' UserUsageReportGet (Maybe Word32)
 uurgMaxResults
   = lens _uurgMaxResults
       (\ s a -> s{_uurgMaxResults = a})
 
-instance GoogleRequest UserUsageReportGet' where
-        type Rs UserUsageReportGet' = UsageReports
-        requestClient UserUsageReportGet'{..}
+instance GoogleRequest UserUsageReportGet where
+        type Rs UserUsageReportGet = UsageReports
+        requestClient UserUsageReportGet{..}
           = go _uurgUserKey _uurgDate _uurgFilters
               _uurgCustomerId
               _uurgParameters

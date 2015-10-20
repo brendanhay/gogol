@@ -29,8 +29,8 @@ module Network.Google.Resource.AppState.States.List
       StatesListResource
 
     -- * Creating a Request
-    , statesList'
-    , StatesList'
+    , statesList
+    , StatesList
 
     -- * Request Lenses
     , slIncludeData
@@ -40,7 +40,7 @@ import           Network.Google.AppState.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @appstate.states.list@ method which the
--- 'StatesList'' request conforms to.
+-- 'StatesList' request conforms to.
 type StatesListResource =
      "states" :>
        QueryParam "includeData" Bool :>
@@ -48,32 +48,32 @@ type StatesListResource =
 
 -- | Lists all the states keys, and optionally the state data.
 --
--- /See:/ 'statesList'' smart constructor.
-newtype StatesList' = StatesList'
+-- /See:/ 'statesList' smart constructor.
+newtype StatesList = StatesList
     { _slIncludeData :: Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'StatesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'StatesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'slIncludeData'
-statesList'
-    :: StatesList'
-statesList' =
-    StatesList'
+statesList
+    :: StatesList
+statesList =
+    StatesList
     { _slIncludeData = False
     }
 
 -- | Whether to include the full data in addition to the version number
-slIncludeData :: Lens' StatesList' Bool
+slIncludeData :: Lens' StatesList Bool
 slIncludeData
   = lens _slIncludeData
       (\ s a -> s{_slIncludeData = a})
 
-instance GoogleRequest StatesList' where
-        type Rs StatesList' = ListResponse
-        requestClient StatesList'{..}
+instance GoogleRequest StatesList where
+        type Rs StatesList = ListResponse
+        requestClient StatesList{..}
           = go (Just _slIncludeData) (Just AltJSON)
               appStateService
           where go

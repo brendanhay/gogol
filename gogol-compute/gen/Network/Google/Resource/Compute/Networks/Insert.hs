@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Networks.Insert
       NetworksInsertResource
 
     -- * Creating a Request
-    , networksInsert'
-    , NetworksInsert'
+    , networksInsert
+    , NetworksInsert
 
     -- * Request Lenses
     , niProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.networks.insert@ method which the
--- 'NetworksInsert'' request conforms to.
+-- 'NetworksInsert' request conforms to.
 type NetworksInsertResource =
      Capture "project" Text :>
        "global" :>
@@ -53,42 +53,42 @@ type NetworksInsertResource =
 -- | Creates a network resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'networksInsert'' smart constructor.
-data NetworksInsert' = NetworksInsert'
+-- /See:/ 'networksInsert' smart constructor.
+data NetworksInsert = NetworksInsert
     { _niProject :: !Text
     , _niPayload :: !Network
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'NetworksInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'NetworksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'niProject'
 --
 -- * 'niPayload'
-networksInsert'
+networksInsert
     :: Text -- ^ 'niProject'
     -> Network -- ^ 'niPayload'
-    -> NetworksInsert'
-networksInsert' pNiProject_ pNiPayload_ =
-    NetworksInsert'
+    -> NetworksInsert
+networksInsert pNiProject_ pNiPayload_ =
+    NetworksInsert
     { _niProject = pNiProject_
     , _niPayload = pNiPayload_
     }
 
 -- | Project ID for this request.
-niProject :: Lens' NetworksInsert' Text
+niProject :: Lens' NetworksInsert Text
 niProject
   = lens _niProject (\ s a -> s{_niProject = a})
 
 -- | Multipart request metadata.
-niPayload :: Lens' NetworksInsert' Network
+niPayload :: Lens' NetworksInsert Network
 niPayload
   = lens _niPayload (\ s a -> s{_niPayload = a})
 
-instance GoogleRequest NetworksInsert' where
-        type Rs NetworksInsert' = Operation
-        requestClient NetworksInsert'{..}
+instance GoogleRequest NetworksInsert where
+        type Rs NetworksInsert = Operation
+        requestClient NetworksInsert{..}
           = go _niProject (Just AltJSON) _niPayload
               computeService
           where go

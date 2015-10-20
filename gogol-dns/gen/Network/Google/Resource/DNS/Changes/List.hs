@@ -29,8 +29,8 @@ module Network.Google.Resource.DNS.Changes.List
       ChangesListResource
 
     -- * Creating a Request
-    , changesList'
-    , ChangesList'
+    , changesList
+    , ChangesList
 
     -- * Request Lenses
     , clProject
@@ -45,7 +45,7 @@ import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dns.changes.list@ method which the
--- 'ChangesList'' request conforms to.
+-- 'ChangesList' request conforms to.
 type ChangesListResource =
      Capture "project" Text :>
        "managedZones" :>
@@ -60,8 +60,8 @@ type ChangesListResource =
 
 -- | Enumerate Changes to a ResourceRecordSet collection.
 --
--- /See:/ 'changesList'' smart constructor.
-data ChangesList' = ChangesList'
+-- /See:/ 'changesList' smart constructor.
+data ChangesList = ChangesList
     { _clProject     :: !Text
     , _clSortOrder   :: !(Maybe Text)
     , _clPageToken   :: !(Maybe Text)
@@ -70,7 +70,7 @@ data ChangesList' = ChangesList'
     , _clSortBy      :: !ChangesListSortBy
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChangesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChangesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -85,12 +85,12 @@ data ChangesList' = ChangesList'
 -- * 'clMaxResults'
 --
 -- * 'clSortBy'
-changesList'
+changesList
     :: Text -- ^ 'clProject'
     -> Text -- ^ 'clManagedZone'
-    -> ChangesList'
-changesList' pClProject_ pClManagedZone_ =
-    ChangesList'
+    -> ChangesList
+changesList pClProject_ pClManagedZone_ =
+    ChangesList
     { _clProject = pClProject_
     , _clSortOrder = Nothing
     , _clPageToken = Nothing
@@ -100,41 +100,41 @@ changesList' pClProject_ pClManagedZone_ =
     }
 
 -- | Identifies the project addressed by this request.
-clProject :: Lens' ChangesList' Text
+clProject :: Lens' ChangesList Text
 clProject
   = lens _clProject (\ s a -> s{_clProject = a})
 
 -- | Sorting order direction: \'ascending\' or \'descending\'.
-clSortOrder :: Lens' ChangesList' (Maybe Text)
+clSortOrder :: Lens' ChangesList (Maybe Text)
 clSortOrder
   = lens _clSortOrder (\ s a -> s{_clSortOrder = a})
 
 -- | Optional. A tag returned by a previous list request that was truncated.
 -- Use this parameter to continue a previous list request.
-clPageToken :: Lens' ChangesList' (Maybe Text)
+clPageToken :: Lens' ChangesList (Maybe Text)
 clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
 -- | Identifies the managed zone addressed by this request. Can be the
 -- managed zone name or id.
-clManagedZone :: Lens' ChangesList' Text
+clManagedZone :: Lens' ChangesList Text
 clManagedZone
   = lens _clManagedZone
       (\ s a -> s{_clManagedZone = a})
 
 -- | Optional. Maximum number of results to be returned. If unspecified, the
 -- server will decide how many results to return.
-clMaxResults :: Lens' ChangesList' (Maybe Int32)
+clMaxResults :: Lens' ChangesList (Maybe Int32)
 clMaxResults
   = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
 
 -- | Sorting criterion. The only supported value is change sequence.
-clSortBy :: Lens' ChangesList' ChangesListSortBy
+clSortBy :: Lens' ChangesList ChangesListSortBy
 clSortBy = lens _clSortBy (\ s a -> s{_clSortBy = a})
 
-instance GoogleRequest ChangesList' where
-        type Rs ChangesList' = ChangesListResponse
-        requestClient ChangesList'{..}
+instance GoogleRequest ChangesList where
+        type Rs ChangesList = ChangesListResponse
+        requestClient ChangesList{..}
           = go _clProject _clManagedZone _clSortOrder
               _clPageToken
               _clMaxResults

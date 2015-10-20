@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Volumes.Mybooks.List
       VolumesMybooksListResource
 
     -- * Creating a Request
-    , volumesMybooksList'
-    , VolumesMybooksList'
+    , volumesMybooksList
+    , VolumesMybooksList
 
     -- * Request Lenses
     , vmlProcessingState
@@ -45,7 +45,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.volumes.mybooks.list@ method which the
--- 'VolumesMybooksList'' request conforms to.
+-- 'VolumesMybooksList' request conforms to.
 type VolumesMybooksListResource =
      "volumes" :>
        "mybooks" :>
@@ -63,8 +63,8 @@ type VolumesMybooksListResource =
 
 -- | Return a list of books in My Library.
 --
--- /See:/ 'volumesMybooksList'' smart constructor.
-data VolumesMybooksList' = VolumesMybooksList'
+-- /See:/ 'volumesMybooksList' smart constructor.
+data VolumesMybooksList = VolumesMybooksList
     { _vmlProcessingState :: !(Maybe [VolumesMybooksListProcessingState])
     , _vmlAcquireMethod   :: !(Maybe [VolumesMybooksListAcquireMethod])
     , _vmlLocale          :: !(Maybe Text)
@@ -73,7 +73,7 @@ data VolumesMybooksList' = VolumesMybooksList'
     , _vmlMaxResults      :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumesMybooksList'' with the minimum fields required to make a request.
+-- | Creates a value of 'VolumesMybooksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -88,10 +88,10 @@ data VolumesMybooksList' = VolumesMybooksList'
 -- * 'vmlStartIndex'
 --
 -- * 'vmlMaxResults'
-volumesMybooksList'
-    :: VolumesMybooksList'
-volumesMybooksList' =
-    VolumesMybooksList'
+volumesMybooksList
+    :: VolumesMybooksList
+volumesMybooksList =
+    VolumesMybooksList
     { _vmlProcessingState = Nothing
     , _vmlAcquireMethod = Nothing
     , _vmlLocale = Nothing
@@ -102,7 +102,7 @@ volumesMybooksList' =
 
 -- | The processing state of the user uploaded volumes to be returned.
 -- Applicable only if the UPLOADED is specified in the acquireMethod.
-vmlProcessingState :: Lens' VolumesMybooksList' [VolumesMybooksListProcessingState]
+vmlProcessingState :: Lens' VolumesMybooksList [VolumesMybooksListProcessingState]
 vmlProcessingState
   = lens _vmlProcessingState
       (\ s a -> s{_vmlProcessingState = a})
@@ -110,7 +110,7 @@ vmlProcessingState
       . _Coerce
 
 -- | How the book was aquired
-vmlAcquireMethod :: Lens' VolumesMybooksList' [VolumesMybooksListAcquireMethod]
+vmlAcquireMethod :: Lens' VolumesMybooksList [VolumesMybooksListAcquireMethod]
 vmlAcquireMethod
   = lens _vmlAcquireMethod
       (\ s a -> s{_vmlAcquireMethod = a})
@@ -119,30 +119,30 @@ vmlAcquireMethod
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Ex:\'en_US\'. Used for
 -- generating recommendations.
-vmlLocale :: Lens' VolumesMybooksList' (Maybe Text)
+vmlLocale :: Lens' VolumesMybooksList (Maybe Text)
 vmlLocale
   = lens _vmlLocale (\ s a -> s{_vmlLocale = a})
 
 -- | String to identify the originator of this request.
-vmlSource :: Lens' VolumesMybooksList' (Maybe Text)
+vmlSource :: Lens' VolumesMybooksList (Maybe Text)
 vmlSource
   = lens _vmlSource (\ s a -> s{_vmlSource = a})
 
 -- | Index of the first result to return (starts at 0)
-vmlStartIndex :: Lens' VolumesMybooksList' (Maybe Word32)
+vmlStartIndex :: Lens' VolumesMybooksList (Maybe Word32)
 vmlStartIndex
   = lens _vmlStartIndex
       (\ s a -> s{_vmlStartIndex = a})
 
 -- | Maximum number of results to return.
-vmlMaxResults :: Lens' VolumesMybooksList' (Maybe Word32)
+vmlMaxResults :: Lens' VolumesMybooksList (Maybe Word32)
 vmlMaxResults
   = lens _vmlMaxResults
       (\ s a -> s{_vmlMaxResults = a})
 
-instance GoogleRequest VolumesMybooksList' where
-        type Rs VolumesMybooksList' = Volumes
-        requestClient VolumesMybooksList'{..}
+instance GoogleRequest VolumesMybooksList where
+        type Rs VolumesMybooksList = Volumes
+        requestClient VolumesMybooksList{..}
           = go (_vmlProcessingState ^. _Default)
               (_vmlAcquireMethod ^. _Default)
               _vmlLocale

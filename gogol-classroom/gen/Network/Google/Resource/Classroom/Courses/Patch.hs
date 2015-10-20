@@ -35,8 +35,8 @@ module Network.Google.Resource.Classroom.Courses.Patch
       CoursesPatchResource
 
     -- * Creating a Request
-    , coursesPatch'
-    , CoursesPatch'
+    , coursesPatch
+    , CoursesPatch
 
     -- * Request Lenses
     , cpXgafv
@@ -55,7 +55,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.patch@ method which the
--- 'CoursesPatch'' request conforms to.
+-- 'CoursesPatch' request conforms to.
 type CoursesPatchResource =
      "v1" :>
        "courses" :>
@@ -79,8 +79,8 @@ type CoursesPatchResource =
 -- or if no update mask is supplied. * \`FAILED_PRECONDITION\` for the
 -- following request errors: * CourseNotModifiable
 --
--- /See:/ 'coursesPatch'' smart constructor.
-data CoursesPatch' = CoursesPatch'
+-- /See:/ 'coursesPatch' smart constructor.
+data CoursesPatch = CoursesPatch
     { _cpXgafv          :: !(Maybe Text)
     , _cpUploadProtocol :: !(Maybe Text)
     , _cpUpdateMask     :: !(Maybe Text)
@@ -93,7 +93,7 @@ data CoursesPatch' = CoursesPatch'
     , _cpCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CoursesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'CoursesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -116,12 +116,12 @@ data CoursesPatch' = CoursesPatch'
 -- * 'cpId'
 --
 -- * 'cpCallback'
-coursesPatch'
+coursesPatch
     :: Course -- ^ 'cpPayload'
     -> Text -- ^ 'cpId'
-    -> CoursesPatch'
-coursesPatch' pCpPayload_ pCpId_ =
-    CoursesPatch'
+    -> CoursesPatch
+coursesPatch pCpPayload_ pCpId_ =
+    CoursesPatch
     { _cpXgafv = Nothing
     , _cpUploadProtocol = Nothing
     , _cpUpdateMask = Nothing
@@ -135,11 +135,11 @@ coursesPatch' pCpPayload_ pCpId_ =
     }
 
 -- | V1 error format.
-cpXgafv :: Lens' CoursesPatch' (Maybe Text)
+cpXgafv :: Lens' CoursesPatch (Maybe Text)
 cpXgafv = lens _cpXgafv (\ s a -> s{_cpXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-cpUploadProtocol :: Lens' CoursesPatch' (Maybe Text)
+cpUploadProtocol :: Lens' CoursesPatch (Maybe Text)
 cpUploadProtocol
   = lens _cpUploadProtocol
       (\ s a -> s{_cpUploadProtocol = a})
@@ -150,49 +150,49 @@ cpUploadProtocol
 -- \`descriptionHeading\` * \`description\` * \`room\` * \`courseState\`
 -- When set in a query parameter, this field should be specified as
 -- \`updateMask=,,...\`
-cpUpdateMask :: Lens' CoursesPatch' (Maybe Text)
+cpUpdateMask :: Lens' CoursesPatch (Maybe Text)
 cpUpdateMask
   = lens _cpUpdateMask (\ s a -> s{_cpUpdateMask = a})
 
 -- | Pretty-print response.
-cpPp :: Lens' CoursesPatch' Bool
+cpPp :: Lens' CoursesPatch Bool
 cpPp = lens _cpPp (\ s a -> s{_cpPp = a})
 
 -- | OAuth access token.
-cpAccessToken :: Lens' CoursesPatch' (Maybe Text)
+cpAccessToken :: Lens' CoursesPatch (Maybe Text)
 cpAccessToken
   = lens _cpAccessToken
       (\ s a -> s{_cpAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-cpUploadType :: Lens' CoursesPatch' (Maybe Text)
+cpUploadType :: Lens' CoursesPatch (Maybe Text)
 cpUploadType
   = lens _cpUploadType (\ s a -> s{_cpUploadType = a})
 
 -- | Multipart request metadata.
-cpPayload :: Lens' CoursesPatch' Course
+cpPayload :: Lens' CoursesPatch Course
 cpPayload
   = lens _cpPayload (\ s a -> s{_cpPayload = a})
 
 -- | OAuth bearer token.
-cpBearerToken :: Lens' CoursesPatch' (Maybe Text)
+cpBearerToken :: Lens' CoursesPatch (Maybe Text)
 cpBearerToken
   = lens _cpBearerToken
       (\ s a -> s{_cpBearerToken = a})
 
 -- | Identifier of the course to update. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
-cpId :: Lens' CoursesPatch' Text
+cpId :: Lens' CoursesPatch Text
 cpId = lens _cpId (\ s a -> s{_cpId = a})
 
 -- | JSONP
-cpCallback :: Lens' CoursesPatch' (Maybe Text)
+cpCallback :: Lens' CoursesPatch (Maybe Text)
 cpCallback
   = lens _cpCallback (\ s a -> s{_cpCallback = a})
 
-instance GoogleRequest CoursesPatch' where
-        type Rs CoursesPatch' = Course
-        requestClient CoursesPatch'{..}
+instance GoogleRequest CoursesPatch where
+        type Rs CoursesPatch = Course
+        requestClient CoursesPatch{..}
           = go _cpId _cpXgafv _cpUploadProtocol _cpUpdateMask
               (Just _cpPp)
               _cpAccessToken

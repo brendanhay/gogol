@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.LandingPages.Get
       LandingPagesGetResource
 
     -- * Creating a Request
-    , landingPagesGet'
-    , LandingPagesGet'
+    , landingPagesGet
+    , LandingPagesGet
 
     -- * Request Lenses
     , lpgCampaignId
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.landingPages.get@ method which the
--- 'LandingPagesGet'' request conforms to.
+-- 'LandingPagesGet' request conforms to.
 type LandingPagesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -54,14 +54,14 @@ type LandingPagesGetResource =
 
 -- | Gets one campaign landing page by ID.
 --
--- /See:/ 'landingPagesGet'' smart constructor.
-data LandingPagesGet' = LandingPagesGet'
+-- /See:/ 'landingPagesGet' smart constructor.
+data LandingPagesGet = LandingPagesGet
     { _lpgCampaignId :: !Int64
     , _lpgProFileId  :: !Int64
     , _lpgId         :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LandingPagesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'LandingPagesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,36 +70,36 @@ data LandingPagesGet' = LandingPagesGet'
 -- * 'lpgProFileId'
 --
 -- * 'lpgId'
-landingPagesGet'
+landingPagesGet
     :: Int64 -- ^ 'lpgCampaignId'
     -> Int64 -- ^ 'lpgProFileId'
     -> Int64 -- ^ 'lpgId'
-    -> LandingPagesGet'
-landingPagesGet' pLpgCampaignId_ pLpgProFileId_ pLpgId_ =
-    LandingPagesGet'
+    -> LandingPagesGet
+landingPagesGet pLpgCampaignId_ pLpgProFileId_ pLpgId_ =
+    LandingPagesGet
     { _lpgCampaignId = pLpgCampaignId_
     , _lpgProFileId = pLpgProFileId_
     , _lpgId = pLpgId_
     }
 
 -- | Landing page campaign ID.
-lpgCampaignId :: Lens' LandingPagesGet' Int64
+lpgCampaignId :: Lens' LandingPagesGet Int64
 lpgCampaignId
   = lens _lpgCampaignId
       (\ s a -> s{_lpgCampaignId = a})
 
 -- | User profile ID associated with this request.
-lpgProFileId :: Lens' LandingPagesGet' Int64
+lpgProFileId :: Lens' LandingPagesGet Int64
 lpgProFileId
   = lens _lpgProFileId (\ s a -> s{_lpgProFileId = a})
 
 -- | Landing page ID.
-lpgId :: Lens' LandingPagesGet' Int64
+lpgId :: Lens' LandingPagesGet Int64
 lpgId = lens _lpgId (\ s a -> s{_lpgId = a})
 
-instance GoogleRequest LandingPagesGet' where
-        type Rs LandingPagesGet' = LandingPage
-        requestClient LandingPagesGet'{..}
+instance GoogleRequest LandingPagesGet where
+        type Rs LandingPagesGet = LandingPage
+        requestClient LandingPagesGet{..}
           = go _lpgProFileId _lpgCampaignId _lpgId
               (Just AltJSON)
               dFAReportingService

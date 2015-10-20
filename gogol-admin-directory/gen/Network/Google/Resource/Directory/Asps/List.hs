@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Asps.List
       AspsListResource
 
     -- * Creating a Request
-    , aspsList'
-    , AspsList'
+    , aspsList
+    , AspsList
 
     -- * Request Lenses
     , alUserKey
@@ -40,7 +40,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.asps.list@ method which the
--- 'AspsList'' request conforms to.
+-- 'AspsList' request conforms to.
 type AspsListResource =
      "users" :>
        Capture "userKey" Text :>
@@ -49,33 +49,33 @@ type AspsListResource =
 
 -- | List the ASPs issued by a user.
 --
--- /See:/ 'aspsList'' smart constructor.
-newtype AspsList' = AspsList'
+-- /See:/ 'aspsList' smart constructor.
+newtype AspsList = AspsList
     { _alUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AspsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AspsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'alUserKey'
-aspsList'
+aspsList
     :: Text -- ^ 'alUserKey'
-    -> AspsList'
-aspsList' pAlUserKey_ =
-    AspsList'
+    -> AspsList
+aspsList pAlUserKey_ =
+    AspsList
     { _alUserKey = pAlUserKey_
     }
 
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.
-alUserKey :: Lens' AspsList' Text
+alUserKey :: Lens' AspsList Text
 alUserKey
   = lens _alUserKey (\ s a -> s{_alUserKey = a})
 
-instance GoogleRequest AspsList' where
-        type Rs AspsList' = Asps
-        requestClient AspsList'{..}
+instance GoogleRequest AspsList where
+        type Rs AspsList = Asps
+        requestClient AspsList{..}
           = go _alUserKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy AspsListResource)

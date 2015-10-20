@@ -33,8 +33,8 @@ module Network.Google.Resource.AppEngine.Apps.Operations.List
       AppsOperationsListResource
 
     -- * Creating a Request
-    , appsOperationsList'
-    , AppsOperationsList'
+    , appsOperationsList
+    , AppsOperationsList
 
     -- * Request Lenses
     , aolXgafv
@@ -54,7 +54,7 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.operations.list@ method which the
--- 'AppsOperationsList'' request conforms to.
+-- 'AppsOperationsList' request conforms to.
 type AppsOperationsListResource =
      "v1beta4" :>
        "apps" :>
@@ -79,8 +79,8 @@ type AppsOperationsListResource =
 -- to use different resource name schemes, such as
 -- \`users\/*\/operations\`.
 --
--- /See:/ 'appsOperationsList'' smart constructor.
-data AppsOperationsList' = AppsOperationsList'
+-- /See:/ 'appsOperationsList' smart constructor.
+data AppsOperationsList = AppsOperationsList
     { _aolXgafv          :: !(Maybe Text)
     , _aolUploadProtocol :: !(Maybe Text)
     , _aolPp             :: !Bool
@@ -94,7 +94,7 @@ data AppsOperationsList' = AppsOperationsList'
     , _aolCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AppsOperationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AppsOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -119,11 +119,11 @@ data AppsOperationsList' = AppsOperationsList'
 -- * 'aolPageSize'
 --
 -- * 'aolCallback'
-appsOperationsList'
+appsOperationsList
     :: Text -- ^ 'aolAppsId'
-    -> AppsOperationsList'
-appsOperationsList' pAolAppsId_ =
-    AppsOperationsList'
+    -> AppsOperationsList
+appsOperationsList pAolAppsId_ =
+    AppsOperationsList
     { _aolXgafv = Nothing
     , _aolUploadProtocol = Nothing
     , _aolPp = True
@@ -138,65 +138,65 @@ appsOperationsList' pAolAppsId_ =
     }
 
 -- | V1 error format.
-aolXgafv :: Lens' AppsOperationsList' (Maybe Text)
+aolXgafv :: Lens' AppsOperationsList (Maybe Text)
 aolXgafv = lens _aolXgafv (\ s a -> s{_aolXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-aolUploadProtocol :: Lens' AppsOperationsList' (Maybe Text)
+aolUploadProtocol :: Lens' AppsOperationsList (Maybe Text)
 aolUploadProtocol
   = lens _aolUploadProtocol
       (\ s a -> s{_aolUploadProtocol = a})
 
 -- | Pretty-print response.
-aolPp :: Lens' AppsOperationsList' Bool
+aolPp :: Lens' AppsOperationsList Bool
 aolPp = lens _aolPp (\ s a -> s{_aolPp = a})
 
 -- | OAuth access token.
-aolAccessToken :: Lens' AppsOperationsList' (Maybe Text)
+aolAccessToken :: Lens' AppsOperationsList (Maybe Text)
 aolAccessToken
   = lens _aolAccessToken
       (\ s a -> s{_aolAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-aolUploadType :: Lens' AppsOperationsList' (Maybe Text)
+aolUploadType :: Lens' AppsOperationsList (Maybe Text)
 aolUploadType
   = lens _aolUploadType
       (\ s a -> s{_aolUploadType = a})
 
 -- | OAuth bearer token.
-aolBearerToken :: Lens' AppsOperationsList' (Maybe Text)
+aolBearerToken :: Lens' AppsOperationsList (Maybe Text)
 aolBearerToken
   = lens _aolBearerToken
       (\ s a -> s{_aolBearerToken = a})
 
 -- | Part of \`name\`. The name of the operation collection.
-aolAppsId :: Lens' AppsOperationsList' Text
+aolAppsId :: Lens' AppsOperationsList Text
 aolAppsId
   = lens _aolAppsId (\ s a -> s{_aolAppsId = a})
 
 -- | The standard list filter.
-aolFilter :: Lens' AppsOperationsList' (Maybe Text)
+aolFilter :: Lens' AppsOperationsList (Maybe Text)
 aolFilter
   = lens _aolFilter (\ s a -> s{_aolFilter = a})
 
 -- | The standard list page token.
-aolPageToken :: Lens' AppsOperationsList' (Maybe Text)
+aolPageToken :: Lens' AppsOperationsList (Maybe Text)
 aolPageToken
   = lens _aolPageToken (\ s a -> s{_aolPageToken = a})
 
 -- | The standard list page size.
-aolPageSize :: Lens' AppsOperationsList' (Maybe Int32)
+aolPageSize :: Lens' AppsOperationsList (Maybe Int32)
 aolPageSize
   = lens _aolPageSize (\ s a -> s{_aolPageSize = a})
 
 -- | JSONP
-aolCallback :: Lens' AppsOperationsList' (Maybe Text)
+aolCallback :: Lens' AppsOperationsList (Maybe Text)
 aolCallback
   = lens _aolCallback (\ s a -> s{_aolCallback = a})
 
-instance GoogleRequest AppsOperationsList' where
-        type Rs AppsOperationsList' = ListOperationsResponse
-        requestClient AppsOperationsList'{..}
+instance GoogleRequest AppsOperationsList where
+        type Rs AppsOperationsList = ListOperationsResponse
+        requestClient AppsOperationsList{..}
           = go _aolAppsId _aolXgafv _aolUploadProtocol
               (Just _aolPp)
               _aolAccessToken

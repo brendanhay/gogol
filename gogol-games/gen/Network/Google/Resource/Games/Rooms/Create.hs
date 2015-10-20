@@ -30,8 +30,8 @@ module Network.Google.Resource.Games.Rooms.Create
       RoomsCreateResource
 
     -- * Creating a Request
-    , roomsCreate'
-    , RoomsCreate'
+    , roomsCreate
+    , RoomsCreate
 
     -- * Request Lenses
     , rcPayload
@@ -42,7 +42,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.rooms.create@ method which the
--- 'RoomsCreate'' request conforms to.
+-- 'RoomsCreate' request conforms to.
 type RoomsCreateResource =
      "rooms" :>
        "create" :>
@@ -54,41 +54,41 @@ type RoomsCreateResource =
 -- | Create a room. For internal use by the Games SDK only. Calling this
 -- method directly is unsupported.
 --
--- /See:/ 'roomsCreate'' smart constructor.
-data RoomsCreate' = RoomsCreate'
+-- /See:/ 'roomsCreate' smart constructor.
+data RoomsCreate = RoomsCreate
     { _rcPayload  :: !RoomCreateRequest
     , _rcLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoomsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'RoomsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rcPayload'
 --
 -- * 'rcLanguage'
-roomsCreate'
+roomsCreate
     :: RoomCreateRequest -- ^ 'rcPayload'
-    -> RoomsCreate'
-roomsCreate' pRcPayload_ =
-    RoomsCreate'
+    -> RoomsCreate
+roomsCreate pRcPayload_ =
+    RoomsCreate
     { _rcPayload = pRcPayload_
     , _rcLanguage = Nothing
     }
 
 -- | Multipart request metadata.
-rcPayload :: Lens' RoomsCreate' RoomCreateRequest
+rcPayload :: Lens' RoomsCreate RoomCreateRequest
 rcPayload
   = lens _rcPayload (\ s a -> s{_rcPayload = a})
 
 -- | The preferred language to use for strings returned by this method.
-rcLanguage :: Lens' RoomsCreate' (Maybe Text)
+rcLanguage :: Lens' RoomsCreate (Maybe Text)
 rcLanguage
   = lens _rcLanguage (\ s a -> s{_rcLanguage = a})
 
-instance GoogleRequest RoomsCreate' where
-        type Rs RoomsCreate' = Room
-        requestClient RoomsCreate'{..}
+instance GoogleRequest RoomsCreate where
+        type Rs RoomsCreate = Room
+        requestClient RoomsCreate{..}
           = go _rcLanguage (Just AltJSON) _rcPayload
               gamesService
           where go

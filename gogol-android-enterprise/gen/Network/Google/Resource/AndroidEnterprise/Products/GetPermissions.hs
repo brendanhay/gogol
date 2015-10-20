@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidEnterprise.Products.GetPermissions
       ProductsGetPermissionsResource
 
     -- * Creating a Request
-    , productsGetPermissions'
-    , ProductsGetPermissions'
+    , productsGetPermissions
+    , ProductsGetPermissions
 
     -- * Request Lenses
     , pgpEnterpriseId
@@ -41,7 +41,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.products.getPermissions@ method which the
--- 'ProductsGetPermissions'' request conforms to.
+-- 'ProductsGetPermissions' request conforms to.
 type ProductsGetPermissionsResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -53,43 +53,43 @@ type ProductsGetPermissionsResource =
 
 -- | Retrieves the Android app permissions required by this app.
 --
--- /See:/ 'productsGetPermissions'' smart constructor.
-data ProductsGetPermissions' = ProductsGetPermissions'
+-- /See:/ 'productsGetPermissions' smart constructor.
+data ProductsGetPermissions = ProductsGetPermissions
     { _pgpEnterpriseId :: !Text
     , _pgpProductId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductsGetPermissions'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProductsGetPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pgpEnterpriseId'
 --
 -- * 'pgpProductId'
-productsGetPermissions'
+productsGetPermissions
     :: Text -- ^ 'pgpEnterpriseId'
     -> Text -- ^ 'pgpProductId'
-    -> ProductsGetPermissions'
-productsGetPermissions' pPgpEnterpriseId_ pPgpProductId_ =
-    ProductsGetPermissions'
+    -> ProductsGetPermissions
+productsGetPermissions pPgpEnterpriseId_ pPgpProductId_ =
+    ProductsGetPermissions
     { _pgpEnterpriseId = pPgpEnterpriseId_
     , _pgpProductId = pPgpProductId_
     }
 
 -- | The ID of the enterprise.
-pgpEnterpriseId :: Lens' ProductsGetPermissions' Text
+pgpEnterpriseId :: Lens' ProductsGetPermissions Text
 pgpEnterpriseId
   = lens _pgpEnterpriseId
       (\ s a -> s{_pgpEnterpriseId = a})
 
 -- | The ID of the product.
-pgpProductId :: Lens' ProductsGetPermissions' Text
+pgpProductId :: Lens' ProductsGetPermissions Text
 pgpProductId
   = lens _pgpProductId (\ s a -> s{_pgpProductId = a})
 
-instance GoogleRequest ProductsGetPermissions' where
-        type Rs ProductsGetPermissions' = ProductPermissions
-        requestClient ProductsGetPermissions'{..}
+instance GoogleRequest ProductsGetPermissions where
+        type Rs ProductsGetPermissions = ProductPermissions
+        requestClient ProductsGetPermissions{..}
           = go _pgpEnterpriseId _pgpProductId (Just AltJSON)
               androidEnterpriseService
           where go

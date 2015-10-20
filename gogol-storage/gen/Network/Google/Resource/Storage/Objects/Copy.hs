@@ -30,8 +30,8 @@ module Network.Google.Resource.Storage.Objects.Copy
       ObjectsCopyResource
 
     -- * Creating a Request
-    , objectsCopy'
-    , ObjectsCopy'
+    , objectsCopy
+    , ObjectsCopy
 
     -- * Request Lenses
     , ocDestinationPredefinedACL
@@ -56,7 +56,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.copy@ method which the
--- 'ObjectsCopy'' request conforms to.
+-- 'ObjectsCopy' request conforms to.
 type ObjectsCopyResource =
      "b" :>
        Capture "sourceBucket" Text :>
@@ -132,8 +132,8 @@ type ObjectsCopyResource =
 -- | Copies a source object to a destination object. Optionally overrides
 -- metadata.
 --
--- /See:/ 'objectsCopy'' smart constructor.
-data ObjectsCopy' = ObjectsCopy'
+-- /See:/ 'objectsCopy' smart constructor.
+data ObjectsCopy = ObjectsCopy
     { _ocDestinationPredefinedACL       :: !(Maybe ObjectsCopyDestinationPredefinedACL)
     , _ocIfSourceGenerationMatch        :: !(Maybe Int64)
     , _ocIfMetagenerationMatch          :: !(Maybe Int64)
@@ -152,7 +152,7 @@ data ObjectsCopy' = ObjectsCopy'
     , _ocDestinationObject              :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ObjectsCopy'' with the minimum fields required to make a request.
+-- | Creates a value of 'ObjectsCopy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -187,15 +187,15 @@ data ObjectsCopy' = ObjectsCopy'
 -- * 'ocSourceGeneration'
 --
 -- * 'ocDestinationObject'
-objectsCopy'
+objectsCopy
     :: Text -- ^ 'ocSourceObject'
     -> Text -- ^ 'ocSourceBucket'
     -> Object -- ^ 'ocPayload'
     -> Text -- ^ 'ocDestinationBucket'
     -> Text -- ^ 'ocDestinationObject'
-    -> ObjectsCopy'
-objectsCopy' pOcSourceObject_ pOcSourceBucket_ pOcPayload_ pOcDestinationBucket_ pOcDestinationObject_ =
-    ObjectsCopy'
+    -> ObjectsCopy
+objectsCopy pOcSourceObject_ pOcSourceBucket_ pOcPayload_ pOcDestinationBucket_ pOcDestinationObject_ =
+    ObjectsCopy
     { _ocDestinationPredefinedACL = Nothing
     , _ocIfSourceGenerationMatch = Nothing
     , _ocIfMetagenerationMatch = Nothing
@@ -215,68 +215,68 @@ objectsCopy' pOcSourceObject_ pOcSourceBucket_ pOcPayload_ pOcDestinationBucket_
     }
 
 -- | Apply a predefined set of access controls to the destination object.
-ocDestinationPredefinedACL :: Lens' ObjectsCopy' (Maybe ObjectsCopyDestinationPredefinedACL)
+ocDestinationPredefinedACL :: Lens' ObjectsCopy (Maybe ObjectsCopyDestinationPredefinedACL)
 ocDestinationPredefinedACL
   = lens _ocDestinationPredefinedACL
       (\ s a -> s{_ocDestinationPredefinedACL = a})
 
 -- | Makes the operation conditional on whether the source object\'s
 -- generation matches the given value.
-ocIfSourceGenerationMatch :: Lens' ObjectsCopy' (Maybe Int64)
+ocIfSourceGenerationMatch :: Lens' ObjectsCopy (Maybe Int64)
 ocIfSourceGenerationMatch
   = lens _ocIfSourceGenerationMatch
       (\ s a -> s{_ocIfSourceGenerationMatch = a})
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current metageneration matches the given value.
-ocIfMetagenerationMatch :: Lens' ObjectsCopy' (Maybe Int64)
+ocIfMetagenerationMatch :: Lens' ObjectsCopy (Maybe Int64)
 ocIfMetagenerationMatch
   = lens _ocIfMetagenerationMatch
       (\ s a -> s{_ocIfMetagenerationMatch = a})
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current generation does not match the given value.
-ocIfGenerationNotMatch :: Lens' ObjectsCopy' (Maybe Int64)
+ocIfGenerationNotMatch :: Lens' ObjectsCopy (Maybe Int64)
 ocIfGenerationNotMatch
   = lens _ocIfGenerationNotMatch
       (\ s a -> s{_ocIfGenerationNotMatch = a})
 
 -- | Makes the operation conditional on whether the source object\'s current
 -- metageneration does not match the given value.
-ocIfSourceMetagenerationNotMatch :: Lens' ObjectsCopy' (Maybe Int64)
+ocIfSourceMetagenerationNotMatch :: Lens' ObjectsCopy (Maybe Int64)
 ocIfSourceMetagenerationNotMatch
   = lens _ocIfSourceMetagenerationNotMatch
       (\ s a -> s{_ocIfSourceMetagenerationNotMatch = a})
 
 -- | Makes the operation conditional on whether the source object\'s current
 -- metageneration matches the given value.
-ocIfSourceMetagenerationMatch :: Lens' ObjectsCopy' (Maybe Int64)
+ocIfSourceMetagenerationMatch :: Lens' ObjectsCopy (Maybe Int64)
 ocIfSourceMetagenerationMatch
   = lens _ocIfSourceMetagenerationMatch
       (\ s a -> s{_ocIfSourceMetagenerationMatch = a})
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current generation matches the given value.
-ocIfGenerationMatch :: Lens' ObjectsCopy' (Maybe Int64)
+ocIfGenerationMatch :: Lens' ObjectsCopy (Maybe Int64)
 ocIfGenerationMatch
   = lens _ocIfGenerationMatch
       (\ s a -> s{_ocIfGenerationMatch = a})
 
 -- | Name of the source object. For information about how to URL encode
 -- object names to be path safe, see Encoding URI Path Parts.
-ocSourceObject :: Lens' ObjectsCopy' Text
+ocSourceObject :: Lens' ObjectsCopy Text
 ocSourceObject
   = lens _ocSourceObject
       (\ s a -> s{_ocSourceObject = a})
 
 -- | Name of the bucket in which to find the source object.
-ocSourceBucket :: Lens' ObjectsCopy' Text
+ocSourceBucket :: Lens' ObjectsCopy Text
 ocSourceBucket
   = lens _ocSourceBucket
       (\ s a -> s{_ocSourceBucket = a})
 
 -- | Multipart request metadata.
-ocPayload :: Lens' ObjectsCopy' Object
+ocPayload :: Lens' ObjectsCopy Object
 ocPayload
   = lens _ocPayload (\ s a -> s{_ocPayload = a})
 
@@ -284,48 +284,48 @@ ocPayload
 -- provided object metadata\'s bucket value, if any.For information about
 -- how to URL encode object names to be path safe, see Encoding URI Path
 -- Parts.
-ocDestinationBucket :: Lens' ObjectsCopy' Text
+ocDestinationBucket :: Lens' ObjectsCopy Text
 ocDestinationBucket
   = lens _ocDestinationBucket
       (\ s a -> s{_ocDestinationBucket = a})
 
 -- | Makes the operation conditional on whether the destination object\'s
 -- current metageneration does not match the given value.
-ocIfMetagenerationNotMatch :: Lens' ObjectsCopy' (Maybe Int64)
+ocIfMetagenerationNotMatch :: Lens' ObjectsCopy (Maybe Int64)
 ocIfMetagenerationNotMatch
   = lens _ocIfMetagenerationNotMatch
       (\ s a -> s{_ocIfMetagenerationNotMatch = a})
 
 -- | Makes the operation conditional on whether the source object\'s
 -- generation does not match the given value.
-ocIfSourceGenerationNotMatch :: Lens' ObjectsCopy' (Maybe Int64)
+ocIfSourceGenerationNotMatch :: Lens' ObjectsCopy (Maybe Int64)
 ocIfSourceGenerationNotMatch
   = lens _ocIfSourceGenerationNotMatch
       (\ s a -> s{_ocIfSourceGenerationNotMatch = a})
 
 -- | Set of properties to return. Defaults to noAcl, unless the object
 -- resource specifies the acl property, when it defaults to full.
-ocProjection :: Lens' ObjectsCopy' (Maybe ObjectsCopyProjection)
+ocProjection :: Lens' ObjectsCopy (Maybe ObjectsCopyProjection)
 ocProjection
   = lens _ocProjection (\ s a -> s{_ocProjection = a})
 
 -- | If present, selects a specific revision of the source object (as opposed
 -- to the latest version, the default).
-ocSourceGeneration :: Lens' ObjectsCopy' (Maybe Int64)
+ocSourceGeneration :: Lens' ObjectsCopy (Maybe Int64)
 ocSourceGeneration
   = lens _ocSourceGeneration
       (\ s a -> s{_ocSourceGeneration = a})
 
 -- | Name of the new object. Required when the object metadata is not
 -- otherwise provided. Overrides the object metadata\'s name value, if any.
-ocDestinationObject :: Lens' ObjectsCopy' Text
+ocDestinationObject :: Lens' ObjectsCopy Text
 ocDestinationObject
   = lens _ocDestinationObject
       (\ s a -> s{_ocDestinationObject = a})
 
-instance GoogleRequest ObjectsCopy' where
-        type Rs ObjectsCopy' = Object
-        requestClient ObjectsCopy'{..}
+instance GoogleRequest ObjectsCopy where
+        type Rs ObjectsCopy = Object
+        requestClient ObjectsCopy{..}
           = go _ocSourceBucket _ocSourceObject
               _ocDestinationBucket
               _ocDestinationObject
@@ -347,10 +347,10 @@ instance GoogleRequest ObjectsCopy' where
                   = buildClient (Proxy :: Proxy ObjectsCopyResource)
                       mempty
 
-instance GoogleRequest (MediaDownload ObjectsCopy')
+instance GoogleRequest (MediaDownload ObjectsCopy)
          where
-        type Rs (MediaDownload ObjectsCopy') = Stream
-        requestClient (MediaDownload ObjectsCopy'{..})
+        type Rs (MediaDownload ObjectsCopy) = Stream
+        requestClient (MediaDownload ObjectsCopy{..})
           = go _ocSourceBucket _ocSourceObject
               _ocDestinationBucket
               _ocDestinationObject

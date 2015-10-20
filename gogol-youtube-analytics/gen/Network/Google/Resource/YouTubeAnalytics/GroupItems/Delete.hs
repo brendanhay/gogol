@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
       GroupItemsDeleteResource
 
     -- * Creating a Request
-    , groupItemsDelete'
-    , GroupItemsDelete'
+    , groupItemsDelete
+    , GroupItemsDelete
 
     -- * Request Lenses
     , gidOnBehalfOfContentOwner
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @youtubeAnalytics.groupItems.delete@ method which the
--- 'GroupItemsDelete'' request conforms to.
+-- 'GroupItemsDelete' request conforms to.
 type GroupItemsDeleteResource =
      "groupItems" :>
        QueryParam "id" Text :>
@@ -50,24 +50,24 @@ type GroupItemsDeleteResource =
 
 -- | Removes an item from a group.
 --
--- /See:/ 'groupItemsDelete'' smart constructor.
-data GroupItemsDelete' = GroupItemsDelete'
+-- /See:/ 'groupItemsDelete' smart constructor.
+data GroupItemsDelete = GroupItemsDelete
     { _gidOnBehalfOfContentOwner :: !(Maybe Text)
     , _gidId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GroupItemsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'GroupItemsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gidOnBehalfOfContentOwner'
 --
 -- * 'gidId'
-groupItemsDelete'
+groupItemsDelete
     :: Text -- ^ 'gidId'
-    -> GroupItemsDelete'
-groupItemsDelete' pGidId_ =
-    GroupItemsDelete'
+    -> GroupItemsDelete
+groupItemsDelete pGidId_ =
+    GroupItemsDelete
     { _gidOnBehalfOfContentOwner = Nothing
     , _gidId = pGidId_
     }
@@ -82,19 +82,19 @@ groupItemsDelete' pGidId_ =
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-gidOnBehalfOfContentOwner :: Lens' GroupItemsDelete' (Maybe Text)
+gidOnBehalfOfContentOwner :: Lens' GroupItemsDelete (Maybe Text)
 gidOnBehalfOfContentOwner
   = lens _gidOnBehalfOfContentOwner
       (\ s a -> s{_gidOnBehalfOfContentOwner = a})
 
 -- | The id parameter specifies the YouTube group item ID for the group that
 -- is being deleted.
-gidId :: Lens' GroupItemsDelete' Text
+gidId :: Lens' GroupItemsDelete Text
 gidId = lens _gidId (\ s a -> s{_gidId = a})
 
-instance GoogleRequest GroupItemsDelete' where
-        type Rs GroupItemsDelete' = ()
-        requestClient GroupItemsDelete'{..}
+instance GoogleRequest GroupItemsDelete where
+        type Rs GroupItemsDelete = ()
+        requestClient GroupItemsDelete{..}
           = go (Just _gidId) _gidOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeAnalyticsService

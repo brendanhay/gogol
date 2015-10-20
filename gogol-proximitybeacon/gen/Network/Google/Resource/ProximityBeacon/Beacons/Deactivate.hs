@@ -33,25 +33,25 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
       BeaconsDeactivateResource
 
     -- * Creating a Request
-    , beaconsDeactivate'
-    , BeaconsDeactivate'
+    , beaconsDeactivate
+    , BeaconsDeactivate
 
     -- * Request Lenses
-    , beaXgafv
-    , beaUploadProtocol
-    , beaPp
-    , beaAccessToken
-    , beaBeaconName
-    , beaUploadType
-    , beaBearerToken
-    , beaCallback
+    , bdXgafv
+    , bdUploadProtocol
+    , bdPp
+    , bdAccessToken
+    , bdBeaconName
+    , bdUploadType
+    , bdBearerToken
+    , bdCallback
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.deactivate@ method which the
--- 'BeaconsDeactivate'' request conforms to.
+-- 'BeaconsDeactivate' request conforms to.
 type BeaconsDeactivateResource =
      "v1beta1" :>
        CaptureMode "beaconName" "deactivate" Text :>
@@ -70,104 +70,102 @@ type BeaconsDeactivateResource =
 -- inactive beacon will do nothing (but will return a successful response
 -- code).
 --
--- /See:/ 'beaconsDeactivate'' smart constructor.
-data BeaconsDeactivate' = BeaconsDeactivate'
-    { _beaXgafv          :: !(Maybe Text)
-    , _beaUploadProtocol :: !(Maybe Text)
-    , _beaPp             :: !Bool
-    , _beaAccessToken    :: !(Maybe Text)
-    , _beaBeaconName     :: !Text
-    , _beaUploadType     :: !(Maybe Text)
-    , _beaBearerToken    :: !(Maybe Text)
-    , _beaCallback       :: !(Maybe Text)
+-- /See:/ 'beaconsDeactivate' smart constructor.
+data BeaconsDeactivate = BeaconsDeactivate
+    { _bdXgafv          :: !(Maybe Text)
+    , _bdUploadProtocol :: !(Maybe Text)
+    , _bdPp             :: !Bool
+    , _bdAccessToken    :: !(Maybe Text)
+    , _bdBeaconName     :: !Text
+    , _bdUploadType     :: !(Maybe Text)
+    , _bdBearerToken    :: !(Maybe Text)
+    , _bdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BeaconsDeactivate'' with the minimum fields required to make a request.
+-- | Creates a value of 'BeaconsDeactivate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'beaXgafv'
+-- * 'bdXgafv'
 --
--- * 'beaUploadProtocol'
+-- * 'bdUploadProtocol'
 --
--- * 'beaPp'
+-- * 'bdPp'
 --
--- * 'beaAccessToken'
+-- * 'bdAccessToken'
 --
--- * 'beaBeaconName'
+-- * 'bdBeaconName'
 --
--- * 'beaUploadType'
+-- * 'bdUploadType'
 --
--- * 'beaBearerToken'
+-- * 'bdBearerToken'
 --
--- * 'beaCallback'
-beaconsDeactivate'
-    :: Text -- ^ 'beaBeaconName'
-    -> BeaconsDeactivate'
-beaconsDeactivate' pBeaBeaconName_ =
-    BeaconsDeactivate'
-    { _beaXgafv = Nothing
-    , _beaUploadProtocol = Nothing
-    , _beaPp = True
-    , _beaAccessToken = Nothing
-    , _beaBeaconName = pBeaBeaconName_
-    , _beaUploadType = Nothing
-    , _beaBearerToken = Nothing
-    , _beaCallback = Nothing
+-- * 'bdCallback'
+beaconsDeactivate
+    :: Text -- ^ 'bdBeaconName'
+    -> BeaconsDeactivate
+beaconsDeactivate pBdBeaconName_ =
+    BeaconsDeactivate
+    { _bdXgafv = Nothing
+    , _bdUploadProtocol = Nothing
+    , _bdPp = True
+    , _bdAccessToken = Nothing
+    , _bdBeaconName = pBdBeaconName_
+    , _bdUploadType = Nothing
+    , _bdBearerToken = Nothing
+    , _bdCallback = Nothing
     }
 
 -- | V1 error format.
-beaXgafv :: Lens' BeaconsDeactivate' (Maybe Text)
-beaXgafv = lens _beaXgafv (\ s a -> s{_beaXgafv = a})
+bdXgafv :: Lens' BeaconsDeactivate (Maybe Text)
+bdXgafv = lens _bdXgafv (\ s a -> s{_bdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-beaUploadProtocol :: Lens' BeaconsDeactivate' (Maybe Text)
-beaUploadProtocol
-  = lens _beaUploadProtocol
-      (\ s a -> s{_beaUploadProtocol = a})
+bdUploadProtocol :: Lens' BeaconsDeactivate (Maybe Text)
+bdUploadProtocol
+  = lens _bdUploadProtocol
+      (\ s a -> s{_bdUploadProtocol = a})
 
 -- | Pretty-print response.
-beaPp :: Lens' BeaconsDeactivate' Bool
-beaPp = lens _beaPp (\ s a -> s{_beaPp = a})
+bdPp :: Lens' BeaconsDeactivate Bool
+bdPp = lens _bdPp (\ s a -> s{_bdPp = a})
 
 -- | OAuth access token.
-beaAccessToken :: Lens' BeaconsDeactivate' (Maybe Text)
-beaAccessToken
-  = lens _beaAccessToken
-      (\ s a -> s{_beaAccessToken = a})
+bdAccessToken :: Lens' BeaconsDeactivate (Maybe Text)
+bdAccessToken
+  = lens _bdAccessToken
+      (\ s a -> s{_bdAccessToken = a})
 
 -- | The beacon name of this beacon.
-beaBeaconName :: Lens' BeaconsDeactivate' Text
-beaBeaconName
-  = lens _beaBeaconName
-      (\ s a -> s{_beaBeaconName = a})
+bdBeaconName :: Lens' BeaconsDeactivate Text
+bdBeaconName
+  = lens _bdBeaconName (\ s a -> s{_bdBeaconName = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-beaUploadType :: Lens' BeaconsDeactivate' (Maybe Text)
-beaUploadType
-  = lens _beaUploadType
-      (\ s a -> s{_beaUploadType = a})
+bdUploadType :: Lens' BeaconsDeactivate (Maybe Text)
+bdUploadType
+  = lens _bdUploadType (\ s a -> s{_bdUploadType = a})
 
 -- | OAuth bearer token.
-beaBearerToken :: Lens' BeaconsDeactivate' (Maybe Text)
-beaBearerToken
-  = lens _beaBearerToken
-      (\ s a -> s{_beaBearerToken = a})
+bdBearerToken :: Lens' BeaconsDeactivate (Maybe Text)
+bdBearerToken
+  = lens _bdBearerToken
+      (\ s a -> s{_bdBearerToken = a})
 
 -- | JSONP
-beaCallback :: Lens' BeaconsDeactivate' (Maybe Text)
-beaCallback
-  = lens _beaCallback (\ s a -> s{_beaCallback = a})
+bdCallback :: Lens' BeaconsDeactivate (Maybe Text)
+bdCallback
+  = lens _bdCallback (\ s a -> s{_bdCallback = a})
 
-instance GoogleRequest BeaconsDeactivate' where
-        type Rs BeaconsDeactivate' = Empty
-        requestClient BeaconsDeactivate'{..}
-          = go _beaBeaconName _beaXgafv _beaUploadProtocol
-              (Just _beaPp)
-              _beaAccessToken
-              _beaUploadType
-              _beaBearerToken
-              _beaCallback
+instance GoogleRequest BeaconsDeactivate where
+        type Rs BeaconsDeactivate = Empty
+        requestClient BeaconsDeactivate{..}
+          = go _bdBeaconName _bdXgafv _bdUploadProtocol
+              (Just _bdPp)
+              _bdAccessToken
+              _bdUploadType
+              _bdBearerToken
+              _bdCallback
               (Just AltJSON)
               proximityBeaconService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.SQL.Operations.Get
       OperationsGetResource
 
     -- * Creating a Request
-    , operationsGet'
-    , OperationsGet'
+    , operationsGet
+    , OperationsGet
 
     -- * Request Lenses
     , ogProject
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.operations.get@ method which the
--- 'OperationsGet'' request conforms to.
+-- 'OperationsGet' request conforms to.
 type OperationsGetResource =
      "projects" :>
        Capture "project" Text :>
@@ -51,42 +51,42 @@ type OperationsGetResource =
 
 -- | Retrieves an instance operation that has been performed on an instance.
 --
--- /See:/ 'operationsGet'' smart constructor.
-data OperationsGet' = OperationsGet'
+-- /See:/ 'operationsGet' smart constructor.
+data OperationsGet = OperationsGet
     { _ogProject   :: !Text
     , _ogOperation :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ogProject'
 --
 -- * 'ogOperation'
-operationsGet'
+operationsGet
     :: Text -- ^ 'ogProject'
     -> Text -- ^ 'ogOperation'
-    -> OperationsGet'
-operationsGet' pOgProject_ pOgOperation_ =
-    OperationsGet'
+    -> OperationsGet
+operationsGet pOgProject_ pOgOperation_ =
+    OperationsGet
     { _ogProject = pOgProject_
     , _ogOperation = pOgOperation_
     }
 
 -- | Project ID of the project that contains the instance.
-ogProject :: Lens' OperationsGet' Text
+ogProject :: Lens' OperationsGet Text
 ogProject
   = lens _ogProject (\ s a -> s{_ogProject = a})
 
 -- | Instance operation ID.
-ogOperation :: Lens' OperationsGet' Text
+ogOperation :: Lens' OperationsGet Text
 ogOperation
   = lens _ogOperation (\ s a -> s{_ogOperation = a})
 
-instance GoogleRequest OperationsGet' where
-        type Rs OperationsGet' = Operation
-        requestClient OperationsGet'{..}
+instance GoogleRequest OperationsGet where
+        type Rs OperationsGet = Operation
+        requestClient OperationsGet{..}
           = go _ogProject _ogOperation (Just AltJSON)
               sQLAdminService
           where go

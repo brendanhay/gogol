@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.TargetPools.List
       TargetPoolsListResource
 
     -- * Creating a Request
-    , targetPoolsList'
-    , TargetPoolsList'
+    , targetPoolsList
+    , TargetPoolsList
 
     -- * Request Lenses
     , tplProject
@@ -45,7 +45,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.list@ method which the
--- 'TargetPoolsList'' request conforms to.
+-- 'TargetPoolsList' request conforms to.
 type TargetPoolsListResource =
      Capture "project" Text :>
        "regions" :>
@@ -60,8 +60,8 @@ type TargetPoolsListResource =
 -- | Retrieves the list of TargetPool resources available to the specified
 -- project and region.
 --
--- /See:/ 'targetPoolsList'' smart constructor.
-data TargetPoolsList' = TargetPoolsList'
+-- /See:/ 'targetPoolsList' smart constructor.
+data TargetPoolsList = TargetPoolsList
     { _tplProject    :: !Text
     , _tplFilter     :: !(Maybe Text)
     , _tplRegion     :: !Text
@@ -69,7 +69,7 @@ data TargetPoolsList' = TargetPoolsList'
     , _tplMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetPoolsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetPoolsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,12 +82,12 @@ data TargetPoolsList' = TargetPoolsList'
 -- * 'tplPageToken'
 --
 -- * 'tplMaxResults'
-targetPoolsList'
+targetPoolsList
     :: Text -- ^ 'tplProject'
     -> Text -- ^ 'tplRegion'
-    -> TargetPoolsList'
-targetPoolsList' pTplProject_ pTplRegion_ =
-    TargetPoolsList'
+    -> TargetPoolsList
+targetPoolsList pTplProject_ pTplRegion_ =
+    TargetPoolsList
     { _tplProject = pTplProject_
     , _tplFilter = Nothing
     , _tplRegion = pTplRegion_
@@ -96,7 +96,7 @@ targetPoolsList' pTplProject_ pTplRegion_ =
     }
 
 -- | Name of the project scoping this request.
-tplProject :: Lens' TargetPoolsList' Text
+tplProject :: Lens' TargetPoolsList Text
 tplProject
   = lens _tplProject (\ s a -> s{_tplProject = a})
 
@@ -111,31 +111,31 @@ tplProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-tplFilter :: Lens' TargetPoolsList' (Maybe Text)
+tplFilter :: Lens' TargetPoolsList (Maybe Text)
 tplFilter
   = lens _tplFilter (\ s a -> s{_tplFilter = a})
 
 -- | Name of the region scoping this request.
-tplRegion :: Lens' TargetPoolsList' Text
+tplRegion :: Lens' TargetPoolsList Text
 tplRegion
   = lens _tplRegion (\ s a -> s{_tplRegion = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-tplPageToken :: Lens' TargetPoolsList' (Maybe Text)
+tplPageToken :: Lens' TargetPoolsList (Maybe Text)
 tplPageToken
   = lens _tplPageToken (\ s a -> s{_tplPageToken = a})
 
 -- | Maximum count of results to be returned.
-tplMaxResults :: Lens' TargetPoolsList' Word32
+tplMaxResults :: Lens' TargetPoolsList Word32
 tplMaxResults
   = lens _tplMaxResults
       (\ s a -> s{_tplMaxResults = a})
 
-instance GoogleRequest TargetPoolsList' where
-        type Rs TargetPoolsList' = TargetPoolList
-        requestClient TargetPoolsList'{..}
+instance GoogleRequest TargetPoolsList where
+        type Rs TargetPoolsList = TargetPoolList
+        requestClient TargetPoolsList{..}
           = go _tplProject _tplRegion _tplFilter _tplPageToken
               (Just _tplMaxResults)
               (Just AltJSON)

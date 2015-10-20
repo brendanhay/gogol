@@ -30,8 +30,8 @@ module Network.Google.Resource.Storage.BucketAccessControls.Delete
       BucketAccessControlsDeleteResource
 
     -- * Creating a Request
-    , bucketAccessControlsDelete'
-    , BucketAccessControlsDelete'
+    , bucketAccessControlsDelete
+    , BucketAccessControlsDelete
 
     -- * Request Lenses
     , bacdBucket
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.bucketAccessControls.delete@ method which the
--- 'BucketAccessControlsDelete'' request conforms to.
+-- 'BucketAccessControlsDelete' request conforms to.
 type BucketAccessControlsDeleteResource =
      "b" :>
        Capture "bucket" Text :>
@@ -53,45 +53,45 @@ type BucketAccessControlsDeleteResource =
 -- | Permanently deletes the ACL entry for the specified entity on the
 -- specified bucket.
 --
--- /See:/ 'bucketAccessControlsDelete'' smart constructor.
-data BucketAccessControlsDelete' = BucketAccessControlsDelete'
+-- /See:/ 'bucketAccessControlsDelete' smart constructor.
+data BucketAccessControlsDelete = BucketAccessControlsDelete
     { _bacdBucket :: !Text
     , _bacdEntity :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BucketAccessControlsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'BucketAccessControlsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'bacdBucket'
 --
 -- * 'bacdEntity'
-bucketAccessControlsDelete'
+bucketAccessControlsDelete
     :: Text -- ^ 'bacdBucket'
     -> Text -- ^ 'bacdEntity'
-    -> BucketAccessControlsDelete'
-bucketAccessControlsDelete' pBacdBucket_ pBacdEntity_ =
-    BucketAccessControlsDelete'
+    -> BucketAccessControlsDelete
+bucketAccessControlsDelete pBacdBucket_ pBacdEntity_ =
+    BucketAccessControlsDelete
     { _bacdBucket = pBacdBucket_
     , _bacdEntity = pBacdEntity_
     }
 
 -- | Name of a bucket.
-bacdBucket :: Lens' BucketAccessControlsDelete' Text
+bacdBucket :: Lens' BucketAccessControlsDelete Text
 bacdBucket
   = lens _bacdBucket (\ s a -> s{_bacdBucket = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
 -- allAuthenticatedUsers.
-bacdEntity :: Lens' BucketAccessControlsDelete' Text
+bacdEntity :: Lens' BucketAccessControlsDelete Text
 bacdEntity
   = lens _bacdEntity (\ s a -> s{_bacdEntity = a})
 
-instance GoogleRequest BucketAccessControlsDelete'
+instance GoogleRequest BucketAccessControlsDelete
          where
-        type Rs BucketAccessControlsDelete' = ()
-        requestClient BucketAccessControlsDelete'{..}
+        type Rs BucketAccessControlsDelete = ()
+        requestClient BucketAccessControlsDelete{..}
           = go _bacdBucket _bacdEntity (Just AltJSON)
               storageService
           where go

@@ -30,8 +30,8 @@ module Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
       ProductsUpdatePermissionsResource
 
     -- * Creating a Request
-    , productsUpdatePermissions'
-    , ProductsUpdatePermissions'
+    , productsUpdatePermissions
+    , ProductsUpdatePermissions
 
     -- * Request Lenses
     , pupEnterpriseId
@@ -43,7 +43,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.products.updatePermissions@ method which the
--- 'ProductsUpdatePermissions'' request conforms to.
+-- 'ProductsUpdatePermissions' request conforms to.
 type ProductsUpdatePermissionsResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -57,14 +57,14 @@ type ProductsUpdatePermissionsResource =
 -- | Updates the set of Android app permissions for this app that have been
 -- accepted by the enterprise.
 --
--- /See:/ 'productsUpdatePermissions'' smart constructor.
-data ProductsUpdatePermissions' = ProductsUpdatePermissions'
+-- /See:/ 'productsUpdatePermissions' smart constructor.
+data ProductsUpdatePermissions = ProductsUpdatePermissions
     { _pupEnterpriseId :: !Text
     , _pupPayload      :: !ProductPermissions
     , _pupProductId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductsUpdatePermissions'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProductsUpdatePermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,39 +73,39 @@ data ProductsUpdatePermissions' = ProductsUpdatePermissions'
 -- * 'pupPayload'
 --
 -- * 'pupProductId'
-productsUpdatePermissions'
+productsUpdatePermissions
     :: Text -- ^ 'pupEnterpriseId'
     -> ProductPermissions -- ^ 'pupPayload'
     -> Text -- ^ 'pupProductId'
-    -> ProductsUpdatePermissions'
-productsUpdatePermissions' pPupEnterpriseId_ pPupPayload_ pPupProductId_ =
-    ProductsUpdatePermissions'
+    -> ProductsUpdatePermissions
+productsUpdatePermissions pPupEnterpriseId_ pPupPayload_ pPupProductId_ =
+    ProductsUpdatePermissions
     { _pupEnterpriseId = pPupEnterpriseId_
     , _pupPayload = pPupPayload_
     , _pupProductId = pPupProductId_
     }
 
 -- | The ID of the enterprise.
-pupEnterpriseId :: Lens' ProductsUpdatePermissions' Text
+pupEnterpriseId :: Lens' ProductsUpdatePermissions Text
 pupEnterpriseId
   = lens _pupEnterpriseId
       (\ s a -> s{_pupEnterpriseId = a})
 
 -- | Multipart request metadata.
-pupPayload :: Lens' ProductsUpdatePermissions' ProductPermissions
+pupPayload :: Lens' ProductsUpdatePermissions ProductPermissions
 pupPayload
   = lens _pupPayload (\ s a -> s{_pupPayload = a})
 
 -- | The ID of the product.
-pupProductId :: Lens' ProductsUpdatePermissions' Text
+pupProductId :: Lens' ProductsUpdatePermissions Text
 pupProductId
   = lens _pupProductId (\ s a -> s{_pupProductId = a})
 
-instance GoogleRequest ProductsUpdatePermissions'
+instance GoogleRequest ProductsUpdatePermissions
          where
-        type Rs ProductsUpdatePermissions' =
+        type Rs ProductsUpdatePermissions =
              ProductPermissions
-        requestClient ProductsUpdatePermissions'{..}
+        requestClient ProductsUpdatePermissions{..}
           = go _pupEnterpriseId _pupProductId (Just AltJSON)
               _pupPayload
               androidEnterpriseService

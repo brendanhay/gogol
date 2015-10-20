@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.Videos.Update
       VideosUpdateResource
 
     -- * Creating a Request
-    , videosUpdate'
-    , VideosUpdate'
+    , videosUpdate
+    , VideosUpdate
 
     -- * Request Lenses
     , vuPart
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.videos.update@ method which the
--- 'VideosUpdate'' request conforms to.
+-- 'VideosUpdate' request conforms to.
 type VideosUpdateResource =
      "videos" :>
        QueryParam "part" Text :>
@@ -52,14 +52,14 @@ type VideosUpdateResource =
 
 -- | Updates a video\'s metadata.
 --
--- /See:/ 'videosUpdate'' smart constructor.
-data VideosUpdate' = VideosUpdate'
+-- /See:/ 'videosUpdate' smart constructor.
+data VideosUpdate = VideosUpdate
     { _vuPart                   :: !Text
     , _vuPayload                :: !Video
     , _vuOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VideosUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'VideosUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,12 +68,12 @@ data VideosUpdate' = VideosUpdate'
 -- * 'vuPayload'
 --
 -- * 'vuOnBehalfOfContentOwner'
-videosUpdate'
+videosUpdate
     :: Text -- ^ 'vuPart'
     -> Video -- ^ 'vuPayload'
-    -> VideosUpdate'
-videosUpdate' pVuPart_ pVuPayload_ =
-    VideosUpdate'
+    -> VideosUpdate
+videosUpdate pVuPart_ pVuPayload_ =
+    VideosUpdate
     { _vuPart = pVuPart_
     , _vuPayload = pVuPayload_
     , _vuOnBehalfOfContentOwner = Nothing
@@ -96,11 +96,11 @@ videosUpdate' pVuPart_ pVuPayload_ =
 -- contain values that you can set or modify. If the parameter value
 -- specifies a part that does not contain mutable values, that part will
 -- still be included in the API response.
-vuPart :: Lens' VideosUpdate' Text
+vuPart :: Lens' VideosUpdate Text
 vuPart = lens _vuPart (\ s a -> s{_vuPart = a})
 
 -- | Multipart request metadata.
-vuPayload :: Lens' VideosUpdate' Video
+vuPayload :: Lens' VideosUpdate Video
 vuPayload
   = lens _vuPayload (\ s a -> s{_vuPayload = a})
 
@@ -114,14 +114,14 @@ vuPayload
 -- without having to provide authentication credentials for each individual
 -- channel. The actual CMS account that the user authenticates with must be
 -- linked to the specified YouTube content owner.
-vuOnBehalfOfContentOwner :: Lens' VideosUpdate' (Maybe Text)
+vuOnBehalfOfContentOwner :: Lens' VideosUpdate (Maybe Text)
 vuOnBehalfOfContentOwner
   = lens _vuOnBehalfOfContentOwner
       (\ s a -> s{_vuOnBehalfOfContentOwner = a})
 
-instance GoogleRequest VideosUpdate' where
-        type Rs VideosUpdate' = Video
-        requestClient VideosUpdate'{..}
+instance GoogleRequest VideosUpdate where
+        type Rs VideosUpdate = Video
+        requestClient VideosUpdate{..}
           = go (Just _vuPart) _vuOnBehalfOfContentOwner
               (Just AltJSON)
               _vuPayload

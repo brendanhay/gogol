@@ -32,21 +32,21 @@ module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Patch
       EditsTracksPatchResource
 
     -- * Creating a Request
-    , editsTracksPatch'
-    , EditsTracksPatch'
+    , editsTracksPatch
+    , EditsTracksPatch
 
     -- * Request Lenses
-    , etpTrack
-    , etpPackageName
-    , etpPayload
-    , etpEditId
+    , etptTrack
+    , etptPackageName
+    , etptPayload
+    , etptEditId
     ) where
 
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.tracks.patch@ method which the
--- 'EditsTracksPatch'' request conforms to.
+-- 'EditsTracksPatch' request conforms to.
 type EditsTracksPatchResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -61,66 +61,67 @@ type EditsTracksPatchResource =
 -- adding new APKs will cause it to resume. This method supports patch
 -- semantics.
 --
--- /See:/ 'editsTracksPatch'' smart constructor.
-data EditsTracksPatch' = EditsTracksPatch'
-    { _etpTrack       :: !EditsTracksPatchTrack
-    , _etpPackageName :: !Text
-    , _etpPayload     :: !Track
-    , _etpEditId      :: !Text
+-- /See:/ 'editsTracksPatch' smart constructor.
+data EditsTracksPatch = EditsTracksPatch
+    { _etptTrack       :: !EditsTracksPatchTrack
+    , _etptPackageName :: !Text
+    , _etptPayload     :: !Track
+    , _etptEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsTracksPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsTracksPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'etpTrack'
+-- * 'etptTrack'
 --
--- * 'etpPackageName'
+-- * 'etptPackageName'
 --
--- * 'etpPayload'
+-- * 'etptPayload'
 --
--- * 'etpEditId'
-editsTracksPatch'
-    :: EditsTracksPatchTrack -- ^ 'etpTrack'
-    -> Text -- ^ 'etpPackageName'
-    -> Track -- ^ 'etpPayload'
-    -> Text -- ^ 'etpEditId'
-    -> EditsTracksPatch'
-editsTracksPatch' pEtpTrack_ pEtpPackageName_ pEtpPayload_ pEtpEditId_ =
-    EditsTracksPatch'
-    { _etpTrack = pEtpTrack_
-    , _etpPackageName = pEtpPackageName_
-    , _etpPayload = pEtpPayload_
-    , _etpEditId = pEtpEditId_
+-- * 'etptEditId'
+editsTracksPatch
+    :: EditsTracksPatchTrack -- ^ 'etptTrack'
+    -> Text -- ^ 'etptPackageName'
+    -> Track -- ^ 'etptPayload'
+    -> Text -- ^ 'etptEditId'
+    -> EditsTracksPatch
+editsTracksPatch pEtptTrack_ pEtptPackageName_ pEtptPayload_ pEtptEditId_ =
+    EditsTracksPatch
+    { _etptTrack = pEtptTrack_
+    , _etptPackageName = pEtptPackageName_
+    , _etptPayload = pEtptPayload_
+    , _etptEditId = pEtptEditId_
     }
 
 -- | The track type to read or modify.
-etpTrack :: Lens' EditsTracksPatch' EditsTracksPatchTrack
-etpTrack = lens _etpTrack (\ s a -> s{_etpTrack = a})
+etptTrack :: Lens' EditsTracksPatch EditsTracksPatchTrack
+etptTrack
+  = lens _etptTrack (\ s a -> s{_etptTrack = a})
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-etpPackageName :: Lens' EditsTracksPatch' Text
-etpPackageName
-  = lens _etpPackageName
-      (\ s a -> s{_etpPackageName = a})
+etptPackageName :: Lens' EditsTracksPatch Text
+etptPackageName
+  = lens _etptPackageName
+      (\ s a -> s{_etptPackageName = a})
 
 -- | Multipart request metadata.
-etpPayload :: Lens' EditsTracksPatch' Track
-etpPayload
-  = lens _etpPayload (\ s a -> s{_etpPayload = a})
+etptPayload :: Lens' EditsTracksPatch Track
+etptPayload
+  = lens _etptPayload (\ s a -> s{_etptPayload = a})
 
 -- | Unique identifier for this edit.
-etpEditId :: Lens' EditsTracksPatch' Text
-etpEditId
-  = lens _etpEditId (\ s a -> s{_etpEditId = a})
+etptEditId :: Lens' EditsTracksPatch Text
+etptEditId
+  = lens _etptEditId (\ s a -> s{_etptEditId = a})
 
-instance GoogleRequest EditsTracksPatch' where
-        type Rs EditsTracksPatch' = Track
-        requestClient EditsTracksPatch'{..}
-          = go _etpPackageName _etpEditId _etpTrack
+instance GoogleRequest EditsTracksPatch where
+        type Rs EditsTracksPatch = Track
+        requestClient EditsTracksPatch{..}
+          = go _etptPackageName _etptEditId _etptTrack
               (Just AltJSON)
-              _etpPayload
+              _etptPayload
               androidPublisherService
           where go
                   = buildClient

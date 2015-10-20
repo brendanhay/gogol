@@ -31,19 +31,19 @@ module Network.Google.Resource.AndroidEnterprise.Collectionviewers.List
       CollectionviewersListResource
 
     -- * Creating a Request
-    , collectionviewersList'
-    , CollectionviewersList'
+    , collectionviewersList
+    , CollectionviewersList
 
     -- * Request Lenses
-    , clEnterpriseId
-    , clCollectionId
+    , cEnterpriseId
+    , cCollectionId
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.collectionviewers.list@ method which the
--- 'CollectionviewersList'' request conforms to.
+-- 'CollectionviewersList' request conforms to.
 type CollectionviewersListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -57,46 +57,46 @@ type CollectionviewersListResource =
 -- the collection. If the collection\'s visibility is set to viewersOnly
 -- then only these users will see the collection.
 --
--- /See:/ 'collectionviewersList'' smart constructor.
-data CollectionviewersList' = CollectionviewersList'
-    { _clEnterpriseId :: !Text
-    , _clCollectionId :: !Text
+-- /See:/ 'collectionviewersList' smart constructor.
+data CollectionviewersList = CollectionviewersList
+    { _cEnterpriseId :: !Text
+    , _cCollectionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CollectionviewersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CollectionviewersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'clEnterpriseId'
+-- * 'cEnterpriseId'
 --
--- * 'clCollectionId'
-collectionviewersList'
-    :: Text -- ^ 'clEnterpriseId'
-    -> Text -- ^ 'clCollectionId'
-    -> CollectionviewersList'
-collectionviewersList' pClEnterpriseId_ pClCollectionId_ =
-    CollectionviewersList'
-    { _clEnterpriseId = pClEnterpriseId_
-    , _clCollectionId = pClCollectionId_
+-- * 'cCollectionId'
+collectionviewersList
+    :: Text -- ^ 'cEnterpriseId'
+    -> Text -- ^ 'cCollectionId'
+    -> CollectionviewersList
+collectionviewersList pCEnterpriseId_ pCCollectionId_ =
+    CollectionviewersList
+    { _cEnterpriseId = pCEnterpriseId_
+    , _cCollectionId = pCCollectionId_
     }
 
 -- | The ID of the enterprise.
-clEnterpriseId :: Lens' CollectionviewersList' Text
-clEnterpriseId
-  = lens _clEnterpriseId
-      (\ s a -> s{_clEnterpriseId = a})
+cEnterpriseId :: Lens' CollectionviewersList Text
+cEnterpriseId
+  = lens _cEnterpriseId
+      (\ s a -> s{_cEnterpriseId = a})
 
 -- | The ID of the collection.
-clCollectionId :: Lens' CollectionviewersList' Text
-clCollectionId
-  = lens _clCollectionId
-      (\ s a -> s{_clCollectionId = a})
+cCollectionId :: Lens' CollectionviewersList Text
+cCollectionId
+  = lens _cCollectionId
+      (\ s a -> s{_cCollectionId = a})
 
-instance GoogleRequest CollectionviewersList' where
-        type Rs CollectionviewersList' =
+instance GoogleRequest CollectionviewersList where
+        type Rs CollectionviewersList =
              CollectionViewersListResponse
-        requestClient CollectionviewersList'{..}
-          = go _clEnterpriseId _clCollectionId (Just AltJSON)
+        requestClient CollectionviewersList{..}
+          = go _cEnterpriseId _cCollectionId (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient

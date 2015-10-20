@@ -29,8 +29,8 @@ module Network.Google.Resource.TaskQueue.Tasks.Insert
       TasksInsertResource
 
     -- * Creating a Request
-    , tasksInsert'
-    , TasksInsert'
+    , tasksInsert
+    , TasksInsert
 
     -- * Request Lenses
     , tiTaskqueue
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
 -- | A resource alias for @taskqueue.tasks.insert@ method which the
--- 'TasksInsert'' request conforms to.
+-- 'TasksInsert' request conforms to.
 type TasksInsertResource =
      Capture "project" Text :>
        "taskqueues" :>
@@ -53,14 +53,14 @@ type TasksInsertResource =
 
 -- | Insert a new task in a TaskQueue
 --
--- /See:/ 'tasksInsert'' smart constructor.
-data TasksInsert' = TasksInsert'
+-- /See:/ 'tasksInsert' smart constructor.
+data TasksInsert = TasksInsert
     { _tiTaskqueue :: !Text
     , _tiProject   :: !Text
     , _tiPayload   :: !Task
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TasksInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'TasksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,36 @@ data TasksInsert' = TasksInsert'
 -- * 'tiProject'
 --
 -- * 'tiPayload'
-tasksInsert'
+tasksInsert
     :: Text -- ^ 'tiTaskqueue'
     -> Text -- ^ 'tiProject'
     -> Task -- ^ 'tiPayload'
-    -> TasksInsert'
-tasksInsert' pTiTaskqueue_ pTiProject_ pTiPayload_ =
-    TasksInsert'
+    -> TasksInsert
+tasksInsert pTiTaskqueue_ pTiProject_ pTiPayload_ =
+    TasksInsert
     { _tiTaskqueue = pTiTaskqueue_
     , _tiProject = pTiProject_
     , _tiPayload = pTiPayload_
     }
 
 -- | The taskqueue to insert the task into
-tiTaskqueue :: Lens' TasksInsert' Text
+tiTaskqueue :: Lens' TasksInsert Text
 tiTaskqueue
   = lens _tiTaskqueue (\ s a -> s{_tiTaskqueue = a})
 
 -- | The project under which the queue lies
-tiProject :: Lens' TasksInsert' Text
+tiProject :: Lens' TasksInsert Text
 tiProject
   = lens _tiProject (\ s a -> s{_tiProject = a})
 
 -- | Multipart request metadata.
-tiPayload :: Lens' TasksInsert' Task
+tiPayload :: Lens' TasksInsert Task
 tiPayload
   = lens _tiPayload (\ s a -> s{_tiPayload = a})
 
-instance GoogleRequest TasksInsert' where
-        type Rs TasksInsert' = Task
-        requestClient TasksInsert'{..}
+instance GoogleRequest TasksInsert where
+        type Rs TasksInsert = Task
+        requestClient TasksInsert{..}
           = go _tiProject _tiTaskqueue (Just AltJSON)
               _tiPayload
               taskQueueService

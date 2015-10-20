@@ -30,8 +30,8 @@ module Network.Google.Resource.Games.Players.Get
       PlayersGetResource
 
     -- * Creating a Request
-    , playersGet'
-    , PlayersGet'
+    , playersGet
+    , PlayersGet
 
     -- * Request Lenses
     , pgLanguage
@@ -42,7 +42,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.players.get@ method which the
--- 'PlayersGet'' request conforms to.
+-- 'PlayersGet' request conforms to.
 type PlayersGetResource =
      "players" :>
        Capture "playerId" Text :>
@@ -52,42 +52,42 @@ type PlayersGetResource =
 -- | Retrieves the Player resource with the given ID. To retrieve the player
 -- for the currently authenticated user, set playerId to me.
 --
--- /See:/ 'playersGet'' smart constructor.
-data PlayersGet' = PlayersGet'
+-- /See:/ 'playersGet' smart constructor.
+data PlayersGet = PlayersGet
     { _pgLanguage :: !(Maybe Text)
     , _pgPlayerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlayersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pgLanguage'
 --
 -- * 'pgPlayerId'
-playersGet'
+playersGet
     :: Text -- ^ 'pgPlayerId'
-    -> PlayersGet'
-playersGet' pPgPlayerId_ =
-    PlayersGet'
+    -> PlayersGet
+playersGet pPgPlayerId_ =
+    PlayersGet
     { _pgLanguage = Nothing
     , _pgPlayerId = pPgPlayerId_
     }
 
 -- | The preferred language to use for strings returned by this method.
-pgLanguage :: Lens' PlayersGet' (Maybe Text)
+pgLanguage :: Lens' PlayersGet (Maybe Text)
 pgLanguage
   = lens _pgLanguage (\ s a -> s{_pgLanguage = a})
 
 -- | A player ID. A value of me may be used in place of the authenticated
 -- player\'s ID.
-pgPlayerId :: Lens' PlayersGet' Text
+pgPlayerId :: Lens' PlayersGet Text
 pgPlayerId
   = lens _pgPlayerId (\ s a -> s{_pgPlayerId = a})
 
-instance GoogleRequest PlayersGet' where
-        type Rs PlayersGet' = Player
-        requestClient PlayersGet'{..}
+instance GoogleRequest PlayersGet where
+        type Rs PlayersGet = Player
+        requestClient PlayersGet{..}
           = go _pgPlayerId _pgLanguage (Just AltJSON)
               gamesService
           where go

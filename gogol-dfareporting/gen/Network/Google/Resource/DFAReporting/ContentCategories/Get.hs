@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Get
       ContentCategoriesGetResource
 
     -- * Creating a Request
-    , contentCategoriesGet'
-    , ContentCategoriesGet'
+    , contentCategoriesGet
+    , ContentCategoriesGet
 
     -- * Request Lenses
     , ccgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.contentCategories.get@ method which the
--- 'ContentCategoriesGet'' request conforms to.
+-- 'ContentCategoriesGet' request conforms to.
 type ContentCategoriesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,41 +52,41 @@ type ContentCategoriesGetResource =
 
 -- | Gets one content category by ID.
 --
--- /See:/ 'contentCategoriesGet'' smart constructor.
-data ContentCategoriesGet' = ContentCategoriesGet'
+-- /See:/ 'contentCategoriesGet' smart constructor.
+data ContentCategoriesGet = ContentCategoriesGet
     { _ccgProFileId :: !Int64
     , _ccgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ContentCategoriesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ContentCategoriesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ccgProFileId'
 --
 -- * 'ccgId'
-contentCategoriesGet'
+contentCategoriesGet
     :: Int64 -- ^ 'ccgProFileId'
     -> Int64 -- ^ 'ccgId'
-    -> ContentCategoriesGet'
-contentCategoriesGet' pCcgProFileId_ pCcgId_ =
-    ContentCategoriesGet'
+    -> ContentCategoriesGet
+contentCategoriesGet pCcgProFileId_ pCcgId_ =
+    ContentCategoriesGet
     { _ccgProFileId = pCcgProFileId_
     , _ccgId = pCcgId_
     }
 
 -- | User profile ID associated with this request.
-ccgProFileId :: Lens' ContentCategoriesGet' Int64
+ccgProFileId :: Lens' ContentCategoriesGet Int64
 ccgProFileId
   = lens _ccgProFileId (\ s a -> s{_ccgProFileId = a})
 
 -- | Content category ID.
-ccgId :: Lens' ContentCategoriesGet' Int64
+ccgId :: Lens' ContentCategoriesGet Int64
 ccgId = lens _ccgId (\ s a -> s{_ccgId = a})
 
-instance GoogleRequest ContentCategoriesGet' where
-        type Rs ContentCategoriesGet' = ContentCategory
-        requestClient ContentCategoriesGet'{..}
+instance GoogleRequest ContentCategoriesGet where
+        type Rs ContentCategoriesGet = ContentCategory
+        requestClient ContentCategoriesGet{..}
           = go _ccgProFileId _ccgId (Just AltJSON)
               dFAReportingService
           where go

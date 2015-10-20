@@ -30,8 +30,8 @@ module Network.Google.Resource.SQL.Instances.List
       InstancesListResource
 
     -- * Creating a Request
-    , instancesList'
-    , InstancesList'
+    , instancesList
+    , InstancesList
 
     -- * Request Lenses
     , ilProject
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.list@ method which the
--- 'InstancesList'' request conforms to.
+-- 'InstancesList' request conforms to.
 type InstancesListResource =
      "projects" :>
        Capture "project" Text :>
@@ -56,14 +56,14 @@ type InstancesListResource =
 -- | Lists instances under a given project in the alphabetical order of the
 -- instance name.
 --
--- /See:/ 'instancesList'' smart constructor.
-data InstancesList' = InstancesList'
+-- /See:/ 'instancesList' smart constructor.
+data InstancesList = InstancesList
     { _ilProject    :: !Text
     , _ilPageToken  :: !(Maybe Text)
     , _ilMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,35 +72,35 @@ data InstancesList' = InstancesList'
 -- * 'ilPageToken'
 --
 -- * 'ilMaxResults'
-instancesList'
+instancesList
     :: Text -- ^ 'ilProject'
-    -> InstancesList'
-instancesList' pIlProject_ =
-    InstancesList'
+    -> InstancesList
+instancesList pIlProject_ =
+    InstancesList
     { _ilProject = pIlProject_
     , _ilPageToken = Nothing
     , _ilMaxResults = Nothing
     }
 
 -- | Project ID of the project for which to list Cloud SQL instances.
-ilProject :: Lens' InstancesList' Text
+ilProject :: Lens' InstancesList Text
 ilProject
   = lens _ilProject (\ s a -> s{_ilProject = a})
 
 -- | A previously-returned page token representing part of the larger set of
 -- results to view.
-ilPageToken :: Lens' InstancesList' (Maybe Text)
+ilPageToken :: Lens' InstancesList (Maybe Text)
 ilPageToken
   = lens _ilPageToken (\ s a -> s{_ilPageToken = a})
 
 -- | The maximum number of results to return per response.
-ilMaxResults :: Lens' InstancesList' (Maybe Word32)
+ilMaxResults :: Lens' InstancesList (Maybe Word32)
 ilMaxResults
   = lens _ilMaxResults (\ s a -> s{_ilMaxResults = a})
 
-instance GoogleRequest InstancesList' where
-        type Rs InstancesList' = InstancesListResponse
-        requestClient InstancesList'{..}
+instance GoogleRequest InstancesList where
+        type Rs InstancesList = InstancesListResponse
+        requestClient InstancesList{..}
           = go _ilProject _ilPageToken _ilMaxResults
               (Just AltJSON)
               sQLAdminService

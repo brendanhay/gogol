@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.Create
       AccountsPermissionsCreateResource
 
     -- * Creating a Request
-    , accountsPermissionsCreate'
-    , AccountsPermissionsCreate'
+    , accountsPermissionsCreate
+    , AccountsPermissionsCreate
 
     -- * Request Lenses
     , apcPayload
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.permissions.create@ method which the
--- 'AccountsPermissionsCreate'' request conforms to.
+-- 'AccountsPermissionsCreate' request conforms to.
 type AccountsPermissionsCreateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -51,43 +51,43 @@ type AccountsPermissionsCreateResource =
 
 -- | Creates a user\'s Account & Container Permissions.
 --
--- /See:/ 'accountsPermissionsCreate'' smart constructor.
-data AccountsPermissionsCreate' = AccountsPermissionsCreate'
+-- /See:/ 'accountsPermissionsCreate' smart constructor.
+data AccountsPermissionsCreate = AccountsPermissionsCreate
     { _apcPayload   :: !UserAccess
     , _apcAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsPermissionsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsPermissionsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'apcPayload'
 --
 -- * 'apcAccountId'
-accountsPermissionsCreate'
+accountsPermissionsCreate
     :: UserAccess -- ^ 'apcPayload'
     -> Text -- ^ 'apcAccountId'
-    -> AccountsPermissionsCreate'
-accountsPermissionsCreate' pApcPayload_ pApcAccountId_ =
-    AccountsPermissionsCreate'
+    -> AccountsPermissionsCreate
+accountsPermissionsCreate pApcPayload_ pApcAccountId_ =
+    AccountsPermissionsCreate
     { _apcPayload = pApcPayload_
     , _apcAccountId = pApcAccountId_
     }
 
 -- | Multipart request metadata.
-apcPayload :: Lens' AccountsPermissionsCreate' UserAccess
+apcPayload :: Lens' AccountsPermissionsCreate UserAccess
 apcPayload
   = lens _apcPayload (\ s a -> s{_apcPayload = a})
 
 -- | The GTM Account ID.
-apcAccountId :: Lens' AccountsPermissionsCreate' Text
+apcAccountId :: Lens' AccountsPermissionsCreate Text
 apcAccountId
   = lens _apcAccountId (\ s a -> s{_apcAccountId = a})
 
-instance GoogleRequest AccountsPermissionsCreate'
+instance GoogleRequest AccountsPermissionsCreate
          where
-        type Rs AccountsPermissionsCreate' = UserAccess
-        requestClient AccountsPermissionsCreate'{..}
+        type Rs AccountsPermissionsCreate = UserAccess
+        requestClient AccountsPermissionsCreate{..}
           = go _apcAccountId (Just AltJSON) _apcPayload
               tagManagerService
           where go

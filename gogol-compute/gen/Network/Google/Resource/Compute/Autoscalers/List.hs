@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Autoscalers.List
       AutoscalersListResource
 
     -- * Creating a Request
-    , autoscalersList'
-    , AutoscalersList'
+    , autoscalersList
+    , AutoscalersList
 
     -- * Request Lenses
     , aProject
@@ -45,7 +45,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.autoscalers.list@ method which the
--- 'AutoscalersList'' request conforms to.
+-- 'AutoscalersList' request conforms to.
 type AutoscalersListResource =
      Capture "project" Text :>
        "zones" :>
@@ -60,8 +60,8 @@ type AutoscalersListResource =
 -- | Retrieves the list of autoscaler resources contained within the
 -- specified zone.
 --
--- /See:/ 'autoscalersList'' smart constructor.
-data AutoscalersList' = AutoscalersList'
+-- /See:/ 'autoscalersList' smart constructor.
+data AutoscalersList = AutoscalersList
     { _aProject    :: !Text
     , _aZone       :: !Text
     , _aFilter     :: !(Maybe Text)
@@ -69,7 +69,7 @@ data AutoscalersList' = AutoscalersList'
     , _aMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AutoscalersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AutoscalersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,12 +82,12 @@ data AutoscalersList' = AutoscalersList'
 -- * 'aPageToken'
 --
 -- * 'aMaxResults'
-autoscalersList'
+autoscalersList
     :: Text -- ^ 'aProject'
     -> Text -- ^ 'aZone'
-    -> AutoscalersList'
-autoscalersList' pAProject_ pAZone_ =
-    AutoscalersList'
+    -> AutoscalersList
+autoscalersList pAProject_ pAZone_ =
+    AutoscalersList
     { _aProject = pAProject_
     , _aZone = pAZone_
     , _aFilter = Nothing
@@ -96,11 +96,11 @@ autoscalersList' pAProject_ pAZone_ =
     }
 
 -- | Name of the project scoping this request.
-aProject :: Lens' AutoscalersList' Text
+aProject :: Lens' AutoscalersList Text
 aProject = lens _aProject (\ s a -> s{_aProject = a})
 
 -- | Name of the zone scoping this request.
-aZone :: Lens' AutoscalersList' Text
+aZone :: Lens' AutoscalersList Text
 aZone = lens _aZone (\ s a -> s{_aZone = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -114,24 +114,24 @@ aZone = lens _aZone (\ s a -> s{_aZone = a})
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-aFilter :: Lens' AutoscalersList' (Maybe Text)
+aFilter :: Lens' AutoscalersList (Maybe Text)
 aFilter = lens _aFilter (\ s a -> s{_aFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-aPageToken :: Lens' AutoscalersList' (Maybe Text)
+aPageToken :: Lens' AutoscalersList (Maybe Text)
 aPageToken
   = lens _aPageToken (\ s a -> s{_aPageToken = a})
 
 -- | Maximum count of results to be returned.
-aMaxResults :: Lens' AutoscalersList' Word32
+aMaxResults :: Lens' AutoscalersList Word32
 aMaxResults
   = lens _aMaxResults (\ s a -> s{_aMaxResults = a})
 
-instance GoogleRequest AutoscalersList' where
-        type Rs AutoscalersList' = AutoscalerList
-        requestClient AutoscalersList'{..}
+instance GoogleRequest AutoscalersList where
+        type Rs AutoscalersList = AutoscalerList
+        requestClient AutoscalersList{..}
           = go _aProject _aZone _aFilter _aPageToken
               (Just _aMaxResults)
               (Just AltJSON)

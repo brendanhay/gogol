@@ -29,8 +29,8 @@ module Network.Google.Resource.FusionTables.Column.Delete
       ColumnDeleteResource
 
     -- * Creating a Request
-    , columnDelete'
-    , ColumnDelete'
+    , columnDelete
+    , ColumnDelete
 
     -- * Request Lenses
     , cdTableId
@@ -41,7 +41,7 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.column.delete@ method which the
--- 'ColumnDelete'' request conforms to.
+-- 'ColumnDelete' request conforms to.
 type ColumnDeleteResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -51,42 +51,42 @@ type ColumnDeleteResource =
 
 -- | Deletes the specified column.
 --
--- /See:/ 'columnDelete'' smart constructor.
-data ColumnDelete' = ColumnDelete'
+-- /See:/ 'columnDelete' smart constructor.
+data ColumnDelete = ColumnDelete
     { _cdTableId  :: !Text
     , _cdColumnId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ColumnDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ColumnDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cdTableId'
 --
 -- * 'cdColumnId'
-columnDelete'
+columnDelete
     :: Text -- ^ 'cdTableId'
     -> Text -- ^ 'cdColumnId'
-    -> ColumnDelete'
-columnDelete' pCdTableId_ pCdColumnId_ =
-    ColumnDelete'
+    -> ColumnDelete
+columnDelete pCdTableId_ pCdColumnId_ =
+    ColumnDelete
     { _cdTableId = pCdTableId_
     , _cdColumnId = pCdColumnId_
     }
 
 -- | Table from which the column is being deleted.
-cdTableId :: Lens' ColumnDelete' Text
+cdTableId :: Lens' ColumnDelete Text
 cdTableId
   = lens _cdTableId (\ s a -> s{_cdTableId = a})
 
 -- | Name or identifier for the column being deleted.
-cdColumnId :: Lens' ColumnDelete' Text
+cdColumnId :: Lens' ColumnDelete Text
 cdColumnId
   = lens _cdColumnId (\ s a -> s{_cdColumnId = a})
 
-instance GoogleRequest ColumnDelete' where
-        type Rs ColumnDelete' = ()
-        requestClient ColumnDelete'{..}
+instance GoogleRequest ColumnDelete where
+        type Rs ColumnDelete = ()
+        requestClient ColumnDelete{..}
           = go _cdTableId _cdColumnId (Just AltJSON)
               fusionTablesService
           where go

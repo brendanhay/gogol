@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.Stop
       UsersStopResource
 
     -- * Creating a Request
-    , usersStop'
-    , UsersStop'
+    , usersStop
+    , UsersStop
 
     -- * Request Lenses
     , usUserId
@@ -40,39 +40,39 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.stop@ method which the
--- 'UsersStop'' request conforms to.
+-- 'UsersStop' request conforms to.
 type UsersStopResource =
      Capture "userId" Text :>
        "stop" :> QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Stop receiving push notifications for the given user mailbox.
 --
--- /See:/ 'usersStop'' smart constructor.
-newtype UsersStop' = UsersStop'
+-- /See:/ 'usersStop' smart constructor.
+newtype UsersStop = UsersStop
     { _usUserId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersStop'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersStop' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'usUserId'
-usersStop'
+usersStop
     :: Text
-    -> UsersStop'
-usersStop' pUsUserId_ =
-    UsersStop'
+    -> UsersStop
+usersStop pUsUserId_ =
+    UsersStop
     { _usUserId = pUsUserId_
     }
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-usUserId :: Lens' UsersStop' Text
+usUserId :: Lens' UsersStop Text
 usUserId = lens _usUserId (\ s a -> s{_usUserId = a})
 
-instance GoogleRequest UsersStop' where
-        type Rs UsersStop' = ()
-        requestClient UsersStop'{..}
+instance GoogleRequest UsersStop where
+        type Rs UsersStop = ()
+        requestClient UsersStop{..}
           = go _usUserId (Just AltJSON) gmailService
           where go
                   = buildClient (Proxy :: Proxy UsersStopResource)

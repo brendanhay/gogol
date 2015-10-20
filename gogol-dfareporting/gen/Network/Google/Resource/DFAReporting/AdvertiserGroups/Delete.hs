@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Delete
       AdvertiserGroupsDeleteResource
 
     -- * Creating a Request
-    , advertiserGroupsDelete'
-    , AdvertiserGroupsDelete'
+    , advertiserGroupsDelete
+    , AdvertiserGroupsDelete
 
     -- * Request Lenses
     , agdProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.advertiserGroups.delete@ method which the
--- 'AdvertiserGroupsDelete'' request conforms to.
+-- 'AdvertiserGroupsDelete' request conforms to.
 type AdvertiserGroupsDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,41 +51,41 @@ type AdvertiserGroupsDeleteResource =
 
 -- | Deletes an existing advertiser group.
 --
--- /See:/ 'advertiserGroupsDelete'' smart constructor.
-data AdvertiserGroupsDelete' = AdvertiserGroupsDelete'
+-- /See:/ 'advertiserGroupsDelete' smart constructor.
+data AdvertiserGroupsDelete = AdvertiserGroupsDelete
     { _agdProFileId :: !Int64
     , _agdId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdvertiserGroupsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdvertiserGroupsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'agdProFileId'
 --
 -- * 'agdId'
-advertiserGroupsDelete'
+advertiserGroupsDelete
     :: Int64 -- ^ 'agdProFileId'
     -> Int64 -- ^ 'agdId'
-    -> AdvertiserGroupsDelete'
-advertiserGroupsDelete' pAgdProFileId_ pAgdId_ =
-    AdvertiserGroupsDelete'
+    -> AdvertiserGroupsDelete
+advertiserGroupsDelete pAgdProFileId_ pAgdId_ =
+    AdvertiserGroupsDelete
     { _agdProFileId = pAgdProFileId_
     , _agdId = pAgdId_
     }
 
 -- | User profile ID associated with this request.
-agdProFileId :: Lens' AdvertiserGroupsDelete' Int64
+agdProFileId :: Lens' AdvertiserGroupsDelete Int64
 agdProFileId
   = lens _agdProFileId (\ s a -> s{_agdProFileId = a})
 
 -- | Advertiser group ID.
-agdId :: Lens' AdvertiserGroupsDelete' Int64
+agdId :: Lens' AdvertiserGroupsDelete Int64
 agdId = lens _agdId (\ s a -> s{_agdId = a})
 
-instance GoogleRequest AdvertiserGroupsDelete' where
-        type Rs AdvertiserGroupsDelete' = ()
-        requestClient AdvertiserGroupsDelete'{..}
+instance GoogleRequest AdvertiserGroupsDelete where
+        type Rs AdvertiserGroupsDelete = ()
+        requestClient AdvertiserGroupsDelete{..}
           = go _agdProFileId _agdId (Just AltJSON)
               dFAReportingService
           where go

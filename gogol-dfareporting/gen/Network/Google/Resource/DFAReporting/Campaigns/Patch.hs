@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Campaigns.Patch
       CampaignsPatchResource
 
     -- * Creating a Request
-    , campaignsPatch'
-    , CampaignsPatch'
+    , campaignsPatch
+    , CampaignsPatch
 
     -- * Request Lenses
     , cpProFileId
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.campaigns.patch@ method which the
--- 'CampaignsPatch'' request conforms to.
+-- 'CampaignsPatch' request conforms to.
 type CampaignsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -53,14 +53,14 @@ type CampaignsPatchResource =
 
 -- | Updates an existing campaign. This method supports patch semantics.
 --
--- /See:/ 'campaignsPatch'' smart constructor.
-data CampaignsPatch' = CampaignsPatch'
+-- /See:/ 'campaignsPatch' smart constructor.
+data CampaignsPatch = CampaignsPatch
     { _cpProFileId :: !Int64
     , _cpPayload   :: !Campaign
     , _cpId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CampaignsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'CampaignsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data CampaignsPatch' = CampaignsPatch'
 -- * 'cpPayload'
 --
 -- * 'cpId'
-campaignsPatch'
+campaignsPatch
     :: Int64 -- ^ 'cpProFileId'
     -> Campaign -- ^ 'cpPayload'
     -> Int64 -- ^ 'cpId'
-    -> CampaignsPatch'
-campaignsPatch' pCpProFileId_ pCpPayload_ pCpId_ =
-    CampaignsPatch'
+    -> CampaignsPatch
+campaignsPatch pCpProFileId_ pCpPayload_ pCpId_ =
+    CampaignsPatch
     { _cpProFileId = pCpProFileId_
     , _cpPayload = pCpPayload_
     , _cpId = pCpId_
     }
 
 -- | User profile ID associated with this request.
-cpProFileId :: Lens' CampaignsPatch' Int64
+cpProFileId :: Lens' CampaignsPatch Int64
 cpProFileId
   = lens _cpProFileId (\ s a -> s{_cpProFileId = a})
 
 -- | Multipart request metadata.
-cpPayload :: Lens' CampaignsPatch' Campaign
+cpPayload :: Lens' CampaignsPatch Campaign
 cpPayload
   = lens _cpPayload (\ s a -> s{_cpPayload = a})
 
 -- | Campaign ID.
-cpId :: Lens' CampaignsPatch' Int64
+cpId :: Lens' CampaignsPatch Int64
 cpId = lens _cpId (\ s a -> s{_cpId = a})
 
-instance GoogleRequest CampaignsPatch' where
-        type Rs CampaignsPatch' = Campaign
-        requestClient CampaignsPatch'{..}
+instance GoogleRequest CampaignsPatch where
+        type Rs CampaignsPatch = Campaign
+        requestClient CampaignsPatch{..}
           = go _cpProFileId (Just _cpId) (Just AltJSON)
               _cpPayload
               dFAReportingService

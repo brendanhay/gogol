@@ -29,8 +29,8 @@ module Network.Google.Resource.DataTransfer.Applications.List
       ApplicationsListResource
 
     -- * Creating a Request
-    , applicationsList'
-    , ApplicationsList'
+    , applicationsList
+    , ApplicationsList
 
     -- * Request Lenses
     , alCustomerId
@@ -42,7 +42,7 @@ import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @datatransfer.applications.list@ method which the
--- 'ApplicationsList'' request conforms to.
+-- 'ApplicationsList' request conforms to.
 type ApplicationsListResource =
      "applications" :>
        QueryParam "customerId" Text :>
@@ -53,14 +53,14 @@ type ApplicationsListResource =
 
 -- | Lists the applications available for data transfer for a customer.
 --
--- /See:/ 'applicationsList'' smart constructor.
-data ApplicationsList' = ApplicationsList'
+-- /See:/ 'applicationsList' smart constructor.
+data ApplicationsList = ApplicationsList
     { _alCustomerId :: !(Maybe Text)
     , _alPageToken  :: !(Maybe Text)
     , _alMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ApplicationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ApplicationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,33 +69,33 @@ data ApplicationsList' = ApplicationsList'
 -- * 'alPageToken'
 --
 -- * 'alMaxResults'
-applicationsList'
-    :: ApplicationsList'
-applicationsList' =
-    ApplicationsList'
+applicationsList
+    :: ApplicationsList
+applicationsList =
+    ApplicationsList
     { _alCustomerId = Nothing
     , _alPageToken = Nothing
     , _alMaxResults = Nothing
     }
 
 -- | Immutable ID of the Google Apps account.
-alCustomerId :: Lens' ApplicationsList' (Maybe Text)
+alCustomerId :: Lens' ApplicationsList (Maybe Text)
 alCustomerId
   = lens _alCustomerId (\ s a -> s{_alCustomerId = a})
 
 -- | Token to specify next page in the list.
-alPageToken :: Lens' ApplicationsList' (Maybe Text)
+alPageToken :: Lens' ApplicationsList (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | Maximum number of results to return. Default is 100.
-alMaxResults :: Lens' ApplicationsList' (Maybe Word32)
+alMaxResults :: Lens' ApplicationsList (Maybe Word32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
-instance GoogleRequest ApplicationsList' where
-        type Rs ApplicationsList' = ApplicationsListResponse
-        requestClient ApplicationsList'{..}
+instance GoogleRequest ApplicationsList where
+        type Rs ApplicationsList = ApplicationsListResponse
+        requestClient ApplicationsList{..}
           = go _alCustomerId _alPageToken _alMaxResults
               (Just AltJSON)
               dataTransferService

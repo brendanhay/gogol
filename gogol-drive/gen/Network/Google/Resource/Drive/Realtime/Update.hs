@@ -30,20 +30,20 @@ module Network.Google.Resource.Drive.Realtime.Update
       RealtimeUpdateResource
 
     -- * Creating a Request
-    , realtimeUpdate'
-    , RealtimeUpdate'
+    , realtimeUpdate
+    , RealtimeUpdate
 
     -- * Request Lenses
-    , rBaseRevision
-    , rMedia
-    , rFileId
+    , reaBaseRevision
+    , reaMedia
+    , reaFileId
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.realtime.update@ method which the
--- 'RealtimeUpdate'' request conforms to.
+-- 'RealtimeUpdate' request conforms to.
 type RealtimeUpdateResource =
      "files" :>
        Capture "fileId" Text :>
@@ -55,31 +55,31 @@ type RealtimeUpdateResource =
 -- | Overwrites the Realtime API data model associated with this file with
 -- the provided JSON data model.
 --
--- /See:/ 'realtimeUpdate'' smart constructor.
-data RealtimeUpdate' = RealtimeUpdate'
-    { _rBaseRevision :: !(Maybe Text)
-    , _rMedia        :: !Body
-    , _rFileId       :: !Text
+-- /See:/ 'realtimeUpdate' smart constructor.
+data RealtimeUpdate = RealtimeUpdate
+    { _reaBaseRevision :: !(Maybe Text)
+    , _reaMedia        :: !Body
+    , _reaFileId       :: !Text
     }
 
--- | Creates a value of 'RealtimeUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'RealtimeUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rBaseRevision'
+-- * 'reaBaseRevision'
 --
--- * 'rMedia'
+-- * 'reaMedia'
 --
--- * 'rFileId'
-realtimeUpdate'
-    :: Body -- ^ 'rMedia'
-    -> Text -- ^ 'rFileId'
-    -> RealtimeUpdate'
-realtimeUpdate' pRMedia_ pRFileId_ =
-    RealtimeUpdate'
-    { _rBaseRevision = Nothing
-    , _rMedia = pRMedia_
-    , _rFileId = pRFileId_
+-- * 'reaFileId'
+realtimeUpdate
+    :: Body -- ^ 'reaMedia'
+    -> Text -- ^ 'reaFileId'
+    -> RealtimeUpdate
+realtimeUpdate pReaMedia_ pReaFileId_ =
+    RealtimeUpdate
+    { _reaBaseRevision = Nothing
+    , _reaMedia = pReaMedia_
+    , _reaFileId = pReaFileId_
     }
 
 -- | The revision of the model to diff the uploaded model against. If set,
@@ -87,22 +87,24 @@ realtimeUpdate' pRMedia_ pRFileId_ =
 -- differences are merged with any changes made to the model after the
 -- provided revision. If not set, the uploaded model replaces the current
 -- model on the server.
-rBaseRevision :: Lens' RealtimeUpdate' (Maybe Text)
-rBaseRevision
-  = lens _rBaseRevision
-      (\ s a -> s{_rBaseRevision = a})
+reaBaseRevision :: Lens' RealtimeUpdate (Maybe Text)
+reaBaseRevision
+  = lens _reaBaseRevision
+      (\ s a -> s{_reaBaseRevision = a})
 
-rMedia :: Lens' RealtimeUpdate' Body
-rMedia = lens _rMedia (\ s a -> s{_rMedia = a})
+reaMedia :: Lens' RealtimeUpdate Body
+reaMedia = lens _reaMedia (\ s a -> s{_reaMedia = a})
 
 -- | The ID of the file that the Realtime API data model is associated with.
-rFileId :: Lens' RealtimeUpdate' Text
-rFileId = lens _rFileId (\ s a -> s{_rFileId = a})
+reaFileId :: Lens' RealtimeUpdate Text
+reaFileId
+  = lens _reaFileId (\ s a -> s{_reaFileId = a})
 
-instance GoogleRequest RealtimeUpdate' where
-        type Rs RealtimeUpdate' = ()
-        requestClient RealtimeUpdate'{..}
-          = go _rFileId _rBaseRevision (Just AltJSON) _rMedia
+instance GoogleRequest RealtimeUpdate where
+        type Rs RealtimeUpdate = ()
+        requestClient RealtimeUpdate{..}
+          = go _reaFileId _reaBaseRevision (Just AltJSON)
+              _reaMedia
               driveService
           where go
                   = buildClient (Proxy :: Proxy RealtimeUpdateResource)

@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudUserAccounts.Users.List
       UsersListResource
 
     -- * Creating a Request
-    , usersList'
-    , UsersList'
+    , usersList
+    , UsersList
 
     -- * Request Lenses
     , ulOrderBy
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
 -- | A resource alias for @clouduseraccounts.users.list@ method which the
--- 'UsersList'' request conforms to.
+-- 'UsersList' request conforms to.
 type UsersListResource =
      Capture "project" Text :>
        "global" :>
@@ -57,8 +57,8 @@ type UsersListResource =
 
 -- | Retrieves a list of users contained within the specified project.
 --
--- /See:/ 'usersList'' smart constructor.
-data UsersList' = UsersList'
+-- /See:/ 'usersList' smart constructor.
+data UsersList = UsersList
     { _ulOrderBy    :: !(Maybe Text)
     , _ulProject    :: !Text
     , _ulFilter     :: !(Maybe Text)
@@ -66,7 +66,7 @@ data UsersList' = UsersList'
     , _ulMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,11 +79,11 @@ data UsersList' = UsersList'
 -- * 'ulPageToken'
 --
 -- * 'ulMaxResults'
-usersList'
+usersList
     :: Text -- ^ 'ulProject'
-    -> UsersList'
-usersList' pUlProject_ =
-    UsersList'
+    -> UsersList
+usersList pUlProject_ =
+    UsersList
     { _ulOrderBy = Nothing
     , _ulProject = pUlProject_
     , _ulFilter = Nothing
@@ -99,12 +99,12 @@ usersList' pUlProject_ =
 -- first). Use this to sort resources like operations so that the newest
 -- operation is returned first. Currently, only sorting by name or
 -- creationTimestamp desc is supported.
-ulOrderBy :: Lens' UsersList' (Maybe Text)
+ulOrderBy :: Lens' UsersList (Maybe Text)
 ulOrderBy
   = lens _ulOrderBy (\ s a -> s{_ulOrderBy = a})
 
 -- | Project ID for this request.
-ulProject :: Lens' UsersList' Text
+ulProject :: Lens' UsersList Text
 ulProject
   = lens _ulProject (\ s a -> s{_ulProject = a})
 
@@ -119,24 +119,24 @@ ulProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-ulFilter :: Lens' UsersList' (Maybe Text)
+ulFilter :: Lens' UsersList (Maybe Text)
 ulFilter = lens _ulFilter (\ s a -> s{_ulFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-ulPageToken :: Lens' UsersList' (Maybe Text)
+ulPageToken :: Lens' UsersList (Maybe Text)
 ulPageToken
   = lens _ulPageToken (\ s a -> s{_ulPageToken = a})
 
 -- | Maximum count of results to be returned.
-ulMaxResults :: Lens' UsersList' Word32
+ulMaxResults :: Lens' UsersList Word32
 ulMaxResults
   = lens _ulMaxResults (\ s a -> s{_ulMaxResults = a})
 
-instance GoogleRequest UsersList' where
-        type Rs UsersList' = UserList
-        requestClient UsersList'{..}
+instance GoogleRequest UsersList where
+        type Rs UsersList = UserList
+        requestClient UsersList{..}
           = go _ulProject _ulOrderBy _ulFilter _ulPageToken
               (Just _ulMaxResults)
               (Just AltJSON)

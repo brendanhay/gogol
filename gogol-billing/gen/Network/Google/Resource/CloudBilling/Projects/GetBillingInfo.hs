@@ -32,8 +32,8 @@ module Network.Google.Resource.CloudBilling.Projects.GetBillingInfo
       ProjectsGetBillingInfoResource
 
     -- * Creating a Request
-    , projectsGetBillingInfo'
-    , ProjectsGetBillingInfo'
+    , projectsGetBillingInfo
+    , ProjectsGetBillingInfo
 
     -- * Request Lenses
     , pgbiXgafv
@@ -50,7 +50,7 @@ import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @cloudbilling.projects.getBillingInfo@ method which the
--- 'ProjectsGetBillingInfo'' request conforms to.
+-- 'ProjectsGetBillingInfo' request conforms to.
 type ProjectsGetBillingInfoResource =
      "v1" :>
        Capture "name" Text :>
@@ -70,8 +70,8 @@ type ProjectsGetBillingInfoResource =
 -- project](https:\/\/cloud.google.com\/docs\/permissions-overview#h.bgs0oxofvnoo
 -- ).
 --
--- /See:/ 'projectsGetBillingInfo'' smart constructor.
-data ProjectsGetBillingInfo' = ProjectsGetBillingInfo'
+-- /See:/ 'projectsGetBillingInfo' smart constructor.
+data ProjectsGetBillingInfo = ProjectsGetBillingInfo
     { _pgbiXgafv          :: !(Maybe Text)
     , _pgbiUploadProtocol :: !(Maybe Text)
     , _pgbiPp             :: !Bool
@@ -82,7 +82,7 @@ data ProjectsGetBillingInfo' = ProjectsGetBillingInfo'
     , _pgbiCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsGetBillingInfo'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsGetBillingInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -101,11 +101,11 @@ data ProjectsGetBillingInfo' = ProjectsGetBillingInfo'
 -- * 'pgbiName'
 --
 -- * 'pgbiCallback'
-projectsGetBillingInfo'
+projectsGetBillingInfo
     :: Text -- ^ 'pgbiName'
-    -> ProjectsGetBillingInfo'
-projectsGetBillingInfo' pPgbiName_ =
-    ProjectsGetBillingInfo'
+    -> ProjectsGetBillingInfo
+projectsGetBillingInfo pPgbiName_ =
+    ProjectsGetBillingInfo
     { _pgbiXgafv = Nothing
     , _pgbiUploadProtocol = Nothing
     , _pgbiPp = True
@@ -117,51 +117,51 @@ projectsGetBillingInfo' pPgbiName_ =
     }
 
 -- | V1 error format.
-pgbiXgafv :: Lens' ProjectsGetBillingInfo' (Maybe Text)
+pgbiXgafv :: Lens' ProjectsGetBillingInfo (Maybe Text)
 pgbiXgafv
   = lens _pgbiXgafv (\ s a -> s{_pgbiXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pgbiUploadProtocol :: Lens' ProjectsGetBillingInfo' (Maybe Text)
+pgbiUploadProtocol :: Lens' ProjectsGetBillingInfo (Maybe Text)
 pgbiUploadProtocol
   = lens _pgbiUploadProtocol
       (\ s a -> s{_pgbiUploadProtocol = a})
 
 -- | Pretty-print response.
-pgbiPp :: Lens' ProjectsGetBillingInfo' Bool
+pgbiPp :: Lens' ProjectsGetBillingInfo Bool
 pgbiPp = lens _pgbiPp (\ s a -> s{_pgbiPp = a})
 
 -- | OAuth access token.
-pgbiAccessToken :: Lens' ProjectsGetBillingInfo' (Maybe Text)
+pgbiAccessToken :: Lens' ProjectsGetBillingInfo (Maybe Text)
 pgbiAccessToken
   = lens _pgbiAccessToken
       (\ s a -> s{_pgbiAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pgbiUploadType :: Lens' ProjectsGetBillingInfo' (Maybe Text)
+pgbiUploadType :: Lens' ProjectsGetBillingInfo (Maybe Text)
 pgbiUploadType
   = lens _pgbiUploadType
       (\ s a -> s{_pgbiUploadType = a})
 
 -- | OAuth bearer token.
-pgbiBearerToken :: Lens' ProjectsGetBillingInfo' (Maybe Text)
+pgbiBearerToken :: Lens' ProjectsGetBillingInfo (Maybe Text)
 pgbiBearerToken
   = lens _pgbiBearerToken
       (\ s a -> s{_pgbiBearerToken = a})
 
 -- | The resource name of the project for which billing information is
 -- retrieved. For example, \`projects\/tokyo-rain-123\`.
-pgbiName :: Lens' ProjectsGetBillingInfo' Text
+pgbiName :: Lens' ProjectsGetBillingInfo Text
 pgbiName = lens _pgbiName (\ s a -> s{_pgbiName = a})
 
 -- | JSONP
-pgbiCallback :: Lens' ProjectsGetBillingInfo' (Maybe Text)
+pgbiCallback :: Lens' ProjectsGetBillingInfo (Maybe Text)
 pgbiCallback
   = lens _pgbiCallback (\ s a -> s{_pgbiCallback = a})
 
-instance GoogleRequest ProjectsGetBillingInfo' where
-        type Rs ProjectsGetBillingInfo' = ProjectBillingInfo
-        requestClient ProjectsGetBillingInfo'{..}
+instance GoogleRequest ProjectsGetBillingInfo where
+        type Rs ProjectsGetBillingInfo = ProjectBillingInfo
+        requestClient ProjectsGetBillingInfo{..}
           = go _pgbiName _pgbiXgafv _pgbiUploadProtocol
               (Just _pgbiPp)
               _pgbiAccessToken

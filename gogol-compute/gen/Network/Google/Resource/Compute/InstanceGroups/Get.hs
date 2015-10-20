@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.InstanceGroups.Get
       InstanceGroupsGetResource
 
     -- * Creating a Request
-    , instanceGroupsGet'
-    , InstanceGroupsGet'
+    , instanceGroupsGet
+    , InstanceGroupsGet
 
     -- * Request Lenses
     , iggProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroups.get@ method which the
--- 'InstanceGroupsGet'' request conforms to.
+-- 'InstanceGroupsGet' request conforms to.
 type InstanceGroupsGetResource =
      Capture "project" Text :>
        "zones" :>
@@ -53,14 +53,14 @@ type InstanceGroupsGetResource =
 
 -- | Returns the specified instance group resource.
 --
--- /See:/ 'instanceGroupsGet'' smart constructor.
-data InstanceGroupsGet' = InstanceGroupsGet'
+-- /See:/ 'instanceGroupsGet' smart constructor.
+data InstanceGroupsGet = InstanceGroupsGet
     { _iggProject       :: !Text
     , _iggZone          :: !Text
     , _iggInstanceGroup :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,36 @@ data InstanceGroupsGet' = InstanceGroupsGet'
 -- * 'iggZone'
 --
 -- * 'iggInstanceGroup'
-instanceGroupsGet'
+instanceGroupsGet
     :: Text -- ^ 'iggProject'
     -> Text -- ^ 'iggZone'
     -> Text -- ^ 'iggInstanceGroup'
-    -> InstanceGroupsGet'
-instanceGroupsGet' pIggProject_ pIggZone_ pIggInstanceGroup_ =
-    InstanceGroupsGet'
+    -> InstanceGroupsGet
+instanceGroupsGet pIggProject_ pIggZone_ pIggInstanceGroup_ =
+    InstanceGroupsGet
     { _iggProject = pIggProject_
     , _iggZone = pIggZone_
     , _iggInstanceGroup = pIggInstanceGroup_
     }
 
 -- | The project ID for this request.
-iggProject :: Lens' InstanceGroupsGet' Text
+iggProject :: Lens' InstanceGroupsGet Text
 iggProject
   = lens _iggProject (\ s a -> s{_iggProject = a})
 
 -- | The name of the zone where the instance group is located.
-iggZone :: Lens' InstanceGroupsGet' Text
+iggZone :: Lens' InstanceGroupsGet Text
 iggZone = lens _iggZone (\ s a -> s{_iggZone = a})
 
 -- | The name of the instance group.
-iggInstanceGroup :: Lens' InstanceGroupsGet' Text
+iggInstanceGroup :: Lens' InstanceGroupsGet Text
 iggInstanceGroup
   = lens _iggInstanceGroup
       (\ s a -> s{_iggInstanceGroup = a})
 
-instance GoogleRequest InstanceGroupsGet' where
-        type Rs InstanceGroupsGet' = InstanceGroup
-        requestClient InstanceGroupsGet'{..}
+instance GoogleRequest InstanceGroupsGet where
+        type Rs InstanceGroupsGet = InstanceGroup
+        requestClient InstanceGroupsGet{..}
           = go _iggProject _iggZone _iggInstanceGroup
               (Just AltJSON)
               computeService

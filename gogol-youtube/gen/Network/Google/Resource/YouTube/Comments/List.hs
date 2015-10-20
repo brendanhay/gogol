@@ -29,23 +29,23 @@ module Network.Google.Resource.YouTube.Comments.List
       CommentsListResource
 
     -- * Creating a Request
-    , commentsList'
-    , CommentsList'
+    , commentsList
+    , CommentsList
 
     -- * Request Lenses
-    , comPart
-    , comId
-    , comPageToken
-    , comTextFormat
-    , comMaxResults
-    , comParentId
+    , cllPart
+    , cllId
+    , cllPageToken
+    , cllTextFormat
+    , cllMaxResults
+    , cllParentId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.comments.list@ method which the
--- 'CommentsList'' request conforms to.
+-- 'CommentsList' request conforms to.
 type CommentsListResource =
      "comments" :>
        QueryParam "part" Text :>
@@ -59,93 +59,93 @@ type CommentsListResource =
 
 -- | Returns a list of comments that match the API request parameters.
 --
--- /See:/ 'commentsList'' smart constructor.
-data CommentsList' = CommentsList'
-    { _comPart       :: !Text
-    , _comId         :: !(Maybe Text)
-    , _comPageToken  :: !(Maybe Text)
-    , _comTextFormat :: !CommentsListTextFormat
-    , _comMaxResults :: !Word32
-    , _comParentId   :: !(Maybe Text)
+-- /See:/ 'commentsList' smart constructor.
+data CommentsList = CommentsList
+    { _cllPart       :: !Text
+    , _cllId         :: !(Maybe Text)
+    , _cllPageToken  :: !(Maybe Text)
+    , _cllTextFormat :: !CommentsListTextFormat
+    , _cllMaxResults :: !Word32
+    , _cllParentId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'comPart'
+-- * 'cllPart'
 --
--- * 'comId'
+-- * 'cllId'
 --
--- * 'comPageToken'
+-- * 'cllPageToken'
 --
--- * 'comTextFormat'
+-- * 'cllTextFormat'
 --
--- * 'comMaxResults'
+-- * 'cllMaxResults'
 --
--- * 'comParentId'
-commentsList'
-    :: Text -- ^ 'comPart'
-    -> CommentsList'
-commentsList' pComPart_ =
-    CommentsList'
-    { _comPart = pComPart_
-    , _comId = Nothing
-    , _comPageToken = Nothing
-    , _comTextFormat = HTML
-    , _comMaxResults = 20
-    , _comParentId = Nothing
+-- * 'cllParentId'
+commentsList
+    :: Text -- ^ 'cllPart'
+    -> CommentsList
+commentsList pCllPart_ =
+    CommentsList
+    { _cllPart = pCllPart_
+    , _cllId = Nothing
+    , _cllPageToken = Nothing
+    , _cllTextFormat = HTML
+    , _cllMaxResults = 20
+    , _cllParentId = Nothing
     }
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- comment resource properties that the API response will include.
-comPart :: Lens' CommentsList' Text
-comPart = lens _comPart (\ s a -> s{_comPart = a})
+cllPart :: Lens' CommentsList Text
+cllPart = lens _cllPart (\ s a -> s{_cllPart = a})
 
 -- | The id parameter specifies a comma-separated list of comment IDs for the
 -- resources that are being retrieved. In a comment resource, the id
 -- property specifies the comment\'s ID.
-comId :: Lens' CommentsList' (Maybe Text)
-comId = lens _comId (\ s a -> s{_comId = a})
+cllId :: Lens' CommentsList (Maybe Text)
+cllId = lens _cllId (\ s a -> s{_cllId = a})
 
 -- | The pageToken parameter identifies a specific page in the result set
 -- that should be returned. In an API response, the nextPageToken property
 -- identifies the next page of the result that can be retrieved. Note: This
 -- parameter is not supported for use in conjunction with the id parameter.
-comPageToken :: Lens' CommentsList' (Maybe Text)
-comPageToken
-  = lens _comPageToken (\ s a -> s{_comPageToken = a})
+cllPageToken :: Lens' CommentsList (Maybe Text)
+cllPageToken
+  = lens _cllPageToken (\ s a -> s{_cllPageToken = a})
 
 -- | This parameter indicates whether the API should return comments
 -- formatted as HTML or as plain text.
-comTextFormat :: Lens' CommentsList' CommentsListTextFormat
-comTextFormat
-  = lens _comTextFormat
-      (\ s a -> s{_comTextFormat = a})
+cllTextFormat :: Lens' CommentsList CommentsListTextFormat
+cllTextFormat
+  = lens _cllTextFormat
+      (\ s a -> s{_cllTextFormat = a})
 
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set. Note: This parameter is not
 -- supported for use in conjunction with the id parameter.
-comMaxResults :: Lens' CommentsList' Word32
-comMaxResults
-  = lens _comMaxResults
-      (\ s a -> s{_comMaxResults = a})
+cllMaxResults :: Lens' CommentsList Word32
+cllMaxResults
+  = lens _cllMaxResults
+      (\ s a -> s{_cllMaxResults = a})
 
 -- | The parentId parameter specifies the ID of the comment for which replies
 -- should be retrieved. Note: YouTube currently supports replies only for
 -- top-level comments. However, replies to replies may be supported in the
 -- future.
-comParentId :: Lens' CommentsList' (Maybe Text)
-comParentId
-  = lens _comParentId (\ s a -> s{_comParentId = a})
+cllParentId :: Lens' CommentsList (Maybe Text)
+cllParentId
+  = lens _cllParentId (\ s a -> s{_cllParentId = a})
 
-instance GoogleRequest CommentsList' where
-        type Rs CommentsList' = CommentListResponse
-        requestClient CommentsList'{..}
-          = go (Just _comPart) _comId _comPageToken
-              (Just _comTextFormat)
-              (Just _comMaxResults)
-              _comParentId
+instance GoogleRequest CommentsList where
+        type Rs CommentsList = CommentListResponse
+        requestClient CommentsList{..}
+          = go (Just _cllPart) _cllId _cllPageToken
+              (Just _cllTextFormat)
+              (Just _cllMaxResults)
+              _cllParentId
               (Just AltJSON)
               youTubeService
           where go

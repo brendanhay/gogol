@@ -31,8 +31,8 @@ module Network.Google.Resource.Genomics.Operations.Get
       OperationsGetResource
 
     -- * Creating a Request
-    , operationsGet'
-    , OperationsGet'
+    , operationsGet
+    , OperationsGet
 
     -- * Request Lenses
     , ogXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.operations.get@ method which the
--- 'OperationsGet'' request conforms to.
+-- 'OperationsGet' request conforms to.
 type OperationsGetResource =
      "v1" :>
        Capture "name" Text :>
@@ -66,8 +66,8 @@ type OperationsGetResource =
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ 'operationsGet'' smart constructor.
-data OperationsGet' = OperationsGet'
+-- /See:/ 'operationsGet' smart constructor.
+data OperationsGet = OperationsGet
     { _ogXgafv          :: !(Maybe Text)
     , _ogUploadProtocol :: !(Maybe Text)
     , _ogPp             :: !Bool
@@ -78,7 +78,7 @@ data OperationsGet' = OperationsGet'
     , _ogCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -97,11 +97,11 @@ data OperationsGet' = OperationsGet'
 -- * 'ogName'
 --
 -- * 'ogCallback'
-operationsGet'
+operationsGet
     :: Text -- ^ 'ogName'
-    -> OperationsGet'
-operationsGet' pOgName_ =
-    OperationsGet'
+    -> OperationsGet
+operationsGet pOgName_ =
+    OperationsGet
     { _ogXgafv = Nothing
     , _ogUploadProtocol = Nothing
     , _ogPp = True
@@ -113,48 +113,48 @@ operationsGet' pOgName_ =
     }
 
 -- | V1 error format.
-ogXgafv :: Lens' OperationsGet' (Maybe Text)
+ogXgafv :: Lens' OperationsGet (Maybe Text)
 ogXgafv = lens _ogXgafv (\ s a -> s{_ogXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ogUploadProtocol :: Lens' OperationsGet' (Maybe Text)
+ogUploadProtocol :: Lens' OperationsGet (Maybe Text)
 ogUploadProtocol
   = lens _ogUploadProtocol
       (\ s a -> s{_ogUploadProtocol = a})
 
 -- | Pretty-print response.
-ogPp :: Lens' OperationsGet' Bool
+ogPp :: Lens' OperationsGet Bool
 ogPp = lens _ogPp (\ s a -> s{_ogPp = a})
 
 -- | OAuth access token.
-ogAccessToken :: Lens' OperationsGet' (Maybe Text)
+ogAccessToken :: Lens' OperationsGet (Maybe Text)
 ogAccessToken
   = lens _ogAccessToken
       (\ s a -> s{_ogAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ogUploadType :: Lens' OperationsGet' (Maybe Text)
+ogUploadType :: Lens' OperationsGet (Maybe Text)
 ogUploadType
   = lens _ogUploadType (\ s a -> s{_ogUploadType = a})
 
 -- | OAuth bearer token.
-ogBearerToken :: Lens' OperationsGet' (Maybe Text)
+ogBearerToken :: Lens' OperationsGet (Maybe Text)
 ogBearerToken
   = lens _ogBearerToken
       (\ s a -> s{_ogBearerToken = a})
 
 -- | The name of the operation resource.
-ogName :: Lens' OperationsGet' Text
+ogName :: Lens' OperationsGet Text
 ogName = lens _ogName (\ s a -> s{_ogName = a})
 
 -- | JSONP
-ogCallback :: Lens' OperationsGet' (Maybe Text)
+ogCallback :: Lens' OperationsGet (Maybe Text)
 ogCallback
   = lens _ogCallback (\ s a -> s{_ogCallback = a})
 
-instance GoogleRequest OperationsGet' where
-        type Rs OperationsGet' = Operation
-        requestClient OperationsGet'{..}
+instance GoogleRequest OperationsGet where
+        type Rs OperationsGet = Operation
+        requestClient OperationsGet{..}
           = go _ogName _ogXgafv _ogUploadProtocol (Just _ogPp)
               _ogAccessToken
               _ogUploadType

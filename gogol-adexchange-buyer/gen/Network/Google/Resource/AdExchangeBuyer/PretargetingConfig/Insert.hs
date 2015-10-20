@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Insert
       PretargetingConfigInsertResource
 
     -- * Creating a Request
-    , pretargetingConfigInsert'
-    , PretargetingConfigInsert'
+    , pretargetingConfigInsert
+    , PretargetingConfigInsert
 
     -- * Request Lenses
     , pciPayload
@@ -41,7 +41,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.pretargetingConfig.insert@ method which the
--- 'PretargetingConfigInsert'' request conforms to.
+-- 'PretargetingConfigInsert' request conforms to.
 type PretargetingConfigInsertResource =
      "pretargetingconfigs" :>
        Capture "accountId" Int64 :>
@@ -51,44 +51,42 @@ type PretargetingConfigInsertResource =
 
 -- | Inserts a new pretargeting configuration.
 --
--- /See:/ 'pretargetingConfigInsert'' smart constructor.
-data PretargetingConfigInsert' = PretargetingConfigInsert'
+-- /See:/ 'pretargetingConfigInsert' smart constructor.
+data PretargetingConfigInsert = PretargetingConfigInsert
     { _pciPayload   :: !PretargetingConfig
     , _pciAccountId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PretargetingConfigInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'PretargetingConfigInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pciPayload'
 --
 -- * 'pciAccountId'
-pretargetingConfigInsert'
+pretargetingConfigInsert
     :: PretargetingConfig -- ^ 'pciPayload'
     -> Int64 -- ^ 'pciAccountId'
-    -> PretargetingConfigInsert'
-pretargetingConfigInsert' pPciPayload_ pPciAccountId_ =
-    PretargetingConfigInsert'
+    -> PretargetingConfigInsert
+pretargetingConfigInsert pPciPayload_ pPciAccountId_ =
+    PretargetingConfigInsert
     { _pciPayload = pPciPayload_
     , _pciAccountId = pPciAccountId_
     }
 
 -- | Multipart request metadata.
-pciPayload :: Lens' PretargetingConfigInsert' PretargetingConfig
+pciPayload :: Lens' PretargetingConfigInsert PretargetingConfig
 pciPayload
   = lens _pciPayload (\ s a -> s{_pciPayload = a})
 
 -- | The account id to insert the pretargeting config for.
-pciAccountId :: Lens' PretargetingConfigInsert' Int64
+pciAccountId :: Lens' PretargetingConfigInsert Int64
 pciAccountId
   = lens _pciAccountId (\ s a -> s{_pciAccountId = a})
 
-instance GoogleRequest PretargetingConfigInsert'
-         where
-        type Rs PretargetingConfigInsert' =
-             PretargetingConfig
-        requestClient PretargetingConfigInsert'{..}
+instance GoogleRequest PretargetingConfigInsert where
+        type Rs PretargetingConfigInsert = PretargetingConfig
+        requestClient PretargetingConfigInsert{..}
           = go _pciAccountId (Just AltJSON) _pciPayload
               adExchangeBuyerService
           where go

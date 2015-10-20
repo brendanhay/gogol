@@ -29,8 +29,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.List
       ProjectsSubscriptionsListResource
 
     -- * Creating a Request
-    , projectsSubscriptionsList'
-    , ProjectsSubscriptionsList'
+    , projectsSubscriptionsList
+    , ProjectsSubscriptionsList
 
     -- * Request Lenses
     , pslXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.list@ method which the
--- 'ProjectsSubscriptionsList'' request conforms to.
+-- 'ProjectsSubscriptionsList' request conforms to.
 type ProjectsSubscriptionsListResource =
      "v1" :>
        Capture "project" Text :>
@@ -68,8 +68,8 @@ type ProjectsSubscriptionsListResource =
 
 -- | Lists matching subscriptions.
 --
--- /See:/ 'projectsSubscriptionsList'' smart constructor.
-data ProjectsSubscriptionsList' = ProjectsSubscriptionsList'
+-- /See:/ 'projectsSubscriptionsList' smart constructor.
+data ProjectsSubscriptionsList = ProjectsSubscriptionsList
     { _pslXgafv          :: !(Maybe Text)
     , _pslUploadProtocol :: !(Maybe Text)
     , _pslProject        :: !Text
@@ -82,7 +82,7 @@ data ProjectsSubscriptionsList' = ProjectsSubscriptionsList'
     , _pslCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsSubscriptionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsSubscriptionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -105,11 +105,11 @@ data ProjectsSubscriptionsList' = ProjectsSubscriptionsList'
 -- * 'pslPageSize'
 --
 -- * 'pslCallback'
-projectsSubscriptionsList'
+projectsSubscriptionsList
     :: Text -- ^ 'pslProject'
-    -> ProjectsSubscriptionsList'
-projectsSubscriptionsList' pPslProject_ =
-    ProjectsSubscriptionsList'
+    -> ProjectsSubscriptionsList
+projectsSubscriptionsList pPslProject_ =
+    ProjectsSubscriptionsList
     { _pslXgafv = Nothing
     , _pslUploadProtocol = Nothing
     , _pslProject = pPslProject_
@@ -123,38 +123,38 @@ projectsSubscriptionsList' pPslProject_ =
     }
 
 -- | V1 error format.
-pslXgafv :: Lens' ProjectsSubscriptionsList' (Maybe Text)
+pslXgafv :: Lens' ProjectsSubscriptionsList (Maybe Text)
 pslXgafv = lens _pslXgafv (\ s a -> s{_pslXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pslUploadProtocol :: Lens' ProjectsSubscriptionsList' (Maybe Text)
+pslUploadProtocol :: Lens' ProjectsSubscriptionsList (Maybe Text)
 pslUploadProtocol
   = lens _pslUploadProtocol
       (\ s a -> s{_pslUploadProtocol = a})
 
 -- | The name of the cloud project that subscriptions belong to.
-pslProject :: Lens' ProjectsSubscriptionsList' Text
+pslProject :: Lens' ProjectsSubscriptionsList Text
 pslProject
   = lens _pslProject (\ s a -> s{_pslProject = a})
 
 -- | Pretty-print response.
-pslPp :: Lens' ProjectsSubscriptionsList' Bool
+pslPp :: Lens' ProjectsSubscriptionsList Bool
 pslPp = lens _pslPp (\ s a -> s{_pslPp = a})
 
 -- | OAuth access token.
-pslAccessToken :: Lens' ProjectsSubscriptionsList' (Maybe Text)
+pslAccessToken :: Lens' ProjectsSubscriptionsList (Maybe Text)
 pslAccessToken
   = lens _pslAccessToken
       (\ s a -> s{_pslAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pslUploadType :: Lens' ProjectsSubscriptionsList' (Maybe Text)
+pslUploadType :: Lens' ProjectsSubscriptionsList (Maybe Text)
 pslUploadType
   = lens _pslUploadType
       (\ s a -> s{_pslUploadType = a})
 
 -- | OAuth bearer token.
-pslBearerToken :: Lens' ProjectsSubscriptionsList' (Maybe Text)
+pslBearerToken :: Lens' ProjectsSubscriptionsList (Maybe Text)
 pslBearerToken
   = lens _pslBearerToken
       (\ s a -> s{_pslBearerToken = a})
@@ -162,25 +162,25 @@ pslBearerToken
 -- | The value returned by the last \`ListSubscriptionsResponse\`; indicates
 -- that this is a continuation of a prior \`ListSubscriptions\` call, and
 -- that the system should return the next page of data.
-pslPageToken :: Lens' ProjectsSubscriptionsList' (Maybe Text)
+pslPageToken :: Lens' ProjectsSubscriptionsList (Maybe Text)
 pslPageToken
   = lens _pslPageToken (\ s a -> s{_pslPageToken = a})
 
 -- | Maximum number of subscriptions to return.
-pslPageSize :: Lens' ProjectsSubscriptionsList' (Maybe Int32)
+pslPageSize :: Lens' ProjectsSubscriptionsList (Maybe Int32)
 pslPageSize
   = lens _pslPageSize (\ s a -> s{_pslPageSize = a})
 
 -- | JSONP
-pslCallback :: Lens' ProjectsSubscriptionsList' (Maybe Text)
+pslCallback :: Lens' ProjectsSubscriptionsList (Maybe Text)
 pslCallback
   = lens _pslCallback (\ s a -> s{_pslCallback = a})
 
-instance GoogleRequest ProjectsSubscriptionsList'
+instance GoogleRequest ProjectsSubscriptionsList
          where
-        type Rs ProjectsSubscriptionsList' =
+        type Rs ProjectsSubscriptionsList =
              ListSubscriptionsResponse
-        requestClient ProjectsSubscriptionsList'{..}
+        requestClient ProjectsSubscriptionsList{..}
           = go _pslProject _pslXgafv _pslUploadProtocol
               (Just _pslPp)
               _pslAccessToken

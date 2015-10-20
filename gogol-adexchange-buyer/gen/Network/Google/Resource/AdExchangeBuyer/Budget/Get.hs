@@ -30,8 +30,8 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Get
       BudgetGetResource
 
     -- * Creating a Request
-    , budgetGet'
-    , BudgetGet'
+    , budgetGet
+    , BudgetGet
 
     -- * Request Lenses
     , bgAccountId
@@ -42,7 +42,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.budget.get@ method which the
--- 'BudgetGet'' request conforms to.
+-- 'BudgetGet' request conforms to.
 type BudgetGetResource =
      "billinginfo" :>
        Capture "accountId" Int64 :>
@@ -52,42 +52,42 @@ type BudgetGetResource =
 -- | Returns the budget information for the adgroup specified by the
 -- accountId and billingId.
 --
--- /See:/ 'budgetGet'' smart constructor.
-data BudgetGet' = BudgetGet'
+-- /See:/ 'budgetGet' smart constructor.
+data BudgetGet = BudgetGet
     { _bgAccountId :: !Int64
     , _bgBillingId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BudgetGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'BudgetGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'bgAccountId'
 --
 -- * 'bgBillingId'
-budgetGet'
+budgetGet
     :: Int64 -- ^ 'bgAccountId'
     -> Int64 -- ^ 'bgBillingId'
-    -> BudgetGet'
-budgetGet' pBgAccountId_ pBgBillingId_ =
-    BudgetGet'
+    -> BudgetGet
+budgetGet pBgAccountId_ pBgBillingId_ =
+    BudgetGet
     { _bgAccountId = pBgAccountId_
     , _bgBillingId = pBgBillingId_
     }
 
 -- | The account id to get the budget information for.
-bgAccountId :: Lens' BudgetGet' Int64
+bgAccountId :: Lens' BudgetGet Int64
 bgAccountId
   = lens _bgAccountId (\ s a -> s{_bgAccountId = a})
 
 -- | The billing id to get the budget information for.
-bgBillingId :: Lens' BudgetGet' Int64
+bgBillingId :: Lens' BudgetGet Int64
 bgBillingId
   = lens _bgBillingId (\ s a -> s{_bgBillingId = a})
 
-instance GoogleRequest BudgetGet' where
-        type Rs BudgetGet' = Budget
-        requestClient BudgetGet'{..}
+instance GoogleRequest BudgetGet where
+        type Rs BudgetGet = Budget
+        requestClient BudgetGet{..}
           = go _bgAccountId _bgBillingId (Just AltJSON)
               adExchangeBuyerService
           where go

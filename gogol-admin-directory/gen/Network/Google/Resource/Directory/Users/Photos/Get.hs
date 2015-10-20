@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Users.Photos.Get
       UsersPhotosGetResource
 
     -- * Creating a Request
-    , usersPhotosGet'
-    , UsersPhotosGet'
+    , usersPhotosGet
+    , UsersPhotosGet
 
     -- * Request Lenses
     , upgUserKey
@@ -40,7 +40,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.users.photos.get@ method which the
--- 'UsersPhotosGet'' request conforms to.
+-- 'UsersPhotosGet' request conforms to.
 type UsersPhotosGetResource =
      "users" :>
        Capture "userKey" Text :>
@@ -50,32 +50,32 @@ type UsersPhotosGetResource =
 
 -- | Retrieve photo of a user
 --
--- /See:/ 'usersPhotosGet'' smart constructor.
-newtype UsersPhotosGet' = UsersPhotosGet'
+-- /See:/ 'usersPhotosGet' smart constructor.
+newtype UsersPhotosGet = UsersPhotosGet
     { _upgUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersPhotosGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersPhotosGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'upgUserKey'
-usersPhotosGet'
+usersPhotosGet
     :: Text -- ^ 'upgUserKey'
-    -> UsersPhotosGet'
-usersPhotosGet' pUpgUserKey_ =
-    UsersPhotosGet'
+    -> UsersPhotosGet
+usersPhotosGet pUpgUserKey_ =
+    UsersPhotosGet
     { _upgUserKey = pUpgUserKey_
     }
 
 -- | Email or immutable Id of the user
-upgUserKey :: Lens' UsersPhotosGet' Text
+upgUserKey :: Lens' UsersPhotosGet Text
 upgUserKey
   = lens _upgUserKey (\ s a -> s{_upgUserKey = a})
 
-instance GoogleRequest UsersPhotosGet' where
-        type Rs UsersPhotosGet' = UserPhoto
-        requestClient UsersPhotosGet'{..}
+instance GoogleRequest UsersPhotosGet where
+        type Rs UsersPhotosGet = UserPhoto
+        requestClient UsersPhotosGet{..}
           = go _upgUserKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy UsersPhotosGetResource)

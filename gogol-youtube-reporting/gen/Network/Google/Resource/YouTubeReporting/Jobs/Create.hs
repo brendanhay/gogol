@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Create
       JobsCreateResource
 
     -- * Creating a Request
-    , jobsCreate'
-    , JobsCreate'
+    , jobsCreate
+    , JobsCreate
 
     -- * Request Lenses
     , jcXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeReporting.Types
 
 -- | A resource alias for @youtubereporting.jobs.create@ method which the
--- 'JobsCreate'' request conforms to.
+-- 'JobsCreate' request conforms to.
 type JobsCreateResource =
      "v1" :>
        "jobs" :>
@@ -65,8 +65,8 @@ type JobsCreateResource =
 
 -- | Creates a job and returns it.
 --
--- /See:/ 'jobsCreate'' smart constructor.
-data JobsCreate' = JobsCreate'
+-- /See:/ 'jobsCreate' smart constructor.
+data JobsCreate = JobsCreate
     { _jcXgafv                  :: !(Maybe Text)
     , _jcUploadProtocol         :: !(Maybe Text)
     , _jcPp                     :: !Bool
@@ -78,7 +78,7 @@ data JobsCreate' = JobsCreate'
     , _jcCallback               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'JobsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'JobsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -99,11 +99,11 @@ data JobsCreate' = JobsCreate'
 -- * 'jcBearerToken'
 --
 -- * 'jcCallback'
-jobsCreate'
+jobsCreate
     :: Job -- ^ 'jcPayload'
-    -> JobsCreate'
-jobsCreate' pJcPayload_ =
-    JobsCreate'
+    -> JobsCreate
+jobsCreate pJcPayload_ =
+    JobsCreate
     { _jcXgafv = Nothing
     , _jcUploadProtocol = Nothing
     , _jcPp = True
@@ -116,56 +116,56 @@ jobsCreate' pJcPayload_ =
     }
 
 -- | V1 error format.
-jcXgafv :: Lens' JobsCreate' (Maybe Text)
+jcXgafv :: Lens' JobsCreate (Maybe Text)
 jcXgafv = lens _jcXgafv (\ s a -> s{_jcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-jcUploadProtocol :: Lens' JobsCreate' (Maybe Text)
+jcUploadProtocol :: Lens' JobsCreate (Maybe Text)
 jcUploadProtocol
   = lens _jcUploadProtocol
       (\ s a -> s{_jcUploadProtocol = a})
 
 -- | Pretty-print response.
-jcPp :: Lens' JobsCreate' Bool
+jcPp :: Lens' JobsCreate Bool
 jcPp = lens _jcPp (\ s a -> s{_jcPp = a})
 
 -- | OAuth access token.
-jcAccessToken :: Lens' JobsCreate' (Maybe Text)
+jcAccessToken :: Lens' JobsCreate (Maybe Text)
 jcAccessToken
   = lens _jcAccessToken
       (\ s a -> s{_jcAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-jcUploadType :: Lens' JobsCreate' (Maybe Text)
+jcUploadType :: Lens' JobsCreate (Maybe Text)
 jcUploadType
   = lens _jcUploadType (\ s a -> s{_jcUploadType = a})
 
 -- | Multipart request metadata.
-jcPayload :: Lens' JobsCreate' Job
+jcPayload :: Lens' JobsCreate Job
 jcPayload
   = lens _jcPayload (\ s a -> s{_jcPayload = a})
 
 -- | The content owner\'s external ID on which behalf the user is acting on.
 -- If not set, the user is acting for himself (his own channel).
-jcOnBehalfOfContentOwner :: Lens' JobsCreate' (Maybe Text)
+jcOnBehalfOfContentOwner :: Lens' JobsCreate (Maybe Text)
 jcOnBehalfOfContentOwner
   = lens _jcOnBehalfOfContentOwner
       (\ s a -> s{_jcOnBehalfOfContentOwner = a})
 
 -- | OAuth bearer token.
-jcBearerToken :: Lens' JobsCreate' (Maybe Text)
+jcBearerToken :: Lens' JobsCreate (Maybe Text)
 jcBearerToken
   = lens _jcBearerToken
       (\ s a -> s{_jcBearerToken = a})
 
 -- | JSONP
-jcCallback :: Lens' JobsCreate' (Maybe Text)
+jcCallback :: Lens' JobsCreate (Maybe Text)
 jcCallback
   = lens _jcCallback (\ s a -> s{_jcCallback = a})
 
-instance GoogleRequest JobsCreate' where
-        type Rs JobsCreate' = Job
-        requestClient JobsCreate'{..}
+instance GoogleRequest JobsCreate where
+        type Rs JobsCreate = Job
+        requestClient JobsCreate{..}
           = go _jcXgafv _jcUploadProtocol (Just _jcPp)
               _jcAccessToken
               _jcUploadType

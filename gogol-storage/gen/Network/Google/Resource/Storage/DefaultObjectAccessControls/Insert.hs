@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Insert
       DefaultObjectAccessControlsInsertResource
 
     -- * Creating a Request
-    , defaultObjectAccessControlsInsert'
-    , DefaultObjectAccessControlsInsert'
+    , defaultObjectAccessControlsInsert
+    , DefaultObjectAccessControlsInsert
 
     -- * Request Lenses
     , doaciBucket
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.defaultObjectAccessControls.insert@ method which the
--- 'DefaultObjectAccessControlsInsert'' request conforms to.
+-- 'DefaultObjectAccessControlsInsert' request conforms to.
 type DefaultObjectAccessControlsInsertResource =
      "b" :>
        Capture "bucket" Text :>
@@ -52,44 +52,44 @@ type DefaultObjectAccessControlsInsertResource =
 
 -- | Creates a new default object ACL entry on the specified bucket.
 --
--- /See:/ 'defaultObjectAccessControlsInsert'' smart constructor.
-data DefaultObjectAccessControlsInsert' = DefaultObjectAccessControlsInsert'
+-- /See:/ 'defaultObjectAccessControlsInsert' smart constructor.
+data DefaultObjectAccessControlsInsert = DefaultObjectAccessControlsInsert
     { _doaciBucket  :: !Text
     , _doaciPayload :: !ObjectAccessControl
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DefaultObjectAccessControlsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'DefaultObjectAccessControlsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'doaciBucket'
 --
 -- * 'doaciPayload'
-defaultObjectAccessControlsInsert'
+defaultObjectAccessControlsInsert
     :: Text -- ^ 'doaciBucket'
     -> ObjectAccessControl -- ^ 'doaciPayload'
-    -> DefaultObjectAccessControlsInsert'
-defaultObjectAccessControlsInsert' pDoaciBucket_ pDoaciPayload_ =
-    DefaultObjectAccessControlsInsert'
+    -> DefaultObjectAccessControlsInsert
+defaultObjectAccessControlsInsert pDoaciBucket_ pDoaciPayload_ =
+    DefaultObjectAccessControlsInsert
     { _doaciBucket = pDoaciBucket_
     , _doaciPayload = pDoaciPayload_
     }
 
 -- | Name of a bucket.
-doaciBucket :: Lens' DefaultObjectAccessControlsInsert' Text
+doaciBucket :: Lens' DefaultObjectAccessControlsInsert Text
 doaciBucket
   = lens _doaciBucket (\ s a -> s{_doaciBucket = a})
 
 -- | Multipart request metadata.
-doaciPayload :: Lens' DefaultObjectAccessControlsInsert' ObjectAccessControl
+doaciPayload :: Lens' DefaultObjectAccessControlsInsert ObjectAccessControl
 doaciPayload
   = lens _doaciPayload (\ s a -> s{_doaciPayload = a})
 
 instance GoogleRequest
-         DefaultObjectAccessControlsInsert' where
-        type Rs DefaultObjectAccessControlsInsert' =
+         DefaultObjectAccessControlsInsert where
+        type Rs DefaultObjectAccessControlsInsert =
              ObjectAccessControl
-        requestClient DefaultObjectAccessControlsInsert'{..}
+        requestClient DefaultObjectAccessControlsInsert{..}
           = go _doaciBucket (Just AltJSON) _doaciPayload
               storageService
           where go

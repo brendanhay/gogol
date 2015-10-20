@@ -31,8 +31,8 @@ module Network.Google.Resource.YouTube.Channels.Update
       ChannelsUpdateResource
 
     -- * Creating a Request
-    , channelsUpdate'
-    , ChannelsUpdate'
+    , channelsUpdate
+    , ChannelsUpdate
 
     -- * Request Lenses
     , chaPart
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.channels.update@ method which the
--- 'ChannelsUpdate'' request conforms to.
+-- 'ChannelsUpdate' request conforms to.
 type ChannelsUpdateResource =
      "channels" :>
        QueryParam "part" Text :>
@@ -56,14 +56,14 @@ type ChannelsUpdateResource =
 -- supports updates to the channel resource\'s brandingSettings and
 -- invideoPromotion objects and their child properties.
 --
--- /See:/ 'channelsUpdate'' smart constructor.
-data ChannelsUpdate' = ChannelsUpdate'
+-- /See:/ 'channelsUpdate' smart constructor.
+data ChannelsUpdate = ChannelsUpdate
     { _chaPart                   :: !Text
     , _chaPayload                :: !Channel
     , _chaOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChannelsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChannelsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,12 +72,12 @@ data ChannelsUpdate' = ChannelsUpdate'
 -- * 'chaPayload'
 --
 -- * 'chaOnBehalfOfContentOwner'
-channelsUpdate'
+channelsUpdate
     :: Text -- ^ 'chaPart'
     -> Channel -- ^ 'chaPayload'
-    -> ChannelsUpdate'
-channelsUpdate' pChaPart_ pChaPayload_ =
-    ChannelsUpdate'
+    -> ChannelsUpdate
+channelsUpdate pChaPart_ pChaPayload_ =
+    ChannelsUpdate
     { _chaPart = pChaPart_
     , _chaPayload = pChaPayload_
     , _chaOnBehalfOfContentOwner = Nothing
@@ -91,11 +91,11 @@ channelsUpdate' pChaPart_ pChaPayload_ =
 -- request.) Note that this method overrides the existing values for all of
 -- the mutable properties that are contained in any parts that the
 -- parameter value specifies.
-chaPart :: Lens' ChannelsUpdate' Text
+chaPart :: Lens' ChannelsUpdate Text
 chaPart = lens _chaPart (\ s a -> s{_chaPart = a})
 
 -- | Multipart request metadata.
-chaPayload :: Lens' ChannelsUpdate' Channel
+chaPayload :: Lens' ChannelsUpdate Channel
 chaPayload
   = lens _chaPayload (\ s a -> s{_chaPayload = a})
 
@@ -107,14 +107,14 @@ chaPayload
 -- without having to provide authentication credentials for each individual
 -- channel. The actual CMS account that the user authenticates with needs
 -- to be linked to the specified YouTube content owner.
-chaOnBehalfOfContentOwner :: Lens' ChannelsUpdate' (Maybe Text)
+chaOnBehalfOfContentOwner :: Lens' ChannelsUpdate (Maybe Text)
 chaOnBehalfOfContentOwner
   = lens _chaOnBehalfOfContentOwner
       (\ s a -> s{_chaOnBehalfOfContentOwner = a})
 
-instance GoogleRequest ChannelsUpdate' where
-        type Rs ChannelsUpdate' = Channel
-        requestClient ChannelsUpdate'{..}
+instance GoogleRequest ChannelsUpdate where
+        type Rs ChannelsUpdate = Channel
+        requestClient ChannelsUpdate{..}
           = go (Just _chaPart) _chaOnBehalfOfContentOwner
               (Just AltJSON)
               _chaPayload

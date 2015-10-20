@@ -31,8 +31,8 @@ module Network.Google.Resource.Games.Applications.Get
       ApplicationsGetResource
 
     -- * Creating a Request
-    , applicationsGet'
-    , ApplicationsGet'
+    , applicationsGet
+    , ApplicationsGet
 
     -- * Request Lenses
     , agApplicationId
@@ -44,7 +44,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.applications.get@ method which the
--- 'ApplicationsGet'' request conforms to.
+-- 'ApplicationsGet' request conforms to.
 type ApplicationsGetResource =
      "applications" :>
        Capture "applicationId" Text :>
@@ -57,14 +57,14 @@ type ApplicationsGetResource =
 -- requested application is not available for the specified platformType,
 -- the returned response will not include any instance data.
 --
--- /See:/ 'applicationsGet'' smart constructor.
-data ApplicationsGet' = ApplicationsGet'
+-- /See:/ 'applicationsGet' smart constructor.
+data ApplicationsGet = ApplicationsGet
     { _agApplicationId :: !Text
     , _agPlatformType  :: !(Maybe ApplicationsGetPlatformType)
     , _agLanguage      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ApplicationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ApplicationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,36 +73,36 @@ data ApplicationsGet' = ApplicationsGet'
 -- * 'agPlatformType'
 --
 -- * 'agLanguage'
-applicationsGet'
+applicationsGet
     :: Text -- ^ 'agApplicationId'
-    -> ApplicationsGet'
-applicationsGet' pAgApplicationId_ =
-    ApplicationsGet'
+    -> ApplicationsGet
+applicationsGet pAgApplicationId_ =
+    ApplicationsGet
     { _agApplicationId = pAgApplicationId_
     , _agPlatformType = Nothing
     , _agLanguage = Nothing
     }
 
 -- | The application ID from the Google Play developer console.
-agApplicationId :: Lens' ApplicationsGet' Text
+agApplicationId :: Lens' ApplicationsGet Text
 agApplicationId
   = lens _agApplicationId
       (\ s a -> s{_agApplicationId = a})
 
 -- | Restrict application details returned to the specific platform.
-agPlatformType :: Lens' ApplicationsGet' (Maybe ApplicationsGetPlatformType)
+agPlatformType :: Lens' ApplicationsGet (Maybe ApplicationsGetPlatformType)
 agPlatformType
   = lens _agPlatformType
       (\ s a -> s{_agPlatformType = a})
 
 -- | The preferred language to use for strings returned by this method.
-agLanguage :: Lens' ApplicationsGet' (Maybe Text)
+agLanguage :: Lens' ApplicationsGet (Maybe Text)
 agLanguage
   = lens _agLanguage (\ s a -> s{_agLanguage = a})
 
-instance GoogleRequest ApplicationsGet' where
-        type Rs ApplicationsGet' = Application
-        requestClient ApplicationsGet'{..}
+instance GoogleRequest ApplicationsGet where
+        type Rs ApplicationsGet = Application
+        requestClient ApplicationsGet{..}
           = go _agApplicationId _agPlatformType _agLanguage
               (Just AltJSON)
               gamesService

@@ -30,8 +30,8 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
       AccountsOrdersGetResource
 
     -- * Creating a Request
-    , accountsOrdersGet'
-    , AccountsOrdersGet'
+    , accountsOrdersGet
+    , AccountsOrdersGet
 
     -- * Request Lenses
     , aogXgafv
@@ -49,7 +49,7 @@ import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @playmoviespartner.accounts.orders.get@ method which the
--- 'AccountsOrdersGet'' request conforms to.
+-- 'AccountsOrdersGet' request conforms to.
 type AccountsOrdersGetResource =
      "v1" :>
        "accounts" :>
@@ -68,8 +68,8 @@ type AccountsOrdersGetResource =
 -- | Get an Order given its id. See _Authentication and Authorization rules_
 -- and _Get methods rules_ for more information about this method.
 --
--- /See:/ 'accountsOrdersGet'' smart constructor.
-data AccountsOrdersGet' = AccountsOrdersGet'
+-- /See:/ 'accountsOrdersGet' smart constructor.
+data AccountsOrdersGet = AccountsOrdersGet
     { _aogXgafv          :: !(Maybe Text)
     , _aogUploadProtocol :: !(Maybe Text)
     , _aogPp             :: !Bool
@@ -81,7 +81,7 @@ data AccountsOrdersGet' = AccountsOrdersGet'
     , _aogCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsOrdersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsOrdersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -102,12 +102,12 @@ data AccountsOrdersGet' = AccountsOrdersGet'
 -- * 'aogOrderId'
 --
 -- * 'aogCallback'
-accountsOrdersGet'
+accountsOrdersGet
     :: Text -- ^ 'aogAccountId'
     -> Text -- ^ 'aogOrderId'
-    -> AccountsOrdersGet'
-accountsOrdersGet' pAogAccountId_ pAogOrderId_ =
-    AccountsOrdersGet'
+    -> AccountsOrdersGet
+accountsOrdersGet pAogAccountId_ pAogOrderId_ =
+    AccountsOrdersGet
     { _aogXgafv = Nothing
     , _aogUploadProtocol = Nothing
     , _aogPp = True
@@ -120,55 +120,55 @@ accountsOrdersGet' pAogAccountId_ pAogOrderId_ =
     }
 
 -- | V1 error format.
-aogXgafv :: Lens' AccountsOrdersGet' (Maybe Text)
+aogXgafv :: Lens' AccountsOrdersGet (Maybe Text)
 aogXgafv = lens _aogXgafv (\ s a -> s{_aogXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-aogUploadProtocol :: Lens' AccountsOrdersGet' (Maybe Text)
+aogUploadProtocol :: Lens' AccountsOrdersGet (Maybe Text)
 aogUploadProtocol
   = lens _aogUploadProtocol
       (\ s a -> s{_aogUploadProtocol = a})
 
 -- | Pretty-print response.
-aogPp :: Lens' AccountsOrdersGet' Bool
+aogPp :: Lens' AccountsOrdersGet Bool
 aogPp = lens _aogPp (\ s a -> s{_aogPp = a})
 
 -- | OAuth access token.
-aogAccessToken :: Lens' AccountsOrdersGet' (Maybe Text)
+aogAccessToken :: Lens' AccountsOrdersGet (Maybe Text)
 aogAccessToken
   = lens _aogAccessToken
       (\ s a -> s{_aogAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-aogUploadType :: Lens' AccountsOrdersGet' (Maybe Text)
+aogUploadType :: Lens' AccountsOrdersGet (Maybe Text)
 aogUploadType
   = lens _aogUploadType
       (\ s a -> s{_aogUploadType = a})
 
 -- | REQUIRED. See _General rules_ for more information about this field.
-aogAccountId :: Lens' AccountsOrdersGet' Text
+aogAccountId :: Lens' AccountsOrdersGet Text
 aogAccountId
   = lens _aogAccountId (\ s a -> s{_aogAccountId = a})
 
 -- | OAuth bearer token.
-aogBearerToken :: Lens' AccountsOrdersGet' (Maybe Text)
+aogBearerToken :: Lens' AccountsOrdersGet (Maybe Text)
 aogBearerToken
   = lens _aogBearerToken
       (\ s a -> s{_aogBearerToken = a})
 
 -- | REQUIRED. Order ID.
-aogOrderId :: Lens' AccountsOrdersGet' Text
+aogOrderId :: Lens' AccountsOrdersGet Text
 aogOrderId
   = lens _aogOrderId (\ s a -> s{_aogOrderId = a})
 
 -- | JSONP
-aogCallback :: Lens' AccountsOrdersGet' (Maybe Text)
+aogCallback :: Lens' AccountsOrdersGet (Maybe Text)
 aogCallback
   = lens _aogCallback (\ s a -> s{_aogCallback = a})
 
-instance GoogleRequest AccountsOrdersGet' where
-        type Rs AccountsOrdersGet' = Order
-        requestClient AccountsOrdersGet'{..}
+instance GoogleRequest AccountsOrdersGet where
+        type Rs AccountsOrdersGet = Order
+        requestClient AccountsOrdersGet{..}
           = go _aogAccountId _aogOrderId _aogXgafv
               _aogUploadProtocol
               (Just _aogPp)

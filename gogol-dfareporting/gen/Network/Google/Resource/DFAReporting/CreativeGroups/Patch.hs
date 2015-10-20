@@ -30,8 +30,8 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Patch
       CreativeGroupsPatchResource
 
     -- * Creating a Request
-    , creativeGroupsPatch'
-    , CreativeGroupsPatch'
+    , creativeGroupsPatch
+    , CreativeGroupsPatch
 
     -- * Request Lenses
     , cgpProFileId
@@ -43,7 +43,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creativeGroups.patch@ method which the
--- 'CreativeGroupsPatch'' request conforms to.
+-- 'CreativeGroupsPatch' request conforms to.
 type CreativeGroupsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -56,14 +56,14 @@ type CreativeGroupsPatchResource =
 -- | Updates an existing creative group. This method supports patch
 -- semantics.
 --
--- /See:/ 'creativeGroupsPatch'' smart constructor.
-data CreativeGroupsPatch' = CreativeGroupsPatch'
+-- /See:/ 'creativeGroupsPatch' smart constructor.
+data CreativeGroupsPatch = CreativeGroupsPatch
     { _cgpProFileId :: !Int64
     , _cgpPayload   :: !CreativeGroup
     , _cgpId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativeGroupsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'CreativeGroupsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,35 +72,35 @@ data CreativeGroupsPatch' = CreativeGroupsPatch'
 -- * 'cgpPayload'
 --
 -- * 'cgpId'
-creativeGroupsPatch'
+creativeGroupsPatch
     :: Int64 -- ^ 'cgpProFileId'
     -> CreativeGroup -- ^ 'cgpPayload'
     -> Int64 -- ^ 'cgpId'
-    -> CreativeGroupsPatch'
-creativeGroupsPatch' pCgpProFileId_ pCgpPayload_ pCgpId_ =
-    CreativeGroupsPatch'
+    -> CreativeGroupsPatch
+creativeGroupsPatch pCgpProFileId_ pCgpPayload_ pCgpId_ =
+    CreativeGroupsPatch
     { _cgpProFileId = pCgpProFileId_
     , _cgpPayload = pCgpPayload_
     , _cgpId = pCgpId_
     }
 
 -- | User profile ID associated with this request.
-cgpProFileId :: Lens' CreativeGroupsPatch' Int64
+cgpProFileId :: Lens' CreativeGroupsPatch Int64
 cgpProFileId
   = lens _cgpProFileId (\ s a -> s{_cgpProFileId = a})
 
 -- | Multipart request metadata.
-cgpPayload :: Lens' CreativeGroupsPatch' CreativeGroup
+cgpPayload :: Lens' CreativeGroupsPatch CreativeGroup
 cgpPayload
   = lens _cgpPayload (\ s a -> s{_cgpPayload = a})
 
 -- | Creative group ID.
-cgpId :: Lens' CreativeGroupsPatch' Int64
+cgpId :: Lens' CreativeGroupsPatch Int64
 cgpId = lens _cgpId (\ s a -> s{_cgpId = a})
 
-instance GoogleRequest CreativeGroupsPatch' where
-        type Rs CreativeGroupsPatch' = CreativeGroup
-        requestClient CreativeGroupsPatch'{..}
+instance GoogleRequest CreativeGroupsPatch where
+        type Rs CreativeGroupsPatch = CreativeGroup
+        requestClient CreativeGroupsPatch{..}
           = go _cgpProFileId (Just _cgpId) (Just AltJSON)
               _cgpPayload
               dFAReportingService

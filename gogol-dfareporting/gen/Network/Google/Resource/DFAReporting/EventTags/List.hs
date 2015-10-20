@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.EventTags.List
       EventTagsListResource
 
     -- * Creating a Request
-    , eventTagsList'
-    , EventTagsList'
+    , eventTagsList
+    , EventTagsList
 
     -- * Request Lenses
     , etlDefinitionsOnly
@@ -50,7 +50,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.eventTags.list@ method which the
--- 'EventTagsList'' request conforms to.
+-- 'EventTagsList' request conforms to.
 type EventTagsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -72,8 +72,8 @@ type EventTagsListResource =
 
 -- | Retrieves a list of event tags, possibly filtered.
 --
--- /See:/ 'eventTagsList'' smart constructor.
-data EventTagsList' = EventTagsList'
+-- /See:/ 'eventTagsList' smart constructor.
+data EventTagsList = EventTagsList
     { _etlDefinitionsOnly :: !(Maybe Bool)
     , _etlEventTagTypes   :: !(Maybe [EventTagsListEventTagTypes])
     , _etlEnabled         :: !(Maybe Bool)
@@ -87,7 +87,7 @@ data EventTagsList' = EventTagsList'
     , _etlSortField       :: !(Maybe EventTagsListSortField)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventTagsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventTagsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -112,11 +112,11 @@ data EventTagsList' = EventTagsList'
 -- * 'etlAdId'
 --
 -- * 'etlSortField'
-eventTagsList'
+eventTagsList
     :: Int64 -- ^ 'etlProFileId'
-    -> EventTagsList'
-eventTagsList' pEtlProFileId_ =
-    EventTagsList'
+    -> EventTagsList
+eventTagsList pEtlProFileId_ =
+    EventTagsList
     { _etlDefinitionsOnly = Nothing
     , _etlEventTagTypes = Nothing
     , _etlEnabled = Nothing
@@ -136,7 +136,7 @@ eventTagsList' pEtlProFileId_ =
 -- addition, when set to false, the status field is examined as well, along
 -- with the enabledByDefault field. This parameter can not be set to true
 -- when adId is specified as ads do not define their own even tags.
-etlDefinitionsOnly :: Lens' EventTagsList' (Maybe Bool)
+etlDefinitionsOnly :: Lens' EventTagsList (Maybe Bool)
 etlDefinitionsOnly
   = lens _etlDefinitionsOnly
       (\ s a -> s{_etlDefinitionsOnly = a})
@@ -145,7 +145,7 @@ etlDefinitionsOnly
 -- types can be used to specify whether to use a third-party pixel, a
 -- third-party JavaScript URL, or a third-party click-through URL for
 -- either impression or click tracking.
-etlEventTagTypes :: Lens' EventTagsList' [EventTagsListEventTagTypes]
+etlEventTagTypes :: Lens' EventTagsList [EventTagsListEventTagTypes]
 etlEventTagTypes
   = lens _etlEventTagTypes
       (\ s a -> s{_etlEventTagTypes = a})
@@ -159,12 +159,12 @@ etlEventTagTypes
 -- false, the specified ad or specified campaign\'s parent advertiser\'s or
 -- parent campaign\'s event tags\' enabledByDefault and status fields are
 -- examined as well.
-etlEnabled :: Lens' EventTagsList' (Maybe Bool)
+etlEnabled :: Lens' EventTagsList (Maybe Bool)
 etlEnabled
   = lens _etlEnabled (\ s a -> s{_etlEnabled = a})
 
 -- | Select only event tags that belong to this advertiser.
-etlAdvertiserId :: Lens' EventTagsList' (Maybe Int64)
+etlAdvertiserId :: Lens' EventTagsList (Maybe Int64)
 etlAdvertiserId
   = lens _etlAdvertiserId
       (\ s a -> s{_etlAdvertiserId = a})
@@ -176,45 +176,45 @@ etlAdvertiserId
 -- and the end of the search string. For example, a search string of
 -- \"eventtag\" will match objects with name \"my eventtag\", \"eventtag
 -- 2015\", or simply \"eventtag\".
-etlSearchString :: Lens' EventTagsList' (Maybe Text)
+etlSearchString :: Lens' EventTagsList (Maybe Text)
 etlSearchString
   = lens _etlSearchString
       (\ s a -> s{_etlSearchString = a})
 
 -- | Select only event tags that belong to this campaign.
-etlCampaignId :: Lens' EventTagsList' (Maybe Int64)
+etlCampaignId :: Lens' EventTagsList (Maybe Int64)
 etlCampaignId
   = lens _etlCampaignId
       (\ s a -> s{_etlCampaignId = a})
 
 -- | Select only event tags with these IDs.
-etlIds :: Lens' EventTagsList' [Int64]
+etlIds :: Lens' EventTagsList [Int64]
 etlIds
   = lens _etlIds (\ s a -> s{_etlIds = a}) . _Default .
       _Coerce
 
 -- | User profile ID associated with this request.
-etlProFileId :: Lens' EventTagsList' Int64
+etlProFileId :: Lens' EventTagsList Int64
 etlProFileId
   = lens _etlProFileId (\ s a -> s{_etlProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-etlSortOrder :: Lens' EventTagsList' (Maybe EventTagsListSortOrder)
+etlSortOrder :: Lens' EventTagsList (Maybe EventTagsListSortOrder)
 etlSortOrder
   = lens _etlSortOrder (\ s a -> s{_etlSortOrder = a})
 
 -- | Select only event tags that belong to this ad.
-etlAdId :: Lens' EventTagsList' (Maybe Int64)
+etlAdId :: Lens' EventTagsList (Maybe Int64)
 etlAdId = lens _etlAdId (\ s a -> s{_etlAdId = a})
 
 -- | Field by which to sort the list.
-etlSortField :: Lens' EventTagsList' (Maybe EventTagsListSortField)
+etlSortField :: Lens' EventTagsList (Maybe EventTagsListSortField)
 etlSortField
   = lens _etlSortField (\ s a -> s{_etlSortField = a})
 
-instance GoogleRequest EventTagsList' where
-        type Rs EventTagsList' = EventTagsListResponse
-        requestClient EventTagsList'{..}
+instance GoogleRequest EventTagsList where
+        type Rs EventTagsList = EventTagsListResponse
+        requestClient EventTagsList{..}
           = go _etlProFileId _etlDefinitionsOnly
               (_etlEventTagTypes ^. _Default)
               _etlEnabled

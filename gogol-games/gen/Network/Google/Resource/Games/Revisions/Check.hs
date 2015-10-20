@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.Revisions.Check
       RevisionsCheckResource
 
     -- * Creating a Request
-    , revisionsCheck'
-    , RevisionsCheck'
+    , revisionsCheck
+    , RevisionsCheck
 
     -- * Request Lenses
     , rcClientRevision
@@ -40,7 +40,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.revisions.check@ method which the
--- 'RevisionsCheck'' request conforms to.
+-- 'RevisionsCheck' request conforms to.
 type RevisionsCheckResource =
      "revisions" :>
        "check" :>
@@ -50,21 +50,21 @@ type RevisionsCheckResource =
 
 -- | Checks whether the games client is out of date.
 --
--- /See:/ 'revisionsCheck'' smart constructor.
-newtype RevisionsCheck' = RevisionsCheck'
+-- /See:/ 'revisionsCheck' smart constructor.
+newtype RevisionsCheck = RevisionsCheck
     { _rcClientRevision :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RevisionsCheck'' with the minimum fields required to make a request.
+-- | Creates a value of 'RevisionsCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rcClientRevision'
-revisionsCheck'
+revisionsCheck
     :: Text -- ^ 'rcClientRevision'
-    -> RevisionsCheck'
-revisionsCheck' pRcClientRevision_ =
-    RevisionsCheck'
+    -> RevisionsCheck
+revisionsCheck pRcClientRevision_ =
+    RevisionsCheck
     { _rcClientRevision = pRcClientRevision_
     }
 
@@ -72,14 +72,14 @@ revisionsCheck' pRcClientRevision_ =
 -- [PLATFORM_TYPE]:[VERSION_NUMBER]. Possible values of PLATFORM_TYPE are:
 -- - \"ANDROID\" - Client is running the Android SDK. - \"IOS\" - Client is
 -- running the iOS SDK. - \"WEB_APP\" - Client is running as a Web App.
-rcClientRevision :: Lens' RevisionsCheck' Text
+rcClientRevision :: Lens' RevisionsCheck Text
 rcClientRevision
   = lens _rcClientRevision
       (\ s a -> s{_rcClientRevision = a})
 
-instance GoogleRequest RevisionsCheck' where
-        type Rs RevisionsCheck' = RevisionCheckResponse
-        requestClient RevisionsCheck'{..}
+instance GoogleRequest RevisionsCheck where
+        type Rs RevisionsCheck = RevisionCheckResponse
+        requestClient RevisionsCheck{..}
           = go (Just _rcClientRevision) (Just AltJSON)
               gamesService
           where go

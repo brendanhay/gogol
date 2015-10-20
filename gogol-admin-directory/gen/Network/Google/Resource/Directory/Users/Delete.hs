@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Users.Delete
       UsersDeleteResource
 
     -- * Creating a Request
-    , usersDelete'
-    , UsersDelete'
+    , usersDelete
+    , UsersDelete
 
     -- * Request Lenses
     , udUserKey
@@ -40,7 +40,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.users.delete@ method which the
--- 'UsersDelete'' request conforms to.
+-- 'UsersDelete' request conforms to.
 type UsersDeleteResource =
      "users" :>
        Capture "userKey" Text :>
@@ -48,32 +48,32 @@ type UsersDeleteResource =
 
 -- | Delete user
 --
--- /See:/ 'usersDelete'' smart constructor.
-newtype UsersDelete' = UsersDelete'
+-- /See:/ 'usersDelete' smart constructor.
+newtype UsersDelete = UsersDelete
     { _udUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'udUserKey'
-usersDelete'
+usersDelete
     :: Text -- ^ 'udUserKey'
-    -> UsersDelete'
-usersDelete' pUdUserKey_ =
-    UsersDelete'
+    -> UsersDelete
+usersDelete pUdUserKey_ =
+    UsersDelete
     { _udUserKey = pUdUserKey_
     }
 
 -- | Email or immutable Id of the user
-udUserKey :: Lens' UsersDelete' Text
+udUserKey :: Lens' UsersDelete Text
 udUserKey
   = lens _udUserKey (\ s a -> s{_udUserKey = a})
 
-instance GoogleRequest UsersDelete' where
-        type Rs UsersDelete' = ()
-        requestClient UsersDelete'{..}
+instance GoogleRequest UsersDelete where
+        type Rs UsersDelete = ()
+        requestClient UsersDelete{..}
           = go _udUserKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy UsersDeleteResource)

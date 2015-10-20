@@ -29,8 +29,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.Create
       ProjectsTopicsCreateResource
 
     -- * Creating a Request
-    , projectsTopicsCreate'
-    , ProjectsTopicsCreate'
+    , projectsTopicsCreate
+    , ProjectsTopicsCreate
 
     -- * Request Lenses
     , ptcXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.create@ method which the
--- 'ProjectsTopicsCreate'' request conforms to.
+-- 'ProjectsTopicsCreate' request conforms to.
 type ProjectsTopicsCreateResource =
      "v1" :>
        Capture "name" Text :>
@@ -64,8 +64,8 @@ type ProjectsTopicsCreateResource =
 
 -- | Creates the given topic with the given name.
 --
--- /See:/ 'projectsTopicsCreate'' smart constructor.
-data ProjectsTopicsCreate' = ProjectsTopicsCreate'
+-- /See:/ 'projectsTopicsCreate' smart constructor.
+data ProjectsTopicsCreate = ProjectsTopicsCreate
     { _ptcXgafv          :: !(Maybe Text)
     , _ptcUploadProtocol :: !(Maybe Text)
     , _ptcPp             :: !Bool
@@ -77,7 +77,7 @@ data ProjectsTopicsCreate' = ProjectsTopicsCreate'
     , _ptcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsTopicsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsTopicsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -98,12 +98,12 @@ data ProjectsTopicsCreate' = ProjectsTopicsCreate'
 -- * 'ptcName'
 --
 -- * 'ptcCallback'
-projectsTopicsCreate'
+projectsTopicsCreate
     :: Topic -- ^ 'ptcPayload'
     -> Text -- ^ 'ptcName'
-    -> ProjectsTopicsCreate'
-projectsTopicsCreate' pPtcPayload_ pPtcName_ =
-    ProjectsTopicsCreate'
+    -> ProjectsTopicsCreate
+projectsTopicsCreate pPtcPayload_ pPtcName_ =
+    ProjectsTopicsCreate
     { _ptcXgafv = Nothing
     , _ptcUploadProtocol = Nothing
     , _ptcPp = True
@@ -116,38 +116,38 @@ projectsTopicsCreate' pPtcPayload_ pPtcName_ =
     }
 
 -- | V1 error format.
-ptcXgafv :: Lens' ProjectsTopicsCreate' (Maybe Text)
+ptcXgafv :: Lens' ProjectsTopicsCreate (Maybe Text)
 ptcXgafv = lens _ptcXgafv (\ s a -> s{_ptcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ptcUploadProtocol :: Lens' ProjectsTopicsCreate' (Maybe Text)
+ptcUploadProtocol :: Lens' ProjectsTopicsCreate (Maybe Text)
 ptcUploadProtocol
   = lens _ptcUploadProtocol
       (\ s a -> s{_ptcUploadProtocol = a})
 
 -- | Pretty-print response.
-ptcPp :: Lens' ProjectsTopicsCreate' Bool
+ptcPp :: Lens' ProjectsTopicsCreate Bool
 ptcPp = lens _ptcPp (\ s a -> s{_ptcPp = a})
 
 -- | OAuth access token.
-ptcAccessToken :: Lens' ProjectsTopicsCreate' (Maybe Text)
+ptcAccessToken :: Lens' ProjectsTopicsCreate (Maybe Text)
 ptcAccessToken
   = lens _ptcAccessToken
       (\ s a -> s{_ptcAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ptcUploadType :: Lens' ProjectsTopicsCreate' (Maybe Text)
+ptcUploadType :: Lens' ProjectsTopicsCreate (Maybe Text)
 ptcUploadType
   = lens _ptcUploadType
       (\ s a -> s{_ptcUploadType = a})
 
 -- | Multipart request metadata.
-ptcPayload :: Lens' ProjectsTopicsCreate' Topic
+ptcPayload :: Lens' ProjectsTopicsCreate Topic
 ptcPayload
   = lens _ptcPayload (\ s a -> s{_ptcPayload = a})
 
 -- | OAuth bearer token.
-ptcBearerToken :: Lens' ProjectsTopicsCreate' (Maybe Text)
+ptcBearerToken :: Lens' ProjectsTopicsCreate (Maybe Text)
 ptcBearerToken
   = lens _ptcBearerToken
       (\ s a -> s{_ptcBearerToken = a})
@@ -159,17 +159,17 @@ ptcBearerToken
 -- tildes (\`~\`), plus (\`+\`) or percent signs (\`%\`). It must be
 -- between 3 and 255 characters in length, and it must not start with
 -- \`\"goog\"\`.
-ptcName :: Lens' ProjectsTopicsCreate' Text
+ptcName :: Lens' ProjectsTopicsCreate Text
 ptcName = lens _ptcName (\ s a -> s{_ptcName = a})
 
 -- | JSONP
-ptcCallback :: Lens' ProjectsTopicsCreate' (Maybe Text)
+ptcCallback :: Lens' ProjectsTopicsCreate (Maybe Text)
 ptcCallback
   = lens _ptcCallback (\ s a -> s{_ptcCallback = a})
 
-instance GoogleRequest ProjectsTopicsCreate' where
-        type Rs ProjectsTopicsCreate' = Topic
-        requestClient ProjectsTopicsCreate'{..}
+instance GoogleRequest ProjectsTopicsCreate where
+        type Rs ProjectsTopicsCreate = Topic
+        requestClient ProjectsTopicsCreate{..}
           = go _ptcName _ptcXgafv _ptcUploadProtocol
               (Just _ptcPp)
               _ptcAccessToken

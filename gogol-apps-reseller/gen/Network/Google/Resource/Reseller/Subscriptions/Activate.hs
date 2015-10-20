@@ -29,8 +29,8 @@ module Network.Google.Resource.Reseller.Subscriptions.Activate
       SubscriptionsActivateResource
 
     -- * Creating a Request
-    , subscriptionsActivate'
-    , SubscriptionsActivate'
+    , subscriptionsActivate
+    , SubscriptionsActivate
 
     -- * Request Lenses
     , saCustomerId
@@ -41,7 +41,7 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @reseller.subscriptions.activate@ method which the
--- 'SubscriptionsActivate'' request conforms to.
+-- 'SubscriptionsActivate' request conforms to.
 type SubscriptionsActivateResource =
      "customers" :>
        Capture "customerId" Text :>
@@ -52,43 +52,43 @@ type SubscriptionsActivateResource =
 
 -- | Activates a subscription previously suspended by the reseller
 --
--- /See:/ 'subscriptionsActivate'' smart constructor.
-data SubscriptionsActivate' = SubscriptionsActivate'
+-- /See:/ 'subscriptionsActivate' smart constructor.
+data SubscriptionsActivate = SubscriptionsActivate
     { _saCustomerId     :: !Text
     , _saSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionsActivate'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubscriptionsActivate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'saCustomerId'
 --
 -- * 'saSubscriptionId'
-subscriptionsActivate'
+subscriptionsActivate
     :: Text -- ^ 'saCustomerId'
     -> Text -- ^ 'saSubscriptionId'
-    -> SubscriptionsActivate'
-subscriptionsActivate' pSaCustomerId_ pSaSubscriptionId_ =
-    SubscriptionsActivate'
+    -> SubscriptionsActivate
+subscriptionsActivate pSaCustomerId_ pSaSubscriptionId_ =
+    SubscriptionsActivate
     { _saCustomerId = pSaCustomerId_
     , _saSubscriptionId = pSaSubscriptionId_
     }
 
 -- | Id of the Customer
-saCustomerId :: Lens' SubscriptionsActivate' Text
+saCustomerId :: Lens' SubscriptionsActivate Text
 saCustomerId
   = lens _saCustomerId (\ s a -> s{_saCustomerId = a})
 
 -- | Id of the subscription, which is unique for a customer
-saSubscriptionId :: Lens' SubscriptionsActivate' Text
+saSubscriptionId :: Lens' SubscriptionsActivate Text
 saSubscriptionId
   = lens _saSubscriptionId
       (\ s a -> s{_saSubscriptionId = a})
 
-instance GoogleRequest SubscriptionsActivate' where
-        type Rs SubscriptionsActivate' = Subscription
-        requestClient SubscriptionsActivate'{..}
+instance GoogleRequest SubscriptionsActivate where
+        type Rs SubscriptionsActivate = Subscription
+        requestClient SubscriptionsActivate{..}
           = go _saCustomerId _saSubscriptionId (Just AltJSON)
               appsResellerService
           where go

@@ -30,8 +30,8 @@ module Network.Google.Resource.CivicInfo.Elections.VoterInfoQuery
       ElectionsVoterInfoQueryResource
 
     -- * Creating a Request
-    , electionsVoterInfoQuery'
-    , ElectionsVoterInfoQuery'
+    , electionsVoterInfoQuery
+    , ElectionsVoterInfoQuery
 
     -- * Request Lenses
     , eviqElectionId
@@ -43,7 +43,7 @@ import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @civicinfo.elections.voterInfoQuery@ method which the
--- 'ElectionsVoterInfoQuery'' request conforms to.
+-- 'ElectionsVoterInfoQuery' request conforms to.
 type ElectionsVoterInfoQueryResource =
      "voterinfo" :>
        QueryParam "address" Text :>
@@ -55,14 +55,14 @@ type ElectionsVoterInfoQueryResource =
 -- | Looks up information relevant to a voter based on the voter\'s
 -- registered address.
 --
--- /See:/ 'electionsVoterInfoQuery'' smart constructor.
-data ElectionsVoterInfoQuery' = ElectionsVoterInfoQuery'
+-- /See:/ 'electionsVoterInfoQuery' smart constructor.
+data ElectionsVoterInfoQuery = ElectionsVoterInfoQuery
     { _eviqElectionId   :: !Int64
     , _eviqAddress      :: !Text
     , _eviqOfficialOnly :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ElectionsVoterInfoQuery'' with the minimum fields required to make a request.
+-- | Creates a value of 'ElectionsVoterInfoQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,11 +71,11 @@ data ElectionsVoterInfoQuery' = ElectionsVoterInfoQuery'
 -- * 'eviqAddress'
 --
 -- * 'eviqOfficialOnly'
-electionsVoterInfoQuery'
+electionsVoterInfoQuery
     :: Text -- ^ 'eviqAddress'
-    -> ElectionsVoterInfoQuery'
-electionsVoterInfoQuery' pEviqAddress_ =
-    ElectionsVoterInfoQuery'
+    -> ElectionsVoterInfoQuery
+electionsVoterInfoQuery pEviqAddress_ =
+    ElectionsVoterInfoQuery
     { _eviqElectionId = 0
     , _eviqAddress = pEviqAddress_
     , _eviqOfficialOnly = False
@@ -84,25 +84,25 @@ electionsVoterInfoQuery' pEviqAddress_ =
 -- | The unique ID of the election to look up. A list of election IDs can be
 -- obtained at
 -- https:\/\/www.googleapis.com\/civicinfo\/{version}\/elections
-eviqElectionId :: Lens' ElectionsVoterInfoQuery' Int64
+eviqElectionId :: Lens' ElectionsVoterInfoQuery Int64
 eviqElectionId
   = lens _eviqElectionId
       (\ s a -> s{_eviqElectionId = a})
 
 -- | The registered address of the voter to look up.
-eviqAddress :: Lens' ElectionsVoterInfoQuery' Text
+eviqAddress :: Lens' ElectionsVoterInfoQuery Text
 eviqAddress
   = lens _eviqAddress (\ s a -> s{_eviqAddress = a})
 
 -- | If set to true, only data from official state sources will be returned.
-eviqOfficialOnly :: Lens' ElectionsVoterInfoQuery' Bool
+eviqOfficialOnly :: Lens' ElectionsVoterInfoQuery Bool
 eviqOfficialOnly
   = lens _eviqOfficialOnly
       (\ s a -> s{_eviqOfficialOnly = a})
 
-instance GoogleRequest ElectionsVoterInfoQuery' where
-        type Rs ElectionsVoterInfoQuery' = VoterInfoResponse
-        requestClient ElectionsVoterInfoQuery'{..}
+instance GoogleRequest ElectionsVoterInfoQuery where
+        type Rs ElectionsVoterInfoQuery = VoterInfoResponse
+        requestClient ElectionsVoterInfoQuery{..}
           = go (Just _eviqAddress) (Just _eviqElectionId)
               (Just _eviqOfficialOnly)
               (Just AltJSON)

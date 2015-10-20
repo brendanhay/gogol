@@ -29,8 +29,8 @@ module Network.Google.Resource.PlusDomains.Circles.Remove
       CirclesRemoveResource
 
     -- * Creating a Request
-    , circlesRemove'
-    , CirclesRemove'
+    , circlesRemove
+    , CirclesRemove
 
     -- * Request Lenses
     , crCircleId
@@ -40,7 +40,7 @@ import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plusDomains.circles.remove@ method which the
--- 'CirclesRemove'' request conforms to.
+-- 'CirclesRemove' request conforms to.
 type CirclesRemoveResource =
      "circles" :>
        Capture "circleId" Text :>
@@ -48,32 +48,32 @@ type CirclesRemoveResource =
 
 -- | Delete a circle.
 --
--- /See:/ 'circlesRemove'' smart constructor.
-newtype CirclesRemove' = CirclesRemove'
+-- /See:/ 'circlesRemove' smart constructor.
+newtype CirclesRemove = CirclesRemove
     { _crCircleId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CirclesRemove'' with the minimum fields required to make a request.
+-- | Creates a value of 'CirclesRemove' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'crCircleId'
-circlesRemove'
+circlesRemove
     :: Text -- ^ 'crCircleId'
-    -> CirclesRemove'
-circlesRemove' pCrCircleId_ =
-    CirclesRemove'
+    -> CirclesRemove
+circlesRemove pCrCircleId_ =
+    CirclesRemove
     { _crCircleId = pCrCircleId_
     }
 
 -- | The ID of the circle to delete.
-crCircleId :: Lens' CirclesRemove' Text
+crCircleId :: Lens' CirclesRemove Text
 crCircleId
   = lens _crCircleId (\ s a -> s{_crCircleId = a})
 
-instance GoogleRequest CirclesRemove' where
-        type Rs CirclesRemove' = ()
-        requestClient CirclesRemove'{..}
+instance GoogleRequest CirclesRemove where
+        type Rs CirclesRemove = ()
+        requestClient CirclesRemove{..}
           = go _crCircleId (Just AltJSON) plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy CirclesRemoveResource)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.Objects.Update
       ObjectsUpdateResource
 
     -- * Creating a Request
-    , objectsUpdate'
-    , ObjectsUpdate'
+    , objectsUpdate
+    , ObjectsUpdate
 
     -- * Request Lenses
     , ouIfMetagenerationMatch
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.update@ method which the
--- 'ObjectsUpdate'' request conforms to.
+-- 'ObjectsUpdate' request conforms to.
 type ObjectsUpdateResource =
      "b" :>
        Capture "bucket" Text :>
@@ -84,8 +84,8 @@ type ObjectsUpdateResource =
 
 -- | Updates an object\'s metadata.
 --
--- /See:/ 'objectsUpdate'' smart constructor.
-data ObjectsUpdate' = ObjectsUpdate'
+-- /See:/ 'objectsUpdate' smart constructor.
+data ObjectsUpdate = ObjectsUpdate
     { _ouIfMetagenerationMatch    :: !(Maybe Int64)
     , _ouIfGenerationNotMatch     :: !(Maybe Int64)
     , _ouIfGenerationMatch        :: !(Maybe Int64)
@@ -98,7 +98,7 @@ data ObjectsUpdate' = ObjectsUpdate'
     , _ouGeneration               :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ObjectsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ObjectsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -121,13 +121,13 @@ data ObjectsUpdate' = ObjectsUpdate'
 -- * 'ouProjection'
 --
 -- * 'ouGeneration'
-objectsUpdate'
+objectsUpdate
     :: Text -- ^ 'ouBucket'
     -> Object -- ^ 'ouPayload'
     -> Text -- ^ 'ouObject'
-    -> ObjectsUpdate'
-objectsUpdate' pOuBucket_ pOuPayload_ pOuObject_ =
-    ObjectsUpdate'
+    -> ObjectsUpdate
+objectsUpdate pOuBucket_ pOuPayload_ pOuObject_ =
+    ObjectsUpdate
     { _ouIfMetagenerationMatch = Nothing
     , _ouIfGenerationNotMatch = Nothing
     , _ouIfGenerationMatch = Nothing
@@ -142,66 +142,66 @@ objectsUpdate' pOuBucket_ pOuPayload_ pOuObject_ =
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.
-ouIfMetagenerationMatch :: Lens' ObjectsUpdate' (Maybe Int64)
+ouIfMetagenerationMatch :: Lens' ObjectsUpdate (Maybe Int64)
 ouIfMetagenerationMatch
   = lens _ouIfMetagenerationMatch
       (\ s a -> s{_ouIfMetagenerationMatch = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation does not match the given value.
-ouIfGenerationNotMatch :: Lens' ObjectsUpdate' (Maybe Int64)
+ouIfGenerationNotMatch :: Lens' ObjectsUpdate (Maybe Int64)
 ouIfGenerationNotMatch
   = lens _ouIfGenerationNotMatch
       (\ s a -> s{_ouIfGenerationNotMatch = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation matches the given value.
-ouIfGenerationMatch :: Lens' ObjectsUpdate' (Maybe Int64)
+ouIfGenerationMatch :: Lens' ObjectsUpdate (Maybe Int64)
 ouIfGenerationMatch
   = lens _ouIfGenerationMatch
       (\ s a -> s{_ouIfGenerationMatch = a})
 
 -- | Apply a predefined set of access controls to this object.
-ouPredefinedACL :: Lens' ObjectsUpdate' (Maybe ObjectsUpdatePredefinedACL)
+ouPredefinedACL :: Lens' ObjectsUpdate (Maybe ObjectsUpdatePredefinedACL)
 ouPredefinedACL
   = lens _ouPredefinedACL
       (\ s a -> s{_ouPredefinedACL = a})
 
 -- | Name of the bucket in which the object resides.
-ouBucket :: Lens' ObjectsUpdate' Text
+ouBucket :: Lens' ObjectsUpdate Text
 ouBucket = lens _ouBucket (\ s a -> s{_ouBucket = a})
 
 -- | Multipart request metadata.
-ouPayload :: Lens' ObjectsUpdate' Object
+ouPayload :: Lens' ObjectsUpdate Object
 ouPayload
   = lens _ouPayload (\ s a -> s{_ouPayload = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration does not match the given value.
-ouIfMetagenerationNotMatch :: Lens' ObjectsUpdate' (Maybe Int64)
+ouIfMetagenerationNotMatch :: Lens' ObjectsUpdate (Maybe Int64)
 ouIfMetagenerationNotMatch
   = lens _ouIfMetagenerationNotMatch
       (\ s a -> s{_ouIfMetagenerationNotMatch = a})
 
 -- | Name of the object. For information about how to URL encode object names
 -- to be path safe, see Encoding URI Path Parts.
-ouObject :: Lens' ObjectsUpdate' Text
+ouObject :: Lens' ObjectsUpdate Text
 ouObject = lens _ouObject (\ s a -> s{_ouObject = a})
 
 -- | Set of properties to return. Defaults to full.
-ouProjection :: Lens' ObjectsUpdate' (Maybe ObjectsUpdateProjection)
+ouProjection :: Lens' ObjectsUpdate (Maybe ObjectsUpdateProjection)
 ouProjection
   = lens _ouProjection (\ s a -> s{_ouProjection = a})
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
-ouGeneration :: Lens' ObjectsUpdate' (Maybe Int64)
+ouGeneration :: Lens' ObjectsUpdate (Maybe Int64)
 ouGeneration
   = lens _ouGeneration (\ s a -> s{_ouGeneration = a})
 
-instance GoogleRequest ObjectsUpdate' where
-        type Rs ObjectsUpdate' = Object
-        requestClient ObjectsUpdate'{..}
+instance GoogleRequest ObjectsUpdate where
+        type Rs ObjectsUpdate = Object
+        requestClient ObjectsUpdate{..}
           = go _ouBucket _ouObject _ouIfMetagenerationMatch
               _ouIfGenerationNotMatch
               _ouIfGenerationMatch
@@ -216,10 +216,10 @@ instance GoogleRequest ObjectsUpdate' where
                   = buildClient (Proxy :: Proxy ObjectsUpdateResource)
                       mempty
 
-instance GoogleRequest (MediaDownload ObjectsUpdate')
+instance GoogleRequest (MediaDownload ObjectsUpdate)
          where
-        type Rs (MediaDownload ObjectsUpdate') = Stream
-        requestClient (MediaDownload ObjectsUpdate'{..})
+        type Rs (MediaDownload ObjectsUpdate) = Stream
+        requestClient (MediaDownload ObjectsUpdate{..})
           = go _ouBucket _ouObject _ouIfMetagenerationMatch
               _ouIfGenerationNotMatch
               _ouIfGenerationMatch

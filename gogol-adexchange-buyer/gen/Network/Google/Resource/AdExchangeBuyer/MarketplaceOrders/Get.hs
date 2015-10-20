@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Get
       MarketplaceOrdersGetResource
 
     -- * Creating a Request
-    , marketplaceOrdersGet'
-    , MarketplaceOrdersGet'
+    , marketplaceOrdersGet
+    , MarketplaceOrdersGet
 
     -- * Request Lenses
     , mogOrderId
@@ -40,7 +40,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.marketplaceorders.get@ method which the
--- 'MarketplaceOrdersGet'' request conforms to.
+-- 'MarketplaceOrdersGet' request conforms to.
 type MarketplaceOrdersGetResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
@@ -49,32 +49,32 @@ type MarketplaceOrdersGetResource =
 
 -- | Get an order given its id
 --
--- /See:/ 'marketplaceOrdersGet'' smart constructor.
-newtype MarketplaceOrdersGet' = MarketplaceOrdersGet'
+-- /See:/ 'marketplaceOrdersGet' smart constructor.
+newtype MarketplaceOrdersGet = MarketplaceOrdersGet
     { _mogOrderId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MarketplaceOrdersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'MarketplaceOrdersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mogOrderId'
-marketplaceOrdersGet'
+marketplaceOrdersGet
     :: Text -- ^ 'mogOrderId'
-    -> MarketplaceOrdersGet'
-marketplaceOrdersGet' pMogOrderId_ =
-    MarketplaceOrdersGet'
+    -> MarketplaceOrdersGet
+marketplaceOrdersGet pMogOrderId_ =
+    MarketplaceOrdersGet
     { _mogOrderId = pMogOrderId_
     }
 
 -- | Id of the order to retrieve.
-mogOrderId :: Lens' MarketplaceOrdersGet' Text
+mogOrderId :: Lens' MarketplaceOrdersGet Text
 mogOrderId
   = lens _mogOrderId (\ s a -> s{_mogOrderId = a})
 
-instance GoogleRequest MarketplaceOrdersGet' where
-        type Rs MarketplaceOrdersGet' = MarketplaceOrder
-        requestClient MarketplaceOrdersGet'{..}
+instance GoogleRequest MarketplaceOrdersGet where
+        type Rs MarketplaceOrdersGet = MarketplaceOrder
+        requestClient MarketplaceOrdersGet{..}
           = go _mogOrderId (Just AltJSON)
               adExchangeBuyerService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Webmasters.URLCrawlErrorsSamples.Get
       URLCrawlErrorsSamplesGetResource
 
     -- * Creating a Request
-    , urlCrawlErrorsSamplesGet'
-    , URLCrawlErrorsSamplesGet'
+    , urlCrawlErrorsSamplesGet
+    , URLCrawlErrorsSamplesGet
 
     -- * Request Lenses
     , ucesgPlatform
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.urlcrawlerrorssamples.get@ method which the
--- 'URLCrawlErrorsSamplesGet'' request conforms to.
+-- 'URLCrawlErrorsSamplesGet' request conforms to.
 type URLCrawlErrorsSamplesGetResource =
      "sites" :>
        Capture "siteUrl" Text :>
@@ -60,15 +60,15 @@ type URLCrawlErrorsSamplesGetResource =
 
 -- | Retrieves details about crawl errors for a site\'s sample URL.
 --
--- /See:/ 'urlCrawlErrorsSamplesGet'' smart constructor.
-data URLCrawlErrorsSamplesGet' = URLCrawlErrorsSamplesGet'
+-- /See:/ 'urlCrawlErrorsSamplesGet' smart constructor.
+data URLCrawlErrorsSamplesGet = URLCrawlErrorsSamplesGet
     { _ucesgPlatform :: !URLCrawlErrorsSamplesGetPlatform
     , _ucesgCategory :: !URLCrawlErrorsSamplesGetCategory
     , _ucesgSiteURL  :: !Text
     , _ucesgURL      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'URLCrawlErrorsSamplesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'URLCrawlErrorsSamplesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,14 +79,14 @@ data URLCrawlErrorsSamplesGet' = URLCrawlErrorsSamplesGet'
 -- * 'ucesgSiteURL'
 --
 -- * 'ucesgURL'
-urlCrawlErrorsSamplesGet'
+urlCrawlErrorsSamplesGet
     :: URLCrawlErrorsSamplesGetPlatform -- ^ 'ucesgPlatform'
     -> URLCrawlErrorsSamplesGetCategory -- ^ 'ucesgCategory'
     -> Text -- ^ 'ucesgSiteURL'
     -> Text -- ^ 'ucesgURL'
-    -> URLCrawlErrorsSamplesGet'
-urlCrawlErrorsSamplesGet' pUcesgPlatform_ pUcesgCategory_ pUcesgSiteURL_ pUcesgURL_ =
-    URLCrawlErrorsSamplesGet'
+    -> URLCrawlErrorsSamplesGet
+urlCrawlErrorsSamplesGet pUcesgPlatform_ pUcesgCategory_ pUcesgSiteURL_ pUcesgURL_ =
+    URLCrawlErrorsSamplesGet
     { _ucesgPlatform = pUcesgPlatform_
     , _ucesgCategory = pUcesgCategory_
     , _ucesgSiteURL = pUcesgSiteURL_
@@ -94,20 +94,20 @@ urlCrawlErrorsSamplesGet' pUcesgPlatform_ pUcesgCategory_ pUcesgSiteURL_ pUcesgU
     }
 
 -- | The user agent type (platform) that made the request. For example: web
-ucesgPlatform :: Lens' URLCrawlErrorsSamplesGet' URLCrawlErrorsSamplesGetPlatform
+ucesgPlatform :: Lens' URLCrawlErrorsSamplesGet URLCrawlErrorsSamplesGetPlatform
 ucesgPlatform
   = lens _ucesgPlatform
       (\ s a -> s{_ucesgPlatform = a})
 
 -- | The crawl error category. For example: authPermissions
-ucesgCategory :: Lens' URLCrawlErrorsSamplesGet' URLCrawlErrorsSamplesGetCategory
+ucesgCategory :: Lens' URLCrawlErrorsSamplesGet URLCrawlErrorsSamplesGetCategory
 ucesgCategory
   = lens _ucesgCategory
       (\ s a -> s{_ucesgCategory = a})
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/
-ucesgSiteURL :: Lens' URLCrawlErrorsSamplesGet' Text
+ucesgSiteURL :: Lens' URLCrawlErrorsSamplesGet Text
 ucesgSiteURL
   = lens _ucesgSiteURL (\ s a -> s{_ucesgSiteURL = a})
 
@@ -115,14 +115,13 @@ ucesgSiteURL
 -- of the URLs returned by list(). For example, for the URL
 -- https:\/\/www.example.com\/pagename on the site
 -- https:\/\/www.example.com\/, the url value is pagename
-ucesgURL :: Lens' URLCrawlErrorsSamplesGet' Text
+ucesgURL :: Lens' URLCrawlErrorsSamplesGet Text
 ucesgURL = lens _ucesgURL (\ s a -> s{_ucesgURL = a})
 
-instance GoogleRequest URLCrawlErrorsSamplesGet'
-         where
-        type Rs URLCrawlErrorsSamplesGet' =
+instance GoogleRequest URLCrawlErrorsSamplesGet where
+        type Rs URLCrawlErrorsSamplesGet =
              URLCrawlErrorsSample
-        requestClient URLCrawlErrorsSamplesGet'{..}
+        requestClient URLCrawlErrorsSamplesGet{..}
           = go _ucesgSiteURL _ucesgURL (Just _ucesgCategory)
               (Just _ucesgPlatform)
               (Just AltJSON)

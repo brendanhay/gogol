@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.Posts.Revert
       PostsRevertResource
 
     -- * Creating a Request
-    , postsRevert'
-    , PostsRevert'
+    , postsRevert
+    , PostsRevert
 
     -- * Request Lenses
     , prBlogId
@@ -41,7 +41,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.posts.revert@ method which the
--- 'PostsRevert'' request conforms to.
+-- 'PostsRevert' request conforms to.
 type PostsRevertResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -52,40 +52,40 @@ type PostsRevertResource =
 
 -- | Revert a published or scheduled post to draft state.
 --
--- /See:/ 'postsRevert'' smart constructor.
-data PostsRevert' = PostsRevert'
+-- /See:/ 'postsRevert' smart constructor.
+data PostsRevert = PostsRevert
     { _prBlogId :: !Text
     , _prPostId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PostsRevert'' with the minimum fields required to make a request.
+-- | Creates a value of 'PostsRevert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'prBlogId'
 --
 -- * 'prPostId'
-postsRevert'
+postsRevert
     :: Text -- ^ 'prBlogId'
     -> Text -- ^ 'prPostId'
-    -> PostsRevert'
-postsRevert' pPrBlogId_ pPrPostId_ =
-    PostsRevert'
+    -> PostsRevert
+postsRevert pPrBlogId_ pPrPostId_ =
+    PostsRevert
     { _prBlogId = pPrBlogId_
     , _prPostId = pPrPostId_
     }
 
 -- | The ID of the Blog.
-prBlogId :: Lens' PostsRevert' Text
+prBlogId :: Lens' PostsRevert Text
 prBlogId = lens _prBlogId (\ s a -> s{_prBlogId = a})
 
 -- | The ID of the Post.
-prPostId :: Lens' PostsRevert' Text
+prPostId :: Lens' PostsRevert Text
 prPostId = lens _prPostId (\ s a -> s{_prPostId = a})
 
-instance GoogleRequest PostsRevert' where
-        type Rs PostsRevert' = Post'
-        requestClient PostsRevert'{..}
+instance GoogleRequest PostsRevert where
+        type Rs PostsRevert = Post'
+        requestClient PostsRevert{..}
           = go _prBlogId _prPostId (Just AltJSON)
               bloggerService
           where go

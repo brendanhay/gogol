@@ -29,18 +29,18 @@ module Network.Google.Resource.Drive.Revisions.List
       RevisionsListResource
 
     -- * Creating a Request
-    , revisionsList'
-    , RevisionsList'
+    , revisionsList
+    , RevisionsList
 
     -- * Request Lenses
-    , rlFileId
+    , rllFileId
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.revisions.list@ method which the
--- 'RevisionsList'' request conforms to.
+-- 'RevisionsList' request conforms to.
 type RevisionsListResource =
      "files" :>
        Capture "fileId" Text :>
@@ -49,32 +49,33 @@ type RevisionsListResource =
 
 -- | Lists a file\'s revisions.
 --
--- /See:/ 'revisionsList'' smart constructor.
-newtype RevisionsList' = RevisionsList'
-    { _rlFileId :: Text
+-- /See:/ 'revisionsList' smart constructor.
+newtype RevisionsList = RevisionsList
+    { _rllFileId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RevisionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'RevisionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rlFileId'
-revisionsList'
-    :: Text -- ^ 'rlFileId'
-    -> RevisionsList'
-revisionsList' pRlFileId_ =
-    RevisionsList'
-    { _rlFileId = pRlFileId_
+-- * 'rllFileId'
+revisionsList
+    :: Text -- ^ 'rllFileId'
+    -> RevisionsList
+revisionsList pRllFileId_ =
+    RevisionsList
+    { _rllFileId = pRllFileId_
     }
 
 -- | The ID of the file.
-rlFileId :: Lens' RevisionsList' Text
-rlFileId = lens _rlFileId (\ s a -> s{_rlFileId = a})
+rllFileId :: Lens' RevisionsList Text
+rllFileId
+  = lens _rllFileId (\ s a -> s{_rllFileId = a})
 
-instance GoogleRequest RevisionsList' where
-        type Rs RevisionsList' = RevisionList
-        requestClient RevisionsList'{..}
-          = go _rlFileId (Just AltJSON) driveService
+instance GoogleRequest RevisionsList where
+        type Rs RevisionsList = RevisionList
+        requestClient RevisionsList{..}
+          = go _rllFileId (Just AltJSON) driveService
           where go
                   = buildClient (Proxy :: Proxy RevisionsListResource)
                       mempty

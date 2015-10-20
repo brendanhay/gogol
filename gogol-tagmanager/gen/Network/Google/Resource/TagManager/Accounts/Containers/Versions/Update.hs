@@ -29,22 +29,22 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Update
       AccountsContainersVersionsUpdateResource
 
     -- * Creating a Request
-    , accountsContainersVersionsUpdate'
-    , AccountsContainersVersionsUpdate'
+    , accountsContainersVersionsUpdate
+    , AccountsContainersVersionsUpdate
 
     -- * Request Lenses
-    , acvucContainerId
-    , acvucFingerprint
-    , acvucContainerVersionId
-    , acvucPayload
-    , acvucAccountId
+    , acccContainerId
+    , acccFingerprint
+    , acccContainerVersionId
+    , acccPayload
+    , acccAccountId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.versions.update@ method which the
--- 'AccountsContainersVersionsUpdate'' request conforms to.
+-- 'AccountsContainersVersionsUpdate' request conforms to.
 type AccountsContainersVersionsUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -59,83 +59,83 @@ type AccountsContainersVersionsUpdateResource =
 
 -- | Updates a Container Version.
 --
--- /See:/ 'accountsContainersVersionsUpdate'' smart constructor.
-data AccountsContainersVersionsUpdate' = AccountsContainersVersionsUpdate'
-    { _acvucContainerId        :: !Text
-    , _acvucFingerprint        :: !(Maybe Text)
-    , _acvucContainerVersionId :: !Text
-    , _acvucPayload            :: !ContainerVersion
-    , _acvucAccountId          :: !Text
+-- /See:/ 'accountsContainersVersionsUpdate' smart constructor.
+data AccountsContainersVersionsUpdate = AccountsContainersVersionsUpdate
+    { _acccContainerId        :: !Text
+    , _acccFingerprint        :: !(Maybe Text)
+    , _acccContainerVersionId :: !Text
+    , _acccPayload            :: !ContainerVersion
+    , _acccAccountId          :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersVersionsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersVersionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acvucContainerId'
+-- * 'acccContainerId'
 --
--- * 'acvucFingerprint'
+-- * 'acccFingerprint'
 --
--- * 'acvucContainerVersionId'
+-- * 'acccContainerVersionId'
 --
--- * 'acvucPayload'
+-- * 'acccPayload'
 --
--- * 'acvucAccountId'
-accountsContainersVersionsUpdate'
-    :: Text -- ^ 'acvucContainerId'
-    -> Text -- ^ 'acvucContainerVersionId'
-    -> ContainerVersion -- ^ 'acvucPayload'
-    -> Text -- ^ 'acvucAccountId'
-    -> AccountsContainersVersionsUpdate'
-accountsContainersVersionsUpdate' pAcvucContainerId_ pAcvucContainerVersionId_ pAcvucPayload_ pAcvucAccountId_ =
-    AccountsContainersVersionsUpdate'
-    { _acvucContainerId = pAcvucContainerId_
-    , _acvucFingerprint = Nothing
-    , _acvucContainerVersionId = pAcvucContainerVersionId_
-    , _acvucPayload = pAcvucPayload_
-    , _acvucAccountId = pAcvucAccountId_
+-- * 'acccAccountId'
+accountsContainersVersionsUpdate
+    :: Text -- ^ 'acccContainerId'
+    -> Text -- ^ 'acccContainerVersionId'
+    -> ContainerVersion -- ^ 'acccPayload'
+    -> Text -- ^ 'acccAccountId'
+    -> AccountsContainersVersionsUpdate
+accountsContainersVersionsUpdate pAcccContainerId_ pAcccContainerVersionId_ pAcccPayload_ pAcccAccountId_ =
+    AccountsContainersVersionsUpdate
+    { _acccContainerId = pAcccContainerId_
+    , _acccFingerprint = Nothing
+    , _acccContainerVersionId = pAcccContainerVersionId_
+    , _acccPayload = pAcccPayload_
+    , _acccAccountId = pAcccAccountId_
     }
 
 -- | The GTM Container ID.
-acvucContainerId :: Lens' AccountsContainersVersionsUpdate' Text
-acvucContainerId
-  = lens _acvucContainerId
-      (\ s a -> s{_acvucContainerId = a})
+acccContainerId :: Lens' AccountsContainersVersionsUpdate Text
+acccContainerId
+  = lens _acccContainerId
+      (\ s a -> s{_acccContainerId = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- container version in storage.
-acvucFingerprint :: Lens' AccountsContainersVersionsUpdate' (Maybe Text)
-acvucFingerprint
-  = lens _acvucFingerprint
-      (\ s a -> s{_acvucFingerprint = a})
+acccFingerprint :: Lens' AccountsContainersVersionsUpdate (Maybe Text)
+acccFingerprint
+  = lens _acccFingerprint
+      (\ s a -> s{_acccFingerprint = a})
 
 -- | The GTM Container Version ID.
-acvucContainerVersionId :: Lens' AccountsContainersVersionsUpdate' Text
-acvucContainerVersionId
-  = lens _acvucContainerVersionId
-      (\ s a -> s{_acvucContainerVersionId = a})
+acccContainerVersionId :: Lens' AccountsContainersVersionsUpdate Text
+acccContainerVersionId
+  = lens _acccContainerVersionId
+      (\ s a -> s{_acccContainerVersionId = a})
 
 -- | Multipart request metadata.
-acvucPayload :: Lens' AccountsContainersVersionsUpdate' ContainerVersion
-acvucPayload
-  = lens _acvucPayload (\ s a -> s{_acvucPayload = a})
+acccPayload :: Lens' AccountsContainersVersionsUpdate ContainerVersion
+acccPayload
+  = lens _acccPayload (\ s a -> s{_acccPayload = a})
 
 -- | The GTM Account ID.
-acvucAccountId :: Lens' AccountsContainersVersionsUpdate' Text
-acvucAccountId
-  = lens _acvucAccountId
-      (\ s a -> s{_acvucAccountId = a})
+acccAccountId :: Lens' AccountsContainersVersionsUpdate Text
+acccAccountId
+  = lens _acccAccountId
+      (\ s a -> s{_acccAccountId = a})
 
 instance GoogleRequest
-         AccountsContainersVersionsUpdate' where
-        type Rs AccountsContainersVersionsUpdate' =
+         AccountsContainersVersionsUpdate where
+        type Rs AccountsContainersVersionsUpdate =
              ContainerVersion
-        requestClient AccountsContainersVersionsUpdate'{..}
-          = go _acvucAccountId _acvucContainerId
-              _acvucContainerVersionId
-              _acvucFingerprint
+        requestClient AccountsContainersVersionsUpdate{..}
+          = go _acccAccountId _acccContainerId
+              _acccContainerVersionId
+              _acccFingerprint
               (Just AltJSON)
-              _acvucPayload
+              _acccPayload
               tagManagerService
           where go
                   = buildClient

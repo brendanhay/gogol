@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Groups.Aliases.List
       GroupsAliasesListResource
 
     -- * Creating a Request
-    , groupsAliasesList'
-    , GroupsAliasesList'
+    , groupsAliasesList
+    , GroupsAliasesList
 
     -- * Request Lenses
     , galGroupKey
@@ -40,7 +40,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.groups.aliases.list@ method which the
--- 'GroupsAliasesList'' request conforms to.
+-- 'GroupsAliasesList' request conforms to.
 type GroupsAliasesListResource =
      "groups" :>
        Capture "groupKey" Text :>
@@ -49,32 +49,32 @@ type GroupsAliasesListResource =
 
 -- | List all aliases for a group
 --
--- /See:/ 'groupsAliasesList'' smart constructor.
-newtype GroupsAliasesList' = GroupsAliasesList'
+-- /See:/ 'groupsAliasesList' smart constructor.
+newtype GroupsAliasesList = GroupsAliasesList
     { _galGroupKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GroupsAliasesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'GroupsAliasesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'galGroupKey'
-groupsAliasesList'
+groupsAliasesList
     :: Text -- ^ 'galGroupKey'
-    -> GroupsAliasesList'
-groupsAliasesList' pGalGroupKey_ =
-    GroupsAliasesList'
+    -> GroupsAliasesList
+groupsAliasesList pGalGroupKey_ =
+    GroupsAliasesList
     { _galGroupKey = pGalGroupKey_
     }
 
 -- | Email or immutable Id of the group
-galGroupKey :: Lens' GroupsAliasesList' Text
+galGroupKey :: Lens' GroupsAliasesList Text
 galGroupKey
   = lens _galGroupKey (\ s a -> s{_galGroupKey = a})
 
-instance GoogleRequest GroupsAliasesList' where
-        type Rs GroupsAliasesList' = Aliases
-        requestClient GroupsAliasesList'{..}
+instance GoogleRequest GroupsAliasesList where
+        type Rs GroupsAliasesList = Aliases
+        requestClient GroupsAliasesList{..}
           = go _galGroupKey (Just AltJSON) directoryService
           where go
                   = buildClient

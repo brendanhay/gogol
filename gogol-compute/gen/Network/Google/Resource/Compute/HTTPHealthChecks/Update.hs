@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.Update
       HTTPHealthChecksUpdateResource
 
     -- * Creating a Request
-    , hTTPHealthChecksUpdate'
-    , HTTPHealthChecksUpdate'
+    , hTTPHealthChecksUpdate
+    , HTTPHealthChecksUpdate
 
     -- * Request Lenses
     , httphcuProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.httpHealthChecks.update@ method which the
--- 'HTTPHealthChecksUpdate'' request conforms to.
+-- 'HTTPHealthChecksUpdate' request conforms to.
 type HTTPHealthChecksUpdateResource =
      Capture "project" Text :>
        "global" :>
@@ -56,14 +56,14 @@ type HTTPHealthChecksUpdateResource =
 -- | Updates a HttpHealthCheck resource in the specified project using the
 -- data included in the request.
 --
--- /See:/ 'hTTPHealthChecksUpdate'' smart constructor.
-data HTTPHealthChecksUpdate' = HTTPHealthChecksUpdate'
+-- /See:/ 'hTTPHealthChecksUpdate' smart constructor.
+data HTTPHealthChecksUpdate = HTTPHealthChecksUpdate
     { _httphcuProject         :: !Text
     , _httphcuPayload         :: !HTTPHealthCheck
     , _httphcuHTTPHealthCheck :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'HTTPHealthChecksUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'HTTPHealthChecksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,39 +72,39 @@ data HTTPHealthChecksUpdate' = HTTPHealthChecksUpdate'
 -- * 'httphcuPayload'
 --
 -- * 'httphcuHTTPHealthCheck'
-hTTPHealthChecksUpdate'
+hTTPHealthChecksUpdate
     :: Text -- ^ 'httphcuProject'
     -> HTTPHealthCheck -- ^ 'httphcuPayload'
     -> Text -- ^ 'httphcuHTTPHealthCheck'
-    -> HTTPHealthChecksUpdate'
-hTTPHealthChecksUpdate' pHttphcuProject_ pHttphcuPayload_ pHttphcuHTTPHealthCheck_ =
-    HTTPHealthChecksUpdate'
+    -> HTTPHealthChecksUpdate
+hTTPHealthChecksUpdate pHttphcuProject_ pHttphcuPayload_ pHttphcuHTTPHealthCheck_ =
+    HTTPHealthChecksUpdate
     { _httphcuProject = pHttphcuProject_
     , _httphcuPayload = pHttphcuPayload_
     , _httphcuHTTPHealthCheck = pHttphcuHTTPHealthCheck_
     }
 
 -- | Name of the project scoping this request.
-httphcuProject :: Lens' HTTPHealthChecksUpdate' Text
+httphcuProject :: Lens' HTTPHealthChecksUpdate Text
 httphcuProject
   = lens _httphcuProject
       (\ s a -> s{_httphcuProject = a})
 
 -- | Multipart request metadata.
-httphcuPayload :: Lens' HTTPHealthChecksUpdate' HTTPHealthCheck
+httphcuPayload :: Lens' HTTPHealthChecksUpdate HTTPHealthCheck
 httphcuPayload
   = lens _httphcuPayload
       (\ s a -> s{_httphcuPayload = a})
 
 -- | Name of the HttpHealthCheck resource to update.
-httphcuHTTPHealthCheck :: Lens' HTTPHealthChecksUpdate' Text
+httphcuHTTPHealthCheck :: Lens' HTTPHealthChecksUpdate Text
 httphcuHTTPHealthCheck
   = lens _httphcuHTTPHealthCheck
       (\ s a -> s{_httphcuHTTPHealthCheck = a})
 
-instance GoogleRequest HTTPHealthChecksUpdate' where
-        type Rs HTTPHealthChecksUpdate' = Operation
-        requestClient HTTPHealthChecksUpdate'{..}
+instance GoogleRequest HTTPHealthChecksUpdate where
+        type Rs HTTPHealthChecksUpdate = Operation
+        requestClient HTTPHealthChecksUpdate{..}
           = go _httphcuProject _httphcuHTTPHealthCheck
               (Just AltJSON)
               _httphcuPayload

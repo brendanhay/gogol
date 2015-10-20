@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Schemas.List
       SchemasListResource
 
     -- * Creating a Request
-    , schemasList'
-    , SchemasList'
+    , schemasList
+    , SchemasList
 
     -- * Request Lenses
     , slCustomerId
@@ -40,7 +40,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.schemas.list@ method which the
--- 'SchemasList'' request conforms to.
+-- 'SchemasList' request conforms to.
 type SchemasListResource =
      "customer" :>
        Capture "customerId" Text :>
@@ -49,32 +49,32 @@ type SchemasListResource =
 
 -- | Retrieve all schemas for a customer
 --
--- /See:/ 'schemasList'' smart constructor.
-newtype SchemasList' = SchemasList'
+-- /See:/ 'schemasList' smart constructor.
+newtype SchemasList = SchemasList
     { _slCustomerId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SchemasList'' with the minimum fields required to make a request.
+-- | Creates a value of 'SchemasList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'slCustomerId'
-schemasList'
+schemasList
     :: Text -- ^ 'slCustomerId'
-    -> SchemasList'
-schemasList' pSlCustomerId_ =
-    SchemasList'
+    -> SchemasList
+schemasList pSlCustomerId_ =
+    SchemasList
     { _slCustomerId = pSlCustomerId_
     }
 
 -- | Immutable id of the Google Apps account
-slCustomerId :: Lens' SchemasList' Text
+slCustomerId :: Lens' SchemasList Text
 slCustomerId
   = lens _slCustomerId (\ s a -> s{_slCustomerId = a})
 
-instance GoogleRequest SchemasList' where
-        type Rs SchemasList' = Schemas
-        requestClient SchemasList'{..}
+instance GoogleRequest SchemasList where
+        type Rs SchemasList = Schemas
+        requestClient SchemasList{..}
           = go _slCustomerId (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy SchemasListResource)

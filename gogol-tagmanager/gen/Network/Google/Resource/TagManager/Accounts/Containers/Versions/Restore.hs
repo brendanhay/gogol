@@ -32,8 +32,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Restore
       AccountsContainersVersionsRestoreResource
 
     -- * Creating a Request
-    , accountsContainersVersionsRestore'
-    , AccountsContainersVersionsRestore'
+    , accountsContainersVersionsRestore
+    , AccountsContainersVersionsRestore
 
     -- * Request Lenses
     , acvrContainerId
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.versions.restore@ method which the
--- 'AccountsContainersVersionsRestore'' request conforms to.
+-- 'AccountsContainersVersionsRestore' request conforms to.
 type AccountsContainersVersionsRestoreResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -62,14 +62,14 @@ type AccountsContainersVersionsRestoreResource =
 -- operation will not have any effect on the version that is being served
 -- (i.e. the published version).
 --
--- /See:/ 'accountsContainersVersionsRestore'' smart constructor.
-data AccountsContainersVersionsRestore' = AccountsContainersVersionsRestore'
+-- /See:/ 'accountsContainersVersionsRestore' smart constructor.
+data AccountsContainersVersionsRestore = AccountsContainersVersionsRestore
     { _acvrContainerId        :: !Text
     , _acvrContainerVersionId :: !Text
     , _acvrAccountId          :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersVersionsRestore'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersVersionsRestore' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -78,41 +78,41 @@ data AccountsContainersVersionsRestore' = AccountsContainersVersionsRestore'
 -- * 'acvrContainerVersionId'
 --
 -- * 'acvrAccountId'
-accountsContainersVersionsRestore'
+accountsContainersVersionsRestore
     :: Text -- ^ 'acvrContainerId'
     -> Text -- ^ 'acvrContainerVersionId'
     -> Text -- ^ 'acvrAccountId'
-    -> AccountsContainersVersionsRestore'
-accountsContainersVersionsRestore' pAcvrContainerId_ pAcvrContainerVersionId_ pAcvrAccountId_ =
-    AccountsContainersVersionsRestore'
+    -> AccountsContainersVersionsRestore
+accountsContainersVersionsRestore pAcvrContainerId_ pAcvrContainerVersionId_ pAcvrAccountId_ =
+    AccountsContainersVersionsRestore
     { _acvrContainerId = pAcvrContainerId_
     , _acvrContainerVersionId = pAcvrContainerVersionId_
     , _acvrAccountId = pAcvrAccountId_
     }
 
 -- | The GTM Container ID.
-acvrContainerId :: Lens' AccountsContainersVersionsRestore' Text
+acvrContainerId :: Lens' AccountsContainersVersionsRestore Text
 acvrContainerId
   = lens _acvrContainerId
       (\ s a -> s{_acvrContainerId = a})
 
 -- | The GTM Container Version ID.
-acvrContainerVersionId :: Lens' AccountsContainersVersionsRestore' Text
+acvrContainerVersionId :: Lens' AccountsContainersVersionsRestore Text
 acvrContainerVersionId
   = lens _acvrContainerVersionId
       (\ s a -> s{_acvrContainerVersionId = a})
 
 -- | The GTM Account ID.
-acvrAccountId :: Lens' AccountsContainersVersionsRestore' Text
+acvrAccountId :: Lens' AccountsContainersVersionsRestore Text
 acvrAccountId
   = lens _acvrAccountId
       (\ s a -> s{_acvrAccountId = a})
 
 instance GoogleRequest
-         AccountsContainersVersionsRestore' where
-        type Rs AccountsContainersVersionsRestore' =
+         AccountsContainersVersionsRestore where
+        type Rs AccountsContainersVersionsRestore =
              ContainerVersion
-        requestClient AccountsContainersVersionsRestore'{..}
+        requestClient AccountsContainersVersionsRestore{..}
           = go _acvrAccountId _acvrContainerId
               _acvrContainerVersionId
               (Just AltJSON)

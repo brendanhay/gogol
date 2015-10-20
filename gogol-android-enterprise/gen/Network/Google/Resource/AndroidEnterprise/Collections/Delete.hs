@@ -29,19 +29,19 @@ module Network.Google.Resource.AndroidEnterprise.Collections.Delete
       CollectionsDeleteResource
 
     -- * Creating a Request
-    , collectionsDelete'
-    , CollectionsDelete'
+    , collectionsDelete
+    , CollectionsDelete
 
     -- * Request Lenses
-    , cdEnterpriseId
-    , cdCollectionId
+    , cddEnterpriseId
+    , cddCollectionId
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.collections.delete@ method which the
--- 'CollectionsDelete'' request conforms to.
+-- 'CollectionsDelete' request conforms to.
 type CollectionsDeleteResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -51,45 +51,45 @@ type CollectionsDeleteResource =
 
 -- | Deletes a collection.
 --
--- /See:/ 'collectionsDelete'' smart constructor.
-data CollectionsDelete' = CollectionsDelete'
-    { _cdEnterpriseId :: !Text
-    , _cdCollectionId :: !Text
+-- /See:/ 'collectionsDelete' smart constructor.
+data CollectionsDelete = CollectionsDelete
+    { _cddEnterpriseId :: !Text
+    , _cddCollectionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CollectionsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'CollectionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdEnterpriseId'
+-- * 'cddEnterpriseId'
 --
--- * 'cdCollectionId'
-collectionsDelete'
-    :: Text -- ^ 'cdEnterpriseId'
-    -> Text -- ^ 'cdCollectionId'
-    -> CollectionsDelete'
-collectionsDelete' pCdEnterpriseId_ pCdCollectionId_ =
-    CollectionsDelete'
-    { _cdEnterpriseId = pCdEnterpriseId_
-    , _cdCollectionId = pCdCollectionId_
+-- * 'cddCollectionId'
+collectionsDelete
+    :: Text -- ^ 'cddEnterpriseId'
+    -> Text -- ^ 'cddCollectionId'
+    -> CollectionsDelete
+collectionsDelete pCddEnterpriseId_ pCddCollectionId_ =
+    CollectionsDelete
+    { _cddEnterpriseId = pCddEnterpriseId_
+    , _cddCollectionId = pCddCollectionId_
     }
 
 -- | The ID of the enterprise.
-cdEnterpriseId :: Lens' CollectionsDelete' Text
-cdEnterpriseId
-  = lens _cdEnterpriseId
-      (\ s a -> s{_cdEnterpriseId = a})
+cddEnterpriseId :: Lens' CollectionsDelete Text
+cddEnterpriseId
+  = lens _cddEnterpriseId
+      (\ s a -> s{_cddEnterpriseId = a})
 
 -- | The ID of the collection.
-cdCollectionId :: Lens' CollectionsDelete' Text
-cdCollectionId
-  = lens _cdCollectionId
-      (\ s a -> s{_cdCollectionId = a})
+cddCollectionId :: Lens' CollectionsDelete Text
+cddCollectionId
+  = lens _cddCollectionId
+      (\ s a -> s{_cddCollectionId = a})
 
-instance GoogleRequest CollectionsDelete' where
-        type Rs CollectionsDelete' = ()
-        requestClient CollectionsDelete'{..}
-          = go _cdEnterpriseId _cdCollectionId (Just AltJSON)
+instance GoogleRequest CollectionsDelete where
+        type Rs CollectionsDelete = ()
+        requestClient CollectionsDelete{..}
+          = go _cddEnterpriseId _cddCollectionId (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient

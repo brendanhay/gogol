@@ -30,8 +30,8 @@ module Network.Google.Resource.Analytics.Management.AccountSummaries.List
       ManagementAccountSummariesListResource
 
     -- * Creating a Request
-    , managementAccountSummariesList'
-    , ManagementAccountSummariesList'
+    , managementAccountSummariesList
+    , ManagementAccountSummariesList
 
     -- * Request Lenses
     , maslStartIndex
@@ -42,7 +42,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.accountSummaries.list@ method which the
--- 'ManagementAccountSummariesList'' request conforms to.
+-- 'ManagementAccountSummariesList' request conforms to.
 type ManagementAccountSummariesListResource =
      "management" :>
        "accountSummaries" :>
@@ -54,46 +54,46 @@ type ManagementAccountSummariesListResource =
 -- | Lists account summaries (lightweight tree comprised of
 -- accounts\/properties\/profiles) to which the user has access.
 --
--- /See:/ 'managementAccountSummariesList'' smart constructor.
-data ManagementAccountSummariesList' = ManagementAccountSummariesList'
+-- /See:/ 'managementAccountSummariesList' smart constructor.
+data ManagementAccountSummariesList = ManagementAccountSummariesList
     { _maslStartIndex :: !(Maybe Int32)
     , _maslMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementAccountSummariesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementAccountSummariesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'maslStartIndex'
 --
 -- * 'maslMaxResults'
-managementAccountSummariesList'
-    :: ManagementAccountSummariesList'
-managementAccountSummariesList' =
-    ManagementAccountSummariesList'
+managementAccountSummariesList
+    :: ManagementAccountSummariesList
+managementAccountSummariesList =
+    ManagementAccountSummariesList
     { _maslStartIndex = Nothing
     , _maslMaxResults = Nothing
     }
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
-maslStartIndex :: Lens' ManagementAccountSummariesList' (Maybe Int32)
+maslStartIndex :: Lens' ManagementAccountSummariesList (Maybe Int32)
 maslStartIndex
   = lens _maslStartIndex
       (\ s a -> s{_maslStartIndex = a})
 
 -- | The maximum number of account summaries to include in this response,
 -- where the largest acceptable value is 1000.
-maslMaxResults :: Lens' ManagementAccountSummariesList' (Maybe Int32)
+maslMaxResults :: Lens' ManagementAccountSummariesList (Maybe Int32)
 maslMaxResults
   = lens _maslMaxResults
       (\ s a -> s{_maslMaxResults = a})
 
-instance GoogleRequest
-         ManagementAccountSummariesList' where
-        type Rs ManagementAccountSummariesList' =
+instance GoogleRequest ManagementAccountSummariesList
+         where
+        type Rs ManagementAccountSummariesList =
              AccountSummaries
-        requestClient ManagementAccountSummariesList'{..}
+        requestClient ManagementAccountSummariesList{..}
           = go _maslStartIndex _maslMaxResults (Just AltJSON)
               analyticsService
           where go

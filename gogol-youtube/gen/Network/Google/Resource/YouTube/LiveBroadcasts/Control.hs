@@ -30,8 +30,8 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Control
       LiveBroadcastsControlResource
 
     -- * Creating a Request
-    , liveBroadcastsControl'
-    , LiveBroadcastsControl'
+    , liveBroadcastsControl
+    , LiveBroadcastsControl
 
     -- * Request Lenses
     , lbcPart
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveBroadcasts.control@ method which the
--- 'LiveBroadcastsControl'' request conforms to.
+-- 'LiveBroadcastsControl' request conforms to.
 type LiveBroadcastsControlResource =
      "liveBroadcasts" :>
        "control" :>
@@ -64,8 +64,8 @@ type LiveBroadcastsControlResource =
 -- | Controls the settings for a slate that can be displayed in the broadcast
 -- stream.
 --
--- /See:/ 'liveBroadcastsControl'' smart constructor.
-data LiveBroadcastsControl' = LiveBroadcastsControl'
+-- /See:/ 'liveBroadcastsControl' smart constructor.
+data LiveBroadcastsControl = LiveBroadcastsControl
     { _lbcPart                          :: !Text
     , _lbcOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbcOnBehalfOfContentOwnerChannel :: !(Maybe Text)
@@ -75,7 +75,7 @@ data LiveBroadcastsControl' = LiveBroadcastsControl'
     , _lbcOffsetTimeMs                  :: !(Maybe Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LiveBroadcastsControl'' with the minimum fields required to make a request.
+-- | Creates a value of 'LiveBroadcastsControl' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -92,12 +92,12 @@ data LiveBroadcastsControl' = LiveBroadcastsControl'
 -- * 'lbcWalltime'
 --
 -- * 'lbcOffsetTimeMs'
-liveBroadcastsControl'
+liveBroadcastsControl
     :: Text -- ^ 'lbcPart'
     -> Text -- ^ 'lbcId'
-    -> LiveBroadcastsControl'
-liveBroadcastsControl' pLbcPart_ pLbcId_ =
-    LiveBroadcastsControl'
+    -> LiveBroadcastsControl
+liveBroadcastsControl pLbcPart_ pLbcId_ =
+    LiveBroadcastsControl
     { _lbcPart = pLbcPart_
     , _lbcOnBehalfOfContentOwner = Nothing
     , _lbcOnBehalfOfContentOwnerChannel = Nothing
@@ -111,7 +111,7 @@ liveBroadcastsControl' pLbcPart_ pLbcId_ =
 -- liveBroadcast resource properties that the API response will include.
 -- The part names that you can include in the parameter value are id,
 -- snippet, contentDetails, and status.
-lbcPart :: Lens' LiveBroadcastsControl' Text
+lbcPart :: Lens' LiveBroadcastsControl Text
 lbcPart = lens _lbcPart (\ s a -> s{_lbcPart = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
@@ -124,7 +124,7 @@ lbcPart = lens _lbcPart (\ s a -> s{_lbcPart = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-lbcOnBehalfOfContentOwner :: Lens' LiveBroadcastsControl' (Maybe Text)
+lbcOnBehalfOfContentOwner :: Lens' LiveBroadcastsControl (Maybe Text)
 lbcOnBehalfOfContentOwner
   = lens _lbcOnBehalfOfContentOwner
       (\ s a -> s{_lbcOnBehalfOfContentOwner = a})
@@ -145,19 +145,19 @@ lbcOnBehalfOfContentOwner
 -- actions on behalf of the channel specified in the parameter value,
 -- without having to provide authentication credentials for each separate
 -- channel.
-lbcOnBehalfOfContentOwnerChannel :: Lens' LiveBroadcastsControl' (Maybe Text)
+lbcOnBehalfOfContentOwnerChannel :: Lens' LiveBroadcastsControl (Maybe Text)
 lbcOnBehalfOfContentOwnerChannel
   = lens _lbcOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lbcOnBehalfOfContentOwnerChannel = a})
 
 -- | The id parameter specifies the YouTube live broadcast ID that uniquely
 -- identifies the broadcast in which the slate is being updated.
-lbcId :: Lens' LiveBroadcastsControl' Text
+lbcId :: Lens' LiveBroadcastsControl Text
 lbcId = lens _lbcId (\ s a -> s{_lbcId = a})
 
 -- | The displaySlate parameter specifies whether the slate is being enabled
 -- or disabled.
-lbcDisplaySlate :: Lens' LiveBroadcastsControl' (Maybe Bool)
+lbcDisplaySlate :: Lens' LiveBroadcastsControl (Maybe Bool)
 lbcDisplaySlate
   = lens _lbcDisplaySlate
       (\ s a -> s{_lbcDisplaySlate = a})
@@ -165,7 +165,7 @@ lbcDisplaySlate
 -- | The walltime parameter specifies the wall clock time at which the
 -- specified slate change will occur. The value is specified in ISO 8601
 -- (YYYY-MM-DDThh:mm:ss.sssZ) format.
-lbcWalltime :: Lens' LiveBroadcastsControl' (Maybe UTCTime)
+lbcWalltime :: Lens' LiveBroadcastsControl (Maybe UTCTime)
 lbcWalltime
   = lens _lbcWalltime (\ s a -> s{_lbcWalltime = a}) .
       mapping _DateTime
@@ -180,14 +180,14 @@ lbcWalltime
 -- performs the action as soon as possible. See the Getting started guide
 -- for more details. Important: You should only specify a value for this
 -- parameter if your broadcast stream is delayed.
-lbcOffsetTimeMs :: Lens' LiveBroadcastsControl' (Maybe Word64)
+lbcOffsetTimeMs :: Lens' LiveBroadcastsControl (Maybe Word64)
 lbcOffsetTimeMs
   = lens _lbcOffsetTimeMs
       (\ s a -> s{_lbcOffsetTimeMs = a})
 
-instance GoogleRequest LiveBroadcastsControl' where
-        type Rs LiveBroadcastsControl' = LiveBroadcast
-        requestClient LiveBroadcastsControl'{..}
+instance GoogleRequest LiveBroadcastsControl where
+        type Rs LiveBroadcastsControl = LiveBroadcast
+        requestClient LiveBroadcastsControl{..}
           = go (Just _lbcId) (Just _lbcPart)
               _lbcOnBehalfOfContentOwner
               _lbcOnBehalfOfContentOwnerChannel

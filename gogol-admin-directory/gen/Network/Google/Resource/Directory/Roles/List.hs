@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Roles.List
       RolesListResource
 
     -- * Creating a Request
-    , rolesList'
-    , RolesList'
+    , rolesList
+    , RolesList
 
     -- * Request Lenses
     , rlCustomer
@@ -42,7 +42,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.roles.list@ method which the
--- 'RolesList'' request conforms to.
+-- 'RolesList' request conforms to.
 type RolesListResource =
      "customer" :>
        Capture "customer" Text :>
@@ -53,14 +53,14 @@ type RolesListResource =
 
 -- | Retrieves a paginated list of all the roles in a domain.
 --
--- /See:/ 'rolesList'' smart constructor.
-data RolesList' = RolesList'
+-- /See:/ 'rolesList' smart constructor.
+data RolesList = RolesList
     { _rlCustomer   :: !Text
     , _rlPageToken  :: !(Maybe Text)
     , _rlMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RolesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'RolesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,34 +69,34 @@ data RolesList' = RolesList'
 -- * 'rlPageToken'
 --
 -- * 'rlMaxResults'
-rolesList'
+rolesList
     :: Text -- ^ 'rlCustomer'
-    -> RolesList'
-rolesList' pRlCustomer_ =
-    RolesList'
+    -> RolesList
+rolesList pRlCustomer_ =
+    RolesList
     { _rlCustomer = pRlCustomer_
     , _rlPageToken = Nothing
     , _rlMaxResults = Nothing
     }
 
 -- | Immutable id of the Google Apps account.
-rlCustomer :: Lens' RolesList' Text
+rlCustomer :: Lens' RolesList Text
 rlCustomer
   = lens _rlCustomer (\ s a -> s{_rlCustomer = a})
 
 -- | Token to specify the next page in the list.
-rlPageToken :: Lens' RolesList' (Maybe Text)
+rlPageToken :: Lens' RolesList (Maybe Text)
 rlPageToken
   = lens _rlPageToken (\ s a -> s{_rlPageToken = a})
 
 -- | Maximum number of results to return.
-rlMaxResults :: Lens' RolesList' (Maybe Int32)
+rlMaxResults :: Lens' RolesList (Maybe Int32)
 rlMaxResults
   = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
 
-instance GoogleRequest RolesList' where
-        type Rs RolesList' = Roles
-        requestClient RolesList'{..}
+instance GoogleRequest RolesList where
+        type Rs RolesList = Roles
+        requestClient RolesList{..}
           = go _rlCustomer _rlPageToken _rlMaxResults
               (Just AltJSON)
               directoryService

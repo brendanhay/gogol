@@ -29,8 +29,8 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Get
       RollingUpdatesGetResource
 
     -- * Creating a Request
-    , rollingUpdatesGet'
-    , RollingUpdatesGet'
+    , rollingUpdatesGet
+    , RollingUpdatesGet
 
     -- * Request Lenses
     , rugRollingUpdate
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.rollingUpdates.get@ method which the
--- 'RollingUpdatesGet'' request conforms to.
+-- 'RollingUpdatesGet' request conforms to.
 type RollingUpdatesGetResource =
      Capture "project" Text :>
        "zones" :>
@@ -53,14 +53,14 @@ type RollingUpdatesGetResource =
 
 -- | Returns information about an update.
 --
--- /See:/ 'rollingUpdatesGet'' smart constructor.
-data RollingUpdatesGet' = RollingUpdatesGet'
+-- /See:/ 'rollingUpdatesGet' smart constructor.
+data RollingUpdatesGet = RollingUpdatesGet
     { _rugRollingUpdate :: !Text
     , _rugProject       :: !Text
     , _rugZone          :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RollingUpdatesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'RollingUpdatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,36 @@ data RollingUpdatesGet' = RollingUpdatesGet'
 -- * 'rugProject'
 --
 -- * 'rugZone'
-rollingUpdatesGet'
+rollingUpdatesGet
     :: Text -- ^ 'rugRollingUpdate'
     -> Text -- ^ 'rugProject'
     -> Text -- ^ 'rugZone'
-    -> RollingUpdatesGet'
-rollingUpdatesGet' pRugRollingUpdate_ pRugProject_ pRugZone_ =
-    RollingUpdatesGet'
+    -> RollingUpdatesGet
+rollingUpdatesGet pRugRollingUpdate_ pRugProject_ pRugZone_ =
+    RollingUpdatesGet
     { _rugRollingUpdate = pRugRollingUpdate_
     , _rugProject = pRugProject_
     , _rugZone = pRugZone_
     }
 
 -- | The name of the update.
-rugRollingUpdate :: Lens' RollingUpdatesGet' Text
+rugRollingUpdate :: Lens' RollingUpdatesGet Text
 rugRollingUpdate
   = lens _rugRollingUpdate
       (\ s a -> s{_rugRollingUpdate = a})
 
 -- | The Google Developers Console project name.
-rugProject :: Lens' RollingUpdatesGet' Text
+rugProject :: Lens' RollingUpdatesGet Text
 rugProject
   = lens _rugProject (\ s a -> s{_rugProject = a})
 
 -- | The name of the zone in which the update\'s target resides.
-rugZone :: Lens' RollingUpdatesGet' Text
+rugZone :: Lens' RollingUpdatesGet Text
 rugZone = lens _rugZone (\ s a -> s{_rugZone = a})
 
-instance GoogleRequest RollingUpdatesGet' where
-        type Rs RollingUpdatesGet' = RollingUpdate
-        requestClient RollingUpdatesGet'{..}
+instance GoogleRequest RollingUpdatesGet where
+        type Rs RollingUpdatesGet = RollingUpdate
+        requestClient RollingUpdatesGet{..}
           = go _rugProject _rugZone _rugRollingUpdate
               (Just AltJSON)
               replicaPoolUpdaterService

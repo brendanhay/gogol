@@ -30,8 +30,8 @@ module Network.Google.Resource.Mirror.Subscriptions.List
       SubscriptionsListResource
 
     -- * Creating a Request
-    , subscriptionsList'
-    , SubscriptionsList'
+    , subscriptionsList
+    , SubscriptionsList
 
     ) where
 
@@ -39,7 +39,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.subscriptions.list@ method which the
--- 'SubscriptionsList'' request conforms to.
+-- 'SubscriptionsList' request conforms to.
 type SubscriptionsListResource =
      "subscriptions" :>
        QueryParam "alt" AltJSON :>
@@ -48,21 +48,20 @@ type SubscriptionsListResource =
 -- | Retrieves a list of subscriptions for the authenticated user and
 -- service.
 --
--- /See:/ 'subscriptionsList'' smart constructor.
-data SubscriptionsList' =
-    SubscriptionsList'
+-- /See:/ 'subscriptionsList' smart constructor.
+data SubscriptionsList =
+    SubscriptionsList
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubscriptionsList' with the minimum fields required to make a request.
 --
-subscriptionsList'
-    :: SubscriptionsList'
-subscriptionsList' = SubscriptionsList'
+subscriptionsList
+    :: SubscriptionsList
+subscriptionsList = SubscriptionsList
 
-instance GoogleRequest SubscriptionsList' where
-        type Rs SubscriptionsList' =
-             SubscriptionsListResponse
-        requestClient SubscriptionsList'{}
+instance GoogleRequest SubscriptionsList where
+        type Rs SubscriptionsList = SubscriptionsListResponse
+        requestClient SubscriptionsList{}
           = go (Just AltJSON) mirrorService
           where go
                   = buildClient

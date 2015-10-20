@@ -29,8 +29,8 @@ module Network.Google.Resource.Admin.Channels.Stop
       ChannelsStopResource
 
     -- * Creating a Request
-    , channelsStop'
-    , ChannelsStop'
+    , channelsStop
+    , ChannelsStop
 
     -- * Request Lenses
     , csPayload
@@ -40,7 +40,7 @@ import           Network.Google.Prelude
 import           Network.Google.Reports.Types
 
 -- | A resource alias for @admin.channels.stop@ method which the
--- 'ChannelsStop'' request conforms to.
+-- 'ChannelsStop' request conforms to.
 type ChannelsStopResource =
      "admin" :>
        "reports_v1" :>
@@ -51,32 +51,32 @@ type ChannelsStopResource =
 
 -- | Stop watching resources through this channel
 --
--- /See:/ 'channelsStop'' smart constructor.
-newtype ChannelsStop' = ChannelsStop'
+-- /See:/ 'channelsStop' smart constructor.
+newtype ChannelsStop = ChannelsStop
     { _csPayload :: Channel
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChannelsStop'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChannelsStop' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'csPayload'
-channelsStop'
+channelsStop
     :: Channel -- ^ 'csPayload'
-    -> ChannelsStop'
-channelsStop' pCsPayload_ =
-    ChannelsStop'
+    -> ChannelsStop
+channelsStop pCsPayload_ =
+    ChannelsStop
     { _csPayload = pCsPayload_
     }
 
 -- | Multipart request metadata.
-csPayload :: Lens' ChannelsStop' Channel
+csPayload :: Lens' ChannelsStop Channel
 csPayload
   = lens _csPayload (\ s a -> s{_csPayload = a})
 
-instance GoogleRequest ChannelsStop' where
-        type Rs ChannelsStop' = ()
-        requestClient ChannelsStop'{..}
+instance GoogleRequest ChannelsStop where
+        type Rs ChannelsStop = ()
+        requestClient ChannelsStop{..}
           = go (Just AltJSON) _csPayload reportsService
           where go
                   = buildClient (Proxy :: Proxy ChannelsStopResource)

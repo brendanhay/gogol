@@ -29,8 +29,8 @@ module Network.Google.Resource.DataTransfer.Applications.Get
       ApplicationsGetResource
 
     -- * Creating a Request
-    , applicationsGet'
-    , ApplicationsGet'
+    , applicationsGet
+    , ApplicationsGet
 
     -- * Request Lenses
     , agApplicationId
@@ -40,7 +40,7 @@ import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @datatransfer.applications.get@ method which the
--- 'ApplicationsGet'' request conforms to.
+-- 'ApplicationsGet' request conforms to.
 type ApplicationsGetResource =
      "applications" :>
        Capture "applicationId" Int64 :>
@@ -48,33 +48,33 @@ type ApplicationsGetResource =
 
 -- | Retrieves information about an application for the given application ID.
 --
--- /See:/ 'applicationsGet'' smart constructor.
-newtype ApplicationsGet' = ApplicationsGet'
+-- /See:/ 'applicationsGet' smart constructor.
+newtype ApplicationsGet = ApplicationsGet
     { _agApplicationId :: Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ApplicationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ApplicationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'agApplicationId'
-applicationsGet'
+applicationsGet
     :: Int64 -- ^ 'agApplicationId'
-    -> ApplicationsGet'
-applicationsGet' pAgApplicationId_ =
-    ApplicationsGet'
+    -> ApplicationsGet
+applicationsGet pAgApplicationId_ =
+    ApplicationsGet
     { _agApplicationId = pAgApplicationId_
     }
 
 -- | ID of the application resource to be retrieved.
-agApplicationId :: Lens' ApplicationsGet' Int64
+agApplicationId :: Lens' ApplicationsGet Int64
 agApplicationId
   = lens _agApplicationId
       (\ s a -> s{_agApplicationId = a})
 
-instance GoogleRequest ApplicationsGet' where
-        type Rs ApplicationsGet' = Application
-        requestClient ApplicationsGet'{..}
+instance GoogleRequest ApplicationsGet where
+        type Rs ApplicationsGet = Application
+        requestClient ApplicationsGet{..}
           = go _agApplicationId (Just AltJSON)
               dataTransferService
           where go

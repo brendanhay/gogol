@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.ACL.Update
       ACLUpdateResource
 
     -- * Creating a Request
-    , aclUpdate'
-    , ACLUpdate'
+    , aclUpdate
+    , ACLUpdate
 
     -- * Request Lenses
     , auCalendarId
@@ -42,7 +42,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.acl.update@ method which the
--- 'ACLUpdate'' request conforms to.
+-- 'ACLUpdate' request conforms to.
 type ACLUpdateResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -53,14 +53,14 @@ type ACLUpdateResource =
 
 -- | Updates an access control rule.
 --
--- /See:/ 'aclUpdate'' smart constructor.
-data ACLUpdate' = ACLUpdate'
+-- /See:/ 'aclUpdate' smart constructor.
+data ACLUpdate = ACLUpdate
     { _auCalendarId :: !Text
     , _auRuleId     :: !Text
     , _auPayload    :: !ACLRule
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ACLUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ACLUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,13 +69,13 @@ data ACLUpdate' = ACLUpdate'
 -- * 'auRuleId'
 --
 -- * 'auPayload'
-aclUpdate'
+aclUpdate
     :: Text -- ^ 'auCalendarId'
     -> Text -- ^ 'auRuleId'
     -> ACLRule -- ^ 'auPayload'
-    -> ACLUpdate'
-aclUpdate' pAuCalendarId_ pAuRuleId_ pAuPayload_ =
-    ACLUpdate'
+    -> ACLUpdate
+aclUpdate pAuCalendarId_ pAuRuleId_ pAuPayload_ =
+    ACLUpdate
     { _auCalendarId = pAuCalendarId_
     , _auRuleId = pAuRuleId_
     , _auPayload = pAuPayload_
@@ -84,22 +84,22 @@ aclUpdate' pAuCalendarId_ pAuRuleId_ pAuPayload_ =
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-auCalendarId :: Lens' ACLUpdate' Text
+auCalendarId :: Lens' ACLUpdate Text
 auCalendarId
   = lens _auCalendarId (\ s a -> s{_auCalendarId = a})
 
 -- | ACL rule identifier.
-auRuleId :: Lens' ACLUpdate' Text
+auRuleId :: Lens' ACLUpdate Text
 auRuleId = lens _auRuleId (\ s a -> s{_auRuleId = a})
 
 -- | Multipart request metadata.
-auPayload :: Lens' ACLUpdate' ACLRule
+auPayload :: Lens' ACLUpdate ACLRule
 auPayload
   = lens _auPayload (\ s a -> s{_auPayload = a})
 
-instance GoogleRequest ACLUpdate' where
-        type Rs ACLUpdate' = ACLRule
-        requestClient ACLUpdate'{..}
+instance GoogleRequest ACLUpdate where
+        type Rs ACLUpdate = ACLRule
+        requestClient ACLUpdate{..}
           = go _auCalendarId _auRuleId (Just AltJSON)
               _auPayload
               appsCalendarService

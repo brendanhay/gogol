@@ -34,8 +34,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Delete
       ProjectsSubscriptionsDeleteResource
 
     -- * Creating a Request
-    , projectsSubscriptionsDelete'
-    , ProjectsSubscriptionsDelete'
+    , projectsSubscriptionsDelete
+    , ProjectsSubscriptionsDelete
 
     -- * Request Lenses
     , psdXgafv
@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.delete@ method which the
--- 'ProjectsSubscriptionsDelete'' request conforms to.
+-- 'ProjectsSubscriptionsDelete' request conforms to.
 type ProjectsSubscriptionsDeleteResource =
      "v1" :>
        Capture "subscription" Text :>
@@ -72,8 +72,8 @@ type ProjectsSubscriptionsDeleteResource =
 -- with the old subscription, or its topic unless the same topic is
 -- specified.
 --
--- /See:/ 'projectsSubscriptionsDelete'' smart constructor.
-data ProjectsSubscriptionsDelete' = ProjectsSubscriptionsDelete'
+-- /See:/ 'projectsSubscriptionsDelete' smart constructor.
+data ProjectsSubscriptionsDelete = ProjectsSubscriptionsDelete
     { _psdXgafv          :: !(Maybe Text)
     , _psdUploadProtocol :: !(Maybe Text)
     , _psdPp             :: !Bool
@@ -84,7 +84,7 @@ data ProjectsSubscriptionsDelete' = ProjectsSubscriptionsDelete'
     , _psdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsSubscriptionsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsSubscriptionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -103,11 +103,11 @@ data ProjectsSubscriptionsDelete' = ProjectsSubscriptionsDelete'
 -- * 'psdSubscription'
 --
 -- * 'psdCallback'
-projectsSubscriptionsDelete'
+projectsSubscriptionsDelete
     :: Text -- ^ 'psdSubscription'
-    -> ProjectsSubscriptionsDelete'
-projectsSubscriptionsDelete' pPsdSubscription_ =
-    ProjectsSubscriptionsDelete'
+    -> ProjectsSubscriptionsDelete
+projectsSubscriptionsDelete pPsdSubscription_ =
+    ProjectsSubscriptionsDelete
     { _psdXgafv = Nothing
     , _psdUploadProtocol = Nothing
     , _psdPp = True
@@ -119,52 +119,52 @@ projectsSubscriptionsDelete' pPsdSubscription_ =
     }
 
 -- | V1 error format.
-psdXgafv :: Lens' ProjectsSubscriptionsDelete' (Maybe Text)
+psdXgafv :: Lens' ProjectsSubscriptionsDelete (Maybe Text)
 psdXgafv = lens _psdXgafv (\ s a -> s{_psdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-psdUploadProtocol :: Lens' ProjectsSubscriptionsDelete' (Maybe Text)
+psdUploadProtocol :: Lens' ProjectsSubscriptionsDelete (Maybe Text)
 psdUploadProtocol
   = lens _psdUploadProtocol
       (\ s a -> s{_psdUploadProtocol = a})
 
 -- | Pretty-print response.
-psdPp :: Lens' ProjectsSubscriptionsDelete' Bool
+psdPp :: Lens' ProjectsSubscriptionsDelete Bool
 psdPp = lens _psdPp (\ s a -> s{_psdPp = a})
 
 -- | OAuth access token.
-psdAccessToken :: Lens' ProjectsSubscriptionsDelete' (Maybe Text)
+psdAccessToken :: Lens' ProjectsSubscriptionsDelete (Maybe Text)
 psdAccessToken
   = lens _psdAccessToken
       (\ s a -> s{_psdAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-psdUploadType :: Lens' ProjectsSubscriptionsDelete' (Maybe Text)
+psdUploadType :: Lens' ProjectsSubscriptionsDelete (Maybe Text)
 psdUploadType
   = lens _psdUploadType
       (\ s a -> s{_psdUploadType = a})
 
 -- | OAuth bearer token.
-psdBearerToken :: Lens' ProjectsSubscriptionsDelete' (Maybe Text)
+psdBearerToken :: Lens' ProjectsSubscriptionsDelete (Maybe Text)
 psdBearerToken
   = lens _psdBearerToken
       (\ s a -> s{_psdBearerToken = a})
 
 -- | The subscription to delete.
-psdSubscription :: Lens' ProjectsSubscriptionsDelete' Text
+psdSubscription :: Lens' ProjectsSubscriptionsDelete Text
 psdSubscription
   = lens _psdSubscription
       (\ s a -> s{_psdSubscription = a})
 
 -- | JSONP
-psdCallback :: Lens' ProjectsSubscriptionsDelete' (Maybe Text)
+psdCallback :: Lens' ProjectsSubscriptionsDelete (Maybe Text)
 psdCallback
   = lens _psdCallback (\ s a -> s{_psdCallback = a})
 
-instance GoogleRequest ProjectsSubscriptionsDelete'
+instance GoogleRequest ProjectsSubscriptionsDelete
          where
-        type Rs ProjectsSubscriptionsDelete' = Empty
-        requestClient ProjectsSubscriptionsDelete'{..}
+        type Rs ProjectsSubscriptionsDelete = Empty
+        requestClient ProjectsSubscriptionsDelete{..}
           = go _psdSubscription _psdXgafv _psdUploadProtocol
               (Just _psdPp)
               _psdAccessToken

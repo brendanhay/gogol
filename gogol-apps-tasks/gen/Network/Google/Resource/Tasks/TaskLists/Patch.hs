@@ -30,8 +30,8 @@ module Network.Google.Resource.Tasks.TaskLists.Patch
       TaskListsPatchResource
 
     -- * Creating a Request
-    , taskListsPatch'
-    , TaskListsPatch'
+    , taskListsPatch
+    , TaskListsPatch
 
     -- * Request Lenses
     , tlpPayload
@@ -42,7 +42,7 @@ import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasklists.patch@ method which the
--- 'TaskListsPatch'' request conforms to.
+-- 'TaskListsPatch' request conforms to.
 type TaskListsPatchResource =
      "users" :>
        "@me" :>
@@ -54,42 +54,42 @@ type TaskListsPatchResource =
 -- | Updates the authenticated user\'s specified task list. This method
 -- supports patch semantics.
 --
--- /See:/ 'taskListsPatch'' smart constructor.
-data TaskListsPatch' = TaskListsPatch'
+-- /See:/ 'taskListsPatch' smart constructor.
+data TaskListsPatch = TaskListsPatch
     { _tlpPayload  :: !TaskList
     , _tlpTaskList :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TaskListsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'TaskListsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tlpPayload'
 --
 -- * 'tlpTaskList'
-taskListsPatch'
+taskListsPatch
     :: TaskList -- ^ 'tlpPayload'
     -> Text -- ^ 'tlpTaskList'
-    -> TaskListsPatch'
-taskListsPatch' pTlpPayload_ pTlpTaskList_ =
-    TaskListsPatch'
+    -> TaskListsPatch
+taskListsPatch pTlpPayload_ pTlpTaskList_ =
+    TaskListsPatch
     { _tlpPayload = pTlpPayload_
     , _tlpTaskList = pTlpTaskList_
     }
 
 -- | Multipart request metadata.
-tlpPayload :: Lens' TaskListsPatch' TaskList
+tlpPayload :: Lens' TaskListsPatch TaskList
 tlpPayload
   = lens _tlpPayload (\ s a -> s{_tlpPayload = a})
 
 -- | Task list identifier.
-tlpTaskList :: Lens' TaskListsPatch' Text
+tlpTaskList :: Lens' TaskListsPatch Text
 tlpTaskList
   = lens _tlpTaskList (\ s a -> s{_tlpTaskList = a})
 
-instance GoogleRequest TaskListsPatch' where
-        type Rs TaskListsPatch' = TaskList
-        requestClient TaskListsPatch'{..}
+instance GoogleRequest TaskListsPatch where
+        type Rs TaskListsPatch = TaskList
+        requestClient TaskListsPatch{..}
           = go _tlpTaskList (Just AltJSON) _tlpPayload
               appsTasksService
           where go

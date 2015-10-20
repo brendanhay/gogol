@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.Messages.Modify
       UsersMessagesModifyResource
 
     -- * Creating a Request
-    , usersMessagesModify'
-    , UsersMessagesModify'
+    , usersMessagesModify
+    , UsersMessagesModify
 
     -- * Request Lenses
     , ummPayload
@@ -42,7 +42,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.messages.modify@ method which the
--- 'UsersMessagesModify'' request conforms to.
+-- 'UsersMessagesModify' request conforms to.
 type UsersMessagesModifyResource =
      Capture "userId" Text :>
        "messages" :>
@@ -54,14 +54,14 @@ type UsersMessagesModifyResource =
 
 -- | Modifies the labels on the specified message.
 --
--- /See:/ 'usersMessagesModify'' smart constructor.
-data UsersMessagesModify' = UsersMessagesModify'
+-- /See:/ 'usersMessagesModify' smart constructor.
+data UsersMessagesModify = UsersMessagesModify
     { _ummPayload :: !ModifyMessageRequest
     , _ummUserId  :: !Text
     , _ummId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersMessagesModify'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersMessagesModify' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,36 +70,36 @@ data UsersMessagesModify' = UsersMessagesModify'
 -- * 'ummUserId'
 --
 -- * 'ummId'
-usersMessagesModify'
+usersMessagesModify
     :: ModifyMessageRequest -- ^ 'ummPayload'
     -> Text -- ^ 'ummId'
     -> Text
-    -> UsersMessagesModify'
-usersMessagesModify' pUmmPayload_ pUmmUserId_ pUmmId_ =
-    UsersMessagesModify'
+    -> UsersMessagesModify
+usersMessagesModify pUmmPayload_ pUmmUserId_ pUmmId_ =
+    UsersMessagesModify
     { _ummPayload = pUmmPayload_
     , _ummUserId = pUmmUserId_
     , _ummId = pUmmId_
     }
 
 -- | Multipart request metadata.
-ummPayload :: Lens' UsersMessagesModify' ModifyMessageRequest
+ummPayload :: Lens' UsersMessagesModify ModifyMessageRequest
 ummPayload
   = lens _ummPayload (\ s a -> s{_ummPayload = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-ummUserId :: Lens' UsersMessagesModify' Text
+ummUserId :: Lens' UsersMessagesModify Text
 ummUserId
   = lens _ummUserId (\ s a -> s{_ummUserId = a})
 
 -- | The ID of the message to modify.
-ummId :: Lens' UsersMessagesModify' Text
+ummId :: Lens' UsersMessagesModify Text
 ummId = lens _ummId (\ s a -> s{_ummId = a})
 
-instance GoogleRequest UsersMessagesModify' where
-        type Rs UsersMessagesModify' = Message
-        requestClient UsersMessagesModify'{..}
+instance GoogleRequest UsersMessagesModify where
+        type Rs UsersMessagesModify = Message
+        requestClient UsersMessagesModify{..}
           = go _ummUserId _ummId (Just AltJSON) _ummPayload
               gmailService
           where go

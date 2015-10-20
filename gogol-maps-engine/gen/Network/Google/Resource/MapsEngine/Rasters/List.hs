@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Rasters.List
       RastersListResource
 
     -- * Creating a Request
-    , rastersList'
-    , RastersList'
+    , rastersList
+    , RastersList
 
     -- * Request Lenses
     , rlCreatedAfter
@@ -52,7 +52,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasters.list@ method which the
--- 'RastersList'' request conforms to.
+-- 'RastersList' request conforms to.
 type RastersListResource =
      "rasters" :>
        QueryParam "projectId" Text :>
@@ -75,8 +75,8 @@ type RastersListResource =
 
 -- | Return all rasters readable by the current user.
 --
--- /See:/ 'rastersList'' smart constructor.
-data RastersList' = RastersList'
+-- /See:/ 'rastersList' smart constructor.
+data RastersList = RastersList
     { _rlCreatedAfter     :: !(Maybe DateTime')
     , _rlCreatorEmail     :: !(Maybe Text)
     , _rlRole             :: !(Maybe RastersListRole)
@@ -92,7 +92,7 @@ data RastersList' = RastersList'
     , _rlCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RastersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'RastersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -121,11 +121,11 @@ data RastersList' = RastersList'
 -- * 'rlTags'
 --
 -- * 'rlCreatedBefore'
-rastersList'
+rastersList
     :: Text -- ^ 'rlProjectId'
-    -> RastersList'
-rastersList' pRlProjectId_ =
-    RastersList'
+    -> RastersList
+rastersList pRlProjectId_ =
+    RastersList
     { _rlCreatedAfter = Nothing
     , _rlCreatorEmail = Nothing
     , _rlRole = Nothing
@@ -143,7 +143,7 @@ rastersList' pRlProjectId_ =
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been created at or after this time.
-rlCreatedAfter :: Lens' RastersList' (Maybe UTCTime)
+rlCreatedAfter :: Lens' RastersList (Maybe UTCTime)
 rlCreatedAfter
   = lens _rlCreatedAfter
       (\ s a -> s{_rlCreatedAfter = a})
@@ -151,29 +151,29 @@ rlCreatedAfter
 
 -- | An email address representing a user. Returned assets that have been
 -- created by the user associated with the provided email address.
-rlCreatorEmail :: Lens' RastersList' (Maybe Text)
+rlCreatorEmail :: Lens' RastersList (Maybe Text)
 rlCreatorEmail
   = lens _rlCreatorEmail
       (\ s a -> s{_rlCreatorEmail = a})
 
 -- | The role parameter indicates that the response should only contain
 -- assets where the current user has the specified level of access.
-rlRole :: Lens' RastersList' (Maybe RastersListRole)
+rlRole :: Lens' RastersList (Maybe RastersListRole)
 rlRole = lens _rlRole (\ s a -> s{_rlRole = a})
 
 -- | A bounding box, expressed as \"west,south,east,north\". If set, only
 -- assets which intersect this bounding box will be returned.
-rlBbox :: Lens' RastersList' (Maybe Text)
+rlBbox :: Lens' RastersList (Maybe Text)
 rlBbox = lens _rlBbox (\ s a -> s{_rlBbox = a})
 
-rlProcessingStatus :: Lens' RastersList' (Maybe RastersListProcessingStatus)
+rlProcessingStatus :: Lens' RastersList (Maybe RastersListProcessingStatus)
 rlProcessingStatus
   = lens _rlProcessingStatus
       (\ s a -> s{_rlProcessingStatus = a})
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been modified at or after this time.
-rlModifiedAfter :: Lens' RastersList' (Maybe UTCTime)
+rlModifiedAfter :: Lens' RastersList (Maybe UTCTime)
 rlModifiedAfter
   = lens _rlModifiedAfter
       (\ s a -> s{_rlModifiedAfter = a})
@@ -181,7 +181,7 @@ rlModifiedAfter
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been modified at or before this time.
-rlModifiedBefore :: Lens' RastersList' (Maybe UTCTime)
+rlModifiedBefore :: Lens' RastersList (Maybe UTCTime)
 rlModifiedBefore
   = lens _rlModifiedBefore
       (\ s a -> s{_rlModifiedBefore = a})
@@ -190,7 +190,7 @@ rlModifiedBefore
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
 -- nextPageToken from the previous response.
-rlPageToken :: Lens' RastersList' (Maybe Text)
+rlPageToken :: Lens' RastersList (Maybe Text)
 rlPageToken
   = lens _rlPageToken (\ s a -> s{_rlPageToken = a})
 
@@ -198,37 +198,37 @@ rlPageToken
 -- all available projects with their IDs, send a Projects: list request.
 -- You can also find your project ID as the value of the DashboardPlace:cid
 -- URL parameter when signed in to mapsengine.google.com.
-rlProjectId :: Lens' RastersList' Text
+rlProjectId :: Lens' RastersList Text
 rlProjectId
   = lens _rlProjectId (\ s a -> s{_rlProjectId = a})
 
 -- | An unstructured search string used to filter the set of results based on
 -- asset metadata.
-rlSearch :: Lens' RastersList' (Maybe Text)
+rlSearch :: Lens' RastersList (Maybe Text)
 rlSearch = lens _rlSearch (\ s a -> s{_rlSearch = a})
 
 -- | The maximum number of items to include in a single response page. The
 -- maximum supported value is 100.
-rlMaxResults :: Lens' RastersList' (Maybe Word32)
+rlMaxResults :: Lens' RastersList (Maybe Word32)
 rlMaxResults
   = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
 
 -- | A comma separated list of tags. Returned assets will contain all the
 -- tags from the list.
-rlTags :: Lens' RastersList' (Maybe Text)
+rlTags :: Lens' RastersList (Maybe Text)
 rlTags = lens _rlTags (\ s a -> s{_rlTags = a})
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been created at or before this time.
-rlCreatedBefore :: Lens' RastersList' (Maybe UTCTime)
+rlCreatedBefore :: Lens' RastersList (Maybe UTCTime)
 rlCreatedBefore
   = lens _rlCreatedBefore
       (\ s a -> s{_rlCreatedBefore = a})
       . mapping _DateTime
 
-instance GoogleRequest RastersList' where
-        type Rs RastersList' = RastersListResponse
-        requestClient RastersList'{..}
+instance GoogleRequest RastersList where
+        type Rs RastersList = RastersListResponse
+        requestClient RastersList{..}
           = go (Just _rlProjectId) _rlCreatedAfter
               _rlCreatorEmail
               _rlRole

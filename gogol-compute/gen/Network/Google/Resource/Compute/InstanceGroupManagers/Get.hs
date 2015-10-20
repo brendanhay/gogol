@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Get
       InstanceGroupManagersGetResource
 
     -- * Creating a Request
-    , instanceGroupManagersGet'
-    , InstanceGroupManagersGet'
+    , instanceGroupManagersGet
+    , InstanceGroupManagersGet
 
     -- * Request Lenses
     , igmgProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroupManagers.get@ method which the
--- 'InstanceGroupManagersGet'' request conforms to.
+-- 'InstanceGroupManagersGet' request conforms to.
 type InstanceGroupManagersGetResource =
      Capture "project" Text :>
        "zones" :>
@@ -54,14 +54,14 @@ type InstanceGroupManagersGetResource =
 
 -- | Returns all of the details about the specified managed instance group.
 --
--- /See:/ 'instanceGroupManagersGet'' smart constructor.
-data InstanceGroupManagersGet' = InstanceGroupManagersGet'
+-- /See:/ 'instanceGroupManagersGet' smart constructor.
+data InstanceGroupManagersGet = InstanceGroupManagersGet
     { _igmgProject              :: !Text
     , _igmgInstanceGroupManager :: !Text
     , _igmgZone                 :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupManagersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupManagersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,38 +70,37 @@ data InstanceGroupManagersGet' = InstanceGroupManagersGet'
 -- * 'igmgInstanceGroupManager'
 --
 -- * 'igmgZone'
-instanceGroupManagersGet'
+instanceGroupManagersGet
     :: Text -- ^ 'igmgProject'
     -> Text -- ^ 'igmgInstanceGroupManager'
     -> Text -- ^ 'igmgZone'
-    -> InstanceGroupManagersGet'
-instanceGroupManagersGet' pIgmgProject_ pIgmgInstanceGroupManager_ pIgmgZone_ =
-    InstanceGroupManagersGet'
+    -> InstanceGroupManagersGet
+instanceGroupManagersGet pIgmgProject_ pIgmgInstanceGroupManager_ pIgmgZone_ =
+    InstanceGroupManagersGet
     { _igmgProject = pIgmgProject_
     , _igmgInstanceGroupManager = pIgmgInstanceGroupManager_
     , _igmgZone = pIgmgZone_
     }
 
 -- | The project ID for this request.
-igmgProject :: Lens' InstanceGroupManagersGet' Text
+igmgProject :: Lens' InstanceGroupManagersGet Text
 igmgProject
   = lens _igmgProject (\ s a -> s{_igmgProject = a})
 
 -- | The name of the managed instance group.
-igmgInstanceGroupManager :: Lens' InstanceGroupManagersGet' Text
+igmgInstanceGroupManager :: Lens' InstanceGroupManagersGet Text
 igmgInstanceGroupManager
   = lens _igmgInstanceGroupManager
       (\ s a -> s{_igmgInstanceGroupManager = a})
 
 -- | The name of the zone where the managed instance group is located.
-igmgZone :: Lens' InstanceGroupManagersGet' Text
+igmgZone :: Lens' InstanceGroupManagersGet Text
 igmgZone = lens _igmgZone (\ s a -> s{_igmgZone = a})
 
-instance GoogleRequest InstanceGroupManagersGet'
-         where
-        type Rs InstanceGroupManagersGet' =
+instance GoogleRequest InstanceGroupManagersGet where
+        type Rs InstanceGroupManagersGet =
              InstanceGroupManager
-        requestClient InstanceGroupManagersGet'{..}
+        requestClient InstanceGroupManagersGet{..}
           = go _igmgProject _igmgZone _igmgInstanceGroupManager
               (Just AltJSON)
               computeService

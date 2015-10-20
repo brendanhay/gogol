@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Members.Get
       MembersGetResource
 
     -- * Creating a Request
-    , membersGet'
-    , MembersGet'
+    , membersGet
+    , MembersGet
 
     -- * Request Lenses
     , mgMemberKey
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.members.get@ method which the
--- 'MembersGet'' request conforms to.
+-- 'MembersGet' request conforms to.
 type MembersGetResource =
      "groups" :>
        Capture "groupKey" Text :>
@@ -51,42 +51,42 @@ type MembersGetResource =
 
 -- | Retrieve Group Member
 --
--- /See:/ 'membersGet'' smart constructor.
-data MembersGet' = MembersGet'
+-- /See:/ 'membersGet' smart constructor.
+data MembersGet = MembersGet
     { _mgMemberKey :: !Text
     , _mgGroupKey  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MembersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'MembersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mgMemberKey'
 --
 -- * 'mgGroupKey'
-membersGet'
+membersGet
     :: Text -- ^ 'mgMemberKey'
     -> Text -- ^ 'mgGroupKey'
-    -> MembersGet'
-membersGet' pMgMemberKey_ pMgGroupKey_ =
-    MembersGet'
+    -> MembersGet
+membersGet pMgMemberKey_ pMgGroupKey_ =
+    MembersGet
     { _mgMemberKey = pMgMemberKey_
     , _mgGroupKey = pMgGroupKey_
     }
 
 -- | Email or immutable Id of the member
-mgMemberKey :: Lens' MembersGet' Text
+mgMemberKey :: Lens' MembersGet Text
 mgMemberKey
   = lens _mgMemberKey (\ s a -> s{_mgMemberKey = a})
 
 -- | Email or immutable Id of the group
-mgGroupKey :: Lens' MembersGet' Text
+mgGroupKey :: Lens' MembersGet Text
 mgGroupKey
   = lens _mgGroupKey (\ s a -> s{_mgGroupKey = a})
 
-instance GoogleRequest MembersGet' where
-        type Rs MembersGet' = Member
-        requestClient MembersGet'{..}
+instance GoogleRequest MembersGet where
+        type Rs MembersGet = Member
+        requestClient MembersGet{..}
           = go _mgGroupKey _mgMemberKey (Just AltJSON)
               directoryService
           where go

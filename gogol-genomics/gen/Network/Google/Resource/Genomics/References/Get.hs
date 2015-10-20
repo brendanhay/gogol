@@ -30,25 +30,25 @@ module Network.Google.Resource.Genomics.References.Get
       ReferencesGetResource
 
     -- * Creating a Request
-    , referencesGet'
-    , ReferencesGet'
+    , referencesGet
+    , ReferencesGet
 
     -- * Request Lenses
-    , rggXgafv
-    , rggUploadProtocol
-    , rggPp
-    , rggAccessToken
-    , rggUploadType
-    , rggReferenceId
-    , rggBearerToken
-    , rggCallback
+    , refXgafv
+    , refUploadProtocol
+    , refPp
+    , refAccessToken
+    , refUploadType
+    , refReferenceId
+    , refBearerToken
+    , refCallback
     ) where
 
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.references.get@ method which the
--- 'ReferencesGet'' request conforms to.
+-- 'ReferencesGet' request conforms to.
 type ReferencesGetResource =
      "v1" :>
        "references" :>
@@ -65,104 +65,104 @@ type ReferencesGetResource =
 -- | Gets a reference. Implements
 -- [GlobalAllianceApi.getReference](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L158).
 --
--- /See:/ 'referencesGet'' smart constructor.
-data ReferencesGet' = ReferencesGet'
-    { _rggXgafv          :: !(Maybe Text)
-    , _rggUploadProtocol :: !(Maybe Text)
-    , _rggPp             :: !Bool
-    , _rggAccessToken    :: !(Maybe Text)
-    , _rggUploadType     :: !(Maybe Text)
-    , _rggReferenceId    :: !Text
-    , _rggBearerToken    :: !(Maybe Text)
-    , _rggCallback       :: !(Maybe Text)
+-- /See:/ 'referencesGet' smart constructor.
+data ReferencesGet = ReferencesGet
+    { _refXgafv          :: !(Maybe Text)
+    , _refUploadProtocol :: !(Maybe Text)
+    , _refPp             :: !Bool
+    , _refAccessToken    :: !(Maybe Text)
+    , _refUploadType     :: !(Maybe Text)
+    , _refReferenceId    :: !Text
+    , _refBearerToken    :: !(Maybe Text)
+    , _refCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReferencesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReferencesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rggXgafv'
+-- * 'refXgafv'
 --
--- * 'rggUploadProtocol'
+-- * 'refUploadProtocol'
 --
--- * 'rggPp'
+-- * 'refPp'
 --
--- * 'rggAccessToken'
+-- * 'refAccessToken'
 --
--- * 'rggUploadType'
+-- * 'refUploadType'
 --
--- * 'rggReferenceId'
+-- * 'refReferenceId'
 --
--- * 'rggBearerToken'
+-- * 'refBearerToken'
 --
--- * 'rggCallback'
-referencesGet'
-    :: Text -- ^ 'rggReferenceId'
-    -> ReferencesGet'
-referencesGet' pRggReferenceId_ =
-    ReferencesGet'
-    { _rggXgafv = Nothing
-    , _rggUploadProtocol = Nothing
-    , _rggPp = True
-    , _rggAccessToken = Nothing
-    , _rggUploadType = Nothing
-    , _rggReferenceId = pRggReferenceId_
-    , _rggBearerToken = Nothing
-    , _rggCallback = Nothing
+-- * 'refCallback'
+referencesGet
+    :: Text -- ^ 'refReferenceId'
+    -> ReferencesGet
+referencesGet pRefReferenceId_ =
+    ReferencesGet
+    { _refXgafv = Nothing
+    , _refUploadProtocol = Nothing
+    , _refPp = True
+    , _refAccessToken = Nothing
+    , _refUploadType = Nothing
+    , _refReferenceId = pRefReferenceId_
+    , _refBearerToken = Nothing
+    , _refCallback = Nothing
     }
 
 -- | V1 error format.
-rggXgafv :: Lens' ReferencesGet' (Maybe Text)
-rggXgafv = lens _rggXgafv (\ s a -> s{_rggXgafv = a})
+refXgafv :: Lens' ReferencesGet (Maybe Text)
+refXgafv = lens _refXgafv (\ s a -> s{_refXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-rggUploadProtocol :: Lens' ReferencesGet' (Maybe Text)
-rggUploadProtocol
-  = lens _rggUploadProtocol
-      (\ s a -> s{_rggUploadProtocol = a})
+refUploadProtocol :: Lens' ReferencesGet (Maybe Text)
+refUploadProtocol
+  = lens _refUploadProtocol
+      (\ s a -> s{_refUploadProtocol = a})
 
 -- | Pretty-print response.
-rggPp :: Lens' ReferencesGet' Bool
-rggPp = lens _rggPp (\ s a -> s{_rggPp = a})
+refPp :: Lens' ReferencesGet Bool
+refPp = lens _refPp (\ s a -> s{_refPp = a})
 
 -- | OAuth access token.
-rggAccessToken :: Lens' ReferencesGet' (Maybe Text)
-rggAccessToken
-  = lens _rggAccessToken
-      (\ s a -> s{_rggAccessToken = a})
+refAccessToken :: Lens' ReferencesGet (Maybe Text)
+refAccessToken
+  = lens _refAccessToken
+      (\ s a -> s{_refAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-rggUploadType :: Lens' ReferencesGet' (Maybe Text)
-rggUploadType
-  = lens _rggUploadType
-      (\ s a -> s{_rggUploadType = a})
+refUploadType :: Lens' ReferencesGet (Maybe Text)
+refUploadType
+  = lens _refUploadType
+      (\ s a -> s{_refUploadType = a})
 
 -- | The ID of the reference.
-rggReferenceId :: Lens' ReferencesGet' Text
-rggReferenceId
-  = lens _rggReferenceId
-      (\ s a -> s{_rggReferenceId = a})
+refReferenceId :: Lens' ReferencesGet Text
+refReferenceId
+  = lens _refReferenceId
+      (\ s a -> s{_refReferenceId = a})
 
 -- | OAuth bearer token.
-rggBearerToken :: Lens' ReferencesGet' (Maybe Text)
-rggBearerToken
-  = lens _rggBearerToken
-      (\ s a -> s{_rggBearerToken = a})
+refBearerToken :: Lens' ReferencesGet (Maybe Text)
+refBearerToken
+  = lens _refBearerToken
+      (\ s a -> s{_refBearerToken = a})
 
 -- | JSONP
-rggCallback :: Lens' ReferencesGet' (Maybe Text)
-rggCallback
-  = lens _rggCallback (\ s a -> s{_rggCallback = a})
+refCallback :: Lens' ReferencesGet (Maybe Text)
+refCallback
+  = lens _refCallback (\ s a -> s{_refCallback = a})
 
-instance GoogleRequest ReferencesGet' where
-        type Rs ReferencesGet' = Reference
-        requestClient ReferencesGet'{..}
-          = go _rggReferenceId _rggXgafv _rggUploadProtocol
-              (Just _rggPp)
-              _rggAccessToken
-              _rggUploadType
-              _rggBearerToken
-              _rggCallback
+instance GoogleRequest ReferencesGet where
+        type Rs ReferencesGet = Reference
+        requestClient ReferencesGet{..}
+          = go _refReferenceId _refXgafv _refUploadProtocol
+              (Just _refPp)
+              _refAccessToken
+              _refUploadType
+              _refBearerToken
+              _refCallback
               (Just AltJSON)
               genomicsService
           where go

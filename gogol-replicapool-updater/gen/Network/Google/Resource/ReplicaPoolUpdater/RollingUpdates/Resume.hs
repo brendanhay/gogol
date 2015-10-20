@@ -30,8 +30,8 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Resume
       RollingUpdatesResumeResource
 
     -- * Creating a Request
-    , rollingUpdatesResume'
-    , RollingUpdatesResume'
+    , rollingUpdatesResume
+    , RollingUpdatesResume
 
     -- * Request Lenses
     , rRollingUpdate
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.rollingUpdates.resume@ method which the
--- 'RollingUpdatesResume'' request conforms to.
+-- 'RollingUpdatesResume' request conforms to.
 type RollingUpdatesResumeResource =
      Capture "project" Text :>
        "zones" :>
@@ -56,14 +56,14 @@ type RollingUpdatesResumeResource =
 -- | Continues an update in PAUSED state. Has no effect if invoked when the
 -- state of the update is ROLLED_OUT.
 --
--- /See:/ 'rollingUpdatesResume'' smart constructor.
-data RollingUpdatesResume' = RollingUpdatesResume'
+-- /See:/ 'rollingUpdatesResume' smart constructor.
+data RollingUpdatesResume = RollingUpdatesResume
     { _rRollingUpdate :: !Text
     , _rProject       :: !Text
     , _rZone          :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RollingUpdatesResume'' with the minimum fields required to make a request.
+-- | Creates a value of 'RollingUpdatesResume' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,35 +72,35 @@ data RollingUpdatesResume' = RollingUpdatesResume'
 -- * 'rProject'
 --
 -- * 'rZone'
-rollingUpdatesResume'
+rollingUpdatesResume
     :: Text -- ^ 'rRollingUpdate'
     -> Text -- ^ 'rProject'
     -> Text -- ^ 'rZone'
-    -> RollingUpdatesResume'
-rollingUpdatesResume' pRRollingUpdate_ pRProject_ pRZone_ =
-    RollingUpdatesResume'
+    -> RollingUpdatesResume
+rollingUpdatesResume pRRollingUpdate_ pRProject_ pRZone_ =
+    RollingUpdatesResume
     { _rRollingUpdate = pRRollingUpdate_
     , _rProject = pRProject_
     , _rZone = pRZone_
     }
 
 -- | The name of the update.
-rRollingUpdate :: Lens' RollingUpdatesResume' Text
+rRollingUpdate :: Lens' RollingUpdatesResume Text
 rRollingUpdate
   = lens _rRollingUpdate
       (\ s a -> s{_rRollingUpdate = a})
 
 -- | The Google Developers Console project name.
-rProject :: Lens' RollingUpdatesResume' Text
+rProject :: Lens' RollingUpdatesResume Text
 rProject = lens _rProject (\ s a -> s{_rProject = a})
 
 -- | The name of the zone in which the update\'s target resides.
-rZone :: Lens' RollingUpdatesResume' Text
+rZone :: Lens' RollingUpdatesResume Text
 rZone = lens _rZone (\ s a -> s{_rZone = a})
 
-instance GoogleRequest RollingUpdatesResume' where
-        type Rs RollingUpdatesResume' = Operation
-        requestClient RollingUpdatesResume'{..}
+instance GoogleRequest RollingUpdatesResume where
+        type Rs RollingUpdatesResume = Operation
+        requestClient RollingUpdatesResume{..}
           = go _rProject _rZone _rRollingUpdate (Just AltJSON)
               replicaPoolUpdaterService
           where go

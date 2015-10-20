@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.BackendServices.Delete
       BackendServicesDeleteResource
 
     -- * Creating a Request
-    , backendServicesDelete'
-    , BackendServicesDelete'
+    , backendServicesDelete
+    , BackendServicesDelete
 
     -- * Request Lenses
     , bsdProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.backendServices.delete@ method which the
--- 'BackendServicesDelete'' request conforms to.
+-- 'BackendServicesDelete' request conforms to.
 type BackendServicesDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,43 +51,43 @@ type BackendServicesDeleteResource =
 
 -- | Deletes the specified BackendService resource.
 --
--- /See:/ 'backendServicesDelete'' smart constructor.
-data BackendServicesDelete' = BackendServicesDelete'
+-- /See:/ 'backendServicesDelete' smart constructor.
+data BackendServicesDelete = BackendServicesDelete
     { _bsdProject        :: !Text
     , _bsdBackendService :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BackendServicesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'BackendServicesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'bsdProject'
 --
 -- * 'bsdBackendService'
-backendServicesDelete'
+backendServicesDelete
     :: Text -- ^ 'bsdProject'
     -> Text -- ^ 'bsdBackendService'
-    -> BackendServicesDelete'
-backendServicesDelete' pBsdProject_ pBsdBackendService_ =
-    BackendServicesDelete'
+    -> BackendServicesDelete
+backendServicesDelete pBsdProject_ pBsdBackendService_ =
+    BackendServicesDelete
     { _bsdProject = pBsdProject_
     , _bsdBackendService = pBsdBackendService_
     }
 
 -- | Name of the project scoping this request.
-bsdProject :: Lens' BackendServicesDelete' Text
+bsdProject :: Lens' BackendServicesDelete Text
 bsdProject
   = lens _bsdProject (\ s a -> s{_bsdProject = a})
 
 -- | Name of the BackendService resource to delete.
-bsdBackendService :: Lens' BackendServicesDelete' Text
+bsdBackendService :: Lens' BackendServicesDelete Text
 bsdBackendService
   = lens _bsdBackendService
       (\ s a -> s{_bsdBackendService = a})
 
-instance GoogleRequest BackendServicesDelete' where
-        type Rs BackendServicesDelete' = Operation
-        requestClient BackendServicesDelete'{..}
+instance GoogleRequest BackendServicesDelete where
+        type Rs BackendServicesDelete = Operation
+        requestClient BackendServicesDelete{..}
           = go _bsdProject _bsdBackendService (Just AltJSON)
               computeService
           where go

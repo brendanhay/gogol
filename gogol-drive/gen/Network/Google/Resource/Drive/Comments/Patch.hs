@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Comments.Patch
       CommentsPatchResource
 
     -- * Creating a Request
-    , commentsPatch'
-    , CommentsPatch'
+    , commentsPatch
+    , CommentsPatch
 
     -- * Request Lenses
     , cpPayload
@@ -42,7 +42,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.comments.patch@ method which the
--- 'CommentsPatch'' request conforms to.
+-- 'CommentsPatch' request conforms to.
 type CommentsPatchResource =
      "files" :>
        Capture "fileId" Text :>
@@ -53,14 +53,14 @@ type CommentsPatchResource =
 
 -- | Updates an existing comment. This method supports patch semantics.
 --
--- /See:/ 'commentsPatch'' smart constructor.
-data CommentsPatch' = CommentsPatch'
+-- /See:/ 'commentsPatch' smart constructor.
+data CommentsPatch = CommentsPatch
     { _cpPayload   :: !Comment
     , _cpFileId    :: !Text
     , _cpCommentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data CommentsPatch' = CommentsPatch'
 -- * 'cpFileId'
 --
 -- * 'cpCommentId'
-commentsPatch'
+commentsPatch
     :: Comment -- ^ 'cpPayload'
     -> Text -- ^ 'cpFileId'
     -> Text -- ^ 'cpCommentId'
-    -> CommentsPatch'
-commentsPatch' pCpPayload_ pCpFileId_ pCpCommentId_ =
-    CommentsPatch'
+    -> CommentsPatch
+commentsPatch pCpPayload_ pCpFileId_ pCpCommentId_ =
+    CommentsPatch
     { _cpPayload = pCpPayload_
     , _cpFileId = pCpFileId_
     , _cpCommentId = pCpCommentId_
     }
 
 -- | Multipart request metadata.
-cpPayload :: Lens' CommentsPatch' Comment
+cpPayload :: Lens' CommentsPatch Comment
 cpPayload
   = lens _cpPayload (\ s a -> s{_cpPayload = a})
 
 -- | The ID of the file.
-cpFileId :: Lens' CommentsPatch' Text
+cpFileId :: Lens' CommentsPatch Text
 cpFileId = lens _cpFileId (\ s a -> s{_cpFileId = a})
 
 -- | The ID of the comment.
-cpCommentId :: Lens' CommentsPatch' Text
+cpCommentId :: Lens' CommentsPatch Text
 cpCommentId
   = lens _cpCommentId (\ s a -> s{_cpCommentId = a})
 
-instance GoogleRequest CommentsPatch' where
-        type Rs CommentsPatch' = Comment
-        requestClient CommentsPatch'{..}
+instance GoogleRequest CommentsPatch where
+        type Rs CommentsPatch = Comment
+        requestClient CommentsPatch{..}
           = go _cpFileId _cpCommentId (Just AltJSON) _cpPayload
               driveService
           where go

@@ -30,8 +30,8 @@ module Network.Google.Resource.SQL.Instances.Export
       InstancesExportResource
 
     -- * Creating a Request
-    , instancesExport'
-    , InstancesExport'
+    , instancesExport
+    , InstancesExport
 
     -- * Request Lenses
     , ieProject
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.export@ method which the
--- 'InstancesExport'' request conforms to.
+-- 'InstancesExport' request conforms to.
 type InstancesExportResource =
      "projects" :>
        Capture "project" Text :>
@@ -57,14 +57,14 @@ type InstancesExportResource =
 -- | Exports data from a Cloud SQL instance to a Google Cloud Storage bucket
 -- as a MySQL dump file.
 --
--- /See:/ 'instancesExport'' smart constructor.
-data InstancesExport' = InstancesExport'
+-- /See:/ 'instancesExport' smart constructor.
+data InstancesExport = InstancesExport
     { _ieProject  :: !Text
     , _iePayload  :: !InstancesExportRequest
     , _ieInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesExport'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesExport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,36 +73,36 @@ data InstancesExport' = InstancesExport'
 -- * 'iePayload'
 --
 -- * 'ieInstance'
-instancesExport'
+instancesExport
     :: Text -- ^ 'ieProject'
     -> InstancesExportRequest -- ^ 'iePayload'
     -> Text -- ^ 'ieInstance'
-    -> InstancesExport'
-instancesExport' pIeProject_ pIePayload_ pIeInstance_ =
-    InstancesExport'
+    -> InstancesExport
+instancesExport pIeProject_ pIePayload_ pIeInstance_ =
+    InstancesExport
     { _ieProject = pIeProject_
     , _iePayload = pIePayload_
     , _ieInstance = pIeInstance_
     }
 
 -- | Project ID of the project that contains the instance to be exported.
-ieProject :: Lens' InstancesExport' Text
+ieProject :: Lens' InstancesExport Text
 ieProject
   = lens _ieProject (\ s a -> s{_ieProject = a})
 
 -- | Multipart request metadata.
-iePayload :: Lens' InstancesExport' InstancesExportRequest
+iePayload :: Lens' InstancesExport InstancesExportRequest
 iePayload
   = lens _iePayload (\ s a -> s{_iePayload = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-ieInstance :: Lens' InstancesExport' Text
+ieInstance :: Lens' InstancesExport Text
 ieInstance
   = lens _ieInstance (\ s a -> s{_ieInstance = a})
 
-instance GoogleRequest InstancesExport' where
-        type Rs InstancesExport' = Operation
-        requestClient InstancesExport'{..}
+instance GoogleRequest InstancesExport where
+        type Rs InstancesExport = Operation
+        requestClient InstancesExport{..}
           = go _ieProject _ieInstance (Just AltJSON) _iePayload
               sQLAdminService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Experiments.Update
       ManagementExperimentsUpdateResource
 
     -- * Creating a Request
-    , managementExperimentsUpdate'
-    , ManagementExperimentsUpdate'
+    , managementExperimentsUpdate
+    , ManagementExperimentsUpdate
 
     -- * Request Lenses
     , meuWebPropertyId
@@ -44,7 +44,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.experiments.update@ method which the
--- 'ManagementExperimentsUpdate'' request conforms to.
+-- 'ManagementExperimentsUpdate' request conforms to.
 type ManagementExperimentsUpdateResource =
      "management" :>
        "accounts" :>
@@ -60,8 +60,8 @@ type ManagementExperimentsUpdateResource =
 
 -- | Update an existing experiment.
 --
--- /See:/ 'managementExperimentsUpdate'' smart constructor.
-data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
+-- /See:/ 'managementExperimentsUpdate' smart constructor.
+data ManagementExperimentsUpdate = ManagementExperimentsUpdate
     { _meuWebPropertyId :: !Text
     , _meuProFileId     :: !Text
     , _meuPayload       :: !Experiment
@@ -69,7 +69,7 @@ data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
     , _meuExperimentId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementExperimentsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementExperimentsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,15 +82,15 @@ data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
 -- * 'meuAccountId'
 --
 -- * 'meuExperimentId'
-managementExperimentsUpdate'
+managementExperimentsUpdate
     :: Text -- ^ 'meuWebPropertyId'
     -> Text -- ^ 'meuProFileId'
     -> Experiment -- ^ 'meuPayload'
     -> Text -- ^ 'meuAccountId'
     -> Text -- ^ 'meuExperimentId'
-    -> ManagementExperimentsUpdate'
-managementExperimentsUpdate' pMeuWebPropertyId_ pMeuProFileId_ pMeuPayload_ pMeuAccountId_ pMeuExperimentId_ =
-    ManagementExperimentsUpdate'
+    -> ManagementExperimentsUpdate
+managementExperimentsUpdate pMeuWebPropertyId_ pMeuProFileId_ pMeuPayload_ pMeuAccountId_ pMeuExperimentId_ =
+    ManagementExperimentsUpdate
     { _meuWebPropertyId = pMeuWebPropertyId_
     , _meuProFileId = pMeuProFileId_
     , _meuPayload = pMeuPayload_
@@ -99,36 +99,36 @@ managementExperimentsUpdate' pMeuWebPropertyId_ pMeuProFileId_ pMeuPayload_ pMeu
     }
 
 -- | Web property ID of the experiment to update.
-meuWebPropertyId :: Lens' ManagementExperimentsUpdate' Text
+meuWebPropertyId :: Lens' ManagementExperimentsUpdate Text
 meuWebPropertyId
   = lens _meuWebPropertyId
       (\ s a -> s{_meuWebPropertyId = a})
 
 -- | View (Profile) ID of the experiment to update.
-meuProFileId :: Lens' ManagementExperimentsUpdate' Text
+meuProFileId :: Lens' ManagementExperimentsUpdate Text
 meuProFileId
   = lens _meuProFileId (\ s a -> s{_meuProFileId = a})
 
 -- | Multipart request metadata.
-meuPayload :: Lens' ManagementExperimentsUpdate' Experiment
+meuPayload :: Lens' ManagementExperimentsUpdate Experiment
 meuPayload
   = lens _meuPayload (\ s a -> s{_meuPayload = a})
 
 -- | Account ID of the experiment to update.
-meuAccountId :: Lens' ManagementExperimentsUpdate' Text
+meuAccountId :: Lens' ManagementExperimentsUpdate Text
 meuAccountId
   = lens _meuAccountId (\ s a -> s{_meuAccountId = a})
 
 -- | Experiment ID of the experiment to update.
-meuExperimentId :: Lens' ManagementExperimentsUpdate' Text
+meuExperimentId :: Lens' ManagementExperimentsUpdate Text
 meuExperimentId
   = lens _meuExperimentId
       (\ s a -> s{_meuExperimentId = a})
 
-instance GoogleRequest ManagementExperimentsUpdate'
+instance GoogleRequest ManagementExperimentsUpdate
          where
-        type Rs ManagementExperimentsUpdate' = Experiment
-        requestClient ManagementExperimentsUpdate'{..}
+        type Rs ManagementExperimentsUpdate = Experiment
+        requestClient ManagementExperimentsUpdate{..}
           = go _meuAccountId _meuWebPropertyId _meuProFileId
               _meuExperimentId
               (Just AltJSON)

@@ -33,8 +33,8 @@ module Network.Google.Resource.Classroom.Courses.Students.Delete
       CoursesStudentsDeleteResource
 
     -- * Creating a Request
-    , coursesStudentsDelete'
-    , CoursesStudentsDelete'
+    , coursesStudentsDelete
+    , CoursesStudentsDelete
 
     -- * Request Lenses
     , csdXgafv
@@ -52,7 +52,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.students.delete@ method which the
--- 'CoursesStudentsDelete'' request conforms to.
+-- 'CoursesStudentsDelete' request conforms to.
 type CoursesStudentsDeleteResource =
      "v1" :>
        "courses" :>
@@ -74,8 +74,8 @@ type CoursesStudentsDeleteResource =
 -- if no student of this course has the requested ID or if the course does
 -- not exist.
 --
--- /See:/ 'coursesStudentsDelete'' smart constructor.
-data CoursesStudentsDelete' = CoursesStudentsDelete'
+-- /See:/ 'coursesStudentsDelete' smart constructor.
+data CoursesStudentsDelete = CoursesStudentsDelete
     { _csdXgafv          :: !(Maybe Text)
     , _csdUploadProtocol :: !(Maybe Text)
     , _csdPp             :: !Bool
@@ -87,7 +87,7 @@ data CoursesStudentsDelete' = CoursesStudentsDelete'
     , _csdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CoursesStudentsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'CoursesStudentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -108,12 +108,12 @@ data CoursesStudentsDelete' = CoursesStudentsDelete'
 -- * 'csdBearerToken'
 --
 -- * 'csdCallback'
-coursesStudentsDelete'
+coursesStudentsDelete
     :: Text -- ^ 'csdCourseId'
     -> Text -- ^ 'csdUserId'
-    -> CoursesStudentsDelete'
-coursesStudentsDelete' pCsdCourseId_ pCsdUserId_ =
-    CoursesStudentsDelete'
+    -> CoursesStudentsDelete
+coursesStudentsDelete pCsdCourseId_ pCsdUserId_ =
+    CoursesStudentsDelete
     { _csdXgafv = Nothing
     , _csdUploadProtocol = Nothing
     , _csdPp = True
@@ -126,33 +126,33 @@ coursesStudentsDelete' pCsdCourseId_ pCsdUserId_ =
     }
 
 -- | V1 error format.
-csdXgafv :: Lens' CoursesStudentsDelete' (Maybe Text)
+csdXgafv :: Lens' CoursesStudentsDelete (Maybe Text)
 csdXgafv = lens _csdXgafv (\ s a -> s{_csdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-csdUploadProtocol :: Lens' CoursesStudentsDelete' (Maybe Text)
+csdUploadProtocol :: Lens' CoursesStudentsDelete (Maybe Text)
 csdUploadProtocol
   = lens _csdUploadProtocol
       (\ s a -> s{_csdUploadProtocol = a})
 
 -- | Pretty-print response.
-csdPp :: Lens' CoursesStudentsDelete' Bool
+csdPp :: Lens' CoursesStudentsDelete Bool
 csdPp = lens _csdPp (\ s a -> s{_csdPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
-csdCourseId :: Lens' CoursesStudentsDelete' Text
+csdCourseId :: Lens' CoursesStudentsDelete Text
 csdCourseId
   = lens _csdCourseId (\ s a -> s{_csdCourseId = a})
 
 -- | OAuth access token.
-csdAccessToken :: Lens' CoursesStudentsDelete' (Maybe Text)
+csdAccessToken :: Lens' CoursesStudentsDelete (Maybe Text)
 csdAccessToken
   = lens _csdAccessToken
       (\ s a -> s{_csdAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-csdUploadType :: Lens' CoursesStudentsDelete' (Maybe Text)
+csdUploadType :: Lens' CoursesStudentsDelete (Maybe Text)
 csdUploadType
   = lens _csdUploadType
       (\ s a -> s{_csdUploadType = a})
@@ -160,24 +160,24 @@ csdUploadType
 -- | Identifier of the student to delete. The identifier can be one of the
 -- following: * the numeric identifier for the user * the email address of
 -- the user * the string literal \`\"me\"\`, indicating the requesting user
-csdUserId :: Lens' CoursesStudentsDelete' Text
+csdUserId :: Lens' CoursesStudentsDelete Text
 csdUserId
   = lens _csdUserId (\ s a -> s{_csdUserId = a})
 
 -- | OAuth bearer token.
-csdBearerToken :: Lens' CoursesStudentsDelete' (Maybe Text)
+csdBearerToken :: Lens' CoursesStudentsDelete (Maybe Text)
 csdBearerToken
   = lens _csdBearerToken
       (\ s a -> s{_csdBearerToken = a})
 
 -- | JSONP
-csdCallback :: Lens' CoursesStudentsDelete' (Maybe Text)
+csdCallback :: Lens' CoursesStudentsDelete (Maybe Text)
 csdCallback
   = lens _csdCallback (\ s a -> s{_csdCallback = a})
 
-instance GoogleRequest CoursesStudentsDelete' where
-        type Rs CoursesStudentsDelete' = Empty
-        requestClient CoursesStudentsDelete'{..}
+instance GoogleRequest CoursesStudentsDelete where
+        type Rs CoursesStudentsDelete = Empty
+        requestClient CoursesStudentsDelete{..}
           = go _csdCourseId _csdUserId _csdXgafv
               _csdUploadProtocol
               (Just _csdPp)

@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSense.AdUnits.GetAdCode
       AdUnitsGetAdCodeResource
 
     -- * Creating a Request
-    , adUnitsGetAdCode'
-    , AdUnitsGetAdCode'
+    , adUnitsGetAdCode
+    , AdUnitsGetAdCode
 
     -- * Request Lenses
     , augacAdUnitId
@@ -41,7 +41,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.adunits.getAdCode@ method which the
--- 'AdUnitsGetAdCode'' request conforms to.
+-- 'AdUnitsGetAdCode' request conforms to.
 type AdUnitsGetAdCodeResource =
      "adclients" :>
        Capture "adClientId" Text :>
@@ -52,44 +52,44 @@ type AdUnitsGetAdCodeResource =
 
 -- | Get ad code for the specified ad unit.
 --
--- /See:/ 'adUnitsGetAdCode'' smart constructor.
-data AdUnitsGetAdCode' = AdUnitsGetAdCode'
+-- /See:/ 'adUnitsGetAdCode' smart constructor.
+data AdUnitsGetAdCode = AdUnitsGetAdCode
     { _augacAdUnitId   :: !Text
     , _augacAdClientId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdUnitsGetAdCode'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdUnitsGetAdCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'augacAdUnitId'
 --
 -- * 'augacAdClientId'
-adUnitsGetAdCode'
+adUnitsGetAdCode
     :: Text -- ^ 'augacAdUnitId'
     -> Text -- ^ 'augacAdClientId'
-    -> AdUnitsGetAdCode'
-adUnitsGetAdCode' pAugacAdUnitId_ pAugacAdClientId_ =
-    AdUnitsGetAdCode'
+    -> AdUnitsGetAdCode
+adUnitsGetAdCode pAugacAdUnitId_ pAugacAdClientId_ =
+    AdUnitsGetAdCode
     { _augacAdUnitId = pAugacAdUnitId_
     , _augacAdClientId = pAugacAdClientId_
     }
 
 -- | Ad unit to get the code for.
-augacAdUnitId :: Lens' AdUnitsGetAdCode' Text
+augacAdUnitId :: Lens' AdUnitsGetAdCode Text
 augacAdUnitId
   = lens _augacAdUnitId
       (\ s a -> s{_augacAdUnitId = a})
 
 -- | Ad client with contains the ad unit.
-augacAdClientId :: Lens' AdUnitsGetAdCode' Text
+augacAdClientId :: Lens' AdUnitsGetAdCode Text
 augacAdClientId
   = lens _augacAdClientId
       (\ s a -> s{_augacAdClientId = a})
 
-instance GoogleRequest AdUnitsGetAdCode' where
-        type Rs AdUnitsGetAdCode' = AdCode
-        requestClient AdUnitsGetAdCode'{..}
+instance GoogleRequest AdUnitsGetAdCode where
+        type Rs AdUnitsGetAdCode = AdCode
+        requestClient AdUnitsGetAdCode{..}
           = go _augacAdClientId _augacAdUnitId (Just AltJSON)
               adSenseService
           where go

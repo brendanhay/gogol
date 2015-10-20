@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.Update
       EditsListingsUpdateResource
 
     -- * Creating a Request
-    , editsListingsUpdate'
-    , EditsListingsUpdate'
+    , editsListingsUpdate
+    , EditsListingsUpdate
 
     -- * Request Lenses
     , eluPackageName
@@ -43,7 +43,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.listings.update@ method which the
--- 'EditsListingsUpdate'' request conforms to.
+-- 'EditsListingsUpdate' request conforms to.
 type EditsListingsUpdateResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -55,15 +55,15 @@ type EditsListingsUpdateResource =
 
 -- | Creates or updates a localized store listing.
 --
--- /See:/ 'editsListingsUpdate'' smart constructor.
-data EditsListingsUpdate' = EditsListingsUpdate'
+-- /See:/ 'editsListingsUpdate' smart constructor.
+data EditsListingsUpdate = EditsListingsUpdate
     { _eluPackageName :: !Text
     , _eluPayload     :: !Listing
     , _eluLanguage    :: !Text
     , _eluEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsListingsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsListingsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,14 +74,14 @@ data EditsListingsUpdate' = EditsListingsUpdate'
 -- * 'eluLanguage'
 --
 -- * 'eluEditId'
-editsListingsUpdate'
+editsListingsUpdate
     :: Text -- ^ 'eluPackageName'
     -> Listing -- ^ 'eluPayload'
     -> Text -- ^ 'eluLanguage'
     -> Text -- ^ 'eluEditId'
-    -> EditsListingsUpdate'
-editsListingsUpdate' pEluPackageName_ pEluPayload_ pEluLanguage_ pEluEditId_ =
-    EditsListingsUpdate'
+    -> EditsListingsUpdate
+editsListingsUpdate pEluPackageName_ pEluPayload_ pEluLanguage_ pEluEditId_ =
+    EditsListingsUpdate
     { _eluPackageName = pEluPackageName_
     , _eluPayload = pEluPayload_
     , _eluLanguage = pEluLanguage_
@@ -90,30 +90,30 @@ editsListingsUpdate' pEluPackageName_ pEluPayload_ pEluLanguage_ pEluEditId_ =
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eluPackageName :: Lens' EditsListingsUpdate' Text
+eluPackageName :: Lens' EditsListingsUpdate Text
 eluPackageName
   = lens _eluPackageName
       (\ s a -> s{_eluPackageName = a})
 
 -- | Multipart request metadata.
-eluPayload :: Lens' EditsListingsUpdate' Listing
+eluPayload :: Lens' EditsListingsUpdate Listing
 eluPayload
   = lens _eluPayload (\ s a -> s{_eluPayload = a})
 
 -- | The language code (a BCP-47 language tag) of the localized listing to
 -- read or modify. For example, to select Austrian German, pass \"de-AT\".
-eluLanguage :: Lens' EditsListingsUpdate' Text
+eluLanguage :: Lens' EditsListingsUpdate Text
 eluLanguage
   = lens _eluLanguage (\ s a -> s{_eluLanguage = a})
 
 -- | Unique identifier for this edit.
-eluEditId :: Lens' EditsListingsUpdate' Text
+eluEditId :: Lens' EditsListingsUpdate Text
 eluEditId
   = lens _eluEditId (\ s a -> s{_eluEditId = a})
 
-instance GoogleRequest EditsListingsUpdate' where
-        type Rs EditsListingsUpdate' = Listing
-        requestClient EditsListingsUpdate'{..}
+instance GoogleRequest EditsListingsUpdate where
+        type Rs EditsListingsUpdate = Listing
+        requestClient EditsListingsUpdate{..}
           = go _eluPackageName _eluEditId _eluLanguage
               (Just AltJSON)
               _eluPayload

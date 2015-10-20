@@ -30,8 +30,8 @@ module Network.Google.Resource.AndroidEnterprise.Grouplicenses.List
       GrouplicensesListResource
 
     -- * Creating a Request
-    , grouplicensesList'
-    , GrouplicensesList'
+    , grouplicensesList
+    , GrouplicensesList
 
     -- * Request Lenses
     , glEnterpriseId
@@ -41,7 +41,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.grouplicenses.list@ method which the
--- 'GrouplicensesList'' request conforms to.
+-- 'GrouplicensesList' request conforms to.
 type GrouplicensesListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -52,34 +52,33 @@ type GrouplicensesListResource =
 -- | Retrieves IDs of all products for which the enterprise has a group
 -- license.
 --
--- /See:/ 'grouplicensesList'' smart constructor.
-newtype GrouplicensesList' = GrouplicensesList'
+-- /See:/ 'grouplicensesList' smart constructor.
+newtype GrouplicensesList = GrouplicensesList
     { _glEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GrouplicensesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'GrouplicensesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'glEnterpriseId'
-grouplicensesList'
+grouplicensesList
     :: Text -- ^ 'glEnterpriseId'
-    -> GrouplicensesList'
-grouplicensesList' pGlEnterpriseId_ =
-    GrouplicensesList'
+    -> GrouplicensesList
+grouplicensesList pGlEnterpriseId_ =
+    GrouplicensesList
     { _glEnterpriseId = pGlEnterpriseId_
     }
 
 -- | The ID of the enterprise.
-glEnterpriseId :: Lens' GrouplicensesList' Text
+glEnterpriseId :: Lens' GrouplicensesList Text
 glEnterpriseId
   = lens _glEnterpriseId
       (\ s a -> s{_glEnterpriseId = a})
 
-instance GoogleRequest GrouplicensesList' where
-        type Rs GrouplicensesList' =
-             GroupLicensesListResponse
-        requestClient GrouplicensesList'{..}
+instance GoogleRequest GrouplicensesList where
+        type Rs GrouplicensesList = GroupLicensesListResponse
+        requestClient GrouplicensesList{..}
           = go _glEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go

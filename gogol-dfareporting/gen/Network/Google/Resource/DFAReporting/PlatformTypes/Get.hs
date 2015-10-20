@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.PlatformTypes.Get
       PlatformTypesGetResource
 
     -- * Creating a Request
-    , platformTypesGet'
-    , PlatformTypesGet'
+    , platformTypesGet
+    , PlatformTypesGet
 
     -- * Request Lenses
     , ptgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.platformTypes.get@ method which the
--- 'PlatformTypesGet'' request conforms to.
+-- 'PlatformTypesGet' request conforms to.
 type PlatformTypesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,41 +51,41 @@ type PlatformTypesGetResource =
 
 -- | Gets one platform type by ID.
 --
--- /See:/ 'platformTypesGet'' smart constructor.
-data PlatformTypesGet' = PlatformTypesGet'
+-- /See:/ 'platformTypesGet' smart constructor.
+data PlatformTypesGet = PlatformTypesGet
     { _ptgProFileId :: !Int64
     , _ptgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlatformTypesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlatformTypesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ptgProFileId'
 --
 -- * 'ptgId'
-platformTypesGet'
+platformTypesGet
     :: Int64 -- ^ 'ptgProFileId'
     -> Int64 -- ^ 'ptgId'
-    -> PlatformTypesGet'
-platformTypesGet' pPtgProFileId_ pPtgId_ =
-    PlatformTypesGet'
+    -> PlatformTypesGet
+platformTypesGet pPtgProFileId_ pPtgId_ =
+    PlatformTypesGet
     { _ptgProFileId = pPtgProFileId_
     , _ptgId = pPtgId_
     }
 
 -- | User profile ID associated with this request.
-ptgProFileId :: Lens' PlatformTypesGet' Int64
+ptgProFileId :: Lens' PlatformTypesGet Int64
 ptgProFileId
   = lens _ptgProFileId (\ s a -> s{_ptgProFileId = a})
 
 -- | Platform type ID.
-ptgId :: Lens' PlatformTypesGet' Int64
+ptgId :: Lens' PlatformTypesGet Int64
 ptgId = lens _ptgId (\ s a -> s{_ptgId = a})
 
-instance GoogleRequest PlatformTypesGet' where
-        type Rs PlatformTypesGet' = PlatformType
-        requestClient PlatformTypesGet'{..}
+instance GoogleRequest PlatformTypesGet where
+        type Rs PlatformTypesGet = PlatformType
+        requestClient PlatformTypesGet{..}
           = go _ptgProFileId _ptgId (Just AltJSON)
               dFAReportingService
           where go

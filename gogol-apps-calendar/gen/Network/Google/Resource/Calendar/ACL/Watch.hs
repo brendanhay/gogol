@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.ACL.Watch
       ACLWatchResource
 
     -- * Creating a Request
-    , aclWatch'
-    , ACLWatch'
+    , aclWatch
+    , ACLWatch
 
     -- * Request Lenses
     , awSyncToken
@@ -45,7 +45,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.acl.watch@ method which the
--- 'ACLWatch'' request conforms to.
+-- 'ACLWatch' request conforms to.
 type ACLWatchResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -60,8 +60,8 @@ type ACLWatchResource =
 
 -- | Watch for changes to ACL resources.
 --
--- /See:/ 'aclWatch'' smart constructor.
-data ACLWatch' = ACLWatch'
+-- /See:/ 'aclWatch' smart constructor.
+data ACLWatch = ACLWatch
     { _awSyncToken   :: !(Maybe Text)
     , _awCalendarId  :: !Text
     , _awShowDeleted :: !(Maybe Bool)
@@ -70,7 +70,7 @@ data ACLWatch' = ACLWatch'
     , _awMaxResults  :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ACLWatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ACLWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -85,12 +85,12 @@ data ACLWatch' = ACLWatch'
 -- * 'awPageToken'
 --
 -- * 'awMaxResults'
-aclWatch'
+aclWatch
     :: Text -- ^ 'awCalendarId'
     -> Channel -- ^ 'awPayload'
-    -> ACLWatch'
-aclWatch' pAwCalendarId_ pAwPayload_ =
-    ACLWatch'
+    -> ACLWatch
+aclWatch pAwCalendarId_ pAwPayload_ =
+    ACLWatch
     { _awSyncToken = Nothing
     , _awCalendarId = pAwCalendarId_
     , _awShowDeleted = Nothing
@@ -108,45 +108,45 @@ aclWatch' pAwCalendarId_ pAwPayload_ =
 -- client should clear its storage and perform a full synchronization
 -- without any syncToken. Learn more about incremental synchronization.
 -- Optional. The default is to return all entries.
-awSyncToken :: Lens' ACLWatch' (Maybe Text)
+awSyncToken :: Lens' ACLWatch (Maybe Text)
 awSyncToken
   = lens _awSyncToken (\ s a -> s{_awSyncToken = a})
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-awCalendarId :: Lens' ACLWatch' Text
+awCalendarId :: Lens' ACLWatch Text
 awCalendarId
   = lens _awCalendarId (\ s a -> s{_awCalendarId = a})
 
 -- | Whether to include deleted ACLs in the result. Deleted ACLs are
 -- represented by role equal to \"none\". Deleted ACLs will always be
 -- included if syncToken is provided. Optional. The default is False.
-awShowDeleted :: Lens' ACLWatch' (Maybe Bool)
+awShowDeleted :: Lens' ACLWatch (Maybe Bool)
 awShowDeleted
   = lens _awShowDeleted
       (\ s a -> s{_awShowDeleted = a})
 
 -- | Multipart request metadata.
-awPayload :: Lens' ACLWatch' Channel
+awPayload :: Lens' ACLWatch Channel
 awPayload
   = lens _awPayload (\ s a -> s{_awPayload = a})
 
 -- | Token specifying which result page to return. Optional.
-awPageToken :: Lens' ACLWatch' (Maybe Text)
+awPageToken :: Lens' ACLWatch (Maybe Text)
 awPageToken
   = lens _awPageToken (\ s a -> s{_awPageToken = a})
 
 -- | Maximum number of entries returned on one result page. By default the
 -- value is 100 entries. The page size can never be larger than 250
 -- entries. Optional.
-awMaxResults :: Lens' ACLWatch' (Maybe Int32)
+awMaxResults :: Lens' ACLWatch (Maybe Int32)
 awMaxResults
   = lens _awMaxResults (\ s a -> s{_awMaxResults = a})
 
-instance GoogleRequest ACLWatch' where
-        type Rs ACLWatch' = Channel
-        requestClient ACLWatch'{..}
+instance GoogleRequest ACLWatch where
+        type Rs ACLWatch = Channel
+        requestClient ACLWatch{..}
           = go _awCalendarId _awSyncToken _awShowDeleted
               _awPageToken
               _awMaxResults

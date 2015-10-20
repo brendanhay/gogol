@@ -30,8 +30,8 @@ module Network.Google.Resource.GAN.Advertisers.List
       AdvertisersListResource
 
     -- * Creating a Request
-    , advertisersList'
-    , AdvertisersList'
+    , advertisersList
+    , AdvertisersList
 
     -- * Request Lenses
     , alRelationshipStatus
@@ -49,7 +49,7 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gan.advertisers.list@ method which the
--- 'AdvertisersList'' request conforms to.
+-- 'AdvertisersList' request conforms to.
 type AdvertisersListResource =
      Capture "role" AdvertisersListRole :>
        Capture "roleId" Text :>
@@ -68,8 +68,8 @@ type AdvertisersListResource =
 -- | Retrieves data about all advertisers that the requesting
 -- advertiser\/publisher has access to.
 --
--- /See:/ 'advertisersList'' smart constructor.
-data AdvertisersList' = AdvertisersList'
+-- /See:/ 'advertisersList' smart constructor.
+data AdvertisersList = AdvertisersList
     { _alRelationshipStatus :: !(Maybe AdvertisersListRelationshipStatus)
     , _alMinSevenDayEpc     :: !(Maybe Double)
     , _alRoleId             :: !Text
@@ -81,7 +81,7 @@ data AdvertisersList' = AdvertisersList'
     , _alMaxResults         :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdvertisersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdvertisersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -102,12 +102,12 @@ data AdvertisersList' = AdvertisersList'
 -- * 'alPageToken'
 --
 -- * 'alMaxResults'
-advertisersList'
+advertisersList
     :: Text -- ^ 'alRoleId'
     -> AdvertisersListRole -- ^ 'alRole'
-    -> AdvertisersList'
-advertisersList' pAlRoleId_ pAlRole_ =
-    AdvertisersList'
+    -> AdvertisersList
+advertisersList pAlRoleId_ pAlRole_ =
+    AdvertisersList
     { _alRelationshipStatus = Nothing
     , _alMinSevenDayEpc = Nothing
     , _alRoleId = pAlRoleId_
@@ -121,32 +121,32 @@ advertisersList' pAlRoleId_ pAlRole_ =
 
 -- | Filters out all advertisers for which do not have the given relationship
 -- status with the requesting publisher.
-alRelationshipStatus :: Lens' AdvertisersList' (Maybe AdvertisersListRelationshipStatus)
+alRelationshipStatus :: Lens' AdvertisersList (Maybe AdvertisersListRelationshipStatus)
 alRelationshipStatus
   = lens _alRelationshipStatus
       (\ s a -> s{_alRelationshipStatus = a})
 
 -- | Filters out all advertisers that have a seven day EPC average lower than
 -- the given value (inclusive). Min value: 0.0. Optional.
-alMinSevenDayEpc :: Lens' AdvertisersList' (Maybe Double)
+alMinSevenDayEpc :: Lens' AdvertisersList (Maybe Double)
 alMinSevenDayEpc
   = lens _alMinSevenDayEpc
       (\ s a -> s{_alMinSevenDayEpc = a})
 
 -- | The ID of the requesting advertiser or publisher.
-alRoleId :: Lens' AdvertisersList' Text
+alRoleId :: Lens' AdvertisersList Text
 alRoleId = lens _alRoleId (\ s a -> s{_alRoleId = a})
 
 -- | Filters out all advertisers that have a ninety day EPC average lower
 -- than the given value (inclusive). Min value: 0.0. Optional.
-alMinNinetyDayEpc :: Lens' AdvertisersList' (Maybe Double)
+alMinNinetyDayEpc :: Lens' AdvertisersList (Maybe Double)
 alMinNinetyDayEpc
   = lens _alMinNinetyDayEpc
       (\ s a -> s{_alMinNinetyDayEpc = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-alRole :: Lens' AdvertisersList' AdvertisersListRole
+alRole :: Lens' AdvertisersList AdvertisersListRole
 alRole = lens _alRole (\ s a -> s{_alRole = a})
 
 -- | A value between 1 and 4, where 1 represents the quartile of advertisers
@@ -154,7 +154,7 @@ alRole = lens _alRole (\ s a -> s{_alRole = a})
 -- the highest ranks. Filters out all advertisers with a lower rank than
 -- the given quartile. For example if a 2 was given only advertisers with a
 -- payout rank of 25 or higher would be included. Optional.
-alMinPayoutRank :: Lens' AdvertisersList' (Maybe Int32)
+alMinPayoutRank :: Lens' AdvertisersList (Maybe Int32)
 alMinPayoutRank
   = lens _alMinPayoutRank
       (\ s a -> s{_alMinPayoutRank = a})
@@ -164,24 +164,24 @@ alMinPayoutRank
 -- http:\/\/www.google.com\/support\/affiliatenetwork\/advertiser\/bin\/answer.py?hl=en&answer=107581.
 -- Filters out all advertisers not in one of the given advertiser
 -- categories. Optional.
-alAdvertiserCategory :: Lens' AdvertisersList' (Maybe Text)
+alAdvertiserCategory :: Lens' AdvertisersList (Maybe Text)
 alAdvertiserCategory
   = lens _alAdvertiserCategory
       (\ s a -> s{_alAdvertiserCategory = a})
 
 -- | The value of \'nextPageToken\' from the previous page. Optional.
-alPageToken :: Lens' AdvertisersList' (Maybe Text)
+alPageToken :: Lens' AdvertisersList (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | Max number of items to return in this page. Optional. Defaults to 20.
-alMaxResults :: Lens' AdvertisersList' (Maybe Word32)
+alMaxResults :: Lens' AdvertisersList (Maybe Word32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
-instance GoogleRequest AdvertisersList' where
-        type Rs AdvertisersList' = Advertisers
-        requestClient AdvertisersList'{..}
+instance GoogleRequest AdvertisersList where
+        type Rs AdvertisersList = Advertisers
+        requestClient AdvertisersList{..}
           = go _alRole _alRoleId _alRelationshipStatus
               _alMinSevenDayEpc
               _alMinNinetyDayEpc

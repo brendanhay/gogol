@@ -29,8 +29,8 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Inse
       AchievementConfigurationsInsertResource
 
     -- * Creating a Request
-    , achievementConfigurationsInsert'
-    , AchievementConfigurationsInsert'
+    , achievementConfigurationsInsert
+    , AchievementConfigurationsInsert
 
     -- * Request Lenses
     , aciPayload
@@ -41,7 +41,7 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.achievementConfigurations.insert@ method which the
--- 'AchievementConfigurationsInsert'' request conforms to.
+-- 'AchievementConfigurationsInsert' request conforms to.
 type AchievementConfigurationsInsertResource =
      "applications" :>
        Capture "applicationId" Text :>
@@ -52,45 +52,45 @@ type AchievementConfigurationsInsertResource =
 
 -- | Insert a new achievement configuration in this application.
 --
--- /See:/ 'achievementConfigurationsInsert'' smart constructor.
-data AchievementConfigurationsInsert' = AchievementConfigurationsInsert'
+-- /See:/ 'achievementConfigurationsInsert' smart constructor.
+data AchievementConfigurationsInsert = AchievementConfigurationsInsert
     { _aciPayload       :: !AchievementConfiguration
     , _aciApplicationId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AchievementConfigurationsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'AchievementConfigurationsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aciPayload'
 --
 -- * 'aciApplicationId'
-achievementConfigurationsInsert'
+achievementConfigurationsInsert
     :: AchievementConfiguration -- ^ 'aciPayload'
     -> Text -- ^ 'aciApplicationId'
-    -> AchievementConfigurationsInsert'
-achievementConfigurationsInsert' pAciPayload_ pAciApplicationId_ =
-    AchievementConfigurationsInsert'
+    -> AchievementConfigurationsInsert
+achievementConfigurationsInsert pAciPayload_ pAciApplicationId_ =
+    AchievementConfigurationsInsert
     { _aciPayload = pAciPayload_
     , _aciApplicationId = pAciApplicationId_
     }
 
 -- | Multipart request metadata.
-aciPayload :: Lens' AchievementConfigurationsInsert' AchievementConfiguration
+aciPayload :: Lens' AchievementConfigurationsInsert AchievementConfiguration
 aciPayload
   = lens _aciPayload (\ s a -> s{_aciPayload = a})
 
 -- | The application ID from the Google Play developer console.
-aciApplicationId :: Lens' AchievementConfigurationsInsert' Text
+aciApplicationId :: Lens' AchievementConfigurationsInsert Text
 aciApplicationId
   = lens _aciApplicationId
       (\ s a -> s{_aciApplicationId = a})
 
 instance GoogleRequest
-         AchievementConfigurationsInsert' where
-        type Rs AchievementConfigurationsInsert' =
+         AchievementConfigurationsInsert where
+        type Rs AchievementConfigurationsInsert =
              AchievementConfiguration
-        requestClient AchievementConfigurationsInsert'{..}
+        requestClient AchievementConfigurationsInsert{..}
           = go _aciApplicationId (Just AltJSON) _aciPayload
               gamesConfigurationService
           where go

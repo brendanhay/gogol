@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.TargetPools.Delete
       TargetPoolsDeleteResource
 
     -- * Creating a Request
-    , targetPoolsDelete'
-    , TargetPoolsDelete'
+    , targetPoolsDelete
+    , TargetPoolsDelete
 
     -- * Request Lenses
     , tpdProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.delete@ method which the
--- 'TargetPoolsDelete'' request conforms to.
+-- 'TargetPoolsDelete' request conforms to.
 type TargetPoolsDeleteResource =
      Capture "project" Text :>
        "regions" :>
@@ -53,14 +53,14 @@ type TargetPoolsDeleteResource =
 
 -- | Deletes the specified TargetPool resource.
 --
--- /See:/ 'targetPoolsDelete'' smart constructor.
-data TargetPoolsDelete' = TargetPoolsDelete'
+-- /See:/ 'targetPoolsDelete' smart constructor.
+data TargetPoolsDelete = TargetPoolsDelete
     { _tpdProject    :: !Text
     , _tpdTargetPool :: !Text
     , _tpdRegion     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetPoolsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetPoolsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,37 +69,37 @@ data TargetPoolsDelete' = TargetPoolsDelete'
 -- * 'tpdTargetPool'
 --
 -- * 'tpdRegion'
-targetPoolsDelete'
+targetPoolsDelete
     :: Text -- ^ 'tpdProject'
     -> Text -- ^ 'tpdTargetPool'
     -> Text -- ^ 'tpdRegion'
-    -> TargetPoolsDelete'
-targetPoolsDelete' pTpdProject_ pTpdTargetPool_ pTpdRegion_ =
-    TargetPoolsDelete'
+    -> TargetPoolsDelete
+targetPoolsDelete pTpdProject_ pTpdTargetPool_ pTpdRegion_ =
+    TargetPoolsDelete
     { _tpdProject = pTpdProject_
     , _tpdTargetPool = pTpdTargetPool_
     , _tpdRegion = pTpdRegion_
     }
 
 -- | Name of the project scoping this request.
-tpdProject :: Lens' TargetPoolsDelete' Text
+tpdProject :: Lens' TargetPoolsDelete Text
 tpdProject
   = lens _tpdProject (\ s a -> s{_tpdProject = a})
 
 -- | Name of the TargetPool resource to delete.
-tpdTargetPool :: Lens' TargetPoolsDelete' Text
+tpdTargetPool :: Lens' TargetPoolsDelete Text
 tpdTargetPool
   = lens _tpdTargetPool
       (\ s a -> s{_tpdTargetPool = a})
 
 -- | Name of the region scoping this request.
-tpdRegion :: Lens' TargetPoolsDelete' Text
+tpdRegion :: Lens' TargetPoolsDelete Text
 tpdRegion
   = lens _tpdRegion (\ s a -> s{_tpdRegion = a})
 
-instance GoogleRequest TargetPoolsDelete' where
-        type Rs TargetPoolsDelete' = Operation
-        requestClient TargetPoolsDelete'{..}
+instance GoogleRequest TargetPoolsDelete where
+        type Rs TargetPoolsDelete = Operation
+        requestClient TargetPoolsDelete{..}
           = go _tpdProject _tpdRegion _tpdTargetPool
               (Just AltJSON)
               computeService

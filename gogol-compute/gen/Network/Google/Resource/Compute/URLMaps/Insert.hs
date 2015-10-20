@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.URLMaps.Insert
       URLMapsInsertResource
 
     -- * Creating a Request
-    , urlMapsInsert'
-    , URLMapsInsert'
+    , urlMapsInsert
+    , URLMapsInsert
 
     -- * Request Lenses
     , umiProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.urlMaps.insert@ method which the
--- 'URLMapsInsert'' request conforms to.
+-- 'URLMapsInsert' request conforms to.
 type URLMapsInsertResource =
      Capture "project" Text :>
        "global" :>
@@ -53,42 +53,42 @@ type URLMapsInsertResource =
 -- | Creates a UrlMap resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'urlMapsInsert'' smart constructor.
-data URLMapsInsert' = URLMapsInsert'
+-- /See:/ 'urlMapsInsert' smart constructor.
+data URLMapsInsert = URLMapsInsert
     { _umiProject :: !Text
     , _umiPayload :: !URLMap
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'URLMapsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'URLMapsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'umiProject'
 --
 -- * 'umiPayload'
-urlMapsInsert'
+urlMapsInsert
     :: Text -- ^ 'umiProject'
     -> URLMap -- ^ 'umiPayload'
-    -> URLMapsInsert'
-urlMapsInsert' pUmiProject_ pUmiPayload_ =
-    URLMapsInsert'
+    -> URLMapsInsert
+urlMapsInsert pUmiProject_ pUmiPayload_ =
+    URLMapsInsert
     { _umiProject = pUmiProject_
     , _umiPayload = pUmiPayload_
     }
 
 -- | Name of the project scoping this request.
-umiProject :: Lens' URLMapsInsert' Text
+umiProject :: Lens' URLMapsInsert Text
 umiProject
   = lens _umiProject (\ s a -> s{_umiProject = a})
 
 -- | Multipart request metadata.
-umiPayload :: Lens' URLMapsInsert' URLMap
+umiPayload :: Lens' URLMapsInsert URLMap
 umiPayload
   = lens _umiPayload (\ s a -> s{_umiPayload = a})
 
-instance GoogleRequest URLMapsInsert' where
-        type Rs URLMapsInsert' = Operation
-        requestClient URLMapsInsert'{..}
+instance GoogleRequest URLMapsInsert where
+        type Rs URLMapsInsert = Operation
+        requestClient URLMapsInsert{..}
           = go _umiProject (Just AltJSON) _umiPayload
               computeService
           where go

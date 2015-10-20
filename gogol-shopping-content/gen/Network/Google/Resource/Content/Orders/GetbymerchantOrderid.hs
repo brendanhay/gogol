@@ -29,19 +29,19 @@ module Network.Google.Resource.Content.Orders.GetbymerchantOrderid
       OrdersGetbymerchantOrderidResource
 
     -- * Creating a Request
-    , ordersGetbymerchantOrderid'
-    , OrdersGetbymerchantOrderid'
+    , ordersGetbymerchantOrderid
+    , OrdersGetbymerchantOrderid
 
     -- * Request Lenses
-    , ordMerchantId
-    , ordMerchantOrderId
+    , ogogMerchantId
+    , ogogMerchantOrderId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.getbymerchantorderid@ method which the
--- 'OrdersGetbymerchantOrderid'' request conforms to.
+-- 'OrdersGetbymerchantOrderid' request conforms to.
 type OrdersGetbymerchantOrderidResource =
      Capture "merchantId" Word64 :>
        "ordersbymerchantid" :>
@@ -51,47 +51,47 @@ type OrdersGetbymerchantOrderidResource =
 
 -- | Retrieves an order using merchant order id.
 --
--- /See:/ 'ordersGetbymerchantOrderid'' smart constructor.
-data OrdersGetbymerchantOrderid' = OrdersGetbymerchantOrderid'
-    { _ordMerchantId      :: !Word64
-    , _ordMerchantOrderId :: !Text
+-- /See:/ 'ordersGetbymerchantOrderid' smart constructor.
+data OrdersGetbymerchantOrderid = OrdersGetbymerchantOrderid
+    { _ogogMerchantId      :: !Word64
+    , _ogogMerchantOrderId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersGetbymerchantOrderid'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersGetbymerchantOrderid' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ordMerchantId'
+-- * 'ogogMerchantId'
 --
--- * 'ordMerchantOrderId'
-ordersGetbymerchantOrderid'
-    :: Word64 -- ^ 'ordMerchantId'
-    -> Text -- ^ 'ordMerchantOrderId'
-    -> OrdersGetbymerchantOrderid'
-ordersGetbymerchantOrderid' pOrdMerchantId_ pOrdMerchantOrderId_ =
-    OrdersGetbymerchantOrderid'
-    { _ordMerchantId = pOrdMerchantId_
-    , _ordMerchantOrderId = pOrdMerchantOrderId_
+-- * 'ogogMerchantOrderId'
+ordersGetbymerchantOrderid
+    :: Word64 -- ^ 'ogogMerchantId'
+    -> Text -- ^ 'ogogMerchantOrderId'
+    -> OrdersGetbymerchantOrderid
+ordersGetbymerchantOrderid pOgogMerchantId_ pOgogMerchantOrderId_ =
+    OrdersGetbymerchantOrderid
+    { _ogogMerchantId = pOgogMerchantId_
+    , _ogogMerchantOrderId = pOgogMerchantOrderId_
     }
 
 -- | The ID of the managing account.
-ordMerchantId :: Lens' OrdersGetbymerchantOrderid' Word64
-ordMerchantId
-  = lens _ordMerchantId
-      (\ s a -> s{_ordMerchantId = a})
+ogogMerchantId :: Lens' OrdersGetbymerchantOrderid Word64
+ogogMerchantId
+  = lens _ogogMerchantId
+      (\ s a -> s{_ogogMerchantId = a})
 
 -- | The merchant order id to be looked for.
-ordMerchantOrderId :: Lens' OrdersGetbymerchantOrderid' Text
-ordMerchantOrderId
-  = lens _ordMerchantOrderId
-      (\ s a -> s{_ordMerchantOrderId = a})
+ogogMerchantOrderId :: Lens' OrdersGetbymerchantOrderid Text
+ogogMerchantOrderId
+  = lens _ogogMerchantOrderId
+      (\ s a -> s{_ogogMerchantOrderId = a})
 
-instance GoogleRequest OrdersGetbymerchantOrderid'
+instance GoogleRequest OrdersGetbymerchantOrderid
          where
-        type Rs OrdersGetbymerchantOrderid' =
+        type Rs OrdersGetbymerchantOrderid =
              OrdersGetByMerchantOrderIdResponse
-        requestClient OrdersGetbymerchantOrderid'{..}
-          = go _ordMerchantId _ordMerchantOrderId
+        requestClient OrdersGetbymerchantOrderid{..}
+          = go _ogogMerchantId _ogogMerchantOrderId
               (Just AltJSON)
               shoppingContentService
           where go

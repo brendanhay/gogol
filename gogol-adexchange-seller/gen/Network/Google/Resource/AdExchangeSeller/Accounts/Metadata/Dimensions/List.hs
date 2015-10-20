@@ -30,8 +30,8 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Dimensions.Lis
       AccountsMetadataDimensionsListResource
 
     -- * Creating a Request
-    , accountsMetadataDimensionsList'
-    , AccountsMetadataDimensionsList'
+    , accountsMetadataDimensionsList
+    , AccountsMetadataDimensionsList
 
     -- * Request Lenses
     , amdlAccountId
@@ -41,7 +41,7 @@ import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangeseller.accounts.metadata.dimensions.list@ method which the
--- 'AccountsMetadataDimensionsList'' request conforms to.
+-- 'AccountsMetadataDimensionsList' request conforms to.
 type AccountsMetadataDimensionsListResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -52,34 +52,34 @@ type AccountsMetadataDimensionsListResource =
 -- | List the metadata for the dimensions available to this AdExchange
 -- account.
 --
--- /See:/ 'accountsMetadataDimensionsList'' smart constructor.
-newtype AccountsMetadataDimensionsList' = AccountsMetadataDimensionsList'
+-- /See:/ 'accountsMetadataDimensionsList' smart constructor.
+newtype AccountsMetadataDimensionsList = AccountsMetadataDimensionsList
     { _amdlAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsMetadataDimensionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsMetadataDimensionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'amdlAccountId'
-accountsMetadataDimensionsList'
+accountsMetadataDimensionsList
     :: Text -- ^ 'amdlAccountId'
-    -> AccountsMetadataDimensionsList'
-accountsMetadataDimensionsList' pAmdlAccountId_ =
-    AccountsMetadataDimensionsList'
+    -> AccountsMetadataDimensionsList
+accountsMetadataDimensionsList pAmdlAccountId_ =
+    AccountsMetadataDimensionsList
     { _amdlAccountId = pAmdlAccountId_
     }
 
 -- | Account with visibility to the dimensions.
-amdlAccountId :: Lens' AccountsMetadataDimensionsList' Text
+amdlAccountId :: Lens' AccountsMetadataDimensionsList Text
 amdlAccountId
   = lens _amdlAccountId
       (\ s a -> s{_amdlAccountId = a})
 
-instance GoogleRequest
-         AccountsMetadataDimensionsList' where
-        type Rs AccountsMetadataDimensionsList' = Metadata
-        requestClient AccountsMetadataDimensionsList'{..}
+instance GoogleRequest AccountsMetadataDimensionsList
+         where
+        type Rs AccountsMetadataDimensionsList = Metadata
+        requestClient AccountsMetadataDimensionsList{..}
           = go _amdlAccountId (Just AltJSON)
               adExchangeSellerService
           where go

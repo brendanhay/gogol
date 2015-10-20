@@ -29,19 +29,19 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.List
       AccountsContainersTriggersListResource
 
     -- * Creating a Request
-    , accountsContainersTriggersList'
-    , AccountsContainersTriggersList'
+    , accountsContainersTriggersList
+    , AccountsContainersTriggersList
 
     -- * Request Lenses
-    , actlContainerId
-    , actlAccountId
+    , actlcContainerId
+    , actlcAccountId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.triggers.list@ method which the
--- 'AccountsContainersTriggersList'' request conforms to.
+-- 'AccountsContainersTriggersList' request conforms to.
 type AccountsContainersTriggersListResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -53,47 +53,47 @@ type AccountsContainersTriggersListResource =
 
 -- | Lists all GTM Triggers of a Container.
 --
--- /See:/ 'accountsContainersTriggersList'' smart constructor.
-data AccountsContainersTriggersList' = AccountsContainersTriggersList'
-    { _actlContainerId :: !Text
-    , _actlAccountId   :: !Text
+-- /See:/ 'accountsContainersTriggersList' smart constructor.
+data AccountsContainersTriggersList = AccountsContainersTriggersList
+    { _actlcContainerId :: !Text
+    , _actlcAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersTriggersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersTriggersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'actlContainerId'
+-- * 'actlcContainerId'
 --
--- * 'actlAccountId'
-accountsContainersTriggersList'
-    :: Text -- ^ 'actlContainerId'
-    -> Text -- ^ 'actlAccountId'
-    -> AccountsContainersTriggersList'
-accountsContainersTriggersList' pActlContainerId_ pActlAccountId_ =
-    AccountsContainersTriggersList'
-    { _actlContainerId = pActlContainerId_
-    , _actlAccountId = pActlAccountId_
+-- * 'actlcAccountId'
+accountsContainersTriggersList
+    :: Text -- ^ 'actlcContainerId'
+    -> Text -- ^ 'actlcAccountId'
+    -> AccountsContainersTriggersList
+accountsContainersTriggersList pActlcContainerId_ pActlcAccountId_ =
+    AccountsContainersTriggersList
+    { _actlcContainerId = pActlcContainerId_
+    , _actlcAccountId = pActlcAccountId_
     }
 
 -- | The GTM Container ID.
-actlContainerId :: Lens' AccountsContainersTriggersList' Text
-actlContainerId
-  = lens _actlContainerId
-      (\ s a -> s{_actlContainerId = a})
+actlcContainerId :: Lens' AccountsContainersTriggersList Text
+actlcContainerId
+  = lens _actlcContainerId
+      (\ s a -> s{_actlcContainerId = a})
 
 -- | The GTM Account ID.
-actlAccountId :: Lens' AccountsContainersTriggersList' Text
-actlAccountId
-  = lens _actlAccountId
-      (\ s a -> s{_actlAccountId = a})
+actlcAccountId :: Lens' AccountsContainersTriggersList Text
+actlcAccountId
+  = lens _actlcAccountId
+      (\ s a -> s{_actlcAccountId = a})
 
-instance GoogleRequest
-         AccountsContainersTriggersList' where
-        type Rs AccountsContainersTriggersList' =
+instance GoogleRequest AccountsContainersTriggersList
+         where
+        type Rs AccountsContainersTriggersList =
              ListTriggersResponse
-        requestClient AccountsContainersTriggersList'{..}
-          = go _actlAccountId _actlContainerId (Just AltJSON)
+        requestClient AccountsContainersTriggersList{..}
+          = go _actlcAccountId _actlcContainerId (Just AltJSON)
               tagManagerService
           where go
                   = buildClient

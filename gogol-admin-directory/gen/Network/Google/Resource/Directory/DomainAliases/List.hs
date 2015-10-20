@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.DomainAliases.List
       DomainAliasesListResource
 
     -- * Creating a Request
-    , domainAliasesList'
-    , DomainAliasesList'
+    , domainAliasesList
+    , DomainAliasesList
 
     -- * Request Lenses
     , dalCustomer
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.domainAliases.list@ method which the
--- 'DomainAliasesList'' request conforms to.
+-- 'DomainAliasesList' request conforms to.
 type DomainAliasesListResource =
      "customer" :>
        Capture "customer" Text :>
@@ -51,42 +51,42 @@ type DomainAliasesListResource =
 
 -- | Lists the domain aliases of the customer.
 --
--- /See:/ 'domainAliasesList'' smart constructor.
-data DomainAliasesList' = DomainAliasesList'
+-- /See:/ 'domainAliasesList' smart constructor.
+data DomainAliasesList = DomainAliasesList
     { _dalCustomer         :: !Text
     , _dalParentDomainName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DomainAliasesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'DomainAliasesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dalCustomer'
 --
 -- * 'dalParentDomainName'
-domainAliasesList'
+domainAliasesList
     :: Text -- ^ 'dalCustomer'
-    -> DomainAliasesList'
-domainAliasesList' pDalCustomer_ =
-    DomainAliasesList'
+    -> DomainAliasesList
+domainAliasesList pDalCustomer_ =
+    DomainAliasesList
     { _dalCustomer = pDalCustomer_
     , _dalParentDomainName = Nothing
     }
 
 -- | Immutable id of the Google Apps account.
-dalCustomer :: Lens' DomainAliasesList' Text
+dalCustomer :: Lens' DomainAliasesList Text
 dalCustomer
   = lens _dalCustomer (\ s a -> s{_dalCustomer = a})
 
 -- | Name of the parent domain for which domain aliases are to be fetched.
-dalParentDomainName :: Lens' DomainAliasesList' (Maybe Text)
+dalParentDomainName :: Lens' DomainAliasesList (Maybe Text)
 dalParentDomainName
   = lens _dalParentDomainName
       (\ s a -> s{_dalParentDomainName = a})
 
-instance GoogleRequest DomainAliasesList' where
-        type Rs DomainAliasesList' = DomainAliases
-        requestClient DomainAliasesList'{..}
+instance GoogleRequest DomainAliasesList where
+        type Rs DomainAliasesList = DomainAliases
+        requestClient DomainAliasesList{..}
           = go _dalCustomer _dalParentDomainName (Just AltJSON)
               directoryService
           where go

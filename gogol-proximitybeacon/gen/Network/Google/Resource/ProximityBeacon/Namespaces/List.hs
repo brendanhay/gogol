@@ -31,8 +31,8 @@ module Network.Google.Resource.ProximityBeacon.Namespaces.List
       NamespacesListResource
 
     -- * Creating a Request
-    , namespacesList'
-    , NamespacesList'
+    , namespacesList
+    , NamespacesList
 
     -- * Request Lenses
     , nlXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.namespaces.list@ method which the
--- 'NamespacesList'' request conforms to.
+-- 'NamespacesList' request conforms to.
 type NamespacesListResource =
      "v1beta1" :>
        "namespaces" :>
@@ -66,8 +66,8 @@ type NamespacesListResource =
 -- project. Attachment data associated with a beacon must include a
 -- namespaced type, and the namespace must be owned by your project.
 --
--- /See:/ 'namespacesList'' smart constructor.
-data NamespacesList' = NamespacesList'
+-- /See:/ 'namespacesList' smart constructor.
+data NamespacesList = NamespacesList
     { _nlXgafv          :: !(Maybe Text)
     , _nlUploadProtocol :: !(Maybe Text)
     , _nlPp             :: !Bool
@@ -77,7 +77,7 @@ data NamespacesList' = NamespacesList'
     , _nlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'NamespacesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'NamespacesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -94,10 +94,10 @@ data NamespacesList' = NamespacesList'
 -- * 'nlBearerToken'
 --
 -- * 'nlCallback'
-namespacesList'
-    :: NamespacesList'
-namespacesList' =
-    NamespacesList'
+namespacesList
+    :: NamespacesList
+namespacesList =
+    NamespacesList
     { _nlXgafv = Nothing
     , _nlUploadProtocol = Nothing
     , _nlPp = True
@@ -108,44 +108,44 @@ namespacesList' =
     }
 
 -- | V1 error format.
-nlXgafv :: Lens' NamespacesList' (Maybe Text)
+nlXgafv :: Lens' NamespacesList (Maybe Text)
 nlXgafv = lens _nlXgafv (\ s a -> s{_nlXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-nlUploadProtocol :: Lens' NamespacesList' (Maybe Text)
+nlUploadProtocol :: Lens' NamespacesList (Maybe Text)
 nlUploadProtocol
   = lens _nlUploadProtocol
       (\ s a -> s{_nlUploadProtocol = a})
 
 -- | Pretty-print response.
-nlPp :: Lens' NamespacesList' Bool
+nlPp :: Lens' NamespacesList Bool
 nlPp = lens _nlPp (\ s a -> s{_nlPp = a})
 
 -- | OAuth access token.
-nlAccessToken :: Lens' NamespacesList' (Maybe Text)
+nlAccessToken :: Lens' NamespacesList (Maybe Text)
 nlAccessToken
   = lens _nlAccessToken
       (\ s a -> s{_nlAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-nlUploadType :: Lens' NamespacesList' (Maybe Text)
+nlUploadType :: Lens' NamespacesList (Maybe Text)
 nlUploadType
   = lens _nlUploadType (\ s a -> s{_nlUploadType = a})
 
 -- | OAuth bearer token.
-nlBearerToken :: Lens' NamespacesList' (Maybe Text)
+nlBearerToken :: Lens' NamespacesList (Maybe Text)
 nlBearerToken
   = lens _nlBearerToken
       (\ s a -> s{_nlBearerToken = a})
 
 -- | JSONP
-nlCallback :: Lens' NamespacesList' (Maybe Text)
+nlCallback :: Lens' NamespacesList (Maybe Text)
 nlCallback
   = lens _nlCallback (\ s a -> s{_nlCallback = a})
 
-instance GoogleRequest NamespacesList' where
-        type Rs NamespacesList' = ListNamespacesResponse
-        requestClient NamespacesList'{..}
+instance GoogleRequest NamespacesList where
+        type Rs NamespacesList = ListNamespacesResponse
+        requestClient NamespacesList{..}
           = go _nlXgafv _nlUploadProtocol (Just _nlPp)
               _nlAccessToken
               _nlUploadType

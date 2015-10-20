@@ -29,8 +29,8 @@ module Network.Google.Resource.Webmasters.Sitemaps.Get
       SitemapsGetResource
 
     -- * Creating a Request
-    , sitemapsGet'
-    , SitemapsGet'
+    , sitemapsGet
+    , SitemapsGet
 
     -- * Request Lenses
     , sgFeedpath
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.sitemaps.get@ method which the
--- 'SitemapsGet'' request conforms to.
+-- 'SitemapsGet' request conforms to.
 type SitemapsGetResource =
      "sites" :>
        Capture "siteUrl" Text :>
@@ -51,44 +51,44 @@ type SitemapsGetResource =
 
 -- | Retrieves information about a specific sitemap.
 --
--- /See:/ 'sitemapsGet'' smart constructor.
-data SitemapsGet' = SitemapsGet'
+-- /See:/ 'sitemapsGet' smart constructor.
+data SitemapsGet = SitemapsGet
     { _sgFeedpath :: !Text
     , _sgSiteURL  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SitemapsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'SitemapsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sgFeedpath'
 --
 -- * 'sgSiteURL'
-sitemapsGet'
+sitemapsGet
     :: Text -- ^ 'sgFeedpath'
     -> Text -- ^ 'sgSiteURL'
-    -> SitemapsGet'
-sitemapsGet' pSgFeedpath_ pSgSiteURL_ =
-    SitemapsGet'
+    -> SitemapsGet
+sitemapsGet pSgFeedpath_ pSgSiteURL_ =
+    SitemapsGet
     { _sgFeedpath = pSgFeedpath_
     , _sgSiteURL = pSgSiteURL_
     }
 
 -- | The URL of the actual sitemap. For example:
 -- http:\/\/www.example.com\/sitemap.xml
-sgFeedpath :: Lens' SitemapsGet' Text
+sgFeedpath :: Lens' SitemapsGet Text
 sgFeedpath
   = lens _sgFeedpath (\ s a -> s{_sgFeedpath = a})
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/
-sgSiteURL :: Lens' SitemapsGet' Text
+sgSiteURL :: Lens' SitemapsGet Text
 sgSiteURL
   = lens _sgSiteURL (\ s a -> s{_sgSiteURL = a})
 
-instance GoogleRequest SitemapsGet' where
-        type Rs SitemapsGet' = WmxSitemap
-        requestClient SitemapsGet'{..}
+instance GoogleRequest SitemapsGet where
+        type Rs SitemapsGet = WmxSitemap
+        requestClient SitemapsGet{..}
           = go _sgSiteURL _sgFeedpath (Just AltJSON)
               webmasterToolsService
           where go

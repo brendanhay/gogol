@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.MobileCarriers.Get
       MobileCarriersGetResource
 
     -- * Creating a Request
-    , mobileCarriersGet'
-    , MobileCarriersGet'
+    , mobileCarriersGet
+    , MobileCarriersGet
 
     -- * Request Lenses
     , mcgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.mobileCarriers.get@ method which the
--- 'MobileCarriersGet'' request conforms to.
+-- 'MobileCarriersGet' request conforms to.
 type MobileCarriersGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,41 +51,41 @@ type MobileCarriersGetResource =
 
 -- | Gets one mobile carrier by ID.
 --
--- /See:/ 'mobileCarriersGet'' smart constructor.
-data MobileCarriersGet' = MobileCarriersGet'
+-- /See:/ 'mobileCarriersGet' smart constructor.
+data MobileCarriersGet = MobileCarriersGet
     { _mcgProFileId :: !Int64
     , _mcgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MobileCarriersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'MobileCarriersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mcgProFileId'
 --
 -- * 'mcgId'
-mobileCarriersGet'
+mobileCarriersGet
     :: Int64 -- ^ 'mcgProFileId'
     -> Int64 -- ^ 'mcgId'
-    -> MobileCarriersGet'
-mobileCarriersGet' pMcgProFileId_ pMcgId_ =
-    MobileCarriersGet'
+    -> MobileCarriersGet
+mobileCarriersGet pMcgProFileId_ pMcgId_ =
+    MobileCarriersGet
     { _mcgProFileId = pMcgProFileId_
     , _mcgId = pMcgId_
     }
 
 -- | User profile ID associated with this request.
-mcgProFileId :: Lens' MobileCarriersGet' Int64
+mcgProFileId :: Lens' MobileCarriersGet Int64
 mcgProFileId
   = lens _mcgProFileId (\ s a -> s{_mcgProFileId = a})
 
 -- | Mobile carrier ID.
-mcgId :: Lens' MobileCarriersGet' Int64
+mcgId :: Lens' MobileCarriersGet Int64
 mcgId = lens _mcgId (\ s a -> s{_mcgId = a})
 
-instance GoogleRequest MobileCarriersGet' where
-        type Rs MobileCarriersGet' = MobileCarrier
-        requestClient MobileCarriersGet'{..}
+instance GoogleRequest MobileCarriersGet where
+        type Rs MobileCarriersGet = MobileCarrier
+        requestClient MobileCarriersGet{..}
           = go _mcgProFileId _mcgId (Just AltJSON)
               dFAReportingService
           where go

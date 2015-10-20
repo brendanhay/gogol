@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.Subscriptions.Insert
       SubscriptionsInsertResource
 
     -- * Creating a Request
-    , subscriptionsInsert'
-    , SubscriptionsInsert'
+    , subscriptionsInsert
+    , SubscriptionsInsert
 
     -- * Request Lenses
     , siPart
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.subscriptions.insert@ method which the
--- 'SubscriptionsInsert'' request conforms to.
+-- 'SubscriptionsInsert' request conforms to.
 type SubscriptionsInsertResource =
      "subscriptions" :>
        QueryParam "part" Text :>
@@ -51,25 +51,25 @@ type SubscriptionsInsertResource =
 
 -- | Adds a subscription for the authenticated user\'s channel.
 --
--- /See:/ 'subscriptionsInsert'' smart constructor.
-data SubscriptionsInsert' = SubscriptionsInsert'
+-- /See:/ 'subscriptionsInsert' smart constructor.
+data SubscriptionsInsert = SubscriptionsInsert
     { _siPart    :: !Text
     , _siPayload :: !Subscription
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubscriptionsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'siPart'
 --
 -- * 'siPayload'
-subscriptionsInsert'
+subscriptionsInsert
     :: Text -- ^ 'siPart'
     -> Subscription -- ^ 'siPayload'
-    -> SubscriptionsInsert'
-subscriptionsInsert' pSiPart_ pSiPayload_ =
-    SubscriptionsInsert'
+    -> SubscriptionsInsert
+subscriptionsInsert pSiPart_ pSiPayload_ =
+    SubscriptionsInsert
     { _siPart = pSiPart_
     , _siPayload = pSiPayload_
     }
@@ -77,17 +77,17 @@ subscriptionsInsert' pSiPart_ pSiPayload_ =
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the
 -- properties that the API response will include.
-siPart :: Lens' SubscriptionsInsert' Text
+siPart :: Lens' SubscriptionsInsert Text
 siPart = lens _siPart (\ s a -> s{_siPart = a})
 
 -- | Multipart request metadata.
-siPayload :: Lens' SubscriptionsInsert' Subscription
+siPayload :: Lens' SubscriptionsInsert Subscription
 siPayload
   = lens _siPayload (\ s a -> s{_siPayload = a})
 
-instance GoogleRequest SubscriptionsInsert' where
-        type Rs SubscriptionsInsert' = Subscription
-        requestClient SubscriptionsInsert'{..}
+instance GoogleRequest SubscriptionsInsert where
+        type Rs SubscriptionsInsert = Subscription
+        requestClient SubscriptionsInsert{..}
           = go (Just _siPart) (Just AltJSON) _siPayload
               youTubeService
           where go

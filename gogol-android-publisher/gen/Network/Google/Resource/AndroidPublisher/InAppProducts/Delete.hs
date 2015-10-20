@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidPublisher.InAppProducts.Delete
       InAppProductsDeleteResource
 
     -- * Creating a Request
-    , inAppProductsDelete'
-    , InAppProductsDelete'
+    , inAppProductsDelete
+    , InAppProductsDelete
 
     -- * Request Lenses
     , iapdPackageName
@@ -41,7 +41,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.inappproducts.delete@ method which the
--- 'InAppProductsDelete'' request conforms to.
+-- 'InAppProductsDelete' request conforms to.
 type InAppProductsDeleteResource =
      Capture "packageName" Text :>
        "inappproducts" :>
@@ -50,43 +50,43 @@ type InAppProductsDeleteResource =
 
 -- | Delete an in-app product for an app.
 --
--- /See:/ 'inAppProductsDelete'' smart constructor.
-data InAppProductsDelete' = InAppProductsDelete'
+-- /See:/ 'inAppProductsDelete' smart constructor.
+data InAppProductsDelete = InAppProductsDelete
     { _iapdPackageName :: !Text
     , _iapdSKU         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InAppProductsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'InAppProductsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'iapdPackageName'
 --
 -- * 'iapdSKU'
-inAppProductsDelete'
+inAppProductsDelete
     :: Text -- ^ 'iapdPackageName'
     -> Text -- ^ 'iapdSKU'
-    -> InAppProductsDelete'
-inAppProductsDelete' pIapdPackageName_ pIapdSKU_ =
-    InAppProductsDelete'
+    -> InAppProductsDelete
+inAppProductsDelete pIapdPackageName_ pIapdSKU_ =
+    InAppProductsDelete
     { _iapdPackageName = pIapdPackageName_
     , _iapdSKU = pIapdSKU_
     }
 
 -- | Unique identifier for the Android app with the in-app product; for
 -- example, \"com.spiffygame\".
-iapdPackageName :: Lens' InAppProductsDelete' Text
+iapdPackageName :: Lens' InAppProductsDelete Text
 iapdPackageName
   = lens _iapdPackageName
       (\ s a -> s{_iapdPackageName = a})
 
 -- | Unique identifier for the in-app product.
-iapdSKU :: Lens' InAppProductsDelete' Text
+iapdSKU :: Lens' InAppProductsDelete Text
 iapdSKU = lens _iapdSKU (\ s a -> s{_iapdSKU = a})
 
-instance GoogleRequest InAppProductsDelete' where
-        type Rs InAppProductsDelete' = ()
-        requestClient InAppProductsDelete'{..}
+instance GoogleRequest InAppProductsDelete where
+        type Rs InAppProductsDelete = ()
+        requestClient InAppProductsDelete{..}
           = go _iapdPackageName _iapdSKU (Just AltJSON)
               androidPublisherService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Dele
       LeaderboardConfigurationsDeleteResource
 
     -- * Creating a Request
-    , leaderboardConfigurationsDelete'
-    , LeaderboardConfigurationsDelete'
+    , leaderboardConfigurationsDelete
+    , LeaderboardConfigurationsDelete
 
     -- * Request Lenses
     , lcdLeaderboardId
@@ -40,7 +40,7 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.leaderboardConfigurations.delete@ method which the
--- 'LeaderboardConfigurationsDelete'' request conforms to.
+-- 'LeaderboardConfigurationsDelete' request conforms to.
 type LeaderboardConfigurationsDeleteResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
@@ -48,34 +48,34 @@ type LeaderboardConfigurationsDeleteResource =
 
 -- | Delete the leaderboard configuration with the given ID.
 --
--- /See:/ 'leaderboardConfigurationsDelete'' smart constructor.
-newtype LeaderboardConfigurationsDelete' = LeaderboardConfigurationsDelete'
+-- /See:/ 'leaderboardConfigurationsDelete' smart constructor.
+newtype LeaderboardConfigurationsDelete = LeaderboardConfigurationsDelete
     { _lcdLeaderboardId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LeaderboardConfigurationsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'LeaderboardConfigurationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lcdLeaderboardId'
-leaderboardConfigurationsDelete'
+leaderboardConfigurationsDelete
     :: Text -- ^ 'lcdLeaderboardId'
-    -> LeaderboardConfigurationsDelete'
-leaderboardConfigurationsDelete' pLcdLeaderboardId_ =
-    LeaderboardConfigurationsDelete'
+    -> LeaderboardConfigurationsDelete
+leaderboardConfigurationsDelete pLcdLeaderboardId_ =
+    LeaderboardConfigurationsDelete
     { _lcdLeaderboardId = pLcdLeaderboardId_
     }
 
 -- | The ID of the leaderboard.
-lcdLeaderboardId :: Lens' LeaderboardConfigurationsDelete' Text
+lcdLeaderboardId :: Lens' LeaderboardConfigurationsDelete Text
 lcdLeaderboardId
   = lens _lcdLeaderboardId
       (\ s a -> s{_lcdLeaderboardId = a})
 
 instance GoogleRequest
-         LeaderboardConfigurationsDelete' where
-        type Rs LeaderboardConfigurationsDelete' = ()
-        requestClient LeaderboardConfigurationsDelete'{..}
+         LeaderboardConfigurationsDelete where
+        type Rs LeaderboardConfigurationsDelete = ()
+        requestClient LeaderboardConfigurationsDelete{..}
           = go _lcdLeaderboardId (Just AltJSON)
               gamesConfigurationService
           where go

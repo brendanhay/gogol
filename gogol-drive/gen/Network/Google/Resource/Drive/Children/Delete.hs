@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Children.Delete
       ChildrenDeleteResource
 
     -- * Creating a Request
-    , childrenDelete'
-    , ChildrenDelete'
+    , childrenDelete
+    , ChildrenDelete
 
     -- * Request Lenses
     , cdFolderId
@@ -41,7 +41,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.children.delete@ method which the
--- 'ChildrenDelete'' request conforms to.
+-- 'ChildrenDelete' request conforms to.
 type ChildrenDeleteResource =
      "files" :>
        Capture "folderId" Text :>
@@ -51,42 +51,42 @@ type ChildrenDeleteResource =
 
 -- | Removes a child from a folder.
 --
--- /See:/ 'childrenDelete'' smart constructor.
-data ChildrenDelete' = ChildrenDelete'
+-- /See:/ 'childrenDelete' smart constructor.
+data ChildrenDelete = ChildrenDelete
     { _cdFolderId :: !Text
     , _cdChildId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChildrenDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChildrenDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cdFolderId'
 --
 -- * 'cdChildId'
-childrenDelete'
+childrenDelete
     :: Text -- ^ 'cdFolderId'
     -> Text -- ^ 'cdChildId'
-    -> ChildrenDelete'
-childrenDelete' pCdFolderId_ pCdChildId_ =
-    ChildrenDelete'
+    -> ChildrenDelete
+childrenDelete pCdFolderId_ pCdChildId_ =
+    ChildrenDelete
     { _cdFolderId = pCdFolderId_
     , _cdChildId = pCdChildId_
     }
 
 -- | The ID of the folder.
-cdFolderId :: Lens' ChildrenDelete' Text
+cdFolderId :: Lens' ChildrenDelete Text
 cdFolderId
   = lens _cdFolderId (\ s a -> s{_cdFolderId = a})
 
 -- | The ID of the child.
-cdChildId :: Lens' ChildrenDelete' Text
+cdChildId :: Lens' ChildrenDelete Text
 cdChildId
   = lens _cdChildId (\ s a -> s{_cdChildId = a})
 
-instance GoogleRequest ChildrenDelete' where
-        type Rs ChildrenDelete' = ()
-        requestClient ChildrenDelete'{..}
+instance GoogleRequest ChildrenDelete where
+        type Rs ChildrenDelete = ()
+        requestClient ChildrenDelete{..}
           = go _cdFolderId _cdChildId (Just AltJSON)
               driveService
           where go

@@ -32,8 +32,8 @@ module Network.Google.Resource.Classroom.Courses.Aliases.Delete
       CoursesAliasesDeleteResource
 
     -- * Creating a Request
-    , coursesAliasesDelete'
-    , CoursesAliasesDelete'
+    , coursesAliasesDelete
+    , CoursesAliasesDelete
 
     -- * Request Lenses
     , cadXgafv
@@ -51,7 +51,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.aliases.delete@ method which the
--- 'CoursesAliasesDelete'' request conforms to.
+-- 'CoursesAliasesDelete' request conforms to.
 type CoursesAliasesDeleteResource =
      "v1" :>
        "courses" :>
@@ -72,8 +72,8 @@ type CoursesAliasesDeleteResource =
 -- to remove the alias or for access errors. * \`NOT_FOUND\` if the alias
 -- does not exist.
 --
--- /See:/ 'coursesAliasesDelete'' smart constructor.
-data CoursesAliasesDelete' = CoursesAliasesDelete'
+-- /See:/ 'coursesAliasesDelete' smart constructor.
+data CoursesAliasesDelete = CoursesAliasesDelete
     { _cadXgafv          :: !(Maybe Text)
     , _cadUploadProtocol :: !(Maybe Text)
     , _cadPp             :: !Bool
@@ -85,7 +85,7 @@ data CoursesAliasesDelete' = CoursesAliasesDelete'
     , _cadCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CoursesAliasesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'CoursesAliasesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -106,12 +106,12 @@ data CoursesAliasesDelete' = CoursesAliasesDelete'
 -- * 'cadBearerToken'
 --
 -- * 'cadCallback'
-coursesAliasesDelete'
+coursesAliasesDelete
     :: Text -- ^ 'cadCourseId'
     -> Text -- ^ 'cadAlias'
-    -> CoursesAliasesDelete'
-coursesAliasesDelete' pCadCourseId_ pCadAlias_ =
-    CoursesAliasesDelete'
+    -> CoursesAliasesDelete
+coursesAliasesDelete pCadCourseId_ pCadAlias_ =
+    CoursesAliasesDelete
     { _cadXgafv = Nothing
     , _cadUploadProtocol = Nothing
     , _cadPp = True
@@ -124,55 +124,55 @@ coursesAliasesDelete' pCadCourseId_ pCadAlias_ =
     }
 
 -- | V1 error format.
-cadXgafv :: Lens' CoursesAliasesDelete' (Maybe Text)
+cadXgafv :: Lens' CoursesAliasesDelete (Maybe Text)
 cadXgafv = lens _cadXgafv (\ s a -> s{_cadXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-cadUploadProtocol :: Lens' CoursesAliasesDelete' (Maybe Text)
+cadUploadProtocol :: Lens' CoursesAliasesDelete (Maybe Text)
 cadUploadProtocol
   = lens _cadUploadProtocol
       (\ s a -> s{_cadUploadProtocol = a})
 
 -- | Pretty-print response.
-cadPp :: Lens' CoursesAliasesDelete' Bool
+cadPp :: Lens' CoursesAliasesDelete Bool
 cadPp = lens _cadPp (\ s a -> s{_cadPp = a})
 
 -- | Identifier of the course whose alias should be deleted. This identifier
 -- can be either the Classroom-assigned identifier or an alias.
-cadCourseId :: Lens' CoursesAliasesDelete' Text
+cadCourseId :: Lens' CoursesAliasesDelete Text
 cadCourseId
   = lens _cadCourseId (\ s a -> s{_cadCourseId = a})
 
 -- | OAuth access token.
-cadAccessToken :: Lens' CoursesAliasesDelete' (Maybe Text)
+cadAccessToken :: Lens' CoursesAliasesDelete (Maybe Text)
 cadAccessToken
   = lens _cadAccessToken
       (\ s a -> s{_cadAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-cadUploadType :: Lens' CoursesAliasesDelete' (Maybe Text)
+cadUploadType :: Lens' CoursesAliasesDelete (Maybe Text)
 cadUploadType
   = lens _cadUploadType
       (\ s a -> s{_cadUploadType = a})
 
 -- | Alias to delete. This may not be the Classroom-assigned identifier.
-cadAlias :: Lens' CoursesAliasesDelete' Text
+cadAlias :: Lens' CoursesAliasesDelete Text
 cadAlias = lens _cadAlias (\ s a -> s{_cadAlias = a})
 
 -- | OAuth bearer token.
-cadBearerToken :: Lens' CoursesAliasesDelete' (Maybe Text)
+cadBearerToken :: Lens' CoursesAliasesDelete (Maybe Text)
 cadBearerToken
   = lens _cadBearerToken
       (\ s a -> s{_cadBearerToken = a})
 
 -- | JSONP
-cadCallback :: Lens' CoursesAliasesDelete' (Maybe Text)
+cadCallback :: Lens' CoursesAliasesDelete (Maybe Text)
 cadCallback
   = lens _cadCallback (\ s a -> s{_cadCallback = a})
 
-instance GoogleRequest CoursesAliasesDelete' where
-        type Rs CoursesAliasesDelete' = Empty
-        requestClient CoursesAliasesDelete'{..}
+instance GoogleRequest CoursesAliasesDelete where
+        type Rs CoursesAliasesDelete = Empty
+        requestClient CoursesAliasesDelete{..}
           = go _cadCourseId _cadAlias _cadXgafv
               _cadUploadProtocol
               (Just _cadPp)

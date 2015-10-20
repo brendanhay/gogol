@@ -30,8 +30,8 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Patch
       ManagementProFileFilterLinksPatchResource
 
     -- * Creating a Request
-    , managementProFileFilterLinksPatch'
-    , ManagementProFileFilterLinksPatch'
+    , managementProFileFilterLinksPatch
+    , ManagementProFileFilterLinksPatch
 
     -- * Request Lenses
     , mpfflpWebPropertyId
@@ -45,7 +45,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profileFilterLinks.patch@ method which the
--- 'ManagementProFileFilterLinksPatch'' request conforms to.
+-- 'ManagementProFileFilterLinksPatch' request conforms to.
 type ManagementProFileFilterLinksPatchResource =
      "management" :>
        "accounts" :>
@@ -63,8 +63,8 @@ type ManagementProFileFilterLinksPatchResource =
 -- | Update an existing profile filter link. This method supports patch
 -- semantics.
 --
--- /See:/ 'managementProFileFilterLinksPatch'' smart constructor.
-data ManagementProFileFilterLinksPatch' = ManagementProFileFilterLinksPatch'
+-- /See:/ 'managementProFileFilterLinksPatch' smart constructor.
+data ManagementProFileFilterLinksPatch = ManagementProFileFilterLinksPatch
     { _mpfflpWebPropertyId :: !Text
     , _mpfflpProFileId     :: !Text
     , _mpfflpPayload       :: !ProFileFilterLink
@@ -72,7 +72,7 @@ data ManagementProFileFilterLinksPatch' = ManagementProFileFilterLinksPatch'
     , _mpfflpLinkId        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementProFileFilterLinksPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementProFileFilterLinksPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -85,15 +85,15 @@ data ManagementProFileFilterLinksPatch' = ManagementProFileFilterLinksPatch'
 -- * 'mpfflpAccountId'
 --
 -- * 'mpfflpLinkId'
-managementProFileFilterLinksPatch'
+managementProFileFilterLinksPatch
     :: Text -- ^ 'mpfflpWebPropertyId'
     -> Text -- ^ 'mpfflpProFileId'
     -> ProFileFilterLink -- ^ 'mpfflpPayload'
     -> Text -- ^ 'mpfflpAccountId'
     -> Text -- ^ 'mpfflpLinkId'
-    -> ManagementProFileFilterLinksPatch'
-managementProFileFilterLinksPatch' pMpfflpWebPropertyId_ pMpfflpProFileId_ pMpfflpPayload_ pMpfflpAccountId_ pMpfflpLinkId_ =
-    ManagementProFileFilterLinksPatch'
+    -> ManagementProFileFilterLinksPatch
+managementProFileFilterLinksPatch pMpfflpWebPropertyId_ pMpfflpProFileId_ pMpfflpPayload_ pMpfflpAccountId_ pMpfflpLinkId_ =
+    ManagementProFileFilterLinksPatch
     { _mpfflpWebPropertyId = pMpfflpWebPropertyId_
     , _mpfflpProFileId = pMpfflpProFileId_
     , _mpfflpPayload = pMpfflpPayload_
@@ -102,39 +102,39 @@ managementProFileFilterLinksPatch' pMpfflpWebPropertyId_ pMpfflpProFileId_ pMpff
     }
 
 -- | Web property Id to which profile filter link belongs
-mpfflpWebPropertyId :: Lens' ManagementProFileFilterLinksPatch' Text
+mpfflpWebPropertyId :: Lens' ManagementProFileFilterLinksPatch Text
 mpfflpWebPropertyId
   = lens _mpfflpWebPropertyId
       (\ s a -> s{_mpfflpWebPropertyId = a})
 
 -- | Profile ID to which filter link belongs
-mpfflpProFileId :: Lens' ManagementProFileFilterLinksPatch' Text
+mpfflpProFileId :: Lens' ManagementProFileFilterLinksPatch Text
 mpfflpProFileId
   = lens _mpfflpProFileId
       (\ s a -> s{_mpfflpProFileId = a})
 
 -- | Multipart request metadata.
-mpfflpPayload :: Lens' ManagementProFileFilterLinksPatch' ProFileFilterLink
+mpfflpPayload :: Lens' ManagementProFileFilterLinksPatch ProFileFilterLink
 mpfflpPayload
   = lens _mpfflpPayload
       (\ s a -> s{_mpfflpPayload = a})
 
 -- | Account ID to which profile filter link belongs.
-mpfflpAccountId :: Lens' ManagementProFileFilterLinksPatch' Text
+mpfflpAccountId :: Lens' ManagementProFileFilterLinksPatch Text
 mpfflpAccountId
   = lens _mpfflpAccountId
       (\ s a -> s{_mpfflpAccountId = a})
 
 -- | ID of the profile filter link to be updated.
-mpfflpLinkId :: Lens' ManagementProFileFilterLinksPatch' Text
+mpfflpLinkId :: Lens' ManagementProFileFilterLinksPatch Text
 mpfflpLinkId
   = lens _mpfflpLinkId (\ s a -> s{_mpfflpLinkId = a})
 
 instance GoogleRequest
-         ManagementProFileFilterLinksPatch' where
-        type Rs ManagementProFileFilterLinksPatch' =
+         ManagementProFileFilterLinksPatch where
+        type Rs ManagementProFileFilterLinksPatch =
              ProFileFilterLink
-        requestClient ManagementProFileFilterLinksPatch'{..}
+        requestClient ManagementProFileFilterLinksPatch{..}
           = go _mpfflpAccountId _mpfflpWebPropertyId
               _mpfflpProFileId
               _mpfflpLinkId

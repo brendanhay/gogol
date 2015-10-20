@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Update
       MarketplaceOrdersUpdateResource
 
     -- * Creating a Request
-    , marketplaceOrdersUpdate'
-    , MarketplaceOrdersUpdate'
+    , marketplaceOrdersUpdate
+    , MarketplaceOrdersUpdate
 
     -- * Request Lenses
     , mouUpdateAction
@@ -43,7 +43,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.marketplaceorders.update@ method which the
--- 'MarketplaceOrdersUpdate'' request conforms to.
+-- 'MarketplaceOrdersUpdate' request conforms to.
 type MarketplaceOrdersUpdateResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
@@ -57,15 +57,15 @@ type MarketplaceOrdersUpdateResource =
 
 -- | Update the given order
 --
--- /See:/ 'marketplaceOrdersUpdate'' smart constructor.
-data MarketplaceOrdersUpdate' = MarketplaceOrdersUpdate'
+-- /See:/ 'marketplaceOrdersUpdate' smart constructor.
+data MarketplaceOrdersUpdate = MarketplaceOrdersUpdate
     { _mouUpdateAction   :: !MarketplaceOrdersUpdateUpdateAction
     , _mouRevisionNumber :: !Int64
     , _mouPayload        :: !MarketplaceOrder
     , _mouOrderId        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MarketplaceOrdersUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'MarketplaceOrdersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,14 +76,14 @@ data MarketplaceOrdersUpdate' = MarketplaceOrdersUpdate'
 -- * 'mouPayload'
 --
 -- * 'mouOrderId'
-marketplaceOrdersUpdate'
+marketplaceOrdersUpdate
     :: MarketplaceOrdersUpdateUpdateAction -- ^ 'mouUpdateAction'
     -> Int64 -- ^ 'mouRevisionNumber'
     -> MarketplaceOrder -- ^ 'mouPayload'
     -> Text -- ^ 'mouOrderId'
-    -> MarketplaceOrdersUpdate'
-marketplaceOrdersUpdate' pMouUpdateAction_ pMouRevisionNumber_ pMouPayload_ pMouOrderId_ =
-    MarketplaceOrdersUpdate'
+    -> MarketplaceOrdersUpdate
+marketplaceOrdersUpdate pMouUpdateAction_ pMouRevisionNumber_ pMouPayload_ pMouOrderId_ =
+    MarketplaceOrdersUpdate
     { _mouUpdateAction = pMouUpdateAction_
     , _mouRevisionNumber = pMouRevisionNumber_
     , _mouPayload = pMouPayload_
@@ -91,7 +91,7 @@ marketplaceOrdersUpdate' pMouUpdateAction_ pMouRevisionNumber_ pMouPayload_ pMou
     }
 
 -- | The proposed action to take on the order.
-mouUpdateAction :: Lens' MarketplaceOrdersUpdate' MarketplaceOrdersUpdateUpdateAction
+mouUpdateAction :: Lens' MarketplaceOrdersUpdate MarketplaceOrdersUpdateUpdateAction
 mouUpdateAction
   = lens _mouUpdateAction
       (\ s a -> s{_mouUpdateAction = a})
@@ -100,24 +100,24 @@ mouUpdateAction
 -- marketplace database has since changed, an error will be thrown. The
 -- caller should then fetch the lastest order at head revision and retry
 -- the update at that revision.
-mouRevisionNumber :: Lens' MarketplaceOrdersUpdate' Int64
+mouRevisionNumber :: Lens' MarketplaceOrdersUpdate Int64
 mouRevisionNumber
   = lens _mouRevisionNumber
       (\ s a -> s{_mouRevisionNumber = a})
 
 -- | Multipart request metadata.
-mouPayload :: Lens' MarketplaceOrdersUpdate' MarketplaceOrder
+mouPayload :: Lens' MarketplaceOrdersUpdate MarketplaceOrder
 mouPayload
   = lens _mouPayload (\ s a -> s{_mouPayload = a})
 
 -- | The order id to update.
-mouOrderId :: Lens' MarketplaceOrdersUpdate' Text
+mouOrderId :: Lens' MarketplaceOrdersUpdate Text
 mouOrderId
   = lens _mouOrderId (\ s a -> s{_mouOrderId = a})
 
-instance GoogleRequest MarketplaceOrdersUpdate' where
-        type Rs MarketplaceOrdersUpdate' = MarketplaceOrder
-        requestClient MarketplaceOrdersUpdate'{..}
+instance GoogleRequest MarketplaceOrdersUpdate where
+        type Rs MarketplaceOrdersUpdate = MarketplaceOrder
+        requestClient MarketplaceOrdersUpdate{..}
           = go _mouOrderId _mouRevisionNumber _mouUpdateAction
               (Just AltJSON)
               _mouPayload

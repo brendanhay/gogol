@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Bookshelves.Volumes.List
       BookshelvesVolumesListResource
 
     -- * Creating a Request
-    , bookshelvesVolumesList'
-    , BookshelvesVolumesList'
+    , bookshelvesVolumesList
+    , BookshelvesVolumesList
 
     -- * Request Lenses
     , bvlUserId
@@ -45,7 +45,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.bookshelves.volumes.list@ method which the
--- 'BookshelvesVolumesList'' request conforms to.
+-- 'BookshelvesVolumesList' request conforms to.
 type BookshelvesVolumesListResource =
      "users" :>
        Capture "userId" Text :>
@@ -60,8 +60,8 @@ type BookshelvesVolumesListResource =
 
 -- | Retrieves volumes in a specific bookshelf for the specified user.
 --
--- /See:/ 'bookshelvesVolumesList'' smart constructor.
-data BookshelvesVolumesList' = BookshelvesVolumesList'
+-- /See:/ 'bookshelvesVolumesList' smart constructor.
+data BookshelvesVolumesList = BookshelvesVolumesList
     { _bvlUserId        :: !Text
     , _bvlShelf         :: !Text
     , _bvlSource        :: !(Maybe Text)
@@ -70,7 +70,7 @@ data BookshelvesVolumesList' = BookshelvesVolumesList'
     , _bvlShowPreOrders :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BookshelvesVolumesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'BookshelvesVolumesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -85,12 +85,12 @@ data BookshelvesVolumesList' = BookshelvesVolumesList'
 -- * 'bvlMaxResults'
 --
 -- * 'bvlShowPreOrders'
-bookshelvesVolumesList'
+bookshelvesVolumesList
     :: Text -- ^ 'bvlUserId'
     -> Text -- ^ 'bvlShelf'
-    -> BookshelvesVolumesList'
-bookshelvesVolumesList' pBvlUserId_ pBvlShelf_ =
-    BookshelvesVolumesList'
+    -> BookshelvesVolumesList
+bookshelvesVolumesList pBvlUserId_ pBvlShelf_ =
+    BookshelvesVolumesList
     { _bvlUserId = pBvlUserId_
     , _bvlShelf = pBvlShelf_
     , _bvlSource = Nothing
@@ -100,40 +100,40 @@ bookshelvesVolumesList' pBvlUserId_ pBvlShelf_ =
     }
 
 -- | ID of user for whom to retrieve bookshelf volumes.
-bvlUserId :: Lens' BookshelvesVolumesList' Text
+bvlUserId :: Lens' BookshelvesVolumesList Text
 bvlUserId
   = lens _bvlUserId (\ s a -> s{_bvlUserId = a})
 
 -- | ID of bookshelf to retrieve volumes.
-bvlShelf :: Lens' BookshelvesVolumesList' Text
+bvlShelf :: Lens' BookshelvesVolumesList Text
 bvlShelf = lens _bvlShelf (\ s a -> s{_bvlShelf = a})
 
 -- | String to identify the originator of this request.
-bvlSource :: Lens' BookshelvesVolumesList' (Maybe Text)
+bvlSource :: Lens' BookshelvesVolumesList (Maybe Text)
 bvlSource
   = lens _bvlSource (\ s a -> s{_bvlSource = a})
 
 -- | Index of the first element to return (starts at 0)
-bvlStartIndex :: Lens' BookshelvesVolumesList' (Maybe Word32)
+bvlStartIndex :: Lens' BookshelvesVolumesList (Maybe Word32)
 bvlStartIndex
   = lens _bvlStartIndex
       (\ s a -> s{_bvlStartIndex = a})
 
 -- | Maximum number of results to return
-bvlMaxResults :: Lens' BookshelvesVolumesList' (Maybe Word32)
+bvlMaxResults :: Lens' BookshelvesVolumesList (Maybe Word32)
 bvlMaxResults
   = lens _bvlMaxResults
       (\ s a -> s{_bvlMaxResults = a})
 
 -- | Set to true to show pre-ordered books. Defaults to false.
-bvlShowPreOrders :: Lens' BookshelvesVolumesList' (Maybe Bool)
+bvlShowPreOrders :: Lens' BookshelvesVolumesList (Maybe Bool)
 bvlShowPreOrders
   = lens _bvlShowPreOrders
       (\ s a -> s{_bvlShowPreOrders = a})
 
-instance GoogleRequest BookshelvesVolumesList' where
-        type Rs BookshelvesVolumesList' = Volumes
-        requestClient BookshelvesVolumesList'{..}
+instance GoogleRequest BookshelvesVolumesList where
+        type Rs BookshelvesVolumesList = Volumes
+        requestClient BookshelvesVolumesList{..}
           = go _bvlUserId _bvlShelf _bvlSource _bvlStartIndex
               _bvlMaxResults
               _bvlShowPreOrders

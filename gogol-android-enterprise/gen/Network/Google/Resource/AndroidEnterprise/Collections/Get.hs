@@ -29,19 +29,19 @@ module Network.Google.Resource.AndroidEnterprise.Collections.Get
       CollectionsGetResource
 
     -- * Creating a Request
-    , collectionsGet'
-    , CollectionsGet'
+    , collectionsGet
+    , CollectionsGet
 
     -- * Request Lenses
-    , cggEnterpriseId
-    , cggCollectionId
+    , cgEnterpriseId
+    , cgCollectionId
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.collections.get@ method which the
--- 'CollectionsGet'' request conforms to.
+-- 'CollectionsGet' request conforms to.
 type CollectionsGetResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -51,45 +51,45 @@ type CollectionsGetResource =
 
 -- | Retrieves the details of a collection.
 --
--- /See:/ 'collectionsGet'' smart constructor.
-data CollectionsGet' = CollectionsGet'
-    { _cggEnterpriseId :: !Text
-    , _cggCollectionId :: !Text
+-- /See:/ 'collectionsGet' smart constructor.
+data CollectionsGet = CollectionsGet
+    { _cgEnterpriseId :: !Text
+    , _cgCollectionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CollectionsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CollectionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cggEnterpriseId'
+-- * 'cgEnterpriseId'
 --
--- * 'cggCollectionId'
-collectionsGet'
-    :: Text -- ^ 'cggEnterpriseId'
-    -> Text -- ^ 'cggCollectionId'
-    -> CollectionsGet'
-collectionsGet' pCggEnterpriseId_ pCggCollectionId_ =
-    CollectionsGet'
-    { _cggEnterpriseId = pCggEnterpriseId_
-    , _cggCollectionId = pCggCollectionId_
+-- * 'cgCollectionId'
+collectionsGet
+    :: Text -- ^ 'cgEnterpriseId'
+    -> Text -- ^ 'cgCollectionId'
+    -> CollectionsGet
+collectionsGet pCgEnterpriseId_ pCgCollectionId_ =
+    CollectionsGet
+    { _cgEnterpriseId = pCgEnterpriseId_
+    , _cgCollectionId = pCgCollectionId_
     }
 
 -- | The ID of the enterprise.
-cggEnterpriseId :: Lens' CollectionsGet' Text
-cggEnterpriseId
-  = lens _cggEnterpriseId
-      (\ s a -> s{_cggEnterpriseId = a})
+cgEnterpriseId :: Lens' CollectionsGet Text
+cgEnterpriseId
+  = lens _cgEnterpriseId
+      (\ s a -> s{_cgEnterpriseId = a})
 
 -- | The ID of the collection.
-cggCollectionId :: Lens' CollectionsGet' Text
-cggCollectionId
-  = lens _cggCollectionId
-      (\ s a -> s{_cggCollectionId = a})
+cgCollectionId :: Lens' CollectionsGet Text
+cgCollectionId
+  = lens _cgCollectionId
+      (\ s a -> s{_cgCollectionId = a})
 
-instance GoogleRequest CollectionsGet' where
-        type Rs CollectionsGet' = Collection
-        requestClient CollectionsGet'{..}
-          = go _cggEnterpriseId _cggCollectionId (Just AltJSON)
+instance GoogleRequest CollectionsGet where
+        type Rs CollectionsGet = Collection
+        requestClient CollectionsGet{..}
+          = go _cgEnterpriseId _cgCollectionId (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient (Proxy :: Proxy CollectionsGetResource)

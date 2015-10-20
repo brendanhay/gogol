@@ -32,8 +32,8 @@ module Network.Google.Resource.MapsEngine.Tables.Files.Insert
       TablesFilesInsertResource
 
     -- * Creating a Request
-    , tablesFilesInsert'
-    , TablesFilesInsert'
+    , tablesFilesInsert
+    , TablesFilesInsert
 
     -- * Request Lenses
     , tfiMedia
@@ -45,7 +45,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.tables.files.insert@ method which the
--- 'TablesFilesInsert'' request conforms to.
+-- 'TablesFilesInsert' request conforms to.
 type TablesFilesInsertResource =
      "tables" :>
        Capture "id" Text :>
@@ -59,14 +59,14 @@ type TablesFilesInsertResource =
 -- in the Supported data formats and limits article of the Google Maps
 -- Engine help center.
 --
--- /See:/ 'tablesFilesInsert'' smart constructor.
-data TablesFilesInsert' = TablesFilesInsert'
+-- /See:/ 'tablesFilesInsert' smart constructor.
+data TablesFilesInsert = TablesFilesInsert
     { _tfiMedia    :: !Body
     , _tfiId       :: !Text
     , _tfiFilename :: !Text
     }
 
--- | Creates a value of 'TablesFilesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesFilesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,33 +75,33 @@ data TablesFilesInsert' = TablesFilesInsert'
 -- * 'tfiId'
 --
 -- * 'tfiFilename'
-tablesFilesInsert'
+tablesFilesInsert
     :: Body -- ^ 'tfiMedia'
     -> Text -- ^ 'tfiId'
     -> Text -- ^ 'tfiFilename'
-    -> TablesFilesInsert'
-tablesFilesInsert' pTfiMedia_ pTfiId_ pTfiFilename_ =
-    TablesFilesInsert'
+    -> TablesFilesInsert
+tablesFilesInsert pTfiMedia_ pTfiId_ pTfiFilename_ =
+    TablesFilesInsert
     { _tfiMedia = pTfiMedia_
     , _tfiId = pTfiId_
     , _tfiFilename = pTfiFilename_
     }
 
-tfiMedia :: Lens' TablesFilesInsert' Body
+tfiMedia :: Lens' TablesFilesInsert Body
 tfiMedia = lens _tfiMedia (\ s a -> s{_tfiMedia = a})
 
 -- | The ID of the table asset.
-tfiId :: Lens' TablesFilesInsert' Text
+tfiId :: Lens' TablesFilesInsert Text
 tfiId = lens _tfiId (\ s a -> s{_tfiId = a})
 
 -- | The file name of this uploaded file.
-tfiFilename :: Lens' TablesFilesInsert' Text
+tfiFilename :: Lens' TablesFilesInsert Text
 tfiFilename
   = lens _tfiFilename (\ s a -> s{_tfiFilename = a})
 
-instance GoogleRequest TablesFilesInsert' where
-        type Rs TablesFilesInsert' = ()
-        requestClient TablesFilesInsert'{..}
+instance GoogleRequest TablesFilesInsert where
+        type Rs TablesFilesInsert = ()
+        requestClient TablesFilesInsert{..}
           = go _tfiId (Just _tfiFilename) (Just AltJSON)
               _tfiMedia
               mapsEngineService

@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.UnSampledReports.List
       ManagementUnSampledReportsListResource
 
     -- * Creating a Request
-    , managementUnSampledReportsList'
-    , ManagementUnSampledReportsList'
+    , managementUnSampledReportsList
+    , ManagementUnSampledReportsList
 
     -- * Request Lenses
     , musrlWebPropertyId
@@ -44,7 +44,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.unsampledReports.list@ method which the
--- 'ManagementUnSampledReportsList'' request conforms to.
+-- 'ManagementUnSampledReportsList' request conforms to.
 type ManagementUnSampledReportsListResource =
      "management" :>
        "accounts" :>
@@ -61,8 +61,8 @@ type ManagementUnSampledReportsListResource =
 
 -- | Lists unsampled reports to which the user has access.
 --
--- /See:/ 'managementUnSampledReportsList'' smart constructor.
-data ManagementUnSampledReportsList' = ManagementUnSampledReportsList'
+-- /See:/ 'managementUnSampledReportsList' smart constructor.
+data ManagementUnSampledReportsList = ManagementUnSampledReportsList
     { _musrlWebPropertyId :: !Text
     , _musrlProFileId     :: !Text
     , _musrlAccountId     :: !Text
@@ -70,7 +70,7 @@ data ManagementUnSampledReportsList' = ManagementUnSampledReportsList'
     , _musrlMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementUnSampledReportsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementUnSampledReportsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -83,13 +83,13 @@ data ManagementUnSampledReportsList' = ManagementUnSampledReportsList'
 -- * 'musrlStartIndex'
 --
 -- * 'musrlMaxResults'
-managementUnSampledReportsList'
+managementUnSampledReportsList
     :: Text -- ^ 'musrlWebPropertyId'
     -> Text -- ^ 'musrlProFileId'
     -> Text -- ^ 'musrlAccountId'
-    -> ManagementUnSampledReportsList'
-managementUnSampledReportsList' pMusrlWebPropertyId_ pMusrlProFileId_ pMusrlAccountId_ =
-    ManagementUnSampledReportsList'
+    -> ManagementUnSampledReportsList
+managementUnSampledReportsList pMusrlWebPropertyId_ pMusrlProFileId_ pMusrlAccountId_ =
+    ManagementUnSampledReportsList
     { _musrlWebPropertyId = pMusrlWebPropertyId_
     , _musrlProFileId = pMusrlProFileId_
     , _musrlAccountId = pMusrlAccountId_
@@ -99,43 +99,43 @@ managementUnSampledReportsList' pMusrlWebPropertyId_ pMusrlProFileId_ pMusrlAcco
 
 -- | Web property ID to retrieve unsampled reports for. Must be a specific
 -- web property ID, ~all is not supported.
-musrlWebPropertyId :: Lens' ManagementUnSampledReportsList' Text
+musrlWebPropertyId :: Lens' ManagementUnSampledReportsList Text
 musrlWebPropertyId
   = lens _musrlWebPropertyId
       (\ s a -> s{_musrlWebPropertyId = a})
 
 -- | View (Profile) ID to retrieve unsampled reports for. Must be a specific
 -- view (profile) ID, ~all is not supported.
-musrlProFileId :: Lens' ManagementUnSampledReportsList' Text
+musrlProFileId :: Lens' ManagementUnSampledReportsList Text
 musrlProFileId
   = lens _musrlProFileId
       (\ s a -> s{_musrlProFileId = a})
 
 -- | Account ID to retrieve unsampled reports for. Must be a specific account
 -- ID, ~all is not supported.
-musrlAccountId :: Lens' ManagementUnSampledReportsList' Text
+musrlAccountId :: Lens' ManagementUnSampledReportsList Text
 musrlAccountId
   = lens _musrlAccountId
       (\ s a -> s{_musrlAccountId = a})
 
 -- | An index of the first unsampled report to retrieve. Use this parameter
 -- as a pagination mechanism along with the max-results parameter.
-musrlStartIndex :: Lens' ManagementUnSampledReportsList' (Maybe Int32)
+musrlStartIndex :: Lens' ManagementUnSampledReportsList (Maybe Int32)
 musrlStartIndex
   = lens _musrlStartIndex
       (\ s a -> s{_musrlStartIndex = a})
 
 -- | The maximum number of unsampled reports to include in this response.
-musrlMaxResults :: Lens' ManagementUnSampledReportsList' (Maybe Int32)
+musrlMaxResults :: Lens' ManagementUnSampledReportsList (Maybe Int32)
 musrlMaxResults
   = lens _musrlMaxResults
       (\ s a -> s{_musrlMaxResults = a})
 
-instance GoogleRequest
-         ManagementUnSampledReportsList' where
-        type Rs ManagementUnSampledReportsList' =
+instance GoogleRequest ManagementUnSampledReportsList
+         where
+        type Rs ManagementUnSampledReportsList =
              UnSampledReports
-        requestClient ManagementUnSampledReportsList'{..}
+        requestClient ManagementUnSampledReportsList{..}
           = go _musrlAccountId _musrlWebPropertyId
               _musrlProFileId
               _musrlStartIndex

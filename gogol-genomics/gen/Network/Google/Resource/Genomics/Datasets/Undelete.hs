@@ -31,8 +31,8 @@ module Network.Google.Resource.Genomics.Datasets.Undelete
       DatasetsUndeleteResource
 
     -- * Creating a Request
-    , datasetsUndelete'
-    , DatasetsUndelete'
+    , datasetsUndelete
+    , DatasetsUndelete
 
     -- * Request Lenses
     , duXgafv
@@ -50,7 +50,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.datasets.undelete@ method which the
--- 'DatasetsUndelete'' request conforms to.
+-- 'DatasetsUndelete' request conforms to.
 type DatasetsUndeleteResource =
      "v1" :>
        "datasets" :>
@@ -70,8 +70,8 @@ type DatasetsUndeleteResource =
 -- API. This operation is only possible for a week after the deletion
 -- occurred.
 --
--- /See:/ 'datasetsUndelete'' smart constructor.
-data DatasetsUndelete' = DatasetsUndelete'
+-- /See:/ 'datasetsUndelete' smart constructor.
+data DatasetsUndelete = DatasetsUndelete
     { _duXgafv          :: !(Maybe Text)
     , _duUploadProtocol :: !(Maybe Text)
     , _duPp             :: !Bool
@@ -83,7 +83,7 @@ data DatasetsUndelete' = DatasetsUndelete'
     , _duCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsUndelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsUndelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -104,12 +104,12 @@ data DatasetsUndelete' = DatasetsUndelete'
 -- * 'duDatasetId'
 --
 -- * 'duCallback'
-datasetsUndelete'
+datasetsUndelete
     :: UndeleteDatasetRequest -- ^ 'duPayload'
     -> Text -- ^ 'duDatasetId'
-    -> DatasetsUndelete'
-datasetsUndelete' pDuPayload_ pDuDatasetId_ =
-    DatasetsUndelete'
+    -> DatasetsUndelete
+datasetsUndelete pDuPayload_ pDuDatasetId_ =
+    DatasetsUndelete
     { _duXgafv = Nothing
     , _duUploadProtocol = Nothing
     , _duPp = True
@@ -122,54 +122,54 @@ datasetsUndelete' pDuPayload_ pDuDatasetId_ =
     }
 
 -- | V1 error format.
-duXgafv :: Lens' DatasetsUndelete' (Maybe Text)
+duXgafv :: Lens' DatasetsUndelete (Maybe Text)
 duXgafv = lens _duXgafv (\ s a -> s{_duXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-duUploadProtocol :: Lens' DatasetsUndelete' (Maybe Text)
+duUploadProtocol :: Lens' DatasetsUndelete (Maybe Text)
 duUploadProtocol
   = lens _duUploadProtocol
       (\ s a -> s{_duUploadProtocol = a})
 
 -- | Pretty-print response.
-duPp :: Lens' DatasetsUndelete' Bool
+duPp :: Lens' DatasetsUndelete Bool
 duPp = lens _duPp (\ s a -> s{_duPp = a})
 
 -- | OAuth access token.
-duAccessToken :: Lens' DatasetsUndelete' (Maybe Text)
+duAccessToken :: Lens' DatasetsUndelete (Maybe Text)
 duAccessToken
   = lens _duAccessToken
       (\ s a -> s{_duAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-duUploadType :: Lens' DatasetsUndelete' (Maybe Text)
+duUploadType :: Lens' DatasetsUndelete (Maybe Text)
 duUploadType
   = lens _duUploadType (\ s a -> s{_duUploadType = a})
 
 -- | Multipart request metadata.
-duPayload :: Lens' DatasetsUndelete' UndeleteDatasetRequest
+duPayload :: Lens' DatasetsUndelete UndeleteDatasetRequest
 duPayload
   = lens _duPayload (\ s a -> s{_duPayload = a})
 
 -- | OAuth bearer token.
-duBearerToken :: Lens' DatasetsUndelete' (Maybe Text)
+duBearerToken :: Lens' DatasetsUndelete (Maybe Text)
 duBearerToken
   = lens _duBearerToken
       (\ s a -> s{_duBearerToken = a})
 
 -- | The ID of the dataset to be undeleted.
-duDatasetId :: Lens' DatasetsUndelete' Text
+duDatasetId :: Lens' DatasetsUndelete Text
 duDatasetId
   = lens _duDatasetId (\ s a -> s{_duDatasetId = a})
 
 -- | JSONP
-duCallback :: Lens' DatasetsUndelete' (Maybe Text)
+duCallback :: Lens' DatasetsUndelete (Maybe Text)
 duCallback
   = lens _duCallback (\ s a -> s{_duCallback = a})
 
-instance GoogleRequest DatasetsUndelete' where
-        type Rs DatasetsUndelete' = Dataset
-        requestClient DatasetsUndelete'{..}
+instance GoogleRequest DatasetsUndelete where
+        type Rs DatasetsUndelete = Dataset
+        requestClient DatasetsUndelete{..}
           = go _duDatasetId _duXgafv _duUploadProtocol
               (Just _duPp)
               _duAccessToken

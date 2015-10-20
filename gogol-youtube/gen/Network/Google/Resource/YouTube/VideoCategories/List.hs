@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.VideoCategories.List
       VideoCategoriesListResource
 
     -- * Creating a Request
-    , videoCategoriesList'
-    , VideoCategoriesList'
+    , videoCategoriesList
+    , VideoCategoriesList
 
     -- * Request Lenses
     , vclPart
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.videoCategories.list@ method which the
--- 'VideoCategoriesList'' request conforms to.
+-- 'VideoCategoriesList' request conforms to.
 type VideoCategoriesListResource =
      "videoCategories" :>
        QueryParam "part" Text :>
@@ -55,15 +55,15 @@ type VideoCategoriesListResource =
 
 -- | Returns a list of categories that can be associated with YouTube videos.
 --
--- /See:/ 'videoCategoriesList'' smart constructor.
-data VideoCategoriesList' = VideoCategoriesList'
+-- /See:/ 'videoCategoriesList' smart constructor.
+data VideoCategoriesList = VideoCategoriesList
     { _vclPart       :: !Text
     , _vclRegionCode :: !(Maybe Text)
     , _vclHl         :: !Text
     , _vclId         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VideoCategoriesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'VideoCategoriesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,11 +74,11 @@ data VideoCategoriesList' = VideoCategoriesList'
 -- * 'vclHl'
 --
 -- * 'vclId'
-videoCategoriesList'
+videoCategoriesList
     :: Text -- ^ 'vclPart'
-    -> VideoCategoriesList'
-videoCategoriesList' pVclPart_ =
-    VideoCategoriesList'
+    -> VideoCategoriesList
+videoCategoriesList pVclPart_ =
+    VideoCategoriesList
     { _vclPart = pVclPart_
     , _vclRegionCode = Nothing
     , _vclHl = "en_US"
@@ -87,31 +87,31 @@ videoCategoriesList' pVclPart_ =
 
 -- | The part parameter specifies the videoCategory resource properties that
 -- the API response will include. Set the parameter value to snippet.
-vclPart :: Lens' VideoCategoriesList' Text
+vclPart :: Lens' VideoCategoriesList Text
 vclPart = lens _vclPart (\ s a -> s{_vclPart = a})
 
 -- | The regionCode parameter instructs the API to return the list of video
 -- categories available in the specified country. The parameter value is an
 -- ISO 3166-1 alpha-2 country code.
-vclRegionCode :: Lens' VideoCategoriesList' (Maybe Text)
+vclRegionCode :: Lens' VideoCategoriesList (Maybe Text)
 vclRegionCode
   = lens _vclRegionCode
       (\ s a -> s{_vclRegionCode = a})
 
 -- | The hl parameter specifies the language that should be used for text
 -- values in the API response.
-vclHl :: Lens' VideoCategoriesList' Text
+vclHl :: Lens' VideoCategoriesList Text
 vclHl = lens _vclHl (\ s a -> s{_vclHl = a})
 
 -- | The id parameter specifies a comma-separated list of video category IDs
 -- for the resources that you are retrieving.
-vclId :: Lens' VideoCategoriesList' (Maybe Text)
+vclId :: Lens' VideoCategoriesList (Maybe Text)
 vclId = lens _vclId (\ s a -> s{_vclId = a})
 
-instance GoogleRequest VideoCategoriesList' where
-        type Rs VideoCategoriesList' =
+instance GoogleRequest VideoCategoriesList where
+        type Rs VideoCategoriesList =
              VideoCategoryListResponse
-        requestClient VideoCategoriesList'{..}
+        requestClient VideoCategoriesList{..}
           = go (Just _vclPart) _vclRegionCode (Just _vclHl)
               _vclId
               (Just AltJSON)

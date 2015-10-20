@@ -29,8 +29,8 @@ module Network.Google.Resource.EmailMigration.Mail.Insert
       MailInsertResource
 
     -- * Creating a Request
-    , mailInsert'
-    , MailInsert'
+    , mailInsert
+    , MailInsert
 
     -- * Request Lenses
     , miPayload
@@ -42,7 +42,7 @@ import           Network.Google.EmailMigration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @emailMigration.mail.insert@ method which the
--- 'MailInsert'' request conforms to.
+-- 'MailInsert' request conforms to.
 type MailInsertResource =
      Capture "userKey" Text :>
        "mail" :>
@@ -52,14 +52,14 @@ type MailInsertResource =
 
 -- | Insert Mail into Google\'s Gmail backends
 --
--- /See:/ 'mailInsert'' smart constructor.
-data MailInsert' = MailInsert'
+-- /See:/ 'mailInsert' smart constructor.
+data MailInsert = MailInsert
     { _miPayload :: !MailItem
     , _miMedia   :: !Body
     , _miUserKey :: !Text
     }
 
--- | Creates a value of 'MailInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'MailInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,34 +68,34 @@ data MailInsert' = MailInsert'
 -- * 'miMedia'
 --
 -- * 'miUserKey'
-mailInsert'
+mailInsert
     :: MailItem -- ^ 'miPayload'
     -> Body -- ^ 'miMedia'
     -> Text -- ^ 'miUserKey'
-    -> MailInsert'
-mailInsert' pMiPayload_ pMiMedia_ pMiUserKey_ =
-    MailInsert'
+    -> MailInsert
+mailInsert pMiPayload_ pMiMedia_ pMiUserKey_ =
+    MailInsert
     { _miPayload = pMiPayload_
     , _miMedia = pMiMedia_
     , _miUserKey = pMiUserKey_
     }
 
 -- | Multipart request metadata.
-miPayload :: Lens' MailInsert' MailItem
+miPayload :: Lens' MailInsert MailItem
 miPayload
   = lens _miPayload (\ s a -> s{_miPayload = a})
 
-miMedia :: Lens' MailInsert' Body
+miMedia :: Lens' MailInsert Body
 miMedia = lens _miMedia (\ s a -> s{_miMedia = a})
 
 -- | The email or immutable id of the user
-miUserKey :: Lens' MailInsert' Text
+miUserKey :: Lens' MailInsert Text
 miUserKey
   = lens _miUserKey (\ s a -> s{_miUserKey = a})
 
-instance GoogleRequest MailInsert' where
-        type Rs MailInsert' = ()
-        requestClient MailInsert'{..}
+instance GoogleRequest MailInsert where
+        type Rs MailInsert = ()
+        requestClient MailInsert{..}
           = go _miUserKey (Just AltJSON) _miPayload _miMedia
               emailMigrationService
           where go

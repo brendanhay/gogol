@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Reports.Files.Get
       ReportsFilesGetResource
 
     -- * Creating a Request
-    , reportsFilesGet'
-    , ReportsFilesGet'
+    , reportsFilesGet
+    , ReportsFilesGet
 
     -- * Request Lenses
     , rfgReportId
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.reports.files.get@ method which the
--- 'ReportsFilesGet'' request conforms to.
+-- 'ReportsFilesGet' request conforms to.
 type ReportsFilesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -63,14 +63,14 @@ type ReportsFilesGetResource =
 
 -- | Retrieves a report file.
 --
--- /See:/ 'reportsFilesGet'' smart constructor.
-data ReportsFilesGet' = ReportsFilesGet'
+-- /See:/ 'reportsFilesGet' smart constructor.
+data ReportsFilesGet = ReportsFilesGet
     { _rfgReportId  :: !Int64
     , _rfgProFileId :: !Int64
     , _rfgFileId    :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReportsFilesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportsFilesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,36 +79,36 @@ data ReportsFilesGet' = ReportsFilesGet'
 -- * 'rfgProFileId'
 --
 -- * 'rfgFileId'
-reportsFilesGet'
+reportsFilesGet
     :: Int64 -- ^ 'rfgReportId'
     -> Int64 -- ^ 'rfgProFileId'
     -> Int64 -- ^ 'rfgFileId'
-    -> ReportsFilesGet'
-reportsFilesGet' pRfgReportId_ pRfgProFileId_ pRfgFileId_ =
-    ReportsFilesGet'
+    -> ReportsFilesGet
+reportsFilesGet pRfgReportId_ pRfgProFileId_ pRfgFileId_ =
+    ReportsFilesGet
     { _rfgReportId = pRfgReportId_
     , _rfgProFileId = pRfgProFileId_
     , _rfgFileId = pRfgFileId_
     }
 
 -- | The ID of the report.
-rfgReportId :: Lens' ReportsFilesGet' Int64
+rfgReportId :: Lens' ReportsFilesGet Int64
 rfgReportId
   = lens _rfgReportId (\ s a -> s{_rfgReportId = a})
 
 -- | The DFA profile ID.
-rfgProFileId :: Lens' ReportsFilesGet' Int64
+rfgProFileId :: Lens' ReportsFilesGet Int64
 rfgProFileId
   = lens _rfgProFileId (\ s a -> s{_rfgProFileId = a})
 
 -- | The ID of the report file.
-rfgFileId :: Lens' ReportsFilesGet' Int64
+rfgFileId :: Lens' ReportsFilesGet Int64
 rfgFileId
   = lens _rfgFileId (\ s a -> s{_rfgFileId = a})
 
-instance GoogleRequest ReportsFilesGet' where
-        type Rs ReportsFilesGet' = File
-        requestClient ReportsFilesGet'{..}
+instance GoogleRequest ReportsFilesGet where
+        type Rs ReportsFilesGet = File
+        requestClient ReportsFilesGet{..}
           = go _rfgProFileId _rfgReportId _rfgFileId
               (Just AltJSON)
               dFAReportingService
@@ -118,9 +118,9 @@ instance GoogleRequest ReportsFilesGet' where
                       mempty
 
 instance GoogleRequest
-         (MediaDownload ReportsFilesGet') where
-        type Rs (MediaDownload ReportsFilesGet') = Stream
-        requestClient (MediaDownload ReportsFilesGet'{..})
+         (MediaDownload ReportsFilesGet) where
+        type Rs (MediaDownload ReportsFilesGet) = Stream
+        requestClient (MediaDownload ReportsFilesGet{..})
           = go _rfgProFileId _rfgReportId _rfgFileId
               (Just AltMedia)
               dFAReportingService

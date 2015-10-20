@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Users.Get
       UsersGetResource
 
     -- * Creating a Request
-    , usersGet'
-    , UsersGet'
+    , usersGet
+    , UsersGet
 
     -- * Request Lenses
     , ugViewType
@@ -43,7 +43,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.users.get@ method which the
--- 'UsersGet'' request conforms to.
+-- 'UsersGet' request conforms to.
 type UsersGetResource =
      "users" :>
        Capture "userKey" Text :>
@@ -54,15 +54,15 @@ type UsersGetResource =
 
 -- | retrieve user
 --
--- /See:/ 'usersGet'' smart constructor.
-data UsersGet' = UsersGet'
+-- /See:/ 'usersGet' smart constructor.
+data UsersGet = UsersGet
     { _ugViewType        :: !UsersGetViewType
     , _ugCustomFieldMask :: !(Maybe Text)
     , _ugProjection      :: !UsersGetProjection
     , _ugUserKey         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,11 +73,11 @@ data UsersGet' = UsersGet'
 -- * 'ugProjection'
 --
 -- * 'ugUserKey'
-usersGet'
+usersGet
     :: Text -- ^ 'ugUserKey'
-    -> UsersGet'
-usersGet' pUgUserKey_ =
-    UsersGet'
+    -> UsersGet
+usersGet pUgUserKey_ =
+    UsersGet
     { _ugViewType = UGVTAdminView
     , _ugCustomFieldMask = Nothing
     , _ugProjection = UGPBasic
@@ -85,30 +85,30 @@ usersGet' pUgUserKey_ =
     }
 
 -- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
-ugViewType :: Lens' UsersGet' UsersGetViewType
+ugViewType :: Lens' UsersGet UsersGetViewType
 ugViewType
   = lens _ugViewType (\ s a -> s{_ugViewType = a})
 
 -- | Comma-separated list of schema names. All fields from these schemas are
 -- fetched. This should only be set when projection=custom.
-ugCustomFieldMask :: Lens' UsersGet' (Maybe Text)
+ugCustomFieldMask :: Lens' UsersGet (Maybe Text)
 ugCustomFieldMask
   = lens _ugCustomFieldMask
       (\ s a -> s{_ugCustomFieldMask = a})
 
 -- | What subset of fields to fetch for this user.
-ugProjection :: Lens' UsersGet' UsersGetProjection
+ugProjection :: Lens' UsersGet UsersGetProjection
 ugProjection
   = lens _ugProjection (\ s a -> s{_ugProjection = a})
 
 -- | Email or immutable Id of the user
-ugUserKey :: Lens' UsersGet' Text
+ugUserKey :: Lens' UsersGet Text
 ugUserKey
   = lens _ugUserKey (\ s a -> s{_ugUserKey = a})
 
-instance GoogleRequest UsersGet' where
-        type Rs UsersGet' = User
-        requestClient UsersGet'{..}
+instance GoogleRequest UsersGet where
+        type Rs UsersGet = User
+        requestClient UsersGet{..}
           = go _ugUserKey (Just _ugViewType) _ugCustomFieldMask
               (Just _ugProjection)
               (Just AltJSON)

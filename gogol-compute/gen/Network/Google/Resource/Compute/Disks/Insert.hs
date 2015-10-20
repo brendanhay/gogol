@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Disks.Insert
       DisksInsertResource
 
     -- * Creating a Request
-    , disksInsert'
-    , DisksInsert'
+    , disksInsert
+    , DisksInsert
 
     -- * Request Lenses
     , diSourceImage
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.disks.insert@ method which the
--- 'DisksInsert'' request conforms to.
+-- 'DisksInsert' request conforms to.
 type DisksInsertResource =
      Capture "project" Text :>
        "zones" :>
@@ -57,15 +57,15 @@ type DisksInsertResource =
 -- | Creates a persistent disk in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'disksInsert'' smart constructor.
-data DisksInsert' = DisksInsert'
+-- /See:/ 'disksInsert' smart constructor.
+data DisksInsert = DisksInsert
     { _diSourceImage :: !(Maybe Text)
     , _diProject     :: !Text
     , _diZone        :: !Text
     , _diPayload     :: !Disk
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DisksInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'DisksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,13 +76,13 @@ data DisksInsert' = DisksInsert'
 -- * 'diZone'
 --
 -- * 'diPayload'
-disksInsert'
+disksInsert
     :: Text -- ^ 'diProject'
     -> Text -- ^ 'diZone'
     -> Disk -- ^ 'diPayload'
-    -> DisksInsert'
-disksInsert' pDiProject_ pDiZone_ pDiPayload_ =
-    DisksInsert'
+    -> DisksInsert
+disksInsert pDiProject_ pDiZone_ pDiPayload_ =
+    DisksInsert
     { _diSourceImage = Nothing
     , _diProject = pDiProject_
     , _diZone = pDiZone_
@@ -90,28 +90,28 @@ disksInsert' pDiProject_ pDiZone_ pDiPayload_ =
     }
 
 -- | Optional. Source image to restore onto a disk.
-diSourceImage :: Lens' DisksInsert' (Maybe Text)
+diSourceImage :: Lens' DisksInsert (Maybe Text)
 diSourceImage
   = lens _diSourceImage
       (\ s a -> s{_diSourceImage = a})
 
 -- | Project ID for this request.
-diProject :: Lens' DisksInsert' Text
+diProject :: Lens' DisksInsert Text
 diProject
   = lens _diProject (\ s a -> s{_diProject = a})
 
 -- | The name of the zone for this request.
-diZone :: Lens' DisksInsert' Text
+diZone :: Lens' DisksInsert Text
 diZone = lens _diZone (\ s a -> s{_diZone = a})
 
 -- | Multipart request metadata.
-diPayload :: Lens' DisksInsert' Disk
+diPayload :: Lens' DisksInsert Disk
 diPayload
   = lens _diPayload (\ s a -> s{_diPayload = a})
 
-instance GoogleRequest DisksInsert' where
-        type Rs DisksInsert' = Operation
-        requestClient DisksInsert'{..}
+instance GoogleRequest DisksInsert where
+        type Rs DisksInsert = Operation
+        requestClient DisksInsert{..}
           = go _diProject _diZone _diSourceImage (Just AltJSON)
               _diPayload
               computeService

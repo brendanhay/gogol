@@ -29,20 +29,20 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Delete
       EntitlementsDeleteResource
 
     -- * Creating a Request
-    , entitlementsDelete'
-    , EntitlementsDelete'
+    , entitlementsDelete
+    , EntitlementsDelete
 
     -- * Request Lenses
-    , edEntitlementId
-    , edEnterpriseId
-    , edUserId
+    , entEntitlementId
+    , entEnterpriseId
+    , entUserId
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.entitlements.delete@ method which the
--- 'EntitlementsDelete'' request conforms to.
+-- 'EntitlementsDelete' request conforms to.
 type EntitlementsDeleteResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -54,54 +54,55 @@ type EntitlementsDeleteResource =
 
 -- | Removes an entitlement to an app for a user and uninstalls it.
 --
--- /See:/ 'entitlementsDelete'' smart constructor.
-data EntitlementsDelete' = EntitlementsDelete'
-    { _edEntitlementId :: !Text
-    , _edEnterpriseId  :: !Text
-    , _edUserId        :: !Text
+-- /See:/ 'entitlementsDelete' smart constructor.
+data EntitlementsDelete = EntitlementsDelete
+    { _entEntitlementId :: !Text
+    , _entEnterpriseId  :: !Text
+    , _entUserId        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EntitlementsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'EntitlementsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'edEntitlementId'
+-- * 'entEntitlementId'
 --
--- * 'edEnterpriseId'
+-- * 'entEnterpriseId'
 --
--- * 'edUserId'
-entitlementsDelete'
-    :: Text -- ^ 'edEntitlementId'
-    -> Text -- ^ 'edEnterpriseId'
-    -> Text -- ^ 'edUserId'
-    -> EntitlementsDelete'
-entitlementsDelete' pEdEntitlementId_ pEdEnterpriseId_ pEdUserId_ =
-    EntitlementsDelete'
-    { _edEntitlementId = pEdEntitlementId_
-    , _edEnterpriseId = pEdEnterpriseId_
-    , _edUserId = pEdUserId_
+-- * 'entUserId'
+entitlementsDelete
+    :: Text -- ^ 'entEntitlementId'
+    -> Text -- ^ 'entEnterpriseId'
+    -> Text -- ^ 'entUserId'
+    -> EntitlementsDelete
+entitlementsDelete pEntEntitlementId_ pEntEnterpriseId_ pEntUserId_ =
+    EntitlementsDelete
+    { _entEntitlementId = pEntEntitlementId_
+    , _entEnterpriseId = pEntEnterpriseId_
+    , _entUserId = pEntUserId_
     }
 
 -- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
-edEntitlementId :: Lens' EntitlementsDelete' Text
-edEntitlementId
-  = lens _edEntitlementId
-      (\ s a -> s{_edEntitlementId = a})
+entEntitlementId :: Lens' EntitlementsDelete Text
+entEntitlementId
+  = lens _entEntitlementId
+      (\ s a -> s{_entEntitlementId = a})
 
 -- | The ID of the enterprise.
-edEnterpriseId :: Lens' EntitlementsDelete' Text
-edEnterpriseId
-  = lens _edEnterpriseId
-      (\ s a -> s{_edEnterpriseId = a})
+entEnterpriseId :: Lens' EntitlementsDelete Text
+entEnterpriseId
+  = lens _entEnterpriseId
+      (\ s a -> s{_entEnterpriseId = a})
 
 -- | The ID of the user.
-edUserId :: Lens' EntitlementsDelete' Text
-edUserId = lens _edUserId (\ s a -> s{_edUserId = a})
+entUserId :: Lens' EntitlementsDelete Text
+entUserId
+  = lens _entUserId (\ s a -> s{_entUserId = a})
 
-instance GoogleRequest EntitlementsDelete' where
-        type Rs EntitlementsDelete' = ()
-        requestClient EntitlementsDelete'{..}
-          = go _edEnterpriseId _edUserId _edEntitlementId
+instance GoogleRequest EntitlementsDelete where
+        type Rs EntitlementsDelete = ()
+        requestClient EntitlementsDelete{..}
+          = go _entEnterpriseId _entUserId _entEntitlementId
               (Just AltJSON)
               androidEnterpriseService
           where go

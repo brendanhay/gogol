@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Delete
       JobsDeleteResource
 
     -- * Creating a Request
-    , jobsDelete'
-    , JobsDelete'
+    , jobsDelete
+    , JobsDelete
 
     -- * Request Lenses
     , jdXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeReporting.Types
 
 -- | A resource alias for @youtubereporting.jobs.delete@ method which the
--- 'JobsDelete'' request conforms to.
+-- 'JobsDelete' request conforms to.
 type JobsDeleteResource =
      "v1" :>
        "jobs" :>
@@ -65,8 +65,8 @@ type JobsDeleteResource =
 
 -- | Deletes a job.
 --
--- /See:/ 'jobsDelete'' smart constructor.
-data JobsDelete' = JobsDelete'
+-- /See:/ 'jobsDelete' smart constructor.
+data JobsDelete = JobsDelete
     { _jdXgafv                  :: !(Maybe Text)
     , _jdJobId                  :: !Text
     , _jdUploadProtocol         :: !(Maybe Text)
@@ -78,7 +78,7 @@ data JobsDelete' = JobsDelete'
     , _jdCallback               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'JobsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'JobsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -99,11 +99,11 @@ data JobsDelete' = JobsDelete'
 -- * 'jdBearerToken'
 --
 -- * 'jdCallback'
-jobsDelete'
+jobsDelete
     :: Text -- ^ 'jdJobId'
-    -> JobsDelete'
-jobsDelete' pJdJobId_ =
-    JobsDelete'
+    -> JobsDelete
+jobsDelete pJdJobId_ =
+    JobsDelete
     { _jdXgafv = Nothing
     , _jdJobId = pJdJobId_
     , _jdUploadProtocol = Nothing
@@ -116,55 +116,55 @@ jobsDelete' pJdJobId_ =
     }
 
 -- | V1 error format.
-jdXgafv :: Lens' JobsDelete' (Maybe Text)
+jdXgafv :: Lens' JobsDelete (Maybe Text)
 jdXgafv = lens _jdXgafv (\ s a -> s{_jdXgafv = a})
 
 -- | The ID of the job to delete.
-jdJobId :: Lens' JobsDelete' Text
+jdJobId :: Lens' JobsDelete Text
 jdJobId = lens _jdJobId (\ s a -> s{_jdJobId = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-jdUploadProtocol :: Lens' JobsDelete' (Maybe Text)
+jdUploadProtocol :: Lens' JobsDelete (Maybe Text)
 jdUploadProtocol
   = lens _jdUploadProtocol
       (\ s a -> s{_jdUploadProtocol = a})
 
 -- | Pretty-print response.
-jdPp :: Lens' JobsDelete' Bool
+jdPp :: Lens' JobsDelete Bool
 jdPp = lens _jdPp (\ s a -> s{_jdPp = a})
 
 -- | OAuth access token.
-jdAccessToken :: Lens' JobsDelete' (Maybe Text)
+jdAccessToken :: Lens' JobsDelete (Maybe Text)
 jdAccessToken
   = lens _jdAccessToken
       (\ s a -> s{_jdAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-jdUploadType :: Lens' JobsDelete' (Maybe Text)
+jdUploadType :: Lens' JobsDelete (Maybe Text)
 jdUploadType
   = lens _jdUploadType (\ s a -> s{_jdUploadType = a})
 
 -- | The content owner\'s external ID on which behalf the user is acting on.
 -- If not set, the user is acting for himself (his own channel).
-jdOnBehalfOfContentOwner :: Lens' JobsDelete' (Maybe Text)
+jdOnBehalfOfContentOwner :: Lens' JobsDelete (Maybe Text)
 jdOnBehalfOfContentOwner
   = lens _jdOnBehalfOfContentOwner
       (\ s a -> s{_jdOnBehalfOfContentOwner = a})
 
 -- | OAuth bearer token.
-jdBearerToken :: Lens' JobsDelete' (Maybe Text)
+jdBearerToken :: Lens' JobsDelete (Maybe Text)
 jdBearerToken
   = lens _jdBearerToken
       (\ s a -> s{_jdBearerToken = a})
 
 -- | JSONP
-jdCallback :: Lens' JobsDelete' (Maybe Text)
+jdCallback :: Lens' JobsDelete (Maybe Text)
 jdCallback
   = lens _jdCallback (\ s a -> s{_jdCallback = a})
 
-instance GoogleRequest JobsDelete' where
-        type Rs JobsDelete' = Empty
-        requestClient JobsDelete'{..}
+instance GoogleRequest JobsDelete where
+        type Rs JobsDelete = Empty
+        requestClient JobsDelete{..}
           = go _jdJobId _jdXgafv _jdUploadProtocol (Just _jdPp)
               _jdAccessToken
               _jdUploadType

@@ -30,8 +30,8 @@ module Network.Google.Resource.Gmail.Users.Messages.Delete
       UsersMessagesDeleteResource
 
     -- * Creating a Request
-    , usersMessagesDelete'
-    , UsersMessagesDelete'
+    , usersMessagesDelete
+    , UsersMessagesDelete
 
     -- * Request Lenses
     , umdUserId
@@ -42,7 +42,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.messages.delete@ method which the
--- 'UsersMessagesDelete'' request conforms to.
+-- 'UsersMessagesDelete' request conforms to.
 type UsersMessagesDeleteResource =
      Capture "userId" Text :>
        "messages" :>
@@ -52,42 +52,42 @@ type UsersMessagesDeleteResource =
 -- | Immediately and permanently deletes the specified message. This
 -- operation cannot be undone. Prefer messages.trash instead.
 --
--- /See:/ 'usersMessagesDelete'' smart constructor.
-data UsersMessagesDelete' = UsersMessagesDelete'
+-- /See:/ 'usersMessagesDelete' smart constructor.
+data UsersMessagesDelete = UsersMessagesDelete
     { _umdUserId :: !Text
     , _umdId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersMessagesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersMessagesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'umdUserId'
 --
 -- * 'umdId'
-usersMessagesDelete'
+usersMessagesDelete
     :: Text -- ^ 'umdId'
     -> Text
-    -> UsersMessagesDelete'
-usersMessagesDelete' pUmdUserId_ pUmdId_ =
-    UsersMessagesDelete'
+    -> UsersMessagesDelete
+usersMessagesDelete pUmdUserId_ pUmdId_ =
+    UsersMessagesDelete
     { _umdUserId = pUmdUserId_
     , _umdId = pUmdId_
     }
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-umdUserId :: Lens' UsersMessagesDelete' Text
+umdUserId :: Lens' UsersMessagesDelete Text
 umdUserId
   = lens _umdUserId (\ s a -> s{_umdUserId = a})
 
 -- | The ID of the message to delete.
-umdId :: Lens' UsersMessagesDelete' Text
+umdId :: Lens' UsersMessagesDelete Text
 umdId = lens _umdId (\ s a -> s{_umdId = a})
 
-instance GoogleRequest UsersMessagesDelete' where
-        type Rs UsersMessagesDelete' = ()
-        requestClient UsersMessagesDelete'{..}
+instance GoogleRequest UsersMessagesDelete where
+        type Rs UsersMessagesDelete = ()
+        requestClient UsersMessagesDelete{..}
           = go _umdUserId _umdId (Just AltJSON) gmailService
           where go
                   = buildClient

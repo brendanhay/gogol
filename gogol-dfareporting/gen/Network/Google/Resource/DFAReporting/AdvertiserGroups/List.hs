@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.List
       AdvertiserGroupsListResource
 
     -- * Creating a Request
-    , advertiserGroupsList'
-    , AdvertiserGroupsList'
+    , advertiserGroupsList
+    , AdvertiserGroupsList
 
     -- * Request Lenses
     , aglSearchString
@@ -46,7 +46,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.advertiserGroups.list@ method which the
--- 'AdvertiserGroupsList'' request conforms to.
+-- 'AdvertiserGroupsList' request conforms to.
 type AdvertiserGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -64,8 +64,8 @@ type AdvertiserGroupsListResource =
 
 -- | Retrieves a list of advertiser groups, possibly filtered.
 --
--- /See:/ 'advertiserGroupsList'' smart constructor.
-data AdvertiserGroupsList' = AdvertiserGroupsList'
+-- /See:/ 'advertiserGroupsList' smart constructor.
+data AdvertiserGroupsList = AdvertiserGroupsList
     { _aglSearchString :: !(Maybe Text)
     , _aglIds          :: !(Maybe [Int64])
     , _aglProFileId    :: !Int64
@@ -75,7 +75,7 @@ data AdvertiserGroupsList' = AdvertiserGroupsList'
     , _aglMaxResults   :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdvertiserGroupsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdvertiserGroupsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -92,11 +92,11 @@ data AdvertiserGroupsList' = AdvertiserGroupsList'
 -- * 'aglSortField'
 --
 -- * 'aglMaxResults'
-advertiserGroupsList'
+advertiserGroupsList
     :: Int64 -- ^ 'aglProFileId'
-    -> AdvertiserGroupsList'
-advertiserGroupsList' pAglProFileId_ =
-    AdvertiserGroupsList'
+    -> AdvertiserGroupsList
+advertiserGroupsList pAglProFileId_ =
+    AdvertiserGroupsList
     { _aglSearchString = Nothing
     , _aglIds = Nothing
     , _aglProFileId = pAglProFileId_
@@ -114,47 +114,47 @@ advertiserGroupsList' pAglProFileId_ =
 -- example, a search string of \"advertisergroup\" will match objects with
 -- name \"my advertisergroup\", \"advertisergroup 2015\", or simply
 -- \"advertisergroup\".
-aglSearchString :: Lens' AdvertiserGroupsList' (Maybe Text)
+aglSearchString :: Lens' AdvertiserGroupsList (Maybe Text)
 aglSearchString
   = lens _aglSearchString
       (\ s a -> s{_aglSearchString = a})
 
 -- | Select only advertiser groups with these IDs.
-aglIds :: Lens' AdvertiserGroupsList' [Int64]
+aglIds :: Lens' AdvertiserGroupsList [Int64]
 aglIds
   = lens _aglIds (\ s a -> s{_aglIds = a}) . _Default .
       _Coerce
 
 -- | User profile ID associated with this request.
-aglProFileId :: Lens' AdvertiserGroupsList' Int64
+aglProFileId :: Lens' AdvertiserGroupsList Int64
 aglProFileId
   = lens _aglProFileId (\ s a -> s{_aglProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-aglSortOrder :: Lens' AdvertiserGroupsList' (Maybe AdvertiserGroupsListSortOrder)
+aglSortOrder :: Lens' AdvertiserGroupsList (Maybe AdvertiserGroupsListSortOrder)
 aglSortOrder
   = lens _aglSortOrder (\ s a -> s{_aglSortOrder = a})
 
 -- | Value of the nextPageToken from the previous result page.
-aglPageToken :: Lens' AdvertiserGroupsList' (Maybe Text)
+aglPageToken :: Lens' AdvertiserGroupsList (Maybe Text)
 aglPageToken
   = lens _aglPageToken (\ s a -> s{_aglPageToken = a})
 
 -- | Field by which to sort the list.
-aglSortField :: Lens' AdvertiserGroupsList' (Maybe AdvertiserGroupsListSortField)
+aglSortField :: Lens' AdvertiserGroupsList (Maybe AdvertiserGroupsListSortField)
 aglSortField
   = lens _aglSortField (\ s a -> s{_aglSortField = a})
 
 -- | Maximum number of results to return.
-aglMaxResults :: Lens' AdvertiserGroupsList' (Maybe Int32)
+aglMaxResults :: Lens' AdvertiserGroupsList (Maybe Int32)
 aglMaxResults
   = lens _aglMaxResults
       (\ s a -> s{_aglMaxResults = a})
 
-instance GoogleRequest AdvertiserGroupsList' where
-        type Rs AdvertiserGroupsList' =
+instance GoogleRequest AdvertiserGroupsList where
+        type Rs AdvertiserGroupsList =
              AdvertiserGroupsListResponse
-        requestClient AdvertiserGroupsList'{..}
+        requestClient AdvertiserGroupsList{..}
           = go _aglProFileId _aglSearchString
               (_aglIds ^. _Default)
               _aglSortOrder

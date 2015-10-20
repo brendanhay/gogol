@@ -33,8 +33,8 @@ module Network.Google.Resource.MapsEngine.Tables.Upload
       TablesUploadResource
 
     -- * Creating a Request
-    , tablesUpload'
-    , TablesUpload'
+    , tablesUpload
+    , TablesUpload
 
     -- * Request Lenses
     , tuPayload
@@ -44,7 +44,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.tables.upload@ method which the
--- 'TablesUpload'' request conforms to.
+-- 'TablesUpload' request conforms to.
 type TablesUploadResource =
      "tables" :>
        "upload" :>
@@ -57,32 +57,32 @@ type TablesUploadResource =
 -- endpoint. See Table Upload in the Developer\'s Guide or Table.files:
 -- insert in the reference documentation for more information.
 --
--- /See:/ 'tablesUpload'' smart constructor.
-newtype TablesUpload' = TablesUpload'
+-- /See:/ 'tablesUpload' smart constructor.
+newtype TablesUpload = TablesUpload
     { _tuPayload :: Table
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesUpload'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tuPayload'
-tablesUpload'
+tablesUpload
     :: Table -- ^ 'tuPayload'
-    -> TablesUpload'
-tablesUpload' pTuPayload_ =
-    TablesUpload'
+    -> TablesUpload
+tablesUpload pTuPayload_ =
+    TablesUpload
     { _tuPayload = pTuPayload_
     }
 
 -- | Multipart request metadata.
-tuPayload :: Lens' TablesUpload' Table
+tuPayload :: Lens' TablesUpload Table
 tuPayload
   = lens _tuPayload (\ s a -> s{_tuPayload = a})
 
-instance GoogleRequest TablesUpload' where
-        type Rs TablesUpload' = Table
-        requestClient TablesUpload'{..}
+instance GoogleRequest TablesUpload where
+        type Rs TablesUpload = Table
+        requestClient TablesUpload{..}
           = go (Just AltJSON) _tuPayload mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy TablesUploadResource)

@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Get
       AccountsContainersGetResource
 
     -- * Creating a Request
-    , accountsContainersGet'
-    , AccountsContainersGet'
+    , accountsContainersGet
+    , AccountsContainersGet
 
     -- * Request Lenses
     , acgContainerId
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.get@ method which the
--- 'AccountsContainersGet'' request conforms to.
+-- 'AccountsContainersGet' request conforms to.
 type AccountsContainersGetResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -51,43 +51,43 @@ type AccountsContainersGetResource =
 
 -- | Gets a Container.
 --
--- /See:/ 'accountsContainersGet'' smart constructor.
-data AccountsContainersGet' = AccountsContainersGet'
+-- /See:/ 'accountsContainersGet' smart constructor.
+data AccountsContainersGet = AccountsContainersGet
     { _acgContainerId :: !Text
     , _acgAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'acgContainerId'
 --
 -- * 'acgAccountId'
-accountsContainersGet'
+accountsContainersGet
     :: Text -- ^ 'acgContainerId'
     -> Text -- ^ 'acgAccountId'
-    -> AccountsContainersGet'
-accountsContainersGet' pAcgContainerId_ pAcgAccountId_ =
-    AccountsContainersGet'
+    -> AccountsContainersGet
+accountsContainersGet pAcgContainerId_ pAcgAccountId_ =
+    AccountsContainersGet
     { _acgContainerId = pAcgContainerId_
     , _acgAccountId = pAcgAccountId_
     }
 
 -- | The GTM Container ID.
-acgContainerId :: Lens' AccountsContainersGet' Text
+acgContainerId :: Lens' AccountsContainersGet Text
 acgContainerId
   = lens _acgContainerId
       (\ s a -> s{_acgContainerId = a})
 
 -- | The GTM Account ID.
-acgAccountId :: Lens' AccountsContainersGet' Text
+acgAccountId :: Lens' AccountsContainersGet Text
 acgAccountId
   = lens _acgAccountId (\ s a -> s{_acgAccountId = a})
 
-instance GoogleRequest AccountsContainersGet' where
-        type Rs AccountsContainersGet' = Container
-        requestClient AccountsContainersGet'{..}
+instance GoogleRequest AccountsContainersGet where
+        type Rs AccountsContainersGet = Container
+        requestClient AccountsContainersGet{..}
           = go _acgAccountId _acgContainerId (Just AltJSON)
               tagManagerService
           where go

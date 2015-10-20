@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Achievements.ResetAll
       AchievementsResetAllResource
 
     -- * Creating a Request
-    , achievementsResetAll'
-    , AchievementsResetAll'
+    , achievementsResetAll
+    , AchievementsResetAll
 
     ) where
 
@@ -40,7 +40,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.achievements.resetAll@ method which the
--- 'AchievementsResetAll'' request conforms to.
+-- 'AchievementsResetAll' request conforms to.
 type AchievementsResetAllResource =
      "achievements" :>
        "reset" :>
@@ -51,21 +51,21 @@ type AchievementsResetAllResource =
 -- application. This method is only accessible to whitelisted tester
 -- accounts for your application.
 --
--- /See:/ 'achievementsResetAll'' smart constructor.
-data AchievementsResetAll' =
-    AchievementsResetAll'
+-- /See:/ 'achievementsResetAll' smart constructor.
+data AchievementsResetAll =
+    AchievementsResetAll
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AchievementsResetAll'' with the minimum fields required to make a request.
+-- | Creates a value of 'AchievementsResetAll' with the minimum fields required to make a request.
 --
-achievementsResetAll'
-    :: AchievementsResetAll'
-achievementsResetAll' = AchievementsResetAll'
+achievementsResetAll
+    :: AchievementsResetAll
+achievementsResetAll = AchievementsResetAll
 
-instance GoogleRequest AchievementsResetAll' where
-        type Rs AchievementsResetAll' =
+instance GoogleRequest AchievementsResetAll where
+        type Rs AchievementsResetAll =
              AchievementResetAllResponse
-        requestClient AchievementsResetAll'{}
+        requestClient AchievementsResetAll{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

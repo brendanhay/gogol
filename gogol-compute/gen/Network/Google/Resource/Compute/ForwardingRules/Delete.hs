@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.ForwardingRules.Delete
       ForwardingRulesDeleteResource
 
     -- * Creating a Request
-    , forwardingRulesDelete'
-    , ForwardingRulesDelete'
+    , forwardingRulesDelete
+    , ForwardingRulesDelete
 
     -- * Request Lenses
     , frdProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.forwardingRules.delete@ method which the
--- 'ForwardingRulesDelete'' request conforms to.
+-- 'ForwardingRulesDelete' request conforms to.
 type ForwardingRulesDeleteResource =
      Capture "project" Text :>
        "regions" :>
@@ -53,14 +53,14 @@ type ForwardingRulesDeleteResource =
 
 -- | Deletes the specified ForwardingRule resource.
 --
--- /See:/ 'forwardingRulesDelete'' smart constructor.
-data ForwardingRulesDelete' = ForwardingRulesDelete'
+-- /See:/ 'forwardingRulesDelete' smart constructor.
+data ForwardingRulesDelete = ForwardingRulesDelete
     { _frdProject        :: !Text
     , _frdForwardingRule :: !Text
     , _frdRegion         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ForwardingRulesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ForwardingRulesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,37 +69,37 @@ data ForwardingRulesDelete' = ForwardingRulesDelete'
 -- * 'frdForwardingRule'
 --
 -- * 'frdRegion'
-forwardingRulesDelete'
+forwardingRulesDelete
     :: Text -- ^ 'frdProject'
     -> Text -- ^ 'frdForwardingRule'
     -> Text -- ^ 'frdRegion'
-    -> ForwardingRulesDelete'
-forwardingRulesDelete' pFrdProject_ pFrdForwardingRule_ pFrdRegion_ =
-    ForwardingRulesDelete'
+    -> ForwardingRulesDelete
+forwardingRulesDelete pFrdProject_ pFrdForwardingRule_ pFrdRegion_ =
+    ForwardingRulesDelete
     { _frdProject = pFrdProject_
     , _frdForwardingRule = pFrdForwardingRule_
     , _frdRegion = pFrdRegion_
     }
 
 -- | Name of the project scoping this request.
-frdProject :: Lens' ForwardingRulesDelete' Text
+frdProject :: Lens' ForwardingRulesDelete Text
 frdProject
   = lens _frdProject (\ s a -> s{_frdProject = a})
 
 -- | Name of the ForwardingRule resource to delete.
-frdForwardingRule :: Lens' ForwardingRulesDelete' Text
+frdForwardingRule :: Lens' ForwardingRulesDelete Text
 frdForwardingRule
   = lens _frdForwardingRule
       (\ s a -> s{_frdForwardingRule = a})
 
 -- | Name of the region scoping this request.
-frdRegion :: Lens' ForwardingRulesDelete' Text
+frdRegion :: Lens' ForwardingRulesDelete Text
 frdRegion
   = lens _frdRegion (\ s a -> s{_frdRegion = a})
 
-instance GoogleRequest ForwardingRulesDelete' where
-        type Rs ForwardingRulesDelete' = Operation
-        requestClient ForwardingRulesDelete'{..}
+instance GoogleRequest ForwardingRulesDelete where
+        type Rs ForwardingRulesDelete = Operation
+        requestClient ForwardingRulesDelete{..}
           = go _frdProject _frdRegion _frdForwardingRule
               (Just AltJSON)
               computeService

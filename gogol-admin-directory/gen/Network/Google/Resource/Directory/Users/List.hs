@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Users.List
       UsersListResource
 
     -- * Creating a Request
-    , usersList'
-    , UsersList'
+    , usersList
+    , UsersList
 
     -- * Request Lenses
     , ulEvent
@@ -51,7 +51,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.users.list@ method which the
--- 'UsersList'' request conforms to.
+-- 'UsersList' request conforms to.
 type UsersListResource =
      "users" :>
        QueryParam "event" UsersListEvent :>
@@ -70,8 +70,8 @@ type UsersListResource =
 
 -- | Retrieve either deleted users or all users in a domain (paginated)
 --
--- /See:/ 'usersList'' smart constructor.
-data UsersList' = UsersList'
+-- /See:/ 'usersList' smart constructor.
+data UsersList = UsersList
     { _ulEvent           :: !(Maybe UsersListEvent)
     , _ulOrderBy         :: !(Maybe UsersListOrderBy)
     , _ulViewType        :: !UsersListViewType
@@ -86,7 +86,7 @@ data UsersList' = UsersList'
     , _ulMaxResults      :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -113,10 +113,10 @@ data UsersList' = UsersList'
 -- * 'ulPageToken'
 --
 -- * 'ulMaxResults'
-usersList'
-    :: UsersList'
-usersList' =
-    UsersList'
+usersList
+    :: UsersList
+usersList =
+    UsersList
     { _ulEvent = Nothing
     , _ulOrderBy = Nothing
     , _ulViewType = AdminView
@@ -132,72 +132,72 @@ usersList' =
     }
 
 -- | Event on which subscription is intended (if subscribing)
-ulEvent :: Lens' UsersList' (Maybe UsersListEvent)
+ulEvent :: Lens' UsersList (Maybe UsersListEvent)
 ulEvent = lens _ulEvent (\ s a -> s{_ulEvent = a})
 
 -- | Column to use for sorting results
-ulOrderBy :: Lens' UsersList' (Maybe UsersListOrderBy)
+ulOrderBy :: Lens' UsersList (Maybe UsersListOrderBy)
 ulOrderBy
   = lens _ulOrderBy (\ s a -> s{_ulOrderBy = a})
 
 -- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
-ulViewType :: Lens' UsersList' UsersListViewType
+ulViewType :: Lens' UsersList UsersListViewType
 ulViewType
   = lens _ulViewType (\ s a -> s{_ulViewType = a})
 
 -- | Comma-separated list of schema names. All fields from these schemas are
 -- fetched. This should only be set when projection=custom.
-ulCustomFieldMask :: Lens' UsersList' (Maybe Text)
+ulCustomFieldMask :: Lens' UsersList (Maybe Text)
 ulCustomFieldMask
   = lens _ulCustomFieldMask
       (\ s a -> s{_ulCustomFieldMask = a})
 
 -- | Name of the domain. Fill this field to get users from only this domain.
 -- To return all users in a multi-domain fill customer field instead.
-ulDomain :: Lens' UsersList' (Maybe Text)
+ulDomain :: Lens' UsersList (Maybe Text)
 ulDomain = lens _ulDomain (\ s a -> s{_ulDomain = a})
 
 -- | If set to true retrieves the list of deleted users. Default is false
-ulShowDeleted :: Lens' UsersList' (Maybe Text)
+ulShowDeleted :: Lens' UsersList (Maybe Text)
 ulShowDeleted
   = lens _ulShowDeleted
       (\ s a -> s{_ulShowDeleted = a})
 
 -- | Whether to return results in ascending or descending order.
-ulSortOrder :: Lens' UsersList' (Maybe UsersListSortOrder)
+ulSortOrder :: Lens' UsersList (Maybe UsersListSortOrder)
 ulSortOrder
   = lens _ulSortOrder (\ s a -> s{_ulSortOrder = a})
 
 -- | Immutable id of the Google Apps account. In case of multi-domain, to
 -- fetch all users for a customer, fill this field instead of domain.
-ulCustomer :: Lens' UsersList' (Maybe Text)
+ulCustomer :: Lens' UsersList (Maybe Text)
 ulCustomer
   = lens _ulCustomer (\ s a -> s{_ulCustomer = a})
 
 -- | Query string search. Should be of the form \"\". Complete documentation
 -- is at
 -- https:\/\/developers.google.com\/admin-sdk\/directory\/v1\/guides\/search-users
-ulQuery :: Lens' UsersList' (Maybe Text)
+ulQuery :: Lens' UsersList (Maybe Text)
 ulQuery = lens _ulQuery (\ s a -> s{_ulQuery = a})
 
 -- | What subset of fields to fetch for this user.
-ulProjection :: Lens' UsersList' UsersListProjection
+ulProjection :: Lens' UsersList UsersListProjection
 ulProjection
   = lens _ulProjection (\ s a -> s{_ulProjection = a})
 
 -- | Token to specify next page in the list
-ulPageToken :: Lens' UsersList' (Maybe Text)
+ulPageToken :: Lens' UsersList (Maybe Text)
 ulPageToken
   = lens _ulPageToken (\ s a -> s{_ulPageToken = a})
 
 -- | Maximum number of results to return. Default is 100. Max allowed is 500
-ulMaxResults :: Lens' UsersList' (Maybe Int32)
+ulMaxResults :: Lens' UsersList (Maybe Int32)
 ulMaxResults
   = lens _ulMaxResults (\ s a -> s{_ulMaxResults = a})
 
-instance GoogleRequest UsersList' where
-        type Rs UsersList' = Users
-        requestClient UsersList'{..}
+instance GoogleRequest UsersList where
+        type Rs UsersList = Users
+        requestClient UsersList{..}
           = go _ulEvent _ulOrderBy (Just _ulViewType)
               _ulCustomFieldMask
               _ulDomain

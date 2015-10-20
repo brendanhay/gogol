@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.InstanceTemplates.Insert
       InstanceTemplatesInsertResource
 
     -- * Creating a Request
-    , instanceTemplatesInsert'
-    , InstanceTemplatesInsert'
+    , instanceTemplatesInsert
+    , InstanceTemplatesInsert
 
     -- * Request Lenses
     , itiProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceTemplates.insert@ method which the
--- 'InstanceTemplatesInsert'' request conforms to.
+-- 'InstanceTemplatesInsert' request conforms to.
 type InstanceTemplatesInsertResource =
      Capture "project" Text :>
        "global" :>
@@ -54,42 +54,42 @@ type InstanceTemplatesInsertResource =
 -- | Creates an instance template in the specified project using the data
 -- that is included in the request.
 --
--- /See:/ 'instanceTemplatesInsert'' smart constructor.
-data InstanceTemplatesInsert' = InstanceTemplatesInsert'
+-- /See:/ 'instanceTemplatesInsert' smart constructor.
+data InstanceTemplatesInsert = InstanceTemplatesInsert
     { _itiProject :: !Text
     , _itiPayload :: !InstanceTemplate
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceTemplatesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceTemplatesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'itiProject'
 --
 -- * 'itiPayload'
-instanceTemplatesInsert'
+instanceTemplatesInsert
     :: Text -- ^ 'itiProject'
     -> InstanceTemplate -- ^ 'itiPayload'
-    -> InstanceTemplatesInsert'
-instanceTemplatesInsert' pItiProject_ pItiPayload_ =
-    InstanceTemplatesInsert'
+    -> InstanceTemplatesInsert
+instanceTemplatesInsert pItiProject_ pItiPayload_ =
+    InstanceTemplatesInsert
     { _itiProject = pItiProject_
     , _itiPayload = pItiPayload_
     }
 
 -- | The project ID for this request.
-itiProject :: Lens' InstanceTemplatesInsert' Text
+itiProject :: Lens' InstanceTemplatesInsert Text
 itiProject
   = lens _itiProject (\ s a -> s{_itiProject = a})
 
 -- | Multipart request metadata.
-itiPayload :: Lens' InstanceTemplatesInsert' InstanceTemplate
+itiPayload :: Lens' InstanceTemplatesInsert InstanceTemplate
 itiPayload
   = lens _itiPayload (\ s a -> s{_itiPayload = a})
 
-instance GoogleRequest InstanceTemplatesInsert' where
-        type Rs InstanceTemplatesInsert' = Operation
-        requestClient InstanceTemplatesInsert'{..}
+instance GoogleRequest InstanceTemplatesInsert where
+        type Rs InstanceTemplatesInsert = Operation
+        requestClient InstanceTemplatesInsert{..}
           = go _itiProject (Just AltJSON) _itiPayload
               computeService
           where go

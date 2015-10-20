@@ -29,8 +29,8 @@ module Network.Google.Resource.DoubleClickBidManager.Queries.GetQuery
       QueriesGetQueryResource
 
     -- * Creating a Request
-    , queriesGetQuery'
-    , QueriesGetQuery'
+    , queriesGetQuery
+    , QueriesGetQuery
 
     -- * Request Lenses
     , qgqQueryId
@@ -40,7 +40,7 @@ import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @doubleclickbidmanager.queries.getquery@ method which the
--- 'QueriesGetQuery'' request conforms to.
+-- 'QueriesGetQuery' request conforms to.
 type QueriesGetQueryResource =
      "query" :>
        Capture "queryId" Int64 :>
@@ -48,32 +48,32 @@ type QueriesGetQueryResource =
 
 -- | Retrieves a stored query.
 --
--- /See:/ 'queriesGetQuery'' smart constructor.
-newtype QueriesGetQuery' = QueriesGetQuery'
+-- /See:/ 'queriesGetQuery' smart constructor.
+newtype QueriesGetQuery = QueriesGetQuery
     { _qgqQueryId :: Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'QueriesGetQuery'' with the minimum fields required to make a request.
+-- | Creates a value of 'QueriesGetQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'qgqQueryId'
-queriesGetQuery'
+queriesGetQuery
     :: Int64 -- ^ 'qgqQueryId'
-    -> QueriesGetQuery'
-queriesGetQuery' pQgqQueryId_ =
-    QueriesGetQuery'
+    -> QueriesGetQuery
+queriesGetQuery pQgqQueryId_ =
+    QueriesGetQuery
     { _qgqQueryId = pQgqQueryId_
     }
 
 -- | Query ID to retrieve.
-qgqQueryId :: Lens' QueriesGetQuery' Int64
+qgqQueryId :: Lens' QueriesGetQuery Int64
 qgqQueryId
   = lens _qgqQueryId (\ s a -> s{_qgqQueryId = a})
 
-instance GoogleRequest QueriesGetQuery' where
-        type Rs QueriesGetQuery' = Query
-        requestClient QueriesGetQuery'{..}
+instance GoogleRequest QueriesGetQuery where
+        type Rs QueriesGetQuery = Query
+        requestClient QueriesGetQuery{..}
           = go _qgqQueryId (Just AltJSON)
               doubleClickBidsService
           where go

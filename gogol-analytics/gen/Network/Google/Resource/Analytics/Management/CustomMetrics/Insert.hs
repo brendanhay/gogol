@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Insert
       ManagementCustomMetricsInsertResource
 
     -- * Creating a Request
-    , managementCustomMetricsInsert'
-    , ManagementCustomMetricsInsert'
+    , managementCustomMetricsInsert
+    , ManagementCustomMetricsInsert
 
     -- * Request Lenses
     , mcmiWebPropertyId
@@ -42,7 +42,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.customMetrics.insert@ method which the
--- 'ManagementCustomMetricsInsert'' request conforms to.
+-- 'ManagementCustomMetricsInsert' request conforms to.
 type ManagementCustomMetricsInsertResource =
      "management" :>
        "accounts" :>
@@ -56,14 +56,14 @@ type ManagementCustomMetricsInsertResource =
 
 -- | Create a new custom metric.
 --
--- /See:/ 'managementCustomMetricsInsert'' smart constructor.
-data ManagementCustomMetricsInsert' = ManagementCustomMetricsInsert'
+-- /See:/ 'managementCustomMetricsInsert' smart constructor.
+data ManagementCustomMetricsInsert = ManagementCustomMetricsInsert
     { _mcmiWebPropertyId :: !Text
     , _mcmiPayload       :: !CustomMetric
     , _mcmiAccountId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementCustomMetricsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementCustomMetricsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,39 +72,39 @@ data ManagementCustomMetricsInsert' = ManagementCustomMetricsInsert'
 -- * 'mcmiPayload'
 --
 -- * 'mcmiAccountId'
-managementCustomMetricsInsert'
+managementCustomMetricsInsert
     :: Text -- ^ 'mcmiWebPropertyId'
     -> CustomMetric -- ^ 'mcmiPayload'
     -> Text -- ^ 'mcmiAccountId'
-    -> ManagementCustomMetricsInsert'
-managementCustomMetricsInsert' pMcmiWebPropertyId_ pMcmiPayload_ pMcmiAccountId_ =
-    ManagementCustomMetricsInsert'
+    -> ManagementCustomMetricsInsert
+managementCustomMetricsInsert pMcmiWebPropertyId_ pMcmiPayload_ pMcmiAccountId_ =
+    ManagementCustomMetricsInsert
     { _mcmiWebPropertyId = pMcmiWebPropertyId_
     , _mcmiPayload = pMcmiPayload_
     , _mcmiAccountId = pMcmiAccountId_
     }
 
 -- | Web property ID for the custom dimension to create.
-mcmiWebPropertyId :: Lens' ManagementCustomMetricsInsert' Text
+mcmiWebPropertyId :: Lens' ManagementCustomMetricsInsert Text
 mcmiWebPropertyId
   = lens _mcmiWebPropertyId
       (\ s a -> s{_mcmiWebPropertyId = a})
 
 -- | Multipart request metadata.
-mcmiPayload :: Lens' ManagementCustomMetricsInsert' CustomMetric
+mcmiPayload :: Lens' ManagementCustomMetricsInsert CustomMetric
 mcmiPayload
   = lens _mcmiPayload (\ s a -> s{_mcmiPayload = a})
 
 -- | Account ID for the custom metric to create.
-mcmiAccountId :: Lens' ManagementCustomMetricsInsert' Text
+mcmiAccountId :: Lens' ManagementCustomMetricsInsert Text
 mcmiAccountId
   = lens _mcmiAccountId
       (\ s a -> s{_mcmiAccountId = a})
 
-instance GoogleRequest ManagementCustomMetricsInsert'
+instance GoogleRequest ManagementCustomMetricsInsert
          where
-        type Rs ManagementCustomMetricsInsert' = CustomMetric
-        requestClient ManagementCustomMetricsInsert'{..}
+        type Rs ManagementCustomMetricsInsert = CustomMetric
+        requestClient ManagementCustomMetricsInsert{..}
           = go _mcmiAccountId _mcmiWebPropertyId (Just AltJSON)
               _mcmiPayload
               analyticsService

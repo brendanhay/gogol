@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Insert
       MarketplaceOrdersInsertResource
 
     -- * Creating a Request
-    , marketplaceOrdersInsert'
-    , MarketplaceOrdersInsert'
+    , marketplaceOrdersInsert
+    , MarketplaceOrdersInsert
 
     -- * Request Lenses
     , moiPayload
@@ -40,7 +40,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.marketplaceorders.insert@ method which the
--- 'MarketplaceOrdersInsert'' request conforms to.
+-- 'MarketplaceOrdersInsert' request conforms to.
 type MarketplaceOrdersInsertResource =
      "marketplaceOrders" :>
        "insert" :>
@@ -50,33 +50,33 @@ type MarketplaceOrdersInsertResource =
 
 -- | Create the given list of orders
 --
--- /See:/ 'marketplaceOrdersInsert'' smart constructor.
-newtype MarketplaceOrdersInsert' = MarketplaceOrdersInsert'
+-- /See:/ 'marketplaceOrdersInsert' smart constructor.
+newtype MarketplaceOrdersInsert = MarketplaceOrdersInsert
     { _moiPayload :: CreateOrdersRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MarketplaceOrdersInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'MarketplaceOrdersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'moiPayload'
-marketplaceOrdersInsert'
+marketplaceOrdersInsert
     :: CreateOrdersRequest -- ^ 'moiPayload'
-    -> MarketplaceOrdersInsert'
-marketplaceOrdersInsert' pMoiPayload_ =
-    MarketplaceOrdersInsert'
+    -> MarketplaceOrdersInsert
+marketplaceOrdersInsert pMoiPayload_ =
+    MarketplaceOrdersInsert
     { _moiPayload = pMoiPayload_
     }
 
 -- | Multipart request metadata.
-moiPayload :: Lens' MarketplaceOrdersInsert' CreateOrdersRequest
+moiPayload :: Lens' MarketplaceOrdersInsert CreateOrdersRequest
 moiPayload
   = lens _moiPayload (\ s a -> s{_moiPayload = a})
 
-instance GoogleRequest MarketplaceOrdersInsert' where
-        type Rs MarketplaceOrdersInsert' =
+instance GoogleRequest MarketplaceOrdersInsert where
+        type Rs MarketplaceOrdersInsert =
              CreateOrdersResponse
-        requestClient MarketplaceOrdersInsert'{..}
+        requestClient MarketplaceOrdersInsert{..}
           = go (Just AltJSON) _moiPayload
               adExchangeBuyerService
           where go

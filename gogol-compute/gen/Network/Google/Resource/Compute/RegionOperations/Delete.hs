@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.RegionOperations.Delete
       RegionOperationsDeleteResource
 
     -- * Creating a Request
-    , regionOperationsDelete'
-    , RegionOperationsDelete'
+    , regionOperationsDelete
+    , RegionOperationsDelete
 
     -- * Request Lenses
     , rodProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.regionOperations.delete@ method which the
--- 'RegionOperationsDelete'' request conforms to.
+-- 'RegionOperationsDelete' request conforms to.
 type RegionOperationsDeleteResource =
      Capture "project" Text :>
        "regions" :>
@@ -53,14 +53,14 @@ type RegionOperationsDeleteResource =
 
 -- | Deletes the specified region-specific Operations resource.
 --
--- /See:/ 'regionOperationsDelete'' smart constructor.
-data RegionOperationsDelete' = RegionOperationsDelete'
+-- /See:/ 'regionOperationsDelete' smart constructor.
+data RegionOperationsDelete = RegionOperationsDelete
     { _rodProject   :: !Text
     , _rodOperation :: !Text
     , _rodRegion    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RegionOperationsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'RegionOperationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,36 @@ data RegionOperationsDelete' = RegionOperationsDelete'
 -- * 'rodOperation'
 --
 -- * 'rodRegion'
-regionOperationsDelete'
+regionOperationsDelete
     :: Text -- ^ 'rodProject'
     -> Text -- ^ 'rodOperation'
     -> Text -- ^ 'rodRegion'
-    -> RegionOperationsDelete'
-regionOperationsDelete' pRodProject_ pRodOperation_ pRodRegion_ =
-    RegionOperationsDelete'
+    -> RegionOperationsDelete
+regionOperationsDelete pRodProject_ pRodOperation_ pRodRegion_ =
+    RegionOperationsDelete
     { _rodProject = pRodProject_
     , _rodOperation = pRodOperation_
     , _rodRegion = pRodRegion_
     }
 
 -- | Project ID for this request.
-rodProject :: Lens' RegionOperationsDelete' Text
+rodProject :: Lens' RegionOperationsDelete Text
 rodProject
   = lens _rodProject (\ s a -> s{_rodProject = a})
 
 -- | Name of the Operations resource to delete.
-rodOperation :: Lens' RegionOperationsDelete' Text
+rodOperation :: Lens' RegionOperationsDelete Text
 rodOperation
   = lens _rodOperation (\ s a -> s{_rodOperation = a})
 
 -- | Name of the region scoping this request.
-rodRegion :: Lens' RegionOperationsDelete' Text
+rodRegion :: Lens' RegionOperationsDelete Text
 rodRegion
   = lens _rodRegion (\ s a -> s{_rodRegion = a})
 
-instance GoogleRequest RegionOperationsDelete' where
-        type Rs RegionOperationsDelete' = ()
-        requestClient RegionOperationsDelete'{..}
+instance GoogleRequest RegionOperationsDelete where
+        type Rs RegionOperationsDelete = ()
+        requestClient RegionOperationsDelete{..}
           = go _rodProject _rodRegion _rodOperation
               (Just AltJSON)
               computeService

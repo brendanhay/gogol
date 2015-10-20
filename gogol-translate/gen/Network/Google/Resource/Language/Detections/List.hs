@@ -29,8 +29,8 @@ module Network.Google.Resource.Language.Detections.List
       DetectionsListResource
 
     -- * Creating a Request
-    , detectionsList'
-    , DetectionsList'
+    , detectionsList
+    , DetectionsList
 
     -- * Request Lenses
     , dlQ
@@ -40,7 +40,7 @@ import           Network.Google.Prelude
 import           Network.Google.Translate.Types
 
 -- | A resource alias for @language.detections.list@ method which the
--- 'DetectionsList'' request conforms to.
+-- 'DetectionsList' request conforms to.
 type DetectionsListResource =
      "v2" :>
        "detect" :>
@@ -50,31 +50,31 @@ type DetectionsListResource =
 
 -- | Detect the language of text.
 --
--- /See:/ 'detectionsList'' smart constructor.
-newtype DetectionsList' = DetectionsList'
+-- /See:/ 'detectionsList' smart constructor.
+newtype DetectionsList = DetectionsList
     { _dlQ :: [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DetectionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'DetectionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dlQ'
-detectionsList'
+detectionsList
     :: [Text] -- ^ 'dlQ'
-    -> DetectionsList'
-detectionsList' pDlQ_ =
-    DetectionsList'
+    -> DetectionsList
+detectionsList pDlQ_ =
+    DetectionsList
     { _dlQ = pDlQ_
     }
 
 -- | The text to detect
-dlQ :: Lens' DetectionsList' [Text]
+dlQ :: Lens' DetectionsList [Text]
 dlQ = lens _dlQ (\ s a -> s{_dlQ = a}) . _Coerce
 
-instance GoogleRequest DetectionsList' where
-        type Rs DetectionsList' = DetectionsListResponse
-        requestClient DetectionsList'{..}
+instance GoogleRequest DetectionsList where
+        type Rs DetectionsList = DetectionsListResponse
+        requestClient DetectionsList{..}
           = go _dlQ (Just AltJSON) translateService
           where go
                   = buildClient (Proxy :: Proxy DetectionsListResource)

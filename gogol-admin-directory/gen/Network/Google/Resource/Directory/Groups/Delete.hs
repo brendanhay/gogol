@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Groups.Delete
       GroupsDeleteResource
 
     -- * Creating a Request
-    , groupsDelete'
-    , GroupsDelete'
+    , groupsDelete
+    , GroupsDelete
 
     -- * Request Lenses
     , gdGroupKey
@@ -40,7 +40,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.groups.delete@ method which the
--- 'GroupsDelete'' request conforms to.
+-- 'GroupsDelete' request conforms to.
 type GroupsDeleteResource =
      "groups" :>
        Capture "groupKey" Text :>
@@ -48,32 +48,32 @@ type GroupsDeleteResource =
 
 -- | Delete Group
 --
--- /See:/ 'groupsDelete'' smart constructor.
-newtype GroupsDelete' = GroupsDelete'
+-- /See:/ 'groupsDelete' smart constructor.
+newtype GroupsDelete = GroupsDelete
     { _gdGroupKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GroupsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'GroupsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gdGroupKey'
-groupsDelete'
+groupsDelete
     :: Text -- ^ 'gdGroupKey'
-    -> GroupsDelete'
-groupsDelete' pGdGroupKey_ =
-    GroupsDelete'
+    -> GroupsDelete
+groupsDelete pGdGroupKey_ =
+    GroupsDelete
     { _gdGroupKey = pGdGroupKey_
     }
 
 -- | Email or immutable Id of the group
-gdGroupKey :: Lens' GroupsDelete' Text
+gdGroupKey :: Lens' GroupsDelete Text
 gdGroupKey
   = lens _gdGroupKey (\ s a -> s{_gdGroupKey = a})
 
-instance GoogleRequest GroupsDelete' where
-        type Rs GroupsDelete' = ()
-        requestClient GroupsDelete'{..}
+instance GoogleRequest GroupsDelete where
+        type Rs GroupsDelete = ()
+        requestClient GroupsDelete{..}
           = go _gdGroupKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy GroupsDeleteResource)

@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.AccountPermissions.List
       AccountPermissionsListResource
 
     -- * Creating a Request
-    , accountPermissionsList'
-    , AccountPermissionsList'
+    , accountPermissionsList
+    , AccountPermissionsList
 
     -- * Request Lenses
     , aplProFileId
@@ -40,7 +40,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accountPermissions.list@ method which the
--- 'AccountPermissionsList'' request conforms to.
+-- 'AccountPermissionsList' request conforms to.
 type AccountPermissionsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -50,33 +50,33 @@ type AccountPermissionsListResource =
 
 -- | Retrieves the list of account permissions.
 --
--- /See:/ 'accountPermissionsList'' smart constructor.
-newtype AccountPermissionsList' = AccountPermissionsList'
+-- /See:/ 'accountPermissionsList' smart constructor.
+newtype AccountPermissionsList = AccountPermissionsList
     { _aplProFileId :: Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountPermissionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountPermissionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aplProFileId'
-accountPermissionsList'
+accountPermissionsList
     :: Int64 -- ^ 'aplProFileId'
-    -> AccountPermissionsList'
-accountPermissionsList' pAplProFileId_ =
-    AccountPermissionsList'
+    -> AccountPermissionsList
+accountPermissionsList pAplProFileId_ =
+    AccountPermissionsList
     { _aplProFileId = pAplProFileId_
     }
 
 -- | User profile ID associated with this request.
-aplProFileId :: Lens' AccountPermissionsList' Int64
+aplProFileId :: Lens' AccountPermissionsList Int64
 aplProFileId
   = lens _aplProFileId (\ s a -> s{_aplProFileId = a})
 
-instance GoogleRequest AccountPermissionsList' where
-        type Rs AccountPermissionsList' =
+instance GoogleRequest AccountPermissionsList where
+        type Rs AccountPermissionsList =
              AccountPermissionsListResponse
-        requestClient AccountPermissionsList'{..}
+        requestClient AccountPermissionsList{..}
           = go _aplProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

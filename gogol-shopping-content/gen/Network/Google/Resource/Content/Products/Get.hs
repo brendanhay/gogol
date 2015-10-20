@@ -29,19 +29,19 @@ module Network.Google.Resource.Content.Products.Get
       ProductsGetResource
 
     -- * Creating a Request
-    , productsGet'
-    , ProductsGet'
+    , productsGet
+    , ProductsGet
 
     -- * Request Lenses
-    , pgMerchantId
-    , pgProductId
+    , pggMerchantId
+    , pggProductId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.products.get@ method which the
--- 'ProductsGet'' request conforms to.
+-- 'ProductsGet' request conforms to.
 type ProductsGetResource =
      Capture "merchantId" Word64 :>
        "products" :>
@@ -50,43 +50,44 @@ type ProductsGetResource =
 
 -- | Retrieves a product from your Merchant Center account.
 --
--- /See:/ 'productsGet'' smart constructor.
-data ProductsGet' = ProductsGet'
-    { _pgMerchantId :: !Word64
-    , _pgProductId  :: !Text
+-- /See:/ 'productsGet' smart constructor.
+data ProductsGet = ProductsGet
+    { _pggMerchantId :: !Word64
+    , _pggProductId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProductsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pgMerchantId'
+-- * 'pggMerchantId'
 --
--- * 'pgProductId'
-productsGet'
-    :: Word64 -- ^ 'pgMerchantId'
-    -> Text -- ^ 'pgProductId'
-    -> ProductsGet'
-productsGet' pPgMerchantId_ pPgProductId_ =
-    ProductsGet'
-    { _pgMerchantId = pPgMerchantId_
-    , _pgProductId = pPgProductId_
+-- * 'pggProductId'
+productsGet
+    :: Word64 -- ^ 'pggMerchantId'
+    -> Text -- ^ 'pggProductId'
+    -> ProductsGet
+productsGet pPggMerchantId_ pPggProductId_ =
+    ProductsGet
+    { _pggMerchantId = pPggMerchantId_
+    , _pggProductId = pPggProductId_
     }
 
 -- | The ID of the managing account.
-pgMerchantId :: Lens' ProductsGet' Word64
-pgMerchantId
-  = lens _pgMerchantId (\ s a -> s{_pgMerchantId = a})
+pggMerchantId :: Lens' ProductsGet Word64
+pggMerchantId
+  = lens _pggMerchantId
+      (\ s a -> s{_pggMerchantId = a})
 
 -- | The ID of the product.
-pgProductId :: Lens' ProductsGet' Text
-pgProductId
-  = lens _pgProductId (\ s a -> s{_pgProductId = a})
+pggProductId :: Lens' ProductsGet Text
+pggProductId
+  = lens _pggProductId (\ s a -> s{_pggProductId = a})
 
-instance GoogleRequest ProductsGet' where
-        type Rs ProductsGet' = Product
-        requestClient ProductsGet'{..}
-          = go _pgMerchantId _pgProductId (Just AltJSON)
+instance GoogleRequest ProductsGet where
+        type Rs ProductsGet = Product
+        requestClient ProductsGet{..}
+          = go _pggMerchantId _pggProductId (Just AltJSON)
               shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy ProductsGetResource)

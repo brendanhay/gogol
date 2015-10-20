@@ -29,8 +29,8 @@ module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDiv
       RepresentativesRepresentativeInfoByDivisionResource
 
     -- * Creating a Request
-    , representativesRepresentativeInfoByDivision'
-    , RepresentativesRepresentativeInfoByDivision'
+    , representativesRepresentativeInfoByDivision
+    , RepresentativesRepresentativeInfoByDivision
 
     -- * Request Lenses
     , rribdRoles
@@ -43,7 +43,7 @@ import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @civicinfo.representatives.representativeInfoByDivision@ method which the
--- 'RepresentativesRepresentativeInfoByDivision'' request conforms to.
+-- 'RepresentativesRepresentativeInfoByDivision' request conforms to.
 type RepresentativesRepresentativeInfoByDivisionResource
      =
      "representatives" :>
@@ -60,15 +60,15 @@ type RepresentativesRepresentativeInfoByDivisionResource
 
 -- | Looks up representative information for a single geographic division.
 --
--- /See:/ 'representativesRepresentativeInfoByDivision'' smart constructor.
-data RepresentativesRepresentativeInfoByDivision' = RepresentativesRepresentativeInfoByDivision'
+-- /See:/ 'representativesRepresentativeInfoByDivision' smart constructor.
+data RepresentativesRepresentativeInfoByDivision = RepresentativesRepresentativeInfoByDivision
     { _rribdRoles     :: !(Maybe [RepresentativesRepresentativeInfoByDivisionRoles])
     , _rribdRecursive :: !(Maybe Bool)
     , _rribdOcdId     :: !Text
     , _rribdLevels    :: !(Maybe [RepresentativesRepresentativeInfoByDivisionLevels])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RepresentativesRepresentativeInfoByDivision'' with the minimum fields required to make a request.
+-- | Creates a value of 'RepresentativesRepresentativeInfoByDivision' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,11 +79,11 @@ data RepresentativesRepresentativeInfoByDivision' = RepresentativesRepresentativ
 -- * 'rribdOcdId'
 --
 -- * 'rribdLevels'
-representativesRepresentativeInfoByDivision'
+representativesRepresentativeInfoByDivision
     :: Text -- ^ 'rribdOcdId'
-    -> RepresentativesRepresentativeInfoByDivision'
-representativesRepresentativeInfoByDivision' pRribdOcdId_ =
-    RepresentativesRepresentativeInfoByDivision'
+    -> RepresentativesRepresentativeInfoByDivision
+representativesRepresentativeInfoByDivision pRribdOcdId_ =
+    RepresentativesRepresentativeInfoByDivision
     { _rribdRoles = Nothing
     , _rribdRecursive = Nothing
     , _rribdOcdId = pRribdOcdId_
@@ -93,7 +93,7 @@ representativesRepresentativeInfoByDivision' pRribdOcdId_ =
 -- | A list of office roles to filter by. Only offices fulfilling one of
 -- these roles will be returned. Divisions that don\'t contain a matching
 -- office will not be returned.
-rribdRoles :: Lens' RepresentativesRepresentativeInfoByDivision' [RepresentativesRepresentativeInfoByDivisionRoles]
+rribdRoles :: Lens' RepresentativesRepresentativeInfoByDivision [RepresentativesRepresentativeInfoByDivisionRoles]
 rribdRoles
   = lens _rribdRoles (\ s a -> s{_rribdRoles = a}) .
       _Default
@@ -103,31 +103,31 @@ rribdRoles
 -- requested will be included as well. For example, if querying
 -- ocd-division\/country:us\/district:dc, this would also return all DC\'s
 -- wards and ANCs.
-rribdRecursive :: Lens' RepresentativesRepresentativeInfoByDivision' (Maybe Bool)
+rribdRecursive :: Lens' RepresentativesRepresentativeInfoByDivision (Maybe Bool)
 rribdRecursive
   = lens _rribdRecursive
       (\ s a -> s{_rribdRecursive = a})
 
 -- | The Open Civic Data division identifier of the division to look up.
-rribdOcdId :: Lens' RepresentativesRepresentativeInfoByDivision' Text
+rribdOcdId :: Lens' RepresentativesRepresentativeInfoByDivision Text
 rribdOcdId
   = lens _rribdOcdId (\ s a -> s{_rribdOcdId = a})
 
 -- | A list of office levels to filter by. Only offices that serve at least
 -- one of these levels will be returned. Divisions that don\'t contain a
 -- matching office will not be returned.
-rribdLevels :: Lens' RepresentativesRepresentativeInfoByDivision' [RepresentativesRepresentativeInfoByDivisionLevels]
+rribdLevels :: Lens' RepresentativesRepresentativeInfoByDivision [RepresentativesRepresentativeInfoByDivisionLevels]
 rribdLevels
   = lens _rribdLevels (\ s a -> s{_rribdLevels = a}) .
       _Default
       . _Coerce
 
 instance GoogleRequest
-         RepresentativesRepresentativeInfoByDivision' where
-        type Rs RepresentativesRepresentativeInfoByDivision'
-             = RepresentativeInfoData
+         RepresentativesRepresentativeInfoByDivision where
+        type Rs RepresentativesRepresentativeInfoByDivision =
+             RepresentativeInfoData
         requestClient
-          RepresentativesRepresentativeInfoByDivision'{..}
+          RepresentativesRepresentativeInfoByDivision{..}
           = go _rribdOcdId (_rribdRoles ^. _Default)
               _rribdRecursive
               (_rribdLevels ^. _Default)

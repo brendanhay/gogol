@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Update
       SubAccountsUpdateResource
 
     -- * Creating a Request
-    , subAccountsUpdate'
-    , SubAccountsUpdate'
+    , subAccountsUpdate
+    , SubAccountsUpdate
 
     -- * Request Lenses
     , sauProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.subaccounts.update@ method which the
--- 'SubAccountsUpdate'' request conforms to.
+-- 'SubAccountsUpdate' request conforms to.
 type SubAccountsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type SubAccountsUpdateResource =
 
 -- | Updates an existing subaccount.
 --
--- /See:/ 'subAccountsUpdate'' smart constructor.
-data SubAccountsUpdate' = SubAccountsUpdate'
+-- /See:/ 'subAccountsUpdate' smart constructor.
+data SubAccountsUpdate = SubAccountsUpdate
     { _sauProFileId :: !Int64
     , _sauPayload   :: !SubAccount
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubAccountsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubAccountsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sauProFileId'
 --
 -- * 'sauPayload'
-subAccountsUpdate'
+subAccountsUpdate
     :: Int64 -- ^ 'sauProFileId'
     -> SubAccount -- ^ 'sauPayload'
-    -> SubAccountsUpdate'
-subAccountsUpdate' pSauProFileId_ pSauPayload_ =
-    SubAccountsUpdate'
+    -> SubAccountsUpdate
+subAccountsUpdate pSauProFileId_ pSauPayload_ =
+    SubAccountsUpdate
     { _sauProFileId = pSauProFileId_
     , _sauPayload = pSauPayload_
     }
 
 -- | User profile ID associated with this request.
-sauProFileId :: Lens' SubAccountsUpdate' Int64
+sauProFileId :: Lens' SubAccountsUpdate Int64
 sauProFileId
   = lens _sauProFileId (\ s a -> s{_sauProFileId = a})
 
 -- | Multipart request metadata.
-sauPayload :: Lens' SubAccountsUpdate' SubAccount
+sauPayload :: Lens' SubAccountsUpdate SubAccount
 sauPayload
   = lens _sauPayload (\ s a -> s{_sauPayload = a})
 
-instance GoogleRequest SubAccountsUpdate' where
-        type Rs SubAccountsUpdate' = SubAccount
-        requestClient SubAccountsUpdate'{..}
+instance GoogleRequest SubAccountsUpdate where
+        type Rs SubAccountsUpdate = SubAccount
+        requestClient SubAccountsUpdate{..}
           = go _sauProFileId (Just AltJSON) _sauPayload
               dFAReportingService
           where go

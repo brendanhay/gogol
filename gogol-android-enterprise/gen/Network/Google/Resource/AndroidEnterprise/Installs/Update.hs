@@ -31,8 +31,8 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Update
       InstallsUpdateResource
 
     -- * Creating a Request
-    , installsUpdate'
-    , InstallsUpdate'
+    , installsUpdate
+    , InstallsUpdate
 
     -- * Request Lenses
     , iuEnterpriseId
@@ -46,7 +46,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.installs.update@ method which the
--- 'InstallsUpdate'' request conforms to.
+-- 'InstallsUpdate' request conforms to.
 type InstallsUpdateResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -63,8 +63,8 @@ type InstallsUpdateResource =
 -- is already installed then it is updated to the latest version if
 -- necessary.
 --
--- /See:/ 'installsUpdate'' smart constructor.
-data InstallsUpdate' = InstallsUpdate'
+-- /See:/ 'installsUpdate' smart constructor.
+data InstallsUpdate = InstallsUpdate
     { _iuEnterpriseId :: !Text
     , _iuPayload      :: !Install
     , _iuUserId       :: !Text
@@ -72,7 +72,7 @@ data InstallsUpdate' = InstallsUpdate'
     , _iuDeviceId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstallsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstallsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -85,15 +85,15 @@ data InstallsUpdate' = InstallsUpdate'
 -- * 'iuInstallId'
 --
 -- * 'iuDeviceId'
-installsUpdate'
+installsUpdate
     :: Text -- ^ 'iuEnterpriseId'
     -> Install -- ^ 'iuPayload'
     -> Text -- ^ 'iuUserId'
     -> Text -- ^ 'iuInstallId'
     -> Text -- ^ 'iuDeviceId'
-    -> InstallsUpdate'
-installsUpdate' pIuEnterpriseId_ pIuPayload_ pIuUserId_ pIuInstallId_ pIuDeviceId_ =
-    InstallsUpdate'
+    -> InstallsUpdate
+installsUpdate pIuEnterpriseId_ pIuPayload_ pIuUserId_ pIuInstallId_ pIuDeviceId_ =
+    InstallsUpdate
     { _iuEnterpriseId = pIuEnterpriseId_
     , _iuPayload = pIuPayload_
     , _iuUserId = pIuUserId_
@@ -102,34 +102,34 @@ installsUpdate' pIuEnterpriseId_ pIuPayload_ pIuUserId_ pIuInstallId_ pIuDeviceI
     }
 
 -- | The ID of the enterprise.
-iuEnterpriseId :: Lens' InstallsUpdate' Text
+iuEnterpriseId :: Lens' InstallsUpdate Text
 iuEnterpriseId
   = lens _iuEnterpriseId
       (\ s a -> s{_iuEnterpriseId = a})
 
 -- | Multipart request metadata.
-iuPayload :: Lens' InstallsUpdate' Install
+iuPayload :: Lens' InstallsUpdate Install
 iuPayload
   = lens _iuPayload (\ s a -> s{_iuPayload = a})
 
 -- | The ID of the user.
-iuUserId :: Lens' InstallsUpdate' Text
+iuUserId :: Lens' InstallsUpdate Text
 iuUserId = lens _iuUserId (\ s a -> s{_iuUserId = a})
 
 -- | The ID of the product represented by the install, e.g.
 -- \"app:com.google.android.gm\".
-iuInstallId :: Lens' InstallsUpdate' Text
+iuInstallId :: Lens' InstallsUpdate Text
 iuInstallId
   = lens _iuInstallId (\ s a -> s{_iuInstallId = a})
 
 -- | The Android ID of the device.
-iuDeviceId :: Lens' InstallsUpdate' Text
+iuDeviceId :: Lens' InstallsUpdate Text
 iuDeviceId
   = lens _iuDeviceId (\ s a -> s{_iuDeviceId = a})
 
-instance GoogleRequest InstallsUpdate' where
-        type Rs InstallsUpdate' = Install
-        requestClient InstallsUpdate'{..}
+instance GoogleRequest InstallsUpdate where
+        type Rs InstallsUpdate = Install
+        requestClient InstallsUpdate{..}
           = go _iuEnterpriseId _iuUserId _iuDeviceId
               _iuInstallId
               (Just AltJSON)

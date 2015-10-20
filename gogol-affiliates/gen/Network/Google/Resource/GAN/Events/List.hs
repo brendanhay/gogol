@@ -29,8 +29,8 @@ module Network.Google.Resource.GAN.Events.List
       EventsListResource
 
     -- * Creating a Request
-    , eventsList'
-    , EventsList'
+    , eventsList
+    , EventsList
 
     -- * Request Lenses
     , elStatus
@@ -57,7 +57,7 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gan.events.list@ method which the
--- 'EventsList'' request conforms to.
+-- 'EventsList' request conforms to.
 type EventsListResource =
      Capture "role" EventsListRole :>
        Capture "roleId" Text :>
@@ -83,8 +83,8 @@ type EventsListResource =
 
 -- | Retrieves event data for a given advertiser\/publisher.
 --
--- /See:/ 'eventsList'' smart constructor.
-data EventsList' = EventsList'
+-- /See:/ 'eventsList' smart constructor.
+data EventsList = EventsList
     { _elStatus          :: !(Maybe EventsListStatus)
     , _elEventDateMin    :: !(Maybe Text)
     , _elChargeType      :: !(Maybe EventsListChargeType)
@@ -105,7 +105,7 @@ data EventsList' = EventsList'
     , _elMaxResults      :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -144,12 +144,12 @@ data EventsList' = EventsList'
 -- * 'elProductCategory'
 --
 -- * 'elMaxResults'
-eventsList'
+eventsList
     :: Text -- ^ 'elRoleId'
     -> EventsListRole -- ^ 'elRole'
-    -> EventsList'
-eventsList' pElRoleId_ pElRole_ =
-    EventsList'
+    -> EventsList
+eventsList pElRoleId_ pElRole_ =
+    EventsList
     { _elStatus = Nothing
     , _elEventDateMin = Nothing
     , _elChargeType = Nothing
@@ -172,12 +172,12 @@ eventsList' pElRoleId_ pElRole_ =
 
 -- | Filters out all events that do not have the given status. Valid values:
 -- \'active\', \'canceled\'. Optional.
-elStatus :: Lens' EventsList' (Maybe EventsListStatus)
+elStatus :: Lens' EventsList (Maybe EventsListStatus)
 elStatus = lens _elStatus (\ s a -> s{_elStatus = a})
 
 -- | Filters out all events earlier than given date. Optional. Defaults to 24
 -- hours from current date\/time.
-elEventDateMin :: Lens' EventsList' (Maybe Text)
+elEventDateMin :: Lens' EventsList (Maybe Text)
 elEventDateMin
   = lens _elEventDateMin
       (\ s a -> s{_elEventDateMin = a})
@@ -185,20 +185,20 @@ elEventDateMin
 -- | Filters out all charge events that are not of the given charge type.
 -- Valid values: \'other\', \'slotting_fee\', \'monthly_minimum\',
 -- \'tier_bonus\', \'credit\', \'debit\'. Optional.
-elChargeType :: Lens' EventsList' (Maybe EventsListChargeType)
+elChargeType :: Lens' EventsList (Maybe EventsListChargeType)
 elChargeType
   = lens _elChargeType (\ s a -> s{_elChargeType = a})
 
 -- | Caret(^) delimited list of member IDs. Filters out all events that do
 -- not reference one of the given member IDs. Optional.
-elMemberId :: Lens' EventsList' (Maybe Text)
+elMemberId :: Lens' EventsList (Maybe Text)
 elMemberId
   = lens _elMemberId (\ s a -> s{_elMemberId = a})
 
 -- | Filters out all events modified later than given date. Optional.
 -- Defaults to 24 hours after modifyDateMin, if modifyDateMin is explicitly
 -- set.
-elModifyDateMax :: Lens' EventsList' (Maybe Text)
+elModifyDateMax :: Lens' EventsList (Maybe Text)
 elModifyDateMax
   = lens _elModifyDateMax
       (\ s a -> s{_elModifyDateMax = a})
@@ -206,7 +206,7 @@ elModifyDateMax
 -- | Caret(^) delimited list of advertiser IDs. Filters out all events that
 -- do not reference one of the given advertiser IDs. Only used when under
 -- publishers role. Optional.
-elAdvertiserId :: Lens' EventsList' (Maybe Text)
+elAdvertiserId :: Lens' EventsList (Maybe Text)
 elAdvertiserId
   = lens _elAdvertiserId
       (\ s a -> s{_elAdvertiserId = a})
@@ -214,57 +214,57 @@ elAdvertiserId
 -- | Filters out all events modified earlier than given date. Optional.
 -- Defaults to 24 hours before the current modifyDateMax, if modifyDateMax
 -- is explicitly set.
-elModifyDateMin :: Lens' EventsList' (Maybe Text)
+elModifyDateMin :: Lens' EventsList (Maybe Text)
 elModifyDateMin
   = lens _elModifyDateMin
       (\ s a -> s{_elModifyDateMin = a})
 
 -- | The ID of the requesting advertiser or publisher.
-elRoleId :: Lens' EventsList' Text
+elRoleId :: Lens' EventsList Text
 elRoleId = lens _elRoleId (\ s a -> s{_elRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-elRole :: Lens' EventsList' EventsListRole
+elRole :: Lens' EventsList EventsListRole
 elRole = lens _elRole (\ s a -> s{_elRole = a})
 
 -- | Filters out all events later than given date. Optional. Defaults to 24
 -- hours after eventMin.
-elEventDateMax :: Lens' EventsList' (Maybe Text)
+elEventDateMax :: Lens' EventsList (Maybe Text)
 elEventDateMax
   = lens _elEventDateMax
       (\ s a -> s{_elEventDateMax = a})
 
 -- | Caret(^) delimited list of SKUs. Filters out all events that do not
 -- reference one of the given SKU. Optional.
-elSKU :: Lens' EventsList' (Maybe Text)
+elSKU :: Lens' EventsList (Maybe Text)
 elSKU = lens _elSKU (\ s a -> s{_elSKU = a})
 
 -- | Caret(^) delimited list of link IDs. Filters out all events that do not
 -- reference one of the given link IDs. Optional.
-elLinkId :: Lens' EventsList' (Maybe Text)
+elLinkId :: Lens' EventsList (Maybe Text)
 elLinkId = lens _elLinkId (\ s a -> s{_elLinkId = a})
 
 -- | The value of \'nextPageToken\' from the previous page. Optional.
-elPageToken :: Lens' EventsList' (Maybe Text)
+elPageToken :: Lens' EventsList (Maybe Text)
 elPageToken
   = lens _elPageToken (\ s a -> s{_elPageToken = a})
 
 -- | Filters out all events that are not of the given type. Valid values:
 -- \'action\', \'transaction\', \'charge\'. Optional.
-elType :: Lens' EventsList' (Maybe EventsListType)
+elType :: Lens' EventsList (Maybe EventsListType)
 elType = lens _elType (\ s a -> s{_elType = a})
 
 -- | Caret(^) delimited list of order IDs. Filters out all events that do not
 -- reference one of the given order IDs. Optional.
-elOrderId :: Lens' EventsList' (Maybe Text)
+elOrderId :: Lens' EventsList (Maybe Text)
 elOrderId
   = lens _elOrderId (\ s a -> s{_elOrderId = a})
 
 -- | Caret(^) delimited list of publisher IDs. Filters out all events that do
 -- not reference one of the given publishers IDs. Only used when under
 -- advertiser role. Optional.
-elPublisherId :: Lens' EventsList' (Maybe Text)
+elPublisherId :: Lens' EventsList (Maybe Text)
 elPublisherId
   = lens _elPublisherId
       (\ s a -> s{_elPublisherId = a})
@@ -272,19 +272,19 @@ elPublisherId
 -- | Caret(^) delimited list of product categories. Filters out all events
 -- that do not reference a product in one of the given product categories.
 -- Optional.
-elProductCategory :: Lens' EventsList' (Maybe Text)
+elProductCategory :: Lens' EventsList (Maybe Text)
 elProductCategory
   = lens _elProductCategory
       (\ s a -> s{_elProductCategory = a})
 
 -- | Max number of offers to return in this page. Optional. Defaults to 20.
-elMaxResults :: Lens' EventsList' (Maybe Word32)
+elMaxResults :: Lens' EventsList (Maybe Word32)
 elMaxResults
   = lens _elMaxResults (\ s a -> s{_elMaxResults = a})
 
-instance GoogleRequest EventsList' where
-        type Rs EventsList' = Events
-        requestClient EventsList'{..}
+instance GoogleRequest EventsList where
+        type Rs EventsList = Events
+        requestClient EventsList{..}
           = go _elRole _elRoleId _elStatus _elEventDateMin
               _elChargeType
               _elMemberId

@@ -29,8 +29,8 @@ module Network.Google.Resource.Genomics.Datasets.Get
       DatasetsGetResource
 
     -- * Creating a Request
-    , datasetsGet'
-    , DatasetsGet'
+    , datasetsGet
+    , DatasetsGet
 
     -- * Request Lenses
     , dgXgafv
@@ -47,7 +47,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.datasets.get@ method which the
--- 'DatasetsGet'' request conforms to.
+-- 'DatasetsGet' request conforms to.
 type DatasetsGetResource =
      "v1" :>
        "datasets" :>
@@ -63,8 +63,8 @@ type DatasetsGetResource =
 
 -- | Gets a dataset by ID.
 --
--- /See:/ 'datasetsGet'' smart constructor.
-data DatasetsGet' = DatasetsGet'
+-- /See:/ 'datasetsGet' smart constructor.
+data DatasetsGet = DatasetsGet
     { _dgXgafv          :: !(Maybe Text)
     , _dgUploadProtocol :: !(Maybe Text)
     , _dgPp             :: !Bool
@@ -75,7 +75,7 @@ data DatasetsGet' = DatasetsGet'
     , _dgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -94,11 +94,11 @@ data DatasetsGet' = DatasetsGet'
 -- * 'dgDatasetId'
 --
 -- * 'dgCallback'
-datasetsGet'
+datasetsGet
     :: Text -- ^ 'dgDatasetId'
-    -> DatasetsGet'
-datasetsGet' pDgDatasetId_ =
-    DatasetsGet'
+    -> DatasetsGet
+datasetsGet pDgDatasetId_ =
+    DatasetsGet
     { _dgXgafv = Nothing
     , _dgUploadProtocol = Nothing
     , _dgPp = True
@@ -110,49 +110,49 @@ datasetsGet' pDgDatasetId_ =
     }
 
 -- | V1 error format.
-dgXgafv :: Lens' DatasetsGet' (Maybe Text)
+dgXgafv :: Lens' DatasetsGet (Maybe Text)
 dgXgafv = lens _dgXgafv (\ s a -> s{_dgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-dgUploadProtocol :: Lens' DatasetsGet' (Maybe Text)
+dgUploadProtocol :: Lens' DatasetsGet (Maybe Text)
 dgUploadProtocol
   = lens _dgUploadProtocol
       (\ s a -> s{_dgUploadProtocol = a})
 
 -- | Pretty-print response.
-dgPp :: Lens' DatasetsGet' Bool
+dgPp :: Lens' DatasetsGet Bool
 dgPp = lens _dgPp (\ s a -> s{_dgPp = a})
 
 -- | OAuth access token.
-dgAccessToken :: Lens' DatasetsGet' (Maybe Text)
+dgAccessToken :: Lens' DatasetsGet (Maybe Text)
 dgAccessToken
   = lens _dgAccessToken
       (\ s a -> s{_dgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-dgUploadType :: Lens' DatasetsGet' (Maybe Text)
+dgUploadType :: Lens' DatasetsGet (Maybe Text)
 dgUploadType
   = lens _dgUploadType (\ s a -> s{_dgUploadType = a})
 
 -- | OAuth bearer token.
-dgBearerToken :: Lens' DatasetsGet' (Maybe Text)
+dgBearerToken :: Lens' DatasetsGet (Maybe Text)
 dgBearerToken
   = lens _dgBearerToken
       (\ s a -> s{_dgBearerToken = a})
 
 -- | The ID of the dataset.
-dgDatasetId :: Lens' DatasetsGet' Text
+dgDatasetId :: Lens' DatasetsGet Text
 dgDatasetId
   = lens _dgDatasetId (\ s a -> s{_dgDatasetId = a})
 
 -- | JSONP
-dgCallback :: Lens' DatasetsGet' (Maybe Text)
+dgCallback :: Lens' DatasetsGet (Maybe Text)
 dgCallback
   = lens _dgCallback (\ s a -> s{_dgCallback = a})
 
-instance GoogleRequest DatasetsGet' where
-        type Rs DatasetsGet' = Dataset
-        requestClient DatasetsGet'{..}
+instance GoogleRequest DatasetsGet where
+        type Rs DatasetsGet = Dataset
+        requestClient DatasetsGet{..}
           = go _dgDatasetId _dgXgafv _dgUploadProtocol
               (Just _dgPp)
               _dgAccessToken

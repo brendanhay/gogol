@@ -31,8 +31,8 @@ module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.Insert
       CampaignCreativeAssociationsInsertResource
 
     -- * Creating a Request
-    , campaignCreativeAssociationsInsert'
-    , CampaignCreativeAssociationsInsert'
+    , campaignCreativeAssociationsInsert
+    , CampaignCreativeAssociationsInsert
 
     -- * Request Lenses
     , ccaiCampaignId
@@ -44,7 +44,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.campaignCreativeAssociations.insert@ method which the
--- 'CampaignCreativeAssociationsInsert'' request conforms to.
+-- 'CampaignCreativeAssociationsInsert' request conforms to.
 type CampaignCreativeAssociationsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -59,14 +59,14 @@ type CampaignCreativeAssociationsInsertResource =
 -- default ad with dimensions matching the creative in the campaign if such
 -- a default ad does not exist already.
 --
--- /See:/ 'campaignCreativeAssociationsInsert'' smart constructor.
-data CampaignCreativeAssociationsInsert' = CampaignCreativeAssociationsInsert'
+-- /See:/ 'campaignCreativeAssociationsInsert' smart constructor.
+data CampaignCreativeAssociationsInsert = CampaignCreativeAssociationsInsert
     { _ccaiCampaignId :: !Int64
     , _ccaiProFileId  :: !Int64
     , _ccaiPayload    :: !CampaignCreativeAssociation
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CampaignCreativeAssociationsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CampaignCreativeAssociationsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,40 +75,40 @@ data CampaignCreativeAssociationsInsert' = CampaignCreativeAssociationsInsert'
 -- * 'ccaiProFileId'
 --
 -- * 'ccaiPayload'
-campaignCreativeAssociationsInsert'
+campaignCreativeAssociationsInsert
     :: Int64 -- ^ 'ccaiCampaignId'
     -> Int64 -- ^ 'ccaiProFileId'
     -> CampaignCreativeAssociation -- ^ 'ccaiPayload'
-    -> CampaignCreativeAssociationsInsert'
-campaignCreativeAssociationsInsert' pCcaiCampaignId_ pCcaiProFileId_ pCcaiPayload_ =
-    CampaignCreativeAssociationsInsert'
+    -> CampaignCreativeAssociationsInsert
+campaignCreativeAssociationsInsert pCcaiCampaignId_ pCcaiProFileId_ pCcaiPayload_ =
+    CampaignCreativeAssociationsInsert
     { _ccaiCampaignId = pCcaiCampaignId_
     , _ccaiProFileId = pCcaiProFileId_
     , _ccaiPayload = pCcaiPayload_
     }
 
 -- | Campaign ID in this association.
-ccaiCampaignId :: Lens' CampaignCreativeAssociationsInsert' Int64
+ccaiCampaignId :: Lens' CampaignCreativeAssociationsInsert Int64
 ccaiCampaignId
   = lens _ccaiCampaignId
       (\ s a -> s{_ccaiCampaignId = a})
 
 -- | User profile ID associated with this request.
-ccaiProFileId :: Lens' CampaignCreativeAssociationsInsert' Int64
+ccaiProFileId :: Lens' CampaignCreativeAssociationsInsert Int64
 ccaiProFileId
   = lens _ccaiProFileId
       (\ s a -> s{_ccaiProFileId = a})
 
 -- | Multipart request metadata.
-ccaiPayload :: Lens' CampaignCreativeAssociationsInsert' CampaignCreativeAssociation
+ccaiPayload :: Lens' CampaignCreativeAssociationsInsert CampaignCreativeAssociation
 ccaiPayload
   = lens _ccaiPayload (\ s a -> s{_ccaiPayload = a})
 
 instance GoogleRequest
-         CampaignCreativeAssociationsInsert' where
-        type Rs CampaignCreativeAssociationsInsert' =
+         CampaignCreativeAssociationsInsert where
+        type Rs CampaignCreativeAssociationsInsert =
              CampaignCreativeAssociation
-        requestClient CampaignCreativeAssociationsInsert'{..}
+        requestClient CampaignCreativeAssociationsInsert{..}
           = go _ccaiProFileId _ccaiCampaignId (Just AltJSON)
               _ccaiPayload
               dFAReportingService

@@ -29,19 +29,19 @@ module Network.Google.Resource.DFAReporting.Creatives.Get
       CreativesGetResource
 
     -- * Creating a Request
-    , creativesGet'
-    , CreativesGet'
+    , creativesGet
+    , CreativesGet
 
     -- * Request Lenses
-    , crerProFileId
-    , crerId
+    , ccProFileId
+    , ccId
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creatives.get@ method which the
--- 'CreativesGet'' request conforms to.
+-- 'CreativesGet' request conforms to.
 type CreativesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,43 +51,42 @@ type CreativesGetResource =
 
 -- | Gets one creative by ID.
 --
--- /See:/ 'creativesGet'' smart constructor.
-data CreativesGet' = CreativesGet'
-    { _crerProFileId :: !Int64
-    , _crerId        :: !Int64
+-- /See:/ 'creativesGet' smart constructor.
+data CreativesGet = CreativesGet
+    { _ccProFileId :: !Int64
+    , _ccId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CreativesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'crerProFileId'
+-- * 'ccProFileId'
 --
--- * 'crerId'
-creativesGet'
-    :: Int64 -- ^ 'crerProFileId'
-    -> Int64 -- ^ 'crerId'
-    -> CreativesGet'
-creativesGet' pCrerProFileId_ pCrerId_ =
-    CreativesGet'
-    { _crerProFileId = pCrerProFileId_
-    , _crerId = pCrerId_
+-- * 'ccId'
+creativesGet
+    :: Int64 -- ^ 'ccProFileId'
+    -> Int64 -- ^ 'ccId'
+    -> CreativesGet
+creativesGet pCcProFileId_ pCcId_ =
+    CreativesGet
+    { _ccProFileId = pCcProFileId_
+    , _ccId = pCcId_
     }
 
 -- | User profile ID associated with this request.
-crerProFileId :: Lens' CreativesGet' Int64
-crerProFileId
-  = lens _crerProFileId
-      (\ s a -> s{_crerProFileId = a})
+ccProFileId :: Lens' CreativesGet Int64
+ccProFileId
+  = lens _ccProFileId (\ s a -> s{_ccProFileId = a})
 
 -- | Creative ID.
-crerId :: Lens' CreativesGet' Int64
-crerId = lens _crerId (\ s a -> s{_crerId = a})
+ccId :: Lens' CreativesGet Int64
+ccId = lens _ccId (\ s a -> s{_ccId = a})
 
-instance GoogleRequest CreativesGet' where
-        type Rs CreativesGet' = Creative
-        requestClient CreativesGet'{..}
-          = go _crerProFileId _crerId (Just AltJSON)
+instance GoogleRequest CreativesGet where
+        type Rs CreativesGet = Creative
+        requestClient CreativesGet{..}
+          = go _ccProFileId _ccId (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy CreativesGetResource)

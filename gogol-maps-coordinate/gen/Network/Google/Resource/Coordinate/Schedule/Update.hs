@@ -29,8 +29,8 @@ module Network.Google.Resource.Coordinate.Schedule.Update
       ScheduleUpdateResource
 
     -- * Creating a Request
-    , scheduleUpdate'
-    , ScheduleUpdate'
+    , scheduleUpdate
+    , ScheduleUpdate
 
     -- * Request Lenses
     , suJobId
@@ -46,7 +46,7 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @coordinate.schedule.update@ method which the
--- 'ScheduleUpdate'' request conforms to.
+-- 'ScheduleUpdate' request conforms to.
 type ScheduleUpdateResource =
      "teams" :>
        Capture "teamId" Text :>
@@ -62,8 +62,8 @@ type ScheduleUpdateResource =
 
 -- | Replaces the schedule of a job with the provided schedule.
 --
--- /See:/ 'scheduleUpdate'' smart constructor.
-data ScheduleUpdate' = ScheduleUpdate'
+-- /See:/ 'scheduleUpdate' smart constructor.
+data ScheduleUpdate = ScheduleUpdate
     { _suJobId     :: !Word64
     , _suAllDay    :: !(Maybe Bool)
     , _suStartTime :: !(Maybe Word64)
@@ -73,7 +73,7 @@ data ScheduleUpdate' = ScheduleUpdate'
     , _suDuration  :: !(Maybe Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ScheduleUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ScheduleUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -90,13 +90,13 @@ data ScheduleUpdate' = ScheduleUpdate'
 -- * 'suEndTime'
 --
 -- * 'suDuration'
-scheduleUpdate'
+scheduleUpdate
     :: Word64 -- ^ 'suJobId'
     -> Text -- ^ 'suTeamId'
     -> Schedule -- ^ 'suPayload'
-    -> ScheduleUpdate'
-scheduleUpdate' pSuJobId_ pSuTeamId_ pSuPayload_ =
-    ScheduleUpdate'
+    -> ScheduleUpdate
+scheduleUpdate pSuJobId_ pSuTeamId_ pSuPayload_ =
+    ScheduleUpdate
     { _suJobId = pSuJobId_
     , _suAllDay = Nothing
     , _suStartTime = Nothing
@@ -107,41 +107,41 @@ scheduleUpdate' pSuJobId_ pSuTeamId_ pSuPayload_ =
     }
 
 -- | Job number
-suJobId :: Lens' ScheduleUpdate' Word64
+suJobId :: Lens' ScheduleUpdate Word64
 suJobId = lens _suJobId (\ s a -> s{_suJobId = a})
 
 -- | Whether the job is scheduled for the whole day. Time of day in
 -- start\/end times is ignored if this is true.
-suAllDay :: Lens' ScheduleUpdate' (Maybe Bool)
+suAllDay :: Lens' ScheduleUpdate (Maybe Bool)
 suAllDay = lens _suAllDay (\ s a -> s{_suAllDay = a})
 
 -- | Scheduled start time in milliseconds since epoch.
-suStartTime :: Lens' ScheduleUpdate' (Maybe Word64)
+suStartTime :: Lens' ScheduleUpdate (Maybe Word64)
 suStartTime
   = lens _suStartTime (\ s a -> s{_suStartTime = a})
 
 -- | Team ID
-suTeamId :: Lens' ScheduleUpdate' Text
+suTeamId :: Lens' ScheduleUpdate Text
 suTeamId = lens _suTeamId (\ s a -> s{_suTeamId = a})
 
 -- | Multipart request metadata.
-suPayload :: Lens' ScheduleUpdate' Schedule
+suPayload :: Lens' ScheduleUpdate Schedule
 suPayload
   = lens _suPayload (\ s a -> s{_suPayload = a})
 
 -- | Scheduled end time in milliseconds since epoch.
-suEndTime :: Lens' ScheduleUpdate' (Maybe Word64)
+suEndTime :: Lens' ScheduleUpdate (Maybe Word64)
 suEndTime
   = lens _suEndTime (\ s a -> s{_suEndTime = a})
 
 -- | Job duration in milliseconds.
-suDuration :: Lens' ScheduleUpdate' (Maybe Word64)
+suDuration :: Lens' ScheduleUpdate (Maybe Word64)
 suDuration
   = lens _suDuration (\ s a -> s{_suDuration = a})
 
-instance GoogleRequest ScheduleUpdate' where
-        type Rs ScheduleUpdate' = Schedule
-        requestClient ScheduleUpdate'{..}
+instance GoogleRequest ScheduleUpdate where
+        type Rs ScheduleUpdate = Schedule
+        requestClient ScheduleUpdate{..}
           = go _suTeamId _suJobId _suAllDay _suStartTime
               _suEndTime
               _suDuration

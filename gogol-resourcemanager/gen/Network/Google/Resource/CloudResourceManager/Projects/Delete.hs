@@ -52,8 +52,8 @@ module Network.Google.Resource.CloudResourceManager.Projects.Delete
       ProjectsDeleteResource
 
     -- * Creating a Request
-    , projectsDelete'
-    , ProjectsDelete'
+    , projectsDelete
+    , ProjectsDelete
 
     -- * Request Lenses
     , pdXgafv
@@ -70,7 +70,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.projects.delete@ method which the
--- 'ProjectsDelete'' request conforms to.
+-- 'ProjectsDelete' request conforms to.
 type ProjectsDeleteResource =
      "v1beta1" :>
        "projects" :>
@@ -109,8 +109,8 @@ type ProjectsDeleteResource =
 -- [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects]
 -- methods. The caller must have modify permissions for this project.
 --
--- /See:/ 'projectsDelete'' smart constructor.
-data ProjectsDelete' = ProjectsDelete'
+-- /See:/ 'projectsDelete' smart constructor.
+data ProjectsDelete = ProjectsDelete
     { _pdXgafv          :: !(Maybe Text)
     , _pdUploadProtocol :: !(Maybe Text)
     , _pdPp             :: !Bool
@@ -121,7 +121,7 @@ data ProjectsDelete' = ProjectsDelete'
     , _pdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -140,11 +140,11 @@ data ProjectsDelete' = ProjectsDelete'
 -- * 'pdProjectId'
 --
 -- * 'pdCallback'
-projectsDelete'
+projectsDelete
     :: Text -- ^ 'pdProjectId'
-    -> ProjectsDelete'
-projectsDelete' pPdProjectId_ =
-    ProjectsDelete'
+    -> ProjectsDelete
+projectsDelete pPdProjectId_ =
+    ProjectsDelete
     { _pdXgafv = Nothing
     , _pdUploadProtocol = Nothing
     , _pdPp = True
@@ -156,49 +156,49 @@ projectsDelete' pPdProjectId_ =
     }
 
 -- | V1 error format.
-pdXgafv :: Lens' ProjectsDelete' (Maybe Text)
+pdXgafv :: Lens' ProjectsDelete (Maybe Text)
 pdXgafv = lens _pdXgafv (\ s a -> s{_pdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pdUploadProtocol :: Lens' ProjectsDelete' (Maybe Text)
+pdUploadProtocol :: Lens' ProjectsDelete (Maybe Text)
 pdUploadProtocol
   = lens _pdUploadProtocol
       (\ s a -> s{_pdUploadProtocol = a})
 
 -- | Pretty-print response.
-pdPp :: Lens' ProjectsDelete' Bool
+pdPp :: Lens' ProjectsDelete Bool
 pdPp = lens _pdPp (\ s a -> s{_pdPp = a})
 
 -- | OAuth access token.
-pdAccessToken :: Lens' ProjectsDelete' (Maybe Text)
+pdAccessToken :: Lens' ProjectsDelete (Maybe Text)
 pdAccessToken
   = lens _pdAccessToken
       (\ s a -> s{_pdAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pdUploadType :: Lens' ProjectsDelete' (Maybe Text)
+pdUploadType :: Lens' ProjectsDelete (Maybe Text)
 pdUploadType
   = lens _pdUploadType (\ s a -> s{_pdUploadType = a})
 
 -- | OAuth bearer token.
-pdBearerToken :: Lens' ProjectsDelete' (Maybe Text)
+pdBearerToken :: Lens' ProjectsDelete (Maybe Text)
 pdBearerToken
   = lens _pdBearerToken
       (\ s a -> s{_pdBearerToken = a})
 
 -- | The project ID (for example, \`foo-bar-123\`). Required.
-pdProjectId :: Lens' ProjectsDelete' Text
+pdProjectId :: Lens' ProjectsDelete Text
 pdProjectId
   = lens _pdProjectId (\ s a -> s{_pdProjectId = a})
 
 -- | JSONP
-pdCallback :: Lens' ProjectsDelete' (Maybe Text)
+pdCallback :: Lens' ProjectsDelete (Maybe Text)
 pdCallback
   = lens _pdCallback (\ s a -> s{_pdCallback = a})
 
-instance GoogleRequest ProjectsDelete' where
-        type Rs ProjectsDelete' = Empty
-        requestClient ProjectsDelete'{..}
+instance GoogleRequest ProjectsDelete where
+        type Rs ProjectsDelete = Empty
+        requestClient ProjectsDelete{..}
           = go _pdProjectId _pdXgafv _pdUploadProtocol
               (Just _pdPp)
               _pdAccessToken

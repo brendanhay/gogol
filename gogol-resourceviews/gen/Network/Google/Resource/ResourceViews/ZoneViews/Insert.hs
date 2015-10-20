@@ -29,8 +29,8 @@ module Network.Google.Resource.ResourceViews.ZoneViews.Insert
       ZoneViewsInsertResource
 
     -- * Creating a Request
-    , zoneViewsInsert'
-    , ZoneViewsInsert'
+    , zoneViewsInsert
+    , ZoneViewsInsert
 
     -- * Request Lenses
     , zviProject
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
 -- | A resource alias for @resourceviews.zoneViews.insert@ method which the
--- 'ZoneViewsInsert'' request conforms to.
+-- 'ZoneViewsInsert' request conforms to.
 type ZoneViewsInsertResource =
      Capture "project" Text :>
        "zones" :>
@@ -54,14 +54,14 @@ type ZoneViewsInsertResource =
 
 -- | Create a resource view.
 --
--- /See:/ 'zoneViewsInsert'' smart constructor.
-data ZoneViewsInsert' = ZoneViewsInsert'
+-- /See:/ 'zoneViewsInsert' smart constructor.
+data ZoneViewsInsert = ZoneViewsInsert
     { _zviProject :: !Text
     , _zviZone    :: !Text
     , _zviPayload :: !ResourceView
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ZoneViewsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ZoneViewsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,35 +70,35 @@ data ZoneViewsInsert' = ZoneViewsInsert'
 -- * 'zviZone'
 --
 -- * 'zviPayload'
-zoneViewsInsert'
+zoneViewsInsert
     :: Text -- ^ 'zviProject'
     -> Text -- ^ 'zviZone'
     -> ResourceView -- ^ 'zviPayload'
-    -> ZoneViewsInsert'
-zoneViewsInsert' pZviProject_ pZviZone_ pZviPayload_ =
-    ZoneViewsInsert'
+    -> ZoneViewsInsert
+zoneViewsInsert pZviProject_ pZviZone_ pZviPayload_ =
+    ZoneViewsInsert
     { _zviProject = pZviProject_
     , _zviZone = pZviZone_
     , _zviPayload = pZviPayload_
     }
 
 -- | The project name of the resource view.
-zviProject :: Lens' ZoneViewsInsert' Text
+zviProject :: Lens' ZoneViewsInsert Text
 zviProject
   = lens _zviProject (\ s a -> s{_zviProject = a})
 
 -- | The zone name of the resource view.
-zviZone :: Lens' ZoneViewsInsert' Text
+zviZone :: Lens' ZoneViewsInsert Text
 zviZone = lens _zviZone (\ s a -> s{_zviZone = a})
 
 -- | Multipart request metadata.
-zviPayload :: Lens' ZoneViewsInsert' ResourceView
+zviPayload :: Lens' ZoneViewsInsert ResourceView
 zviPayload
   = lens _zviPayload (\ s a -> s{_zviPayload = a})
 
-instance GoogleRequest ZoneViewsInsert' where
-        type Rs ZoneViewsInsert' = Operation
-        requestClient ZoneViewsInsert'{..}
+instance GoogleRequest ZoneViewsInsert where
+        type Rs ZoneViewsInsert = Operation
+        requestClient ZoneViewsInsert{..}
           = go _zviProject _zviZone (Just AltJSON) _zviPayload
               resourceViewsService
           where go

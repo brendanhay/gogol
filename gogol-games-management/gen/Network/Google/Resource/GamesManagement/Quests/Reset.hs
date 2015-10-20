@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Quests.Reset
       QuestsResetResource
 
     -- * Creating a Request
-    , questsReset'
-    , QuestsReset'
+    , questsReset
+    , QuestsReset
 
     -- * Request Lenses
     , qrQuestId
@@ -42,7 +42,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.quests.reset@ method which the
--- 'QuestsReset'' request conforms to.
+-- 'QuestsReset' request conforms to.
 type QuestsResetResource =
      "quests" :>
        Capture "questId" Text :>
@@ -53,32 +53,32 @@ type QuestsResetResource =
 -- currently authenticated player. This method is only accessible to
 -- whitelisted tester accounts for your application.
 --
--- /See:/ 'questsReset'' smart constructor.
-newtype QuestsReset' = QuestsReset'
+-- /See:/ 'questsReset' smart constructor.
+newtype QuestsReset = QuestsReset
     { _qrQuestId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'QuestsReset'' with the minimum fields required to make a request.
+-- | Creates a value of 'QuestsReset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'qrQuestId'
-questsReset'
+questsReset
     :: Text -- ^ 'qrQuestId'
-    -> QuestsReset'
-questsReset' pQrQuestId_ =
-    QuestsReset'
+    -> QuestsReset
+questsReset pQrQuestId_ =
+    QuestsReset
     { _qrQuestId = pQrQuestId_
     }
 
 -- | The ID of the quest.
-qrQuestId :: Lens' QuestsReset' Text
+qrQuestId :: Lens' QuestsReset Text
 qrQuestId
   = lens _qrQuestId (\ s a -> s{_qrQuestId = a})
 
-instance GoogleRequest QuestsReset' where
-        type Rs QuestsReset' = ()
-        requestClient QuestsReset'{..}
+instance GoogleRequest QuestsReset where
+        type Rs QuestsReset = ()
+        requestClient QuestsReset{..}
           = go _qrQuestId (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy QuestsResetResource)

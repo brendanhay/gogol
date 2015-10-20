@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.PlayListItems.Delete
       PlayListItemsDeleteResource
 
     -- * Creating a Request
-    , playListItemsDelete'
-    , PlayListItemsDelete'
+    , playListItemsDelete
+    , PlayListItemsDelete
 
     -- * Request Lenses
     , plidId
@@ -40,7 +40,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.playlistItems.delete@ method which the
--- 'PlayListItemsDelete'' request conforms to.
+-- 'PlayListItemsDelete' request conforms to.
 type PlayListItemsDeleteResource =
      "playlistItems" :>
        QueryParam "id" Text :>
@@ -48,33 +48,33 @@ type PlayListItemsDeleteResource =
 
 -- | Deletes a playlist item.
 --
--- /See:/ 'playListItemsDelete'' smart constructor.
-newtype PlayListItemsDelete' = PlayListItemsDelete'
+-- /See:/ 'playListItemsDelete' smart constructor.
+newtype PlayListItemsDelete = PlayListItemsDelete
     { _plidId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlayListItemsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayListItemsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'plidId'
-playListItemsDelete'
+playListItemsDelete
     :: Text -- ^ 'plidId'
-    -> PlayListItemsDelete'
-playListItemsDelete' pPlidId_ =
-    PlayListItemsDelete'
+    -> PlayListItemsDelete
+playListItemsDelete pPlidId_ =
+    PlayListItemsDelete
     { _plidId = pPlidId_
     }
 
 -- | The id parameter specifies the YouTube playlist item ID for the playlist
 -- item that is being deleted. In a playlistItem resource, the id property
 -- specifies the playlist item\'s ID.
-plidId :: Lens' PlayListItemsDelete' Text
+plidId :: Lens' PlayListItemsDelete Text
 plidId = lens _plidId (\ s a -> s{_plidId = a})
 
-instance GoogleRequest PlayListItemsDelete' where
-        type Rs PlayListItemsDelete' = ()
-        requestClient PlayListItemsDelete'{..}
+instance GoogleRequest PlayListItemsDelete where
+        type Rs PlayListItemsDelete = ()
+        requestClient PlayListItemsDelete{..}
           = go (Just _plidId) (Just AltJSON) youTubeService
           where go
                   = buildClient

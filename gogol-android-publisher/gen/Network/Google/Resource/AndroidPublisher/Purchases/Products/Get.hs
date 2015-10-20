@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidPublisher.Purchases.Products.Get
       PurchasesProductsGetResource
 
     -- * Creating a Request
-    , purchasesProductsGet'
-    , PurchasesProductsGet'
+    , purchasesProductsGet
+    , PurchasesProductsGet
 
     -- * Request Lenses
     , ppgPackageName
@@ -42,7 +42,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.purchases.products.get@ method which the
--- 'PurchasesProductsGet'' request conforms to.
+-- 'PurchasesProductsGet' request conforms to.
 type PurchasesProductsGetResource =
      Capture "packageName" Text :>
        "purchases" :>
@@ -55,14 +55,14 @@ type PurchasesProductsGetResource =
 
 -- | Checks the purchase and consumption status of an inapp item.
 --
--- /See:/ 'purchasesProductsGet'' smart constructor.
-data PurchasesProductsGet' = PurchasesProductsGet'
+-- /See:/ 'purchasesProductsGet' smart constructor.
+data PurchasesProductsGet = PurchasesProductsGet
     { _ppgPackageName :: !Text
     , _ppgToken       :: !Text
     , _ppgProductId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PurchasesProductsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PurchasesProductsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,13 +71,13 @@ data PurchasesProductsGet' = PurchasesProductsGet'
 -- * 'ppgToken'
 --
 -- * 'ppgProductId'
-purchasesProductsGet'
+purchasesProductsGet
     :: Text -- ^ 'ppgPackageName'
     -> Text -- ^ 'ppgToken'
     -> Text -- ^ 'ppgProductId'
-    -> PurchasesProductsGet'
-purchasesProductsGet' pPpgPackageName_ pPpgToken_ pPpgProductId_ =
-    PurchasesProductsGet'
+    -> PurchasesProductsGet
+purchasesProductsGet pPpgPackageName_ pPpgToken_ pPpgProductId_ =
+    PurchasesProductsGet
     { _ppgPackageName = pPpgPackageName_
     , _ppgToken = pPpgToken_
     , _ppgProductId = pPpgProductId_
@@ -85,24 +85,24 @@ purchasesProductsGet' pPpgPackageName_ pPpgToken_ pPpgProductId_ =
 
 -- | The package name of the application the inapp product was sold in (for
 -- example, \'com.some.thing\').
-ppgPackageName :: Lens' PurchasesProductsGet' Text
+ppgPackageName :: Lens' PurchasesProductsGet Text
 ppgPackageName
   = lens _ppgPackageName
       (\ s a -> s{_ppgPackageName = a})
 
 -- | The token provided to the user\'s device when the inapp product was
 -- purchased.
-ppgToken :: Lens' PurchasesProductsGet' Text
+ppgToken :: Lens' PurchasesProductsGet Text
 ppgToken = lens _ppgToken (\ s a -> s{_ppgToken = a})
 
 -- | The inapp product SKU (for example, \'com.some.thing.inapp1\').
-ppgProductId :: Lens' PurchasesProductsGet' Text
+ppgProductId :: Lens' PurchasesProductsGet Text
 ppgProductId
   = lens _ppgProductId (\ s a -> s{_ppgProductId = a})
 
-instance GoogleRequest PurchasesProductsGet' where
-        type Rs PurchasesProductsGet' = ProductPurchase
-        requestClient PurchasesProductsGet'{..}
+instance GoogleRequest PurchasesProductsGet where
+        type Rs PurchasesProductsGet = ProductPurchase
+        requestClient PurchasesProductsGet{..}
           = go _ppgPackageName _ppgProductId _ppgToken
               (Just AltJSON)
               androidPublisherService

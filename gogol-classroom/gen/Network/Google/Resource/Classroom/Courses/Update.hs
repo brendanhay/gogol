@@ -33,8 +33,8 @@ module Network.Google.Resource.Classroom.Courses.Update
       CoursesUpdateResource
 
     -- * Creating a Request
-    , coursesUpdate'
-    , CoursesUpdate'
+    , coursesUpdate
+    , CoursesUpdate
 
     -- * Request Lenses
     , cuXgafv
@@ -52,7 +52,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.update@ method which the
--- 'CoursesUpdate'' request conforms to.
+-- 'CoursesUpdate' request conforms to.
 type CoursesUpdateResource =
      "v1" :>
        "courses" :>
@@ -73,8 +73,8 @@ type CoursesUpdateResource =
 -- exists with the requested ID. * \`FAILED_PRECONDITION\` for the
 -- following request errors: * CourseNotModifiable
 --
--- /See:/ 'coursesUpdate'' smart constructor.
-data CoursesUpdate' = CoursesUpdate'
+-- /See:/ 'coursesUpdate' smart constructor.
+data CoursesUpdate = CoursesUpdate
     { _cuXgafv          :: !(Maybe Text)
     , _cuUploadProtocol :: !(Maybe Text)
     , _cuPp             :: !Bool
@@ -86,7 +86,7 @@ data CoursesUpdate' = CoursesUpdate'
     , _cuCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CoursesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CoursesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -107,12 +107,12 @@ data CoursesUpdate' = CoursesUpdate'
 -- * 'cuId'
 --
 -- * 'cuCallback'
-coursesUpdate'
+coursesUpdate
     :: Course -- ^ 'cuPayload'
     -> Text -- ^ 'cuId'
-    -> CoursesUpdate'
-coursesUpdate' pCuPayload_ pCuId_ =
-    CoursesUpdate'
+    -> CoursesUpdate
+coursesUpdate pCuPayload_ pCuId_ =
+    CoursesUpdate
     { _cuXgafv = Nothing
     , _cuUploadProtocol = Nothing
     , _cuPp = True
@@ -125,54 +125,54 @@ coursesUpdate' pCuPayload_ pCuId_ =
     }
 
 -- | V1 error format.
-cuXgafv :: Lens' CoursesUpdate' (Maybe Text)
+cuXgafv :: Lens' CoursesUpdate (Maybe Text)
 cuXgafv = lens _cuXgafv (\ s a -> s{_cuXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-cuUploadProtocol :: Lens' CoursesUpdate' (Maybe Text)
+cuUploadProtocol :: Lens' CoursesUpdate (Maybe Text)
 cuUploadProtocol
   = lens _cuUploadProtocol
       (\ s a -> s{_cuUploadProtocol = a})
 
 -- | Pretty-print response.
-cuPp :: Lens' CoursesUpdate' Bool
+cuPp :: Lens' CoursesUpdate Bool
 cuPp = lens _cuPp (\ s a -> s{_cuPp = a})
 
 -- | OAuth access token.
-cuAccessToken :: Lens' CoursesUpdate' (Maybe Text)
+cuAccessToken :: Lens' CoursesUpdate (Maybe Text)
 cuAccessToken
   = lens _cuAccessToken
       (\ s a -> s{_cuAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-cuUploadType :: Lens' CoursesUpdate' (Maybe Text)
+cuUploadType :: Lens' CoursesUpdate (Maybe Text)
 cuUploadType
   = lens _cuUploadType (\ s a -> s{_cuUploadType = a})
 
 -- | Multipart request metadata.
-cuPayload :: Lens' CoursesUpdate' Course
+cuPayload :: Lens' CoursesUpdate Course
 cuPayload
   = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
 -- | OAuth bearer token.
-cuBearerToken :: Lens' CoursesUpdate' (Maybe Text)
+cuBearerToken :: Lens' CoursesUpdate (Maybe Text)
 cuBearerToken
   = lens _cuBearerToken
       (\ s a -> s{_cuBearerToken = a})
 
 -- | Identifier of the course to update. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
-cuId :: Lens' CoursesUpdate' Text
+cuId :: Lens' CoursesUpdate Text
 cuId = lens _cuId (\ s a -> s{_cuId = a})
 
 -- | JSONP
-cuCallback :: Lens' CoursesUpdate' (Maybe Text)
+cuCallback :: Lens' CoursesUpdate (Maybe Text)
 cuCallback
   = lens _cuCallback (\ s a -> s{_cuCallback = a})
 
-instance GoogleRequest CoursesUpdate' where
-        type Rs CoursesUpdate' = Course
-        requestClient CoursesUpdate'{..}
+instance GoogleRequest CoursesUpdate where
+        type Rs CoursesUpdate = Course
+        requestClient CoursesUpdate{..}
           = go _cuId _cuXgafv _cuUploadProtocol (Just _cuPp)
               _cuAccessToken
               _cuUploadType

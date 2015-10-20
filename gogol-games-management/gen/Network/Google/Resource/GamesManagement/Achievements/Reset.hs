@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Achievements.Reset
       AchievementsResetResource
 
     -- * Creating a Request
-    , achievementsReset'
-    , AchievementsReset'
+    , achievementsReset
+    , AchievementsReset
 
     -- * Request Lenses
     , arAchievementId
@@ -42,7 +42,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.achievements.reset@ method which the
--- 'AchievementsReset'' request conforms to.
+-- 'AchievementsReset' request conforms to.
 type AchievementsResetResource =
      "achievements" :>
        Capture "achievementId" Text :>
@@ -54,33 +54,33 @@ type AchievementsResetResource =
 -- player. This method is only accessible to whitelisted tester accounts
 -- for your application.
 --
--- /See:/ 'achievementsReset'' smart constructor.
-newtype AchievementsReset' = AchievementsReset'
+-- /See:/ 'achievementsReset' smart constructor.
+newtype AchievementsReset = AchievementsReset
     { _arAchievementId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AchievementsReset'' with the minimum fields required to make a request.
+-- | Creates a value of 'AchievementsReset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'arAchievementId'
-achievementsReset'
+achievementsReset
     :: Text -- ^ 'arAchievementId'
-    -> AchievementsReset'
-achievementsReset' pArAchievementId_ =
-    AchievementsReset'
+    -> AchievementsReset
+achievementsReset pArAchievementId_ =
+    AchievementsReset
     { _arAchievementId = pArAchievementId_
     }
 
 -- | The ID of the achievement used by this method.
-arAchievementId :: Lens' AchievementsReset' Text
+arAchievementId :: Lens' AchievementsReset Text
 arAchievementId
   = lens _arAchievementId
       (\ s a -> s{_arAchievementId = a})
 
-instance GoogleRequest AchievementsReset' where
-        type Rs AchievementsReset' = AchievementResetResponse
-        requestClient AchievementsReset'{..}
+instance GoogleRequest AchievementsReset where
+        type Rs AchievementsReset = AchievementResetResponse
+        requestClient AchievementsReset{..}
           = go _arAchievementId (Just AltJSON)
               gamesManagementService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.Objects.Get
       ObjectsGetResource
 
     -- * Creating a Request
-    , objectsGet'
-    , ObjectsGet'
+    , objectsGet
+    , ObjectsGet
 
     -- * Request Lenses
     , ogIfMetagenerationMatch
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.get@ method which the
--- 'ObjectsGet'' request conforms to.
+-- 'ObjectsGet' request conforms to.
 type ObjectsGetResource =
      "b" :>
        Capture "bucket" Text :>
@@ -76,8 +76,8 @@ type ObjectsGetResource =
 
 -- | Retrieves an object or its metadata.
 --
--- /See:/ 'objectsGet'' smart constructor.
-data ObjectsGet' = ObjectsGet'
+-- /See:/ 'objectsGet' smart constructor.
+data ObjectsGet = ObjectsGet
     { _ogIfMetagenerationMatch    :: !(Maybe Int64)
     , _ogIfGenerationNotMatch     :: !(Maybe Int64)
     , _ogIfGenerationMatch        :: !(Maybe Int64)
@@ -88,7 +88,7 @@ data ObjectsGet' = ObjectsGet'
     , _ogGeneration               :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ObjectsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ObjectsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -107,12 +107,12 @@ data ObjectsGet' = ObjectsGet'
 -- * 'ogProjection'
 --
 -- * 'ogGeneration'
-objectsGet'
+objectsGet
     :: Text -- ^ 'ogBucket'
     -> Text -- ^ 'ogObject'
-    -> ObjectsGet'
-objectsGet' pOgBucket_ pOgObject_ =
-    ObjectsGet'
+    -> ObjectsGet
+objectsGet pOgBucket_ pOgObject_ =
+    ObjectsGet
     { _ogIfMetagenerationMatch = Nothing
     , _ogIfGenerationNotMatch = Nothing
     , _ogIfGenerationMatch = Nothing
@@ -125,55 +125,55 @@ objectsGet' pOgBucket_ pOgObject_ =
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.
-ogIfMetagenerationMatch :: Lens' ObjectsGet' (Maybe Int64)
+ogIfMetagenerationMatch :: Lens' ObjectsGet (Maybe Int64)
 ogIfMetagenerationMatch
   = lens _ogIfMetagenerationMatch
       (\ s a -> s{_ogIfMetagenerationMatch = a})
 
 -- | Makes the operation conditional on whether the object\'s generation does
 -- not match the given value.
-ogIfGenerationNotMatch :: Lens' ObjectsGet' (Maybe Int64)
+ogIfGenerationNotMatch :: Lens' ObjectsGet (Maybe Int64)
 ogIfGenerationNotMatch
   = lens _ogIfGenerationNotMatch
       (\ s a -> s{_ogIfGenerationNotMatch = a})
 
 -- | Makes the operation conditional on whether the object\'s generation
 -- matches the given value.
-ogIfGenerationMatch :: Lens' ObjectsGet' (Maybe Int64)
+ogIfGenerationMatch :: Lens' ObjectsGet (Maybe Int64)
 ogIfGenerationMatch
   = lens _ogIfGenerationMatch
       (\ s a -> s{_ogIfGenerationMatch = a})
 
 -- | Name of the bucket in which the object resides.
-ogBucket :: Lens' ObjectsGet' Text
+ogBucket :: Lens' ObjectsGet Text
 ogBucket = lens _ogBucket (\ s a -> s{_ogBucket = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration does not match the given value.
-ogIfMetagenerationNotMatch :: Lens' ObjectsGet' (Maybe Int64)
+ogIfMetagenerationNotMatch :: Lens' ObjectsGet (Maybe Int64)
 ogIfMetagenerationNotMatch
   = lens _ogIfMetagenerationNotMatch
       (\ s a -> s{_ogIfMetagenerationNotMatch = a})
 
 -- | Name of the object. For information about how to URL encode object names
 -- to be path safe, see Encoding URI Path Parts.
-ogObject :: Lens' ObjectsGet' Text
+ogObject :: Lens' ObjectsGet Text
 ogObject = lens _ogObject (\ s a -> s{_ogObject = a})
 
 -- | Set of properties to return. Defaults to noAcl.
-ogProjection :: Lens' ObjectsGet' (Maybe ObjectsGetProjection)
+ogProjection :: Lens' ObjectsGet (Maybe ObjectsGetProjection)
 ogProjection
   = lens _ogProjection (\ s a -> s{_ogProjection = a})
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
-ogGeneration :: Lens' ObjectsGet' (Maybe Int64)
+ogGeneration :: Lens' ObjectsGet (Maybe Int64)
 ogGeneration
   = lens _ogGeneration (\ s a -> s{_ogGeneration = a})
 
-instance GoogleRequest ObjectsGet' where
-        type Rs ObjectsGet' = Object
-        requestClient ObjectsGet'{..}
+instance GoogleRequest ObjectsGet where
+        type Rs ObjectsGet = Object
+        requestClient ObjectsGet{..}
           = go _ogBucket _ogObject _ogIfMetagenerationMatch
               _ogIfGenerationNotMatch
               _ogIfGenerationMatch
@@ -186,10 +186,10 @@ instance GoogleRequest ObjectsGet' where
                   = buildClient (Proxy :: Proxy ObjectsGetResource)
                       mempty
 
-instance GoogleRequest (MediaDownload ObjectsGet')
+instance GoogleRequest (MediaDownload ObjectsGet)
          where
-        type Rs (MediaDownload ObjectsGet') = Stream
-        requestClient (MediaDownload ObjectsGet'{..})
+        type Rs (MediaDownload ObjectsGet) = Stream
+        requestClient (MediaDownload ObjectsGet{..})
           = go _ogBucket _ogObject _ogIfMetagenerationMatch
               _ogIfGenerationNotMatch
               _ogIfGenerationMatch

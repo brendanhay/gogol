@@ -27,18 +27,18 @@ module Network.Google.Resource.Content.Accountstatuses.Custombatch
       AccountstatusesCustombatchResource
 
     -- * Creating a Request
-    , accountstatusesCustombatch'
-    , AccountstatusesCustombatch'
+    , accountstatusesCustombatch
+    , AccountstatusesCustombatch
 
     -- * Request Lenses
-    , aaPayload
+    , accPayload
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accountstatuses.custombatch@ method which the
--- 'AccountstatusesCustombatch'' request conforms to.
+-- 'AccountstatusesCustombatch' request conforms to.
 type AccountstatusesCustombatchResource =
      "accountstatuses" :>
        "batch" :>
@@ -47,35 +47,36 @@ type AccountstatusesCustombatchResource =
              Post '[JSON] AccountstatusesCustomBatchResponse
 
 --
--- /See:/ 'accountstatusesCustombatch'' smart constructor.
-newtype AccountstatusesCustombatch' = AccountstatusesCustombatch'
-    { _aaPayload :: AccountstatusesCustomBatchRequest
+-- /See:/ 'accountstatusesCustombatch' smart constructor.
+newtype AccountstatusesCustombatch = AccountstatusesCustombatch
+    { _accPayload :: AccountstatusesCustomBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountstatusesCustombatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountstatusesCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aaPayload'
-accountstatusesCustombatch'
-    :: AccountstatusesCustomBatchRequest -- ^ 'aaPayload'
-    -> AccountstatusesCustombatch'
-accountstatusesCustombatch' pAaPayload_ =
-    AccountstatusesCustombatch'
-    { _aaPayload = pAaPayload_
+-- * 'accPayload'
+accountstatusesCustombatch
+    :: AccountstatusesCustomBatchRequest -- ^ 'accPayload'
+    -> AccountstatusesCustombatch
+accountstatusesCustombatch pAccPayload_ =
+    AccountstatusesCustombatch
+    { _accPayload = pAccPayload_
     }
 
 -- | Multipart request metadata.
-aaPayload :: Lens' AccountstatusesCustombatch' AccountstatusesCustomBatchRequest
-aaPayload
-  = lens _aaPayload (\ s a -> s{_aaPayload = a})
+accPayload :: Lens' AccountstatusesCustombatch AccountstatusesCustomBatchRequest
+accPayload
+  = lens _accPayload (\ s a -> s{_accPayload = a})
 
-instance GoogleRequest AccountstatusesCustombatch'
+instance GoogleRequest AccountstatusesCustombatch
          where
-        type Rs AccountstatusesCustombatch' =
+        type Rs AccountstatusesCustombatch =
              AccountstatusesCustomBatchResponse
-        requestClient AccountstatusesCustombatch'{..}
-          = go (Just AltJSON) _aaPayload shoppingContentService
+        requestClient AccountstatusesCustombatch{..}
+          = go (Just AltJSON) _accPayload
+              shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy AccountstatusesCustombatchResource)

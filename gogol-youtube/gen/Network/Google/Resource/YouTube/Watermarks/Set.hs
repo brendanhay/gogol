@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.Watermarks.Set
       WatermarksSetResource
 
     -- * Creating a Request
-    , watermarksSet'
-    , WatermarksSet'
+    , watermarksSet
+    , WatermarksSet
 
     -- * Request Lenses
     , wsChannelId
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.watermarks.set@ method which the
--- 'WatermarksSet'' request conforms to.
+-- 'WatermarksSet' request conforms to.
 type WatermarksSetResource =
      "watermarks" :>
        "set" :>
@@ -55,15 +55,15 @@ type WatermarksSetResource =
 
 -- | Uploads a watermark image to YouTube and sets it for a channel.
 --
--- /See:/ 'watermarksSet'' smart constructor.
-data WatermarksSet' = WatermarksSet'
+-- /See:/ 'watermarksSet' smart constructor.
+data WatermarksSet = WatermarksSet
     { _wsChannelId              :: !Text
     , _wsPayload                :: !InvideoBranding
     , _wsMedia                  :: !Body
     , _wsOnBehalfOfContentOwner :: !(Maybe Text)
     }
 
--- | Creates a value of 'WatermarksSet'' with the minimum fields required to make a request.
+-- | Creates a value of 'WatermarksSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,13 +74,13 @@ data WatermarksSet' = WatermarksSet'
 -- * 'wsMedia'
 --
 -- * 'wsOnBehalfOfContentOwner'
-watermarksSet'
+watermarksSet
     :: Text -- ^ 'wsChannelId'
     -> InvideoBranding -- ^ 'wsPayload'
     -> Body -- ^ 'wsMedia'
-    -> WatermarksSet'
-watermarksSet' pWsChannelId_ pWsPayload_ pWsMedia_ =
-    WatermarksSet'
+    -> WatermarksSet
+watermarksSet pWsChannelId_ pWsPayload_ pWsMedia_ =
+    WatermarksSet
     { _wsChannelId = pWsChannelId_
     , _wsPayload = pWsPayload_
     , _wsMedia = pWsMedia_
@@ -89,16 +89,16 @@ watermarksSet' pWsChannelId_ pWsPayload_ pWsMedia_ =
 
 -- | The channelId parameter specifies the YouTube channel ID for which the
 -- watermark is being provided.
-wsChannelId :: Lens' WatermarksSet' Text
+wsChannelId :: Lens' WatermarksSet Text
 wsChannelId
   = lens _wsChannelId (\ s a -> s{_wsChannelId = a})
 
 -- | Multipart request metadata.
-wsPayload :: Lens' WatermarksSet' InvideoBranding
+wsPayload :: Lens' WatermarksSet InvideoBranding
 wsPayload
   = lens _wsPayload (\ s a -> s{_wsPayload = a})
 
-wsMedia :: Lens' WatermarksSet' Body
+wsMedia :: Lens' WatermarksSet Body
 wsMedia = lens _wsMedia (\ s a -> s{_wsMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
@@ -111,14 +111,14 @@ wsMedia = lens _wsMedia (\ s a -> s{_wsMedia = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-wsOnBehalfOfContentOwner :: Lens' WatermarksSet' (Maybe Text)
+wsOnBehalfOfContentOwner :: Lens' WatermarksSet (Maybe Text)
 wsOnBehalfOfContentOwner
   = lens _wsOnBehalfOfContentOwner
       (\ s a -> s{_wsOnBehalfOfContentOwner = a})
 
-instance GoogleRequest WatermarksSet' where
-        type Rs WatermarksSet' = ()
-        requestClient WatermarksSet'{..}
+instance GoogleRequest WatermarksSet where
+        type Rs WatermarksSet = ()
+        requestClient WatermarksSet{..}
           = go (Just _wsChannelId) _wsOnBehalfOfContentOwner
               (Just AltJSON)
               _wsPayload

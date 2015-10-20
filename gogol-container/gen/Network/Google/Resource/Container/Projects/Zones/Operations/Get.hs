@@ -29,8 +29,8 @@ module Network.Google.Resource.Container.Projects.Zones.Operations.Get
       ProjectsZonesOperationsGetResource
 
     -- * Creating a Request
-    , projectsZonesOperationsGet'
-    , ProjectsZonesOperationsGet'
+    , projectsZonesOperationsGet
+    , ProjectsZonesOperationsGet
 
     -- * Request Lenses
     , pzogXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.operations.get@ method which the
--- 'ProjectsZonesOperationsGet'' request conforms to.
+-- 'ProjectsZonesOperationsGet' request conforms to.
 type ProjectsZonesOperationsGetResource =
      "v1" :>
        "projects" :>
@@ -70,8 +70,8 @@ type ProjectsZonesOperationsGetResource =
 
 -- | Gets the specified operation.
 --
--- /See:/ 'projectsZonesOperationsGet'' smart constructor.
-data ProjectsZonesOperationsGet' = ProjectsZonesOperationsGet'
+-- /See:/ 'projectsZonesOperationsGet' smart constructor.
+data ProjectsZonesOperationsGet = ProjectsZonesOperationsGet
     { _pzogXgafv          :: !(Maybe Text)
     , _pzogUploadProtocol :: !(Maybe Text)
     , _pzogPp             :: !Bool
@@ -84,7 +84,7 @@ data ProjectsZonesOperationsGet' = ProjectsZonesOperationsGet'
     , _pzogCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsZonesOperationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsZonesOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -107,13 +107,13 @@ data ProjectsZonesOperationsGet' = ProjectsZonesOperationsGet'
 -- * 'pzogOperationId'
 --
 -- * 'pzogCallback'
-projectsZonesOperationsGet'
+projectsZonesOperationsGet
     :: Text -- ^ 'pzogZone'
     -> Text -- ^ 'pzogProjectId'
     -> Text -- ^ 'pzogOperationId'
-    -> ProjectsZonesOperationsGet'
-projectsZonesOperationsGet' pPzogZone_ pPzogProjectId_ pPzogOperationId_ =
-    ProjectsZonesOperationsGet'
+    -> ProjectsZonesOperationsGet
+projectsZonesOperationsGet pPzogZone_ pPzogProjectId_ pPzogOperationId_ =
+    ProjectsZonesOperationsGet
     { _pzogXgafv = Nothing
     , _pzogUploadProtocol = Nothing
     , _pzogPp = True
@@ -127,65 +127,65 @@ projectsZonesOperationsGet' pPzogZone_ pPzogProjectId_ pPzogOperationId_ =
     }
 
 -- | V1 error format.
-pzogXgafv :: Lens' ProjectsZonesOperationsGet' (Maybe Text)
+pzogXgafv :: Lens' ProjectsZonesOperationsGet (Maybe Text)
 pzogXgafv
   = lens _pzogXgafv (\ s a -> s{_pzogXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pzogUploadProtocol :: Lens' ProjectsZonesOperationsGet' (Maybe Text)
+pzogUploadProtocol :: Lens' ProjectsZonesOperationsGet (Maybe Text)
 pzogUploadProtocol
   = lens _pzogUploadProtocol
       (\ s a -> s{_pzogUploadProtocol = a})
 
 -- | Pretty-print response.
-pzogPp :: Lens' ProjectsZonesOperationsGet' Bool
+pzogPp :: Lens' ProjectsZonesOperationsGet Bool
 pzogPp = lens _pzogPp (\ s a -> s{_pzogPp = a})
 
 -- | OAuth access token.
-pzogAccessToken :: Lens' ProjectsZonesOperationsGet' (Maybe Text)
+pzogAccessToken :: Lens' ProjectsZonesOperationsGet (Maybe Text)
 pzogAccessToken
   = lens _pzogAccessToken
       (\ s a -> s{_pzogAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pzogUploadType :: Lens' ProjectsZonesOperationsGet' (Maybe Text)
+pzogUploadType :: Lens' ProjectsZonesOperationsGet (Maybe Text)
 pzogUploadType
   = lens _pzogUploadType
       (\ s a -> s{_pzogUploadType = a})
 
 -- | The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
-pzogZone :: Lens' ProjectsZonesOperationsGet' Text
+pzogZone :: Lens' ProjectsZonesOperationsGet Text
 pzogZone = lens _pzogZone (\ s a -> s{_pzogZone = a})
 
 -- | OAuth bearer token.
-pzogBearerToken :: Lens' ProjectsZonesOperationsGet' (Maybe Text)
+pzogBearerToken :: Lens' ProjectsZonesOperationsGet (Maybe Text)
 pzogBearerToken
   = lens _pzogBearerToken
       (\ s a -> s{_pzogBearerToken = a})
 
 -- | The Google Developers Console [project ID or project
 -- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
-pzogProjectId :: Lens' ProjectsZonesOperationsGet' Text
+pzogProjectId :: Lens' ProjectsZonesOperationsGet Text
 pzogProjectId
   = lens _pzogProjectId
       (\ s a -> s{_pzogProjectId = a})
 
 -- | The server-assigned \`name\` of the operation.
-pzogOperationId :: Lens' ProjectsZonesOperationsGet' Text
+pzogOperationId :: Lens' ProjectsZonesOperationsGet Text
 pzogOperationId
   = lens _pzogOperationId
       (\ s a -> s{_pzogOperationId = a})
 
 -- | JSONP
-pzogCallback :: Lens' ProjectsZonesOperationsGet' (Maybe Text)
+pzogCallback :: Lens' ProjectsZonesOperationsGet (Maybe Text)
 pzogCallback
   = lens _pzogCallback (\ s a -> s{_pzogCallback = a})
 
-instance GoogleRequest ProjectsZonesOperationsGet'
+instance GoogleRequest ProjectsZonesOperationsGet
          where
-        type Rs ProjectsZonesOperationsGet' = Operation
-        requestClient ProjectsZonesOperationsGet'{..}
+        type Rs ProjectsZonesOperationsGet = Operation
+        requestClient ProjectsZonesOperationsGet{..}
           = go _pzogProjectId _pzogZone _pzogOperationId
               _pzogXgafv
               _pzogUploadProtocol

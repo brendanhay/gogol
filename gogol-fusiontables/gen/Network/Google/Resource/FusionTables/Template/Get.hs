@@ -29,19 +29,19 @@ module Network.Google.Resource.FusionTables.Template.Get
       TemplateGetResource
 
     -- * Creating a Request
-    , templateGet'
-    , TemplateGet'
+    , templateGet
+    , TemplateGet
 
     -- * Request Lenses
-    , tggTemplateId
-    , tggTableId
+    , temeTemplateId
+    , temeTableId
     ) where
 
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.template.get@ method which the
--- 'TemplateGet'' request conforms to.
+-- 'TemplateGet' request conforms to.
 type TemplateGetResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -51,44 +51,44 @@ type TemplateGetResource =
 
 -- | Retrieves a specific template by its id
 --
--- /See:/ 'templateGet'' smart constructor.
-data TemplateGet' = TemplateGet'
-    { _tggTemplateId :: !Int32
-    , _tggTableId    :: !Text
+-- /See:/ 'templateGet' smart constructor.
+data TemplateGet = TemplateGet
+    { _temeTemplateId :: !Int32
+    , _temeTableId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TemplateGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TemplateGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tggTemplateId'
+-- * 'temeTemplateId'
 --
--- * 'tggTableId'
-templateGet'
-    :: Int32 -- ^ 'tggTemplateId'
-    -> Text -- ^ 'tggTableId'
-    -> TemplateGet'
-templateGet' pTggTemplateId_ pTggTableId_ =
-    TemplateGet'
-    { _tggTemplateId = pTggTemplateId_
-    , _tggTableId = pTggTableId_
+-- * 'temeTableId'
+templateGet
+    :: Int32 -- ^ 'temeTemplateId'
+    -> Text -- ^ 'temeTableId'
+    -> TemplateGet
+templateGet pTemeTemplateId_ pTemeTableId_ =
+    TemplateGet
+    { _temeTemplateId = pTemeTemplateId_
+    , _temeTableId = pTemeTableId_
     }
 
 -- | Identifier for the template that is being requested
-tggTemplateId :: Lens' TemplateGet' Int32
-tggTemplateId
-  = lens _tggTemplateId
-      (\ s a -> s{_tggTemplateId = a})
+temeTemplateId :: Lens' TemplateGet Int32
+temeTemplateId
+  = lens _temeTemplateId
+      (\ s a -> s{_temeTemplateId = a})
 
 -- | Table to which the template belongs
-tggTableId :: Lens' TemplateGet' Text
-tggTableId
-  = lens _tggTableId (\ s a -> s{_tggTableId = a})
+temeTableId :: Lens' TemplateGet Text
+temeTableId
+  = lens _temeTableId (\ s a -> s{_temeTableId = a})
 
-instance GoogleRequest TemplateGet' where
-        type Rs TemplateGet' = Template
-        requestClient TemplateGet'{..}
-          = go _tggTableId _tggTemplateId (Just AltJSON)
+instance GoogleRequest TemplateGet where
+        type Rs TemplateGet = Template
+        requestClient TemplateGet{..}
+          = go _temeTableId _temeTemplateId (Just AltJSON)
               fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TemplateGetResource)

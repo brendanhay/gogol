@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudResourceManager.Organizations.List
       OrganizationsListResource
 
     -- * Creating a Request
-    , organizationsList'
-    , OrganizationsList'
+    , organizationsList
+    , OrganizationsList
 
     -- * Request Lenses
     , olXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.organizations.list@ method which the
--- 'OrganizationsList'' request conforms to.
+-- 'OrganizationsList' request conforms to.
 type OrganizationsListResource =
      "v1beta1" :>
        "organizations" :>
@@ -68,8 +68,8 @@ type OrganizationsListResource =
 
 -- | Query Organization resources.
 --
--- /See:/ 'organizationsList'' smart constructor.
-data OrganizationsList' = OrganizationsList'
+-- /See:/ 'organizationsList' smart constructor.
+data OrganizationsList = OrganizationsList
     { _olXgafv          :: !(Maybe Text)
     , _olUploadProtocol :: !(Maybe Text)
     , _olPp             :: !Bool
@@ -82,7 +82,7 @@ data OrganizationsList' = OrganizationsList'
     , _olCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrganizationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrganizationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -105,10 +105,10 @@ data OrganizationsList' = OrganizationsList'
 -- * 'olPageSize'
 --
 -- * 'olCallback'
-organizationsList'
-    :: OrganizationsList'
-organizationsList' =
-    OrganizationsList'
+organizationsList
+    :: OrganizationsList
+organizationsList =
+    OrganizationsList
     { _olXgafv = Nothing
     , _olUploadProtocol = Nothing
     , _olPp = True
@@ -122,32 +122,32 @@ organizationsList' =
     }
 
 -- | V1 error format.
-olXgafv :: Lens' OrganizationsList' (Maybe Text)
+olXgafv :: Lens' OrganizationsList (Maybe Text)
 olXgafv = lens _olXgafv (\ s a -> s{_olXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-olUploadProtocol :: Lens' OrganizationsList' (Maybe Text)
+olUploadProtocol :: Lens' OrganizationsList (Maybe Text)
 olUploadProtocol
   = lens _olUploadProtocol
       (\ s a -> s{_olUploadProtocol = a})
 
 -- | Pretty-print response.
-olPp :: Lens' OrganizationsList' Bool
+olPp :: Lens' OrganizationsList Bool
 olPp = lens _olPp (\ s a -> s{_olPp = a})
 
 -- | OAuth access token.
-olAccessToken :: Lens' OrganizationsList' (Maybe Text)
+olAccessToken :: Lens' OrganizationsList (Maybe Text)
 olAccessToken
   = lens _olAccessToken
       (\ s a -> s{_olAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-olUploadType :: Lens' OrganizationsList' (Maybe Text)
+olUploadType :: Lens' OrganizationsList (Maybe Text)
 olUploadType
   = lens _olUploadType (\ s a -> s{_olUploadType = a})
 
 -- | OAuth bearer token.
-olBearerToken :: Lens' OrganizationsList' (Maybe Text)
+olBearerToken :: Lens' OrganizationsList (Maybe Text)
 olBearerToken
   = lens _olBearerToken
       (\ s a -> s{_olBearerToken = a})
@@ -160,31 +160,30 @@ olBearerToken
 -- with \`owner.directory_customer_id\` equal to \`123456789\`.|
 -- |domain:google.com|Organizations corresponding to the domain
 -- \`google.com\`.| This field is optional.
-olFilter :: Lens' OrganizationsList' (Maybe Text)
+olFilter :: Lens' OrganizationsList (Maybe Text)
 olFilter = lens _olFilter (\ s a -> s{_olFilter = a})
 
 -- | A pagination token returned from a previous call to ListOrganizations
 -- that indicates from where listing should continue. This field is
 -- optional.
-olPageToken :: Lens' OrganizationsList' (Maybe Text)
+olPageToken :: Lens' OrganizationsList (Maybe Text)
 olPageToken
   = lens _olPageToken (\ s a -> s{_olPageToken = a})
 
 -- | The maximum number of Organizations to return in the response. This
 -- field is optional.
-olPageSize :: Lens' OrganizationsList' (Maybe Int32)
+olPageSize :: Lens' OrganizationsList (Maybe Int32)
 olPageSize
   = lens _olPageSize (\ s a -> s{_olPageSize = a})
 
 -- | JSONP
-olCallback :: Lens' OrganizationsList' (Maybe Text)
+olCallback :: Lens' OrganizationsList (Maybe Text)
 olCallback
   = lens _olCallback (\ s a -> s{_olCallback = a})
 
-instance GoogleRequest OrganizationsList' where
-        type Rs OrganizationsList' =
-             ListOrganizationsResponse
-        requestClient OrganizationsList'{..}
+instance GoogleRequest OrganizationsList where
+        type Rs OrganizationsList = ListOrganizationsResponse
+        requestClient OrganizationsList{..}
           = go _olXgafv _olUploadProtocol (Just _olPp)
               _olAccessToken
               _olUploadType

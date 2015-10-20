@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.BackendServices.GetHealth
       BackendServicesGetHealthResource
 
     -- * Creating a Request
-    , backendServicesGetHealth'
-    , BackendServicesGetHealth'
+    , backendServicesGetHealth
+    , BackendServicesGetHealth
 
     -- * Request Lenses
     , bsghProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.backendServices.getHealth@ method which the
--- 'BackendServicesGetHealth'' request conforms to.
+-- 'BackendServicesGetHealth' request conforms to.
 type BackendServicesGetHealthResource =
      Capture "project" Text :>
        "global" :>
@@ -55,14 +55,14 @@ type BackendServicesGetHealthResource =
 
 -- | Gets the most recent health check results for this BackendService.
 --
--- /See:/ 'backendServicesGetHealth'' smart constructor.
-data BackendServicesGetHealth' = BackendServicesGetHealth'
+-- /See:/ 'backendServicesGetHealth' smart constructor.
+data BackendServicesGetHealth = BackendServicesGetHealth
     { _bsghProject        :: !Text
     , _bsghPayload        :: !ResourceGroupReference
     , _bsghBackendService :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BackendServicesGetHealth'' with the minimum fields required to make a request.
+-- | Creates a value of 'BackendServicesGetHealth' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,39 +71,38 @@ data BackendServicesGetHealth' = BackendServicesGetHealth'
 -- * 'bsghPayload'
 --
 -- * 'bsghBackendService'
-backendServicesGetHealth'
+backendServicesGetHealth
     :: Text -- ^ 'bsghProject'
     -> ResourceGroupReference -- ^ 'bsghPayload'
     -> Text -- ^ 'bsghBackendService'
-    -> BackendServicesGetHealth'
-backendServicesGetHealth' pBsghProject_ pBsghPayload_ pBsghBackendService_ =
-    BackendServicesGetHealth'
+    -> BackendServicesGetHealth
+backendServicesGetHealth pBsghProject_ pBsghPayload_ pBsghBackendService_ =
+    BackendServicesGetHealth
     { _bsghProject = pBsghProject_
     , _bsghPayload = pBsghPayload_
     , _bsghBackendService = pBsghBackendService_
     }
 
-bsghProject :: Lens' BackendServicesGetHealth' Text
+bsghProject :: Lens' BackendServicesGetHealth Text
 bsghProject
   = lens _bsghProject (\ s a -> s{_bsghProject = a})
 
 -- | Multipart request metadata.
-bsghPayload :: Lens' BackendServicesGetHealth' ResourceGroupReference
+bsghPayload :: Lens' BackendServicesGetHealth ResourceGroupReference
 bsghPayload
   = lens _bsghPayload (\ s a -> s{_bsghPayload = a})
 
 -- | Name of the BackendService resource to which the queried instance
 -- belongs.
-bsghBackendService :: Lens' BackendServicesGetHealth' Text
+bsghBackendService :: Lens' BackendServicesGetHealth Text
 bsghBackendService
   = lens _bsghBackendService
       (\ s a -> s{_bsghBackendService = a})
 
-instance GoogleRequest BackendServicesGetHealth'
-         where
-        type Rs BackendServicesGetHealth' =
+instance GoogleRequest BackendServicesGetHealth where
+        type Rs BackendServicesGetHealth =
              BackendServiceGroupHealth
-        requestClient BackendServicesGetHealth'{..}
+        requestClient BackendServicesGetHealth{..}
           = go _bsghProject _bsghBackendService (Just AltJSON)
               _bsghPayload
               computeService

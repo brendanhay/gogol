@@ -30,8 +30,8 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.Get
       MyLibraryBookshelvesGetResource
 
     -- * Creating a Request
-    , myLibraryBookshelvesGet'
-    , MyLibraryBookshelvesGet'
+    , myLibraryBookshelvesGet
+    , MyLibraryBookshelvesGet
 
     -- * Request Lenses
     , mlbgShelf
@@ -42,7 +42,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.bookshelves.get@ method which the
--- 'MyLibraryBookshelvesGet'' request conforms to.
+-- 'MyLibraryBookshelvesGet' request conforms to.
 type MyLibraryBookshelvesGetResource =
      "mylibrary" :>
        "bookshelves" :>
@@ -53,41 +53,41 @@ type MyLibraryBookshelvesGetResource =
 -- | Retrieves metadata for a specific bookshelf belonging to the
 -- authenticated user.
 --
--- /See:/ 'myLibraryBookshelvesGet'' smart constructor.
-data MyLibraryBookshelvesGet' = MyLibraryBookshelvesGet'
+-- /See:/ 'myLibraryBookshelvesGet' smart constructor.
+data MyLibraryBookshelvesGet = MyLibraryBookshelvesGet
     { _mlbgShelf  :: !Text
     , _mlbgSource :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MyLibraryBookshelvesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'MyLibraryBookshelvesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mlbgShelf'
 --
 -- * 'mlbgSource'
-myLibraryBookshelvesGet'
+myLibraryBookshelvesGet
     :: Text -- ^ 'mlbgShelf'
-    -> MyLibraryBookshelvesGet'
-myLibraryBookshelvesGet' pMlbgShelf_ =
-    MyLibraryBookshelvesGet'
+    -> MyLibraryBookshelvesGet
+myLibraryBookshelvesGet pMlbgShelf_ =
+    MyLibraryBookshelvesGet
     { _mlbgShelf = pMlbgShelf_
     , _mlbgSource = Nothing
     }
 
 -- | ID of bookshelf to retrieve.
-mlbgShelf :: Lens' MyLibraryBookshelvesGet' Text
+mlbgShelf :: Lens' MyLibraryBookshelvesGet Text
 mlbgShelf
   = lens _mlbgShelf (\ s a -> s{_mlbgShelf = a})
 
 -- | String to identify the originator of this request.
-mlbgSource :: Lens' MyLibraryBookshelvesGet' (Maybe Text)
+mlbgSource :: Lens' MyLibraryBookshelvesGet (Maybe Text)
 mlbgSource
   = lens _mlbgSource (\ s a -> s{_mlbgSource = a})
 
-instance GoogleRequest MyLibraryBookshelvesGet' where
-        type Rs MyLibraryBookshelvesGet' = Bookshelf
-        requestClient MyLibraryBookshelvesGet'{..}
+instance GoogleRequest MyLibraryBookshelvesGet where
+        type Rs MyLibraryBookshelvesGet = Bookshelf
+        requestClient MyLibraryBookshelvesGet{..}
           = go _mlbgShelf _mlbgSource (Just AltJSON)
               booksService
           where go

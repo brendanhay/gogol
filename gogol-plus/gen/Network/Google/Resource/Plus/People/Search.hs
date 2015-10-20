@@ -29,8 +29,8 @@ module Network.Google.Resource.Plus.People.Search
       PeopleSearchResource
 
     -- * Creating a Request
-    , peopleSearch'
-    , PeopleSearch'
+    , peopleSearch
+    , PeopleSearch
 
     -- * Request Lenses
     , psQuery
@@ -43,7 +43,7 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plus.people.search@ method which the
--- 'PeopleSearch'' request conforms to.
+-- 'PeopleSearch' request conforms to.
 type PeopleSearchResource =
      "people" :>
        QueryParam "query" Text :>
@@ -54,15 +54,15 @@ type PeopleSearchResource =
 
 -- | Search all public profiles.
 --
--- /See:/ 'peopleSearch'' smart constructor.
-data PeopleSearch' = PeopleSearch'
+-- /See:/ 'peopleSearch' smart constructor.
+data PeopleSearch = PeopleSearch
     { _psQuery      :: !Text
     , _psLanguage   :: !Text
     , _psPageToken  :: !(Maybe Text)
     , _psMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PeopleSearch'' with the minimum fields required to make a request.
+-- | Creates a value of 'PeopleSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,11 +73,11 @@ data PeopleSearch' = PeopleSearch'
 -- * 'psPageToken'
 --
 -- * 'psMaxResults'
-peopleSearch'
+peopleSearch
     :: Text -- ^ 'psQuery'
-    -> PeopleSearch'
-peopleSearch' pPsQuery_ =
-    PeopleSearch'
+    -> PeopleSearch
+peopleSearch pPsQuery_ =
+    PeopleSearch
     { _psQuery = pPsQuery_
     , _psLanguage = "en-US"
     , _psPageToken = Nothing
@@ -86,12 +86,12 @@ peopleSearch' pPsQuery_ =
 
 -- | Specify a query string for full text search of public text in all
 -- profiles.
-psQuery :: Lens' PeopleSearch' Text
+psQuery :: Lens' PeopleSearch Text
 psQuery = lens _psQuery (\ s a -> s{_psQuery = a})
 
 -- | Specify the preferred language to search with. See search language codes
 -- for available values.
-psLanguage :: Lens' PeopleSearch' Text
+psLanguage :: Lens' PeopleSearch Text
 psLanguage
   = lens _psLanguage (\ s a -> s{_psLanguage = a})
 
@@ -99,20 +99,20 @@ psLanguage
 -- To get the next page of results, set this parameter to the value of
 -- \"nextPageToken\" from the previous response. This token can be of any
 -- length.
-psPageToken :: Lens' PeopleSearch' (Maybe Text)
+psPageToken :: Lens' PeopleSearch (Maybe Text)
 psPageToken
   = lens _psPageToken (\ s a -> s{_psPageToken = a})
 
 -- | The maximum number of people to include in the response, which is used
 -- for paging. For any response, the actual number returned might be less
 -- than the specified maxResults.
-psMaxResults :: Lens' PeopleSearch' Word32
+psMaxResults :: Lens' PeopleSearch Word32
 psMaxResults
   = lens _psMaxResults (\ s a -> s{_psMaxResults = a})
 
-instance GoogleRequest PeopleSearch' where
-        type Rs PeopleSearch' = PeopleFeed
-        requestClient PeopleSearch'{..}
+instance GoogleRequest PeopleSearch where
+        type Rs PeopleSearch = PeopleFeed
+        requestClient PeopleSearch{..}
           = go (Just _psQuery) (Just _psLanguage) _psPageToken
               (Just _psMaxResults)
               (Just AltJSON)

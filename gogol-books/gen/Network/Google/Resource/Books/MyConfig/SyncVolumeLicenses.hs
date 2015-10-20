@@ -30,8 +30,8 @@ module Network.Google.Resource.Books.MyConfig.SyncVolumeLicenses
       MyConfigSyncVolumeLicensesResource
 
     -- * Creating a Request
-    , myConfigSyncVolumeLicenses'
-    , MyConfigSyncVolumeLicenses'
+    , myConfigSyncVolumeLicenses
+    , MyConfigSyncVolumeLicenses
 
     -- * Request Lenses
     , mcsvlCpksver
@@ -47,7 +47,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.myconfig.syncVolumeLicenses@ method which the
--- 'MyConfigSyncVolumeLicenses'' request conforms to.
+-- 'MyConfigSyncVolumeLicenses' request conforms to.
 type MyConfigSyncVolumeLicensesResource =
      "myconfig" :>
        "syncVolumeLicenses" :>
@@ -65,8 +65,8 @@ type MyConfigSyncVolumeLicensesResource =
 -- | Request downloaded content access for specified volumes on the My eBooks
 -- shelf.
 --
--- /See:/ 'myConfigSyncVolumeLicenses'' smart constructor.
-data MyConfigSyncVolumeLicenses' = MyConfigSyncVolumeLicenses'
+-- /See:/ 'myConfigSyncVolumeLicenses' smart constructor.
+data MyConfigSyncVolumeLicenses = MyConfigSyncVolumeLicenses
     { _mcsvlCpksver       :: !Text
     , _mcsvlLocale        :: !(Maybe Text)
     , _mcsvlVolumeIds     :: !(Maybe [Text])
@@ -76,7 +76,7 @@ data MyConfigSyncVolumeLicenses' = MyConfigSyncVolumeLicenses'
     , _mcsvlNonce         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MyConfigSyncVolumeLicenses'' with the minimum fields required to make a request.
+-- | Creates a value of 'MyConfigSyncVolumeLicenses' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -93,13 +93,13 @@ data MyConfigSyncVolumeLicenses' = MyConfigSyncVolumeLicenses'
 -- * 'mcsvlShowPreOrders'
 --
 -- * 'mcsvlNonce'
-myConfigSyncVolumeLicenses'
+myConfigSyncVolumeLicenses
     :: Text -- ^ 'mcsvlCpksver'
     -> Text -- ^ 'mcsvlSource'
     -> Text -- ^ 'mcsvlNonce'
-    -> MyConfigSyncVolumeLicenses'
-myConfigSyncVolumeLicenses' pMcsvlCpksver_ pMcsvlSource_ pMcsvlNonce_ =
-    MyConfigSyncVolumeLicenses'
+    -> MyConfigSyncVolumeLicenses
+myConfigSyncVolumeLicenses pMcsvlCpksver_ pMcsvlSource_ pMcsvlNonce_ =
+    MyConfigSyncVolumeLicenses
     { _mcsvlCpksver = pMcsvlCpksver_
     , _mcsvlLocale = Nothing
     , _mcsvlVolumeIds = Nothing
@@ -110,17 +110,17 @@ myConfigSyncVolumeLicenses' pMcsvlCpksver_ pMcsvlSource_ pMcsvlNonce_ =
     }
 
 -- | The device\/version ID from which to release the restriction.
-mcsvlCpksver :: Lens' MyConfigSyncVolumeLicenses' Text
+mcsvlCpksver :: Lens' MyConfigSyncVolumeLicenses Text
 mcsvlCpksver
   = lens _mcsvlCpksver (\ s a -> s{_mcsvlCpksver = a})
 
 -- | ISO-639-1, ISO-3166-1 codes for message localization, i.e. en_US.
-mcsvlLocale :: Lens' MyConfigSyncVolumeLicenses' (Maybe Text)
+mcsvlLocale :: Lens' MyConfigSyncVolumeLicenses (Maybe Text)
 mcsvlLocale
   = lens _mcsvlLocale (\ s a -> s{_mcsvlLocale = a})
 
 -- | The volume(s) to request download restrictions for.
-mcsvlVolumeIds :: Lens' MyConfigSyncVolumeLicenses' [Text]
+mcsvlVolumeIds :: Lens' MyConfigSyncVolumeLicenses [Text]
 mcsvlVolumeIds
   = lens _mcsvlVolumeIds
       (\ s a -> s{_mcsvlVolumeIds = a})
@@ -128,7 +128,7 @@ mcsvlVolumeIds
       . _Coerce
 
 -- | List of features supported by the client, i.e., \'RENTALS\'
-mcsvlFeatures :: Lens' MyConfigSyncVolumeLicenses' [MyConfigSyncVolumeLicensesFeatures]
+mcsvlFeatures :: Lens' MyConfigSyncVolumeLicenses [MyConfigSyncVolumeLicensesFeatures]
 mcsvlFeatures
   = lens _mcsvlFeatures
       (\ s a -> s{_mcsvlFeatures = a})
@@ -136,25 +136,25 @@ mcsvlFeatures
       . _Coerce
 
 -- | String to identify the originator of this request.
-mcsvlSource :: Lens' MyConfigSyncVolumeLicenses' Text
+mcsvlSource :: Lens' MyConfigSyncVolumeLicenses Text
 mcsvlSource
   = lens _mcsvlSource (\ s a -> s{_mcsvlSource = a})
 
 -- | Set to true to show pre-ordered books. Defaults to false.
-mcsvlShowPreOrders :: Lens' MyConfigSyncVolumeLicenses' (Maybe Bool)
+mcsvlShowPreOrders :: Lens' MyConfigSyncVolumeLicenses (Maybe Bool)
 mcsvlShowPreOrders
   = lens _mcsvlShowPreOrders
       (\ s a -> s{_mcsvlShowPreOrders = a})
 
 -- | The client nonce value.
-mcsvlNonce :: Lens' MyConfigSyncVolumeLicenses' Text
+mcsvlNonce :: Lens' MyConfigSyncVolumeLicenses Text
 mcsvlNonce
   = lens _mcsvlNonce (\ s a -> s{_mcsvlNonce = a})
 
-instance GoogleRequest MyConfigSyncVolumeLicenses'
+instance GoogleRequest MyConfigSyncVolumeLicenses
          where
-        type Rs MyConfigSyncVolumeLicenses' = Volumes
-        requestClient MyConfigSyncVolumeLicenses'{..}
+        type Rs MyConfigSyncVolumeLicenses = Volumes
+        requestClient MyConfigSyncVolumeLicenses{..}
           = go (Just _mcsvlSource) (Just _mcsvlNonce)
               (Just _mcsvlCpksver)
               _mcsvlLocale

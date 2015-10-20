@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.VPNTunnels.Get
       VPNTunnelsGetResource
 
     -- * Creating a Request
-    , vpnTunnelsGet'
-    , VPNTunnelsGet'
+    , vpnTunnelsGet
+    , VPNTunnelsGet
 
     -- * Request Lenses
     , vtgProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.vpnTunnels.get@ method which the
--- 'VPNTunnelsGet'' request conforms to.
+-- 'VPNTunnelsGet' request conforms to.
 type VPNTunnelsGetResource =
      Capture "project" Text :>
        "regions" :>
@@ -53,14 +53,14 @@ type VPNTunnelsGetResource =
 
 -- | Returns the specified VpnTunnel resource.
 --
--- /See:/ 'vpnTunnelsGet'' smart constructor.
-data VPNTunnelsGet' = VPNTunnelsGet'
+-- /See:/ 'vpnTunnelsGet' smart constructor.
+data VPNTunnelsGet = VPNTunnelsGet
     { _vtgProject   :: !Text
     , _vtgVPNTunnel :: !Text
     , _vtgRegion    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VPNTunnelsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'VPNTunnelsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,36 @@ data VPNTunnelsGet' = VPNTunnelsGet'
 -- * 'vtgVPNTunnel'
 --
 -- * 'vtgRegion'
-vpnTunnelsGet'
+vpnTunnelsGet
     :: Text -- ^ 'vtgProject'
     -> Text -- ^ 'vtgVPNTunnel'
     -> Text -- ^ 'vtgRegion'
-    -> VPNTunnelsGet'
-vpnTunnelsGet' pVtgProject_ pVtgVPNTunnel_ pVtgRegion_ =
-    VPNTunnelsGet'
+    -> VPNTunnelsGet
+vpnTunnelsGet pVtgProject_ pVtgVPNTunnel_ pVtgRegion_ =
+    VPNTunnelsGet
     { _vtgProject = pVtgProject_
     , _vtgVPNTunnel = pVtgVPNTunnel_
     , _vtgRegion = pVtgRegion_
     }
 
 -- | Project ID for this request.
-vtgProject :: Lens' VPNTunnelsGet' Text
+vtgProject :: Lens' VPNTunnelsGet Text
 vtgProject
   = lens _vtgProject (\ s a -> s{_vtgProject = a})
 
 -- | Name of the VpnTunnel resource to return.
-vtgVPNTunnel :: Lens' VPNTunnelsGet' Text
+vtgVPNTunnel :: Lens' VPNTunnelsGet Text
 vtgVPNTunnel
   = lens _vtgVPNTunnel (\ s a -> s{_vtgVPNTunnel = a})
 
 -- | The name of the region for this request.
-vtgRegion :: Lens' VPNTunnelsGet' Text
+vtgRegion :: Lens' VPNTunnelsGet Text
 vtgRegion
   = lens _vtgRegion (\ s a -> s{_vtgRegion = a})
 
-instance GoogleRequest VPNTunnelsGet' where
-        type Rs VPNTunnelsGet' = VPNTunnel
-        requestClient VPNTunnelsGet'{..}
+instance GoogleRequest VPNTunnelsGet where
+        type Rs VPNTunnelsGet = VPNTunnel
+        requestClient VPNTunnelsGet{..}
           = go _vtgProject _vtgRegion _vtgVPNTunnel
               (Just AltJSON)
               computeService

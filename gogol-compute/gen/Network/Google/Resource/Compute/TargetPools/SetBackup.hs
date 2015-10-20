@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.TargetPools.SetBackup
       TargetPoolsSetBackupResource
 
     -- * Creating a Request
-    , targetPoolsSetBackup'
-    , TargetPoolsSetBackup'
+    , targetPoolsSetBackup
+    , TargetPoolsSetBackup
 
     -- * Request Lenses
     , tpsbProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.setBackup@ method which the
--- 'TargetPoolsSetBackup'' request conforms to.
+-- 'TargetPoolsSetBackup' request conforms to.
 type TargetPoolsSetBackupResource =
      Capture "project" Text :>
        "regions" :>
@@ -59,8 +59,8 @@ type TargetPoolsSetBackupResource =
 
 -- | Changes backup pool configurations.
 --
--- /See:/ 'targetPoolsSetBackup'' smart constructor.
-data TargetPoolsSetBackup' = TargetPoolsSetBackup'
+-- /See:/ 'targetPoolsSetBackup' smart constructor.
+data TargetPoolsSetBackup = TargetPoolsSetBackup
     { _tpsbProject       :: !Text
     , _tpsbTargetPool    :: !Text
     , _tpsbPayload       :: !TargetReference
@@ -68,7 +68,7 @@ data TargetPoolsSetBackup' = TargetPoolsSetBackup'
     , _tpsbRegion        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetPoolsSetBackup'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetPoolsSetBackup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,14 +81,14 @@ data TargetPoolsSetBackup' = TargetPoolsSetBackup'
 -- * 'tpsbFailoverRatio'
 --
 -- * 'tpsbRegion'
-targetPoolsSetBackup'
+targetPoolsSetBackup
     :: Text -- ^ 'tpsbProject'
     -> Text -- ^ 'tpsbTargetPool'
     -> TargetReference -- ^ 'tpsbPayload'
     -> Text -- ^ 'tpsbRegion'
-    -> TargetPoolsSetBackup'
-targetPoolsSetBackup' pTpsbProject_ pTpsbTargetPool_ pTpsbPayload_ pTpsbRegion_ =
-    TargetPoolsSetBackup'
+    -> TargetPoolsSetBackup
+targetPoolsSetBackup pTpsbProject_ pTpsbTargetPool_ pTpsbPayload_ pTpsbRegion_ =
+    TargetPoolsSetBackup
     { _tpsbProject = pTpsbProject_
     , _tpsbTargetPool = pTpsbTargetPool_
     , _tpsbPayload = pTpsbPayload_
@@ -97,35 +97,35 @@ targetPoolsSetBackup' pTpsbProject_ pTpsbTargetPool_ pTpsbPayload_ pTpsbRegion_ 
     }
 
 -- | Name of the project scoping this request.
-tpsbProject :: Lens' TargetPoolsSetBackup' Text
+tpsbProject :: Lens' TargetPoolsSetBackup Text
 tpsbProject
   = lens _tpsbProject (\ s a -> s{_tpsbProject = a})
 
 -- | Name of the TargetPool resource for which the backup is to be set.
-tpsbTargetPool :: Lens' TargetPoolsSetBackup' Text
+tpsbTargetPool :: Lens' TargetPoolsSetBackup Text
 tpsbTargetPool
   = lens _tpsbTargetPool
       (\ s a -> s{_tpsbTargetPool = a})
 
 -- | Multipart request metadata.
-tpsbPayload :: Lens' TargetPoolsSetBackup' TargetReference
+tpsbPayload :: Lens' TargetPoolsSetBackup TargetReference
 tpsbPayload
   = lens _tpsbPayload (\ s a -> s{_tpsbPayload = a})
 
 -- | New failoverRatio value for the containing target pool.
-tpsbFailoverRatio :: Lens' TargetPoolsSetBackup' (Maybe Float)
+tpsbFailoverRatio :: Lens' TargetPoolsSetBackup (Maybe Float)
 tpsbFailoverRatio
   = lens _tpsbFailoverRatio
       (\ s a -> s{_tpsbFailoverRatio = a})
 
 -- | Name of the region scoping this request.
-tpsbRegion :: Lens' TargetPoolsSetBackup' Text
+tpsbRegion :: Lens' TargetPoolsSetBackup Text
 tpsbRegion
   = lens _tpsbRegion (\ s a -> s{_tpsbRegion = a})
 
-instance GoogleRequest TargetPoolsSetBackup' where
-        type Rs TargetPoolsSetBackup' = Operation
-        requestClient TargetPoolsSetBackup'{..}
+instance GoogleRequest TargetPoolsSetBackup where
+        type Rs TargetPoolsSetBackup = Operation
+        requestClient TargetPoolsSetBackup{..}
           = go _tpsbProject _tpsbRegion _tpsbTargetPool
               _tpsbFailoverRatio
               (Just AltJSON)

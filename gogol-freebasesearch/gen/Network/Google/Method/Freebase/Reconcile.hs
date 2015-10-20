@@ -29,8 +29,8 @@ module Network.Google.Method.Freebase.Reconcile
       ReconcileMethod
 
     -- * Creating a Request
-    , reconcile'
-    , Reconcile'
+    , reconcile
+    , Reconcile
 
     -- * Request Lenses
     , rKind
@@ -45,7 +45,7 @@ import           Network.Google.FreebaseSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @freebase.reconcile@ method which the
--- 'Reconcile'' request conforms to.
+-- 'Reconcile' request conforms to.
 type ReconcileMethod =
      "reconcile" :>
        QueryParams "kind" Text :>
@@ -58,8 +58,8 @@ type ReconcileMethod =
 
 -- | Reconcile entities to Freebase open data.
 --
--- /See:/ 'reconcile'' smart constructor.
-data Reconcile' = Reconcile'
+-- /See:/ 'reconcile' smart constructor.
+data Reconcile = Reconcile
     { _rKind       :: !(Maybe [Text])
     , _rLang       :: !(Maybe [Text])
     , _rConfidence :: !Float
@@ -68,7 +68,7 @@ data Reconcile' = Reconcile'
     , _rProp       :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Reconcile'' with the minimum fields required to make a request.
+-- | Creates a value of 'Reconcile' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -83,10 +83,10 @@ data Reconcile' = Reconcile'
 -- * 'rLimit'
 --
 -- * 'rProp'
-reconcile'
-    :: Reconcile'
-reconcile' =
-    Reconcile'
+reconcile
+    :: Reconcile
+reconcile =
+    Reconcile
     { _rKind = Nothing
     , _rLang = Nothing
     , _rConfidence = 0.99
@@ -96,40 +96,40 @@ reconcile' =
     }
 
 -- | Classifications of entity e.g. type, category, title.
-rKind :: Lens' Reconcile' [Text]
+rKind :: Lens' Reconcile [Text]
 rKind
   = lens _rKind (\ s a -> s{_rKind = a}) . _Default .
       _Coerce
 
 -- | Languages for names and values. First language is used for display.
 -- Default is \'en\'.
-rLang :: Lens' Reconcile' [Text]
+rLang :: Lens' Reconcile [Text]
 rLang
   = lens _rLang (\ s a -> s{_rLang = a}) . _Default .
       _Coerce
 
 -- | Required confidence for a candidate to match. Must be between .5 and 1.0
-rConfidence :: Lens' Reconcile' Float
+rConfidence :: Lens' Reconcile Float
 rConfidence
   = lens _rConfidence (\ s a -> s{_rConfidence = a})
 
 -- | Name of entity.
-rName :: Lens' Reconcile' (Maybe Text)
+rName :: Lens' Reconcile (Maybe Text)
 rName = lens _rName (\ s a -> s{_rName = a})
 
 -- | Maximum number of candidates to return.
-rLimit :: Lens' Reconcile' Int32
+rLimit :: Lens' Reconcile Int32
 rLimit = lens _rLimit (\ s a -> s{_rLimit = a})
 
 -- | Property values for entity formatted as :
-rProp :: Lens' Reconcile' [Text]
+rProp :: Lens' Reconcile [Text]
 rProp
   = lens _rProp (\ s a -> s{_rProp = a}) . _Default .
       _Coerce
 
-instance GoogleRequest Reconcile' where
-        type Rs Reconcile' = ReconcileGet
-        requestClient Reconcile'{..}
+instance GoogleRequest Reconcile where
+        type Rs Reconcile = ReconcileGet
+        requestClient Reconcile{..}
           = go (_rKind ^. _Default) (_rLang ^. _Default)
               (Just _rConfidence)
               _rName

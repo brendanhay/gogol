@@ -30,8 +30,8 @@ module Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.List
       GlobalAccountsOperationsListResource
 
     -- * Creating a Request
-    , globalAccountsOperationsList'
-    , GlobalAccountsOperationsList'
+    , globalAccountsOperationsList
+    , GlobalAccountsOperationsList
 
     -- * Request Lenses
     , gaolOrderBy
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
 -- | A resource alias for @clouduseraccounts.globalAccountsOperations.list@ method which the
--- 'GlobalAccountsOperationsList'' request conforms to.
+-- 'GlobalAccountsOperationsList' request conforms to.
 type GlobalAccountsOperationsListResource =
      Capture "project" Text :>
        "global" :>
@@ -59,8 +59,8 @@ type GlobalAccountsOperationsListResource =
 -- | Retrieves the list of operation resources contained within the specified
 -- project.
 --
--- /See:/ 'globalAccountsOperationsList'' smart constructor.
-data GlobalAccountsOperationsList' = GlobalAccountsOperationsList'
+-- /See:/ 'globalAccountsOperationsList' smart constructor.
+data GlobalAccountsOperationsList = GlobalAccountsOperationsList
     { _gaolOrderBy    :: !(Maybe Text)
     , _gaolProject    :: !Text
     , _gaolFilter     :: !(Maybe Text)
@@ -68,7 +68,7 @@ data GlobalAccountsOperationsList' = GlobalAccountsOperationsList'
     , _gaolMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GlobalAccountsOperationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'GlobalAccountsOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,11 +81,11 @@ data GlobalAccountsOperationsList' = GlobalAccountsOperationsList'
 -- * 'gaolPageToken'
 --
 -- * 'gaolMaxResults'
-globalAccountsOperationsList'
+globalAccountsOperationsList
     :: Text -- ^ 'gaolProject'
-    -> GlobalAccountsOperationsList'
-globalAccountsOperationsList' pGaolProject_ =
-    GlobalAccountsOperationsList'
+    -> GlobalAccountsOperationsList
+globalAccountsOperationsList pGaolProject_ =
+    GlobalAccountsOperationsList
     { _gaolOrderBy = Nothing
     , _gaolProject = pGaolProject_
     , _gaolFilter = Nothing
@@ -101,12 +101,12 @@ globalAccountsOperationsList' pGaolProject_ =
 -- first). Use this to sort resources like operations so that the newest
 -- operation is returned first. Currently, only sorting by name or
 -- creationTimestamp desc is supported.
-gaolOrderBy :: Lens' GlobalAccountsOperationsList' (Maybe Text)
+gaolOrderBy :: Lens' GlobalAccountsOperationsList (Maybe Text)
 gaolOrderBy
   = lens _gaolOrderBy (\ s a -> s{_gaolOrderBy = a})
 
 -- | Project ID for this request.
-gaolProject :: Lens' GlobalAccountsOperationsList' Text
+gaolProject :: Lens' GlobalAccountsOperationsList Text
 gaolProject
   = lens _gaolProject (\ s a -> s{_gaolProject = a})
 
@@ -121,28 +121,28 @@ gaolProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-gaolFilter :: Lens' GlobalAccountsOperationsList' (Maybe Text)
+gaolFilter :: Lens' GlobalAccountsOperationsList (Maybe Text)
 gaolFilter
   = lens _gaolFilter (\ s a -> s{_gaolFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-gaolPageToken :: Lens' GlobalAccountsOperationsList' (Maybe Text)
+gaolPageToken :: Lens' GlobalAccountsOperationsList (Maybe Text)
 gaolPageToken
   = lens _gaolPageToken
       (\ s a -> s{_gaolPageToken = a})
 
 -- | Maximum count of results to be returned.
-gaolMaxResults :: Lens' GlobalAccountsOperationsList' Word32
+gaolMaxResults :: Lens' GlobalAccountsOperationsList Word32
 gaolMaxResults
   = lens _gaolMaxResults
       (\ s a -> s{_gaolMaxResults = a})
 
-instance GoogleRequest GlobalAccountsOperationsList'
+instance GoogleRequest GlobalAccountsOperationsList
          where
-        type Rs GlobalAccountsOperationsList' = OperationList
-        requestClient GlobalAccountsOperationsList'{..}
+        type Rs GlobalAccountsOperationsList = OperationList
+        requestClient GlobalAccountsOperationsList{..}
           = go _gaolProject _gaolOrderBy _gaolFilter
               _gaolPageToken
               (Just _gaolMaxResults)

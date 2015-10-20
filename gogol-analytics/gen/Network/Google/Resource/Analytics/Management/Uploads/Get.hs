@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Uploads.Get
       ManagementUploadsGetResource
 
     -- * Creating a Request
-    , managementUploadsGet'
-    , ManagementUploadsGet'
+    , managementUploadsGet
+    , ManagementUploadsGet
 
     -- * Request Lenses
     , mugWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.uploads.get@ method which the
--- 'ManagementUploadsGet'' request conforms to.
+-- 'ManagementUploadsGet' request conforms to.
 type ManagementUploadsGetResource =
      "management" :>
        "accounts" :>
@@ -58,15 +58,15 @@ type ManagementUploadsGetResource =
 
 -- | List uploads to which the user has access.
 --
--- /See:/ 'managementUploadsGet'' smart constructor.
-data ManagementUploadsGet' = ManagementUploadsGet'
+-- /See:/ 'managementUploadsGet' smart constructor.
+data ManagementUploadsGet = ManagementUploadsGet
     { _mugWebPropertyId      :: !Text
     , _mugCustomDataSourceId :: !Text
     , _mugAccountId          :: !Text
     , _mugUploadId           :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementUploadsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementUploadsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data ManagementUploadsGet' = ManagementUploadsGet'
 -- * 'mugAccountId'
 --
 -- * 'mugUploadId'
-managementUploadsGet'
+managementUploadsGet
     :: Text -- ^ 'mugWebPropertyId'
     -> Text -- ^ 'mugCustomDataSourceId'
     -> Text -- ^ 'mugAccountId'
     -> Text -- ^ 'mugUploadId'
-    -> ManagementUploadsGet'
-managementUploadsGet' pMugWebPropertyId_ pMugCustomDataSourceId_ pMugAccountId_ pMugUploadId_ =
-    ManagementUploadsGet'
+    -> ManagementUploadsGet
+managementUploadsGet pMugWebPropertyId_ pMugCustomDataSourceId_ pMugAccountId_ pMugUploadId_ =
+    ManagementUploadsGet
     { _mugWebPropertyId = pMugWebPropertyId_
     , _mugCustomDataSourceId = pMugCustomDataSourceId_
     , _mugAccountId = pMugAccountId_
@@ -92,30 +92,30 @@ managementUploadsGet' pMugWebPropertyId_ pMugCustomDataSourceId_ pMugAccountId_ 
     }
 
 -- | Web property Id for the upload to retrieve.
-mugWebPropertyId :: Lens' ManagementUploadsGet' Text
+mugWebPropertyId :: Lens' ManagementUploadsGet Text
 mugWebPropertyId
   = lens _mugWebPropertyId
       (\ s a -> s{_mugWebPropertyId = a})
 
 -- | Custom data source Id for upload to retrieve.
-mugCustomDataSourceId :: Lens' ManagementUploadsGet' Text
+mugCustomDataSourceId :: Lens' ManagementUploadsGet Text
 mugCustomDataSourceId
   = lens _mugCustomDataSourceId
       (\ s a -> s{_mugCustomDataSourceId = a})
 
 -- | Account Id for the upload to retrieve.
-mugAccountId :: Lens' ManagementUploadsGet' Text
+mugAccountId :: Lens' ManagementUploadsGet Text
 mugAccountId
   = lens _mugAccountId (\ s a -> s{_mugAccountId = a})
 
 -- | Upload Id to retrieve.
-mugUploadId :: Lens' ManagementUploadsGet' Text
+mugUploadId :: Lens' ManagementUploadsGet Text
 mugUploadId
   = lens _mugUploadId (\ s a -> s{_mugUploadId = a})
 
-instance GoogleRequest ManagementUploadsGet' where
-        type Rs ManagementUploadsGet' = Upload
-        requestClient ManagementUploadsGet'{..}
+instance GoogleRequest ManagementUploadsGet where
+        type Rs ManagementUploadsGet = Upload
+        requestClient ManagementUploadsGet{..}
           = go _mugAccountId _mugWebPropertyId
               _mugCustomDataSourceId
               _mugUploadId

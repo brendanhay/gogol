@@ -29,8 +29,8 @@ module Network.Google.Resource.Mirror.Timeline.Update
       TimelineUpdateResource
 
     -- * Creating a Request
-    , timelineUpdate'
-    , TimelineUpdate'
+    , timelineUpdate
+    , TimelineUpdate
 
     -- * Request Lenses
     , tuPayload
@@ -42,7 +42,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.timeline.update@ method which the
--- 'TimelineUpdate'' request conforms to.
+-- 'TimelineUpdate' request conforms to.
 type TimelineUpdateResource =
      "timeline" :>
        Capture "id" Text :>
@@ -52,14 +52,14 @@ type TimelineUpdateResource =
 
 -- | Updates a timeline item in place.
 --
--- /See:/ 'timelineUpdate'' smart constructor.
-data TimelineUpdate' = TimelineUpdate'
+-- /See:/ 'timelineUpdate' smart constructor.
+data TimelineUpdate = TimelineUpdate
     { _tuPayload :: !TimelineItem
     , _tuMedia   :: !Body
     , _tuId      :: !Text
     }
 
--- | Creates a value of 'TimelineUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'TimelineUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,33 +68,33 @@ data TimelineUpdate' = TimelineUpdate'
 -- * 'tuMedia'
 --
 -- * 'tuId'
-timelineUpdate'
+timelineUpdate
     :: TimelineItem -- ^ 'tuPayload'
     -> Body -- ^ 'tuMedia'
     -> Text -- ^ 'tuId'
-    -> TimelineUpdate'
-timelineUpdate' pTuPayload_ pTuMedia_ pTuId_ =
-    TimelineUpdate'
+    -> TimelineUpdate
+timelineUpdate pTuPayload_ pTuMedia_ pTuId_ =
+    TimelineUpdate
     { _tuPayload = pTuPayload_
     , _tuMedia = pTuMedia_
     , _tuId = pTuId_
     }
 
 -- | Multipart request metadata.
-tuPayload :: Lens' TimelineUpdate' TimelineItem
+tuPayload :: Lens' TimelineUpdate TimelineItem
 tuPayload
   = lens _tuPayload (\ s a -> s{_tuPayload = a})
 
-tuMedia :: Lens' TimelineUpdate' Body
+tuMedia :: Lens' TimelineUpdate Body
 tuMedia = lens _tuMedia (\ s a -> s{_tuMedia = a})
 
 -- | The ID of the timeline item.
-tuId :: Lens' TimelineUpdate' Text
+tuId :: Lens' TimelineUpdate Text
 tuId = lens _tuId (\ s a -> s{_tuId = a})
 
-instance GoogleRequest TimelineUpdate' where
-        type Rs TimelineUpdate' = TimelineItem
-        requestClient TimelineUpdate'{..}
+instance GoogleRequest TimelineUpdate where
+        type Rs TimelineUpdate = TimelineItem
+        requestClient TimelineUpdate{..}
           = go _tuId (Just AltJSON) _tuPayload _tuMedia
               mirrorService
           where go

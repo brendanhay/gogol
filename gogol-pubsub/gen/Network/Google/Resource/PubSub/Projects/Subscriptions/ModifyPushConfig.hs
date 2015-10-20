@@ -34,8 +34,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
       ProjectsSubscriptionsModifyPushConfigResource
 
     -- * Creating a Request
-    , projectsSubscriptionsModifyPushConfig'
-    , ProjectsSubscriptionsModifyPushConfig'
+    , projectsSubscriptionsModifyPushConfig
+    , ProjectsSubscriptionsModifyPushConfig
 
     -- * Request Lenses
     , psmpcXgafv
@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.modifyPushConfig@ method which the
--- 'ProjectsSubscriptionsModifyPushConfig'' request conforms to.
+-- 'ProjectsSubscriptionsModifyPushConfig' request conforms to.
 type ProjectsSubscriptionsModifyPushConfigResource =
      "v1" :>
        CaptureMode "subscription" "modifyPushConfig" Text :>
@@ -75,8 +75,8 @@ type ProjectsSubscriptionsModifyPushConfigResource =
 -- continuously through the call regardless of changes to the
 -- \`PushConfig\`.
 --
--- /See:/ 'projectsSubscriptionsModifyPushConfig'' smart constructor.
-data ProjectsSubscriptionsModifyPushConfig' = ProjectsSubscriptionsModifyPushConfig'
+-- /See:/ 'projectsSubscriptionsModifyPushConfig' smart constructor.
+data ProjectsSubscriptionsModifyPushConfig = ProjectsSubscriptionsModifyPushConfig
     { _psmpcXgafv          :: !(Maybe Text)
     , _psmpcUploadProtocol :: !(Maybe Text)
     , _psmpcPp             :: !Bool
@@ -88,7 +88,7 @@ data ProjectsSubscriptionsModifyPushConfig' = ProjectsSubscriptionsModifyPushCon
     , _psmpcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsSubscriptionsModifyPushConfig'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsSubscriptionsModifyPushConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -109,12 +109,12 @@ data ProjectsSubscriptionsModifyPushConfig' = ProjectsSubscriptionsModifyPushCon
 -- * 'psmpcSubscription'
 --
 -- * 'psmpcCallback'
-projectsSubscriptionsModifyPushConfig'
+projectsSubscriptionsModifyPushConfig
     :: ModifyPushConfigRequest -- ^ 'psmpcPayload'
     -> Text -- ^ 'psmpcSubscription'
-    -> ProjectsSubscriptionsModifyPushConfig'
-projectsSubscriptionsModifyPushConfig' pPsmpcPayload_ pPsmpcSubscription_ =
-    ProjectsSubscriptionsModifyPushConfig'
+    -> ProjectsSubscriptionsModifyPushConfig
+projectsSubscriptionsModifyPushConfig pPsmpcPayload_ pPsmpcSubscription_ =
+    ProjectsSubscriptionsModifyPushConfig
     { _psmpcXgafv = Nothing
     , _psmpcUploadProtocol = Nothing
     , _psmpcPp = True
@@ -127,61 +127,60 @@ projectsSubscriptionsModifyPushConfig' pPsmpcPayload_ pPsmpcSubscription_ =
     }
 
 -- | V1 error format.
-psmpcXgafv :: Lens' ProjectsSubscriptionsModifyPushConfig' (Maybe Text)
+psmpcXgafv :: Lens' ProjectsSubscriptionsModifyPushConfig (Maybe Text)
 psmpcXgafv
   = lens _psmpcXgafv (\ s a -> s{_psmpcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-psmpcUploadProtocol :: Lens' ProjectsSubscriptionsModifyPushConfig' (Maybe Text)
+psmpcUploadProtocol :: Lens' ProjectsSubscriptionsModifyPushConfig (Maybe Text)
 psmpcUploadProtocol
   = lens _psmpcUploadProtocol
       (\ s a -> s{_psmpcUploadProtocol = a})
 
 -- | Pretty-print response.
-psmpcPp :: Lens' ProjectsSubscriptionsModifyPushConfig' Bool
+psmpcPp :: Lens' ProjectsSubscriptionsModifyPushConfig Bool
 psmpcPp = lens _psmpcPp (\ s a -> s{_psmpcPp = a})
 
 -- | OAuth access token.
-psmpcAccessToken :: Lens' ProjectsSubscriptionsModifyPushConfig' (Maybe Text)
+psmpcAccessToken :: Lens' ProjectsSubscriptionsModifyPushConfig (Maybe Text)
 psmpcAccessToken
   = lens _psmpcAccessToken
       (\ s a -> s{_psmpcAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-psmpcUploadType :: Lens' ProjectsSubscriptionsModifyPushConfig' (Maybe Text)
+psmpcUploadType :: Lens' ProjectsSubscriptionsModifyPushConfig (Maybe Text)
 psmpcUploadType
   = lens _psmpcUploadType
       (\ s a -> s{_psmpcUploadType = a})
 
 -- | Multipart request metadata.
-psmpcPayload :: Lens' ProjectsSubscriptionsModifyPushConfig' ModifyPushConfigRequest
+psmpcPayload :: Lens' ProjectsSubscriptionsModifyPushConfig ModifyPushConfigRequest
 psmpcPayload
   = lens _psmpcPayload (\ s a -> s{_psmpcPayload = a})
 
 -- | OAuth bearer token.
-psmpcBearerToken :: Lens' ProjectsSubscriptionsModifyPushConfig' (Maybe Text)
+psmpcBearerToken :: Lens' ProjectsSubscriptionsModifyPushConfig (Maybe Text)
 psmpcBearerToken
   = lens _psmpcBearerToken
       (\ s a -> s{_psmpcBearerToken = a})
 
 -- | The name of the subscription.
-psmpcSubscription :: Lens' ProjectsSubscriptionsModifyPushConfig' Text
+psmpcSubscription :: Lens' ProjectsSubscriptionsModifyPushConfig Text
 psmpcSubscription
   = lens _psmpcSubscription
       (\ s a -> s{_psmpcSubscription = a})
 
 -- | JSONP
-psmpcCallback :: Lens' ProjectsSubscriptionsModifyPushConfig' (Maybe Text)
+psmpcCallback :: Lens' ProjectsSubscriptionsModifyPushConfig (Maybe Text)
 psmpcCallback
   = lens _psmpcCallback
       (\ s a -> s{_psmpcCallback = a})
 
 instance GoogleRequest
-         ProjectsSubscriptionsModifyPushConfig' where
-        type Rs ProjectsSubscriptionsModifyPushConfig' =
-             Empty
+         ProjectsSubscriptionsModifyPushConfig where
+        type Rs ProjectsSubscriptionsModifyPushConfig = Empty
         requestClient
-          ProjectsSubscriptionsModifyPushConfig'{..}
+          ProjectsSubscriptionsModifyPushConfig{..}
           = go _psmpcSubscription _psmpcXgafv
               _psmpcUploadProtocol
               (Just _psmpcPp)

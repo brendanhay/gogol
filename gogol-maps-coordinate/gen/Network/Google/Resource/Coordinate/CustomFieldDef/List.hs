@@ -29,8 +29,8 @@ module Network.Google.Resource.Coordinate.CustomFieldDef.List
       CustomFieldDefListResource
 
     -- * Creating a Request
-    , customFieldDefList'
-    , CustomFieldDefList'
+    , customFieldDefList
+    , CustomFieldDefList
 
     -- * Request Lenses
     , cfdlTeamId
@@ -40,7 +40,7 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @coordinate.customFieldDef.list@ method which the
--- 'CustomFieldDefList'' request conforms to.
+-- 'CustomFieldDefList' request conforms to.
 type CustomFieldDefListResource =
      "teams" :>
        Capture "teamId" Text :>
@@ -50,33 +50,33 @@ type CustomFieldDefListResource =
 
 -- | Retrieves a list of custom field definitions for a team.
 --
--- /See:/ 'customFieldDefList'' smart constructor.
-newtype CustomFieldDefList' = CustomFieldDefList'
+-- /See:/ 'customFieldDefList' smart constructor.
+newtype CustomFieldDefList = CustomFieldDefList
     { _cfdlTeamId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CustomFieldDefList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CustomFieldDefList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cfdlTeamId'
-customFieldDefList'
+customFieldDefList
     :: Text -- ^ 'cfdlTeamId'
-    -> CustomFieldDefList'
-customFieldDefList' pCfdlTeamId_ =
-    CustomFieldDefList'
+    -> CustomFieldDefList
+customFieldDefList pCfdlTeamId_ =
+    CustomFieldDefList
     { _cfdlTeamId = pCfdlTeamId_
     }
 
 -- | Team ID
-cfdlTeamId :: Lens' CustomFieldDefList' Text
+cfdlTeamId :: Lens' CustomFieldDefList Text
 cfdlTeamId
   = lens _cfdlTeamId (\ s a -> s{_cfdlTeamId = a})
 
-instance GoogleRequest CustomFieldDefList' where
-        type Rs CustomFieldDefList' =
+instance GoogleRequest CustomFieldDefList where
+        type Rs CustomFieldDefList =
              CustomFieldDefListResponse
-        requestClient CustomFieldDefList'{..}
+        requestClient CustomFieldDefList{..}
           = go _cfdlTeamId (Just AltJSON) mapsCoordinateService
           where go
                   = buildClient

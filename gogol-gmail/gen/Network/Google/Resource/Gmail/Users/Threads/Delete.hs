@@ -30,8 +30,8 @@ module Network.Google.Resource.Gmail.Users.Threads.Delete
       UsersThreadsDeleteResource
 
     -- * Creating a Request
-    , usersThreadsDelete'
-    , UsersThreadsDelete'
+    , usersThreadsDelete
+    , UsersThreadsDelete
 
     -- * Request Lenses
     , utdUserId
@@ -42,7 +42,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.threads.delete@ method which the
--- 'UsersThreadsDelete'' request conforms to.
+-- 'UsersThreadsDelete' request conforms to.
 type UsersThreadsDeleteResource =
      Capture "userId" Text :>
        "threads" :>
@@ -52,42 +52,42 @@ type UsersThreadsDeleteResource =
 -- | Immediately and permanently deletes the specified thread. This operation
 -- cannot be undone. Prefer threads.trash instead.
 --
--- /See:/ 'usersThreadsDelete'' smart constructor.
-data UsersThreadsDelete' = UsersThreadsDelete'
+-- /See:/ 'usersThreadsDelete' smart constructor.
+data UsersThreadsDelete = UsersThreadsDelete
     { _utdUserId :: !Text
     , _utdId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersThreadsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersThreadsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'utdUserId'
 --
 -- * 'utdId'
-usersThreadsDelete'
+usersThreadsDelete
     :: Text -- ^ 'utdId'
     -> Text
-    -> UsersThreadsDelete'
-usersThreadsDelete' pUtdUserId_ pUtdId_ =
-    UsersThreadsDelete'
+    -> UsersThreadsDelete
+usersThreadsDelete pUtdUserId_ pUtdId_ =
+    UsersThreadsDelete
     { _utdUserId = pUtdUserId_
     , _utdId = pUtdId_
     }
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-utdUserId :: Lens' UsersThreadsDelete' Text
+utdUserId :: Lens' UsersThreadsDelete Text
 utdUserId
   = lens _utdUserId (\ s a -> s{_utdUserId = a})
 
 -- | ID of the Thread to delete.
-utdId :: Lens' UsersThreadsDelete' Text
+utdId :: Lens' UsersThreadsDelete Text
 utdId = lens _utdId (\ s a -> s{_utdId = a})
 
-instance GoogleRequest UsersThreadsDelete' where
-        type Rs UsersThreadsDelete' = ()
-        requestClient UsersThreadsDelete'{..}
+instance GoogleRequest UsersThreadsDelete where
+        type Rs UsersThreadsDelete = ()
+        requestClient UsersThreadsDelete{..}
           = go _utdUserId _utdId (Just AltJSON) gmailService
           where go
                   = buildClient

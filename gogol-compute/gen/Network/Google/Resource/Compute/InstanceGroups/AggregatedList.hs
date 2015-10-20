@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.InstanceGroups.AggregatedList
       InstanceGroupsAggregatedListResource
 
     -- * Creating a Request
-    , instanceGroupsAggregatedList'
-    , InstanceGroupsAggregatedList'
+    , instanceGroupsAggregatedList
+    , InstanceGroupsAggregatedList
 
     -- * Request Lenses
     , igalProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroups.aggregatedList@ method which the
--- 'InstanceGroupsAggregatedList'' request conforms to.
+-- 'InstanceGroupsAggregatedList' request conforms to.
 type InstanceGroupsAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
@@ -56,15 +56,15 @@ type InstanceGroupsAggregatedListResource =
 
 -- | Retrieves the list of instance groups and sorts them by zone.
 --
--- /See:/ 'instanceGroupsAggregatedList'' smart constructor.
-data InstanceGroupsAggregatedList' = InstanceGroupsAggregatedList'
+-- /See:/ 'instanceGroupsAggregatedList' smart constructor.
+data InstanceGroupsAggregatedList = InstanceGroupsAggregatedList
     { _igalProject    :: !Text
     , _igalFilter     :: !(Maybe Text)
     , _igalPageToken  :: !(Maybe Text)
     , _igalMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupsAggregatedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupsAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,11 +75,11 @@ data InstanceGroupsAggregatedList' = InstanceGroupsAggregatedList'
 -- * 'igalPageToken'
 --
 -- * 'igalMaxResults'
-instanceGroupsAggregatedList'
+instanceGroupsAggregatedList
     :: Text -- ^ 'igalProject'
-    -> InstanceGroupsAggregatedList'
-instanceGroupsAggregatedList' pIgalProject_ =
-    InstanceGroupsAggregatedList'
+    -> InstanceGroupsAggregatedList
+instanceGroupsAggregatedList pIgalProject_ =
+    InstanceGroupsAggregatedList
     { _igalProject = pIgalProject_
     , _igalFilter = Nothing
     , _igalPageToken = Nothing
@@ -87,7 +87,7 @@ instanceGroupsAggregatedList' pIgalProject_ =
     }
 
 -- | The project ID for this request.
-igalProject :: Lens' InstanceGroupsAggregatedList' Text
+igalProject :: Lens' InstanceGroupsAggregatedList Text
 igalProject
   = lens _igalProject (\ s a -> s{_igalProject = a})
 
@@ -102,29 +102,29 @@ igalProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-igalFilter :: Lens' InstanceGroupsAggregatedList' (Maybe Text)
+igalFilter :: Lens' InstanceGroupsAggregatedList (Maybe Text)
 igalFilter
   = lens _igalFilter (\ s a -> s{_igalFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-igalPageToken :: Lens' InstanceGroupsAggregatedList' (Maybe Text)
+igalPageToken :: Lens' InstanceGroupsAggregatedList (Maybe Text)
 igalPageToken
   = lens _igalPageToken
       (\ s a -> s{_igalPageToken = a})
 
 -- | Maximum count of results to be returned.
-igalMaxResults :: Lens' InstanceGroupsAggregatedList' Word32
+igalMaxResults :: Lens' InstanceGroupsAggregatedList Word32
 igalMaxResults
   = lens _igalMaxResults
       (\ s a -> s{_igalMaxResults = a})
 
-instance GoogleRequest InstanceGroupsAggregatedList'
+instance GoogleRequest InstanceGroupsAggregatedList
          where
-        type Rs InstanceGroupsAggregatedList' =
+        type Rs InstanceGroupsAggregatedList =
              InstanceGroupAggregatedList
-        requestClient InstanceGroupsAggregatedList'{..}
+        requestClient InstanceGroupsAggregatedList{..}
           = go _igalProject _igalFilter _igalPageToken
               (Just _igalMaxResults)
               (Just AltJSON)

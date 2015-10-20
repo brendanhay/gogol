@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Get
       ManagementWebPropertiesGetResource
 
     -- * Creating a Request
-    , managementWebPropertiesGet'
-    , ManagementWebPropertiesGet'
+    , managementWebPropertiesGet
+    , ManagementWebPropertiesGet
 
     -- * Request Lenses
     , mwpgWebPropertyId
@@ -41,7 +41,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webproperties.get@ method which the
--- 'ManagementWebPropertiesGet'' request conforms to.
+-- 'ManagementWebPropertiesGet' request conforms to.
 type ManagementWebPropertiesGetResource =
      "management" :>
        "accounts" :>
@@ -52,45 +52,45 @@ type ManagementWebPropertiesGetResource =
 
 -- | Gets a web property to which the user has access.
 --
--- /See:/ 'managementWebPropertiesGet'' smart constructor.
-data ManagementWebPropertiesGet' = ManagementWebPropertiesGet'
+-- /See:/ 'managementWebPropertiesGet' smart constructor.
+data ManagementWebPropertiesGet = ManagementWebPropertiesGet
     { _mwpgWebPropertyId :: !Text
     , _mwpgAccountId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementWebPropertiesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementWebPropertiesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mwpgWebPropertyId'
 --
 -- * 'mwpgAccountId'
-managementWebPropertiesGet'
+managementWebPropertiesGet
     :: Text -- ^ 'mwpgWebPropertyId'
     -> Text -- ^ 'mwpgAccountId'
-    -> ManagementWebPropertiesGet'
-managementWebPropertiesGet' pMwpgWebPropertyId_ pMwpgAccountId_ =
-    ManagementWebPropertiesGet'
+    -> ManagementWebPropertiesGet
+managementWebPropertiesGet pMwpgWebPropertyId_ pMwpgAccountId_ =
+    ManagementWebPropertiesGet
     { _mwpgWebPropertyId = pMwpgWebPropertyId_
     , _mwpgAccountId = pMwpgAccountId_
     }
 
 -- | ID to retrieve the web property for.
-mwpgWebPropertyId :: Lens' ManagementWebPropertiesGet' Text
+mwpgWebPropertyId :: Lens' ManagementWebPropertiesGet Text
 mwpgWebPropertyId
   = lens _mwpgWebPropertyId
       (\ s a -> s{_mwpgWebPropertyId = a})
 
 -- | Account ID to retrieve the web property for.
-mwpgAccountId :: Lens' ManagementWebPropertiesGet' Text
+mwpgAccountId :: Lens' ManagementWebPropertiesGet Text
 mwpgAccountId
   = lens _mwpgAccountId
       (\ s a -> s{_mwpgAccountId = a})
 
-instance GoogleRequest ManagementWebPropertiesGet'
+instance GoogleRequest ManagementWebPropertiesGet
          where
-        type Rs ManagementWebPropertiesGet' = WebProperty
-        requestClient ManagementWebPropertiesGet'{..}
+        type Rs ManagementWebPropertiesGet = WebProperty
+        requestClient ManagementWebPropertiesGet{..}
           = go _mwpgAccountId _mwpgWebPropertyId (Just AltJSON)
               analyticsService
           where go

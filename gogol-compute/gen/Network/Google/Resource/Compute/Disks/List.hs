@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Disks.List
       DisksListResource
 
     -- * Creating a Request
-    , disksList'
-    , DisksList'
+    , disksList
+    , DisksList
 
     -- * Request Lenses
     , dlProject
@@ -45,7 +45,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.disks.list@ method which the
--- 'DisksList'' request conforms to.
+-- 'DisksList' request conforms to.
 type DisksListResource =
      Capture "project" Text :>
        "zones" :>
@@ -59,8 +59,8 @@ type DisksListResource =
 -- | Retrieves the list of persistent disks contained within the specified
 -- zone.
 --
--- /See:/ 'disksList'' smart constructor.
-data DisksList' = DisksList'
+-- /See:/ 'disksList' smart constructor.
+data DisksList = DisksList
     { _dlProject    :: !Text
     , _dlZone       :: !Text
     , _dlFilter     :: !(Maybe Text)
@@ -68,7 +68,7 @@ data DisksList' = DisksList'
     , _dlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DisksList'' with the minimum fields required to make a request.
+-- | Creates a value of 'DisksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,12 +81,12 @@ data DisksList' = DisksList'
 -- * 'dlPageToken'
 --
 -- * 'dlMaxResults'
-disksList'
+disksList
     :: Text -- ^ 'dlProject'
     -> Text -- ^ 'dlZone'
-    -> DisksList'
-disksList' pDlProject_ pDlZone_ =
-    DisksList'
+    -> DisksList
+disksList pDlProject_ pDlZone_ =
+    DisksList
     { _dlProject = pDlProject_
     , _dlZone = pDlZone_
     , _dlFilter = Nothing
@@ -95,12 +95,12 @@ disksList' pDlProject_ pDlZone_ =
     }
 
 -- | Project ID for this request.
-dlProject :: Lens' DisksList' Text
+dlProject :: Lens' DisksList Text
 dlProject
   = lens _dlProject (\ s a -> s{_dlProject = a})
 
 -- | The name of the zone for this request.
-dlZone :: Lens' DisksList' Text
+dlZone :: Lens' DisksList Text
 dlZone = lens _dlZone (\ s a -> s{_dlZone = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -114,24 +114,24 @@ dlZone = lens _dlZone (\ s a -> s{_dlZone = a})
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-dlFilter :: Lens' DisksList' (Maybe Text)
+dlFilter :: Lens' DisksList (Maybe Text)
 dlFilter = lens _dlFilter (\ s a -> s{_dlFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-dlPageToken :: Lens' DisksList' (Maybe Text)
+dlPageToken :: Lens' DisksList (Maybe Text)
 dlPageToken
   = lens _dlPageToken (\ s a -> s{_dlPageToken = a})
 
 -- | Maximum count of results to be returned.
-dlMaxResults :: Lens' DisksList' Word32
+dlMaxResults :: Lens' DisksList Word32
 dlMaxResults
   = lens _dlMaxResults (\ s a -> s{_dlMaxResults = a})
 
-instance GoogleRequest DisksList' where
-        type Rs DisksList' = DiskList
-        requestClient DisksList'{..}
+instance GoogleRequest DisksList where
+        type Rs DisksList = DiskList
+        requestClient DisksList{..}
           = go _dlProject _dlZone _dlFilter _dlPageToken
               (Just _dlMaxResults)
               (Just AltJSON)

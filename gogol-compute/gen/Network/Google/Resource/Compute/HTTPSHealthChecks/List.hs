@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.HTTPSHealthChecks.List
       HTTPSHealthChecksListResource
 
     -- * Creating a Request
-    , httpsHealthChecksList'
-    , HTTPSHealthChecksList'
+    , httpsHealthChecksList
+    , HTTPSHealthChecksList
 
     -- * Request Lenses
     , hhclProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.httpsHealthChecks.list@ method which the
--- 'HTTPSHealthChecksList'' request conforms to.
+-- 'HTTPSHealthChecksList' request conforms to.
 type HTTPSHealthChecksListResource =
      Capture "project" Text :>
        "global" :>
@@ -58,15 +58,15 @@ type HTTPSHealthChecksListResource =
 -- | Retrieves the list of HttpsHealthCheck resources available to the
 -- specified project.
 --
--- /See:/ 'httpsHealthChecksList'' smart constructor.
-data HTTPSHealthChecksList' = HTTPSHealthChecksList'
+-- /See:/ 'httpsHealthChecksList' smart constructor.
+data HTTPSHealthChecksList = HTTPSHealthChecksList
     { _hhclProject    :: !Text
     , _hhclFilter     :: !(Maybe Text)
     , _hhclPageToken  :: !(Maybe Text)
     , _hhclMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'HTTPSHealthChecksList'' with the minimum fields required to make a request.
+-- | Creates a value of 'HTTPSHealthChecksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,11 +77,11 @@ data HTTPSHealthChecksList' = HTTPSHealthChecksList'
 -- * 'hhclPageToken'
 --
 -- * 'hhclMaxResults'
-httpsHealthChecksList'
+httpsHealthChecksList
     :: Text -- ^ 'hhclProject'
-    -> HTTPSHealthChecksList'
-httpsHealthChecksList' pHhclProject_ =
-    HTTPSHealthChecksList'
+    -> HTTPSHealthChecksList
+httpsHealthChecksList pHhclProject_ =
+    HTTPSHealthChecksList
     { _hhclProject = pHhclProject_
     , _hhclFilter = Nothing
     , _hhclPageToken = Nothing
@@ -89,7 +89,7 @@ httpsHealthChecksList' pHhclProject_ =
     }
 
 -- | Name of the project scoping this request.
-hhclProject :: Lens' HTTPSHealthChecksList' Text
+hhclProject :: Lens' HTTPSHealthChecksList Text
 hhclProject
   = lens _hhclProject (\ s a -> s{_hhclProject = a})
 
@@ -104,27 +104,27 @@ hhclProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-hhclFilter :: Lens' HTTPSHealthChecksList' (Maybe Text)
+hhclFilter :: Lens' HTTPSHealthChecksList (Maybe Text)
 hhclFilter
   = lens _hhclFilter (\ s a -> s{_hhclFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-hhclPageToken :: Lens' HTTPSHealthChecksList' (Maybe Text)
+hhclPageToken :: Lens' HTTPSHealthChecksList (Maybe Text)
 hhclPageToken
   = lens _hhclPageToken
       (\ s a -> s{_hhclPageToken = a})
 
 -- | Maximum count of results to be returned.
-hhclMaxResults :: Lens' HTTPSHealthChecksList' Word32
+hhclMaxResults :: Lens' HTTPSHealthChecksList Word32
 hhclMaxResults
   = lens _hhclMaxResults
       (\ s a -> s{_hhclMaxResults = a})
 
-instance GoogleRequest HTTPSHealthChecksList' where
-        type Rs HTTPSHealthChecksList' = HTTPSHealthCheckList
-        requestClient HTTPSHealthChecksList'{..}
+instance GoogleRequest HTTPSHealthChecksList where
+        type Rs HTTPSHealthChecksList = HTTPSHealthCheckList
+        requestClient HTTPSHealthChecksList{..}
           = go _hhclProject _hhclFilter _hhclPageToken
               (Just _hhclMaxResults)
               (Just AltJSON)

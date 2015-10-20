@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.List
       CustomChannelsListResource
 
     -- * Creating a Request
-    , customChannelsList'
-    , CustomChannelsList'
+    , customChannelsList
+    , CustomChannelsList
 
     -- * Request Lenses
     , cclAdClientId
@@ -42,7 +42,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.customchannels.list@ method which the
--- 'CustomChannelsList'' request conforms to.
+-- 'CustomChannelsList' request conforms to.
 type CustomChannelsListResource =
      "adclients" :>
        Capture "adClientId" Text :>
@@ -54,14 +54,14 @@ type CustomChannelsListResource =
 
 -- | List all host custom channels in this AdSense account.
 --
--- /See:/ 'customChannelsList'' smart constructor.
-data CustomChannelsList' = CustomChannelsList'
+-- /See:/ 'customChannelsList' smart constructor.
+data CustomChannelsList = CustomChannelsList
     { _cclAdClientId :: !Text
     , _cclPageToken  :: !(Maybe Text)
     , _cclMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CustomChannelsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CustomChannelsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,18 +70,18 @@ data CustomChannelsList' = CustomChannelsList'
 -- * 'cclPageToken'
 --
 -- * 'cclMaxResults'
-customChannelsList'
+customChannelsList
     :: Text -- ^ 'cclAdClientId'
-    -> CustomChannelsList'
-customChannelsList' pCclAdClientId_ =
-    CustomChannelsList'
+    -> CustomChannelsList
+customChannelsList pCclAdClientId_ =
+    CustomChannelsList
     { _cclAdClientId = pCclAdClientId_
     , _cclPageToken = Nothing
     , _cclMaxResults = Nothing
     }
 
 -- | Ad client for which to list custom channels.
-cclAdClientId :: Lens' CustomChannelsList' Text
+cclAdClientId :: Lens' CustomChannelsList Text
 cclAdClientId
   = lens _cclAdClientId
       (\ s a -> s{_cclAdClientId = a})
@@ -89,20 +89,20 @@ cclAdClientId
 -- | A continuation token, used to page through custom channels. To retrieve
 -- the next page, set this parameter to the value of \"nextPageToken\" from
 -- the previous response.
-cclPageToken :: Lens' CustomChannelsList' (Maybe Text)
+cclPageToken :: Lens' CustomChannelsList (Maybe Text)
 cclPageToken
   = lens _cclPageToken (\ s a -> s{_cclPageToken = a})
 
 -- | The maximum number of custom channels to include in the response, used
 -- for paging.
-cclMaxResults :: Lens' CustomChannelsList' (Maybe Word32)
+cclMaxResults :: Lens' CustomChannelsList (Maybe Word32)
 cclMaxResults
   = lens _cclMaxResults
       (\ s a -> s{_cclMaxResults = a})
 
-instance GoogleRequest CustomChannelsList' where
-        type Rs CustomChannelsList' = CustomChannels
-        requestClient CustomChannelsList'{..}
+instance GoogleRequest CustomChannelsList where
+        type Rs CustomChannelsList = CustomChannels
+        requestClient CustomChannelsList{..}
           = go _cclAdClientId _cclPageToken _cclMaxResults
               (Just AltJSON)
               adSenseHostService

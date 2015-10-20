@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Players.Unhide
       PlayersUnhideResource
 
     -- * Creating a Request
-    , playersUnhide'
-    , PlayersUnhide'
+    , playersUnhide
+    , PlayersUnhide
 
     -- * Request Lenses
     , puApplicationId
@@ -43,7 +43,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.players.unhide@ method which the
--- 'PlayersUnhide'' request conforms to.
+-- 'PlayersUnhide' request conforms to.
 type PlayersUnhideResource =
      "applications" :>
        Capture "applicationId" Text :>
@@ -56,44 +56,44 @@ type PlayersUnhideResource =
 -- application. This method is only available to user accounts for your
 -- developer console.
 --
--- /See:/ 'playersUnhide'' smart constructor.
-data PlayersUnhide' = PlayersUnhide'
+-- /See:/ 'playersUnhide' smart constructor.
+data PlayersUnhide = PlayersUnhide
     { _puApplicationId :: !Text
     , _puPlayerId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlayersUnhide'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayersUnhide' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'puApplicationId'
 --
 -- * 'puPlayerId'
-playersUnhide'
+playersUnhide
     :: Text -- ^ 'puApplicationId'
     -> Text -- ^ 'puPlayerId'
-    -> PlayersUnhide'
-playersUnhide' pPuApplicationId_ pPuPlayerId_ =
-    PlayersUnhide'
+    -> PlayersUnhide
+playersUnhide pPuApplicationId_ pPuPlayerId_ =
+    PlayersUnhide
     { _puApplicationId = pPuApplicationId_
     , _puPlayerId = pPuPlayerId_
     }
 
 -- | The application ID from the Google Play developer console.
-puApplicationId :: Lens' PlayersUnhide' Text
+puApplicationId :: Lens' PlayersUnhide Text
 puApplicationId
   = lens _puApplicationId
       (\ s a -> s{_puApplicationId = a})
 
 -- | A player ID. A value of me may be used in place of the authenticated
 -- player\'s ID.
-puPlayerId :: Lens' PlayersUnhide' Text
+puPlayerId :: Lens' PlayersUnhide Text
 puPlayerId
   = lens _puPlayerId (\ s a -> s{_puPlayerId = a})
 
-instance GoogleRequest PlayersUnhide' where
-        type Rs PlayersUnhide' = ()
-        requestClient PlayersUnhide'{..}
+instance GoogleRequest PlayersUnhide where
+        type Rs PlayersUnhide = ()
+        requestClient PlayersUnhide{..}
           = go _puApplicationId _puPlayerId (Just AltJSON)
               gamesManagementService
           where go

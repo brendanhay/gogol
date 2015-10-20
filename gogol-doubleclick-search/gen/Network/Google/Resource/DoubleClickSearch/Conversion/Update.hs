@@ -29,8 +29,8 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.Update
       ConversionUpdateResource
 
     -- * Creating a Request
-    , conversionUpdate'
-    , ConversionUpdate'
+    , conversionUpdate
+    , ConversionUpdate
 
     -- * Request Lenses
     , cuPayload
@@ -40,7 +40,7 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @doubleclicksearch.conversion.update@ method which the
--- 'ConversionUpdate'' request conforms to.
+-- 'ConversionUpdate' request conforms to.
 type ConversionUpdateResource =
      "conversion" :>
        QueryParam "alt" AltJSON :>
@@ -49,32 +49,32 @@ type ConversionUpdateResource =
 
 -- | Updates a batch of conversions in DoubleClick Search.
 --
--- /See:/ 'conversionUpdate'' smart constructor.
-newtype ConversionUpdate' = ConversionUpdate'
+-- /See:/ 'conversionUpdate' smart constructor.
+newtype ConversionUpdate = ConversionUpdate
     { _cuPayload :: ConversionList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ConversionUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ConversionUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cuPayload'
-conversionUpdate'
+conversionUpdate
     :: ConversionList -- ^ 'cuPayload'
-    -> ConversionUpdate'
-conversionUpdate' pCuPayload_ =
-    ConversionUpdate'
+    -> ConversionUpdate
+conversionUpdate pCuPayload_ =
+    ConversionUpdate
     { _cuPayload = pCuPayload_
     }
 
 -- | Multipart request metadata.
-cuPayload :: Lens' ConversionUpdate' ConversionList
+cuPayload :: Lens' ConversionUpdate ConversionList
 cuPayload
   = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
-instance GoogleRequest ConversionUpdate' where
-        type Rs ConversionUpdate' = ConversionList
-        requestClient ConversionUpdate'{..}
+instance GoogleRequest ConversionUpdate where
+        type Rs ConversionUpdate = ConversionList
+        requestClient ConversionUpdate{..}
           = go (Just AltJSON) _cuPayload
               doubleClickSearchService
           where go

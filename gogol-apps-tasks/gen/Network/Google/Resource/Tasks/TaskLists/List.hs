@@ -29,8 +29,8 @@ module Network.Google.Resource.Tasks.TaskLists.List
       TaskListsListResource
 
     -- * Creating a Request
-    , taskListsList'
-    , TaskListsList'
+    , taskListsList
+    , TaskListsList
 
     -- * Request Lenses
     , tllPageToken
@@ -41,7 +41,7 @@ import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasklists.list@ method which the
--- 'TaskListsList'' request conforms to.
+-- 'TaskListsList' request conforms to.
 type TaskListsListResource =
      "users" :>
        "@me" :>
@@ -52,42 +52,42 @@ type TaskListsListResource =
 
 -- | Returns all the authenticated user\'s task lists.
 --
--- /See:/ 'taskListsList'' smart constructor.
-data TaskListsList' = TaskListsList'
+-- /See:/ 'taskListsList' smart constructor.
+data TaskListsList = TaskListsList
     { _tllPageToken  :: !(Maybe Text)
     , _tllMaxResults :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TaskListsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TaskListsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tllPageToken'
 --
 -- * 'tllMaxResults'
-taskListsList'
-    :: TaskListsList'
-taskListsList' =
-    TaskListsList'
+taskListsList
+    :: TaskListsList
+taskListsList =
+    TaskListsList
     { _tllPageToken = Nothing
     , _tllMaxResults = Nothing
     }
 
 -- | Token specifying the result page to return. Optional.
-tllPageToken :: Lens' TaskListsList' (Maybe Text)
+tllPageToken :: Lens' TaskListsList (Maybe Text)
 tllPageToken
   = lens _tllPageToken (\ s a -> s{_tllPageToken = a})
 
 -- | Maximum number of task lists returned on one page. Optional. The default
 -- is 100.
-tllMaxResults :: Lens' TaskListsList' (Maybe Int64)
+tllMaxResults :: Lens' TaskListsList (Maybe Int64)
 tllMaxResults
   = lens _tllMaxResults
       (\ s a -> s{_tllMaxResults = a})
 
-instance GoogleRequest TaskListsList' where
-        type Rs TaskListsList' = TaskLists
-        requestClient TaskListsList'{..}
+instance GoogleRequest TaskListsList where
+        type Rs TaskListsList = TaskLists
+        requestClient TaskListsList{..}
           = go _tllPageToken _tllMaxResults (Just AltJSON)
               appsTasksService
           where go

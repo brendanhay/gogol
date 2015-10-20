@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Autoscalers.Update
       AutoscalersUpdateResource
 
     -- * Creating a Request
-    , autoscalersUpdate'
-    , AutoscalersUpdate'
+    , autoscalersUpdate
+    , AutoscalersUpdate
 
     -- * Request Lenses
     , auProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.autoscalers.update@ method which the
--- 'AutoscalersUpdate'' request conforms to.
+-- 'AutoscalersUpdate' request conforms to.
 type AutoscalersUpdateResource =
      Capture "project" Text :>
        "zones" :>
@@ -57,15 +57,15 @@ type AutoscalersUpdateResource =
 -- | Updates an autoscaler resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'autoscalersUpdate'' smart constructor.
-data AutoscalersUpdate' = AutoscalersUpdate'
+-- /See:/ 'autoscalersUpdate' smart constructor.
+data AutoscalersUpdate = AutoscalersUpdate
     { _auProject    :: !Text
     , _auZone       :: !Text
     , _auPayload    :: !Autoscaler
     , _auAutoscaler :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AutoscalersUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AutoscalersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,13 +76,13 @@ data AutoscalersUpdate' = AutoscalersUpdate'
 -- * 'auPayload'
 --
 -- * 'auAutoscaler'
-autoscalersUpdate'
+autoscalersUpdate
     :: Text -- ^ 'auProject'
     -> Text -- ^ 'auZone'
     -> Autoscaler -- ^ 'auPayload'
-    -> AutoscalersUpdate'
-autoscalersUpdate' pAuProject_ pAuZone_ pAuPayload_ =
-    AutoscalersUpdate'
+    -> AutoscalersUpdate
+autoscalersUpdate pAuProject_ pAuZone_ pAuPayload_ =
+    AutoscalersUpdate
     { _auProject = pAuProject_
     , _auZone = pAuZone_
     , _auPayload = pAuPayload_
@@ -90,27 +90,27 @@ autoscalersUpdate' pAuProject_ pAuZone_ pAuPayload_ =
     }
 
 -- | Name of the project scoping this request.
-auProject :: Lens' AutoscalersUpdate' Text
+auProject :: Lens' AutoscalersUpdate Text
 auProject
   = lens _auProject (\ s a -> s{_auProject = a})
 
 -- | Name of the zone scoping this request.
-auZone :: Lens' AutoscalersUpdate' Text
+auZone :: Lens' AutoscalersUpdate Text
 auZone = lens _auZone (\ s a -> s{_auZone = a})
 
 -- | Multipart request metadata.
-auPayload :: Lens' AutoscalersUpdate' Autoscaler
+auPayload :: Lens' AutoscalersUpdate Autoscaler
 auPayload
   = lens _auPayload (\ s a -> s{_auPayload = a})
 
 -- | Name of the autoscaler resource to update.
-auAutoscaler :: Lens' AutoscalersUpdate' (Maybe Text)
+auAutoscaler :: Lens' AutoscalersUpdate (Maybe Text)
 auAutoscaler
   = lens _auAutoscaler (\ s a -> s{_auAutoscaler = a})
 
-instance GoogleRequest AutoscalersUpdate' where
-        type Rs AutoscalersUpdate' = Operation
-        requestClient AutoscalersUpdate'{..}
+instance GoogleRequest AutoscalersUpdate where
+        type Rs AutoscalersUpdate = Operation
+        requestClient AutoscalersUpdate{..}
           = go _auProject _auZone _auAutoscaler (Just AltJSON)
               _auPayload
               computeService

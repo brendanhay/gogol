@@ -29,8 +29,8 @@ module Network.Google.Resource.FusionTables.Style.Get
       StyleGetResource
 
     -- * Creating a Request
-    , styleGet'
-    , StyleGet'
+    , styleGet
+    , StyleGet
 
     -- * Request Lenses
     , sgStyleId
@@ -41,7 +41,7 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.style.get@ method which the
--- 'StyleGet'' request conforms to.
+-- 'StyleGet' request conforms to.
 type StyleGetResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -51,42 +51,42 @@ type StyleGetResource =
 
 -- | Gets a specific style.
 --
--- /See:/ 'styleGet'' smart constructor.
-data StyleGet' = StyleGet'
+-- /See:/ 'styleGet' smart constructor.
+data StyleGet = StyleGet
     { _sgStyleId :: !Int32
     , _sgTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'StyleGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'StyleGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sgStyleId'
 --
 -- * 'sgTableId'
-styleGet'
+styleGet
     :: Int32 -- ^ 'sgStyleId'
     -> Text -- ^ 'sgTableId'
-    -> StyleGet'
-styleGet' pSgStyleId_ pSgTableId_ =
-    StyleGet'
+    -> StyleGet
+styleGet pSgStyleId_ pSgTableId_ =
+    StyleGet
     { _sgStyleId = pSgStyleId_
     , _sgTableId = pSgTableId_
     }
 
 -- | Identifier (integer) for a specific style in a table
-sgStyleId :: Lens' StyleGet' Int32
+sgStyleId :: Lens' StyleGet Int32
 sgStyleId
   = lens _sgStyleId (\ s a -> s{_sgStyleId = a})
 
 -- | Table to which the requested style belongs
-sgTableId :: Lens' StyleGet' Text
+sgTableId :: Lens' StyleGet Text
 sgTableId
   = lens _sgTableId (\ s a -> s{_sgTableId = a})
 
-instance GoogleRequest StyleGet' where
-        type Rs StyleGet' = StyleSetting
-        requestClient StyleGet'{..}
+instance GoogleRequest StyleGet where
+        type Rs StyleGet = StyleSetting
+        requestClient StyleGet{..}
           = go _sgTableId _sgStyleId (Just AltJSON)
               fusionTablesService
           where go

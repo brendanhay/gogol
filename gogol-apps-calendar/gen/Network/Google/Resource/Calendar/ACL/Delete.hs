@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.ACL.Delete
       ACLDeleteResource
 
     -- * Creating a Request
-    , aclDelete'
-    , ACLDelete'
+    , aclDelete
+    , ACLDelete
 
     -- * Request Lenses
     , adCalendarId
@@ -41,7 +41,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.acl.delete@ method which the
--- 'ACLDelete'' request conforms to.
+-- 'ACLDelete' request conforms to.
 type ACLDeleteResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -51,25 +51,25 @@ type ACLDeleteResource =
 
 -- | Deletes an access control rule.
 --
--- /See:/ 'aclDelete'' smart constructor.
-data ACLDelete' = ACLDelete'
+-- /See:/ 'aclDelete' smart constructor.
+data ACLDelete = ACLDelete
     { _adCalendarId :: !Text
     , _adRuleId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ACLDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ACLDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'adCalendarId'
 --
 -- * 'adRuleId'
-aclDelete'
+aclDelete
     :: Text -- ^ 'adCalendarId'
     -> Text -- ^ 'adRuleId'
-    -> ACLDelete'
-aclDelete' pAdCalendarId_ pAdRuleId_ =
-    ACLDelete'
+    -> ACLDelete
+aclDelete pAdCalendarId_ pAdRuleId_ =
+    ACLDelete
     { _adCalendarId = pAdCalendarId_
     , _adRuleId = pAdRuleId_
     }
@@ -77,17 +77,17 @@ aclDelete' pAdCalendarId_ pAdRuleId_ =
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-adCalendarId :: Lens' ACLDelete' Text
+adCalendarId :: Lens' ACLDelete Text
 adCalendarId
   = lens _adCalendarId (\ s a -> s{_adCalendarId = a})
 
 -- | ACL rule identifier.
-adRuleId :: Lens' ACLDelete' Text
+adRuleId :: Lens' ACLDelete Text
 adRuleId = lens _adRuleId (\ s a -> s{_adRuleId = a})
 
-instance GoogleRequest ACLDelete' where
-        type Rs ACLDelete' = ()
-        requestClient ACLDelete'{..}
+instance GoogleRequest ACLDelete where
+        type Rs ACLDelete = ()
+        requestClient ACLDelete{..}
           = go _adCalendarId _adRuleId (Just AltJSON)
               appsCalendarService
           where go

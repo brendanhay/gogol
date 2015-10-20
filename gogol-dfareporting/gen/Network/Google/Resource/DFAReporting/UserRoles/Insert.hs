@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.UserRoles.Insert
       UserRolesInsertResource
 
     -- * Creating a Request
-    , userRolesInsert'
-    , UserRolesInsert'
+    , userRolesInsert
+    , UserRolesInsert
 
     -- * Request Lenses
     , uriProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.userRoles.insert@ method which the
--- 'UserRolesInsert'' request conforms to.
+-- 'UserRolesInsert' request conforms to.
 type UserRolesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type UserRolesInsertResource =
 
 -- | Inserts a new user role.
 --
--- /See:/ 'userRolesInsert'' smart constructor.
-data UserRolesInsert' = UserRolesInsert'
+-- /See:/ 'userRolesInsert' smart constructor.
+data UserRolesInsert = UserRolesInsert
     { _uriProFileId :: !Int64
     , _uriPayload   :: !UserRole
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserRolesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'UserRolesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'uriProFileId'
 --
 -- * 'uriPayload'
-userRolesInsert'
+userRolesInsert
     :: Int64 -- ^ 'uriProFileId'
     -> UserRole -- ^ 'uriPayload'
-    -> UserRolesInsert'
-userRolesInsert' pUriProFileId_ pUriPayload_ =
-    UserRolesInsert'
+    -> UserRolesInsert
+userRolesInsert pUriProFileId_ pUriPayload_ =
+    UserRolesInsert
     { _uriProFileId = pUriProFileId_
     , _uriPayload = pUriPayload_
     }
 
 -- | User profile ID associated with this request.
-uriProFileId :: Lens' UserRolesInsert' Int64
+uriProFileId :: Lens' UserRolesInsert Int64
 uriProFileId
   = lens _uriProFileId (\ s a -> s{_uriProFileId = a})
 
 -- | Multipart request metadata.
-uriPayload :: Lens' UserRolesInsert' UserRole
+uriPayload :: Lens' UserRolesInsert UserRole
 uriPayload
   = lens _uriPayload (\ s a -> s{_uriPayload = a})
 
-instance GoogleRequest UserRolesInsert' where
-        type Rs UserRolesInsert' = UserRole
-        requestClient UserRolesInsert'{..}
+instance GoogleRequest UserRolesInsert where
+        type Rs UserRolesInsert = UserRole
+        requestClient UserRolesInsert{..}
           = go _uriProFileId (Just AltJSON) _uriPayload
               dFAReportingService
           where go

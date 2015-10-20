@@ -29,8 +29,8 @@ module Network.Google.Resource.GamesConfiguration.ImageConfigurations.Upload
       ImageConfigurationsUploadResource
 
     -- * Creating a Request
-    , imageConfigurationsUpload'
-    , ImageConfigurationsUpload'
+    , imageConfigurationsUpload
+    , ImageConfigurationsUpload
 
     -- * Request Lenses
     , icuResourceId
@@ -42,7 +42,7 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.imageConfigurations.upload@ method which the
--- 'ImageConfigurationsUpload'' request conforms to.
+-- 'ImageConfigurationsUpload' request conforms to.
 type ImageConfigurationsUploadResource =
      "images" :>
        Capture "resourceId" Text :>
@@ -56,14 +56,14 @@ type ImageConfigurationsUploadResource =
 
 -- | Uploads an image for a resource with the given ID and image type.
 --
--- /See:/ 'imageConfigurationsUpload'' smart constructor.
-data ImageConfigurationsUpload' = ImageConfigurationsUpload'
+-- /See:/ 'imageConfigurationsUpload' smart constructor.
+data ImageConfigurationsUpload = ImageConfigurationsUpload
     { _icuResourceId :: !Text
     , _icuMedia      :: !Body
     , _icuImageType  :: !ImageConfigurationsUploadImageType
     }
 
--- | Creates a value of 'ImageConfigurationsUpload'' with the minimum fields required to make a request.
+-- | Creates a value of 'ImageConfigurationsUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,37 +72,37 @@ data ImageConfigurationsUpload' = ImageConfigurationsUpload'
 -- * 'icuMedia'
 --
 -- * 'icuImageType'
-imageConfigurationsUpload'
+imageConfigurationsUpload
     :: Text -- ^ 'icuResourceId'
     -> Body -- ^ 'icuMedia'
     -> ImageConfigurationsUploadImageType -- ^ 'icuImageType'
-    -> ImageConfigurationsUpload'
-imageConfigurationsUpload' pIcuResourceId_ pIcuMedia_ pIcuImageType_ =
-    ImageConfigurationsUpload'
+    -> ImageConfigurationsUpload
+imageConfigurationsUpload pIcuResourceId_ pIcuMedia_ pIcuImageType_ =
+    ImageConfigurationsUpload
     { _icuResourceId = pIcuResourceId_
     , _icuMedia = pIcuMedia_
     , _icuImageType = pIcuImageType_
     }
 
 -- | The ID of the resource used by this method.
-icuResourceId :: Lens' ImageConfigurationsUpload' Text
+icuResourceId :: Lens' ImageConfigurationsUpload Text
 icuResourceId
   = lens _icuResourceId
       (\ s a -> s{_icuResourceId = a})
 
-icuMedia :: Lens' ImageConfigurationsUpload' Body
+icuMedia :: Lens' ImageConfigurationsUpload Body
 icuMedia = lens _icuMedia (\ s a -> s{_icuMedia = a})
 
 -- | Selects which image in a resource for this method.
-icuImageType :: Lens' ImageConfigurationsUpload' ImageConfigurationsUploadImageType
+icuImageType :: Lens' ImageConfigurationsUpload ImageConfigurationsUploadImageType
 icuImageType
   = lens _icuImageType (\ s a -> s{_icuImageType = a})
 
-instance GoogleRequest ImageConfigurationsUpload'
+instance GoogleRequest ImageConfigurationsUpload
          where
-        type Rs ImageConfigurationsUpload' =
+        type Rs ImageConfigurationsUpload =
              ImageConfiguration
-        requestClient ImageConfigurationsUpload'{..}
+        requestClient ImageConfigurationsUpload{..}
           = go _icuResourceId _icuImageType (Just AltJSON)
               _icuMedia
               gamesConfigurationService

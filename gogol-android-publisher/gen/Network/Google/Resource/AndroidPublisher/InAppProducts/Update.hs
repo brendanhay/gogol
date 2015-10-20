@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidPublisher.InAppProducts.Update
       InAppProductsUpdateResource
 
     -- * Creating a Request
-    , inAppProductsUpdate'
-    , InAppProductsUpdate'
+    , inAppProductsUpdate
+    , InAppProductsUpdate
 
     -- * Request Lenses
     , iapuAutoConvertMissingPrices
@@ -43,7 +43,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.inappproducts.update@ method which the
--- 'InAppProductsUpdate'' request conforms to.
+-- 'InAppProductsUpdate' request conforms to.
 type InAppProductsUpdateResource =
      Capture "packageName" Text :>
        "inappproducts" :>
@@ -55,15 +55,15 @@ type InAppProductsUpdateResource =
 
 -- | Updates the details of an in-app product.
 --
--- /See:/ 'inAppProductsUpdate'' smart constructor.
-data InAppProductsUpdate' = InAppProductsUpdate'
+-- /See:/ 'inAppProductsUpdate' smart constructor.
+data InAppProductsUpdate = InAppProductsUpdate
     { _iapuAutoConvertMissingPrices :: !(Maybe Bool)
     , _iapuPackageName              :: !Text
     , _iapuPayload                  :: !InAppProduct
     , _iapuSKU                      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InAppProductsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'InAppProductsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,13 +74,13 @@ data InAppProductsUpdate' = InAppProductsUpdate'
 -- * 'iapuPayload'
 --
 -- * 'iapuSKU'
-inAppProductsUpdate'
+inAppProductsUpdate
     :: Text -- ^ 'iapuPackageName'
     -> InAppProduct -- ^ 'iapuPayload'
     -> Text -- ^ 'iapuSKU'
-    -> InAppProductsUpdate'
-inAppProductsUpdate' pIapuPackageName_ pIapuPayload_ pIapuSKU_ =
-    InAppProductsUpdate'
+    -> InAppProductsUpdate
+inAppProductsUpdate pIapuPackageName_ pIapuPayload_ pIapuSKU_ =
+    InAppProductsUpdate
     { _iapuAutoConvertMissingPrices = Nothing
     , _iapuPackageName = pIapuPackageName_
     , _iapuPayload = pIapuPayload_
@@ -91,30 +91,30 @@ inAppProductsUpdate' pIapuPackageName_ pIapuPayload_ pIapuSKU_ =
 -- don\'t have a price specified for this in-app product will be auto
 -- converted to the target currency based on the default price. Defaults to
 -- false.
-iapuAutoConvertMissingPrices :: Lens' InAppProductsUpdate' (Maybe Bool)
+iapuAutoConvertMissingPrices :: Lens' InAppProductsUpdate (Maybe Bool)
 iapuAutoConvertMissingPrices
   = lens _iapuAutoConvertMissingPrices
       (\ s a -> s{_iapuAutoConvertMissingPrices = a})
 
 -- | Unique identifier for the Android app with the in-app product; for
 -- example, \"com.spiffygame\".
-iapuPackageName :: Lens' InAppProductsUpdate' Text
+iapuPackageName :: Lens' InAppProductsUpdate Text
 iapuPackageName
   = lens _iapuPackageName
       (\ s a -> s{_iapuPackageName = a})
 
 -- | Multipart request metadata.
-iapuPayload :: Lens' InAppProductsUpdate' InAppProduct
+iapuPayload :: Lens' InAppProductsUpdate InAppProduct
 iapuPayload
   = lens _iapuPayload (\ s a -> s{_iapuPayload = a})
 
 -- | Unique identifier for the in-app product.
-iapuSKU :: Lens' InAppProductsUpdate' Text
+iapuSKU :: Lens' InAppProductsUpdate Text
 iapuSKU = lens _iapuSKU (\ s a -> s{_iapuSKU = a})
 
-instance GoogleRequest InAppProductsUpdate' where
-        type Rs InAppProductsUpdate' = InAppProduct
-        requestClient InAppProductsUpdate'{..}
+instance GoogleRequest InAppProductsUpdate where
+        type Rs InAppProductsUpdate = InAppProduct
+        requestClient InAppProductsUpdate{..}
           = go _iapuPackageName _iapuSKU
               _iapuAutoConvertMissingPrices
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Maps.GetPublished
       MapsGetPublishedResource
 
     -- * Creating a Request
-    , mapsGetPublished'
-    , MapsGetPublished'
+    , mapsGetPublished
+    , MapsGetPublished
 
     -- * Request Lenses
     , mgpId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.maps.getPublished@ method which the
--- 'MapsGetPublished'' request conforms to.
+-- 'MapsGetPublished' request conforms to.
 type MapsGetPublishedResource =
      "maps" :>
        Capture "id" Text :>
@@ -49,31 +49,31 @@ type MapsGetPublishedResource =
 
 -- | Return the published metadata for a particular map.
 --
--- /See:/ 'mapsGetPublished'' smart constructor.
-newtype MapsGetPublished' = MapsGetPublished'
+-- /See:/ 'mapsGetPublished' smart constructor.
+newtype MapsGetPublished = MapsGetPublished
     { _mgpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MapsGetPublished'' with the minimum fields required to make a request.
+-- | Creates a value of 'MapsGetPublished' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mgpId'
-mapsGetPublished'
+mapsGetPublished
     :: Text -- ^ 'mgpId'
-    -> MapsGetPublished'
-mapsGetPublished' pMgpId_ =
-    MapsGetPublished'
+    -> MapsGetPublished
+mapsGetPublished pMgpId_ =
+    MapsGetPublished
     { _mgpId = pMgpId_
     }
 
 -- | The ID of the map.
-mgpId :: Lens' MapsGetPublished' Text
+mgpId :: Lens' MapsGetPublished Text
 mgpId = lens _mgpId (\ s a -> s{_mgpId = a})
 
-instance GoogleRequest MapsGetPublished' where
-        type Rs MapsGetPublished' = PublishedMap
-        requestClient MapsGetPublished'{..}
+instance GoogleRequest MapsGetPublished where
+        type Rs MapsGetPublished = PublishedMap
+        requestClient MapsGetPublished{..}
           = go _mgpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

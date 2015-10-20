@@ -33,8 +33,8 @@ module Network.Google.Resource.CloudMonitoring.MetricDescriptors.List
       MetricDescriptorsListResource
 
     -- * Creating a Request
-    , metricDescriptorsList'
-    , MetricDescriptorsList'
+    , metricDescriptorsList
+    , MetricDescriptorsList
 
     -- * Request Lenses
     , mdlProject
@@ -48,7 +48,7 @@ import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @cloudmonitoring.metricDescriptors.list@ method which the
--- 'MetricDescriptorsList'' request conforms to.
+-- 'MetricDescriptorsList' request conforms to.
 type MetricDescriptorsListResource =
      Capture "project" Text :>
        "metricDescriptors" :>
@@ -65,8 +65,8 @@ type MetricDescriptorsListResource =
 -- request subsequent pages of results by setting the pageToken query
 -- parameter to the value of the nextPageToken.
 --
--- /See:/ 'metricDescriptorsList'' smart constructor.
-data MetricDescriptorsList' = MetricDescriptorsList'
+-- /See:/ 'metricDescriptorsList' smart constructor.
+data MetricDescriptorsList = MetricDescriptorsList
     { _mdlProject   :: !Text
     , _mdlCount     :: !Int32
     , _mdlPayload   :: !ListMetricDescriptorsRequest
@@ -74,7 +74,7 @@ data MetricDescriptorsList' = MetricDescriptorsList'
     , _mdlPageToken :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MetricDescriptorsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'MetricDescriptorsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -87,12 +87,12 @@ data MetricDescriptorsList' = MetricDescriptorsList'
 -- * 'mdlQuery'
 --
 -- * 'mdlPageToken'
-metricDescriptorsList'
+metricDescriptorsList
     :: Text -- ^ 'mdlProject'
     -> ListMetricDescriptorsRequest -- ^ 'mdlPayload'
-    -> MetricDescriptorsList'
-metricDescriptorsList' pMdlProject_ pMdlPayload_ =
-    MetricDescriptorsList'
+    -> MetricDescriptorsList
+metricDescriptorsList pMdlProject_ pMdlPayload_ =
+    MetricDescriptorsList
     { _mdlProject = pMdlProject_
     , _mdlCount = 100
     , _mdlPayload = pMdlPayload_
@@ -102,17 +102,17 @@ metricDescriptorsList' pMdlProject_ pMdlPayload_ =
 
 -- | The project id. The value can be the numeric project ID or string-based
 -- project name.
-mdlProject :: Lens' MetricDescriptorsList' Text
+mdlProject :: Lens' MetricDescriptorsList Text
 mdlProject
   = lens _mdlProject (\ s a -> s{_mdlProject = a})
 
 -- | Maximum number of metric descriptors per page. Used for pagination. If
 -- not specified, count = 100.
-mdlCount :: Lens' MetricDescriptorsList' Int32
+mdlCount :: Lens' MetricDescriptorsList Int32
 mdlCount = lens _mdlCount (\ s a -> s{_mdlCount = a})
 
 -- | Multipart request metadata.
-mdlPayload :: Lens' MetricDescriptorsList' ListMetricDescriptorsRequest
+mdlPayload :: Lens' MetricDescriptorsList ListMetricDescriptorsRequest
 mdlPayload
   = lens _mdlPayload (\ s a -> s{_mdlPayload = a})
 
@@ -121,20 +121,20 @@ mdlPayload
 -- keywords must match for a metric to be returned. If this field is
 -- omitted, all metrics are returned. If an empty string is passed with
 -- this field, no metrics are returned.
-mdlQuery :: Lens' MetricDescriptorsList' (Maybe Text)
+mdlQuery :: Lens' MetricDescriptorsList (Maybe Text)
 mdlQuery = lens _mdlQuery (\ s a -> s{_mdlQuery = a})
 
 -- | The pagination token, which is used to page through large result sets.
 -- Set this value to the value of the nextPageToken to retrieve the next
 -- page of results.
-mdlPageToken :: Lens' MetricDescriptorsList' (Maybe Text)
+mdlPageToken :: Lens' MetricDescriptorsList (Maybe Text)
 mdlPageToken
   = lens _mdlPageToken (\ s a -> s{_mdlPageToken = a})
 
-instance GoogleRequest MetricDescriptorsList' where
-        type Rs MetricDescriptorsList' =
+instance GoogleRequest MetricDescriptorsList where
+        type Rs MetricDescriptorsList =
              ListMetricDescriptorsResponse
-        requestClient MetricDescriptorsList'{..}
+        requestClient MetricDescriptorsList{..}
           = go _mdlProject (Just _mdlCount) _mdlQuery
               _mdlPageToken
               (Just AltJSON)

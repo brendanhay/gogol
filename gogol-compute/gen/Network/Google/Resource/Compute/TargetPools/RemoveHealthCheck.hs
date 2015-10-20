@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.TargetPools.RemoveHealthCheck
       TargetPoolsRemoveHealthCheckResource
 
     -- * Creating a Request
-    , targetPoolsRemoveHealthCheck'
-    , TargetPoolsRemoveHealthCheck'
+    , targetPoolsRemoveHealthCheck
+    , TargetPoolsRemoveHealthCheck
 
     -- * Request Lenses
     , tprhcProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.removeHealthCheck@ method which the
--- 'TargetPoolsRemoveHealthCheck'' request conforms to.
+-- 'TargetPoolsRemoveHealthCheck' request conforms to.
 type TargetPoolsRemoveHealthCheckResource =
      Capture "project" Text :>
        "regions" :>
@@ -57,15 +57,15 @@ type TargetPoolsRemoveHealthCheckResource =
 
 -- | Removes health check URL from targetPool.
 --
--- /See:/ 'targetPoolsRemoveHealthCheck'' smart constructor.
-data TargetPoolsRemoveHealthCheck' = TargetPoolsRemoveHealthCheck'
+-- /See:/ 'targetPoolsRemoveHealthCheck' smart constructor.
+data TargetPoolsRemoveHealthCheck = TargetPoolsRemoveHealthCheck
     { _tprhcProject    :: !Text
     , _tprhcTargetPool :: !Text
     , _tprhcPayload    :: !TargetPoolsRemoveHealthCheckRequest
     , _tprhcRegion     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetPoolsRemoveHealthCheck'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetPoolsRemoveHealthCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,45 +76,45 @@ data TargetPoolsRemoveHealthCheck' = TargetPoolsRemoveHealthCheck'
 -- * 'tprhcPayload'
 --
 -- * 'tprhcRegion'
-targetPoolsRemoveHealthCheck'
+targetPoolsRemoveHealthCheck
     :: Text -- ^ 'tprhcProject'
     -> Text -- ^ 'tprhcTargetPool'
     -> TargetPoolsRemoveHealthCheckRequest -- ^ 'tprhcPayload'
     -> Text -- ^ 'tprhcRegion'
-    -> TargetPoolsRemoveHealthCheck'
-targetPoolsRemoveHealthCheck' pTprhcProject_ pTprhcTargetPool_ pTprhcPayload_ pTprhcRegion_ =
-    TargetPoolsRemoveHealthCheck'
+    -> TargetPoolsRemoveHealthCheck
+targetPoolsRemoveHealthCheck pTprhcProject_ pTprhcTargetPool_ pTprhcPayload_ pTprhcRegion_ =
+    TargetPoolsRemoveHealthCheck
     { _tprhcProject = pTprhcProject_
     , _tprhcTargetPool = pTprhcTargetPool_
     , _tprhcPayload = pTprhcPayload_
     , _tprhcRegion = pTprhcRegion_
     }
 
-tprhcProject :: Lens' TargetPoolsRemoveHealthCheck' Text
+tprhcProject :: Lens' TargetPoolsRemoveHealthCheck Text
 tprhcProject
   = lens _tprhcProject (\ s a -> s{_tprhcProject = a})
 
 -- | Name of the TargetPool resource to which health_check_url is to be
 -- removed.
-tprhcTargetPool :: Lens' TargetPoolsRemoveHealthCheck' Text
+tprhcTargetPool :: Lens' TargetPoolsRemoveHealthCheck Text
 tprhcTargetPool
   = lens _tprhcTargetPool
       (\ s a -> s{_tprhcTargetPool = a})
 
 -- | Multipart request metadata.
-tprhcPayload :: Lens' TargetPoolsRemoveHealthCheck' TargetPoolsRemoveHealthCheckRequest
+tprhcPayload :: Lens' TargetPoolsRemoveHealthCheck TargetPoolsRemoveHealthCheckRequest
 tprhcPayload
   = lens _tprhcPayload (\ s a -> s{_tprhcPayload = a})
 
 -- | Name of the region scoping this request.
-tprhcRegion :: Lens' TargetPoolsRemoveHealthCheck' Text
+tprhcRegion :: Lens' TargetPoolsRemoveHealthCheck Text
 tprhcRegion
   = lens _tprhcRegion (\ s a -> s{_tprhcRegion = a})
 
-instance GoogleRequest TargetPoolsRemoveHealthCheck'
+instance GoogleRequest TargetPoolsRemoveHealthCheck
          where
-        type Rs TargetPoolsRemoveHealthCheck' = Operation
-        requestClient TargetPoolsRemoveHealthCheck'{..}
+        type Rs TargetPoolsRemoveHealthCheck = Operation
+        requestClient TargetPoolsRemoveHealthCheck{..}
           = go _tprhcProject _tprhcRegion _tprhcTargetPool
               (Just AltJSON)
               _tprhcPayload

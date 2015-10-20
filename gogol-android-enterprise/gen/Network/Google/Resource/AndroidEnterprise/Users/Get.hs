@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidEnterprise.Users.Get
       UsersGetResource
 
     -- * Creating a Request
-    , usersGet'
-    , UsersGet'
+    , usersGet
+    , UsersGet
 
     -- * Request Lenses
     , ugEnterpriseId
@@ -41,7 +41,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.users.get@ method which the
--- 'UsersGet'' request conforms to.
+-- 'UsersGet' request conforms to.
 type UsersGetResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -51,42 +51,42 @@ type UsersGetResource =
 
 -- | Retrieves a user\'s details.
 --
--- /See:/ 'usersGet'' smart constructor.
-data UsersGet' = UsersGet'
+-- /See:/ 'usersGet' smart constructor.
+data UsersGet = UsersGet
     { _ugEnterpriseId :: !Text
     , _ugUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ugEnterpriseId'
 --
 -- * 'ugUserId'
-usersGet'
+usersGet
     :: Text -- ^ 'ugEnterpriseId'
     -> Text -- ^ 'ugUserId'
-    -> UsersGet'
-usersGet' pUgEnterpriseId_ pUgUserId_ =
-    UsersGet'
+    -> UsersGet
+usersGet pUgEnterpriseId_ pUgUserId_ =
+    UsersGet
     { _ugEnterpriseId = pUgEnterpriseId_
     , _ugUserId = pUgUserId_
     }
 
 -- | The ID of the enterprise.
-ugEnterpriseId :: Lens' UsersGet' Text
+ugEnterpriseId :: Lens' UsersGet Text
 ugEnterpriseId
   = lens _ugEnterpriseId
       (\ s a -> s{_ugEnterpriseId = a})
 
 -- | The ID of the user.
-ugUserId :: Lens' UsersGet' Text
+ugUserId :: Lens' UsersGet Text
 ugUserId = lens _ugUserId (\ s a -> s{_ugUserId = a})
 
-instance GoogleRequest UsersGet' where
-        type Rs UsersGet' = User
-        requestClient UsersGet'{..}
+instance GoogleRequest UsersGet where
+        type Rs UsersGet = User
+        requestClient UsersGet{..}
           = go _ugEnterpriseId _ugUserId (Just AltJSON)
               androidEnterpriseService
           where go

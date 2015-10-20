@@ -29,8 +29,8 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Delete
       LicenseAssignmentsDeleteResource
 
     -- * Creating a Request
-    , licenseAssignmentsDelete'
-    , LicenseAssignmentsDelete'
+    , licenseAssignmentsDelete
+    , LicenseAssignmentsDelete
 
     -- * Request Lenses
     , ladSKUId
@@ -42,7 +42,7 @@ import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @licensing.licenseAssignments.delete@ method which the
--- 'LicenseAssignmentsDelete'' request conforms to.
+-- 'LicenseAssignmentsDelete' request conforms to.
 type LicenseAssignmentsDeleteResource =
      Capture "productId" Text :>
        "sku" :>
@@ -53,14 +53,14 @@ type LicenseAssignmentsDeleteResource =
 
 -- | Revoke License.
 --
--- /See:/ 'licenseAssignmentsDelete'' smart constructor.
-data LicenseAssignmentsDelete' = LicenseAssignmentsDelete'
+-- /See:/ 'licenseAssignmentsDelete' smart constructor.
+data LicenseAssignmentsDelete = LicenseAssignmentsDelete
     { _ladSKUId     :: !Text
     , _ladUserId    :: !Text
     , _ladProductId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LicenseAssignmentsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'LicenseAssignmentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,35 @@ data LicenseAssignmentsDelete' = LicenseAssignmentsDelete'
 -- * 'ladUserId'
 --
 -- * 'ladProductId'
-licenseAssignmentsDelete'
+licenseAssignmentsDelete
     :: Text -- ^ 'ladSKUId'
     -> Text -- ^ 'ladUserId'
     -> Text -- ^ 'ladProductId'
-    -> LicenseAssignmentsDelete'
-licenseAssignmentsDelete' pLadSKUId_ pLadUserId_ pLadProductId_ =
-    LicenseAssignmentsDelete'
+    -> LicenseAssignmentsDelete
+licenseAssignmentsDelete pLadSKUId_ pLadUserId_ pLadProductId_ =
+    LicenseAssignmentsDelete
     { _ladSKUId = pLadSKUId_
     , _ladUserId = pLadUserId_
     , _ladProductId = pLadProductId_
     }
 
 -- | Name for sku
-ladSKUId :: Lens' LicenseAssignmentsDelete' Text
+ladSKUId :: Lens' LicenseAssignmentsDelete Text
 ladSKUId = lens _ladSKUId (\ s a -> s{_ladSKUId = a})
 
 -- | email id or unique Id of the user
-ladUserId :: Lens' LicenseAssignmentsDelete' Text
+ladUserId :: Lens' LicenseAssignmentsDelete Text
 ladUserId
   = lens _ladUserId (\ s a -> s{_ladUserId = a})
 
 -- | Name for product
-ladProductId :: Lens' LicenseAssignmentsDelete' Text
+ladProductId :: Lens' LicenseAssignmentsDelete Text
 ladProductId
   = lens _ladProductId (\ s a -> s{_ladProductId = a})
 
-instance GoogleRequest LicenseAssignmentsDelete'
-         where
-        type Rs LicenseAssignmentsDelete' = ()
-        requestClient LicenseAssignmentsDelete'{..}
+instance GoogleRequest LicenseAssignmentsDelete where
+        type Rs LicenseAssignmentsDelete = ()
+        requestClient LicenseAssignmentsDelete{..}
           = go _ladProductId _ladSKUId _ladUserId
               (Just AltJSON)
               appsLicensingService

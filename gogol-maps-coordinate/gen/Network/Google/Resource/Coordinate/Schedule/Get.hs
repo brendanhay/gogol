@@ -29,8 +29,8 @@ module Network.Google.Resource.Coordinate.Schedule.Get
       ScheduleGetResource
 
     -- * Creating a Request
-    , scheduleGet'
-    , ScheduleGet'
+    , scheduleGet
+    , ScheduleGet
 
     -- * Request Lenses
     , sgJobId
@@ -41,7 +41,7 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @coordinate.schedule.get@ method which the
--- 'ScheduleGet'' request conforms to.
+-- 'ScheduleGet' request conforms to.
 type ScheduleGetResource =
      "teams" :>
        Capture "teamId" Text :>
@@ -52,40 +52,40 @@ type ScheduleGetResource =
 
 -- | Retrieves the schedule for a job.
 --
--- /See:/ 'scheduleGet'' smart constructor.
-data ScheduleGet' = ScheduleGet'
+-- /See:/ 'scheduleGet' smart constructor.
+data ScheduleGet = ScheduleGet
     { _sgJobId  :: !Word64
     , _sgTeamId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ScheduleGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ScheduleGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sgJobId'
 --
 -- * 'sgTeamId'
-scheduleGet'
+scheduleGet
     :: Word64 -- ^ 'sgJobId'
     -> Text -- ^ 'sgTeamId'
-    -> ScheduleGet'
-scheduleGet' pSgJobId_ pSgTeamId_ =
-    ScheduleGet'
+    -> ScheduleGet
+scheduleGet pSgJobId_ pSgTeamId_ =
+    ScheduleGet
     { _sgJobId = pSgJobId_
     , _sgTeamId = pSgTeamId_
     }
 
 -- | Job number
-sgJobId :: Lens' ScheduleGet' Word64
+sgJobId :: Lens' ScheduleGet Word64
 sgJobId = lens _sgJobId (\ s a -> s{_sgJobId = a})
 
 -- | Team ID
-sgTeamId :: Lens' ScheduleGet' Text
+sgTeamId :: Lens' ScheduleGet Text
 sgTeamId = lens _sgTeamId (\ s a -> s{_sgTeamId = a})
 
-instance GoogleRequest ScheduleGet' where
-        type Rs ScheduleGet' = Schedule
-        requestClient ScheduleGet'{..}
+instance GoogleRequest ScheduleGet where
+        type Rs ScheduleGet = Schedule
+        requestClient ScheduleGet{..}
           = go _sgTeamId _sgJobId (Just AltJSON)
               mapsCoordinateService
           where go

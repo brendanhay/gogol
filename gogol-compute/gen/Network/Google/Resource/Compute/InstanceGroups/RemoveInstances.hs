@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.InstanceGroups.RemoveInstances
       InstanceGroupsRemoveInstancesResource
 
     -- * Creating a Request
-    , instanceGroupsRemoveInstances'
-    , InstanceGroupsRemoveInstances'
+    , instanceGroupsRemoveInstances
+    , InstanceGroupsRemoveInstances
 
     -- * Request Lenses
     , igriProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroups.removeInstances@ method which the
--- 'InstanceGroupsRemoveInstances'' request conforms to.
+-- 'InstanceGroupsRemoveInstances' request conforms to.
 type InstanceGroupsRemoveInstancesResource =
      Capture "project" Text :>
        "zones" :>
@@ -59,15 +59,15 @@ type InstanceGroupsRemoveInstancesResource =
 -- | Removes one or more instances from the specified instance group, but
 -- does not delete those instances.
 --
--- /See:/ 'instanceGroupsRemoveInstances'' smart constructor.
-data InstanceGroupsRemoveInstances' = InstanceGroupsRemoveInstances'
+-- /See:/ 'instanceGroupsRemoveInstances' smart constructor.
+data InstanceGroupsRemoveInstances = InstanceGroupsRemoveInstances
     { _igriProject       :: !Text
     , _igriZone          :: !Text
     , _igriPayload       :: !InstanceGroupsRemoveInstancesRequest
     , _igriInstanceGroup :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupsRemoveInstances'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupsRemoveInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -78,14 +78,14 @@ data InstanceGroupsRemoveInstances' = InstanceGroupsRemoveInstances'
 -- * 'igriPayload'
 --
 -- * 'igriInstanceGroup'
-instanceGroupsRemoveInstances'
+instanceGroupsRemoveInstances
     :: Text -- ^ 'igriProject'
     -> Text -- ^ 'igriZone'
     -> InstanceGroupsRemoveInstancesRequest -- ^ 'igriPayload'
     -> Text -- ^ 'igriInstanceGroup'
-    -> InstanceGroupsRemoveInstances'
-instanceGroupsRemoveInstances' pIgriProject_ pIgriZone_ pIgriPayload_ pIgriInstanceGroup_ =
-    InstanceGroupsRemoveInstances'
+    -> InstanceGroupsRemoveInstances
+instanceGroupsRemoveInstances pIgriProject_ pIgriZone_ pIgriPayload_ pIgriInstanceGroup_ =
+    InstanceGroupsRemoveInstances
     { _igriProject = pIgriProject_
     , _igriZone = pIgriZone_
     , _igriPayload = pIgriPayload_
@@ -93,30 +93,30 @@ instanceGroupsRemoveInstances' pIgriProject_ pIgriZone_ pIgriPayload_ pIgriInsta
     }
 
 -- | The project ID for this request.
-igriProject :: Lens' InstanceGroupsRemoveInstances' Text
+igriProject :: Lens' InstanceGroupsRemoveInstances Text
 igriProject
   = lens _igriProject (\ s a -> s{_igriProject = a})
 
 -- | The name of the zone where the instance group is located.
-igriZone :: Lens' InstanceGroupsRemoveInstances' Text
+igriZone :: Lens' InstanceGroupsRemoveInstances Text
 igriZone = lens _igriZone (\ s a -> s{_igriZone = a})
 
 -- | Multipart request metadata.
-igriPayload :: Lens' InstanceGroupsRemoveInstances' InstanceGroupsRemoveInstancesRequest
+igriPayload :: Lens' InstanceGroupsRemoveInstances InstanceGroupsRemoveInstancesRequest
 igriPayload
   = lens _igriPayload (\ s a -> s{_igriPayload = a})
 
 -- | The name of the instance group where the specified instances will be
 -- removed.
-igriInstanceGroup :: Lens' InstanceGroupsRemoveInstances' Text
+igriInstanceGroup :: Lens' InstanceGroupsRemoveInstances Text
 igriInstanceGroup
   = lens _igriInstanceGroup
       (\ s a -> s{_igriInstanceGroup = a})
 
-instance GoogleRequest InstanceGroupsRemoveInstances'
+instance GoogleRequest InstanceGroupsRemoveInstances
          where
-        type Rs InstanceGroupsRemoveInstances' = Operation
-        requestClient InstanceGroupsRemoveInstances'{..}
+        type Rs InstanceGroupsRemoveInstances = Operation
+        requestClient InstanceGroupsRemoveInstances{..}
           = go _igriProject _igriZone _igriInstanceGroup
               (Just AltJSON)
               _igriPayload

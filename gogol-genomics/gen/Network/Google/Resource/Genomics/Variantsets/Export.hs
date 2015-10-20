@@ -29,8 +29,8 @@ module Network.Google.Resource.Genomics.Variantsets.Export
       VariantsetsExportResource
 
     -- * Creating a Request
-    , variantsetsExport'
-    , VariantsetsExport'
+    , variantsetsExport
+    , VariantsetsExport
 
     -- * Request Lenses
     , veXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.variantsets.export@ method which the
--- 'VariantsetsExport'' request conforms to.
+-- 'VariantsetsExport' request conforms to.
 type VariantsetsExportResource =
      "v1" :>
        "variantsets" :>
@@ -66,8 +66,8 @@ type VariantsetsExportResource =
 
 -- | Exports variant set data to an external destination.
 --
--- /See:/ 'variantsetsExport'' smart constructor.
-data VariantsetsExport' = VariantsetsExport'
+-- /See:/ 'variantsetsExport' smart constructor.
+data VariantsetsExport = VariantsetsExport
     { _veXgafv          :: !(Maybe Text)
     , _veUploadProtocol :: !(Maybe Text)
     , _vePp             :: !Bool
@@ -79,7 +79,7 @@ data VariantsetsExport' = VariantsetsExport'
     , _veCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VariantsetsExport'' with the minimum fields required to make a request.
+-- | Creates a value of 'VariantsetsExport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -100,12 +100,12 @@ data VariantsetsExport' = VariantsetsExport'
 -- * 'veBearerToken'
 --
 -- * 'veCallback'
-variantsetsExport'
+variantsetsExport
     :: Text -- ^ 'veVariantSetId'
     -> ExportVariantSetRequest -- ^ 'vePayload'
-    -> VariantsetsExport'
-variantsetsExport' pVeVariantSetId_ pVePayload_ =
-    VariantsetsExport'
+    -> VariantsetsExport
+variantsetsExport pVeVariantSetId_ pVePayload_ =
+    VariantsetsExport
     { _veXgafv = Nothing
     , _veUploadProtocol = Nothing
     , _vePp = True
@@ -118,57 +118,57 @@ variantsetsExport' pVeVariantSetId_ pVePayload_ =
     }
 
 -- | V1 error format.
-veXgafv :: Lens' VariantsetsExport' (Maybe Text)
+veXgafv :: Lens' VariantsetsExport (Maybe Text)
 veXgafv = lens _veXgafv (\ s a -> s{_veXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-veUploadProtocol :: Lens' VariantsetsExport' (Maybe Text)
+veUploadProtocol :: Lens' VariantsetsExport (Maybe Text)
 veUploadProtocol
   = lens _veUploadProtocol
       (\ s a -> s{_veUploadProtocol = a})
 
 -- | Pretty-print response.
-vePp :: Lens' VariantsetsExport' Bool
+vePp :: Lens' VariantsetsExport Bool
 vePp = lens _vePp (\ s a -> s{_vePp = a})
 
 -- | Required. The ID of the variant set that contains variant data which
 -- should be exported. The caller must have READ access to this variant
 -- set.
-veVariantSetId :: Lens' VariantsetsExport' Text
+veVariantSetId :: Lens' VariantsetsExport Text
 veVariantSetId
   = lens _veVariantSetId
       (\ s a -> s{_veVariantSetId = a})
 
 -- | OAuth access token.
-veAccessToken :: Lens' VariantsetsExport' (Maybe Text)
+veAccessToken :: Lens' VariantsetsExport (Maybe Text)
 veAccessToken
   = lens _veAccessToken
       (\ s a -> s{_veAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-veUploadType :: Lens' VariantsetsExport' (Maybe Text)
+veUploadType :: Lens' VariantsetsExport (Maybe Text)
 veUploadType
   = lens _veUploadType (\ s a -> s{_veUploadType = a})
 
 -- | Multipart request metadata.
-vePayload :: Lens' VariantsetsExport' ExportVariantSetRequest
+vePayload :: Lens' VariantsetsExport ExportVariantSetRequest
 vePayload
   = lens _vePayload (\ s a -> s{_vePayload = a})
 
 -- | OAuth bearer token.
-veBearerToken :: Lens' VariantsetsExport' (Maybe Text)
+veBearerToken :: Lens' VariantsetsExport (Maybe Text)
 veBearerToken
   = lens _veBearerToken
       (\ s a -> s{_veBearerToken = a})
 
 -- | JSONP
-veCallback :: Lens' VariantsetsExport' (Maybe Text)
+veCallback :: Lens' VariantsetsExport (Maybe Text)
 veCallback
   = lens _veCallback (\ s a -> s{_veCallback = a})
 
-instance GoogleRequest VariantsetsExport' where
-        type Rs VariantsetsExport' = Operation
-        requestClient VariantsetsExport'{..}
+instance GoogleRequest VariantsetsExport where
+        type Rs VariantsetsExport = Operation
+        requestClient VariantsetsExport{..}
           = go _veVariantSetId _veXgafv _veUploadProtocol
               (Just _vePp)
               _veAccessToken

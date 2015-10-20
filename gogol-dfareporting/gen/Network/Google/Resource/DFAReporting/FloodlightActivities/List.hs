@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.List
       FloodlightActivitiesListResource
 
     -- * Creating a Request
-    , floodlightActivitiesList'
-    , FloodlightActivitiesList'
+    , floodlightActivitiesList
+    , FloodlightActivitiesList
 
     -- * Request Lenses
     , falTagString
@@ -53,7 +53,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightActivities.list@ method which the
--- 'FloodlightActivitiesList'' request conforms to.
+-- 'FloodlightActivitiesList' request conforms to.
 type FloodlightActivitiesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -83,8 +83,8 @@ type FloodlightActivitiesListResource =
 
 -- | Retrieves a list of floodlight activities, possibly filtered.
 --
--- /See:/ 'floodlightActivitiesList'' smart constructor.
-data FloodlightActivitiesList' = FloodlightActivitiesList'
+-- /See:/ 'floodlightActivitiesList' smart constructor.
+data FloodlightActivitiesList = FloodlightActivitiesList
     { _falTagString                        :: !(Maybe Text)
     , _falFloodlightActivityGroupTagString :: !(Maybe Text)
     , _falFloodlightConfigurationId        :: !(Maybe Int64)
@@ -101,7 +101,7 @@ data FloodlightActivitiesList' = FloodlightActivitiesList'
     , _falMaxResults                       :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FloodlightActivitiesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'FloodlightActivitiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -132,11 +132,11 @@ data FloodlightActivitiesList' = FloodlightActivitiesList'
 -- * 'falSortField'
 --
 -- * 'falMaxResults'
-floodlightActivitiesList'
+floodlightActivitiesList
     :: Int64 -- ^ 'falProFileId'
-    -> FloodlightActivitiesList'
-floodlightActivitiesList' pFalProFileId_ =
-    FloodlightActivitiesList'
+    -> FloodlightActivitiesList
+floodlightActivitiesList pFalProFileId_ =
+    FloodlightActivitiesList
     { _falTagString = Nothing
     , _falFloodlightActivityGroupTagString = Nothing
     , _falFloodlightConfigurationId = Nothing
@@ -154,13 +154,13 @@ floodlightActivitiesList' pFalProFileId_ =
     }
 
 -- | Select only floodlight activities with the specified tag string.
-falTagString :: Lens' FloodlightActivitiesList' (Maybe Text)
+falTagString :: Lens' FloodlightActivitiesList (Maybe Text)
 falTagString
   = lens _falTagString (\ s a -> s{_falTagString = a})
 
 -- | Select only floodlight activities with the specified floodlight activity
 -- group tag string.
-falFloodlightActivityGroupTagString :: Lens' FloodlightActivitiesList' (Maybe Text)
+falFloodlightActivityGroupTagString :: Lens' FloodlightActivitiesList (Maybe Text)
 falFloodlightActivityGroupTagString
   = lens _falFloodlightActivityGroupTagString
       (\ s a ->
@@ -169,7 +169,7 @@ falFloodlightActivityGroupTagString
 -- | Select only floodlight activities for the specified floodlight
 -- configuration ID. Must specify either ids, advertiserId, or
 -- floodlightConfigurationId for a non-empty result.
-falFloodlightConfigurationId :: Lens' FloodlightActivitiesList' (Maybe Int64)
+falFloodlightConfigurationId :: Lens' FloodlightActivitiesList (Maybe Int64)
 falFloodlightConfigurationId
   = lens _falFloodlightConfigurationId
       (\ s a -> s{_falFloodlightConfigurationId = a})
@@ -177,7 +177,7 @@ falFloodlightConfigurationId
 -- | Select only floodlight activities for the specified advertiser ID. Must
 -- specify either ids, advertiserId, or floodlightConfigurationId for a
 -- non-empty result.
-falAdvertiserId :: Lens' FloodlightActivitiesList' (Maybe Int64)
+falAdvertiserId :: Lens' FloodlightActivitiesList (Maybe Int64)
 falAdvertiserId
   = lens _falAdvertiserId
       (\ s a -> s{_falAdvertiserId = a})
@@ -190,7 +190,7 @@ falAdvertiserId
 -- For example, a search string of \"floodlightactivity\" will match
 -- objects with name \"my floodlightactivity activity\",
 -- \"floodlightactivity 2015\", or simply \"floodlightactivity\".
-falSearchString :: Lens' FloodlightActivitiesList' (Maybe Text)
+falSearchString :: Lens' FloodlightActivitiesList (Maybe Text)
 falSearchString
   = lens _falSearchString
       (\ s a -> s{_falSearchString = a})
@@ -198,19 +198,19 @@ falSearchString
 -- | Select only floodlight activities with the specified IDs. Must specify
 -- either ids, advertiserId, or floodlightConfigurationId for a non-empty
 -- result.
-falIds :: Lens' FloodlightActivitiesList' [Int64]
+falIds :: Lens' FloodlightActivitiesList [Int64]
 falIds
   = lens _falIds (\ s a -> s{_falIds = a}) . _Default .
       _Coerce
 
 -- | User profile ID associated with this request.
-falProFileId :: Lens' FloodlightActivitiesList' Int64
+falProFileId :: Lens' FloodlightActivitiesList Int64
 falProFileId
   = lens _falProFileId (\ s a -> s{_falProFileId = a})
 
 -- | Select only floodlight activities with the specified floodlight activity
 -- group IDs.
-falFloodlightActivityGroupIds :: Lens' FloodlightActivitiesList' [Int64]
+falFloodlightActivityGroupIds :: Lens' FloodlightActivitiesList [Int64]
 falFloodlightActivityGroupIds
   = lens _falFloodlightActivityGroupIds
       (\ s a -> s{_falFloodlightActivityGroupIds = a})
@@ -218,45 +218,44 @@ falFloodlightActivityGroupIds
       . _Coerce
 
 -- | Order of sorted results, default is ASCENDING.
-falSortOrder :: Lens' FloodlightActivitiesList' (Maybe FloodlightActivitiesListSortOrder)
+falSortOrder :: Lens' FloodlightActivitiesList (Maybe FloodlightActivitiesListSortOrder)
 falSortOrder
   = lens _falSortOrder (\ s a -> s{_falSortOrder = a})
 
 -- | Select only floodlight activities with the specified floodlight activity
 -- group type.
-falFloodlightActivityGroupType :: Lens' FloodlightActivitiesList' (Maybe FloodlightActivitiesListFloodlightActivityGroupType)
+falFloodlightActivityGroupType :: Lens' FloodlightActivitiesList (Maybe FloodlightActivitiesListFloodlightActivityGroupType)
 falFloodlightActivityGroupType
   = lens _falFloodlightActivityGroupType
       (\ s a -> s{_falFloodlightActivityGroupType = a})
 
 -- | Select only floodlight activities with the specified floodlight activity
 -- group name.
-falFloodlightActivityGroupName :: Lens' FloodlightActivitiesList' (Maybe Text)
+falFloodlightActivityGroupName :: Lens' FloodlightActivitiesList (Maybe Text)
 falFloodlightActivityGroupName
   = lens _falFloodlightActivityGroupName
       (\ s a -> s{_falFloodlightActivityGroupName = a})
 
 -- | Value of the nextPageToken from the previous result page.
-falPageToken :: Lens' FloodlightActivitiesList' (Maybe Text)
+falPageToken :: Lens' FloodlightActivitiesList (Maybe Text)
 falPageToken
   = lens _falPageToken (\ s a -> s{_falPageToken = a})
 
 -- | Field by which to sort the list.
-falSortField :: Lens' FloodlightActivitiesList' (Maybe FloodlightActivitiesListSortField)
+falSortField :: Lens' FloodlightActivitiesList (Maybe FloodlightActivitiesListSortField)
 falSortField
   = lens _falSortField (\ s a -> s{_falSortField = a})
 
 -- | Maximum number of results to return.
-falMaxResults :: Lens' FloodlightActivitiesList' (Maybe Int32)
+falMaxResults :: Lens' FloodlightActivitiesList (Maybe Int32)
 falMaxResults
   = lens _falMaxResults
       (\ s a -> s{_falMaxResults = a})
 
-instance GoogleRequest FloodlightActivitiesList'
-         where
-        type Rs FloodlightActivitiesList' =
+instance GoogleRequest FloodlightActivitiesList where
+        type Rs FloodlightActivitiesList =
              FloodlightActivitiesListResponse
-        requestClient FloodlightActivitiesList'{..}
+        requestClient FloodlightActivitiesList{..}
           = go _falProFileId _falTagString
               _falFloodlightActivityGroupTagString
               _falFloodlightConfigurationId

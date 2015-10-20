@@ -29,8 +29,8 @@ module Network.Google.Resource.DataTransfer.Transfers.Insert
       TransfersInsertResource
 
     -- * Creating a Request
-    , transfersInsert'
-    , TransfersInsert'
+    , transfersInsert
+    , TransfersInsert
 
     -- * Request Lenses
     , tiPayload
@@ -40,7 +40,7 @@ import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @datatransfer.transfers.insert@ method which the
--- 'TransfersInsert'' request conforms to.
+-- 'TransfersInsert' request conforms to.
 type TransfersInsertResource =
      "transfers" :>
        QueryParam "alt" AltJSON :>
@@ -49,32 +49,32 @@ type TransfersInsertResource =
 
 -- | Inserts a data transfer request.
 --
--- /See:/ 'transfersInsert'' smart constructor.
-newtype TransfersInsert' = TransfersInsert'
+-- /See:/ 'transfersInsert' smart constructor.
+newtype TransfersInsert = TransfersInsert
     { _tiPayload :: DataTransfer
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TransfersInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'TransfersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tiPayload'
-transfersInsert'
+transfersInsert
     :: DataTransfer -- ^ 'tiPayload'
-    -> TransfersInsert'
-transfersInsert' pTiPayload_ =
-    TransfersInsert'
+    -> TransfersInsert
+transfersInsert pTiPayload_ =
+    TransfersInsert
     { _tiPayload = pTiPayload_
     }
 
 -- | Multipart request metadata.
-tiPayload :: Lens' TransfersInsert' DataTransfer
+tiPayload :: Lens' TransfersInsert DataTransfer
 tiPayload
   = lens _tiPayload (\ s a -> s{_tiPayload = a})
 
-instance GoogleRequest TransfersInsert' where
-        type Rs TransfersInsert' = DataTransfer
-        requestClient TransfersInsert'{..}
+instance GoogleRequest TransfersInsert where
+        type Rs TransfersInsert = DataTransfer
+        requestClient TransfersInsert{..}
           = go (Just AltJSON) _tiPayload dataTransferService
           where go
                   = buildClient

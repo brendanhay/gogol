@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
       ManagementAccountUserLinksUpdateResource
 
     -- * Creating a Request
-    , managementAccountUserLinksUpdate'
-    , ManagementAccountUserLinksUpdate'
+    , managementAccountUserLinksUpdate
+    , ManagementAccountUserLinksUpdate
 
     -- * Request Lenses
     , mauluPayload
@@ -42,7 +42,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.accountUserLinks.update@ method which the
--- 'ManagementAccountUserLinksUpdate'' request conforms to.
+-- 'ManagementAccountUserLinksUpdate' request conforms to.
 type ManagementAccountUserLinksUpdateResource =
      "management" :>
        "accounts" :>
@@ -55,14 +55,14 @@ type ManagementAccountUserLinksUpdateResource =
 
 -- | Updates permissions for an existing user on the given account.
 --
--- /See:/ 'managementAccountUserLinksUpdate'' smart constructor.
-data ManagementAccountUserLinksUpdate' = ManagementAccountUserLinksUpdate'
+-- /See:/ 'managementAccountUserLinksUpdate' smart constructor.
+data ManagementAccountUserLinksUpdate = ManagementAccountUserLinksUpdate
     { _mauluPayload   :: !EntityUserLink
     , _mauluAccountId :: !Text
     , _mauluLinkId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementAccountUserLinksUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementAccountUserLinksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,39 +71,39 @@ data ManagementAccountUserLinksUpdate' = ManagementAccountUserLinksUpdate'
 -- * 'mauluAccountId'
 --
 -- * 'mauluLinkId'
-managementAccountUserLinksUpdate'
+managementAccountUserLinksUpdate
     :: EntityUserLink -- ^ 'mauluPayload'
     -> Text -- ^ 'mauluAccountId'
     -> Text -- ^ 'mauluLinkId'
-    -> ManagementAccountUserLinksUpdate'
-managementAccountUserLinksUpdate' pMauluPayload_ pMauluAccountId_ pMauluLinkId_ =
-    ManagementAccountUserLinksUpdate'
+    -> ManagementAccountUserLinksUpdate
+managementAccountUserLinksUpdate pMauluPayload_ pMauluAccountId_ pMauluLinkId_ =
+    ManagementAccountUserLinksUpdate
     { _mauluPayload = pMauluPayload_
     , _mauluAccountId = pMauluAccountId_
     , _mauluLinkId = pMauluLinkId_
     }
 
 -- | Multipart request metadata.
-mauluPayload :: Lens' ManagementAccountUserLinksUpdate' EntityUserLink
+mauluPayload :: Lens' ManagementAccountUserLinksUpdate EntityUserLink
 mauluPayload
   = lens _mauluPayload (\ s a -> s{_mauluPayload = a})
 
 -- | Account ID to update the account-user link for.
-mauluAccountId :: Lens' ManagementAccountUserLinksUpdate' Text
+mauluAccountId :: Lens' ManagementAccountUserLinksUpdate Text
 mauluAccountId
   = lens _mauluAccountId
       (\ s a -> s{_mauluAccountId = a})
 
 -- | Link ID to update the account-user link for.
-mauluLinkId :: Lens' ManagementAccountUserLinksUpdate' Text
+mauluLinkId :: Lens' ManagementAccountUserLinksUpdate Text
 mauluLinkId
   = lens _mauluLinkId (\ s a -> s{_mauluLinkId = a})
 
 instance GoogleRequest
-         ManagementAccountUserLinksUpdate' where
-        type Rs ManagementAccountUserLinksUpdate' =
+         ManagementAccountUserLinksUpdate where
+        type Rs ManagementAccountUserLinksUpdate =
              EntityUserLink
-        requestClient ManagementAccountUserLinksUpdate'{..}
+        requestClient ManagementAccountUserLinksUpdate{..}
           = go _mauluAccountId _mauluLinkId (Just AltJSON)
               _mauluPayload
               analyticsService

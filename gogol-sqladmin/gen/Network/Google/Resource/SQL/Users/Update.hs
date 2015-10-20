@@ -29,8 +29,8 @@ module Network.Google.Resource.SQL.Users.Update
       UsersUpdateResource
 
     -- * Creating a Request
-    , usersUpdate'
-    , UsersUpdate'
+    , usersUpdate
+    , UsersUpdate
 
     -- * Request Lenses
     , uuProject
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.users.update@ method which the
--- 'UsersUpdate'' request conforms to.
+-- 'UsersUpdate' request conforms to.
 type UsersUpdateResource =
      "projects" :>
        Capture "project" Text :>
@@ -58,8 +58,8 @@ type UsersUpdateResource =
 
 -- | Updates an existing user in a Cloud SQL instance.
 --
--- /See:/ 'usersUpdate'' smart constructor.
-data UsersUpdate' = UsersUpdate'
+-- /See:/ 'usersUpdate' smart constructor.
+data UsersUpdate = UsersUpdate
     { _uuProject  :: !Text
     , _uuPayload  :: !User
     , _uuName     :: !Text
@@ -67,7 +67,7 @@ data UsersUpdate' = UsersUpdate'
     , _uuInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,15 +80,15 @@ data UsersUpdate' = UsersUpdate'
 -- * 'uuHost'
 --
 -- * 'uuInstance'
-usersUpdate'
+usersUpdate
     :: Text -- ^ 'uuProject'
     -> User -- ^ 'uuPayload'
     -> Text -- ^ 'uuName'
     -> Text -- ^ 'uuHost'
     -> Text -- ^ 'uuInstance'
-    -> UsersUpdate'
-usersUpdate' pUuProject_ pUuPayload_ pUuName_ pUuHost_ pUuInstance_ =
-    UsersUpdate'
+    -> UsersUpdate
+usersUpdate pUuProject_ pUuPayload_ pUuName_ pUuHost_ pUuInstance_ =
+    UsersUpdate
     { _uuProject = pUuProject_
     , _uuPayload = pUuPayload_
     , _uuName = pUuName_
@@ -97,31 +97,31 @@ usersUpdate' pUuProject_ pUuPayload_ pUuName_ pUuHost_ pUuInstance_ =
     }
 
 -- | Project ID of the project that contains the instance.
-uuProject :: Lens' UsersUpdate' Text
+uuProject :: Lens' UsersUpdate Text
 uuProject
   = lens _uuProject (\ s a -> s{_uuProject = a})
 
 -- | Multipart request metadata.
-uuPayload :: Lens' UsersUpdate' User
+uuPayload :: Lens' UsersUpdate User
 uuPayload
   = lens _uuPayload (\ s a -> s{_uuPayload = a})
 
 -- | Name of the user in the instance.
-uuName :: Lens' UsersUpdate' Text
+uuName :: Lens' UsersUpdate Text
 uuName = lens _uuName (\ s a -> s{_uuName = a})
 
 -- | Host of the user in the instance.
-uuHost :: Lens' UsersUpdate' Text
+uuHost :: Lens' UsersUpdate Text
 uuHost = lens _uuHost (\ s a -> s{_uuHost = a})
 
 -- | Database instance ID. This does not include the project ID.
-uuInstance :: Lens' UsersUpdate' Text
+uuInstance :: Lens' UsersUpdate Text
 uuInstance
   = lens _uuInstance (\ s a -> s{_uuInstance = a})
 
-instance GoogleRequest UsersUpdate' where
-        type Rs UsersUpdate' = Operation
-        requestClient UsersUpdate'{..}
+instance GoogleRequest UsersUpdate where
+        type Rs UsersUpdate = Operation
+        requestClient UsersUpdate{..}
           = go _uuProject _uuInstance (Just _uuHost)
               (Just _uuName)
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Routes.Delete
       RoutesDeleteResource
 
     -- * Creating a Request
-    , routesDelete'
-    , RoutesDelete'
+    , routesDelete
+    , RoutesDelete
 
     -- * Request Lenses
     , rdProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.routes.delete@ method which the
--- 'RoutesDelete'' request conforms to.
+-- 'RoutesDelete' request conforms to.
 type RoutesDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,41 +51,41 @@ type RoutesDeleteResource =
 
 -- | Deletes the specified route resource.
 --
--- /See:/ 'routesDelete'' smart constructor.
-data RoutesDelete' = RoutesDelete'
+-- /See:/ 'routesDelete' smart constructor.
+data RoutesDelete = RoutesDelete
     { _rdProject :: !Text
     , _rdRoute   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoutesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'RoutesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rdProject'
 --
 -- * 'rdRoute'
-routesDelete'
+routesDelete
     :: Text -- ^ 'rdProject'
     -> Text -- ^ 'rdRoute'
-    -> RoutesDelete'
-routesDelete' pRdProject_ pRdRoute_ =
-    RoutesDelete'
+    -> RoutesDelete
+routesDelete pRdProject_ pRdRoute_ =
+    RoutesDelete
     { _rdProject = pRdProject_
     , _rdRoute = pRdRoute_
     }
 
 -- | Name of the project scoping this request.
-rdProject :: Lens' RoutesDelete' Text
+rdProject :: Lens' RoutesDelete Text
 rdProject
   = lens _rdProject (\ s a -> s{_rdProject = a})
 
 -- | Name of the route resource to delete.
-rdRoute :: Lens' RoutesDelete' Text
+rdRoute :: Lens' RoutesDelete Text
 rdRoute = lens _rdRoute (\ s a -> s{_rdRoute = a})
 
-instance GoogleRequest RoutesDelete' where
-        type Rs RoutesDelete' = Operation
-        requestClient RoutesDelete'{..}
+instance GoogleRequest RoutesDelete where
+        type Rs RoutesDelete = Operation
+        requestClient RoutesDelete{..}
           = go _rdProject _rdRoute (Just AltJSON)
               computeService
           where go

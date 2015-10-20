@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.AccountUserProFiles.Get
       AccountUserProFilesGetResource
 
     -- * Creating a Request
-    , accountUserProFilesGet'
-    , AccountUserProFilesGet'
+    , accountUserProFilesGet
+    , AccountUserProFilesGet
 
     -- * Request Lenses
     , aupfgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accountUserProfiles.get@ method which the
--- 'AccountUserProFilesGet'' request conforms to.
+-- 'AccountUserProFilesGet' request conforms to.
 type AccountUserProFilesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,42 +52,42 @@ type AccountUserProFilesGetResource =
 
 -- | Gets one account user profile by ID.
 --
--- /See:/ 'accountUserProFilesGet'' smart constructor.
-data AccountUserProFilesGet' = AccountUserProFilesGet'
+-- /See:/ 'accountUserProFilesGet' smart constructor.
+data AccountUserProFilesGet = AccountUserProFilesGet
     { _aupfgProFileId :: !Int64
     , _aupfgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountUserProFilesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountUserProFilesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aupfgProFileId'
 --
 -- * 'aupfgId'
-accountUserProFilesGet'
+accountUserProFilesGet
     :: Int64 -- ^ 'aupfgProFileId'
     -> Int64 -- ^ 'aupfgId'
-    -> AccountUserProFilesGet'
-accountUserProFilesGet' pAupfgProFileId_ pAupfgId_ =
-    AccountUserProFilesGet'
+    -> AccountUserProFilesGet
+accountUserProFilesGet pAupfgProFileId_ pAupfgId_ =
+    AccountUserProFilesGet
     { _aupfgProFileId = pAupfgProFileId_
     , _aupfgId = pAupfgId_
     }
 
 -- | User profile ID associated with this request.
-aupfgProFileId :: Lens' AccountUserProFilesGet' Int64
+aupfgProFileId :: Lens' AccountUserProFilesGet Int64
 aupfgProFileId
   = lens _aupfgProFileId
       (\ s a -> s{_aupfgProFileId = a})
 
 -- | User profile ID.
-aupfgId :: Lens' AccountUserProFilesGet' Int64
+aupfgId :: Lens' AccountUserProFilesGet Int64
 aupfgId = lens _aupfgId (\ s a -> s{_aupfgId = a})
 
-instance GoogleRequest AccountUserProFilesGet' where
-        type Rs AccountUserProFilesGet' = AccountUserProFile
-        requestClient AccountUserProFilesGet'{..}
+instance GoogleRequest AccountUserProFilesGet where
+        type Rs AccountUserProFilesGet = AccountUserProFile
+        requestClient AccountUserProFilesGet{..}
           = go _aupfgProFileId _aupfgId (Just AltJSON)
               dFAReportingService
           where go

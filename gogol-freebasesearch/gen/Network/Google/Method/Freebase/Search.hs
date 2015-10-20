@@ -29,8 +29,8 @@ module Network.Google.Method.Freebase.Search
       SearchMethod
 
     -- * Creating a Request
-    , search'
-    , Search'
+    , search
+    , Search
 
     -- * Request Lenses
     , sWithout
@@ -62,7 +62,7 @@ import           Network.Google.FreebaseSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @freebase.search@ method which the
--- 'Search'' request conforms to.
+-- 'Search' request conforms to.
 type SearchMethod =
      "search" :>
        QueryParams "without" Text :>
@@ -131,8 +131,8 @@ type SearchMethod =
 
 -- | Search Freebase open data.
 --
--- /See:/ 'search'' smart constructor.
-data Search' = Search'
+-- /See:/ 'search' smart constructor.
+data Search = Search
     { _sWithout   :: !(Maybe [Text])
     , _sCursor    :: !(Maybe Int32)
     , _sWith      :: !(Maybe [Text])
@@ -158,7 +158,7 @@ data Search' = Search'
     , _sCallback  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Search'' with the minimum fields required to make a request.
+-- | Creates a value of 'Search' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -207,10 +207,10 @@ data Search' = Search'
 -- * 'sPrefixed'
 --
 -- * 'sCallback'
-search'
-    :: Search'
-search' =
-    Search'
+search
+    :: Search
+search =
+    Search
     { _sWithout = Nothing
     , _sCursor = Nothing
     , _sWith = Nothing
@@ -237,120 +237,120 @@ search' =
     }
 
 -- | A rule to not match against.
-sWithout :: Lens' Search' [Text]
+sWithout :: Lens' Search [Text]
 sWithout
   = lens _sWithout (\ s a -> s{_sWithout = a}) .
       _Default
       . _Coerce
 
 -- | The cursor value to use for the next page of results.
-sCursor :: Lens' Search' (Maybe Int32)
+sCursor :: Lens' Search (Maybe Int32)
 sCursor = lens _sCursor (\ s a -> s{_sCursor = a})
 
 -- | A rule to match against.
-sWith :: Lens' Search' [Text]
+sWith :: Lens' Search [Text]
 sWith
   = lens _sWith (\ s a -> s{_sWith = a}) . _Default .
       _Coerce
 
 -- | Restrict to topics with this Freebase domain id.
-sDomain :: Lens' Search' [Text]
+sDomain :: Lens' Search [Text]
 sDomain
   = lens _sDomain (\ s a -> s{_sDomain = a}) . _Default
       . _Coerce
 
 -- | Structural format of the json response.
-sFormat :: Lens' Search' FreebaseSearchFormat
+sFormat :: Lens' Search FreebaseSearchFormat
 sFormat = lens _sFormat (\ s a -> s{_sFormat = a})
 
 -- | The keyword to request help on.
-sHelp :: Lens' Search' (Maybe FreebaseSearchHelp)
+sHelp :: Lens' Search (Maybe FreebaseSearchHelp)
 sHelp = lens _sHelp (\ s a -> s{_sHelp = a})
 
 -- | The code of the language to run the query with. Default is \'en\'.
-sLang :: Lens' Search' [Text]
+sLang :: Lens' Search [Text]
 sLang
   = lens _sLang (\ s a -> s{_sLang = a}) . _Default .
       _Coerce
 
 -- | Whether to indent the json results or not.
-sIndent :: Lens' Search' (Maybe Bool)
+sIndent :: Lens' Search (Maybe Bool)
 sIndent = lens _sIndent (\ s a -> s{_sIndent = a})
 
 -- | An output expression to request data from matches.
-sOutput :: Lens' Search' (Maybe Text)
+sOutput :: Lens' Search (Maybe Text)
 sOutput = lens _sOutput (\ s a -> s{_sOutput = a})
 
 -- | Query term to search for.
-sQuery :: Lens' Search' (Maybe Text)
+sQuery :: Lens' Search (Maybe Text)
 sQuery = lens _sQuery (\ s a -> s{_sQuery = a})
 
 -- | Relevance scoring algorithm to use.
-sScoring :: Lens' Search' FreebaseSearchScoring
+sScoring :: Lens' Search FreebaseSearchScoring
 sScoring = lens _sScoring (\ s a -> s{_sScoring = a})
 
 -- | Maximum number of results to return.
-sLimit :: Lens' Search' Int32
+sLimit :: Lens' Search Int32
 sLimit = lens _sLimit (\ s a -> s{_sLimit = a})
 
 -- | A filter to apply to the query.
-sFilter :: Lens' Search' [Text]
+sFilter :: Lens' Search [Text]
 sFilter
   = lens _sFilter (\ s a -> s{_sFilter = a}) . _Default
       . _Coerce
 
 -- | The MQL query to run againist the results to extract more data.
-sMqlOutput :: Lens' Search' (Maybe Text)
+sMqlOutput :: Lens' Search (Maybe Text)
 sMqlOutput
   = lens _sMqlOutput (\ s a -> s{_sMqlOutput = a})
 
 -- | A mid to use instead of a query.
-sMid :: Lens' Search' [Text]
+sMid :: Lens' Search [Text]
 sMid
   = lens _sMid (\ s a -> s{_sMid = a}) . _Default .
       _Coerce
 
 -- | Restrict to topics with this Freebase type id.
-sType :: Lens' Search' [Text]
+sType :: Lens' Search [Text]
 sType
   = lens _sType (\ s a -> s{_sType = a}) . _Default .
       _Coerce
 
 -- | Query on stemmed names and aliases. May not be used with prefixed.
-sStemmed :: Lens' Search' (Maybe Bool)
+sStemmed :: Lens' Search (Maybe Bool)
 sStemmed = lens _sStemmed (\ s a -> s{_sStemmed = a})
 
 -- | Query on exact name and keys only.
-sExact :: Lens' Search' (Maybe Bool)
+sExact :: Lens' Search (Maybe Bool)
 sExact = lens _sExact (\ s a -> s{_sExact = a})
 
 -- | Request \'did you mean\' suggestions
-sSpell :: Lens' Search' FreebaseSearchSpell
+sSpell :: Lens' Search FreebaseSearchSpell
 sSpell = lens _sSpell (\ s a -> s{_sSpell = a})
 
 -- | A mql as_of_time value to use with mql_output queries.
-sAsOfTime :: Lens' Search' (Maybe Text)
+sAsOfTime :: Lens' Search (Maybe Text)
 sAsOfTime
   = lens _sAsOfTime (\ s a -> s{_sAsOfTime = a})
 
 -- | The encoding of the response. You can use this parameter to enable html
 -- encoding.
-sEncode :: Lens' Search' FreebaseSearchEncode
+sEncode :: Lens' Search FreebaseSearchEncode
 sEncode = lens _sEncode (\ s a -> s{_sEncode = a})
 
 -- | Prefix match against names and aliases.
-sPrefixed :: Lens' Search' (Maybe Bool)
+sPrefixed :: Lens' Search (Maybe Bool)
 sPrefixed
   = lens _sPrefixed (\ s a -> s{_sPrefixed = a})
 
 -- | JS method name for JSONP callbacks.
-sCallback :: Lens' Search' (Maybe Text)
+sCallback :: Lens' Search (Maybe Text)
 sCallback
   = lens _sCallback (\ s a -> s{_sCallback = a})
 
-instance GoogleRequest Search' where
-        type Rs Search' = ()
-        requestClient Search'{..}
+instance GoogleRequest Search where
+        type Rs Search = ()
+        requestClient Search{..}
           = go (_sWithout ^. _Default) _sCursor
               (_sWith ^. _Default)
               (_sDomain ^. _Default)
@@ -378,9 +378,9 @@ instance GoogleRequest Search' where
           where go :<|> _
                   = buildClient (Proxy :: Proxy SearchMethod) mempty
 
-instance GoogleRequest (MediaDownload Search') where
-        type Rs (MediaDownload Search') = Stream
-        requestClient (MediaDownload Search'{..})
+instance GoogleRequest (MediaDownload Search) where
+        type Rs (MediaDownload Search) = Stream
+        requestClient (MediaDownload Search{..})
           = go (_sWithout ^. _Default) _sCursor
               (_sWith ^. _Default)
               (_sDomain ^. _Default)

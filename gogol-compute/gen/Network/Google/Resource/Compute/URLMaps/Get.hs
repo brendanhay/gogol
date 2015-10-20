@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.URLMaps.Get
       URLMapsGetResource
 
     -- * Creating a Request
-    , urlMapsGet'
-    , URLMapsGet'
+    , urlMapsGet
+    , URLMapsGet
 
     -- * Request Lenses
     , umgURLMap
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.urlMaps.get@ method which the
--- 'URLMapsGet'' request conforms to.
+-- 'URLMapsGet' request conforms to.
 type URLMapsGetResource =
      Capture "project" Text :>
        "global" :>
@@ -51,42 +51,42 @@ type URLMapsGetResource =
 
 -- | Returns the specified UrlMap resource.
 --
--- /See:/ 'urlMapsGet'' smart constructor.
-data URLMapsGet' = URLMapsGet'
+-- /See:/ 'urlMapsGet' smart constructor.
+data URLMapsGet = URLMapsGet
     { _umgURLMap  :: !Text
     , _umgProject :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'URLMapsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'URLMapsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'umgURLMap'
 --
 -- * 'umgProject'
-urlMapsGet'
+urlMapsGet
     :: Text -- ^ 'umgURLMap'
     -> Text -- ^ 'umgProject'
-    -> URLMapsGet'
-urlMapsGet' pUmgURLMap_ pUmgProject_ =
-    URLMapsGet'
+    -> URLMapsGet
+urlMapsGet pUmgURLMap_ pUmgProject_ =
+    URLMapsGet
     { _umgURLMap = pUmgURLMap_
     , _umgProject = pUmgProject_
     }
 
 -- | Name of the UrlMap resource to return.
-umgURLMap :: Lens' URLMapsGet' Text
+umgURLMap :: Lens' URLMapsGet Text
 umgURLMap
   = lens _umgURLMap (\ s a -> s{_umgURLMap = a})
 
 -- | Name of the project scoping this request.
-umgProject :: Lens' URLMapsGet' Text
+umgProject :: Lens' URLMapsGet Text
 umgProject
   = lens _umgProject (\ s a -> s{_umgProject = a})
 
-instance GoogleRequest URLMapsGet' where
-        type Rs URLMapsGet' = URLMap
-        requestClient URLMapsGet'{..}
+instance GoogleRequest URLMapsGet where
+        type Rs URLMapsGet = URLMap
+        requestClient URLMapsGet{..}
           = go _umgProject _umgURLMap (Just AltJSON)
               computeService
           where go

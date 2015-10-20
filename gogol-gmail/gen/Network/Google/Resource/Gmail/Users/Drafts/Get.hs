@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.Drafts.Get
       UsersDraftsGetResource
 
     -- * Creating a Request
-    , usersDraftsGet'
-    , UsersDraftsGet'
+    , usersDraftsGet
+    , UsersDraftsGet
 
     -- * Request Lenses
     , udgFormat
@@ -42,7 +42,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.drafts.get@ method which the
--- 'UsersDraftsGet'' request conforms to.
+-- 'UsersDraftsGet' request conforms to.
 type UsersDraftsGetResource =
      Capture "userId" Text :>
        "drafts" :>
@@ -52,14 +52,14 @@ type UsersDraftsGetResource =
 
 -- | Gets the specified draft.
 --
--- /See:/ 'usersDraftsGet'' smart constructor.
-data UsersDraftsGet' = UsersDraftsGet'
+-- /See:/ 'usersDraftsGet' smart constructor.
+data UsersDraftsGet = UsersDraftsGet
     { _udgFormat :: !UsersDraftsGetFormat
     , _udgUserId :: !Text
     , _udgId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersDraftsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersDraftsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,35 +68,35 @@ data UsersDraftsGet' = UsersDraftsGet'
 -- * 'udgUserId'
 --
 -- * 'udgId'
-usersDraftsGet'
+usersDraftsGet
     :: Text -- ^ 'udgId'
     -> Text
-    -> UsersDraftsGet'
-usersDraftsGet' pUdgUserId_ pUdgId_ =
-    UsersDraftsGet'
+    -> UsersDraftsGet
+usersDraftsGet pUdgUserId_ pUdgId_ =
+    UsersDraftsGet
     { _udgFormat = UDGFFull
     , _udgUserId = pUdgUserId_
     , _udgId = pUdgId_
     }
 
 -- | The format to return the draft in.
-udgFormat :: Lens' UsersDraftsGet' UsersDraftsGetFormat
+udgFormat :: Lens' UsersDraftsGet UsersDraftsGetFormat
 udgFormat
   = lens _udgFormat (\ s a -> s{_udgFormat = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-udgUserId :: Lens' UsersDraftsGet' Text
+udgUserId :: Lens' UsersDraftsGet Text
 udgUserId
   = lens _udgUserId (\ s a -> s{_udgUserId = a})
 
 -- | The ID of the draft to retrieve.
-udgId :: Lens' UsersDraftsGet' Text
+udgId :: Lens' UsersDraftsGet Text
 udgId = lens _udgId (\ s a -> s{_udgId = a})
 
-instance GoogleRequest UsersDraftsGet' where
-        type Rs UsersDraftsGet' = Draft
-        requestClient UsersDraftsGet'{..}
+instance GoogleRequest UsersDraftsGet where
+        type Rs UsersDraftsGet = Draft
+        requestClient UsersDraftsGet{..}
           = go _udgUserId _udgId (Just _udgFormat)
               (Just AltJSON)
               gmailService

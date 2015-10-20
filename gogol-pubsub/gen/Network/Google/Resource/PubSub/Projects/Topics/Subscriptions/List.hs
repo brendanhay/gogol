@@ -29,8 +29,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
       ProjectsTopicsSubscriptionsListResource
 
     -- * Creating a Request
-    , projectsTopicsSubscriptionsList'
-    , ProjectsTopicsSubscriptionsList'
+    , projectsTopicsSubscriptionsList
+    , ProjectsTopicsSubscriptionsList
 
     -- * Request Lenses
     , ptslXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.subscriptions.list@ method which the
--- 'ProjectsTopicsSubscriptionsList'' request conforms to.
+-- 'ProjectsTopicsSubscriptionsList' request conforms to.
 type ProjectsTopicsSubscriptionsListResource =
      "v1" :>
        Capture "topic" Text :>
@@ -68,8 +68,8 @@ type ProjectsTopicsSubscriptionsListResource =
 
 -- | Lists the name of the subscriptions for this topic.
 --
--- /See:/ 'projectsTopicsSubscriptionsList'' smart constructor.
-data ProjectsTopicsSubscriptionsList' = ProjectsTopicsSubscriptionsList'
+-- /See:/ 'projectsTopicsSubscriptionsList' smart constructor.
+data ProjectsTopicsSubscriptionsList = ProjectsTopicsSubscriptionsList
     { _ptslXgafv          :: !(Maybe Text)
     , _ptslUploadProtocol :: !(Maybe Text)
     , _ptslPp             :: !Bool
@@ -82,7 +82,7 @@ data ProjectsTopicsSubscriptionsList' = ProjectsTopicsSubscriptionsList'
     , _ptslCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsTopicsSubscriptionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsTopicsSubscriptionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -105,11 +105,11 @@ data ProjectsTopicsSubscriptionsList' = ProjectsTopicsSubscriptionsList'
 -- * 'ptslPageSize'
 --
 -- * 'ptslCallback'
-projectsTopicsSubscriptionsList'
+projectsTopicsSubscriptionsList
     :: Text -- ^ 'ptslTopic'
-    -> ProjectsTopicsSubscriptionsList'
-projectsTopicsSubscriptionsList' pPtslTopic_ =
-    ProjectsTopicsSubscriptionsList'
+    -> ProjectsTopicsSubscriptionsList
+projectsTopicsSubscriptionsList pPtslTopic_ =
+    ProjectsTopicsSubscriptionsList
     { _ptslXgafv = Nothing
     , _ptslUploadProtocol = Nothing
     , _ptslPp = True
@@ -123,39 +123,39 @@ projectsTopicsSubscriptionsList' pPtslTopic_ =
     }
 
 -- | V1 error format.
-ptslXgafv :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Text)
+ptslXgafv :: Lens' ProjectsTopicsSubscriptionsList (Maybe Text)
 ptslXgafv
   = lens _ptslXgafv (\ s a -> s{_ptslXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ptslUploadProtocol :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Text)
+ptslUploadProtocol :: Lens' ProjectsTopicsSubscriptionsList (Maybe Text)
 ptslUploadProtocol
   = lens _ptslUploadProtocol
       (\ s a -> s{_ptslUploadProtocol = a})
 
 -- | Pretty-print response.
-ptslPp :: Lens' ProjectsTopicsSubscriptionsList' Bool
+ptslPp :: Lens' ProjectsTopicsSubscriptionsList Bool
 ptslPp = lens _ptslPp (\ s a -> s{_ptslPp = a})
 
 -- | OAuth access token.
-ptslAccessToken :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Text)
+ptslAccessToken :: Lens' ProjectsTopicsSubscriptionsList (Maybe Text)
 ptslAccessToken
   = lens _ptslAccessToken
       (\ s a -> s{_ptslAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ptslUploadType :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Text)
+ptslUploadType :: Lens' ProjectsTopicsSubscriptionsList (Maybe Text)
 ptslUploadType
   = lens _ptslUploadType
       (\ s a -> s{_ptslUploadType = a})
 
 -- | The name of the topic that subscriptions are attached to.
-ptslTopic :: Lens' ProjectsTopicsSubscriptionsList' Text
+ptslTopic :: Lens' ProjectsTopicsSubscriptionsList Text
 ptslTopic
   = lens _ptslTopic (\ s a -> s{_ptslTopic = a})
 
 -- | OAuth bearer token.
-ptslBearerToken :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Text)
+ptslBearerToken :: Lens' ProjectsTopicsSubscriptionsList (Maybe Text)
 ptslBearerToken
   = lens _ptslBearerToken
       (\ s a -> s{_ptslBearerToken = a})
@@ -164,26 +164,26 @@ ptslBearerToken
 -- indicates that this is a continuation of a prior
 -- \`ListTopicSubscriptions\` call, and that the system should return the
 -- next page of data.
-ptslPageToken :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Text)
+ptslPageToken :: Lens' ProjectsTopicsSubscriptionsList (Maybe Text)
 ptslPageToken
   = lens _ptslPageToken
       (\ s a -> s{_ptslPageToken = a})
 
 -- | Maximum number of subscription names to return.
-ptslPageSize :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Int32)
+ptslPageSize :: Lens' ProjectsTopicsSubscriptionsList (Maybe Int32)
 ptslPageSize
   = lens _ptslPageSize (\ s a -> s{_ptslPageSize = a})
 
 -- | JSONP
-ptslCallback :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Text)
+ptslCallback :: Lens' ProjectsTopicsSubscriptionsList (Maybe Text)
 ptslCallback
   = lens _ptslCallback (\ s a -> s{_ptslCallback = a})
 
 instance GoogleRequest
-         ProjectsTopicsSubscriptionsList' where
-        type Rs ProjectsTopicsSubscriptionsList' =
+         ProjectsTopicsSubscriptionsList where
+        type Rs ProjectsTopicsSubscriptionsList =
              ListTopicSubscriptionsResponse
-        requestClient ProjectsTopicsSubscriptionsList'{..}
+        requestClient ProjectsTopicsSubscriptionsList{..}
           = go _ptslTopic _ptslXgafv _ptslUploadProtocol
               (Just _ptslPp)
               _ptslAccessToken

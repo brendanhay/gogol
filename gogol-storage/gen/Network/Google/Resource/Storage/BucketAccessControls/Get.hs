@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.BucketAccessControls.Get
       BucketAccessControlsGetResource
 
     -- * Creating a Request
-    , bucketAccessControlsGet'
-    , BucketAccessControlsGet'
+    , bucketAccessControlsGet
+    , BucketAccessControlsGet
 
     -- * Request Lenses
     , bacgBucket
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.bucketAccessControls.get@ method which the
--- 'BucketAccessControlsGet'' request conforms to.
+-- 'BucketAccessControlsGet' request conforms to.
 type BucketAccessControlsGetResource =
      "b" :>
        Capture "bucket" Text :>
@@ -52,45 +52,44 @@ type BucketAccessControlsGetResource =
 
 -- | Returns the ACL entry for the specified entity on the specified bucket.
 --
--- /See:/ 'bucketAccessControlsGet'' smart constructor.
-data BucketAccessControlsGet' = BucketAccessControlsGet'
+-- /See:/ 'bucketAccessControlsGet' smart constructor.
+data BucketAccessControlsGet = BucketAccessControlsGet
     { _bacgBucket :: !Text
     , _bacgEntity :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BucketAccessControlsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'BucketAccessControlsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'bacgBucket'
 --
 -- * 'bacgEntity'
-bucketAccessControlsGet'
+bucketAccessControlsGet
     :: Text -- ^ 'bacgBucket'
     -> Text -- ^ 'bacgEntity'
-    -> BucketAccessControlsGet'
-bucketAccessControlsGet' pBacgBucket_ pBacgEntity_ =
-    BucketAccessControlsGet'
+    -> BucketAccessControlsGet
+bucketAccessControlsGet pBacgBucket_ pBacgEntity_ =
+    BucketAccessControlsGet
     { _bacgBucket = pBacgBucket_
     , _bacgEntity = pBacgEntity_
     }
 
 -- | Name of a bucket.
-bacgBucket :: Lens' BucketAccessControlsGet' Text
+bacgBucket :: Lens' BucketAccessControlsGet Text
 bacgBucket
   = lens _bacgBucket (\ s a -> s{_bacgBucket = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
 -- allAuthenticatedUsers.
-bacgEntity :: Lens' BucketAccessControlsGet' Text
+bacgEntity :: Lens' BucketAccessControlsGet Text
 bacgEntity
   = lens _bacgEntity (\ s a -> s{_bacgEntity = a})
 
-instance GoogleRequest BucketAccessControlsGet' where
-        type Rs BucketAccessControlsGet' =
-             BucketAccessControl
-        requestClient BucketAccessControlsGet'{..}
+instance GoogleRequest BucketAccessControlsGet where
+        type Rs BucketAccessControlsGet = BucketAccessControl
+        requestClient BucketAccessControlsGet{..}
           = go _bacgBucket _bacgEntity (Just AltJSON)
               storageService
           where go

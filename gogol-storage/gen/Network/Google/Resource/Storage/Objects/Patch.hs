@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.Objects.Patch
       ObjectsPatchResource
 
     -- * Creating a Request
-    , objectsPatch'
-    , ObjectsPatch'
+    , objectsPatch
+    , ObjectsPatch
 
     -- * Request Lenses
     , opIfMetagenerationMatch
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.patch@ method which the
--- 'ObjectsPatch'' request conforms to.
+-- 'ObjectsPatch' request conforms to.
 type ObjectsPatchResource =
      "b" :>
        Capture "bucket" Text :>
@@ -68,8 +68,8 @@ type ObjectsPatchResource =
 
 -- | Updates an object\'s metadata. This method supports patch semantics.
 --
--- /See:/ 'objectsPatch'' smart constructor.
-data ObjectsPatch' = ObjectsPatch'
+-- /See:/ 'objectsPatch' smart constructor.
+data ObjectsPatch = ObjectsPatch
     { _opIfMetagenerationMatch    :: !(Maybe Int64)
     , _opIfGenerationNotMatch     :: !(Maybe Int64)
     , _opIfGenerationMatch        :: !(Maybe Int64)
@@ -82,7 +82,7 @@ data ObjectsPatch' = ObjectsPatch'
     , _opGeneration               :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ObjectsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ObjectsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -105,13 +105,13 @@ data ObjectsPatch' = ObjectsPatch'
 -- * 'opProjection'
 --
 -- * 'opGeneration'
-objectsPatch'
+objectsPatch
     :: Text -- ^ 'opBucket'
     -> Object -- ^ 'opPayload'
     -> Text -- ^ 'opObject'
-    -> ObjectsPatch'
-objectsPatch' pOpBucket_ pOpPayload_ pOpObject_ =
-    ObjectsPatch'
+    -> ObjectsPatch
+objectsPatch pOpBucket_ pOpPayload_ pOpObject_ =
+    ObjectsPatch
     { _opIfMetagenerationMatch = Nothing
     , _opIfGenerationNotMatch = Nothing
     , _opIfGenerationMatch = Nothing
@@ -126,66 +126,66 @@ objectsPatch' pOpBucket_ pOpPayload_ pOpObject_ =
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.
-opIfMetagenerationMatch :: Lens' ObjectsPatch' (Maybe Int64)
+opIfMetagenerationMatch :: Lens' ObjectsPatch (Maybe Int64)
 opIfMetagenerationMatch
   = lens _opIfMetagenerationMatch
       (\ s a -> s{_opIfMetagenerationMatch = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation does not match the given value.
-opIfGenerationNotMatch :: Lens' ObjectsPatch' (Maybe Int64)
+opIfGenerationNotMatch :: Lens' ObjectsPatch (Maybe Int64)
 opIfGenerationNotMatch
   = lens _opIfGenerationNotMatch
       (\ s a -> s{_opIfGenerationNotMatch = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation matches the given value.
-opIfGenerationMatch :: Lens' ObjectsPatch' (Maybe Int64)
+opIfGenerationMatch :: Lens' ObjectsPatch (Maybe Int64)
 opIfGenerationMatch
   = lens _opIfGenerationMatch
       (\ s a -> s{_opIfGenerationMatch = a})
 
 -- | Apply a predefined set of access controls to this object.
-opPredefinedACL :: Lens' ObjectsPatch' (Maybe ObjectsPatchPredefinedACL)
+opPredefinedACL :: Lens' ObjectsPatch (Maybe ObjectsPatchPredefinedACL)
 opPredefinedACL
   = lens _opPredefinedACL
       (\ s a -> s{_opPredefinedACL = a})
 
 -- | Name of the bucket in which the object resides.
-opBucket :: Lens' ObjectsPatch' Text
+opBucket :: Lens' ObjectsPatch Text
 opBucket = lens _opBucket (\ s a -> s{_opBucket = a})
 
 -- | Multipart request metadata.
-opPayload :: Lens' ObjectsPatch' Object
+opPayload :: Lens' ObjectsPatch Object
 opPayload
   = lens _opPayload (\ s a -> s{_opPayload = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration does not match the given value.
-opIfMetagenerationNotMatch :: Lens' ObjectsPatch' (Maybe Int64)
+opIfMetagenerationNotMatch :: Lens' ObjectsPatch (Maybe Int64)
 opIfMetagenerationNotMatch
   = lens _opIfMetagenerationNotMatch
       (\ s a -> s{_opIfMetagenerationNotMatch = a})
 
 -- | Name of the object. For information about how to URL encode object names
 -- to be path safe, see Encoding URI Path Parts.
-opObject :: Lens' ObjectsPatch' Text
+opObject :: Lens' ObjectsPatch Text
 opObject = lens _opObject (\ s a -> s{_opObject = a})
 
 -- | Set of properties to return. Defaults to full.
-opProjection :: Lens' ObjectsPatch' (Maybe ObjectsPatchProjection)
+opProjection :: Lens' ObjectsPatch (Maybe ObjectsPatchProjection)
 opProjection
   = lens _opProjection (\ s a -> s{_opProjection = a})
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
-opGeneration :: Lens' ObjectsPatch' (Maybe Int64)
+opGeneration :: Lens' ObjectsPatch (Maybe Int64)
 opGeneration
   = lens _opGeneration (\ s a -> s{_opGeneration = a})
 
-instance GoogleRequest ObjectsPatch' where
-        type Rs ObjectsPatch' = Object
-        requestClient ObjectsPatch'{..}
+instance GoogleRequest ObjectsPatch where
+        type Rs ObjectsPatch = Object
+        requestClient ObjectsPatch{..}
           = go _opBucket _opObject _opIfMetagenerationMatch
               _opIfGenerationNotMatch
               _opIfGenerationMatch

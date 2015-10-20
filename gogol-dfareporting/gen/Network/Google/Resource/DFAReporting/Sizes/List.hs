@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Sizes.List
       SizesListResource
 
     -- * Creating a Request
-    , sizesList'
-    , SizesList'
+    , sizesList
+    , SizesList
 
     -- * Request Lenses
     , slHeight
@@ -44,7 +44,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.sizes.list@ method which the
--- 'SizesList'' request conforms to.
+-- 'SizesList' request conforms to.
 type SizesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -58,8 +58,8 @@ type SizesListResource =
 
 -- | Retrieves a list of sizes, possibly filtered.
 --
--- /See:/ 'sizesList'' smart constructor.
-data SizesList' = SizesList'
+-- /See:/ 'sizesList' smart constructor.
+data SizesList = SizesList
     { _slHeight      :: !(Maybe Int32)
     , _slIds         :: !(Maybe [Int64])
     , _slWidth       :: !(Maybe Int32)
@@ -67,7 +67,7 @@ data SizesList' = SizesList'
     , _slIabStandard :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SizesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'SizesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,11 +80,11 @@ data SizesList' = SizesList'
 -- * 'slProFileId'
 --
 -- * 'slIabStandard'
-sizesList'
+sizesList
     :: Int64 -- ^ 'slProFileId'
-    -> SizesList'
-sizesList' pSlProFileId_ =
-    SizesList'
+    -> SizesList
+sizesList pSlProFileId_ =
+    SizesList
     { _slHeight = Nothing
     , _slIds = Nothing
     , _slWidth = Nothing
@@ -93,33 +93,33 @@ sizesList' pSlProFileId_ =
     }
 
 -- | Select only sizes with this height.
-slHeight :: Lens' SizesList' (Maybe Int32)
+slHeight :: Lens' SizesList (Maybe Int32)
 slHeight = lens _slHeight (\ s a -> s{_slHeight = a})
 
 -- | Select only sizes with these IDs.
-slIds :: Lens' SizesList' [Int64]
+slIds :: Lens' SizesList [Int64]
 slIds
   = lens _slIds (\ s a -> s{_slIds = a}) . _Default .
       _Coerce
 
 -- | Select only sizes with this width.
-slWidth :: Lens' SizesList' (Maybe Int32)
+slWidth :: Lens' SizesList (Maybe Int32)
 slWidth = lens _slWidth (\ s a -> s{_slWidth = a})
 
 -- | User profile ID associated with this request.
-slProFileId :: Lens' SizesList' Int64
+slProFileId :: Lens' SizesList Int64
 slProFileId
   = lens _slProFileId (\ s a -> s{_slProFileId = a})
 
 -- | Select only IAB standard sizes.
-slIabStandard :: Lens' SizesList' (Maybe Bool)
+slIabStandard :: Lens' SizesList (Maybe Bool)
 slIabStandard
   = lens _slIabStandard
       (\ s a -> s{_slIabStandard = a})
 
-instance GoogleRequest SizesList' where
-        type Rs SizesList' = SizesListResponse
-        requestClient SizesList'{..}
+instance GoogleRequest SizesList where
+        type Rs SizesList = SizesListResponse
+        requestClient SizesList{..}
           = go _slProFileId _slHeight (_slIds ^. _Default)
               _slWidth
               _slIabStandard

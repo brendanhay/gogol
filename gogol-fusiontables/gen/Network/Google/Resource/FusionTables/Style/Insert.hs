@@ -29,8 +29,8 @@ module Network.Google.Resource.FusionTables.Style.Insert
       StyleInsertResource
 
     -- * Creating a Request
-    , styleInsert'
-    , StyleInsert'
+    , styleInsert
+    , StyleInsert
 
     -- * Request Lenses
     , siPayload
@@ -41,7 +41,7 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.style.insert@ method which the
--- 'StyleInsert'' request conforms to.
+-- 'StyleInsert' request conforms to.
 type StyleInsertResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -52,42 +52,42 @@ type StyleInsertResource =
 
 -- | Adds a new style for the table.
 --
--- /See:/ 'styleInsert'' smart constructor.
-data StyleInsert' = StyleInsert'
+-- /See:/ 'styleInsert' smart constructor.
+data StyleInsert = StyleInsert
     { _siPayload :: !StyleSetting
     , _siTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'StyleInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'StyleInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'siPayload'
 --
 -- * 'siTableId'
-styleInsert'
+styleInsert
     :: StyleSetting -- ^ 'siPayload'
     -> Text -- ^ 'siTableId'
-    -> StyleInsert'
-styleInsert' pSiPayload_ pSiTableId_ =
-    StyleInsert'
+    -> StyleInsert
+styleInsert pSiPayload_ pSiTableId_ =
+    StyleInsert
     { _siPayload = pSiPayload_
     , _siTableId = pSiTableId_
     }
 
 -- | Multipart request metadata.
-siPayload :: Lens' StyleInsert' StyleSetting
+siPayload :: Lens' StyleInsert StyleSetting
 siPayload
   = lens _siPayload (\ s a -> s{_siPayload = a})
 
 -- | Table for which a new style is being added
-siTableId :: Lens' StyleInsert' Text
+siTableId :: Lens' StyleInsert Text
 siTableId
   = lens _siTableId (\ s a -> s{_siTableId = a})
 
-instance GoogleRequest StyleInsert' where
-        type Rs StyleInsert' = StyleSetting
-        requestClient StyleInsert'{..}
+instance GoogleRequest StyleInsert where
+        type Rs StyleInsert = StyleSetting
+        requestClient StyleInsert{..}
           = go _siTableId (Just AltJSON) _siPayload
               fusionTablesService
           where go

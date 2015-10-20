@@ -29,8 +29,8 @@ module Network.Google.Resource.Datastore.Datasets.BeginTransaction
       DatasetsBeginTransactionResource
 
     -- * Creating a Request
-    , datasetsBeginTransaction'
-    , DatasetsBeginTransaction'
+    , datasetsBeginTransaction
+    , DatasetsBeginTransaction
 
     -- * Request Lenses
     , dbtPayload
@@ -41,7 +41,7 @@ import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @datastore.datasets.beginTransaction@ method which the
--- 'DatasetsBeginTransaction'' request conforms to.
+-- 'DatasetsBeginTransaction' request conforms to.
 type DatasetsBeginTransactionResource =
      Capture "datasetId" Text :>
        "beginTransaction" :>
@@ -51,44 +51,43 @@ type DatasetsBeginTransactionResource =
 
 -- | Begin a new transaction.
 --
--- /See:/ 'datasetsBeginTransaction'' smart constructor.
-data DatasetsBeginTransaction' = DatasetsBeginTransaction'
+-- /See:/ 'datasetsBeginTransaction' smart constructor.
+data DatasetsBeginTransaction = DatasetsBeginTransaction
     { _dbtPayload   :: !BeginTransactionRequest
     , _dbtDatasetId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsBeginTransaction'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsBeginTransaction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dbtPayload'
 --
 -- * 'dbtDatasetId'
-datasetsBeginTransaction'
+datasetsBeginTransaction
     :: BeginTransactionRequest -- ^ 'dbtPayload'
     -> Text -- ^ 'dbtDatasetId'
-    -> DatasetsBeginTransaction'
-datasetsBeginTransaction' pDbtPayload_ pDbtDatasetId_ =
-    DatasetsBeginTransaction'
+    -> DatasetsBeginTransaction
+datasetsBeginTransaction pDbtPayload_ pDbtDatasetId_ =
+    DatasetsBeginTransaction
     { _dbtPayload = pDbtPayload_
     , _dbtDatasetId = pDbtDatasetId_
     }
 
 -- | Multipart request metadata.
-dbtPayload :: Lens' DatasetsBeginTransaction' BeginTransactionRequest
+dbtPayload :: Lens' DatasetsBeginTransaction BeginTransactionRequest
 dbtPayload
   = lens _dbtPayload (\ s a -> s{_dbtPayload = a})
 
 -- | Identifies the dataset.
-dbtDatasetId :: Lens' DatasetsBeginTransaction' Text
+dbtDatasetId :: Lens' DatasetsBeginTransaction Text
 dbtDatasetId
   = lens _dbtDatasetId (\ s a -> s{_dbtDatasetId = a})
 
-instance GoogleRequest DatasetsBeginTransaction'
-         where
-        type Rs DatasetsBeginTransaction' =
+instance GoogleRequest DatasetsBeginTransaction where
+        type Rs DatasetsBeginTransaction =
              BeginTransactionResponse
-        requestClient DatasetsBeginTransaction'{..}
+        requestClient DatasetsBeginTransaction{..}
           = go _dbtDatasetId (Just AltJSON) _dbtPayload
               datastoreService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes
       MyLibraryBookshelvesClearVolumesResource
 
     -- * Creating a Request
-    , myLibraryBookshelvesClearVolumes'
-    , MyLibraryBookshelvesClearVolumes'
+    , myLibraryBookshelvesClearVolumes
+    , MyLibraryBookshelvesClearVolumes
 
     -- * Request Lenses
     , mlbcvShelf
@@ -41,7 +41,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.bookshelves.clearVolumes@ method which the
--- 'MyLibraryBookshelvesClearVolumes'' request conforms to.
+-- 'MyLibraryBookshelvesClearVolumes' request conforms to.
 type MyLibraryBookshelvesClearVolumesResource =
      "mylibrary" :>
        "bookshelves" :>
@@ -52,42 +52,42 @@ type MyLibraryBookshelvesClearVolumesResource =
 
 -- | Clears all volumes from a bookshelf.
 --
--- /See:/ 'myLibraryBookshelvesClearVolumes'' smart constructor.
-data MyLibraryBookshelvesClearVolumes' = MyLibraryBookshelvesClearVolumes'
+-- /See:/ 'myLibraryBookshelvesClearVolumes' smart constructor.
+data MyLibraryBookshelvesClearVolumes = MyLibraryBookshelvesClearVolumes
     { _mlbcvShelf  :: !Text
     , _mlbcvSource :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MyLibraryBookshelvesClearVolumes'' with the minimum fields required to make a request.
+-- | Creates a value of 'MyLibraryBookshelvesClearVolumes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mlbcvShelf'
 --
 -- * 'mlbcvSource'
-myLibraryBookshelvesClearVolumes'
+myLibraryBookshelvesClearVolumes
     :: Text -- ^ 'mlbcvShelf'
-    -> MyLibraryBookshelvesClearVolumes'
-myLibraryBookshelvesClearVolumes' pMlbcvShelf_ =
-    MyLibraryBookshelvesClearVolumes'
+    -> MyLibraryBookshelvesClearVolumes
+myLibraryBookshelvesClearVolumes pMlbcvShelf_ =
+    MyLibraryBookshelvesClearVolumes
     { _mlbcvShelf = pMlbcvShelf_
     , _mlbcvSource = Nothing
     }
 
 -- | ID of bookshelf from which to remove a volume.
-mlbcvShelf :: Lens' MyLibraryBookshelvesClearVolumes' Text
+mlbcvShelf :: Lens' MyLibraryBookshelvesClearVolumes Text
 mlbcvShelf
   = lens _mlbcvShelf (\ s a -> s{_mlbcvShelf = a})
 
 -- | String to identify the originator of this request.
-mlbcvSource :: Lens' MyLibraryBookshelvesClearVolumes' (Maybe Text)
+mlbcvSource :: Lens' MyLibraryBookshelvesClearVolumes (Maybe Text)
 mlbcvSource
   = lens _mlbcvSource (\ s a -> s{_mlbcvSource = a})
 
 instance GoogleRequest
-         MyLibraryBookshelvesClearVolumes' where
-        type Rs MyLibraryBookshelvesClearVolumes' = ()
-        requestClient MyLibraryBookshelvesClearVolumes'{..}
+         MyLibraryBookshelvesClearVolumes where
+        type Rs MyLibraryBookshelvesClearVolumes = ()
+        requestClient MyLibraryBookshelvesClearVolumes{..}
           = go _mlbcvShelf _mlbcvSource (Just AltJSON)
               booksService
           where go

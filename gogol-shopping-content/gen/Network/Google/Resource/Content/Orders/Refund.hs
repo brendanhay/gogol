@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Orders.Refund
       OrdersRefundResource
 
     -- * Creating a Request
-    , ordersRefund'
-    , OrdersRefund'
+    , ordersRefund
+    , OrdersRefund
 
     -- * Request Lenses
     , orMerchantId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.refund@ method which the
--- 'OrdersRefund'' request conforms to.
+-- 'OrdersRefund' request conforms to.
 type OrdersRefundResource =
      Capture "merchantId" Word64 :>
        "orders" :>
@@ -54,14 +54,14 @@ type OrdersRefundResource =
 
 -- | Refund a portion of the order, up to the full amount paid.
 --
--- /See:/ 'ordersRefund'' smart constructor.
-data OrdersRefund' = OrdersRefund'
+-- /See:/ 'ordersRefund' smart constructor.
+data OrdersRefund = OrdersRefund
     { _orMerchantId :: !Word64
     , _orPayload    :: !OrdersRefundRequest
     , _orOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersRefund'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersRefund' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,36 +70,36 @@ data OrdersRefund' = OrdersRefund'
 -- * 'orPayload'
 --
 -- * 'orOrderId'
-ordersRefund'
+ordersRefund
     :: Word64 -- ^ 'orMerchantId'
     -> OrdersRefundRequest -- ^ 'orPayload'
     -> Text -- ^ 'orOrderId'
-    -> OrdersRefund'
-ordersRefund' pOrMerchantId_ pOrPayload_ pOrOrderId_ =
-    OrdersRefund'
+    -> OrdersRefund
+ordersRefund pOrMerchantId_ pOrPayload_ pOrOrderId_ =
+    OrdersRefund
     { _orMerchantId = pOrMerchantId_
     , _orPayload = pOrPayload_
     , _orOrderId = pOrOrderId_
     }
 
 -- | The ID of the managing account.
-orMerchantId :: Lens' OrdersRefund' Word64
+orMerchantId :: Lens' OrdersRefund Word64
 orMerchantId
   = lens _orMerchantId (\ s a -> s{_orMerchantId = a})
 
 -- | Multipart request metadata.
-orPayload :: Lens' OrdersRefund' OrdersRefundRequest
+orPayload :: Lens' OrdersRefund OrdersRefundRequest
 orPayload
   = lens _orPayload (\ s a -> s{_orPayload = a})
 
 -- | The ID of the order to refund.
-orOrderId :: Lens' OrdersRefund' Text
+orOrderId :: Lens' OrdersRefund Text
 orOrderId
   = lens _orOrderId (\ s a -> s{_orOrderId = a})
 
-instance GoogleRequest OrdersRefund' where
-        type Rs OrdersRefund' = OrdersRefundResponse
-        requestClient OrdersRefund'{..}
+instance GoogleRequest OrdersRefund where
+        type Rs OrdersRefund = OrdersRefundResponse
+        requestClient OrdersRefund{..}
           = go _orMerchantId _orOrderId (Just AltJSON)
               _orPayload
               shoppingContentService

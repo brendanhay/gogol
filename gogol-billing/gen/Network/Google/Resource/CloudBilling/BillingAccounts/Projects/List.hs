@@ -31,8 +31,8 @@ module Network.Google.Resource.CloudBilling.BillingAccounts.Projects.List
       BillingAccountsProjectsListResource
 
     -- * Creating a Request
-    , billingAccountsProjectsList'
-    , BillingAccountsProjectsList'
+    , billingAccountsProjectsList
+    , BillingAccountsProjectsList
 
     -- * Request Lenses
     , baplXgafv
@@ -51,7 +51,7 @@ import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @cloudbilling.billingAccounts.projects.list@ method which the
--- 'BillingAccountsProjectsList'' request conforms to.
+-- 'BillingAccountsProjectsList' request conforms to.
 type BillingAccountsProjectsListResource =
      "v1" :>
        Capture "name" Text :>
@@ -72,8 +72,8 @@ type BillingAccountsProjectsListResource =
 -- authenticated user must be an [owner of the billing
 -- account](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
--- /See:/ 'billingAccountsProjectsList'' smart constructor.
-data BillingAccountsProjectsList' = BillingAccountsProjectsList'
+-- /See:/ 'billingAccountsProjectsList' smart constructor.
+data BillingAccountsProjectsList = BillingAccountsProjectsList
     { _baplXgafv          :: !(Maybe Text)
     , _baplUploadProtocol :: !(Maybe Text)
     , _baplPp             :: !Bool
@@ -86,7 +86,7 @@ data BillingAccountsProjectsList' = BillingAccountsProjectsList'
     , _baplCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BillingAccountsProjectsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'BillingAccountsProjectsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -109,11 +109,11 @@ data BillingAccountsProjectsList' = BillingAccountsProjectsList'
 -- * 'baplPageSize'
 --
 -- * 'baplCallback'
-billingAccountsProjectsList'
+billingAccountsProjectsList
     :: Text -- ^ 'baplName'
-    -> BillingAccountsProjectsList'
-billingAccountsProjectsList' pBaplName_ =
-    BillingAccountsProjectsList'
+    -> BillingAccountsProjectsList
+billingAccountsProjectsList pBaplName_ =
+    BillingAccountsProjectsList
     { _baplXgafv = Nothing
     , _baplUploadProtocol = Nothing
     , _baplPp = True
@@ -127,34 +127,34 @@ billingAccountsProjectsList' pBaplName_ =
     }
 
 -- | V1 error format.
-baplXgafv :: Lens' BillingAccountsProjectsList' (Maybe Text)
+baplXgafv :: Lens' BillingAccountsProjectsList (Maybe Text)
 baplXgafv
   = lens _baplXgafv (\ s a -> s{_baplXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-baplUploadProtocol :: Lens' BillingAccountsProjectsList' (Maybe Text)
+baplUploadProtocol :: Lens' BillingAccountsProjectsList (Maybe Text)
 baplUploadProtocol
   = lens _baplUploadProtocol
       (\ s a -> s{_baplUploadProtocol = a})
 
 -- | Pretty-print response.
-baplPp :: Lens' BillingAccountsProjectsList' Bool
+baplPp :: Lens' BillingAccountsProjectsList Bool
 baplPp = lens _baplPp (\ s a -> s{_baplPp = a})
 
 -- | OAuth access token.
-baplAccessToken :: Lens' BillingAccountsProjectsList' (Maybe Text)
+baplAccessToken :: Lens' BillingAccountsProjectsList (Maybe Text)
 baplAccessToken
   = lens _baplAccessToken
       (\ s a -> s{_baplAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-baplUploadType :: Lens' BillingAccountsProjectsList' (Maybe Text)
+baplUploadType :: Lens' BillingAccountsProjectsList (Maybe Text)
 baplUploadType
   = lens _baplUploadType
       (\ s a -> s{_baplUploadType = a})
 
 -- | OAuth bearer token.
-baplBearerToken :: Lens' BillingAccountsProjectsList' (Maybe Text)
+baplBearerToken :: Lens' BillingAccountsProjectsList (Maybe Text)
 baplBearerToken
   = lens _baplBearerToken
       (\ s a -> s{_baplBearerToken = a})
@@ -162,34 +162,34 @@ baplBearerToken
 -- | The resource name of the billing account associated with the projects
 -- that you want to list. For example,
 -- \`billingAccounts\/012345-567890-ABCDEF\`.
-baplName :: Lens' BillingAccountsProjectsList' Text
+baplName :: Lens' BillingAccountsProjectsList Text
 baplName = lens _baplName (\ s a -> s{_baplName = a})
 
 -- | A token identifying a page of results to be returned. This should be a
 -- \`next_page_token\` value returned from a previous
 -- \`ListProjectBillingInfo\` call. If unspecified, the first page of
 -- results is returned.
-baplPageToken :: Lens' BillingAccountsProjectsList' (Maybe Text)
+baplPageToken :: Lens' BillingAccountsProjectsList (Maybe Text)
 baplPageToken
   = lens _baplPageToken
       (\ s a -> s{_baplPageToken = a})
 
 -- | Requested page size. The maximum page size is 100; this is also the
 -- default.
-baplPageSize :: Lens' BillingAccountsProjectsList' (Maybe Int32)
+baplPageSize :: Lens' BillingAccountsProjectsList (Maybe Int32)
 baplPageSize
   = lens _baplPageSize (\ s a -> s{_baplPageSize = a})
 
 -- | JSONP
-baplCallback :: Lens' BillingAccountsProjectsList' (Maybe Text)
+baplCallback :: Lens' BillingAccountsProjectsList (Maybe Text)
 baplCallback
   = lens _baplCallback (\ s a -> s{_baplCallback = a})
 
-instance GoogleRequest BillingAccountsProjectsList'
+instance GoogleRequest BillingAccountsProjectsList
          where
-        type Rs BillingAccountsProjectsList' =
+        type Rs BillingAccountsProjectsList =
              ListProjectBillingInfoResponse
-        requestClient BillingAccountsProjectsList'{..}
+        requestClient BillingAccountsProjectsList{..}
           = go _baplName _baplXgafv _baplUploadProtocol
               (Just _baplPp)
               _baplAccessToken

@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Deleteall
       EditsAPKListingsDeleteallResource
 
     -- * Creating a Request
-    , editsAPKListingsDeleteall'
-    , EditsAPKListingsDeleteall'
+    , editsAPKListingsDeleteall
+    , EditsAPKListingsDeleteall
 
     -- * Request Lenses
     , eapkldaPackageName
@@ -42,7 +42,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.apklistings.deleteall@ method which the
--- 'EditsAPKListingsDeleteall'' request conforms to.
+-- 'EditsAPKListingsDeleteall' request conforms to.
 type EditsAPKListingsDeleteallResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -54,14 +54,14 @@ type EditsAPKListingsDeleteallResource =
 
 -- | Deletes all the APK-specific localized listings for a specified APK.
 --
--- /See:/ 'editsAPKListingsDeleteall'' smart constructor.
-data EditsAPKListingsDeleteall' = EditsAPKListingsDeleteall'
+-- /See:/ 'editsAPKListingsDeleteall' smart constructor.
+data EditsAPKListingsDeleteall = EditsAPKListingsDeleteall
     { _eapkldaPackageName    :: !Text
     , _eapkldaAPKVersionCode :: !Int32
     , _eapkldaEditId         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsAPKListingsDeleteall'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsAPKListingsDeleteall' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,13 +70,13 @@ data EditsAPKListingsDeleteall' = EditsAPKListingsDeleteall'
 -- * 'eapkldaAPKVersionCode'
 --
 -- * 'eapkldaEditId'
-editsAPKListingsDeleteall'
+editsAPKListingsDeleteall
     :: Text -- ^ 'eapkldaPackageName'
     -> Int32 -- ^ 'eapkldaAPKVersionCode'
     -> Text -- ^ 'eapkldaEditId'
-    -> EditsAPKListingsDeleteall'
-editsAPKListingsDeleteall' pEapkldaPackageName_ pEapkldaAPKVersionCode_ pEapkldaEditId_ =
-    EditsAPKListingsDeleteall'
+    -> EditsAPKListingsDeleteall
+editsAPKListingsDeleteall pEapkldaPackageName_ pEapkldaAPKVersionCode_ pEapkldaEditId_ =
+    EditsAPKListingsDeleteall
     { _eapkldaPackageName = pEapkldaPackageName_
     , _eapkldaAPKVersionCode = pEapkldaAPKVersionCode_
     , _eapkldaEditId = pEapkldaEditId_
@@ -84,28 +84,28 @@ editsAPKListingsDeleteall' pEapkldaPackageName_ pEapkldaAPKVersionCode_ pEapklda
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eapkldaPackageName :: Lens' EditsAPKListingsDeleteall' Text
+eapkldaPackageName :: Lens' EditsAPKListingsDeleteall Text
 eapkldaPackageName
   = lens _eapkldaPackageName
       (\ s a -> s{_eapkldaPackageName = a})
 
 -- | The APK version code whose APK-specific listings should be read or
 -- modified.
-eapkldaAPKVersionCode :: Lens' EditsAPKListingsDeleteall' Int32
+eapkldaAPKVersionCode :: Lens' EditsAPKListingsDeleteall Int32
 eapkldaAPKVersionCode
   = lens _eapkldaAPKVersionCode
       (\ s a -> s{_eapkldaAPKVersionCode = a})
 
 -- | Unique identifier for this edit.
-eapkldaEditId :: Lens' EditsAPKListingsDeleteall' Text
+eapkldaEditId :: Lens' EditsAPKListingsDeleteall Text
 eapkldaEditId
   = lens _eapkldaEditId
       (\ s a -> s{_eapkldaEditId = a})
 
-instance GoogleRequest EditsAPKListingsDeleteall'
+instance GoogleRequest EditsAPKListingsDeleteall
          where
-        type Rs EditsAPKListingsDeleteall' = ()
-        requestClient EditsAPKListingsDeleteall'{..}
+        type Rs EditsAPKListingsDeleteall = ()
+        requestClient EditsAPKListingsDeleteall{..}
           = go _eapkldaPackageName _eapkldaEditId
               _eapkldaAPKVersionCode
               (Just AltJSON)

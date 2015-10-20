@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Insert
       LiveBroadcastsInsertResource
 
     -- * Creating a Request
-    , liveBroadcastsInsert'
-    , LiveBroadcastsInsert'
+    , liveBroadcastsInsert
+    , LiveBroadcastsInsert
 
     -- * Request Lenses
     , lbiPart
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveBroadcasts.insert@ method which the
--- 'LiveBroadcastsInsert'' request conforms to.
+-- 'LiveBroadcastsInsert' request conforms to.
 type LiveBroadcastsInsertResource =
      "liveBroadcasts" :>
        QueryParam "part" Text :>
@@ -55,15 +55,15 @@ type LiveBroadcastsInsertResource =
 
 -- | Creates a broadcast.
 --
--- /See:/ 'liveBroadcastsInsert'' smart constructor.
-data LiveBroadcastsInsert' = LiveBroadcastsInsert'
+-- /See:/ 'liveBroadcastsInsert' smart constructor.
+data LiveBroadcastsInsert = LiveBroadcastsInsert
     { _lbiPart                          :: !Text
     , _lbiPayload                       :: !LiveBroadcast
     , _lbiOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbiOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LiveBroadcastsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'LiveBroadcastsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,12 +74,12 @@ data LiveBroadcastsInsert' = LiveBroadcastsInsert'
 -- * 'lbiOnBehalfOfContentOwner'
 --
 -- * 'lbiOnBehalfOfContentOwnerChannel'
-liveBroadcastsInsert'
+liveBroadcastsInsert
     :: Text -- ^ 'lbiPart'
     -> LiveBroadcast -- ^ 'lbiPayload'
-    -> LiveBroadcastsInsert'
-liveBroadcastsInsert' pLbiPart_ pLbiPayload_ =
-    LiveBroadcastsInsert'
+    -> LiveBroadcastsInsert
+liveBroadcastsInsert pLbiPart_ pLbiPayload_ =
+    LiveBroadcastsInsert
     { _lbiPart = pLbiPart_
     , _lbiPayload = pLbiPayload_
     , _lbiOnBehalfOfContentOwner = Nothing
@@ -91,11 +91,11 @@ liveBroadcastsInsert' pLbiPart_ pLbiPayload_ =
 -- properties that the API response will include. The part properties that
 -- you can include in the parameter value are id, snippet, contentDetails,
 -- and status.
-lbiPart :: Lens' LiveBroadcastsInsert' Text
+lbiPart :: Lens' LiveBroadcastsInsert Text
 lbiPart = lens _lbiPart (\ s a -> s{_lbiPart = a})
 
 -- | Multipart request metadata.
-lbiPayload :: Lens' LiveBroadcastsInsert' LiveBroadcast
+lbiPayload :: Lens' LiveBroadcastsInsert LiveBroadcast
 lbiPayload
   = lens _lbiPayload (\ s a -> s{_lbiPayload = a})
 
@@ -109,7 +109,7 @@ lbiPayload
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-lbiOnBehalfOfContentOwner :: Lens' LiveBroadcastsInsert' (Maybe Text)
+lbiOnBehalfOfContentOwner :: Lens' LiveBroadcastsInsert (Maybe Text)
 lbiOnBehalfOfContentOwner
   = lens _lbiOnBehalfOfContentOwner
       (\ s a -> s{_lbiOnBehalfOfContentOwner = a})
@@ -130,14 +130,14 @@ lbiOnBehalfOfContentOwner
 -- actions on behalf of the channel specified in the parameter value,
 -- without having to provide authentication credentials for each separate
 -- channel.
-lbiOnBehalfOfContentOwnerChannel :: Lens' LiveBroadcastsInsert' (Maybe Text)
+lbiOnBehalfOfContentOwnerChannel :: Lens' LiveBroadcastsInsert (Maybe Text)
 lbiOnBehalfOfContentOwnerChannel
   = lens _lbiOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lbiOnBehalfOfContentOwnerChannel = a})
 
-instance GoogleRequest LiveBroadcastsInsert' where
-        type Rs LiveBroadcastsInsert' = LiveBroadcast
-        requestClient LiveBroadcastsInsert'{..}
+instance GoogleRequest LiveBroadcastsInsert where
+        type Rs LiveBroadcastsInsert = LiveBroadcast
+        requestClient LiveBroadcastsInsert{..}
           = go (Just _lbiPart) _lbiOnBehalfOfContentOwner
               _lbiOnBehalfOfContentOwnerChannel
               (Just AltJSON)

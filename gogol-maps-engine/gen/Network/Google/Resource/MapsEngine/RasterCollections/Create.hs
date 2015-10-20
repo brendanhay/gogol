@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Create
       RasterCollectionsCreateResource
 
     -- * Creating a Request
-    , rasterCollectionsCreate'
-    , RasterCollectionsCreate'
+    , rasterCollectionsCreate
+    , RasterCollectionsCreate
 
     -- * Request Lenses
     , rccPayload
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasterCollections.create@ method which the
--- 'RasterCollectionsCreate'' request conforms to.
+-- 'RasterCollectionsCreate' request conforms to.
 type RasterCollectionsCreateResource =
      "rasterCollections" :>
        QueryParam "alt" AltJSON :>
@@ -49,32 +49,32 @@ type RasterCollectionsCreateResource =
 
 -- | Create a raster collection asset.
 --
--- /See:/ 'rasterCollectionsCreate'' smart constructor.
-newtype RasterCollectionsCreate' = RasterCollectionsCreate'
+-- /See:/ 'rasterCollectionsCreate' smart constructor.
+newtype RasterCollectionsCreate = RasterCollectionsCreate
     { _rccPayload :: RasterCollection
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RasterCollectionsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'RasterCollectionsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rccPayload'
-rasterCollectionsCreate'
+rasterCollectionsCreate
     :: RasterCollection -- ^ 'rccPayload'
-    -> RasterCollectionsCreate'
-rasterCollectionsCreate' pRccPayload_ =
-    RasterCollectionsCreate'
+    -> RasterCollectionsCreate
+rasterCollectionsCreate pRccPayload_ =
+    RasterCollectionsCreate
     { _rccPayload = pRccPayload_
     }
 
 -- | Multipart request metadata.
-rccPayload :: Lens' RasterCollectionsCreate' RasterCollection
+rccPayload :: Lens' RasterCollectionsCreate RasterCollection
 rccPayload
   = lens _rccPayload (\ s a -> s{_rccPayload = a})
 
-instance GoogleRequest RasterCollectionsCreate' where
-        type Rs RasterCollectionsCreate' = RasterCollection
-        requestClient RasterCollectionsCreate'{..}
+instance GoogleRequest RasterCollectionsCreate where
+        type Rs RasterCollectionsCreate = RasterCollection
+        requestClient RasterCollectionsCreate{..}
           = go (Just AltJSON) _rccPayload mapsEngineService
           where go
                   = buildClient

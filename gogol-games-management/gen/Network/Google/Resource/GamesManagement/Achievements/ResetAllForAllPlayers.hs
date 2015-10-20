@@ -30,8 +30,8 @@ module Network.Google.Resource.GamesManagement.Achievements.ResetAllForAllPlayer
       AchievementsResetAllForAllPlayersResource
 
     -- * Creating a Request
-    , achievementsResetAllForAllPlayers'
-    , AchievementsResetAllForAllPlayers'
+    , achievementsResetAllForAllPlayers
+    , AchievementsResetAllForAllPlayers
 
     ) where
 
@@ -39,7 +39,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.achievements.resetAllForAllPlayers@ method which the
--- 'AchievementsResetAllForAllPlayers'' request conforms to.
+-- 'AchievementsResetAllForAllPlayers' request conforms to.
 type AchievementsResetAllForAllPlayersResource =
      "achievements" :>
        "resetAllForAllPlayers" :>
@@ -48,21 +48,21 @@ type AchievementsResetAllForAllPlayersResource =
 -- | Resets all draft achievements for all players. This method is only
 -- available to user accounts for your developer console.
 --
--- /See:/ 'achievementsResetAllForAllPlayers'' smart constructor.
-data AchievementsResetAllForAllPlayers' =
-    AchievementsResetAllForAllPlayers'
+-- /See:/ 'achievementsResetAllForAllPlayers' smart constructor.
+data AchievementsResetAllForAllPlayers =
+    AchievementsResetAllForAllPlayers
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AchievementsResetAllForAllPlayers'' with the minimum fields required to make a request.
+-- | Creates a value of 'AchievementsResetAllForAllPlayers' with the minimum fields required to make a request.
 --
-achievementsResetAllForAllPlayers'
-    :: AchievementsResetAllForAllPlayers'
-achievementsResetAllForAllPlayers' = AchievementsResetAllForAllPlayers'
+achievementsResetAllForAllPlayers
+    :: AchievementsResetAllForAllPlayers
+achievementsResetAllForAllPlayers = AchievementsResetAllForAllPlayers
 
 instance GoogleRequest
-         AchievementsResetAllForAllPlayers' where
-        type Rs AchievementsResetAllForAllPlayers' = ()
-        requestClient AchievementsResetAllForAllPlayers'{}
+         AchievementsResetAllForAllPlayers where
+        type Rs AchievementsResetAllForAllPlayers = ()
+        requestClient AchievementsResetAllForAllPlayers{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

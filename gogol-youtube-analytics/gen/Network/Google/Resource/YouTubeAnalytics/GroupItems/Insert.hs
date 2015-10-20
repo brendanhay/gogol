@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert
       GroupItemsInsertResource
 
     -- * Creating a Request
-    , groupItemsInsert'
-    , GroupItemsInsert'
+    , groupItemsInsert
+    , GroupItemsInsert
 
     -- * Request Lenses
     , giiPayload
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @youtubeAnalytics.groupItems.insert@ method which the
--- 'GroupItemsInsert'' request conforms to.
+-- 'GroupItemsInsert' request conforms to.
 type GroupItemsInsertResource =
      "groupItems" :>
        QueryParam "onBehalfOfContentOwner" Text :>
@@ -50,30 +50,30 @@ type GroupItemsInsertResource =
 
 -- | Creates a group item.
 --
--- /See:/ 'groupItemsInsert'' smart constructor.
-data GroupItemsInsert' = GroupItemsInsert'
+-- /See:/ 'groupItemsInsert' smart constructor.
+data GroupItemsInsert = GroupItemsInsert
     { _giiPayload                :: !GroupItem
     , _giiOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GroupItemsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'GroupItemsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'giiPayload'
 --
 -- * 'giiOnBehalfOfContentOwner'
-groupItemsInsert'
+groupItemsInsert
     :: GroupItem -- ^ 'giiPayload'
-    -> GroupItemsInsert'
-groupItemsInsert' pGiiPayload_ =
-    GroupItemsInsert'
+    -> GroupItemsInsert
+groupItemsInsert pGiiPayload_ =
+    GroupItemsInsert
     { _giiPayload = pGiiPayload_
     , _giiOnBehalfOfContentOwner = Nothing
     }
 
 -- | Multipart request metadata.
-giiPayload :: Lens' GroupItemsInsert' GroupItem
+giiPayload :: Lens' GroupItemsInsert GroupItem
 giiPayload
   = lens _giiPayload (\ s a -> s{_giiPayload = a})
 
@@ -87,14 +87,14 @@ giiPayload
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-giiOnBehalfOfContentOwner :: Lens' GroupItemsInsert' (Maybe Text)
+giiOnBehalfOfContentOwner :: Lens' GroupItemsInsert (Maybe Text)
 giiOnBehalfOfContentOwner
   = lens _giiOnBehalfOfContentOwner
       (\ s a -> s{_giiOnBehalfOfContentOwner = a})
 
-instance GoogleRequest GroupItemsInsert' where
-        type Rs GroupItemsInsert' = GroupItem
-        requestClient GroupItemsInsert'{..}
+instance GoogleRequest GroupItemsInsert where
+        type Rs GroupItemsInsert = GroupItem
+        requestClient GroupItemsInsert{..}
           = go _giiOnBehalfOfContentOwner (Just AltJSON)
               _giiPayload
               youTubeAnalyticsService

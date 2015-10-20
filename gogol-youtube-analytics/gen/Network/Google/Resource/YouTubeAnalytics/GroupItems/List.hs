@@ -30,8 +30,8 @@ module Network.Google.Resource.YouTubeAnalytics.GroupItems.List
       GroupItemsListResource
 
     -- * Creating a Request
-    , groupItemsList'
-    , GroupItemsList'
+    , groupItemsList
+    , GroupItemsList
 
     -- * Request Lenses
     , gilOnBehalfOfContentOwner
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @youtubeAnalytics.groupItems.list@ method which the
--- 'GroupItemsList'' request conforms to.
+-- 'GroupItemsList' request conforms to.
 type GroupItemsListResource =
      "groupItems" :>
        QueryParam "groupId" Text :>
@@ -53,24 +53,24 @@ type GroupItemsListResource =
 -- | Returns a collection of group items that match the API request
 -- parameters.
 --
--- /See:/ 'groupItemsList'' smart constructor.
-data GroupItemsList' = GroupItemsList'
+-- /See:/ 'groupItemsList' smart constructor.
+data GroupItemsList = GroupItemsList
     { _gilOnBehalfOfContentOwner :: !(Maybe Text)
     , _gilGroupId                :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GroupItemsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'GroupItemsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gilOnBehalfOfContentOwner'
 --
 -- * 'gilGroupId'
-groupItemsList'
+groupItemsList
     :: Text -- ^ 'gilGroupId'
-    -> GroupItemsList'
-groupItemsList' pGilGroupId_ =
-    GroupItemsList'
+    -> GroupItemsList
+groupItemsList pGilGroupId_ =
+    GroupItemsList
     { _gilOnBehalfOfContentOwner = Nothing
     , _gilGroupId = pGilGroupId_
     }
@@ -85,20 +85,20 @@ groupItemsList' pGilGroupId_ =
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-gilOnBehalfOfContentOwner :: Lens' GroupItemsList' (Maybe Text)
+gilOnBehalfOfContentOwner :: Lens' GroupItemsList (Maybe Text)
 gilOnBehalfOfContentOwner
   = lens _gilOnBehalfOfContentOwner
       (\ s a -> s{_gilOnBehalfOfContentOwner = a})
 
 -- | The id parameter specifies the unique ID of the group for which you want
 -- to retrieve group items.
-gilGroupId :: Lens' GroupItemsList' Text
+gilGroupId :: Lens' GroupItemsList Text
 gilGroupId
   = lens _gilGroupId (\ s a -> s{_gilGroupId = a})
 
-instance GoogleRequest GroupItemsList' where
-        type Rs GroupItemsList' = GroupItemListResponse
-        requestClient GroupItemsList'{..}
+instance GoogleRequest GroupItemsList where
+        type Rs GroupItemsList = GroupItemListResponse
+        requestClient GroupItemsList{..}
           = go (Just _gilGroupId) _gilOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeAnalyticsService

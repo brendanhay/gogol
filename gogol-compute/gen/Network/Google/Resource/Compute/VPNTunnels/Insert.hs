@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.VPNTunnels.Insert
       VPNTunnelsInsertResource
 
     -- * Creating a Request
-    , vpnTunnelsInsert'
-    , VPNTunnelsInsert'
+    , vpnTunnelsInsert
+    , VPNTunnelsInsert
 
     -- * Request Lenses
     , vtiProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.vpnTunnels.insert@ method which the
--- 'VPNTunnelsInsert'' request conforms to.
+-- 'VPNTunnelsInsert' request conforms to.
 type VPNTunnelsInsertResource =
      Capture "project" Text :>
        "regions" :>
@@ -55,14 +55,14 @@ type VPNTunnelsInsertResource =
 -- | Creates a VpnTunnel resource in the specified project and region using
 -- the data included in the request.
 --
--- /See:/ 'vpnTunnelsInsert'' smart constructor.
-data VPNTunnelsInsert' = VPNTunnelsInsert'
+-- /See:/ 'vpnTunnelsInsert' smart constructor.
+data VPNTunnelsInsert = VPNTunnelsInsert
     { _vtiProject :: !Text
     , _vtiPayload :: !VPNTunnel
     , _vtiRegion  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VPNTunnelsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'VPNTunnelsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,36 +71,36 @@ data VPNTunnelsInsert' = VPNTunnelsInsert'
 -- * 'vtiPayload'
 --
 -- * 'vtiRegion'
-vpnTunnelsInsert'
+vpnTunnelsInsert
     :: Text -- ^ 'vtiProject'
     -> VPNTunnel -- ^ 'vtiPayload'
     -> Text -- ^ 'vtiRegion'
-    -> VPNTunnelsInsert'
-vpnTunnelsInsert' pVtiProject_ pVtiPayload_ pVtiRegion_ =
-    VPNTunnelsInsert'
+    -> VPNTunnelsInsert
+vpnTunnelsInsert pVtiProject_ pVtiPayload_ pVtiRegion_ =
+    VPNTunnelsInsert
     { _vtiProject = pVtiProject_
     , _vtiPayload = pVtiPayload_
     , _vtiRegion = pVtiRegion_
     }
 
 -- | Project ID for this request.
-vtiProject :: Lens' VPNTunnelsInsert' Text
+vtiProject :: Lens' VPNTunnelsInsert Text
 vtiProject
   = lens _vtiProject (\ s a -> s{_vtiProject = a})
 
 -- | Multipart request metadata.
-vtiPayload :: Lens' VPNTunnelsInsert' VPNTunnel
+vtiPayload :: Lens' VPNTunnelsInsert VPNTunnel
 vtiPayload
   = lens _vtiPayload (\ s a -> s{_vtiPayload = a})
 
 -- | The name of the region for this request.
-vtiRegion :: Lens' VPNTunnelsInsert' Text
+vtiRegion :: Lens' VPNTunnelsInsert Text
 vtiRegion
   = lens _vtiRegion (\ s a -> s{_vtiRegion = a})
 
-instance GoogleRequest VPNTunnelsInsert' where
-        type Rs VPNTunnelsInsert' = Operation
-        requestClient VPNTunnelsInsert'{..}
+instance GoogleRequest VPNTunnelsInsert where
+        type Rs VPNTunnelsInsert = Operation
+        requestClient VPNTunnelsInsert{..}
           = go _vtiProject _vtiRegion (Just AltJSON)
               _vtiPayload
               computeService

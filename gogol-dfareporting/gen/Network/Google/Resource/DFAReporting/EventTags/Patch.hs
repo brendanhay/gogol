@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.EventTags.Patch
       EventTagsPatchResource
 
     -- * Creating a Request
-    , eventTagsPatch'
-    , EventTagsPatch'
+    , eventTagsPatch
+    , EventTagsPatch
 
     -- * Request Lenses
     , etpProFileId
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.eventTags.patch@ method which the
--- 'EventTagsPatch'' request conforms to.
+-- 'EventTagsPatch' request conforms to.
 type EventTagsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -53,14 +53,14 @@ type EventTagsPatchResource =
 
 -- | Updates an existing event tag. This method supports patch semantics.
 --
--- /See:/ 'eventTagsPatch'' smart constructor.
-data EventTagsPatch' = EventTagsPatch'
+-- /See:/ 'eventTagsPatch' smart constructor.
+data EventTagsPatch = EventTagsPatch
     { _etpProFileId :: !Int64
     , _etpPayload   :: !EventTag
     , _etpId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventTagsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventTagsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data EventTagsPatch' = EventTagsPatch'
 -- * 'etpPayload'
 --
 -- * 'etpId'
-eventTagsPatch'
+eventTagsPatch
     :: Int64 -- ^ 'etpProFileId'
     -> EventTag -- ^ 'etpPayload'
     -> Int64 -- ^ 'etpId'
-    -> EventTagsPatch'
-eventTagsPatch' pEtpProFileId_ pEtpPayload_ pEtpId_ =
-    EventTagsPatch'
+    -> EventTagsPatch
+eventTagsPatch pEtpProFileId_ pEtpPayload_ pEtpId_ =
+    EventTagsPatch
     { _etpProFileId = pEtpProFileId_
     , _etpPayload = pEtpPayload_
     , _etpId = pEtpId_
     }
 
 -- | User profile ID associated with this request.
-etpProFileId :: Lens' EventTagsPatch' Int64
+etpProFileId :: Lens' EventTagsPatch Int64
 etpProFileId
   = lens _etpProFileId (\ s a -> s{_etpProFileId = a})
 
 -- | Multipart request metadata.
-etpPayload :: Lens' EventTagsPatch' EventTag
+etpPayload :: Lens' EventTagsPatch EventTag
 etpPayload
   = lens _etpPayload (\ s a -> s{_etpPayload = a})
 
 -- | Event tag ID.
-etpId :: Lens' EventTagsPatch' Int64
+etpId :: Lens' EventTagsPatch Int64
 etpId = lens _etpId (\ s a -> s{_etpId = a})
 
-instance GoogleRequest EventTagsPatch' where
-        type Rs EventTagsPatch' = EventTag
-        requestClient EventTagsPatch'{..}
+instance GoogleRequest EventTagsPatch where
+        type Rs EventTagsPatch = EventTag
+        requestClient EventTagsPatch{..}
           = go _etpProFileId (Just _etpId) (Just AltJSON)
               _etpPayload
               dFAReportingService

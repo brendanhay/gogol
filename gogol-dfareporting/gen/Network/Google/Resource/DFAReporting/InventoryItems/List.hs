@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.InventoryItems.List
       InventoryItemsListResource
 
     -- * Creating a Request
-    , inventoryItemsList'
-    , InventoryItemsList'
+    , inventoryItemsList
+    , InventoryItemsList
 
     -- * Request Lenses
     , iilIds
@@ -49,7 +49,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.inventoryItems.list@ method which the
--- 'InventoryItemsList'' request conforms to.
+-- 'InventoryItemsList' request conforms to.
 type InventoryItemsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -69,8 +69,8 @@ type InventoryItemsListResource =
 
 -- | Retrieves a list of inventory items, possibly filtered.
 --
--- /See:/ 'inventoryItemsList'' smart constructor.
-data InventoryItemsList' = InventoryItemsList'
+-- /See:/ 'inventoryItemsList' smart constructor.
+data InventoryItemsList = InventoryItemsList
     { _iilIds        :: !(Maybe [Int64])
     , _iilProFileId  :: !Int64
     , _iilSortOrder  :: !(Maybe InventoryItemsListSortOrder)
@@ -83,7 +83,7 @@ data InventoryItemsList' = InventoryItemsList'
     , _iilMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InventoryItemsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'InventoryItemsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -106,12 +106,12 @@ data InventoryItemsList' = InventoryItemsList'
 -- * 'iilSiteId'
 --
 -- * 'iilMaxResults'
-inventoryItemsList'
+inventoryItemsList
     :: Int64 -- ^ 'iilProFileId'
     -> Int64 -- ^ 'iilProjectId'
-    -> InventoryItemsList'
-inventoryItemsList' pIilProFileId_ pIilProjectId_ =
-    InventoryItemsList'
+    -> InventoryItemsList
+inventoryItemsList pIilProFileId_ pIilProjectId_ =
+    InventoryItemsList
     { _iilIds = Nothing
     , _iilProFileId = pIilProFileId_
     , _iilSortOrder = Nothing
@@ -125,65 +125,65 @@ inventoryItemsList' pIilProFileId_ pIilProjectId_ =
     }
 
 -- | Select only inventory items with these IDs.
-iilIds :: Lens' InventoryItemsList' [Int64]
+iilIds :: Lens' InventoryItemsList [Int64]
 iilIds
   = lens _iilIds (\ s a -> s{_iilIds = a}) . _Default .
       _Coerce
 
 -- | User profile ID associated with this request.
-iilProFileId :: Lens' InventoryItemsList' Int64
+iilProFileId :: Lens' InventoryItemsList Int64
 iilProFileId
   = lens _iilProFileId (\ s a -> s{_iilProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-iilSortOrder :: Lens' InventoryItemsList' (Maybe InventoryItemsListSortOrder)
+iilSortOrder :: Lens' InventoryItemsList (Maybe InventoryItemsListSortOrder)
 iilSortOrder
   = lens _iilSortOrder (\ s a -> s{_iilSortOrder = a})
 
 -- | Select only inventory items that are in plan.
-iilInPlan :: Lens' InventoryItemsList' (Maybe Bool)
+iilInPlan :: Lens' InventoryItemsList (Maybe Bool)
 iilInPlan
   = lens _iilInPlan (\ s a -> s{_iilInPlan = a})
 
 -- | Value of the nextPageToken from the previous result page.
-iilPageToken :: Lens' InventoryItemsList' (Maybe Text)
+iilPageToken :: Lens' InventoryItemsList (Maybe Text)
 iilPageToken
   = lens _iilPageToken (\ s a -> s{_iilPageToken = a})
 
 -- | Project ID for order documents.
-iilProjectId :: Lens' InventoryItemsList' Int64
+iilProjectId :: Lens' InventoryItemsList Int64
 iilProjectId
   = lens _iilProjectId (\ s a -> s{_iilProjectId = a})
 
 -- | Field by which to sort the list.
-iilSortField :: Lens' InventoryItemsList' (Maybe InventoryItemsListSortField)
+iilSortField :: Lens' InventoryItemsList (Maybe InventoryItemsListSortField)
 iilSortField
   = lens _iilSortField (\ s a -> s{_iilSortField = a})
 
 -- | Select only inventory items that belong to specified orders.
-iilOrderId :: Lens' InventoryItemsList' [Int64]
+iilOrderId :: Lens' InventoryItemsList [Int64]
 iilOrderId
   = lens _iilOrderId (\ s a -> s{_iilOrderId = a}) .
       _Default
       . _Coerce
 
 -- | Select only inventory items that are associated with these sites.
-iilSiteId :: Lens' InventoryItemsList' [Int64]
+iilSiteId :: Lens' InventoryItemsList [Int64]
 iilSiteId
   = lens _iilSiteId (\ s a -> s{_iilSiteId = a}) .
       _Default
       . _Coerce
 
 -- | Maximum number of results to return.
-iilMaxResults :: Lens' InventoryItemsList' (Maybe Int32)
+iilMaxResults :: Lens' InventoryItemsList (Maybe Int32)
 iilMaxResults
   = lens _iilMaxResults
       (\ s a -> s{_iilMaxResults = a})
 
-instance GoogleRequest InventoryItemsList' where
-        type Rs InventoryItemsList' =
+instance GoogleRequest InventoryItemsList where
+        type Rs InventoryItemsList =
              InventoryItemsListResponse
-        requestClient InventoryItemsList'{..}
+        requestClient InventoryItemsList{..}
           = go _iilProFileId _iilProjectId
               (_iilIds ^. _Default)
               _iilSortOrder

@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.Comments.Approve
       CommentsApproveResource
 
     -- * Creating a Request
-    , commentsApprove'
-    , CommentsApprove'
+    , commentsApprove
+    , CommentsApprove
 
     -- * Request Lenses
     , caBlogId
@@ -42,7 +42,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.comments.approve@ method which the
--- 'CommentsApprove'' request conforms to.
+-- 'CommentsApprove' request conforms to.
 type CommentsApproveResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -55,14 +55,14 @@ type CommentsApproveResource =
 
 -- | Marks a comment as not spam.
 --
--- /See:/ 'commentsApprove'' smart constructor.
-data CommentsApprove' = CommentsApprove'
+-- /See:/ 'commentsApprove' smart constructor.
+data CommentsApprove = CommentsApprove
     { _caBlogId    :: !Text
     , _caPostId    :: !Text
     , _caCommentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsApprove'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsApprove' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,34 +71,34 @@ data CommentsApprove' = CommentsApprove'
 -- * 'caPostId'
 --
 -- * 'caCommentId'
-commentsApprove'
+commentsApprove
     :: Text -- ^ 'caBlogId'
     -> Text -- ^ 'caPostId'
     -> Text -- ^ 'caCommentId'
-    -> CommentsApprove'
-commentsApprove' pCaBlogId_ pCaPostId_ pCaCommentId_ =
-    CommentsApprove'
+    -> CommentsApprove
+commentsApprove pCaBlogId_ pCaPostId_ pCaCommentId_ =
+    CommentsApprove
     { _caBlogId = pCaBlogId_
     , _caPostId = pCaPostId_
     , _caCommentId = pCaCommentId_
     }
 
 -- | The ID of the Blog.
-caBlogId :: Lens' CommentsApprove' Text
+caBlogId :: Lens' CommentsApprove Text
 caBlogId = lens _caBlogId (\ s a -> s{_caBlogId = a})
 
 -- | The ID of the Post.
-caPostId :: Lens' CommentsApprove' Text
+caPostId :: Lens' CommentsApprove Text
 caPostId = lens _caPostId (\ s a -> s{_caPostId = a})
 
 -- | The ID of the comment to mark as not spam.
-caCommentId :: Lens' CommentsApprove' Text
+caCommentId :: Lens' CommentsApprove Text
 caCommentId
   = lens _caCommentId (\ s a -> s{_caCommentId = a})
 
-instance GoogleRequest CommentsApprove' where
-        type Rs CommentsApprove' = Comment
-        requestClient CommentsApprove'{..}
+instance GoogleRequest CommentsApprove where
+        type Rs CommentsApprove = Comment
+        requestClient CommentsApprove{..}
           = go _caBlogId _caPostId _caCommentId (Just AltJSON)
               bloggerService
           where go

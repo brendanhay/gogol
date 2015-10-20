@@ -29,8 +29,8 @@ module Network.Google.Resource.SQL.Instances.RestoreBackup
       InstancesRestoreBackupResource
 
     -- * Creating a Request
-    , instancesRestoreBackup'
-    , InstancesRestoreBackup'
+    , instancesRestoreBackup
+    , InstancesRestoreBackup
 
     -- * Request Lenses
     , irbProject
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.restoreBackup@ method which the
--- 'InstancesRestoreBackup'' request conforms to.
+-- 'InstancesRestoreBackup' request conforms to.
 type InstancesRestoreBackupResource =
      "projects" :>
        Capture "project" Text :>
@@ -55,14 +55,14 @@ type InstancesRestoreBackupResource =
 
 -- | Restores a backup of a Cloud SQL instance.
 --
--- /See:/ 'instancesRestoreBackup'' smart constructor.
-data InstancesRestoreBackup' = InstancesRestoreBackup'
+-- /See:/ 'instancesRestoreBackup' smart constructor.
+data InstancesRestoreBackup = InstancesRestoreBackup
     { _irbProject  :: !Text
     , _irbPayload  :: !InstancesRestoreBackupRequest
     , _irbInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesRestoreBackup'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesRestoreBackup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,36 +71,36 @@ data InstancesRestoreBackup' = InstancesRestoreBackup'
 -- * 'irbPayload'
 --
 -- * 'irbInstance'
-instancesRestoreBackup'
+instancesRestoreBackup
     :: Text -- ^ 'irbProject'
     -> InstancesRestoreBackupRequest -- ^ 'irbPayload'
     -> Text -- ^ 'irbInstance'
-    -> InstancesRestoreBackup'
-instancesRestoreBackup' pIrbProject_ pIrbPayload_ pIrbInstance_ =
-    InstancesRestoreBackup'
+    -> InstancesRestoreBackup
+instancesRestoreBackup pIrbProject_ pIrbPayload_ pIrbInstance_ =
+    InstancesRestoreBackup
     { _irbProject = pIrbProject_
     , _irbPayload = pIrbPayload_
     , _irbInstance = pIrbInstance_
     }
 
 -- | Project ID of the project that contains the instance.
-irbProject :: Lens' InstancesRestoreBackup' Text
+irbProject :: Lens' InstancesRestoreBackup Text
 irbProject
   = lens _irbProject (\ s a -> s{_irbProject = a})
 
 -- | Multipart request metadata.
-irbPayload :: Lens' InstancesRestoreBackup' InstancesRestoreBackupRequest
+irbPayload :: Lens' InstancesRestoreBackup InstancesRestoreBackupRequest
 irbPayload
   = lens _irbPayload (\ s a -> s{_irbPayload = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-irbInstance :: Lens' InstancesRestoreBackup' Text
+irbInstance :: Lens' InstancesRestoreBackup Text
 irbInstance
   = lens _irbInstance (\ s a -> s{_irbInstance = a})
 
-instance GoogleRequest InstancesRestoreBackup' where
-        type Rs InstancesRestoreBackup' = Operation
-        requestClient InstancesRestoreBackup'{..}
+instance GoogleRequest InstancesRestoreBackup where
+        type Rs InstancesRestoreBackup = Operation
+        requestClient InstancesRestoreBackup{..}
           = go _irbProject _irbInstance (Just AltJSON)
               _irbPayload
               sQLAdminService

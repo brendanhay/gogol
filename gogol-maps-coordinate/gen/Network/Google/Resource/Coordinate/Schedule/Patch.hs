@@ -30,8 +30,8 @@ module Network.Google.Resource.Coordinate.Schedule.Patch
       SchedulePatchResource
 
     -- * Creating a Request
-    , schedulePatch'
-    , SchedulePatch'
+    , schedulePatch
+    , SchedulePatch
 
     -- * Request Lenses
     , spJobId
@@ -47,7 +47,7 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @coordinate.schedule.patch@ method which the
--- 'SchedulePatch'' request conforms to.
+-- 'SchedulePatch' request conforms to.
 type SchedulePatchResource =
      "teams" :>
        Capture "teamId" Text :>
@@ -64,8 +64,8 @@ type SchedulePatchResource =
 -- | Replaces the schedule of a job with the provided schedule. This method
 -- supports patch semantics.
 --
--- /See:/ 'schedulePatch'' smart constructor.
-data SchedulePatch' = SchedulePatch'
+-- /See:/ 'schedulePatch' smart constructor.
+data SchedulePatch = SchedulePatch
     { _spJobId     :: !Word64
     , _spAllDay    :: !(Maybe Bool)
     , _spStartTime :: !(Maybe Word64)
@@ -75,7 +75,7 @@ data SchedulePatch' = SchedulePatch'
     , _spDuration  :: !(Maybe Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SchedulePatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'SchedulePatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -92,13 +92,13 @@ data SchedulePatch' = SchedulePatch'
 -- * 'spEndTime'
 --
 -- * 'spDuration'
-schedulePatch'
+schedulePatch
     :: Word64 -- ^ 'spJobId'
     -> Text -- ^ 'spTeamId'
     -> Schedule -- ^ 'spPayload'
-    -> SchedulePatch'
-schedulePatch' pSpJobId_ pSpTeamId_ pSpPayload_ =
-    SchedulePatch'
+    -> SchedulePatch
+schedulePatch pSpJobId_ pSpTeamId_ pSpPayload_ =
+    SchedulePatch
     { _spJobId = pSpJobId_
     , _spAllDay = Nothing
     , _spStartTime = Nothing
@@ -109,41 +109,41 @@ schedulePatch' pSpJobId_ pSpTeamId_ pSpPayload_ =
     }
 
 -- | Job number
-spJobId :: Lens' SchedulePatch' Word64
+spJobId :: Lens' SchedulePatch Word64
 spJobId = lens _spJobId (\ s a -> s{_spJobId = a})
 
 -- | Whether the job is scheduled for the whole day. Time of day in
 -- start\/end times is ignored if this is true.
-spAllDay :: Lens' SchedulePatch' (Maybe Bool)
+spAllDay :: Lens' SchedulePatch (Maybe Bool)
 spAllDay = lens _spAllDay (\ s a -> s{_spAllDay = a})
 
 -- | Scheduled start time in milliseconds since epoch.
-spStartTime :: Lens' SchedulePatch' (Maybe Word64)
+spStartTime :: Lens' SchedulePatch (Maybe Word64)
 spStartTime
   = lens _spStartTime (\ s a -> s{_spStartTime = a})
 
 -- | Team ID
-spTeamId :: Lens' SchedulePatch' Text
+spTeamId :: Lens' SchedulePatch Text
 spTeamId = lens _spTeamId (\ s a -> s{_spTeamId = a})
 
 -- | Multipart request metadata.
-spPayload :: Lens' SchedulePatch' Schedule
+spPayload :: Lens' SchedulePatch Schedule
 spPayload
   = lens _spPayload (\ s a -> s{_spPayload = a})
 
 -- | Scheduled end time in milliseconds since epoch.
-spEndTime :: Lens' SchedulePatch' (Maybe Word64)
+spEndTime :: Lens' SchedulePatch (Maybe Word64)
 spEndTime
   = lens _spEndTime (\ s a -> s{_spEndTime = a})
 
 -- | Job duration in milliseconds.
-spDuration :: Lens' SchedulePatch' (Maybe Word64)
+spDuration :: Lens' SchedulePatch (Maybe Word64)
 spDuration
   = lens _spDuration (\ s a -> s{_spDuration = a})
 
-instance GoogleRequest SchedulePatch' where
-        type Rs SchedulePatch' = Schedule
-        requestClient SchedulePatch'{..}
+instance GoogleRequest SchedulePatch where
+        type Rs SchedulePatch = Schedule
+        requestClient SchedulePatch{..}
           = go _spTeamId _spJobId _spAllDay _spStartTime
               _spEndTime
               _spDuration

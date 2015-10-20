@@ -29,8 +29,8 @@ module Network.Google.Resource.FusionTables.Table.Copy
       TableCopyResource
 
     -- * Creating a Request
-    , tableCopy'
-    , TableCopy'
+    , tableCopy
+    , TableCopy
 
     -- * Request Lenses
     , tcTableId
@@ -41,7 +41,7 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.table.copy@ method which the
--- 'TableCopy'' request conforms to.
+-- 'TableCopy' request conforms to.
 type TableCopyResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -51,42 +51,42 @@ type TableCopyResource =
 
 -- | Copies a table.
 --
--- /See:/ 'tableCopy'' smart constructor.
-data TableCopy' = TableCopy'
+-- /See:/ 'tableCopy' smart constructor.
+data TableCopy = TableCopy
     { _tcTableId          :: !Text
     , _tcCopyPresentation :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TableCopy'' with the minimum fields required to make a request.
+-- | Creates a value of 'TableCopy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tcTableId'
 --
 -- * 'tcCopyPresentation'
-tableCopy'
+tableCopy
     :: Text -- ^ 'tcTableId'
-    -> TableCopy'
-tableCopy' pTcTableId_ =
-    TableCopy'
+    -> TableCopy
+tableCopy pTcTableId_ =
+    TableCopy
     { _tcTableId = pTcTableId_
     , _tcCopyPresentation = Nothing
     }
 
 -- | ID of the table that is being copied.
-tcTableId :: Lens' TableCopy' Text
+tcTableId :: Lens' TableCopy Text
 tcTableId
   = lens _tcTableId (\ s a -> s{_tcTableId = a})
 
 -- | Whether to also copy tabs, styles, and templates. Default is false.
-tcCopyPresentation :: Lens' TableCopy' (Maybe Bool)
+tcCopyPresentation :: Lens' TableCopy (Maybe Bool)
 tcCopyPresentation
   = lens _tcCopyPresentation
       (\ s a -> s{_tcCopyPresentation = a})
 
-instance GoogleRequest TableCopy' where
-        type Rs TableCopy' = Table
-        requestClient TableCopy'{..}
+instance GoogleRequest TableCopy where
+        type Rs TableCopy = Table
+        requestClient TableCopy{..}
           = go _tcTableId _tcCopyPresentation (Just AltJSON)
               fusionTablesService
           where go

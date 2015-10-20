@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Schemas.Insert
       SchemasInsertResource
 
     -- * Creating a Request
-    , schemasInsert'
-    , SchemasInsert'
+    , schemasInsert
+    , SchemasInsert
 
     -- * Request Lenses
     , siPayload
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.schemas.insert@ method which the
--- 'SchemasInsert'' request conforms to.
+-- 'SchemasInsert' request conforms to.
 type SchemasInsertResource =
      "customer" :>
        Capture "customerId" Text :>
@@ -51,42 +51,42 @@ type SchemasInsertResource =
 
 -- | Create schema.
 --
--- /See:/ 'schemasInsert'' smart constructor.
-data SchemasInsert' = SchemasInsert'
+-- /See:/ 'schemasInsert' smart constructor.
+data SchemasInsert = SchemasInsert
     { _siPayload    :: !Schema
     , _siCustomerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SchemasInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'SchemasInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'siPayload'
 --
 -- * 'siCustomerId'
-schemasInsert'
+schemasInsert
     :: Schema -- ^ 'siPayload'
     -> Text -- ^ 'siCustomerId'
-    -> SchemasInsert'
-schemasInsert' pSiPayload_ pSiCustomerId_ =
-    SchemasInsert'
+    -> SchemasInsert
+schemasInsert pSiPayload_ pSiCustomerId_ =
+    SchemasInsert
     { _siPayload = pSiPayload_
     , _siCustomerId = pSiCustomerId_
     }
 
 -- | Multipart request metadata.
-siPayload :: Lens' SchemasInsert' Schema
+siPayload :: Lens' SchemasInsert Schema
 siPayload
   = lens _siPayload (\ s a -> s{_siPayload = a})
 
 -- | Immutable id of the Google Apps account
-siCustomerId :: Lens' SchemasInsert' Text
+siCustomerId :: Lens' SchemasInsert Text
 siCustomerId
   = lens _siCustomerId (\ s a -> s{_siCustomerId = a})
 
-instance GoogleRequest SchemasInsert' where
-        type Rs SchemasInsert' = Schema
-        requestClient SchemasInsert'{..}
+instance GoogleRequest SchemasInsert where
+        type Rs SchemasInsert = Schema
+        requestClient SchemasInsert{..}
           = go _siCustomerId (Just AltJSON) _siPayload
               directoryService
           where go

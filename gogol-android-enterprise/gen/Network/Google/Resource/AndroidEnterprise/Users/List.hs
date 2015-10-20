@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidEnterprise.Users.List
       UsersListResource
 
     -- * Creating a Request
-    , usersList'
-    , UsersList'
+    , usersList
+    , UsersList
 
     -- * Request Lenses
     , ulEmail
@@ -41,7 +41,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.users.list@ method which the
--- 'UsersList'' request conforms to.
+-- 'UsersList' request conforms to.
 type UsersListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -52,42 +52,42 @@ type UsersListResource =
 
 -- | Looks up a user by email address.
 --
--- /See:/ 'usersList'' smart constructor.
-data UsersList' = UsersList'
+-- /See:/ 'usersList' smart constructor.
+data UsersList = UsersList
     { _ulEmail        :: !Text
     , _ulEnterpriseId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ulEmail'
 --
 -- * 'ulEnterpriseId'
-usersList'
+usersList
     :: Text -- ^ 'ulEmail'
     -> Text -- ^ 'ulEnterpriseId'
-    -> UsersList'
-usersList' pUlEmail_ pUlEnterpriseId_ =
-    UsersList'
+    -> UsersList
+usersList pUlEmail_ pUlEnterpriseId_ =
+    UsersList
     { _ulEmail = pUlEmail_
     , _ulEnterpriseId = pUlEnterpriseId_
     }
 
 -- | The exact primary email address of the user to look up.
-ulEmail :: Lens' UsersList' Text
+ulEmail :: Lens' UsersList Text
 ulEmail = lens _ulEmail (\ s a -> s{_ulEmail = a})
 
 -- | The ID of the enterprise.
-ulEnterpriseId :: Lens' UsersList' Text
+ulEnterpriseId :: Lens' UsersList Text
 ulEnterpriseId
   = lens _ulEnterpriseId
       (\ s a -> s{_ulEnterpriseId = a})
 
-instance GoogleRequest UsersList' where
-        type Rs UsersList' = UsersListResponse
-        requestClient UsersList'{..}
+instance GoogleRequest UsersList where
+        type Rs UsersList = UsersListResponse
+        requestClient UsersList{..}
           = go _ulEnterpriseId (Just _ulEmail) (Just AltJSON)
               androidEnterpriseService
           where go

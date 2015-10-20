@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Dele
       ManagementWebPropertyAdWordsLinksDeleteResource
 
     -- * Creating a Request
-    , managementWebPropertyAdWordsLinksDelete'
-    , ManagementWebPropertyAdWordsLinksDelete'
+    , managementWebPropertyAdWordsLinksDelete
+    , ManagementWebPropertyAdWordsLinksDelete
 
     -- * Request Lenses
     , mwpawldWebPropertyId
@@ -42,7 +42,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webPropertyAdWordsLinks.delete@ method which the
--- 'ManagementWebPropertyAdWordsLinksDelete'' request conforms to.
+-- 'ManagementWebPropertyAdWordsLinksDelete' request conforms to.
 type ManagementWebPropertyAdWordsLinksDeleteResource
      =
      "management" :>
@@ -56,14 +56,14 @@ type ManagementWebPropertyAdWordsLinksDeleteResource
 
 -- | Deletes a web property-AdWords link.
 --
--- /See:/ 'managementWebPropertyAdWordsLinksDelete'' smart constructor.
-data ManagementWebPropertyAdWordsLinksDelete' = ManagementWebPropertyAdWordsLinksDelete'
+-- /See:/ 'managementWebPropertyAdWordsLinksDelete' smart constructor.
+data ManagementWebPropertyAdWordsLinksDelete = ManagementWebPropertyAdWordsLinksDelete
     { _mwpawldWebPropertyId            :: !Text
     , _mwpawldAccountId                :: !Text
     , _mwpawldWebPropertyAdWordsLinkId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementWebPropertyAdWordsLinksDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementWebPropertyAdWordsLinksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,41 +72,41 @@ data ManagementWebPropertyAdWordsLinksDelete' = ManagementWebPropertyAdWordsLink
 -- * 'mwpawldAccountId'
 --
 -- * 'mwpawldWebPropertyAdWordsLinkId'
-managementWebPropertyAdWordsLinksDelete'
+managementWebPropertyAdWordsLinksDelete
     :: Text -- ^ 'mwpawldWebPropertyId'
     -> Text -- ^ 'mwpawldAccountId'
     -> Text -- ^ 'mwpawldWebPropertyAdWordsLinkId'
-    -> ManagementWebPropertyAdWordsLinksDelete'
-managementWebPropertyAdWordsLinksDelete' pMwpawldWebPropertyId_ pMwpawldAccountId_ pMwpawldWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksDelete'
+    -> ManagementWebPropertyAdWordsLinksDelete
+managementWebPropertyAdWordsLinksDelete pMwpawldWebPropertyId_ pMwpawldAccountId_ pMwpawldWebPropertyAdWordsLinkId_ =
+    ManagementWebPropertyAdWordsLinksDelete
     { _mwpawldWebPropertyId = pMwpawldWebPropertyId_
     , _mwpawldAccountId = pMwpawldAccountId_
     , _mwpawldWebPropertyAdWordsLinkId = pMwpawldWebPropertyAdWordsLinkId_
     }
 
 -- | Web property ID to delete the AdWords link for.
-mwpawldWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksDelete' Text
+mwpawldWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksDelete Text
 mwpawldWebPropertyId
   = lens _mwpawldWebPropertyId
       (\ s a -> s{_mwpawldWebPropertyId = a})
 
 -- | ID of the account which the given web property belongs to.
-mwpawldAccountId :: Lens' ManagementWebPropertyAdWordsLinksDelete' Text
+mwpawldAccountId :: Lens' ManagementWebPropertyAdWordsLinksDelete Text
 mwpawldAccountId
   = lens _mwpawldAccountId
       (\ s a -> s{_mwpawldAccountId = a})
 
 -- | Web property AdWords link ID.
-mwpawldWebPropertyAdWordsLinkId :: Lens' ManagementWebPropertyAdWordsLinksDelete' Text
+mwpawldWebPropertyAdWordsLinkId :: Lens' ManagementWebPropertyAdWordsLinksDelete Text
 mwpawldWebPropertyAdWordsLinkId
   = lens _mwpawldWebPropertyAdWordsLinkId
       (\ s a -> s{_mwpawldWebPropertyAdWordsLinkId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyAdWordsLinksDelete' where
-        type Rs ManagementWebPropertyAdWordsLinksDelete' = ()
+         ManagementWebPropertyAdWordsLinksDelete where
+        type Rs ManagementWebPropertyAdWordsLinksDelete = ()
         requestClient
-          ManagementWebPropertyAdWordsLinksDelete'{..}
+          ManagementWebPropertyAdWordsLinksDelete{..}
           = go _mwpawldAccountId _mwpawldWebPropertyId
               _mwpawldWebPropertyAdWordsLinkId
               (Just AltJSON)

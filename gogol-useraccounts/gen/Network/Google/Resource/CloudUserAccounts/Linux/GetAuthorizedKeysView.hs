@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudUserAccounts.Linux.GetAuthorizedKeysView
       LinuxGetAuthorizedKeysViewResource
 
     -- * Creating a Request
-    , linuxGetAuthorizedKeysView'
-    , LinuxGetAuthorizedKeysView'
+    , linuxGetAuthorizedKeysView
+    , LinuxGetAuthorizedKeysView
 
     -- * Request Lenses
     , lgakvProject
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
 -- | A resource alias for @clouduseraccounts.linux.getAuthorizedKeysView@ method which the
--- 'LinuxGetAuthorizedKeysView'' request conforms to.
+-- 'LinuxGetAuthorizedKeysView' request conforms to.
 type LinuxGetAuthorizedKeysViewResource =
      Capture "project" Text :>
        "zones" :>
@@ -58,8 +58,8 @@ type LinuxGetAuthorizedKeysViewResource =
 
 -- | Returns a list of authorized public keys for a specific user account.
 --
--- /See:/ 'linuxGetAuthorizedKeysView'' smart constructor.
-data LinuxGetAuthorizedKeysView' = LinuxGetAuthorizedKeysView'
+-- /See:/ 'linuxGetAuthorizedKeysView' smart constructor.
+data LinuxGetAuthorizedKeysView = LinuxGetAuthorizedKeysView
     { _lgakvProject  :: !Text
     , _lgakvZone     :: !Text
     , _lgakvUser     :: !Text
@@ -67,7 +67,7 @@ data LinuxGetAuthorizedKeysView' = LinuxGetAuthorizedKeysView'
     , _lgakvInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LinuxGetAuthorizedKeysView'' with the minimum fields required to make a request.
+-- | Creates a value of 'LinuxGetAuthorizedKeysView' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,14 +80,14 @@ data LinuxGetAuthorizedKeysView' = LinuxGetAuthorizedKeysView'
 -- * 'lgakvLogin'
 --
 -- * 'lgakvInstance'
-linuxGetAuthorizedKeysView'
+linuxGetAuthorizedKeysView
     :: Text -- ^ 'lgakvProject'
     -> Text -- ^ 'lgakvZone'
     -> Text -- ^ 'lgakvUser'
     -> Text -- ^ 'lgakvInstance'
-    -> LinuxGetAuthorizedKeysView'
-linuxGetAuthorizedKeysView' pLgakvProject_ pLgakvZone_ pLgakvUser_ pLgakvInstance_ =
-    LinuxGetAuthorizedKeysView'
+    -> LinuxGetAuthorizedKeysView
+linuxGetAuthorizedKeysView pLgakvProject_ pLgakvZone_ pLgakvUser_ pLgakvInstance_ =
+    LinuxGetAuthorizedKeysView
     { _lgakvProject = pLgakvProject_
     , _lgakvZone = pLgakvZone_
     , _lgakvUser = pLgakvUser_
@@ -96,37 +96,37 @@ linuxGetAuthorizedKeysView' pLgakvProject_ pLgakvZone_ pLgakvUser_ pLgakvInstanc
     }
 
 -- | Project ID for this request.
-lgakvProject :: Lens' LinuxGetAuthorizedKeysView' Text
+lgakvProject :: Lens' LinuxGetAuthorizedKeysView Text
 lgakvProject
   = lens _lgakvProject (\ s a -> s{_lgakvProject = a})
 
 -- | Name of the zone for this request.
-lgakvZone :: Lens' LinuxGetAuthorizedKeysView' Text
+lgakvZone :: Lens' LinuxGetAuthorizedKeysView Text
 lgakvZone
   = lens _lgakvZone (\ s a -> s{_lgakvZone = a})
 
 -- | The user account for which you want to get a list of authorized public
 -- keys.
-lgakvUser :: Lens' LinuxGetAuthorizedKeysView' Text
+lgakvUser :: Lens' LinuxGetAuthorizedKeysView Text
 lgakvUser
   = lens _lgakvUser (\ s a -> s{_lgakvUser = a})
 
 -- | Whether the view was requested as part of a user-initiated login.
-lgakvLogin :: Lens' LinuxGetAuthorizedKeysView' (Maybe Bool)
+lgakvLogin :: Lens' LinuxGetAuthorizedKeysView (Maybe Bool)
 lgakvLogin
   = lens _lgakvLogin (\ s a -> s{_lgakvLogin = a})
 
 -- | The fully-qualified URL of the virtual machine requesting the view.
-lgakvInstance :: Lens' LinuxGetAuthorizedKeysView' Text
+lgakvInstance :: Lens' LinuxGetAuthorizedKeysView Text
 lgakvInstance
   = lens _lgakvInstance
       (\ s a -> s{_lgakvInstance = a})
 
-instance GoogleRequest LinuxGetAuthorizedKeysView'
+instance GoogleRequest LinuxGetAuthorizedKeysView
          where
-        type Rs LinuxGetAuthorizedKeysView' =
+        type Rs LinuxGetAuthorizedKeysView =
              LinuxGetAuthorizedKeysViewResponse
-        requestClient LinuxGetAuthorizedKeysView'{..}
+        requestClient LinuxGetAuthorizedKeysView{..}
           = go _lgakvProject _lgakvZone _lgakvUser
               (Just _lgakvInstance)
               _lgakvLogin

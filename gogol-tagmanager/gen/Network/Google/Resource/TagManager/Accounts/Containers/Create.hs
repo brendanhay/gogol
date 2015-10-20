@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Create
       AccountsContainersCreateResource
 
     -- * Creating a Request
-    , accountsContainersCreate'
-    , AccountsContainersCreate'
+    , accountsContainersCreate
+    , AccountsContainersCreate
 
     -- * Request Lenses
     , accPayload
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.create@ method which the
--- 'AccountsContainersCreate'' request conforms to.
+-- 'AccountsContainersCreate' request conforms to.
 type AccountsContainersCreateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -51,43 +51,42 @@ type AccountsContainersCreateResource =
 
 -- | Creates a Container.
 --
--- /See:/ 'accountsContainersCreate'' smart constructor.
-data AccountsContainersCreate' = AccountsContainersCreate'
+-- /See:/ 'accountsContainersCreate' smart constructor.
+data AccountsContainersCreate = AccountsContainersCreate
     { _accPayload   :: !Container
     , _accAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'accPayload'
 --
 -- * 'accAccountId'
-accountsContainersCreate'
+accountsContainersCreate
     :: Container -- ^ 'accPayload'
     -> Text -- ^ 'accAccountId'
-    -> AccountsContainersCreate'
-accountsContainersCreate' pAccPayload_ pAccAccountId_ =
-    AccountsContainersCreate'
+    -> AccountsContainersCreate
+accountsContainersCreate pAccPayload_ pAccAccountId_ =
+    AccountsContainersCreate
     { _accPayload = pAccPayload_
     , _accAccountId = pAccAccountId_
     }
 
 -- | Multipart request metadata.
-accPayload :: Lens' AccountsContainersCreate' Container
+accPayload :: Lens' AccountsContainersCreate Container
 accPayload
   = lens _accPayload (\ s a -> s{_accPayload = a})
 
 -- | The GTM Account ID.
-accAccountId :: Lens' AccountsContainersCreate' Text
+accAccountId :: Lens' AccountsContainersCreate Text
 accAccountId
   = lens _accAccountId (\ s a -> s{_accAccountId = a})
 
-instance GoogleRequest AccountsContainersCreate'
-         where
-        type Rs AccountsContainersCreate' = Container
-        requestClient AccountsContainersCreate'{..}
+instance GoogleRequest AccountsContainersCreate where
+        type Rs AccountsContainersCreate = Container
+        requestClient AccountsContainersCreate{..}
           = go _accAccountId (Just AltJSON) _accPayload
               tagManagerService
           where go

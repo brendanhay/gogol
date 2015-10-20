@@ -30,8 +30,8 @@ module Network.Google.Resource.Games.Quests.Accept
       QuestsAcceptResource
 
     -- * Creating a Request
-    , questsAccept'
-    , QuestsAccept'
+    , questsAccept
+    , QuestsAccept
 
     -- * Request Lenses
     , qaLanguage
@@ -42,7 +42,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.quests.accept@ method which the
--- 'QuestsAccept'' request conforms to.
+-- 'QuestsAccept' request conforms to.
 type QuestsAcceptResource =
      "quests" :>
        Capture "questId" Text :>
@@ -53,41 +53,41 @@ type QuestsAcceptResource =
 -- | Indicates that the currently authorized user will participate in the
 -- quest.
 --
--- /See:/ 'questsAccept'' smart constructor.
-data QuestsAccept' = QuestsAccept'
+-- /See:/ 'questsAccept' smart constructor.
+data QuestsAccept = QuestsAccept
     { _qaLanguage :: !(Maybe Text)
     , _qaQuestId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'QuestsAccept'' with the minimum fields required to make a request.
+-- | Creates a value of 'QuestsAccept' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'qaLanguage'
 --
 -- * 'qaQuestId'
-questsAccept'
+questsAccept
     :: Text -- ^ 'qaQuestId'
-    -> QuestsAccept'
-questsAccept' pQaQuestId_ =
-    QuestsAccept'
+    -> QuestsAccept
+questsAccept pQaQuestId_ =
+    QuestsAccept
     { _qaLanguage = Nothing
     , _qaQuestId = pQaQuestId_
     }
 
 -- | The preferred language to use for strings returned by this method.
-qaLanguage :: Lens' QuestsAccept' (Maybe Text)
+qaLanguage :: Lens' QuestsAccept (Maybe Text)
 qaLanguage
   = lens _qaLanguage (\ s a -> s{_qaLanguage = a})
 
 -- | The ID of the quest.
-qaQuestId :: Lens' QuestsAccept' Text
+qaQuestId :: Lens' QuestsAccept Text
 qaQuestId
   = lens _qaQuestId (\ s a -> s{_qaQuestId = a})
 
-instance GoogleRequest QuestsAccept' where
-        type Rs QuestsAccept' = Quest
-        requestClient QuestsAccept'{..}
+instance GoogleRequest QuestsAccept where
+        type Rs QuestsAccept = Quest
+        requestClient QuestsAccept{..}
           = go _qaQuestId _qaLanguage (Just AltJSON)
               gamesService
           where go

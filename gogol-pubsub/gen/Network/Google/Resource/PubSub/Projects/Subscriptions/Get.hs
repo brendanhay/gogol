@@ -29,8 +29,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Get
       ProjectsSubscriptionsGetResource
 
     -- * Creating a Request
-    , projectsSubscriptionsGet'
-    , ProjectsSubscriptionsGet'
+    , projectsSubscriptionsGet
+    , ProjectsSubscriptionsGet
 
     -- * Request Lenses
     , psgXgafv
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.get@ method which the
--- 'ProjectsSubscriptionsGet'' request conforms to.
+-- 'ProjectsSubscriptionsGet' request conforms to.
 type ProjectsSubscriptionsGetResource =
      "v1" :>
        Capture "subscription" Text :>
@@ -62,8 +62,8 @@ type ProjectsSubscriptionsGetResource =
 
 -- | Gets the configuration details of a subscription.
 --
--- /See:/ 'projectsSubscriptionsGet'' smart constructor.
-data ProjectsSubscriptionsGet' = ProjectsSubscriptionsGet'
+-- /See:/ 'projectsSubscriptionsGet' smart constructor.
+data ProjectsSubscriptionsGet = ProjectsSubscriptionsGet
     { _psgXgafv          :: !(Maybe Text)
     , _psgUploadProtocol :: !(Maybe Text)
     , _psgPp             :: !Bool
@@ -74,7 +74,7 @@ data ProjectsSubscriptionsGet' = ProjectsSubscriptionsGet'
     , _psgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsSubscriptionsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsSubscriptionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -93,11 +93,11 @@ data ProjectsSubscriptionsGet' = ProjectsSubscriptionsGet'
 -- * 'psgSubscription'
 --
 -- * 'psgCallback'
-projectsSubscriptionsGet'
+projectsSubscriptionsGet
     :: Text -- ^ 'psgSubscription'
-    -> ProjectsSubscriptionsGet'
-projectsSubscriptionsGet' pPsgSubscription_ =
-    ProjectsSubscriptionsGet'
+    -> ProjectsSubscriptionsGet
+projectsSubscriptionsGet pPsgSubscription_ =
+    ProjectsSubscriptionsGet
     { _psgXgafv = Nothing
     , _psgUploadProtocol = Nothing
     , _psgPp = True
@@ -109,52 +109,51 @@ projectsSubscriptionsGet' pPsgSubscription_ =
     }
 
 -- | V1 error format.
-psgXgafv :: Lens' ProjectsSubscriptionsGet' (Maybe Text)
+psgXgafv :: Lens' ProjectsSubscriptionsGet (Maybe Text)
 psgXgafv = lens _psgXgafv (\ s a -> s{_psgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-psgUploadProtocol :: Lens' ProjectsSubscriptionsGet' (Maybe Text)
+psgUploadProtocol :: Lens' ProjectsSubscriptionsGet (Maybe Text)
 psgUploadProtocol
   = lens _psgUploadProtocol
       (\ s a -> s{_psgUploadProtocol = a})
 
 -- | Pretty-print response.
-psgPp :: Lens' ProjectsSubscriptionsGet' Bool
+psgPp :: Lens' ProjectsSubscriptionsGet Bool
 psgPp = lens _psgPp (\ s a -> s{_psgPp = a})
 
 -- | OAuth access token.
-psgAccessToken :: Lens' ProjectsSubscriptionsGet' (Maybe Text)
+psgAccessToken :: Lens' ProjectsSubscriptionsGet (Maybe Text)
 psgAccessToken
   = lens _psgAccessToken
       (\ s a -> s{_psgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-psgUploadType :: Lens' ProjectsSubscriptionsGet' (Maybe Text)
+psgUploadType :: Lens' ProjectsSubscriptionsGet (Maybe Text)
 psgUploadType
   = lens _psgUploadType
       (\ s a -> s{_psgUploadType = a})
 
 -- | OAuth bearer token.
-psgBearerToken :: Lens' ProjectsSubscriptionsGet' (Maybe Text)
+psgBearerToken :: Lens' ProjectsSubscriptionsGet (Maybe Text)
 psgBearerToken
   = lens _psgBearerToken
       (\ s a -> s{_psgBearerToken = a})
 
 -- | The name of the subscription to get.
-psgSubscription :: Lens' ProjectsSubscriptionsGet' Text
+psgSubscription :: Lens' ProjectsSubscriptionsGet Text
 psgSubscription
   = lens _psgSubscription
       (\ s a -> s{_psgSubscription = a})
 
 -- | JSONP
-psgCallback :: Lens' ProjectsSubscriptionsGet' (Maybe Text)
+psgCallback :: Lens' ProjectsSubscriptionsGet (Maybe Text)
 psgCallback
   = lens _psgCallback (\ s a -> s{_psgCallback = a})
 
-instance GoogleRequest ProjectsSubscriptionsGet'
-         where
-        type Rs ProjectsSubscriptionsGet' = Subscription
-        requestClient ProjectsSubscriptionsGet'{..}
+instance GoogleRequest ProjectsSubscriptionsGet where
+        type Rs ProjectsSubscriptionsGet = Subscription
+        requestClient ProjectsSubscriptionsGet{..}
           = go _psgSubscription _psgXgafv _psgUploadProtocol
               (Just _psgPp)
               _psgAccessToken

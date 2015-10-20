@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSenseHost.AdClients.List
       AdClientsListResource
 
     -- * Creating a Request
-    , adClientsList'
-    , AdClientsList'
+    , adClientsList
+    , AdClientsList
 
     -- * Request Lenses
     , aclPageToken
@@ -41,7 +41,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.adclients.list@ method which the
--- 'AdClientsList'' request conforms to.
+-- 'AdClientsList' request conforms to.
 type AdClientsListResource =
      "adclients" :>
        QueryParam "pageToken" Text :>
@@ -50,23 +50,23 @@ type AdClientsListResource =
 
 -- | List all host ad clients in this AdSense account.
 --
--- /See:/ 'adClientsList'' smart constructor.
-data AdClientsList' = AdClientsList'
+-- /See:/ 'adClientsList' smart constructor.
+data AdClientsList = AdClientsList
     { _aclPageToken  :: !(Maybe Text)
     , _aclMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdClientsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdClientsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aclPageToken'
 --
 -- * 'aclMaxResults'
-adClientsList'
-    :: AdClientsList'
-adClientsList' =
-    AdClientsList'
+adClientsList
+    :: AdClientsList
+adClientsList =
+    AdClientsList
     { _aclPageToken = Nothing
     , _aclMaxResults = Nothing
     }
@@ -74,20 +74,20 @@ adClientsList' =
 -- | A continuation token, used to page through ad clients. To retrieve the
 -- next page, set this parameter to the value of \"nextPageToken\" from the
 -- previous response.
-aclPageToken :: Lens' AdClientsList' (Maybe Text)
+aclPageToken :: Lens' AdClientsList (Maybe Text)
 aclPageToken
   = lens _aclPageToken (\ s a -> s{_aclPageToken = a})
 
 -- | The maximum number of ad clients to include in the response, used for
 -- paging.
-aclMaxResults :: Lens' AdClientsList' (Maybe Word32)
+aclMaxResults :: Lens' AdClientsList (Maybe Word32)
 aclMaxResults
   = lens _aclMaxResults
       (\ s a -> s{_aclMaxResults = a})
 
-instance GoogleRequest AdClientsList' where
-        type Rs AdClientsList' = AdClients
-        requestClient AdClientsList'{..}
+instance GoogleRequest AdClientsList where
+        type Rs AdClientsList = AdClients
+        requestClient AdClientsList{..}
           = go _aclPageToken _aclMaxResults (Just AltJSON)
               adSenseHostService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Plus.Activities.Search
       ActivitiesSearchResource
 
     -- * Creating a Request
-    , activitiesSearch'
-    , ActivitiesSearch'
+    , activitiesSearch
+    , ActivitiesSearch
 
     -- * Request Lenses
     , asOrderBy
@@ -44,7 +44,7 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plus.activities.search@ method which the
--- 'ActivitiesSearch'' request conforms to.
+-- 'ActivitiesSearch' request conforms to.
 type ActivitiesSearchResource =
      "activities" :>
        QueryParam "query" Text :>
@@ -56,8 +56,8 @@ type ActivitiesSearchResource =
 
 -- | Search public activities.
 --
--- /See:/ 'activitiesSearch'' smart constructor.
-data ActivitiesSearch' = ActivitiesSearch'
+-- /See:/ 'activitiesSearch' smart constructor.
+data ActivitiesSearch = ActivitiesSearch
     { _asOrderBy    :: !ActivitiesSearchOrderBy
     , _asQuery      :: !Text
     , _asLanguage   :: !Text
@@ -65,7 +65,7 @@ data ActivitiesSearch' = ActivitiesSearch'
     , _asMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ActivitiesSearch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivitiesSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -78,11 +78,11 @@ data ActivitiesSearch' = ActivitiesSearch'
 -- * 'asPageToken'
 --
 -- * 'asMaxResults'
-activitiesSearch'
+activitiesSearch
     :: Text -- ^ 'asQuery'
-    -> ActivitiesSearch'
-activitiesSearch' pAsQuery_ =
-    ActivitiesSearch'
+    -> ActivitiesSearch
+activitiesSearch pAsQuery_ =
+    ActivitiesSearch
     { _asOrderBy = ASOBRecent
     , _asQuery = pAsQuery_
     , _asLanguage = "en-US"
@@ -91,17 +91,17 @@ activitiesSearch' pAsQuery_ =
     }
 
 -- | Specifies how to order search results.
-asOrderBy :: Lens' ActivitiesSearch' ActivitiesSearchOrderBy
+asOrderBy :: Lens' ActivitiesSearch ActivitiesSearchOrderBy
 asOrderBy
   = lens _asOrderBy (\ s a -> s{_asOrderBy = a})
 
 -- | Full-text search query string.
-asQuery :: Lens' ActivitiesSearch' Text
+asQuery :: Lens' ActivitiesSearch Text
 asQuery = lens _asQuery (\ s a -> s{_asQuery = a})
 
 -- | Specify the preferred language to search with. See search language codes
 -- for available values.
-asLanguage :: Lens' ActivitiesSearch' Text
+asLanguage :: Lens' ActivitiesSearch Text
 asLanguage
   = lens _asLanguage (\ s a -> s{_asLanguage = a})
 
@@ -109,20 +109,20 @@ asLanguage
 -- To get the next page of results, set this parameter to the value of
 -- \"nextPageToken\" from the previous response. This token can be of any
 -- length.
-asPageToken :: Lens' ActivitiesSearch' (Maybe Text)
+asPageToken :: Lens' ActivitiesSearch (Maybe Text)
 asPageToken
   = lens _asPageToken (\ s a -> s{_asPageToken = a})
 
 -- | The maximum number of activities to include in the response, which is
 -- used for paging. For any response, the actual number returned might be
 -- less than the specified maxResults.
-asMaxResults :: Lens' ActivitiesSearch' Word32
+asMaxResults :: Lens' ActivitiesSearch Word32
 asMaxResults
   = lens _asMaxResults (\ s a -> s{_asMaxResults = a})
 
-instance GoogleRequest ActivitiesSearch' where
-        type Rs ActivitiesSearch' = ActivityFeed
-        requestClient ActivitiesSearch'{..}
+instance GoogleRequest ActivitiesSearch where
+        type Rs ActivitiesSearch = ActivityFeed
+        requestClient ActivitiesSearch{..}
           = go (Just _asQuery) (Just _asOrderBy)
               (Just _asLanguage)
               _asPageToken

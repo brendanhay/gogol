@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Layers.List
       LayersListResource
 
     -- * Creating a Request
-    , layersList'
-    , LayersList'
+    , layersList
+    , LayersList
 
     -- * Request Lenses
     , llCreatedAfter
@@ -52,7 +52,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.layers.list@ method which the
--- 'LayersList'' request conforms to.
+-- 'LayersList' request conforms to.
 type LayersListResource =
      "layers" :>
        QueryParam "createdAfter" DateTime' :>
@@ -75,8 +75,8 @@ type LayersListResource =
 
 -- | Return all layers readable by the current user.
 --
--- /See:/ 'layersList'' smart constructor.
-data LayersList' = LayersList'
+-- /See:/ 'layersList' smart constructor.
+data LayersList = LayersList
     { _llCreatedAfter     :: !(Maybe DateTime')
     , _llCreatorEmail     :: !(Maybe Text)
     , _llRole             :: !(Maybe LayersListRole)
@@ -92,7 +92,7 @@ data LayersList' = LayersList'
     , _llCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -121,10 +121,10 @@ data LayersList' = LayersList'
 -- * 'llTags'
 --
 -- * 'llCreatedBefore'
-layersList'
-    :: LayersList'
-layersList' =
-    LayersList'
+layersList
+    :: LayersList
+layersList =
+    LayersList
     { _llCreatedAfter = Nothing
     , _llCreatorEmail = Nothing
     , _llRole = Nothing
@@ -142,7 +142,7 @@ layersList' =
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been created at or after this time.
-llCreatedAfter :: Lens' LayersList' (Maybe UTCTime)
+llCreatedAfter :: Lens' LayersList (Maybe UTCTime)
 llCreatedAfter
   = lens _llCreatedAfter
       (\ s a -> s{_llCreatedAfter = a})
@@ -150,29 +150,29 @@ llCreatedAfter
 
 -- | An email address representing a user. Returned assets that have been
 -- created by the user associated with the provided email address.
-llCreatorEmail :: Lens' LayersList' (Maybe Text)
+llCreatorEmail :: Lens' LayersList (Maybe Text)
 llCreatorEmail
   = lens _llCreatorEmail
       (\ s a -> s{_llCreatorEmail = a})
 
 -- | The role parameter indicates that the response should only contain
 -- assets where the current user has the specified level of access.
-llRole :: Lens' LayersList' (Maybe LayersListRole)
+llRole :: Lens' LayersList (Maybe LayersListRole)
 llRole = lens _llRole (\ s a -> s{_llRole = a})
 
 -- | A bounding box, expressed as \"west,south,east,north\". If set, only
 -- assets which intersect this bounding box will be returned.
-llBbox :: Lens' LayersList' (Maybe Text)
+llBbox :: Lens' LayersList (Maybe Text)
 llBbox = lens _llBbox (\ s a -> s{_llBbox = a})
 
-llProcessingStatus :: Lens' LayersList' (Maybe LayersListProcessingStatus)
+llProcessingStatus :: Lens' LayersList (Maybe LayersListProcessingStatus)
 llProcessingStatus
   = lens _llProcessingStatus
       (\ s a -> s{_llProcessingStatus = a})
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been modified at or after this time.
-llModifiedAfter :: Lens' LayersList' (Maybe UTCTime)
+llModifiedAfter :: Lens' LayersList (Maybe UTCTime)
 llModifiedAfter
   = lens _llModifiedAfter
       (\ s a -> s{_llModifiedAfter = a})
@@ -180,7 +180,7 @@ llModifiedAfter
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been modified at or before this time.
-llModifiedBefore :: Lens' LayersList' (Maybe UTCTime)
+llModifiedBefore :: Lens' LayersList (Maybe UTCTime)
 llModifiedBefore
   = lens _llModifiedBefore
       (\ s a -> s{_llModifiedBefore = a})
@@ -189,7 +189,7 @@ llModifiedBefore
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
 -- nextPageToken from the previous response.
-llPageToken :: Lens' LayersList' (Maybe Text)
+llPageToken :: Lens' LayersList (Maybe Text)
 llPageToken
   = lens _llPageToken (\ s a -> s{_llPageToken = a})
 
@@ -197,37 +197,37 @@ llPageToken
 -- all available projects with their IDs, send a Projects: list request.
 -- You can also find your project ID as the value of the DashboardPlace:cid
 -- URL parameter when signed in to mapsengine.google.com.
-llProjectId :: Lens' LayersList' (Maybe Text)
+llProjectId :: Lens' LayersList (Maybe Text)
 llProjectId
   = lens _llProjectId (\ s a -> s{_llProjectId = a})
 
 -- | An unstructured search string used to filter the set of results based on
 -- asset metadata.
-llSearch :: Lens' LayersList' (Maybe Text)
+llSearch :: Lens' LayersList (Maybe Text)
 llSearch = lens _llSearch (\ s a -> s{_llSearch = a})
 
 -- | The maximum number of items to include in a single response page. The
 -- maximum supported value is 100.
-llMaxResults :: Lens' LayersList' (Maybe Word32)
+llMaxResults :: Lens' LayersList (Maybe Word32)
 llMaxResults
   = lens _llMaxResults (\ s a -> s{_llMaxResults = a})
 
 -- | A comma separated list of tags. Returned assets will contain all the
 -- tags from the list.
-llTags :: Lens' LayersList' (Maybe Text)
+llTags :: Lens' LayersList (Maybe Text)
 llTags = lens _llTags (\ s a -> s{_llTags = a})
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been created at or before this time.
-llCreatedBefore :: Lens' LayersList' (Maybe UTCTime)
+llCreatedBefore :: Lens' LayersList (Maybe UTCTime)
 llCreatedBefore
   = lens _llCreatedBefore
       (\ s a -> s{_llCreatedBefore = a})
       . mapping _DateTime
 
-instance GoogleRequest LayersList' where
-        type Rs LayersList' = LayersListResponse
-        requestClient LayersList'{..}
+instance GoogleRequest LayersList where
+        type Rs LayersList = LayersListResponse
+        requestClient LayersList{..}
           = go _llCreatedAfter _llCreatorEmail _llRole _llBbox
               _llProcessingStatus
               _llModifiedAfter

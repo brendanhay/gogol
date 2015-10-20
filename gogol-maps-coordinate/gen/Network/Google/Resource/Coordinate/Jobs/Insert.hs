@@ -29,8 +29,8 @@ module Network.Google.Resource.Coordinate.Jobs.Insert
       JobsInsertResource
 
     -- * Creating a Request
-    , jobsInsert'
-    , JobsInsert'
+    , jobsInsert
+    , JobsInsert
 
     -- * Request Lenses
     , jiNote
@@ -50,7 +50,7 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @coordinate.jobs.insert@ method which the
--- 'JobsInsert'' request conforms to.
+-- 'JobsInsert' request conforms to.
 type JobsInsertResource =
      "teams" :>
        Capture "teamId" Text :>
@@ -69,8 +69,8 @@ type JobsInsertResource =
 
 -- | Inserts a new job. Only the state field of the job should be set.
 --
--- /See:/ 'jobsInsert'' smart constructor.
-data JobsInsert' = JobsInsert'
+-- /See:/ 'jobsInsert' smart constructor.
+data JobsInsert = JobsInsert
     { _jiNote                :: !(Maybe Text)
     , _jiTeamId              :: !Text
     , _jiCustomerPhoneNumber :: !(Maybe Text)
@@ -84,7 +84,7 @@ data JobsInsert' = JobsInsert'
     , _jiCustomField         :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'JobsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'JobsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -109,16 +109,16 @@ data JobsInsert' = JobsInsert'
 -- * 'jiTitle'
 --
 -- * 'jiCustomField'
-jobsInsert'
+jobsInsert
     :: Text -- ^ 'jiTeamId'
     -> Text -- ^ 'jiAddress'
     -> Job -- ^ 'jiPayload'
     -> Double -- ^ 'jiLat'
     -> Double -- ^ 'jiLng'
     -> Text -- ^ 'jiTitle'
-    -> JobsInsert'
-jobsInsert' pJiTeamId_ pJiAddress_ pJiPayload_ pJiLat_ pJiLng_ pJiTitle_ =
-    JobsInsert'
+    -> JobsInsert
+jobsInsert pJiTeamId_ pJiAddress_ pJiPayload_ pJiLat_ pJiLng_ pJiTitle_ =
+    JobsInsert
     { _jiNote = Nothing
     , _jiTeamId = pJiTeamId_
     , _jiCustomerPhoneNumber = Nothing
@@ -133,50 +133,50 @@ jobsInsert' pJiTeamId_ pJiAddress_ pJiPayload_ pJiLat_ pJiLng_ pJiTitle_ =
     }
 
 -- | Job note as newline (Unix) separated string
-jiNote :: Lens' JobsInsert' (Maybe Text)
+jiNote :: Lens' JobsInsert (Maybe Text)
 jiNote = lens _jiNote (\ s a -> s{_jiNote = a})
 
 -- | Team ID
-jiTeamId :: Lens' JobsInsert' Text
+jiTeamId :: Lens' JobsInsert Text
 jiTeamId = lens _jiTeamId (\ s a -> s{_jiTeamId = a})
 
 -- | Customer phone number
-jiCustomerPhoneNumber :: Lens' JobsInsert' (Maybe Text)
+jiCustomerPhoneNumber :: Lens' JobsInsert (Maybe Text)
 jiCustomerPhoneNumber
   = lens _jiCustomerPhoneNumber
       (\ s a -> s{_jiCustomerPhoneNumber = a})
 
 -- | Customer name
-jiCustomerName :: Lens' JobsInsert' (Maybe Text)
+jiCustomerName :: Lens' JobsInsert (Maybe Text)
 jiCustomerName
   = lens _jiCustomerName
       (\ s a -> s{_jiCustomerName = a})
 
 -- | Job address as newline (Unix) separated string
-jiAddress :: Lens' JobsInsert' Text
+jiAddress :: Lens' JobsInsert Text
 jiAddress
   = lens _jiAddress (\ s a -> s{_jiAddress = a})
 
 -- | Multipart request metadata.
-jiPayload :: Lens' JobsInsert' Job
+jiPayload :: Lens' JobsInsert Job
 jiPayload
   = lens _jiPayload (\ s a -> s{_jiPayload = a})
 
 -- | Assignee email address, or empty string to unassign.
-jiAssignee :: Lens' JobsInsert' (Maybe Text)
+jiAssignee :: Lens' JobsInsert (Maybe Text)
 jiAssignee
   = lens _jiAssignee (\ s a -> s{_jiAssignee = a})
 
 -- | The latitude coordinate of this job\'s location.
-jiLat :: Lens' JobsInsert' Double
+jiLat :: Lens' JobsInsert Double
 jiLat = lens _jiLat (\ s a -> s{_jiLat = a})
 
 -- | The longitude coordinate of this job\'s location.
-jiLng :: Lens' JobsInsert' Double
+jiLng :: Lens' JobsInsert Double
 jiLng = lens _jiLng (\ s a -> s{_jiLng = a})
 
 -- | Job title
-jiTitle :: Lens' JobsInsert' Text
+jiTitle :: Lens' JobsInsert Text
 jiTitle = lens _jiTitle (\ s a -> s{_jiTitle = a})
 
 -- | Sets the value of custom fields. To set a custom field, pass the field
@@ -185,16 +185,16 @@ jiTitle = lens _jiTitle (\ s a -> s{_jiTitle = a})
 -- customField=12%3DAlice. Repeat the parameter for each custom field. Note
 -- that \'=\' cannot appear in the parameter value. Specifying an invalid,
 -- or inactive enum field will result in an error 500.
-jiCustomField :: Lens' JobsInsert' [Text]
+jiCustomField :: Lens' JobsInsert [Text]
 jiCustomField
   = lens _jiCustomField
       (\ s a -> s{_jiCustomField = a})
       . _Default
       . _Coerce
 
-instance GoogleRequest JobsInsert' where
-        type Rs JobsInsert' = Job
-        requestClient JobsInsert'{..}
+instance GoogleRequest JobsInsert where
+        type Rs JobsInsert = Job
+        requestClient JobsInsert{..}
           = go _jiTeamId (Just _jiAddress) (Just _jiLat)
               (Just _jiLng)
               (Just _jiTitle)

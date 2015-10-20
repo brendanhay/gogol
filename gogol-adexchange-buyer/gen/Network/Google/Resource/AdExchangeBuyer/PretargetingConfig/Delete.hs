@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Delete
       PretargetingConfigDeleteResource
 
     -- * Creating a Request
-    , pretargetingConfigDelete'
-    , PretargetingConfigDelete'
+    , pretargetingConfigDelete
+    , PretargetingConfigDelete
 
     -- * Request Lenses
     , pcdAccountId
@@ -41,7 +41,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.pretargetingConfig.delete@ method which the
--- 'PretargetingConfigDelete'' request conforms to.
+-- 'PretargetingConfigDelete' request conforms to.
 type PretargetingConfigDeleteResource =
      "pretargetingconfigs" :>
        Capture "accountId" Int64 :>
@@ -50,43 +50,42 @@ type PretargetingConfigDeleteResource =
 
 -- | Deletes an existing pretargeting config.
 --
--- /See:/ 'pretargetingConfigDelete'' smart constructor.
-data PretargetingConfigDelete' = PretargetingConfigDelete'
+-- /See:/ 'pretargetingConfigDelete' smart constructor.
+data PretargetingConfigDelete = PretargetingConfigDelete
     { _pcdAccountId :: !Int64
     , _pcdConfigId  :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PretargetingConfigDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'PretargetingConfigDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pcdAccountId'
 --
 -- * 'pcdConfigId'
-pretargetingConfigDelete'
+pretargetingConfigDelete
     :: Int64 -- ^ 'pcdAccountId'
     -> Int64 -- ^ 'pcdConfigId'
-    -> PretargetingConfigDelete'
-pretargetingConfigDelete' pPcdAccountId_ pPcdConfigId_ =
-    PretargetingConfigDelete'
+    -> PretargetingConfigDelete
+pretargetingConfigDelete pPcdAccountId_ pPcdConfigId_ =
+    PretargetingConfigDelete
     { _pcdAccountId = pPcdAccountId_
     , _pcdConfigId = pPcdConfigId_
     }
 
 -- | The account id to delete the pretargeting config for.
-pcdAccountId :: Lens' PretargetingConfigDelete' Int64
+pcdAccountId :: Lens' PretargetingConfigDelete Int64
 pcdAccountId
   = lens _pcdAccountId (\ s a -> s{_pcdAccountId = a})
 
 -- | The specific id of the configuration to delete.
-pcdConfigId :: Lens' PretargetingConfigDelete' Int64
+pcdConfigId :: Lens' PretargetingConfigDelete Int64
 pcdConfigId
   = lens _pcdConfigId (\ s a -> s{_pcdConfigId = a})
 
-instance GoogleRequest PretargetingConfigDelete'
-         where
-        type Rs PretargetingConfigDelete' = ()
-        requestClient PretargetingConfigDelete'{..}
+instance GoogleRequest PretargetingConfigDelete where
+        type Rs PretargetingConfigDelete = ()
+        requestClient PretargetingConfigDelete{..}
           = go _pcdAccountId _pcdConfigId (Just AltJSON)
               adExchangeBuyerService
           where go

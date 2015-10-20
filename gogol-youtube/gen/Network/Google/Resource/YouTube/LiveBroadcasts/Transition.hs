@@ -34,8 +34,8 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Transition
       LiveBroadcastsTransitionResource
 
     -- * Creating a Request
-    , liveBroadcastsTransition'
-    , LiveBroadcastsTransition'
+    , liveBroadcastsTransition
+    , LiveBroadcastsTransition
 
     -- * Request Lenses
     , lbtPart
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveBroadcasts.transition@ method which the
--- 'LiveBroadcastsTransition'' request conforms to.
+-- 'LiveBroadcastsTransition' request conforms to.
 type LiveBroadcastsTransitionResource =
      "liveBroadcasts" :>
        "transition" :>
@@ -70,8 +70,8 @@ type LiveBroadcastsTransitionResource =
 -- you should confirm that the value of the status.streamStatus property
 -- for the stream bound to your broadcast is active.
 --
--- /See:/ 'liveBroadcastsTransition'' smart constructor.
-data LiveBroadcastsTransition' = LiveBroadcastsTransition'
+-- /See:/ 'liveBroadcastsTransition' smart constructor.
+data LiveBroadcastsTransition = LiveBroadcastsTransition
     { _lbtPart                          :: !Text
     , _lbtBroadcastStatus               :: !LiveBroadcastsTransitionBroadcastStatus
     , _lbtOnBehalfOfContentOwner        :: !(Maybe Text)
@@ -79,7 +79,7 @@ data LiveBroadcastsTransition' = LiveBroadcastsTransition'
     , _lbtId                            :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LiveBroadcastsTransition'' with the minimum fields required to make a request.
+-- | Creates a value of 'LiveBroadcastsTransition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -92,13 +92,13 @@ data LiveBroadcastsTransition' = LiveBroadcastsTransition'
 -- * 'lbtOnBehalfOfContentOwnerChannel'
 --
 -- * 'lbtId'
-liveBroadcastsTransition'
+liveBroadcastsTransition
     :: Text -- ^ 'lbtPart'
     -> LiveBroadcastsTransitionBroadcastStatus -- ^ 'lbtBroadcastStatus'
     -> Text -- ^ 'lbtId'
-    -> LiveBroadcastsTransition'
-liveBroadcastsTransition' pLbtPart_ pLbtBroadcastStatus_ pLbtId_ =
-    LiveBroadcastsTransition'
+    -> LiveBroadcastsTransition
+liveBroadcastsTransition pLbtPart_ pLbtBroadcastStatus_ pLbtId_ =
+    LiveBroadcastsTransition
     { _lbtPart = pLbtPart_
     , _lbtBroadcastStatus = pLbtBroadcastStatus_
     , _lbtOnBehalfOfContentOwner = Nothing
@@ -110,14 +110,14 @@ liveBroadcastsTransition' pLbtPart_ pLbtBroadcastStatus_ pLbtId_ =
 -- liveBroadcast resource properties that the API response will include.
 -- The part names that you can include in the parameter value are id,
 -- snippet, contentDetails, and status.
-lbtPart :: Lens' LiveBroadcastsTransition' Text
+lbtPart :: Lens' LiveBroadcastsTransition Text
 lbtPart = lens _lbtPart (\ s a -> s{_lbtPart = a})
 
 -- | The broadcastStatus parameter identifies the state to which the
 -- broadcast is changing. Note that to transition a broadcast to either the
 -- testing or live state, the status.streamStatus must be active for the
 -- stream that the broadcast is bound to.
-lbtBroadcastStatus :: Lens' LiveBroadcastsTransition' LiveBroadcastsTransitionBroadcastStatus
+lbtBroadcastStatus :: Lens' LiveBroadcastsTransition LiveBroadcastsTransitionBroadcastStatus
 lbtBroadcastStatus
   = lens _lbtBroadcastStatus
       (\ s a -> s{_lbtBroadcastStatus = a})
@@ -132,7 +132,7 @@ lbtBroadcastStatus
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-lbtOnBehalfOfContentOwner :: Lens' LiveBroadcastsTransition' (Maybe Text)
+lbtOnBehalfOfContentOwner :: Lens' LiveBroadcastsTransition (Maybe Text)
 lbtOnBehalfOfContentOwner
   = lens _lbtOnBehalfOfContentOwner
       (\ s a -> s{_lbtOnBehalfOfContentOwner = a})
@@ -153,20 +153,19 @@ lbtOnBehalfOfContentOwner
 -- actions on behalf of the channel specified in the parameter value,
 -- without having to provide authentication credentials for each separate
 -- channel.
-lbtOnBehalfOfContentOwnerChannel :: Lens' LiveBroadcastsTransition' (Maybe Text)
+lbtOnBehalfOfContentOwnerChannel :: Lens' LiveBroadcastsTransition (Maybe Text)
 lbtOnBehalfOfContentOwnerChannel
   = lens _lbtOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lbtOnBehalfOfContentOwnerChannel = a})
 
 -- | The id parameter specifies the unique ID of the broadcast that is
 -- transitioning to another status.
-lbtId :: Lens' LiveBroadcastsTransition' Text
+lbtId :: Lens' LiveBroadcastsTransition Text
 lbtId = lens _lbtId (\ s a -> s{_lbtId = a})
 
-instance GoogleRequest LiveBroadcastsTransition'
-         where
-        type Rs LiveBroadcastsTransition' = LiveBroadcast
-        requestClient LiveBroadcastsTransition'{..}
+instance GoogleRequest LiveBroadcastsTransition where
+        type Rs LiveBroadcastsTransition = LiveBroadcast
+        requestClient LiveBroadcastsTransition{..}
           = go (Just _lbtBroadcastStatus) (Just _lbtId)
               (Just _lbtPart)
               _lbtOnBehalfOfContentOwner

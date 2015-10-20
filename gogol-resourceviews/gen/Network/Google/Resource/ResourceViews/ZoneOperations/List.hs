@@ -30,8 +30,8 @@ module Network.Google.Resource.ResourceViews.ZoneOperations.List
       ZoneOperationsListResource
 
     -- * Creating a Request
-    , zoneOperationsList'
-    , ZoneOperationsList'
+    , zoneOperationsList
+    , ZoneOperationsList
 
     -- * Request Lenses
     , zolProject
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
 -- | A resource alias for @resourceviews.zoneOperations.list@ method which the
--- 'ZoneOperationsList'' request conforms to.
+-- 'ZoneOperationsList' request conforms to.
 type ZoneOperationsListResource =
      Capture "project" Text :>
        "zones" :>
@@ -59,8 +59,8 @@ type ZoneOperationsListResource =
 -- | Retrieves the list of operation resources contained within the specified
 -- zone.
 --
--- /See:/ 'zoneOperationsList'' smart constructor.
-data ZoneOperationsList' = ZoneOperationsList'
+-- /See:/ 'zoneOperationsList' smart constructor.
+data ZoneOperationsList = ZoneOperationsList
     { _zolProject    :: !Text
     , _zolZone       :: !Text
     , _zolFilter     :: !(Maybe Text)
@@ -68,7 +68,7 @@ data ZoneOperationsList' = ZoneOperationsList'
     , _zolMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ZoneOperationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ZoneOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,12 +81,12 @@ data ZoneOperationsList' = ZoneOperationsList'
 -- * 'zolPageToken'
 --
 -- * 'zolMaxResults'
-zoneOperationsList'
+zoneOperationsList
     :: Text -- ^ 'zolProject'
     -> Text -- ^ 'zolZone'
-    -> ZoneOperationsList'
-zoneOperationsList' pZolProject_ pZolZone_ =
-    ZoneOperationsList'
+    -> ZoneOperationsList
+zoneOperationsList pZolProject_ pZolZone_ =
+    ZoneOperationsList
     { _zolProject = pZolProject_
     , _zolZone = pZolZone_
     , _zolFilter = Nothing
@@ -95,35 +95,35 @@ zoneOperationsList' pZolProject_ pZolZone_ =
     }
 
 -- | Name of the project scoping this request.
-zolProject :: Lens' ZoneOperationsList' Text
+zolProject :: Lens' ZoneOperationsList Text
 zolProject
   = lens _zolProject (\ s a -> s{_zolProject = a})
 
 -- | Name of the zone scoping this request.
-zolZone :: Lens' ZoneOperationsList' Text
+zolZone :: Lens' ZoneOperationsList Text
 zolZone = lens _zolZone (\ s a -> s{_zolZone = a})
 
 -- | Optional. Filter expression for filtering listed resources.
-zolFilter :: Lens' ZoneOperationsList' (Maybe Text)
+zolFilter :: Lens' ZoneOperationsList (Maybe Text)
 zolFilter
   = lens _zolFilter (\ s a -> s{_zolFilter = a})
 
 -- | Optional. Tag returned by a previous list request truncated by
 -- maxResults. Used to continue a previous list request.
-zolPageToken :: Lens' ZoneOperationsList' (Maybe Text)
+zolPageToken :: Lens' ZoneOperationsList (Maybe Text)
 zolPageToken
   = lens _zolPageToken (\ s a -> s{_zolPageToken = a})
 
 -- | Optional. Maximum count of results to be returned. Maximum value is 500
 -- and default value is 500.
-zolMaxResults :: Lens' ZoneOperationsList' Word32
+zolMaxResults :: Lens' ZoneOperationsList Word32
 zolMaxResults
   = lens _zolMaxResults
       (\ s a -> s{_zolMaxResults = a})
 
-instance GoogleRequest ZoneOperationsList' where
-        type Rs ZoneOperationsList' = OperationList
-        requestClient ZoneOperationsList'{..}
+instance GoogleRequest ZoneOperationsList where
+        type Rs ZoneOperationsList = OperationList
+        requestClient ZoneOperationsList{..}
           = go _zolProject _zolZone _zolFilter _zolPageToken
               (Just _zolMaxResults)
               (Just AltJSON)

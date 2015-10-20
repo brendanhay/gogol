@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Rasters.Process
       RastersProcessResource
 
     -- * Creating a Request
-    , rastersProcess'
-    , RastersProcess'
+    , rastersProcess
+    , RastersProcess
 
     -- * Request Lenses
     , rpId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasters.process@ method which the
--- 'RastersProcess'' request conforms to.
+-- 'RastersProcess' request conforms to.
 type RastersProcessResource =
      "rasters" :>
        Capture "id" Text :>
@@ -50,31 +50,31 @@ type RastersProcessResource =
 
 -- | Process a raster asset.
 --
--- /See:/ 'rastersProcess'' smart constructor.
-newtype RastersProcess' = RastersProcess'
+-- /See:/ 'rastersProcess' smart constructor.
+newtype RastersProcess = RastersProcess
     { _rpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RastersProcess'' with the minimum fields required to make a request.
+-- | Creates a value of 'RastersProcess' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rpId'
-rastersProcess'
+rastersProcess
     :: Text -- ^ 'rpId'
-    -> RastersProcess'
-rastersProcess' pRpId_ =
-    RastersProcess'
+    -> RastersProcess
+rastersProcess pRpId_ =
+    RastersProcess
     { _rpId = pRpId_
     }
 
 -- | The ID of the raster.
-rpId :: Lens' RastersProcess' Text
+rpId :: Lens' RastersProcess Text
 rpId = lens _rpId (\ s a -> s{_rpId = a})
 
-instance GoogleRequest RastersProcess' where
-        type Rs RastersProcess' = ProcessResponse
-        requestClient RastersProcess'{..}
+instance GoogleRequest RastersProcess where
+        type Rs RastersProcess = ProcessResponse
+        requestClient RastersProcess{..}
           = go _rpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy RastersProcessResource)

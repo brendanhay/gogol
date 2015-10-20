@@ -31,8 +31,8 @@ module Network.Google.Resource.MapsEngine.Tables.Permissions.BatchUpdate
       TablesPermissionsBatchUpdateResource
 
     -- * Creating a Request
-    , tablesPermissionsBatchUpdate'
-    , TablesPermissionsBatchUpdate'
+    , tablesPermissionsBatchUpdate
+    , TablesPermissionsBatchUpdate
 
     -- * Request Lenses
     , tpbuPayload
@@ -43,7 +43,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.tables.permissions.batchUpdate@ method which the
--- 'TablesPermissionsBatchUpdate'' request conforms to.
+-- 'TablesPermissionsBatchUpdate' request conforms to.
 type TablesPermissionsBatchUpdateResource =
      "tables" :>
        Capture "id" Text :>
@@ -57,43 +57,43 @@ type TablesPermissionsBatchUpdateResource =
 -- can hold up to 20 different permission entries. Each batchInsert request
 -- is atomic.
 --
--- /See:/ 'tablesPermissionsBatchUpdate'' smart constructor.
-data TablesPermissionsBatchUpdate' = TablesPermissionsBatchUpdate'
+-- /See:/ 'tablesPermissionsBatchUpdate' smart constructor.
+data TablesPermissionsBatchUpdate = TablesPermissionsBatchUpdate
     { _tpbuPayload :: !PermissionsBatchUpdateRequest
     , _tpbuId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesPermissionsBatchUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesPermissionsBatchUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tpbuPayload'
 --
 -- * 'tpbuId'
-tablesPermissionsBatchUpdate'
+tablesPermissionsBatchUpdate
     :: PermissionsBatchUpdateRequest -- ^ 'tpbuPayload'
     -> Text -- ^ 'tpbuId'
-    -> TablesPermissionsBatchUpdate'
-tablesPermissionsBatchUpdate' pTpbuPayload_ pTpbuId_ =
-    TablesPermissionsBatchUpdate'
+    -> TablesPermissionsBatchUpdate
+tablesPermissionsBatchUpdate pTpbuPayload_ pTpbuId_ =
+    TablesPermissionsBatchUpdate
     { _tpbuPayload = pTpbuPayload_
     , _tpbuId = pTpbuId_
     }
 
 -- | Multipart request metadata.
-tpbuPayload :: Lens' TablesPermissionsBatchUpdate' PermissionsBatchUpdateRequest
+tpbuPayload :: Lens' TablesPermissionsBatchUpdate PermissionsBatchUpdateRequest
 tpbuPayload
   = lens _tpbuPayload (\ s a -> s{_tpbuPayload = a})
 
 -- | The ID of the asset to which permissions will be added.
-tpbuId :: Lens' TablesPermissionsBatchUpdate' Text
+tpbuId :: Lens' TablesPermissionsBatchUpdate Text
 tpbuId = lens _tpbuId (\ s a -> s{_tpbuId = a})
 
-instance GoogleRequest TablesPermissionsBatchUpdate'
+instance GoogleRequest TablesPermissionsBatchUpdate
          where
-        type Rs TablesPermissionsBatchUpdate' =
+        type Rs TablesPermissionsBatchUpdate =
              PermissionsBatchUpdateResponse
-        requestClient TablesPermissionsBatchUpdate'{..}
+        requestClient TablesPermissionsBatchUpdate{..}
           = go _tpbuId (Just AltJSON) _tpbuPayload
               mapsEngineService
           where go

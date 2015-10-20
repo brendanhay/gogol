@@ -30,8 +30,8 @@ module Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
       OrganizationsGetIAMPolicyResource
 
     -- * Creating a Request
-    , organizationsGetIAMPolicy'
-    , OrganizationsGetIAMPolicy'
+    , organizationsGetIAMPolicy
+    , OrganizationsGetIAMPolicy
 
     -- * Request Lenses
     , ogipXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.organizations.getIamPolicy@ method which the
--- 'OrganizationsGetIAMPolicy'' request conforms to.
+-- 'OrganizationsGetIAMPolicy' request conforms to.
 type OrganizationsGetIAMPolicyResource =
      "v1beta1" :>
        "organizations" :>
@@ -68,8 +68,8 @@ type OrganizationsGetIAMPolicyResource =
 -- | Gets the access control policy for a Organization resource. May be empty
 -- if no such policy or resource exists.
 --
--- /See:/ 'organizationsGetIAMPolicy'' smart constructor.
-data OrganizationsGetIAMPolicy' = OrganizationsGetIAMPolicy'
+-- /See:/ 'organizationsGetIAMPolicy' smart constructor.
+data OrganizationsGetIAMPolicy = OrganizationsGetIAMPolicy
     { _ogipXgafv          :: !(Maybe Text)
     , _ogipUploadProtocol :: !(Maybe Text)
     , _ogipPp             :: !Bool
@@ -81,7 +81,7 @@ data OrganizationsGetIAMPolicy' = OrganizationsGetIAMPolicy'
     , _ogipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrganizationsGetIAMPolicy'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrganizationsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -102,12 +102,12 @@ data OrganizationsGetIAMPolicy' = OrganizationsGetIAMPolicy'
 -- * 'ogipResource'
 --
 -- * 'ogipCallback'
-organizationsGetIAMPolicy'
+organizationsGetIAMPolicy
     :: GetIAMPolicyRequest -- ^ 'ogipPayload'
     -> Text -- ^ 'ogipResource'
-    -> OrganizationsGetIAMPolicy'
-organizationsGetIAMPolicy' pOgipPayload_ pOgipResource_ =
-    OrganizationsGetIAMPolicy'
+    -> OrganizationsGetIAMPolicy
+organizationsGetIAMPolicy pOgipPayload_ pOgipResource_ =
+    OrganizationsGetIAMPolicy
     { _ogipXgafv = Nothing
     , _ogipUploadProtocol = Nothing
     , _ogipPp = True
@@ -120,58 +120,58 @@ organizationsGetIAMPolicy' pOgipPayload_ pOgipResource_ =
     }
 
 -- | V1 error format.
-ogipXgafv :: Lens' OrganizationsGetIAMPolicy' (Maybe Text)
+ogipXgafv :: Lens' OrganizationsGetIAMPolicy (Maybe Text)
 ogipXgafv
   = lens _ogipXgafv (\ s a -> s{_ogipXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ogipUploadProtocol :: Lens' OrganizationsGetIAMPolicy' (Maybe Text)
+ogipUploadProtocol :: Lens' OrganizationsGetIAMPolicy (Maybe Text)
 ogipUploadProtocol
   = lens _ogipUploadProtocol
       (\ s a -> s{_ogipUploadProtocol = a})
 
 -- | Pretty-print response.
-ogipPp :: Lens' OrganizationsGetIAMPolicy' Bool
+ogipPp :: Lens' OrganizationsGetIAMPolicy Bool
 ogipPp = lens _ogipPp (\ s a -> s{_ogipPp = a})
 
 -- | OAuth access token.
-ogipAccessToken :: Lens' OrganizationsGetIAMPolicy' (Maybe Text)
+ogipAccessToken :: Lens' OrganizationsGetIAMPolicy (Maybe Text)
 ogipAccessToken
   = lens _ogipAccessToken
       (\ s a -> s{_ogipAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ogipUploadType :: Lens' OrganizationsGetIAMPolicy' (Maybe Text)
+ogipUploadType :: Lens' OrganizationsGetIAMPolicy (Maybe Text)
 ogipUploadType
   = lens _ogipUploadType
       (\ s a -> s{_ogipUploadType = a})
 
 -- | Multipart request metadata.
-ogipPayload :: Lens' OrganizationsGetIAMPolicy' GetIAMPolicyRequest
+ogipPayload :: Lens' OrganizationsGetIAMPolicy GetIAMPolicyRequest
 ogipPayload
   = lens _ogipPayload (\ s a -> s{_ogipPayload = a})
 
 -- | OAuth bearer token.
-ogipBearerToken :: Lens' OrganizationsGetIAMPolicy' (Maybe Text)
+ogipBearerToken :: Lens' OrganizationsGetIAMPolicy (Maybe Text)
 ogipBearerToken
   = lens _ogipBearerToken
       (\ s a -> s{_ogipBearerToken = a})
 
 -- | REQUIRED: The resource for which policy is being requested. Resource is
 -- usually specified as a path, such as, \`projects\/{project}\`.
-ogipResource :: Lens' OrganizationsGetIAMPolicy' Text
+ogipResource :: Lens' OrganizationsGetIAMPolicy Text
 ogipResource
   = lens _ogipResource (\ s a -> s{_ogipResource = a})
 
 -- | JSONP
-ogipCallback :: Lens' OrganizationsGetIAMPolicy' (Maybe Text)
+ogipCallback :: Lens' OrganizationsGetIAMPolicy (Maybe Text)
 ogipCallback
   = lens _ogipCallback (\ s a -> s{_ogipCallback = a})
 
-instance GoogleRequest OrganizationsGetIAMPolicy'
+instance GoogleRequest OrganizationsGetIAMPolicy
          where
-        type Rs OrganizationsGetIAMPolicy' = Policy
-        requestClient OrganizationsGetIAMPolicy'{..}
+        type Rs OrganizationsGetIAMPolicy = Policy
+        requestClient OrganizationsGetIAMPolicy{..}
           = go _ogipResource _ogipXgafv _ogipUploadProtocol
               (Just _ogipPp)
               _ogipAccessToken

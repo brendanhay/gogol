@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.Blogs.ListByUser
       BlogsListByUserResource
 
     -- * Creating a Request
-    , blogsListByUser'
-    , BlogsListByUser'
+    , blogsListByUser
+    , BlogsListByUser
 
     -- * Request Lenses
     , blbuStatus
@@ -44,7 +44,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.blogs.listByUser@ method which the
--- 'BlogsListByUser'' request conforms to.
+-- 'BlogsListByUser' request conforms to.
 type BlogsListByUserResource =
      "users" :>
        Capture "userId" Text :>
@@ -57,8 +57,8 @@ type BlogsListByUserResource =
 
 -- | Retrieves a list of blogs, possibly filtered.
 --
--- /See:/ 'blogsListByUser'' smart constructor.
-data BlogsListByUser' = BlogsListByUser'
+-- /See:/ 'blogsListByUser' smart constructor.
+data BlogsListByUser = BlogsListByUser
     { _blbuStatus        :: ![BlogsListByUserStatus]
     , _blbuFetchUserInfo :: !(Maybe Bool)
     , _blbuUserId        :: !Text
@@ -66,7 +66,7 @@ data BlogsListByUser' = BlogsListByUser'
     , _blbuView          :: !(Maybe BlogsListByUserView)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BlogsListByUser'' with the minimum fields required to make a request.
+-- | Creates a value of 'BlogsListByUser' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,11 +79,11 @@ data BlogsListByUser' = BlogsListByUser'
 -- * 'blbuRole'
 --
 -- * 'blbuView'
-blogsListByUser'
+blogsListByUser
     :: Text -- ^ 'blbuUserId'
-    -> BlogsListByUser'
-blogsListByUser' pBlbuUserId_ =
-    BlogsListByUser'
+    -> BlogsListByUser
+blogsListByUser pBlbuUserId_ =
+    BlogsListByUser
     { _blbuStatus = [BLBUSLive]
     , _blbuFetchUserInfo = Nothing
     , _blbuUserId = pBlbuUserId_
@@ -93,28 +93,28 @@ blogsListByUser' pBlbuUserId_ =
 
 -- | Blog statuses to include in the result (default: Live blogs only). Note
 -- that ADMIN access is required to view deleted blogs.
-blbuStatus :: Lens' BlogsListByUser' [BlogsListByUserStatus]
+blbuStatus :: Lens' BlogsListByUser [BlogsListByUserStatus]
 blbuStatus
   = lens _blbuStatus (\ s a -> s{_blbuStatus = a}) .
       _Coerce
 
 -- | Whether the response is a list of blogs with per-user information
 -- instead of just blogs.
-blbuFetchUserInfo :: Lens' BlogsListByUser' (Maybe Bool)
+blbuFetchUserInfo :: Lens' BlogsListByUser (Maybe Bool)
 blbuFetchUserInfo
   = lens _blbuFetchUserInfo
       (\ s a -> s{_blbuFetchUserInfo = a})
 
 -- | ID of the user whose blogs are to be fetched. Either the word \'self\'
 -- (sans quote marks) or the user\'s profile identifier.
-blbuUserId :: Lens' BlogsListByUser' Text
+blbuUserId :: Lens' BlogsListByUser Text
 blbuUserId
   = lens _blbuUserId (\ s a -> s{_blbuUserId = a})
 
 -- | User access types for blogs to include in the results, e.g. AUTHOR will
 -- return blogs where the user has author level access. If no roles are
 -- specified, defaults to ADMIN and AUTHOR roles.
-blbuRole :: Lens' BlogsListByUser' [BlogsListByUserRole]
+blbuRole :: Lens' BlogsListByUser [BlogsListByUserRole]
 blbuRole
   = lens _blbuRole (\ s a -> s{_blbuRole = a}) .
       _Default
@@ -122,12 +122,12 @@ blbuRole
 
 -- | Access level with which to view the blogs. Note that some fields require
 -- elevated access.
-blbuView :: Lens' BlogsListByUser' (Maybe BlogsListByUserView)
+blbuView :: Lens' BlogsListByUser (Maybe BlogsListByUserView)
 blbuView = lens _blbuView (\ s a -> s{_blbuView = a})
 
-instance GoogleRequest BlogsListByUser' where
-        type Rs BlogsListByUser' = BlogList
-        requestClient BlogsListByUser'{..}
+instance GoogleRequest BlogsListByUser where
+        type Rs BlogsListByUser = BlogList
+        requestClient BlogsListByUser{..}
           = go _blbuUserId _blbuStatus _blbuFetchUserInfo
               (_blbuRole ^. _Default)
               _blbuView

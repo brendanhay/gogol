@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.PlatformTypes.List
       PlatformTypesListResource
 
     -- * Creating a Request
-    , platformTypesList'
-    , PlatformTypesList'
+    , platformTypesList
+    , PlatformTypesList
 
     -- * Request Lenses
     , ptlProFileId
@@ -40,7 +40,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.platformTypes.list@ method which the
--- 'PlatformTypesList'' request conforms to.
+-- 'PlatformTypesList' request conforms to.
 type PlatformTypesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -50,33 +50,32 @@ type PlatformTypesListResource =
 
 -- | Retrieves a list of platform types.
 --
--- /See:/ 'platformTypesList'' smart constructor.
-newtype PlatformTypesList' = PlatformTypesList'
+-- /See:/ 'platformTypesList' smart constructor.
+newtype PlatformTypesList = PlatformTypesList
     { _ptlProFileId :: Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlatformTypesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlatformTypesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ptlProFileId'
-platformTypesList'
+platformTypesList
     :: Int64 -- ^ 'ptlProFileId'
-    -> PlatformTypesList'
-platformTypesList' pPtlProFileId_ =
-    PlatformTypesList'
+    -> PlatformTypesList
+platformTypesList pPtlProFileId_ =
+    PlatformTypesList
     { _ptlProFileId = pPtlProFileId_
     }
 
 -- | User profile ID associated with this request.
-ptlProFileId :: Lens' PlatformTypesList' Int64
+ptlProFileId :: Lens' PlatformTypesList Int64
 ptlProFileId
   = lens _ptlProFileId (\ s a -> s{_ptlProFileId = a})
 
-instance GoogleRequest PlatformTypesList' where
-        type Rs PlatformTypesList' =
-             PlatformTypesListResponse
-        requestClient PlatformTypesList'{..}
+instance GoogleRequest PlatformTypesList where
+        type Rs PlatformTypesList = PlatformTypesListResponse
+        requestClient PlatformTypesList{..}
           = go _ptlProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

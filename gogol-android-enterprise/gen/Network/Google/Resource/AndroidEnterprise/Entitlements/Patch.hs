@@ -30,8 +30,8 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Patch
       EntitlementsPatchResource
 
     -- * Creating a Request
-    , entitlementsPatch'
-    , EntitlementsPatch'
+    , entitlementsPatch
+    , EntitlementsPatch
 
     -- * Request Lenses
     , epEntitlementId
@@ -45,7 +45,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.entitlements.patch@ method which the
--- 'EntitlementsPatch'' request conforms to.
+-- 'EntitlementsPatch' request conforms to.
 type EntitlementsPatchResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -61,8 +61,8 @@ type EntitlementsPatchResource =
 -- | Adds or updates an entitlement to an app for a user. This method
 -- supports patch semantics.
 --
--- /See:/ 'entitlementsPatch'' smart constructor.
-data EntitlementsPatch' = EntitlementsPatch'
+-- /See:/ 'entitlementsPatch' smart constructor.
+data EntitlementsPatch = EntitlementsPatch
     { _epEntitlementId :: !Text
     , _epEnterpriseId  :: !Text
     , _epPayload       :: !Entitlement
@@ -70,7 +70,7 @@ data EntitlementsPatch' = EntitlementsPatch'
     , _epUserId        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EntitlementsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'EntitlementsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -83,14 +83,14 @@ data EntitlementsPatch' = EntitlementsPatch'
 -- * 'epInstall'
 --
 -- * 'epUserId'
-entitlementsPatch'
+entitlementsPatch
     :: Text -- ^ 'epEntitlementId'
     -> Text -- ^ 'epEnterpriseId'
     -> Entitlement -- ^ 'epPayload'
     -> Text -- ^ 'epUserId'
-    -> EntitlementsPatch'
-entitlementsPatch' pEpEntitlementId_ pEpEnterpriseId_ pEpPayload_ pEpUserId_ =
-    EntitlementsPatch'
+    -> EntitlementsPatch
+entitlementsPatch pEpEntitlementId_ pEpEnterpriseId_ pEpPayload_ pEpUserId_ =
+    EntitlementsPatch
     { _epEntitlementId = pEpEntitlementId_
     , _epEnterpriseId = pEpEnterpriseId_
     , _epPayload = pEpPayload_
@@ -99,19 +99,19 @@ entitlementsPatch' pEpEntitlementId_ pEpEnterpriseId_ pEpPayload_ pEpUserId_ =
     }
 
 -- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
-epEntitlementId :: Lens' EntitlementsPatch' Text
+epEntitlementId :: Lens' EntitlementsPatch Text
 epEntitlementId
   = lens _epEntitlementId
       (\ s a -> s{_epEntitlementId = a})
 
 -- | The ID of the enterprise.
-epEnterpriseId :: Lens' EntitlementsPatch' Text
+epEnterpriseId :: Lens' EntitlementsPatch Text
 epEnterpriseId
   = lens _epEnterpriseId
       (\ s a -> s{_epEnterpriseId = a})
 
 -- | Multipart request metadata.
-epPayload :: Lens' EntitlementsPatch' Entitlement
+epPayload :: Lens' EntitlementsPatch Entitlement
 epPayload
   = lens _epPayload (\ s a -> s{_epPayload = a})
 
@@ -119,17 +119,17 @@ epPayload
 -- possible. Failure to install on one or more devices will not prevent
 -- this operation from returning successfully, as long as the entitlement
 -- was successfully assigned to the user.
-epInstall :: Lens' EntitlementsPatch' (Maybe Bool)
+epInstall :: Lens' EntitlementsPatch (Maybe Bool)
 epInstall
   = lens _epInstall (\ s a -> s{_epInstall = a})
 
 -- | The ID of the user.
-epUserId :: Lens' EntitlementsPatch' Text
+epUserId :: Lens' EntitlementsPatch Text
 epUserId = lens _epUserId (\ s a -> s{_epUserId = a})
 
-instance GoogleRequest EntitlementsPatch' where
-        type Rs EntitlementsPatch' = Entitlement
-        requestClient EntitlementsPatch'{..}
+instance GoogleRequest EntitlementsPatch where
+        type Rs EntitlementsPatch = Entitlement
+        requestClient EntitlementsPatch{..}
           = go _epEnterpriseId _epUserId _epEntitlementId
               _epInstall
               (Just AltJSON)

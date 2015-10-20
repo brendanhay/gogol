@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Projects.Icons.Get
       ProjectsIconsGetResource
 
     -- * Creating a Request
-    , projectsIconsGet'
-    , ProjectsIconsGet'
+    , projectsIconsGet
+    , ProjectsIconsGet
 
     -- * Request Lenses
     , pigId
@@ -41,7 +41,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.projects.icons.get@ method which the
--- 'ProjectsIconsGet'' request conforms to.
+-- 'ProjectsIconsGet' request conforms to.
 type ProjectsIconsGetResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -58,41 +58,41 @@ type ProjectsIconsGetResource =
 
 -- | Return an icon or its associated metadata
 --
--- /See:/ 'projectsIconsGet'' smart constructor.
-data ProjectsIconsGet' = ProjectsIconsGet'
+-- /See:/ 'projectsIconsGet' smart constructor.
+data ProjectsIconsGet = ProjectsIconsGet
     { _pigId        :: !Text
     , _pigProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsIconsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsIconsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pigId'
 --
 -- * 'pigProjectId'
-projectsIconsGet'
+projectsIconsGet
     :: Text -- ^ 'pigId'
     -> Text -- ^ 'pigProjectId'
-    -> ProjectsIconsGet'
-projectsIconsGet' pPigId_ pPigProjectId_ =
-    ProjectsIconsGet'
+    -> ProjectsIconsGet
+projectsIconsGet pPigId_ pPigProjectId_ =
+    ProjectsIconsGet
     { _pigId = pPigId_
     , _pigProjectId = pPigProjectId_
     }
 
 -- | The ID of the icon.
-pigId :: Lens' ProjectsIconsGet' Text
+pigId :: Lens' ProjectsIconsGet Text
 pigId = lens _pigId (\ s a -> s{_pigId = a})
 
 -- | The ID of the project.
-pigProjectId :: Lens' ProjectsIconsGet' Text
+pigProjectId :: Lens' ProjectsIconsGet Text
 pigProjectId
   = lens _pigProjectId (\ s a -> s{_pigProjectId = a})
 
-instance GoogleRequest ProjectsIconsGet' where
-        type Rs ProjectsIconsGet' = Icon
-        requestClient ProjectsIconsGet'{..}
+instance GoogleRequest ProjectsIconsGet where
+        type Rs ProjectsIconsGet = Icon
+        requestClient ProjectsIconsGet{..}
           = go _pigProjectId _pigId (Just AltJSON)
               mapsEngineService
           where go :<|> _
@@ -101,9 +101,9 @@ instance GoogleRequest ProjectsIconsGet' where
                       mempty
 
 instance GoogleRequest
-         (MediaDownload ProjectsIconsGet') where
-        type Rs (MediaDownload ProjectsIconsGet') = Stream
-        requestClient (MediaDownload ProjectsIconsGet'{..})
+         (MediaDownload ProjectsIconsGet) where
+        type Rs (MediaDownload ProjectsIconsGet) = Stream
+        requestClient (MediaDownload ProjectsIconsGet{..})
           = go _pigProjectId _pigId (Just AltMedia)
               mapsEngineService
           where _ :<|> go

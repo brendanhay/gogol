@@ -30,8 +30,8 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.Delete
       AccountsPermissionsDeleteResource
 
     -- * Creating a Request
-    , accountsPermissionsDelete'
-    , AccountsPermissionsDelete'
+    , accountsPermissionsDelete
+    , AccountsPermissionsDelete
 
     -- * Request Lenses
     , apdAccountId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.permissions.delete@ method which the
--- 'AccountsPermissionsDelete'' request conforms to.
+-- 'AccountsPermissionsDelete' request conforms to.
 type AccountsPermissionsDeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -53,44 +53,44 @@ type AccountsPermissionsDeleteResource =
 -- | Removes a user from the account, revoking access to it and all of its
 -- containers.
 --
--- /See:/ 'accountsPermissionsDelete'' smart constructor.
-data AccountsPermissionsDelete' = AccountsPermissionsDelete'
+-- /See:/ 'accountsPermissionsDelete' smart constructor.
+data AccountsPermissionsDelete = AccountsPermissionsDelete
     { _apdAccountId    :: !Text
     , _apdPermissionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsPermissionsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsPermissionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'apdAccountId'
 --
 -- * 'apdPermissionId'
-accountsPermissionsDelete'
+accountsPermissionsDelete
     :: Text -- ^ 'apdAccountId'
     -> Text -- ^ 'apdPermissionId'
-    -> AccountsPermissionsDelete'
-accountsPermissionsDelete' pApdAccountId_ pApdPermissionId_ =
-    AccountsPermissionsDelete'
+    -> AccountsPermissionsDelete
+accountsPermissionsDelete pApdAccountId_ pApdPermissionId_ =
+    AccountsPermissionsDelete
     { _apdAccountId = pApdAccountId_
     , _apdPermissionId = pApdPermissionId_
     }
 
 -- | The GTM Account ID.
-apdAccountId :: Lens' AccountsPermissionsDelete' Text
+apdAccountId :: Lens' AccountsPermissionsDelete Text
 apdAccountId
   = lens _apdAccountId (\ s a -> s{_apdAccountId = a})
 
 -- | The GTM User ID.
-apdPermissionId :: Lens' AccountsPermissionsDelete' Text
+apdPermissionId :: Lens' AccountsPermissionsDelete Text
 apdPermissionId
   = lens _apdPermissionId
       (\ s a -> s{_apdPermissionId = a})
 
-instance GoogleRequest AccountsPermissionsDelete'
+instance GoogleRequest AccountsPermissionsDelete
          where
-        type Rs AccountsPermissionsDelete' = ()
-        requestClient AccountsPermissionsDelete'{..}
+        type Rs AccountsPermissionsDelete = ()
+        requestClient AccountsPermissionsDelete{..}
           = go _apdAccountId _apdPermissionId (Just AltJSON)
               tagManagerService
           where go

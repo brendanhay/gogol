@@ -30,21 +30,21 @@ module Network.Google.Resource.PlusDomains.Activities.List
       ActivitiesListResource
 
     -- * Creating a Request
-    , activitiesList'
-    , ActivitiesList'
+    , activitiesList
+    , ActivitiesList
 
     -- * Request Lenses
-    , aCollection
-    , aUserId
-    , aPageToken
-    , aMaxResults
+    , alCollection
+    , alUserId
+    , alPageToken
+    , alMaxResults
     ) where
 
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plusDomains.activities.list@ method which the
--- 'ActivitiesList'' request conforms to.
+-- 'ActivitiesList' request conforms to.
 type ActivitiesListResource =
      "people" :>
        Capture "userId" Text :>
@@ -57,66 +57,66 @@ type ActivitiesListResource =
 -- | List all of the activities in the specified collection for a particular
 -- user.
 --
--- /See:/ 'activitiesList'' smart constructor.
-data ActivitiesList' = ActivitiesList'
-    { _aCollection :: !ActivitiesListCollection
-    , _aUserId     :: !Text
-    , _aPageToken  :: !(Maybe Text)
-    , _aMaxResults :: !Word32
+-- /See:/ 'activitiesList' smart constructor.
+data ActivitiesList = ActivitiesList
+    { _alCollection :: !ActivitiesListCollection
+    , _alUserId     :: !Text
+    , _alPageToken  :: !(Maybe Text)
+    , _alMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aCollection'
+-- * 'alCollection'
 --
--- * 'aUserId'
+-- * 'alUserId'
 --
--- * 'aPageToken'
+-- * 'alPageToken'
 --
--- * 'aMaxResults'
-activitiesList'
-    :: ActivitiesListCollection -- ^ 'aCollection'
-    -> Text -- ^ 'aUserId'
-    -> ActivitiesList'
-activitiesList' pACollection_ pAUserId_ =
-    ActivitiesList'
-    { _aCollection = pACollection_
-    , _aUserId = pAUserId_
-    , _aPageToken = Nothing
-    , _aMaxResults = 20
+-- * 'alMaxResults'
+activitiesList
+    :: ActivitiesListCollection -- ^ 'alCollection'
+    -> Text -- ^ 'alUserId'
+    -> ActivitiesList
+activitiesList pAlCollection_ pAlUserId_ =
+    ActivitiesList
+    { _alCollection = pAlCollection_
+    , _alUserId = pAlUserId_
+    , _alPageToken = Nothing
+    , _alMaxResults = 20
     }
 
 -- | The collection of activities to list.
-aCollection :: Lens' ActivitiesList' ActivitiesListCollection
-aCollection
-  = lens _aCollection (\ s a -> s{_aCollection = a})
+alCollection :: Lens' ActivitiesList ActivitiesListCollection
+alCollection
+  = lens _alCollection (\ s a -> s{_alCollection = a})
 
 -- | The ID of the user to get activities for. The special value \"me\" can
 -- be used to indicate the authenticated user.
-aUserId :: Lens' ActivitiesList' Text
-aUserId = lens _aUserId (\ s a -> s{_aUserId = a})
+alUserId :: Lens' ActivitiesList Text
+alUserId = lens _alUserId (\ s a -> s{_alUserId = a})
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
 -- \"nextPageToken\" from the previous response.
-aPageToken :: Lens' ActivitiesList' (Maybe Text)
-aPageToken
-  = lens _aPageToken (\ s a -> s{_aPageToken = a})
+alPageToken :: Lens' ActivitiesList (Maybe Text)
+alPageToken
+  = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | The maximum number of activities to include in the response, which is
 -- used for paging. For any response, the actual number returned might be
 -- less than the specified maxResults.
-aMaxResults :: Lens' ActivitiesList' Word32
-aMaxResults
-  = lens _aMaxResults (\ s a -> s{_aMaxResults = a})
+alMaxResults :: Lens' ActivitiesList Word32
+alMaxResults
+  = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
-instance GoogleRequest ActivitiesList' where
-        type Rs ActivitiesList' = ActivityFeed
-        requestClient ActivitiesList'{..}
-          = go _aUserId _aCollection _aPageToken
-              (Just _aMaxResults)
+instance GoogleRequest ActivitiesList where
+        type Rs ActivitiesList = ActivityFeed
+        requestClient ActivitiesList{..}
+          = go _alUserId _alCollection _alPageToken
+              (Just _alMaxResults)
               (Just AltJSON)
               plusDomainsService
           where go

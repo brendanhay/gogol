@@ -31,8 +31,8 @@ module Network.Google.Resource.Tasks.Tasks.Clear
       TasksClearResource
 
     -- * Creating a Request
-    , tasksClear'
-    , TasksClear'
+    , tasksClear
+    , TasksClear
 
     -- * Request Lenses
     , tcTaskList
@@ -42,7 +42,7 @@ import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @tasks.tasks.clear@ method which the
--- 'TasksClear'' request conforms to.
+-- 'TasksClear' request conforms to.
 type TasksClearResource =
      "lists" :>
        Capture "tasklist" Text :>
@@ -53,32 +53,32 @@ type TasksClearResource =
 -- tasks will be marked as \'hidden\' and no longer be returned by default
 -- when retrieving all tasks for a task list.
 --
--- /See:/ 'tasksClear'' smart constructor.
-newtype TasksClear' = TasksClear'
+-- /See:/ 'tasksClear' smart constructor.
+newtype TasksClear = TasksClear
     { _tcTaskList :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TasksClear'' with the minimum fields required to make a request.
+-- | Creates a value of 'TasksClear' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tcTaskList'
-tasksClear'
+tasksClear
     :: Text -- ^ 'tcTaskList'
-    -> TasksClear'
-tasksClear' pTcTaskList_ =
-    TasksClear'
+    -> TasksClear
+tasksClear pTcTaskList_ =
+    TasksClear
     { _tcTaskList = pTcTaskList_
     }
 
 -- | Task list identifier.
-tcTaskList :: Lens' TasksClear' Text
+tcTaskList :: Lens' TasksClear Text
 tcTaskList
   = lens _tcTaskList (\ s a -> s{_tcTaskList = a})
 
-instance GoogleRequest TasksClear' where
-        type Rs TasksClear' = ()
-        requestClient TasksClear'{..}
+instance GoogleRequest TasksClear where
+        type Rs TasksClear = ()
+        requestClient TasksClear{..}
           = go _tcTaskList (Just AltJSON) appsTasksService
           where go
                   = buildClient (Proxy :: Proxy TasksClearResource)

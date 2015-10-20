@@ -30,8 +30,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.Listings.Patch
       EditsListingsPatchResource
 
     -- * Creating a Request
-    , editsListingsPatch'
-    , EditsListingsPatch'
+    , editsListingsPatch
+    , EditsListingsPatch
 
     -- * Request Lenses
     , elpPackageName
@@ -44,7 +44,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.listings.patch@ method which the
--- 'EditsListingsPatch'' request conforms to.
+-- 'EditsListingsPatch' request conforms to.
 type EditsListingsPatchResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -57,15 +57,15 @@ type EditsListingsPatchResource =
 -- | Creates or updates a localized store listing. This method supports patch
 -- semantics.
 --
--- /See:/ 'editsListingsPatch'' smart constructor.
-data EditsListingsPatch' = EditsListingsPatch'
+-- /See:/ 'editsListingsPatch' smart constructor.
+data EditsListingsPatch = EditsListingsPatch
     { _elpPackageName :: !Text
     , _elpPayload     :: !Listing
     , _elpLanguage    :: !Text
     , _elpEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsListingsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsListingsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,14 +76,14 @@ data EditsListingsPatch' = EditsListingsPatch'
 -- * 'elpLanguage'
 --
 -- * 'elpEditId'
-editsListingsPatch'
+editsListingsPatch
     :: Text -- ^ 'elpPackageName'
     -> Listing -- ^ 'elpPayload'
     -> Text -- ^ 'elpLanguage'
     -> Text -- ^ 'elpEditId'
-    -> EditsListingsPatch'
-editsListingsPatch' pElpPackageName_ pElpPayload_ pElpLanguage_ pElpEditId_ =
-    EditsListingsPatch'
+    -> EditsListingsPatch
+editsListingsPatch pElpPackageName_ pElpPayload_ pElpLanguage_ pElpEditId_ =
+    EditsListingsPatch
     { _elpPackageName = pElpPackageName_
     , _elpPayload = pElpPayload_
     , _elpLanguage = pElpLanguage_
@@ -92,30 +92,30 @@ editsListingsPatch' pElpPackageName_ pElpPayload_ pElpLanguage_ pElpEditId_ =
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-elpPackageName :: Lens' EditsListingsPatch' Text
+elpPackageName :: Lens' EditsListingsPatch Text
 elpPackageName
   = lens _elpPackageName
       (\ s a -> s{_elpPackageName = a})
 
 -- | Multipart request metadata.
-elpPayload :: Lens' EditsListingsPatch' Listing
+elpPayload :: Lens' EditsListingsPatch Listing
 elpPayload
   = lens _elpPayload (\ s a -> s{_elpPayload = a})
 
 -- | The language code (a BCP-47 language tag) of the localized listing to
 -- read or modify. For example, to select Austrian German, pass \"de-AT\".
-elpLanguage :: Lens' EditsListingsPatch' Text
+elpLanguage :: Lens' EditsListingsPatch Text
 elpLanguage
   = lens _elpLanguage (\ s a -> s{_elpLanguage = a})
 
 -- | Unique identifier for this edit.
-elpEditId :: Lens' EditsListingsPatch' Text
+elpEditId :: Lens' EditsListingsPatch Text
 elpEditId
   = lens _elpEditId (\ s a -> s{_elpEditId = a})
 
-instance GoogleRequest EditsListingsPatch' where
-        type Rs EditsListingsPatch' = Listing
-        requestClient EditsListingsPatch'{..}
+instance GoogleRequest EditsListingsPatch where
+        type Rs EditsListingsPatch = Listing
+        requestClient EditsListingsPatch{..}
           = go _elpPackageName _elpEditId _elpLanguage
               (Just AltJSON)
               _elpPayload

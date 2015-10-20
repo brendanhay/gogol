@@ -32,8 +32,8 @@ module Network.Google.Resource.Classroom.Courses.Aliases.Create
       CoursesAliasesCreateResource
 
     -- * Creating a Request
-    , coursesAliasesCreate'
-    , CoursesAliasesCreate'
+    , coursesAliasesCreate
+    , CoursesAliasesCreate
 
     -- * Request Lenses
     , cacXgafv
@@ -51,7 +51,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.aliases.create@ method which the
--- 'CoursesAliasesCreate'' request conforms to.
+-- 'CoursesAliasesCreate' request conforms to.
 type CoursesAliasesCreateResource =
      "v1" :>
        "courses" :>
@@ -73,8 +73,8 @@ type CoursesAliasesCreateResource =
 -- to create the alias or for access errors. * \`NOT_FOUND\` if the course
 -- does not exist. * \`ALREADY_EXISTS\` if the alias already exists.
 --
--- /See:/ 'coursesAliasesCreate'' smart constructor.
-data CoursesAliasesCreate' = CoursesAliasesCreate'
+-- /See:/ 'coursesAliasesCreate' smart constructor.
+data CoursesAliasesCreate = CoursesAliasesCreate
     { _cacXgafv          :: !(Maybe Text)
     , _cacUploadProtocol :: !(Maybe Text)
     , _cacPp             :: !Bool
@@ -86,7 +86,7 @@ data CoursesAliasesCreate' = CoursesAliasesCreate'
     , _cacCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CoursesAliasesCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CoursesAliasesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -107,12 +107,12 @@ data CoursesAliasesCreate' = CoursesAliasesCreate'
 -- * 'cacBearerToken'
 --
 -- * 'cacCallback'
-coursesAliasesCreate'
+coursesAliasesCreate
     :: Text -- ^ 'cacCourseId'
     -> CourseAlias -- ^ 'cacPayload'
-    -> CoursesAliasesCreate'
-coursesAliasesCreate' pCacCourseId_ pCacPayload_ =
-    CoursesAliasesCreate'
+    -> CoursesAliasesCreate
+coursesAliasesCreate pCacCourseId_ pCacPayload_ =
+    CoursesAliasesCreate
     { _cacXgafv = Nothing
     , _cacUploadProtocol = Nothing
     , _cacPp = True
@@ -125,56 +125,56 @@ coursesAliasesCreate' pCacCourseId_ pCacPayload_ =
     }
 
 -- | V1 error format.
-cacXgafv :: Lens' CoursesAliasesCreate' (Maybe Text)
+cacXgafv :: Lens' CoursesAliasesCreate (Maybe Text)
 cacXgafv = lens _cacXgafv (\ s a -> s{_cacXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-cacUploadProtocol :: Lens' CoursesAliasesCreate' (Maybe Text)
+cacUploadProtocol :: Lens' CoursesAliasesCreate (Maybe Text)
 cacUploadProtocol
   = lens _cacUploadProtocol
       (\ s a -> s{_cacUploadProtocol = a})
 
 -- | Pretty-print response.
-cacPp :: Lens' CoursesAliasesCreate' Bool
+cacPp :: Lens' CoursesAliasesCreate Bool
 cacPp = lens _cacPp (\ s a -> s{_cacPp = a})
 
 -- | Identifier of the course to alias. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
-cacCourseId :: Lens' CoursesAliasesCreate' Text
+cacCourseId :: Lens' CoursesAliasesCreate Text
 cacCourseId
   = lens _cacCourseId (\ s a -> s{_cacCourseId = a})
 
 -- | OAuth access token.
-cacAccessToken :: Lens' CoursesAliasesCreate' (Maybe Text)
+cacAccessToken :: Lens' CoursesAliasesCreate (Maybe Text)
 cacAccessToken
   = lens _cacAccessToken
       (\ s a -> s{_cacAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-cacUploadType :: Lens' CoursesAliasesCreate' (Maybe Text)
+cacUploadType :: Lens' CoursesAliasesCreate (Maybe Text)
 cacUploadType
   = lens _cacUploadType
       (\ s a -> s{_cacUploadType = a})
 
 -- | Multipart request metadata.
-cacPayload :: Lens' CoursesAliasesCreate' CourseAlias
+cacPayload :: Lens' CoursesAliasesCreate CourseAlias
 cacPayload
   = lens _cacPayload (\ s a -> s{_cacPayload = a})
 
 -- | OAuth bearer token.
-cacBearerToken :: Lens' CoursesAliasesCreate' (Maybe Text)
+cacBearerToken :: Lens' CoursesAliasesCreate (Maybe Text)
 cacBearerToken
   = lens _cacBearerToken
       (\ s a -> s{_cacBearerToken = a})
 
 -- | JSONP
-cacCallback :: Lens' CoursesAliasesCreate' (Maybe Text)
+cacCallback :: Lens' CoursesAliasesCreate (Maybe Text)
 cacCallback
   = lens _cacCallback (\ s a -> s{_cacCallback = a})
 
-instance GoogleRequest CoursesAliasesCreate' where
-        type Rs CoursesAliasesCreate' = CourseAlias
-        requestClient CoursesAliasesCreate'{..}
+instance GoogleRequest CoursesAliasesCreate where
+        type Rs CoursesAliasesCreate = CourseAlias
+        requestClient CoursesAliasesCreate{..}
           = go _cacCourseId _cacXgafv _cacUploadProtocol
               (Just _cacPp)
               _cacAccessToken

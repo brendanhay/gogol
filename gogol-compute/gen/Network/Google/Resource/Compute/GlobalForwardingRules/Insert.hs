@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.GlobalForwardingRules.Insert
       GlobalForwardingRulesInsertResource
 
     -- * Creating a Request
-    , globalForwardingRulesInsert'
-    , GlobalForwardingRulesInsert'
+    , globalForwardingRulesInsert
+    , GlobalForwardingRulesInsert
 
     -- * Request Lenses
     , gfriProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.globalForwardingRules.insert@ method which the
--- 'GlobalForwardingRulesInsert'' request conforms to.
+-- 'GlobalForwardingRulesInsert' request conforms to.
 type GlobalForwardingRulesInsertResource =
      Capture "project" Text :>
        "global" :>
@@ -54,43 +54,43 @@ type GlobalForwardingRulesInsertResource =
 -- | Creates a ForwardingRule resource in the specified project and region
 -- using the data included in the request.
 --
--- /See:/ 'globalForwardingRulesInsert'' smart constructor.
-data GlobalForwardingRulesInsert' = GlobalForwardingRulesInsert'
+-- /See:/ 'globalForwardingRulesInsert' smart constructor.
+data GlobalForwardingRulesInsert = GlobalForwardingRulesInsert
     { _gfriProject :: !Text
     , _gfriPayload :: !ForwardingRule
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GlobalForwardingRulesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'GlobalForwardingRulesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gfriProject'
 --
 -- * 'gfriPayload'
-globalForwardingRulesInsert'
+globalForwardingRulesInsert
     :: Text -- ^ 'gfriProject'
     -> ForwardingRule -- ^ 'gfriPayload'
-    -> GlobalForwardingRulesInsert'
-globalForwardingRulesInsert' pGfriProject_ pGfriPayload_ =
-    GlobalForwardingRulesInsert'
+    -> GlobalForwardingRulesInsert
+globalForwardingRulesInsert pGfriProject_ pGfriPayload_ =
+    GlobalForwardingRulesInsert
     { _gfriProject = pGfriProject_
     , _gfriPayload = pGfriPayload_
     }
 
 -- | Name of the project scoping this request.
-gfriProject :: Lens' GlobalForwardingRulesInsert' Text
+gfriProject :: Lens' GlobalForwardingRulesInsert Text
 gfriProject
   = lens _gfriProject (\ s a -> s{_gfriProject = a})
 
 -- | Multipart request metadata.
-gfriPayload :: Lens' GlobalForwardingRulesInsert' ForwardingRule
+gfriPayload :: Lens' GlobalForwardingRulesInsert ForwardingRule
 gfriPayload
   = lens _gfriPayload (\ s a -> s{_gfriPayload = a})
 
-instance GoogleRequest GlobalForwardingRulesInsert'
+instance GoogleRequest GlobalForwardingRulesInsert
          where
-        type Rs GlobalForwardingRulesInsert' = Operation
-        requestClient GlobalForwardingRulesInsert'{..}
+        type Rs GlobalForwardingRulesInsert = Operation
+        requestClient GlobalForwardingRulesInsert{..}
           = go _gfriProject (Just AltJSON) _gfriPayload
               computeService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSense.Accounts.Reports.Saved.List
       AccountsReportsSavedListResource
 
     -- * Creating a Request
-    , accountsReportsSavedList'
-    , AccountsReportsSavedList'
+    , accountsReportsSavedList
+    , AccountsReportsSavedList
 
     -- * Request Lenses
     , arslAccountId
@@ -42,7 +42,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.reports.saved.list@ method which the
--- 'AccountsReportsSavedList'' request conforms to.
+-- 'AccountsReportsSavedList' request conforms to.
 type AccountsReportsSavedListResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -54,14 +54,14 @@ type AccountsReportsSavedListResource =
 
 -- | List all saved reports in the specified AdSense account.
 --
--- /See:/ 'accountsReportsSavedList'' smart constructor.
-data AccountsReportsSavedList' = AccountsReportsSavedList'
+-- /See:/ 'accountsReportsSavedList' smart constructor.
+data AccountsReportsSavedList = AccountsReportsSavedList
     { _arslAccountId  :: !Text
     , _arslPageToken  :: !(Maybe Text)
     , _arslMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsReportsSavedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsReportsSavedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,18 +70,18 @@ data AccountsReportsSavedList' = AccountsReportsSavedList'
 -- * 'arslPageToken'
 --
 -- * 'arslMaxResults'
-accountsReportsSavedList'
+accountsReportsSavedList
     :: Text -- ^ 'arslAccountId'
-    -> AccountsReportsSavedList'
-accountsReportsSavedList' pArslAccountId_ =
-    AccountsReportsSavedList'
+    -> AccountsReportsSavedList
+accountsReportsSavedList pArslAccountId_ =
+    AccountsReportsSavedList
     { _arslAccountId = pArslAccountId_
     , _arslPageToken = Nothing
     , _arslMaxResults = Nothing
     }
 
 -- | Account to which the saved reports belong.
-arslAccountId :: Lens' AccountsReportsSavedList' Text
+arslAccountId :: Lens' AccountsReportsSavedList Text
 arslAccountId
   = lens _arslAccountId
       (\ s a -> s{_arslAccountId = a})
@@ -89,22 +89,21 @@ arslAccountId
 -- | A continuation token, used to page through saved reports. To retrieve
 -- the next page, set this parameter to the value of \"nextPageToken\" from
 -- the previous response.
-arslPageToken :: Lens' AccountsReportsSavedList' (Maybe Text)
+arslPageToken :: Lens' AccountsReportsSavedList (Maybe Text)
 arslPageToken
   = lens _arslPageToken
       (\ s a -> s{_arslPageToken = a})
 
 -- | The maximum number of saved reports to include in the response, used for
 -- paging.
-arslMaxResults :: Lens' AccountsReportsSavedList' (Maybe Int32)
+arslMaxResults :: Lens' AccountsReportsSavedList (Maybe Int32)
 arslMaxResults
   = lens _arslMaxResults
       (\ s a -> s{_arslMaxResults = a})
 
-instance GoogleRequest AccountsReportsSavedList'
-         where
-        type Rs AccountsReportsSavedList' = SavedReports
-        requestClient AccountsReportsSavedList'{..}
+instance GoogleRequest AccountsReportsSavedList where
+        type Rs AccountsReportsSavedList = SavedReports
+        requestClient AccountsReportsSavedList{..}
           = go _arslAccountId _arslPageToken _arslMaxResults
               (Just AltJSON)
               adSenseService

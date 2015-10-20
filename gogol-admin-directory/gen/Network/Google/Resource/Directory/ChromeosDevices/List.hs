@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.ChromeosDevices.List
       ChromeosDevicesListResource
 
     -- * Creating a Request
-    , chromeosDevicesList'
-    , ChromeosDevicesList'
+    , chromeosDevicesList
+    , ChromeosDevicesList
 
     -- * Request Lenses
     , cdlOrderBy
@@ -46,7 +46,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.chromeosdevices.list@ method which the
--- 'ChromeosDevicesList'' request conforms to.
+-- 'ChromeosDevicesList' request conforms to.
 type ChromeosDevicesListResource =
      "customer" :>
        Capture "customerId" Text :>
@@ -65,8 +65,8 @@ type ChromeosDevicesListResource =
 
 -- | Retrieve all Chrome OS Devices of a customer (paginated)
 --
--- /See:/ 'chromeosDevicesList'' smart constructor.
-data ChromeosDevicesList' = ChromeosDevicesList'
+-- /See:/ 'chromeosDevicesList' smart constructor.
+data ChromeosDevicesList = ChromeosDevicesList
     { _cdlOrderBy    :: !(Maybe ChromeosDevicesListOrderBy)
     , _cdlCustomerId :: !Text
     , _cdlSortOrder  :: !(Maybe ChromeosDevicesListSortOrder)
@@ -76,7 +76,7 @@ data ChromeosDevicesList' = ChromeosDevicesList'
     , _cdlMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChromeosDevicesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChromeosDevicesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -93,11 +93,11 @@ data ChromeosDevicesList' = ChromeosDevicesList'
 -- * 'cdlPageToken'
 --
 -- * 'cdlMaxResults'
-chromeosDevicesList'
+chromeosDevicesList
     :: Text -- ^ 'cdlCustomerId'
-    -> ChromeosDevicesList'
-chromeosDevicesList' pCdlCustomerId_ =
-    ChromeosDevicesList'
+    -> ChromeosDevicesList
+chromeosDevicesList pCdlCustomerId_ =
+    ChromeosDevicesList
     { _cdlOrderBy = Nothing
     , _cdlCustomerId = pCdlCustomerId_
     , _cdlSortOrder = Nothing
@@ -108,47 +108,47 @@ chromeosDevicesList' pCdlCustomerId_ =
     }
 
 -- | Column to use for sorting results
-cdlOrderBy :: Lens' ChromeosDevicesList' (Maybe ChromeosDevicesListOrderBy)
+cdlOrderBy :: Lens' ChromeosDevicesList (Maybe ChromeosDevicesListOrderBy)
 cdlOrderBy
   = lens _cdlOrderBy (\ s a -> s{_cdlOrderBy = a})
 
 -- | Immutable id of the Google Apps account
-cdlCustomerId :: Lens' ChromeosDevicesList' Text
+cdlCustomerId :: Lens' ChromeosDevicesList Text
 cdlCustomerId
   = lens _cdlCustomerId
       (\ s a -> s{_cdlCustomerId = a})
 
 -- | Whether to return results in ascending or descending order. Only of use
 -- when orderBy is also used
-cdlSortOrder :: Lens' ChromeosDevicesList' (Maybe ChromeosDevicesListSortOrder)
+cdlSortOrder :: Lens' ChromeosDevicesList (Maybe ChromeosDevicesListSortOrder)
 cdlSortOrder
   = lens _cdlSortOrder (\ s a -> s{_cdlSortOrder = a})
 
 -- | Search string in the format given at
 -- http:\/\/support.google.com\/chromeos\/a\/bin\/answer.py?hl=en&answer=1698333
-cdlQuery :: Lens' ChromeosDevicesList' (Maybe Text)
+cdlQuery :: Lens' ChromeosDevicesList (Maybe Text)
 cdlQuery = lens _cdlQuery (\ s a -> s{_cdlQuery = a})
 
 -- | Restrict information returned to a set of selected fields.
-cdlProjection :: Lens' ChromeosDevicesList' (Maybe ChromeosDevicesListProjection)
+cdlProjection :: Lens' ChromeosDevicesList (Maybe ChromeosDevicesListProjection)
 cdlProjection
   = lens _cdlProjection
       (\ s a -> s{_cdlProjection = a})
 
 -- | Token to specify next page in the list
-cdlPageToken :: Lens' ChromeosDevicesList' (Maybe Text)
+cdlPageToken :: Lens' ChromeosDevicesList (Maybe Text)
 cdlPageToken
   = lens _cdlPageToken (\ s a -> s{_cdlPageToken = a})
 
 -- | Maximum number of results to return. Default is 100
-cdlMaxResults :: Lens' ChromeosDevicesList' (Maybe Int32)
+cdlMaxResults :: Lens' ChromeosDevicesList (Maybe Int32)
 cdlMaxResults
   = lens _cdlMaxResults
       (\ s a -> s{_cdlMaxResults = a})
 
-instance GoogleRequest ChromeosDevicesList' where
-        type Rs ChromeosDevicesList' = ChromeOSDevices
-        requestClient ChromeosDevicesList'{..}
+instance GoogleRequest ChromeosDevicesList where
+        type Rs ChromeosDevicesList = ChromeOSDevices
+        requestClient ChromeosDevicesList{..}
           = go _cdlCustomerId _cdlOrderBy _cdlSortOrder
               _cdlQuery
               _cdlProjection

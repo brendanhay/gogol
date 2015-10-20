@@ -31,21 +31,21 @@ module Network.Google.Resource.AndroidEnterprise.Collectionviewers.Update
       CollectionviewersUpdateResource
 
     -- * Creating a Request
-    , collectionviewersUpdate'
-    , CollectionviewersUpdate'
+    , collectionviewersUpdate
+    , CollectionviewersUpdate
 
     -- * Request Lenses
-    , cuuEnterpriseId
-    , cuuCollectionId
-    , cuuPayload
-    , cuuUserId
+    , cuEnterpriseId
+    , cuCollectionId
+    , cuPayload
+    , cuUserId
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.collectionviewers.update@ method which the
--- 'CollectionviewersUpdate'' request conforms to.
+-- 'CollectionviewersUpdate' request conforms to.
 type CollectionviewersUpdateResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -60,67 +60,66 @@ type CollectionviewersUpdateResource =
 -- collection. If the collection\'s visibility is set to viewersOnly then
 -- only such users will see the collection.
 --
--- /See:/ 'collectionviewersUpdate'' smart constructor.
-data CollectionviewersUpdate' = CollectionviewersUpdate'
-    { _cuuEnterpriseId :: !Text
-    , _cuuCollectionId :: !Text
-    , _cuuPayload      :: !User
-    , _cuuUserId       :: !Text
+-- /See:/ 'collectionviewersUpdate' smart constructor.
+data CollectionviewersUpdate = CollectionviewersUpdate
+    { _cuEnterpriseId :: !Text
+    , _cuCollectionId :: !Text
+    , _cuPayload      :: !User
+    , _cuUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CollectionviewersUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CollectionviewersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cuuEnterpriseId'
+-- * 'cuEnterpriseId'
 --
--- * 'cuuCollectionId'
+-- * 'cuCollectionId'
 --
--- * 'cuuPayload'
+-- * 'cuPayload'
 --
--- * 'cuuUserId'
-collectionviewersUpdate'
-    :: Text -- ^ 'cuuEnterpriseId'
-    -> Text -- ^ 'cuuCollectionId'
-    -> User -- ^ 'cuuPayload'
-    -> Text -- ^ 'cuuUserId'
-    -> CollectionviewersUpdate'
-collectionviewersUpdate' pCuuEnterpriseId_ pCuuCollectionId_ pCuuPayload_ pCuuUserId_ =
-    CollectionviewersUpdate'
-    { _cuuEnterpriseId = pCuuEnterpriseId_
-    , _cuuCollectionId = pCuuCollectionId_
-    , _cuuPayload = pCuuPayload_
-    , _cuuUserId = pCuuUserId_
+-- * 'cuUserId'
+collectionviewersUpdate
+    :: Text -- ^ 'cuEnterpriseId'
+    -> Text -- ^ 'cuCollectionId'
+    -> User -- ^ 'cuPayload'
+    -> Text -- ^ 'cuUserId'
+    -> CollectionviewersUpdate
+collectionviewersUpdate pCuEnterpriseId_ pCuCollectionId_ pCuPayload_ pCuUserId_ =
+    CollectionviewersUpdate
+    { _cuEnterpriseId = pCuEnterpriseId_
+    , _cuCollectionId = pCuCollectionId_
+    , _cuPayload = pCuPayload_
+    , _cuUserId = pCuUserId_
     }
 
 -- | The ID of the enterprise.
-cuuEnterpriseId :: Lens' CollectionviewersUpdate' Text
-cuuEnterpriseId
-  = lens _cuuEnterpriseId
-      (\ s a -> s{_cuuEnterpriseId = a})
+cuEnterpriseId :: Lens' CollectionviewersUpdate Text
+cuEnterpriseId
+  = lens _cuEnterpriseId
+      (\ s a -> s{_cuEnterpriseId = a})
 
 -- | The ID of the collection.
-cuuCollectionId :: Lens' CollectionviewersUpdate' Text
-cuuCollectionId
-  = lens _cuuCollectionId
-      (\ s a -> s{_cuuCollectionId = a})
+cuCollectionId :: Lens' CollectionviewersUpdate Text
+cuCollectionId
+  = lens _cuCollectionId
+      (\ s a -> s{_cuCollectionId = a})
 
 -- | Multipart request metadata.
-cuuPayload :: Lens' CollectionviewersUpdate' User
-cuuPayload
-  = lens _cuuPayload (\ s a -> s{_cuuPayload = a})
+cuPayload :: Lens' CollectionviewersUpdate User
+cuPayload
+  = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
 -- | The ID of the user.
-cuuUserId :: Lens' CollectionviewersUpdate' Text
-cuuUserId
-  = lens _cuuUserId (\ s a -> s{_cuuUserId = a})
+cuUserId :: Lens' CollectionviewersUpdate Text
+cuUserId = lens _cuUserId (\ s a -> s{_cuUserId = a})
 
-instance GoogleRequest CollectionviewersUpdate' where
-        type Rs CollectionviewersUpdate' = User
-        requestClient CollectionviewersUpdate'{..}
-          = go _cuuEnterpriseId _cuuCollectionId _cuuUserId
+instance GoogleRequest CollectionviewersUpdate where
+        type Rs CollectionviewersUpdate = User
+        requestClient CollectionviewersUpdate{..}
+          = go _cuEnterpriseId _cuCollectionId _cuUserId
               (Just AltJSON)
-              _cuuPayload
+              _cuPayload
               androidEnterpriseService
           where go
                   = buildClient

@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.SSLCertificates.Get
       SSLCertificatesGetResource
 
     -- * Creating a Request
-    , sslCertificatesGet'
-    , SSLCertificatesGet'
+    , sslCertificatesGet
+    , SSLCertificatesGet
 
     -- * Request Lenses
     , scgProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.sslCertificates.get@ method which the
--- 'SSLCertificatesGet'' request conforms to.
+-- 'SSLCertificatesGet' request conforms to.
 type SSLCertificatesGetResource =
      Capture "project" Text :>
        "global" :>
@@ -52,43 +52,43 @@ type SSLCertificatesGetResource =
 
 -- | Returns the specified SslCertificate resource.
 --
--- /See:/ 'sslCertificatesGet'' smart constructor.
-data SSLCertificatesGet' = SSLCertificatesGet'
+-- /See:/ 'sslCertificatesGet' smart constructor.
+data SSLCertificatesGet = SSLCertificatesGet
     { _scgProject        :: !Text
     , _scgSSLCertificate :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SSLCertificatesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'SSLCertificatesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'scgProject'
 --
 -- * 'scgSSLCertificate'
-sslCertificatesGet'
+sslCertificatesGet
     :: Text -- ^ 'scgProject'
     -> Text -- ^ 'scgSSLCertificate'
-    -> SSLCertificatesGet'
-sslCertificatesGet' pScgProject_ pScgSSLCertificate_ =
-    SSLCertificatesGet'
+    -> SSLCertificatesGet
+sslCertificatesGet pScgProject_ pScgSSLCertificate_ =
+    SSLCertificatesGet
     { _scgProject = pScgProject_
     , _scgSSLCertificate = pScgSSLCertificate_
     }
 
 -- | Name of the project scoping this request.
-scgProject :: Lens' SSLCertificatesGet' Text
+scgProject :: Lens' SSLCertificatesGet Text
 scgProject
   = lens _scgProject (\ s a -> s{_scgProject = a})
 
 -- | Name of the SslCertificate resource to return.
-scgSSLCertificate :: Lens' SSLCertificatesGet' Text
+scgSSLCertificate :: Lens' SSLCertificatesGet Text
 scgSSLCertificate
   = lens _scgSSLCertificate
       (\ s a -> s{_scgSSLCertificate = a})
 
-instance GoogleRequest SSLCertificatesGet' where
-        type Rs SSLCertificatesGet' = SSLCertificate
-        requestClient SSLCertificatesGet'{..}
+instance GoogleRequest SSLCertificatesGet where
+        type Rs SSLCertificatesGet = SSLCertificate
+        requestClient SSLCertificatesGet{..}
           = go _scgProject _scgSSLCertificate (Just AltJSON)
               computeService
           where go

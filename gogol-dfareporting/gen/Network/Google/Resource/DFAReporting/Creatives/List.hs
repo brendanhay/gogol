@@ -29,34 +29,34 @@ module Network.Google.Resource.DFAReporting.Creatives.List
       CreativesListResource
 
     -- * Creating a Request
-    , creativesList'
-    , CreativesList'
+    , creativesList
+    , CreativesList
 
     -- * Request Lenses
-    , clRenderingIds
-    , clAdvertiserId
-    , clSearchString
-    , clSizeIds
-    , clCompanionCreativeIds
-    , clCampaignId
-    , clTypes
-    , clIds
-    , clProFileId
-    , clSortOrder
-    , clActive
-    , clCreativeFieldIds
-    , clPageToken
-    , clSortField
-    , clStudioCreativeId
-    , clArchived
-    , clMaxResults
+    , cRenderingIds
+    , cAdvertiserId
+    , cSearchString
+    , cSizeIds
+    , cCompanionCreativeIds
+    , cCampaignId
+    , cTypes
+    , cIds
+    , cProFileId
+    , cSortOrder
+    , cActive
+    , cCreativeFieldIds
+    , cPageToken
+    , cSortField
+    , cStudioCreativeId
+    , cArchived
+    , cMaxResults
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creatives.list@ method which the
--- 'CreativesList'' request conforms to.
+-- 'CreativesList' request conforms to.
 type CreativesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -83,101 +83,101 @@ type CreativesListResource =
 
 -- | Retrieves a list of creatives, possibly filtered.
 --
--- /See:/ 'creativesList'' smart constructor.
-data CreativesList' = CreativesList'
-    { _clRenderingIds         :: !(Maybe [Int64])
-    , _clAdvertiserId         :: !(Maybe Int64)
-    , _clSearchString         :: !(Maybe Text)
-    , _clSizeIds              :: !(Maybe [Int64])
-    , _clCompanionCreativeIds :: !(Maybe [Int64])
-    , _clCampaignId           :: !(Maybe Int64)
-    , _clTypes                :: !(Maybe [CreativesListTypes])
-    , _clIds                  :: !(Maybe [Int64])
-    , _clProFileId            :: !Int64
-    , _clSortOrder            :: !(Maybe CreativesListSortOrder)
-    , _clActive               :: !(Maybe Bool)
-    , _clCreativeFieldIds     :: !(Maybe [Int64])
-    , _clPageToken            :: !(Maybe Text)
-    , _clSortField            :: !(Maybe CreativesListSortField)
-    , _clStudioCreativeId     :: !(Maybe Int64)
-    , _clArchived             :: !(Maybe Bool)
-    , _clMaxResults           :: !(Maybe Int32)
+-- /See:/ 'creativesList' smart constructor.
+data CreativesList = CreativesList
+    { _cRenderingIds         :: !(Maybe [Int64])
+    , _cAdvertiserId         :: !(Maybe Int64)
+    , _cSearchString         :: !(Maybe Text)
+    , _cSizeIds              :: !(Maybe [Int64])
+    , _cCompanionCreativeIds :: !(Maybe [Int64])
+    , _cCampaignId           :: !(Maybe Int64)
+    , _cTypes                :: !(Maybe [CreativesListTypes])
+    , _cIds                  :: !(Maybe [Int64])
+    , _cProFileId            :: !Int64
+    , _cSortOrder            :: !(Maybe CreativesListSortOrder)
+    , _cActive               :: !(Maybe Bool)
+    , _cCreativeFieldIds     :: !(Maybe [Int64])
+    , _cPageToken            :: !(Maybe Text)
+    , _cSortField            :: !(Maybe CreativesListSortField)
+    , _cStudioCreativeId     :: !(Maybe Int64)
+    , _cArchived             :: !(Maybe Bool)
+    , _cMaxResults           :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CreativesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'clRenderingIds'
+-- * 'cRenderingIds'
 --
--- * 'clAdvertiserId'
+-- * 'cAdvertiserId'
 --
--- * 'clSearchString'
+-- * 'cSearchString'
 --
--- * 'clSizeIds'
+-- * 'cSizeIds'
 --
--- * 'clCompanionCreativeIds'
+-- * 'cCompanionCreativeIds'
 --
--- * 'clCampaignId'
+-- * 'cCampaignId'
 --
--- * 'clTypes'
+-- * 'cTypes'
 --
--- * 'clIds'
+-- * 'cIds'
 --
--- * 'clProFileId'
+-- * 'cProFileId'
 --
--- * 'clSortOrder'
+-- * 'cSortOrder'
 --
--- * 'clActive'
+-- * 'cActive'
 --
--- * 'clCreativeFieldIds'
+-- * 'cCreativeFieldIds'
 --
--- * 'clPageToken'
+-- * 'cPageToken'
 --
--- * 'clSortField'
+-- * 'cSortField'
 --
--- * 'clStudioCreativeId'
+-- * 'cStudioCreativeId'
 --
--- * 'clArchived'
+-- * 'cArchived'
 --
--- * 'clMaxResults'
-creativesList'
-    :: Int64 -- ^ 'clProFileId'
-    -> CreativesList'
-creativesList' pClProFileId_ =
-    CreativesList'
-    { _clRenderingIds = Nothing
-    , _clAdvertiserId = Nothing
-    , _clSearchString = Nothing
-    , _clSizeIds = Nothing
-    , _clCompanionCreativeIds = Nothing
-    , _clCampaignId = Nothing
-    , _clTypes = Nothing
-    , _clIds = Nothing
-    , _clProFileId = pClProFileId_
-    , _clSortOrder = Nothing
-    , _clActive = Nothing
-    , _clCreativeFieldIds = Nothing
-    , _clPageToken = Nothing
-    , _clSortField = Nothing
-    , _clStudioCreativeId = Nothing
-    , _clArchived = Nothing
-    , _clMaxResults = Nothing
+-- * 'cMaxResults'
+creativesList
+    :: Int64 -- ^ 'cProFileId'
+    -> CreativesList
+creativesList pCProFileId_ =
+    CreativesList
+    { _cRenderingIds = Nothing
+    , _cAdvertiserId = Nothing
+    , _cSearchString = Nothing
+    , _cSizeIds = Nothing
+    , _cCompanionCreativeIds = Nothing
+    , _cCampaignId = Nothing
+    , _cTypes = Nothing
+    , _cIds = Nothing
+    , _cProFileId = pCProFileId_
+    , _cSortOrder = Nothing
+    , _cActive = Nothing
+    , _cCreativeFieldIds = Nothing
+    , _cPageToken = Nothing
+    , _cSortField = Nothing
+    , _cStudioCreativeId = Nothing
+    , _cArchived = Nothing
+    , _cMaxResults = Nothing
     }
 
 -- | Select only creatives with these rendering IDs.
-clRenderingIds :: Lens' CreativesList' [Int64]
-clRenderingIds
-  = lens _clRenderingIds
-      (\ s a -> s{_clRenderingIds = a})
+cRenderingIds :: Lens' CreativesList [Int64]
+cRenderingIds
+  = lens _cRenderingIds
+      (\ s a -> s{_cRenderingIds = a})
       . _Default
       . _Coerce
 
 -- | Select only creatives with this advertiser ID.
-clAdvertiserId :: Lens' CreativesList' (Maybe Int64)
-clAdvertiserId
-  = lens _clAdvertiserId
-      (\ s a -> s{_clAdvertiserId = a})
+cAdvertiserId :: Lens' CreativesList (Maybe Int64)
+cAdvertiserId
+  = lens _cAdvertiserId
+      (\ s a -> s{_cAdvertiserId = a})
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"creative*2015\" will return objects with names like
@@ -186,112 +186,112 @@ clAdvertiserId
 -- and the end of the search string. For example, a search string of
 -- \"creative\" will match objects with name \"my creative\", \"creative
 -- 2015\", or simply \"creative\".
-clSearchString :: Lens' CreativesList' (Maybe Text)
-clSearchString
-  = lens _clSearchString
-      (\ s a -> s{_clSearchString = a})
+cSearchString :: Lens' CreativesList (Maybe Text)
+cSearchString
+  = lens _cSearchString
+      (\ s a -> s{_cSearchString = a})
 
 -- | Select only creatives with these size IDs.
-clSizeIds :: Lens' CreativesList' [Int64]
-clSizeIds
-  = lens _clSizeIds (\ s a -> s{_clSizeIds = a}) .
+cSizeIds :: Lens' CreativesList [Int64]
+cSizeIds
+  = lens _cSizeIds (\ s a -> s{_cSizeIds = a}) .
       _Default
       . _Coerce
 
 -- | Select only in-stream video creatives with these companion IDs.
-clCompanionCreativeIds :: Lens' CreativesList' [Int64]
-clCompanionCreativeIds
-  = lens _clCompanionCreativeIds
-      (\ s a -> s{_clCompanionCreativeIds = a})
+cCompanionCreativeIds :: Lens' CreativesList [Int64]
+cCompanionCreativeIds
+  = lens _cCompanionCreativeIds
+      (\ s a -> s{_cCompanionCreativeIds = a})
       . _Default
       . _Coerce
 
 -- | Select only creatives with this campaign ID.
-clCampaignId :: Lens' CreativesList' (Maybe Int64)
-clCampaignId
-  = lens _clCampaignId (\ s a -> s{_clCampaignId = a})
+cCampaignId :: Lens' CreativesList (Maybe Int64)
+cCampaignId
+  = lens _cCampaignId (\ s a -> s{_cCampaignId = a})
 
 -- | Select only creatives with these creative types.
-clTypes :: Lens' CreativesList' [CreativesListTypes]
-clTypes
-  = lens _clTypes (\ s a -> s{_clTypes = a}) . _Default
-      . _Coerce
+cTypes :: Lens' CreativesList [CreativesListTypes]
+cTypes
+  = lens _cTypes (\ s a -> s{_cTypes = a}) . _Default .
+      _Coerce
 
 -- | Select only creatives with these IDs.
-clIds :: Lens' CreativesList' [Int64]
-clIds
-  = lens _clIds (\ s a -> s{_clIds = a}) . _Default .
+cIds :: Lens' CreativesList [Int64]
+cIds
+  = lens _cIds (\ s a -> s{_cIds = a}) . _Default .
       _Coerce
 
 -- | User profile ID associated with this request.
-clProFileId :: Lens' CreativesList' Int64
-clProFileId
-  = lens _clProFileId (\ s a -> s{_clProFileId = a})
+cProFileId :: Lens' CreativesList Int64
+cProFileId
+  = lens _cProFileId (\ s a -> s{_cProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-clSortOrder :: Lens' CreativesList' (Maybe CreativesListSortOrder)
-clSortOrder
-  = lens _clSortOrder (\ s a -> s{_clSortOrder = a})
+cSortOrder :: Lens' CreativesList (Maybe CreativesListSortOrder)
+cSortOrder
+  = lens _cSortOrder (\ s a -> s{_cSortOrder = a})
 
 -- | Select only active creatives. Leave blank to select active and inactive
 -- creatives.
-clActive :: Lens' CreativesList' (Maybe Bool)
-clActive = lens _clActive (\ s a -> s{_clActive = a})
+cActive :: Lens' CreativesList (Maybe Bool)
+cActive = lens _cActive (\ s a -> s{_cActive = a})
 
 -- | Select only creatives with these creative field IDs.
-clCreativeFieldIds :: Lens' CreativesList' [Int64]
-clCreativeFieldIds
-  = lens _clCreativeFieldIds
-      (\ s a -> s{_clCreativeFieldIds = a})
+cCreativeFieldIds :: Lens' CreativesList [Int64]
+cCreativeFieldIds
+  = lens _cCreativeFieldIds
+      (\ s a -> s{_cCreativeFieldIds = a})
       . _Default
       . _Coerce
 
 -- | Value of the nextPageToken from the previous result page.
-clPageToken :: Lens' CreativesList' (Maybe Text)
-clPageToken
-  = lens _clPageToken (\ s a -> s{_clPageToken = a})
+cPageToken :: Lens' CreativesList (Maybe Text)
+cPageToken
+  = lens _cPageToken (\ s a -> s{_cPageToken = a})
 
 -- | Field by which to sort the list.
-clSortField :: Lens' CreativesList' (Maybe CreativesListSortField)
-clSortField
-  = lens _clSortField (\ s a -> s{_clSortField = a})
+cSortField :: Lens' CreativesList (Maybe CreativesListSortField)
+cSortField
+  = lens _cSortField (\ s a -> s{_cSortField = a})
 
 -- | Select only creatives corresponding to this Studio creative ID.
-clStudioCreativeId :: Lens' CreativesList' (Maybe Int64)
-clStudioCreativeId
-  = lens _clStudioCreativeId
-      (\ s a -> s{_clStudioCreativeId = a})
+cStudioCreativeId :: Lens' CreativesList (Maybe Int64)
+cStudioCreativeId
+  = lens _cStudioCreativeId
+      (\ s a -> s{_cStudioCreativeId = a})
 
 -- | Select only archived creatives. Leave blank to select archived and
 -- unarchived creatives.
-clArchived :: Lens' CreativesList' (Maybe Bool)
-clArchived
-  = lens _clArchived (\ s a -> s{_clArchived = a})
+cArchived :: Lens' CreativesList (Maybe Bool)
+cArchived
+  = lens _cArchived (\ s a -> s{_cArchived = a})
 
 -- | Maximum number of results to return.
-clMaxResults :: Lens' CreativesList' (Maybe Int32)
-clMaxResults
-  = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
+cMaxResults :: Lens' CreativesList (Maybe Int32)
+cMaxResults
+  = lens _cMaxResults (\ s a -> s{_cMaxResults = a})
 
-instance GoogleRequest CreativesList' where
-        type Rs CreativesList' = CreativesListResponse
-        requestClient CreativesList'{..}
-          = go _clProFileId (_clRenderingIds ^. _Default)
-              _clAdvertiserId
-              _clSearchString
-              (_clSizeIds ^. _Default)
-              (_clCompanionCreativeIds ^. _Default)
-              _clCampaignId
-              (_clTypes ^. _Default)
-              (_clIds ^. _Default)
-              _clSortOrder
-              _clActive
-              (_clCreativeFieldIds ^. _Default)
-              _clPageToken
-              _clSortField
-              _clStudioCreativeId
-              _clArchived
-              _clMaxResults
+instance GoogleRequest CreativesList where
+        type Rs CreativesList = CreativesListResponse
+        requestClient CreativesList{..}
+          = go _cProFileId (_cRenderingIds ^. _Default)
+              _cAdvertiserId
+              _cSearchString
+              (_cSizeIds ^. _Default)
+              (_cCompanionCreativeIds ^. _Default)
+              _cCampaignId
+              (_cTypes ^. _Default)
+              (_cIds ^. _Default)
+              _cSortOrder
+              _cActive
+              (_cCreativeFieldIds ^. _Default)
+              _cPageToken
+              _cSortField
+              _cStudioCreativeId
+              _cArchived
+              _cMaxResults
               (Just AltJSON)
               dFAReportingService
           where go

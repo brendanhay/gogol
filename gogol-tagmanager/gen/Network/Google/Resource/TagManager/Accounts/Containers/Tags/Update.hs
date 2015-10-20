@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Update
       AccountsContainersTagsUpdateResource
 
     -- * Creating a Request
-    , accountsContainersTagsUpdate'
-    , AccountsContainersTagsUpdate'
+    , accountsContainersTagsUpdate
+    , AccountsContainersTagsUpdate
 
     -- * Request Lenses
     , actucContainerId
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.tags.update@ method which the
--- 'AccountsContainersTagsUpdate'' request conforms to.
+-- 'AccountsContainersTagsUpdate' request conforms to.
 type AccountsContainersTagsUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -58,8 +58,8 @@ type AccountsContainersTagsUpdateResource =
 
 -- | Updates a GTM Tag.
 --
--- /See:/ 'accountsContainersTagsUpdate'' smart constructor.
-data AccountsContainersTagsUpdate' = AccountsContainersTagsUpdate'
+-- /See:/ 'accountsContainersTagsUpdate' smart constructor.
+data AccountsContainersTagsUpdate = AccountsContainersTagsUpdate
     { _actucContainerId :: !Text
     , _actucFingerprint :: !(Maybe Text)
     , _actucPayload     :: !Tag
@@ -67,7 +67,7 @@ data AccountsContainersTagsUpdate' = AccountsContainersTagsUpdate'
     , _actucTagId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersTagsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersTagsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,14 +80,14 @@ data AccountsContainersTagsUpdate' = AccountsContainersTagsUpdate'
 -- * 'actucAccountId'
 --
 -- * 'actucTagId'
-accountsContainersTagsUpdate'
+accountsContainersTagsUpdate
     :: Text -- ^ 'actucContainerId'
     -> Tag -- ^ 'actucPayload'
     -> Text -- ^ 'actucAccountId'
     -> Text -- ^ 'actucTagId'
-    -> AccountsContainersTagsUpdate'
-accountsContainersTagsUpdate' pActucContainerId_ pActucPayload_ pActucAccountId_ pActucTagId_ =
-    AccountsContainersTagsUpdate'
+    -> AccountsContainersTagsUpdate
+accountsContainersTagsUpdate pActucContainerId_ pActucPayload_ pActucAccountId_ pActucTagId_ =
+    AccountsContainersTagsUpdate
     { _actucContainerId = pActucContainerId_
     , _actucFingerprint = Nothing
     , _actucPayload = pActucPayload_
@@ -96,38 +96,38 @@ accountsContainersTagsUpdate' pActucContainerId_ pActucPayload_ pActucAccountId_
     }
 
 -- | The GTM Container ID.
-actucContainerId :: Lens' AccountsContainersTagsUpdate' Text
+actucContainerId :: Lens' AccountsContainersTagsUpdate Text
 actucContainerId
   = lens _actucContainerId
       (\ s a -> s{_actucContainerId = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the tag in
 -- storage.
-actucFingerprint :: Lens' AccountsContainersTagsUpdate' (Maybe Text)
+actucFingerprint :: Lens' AccountsContainersTagsUpdate (Maybe Text)
 actucFingerprint
   = lens _actucFingerprint
       (\ s a -> s{_actucFingerprint = a})
 
 -- | Multipart request metadata.
-actucPayload :: Lens' AccountsContainersTagsUpdate' Tag
+actucPayload :: Lens' AccountsContainersTagsUpdate Tag
 actucPayload
   = lens _actucPayload (\ s a -> s{_actucPayload = a})
 
 -- | The GTM Account ID.
-actucAccountId :: Lens' AccountsContainersTagsUpdate' Text
+actucAccountId :: Lens' AccountsContainersTagsUpdate Text
 actucAccountId
   = lens _actucAccountId
       (\ s a -> s{_actucAccountId = a})
 
 -- | The GTM Tag ID.
-actucTagId :: Lens' AccountsContainersTagsUpdate' Text
+actucTagId :: Lens' AccountsContainersTagsUpdate Text
 actucTagId
   = lens _actucTagId (\ s a -> s{_actucTagId = a})
 
-instance GoogleRequest AccountsContainersTagsUpdate'
+instance GoogleRequest AccountsContainersTagsUpdate
          where
-        type Rs AccountsContainersTagsUpdate' = Tag
-        requestClient AccountsContainersTagsUpdate'{..}
+        type Rs AccountsContainersTagsUpdate = Tag
+        requestClient AccountsContainersTagsUpdate{..}
           = go _actucAccountId _actucContainerId _actucTagId
               _actucFingerprint
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.CalendarList.Get
       CalendarListGetResource
 
     -- * Creating a Request
-    , calendarListGet'
-    , CalendarListGet'
+    , calendarListGet
+    , CalendarListGet
 
     -- * Request Lenses
     , clgCalendarId
@@ -40,7 +40,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendarList.get@ method which the
--- 'CalendarListGet'' request conforms to.
+-- 'CalendarListGet' request conforms to.
 type CalendarListGetResource =
      "users" :>
        "me" :>
@@ -51,35 +51,35 @@ type CalendarListGetResource =
 
 -- | Returns an entry on the user\'s calendar list.
 --
--- /See:/ 'calendarListGet'' smart constructor.
-newtype CalendarListGet' = CalendarListGet'
+-- /See:/ 'calendarListGet' smart constructor.
+newtype CalendarListGet = CalendarListGet
     { _clgCalendarId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CalendarListGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CalendarListGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'clgCalendarId'
-calendarListGet'
+calendarListGet
     :: Text -- ^ 'clgCalendarId'
-    -> CalendarListGet'
-calendarListGet' pClgCalendarId_ =
-    CalendarListGet'
+    -> CalendarListGet
+calendarListGet pClgCalendarId_ =
+    CalendarListGet
     { _clgCalendarId = pClgCalendarId_
     }
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-clgCalendarId :: Lens' CalendarListGet' Text
+clgCalendarId :: Lens' CalendarListGet Text
 clgCalendarId
   = lens _clgCalendarId
       (\ s a -> s{_clgCalendarId = a})
 
-instance GoogleRequest CalendarListGet' where
-        type Rs CalendarListGet' = CalendarListEntry
-        requestClient CalendarListGet'{..}
+instance GoogleRequest CalendarListGet where
+        type Rs CalendarListGet = CalendarListEntry
+        requestClient CalendarListGet{..}
           = go _clgCalendarId (Just AltJSON)
               appsCalendarService
           where go

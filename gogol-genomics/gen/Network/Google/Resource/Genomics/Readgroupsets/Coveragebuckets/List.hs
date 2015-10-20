@@ -36,8 +36,8 @@ module Network.Google.Resource.Genomics.Readgroupsets.Coveragebuckets.List
       ReadgroupsetsCoveragebucketsListResource
 
     -- * Creating a Request
-    , readgroupsetsCoveragebucketsList'
-    , ReadgroupsetsCoveragebucketsList'
+    , readgroupsetsCoveragebucketsList
+    , ReadgroupsetsCoveragebucketsList
 
     -- * Request Lenses
     , rclXgafv
@@ -60,7 +60,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.readgroupsets.coveragebuckets.list@ method which the
--- 'ReadgroupsetsCoveragebucketsList'' request conforms to.
+-- 'ReadgroupsetsCoveragebucketsList' request conforms to.
 type ReadgroupsetsCoveragebucketsListResource =
      "v1" :>
        "readgroupsets" :>
@@ -91,8 +91,8 @@ type ReadgroupsetsCoveragebucketsListResource =
 -- levels\'. The caller must have READ permissions for the target read
 -- group set.
 --
--- /See:/ 'readgroupsetsCoveragebucketsList'' smart constructor.
-data ReadgroupsetsCoveragebucketsList' = ReadgroupsetsCoveragebucketsList'
+-- /See:/ 'readgroupsetsCoveragebucketsList' smart constructor.
+data ReadgroupsetsCoveragebucketsList = ReadgroupsetsCoveragebucketsList
     { _rclXgafv             :: !(Maybe Text)
     , _rclReadGroupSetId    :: !Text
     , _rclUploadProtocol    :: !(Maybe Text)
@@ -109,7 +109,7 @@ data ReadgroupsetsCoveragebucketsList' = ReadgroupsetsCoveragebucketsList'
     , _rclCallback          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReadgroupsetsCoveragebucketsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReadgroupsetsCoveragebucketsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -140,11 +140,11 @@ data ReadgroupsetsCoveragebucketsList' = ReadgroupsetsCoveragebucketsList'
 -- * 'rclPageSize'
 --
 -- * 'rclCallback'
-readgroupsetsCoveragebucketsList'
+readgroupsetsCoveragebucketsList
     :: Text -- ^ 'rclReadGroupSetId'
-    -> ReadgroupsetsCoveragebucketsList'
-readgroupsetsCoveragebucketsList' pRclReadGroupSetId_ =
-    ReadgroupsetsCoveragebucketsList'
+    -> ReadgroupsetsCoveragebucketsList
+readgroupsetsCoveragebucketsList pRclReadGroupSetId_ =
+    ReadgroupsetsCoveragebucketsList
     { _rclXgafv = Nothing
     , _rclReadGroupSetId = pRclReadGroupSetId_
     , _rclUploadProtocol = Nothing
@@ -162,38 +162,38 @@ readgroupsetsCoveragebucketsList' pRclReadGroupSetId_ =
     }
 
 -- | V1 error format.
-rclXgafv :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
+rclXgafv :: Lens' ReadgroupsetsCoveragebucketsList (Maybe Text)
 rclXgafv = lens _rclXgafv (\ s a -> s{_rclXgafv = a})
 
 -- | Required. The ID of the read group set over which coverage is requested.
-rclReadGroupSetId :: Lens' ReadgroupsetsCoveragebucketsList' Text
+rclReadGroupSetId :: Lens' ReadgroupsetsCoveragebucketsList Text
 rclReadGroupSetId
   = lens _rclReadGroupSetId
       (\ s a -> s{_rclReadGroupSetId = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-rclUploadProtocol :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
+rclUploadProtocol :: Lens' ReadgroupsetsCoveragebucketsList (Maybe Text)
 rclUploadProtocol
   = lens _rclUploadProtocol
       (\ s a -> s{_rclUploadProtocol = a})
 
 -- | Pretty-print response.
-rclPp :: Lens' ReadgroupsetsCoveragebucketsList' Bool
+rclPp :: Lens' ReadgroupsetsCoveragebucketsList Bool
 rclPp = lens _rclPp (\ s a -> s{_rclPp = a})
 
 -- | OAuth access token.
-rclAccessToken :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
+rclAccessToken :: Lens' ReadgroupsetsCoveragebucketsList (Maybe Text)
 rclAccessToken
   = lens _rclAccessToken
       (\ s a -> s{_rclAccessToken = a})
 
 -- | The start position of the range on the reference, 0-based inclusive. If
 -- specified, \`referenceName\` must also be specified. Defaults to 0.
-rclStart :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Int64)
+rclStart :: Lens' ReadgroupsetsCoveragebucketsList (Maybe Int64)
 rclStart = lens _rclStart (\ s a -> s{_rclStart = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-rclUploadType :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
+rclUploadType :: Lens' ReadgroupsetsCoveragebucketsList (Maybe Text)
 rclUploadType
   = lens _rclUploadType
       (\ s a -> s{_rclUploadType = a})
@@ -204,20 +204,20 @@ rclUploadType
 -- infinity (each bucket spans an entire reference sequence) or the length
 -- of the target range, if specified. The smallest precomputed
 -- \`bucketWidth\` is currently 2048 base pairs; this is subject to change.
-rclTargetBucketWidth :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Int64)
+rclTargetBucketWidth :: Lens' ReadgroupsetsCoveragebucketsList (Maybe Int64)
 rclTargetBucketWidth
   = lens _rclTargetBucketWidth
       (\ s a -> s{_rclTargetBucketWidth = a})
 
 -- | The name of the reference to query, within the reference set associated
 -- with this query. Optional.
-rclReferenceName :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
+rclReferenceName :: Lens' ReadgroupsetsCoveragebucketsList (Maybe Text)
 rclReferenceName
   = lens _rclReferenceName
       (\ s a -> s{_rclReferenceName = a})
 
 -- | OAuth bearer token.
-rclBearerToken :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
+rclBearerToken :: Lens' ReadgroupsetsCoveragebucketsList (Maybe Text)
 rclBearerToken
   = lens _rclBearerToken
       (\ s a -> s{_rclBearerToken = a})
@@ -225,32 +225,32 @@ rclBearerToken
 -- | The end position of the range on the reference, 0-based exclusive. If
 -- specified, \`referenceName\` must also be specified. If unset or 0,
 -- defaults to the length of the reference.
-rclEnd :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Int64)
+rclEnd :: Lens' ReadgroupsetsCoveragebucketsList (Maybe Int64)
 rclEnd = lens _rclEnd (\ s a -> s{_rclEnd = a})
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
 -- \`nextPageToken\` from the previous response.
-rclPageToken :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
+rclPageToken :: Lens' ReadgroupsetsCoveragebucketsList (Maybe Text)
 rclPageToken
   = lens _rclPageToken (\ s a -> s{_rclPageToken = a})
 
 -- | The maximum number of results to return in a single page. If
 -- unspecified, defaults to 1024. The maximum value is 2048.
-rclPageSize :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Int32)
+rclPageSize :: Lens' ReadgroupsetsCoveragebucketsList (Maybe Int32)
 rclPageSize
   = lens _rclPageSize (\ s a -> s{_rclPageSize = a})
 
 -- | JSONP
-rclCallback :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
+rclCallback :: Lens' ReadgroupsetsCoveragebucketsList (Maybe Text)
 rclCallback
   = lens _rclCallback (\ s a -> s{_rclCallback = a})
 
 instance GoogleRequest
-         ReadgroupsetsCoveragebucketsList' where
-        type Rs ReadgroupsetsCoveragebucketsList' =
+         ReadgroupsetsCoveragebucketsList where
+        type Rs ReadgroupsetsCoveragebucketsList =
              ListCoverageBucketsResponse
-        requestClient ReadgroupsetsCoveragebucketsList'{..}
+        requestClient ReadgroupsetsCoveragebucketsList{..}
           = go _rclReadGroupSetId _rclXgafv _rclUploadProtocol
               (Just _rclPp)
               _rclAccessToken

@@ -29,23 +29,23 @@ module Network.Google.Resource.Blogger.Posts.Get
       PostsGetResource
 
     -- * Creating a Request
-    , postsGet'
-    , PostsGet'
+    , postsGet
+    , PostsGet
 
     -- * Request Lenses
-    , pgFetchBody
-    , pgFetchImages
-    , pgBlogId
-    , pgMaxComments
-    , pgView
-    , pgPostId
+    , pggFetchBody
+    , pggFetchImages
+    , pggBlogId
+    , pggMaxComments
+    , pggView
+    , pggPostId
     ) where
 
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.posts.get@ method which the
--- 'PostsGet'' request conforms to.
+-- 'PostsGet' request conforms to.
 type PostsGetResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -59,84 +59,86 @@ type PostsGetResource =
 
 -- | Get a post by ID.
 --
--- /See:/ 'postsGet'' smart constructor.
-data PostsGet' = PostsGet'
-    { _pgFetchBody   :: !Bool
-    , _pgFetchImages :: !(Maybe Bool)
-    , _pgBlogId      :: !Text
-    , _pgMaxComments :: !(Maybe Word32)
-    , _pgView        :: !(Maybe PostsGetView)
-    , _pgPostId      :: !Text
+-- /See:/ 'postsGet' smart constructor.
+data PostsGet = PostsGet
+    { _pggFetchBody   :: !Bool
+    , _pggFetchImages :: !(Maybe Bool)
+    , _pggBlogId      :: !Text
+    , _pggMaxComments :: !(Maybe Word32)
+    , _pggView        :: !(Maybe PostsGetView)
+    , _pggPostId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PostsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PostsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pgFetchBody'
+-- * 'pggFetchBody'
 --
--- * 'pgFetchImages'
+-- * 'pggFetchImages'
 --
--- * 'pgBlogId'
+-- * 'pggBlogId'
 --
--- * 'pgMaxComments'
+-- * 'pggMaxComments'
 --
--- * 'pgView'
+-- * 'pggView'
 --
--- * 'pgPostId'
-postsGet'
-    :: Text -- ^ 'pgBlogId'
-    -> Text -- ^ 'pgPostId'
-    -> PostsGet'
-postsGet' pPgBlogId_ pPgPostId_ =
-    PostsGet'
-    { _pgFetchBody = True
-    , _pgFetchImages = Nothing
-    , _pgBlogId = pPgBlogId_
-    , _pgMaxComments = Nothing
-    , _pgView = Nothing
-    , _pgPostId = pPgPostId_
+-- * 'pggPostId'
+postsGet
+    :: Text -- ^ 'pggBlogId'
+    -> Text -- ^ 'pggPostId'
+    -> PostsGet
+postsGet pPggBlogId_ pPggPostId_ =
+    PostsGet
+    { _pggFetchBody = True
+    , _pggFetchImages = Nothing
+    , _pggBlogId = pPggBlogId_
+    , _pggMaxComments = Nothing
+    , _pggView = Nothing
+    , _pggPostId = pPggPostId_
     }
 
 -- | Whether the body content of the post is included (default: true). This
 -- should be set to false when the post bodies are not required, to help
 -- minimize traffic.
-pgFetchBody :: Lens' PostsGet' Bool
-pgFetchBody
-  = lens _pgFetchBody (\ s a -> s{_pgFetchBody = a})
+pggFetchBody :: Lens' PostsGet Bool
+pggFetchBody
+  = lens _pggFetchBody (\ s a -> s{_pggFetchBody = a})
 
 -- | Whether image URL metadata for each post is included (default: false).
-pgFetchImages :: Lens' PostsGet' (Maybe Bool)
-pgFetchImages
-  = lens _pgFetchImages
-      (\ s a -> s{_pgFetchImages = a})
+pggFetchImages :: Lens' PostsGet (Maybe Bool)
+pggFetchImages
+  = lens _pggFetchImages
+      (\ s a -> s{_pggFetchImages = a})
 
 -- | ID of the blog to fetch the post from.
-pgBlogId :: Lens' PostsGet' Text
-pgBlogId = lens _pgBlogId (\ s a -> s{_pgBlogId = a})
+pggBlogId :: Lens' PostsGet Text
+pggBlogId
+  = lens _pggBlogId (\ s a -> s{_pggBlogId = a})
 
 -- | Maximum number of comments to pull back on a post.
-pgMaxComments :: Lens' PostsGet' (Maybe Word32)
-pgMaxComments
-  = lens _pgMaxComments
-      (\ s a -> s{_pgMaxComments = a})
+pggMaxComments :: Lens' PostsGet (Maybe Word32)
+pggMaxComments
+  = lens _pggMaxComments
+      (\ s a -> s{_pggMaxComments = a})
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
-pgView :: Lens' PostsGet' (Maybe PostsGetView)
-pgView = lens _pgView (\ s a -> s{_pgView = a})
+pggView :: Lens' PostsGet (Maybe PostsGetView)
+pggView = lens _pggView (\ s a -> s{_pggView = a})
 
 -- | The ID of the post
-pgPostId :: Lens' PostsGet' Text
-pgPostId = lens _pgPostId (\ s a -> s{_pgPostId = a})
+pggPostId :: Lens' PostsGet Text
+pggPostId
+  = lens _pggPostId (\ s a -> s{_pggPostId = a})
 
-instance GoogleRequest PostsGet' where
-        type Rs PostsGet' = Post'
-        requestClient PostsGet'{..}
-          = go _pgBlogId _pgPostId (Just _pgFetchBody)
-              _pgFetchImages
-              _pgMaxComments
-              _pgView
+instance GoogleRequest PostsGet where
+        type Rs PostsGet = Post'
+        requestClient PostsGet{..}
+          = go _pggBlogId _pggPostId (Just _pggFetchBody)
+              _pggFetchImages
+              _pggMaxComments
+              _pggView
               (Just AltJSON)
               bloggerService
           where go

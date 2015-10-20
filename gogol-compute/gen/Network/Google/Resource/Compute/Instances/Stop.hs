@@ -34,8 +34,8 @@ module Network.Google.Resource.Compute.Instances.Stop
       InstancesStopResource
 
     -- * Creating a Request
-    , instancesStop'
-    , InstancesStop'
+    , instancesStop
+    , InstancesStop
 
     -- * Request Lenses
     , isProject
@@ -47,7 +47,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.stop@ method which the
--- 'InstancesStop'' request conforms to.
+-- 'InstancesStop' request conforms to.
 type InstancesStopResource =
      Capture "project" Text :>
        "zones" :>
@@ -64,14 +64,14 @@ type InstancesStopResource =
 -- persistent disks and static IP addresses,will continue to be charged
 -- until they are deleted. For more information, see Stopping an instance.
 --
--- /See:/ 'instancesStop'' smart constructor.
-data InstancesStop' = InstancesStop'
+-- /See:/ 'instancesStop' smart constructor.
+data InstancesStop = InstancesStop
     { _isProject  :: !Text
     , _isZone     :: !Text
     , _isInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesStop'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesStop' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,35 +80,35 @@ data InstancesStop' = InstancesStop'
 -- * 'isZone'
 --
 -- * 'isInstance'
-instancesStop'
+instancesStop
     :: Text -- ^ 'isProject'
     -> Text -- ^ 'isZone'
     -> Text -- ^ 'isInstance'
-    -> InstancesStop'
-instancesStop' pIsProject_ pIsZone_ pIsInstance_ =
-    InstancesStop'
+    -> InstancesStop
+instancesStop pIsProject_ pIsZone_ pIsInstance_ =
+    InstancesStop
     { _isProject = pIsProject_
     , _isZone = pIsZone_
     , _isInstance = pIsInstance_
     }
 
 -- | Project ID for this request.
-isProject :: Lens' InstancesStop' Text
+isProject :: Lens' InstancesStop Text
 isProject
   = lens _isProject (\ s a -> s{_isProject = a})
 
 -- | The name of the zone for this request.
-isZone :: Lens' InstancesStop' Text
+isZone :: Lens' InstancesStop Text
 isZone = lens _isZone (\ s a -> s{_isZone = a})
 
 -- | Name of the instance resource to stop.
-isInstance :: Lens' InstancesStop' Text
+isInstance :: Lens' InstancesStop Text
 isInstance
   = lens _isInstance (\ s a -> s{_isInstance = a})
 
-instance GoogleRequest InstancesStop' where
-        type Rs InstancesStop' = Operation
-        requestClient InstancesStop'{..}
+instance GoogleRequest InstancesStop where
+        type Rs InstancesStop = Operation
+        requestClient InstancesStop{..}
           = go _isProject _isZone _isInstance (Just AltJSON)
               computeService
           where go

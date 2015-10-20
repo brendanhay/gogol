@@ -639,25 +639,25 @@ module Network.Google.MapsEngine
     -- ** Map
     , Map
     , map'
-    , mapaCreationTime
-    , mapaWritersCanEditPermissions
-    , mapaEtag
-    , mapaDefaultViewport
-    , mapaContents
-    , mapaPublishingStatus
-    , mapaCreatorEmail
-    , mapaLastModifiedTime
-    , mapaLastModifierEmail
-    , mapaVersions
-    , mapaName
-    , mapaBbox
-    , mapaProcessingStatus
-    , mapaId
-    , mapaProjectId
-    , mapaDraftAccessList
-    , mapaPublishedAccessList
-    , mapaDescription
-    , mapaTags
+    , mCreationTime
+    , mWritersCanEditPermissions
+    , mEtag
+    , mDefaultViewport
+    , mContents
+    , mPublishingStatus
+    , mCreatorEmail
+    , mLastModifiedTime
+    , mLastModifierEmail
+    , mVersions
+    , mName
+    , mBbox
+    , mProcessingStatus
+    , mId
+    , mProjectId
+    , mDraftAccessList
+    , mPublishedAccessList
+    , mDescription
+    , mTags
 
     -- ** MapLayerType
     , MapLayerType (..)
@@ -771,26 +771,26 @@ module Network.Google.MapsEngine
     -- ** Layer
     , Layer
     , layer
-    , layaCreationTime
-    , layaWritersCanEditPermissions
-    , layaStyle
-    , layaEtag
-    , layaDatasourceType
-    , layaPublishingStatus
-    , layaCreatorEmail
-    , layaLayerType
-    , layaLastModifiedTime
-    , layaDatasources
-    , layaLastModifierEmail
-    , layaName
-    , layaBbox
-    , layaProcessingStatus
-    , layaId
-    , layaProjectId
-    , layaDraftAccessList
-    , layaPublishedAccessList
-    , layaDescription
-    , layaTags
+    , layCreationTime
+    , layWritersCanEditPermissions
+    , layStyle
+    , layEtag
+    , layDatasourceType
+    , layPublishingStatus
+    , layCreatorEmail
+    , layLayerType
+    , layLastModifiedTime
+    , layDatasources
+    , layLastModifierEmail
+    , layName
+    , layBbox
+    , layProcessingStatus
+    , layId
+    , layProjectId
+    , layDraftAccessList
+    , layPublishedAccessList
+    , layDescription
+    , layTags
 
     -- ** PointStyle
     , PointStyle
@@ -854,24 +854,24 @@ module Network.Google.MapsEngine
     -- ** Table
     , Table
     , table
-    , ttCreationTime
-    , ttWritersCanEditPermissions
-    , ttEtag
-    , ttCreatorEmail
-    , ttLastModifiedTime
-    , ttSchema
-    , ttLastModifierEmail
-    , ttName
-    , ttBbox
-    , ttProcessingStatus
-    , ttFiles
-    , ttId
-    , ttProjectId
-    , ttDraftAccessList
-    , ttPublishedAccessList
-    , ttSourceEncoding
-    , ttDescription
-    , ttTags
+    , tabCreationTime
+    , tabWritersCanEditPermissions
+    , tabEtag
+    , tabCreatorEmail
+    , tabLastModifiedTime
+    , tabSchema
+    , tabLastModifierEmail
+    , tabName
+    , tabBbox
+    , tabProcessingStatus
+    , tabFiles
+    , tabId
+    , tabProjectId
+    , tabDraftAccessList
+    , tabPublishedAccessList
+    , tabSourceEncoding
+    , tabDescription
+    , tabTags
 
     -- ** File
     , File

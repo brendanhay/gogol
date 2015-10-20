@@ -32,8 +32,8 @@ module Network.Google.Resource.Classroom.Courses.Aliases.List
       CoursesAliasesListResource
 
     -- * Creating a Request
-    , coursesAliasesList'
-    , CoursesAliasesList'
+    , coursesAliasesList
+    , CoursesAliasesList
 
     -- * Request Lenses
     , calXgafv
@@ -52,7 +52,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.aliases.list@ method which the
--- 'CoursesAliasesList'' request conforms to.
+-- 'CoursesAliasesList' request conforms to.
 type CoursesAliasesListResource =
      "v1" :>
        "courses" :>
@@ -75,8 +75,8 @@ type CoursesAliasesListResource =
 -- not permitted to access the course or for access errors. * \`NOT_FOUND\`
 -- if the course does not exist.
 --
--- /See:/ 'coursesAliasesList'' smart constructor.
-data CoursesAliasesList' = CoursesAliasesList'
+-- /See:/ 'coursesAliasesList' smart constructor.
+data CoursesAliasesList = CoursesAliasesList
     { _calXgafv          :: !(Maybe Text)
     , _calUploadProtocol :: !(Maybe Text)
     , _calPp             :: !Bool
@@ -89,7 +89,7 @@ data CoursesAliasesList' = CoursesAliasesList'
     , _calCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CoursesAliasesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CoursesAliasesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -112,11 +112,11 @@ data CoursesAliasesList' = CoursesAliasesList'
 -- * 'calPageSize'
 --
 -- * 'calCallback'
-coursesAliasesList'
+coursesAliasesList
     :: Text -- ^ 'calCourseId'
-    -> CoursesAliasesList'
-coursesAliasesList' pCalCourseId_ =
-    CoursesAliasesList'
+    -> CoursesAliasesList
+coursesAliasesList pCalCourseId_ =
+    CoursesAliasesList
     { _calXgafv = Nothing
     , _calUploadProtocol = Nothing
     , _calPp = True
@@ -130,39 +130,39 @@ coursesAliasesList' pCalCourseId_ =
     }
 
 -- | V1 error format.
-calXgafv :: Lens' CoursesAliasesList' (Maybe Text)
+calXgafv :: Lens' CoursesAliasesList (Maybe Text)
 calXgafv = lens _calXgafv (\ s a -> s{_calXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-calUploadProtocol :: Lens' CoursesAliasesList' (Maybe Text)
+calUploadProtocol :: Lens' CoursesAliasesList (Maybe Text)
 calUploadProtocol
   = lens _calUploadProtocol
       (\ s a -> s{_calUploadProtocol = a})
 
 -- | Pretty-print response.
-calPp :: Lens' CoursesAliasesList' Bool
+calPp :: Lens' CoursesAliasesList Bool
 calPp = lens _calPp (\ s a -> s{_calPp = a})
 
 -- | The identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
-calCourseId :: Lens' CoursesAliasesList' Text
+calCourseId :: Lens' CoursesAliasesList Text
 calCourseId
   = lens _calCourseId (\ s a -> s{_calCourseId = a})
 
 -- | OAuth access token.
-calAccessToken :: Lens' CoursesAliasesList' (Maybe Text)
+calAccessToken :: Lens' CoursesAliasesList (Maybe Text)
 calAccessToken
   = lens _calAccessToken
       (\ s a -> s{_calAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-calUploadType :: Lens' CoursesAliasesList' (Maybe Text)
+calUploadType :: Lens' CoursesAliasesList (Maybe Text)
 calUploadType
   = lens _calUploadType
       (\ s a -> s{_calUploadType = a})
 
 -- | OAuth bearer token.
-calBearerToken :: Lens' CoursesAliasesList' (Maybe Text)
+calBearerToken :: Lens' CoursesAliasesList (Maybe Text)
 calBearerToken
   = lens _calBearerToken
       (\ s a -> s{_calBearerToken = a})
@@ -170,26 +170,26 @@ calBearerToken
 -- | nextPageToken value returned from a previous list call, indicating that
 -- the subsequent page of results should be returned. The list request must
 -- be otherwise identical to the one that resulted in this token.
-calPageToken :: Lens' CoursesAliasesList' (Maybe Text)
+calPageToken :: Lens' CoursesAliasesList (Maybe Text)
 calPageToken
   = lens _calPageToken (\ s a -> s{_calPageToken = a})
 
 -- | Maximum number of items to return. Zero or unspecified indicates that
 -- the server may assign a maximum. The server may return fewer than the
 -- specified number of results.
-calPageSize :: Lens' CoursesAliasesList' (Maybe Int32)
+calPageSize :: Lens' CoursesAliasesList (Maybe Int32)
 calPageSize
   = lens _calPageSize (\ s a -> s{_calPageSize = a})
 
 -- | JSONP
-calCallback :: Lens' CoursesAliasesList' (Maybe Text)
+calCallback :: Lens' CoursesAliasesList (Maybe Text)
 calCallback
   = lens _calCallback (\ s a -> s{_calCallback = a})
 
-instance GoogleRequest CoursesAliasesList' where
-        type Rs CoursesAliasesList' =
+instance GoogleRequest CoursesAliasesList where
+        type Rs CoursesAliasesList =
              ListCourseAliasesResponse
-        requestClient CoursesAliasesList'{..}
+        requestClient CoursesAliasesList{..}
           = go _calCourseId _calXgafv _calUploadProtocol
               (Just _calPp)
               _calAccessToken

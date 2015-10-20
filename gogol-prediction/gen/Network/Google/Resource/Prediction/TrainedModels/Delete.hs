@@ -29,8 +29,8 @@ module Network.Google.Resource.Prediction.TrainedModels.Delete
       TrainedModelsDeleteResource
 
     -- * Creating a Request
-    , trainedModelsDelete'
-    , TrainedModelsDelete'
+    , trainedModelsDelete
+    , TrainedModelsDelete
 
     -- * Request Lenses
     , tmdProject
@@ -41,7 +41,7 @@ import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @prediction.trainedmodels.delete@ method which the
--- 'TrainedModelsDelete'' request conforms to.
+-- 'TrainedModelsDelete' request conforms to.
 type TrainedModelsDeleteResource =
      Capture "project" Text :>
        "trainedmodels" :>
@@ -50,41 +50,41 @@ type TrainedModelsDeleteResource =
 
 -- | Delete a trained model.
 --
--- /See:/ 'trainedModelsDelete'' smart constructor.
-data TrainedModelsDelete' = TrainedModelsDelete'
+-- /See:/ 'trainedModelsDelete' smart constructor.
+data TrainedModelsDelete = TrainedModelsDelete
     { _tmdProject :: !Text
     , _tmdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TrainedModelsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'TrainedModelsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tmdProject'
 --
 -- * 'tmdId'
-trainedModelsDelete'
+trainedModelsDelete
     :: Text -- ^ 'tmdProject'
     -> Text -- ^ 'tmdId'
-    -> TrainedModelsDelete'
-trainedModelsDelete' pTmdProject_ pTmdId_ =
-    TrainedModelsDelete'
+    -> TrainedModelsDelete
+trainedModelsDelete pTmdProject_ pTmdId_ =
+    TrainedModelsDelete
     { _tmdProject = pTmdProject_
     , _tmdId = pTmdId_
     }
 
 -- | The project associated with the model.
-tmdProject :: Lens' TrainedModelsDelete' Text
+tmdProject :: Lens' TrainedModelsDelete Text
 tmdProject
   = lens _tmdProject (\ s a -> s{_tmdProject = a})
 
 -- | The unique name for the predictive model.
-tmdId :: Lens' TrainedModelsDelete' Text
+tmdId :: Lens' TrainedModelsDelete Text
 tmdId = lens _tmdId (\ s a -> s{_tmdId = a})
 
-instance GoogleRequest TrainedModelsDelete' where
-        type Rs TrainedModelsDelete' = ()
-        requestClient TrainedModelsDelete'{..}
+instance GoogleRequest TrainedModelsDelete where
+        type Rs TrainedModelsDelete = ()
+        requestClient TrainedModelsDelete{..}
           = go _tmdProject _tmdId (Just AltJSON)
               predictionService
           where go

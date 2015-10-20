@@ -32,8 +32,8 @@ module Network.Google.Resource.Classroom.Invitations.Get
       InvitationsGetResource
 
     -- * Creating a Request
-    , invitationsGet'
-    , InvitationsGet'
+    , invitationsGet
+    , InvitationsGet
 
     -- * Request Lenses
     , igXgafv
@@ -50,7 +50,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.invitations.get@ method which the
--- 'InvitationsGet'' request conforms to.
+-- 'InvitationsGet' request conforms to.
 type InvitationsGetResource =
      "v1" :>
        "invitations" :>
@@ -69,8 +69,8 @@ type InvitationsGetResource =
 -- the requested invitation or for access errors. * \`NOT_FOUND\` if no
 -- invitation exists with the requested ID.
 --
--- /See:/ 'invitationsGet'' smart constructor.
-data InvitationsGet' = InvitationsGet'
+-- /See:/ 'invitationsGet' smart constructor.
+data InvitationsGet = InvitationsGet
     { _igXgafv          :: !(Maybe Text)
     , _igUploadProtocol :: !(Maybe Text)
     , _igPp             :: !Bool
@@ -81,7 +81,7 @@ data InvitationsGet' = InvitationsGet'
     , _igCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InvitationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'InvitationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -100,11 +100,11 @@ data InvitationsGet' = InvitationsGet'
 -- * 'igId'
 --
 -- * 'igCallback'
-invitationsGet'
+invitationsGet
     :: Text -- ^ 'igId'
-    -> InvitationsGet'
-invitationsGet' pIgId_ =
-    InvitationsGet'
+    -> InvitationsGet
+invitationsGet pIgId_ =
+    InvitationsGet
     { _igXgafv = Nothing
     , _igUploadProtocol = Nothing
     , _igPp = True
@@ -116,48 +116,48 @@ invitationsGet' pIgId_ =
     }
 
 -- | V1 error format.
-igXgafv :: Lens' InvitationsGet' (Maybe Text)
+igXgafv :: Lens' InvitationsGet (Maybe Text)
 igXgafv = lens _igXgafv (\ s a -> s{_igXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-igUploadProtocol :: Lens' InvitationsGet' (Maybe Text)
+igUploadProtocol :: Lens' InvitationsGet (Maybe Text)
 igUploadProtocol
   = lens _igUploadProtocol
       (\ s a -> s{_igUploadProtocol = a})
 
 -- | Pretty-print response.
-igPp :: Lens' InvitationsGet' Bool
+igPp :: Lens' InvitationsGet Bool
 igPp = lens _igPp (\ s a -> s{_igPp = a})
 
 -- | OAuth access token.
-igAccessToken :: Lens' InvitationsGet' (Maybe Text)
+igAccessToken :: Lens' InvitationsGet (Maybe Text)
 igAccessToken
   = lens _igAccessToken
       (\ s a -> s{_igAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-igUploadType :: Lens' InvitationsGet' (Maybe Text)
+igUploadType :: Lens' InvitationsGet (Maybe Text)
 igUploadType
   = lens _igUploadType (\ s a -> s{_igUploadType = a})
 
 -- | OAuth bearer token.
-igBearerToken :: Lens' InvitationsGet' (Maybe Text)
+igBearerToken :: Lens' InvitationsGet (Maybe Text)
 igBearerToken
   = lens _igBearerToken
       (\ s a -> s{_igBearerToken = a})
 
 -- | Identifier of the invitation to return.
-igId :: Lens' InvitationsGet' Text
+igId :: Lens' InvitationsGet Text
 igId = lens _igId (\ s a -> s{_igId = a})
 
 -- | JSONP
-igCallback :: Lens' InvitationsGet' (Maybe Text)
+igCallback :: Lens' InvitationsGet (Maybe Text)
 igCallback
   = lens _igCallback (\ s a -> s{_igCallback = a})
 
-instance GoogleRequest InvitationsGet' where
-        type Rs InvitationsGet' = Invitation
-        requestClient InvitationsGet'{..}
+instance GoogleRequest InvitationsGet where
+        type Rs InvitationsGet = Invitation
+        requestClient InvitationsGet{..}
           = go _igId _igXgafv _igUploadProtocol (Just _igPp)
               _igAccessToken
               _igUploadType

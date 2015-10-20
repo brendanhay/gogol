@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Projects.List
       ProjectsListResource
 
     -- * Creating a Request
-    , projectsList'
-    , ProjectsList'
+    , projectsList
+    , ProjectsList
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.projects.list@ method which the
--- 'ProjectsList'' request conforms to.
+-- 'ProjectsList' request conforms to.
 type ProjectsListResource =
      "projects" :>
        QueryParam "alt" AltJSON :>
@@ -46,20 +46,20 @@ type ProjectsListResource =
 
 -- | Return all projects readable by the current user.
 --
--- /See:/ 'projectsList'' smart constructor.
-data ProjectsList' =
-    ProjectsList'
+-- /See:/ 'projectsList' smart constructor.
+data ProjectsList =
+    ProjectsList
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsList' with the minimum fields required to make a request.
 --
-projectsList'
-    :: ProjectsList'
-projectsList' = ProjectsList'
+projectsList
+    :: ProjectsList
+projectsList = ProjectsList
 
-instance GoogleRequest ProjectsList' where
-        type Rs ProjectsList' = ProjectsListResponse
-        requestClient ProjectsList'{}
+instance GoogleRequest ProjectsList where
+        type Rs ProjectsList = ProjectsListResponse
+        requestClient ProjectsList{}
           = go (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy ProjectsListResource)

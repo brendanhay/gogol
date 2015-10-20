@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.Posts.Update
       PostsUpdateResource
 
     -- * Creating a Request
-    , postsUpdate'
-    , PostsUpdate'
+    , postsUpdate
+    , PostsUpdate
 
     -- * Request Lenses
     , puFetchBody
@@ -47,7 +47,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.posts.update@ method which the
--- 'PostsUpdate'' request conforms to.
+-- 'PostsUpdate' request conforms to.
 type PostsUpdateResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -63,8 +63,8 @@ type PostsUpdateResource =
 
 -- | Update a post.
 --
--- /See:/ 'postsUpdate'' smart constructor.
-data PostsUpdate' = PostsUpdate'
+-- /See:/ 'postsUpdate' smart constructor.
+data PostsUpdate = PostsUpdate
     { _puFetchBody   :: !Bool
     , _puFetchImages :: !(Maybe Bool)
     , _puBlogId      :: !Text
@@ -75,7 +75,7 @@ data PostsUpdate' = PostsUpdate'
     , _puPublish     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PostsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'PostsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -94,13 +94,13 @@ data PostsUpdate' = PostsUpdate'
 -- * 'puPostId'
 --
 -- * 'puPublish'
-postsUpdate'
+postsUpdate
     :: Text -- ^ 'puBlogId'
     -> Post' -- ^ 'puPayload'
     -> Text -- ^ 'puPostId'
-    -> PostsUpdate'
-postsUpdate' pPuBlogId_ pPuPayload_ pPuPostId_ =
-    PostsUpdate'
+    -> PostsUpdate
+postsUpdate pPuBlogId_ pPuPayload_ pPuPostId_ =
+    PostsUpdate
     { _puFetchBody = True
     , _puFetchImages = Nothing
     , _puBlogId = pPuBlogId_
@@ -113,50 +113,50 @@ postsUpdate' pPuBlogId_ pPuPayload_ pPuPostId_ =
 
 -- | Whether the body content of the post is included with the result
 -- (default: true).
-puFetchBody :: Lens' PostsUpdate' Bool
+puFetchBody :: Lens' PostsUpdate Bool
 puFetchBody
   = lens _puFetchBody (\ s a -> s{_puFetchBody = a})
 
 -- | Whether image URL metadata for each post is included in the returned
 -- result (default: false).
-puFetchImages :: Lens' PostsUpdate' (Maybe Bool)
+puFetchImages :: Lens' PostsUpdate (Maybe Bool)
 puFetchImages
   = lens _puFetchImages
       (\ s a -> s{_puFetchImages = a})
 
 -- | The ID of the Blog.
-puBlogId :: Lens' PostsUpdate' Text
+puBlogId :: Lens' PostsUpdate Text
 puBlogId = lens _puBlogId (\ s a -> s{_puBlogId = a})
 
 -- | Multipart request metadata.
-puPayload :: Lens' PostsUpdate' Post'
+puPayload :: Lens' PostsUpdate Post'
 puPayload
   = lens _puPayload (\ s a -> s{_puPayload = a})
 
 -- | Maximum number of comments to retrieve with the returned post.
-puMaxComments :: Lens' PostsUpdate' (Maybe Word32)
+puMaxComments :: Lens' PostsUpdate (Maybe Word32)
 puMaxComments
   = lens _puMaxComments
       (\ s a -> s{_puMaxComments = a})
 
 -- | Whether a revert action should be performed when the post is updated
 -- (default: false).
-puRevert :: Lens' PostsUpdate' (Maybe Bool)
+puRevert :: Lens' PostsUpdate (Maybe Bool)
 puRevert = lens _puRevert (\ s a -> s{_puRevert = a})
 
 -- | The ID of the Post.
-puPostId :: Lens' PostsUpdate' Text
+puPostId :: Lens' PostsUpdate Text
 puPostId = lens _puPostId (\ s a -> s{_puPostId = a})
 
 -- | Whether a publish action should be performed when the post is updated
 -- (default: false).
-puPublish :: Lens' PostsUpdate' (Maybe Bool)
+puPublish :: Lens' PostsUpdate (Maybe Bool)
 puPublish
   = lens _puPublish (\ s a -> s{_puPublish = a})
 
-instance GoogleRequest PostsUpdate' where
-        type Rs PostsUpdate' = Post'
-        requestClient PostsUpdate'{..}
+instance GoogleRequest PostsUpdate where
+        type Rs PostsUpdate = Post'
+        requestClient PostsUpdate{..}
           = go _puBlogId _puPostId (Just _puFetchBody)
               _puFetchImages
               _puMaxComments

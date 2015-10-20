@@ -29,18 +29,18 @@ module Network.Google.Resource.Drive.Properties.List
       PropertiesListResource
 
     -- * Creating a Request
-    , propertiesList'
-    , PropertiesList'
+    , propertiesList
+    , PropertiesList
 
     -- * Request Lenses
-    , plFileId
+    , proFileId
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.properties.list@ method which the
--- 'PropertiesList'' request conforms to.
+-- 'PropertiesList' request conforms to.
 type PropertiesListResource =
      "files" :>
        Capture "fileId" Text :>
@@ -49,32 +49,33 @@ type PropertiesListResource =
 
 -- | Lists a file\'s properties.
 --
--- /See:/ 'propertiesList'' smart constructor.
-newtype PropertiesList' = PropertiesList'
-    { _plFileId :: Text
+-- /See:/ 'propertiesList' smart constructor.
+newtype PropertiesList = PropertiesList
+    { _proFileId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PropertiesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'PropertiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'plFileId'
-propertiesList'
-    :: Text -- ^ 'plFileId'
-    -> PropertiesList'
-propertiesList' pPlFileId_ =
-    PropertiesList'
-    { _plFileId = pPlFileId_
+-- * 'proFileId'
+propertiesList
+    :: Text -- ^ 'proFileId'
+    -> PropertiesList
+propertiesList pProFileId_ =
+    PropertiesList
+    { _proFileId = pProFileId_
     }
 
 -- | The ID of the file.
-plFileId :: Lens' PropertiesList' Text
-plFileId = lens _plFileId (\ s a -> s{_plFileId = a})
+proFileId :: Lens' PropertiesList Text
+proFileId
+  = lens _proFileId (\ s a -> s{_proFileId = a})
 
-instance GoogleRequest PropertiesList' where
-        type Rs PropertiesList' = PropertyList
-        requestClient PropertiesList'{..}
-          = go _plFileId (Just AltJSON) driveService
+instance GoogleRequest PropertiesList where
+        type Rs PropertiesList = PropertyList
+        requestClient PropertiesList{..}
+          = go _proFileId (Just AltJSON) driveService
           where go
                   = buildClient (Proxy :: Proxy PropertiesListResource)
                       mempty

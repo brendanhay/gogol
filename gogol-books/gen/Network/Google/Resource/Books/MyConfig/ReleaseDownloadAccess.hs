@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.MyConfig.ReleaseDownloadAccess
       MyConfigReleaseDownloadAccessResource
 
     -- * Creating a Request
-    , myConfigReleaseDownloadAccess'
-    , MyConfigReleaseDownloadAccess'
+    , myConfigReleaseDownloadAccess
+    , MyConfigReleaseDownloadAccess
 
     -- * Request Lenses
     , mcrdaCpksver
@@ -43,7 +43,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.myconfig.releaseDownloadAccess@ method which the
--- 'MyConfigReleaseDownloadAccess'' request conforms to.
+-- 'MyConfigReleaseDownloadAccess' request conforms to.
 type MyConfigReleaseDownloadAccessResource =
      "myconfig" :>
        "releaseDownloadAccess" :>
@@ -56,15 +56,15 @@ type MyConfigReleaseDownloadAccessResource =
 
 -- | Release downloaded content access restriction.
 --
--- /See:/ 'myConfigReleaseDownloadAccess'' smart constructor.
-data MyConfigReleaseDownloadAccess' = MyConfigReleaseDownloadAccess'
+-- /See:/ 'myConfigReleaseDownloadAccess' smart constructor.
+data MyConfigReleaseDownloadAccess = MyConfigReleaseDownloadAccess
     { _mcrdaCpksver   :: !Text
     , _mcrdaLocale    :: !(Maybe Text)
     , _mcrdaVolumeIds :: ![Text]
     , _mcrdaSource    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MyConfigReleaseDownloadAccess'' with the minimum fields required to make a request.
+-- | Creates a value of 'MyConfigReleaseDownloadAccess' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,12 +75,12 @@ data MyConfigReleaseDownloadAccess' = MyConfigReleaseDownloadAccess'
 -- * 'mcrdaVolumeIds'
 --
 -- * 'mcrdaSource'
-myConfigReleaseDownloadAccess'
+myConfigReleaseDownloadAccess
     :: Text -- ^ 'mcrdaCpksver'
     -> [Text] -- ^ 'mcrdaVolumeIds'
-    -> MyConfigReleaseDownloadAccess'
-myConfigReleaseDownloadAccess' pMcrdaCpksver_ pMcrdaVolumeIds_ =
-    MyConfigReleaseDownloadAccess'
+    -> MyConfigReleaseDownloadAccess
+myConfigReleaseDownloadAccess pMcrdaCpksver_ pMcrdaVolumeIds_ =
+    MyConfigReleaseDownloadAccess
     { _mcrdaCpksver = pMcrdaCpksver_
     , _mcrdaLocale = Nothing
     , _mcrdaVolumeIds = pMcrdaVolumeIds_
@@ -88,32 +88,32 @@ myConfigReleaseDownloadAccess' pMcrdaCpksver_ pMcrdaVolumeIds_ =
     }
 
 -- | The device\/version ID from which to release the restriction.
-mcrdaCpksver :: Lens' MyConfigReleaseDownloadAccess' Text
+mcrdaCpksver :: Lens' MyConfigReleaseDownloadAccess Text
 mcrdaCpksver
   = lens _mcrdaCpksver (\ s a -> s{_mcrdaCpksver = a})
 
 -- | ISO-639-1, ISO-3166-1 codes for message localization, i.e. en_US.
-mcrdaLocale :: Lens' MyConfigReleaseDownloadAccess' (Maybe Text)
+mcrdaLocale :: Lens' MyConfigReleaseDownloadAccess (Maybe Text)
 mcrdaLocale
   = lens _mcrdaLocale (\ s a -> s{_mcrdaLocale = a})
 
 -- | The volume(s) to release restrictions for.
-mcrdaVolumeIds :: Lens' MyConfigReleaseDownloadAccess' [Text]
+mcrdaVolumeIds :: Lens' MyConfigReleaseDownloadAccess [Text]
 mcrdaVolumeIds
   = lens _mcrdaVolumeIds
       (\ s a -> s{_mcrdaVolumeIds = a})
       . _Coerce
 
 -- | String to identify the originator of this request.
-mcrdaSource :: Lens' MyConfigReleaseDownloadAccess' (Maybe Text)
+mcrdaSource :: Lens' MyConfigReleaseDownloadAccess (Maybe Text)
 mcrdaSource
   = lens _mcrdaSource (\ s a -> s{_mcrdaSource = a})
 
-instance GoogleRequest MyConfigReleaseDownloadAccess'
+instance GoogleRequest MyConfigReleaseDownloadAccess
          where
-        type Rs MyConfigReleaseDownloadAccess' =
+        type Rs MyConfigReleaseDownloadAccess =
              DownloadAccesses
-        requestClient MyConfigReleaseDownloadAccess'{..}
+        requestClient MyConfigReleaseDownloadAccess{..}
           = go _mcrdaVolumeIds (Just _mcrdaCpksver)
               _mcrdaLocale
               _mcrdaSource

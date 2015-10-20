@@ -29,18 +29,18 @@ module Network.Google.Resource.Webmasters.Sites.Get
       SitesGetResource
 
     -- * Creating a Request
-    , sitesGet'
-    , SitesGet'
+    , sitesGet
+    , SitesGet
 
     -- * Request Lenses
-    , sSiteURL
+    , sitSiteURL
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.sites.get@ method which the
--- 'SitesGet'' request conforms to.
+-- 'SitesGet' request conforms to.
 type SitesGetResource =
      "sites" :>
        Capture "siteUrl" Text :>
@@ -48,33 +48,34 @@ type SitesGetResource =
 
 -- | Retrieves information about specific site.
 --
--- /See:/ 'sitesGet'' smart constructor.
-newtype SitesGet' = SitesGet'
-    { _sSiteURL :: Text
+-- /See:/ 'sitesGet' smart constructor.
+newtype SitesGet = SitesGet
+    { _sitSiteURL :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SitesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'SitesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sSiteURL'
-sitesGet'
-    :: Text -- ^ 'sSiteURL'
-    -> SitesGet'
-sitesGet' pSSiteURL_ =
-    SitesGet'
-    { _sSiteURL = pSSiteURL_
+-- * 'sitSiteURL'
+sitesGet
+    :: Text -- ^ 'sitSiteURL'
+    -> SitesGet
+sitesGet pSitSiteURL_ =
+    SitesGet
+    { _sitSiteURL = pSitSiteURL_
     }
 
 -- | The URI of the property as defined in Search Console. Examples:
 -- http:\/\/www.example.com\/ or android-app:\/\/com.example\/
-sSiteURL :: Lens' SitesGet' Text
-sSiteURL = lens _sSiteURL (\ s a -> s{_sSiteURL = a})
+sitSiteURL :: Lens' SitesGet Text
+sitSiteURL
+  = lens _sitSiteURL (\ s a -> s{_sitSiteURL = a})
 
-instance GoogleRequest SitesGet' where
-        type Rs SitesGet' = WmxSite
-        requestClient SitesGet'{..}
-          = go _sSiteURL (Just AltJSON) webmasterToolsService
+instance GoogleRequest SitesGet where
+        type Rs SitesGet = WmxSite
+        requestClient SitesGet{..}
+          = go _sitSiteURL (Just AltJSON) webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitesGetResource)
                       mempty

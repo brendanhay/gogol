@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSense.AdUnits.List
       AdUnitsListResource
 
     -- * Creating a Request
-    , adUnitsList'
-    , AdUnitsList'
+    , adUnitsList
+    , AdUnitsList
 
     -- * Request Lenses
     , aulIncludeInactive
@@ -43,7 +43,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.adunits.list@ method which the
--- 'AdUnitsList'' request conforms to.
+-- 'AdUnitsList' request conforms to.
 type AdUnitsListResource =
      "adclients" :>
        Capture "adClientId" Text :>
@@ -55,15 +55,15 @@ type AdUnitsListResource =
 
 -- | List all ad units in the specified ad client for this AdSense account.
 --
--- /See:/ 'adUnitsList'' smart constructor.
-data AdUnitsList' = AdUnitsList'
+-- /See:/ 'adUnitsList' smart constructor.
+data AdUnitsList = AdUnitsList
     { _aulIncludeInactive :: !(Maybe Bool)
     , _aulAdClientId      :: !Text
     , _aulPageToken       :: !(Maybe Text)
     , _aulMaxResults      :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdUnitsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdUnitsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,11 +74,11 @@ data AdUnitsList' = AdUnitsList'
 -- * 'aulPageToken'
 --
 -- * 'aulMaxResults'
-adUnitsList'
+adUnitsList
     :: Text -- ^ 'aulAdClientId'
-    -> AdUnitsList'
-adUnitsList' pAulAdClientId_ =
-    AdUnitsList'
+    -> AdUnitsList
+adUnitsList pAulAdClientId_ =
+    AdUnitsList
     { _aulIncludeInactive = Nothing
     , _aulAdClientId = pAulAdClientId_
     , _aulPageToken = Nothing
@@ -86,13 +86,13 @@ adUnitsList' pAulAdClientId_ =
     }
 
 -- | Whether to include inactive ad units. Default: true.
-aulIncludeInactive :: Lens' AdUnitsList' (Maybe Bool)
+aulIncludeInactive :: Lens' AdUnitsList (Maybe Bool)
 aulIncludeInactive
   = lens _aulIncludeInactive
       (\ s a -> s{_aulIncludeInactive = a})
 
 -- | Ad client for which to list ad units.
-aulAdClientId :: Lens' AdUnitsList' Text
+aulAdClientId :: Lens' AdUnitsList Text
 aulAdClientId
   = lens _aulAdClientId
       (\ s a -> s{_aulAdClientId = a})
@@ -100,20 +100,20 @@ aulAdClientId
 -- | A continuation token, used to page through ad units. To retrieve the
 -- next page, set this parameter to the value of \"nextPageToken\" from the
 -- previous response.
-aulPageToken :: Lens' AdUnitsList' (Maybe Text)
+aulPageToken :: Lens' AdUnitsList (Maybe Text)
 aulPageToken
   = lens _aulPageToken (\ s a -> s{_aulPageToken = a})
 
 -- | The maximum number of ad units to include in the response, used for
 -- paging.
-aulMaxResults :: Lens' AdUnitsList' (Maybe Int32)
+aulMaxResults :: Lens' AdUnitsList (Maybe Int32)
 aulMaxResults
   = lens _aulMaxResults
       (\ s a -> s{_aulMaxResults = a})
 
-instance GoogleRequest AdUnitsList' where
-        type Rs AdUnitsList' = AdUnits
-        requestClient AdUnitsList'{..}
+instance GoogleRequest AdUnitsList where
+        type Rs AdUnitsList = AdUnits
+        requestClient AdUnitsList{..}
           = go _aulAdClientId _aulIncludeInactive _aulPageToken
               _aulMaxResults
               (Just AltJSON)

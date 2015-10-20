@@ -29,23 +29,23 @@ module Network.Google.Resource.DFAReporting.Reports.List
       ReportsListResource
 
     -- * Creating a Request
-    , reportsList'
-    , ReportsList'
+    , reportsList
+    , ReportsList
 
     -- * Request Lenses
-    , rProFileId
-    , rSortOrder
-    , rScope
-    , rPageToken
-    , rSortField
-    , rMaxResults
+    , rlProFileId
+    , rlSortOrder
+    , rlScope
+    , rlPageToken
+    , rlSortField
+    , rlMaxResults
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.reports.list@ method which the
--- 'ReportsList'' request conforms to.
+-- 'ReportsList' request conforms to.
 type ReportsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -59,80 +59,80 @@ type ReportsListResource =
 
 -- | Retrieves list of reports.
 --
--- /See:/ 'reportsList'' smart constructor.
-data ReportsList' = ReportsList'
-    { _rProFileId  :: !Int64
-    , _rSortOrder  :: !ReportsListSortOrder
-    , _rScope      :: !ReportsListScope
-    , _rPageToken  :: !(Maybe Text)
-    , _rSortField  :: !ReportsListSortField
-    , _rMaxResults :: !(Maybe Int32)
+-- /See:/ 'reportsList' smart constructor.
+data ReportsList = ReportsList
+    { _rlProFileId  :: !Int64
+    , _rlSortOrder  :: !ReportsListSortOrder
+    , _rlScope      :: !ReportsListScope
+    , _rlPageToken  :: !(Maybe Text)
+    , _rlSortField  :: !ReportsListSortField
+    , _rlMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReportsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rProFileId'
+-- * 'rlProFileId'
 --
--- * 'rSortOrder'
+-- * 'rlSortOrder'
 --
--- * 'rScope'
+-- * 'rlScope'
 --
--- * 'rPageToken'
+-- * 'rlPageToken'
 --
--- * 'rSortField'
+-- * 'rlSortField'
 --
--- * 'rMaxResults'
-reportsList'
-    :: Int64 -- ^ 'rProFileId'
-    -> ReportsList'
-reportsList' pRProFileId_ =
-    ReportsList'
-    { _rProFileId = pRProFileId_
-    , _rSortOrder = RLSODescending
-    , _rScope = Mine
-    , _rPageToken = Nothing
-    , _rSortField = RLSFLastModifiedTime
-    , _rMaxResults = Nothing
+-- * 'rlMaxResults'
+reportsList
+    :: Int64 -- ^ 'rlProFileId'
+    -> ReportsList
+reportsList pRlProFileId_ =
+    ReportsList
+    { _rlProFileId = pRlProFileId_
+    , _rlSortOrder = RLSODescending
+    , _rlScope = Mine
+    , _rlPageToken = Nothing
+    , _rlSortField = RLSFLastModifiedTime
+    , _rlMaxResults = Nothing
     }
 
 -- | The DFA user profile ID.
-rProFileId :: Lens' ReportsList' Int64
-rProFileId
-  = lens _rProFileId (\ s a -> s{_rProFileId = a})
+rlProFileId :: Lens' ReportsList Int64
+rlProFileId
+  = lens _rlProFileId (\ s a -> s{_rlProFileId = a})
 
 -- | Order of sorted results, default is \'DESCENDING\'.
-rSortOrder :: Lens' ReportsList' ReportsListSortOrder
-rSortOrder
-  = lens _rSortOrder (\ s a -> s{_rSortOrder = a})
+rlSortOrder :: Lens' ReportsList ReportsListSortOrder
+rlSortOrder
+  = lens _rlSortOrder (\ s a -> s{_rlSortOrder = a})
 
 -- | The scope that defines which results are returned, default is \'MINE\'.
-rScope :: Lens' ReportsList' ReportsListScope
-rScope = lens _rScope (\ s a -> s{_rScope = a})
+rlScope :: Lens' ReportsList ReportsListScope
+rlScope = lens _rlScope (\ s a -> s{_rlScope = a})
 
 -- | The value of the nextToken from the previous result page.
-rPageToken :: Lens' ReportsList' (Maybe Text)
-rPageToken
-  = lens _rPageToken (\ s a -> s{_rPageToken = a})
+rlPageToken :: Lens' ReportsList (Maybe Text)
+rlPageToken
+  = lens _rlPageToken (\ s a -> s{_rlPageToken = a})
 
 -- | The field by which to sort the list.
-rSortField :: Lens' ReportsList' ReportsListSortField
-rSortField
-  = lens _rSortField (\ s a -> s{_rSortField = a})
+rlSortField :: Lens' ReportsList ReportsListSortField
+rlSortField
+  = lens _rlSortField (\ s a -> s{_rlSortField = a})
 
 -- | Maximum number of results to return.
-rMaxResults :: Lens' ReportsList' (Maybe Int32)
-rMaxResults
-  = lens _rMaxResults (\ s a -> s{_rMaxResults = a})
+rlMaxResults :: Lens' ReportsList (Maybe Int32)
+rlMaxResults
+  = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
 
-instance GoogleRequest ReportsList' where
-        type Rs ReportsList' = ReportList
-        requestClient ReportsList'{..}
-          = go _rProFileId (Just _rSortOrder) (Just _rScope)
-              _rPageToken
-              (Just _rSortField)
-              _rMaxResults
+instance GoogleRequest ReportsList where
+        type Rs ReportsList = ReportList
+        requestClient ReportsList{..}
+          = go _rlProFileId (Just _rlSortOrder) (Just _rlScope)
+              _rlPageToken
+              (Just _rlSortField)
+              _rlMaxResults
               (Just AltJSON)
               dFAReportingService
           where go

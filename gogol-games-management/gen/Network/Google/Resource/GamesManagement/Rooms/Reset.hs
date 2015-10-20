@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Rooms.Reset
       RoomsResetResource
 
     -- * Creating a Request
-    , roomsReset'
-    , RoomsReset'
+    , roomsReset
+    , RoomsReset
 
     ) where
 
@@ -40,7 +40,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.rooms.reset@ method which the
--- 'RoomsReset'' request conforms to.
+-- 'RoomsReset' request conforms to.
 type RoomsResetResource =
      "rooms" :>
        "reset" :>
@@ -50,20 +50,20 @@ type RoomsResetResource =
 -- application. This method is only accessible to whitelisted tester
 -- accounts for your application.
 --
--- /See:/ 'roomsReset'' smart constructor.
-data RoomsReset' =
-    RoomsReset'
+-- /See:/ 'roomsReset' smart constructor.
+data RoomsReset =
+    RoomsReset
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoomsReset'' with the minimum fields required to make a request.
+-- | Creates a value of 'RoomsReset' with the minimum fields required to make a request.
 --
-roomsReset'
-    :: RoomsReset'
-roomsReset' = RoomsReset'
+roomsReset
+    :: RoomsReset
+roomsReset = RoomsReset
 
-instance GoogleRequest RoomsReset' where
-        type Rs RoomsReset' = ()
-        requestClient RoomsReset'{}
+instance GoogleRequest RoomsReset where
+        type Rs RoomsReset = ()
+        requestClient RoomsReset{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy RoomsResetResource)

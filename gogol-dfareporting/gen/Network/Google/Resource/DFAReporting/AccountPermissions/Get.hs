@@ -29,19 +29,19 @@ module Network.Google.Resource.DFAReporting.AccountPermissions.Get
       AccountPermissionsGetResource
 
     -- * Creating a Request
-    , accountPermissionsGet'
-    , AccountPermissionsGet'
+    , accountPermissionsGet
+    , AccountPermissionsGet
 
     -- * Request Lenses
-    , accProFileId
-    , accId
+    , apgProFileId
+    , apgId
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accountPermissions.get@ method which the
--- 'AccountPermissionsGet'' request conforms to.
+-- 'AccountPermissionsGet' request conforms to.
 type AccountPermissionsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,42 +52,42 @@ type AccountPermissionsGetResource =
 
 -- | Gets one account permission by ID.
 --
--- /See:/ 'accountPermissionsGet'' smart constructor.
-data AccountPermissionsGet' = AccountPermissionsGet'
-    { _accProFileId :: !Int64
-    , _accId        :: !Int64
+-- /See:/ 'accountPermissionsGet' smart constructor.
+data AccountPermissionsGet = AccountPermissionsGet
+    { _apgProFileId :: !Int64
+    , _apgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountPermissionsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountPermissionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'accProFileId'
+-- * 'apgProFileId'
 --
--- * 'accId'
-accountPermissionsGet'
-    :: Int64 -- ^ 'accProFileId'
-    -> Int64 -- ^ 'accId'
-    -> AccountPermissionsGet'
-accountPermissionsGet' pAccProFileId_ pAccId_ =
-    AccountPermissionsGet'
-    { _accProFileId = pAccProFileId_
-    , _accId = pAccId_
+-- * 'apgId'
+accountPermissionsGet
+    :: Int64 -- ^ 'apgProFileId'
+    -> Int64 -- ^ 'apgId'
+    -> AccountPermissionsGet
+accountPermissionsGet pApgProFileId_ pApgId_ =
+    AccountPermissionsGet
+    { _apgProFileId = pApgProFileId_
+    , _apgId = pApgId_
     }
 
 -- | User profile ID associated with this request.
-accProFileId :: Lens' AccountPermissionsGet' Int64
-accProFileId
-  = lens _accProFileId (\ s a -> s{_accProFileId = a})
+apgProFileId :: Lens' AccountPermissionsGet Int64
+apgProFileId
+  = lens _apgProFileId (\ s a -> s{_apgProFileId = a})
 
 -- | Account permission ID.
-accId :: Lens' AccountPermissionsGet' Int64
-accId = lens _accId (\ s a -> s{_accId = a})
+apgId :: Lens' AccountPermissionsGet Int64
+apgId = lens _apgId (\ s a -> s{_apgId = a})
 
-instance GoogleRequest AccountPermissionsGet' where
-        type Rs AccountPermissionsGet' = AccountPermission
-        requestClient AccountPermissionsGet'{..}
-          = go _accProFileId _accId (Just AltJSON)
+instance GoogleRequest AccountPermissionsGet where
+        type Rs AccountPermissionsGet = AccountPermission
+        requestClient AccountPermissionsGet{..}
+          = go _apgProFileId _apgId (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient

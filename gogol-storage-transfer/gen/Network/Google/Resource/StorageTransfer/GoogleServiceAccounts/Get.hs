@@ -35,8 +35,8 @@ module Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
       GoogleServiceAccountsGetResource
 
     -- * Creating a Request
-    , googleServiceAccountsGet'
-    , GoogleServiceAccountsGet'
+    , googleServiceAccountsGet
+    , GoogleServiceAccountsGet
 
     -- * Request Lenses
     , gsagXgafv
@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.googleServiceAccounts.get@ method which the
--- 'GoogleServiceAccountsGet'' request conforms to.
+-- 'GoogleServiceAccountsGet' request conforms to.
 type GoogleServiceAccountsGetResource =
      "v1" :>
        "googleServiceAccounts" :>
@@ -76,8 +76,8 @@ type GoogleServiceAccountsGetResource =
 -- Service. This service account is created and owned by Storage Transfer
 -- Service and can only be used by Storage Transfer Service.
 --
--- /See:/ 'googleServiceAccountsGet'' smart constructor.
-data GoogleServiceAccountsGet' = GoogleServiceAccountsGet'
+-- /See:/ 'googleServiceAccountsGet' smart constructor.
+data GoogleServiceAccountsGet = GoogleServiceAccountsGet
     { _gsagXgafv          :: !(Maybe Text)
     , _gsagUploadProtocol :: !(Maybe Text)
     , _gsagPp             :: !Bool
@@ -88,7 +88,7 @@ data GoogleServiceAccountsGet' = GoogleServiceAccountsGet'
     , _gsagCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GoogleServiceAccountsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'GoogleServiceAccountsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -107,11 +107,11 @@ data GoogleServiceAccountsGet' = GoogleServiceAccountsGet'
 -- * 'gsagProjectId'
 --
 -- * 'gsagCallback'
-googleServiceAccountsGet'
+googleServiceAccountsGet
     :: Text -- ^ 'gsagProjectId'
-    -> GoogleServiceAccountsGet'
-googleServiceAccountsGet' pGsagProjectId_ =
-    GoogleServiceAccountsGet'
+    -> GoogleServiceAccountsGet
+googleServiceAccountsGet pGsagProjectId_ =
+    GoogleServiceAccountsGet
     { _gsagXgafv = Nothing
     , _gsagUploadProtocol = Nothing
     , _gsagPp = True
@@ -123,55 +123,54 @@ googleServiceAccountsGet' pGsagProjectId_ =
     }
 
 -- | V1 error format.
-gsagXgafv :: Lens' GoogleServiceAccountsGet' (Maybe Text)
+gsagXgafv :: Lens' GoogleServiceAccountsGet (Maybe Text)
 gsagXgafv
   = lens _gsagXgafv (\ s a -> s{_gsagXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-gsagUploadProtocol :: Lens' GoogleServiceAccountsGet' (Maybe Text)
+gsagUploadProtocol :: Lens' GoogleServiceAccountsGet (Maybe Text)
 gsagUploadProtocol
   = lens _gsagUploadProtocol
       (\ s a -> s{_gsagUploadProtocol = a})
 
 -- | Pretty-print response.
-gsagPp :: Lens' GoogleServiceAccountsGet' Bool
+gsagPp :: Lens' GoogleServiceAccountsGet Bool
 gsagPp = lens _gsagPp (\ s a -> s{_gsagPp = a})
 
 -- | OAuth access token.
-gsagAccessToken :: Lens' GoogleServiceAccountsGet' (Maybe Text)
+gsagAccessToken :: Lens' GoogleServiceAccountsGet (Maybe Text)
 gsagAccessToken
   = lens _gsagAccessToken
       (\ s a -> s{_gsagAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-gsagUploadType :: Lens' GoogleServiceAccountsGet' (Maybe Text)
+gsagUploadType :: Lens' GoogleServiceAccountsGet (Maybe Text)
 gsagUploadType
   = lens _gsagUploadType
       (\ s a -> s{_gsagUploadType = a})
 
 -- | OAuth bearer token.
-gsagBearerToken :: Lens' GoogleServiceAccountsGet' (Maybe Text)
+gsagBearerToken :: Lens' GoogleServiceAccountsGet (Maybe Text)
 gsagBearerToken
   = lens _gsagBearerToken
       (\ s a -> s{_gsagBearerToken = a})
 
 -- | The ID of the Google Developers Console project that the Google service
 -- account is associated with. Required.
-gsagProjectId :: Lens' GoogleServiceAccountsGet' Text
+gsagProjectId :: Lens' GoogleServiceAccountsGet Text
 gsagProjectId
   = lens _gsagProjectId
       (\ s a -> s{_gsagProjectId = a})
 
 -- | JSONP
-gsagCallback :: Lens' GoogleServiceAccountsGet' (Maybe Text)
+gsagCallback :: Lens' GoogleServiceAccountsGet (Maybe Text)
 gsagCallback
   = lens _gsagCallback (\ s a -> s{_gsagCallback = a})
 
-instance GoogleRequest GoogleServiceAccountsGet'
-         where
-        type Rs GoogleServiceAccountsGet' =
+instance GoogleRequest GoogleServiceAccountsGet where
+        type Rs GoogleServiceAccountsGet =
              GoogleServiceAccount
-        requestClient GoogleServiceAccountsGet'{..}
+        requestClient GoogleServiceAccountsGet{..}
           = go _gsagProjectId _gsagXgafv _gsagUploadProtocol
               (Just _gsagPp)
               _gsagAccessToken

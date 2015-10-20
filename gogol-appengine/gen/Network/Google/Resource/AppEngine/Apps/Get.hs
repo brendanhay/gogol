@@ -29,8 +29,8 @@ module Network.Google.Resource.AppEngine.Apps.Get
       AppsGetResource
 
     -- * Creating a Request
-    , appsGet'
-    , AppsGet'
+    , appsGet
+    , AppsGet
 
     -- * Request Lenses
     , agXgafv
@@ -48,7 +48,7 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.get@ method which the
--- 'AppsGet'' request conforms to.
+-- 'AppsGet' request conforms to.
 type AppsGetResource =
      "v1beta4" :>
        "apps" :>
@@ -65,8 +65,8 @@ type AppsGetResource =
 
 -- | Gets information about an application.
 --
--- /See:/ 'appsGet'' smart constructor.
-data AppsGet' = AppsGet'
+-- /See:/ 'appsGet' smart constructor.
+data AppsGet = AppsGet
     { _agXgafv                :: !(Maybe Text)
     , _agUploadProtocol       :: !(Maybe Text)
     , _agPp                   :: !Bool
@@ -78,7 +78,7 @@ data AppsGet' = AppsGet'
     , _agCallback             :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AppsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AppsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -99,11 +99,11 @@ data AppsGet' = AppsGet'
 -- * 'agEnsureResourcesExist'
 --
 -- * 'agCallback'
-appsGet'
+appsGet
     :: Text -- ^ 'agAppsId'
-    -> AppsGet'
-appsGet' pAgAppsId_ =
-    AppsGet'
+    -> AppsGet
+appsGet pAgAppsId_ =
+    AppsGet
     { _agXgafv = Nothing
     , _agUploadProtocol = Nothing
     , _agPp = True
@@ -116,58 +116,58 @@ appsGet' pAgAppsId_ =
     }
 
 -- | V1 error format.
-agXgafv :: Lens' AppsGet' (Maybe Text)
+agXgafv :: Lens' AppsGet (Maybe Text)
 agXgafv = lens _agXgafv (\ s a -> s{_agXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-agUploadProtocol :: Lens' AppsGet' (Maybe Text)
+agUploadProtocol :: Lens' AppsGet (Maybe Text)
 agUploadProtocol
   = lens _agUploadProtocol
       (\ s a -> s{_agUploadProtocol = a})
 
 -- | Pretty-print response.
-agPp :: Lens' AppsGet' Bool
+agPp :: Lens' AppsGet Bool
 agPp = lens _agPp (\ s a -> s{_agPp = a})
 
 -- | OAuth access token.
-agAccessToken :: Lens' AppsGet' (Maybe Text)
+agAccessToken :: Lens' AppsGet (Maybe Text)
 agAccessToken
   = lens _agAccessToken
       (\ s a -> s{_agAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-agUploadType :: Lens' AppsGet' (Maybe Text)
+agUploadType :: Lens' AppsGet (Maybe Text)
 agUploadType
   = lens _agUploadType (\ s a -> s{_agUploadType = a})
 
 -- | OAuth bearer token.
-agBearerToken :: Lens' AppsGet' (Maybe Text)
+agBearerToken :: Lens' AppsGet (Maybe Text)
 agBearerToken
   = lens _agBearerToken
       (\ s a -> s{_agBearerToken = a})
 
 -- | Part of \`name\`. Name of the application to get. For example:
 -- \"apps\/myapp\".
-agAppsId :: Lens' AppsGet' Text
+agAppsId :: Lens' AppsGet Text
 agAppsId = lens _agAppsId (\ s a -> s{_agAppsId = a})
 
 -- | Certain resources associated with an application are created on-demand.
 -- Controls whether these resources should be created when performing the
 -- \`GET\` operation. If specified and any resources cloud not be created,
 -- the request will fail with an error code.
-agEnsureResourcesExist :: Lens' AppsGet' (Maybe Bool)
+agEnsureResourcesExist :: Lens' AppsGet (Maybe Bool)
 agEnsureResourcesExist
   = lens _agEnsureResourcesExist
       (\ s a -> s{_agEnsureResourcesExist = a})
 
 -- | JSONP
-agCallback :: Lens' AppsGet' (Maybe Text)
+agCallback :: Lens' AppsGet (Maybe Text)
 agCallback
   = lens _agCallback (\ s a -> s{_agCallback = a})
 
-instance GoogleRequest AppsGet' where
-        type Rs AppsGet' = Application
-        requestClient AppsGet'{..}
+instance GoogleRequest AppsGet where
+        type Rs AppsGet = Application
+        requestClient AppsGet{..}
           = go _agAppsId _agXgafv _agUploadProtocol
               (Just _agPp)
               _agAccessToken

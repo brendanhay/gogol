@@ -31,8 +31,8 @@ module Network.Google.Resource.BigQuery.Jobs.Get
       JobsGetResource
 
     -- * Creating a Request
-    , jobsGet'
-    , JobsGet'
+    , jobsGet
+    , JobsGet
 
     -- * Request Lenses
     , jgJobId
@@ -43,7 +43,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.jobs.get@ method which the
--- 'JobsGet'' request conforms to.
+-- 'JobsGet' request conforms to.
 type JobsGetResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -55,41 +55,41 @@ type JobsGetResource =
 -- for a six month period after creation. Requires that you\'re the person
 -- who ran the job, or have the Is Owner project role.
 --
--- /See:/ 'jobsGet'' smart constructor.
-data JobsGet' = JobsGet'
+-- /See:/ 'jobsGet' smart constructor.
+data JobsGet = JobsGet
     { _jgJobId     :: !Text
     , _jgProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'JobsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'JobsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'jgJobId'
 --
 -- * 'jgProjectId'
-jobsGet'
+jobsGet
     :: Text -- ^ 'jgJobId'
     -> Text -- ^ 'jgProjectId'
-    -> JobsGet'
-jobsGet' pJgJobId_ pJgProjectId_ =
-    JobsGet'
+    -> JobsGet
+jobsGet pJgJobId_ pJgProjectId_ =
+    JobsGet
     { _jgJobId = pJgJobId_
     , _jgProjectId = pJgProjectId_
     }
 
 -- | Job ID of the requested job
-jgJobId :: Lens' JobsGet' Text
+jgJobId :: Lens' JobsGet Text
 jgJobId = lens _jgJobId (\ s a -> s{_jgJobId = a})
 
 -- | Project ID of the requested job
-jgProjectId :: Lens' JobsGet' Text
+jgProjectId :: Lens' JobsGet Text
 jgProjectId
   = lens _jgProjectId (\ s a -> s{_jgProjectId = a})
 
-instance GoogleRequest JobsGet' where
-        type Rs JobsGet' = Job
-        requestClient JobsGet'{..}
+instance GoogleRequest JobsGet where
+        type Rs JobsGet = Job
+        requestClient JobsGet{..}
           = go _jgProjectId _jgJobId (Just AltJSON)
               bigQueryService
           where go

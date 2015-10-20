@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Assets.Get
       AssetsGetResource
 
     -- * Creating a Request
-    , assetsGet'
-    , AssetsGet'
+    , assetsGet
+    , AssetsGet
 
     -- * Request Lenses
     , agId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.assets.get@ method which the
--- 'AssetsGet'' request conforms to.
+-- 'AssetsGet' request conforms to.
 type AssetsGetResource =
      "assets" :>
        Capture "id" Text :>
@@ -48,31 +48,31 @@ type AssetsGetResource =
 
 -- | Return metadata for a particular asset.
 --
--- /See:/ 'assetsGet'' smart constructor.
-newtype AssetsGet' = AssetsGet'
+-- /See:/ 'assetsGet' smart constructor.
+newtype AssetsGet = AssetsGet
     { _agId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AssetsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AssetsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'agId'
-assetsGet'
+assetsGet
     :: Text -- ^ 'agId'
-    -> AssetsGet'
-assetsGet' pAgId_ =
-    AssetsGet'
+    -> AssetsGet
+assetsGet pAgId_ =
+    AssetsGet
     { _agId = pAgId_
     }
 
 -- | The ID of the asset.
-agId :: Lens' AssetsGet' Text
+agId :: Lens' AssetsGet Text
 agId = lens _agId (\ s a -> s{_agId = a})
 
-instance GoogleRequest AssetsGet' where
-        type Rs AssetsGet' = Asset
-        requestClient AssetsGet'{..}
+instance GoogleRequest AssetsGet where
+        type Rs AssetsGet = Asset
+        requestClient AssetsGet{..}
           = go _agId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy AssetsGetResource)

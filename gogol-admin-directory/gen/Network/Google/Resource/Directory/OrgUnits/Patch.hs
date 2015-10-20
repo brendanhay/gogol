@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.OrgUnits.Patch
       OrgUnitsPatchResource
 
     -- * Creating a Request
-    , orgUnitsPatch'
-    , OrgUnitsPatch'
+    , orgUnitsPatch
+    , OrgUnitsPatch
 
     -- * Request Lenses
     , oupPayload
@@ -42,7 +42,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.orgunits.patch@ method which the
--- 'OrgUnitsPatch'' request conforms to.
+-- 'OrgUnitsPatch' request conforms to.
 type OrgUnitsPatchResource =
      "customer" :>
        Capture "customerId" Text :>
@@ -53,14 +53,14 @@ type OrgUnitsPatchResource =
 
 -- | Update Organization Unit. This method supports patch semantics.
 --
--- /See:/ 'orgUnitsPatch'' smart constructor.
-data OrgUnitsPatch' = OrgUnitsPatch'
+-- /See:/ 'orgUnitsPatch' smart constructor.
+data OrgUnitsPatch = OrgUnitsPatch
     { _oupPayload     :: !OrgUnit
     , _oupOrgUnitPath :: ![Text]
     , _oupCustomerId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrgUnitsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrgUnitsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,39 +69,39 @@ data OrgUnitsPatch' = OrgUnitsPatch'
 -- * 'oupOrgUnitPath'
 --
 -- * 'oupCustomerId'
-orgUnitsPatch'
+orgUnitsPatch
     :: OrgUnit -- ^ 'oupPayload'
     -> [Text] -- ^ 'oupOrgUnitPath'
     -> Text -- ^ 'oupCustomerId'
-    -> OrgUnitsPatch'
-orgUnitsPatch' pOupPayload_ pOupOrgUnitPath_ pOupCustomerId_ =
-    OrgUnitsPatch'
+    -> OrgUnitsPatch
+orgUnitsPatch pOupPayload_ pOupOrgUnitPath_ pOupCustomerId_ =
+    OrgUnitsPatch
     { _oupPayload = pOupPayload_
     , _oupOrgUnitPath = pOupOrgUnitPath_
     , _oupCustomerId = pOupCustomerId_
     }
 
 -- | Multipart request metadata.
-oupPayload :: Lens' OrgUnitsPatch' OrgUnit
+oupPayload :: Lens' OrgUnitsPatch OrgUnit
 oupPayload
   = lens _oupPayload (\ s a -> s{_oupPayload = a})
 
 -- | Full path of the organization unit or its Id
-oupOrgUnitPath :: Lens' OrgUnitsPatch' [Text]
+oupOrgUnitPath :: Lens' OrgUnitsPatch [Text]
 oupOrgUnitPath
   = lens _oupOrgUnitPath
       (\ s a -> s{_oupOrgUnitPath = a})
       . _Coerce
 
 -- | Immutable id of the Google Apps account
-oupCustomerId :: Lens' OrgUnitsPatch' Text
+oupCustomerId :: Lens' OrgUnitsPatch Text
 oupCustomerId
   = lens _oupCustomerId
       (\ s a -> s{_oupCustomerId = a})
 
-instance GoogleRequest OrgUnitsPatch' where
-        type Rs OrgUnitsPatch' = OrgUnit
-        requestClient OrgUnitsPatch'{..}
+instance GoogleRequest OrgUnitsPatch where
+        type Rs OrgUnitsPatch = OrgUnit
+        requestClient OrgUnitsPatch{..}
           = go _oupCustomerId _oupOrgUnitPath (Just AltJSON)
               _oupPayload
               directoryService

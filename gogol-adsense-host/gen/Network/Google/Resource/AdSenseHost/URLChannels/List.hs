@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSenseHost.URLChannels.List
       URLChannelsListResource
 
     -- * Creating a Request
-    , urlChannelsList'
-    , URLChannelsList'
+    , urlChannelsList
+    , URLChannelsList
 
     -- * Request Lenses
     , uclAdClientId
@@ -42,7 +42,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.urlchannels.list@ method which the
--- 'URLChannelsList'' request conforms to.
+-- 'URLChannelsList' request conforms to.
 type URLChannelsListResource =
      "adclients" :>
        Capture "adClientId" Text :>
@@ -53,14 +53,14 @@ type URLChannelsListResource =
 
 -- | List all host URL channels in the host AdSense account.
 --
--- /See:/ 'urlChannelsList'' smart constructor.
-data URLChannelsList' = URLChannelsList'
+-- /See:/ 'urlChannelsList' smart constructor.
+data URLChannelsList = URLChannelsList
     { _uclAdClientId :: !Text
     , _uclPageToken  :: !(Maybe Text)
     , _uclMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'URLChannelsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'URLChannelsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,18 +69,18 @@ data URLChannelsList' = URLChannelsList'
 -- * 'uclPageToken'
 --
 -- * 'uclMaxResults'
-urlChannelsList'
+urlChannelsList
     :: Text -- ^ 'uclAdClientId'
-    -> URLChannelsList'
-urlChannelsList' pUclAdClientId_ =
-    URLChannelsList'
+    -> URLChannelsList
+urlChannelsList pUclAdClientId_ =
+    URLChannelsList
     { _uclAdClientId = pUclAdClientId_
     , _uclPageToken = Nothing
     , _uclMaxResults = Nothing
     }
 
 -- | Ad client for which to list URL channels.
-uclAdClientId :: Lens' URLChannelsList' Text
+uclAdClientId :: Lens' URLChannelsList Text
 uclAdClientId
   = lens _uclAdClientId
       (\ s a -> s{_uclAdClientId = a})
@@ -88,20 +88,20 @@ uclAdClientId
 -- | A continuation token, used to page through URL channels. To retrieve the
 -- next page, set this parameter to the value of \"nextPageToken\" from the
 -- previous response.
-uclPageToken :: Lens' URLChannelsList' (Maybe Text)
+uclPageToken :: Lens' URLChannelsList (Maybe Text)
 uclPageToken
   = lens _uclPageToken (\ s a -> s{_uclPageToken = a})
 
 -- | The maximum number of URL channels to include in the response, used for
 -- paging.
-uclMaxResults :: Lens' URLChannelsList' (Maybe Word32)
+uclMaxResults :: Lens' URLChannelsList (Maybe Word32)
 uclMaxResults
   = lens _uclMaxResults
       (\ s a -> s{_uclMaxResults = a})
 
-instance GoogleRequest URLChannelsList' where
-        type Rs URLChannelsList' = URLChannels
-        requestClient URLChannelsList'{..}
+instance GoogleRequest URLChannelsList where
+        type Rs URLChannelsList = URLChannels
+        requestClient URLChannelsList{..}
           = go _uclAdClientId _uclPageToken _uclMaxResults
               (Just AltJSON)
               adSenseHostService

@@ -29,8 +29,8 @@ module Network.Google.Resource.ResourceViews.ZoneViews.Delete
       ZoneViewsDeleteResource
 
     -- * Creating a Request
-    , zoneViewsDelete'
-    , ZoneViewsDelete'
+    , zoneViewsDelete
+    , ZoneViewsDelete
 
     -- * Request Lenses
     , zvdResourceView
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
 -- | A resource alias for @resourceviews.zoneViews.delete@ method which the
--- 'ZoneViewsDelete'' request conforms to.
+-- 'ZoneViewsDelete' request conforms to.
 type ZoneViewsDeleteResource =
      Capture "project" Text :>
        "zones" :>
@@ -53,14 +53,14 @@ type ZoneViewsDeleteResource =
 
 -- | Delete a resource view.
 --
--- /See:/ 'zoneViewsDelete'' smart constructor.
-data ZoneViewsDelete' = ZoneViewsDelete'
+-- /See:/ 'zoneViewsDelete' smart constructor.
+data ZoneViewsDelete = ZoneViewsDelete
     { _zvdResourceView :: !Text
     , _zvdProject      :: !Text
     , _zvdZone         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ZoneViewsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ZoneViewsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,36 @@ data ZoneViewsDelete' = ZoneViewsDelete'
 -- * 'zvdProject'
 --
 -- * 'zvdZone'
-zoneViewsDelete'
+zoneViewsDelete
     :: Text -- ^ 'zvdResourceView'
     -> Text -- ^ 'zvdProject'
     -> Text -- ^ 'zvdZone'
-    -> ZoneViewsDelete'
-zoneViewsDelete' pZvdResourceView_ pZvdProject_ pZvdZone_ =
-    ZoneViewsDelete'
+    -> ZoneViewsDelete
+zoneViewsDelete pZvdResourceView_ pZvdProject_ pZvdZone_ =
+    ZoneViewsDelete
     { _zvdResourceView = pZvdResourceView_
     , _zvdProject = pZvdProject_
     , _zvdZone = pZvdZone_
     }
 
 -- | The name of the resource view.
-zvdResourceView :: Lens' ZoneViewsDelete' Text
+zvdResourceView :: Lens' ZoneViewsDelete Text
 zvdResourceView
   = lens _zvdResourceView
       (\ s a -> s{_zvdResourceView = a})
 
 -- | The project name of the resource view.
-zvdProject :: Lens' ZoneViewsDelete' Text
+zvdProject :: Lens' ZoneViewsDelete Text
 zvdProject
   = lens _zvdProject (\ s a -> s{_zvdProject = a})
 
 -- | The zone name of the resource view.
-zvdZone :: Lens' ZoneViewsDelete' Text
+zvdZone :: Lens' ZoneViewsDelete Text
 zvdZone = lens _zvdZone (\ s a -> s{_zvdZone = a})
 
-instance GoogleRequest ZoneViewsDelete' where
-        type Rs ZoneViewsDelete' = Operation
-        requestClient ZoneViewsDelete'{..}
+instance GoogleRequest ZoneViewsDelete where
+        type Rs ZoneViewsDelete = Operation
+        requestClient ZoneViewsDelete{..}
           = go _zvdProject _zvdZone _zvdResourceView
               (Just AltJSON)
               resourceViewsService

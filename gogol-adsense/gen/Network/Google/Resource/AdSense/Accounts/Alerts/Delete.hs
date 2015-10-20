@@ -30,8 +30,8 @@ module Network.Google.Resource.AdSense.Accounts.Alerts.Delete
       AccountsAlertsDeleteResource
 
     -- * Creating a Request
-    , accountsAlertsDelete'
-    , AccountsAlertsDelete'
+    , accountsAlertsDelete
+    , AccountsAlertsDelete
 
     -- * Request Lenses
     , aadAlertId
@@ -42,7 +42,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.alerts.delete@ method which the
--- 'AccountsAlertsDelete'' request conforms to.
+-- 'AccountsAlertsDelete' request conforms to.
 type AccountsAlertsDeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -53,42 +53,42 @@ type AccountsAlertsDeleteResource =
 -- | Dismiss (delete) the specified alert from the specified publisher
 -- AdSense account.
 --
--- /See:/ 'accountsAlertsDelete'' smart constructor.
-data AccountsAlertsDelete' = AccountsAlertsDelete'
+-- /See:/ 'accountsAlertsDelete' smart constructor.
+data AccountsAlertsDelete = AccountsAlertsDelete
     { _aadAlertId   :: !Text
     , _aadAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsAlertsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsAlertsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aadAlertId'
 --
 -- * 'aadAccountId'
-accountsAlertsDelete'
+accountsAlertsDelete
     :: Text -- ^ 'aadAlertId'
     -> Text -- ^ 'aadAccountId'
-    -> AccountsAlertsDelete'
-accountsAlertsDelete' pAadAlertId_ pAadAccountId_ =
-    AccountsAlertsDelete'
+    -> AccountsAlertsDelete
+accountsAlertsDelete pAadAlertId_ pAadAccountId_ =
+    AccountsAlertsDelete
     { _aadAlertId = pAadAlertId_
     , _aadAccountId = pAadAccountId_
     }
 
 -- | Alert to delete.
-aadAlertId :: Lens' AccountsAlertsDelete' Text
+aadAlertId :: Lens' AccountsAlertsDelete Text
 aadAlertId
   = lens _aadAlertId (\ s a -> s{_aadAlertId = a})
 
 -- | Account which contains the ad unit.
-aadAccountId :: Lens' AccountsAlertsDelete' Text
+aadAccountId :: Lens' AccountsAlertsDelete Text
 aadAccountId
   = lens _aadAccountId (\ s a -> s{_aadAccountId = a})
 
-instance GoogleRequest AccountsAlertsDelete' where
-        type Rs AccountsAlertsDelete' = ()
-        requestClient AccountsAlertsDelete'{..}
+instance GoogleRequest AccountsAlertsDelete where
+        type Rs AccountsAlertsDelete = ()
+        requestClient AccountsAlertsDelete{..}
           = go _aadAccountId _aadAlertId (Just AltJSON)
               adSenseService
           where go

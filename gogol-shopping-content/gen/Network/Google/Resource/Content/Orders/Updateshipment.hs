@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Orders.Updateshipment
       OrdersUpdateshipmentResource
 
     -- * Creating a Request
-    , ordersUpdateshipment'
-    , OrdersUpdateshipment'
+    , ordersUpdateshipment
+    , OrdersUpdateshipment
 
     -- * Request Lenses
     , ouMerchantId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.updateshipment@ method which the
--- 'OrdersUpdateshipment'' request conforms to.
+-- 'OrdersUpdateshipment' request conforms to.
 type OrdersUpdateshipmentResource =
      Capture "merchantId" Word64 :>
        "orders" :>
@@ -54,14 +54,14 @@ type OrdersUpdateshipmentResource =
 
 -- | Updates a shipment\'s status, carrier, and\/or tracking ID.
 --
--- /See:/ 'ordersUpdateshipment'' smart constructor.
-data OrdersUpdateshipment' = OrdersUpdateshipment'
+-- /See:/ 'ordersUpdateshipment' smart constructor.
+data OrdersUpdateshipment = OrdersUpdateshipment
     { _ouMerchantId :: !Word64
     , _ouPayload    :: !OrdersUpdateShipmentRequest
     , _ouOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersUpdateshipment'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersUpdateshipment' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,37 +70,37 @@ data OrdersUpdateshipment' = OrdersUpdateshipment'
 -- * 'ouPayload'
 --
 -- * 'ouOrderId'
-ordersUpdateshipment'
+ordersUpdateshipment
     :: Word64 -- ^ 'ouMerchantId'
     -> OrdersUpdateShipmentRequest -- ^ 'ouPayload'
     -> Text -- ^ 'ouOrderId'
-    -> OrdersUpdateshipment'
-ordersUpdateshipment' pOuMerchantId_ pOuPayload_ pOuOrderId_ =
-    OrdersUpdateshipment'
+    -> OrdersUpdateshipment
+ordersUpdateshipment pOuMerchantId_ pOuPayload_ pOuOrderId_ =
+    OrdersUpdateshipment
     { _ouMerchantId = pOuMerchantId_
     , _ouPayload = pOuPayload_
     , _ouOrderId = pOuOrderId_
     }
 
 -- | The ID of the managing account.
-ouMerchantId :: Lens' OrdersUpdateshipment' Word64
+ouMerchantId :: Lens' OrdersUpdateshipment Word64
 ouMerchantId
   = lens _ouMerchantId (\ s a -> s{_ouMerchantId = a})
 
 -- | Multipart request metadata.
-ouPayload :: Lens' OrdersUpdateshipment' OrdersUpdateShipmentRequest
+ouPayload :: Lens' OrdersUpdateshipment OrdersUpdateShipmentRequest
 ouPayload
   = lens _ouPayload (\ s a -> s{_ouPayload = a})
 
 -- | The ID of the order.
-ouOrderId :: Lens' OrdersUpdateshipment' Text
+ouOrderId :: Lens' OrdersUpdateshipment Text
 ouOrderId
   = lens _ouOrderId (\ s a -> s{_ouOrderId = a})
 
-instance GoogleRequest OrdersUpdateshipment' where
-        type Rs OrdersUpdateshipment' =
+instance GoogleRequest OrdersUpdateshipment where
+        type Rs OrdersUpdateshipment =
              OrdersUpdateShipmentResponse
-        requestClient OrdersUpdateshipment'{..}
+        requestClient OrdersUpdateshipment{..}
           = go _ouMerchantId _ouOrderId (Just AltJSON)
               _ouPayload
               shoppingContentService

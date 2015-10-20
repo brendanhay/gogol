@@ -29,8 +29,8 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Get
       ProjectsJobsGetResource
 
     -- * Creating a Request
-    , projectsJobsGet'
-    , ProjectsJobsGet'
+    , projectsJobsGet
+    , ProjectsJobsGet
 
     -- * Request Lenses
     , pjgXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.jobs.get@ method which the
--- 'ProjectsJobsGet'' request conforms to.
+-- 'ProjectsJobsGet' request conforms to.
 type ProjectsJobsGetResource =
      "v1b3" :>
        "projects" :>
@@ -68,8 +68,8 @@ type ProjectsJobsGetResource =
 
 -- | Gets the state of the specified dataflow job.
 --
--- /See:/ 'projectsJobsGet'' smart constructor.
-data ProjectsJobsGet' = ProjectsJobsGet'
+-- /See:/ 'projectsJobsGet' smart constructor.
+data ProjectsJobsGet = ProjectsJobsGet
     { _pjgXgafv          :: !(Maybe Text)
     , _pjgJobId          :: !Text
     , _pjgUploadProtocol :: !(Maybe Text)
@@ -82,7 +82,7 @@ data ProjectsJobsGet' = ProjectsJobsGet'
     , _pjgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsJobsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsJobsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -105,12 +105,12 @@ data ProjectsJobsGet' = ProjectsJobsGet'
 -- * 'pjgProjectId'
 --
 -- * 'pjgCallback'
-projectsJobsGet'
+projectsJobsGet
     :: Text -- ^ 'pjgJobId'
     -> Text -- ^ 'pjgProjectId'
-    -> ProjectsJobsGet'
-projectsJobsGet' pPjgJobId_ pPjgProjectId_ =
-    ProjectsJobsGet'
+    -> ProjectsJobsGet
+projectsJobsGet pPjgJobId_ pPjgProjectId_ =
+    ProjectsJobsGet
     { _pjgXgafv = Nothing
     , _pjgJobId = pPjgJobId_
     , _pjgUploadProtocol = Nothing
@@ -124,58 +124,58 @@ projectsJobsGet' pPjgJobId_ pPjgProjectId_ =
     }
 
 -- | V1 error format.
-pjgXgafv :: Lens' ProjectsJobsGet' (Maybe Text)
+pjgXgafv :: Lens' ProjectsJobsGet (Maybe Text)
 pjgXgafv = lens _pjgXgafv (\ s a -> s{_pjgXgafv = a})
 
 -- | Identifies a single job.
-pjgJobId :: Lens' ProjectsJobsGet' Text
+pjgJobId :: Lens' ProjectsJobsGet Text
 pjgJobId = lens _pjgJobId (\ s a -> s{_pjgJobId = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pjgUploadProtocol :: Lens' ProjectsJobsGet' (Maybe Text)
+pjgUploadProtocol :: Lens' ProjectsJobsGet (Maybe Text)
 pjgUploadProtocol
   = lens _pjgUploadProtocol
       (\ s a -> s{_pjgUploadProtocol = a})
 
 -- | Pretty-print response.
-pjgPp :: Lens' ProjectsJobsGet' Bool
+pjgPp :: Lens' ProjectsJobsGet Bool
 pjgPp = lens _pjgPp (\ s a -> s{_pjgPp = a})
 
 -- | OAuth access token.
-pjgAccessToken :: Lens' ProjectsJobsGet' (Maybe Text)
+pjgAccessToken :: Lens' ProjectsJobsGet (Maybe Text)
 pjgAccessToken
   = lens _pjgAccessToken
       (\ s a -> s{_pjgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pjgUploadType :: Lens' ProjectsJobsGet' (Maybe Text)
+pjgUploadType :: Lens' ProjectsJobsGet (Maybe Text)
 pjgUploadType
   = lens _pjgUploadType
       (\ s a -> s{_pjgUploadType = a})
 
 -- | OAuth bearer token.
-pjgBearerToken :: Lens' ProjectsJobsGet' (Maybe Text)
+pjgBearerToken :: Lens' ProjectsJobsGet (Maybe Text)
 pjgBearerToken
   = lens _pjgBearerToken
       (\ s a -> s{_pjgBearerToken = a})
 
 -- | Level of information requested in response.
-pjgView :: Lens' ProjectsJobsGet' (Maybe Text)
+pjgView :: Lens' ProjectsJobsGet (Maybe Text)
 pjgView = lens _pjgView (\ s a -> s{_pjgView = a})
 
 -- | The project which owns the job.
-pjgProjectId :: Lens' ProjectsJobsGet' Text
+pjgProjectId :: Lens' ProjectsJobsGet Text
 pjgProjectId
   = lens _pjgProjectId (\ s a -> s{_pjgProjectId = a})
 
 -- | JSONP
-pjgCallback :: Lens' ProjectsJobsGet' (Maybe Text)
+pjgCallback :: Lens' ProjectsJobsGet (Maybe Text)
 pjgCallback
   = lens _pjgCallback (\ s a -> s{_pjgCallback = a})
 
-instance GoogleRequest ProjectsJobsGet' where
-        type Rs ProjectsJobsGet' = Job
-        requestClient ProjectsJobsGet'{..}
+instance GoogleRequest ProjectsJobsGet where
+        type Rs ProjectsJobsGet = Job
+        requestClient ProjectsJobsGet{..}
           = go _pjgProjectId _pjgJobId _pjgXgafv
               _pjgUploadProtocol
               (Just _pjgPp)

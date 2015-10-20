@@ -29,19 +29,19 @@ module Network.Google.Resource.Drive.Parents.Get
       ParentsGetResource
 
     -- * Creating a Request
-    , parentsGet'
-    , ParentsGet'
+    , parentsGet
+    , ParentsGet
 
     -- * Request Lenses
-    , paraFileId
-    , paraParentId
+    , pg1FileId
+    , pg1ParentId
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.parents.get@ method which the
--- 'ParentsGet'' request conforms to.
+-- 'ParentsGet' request conforms to.
 type ParentsGetResource =
      "files" :>
        Capture "fileId" Text :>
@@ -52,43 +52,43 @@ type ParentsGetResource =
 
 -- | Gets a specific parent reference.
 --
--- /See:/ 'parentsGet'' smart constructor.
-data ParentsGet' = ParentsGet'
-    { _paraFileId   :: !Text
-    , _paraParentId :: !Text
+-- /See:/ 'parentsGet' smart constructor.
+data ParentsGet = ParentsGet
+    { _pg1FileId   :: !Text
+    , _pg1ParentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ParentsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ParentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'paraFileId'
+-- * 'pg1FileId'
 --
--- * 'paraParentId'
-parentsGet'
-    :: Text -- ^ 'paraFileId'
-    -> Text -- ^ 'paraParentId'
-    -> ParentsGet'
-parentsGet' pParaFileId_ pParaParentId_ =
-    ParentsGet'
-    { _paraFileId = pParaFileId_
-    , _paraParentId = pParaParentId_
+-- * 'pg1ParentId'
+parentsGet
+    :: Text -- ^ 'pg1FileId'
+    -> Text -- ^ 'pg1ParentId'
+    -> ParentsGet
+parentsGet pPg1FileId_ pPg1ParentId_ =
+    ParentsGet
+    { _pg1FileId = pPg1FileId_
+    , _pg1ParentId = pPg1ParentId_
     }
 
 -- | The ID of the file.
-paraFileId :: Lens' ParentsGet' Text
-paraFileId
-  = lens _paraFileId (\ s a -> s{_paraFileId = a})
+pg1FileId :: Lens' ParentsGet Text
+pg1FileId
+  = lens _pg1FileId (\ s a -> s{_pg1FileId = a})
 
 -- | The ID of the parent.
-paraParentId :: Lens' ParentsGet' Text
-paraParentId
-  = lens _paraParentId (\ s a -> s{_paraParentId = a})
+pg1ParentId :: Lens' ParentsGet Text
+pg1ParentId
+  = lens _pg1ParentId (\ s a -> s{_pg1ParentId = a})
 
-instance GoogleRequest ParentsGet' where
-        type Rs ParentsGet' = ParentReference
-        requestClient ParentsGet'{..}
-          = go _paraFileId _paraParentId (Just AltJSON)
+instance GoogleRequest ParentsGet where
+        type Rs ParentsGet = ParentReference
+        requestClient ParentsGet{..}
+          = go _pg1FileId _pg1ParentId (Just AltJSON)
               driveService
           where go
                   = buildClient (Proxy :: Proxy ParentsGetResource)

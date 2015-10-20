@@ -29,20 +29,20 @@ module Network.Google.Resource.MapsEngine.Assets.Parents.List
       AssetsParentsListResource
 
     -- * Creating a Request
-    , assetsParentsList'
-    , AssetsParentsList'
+    , assetsParentsList
+    , AssetsParentsList
 
     -- * Request Lenses
-    , assId
-    , assPageToken
-    , assMaxResults
+    , aplId
+    , aplPageToken
+    , aplMaxResults
     ) where
 
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.assets.parents.list@ method which the
--- 'AssetsParentsList'' request conforms to.
+-- 'AssetsParentsList' request conforms to.
 type AssetsParentsListResource =
      "assets" :>
        Capture "id" Text :>
@@ -54,54 +54,54 @@ type AssetsParentsListResource =
 
 -- | Return all parent ids of the specified asset.
 --
--- /See:/ 'assetsParentsList'' smart constructor.
-data AssetsParentsList' = AssetsParentsList'
-    { _assId         :: !Text
-    , _assPageToken  :: !(Maybe Text)
-    , _assMaxResults :: !(Maybe Word32)
+-- /See:/ 'assetsParentsList' smart constructor.
+data AssetsParentsList = AssetsParentsList
+    { _aplId         :: !Text
+    , _aplPageToken  :: !(Maybe Text)
+    , _aplMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AssetsParentsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AssetsParentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'assId'
+-- * 'aplId'
 --
--- * 'assPageToken'
+-- * 'aplPageToken'
 --
--- * 'assMaxResults'
-assetsParentsList'
-    :: Text -- ^ 'assId'
-    -> AssetsParentsList'
-assetsParentsList' pAssId_ =
-    AssetsParentsList'
-    { _assId = pAssId_
-    , _assPageToken = Nothing
-    , _assMaxResults = Nothing
+-- * 'aplMaxResults'
+assetsParentsList
+    :: Text -- ^ 'aplId'
+    -> AssetsParentsList
+assetsParentsList pAplId_ =
+    AssetsParentsList
+    { _aplId = pAplId_
+    , _aplPageToken = Nothing
+    , _aplMaxResults = Nothing
     }
 
 -- | The ID of the asset whose parents will be listed.
-assId :: Lens' AssetsParentsList' Text
-assId = lens _assId (\ s a -> s{_assId = a})
+aplId :: Lens' AssetsParentsList Text
+aplId = lens _aplId (\ s a -> s{_aplId = a})
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
 -- nextPageToken from the previous response.
-assPageToken :: Lens' AssetsParentsList' (Maybe Text)
-assPageToken
-  = lens _assPageToken (\ s a -> s{_assPageToken = a})
+aplPageToken :: Lens' AssetsParentsList (Maybe Text)
+aplPageToken
+  = lens _aplPageToken (\ s a -> s{_aplPageToken = a})
 
 -- | The maximum number of items to include in a single response page. The
 -- maximum supported value is 50.
-assMaxResults :: Lens' AssetsParentsList' (Maybe Word32)
-assMaxResults
-  = lens _assMaxResults
-      (\ s a -> s{_assMaxResults = a})
+aplMaxResults :: Lens' AssetsParentsList (Maybe Word32)
+aplMaxResults
+  = lens _aplMaxResults
+      (\ s a -> s{_aplMaxResults = a})
 
-instance GoogleRequest AssetsParentsList' where
-        type Rs AssetsParentsList' = ParentsListResponse
-        requestClient AssetsParentsList'{..}
-          = go _assId _assPageToken _assMaxResults
+instance GoogleRequest AssetsParentsList where
+        type Rs AssetsParentsList = ParentsListResponse
+        requestClient AssetsParentsList{..}
+          = go _aplId _aplPageToken _aplMaxResults
               (Just AltJSON)
               mapsEngineService
           where go

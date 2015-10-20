@@ -30,8 +30,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.SetIAMPolicy
       ProjectsTopicsSetIAMPolicyResource
 
     -- * Creating a Request
-    , projectsTopicsSetIAMPolicy'
-    , ProjectsTopicsSetIAMPolicy'
+    , projectsTopicsSetIAMPolicy
+    , ProjectsTopicsSetIAMPolicy
 
     -- * Request Lenses
     , ptsipXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.setIamPolicy@ method which the
--- 'ProjectsTopicsSetIAMPolicy'' request conforms to.
+-- 'ProjectsTopicsSetIAMPolicy' request conforms to.
 type ProjectsTopicsSetIAMPolicyResource =
      "v1" :>
        CaptureMode "resource" "setIamPolicy" Text :>
@@ -67,8 +67,8 @@ type ProjectsTopicsSetIAMPolicyResource =
 -- | Sets the access control policy on the specified resource. Replaces any
 -- existing policy.
 --
--- /See:/ 'projectsTopicsSetIAMPolicy'' smart constructor.
-data ProjectsTopicsSetIAMPolicy' = ProjectsTopicsSetIAMPolicy'
+-- /See:/ 'projectsTopicsSetIAMPolicy' smart constructor.
+data ProjectsTopicsSetIAMPolicy = ProjectsTopicsSetIAMPolicy
     { _ptsipXgafv          :: !(Maybe Text)
     , _ptsipUploadProtocol :: !(Maybe Text)
     , _ptsipPp             :: !Bool
@@ -80,7 +80,7 @@ data ProjectsTopicsSetIAMPolicy' = ProjectsTopicsSetIAMPolicy'
     , _ptsipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsTopicsSetIAMPolicy'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsTopicsSetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -101,12 +101,12 @@ data ProjectsTopicsSetIAMPolicy' = ProjectsTopicsSetIAMPolicy'
 -- * 'ptsipResource'
 --
 -- * 'ptsipCallback'
-projectsTopicsSetIAMPolicy'
+projectsTopicsSetIAMPolicy
     :: SetIAMPolicyRequest -- ^ 'ptsipPayload'
     -> Text -- ^ 'ptsipResource'
-    -> ProjectsTopicsSetIAMPolicy'
-projectsTopicsSetIAMPolicy' pPtsipPayload_ pPtsipResource_ =
-    ProjectsTopicsSetIAMPolicy'
+    -> ProjectsTopicsSetIAMPolicy
+projectsTopicsSetIAMPolicy pPtsipPayload_ pPtsipResource_ =
+    ProjectsTopicsSetIAMPolicy
     { _ptsipXgafv = Nothing
     , _ptsipUploadProtocol = Nothing
     , _ptsipPp = True
@@ -119,39 +119,39 @@ projectsTopicsSetIAMPolicy' pPtsipPayload_ pPtsipResource_ =
     }
 
 -- | V1 error format.
-ptsipXgafv :: Lens' ProjectsTopicsSetIAMPolicy' (Maybe Text)
+ptsipXgafv :: Lens' ProjectsTopicsSetIAMPolicy (Maybe Text)
 ptsipXgafv
   = lens _ptsipXgafv (\ s a -> s{_ptsipXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ptsipUploadProtocol :: Lens' ProjectsTopicsSetIAMPolicy' (Maybe Text)
+ptsipUploadProtocol :: Lens' ProjectsTopicsSetIAMPolicy (Maybe Text)
 ptsipUploadProtocol
   = lens _ptsipUploadProtocol
       (\ s a -> s{_ptsipUploadProtocol = a})
 
 -- | Pretty-print response.
-ptsipPp :: Lens' ProjectsTopicsSetIAMPolicy' Bool
+ptsipPp :: Lens' ProjectsTopicsSetIAMPolicy Bool
 ptsipPp = lens _ptsipPp (\ s a -> s{_ptsipPp = a})
 
 -- | OAuth access token.
-ptsipAccessToken :: Lens' ProjectsTopicsSetIAMPolicy' (Maybe Text)
+ptsipAccessToken :: Lens' ProjectsTopicsSetIAMPolicy (Maybe Text)
 ptsipAccessToken
   = lens _ptsipAccessToken
       (\ s a -> s{_ptsipAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ptsipUploadType :: Lens' ProjectsTopicsSetIAMPolicy' (Maybe Text)
+ptsipUploadType :: Lens' ProjectsTopicsSetIAMPolicy (Maybe Text)
 ptsipUploadType
   = lens _ptsipUploadType
       (\ s a -> s{_ptsipUploadType = a})
 
 -- | Multipart request metadata.
-ptsipPayload :: Lens' ProjectsTopicsSetIAMPolicy' SetIAMPolicyRequest
+ptsipPayload :: Lens' ProjectsTopicsSetIAMPolicy SetIAMPolicyRequest
 ptsipPayload
   = lens _ptsipPayload (\ s a -> s{_ptsipPayload = a})
 
 -- | OAuth bearer token.
-ptsipBearerToken :: Lens' ProjectsTopicsSetIAMPolicy' (Maybe Text)
+ptsipBearerToken :: Lens' ProjectsTopicsSetIAMPolicy (Maybe Text)
 ptsipBearerToken
   = lens _ptsipBearerToken
       (\ s a -> s{_ptsipBearerToken = a})
@@ -159,21 +159,21 @@ ptsipBearerToken
 -- | REQUIRED: The resource for which policy is being specified. \`resource\`
 -- is usually specified as a path, such as,
 -- \`projects\/{project}\/zones\/{zone}\/disks\/{disk}\`.
-ptsipResource :: Lens' ProjectsTopicsSetIAMPolicy' Text
+ptsipResource :: Lens' ProjectsTopicsSetIAMPolicy Text
 ptsipResource
   = lens _ptsipResource
       (\ s a -> s{_ptsipResource = a})
 
 -- | JSONP
-ptsipCallback :: Lens' ProjectsTopicsSetIAMPolicy' (Maybe Text)
+ptsipCallback :: Lens' ProjectsTopicsSetIAMPolicy (Maybe Text)
 ptsipCallback
   = lens _ptsipCallback
       (\ s a -> s{_ptsipCallback = a})
 
-instance GoogleRequest ProjectsTopicsSetIAMPolicy'
+instance GoogleRequest ProjectsTopicsSetIAMPolicy
          where
-        type Rs ProjectsTopicsSetIAMPolicy' = Policy
-        requestClient ProjectsTopicsSetIAMPolicy'{..}
+        type Rs ProjectsTopicsSetIAMPolicy = Policy
+        requestClient ProjectsTopicsSetIAMPolicy{..}
           = go _ptsipResource _ptsipXgafv _ptsipUploadProtocol
               (Just _ptsipPp)
               _ptsipAccessToken

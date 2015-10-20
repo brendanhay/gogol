@@ -30,8 +30,8 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Pause
       RollingUpdatesPauseResource
 
     -- * Creating a Request
-    , rollingUpdatesPause'
-    , RollingUpdatesPause'
+    , rollingUpdatesPause
+    , RollingUpdatesPause
 
     -- * Request Lenses
     , rupRollingUpdate
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.rollingUpdates.pause@ method which the
--- 'RollingUpdatesPause'' request conforms to.
+-- 'RollingUpdatesPause' request conforms to.
 type RollingUpdatesPauseResource =
      Capture "project" Text :>
        "zones" :>
@@ -56,14 +56,14 @@ type RollingUpdatesPauseResource =
 -- | Pauses the update in state from ROLLING_FORWARD or ROLLING_BACK. Has no
 -- effect if invoked when the state of the update is PAUSED.
 --
--- /See:/ 'rollingUpdatesPause'' smart constructor.
-data RollingUpdatesPause' = RollingUpdatesPause'
+-- /See:/ 'rollingUpdatesPause' smart constructor.
+data RollingUpdatesPause = RollingUpdatesPause
     { _rupRollingUpdate :: !Text
     , _rupProject       :: !Text
     , _rupZone          :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RollingUpdatesPause'' with the minimum fields required to make a request.
+-- | Creates a value of 'RollingUpdatesPause' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,36 +72,36 @@ data RollingUpdatesPause' = RollingUpdatesPause'
 -- * 'rupProject'
 --
 -- * 'rupZone'
-rollingUpdatesPause'
+rollingUpdatesPause
     :: Text -- ^ 'rupRollingUpdate'
     -> Text -- ^ 'rupProject'
     -> Text -- ^ 'rupZone'
-    -> RollingUpdatesPause'
-rollingUpdatesPause' pRupRollingUpdate_ pRupProject_ pRupZone_ =
-    RollingUpdatesPause'
+    -> RollingUpdatesPause
+rollingUpdatesPause pRupRollingUpdate_ pRupProject_ pRupZone_ =
+    RollingUpdatesPause
     { _rupRollingUpdate = pRupRollingUpdate_
     , _rupProject = pRupProject_
     , _rupZone = pRupZone_
     }
 
 -- | The name of the update.
-rupRollingUpdate :: Lens' RollingUpdatesPause' Text
+rupRollingUpdate :: Lens' RollingUpdatesPause Text
 rupRollingUpdate
   = lens _rupRollingUpdate
       (\ s a -> s{_rupRollingUpdate = a})
 
 -- | The Google Developers Console project name.
-rupProject :: Lens' RollingUpdatesPause' Text
+rupProject :: Lens' RollingUpdatesPause Text
 rupProject
   = lens _rupProject (\ s a -> s{_rupProject = a})
 
 -- | The name of the zone in which the update\'s target resides.
-rupZone :: Lens' RollingUpdatesPause' Text
+rupZone :: Lens' RollingUpdatesPause Text
 rupZone = lens _rupZone (\ s a -> s{_rupZone = a})
 
-instance GoogleRequest RollingUpdatesPause' where
-        type Rs RollingUpdatesPause' = Operation
-        requestClient RollingUpdatesPause'{..}
+instance GoogleRequest RollingUpdatesPause where
+        type Rs RollingUpdatesPause = Operation
+        requestClient RollingUpdatesPause{..}
           = go _rupProject _rupZone _rupRollingUpdate
               (Just AltJSON)
               replicaPoolUpdaterService

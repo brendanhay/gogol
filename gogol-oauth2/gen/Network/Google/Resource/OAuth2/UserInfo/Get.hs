@@ -27,8 +27,8 @@ module Network.Google.Resource.OAuth2.UserInfo.Get
       UserInfoGetResource
 
     -- * Creating a Request
-    , userInfoGet'
-    , UserInfoGet'
+    , userInfoGet
+    , UserInfoGet
 
     ) where
 
@@ -36,7 +36,7 @@ import           Network.Google.OAuth2.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @oauth2.userinfo.get@ method which the
--- 'UserInfoGet'' request conforms to.
+-- 'UserInfoGet' request conforms to.
 type UserInfoGetResource =
      "oauth2" :>
        "v2" :>
@@ -44,20 +44,20 @@ type UserInfoGetResource =
            QueryParam "alt" AltJSON :> Get '[JSON] UserInfoplus
 
 --
--- /See:/ 'userInfoGet'' smart constructor.
-data UserInfoGet' =
-    UserInfoGet'
+-- /See:/ 'userInfoGet' smart constructor.
+data UserInfoGet =
+    UserInfoGet
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserInfoGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UserInfoGet' with the minimum fields required to make a request.
 --
-userInfoGet'
-    :: UserInfoGet'
-userInfoGet' = UserInfoGet'
+userInfoGet
+    :: UserInfoGet
+userInfoGet = UserInfoGet
 
-instance GoogleRequest UserInfoGet' where
-        type Rs UserInfoGet' = UserInfoplus
-        requestClient UserInfoGet'{}
+instance GoogleRequest UserInfoGet where
+        type Rs UserInfoGet = UserInfoplus
+        requestClient UserInfoGet{}
           = go (Just AltJSON) oAuth2Service
           where go
                   = buildClient (Proxy :: Proxy UserInfoGetResource)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Datastore.Datasets.Lookup
       DatasetsLookupResource
 
     -- * Creating a Request
-    , datasetsLookup'
-    , DatasetsLookup'
+    , datasetsLookup
+    , DatasetsLookup
 
     -- * Request Lenses
     , dlPayload
@@ -41,7 +41,7 @@ import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @datastore.datasets.lookup@ method which the
--- 'DatasetsLookup'' request conforms to.
+-- 'DatasetsLookup' request conforms to.
 type DatasetsLookupResource =
      Capture "datasetId" Text :>
        "lookup" :>
@@ -51,42 +51,42 @@ type DatasetsLookupResource =
 
 -- | Look up some entities by key.
 --
--- /See:/ 'datasetsLookup'' smart constructor.
-data DatasetsLookup' = DatasetsLookup'
+-- /See:/ 'datasetsLookup' smart constructor.
+data DatasetsLookup = DatasetsLookup
     { _dlPayload   :: !LookupRequest
     , _dlDatasetId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsLookup'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsLookup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dlPayload'
 --
 -- * 'dlDatasetId'
-datasetsLookup'
+datasetsLookup
     :: LookupRequest -- ^ 'dlPayload'
     -> Text -- ^ 'dlDatasetId'
-    -> DatasetsLookup'
-datasetsLookup' pDlPayload_ pDlDatasetId_ =
-    DatasetsLookup'
+    -> DatasetsLookup
+datasetsLookup pDlPayload_ pDlDatasetId_ =
+    DatasetsLookup
     { _dlPayload = pDlPayload_
     , _dlDatasetId = pDlDatasetId_
     }
 
 -- | Multipart request metadata.
-dlPayload :: Lens' DatasetsLookup' LookupRequest
+dlPayload :: Lens' DatasetsLookup LookupRequest
 dlPayload
   = lens _dlPayload (\ s a -> s{_dlPayload = a})
 
 -- | Identifies the dataset.
-dlDatasetId :: Lens' DatasetsLookup' Text
+dlDatasetId :: Lens' DatasetsLookup Text
 dlDatasetId
   = lens _dlDatasetId (\ s a -> s{_dlDatasetId = a})
 
-instance GoogleRequest DatasetsLookup' where
-        type Rs DatasetsLookup' = LookupResponse
-        requestClient DatasetsLookup'{..}
+instance GoogleRequest DatasetsLookup where
+        type Rs DatasetsLookup = LookupResponse
+        requestClient DatasetsLookup{..}
           = go _dlDatasetId (Just AltJSON) _dlPayload
               datastoreService
           where go

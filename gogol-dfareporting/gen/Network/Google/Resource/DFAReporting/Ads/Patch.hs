@@ -29,20 +29,20 @@ module Network.Google.Resource.DFAReporting.Ads.Patch
       AdsPatchResource
 
     -- * Creating a Request
-    , adsPatch'
-    , AdsPatch'
+    , adsPatch
+    , AdsPatch
 
     -- * Request Lenses
-    , appProFileId
-    , appPayload
-    , appId
+    , adsdProFileId
+    , adsdPayload
+    , adsdId
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.ads.patch@ method which the
--- 'AdsPatch'' request conforms to.
+-- 'AdsPatch' request conforms to.
 type AdsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -53,53 +53,54 @@ type AdsPatchResource =
 
 -- | Updates an existing ad. This method supports patch semantics.
 --
--- /See:/ 'adsPatch'' smart constructor.
-data AdsPatch' = AdsPatch'
-    { _appProFileId :: !Int64
-    , _appPayload   :: !Ad
-    , _appId        :: !Int64
+-- /See:/ 'adsPatch' smart constructor.
+data AdsPatch = AdsPatch
+    { _adsdProFileId :: !Int64
+    , _adsdPayload   :: !Ad
+    , _adsdId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'appProFileId'
+-- * 'adsdProFileId'
 --
--- * 'appPayload'
+-- * 'adsdPayload'
 --
--- * 'appId'
-adsPatch'
-    :: Int64 -- ^ 'appProFileId'
-    -> Ad -- ^ 'appPayload'
-    -> Int64 -- ^ 'appId'
-    -> AdsPatch'
-adsPatch' pAppProFileId_ pAppPayload_ pAppId_ =
-    AdsPatch'
-    { _appProFileId = pAppProFileId_
-    , _appPayload = pAppPayload_
-    , _appId = pAppId_
+-- * 'adsdId'
+adsPatch
+    :: Int64 -- ^ 'adsdProFileId'
+    -> Ad -- ^ 'adsdPayload'
+    -> Int64 -- ^ 'adsdId'
+    -> AdsPatch
+adsPatch pAdsdProFileId_ pAdsdPayload_ pAdsdId_ =
+    AdsPatch
+    { _adsdProFileId = pAdsdProFileId_
+    , _adsdPayload = pAdsdPayload_
+    , _adsdId = pAdsdId_
     }
 
 -- | User profile ID associated with this request.
-appProFileId :: Lens' AdsPatch' Int64
-appProFileId
-  = lens _appProFileId (\ s a -> s{_appProFileId = a})
+adsdProFileId :: Lens' AdsPatch Int64
+adsdProFileId
+  = lens _adsdProFileId
+      (\ s a -> s{_adsdProFileId = a})
 
 -- | Multipart request metadata.
-appPayload :: Lens' AdsPatch' Ad
-appPayload
-  = lens _appPayload (\ s a -> s{_appPayload = a})
+adsdPayload :: Lens' AdsPatch Ad
+adsdPayload
+  = lens _adsdPayload (\ s a -> s{_adsdPayload = a})
 
 -- | Ad ID.
-appId :: Lens' AdsPatch' Int64
-appId = lens _appId (\ s a -> s{_appId = a})
+adsdId :: Lens' AdsPatch Int64
+adsdId = lens _adsdId (\ s a -> s{_adsdId = a})
 
-instance GoogleRequest AdsPatch' where
-        type Rs AdsPatch' = Ad
-        requestClient AdsPatch'{..}
-          = go _appProFileId (Just _appId) (Just AltJSON)
-              _appPayload
+instance GoogleRequest AdsPatch where
+        type Rs AdsPatch = Ad
+        requestClient AdsPatch{..}
+          = go _adsdProFileId (Just _adsdId) (Just AltJSON)
+              _adsdPayload
               dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy AdsPatchResource)

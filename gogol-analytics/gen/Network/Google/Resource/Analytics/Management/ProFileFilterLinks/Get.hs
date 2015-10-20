@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.Get
       ManagementProFileFilterLinksGetResource
 
     -- * Creating a Request
-    , managementProFileFilterLinksGet'
-    , ManagementProFileFilterLinksGet'
+    , managementProFileFilterLinksGet
+    , ManagementProFileFilterLinksGet
 
     -- * Request Lenses
     , mpfflgWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profileFilterLinks.get@ method which the
--- 'ManagementProFileFilterLinksGet'' request conforms to.
+-- 'ManagementProFileFilterLinksGet' request conforms to.
 type ManagementProFileFilterLinksGetResource =
      "management" :>
        "accounts" :>
@@ -59,15 +59,15 @@ type ManagementProFileFilterLinksGetResource =
 
 -- | Returns a single profile filter link.
 --
--- /See:/ 'managementProFileFilterLinksGet'' smart constructor.
-data ManagementProFileFilterLinksGet' = ManagementProFileFilterLinksGet'
+-- /See:/ 'managementProFileFilterLinksGet' smart constructor.
+data ManagementProFileFilterLinksGet = ManagementProFileFilterLinksGet
     { _mpfflgWebPropertyId :: !Text
     , _mpfflgProFileId     :: !Text
     , _mpfflgAccountId     :: !Text
     , _mpfflgLinkId        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementProFileFilterLinksGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementProFileFilterLinksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -78,14 +78,14 @@ data ManagementProFileFilterLinksGet' = ManagementProFileFilterLinksGet'
 -- * 'mpfflgAccountId'
 --
 -- * 'mpfflgLinkId'
-managementProFileFilterLinksGet'
+managementProFileFilterLinksGet
     :: Text -- ^ 'mpfflgWebPropertyId'
     -> Text -- ^ 'mpfflgProFileId'
     -> Text -- ^ 'mpfflgAccountId'
     -> Text -- ^ 'mpfflgLinkId'
-    -> ManagementProFileFilterLinksGet'
-managementProFileFilterLinksGet' pMpfflgWebPropertyId_ pMpfflgProFileId_ pMpfflgAccountId_ pMpfflgLinkId_ =
-    ManagementProFileFilterLinksGet'
+    -> ManagementProFileFilterLinksGet
+managementProFileFilterLinksGet pMpfflgWebPropertyId_ pMpfflgProFileId_ pMpfflgAccountId_ pMpfflgLinkId_ =
+    ManagementProFileFilterLinksGet
     { _mpfflgWebPropertyId = pMpfflgWebPropertyId_
     , _mpfflgProFileId = pMpfflgProFileId_
     , _mpfflgAccountId = pMpfflgAccountId_
@@ -93,33 +93,33 @@ managementProFileFilterLinksGet' pMpfflgWebPropertyId_ pMpfflgProFileId_ pMpfflg
     }
 
 -- | Web property Id to retrieve profile filter link for.
-mpfflgWebPropertyId :: Lens' ManagementProFileFilterLinksGet' Text
+mpfflgWebPropertyId :: Lens' ManagementProFileFilterLinksGet Text
 mpfflgWebPropertyId
   = lens _mpfflgWebPropertyId
       (\ s a -> s{_mpfflgWebPropertyId = a})
 
 -- | Profile ID to retrieve filter link for.
-mpfflgProFileId :: Lens' ManagementProFileFilterLinksGet' Text
+mpfflgProFileId :: Lens' ManagementProFileFilterLinksGet Text
 mpfflgProFileId
   = lens _mpfflgProFileId
       (\ s a -> s{_mpfflgProFileId = a})
 
 -- | Account ID to retrieve profile filter link for.
-mpfflgAccountId :: Lens' ManagementProFileFilterLinksGet' Text
+mpfflgAccountId :: Lens' ManagementProFileFilterLinksGet Text
 mpfflgAccountId
   = lens _mpfflgAccountId
       (\ s a -> s{_mpfflgAccountId = a})
 
 -- | ID of the profile filter link.
-mpfflgLinkId :: Lens' ManagementProFileFilterLinksGet' Text
+mpfflgLinkId :: Lens' ManagementProFileFilterLinksGet Text
 mpfflgLinkId
   = lens _mpfflgLinkId (\ s a -> s{_mpfflgLinkId = a})
 
 instance GoogleRequest
-         ManagementProFileFilterLinksGet' where
-        type Rs ManagementProFileFilterLinksGet' =
+         ManagementProFileFilterLinksGet where
+        type Rs ManagementProFileFilterLinksGet =
              ProFileFilterLink
-        requestClient ManagementProFileFilterLinksGet'{..}
+        requestClient ManagementProFileFilterLinksGet{..}
           = go _mpfflgAccountId _mpfflgWebPropertyId
               _mpfflgProFileId
               _mpfflgLinkId

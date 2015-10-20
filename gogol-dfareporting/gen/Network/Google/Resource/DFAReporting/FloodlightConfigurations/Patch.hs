@@ -30,8 +30,8 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Patch
       FloodlightConfigurationsPatchResource
 
     -- * Creating a Request
-    , floodlightConfigurationsPatch'
-    , FloodlightConfigurationsPatch'
+    , floodlightConfigurationsPatch
+    , FloodlightConfigurationsPatch
 
     -- * Request Lenses
     , fcpProFileId
@@ -43,7 +43,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightConfigurations.patch@ method which the
--- 'FloodlightConfigurationsPatch'' request conforms to.
+-- 'FloodlightConfigurationsPatch' request conforms to.
 type FloodlightConfigurationsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -56,14 +56,14 @@ type FloodlightConfigurationsPatchResource =
 -- | Updates an existing floodlight configuration. This method supports patch
 -- semantics.
 --
--- /See:/ 'floodlightConfigurationsPatch'' smart constructor.
-data FloodlightConfigurationsPatch' = FloodlightConfigurationsPatch'
+-- /See:/ 'floodlightConfigurationsPatch' smart constructor.
+data FloodlightConfigurationsPatch = FloodlightConfigurationsPatch
     { _fcpProFileId :: !Int64
     , _fcpPayload   :: !FloodlightConfiguration
     , _fcpId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FloodlightConfigurationsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'FloodlightConfigurationsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,37 +72,37 @@ data FloodlightConfigurationsPatch' = FloodlightConfigurationsPatch'
 -- * 'fcpPayload'
 --
 -- * 'fcpId'
-floodlightConfigurationsPatch'
+floodlightConfigurationsPatch
     :: Int64 -- ^ 'fcpProFileId'
     -> FloodlightConfiguration -- ^ 'fcpPayload'
     -> Int64 -- ^ 'fcpId'
-    -> FloodlightConfigurationsPatch'
-floodlightConfigurationsPatch' pFcpProFileId_ pFcpPayload_ pFcpId_ =
-    FloodlightConfigurationsPatch'
+    -> FloodlightConfigurationsPatch
+floodlightConfigurationsPatch pFcpProFileId_ pFcpPayload_ pFcpId_ =
+    FloodlightConfigurationsPatch
     { _fcpProFileId = pFcpProFileId_
     , _fcpPayload = pFcpPayload_
     , _fcpId = pFcpId_
     }
 
 -- | User profile ID associated with this request.
-fcpProFileId :: Lens' FloodlightConfigurationsPatch' Int64
+fcpProFileId :: Lens' FloodlightConfigurationsPatch Int64
 fcpProFileId
   = lens _fcpProFileId (\ s a -> s{_fcpProFileId = a})
 
 -- | Multipart request metadata.
-fcpPayload :: Lens' FloodlightConfigurationsPatch' FloodlightConfiguration
+fcpPayload :: Lens' FloodlightConfigurationsPatch FloodlightConfiguration
 fcpPayload
   = lens _fcpPayload (\ s a -> s{_fcpPayload = a})
 
 -- | Floodlight configuration ID.
-fcpId :: Lens' FloodlightConfigurationsPatch' Int64
+fcpId :: Lens' FloodlightConfigurationsPatch Int64
 fcpId = lens _fcpId (\ s a -> s{_fcpId = a})
 
-instance GoogleRequest FloodlightConfigurationsPatch'
+instance GoogleRequest FloodlightConfigurationsPatch
          where
-        type Rs FloodlightConfigurationsPatch' =
+        type Rs FloodlightConfigurationsPatch =
              FloodlightConfiguration
-        requestClient FloodlightConfigurationsPatch'{..}
+        requestClient FloodlightConfigurationsPatch{..}
           = go _fcpProFileId (Just _fcpId) (Just AltJSON)
               _fcpPayload
               dFAReportingService

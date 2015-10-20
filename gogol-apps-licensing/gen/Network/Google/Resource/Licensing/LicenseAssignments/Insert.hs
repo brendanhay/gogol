@@ -29,8 +29,8 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Insert
       LicenseAssignmentsInsertResource
 
     -- * Creating a Request
-    , licenseAssignmentsInsert'
-    , LicenseAssignmentsInsert'
+    , licenseAssignmentsInsert
+    , LicenseAssignmentsInsert
 
     -- * Request Lenses
     , laiSKUId
@@ -42,7 +42,7 @@ import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @licensing.licenseAssignments.insert@ method which the
--- 'LicenseAssignmentsInsert'' request conforms to.
+-- 'LicenseAssignmentsInsert' request conforms to.
 type LicenseAssignmentsInsertResource =
      Capture "productId" Text :>
        "sku" :>
@@ -54,14 +54,14 @@ type LicenseAssignmentsInsertResource =
 
 -- | Assign License.
 --
--- /See:/ 'licenseAssignmentsInsert'' smart constructor.
-data LicenseAssignmentsInsert' = LicenseAssignmentsInsert'
+-- /See:/ 'licenseAssignmentsInsert' smart constructor.
+data LicenseAssignmentsInsert = LicenseAssignmentsInsert
     { _laiSKUId     :: !Text
     , _laiPayload   :: !LicenseAssignmentInsert
     , _laiProductId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LicenseAssignmentsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'LicenseAssignmentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,36 +70,35 @@ data LicenseAssignmentsInsert' = LicenseAssignmentsInsert'
 -- * 'laiPayload'
 --
 -- * 'laiProductId'
-licenseAssignmentsInsert'
+licenseAssignmentsInsert
     :: Text -- ^ 'laiSKUId'
     -> LicenseAssignmentInsert -- ^ 'laiPayload'
     -> Text -- ^ 'laiProductId'
-    -> LicenseAssignmentsInsert'
-licenseAssignmentsInsert' pLaiSKUId_ pLaiPayload_ pLaiProductId_ =
-    LicenseAssignmentsInsert'
+    -> LicenseAssignmentsInsert
+licenseAssignmentsInsert pLaiSKUId_ pLaiPayload_ pLaiProductId_ =
+    LicenseAssignmentsInsert
     { _laiSKUId = pLaiSKUId_
     , _laiPayload = pLaiPayload_
     , _laiProductId = pLaiProductId_
     }
 
 -- | Name for sku
-laiSKUId :: Lens' LicenseAssignmentsInsert' Text
+laiSKUId :: Lens' LicenseAssignmentsInsert Text
 laiSKUId = lens _laiSKUId (\ s a -> s{_laiSKUId = a})
 
 -- | Multipart request metadata.
-laiPayload :: Lens' LicenseAssignmentsInsert' LicenseAssignmentInsert
+laiPayload :: Lens' LicenseAssignmentsInsert LicenseAssignmentInsert
 laiPayload
   = lens _laiPayload (\ s a -> s{_laiPayload = a})
 
 -- | Name for product
-laiProductId :: Lens' LicenseAssignmentsInsert' Text
+laiProductId :: Lens' LicenseAssignmentsInsert Text
 laiProductId
   = lens _laiProductId (\ s a -> s{_laiProductId = a})
 
-instance GoogleRequest LicenseAssignmentsInsert'
-         where
-        type Rs LicenseAssignmentsInsert' = LicenseAssignment
-        requestClient LicenseAssignmentsInsert'{..}
+instance GoogleRequest LicenseAssignmentsInsert where
+        type Rs LicenseAssignmentsInsert = LicenseAssignment
+        requestClient LicenseAssignmentsInsert{..}
           = go _laiProductId _laiSKUId (Just AltJSON)
               _laiPayload
               appsLicensingService

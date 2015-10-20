@@ -30,20 +30,20 @@ module Network.Google.Resource.SQL.Instances.Import
       InstancesImportResource
 
     -- * Creating a Request
-    , instancesImport'
-    , InstancesImport'
+    , instancesImport
+    , InstancesImport
 
     -- * Request Lenses
-    , insProject
-    , insPayload
-    , insInstance
+    , iiProject
+    , iiPayload
+    , iiInstance
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.import@ method which the
--- 'InstancesImport'' request conforms to.
+-- 'InstancesImport' request conforms to.
 type InstancesImportResource =
      "projects" :>
        Capture "project" Text :>
@@ -57,54 +57,53 @@ type InstancesImportResource =
 -- | Imports data into a Cloud SQL instance from a MySQL dump file in Google
 -- Cloud Storage.
 --
--- /See:/ 'instancesImport'' smart constructor.
-data InstancesImport' = InstancesImport'
-    { _insProject  :: !Text
-    , _insPayload  :: !InstancesImportRequest
-    , _insInstance :: !Text
+-- /See:/ 'instancesImport' smart constructor.
+data InstancesImport = InstancesImport
+    { _iiProject  :: !Text
+    , _iiPayload  :: !InstancesImportRequest
+    , _iiInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesImport'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesImport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'insProject'
+-- * 'iiProject'
 --
--- * 'insPayload'
+-- * 'iiPayload'
 --
--- * 'insInstance'
-instancesImport'
-    :: Text -- ^ 'insProject'
-    -> InstancesImportRequest -- ^ 'insPayload'
-    -> Text -- ^ 'insInstance'
-    -> InstancesImport'
-instancesImport' pInsProject_ pInsPayload_ pInsInstance_ =
-    InstancesImport'
-    { _insProject = pInsProject_
-    , _insPayload = pInsPayload_
-    , _insInstance = pInsInstance_
+-- * 'iiInstance'
+instancesImport
+    :: Text -- ^ 'iiProject'
+    -> InstancesImportRequest -- ^ 'iiPayload'
+    -> Text -- ^ 'iiInstance'
+    -> InstancesImport
+instancesImport pIiProject_ pIiPayload_ pIiInstance_ =
+    InstancesImport
+    { _iiProject = pIiProject_
+    , _iiPayload = pIiPayload_
+    , _iiInstance = pIiInstance_
     }
 
 -- | Project ID of the project that contains the instance.
-insProject :: Lens' InstancesImport' Text
-insProject
-  = lens _insProject (\ s a -> s{_insProject = a})
+iiProject :: Lens' InstancesImport Text
+iiProject
+  = lens _iiProject (\ s a -> s{_iiProject = a})
 
 -- | Multipart request metadata.
-insPayload :: Lens' InstancesImport' InstancesImportRequest
-insPayload
-  = lens _insPayload (\ s a -> s{_insPayload = a})
+iiPayload :: Lens' InstancesImport InstancesImportRequest
+iiPayload
+  = lens _iiPayload (\ s a -> s{_iiPayload = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-insInstance :: Lens' InstancesImport' Text
-insInstance
-  = lens _insInstance (\ s a -> s{_insInstance = a})
+iiInstance :: Lens' InstancesImport Text
+iiInstance
+  = lens _iiInstance (\ s a -> s{_iiInstance = a})
 
-instance GoogleRequest InstancesImport' where
-        type Rs InstancesImport' = Operation
-        requestClient InstancesImport'{..}
-          = go _insProject _insInstance (Just AltJSON)
-              _insPayload
+instance GoogleRequest InstancesImport where
+        type Rs InstancesImport = Operation
+        requestClient InstancesImport{..}
+          = go _iiProject _iiInstance (Just AltJSON) _iiPayload
               sQLAdminService
           where go
                   = buildClient

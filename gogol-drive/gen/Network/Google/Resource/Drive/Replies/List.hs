@@ -29,22 +29,22 @@ module Network.Google.Resource.Drive.Replies.List
       RepliesListResource
 
     -- * Creating a Request
-    , repliesList'
-    , RepliesList'
+    , repliesList
+    , RepliesList
 
     -- * Request Lenses
-    , rllPageToken
-    , rllFileId
-    , rllCommentId
-    , rllMaxResults
-    , rllIncludeDeleted
+    , rlPageToken
+    , rlFileId
+    , rlCommentId
+    , rlMaxResults
+    , rlIncludeDeleted
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.replies.list@ method which the
--- 'RepliesList'' request conforms to.
+-- 'RepliesList' request conforms to.
 type RepliesListResource =
      "files" :>
        Capture "fileId" Text :>
@@ -59,78 +59,76 @@ type RepliesListResource =
 
 -- | Lists all of the replies to a comment.
 --
--- /See:/ 'repliesList'' smart constructor.
-data RepliesList' = RepliesList'
-    { _rllPageToken      :: !(Maybe Text)
-    , _rllFileId         :: !Text
-    , _rllCommentId      :: !Text
-    , _rllMaxResults     :: !Int32
-    , _rllIncludeDeleted :: !Bool
+-- /See:/ 'repliesList' smart constructor.
+data RepliesList = RepliesList
+    { _rlPageToken      :: !(Maybe Text)
+    , _rlFileId         :: !Text
+    , _rlCommentId      :: !Text
+    , _rlMaxResults     :: !Int32
+    , _rlIncludeDeleted :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RepliesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'RepliesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rllPageToken'
+-- * 'rlPageToken'
 --
--- * 'rllFileId'
+-- * 'rlFileId'
 --
--- * 'rllCommentId'
+-- * 'rlCommentId'
 --
--- * 'rllMaxResults'
+-- * 'rlMaxResults'
 --
--- * 'rllIncludeDeleted'
-repliesList'
-    :: Text -- ^ 'rllFileId'
-    -> Text -- ^ 'rllCommentId'
-    -> RepliesList'
-repliesList' pRllFileId_ pRllCommentId_ =
-    RepliesList'
-    { _rllPageToken = Nothing
-    , _rllFileId = pRllFileId_
-    , _rllCommentId = pRllCommentId_
-    , _rllMaxResults = 20
-    , _rllIncludeDeleted = False
+-- * 'rlIncludeDeleted'
+repliesList
+    :: Text -- ^ 'rlFileId'
+    -> Text -- ^ 'rlCommentId'
+    -> RepliesList
+repliesList pRlFileId_ pRlCommentId_ =
+    RepliesList
+    { _rlPageToken = Nothing
+    , _rlFileId = pRlFileId_
+    , _rlCommentId = pRlCommentId_
+    , _rlMaxResults = 20
+    , _rlIncludeDeleted = False
     }
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
 -- \"nextPageToken\" from the previous response.
-rllPageToken :: Lens' RepliesList' (Maybe Text)
-rllPageToken
-  = lens _rllPageToken (\ s a -> s{_rllPageToken = a})
+rlPageToken :: Lens' RepliesList (Maybe Text)
+rlPageToken
+  = lens _rlPageToken (\ s a -> s{_rlPageToken = a})
 
 -- | The ID of the file.
-rllFileId :: Lens' RepliesList' Text
-rllFileId
-  = lens _rllFileId (\ s a -> s{_rllFileId = a})
+rlFileId :: Lens' RepliesList Text
+rlFileId = lens _rlFileId (\ s a -> s{_rlFileId = a})
 
 -- | The ID of the comment.
-rllCommentId :: Lens' RepliesList' Text
-rllCommentId
-  = lens _rllCommentId (\ s a -> s{_rllCommentId = a})
+rlCommentId :: Lens' RepliesList Text
+rlCommentId
+  = lens _rlCommentId (\ s a -> s{_rlCommentId = a})
 
 -- | The maximum number of replies to include in the response, used for
 -- paging.
-rllMaxResults :: Lens' RepliesList' Int32
-rllMaxResults
-  = lens _rllMaxResults
-      (\ s a -> s{_rllMaxResults = a})
+rlMaxResults :: Lens' RepliesList Int32
+rlMaxResults
+  = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
 
 -- | If set, all replies, including deleted replies (with content stripped)
 -- will be returned.
-rllIncludeDeleted :: Lens' RepliesList' Bool
-rllIncludeDeleted
-  = lens _rllIncludeDeleted
-      (\ s a -> s{_rllIncludeDeleted = a})
+rlIncludeDeleted :: Lens' RepliesList Bool
+rlIncludeDeleted
+  = lens _rlIncludeDeleted
+      (\ s a -> s{_rlIncludeDeleted = a})
 
-instance GoogleRequest RepliesList' where
-        type Rs RepliesList' = CommentReplyList
-        requestClient RepliesList'{..}
-          = go _rllFileId _rllCommentId _rllPageToken
-              (Just _rllMaxResults)
-              (Just _rllIncludeDeleted)
+instance GoogleRequest RepliesList where
+        type Rs RepliesList = CommentReplyList
+        requestClient RepliesList{..}
+          = go _rlFileId _rlCommentId _rlPageToken
+              (Just _rlMaxResults)
+              (Just _rlIncludeDeleted)
               (Just AltJSON)
               driveService
           where go

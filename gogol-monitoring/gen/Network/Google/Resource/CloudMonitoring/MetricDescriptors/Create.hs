@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudMonitoring.MetricDescriptors.Create
       MetricDescriptorsCreateResource
 
     -- * Creating a Request
-    , metricDescriptorsCreate'
-    , MetricDescriptorsCreate'
+    , metricDescriptorsCreate
+    , MetricDescriptorsCreate
 
     -- * Request Lenses
     , mdcProject
@@ -41,7 +41,7 @@ import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @cloudmonitoring.metricDescriptors.create@ method which the
--- 'MetricDescriptorsCreate'' request conforms to.
+-- 'MetricDescriptorsCreate' request conforms to.
 type MetricDescriptorsCreateResource =
      Capture "project" Text :>
        "metricDescriptors" :>
@@ -51,43 +51,43 @@ type MetricDescriptorsCreateResource =
 
 -- | Create a new metric.
 --
--- /See:/ 'metricDescriptorsCreate'' smart constructor.
-data MetricDescriptorsCreate' = MetricDescriptorsCreate'
+-- /See:/ 'metricDescriptorsCreate' smart constructor.
+data MetricDescriptorsCreate = MetricDescriptorsCreate
     { _mdcProject :: !Text
     , _mdcPayload :: !MetricDescriptor
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MetricDescriptorsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'MetricDescriptorsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mdcProject'
 --
 -- * 'mdcPayload'
-metricDescriptorsCreate'
+metricDescriptorsCreate
     :: Text -- ^ 'mdcProject'
     -> MetricDescriptor -- ^ 'mdcPayload'
-    -> MetricDescriptorsCreate'
-metricDescriptorsCreate' pMdcProject_ pMdcPayload_ =
-    MetricDescriptorsCreate'
+    -> MetricDescriptorsCreate
+metricDescriptorsCreate pMdcProject_ pMdcPayload_ =
+    MetricDescriptorsCreate
     { _mdcProject = pMdcProject_
     , _mdcPayload = pMdcPayload_
     }
 
 -- | The project id. The value can be the numeric project ID or string-based
 -- project name.
-mdcProject :: Lens' MetricDescriptorsCreate' Text
+mdcProject :: Lens' MetricDescriptorsCreate Text
 mdcProject
   = lens _mdcProject (\ s a -> s{_mdcProject = a})
 
 -- | Multipart request metadata.
-mdcPayload :: Lens' MetricDescriptorsCreate' MetricDescriptor
+mdcPayload :: Lens' MetricDescriptorsCreate MetricDescriptor
 mdcPayload
   = lens _mdcPayload (\ s a -> s{_mdcPayload = a})
 
-instance GoogleRequest MetricDescriptorsCreate' where
-        type Rs MetricDescriptorsCreate' = MetricDescriptor
-        requestClient MetricDescriptorsCreate'{..}
+instance GoogleRequest MetricDescriptorsCreate where
+        type Rs MetricDescriptorsCreate = MetricDescriptor
+        requestClient MetricDescriptorsCreate{..}
           = go _mdcProject (Just AltJSON) _mdcPayload
               monitoringService
           where go

@@ -30,8 +30,8 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.Generate
       AccountsReportsSavedGenerateResource
 
     -- * Creating a Request
-    , accountsReportsSavedGenerate'
-    , AccountsReportsSavedGenerate'
+    , accountsReportsSavedGenerate
+    , AccountsReportsSavedGenerate
 
     -- * Request Lenses
     , arsgLocale
@@ -45,7 +45,7 @@ import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangeseller.accounts.reports.saved.generate@ method which the
--- 'AccountsReportsSavedGenerate'' request conforms to.
+-- 'AccountsReportsSavedGenerate' request conforms to.
 type AccountsReportsSavedGenerateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -59,8 +59,8 @@ type AccountsReportsSavedGenerateResource =
 -- | Generate an Ad Exchange report based on the saved report ID sent in the
 -- query parameters.
 --
--- /See:/ 'accountsReportsSavedGenerate'' smart constructor.
-data AccountsReportsSavedGenerate' = AccountsReportsSavedGenerate'
+-- /See:/ 'accountsReportsSavedGenerate' smart constructor.
+data AccountsReportsSavedGenerate = AccountsReportsSavedGenerate
     { _arsgLocale        :: !(Maybe Text)
     , _arsgSavedReportId :: !Text
     , _arsgAccountId     :: !Text
@@ -68,7 +68,7 @@ data AccountsReportsSavedGenerate' = AccountsReportsSavedGenerate'
     , _arsgMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsReportsSavedGenerate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsReportsSavedGenerate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,12 +81,12 @@ data AccountsReportsSavedGenerate' = AccountsReportsSavedGenerate'
 -- * 'arsgStartIndex'
 --
 -- * 'arsgMaxResults'
-accountsReportsSavedGenerate'
+accountsReportsSavedGenerate
     :: Text -- ^ 'arsgSavedReportId'
     -> Text -- ^ 'arsgAccountId'
-    -> AccountsReportsSavedGenerate'
-accountsReportsSavedGenerate' pArsgSavedReportId_ pArsgAccountId_ =
-    AccountsReportsSavedGenerate'
+    -> AccountsReportsSavedGenerate
+accountsReportsSavedGenerate pArsgSavedReportId_ pArsgAccountId_ =
+    AccountsReportsSavedGenerate
     { _arsgLocale = Nothing
     , _arsgSavedReportId = pArsgSavedReportId_
     , _arsgAccountId = pArsgAccountId_
@@ -96,38 +96,38 @@ accountsReportsSavedGenerate' pArsgSavedReportId_ pArsgAccountId_ =
 
 -- | Optional locale to use for translating report output to a local
 -- language. Defaults to \"en_US\" if not specified.
-arsgLocale :: Lens' AccountsReportsSavedGenerate' (Maybe Text)
+arsgLocale :: Lens' AccountsReportsSavedGenerate (Maybe Text)
 arsgLocale
   = lens _arsgLocale (\ s a -> s{_arsgLocale = a})
 
 -- | The saved report to retrieve.
-arsgSavedReportId :: Lens' AccountsReportsSavedGenerate' Text
+arsgSavedReportId :: Lens' AccountsReportsSavedGenerate Text
 arsgSavedReportId
   = lens _arsgSavedReportId
       (\ s a -> s{_arsgSavedReportId = a})
 
 -- | Account owning the saved report.
-arsgAccountId :: Lens' AccountsReportsSavedGenerate' Text
+arsgAccountId :: Lens' AccountsReportsSavedGenerate Text
 arsgAccountId
   = lens _arsgAccountId
       (\ s a -> s{_arsgAccountId = a})
 
 -- | Index of the first row of report data to return.
-arsgStartIndex :: Lens' AccountsReportsSavedGenerate' (Maybe Int32)
+arsgStartIndex :: Lens' AccountsReportsSavedGenerate (Maybe Int32)
 arsgStartIndex
   = lens _arsgStartIndex
       (\ s a -> s{_arsgStartIndex = a})
 
 -- | The maximum number of rows of report data to return.
-arsgMaxResults :: Lens' AccountsReportsSavedGenerate' (Maybe Int32)
+arsgMaxResults :: Lens' AccountsReportsSavedGenerate (Maybe Int32)
 arsgMaxResults
   = lens _arsgMaxResults
       (\ s a -> s{_arsgMaxResults = a})
 
-instance GoogleRequest AccountsReportsSavedGenerate'
+instance GoogleRequest AccountsReportsSavedGenerate
          where
-        type Rs AccountsReportsSavedGenerate' = Report
-        requestClient AccountsReportsSavedGenerate'{..}
+        type Rs AccountsReportsSavedGenerate = Report
+        requestClient AccountsReportsSavedGenerate{..}
           = go _arsgAccountId _arsgSavedReportId _arsgLocale
               _arsgStartIndex
               _arsgMaxResults

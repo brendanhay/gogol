@@ -29,8 +29,8 @@ module Network.Google.Resource.SQL.SSLCerts.List
       SSLCertsListResource
 
     -- * Creating a Request
-    , sslCertsList'
-    , SSLCertsList'
+    , sslCertsList
+    , SSLCertsList
 
     -- * Request Lenses
     , sclProject
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.sslCerts.list@ method which the
--- 'SSLCertsList'' request conforms to.
+-- 'SSLCertsList' request conforms to.
 type SSLCertsListResource =
      "projects" :>
        Capture "project" Text :>
@@ -53,42 +53,42 @@ type SSLCertsListResource =
 
 -- | Lists all of the current SSL certificates for the instance.
 --
--- /See:/ 'sslCertsList'' smart constructor.
-data SSLCertsList' = SSLCertsList'
+-- /See:/ 'sslCertsList' smart constructor.
+data SSLCertsList = SSLCertsList
     { _sclProject  :: !Text
     , _sclInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SSLCertsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'SSLCertsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sclProject'
 --
 -- * 'sclInstance'
-sslCertsList'
+sslCertsList
     :: Text -- ^ 'sclProject'
     -> Text -- ^ 'sclInstance'
-    -> SSLCertsList'
-sslCertsList' pSclProject_ pSclInstance_ =
-    SSLCertsList'
+    -> SSLCertsList
+sslCertsList pSclProject_ pSclInstance_ =
+    SSLCertsList
     { _sclProject = pSclProject_
     , _sclInstance = pSclInstance_
     }
 
 -- | Project ID of the project for which to list Cloud SQL instances.
-sclProject :: Lens' SSLCertsList' Text
+sclProject :: Lens' SSLCertsList Text
 sclProject
   = lens _sclProject (\ s a -> s{_sclProject = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-sclInstance :: Lens' SSLCertsList' Text
+sclInstance :: Lens' SSLCertsList Text
 sclInstance
   = lens _sclInstance (\ s a -> s{_sclInstance = a})
 
-instance GoogleRequest SSLCertsList' where
-        type Rs SSLCertsList' = SSLCertsListResponse
-        requestClient SSLCertsList'{..}
+instance GoogleRequest SSLCertsList where
+        type Rs SSLCertsList = SSLCertsListResponse
+        requestClient SSLCertsList{..}
           = go _sclProject _sclInstance (Just AltJSON)
               sQLAdminService
           where go

@@ -29,20 +29,20 @@ module Network.Google.Resource.DFAReporting.Accounts.Patch
       AccountsPatchResource
 
     -- * Creating a Request
-    , accountsPatch'
-    , AccountsPatch'
+    , accountsPatch
+    , AccountsPatch
 
     -- * Request Lenses
-    , ap1ProFileId
-    , ap1Payload
-    , ap1Id
+    , appProFileId
+    , appPayload
+    , appId
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accounts.patch@ method which the
--- 'AccountsPatch'' request conforms to.
+-- 'AccountsPatch' request conforms to.
 type AccountsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -53,53 +53,53 @@ type AccountsPatchResource =
 
 -- | Updates an existing account. This method supports patch semantics.
 --
--- /See:/ 'accountsPatch'' smart constructor.
-data AccountsPatch' = AccountsPatch'
-    { _ap1ProFileId :: !Int64
-    , _ap1Payload   :: !Account
-    , _ap1Id        :: !Int64
+-- /See:/ 'accountsPatch' smart constructor.
+data AccountsPatch = AccountsPatch
+    { _appProFileId :: !Int64
+    , _appPayload   :: !Account
+    , _appId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ap1ProFileId'
+-- * 'appProFileId'
 --
--- * 'ap1Payload'
+-- * 'appPayload'
 --
--- * 'ap1Id'
-accountsPatch'
-    :: Int64 -- ^ 'ap1ProFileId'
-    -> Account -- ^ 'ap1Payload'
-    -> Int64 -- ^ 'ap1Id'
-    -> AccountsPatch'
-accountsPatch' pAp1ProFileId_ pAp1Payload_ pAp1Id_ =
-    AccountsPatch'
-    { _ap1ProFileId = pAp1ProFileId_
-    , _ap1Payload = pAp1Payload_
-    , _ap1Id = pAp1Id_
+-- * 'appId'
+accountsPatch
+    :: Int64 -- ^ 'appProFileId'
+    -> Account -- ^ 'appPayload'
+    -> Int64 -- ^ 'appId'
+    -> AccountsPatch
+accountsPatch pAppProFileId_ pAppPayload_ pAppId_ =
+    AccountsPatch
+    { _appProFileId = pAppProFileId_
+    , _appPayload = pAppPayload_
+    , _appId = pAppId_
     }
 
 -- | User profile ID associated with this request.
-ap1ProFileId :: Lens' AccountsPatch' Int64
-ap1ProFileId
-  = lens _ap1ProFileId (\ s a -> s{_ap1ProFileId = a})
+appProFileId :: Lens' AccountsPatch Int64
+appProFileId
+  = lens _appProFileId (\ s a -> s{_appProFileId = a})
 
 -- | Multipart request metadata.
-ap1Payload :: Lens' AccountsPatch' Account
-ap1Payload
-  = lens _ap1Payload (\ s a -> s{_ap1Payload = a})
+appPayload :: Lens' AccountsPatch Account
+appPayload
+  = lens _appPayload (\ s a -> s{_appPayload = a})
 
 -- | Account ID.
-ap1Id :: Lens' AccountsPatch' Int64
-ap1Id = lens _ap1Id (\ s a -> s{_ap1Id = a})
+appId :: Lens' AccountsPatch Int64
+appId = lens _appId (\ s a -> s{_appId = a})
 
-instance GoogleRequest AccountsPatch' where
-        type Rs AccountsPatch' = Account
-        requestClient AccountsPatch'{..}
-          = go _ap1ProFileId (Just _ap1Id) (Just AltJSON)
-              _ap1Payload
+instance GoogleRequest AccountsPatch where
+        type Rs AccountsPatch = Account
+        requestClient AccountsPatch{..}
+          = go _appProFileId (Just _appId) (Just AltJSON)
+              _appPayload
               dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy AccountsPatchResource)

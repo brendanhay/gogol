@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List
       DebuggerDebuggeesBreakpointsListResource
 
     -- * Creating a Request
-    , debuggerDebuggeesBreakpointsList'
-    , DebuggerDebuggeesBreakpointsList'
+    , debuggerDebuggeesBreakpointsList
+    , DebuggerDebuggeesBreakpointsList
 
     -- * Request Lenses
     , ddblXgafv
@@ -52,7 +52,7 @@ import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @clouddebugger.debugger.debuggees.breakpoints.list@ method which the
--- 'DebuggerDebuggeesBreakpointsList'' request conforms to.
+-- 'DebuggerDebuggeesBreakpointsList' request conforms to.
 type DebuggerDebuggeesBreakpointsListResource =
      "v2" :>
        "debugger" :>
@@ -76,8 +76,8 @@ type DebuggerDebuggeesBreakpointsListResource =
 
 -- | Lists all breakpoints of the debuggee that the user has access to.
 --
--- /See:/ 'debuggerDebuggeesBreakpointsList'' smart constructor.
-data DebuggerDebuggeesBreakpointsList' = DebuggerDebuggeesBreakpointsList'
+-- /See:/ 'debuggerDebuggeesBreakpointsList' smart constructor.
+data DebuggerDebuggeesBreakpointsList = DebuggerDebuggeesBreakpointsList
     { _ddblXgafv           :: !(Maybe Text)
     , _ddblIncludeInactive :: !(Maybe Bool)
     , _ddblUploadProtocol  :: !(Maybe Text)
@@ -93,7 +93,7 @@ data DebuggerDebuggeesBreakpointsList' = DebuggerDebuggeesBreakpointsList'
     , _ddblCallback        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DebuggerDebuggeesBreakpointsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'DebuggerDebuggeesBreakpointsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -122,11 +122,11 @@ data DebuggerDebuggeesBreakpointsList' = DebuggerDebuggeesBreakpointsList'
 -- * 'ddblDebuggeeId'
 --
 -- * 'ddblCallback'
-debuggerDebuggeesBreakpointsList'
+debuggerDebuggeesBreakpointsList
     :: Text -- ^ 'ddblDebuggeeId'
-    -> DebuggerDebuggeesBreakpointsList'
-debuggerDebuggeesBreakpointsList' pDdblDebuggeeId_ =
-    DebuggerDebuggeesBreakpointsList'
+    -> DebuggerDebuggeesBreakpointsList
+debuggerDebuggeesBreakpointsList pDdblDebuggeeId_ =
+    DebuggerDebuggeesBreakpointsList
     { _ddblXgafv = Nothing
     , _ddblIncludeInactive = Nothing
     , _ddblUploadProtocol = Nothing
@@ -143,61 +143,61 @@ debuggerDebuggeesBreakpointsList' pDdblDebuggeeId_ =
     }
 
 -- | V1 error format.
-ddblXgafv :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Text)
+ddblXgafv :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
 ddblXgafv
   = lens _ddblXgafv (\ s a -> s{_ddblXgafv = a})
 
 -- | When set to true the response includes active and inactive breakpoints,
 -- otherwise only active breakpoints are returned.
-ddblIncludeInactive :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Bool)
+ddblIncludeInactive :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Bool)
 ddblIncludeInactive
   = lens _ddblIncludeInactive
       (\ s a -> s{_ddblIncludeInactive = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ddblUploadProtocol :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Text)
+ddblUploadProtocol :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
 ddblUploadProtocol
   = lens _ddblUploadProtocol
       (\ s a -> s{_ddblUploadProtocol = a})
 
 -- | Pretty-print response.
-ddblPp :: Lens' DebuggerDebuggeesBreakpointsList' Bool
+ddblPp :: Lens' DebuggerDebuggeesBreakpointsList Bool
 ddblPp = lens _ddblPp (\ s a -> s{_ddblPp = a})
 
 -- | OAuth access token.
-ddblAccessToken :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Text)
+ddblAccessToken :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
 ddblAccessToken
   = lens _ddblAccessToken
       (\ s a -> s{_ddblAccessToken = a})
 
 -- | Only breakpoints with the specified action will pass the filter.
-ddblActionValue :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Text)
+ddblActionValue :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
 ddblActionValue
   = lens _ddblActionValue
       (\ s a -> s{_ddblActionValue = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ddblUploadType :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Text)
+ddblUploadType :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
 ddblUploadType
   = lens _ddblUploadType
       (\ s a -> s{_ddblUploadType = a})
 
 -- | When set to true the response breakpoints will be stripped of the
 -- results fields: stack_frames, evaluated_expressions and variable_table.
-ddblStripResults :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Bool)
+ddblStripResults :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Bool)
 ddblStripResults
   = lens _ddblStripResults
       (\ s a -> s{_ddblStripResults = a})
 
 -- | OAuth bearer token.
-ddblBearerToken :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Text)
+ddblBearerToken :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
 ddblBearerToken
   = lens _ddblBearerToken
       (\ s a -> s{_ddblBearerToken = a})
 
 -- | When set to true the response includes the list of breakpoints set by
 -- any user, otherwise only breakpoints set by the caller.
-ddblIncludeAllUsers :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Bool)
+ddblIncludeAllUsers :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Bool)
 ddblIncludeAllUsers
   = lens _ddblIncludeAllUsers
       (\ s a -> s{_ddblIncludeAllUsers = a})
@@ -207,27 +207,27 @@ ddblIncludeAllUsers
 -- should be set from the last response to ListBreakpoints. The error code
 -- ABORTED is returned on wait timeout, which should be called again with
 -- the same wait_token.
-ddblWaitToken :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Text)
+ddblWaitToken :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
 ddblWaitToken
   = lens _ddblWaitToken
       (\ s a -> s{_ddblWaitToken = a})
 
 -- | The debuggee id to list breakpoint from.
-ddblDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsList' Text
+ddblDebuggeeId :: Lens' DebuggerDebuggeesBreakpointsList Text
 ddblDebuggeeId
   = lens _ddblDebuggeeId
       (\ s a -> s{_ddblDebuggeeId = a})
 
 -- | JSONP
-ddblCallback :: Lens' DebuggerDebuggeesBreakpointsList' (Maybe Text)
+ddblCallback :: Lens' DebuggerDebuggeesBreakpointsList (Maybe Text)
 ddblCallback
   = lens _ddblCallback (\ s a -> s{_ddblCallback = a})
 
 instance GoogleRequest
-         DebuggerDebuggeesBreakpointsList' where
-        type Rs DebuggerDebuggeesBreakpointsList' =
+         DebuggerDebuggeesBreakpointsList where
+        type Rs DebuggerDebuggeesBreakpointsList =
              ListBreakpointsResponse
-        requestClient DebuggerDebuggeesBreakpointsList'{..}
+        requestClient DebuggerDebuggeesBreakpointsList{..}
           = go _ddblDebuggeeId _ddblXgafv _ddblIncludeInactive
               _ddblUploadProtocol
               (Just _ddblPp)

@@ -29,8 +29,8 @@ module Network.Google.Resource.DNS.ManagedZones.Create
       ManagedZonesCreateResource
 
     -- * Creating a Request
-    , managedZonesCreate'
-    , ManagedZonesCreate'
+    , managedZonesCreate
+    , ManagedZonesCreate
 
     -- * Request Lenses
     , mzcProject
@@ -41,7 +41,7 @@ import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dns.managedZones.create@ method which the
--- 'ManagedZonesCreate'' request conforms to.
+-- 'ManagedZonesCreate' request conforms to.
 type ManagedZonesCreateResource =
      Capture "project" Text :>
        "managedZones" :>
@@ -51,42 +51,42 @@ type ManagedZonesCreateResource =
 
 -- | Create a new ManagedZone.
 --
--- /See:/ 'managedZonesCreate'' smart constructor.
-data ManagedZonesCreate' = ManagedZonesCreate'
+-- /See:/ 'managedZonesCreate' smart constructor.
+data ManagedZonesCreate = ManagedZonesCreate
     { _mzcProject :: !Text
     , _mzcPayload :: !ManagedZone
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagedZonesCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagedZonesCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mzcProject'
 --
 -- * 'mzcPayload'
-managedZonesCreate'
+managedZonesCreate
     :: Text -- ^ 'mzcProject'
     -> ManagedZone -- ^ 'mzcPayload'
-    -> ManagedZonesCreate'
-managedZonesCreate' pMzcProject_ pMzcPayload_ =
-    ManagedZonesCreate'
+    -> ManagedZonesCreate
+managedZonesCreate pMzcProject_ pMzcPayload_ =
+    ManagedZonesCreate
     { _mzcProject = pMzcProject_
     , _mzcPayload = pMzcPayload_
     }
 
 -- | Identifies the project addressed by this request.
-mzcProject :: Lens' ManagedZonesCreate' Text
+mzcProject :: Lens' ManagedZonesCreate Text
 mzcProject
   = lens _mzcProject (\ s a -> s{_mzcProject = a})
 
 -- | Multipart request metadata.
-mzcPayload :: Lens' ManagedZonesCreate' ManagedZone
+mzcPayload :: Lens' ManagedZonesCreate ManagedZone
 mzcPayload
   = lens _mzcPayload (\ s a -> s{_mzcPayload = a})
 
-instance GoogleRequest ManagedZonesCreate' where
-        type Rs ManagedZonesCreate' = ManagedZone
-        requestClient ManagedZonesCreate'{..}
+instance GoogleRequest ManagedZonesCreate where
+        type Rs ManagedZonesCreate = ManagedZone
+        requestClient ManagedZonesCreate{..}
           = go _mzcProject (Just AltJSON) _mzcPayload
               dNSService
           where go

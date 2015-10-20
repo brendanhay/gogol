@@ -33,8 +33,8 @@ module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Get
       UsersDataSourcesDatasetsGetResource
 
     -- * Creating a Request
-    , usersDataSourcesDatasetsGet'
-    , UsersDataSourcesDatasetsGet'
+    , usersDataSourcesDatasetsGet
+    , UsersDataSourcesDatasetsGet
 
     -- * Request Lenses
     , udsdgDataSourceId
@@ -48,7 +48,7 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fitness.users.dataSources.datasets.get@ method which the
--- 'UsersDataSourcesDatasetsGet'' request conforms to.
+-- 'UsersDataSourcesDatasetsGet' request conforms to.
 type UsersDataSourcesDatasetsGetResource =
      Capture "userId" Text :>
        "dataSources" :>
@@ -65,8 +65,8 @@ type UsersDataSourcesDatasetsGetResource =
 -- than or equal to the dataset end time and whose end time is greater than
 -- or equal to the dataset start time.
 --
--- /See:/ 'usersDataSourcesDatasetsGet'' smart constructor.
-data UsersDataSourcesDatasetsGet' = UsersDataSourcesDatasetsGet'
+-- /See:/ 'usersDataSourcesDatasetsGet' smart constructor.
+data UsersDataSourcesDatasetsGet = UsersDataSourcesDatasetsGet
     { _udsdgDataSourceId :: !Text
     , _udsdgUserId       :: !Text
     , _udsdgDatasetId    :: !Text
@@ -74,7 +74,7 @@ data UsersDataSourcesDatasetsGet' = UsersDataSourcesDatasetsGet'
     , _udsdgPageToken    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersDataSourcesDatasetsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersDataSourcesDatasetsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -87,13 +87,13 @@ data UsersDataSourcesDatasetsGet' = UsersDataSourcesDatasetsGet'
 -- * 'udsdgLimit'
 --
 -- * 'udsdgPageToken'
-usersDataSourcesDatasetsGet'
+usersDataSourcesDatasetsGet
     :: Text -- ^ 'udsdgDataSourceId'
     -> Text -- ^ 'udsdgUserId'
     -> Text -- ^ 'udsdgDatasetId'
-    -> UsersDataSourcesDatasetsGet'
-usersDataSourcesDatasetsGet' pUdsdgDataSourceId_ pUdsdgUserId_ pUdsdgDatasetId_ =
-    UsersDataSourcesDatasetsGet'
+    -> UsersDataSourcesDatasetsGet
+usersDataSourcesDatasetsGet pUdsdgDataSourceId_ pUdsdgUserId_ pUdsdgDatasetId_ =
+    UsersDataSourcesDatasetsGet
     { _udsdgDataSourceId = pUdsdgDataSourceId_
     , _udsdgUserId = pUdsdgUserId_
     , _udsdgDatasetId = pUdsdgDatasetId_
@@ -102,14 +102,14 @@ usersDataSourcesDatasetsGet' pUdsdgDataSourceId_ pUdsdgUserId_ pUdsdgDatasetId_ 
     }
 
 -- | The data stream ID of the data source that created the dataset.
-udsdgDataSourceId :: Lens' UsersDataSourcesDatasetsGet' Text
+udsdgDataSourceId :: Lens' UsersDataSourcesDatasetsGet Text
 udsdgDataSourceId
   = lens _udsdgDataSourceId
       (\ s a -> s{_udsdgDataSourceId = a})
 
 -- | Retrieve a dataset for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
-udsdgUserId :: Lens' UsersDataSourcesDatasetsGet' Text
+udsdgUserId :: Lens' UsersDataSourcesDatasetsGet Text
 udsdgUserId
   = lens _udsdgUserId (\ s a -> s{_udsdgUserId = a})
 
@@ -117,7 +117,7 @@ udsdgUserId
 -- time and maximum data point end time represented as nanoseconds from the
 -- epoch. The ID is formatted like: \"startTime-endTime\" where startTime
 -- and endTime are 64 bit integers.
-udsdgDatasetId :: Lens' UsersDataSourcesDatasetsGet' Text
+udsdgDatasetId :: Lens' UsersDataSourcesDatasetsGet Text
 udsdgDatasetId
   = lens _udsdgDatasetId
       (\ s a -> s{_udsdgDatasetId = a})
@@ -125,7 +125,7 @@ udsdgDatasetId
 -- | If specified, no more than this many data points will be included in the
 -- dataset. If the there are more data points in the dataset, nextPageToken
 -- will be set in the dataset response.
-udsdgLimit :: Lens' UsersDataSourcesDatasetsGet' (Maybe Int32)
+udsdgLimit :: Lens' UsersDataSourcesDatasetsGet (Maybe Int32)
 udsdgLimit
   = lens _udsdgLimit (\ s a -> s{_udsdgLimit = a})
 
@@ -134,15 +134,15 @@ udsdgLimit
 -- nextPageToken from the previous response. Each subsequent call will
 -- yield a partial dataset with data point end timestamps that are strictly
 -- smaller than those in the previous partial response.
-udsdgPageToken :: Lens' UsersDataSourcesDatasetsGet' (Maybe Text)
+udsdgPageToken :: Lens' UsersDataSourcesDatasetsGet (Maybe Text)
 udsdgPageToken
   = lens _udsdgPageToken
       (\ s a -> s{_udsdgPageToken = a})
 
-instance GoogleRequest UsersDataSourcesDatasetsGet'
+instance GoogleRequest UsersDataSourcesDatasetsGet
          where
-        type Rs UsersDataSourcesDatasetsGet' = Dataset
-        requestClient UsersDataSourcesDatasetsGet'{..}
+        type Rs UsersDataSourcesDatasetsGet = Dataset
+        requestClient UsersDataSourcesDatasetsGet{..}
           = go _udsdgUserId _udsdgDataSourceId _udsdgDatasetId
               _udsdgLimit
               _udsdgPageToken

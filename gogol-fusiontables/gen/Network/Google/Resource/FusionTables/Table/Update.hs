@@ -30,20 +30,20 @@ module Network.Google.Resource.FusionTables.Table.Update
       TableUpdateResource
 
     -- * Creating a Request
-    , tableUpdate'
-    , TableUpdate'
+    , tableUpdate
+    , TableUpdate
 
     -- * Request Lenses
-    , tuPayload
-    , tuReplaceViewDefinition
-    , tuTableId
+    , tabPayload
+    , tabReplaceViewDefinition
+    , tabTableId
     ) where
 
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.table.update@ method which the
--- 'TableUpdate'' request conforms to.
+-- 'TableUpdate' request conforms to.
 type TableUpdateResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -54,57 +54,57 @@ type TableUpdateResource =
 -- | Updates an existing table. Unless explicitly requested, only the name,
 -- description, and attribution will be updated.
 --
--- /See:/ 'tableUpdate'' smart constructor.
-data TableUpdate' = TableUpdate'
-    { _tuPayload               :: !Table
-    , _tuReplaceViewDefinition :: !(Maybe Bool)
-    , _tuTableId               :: !Text
+-- /See:/ 'tableUpdate' smart constructor.
+data TableUpdate = TableUpdate
+    { _tabPayload               :: !Table
+    , _tabReplaceViewDefinition :: !(Maybe Bool)
+    , _tabTableId               :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TableUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'TableUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tuPayload'
+-- * 'tabPayload'
 --
--- * 'tuReplaceViewDefinition'
+-- * 'tabReplaceViewDefinition'
 --
--- * 'tuTableId'
-tableUpdate'
-    :: Table -- ^ 'tuPayload'
-    -> Text -- ^ 'tuTableId'
-    -> TableUpdate'
-tableUpdate' pTuPayload_ pTuTableId_ =
-    TableUpdate'
-    { _tuPayload = pTuPayload_
-    , _tuReplaceViewDefinition = Nothing
-    , _tuTableId = pTuTableId_
+-- * 'tabTableId'
+tableUpdate
+    :: Table -- ^ 'tabPayload'
+    -> Text -- ^ 'tabTableId'
+    -> TableUpdate
+tableUpdate pTabPayload_ pTabTableId_ =
+    TableUpdate
+    { _tabPayload = pTabPayload_
+    , _tabReplaceViewDefinition = Nothing
+    , _tabTableId = pTabTableId_
     }
 
 -- | Multipart request metadata.
-tuPayload :: Lens' TableUpdate' Table
-tuPayload
-  = lens _tuPayload (\ s a -> s{_tuPayload = a})
+tabPayload :: Lens' TableUpdate Table
+tabPayload
+  = lens _tabPayload (\ s a -> s{_tabPayload = a})
 
 -- | Whether the view definition is also updated. The specified view
 -- definition replaces the existing one. Only a view can be updated with a
 -- new definition.
-tuReplaceViewDefinition :: Lens' TableUpdate' (Maybe Bool)
-tuReplaceViewDefinition
-  = lens _tuReplaceViewDefinition
-      (\ s a -> s{_tuReplaceViewDefinition = a})
+tabReplaceViewDefinition :: Lens' TableUpdate (Maybe Bool)
+tabReplaceViewDefinition
+  = lens _tabReplaceViewDefinition
+      (\ s a -> s{_tabReplaceViewDefinition = a})
 
 -- | ID of the table that is being updated.
-tuTableId :: Lens' TableUpdate' Text
-tuTableId
-  = lens _tuTableId (\ s a -> s{_tuTableId = a})
+tabTableId :: Lens' TableUpdate Text
+tabTableId
+  = lens _tabTableId (\ s a -> s{_tabTableId = a})
 
-instance GoogleRequest TableUpdate' where
-        type Rs TableUpdate' = Table
-        requestClient TableUpdate'{..}
-          = go _tuTableId _tuReplaceViewDefinition
+instance GoogleRequest TableUpdate where
+        type Rs TableUpdate = Table
+        requestClient TableUpdate{..}
+          = go _tabTableId _tabReplaceViewDefinition
               (Just AltJSON)
-              _tuPayload
+              _tabPayload
               fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TableUpdateResource)

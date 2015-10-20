@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Networks.List
       NetworksListResource
 
     -- * Creating a Request
-    , networksList'
-    , NetworksList'
+    , networksList
+    , NetworksList
 
     -- * Request Lenses
     , nlProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.networks.list@ method which the
--- 'NetworksList'' request conforms to.
+-- 'NetworksList' request conforms to.
 type NetworksListResource =
      Capture "project" Text :>
        "global" :>
@@ -57,15 +57,15 @@ type NetworksListResource =
 -- | Retrieves the list of network resources available to the specified
 -- project.
 --
--- /See:/ 'networksList'' smart constructor.
-data NetworksList' = NetworksList'
+-- /See:/ 'networksList' smart constructor.
+data NetworksList = NetworksList
     { _nlProject    :: !Text
     , _nlFilter     :: !(Maybe Text)
     , _nlPageToken  :: !(Maybe Text)
     , _nlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'NetworksList'' with the minimum fields required to make a request.
+-- | Creates a value of 'NetworksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,11 +76,11 @@ data NetworksList' = NetworksList'
 -- * 'nlPageToken'
 --
 -- * 'nlMaxResults'
-networksList'
+networksList
     :: Text -- ^ 'nlProject'
-    -> NetworksList'
-networksList' pNlProject_ =
-    NetworksList'
+    -> NetworksList
+networksList pNlProject_ =
+    NetworksList
     { _nlProject = pNlProject_
     , _nlFilter = Nothing
     , _nlPageToken = Nothing
@@ -88,7 +88,7 @@ networksList' pNlProject_ =
     }
 
 -- | Project ID for this request.
-nlProject :: Lens' NetworksList' Text
+nlProject :: Lens' NetworksList Text
 nlProject
   = lens _nlProject (\ s a -> s{_nlProject = a})
 
@@ -103,24 +103,24 @@ nlProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-nlFilter :: Lens' NetworksList' (Maybe Text)
+nlFilter :: Lens' NetworksList (Maybe Text)
 nlFilter = lens _nlFilter (\ s a -> s{_nlFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-nlPageToken :: Lens' NetworksList' (Maybe Text)
+nlPageToken :: Lens' NetworksList (Maybe Text)
 nlPageToken
   = lens _nlPageToken (\ s a -> s{_nlPageToken = a})
 
 -- | Maximum count of results to be returned.
-nlMaxResults :: Lens' NetworksList' Word32
+nlMaxResults :: Lens' NetworksList Word32
 nlMaxResults
   = lens _nlMaxResults (\ s a -> s{_nlMaxResults = a})
 
-instance GoogleRequest NetworksList' where
-        type Rs NetworksList' = NetworkList
-        requestClient NetworksList'{..}
+instance GoogleRequest NetworksList where
+        type Rs NetworksList = NetworkList
+        requestClient NetworksList{..}
           = go _nlProject _nlFilter _nlPageToken
               (Just _nlMaxResults)
               (Just AltJSON)

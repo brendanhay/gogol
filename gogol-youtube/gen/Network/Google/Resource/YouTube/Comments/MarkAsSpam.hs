@@ -30,8 +30,8 @@ module Network.Google.Resource.YouTube.Comments.MarkAsSpam
       CommentsMarkAsSpamResource
 
     -- * Creating a Request
-    , commentsMarkAsSpam'
-    , CommentsMarkAsSpam'
+    , commentsMarkAsSpam
+    , CommentsMarkAsSpam
 
     -- * Request Lenses
     , cmasId
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.comments.markAsSpam@ method which the
--- 'CommentsMarkAsSpam'' request conforms to.
+-- 'CommentsMarkAsSpam' request conforms to.
 type CommentsMarkAsSpamResource =
      "comments" :>
        "markAsSpam" :>
@@ -51,32 +51,32 @@ type CommentsMarkAsSpamResource =
 -- | Expresses the caller\'s opinion that one or more comments should be
 -- flagged as spam.
 --
--- /See:/ 'commentsMarkAsSpam'' smart constructor.
-newtype CommentsMarkAsSpam' = CommentsMarkAsSpam'
+-- /See:/ 'commentsMarkAsSpam' smart constructor.
+newtype CommentsMarkAsSpam = CommentsMarkAsSpam
     { _cmasId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsMarkAsSpam'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsMarkAsSpam' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cmasId'
-commentsMarkAsSpam'
+commentsMarkAsSpam
     :: Text -- ^ 'cmasId'
-    -> CommentsMarkAsSpam'
-commentsMarkAsSpam' pCmasId_ =
-    CommentsMarkAsSpam'
+    -> CommentsMarkAsSpam
+commentsMarkAsSpam pCmasId_ =
+    CommentsMarkAsSpam
     { _cmasId = pCmasId_
     }
 
 -- | The id parameter specifies a comma-separated list of IDs of comments
 -- that the caller believes should be classified as spam.
-cmasId :: Lens' CommentsMarkAsSpam' Text
+cmasId :: Lens' CommentsMarkAsSpam Text
 cmasId = lens _cmasId (\ s a -> s{_cmasId = a})
 
-instance GoogleRequest CommentsMarkAsSpam' where
-        type Rs CommentsMarkAsSpam' = ()
-        requestClient CommentsMarkAsSpam'{..}
+instance GoogleRequest CommentsMarkAsSpam where
+        type Rs CommentsMarkAsSpam = ()
+        requestClient CommentsMarkAsSpam{..}
           = go (Just _cmasId) (Just AltJSON) youTubeService
           where go
                   = buildClient

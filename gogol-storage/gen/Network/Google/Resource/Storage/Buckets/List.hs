@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.Buckets.List
       BucketsListResource
 
     -- * Creating a Request
-    , bucketsList'
-    , BucketsList'
+    , bucketsList
+    , BucketsList
 
     -- * Request Lenses
     , blProject
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.buckets.list@ method which the
--- 'BucketsList'' request conforms to.
+-- 'BucketsList' request conforms to.
 type BucketsListResource =
      "b" :>
        QueryParam "project" Text :>
@@ -56,8 +56,8 @@ type BucketsListResource =
 
 -- | Retrieves a list of buckets for a given project.
 --
--- /See:/ 'bucketsList'' smart constructor.
-data BucketsList' = BucketsList'
+-- /See:/ 'bucketsList' smart constructor.
+data BucketsList = BucketsList
     { _blProject    :: !Text
     , _blPrefix     :: !(Maybe Text)
     , _blProjection :: !(Maybe BucketsListProjection)
@@ -65,7 +65,7 @@ data BucketsList' = BucketsList'
     , _blMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BucketsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'BucketsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -78,11 +78,11 @@ data BucketsList' = BucketsList'
 -- * 'blPageToken'
 --
 -- * 'blMaxResults'
-bucketsList'
+bucketsList
     :: Text -- ^ 'blProject'
-    -> BucketsList'
-bucketsList' pBlProject_ =
-    BucketsList'
+    -> BucketsList
+bucketsList pBlProject_ =
+    BucketsList
     { _blProject = pBlProject_
     , _blPrefix = Nothing
     , _blProjection = Nothing
@@ -91,33 +91,33 @@ bucketsList' pBlProject_ =
     }
 
 -- | A valid API project identifier.
-blProject :: Lens' BucketsList' Text
+blProject :: Lens' BucketsList Text
 blProject
   = lens _blProject (\ s a -> s{_blProject = a})
 
 -- | Filter results to buckets whose names begin with this prefix.
-blPrefix :: Lens' BucketsList' (Maybe Text)
+blPrefix :: Lens' BucketsList (Maybe Text)
 blPrefix = lens _blPrefix (\ s a -> s{_blPrefix = a})
 
 -- | Set of properties to return. Defaults to noAcl.
-blProjection :: Lens' BucketsList' (Maybe BucketsListProjection)
+blProjection :: Lens' BucketsList (Maybe BucketsListProjection)
 blProjection
   = lens _blProjection (\ s a -> s{_blProjection = a})
 
 -- | A previously-returned page token representing part of the larger set of
 -- results to view.
-blPageToken :: Lens' BucketsList' (Maybe Text)
+blPageToken :: Lens' BucketsList (Maybe Text)
 blPageToken
   = lens _blPageToken (\ s a -> s{_blPageToken = a})
 
 -- | Maximum number of buckets to return.
-blMaxResults :: Lens' BucketsList' (Maybe Word32)
+blMaxResults :: Lens' BucketsList (Maybe Word32)
 blMaxResults
   = lens _blMaxResults (\ s a -> s{_blMaxResults = a})
 
-instance GoogleRequest BucketsList' where
-        type Rs BucketsList' = Buckets
-        requestClient BucketsList'{..}
+instance GoogleRequest BucketsList where
+        type Rs BucketsList = Buckets
+        requestClient BucketsList{..}
           = go (Just _blProject) _blPrefix _blProjection
               _blPageToken
               _blMaxResults

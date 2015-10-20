@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Firewalls.Update
       FirewallsUpdateResource
 
     -- * Creating a Request
-    , firewallsUpdate'
-    , FirewallsUpdate'
+    , firewallsUpdate
+    , FirewallsUpdate
 
     -- * Request Lenses
     , fuProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.firewalls.update@ method which the
--- 'FirewallsUpdate'' request conforms to.
+-- 'FirewallsUpdate' request conforms to.
 type FirewallsUpdateResource =
      Capture "project" Text :>
        "global" :>
@@ -55,14 +55,14 @@ type FirewallsUpdateResource =
 -- | Updates the specified firewall resource with the data included in the
 -- request.
 --
--- /See:/ 'firewallsUpdate'' smart constructor.
-data FirewallsUpdate' = FirewallsUpdate'
+-- /See:/ 'firewallsUpdate' smart constructor.
+data FirewallsUpdate = FirewallsUpdate
     { _fuProject  :: !Text
     , _fuPayload  :: !Firewall
     , _fuFirewall :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FirewallsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'FirewallsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,36 +71,36 @@ data FirewallsUpdate' = FirewallsUpdate'
 -- * 'fuPayload'
 --
 -- * 'fuFirewall'
-firewallsUpdate'
+firewallsUpdate
     :: Text -- ^ 'fuProject'
     -> Firewall -- ^ 'fuPayload'
     -> Text -- ^ 'fuFirewall'
-    -> FirewallsUpdate'
-firewallsUpdate' pFuProject_ pFuPayload_ pFuFirewall_ =
-    FirewallsUpdate'
+    -> FirewallsUpdate
+firewallsUpdate pFuProject_ pFuPayload_ pFuFirewall_ =
+    FirewallsUpdate
     { _fuProject = pFuProject_
     , _fuPayload = pFuPayload_
     , _fuFirewall = pFuFirewall_
     }
 
 -- | Project ID for this request.
-fuProject :: Lens' FirewallsUpdate' Text
+fuProject :: Lens' FirewallsUpdate Text
 fuProject
   = lens _fuProject (\ s a -> s{_fuProject = a})
 
 -- | Multipart request metadata.
-fuPayload :: Lens' FirewallsUpdate' Firewall
+fuPayload :: Lens' FirewallsUpdate Firewall
 fuPayload
   = lens _fuPayload (\ s a -> s{_fuPayload = a})
 
 -- | Name of the firewall resource to update.
-fuFirewall :: Lens' FirewallsUpdate' Text
+fuFirewall :: Lens' FirewallsUpdate Text
 fuFirewall
   = lens _fuFirewall (\ s a -> s{_fuFirewall = a})
 
-instance GoogleRequest FirewallsUpdate' where
-        type Rs FirewallsUpdate' = Operation
-        requestClient FirewallsUpdate'{..}
+instance GoogleRequest FirewallsUpdate where
+        type Rs FirewallsUpdate = Operation
+        requestClient FirewallsUpdate{..}
           = go _fuProject _fuFirewall (Just AltJSON) _fuPayload
               computeService
           where go

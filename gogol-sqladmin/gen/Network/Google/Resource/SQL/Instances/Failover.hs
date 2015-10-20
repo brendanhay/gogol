@@ -29,8 +29,8 @@ module Network.Google.Resource.SQL.Instances.Failover
       InstancesFailoverResource
 
     -- * Creating a Request
-    , instancesFailover'
-    , InstancesFailover'
+    , instancesFailover
+    , InstancesFailover
 
     -- * Request Lenses
     , ifProject
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.failover@ method which the
--- 'InstancesFailover'' request conforms to.
+-- 'InstancesFailover' request conforms to.
 type InstancesFailoverResource =
      "projects" :>
        Capture "project" Text :>
@@ -55,14 +55,14 @@ type InstancesFailoverResource =
 
 -- | Failover the instance to its failover replica instance.
 --
--- /See:/ 'instancesFailover'' smart constructor.
-data InstancesFailover' = InstancesFailover'
+-- /See:/ 'instancesFailover' smart constructor.
+data InstancesFailover = InstancesFailover
     { _ifProject  :: !Text
     , _ifPayload  :: !InstancesFailoverRequest
     , _ifInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesFailover'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesFailover' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,36 +71,36 @@ data InstancesFailover' = InstancesFailover'
 -- * 'ifPayload'
 --
 -- * 'ifInstance'
-instancesFailover'
+instancesFailover
     :: Text -- ^ 'ifProject'
     -> InstancesFailoverRequest -- ^ 'ifPayload'
     -> Text -- ^ 'ifInstance'
-    -> InstancesFailover'
-instancesFailover' pIfProject_ pIfPayload_ pIfInstance_ =
-    InstancesFailover'
+    -> InstancesFailover
+instancesFailover pIfProject_ pIfPayload_ pIfInstance_ =
+    InstancesFailover
     { _ifProject = pIfProject_
     , _ifPayload = pIfPayload_
     , _ifInstance = pIfInstance_
     }
 
 -- | ID of the project that contains the read replica.
-ifProject :: Lens' InstancesFailover' Text
+ifProject :: Lens' InstancesFailover Text
 ifProject
   = lens _ifProject (\ s a -> s{_ifProject = a})
 
 -- | Multipart request metadata.
-ifPayload :: Lens' InstancesFailover' InstancesFailoverRequest
+ifPayload :: Lens' InstancesFailover InstancesFailoverRequest
 ifPayload
   = lens _ifPayload (\ s a -> s{_ifPayload = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-ifInstance :: Lens' InstancesFailover' Text
+ifInstance :: Lens' InstancesFailover Text
 ifInstance
   = lens _ifInstance (\ s a -> s{_ifInstance = a})
 
-instance GoogleRequest InstancesFailover' where
-        type Rs InstancesFailover' = Operation
-        requestClient InstancesFailover'{..}
+instance GoogleRequest InstancesFailover where
+        type Rs InstancesFailover = Operation
+        requestClient InstancesFailover{..}
           = go _ifProject _ifInstance (Just AltJSON) _ifPayload
               sQLAdminService
           where go

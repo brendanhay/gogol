@@ -30,8 +30,8 @@ module Network.Google.Resource.Spectrum.Paws.Register
       PawsRegisterResource
 
     -- * Creating a Request
-    , pawsRegister'
-    , PawsRegister'
+    , pawsRegister
+    , PawsRegister
 
     -- * Request Lenses
     , prPayload
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
 -- | A resource alias for @spectrum.paws.register@ method which the
--- 'PawsRegister'' request conforms to.
+-- 'PawsRegister' request conforms to.
 type PawsRegisterResource =
      "register" :>
        QueryParam "alt" AltJSON :>
@@ -51,32 +51,32 @@ type PawsRegisterResource =
 -- | The Google Spectrum Database implements registration in the getSpectrum
 -- method. As such this always returns an UNIMPLEMENTED error.
 --
--- /See:/ 'pawsRegister'' smart constructor.
-newtype PawsRegister' = PawsRegister'
+-- /See:/ 'pawsRegister' smart constructor.
+newtype PawsRegister = PawsRegister
     { _prPayload :: PawsRegisterRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PawsRegister'' with the minimum fields required to make a request.
+-- | Creates a value of 'PawsRegister' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'prPayload'
-pawsRegister'
+pawsRegister
     :: PawsRegisterRequest -- ^ 'prPayload'
-    -> PawsRegister'
-pawsRegister' pPrPayload_ =
-    PawsRegister'
+    -> PawsRegister
+pawsRegister pPrPayload_ =
+    PawsRegister
     { _prPayload = pPrPayload_
     }
 
 -- | Multipart request metadata.
-prPayload :: Lens' PawsRegister' PawsRegisterRequest
+prPayload :: Lens' PawsRegister PawsRegisterRequest
 prPayload
   = lens _prPayload (\ s a -> s{_prPayload = a})
 
-instance GoogleRequest PawsRegister' where
-        type Rs PawsRegister' = PawsRegisterResponse
-        requestClient PawsRegister'{..}
+instance GoogleRequest PawsRegister where
+        type Rs PawsRegister = PawsRegisterResponse
+        requestClient PawsRegister{..}
           = go (Just AltJSON) _prPayload spectrumService
           where go
                   = buildClient (Proxy :: Proxy PawsRegisterResource)

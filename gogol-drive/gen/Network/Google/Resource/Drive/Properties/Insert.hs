@@ -29,19 +29,19 @@ module Network.Google.Resource.Drive.Properties.Insert
       PropertiesInsertResource
 
     -- * Creating a Request
-    , propertiesInsert'
-    , PropertiesInsert'
+    , propertiesInsert
+    , PropertiesInsert
 
     -- * Request Lenses
-    , proPayload
-    , proFileId
+    , piPayload
+    , piFileId
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.properties.insert@ method which the
--- 'PropertiesInsert'' request conforms to.
+-- 'PropertiesInsert' request conforms to.
 type PropertiesInsertResource =
      "files" :>
        Capture "fileId" Text :>
@@ -51,44 +51,42 @@ type PropertiesInsertResource =
 
 -- | Adds a property to a file.
 --
--- /See:/ 'propertiesInsert'' smart constructor.
-data PropertiesInsert' = PropertiesInsert'
-    { _proPayload :: !Property
-    , _proFileId  :: !Text
+-- /See:/ 'propertiesInsert' smart constructor.
+data PropertiesInsert = PropertiesInsert
+    { _piPayload :: !Property
+    , _piFileId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PropertiesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'PropertiesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'proPayload'
+-- * 'piPayload'
 --
--- * 'proFileId'
-propertiesInsert'
-    :: Property -- ^ 'proPayload'
-    -> Text -- ^ 'proFileId'
-    -> PropertiesInsert'
-propertiesInsert' pProPayload_ pProFileId_ =
-    PropertiesInsert'
-    { _proPayload = pProPayload_
-    , _proFileId = pProFileId_
+-- * 'piFileId'
+propertiesInsert
+    :: Property -- ^ 'piPayload'
+    -> Text -- ^ 'piFileId'
+    -> PropertiesInsert
+propertiesInsert pPiPayload_ pPiFileId_ =
+    PropertiesInsert
+    { _piPayload = pPiPayload_
+    , _piFileId = pPiFileId_
     }
 
 -- | Multipart request metadata.
-proPayload :: Lens' PropertiesInsert' Property
-proPayload
-  = lens _proPayload (\ s a -> s{_proPayload = a})
+piPayload :: Lens' PropertiesInsert Property
+piPayload
+  = lens _piPayload (\ s a -> s{_piPayload = a})
 
 -- | The ID of the file.
-proFileId :: Lens' PropertiesInsert' Text
-proFileId
-  = lens _proFileId (\ s a -> s{_proFileId = a})
+piFileId :: Lens' PropertiesInsert Text
+piFileId = lens _piFileId (\ s a -> s{_piFileId = a})
 
-instance GoogleRequest PropertiesInsert' where
-        type Rs PropertiesInsert' = Property
-        requestClient PropertiesInsert'{..}
-          = go _proFileId (Just AltJSON) _proPayload
-              driveService
+instance GoogleRequest PropertiesInsert where
+        type Rs PropertiesInsert = Property
+        requestClient PropertiesInsert{..}
+          = go _piFileId (Just AltJSON) _piPayload driveService
           where go
                   = buildClient
                       (Proxy :: Proxy PropertiesInsertResource)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Get
       ObjectAccessControlsGetResource
 
     -- * Creating a Request
-    , objectAccessControlsGet'
-    , ObjectAccessControlsGet'
+    , objectAccessControlsGet
+    , ObjectAccessControlsGet
 
     -- * Request Lenses
     , oacgBucket
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objectAccessControls.get@ method which the
--- 'ObjectAccessControlsGet'' request conforms to.
+-- 'ObjectAccessControlsGet' request conforms to.
 type ObjectAccessControlsGetResource =
      "b" :>
        Capture "bucket" Text :>
@@ -57,15 +57,15 @@ type ObjectAccessControlsGetResource =
 
 -- | Returns the ACL entry for the specified entity on the specified object.
 --
--- /See:/ 'objectAccessControlsGet'' smart constructor.
-data ObjectAccessControlsGet' = ObjectAccessControlsGet'
+-- /See:/ 'objectAccessControlsGet' smart constructor.
+data ObjectAccessControlsGet = ObjectAccessControlsGet
     { _oacgBucket     :: !Text
     , _oacgObject     :: !Text
     , _oacgEntity     :: !Text
     , _oacgGeneration :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ObjectAccessControlsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ObjectAccessControlsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,13 +76,13 @@ data ObjectAccessControlsGet' = ObjectAccessControlsGet'
 -- * 'oacgEntity'
 --
 -- * 'oacgGeneration'
-objectAccessControlsGet'
+objectAccessControlsGet
     :: Text -- ^ 'oacgBucket'
     -> Text -- ^ 'oacgObject'
     -> Text -- ^ 'oacgEntity'
-    -> ObjectAccessControlsGet'
-objectAccessControlsGet' pOacgBucket_ pOacgObject_ pOacgEntity_ =
-    ObjectAccessControlsGet'
+    -> ObjectAccessControlsGet
+objectAccessControlsGet pOacgBucket_ pOacgObject_ pOacgEntity_ =
+    ObjectAccessControlsGet
     { _oacgBucket = pOacgBucket_
     , _oacgObject = pOacgObject_
     , _oacgEntity = pOacgEntity_
@@ -90,34 +90,33 @@ objectAccessControlsGet' pOacgBucket_ pOacgObject_ pOacgEntity_ =
     }
 
 -- | Name of a bucket.
-oacgBucket :: Lens' ObjectAccessControlsGet' Text
+oacgBucket :: Lens' ObjectAccessControlsGet Text
 oacgBucket
   = lens _oacgBucket (\ s a -> s{_oacgBucket = a})
 
 -- | Name of the object. For information about how to URL encode object names
 -- to be path safe, see Encoding URI Path Parts.
-oacgObject :: Lens' ObjectAccessControlsGet' Text
+oacgObject :: Lens' ObjectAccessControlsGet Text
 oacgObject
   = lens _oacgObject (\ s a -> s{_oacgObject = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
 -- allAuthenticatedUsers.
-oacgEntity :: Lens' ObjectAccessControlsGet' Text
+oacgEntity :: Lens' ObjectAccessControlsGet Text
 oacgEntity
   = lens _oacgEntity (\ s a -> s{_oacgEntity = a})
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
-oacgGeneration :: Lens' ObjectAccessControlsGet' (Maybe Int64)
+oacgGeneration :: Lens' ObjectAccessControlsGet (Maybe Int64)
 oacgGeneration
   = lens _oacgGeneration
       (\ s a -> s{_oacgGeneration = a})
 
-instance GoogleRequest ObjectAccessControlsGet' where
-        type Rs ObjectAccessControlsGet' =
-             ObjectAccessControl
-        requestClient ObjectAccessControlsGet'{..}
+instance GoogleRequest ObjectAccessControlsGet where
+        type Rs ObjectAccessControlsGet = ObjectAccessControl
+        requestClient ObjectAccessControlsGet{..}
           = go _oacgBucket _oacgObject _oacgEntity
               _oacgGeneration
               (Just AltJSON)

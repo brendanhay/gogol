@@ -30,8 +30,8 @@ module Network.Google.Resource.Games.Rooms.Join
       RoomsJoinResource
 
     -- * Creating a Request
-    , roomsJoin'
-    , RoomsJoin'
+    , roomsJoin
+    , RoomsJoin
 
     -- * Request Lenses
     , rjPayload
@@ -43,7 +43,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.rooms.join@ method which the
--- 'RoomsJoin'' request conforms to.
+-- 'RoomsJoin' request conforms to.
 type RoomsJoinResource =
      "rooms" :>
        Capture "roomId" Text :>
@@ -55,14 +55,14 @@ type RoomsJoinResource =
 -- | Join a room. For internal use by the Games SDK only. Calling this method
 -- directly is unsupported.
 --
--- /See:/ 'roomsJoin'' smart constructor.
-data RoomsJoin' = RoomsJoin'
+-- /See:/ 'roomsJoin' smart constructor.
+data RoomsJoin = RoomsJoin
     { _rjPayload  :: !RoomJoinRequest
     , _rjRoomId   :: !Text
     , _rjLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoomsJoin'' with the minimum fields required to make a request.
+-- | Creates a value of 'RoomsJoin' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,34 +71,34 @@ data RoomsJoin' = RoomsJoin'
 -- * 'rjRoomId'
 --
 -- * 'rjLanguage'
-roomsJoin'
+roomsJoin
     :: RoomJoinRequest -- ^ 'rjPayload'
     -> Text -- ^ 'rjRoomId'
-    -> RoomsJoin'
-roomsJoin' pRjPayload_ pRjRoomId_ =
-    RoomsJoin'
+    -> RoomsJoin
+roomsJoin pRjPayload_ pRjRoomId_ =
+    RoomsJoin
     { _rjPayload = pRjPayload_
     , _rjRoomId = pRjRoomId_
     , _rjLanguage = Nothing
     }
 
 -- | Multipart request metadata.
-rjPayload :: Lens' RoomsJoin' RoomJoinRequest
+rjPayload :: Lens' RoomsJoin RoomJoinRequest
 rjPayload
   = lens _rjPayload (\ s a -> s{_rjPayload = a})
 
 -- | The ID of the room.
-rjRoomId :: Lens' RoomsJoin' Text
+rjRoomId :: Lens' RoomsJoin Text
 rjRoomId = lens _rjRoomId (\ s a -> s{_rjRoomId = a})
 
 -- | The preferred language to use for strings returned by this method.
-rjLanguage :: Lens' RoomsJoin' (Maybe Text)
+rjLanguage :: Lens' RoomsJoin (Maybe Text)
 rjLanguage
   = lens _rjLanguage (\ s a -> s{_rjLanguage = a})
 
-instance GoogleRequest RoomsJoin' where
-        type Rs RoomsJoin' = Room
-        requestClient RoomsJoin'{..}
+instance GoogleRequest RoomsJoin where
+        type Rs RoomsJoin = Room
+        requestClient RoomsJoin{..}
           = go _rjRoomId _rjLanguage (Just AltJSON) _rjPayload
               gamesService
           where go

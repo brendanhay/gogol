@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Update
       ManagementCustomDimensionsUpdateResource
 
     -- * Creating a Request
-    , managementCustomDimensionsUpdate'
-    , ManagementCustomDimensionsUpdate'
+    , managementCustomDimensionsUpdate
+    , ManagementCustomDimensionsUpdate
 
     -- * Request Lenses
     , mcduWebPropertyId
@@ -44,7 +44,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.customDimensions.update@ method which the
--- 'ManagementCustomDimensionsUpdate'' request conforms to.
+-- 'ManagementCustomDimensionsUpdate' request conforms to.
 type ManagementCustomDimensionsUpdateResource =
      "management" :>
        "accounts" :>
@@ -60,8 +60,8 @@ type ManagementCustomDimensionsUpdateResource =
 
 -- | Updates an existing custom dimension.
 --
--- /See:/ 'managementCustomDimensionsUpdate'' smart constructor.
-data ManagementCustomDimensionsUpdate' = ManagementCustomDimensionsUpdate'
+-- /See:/ 'managementCustomDimensionsUpdate' smart constructor.
+data ManagementCustomDimensionsUpdate = ManagementCustomDimensionsUpdate
     { _mcduWebPropertyId               :: !Text
     , _mcduIgnoreCustomDataSourceLinks :: !Bool
     , _mcduPayload                     :: !CustomDimension
@@ -69,7 +69,7 @@ data ManagementCustomDimensionsUpdate' = ManagementCustomDimensionsUpdate'
     , _mcduCustomDimensionId           :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementCustomDimensionsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementCustomDimensionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,14 +82,14 @@ data ManagementCustomDimensionsUpdate' = ManagementCustomDimensionsUpdate'
 -- * 'mcduAccountId'
 --
 -- * 'mcduCustomDimensionId'
-managementCustomDimensionsUpdate'
+managementCustomDimensionsUpdate
     :: Text -- ^ 'mcduWebPropertyId'
     -> CustomDimension -- ^ 'mcduPayload'
     -> Text -- ^ 'mcduAccountId'
     -> Text -- ^ 'mcduCustomDimensionId'
-    -> ManagementCustomDimensionsUpdate'
-managementCustomDimensionsUpdate' pMcduWebPropertyId_ pMcduPayload_ pMcduAccountId_ pMcduCustomDimensionId_ =
-    ManagementCustomDimensionsUpdate'
+    -> ManagementCustomDimensionsUpdate
+managementCustomDimensionsUpdate pMcduWebPropertyId_ pMcduPayload_ pMcduAccountId_ pMcduCustomDimensionId_ =
+    ManagementCustomDimensionsUpdate
     { _mcduWebPropertyId = pMcduWebPropertyId_
     , _mcduIgnoreCustomDataSourceLinks = False
     , _mcduPayload = pMcduPayload_
@@ -98,40 +98,40 @@ managementCustomDimensionsUpdate' pMcduWebPropertyId_ pMcduPayload_ pMcduAccount
     }
 
 -- | Web property ID for the custom dimension to update.
-mcduWebPropertyId :: Lens' ManagementCustomDimensionsUpdate' Text
+mcduWebPropertyId :: Lens' ManagementCustomDimensionsUpdate Text
 mcduWebPropertyId
   = lens _mcduWebPropertyId
       (\ s a -> s{_mcduWebPropertyId = a})
 
 -- | Force the update and ignore any warnings related to the custom dimension
 -- being linked to a custom data source \/ data set.
-mcduIgnoreCustomDataSourceLinks :: Lens' ManagementCustomDimensionsUpdate' Bool
+mcduIgnoreCustomDataSourceLinks :: Lens' ManagementCustomDimensionsUpdate Bool
 mcduIgnoreCustomDataSourceLinks
   = lens _mcduIgnoreCustomDataSourceLinks
       (\ s a -> s{_mcduIgnoreCustomDataSourceLinks = a})
 
 -- | Multipart request metadata.
-mcduPayload :: Lens' ManagementCustomDimensionsUpdate' CustomDimension
+mcduPayload :: Lens' ManagementCustomDimensionsUpdate CustomDimension
 mcduPayload
   = lens _mcduPayload (\ s a -> s{_mcduPayload = a})
 
 -- | Account ID for the custom dimension to update.
-mcduAccountId :: Lens' ManagementCustomDimensionsUpdate' Text
+mcduAccountId :: Lens' ManagementCustomDimensionsUpdate Text
 mcduAccountId
   = lens _mcduAccountId
       (\ s a -> s{_mcduAccountId = a})
 
 -- | Custom dimension ID for the custom dimension to update.
-mcduCustomDimensionId :: Lens' ManagementCustomDimensionsUpdate' Text
+mcduCustomDimensionId :: Lens' ManagementCustomDimensionsUpdate Text
 mcduCustomDimensionId
   = lens _mcduCustomDimensionId
       (\ s a -> s{_mcduCustomDimensionId = a})
 
 instance GoogleRequest
-         ManagementCustomDimensionsUpdate' where
-        type Rs ManagementCustomDimensionsUpdate' =
+         ManagementCustomDimensionsUpdate where
+        type Rs ManagementCustomDimensionsUpdate =
              CustomDimension
-        requestClient ManagementCustomDimensionsUpdate'{..}
+        requestClient ManagementCustomDimensionsUpdate{..}
           = go _mcduAccountId _mcduWebPropertyId
               _mcduCustomDimensionId
               (Just _mcduIgnoreCustomDataSourceLinks)

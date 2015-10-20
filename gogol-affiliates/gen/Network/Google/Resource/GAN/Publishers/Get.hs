@@ -32,8 +32,8 @@ module Network.Google.Resource.GAN.Publishers.Get
       PublishersGetResource
 
     -- * Creating a Request
-    , publishersGet'
-    , PublishersGet'
+    , publishersGet
+    , PublishersGet
 
     -- * Request Lenses
     , pgRoleId
@@ -45,7 +45,7 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gan.publishers.get@ method which the
--- 'PublishersGet'' request conforms to.
+-- 'PublishersGet' request conforms to.
 type PublishersGetResource =
      Capture "role" PublishersGetRole :>
        Capture "roleId" Text :>
@@ -58,14 +58,14 @@ type PublishersGetResource =
 -- publishers. Publishers can request information about themselves by
 -- omitting the publisherId query parameter.
 --
--- /See:/ 'publishersGet'' smart constructor.
-data PublishersGet' = PublishersGet'
+-- /See:/ 'publishersGet' smart constructor.
+data PublishersGet = PublishersGet
     { _pgRoleId      :: !Text
     , _pgRole        :: !PublishersGetRole
     , _pgPublisherId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PublishersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PublishersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,35 +74,35 @@ data PublishersGet' = PublishersGet'
 -- * 'pgRole'
 --
 -- * 'pgPublisherId'
-publishersGet'
+publishersGet
     :: Text -- ^ 'pgRoleId'
     -> PublishersGetRole -- ^ 'pgRole'
-    -> PublishersGet'
-publishersGet' pPgRoleId_ pPgRole_ =
-    PublishersGet'
+    -> PublishersGet
+publishersGet pPgRoleId_ pPgRole_ =
+    PublishersGet
     { _pgRoleId = pPgRoleId_
     , _pgRole = pPgRole_
     , _pgPublisherId = Nothing
     }
 
 -- | The ID of the requesting advertiser or publisher.
-pgRoleId :: Lens' PublishersGet' Text
+pgRoleId :: Lens' PublishersGet Text
 pgRoleId = lens _pgRoleId (\ s a -> s{_pgRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-pgRole :: Lens' PublishersGet' PublishersGetRole
+pgRole :: Lens' PublishersGet PublishersGetRole
 pgRole = lens _pgRole (\ s a -> s{_pgRole = a})
 
 -- | The ID of the publisher to look up. Optional.
-pgPublisherId :: Lens' PublishersGet' (Maybe Text)
+pgPublisherId :: Lens' PublishersGet (Maybe Text)
 pgPublisherId
   = lens _pgPublisherId
       (\ s a -> s{_pgPublisherId = a})
 
-instance GoogleRequest PublishersGet' where
-        type Rs PublishersGet' = Publisher
-        requestClient PublishersGet'{..}
+instance GoogleRequest PublishersGet where
+        type Rs PublishersGet = Publisher
+        requestClient PublishersGet{..}
           = go _pgRole _pgRoleId _pgPublisherId (Just AltJSON)
               affiliatesService
           where go

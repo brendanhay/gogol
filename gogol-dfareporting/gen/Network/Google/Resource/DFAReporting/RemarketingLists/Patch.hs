@@ -30,8 +30,8 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Patch
       RemarketingListsPatchResource
 
     -- * Creating a Request
-    , remarketingListsPatch'
-    , RemarketingListsPatch'
+    , remarketingListsPatch
+    , RemarketingListsPatch
 
     -- * Request Lenses
     , rlpProFileId
@@ -43,7 +43,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.remarketingLists.patch@ method which the
--- 'RemarketingListsPatch'' request conforms to.
+-- 'RemarketingListsPatch' request conforms to.
 type RemarketingListsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -56,14 +56,14 @@ type RemarketingListsPatchResource =
 -- | Updates an existing remarketing list. This method supports patch
 -- semantics.
 --
--- /See:/ 'remarketingListsPatch'' smart constructor.
-data RemarketingListsPatch' = RemarketingListsPatch'
+-- /See:/ 'remarketingListsPatch' smart constructor.
+data RemarketingListsPatch = RemarketingListsPatch
     { _rlpProFileId :: !Int64
     , _rlpPayload   :: !RemarketingList
     , _rlpId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RemarketingListsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'RemarketingListsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,35 +72,35 @@ data RemarketingListsPatch' = RemarketingListsPatch'
 -- * 'rlpPayload'
 --
 -- * 'rlpId'
-remarketingListsPatch'
+remarketingListsPatch
     :: Int64 -- ^ 'rlpProFileId'
     -> RemarketingList -- ^ 'rlpPayload'
     -> Int64 -- ^ 'rlpId'
-    -> RemarketingListsPatch'
-remarketingListsPatch' pRlpProFileId_ pRlpPayload_ pRlpId_ =
-    RemarketingListsPatch'
+    -> RemarketingListsPatch
+remarketingListsPatch pRlpProFileId_ pRlpPayload_ pRlpId_ =
+    RemarketingListsPatch
     { _rlpProFileId = pRlpProFileId_
     , _rlpPayload = pRlpPayload_
     , _rlpId = pRlpId_
     }
 
 -- | User profile ID associated with this request.
-rlpProFileId :: Lens' RemarketingListsPatch' Int64
+rlpProFileId :: Lens' RemarketingListsPatch Int64
 rlpProFileId
   = lens _rlpProFileId (\ s a -> s{_rlpProFileId = a})
 
 -- | Multipart request metadata.
-rlpPayload :: Lens' RemarketingListsPatch' RemarketingList
+rlpPayload :: Lens' RemarketingListsPatch RemarketingList
 rlpPayload
   = lens _rlpPayload (\ s a -> s{_rlpPayload = a})
 
 -- | Remarketing list ID.
-rlpId :: Lens' RemarketingListsPatch' Int64
+rlpId :: Lens' RemarketingListsPatch Int64
 rlpId = lens _rlpId (\ s a -> s{_rlpId = a})
 
-instance GoogleRequest RemarketingListsPatch' where
-        type Rs RemarketingListsPatch' = RemarketingList
-        requestClient RemarketingListsPatch'{..}
+instance GoogleRequest RemarketingListsPatch where
+        type Rs RemarketingListsPatch = RemarketingList
+        requestClient RemarketingListsPatch{..}
           = go _rlpProFileId (Just _rlpId) (Just AltJSON)
               _rlpPayload
               dFAReportingService

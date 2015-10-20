@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.TurnBasedMatches.TakeTurn
       TurnBasedMatchesTakeTurnResource
 
     -- * Creating a Request
-    , turnBasedMatchesTakeTurn'
-    , TurnBasedMatchesTakeTurn'
+    , turnBasedMatchesTakeTurn
+    , TurnBasedMatchesTakeTurn
 
     -- * Request Lenses
     , tbmttPayload
@@ -42,7 +42,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.turnBasedMatches.takeTurn@ method which the
--- 'TurnBasedMatchesTakeTurn'' request conforms to.
+-- 'TurnBasedMatchesTakeTurn' request conforms to.
 type TurnBasedMatchesTakeTurnResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
@@ -54,14 +54,14 @@ type TurnBasedMatchesTakeTurnResource =
 
 -- | Commit the results of a player turn.
 --
--- /See:/ 'turnBasedMatchesTakeTurn'' smart constructor.
-data TurnBasedMatchesTakeTurn' = TurnBasedMatchesTakeTurn'
+-- /See:/ 'turnBasedMatchesTakeTurn' smart constructor.
+data TurnBasedMatchesTakeTurn = TurnBasedMatchesTakeTurn
     { _tbmttPayload  :: !TurnBasedMatchTurn
     , _tbmttLanguage :: !(Maybe Text)
     , _tbmttMatchId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TurnBasedMatchesTakeTurn'' with the minimum fields required to make a request.
+-- | Creates a value of 'TurnBasedMatchesTakeTurn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,37 +70,36 @@ data TurnBasedMatchesTakeTurn' = TurnBasedMatchesTakeTurn'
 -- * 'tbmttLanguage'
 --
 -- * 'tbmttMatchId'
-turnBasedMatchesTakeTurn'
+turnBasedMatchesTakeTurn
     :: TurnBasedMatchTurn -- ^ 'tbmttPayload'
     -> Text -- ^ 'tbmttMatchId'
-    -> TurnBasedMatchesTakeTurn'
-turnBasedMatchesTakeTurn' pTbmttPayload_ pTbmttMatchId_ =
-    TurnBasedMatchesTakeTurn'
+    -> TurnBasedMatchesTakeTurn
+turnBasedMatchesTakeTurn pTbmttPayload_ pTbmttMatchId_ =
+    TurnBasedMatchesTakeTurn
     { _tbmttPayload = pTbmttPayload_
     , _tbmttLanguage = Nothing
     , _tbmttMatchId = pTbmttMatchId_
     }
 
 -- | Multipart request metadata.
-tbmttPayload :: Lens' TurnBasedMatchesTakeTurn' TurnBasedMatchTurn
+tbmttPayload :: Lens' TurnBasedMatchesTakeTurn TurnBasedMatchTurn
 tbmttPayload
   = lens _tbmttPayload (\ s a -> s{_tbmttPayload = a})
 
 -- | The preferred language to use for strings returned by this method.
-tbmttLanguage :: Lens' TurnBasedMatchesTakeTurn' (Maybe Text)
+tbmttLanguage :: Lens' TurnBasedMatchesTakeTurn (Maybe Text)
 tbmttLanguage
   = lens _tbmttLanguage
       (\ s a -> s{_tbmttLanguage = a})
 
 -- | The ID of the match.
-tbmttMatchId :: Lens' TurnBasedMatchesTakeTurn' Text
+tbmttMatchId :: Lens' TurnBasedMatchesTakeTurn Text
 tbmttMatchId
   = lens _tbmttMatchId (\ s a -> s{_tbmttMatchId = a})
 
-instance GoogleRequest TurnBasedMatchesTakeTurn'
-         where
-        type Rs TurnBasedMatchesTakeTurn' = TurnBasedMatch
-        requestClient TurnBasedMatchesTakeTurn'{..}
+instance GoogleRequest TurnBasedMatchesTakeTurn where
+        type Rs TurnBasedMatchesTakeTurn = TurnBasedMatch
+        requestClient TurnBasedMatchesTakeTurn{..}
           = go _tbmttMatchId _tbmttLanguage (Just AltJSON)
               _tbmttPayload
               gamesService

@@ -91,23 +91,23 @@ module Network.Google.Genomics.Types
     -- * Read'
     , Read'
     , read'
-    , rFragmentLength
-    , rDuplicateFragment
-    , rReadGroupSetId
-    , rNextMatePosition
-    , rFailedVendorQualityChecks
-    , rAlignment
-    , rFragmentName
-    , rNumberReads
-    , rId
-    , rSecondaryAlignment
-    , rReadGroupId
-    , rSupplementaryAlignment
-    , rAlignedSequence
-    , rProperPlacement
-    , rInfo
-    , rReadNumber
-    , rAlignedQuality
+    , reaFragmentLength
+    , reaDuplicateFragment
+    , reaReadGroupSetId
+    , reaNextMatePosition
+    , reaFailedVendorQualityChecks
+    , reaAlignment
+    , reaFragmentName
+    , reaNumberReads
+    , reaId
+    , reaSecondaryAlignment
+    , reaReadGroupId
+    , reaSupplementaryAlignment
+    , reaAlignedSequence
+    , reaProperPlacement
+    , reaInfo
+    , reaReadNumber
+    , reaAlignedQuality
 
     -- * VariantCall
     , VariantCall
@@ -122,16 +122,16 @@ module Network.Google.Genomics.Types
     -- * ReadGroup
     , ReadGroup
     , readGroup
-    , rgReferenceSetId
-    , rgPrograms
-    , rgExperiment
-    , rgName
-    , rgDatasetId
-    , rgId
-    , rgSampleId
-    , rgPredictedInsertSize
-    , rgDescription
-    , rgInfo
+    , rReferenceSetId
+    , rPrograms
+    , rExperiment
+    , rName
+    , rDatasetId
+    , rId
+    , rSampleId
+    , rPredictedInsertSize
+    , rDescription
+    , rInfo
 
     -- * Operation
     , Operation

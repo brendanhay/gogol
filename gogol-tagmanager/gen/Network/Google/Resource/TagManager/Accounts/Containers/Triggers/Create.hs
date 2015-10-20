@@ -29,20 +29,20 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Create
       AccountsContainersTriggersCreateResource
 
     -- * Creating a Request
-    , accountsContainersTriggersCreate'
-    , AccountsContainersTriggersCreate'
+    , accountsContainersTriggersCreate
+    , AccountsContainersTriggersCreate
 
     -- * Request Lenses
-    , actccContainerId
-    , actccPayload
-    , actccAccountId
+    , actcContainerId
+    , actcPayload
+    , actcAccountId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.triggers.create@ method which the
--- 'AccountsContainersTriggersCreate'' request conforms to.
+-- 'AccountsContainersTriggersCreate' request conforms to.
 type AccountsContainersTriggersCreateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -54,57 +54,57 @@ type AccountsContainersTriggersCreateResource =
 
 -- | Creates a GTM Trigger.
 --
--- /See:/ 'accountsContainersTriggersCreate'' smart constructor.
-data AccountsContainersTriggersCreate' = AccountsContainersTriggersCreate'
-    { _actccContainerId :: !Text
-    , _actccPayload     :: !Trigger
-    , _actccAccountId   :: !Text
+-- /See:/ 'accountsContainersTriggersCreate' smart constructor.
+data AccountsContainersTriggersCreate = AccountsContainersTriggersCreate
+    { _actcContainerId :: !Text
+    , _actcPayload     :: !Trigger
+    , _actcAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersTriggersCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersTriggersCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'actccContainerId'
+-- * 'actcContainerId'
 --
--- * 'actccPayload'
+-- * 'actcPayload'
 --
--- * 'actccAccountId'
-accountsContainersTriggersCreate'
-    :: Text -- ^ 'actccContainerId'
-    -> Trigger -- ^ 'actccPayload'
-    -> Text -- ^ 'actccAccountId'
-    -> AccountsContainersTriggersCreate'
-accountsContainersTriggersCreate' pActccContainerId_ pActccPayload_ pActccAccountId_ =
-    AccountsContainersTriggersCreate'
-    { _actccContainerId = pActccContainerId_
-    , _actccPayload = pActccPayload_
-    , _actccAccountId = pActccAccountId_
+-- * 'actcAccountId'
+accountsContainersTriggersCreate
+    :: Text -- ^ 'actcContainerId'
+    -> Trigger -- ^ 'actcPayload'
+    -> Text -- ^ 'actcAccountId'
+    -> AccountsContainersTriggersCreate
+accountsContainersTriggersCreate pActcContainerId_ pActcPayload_ pActcAccountId_ =
+    AccountsContainersTriggersCreate
+    { _actcContainerId = pActcContainerId_
+    , _actcPayload = pActcPayload_
+    , _actcAccountId = pActcAccountId_
     }
 
 -- | The GTM Container ID.
-actccContainerId :: Lens' AccountsContainersTriggersCreate' Text
-actccContainerId
-  = lens _actccContainerId
-      (\ s a -> s{_actccContainerId = a})
+actcContainerId :: Lens' AccountsContainersTriggersCreate Text
+actcContainerId
+  = lens _actcContainerId
+      (\ s a -> s{_actcContainerId = a})
 
 -- | Multipart request metadata.
-actccPayload :: Lens' AccountsContainersTriggersCreate' Trigger
-actccPayload
-  = lens _actccPayload (\ s a -> s{_actccPayload = a})
+actcPayload :: Lens' AccountsContainersTriggersCreate Trigger
+actcPayload
+  = lens _actcPayload (\ s a -> s{_actcPayload = a})
 
 -- | The GTM Account ID.
-actccAccountId :: Lens' AccountsContainersTriggersCreate' Text
-actccAccountId
-  = lens _actccAccountId
-      (\ s a -> s{_actccAccountId = a})
+actcAccountId :: Lens' AccountsContainersTriggersCreate Text
+actcAccountId
+  = lens _actcAccountId
+      (\ s a -> s{_actcAccountId = a})
 
 instance GoogleRequest
-         AccountsContainersTriggersCreate' where
-        type Rs AccountsContainersTriggersCreate' = Trigger
-        requestClient AccountsContainersTriggersCreate'{..}
-          = go _actccAccountId _actccContainerId (Just AltJSON)
-              _actccPayload
+         AccountsContainersTriggersCreate where
+        type Rs AccountsContainersTriggersCreate = Trigger
+        requestClient AccountsContainersTriggersCreate{..}
+          = go _actcAccountId _actcContainerId (Just AltJSON)
+              _actcPayload
               tagManagerService
           where go
                   = buildClient

@@ -33,8 +33,8 @@ module Network.Google.Resource.CloudMonitoring.TimeseriesDescriptors.List
       TimeseriesDescriptorsListResource
 
     -- * Creating a Request
-    , timeseriesDescriptorsList'
-    , TimeseriesDescriptorsList'
+    , timeseriesDescriptorsList
+    , TimeseriesDescriptorsList
 
     -- * Request Lenses
     , tdlWindow
@@ -54,7 +54,7 @@ import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @cloudmonitoring.timeseriesDescriptors.list@ method which the
--- 'TimeseriesDescriptorsList'' request conforms to.
+-- 'TimeseriesDescriptorsList' request conforms to.
 type TimeseriesDescriptorsListResource =
      Capture "project" Text :>
        "timeseriesDescriptors" :>
@@ -79,8 +79,8 @@ type TimeseriesDescriptorsListResource =
 -- subsequent pages of results by setting the pageToken query parameter to
 -- the value of the nextPageToken.
 --
--- /See:/ 'timeseriesDescriptorsList'' smart constructor.
-data TimeseriesDescriptorsList' = TimeseriesDescriptorsList'
+-- /See:/ 'timeseriesDescriptorsList' smart constructor.
+data TimeseriesDescriptorsList = TimeseriesDescriptorsList
     { _tdlWindow     :: !(Maybe Text)
     , _tdlProject    :: !Text
     , _tdlCount      :: !Int32
@@ -94,7 +94,7 @@ data TimeseriesDescriptorsList' = TimeseriesDescriptorsList'
     , _tdlYoungest   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TimeseriesDescriptorsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TimeseriesDescriptorsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -119,14 +119,14 @@ data TimeseriesDescriptorsList' = TimeseriesDescriptorsList'
 -- * 'tdlPageToken'
 --
 -- * 'tdlYoungest'
-timeseriesDescriptorsList'
+timeseriesDescriptorsList
     :: Text -- ^ 'tdlProject'
     -> ListTimeseriesDescriptorsRequest -- ^ 'tdlPayload'
     -> Text -- ^ 'tdlMetric'
     -> Text -- ^ 'tdlYoungest'
-    -> TimeseriesDescriptorsList'
-timeseriesDescriptorsList' pTdlProject_ pTdlPayload_ pTdlMetric_ pTdlYoungest_ =
-    TimeseriesDescriptorsList'
+    -> TimeseriesDescriptorsList
+timeseriesDescriptorsList pTdlProject_ pTdlPayload_ pTdlMetric_ pTdlYoungest_ =
+    TimeseriesDescriptorsList
     { _tdlWindow = Nothing
     , _tdlProject = pTdlProject_
     , _tdlCount = 100
@@ -145,30 +145,30 @@ timeseriesDescriptorsList' pTdlProject_ pTdlPayload_ pTdlMetric_ pTdlYoungest_ =
 -- non-cumulative metric types. Units: - m: minute - h: hour - d: day - w:
 -- week Examples: 3m, 4w. Only one unit is allowed, for example: 2w3d is
 -- not allowed; you should use 17d instead.
-tdlWindow :: Lens' TimeseriesDescriptorsList' (Maybe Text)
+tdlWindow :: Lens' TimeseriesDescriptorsList (Maybe Text)
 tdlWindow
   = lens _tdlWindow (\ s a -> s{_tdlWindow = a})
 
 -- | The project ID to which this time series belongs. The value can be the
 -- numeric project ID or string-based project name.
-tdlProject :: Lens' TimeseriesDescriptorsList' Text
+tdlProject :: Lens' TimeseriesDescriptorsList Text
 tdlProject
   = lens _tdlProject (\ s a -> s{_tdlProject = a})
 
 -- | Maximum number of time series descriptors per page. Used for pagination.
 -- If not specified, count = 100.
-tdlCount :: Lens' TimeseriesDescriptorsList' Int32
+tdlCount :: Lens' TimeseriesDescriptorsList Int32
 tdlCount = lens _tdlCount (\ s a -> s{_tdlCount = a})
 
 -- | Multipart request metadata.
-tdlPayload :: Lens' TimeseriesDescriptorsList' ListTimeseriesDescriptorsRequest
+tdlPayload :: Lens' TimeseriesDescriptorsList ListTimeseriesDescriptorsRequest
 tdlPayload
   = lens _tdlPayload (\ s a -> s{_tdlPayload = a})
 
 -- | The aggregation function that will reduce the data points in each window
 -- to a single point. This parameter is only valid for non-cumulative
 -- metrics with a value type of INT64 or DOUBLE.
-tdlAggregator :: Lens' TimeseriesDescriptorsList' (Maybe TimeseriesDescriptorsListAggregator)
+tdlAggregator :: Lens' TimeseriesDescriptorsList (Maybe TimeseriesDescriptorsListAggregator)
 tdlAggregator
   = lens _tdlAggregator
       (\ s a -> s{_tdlAggregator = a})
@@ -180,21 +180,21 @@ tdlAggregator
 -- is allowed, for example: 2w3d is not allowed; you should use 17d
 -- instead. If neither oldest nor timespan is specified, the default time
 -- interval will be (youngest - 4 hours, youngest].
-tdlTimespan :: Lens' TimeseriesDescriptorsList' (Maybe Text)
+tdlTimespan :: Lens' TimeseriesDescriptorsList (Maybe Text)
 tdlTimespan
   = lens _tdlTimespan (\ s a -> s{_tdlTimespan = a})
 
 -- | Metric names are protocol-free URLs as listed in the Supported Metrics
 -- page. For example,
 -- compute.googleapis.com\/instance\/disk\/read_ops_count.
-tdlMetric :: Lens' TimeseriesDescriptorsList' Text
+tdlMetric :: Lens' TimeseriesDescriptorsList Text
 tdlMetric
   = lens _tdlMetric (\ s a -> s{_tdlMetric = a})
 
 -- | Start of the time interval (exclusive), which is expressed as an RFC
 -- 3339 timestamp. If neither oldest nor timespan is specified, the default
 -- time interval will be (youngest - 4 hours, youngest]
-tdlOldest :: Lens' TimeseriesDescriptorsList' (Maybe Text)
+tdlOldest :: Lens' TimeseriesDescriptorsList (Maybe Text)
 tdlOldest
   = lens _tdlOldest (\ s a -> s{_tdlOldest = a})
 
@@ -204,7 +204,7 @@ tdlOldest
 -- key!~value: key regex does not match the value For example, to list all
 -- of the time series descriptors for the region us-central1, you could
 -- specify: label=cloud.googleapis.com%2Flocation=~us-central1.*
-tdlLabels :: Lens' TimeseriesDescriptorsList' [Text]
+tdlLabels :: Lens' TimeseriesDescriptorsList [Text]
 tdlLabels
   = lens _tdlLabels (\ s a -> s{_tdlLabels = a}) .
       _Default
@@ -213,21 +213,21 @@ tdlLabels
 -- | The pagination token, which is used to page through large result sets.
 -- Set this value to the value of the nextPageToken to retrieve the next
 -- page of results.
-tdlPageToken :: Lens' TimeseriesDescriptorsList' (Maybe Text)
+tdlPageToken :: Lens' TimeseriesDescriptorsList (Maybe Text)
 tdlPageToken
   = lens _tdlPageToken (\ s a -> s{_tdlPageToken = a})
 
 -- | End of the time interval (inclusive), which is expressed as an RFC 3339
 -- timestamp.
-tdlYoungest :: Lens' TimeseriesDescriptorsList' Text
+tdlYoungest :: Lens' TimeseriesDescriptorsList Text
 tdlYoungest
   = lens _tdlYoungest (\ s a -> s{_tdlYoungest = a})
 
-instance GoogleRequest TimeseriesDescriptorsList'
+instance GoogleRequest TimeseriesDescriptorsList
          where
-        type Rs TimeseriesDescriptorsList' =
+        type Rs TimeseriesDescriptorsList =
              ListTimeseriesDescriptorsResponse
-        requestClient TimeseriesDescriptorsList'{..}
+        requestClient TimeseriesDescriptorsList{..}
           = go _tdlProject _tdlMetric (Just _tdlYoungest)
               _tdlWindow
               (Just _tdlCount)

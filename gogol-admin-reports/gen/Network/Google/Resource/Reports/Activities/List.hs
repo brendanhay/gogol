@@ -29,8 +29,8 @@ module Network.Google.Resource.Reports.Activities.List
       ActivitiesListResource
 
     -- * Creating a Request
-    , activitiesList'
-    , ActivitiesList'
+    , activitiesList
+    , ActivitiesList
 
     -- * Request Lenses
     , alStartTime
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.Reports.Types
 
 -- | A resource alias for @reports.activities.list@ method which the
--- 'ActivitiesList'' request conforms to.
+-- 'ActivitiesList' request conforms to.
 type ActivitiesListResource =
      "activity" :>
        "users" :>
@@ -69,8 +69,8 @@ type ActivitiesListResource =
 
 -- | Retrieves a list of activities for a specific customer and application.
 --
--- /See:/ 'activitiesList'' smart constructor.
-data ActivitiesList' = ActivitiesList'
+-- /See:/ 'activitiesList' smart constructor.
+data ActivitiesList = ActivitiesList
     { _alStartTime       :: !(Maybe Text)
     , _alFilters         :: !(Maybe Text)
     , _alCustomerId      :: !(Maybe Text)
@@ -83,7 +83,7 @@ data ActivitiesList' = ActivitiesList'
     , _alMaxResults      :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivitiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -106,12 +106,12 @@ data ActivitiesList' = ActivitiesList'
 -- * 'alUserKey'
 --
 -- * 'alMaxResults'
-activitiesList'
+activitiesList
     :: Text -- ^ 'alApplicationName'
     -> Text -- ^ 'alUserKey'
-    -> ActivitiesList'
-activitiesList' pAlApplicationName_ pAlUserKey_ =
-    ActivitiesList'
+    -> ActivitiesList
+activitiesList pAlApplicationName_ pAlUserKey_ =
+    ActivitiesList
     { _alStartTime = Nothing
     , _alFilters = Nothing
     , _alCustomerId = Nothing
@@ -125,64 +125,64 @@ activitiesList' pAlApplicationName_ pAlUserKey_ =
     }
 
 -- | Return events which occured at or after this time.
-alStartTime :: Lens' ActivitiesList' (Maybe Text)
+alStartTime :: Lens' ActivitiesList (Maybe Text)
 alStartTime
   = lens _alStartTime (\ s a -> s{_alStartTime = a})
 
 -- | Event parameters in the form [parameter1 name][operator][parameter1
 -- value],[parameter2 name][operator][parameter2 value],...
-alFilters :: Lens' ActivitiesList' (Maybe Text)
+alFilters :: Lens' ActivitiesList (Maybe Text)
 alFilters
   = lens _alFilters (\ s a -> s{_alFilters = a})
 
 -- | Represents the customer for which the data is to be fetched.
-alCustomerId :: Lens' ActivitiesList' (Maybe Text)
+alCustomerId :: Lens' ActivitiesList (Maybe Text)
 alCustomerId
   = lens _alCustomerId (\ s a -> s{_alCustomerId = a})
 
 -- | IP Address of host where the event was performed. Supports both IPv4 and
 -- IPv6 addresses.
-alActorIPAddress :: Lens' ActivitiesList' (Maybe Text)
+alActorIPAddress :: Lens' ActivitiesList (Maybe Text)
 alActorIPAddress
   = lens _alActorIPAddress
       (\ s a -> s{_alActorIPAddress = a})
 
 -- | Return events which occured at or before this time.
-alEndTime :: Lens' ActivitiesList' (Maybe Text)
+alEndTime :: Lens' ActivitiesList (Maybe Text)
 alEndTime
   = lens _alEndTime (\ s a -> s{_alEndTime = a})
 
 -- | Application name for which the events are to be retrieved.
-alApplicationName :: Lens' ActivitiesList' Text
+alApplicationName :: Lens' ActivitiesList Text
 alApplicationName
   = lens _alApplicationName
       (\ s a -> s{_alApplicationName = a})
 
 -- | Token to specify next page.
-alPageToken :: Lens' ActivitiesList' (Maybe Text)
+alPageToken :: Lens' ActivitiesList (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | Name of the event being queried.
-alEventName :: Lens' ActivitiesList' (Maybe Text)
+alEventName :: Lens' ActivitiesList (Maybe Text)
 alEventName
   = lens _alEventName (\ s a -> s{_alEventName = a})
 
 -- | Represents the profile id or the user email for which the data should be
 -- filtered. When \'all\' is specified as the userKey, it returns
 -- usageReports for all users.
-alUserKey :: Lens' ActivitiesList' Text
+alUserKey :: Lens' ActivitiesList Text
 alUserKey
   = lens _alUserKey (\ s a -> s{_alUserKey = a})
 
 -- | Number of activity records to be shown in each page.
-alMaxResults :: Lens' ActivitiesList' (Maybe Int32)
+alMaxResults :: Lens' ActivitiesList (Maybe Int32)
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
-instance GoogleRequest ActivitiesList' where
-        type Rs ActivitiesList' = Activities
-        requestClient ActivitiesList'{..}
+instance GoogleRequest ActivitiesList where
+        type Rs ActivitiesList = Activities
+        requestClient ActivitiesList{..}
           = go _alUserKey _alApplicationName _alStartTime
               _alFilters
               _alCustomerId

@@ -29,8 +29,8 @@ module Network.Google.Resource.AppEngine.Apps.Modules.List
       AppsModulesListResource
 
     -- * Creating a Request
-    , appsModulesList'
-    , AppsModulesList'
+    , appsModulesList
+    , AppsModulesList
 
     -- * Request Lenses
     , amlXgafv
@@ -49,7 +49,7 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.modules.list@ method which the
--- 'AppsModulesList'' request conforms to.
+-- 'AppsModulesList' request conforms to.
 type AppsModulesListResource =
      "v1beta4" :>
        "apps" :>
@@ -69,8 +69,8 @@ type AppsModulesListResource =
 
 -- | Lists all the modules in the application.
 --
--- /See:/ 'appsModulesList'' smart constructor.
-data AppsModulesList' = AppsModulesList'
+-- /See:/ 'appsModulesList' smart constructor.
+data AppsModulesList = AppsModulesList
     { _amlXgafv          :: !(Maybe Text)
     , _amlUploadProtocol :: !(Maybe Text)
     , _amlPp             :: !Bool
@@ -83,7 +83,7 @@ data AppsModulesList' = AppsModulesList'
     , _amlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AppsModulesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AppsModulesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -106,11 +106,11 @@ data AppsModulesList' = AppsModulesList'
 -- * 'amlPageSize'
 --
 -- * 'amlCallback'
-appsModulesList'
+appsModulesList
     :: Text -- ^ 'amlAppsId'
-    -> AppsModulesList'
-appsModulesList' pAmlAppsId_ =
-    AppsModulesList'
+    -> AppsModulesList
+appsModulesList pAmlAppsId_ =
+    AppsModulesList
     { _amlXgafv = Nothing
     , _amlUploadProtocol = Nothing
     , _amlPp = True
@@ -124,61 +124,61 @@ appsModulesList' pAmlAppsId_ =
     }
 
 -- | V1 error format.
-amlXgafv :: Lens' AppsModulesList' (Maybe Text)
+amlXgafv :: Lens' AppsModulesList (Maybe Text)
 amlXgafv = lens _amlXgafv (\ s a -> s{_amlXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-amlUploadProtocol :: Lens' AppsModulesList' (Maybe Text)
+amlUploadProtocol :: Lens' AppsModulesList (Maybe Text)
 amlUploadProtocol
   = lens _amlUploadProtocol
       (\ s a -> s{_amlUploadProtocol = a})
 
 -- | Pretty-print response.
-amlPp :: Lens' AppsModulesList' Bool
+amlPp :: Lens' AppsModulesList Bool
 amlPp = lens _amlPp (\ s a -> s{_amlPp = a})
 
 -- | OAuth access token.
-amlAccessToken :: Lens' AppsModulesList' (Maybe Text)
+amlAccessToken :: Lens' AppsModulesList (Maybe Text)
 amlAccessToken
   = lens _amlAccessToken
       (\ s a -> s{_amlAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-amlUploadType :: Lens' AppsModulesList' (Maybe Text)
+amlUploadType :: Lens' AppsModulesList (Maybe Text)
 amlUploadType
   = lens _amlUploadType
       (\ s a -> s{_amlUploadType = a})
 
 -- | OAuth bearer token.
-amlBearerToken :: Lens' AppsModulesList' (Maybe Text)
+amlBearerToken :: Lens' AppsModulesList (Maybe Text)
 amlBearerToken
   = lens _amlBearerToken
       (\ s a -> s{_amlBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource requested. For example:
 -- \"apps\/myapp\".
-amlAppsId :: Lens' AppsModulesList' Text
+amlAppsId :: Lens' AppsModulesList Text
 amlAppsId
   = lens _amlAppsId (\ s a -> s{_amlAppsId = a})
 
 -- | Continuation token for fetching the next page of results.
-amlPageToken :: Lens' AppsModulesList' (Maybe Text)
+amlPageToken :: Lens' AppsModulesList (Maybe Text)
 amlPageToken
   = lens _amlPageToken (\ s a -> s{_amlPageToken = a})
 
 -- | Maximum results to return per page.
-amlPageSize :: Lens' AppsModulesList' (Maybe Int32)
+amlPageSize :: Lens' AppsModulesList (Maybe Int32)
 amlPageSize
   = lens _amlPageSize (\ s a -> s{_amlPageSize = a})
 
 -- | JSONP
-amlCallback :: Lens' AppsModulesList' (Maybe Text)
+amlCallback :: Lens' AppsModulesList (Maybe Text)
 amlCallback
   = lens _amlCallback (\ s a -> s{_amlCallback = a})
 
-instance GoogleRequest AppsModulesList' where
-        type Rs AppsModulesList' = ListModulesResponse
-        requestClient AppsModulesList'{..}
+instance GoogleRequest AppsModulesList where
+        type Rs AppsModulesList = ListModulesResponse
+        requestClient AppsModulesList{..}
           = go _amlAppsId _amlXgafv _amlUploadProtocol
               (Just _amlPp)
               _amlAccessToken

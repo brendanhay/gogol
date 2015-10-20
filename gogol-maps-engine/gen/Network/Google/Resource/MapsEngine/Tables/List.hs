@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Tables.List
       TablesListResource
 
     -- * Creating a Request
-    , tablesList'
-    , TablesList'
+    , tablesList
+    , TablesList
 
     -- * Request Lenses
     , tlCreatedAfter
@@ -52,7 +52,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.tables.list@ method which the
--- 'TablesList'' request conforms to.
+-- 'TablesList' request conforms to.
 type TablesListResource =
      "tables" :>
        QueryParam "createdAfter" DateTime' :>
@@ -75,8 +75,8 @@ type TablesListResource =
 
 -- | Return all tables readable by the current user.
 --
--- /See:/ 'tablesList'' smart constructor.
-data TablesList' = TablesList'
+-- /See:/ 'tablesList' smart constructor.
+data TablesList = TablesList
     { _tlCreatedAfter     :: !(Maybe DateTime')
     , _tlCreatorEmail     :: !(Maybe Text)
     , _tlRole             :: !(Maybe TablesListRole)
@@ -92,7 +92,7 @@ data TablesList' = TablesList'
     , _tlCreatedBefore    :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -121,10 +121,10 @@ data TablesList' = TablesList'
 -- * 'tlTags'
 --
 -- * 'tlCreatedBefore'
-tablesList'
-    :: TablesList'
-tablesList' =
-    TablesList'
+tablesList
+    :: TablesList
+tablesList =
+    TablesList
     { _tlCreatedAfter = Nothing
     , _tlCreatorEmail = Nothing
     , _tlRole = Nothing
@@ -142,7 +142,7 @@ tablesList' =
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been created at or after this time.
-tlCreatedAfter :: Lens' TablesList' (Maybe UTCTime)
+tlCreatedAfter :: Lens' TablesList (Maybe UTCTime)
 tlCreatedAfter
   = lens _tlCreatedAfter
       (\ s a -> s{_tlCreatedAfter = a})
@@ -150,29 +150,29 @@ tlCreatedAfter
 
 -- | An email address representing a user. Returned assets that have been
 -- created by the user associated with the provided email address.
-tlCreatorEmail :: Lens' TablesList' (Maybe Text)
+tlCreatorEmail :: Lens' TablesList (Maybe Text)
 tlCreatorEmail
   = lens _tlCreatorEmail
       (\ s a -> s{_tlCreatorEmail = a})
 
 -- | The role parameter indicates that the response should only contain
 -- assets where the current user has the specified level of access.
-tlRole :: Lens' TablesList' (Maybe TablesListRole)
+tlRole :: Lens' TablesList (Maybe TablesListRole)
 tlRole = lens _tlRole (\ s a -> s{_tlRole = a})
 
 -- | A bounding box, expressed as \"west,south,east,north\". If set, only
 -- assets which intersect this bounding box will be returned.
-tlBbox :: Lens' TablesList' (Maybe Text)
+tlBbox :: Lens' TablesList (Maybe Text)
 tlBbox = lens _tlBbox (\ s a -> s{_tlBbox = a})
 
-tlProcessingStatus :: Lens' TablesList' (Maybe TablesListProcessingStatus)
+tlProcessingStatus :: Lens' TablesList (Maybe TablesListProcessingStatus)
 tlProcessingStatus
   = lens _tlProcessingStatus
       (\ s a -> s{_tlProcessingStatus = a})
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been modified at or after this time.
-tlModifiedAfter :: Lens' TablesList' (Maybe UTCTime)
+tlModifiedAfter :: Lens' TablesList (Maybe UTCTime)
 tlModifiedAfter
   = lens _tlModifiedAfter
       (\ s a -> s{_tlModifiedAfter = a})
@@ -180,7 +180,7 @@ tlModifiedAfter
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been modified at or before this time.
-tlModifiedBefore :: Lens' TablesList' (Maybe UTCTime)
+tlModifiedBefore :: Lens' TablesList (Maybe UTCTime)
 tlModifiedBefore
   = lens _tlModifiedBefore
       (\ s a -> s{_tlModifiedBefore = a})
@@ -189,7 +189,7 @@ tlModifiedBefore
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
 -- nextPageToken from the previous response.
-tlPageToken :: Lens' TablesList' (Maybe Text)
+tlPageToken :: Lens' TablesList (Maybe Text)
 tlPageToken
   = lens _tlPageToken (\ s a -> s{_tlPageToken = a})
 
@@ -197,37 +197,37 @@ tlPageToken
 -- all available projects with their IDs, send a Projects: list request.
 -- You can also find your project ID as the value of the DashboardPlace:cid
 -- URL parameter when signed in to mapsengine.google.com.
-tlProjectId :: Lens' TablesList' (Maybe Text)
+tlProjectId :: Lens' TablesList (Maybe Text)
 tlProjectId
   = lens _tlProjectId (\ s a -> s{_tlProjectId = a})
 
 -- | An unstructured search string used to filter the set of results based on
 -- asset metadata.
-tlSearch :: Lens' TablesList' (Maybe Text)
+tlSearch :: Lens' TablesList (Maybe Text)
 tlSearch = lens _tlSearch (\ s a -> s{_tlSearch = a})
 
 -- | The maximum number of items to include in a single response page. The
 -- maximum supported value is 100.
-tlMaxResults :: Lens' TablesList' (Maybe Word32)
+tlMaxResults :: Lens' TablesList (Maybe Word32)
 tlMaxResults
   = lens _tlMaxResults (\ s a -> s{_tlMaxResults = a})
 
 -- | A comma separated list of tags. Returned assets will contain all the
 -- tags from the list.
-tlTags :: Lens' TablesList' (Maybe Text)
+tlTags :: Lens' TablesList (Maybe Text)
 tlTags = lens _tlTags (\ s a -> s{_tlTags = a})
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
 -- Returned assets will have been created at or before this time.
-tlCreatedBefore :: Lens' TablesList' (Maybe UTCTime)
+tlCreatedBefore :: Lens' TablesList (Maybe UTCTime)
 tlCreatedBefore
   = lens _tlCreatedBefore
       (\ s a -> s{_tlCreatedBefore = a})
       . mapping _DateTime
 
-instance GoogleRequest TablesList' where
-        type Rs TablesList' = TablesListResponse
-        requestClient TablesList'{..}
+instance GoogleRequest TablesList where
+        type Rs TablesList = TablesListResponse
+        requestClient TablesList{..}
           = go _tlCreatedAfter _tlCreatorEmail _tlRole _tlBbox
               _tlProcessingStatus
               _tlModifiedAfter

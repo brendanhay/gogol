@@ -30,8 +30,8 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Patch
       ObjectAccessControlsPatchResource
 
     -- * Creating a Request
-    , objectAccessControlsPatch'
-    , ObjectAccessControlsPatch'
+    , objectAccessControlsPatch
+    , ObjectAccessControlsPatch
 
     -- * Request Lenses
     , oacpBucket
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objectAccessControls.patch@ method which the
--- 'ObjectAccessControlsPatch'' request conforms to.
+-- 'ObjectAccessControlsPatch' request conforms to.
 type ObjectAccessControlsPatchResource =
      "b" :>
        Capture "bucket" Text :>
@@ -61,8 +61,8 @@ type ObjectAccessControlsPatchResource =
 -- | Updates an ACL entry on the specified object. This method supports patch
 -- semantics.
 --
--- /See:/ 'objectAccessControlsPatch'' smart constructor.
-data ObjectAccessControlsPatch' = ObjectAccessControlsPatch'
+-- /See:/ 'objectAccessControlsPatch' smart constructor.
+data ObjectAccessControlsPatch = ObjectAccessControlsPatch
     { _oacpBucket     :: !Text
     , _oacpPayload    :: !ObjectAccessControl
     , _oacpObject     :: !Text
@@ -70,7 +70,7 @@ data ObjectAccessControlsPatch' = ObjectAccessControlsPatch'
     , _oacpGeneration :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ObjectAccessControlsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ObjectAccessControlsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -83,14 +83,14 @@ data ObjectAccessControlsPatch' = ObjectAccessControlsPatch'
 -- * 'oacpEntity'
 --
 -- * 'oacpGeneration'
-objectAccessControlsPatch'
+objectAccessControlsPatch
     :: Text -- ^ 'oacpBucket'
     -> ObjectAccessControl -- ^ 'oacpPayload'
     -> Text -- ^ 'oacpObject'
     -> Text -- ^ 'oacpEntity'
-    -> ObjectAccessControlsPatch'
-objectAccessControlsPatch' pOacpBucket_ pOacpPayload_ pOacpObject_ pOacpEntity_ =
-    ObjectAccessControlsPatch'
+    -> ObjectAccessControlsPatch
+objectAccessControlsPatch pOacpBucket_ pOacpPayload_ pOacpObject_ pOacpEntity_ =
+    ObjectAccessControlsPatch
     { _oacpBucket = pOacpBucket_
     , _oacpPayload = pOacpPayload_
     , _oacpObject = pOacpObject_
@@ -99,40 +99,40 @@ objectAccessControlsPatch' pOacpBucket_ pOacpPayload_ pOacpObject_ pOacpEntity_ 
     }
 
 -- | Name of a bucket.
-oacpBucket :: Lens' ObjectAccessControlsPatch' Text
+oacpBucket :: Lens' ObjectAccessControlsPatch Text
 oacpBucket
   = lens _oacpBucket (\ s a -> s{_oacpBucket = a})
 
 -- | Multipart request metadata.
-oacpPayload :: Lens' ObjectAccessControlsPatch' ObjectAccessControl
+oacpPayload :: Lens' ObjectAccessControlsPatch ObjectAccessControl
 oacpPayload
   = lens _oacpPayload (\ s a -> s{_oacpPayload = a})
 
 -- | Name of the object. For information about how to URL encode object names
 -- to be path safe, see Encoding URI Path Parts.
-oacpObject :: Lens' ObjectAccessControlsPatch' Text
+oacpObject :: Lens' ObjectAccessControlsPatch Text
 oacpObject
   = lens _oacpObject (\ s a -> s{_oacpObject = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
 -- allAuthenticatedUsers.
-oacpEntity :: Lens' ObjectAccessControlsPatch' Text
+oacpEntity :: Lens' ObjectAccessControlsPatch Text
 oacpEntity
   = lens _oacpEntity (\ s a -> s{_oacpEntity = a})
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
-oacpGeneration :: Lens' ObjectAccessControlsPatch' (Maybe Int64)
+oacpGeneration :: Lens' ObjectAccessControlsPatch (Maybe Int64)
 oacpGeneration
   = lens _oacpGeneration
       (\ s a -> s{_oacpGeneration = a})
 
-instance GoogleRequest ObjectAccessControlsPatch'
+instance GoogleRequest ObjectAccessControlsPatch
          where
-        type Rs ObjectAccessControlsPatch' =
+        type Rs ObjectAccessControlsPatch =
              ObjectAccessControl
-        requestClient ObjectAccessControlsPatch'{..}
+        requestClient ObjectAccessControlsPatch{..}
           = go _oacpBucket _oacpObject _oacpEntity
               _oacpGeneration
               (Just AltJSON)

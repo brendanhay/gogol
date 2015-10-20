@@ -34,8 +34,8 @@ module Network.Google.Resource.Classroom.Courses.Teachers.Delete
       CoursesTeachersDeleteResource
 
     -- * Creating a Request
-    , coursesTeachersDelete'
-    , CoursesTeachersDelete'
+    , coursesTeachersDelete
+    , CoursesTeachersDelete
 
     -- * Request Lenses
     , ctdXgafv
@@ -53,7 +53,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.teachers.delete@ method which the
--- 'CoursesTeachersDelete'' request conforms to.
+-- 'CoursesTeachersDelete' request conforms to.
 type CoursesTeachersDeleteResource =
      "v1" :>
        "courses" :>
@@ -76,8 +76,8 @@ type CoursesTeachersDeleteResource =
 -- not exist. * \`FAILED_PRECONDITION\` if the requested ID belongs to the
 -- primary teacher of this course.
 --
--- /See:/ 'coursesTeachersDelete'' smart constructor.
-data CoursesTeachersDelete' = CoursesTeachersDelete'
+-- /See:/ 'coursesTeachersDelete' smart constructor.
+data CoursesTeachersDelete = CoursesTeachersDelete
     { _ctdXgafv          :: !(Maybe Text)
     , _ctdUploadProtocol :: !(Maybe Text)
     , _ctdPp             :: !Bool
@@ -89,7 +89,7 @@ data CoursesTeachersDelete' = CoursesTeachersDelete'
     , _ctdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CoursesTeachersDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'CoursesTeachersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -110,12 +110,12 @@ data CoursesTeachersDelete' = CoursesTeachersDelete'
 -- * 'ctdBearerToken'
 --
 -- * 'ctdCallback'
-coursesTeachersDelete'
+coursesTeachersDelete
     :: Text -- ^ 'ctdCourseId'
     -> Text -- ^ 'ctdUserId'
-    -> CoursesTeachersDelete'
-coursesTeachersDelete' pCtdCourseId_ pCtdUserId_ =
-    CoursesTeachersDelete'
+    -> CoursesTeachersDelete
+coursesTeachersDelete pCtdCourseId_ pCtdUserId_ =
+    CoursesTeachersDelete
     { _ctdXgafv = Nothing
     , _ctdUploadProtocol = Nothing
     , _ctdPp = True
@@ -128,33 +128,33 @@ coursesTeachersDelete' pCtdCourseId_ pCtdUserId_ =
     }
 
 -- | V1 error format.
-ctdXgafv :: Lens' CoursesTeachersDelete' (Maybe Text)
+ctdXgafv :: Lens' CoursesTeachersDelete (Maybe Text)
 ctdXgafv = lens _ctdXgafv (\ s a -> s{_ctdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ctdUploadProtocol :: Lens' CoursesTeachersDelete' (Maybe Text)
+ctdUploadProtocol :: Lens' CoursesTeachersDelete (Maybe Text)
 ctdUploadProtocol
   = lens _ctdUploadProtocol
       (\ s a -> s{_ctdUploadProtocol = a})
 
 -- | Pretty-print response.
-ctdPp :: Lens' CoursesTeachersDelete' Bool
+ctdPp :: Lens' CoursesTeachersDelete Bool
 ctdPp = lens _ctdPp (\ s a -> s{_ctdPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
-ctdCourseId :: Lens' CoursesTeachersDelete' Text
+ctdCourseId :: Lens' CoursesTeachersDelete Text
 ctdCourseId
   = lens _ctdCourseId (\ s a -> s{_ctdCourseId = a})
 
 -- | OAuth access token.
-ctdAccessToken :: Lens' CoursesTeachersDelete' (Maybe Text)
+ctdAccessToken :: Lens' CoursesTeachersDelete (Maybe Text)
 ctdAccessToken
   = lens _ctdAccessToken
       (\ s a -> s{_ctdAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ctdUploadType :: Lens' CoursesTeachersDelete' (Maybe Text)
+ctdUploadType :: Lens' CoursesTeachersDelete (Maybe Text)
 ctdUploadType
   = lens _ctdUploadType
       (\ s a -> s{_ctdUploadType = a})
@@ -162,24 +162,24 @@ ctdUploadType
 -- | Identifier of the teacher to delete. The identifier can be one of the
 -- following: * the numeric identifier for the user * the email address of
 -- the user * the string literal \`\"me\"\`, indicating the requesting user
-ctdUserId :: Lens' CoursesTeachersDelete' Text
+ctdUserId :: Lens' CoursesTeachersDelete Text
 ctdUserId
   = lens _ctdUserId (\ s a -> s{_ctdUserId = a})
 
 -- | OAuth bearer token.
-ctdBearerToken :: Lens' CoursesTeachersDelete' (Maybe Text)
+ctdBearerToken :: Lens' CoursesTeachersDelete (Maybe Text)
 ctdBearerToken
   = lens _ctdBearerToken
       (\ s a -> s{_ctdBearerToken = a})
 
 -- | JSONP
-ctdCallback :: Lens' CoursesTeachersDelete' (Maybe Text)
+ctdCallback :: Lens' CoursesTeachersDelete (Maybe Text)
 ctdCallback
   = lens _ctdCallback (\ s a -> s{_ctdCallback = a})
 
-instance GoogleRequest CoursesTeachersDelete' where
-        type Rs CoursesTeachersDelete' = Empty
-        requestClient CoursesTeachersDelete'{..}
+instance GoogleRequest CoursesTeachersDelete where
+        type Rs CoursesTeachersDelete = Empty
+        requestClient CoursesTeachersDelete{..}
           = go _ctdCourseId _ctdUserId _ctdXgafv
               _ctdUploadProtocol
               (Just _ctdPp)

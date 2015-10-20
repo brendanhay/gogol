@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.List
       EntitlementsListResource
 
     -- * Creating a Request
-    , entitlementsList'
-    , EntitlementsList'
+    , entitlementsList
+    , EntitlementsList
 
     -- * Request Lenses
     , elEnterpriseId
@@ -41,7 +41,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.entitlements.list@ method which the
--- 'EntitlementsList'' request conforms to.
+-- 'EntitlementsList' request conforms to.
 type EntitlementsListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -53,42 +53,42 @@ type EntitlementsListResource =
 
 -- | List of all entitlements for the specified user. Only the ID is set.
 --
--- /See:/ 'entitlementsList'' smart constructor.
-data EntitlementsList' = EntitlementsList'
+-- /See:/ 'entitlementsList' smart constructor.
+data EntitlementsList = EntitlementsList
     { _elEnterpriseId :: !Text
     , _elUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EntitlementsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'EntitlementsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'elEnterpriseId'
 --
 -- * 'elUserId'
-entitlementsList'
+entitlementsList
     :: Text -- ^ 'elEnterpriseId'
     -> Text -- ^ 'elUserId'
-    -> EntitlementsList'
-entitlementsList' pElEnterpriseId_ pElUserId_ =
-    EntitlementsList'
+    -> EntitlementsList
+entitlementsList pElEnterpriseId_ pElUserId_ =
+    EntitlementsList
     { _elEnterpriseId = pElEnterpriseId_
     , _elUserId = pElUserId_
     }
 
 -- | The ID of the enterprise.
-elEnterpriseId :: Lens' EntitlementsList' Text
+elEnterpriseId :: Lens' EntitlementsList Text
 elEnterpriseId
   = lens _elEnterpriseId
       (\ s a -> s{_elEnterpriseId = a})
 
 -- | The ID of the user.
-elUserId :: Lens' EntitlementsList' Text
+elUserId :: Lens' EntitlementsList Text
 elUserId = lens _elUserId (\ s a -> s{_elUserId = a})
 
-instance GoogleRequest EntitlementsList' where
-        type Rs EntitlementsList' = EntitlementsListResponse
-        requestClient EntitlementsList'{..}
+instance GoogleRequest EntitlementsList where
+        type Rs EntitlementsList = EntitlementsListResponse
+        requestClient EntitlementsList{..}
           = go _elEnterpriseId _elUserId (Just AltJSON)
               androidEnterpriseService
           where go

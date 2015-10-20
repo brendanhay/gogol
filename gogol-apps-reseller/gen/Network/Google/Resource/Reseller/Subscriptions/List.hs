@@ -30,8 +30,8 @@ module Network.Google.Resource.Reseller.Subscriptions.List
       SubscriptionsListResource
 
     -- * Creating a Request
-    , subscriptionsList'
-    , SubscriptionsList'
+    , subscriptionsList
+    , SubscriptionsList
 
     -- * Request Lenses
     , slCustomerNamePrefix
@@ -45,7 +45,7 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @reseller.subscriptions.list@ method which the
--- 'SubscriptionsList'' request conforms to.
+-- 'SubscriptionsList' request conforms to.
 type SubscriptionsListResource =
      "subscriptions" :>
        QueryParam "customerNamePrefix" Text :>
@@ -58,8 +58,8 @@ type SubscriptionsListResource =
 -- | Lists subscriptions of a reseller, optionally filtered by a customer
 -- name prefix.
 --
--- /See:/ 'subscriptionsList'' smart constructor.
-data SubscriptionsList' = SubscriptionsList'
+-- /See:/ 'subscriptionsList' smart constructor.
+data SubscriptionsList = SubscriptionsList
     { _slCustomerNamePrefix :: !(Maybe Text)
     , _slCustomerId         :: !(Maybe Text)
     , _slCustomerAuthToken  :: !(Maybe Text)
@@ -67,7 +67,7 @@ data SubscriptionsList' = SubscriptionsList'
     , _slMaxResults         :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubscriptionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,10 +80,10 @@ data SubscriptionsList' = SubscriptionsList'
 -- * 'slPageToken'
 --
 -- * 'slMaxResults'
-subscriptionsList'
-    :: SubscriptionsList'
-subscriptionsList' =
-    SubscriptionsList'
+subscriptionsList
+    :: SubscriptionsList
+subscriptionsList =
+    SubscriptionsList
     { _slCustomerNamePrefix = Nothing
     , _slCustomerId = Nothing
     , _slCustomerAuthToken = Nothing
@@ -93,37 +93,37 @@ subscriptionsList' =
 
 -- | Prefix of the customer\'s domain name by which the subscriptions should
 -- be filtered. Optional
-slCustomerNamePrefix :: Lens' SubscriptionsList' (Maybe Text)
+slCustomerNamePrefix :: Lens' SubscriptionsList (Maybe Text)
 slCustomerNamePrefix
   = lens _slCustomerNamePrefix
       (\ s a -> s{_slCustomerNamePrefix = a})
 
 -- | Id of the Customer
-slCustomerId :: Lens' SubscriptionsList' (Maybe Text)
+slCustomerId :: Lens' SubscriptionsList (Maybe Text)
 slCustomerId
   = lens _slCustomerId (\ s a -> s{_slCustomerId = a})
 
 -- | An auth token needed if the customer is not a resold customer of this
 -- reseller. Can be generated at
 -- https:\/\/www.google.com\/a\/cpanel\/customer-domain\/TransferToken.Optional.
-slCustomerAuthToken :: Lens' SubscriptionsList' (Maybe Text)
+slCustomerAuthToken :: Lens' SubscriptionsList (Maybe Text)
 slCustomerAuthToken
   = lens _slCustomerAuthToken
       (\ s a -> s{_slCustomerAuthToken = a})
 
 -- | Token to specify next page in the list
-slPageToken :: Lens' SubscriptionsList' (Maybe Text)
+slPageToken :: Lens' SubscriptionsList (Maybe Text)
 slPageToken
   = lens _slPageToken (\ s a -> s{_slPageToken = a})
 
 -- | Maximum number of results to return
-slMaxResults :: Lens' SubscriptionsList' (Maybe Word32)
+slMaxResults :: Lens' SubscriptionsList (Maybe Word32)
 slMaxResults
   = lens _slMaxResults (\ s a -> s{_slMaxResults = a})
 
-instance GoogleRequest SubscriptionsList' where
-        type Rs SubscriptionsList' = Subscriptions
-        requestClient SubscriptionsList'{..}
+instance GoogleRequest SubscriptionsList where
+        type Rs SubscriptionsList = Subscriptions
+        requestClient SubscriptionsList{..}
           = go _slCustomerNamePrefix _slCustomerId
               _slCustomerAuthToken
               _slPageToken

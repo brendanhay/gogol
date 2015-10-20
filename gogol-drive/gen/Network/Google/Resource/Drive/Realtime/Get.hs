@@ -30,19 +30,19 @@ module Network.Google.Resource.Drive.Realtime.Get
       RealtimeGetResource
 
     -- * Creating a Request
-    , realtimeGet'
-    , RealtimeGet'
+    , realtimeGet
+    , RealtimeGet
 
     -- * Request Lenses
-    , reaFileId
-    , reaRevision
+    , rrFileId
+    , rrRevision
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.realtime.get@ method which the
--- 'RealtimeGet'' request conforms to.
+-- 'RealtimeGet' request conforms to.
 type RealtimeGetResource =
      "files" :>
        Capture "fileId" Text :>
@@ -60,55 +60,54 @@ type RealtimeGetResource =
 -- | Exports the contents of the Realtime API data model associated with this
 -- file as JSON.
 --
--- /See:/ 'realtimeGet'' smart constructor.
-data RealtimeGet' = RealtimeGet'
-    { _reaFileId   :: !Text
-    , _reaRevision :: !(Maybe Int32)
+-- /See:/ 'realtimeGet' smart constructor.
+data RealtimeGet = RealtimeGet
+    { _rrFileId   :: !Text
+    , _rrRevision :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RealtimeGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'RealtimeGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'reaFileId'
+-- * 'rrFileId'
 --
--- * 'reaRevision'
-realtimeGet'
-    :: Text -- ^ 'reaFileId'
-    -> RealtimeGet'
-realtimeGet' pReaFileId_ =
-    RealtimeGet'
-    { _reaFileId = pReaFileId_
-    , _reaRevision = Nothing
+-- * 'rrRevision'
+realtimeGet
+    :: Text -- ^ 'rrFileId'
+    -> RealtimeGet
+realtimeGet pRrFileId_ =
+    RealtimeGet
+    { _rrFileId = pRrFileId_
+    , _rrRevision = Nothing
     }
 
 -- | The ID of the file that the Realtime API data model is associated with.
-reaFileId :: Lens' RealtimeGet' Text
-reaFileId
-  = lens _reaFileId (\ s a -> s{_reaFileId = a})
+rrFileId :: Lens' RealtimeGet Text
+rrFileId = lens _rrFileId (\ s a -> s{_rrFileId = a})
 
 -- | The revision of the Realtime API data model to export. Revisions start
 -- at 1 (the initial empty data model) and are incremented with each
 -- change. If this parameter is excluded, the most recent data model will
 -- be returned.
-reaRevision :: Lens' RealtimeGet' (Maybe Int32)
-reaRevision
-  = lens _reaRevision (\ s a -> s{_reaRevision = a})
+rrRevision :: Lens' RealtimeGet (Maybe Int32)
+rrRevision
+  = lens _rrRevision (\ s a -> s{_rrRevision = a})
 
-instance GoogleRequest RealtimeGet' where
-        type Rs RealtimeGet' = ()
-        requestClient RealtimeGet'{..}
-          = go _reaFileId _reaRevision (Just AltJSON)
+instance GoogleRequest RealtimeGet where
+        type Rs RealtimeGet = ()
+        requestClient RealtimeGet{..}
+          = go _rrFileId _rrRevision (Just AltJSON)
               driveService
           where go :<|> _
                   = buildClient (Proxy :: Proxy RealtimeGetResource)
                       mempty
 
-instance GoogleRequest (MediaDownload RealtimeGet')
+instance GoogleRequest (MediaDownload RealtimeGet)
          where
-        type Rs (MediaDownload RealtimeGet') = Stream
-        requestClient (MediaDownload RealtimeGet'{..})
-          = go _reaFileId _reaRevision (Just AltMedia)
+        type Rs (MediaDownload RealtimeGet) = Stream
+        requestClient (MediaDownload RealtimeGet{..})
+          = go _rrFileId _rrRevision (Just AltMedia)
               driveService
           where _ :<|> go
                   = buildClient (Proxy :: Proxy RealtimeGetResource)

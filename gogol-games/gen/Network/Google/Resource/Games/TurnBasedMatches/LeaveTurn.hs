@@ -30,8 +30,8 @@ module Network.Google.Resource.Games.TurnBasedMatches.LeaveTurn
       TurnBasedMatchesLeaveTurnResource
 
     -- * Creating a Request
-    , turnBasedMatchesLeaveTurn'
-    , TurnBasedMatchesLeaveTurn'
+    , turnBasedMatchesLeaveTurn
+    , TurnBasedMatchesLeaveTurn
 
     -- * Request Lenses
     , tbmltLanguage
@@ -44,7 +44,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.turnBasedMatches.leaveTurn@ method which the
--- 'TurnBasedMatchesLeaveTurn'' request conforms to.
+-- 'TurnBasedMatchesLeaveTurn' request conforms to.
 type TurnBasedMatchesLeaveTurnResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
@@ -58,15 +58,15 @@ type TurnBasedMatchesLeaveTurnResource =
 -- | Leave a turn-based match during the current player\'s turn, without
 -- canceling the match.
 --
--- /See:/ 'turnBasedMatchesLeaveTurn'' smart constructor.
-data TurnBasedMatchesLeaveTurn' = TurnBasedMatchesLeaveTurn'
+-- /See:/ 'turnBasedMatchesLeaveTurn' smart constructor.
+data TurnBasedMatchesLeaveTurn = TurnBasedMatchesLeaveTurn
     { _tbmltLanguage             :: !(Maybe Text)
     , _tbmltPendingParticipantId :: !(Maybe Text)
     , _tbmltMatchId              :: !Text
     , _tbmltMatchVersion         :: !Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TurnBasedMatchesLeaveTurn'' with the minimum fields required to make a request.
+-- | Creates a value of 'TurnBasedMatchesLeaveTurn' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,12 +77,12 @@ data TurnBasedMatchesLeaveTurn' = TurnBasedMatchesLeaveTurn'
 -- * 'tbmltMatchId'
 --
 -- * 'tbmltMatchVersion'
-turnBasedMatchesLeaveTurn'
+turnBasedMatchesLeaveTurn
     :: Text -- ^ 'tbmltMatchId'
     -> Int32 -- ^ 'tbmltMatchVersion'
-    -> TurnBasedMatchesLeaveTurn'
-turnBasedMatchesLeaveTurn' pTbmltMatchId_ pTbmltMatchVersion_ =
-    TurnBasedMatchesLeaveTurn'
+    -> TurnBasedMatchesLeaveTurn
+turnBasedMatchesLeaveTurn pTbmltMatchId_ pTbmltMatchVersion_ =
+    TurnBasedMatchesLeaveTurn
     { _tbmltLanguage = Nothing
     , _tbmltPendingParticipantId = Nothing
     , _tbmltMatchId = pTbmltMatchId_
@@ -90,7 +90,7 @@ turnBasedMatchesLeaveTurn' pTbmltMatchId_ pTbmltMatchVersion_ =
     }
 
 -- | The preferred language to use for strings returned by this method.
-tbmltLanguage :: Lens' TurnBasedMatchesLeaveTurn' (Maybe Text)
+tbmltLanguage :: Lens' TurnBasedMatchesLeaveTurn (Maybe Text)
 tbmltLanguage
   = lens _tbmltLanguage
       (\ s a -> s{_tbmltLanguage = a})
@@ -99,26 +99,26 @@ tbmltLanguage
 -- set, the match will wait for other player(s) to join via automatching;
 -- this is only valid if automatch criteria is set on the match with
 -- remaining slots for automatched players.
-tbmltPendingParticipantId :: Lens' TurnBasedMatchesLeaveTurn' (Maybe Text)
+tbmltPendingParticipantId :: Lens' TurnBasedMatchesLeaveTurn (Maybe Text)
 tbmltPendingParticipantId
   = lens _tbmltPendingParticipantId
       (\ s a -> s{_tbmltPendingParticipantId = a})
 
 -- | The ID of the match.
-tbmltMatchId :: Lens' TurnBasedMatchesLeaveTurn' Text
+tbmltMatchId :: Lens' TurnBasedMatchesLeaveTurn Text
 tbmltMatchId
   = lens _tbmltMatchId (\ s a -> s{_tbmltMatchId = a})
 
 -- | The version of the match being updated.
-tbmltMatchVersion :: Lens' TurnBasedMatchesLeaveTurn' Int32
+tbmltMatchVersion :: Lens' TurnBasedMatchesLeaveTurn Int32
 tbmltMatchVersion
   = lens _tbmltMatchVersion
       (\ s a -> s{_tbmltMatchVersion = a})
 
-instance GoogleRequest TurnBasedMatchesLeaveTurn'
+instance GoogleRequest TurnBasedMatchesLeaveTurn
          where
-        type Rs TurnBasedMatchesLeaveTurn' = TurnBasedMatch
-        requestClient TurnBasedMatchesLeaveTurn'{..}
+        type Rs TurnBasedMatchesLeaveTurn = TurnBasedMatch
+        requestClient TurnBasedMatchesLeaveTurn{..}
           = go _tbmltMatchId (Just _tbmltMatchVersion)
               _tbmltLanguage
               _tbmltPendingParticipantId

@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.TargetHTTPSProxies.Get
       TargetHTTPSProxiesGetResource
 
     -- * Creating a Request
-    , targetHTTPSProxiesGet'
-    , TargetHTTPSProxiesGet'
+    , targetHTTPSProxiesGet
+    , TargetHTTPSProxiesGet
 
     -- * Request Lenses
     , thpgProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetHttpsProxies.get@ method which the
--- 'TargetHTTPSProxiesGet'' request conforms to.
+-- 'TargetHTTPSProxiesGet' request conforms to.
 type TargetHTTPSProxiesGetResource =
      Capture "project" Text :>
        "global" :>
@@ -52,43 +52,43 @@ type TargetHTTPSProxiesGetResource =
 
 -- | Returns the specified TargetHttpsProxy resource.
 --
--- /See:/ 'targetHTTPSProxiesGet'' smart constructor.
-data TargetHTTPSProxiesGet' = TargetHTTPSProxiesGet'
+-- /See:/ 'targetHTTPSProxiesGet' smart constructor.
+data TargetHTTPSProxiesGet = TargetHTTPSProxiesGet
     { _thpgProject          :: !Text
     , _thpgTargetHTTPSProxy :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetHTTPSProxiesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetHTTPSProxiesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'thpgProject'
 --
 -- * 'thpgTargetHTTPSProxy'
-targetHTTPSProxiesGet'
+targetHTTPSProxiesGet
     :: Text -- ^ 'thpgProject'
     -> Text -- ^ 'thpgTargetHTTPSProxy'
-    -> TargetHTTPSProxiesGet'
-targetHTTPSProxiesGet' pThpgProject_ pThpgTargetHTTPSProxy_ =
-    TargetHTTPSProxiesGet'
+    -> TargetHTTPSProxiesGet
+targetHTTPSProxiesGet pThpgProject_ pThpgTargetHTTPSProxy_ =
+    TargetHTTPSProxiesGet
     { _thpgProject = pThpgProject_
     , _thpgTargetHTTPSProxy = pThpgTargetHTTPSProxy_
     }
 
 -- | Name of the project scoping this request.
-thpgProject :: Lens' TargetHTTPSProxiesGet' Text
+thpgProject :: Lens' TargetHTTPSProxiesGet Text
 thpgProject
   = lens _thpgProject (\ s a -> s{_thpgProject = a})
 
 -- | Name of the TargetHttpsProxy resource to return.
-thpgTargetHTTPSProxy :: Lens' TargetHTTPSProxiesGet' Text
+thpgTargetHTTPSProxy :: Lens' TargetHTTPSProxiesGet Text
 thpgTargetHTTPSProxy
   = lens _thpgTargetHTTPSProxy
       (\ s a -> s{_thpgTargetHTTPSProxy = a})
 
-instance GoogleRequest TargetHTTPSProxiesGet' where
-        type Rs TargetHTTPSProxiesGet' = TargetHTTPSProxy
-        requestClient TargetHTTPSProxiesGet'{..}
+instance GoogleRequest TargetHTTPSProxiesGet where
+        type Rs TargetHTTPSProxiesGet = TargetHTTPSProxy
+        requestClient TargetHTTPSProxiesGet{..}
           = go _thpgProject _thpgTargetHTTPSProxy
               (Just AltJSON)
               computeService

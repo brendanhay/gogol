@@ -29,19 +29,19 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Patch
       RasterCollectionsPatchResource
 
     -- * Creating a Request
-    , rasterCollectionsPatch'
-    , RasterCollectionsPatch'
+    , rasterCollectionsPatch
+    , RasterCollectionsPatch
 
     -- * Request Lenses
-    , rcpPayload
-    , rcpId
+    , rasPayload
+    , rasId
     ) where
 
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasterCollections.patch@ method which the
--- 'RasterCollectionsPatch'' request conforms to.
+-- 'RasterCollectionsPatch' request conforms to.
 type RasterCollectionsPatchResource =
      "rasterCollections" :>
        Capture "id" Text :>
@@ -50,42 +50,42 @@ type RasterCollectionsPatchResource =
 
 -- | Mutate a raster collection asset.
 --
--- /See:/ 'rasterCollectionsPatch'' smart constructor.
-data RasterCollectionsPatch' = RasterCollectionsPatch'
-    { _rcpPayload :: !RasterCollection
-    , _rcpId      :: !Text
+-- /See:/ 'rasterCollectionsPatch' smart constructor.
+data RasterCollectionsPatch = RasterCollectionsPatch
+    { _rasPayload :: !RasterCollection
+    , _rasId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RasterCollectionsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'RasterCollectionsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcpPayload'
+-- * 'rasPayload'
 --
--- * 'rcpId'
-rasterCollectionsPatch'
-    :: RasterCollection -- ^ 'rcpPayload'
-    -> Text -- ^ 'rcpId'
-    -> RasterCollectionsPatch'
-rasterCollectionsPatch' pRcpPayload_ pRcpId_ =
-    RasterCollectionsPatch'
-    { _rcpPayload = pRcpPayload_
-    , _rcpId = pRcpId_
+-- * 'rasId'
+rasterCollectionsPatch
+    :: RasterCollection -- ^ 'rasPayload'
+    -> Text -- ^ 'rasId'
+    -> RasterCollectionsPatch
+rasterCollectionsPatch pRasPayload_ pRasId_ =
+    RasterCollectionsPatch
+    { _rasPayload = pRasPayload_
+    , _rasId = pRasId_
     }
 
 -- | Multipart request metadata.
-rcpPayload :: Lens' RasterCollectionsPatch' RasterCollection
-rcpPayload
-  = lens _rcpPayload (\ s a -> s{_rcpPayload = a})
+rasPayload :: Lens' RasterCollectionsPatch RasterCollection
+rasPayload
+  = lens _rasPayload (\ s a -> s{_rasPayload = a})
 
 -- | The ID of the raster collection.
-rcpId :: Lens' RasterCollectionsPatch' Text
-rcpId = lens _rcpId (\ s a -> s{_rcpId = a})
+rasId :: Lens' RasterCollectionsPatch Text
+rasId = lens _rasId (\ s a -> s{_rasId = a})
 
-instance GoogleRequest RasterCollectionsPatch' where
-        type Rs RasterCollectionsPatch' = ()
-        requestClient RasterCollectionsPatch'{..}
-          = go _rcpId (Just AltJSON) _rcpPayload
+instance GoogleRequest RasterCollectionsPatch where
+        type Rs RasterCollectionsPatch = ()
+        requestClient RasterCollectionsPatch{..}
+          = go _rasId (Just AltJSON) _rasPayload
               mapsEngineService
           where go
                   = buildClient

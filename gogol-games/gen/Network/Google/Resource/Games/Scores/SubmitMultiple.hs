@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.Scores.SubmitMultiple
       ScoresSubmitMultipleResource
 
     -- * Creating a Request
-    , scoresSubmitMultiple'
-    , ScoresSubmitMultiple'
+    , scoresSubmitMultiple
+    , ScoresSubmitMultiple
 
     -- * Request Lenses
     , ssmPayload
@@ -41,7 +41,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.scores.submitMultiple@ method which the
--- 'ScoresSubmitMultiple'' request conforms to.
+-- 'ScoresSubmitMultiple' request conforms to.
 type ScoresSubmitMultipleResource =
      "leaderboards" :>
        "scores" :>
@@ -52,42 +52,42 @@ type ScoresSubmitMultipleResource =
 
 -- | Submits multiple scores to leaderboards.
 --
--- /See:/ 'scoresSubmitMultiple'' smart constructor.
-data ScoresSubmitMultiple' = ScoresSubmitMultiple'
+-- /See:/ 'scoresSubmitMultiple' smart constructor.
+data ScoresSubmitMultiple = ScoresSubmitMultiple
     { _ssmPayload  :: !PlayerScoreSubmissionList
     , _ssmLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ScoresSubmitMultiple'' with the minimum fields required to make a request.
+-- | Creates a value of 'ScoresSubmitMultiple' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ssmPayload'
 --
 -- * 'ssmLanguage'
-scoresSubmitMultiple'
+scoresSubmitMultiple
     :: PlayerScoreSubmissionList -- ^ 'ssmPayload'
-    -> ScoresSubmitMultiple'
-scoresSubmitMultiple' pSsmPayload_ =
-    ScoresSubmitMultiple'
+    -> ScoresSubmitMultiple
+scoresSubmitMultiple pSsmPayload_ =
+    ScoresSubmitMultiple
     { _ssmPayload = pSsmPayload_
     , _ssmLanguage = Nothing
     }
 
 -- | Multipart request metadata.
-ssmPayload :: Lens' ScoresSubmitMultiple' PlayerScoreSubmissionList
+ssmPayload :: Lens' ScoresSubmitMultiple PlayerScoreSubmissionList
 ssmPayload
   = lens _ssmPayload (\ s a -> s{_ssmPayload = a})
 
 -- | The preferred language to use for strings returned by this method.
-ssmLanguage :: Lens' ScoresSubmitMultiple' (Maybe Text)
+ssmLanguage :: Lens' ScoresSubmitMultiple (Maybe Text)
 ssmLanguage
   = lens _ssmLanguage (\ s a -> s{_ssmLanguage = a})
 
-instance GoogleRequest ScoresSubmitMultiple' where
-        type Rs ScoresSubmitMultiple' =
+instance GoogleRequest ScoresSubmitMultiple where
+        type Rs ScoresSubmitMultiple =
              PlayerScoreListResponse
-        requestClient ScoresSubmitMultiple'{..}
+        requestClient ScoresSubmitMultiple{..}
           = go _ssmLanguage (Just AltJSON) _ssmPayload
               gamesService
           where go

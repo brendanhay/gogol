@@ -29,8 +29,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.GetAccountInfo
       RelyingPartyGetAccountInfoResource
 
     -- * Creating a Request
-    , relyingPartyGetAccountInfo'
-    , RelyingPartyGetAccountInfo'
+    , relyingPartyGetAccountInfo
+    , RelyingPartyGetAccountInfo
 
     -- * Request Lenses
     , rpgaiPayload
@@ -40,7 +40,7 @@ import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.getAccountInfo@ method which the
--- 'RelyingPartyGetAccountInfo'' request conforms to.
+-- 'RelyingPartyGetAccountInfo' request conforms to.
 type RelyingPartyGetAccountInfoResource =
      "getAccountInfo" :>
        QueryParam "alt" AltJSON :>
@@ -50,34 +50,34 @@ type RelyingPartyGetAccountInfoResource =
 
 -- | Returns the account info.
 --
--- /See:/ 'relyingPartyGetAccountInfo'' smart constructor.
-newtype RelyingPartyGetAccountInfo' = RelyingPartyGetAccountInfo'
+-- /See:/ 'relyingPartyGetAccountInfo' smart constructor.
+newtype RelyingPartyGetAccountInfo = RelyingPartyGetAccountInfo
     { _rpgaiPayload :: IdentitytoolkitRelyingPartyGetAccountInfoRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RelyingPartyGetAccountInfo'' with the minimum fields required to make a request.
+-- | Creates a value of 'RelyingPartyGetAccountInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rpgaiPayload'
-relyingPartyGetAccountInfo'
+relyingPartyGetAccountInfo
     :: IdentitytoolkitRelyingPartyGetAccountInfoRequest -- ^ 'rpgaiPayload'
-    -> RelyingPartyGetAccountInfo'
-relyingPartyGetAccountInfo' pRpgaiPayload_ =
-    RelyingPartyGetAccountInfo'
+    -> RelyingPartyGetAccountInfo
+relyingPartyGetAccountInfo pRpgaiPayload_ =
+    RelyingPartyGetAccountInfo
     { _rpgaiPayload = pRpgaiPayload_
     }
 
 -- | Multipart request metadata.
-rpgaiPayload :: Lens' RelyingPartyGetAccountInfo' IdentitytoolkitRelyingPartyGetAccountInfoRequest
+rpgaiPayload :: Lens' RelyingPartyGetAccountInfo IdentitytoolkitRelyingPartyGetAccountInfoRequest
 rpgaiPayload
   = lens _rpgaiPayload (\ s a -> s{_rpgaiPayload = a})
 
-instance GoogleRequest RelyingPartyGetAccountInfo'
+instance GoogleRequest RelyingPartyGetAccountInfo
          where
-        type Rs RelyingPartyGetAccountInfo' =
+        type Rs RelyingPartyGetAccountInfo =
              GetAccountInfoResponse
-        requestClient RelyingPartyGetAccountInfo'{..}
+        requestClient RelyingPartyGetAccountInfo{..}
           = go (Just AltJSON) _rpgaiPayload
               identityToolkitService
           where go

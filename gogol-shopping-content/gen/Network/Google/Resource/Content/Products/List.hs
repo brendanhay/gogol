@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Products.List
       ProductsListResource
 
     -- * Creating a Request
-    , productsList'
-    , ProductsList'
+    , productsList
+    , ProductsList
 
     -- * Request Lenses
     , proMerchantId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.products.list@ method which the
--- 'ProductsList'' request conforms to.
+-- 'ProductsList' request conforms to.
 type ProductsListResource =
      Capture "merchantId" Word64 :>
        "products" :>
@@ -53,14 +53,14 @@ type ProductsListResource =
 
 -- | Lists the products in your Merchant Center account.
 --
--- /See:/ 'productsList'' smart constructor.
-data ProductsList' = ProductsList'
+-- /See:/ 'productsList' smart constructor.
+data ProductsList = ProductsList
     { _proMerchantId :: !Word64
     , _proPageToken  :: !(Maybe Text)
     , _proMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProductsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,37 +69,37 @@ data ProductsList' = ProductsList'
 -- * 'proPageToken'
 --
 -- * 'proMaxResults'
-productsList'
+productsList
     :: Word64 -- ^ 'proMerchantId'
-    -> ProductsList'
-productsList' pProMerchantId_ =
-    ProductsList'
+    -> ProductsList
+productsList pProMerchantId_ =
+    ProductsList
     { _proMerchantId = pProMerchantId_
     , _proPageToken = Nothing
     , _proMaxResults = Nothing
     }
 
 -- | The ID of the managing account.
-proMerchantId :: Lens' ProductsList' Word64
+proMerchantId :: Lens' ProductsList Word64
 proMerchantId
   = lens _proMerchantId
       (\ s a -> s{_proMerchantId = a})
 
 -- | The token returned by the previous request.
-proPageToken :: Lens' ProductsList' (Maybe Text)
+proPageToken :: Lens' ProductsList (Maybe Text)
 proPageToken
   = lens _proPageToken (\ s a -> s{_proPageToken = a})
 
 -- | The maximum number of products to return in the response, used for
 -- paging.
-proMaxResults :: Lens' ProductsList' (Maybe Word32)
+proMaxResults :: Lens' ProductsList (Maybe Word32)
 proMaxResults
   = lens _proMaxResults
       (\ s a -> s{_proMaxResults = a})
 
-instance GoogleRequest ProductsList' where
-        type Rs ProductsList' = ProductsListResponse
-        requestClient ProductsList'{..}
+instance GoogleRequest ProductsList where
+        type Rs ProductsList = ProductsListResponse
+        requestClient ProductsList{..}
           = go _proMerchantId _proPageToken _proMaxResults
               (Just AltJSON)
               shoppingContentService

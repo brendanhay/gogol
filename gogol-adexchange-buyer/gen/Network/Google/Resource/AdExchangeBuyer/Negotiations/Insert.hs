@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.Negotiations.Insert
       NegotiationsInsertResource
 
     -- * Creating a Request
-    , negotiationsInsert'
-    , NegotiationsInsert'
+    , negotiationsInsert
+    , NegotiationsInsert
 
     -- * Request Lenses
     , niPayload
@@ -40,7 +40,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.negotiations.insert@ method which the
--- 'NegotiationsInsert'' request conforms to.
+-- 'NegotiationsInsert' request conforms to.
 type NegotiationsInsertResource =
      "negotiations" :>
        QueryParam "alt" AltJSON :>
@@ -49,32 +49,32 @@ type NegotiationsInsertResource =
 
 -- | Creates or updates the requested negotiation.
 --
--- /See:/ 'negotiationsInsert'' smart constructor.
-newtype NegotiationsInsert' = NegotiationsInsert'
+-- /See:/ 'negotiationsInsert' smart constructor.
+newtype NegotiationsInsert = NegotiationsInsert
     { _niPayload :: NegotiationDTO
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'NegotiationsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'NegotiationsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'niPayload'
-negotiationsInsert'
+negotiationsInsert
     :: NegotiationDTO -- ^ 'niPayload'
-    -> NegotiationsInsert'
-negotiationsInsert' pNiPayload_ =
-    NegotiationsInsert'
+    -> NegotiationsInsert
+negotiationsInsert pNiPayload_ =
+    NegotiationsInsert
     { _niPayload = pNiPayload_
     }
 
 -- | Multipart request metadata.
-niPayload :: Lens' NegotiationsInsert' NegotiationDTO
+niPayload :: Lens' NegotiationsInsert NegotiationDTO
 niPayload
   = lens _niPayload (\ s a -> s{_niPayload = a})
 
-instance GoogleRequest NegotiationsInsert' where
-        type Rs NegotiationsInsert' = NegotiationDTO
-        requestClient NegotiationsInsert'{..}
+instance GoogleRequest NegotiationsInsert where
+        type Rs NegotiationsInsert = NegotiationDTO
+        requestClient NegotiationsInsert{..}
           = go (Just AltJSON) _niPayload adExchangeBuyerService
           where go
                   = buildClient

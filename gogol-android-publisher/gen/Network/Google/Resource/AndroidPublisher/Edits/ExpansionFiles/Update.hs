@@ -31,22 +31,22 @@ module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Update
       EditsExpansionFilesUpdateResource
 
     -- * Creating a Request
-    , editsExpansionFilesUpdate'
-    , EditsExpansionFilesUpdate'
+    , editsExpansionFilesUpdate
+    , EditsExpansionFilesUpdate
 
     -- * Request Lenses
-    , ePackageName
-    , eAPKVersionCode
-    , ePayload
-    , eExpansionFileType
-    , eEditId
+    , eefuPackageName
+    , eefuAPKVersionCode
+    , eefuPayload
+    , eefuExpansionFileType
+    , eefuEditId
     ) where
 
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.expansionfiles.update@ method which the
--- 'EditsExpansionFilesUpdate'' request conforms to.
+-- 'EditsExpansionFilesUpdate' request conforms to.
 type EditsExpansionFilesUpdateResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -65,78 +65,81 @@ type EditsExpansionFilesUpdateResource =
 -- APK\'s Expansion Files. To add a new Expansion File use the Upload
 -- method.
 --
--- /See:/ 'editsExpansionFilesUpdate'' smart constructor.
-data EditsExpansionFilesUpdate' = EditsExpansionFilesUpdate'
-    { _ePackageName       :: !Text
-    , _eAPKVersionCode    :: !Int32
-    , _ePayload           :: !ExpansionFile
-    , _eExpansionFileType :: !EditsExpansionFilesUpdateExpansionFileType
-    , _eEditId            :: !Text
+-- /See:/ 'editsExpansionFilesUpdate' smart constructor.
+data EditsExpansionFilesUpdate = EditsExpansionFilesUpdate
+    { _eefuPackageName       :: !Text
+    , _eefuAPKVersionCode    :: !Int32
+    , _eefuPayload           :: !ExpansionFile
+    , _eefuExpansionFileType :: !EditsExpansionFilesUpdateExpansionFileType
+    , _eefuEditId            :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsExpansionFilesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsExpansionFilesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ePackageName'
+-- * 'eefuPackageName'
 --
--- * 'eAPKVersionCode'
+-- * 'eefuAPKVersionCode'
 --
--- * 'ePayload'
+-- * 'eefuPayload'
 --
--- * 'eExpansionFileType'
+-- * 'eefuExpansionFileType'
 --
--- * 'eEditId'
-editsExpansionFilesUpdate'
-    :: Text -- ^ 'ePackageName'
-    -> Int32 -- ^ 'eAPKVersionCode'
-    -> ExpansionFile -- ^ 'ePayload'
-    -> EditsExpansionFilesUpdateExpansionFileType -- ^ 'eExpansionFileType'
-    -> Text -- ^ 'eEditId'
-    -> EditsExpansionFilesUpdate'
-editsExpansionFilesUpdate' pEPackageName_ pEAPKVersionCode_ pEPayload_ pEExpansionFileType_ pEEditId_ =
-    EditsExpansionFilesUpdate'
-    { _ePackageName = pEPackageName_
-    , _eAPKVersionCode = pEAPKVersionCode_
-    , _ePayload = pEPayload_
-    , _eExpansionFileType = pEExpansionFileType_
-    , _eEditId = pEEditId_
+-- * 'eefuEditId'
+editsExpansionFilesUpdate
+    :: Text -- ^ 'eefuPackageName'
+    -> Int32 -- ^ 'eefuAPKVersionCode'
+    -> ExpansionFile -- ^ 'eefuPayload'
+    -> EditsExpansionFilesUpdateExpansionFileType -- ^ 'eefuExpansionFileType'
+    -> Text -- ^ 'eefuEditId'
+    -> EditsExpansionFilesUpdate
+editsExpansionFilesUpdate pEefuPackageName_ pEefuAPKVersionCode_ pEefuPayload_ pEefuExpansionFileType_ pEefuEditId_ =
+    EditsExpansionFilesUpdate
+    { _eefuPackageName = pEefuPackageName_
+    , _eefuAPKVersionCode = pEefuAPKVersionCode_
+    , _eefuPayload = pEefuPayload_
+    , _eefuExpansionFileType = pEefuExpansionFileType_
+    , _eefuEditId = pEefuEditId_
     }
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-ePackageName :: Lens' EditsExpansionFilesUpdate' Text
-ePackageName
-  = lens _ePackageName (\ s a -> s{_ePackageName = a})
+eefuPackageName :: Lens' EditsExpansionFilesUpdate Text
+eefuPackageName
+  = lens _eefuPackageName
+      (\ s a -> s{_eefuPackageName = a})
 
 -- | The version code of the APK whose Expansion File configuration is being
 -- read or modified.
-eAPKVersionCode :: Lens' EditsExpansionFilesUpdate' Int32
-eAPKVersionCode
-  = lens _eAPKVersionCode
-      (\ s a -> s{_eAPKVersionCode = a})
+eefuAPKVersionCode :: Lens' EditsExpansionFilesUpdate Int32
+eefuAPKVersionCode
+  = lens _eefuAPKVersionCode
+      (\ s a -> s{_eefuAPKVersionCode = a})
 
 -- | Multipart request metadata.
-ePayload :: Lens' EditsExpansionFilesUpdate' ExpansionFile
-ePayload = lens _ePayload (\ s a -> s{_ePayload = a})
+eefuPayload :: Lens' EditsExpansionFilesUpdate ExpansionFile
+eefuPayload
+  = lens _eefuPayload (\ s a -> s{_eefuPayload = a})
 
-eExpansionFileType :: Lens' EditsExpansionFilesUpdate' EditsExpansionFilesUpdateExpansionFileType
-eExpansionFileType
-  = lens _eExpansionFileType
-      (\ s a -> s{_eExpansionFileType = a})
+eefuExpansionFileType :: Lens' EditsExpansionFilesUpdate EditsExpansionFilesUpdateExpansionFileType
+eefuExpansionFileType
+  = lens _eefuExpansionFileType
+      (\ s a -> s{_eefuExpansionFileType = a})
 
 -- | Unique identifier for this edit.
-eEditId :: Lens' EditsExpansionFilesUpdate' Text
-eEditId = lens _eEditId (\ s a -> s{_eEditId = a})
+eefuEditId :: Lens' EditsExpansionFilesUpdate Text
+eefuEditId
+  = lens _eefuEditId (\ s a -> s{_eefuEditId = a})
 
-instance GoogleRequest EditsExpansionFilesUpdate'
+instance GoogleRequest EditsExpansionFilesUpdate
          where
-        type Rs EditsExpansionFilesUpdate' = ExpansionFile
-        requestClient EditsExpansionFilesUpdate'{..}
-          = go _ePackageName _eEditId _eAPKVersionCode
-              _eExpansionFileType
+        type Rs EditsExpansionFilesUpdate = ExpansionFile
+        requestClient EditsExpansionFilesUpdate{..}
+          = go _eefuPackageName _eefuEditId _eefuAPKVersionCode
+              _eefuExpansionFileType
               (Just AltJSON)
-              _ePayload
+              _eefuPayload
               androidPublisherService
           where go
                   = buildClient

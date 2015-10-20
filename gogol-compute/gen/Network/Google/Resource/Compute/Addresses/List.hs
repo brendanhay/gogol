@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Addresses.List
       AddressesListResource
 
     -- * Creating a Request
-    , addressesList'
-    , AddressesList'
+    , addressesList
+    , AddressesList
 
     -- * Request Lenses
     , alProject
@@ -45,7 +45,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.addresses.list@ method which the
--- 'AddressesList'' request conforms to.
+-- 'AddressesList' request conforms to.
 type AddressesListResource =
      Capture "project" Text :>
        "regions" :>
@@ -59,8 +59,8 @@ type AddressesListResource =
 -- | Retrieves the list of address resources contained within the specified
 -- region.
 --
--- /See:/ 'addressesList'' smart constructor.
-data AddressesList' = AddressesList'
+-- /See:/ 'addressesList' smart constructor.
+data AddressesList = AddressesList
     { _alProject    :: !Text
     , _alFilter     :: !(Maybe Text)
     , _alRegion     :: !Text
@@ -68,7 +68,7 @@ data AddressesList' = AddressesList'
     , _alMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AddressesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AddressesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,12 +81,12 @@ data AddressesList' = AddressesList'
 -- * 'alPageToken'
 --
 -- * 'alMaxResults'
-addressesList'
+addressesList
     :: Text -- ^ 'alProject'
     -> Text -- ^ 'alRegion'
-    -> AddressesList'
-addressesList' pAlProject_ pAlRegion_ =
-    AddressesList'
+    -> AddressesList
+addressesList pAlProject_ pAlRegion_ =
+    AddressesList
     { _alProject = pAlProject_
     , _alFilter = Nothing
     , _alRegion = pAlRegion_
@@ -95,7 +95,7 @@ addressesList' pAlProject_ pAlRegion_ =
     }
 
 -- | Project ID for this request.
-alProject :: Lens' AddressesList' Text
+alProject :: Lens' AddressesList Text
 alProject
   = lens _alProject (\ s a -> s{_alProject = a})
 
@@ -110,28 +110,28 @@ alProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-alFilter :: Lens' AddressesList' (Maybe Text)
+alFilter :: Lens' AddressesList (Maybe Text)
 alFilter = lens _alFilter (\ s a -> s{_alFilter = a})
 
 -- | The name of the region for this request.
-alRegion :: Lens' AddressesList' Text
+alRegion :: Lens' AddressesList Text
 alRegion = lens _alRegion (\ s a -> s{_alRegion = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-alPageToken :: Lens' AddressesList' (Maybe Text)
+alPageToken :: Lens' AddressesList (Maybe Text)
 alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | Maximum count of results to be returned.
-alMaxResults :: Lens' AddressesList' Word32
+alMaxResults :: Lens' AddressesList Word32
 alMaxResults
   = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
-instance GoogleRequest AddressesList' where
-        type Rs AddressesList' = AddressList
-        requestClient AddressesList'{..}
+instance GoogleRequest AddressesList where
+        type Rs AddressesList = AddressList
+        requestClient AddressesList{..}
           = go _alProject _alRegion _alFilter _alPageToken
               (Just _alMaxResults)
               (Just AltJSON)

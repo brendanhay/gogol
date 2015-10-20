@@ -29,8 +29,8 @@ module Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
       LineitemsDownloadlineitemsResource
 
     -- * Creating a Request
-    , lineitemsDownloadlineitems'
-    , LineitemsDownloadlineitems'
+    , lineitemsDownloadlineitems
+    , LineitemsDownloadlineitems
 
     -- * Request Lenses
     , ldPayload
@@ -40,7 +40,7 @@ import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @doubleclickbidmanager.lineitems.downloadlineitems@ method which the
--- 'LineitemsDownloadlineitems'' request conforms to.
+-- 'LineitemsDownloadlineitems' request conforms to.
 type LineitemsDownloadlineitemsResource =
      "lineitems" :>
        "downloadlineitems" :>
@@ -50,34 +50,34 @@ type LineitemsDownloadlineitemsResource =
 
 -- | Retrieves line items in CSV format.
 --
--- /See:/ 'lineitemsDownloadlineitems'' smart constructor.
-newtype LineitemsDownloadlineitems' = LineitemsDownloadlineitems'
+-- /See:/ 'lineitemsDownloadlineitems' smart constructor.
+newtype LineitemsDownloadlineitems = LineitemsDownloadlineitems
     { _ldPayload :: DownloadLineItemsRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LineitemsDownloadlineitems'' with the minimum fields required to make a request.
+-- | Creates a value of 'LineitemsDownloadlineitems' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ldPayload'
-lineitemsDownloadlineitems'
+lineitemsDownloadlineitems
     :: DownloadLineItemsRequest -- ^ 'ldPayload'
-    -> LineitemsDownloadlineitems'
-lineitemsDownloadlineitems' pLdPayload_ =
-    LineitemsDownloadlineitems'
+    -> LineitemsDownloadlineitems
+lineitemsDownloadlineitems pLdPayload_ =
+    LineitemsDownloadlineitems
     { _ldPayload = pLdPayload_
     }
 
 -- | Multipart request metadata.
-ldPayload :: Lens' LineitemsDownloadlineitems' DownloadLineItemsRequest
+ldPayload :: Lens' LineitemsDownloadlineitems DownloadLineItemsRequest
 ldPayload
   = lens _ldPayload (\ s a -> s{_ldPayload = a})
 
-instance GoogleRequest LineitemsDownloadlineitems'
+instance GoogleRequest LineitemsDownloadlineitems
          where
-        type Rs LineitemsDownloadlineitems' =
+        type Rs LineitemsDownloadlineitems =
              DownloadLineItemsResponse
-        requestClient LineitemsDownloadlineitems'{..}
+        requestClient LineitemsDownloadlineitems{..}
           = go (Just AltJSON) _ldPayload doubleClickBidsService
           where go
                   = buildClient

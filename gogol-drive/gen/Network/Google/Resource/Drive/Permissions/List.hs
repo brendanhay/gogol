@@ -29,18 +29,18 @@ module Network.Google.Resource.Drive.Permissions.List
       PermissionsListResource
 
     -- * Creating a Request
-    , permissionsList'
-    , PermissionsList'
+    , permissionsList
+    , PermissionsList
 
     -- * Request Lenses
-    , pllFileId
+    , plFileId
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.permissions.list@ method which the
--- 'PermissionsList'' request conforms to.
+-- 'PermissionsList' request conforms to.
 type PermissionsListResource =
      "files" :>
        Capture "fileId" Text :>
@@ -50,33 +50,32 @@ type PermissionsListResource =
 
 -- | Lists a file\'s permissions.
 --
--- /See:/ 'permissionsList'' smart constructor.
-newtype PermissionsList' = PermissionsList'
-    { _pllFileId :: Text
+-- /See:/ 'permissionsList' smart constructor.
+newtype PermissionsList = PermissionsList
+    { _plFileId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PermissionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'PermissionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pllFileId'
-permissionsList'
-    :: Text -- ^ 'pllFileId'
-    -> PermissionsList'
-permissionsList' pPllFileId_ =
-    PermissionsList'
-    { _pllFileId = pPllFileId_
+-- * 'plFileId'
+permissionsList
+    :: Text -- ^ 'plFileId'
+    -> PermissionsList
+permissionsList pPlFileId_ =
+    PermissionsList
+    { _plFileId = pPlFileId_
     }
 
 -- | The ID for the file.
-pllFileId :: Lens' PermissionsList' Text
-pllFileId
-  = lens _pllFileId (\ s a -> s{_pllFileId = a})
+plFileId :: Lens' PermissionsList Text
+plFileId = lens _plFileId (\ s a -> s{_plFileId = a})
 
-instance GoogleRequest PermissionsList' where
-        type Rs PermissionsList' = PermissionList
-        requestClient PermissionsList'{..}
-          = go _pllFileId (Just AltJSON) driveService
+instance GoogleRequest PermissionsList where
+        type Rs PermissionsList = PermissionList
+        requestClient PermissionsList{..}
+          = go _plFileId (Just AltJSON) driveService
           where go
                   = buildClient
                       (Proxy :: Proxy PermissionsListResource)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.List
       ManagementCustomMetricsListResource
 
     -- * Creating a Request
-    , managementCustomMetricsList'
-    , ManagementCustomMetricsList'
+    , managementCustomMetricsList
+    , ManagementCustomMetricsList
 
     -- * Request Lenses
     , mcmlWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.customMetrics.list@ method which the
--- 'ManagementCustomMetricsList'' request conforms to.
+-- 'ManagementCustomMetricsList' request conforms to.
 type ManagementCustomMetricsListResource =
      "management" :>
        "accounts" :>
@@ -57,15 +57,15 @@ type ManagementCustomMetricsListResource =
 
 -- | Lists custom metrics to which the user has access.
 --
--- /See:/ 'managementCustomMetricsList'' smart constructor.
-data ManagementCustomMetricsList' = ManagementCustomMetricsList'
+-- /See:/ 'managementCustomMetricsList' smart constructor.
+data ManagementCustomMetricsList = ManagementCustomMetricsList
     { _mcmlWebPropertyId :: !Text
     , _mcmlAccountId     :: !Text
     , _mcmlStartIndex    :: !(Maybe Int32)
     , _mcmlMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementCustomMetricsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementCustomMetricsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,12 +76,12 @@ data ManagementCustomMetricsList' = ManagementCustomMetricsList'
 -- * 'mcmlStartIndex'
 --
 -- * 'mcmlMaxResults'
-managementCustomMetricsList'
+managementCustomMetricsList
     :: Text -- ^ 'mcmlWebPropertyId'
     -> Text -- ^ 'mcmlAccountId'
-    -> ManagementCustomMetricsList'
-managementCustomMetricsList' pMcmlWebPropertyId_ pMcmlAccountId_ =
-    ManagementCustomMetricsList'
+    -> ManagementCustomMetricsList
+managementCustomMetricsList pMcmlWebPropertyId_ pMcmlAccountId_ =
+    ManagementCustomMetricsList
     { _mcmlWebPropertyId = pMcmlWebPropertyId_
     , _mcmlAccountId = pMcmlAccountId_
     , _mcmlStartIndex = Nothing
@@ -89,34 +89,34 @@ managementCustomMetricsList' pMcmlWebPropertyId_ pMcmlAccountId_ =
     }
 
 -- | Web property ID for the custom metrics to retrieve.
-mcmlWebPropertyId :: Lens' ManagementCustomMetricsList' Text
+mcmlWebPropertyId :: Lens' ManagementCustomMetricsList Text
 mcmlWebPropertyId
   = lens _mcmlWebPropertyId
       (\ s a -> s{_mcmlWebPropertyId = a})
 
 -- | Account ID for the custom metrics to retrieve.
-mcmlAccountId :: Lens' ManagementCustomMetricsList' Text
+mcmlAccountId :: Lens' ManagementCustomMetricsList Text
 mcmlAccountId
   = lens _mcmlAccountId
       (\ s a -> s{_mcmlAccountId = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
-mcmlStartIndex :: Lens' ManagementCustomMetricsList' (Maybe Int32)
+mcmlStartIndex :: Lens' ManagementCustomMetricsList (Maybe Int32)
 mcmlStartIndex
   = lens _mcmlStartIndex
       (\ s a -> s{_mcmlStartIndex = a})
 
 -- | The maximum number of custom metrics to include in this response.
-mcmlMaxResults :: Lens' ManagementCustomMetricsList' (Maybe Int32)
+mcmlMaxResults :: Lens' ManagementCustomMetricsList (Maybe Int32)
 mcmlMaxResults
   = lens _mcmlMaxResults
       (\ s a -> s{_mcmlMaxResults = a})
 
-instance GoogleRequest ManagementCustomMetricsList'
+instance GoogleRequest ManagementCustomMetricsList
          where
-        type Rs ManagementCustomMetricsList' = CustomMetrics
-        requestClient ManagementCustomMetricsList'{..}
+        type Rs ManagementCustomMetricsList = CustomMetrics
+        requestClient ManagementCustomMetricsList{..}
           = go _mcmlAccountId _mcmlWebPropertyId
               _mcmlStartIndex
               _mcmlMaxResults

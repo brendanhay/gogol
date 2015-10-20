@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.Events.Patch
       EventsPatchResource
 
     -- * Creating a Request
-    , eventsPatch'
-    , EventsPatch'
+    , eventsPatch
+    , EventsPatch
 
     -- * Request Lenses
     , epCalendarId
@@ -46,7 +46,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.patch@ method which the
--- 'EventsPatch'' request conforms to.
+-- 'EventsPatch' request conforms to.
 type EventsPatchResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -61,8 +61,8 @@ type EventsPatchResource =
 
 -- | Updates an event. This method supports patch semantics.
 --
--- /See:/ 'eventsPatch'' smart constructor.
-data EventsPatch' = EventsPatch'
+-- /See:/ 'eventsPatch' smart constructor.
+data EventsPatch = EventsPatch
     { _epCalendarId          :: !Text
     , _epPayload             :: !Event
     , _epMaxAttendees        :: !(Maybe Int32)
@@ -72,7 +72,7 @@ data EventsPatch' = EventsPatch'
     , _epEventId             :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -89,13 +89,13 @@ data EventsPatch' = EventsPatch'
 -- * 'epAlwaysIncludeEmail'
 --
 -- * 'epEventId'
-eventsPatch'
+eventsPatch
     :: Text -- ^ 'epCalendarId'
     -> Event -- ^ 'epPayload'
     -> Text -- ^ 'epEventId'
-    -> EventsPatch'
-eventsPatch' pEpCalendarId_ pEpPayload_ pEpEventId_ =
-    EventsPatch'
+    -> EventsPatch
+eventsPatch pEpCalendarId_ pEpPayload_ pEpEventId_ =
+    EventsPatch
     { _epCalendarId = pEpCalendarId_
     , _epPayload = pEpPayload_
     , _epMaxAttendees = Nothing
@@ -108,33 +108,33 @@ eventsPatch' pEpCalendarId_ pEpPayload_ pEpEventId_ =
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-epCalendarId :: Lens' EventsPatch' Text
+epCalendarId :: Lens' EventsPatch Text
 epCalendarId
   = lens _epCalendarId (\ s a -> s{_epCalendarId = a})
 
 -- | Multipart request metadata.
-epPayload :: Lens' EventsPatch' Event
+epPayload :: Lens' EventsPatch Event
 epPayload
   = lens _epPayload (\ s a -> s{_epPayload = a})
 
 -- | The maximum number of attendees to include in the response. If there are
 -- more than the specified number of attendees, only the participant is
 -- returned. Optional.
-epMaxAttendees :: Lens' EventsPatch' (Maybe Int32)
+epMaxAttendees :: Lens' EventsPatch (Maybe Int32)
 epMaxAttendees
   = lens _epMaxAttendees
       (\ s a -> s{_epMaxAttendees = a})
 
 -- | Whether to send notifications about the event update (e.g. attendee\'s
 -- responses, title changes, etc.). Optional. The default is False.
-epSendNotifications :: Lens' EventsPatch' (Maybe Bool)
+epSendNotifications :: Lens' EventsPatch (Maybe Bool)
 epSendNotifications
   = lens _epSendNotifications
       (\ s a -> s{_epSendNotifications = a})
 
 -- | Whether API client performing operation supports event attachments.
 -- Optional. The default is False.
-epSupportsAttachments :: Lens' EventsPatch' (Maybe Bool)
+epSupportsAttachments :: Lens' EventsPatch (Maybe Bool)
 epSupportsAttachments
   = lens _epSupportsAttachments
       (\ s a -> s{_epSupportsAttachments = a})
@@ -145,19 +145,19 @@ epSupportsAttachments
 -- is discouraged and should only be used by clients which cannot handle
 -- the absence of an email address value in the mentioned places. Optional.
 -- The default is False.
-epAlwaysIncludeEmail :: Lens' EventsPatch' (Maybe Bool)
+epAlwaysIncludeEmail :: Lens' EventsPatch (Maybe Bool)
 epAlwaysIncludeEmail
   = lens _epAlwaysIncludeEmail
       (\ s a -> s{_epAlwaysIncludeEmail = a})
 
 -- | Event identifier.
-epEventId :: Lens' EventsPatch' Text
+epEventId :: Lens' EventsPatch Text
 epEventId
   = lens _epEventId (\ s a -> s{_epEventId = a})
 
-instance GoogleRequest EventsPatch' where
-        type Rs EventsPatch' = Event
-        requestClient EventsPatch'{..}
+instance GoogleRequest EventsPatch where
+        type Rs EventsPatch = Event
+        requestClient EventsPatch{..}
           = go _epCalendarId _epEventId _epMaxAttendees
               _epSendNotifications
               _epSupportsAttachments

@@ -29,8 +29,8 @@ module Network.Google.Resource.Fitness.Users.Sessions.Update
       UsersSessionsUpdateResource
 
     -- * Creating a Request
-    , usersSessionsUpdate'
-    , UsersSessionsUpdate'
+    , usersSessionsUpdate
+    , UsersSessionsUpdate
 
     -- * Request Lenses
     , usuPayload
@@ -43,7 +43,7 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fitness.users.sessions.update@ method which the
--- 'UsersSessionsUpdate'' request conforms to.
+-- 'UsersSessionsUpdate' request conforms to.
 type UsersSessionsUpdateResource =
      Capture "userId" Text :>
        "sessions" :>
@@ -54,15 +54,15 @@ type UsersSessionsUpdateResource =
 
 -- | Updates or insert a given session.
 --
--- /See:/ 'usersSessionsUpdate'' smart constructor.
-data UsersSessionsUpdate' = UsersSessionsUpdate'
+-- /See:/ 'usersSessionsUpdate' smart constructor.
+data UsersSessionsUpdate = UsersSessionsUpdate
     { _usuPayload           :: !Session
     , _usuUserId            :: !Text
     , _usuCurrentTimeMillis :: !(Maybe Int64)
     , _usuSessionId         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersSessionsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersSessionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,13 +73,13 @@ data UsersSessionsUpdate' = UsersSessionsUpdate'
 -- * 'usuCurrentTimeMillis'
 --
 -- * 'usuSessionId'
-usersSessionsUpdate'
+usersSessionsUpdate
     :: Session -- ^ 'usuPayload'
     -> Text -- ^ 'usuUserId'
     -> Text -- ^ 'usuSessionId'
-    -> UsersSessionsUpdate'
-usersSessionsUpdate' pUsuPayload_ pUsuUserId_ pUsuSessionId_ =
-    UsersSessionsUpdate'
+    -> UsersSessionsUpdate
+usersSessionsUpdate pUsuPayload_ pUsuUserId_ pUsuSessionId_ =
+    UsersSessionsUpdate
     { _usuPayload = pUsuPayload_
     , _usuUserId = pUsuUserId_
     , _usuCurrentTimeMillis = Nothing
@@ -87,30 +87,30 @@ usersSessionsUpdate' pUsuPayload_ pUsuUserId_ pUsuSessionId_ =
     }
 
 -- | Multipart request metadata.
-usuPayload :: Lens' UsersSessionsUpdate' Session
+usuPayload :: Lens' UsersSessionsUpdate Session
 usuPayload
   = lens _usuPayload (\ s a -> s{_usuPayload = a})
 
 -- | Create sessions for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
-usuUserId :: Lens' UsersSessionsUpdate' Text
+usuUserId :: Lens' UsersSessionsUpdate Text
 usuUserId
   = lens _usuUserId (\ s a -> s{_usuUserId = a})
 
 -- | The client\'s current time in milliseconds since epoch.
-usuCurrentTimeMillis :: Lens' UsersSessionsUpdate' (Maybe Int64)
+usuCurrentTimeMillis :: Lens' UsersSessionsUpdate (Maybe Int64)
 usuCurrentTimeMillis
   = lens _usuCurrentTimeMillis
       (\ s a -> s{_usuCurrentTimeMillis = a})
 
 -- | The ID of the session to be created.
-usuSessionId :: Lens' UsersSessionsUpdate' Text
+usuSessionId :: Lens' UsersSessionsUpdate Text
 usuSessionId
   = lens _usuSessionId (\ s a -> s{_usuSessionId = a})
 
-instance GoogleRequest UsersSessionsUpdate' where
-        type Rs UsersSessionsUpdate' = Session
-        requestClient UsersSessionsUpdate'{..}
+instance GoogleRequest UsersSessionsUpdate where
+        type Rs UsersSessionsUpdate = Session
+        requestClient UsersSessionsUpdate{..}
           = go _usuUserId _usuSessionId _usuCurrentTimeMillis
               (Just AltJSON)
               _usuPayload

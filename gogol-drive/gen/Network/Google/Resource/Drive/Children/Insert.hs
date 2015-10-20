@@ -29,19 +29,19 @@ module Network.Google.Resource.Drive.Children.Insert
       ChildrenInsertResource
 
     -- * Creating a Request
-    , childrenInsert'
-    , ChildrenInsert'
+    , childrenInsert
+    , ChildrenInsert
 
     -- * Request Lenses
-    , chiFolderId
-    , chiPayload
+    , ciFolderId
+    , ciPayload
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.children.insert@ method which the
--- 'ChildrenInsert'' request conforms to.
+-- 'ChildrenInsert' request conforms to.
 type ChildrenInsertResource =
      "files" :>
        Capture "folderId" Text :>
@@ -52,43 +52,43 @@ type ChildrenInsertResource =
 
 -- | Inserts a file into a folder.
 --
--- /See:/ 'childrenInsert'' smart constructor.
-data ChildrenInsert' = ChildrenInsert'
-    { _chiFolderId :: !Text
-    , _chiPayload  :: !ChildReference
+-- /See:/ 'childrenInsert' smart constructor.
+data ChildrenInsert = ChildrenInsert
+    { _ciFolderId :: !Text
+    , _ciPayload  :: !ChildReference
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChildrenInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChildrenInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'chiFolderId'
+-- * 'ciFolderId'
 --
--- * 'chiPayload'
-childrenInsert'
-    :: Text -- ^ 'chiFolderId'
-    -> ChildReference -- ^ 'chiPayload'
-    -> ChildrenInsert'
-childrenInsert' pChiFolderId_ pChiPayload_ =
-    ChildrenInsert'
-    { _chiFolderId = pChiFolderId_
-    , _chiPayload = pChiPayload_
+-- * 'ciPayload'
+childrenInsert
+    :: Text -- ^ 'ciFolderId'
+    -> ChildReference -- ^ 'ciPayload'
+    -> ChildrenInsert
+childrenInsert pCiFolderId_ pCiPayload_ =
+    ChildrenInsert
+    { _ciFolderId = pCiFolderId_
+    , _ciPayload = pCiPayload_
     }
 
 -- | The ID of the folder.
-chiFolderId :: Lens' ChildrenInsert' Text
-chiFolderId
-  = lens _chiFolderId (\ s a -> s{_chiFolderId = a})
+ciFolderId :: Lens' ChildrenInsert Text
+ciFolderId
+  = lens _ciFolderId (\ s a -> s{_ciFolderId = a})
 
 -- | Multipart request metadata.
-chiPayload :: Lens' ChildrenInsert' ChildReference
-chiPayload
-  = lens _chiPayload (\ s a -> s{_chiPayload = a})
+ciPayload :: Lens' ChildrenInsert ChildReference
+ciPayload
+  = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
-instance GoogleRequest ChildrenInsert' where
-        type Rs ChildrenInsert' = ChildReference
-        requestClient ChildrenInsert'{..}
-          = go _chiFolderId (Just AltJSON) _chiPayload
+instance GoogleRequest ChildrenInsert where
+        type Rs ChildrenInsert = ChildReference
+        requestClient ChildrenInsert{..}
+          = go _ciFolderId (Just AltJSON) _ciPayload
               driveService
           where go
                   = buildClient (Proxy :: Proxy ChildrenInsertResource)

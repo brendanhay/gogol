@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Disks.AggregatedList
       DisksAggregatedListResource
 
     -- * Creating a Request
-    , disksAggregatedList'
-    , DisksAggregatedList'
+    , disksAggregatedList
+    , DisksAggregatedList
 
     -- * Request Lenses
     , dalProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.disks.aggregatedList@ method which the
--- 'DisksAggregatedList'' request conforms to.
+-- 'DisksAggregatedList' request conforms to.
 type DisksAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
@@ -56,15 +56,15 @@ type DisksAggregatedListResource =
 
 -- | Retrieves the list of disks grouped by scope.
 --
--- /See:/ 'disksAggregatedList'' smart constructor.
-data DisksAggregatedList' = DisksAggregatedList'
+-- /See:/ 'disksAggregatedList' smart constructor.
+data DisksAggregatedList = DisksAggregatedList
     { _dalProject    :: !Text
     , _dalFilter     :: !(Maybe Text)
     , _dalPageToken  :: !(Maybe Text)
     , _dalMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DisksAggregatedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'DisksAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,11 +75,11 @@ data DisksAggregatedList' = DisksAggregatedList'
 -- * 'dalPageToken'
 --
 -- * 'dalMaxResults'
-disksAggregatedList'
+disksAggregatedList
     :: Text -- ^ 'dalProject'
-    -> DisksAggregatedList'
-disksAggregatedList' pDalProject_ =
-    DisksAggregatedList'
+    -> DisksAggregatedList
+disksAggregatedList pDalProject_ =
+    DisksAggregatedList
     { _dalProject = pDalProject_
     , _dalFilter = Nothing
     , _dalPageToken = Nothing
@@ -87,7 +87,7 @@ disksAggregatedList' pDalProject_ =
     }
 
 -- | Project ID for this request.
-dalProject :: Lens' DisksAggregatedList' Text
+dalProject :: Lens' DisksAggregatedList Text
 dalProject
   = lens _dalProject (\ s a -> s{_dalProject = a})
 
@@ -102,26 +102,26 @@ dalProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-dalFilter :: Lens' DisksAggregatedList' (Maybe Text)
+dalFilter :: Lens' DisksAggregatedList (Maybe Text)
 dalFilter
   = lens _dalFilter (\ s a -> s{_dalFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-dalPageToken :: Lens' DisksAggregatedList' (Maybe Text)
+dalPageToken :: Lens' DisksAggregatedList (Maybe Text)
 dalPageToken
   = lens _dalPageToken (\ s a -> s{_dalPageToken = a})
 
 -- | Maximum count of results to be returned.
-dalMaxResults :: Lens' DisksAggregatedList' Word32
+dalMaxResults :: Lens' DisksAggregatedList Word32
 dalMaxResults
   = lens _dalMaxResults
       (\ s a -> s{_dalMaxResults = a})
 
-instance GoogleRequest DisksAggregatedList' where
-        type Rs DisksAggregatedList' = DiskAggregatedList
-        requestClient DisksAggregatedList'{..}
+instance GoogleRequest DisksAggregatedList where
+        type Rs DisksAggregatedList = DiskAggregatedList
+        requestClient DisksAggregatedList{..}
           = go _dalProject _dalFilter _dalPageToken
               (Just _dalMaxResults)
               (Just AltJSON)

@@ -30,8 +30,8 @@ module Network.Google.Resource.DataTransfer.Transfers.List
       TransfersListResource
 
     -- * Creating a Request
-    , transfersList'
-    , TransfersList'
+    , transfersList
+    , TransfersList
 
     -- * Request Lenses
     , tlStatus
@@ -46,7 +46,7 @@ import           Network.Google.DataTransfer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @datatransfer.transfers.list@ method which the
--- 'TransfersList'' request conforms to.
+-- 'TransfersList' request conforms to.
 type TransfersListResource =
      "transfers" :>
        QueryParam "status" Text :>
@@ -61,8 +61,8 @@ type TransfersListResource =
 -- | Lists the transfers for a customer by source user, destination user, or
 -- status.
 --
--- /See:/ 'transfersList'' smart constructor.
-data TransfersList' = TransfersList'
+-- /See:/ 'transfersList' smart constructor.
+data TransfersList = TransfersList
     { _tlStatus         :: !(Maybe Text)
     , _tlOldOwnerUserId :: !(Maybe Text)
     , _tlNewOwnerUserId :: !(Maybe Text)
@@ -71,7 +71,7 @@ data TransfersList' = TransfersList'
     , _tlMaxResults     :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TransfersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TransfersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -86,10 +86,10 @@ data TransfersList' = TransfersList'
 -- * 'tlPageToken'
 --
 -- * 'tlMaxResults'
-transfersList'
-    :: TransfersList'
-transfersList' =
-    TransfersList'
+transfersList
+    :: TransfersList
+transfersList =
+    TransfersList
     { _tlStatus = Nothing
     , _tlOldOwnerUserId = Nothing
     , _tlNewOwnerUserId = Nothing
@@ -99,39 +99,39 @@ transfersList' =
     }
 
 -- | Status of the transfer.
-tlStatus :: Lens' TransfersList' (Maybe Text)
+tlStatus :: Lens' TransfersList (Maybe Text)
 tlStatus = lens _tlStatus (\ s a -> s{_tlStatus = a})
 
 -- | Source user\'s profile ID.
-tlOldOwnerUserId :: Lens' TransfersList' (Maybe Text)
+tlOldOwnerUserId :: Lens' TransfersList (Maybe Text)
 tlOldOwnerUserId
   = lens _tlOldOwnerUserId
       (\ s a -> s{_tlOldOwnerUserId = a})
 
 -- | Destination user\'s profile ID.
-tlNewOwnerUserId :: Lens' TransfersList' (Maybe Text)
+tlNewOwnerUserId :: Lens' TransfersList (Maybe Text)
 tlNewOwnerUserId
   = lens _tlNewOwnerUserId
       (\ s a -> s{_tlNewOwnerUserId = a})
 
 -- | Immutable ID of the Google Apps account.
-tlCustomerId :: Lens' TransfersList' (Maybe Text)
+tlCustomerId :: Lens' TransfersList (Maybe Text)
 tlCustomerId
   = lens _tlCustomerId (\ s a -> s{_tlCustomerId = a})
 
 -- | Token to specify the next page in the list.
-tlPageToken :: Lens' TransfersList' (Maybe Text)
+tlPageToken :: Lens' TransfersList (Maybe Text)
 tlPageToken
   = lens _tlPageToken (\ s a -> s{_tlPageToken = a})
 
 -- | Maximum number of results to return. Default is 100.
-tlMaxResults :: Lens' TransfersList' (Maybe Int32)
+tlMaxResults :: Lens' TransfersList (Maybe Int32)
 tlMaxResults
   = lens _tlMaxResults (\ s a -> s{_tlMaxResults = a})
 
-instance GoogleRequest TransfersList' where
-        type Rs TransfersList' = DataTransfersListResponse
-        requestClient TransfersList'{..}
+instance GoogleRequest TransfersList where
+        type Rs TransfersList = DataTransfersListResponse
+        requestClient TransfersList{..}
           = go _tlStatus _tlOldOwnerUserId _tlNewOwnerUserId
               _tlCustomerId
               _tlPageToken

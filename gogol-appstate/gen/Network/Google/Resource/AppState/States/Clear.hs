@@ -31,8 +31,8 @@ module Network.Google.Resource.AppState.States.Clear
       StatesClearResource
 
     -- * Creating a Request
-    , statesClear'
-    , StatesClear'
+    , statesClear
+    , StatesClear
 
     -- * Request Lenses
     , scStateKey
@@ -43,7 +43,7 @@ import           Network.Google.AppState.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @appstate.states.clear@ method which the
--- 'StatesClear'' request conforms to.
+-- 'StatesClear' request conforms to.
 type StatesClearResource =
      "states" :>
        Capture "stateKey" Int32 :>
@@ -55,43 +55,43 @@ type StatesClearResource =
 -- passed version matches the currently stored version. This method results
 -- in a conflict error on version mismatch.
 --
--- /See:/ 'statesClear'' smart constructor.
-data StatesClear' = StatesClear'
+-- /See:/ 'statesClear' smart constructor.
+data StatesClear = StatesClear
     { _scStateKey           :: !Int32
     , _scCurrentDataVersion :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'StatesClear'' with the minimum fields required to make a request.
+-- | Creates a value of 'StatesClear' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'scStateKey'
 --
 -- * 'scCurrentDataVersion'
-statesClear'
+statesClear
     :: Int32 -- ^ 'scStateKey'
-    -> StatesClear'
-statesClear' pScStateKey_ =
-    StatesClear'
+    -> StatesClear
+statesClear pScStateKey_ =
+    StatesClear
     { _scStateKey = pScStateKey_
     , _scCurrentDataVersion = Nothing
     }
 
 -- | The key for the data to be retrieved.
-scStateKey :: Lens' StatesClear' Int32
+scStateKey :: Lens' StatesClear Int32
 scStateKey
   = lens _scStateKey (\ s a -> s{_scStateKey = a})
 
 -- | The version of the data to be cleared. Version strings are returned by
 -- the server.
-scCurrentDataVersion :: Lens' StatesClear' (Maybe Text)
+scCurrentDataVersion :: Lens' StatesClear (Maybe Text)
 scCurrentDataVersion
   = lens _scCurrentDataVersion
       (\ s a -> s{_scCurrentDataVersion = a})
 
-instance GoogleRequest StatesClear' where
-        type Rs StatesClear' = WriteResult
-        requestClient StatesClear'{..}
+instance GoogleRequest StatesClear where
+        type Rs StatesClear = WriteResult
+        requestClient StatesClear{..}
           = go _scStateKey _scCurrentDataVersion (Just AltJSON)
               appStateService
           where go

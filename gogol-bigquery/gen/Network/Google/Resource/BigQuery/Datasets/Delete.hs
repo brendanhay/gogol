@@ -32,8 +32,8 @@ module Network.Google.Resource.BigQuery.Datasets.Delete
       DatasetsDeleteResource
 
     -- * Creating a Request
-    , datasetsDelete'
-    , DatasetsDelete'
+    , datasetsDelete
+    , DatasetsDelete
 
     -- * Request Lenses
     , ddDatasetId
@@ -45,7 +45,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.datasets.delete@ method which the
--- 'DatasetsDelete'' request conforms to.
+-- 'DatasetsDelete' request conforms to.
 type DatasetsDeleteResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -59,14 +59,14 @@ type DatasetsDeleteResource =
 -- specifying deleteContents. Immediately after deletion, you can create
 -- another dataset with the same name.
 --
--- /See:/ 'datasetsDelete'' smart constructor.
-data DatasetsDelete' = DatasetsDelete'
+-- /See:/ 'datasetsDelete' smart constructor.
+data DatasetsDelete = DatasetsDelete
     { _ddDatasetId      :: !Text
     , _ddProjectId      :: !Text
     , _ddDeleteContents :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,37 +75,37 @@ data DatasetsDelete' = DatasetsDelete'
 -- * 'ddProjectId'
 --
 -- * 'ddDeleteContents'
-datasetsDelete'
+datasetsDelete
     :: Text -- ^ 'ddDatasetId'
     -> Text -- ^ 'ddProjectId'
-    -> DatasetsDelete'
-datasetsDelete' pDdDatasetId_ pDdProjectId_ =
-    DatasetsDelete'
+    -> DatasetsDelete
+datasetsDelete pDdDatasetId_ pDdProjectId_ =
+    DatasetsDelete
     { _ddDatasetId = pDdDatasetId_
     , _ddProjectId = pDdProjectId_
     , _ddDeleteContents = Nothing
     }
 
 -- | Dataset ID of dataset being deleted
-ddDatasetId :: Lens' DatasetsDelete' Text
+ddDatasetId :: Lens' DatasetsDelete Text
 ddDatasetId
   = lens _ddDatasetId (\ s a -> s{_ddDatasetId = a})
 
 -- | Project ID of the dataset being deleted
-ddProjectId :: Lens' DatasetsDelete' Text
+ddProjectId :: Lens' DatasetsDelete Text
 ddProjectId
   = lens _ddProjectId (\ s a -> s{_ddProjectId = a})
 
 -- | If True, delete all the tables in the dataset. If False and the dataset
 -- contains tables, the request will fail. Default is False
-ddDeleteContents :: Lens' DatasetsDelete' (Maybe Bool)
+ddDeleteContents :: Lens' DatasetsDelete (Maybe Bool)
 ddDeleteContents
   = lens _ddDeleteContents
       (\ s a -> s{_ddDeleteContents = a})
 
-instance GoogleRequest DatasetsDelete' where
-        type Rs DatasetsDelete' = ()
-        requestClient DatasetsDelete'{..}
+instance GoogleRequest DatasetsDelete where
+        type Rs DatasetsDelete = ()
+        requestClient DatasetsDelete{..}
           = go _ddProjectId _ddDatasetId _ddDeleteContents
               (Just AltJSON)
               bigQueryService

@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.MobileCarriers.List
       MobileCarriersListResource
 
     -- * Creating a Request
-    , mobileCarriersList'
-    , MobileCarriersList'
+    , mobileCarriersList
+    , MobileCarriersList
 
     -- * Request Lenses
     , mclProFileId
@@ -40,7 +40,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.mobileCarriers.list@ method which the
--- 'MobileCarriersList'' request conforms to.
+-- 'MobileCarriersList' request conforms to.
 type MobileCarriersListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -50,33 +50,33 @@ type MobileCarriersListResource =
 
 -- | Retrieves a list of mobile carriers.
 --
--- /See:/ 'mobileCarriersList'' smart constructor.
-newtype MobileCarriersList' = MobileCarriersList'
+-- /See:/ 'mobileCarriersList' smart constructor.
+newtype MobileCarriersList = MobileCarriersList
     { _mclProFileId :: Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MobileCarriersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'MobileCarriersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mclProFileId'
-mobileCarriersList'
+mobileCarriersList
     :: Int64 -- ^ 'mclProFileId'
-    -> MobileCarriersList'
-mobileCarriersList' pMclProFileId_ =
-    MobileCarriersList'
+    -> MobileCarriersList
+mobileCarriersList pMclProFileId_ =
+    MobileCarriersList
     { _mclProFileId = pMclProFileId_
     }
 
 -- | User profile ID associated with this request.
-mclProFileId :: Lens' MobileCarriersList' Int64
+mclProFileId :: Lens' MobileCarriersList Int64
 mclProFileId
   = lens _mclProFileId (\ s a -> s{_mclProFileId = a})
 
-instance GoogleRequest MobileCarriersList' where
-        type Rs MobileCarriersList' =
+instance GoogleRequest MobileCarriersList where
+        type Rs MobileCarriersList =
              MobileCarriersListResponse
-        requestClient MobileCarriersList'{..}
+        requestClient MobileCarriersList{..}
           = go _mclProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

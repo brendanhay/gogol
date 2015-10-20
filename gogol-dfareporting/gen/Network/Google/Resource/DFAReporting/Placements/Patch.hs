@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Placements.Patch
       PlacementsPatchResource
 
     -- * Creating a Request
-    , placementsPatch'
-    , PlacementsPatch'
+    , placementsPatch
+    , PlacementsPatch
 
     -- * Request Lenses
     , ppProFileId
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placements.patch@ method which the
--- 'PlacementsPatch'' request conforms to.
+-- 'PlacementsPatch' request conforms to.
 type PlacementsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -53,14 +53,14 @@ type PlacementsPatchResource =
 
 -- | Updates an existing placement. This method supports patch semantics.
 --
--- /See:/ 'placementsPatch'' smart constructor.
-data PlacementsPatch' = PlacementsPatch'
+-- /See:/ 'placementsPatch' smart constructor.
+data PlacementsPatch = PlacementsPatch
     { _ppProFileId :: !Int64
     , _ppPayload   :: !Placement
     , _ppId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlacementsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlacementsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data PlacementsPatch' = PlacementsPatch'
 -- * 'ppPayload'
 --
 -- * 'ppId'
-placementsPatch'
+placementsPatch
     :: Int64 -- ^ 'ppProFileId'
     -> Placement -- ^ 'ppPayload'
     -> Int64 -- ^ 'ppId'
-    -> PlacementsPatch'
-placementsPatch' pPpProFileId_ pPpPayload_ pPpId_ =
-    PlacementsPatch'
+    -> PlacementsPatch
+placementsPatch pPpProFileId_ pPpPayload_ pPpId_ =
+    PlacementsPatch
     { _ppProFileId = pPpProFileId_
     , _ppPayload = pPpPayload_
     , _ppId = pPpId_
     }
 
 -- | User profile ID associated with this request.
-ppProFileId :: Lens' PlacementsPatch' Int64
+ppProFileId :: Lens' PlacementsPatch Int64
 ppProFileId
   = lens _ppProFileId (\ s a -> s{_ppProFileId = a})
 
 -- | Multipart request metadata.
-ppPayload :: Lens' PlacementsPatch' Placement
+ppPayload :: Lens' PlacementsPatch Placement
 ppPayload
   = lens _ppPayload (\ s a -> s{_ppPayload = a})
 
 -- | Placement ID.
-ppId :: Lens' PlacementsPatch' Int64
+ppId :: Lens' PlacementsPatch Int64
 ppId = lens _ppId (\ s a -> s{_ppId = a})
 
-instance GoogleRequest PlacementsPatch' where
-        type Rs PlacementsPatch' = Placement
-        requestClient PlacementsPatch'{..}
+instance GoogleRequest PlacementsPatch where
+        type Rs PlacementsPatch = Placement
+        requestClient PlacementsPatch{..}
           = go _ppProFileId (Just _ppId) (Just AltJSON)
               _ppPayload
               dFAReportingService

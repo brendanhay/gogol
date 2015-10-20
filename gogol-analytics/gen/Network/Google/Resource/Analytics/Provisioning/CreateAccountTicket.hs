@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
       ProvisioningCreateAccountTicketResource
 
     -- * Creating a Request
-    , provisioningCreateAccountTicket'
-    , ProvisioningCreateAccountTicket'
+    , provisioningCreateAccountTicket
+    , ProvisioningCreateAccountTicket
 
     -- * Request Lenses
     , pcatPayload
@@ -40,7 +40,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.provisioning.createAccountTicket@ method which the
--- 'ProvisioningCreateAccountTicket'' request conforms to.
+-- 'ProvisioningCreateAccountTicket' request conforms to.
 type ProvisioningCreateAccountTicketResource =
      "provisioning" :>
        "createAccountTicket" :>
@@ -50,34 +50,34 @@ type ProvisioningCreateAccountTicketResource =
 
 -- | Creates an account ticket.
 --
--- /See:/ 'provisioningCreateAccountTicket'' smart constructor.
-newtype ProvisioningCreateAccountTicket' = ProvisioningCreateAccountTicket'
+-- /See:/ 'provisioningCreateAccountTicket' smart constructor.
+newtype ProvisioningCreateAccountTicket = ProvisioningCreateAccountTicket
     { _pcatPayload :: AccountTicket
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProvisioningCreateAccountTicket'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProvisioningCreateAccountTicket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pcatPayload'
-provisioningCreateAccountTicket'
+provisioningCreateAccountTicket
     :: AccountTicket -- ^ 'pcatPayload'
-    -> ProvisioningCreateAccountTicket'
-provisioningCreateAccountTicket' pPcatPayload_ =
-    ProvisioningCreateAccountTicket'
+    -> ProvisioningCreateAccountTicket
+provisioningCreateAccountTicket pPcatPayload_ =
+    ProvisioningCreateAccountTicket
     { _pcatPayload = pPcatPayload_
     }
 
 -- | Multipart request metadata.
-pcatPayload :: Lens' ProvisioningCreateAccountTicket' AccountTicket
+pcatPayload :: Lens' ProvisioningCreateAccountTicket AccountTicket
 pcatPayload
   = lens _pcatPayload (\ s a -> s{_pcatPayload = a})
 
 instance GoogleRequest
-         ProvisioningCreateAccountTicket' where
-        type Rs ProvisioningCreateAccountTicket' =
+         ProvisioningCreateAccountTicket where
+        type Rs ProvisioningCreateAccountTicket =
              AccountTicket
-        requestClient ProvisioningCreateAccountTicket'{..}
+        requestClient ProvisioningCreateAccountTicket{..}
           = go (Just AltJSON) _pcatPayload analyticsService
           where go
                   = buildClient

@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Rooms.ResetForAllPlayers
       RoomsResetForAllPlayersResource
 
     -- * Creating a Request
-    , roomsResetForAllPlayers'
-    , RoomsResetForAllPlayers'
+    , roomsResetForAllPlayers
+    , RoomsResetForAllPlayers
 
     ) where
 
@@ -40,7 +40,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.rooms.resetForAllPlayers@ method which the
--- 'RoomsResetForAllPlayers'' request conforms to.
+-- 'RoomsResetForAllPlayers' request conforms to.
 type RoomsResetForAllPlayersResource =
      "rooms" :>
        "resetForAllPlayers" :>
@@ -50,20 +50,20 @@ type RoomsResetForAllPlayersResource =
 -- tester accounts for your application. This method is only available to
 -- user accounts for your developer console.
 --
--- /See:/ 'roomsResetForAllPlayers'' smart constructor.
-data RoomsResetForAllPlayers' =
-    RoomsResetForAllPlayers'
+-- /See:/ 'roomsResetForAllPlayers' smart constructor.
+data RoomsResetForAllPlayers =
+    RoomsResetForAllPlayers
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoomsResetForAllPlayers'' with the minimum fields required to make a request.
+-- | Creates a value of 'RoomsResetForAllPlayers' with the minimum fields required to make a request.
 --
-roomsResetForAllPlayers'
-    :: RoomsResetForAllPlayers'
-roomsResetForAllPlayers' = RoomsResetForAllPlayers'
+roomsResetForAllPlayers
+    :: RoomsResetForAllPlayers
+roomsResetForAllPlayers = RoomsResetForAllPlayers
 
-instance GoogleRequest RoomsResetForAllPlayers' where
-        type Rs RoomsResetForAllPlayers' = ()
-        requestClient RoomsResetForAllPlayers'{}
+instance GoogleRequest RoomsResetForAllPlayers where
+        type Rs RoomsResetForAllPlayers = ()
+        requestClient RoomsResetForAllPlayers{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

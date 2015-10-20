@@ -29,8 +29,8 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
       ProjectsJobsGetMetricsResource
 
     -- * Creating a Request
-    , projectsJobsGetMetrics'
-    , ProjectsJobsGetMetrics'
+    , projectsJobsGetMetrics
+    , ProjectsJobsGetMetrics
 
     -- * Request Lenses
     , pjgmXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.jobs.getMetrics@ method which the
--- 'ProjectsJobsGetMetrics'' request conforms to.
+-- 'ProjectsJobsGetMetrics' request conforms to.
 type ProjectsJobsGetMetricsResource =
      "v1b3" :>
        "projects" :>
@@ -70,8 +70,8 @@ type ProjectsJobsGetMetricsResource =
 
 -- | Request the job status.
 --
--- /See:/ 'projectsJobsGetMetrics'' smart constructor.
-data ProjectsJobsGetMetrics' = ProjectsJobsGetMetrics'
+-- /See:/ 'projectsJobsGetMetrics' smart constructor.
+data ProjectsJobsGetMetrics = ProjectsJobsGetMetrics
     { _pjgmXgafv          :: !(Maybe Text)
     , _pjgmJobId          :: !Text
     , _pjgmUploadProtocol :: !(Maybe Text)
@@ -84,7 +84,7 @@ data ProjectsJobsGetMetrics' = ProjectsJobsGetMetrics'
     , _pjgmCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsJobsGetMetrics'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsJobsGetMetrics' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -107,12 +107,12 @@ data ProjectsJobsGetMetrics' = ProjectsJobsGetMetrics'
 -- * 'pjgmProjectId'
 --
 -- * 'pjgmCallback'
-projectsJobsGetMetrics'
+projectsJobsGetMetrics
     :: Text -- ^ 'pjgmJobId'
     -> Text -- ^ 'pjgmProjectId'
-    -> ProjectsJobsGetMetrics'
-projectsJobsGetMetrics' pPjgmJobId_ pPjgmProjectId_ =
-    ProjectsJobsGetMetrics'
+    -> ProjectsJobsGetMetrics
+projectsJobsGetMetrics pPjgmJobId_ pPjgmProjectId_ =
+    ProjectsJobsGetMetrics
     { _pjgmXgafv = Nothing
     , _pjgmJobId = pPjgmJobId_
     , _pjgmUploadProtocol = Nothing
@@ -126,64 +126,64 @@ projectsJobsGetMetrics' pPjgmJobId_ pPjgmProjectId_ =
     }
 
 -- | V1 error format.
-pjgmXgafv :: Lens' ProjectsJobsGetMetrics' (Maybe Text)
+pjgmXgafv :: Lens' ProjectsJobsGetMetrics (Maybe Text)
 pjgmXgafv
   = lens _pjgmXgafv (\ s a -> s{_pjgmXgafv = a})
 
 -- | The job to get messages for.
-pjgmJobId :: Lens' ProjectsJobsGetMetrics' Text
+pjgmJobId :: Lens' ProjectsJobsGetMetrics Text
 pjgmJobId
   = lens _pjgmJobId (\ s a -> s{_pjgmJobId = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pjgmUploadProtocol :: Lens' ProjectsJobsGetMetrics' (Maybe Text)
+pjgmUploadProtocol :: Lens' ProjectsJobsGetMetrics (Maybe Text)
 pjgmUploadProtocol
   = lens _pjgmUploadProtocol
       (\ s a -> s{_pjgmUploadProtocol = a})
 
 -- | Return only metric data that has changed since this time. Default is to
 -- return all information about all metrics for the job.
-pjgmStartTime :: Lens' ProjectsJobsGetMetrics' (Maybe Text)
+pjgmStartTime :: Lens' ProjectsJobsGetMetrics (Maybe Text)
 pjgmStartTime
   = lens _pjgmStartTime
       (\ s a -> s{_pjgmStartTime = a})
 
 -- | Pretty-print response.
-pjgmPp :: Lens' ProjectsJobsGetMetrics' Bool
+pjgmPp :: Lens' ProjectsJobsGetMetrics Bool
 pjgmPp = lens _pjgmPp (\ s a -> s{_pjgmPp = a})
 
 -- | OAuth access token.
-pjgmAccessToken :: Lens' ProjectsJobsGetMetrics' (Maybe Text)
+pjgmAccessToken :: Lens' ProjectsJobsGetMetrics (Maybe Text)
 pjgmAccessToken
   = lens _pjgmAccessToken
       (\ s a -> s{_pjgmAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pjgmUploadType :: Lens' ProjectsJobsGetMetrics' (Maybe Text)
+pjgmUploadType :: Lens' ProjectsJobsGetMetrics (Maybe Text)
 pjgmUploadType
   = lens _pjgmUploadType
       (\ s a -> s{_pjgmUploadType = a})
 
 -- | OAuth bearer token.
-pjgmBearerToken :: Lens' ProjectsJobsGetMetrics' (Maybe Text)
+pjgmBearerToken :: Lens' ProjectsJobsGetMetrics (Maybe Text)
 pjgmBearerToken
   = lens _pjgmBearerToken
       (\ s a -> s{_pjgmBearerToken = a})
 
 -- | A project id.
-pjgmProjectId :: Lens' ProjectsJobsGetMetrics' Text
+pjgmProjectId :: Lens' ProjectsJobsGetMetrics Text
 pjgmProjectId
   = lens _pjgmProjectId
       (\ s a -> s{_pjgmProjectId = a})
 
 -- | JSONP
-pjgmCallback :: Lens' ProjectsJobsGetMetrics' (Maybe Text)
+pjgmCallback :: Lens' ProjectsJobsGetMetrics (Maybe Text)
 pjgmCallback
   = lens _pjgmCallback (\ s a -> s{_pjgmCallback = a})
 
-instance GoogleRequest ProjectsJobsGetMetrics' where
-        type Rs ProjectsJobsGetMetrics' = JobMetrics
-        requestClient ProjectsJobsGetMetrics'{..}
+instance GoogleRequest ProjectsJobsGetMetrics where
+        type Rs ProjectsJobsGetMetrics = JobMetrics
+        requestClient ProjectsJobsGetMetrics{..}
           = go _pjgmProjectId _pjgmJobId _pjgmXgafv
               _pjgmUploadProtocol
               _pjgmStartTime

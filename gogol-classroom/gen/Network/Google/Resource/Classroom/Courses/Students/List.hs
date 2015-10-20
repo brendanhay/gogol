@@ -32,8 +32,8 @@ module Network.Google.Resource.Classroom.Courses.Students.List
       CoursesStudentsListResource
 
     -- * Creating a Request
-    , coursesStudentsList'
-    , CoursesStudentsList'
+    , coursesStudentsList
+    , CoursesStudentsList
 
     -- * Request Lenses
     , cslXgafv
@@ -52,7 +52,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.students.list@ method which the
--- 'CoursesStudentsList'' request conforms to.
+-- 'CoursesStudentsList' request conforms to.
 type CoursesStudentsListResource =
      "v1" :>
        "courses" :>
@@ -75,8 +75,8 @@ type CoursesStudentsListResource =
 -- \`NOT_FOUND\` if the course does not exist. * \`PERMISSION_DENIED\` for
 -- access errors.
 --
--- /See:/ 'coursesStudentsList'' smart constructor.
-data CoursesStudentsList' = CoursesStudentsList'
+-- /See:/ 'coursesStudentsList' smart constructor.
+data CoursesStudentsList = CoursesStudentsList
     { _cslXgafv          :: !(Maybe Text)
     , _cslUploadProtocol :: !(Maybe Text)
     , _cslPp             :: !Bool
@@ -89,7 +89,7 @@ data CoursesStudentsList' = CoursesStudentsList'
     , _cslCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CoursesStudentsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CoursesStudentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -112,11 +112,11 @@ data CoursesStudentsList' = CoursesStudentsList'
 -- * 'cslPageSize'
 --
 -- * 'cslCallback'
-coursesStudentsList'
+coursesStudentsList
     :: Text -- ^ 'cslCourseId'
-    -> CoursesStudentsList'
-coursesStudentsList' pCslCourseId_ =
-    CoursesStudentsList'
+    -> CoursesStudentsList
+coursesStudentsList pCslCourseId_ =
+    CoursesStudentsList
     { _cslXgafv = Nothing
     , _cslUploadProtocol = Nothing
     , _cslPp = True
@@ -130,39 +130,39 @@ coursesStudentsList' pCslCourseId_ =
     }
 
 -- | V1 error format.
-cslXgafv :: Lens' CoursesStudentsList' (Maybe Text)
+cslXgafv :: Lens' CoursesStudentsList (Maybe Text)
 cslXgafv = lens _cslXgafv (\ s a -> s{_cslXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-cslUploadProtocol :: Lens' CoursesStudentsList' (Maybe Text)
+cslUploadProtocol :: Lens' CoursesStudentsList (Maybe Text)
 cslUploadProtocol
   = lens _cslUploadProtocol
       (\ s a -> s{_cslUploadProtocol = a})
 
 -- | Pretty-print response.
-cslPp :: Lens' CoursesStudentsList' Bool
+cslPp :: Lens' CoursesStudentsList Bool
 cslPp = lens _cslPp (\ s a -> s{_cslPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
-cslCourseId :: Lens' CoursesStudentsList' Text
+cslCourseId :: Lens' CoursesStudentsList Text
 cslCourseId
   = lens _cslCourseId (\ s a -> s{_cslCourseId = a})
 
 -- | OAuth access token.
-cslAccessToken :: Lens' CoursesStudentsList' (Maybe Text)
+cslAccessToken :: Lens' CoursesStudentsList (Maybe Text)
 cslAccessToken
   = lens _cslAccessToken
       (\ s a -> s{_cslAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-cslUploadType :: Lens' CoursesStudentsList' (Maybe Text)
+cslUploadType :: Lens' CoursesStudentsList (Maybe Text)
 cslUploadType
   = lens _cslUploadType
       (\ s a -> s{_cslUploadType = a})
 
 -- | OAuth bearer token.
-cslBearerToken :: Lens' CoursesStudentsList' (Maybe Text)
+cslBearerToken :: Lens' CoursesStudentsList (Maybe Text)
 cslBearerToken
   = lens _cslBearerToken
       (\ s a -> s{_cslBearerToken = a})
@@ -170,24 +170,24 @@ cslBearerToken
 -- | nextPageToken value returned from a previous list call, indicating that
 -- the subsequent page of results should be returned. The list request must
 -- be otherwise identical to the one that resulted in this token.
-cslPageToken :: Lens' CoursesStudentsList' (Maybe Text)
+cslPageToken :: Lens' CoursesStudentsList (Maybe Text)
 cslPageToken
   = lens _cslPageToken (\ s a -> s{_cslPageToken = a})
 
 -- | Maximum number of items to return. Zero means no maximum. The server may
 -- return fewer than the specified number of results.
-cslPageSize :: Lens' CoursesStudentsList' (Maybe Int32)
+cslPageSize :: Lens' CoursesStudentsList (Maybe Int32)
 cslPageSize
   = lens _cslPageSize (\ s a -> s{_cslPageSize = a})
 
 -- | JSONP
-cslCallback :: Lens' CoursesStudentsList' (Maybe Text)
+cslCallback :: Lens' CoursesStudentsList (Maybe Text)
 cslCallback
   = lens _cslCallback (\ s a -> s{_cslCallback = a})
 
-instance GoogleRequest CoursesStudentsList' where
-        type Rs CoursesStudentsList' = ListStudentsResponse
-        requestClient CoursesStudentsList'{..}
+instance GoogleRequest CoursesStudentsList where
+        type Rs CoursesStudentsList = ListStudentsResponse
+        requestClient CoursesStudentsList{..}
           = go _cslCourseId _cslXgafv _cslUploadProtocol
               (Just _cslPp)
               _cslAccessToken

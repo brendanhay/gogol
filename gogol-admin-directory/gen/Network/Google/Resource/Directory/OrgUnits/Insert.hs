@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.OrgUnits.Insert
       OrgUnitsInsertResource
 
     -- * Creating a Request
-    , orgUnitsInsert'
-    , OrgUnitsInsert'
+    , orgUnitsInsert
+    , OrgUnitsInsert
 
     -- * Request Lenses
     , ouiPayload
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.orgunits.insert@ method which the
--- 'OrgUnitsInsert'' request conforms to.
+-- 'OrgUnitsInsert' request conforms to.
 type OrgUnitsInsertResource =
      "customer" :>
        Capture "customerId" Text :>
@@ -51,43 +51,43 @@ type OrgUnitsInsertResource =
 
 -- | Add Organization Unit
 --
--- /See:/ 'orgUnitsInsert'' smart constructor.
-data OrgUnitsInsert' = OrgUnitsInsert'
+-- /See:/ 'orgUnitsInsert' smart constructor.
+data OrgUnitsInsert = OrgUnitsInsert
     { _ouiPayload    :: !OrgUnit
     , _ouiCustomerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrgUnitsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrgUnitsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ouiPayload'
 --
 -- * 'ouiCustomerId'
-orgUnitsInsert'
+orgUnitsInsert
     :: OrgUnit -- ^ 'ouiPayload'
     -> Text -- ^ 'ouiCustomerId'
-    -> OrgUnitsInsert'
-orgUnitsInsert' pOuiPayload_ pOuiCustomerId_ =
-    OrgUnitsInsert'
+    -> OrgUnitsInsert
+orgUnitsInsert pOuiPayload_ pOuiCustomerId_ =
+    OrgUnitsInsert
     { _ouiPayload = pOuiPayload_
     , _ouiCustomerId = pOuiCustomerId_
     }
 
 -- | Multipart request metadata.
-ouiPayload :: Lens' OrgUnitsInsert' OrgUnit
+ouiPayload :: Lens' OrgUnitsInsert OrgUnit
 ouiPayload
   = lens _ouiPayload (\ s a -> s{_ouiPayload = a})
 
 -- | Immutable id of the Google Apps account
-ouiCustomerId :: Lens' OrgUnitsInsert' Text
+ouiCustomerId :: Lens' OrgUnitsInsert Text
 ouiCustomerId
   = lens _ouiCustomerId
       (\ s a -> s{_ouiCustomerId = a})
 
-instance GoogleRequest OrgUnitsInsert' where
-        type Rs OrgUnitsInsert' = OrgUnit
-        requestClient OrgUnitsInsert'{..}
+instance GoogleRequest OrgUnitsInsert where
+        type Rs OrgUnitsInsert = OrgUnit
+        requestClient OrgUnitsInsert{..}
           = go _ouiCustomerId (Just AltJSON) _ouiPayload
               directoryService
           where go

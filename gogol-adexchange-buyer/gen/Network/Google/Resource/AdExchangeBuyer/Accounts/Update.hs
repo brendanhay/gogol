@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.Update
       AccountsUpdateResource
 
     -- * Creating a Request
-    , accountsUpdate'
-    , AccountsUpdate'
+    , accountsUpdate
+    , AccountsUpdate
 
     -- * Request Lenses
     , auPayload
@@ -41,7 +41,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.accounts.update@ method which the
--- 'AccountsUpdate'' request conforms to.
+-- 'AccountsUpdate' request conforms to.
 type AccountsUpdateResource =
      "accounts" :>
        Capture "id" Int32 :>
@@ -50,41 +50,41 @@ type AccountsUpdateResource =
 
 -- | Updates an existing account.
 --
--- /See:/ 'accountsUpdate'' smart constructor.
-data AccountsUpdate' = AccountsUpdate'
+-- /See:/ 'accountsUpdate' smart constructor.
+data AccountsUpdate = AccountsUpdate
     { _auPayload :: !Account
     , _auId      :: !Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'auPayload'
 --
 -- * 'auId'
-accountsUpdate'
+accountsUpdate
     :: Account -- ^ 'auPayload'
     -> Int32 -- ^ 'auId'
-    -> AccountsUpdate'
-accountsUpdate' pAuPayload_ pAuId_ =
-    AccountsUpdate'
+    -> AccountsUpdate
+accountsUpdate pAuPayload_ pAuId_ =
+    AccountsUpdate
     { _auPayload = pAuPayload_
     , _auId = pAuId_
     }
 
 -- | Multipart request metadata.
-auPayload :: Lens' AccountsUpdate' Account
+auPayload :: Lens' AccountsUpdate Account
 auPayload
   = lens _auPayload (\ s a -> s{_auPayload = a})
 
 -- | The account id
-auId :: Lens' AccountsUpdate' Int32
+auId :: Lens' AccountsUpdate Int32
 auId = lens _auId (\ s a -> s{_auId = a})
 
-instance GoogleRequest AccountsUpdate' where
-        type Rs AccountsUpdate' = Account
-        requestClient AccountsUpdate'{..}
+instance GoogleRequest AccountsUpdate where
+        type Rs AccountsUpdate = Account
+        requestClient AccountsUpdate{..}
           = go _auId (Just AltJSON) _auPayload
               adExchangeBuyerService
           where go

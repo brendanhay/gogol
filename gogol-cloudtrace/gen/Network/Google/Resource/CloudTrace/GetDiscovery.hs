@@ -30,8 +30,8 @@ module Network.Google.Resource.CloudTrace.GetDiscovery
       GetDiscoveryResource
 
     -- * Creating a Request
-    , getDiscovery'
-    , GetDiscovery'
+    , getDiscovery
+    , GetDiscovery
 
     -- * Request Lenses
     , gdXgafv
@@ -51,7 +51,7 @@ import           Network.Google.CloudTrace.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @cloudtrace.getDiscovery@ method which the
--- 'GetDiscovery'' request conforms to.
+-- 'GetDiscovery' request conforms to.
 type GetDiscoveryResource =
      "v1" :>
        "discovery" :>
@@ -71,8 +71,8 @@ type GetDiscoveryResource =
 -- | Returns a discovery document in the specified \`format\`. The typeurl in
 -- the returned google.protobuf.Any value depends on the requested format.
 --
--- /See:/ 'getDiscovery'' smart constructor.
-data GetDiscovery' = GetDiscovery'
+-- /See:/ 'getDiscovery' smart constructor.
+data GetDiscovery = GetDiscovery
     { _gdXgafv          :: !(Maybe Text)
     , _gdArgs           :: !(Maybe [Text])
     , _gdUploadProtocol :: !(Maybe Text)
@@ -86,7 +86,7 @@ data GetDiscovery' = GetDiscovery'
     , _gdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GetDiscovery'' with the minimum fields required to make a request.
+-- | Creates a value of 'GetDiscovery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -111,10 +111,10 @@ data GetDiscovery' = GetDiscovery'
 -- * 'gdLabels'
 --
 -- * 'gdCallback'
-getDiscovery'
-    :: GetDiscovery'
-getDiscovery' =
-    GetDiscovery'
+getDiscovery
+    :: GetDiscovery
+getDiscovery =
+    GetDiscovery
     { _gdXgafv = Nothing
     , _gdArgs = Nothing
     , _gdUploadProtocol = Nothing
@@ -129,67 +129,67 @@ getDiscovery' =
     }
 
 -- | V1 error format.
-gdXgafv :: Lens' GetDiscovery' (Maybe Text)
+gdXgafv :: Lens' GetDiscovery (Maybe Text)
 gdXgafv = lens _gdXgafv (\ s a -> s{_gdXgafv = a})
 
 -- | Any additional arguments.
-gdArgs :: Lens' GetDiscovery' [Text]
+gdArgs :: Lens' GetDiscovery [Text]
 gdArgs
   = lens _gdArgs (\ s a -> s{_gdArgs = a}) . _Default .
       _Coerce
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-gdUploadProtocol :: Lens' GetDiscovery' (Maybe Text)
+gdUploadProtocol :: Lens' GetDiscovery (Maybe Text)
 gdUploadProtocol
   = lens _gdUploadProtocol
       (\ s a -> s{_gdUploadProtocol = a})
 
 -- | Pretty-print response.
-gdPp :: Lens' GetDiscovery' Bool
+gdPp :: Lens' GetDiscovery Bool
 gdPp = lens _gdPp (\ s a -> s{_gdPp = a})
 
 -- | OAuth access token.
-gdAccessToken :: Lens' GetDiscovery' (Maybe Text)
+gdAccessToken :: Lens' GetDiscovery (Maybe Text)
 gdAccessToken
   = lens _gdAccessToken
       (\ s a -> s{_gdAccessToken = a})
 
 -- | The format requested for discovery.
-gdFormat :: Lens' GetDiscovery' (Maybe Text)
+gdFormat :: Lens' GetDiscovery (Maybe Text)
 gdFormat = lens _gdFormat (\ s a -> s{_gdFormat = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-gdUploadType :: Lens' GetDiscovery' (Maybe Text)
+gdUploadType :: Lens' GetDiscovery (Maybe Text)
 gdUploadType
   = lens _gdUploadType (\ s a -> s{_gdUploadType = a})
 
 -- | OAuth bearer token.
-gdBearerToken :: Lens' GetDiscovery' (Maybe Text)
+gdBearerToken :: Lens' GetDiscovery (Maybe Text)
 gdBearerToken
   = lens _gdBearerToken
       (\ s a -> s{_gdBearerToken = a})
 
 -- | The API version of the requested discovery doc.
-gdVersion :: Lens' GetDiscovery' (Maybe Text)
+gdVersion :: Lens' GetDiscovery (Maybe Text)
 gdVersion
   = lens _gdVersion (\ s a -> s{_gdVersion = a})
 
 -- | A list of labels (like visibility) influencing the scope of the
 -- requested doc.
-gdLabels :: Lens' GetDiscovery' [Text]
+gdLabels :: Lens' GetDiscovery [Text]
 gdLabels
   = lens _gdLabels (\ s a -> s{_gdLabels = a}) .
       _Default
       . _Coerce
 
 -- | JSONP
-gdCallback :: Lens' GetDiscovery' (Maybe Text)
+gdCallback :: Lens' GetDiscovery (Maybe Text)
 gdCallback
   = lens _gdCallback (\ s a -> s{_gdCallback = a})
 
-instance GoogleRequest GetDiscovery' where
-        type Rs GetDiscovery' = ()
-        requestClient GetDiscovery'{..}
+instance GoogleRequest GetDiscovery where
+        type Rs GetDiscovery = ()
+        requestClient GetDiscovery{..}
           = go _gdXgafv (_gdArgs ^. _Default) _gdUploadProtocol
               (Just _gdPp)
               _gdAccessToken

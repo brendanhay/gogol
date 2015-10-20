@@ -29,25 +29,25 @@ module Network.Google.Resource.Blogger.Posts.Patch
       PostsPatchResource
 
     -- * Creating a Request
-    , postsPatch'
-    , PostsPatch'
+    , postsPatch
+    , PostsPatch
 
     -- * Request Lenses
-    , ppFetchBody
-    , ppFetchImages
-    , ppBlogId
-    , ppPayload
-    , ppMaxComments
-    , ppRevert
-    , ppPostId
-    , ppPublish
+    , posoFetchBody
+    , posoFetchImages
+    , posoBlogId
+    , posoPayload
+    , posoMaxComments
+    , posoRevert
+    , posoPostId
+    , posoPublish
     ) where
 
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.posts.patch@ method which the
--- 'PostsPatch'' request conforms to.
+-- 'PostsPatch' request conforms to.
 type PostsPatchResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -63,107 +63,111 @@ type PostsPatchResource =
 
 -- | Update a post. This method supports patch semantics.
 --
--- /See:/ 'postsPatch'' smart constructor.
-data PostsPatch' = PostsPatch'
-    { _ppFetchBody   :: !Bool
-    , _ppFetchImages :: !(Maybe Bool)
-    , _ppBlogId      :: !Text
-    , _ppPayload     :: !Post'
-    , _ppMaxComments :: !(Maybe Word32)
-    , _ppRevert      :: !(Maybe Bool)
-    , _ppPostId      :: !Text
-    , _ppPublish     :: !(Maybe Bool)
+-- /See:/ 'postsPatch' smart constructor.
+data PostsPatch = PostsPatch
+    { _posoFetchBody   :: !Bool
+    , _posoFetchImages :: !(Maybe Bool)
+    , _posoBlogId      :: !Text
+    , _posoPayload     :: !Post'
+    , _posoMaxComments :: !(Maybe Word32)
+    , _posoRevert      :: !(Maybe Bool)
+    , _posoPostId      :: !Text
+    , _posoPublish     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PostsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'PostsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ppFetchBody'
+-- * 'posoFetchBody'
 --
--- * 'ppFetchImages'
+-- * 'posoFetchImages'
 --
--- * 'ppBlogId'
+-- * 'posoBlogId'
 --
--- * 'ppPayload'
+-- * 'posoPayload'
 --
--- * 'ppMaxComments'
+-- * 'posoMaxComments'
 --
--- * 'ppRevert'
+-- * 'posoRevert'
 --
--- * 'ppPostId'
+-- * 'posoPostId'
 --
--- * 'ppPublish'
-postsPatch'
-    :: Text -- ^ 'ppBlogId'
-    -> Post' -- ^ 'ppPayload'
-    -> Text -- ^ 'ppPostId'
-    -> PostsPatch'
-postsPatch' pPpBlogId_ pPpPayload_ pPpPostId_ =
-    PostsPatch'
-    { _ppFetchBody = True
-    , _ppFetchImages = Nothing
-    , _ppBlogId = pPpBlogId_
-    , _ppPayload = pPpPayload_
-    , _ppMaxComments = Nothing
-    , _ppRevert = Nothing
-    , _ppPostId = pPpPostId_
-    , _ppPublish = Nothing
+-- * 'posoPublish'
+postsPatch
+    :: Text -- ^ 'posoBlogId'
+    -> Post' -- ^ 'posoPayload'
+    -> Text -- ^ 'posoPostId'
+    -> PostsPatch
+postsPatch pPosoBlogId_ pPosoPayload_ pPosoPostId_ =
+    PostsPatch
+    { _posoFetchBody = True
+    , _posoFetchImages = Nothing
+    , _posoBlogId = pPosoBlogId_
+    , _posoPayload = pPosoPayload_
+    , _posoMaxComments = Nothing
+    , _posoRevert = Nothing
+    , _posoPostId = pPosoPostId_
+    , _posoPublish = Nothing
     }
 
 -- | Whether the body content of the post is included with the result
 -- (default: true).
-ppFetchBody :: Lens' PostsPatch' Bool
-ppFetchBody
-  = lens _ppFetchBody (\ s a -> s{_ppFetchBody = a})
+posoFetchBody :: Lens' PostsPatch Bool
+posoFetchBody
+  = lens _posoFetchBody
+      (\ s a -> s{_posoFetchBody = a})
 
 -- | Whether image URL metadata for each post is included in the returned
 -- result (default: false).
-ppFetchImages :: Lens' PostsPatch' (Maybe Bool)
-ppFetchImages
-  = lens _ppFetchImages
-      (\ s a -> s{_ppFetchImages = a})
+posoFetchImages :: Lens' PostsPatch (Maybe Bool)
+posoFetchImages
+  = lens _posoFetchImages
+      (\ s a -> s{_posoFetchImages = a})
 
 -- | The ID of the Blog.
-ppBlogId :: Lens' PostsPatch' Text
-ppBlogId = lens _ppBlogId (\ s a -> s{_ppBlogId = a})
+posoBlogId :: Lens' PostsPatch Text
+posoBlogId
+  = lens _posoBlogId (\ s a -> s{_posoBlogId = a})
 
 -- | Multipart request metadata.
-ppPayload :: Lens' PostsPatch' Post'
-ppPayload
-  = lens _ppPayload (\ s a -> s{_ppPayload = a})
+posoPayload :: Lens' PostsPatch Post'
+posoPayload
+  = lens _posoPayload (\ s a -> s{_posoPayload = a})
 
 -- | Maximum number of comments to retrieve with the returned post.
-ppMaxComments :: Lens' PostsPatch' (Maybe Word32)
-ppMaxComments
-  = lens _ppMaxComments
-      (\ s a -> s{_ppMaxComments = a})
+posoMaxComments :: Lens' PostsPatch (Maybe Word32)
+posoMaxComments
+  = lens _posoMaxComments
+      (\ s a -> s{_posoMaxComments = a})
 
 -- | Whether a revert action should be performed when the post is updated
 -- (default: false).
-ppRevert :: Lens' PostsPatch' (Maybe Bool)
-ppRevert = lens _ppRevert (\ s a -> s{_ppRevert = a})
+posoRevert :: Lens' PostsPatch (Maybe Bool)
+posoRevert
+  = lens _posoRevert (\ s a -> s{_posoRevert = a})
 
 -- | The ID of the Post.
-ppPostId :: Lens' PostsPatch' Text
-ppPostId = lens _ppPostId (\ s a -> s{_ppPostId = a})
+posoPostId :: Lens' PostsPatch Text
+posoPostId
+  = lens _posoPostId (\ s a -> s{_posoPostId = a})
 
 -- | Whether a publish action should be performed when the post is updated
 -- (default: false).
-ppPublish :: Lens' PostsPatch' (Maybe Bool)
-ppPublish
-  = lens _ppPublish (\ s a -> s{_ppPublish = a})
+posoPublish :: Lens' PostsPatch (Maybe Bool)
+posoPublish
+  = lens _posoPublish (\ s a -> s{_posoPublish = a})
 
-instance GoogleRequest PostsPatch' where
-        type Rs PostsPatch' = Post'
-        requestClient PostsPatch'{..}
-          = go _ppBlogId _ppPostId (Just _ppFetchBody)
-              _ppFetchImages
-              _ppMaxComments
-              _ppRevert
-              _ppPublish
+instance GoogleRequest PostsPatch where
+        type Rs PostsPatch = Post'
+        requestClient PostsPatch{..}
+          = go _posoBlogId _posoPostId (Just _posoFetchBody)
+              _posoFetchImages
+              _posoMaxComments
+              _posoRevert
+              _posoPublish
               (Just AltJSON)
-              _ppPayload
+              _posoPayload
               bloggerService
           where go
                   = buildClient (Proxy :: Proxy PostsPatchResource)

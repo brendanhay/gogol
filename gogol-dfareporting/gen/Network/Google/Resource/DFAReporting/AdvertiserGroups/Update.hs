@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
       AdvertiserGroupsUpdateResource
 
     -- * Creating a Request
-    , advertiserGroupsUpdate'
-    , AdvertiserGroupsUpdate'
+    , advertiserGroupsUpdate
+    , AdvertiserGroupsUpdate
 
     -- * Request Lenses
     , aguProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.advertiserGroups.update@ method which the
--- 'AdvertiserGroupsUpdate'' request conforms to.
+-- 'AdvertiserGroupsUpdate' request conforms to.
 type AdvertiserGroupsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,42 +52,42 @@ type AdvertiserGroupsUpdateResource =
 
 -- | Updates an existing advertiser group.
 --
--- /See:/ 'advertiserGroupsUpdate'' smart constructor.
-data AdvertiserGroupsUpdate' = AdvertiserGroupsUpdate'
+-- /See:/ 'advertiserGroupsUpdate' smart constructor.
+data AdvertiserGroupsUpdate = AdvertiserGroupsUpdate
     { _aguProFileId :: !Int64
     , _aguPayload   :: !AdvertiserGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdvertiserGroupsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdvertiserGroupsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aguProFileId'
 --
 -- * 'aguPayload'
-advertiserGroupsUpdate'
+advertiserGroupsUpdate
     :: Int64 -- ^ 'aguProFileId'
     -> AdvertiserGroup -- ^ 'aguPayload'
-    -> AdvertiserGroupsUpdate'
-advertiserGroupsUpdate' pAguProFileId_ pAguPayload_ =
-    AdvertiserGroupsUpdate'
+    -> AdvertiserGroupsUpdate
+advertiserGroupsUpdate pAguProFileId_ pAguPayload_ =
+    AdvertiserGroupsUpdate
     { _aguProFileId = pAguProFileId_
     , _aguPayload = pAguPayload_
     }
 
 -- | User profile ID associated with this request.
-aguProFileId :: Lens' AdvertiserGroupsUpdate' Int64
+aguProFileId :: Lens' AdvertiserGroupsUpdate Int64
 aguProFileId
   = lens _aguProFileId (\ s a -> s{_aguProFileId = a})
 
 -- | Multipart request metadata.
-aguPayload :: Lens' AdvertiserGroupsUpdate' AdvertiserGroup
+aguPayload :: Lens' AdvertiserGroupsUpdate AdvertiserGroup
 aguPayload
   = lens _aguPayload (\ s a -> s{_aguPayload = a})
 
-instance GoogleRequest AdvertiserGroupsUpdate' where
-        type Rs AdvertiserGroupsUpdate' = AdvertiserGroup
-        requestClient AdvertiserGroupsUpdate'{..}
+instance GoogleRequest AdvertiserGroupsUpdate where
+        type Rs AdvertiserGroupsUpdate = AdvertiserGroup
+        requestClient AdvertiserGroupsUpdate{..}
           = go _aguProFileId (Just AltJSON) _aguPayload
               dFAReportingService
           where go

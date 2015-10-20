@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Update
       ManagementCustomMetricsUpdateResource
 
     -- * Creating a Request
-    , managementCustomMetricsUpdate'
-    , ManagementCustomMetricsUpdate'
+    , managementCustomMetricsUpdate
+    , ManagementCustomMetricsUpdate
 
     -- * Request Lenses
     , mcmuCustomMetricId
@@ -44,7 +44,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.customMetrics.update@ method which the
--- 'ManagementCustomMetricsUpdate'' request conforms to.
+-- 'ManagementCustomMetricsUpdate' request conforms to.
 type ManagementCustomMetricsUpdateResource =
      "management" :>
        "accounts" :>
@@ -60,8 +60,8 @@ type ManagementCustomMetricsUpdateResource =
 
 -- | Updates an existing custom metric.
 --
--- /See:/ 'managementCustomMetricsUpdate'' smart constructor.
-data ManagementCustomMetricsUpdate' = ManagementCustomMetricsUpdate'
+-- /See:/ 'managementCustomMetricsUpdate' smart constructor.
+data ManagementCustomMetricsUpdate = ManagementCustomMetricsUpdate
     { _mcmuCustomMetricId              :: !Text
     , _mcmuWebPropertyId               :: !Text
     , _mcmuIgnoreCustomDataSourceLinks :: !Bool
@@ -69,7 +69,7 @@ data ManagementCustomMetricsUpdate' = ManagementCustomMetricsUpdate'
     , _mcmuAccountId                   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementCustomMetricsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementCustomMetricsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,14 +82,14 @@ data ManagementCustomMetricsUpdate' = ManagementCustomMetricsUpdate'
 -- * 'mcmuPayload'
 --
 -- * 'mcmuAccountId'
-managementCustomMetricsUpdate'
+managementCustomMetricsUpdate
     :: Text -- ^ 'mcmuCustomMetricId'
     -> Text -- ^ 'mcmuWebPropertyId'
     -> CustomMetric -- ^ 'mcmuPayload'
     -> Text -- ^ 'mcmuAccountId'
-    -> ManagementCustomMetricsUpdate'
-managementCustomMetricsUpdate' pMcmuCustomMetricId_ pMcmuWebPropertyId_ pMcmuPayload_ pMcmuAccountId_ =
-    ManagementCustomMetricsUpdate'
+    -> ManagementCustomMetricsUpdate
+managementCustomMetricsUpdate pMcmuCustomMetricId_ pMcmuWebPropertyId_ pMcmuPayload_ pMcmuAccountId_ =
+    ManagementCustomMetricsUpdate
     { _mcmuCustomMetricId = pMcmuCustomMetricId_
     , _mcmuWebPropertyId = pMcmuWebPropertyId_
     , _mcmuIgnoreCustomDataSourceLinks = False
@@ -98,39 +98,39 @@ managementCustomMetricsUpdate' pMcmuCustomMetricId_ pMcmuWebPropertyId_ pMcmuPay
     }
 
 -- | Custom metric ID for the custom metric to update.
-mcmuCustomMetricId :: Lens' ManagementCustomMetricsUpdate' Text
+mcmuCustomMetricId :: Lens' ManagementCustomMetricsUpdate Text
 mcmuCustomMetricId
   = lens _mcmuCustomMetricId
       (\ s a -> s{_mcmuCustomMetricId = a})
 
 -- | Web property ID for the custom metric to update.
-mcmuWebPropertyId :: Lens' ManagementCustomMetricsUpdate' Text
+mcmuWebPropertyId :: Lens' ManagementCustomMetricsUpdate Text
 mcmuWebPropertyId
   = lens _mcmuWebPropertyId
       (\ s a -> s{_mcmuWebPropertyId = a})
 
 -- | Force the update and ignore any warnings related to the custom metric
 -- being linked to a custom data source \/ data set.
-mcmuIgnoreCustomDataSourceLinks :: Lens' ManagementCustomMetricsUpdate' Bool
+mcmuIgnoreCustomDataSourceLinks :: Lens' ManagementCustomMetricsUpdate Bool
 mcmuIgnoreCustomDataSourceLinks
   = lens _mcmuIgnoreCustomDataSourceLinks
       (\ s a -> s{_mcmuIgnoreCustomDataSourceLinks = a})
 
 -- | Multipart request metadata.
-mcmuPayload :: Lens' ManagementCustomMetricsUpdate' CustomMetric
+mcmuPayload :: Lens' ManagementCustomMetricsUpdate CustomMetric
 mcmuPayload
   = lens _mcmuPayload (\ s a -> s{_mcmuPayload = a})
 
 -- | Account ID for the custom metric to update.
-mcmuAccountId :: Lens' ManagementCustomMetricsUpdate' Text
+mcmuAccountId :: Lens' ManagementCustomMetricsUpdate Text
 mcmuAccountId
   = lens _mcmuAccountId
       (\ s a -> s{_mcmuAccountId = a})
 
-instance GoogleRequest ManagementCustomMetricsUpdate'
+instance GoogleRequest ManagementCustomMetricsUpdate
          where
-        type Rs ManagementCustomMetricsUpdate' = CustomMetric
-        requestClient ManagementCustomMetricsUpdate'{..}
+        type Rs ManagementCustomMetricsUpdate = CustomMetric
+        requestClient ManagementCustomMetricsUpdate{..}
           = go _mcmuAccountId _mcmuWebPropertyId
               _mcmuCustomMetricId
               (Just _mcmuIgnoreCustomDataSourceLinks)

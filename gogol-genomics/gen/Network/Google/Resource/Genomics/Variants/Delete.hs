@@ -29,25 +29,25 @@ module Network.Google.Resource.Genomics.Variants.Delete
       VariantsDeleteResource
 
     -- * Creating a Request
-    , variantsDelete'
-    , VariantsDelete'
+    , variantsDelete
+    , VariantsDelete
 
     -- * Request Lenses
-    , vdXgafv
-    , vdUploadProtocol
-    , vdPp
-    , vdAccessToken
-    , vdUploadType
-    , vdBearerToken
-    , vdVariantId
-    , vdCallback
+    , vddXgafv
+    , vddUploadProtocol
+    , vddPp
+    , vddAccessToken
+    , vddUploadType
+    , vddBearerToken
+    , vddVariantId
+    , vddCallback
     ) where
 
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.variants.delete@ method which the
--- 'VariantsDelete'' request conforms to.
+-- 'VariantsDelete' request conforms to.
 type VariantsDeleteResource =
      "v1" :>
        "variants" :>
@@ -63,102 +63,103 @@ type VariantsDeleteResource =
 
 -- | Deletes a variant.
 --
--- /See:/ 'variantsDelete'' smart constructor.
-data VariantsDelete' = VariantsDelete'
-    { _vdXgafv          :: !(Maybe Text)
-    , _vdUploadProtocol :: !(Maybe Text)
-    , _vdPp             :: !Bool
-    , _vdAccessToken    :: !(Maybe Text)
-    , _vdUploadType     :: !(Maybe Text)
-    , _vdBearerToken    :: !(Maybe Text)
-    , _vdVariantId      :: !Text
-    , _vdCallback       :: !(Maybe Text)
+-- /See:/ 'variantsDelete' smart constructor.
+data VariantsDelete = VariantsDelete
+    { _vddXgafv          :: !(Maybe Text)
+    , _vddUploadProtocol :: !(Maybe Text)
+    , _vddPp             :: !Bool
+    , _vddAccessToken    :: !(Maybe Text)
+    , _vddUploadType     :: !(Maybe Text)
+    , _vddBearerToken    :: !(Maybe Text)
+    , _vddVariantId      :: !Text
+    , _vddCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VariantsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'VariantsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vdXgafv'
+-- * 'vddXgafv'
 --
--- * 'vdUploadProtocol'
+-- * 'vddUploadProtocol'
 --
--- * 'vdPp'
+-- * 'vddPp'
 --
--- * 'vdAccessToken'
+-- * 'vddAccessToken'
 --
--- * 'vdUploadType'
+-- * 'vddUploadType'
 --
--- * 'vdBearerToken'
+-- * 'vddBearerToken'
 --
--- * 'vdVariantId'
+-- * 'vddVariantId'
 --
--- * 'vdCallback'
-variantsDelete'
-    :: Text -- ^ 'vdVariantId'
-    -> VariantsDelete'
-variantsDelete' pVdVariantId_ =
-    VariantsDelete'
-    { _vdXgafv = Nothing
-    , _vdUploadProtocol = Nothing
-    , _vdPp = True
-    , _vdAccessToken = Nothing
-    , _vdUploadType = Nothing
-    , _vdBearerToken = Nothing
-    , _vdVariantId = pVdVariantId_
-    , _vdCallback = Nothing
+-- * 'vddCallback'
+variantsDelete
+    :: Text -- ^ 'vddVariantId'
+    -> VariantsDelete
+variantsDelete pVddVariantId_ =
+    VariantsDelete
+    { _vddXgafv = Nothing
+    , _vddUploadProtocol = Nothing
+    , _vddPp = True
+    , _vddAccessToken = Nothing
+    , _vddUploadType = Nothing
+    , _vddBearerToken = Nothing
+    , _vddVariantId = pVddVariantId_
+    , _vddCallback = Nothing
     }
 
 -- | V1 error format.
-vdXgafv :: Lens' VariantsDelete' (Maybe Text)
-vdXgafv = lens _vdXgafv (\ s a -> s{_vdXgafv = a})
+vddXgafv :: Lens' VariantsDelete (Maybe Text)
+vddXgafv = lens _vddXgafv (\ s a -> s{_vddXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-vdUploadProtocol :: Lens' VariantsDelete' (Maybe Text)
-vdUploadProtocol
-  = lens _vdUploadProtocol
-      (\ s a -> s{_vdUploadProtocol = a})
+vddUploadProtocol :: Lens' VariantsDelete (Maybe Text)
+vddUploadProtocol
+  = lens _vddUploadProtocol
+      (\ s a -> s{_vddUploadProtocol = a})
 
 -- | Pretty-print response.
-vdPp :: Lens' VariantsDelete' Bool
-vdPp = lens _vdPp (\ s a -> s{_vdPp = a})
+vddPp :: Lens' VariantsDelete Bool
+vddPp = lens _vddPp (\ s a -> s{_vddPp = a})
 
 -- | OAuth access token.
-vdAccessToken :: Lens' VariantsDelete' (Maybe Text)
-vdAccessToken
-  = lens _vdAccessToken
-      (\ s a -> s{_vdAccessToken = a})
+vddAccessToken :: Lens' VariantsDelete (Maybe Text)
+vddAccessToken
+  = lens _vddAccessToken
+      (\ s a -> s{_vddAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-vdUploadType :: Lens' VariantsDelete' (Maybe Text)
-vdUploadType
-  = lens _vdUploadType (\ s a -> s{_vdUploadType = a})
+vddUploadType :: Lens' VariantsDelete (Maybe Text)
+vddUploadType
+  = lens _vddUploadType
+      (\ s a -> s{_vddUploadType = a})
 
 -- | OAuth bearer token.
-vdBearerToken :: Lens' VariantsDelete' (Maybe Text)
-vdBearerToken
-  = lens _vdBearerToken
-      (\ s a -> s{_vdBearerToken = a})
+vddBearerToken :: Lens' VariantsDelete (Maybe Text)
+vddBearerToken
+  = lens _vddBearerToken
+      (\ s a -> s{_vddBearerToken = a})
 
 -- | The ID of the variant to be deleted.
-vdVariantId :: Lens' VariantsDelete' Text
-vdVariantId
-  = lens _vdVariantId (\ s a -> s{_vdVariantId = a})
+vddVariantId :: Lens' VariantsDelete Text
+vddVariantId
+  = lens _vddVariantId (\ s a -> s{_vddVariantId = a})
 
 -- | JSONP
-vdCallback :: Lens' VariantsDelete' (Maybe Text)
-vdCallback
-  = lens _vdCallback (\ s a -> s{_vdCallback = a})
+vddCallback :: Lens' VariantsDelete (Maybe Text)
+vddCallback
+  = lens _vddCallback (\ s a -> s{_vddCallback = a})
 
-instance GoogleRequest VariantsDelete' where
-        type Rs VariantsDelete' = Empty
-        requestClient VariantsDelete'{..}
-          = go _vdVariantId _vdXgafv _vdUploadProtocol
-              (Just _vdPp)
-              _vdAccessToken
-              _vdUploadType
-              _vdBearerToken
-              _vdCallback
+instance GoogleRequest VariantsDelete where
+        type Rs VariantsDelete = Empty
+        requestClient VariantsDelete{..}
+          = go _vddVariantId _vddXgafv _vddUploadProtocol
+              (Just _vddPp)
+              _vddAccessToken
+              _vddUploadType
+              _vddBearerToken
+              _vddCallback
               (Just AltJSON)
               genomicsService
           where go

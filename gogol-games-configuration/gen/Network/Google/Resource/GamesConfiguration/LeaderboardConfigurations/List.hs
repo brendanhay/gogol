@@ -29,8 +29,8 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.List
       LeaderboardConfigurationsListResource
 
     -- * Creating a Request
-    , leaderboardConfigurationsList'
-    , LeaderboardConfigurationsList'
+    , leaderboardConfigurationsList
+    , LeaderboardConfigurationsList
 
     -- * Request Lenses
     , lclApplicationId
@@ -42,7 +42,7 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.leaderboardConfigurations.list@ method which the
--- 'LeaderboardConfigurationsList'' request conforms to.
+-- 'LeaderboardConfigurationsList' request conforms to.
 type LeaderboardConfigurationsListResource =
      "applications" :>
        Capture "applicationId" Text :>
@@ -54,14 +54,14 @@ type LeaderboardConfigurationsListResource =
 
 -- | Returns a list of the leaderboard configurations in this application.
 --
--- /See:/ 'leaderboardConfigurationsList'' smart constructor.
-data LeaderboardConfigurationsList' = LeaderboardConfigurationsList'
+-- /See:/ 'leaderboardConfigurationsList' smart constructor.
+data LeaderboardConfigurationsList = LeaderboardConfigurationsList
     { _lclApplicationId :: !Text
     , _lclPageToken     :: !(Maybe Text)
     , _lclMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LeaderboardConfigurationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'LeaderboardConfigurationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,40 +70,40 @@ data LeaderboardConfigurationsList' = LeaderboardConfigurationsList'
 -- * 'lclPageToken'
 --
 -- * 'lclMaxResults'
-leaderboardConfigurationsList'
+leaderboardConfigurationsList
     :: Text -- ^ 'lclApplicationId'
-    -> LeaderboardConfigurationsList'
-leaderboardConfigurationsList' pLclApplicationId_ =
-    LeaderboardConfigurationsList'
+    -> LeaderboardConfigurationsList
+leaderboardConfigurationsList pLclApplicationId_ =
+    LeaderboardConfigurationsList
     { _lclApplicationId = pLclApplicationId_
     , _lclPageToken = Nothing
     , _lclMaxResults = Nothing
     }
 
 -- | The application ID from the Google Play developer console.
-lclApplicationId :: Lens' LeaderboardConfigurationsList' Text
+lclApplicationId :: Lens' LeaderboardConfigurationsList Text
 lclApplicationId
   = lens _lclApplicationId
       (\ s a -> s{_lclApplicationId = a})
 
 -- | The token returned by the previous request.
-lclPageToken :: Lens' LeaderboardConfigurationsList' (Maybe Text)
+lclPageToken :: Lens' LeaderboardConfigurationsList (Maybe Text)
 lclPageToken
   = lens _lclPageToken (\ s a -> s{_lclPageToken = a})
 
 -- | The maximum number of resource configurations to return in the response,
 -- used for paging. For any response, the actual number of resources
 -- returned may be less than the specified maxResults.
-lclMaxResults :: Lens' LeaderboardConfigurationsList' (Maybe Int32)
+lclMaxResults :: Lens' LeaderboardConfigurationsList (Maybe Int32)
 lclMaxResults
   = lens _lclMaxResults
       (\ s a -> s{_lclMaxResults = a})
 
-instance GoogleRequest LeaderboardConfigurationsList'
+instance GoogleRequest LeaderboardConfigurationsList
          where
-        type Rs LeaderboardConfigurationsList' =
+        type Rs LeaderboardConfigurationsList =
              LeaderboardConfigurationListResponse
-        requestClient LeaderboardConfigurationsList'{..}
+        requestClient LeaderboardConfigurationsList{..}
           = go _lclApplicationId _lclPageToken _lclMaxResults
               (Just AltJSON)
               gamesConfigurationService

@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Files.Update
       FilesUpdateResource
 
     -- * Creating a Request
-    , filesUpdate'
-    , FilesUpdate'
+    , filesUpdate
+    , FilesUpdate
 
     -- * Request Lenses
     , fuNewRevision
@@ -55,7 +55,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.files.update@ method which the
--- 'FilesUpdate'' request conforms to.
+-- 'FilesUpdate' request conforms to.
 type FilesUpdateResource =
      "files" :>
        Capture "fileId" Text :>
@@ -80,8 +80,8 @@ type FilesUpdateResource =
 
 -- | Updates file metadata and\/or content.
 --
--- /See:/ 'filesUpdate'' smart constructor.
-data FilesUpdate' = FilesUpdate'
+-- /See:/ 'filesUpdate' smart constructor.
+data FilesUpdate = FilesUpdate
     { _fuNewRevision               :: !Bool
     , _fuPinned                    :: !Bool
     , _fuTimedTextLanguage         :: !(Maybe Text)
@@ -100,7 +100,7 @@ data FilesUpdate' = FilesUpdate'
     , _fuOCR                       :: !Bool
     }
 
--- | Creates a value of 'FilesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'FilesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -135,13 +135,13 @@ data FilesUpdate' = FilesUpdate'
 -- * 'fuAddParents'
 --
 -- * 'fuOCR'
-filesUpdate'
+filesUpdate
     :: File -- ^ 'fuPayload'
     -> Body -- ^ 'fuMedia'
     -> Text -- ^ 'fuFileId'
-    -> FilesUpdate'
-filesUpdate' pFuPayload_ pFuMedia_ pFuFileId_ =
-    FilesUpdate'
+    -> FilesUpdate
+filesUpdate pFuPayload_ pFuMedia_ pFuFileId_ =
+    FilesUpdate
     { _fuNewRevision = True
     , _fuPinned = False
     , _fuTimedTextLanguage = Nothing
@@ -167,95 +167,95 @@ filesUpdate' pFuPayload_ pFuMedia_ pFuFileId_ =
 -- indefinitely, using additional storage quota, up to a maximum of 200
 -- revisions. For details on how revisions are retained, see the Drive Help
 -- Center.
-fuNewRevision :: Lens' FilesUpdate' Bool
+fuNewRevision :: Lens' FilesUpdate Bool
 fuNewRevision
   = lens _fuNewRevision
       (\ s a -> s{_fuNewRevision = a})
 
 -- | Whether to pin the new revision. A file can have a maximum of 200 pinned
 -- revisions.
-fuPinned :: Lens' FilesUpdate' Bool
+fuPinned :: Lens' FilesUpdate Bool
 fuPinned = lens _fuPinned (\ s a -> s{_fuPinned = a})
 
 -- | The language of the timed text.
-fuTimedTextLanguage :: Lens' FilesUpdate' (Maybe Text)
+fuTimedTextLanguage :: Lens' FilesUpdate (Maybe Text)
 fuTimedTextLanguage
   = lens _fuTimedTextLanguage
       (\ s a -> s{_fuTimedTextLanguage = a})
 
 -- | Multipart request metadata.
-fuPayload :: Lens' FilesUpdate' File
+fuPayload :: Lens' FilesUpdate File
 fuPayload
   = lens _fuPayload (\ s a -> s{_fuPayload = a})
 
 -- | Whether to update the view date after successfully updating the file.
-fuUpdateViewedDate :: Lens' FilesUpdate' Bool
+fuUpdateViewedDate :: Lens' FilesUpdate Bool
 fuUpdateViewedDate
   = lens _fuUpdateViewedDate
       (\ s a -> s{_fuUpdateViewedDate = a})
 
 -- | Comma-separated list of parent IDs to remove.
-fuRemoveParents :: Lens' FilesUpdate' (Maybe Text)
+fuRemoveParents :: Lens' FilesUpdate (Maybe Text)
 fuRemoveParents
   = lens _fuRemoveParents
       (\ s a -> s{_fuRemoveParents = a})
 
 -- | Determines the behavior in which modifiedDate is updated. This overrides
 -- setModifiedDate.
-fuModifiedDateBehavior :: Lens' FilesUpdate' (Maybe FilesUpdateModifiedDateBehavior)
+fuModifiedDateBehavior :: Lens' FilesUpdate (Maybe FilesUpdateModifiedDateBehavior)
 fuModifiedDateBehavior
   = lens _fuModifiedDateBehavior
       (\ s a -> s{_fuModifiedDateBehavior = a})
 
 -- | Whether to use the content as indexable text.
-fuUseContentAsIndexableText :: Lens' FilesUpdate' Bool
+fuUseContentAsIndexableText :: Lens' FilesUpdate Bool
 fuUseContentAsIndexableText
   = lens _fuUseContentAsIndexableText
       (\ s a -> s{_fuUseContentAsIndexableText = a})
 
-fuMedia :: Lens' FilesUpdate' Body
+fuMedia :: Lens' FilesUpdate Body
 fuMedia = lens _fuMedia (\ s a -> s{_fuMedia = a})
 
 -- | The timed text track name.
-fuTimedTextTrackName :: Lens' FilesUpdate' (Maybe Text)
+fuTimedTextTrackName :: Lens' FilesUpdate (Maybe Text)
 fuTimedTextTrackName
   = lens _fuTimedTextTrackName
       (\ s a -> s{_fuTimedTextTrackName = a})
 
 -- | If ocr is true, hints at the language to use. Valid values are BCP 47
 -- codes.
-fuOCRLanguage :: Lens' FilesUpdate' (Maybe Text)
+fuOCRLanguage :: Lens' FilesUpdate (Maybe Text)
 fuOCRLanguage
   = lens _fuOCRLanguage
       (\ s a -> s{_fuOCRLanguage = a})
 
 -- | This parameter is deprecated and has no function.
-fuConvert :: Lens' FilesUpdate' Bool
+fuConvert :: Lens' FilesUpdate Bool
 fuConvert
   = lens _fuConvert (\ s a -> s{_fuConvert = a})
 
 -- | Whether to set the modified date with the supplied modified date.
-fuSetModifiedDate :: Lens' FilesUpdate' Bool
+fuSetModifiedDate :: Lens' FilesUpdate Bool
 fuSetModifiedDate
   = lens _fuSetModifiedDate
       (\ s a -> s{_fuSetModifiedDate = a})
 
 -- | The ID of the file to update.
-fuFileId :: Lens' FilesUpdate' Text
+fuFileId :: Lens' FilesUpdate Text
 fuFileId = lens _fuFileId (\ s a -> s{_fuFileId = a})
 
 -- | Comma-separated list of parent IDs to add.
-fuAddParents :: Lens' FilesUpdate' (Maybe Text)
+fuAddParents :: Lens' FilesUpdate (Maybe Text)
 fuAddParents
   = lens _fuAddParents (\ s a -> s{_fuAddParents = a})
 
 -- | Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.
-fuOCR :: Lens' FilesUpdate' Bool
+fuOCR :: Lens' FilesUpdate Bool
 fuOCR = lens _fuOCR (\ s a -> s{_fuOCR = a})
 
-instance GoogleRequest FilesUpdate' where
-        type Rs FilesUpdate' = File
-        requestClient FilesUpdate'{..}
+instance GoogleRequest FilesUpdate where
+        type Rs FilesUpdate = File
+        requestClient FilesUpdate{..}
           = go _fuFileId (Just _fuNewRevision) (Just _fuPinned)
               _fuTimedTextLanguage
               (Just _fuUpdateViewedDate)

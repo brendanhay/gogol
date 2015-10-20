@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.Drafts.List
       UsersDraftsListResource
 
     -- * Creating a Request
-    , usersDraftsList'
-    , UsersDraftsList'
+    , usersDraftsList
+    , UsersDraftsList
 
     -- * Request Lenses
     , udlUserId
@@ -42,7 +42,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.drafts.list@ method which the
--- 'UsersDraftsList'' request conforms to.
+-- 'UsersDraftsList' request conforms to.
 type UsersDraftsListResource =
      Capture "userId" Text :>
        "drafts" :>
@@ -53,14 +53,14 @@ type UsersDraftsListResource =
 
 -- | Lists the drafts in the user\'s mailbox.
 --
--- /See:/ 'usersDraftsList'' smart constructor.
-data UsersDraftsList' = UsersDraftsList'
+-- /See:/ 'usersDraftsList' smart constructor.
+data UsersDraftsList = UsersDraftsList
     { _udlUserId     :: !Text
     , _udlPageToken  :: !(Maybe Text)
     , _udlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersDraftsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersDraftsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,11 +69,11 @@ data UsersDraftsList' = UsersDraftsList'
 -- * 'udlPageToken'
 --
 -- * 'udlMaxResults'
-usersDraftsList'
+usersDraftsList
     :: Text
-    -> UsersDraftsList'
-usersDraftsList' pUdlUserId_ =
-    UsersDraftsList'
+    -> UsersDraftsList
+usersDraftsList pUdlUserId_ =
+    UsersDraftsList
     { _udlUserId = pUdlUserId_
     , _udlPageToken = Nothing
     , _udlMaxResults = 100
@@ -81,24 +81,24 @@ usersDraftsList' pUdlUserId_ =
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-udlUserId :: Lens' UsersDraftsList' Text
+udlUserId :: Lens' UsersDraftsList Text
 udlUserId
   = lens _udlUserId (\ s a -> s{_udlUserId = a})
 
 -- | Page token to retrieve a specific page of results in the list.
-udlPageToken :: Lens' UsersDraftsList' (Maybe Text)
+udlPageToken :: Lens' UsersDraftsList (Maybe Text)
 udlPageToken
   = lens _udlPageToken (\ s a -> s{_udlPageToken = a})
 
 -- | Maximum number of drafts to return.
-udlMaxResults :: Lens' UsersDraftsList' Word32
+udlMaxResults :: Lens' UsersDraftsList Word32
 udlMaxResults
   = lens _udlMaxResults
       (\ s a -> s{_udlMaxResults = a})
 
-instance GoogleRequest UsersDraftsList' where
-        type Rs UsersDraftsList' = ListDraftsResponse
-        requestClient UsersDraftsList'{..}
+instance GoogleRequest UsersDraftsList where
+        type Rs UsersDraftsList = ListDraftsResponse
+        requestClient UsersDraftsList{..}
           = go _udlUserId _udlPageToken (Just _udlMaxResults)
               (Just AltJSON)
               gmailService

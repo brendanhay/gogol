@@ -29,8 +29,8 @@ module Network.Google.Resource.Genomics.Callsets.Delete
       CallsetsDeleteResource
 
     -- * Creating a Request
-    , callsetsDelete'
-    , CallsetsDelete'
+    , callsetsDelete
+    , CallsetsDelete
 
     -- * Request Lenses
     , cdXgafv
@@ -47,7 +47,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.callsets.delete@ method which the
--- 'CallsetsDelete'' request conforms to.
+-- 'CallsetsDelete' request conforms to.
 type CallsetsDeleteResource =
      "v1" :>
        "callsets" :>
@@ -63,8 +63,8 @@ type CallsetsDeleteResource =
 
 -- | Deletes a call set.
 --
--- /See:/ 'callsetsDelete'' smart constructor.
-data CallsetsDelete' = CallsetsDelete'
+-- /See:/ 'callsetsDelete' smart constructor.
+data CallsetsDelete = CallsetsDelete
     { _cdXgafv          :: !(Maybe Text)
     , _cdUploadProtocol :: !(Maybe Text)
     , _cdPp             :: !Bool
@@ -75,7 +75,7 @@ data CallsetsDelete' = CallsetsDelete'
     , _cdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CallsetsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'CallsetsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -94,11 +94,11 @@ data CallsetsDelete' = CallsetsDelete'
 -- * 'cdCallSetId'
 --
 -- * 'cdCallback'
-callsetsDelete'
+callsetsDelete
     :: Text -- ^ 'cdCallSetId'
-    -> CallsetsDelete'
-callsetsDelete' pCdCallSetId_ =
-    CallsetsDelete'
+    -> CallsetsDelete
+callsetsDelete pCdCallSetId_ =
+    CallsetsDelete
     { _cdXgafv = Nothing
     , _cdUploadProtocol = Nothing
     , _cdPp = True
@@ -110,49 +110,49 @@ callsetsDelete' pCdCallSetId_ =
     }
 
 -- | V1 error format.
-cdXgafv :: Lens' CallsetsDelete' (Maybe Text)
+cdXgafv :: Lens' CallsetsDelete (Maybe Text)
 cdXgafv = lens _cdXgafv (\ s a -> s{_cdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-cdUploadProtocol :: Lens' CallsetsDelete' (Maybe Text)
+cdUploadProtocol :: Lens' CallsetsDelete (Maybe Text)
 cdUploadProtocol
   = lens _cdUploadProtocol
       (\ s a -> s{_cdUploadProtocol = a})
 
 -- | Pretty-print response.
-cdPp :: Lens' CallsetsDelete' Bool
+cdPp :: Lens' CallsetsDelete Bool
 cdPp = lens _cdPp (\ s a -> s{_cdPp = a})
 
 -- | OAuth access token.
-cdAccessToken :: Lens' CallsetsDelete' (Maybe Text)
+cdAccessToken :: Lens' CallsetsDelete (Maybe Text)
 cdAccessToken
   = lens _cdAccessToken
       (\ s a -> s{_cdAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-cdUploadType :: Lens' CallsetsDelete' (Maybe Text)
+cdUploadType :: Lens' CallsetsDelete (Maybe Text)
 cdUploadType
   = lens _cdUploadType (\ s a -> s{_cdUploadType = a})
 
 -- | OAuth bearer token.
-cdBearerToken :: Lens' CallsetsDelete' (Maybe Text)
+cdBearerToken :: Lens' CallsetsDelete (Maybe Text)
 cdBearerToken
   = lens _cdBearerToken
       (\ s a -> s{_cdBearerToken = a})
 
 -- | The ID of the call set to be deleted.
-cdCallSetId :: Lens' CallsetsDelete' Text
+cdCallSetId :: Lens' CallsetsDelete Text
 cdCallSetId
   = lens _cdCallSetId (\ s a -> s{_cdCallSetId = a})
 
 -- | JSONP
-cdCallback :: Lens' CallsetsDelete' (Maybe Text)
+cdCallback :: Lens' CallsetsDelete (Maybe Text)
 cdCallback
   = lens _cdCallback (\ s a -> s{_cdCallback = a})
 
-instance GoogleRequest CallsetsDelete' where
-        type Rs CallsetsDelete' = Empty
-        requestClient CallsetsDelete'{..}
+instance GoogleRequest CallsetsDelete where
+        type Rs CallsetsDelete = Empty
+        requestClient CallsetsDelete{..}
           = go _cdCallSetId _cdXgafv _cdUploadProtocol
               (Just _cdPp)
               _cdAccessToken

@@ -29,21 +29,21 @@ module Network.Google.Resource.PlusDomains.Comments.List
       CommentsListResource
 
     -- * Creating a Request
-    , commentsList'
-    , CommentsList'
+    , commentsList
+    , CommentsList
 
     -- * Request Lenses
-    , cActivityId
-    , cSortOrder
-    , cPageToken
-    , cMaxResults
+    , clActivityId
+    , clSortOrder
+    , clPageToken
+    , clMaxResults
     ) where
 
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plusDomains.comments.list@ method which the
--- 'CommentsList'' request conforms to.
+-- 'CommentsList' request conforms to.
 type CommentsListResource =
      "activities" :>
        Capture "activityId" Text :>
@@ -55,65 +55,65 @@ type CommentsListResource =
 
 -- | List all of the comments for an activity.
 --
--- /See:/ 'commentsList'' smart constructor.
-data CommentsList' = CommentsList'
-    { _cActivityId :: !Text
-    , _cSortOrder  :: !CommentsListSortOrder
-    , _cPageToken  :: !(Maybe Text)
-    , _cMaxResults :: !Word32
+-- /See:/ 'commentsList' smart constructor.
+data CommentsList = CommentsList
+    { _clActivityId :: !Text
+    , _clSortOrder  :: !CommentsListSortOrder
+    , _clPageToken  :: !(Maybe Text)
+    , _clMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cActivityId'
+-- * 'clActivityId'
 --
--- * 'cSortOrder'
+-- * 'clSortOrder'
 --
--- * 'cPageToken'
+-- * 'clPageToken'
 --
--- * 'cMaxResults'
-commentsList'
-    :: Text -- ^ 'cActivityId'
-    -> CommentsList'
-commentsList' pCActivityId_ =
-    CommentsList'
-    { _cActivityId = pCActivityId_
-    , _cSortOrder = Ascending
-    , _cPageToken = Nothing
-    , _cMaxResults = 20
+-- * 'clMaxResults'
+commentsList
+    :: Text -- ^ 'clActivityId'
+    -> CommentsList
+commentsList pClActivityId_ =
+    CommentsList
+    { _clActivityId = pClActivityId_
+    , _clSortOrder = Ascending
+    , _clPageToken = Nothing
+    , _clMaxResults = 20
     }
 
 -- | The ID of the activity to get comments for.
-cActivityId :: Lens' CommentsList' Text
-cActivityId
-  = lens _cActivityId (\ s a -> s{_cActivityId = a})
+clActivityId :: Lens' CommentsList Text
+clActivityId
+  = lens _clActivityId (\ s a -> s{_clActivityId = a})
 
 -- | The order in which to sort the list of comments.
-cSortOrder :: Lens' CommentsList' CommentsListSortOrder
-cSortOrder
-  = lens _cSortOrder (\ s a -> s{_cSortOrder = a})
+clSortOrder :: Lens' CommentsList CommentsListSortOrder
+clSortOrder
+  = lens _clSortOrder (\ s a -> s{_clSortOrder = a})
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
 -- \"nextPageToken\" from the previous response.
-cPageToken :: Lens' CommentsList' (Maybe Text)
-cPageToken
-  = lens _cPageToken (\ s a -> s{_cPageToken = a})
+clPageToken :: Lens' CommentsList (Maybe Text)
+clPageToken
+  = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
 -- | The maximum number of comments to include in the response, which is used
 -- for paging. For any response, the actual number returned might be less
 -- than the specified maxResults.
-cMaxResults :: Lens' CommentsList' Word32
-cMaxResults
-  = lens _cMaxResults (\ s a -> s{_cMaxResults = a})
+clMaxResults :: Lens' CommentsList Word32
+clMaxResults
+  = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
 
-instance GoogleRequest CommentsList' where
-        type Rs CommentsList' = CommentFeed
-        requestClient CommentsList'{..}
-          = go _cActivityId (Just _cSortOrder) _cPageToken
-              (Just _cMaxResults)
+instance GoogleRequest CommentsList where
+        type Rs CommentsList = CommentFeed
+        requestClient CommentsList{..}
+          = go _clActivityId (Just _clSortOrder) _clPageToken
+              (Just _clMaxResults)
               (Just AltJSON)
               plusDomainsService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.MobileDevices.Delete
       MobileDevicesDeleteResource
 
     -- * Creating a Request
-    , mobileDevicesDelete'
-    , MobileDevicesDelete'
+    , mobileDevicesDelete
+    , MobileDevicesDelete
 
     -- * Request Lenses
     , mddResourceId
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.mobiledevices.delete@ method which the
--- 'MobileDevicesDelete'' request conforms to.
+-- 'MobileDevicesDelete' request conforms to.
 type MobileDevicesDeleteResource =
      "customer" :>
        Capture "customerId" Text :>
@@ -52,44 +52,44 @@ type MobileDevicesDeleteResource =
 
 -- | Delete Mobile Device
 --
--- /See:/ 'mobileDevicesDelete'' smart constructor.
-data MobileDevicesDelete' = MobileDevicesDelete'
+-- /See:/ 'mobileDevicesDelete' smart constructor.
+data MobileDevicesDelete = MobileDevicesDelete
     { _mddResourceId :: !Text
     , _mddCustomerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MobileDevicesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'MobileDevicesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mddResourceId'
 --
 -- * 'mddCustomerId'
-mobileDevicesDelete'
+mobileDevicesDelete
     :: Text -- ^ 'mddResourceId'
     -> Text -- ^ 'mddCustomerId'
-    -> MobileDevicesDelete'
-mobileDevicesDelete' pMddResourceId_ pMddCustomerId_ =
-    MobileDevicesDelete'
+    -> MobileDevicesDelete
+mobileDevicesDelete pMddResourceId_ pMddCustomerId_ =
+    MobileDevicesDelete
     { _mddResourceId = pMddResourceId_
     , _mddCustomerId = pMddCustomerId_
     }
 
 -- | Immutable id of Mobile Device
-mddResourceId :: Lens' MobileDevicesDelete' Text
+mddResourceId :: Lens' MobileDevicesDelete Text
 mddResourceId
   = lens _mddResourceId
       (\ s a -> s{_mddResourceId = a})
 
 -- | Immutable id of the Google Apps account
-mddCustomerId :: Lens' MobileDevicesDelete' Text
+mddCustomerId :: Lens' MobileDevicesDelete Text
 mddCustomerId
   = lens _mddCustomerId
       (\ s a -> s{_mddCustomerId = a})
 
-instance GoogleRequest MobileDevicesDelete' where
-        type Rs MobileDevicesDelete' = ()
-        requestClient MobileDevicesDelete'{..}
+instance GoogleRequest MobileDevicesDelete where
+        type Rs MobileDevicesDelete = ()
+        requestClient MobileDevicesDelete{..}
           = go _mddCustomerId _mddResourceId (Just AltJSON)
               directoryService
           where go

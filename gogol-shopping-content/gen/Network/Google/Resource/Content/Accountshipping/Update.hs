@@ -29,21 +29,21 @@ module Network.Google.Resource.Content.Accountshipping.Update
       AccountshippingUpdateResource
 
     -- * Creating a Request
-    , accountshippingUpdate'
-    , AccountshippingUpdate'
+    , accountshippingUpdate
+    , AccountshippingUpdate
 
     -- * Request Lenses
-    , auuMerchantId
-    , auuPayload
-    , auuAccountId
-    , auuDryRun
+    , auMerchantId
+    , auPayload
+    , auAccountId
+    , auDryRun
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accountshipping.update@ method which the
--- 'AccountshippingUpdate'' request conforms to.
+-- 'AccountshippingUpdate' request conforms to.
 type AccountshippingUpdateResource =
      Capture "merchantId" Word64 :>
        "accountshipping" :>
@@ -55,66 +55,64 @@ type AccountshippingUpdateResource =
 
 -- | Updates the shipping settings of the account.
 --
--- /See:/ 'accountshippingUpdate'' smart constructor.
-data AccountshippingUpdate' = AccountshippingUpdate'
-    { _auuMerchantId :: !Word64
-    , _auuPayload    :: !AccountShipping
-    , _auuAccountId  :: !Word64
-    , _auuDryRun     :: !(Maybe Bool)
+-- /See:/ 'accountshippingUpdate' smart constructor.
+data AccountshippingUpdate = AccountshippingUpdate
+    { _auMerchantId :: !Word64
+    , _auPayload    :: !AccountShipping
+    , _auAccountId  :: !Word64
+    , _auDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountshippingUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountshippingUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'auuMerchantId'
+-- * 'auMerchantId'
 --
--- * 'auuPayload'
+-- * 'auPayload'
 --
--- * 'auuAccountId'
+-- * 'auAccountId'
 --
--- * 'auuDryRun'
-accountshippingUpdate'
-    :: Word64 -- ^ 'auuMerchantId'
-    -> AccountShipping -- ^ 'auuPayload'
-    -> Word64 -- ^ 'auuAccountId'
-    -> AccountshippingUpdate'
-accountshippingUpdate' pAuuMerchantId_ pAuuPayload_ pAuuAccountId_ =
-    AccountshippingUpdate'
-    { _auuMerchantId = pAuuMerchantId_
-    , _auuPayload = pAuuPayload_
-    , _auuAccountId = pAuuAccountId_
-    , _auuDryRun = Nothing
+-- * 'auDryRun'
+accountshippingUpdate
+    :: Word64 -- ^ 'auMerchantId'
+    -> AccountShipping -- ^ 'auPayload'
+    -> Word64 -- ^ 'auAccountId'
+    -> AccountshippingUpdate
+accountshippingUpdate pAuMerchantId_ pAuPayload_ pAuAccountId_ =
+    AccountshippingUpdate
+    { _auMerchantId = pAuMerchantId_
+    , _auPayload = pAuPayload_
+    , _auAccountId = pAuAccountId_
+    , _auDryRun = Nothing
     }
 
 -- | The ID of the managing account.
-auuMerchantId :: Lens' AccountshippingUpdate' Word64
-auuMerchantId
-  = lens _auuMerchantId
-      (\ s a -> s{_auuMerchantId = a})
+auMerchantId :: Lens' AccountshippingUpdate Word64
+auMerchantId
+  = lens _auMerchantId (\ s a -> s{_auMerchantId = a})
 
 -- | Multipart request metadata.
-auuPayload :: Lens' AccountshippingUpdate' AccountShipping
-auuPayload
-  = lens _auuPayload (\ s a -> s{_auuPayload = a})
+auPayload :: Lens' AccountshippingUpdate AccountShipping
+auPayload
+  = lens _auPayload (\ s a -> s{_auPayload = a})
 
 -- | The ID of the account for which to get\/update account shipping
 -- settings.
-auuAccountId :: Lens' AccountshippingUpdate' Word64
-auuAccountId
-  = lens _auuAccountId (\ s a -> s{_auuAccountId = a})
+auAccountId :: Lens' AccountshippingUpdate Word64
+auAccountId
+  = lens _auAccountId (\ s a -> s{_auAccountId = a})
 
 -- | Flag to run the request in dry-run mode.
-auuDryRun :: Lens' AccountshippingUpdate' (Maybe Bool)
-auuDryRun
-  = lens _auuDryRun (\ s a -> s{_auuDryRun = a})
+auDryRun :: Lens' AccountshippingUpdate (Maybe Bool)
+auDryRun = lens _auDryRun (\ s a -> s{_auDryRun = a})
 
-instance GoogleRequest AccountshippingUpdate' where
-        type Rs AccountshippingUpdate' = AccountShipping
-        requestClient AccountshippingUpdate'{..}
-          = go _auuMerchantId _auuAccountId _auuDryRun
+instance GoogleRequest AccountshippingUpdate where
+        type Rs AccountshippingUpdate = AccountShipping
+        requestClient AccountshippingUpdate{..}
+          = go _auMerchantId _auAccountId _auDryRun
               (Just AltJSON)
-              _auuPayload
+              _auPayload
               shoppingContentService
           where go
                   = buildClient

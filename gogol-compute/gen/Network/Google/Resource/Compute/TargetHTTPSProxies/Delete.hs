@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.TargetHTTPSProxies.Delete
       TargetHTTPSProxiesDeleteResource
 
     -- * Creating a Request
-    , targetHTTPSProxiesDelete'
-    , TargetHTTPSProxiesDelete'
+    , targetHTTPSProxiesDelete
+    , TargetHTTPSProxiesDelete
 
     -- * Request Lenses
     , thpdProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetHttpsProxies.delete@ method which the
--- 'TargetHTTPSProxiesDelete'' request conforms to.
+-- 'TargetHTTPSProxiesDelete' request conforms to.
 type TargetHTTPSProxiesDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,44 +51,43 @@ type TargetHTTPSProxiesDeleteResource =
 
 -- | Deletes the specified TargetHttpsProxy resource.
 --
--- /See:/ 'targetHTTPSProxiesDelete'' smart constructor.
-data TargetHTTPSProxiesDelete' = TargetHTTPSProxiesDelete'
+-- /See:/ 'targetHTTPSProxiesDelete' smart constructor.
+data TargetHTTPSProxiesDelete = TargetHTTPSProxiesDelete
     { _thpdProject          :: !Text
     , _thpdTargetHTTPSProxy :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetHTTPSProxiesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetHTTPSProxiesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'thpdProject'
 --
 -- * 'thpdTargetHTTPSProxy'
-targetHTTPSProxiesDelete'
+targetHTTPSProxiesDelete
     :: Text -- ^ 'thpdProject'
     -> Text -- ^ 'thpdTargetHTTPSProxy'
-    -> TargetHTTPSProxiesDelete'
-targetHTTPSProxiesDelete' pThpdProject_ pThpdTargetHTTPSProxy_ =
-    TargetHTTPSProxiesDelete'
+    -> TargetHTTPSProxiesDelete
+targetHTTPSProxiesDelete pThpdProject_ pThpdTargetHTTPSProxy_ =
+    TargetHTTPSProxiesDelete
     { _thpdProject = pThpdProject_
     , _thpdTargetHTTPSProxy = pThpdTargetHTTPSProxy_
     }
 
 -- | Name of the project scoping this request.
-thpdProject :: Lens' TargetHTTPSProxiesDelete' Text
+thpdProject :: Lens' TargetHTTPSProxiesDelete Text
 thpdProject
   = lens _thpdProject (\ s a -> s{_thpdProject = a})
 
 -- | Name of the TargetHttpsProxy resource to delete.
-thpdTargetHTTPSProxy :: Lens' TargetHTTPSProxiesDelete' Text
+thpdTargetHTTPSProxy :: Lens' TargetHTTPSProxiesDelete Text
 thpdTargetHTTPSProxy
   = lens _thpdTargetHTTPSProxy
       (\ s a -> s{_thpdTargetHTTPSProxy = a})
 
-instance GoogleRequest TargetHTTPSProxiesDelete'
-         where
-        type Rs TargetHTTPSProxiesDelete' = Operation
-        requestClient TargetHTTPSProxiesDelete'{..}
+instance GoogleRequest TargetHTTPSProxiesDelete where
+        type Rs TargetHTTPSProxiesDelete = Operation
+        requestClient TargetHTTPSProxiesDelete{..}
           = go _thpdProject _thpdTargetHTTPSProxy
               (Just AltJSON)
               computeService

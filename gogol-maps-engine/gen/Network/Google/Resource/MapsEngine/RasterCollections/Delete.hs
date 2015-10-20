@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Delete
       RasterCollectionsDeleteResource
 
     -- * Creating a Request
-    , rasterCollectionsDelete'
-    , RasterCollectionsDelete'
+    , rasterCollectionsDelete
+    , RasterCollectionsDelete
 
     -- * Request Lenses
     , rcdId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasterCollections.delete@ method which the
--- 'RasterCollectionsDelete'' request conforms to.
+-- 'RasterCollectionsDelete' request conforms to.
 type RasterCollectionsDeleteResource =
      "rasterCollections" :>
        Capture "id" Text :>
@@ -48,21 +48,21 @@ type RasterCollectionsDeleteResource =
 
 -- | Delete a raster collection.
 --
--- /See:/ 'rasterCollectionsDelete'' smart constructor.
-newtype RasterCollectionsDelete' = RasterCollectionsDelete'
+-- /See:/ 'rasterCollectionsDelete' smart constructor.
+newtype RasterCollectionsDelete = RasterCollectionsDelete
     { _rcdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RasterCollectionsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'RasterCollectionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rcdId'
-rasterCollectionsDelete'
+rasterCollectionsDelete
     :: Text -- ^ 'rcdId'
-    -> RasterCollectionsDelete'
-rasterCollectionsDelete' pRcdId_ =
-    RasterCollectionsDelete'
+    -> RasterCollectionsDelete
+rasterCollectionsDelete pRcdId_ =
+    RasterCollectionsDelete
     { _rcdId = pRcdId_
     }
 
@@ -70,12 +70,12 @@ rasterCollectionsDelete' pRcdId_ =
 -- project owner are permitted to delete. If the rastor collection is
 -- included in a layer, the request will fail. Remove the raster collection
 -- from all layers prior to deleting.
-rcdId :: Lens' RasterCollectionsDelete' Text
+rcdId :: Lens' RasterCollectionsDelete Text
 rcdId = lens _rcdId (\ s a -> s{_rcdId = a})
 
-instance GoogleRequest RasterCollectionsDelete' where
-        type Rs RasterCollectionsDelete' = ()
-        requestClient RasterCollectionsDelete'{..}
+instance GoogleRequest RasterCollectionsDelete where
+        type Rs RasterCollectionsDelete = ()
+        requestClient RasterCollectionsDelete{..}
           = go _rcdId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

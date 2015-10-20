@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Ads.Insert
       AdsInsertResource
 
     -- * Creating a Request
-    , adsInsert'
-    , AdsInsert'
+    , adsInsert
+    , AdsInsert
 
     -- * Request Lenses
     , aiProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.ads.insert@ method which the
--- 'AdsInsert'' request conforms to.
+-- 'AdsInsert' request conforms to.
 type AdsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type AdsInsertResource =
 
 -- | Inserts a new ad.
 --
--- /See:/ 'adsInsert'' smart constructor.
-data AdsInsert' = AdsInsert'
+-- /See:/ 'adsInsert' smart constructor.
+data AdsInsert = AdsInsert
     { _aiProFileId :: !Int64
     , _aiPayload   :: !Ad
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aiProFileId'
 --
 -- * 'aiPayload'
-adsInsert'
+adsInsert
     :: Int64 -- ^ 'aiProFileId'
     -> Ad -- ^ 'aiPayload'
-    -> AdsInsert'
-adsInsert' pAiProFileId_ pAiPayload_ =
-    AdsInsert'
+    -> AdsInsert
+adsInsert pAiProFileId_ pAiPayload_ =
+    AdsInsert
     { _aiProFileId = pAiProFileId_
     , _aiPayload = pAiPayload_
     }
 
 -- | User profile ID associated with this request.
-aiProFileId :: Lens' AdsInsert' Int64
+aiProFileId :: Lens' AdsInsert Int64
 aiProFileId
   = lens _aiProFileId (\ s a -> s{_aiProFileId = a})
 
 -- | Multipart request metadata.
-aiPayload :: Lens' AdsInsert' Ad
+aiPayload :: Lens' AdsInsert Ad
 aiPayload
   = lens _aiPayload (\ s a -> s{_aiPayload = a})
 
-instance GoogleRequest AdsInsert' where
-        type Rs AdsInsert' = Ad
-        requestClient AdsInsert'{..}
+instance GoogleRequest AdsInsert where
+        type Rs AdsInsert = Ad
+        requestClient AdsInsert{..}
           = go _aiProFileId (Just AltJSON) _aiPayload
               dFAReportingService
           where go

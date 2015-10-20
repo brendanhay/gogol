@@ -34,8 +34,8 @@ module Network.Google.Resource.Fitness.Users.DataSources.Patch
       UsersDataSourcesPatchResource
 
     -- * Creating a Request
-    , usersDataSourcesPatch'
-    , UsersDataSourcesPatch'
+    , usersDataSourcesPatch
+    , UsersDataSourcesPatch
 
     -- * Request Lenses
     , udspDataSourceId
@@ -47,7 +47,7 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fitness.users.dataSources.patch@ method which the
--- 'UsersDataSourcesPatch'' request conforms to.
+-- 'UsersDataSourcesPatch' request conforms to.
 type UsersDataSourcesPatchResource =
      Capture "userId" Text :>
        "dataSources" :>
@@ -63,14 +63,14 @@ type UsersDataSourcesPatchResource =
 -- identified by their data stream ID. This method supports patch
 -- semantics.
 --
--- /See:/ 'usersDataSourcesPatch'' smart constructor.
-data UsersDataSourcesPatch' = UsersDataSourcesPatch'
+-- /See:/ 'usersDataSourcesPatch' smart constructor.
+data UsersDataSourcesPatch = UsersDataSourcesPatch
     { _udspDataSourceId :: !Text
     , _udspPayload      :: !DataSource
     , _udspUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersDataSourcesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersDataSourcesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,38 +79,38 @@ data UsersDataSourcesPatch' = UsersDataSourcesPatch'
 -- * 'udspPayload'
 --
 -- * 'udspUserId'
-usersDataSourcesPatch'
+usersDataSourcesPatch
     :: Text -- ^ 'udspDataSourceId'
     -> DataSource -- ^ 'udspPayload'
     -> Text -- ^ 'udspUserId'
-    -> UsersDataSourcesPatch'
-usersDataSourcesPatch' pUdspDataSourceId_ pUdspPayload_ pUdspUserId_ =
-    UsersDataSourcesPatch'
+    -> UsersDataSourcesPatch
+usersDataSourcesPatch pUdspDataSourceId_ pUdspPayload_ pUdspUserId_ =
+    UsersDataSourcesPatch
     { _udspDataSourceId = pUdspDataSourceId_
     , _udspPayload = pUdspPayload_
     , _udspUserId = pUdspUserId_
     }
 
 -- | The data stream ID of the data source to update.
-udspDataSourceId :: Lens' UsersDataSourcesPatch' Text
+udspDataSourceId :: Lens' UsersDataSourcesPatch Text
 udspDataSourceId
   = lens _udspDataSourceId
       (\ s a -> s{_udspDataSourceId = a})
 
 -- | Multipart request metadata.
-udspPayload :: Lens' UsersDataSourcesPatch' DataSource
+udspPayload :: Lens' UsersDataSourcesPatch DataSource
 udspPayload
   = lens _udspPayload (\ s a -> s{_udspPayload = a})
 
 -- | Update the data source for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
-udspUserId :: Lens' UsersDataSourcesPatch' Text
+udspUserId :: Lens' UsersDataSourcesPatch Text
 udspUserId
   = lens _udspUserId (\ s a -> s{_udspUserId = a})
 
-instance GoogleRequest UsersDataSourcesPatch' where
-        type Rs UsersDataSourcesPatch' = DataSource
-        requestClient UsersDataSourcesPatch'{..}
+instance GoogleRequest UsersDataSourcesPatch where
+        type Rs UsersDataSourcesPatch = DataSource
+        requestClient UsersDataSourcesPatch{..}
           = go _udspUserId _udspDataSourceId (Just AltJSON)
               _udspPayload
               fitnessService

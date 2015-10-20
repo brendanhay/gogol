@@ -30,8 +30,8 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
       ConversionUpdateAvailabilityResource
 
     -- * Creating a Request
-    , conversionUpdateAvailability'
-    , ConversionUpdateAvailability'
+    , conversionUpdateAvailability
+    , ConversionUpdateAvailability
 
     -- * Request Lenses
     , cuaPayload
@@ -41,7 +41,7 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @doubleclicksearch.conversion.updateAvailability@ method which the
--- 'ConversionUpdateAvailability'' request conforms to.
+-- 'ConversionUpdateAvailability' request conforms to.
 type ConversionUpdateAvailabilityResource =
      "conversion" :>
        "updateAvailability" :>
@@ -52,34 +52,34 @@ type ConversionUpdateAvailabilityResource =
 -- | Updates the availabilities of a batch of floodlight activities in
 -- DoubleClick Search.
 --
--- /See:/ 'conversionUpdateAvailability'' smart constructor.
-newtype ConversionUpdateAvailability' = ConversionUpdateAvailability'
+-- /See:/ 'conversionUpdateAvailability' smart constructor.
+newtype ConversionUpdateAvailability = ConversionUpdateAvailability
     { _cuaPayload :: UpdateAvailabilityRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ConversionUpdateAvailability'' with the minimum fields required to make a request.
+-- | Creates a value of 'ConversionUpdateAvailability' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cuaPayload'
-conversionUpdateAvailability'
+conversionUpdateAvailability
     :: UpdateAvailabilityRequest -- ^ 'cuaPayload'
-    -> ConversionUpdateAvailability'
-conversionUpdateAvailability' pCuaPayload_ =
-    ConversionUpdateAvailability'
+    -> ConversionUpdateAvailability
+conversionUpdateAvailability pCuaPayload_ =
+    ConversionUpdateAvailability
     { _cuaPayload = pCuaPayload_
     }
 
 -- | Multipart request metadata.
-cuaPayload :: Lens' ConversionUpdateAvailability' UpdateAvailabilityRequest
+cuaPayload :: Lens' ConversionUpdateAvailability UpdateAvailabilityRequest
 cuaPayload
   = lens _cuaPayload (\ s a -> s{_cuaPayload = a})
 
-instance GoogleRequest ConversionUpdateAvailability'
+instance GoogleRequest ConversionUpdateAvailability
          where
-        type Rs ConversionUpdateAvailability' =
+        type Rs ConversionUpdateAvailability =
              UpdateAvailabilityResponse
-        requestClient ConversionUpdateAvailability'{..}
+        requestClient ConversionUpdateAvailability{..}
           = go (Just AltJSON) _cuaPayload
               doubleClickSearchService
           where go

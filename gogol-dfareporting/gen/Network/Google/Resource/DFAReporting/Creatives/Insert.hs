@@ -29,19 +29,19 @@ module Network.Google.Resource.DFAReporting.Creatives.Insert
       CreativesInsertResource
 
     -- * Creating a Request
-    , creativesInsert'
-    , CreativesInsert'
+    , creativesInsert
+    , CreativesInsert
 
     -- * Request Lenses
-    , creProFileId
-    , crePayload
+    , ciProFileId
+    , ciPayload
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creatives.insert@ method which the
--- 'CreativesInsert'' request conforms to.
+-- 'CreativesInsert' request conforms to.
 type CreativesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,43 +51,43 @@ type CreativesInsertResource =
 
 -- | Inserts a new creative.
 --
--- /See:/ 'creativesInsert'' smart constructor.
-data CreativesInsert' = CreativesInsert'
-    { _creProFileId :: !Int64
-    , _crePayload   :: !Creative
+-- /See:/ 'creativesInsert' smart constructor.
+data CreativesInsert = CreativesInsert
+    { _ciProFileId :: !Int64
+    , _ciPayload   :: !Creative
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CreativesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'creProFileId'
+-- * 'ciProFileId'
 --
--- * 'crePayload'
-creativesInsert'
-    :: Int64 -- ^ 'creProFileId'
-    -> Creative -- ^ 'crePayload'
-    -> CreativesInsert'
-creativesInsert' pCreProFileId_ pCrePayload_ =
-    CreativesInsert'
-    { _creProFileId = pCreProFileId_
-    , _crePayload = pCrePayload_
+-- * 'ciPayload'
+creativesInsert
+    :: Int64 -- ^ 'ciProFileId'
+    -> Creative -- ^ 'ciPayload'
+    -> CreativesInsert
+creativesInsert pCiProFileId_ pCiPayload_ =
+    CreativesInsert
+    { _ciProFileId = pCiProFileId_
+    , _ciPayload = pCiPayload_
     }
 
 -- | User profile ID associated with this request.
-creProFileId :: Lens' CreativesInsert' Int64
-creProFileId
-  = lens _creProFileId (\ s a -> s{_creProFileId = a})
+ciProFileId :: Lens' CreativesInsert Int64
+ciProFileId
+  = lens _ciProFileId (\ s a -> s{_ciProFileId = a})
 
 -- | Multipart request metadata.
-crePayload :: Lens' CreativesInsert' Creative
-crePayload
-  = lens _crePayload (\ s a -> s{_crePayload = a})
+ciPayload :: Lens' CreativesInsert Creative
+ciPayload
+  = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
-instance GoogleRequest CreativesInsert' where
-        type Rs CreativesInsert' = Creative
-        requestClient CreativesInsert'{..}
-          = go _creProFileId (Just AltJSON) _crePayload
+instance GoogleRequest CreativesInsert where
+        type Rs CreativesInsert = Creative
+        requestClient CreativesInsert{..}
+          = go _ciProFileId (Just AltJSON) _ciPayload
               dFAReportingService
           where go
                   = buildClient

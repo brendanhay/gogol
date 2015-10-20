@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudMonitoring.MetricDescriptors.Delete
       MetricDescriptorsDeleteResource
 
     -- * Creating a Request
-    , metricDescriptorsDelete'
-    , MetricDescriptorsDelete'
+    , metricDescriptorsDelete
+    , MetricDescriptorsDelete
 
     -- * Request Lenses
     , mddProject
@@ -41,7 +41,7 @@ import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @cloudmonitoring.metricDescriptors.delete@ method which the
--- 'MetricDescriptorsDelete'' request conforms to.
+-- 'MetricDescriptorsDelete' request conforms to.
 type MetricDescriptorsDeleteResource =
      Capture "project" Text :>
        "metricDescriptors" :>
@@ -51,43 +51,43 @@ type MetricDescriptorsDeleteResource =
 
 -- | Delete an existing metric.
 --
--- /See:/ 'metricDescriptorsDelete'' smart constructor.
-data MetricDescriptorsDelete' = MetricDescriptorsDelete'
+-- /See:/ 'metricDescriptorsDelete' smart constructor.
+data MetricDescriptorsDelete = MetricDescriptorsDelete
     { _mddProject :: !Text
     , _mddMetric  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MetricDescriptorsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'MetricDescriptorsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mddProject'
 --
 -- * 'mddMetric'
-metricDescriptorsDelete'
+metricDescriptorsDelete
     :: Text -- ^ 'mddProject'
     -> Text -- ^ 'mddMetric'
-    -> MetricDescriptorsDelete'
-metricDescriptorsDelete' pMddProject_ pMddMetric_ =
-    MetricDescriptorsDelete'
+    -> MetricDescriptorsDelete
+metricDescriptorsDelete pMddProject_ pMddMetric_ =
+    MetricDescriptorsDelete
     { _mddProject = pMddProject_
     , _mddMetric = pMddMetric_
     }
 
 -- | The project ID to which the metric belongs.
-mddProject :: Lens' MetricDescriptorsDelete' Text
+mddProject :: Lens' MetricDescriptorsDelete Text
 mddProject
   = lens _mddProject (\ s a -> s{_mddProject = a})
 
 -- | Name of the metric.
-mddMetric :: Lens' MetricDescriptorsDelete' Text
+mddMetric :: Lens' MetricDescriptorsDelete Text
 mddMetric
   = lens _mddMetric (\ s a -> s{_mddMetric = a})
 
-instance GoogleRequest MetricDescriptorsDelete' where
-        type Rs MetricDescriptorsDelete' =
+instance GoogleRequest MetricDescriptorsDelete where
+        type Rs MetricDescriptorsDelete =
              DeleteMetricDescriptorResponse
-        requestClient MetricDescriptorsDelete'{..}
+        requestClient MetricDescriptorsDelete{..}
           = go _mddProject _mddMetric (Just AltJSON)
               monitoringService
           where go

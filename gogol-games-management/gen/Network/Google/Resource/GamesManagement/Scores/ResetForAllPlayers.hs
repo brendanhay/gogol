@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Scores.ResetForAllPlayers
       ScoresResetForAllPlayersResource
 
     -- * Creating a Request
-    , scoresResetForAllPlayers'
-    , ScoresResetForAllPlayers'
+    , scoresResetForAllPlayers
+    , ScoresResetForAllPlayers
 
     -- * Request Lenses
     , srfapLeaderboardId
@@ -42,7 +42,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.scores.resetForAllPlayers@ method which the
--- 'ScoresResetForAllPlayers'' request conforms to.
+-- 'ScoresResetForAllPlayers' request conforms to.
 type ScoresResetForAllPlayersResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
@@ -54,34 +54,33 @@ type ScoresResetForAllPlayersResource =
 -- This method is only available to user accounts for your developer
 -- console. Only draft leaderboards can be reset.
 --
--- /See:/ 'scoresResetForAllPlayers'' smart constructor.
-newtype ScoresResetForAllPlayers' = ScoresResetForAllPlayers'
+-- /See:/ 'scoresResetForAllPlayers' smart constructor.
+newtype ScoresResetForAllPlayers = ScoresResetForAllPlayers
     { _srfapLeaderboardId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ScoresResetForAllPlayers'' with the minimum fields required to make a request.
+-- | Creates a value of 'ScoresResetForAllPlayers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'srfapLeaderboardId'
-scoresResetForAllPlayers'
+scoresResetForAllPlayers
     :: Text -- ^ 'srfapLeaderboardId'
-    -> ScoresResetForAllPlayers'
-scoresResetForAllPlayers' pSrfapLeaderboardId_ =
-    ScoresResetForAllPlayers'
+    -> ScoresResetForAllPlayers
+scoresResetForAllPlayers pSrfapLeaderboardId_ =
+    ScoresResetForAllPlayers
     { _srfapLeaderboardId = pSrfapLeaderboardId_
     }
 
 -- | The ID of the leaderboard.
-srfapLeaderboardId :: Lens' ScoresResetForAllPlayers' Text
+srfapLeaderboardId :: Lens' ScoresResetForAllPlayers Text
 srfapLeaderboardId
   = lens _srfapLeaderboardId
       (\ s a -> s{_srfapLeaderboardId = a})
 
-instance GoogleRequest ScoresResetForAllPlayers'
-         where
-        type Rs ScoresResetForAllPlayers' = ()
-        requestClient ScoresResetForAllPlayers'{..}
+instance GoogleRequest ScoresResetForAllPlayers where
+        type Rs ScoresResetForAllPlayers = ()
+        requestClient ScoresResetForAllPlayers{..}
           = go _srfapLeaderboardId (Just AltJSON)
               gamesManagementService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Tables.Features.Get
       TablesFeaturesGetResource
 
     -- * Creating a Request
-    , tablesFeaturesGet'
-    , TablesFeaturesGet'
+    , tablesFeaturesGet
+    , TablesFeaturesGet
 
     -- * Request Lenses
     , tfgVersion
@@ -43,7 +43,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.tables.features.get@ method which the
--- 'TablesFeaturesGet'' request conforms to.
+-- 'TablesFeaturesGet' request conforms to.
 type TablesFeaturesGetResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -55,15 +55,15 @@ type TablesFeaturesGetResource =
 
 -- | Return a single feature, given its ID.
 --
--- /See:/ 'tablesFeaturesGet'' smart constructor.
-data TablesFeaturesGet' = TablesFeaturesGet'
+-- /See:/ 'tablesFeaturesGet' smart constructor.
+data TablesFeaturesGet = TablesFeaturesGet
     { _tfgVersion :: !(Maybe TablesFeaturesGetVersion)
     , _tfgId      :: !Text
     , _tfgSelect  :: !(Maybe Text)
     , _tfgTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesFeaturesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesFeaturesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,12 +74,12 @@ data TablesFeaturesGet' = TablesFeaturesGet'
 -- * 'tfgSelect'
 --
 -- * 'tfgTableId'
-tablesFeaturesGet'
+tablesFeaturesGet
     :: Text -- ^ 'tfgId'
     -> Text -- ^ 'tfgTableId'
-    -> TablesFeaturesGet'
-tablesFeaturesGet' pTfgId_ pTfgTableId_ =
-    TablesFeaturesGet'
+    -> TablesFeaturesGet
+tablesFeaturesGet pTfgId_ pTfgTableId_ =
+    TablesFeaturesGet
     { _tfgVersion = Nothing
     , _tfgId = pTfgId_
     , _tfgSelect = Nothing
@@ -87,28 +87,28 @@ tablesFeaturesGet' pTfgId_ pTfgTableId_ =
     }
 
 -- | The table version to access. See Accessing Public Data for information.
-tfgVersion :: Lens' TablesFeaturesGet' (Maybe TablesFeaturesGetVersion)
+tfgVersion :: Lens' TablesFeaturesGet (Maybe TablesFeaturesGetVersion)
 tfgVersion
   = lens _tfgVersion (\ s a -> s{_tfgVersion = a})
 
 -- | The ID of the feature to get.
-tfgId :: Lens' TablesFeaturesGet' Text
+tfgId :: Lens' TablesFeaturesGet Text
 tfgId = lens _tfgId (\ s a -> s{_tfgId = a})
 
 -- | A SQL-like projection clause used to specify returned properties. If
 -- this parameter is not included, all properties are returned.
-tfgSelect :: Lens' TablesFeaturesGet' (Maybe Text)
+tfgSelect :: Lens' TablesFeaturesGet (Maybe Text)
 tfgSelect
   = lens _tfgSelect (\ s a -> s{_tfgSelect = a})
 
 -- | The ID of the table.
-tfgTableId :: Lens' TablesFeaturesGet' Text
+tfgTableId :: Lens' TablesFeaturesGet Text
 tfgTableId
   = lens _tfgTableId (\ s a -> s{_tfgTableId = a})
 
-instance GoogleRequest TablesFeaturesGet' where
-        type Rs TablesFeaturesGet' = Feature
-        requestClient TablesFeaturesGet'{..}
+instance GoogleRequest TablesFeaturesGet where
+        type Rs TablesFeaturesGet = Feature
+        requestClient TablesFeaturesGet{..}
           = go _tfgTableId _tfgId _tfgVersion _tfgSelect
               (Just AltJSON)
               mapsEngineService

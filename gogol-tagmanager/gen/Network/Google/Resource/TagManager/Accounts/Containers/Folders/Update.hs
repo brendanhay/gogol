@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Update
       AccountsContainersFoldersUpdateResource
 
     -- * Creating a Request
-    , accountsContainersFoldersUpdate'
-    , AccountsContainersFoldersUpdate'
+    , accountsContainersFoldersUpdate
+    , AccountsContainersFoldersUpdate
 
     -- * Request Lenses
     , acfuContainerId
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.folders.update@ method which the
--- 'AccountsContainersFoldersUpdate'' request conforms to.
+-- 'AccountsContainersFoldersUpdate' request conforms to.
 type AccountsContainersFoldersUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -58,8 +58,8 @@ type AccountsContainersFoldersUpdateResource =
 
 -- | Updates a GTM Folder.
 --
--- /See:/ 'accountsContainersFoldersUpdate'' smart constructor.
-data AccountsContainersFoldersUpdate' = AccountsContainersFoldersUpdate'
+-- /See:/ 'accountsContainersFoldersUpdate' smart constructor.
+data AccountsContainersFoldersUpdate = AccountsContainersFoldersUpdate
     { _acfuContainerId :: !Text
     , _acfuFingerprint :: !(Maybe Text)
     , _acfuFolderId    :: !Text
@@ -67,7 +67,7 @@ data AccountsContainersFoldersUpdate' = AccountsContainersFoldersUpdate'
     , _acfuAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersFoldersUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersFoldersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,14 +80,14 @@ data AccountsContainersFoldersUpdate' = AccountsContainersFoldersUpdate'
 -- * 'acfuPayload'
 --
 -- * 'acfuAccountId'
-accountsContainersFoldersUpdate'
+accountsContainersFoldersUpdate
     :: Text -- ^ 'acfuContainerId'
     -> Text -- ^ 'acfuFolderId'
     -> Folder -- ^ 'acfuPayload'
     -> Text -- ^ 'acfuAccountId'
-    -> AccountsContainersFoldersUpdate'
-accountsContainersFoldersUpdate' pAcfuContainerId_ pAcfuFolderId_ pAcfuPayload_ pAcfuAccountId_ =
-    AccountsContainersFoldersUpdate'
+    -> AccountsContainersFoldersUpdate
+accountsContainersFoldersUpdate pAcfuContainerId_ pAcfuFolderId_ pAcfuPayload_ pAcfuAccountId_ =
+    AccountsContainersFoldersUpdate
     { _acfuContainerId = pAcfuContainerId_
     , _acfuFingerprint = Nothing
     , _acfuFolderId = pAcfuFolderId_
@@ -96,38 +96,38 @@ accountsContainersFoldersUpdate' pAcfuContainerId_ pAcfuFolderId_ pAcfuPayload_ 
     }
 
 -- | The GTM Container ID.
-acfuContainerId :: Lens' AccountsContainersFoldersUpdate' Text
+acfuContainerId :: Lens' AccountsContainersFoldersUpdate Text
 acfuContainerId
   = lens _acfuContainerId
       (\ s a -> s{_acfuContainerId = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the folder
 -- in storage.
-acfuFingerprint :: Lens' AccountsContainersFoldersUpdate' (Maybe Text)
+acfuFingerprint :: Lens' AccountsContainersFoldersUpdate (Maybe Text)
 acfuFingerprint
   = lens _acfuFingerprint
       (\ s a -> s{_acfuFingerprint = a})
 
 -- | The GTM Folder ID.
-acfuFolderId :: Lens' AccountsContainersFoldersUpdate' Text
+acfuFolderId :: Lens' AccountsContainersFoldersUpdate Text
 acfuFolderId
   = lens _acfuFolderId (\ s a -> s{_acfuFolderId = a})
 
 -- | Multipart request metadata.
-acfuPayload :: Lens' AccountsContainersFoldersUpdate' Folder
+acfuPayload :: Lens' AccountsContainersFoldersUpdate Folder
 acfuPayload
   = lens _acfuPayload (\ s a -> s{_acfuPayload = a})
 
 -- | The GTM Account ID.
-acfuAccountId :: Lens' AccountsContainersFoldersUpdate' Text
+acfuAccountId :: Lens' AccountsContainersFoldersUpdate Text
 acfuAccountId
   = lens _acfuAccountId
       (\ s a -> s{_acfuAccountId = a})
 
 instance GoogleRequest
-         AccountsContainersFoldersUpdate' where
-        type Rs AccountsContainersFoldersUpdate' = Folder
-        requestClient AccountsContainersFoldersUpdate'{..}
+         AccountsContainersFoldersUpdate where
+        type Rs AccountsContainersFoldersUpdate = Folder
+        requestClient AccountsContainersFoldersUpdate{..}
           = go _acfuAccountId _acfuContainerId _acfuFolderId
               _acfuFingerprint
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Datafeeds.Get
       DatafeedsGetResource
 
     -- * Creating a Request
-    , datafeedsGet'
-    , DatafeedsGet'
+    , datafeedsGet
+    , DatafeedsGet
 
     -- * Request Lenses
     , dgMerchantId
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.datafeeds.get@ method which the
--- 'DatafeedsGet'' request conforms to.
+-- 'DatafeedsGet' request conforms to.
 type DatafeedsGetResource =
      Capture "merchantId" Word64 :>
        "datafeeds" :>
@@ -50,40 +50,40 @@ type DatafeedsGetResource =
 
 -- | Retrieves a datafeed from your Merchant Center account.
 --
--- /See:/ 'datafeedsGet'' smart constructor.
-data DatafeedsGet' = DatafeedsGet'
+-- /See:/ 'datafeedsGet' smart constructor.
+data DatafeedsGet = DatafeedsGet
     { _dgMerchantId :: !Word64
     , _dgDatafeedId :: !Word64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatafeedsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatafeedsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dgMerchantId'
 --
 -- * 'dgDatafeedId'
-datafeedsGet'
+datafeedsGet
     :: Word64 -- ^ 'dgMerchantId'
     -> Word64 -- ^ 'dgDatafeedId'
-    -> DatafeedsGet'
-datafeedsGet' pDgMerchantId_ pDgDatafeedId_ =
-    DatafeedsGet'
+    -> DatafeedsGet
+datafeedsGet pDgMerchantId_ pDgDatafeedId_ =
+    DatafeedsGet
     { _dgMerchantId = pDgMerchantId_
     , _dgDatafeedId = pDgDatafeedId_
     }
 
-dgMerchantId :: Lens' DatafeedsGet' Word64
+dgMerchantId :: Lens' DatafeedsGet Word64
 dgMerchantId
   = lens _dgMerchantId (\ s a -> s{_dgMerchantId = a})
 
-dgDatafeedId :: Lens' DatafeedsGet' Word64
+dgDatafeedId :: Lens' DatafeedsGet Word64
 dgDatafeedId
   = lens _dgDatafeedId (\ s a -> s{_dgDatafeedId = a})
 
-instance GoogleRequest DatafeedsGet' where
-        type Rs DatafeedsGet' = Datafeed
-        requestClient DatafeedsGet'{..}
+instance GoogleRequest DatafeedsGet where
+        type Rs DatafeedsGet = Datafeed
+        requestClient DatafeedsGet{..}
           = go _dgMerchantId _dgDatafeedId (Just AltJSON)
               shoppingContentService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Metrics.List
       AccountsMetadataMetricsListResource
 
     -- * Creating a Request
-    , accountsMetadataMetricsList'
-    , AccountsMetadataMetricsList'
+    , accountsMetadataMetricsList
+    , AccountsMetadataMetricsList
 
     -- * Request Lenses
     , ammlAccountId
@@ -40,7 +40,7 @@ import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangeseller.accounts.metadata.metrics.list@ method which the
--- 'AccountsMetadataMetricsList'' request conforms to.
+-- 'AccountsMetadataMetricsList' request conforms to.
 type AccountsMetadataMetricsListResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -50,34 +50,34 @@ type AccountsMetadataMetricsListResource =
 
 -- | List the metadata for the metrics available to this AdExchange account.
 --
--- /See:/ 'accountsMetadataMetricsList'' smart constructor.
-newtype AccountsMetadataMetricsList' = AccountsMetadataMetricsList'
+-- /See:/ 'accountsMetadataMetricsList' smart constructor.
+newtype AccountsMetadataMetricsList = AccountsMetadataMetricsList
     { _ammlAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsMetadataMetricsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsMetadataMetricsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ammlAccountId'
-accountsMetadataMetricsList'
+accountsMetadataMetricsList
     :: Text -- ^ 'ammlAccountId'
-    -> AccountsMetadataMetricsList'
-accountsMetadataMetricsList' pAmmlAccountId_ =
-    AccountsMetadataMetricsList'
+    -> AccountsMetadataMetricsList
+accountsMetadataMetricsList pAmmlAccountId_ =
+    AccountsMetadataMetricsList
     { _ammlAccountId = pAmmlAccountId_
     }
 
 -- | Account with visibility to the metrics.
-ammlAccountId :: Lens' AccountsMetadataMetricsList' Text
+ammlAccountId :: Lens' AccountsMetadataMetricsList Text
 ammlAccountId
   = lens _ammlAccountId
       (\ s a -> s{_ammlAccountId = a})
 
-instance GoogleRequest AccountsMetadataMetricsList'
+instance GoogleRequest AccountsMetadataMetricsList
          where
-        type Rs AccountsMetadataMetricsList' = Metadata
-        requestClient AccountsMetadataMetricsList'{..}
+        type Rs AccountsMetadataMetricsList = Metadata
+        requestClient AccountsMetadataMetricsList{..}
           = go _ammlAccountId (Just AltJSON)
               adExchangeSellerService
           where go

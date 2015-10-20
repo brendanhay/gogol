@@ -30,8 +30,8 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.List
       LiveBroadcastsListResource
 
     -- * Creating a Request
-    , liveBroadcastsList'
-    , LiveBroadcastsList'
+    , liveBroadcastsList
+    , LiveBroadcastsList
 
     -- * Request Lenses
     , lblPart
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveBroadcasts.list@ method which the
--- 'LiveBroadcastsList'' request conforms to.
+-- 'LiveBroadcastsList' request conforms to.
 type LiveBroadcastsListResource =
      "liveBroadcasts" :>
        QueryParam "part" Text :>
@@ -67,8 +67,8 @@ type LiveBroadcastsListResource =
 -- | Returns a list of YouTube broadcasts that match the API request
 -- parameters.
 --
--- /See:/ 'liveBroadcastsList'' smart constructor.
-data LiveBroadcastsList' = LiveBroadcastsList'
+-- /See:/ 'liveBroadcastsList' smart constructor.
+data LiveBroadcastsList = LiveBroadcastsList
     { _lblPart                          :: !Text
     , _lblMine                          :: !(Maybe Bool)
     , _lblBroadcastStatus               :: !(Maybe LiveBroadcastsListBroadcastStatus)
@@ -79,7 +79,7 @@ data LiveBroadcastsList' = LiveBroadcastsList'
     , _lblMaxResults                    :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LiveBroadcastsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'LiveBroadcastsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -98,11 +98,11 @@ data LiveBroadcastsList' = LiveBroadcastsList'
 -- * 'lblPageToken'
 --
 -- * 'lblMaxResults'
-liveBroadcastsList'
+liveBroadcastsList
     :: Text -- ^ 'lblPart'
-    -> LiveBroadcastsList'
-liveBroadcastsList' pLblPart_ =
-    LiveBroadcastsList'
+    -> LiveBroadcastsList
+liveBroadcastsList pLblPart_ =
+    LiveBroadcastsList
     { _lblPart = pLblPart_
     , _lblMine = Nothing
     , _lblBroadcastStatus = Nothing
@@ -117,18 +117,18 @@ liveBroadcastsList' pLblPart_ =
 -- liveBroadcast resource properties that the API response will include.
 -- The part names that you can include in the parameter value are id,
 -- snippet, contentDetails, and status.
-lblPart :: Lens' LiveBroadcastsList' Text
+lblPart :: Lens' LiveBroadcastsList Text
 lblPart = lens _lblPart (\ s a -> s{_lblPart = a})
 
 -- | The mine parameter can be used to instruct the API to only return
 -- broadcasts owned by the authenticated user. Set the parameter value to
 -- true to only retrieve your own broadcasts.
-lblMine :: Lens' LiveBroadcastsList' (Maybe Bool)
+lblMine :: Lens' LiveBroadcastsList (Maybe Bool)
 lblMine = lens _lblMine (\ s a -> s{_lblMine = a})
 
 -- | The broadcastStatus parameter filters the API response to only include
 -- broadcasts with the specified status.
-lblBroadcastStatus :: Lens' LiveBroadcastsList' (Maybe LiveBroadcastsListBroadcastStatus)
+lblBroadcastStatus :: Lens' LiveBroadcastsList (Maybe LiveBroadcastsListBroadcastStatus)
 lblBroadcastStatus
   = lens _lblBroadcastStatus
       (\ s a -> s{_lblBroadcastStatus = a})
@@ -143,7 +143,7 @@ lblBroadcastStatus
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-lblOnBehalfOfContentOwner :: Lens' LiveBroadcastsList' (Maybe Text)
+lblOnBehalfOfContentOwner :: Lens' LiveBroadcastsList (Maybe Text)
 lblOnBehalfOfContentOwner
   = lens _lblOnBehalfOfContentOwner
       (\ s a -> s{_lblOnBehalfOfContentOwner = a})
@@ -164,7 +164,7 @@ lblOnBehalfOfContentOwner
 -- actions on behalf of the channel specified in the parameter value,
 -- without having to provide authentication credentials for each separate
 -- channel.
-lblOnBehalfOfContentOwnerChannel :: Lens' LiveBroadcastsList' (Maybe Text)
+lblOnBehalfOfContentOwnerChannel :: Lens' LiveBroadcastsList (Maybe Text)
 lblOnBehalfOfContentOwnerChannel
   = lens _lblOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lblOnBehalfOfContentOwnerChannel = a})
@@ -172,27 +172,27 @@ lblOnBehalfOfContentOwnerChannel
 -- | The id parameter specifies a comma-separated list of YouTube broadcast
 -- IDs that identify the broadcasts being retrieved. In a liveBroadcast
 -- resource, the id property specifies the broadcast\'s ID.
-lblId :: Lens' LiveBroadcastsList' (Maybe Text)
+lblId :: Lens' LiveBroadcastsList (Maybe Text)
 lblId = lens _lblId (\ s a -> s{_lblId = a})
 
 -- | The pageToken parameter identifies a specific page in the result set
 -- that should be returned. In an API response, the nextPageToken and
 -- prevPageToken properties identify other pages that could be retrieved.
-lblPageToken :: Lens' LiveBroadcastsList' (Maybe Text)
+lblPageToken :: Lens' LiveBroadcastsList (Maybe Text)
 lblPageToken
   = lens _lblPageToken (\ s a -> s{_lblPageToken = a})
 
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set.
-lblMaxResults :: Lens' LiveBroadcastsList' Word32
+lblMaxResults :: Lens' LiveBroadcastsList Word32
 lblMaxResults
   = lens _lblMaxResults
       (\ s a -> s{_lblMaxResults = a})
 
-instance GoogleRequest LiveBroadcastsList' where
-        type Rs LiveBroadcastsList' =
+instance GoogleRequest LiveBroadcastsList where
+        type Rs LiveBroadcastsList =
              LiveBroadcastListResponse
-        requestClient LiveBroadcastsList'{..}
+        requestClient LiveBroadcastsList{..}
           = go (Just _lblPart) _lblMine _lblBroadcastStatus
               _lblOnBehalfOfContentOwner
               _lblOnBehalfOfContentOwnerChannel

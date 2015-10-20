@@ -29,8 +29,8 @@ module Network.Google.Resource.Mirror.Contacts.Delete
       ContactsDeleteResource
 
     -- * Creating a Request
-    , contactsDelete'
-    , ContactsDelete'
+    , contactsDelete
+    , ContactsDelete
 
     -- * Request Lenses
     , cdId
@@ -40,7 +40,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.contacts.delete@ method which the
--- 'ContactsDelete'' request conforms to.
+-- 'ContactsDelete' request conforms to.
 type ContactsDeleteResource =
      "contacts" :>
        Capture "id" Text :>
@@ -48,31 +48,31 @@ type ContactsDeleteResource =
 
 -- | Deletes a contact.
 --
--- /See:/ 'contactsDelete'' smart constructor.
-newtype ContactsDelete' = ContactsDelete'
+-- /See:/ 'contactsDelete' smart constructor.
+newtype ContactsDelete = ContactsDelete
     { _cdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ContactsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ContactsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cdId'
-contactsDelete'
+contactsDelete
     :: Text -- ^ 'cdId'
-    -> ContactsDelete'
-contactsDelete' pCdId_ =
-    ContactsDelete'
+    -> ContactsDelete
+contactsDelete pCdId_ =
+    ContactsDelete
     { _cdId = pCdId_
     }
 
 -- | The ID of the contact.
-cdId :: Lens' ContactsDelete' Text
+cdId :: Lens' ContactsDelete Text
 cdId = lens _cdId (\ s a -> s{_cdId = a})
 
-instance GoogleRequest ContactsDelete' where
-        type Rs ContactsDelete' = ()
-        requestClient ContactsDelete'{..}
+instance GoogleRequest ContactsDelete where
+        type Rs ContactsDelete = ()
+        requestClient ContactsDelete{..}
           = go _cdId (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsDeleteResource)

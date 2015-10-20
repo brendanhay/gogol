@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSense.Metadata.Metrics.List
       MetadataMetricsListResource
 
     -- * Creating a Request
-    , metadataMetricsList'
-    , MetadataMetricsList'
+    , metadataMetricsList
+    , MetadataMetricsList
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.metadata.metrics.list@ method which the
--- 'MetadataMetricsList'' request conforms to.
+-- 'MetadataMetricsList' request conforms to.
 type MetadataMetricsListResource =
      "metadata" :>
        "metrics" :>
@@ -46,20 +46,20 @@ type MetadataMetricsListResource =
 
 -- | List the metadata for the metrics available to this AdSense account.
 --
--- /See:/ 'metadataMetricsList'' smart constructor.
-data MetadataMetricsList' =
-    MetadataMetricsList'
+-- /See:/ 'metadataMetricsList' smart constructor.
+data MetadataMetricsList =
+    MetadataMetricsList
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MetadataMetricsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'MetadataMetricsList' with the minimum fields required to make a request.
 --
-metadataMetricsList'
-    :: MetadataMetricsList'
-metadataMetricsList' = MetadataMetricsList'
+metadataMetricsList
+    :: MetadataMetricsList
+metadataMetricsList = MetadataMetricsList
 
-instance GoogleRequest MetadataMetricsList' where
-        type Rs MetadataMetricsList' = Metadata
-        requestClient MetadataMetricsList'{}
+instance GoogleRequest MetadataMetricsList where
+        type Rs MetadataMetricsList = Metadata
+        requestClient MetadataMetricsList{}
           = go (Just AltJSON) adSenseService
           where go
                   = buildClient

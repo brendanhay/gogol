@@ -29,18 +29,18 @@ module Network.Google.Resource.DFAReporting.Regions.List
       RegionsListResource
 
     -- * Creating a Request
-    , regionsList'
-    , RegionsList'
+    , regionsList
+    , RegionsList
 
     -- * Request Lenses
-    , rlProFileId
+    , rProFileId
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.regions.list@ method which the
--- 'RegionsList'' request conforms to.
+-- 'RegionsList' request conforms to.
 type RegionsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -50,33 +50,33 @@ type RegionsListResource =
 
 -- | Retrieves a list of regions.
 --
--- /See:/ 'regionsList'' smart constructor.
-newtype RegionsList' = RegionsList'
-    { _rlProFileId :: Int64
+-- /See:/ 'regionsList' smart constructor.
+newtype RegionsList = RegionsList
+    { _rProFileId :: Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RegionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'RegionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rlProFileId'
-regionsList'
-    :: Int64 -- ^ 'rlProFileId'
-    -> RegionsList'
-regionsList' pRlProFileId_ =
-    RegionsList'
-    { _rlProFileId = pRlProFileId_
+-- * 'rProFileId'
+regionsList
+    :: Int64 -- ^ 'rProFileId'
+    -> RegionsList
+regionsList pRProFileId_ =
+    RegionsList
+    { _rProFileId = pRProFileId_
     }
 
 -- | User profile ID associated with this request.
-rlProFileId :: Lens' RegionsList' Int64
-rlProFileId
-  = lens _rlProFileId (\ s a -> s{_rlProFileId = a})
+rProFileId :: Lens' RegionsList Int64
+rProFileId
+  = lens _rProFileId (\ s a -> s{_rProFileId = a})
 
-instance GoogleRequest RegionsList' where
-        type Rs RegionsList' = RegionsListResponse
-        requestClient RegionsList'{..}
-          = go _rlProFileId (Just AltJSON) dFAReportingService
+instance GoogleRequest RegionsList where
+        type Rs RegionsList = RegionsListResponse
+        requestClient RegionsList{..}
+          = go _rProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy RegionsListResource)
                       mempty

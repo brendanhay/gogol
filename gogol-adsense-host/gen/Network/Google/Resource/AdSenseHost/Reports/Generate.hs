@@ -31,8 +31,8 @@ module Network.Google.Resource.AdSenseHost.Reports.Generate
       ReportsGenerateResource
 
     -- * Creating a Request
-    , reportsGenerate'
-    , ReportsGenerate'
+    , reportsGenerate
+    , ReportsGenerate
 
     -- * Request Lenses
     , rgDimension
@@ -50,7 +50,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.reports.generate@ method which the
--- 'ReportsGenerate'' request conforms to.
+-- 'ReportsGenerate' request conforms to.
 type ReportsGenerateResource =
      "reports" :>
        QueryParam "startDate" Text :>
@@ -68,8 +68,8 @@ type ReportsGenerateResource =
 -- parameters. Returns the result as JSON; to retrieve output in CSV format
 -- specify \"alt=csv\" as a query parameter.
 --
--- /See:/ 'reportsGenerate'' smart constructor.
-data ReportsGenerate' = ReportsGenerate'
+-- /See:/ 'reportsGenerate' smart constructor.
+data ReportsGenerate = ReportsGenerate
     { _rgDimension  :: !(Maybe [Text])
     , _rgLocale     :: !(Maybe Text)
     , _rgEndDate    :: !Text
@@ -81,7 +81,7 @@ data ReportsGenerate' = ReportsGenerate'
     , _rgMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReportsGenerate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportsGenerate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -102,12 +102,12 @@ data ReportsGenerate' = ReportsGenerate'
 -- * 'rgStartIndex'
 --
 -- * 'rgMaxResults'
-reportsGenerate'
+reportsGenerate
     :: Text -- ^ 'rgEndDate'
     -> Text -- ^ 'rgStartDate'
-    -> ReportsGenerate'
-reportsGenerate' pRgEndDate_ pRgStartDate_ =
-    ReportsGenerate'
+    -> ReportsGenerate
+reportsGenerate pRgEndDate_ pRgStartDate_ =
+    ReportsGenerate
     { _rgDimension = Nothing
     , _rgLocale = Nothing
     , _rgEndDate = pRgEndDate_
@@ -120,7 +120,7 @@ reportsGenerate' pRgEndDate_ pRgStartDate_ =
     }
 
 -- | Dimensions to base the report on.
-rgDimension :: Lens' ReportsGenerate' [Text]
+rgDimension :: Lens' ReportsGenerate [Text]
 rgDimension
   = lens _rgDimension (\ s a -> s{_rgDimension = a}) .
       _Default
@@ -128,22 +128,22 @@ rgDimension
 
 -- | Optional locale to use for translating report output to a local
 -- language. Defaults to \"en_US\" if not specified.
-rgLocale :: Lens' ReportsGenerate' (Maybe Text)
+rgLocale :: Lens' ReportsGenerate (Maybe Text)
 rgLocale = lens _rgLocale (\ s a -> s{_rgLocale = a})
 
 -- | End of the date range to report on in \"YYYY-MM-DD\" format, inclusive.
-rgEndDate :: Lens' ReportsGenerate' Text
+rgEndDate :: Lens' ReportsGenerate Text
 rgEndDate
   = lens _rgEndDate (\ s a -> s{_rgEndDate = a})
 
 -- | Start of the date range to report on in \"YYYY-MM-DD\" format,
 -- inclusive.
-rgStartDate :: Lens' ReportsGenerate' Text
+rgStartDate :: Lens' ReportsGenerate Text
 rgStartDate
   = lens _rgStartDate (\ s a -> s{_rgStartDate = a})
 
 -- | Numeric columns to include in the report.
-rgMetric :: Lens' ReportsGenerate' [Text]
+rgMetric :: Lens' ReportsGenerate [Text]
 rgMetric
   = lens _rgMetric (\ s a -> s{_rgMetric = a}) .
       _Default
@@ -152,31 +152,31 @@ rgMetric
 -- | The name of a dimension or metric to sort the resulting report on,
 -- optionally prefixed with \"+\" to sort ascending or \"-\" to sort
 -- descending. If no prefix is specified, the column is sorted ascending.
-rgSort :: Lens' ReportsGenerate' [Text]
+rgSort :: Lens' ReportsGenerate [Text]
 rgSort
   = lens _rgSort (\ s a -> s{_rgSort = a}) . _Default .
       _Coerce
 
 -- | Filters to be run on the report.
-rgFilter :: Lens' ReportsGenerate' [Text]
+rgFilter :: Lens' ReportsGenerate [Text]
 rgFilter
   = lens _rgFilter (\ s a -> s{_rgFilter = a}) .
       _Default
       . _Coerce
 
 -- | Index of the first row of report data to return.
-rgStartIndex :: Lens' ReportsGenerate' (Maybe Word32)
+rgStartIndex :: Lens' ReportsGenerate (Maybe Word32)
 rgStartIndex
   = lens _rgStartIndex (\ s a -> s{_rgStartIndex = a})
 
 -- | The maximum number of rows of report data to return.
-rgMaxResults :: Lens' ReportsGenerate' (Maybe Word32)
+rgMaxResults :: Lens' ReportsGenerate (Maybe Word32)
 rgMaxResults
   = lens _rgMaxResults (\ s a -> s{_rgMaxResults = a})
 
-instance GoogleRequest ReportsGenerate' where
-        type Rs ReportsGenerate' = Report
-        requestClient ReportsGenerate'{..}
+instance GoogleRequest ReportsGenerate where
+        type Rs ReportsGenerate = Report
+        requestClient ReportsGenerate{..}
           = go (Just _rgStartDate) (Just _rgEndDate)
               (_rgDimension ^. _Default)
               _rgLocale

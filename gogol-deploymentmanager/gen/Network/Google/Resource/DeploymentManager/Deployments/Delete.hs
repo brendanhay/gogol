@@ -29,8 +29,8 @@ module Network.Google.Resource.DeploymentManager.Deployments.Delete
       DeploymentsDeleteResource
 
     -- * Creating a Request
-    , deploymentsDelete'
-    , DeploymentsDelete'
+    , deploymentsDelete
+    , DeploymentsDelete
 
     -- * Request Lenses
     , ddProject
@@ -41,7 +41,7 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @deploymentmanager.deployments.delete@ method which the
--- 'DeploymentsDelete'' request conforms to.
+-- 'DeploymentsDelete' request conforms to.
 type DeploymentsDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,42 +51,42 @@ type DeploymentsDeleteResource =
 
 -- | Deletes a deployment and all of the resources in the deployment.
 --
--- /See:/ 'deploymentsDelete'' smart constructor.
-data DeploymentsDelete' = DeploymentsDelete'
+-- /See:/ 'deploymentsDelete' smart constructor.
+data DeploymentsDelete = DeploymentsDelete
     { _ddProject    :: !Text
     , _ddDeployment :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DeploymentsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'DeploymentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ddProject'
 --
 -- * 'ddDeployment'
-deploymentsDelete'
+deploymentsDelete
     :: Text -- ^ 'ddProject'
     -> Text -- ^ 'ddDeployment'
-    -> DeploymentsDelete'
-deploymentsDelete' pDdProject_ pDdDeployment_ =
-    DeploymentsDelete'
+    -> DeploymentsDelete
+deploymentsDelete pDdProject_ pDdDeployment_ =
+    DeploymentsDelete
     { _ddProject = pDdProject_
     , _ddDeployment = pDdDeployment_
     }
 
 -- | The project ID for this request.
-ddProject :: Lens' DeploymentsDelete' Text
+ddProject :: Lens' DeploymentsDelete Text
 ddProject
   = lens _ddProject (\ s a -> s{_ddProject = a})
 
 -- | The name of the deployment for this request.
-ddDeployment :: Lens' DeploymentsDelete' Text
+ddDeployment :: Lens' DeploymentsDelete Text
 ddDeployment
   = lens _ddDeployment (\ s a -> s{_ddDeployment = a})
 
-instance GoogleRequest DeploymentsDelete' where
-        type Rs DeploymentsDelete' = Operation
-        requestClient DeploymentsDelete'{..}
+instance GoogleRequest DeploymentsDelete where
+        type Rs DeploymentsDelete = Operation
+        requestClient DeploymentsDelete{..}
           = go _ddProject _ddDeployment (Just AltJSON)
               deploymentManagerService
           where go

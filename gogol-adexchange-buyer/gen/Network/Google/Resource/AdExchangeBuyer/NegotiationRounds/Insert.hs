@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.NegotiationRounds.Insert
       NegotiationRoundsInsertResource
 
     -- * Creating a Request
-    , negotiationRoundsInsert'
-    , NegotiationRoundsInsert'
+    , negotiationRoundsInsert
+    , NegotiationRoundsInsert
 
     -- * Request Lenses
     , nriPayload
@@ -41,7 +41,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.negotiationrounds.insert@ method which the
--- 'NegotiationRoundsInsert'' request conforms to.
+-- 'NegotiationRoundsInsert' request conforms to.
 type NegotiationRoundsInsertResource =
      "negotiations" :>
        Capture "negotiationId" Int64 :>
@@ -52,43 +52,42 @@ type NegotiationRoundsInsertResource =
 
 -- | Adds the requested negotiationRound to the requested negotiation.
 --
--- /See:/ 'negotiationRoundsInsert'' smart constructor.
-data NegotiationRoundsInsert' = NegotiationRoundsInsert'
+-- /See:/ 'negotiationRoundsInsert' smart constructor.
+data NegotiationRoundsInsert = NegotiationRoundsInsert
     { _nriPayload       :: !NegotiationRoundDTO
     , _nriNegotiationId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'NegotiationRoundsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'NegotiationRoundsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'nriPayload'
 --
 -- * 'nriNegotiationId'
-negotiationRoundsInsert'
+negotiationRoundsInsert
     :: NegotiationRoundDTO -- ^ 'nriPayload'
     -> Int64 -- ^ 'nriNegotiationId'
-    -> NegotiationRoundsInsert'
-negotiationRoundsInsert' pNriPayload_ pNriNegotiationId_ =
-    NegotiationRoundsInsert'
+    -> NegotiationRoundsInsert
+negotiationRoundsInsert pNriPayload_ pNriNegotiationId_ =
+    NegotiationRoundsInsert
     { _nriPayload = pNriPayload_
     , _nriNegotiationId = pNriNegotiationId_
     }
 
 -- | Multipart request metadata.
-nriPayload :: Lens' NegotiationRoundsInsert' NegotiationRoundDTO
+nriPayload :: Lens' NegotiationRoundsInsert NegotiationRoundDTO
 nriPayload
   = lens _nriPayload (\ s a -> s{_nriPayload = a})
 
-nriNegotiationId :: Lens' NegotiationRoundsInsert' Int64
+nriNegotiationId :: Lens' NegotiationRoundsInsert Int64
 nriNegotiationId
   = lens _nriNegotiationId
       (\ s a -> s{_nriNegotiationId = a})
 
-instance GoogleRequest NegotiationRoundsInsert' where
-        type Rs NegotiationRoundsInsert' =
-             NegotiationRoundDTO
-        requestClient NegotiationRoundsInsert'{..}
+instance GoogleRequest NegotiationRoundsInsert where
+        type Rs NegotiationRoundsInsert = NegotiationRoundDTO
+        requestClient NegotiationRoundsInsert{..}
           = go _nriNegotiationId (Just AltJSON) _nriPayload
               adExchangeBuyerService
           where go

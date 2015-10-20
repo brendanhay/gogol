@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Roles.Get
       RolesGetResource
 
     -- * Creating a Request
-    , rolesGet'
-    , RolesGet'
+    , rolesGet
+    , RolesGet
 
     -- * Request Lenses
     , rgRoleId
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.roles.get@ method which the
--- 'RolesGet'' request conforms to.
+-- 'RolesGet' request conforms to.
 type RolesGetResource =
      "customer" :>
        Capture "customer" Text :>
@@ -51,41 +51,41 @@ type RolesGetResource =
 
 -- | Retrieves a role.
 --
--- /See:/ 'rolesGet'' smart constructor.
-data RolesGet' = RolesGet'
+-- /See:/ 'rolesGet' smart constructor.
+data RolesGet = RolesGet
     { _rgRoleId   :: !Text
     , _rgCustomer :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RolesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'RolesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rgRoleId'
 --
 -- * 'rgCustomer'
-rolesGet'
+rolesGet
     :: Text -- ^ 'rgRoleId'
     -> Text -- ^ 'rgCustomer'
-    -> RolesGet'
-rolesGet' pRgRoleId_ pRgCustomer_ =
-    RolesGet'
+    -> RolesGet
+rolesGet pRgRoleId_ pRgCustomer_ =
+    RolesGet
     { _rgRoleId = pRgRoleId_
     , _rgCustomer = pRgCustomer_
     }
 
 -- | Immutable ID of the role.
-rgRoleId :: Lens' RolesGet' Text
+rgRoleId :: Lens' RolesGet Text
 rgRoleId = lens _rgRoleId (\ s a -> s{_rgRoleId = a})
 
 -- | Immutable ID of the Google Apps account.
-rgCustomer :: Lens' RolesGet' Text
+rgCustomer :: Lens' RolesGet Text
 rgCustomer
   = lens _rgCustomer (\ s a -> s{_rgCustomer = a})
 
-instance GoogleRequest RolesGet' where
-        type Rs RolesGet' = Role
-        requestClient RolesGet'{..}
+instance GoogleRequest RolesGet where
+        type Rs RolesGet = Role
+        requestClient RolesGet{..}
           = go _rgCustomer _rgRoleId (Just AltJSON)
               directoryService
           where go

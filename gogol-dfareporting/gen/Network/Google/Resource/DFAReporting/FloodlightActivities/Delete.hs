@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Delete
       FloodlightActivitiesDeleteResource
 
     -- * Creating a Request
-    , floodlightActivitiesDelete'
-    , FloodlightActivitiesDelete'
+    , floodlightActivitiesDelete
+    , FloodlightActivitiesDelete
 
     -- * Request Lenses
     , fadProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightActivities.delete@ method which the
--- 'FloodlightActivitiesDelete'' request conforms to.
+-- 'FloodlightActivitiesDelete' request conforms to.
 type FloodlightActivitiesDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type FloodlightActivitiesDeleteResource =
 
 -- | Deletes an existing floodlight activity.
 --
--- /See:/ 'floodlightActivitiesDelete'' smart constructor.
-data FloodlightActivitiesDelete' = FloodlightActivitiesDelete'
+-- /See:/ 'floodlightActivitiesDelete' smart constructor.
+data FloodlightActivitiesDelete = FloodlightActivitiesDelete
     { _fadProFileId :: !Int64
     , _fadId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FloodlightActivitiesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'FloodlightActivitiesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fadProFileId'
 --
 -- * 'fadId'
-floodlightActivitiesDelete'
+floodlightActivitiesDelete
     :: Int64 -- ^ 'fadProFileId'
     -> Int64 -- ^ 'fadId'
-    -> FloodlightActivitiesDelete'
-floodlightActivitiesDelete' pFadProFileId_ pFadId_ =
-    FloodlightActivitiesDelete'
+    -> FloodlightActivitiesDelete
+floodlightActivitiesDelete pFadProFileId_ pFadId_ =
+    FloodlightActivitiesDelete
     { _fadProFileId = pFadProFileId_
     , _fadId = pFadId_
     }
 
 -- | User profile ID associated with this request.
-fadProFileId :: Lens' FloodlightActivitiesDelete' Int64
+fadProFileId :: Lens' FloodlightActivitiesDelete Int64
 fadProFileId
   = lens _fadProFileId (\ s a -> s{_fadProFileId = a})
 
 -- | Floodlight activity ID.
-fadId :: Lens' FloodlightActivitiesDelete' Int64
+fadId :: Lens' FloodlightActivitiesDelete Int64
 fadId = lens _fadId (\ s a -> s{_fadId = a})
 
-instance GoogleRequest FloodlightActivitiesDelete'
+instance GoogleRequest FloodlightActivitiesDelete
          where
-        type Rs FloodlightActivitiesDelete' = ()
-        requestClient FloodlightActivitiesDelete'{..}
+        type Rs FloodlightActivitiesDelete = ()
+        requestClient FloodlightActivitiesDelete{..}
           = go _fadProFileId _fadId (Just AltJSON)
               dFAReportingService
           where go

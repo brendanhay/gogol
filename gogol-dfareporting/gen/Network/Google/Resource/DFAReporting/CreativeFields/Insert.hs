@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Insert
       CreativeFieldsInsertResource
 
     -- * Creating a Request
-    , creativeFieldsInsert'
-    , CreativeFieldsInsert'
+    , creativeFieldsInsert
+    , CreativeFieldsInsert
 
     -- * Request Lenses
     , cfiProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creativeFields.insert@ method which the
--- 'CreativeFieldsInsert'' request conforms to.
+-- 'CreativeFieldsInsert' request conforms to.
 type CreativeFieldsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,42 +52,42 @@ type CreativeFieldsInsertResource =
 
 -- | Inserts a new creative field.
 --
--- /See:/ 'creativeFieldsInsert'' smart constructor.
-data CreativeFieldsInsert' = CreativeFieldsInsert'
+-- /See:/ 'creativeFieldsInsert' smart constructor.
+data CreativeFieldsInsert = CreativeFieldsInsert
     { _cfiProFileId :: !Int64
     , _cfiPayload   :: !CreativeField
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativeFieldsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CreativeFieldsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cfiProFileId'
 --
 -- * 'cfiPayload'
-creativeFieldsInsert'
+creativeFieldsInsert
     :: Int64 -- ^ 'cfiProFileId'
     -> CreativeField -- ^ 'cfiPayload'
-    -> CreativeFieldsInsert'
-creativeFieldsInsert' pCfiProFileId_ pCfiPayload_ =
-    CreativeFieldsInsert'
+    -> CreativeFieldsInsert
+creativeFieldsInsert pCfiProFileId_ pCfiPayload_ =
+    CreativeFieldsInsert
     { _cfiProFileId = pCfiProFileId_
     , _cfiPayload = pCfiPayload_
     }
 
 -- | User profile ID associated with this request.
-cfiProFileId :: Lens' CreativeFieldsInsert' Int64
+cfiProFileId :: Lens' CreativeFieldsInsert Int64
 cfiProFileId
   = lens _cfiProFileId (\ s a -> s{_cfiProFileId = a})
 
 -- | Multipart request metadata.
-cfiPayload :: Lens' CreativeFieldsInsert' CreativeField
+cfiPayload :: Lens' CreativeFieldsInsert CreativeField
 cfiPayload
   = lens _cfiPayload (\ s a -> s{_cfiPayload = a})
 
-instance GoogleRequest CreativeFieldsInsert' where
-        type Rs CreativeFieldsInsert' = CreativeField
-        requestClient CreativeFieldsInsert'{..}
+instance GoogleRequest CreativeFieldsInsert where
+        type Rs CreativeFieldsInsert = CreativeField
+        requestClient CreativeFieldsInsert{..}
           = go _cfiProFileId (Just AltJSON) _cfiPayload
               dFAReportingService
           where go

@@ -30,8 +30,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.List
       ProjectsZonesClustersListResource
 
     -- * Creating a Request
-    , projectsZonesClustersList'
-    , ProjectsZonesClustersList'
+    , projectsZonesClustersList
+    , ProjectsZonesClustersList
 
     -- * Request Lenses
     , pzclXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.clusters.list@ method which the
--- 'ProjectsZonesClustersList'' request conforms to.
+-- 'ProjectsZonesClustersList' request conforms to.
 type ProjectsZonesClustersListResource =
      "v1" :>
        "projects" :>
@@ -70,8 +70,8 @@ type ProjectsZonesClustersListResource =
 -- | Lists all clusters owned by a project in either the specified zone or
 -- all zones.
 --
--- /See:/ 'projectsZonesClustersList'' smart constructor.
-data ProjectsZonesClustersList' = ProjectsZonesClustersList'
+-- /See:/ 'projectsZonesClustersList' smart constructor.
+data ProjectsZonesClustersList = ProjectsZonesClustersList
     { _pzclXgafv          :: !(Maybe Text)
     , _pzclUploadProtocol :: !(Maybe Text)
     , _pzclPp             :: !Bool
@@ -83,7 +83,7 @@ data ProjectsZonesClustersList' = ProjectsZonesClustersList'
     , _pzclCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsZonesClustersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsZonesClustersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -104,12 +104,12 @@ data ProjectsZonesClustersList' = ProjectsZonesClustersList'
 -- * 'pzclProjectId'
 --
 -- * 'pzclCallback'
-projectsZonesClustersList'
+projectsZonesClustersList
     :: Text -- ^ 'pzclZone'
     -> Text -- ^ 'pzclProjectId'
-    -> ProjectsZonesClustersList'
-projectsZonesClustersList' pPzclZone_ pPzclProjectId_ =
-    ProjectsZonesClustersList'
+    -> ProjectsZonesClustersList
+projectsZonesClustersList pPzclZone_ pPzclProjectId_ =
+    ProjectsZonesClustersList
     { _pzclXgafv = Nothing
     , _pzclUploadProtocol = Nothing
     , _pzclPp = True
@@ -122,28 +122,28 @@ projectsZonesClustersList' pPzclZone_ pPzclProjectId_ =
     }
 
 -- | V1 error format.
-pzclXgafv :: Lens' ProjectsZonesClustersList' (Maybe Text)
+pzclXgafv :: Lens' ProjectsZonesClustersList (Maybe Text)
 pzclXgafv
   = lens _pzclXgafv (\ s a -> s{_pzclXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pzclUploadProtocol :: Lens' ProjectsZonesClustersList' (Maybe Text)
+pzclUploadProtocol :: Lens' ProjectsZonesClustersList (Maybe Text)
 pzclUploadProtocol
   = lens _pzclUploadProtocol
       (\ s a -> s{_pzclUploadProtocol = a})
 
 -- | Pretty-print response.
-pzclPp :: Lens' ProjectsZonesClustersList' Bool
+pzclPp :: Lens' ProjectsZonesClustersList Bool
 pzclPp = lens _pzclPp (\ s a -> s{_pzclPp = a})
 
 -- | OAuth access token.
-pzclAccessToken :: Lens' ProjectsZonesClustersList' (Maybe Text)
+pzclAccessToken :: Lens' ProjectsZonesClustersList (Maybe Text)
 pzclAccessToken
   = lens _pzclAccessToken
       (\ s a -> s{_pzclAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pzclUploadType :: Lens' ProjectsZonesClustersList' (Maybe Text)
+pzclUploadType :: Lens' ProjectsZonesClustersList (Maybe Text)
 pzclUploadType
   = lens _pzclUploadType
       (\ s a -> s{_pzclUploadType = a})
@@ -151,32 +151,32 @@ pzclUploadType
 -- | The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides,
 -- or \"-\" for all zones.
-pzclZone :: Lens' ProjectsZonesClustersList' Text
+pzclZone :: Lens' ProjectsZonesClustersList Text
 pzclZone = lens _pzclZone (\ s a -> s{_pzclZone = a})
 
 -- | OAuth bearer token.
-pzclBearerToken :: Lens' ProjectsZonesClustersList' (Maybe Text)
+pzclBearerToken :: Lens' ProjectsZonesClustersList (Maybe Text)
 pzclBearerToken
   = lens _pzclBearerToken
       (\ s a -> s{_pzclBearerToken = a})
 
 -- | The Google Developers Console [project ID or project
 -- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
-pzclProjectId :: Lens' ProjectsZonesClustersList' Text
+pzclProjectId :: Lens' ProjectsZonesClustersList Text
 pzclProjectId
   = lens _pzclProjectId
       (\ s a -> s{_pzclProjectId = a})
 
 -- | JSONP
-pzclCallback :: Lens' ProjectsZonesClustersList' (Maybe Text)
+pzclCallback :: Lens' ProjectsZonesClustersList (Maybe Text)
 pzclCallback
   = lens _pzclCallback (\ s a -> s{_pzclCallback = a})
 
-instance GoogleRequest ProjectsZonesClustersList'
+instance GoogleRequest ProjectsZonesClustersList
          where
-        type Rs ProjectsZonesClustersList' =
+        type Rs ProjectsZonesClustersList =
              ListClustersResponse
-        requestClient ProjectsZonesClustersList'{..}
+        requestClient ProjectsZonesClustersList{..}
           = go _pzclProjectId _pzclZone _pzclXgafv
               _pzclUploadProtocol
               (Just _pzclPp)

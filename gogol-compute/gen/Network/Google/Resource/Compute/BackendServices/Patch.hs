@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.BackendServices.Patch
       BackendServicesPatchResource
 
     -- * Creating a Request
-    , backendServicesPatch'
-    , BackendServicesPatch'
+    , backendServicesPatch
+    , BackendServicesPatch
 
     -- * Request Lenses
     , bspProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.backendServices.patch@ method which the
--- 'BackendServicesPatch'' request conforms to.
+-- 'BackendServicesPatch' request conforms to.
 type BackendServicesPatchResource =
      Capture "project" Text :>
        "global" :>
@@ -56,14 +56,14 @@ type BackendServicesPatchResource =
 -- | Update the entire content of the BackendService resource. This method
 -- supports patch semantics.
 --
--- /See:/ 'backendServicesPatch'' smart constructor.
-data BackendServicesPatch' = BackendServicesPatch'
+-- /See:/ 'backendServicesPatch' smart constructor.
+data BackendServicesPatch = BackendServicesPatch
     { _bspProject        :: !Text
     , _bspPayload        :: !BackendService
     , _bspBackendService :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BackendServicesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'BackendServicesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,37 +72,37 @@ data BackendServicesPatch' = BackendServicesPatch'
 -- * 'bspPayload'
 --
 -- * 'bspBackendService'
-backendServicesPatch'
+backendServicesPatch
     :: Text -- ^ 'bspProject'
     -> BackendService -- ^ 'bspPayload'
     -> Text -- ^ 'bspBackendService'
-    -> BackendServicesPatch'
-backendServicesPatch' pBspProject_ pBspPayload_ pBspBackendService_ =
-    BackendServicesPatch'
+    -> BackendServicesPatch
+backendServicesPatch pBspProject_ pBspPayload_ pBspBackendService_ =
+    BackendServicesPatch
     { _bspProject = pBspProject_
     , _bspPayload = pBspPayload_
     , _bspBackendService = pBspBackendService_
     }
 
 -- | Name of the project scoping this request.
-bspProject :: Lens' BackendServicesPatch' Text
+bspProject :: Lens' BackendServicesPatch Text
 bspProject
   = lens _bspProject (\ s a -> s{_bspProject = a})
 
 -- | Multipart request metadata.
-bspPayload :: Lens' BackendServicesPatch' BackendService
+bspPayload :: Lens' BackendServicesPatch BackendService
 bspPayload
   = lens _bspPayload (\ s a -> s{_bspPayload = a})
 
 -- | Name of the BackendService resource to update.
-bspBackendService :: Lens' BackendServicesPatch' Text
+bspBackendService :: Lens' BackendServicesPatch Text
 bspBackendService
   = lens _bspBackendService
       (\ s a -> s{_bspBackendService = a})
 
-instance GoogleRequest BackendServicesPatch' where
-        type Rs BackendServicesPatch' = Operation
-        requestClient BackendServicesPatch'{..}
+instance GoogleRequest BackendServicesPatch where
+        type Rs BackendServicesPatch = Operation
+        requestClient BackendServicesPatch{..}
           = go _bspProject _bspBackendService (Just AltJSON)
               _bspPayload
               computeService

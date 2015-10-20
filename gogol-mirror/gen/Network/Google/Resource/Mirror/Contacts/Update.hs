@@ -29,8 +29,8 @@ module Network.Google.Resource.Mirror.Contacts.Update
       ContactsUpdateResource
 
     -- * Creating a Request
-    , contactsUpdate'
-    , ContactsUpdate'
+    , contactsUpdate
+    , ContactsUpdate
 
     -- * Request Lenses
     , cuPayload
@@ -41,7 +41,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.contacts.update@ method which the
--- 'ContactsUpdate'' request conforms to.
+-- 'ContactsUpdate' request conforms to.
 type ContactsUpdateResource =
      "contacts" :>
        Capture "id" Text :>
@@ -50,41 +50,41 @@ type ContactsUpdateResource =
 
 -- | Updates a contact in place.
 --
--- /See:/ 'contactsUpdate'' smart constructor.
-data ContactsUpdate' = ContactsUpdate'
+-- /See:/ 'contactsUpdate' smart constructor.
+data ContactsUpdate = ContactsUpdate
     { _cuPayload :: !Contact
     , _cuId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ContactsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ContactsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cuPayload'
 --
 -- * 'cuId'
-contactsUpdate'
+contactsUpdate
     :: Contact -- ^ 'cuPayload'
     -> Text -- ^ 'cuId'
-    -> ContactsUpdate'
-contactsUpdate' pCuPayload_ pCuId_ =
-    ContactsUpdate'
+    -> ContactsUpdate
+contactsUpdate pCuPayload_ pCuId_ =
+    ContactsUpdate
     { _cuPayload = pCuPayload_
     , _cuId = pCuId_
     }
 
 -- | Multipart request metadata.
-cuPayload :: Lens' ContactsUpdate' Contact
+cuPayload :: Lens' ContactsUpdate Contact
 cuPayload
   = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
 -- | The ID of the contact.
-cuId :: Lens' ContactsUpdate' Text
+cuId :: Lens' ContactsUpdate Text
 cuId = lens _cuId (\ s a -> s{_cuId = a})
 
-instance GoogleRequest ContactsUpdate' where
-        type Rs ContactsUpdate' = Contact
-        requestClient ContactsUpdate'{..}
+instance GoogleRequest ContactsUpdate where
+        type Rs ContactsUpdate = Contact
+        requestClient ContactsUpdate{..}
           = go _cuId (Just AltJSON) _cuPayload mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsUpdateResource)

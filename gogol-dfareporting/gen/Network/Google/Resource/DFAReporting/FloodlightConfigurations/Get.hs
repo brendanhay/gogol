@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Get
       FloodlightConfigurationsGetResource
 
     -- * Creating a Request
-    , floodlightConfigurationsGet'
-    , FloodlightConfigurationsGet'
+    , floodlightConfigurationsGet
+    , FloodlightConfigurationsGet
 
     -- * Request Lenses
     , fcgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightConfigurations.get@ method which the
--- 'FloodlightConfigurationsGet'' request conforms to.
+-- 'FloodlightConfigurationsGet' request conforms to.
 type FloodlightConfigurationsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,43 +52,43 @@ type FloodlightConfigurationsGetResource =
 
 -- | Gets one floodlight configuration by ID.
 --
--- /See:/ 'floodlightConfigurationsGet'' smart constructor.
-data FloodlightConfigurationsGet' = FloodlightConfigurationsGet'
+-- /See:/ 'floodlightConfigurationsGet' smart constructor.
+data FloodlightConfigurationsGet = FloodlightConfigurationsGet
     { _fcgProFileId :: !Int64
     , _fcgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FloodlightConfigurationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'FloodlightConfigurationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fcgProFileId'
 --
 -- * 'fcgId'
-floodlightConfigurationsGet'
+floodlightConfigurationsGet
     :: Int64 -- ^ 'fcgProFileId'
     -> Int64 -- ^ 'fcgId'
-    -> FloodlightConfigurationsGet'
-floodlightConfigurationsGet' pFcgProFileId_ pFcgId_ =
-    FloodlightConfigurationsGet'
+    -> FloodlightConfigurationsGet
+floodlightConfigurationsGet pFcgProFileId_ pFcgId_ =
+    FloodlightConfigurationsGet
     { _fcgProFileId = pFcgProFileId_
     , _fcgId = pFcgId_
     }
 
 -- | User profile ID associated with this request.
-fcgProFileId :: Lens' FloodlightConfigurationsGet' Int64
+fcgProFileId :: Lens' FloodlightConfigurationsGet Int64
 fcgProFileId
   = lens _fcgProFileId (\ s a -> s{_fcgProFileId = a})
 
 -- | Floodlight configuration ID.
-fcgId :: Lens' FloodlightConfigurationsGet' Int64
+fcgId :: Lens' FloodlightConfigurationsGet Int64
 fcgId = lens _fcgId (\ s a -> s{_fcgId = a})
 
-instance GoogleRequest FloodlightConfigurationsGet'
+instance GoogleRequest FloodlightConfigurationsGet
          where
-        type Rs FloodlightConfigurationsGet' =
+        type Rs FloodlightConfigurationsGet =
              FloodlightConfiguration
-        requestClient FloodlightConfigurationsGet'{..}
+        requestClient FloodlightConfigurationsGet{..}
           = go _fcgProFileId _fcgId (Just AltJSON)
               dFAReportingService
           where go

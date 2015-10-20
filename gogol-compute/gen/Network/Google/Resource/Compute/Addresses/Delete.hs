@@ -29,20 +29,20 @@ module Network.Google.Resource.Compute.Addresses.Delete
       AddressesDeleteResource
 
     -- * Creating a Request
-    , addressesDelete'
-    , AddressesDelete'
+    , addressesDelete
+    , AddressesDelete
 
     -- * Request Lenses
-    , addProject
-    , addAddress
-    , addRegion
+    , aaProject
+    , aaAddress
+    , aaRegion
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.addresses.delete@ method which the
--- 'AddressesDelete'' request conforms to.
+-- 'AddressesDelete' request conforms to.
 type AddressesDeleteResource =
      Capture "project" Text :>
        "regions" :>
@@ -53,54 +53,52 @@ type AddressesDeleteResource =
 
 -- | Deletes the specified address resource.
 --
--- /See:/ 'addressesDelete'' smart constructor.
-data AddressesDelete' = AddressesDelete'
-    { _addProject :: !Text
-    , _addAddress :: !Text
-    , _addRegion  :: !Text
+-- /See:/ 'addressesDelete' smart constructor.
+data AddressesDelete = AddressesDelete
+    { _aaProject :: !Text
+    , _aaAddress :: !Text
+    , _aaRegion  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AddressesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'AddressesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'addProject'
+-- * 'aaProject'
 --
--- * 'addAddress'
+-- * 'aaAddress'
 --
--- * 'addRegion'
-addressesDelete'
-    :: Text -- ^ 'addProject'
-    -> Text -- ^ 'addAddress'
-    -> Text -- ^ 'addRegion'
-    -> AddressesDelete'
-addressesDelete' pAddProject_ pAddAddress_ pAddRegion_ =
-    AddressesDelete'
-    { _addProject = pAddProject_
-    , _addAddress = pAddAddress_
-    , _addRegion = pAddRegion_
+-- * 'aaRegion'
+addressesDelete
+    :: Text -- ^ 'aaProject'
+    -> Text -- ^ 'aaAddress'
+    -> Text -- ^ 'aaRegion'
+    -> AddressesDelete
+addressesDelete pAaProject_ pAaAddress_ pAaRegion_ =
+    AddressesDelete
+    { _aaProject = pAaProject_
+    , _aaAddress = pAaAddress_
+    , _aaRegion = pAaRegion_
     }
 
 -- | Project ID for this request.
-addProject :: Lens' AddressesDelete' Text
-addProject
-  = lens _addProject (\ s a -> s{_addProject = a})
+aaProject :: Lens' AddressesDelete Text
+aaProject
+  = lens _aaProject (\ s a -> s{_aaProject = a})
 
 -- | Name of the address resource to delete.
-addAddress :: Lens' AddressesDelete' Text
-addAddress
-  = lens _addAddress (\ s a -> s{_addAddress = a})
+aaAddress :: Lens' AddressesDelete Text
+aaAddress
+  = lens _aaAddress (\ s a -> s{_aaAddress = a})
 
 -- | The name of the region for this request.
-addRegion :: Lens' AddressesDelete' Text
-addRegion
-  = lens _addRegion (\ s a -> s{_addRegion = a})
+aaRegion :: Lens' AddressesDelete Text
+aaRegion = lens _aaRegion (\ s a -> s{_aaRegion = a})
 
-instance GoogleRequest AddressesDelete' where
-        type Rs AddressesDelete' = Operation
-        requestClient AddressesDelete'{..}
-          = go _addProject _addRegion _addAddress
-              (Just AltJSON)
+instance GoogleRequest AddressesDelete where
+        type Rs AddressesDelete = Operation
+        requestClient AddressesDelete{..}
+          = go _aaProject _aaRegion _aaAddress (Just AltJSON)
               computeService
           where go
                   = buildClient

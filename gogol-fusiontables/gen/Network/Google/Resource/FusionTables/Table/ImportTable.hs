@@ -29,8 +29,8 @@ module Network.Google.Resource.FusionTables.Table.ImportTable
       TableImportTableResource
 
     -- * Creating a Request
-    , tableImportTable'
-    , TableImportTable'
+    , tableImportTable
+    , TableImportTable
 
     -- * Request Lenses
     , titMedia
@@ -43,7 +43,7 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.table.importTable@ method which the
--- 'TableImportTable'' request conforms to.
+-- 'TableImportTable' request conforms to.
 type TableImportTableResource =
      "tables" :>
        "import" :>
@@ -55,15 +55,15 @@ type TableImportTableResource =
 
 -- | Imports a new table.
 --
--- /See:/ 'tableImportTable'' smart constructor.
-data TableImportTable' = TableImportTable'
+-- /See:/ 'tableImportTable' smart constructor.
+data TableImportTable = TableImportTable
     { _titMedia     :: !Body
     , _titName      :: !Text
     , _titDelimiter :: !(Maybe Text)
     , _titEncoding  :: !(Maybe Text)
     }
 
--- | Creates a value of 'TableImportTable'' with the minimum fields required to make a request.
+-- | Creates a value of 'TableImportTable' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,40 +74,40 @@ data TableImportTable' = TableImportTable'
 -- * 'titDelimiter'
 --
 -- * 'titEncoding'
-tableImportTable'
+tableImportTable
     :: Body -- ^ 'titMedia'
     -> Text -- ^ 'titName'
-    -> TableImportTable'
-tableImportTable' pTitMedia_ pTitName_ =
-    TableImportTable'
+    -> TableImportTable
+tableImportTable pTitMedia_ pTitName_ =
+    TableImportTable
     { _titMedia = pTitMedia_
     , _titName = pTitName_
     , _titDelimiter = Nothing
     , _titEncoding = Nothing
     }
 
-titMedia :: Lens' TableImportTable' Body
+titMedia :: Lens' TableImportTable Body
 titMedia = lens _titMedia (\ s a -> s{_titMedia = a})
 
 -- | The name to be assigned to the new table.
-titName :: Lens' TableImportTable' Text
+titName :: Lens' TableImportTable Text
 titName = lens _titName (\ s a -> s{_titName = a})
 
 -- | The delimiter used to separate cell values. This can only consist of a
 -- single character. Default is ,.
-titDelimiter :: Lens' TableImportTable' (Maybe Text)
+titDelimiter :: Lens' TableImportTable (Maybe Text)
 titDelimiter
   = lens _titDelimiter (\ s a -> s{_titDelimiter = a})
 
 -- | The encoding of the content. Default is UTF-8. Use auto-detect if you
 -- are unsure of the encoding.
-titEncoding :: Lens' TableImportTable' (Maybe Text)
+titEncoding :: Lens' TableImportTable (Maybe Text)
 titEncoding
   = lens _titEncoding (\ s a -> s{_titEncoding = a})
 
-instance GoogleRequest TableImportTable' where
-        type Rs TableImportTable' = Table
-        requestClient TableImportTable'{..}
+instance GoogleRequest TableImportTable where
+        type Rs TableImportTable = Table
+        requestClient TableImportTable{..}
           = go (Just _titName) _titDelimiter _titEncoding
               (Just AltJSON)
               _titMedia

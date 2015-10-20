@@ -29,8 +29,8 @@ module Network.Google.Resource.SQL.Databases.List
       DatabasesListResource
 
     -- * Creating a Request
-    , databasesList'
-    , DatabasesList'
+    , databasesList
+    , DatabasesList
 
     -- * Request Lenses
     , dlProject
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.databases.list@ method which the
--- 'DatabasesList'' request conforms to.
+-- 'DatabasesList' request conforms to.
 type DatabasesListResource =
      "projects" :>
        Capture "project" Text :>
@@ -53,42 +53,42 @@ type DatabasesListResource =
 
 -- | Lists databases in the specified Cloud SQL instance.
 --
--- /See:/ 'databasesList'' smart constructor.
-data DatabasesList' = DatabasesList'
+-- /See:/ 'databasesList' smart constructor.
+data DatabasesList = DatabasesList
     { _dlProject  :: !Text
     , _dlInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatabasesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatabasesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dlProject'
 --
 -- * 'dlInstance'
-databasesList'
+databasesList
     :: Text -- ^ 'dlProject'
     -> Text -- ^ 'dlInstance'
-    -> DatabasesList'
-databasesList' pDlProject_ pDlInstance_ =
-    DatabasesList'
+    -> DatabasesList
+databasesList pDlProject_ pDlInstance_ =
+    DatabasesList
     { _dlProject = pDlProject_
     , _dlInstance = pDlInstance_
     }
 
 -- | Project ID of the project for which to list Cloud SQL instances.
-dlProject :: Lens' DatabasesList' Text
+dlProject :: Lens' DatabasesList Text
 dlProject
   = lens _dlProject (\ s a -> s{_dlProject = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-dlInstance :: Lens' DatabasesList' Text
+dlInstance :: Lens' DatabasesList Text
 dlInstance
   = lens _dlInstance (\ s a -> s{_dlInstance = a})
 
-instance GoogleRequest DatabasesList' where
-        type Rs DatabasesList' = DatabasesListResponse
-        requestClient DatabasesList'{..}
+instance GoogleRequest DatabasesList where
+        type Rs DatabasesList = DatabasesListResponse
+        requestClient DatabasesList{..}
           = go _dlProject _dlInstance (Just AltJSON)
               sQLAdminService
           where go

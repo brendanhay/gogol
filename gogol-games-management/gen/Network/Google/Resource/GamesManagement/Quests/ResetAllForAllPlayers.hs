@@ -30,8 +30,8 @@ module Network.Google.Resource.GamesManagement.Quests.ResetAllForAllPlayers
       QuestsResetAllForAllPlayersResource
 
     -- * Creating a Request
-    , questsResetAllForAllPlayers'
-    , QuestsResetAllForAllPlayers'
+    , questsResetAllForAllPlayers
+    , QuestsResetAllForAllPlayers
 
     ) where
 
@@ -39,7 +39,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.quests.resetAllForAllPlayers@ method which the
--- 'QuestsResetAllForAllPlayers'' request conforms to.
+-- 'QuestsResetAllForAllPlayers' request conforms to.
 type QuestsResetAllForAllPlayersResource =
      "quests" :>
        "resetAllForAllPlayers" :>
@@ -48,21 +48,21 @@ type QuestsResetAllForAllPlayersResource =
 -- | Resets all draft quests for all players. This method is only available
 -- to user accounts for your developer console.
 --
--- /See:/ 'questsResetAllForAllPlayers'' smart constructor.
-data QuestsResetAllForAllPlayers' =
-    QuestsResetAllForAllPlayers'
+-- /See:/ 'questsResetAllForAllPlayers' smart constructor.
+data QuestsResetAllForAllPlayers =
+    QuestsResetAllForAllPlayers
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'QuestsResetAllForAllPlayers'' with the minimum fields required to make a request.
+-- | Creates a value of 'QuestsResetAllForAllPlayers' with the minimum fields required to make a request.
 --
-questsResetAllForAllPlayers'
-    :: QuestsResetAllForAllPlayers'
-questsResetAllForAllPlayers' = QuestsResetAllForAllPlayers'
+questsResetAllForAllPlayers
+    :: QuestsResetAllForAllPlayers
+questsResetAllForAllPlayers = QuestsResetAllForAllPlayers
 
-instance GoogleRequest QuestsResetAllForAllPlayers'
+instance GoogleRequest QuestsResetAllForAllPlayers
          where
-        type Rs QuestsResetAllForAllPlayers' = ()
-        requestClient QuestsResetAllForAllPlayers'{}
+        type Rs QuestsResetAllForAllPlayers = ()
+        requestClient QuestsResetAllForAllPlayers{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

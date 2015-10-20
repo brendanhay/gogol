@@ -34,8 +34,8 @@ module Network.Google.Resource.Webmasters.Searchanalytics.Query
       SearchanalyticsQueryResource
 
     -- * Creating a Request
-    , searchanalyticsQuery'
-    , SearchanalyticsQuery'
+    , searchanalyticsQuery
+    , SearchanalyticsQuery
 
     -- * Request Lenses
     , sqSiteURL
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.searchanalytics.query@ method which the
--- 'SearchanalyticsQuery'' request conforms to.
+-- 'SearchanalyticsQuery' request conforms to.
 type SearchanalyticsQueryResource =
      "sites" :>
        Capture "siteUrl" Text :>
@@ -63,44 +63,44 @@ type SearchanalyticsQueryResource =
 -- you need to know which days have data, issue a broad date range query
 -- grouped by date for any metric, and see which day rows are returned.
 --
--- /See:/ 'searchanalyticsQuery'' smart constructor.
-data SearchanalyticsQuery' = SearchanalyticsQuery'
+-- /See:/ 'searchanalyticsQuery' smart constructor.
+data SearchanalyticsQuery = SearchanalyticsQuery
     { _sqSiteURL :: !Text
     , _sqPayload :: !SearchAnalyticsQueryRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SearchanalyticsQuery'' with the minimum fields required to make a request.
+-- | Creates a value of 'SearchanalyticsQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sqSiteURL'
 --
 -- * 'sqPayload'
-searchanalyticsQuery'
+searchanalyticsQuery
     :: Text -- ^ 'sqSiteURL'
     -> SearchAnalyticsQueryRequest -- ^ 'sqPayload'
-    -> SearchanalyticsQuery'
-searchanalyticsQuery' pSqSiteURL_ pSqPayload_ =
-    SearchanalyticsQuery'
+    -> SearchanalyticsQuery
+searchanalyticsQuery pSqSiteURL_ pSqPayload_ =
+    SearchanalyticsQuery
     { _sqSiteURL = pSqSiteURL_
     , _sqPayload = pSqPayload_
     }
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/
-sqSiteURL :: Lens' SearchanalyticsQuery' Text
+sqSiteURL :: Lens' SearchanalyticsQuery Text
 sqSiteURL
   = lens _sqSiteURL (\ s a -> s{_sqSiteURL = a})
 
 -- | Multipart request metadata.
-sqPayload :: Lens' SearchanalyticsQuery' SearchAnalyticsQueryRequest
+sqPayload :: Lens' SearchanalyticsQuery SearchAnalyticsQueryRequest
 sqPayload
   = lens _sqPayload (\ s a -> s{_sqPayload = a})
 
-instance GoogleRequest SearchanalyticsQuery' where
-        type Rs SearchanalyticsQuery' =
+instance GoogleRequest SearchanalyticsQuery where
+        type Rs SearchanalyticsQuery =
              SearchAnalyticsQueryResponse
-        requestClient SearchanalyticsQuery'{..}
+        requestClient SearchanalyticsQuery{..}
           = go _sqSiteURL (Just AltJSON) _sqPayload
               webmasterToolsService
           where go

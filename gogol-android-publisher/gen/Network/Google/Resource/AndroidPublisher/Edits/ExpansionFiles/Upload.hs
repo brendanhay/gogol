@@ -29,22 +29,22 @@ module Network.Google.Resource.AndroidPublisher.Edits.ExpansionFiles.Upload
       EditsExpansionFilesUploadResource
 
     -- * Creating a Request
-    , editsExpansionFilesUpload'
-    , EditsExpansionFilesUpload'
+    , editsExpansionFilesUpload
+    , EditsExpansionFilesUpload
 
     -- * Request Lenses
-    , eefuPackageName
-    , eefuAPKVersionCode
-    , eefuMedia
-    , eefuExpansionFileType
-    , eefuEditId
+    , ePackageName
+    , eAPKVersionCode
+    , eMedia
+    , eExpansionFileType
+    , eEditId
     ) where
 
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.expansionfiles.upload@ method which the
--- 'EditsExpansionFilesUpload'' request conforms to.
+-- 'EditsExpansionFilesUpload' request conforms to.
 type EditsExpansionFilesUploadResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -61,81 +61,78 @@ type EditsExpansionFilesUploadResource =
 
 -- | Uploads and attaches a new Expansion File to the APK specified.
 --
--- /See:/ 'editsExpansionFilesUpload'' smart constructor.
-data EditsExpansionFilesUpload' = EditsExpansionFilesUpload'
-    { _eefuPackageName       :: !Text
-    , _eefuAPKVersionCode    :: !Int32
-    , _eefuMedia             :: !Body
-    , _eefuExpansionFileType :: !EditsExpansionFilesUploadExpansionFileType
-    , _eefuEditId            :: !Text
+-- /See:/ 'editsExpansionFilesUpload' smart constructor.
+data EditsExpansionFilesUpload = EditsExpansionFilesUpload
+    { _ePackageName       :: !Text
+    , _eAPKVersionCode    :: !Int32
+    , _eMedia             :: !Body
+    , _eExpansionFileType :: !EditsExpansionFilesUploadExpansionFileType
+    , _eEditId            :: !Text
     }
 
--- | Creates a value of 'EditsExpansionFilesUpload'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsExpansionFilesUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eefuPackageName'
+-- * 'ePackageName'
 --
--- * 'eefuAPKVersionCode'
+-- * 'eAPKVersionCode'
 --
--- * 'eefuMedia'
+-- * 'eMedia'
 --
--- * 'eefuExpansionFileType'
+-- * 'eExpansionFileType'
 --
--- * 'eefuEditId'
-editsExpansionFilesUpload'
-    :: Text -- ^ 'eefuPackageName'
-    -> Int32 -- ^ 'eefuAPKVersionCode'
-    -> Body -- ^ 'eefuMedia'
-    -> EditsExpansionFilesUploadExpansionFileType -- ^ 'eefuExpansionFileType'
-    -> Text -- ^ 'eefuEditId'
-    -> EditsExpansionFilesUpload'
-editsExpansionFilesUpload' pEefuPackageName_ pEefuAPKVersionCode_ pEefuMedia_ pEefuExpansionFileType_ pEefuEditId_ =
-    EditsExpansionFilesUpload'
-    { _eefuPackageName = pEefuPackageName_
-    , _eefuAPKVersionCode = pEefuAPKVersionCode_
-    , _eefuMedia = pEefuMedia_
-    , _eefuExpansionFileType = pEefuExpansionFileType_
-    , _eefuEditId = pEefuEditId_
+-- * 'eEditId'
+editsExpansionFilesUpload
+    :: Text -- ^ 'ePackageName'
+    -> Int32 -- ^ 'eAPKVersionCode'
+    -> Body -- ^ 'eMedia'
+    -> EditsExpansionFilesUploadExpansionFileType -- ^ 'eExpansionFileType'
+    -> Text -- ^ 'eEditId'
+    -> EditsExpansionFilesUpload
+editsExpansionFilesUpload pEPackageName_ pEAPKVersionCode_ pEMedia_ pEExpansionFileType_ pEEditId_ =
+    EditsExpansionFilesUpload
+    { _ePackageName = pEPackageName_
+    , _eAPKVersionCode = pEAPKVersionCode_
+    , _eMedia = pEMedia_
+    , _eExpansionFileType = pEExpansionFileType_
+    , _eEditId = pEEditId_
     }
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eefuPackageName :: Lens' EditsExpansionFilesUpload' Text
-eefuPackageName
-  = lens _eefuPackageName
-      (\ s a -> s{_eefuPackageName = a})
+ePackageName :: Lens' EditsExpansionFilesUpload Text
+ePackageName
+  = lens _ePackageName (\ s a -> s{_ePackageName = a})
 
 -- | The version code of the APK whose Expansion File configuration is being
 -- read or modified.
-eefuAPKVersionCode :: Lens' EditsExpansionFilesUpload' Int32
-eefuAPKVersionCode
-  = lens _eefuAPKVersionCode
-      (\ s a -> s{_eefuAPKVersionCode = a})
+eAPKVersionCode :: Lens' EditsExpansionFilesUpload Int32
+eAPKVersionCode
+  = lens _eAPKVersionCode
+      (\ s a -> s{_eAPKVersionCode = a})
 
-eefuMedia :: Lens' EditsExpansionFilesUpload' Body
-eefuMedia
-  = lens _eefuMedia (\ s a -> s{_eefuMedia = a})
+eMedia :: Lens' EditsExpansionFilesUpload Body
+eMedia = lens _eMedia (\ s a -> s{_eMedia = a})
 
-eefuExpansionFileType :: Lens' EditsExpansionFilesUpload' EditsExpansionFilesUploadExpansionFileType
-eefuExpansionFileType
-  = lens _eefuExpansionFileType
-      (\ s a -> s{_eefuExpansionFileType = a})
+eExpansionFileType :: Lens' EditsExpansionFilesUpload EditsExpansionFilesUploadExpansionFileType
+eExpansionFileType
+  = lens _eExpansionFileType
+      (\ s a -> s{_eExpansionFileType = a})
 
 -- | Unique identifier for this edit.
-eefuEditId :: Lens' EditsExpansionFilesUpload' Text
-eefuEditId
-  = lens _eefuEditId (\ s a -> s{_eefuEditId = a})
+eEditId :: Lens' EditsExpansionFilesUpload Text
+eEditId = lens _eEditId (\ s a -> s{_eEditId = a})
 
-instance GoogleRequest EditsExpansionFilesUpload'
+instance GoogleRequest EditsExpansionFilesUpload
          where
-        type Rs EditsExpansionFilesUpload' =
+        type Rs EditsExpansionFilesUpload =
              ExpansionFilesUploadResponse
-        requestClient EditsExpansionFilesUpload'{..}
-          = go _eefuPackageName _eefuEditId _eefuAPKVersionCode
-              _eefuExpansionFileType
+        requestClient EditsExpansionFilesUpload{..}
+          = go _ePackageName _eEditId _eAPKVersionCode
+              _eExpansionFileType
               (Just AltJSON)
-              _eefuMedia
+              _eMedia
               androidPublisherService
           where go
                   = buildClient

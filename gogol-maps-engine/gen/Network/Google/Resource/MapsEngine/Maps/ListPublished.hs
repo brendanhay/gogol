@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Maps.ListPublished
       MapsListPublishedResource
 
     -- * Creating a Request
-    , mapsListPublished'
-    , MapsListPublished'
+    , mapsListPublished
+    , MapsListPublished
 
     -- * Request Lenses
     , mlpPageToken
@@ -42,7 +42,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.maps.listPublished@ method which the
--- 'MapsListPublished'' request conforms to.
+-- 'MapsListPublished' request conforms to.
 type MapsListPublishedResource =
      "maps" :>
        "published" :>
@@ -54,14 +54,14 @@ type MapsListPublishedResource =
 
 -- | Return all published maps readable by the current user.
 --
--- /See:/ 'mapsListPublished'' smart constructor.
-data MapsListPublished' = MapsListPublished'
+-- /See:/ 'mapsListPublished' smart constructor.
+data MapsListPublished = MapsListPublished
     { _mlpPageToken  :: !(Maybe Text)
     , _mlpProjectId  :: !(Maybe Text)
     , _mlpMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MapsListPublished'' with the minimum fields required to make a request.
+-- | Creates a value of 'MapsListPublished' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,10 +70,10 @@ data MapsListPublished' = MapsListPublished'
 -- * 'mlpProjectId'
 --
 -- * 'mlpMaxResults'
-mapsListPublished'
-    :: MapsListPublished'
-mapsListPublished' =
-    MapsListPublished'
+mapsListPublished
+    :: MapsListPublished
+mapsListPublished =
+    MapsListPublished
     { _mlpPageToken = Nothing
     , _mlpProjectId = Nothing
     , _mlpMaxResults = Nothing
@@ -82,7 +82,7 @@ mapsListPublished' =
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
 -- nextPageToken from the previous response.
-mlpPageToken :: Lens' MapsListPublished' (Maybe Text)
+mlpPageToken :: Lens' MapsListPublished (Maybe Text)
 mlpPageToken
   = lens _mlpPageToken (\ s a -> s{_mlpPageToken = a})
 
@@ -90,21 +90,20 @@ mlpPageToken
 -- all available projects with their IDs, send a Projects: list request.
 -- You can also find your project ID as the value of the DashboardPlace:cid
 -- URL parameter when signed in to mapsengine.google.com.
-mlpProjectId :: Lens' MapsListPublished' (Maybe Text)
+mlpProjectId :: Lens' MapsListPublished (Maybe Text)
 mlpProjectId
   = lens _mlpProjectId (\ s a -> s{_mlpProjectId = a})
 
 -- | The maximum number of items to include in a single response page. The
 -- maximum supported value is 100.
-mlpMaxResults :: Lens' MapsListPublished' (Maybe Word32)
+mlpMaxResults :: Lens' MapsListPublished (Maybe Word32)
 mlpMaxResults
   = lens _mlpMaxResults
       (\ s a -> s{_mlpMaxResults = a})
 
-instance GoogleRequest MapsListPublished' where
-        type Rs MapsListPublished' =
-             PublishedMapsListResponse
-        requestClient MapsListPublished'{..}
+instance GoogleRequest MapsListPublished where
+        type Rs MapsListPublished = PublishedMapsListResponse
+        requestClient MapsListPublished{..}
           = go _mlpPageToken _mlpProjectId _mlpMaxResults
               (Just AltJSON)
               mapsEngineService

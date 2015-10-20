@@ -32,8 +32,8 @@ module Network.Google.Resource.Fitness.Users.Dataset.Aggregate
       UsersDatasetAggregateResource
 
     -- * Creating a Request
-    , usersDatasetAggregate'
-    , UsersDatasetAggregate'
+    , usersDatasetAggregate
+    , UsersDatasetAggregate
 
     -- * Request Lenses
     , udaPayload
@@ -44,7 +44,7 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fitness.users.dataset.aggregate@ method which the
--- 'UsersDatasetAggregate'' request conforms to.
+-- 'UsersDatasetAggregate' request conforms to.
 type UsersDatasetAggregateResource =
      Capture "userId" Text :>
        "dataset:aggregate" :>
@@ -57,43 +57,43 @@ type UsersDatasetAggregateResource =
 -- multiple sources can be aggreated into exactly one bucket type per
 -- request.
 --
--- /See:/ 'usersDatasetAggregate'' smart constructor.
-data UsersDatasetAggregate' = UsersDatasetAggregate'
+-- /See:/ 'usersDatasetAggregate' smart constructor.
+data UsersDatasetAggregate = UsersDatasetAggregate
     { _udaPayload :: !AggregateRequest
     , _udaUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersDatasetAggregate'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersDatasetAggregate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'udaPayload'
 --
 -- * 'udaUserId'
-usersDatasetAggregate'
+usersDatasetAggregate
     :: AggregateRequest -- ^ 'udaPayload'
     -> Text -- ^ 'udaUserId'
-    -> UsersDatasetAggregate'
-usersDatasetAggregate' pUdaPayload_ pUdaUserId_ =
-    UsersDatasetAggregate'
+    -> UsersDatasetAggregate
+usersDatasetAggregate pUdaPayload_ pUdaUserId_ =
+    UsersDatasetAggregate
     { _udaPayload = pUdaPayload_
     , _udaUserId = pUdaUserId_
     }
 
 -- | Multipart request metadata.
-udaPayload :: Lens' UsersDatasetAggregate' AggregateRequest
+udaPayload :: Lens' UsersDatasetAggregate AggregateRequest
 udaPayload
   = lens _udaPayload (\ s a -> s{_udaPayload = a})
 
 -- | Aggregate data for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
-udaUserId :: Lens' UsersDatasetAggregate' Text
+udaUserId :: Lens' UsersDatasetAggregate Text
 udaUserId
   = lens _udaUserId (\ s a -> s{_udaUserId = a})
 
-instance GoogleRequest UsersDatasetAggregate' where
-        type Rs UsersDatasetAggregate' = AggregateResponse
-        requestClient UsersDatasetAggregate'{..}
+instance GoogleRequest UsersDatasetAggregate where
+        type Rs UsersDatasetAggregate = AggregateResponse
+        requestClient UsersDatasetAggregate{..}
           = go _udaUserId (Just AltJSON) _udaPayload
               fitnessService
           where go

@@ -31,8 +31,8 @@ module Network.Google.Resource.Compute.URLMaps.Validate
       URLMapsValidateResource
 
     -- * Creating a Request
-    , urlMapsValidate'
-    , URLMapsValidate'
+    , urlMapsValidate
+    , URLMapsValidate
 
     -- * Request Lenses
     , umvURLMap
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.urlMaps.validate@ method which the
--- 'URLMapsValidate'' request conforms to.
+-- 'URLMapsValidate' request conforms to.
 type URLMapsValidateResource =
      Capture "project" Text :>
        "global" :>
@@ -59,14 +59,14 @@ type URLMapsValidateResource =
 -- provided UrlMap will be run. Calling this method does NOT create the
 -- UrlMap.
 --
--- /See:/ 'urlMapsValidate'' smart constructor.
-data URLMapsValidate' = URLMapsValidate'
+-- /See:/ 'urlMapsValidate' smart constructor.
+data URLMapsValidate = URLMapsValidate
     { _umvURLMap  :: !Text
     , _umvProject :: !Text
     , _umvPayload :: !URLMapsValidateRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'URLMapsValidate'' with the minimum fields required to make a request.
+-- | Creates a value of 'URLMapsValidate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,36 +75,36 @@ data URLMapsValidate' = URLMapsValidate'
 -- * 'umvProject'
 --
 -- * 'umvPayload'
-urlMapsValidate'
+urlMapsValidate
     :: Text -- ^ 'umvURLMap'
     -> Text -- ^ 'umvProject'
     -> URLMapsValidateRequest -- ^ 'umvPayload'
-    -> URLMapsValidate'
-urlMapsValidate' pUmvURLMap_ pUmvProject_ pUmvPayload_ =
-    URLMapsValidate'
+    -> URLMapsValidate
+urlMapsValidate pUmvURLMap_ pUmvProject_ pUmvPayload_ =
+    URLMapsValidate
     { _umvURLMap = pUmvURLMap_
     , _umvProject = pUmvProject_
     , _umvPayload = pUmvPayload_
     }
 
 -- | Name of the UrlMap resource to be validated as.
-umvURLMap :: Lens' URLMapsValidate' Text
+umvURLMap :: Lens' URLMapsValidate Text
 umvURLMap
   = lens _umvURLMap (\ s a -> s{_umvURLMap = a})
 
 -- | Name of the project scoping this request.
-umvProject :: Lens' URLMapsValidate' Text
+umvProject :: Lens' URLMapsValidate Text
 umvProject
   = lens _umvProject (\ s a -> s{_umvProject = a})
 
 -- | Multipart request metadata.
-umvPayload :: Lens' URLMapsValidate' URLMapsValidateRequest
+umvPayload :: Lens' URLMapsValidate URLMapsValidateRequest
 umvPayload
   = lens _umvPayload (\ s a -> s{_umvPayload = a})
 
-instance GoogleRequest URLMapsValidate' where
-        type Rs URLMapsValidate' = URLMapsValidateResponse
-        requestClient URLMapsValidate'{..}
+instance GoogleRequest URLMapsValidate where
+        type Rs URLMapsValidate = URLMapsValidateResponse
+        requestClient URLMapsValidate{..}
           = go _umvProject _umvURLMap (Just AltJSON)
               _umvPayload
               computeService

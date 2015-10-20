@@ -29,8 +29,8 @@ module Network.Google.Resource.FusionTables.Column.Get
       ColumnGetResource
 
     -- * Creating a Request
-    , columnGet'
-    , ColumnGet'
+    , columnGet
+    , ColumnGet
 
     -- * Request Lenses
     , cgTableId
@@ -41,7 +41,7 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.column.get@ method which the
--- 'ColumnGet'' request conforms to.
+-- 'ColumnGet' request conforms to.
 type ColumnGetResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -51,42 +51,42 @@ type ColumnGetResource =
 
 -- | Retrieves a specific column by its ID.
 --
--- /See:/ 'columnGet'' smart constructor.
-data ColumnGet' = ColumnGet'
+-- /See:/ 'columnGet' smart constructor.
+data ColumnGet = ColumnGet
     { _cgTableId  :: !Text
     , _cgColumnId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ColumnGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ColumnGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cgTableId'
 --
 -- * 'cgColumnId'
-columnGet'
+columnGet
     :: Text -- ^ 'cgTableId'
     -> Text -- ^ 'cgColumnId'
-    -> ColumnGet'
-columnGet' pCgTableId_ pCgColumnId_ =
-    ColumnGet'
+    -> ColumnGet
+columnGet pCgTableId_ pCgColumnId_ =
+    ColumnGet
     { _cgTableId = pCgTableId_
     , _cgColumnId = pCgColumnId_
     }
 
 -- | Table to which the column belongs.
-cgTableId :: Lens' ColumnGet' Text
+cgTableId :: Lens' ColumnGet Text
 cgTableId
   = lens _cgTableId (\ s a -> s{_cgTableId = a})
 
 -- | Name or identifier for the column that is being requested.
-cgColumnId :: Lens' ColumnGet' Text
+cgColumnId :: Lens' ColumnGet Text
 cgColumnId
   = lens _cgColumnId (\ s a -> s{_cgColumnId = a})
 
-instance GoogleRequest ColumnGet' where
-        type Rs ColumnGet' = Column
-        requestClient ColumnGet'{..}
+instance GoogleRequest ColumnGet where
+        type Rs ColumnGet = Column
+        requestClient ColumnGet{..}
           = go _cgTableId _cgColumnId (Just AltJSON)
               fusionTablesService
           where go

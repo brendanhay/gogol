@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.UnSampledReports.Get
       ManagementUnSampledReportsGetResource
 
     -- * Creating a Request
-    , managementUnSampledReportsGet'
-    , ManagementUnSampledReportsGet'
+    , managementUnSampledReportsGet
+    , ManagementUnSampledReportsGet
 
     -- * Request Lenses
     , musrgWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.unsampledReports.get@ method which the
--- 'ManagementUnSampledReportsGet'' request conforms to.
+-- 'ManagementUnSampledReportsGet' request conforms to.
 type ManagementUnSampledReportsGetResource =
      "management" :>
        "accounts" :>
@@ -59,15 +59,15 @@ type ManagementUnSampledReportsGetResource =
 
 -- | Returns a single unsampled report.
 --
--- /See:/ 'managementUnSampledReportsGet'' smart constructor.
-data ManagementUnSampledReportsGet' = ManagementUnSampledReportsGet'
+-- /See:/ 'managementUnSampledReportsGet' smart constructor.
+data ManagementUnSampledReportsGet = ManagementUnSampledReportsGet
     { _musrgWebPropertyId     :: !Text
     , _musrgProFileId         :: !Text
     , _musrgAccountId         :: !Text
     , _musrgUnSampledReportId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementUnSampledReportsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementUnSampledReportsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -78,14 +78,14 @@ data ManagementUnSampledReportsGet' = ManagementUnSampledReportsGet'
 -- * 'musrgAccountId'
 --
 -- * 'musrgUnSampledReportId'
-managementUnSampledReportsGet'
+managementUnSampledReportsGet
     :: Text -- ^ 'musrgWebPropertyId'
     -> Text -- ^ 'musrgProFileId'
     -> Text -- ^ 'musrgAccountId'
     -> Text -- ^ 'musrgUnSampledReportId'
-    -> ManagementUnSampledReportsGet'
-managementUnSampledReportsGet' pMusrgWebPropertyId_ pMusrgProFileId_ pMusrgAccountId_ pMusrgUnSampledReportId_ =
-    ManagementUnSampledReportsGet'
+    -> ManagementUnSampledReportsGet
+managementUnSampledReportsGet pMusrgWebPropertyId_ pMusrgProFileId_ pMusrgAccountId_ pMusrgUnSampledReportId_ =
+    ManagementUnSampledReportsGet
     { _musrgWebPropertyId = pMusrgWebPropertyId_
     , _musrgProFileId = pMusrgProFileId_
     , _musrgAccountId = pMusrgAccountId_
@@ -93,34 +93,34 @@ managementUnSampledReportsGet' pMusrgWebPropertyId_ pMusrgProFileId_ pMusrgAccou
     }
 
 -- | Web property ID to retrieve unsampled reports for.
-musrgWebPropertyId :: Lens' ManagementUnSampledReportsGet' Text
+musrgWebPropertyId :: Lens' ManagementUnSampledReportsGet Text
 musrgWebPropertyId
   = lens _musrgWebPropertyId
       (\ s a -> s{_musrgWebPropertyId = a})
 
 -- | View (Profile) ID to retrieve unsampled report for.
-musrgProFileId :: Lens' ManagementUnSampledReportsGet' Text
+musrgProFileId :: Lens' ManagementUnSampledReportsGet Text
 musrgProFileId
   = lens _musrgProFileId
       (\ s a -> s{_musrgProFileId = a})
 
 -- | Account ID to retrieve unsampled report for.
-musrgAccountId :: Lens' ManagementUnSampledReportsGet' Text
+musrgAccountId :: Lens' ManagementUnSampledReportsGet Text
 musrgAccountId
   = lens _musrgAccountId
       (\ s a -> s{_musrgAccountId = a})
 
 -- | ID of the unsampled report to retrieve.
-musrgUnSampledReportId :: Lens' ManagementUnSampledReportsGet' Text
+musrgUnSampledReportId :: Lens' ManagementUnSampledReportsGet Text
 musrgUnSampledReportId
   = lens _musrgUnSampledReportId
       (\ s a -> s{_musrgUnSampledReportId = a})
 
-instance GoogleRequest ManagementUnSampledReportsGet'
+instance GoogleRequest ManagementUnSampledReportsGet
          where
-        type Rs ManagementUnSampledReportsGet' =
+        type Rs ManagementUnSampledReportsGet =
              UnSampledReport
-        requestClient ManagementUnSampledReportsGet'{..}
+        requestClient ManagementUnSampledReportsGet{..}
           = go _musrgAccountId _musrgWebPropertyId
               _musrgProFileId
               _musrgUnSampledReportId

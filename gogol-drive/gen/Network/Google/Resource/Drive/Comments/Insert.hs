@@ -29,19 +29,19 @@ module Network.Google.Resource.Drive.Comments.Insert
       CommentsInsertResource
 
     -- * Creating a Request
-    , commentsInsert'
-    , CommentsInsert'
+    , commentsInsert
+    , CommentsInsert
 
     -- * Request Lenses
-    , ciPayload
-    , ciFileId
+    , comPayload
+    , comFileId
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.comments.insert@ method which the
--- 'CommentsInsert'' request conforms to.
+-- 'CommentsInsert' request conforms to.
 type CommentsInsertResource =
      "files" :>
        Capture "fileId" Text :>
@@ -51,42 +51,44 @@ type CommentsInsertResource =
 
 -- | Creates a new comment on the given file.
 --
--- /See:/ 'commentsInsert'' smart constructor.
-data CommentsInsert' = CommentsInsert'
-    { _ciPayload :: !Comment
-    , _ciFileId  :: !Text
+-- /See:/ 'commentsInsert' smart constructor.
+data CommentsInsert = CommentsInsert
+    { _comPayload :: !Comment
+    , _comFileId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ciPayload'
+-- * 'comPayload'
 --
--- * 'ciFileId'
-commentsInsert'
-    :: Comment -- ^ 'ciPayload'
-    -> Text -- ^ 'ciFileId'
-    -> CommentsInsert'
-commentsInsert' pCiPayload_ pCiFileId_ =
-    CommentsInsert'
-    { _ciPayload = pCiPayload_
-    , _ciFileId = pCiFileId_
+-- * 'comFileId'
+commentsInsert
+    :: Comment -- ^ 'comPayload'
+    -> Text -- ^ 'comFileId'
+    -> CommentsInsert
+commentsInsert pComPayload_ pComFileId_ =
+    CommentsInsert
+    { _comPayload = pComPayload_
+    , _comFileId = pComFileId_
     }
 
 -- | Multipart request metadata.
-ciPayload :: Lens' CommentsInsert' Comment
-ciPayload
-  = lens _ciPayload (\ s a -> s{_ciPayload = a})
+comPayload :: Lens' CommentsInsert Comment
+comPayload
+  = lens _comPayload (\ s a -> s{_comPayload = a})
 
 -- | The ID of the file.
-ciFileId :: Lens' CommentsInsert' Text
-ciFileId = lens _ciFileId (\ s a -> s{_ciFileId = a})
+comFileId :: Lens' CommentsInsert Text
+comFileId
+  = lens _comFileId (\ s a -> s{_comFileId = a})
 
-instance GoogleRequest CommentsInsert' where
-        type Rs CommentsInsert' = Comment
-        requestClient CommentsInsert'{..}
-          = go _ciFileId (Just AltJSON) _ciPayload driveService
+instance GoogleRequest CommentsInsert where
+        type Rs CommentsInsert = Comment
+        requestClient CommentsInsert{..}
+          = go _comFileId (Just AltJSON) _comPayload
+              driveService
           where go
                   = buildClient (Proxy :: Proxy CommentsInsertResource)
                       mempty

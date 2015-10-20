@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Metadata.Columns.List
       MetadataColumnsListResource
 
     -- * Creating a Request
-    , metadataColumnsList'
-    , MetadataColumnsList'
+    , metadataColumnsList
+    , MetadataColumnsList
 
     -- * Request Lenses
     , mclReportType
@@ -40,7 +40,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.metadata.columns.list@ method which the
--- 'MetadataColumnsList'' request conforms to.
+-- 'MetadataColumnsList' request conforms to.
 type MetadataColumnsListResource =
      "metadata" :>
        Capture "reportType" Text :>
@@ -49,34 +49,34 @@ type MetadataColumnsListResource =
 
 -- | Lists all columns for a report type
 --
--- /See:/ 'metadataColumnsList'' smart constructor.
-newtype MetadataColumnsList' = MetadataColumnsList'
+-- /See:/ 'metadataColumnsList' smart constructor.
+newtype MetadataColumnsList = MetadataColumnsList
     { _mclReportType :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MetadataColumnsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'MetadataColumnsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mclReportType'
-metadataColumnsList'
+metadataColumnsList
     :: Text -- ^ 'mclReportType'
-    -> MetadataColumnsList'
-metadataColumnsList' pMclReportType_ =
-    MetadataColumnsList'
+    -> MetadataColumnsList
+metadataColumnsList pMclReportType_ =
+    MetadataColumnsList
     { _mclReportType = pMclReportType_
     }
 
 -- | Report type. Allowed Values: \'ga\'. Where \'ga\' corresponds to the
 -- Core Reporting API
-mclReportType :: Lens' MetadataColumnsList' Text
+mclReportType :: Lens' MetadataColumnsList Text
 mclReportType
   = lens _mclReportType
       (\ s a -> s{_mclReportType = a})
 
-instance GoogleRequest MetadataColumnsList' where
-        type Rs MetadataColumnsList' = Columns
-        requestClient MetadataColumnsList'{..}
+instance GoogleRequest MetadataColumnsList where
+        type Rs MetadataColumnsList = Columns
+        requestClient MetadataColumnsList{..}
           = go _mclReportType (Just AltJSON) analyticsService
           where go
                   = buildClient

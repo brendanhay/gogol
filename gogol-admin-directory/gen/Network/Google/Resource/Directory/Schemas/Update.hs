@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Schemas.Update
       SchemasUpdateResource
 
     -- * Creating a Request
-    , schemasUpdate'
-    , SchemasUpdate'
+    , schemasUpdate
+    , SchemasUpdate
 
     -- * Request Lenses
     , suPayload
@@ -42,7 +42,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.schemas.update@ method which the
--- 'SchemasUpdate'' request conforms to.
+-- 'SchemasUpdate' request conforms to.
 type SchemasUpdateResource =
      "customer" :>
        Capture "customerId" Text :>
@@ -53,14 +53,14 @@ type SchemasUpdateResource =
 
 -- | Update schema
 --
--- /See:/ 'schemasUpdate'' smart constructor.
-data SchemasUpdate' = SchemasUpdate'
+-- /See:/ 'schemasUpdate' smart constructor.
+data SchemasUpdate = SchemasUpdate
     { _suPayload    :: !Schema
     , _suCustomerId :: !Text
     , _suSchemaKey  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SchemasUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'SchemasUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,36 @@ data SchemasUpdate' = SchemasUpdate'
 -- * 'suCustomerId'
 --
 -- * 'suSchemaKey'
-schemasUpdate'
+schemasUpdate
     :: Schema -- ^ 'suPayload'
     -> Text -- ^ 'suCustomerId'
     -> Text -- ^ 'suSchemaKey'
-    -> SchemasUpdate'
-schemasUpdate' pSuPayload_ pSuCustomerId_ pSuSchemaKey_ =
-    SchemasUpdate'
+    -> SchemasUpdate
+schemasUpdate pSuPayload_ pSuCustomerId_ pSuSchemaKey_ =
+    SchemasUpdate
     { _suPayload = pSuPayload_
     , _suCustomerId = pSuCustomerId_
     , _suSchemaKey = pSuSchemaKey_
     }
 
 -- | Multipart request metadata.
-suPayload :: Lens' SchemasUpdate' Schema
+suPayload :: Lens' SchemasUpdate Schema
 suPayload
   = lens _suPayload (\ s a -> s{_suPayload = a})
 
 -- | Immutable id of the Google Apps account
-suCustomerId :: Lens' SchemasUpdate' Text
+suCustomerId :: Lens' SchemasUpdate Text
 suCustomerId
   = lens _suCustomerId (\ s a -> s{_suCustomerId = a})
 
 -- | Name or immutable Id of the schema.
-suSchemaKey :: Lens' SchemasUpdate' Text
+suSchemaKey :: Lens' SchemasUpdate Text
 suSchemaKey
   = lens _suSchemaKey (\ s a -> s{_suSchemaKey = a})
 
-instance GoogleRequest SchemasUpdate' where
-        type Rs SchemasUpdate' = Schema
-        requestClient SchemasUpdate'{..}
+instance GoogleRequest SchemasUpdate where
+        type Rs SchemasUpdate = Schema
+        requestClient SchemasUpdate{..}
           = go _suCustomerId _suSchemaKey (Just AltJSON)
               _suPayload
               directoryService

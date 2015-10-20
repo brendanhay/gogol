@@ -35,8 +35,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Create
       BeaconsAttachmentsCreateResource
 
     -- * Creating a Request
-    , beaconsAttachmentsCreate'
-    , BeaconsAttachmentsCreate'
+    , beaconsAttachmentsCreate
+    , BeaconsAttachmentsCreate
 
     -- * Request Lenses
     , bacXgafv
@@ -54,7 +54,7 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.attachments.create@ method which the
--- 'BeaconsAttachmentsCreate'' request conforms to.
+-- 'BeaconsAttachmentsCreate' request conforms to.
 type BeaconsAttachmentsCreateResource =
      "v1beta1" :>
        Capture "beaconName" Text :>
@@ -78,8 +78,8 @@ type BeaconsAttachmentsCreateResource =
 -- characters except for the forward slash (\`\/\`) up to 100 characters in
 -- length. Attachment data can be up to 1024 bytes long.
 --
--- /See:/ 'beaconsAttachmentsCreate'' smart constructor.
-data BeaconsAttachmentsCreate' = BeaconsAttachmentsCreate'
+-- /See:/ 'beaconsAttachmentsCreate' smart constructor.
+data BeaconsAttachmentsCreate = BeaconsAttachmentsCreate
     { _bacXgafv          :: !(Maybe Text)
     , _bacUploadProtocol :: !(Maybe Text)
     , _bacPp             :: !Bool
@@ -91,7 +91,7 @@ data BeaconsAttachmentsCreate' = BeaconsAttachmentsCreate'
     , _bacCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BeaconsAttachmentsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'BeaconsAttachmentsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -112,12 +112,12 @@ data BeaconsAttachmentsCreate' = BeaconsAttachmentsCreate'
 -- * 'bacBearerToken'
 --
 -- * 'bacCallback'
-beaconsAttachmentsCreate'
+beaconsAttachmentsCreate
     :: Text -- ^ 'bacBeaconName'
     -> BeaconAttachment -- ^ 'bacPayload'
-    -> BeaconsAttachmentsCreate'
-beaconsAttachmentsCreate' pBacBeaconName_ pBacPayload_ =
-    BeaconsAttachmentsCreate'
+    -> BeaconsAttachmentsCreate
+beaconsAttachmentsCreate pBacBeaconName_ pBacPayload_ =
+    BeaconsAttachmentsCreate
     { _bacXgafv = Nothing
     , _bacUploadProtocol = Nothing
     , _bacPp = True
@@ -130,57 +130,56 @@ beaconsAttachmentsCreate' pBacBeaconName_ pBacPayload_ =
     }
 
 -- | V1 error format.
-bacXgafv :: Lens' BeaconsAttachmentsCreate' (Maybe Text)
+bacXgafv :: Lens' BeaconsAttachmentsCreate (Maybe Text)
 bacXgafv = lens _bacXgafv (\ s a -> s{_bacXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-bacUploadProtocol :: Lens' BeaconsAttachmentsCreate' (Maybe Text)
+bacUploadProtocol :: Lens' BeaconsAttachmentsCreate (Maybe Text)
 bacUploadProtocol
   = lens _bacUploadProtocol
       (\ s a -> s{_bacUploadProtocol = a})
 
 -- | Pretty-print response.
-bacPp :: Lens' BeaconsAttachmentsCreate' Bool
+bacPp :: Lens' BeaconsAttachmentsCreate Bool
 bacPp = lens _bacPp (\ s a -> s{_bacPp = a})
 
 -- | OAuth access token.
-bacAccessToken :: Lens' BeaconsAttachmentsCreate' (Maybe Text)
+bacAccessToken :: Lens' BeaconsAttachmentsCreate (Maybe Text)
 bacAccessToken
   = lens _bacAccessToken
       (\ s a -> s{_bacAccessToken = a})
 
 -- | The beacon on which the attachment should be created. Required.
-bacBeaconName :: Lens' BeaconsAttachmentsCreate' Text
+bacBeaconName :: Lens' BeaconsAttachmentsCreate Text
 bacBeaconName
   = lens _bacBeaconName
       (\ s a -> s{_bacBeaconName = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-bacUploadType :: Lens' BeaconsAttachmentsCreate' (Maybe Text)
+bacUploadType :: Lens' BeaconsAttachmentsCreate (Maybe Text)
 bacUploadType
   = lens _bacUploadType
       (\ s a -> s{_bacUploadType = a})
 
 -- | Multipart request metadata.
-bacPayload :: Lens' BeaconsAttachmentsCreate' BeaconAttachment
+bacPayload :: Lens' BeaconsAttachmentsCreate BeaconAttachment
 bacPayload
   = lens _bacPayload (\ s a -> s{_bacPayload = a})
 
 -- | OAuth bearer token.
-bacBearerToken :: Lens' BeaconsAttachmentsCreate' (Maybe Text)
+bacBearerToken :: Lens' BeaconsAttachmentsCreate (Maybe Text)
 bacBearerToken
   = lens _bacBearerToken
       (\ s a -> s{_bacBearerToken = a})
 
 -- | JSONP
-bacCallback :: Lens' BeaconsAttachmentsCreate' (Maybe Text)
+bacCallback :: Lens' BeaconsAttachmentsCreate (Maybe Text)
 bacCallback
   = lens _bacCallback (\ s a -> s{_bacCallback = a})
 
-instance GoogleRequest BeaconsAttachmentsCreate'
-         where
-        type Rs BeaconsAttachmentsCreate' = BeaconAttachment
-        requestClient BeaconsAttachmentsCreate'{..}
+instance GoogleRequest BeaconsAttachmentsCreate where
+        type Rs BeaconsAttachmentsCreate = BeaconAttachment
+        requestClient BeaconsAttachmentsCreate{..}
           = go _bacBeaconName _bacXgafv _bacUploadProtocol
               (Just _bacPp)
               _bacAccessToken

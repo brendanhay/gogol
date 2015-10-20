@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Placements.Insert
       PlacementsInsertResource
 
     -- * Creating a Request
-    , placementsInsert'
-    , PlacementsInsert'
+    , placementsInsert
+    , PlacementsInsert
 
     -- * Request Lenses
     , piProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placements.insert@ method which the
--- 'PlacementsInsert'' request conforms to.
+-- 'PlacementsInsert' request conforms to.
 type PlacementsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type PlacementsInsertResource =
 
 -- | Inserts a new placement.
 --
--- /See:/ 'placementsInsert'' smart constructor.
-data PlacementsInsert' = PlacementsInsert'
+-- /See:/ 'placementsInsert' smart constructor.
+data PlacementsInsert = PlacementsInsert
     { _piProFileId :: !Int64
     , _piPayload   :: !Placement
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlacementsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlacementsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'piProFileId'
 --
 -- * 'piPayload'
-placementsInsert'
+placementsInsert
     :: Int64 -- ^ 'piProFileId'
     -> Placement -- ^ 'piPayload'
-    -> PlacementsInsert'
-placementsInsert' pPiProFileId_ pPiPayload_ =
-    PlacementsInsert'
+    -> PlacementsInsert
+placementsInsert pPiProFileId_ pPiPayload_ =
+    PlacementsInsert
     { _piProFileId = pPiProFileId_
     , _piPayload = pPiPayload_
     }
 
 -- | User profile ID associated with this request.
-piProFileId :: Lens' PlacementsInsert' Int64
+piProFileId :: Lens' PlacementsInsert Int64
 piProFileId
   = lens _piProFileId (\ s a -> s{_piProFileId = a})
 
 -- | Multipart request metadata.
-piPayload :: Lens' PlacementsInsert' Placement
+piPayload :: Lens' PlacementsInsert Placement
 piPayload
   = lens _piPayload (\ s a -> s{_piPayload = a})
 
-instance GoogleRequest PlacementsInsert' where
-        type Rs PlacementsInsert' = Placement
-        requestClient PlacementsInsert'{..}
+instance GoogleRequest PlacementsInsert where
+        type Rs PlacementsInsert = Placement
+        requestClient PlacementsInsert{..}
           = go _piProFileId (Just AltJSON) _piPayload
               dFAReportingService
           where go

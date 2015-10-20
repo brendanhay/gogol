@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Update
       FloodlightActivitiesUpdateResource
 
     -- * Creating a Request
-    , floodlightActivitiesUpdate'
-    , FloodlightActivitiesUpdate'
+    , floodlightActivitiesUpdate
+    , FloodlightActivitiesUpdate
 
     -- * Request Lenses
     , fauProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightActivities.update@ method which the
--- 'FloodlightActivitiesUpdate'' request conforms to.
+-- 'FloodlightActivitiesUpdate' request conforms to.
 type FloodlightActivitiesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,44 +52,44 @@ type FloodlightActivitiesUpdateResource =
 
 -- | Updates an existing floodlight activity.
 --
--- /See:/ 'floodlightActivitiesUpdate'' smart constructor.
-data FloodlightActivitiesUpdate' = FloodlightActivitiesUpdate'
+-- /See:/ 'floodlightActivitiesUpdate' smart constructor.
+data FloodlightActivitiesUpdate = FloodlightActivitiesUpdate
     { _fauProFileId :: !Int64
     , _fauPayload   :: !FloodlightActivity
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FloodlightActivitiesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'FloodlightActivitiesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fauProFileId'
 --
 -- * 'fauPayload'
-floodlightActivitiesUpdate'
+floodlightActivitiesUpdate
     :: Int64 -- ^ 'fauProFileId'
     -> FloodlightActivity -- ^ 'fauPayload'
-    -> FloodlightActivitiesUpdate'
-floodlightActivitiesUpdate' pFauProFileId_ pFauPayload_ =
-    FloodlightActivitiesUpdate'
+    -> FloodlightActivitiesUpdate
+floodlightActivitiesUpdate pFauProFileId_ pFauPayload_ =
+    FloodlightActivitiesUpdate
     { _fauProFileId = pFauProFileId_
     , _fauPayload = pFauPayload_
     }
 
 -- | User profile ID associated with this request.
-fauProFileId :: Lens' FloodlightActivitiesUpdate' Int64
+fauProFileId :: Lens' FloodlightActivitiesUpdate Int64
 fauProFileId
   = lens _fauProFileId (\ s a -> s{_fauProFileId = a})
 
 -- | Multipart request metadata.
-fauPayload :: Lens' FloodlightActivitiesUpdate' FloodlightActivity
+fauPayload :: Lens' FloodlightActivitiesUpdate FloodlightActivity
 fauPayload
   = lens _fauPayload (\ s a -> s{_fauPayload = a})
 
-instance GoogleRequest FloodlightActivitiesUpdate'
+instance GoogleRequest FloodlightActivitiesUpdate
          where
-        type Rs FloodlightActivitiesUpdate' =
+        type Rs FloodlightActivitiesUpdate =
              FloodlightActivity
-        requestClient FloodlightActivitiesUpdate'{..}
+        requestClient FloodlightActivitiesUpdate{..}
           = go _fauProFileId (Just AltJSON) _fauPayload
               dFAReportingService
           where go

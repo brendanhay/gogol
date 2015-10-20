@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.AccountUserProFiles.Update
       AccountUserProFilesUpdateResource
 
     -- * Creating a Request
-    , accountUserProFilesUpdate'
-    , AccountUserProFilesUpdate'
+    , accountUserProFilesUpdate
+    , AccountUserProFilesUpdate
 
     -- * Request Lenses
     , aupfuProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accountUserProfiles.update@ method which the
--- 'AccountUserProFilesUpdate'' request conforms to.
+-- 'AccountUserProFilesUpdate' request conforms to.
 type AccountUserProFilesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,45 +52,45 @@ type AccountUserProFilesUpdateResource =
 
 -- | Updates an existing account user profile.
 --
--- /See:/ 'accountUserProFilesUpdate'' smart constructor.
-data AccountUserProFilesUpdate' = AccountUserProFilesUpdate'
+-- /See:/ 'accountUserProFilesUpdate' smart constructor.
+data AccountUserProFilesUpdate = AccountUserProFilesUpdate
     { _aupfuProFileId :: !Int64
     , _aupfuPayload   :: !AccountUserProFile
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountUserProFilesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountUserProFilesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aupfuProFileId'
 --
 -- * 'aupfuPayload'
-accountUserProFilesUpdate'
+accountUserProFilesUpdate
     :: Int64 -- ^ 'aupfuProFileId'
     -> AccountUserProFile -- ^ 'aupfuPayload'
-    -> AccountUserProFilesUpdate'
-accountUserProFilesUpdate' pAupfuProFileId_ pAupfuPayload_ =
-    AccountUserProFilesUpdate'
+    -> AccountUserProFilesUpdate
+accountUserProFilesUpdate pAupfuProFileId_ pAupfuPayload_ =
+    AccountUserProFilesUpdate
     { _aupfuProFileId = pAupfuProFileId_
     , _aupfuPayload = pAupfuPayload_
     }
 
 -- | User profile ID associated with this request.
-aupfuProFileId :: Lens' AccountUserProFilesUpdate' Int64
+aupfuProFileId :: Lens' AccountUserProFilesUpdate Int64
 aupfuProFileId
   = lens _aupfuProFileId
       (\ s a -> s{_aupfuProFileId = a})
 
 -- | Multipart request metadata.
-aupfuPayload :: Lens' AccountUserProFilesUpdate' AccountUserProFile
+aupfuPayload :: Lens' AccountUserProFilesUpdate AccountUserProFile
 aupfuPayload
   = lens _aupfuPayload (\ s a -> s{_aupfuPayload = a})
 
-instance GoogleRequest AccountUserProFilesUpdate'
+instance GoogleRequest AccountUserProFilesUpdate
          where
-        type Rs AccountUserProFilesUpdate' =
+        type Rs AccountUserProFilesUpdate =
              AccountUserProFile
-        requestClient AccountUserProFilesUpdate'{..}
+        requestClient AccountUserProFilesUpdate{..}
           = go _aupfuProFileId (Just AltJSON) _aupfuPayload
               dFAReportingService
           where go

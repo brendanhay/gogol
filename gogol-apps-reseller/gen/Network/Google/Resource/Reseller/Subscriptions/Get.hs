@@ -29,8 +29,8 @@ module Network.Google.Resource.Reseller.Subscriptions.Get
       SubscriptionsGetResource
 
     -- * Creating a Request
-    , subscriptionsGet'
-    , SubscriptionsGet'
+    , subscriptionsGet
+    , SubscriptionsGet
 
     -- * Request Lenses
     , sgCustomerId
@@ -41,7 +41,7 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @reseller.subscriptions.get@ method which the
--- 'SubscriptionsGet'' request conforms to.
+-- 'SubscriptionsGet' request conforms to.
 type SubscriptionsGetResource =
      "customers" :>
        Capture "customerId" Text :>
@@ -51,43 +51,43 @@ type SubscriptionsGetResource =
 
 -- | Gets a subscription of the customer.
 --
--- /See:/ 'subscriptionsGet'' smart constructor.
-data SubscriptionsGet' = SubscriptionsGet'
+-- /See:/ 'subscriptionsGet' smart constructor.
+data SubscriptionsGet = SubscriptionsGet
     { _sgCustomerId     :: !Text
     , _sgSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubscriptionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sgCustomerId'
 --
 -- * 'sgSubscriptionId'
-subscriptionsGet'
+subscriptionsGet
     :: Text -- ^ 'sgCustomerId'
     -> Text -- ^ 'sgSubscriptionId'
-    -> SubscriptionsGet'
-subscriptionsGet' pSgCustomerId_ pSgSubscriptionId_ =
-    SubscriptionsGet'
+    -> SubscriptionsGet
+subscriptionsGet pSgCustomerId_ pSgSubscriptionId_ =
+    SubscriptionsGet
     { _sgCustomerId = pSgCustomerId_
     , _sgSubscriptionId = pSgSubscriptionId_
     }
 
 -- | Id of the Customer
-sgCustomerId :: Lens' SubscriptionsGet' Text
+sgCustomerId :: Lens' SubscriptionsGet Text
 sgCustomerId
   = lens _sgCustomerId (\ s a -> s{_sgCustomerId = a})
 
 -- | Id of the subscription, which is unique for a customer
-sgSubscriptionId :: Lens' SubscriptionsGet' Text
+sgSubscriptionId :: Lens' SubscriptionsGet Text
 sgSubscriptionId
   = lens _sgSubscriptionId
       (\ s a -> s{_sgSubscriptionId = a})
 
-instance GoogleRequest SubscriptionsGet' where
-        type Rs SubscriptionsGet' = Subscription
-        requestClient SubscriptionsGet'{..}
+instance GoogleRequest SubscriptionsGet where
+        type Rs SubscriptionsGet = Subscription
+        requestClient SubscriptionsGet{..}
           = go _sgCustomerId _sgSubscriptionId (Just AltJSON)
               appsResellerService
           where go

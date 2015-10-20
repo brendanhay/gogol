@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.CustomDataSources.List
       ManagementCustomDataSourcesListResource
 
     -- * Creating a Request
-    , managementCustomDataSourcesList'
-    , ManagementCustomDataSourcesList'
+    , managementCustomDataSourcesList
+    , ManagementCustomDataSourcesList
 
     -- * Request Lenses
     , mcdslWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.customDataSources.list@ method which the
--- 'ManagementCustomDataSourcesList'' request conforms to.
+-- 'ManagementCustomDataSourcesList' request conforms to.
 type ManagementCustomDataSourcesListResource =
      "management" :>
        "accounts" :>
@@ -58,15 +58,15 @@ type ManagementCustomDataSourcesListResource =
 
 -- | List custom data sources to which the user has access.
 --
--- /See:/ 'managementCustomDataSourcesList'' smart constructor.
-data ManagementCustomDataSourcesList' = ManagementCustomDataSourcesList'
+-- /See:/ 'managementCustomDataSourcesList' smart constructor.
+data ManagementCustomDataSourcesList = ManagementCustomDataSourcesList
     { _mcdslWebPropertyId :: !Text
     , _mcdslAccountId     :: !Text
     , _mcdslStartIndex    :: !(Maybe Int32)
     , _mcdslMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementCustomDataSourcesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementCustomDataSourcesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,12 +77,12 @@ data ManagementCustomDataSourcesList' = ManagementCustomDataSourcesList'
 -- * 'mcdslStartIndex'
 --
 -- * 'mcdslMaxResults'
-managementCustomDataSourcesList'
+managementCustomDataSourcesList
     :: Text -- ^ 'mcdslWebPropertyId'
     -> Text -- ^ 'mcdslAccountId'
-    -> ManagementCustomDataSourcesList'
-managementCustomDataSourcesList' pMcdslWebPropertyId_ pMcdslAccountId_ =
-    ManagementCustomDataSourcesList'
+    -> ManagementCustomDataSourcesList
+managementCustomDataSourcesList pMcdslWebPropertyId_ pMcdslAccountId_ =
+    ManagementCustomDataSourcesList
     { _mcdslWebPropertyId = pMcdslWebPropertyId_
     , _mcdslAccountId = pMcdslAccountId_
     , _mcdslStartIndex = Nothing
@@ -90,13 +90,13 @@ managementCustomDataSourcesList' pMcdslWebPropertyId_ pMcdslAccountId_ =
     }
 
 -- | Web property Id for the custom data sources to retrieve.
-mcdslWebPropertyId :: Lens' ManagementCustomDataSourcesList' Text
+mcdslWebPropertyId :: Lens' ManagementCustomDataSourcesList Text
 mcdslWebPropertyId
   = lens _mcdslWebPropertyId
       (\ s a -> s{_mcdslWebPropertyId = a})
 
 -- | Account Id for the custom data sources to retrieve.
-mcdslAccountId :: Lens' ManagementCustomDataSourcesList' Text
+mcdslAccountId :: Lens' ManagementCustomDataSourcesList Text
 mcdslAccountId
   = lens _mcdslAccountId
       (\ s a -> s{_mcdslAccountId = a})
@@ -104,22 +104,22 @@ mcdslAccountId
 -- | A 1-based index of the first custom data source to retrieve. Use this
 -- parameter as a pagination mechanism along with the max-results
 -- parameter.
-mcdslStartIndex :: Lens' ManagementCustomDataSourcesList' (Maybe Int32)
+mcdslStartIndex :: Lens' ManagementCustomDataSourcesList (Maybe Int32)
 mcdslStartIndex
   = lens _mcdslStartIndex
       (\ s a -> s{_mcdslStartIndex = a})
 
 -- | The maximum number of custom data sources to include in this response.
-mcdslMaxResults :: Lens' ManagementCustomDataSourcesList' (Maybe Int32)
+mcdslMaxResults :: Lens' ManagementCustomDataSourcesList (Maybe Int32)
 mcdslMaxResults
   = lens _mcdslMaxResults
       (\ s a -> s{_mcdslMaxResults = a})
 
 instance GoogleRequest
-         ManagementCustomDataSourcesList' where
-        type Rs ManagementCustomDataSourcesList' =
+         ManagementCustomDataSourcesList where
+        type Rs ManagementCustomDataSourcesList =
              CustomDataSources
-        requestClient ManagementCustomDataSourcesList'{..}
+        requestClient ManagementCustomDataSourcesList{..}
           = go _mcdslAccountId _mcdslWebPropertyId
               _mcdslStartIndex
               _mcdslMaxResults

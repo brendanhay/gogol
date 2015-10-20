@@ -31,8 +31,8 @@ module Network.Google.Resource.Compute.Projects.SetUsageExportBucket
       ProjectsSetUsageExportBucketResource
 
     -- * Creating a Request
-    , projectsSetUsageExportBucket'
-    , ProjectsSetUsageExportBucket'
+    , projectsSetUsageExportBucket
+    , ProjectsSetUsageExportBucket
 
     -- * Request Lenses
     , psuebProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.projects.setUsageExportBucket@ method which the
--- 'ProjectsSetUsageExportBucket'' request conforms to.
+-- 'ProjectsSetUsageExportBucket' request conforms to.
 type ProjectsSetUsageExportBucketResource =
      Capture "project" Text :>
        "setUsageExportBucket" :>
@@ -55,43 +55,43 @@ type ProjectsSetUsageExportBucketResource =
 -- reports are stored. If you provide an empty request body using this
 -- method, the usage export feature will be disabled.
 --
--- /See:/ 'projectsSetUsageExportBucket'' smart constructor.
-data ProjectsSetUsageExportBucket' = ProjectsSetUsageExportBucket'
+-- /See:/ 'projectsSetUsageExportBucket' smart constructor.
+data ProjectsSetUsageExportBucket = ProjectsSetUsageExportBucket
     { _psuebProject :: !Text
     , _psuebPayload :: !UsageExportLocation
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsSetUsageExportBucket'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsSetUsageExportBucket' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'psuebProject'
 --
 -- * 'psuebPayload'
-projectsSetUsageExportBucket'
+projectsSetUsageExportBucket
     :: Text -- ^ 'psuebProject'
     -> UsageExportLocation -- ^ 'psuebPayload'
-    -> ProjectsSetUsageExportBucket'
-projectsSetUsageExportBucket' pPsuebProject_ pPsuebPayload_ =
-    ProjectsSetUsageExportBucket'
+    -> ProjectsSetUsageExportBucket
+projectsSetUsageExportBucket pPsuebProject_ pPsuebPayload_ =
+    ProjectsSetUsageExportBucket
     { _psuebProject = pPsuebProject_
     , _psuebPayload = pPsuebPayload_
     }
 
 -- | Project ID for this request.
-psuebProject :: Lens' ProjectsSetUsageExportBucket' Text
+psuebProject :: Lens' ProjectsSetUsageExportBucket Text
 psuebProject
   = lens _psuebProject (\ s a -> s{_psuebProject = a})
 
 -- | Multipart request metadata.
-psuebPayload :: Lens' ProjectsSetUsageExportBucket' UsageExportLocation
+psuebPayload :: Lens' ProjectsSetUsageExportBucket UsageExportLocation
 psuebPayload
   = lens _psuebPayload (\ s a -> s{_psuebPayload = a})
 
-instance GoogleRequest ProjectsSetUsageExportBucket'
+instance GoogleRequest ProjectsSetUsageExportBucket
          where
-        type Rs ProjectsSetUsageExportBucket' = Operation
-        requestClient ProjectsSetUsageExportBucket'{..}
+        type Rs ProjectsSetUsageExportBucket = Operation
+        requestClient ProjectsSetUsageExportBucket{..}
           = go _psuebProject (Just AltJSON) _psuebPayload
               computeService
           where go

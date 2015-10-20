@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.TargetVPNGateways.Insert
       TargetVPNGatewaysInsertResource
 
     -- * Creating a Request
-    , targetVPNGatewaysInsert'
-    , TargetVPNGatewaysInsert'
+    , targetVPNGatewaysInsert
+    , TargetVPNGatewaysInsert
 
     -- * Request Lenses
     , tvgiProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetVpnGateways.insert@ method which the
--- 'TargetVPNGatewaysInsert'' request conforms to.
+-- 'TargetVPNGatewaysInsert' request conforms to.
 type TargetVPNGatewaysInsertResource =
      Capture "project" Text :>
        "regions" :>
@@ -56,14 +56,14 @@ type TargetVPNGatewaysInsertResource =
 -- | Creates a TargetVpnGateway resource in the specified project and region
 -- using the data included in the request.
 --
--- /See:/ 'targetVPNGatewaysInsert'' smart constructor.
-data TargetVPNGatewaysInsert' = TargetVPNGatewaysInsert'
+-- /See:/ 'targetVPNGatewaysInsert' smart constructor.
+data TargetVPNGatewaysInsert = TargetVPNGatewaysInsert
     { _tvgiProject :: !Text
     , _tvgiPayload :: !TargetVPNGateway
     , _tvgiRegion  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetVPNGatewaysInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetVPNGatewaysInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,36 +72,36 @@ data TargetVPNGatewaysInsert' = TargetVPNGatewaysInsert'
 -- * 'tvgiPayload'
 --
 -- * 'tvgiRegion'
-targetVPNGatewaysInsert'
+targetVPNGatewaysInsert
     :: Text -- ^ 'tvgiProject'
     -> TargetVPNGateway -- ^ 'tvgiPayload'
     -> Text -- ^ 'tvgiRegion'
-    -> TargetVPNGatewaysInsert'
-targetVPNGatewaysInsert' pTvgiProject_ pTvgiPayload_ pTvgiRegion_ =
-    TargetVPNGatewaysInsert'
+    -> TargetVPNGatewaysInsert
+targetVPNGatewaysInsert pTvgiProject_ pTvgiPayload_ pTvgiRegion_ =
+    TargetVPNGatewaysInsert
     { _tvgiProject = pTvgiProject_
     , _tvgiPayload = pTvgiPayload_
     , _tvgiRegion = pTvgiRegion_
     }
 
 -- | Project ID for this request.
-tvgiProject :: Lens' TargetVPNGatewaysInsert' Text
+tvgiProject :: Lens' TargetVPNGatewaysInsert Text
 tvgiProject
   = lens _tvgiProject (\ s a -> s{_tvgiProject = a})
 
 -- | Multipart request metadata.
-tvgiPayload :: Lens' TargetVPNGatewaysInsert' TargetVPNGateway
+tvgiPayload :: Lens' TargetVPNGatewaysInsert TargetVPNGateway
 tvgiPayload
   = lens _tvgiPayload (\ s a -> s{_tvgiPayload = a})
 
 -- | The name of the region for this request.
-tvgiRegion :: Lens' TargetVPNGatewaysInsert' Text
+tvgiRegion :: Lens' TargetVPNGatewaysInsert Text
 tvgiRegion
   = lens _tvgiRegion (\ s a -> s{_tvgiRegion = a})
 
-instance GoogleRequest TargetVPNGatewaysInsert' where
-        type Rs TargetVPNGatewaysInsert' = Operation
-        requestClient TargetVPNGatewaysInsert'{..}
+instance GoogleRequest TargetVPNGatewaysInsert where
+        type Rs TargetVPNGatewaysInsert = Operation
+        requestClient TargetVPNGatewaysInsert{..}
           = go _tvgiProject _tvgiRegion (Just AltJSON)
               _tvgiPayload
               computeService

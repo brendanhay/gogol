@@ -32,18 +32,18 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.Delete
       EnterprisesDeleteResource
 
     -- * Creating a Request
-    , enterprisesDelete'
-    , EnterprisesDelete'
+    , enterprisesDelete
+    , EnterprisesDelete
 
     -- * Request Lenses
-    , eddEnterpriseId
+    , edEnterpriseId
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.enterprises.delete@ method which the
--- 'EnterprisesDelete'' request conforms to.
+-- 'EnterprisesDelete' request conforms to.
 type EnterprisesDeleteResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -54,34 +54,34 @@ type EnterprisesDeleteResource =
 -- with the \'insert\' call, then enroll them again with the \'enroll\'
 -- call.
 --
--- /See:/ 'enterprisesDelete'' smart constructor.
-newtype EnterprisesDelete' = EnterprisesDelete'
-    { _eddEnterpriseId :: Text
+-- /See:/ 'enterprisesDelete' smart constructor.
+newtype EnterprisesDelete = EnterprisesDelete
+    { _edEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EnterprisesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'EnterprisesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eddEnterpriseId'
-enterprisesDelete'
-    :: Text -- ^ 'eddEnterpriseId'
-    -> EnterprisesDelete'
-enterprisesDelete' pEddEnterpriseId_ =
-    EnterprisesDelete'
-    { _eddEnterpriseId = pEddEnterpriseId_
+-- * 'edEnterpriseId'
+enterprisesDelete
+    :: Text -- ^ 'edEnterpriseId'
+    -> EnterprisesDelete
+enterprisesDelete pEdEnterpriseId_ =
+    EnterprisesDelete
+    { _edEnterpriseId = pEdEnterpriseId_
     }
 
 -- | The ID of the enterprise.
-eddEnterpriseId :: Lens' EnterprisesDelete' Text
-eddEnterpriseId
-  = lens _eddEnterpriseId
-      (\ s a -> s{_eddEnterpriseId = a})
+edEnterpriseId :: Lens' EnterprisesDelete Text
+edEnterpriseId
+  = lens _edEnterpriseId
+      (\ s a -> s{_edEnterpriseId = a})
 
-instance GoogleRequest EnterprisesDelete' where
-        type Rs EnterprisesDelete' = ()
-        requestClient EnterprisesDelete'{..}
-          = go _eddEnterpriseId (Just AltJSON)
+instance GoogleRequest EnterprisesDelete where
+        type Rs EnterprisesDelete = ()
+        requestClient EnterprisesDelete{..}
+          = go _edEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient

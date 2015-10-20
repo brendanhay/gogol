@@ -29,19 +29,19 @@ module Network.Google.Resource.Directory.Users.Undelete
       UsersUndeleteResource
 
     -- * Creating a Request
-    , usersUndelete'
-    , UsersUndelete'
+    , usersUndelete
+    , UsersUndelete
 
     -- * Request Lenses
-    , uPayload
-    , uUserKey
+    , uuPayload
+    , uuUserKey
     ) where
 
 import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.users.undelete@ method which the
--- 'UsersUndelete'' request conforms to.
+-- 'UsersUndelete' request conforms to.
 type UsersUndeleteResource =
      "users" :>
        Capture "userKey" Text :>
@@ -51,41 +51,43 @@ type UsersUndeleteResource =
 
 -- | Undelete a deleted user
 --
--- /See:/ 'usersUndelete'' smart constructor.
-data UsersUndelete' = UsersUndelete'
-    { _uPayload :: !UserUndelete
-    , _uUserKey :: !Text
+-- /See:/ 'usersUndelete' smart constructor.
+data UsersUndelete = UsersUndelete
+    { _uuPayload :: !UserUndelete
+    , _uuUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersUndelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersUndelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uPayload'
+-- * 'uuPayload'
 --
--- * 'uUserKey'
-usersUndelete'
-    :: UserUndelete -- ^ 'uPayload'
-    -> Text -- ^ 'uUserKey'
-    -> UsersUndelete'
-usersUndelete' pUPayload_ pUUserKey_ =
-    UsersUndelete'
-    { _uPayload = pUPayload_
-    , _uUserKey = pUUserKey_
+-- * 'uuUserKey'
+usersUndelete
+    :: UserUndelete -- ^ 'uuPayload'
+    -> Text -- ^ 'uuUserKey'
+    -> UsersUndelete
+usersUndelete pUuPayload_ pUuUserKey_ =
+    UsersUndelete
+    { _uuPayload = pUuPayload_
+    , _uuUserKey = pUuUserKey_
     }
 
 -- | Multipart request metadata.
-uPayload :: Lens' UsersUndelete' UserUndelete
-uPayload = lens _uPayload (\ s a -> s{_uPayload = a})
+uuPayload :: Lens' UsersUndelete UserUndelete
+uuPayload
+  = lens _uuPayload (\ s a -> s{_uuPayload = a})
 
 -- | The immutable id of the user
-uUserKey :: Lens' UsersUndelete' Text
-uUserKey = lens _uUserKey (\ s a -> s{_uUserKey = a})
+uuUserKey :: Lens' UsersUndelete Text
+uuUserKey
+  = lens _uuUserKey (\ s a -> s{_uuUserKey = a})
 
-instance GoogleRequest UsersUndelete' where
-        type Rs UsersUndelete' = ()
-        requestClient UsersUndelete'{..}
-          = go _uUserKey (Just AltJSON) _uPayload
+instance GoogleRequest UsersUndelete where
+        type Rs UsersUndelete = ()
+        requestClient UsersUndelete{..}
+          = go _uuUserKey (Just AltJSON) _uuPayload
               directoryService
           where go
                   = buildClient (Proxy :: Proxy UsersUndeleteResource)

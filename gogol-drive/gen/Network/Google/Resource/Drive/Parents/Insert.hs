@@ -29,19 +29,19 @@ module Network.Google.Resource.Drive.Parents.Insert
       ParentsInsertResource
 
     -- * Creating a Request
-    , parentsInsert'
-    , ParentsInsert'
+    , parentsInsert
+    , ParentsInsert
 
     -- * Request Lenses
-    , piiPayload
-    , piiFileId
+    , paraPayload
+    , paraFileId
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.parents.insert@ method which the
--- 'ParentsInsert'' request conforms to.
+-- 'ParentsInsert' request conforms to.
 type ParentsInsertResource =
      "files" :>
        Capture "fileId" Text :>
@@ -52,43 +52,43 @@ type ParentsInsertResource =
 
 -- | Adds a parent folder for a file.
 --
--- /See:/ 'parentsInsert'' smart constructor.
-data ParentsInsert' = ParentsInsert'
-    { _piiPayload :: !ParentReference
-    , _piiFileId  :: !Text
+-- /See:/ 'parentsInsert' smart constructor.
+data ParentsInsert = ParentsInsert
+    { _paraPayload :: !ParentReference
+    , _paraFileId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ParentsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ParentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'piiPayload'
+-- * 'paraPayload'
 --
--- * 'piiFileId'
-parentsInsert'
-    :: ParentReference -- ^ 'piiPayload'
-    -> Text -- ^ 'piiFileId'
-    -> ParentsInsert'
-parentsInsert' pPiiPayload_ pPiiFileId_ =
-    ParentsInsert'
-    { _piiPayload = pPiiPayload_
-    , _piiFileId = pPiiFileId_
+-- * 'paraFileId'
+parentsInsert
+    :: ParentReference -- ^ 'paraPayload'
+    -> Text -- ^ 'paraFileId'
+    -> ParentsInsert
+parentsInsert pParaPayload_ pParaFileId_ =
+    ParentsInsert
+    { _paraPayload = pParaPayload_
+    , _paraFileId = pParaFileId_
     }
 
 -- | Multipart request metadata.
-piiPayload :: Lens' ParentsInsert' ParentReference
-piiPayload
-  = lens _piiPayload (\ s a -> s{_piiPayload = a})
+paraPayload :: Lens' ParentsInsert ParentReference
+paraPayload
+  = lens _paraPayload (\ s a -> s{_paraPayload = a})
 
 -- | The ID of the file.
-piiFileId :: Lens' ParentsInsert' Text
-piiFileId
-  = lens _piiFileId (\ s a -> s{_piiFileId = a})
+paraFileId :: Lens' ParentsInsert Text
+paraFileId
+  = lens _paraFileId (\ s a -> s{_paraFileId = a})
 
-instance GoogleRequest ParentsInsert' where
-        type Rs ParentsInsert' = ParentReference
-        requestClient ParentsInsert'{..}
-          = go _piiFileId (Just AltJSON) _piiPayload
+instance GoogleRequest ParentsInsert where
+        type Rs ParentsInsert = ParentReference
+        requestClient ParentsInsert{..}
+          = go _paraFileId (Just AltJSON) _paraPayload
               driveService
           where go
                   = buildClient (Proxy :: Proxy ParentsInsertResource)

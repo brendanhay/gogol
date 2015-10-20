@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.GlobalAddresses.List
       GlobalAddressesListResource
 
     -- * Creating a Request
-    , globalAddressesList'
-    , GlobalAddressesList'
+    , globalAddressesList
+    , GlobalAddressesList
 
     -- * Request Lenses
     , galProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.globalAddresses.list@ method which the
--- 'GlobalAddressesList'' request conforms to.
+-- 'GlobalAddressesList' request conforms to.
 type GlobalAddressesListResource =
      Capture "project" Text :>
        "global" :>
@@ -55,15 +55,15 @@ type GlobalAddressesListResource =
 
 -- | Retrieves the list of global address resources.
 --
--- /See:/ 'globalAddressesList'' smart constructor.
-data GlobalAddressesList' = GlobalAddressesList'
+-- /See:/ 'globalAddressesList' smart constructor.
+data GlobalAddressesList = GlobalAddressesList
     { _galProject    :: !Text
     , _galFilter     :: !(Maybe Text)
     , _galPageToken  :: !(Maybe Text)
     , _galMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GlobalAddressesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'GlobalAddressesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,11 +74,11 @@ data GlobalAddressesList' = GlobalAddressesList'
 -- * 'galPageToken'
 --
 -- * 'galMaxResults'
-globalAddressesList'
+globalAddressesList
     :: Text -- ^ 'galProject'
-    -> GlobalAddressesList'
-globalAddressesList' pGalProject_ =
-    GlobalAddressesList'
+    -> GlobalAddressesList
+globalAddressesList pGalProject_ =
+    GlobalAddressesList
     { _galProject = pGalProject_
     , _galFilter = Nothing
     , _galPageToken = Nothing
@@ -86,7 +86,7 @@ globalAddressesList' pGalProject_ =
     }
 
 -- | Project ID for this request.
-galProject :: Lens' GlobalAddressesList' Text
+galProject :: Lens' GlobalAddressesList Text
 galProject
   = lens _galProject (\ s a -> s{_galProject = a})
 
@@ -101,26 +101,26 @@ galProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-galFilter :: Lens' GlobalAddressesList' (Maybe Text)
+galFilter :: Lens' GlobalAddressesList (Maybe Text)
 galFilter
   = lens _galFilter (\ s a -> s{_galFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-galPageToken :: Lens' GlobalAddressesList' (Maybe Text)
+galPageToken :: Lens' GlobalAddressesList (Maybe Text)
 galPageToken
   = lens _galPageToken (\ s a -> s{_galPageToken = a})
 
 -- | Maximum count of results to be returned.
-galMaxResults :: Lens' GlobalAddressesList' Word32
+galMaxResults :: Lens' GlobalAddressesList Word32
 galMaxResults
   = lens _galMaxResults
       (\ s a -> s{_galMaxResults = a})
 
-instance GoogleRequest GlobalAddressesList' where
-        type Rs GlobalAddressesList' = AddressList
-        requestClient GlobalAddressesList'{..}
+instance GoogleRequest GlobalAddressesList where
+        type Rs GlobalAddressesList = AddressList
+        requestClient GlobalAddressesList{..}
           = go _galProject _galFilter _galPageToken
               (Just _galMaxResults)
               (Just AltJSON)

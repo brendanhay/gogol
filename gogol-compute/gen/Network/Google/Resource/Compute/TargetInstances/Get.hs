@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.TargetInstances.Get
       TargetInstancesGetResource
 
     -- * Creating a Request
-    , targetInstancesGet'
-    , TargetInstancesGet'
+    , targetInstancesGet
+    , TargetInstancesGet
 
     -- * Request Lenses
     , tigProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetInstances.get@ method which the
--- 'TargetInstancesGet'' request conforms to.
+-- 'TargetInstancesGet' request conforms to.
 type TargetInstancesGetResource =
      Capture "project" Text :>
        "zones" :>
@@ -54,14 +54,14 @@ type TargetInstancesGetResource =
 
 -- | Returns the specified TargetInstance resource.
 --
--- /See:/ 'targetInstancesGet'' smart constructor.
-data TargetInstancesGet' = TargetInstancesGet'
+-- /See:/ 'targetInstancesGet' smart constructor.
+data TargetInstancesGet = TargetInstancesGet
     { _tigProject        :: !Text
     , _tigTargetInstance :: !Text
     , _tigZone           :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetInstancesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetInstancesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,36 +70,36 @@ data TargetInstancesGet' = TargetInstancesGet'
 -- * 'tigTargetInstance'
 --
 -- * 'tigZone'
-targetInstancesGet'
+targetInstancesGet
     :: Text -- ^ 'tigProject'
     -> Text -- ^ 'tigTargetInstance'
     -> Text -- ^ 'tigZone'
-    -> TargetInstancesGet'
-targetInstancesGet' pTigProject_ pTigTargetInstance_ pTigZone_ =
-    TargetInstancesGet'
+    -> TargetInstancesGet
+targetInstancesGet pTigProject_ pTigTargetInstance_ pTigZone_ =
+    TargetInstancesGet
     { _tigProject = pTigProject_
     , _tigTargetInstance = pTigTargetInstance_
     , _tigZone = pTigZone_
     }
 
 -- | Name of the project scoping this request.
-tigProject :: Lens' TargetInstancesGet' Text
+tigProject :: Lens' TargetInstancesGet Text
 tigProject
   = lens _tigProject (\ s a -> s{_tigProject = a})
 
 -- | Name of the TargetInstance resource to return.
-tigTargetInstance :: Lens' TargetInstancesGet' Text
+tigTargetInstance :: Lens' TargetInstancesGet Text
 tigTargetInstance
   = lens _tigTargetInstance
       (\ s a -> s{_tigTargetInstance = a})
 
 -- | Name of the zone scoping this request.
-tigZone :: Lens' TargetInstancesGet' Text
+tigZone :: Lens' TargetInstancesGet Text
 tigZone = lens _tigZone (\ s a -> s{_tigZone = a})
 
-instance GoogleRequest TargetInstancesGet' where
-        type Rs TargetInstancesGet' = TargetInstance
-        requestClient TargetInstancesGet'{..}
+instance GoogleRequest TargetInstancesGet where
+        type Rs TargetInstancesGet = TargetInstance
+        requestClient TargetInstancesGet{..}
           = go _tigProject _tigZone _tigTargetInstance
               (Just AltJSON)
               computeService

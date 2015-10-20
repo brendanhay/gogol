@@ -29,8 +29,8 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Update
       ProjectsJobsUpdateResource
 
     -- * Creating a Request
-    , projectsJobsUpdate'
-    , ProjectsJobsUpdate'
+    , projectsJobsUpdate
+    , ProjectsJobsUpdate
 
     -- * Request Lenses
     , pjuXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.jobs.update@ method which the
--- 'ProjectsJobsUpdate'' request conforms to.
+-- 'ProjectsJobsUpdate' request conforms to.
 type ProjectsJobsUpdateResource =
      "v1b3" :>
        "projects" :>
@@ -68,8 +68,8 @@ type ProjectsJobsUpdateResource =
 
 -- | Updates the state of an existing dataflow job.
 --
--- /See:/ 'projectsJobsUpdate'' smart constructor.
-data ProjectsJobsUpdate' = ProjectsJobsUpdate'
+-- /See:/ 'projectsJobsUpdate' smart constructor.
+data ProjectsJobsUpdate = ProjectsJobsUpdate
     { _pjuXgafv          :: !(Maybe Text)
     , _pjuJobId          :: !Text
     , _pjuUploadProtocol :: !(Maybe Text)
@@ -82,7 +82,7 @@ data ProjectsJobsUpdate' = ProjectsJobsUpdate'
     , _pjuCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsJobsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsJobsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -105,13 +105,13 @@ data ProjectsJobsUpdate' = ProjectsJobsUpdate'
 -- * 'pjuProjectId'
 --
 -- * 'pjuCallback'
-projectsJobsUpdate'
+projectsJobsUpdate
     :: Text -- ^ 'pjuJobId'
     -> Job -- ^ 'pjuPayload'
     -> Text -- ^ 'pjuProjectId'
-    -> ProjectsJobsUpdate'
-projectsJobsUpdate' pPjuJobId_ pPjuPayload_ pPjuProjectId_ =
-    ProjectsJobsUpdate'
+    -> ProjectsJobsUpdate
+projectsJobsUpdate pPjuJobId_ pPjuPayload_ pPjuProjectId_ =
+    ProjectsJobsUpdate
     { _pjuXgafv = Nothing
     , _pjuJobId = pPjuJobId_
     , _pjuUploadProtocol = Nothing
@@ -125,59 +125,59 @@ projectsJobsUpdate' pPjuJobId_ pPjuPayload_ pPjuProjectId_ =
     }
 
 -- | V1 error format.
-pjuXgafv :: Lens' ProjectsJobsUpdate' (Maybe Text)
+pjuXgafv :: Lens' ProjectsJobsUpdate (Maybe Text)
 pjuXgafv = lens _pjuXgafv (\ s a -> s{_pjuXgafv = a})
 
 -- | Identifies a single job.
-pjuJobId :: Lens' ProjectsJobsUpdate' Text
+pjuJobId :: Lens' ProjectsJobsUpdate Text
 pjuJobId = lens _pjuJobId (\ s a -> s{_pjuJobId = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pjuUploadProtocol :: Lens' ProjectsJobsUpdate' (Maybe Text)
+pjuUploadProtocol :: Lens' ProjectsJobsUpdate (Maybe Text)
 pjuUploadProtocol
   = lens _pjuUploadProtocol
       (\ s a -> s{_pjuUploadProtocol = a})
 
 -- | Pretty-print response.
-pjuPp :: Lens' ProjectsJobsUpdate' Bool
+pjuPp :: Lens' ProjectsJobsUpdate Bool
 pjuPp = lens _pjuPp (\ s a -> s{_pjuPp = a})
 
 -- | OAuth access token.
-pjuAccessToken :: Lens' ProjectsJobsUpdate' (Maybe Text)
+pjuAccessToken :: Lens' ProjectsJobsUpdate (Maybe Text)
 pjuAccessToken
   = lens _pjuAccessToken
       (\ s a -> s{_pjuAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pjuUploadType :: Lens' ProjectsJobsUpdate' (Maybe Text)
+pjuUploadType :: Lens' ProjectsJobsUpdate (Maybe Text)
 pjuUploadType
   = lens _pjuUploadType
       (\ s a -> s{_pjuUploadType = a})
 
 -- | Multipart request metadata.
-pjuPayload :: Lens' ProjectsJobsUpdate' Job
+pjuPayload :: Lens' ProjectsJobsUpdate Job
 pjuPayload
   = lens _pjuPayload (\ s a -> s{_pjuPayload = a})
 
 -- | OAuth bearer token.
-pjuBearerToken :: Lens' ProjectsJobsUpdate' (Maybe Text)
+pjuBearerToken :: Lens' ProjectsJobsUpdate (Maybe Text)
 pjuBearerToken
   = lens _pjuBearerToken
       (\ s a -> s{_pjuBearerToken = a})
 
 -- | The project which owns the job.
-pjuProjectId :: Lens' ProjectsJobsUpdate' Text
+pjuProjectId :: Lens' ProjectsJobsUpdate Text
 pjuProjectId
   = lens _pjuProjectId (\ s a -> s{_pjuProjectId = a})
 
 -- | JSONP
-pjuCallback :: Lens' ProjectsJobsUpdate' (Maybe Text)
+pjuCallback :: Lens' ProjectsJobsUpdate (Maybe Text)
 pjuCallback
   = lens _pjuCallback (\ s a -> s{_pjuCallback = a})
 
-instance GoogleRequest ProjectsJobsUpdate' where
-        type Rs ProjectsJobsUpdate' = Job
-        requestClient ProjectsJobsUpdate'{..}
+instance GoogleRequest ProjectsJobsUpdate where
+        type Rs ProjectsJobsUpdate = Job
+        requestClient ProjectsJobsUpdate{..}
           = go _pjuProjectId _pjuJobId _pjuXgafv
               _pjuUploadProtocol
               (Just _pjuPp)

@@ -30,8 +30,8 @@ module Network.Google.Resource.YouTube.PlayListItems.Update
       PlayListItemsUpdateResource
 
     -- * Creating a Request
-    , playListItemsUpdate'
-    , PlayListItemsUpdate'
+    , playListItemsUpdate
+    , PlayListItemsUpdate
 
     -- * Request Lenses
     , pliuPart
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.playlistItems.update@ method which the
--- 'PlayListItemsUpdate'' request conforms to.
+-- 'PlayListItemsUpdate' request conforms to.
 type PlayListItemsUpdateResource =
      "playlistItems" :>
        QueryParam "part" Text :>
@@ -53,25 +53,25 @@ type PlayListItemsUpdateResource =
 -- | Modifies a playlist item. For example, you could update the item\'s
 -- position in the playlist.
 --
--- /See:/ 'playListItemsUpdate'' smart constructor.
-data PlayListItemsUpdate' = PlayListItemsUpdate'
+-- /See:/ 'playListItemsUpdate' smart constructor.
+data PlayListItemsUpdate = PlayListItemsUpdate
     { _pliuPart    :: !Text
     , _pliuPayload :: !PlayListItem
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlayListItemsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayListItemsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pliuPart'
 --
 -- * 'pliuPayload'
-playListItemsUpdate'
+playListItemsUpdate
     :: Text -- ^ 'pliuPart'
     -> PlayListItem -- ^ 'pliuPayload'
-    -> PlayListItemsUpdate'
-playListItemsUpdate' pPliuPart_ pPliuPayload_ =
-    PlayListItemsUpdate'
+    -> PlayListItemsUpdate
+playListItemsUpdate pPliuPart_ pPliuPayload_ =
+    PlayListItemsUpdate
     { _pliuPart = pPliuPart_
     , _pliuPayload = pPliuPayload_
     }
@@ -89,17 +89,17 @@ playListItemsUpdate' pPliuPart_ pPliuPayload_ =
 -- times will be updated to whatever value the request body specifies. If
 -- the request body does not specify values, the existing start and end
 -- times will be removed and replaced with the default settings.
-pliuPart :: Lens' PlayListItemsUpdate' Text
+pliuPart :: Lens' PlayListItemsUpdate Text
 pliuPart = lens _pliuPart (\ s a -> s{_pliuPart = a})
 
 -- | Multipart request metadata.
-pliuPayload :: Lens' PlayListItemsUpdate' PlayListItem
+pliuPayload :: Lens' PlayListItemsUpdate PlayListItem
 pliuPayload
   = lens _pliuPayload (\ s a -> s{_pliuPayload = a})
 
-instance GoogleRequest PlayListItemsUpdate' where
-        type Rs PlayListItemsUpdate' = PlayListItem
-        requestClient PlayListItemsUpdate'{..}
+instance GoogleRequest PlayListItemsUpdate where
+        type Rs PlayListItemsUpdate = PlayListItem
+        requestClient PlayListItemsUpdate{..}
           = go (Just _pliuPart) (Just AltJSON) _pliuPayload
               youTubeService
           where go

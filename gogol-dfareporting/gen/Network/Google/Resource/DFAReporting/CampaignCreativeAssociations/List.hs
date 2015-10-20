@@ -30,8 +30,8 @@ module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.List
       CampaignCreativeAssociationsListResource
 
     -- * Creating a Request
-    , campaignCreativeAssociationsList'
-    , CampaignCreativeAssociationsList'
+    , campaignCreativeAssociationsList
+    , CampaignCreativeAssociationsList
 
     -- * Request Lenses
     , ccalCampaignId
@@ -45,7 +45,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.campaignCreativeAssociations.list@ method which the
--- 'CampaignCreativeAssociationsList'' request conforms to.
+-- 'CampaignCreativeAssociationsList' request conforms to.
 type CampaignCreativeAssociationsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -63,8 +63,8 @@ type CampaignCreativeAssociationsListResource =
 -- | Retrieves the list of creative IDs associated with the specified
 -- campaign.
 --
--- /See:/ 'campaignCreativeAssociationsList'' smart constructor.
-data CampaignCreativeAssociationsList' = CampaignCreativeAssociationsList'
+-- /See:/ 'campaignCreativeAssociationsList' smart constructor.
+data CampaignCreativeAssociationsList = CampaignCreativeAssociationsList
     { _ccalCampaignId :: !Int64
     , _ccalProFileId  :: !Int64
     , _ccalSortOrder  :: !(Maybe CampaignCreativeAssociationsListSortOrder)
@@ -72,7 +72,7 @@ data CampaignCreativeAssociationsList' = CampaignCreativeAssociationsList'
     , _ccalMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CampaignCreativeAssociationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CampaignCreativeAssociationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -85,12 +85,12 @@ data CampaignCreativeAssociationsList' = CampaignCreativeAssociationsList'
 -- * 'ccalPageToken'
 --
 -- * 'ccalMaxResults'
-campaignCreativeAssociationsList'
+campaignCreativeAssociationsList
     :: Int64 -- ^ 'ccalCampaignId'
     -> Int64 -- ^ 'ccalProFileId'
-    -> CampaignCreativeAssociationsList'
-campaignCreativeAssociationsList' pCcalCampaignId_ pCcalProFileId_ =
-    CampaignCreativeAssociationsList'
+    -> CampaignCreativeAssociationsList
+campaignCreativeAssociationsList pCcalCampaignId_ pCcalProFileId_ =
+    CampaignCreativeAssociationsList
     { _ccalCampaignId = pCcalCampaignId_
     , _ccalProFileId = pCcalProFileId_
     , _ccalSortOrder = Nothing
@@ -99,40 +99,40 @@ campaignCreativeAssociationsList' pCcalCampaignId_ pCcalProFileId_ =
     }
 
 -- | Campaign ID in this association.
-ccalCampaignId :: Lens' CampaignCreativeAssociationsList' Int64
+ccalCampaignId :: Lens' CampaignCreativeAssociationsList Int64
 ccalCampaignId
   = lens _ccalCampaignId
       (\ s a -> s{_ccalCampaignId = a})
 
 -- | User profile ID associated with this request.
-ccalProFileId :: Lens' CampaignCreativeAssociationsList' Int64
+ccalProFileId :: Lens' CampaignCreativeAssociationsList Int64
 ccalProFileId
   = lens _ccalProFileId
       (\ s a -> s{_ccalProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-ccalSortOrder :: Lens' CampaignCreativeAssociationsList' (Maybe CampaignCreativeAssociationsListSortOrder)
+ccalSortOrder :: Lens' CampaignCreativeAssociationsList (Maybe CampaignCreativeAssociationsListSortOrder)
 ccalSortOrder
   = lens _ccalSortOrder
       (\ s a -> s{_ccalSortOrder = a})
 
 -- | Value of the nextPageToken from the previous result page.
-ccalPageToken :: Lens' CampaignCreativeAssociationsList' (Maybe Text)
+ccalPageToken :: Lens' CampaignCreativeAssociationsList (Maybe Text)
 ccalPageToken
   = lens _ccalPageToken
       (\ s a -> s{_ccalPageToken = a})
 
 -- | Maximum number of results to return.
-ccalMaxResults :: Lens' CampaignCreativeAssociationsList' (Maybe Int32)
+ccalMaxResults :: Lens' CampaignCreativeAssociationsList (Maybe Int32)
 ccalMaxResults
   = lens _ccalMaxResults
       (\ s a -> s{_ccalMaxResults = a})
 
 instance GoogleRequest
-         CampaignCreativeAssociationsList' where
-        type Rs CampaignCreativeAssociationsList' =
+         CampaignCreativeAssociationsList where
+        type Rs CampaignCreativeAssociationsList =
              CampaignCreativeAssociationsListResponse
-        requestClient CampaignCreativeAssociationsList'{..}
+        requestClient CampaignCreativeAssociationsList{..}
           = go _ccalProFileId _ccalCampaignId _ccalSortOrder
               _ccalPageToken
               _ccalMaxResults

@@ -30,8 +30,8 @@ module Network.Google.Resource.SQL.Databases.Delete
       DatabasesDeleteResource
 
     -- * Creating a Request
-    , databasesDelete'
-    , DatabasesDelete'
+    , databasesDelete
+    , DatabasesDelete
 
     -- * Request Lenses
     , ddProject
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.databases.delete@ method which the
--- 'DatabasesDelete'' request conforms to.
+-- 'DatabasesDelete' request conforms to.
 type DatabasesDeleteResource =
      "projects" :>
        Capture "project" Text :>
@@ -56,14 +56,14 @@ type DatabasesDeleteResource =
 -- | Deletes a resource containing information about a database inside a
 -- Cloud SQL instance.
 --
--- /See:/ 'databasesDelete'' smart constructor.
-data DatabasesDelete' = DatabasesDelete'
+-- /See:/ 'databasesDelete' smart constructor.
+data DatabasesDelete = DatabasesDelete
     { _ddProject  :: !Text
     , _ddDatabase :: !Text
     , _ddInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatabasesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatabasesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,36 +72,36 @@ data DatabasesDelete' = DatabasesDelete'
 -- * 'ddDatabase'
 --
 -- * 'ddInstance'
-databasesDelete'
+databasesDelete
     :: Text -- ^ 'ddProject'
     -> Text -- ^ 'ddDatabase'
     -> Text -- ^ 'ddInstance'
-    -> DatabasesDelete'
-databasesDelete' pDdProject_ pDdDatabase_ pDdInstance_ =
-    DatabasesDelete'
+    -> DatabasesDelete
+databasesDelete pDdProject_ pDdDatabase_ pDdInstance_ =
+    DatabasesDelete
     { _ddProject = pDdProject_
     , _ddDatabase = pDdDatabase_
     , _ddInstance = pDdInstance_
     }
 
 -- | Project ID of the project that contains the instance.
-ddProject :: Lens' DatabasesDelete' Text
+ddProject :: Lens' DatabasesDelete Text
 ddProject
   = lens _ddProject (\ s a -> s{_ddProject = a})
 
 -- | Name of the database to be deleted in the instance.
-ddDatabase :: Lens' DatabasesDelete' Text
+ddDatabase :: Lens' DatabasesDelete Text
 ddDatabase
   = lens _ddDatabase (\ s a -> s{_ddDatabase = a})
 
 -- | Database instance ID. This does not include the project ID.
-ddInstance :: Lens' DatabasesDelete' Text
+ddInstance :: Lens' DatabasesDelete Text
 ddInstance
   = lens _ddInstance (\ s a -> s{_ddInstance = a})
 
-instance GoogleRequest DatabasesDelete' where
-        type Rs DatabasesDelete' = Operation
-        requestClient DatabasesDelete'{..}
+instance GoogleRequest DatabasesDelete where
+        type Rs DatabasesDelete = Operation
+        requestClient DatabasesDelete{..}
           = go _ddProject _ddInstance _ddDatabase
               (Just AltJSON)
               sQLAdminService

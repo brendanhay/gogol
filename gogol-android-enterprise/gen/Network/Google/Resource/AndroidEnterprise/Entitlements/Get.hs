@@ -29,20 +29,20 @@ module Network.Google.Resource.AndroidEnterprise.Entitlements.Get
       EntitlementsGetResource
 
     -- * Creating a Request
-    , entitlementsGet'
-    , EntitlementsGet'
+    , entitlementsGet
+    , EntitlementsGet
 
     -- * Request Lenses
-    , eEntitlementId
-    , eEnterpriseId
-    , eUserId
+    , egEntitlementId
+    , egEnterpriseId
+    , egUserId
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.entitlements.get@ method which the
--- 'EntitlementsGet'' request conforms to.
+-- 'EntitlementsGet' request conforms to.
 type EntitlementsGetResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -54,54 +54,54 @@ type EntitlementsGetResource =
 
 -- | Retrieves details of an entitlement.
 --
--- /See:/ 'entitlementsGet'' smart constructor.
-data EntitlementsGet' = EntitlementsGet'
-    { _eEntitlementId :: !Text
-    , _eEnterpriseId  :: !Text
-    , _eUserId        :: !Text
+-- /See:/ 'entitlementsGet' smart constructor.
+data EntitlementsGet = EntitlementsGet
+    { _egEntitlementId :: !Text
+    , _egEnterpriseId  :: !Text
+    , _egUserId        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EntitlementsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'EntitlementsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eEntitlementId'
+-- * 'egEntitlementId'
 --
--- * 'eEnterpriseId'
+-- * 'egEnterpriseId'
 --
--- * 'eUserId'
-entitlementsGet'
-    :: Text -- ^ 'eEntitlementId'
-    -> Text -- ^ 'eEnterpriseId'
-    -> Text -- ^ 'eUserId'
-    -> EntitlementsGet'
-entitlementsGet' pEEntitlementId_ pEEnterpriseId_ pEUserId_ =
-    EntitlementsGet'
-    { _eEntitlementId = pEEntitlementId_
-    , _eEnterpriseId = pEEnterpriseId_
-    , _eUserId = pEUserId_
+-- * 'egUserId'
+entitlementsGet
+    :: Text -- ^ 'egEntitlementId'
+    -> Text -- ^ 'egEnterpriseId'
+    -> Text -- ^ 'egUserId'
+    -> EntitlementsGet
+entitlementsGet pEgEntitlementId_ pEgEnterpriseId_ pEgUserId_ =
+    EntitlementsGet
+    { _egEntitlementId = pEgEntitlementId_
+    , _egEnterpriseId = pEgEnterpriseId_
+    , _egUserId = pEgUserId_
     }
 
 -- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
-eEntitlementId :: Lens' EntitlementsGet' Text
-eEntitlementId
-  = lens _eEntitlementId
-      (\ s a -> s{_eEntitlementId = a})
+egEntitlementId :: Lens' EntitlementsGet Text
+egEntitlementId
+  = lens _egEntitlementId
+      (\ s a -> s{_egEntitlementId = a})
 
 -- | The ID of the enterprise.
-eEnterpriseId :: Lens' EntitlementsGet' Text
-eEnterpriseId
-  = lens _eEnterpriseId
-      (\ s a -> s{_eEnterpriseId = a})
+egEnterpriseId :: Lens' EntitlementsGet Text
+egEnterpriseId
+  = lens _egEnterpriseId
+      (\ s a -> s{_egEnterpriseId = a})
 
 -- | The ID of the user.
-eUserId :: Lens' EntitlementsGet' Text
-eUserId = lens _eUserId (\ s a -> s{_eUserId = a})
+egUserId :: Lens' EntitlementsGet Text
+egUserId = lens _egUserId (\ s a -> s{_egUserId = a})
 
-instance GoogleRequest EntitlementsGet' where
-        type Rs EntitlementsGet' = Entitlement
-        requestClient EntitlementsGet'{..}
-          = go _eEnterpriseId _eUserId _eEntitlementId
+instance GoogleRequest EntitlementsGet where
+        type Rs EntitlementsGet = Entitlement
+        requestClient EntitlementsGet{..}
+          = go _egEnterpriseId _egUserId _egEntitlementId
               (Just AltJSON)
               androidEnterpriseService
           where go

@@ -30,8 +30,8 @@ module Network.Google.Resource.Analytics.Management.Goals.Patch
       ManagementGoalsPatchResource
 
     -- * Creating a Request
-    , managementGoalsPatch'
-    , ManagementGoalsPatch'
+    , managementGoalsPatch
+    , ManagementGoalsPatch
 
     -- * Request Lenses
     , mgpWebPropertyId
@@ -45,7 +45,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.goals.patch@ method which the
--- 'ManagementGoalsPatch'' request conforms to.
+-- 'ManagementGoalsPatch' request conforms to.
 type ManagementGoalsPatchResource =
      "management" :>
        "accounts" :>
@@ -62,8 +62,8 @@ type ManagementGoalsPatchResource =
 -- | Updates an existing view (profile). This method supports patch
 -- semantics.
 --
--- /See:/ 'managementGoalsPatch'' smart constructor.
-data ManagementGoalsPatch' = ManagementGoalsPatch'
+-- /See:/ 'managementGoalsPatch' smart constructor.
+data ManagementGoalsPatch = ManagementGoalsPatch
     { _mgpWebPropertyId :: !Text
     , _mgpGoalId        :: !Text
     , _mgpProFileId     :: !Text
@@ -71,7 +71,7 @@ data ManagementGoalsPatch' = ManagementGoalsPatch'
     , _mgpAccountId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementGoalsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementGoalsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -84,15 +84,15 @@ data ManagementGoalsPatch' = ManagementGoalsPatch'
 -- * 'mgpPayload'
 --
 -- * 'mgpAccountId'
-managementGoalsPatch'
+managementGoalsPatch
     :: Text -- ^ 'mgpWebPropertyId'
     -> Text -- ^ 'mgpGoalId'
     -> Text -- ^ 'mgpProFileId'
     -> Goal -- ^ 'mgpPayload'
     -> Text -- ^ 'mgpAccountId'
-    -> ManagementGoalsPatch'
-managementGoalsPatch' pMgpWebPropertyId_ pMgpGoalId_ pMgpProFileId_ pMgpPayload_ pMgpAccountId_ =
-    ManagementGoalsPatch'
+    -> ManagementGoalsPatch
+managementGoalsPatch pMgpWebPropertyId_ pMgpGoalId_ pMgpProFileId_ pMgpPayload_ pMgpAccountId_ =
+    ManagementGoalsPatch
     { _mgpWebPropertyId = pMgpWebPropertyId_
     , _mgpGoalId = pMgpGoalId_
     , _mgpProFileId = pMgpProFileId_
@@ -101,34 +101,34 @@ managementGoalsPatch' pMgpWebPropertyId_ pMgpGoalId_ pMgpProFileId_ pMgpPayload_
     }
 
 -- | Web property ID to update the goal.
-mgpWebPropertyId :: Lens' ManagementGoalsPatch' Text
+mgpWebPropertyId :: Lens' ManagementGoalsPatch Text
 mgpWebPropertyId
   = lens _mgpWebPropertyId
       (\ s a -> s{_mgpWebPropertyId = a})
 
 -- | Index of the goal to be updated.
-mgpGoalId :: Lens' ManagementGoalsPatch' Text
+mgpGoalId :: Lens' ManagementGoalsPatch Text
 mgpGoalId
   = lens _mgpGoalId (\ s a -> s{_mgpGoalId = a})
 
 -- | View (Profile) ID to update the goal.
-mgpProFileId :: Lens' ManagementGoalsPatch' Text
+mgpProFileId :: Lens' ManagementGoalsPatch Text
 mgpProFileId
   = lens _mgpProFileId (\ s a -> s{_mgpProFileId = a})
 
 -- | Multipart request metadata.
-mgpPayload :: Lens' ManagementGoalsPatch' Goal
+mgpPayload :: Lens' ManagementGoalsPatch Goal
 mgpPayload
   = lens _mgpPayload (\ s a -> s{_mgpPayload = a})
 
 -- | Account ID to update the goal.
-mgpAccountId :: Lens' ManagementGoalsPatch' Text
+mgpAccountId :: Lens' ManagementGoalsPatch Text
 mgpAccountId
   = lens _mgpAccountId (\ s a -> s{_mgpAccountId = a})
 
-instance GoogleRequest ManagementGoalsPatch' where
-        type Rs ManagementGoalsPatch' = Goal
-        requestClient ManagementGoalsPatch'{..}
+instance GoogleRequest ManagementGoalsPatch where
+        type Rs ManagementGoalsPatch = Goal
+        requestClient ManagementGoalsPatch{..}
           = go _mgpAccountId _mgpWebPropertyId _mgpProFileId
               _mgpGoalId
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Filters.Delete
       ManagementFiltersDeleteResource
 
     -- * Creating a Request
-    , managementFiltersDelete'
-    , ManagementFiltersDelete'
+    , managementFiltersDelete
+    , ManagementFiltersDelete
 
     -- * Request Lenses
     , mfdFilterId
@@ -41,7 +41,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.filters.delete@ method which the
--- 'ManagementFiltersDelete'' request conforms to.
+-- 'ManagementFiltersDelete' request conforms to.
 type ManagementFiltersDeleteResource =
      "management" :>
        "accounts" :>
@@ -52,42 +52,42 @@ type ManagementFiltersDeleteResource =
 
 -- | Delete a filter.
 --
--- /See:/ 'managementFiltersDelete'' smart constructor.
-data ManagementFiltersDelete' = ManagementFiltersDelete'
+-- /See:/ 'managementFiltersDelete' smart constructor.
+data ManagementFiltersDelete = ManagementFiltersDelete
     { _mfdFilterId  :: !Text
     , _mfdAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementFiltersDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementFiltersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mfdFilterId'
 --
 -- * 'mfdAccountId'
-managementFiltersDelete'
+managementFiltersDelete
     :: Text -- ^ 'mfdFilterId'
     -> Text -- ^ 'mfdAccountId'
-    -> ManagementFiltersDelete'
-managementFiltersDelete' pMfdFilterId_ pMfdAccountId_ =
-    ManagementFiltersDelete'
+    -> ManagementFiltersDelete
+managementFiltersDelete pMfdFilterId_ pMfdAccountId_ =
+    ManagementFiltersDelete
     { _mfdFilterId = pMfdFilterId_
     , _mfdAccountId = pMfdAccountId_
     }
 
 -- | ID of the filter to be deleted.
-mfdFilterId :: Lens' ManagementFiltersDelete' Text
+mfdFilterId :: Lens' ManagementFiltersDelete Text
 mfdFilterId
   = lens _mfdFilterId (\ s a -> s{_mfdFilterId = a})
 
 -- | Account ID to delete the filter for.
-mfdAccountId :: Lens' ManagementFiltersDelete' Text
+mfdAccountId :: Lens' ManagementFiltersDelete Text
 mfdAccountId
   = lens _mfdAccountId (\ s a -> s{_mfdAccountId = a})
 
-instance GoogleRequest ManagementFiltersDelete' where
-        type Rs ManagementFiltersDelete' = Filter
-        requestClient ManagementFiltersDelete'{..}
+instance GoogleRequest ManagementFiltersDelete where
+        type Rs ManagementFiltersDelete = Filter
+        requestClient ManagementFiltersDelete{..}
           = go _mfdAccountId _mfdFilterId (Just AltJSON)
               analyticsService
           where go

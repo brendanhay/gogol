@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
       MyLibraryBookshelvesVolumesListResource
 
     -- * Creating a Request
-    , myLibraryBookshelvesVolumesList'
-    , MyLibraryBookshelvesVolumesList'
+    , myLibraryBookshelvesVolumesList
+    , MyLibraryBookshelvesVolumesList
 
     -- * Request Lenses
     , mlbvlCountry
@@ -47,7 +47,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.bookshelves.volumes.list@ method which the
--- 'MyLibraryBookshelvesVolumesList'' request conforms to.
+-- 'MyLibraryBookshelvesVolumesList' request conforms to.
 type MyLibraryBookshelvesVolumesListResource =
      "mylibrary" :>
        "bookshelves" :>
@@ -66,8 +66,8 @@ type MyLibraryBookshelvesVolumesListResource =
 
 -- | Gets volume information for volumes on a bookshelf.
 --
--- /See:/ 'myLibraryBookshelvesVolumesList'' smart constructor.
-data MyLibraryBookshelvesVolumesList' = MyLibraryBookshelvesVolumesList'
+-- /See:/ 'myLibraryBookshelvesVolumesList' smart constructor.
+data MyLibraryBookshelvesVolumesList = MyLibraryBookshelvesVolumesList
     { _mlbvlCountry       :: !(Maybe Text)
     , _mlbvlQ             :: !(Maybe Text)
     , _mlbvlShelf         :: !Text
@@ -78,7 +78,7 @@ data MyLibraryBookshelvesVolumesList' = MyLibraryBookshelvesVolumesList'
     , _mlbvlShowPreOrders :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MyLibraryBookshelvesVolumesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'MyLibraryBookshelvesVolumesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -97,11 +97,11 @@ data MyLibraryBookshelvesVolumesList' = MyLibraryBookshelvesVolumesList'
 -- * 'mlbvlMaxResults'
 --
 -- * 'mlbvlShowPreOrders'
-myLibraryBookshelvesVolumesList'
+myLibraryBookshelvesVolumesList
     :: Text -- ^ 'mlbvlShelf'
-    -> MyLibraryBookshelvesVolumesList'
-myLibraryBookshelvesVolumesList' pMlbvlShelf_ =
-    MyLibraryBookshelvesVolumesList'
+    -> MyLibraryBookshelvesVolumesList
+myLibraryBookshelvesVolumesList pMlbvlShelf_ =
+    MyLibraryBookshelvesVolumesList
     { _mlbvlCountry = Nothing
     , _mlbvlQ = Nothing
     , _mlbvlShelf = pMlbvlShelf_
@@ -113,52 +113,52 @@ myLibraryBookshelvesVolumesList' pMlbvlShelf_ =
     }
 
 -- | ISO-3166-1 code to override the IP-based location.
-mlbvlCountry :: Lens' MyLibraryBookshelvesVolumesList' (Maybe Text)
+mlbvlCountry :: Lens' MyLibraryBookshelvesVolumesList (Maybe Text)
 mlbvlCountry
   = lens _mlbvlCountry (\ s a -> s{_mlbvlCountry = a})
 
 -- | Full-text search query string in this bookshelf.
-mlbvlQ :: Lens' MyLibraryBookshelvesVolumesList' (Maybe Text)
+mlbvlQ :: Lens' MyLibraryBookshelvesVolumesList (Maybe Text)
 mlbvlQ = lens _mlbvlQ (\ s a -> s{_mlbvlQ = a})
 
 -- | The bookshelf ID or name retrieve volumes for.
-mlbvlShelf :: Lens' MyLibraryBookshelvesVolumesList' Text
+mlbvlShelf :: Lens' MyLibraryBookshelvesVolumesList Text
 mlbvlShelf
   = lens _mlbvlShelf (\ s a -> s{_mlbvlShelf = a})
 
 -- | String to identify the originator of this request.
-mlbvlSource :: Lens' MyLibraryBookshelvesVolumesList' (Maybe Text)
+mlbvlSource :: Lens' MyLibraryBookshelvesVolumesList (Maybe Text)
 mlbvlSource
   = lens _mlbvlSource (\ s a -> s{_mlbvlSource = a})
 
 -- | Restrict information returned to a set of selected fields.
-mlbvlProjection :: Lens' MyLibraryBookshelvesVolumesList' (Maybe MyLibraryBookshelvesVolumesListProjection)
+mlbvlProjection :: Lens' MyLibraryBookshelvesVolumesList (Maybe MyLibraryBookshelvesVolumesListProjection)
 mlbvlProjection
   = lens _mlbvlProjection
       (\ s a -> s{_mlbvlProjection = a})
 
 -- | Index of the first element to return (starts at 0)
-mlbvlStartIndex :: Lens' MyLibraryBookshelvesVolumesList' (Maybe Word32)
+mlbvlStartIndex :: Lens' MyLibraryBookshelvesVolumesList (Maybe Word32)
 mlbvlStartIndex
   = lens _mlbvlStartIndex
       (\ s a -> s{_mlbvlStartIndex = a})
 
 -- | Maximum number of results to return
-mlbvlMaxResults :: Lens' MyLibraryBookshelvesVolumesList' (Maybe Word32)
+mlbvlMaxResults :: Lens' MyLibraryBookshelvesVolumesList (Maybe Word32)
 mlbvlMaxResults
   = lens _mlbvlMaxResults
       (\ s a -> s{_mlbvlMaxResults = a})
 
 -- | Set to true to show pre-ordered books. Defaults to false.
-mlbvlShowPreOrders :: Lens' MyLibraryBookshelvesVolumesList' (Maybe Bool)
+mlbvlShowPreOrders :: Lens' MyLibraryBookshelvesVolumesList (Maybe Bool)
 mlbvlShowPreOrders
   = lens _mlbvlShowPreOrders
       (\ s a -> s{_mlbvlShowPreOrders = a})
 
 instance GoogleRequest
-         MyLibraryBookshelvesVolumesList' where
-        type Rs MyLibraryBookshelvesVolumesList' = Volumes
-        requestClient MyLibraryBookshelvesVolumesList'{..}
+         MyLibraryBookshelvesVolumesList where
+        type Rs MyLibraryBookshelvesVolumesList = Volumes
+        requestClient MyLibraryBookshelvesVolumesList{..}
           = go _mlbvlShelf _mlbvlCountry _mlbvlQ _mlbvlSource
               _mlbvlProjection
               _mlbvlStartIndex

@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.Negotiations.Get
       NegotiationsGetResource
 
     -- * Creating a Request
-    , negotiationsGet'
-    , NegotiationsGet'
+    , negotiationsGet
+    , NegotiationsGet
 
     -- * Request Lenses
     , ngPayload
@@ -41,7 +41,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.negotiations.get@ method which the
--- 'NegotiationsGet'' request conforms to.
+-- 'NegotiationsGet' request conforms to.
 type NegotiationsGetResource =
      "negotiations" :>
        Capture "negotiationId" Int64 :>
@@ -51,42 +51,42 @@ type NegotiationsGetResource =
 
 -- | Gets the requested negotiation.
 --
--- /See:/ 'negotiationsGet'' smart constructor.
-data NegotiationsGet' = NegotiationsGet'
+-- /See:/ 'negotiationsGet' smart constructor.
+data NegotiationsGet = NegotiationsGet
     { _ngPayload       :: !GetNegotiationByIdRequest
     , _ngNegotiationId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'NegotiationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'NegotiationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ngPayload'
 --
 -- * 'ngNegotiationId'
-negotiationsGet'
+negotiationsGet
     :: GetNegotiationByIdRequest -- ^ 'ngPayload'
     -> Int64 -- ^ 'ngNegotiationId'
-    -> NegotiationsGet'
-negotiationsGet' pNgPayload_ pNgNegotiationId_ =
-    NegotiationsGet'
+    -> NegotiationsGet
+negotiationsGet pNgPayload_ pNgNegotiationId_ =
+    NegotiationsGet
     { _ngPayload = pNgPayload_
     , _ngNegotiationId = pNgNegotiationId_
     }
 
 -- | Multipart request metadata.
-ngPayload :: Lens' NegotiationsGet' GetNegotiationByIdRequest
+ngPayload :: Lens' NegotiationsGet GetNegotiationByIdRequest
 ngPayload
   = lens _ngPayload (\ s a -> s{_ngPayload = a})
 
-ngNegotiationId :: Lens' NegotiationsGet' Int64
+ngNegotiationId :: Lens' NegotiationsGet Int64
 ngNegotiationId
   = lens _ngNegotiationId
       (\ s a -> s{_ngNegotiationId = a})
 
-instance GoogleRequest NegotiationsGet' where
-        type Rs NegotiationsGet' = NegotiationDTO
-        requestClient NegotiationsGet'{..}
+instance GoogleRequest NegotiationsGet where
+        type Rs NegotiationsGet = NegotiationDTO
+        requestClient NegotiationsGet{..}
           = go _ngNegotiationId (Just AltJSON) _ngPayload
               adExchangeBuyerService
           where go

@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Snapshots.List
       SnapshotsListResource
 
     -- * Creating a Request
-    , snapshotsList'
-    , SnapshotsList'
+    , snapshotsList
+    , SnapshotsList
 
     -- * Request Lenses
     , slProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.snapshots.list@ method which the
--- 'SnapshotsList'' request conforms to.
+-- 'SnapshotsList' request conforms to.
 type SnapshotsListResource =
      Capture "project" Text :>
        "global" :>
@@ -57,15 +57,15 @@ type SnapshotsListResource =
 -- | Retrieves the list of Snapshot resources contained within the specified
 -- project.
 --
--- /See:/ 'snapshotsList'' smart constructor.
-data SnapshotsList' = SnapshotsList'
+-- /See:/ 'snapshotsList' smart constructor.
+data SnapshotsList = SnapshotsList
     { _slProject    :: !Text
     , _slFilter     :: !(Maybe Text)
     , _slPageToken  :: !(Maybe Text)
     , _slMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SnapshotsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'SnapshotsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,11 +76,11 @@ data SnapshotsList' = SnapshotsList'
 -- * 'slPageToken'
 --
 -- * 'slMaxResults'
-snapshotsList'
+snapshotsList
     :: Text -- ^ 'slProject'
-    -> SnapshotsList'
-snapshotsList' pSlProject_ =
-    SnapshotsList'
+    -> SnapshotsList
+snapshotsList pSlProject_ =
+    SnapshotsList
     { _slProject = pSlProject_
     , _slFilter = Nothing
     , _slPageToken = Nothing
@@ -88,7 +88,7 @@ snapshotsList' pSlProject_ =
     }
 
 -- | Name of the project scoping this request.
-slProject :: Lens' SnapshotsList' Text
+slProject :: Lens' SnapshotsList Text
 slProject
   = lens _slProject (\ s a -> s{_slProject = a})
 
@@ -103,24 +103,24 @@ slProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-slFilter :: Lens' SnapshotsList' (Maybe Text)
+slFilter :: Lens' SnapshotsList (Maybe Text)
 slFilter = lens _slFilter (\ s a -> s{_slFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-slPageToken :: Lens' SnapshotsList' (Maybe Text)
+slPageToken :: Lens' SnapshotsList (Maybe Text)
 slPageToken
   = lens _slPageToken (\ s a -> s{_slPageToken = a})
 
 -- | Maximum count of results to be returned.
-slMaxResults :: Lens' SnapshotsList' Word32
+slMaxResults :: Lens' SnapshotsList Word32
 slMaxResults
   = lens _slMaxResults (\ s a -> s{_slMaxResults = a})
 
-instance GoogleRequest SnapshotsList' where
-        type Rs SnapshotsList' = SnapshotList
-        requestClient SnapshotsList'{..}
+instance GoogleRequest SnapshotsList where
+        type Rs SnapshotsList = SnapshotList
+        requestClient SnapshotsList{..}
           = go _slProject _slFilter _slPageToken
               (Just _slMaxResults)
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Filters.Insert
       ManagementFiltersInsertResource
 
     -- * Creating a Request
-    , managementFiltersInsert'
-    , ManagementFiltersInsert'
+    , managementFiltersInsert
+    , ManagementFiltersInsert
 
     -- * Request Lenses
     , mfiPayload
@@ -41,7 +41,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.filters.insert@ method which the
--- 'ManagementFiltersInsert'' request conforms to.
+-- 'ManagementFiltersInsert' request conforms to.
 type ManagementFiltersInsertResource =
      "management" :>
        "accounts" :>
@@ -52,42 +52,42 @@ type ManagementFiltersInsertResource =
 
 -- | Create a new filter.
 --
--- /See:/ 'managementFiltersInsert'' smart constructor.
-data ManagementFiltersInsert' = ManagementFiltersInsert'
+-- /See:/ 'managementFiltersInsert' smart constructor.
+data ManagementFiltersInsert = ManagementFiltersInsert
     { _mfiPayload   :: !Filter
     , _mfiAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementFiltersInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementFiltersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mfiPayload'
 --
 -- * 'mfiAccountId'
-managementFiltersInsert'
+managementFiltersInsert
     :: Filter -- ^ 'mfiPayload'
     -> Text -- ^ 'mfiAccountId'
-    -> ManagementFiltersInsert'
-managementFiltersInsert' pMfiPayload_ pMfiAccountId_ =
-    ManagementFiltersInsert'
+    -> ManagementFiltersInsert
+managementFiltersInsert pMfiPayload_ pMfiAccountId_ =
+    ManagementFiltersInsert
     { _mfiPayload = pMfiPayload_
     , _mfiAccountId = pMfiAccountId_
     }
 
 -- | Multipart request metadata.
-mfiPayload :: Lens' ManagementFiltersInsert' Filter
+mfiPayload :: Lens' ManagementFiltersInsert Filter
 mfiPayload
   = lens _mfiPayload (\ s a -> s{_mfiPayload = a})
 
 -- | Account ID to create filter for.
-mfiAccountId :: Lens' ManagementFiltersInsert' Text
+mfiAccountId :: Lens' ManagementFiltersInsert Text
 mfiAccountId
   = lens _mfiAccountId (\ s a -> s{_mfiAccountId = a})
 
-instance GoogleRequest ManagementFiltersInsert' where
-        type Rs ManagementFiltersInsert' = Filter
-        requestClient ManagementFiltersInsert'{..}
+instance GoogleRequest ManagementFiltersInsert where
+        type Rs ManagementFiltersInsert = Filter
+        requestClient ManagementFiltersInsert{..}
           = go _mfiAccountId (Just AltJSON) _mfiPayload
               analyticsService
           where go

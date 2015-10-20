@@ -29,8 +29,8 @@ module Network.Google.Resource.SiteVerification.WebResource.Delete
       WebResourceDeleteResource
 
     -- * Creating a Request
-    , webResourceDelete'
-    , WebResourceDelete'
+    , webResourceDelete
+    , WebResourceDelete
 
     -- * Request Lenses
     , wrdId
@@ -40,7 +40,7 @@ import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.delete@ method which the
--- 'WebResourceDelete'' request conforms to.
+-- 'WebResourceDelete' request conforms to.
 type WebResourceDeleteResource =
      "webResource" :>
        Capture "id" Text :>
@@ -48,31 +48,31 @@ type WebResourceDeleteResource =
 
 -- | Relinquish ownership of a website or domain.
 --
--- /See:/ 'webResourceDelete'' smart constructor.
-newtype WebResourceDelete' = WebResourceDelete'
+-- /See:/ 'webResourceDelete' smart constructor.
+newtype WebResourceDelete = WebResourceDelete
     { _wrdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'WebResourceDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'WebResourceDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'wrdId'
-webResourceDelete'
+webResourceDelete
     :: Text -- ^ 'wrdId'
-    -> WebResourceDelete'
-webResourceDelete' pWrdId_ =
-    WebResourceDelete'
+    -> WebResourceDelete
+webResourceDelete pWrdId_ =
+    WebResourceDelete
     { _wrdId = pWrdId_
     }
 
 -- | The id of a verified site or domain.
-wrdId :: Lens' WebResourceDelete' Text
+wrdId :: Lens' WebResourceDelete Text
 wrdId = lens _wrdId (\ s a -> s{_wrdId = a})
 
-instance GoogleRequest WebResourceDelete' where
-        type Rs WebResourceDelete' = ()
-        requestClient WebResourceDelete'{..}
+instance GoogleRequest WebResourceDelete where
+        type Rs WebResourceDelete = ()
+        requestClient WebResourceDelete{..}
           = go _wrdId (Just AltJSON) siteVerificationService
           where go
                   = buildClient

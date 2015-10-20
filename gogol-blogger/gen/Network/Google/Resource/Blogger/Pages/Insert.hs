@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.Pages.Insert
       PagesInsertResource
 
     -- * Creating a Request
-    , pagesInsert'
-    , PagesInsert'
+    , pagesInsert
+    , PagesInsert
 
     -- * Request Lenses
     , piIsDraft
@@ -42,7 +42,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.pages.insert@ method which the
--- 'PagesInsert'' request conforms to.
+-- 'PagesInsert' request conforms to.
 type PagesInsertResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -53,14 +53,14 @@ type PagesInsertResource =
 
 -- | Add a page.
 --
--- /See:/ 'pagesInsert'' smart constructor.
-data PagesInsert' = PagesInsert'
+-- /See:/ 'pagesInsert' smart constructor.
+data PagesInsert = PagesInsert
     { _piIsDraft :: !(Maybe Bool)
     , _piBlogId  :: !Text
     , _piPayload :: !Page
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PagesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'PagesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,34 +69,34 @@ data PagesInsert' = PagesInsert'
 -- * 'piBlogId'
 --
 -- * 'piPayload'
-pagesInsert'
+pagesInsert
     :: Text -- ^ 'piBlogId'
     -> Page -- ^ 'piPayload'
-    -> PagesInsert'
-pagesInsert' pPiBlogId_ pPiPayload_ =
-    PagesInsert'
+    -> PagesInsert
+pagesInsert pPiBlogId_ pPiPayload_ =
+    PagesInsert
     { _piIsDraft = Nothing
     , _piBlogId = pPiBlogId_
     , _piPayload = pPiPayload_
     }
 
 -- | Whether to create the page as a draft (default: false).
-piIsDraft :: Lens' PagesInsert' (Maybe Bool)
+piIsDraft :: Lens' PagesInsert (Maybe Bool)
 piIsDraft
   = lens _piIsDraft (\ s a -> s{_piIsDraft = a})
 
 -- | ID of the blog to add the page to.
-piBlogId :: Lens' PagesInsert' Text
+piBlogId :: Lens' PagesInsert Text
 piBlogId = lens _piBlogId (\ s a -> s{_piBlogId = a})
 
 -- | Multipart request metadata.
-piPayload :: Lens' PagesInsert' Page
+piPayload :: Lens' PagesInsert Page
 piPayload
   = lens _piPayload (\ s a -> s{_piPayload = a})
 
-instance GoogleRequest PagesInsert' where
-        type Rs PagesInsert' = Page
-        requestClient PagesInsert'{..}
+instance GoogleRequest PagesInsert where
+        type Rs PagesInsert = Page
+        requestClient PagesInsert{..}
           = go _piBlogId _piIsDraft (Just AltJSON) _piPayload
               bloggerService
           where go

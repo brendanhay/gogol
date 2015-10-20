@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSense.Metadata.Dimensions.List
       MetadataDimensionsListResource
 
     -- * Creating a Request
-    , metadataDimensionsList'
-    , MetadataDimensionsList'
+    , metadataDimensionsList
+    , MetadataDimensionsList
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.metadata.dimensions.list@ method which the
--- 'MetadataDimensionsList'' request conforms to.
+-- 'MetadataDimensionsList' request conforms to.
 type MetadataDimensionsListResource =
      "metadata" :>
        "dimensions" :>
@@ -46,20 +46,20 @@ type MetadataDimensionsListResource =
 
 -- | List the metadata for the dimensions available to this AdSense account.
 --
--- /See:/ 'metadataDimensionsList'' smart constructor.
-data MetadataDimensionsList' =
-    MetadataDimensionsList'
+-- /See:/ 'metadataDimensionsList' smart constructor.
+data MetadataDimensionsList =
+    MetadataDimensionsList
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MetadataDimensionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'MetadataDimensionsList' with the minimum fields required to make a request.
 --
-metadataDimensionsList'
-    :: MetadataDimensionsList'
-metadataDimensionsList' = MetadataDimensionsList'
+metadataDimensionsList
+    :: MetadataDimensionsList
+metadataDimensionsList = MetadataDimensionsList
 
-instance GoogleRequest MetadataDimensionsList' where
-        type Rs MetadataDimensionsList' = Metadata
-        requestClient MetadataDimensionsList'{}
+instance GoogleRequest MetadataDimensionsList where
+        type Rs MetadataDimensionsList = Metadata
+        requestClient MetadataDimensionsList{}
           = go (Just AltJSON) adSenseService
           where go
                   = buildClient

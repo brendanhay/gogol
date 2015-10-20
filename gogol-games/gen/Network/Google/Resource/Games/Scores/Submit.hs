@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.Scores.Submit
       ScoresSubmitResource
 
     -- * Creating a Request
-    , scoresSubmit'
-    , ScoresSubmit'
+    , scoresSubmit
+    , ScoresSubmit
 
     -- * Request Lenses
     , ssScoreTag
@@ -43,7 +43,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.scores.submit@ method which the
--- 'ScoresSubmit'' request conforms to.
+-- 'ScoresSubmit' request conforms to.
 type ScoresSubmitResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
@@ -56,15 +56,15 @@ type ScoresSubmitResource =
 
 -- | Submits a score to the specified leaderboard.
 --
--- /See:/ 'scoresSubmit'' smart constructor.
-data ScoresSubmit' = ScoresSubmit'
+-- /See:/ 'scoresSubmit' smart constructor.
+data ScoresSubmit = ScoresSubmit
     { _ssScoreTag      :: !(Maybe Text)
     , _ssScore         :: !Int64
     , _ssLeaderboardId :: !Text
     , _ssLanguage      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ScoresSubmit'' with the minimum fields required to make a request.
+-- | Creates a value of 'ScoresSubmit' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,12 +75,12 @@ data ScoresSubmit' = ScoresSubmit'
 -- * 'ssLeaderboardId'
 --
 -- * 'ssLanguage'
-scoresSubmit'
+scoresSubmit
     :: Int64 -- ^ 'ssScore'
     -> Text -- ^ 'ssLeaderboardId'
-    -> ScoresSubmit'
-scoresSubmit' pSsScore_ pSsLeaderboardId_ =
-    ScoresSubmit'
+    -> ScoresSubmit
+scoresSubmit pSsScore_ pSsLeaderboardId_ =
+    ScoresSubmit
     { _ssScoreTag = Nothing
     , _ssScore = pSsScore_
     , _ssLeaderboardId = pSsLeaderboardId_
@@ -90,7 +90,7 @@ scoresSubmit' pSsScore_ pSsLeaderboardId_ =
 -- | Additional information about the score you\'re submitting. Values must
 -- contain no more than 64 URI-safe characters as defined by section 2.3 of
 -- RFC 3986.
-ssScoreTag :: Lens' ScoresSubmit' (Maybe Text)
+ssScoreTag :: Lens' ScoresSubmit (Maybe Text)
 ssScoreTag
   = lens _ssScoreTag (\ s a -> s{_ssScoreTag = a})
 
@@ -100,23 +100,23 @@ ssScoreTag
 -- leaderboard format type. For fixed-point, the score represents the raw
 -- value. For time, the score represents elapsed time in milliseconds. For
 -- currency, the score represents a value in micro units.
-ssScore :: Lens' ScoresSubmit' Int64
+ssScore :: Lens' ScoresSubmit Int64
 ssScore = lens _ssScore (\ s a -> s{_ssScore = a})
 
 -- | The ID of the leaderboard.
-ssLeaderboardId :: Lens' ScoresSubmit' Text
+ssLeaderboardId :: Lens' ScoresSubmit Text
 ssLeaderboardId
   = lens _ssLeaderboardId
       (\ s a -> s{_ssLeaderboardId = a})
 
 -- | The preferred language to use for strings returned by this method.
-ssLanguage :: Lens' ScoresSubmit' (Maybe Text)
+ssLanguage :: Lens' ScoresSubmit (Maybe Text)
 ssLanguage
   = lens _ssLanguage (\ s a -> s{_ssLanguage = a})
 
-instance GoogleRequest ScoresSubmit' where
-        type Rs ScoresSubmit' = PlayerScoreResponse
-        requestClient ScoresSubmit'{..}
+instance GoogleRequest ScoresSubmit where
+        type Rs ScoresSubmit = PlayerScoreResponse
+        requestClient ScoresSubmit{..}
           = go _ssLeaderboardId (Just _ssScore) _ssScoreTag
               _ssLanguage
               (Just AltJSON)

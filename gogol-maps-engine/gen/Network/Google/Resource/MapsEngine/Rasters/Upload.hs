@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Rasters.Upload
       RastersUploadResource
 
     -- * Creating a Request
-    , rastersUpload'
-    , RastersUpload'
+    , rastersUpload
+    , RastersUpload
 
     -- * Request Lenses
     , ruPayload
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasters.upload@ method which the
--- 'RastersUpload'' request conforms to.
+-- 'RastersUpload' request conforms to.
 type RastersUploadResource =
      "rasters" :>
        "upload" :>
@@ -49,32 +49,32 @@ type RastersUploadResource =
 
 -- | Create a skeleton raster asset for upload.
 --
--- /See:/ 'rastersUpload'' smart constructor.
-newtype RastersUpload' = RastersUpload'
+-- /See:/ 'rastersUpload' smart constructor.
+newtype RastersUpload = RastersUpload
     { _ruPayload :: Raster
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RastersUpload'' with the minimum fields required to make a request.
+-- | Creates a value of 'RastersUpload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ruPayload'
-rastersUpload'
+rastersUpload
     :: Raster -- ^ 'ruPayload'
-    -> RastersUpload'
-rastersUpload' pRuPayload_ =
-    RastersUpload'
+    -> RastersUpload
+rastersUpload pRuPayload_ =
+    RastersUpload
     { _ruPayload = pRuPayload_
     }
 
 -- | Multipart request metadata.
-ruPayload :: Lens' RastersUpload' Raster
+ruPayload :: Lens' RastersUpload Raster
 ruPayload
   = lens _ruPayload (\ s a -> s{_ruPayload = a})
 
-instance GoogleRequest RastersUpload' where
-        type Rs RastersUpload' = Raster
-        requestClient RastersUpload'{..}
+instance GoogleRequest RastersUpload where
+        type Rs RastersUpload = Raster
+        requestClient RastersUpload{..}
           = go (Just AltJSON) _ruPayload mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy RastersUploadResource)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.Events.Update
       EventsUpdateResource
 
     -- * Creating a Request
-    , eventsUpdate'
-    , EventsUpdate'
+    , eventsUpdate
+    , EventsUpdate
 
     -- * Request Lenses
     , euCalendarId
@@ -46,7 +46,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.update@ method which the
--- 'EventsUpdate'' request conforms to.
+-- 'EventsUpdate' request conforms to.
 type EventsUpdateResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -61,8 +61,8 @@ type EventsUpdateResource =
 
 -- | Updates an event.
 --
--- /See:/ 'eventsUpdate'' smart constructor.
-data EventsUpdate' = EventsUpdate'
+-- /See:/ 'eventsUpdate' smart constructor.
+data EventsUpdate = EventsUpdate
     { _euCalendarId          :: !Text
     , _euPayload             :: !Event
     , _euMaxAttendees        :: !(Maybe Int32)
@@ -72,7 +72,7 @@ data EventsUpdate' = EventsUpdate'
     , _euEventId             :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -89,13 +89,13 @@ data EventsUpdate' = EventsUpdate'
 -- * 'euAlwaysIncludeEmail'
 --
 -- * 'euEventId'
-eventsUpdate'
+eventsUpdate
     :: Text -- ^ 'euCalendarId'
     -> Event -- ^ 'euPayload'
     -> Text -- ^ 'euEventId'
-    -> EventsUpdate'
-eventsUpdate' pEuCalendarId_ pEuPayload_ pEuEventId_ =
-    EventsUpdate'
+    -> EventsUpdate
+eventsUpdate pEuCalendarId_ pEuPayload_ pEuEventId_ =
+    EventsUpdate
     { _euCalendarId = pEuCalendarId_
     , _euPayload = pEuPayload_
     , _euMaxAttendees = Nothing
@@ -108,33 +108,33 @@ eventsUpdate' pEuCalendarId_ pEuPayload_ pEuEventId_ =
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-euCalendarId :: Lens' EventsUpdate' Text
+euCalendarId :: Lens' EventsUpdate Text
 euCalendarId
   = lens _euCalendarId (\ s a -> s{_euCalendarId = a})
 
 -- | Multipart request metadata.
-euPayload :: Lens' EventsUpdate' Event
+euPayload :: Lens' EventsUpdate Event
 euPayload
   = lens _euPayload (\ s a -> s{_euPayload = a})
 
 -- | The maximum number of attendees to include in the response. If there are
 -- more than the specified number of attendees, only the participant is
 -- returned. Optional.
-euMaxAttendees :: Lens' EventsUpdate' (Maybe Int32)
+euMaxAttendees :: Lens' EventsUpdate (Maybe Int32)
 euMaxAttendees
   = lens _euMaxAttendees
       (\ s a -> s{_euMaxAttendees = a})
 
 -- | Whether to send notifications about the event update (e.g. attendee\'s
 -- responses, title changes, etc.). Optional. The default is False.
-euSendNotifications :: Lens' EventsUpdate' (Maybe Bool)
+euSendNotifications :: Lens' EventsUpdate (Maybe Bool)
 euSendNotifications
   = lens _euSendNotifications
       (\ s a -> s{_euSendNotifications = a})
 
 -- | Whether API client performing operation supports event attachments.
 -- Optional. The default is False.
-euSupportsAttachments :: Lens' EventsUpdate' (Maybe Bool)
+euSupportsAttachments :: Lens' EventsUpdate (Maybe Bool)
 euSupportsAttachments
   = lens _euSupportsAttachments
       (\ s a -> s{_euSupportsAttachments = a})
@@ -145,19 +145,19 @@ euSupportsAttachments
 -- is discouraged and should only be used by clients which cannot handle
 -- the absence of an email address value in the mentioned places. Optional.
 -- The default is False.
-euAlwaysIncludeEmail :: Lens' EventsUpdate' (Maybe Bool)
+euAlwaysIncludeEmail :: Lens' EventsUpdate (Maybe Bool)
 euAlwaysIncludeEmail
   = lens _euAlwaysIncludeEmail
       (\ s a -> s{_euAlwaysIncludeEmail = a})
 
 -- | Event identifier.
-euEventId :: Lens' EventsUpdate' Text
+euEventId :: Lens' EventsUpdate Text
 euEventId
   = lens _euEventId (\ s a -> s{_euEventId = a})
 
-instance GoogleRequest EventsUpdate' where
-        type Rs EventsUpdate' = Event
-        requestClient EventsUpdate'{..}
+instance GoogleRequest EventsUpdate where
+        type Rs EventsUpdate = Event
+        requestClient EventsUpdate{..}
           = go _euCalendarId _euEventId _euMaxAttendees
               _euSendNotifications
               _euSupportsAttachments

@@ -2345,25 +2345,25 @@ instance ToJSON ForwardingRulesScopedList where
 --
 -- /See:/ 'instanceReference' smart constructor.
 newtype InstanceReference = InstanceReference
-    { _irInstance :: Maybe Text
+    { _iInstance :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'irInstance'
+-- * 'iInstance'
 instanceReference
     :: InstanceReference
 instanceReference =
     InstanceReference
-    { _irInstance = Nothing
+    { _iInstance = Nothing
     }
 
 -- | The URL for a specific instance.
-irInstance :: Lens' InstanceReference (Maybe Text)
-irInstance
-  = lens _irInstance (\ s a -> s{_irInstance = a})
+iInstance :: Lens' InstanceReference (Maybe Text)
+iInstance
+  = lens _iInstance (\ s a -> s{_iInstance = a})
 
 instance FromJSON InstanceReference where
         parseJSON
@@ -2372,8 +2372,7 @@ instance FromJSON InstanceReference where
 
 instance ToJSON InstanceReference where
         toJSON InstanceReference{..}
-          = object
-              (catMaybes [("instance" .=) <$> _irInstance])
+          = object (catMaybes [("instance" .=) <$> _iInstance])
 
 --
 -- /See:/ 'operationAggregatedList' smart constructor.
@@ -13717,126 +13716,125 @@ instance ToJSON Quota where
 --
 -- /See:/ 'instanceGroup' smart constructor.
 data InstanceGroup = InstanceGroup
-    { _ig1Size              :: !(Maybe Int32)
-    , _ig1Kind              :: !Text
-    , _ig1Fingerprint       :: !(Maybe Word8)
-    , _ig1Network           :: !(Maybe Text)
-    , _ig1Zone              :: !(Maybe Text)
-    , _ig1SelfLink          :: !(Maybe Text)
-    , _ig1Name              :: !(Maybe Text)
-    , _ig1CreationTimestamp :: !(Maybe Text)
-    , _ig1Id                :: !(Maybe Word64)
-    , _ig1Description       :: !(Maybe Text)
-    , _ig1NamedPorts        :: !(Maybe [NamedPort])
+    { _iiSize              :: !(Maybe Int32)
+    , _iiKind              :: !Text
+    , _iiFingerprint       :: !(Maybe Word8)
+    , _iiNetwork           :: !(Maybe Text)
+    , _iiZone              :: !(Maybe Text)
+    , _iiSelfLink          :: !(Maybe Text)
+    , _iiName              :: !(Maybe Text)
+    , _iiCreationTimestamp :: !(Maybe Text)
+    , _iiId                :: !(Maybe Word64)
+    , _iiDescription       :: !(Maybe Text)
+    , _iiNamedPorts        :: !(Maybe [NamedPort])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ig1Size'
+-- * 'iiSize'
 --
--- * 'ig1Kind'
+-- * 'iiKind'
 --
--- * 'ig1Fingerprint'
+-- * 'iiFingerprint'
 --
--- * 'ig1Network'
+-- * 'iiNetwork'
 --
--- * 'ig1Zone'
+-- * 'iiZone'
 --
--- * 'ig1SelfLink'
+-- * 'iiSelfLink'
 --
--- * 'ig1Name'
+-- * 'iiName'
 --
--- * 'ig1CreationTimestamp'
+-- * 'iiCreationTimestamp'
 --
--- * 'ig1Id'
+-- * 'iiId'
 --
--- * 'ig1Description'
+-- * 'iiDescription'
 --
--- * 'ig1NamedPorts'
+-- * 'iiNamedPorts'
 instanceGroup
     :: InstanceGroup
 instanceGroup =
     InstanceGroup
-    { _ig1Size = Nothing
-    , _ig1Kind = "compute#instanceGroup"
-    , _ig1Fingerprint = Nothing
-    , _ig1Network = Nothing
-    , _ig1Zone = Nothing
-    , _ig1SelfLink = Nothing
-    , _ig1Name = Nothing
-    , _ig1CreationTimestamp = Nothing
-    , _ig1Id = Nothing
-    , _ig1Description = Nothing
-    , _ig1NamedPorts = Nothing
+    { _iiSize = Nothing
+    , _iiKind = "compute#instanceGroup"
+    , _iiFingerprint = Nothing
+    , _iiNetwork = Nothing
+    , _iiZone = Nothing
+    , _iiSelfLink = Nothing
+    , _iiName = Nothing
+    , _iiCreationTimestamp = Nothing
+    , _iiId = Nothing
+    , _iiDescription = Nothing
+    , _iiNamedPorts = Nothing
     }
 
 -- | [Output Only] The total number of instances in the instance group.
-ig1Size :: Lens' InstanceGroup (Maybe Int32)
-ig1Size = lens _ig1Size (\ s a -> s{_ig1Size = a})
+iiSize :: Lens' InstanceGroup (Maybe Int32)
+iiSize = lens _iiSize (\ s a -> s{_iiSize = a})
 
 -- | [Output Only] The resource type, which is always compute#instanceGroup
 -- for instance groups.
-ig1Kind :: Lens' InstanceGroup Text
-ig1Kind = lens _ig1Kind (\ s a -> s{_ig1Kind = a})
+iiKind :: Lens' InstanceGroup Text
+iiKind = lens _iiKind (\ s a -> s{_iiKind = a})
 
 -- | [Output Only] The fingerprint of the named ports. The system uses this
 -- fingerprint to detect conflicts when multiple users change the named
 -- ports concurrently.
-ig1Fingerprint :: Lens' InstanceGroup (Maybe Word8)
-ig1Fingerprint
-  = lens _ig1Fingerprint
-      (\ s a -> s{_ig1Fingerprint = a})
+iiFingerprint :: Lens' InstanceGroup (Maybe Word8)
+iiFingerprint
+  = lens _iiFingerprint
+      (\ s a -> s{_iiFingerprint = a})
 
 -- | [Output Only] The URL of the network to which all instances in the
 -- instance group belong.
-ig1Network :: Lens' InstanceGroup (Maybe Text)
-ig1Network
-  = lens _ig1Network (\ s a -> s{_ig1Network = a})
+iiNetwork :: Lens' InstanceGroup (Maybe Text)
+iiNetwork
+  = lens _iiNetwork (\ s a -> s{_iiNetwork = a})
 
 -- | [Output Only] The URL of the zone where the instance group is located.
-ig1Zone :: Lens' InstanceGroup (Maybe Text)
-ig1Zone = lens _ig1Zone (\ s a -> s{_ig1Zone = a})
+iiZone :: Lens' InstanceGroup (Maybe Text)
+iiZone = lens _iiZone (\ s a -> s{_iiZone = a})
 
 -- | [Output Only] The URL for this instance group. The server generates this
 -- URL.
-ig1SelfLink :: Lens' InstanceGroup (Maybe Text)
-ig1SelfLink
-  = lens _ig1SelfLink (\ s a -> s{_ig1SelfLink = a})
+iiSelfLink :: Lens' InstanceGroup (Maybe Text)
+iiSelfLink
+  = lens _iiSelfLink (\ s a -> s{_iiSelfLink = a})
 
 -- | The name of the instance group. The name must be 1-63 characters long,
 -- and comply with RFC1035.
-ig1Name :: Lens' InstanceGroup (Maybe Text)
-ig1Name = lens _ig1Name (\ s a -> s{_ig1Name = a})
+iiName :: Lens' InstanceGroup (Maybe Text)
+iiName = lens _iiName (\ s a -> s{_iiName = a})
 
 -- | [Output Only] The creation timestamp for this instance group in RFC3339
 -- text format.
-ig1CreationTimestamp :: Lens' InstanceGroup (Maybe Text)
-ig1CreationTimestamp
-  = lens _ig1CreationTimestamp
-      (\ s a -> s{_ig1CreationTimestamp = a})
+iiCreationTimestamp :: Lens' InstanceGroup (Maybe Text)
+iiCreationTimestamp
+  = lens _iiCreationTimestamp
+      (\ s a -> s{_iiCreationTimestamp = a})
 
 -- | [Output Only] A unique identifier for this resource type. The server
 -- generates this identifier.
-ig1Id :: Lens' InstanceGroup (Maybe Word64)
-ig1Id = lens _ig1Id (\ s a -> s{_ig1Id = a})
+iiId :: Lens' InstanceGroup (Maybe Word64)
+iiId = lens _iiId (\ s a -> s{_iiId = a})
 
 -- | An optional text description for the instance group.
-ig1Description :: Lens' InstanceGroup (Maybe Text)
-ig1Description
-  = lens _ig1Description
-      (\ s a -> s{_ig1Description = a})
+iiDescription :: Lens' InstanceGroup (Maybe Text)
+iiDescription
+  = lens _iiDescription
+      (\ s a -> s{_iiDescription = a})
 
 -- | Assigns a name to a port number. For example: {name: \"http\", port: 80}
 -- This allows the system to reference ports by the assigned name instead
 -- of a port number. Named ports can also contain multiple ports. For
 -- example: [{name: \"http\", port: 80},{name: \"http\", port: 8080}] Named
 -- ports apply to all instances in this instance group.
-ig1NamedPorts :: Lens' InstanceGroup [NamedPort]
-ig1NamedPorts
-  = lens _ig1NamedPorts
-      (\ s a -> s{_ig1NamedPorts = a})
+iiNamedPorts :: Lens' InstanceGroup [NamedPort]
+iiNamedPorts
+  = lens _iiNamedPorts (\ s a -> s{_iiNamedPorts = a})
       . _Default
       . _Coerce
 
@@ -13861,16 +13859,16 @@ instance ToJSON InstanceGroup where
         toJSON InstanceGroup{..}
           = object
               (catMaybes
-                 [("size" .=) <$> _ig1Size, Just ("kind" .= _ig1Kind),
-                  ("fingerprint" .=) <$> _ig1Fingerprint,
-                  ("network" .=) <$> _ig1Network,
-                  ("zone" .=) <$> _ig1Zone,
-                  ("selfLink" .=) <$> _ig1SelfLink,
-                  ("name" .=) <$> _ig1Name,
-                  ("creationTimestamp" .=) <$> _ig1CreationTimestamp,
-                  ("id" .=) <$> _ig1Id,
-                  ("description" .=) <$> _ig1Description,
-                  ("namedPorts" .=) <$> _ig1NamedPorts])
+                 [("size" .=) <$> _iiSize, Just ("kind" .= _iiKind),
+                  ("fingerprint" .=) <$> _iiFingerprint,
+                  ("network" .=) <$> _iiNetwork,
+                  ("zone" .=) <$> _iiZone,
+                  ("selfLink" .=) <$> _iiSelfLink,
+                  ("name" .=) <$> _iiName,
+                  ("creationTimestamp" .=) <$> _iiCreationTimestamp,
+                  ("id" .=) <$> _iiId,
+                  ("description" .=) <$> _iiDescription,
+                  ("namedPorts" .=) <$> _iiNamedPorts])
 
 -- | Contains a list of Snapshot resources.
 --
@@ -15349,135 +15347,136 @@ instance ToJSON URLMapTest where
 --
 -- /See:/ 'instance'' smart constructor.
 data Instance = Instance
-    { _i1Status            :: !(Maybe InstanceStatus)
-    , _i1ServiceAccounts   :: !(Maybe [ServiceAccount])
-    , _i1NetworkInterfaces :: !(Maybe [NetworkInterface])
-    , _i1Kind              :: !Text
-    , _i1Zone              :: !(Maybe Text)
-    , _i1CPUPlatform       :: !(Maybe Text)
-    , _i1SelfLink          :: !(Maybe Text)
-    , _i1Name              :: !(Maybe Text)
-    , _i1StatusMessage     :: !(Maybe Text)
-    , _i1CreationTimestamp :: !(Maybe Text)
-    , _i1MachineType       :: !(Maybe Text)
-    , _i1Metadata          :: !(Maybe Metadata)
-    , _i1Id                :: !(Maybe Word64)
-    , _i1Scheduling        :: !(Maybe Scheduling)
-    , _i1Disks             :: !(Maybe [AttachedDisk])
-    , _i1CanIPForward      :: !(Maybe Bool)
-    , _i1Description       :: !(Maybe Text)
-    , _i1Tags              :: !(Maybe Tags)
+    { _insnStatus            :: !(Maybe InstanceStatus)
+    , _insnServiceAccounts   :: !(Maybe [ServiceAccount])
+    , _insnNetworkInterfaces :: !(Maybe [NetworkInterface])
+    , _insnKind              :: !Text
+    , _insnZone              :: !(Maybe Text)
+    , _insnCPUPlatform       :: !(Maybe Text)
+    , _insnSelfLink          :: !(Maybe Text)
+    , _insnName              :: !(Maybe Text)
+    , _insnStatusMessage     :: !(Maybe Text)
+    , _insnCreationTimestamp :: !(Maybe Text)
+    , _insnMachineType       :: !(Maybe Text)
+    , _insnMetadata          :: !(Maybe Metadata)
+    , _insnId                :: !(Maybe Word64)
+    , _insnScheduling        :: !(Maybe Scheduling)
+    , _insnDisks             :: !(Maybe [AttachedDisk])
+    , _insnCanIPForward      :: !(Maybe Bool)
+    , _insnDescription       :: !(Maybe Text)
+    , _insnTags              :: !(Maybe Tags)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'i1Status'
+-- * 'insnStatus'
 --
--- * 'i1ServiceAccounts'
+-- * 'insnServiceAccounts'
 --
--- * 'i1NetworkInterfaces'
+-- * 'insnNetworkInterfaces'
 --
--- * 'i1Kind'
+-- * 'insnKind'
 --
--- * 'i1Zone'
+-- * 'insnZone'
 --
--- * 'i1CPUPlatform'
+-- * 'insnCPUPlatform'
 --
--- * 'i1SelfLink'
+-- * 'insnSelfLink'
 --
--- * 'i1Name'
+-- * 'insnName'
 --
--- * 'i1StatusMessage'
+-- * 'insnStatusMessage'
 --
--- * 'i1CreationTimestamp'
+-- * 'insnCreationTimestamp'
 --
--- * 'i1MachineType'
+-- * 'insnMachineType'
 --
--- * 'i1Metadata'
+-- * 'insnMetadata'
 --
--- * 'i1Id'
+-- * 'insnId'
 --
--- * 'i1Scheduling'
+-- * 'insnScheduling'
 --
--- * 'i1Disks'
+-- * 'insnDisks'
 --
--- * 'i1CanIPForward'
+-- * 'insnCanIPForward'
 --
--- * 'i1Description'
+-- * 'insnDescription'
 --
--- * 'i1Tags'
+-- * 'insnTags'
 instance'
     :: Instance
 instance' =
     Instance
-    { _i1Status = Nothing
-    , _i1ServiceAccounts = Nothing
-    , _i1NetworkInterfaces = Nothing
-    , _i1Kind = "compute#instance"
-    , _i1Zone = Nothing
-    , _i1CPUPlatform = Nothing
-    , _i1SelfLink = Nothing
-    , _i1Name = Nothing
-    , _i1StatusMessage = Nothing
-    , _i1CreationTimestamp = Nothing
-    , _i1MachineType = Nothing
-    , _i1Metadata = Nothing
-    , _i1Id = Nothing
-    , _i1Scheduling = Nothing
-    , _i1Disks = Nothing
-    , _i1CanIPForward = Nothing
-    , _i1Description = Nothing
-    , _i1Tags = Nothing
+    { _insnStatus = Nothing
+    , _insnServiceAccounts = Nothing
+    , _insnNetworkInterfaces = Nothing
+    , _insnKind = "compute#instance"
+    , _insnZone = Nothing
+    , _insnCPUPlatform = Nothing
+    , _insnSelfLink = Nothing
+    , _insnName = Nothing
+    , _insnStatusMessage = Nothing
+    , _insnCreationTimestamp = Nothing
+    , _insnMachineType = Nothing
+    , _insnMetadata = Nothing
+    , _insnId = Nothing
+    , _insnScheduling = Nothing
+    , _insnDisks = Nothing
+    , _insnCanIPForward = Nothing
+    , _insnDescription = Nothing
+    , _insnTags = Nothing
     }
 
 -- | [Output Only] The status of the instance. One of the following values:
 -- PROVISIONING, STAGING, RUNNING, STOPPING, and TERMINATED.
-i1Status :: Lens' Instance (Maybe InstanceStatus)
-i1Status = lens _i1Status (\ s a -> s{_i1Status = a})
+insnStatus :: Lens' Instance (Maybe InstanceStatus)
+insnStatus
+  = lens _insnStatus (\ s a -> s{_insnStatus = a})
 
 -- | A list of service accounts, with their specified scopes, authorized for
 -- this instance. Service accounts generate access tokens that can be
 -- accessed through the metadata server and used to authenticate
 -- applications on the instance. See Authenticating from Google Compute
 -- Engine for more information.
-i1ServiceAccounts :: Lens' Instance [ServiceAccount]
-i1ServiceAccounts
-  = lens _i1ServiceAccounts
-      (\ s a -> s{_i1ServiceAccounts = a})
+insnServiceAccounts :: Lens' Instance [ServiceAccount]
+insnServiceAccounts
+  = lens _insnServiceAccounts
+      (\ s a -> s{_insnServiceAccounts = a})
       . _Default
       . _Coerce
 
 -- | An array of configurations for this interface. This specifies how this
 -- interface is configured to interact with other network services, such as
 -- connecting to the internet.
-i1NetworkInterfaces :: Lens' Instance [NetworkInterface]
-i1NetworkInterfaces
-  = lens _i1NetworkInterfaces
-      (\ s a -> s{_i1NetworkInterfaces = a})
+insnNetworkInterfaces :: Lens' Instance [NetworkInterface]
+insnNetworkInterfaces
+  = lens _insnNetworkInterfaces
+      (\ s a -> s{_insnNetworkInterfaces = a})
       . _Default
       . _Coerce
 
 -- | [Output Only] Type of the resource. Always compute#instance for
 -- instances.
-i1Kind :: Lens' Instance Text
-i1Kind = lens _i1Kind (\ s a -> s{_i1Kind = a})
+insnKind :: Lens' Instance Text
+insnKind = lens _insnKind (\ s a -> s{_insnKind = a})
 
 -- | [Output Only] URL of the zone where the instance resides.
-i1Zone :: Lens' Instance (Maybe Text)
-i1Zone = lens _i1Zone (\ s a -> s{_i1Zone = a})
+insnZone :: Lens' Instance (Maybe Text)
+insnZone = lens _insnZone (\ s a -> s{_insnZone = a})
 
 -- | [Output Only] The CPU platform used by this instance.
-i1CPUPlatform :: Lens' Instance (Maybe Text)
-i1CPUPlatform
-  = lens _i1CPUPlatform
-      (\ s a -> s{_i1CPUPlatform = a})
+insnCPUPlatform :: Lens' Instance (Maybe Text)
+insnCPUPlatform
+  = lens _insnCPUPlatform
+      (\ s a -> s{_insnCPUPlatform = a})
 
 -- | [Output Only] Server defined URL for this resource.
-i1SelfLink :: Lens' Instance (Maybe Text)
-i1SelfLink
-  = lens _i1SelfLink (\ s a -> s{_i1SelfLink = a})
+insnSelfLink :: Lens' Instance (Maybe Text)
+insnSelfLink
+  = lens _insnSelfLink (\ s a -> s{_insnSelfLink = a})
 
 -- | Name of the resource; provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
@@ -15486,74 +15485,76 @@ i1SelfLink
 -- character must be a lowercase letter, and all following characters must
 -- be a dash, lowercase letter, or digit, except the last character, which
 -- cannot be a dash.
-i1Name :: Lens' Instance (Maybe Text)
-i1Name = lens _i1Name (\ s a -> s{_i1Name = a})
+insnName :: Lens' Instance (Maybe Text)
+insnName = lens _insnName (\ s a -> s{_insnName = a})
 
 -- | [Output Only] An optional, human-readable explanation of the status.
-i1StatusMessage :: Lens' Instance (Maybe Text)
-i1StatusMessage
-  = lens _i1StatusMessage
-      (\ s a -> s{_i1StatusMessage = a})
+insnStatusMessage :: Lens' Instance (Maybe Text)
+insnStatusMessage
+  = lens _insnStatusMessage
+      (\ s a -> s{_insnStatusMessage = a})
 
 -- | [Output Only] Creation timestamp in RFC3339 text format.
-i1CreationTimestamp :: Lens' Instance (Maybe Text)
-i1CreationTimestamp
-  = lens _i1CreationTimestamp
-      (\ s a -> s{_i1CreationTimestamp = a})
+insnCreationTimestamp :: Lens' Instance (Maybe Text)
+insnCreationTimestamp
+  = lens _insnCreationTimestamp
+      (\ s a -> s{_insnCreationTimestamp = a})
 
 -- | Full or partial URL of the machine type resource to use for this
 -- instance. This is provided by the client when the instance is created.
 -- For example, the following is a valid partial url:
 -- zones\/zone\/machineTypes\/machine-type
-i1MachineType :: Lens' Instance (Maybe Text)
-i1MachineType
-  = lens _i1MachineType
-      (\ s a -> s{_i1MachineType = a})
+insnMachineType :: Lens' Instance (Maybe Text)
+insnMachineType
+  = lens _insnMachineType
+      (\ s a -> s{_insnMachineType = a})
 
 -- | The metadata key\/value pairs assigned to this instance. This includes
 -- custom metadata and predefined keys.
-i1Metadata :: Lens' Instance (Maybe Metadata)
-i1Metadata
-  = lens _i1Metadata (\ s a -> s{_i1Metadata = a})
+insnMetadata :: Lens' Instance (Maybe Metadata)
+insnMetadata
+  = lens _insnMetadata (\ s a -> s{_insnMetadata = a})
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
-i1Id :: Lens' Instance (Maybe Word64)
-i1Id = lens _i1Id (\ s a -> s{_i1Id = a})
+insnId :: Lens' Instance (Maybe Word64)
+insnId = lens _insnId (\ s a -> s{_insnId = a})
 
 -- | Scheduling options for this instance.
-i1Scheduling :: Lens' Instance (Maybe Scheduling)
-i1Scheduling
-  = lens _i1Scheduling (\ s a -> s{_i1Scheduling = a})
+insnScheduling :: Lens' Instance (Maybe Scheduling)
+insnScheduling
+  = lens _insnScheduling
+      (\ s a -> s{_insnScheduling = a})
 
 -- | Array of disks associated with this instance. Persistent disks must be
 -- created before you can assign them.
-i1Disks :: Lens' Instance [AttachedDisk]
-i1Disks
-  = lens _i1Disks (\ s a -> s{_i1Disks = a}) . _Default
+insnDisks :: Lens' Instance [AttachedDisk]
+insnDisks
+  = lens _insnDisks (\ s a -> s{_insnDisks = a}) .
+      _Default
       . _Coerce
 
 -- | Allows this instance to send and receive packets with non-matching
 -- destination or source IPs. This is required if you plan to use this
 -- instance to forward routes. For more information, see Enabling IP
 -- Forwarding.
-i1CanIPForward :: Lens' Instance (Maybe Bool)
-i1CanIPForward
-  = lens _i1CanIPForward
-      (\ s a -> s{_i1CanIPForward = a})
+insnCanIPForward :: Lens' Instance (Maybe Bool)
+insnCanIPForward
+  = lens _insnCanIPForward
+      (\ s a -> s{_insnCanIPForward = a})
 
 -- | An optional textual description of the resource; provided by the client
 -- when the resource is created.
-i1Description :: Lens' Instance (Maybe Text)
-i1Description
-  = lens _i1Description
-      (\ s a -> s{_i1Description = a})
+insnDescription :: Lens' Instance (Maybe Text)
+insnDescription
+  = lens _insnDescription
+      (\ s a -> s{_insnDescription = a})
 
 -- | A list of tags to appy to this instance. Tags are used to identify valid
 -- sources or targets for network firewalls and are specified by the client
 -- during instance creation. The tags can be later modified by the setTags
 -- method. Each tag within the list must comply with RFC1035.
-i1Tags :: Lens' Instance (Maybe Tags)
-i1Tags = lens _i1Tags (\ s a -> s{_i1Tags = a})
+insnTags :: Lens' Instance (Maybe Tags)
+insnTags = lens _insnTags (\ s a -> s{_insnTags = a})
 
 instance FromJSON Instance where
         parseJSON
@@ -15583,22 +15584,24 @@ instance ToJSON Instance where
         toJSON Instance{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _i1Status,
-                  ("serviceAccounts" .=) <$> _i1ServiceAccounts,
-                  ("networkInterfaces" .=) <$> _i1NetworkInterfaces,
-                  Just ("kind" .= _i1Kind), ("zone" .=) <$> _i1Zone,
-                  ("cpuPlatform" .=) <$> _i1CPUPlatform,
-                  ("selfLink" .=) <$> _i1SelfLink,
-                  ("name" .=) <$> _i1Name,
-                  ("statusMessage" .=) <$> _i1StatusMessage,
-                  ("creationTimestamp" .=) <$> _i1CreationTimestamp,
-                  ("machineType" .=) <$> _i1MachineType,
-                  ("metadata" .=) <$> _i1Metadata, ("id" .=) <$> _i1Id,
-                  ("scheduling" .=) <$> _i1Scheduling,
-                  ("disks" .=) <$> _i1Disks,
-                  ("canIpForward" .=) <$> _i1CanIPForward,
-                  ("description" .=) <$> _i1Description,
-                  ("tags" .=) <$> _i1Tags])
+                 [("status" .=) <$> _insnStatus,
+                  ("serviceAccounts" .=) <$> _insnServiceAccounts,
+                  ("networkInterfaces" .=) <$> _insnNetworkInterfaces,
+                  Just ("kind" .= _insnKind),
+                  ("zone" .=) <$> _insnZone,
+                  ("cpuPlatform" .=) <$> _insnCPUPlatform,
+                  ("selfLink" .=) <$> _insnSelfLink,
+                  ("name" .=) <$> _insnName,
+                  ("statusMessage" .=) <$> _insnStatusMessage,
+                  ("creationTimestamp" .=) <$> _insnCreationTimestamp,
+                  ("machineType" .=) <$> _insnMachineType,
+                  ("metadata" .=) <$> _insnMetadata,
+                  ("id" .=) <$> _insnId,
+                  ("scheduling" .=) <$> _insnScheduling,
+                  ("disks" .=) <$> _insnDisks,
+                  ("canIpForward" .=) <$> _insnCanIPForward,
+                  ("description" .=) <$> _insnDescription,
+                  ("tags" .=) <$> _insnTags])
 
 -- | A matcher for the path portion of the URL. The BackendService from the
 -- longest-matched rule will serve the URL. If no rule was matched, the

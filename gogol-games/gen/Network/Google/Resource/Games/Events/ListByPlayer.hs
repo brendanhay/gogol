@@ -30,8 +30,8 @@ module Network.Google.Resource.Games.Events.ListByPlayer
       EventsListByPlayerResource
 
     -- * Creating a Request
-    , eventsListByPlayer'
-    , EventsListByPlayer'
+    , eventsListByPlayer
+    , EventsListByPlayer
 
     -- * Request Lenses
     , elbpLanguage
@@ -43,7 +43,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.events.listByPlayer@ method which the
--- 'EventsListByPlayer'' request conforms to.
+-- 'EventsListByPlayer' request conforms to.
 type EventsListByPlayerResource =
      "events" :>
        QueryParam "language" Text :>
@@ -55,14 +55,14 @@ type EventsListByPlayerResource =
 -- | Returns a list showing the current progress on events in this
 -- application for the currently authenticated user.
 --
--- /See:/ 'eventsListByPlayer'' smart constructor.
-data EventsListByPlayer' = EventsListByPlayer'
+-- /See:/ 'eventsListByPlayer' smart constructor.
+data EventsListByPlayer = EventsListByPlayer
     { _elbpLanguage   :: !(Maybe Text)
     , _elbpPageToken  :: !(Maybe Text)
     , _elbpMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventsListByPlayer'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventsListByPlayer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,22 +71,22 @@ data EventsListByPlayer' = EventsListByPlayer'
 -- * 'elbpPageToken'
 --
 -- * 'elbpMaxResults'
-eventsListByPlayer'
-    :: EventsListByPlayer'
-eventsListByPlayer' =
-    EventsListByPlayer'
+eventsListByPlayer
+    :: EventsListByPlayer
+eventsListByPlayer =
+    EventsListByPlayer
     { _elbpLanguage = Nothing
     , _elbpPageToken = Nothing
     , _elbpMaxResults = Nothing
     }
 
 -- | The preferred language to use for strings returned by this method.
-elbpLanguage :: Lens' EventsListByPlayer' (Maybe Text)
+elbpLanguage :: Lens' EventsListByPlayer (Maybe Text)
 elbpLanguage
   = lens _elbpLanguage (\ s a -> s{_elbpLanguage = a})
 
 -- | The token returned by the previous request.
-elbpPageToken :: Lens' EventsListByPlayer' (Maybe Text)
+elbpPageToken :: Lens' EventsListByPlayer (Maybe Text)
 elbpPageToken
   = lens _elbpPageToken
       (\ s a -> s{_elbpPageToken = a})
@@ -94,14 +94,14 @@ elbpPageToken
 -- | The maximum number of events to return in the response, used for paging.
 -- For any response, the actual number of events to return may be less than
 -- the specified maxResults.
-elbpMaxResults :: Lens' EventsListByPlayer' (Maybe Int32)
+elbpMaxResults :: Lens' EventsListByPlayer (Maybe Int32)
 elbpMaxResults
   = lens _elbpMaxResults
       (\ s a -> s{_elbpMaxResults = a})
 
-instance GoogleRequest EventsListByPlayer' where
-        type Rs EventsListByPlayer' = PlayerEventListResponse
-        requestClient EventsListByPlayer'{..}
+instance GoogleRequest EventsListByPlayer where
+        type Rs EventsListByPlayer = PlayerEventListResponse
+        requestClient EventsListByPlayer{..}
           = go _elbpLanguage _elbpPageToken _elbpMaxResults
               (Just AltJSON)
               gamesService

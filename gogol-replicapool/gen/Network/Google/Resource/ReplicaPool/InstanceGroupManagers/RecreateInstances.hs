@@ -30,8 +30,8 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.RecreateInstanc
       InstanceGroupManagersRecreateInstancesResource
 
     -- * Creating a Request
-    , instanceGroupManagersRecreateInstances'
-    , InstanceGroupManagersRecreateInstances'
+    , instanceGroupManagersRecreateInstances
+    , InstanceGroupManagersRecreateInstances
 
     -- * Request Lenses
     , igmriProject
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.instanceGroupManagers.recreateInstances@ method which the
--- 'InstanceGroupManagersRecreateInstances'' request conforms to.
+-- 'InstanceGroupManagersRecreateInstances' request conforms to.
 type InstanceGroupManagersRecreateInstancesResource =
      Capture "project" Text :>
        "zones" :>
@@ -60,15 +60,15 @@ type InstanceGroupManagersRecreateInstancesResource =
 -- | Recreates the specified instances. The instances are deleted, then
 -- recreated using the instance group manager\'s current instance template.
 --
--- /See:/ 'instanceGroupManagersRecreateInstances'' smart constructor.
-data InstanceGroupManagersRecreateInstances' = InstanceGroupManagersRecreateInstances'
+-- /See:/ 'instanceGroupManagersRecreateInstances' smart constructor.
+data InstanceGroupManagersRecreateInstances = InstanceGroupManagersRecreateInstances
     { _igmriProject              :: !Text
     , _igmriInstanceGroupManager :: !Text
     , _igmriZone                 :: !Text
     , _igmriPayload              :: !InstanceGroupManagersRecreateInstancesRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupManagersRecreateInstances'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupManagersRecreateInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,14 +79,14 @@ data InstanceGroupManagersRecreateInstances' = InstanceGroupManagersRecreateInst
 -- * 'igmriZone'
 --
 -- * 'igmriPayload'
-instanceGroupManagersRecreateInstances'
+instanceGroupManagersRecreateInstances
     :: Text -- ^ 'igmriProject'
     -> Text -- ^ 'igmriInstanceGroupManager'
     -> Text -- ^ 'igmriZone'
     -> InstanceGroupManagersRecreateInstancesRequest -- ^ 'igmriPayload'
-    -> InstanceGroupManagersRecreateInstances'
-instanceGroupManagersRecreateInstances' pIgmriProject_ pIgmriInstanceGroupManager_ pIgmriZone_ pIgmriPayload_ =
-    InstanceGroupManagersRecreateInstances'
+    -> InstanceGroupManagersRecreateInstances
+instanceGroupManagersRecreateInstances pIgmriProject_ pIgmriInstanceGroupManager_ pIgmriZone_ pIgmriPayload_ =
+    InstanceGroupManagersRecreateInstances
     { _igmriProject = pIgmriProject_
     , _igmriInstanceGroupManager = pIgmriInstanceGroupManager_
     , _igmriZone = pIgmriZone_
@@ -94,32 +94,32 @@ instanceGroupManagersRecreateInstances' pIgmriProject_ pIgmriInstanceGroupManage
     }
 
 -- | The Google Developers Console project name.
-igmriProject :: Lens' InstanceGroupManagersRecreateInstances' Text
+igmriProject :: Lens' InstanceGroupManagersRecreateInstances Text
 igmriProject
   = lens _igmriProject (\ s a -> s{_igmriProject = a})
 
 -- | The name of the instance group manager.
-igmriInstanceGroupManager :: Lens' InstanceGroupManagersRecreateInstances' Text
+igmriInstanceGroupManager :: Lens' InstanceGroupManagersRecreateInstances Text
 igmriInstanceGroupManager
   = lens _igmriInstanceGroupManager
       (\ s a -> s{_igmriInstanceGroupManager = a})
 
 -- | The name of the zone in which the instance group manager resides.
-igmriZone :: Lens' InstanceGroupManagersRecreateInstances' Text
+igmriZone :: Lens' InstanceGroupManagersRecreateInstances Text
 igmriZone
   = lens _igmriZone (\ s a -> s{_igmriZone = a})
 
 -- | Multipart request metadata.
-igmriPayload :: Lens' InstanceGroupManagersRecreateInstances' InstanceGroupManagersRecreateInstancesRequest
+igmriPayload :: Lens' InstanceGroupManagersRecreateInstances InstanceGroupManagersRecreateInstancesRequest
 igmriPayload
   = lens _igmriPayload (\ s a -> s{_igmriPayload = a})
 
 instance GoogleRequest
-         InstanceGroupManagersRecreateInstances' where
-        type Rs InstanceGroupManagersRecreateInstances' =
+         InstanceGroupManagersRecreateInstances where
+        type Rs InstanceGroupManagersRecreateInstances =
              Operation
         requestClient
-          InstanceGroupManagersRecreateInstances'{..}
+          InstanceGroupManagersRecreateInstances{..}
           = go _igmriProject _igmriZone
               _igmriInstanceGroupManager
               (Just AltJSON)

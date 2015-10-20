@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidPublisher.Entitlements.List
       EntitlementsListResource
 
     -- * Creating a Request
-    , entitlementsList'
-    , EntitlementsList'
+    , entitlementsList
+    , EntitlementsList
 
     -- * Request Lenses
     , elPackageName
@@ -44,7 +44,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.entitlements.list@ method which the
--- 'EntitlementsList'' request conforms to.
+-- 'EntitlementsList' request conforms to.
 type EntitlementsListResource =
      Capture "packageName" Text :>
        "entitlements" :>
@@ -57,8 +57,8 @@ type EntitlementsListResource =
 
 -- | Lists the user\'s current inapp item or subscription entitlements
 --
--- /See:/ 'entitlementsList'' smart constructor.
-data EntitlementsList' = EntitlementsList'
+-- /See:/ 'entitlementsList' smart constructor.
+data EntitlementsList = EntitlementsList
     { _elPackageName :: !Text
     , _elToken       :: !(Maybe Text)
     , _elStartIndex  :: !(Maybe Word32)
@@ -66,7 +66,7 @@ data EntitlementsList' = EntitlementsList'
     , _elMaxResults  :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EntitlementsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'EntitlementsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,11 +79,11 @@ data EntitlementsList' = EntitlementsList'
 -- * 'elProductId'
 --
 -- * 'elMaxResults'
-entitlementsList'
+entitlementsList
     :: Text -- ^ 'elPackageName'
-    -> EntitlementsList'
-entitlementsList' pElPackageName_ =
-    EntitlementsList'
+    -> EntitlementsList
+entitlementsList pElPackageName_ =
+    EntitlementsList
     { _elPackageName = pElPackageName_
     , _elToken = Nothing
     , _elStartIndex = Nothing
@@ -93,31 +93,31 @@ entitlementsList' pElPackageName_ =
 
 -- | The package name of the application the inapp product was sold in (for
 -- example, \'com.some.thing\').
-elPackageName :: Lens' EntitlementsList' Text
+elPackageName :: Lens' EntitlementsList Text
 elPackageName
   = lens _elPackageName
       (\ s a -> s{_elPackageName = a})
 
-elToken :: Lens' EntitlementsList' (Maybe Text)
+elToken :: Lens' EntitlementsList (Maybe Text)
 elToken = lens _elToken (\ s a -> s{_elToken = a})
 
-elStartIndex :: Lens' EntitlementsList' (Maybe Word32)
+elStartIndex :: Lens' EntitlementsList (Maybe Word32)
 elStartIndex
   = lens _elStartIndex (\ s a -> s{_elStartIndex = a})
 
 -- | The product id of the inapp product (for example, \'sku1\'). This can be
 -- used to restrict the result set.
-elProductId :: Lens' EntitlementsList' (Maybe Text)
+elProductId :: Lens' EntitlementsList (Maybe Text)
 elProductId
   = lens _elProductId (\ s a -> s{_elProductId = a})
 
-elMaxResults :: Lens' EntitlementsList' (Maybe Word32)
+elMaxResults :: Lens' EntitlementsList (Maybe Word32)
 elMaxResults
   = lens _elMaxResults (\ s a -> s{_elMaxResults = a})
 
-instance GoogleRequest EntitlementsList' where
-        type Rs EntitlementsList' = EntitlementsListResponse
-        requestClient EntitlementsList'{..}
+instance GoogleRequest EntitlementsList where
+        type Rs EntitlementsList = EntitlementsListResponse
+        requestClient EntitlementsList{..}
           = go _elPackageName _elToken _elStartIndex
               _elProductId
               _elMaxResults

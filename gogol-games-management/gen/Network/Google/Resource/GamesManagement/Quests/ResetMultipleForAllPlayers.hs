@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Quests.ResetMultipleForAllPlayers
       QuestsResetMultipleForAllPlayersResource
 
     -- * Creating a Request
-    , questsResetMultipleForAllPlayers'
-    , QuestsResetMultipleForAllPlayers'
+    , questsResetMultipleForAllPlayers
+    , QuestsResetMultipleForAllPlayers
 
     -- * Request Lenses
     , qrmfapPayload
@@ -42,7 +42,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.quests.resetMultipleForAllPlayers@ method which the
--- 'QuestsResetMultipleForAllPlayers'' request conforms to.
+-- 'QuestsResetMultipleForAllPlayers' request conforms to.
 type QuestsResetMultipleForAllPlayersResource =
      "quests" :>
        "resetMultipleForAllPlayers" :>
@@ -54,34 +54,34 @@ type QuestsResetMultipleForAllPlayersResource =
 -- available to user accounts for your developer console. Only draft quests
 -- may be reset.
 --
--- /See:/ 'questsResetMultipleForAllPlayers'' smart constructor.
-newtype QuestsResetMultipleForAllPlayers' = QuestsResetMultipleForAllPlayers'
+-- /See:/ 'questsResetMultipleForAllPlayers' smart constructor.
+newtype QuestsResetMultipleForAllPlayers = QuestsResetMultipleForAllPlayers
     { _qrmfapPayload :: QuestsResetMultipleForAllRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'QuestsResetMultipleForAllPlayers'' with the minimum fields required to make a request.
+-- | Creates a value of 'QuestsResetMultipleForAllPlayers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'qrmfapPayload'
-questsResetMultipleForAllPlayers'
+questsResetMultipleForAllPlayers
     :: QuestsResetMultipleForAllRequest -- ^ 'qrmfapPayload'
-    -> QuestsResetMultipleForAllPlayers'
-questsResetMultipleForAllPlayers' pQrmfapPayload_ =
-    QuestsResetMultipleForAllPlayers'
+    -> QuestsResetMultipleForAllPlayers
+questsResetMultipleForAllPlayers pQrmfapPayload_ =
+    QuestsResetMultipleForAllPlayers
     { _qrmfapPayload = pQrmfapPayload_
     }
 
 -- | Multipart request metadata.
-qrmfapPayload :: Lens' QuestsResetMultipleForAllPlayers' QuestsResetMultipleForAllRequest
+qrmfapPayload :: Lens' QuestsResetMultipleForAllPlayers QuestsResetMultipleForAllRequest
 qrmfapPayload
   = lens _qrmfapPayload
       (\ s a -> s{_qrmfapPayload = a})
 
 instance GoogleRequest
-         QuestsResetMultipleForAllPlayers' where
-        type Rs QuestsResetMultipleForAllPlayers' = ()
-        requestClient QuestsResetMultipleForAllPlayers'{..}
+         QuestsResetMultipleForAllPlayers where
+        type Rs QuestsResetMultipleForAllPlayers = ()
+        requestClient QuestsResetMultipleForAllPlayers{..}
           = go (Just AltJSON) _qrmfapPayload
               gamesManagementService
           where go

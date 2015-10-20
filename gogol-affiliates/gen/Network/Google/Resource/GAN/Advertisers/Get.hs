@@ -32,8 +32,8 @@ module Network.Google.Resource.GAN.Advertisers.Get
       AdvertisersGetResource
 
     -- * Creating a Request
-    , advertisersGet'
-    , AdvertisersGet'
+    , advertisersGet
+    , AdvertisersGet
 
     -- * Request Lenses
     , agAdvertiserId
@@ -45,7 +45,7 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gan.advertisers.get@ method which the
--- 'AdvertisersGet'' request conforms to.
+-- 'AdvertisersGet' request conforms to.
 type AdvertisersGetResource =
      Capture "role" AdvertisersGetRole :>
        Capture "roleId" Text :>
@@ -58,14 +58,14 @@ type AdvertisersGetResource =
 -- advertisers. Advertisers can request information about themselves by
 -- omitting the advertiserId query parameter.
 --
--- /See:/ 'advertisersGet'' smart constructor.
-data AdvertisersGet' = AdvertisersGet'
+-- /See:/ 'advertisersGet' smart constructor.
+data AdvertisersGet = AdvertisersGet
     { _agAdvertiserId :: !(Maybe Text)
     , _agRoleId       :: !Text
     , _agRole         :: !AdvertisersGetRole
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdvertisersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdvertisersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,35 +74,35 @@ data AdvertisersGet' = AdvertisersGet'
 -- * 'agRoleId'
 --
 -- * 'agRole'
-advertisersGet'
+advertisersGet
     :: Text -- ^ 'agRoleId'
     -> AdvertisersGetRole -- ^ 'agRole'
-    -> AdvertisersGet'
-advertisersGet' pAgRoleId_ pAgRole_ =
-    AdvertisersGet'
+    -> AdvertisersGet
+advertisersGet pAgRoleId_ pAgRole_ =
+    AdvertisersGet
     { _agAdvertiserId = Nothing
     , _agRoleId = pAgRoleId_
     , _agRole = pAgRole_
     }
 
 -- | The ID of the advertiser to look up. Optional.
-agAdvertiserId :: Lens' AdvertisersGet' (Maybe Text)
+agAdvertiserId :: Lens' AdvertisersGet (Maybe Text)
 agAdvertiserId
   = lens _agAdvertiserId
       (\ s a -> s{_agAdvertiserId = a})
 
 -- | The ID of the requesting advertiser or publisher.
-agRoleId :: Lens' AdvertisersGet' Text
+agRoleId :: Lens' AdvertisersGet Text
 agRoleId = lens _agRoleId (\ s a -> s{_agRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-agRole :: Lens' AdvertisersGet' AdvertisersGetRole
+agRole :: Lens' AdvertisersGet AdvertisersGetRole
 agRole = lens _agRole (\ s a -> s{_agRole = a})
 
-instance GoogleRequest AdvertisersGet' where
-        type Rs AdvertisersGet' = Advertiser
-        requestClient AdvertisersGet'{..}
+instance GoogleRequest AdvertisersGet where
+        type Rs AdvertisersGet = Advertiser
+        requestClient AdvertisersGet{..}
           = go _agRole _agRoleId _agAdvertiserId (Just AltJSON)
               affiliatesService
           where go

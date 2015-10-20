@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.UserProFiles.List
       UserProFilesListResource
 
     -- * Creating a Request
-    , userProFilesList'
-    , UserProFilesList'
+    , userProFilesList
+    , UserProFilesList
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.userProfiles.list@ method which the
--- 'UserProFilesList'' request conforms to.
+-- 'UserProFilesList' request conforms to.
 type UserProFilesListResource =
      "userprofiles" :>
        QueryParam "alt" AltJSON :>
@@ -46,20 +46,20 @@ type UserProFilesListResource =
 
 -- | Retrieves list of user profiles for a user.
 --
--- /See:/ 'userProFilesList'' smart constructor.
-data UserProFilesList' =
-    UserProFilesList'
+-- /See:/ 'userProFilesList' smart constructor.
+data UserProFilesList =
+    UserProFilesList
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UserProFilesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'UserProFilesList' with the minimum fields required to make a request.
 --
-userProFilesList'
-    :: UserProFilesList'
-userProFilesList' = UserProFilesList'
+userProFilesList
+    :: UserProFilesList
+userProFilesList = UserProFilesList
 
-instance GoogleRequest UserProFilesList' where
-        type Rs UserProFilesList' = UserProFileList
-        requestClient UserProFilesList'{}
+instance GoogleRequest UserProFilesList where
+        type Rs UserProFilesList = UserProFileList
+        requestClient UserProFilesList{}
           = go (Just AltJSON) dFAReportingService
           where go
                   = buildClient

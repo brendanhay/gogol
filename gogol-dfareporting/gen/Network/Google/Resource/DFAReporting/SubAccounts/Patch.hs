@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Patch
       SubAccountsPatchResource
 
     -- * Creating a Request
-    , subAccountsPatch'
-    , SubAccountsPatch'
+    , subAccountsPatch
+    , SubAccountsPatch
 
     -- * Request Lenses
     , sapProFileId
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.subaccounts.patch@ method which the
--- 'SubAccountsPatch'' request conforms to.
+-- 'SubAccountsPatch' request conforms to.
 type SubAccountsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -54,14 +54,14 @@ type SubAccountsPatchResource =
 
 -- | Updates an existing subaccount. This method supports patch semantics.
 --
--- /See:/ 'subAccountsPatch'' smart constructor.
-data SubAccountsPatch' = SubAccountsPatch'
+-- /See:/ 'subAccountsPatch' smart constructor.
+data SubAccountsPatch = SubAccountsPatch
     { _sapProFileId :: !Int64
     , _sapPayload   :: !SubAccount
     , _sapId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubAccountsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubAccountsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,35 +70,35 @@ data SubAccountsPatch' = SubAccountsPatch'
 -- * 'sapPayload'
 --
 -- * 'sapId'
-subAccountsPatch'
+subAccountsPatch
     :: Int64 -- ^ 'sapProFileId'
     -> SubAccount -- ^ 'sapPayload'
     -> Int64 -- ^ 'sapId'
-    -> SubAccountsPatch'
-subAccountsPatch' pSapProFileId_ pSapPayload_ pSapId_ =
-    SubAccountsPatch'
+    -> SubAccountsPatch
+subAccountsPatch pSapProFileId_ pSapPayload_ pSapId_ =
+    SubAccountsPatch
     { _sapProFileId = pSapProFileId_
     , _sapPayload = pSapPayload_
     , _sapId = pSapId_
     }
 
 -- | User profile ID associated with this request.
-sapProFileId :: Lens' SubAccountsPatch' Int64
+sapProFileId :: Lens' SubAccountsPatch Int64
 sapProFileId
   = lens _sapProFileId (\ s a -> s{_sapProFileId = a})
 
 -- | Multipart request metadata.
-sapPayload :: Lens' SubAccountsPatch' SubAccount
+sapPayload :: Lens' SubAccountsPatch SubAccount
 sapPayload
   = lens _sapPayload (\ s a -> s{_sapPayload = a})
 
 -- | Subaccount ID.
-sapId :: Lens' SubAccountsPatch' Int64
+sapId :: Lens' SubAccountsPatch Int64
 sapId = lens _sapId (\ s a -> s{_sapId = a})
 
-instance GoogleRequest SubAccountsPatch' where
-        type Rs SubAccountsPatch' = SubAccount
-        requestClient SubAccountsPatch'{..}
+instance GoogleRequest SubAccountsPatch where
+        type Rs SubAccountsPatch = SubAccount
+        requestClient SubAccountsPatch{..}
           = go _sapProFileId (Just _sapId) (Just AltJSON)
               _sapPayload
               dFAReportingService

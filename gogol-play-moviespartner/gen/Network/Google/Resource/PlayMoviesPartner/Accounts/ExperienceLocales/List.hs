@@ -31,8 +31,8 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
       AccountsExperienceLocalesListResource
 
     -- * Creating a Request
-    , accountsExperienceLocalesList'
-    , AccountsExperienceLocalesList'
+    , accountsExperienceLocalesList
+    , AccountsExperienceLocalesList
 
     -- * Request Lenses
     , aellTitleLevelEidr
@@ -58,7 +58,7 @@ import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @playmoviespartner.accounts.experienceLocales.list@ method which the
--- 'AccountsExperienceLocalesList'' request conforms to.
+-- 'AccountsExperienceLocalesList' request conforms to.
 type AccountsExperienceLocalesListResource =
      "v1" :>
        "accounts" :>
@@ -88,8 +88,8 @@ type AccountsExperienceLocalesListResource =
 -- _Authentication and Authorization rules_ and _List methods rules_ for
 -- more information about this method.
 --
--- /See:/ 'accountsExperienceLocalesList'' smart constructor.
-data AccountsExperienceLocalesList' = AccountsExperienceLocalesList'
+-- /See:/ 'accountsExperienceLocalesList' smart constructor.
+data AccountsExperienceLocalesList = AccountsExperienceLocalesList
     { _aellTitleLevelEidr :: !(Maybe Text)
     , _aellStatus         :: !(Maybe [Text])
     , _aellPphNames       :: !(Maybe [Text])
@@ -109,7 +109,7 @@ data AccountsExperienceLocalesList' = AccountsExperienceLocalesList'
     , _aellCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsExperienceLocalesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsExperienceLocalesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -146,11 +146,11 @@ data AccountsExperienceLocalesList' = AccountsExperienceLocalesList'
 -- * 'aellPageSize'
 --
 -- * 'aellCallback'
-accountsExperienceLocalesList'
+accountsExperienceLocalesList
     :: Text -- ^ 'aellAccountId'
-    -> AccountsExperienceLocalesList'
-accountsExperienceLocalesList' pAellAccountId_ =
-    AccountsExperienceLocalesList'
+    -> AccountsExperienceLocalesList
+accountsExperienceLocalesList pAellAccountId_ =
+    AccountsExperienceLocalesList
     { _aellTitleLevelEidr = Nothing
     , _aellStatus = Nothing
     , _aellPphNames = Nothing
@@ -171,32 +171,32 @@ accountsExperienceLocalesList' pAellAccountId_ =
     }
 
 -- | Filter ExperienceLocales that match a given title-level EIDR.
-aellTitleLevelEidr :: Lens' AccountsExperienceLocalesList' (Maybe Text)
+aellTitleLevelEidr :: Lens' AccountsExperienceLocalesList (Maybe Text)
 aellTitleLevelEidr
   = lens _aellTitleLevelEidr
       (\ s a -> s{_aellTitleLevelEidr = a})
 
 -- | Filter ExperienceLocales that match one of the given status.
-aellStatus :: Lens' AccountsExperienceLocalesList' [Text]
+aellStatus :: Lens' AccountsExperienceLocalesList [Text]
 aellStatus
   = lens _aellStatus (\ s a -> s{_aellStatus = a}) .
       _Default
       . _Coerce
 
 -- | See _List methods rules_ for info about this field.
-aellPphNames :: Lens' AccountsExperienceLocalesList' [Text]
+aellPphNames :: Lens' AccountsExperienceLocalesList [Text]
 aellPphNames
   = lens _aellPphNames (\ s a -> s{_aellPphNames = a})
       . _Default
       . _Coerce
 
 -- | V1 error format.
-aellXgafv :: Lens' AccountsExperienceLocalesList' (Maybe Text)
+aellXgafv :: Lens' AccountsExperienceLocalesList (Maybe Text)
 aellXgafv
   = lens _aellXgafv (\ s a -> s{_aellXgafv = a})
 
 -- | See _List methods rules_ for info about this field.
-aellStudioNames :: Lens' AccountsExperienceLocalesList' [Text]
+aellStudioNames :: Lens' AccountsExperienceLocalesList [Text]
 aellStudioNames
   = lens _aellStudioNames
       (\ s a -> s{_aellStudioNames = a})
@@ -204,78 +204,78 @@ aellStudioNames
       . _Coerce
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-aellUploadProtocol :: Lens' AccountsExperienceLocalesList' (Maybe Text)
+aellUploadProtocol :: Lens' AccountsExperienceLocalesList (Maybe Text)
 aellUploadProtocol
   = lens _aellUploadProtocol
       (\ s a -> s{_aellUploadProtocol = a})
 
 -- | Pretty-print response.
-aellPp :: Lens' AccountsExperienceLocalesList' Bool
+aellPp :: Lens' AccountsExperienceLocalesList Bool
 aellPp = lens _aellPp (\ s a -> s{_aellPp = a})
 
 -- | OAuth access token.
-aellAccessToken :: Lens' AccountsExperienceLocalesList' (Maybe Text)
+aellAccessToken :: Lens' AccountsExperienceLocalesList (Maybe Text)
 aellAccessToken
   = lens _aellAccessToken
       (\ s a -> s{_aellAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-aellUploadType :: Lens' AccountsExperienceLocalesList' (Maybe Text)
+aellUploadType :: Lens' AccountsExperienceLocalesList (Maybe Text)
 aellUploadType
   = lens _aellUploadType
       (\ s a -> s{_aellUploadType = a})
 
 -- | Filter ExperienceLocales that match a case-insensitive, partner-specific
 -- Alternative Cut ID.
-aellAltCutId :: Lens' AccountsExperienceLocalesList' (Maybe Text)
+aellAltCutId :: Lens' AccountsExperienceLocalesList (Maybe Text)
 aellAltCutId
   = lens _aellAltCutId (\ s a -> s{_aellAltCutId = a})
 
 -- | Filter ExperienceLocales that match a case-insensitive, partner-specific
 -- custom id.
-aellCustomId :: Lens' AccountsExperienceLocalesList' (Maybe Text)
+aellCustomId :: Lens' AccountsExperienceLocalesList (Maybe Text)
 aellCustomId
   = lens _aellCustomId (\ s a -> s{_aellCustomId = a})
 
 -- | REQUIRED. See _General rules_ for more information about this field.
-aellAccountId :: Lens' AccountsExperienceLocalesList' Text
+aellAccountId :: Lens' AccountsExperienceLocalesList Text
 aellAccountId
   = lens _aellAccountId
       (\ s a -> s{_aellAccountId = a})
 
 -- | OAuth bearer token.
-aellBearerToken :: Lens' AccountsExperienceLocalesList' (Maybe Text)
+aellBearerToken :: Lens' AccountsExperienceLocalesList (Maybe Text)
 aellBearerToken
   = lens _aellBearerToken
       (\ s a -> s{_aellBearerToken = a})
 
 -- | Filter ExperienceLocales that match a given edit-level EIDR.
-aellEditLevelEidr :: Lens' AccountsExperienceLocalesList' (Maybe Text)
+aellEditLevelEidr :: Lens' AccountsExperienceLocalesList (Maybe Text)
 aellEditLevelEidr
   = lens _aellEditLevelEidr
       (\ s a -> s{_aellEditLevelEidr = a})
 
 -- | See _List methods rules_ for info about this field.
-aellPageToken :: Lens' AccountsExperienceLocalesList' (Maybe Text)
+aellPageToken :: Lens' AccountsExperienceLocalesList (Maybe Text)
 aellPageToken
   = lens _aellPageToken
       (\ s a -> s{_aellPageToken = a})
 
 -- | See _List methods rules_ for info about this field.
-aellPageSize :: Lens' AccountsExperienceLocalesList' (Maybe Int32)
+aellPageSize :: Lens' AccountsExperienceLocalesList (Maybe Int32)
 aellPageSize
   = lens _aellPageSize (\ s a -> s{_aellPageSize = a})
 
 -- | JSONP
-aellCallback :: Lens' AccountsExperienceLocalesList' (Maybe Text)
+aellCallback :: Lens' AccountsExperienceLocalesList (Maybe Text)
 aellCallback
   = lens _aellCallback (\ s a -> s{_aellCallback = a})
 
-instance GoogleRequest AccountsExperienceLocalesList'
+instance GoogleRequest AccountsExperienceLocalesList
          where
-        type Rs AccountsExperienceLocalesList' =
+        type Rs AccountsExperienceLocalesList =
              ListExperienceLocalesResponse
-        requestClient AccountsExperienceLocalesList'{..}
+        requestClient AccountsExperienceLocalesList{..}
           = go _aellAccountId _aellTitleLevelEidr
               (_aellStatus ^. _Default)
               (_aellPphNames ^. _Default)

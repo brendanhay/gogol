@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.TargetHTTPSProxies.Insert
       TargetHTTPSProxiesInsertResource
 
     -- * Creating a Request
-    , targetHTTPSProxiesInsert'
-    , TargetHTTPSProxiesInsert'
+    , targetHTTPSProxiesInsert
+    , TargetHTTPSProxiesInsert
 
     -- * Request Lenses
     , thpiProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetHttpsProxies.insert@ method which the
--- 'TargetHTTPSProxiesInsert'' request conforms to.
+-- 'TargetHTTPSProxiesInsert' request conforms to.
 type TargetHTTPSProxiesInsertResource =
      Capture "project" Text :>
        "global" :>
@@ -54,43 +54,42 @@ type TargetHTTPSProxiesInsertResource =
 -- | Creates a TargetHttpsProxy resource in the specified project using the
 -- data included in the request.
 --
--- /See:/ 'targetHTTPSProxiesInsert'' smart constructor.
-data TargetHTTPSProxiesInsert' = TargetHTTPSProxiesInsert'
+-- /See:/ 'targetHTTPSProxiesInsert' smart constructor.
+data TargetHTTPSProxiesInsert = TargetHTTPSProxiesInsert
     { _thpiProject :: !Text
     , _thpiPayload :: !TargetHTTPSProxy
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetHTTPSProxiesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetHTTPSProxiesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'thpiProject'
 --
 -- * 'thpiPayload'
-targetHTTPSProxiesInsert'
+targetHTTPSProxiesInsert
     :: Text -- ^ 'thpiProject'
     -> TargetHTTPSProxy -- ^ 'thpiPayload'
-    -> TargetHTTPSProxiesInsert'
-targetHTTPSProxiesInsert' pThpiProject_ pThpiPayload_ =
-    TargetHTTPSProxiesInsert'
+    -> TargetHTTPSProxiesInsert
+targetHTTPSProxiesInsert pThpiProject_ pThpiPayload_ =
+    TargetHTTPSProxiesInsert
     { _thpiProject = pThpiProject_
     , _thpiPayload = pThpiPayload_
     }
 
 -- | Name of the project scoping this request.
-thpiProject :: Lens' TargetHTTPSProxiesInsert' Text
+thpiProject :: Lens' TargetHTTPSProxiesInsert Text
 thpiProject
   = lens _thpiProject (\ s a -> s{_thpiProject = a})
 
 -- | Multipart request metadata.
-thpiPayload :: Lens' TargetHTTPSProxiesInsert' TargetHTTPSProxy
+thpiPayload :: Lens' TargetHTTPSProxiesInsert TargetHTTPSProxy
 thpiPayload
   = lens _thpiPayload (\ s a -> s{_thpiPayload = a})
 
-instance GoogleRequest TargetHTTPSProxiesInsert'
-         where
-        type Rs TargetHTTPSProxiesInsert' = Operation
-        requestClient TargetHTTPSProxiesInsert'{..}
+instance GoogleRequest TargetHTTPSProxiesInsert where
+        type Rs TargetHTTPSProxiesInsert = Operation
+        requestClient TargetHTTPSProxiesInsert{..}
           = go _thpiProject (Just AltJSON) _thpiPayload
               computeService
           where go

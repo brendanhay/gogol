@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.Blogs.Get
       BlogsGetResource
 
     -- * Creating a Request
-    , blogsGet'
-    , BlogsGet'
+    , blogsGet
+    , BlogsGet
 
     -- * Request Lenses
     , bgBlogId
@@ -42,7 +42,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.blogs.get@ method which the
--- 'BlogsGet'' request conforms to.
+-- 'BlogsGet' request conforms to.
 type BlogsGetResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -52,14 +52,14 @@ type BlogsGetResource =
 
 -- | Gets one blog by ID.
 --
--- /See:/ 'blogsGet'' smart constructor.
-data BlogsGet' = BlogsGet'
+-- /See:/ 'blogsGet' smart constructor.
+data BlogsGet = BlogsGet
     { _bgBlogId   :: !Text
     , _bgMaxPosts :: !(Maybe Word32)
     , _bgView     :: !(Maybe BlogsGetView)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BlogsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'BlogsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,33 +68,33 @@ data BlogsGet' = BlogsGet'
 -- * 'bgMaxPosts'
 --
 -- * 'bgView'
-blogsGet'
+blogsGet
     :: Text -- ^ 'bgBlogId'
-    -> BlogsGet'
-blogsGet' pBgBlogId_ =
-    BlogsGet'
+    -> BlogsGet
+blogsGet pBgBlogId_ =
+    BlogsGet
     { _bgBlogId = pBgBlogId_
     , _bgMaxPosts = Nothing
     , _bgView = Nothing
     }
 
 -- | The ID of the blog to get.
-bgBlogId :: Lens' BlogsGet' Text
+bgBlogId :: Lens' BlogsGet Text
 bgBlogId = lens _bgBlogId (\ s a -> s{_bgBlogId = a})
 
 -- | Maximum number of posts to pull back with the blog.
-bgMaxPosts :: Lens' BlogsGet' (Maybe Word32)
+bgMaxPosts :: Lens' BlogsGet (Maybe Word32)
 bgMaxPosts
   = lens _bgMaxPosts (\ s a -> s{_bgMaxPosts = a})
 
 -- | Access level with which to view the blog. Note that some fields require
 -- elevated access.
-bgView :: Lens' BlogsGet' (Maybe BlogsGetView)
+bgView :: Lens' BlogsGet (Maybe BlogsGetView)
 bgView = lens _bgView (\ s a -> s{_bgView = a})
 
-instance GoogleRequest BlogsGet' where
-        type Rs BlogsGet' = Blog
-        requestClient BlogsGet'{..}
+instance GoogleRequest BlogsGet where
+        type Rs BlogsGet = Blog
+        requestClient BlogsGet{..}
           = go _bgBlogId _bgMaxPosts _bgView (Just AltJSON)
               bloggerService
           where go

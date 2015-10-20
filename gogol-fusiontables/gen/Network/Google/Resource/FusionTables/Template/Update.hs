@@ -29,20 +29,20 @@ module Network.Google.Resource.FusionTables.Template.Update
       TemplateUpdateResource
 
     -- * Creating a Request
-    , templateUpdate'
-    , TemplateUpdate'
+    , templateUpdate
+    , TemplateUpdate
 
     -- * Request Lenses
-    , temTemplateId
-    , temPayload
-    , temTableId
+    , tuTemplateId
+    , tuPayload
+    , tuTableId
     ) where
 
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.template.update@ method which the
--- 'TemplateUpdate'' request conforms to.
+-- 'TemplateUpdate' request conforms to.
 type TemplateUpdateResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -53,55 +53,54 @@ type TemplateUpdateResource =
 
 -- | Updates an existing template
 --
--- /See:/ 'templateUpdate'' smart constructor.
-data TemplateUpdate' = TemplateUpdate'
-    { _temTemplateId :: !Int32
-    , _temPayload    :: !Template
-    , _temTableId    :: !Text
+-- /See:/ 'templateUpdate' smart constructor.
+data TemplateUpdate = TemplateUpdate
+    { _tuTemplateId :: !Int32
+    , _tuPayload    :: !Template
+    , _tuTableId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TemplateUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'TemplateUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'temTemplateId'
+-- * 'tuTemplateId'
 --
--- * 'temPayload'
+-- * 'tuPayload'
 --
--- * 'temTableId'
-templateUpdate'
-    :: Int32 -- ^ 'temTemplateId'
-    -> Template -- ^ 'temPayload'
-    -> Text -- ^ 'temTableId'
-    -> TemplateUpdate'
-templateUpdate' pTemTemplateId_ pTemPayload_ pTemTableId_ =
-    TemplateUpdate'
-    { _temTemplateId = pTemTemplateId_
-    , _temPayload = pTemPayload_
-    , _temTableId = pTemTableId_
+-- * 'tuTableId'
+templateUpdate
+    :: Int32 -- ^ 'tuTemplateId'
+    -> Template -- ^ 'tuPayload'
+    -> Text -- ^ 'tuTableId'
+    -> TemplateUpdate
+templateUpdate pTuTemplateId_ pTuPayload_ pTuTableId_ =
+    TemplateUpdate
+    { _tuTemplateId = pTuTemplateId_
+    , _tuPayload = pTuPayload_
+    , _tuTableId = pTuTableId_
     }
 
 -- | Identifier for the template that is being updated
-temTemplateId :: Lens' TemplateUpdate' Int32
-temTemplateId
-  = lens _temTemplateId
-      (\ s a -> s{_temTemplateId = a})
+tuTemplateId :: Lens' TemplateUpdate Int32
+tuTemplateId
+  = lens _tuTemplateId (\ s a -> s{_tuTemplateId = a})
 
 -- | Multipart request metadata.
-temPayload :: Lens' TemplateUpdate' Template
-temPayload
-  = lens _temPayload (\ s a -> s{_temPayload = a})
+tuPayload :: Lens' TemplateUpdate Template
+tuPayload
+  = lens _tuPayload (\ s a -> s{_tuPayload = a})
 
 -- | Table to which the updated template belongs
-temTableId :: Lens' TemplateUpdate' Text
-temTableId
-  = lens _temTableId (\ s a -> s{_temTableId = a})
+tuTableId :: Lens' TemplateUpdate Text
+tuTableId
+  = lens _tuTableId (\ s a -> s{_tuTableId = a})
 
-instance GoogleRequest TemplateUpdate' where
-        type Rs TemplateUpdate' = Template
-        requestClient TemplateUpdate'{..}
-          = go _temTableId _temTemplateId (Just AltJSON)
-              _temPayload
+instance GoogleRequest TemplateUpdate where
+        type Rs TemplateUpdate = Template
+        requestClient TemplateUpdate{..}
+          = go _tuTableId _tuTemplateId (Just AltJSON)
+              _tuPayload
               fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TemplateUpdateResource)

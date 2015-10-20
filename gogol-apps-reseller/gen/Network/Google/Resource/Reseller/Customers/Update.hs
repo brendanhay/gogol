@@ -30,8 +30,8 @@ module Network.Google.Resource.Reseller.Customers.Update
       CustomersUpdateResource
 
     -- * Creating a Request
-    , customersUpdate'
-    , CustomersUpdate'
+    , customersUpdate
+    , CustomersUpdate
 
     -- * Request Lenses
     , cuPayload
@@ -42,7 +42,7 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @reseller.customers.update@ method which the
--- 'CustomersUpdate'' request conforms to.
+-- 'CustomersUpdate' request conforms to.
 type CustomersUpdateResource =
      "customers" :>
        Capture "customerId" Text :>
@@ -52,42 +52,42 @@ type CustomersUpdateResource =
 -- | Update a customer resource if one it exists and is owned by the
 -- reseller.
 --
--- /See:/ 'customersUpdate'' smart constructor.
-data CustomersUpdate' = CustomersUpdate'
+-- /See:/ 'customersUpdate' smart constructor.
+data CustomersUpdate = CustomersUpdate
     { _cuPayload    :: !Customer
     , _cuCustomerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CustomersUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CustomersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cuPayload'
 --
 -- * 'cuCustomerId'
-customersUpdate'
+customersUpdate
     :: Customer -- ^ 'cuPayload'
     -> Text -- ^ 'cuCustomerId'
-    -> CustomersUpdate'
-customersUpdate' pCuPayload_ pCuCustomerId_ =
-    CustomersUpdate'
+    -> CustomersUpdate
+customersUpdate pCuPayload_ pCuCustomerId_ =
+    CustomersUpdate
     { _cuPayload = pCuPayload_
     , _cuCustomerId = pCuCustomerId_
     }
 
 -- | Multipart request metadata.
-cuPayload :: Lens' CustomersUpdate' Customer
+cuPayload :: Lens' CustomersUpdate Customer
 cuPayload
   = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
 -- | Id of the Customer
-cuCustomerId :: Lens' CustomersUpdate' Text
+cuCustomerId :: Lens' CustomersUpdate Text
 cuCustomerId
   = lens _cuCustomerId (\ s a -> s{_cuCustomerId = a})
 
-instance GoogleRequest CustomersUpdate' where
-        type Rs CustomersUpdate' = Customer
-        requestClient CustomersUpdate'{..}
+instance GoogleRequest CustomersUpdate where
+        type Rs CustomersUpdate = Customer
+        requestClient CustomersUpdate{..}
           = go _cuCustomerId (Just AltJSON) _cuPayload
               appsResellerService
           where go

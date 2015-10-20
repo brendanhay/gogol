@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.Blogs.GetByURL
       BlogsGetByURLResource
 
     -- * Creating a Request
-    , blogsGetByURL'
-    , BlogsGetByURL'
+    , blogsGetByURL
+    , BlogsGetByURL
 
     -- * Request Lenses
     , bgbuURL
@@ -41,7 +41,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.blogs.getByUrl@ method which the
--- 'BlogsGetByURL'' request conforms to.
+-- 'BlogsGetByURL' request conforms to.
 type BlogsGetByURLResource =
      "blogs" :>
        "byurl" :>
@@ -51,40 +51,40 @@ type BlogsGetByURLResource =
 
 -- | Retrieve a Blog by URL.
 --
--- /See:/ 'blogsGetByURL'' smart constructor.
-data BlogsGetByURL' = BlogsGetByURL'
+-- /See:/ 'blogsGetByURL' smart constructor.
+data BlogsGetByURL = BlogsGetByURL
     { _bgbuURL  :: !Text
     , _bgbuView :: !(Maybe BlogsGetByURLView)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BlogsGetByURL'' with the minimum fields required to make a request.
+-- | Creates a value of 'BlogsGetByURL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'bgbuURL'
 --
 -- * 'bgbuView'
-blogsGetByURL'
+blogsGetByURL
     :: Text -- ^ 'bgbuURL'
-    -> BlogsGetByURL'
-blogsGetByURL' pBgbuURL_ =
-    BlogsGetByURL'
+    -> BlogsGetByURL
+blogsGetByURL pBgbuURL_ =
+    BlogsGetByURL
     { _bgbuURL = pBgbuURL_
     , _bgbuView = Nothing
     }
 
 -- | The URL of the blog to retrieve.
-bgbuURL :: Lens' BlogsGetByURL' Text
+bgbuURL :: Lens' BlogsGetByURL Text
 bgbuURL = lens _bgbuURL (\ s a -> s{_bgbuURL = a})
 
 -- | Access level with which to view the blog. Note that some fields require
 -- elevated access.
-bgbuView :: Lens' BlogsGetByURL' (Maybe BlogsGetByURLView)
+bgbuView :: Lens' BlogsGetByURL (Maybe BlogsGetByURLView)
 bgbuView = lens _bgbuView (\ s a -> s{_bgbuView = a})
 
-instance GoogleRequest BlogsGetByURL' where
-        type Rs BlogsGetByURL' = Blog
-        requestClient BlogsGetByURL'{..}
+instance GoogleRequest BlogsGetByURL where
+        type Rs BlogsGetByURL = Blog
+        requestClient BlogsGetByURL{..}
           = go (Just _bgbuURL) _bgbuView (Just AltJSON)
               bloggerService
           where go

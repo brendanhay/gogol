@@ -30,8 +30,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKListings.Delete
       EditsAPKListingsDeleteResource
 
     -- * Creating a Request
-    , editsAPKListingsDelete'
-    , EditsAPKListingsDelete'
+    , editsAPKListingsDelete
+    , EditsAPKListingsDelete
 
     -- * Request Lenses
     , eapkldPackageName
@@ -44,7 +44,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.apklistings.delete@ method which the
--- 'EditsAPKListingsDelete'' request conforms to.
+-- 'EditsAPKListingsDelete' request conforms to.
 type EditsAPKListingsDeleteResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -58,15 +58,15 @@ type EditsAPKListingsDeleteResource =
 -- | Deletes the APK-specific localized listing for a specified APK and
 -- language code.
 --
--- /See:/ 'editsAPKListingsDelete'' smart constructor.
-data EditsAPKListingsDelete' = EditsAPKListingsDelete'
+-- /See:/ 'editsAPKListingsDelete' smart constructor.
+data EditsAPKListingsDelete = EditsAPKListingsDelete
     { _eapkldPackageName    :: !Text
     , _eapkldAPKVersionCode :: !Int32
     , _eapkldLanguage       :: !Text
     , _eapkldEditId         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsAPKListingsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsAPKListingsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data EditsAPKListingsDelete' = EditsAPKListingsDelete'
 -- * 'eapkldLanguage'
 --
 -- * 'eapkldEditId'
-editsAPKListingsDelete'
+editsAPKListingsDelete
     :: Text -- ^ 'eapkldPackageName'
     -> Int32 -- ^ 'eapkldAPKVersionCode'
     -> Text -- ^ 'eapkldLanguage'
     -> Text -- ^ 'eapkldEditId'
-    -> EditsAPKListingsDelete'
-editsAPKListingsDelete' pEapkldPackageName_ pEapkldAPKVersionCode_ pEapkldLanguage_ pEapkldEditId_ =
-    EditsAPKListingsDelete'
+    -> EditsAPKListingsDelete
+editsAPKListingsDelete pEapkldPackageName_ pEapkldAPKVersionCode_ pEapkldLanguage_ pEapkldEditId_ =
+    EditsAPKListingsDelete
     { _eapkldPackageName = pEapkldPackageName_
     , _eapkldAPKVersionCode = pEapkldAPKVersionCode_
     , _eapkldLanguage = pEapkldLanguage_
@@ -93,14 +93,14 @@ editsAPKListingsDelete' pEapkldPackageName_ pEapkldAPKVersionCode_ pEapkldLangua
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eapkldPackageName :: Lens' EditsAPKListingsDelete' Text
+eapkldPackageName :: Lens' EditsAPKListingsDelete Text
 eapkldPackageName
   = lens _eapkldPackageName
       (\ s a -> s{_eapkldPackageName = a})
 
 -- | The APK version code whose APK-specific listings should be read or
 -- modified.
-eapkldAPKVersionCode :: Lens' EditsAPKListingsDelete' Int32
+eapkldAPKVersionCode :: Lens' EditsAPKListingsDelete Int32
 eapkldAPKVersionCode
   = lens _eapkldAPKVersionCode
       (\ s a -> s{_eapkldAPKVersionCode = a})
@@ -108,19 +108,19 @@ eapkldAPKVersionCode
 -- | The language code (a BCP-47 language tag) of the APK-specific localized
 -- listing to read or modify. For example, to select Austrian German, pass
 -- \"de-AT\".
-eapkldLanguage :: Lens' EditsAPKListingsDelete' Text
+eapkldLanguage :: Lens' EditsAPKListingsDelete Text
 eapkldLanguage
   = lens _eapkldLanguage
       (\ s a -> s{_eapkldLanguage = a})
 
 -- | Unique identifier for this edit.
-eapkldEditId :: Lens' EditsAPKListingsDelete' Text
+eapkldEditId :: Lens' EditsAPKListingsDelete Text
 eapkldEditId
   = lens _eapkldEditId (\ s a -> s{_eapkldEditId = a})
 
-instance GoogleRequest EditsAPKListingsDelete' where
-        type Rs EditsAPKListingsDelete' = ()
-        requestClient EditsAPKListingsDelete'{..}
+instance GoogleRequest EditsAPKListingsDelete where
+        type Rs EditsAPKListingsDelete = ()
+        requestClient EditsAPKListingsDelete{..}
           = go _eapkldPackageName _eapkldEditId
               _eapkldAPKVersionCode
               _eapkldLanguage

@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Update
       RemarketingListsUpdateResource
 
     -- * Creating a Request
-    , remarketingListsUpdate'
-    , RemarketingListsUpdate'
+    , remarketingListsUpdate
+    , RemarketingListsUpdate
 
     -- * Request Lenses
     , rluProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.remarketingLists.update@ method which the
--- 'RemarketingListsUpdate'' request conforms to.
+-- 'RemarketingListsUpdate' request conforms to.
 type RemarketingListsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,42 +52,42 @@ type RemarketingListsUpdateResource =
 
 -- | Updates an existing remarketing list.
 --
--- /See:/ 'remarketingListsUpdate'' smart constructor.
-data RemarketingListsUpdate' = RemarketingListsUpdate'
+-- /See:/ 'remarketingListsUpdate' smart constructor.
+data RemarketingListsUpdate = RemarketingListsUpdate
     { _rluProFileId :: !Int64
     , _rluPayload   :: !RemarketingList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RemarketingListsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'RemarketingListsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rluProFileId'
 --
 -- * 'rluPayload'
-remarketingListsUpdate'
+remarketingListsUpdate
     :: Int64 -- ^ 'rluProFileId'
     -> RemarketingList -- ^ 'rluPayload'
-    -> RemarketingListsUpdate'
-remarketingListsUpdate' pRluProFileId_ pRluPayload_ =
-    RemarketingListsUpdate'
+    -> RemarketingListsUpdate
+remarketingListsUpdate pRluProFileId_ pRluPayload_ =
+    RemarketingListsUpdate
     { _rluProFileId = pRluProFileId_
     , _rluPayload = pRluPayload_
     }
 
 -- | User profile ID associated with this request.
-rluProFileId :: Lens' RemarketingListsUpdate' Int64
+rluProFileId :: Lens' RemarketingListsUpdate Int64
 rluProFileId
   = lens _rluProFileId (\ s a -> s{_rluProFileId = a})
 
 -- | Multipart request metadata.
-rluPayload :: Lens' RemarketingListsUpdate' RemarketingList
+rluPayload :: Lens' RemarketingListsUpdate RemarketingList
 rluPayload
   = lens _rluPayload (\ s a -> s{_rluPayload = a})
 
-instance GoogleRequest RemarketingListsUpdate' where
-        type Rs RemarketingListsUpdate' = RemarketingList
-        requestClient RemarketingListsUpdate'{..}
+instance GoogleRequest RemarketingListsUpdate where
+        type Rs RemarketingListsUpdate = RemarketingList
+        requestClient RemarketingListsUpdate{..}
           = go _rluProFileId (Just AltJSON) _rluPayload
               dFAReportingService
           where go

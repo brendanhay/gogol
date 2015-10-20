@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Volumes.Associated.List
       VolumesAssociatedListResource
 
     -- * Creating a Request
-    , volumesAssociatedList'
-    , VolumesAssociatedList'
+    , volumesAssociatedList
+    , VolumesAssociatedList
 
     -- * Request Lenses
     , valLocale
@@ -44,7 +44,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.volumes.associated.list@ method which the
--- 'VolumesAssociatedList'' request conforms to.
+-- 'VolumesAssociatedList' request conforms to.
 type VolumesAssociatedListResource =
      "volumes" :>
        Capture "volumeId" Text :>
@@ -60,8 +60,8 @@ type VolumesAssociatedListResource =
 
 -- | Return a list of associated books.
 --
--- /See:/ 'volumesAssociatedList'' smart constructor.
-data VolumesAssociatedList' = VolumesAssociatedList'
+-- /See:/ 'volumesAssociatedList' smart constructor.
+data VolumesAssociatedList = VolumesAssociatedList
     { _valLocale                   :: !(Maybe Text)
     , _valMaxAllowedMaturityRating :: !(Maybe VolumesAssociatedListMaxAllowedMaturityRating)
     , _valVolumeId                 :: !Text
@@ -69,7 +69,7 @@ data VolumesAssociatedList' = VolumesAssociatedList'
     , _valAssociation              :: !(Maybe VolumesAssociatedListAssociation)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VolumesAssociatedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'VolumesAssociatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,11 +82,11 @@ data VolumesAssociatedList' = VolumesAssociatedList'
 -- * 'valSource'
 --
 -- * 'valAssociation'
-volumesAssociatedList'
+volumesAssociatedList
     :: Text -- ^ 'valVolumeId'
-    -> VolumesAssociatedList'
-volumesAssociatedList' pValVolumeId_ =
-    VolumesAssociatedList'
+    -> VolumesAssociatedList
+volumesAssociatedList pValVolumeId_ =
+    VolumesAssociatedList
     { _valLocale = Nothing
     , _valMaxAllowedMaturityRating = Nothing
     , _valVolumeId = pValVolumeId_
@@ -96,36 +96,36 @@ volumesAssociatedList' pValVolumeId_ =
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Ex: \'en_US\'. Used for
 -- generating recommendations.
-valLocale :: Lens' VolumesAssociatedList' (Maybe Text)
+valLocale :: Lens' VolumesAssociatedList (Maybe Text)
 valLocale
   = lens _valLocale (\ s a -> s{_valLocale = a})
 
 -- | The maximum allowed maturity rating of returned recommendations. Books
 -- with a higher maturity rating are filtered out.
-valMaxAllowedMaturityRating :: Lens' VolumesAssociatedList' (Maybe VolumesAssociatedListMaxAllowedMaturityRating)
+valMaxAllowedMaturityRating :: Lens' VolumesAssociatedList (Maybe VolumesAssociatedListMaxAllowedMaturityRating)
 valMaxAllowedMaturityRating
   = lens _valMaxAllowedMaturityRating
       (\ s a -> s{_valMaxAllowedMaturityRating = a})
 
 -- | ID of the source volume.
-valVolumeId :: Lens' VolumesAssociatedList' Text
+valVolumeId :: Lens' VolumesAssociatedList Text
 valVolumeId
   = lens _valVolumeId (\ s a -> s{_valVolumeId = a})
 
 -- | String to identify the originator of this request.
-valSource :: Lens' VolumesAssociatedList' (Maybe Text)
+valSource :: Lens' VolumesAssociatedList (Maybe Text)
 valSource
   = lens _valSource (\ s a -> s{_valSource = a})
 
 -- | Association type.
-valAssociation :: Lens' VolumesAssociatedList' (Maybe VolumesAssociatedListAssociation)
+valAssociation :: Lens' VolumesAssociatedList (Maybe VolumesAssociatedListAssociation)
 valAssociation
   = lens _valAssociation
       (\ s a -> s{_valAssociation = a})
 
-instance GoogleRequest VolumesAssociatedList' where
-        type Rs VolumesAssociatedList' = Volumes
-        requestClient VolumesAssociatedList'{..}
+instance GoogleRequest VolumesAssociatedList where
+        type Rs VolumesAssociatedList = Volumes
+        requestClient VolumesAssociatedList{..}
           = go _valVolumeId _valLocale
               _valMaxAllowedMaturityRating
               _valSource

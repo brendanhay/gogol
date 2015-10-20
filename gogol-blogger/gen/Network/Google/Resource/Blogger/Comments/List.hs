@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.Comments.List
       CommentsListResource
 
     -- * Creating a Request
-    , commentsList'
-    , CommentsList'
+    , commentsList
+    , CommentsList
 
     -- * Request Lenses
     , clStatus
@@ -48,7 +48,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.comments.list@ method which the
--- 'CommentsList'' request conforms to.
+-- 'CommentsList' request conforms to.
 type CommentsListResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -66,8 +66,8 @@ type CommentsListResource =
 
 -- | Retrieves the comments for a post, possibly filtered.
 --
--- /See:/ 'commentsList'' smart constructor.
-data CommentsList' = CommentsList'
+-- /See:/ 'commentsList' smart constructor.
+data CommentsList = CommentsList
     { _clStatus      :: !(Maybe [CommentsListStatus])
     , _clEndDate     :: !(Maybe DateTime')
     , _clBlogId      :: !Text
@@ -79,7 +79,7 @@ data CommentsList' = CommentsList'
     , _clMaxResults  :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -100,12 +100,12 @@ data CommentsList' = CommentsList'
 -- * 'clPageToken'
 --
 -- * 'clMaxResults'
-commentsList'
+commentsList
     :: Text -- ^ 'clBlogId'
     -> Text -- ^ 'clPostId'
-    -> CommentsList'
-commentsList' pClBlogId_ pClPostId_ =
-    CommentsList'
+    -> CommentsList
+commentsList pClBlogId_ pClPostId_ =
+    CommentsList
     { _clStatus = Nothing
     , _clEndDate = Nothing
     , _clBlogId = pClBlogId_
@@ -117,56 +117,56 @@ commentsList' pClBlogId_ pClPostId_ =
     , _clMaxResults = Nothing
     }
 
-clStatus :: Lens' CommentsList' [CommentsListStatus]
+clStatus :: Lens' CommentsList [CommentsListStatus]
 clStatus
   = lens _clStatus (\ s a -> s{_clStatus = a}) .
       _Default
       . _Coerce
 
 -- | Latest date of comment to fetch, a date-time with RFC 3339 formatting.
-clEndDate :: Lens' CommentsList' (Maybe UTCTime)
+clEndDate :: Lens' CommentsList (Maybe UTCTime)
 clEndDate
   = lens _clEndDate (\ s a -> s{_clEndDate = a}) .
       mapping _DateTime
 
 -- | ID of the blog to fetch comments from.
-clBlogId :: Lens' CommentsList' Text
+clBlogId :: Lens' CommentsList Text
 clBlogId = lens _clBlogId (\ s a -> s{_clBlogId = a})
 
 -- | Earliest date of comment to fetch, a date-time with RFC 3339 formatting.
-clStartDate :: Lens' CommentsList' (Maybe UTCTime)
+clStartDate :: Lens' CommentsList (Maybe UTCTime)
 clStartDate
   = lens _clStartDate (\ s a -> s{_clStartDate = a}) .
       mapping _DateTime
 
 -- | Whether the body content of the comments is included.
-clFetchBodies :: Lens' CommentsList' (Maybe Bool)
+clFetchBodies :: Lens' CommentsList (Maybe Bool)
 clFetchBodies
   = lens _clFetchBodies
       (\ s a -> s{_clFetchBodies = a})
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
-clView :: Lens' CommentsList' (Maybe CommentsListView)
+clView :: Lens' CommentsList (Maybe CommentsListView)
 clView = lens _clView (\ s a -> s{_clView = a})
 
 -- | ID of the post to fetch posts from.
-clPostId :: Lens' CommentsList' Text
+clPostId :: Lens' CommentsList Text
 clPostId = lens _clPostId (\ s a -> s{_clPostId = a})
 
 -- | Continuation token if request is paged.
-clPageToken :: Lens' CommentsList' (Maybe Text)
+clPageToken :: Lens' CommentsList (Maybe Text)
 clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
 -- | Maximum number of comments to include in the result.
-clMaxResults :: Lens' CommentsList' (Maybe Word32)
+clMaxResults :: Lens' CommentsList (Maybe Word32)
 clMaxResults
   = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
 
-instance GoogleRequest CommentsList' where
-        type Rs CommentsList' = CommentList
-        requestClient CommentsList'{..}
+instance GoogleRequest CommentsList where
+        type Rs CommentsList = CommentList
+        requestClient CommentsList{..}
           = go _clBlogId _clPostId (_clStatus ^. _Default)
               _clEndDate
               _clStartDate

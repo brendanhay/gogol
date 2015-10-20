@@ -29,8 +29,8 @@ module Network.Google.Resource.Mirror.Locations.Get
       LocationsGetResource
 
     -- * Creating a Request
-    , locationsGet'
-    , LocationsGet'
+    , locationsGet
+    , LocationsGet
 
     -- * Request Lenses
     , lgId
@@ -40,7 +40,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.locations.get@ method which the
--- 'LocationsGet'' request conforms to.
+-- 'LocationsGet' request conforms to.
 type LocationsGetResource =
      "locations" :>
        Capture "id" Text :>
@@ -48,31 +48,31 @@ type LocationsGetResource =
 
 -- | Gets a single location by ID.
 --
--- /See:/ 'locationsGet'' smart constructor.
-newtype LocationsGet' = LocationsGet'
+-- /See:/ 'locationsGet' smart constructor.
+newtype LocationsGet = LocationsGet
     { _lgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LocationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'LocationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lgId'
-locationsGet'
+locationsGet
     :: Text -- ^ 'lgId'
-    -> LocationsGet'
-locationsGet' pLgId_ =
-    LocationsGet'
+    -> LocationsGet
+locationsGet pLgId_ =
+    LocationsGet
     { _lgId = pLgId_
     }
 
 -- | The ID of the location or latest for the last known location.
-lgId :: Lens' LocationsGet' Text
+lgId :: Lens' LocationsGet Text
 lgId = lens _lgId (\ s a -> s{_lgId = a})
 
-instance GoogleRequest LocationsGet' where
-        type Rs LocationsGet' = Location
-        requestClient LocationsGet'{..}
+instance GoogleRequest LocationsGet where
+        type Rs LocationsGet = Location
+        requestClient LocationsGet{..}
           = go _lgId (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy LocationsGetResource)

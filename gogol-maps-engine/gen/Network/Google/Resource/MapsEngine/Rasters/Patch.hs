@@ -29,19 +29,19 @@ module Network.Google.Resource.MapsEngine.Rasters.Patch
       RastersPatchResource
 
     -- * Creating a Request
-    , rastersPatch'
-    , RastersPatch'
+    , rastersPatch
+    , RastersPatch
 
     -- * Request Lenses
-    , rPayload
-    , rId
+    , rppPayload
+    , rppId
     ) where
 
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasters.patch@ method which the
--- 'RastersPatch'' request conforms to.
+-- 'RastersPatch' request conforms to.
 type RastersPatchResource =
      "rasters" :>
        Capture "id" Text :>
@@ -50,41 +50,43 @@ type RastersPatchResource =
 
 -- | Mutate a raster asset.
 --
--- /See:/ 'rastersPatch'' smart constructor.
-data RastersPatch' = RastersPatch'
-    { _rPayload :: !Raster
-    , _rId      :: !Text
+-- /See:/ 'rastersPatch' smart constructor.
+data RastersPatch = RastersPatch
+    { _rppPayload :: !Raster
+    , _rppId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RastersPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'RastersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rPayload'
+-- * 'rppPayload'
 --
--- * 'rId'
-rastersPatch'
-    :: Raster -- ^ 'rPayload'
-    -> Text -- ^ 'rId'
-    -> RastersPatch'
-rastersPatch' pRPayload_ pRId_ =
-    RastersPatch'
-    { _rPayload = pRPayload_
-    , _rId = pRId_
+-- * 'rppId'
+rastersPatch
+    :: Raster -- ^ 'rppPayload'
+    -> Text -- ^ 'rppId'
+    -> RastersPatch
+rastersPatch pRppPayload_ pRppId_ =
+    RastersPatch
+    { _rppPayload = pRppPayload_
+    , _rppId = pRppId_
     }
 
 -- | Multipart request metadata.
-rPayload :: Lens' RastersPatch' Raster
-rPayload = lens _rPayload (\ s a -> s{_rPayload = a})
+rppPayload :: Lens' RastersPatch Raster
+rppPayload
+  = lens _rppPayload (\ s a -> s{_rppPayload = a})
 
 -- | The ID of the raster.
-rId :: Lens' RastersPatch' Text
-rId = lens _rId (\ s a -> s{_rId = a})
+rppId :: Lens' RastersPatch Text
+rppId = lens _rppId (\ s a -> s{_rppId = a})
 
-instance GoogleRequest RastersPatch' where
-        type Rs RastersPatch' = ()
-        requestClient RastersPatch'{..}
-          = go _rId (Just AltJSON) _rPayload mapsEngineService
+instance GoogleRequest RastersPatch where
+        type Rs RastersPatch = ()
+        requestClient RastersPatch{..}
+          = go _rppId (Just AltJSON) _rppPayload
+              mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy RastersPatchResource)
                       mempty

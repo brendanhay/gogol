@@ -30,25 +30,25 @@ module Network.Google.Resource.Genomics.Referencesets.Search
       ReferencesetsSearchResource
 
     -- * Creating a Request
-    , referencesetsSearch'
-    , ReferencesetsSearch'
+    , referencesetsSearch
+    , ReferencesetsSearch
 
     -- * Request Lenses
-    , rssXgafv
-    , rssUploadProtocol
-    , rssPp
-    , rssAccessToken
-    , rssUploadType
-    , rssPayload
-    , rssBearerToken
-    , rssCallback
+    , rsXgafv
+    , rsUploadProtocol
+    , rsPp
+    , rsAccessToken
+    , rsUploadType
+    , rsPayload
+    , rsBearerToken
+    , rsCallback
     ) where
 
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.referencesets.search@ method which the
--- 'ReferencesetsSearch'' request conforms to.
+-- 'ReferencesetsSearch' request conforms to.
 type ReferencesetsSearchResource =
      "v1" :>
        "referencesets" :>
@@ -67,105 +67,104 @@ type ReferencesetsSearchResource =
 -- | Searches for reference sets which match the given criteria. Implements
 -- [GlobalAllianceApi.searchReferenceSets](http:\/\/ga4gh.org\/documentation\/api\/v0.5.1\/ga4gh_api.html#\/schema\/org.ga4gh.searchReferenceSets).
 --
--- /See:/ 'referencesetsSearch'' smart constructor.
-data ReferencesetsSearch' = ReferencesetsSearch'
-    { _rssXgafv          :: !(Maybe Text)
-    , _rssUploadProtocol :: !(Maybe Text)
-    , _rssPp             :: !Bool
-    , _rssAccessToken    :: !(Maybe Text)
-    , _rssUploadType     :: !(Maybe Text)
-    , _rssPayload        :: !SearchReferenceSetsRequest
-    , _rssBearerToken    :: !(Maybe Text)
-    , _rssCallback       :: !(Maybe Text)
+-- /See:/ 'referencesetsSearch' smart constructor.
+data ReferencesetsSearch = ReferencesetsSearch
+    { _rsXgafv          :: !(Maybe Text)
+    , _rsUploadProtocol :: !(Maybe Text)
+    , _rsPp             :: !Bool
+    , _rsAccessToken    :: !(Maybe Text)
+    , _rsUploadType     :: !(Maybe Text)
+    , _rsPayload        :: !SearchReferenceSetsRequest
+    , _rsBearerToken    :: !(Maybe Text)
+    , _rsCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReferencesetsSearch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReferencesetsSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rssXgafv'
+-- * 'rsXgafv'
 --
--- * 'rssUploadProtocol'
+-- * 'rsUploadProtocol'
 --
--- * 'rssPp'
+-- * 'rsPp'
 --
--- * 'rssAccessToken'
+-- * 'rsAccessToken'
 --
--- * 'rssUploadType'
+-- * 'rsUploadType'
 --
--- * 'rssPayload'
+-- * 'rsPayload'
 --
--- * 'rssBearerToken'
+-- * 'rsBearerToken'
 --
--- * 'rssCallback'
-referencesetsSearch'
-    :: SearchReferenceSetsRequest -- ^ 'rssPayload'
-    -> ReferencesetsSearch'
-referencesetsSearch' pRssPayload_ =
-    ReferencesetsSearch'
-    { _rssXgafv = Nothing
-    , _rssUploadProtocol = Nothing
-    , _rssPp = True
-    , _rssAccessToken = Nothing
-    , _rssUploadType = Nothing
-    , _rssPayload = pRssPayload_
-    , _rssBearerToken = Nothing
-    , _rssCallback = Nothing
+-- * 'rsCallback'
+referencesetsSearch
+    :: SearchReferenceSetsRequest -- ^ 'rsPayload'
+    -> ReferencesetsSearch
+referencesetsSearch pRsPayload_ =
+    ReferencesetsSearch
+    { _rsXgafv = Nothing
+    , _rsUploadProtocol = Nothing
+    , _rsPp = True
+    , _rsAccessToken = Nothing
+    , _rsUploadType = Nothing
+    , _rsPayload = pRsPayload_
+    , _rsBearerToken = Nothing
+    , _rsCallback = Nothing
     }
 
 -- | V1 error format.
-rssXgafv :: Lens' ReferencesetsSearch' (Maybe Text)
-rssXgafv = lens _rssXgafv (\ s a -> s{_rssXgafv = a})
+rsXgafv :: Lens' ReferencesetsSearch (Maybe Text)
+rsXgafv = lens _rsXgafv (\ s a -> s{_rsXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-rssUploadProtocol :: Lens' ReferencesetsSearch' (Maybe Text)
-rssUploadProtocol
-  = lens _rssUploadProtocol
-      (\ s a -> s{_rssUploadProtocol = a})
+rsUploadProtocol :: Lens' ReferencesetsSearch (Maybe Text)
+rsUploadProtocol
+  = lens _rsUploadProtocol
+      (\ s a -> s{_rsUploadProtocol = a})
 
 -- | Pretty-print response.
-rssPp :: Lens' ReferencesetsSearch' Bool
-rssPp = lens _rssPp (\ s a -> s{_rssPp = a})
+rsPp :: Lens' ReferencesetsSearch Bool
+rsPp = lens _rsPp (\ s a -> s{_rsPp = a})
 
 -- | OAuth access token.
-rssAccessToken :: Lens' ReferencesetsSearch' (Maybe Text)
-rssAccessToken
-  = lens _rssAccessToken
-      (\ s a -> s{_rssAccessToken = a})
+rsAccessToken :: Lens' ReferencesetsSearch (Maybe Text)
+rsAccessToken
+  = lens _rsAccessToken
+      (\ s a -> s{_rsAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-rssUploadType :: Lens' ReferencesetsSearch' (Maybe Text)
-rssUploadType
-  = lens _rssUploadType
-      (\ s a -> s{_rssUploadType = a})
+rsUploadType :: Lens' ReferencesetsSearch (Maybe Text)
+rsUploadType
+  = lens _rsUploadType (\ s a -> s{_rsUploadType = a})
 
 -- | Multipart request metadata.
-rssPayload :: Lens' ReferencesetsSearch' SearchReferenceSetsRequest
-rssPayload
-  = lens _rssPayload (\ s a -> s{_rssPayload = a})
+rsPayload :: Lens' ReferencesetsSearch SearchReferenceSetsRequest
+rsPayload
+  = lens _rsPayload (\ s a -> s{_rsPayload = a})
 
 -- | OAuth bearer token.
-rssBearerToken :: Lens' ReferencesetsSearch' (Maybe Text)
-rssBearerToken
-  = lens _rssBearerToken
-      (\ s a -> s{_rssBearerToken = a})
+rsBearerToken :: Lens' ReferencesetsSearch (Maybe Text)
+rsBearerToken
+  = lens _rsBearerToken
+      (\ s a -> s{_rsBearerToken = a})
 
 -- | JSONP
-rssCallback :: Lens' ReferencesetsSearch' (Maybe Text)
-rssCallback
-  = lens _rssCallback (\ s a -> s{_rssCallback = a})
+rsCallback :: Lens' ReferencesetsSearch (Maybe Text)
+rsCallback
+  = lens _rsCallback (\ s a -> s{_rsCallback = a})
 
-instance GoogleRequest ReferencesetsSearch' where
-        type Rs ReferencesetsSearch' =
+instance GoogleRequest ReferencesetsSearch where
+        type Rs ReferencesetsSearch =
              SearchReferenceSetsResponse
-        requestClient ReferencesetsSearch'{..}
-          = go _rssXgafv _rssUploadProtocol (Just _rssPp)
-              _rssAccessToken
-              _rssUploadType
-              _rssBearerToken
-              _rssCallback
+        requestClient ReferencesetsSearch{..}
+          = go _rsXgafv _rsUploadProtocol (Just _rsPp)
+              _rsAccessToken
+              _rsUploadType
+              _rsBearerToken
+              _rsCallback
               (Just AltJSON)
-              _rssPayload
+              _rsPayload
               genomicsService
           where go
                   = buildClient

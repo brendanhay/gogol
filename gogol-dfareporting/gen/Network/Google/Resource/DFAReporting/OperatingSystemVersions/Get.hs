@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.OperatingSystemVersions.Get
       OperatingSystemVersionsGetResource
 
     -- * Creating a Request
-    , operatingSystemVersionsGet'
-    , OperatingSystemVersionsGet'
+    , operatingSystemVersionsGet
+    , OperatingSystemVersionsGet
 
     -- * Request Lenses
     , osvgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.operatingSystemVersions.get@ method which the
--- 'OperatingSystemVersionsGet'' request conforms to.
+-- 'OperatingSystemVersionsGet' request conforms to.
 type OperatingSystemVersionsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,44 +52,44 @@ type OperatingSystemVersionsGetResource =
 
 -- | Gets one operating system version by ID.
 --
--- /See:/ 'operatingSystemVersionsGet'' smart constructor.
-data OperatingSystemVersionsGet' = OperatingSystemVersionsGet'
+-- /See:/ 'operatingSystemVersionsGet' smart constructor.
+data OperatingSystemVersionsGet = OperatingSystemVersionsGet
     { _osvgProFileId :: !Int64
     , _osvgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperatingSystemVersionsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'OperatingSystemVersionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'osvgProFileId'
 --
 -- * 'osvgId'
-operatingSystemVersionsGet'
+operatingSystemVersionsGet
     :: Int64 -- ^ 'osvgProFileId'
     -> Int64 -- ^ 'osvgId'
-    -> OperatingSystemVersionsGet'
-operatingSystemVersionsGet' pOsvgProFileId_ pOsvgId_ =
-    OperatingSystemVersionsGet'
+    -> OperatingSystemVersionsGet
+operatingSystemVersionsGet pOsvgProFileId_ pOsvgId_ =
+    OperatingSystemVersionsGet
     { _osvgProFileId = pOsvgProFileId_
     , _osvgId = pOsvgId_
     }
 
 -- | User profile ID associated with this request.
-osvgProFileId :: Lens' OperatingSystemVersionsGet' Int64
+osvgProFileId :: Lens' OperatingSystemVersionsGet Int64
 osvgProFileId
   = lens _osvgProFileId
       (\ s a -> s{_osvgProFileId = a})
 
 -- | Operating system version ID.
-osvgId :: Lens' OperatingSystemVersionsGet' Int64
+osvgId :: Lens' OperatingSystemVersionsGet Int64
 osvgId = lens _osvgId (\ s a -> s{_osvgId = a})
 
-instance GoogleRequest OperatingSystemVersionsGet'
+instance GoogleRequest OperatingSystemVersionsGet
          where
-        type Rs OperatingSystemVersionsGet' =
+        type Rs OperatingSystemVersionsGet =
              OperatingSystemVersion
-        requestClient OperatingSystemVersionsGet'{..}
+        requestClient OperatingSystemVersionsGet{..}
           = go _osvgProFileId _osvgId (Just AltJSON)
               dFAReportingService
           where go

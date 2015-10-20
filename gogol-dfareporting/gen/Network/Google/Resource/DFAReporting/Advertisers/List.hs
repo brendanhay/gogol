@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Advertisers.List
       AdvertisersListResource
 
     -- * Creating a Request
-    , advertisersList'
-    , AdvertisersList'
+    , advertisersList
+    , AdvertisersList
 
     -- * Request Lenses
     , allStatus
@@ -52,7 +52,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.advertisers.list@ method which the
--- 'AdvertisersList'' request conforms to.
+-- 'AdvertisersList' request conforms to.
 type AdvertisersListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -75,8 +75,8 @@ type AdvertisersListResource =
 
 -- | Retrieves a list of advertisers, possibly filtered.
 --
--- /See:/ 'advertisersList'' smart constructor.
-data AdvertisersList' = AdvertisersList'
+-- /See:/ 'advertisersList' smart constructor.
+data AdvertisersList = AdvertisersList
     { _allStatus                              :: !(Maybe AdvertisersListStatus)
     , _allOnlyParent                          :: !(Maybe Bool)
     , _allSearchString                        :: !(Maybe Text)
@@ -92,7 +92,7 @@ data AdvertisersList' = AdvertisersList'
     , _allMaxResults                          :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdvertisersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdvertisersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -121,11 +121,11 @@ data AdvertisersList' = AdvertisersList'
 -- * 'allFloodlightConfigurationIds'
 --
 -- * 'allMaxResults'
-advertisersList'
+advertisersList
     :: Int64 -- ^ 'allProFileId'
-    -> AdvertisersList'
-advertisersList' pAllProFileId_ =
-    AdvertisersList'
+    -> AdvertisersList
+advertisersList pAllProFileId_ =
+    AdvertisersList
     { _allStatus = Nothing
     , _allOnlyParent = Nothing
     , _allSearchString = Nothing
@@ -142,13 +142,13 @@ advertisersList' pAllProFileId_ =
     }
 
 -- | Select only advertisers with the specified status.
-allStatus :: Lens' AdvertisersList' (Maybe AdvertisersListStatus)
+allStatus :: Lens' AdvertisersList (Maybe AdvertisersListStatus)
 allStatus
   = lens _allStatus (\ s a -> s{_allStatus = a})
 
 -- | Select only advertisers which use another advertiser\'s floodlight
 -- configuration.
-allOnlyParent :: Lens' AdvertisersList' (Maybe Bool)
+allOnlyParent :: Lens' AdvertisersList (Maybe Bool)
 allOnlyParent
   = lens _allOnlyParent
       (\ s a -> s{_allOnlyParent = a})
@@ -160,36 +160,36 @@ allOnlyParent
 -- at the start and the end of the search string. For example, a search
 -- string of \"advertiser\" will match objects with name \"my advertiser\",
 -- \"advertiser 2015\", or simply \"advertiser\".
-allSearchString :: Lens' AdvertisersList' (Maybe Text)
+allSearchString :: Lens' AdvertisersList (Maybe Text)
 allSearchString
   = lens _allSearchString
       (\ s a -> s{_allSearchString = a})
 
 -- | Select only advertisers with these IDs.
-allIds :: Lens' AdvertisersList' [Int64]
+allIds :: Lens' AdvertisersList [Int64]
 allIds
   = lens _allIds (\ s a -> s{_allIds = a}) . _Default .
       _Coerce
 
 -- | Select only advertisers which do not belong to any advertiser group.
-allIncludeAdvertisersWithoutGroupsOnly :: Lens' AdvertisersList' (Maybe Bool)
+allIncludeAdvertisersWithoutGroupsOnly :: Lens' AdvertisersList (Maybe Bool)
 allIncludeAdvertisersWithoutGroupsOnly
   = lens _allIncludeAdvertisersWithoutGroupsOnly
       (\ s a ->
          s{_allIncludeAdvertisersWithoutGroupsOnly = a})
 
 -- | User profile ID associated with this request.
-allProFileId :: Lens' AdvertisersList' Int64
+allProFileId :: Lens' AdvertisersList Int64
 allProFileId
   = lens _allProFileId (\ s a -> s{_allProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-allSortOrder :: Lens' AdvertisersList' (Maybe AdvertisersListSortOrder)
+allSortOrder :: Lens' AdvertisersList (Maybe AdvertisersListSortOrder)
 allSortOrder
   = lens _allSortOrder (\ s a -> s{_allSortOrder = a})
 
 -- | Select only advertisers with these advertiser group IDs.
-allAdvertiserGroupIds :: Lens' AdvertisersList' [Int64]
+allAdvertiserGroupIds :: Lens' AdvertisersList [Int64]
 allAdvertiserGroupIds
   = lens _allAdvertiserGroupIds
       (\ s a -> s{_allAdvertiserGroupIds = a})
@@ -197,23 +197,23 @@ allAdvertiserGroupIds
       . _Coerce
 
 -- | Value of the nextPageToken from the previous result page.
-allPageToken :: Lens' AdvertisersList' (Maybe Text)
+allPageToken :: Lens' AdvertisersList (Maybe Text)
 allPageToken
   = lens _allPageToken (\ s a -> s{_allPageToken = a})
 
 -- | Field by which to sort the list.
-allSortField :: Lens' AdvertisersList' (Maybe AdvertisersListSortField)
+allSortField :: Lens' AdvertisersList (Maybe AdvertisersListSortField)
 allSortField
   = lens _allSortField (\ s a -> s{_allSortField = a})
 
 -- | Select only advertisers with these subaccount IDs.
-allSubAccountId :: Lens' AdvertisersList' (Maybe Int64)
+allSubAccountId :: Lens' AdvertisersList (Maybe Int64)
 allSubAccountId
   = lens _allSubAccountId
       (\ s a -> s{_allSubAccountId = a})
 
 -- | Select only advertisers with these floodlight configuration IDs.
-allFloodlightConfigurationIds :: Lens' AdvertisersList' [Int64]
+allFloodlightConfigurationIds :: Lens' AdvertisersList [Int64]
 allFloodlightConfigurationIds
   = lens _allFloodlightConfigurationIds
       (\ s a -> s{_allFloodlightConfigurationIds = a})
@@ -221,14 +221,14 @@ allFloodlightConfigurationIds
       . _Coerce
 
 -- | Maximum number of results to return.
-allMaxResults :: Lens' AdvertisersList' (Maybe Int32)
+allMaxResults :: Lens' AdvertisersList (Maybe Int32)
 allMaxResults
   = lens _allMaxResults
       (\ s a -> s{_allMaxResults = a})
 
-instance GoogleRequest AdvertisersList' where
-        type Rs AdvertisersList' = AdvertisersListResponse
-        requestClient AdvertisersList'{..}
+instance GoogleRequest AdvertisersList where
+        type Rs AdvertisersList = AdvertisersListResponse
+        requestClient AdvertisersList{..}
           = go _allProFileId _allStatus _allOnlyParent
               _allSearchString
               (_allIds ^. _Default)

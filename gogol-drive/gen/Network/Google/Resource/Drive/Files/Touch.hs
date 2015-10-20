@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Files.Touch
       FilesTouchResource
 
     -- * Creating a Request
-    , filesTouch'
-    , FilesTouch'
+    , filesTouch
+    , FilesTouch
 
     -- * Request Lenses
     , ftFileId
@@ -40,7 +40,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.files.touch@ method which the
--- 'FilesTouch'' request conforms to.
+-- 'FilesTouch' request conforms to.
 type FilesTouchResource =
      "files" :>
        Capture "fileId" Text :>
@@ -49,31 +49,31 @@ type FilesTouchResource =
 
 -- | Set the file\'s updated time to the current server time.
 --
--- /See:/ 'filesTouch'' smart constructor.
-newtype FilesTouch' = FilesTouch'
+-- /See:/ 'filesTouch' smart constructor.
+newtype FilesTouch = FilesTouch
     { _ftFileId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FilesTouch'' with the minimum fields required to make a request.
+-- | Creates a value of 'FilesTouch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ftFileId'
-filesTouch'
+filesTouch
     :: Text -- ^ 'ftFileId'
-    -> FilesTouch'
-filesTouch' pFtFileId_ =
-    FilesTouch'
+    -> FilesTouch
+filesTouch pFtFileId_ =
+    FilesTouch
     { _ftFileId = pFtFileId_
     }
 
 -- | The ID of the file to update.
-ftFileId :: Lens' FilesTouch' Text
+ftFileId :: Lens' FilesTouch Text
 ftFileId = lens _ftFileId (\ s a -> s{_ftFileId = a})
 
-instance GoogleRequest FilesTouch' where
-        type Rs FilesTouch' = File
-        requestClient FilesTouch'{..}
+instance GoogleRequest FilesTouch where
+        type Rs FilesTouch = File
+        requestClient FilesTouch{..}
           = go _ftFileId (Just AltJSON) driveService
           where go
                   = buildClient (Proxy :: Proxy FilesTouchResource)

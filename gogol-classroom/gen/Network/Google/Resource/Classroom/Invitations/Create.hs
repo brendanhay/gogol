@@ -37,8 +37,8 @@ module Network.Google.Resource.Classroom.Invitations.Create
       InvitationsCreateResource
 
     -- * Creating a Request
-    , invitationsCreate'
-    , InvitationsCreate'
+    , invitationsCreate
+    , InvitationsCreate
 
     -- * Request Lenses
     , icXgafv
@@ -55,7 +55,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.invitations.create@ method which the
--- 'InvitationsCreate'' request conforms to.
+-- 'InvitationsCreate' request conforms to.
 type InvitationsCreateResource =
      "v1" :>
        "invitations" :>
@@ -79,8 +79,8 @@ type InvitationsCreateResource =
 -- greater permissions. * \`ALREADY_EXISTS\` if an invitation for the
 -- specified user and course already exists.
 --
--- /See:/ 'invitationsCreate'' smart constructor.
-data InvitationsCreate' = InvitationsCreate'
+-- /See:/ 'invitationsCreate' smart constructor.
+data InvitationsCreate = InvitationsCreate
     { _icXgafv          :: !(Maybe Text)
     , _icUploadProtocol :: !(Maybe Text)
     , _icPp             :: !Bool
@@ -91,7 +91,7 @@ data InvitationsCreate' = InvitationsCreate'
     , _icCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InvitationsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'InvitationsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -110,11 +110,11 @@ data InvitationsCreate' = InvitationsCreate'
 -- * 'icBearerToken'
 --
 -- * 'icCallback'
-invitationsCreate'
+invitationsCreate
     :: Invitation -- ^ 'icPayload'
-    -> InvitationsCreate'
-invitationsCreate' pIcPayload_ =
-    InvitationsCreate'
+    -> InvitationsCreate
+invitationsCreate pIcPayload_ =
+    InvitationsCreate
     { _icXgafv = Nothing
     , _icUploadProtocol = Nothing
     , _icPp = True
@@ -126,49 +126,49 @@ invitationsCreate' pIcPayload_ =
     }
 
 -- | V1 error format.
-icXgafv :: Lens' InvitationsCreate' (Maybe Text)
+icXgafv :: Lens' InvitationsCreate (Maybe Text)
 icXgafv = lens _icXgafv (\ s a -> s{_icXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-icUploadProtocol :: Lens' InvitationsCreate' (Maybe Text)
+icUploadProtocol :: Lens' InvitationsCreate (Maybe Text)
 icUploadProtocol
   = lens _icUploadProtocol
       (\ s a -> s{_icUploadProtocol = a})
 
 -- | Pretty-print response.
-icPp :: Lens' InvitationsCreate' Bool
+icPp :: Lens' InvitationsCreate Bool
 icPp = lens _icPp (\ s a -> s{_icPp = a})
 
 -- | OAuth access token.
-icAccessToken :: Lens' InvitationsCreate' (Maybe Text)
+icAccessToken :: Lens' InvitationsCreate (Maybe Text)
 icAccessToken
   = lens _icAccessToken
       (\ s a -> s{_icAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-icUploadType :: Lens' InvitationsCreate' (Maybe Text)
+icUploadType :: Lens' InvitationsCreate (Maybe Text)
 icUploadType
   = lens _icUploadType (\ s a -> s{_icUploadType = a})
 
 -- | Multipart request metadata.
-icPayload :: Lens' InvitationsCreate' Invitation
+icPayload :: Lens' InvitationsCreate Invitation
 icPayload
   = lens _icPayload (\ s a -> s{_icPayload = a})
 
 -- | OAuth bearer token.
-icBearerToken :: Lens' InvitationsCreate' (Maybe Text)
+icBearerToken :: Lens' InvitationsCreate (Maybe Text)
 icBearerToken
   = lens _icBearerToken
       (\ s a -> s{_icBearerToken = a})
 
 -- | JSONP
-icCallback :: Lens' InvitationsCreate' (Maybe Text)
+icCallback :: Lens' InvitationsCreate (Maybe Text)
 icCallback
   = lens _icCallback (\ s a -> s{_icCallback = a})
 
-instance GoogleRequest InvitationsCreate' where
-        type Rs InvitationsCreate' = Invitation
-        requestClient InvitationsCreate'{..}
+instance GoogleRequest InvitationsCreate where
+        type Rs InvitationsCreate = Invitation
+        requestClient InvitationsCreate{..}
           = go _icXgafv _icUploadProtocol (Just _icPp)
               _icAccessToken
               _icUploadType

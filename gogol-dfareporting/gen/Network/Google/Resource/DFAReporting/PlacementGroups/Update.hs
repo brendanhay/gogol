@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.Update
       PlacementGroupsUpdateResource
 
     -- * Creating a Request
-    , placementGroupsUpdate'
-    , PlacementGroupsUpdate'
+    , placementGroupsUpdate
+    , PlacementGroupsUpdate
 
     -- * Request Lenses
     , pguProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placementGroups.update@ method which the
--- 'PlacementGroupsUpdate'' request conforms to.
+-- 'PlacementGroupsUpdate' request conforms to.
 type PlacementGroupsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,42 +52,42 @@ type PlacementGroupsUpdateResource =
 
 -- | Updates an existing placement group.
 --
--- /See:/ 'placementGroupsUpdate'' smart constructor.
-data PlacementGroupsUpdate' = PlacementGroupsUpdate'
+-- /See:/ 'placementGroupsUpdate' smart constructor.
+data PlacementGroupsUpdate = PlacementGroupsUpdate
     { _pguProFileId :: !Int64
     , _pguPayload   :: !PlacementGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlacementGroupsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlacementGroupsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pguProFileId'
 --
 -- * 'pguPayload'
-placementGroupsUpdate'
+placementGroupsUpdate
     :: Int64 -- ^ 'pguProFileId'
     -> PlacementGroup -- ^ 'pguPayload'
-    -> PlacementGroupsUpdate'
-placementGroupsUpdate' pPguProFileId_ pPguPayload_ =
-    PlacementGroupsUpdate'
+    -> PlacementGroupsUpdate
+placementGroupsUpdate pPguProFileId_ pPguPayload_ =
+    PlacementGroupsUpdate
     { _pguProFileId = pPguProFileId_
     , _pguPayload = pPguPayload_
     }
 
 -- | User profile ID associated with this request.
-pguProFileId :: Lens' PlacementGroupsUpdate' Int64
+pguProFileId :: Lens' PlacementGroupsUpdate Int64
 pguProFileId
   = lens _pguProFileId (\ s a -> s{_pguProFileId = a})
 
 -- | Multipart request metadata.
-pguPayload :: Lens' PlacementGroupsUpdate' PlacementGroup
+pguPayload :: Lens' PlacementGroupsUpdate PlacementGroup
 pguPayload
   = lens _pguPayload (\ s a -> s{_pguPayload = a})
 
-instance GoogleRequest PlacementGroupsUpdate' where
-        type Rs PlacementGroupsUpdate' = PlacementGroup
-        requestClient PlacementGroupsUpdate'{..}
+instance GoogleRequest PlacementGroupsUpdate where
+        type Rs PlacementGroupsUpdate = PlacementGroup
+        requestClient PlacementGroupsUpdate{..}
           = go _pguProFileId (Just AltJSON) _pguPayload
               dFAReportingService
           where go

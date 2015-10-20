@@ -29,8 +29,8 @@ module Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
       SubscriptionsChangeSeatsResource
 
     -- * Creating a Request
-    , subscriptionsChangeSeats'
-    , SubscriptionsChangeSeats'
+    , subscriptionsChangeSeats
+    , SubscriptionsChangeSeats
 
     -- * Request Lenses
     , scsPayload
@@ -42,7 +42,7 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @reseller.subscriptions.changeSeats@ method which the
--- 'SubscriptionsChangeSeats'' request conforms to.
+-- 'SubscriptionsChangeSeats' request conforms to.
 type SubscriptionsChangeSeatsResource =
      "customers" :>
        Capture "customerId" Text :>
@@ -54,14 +54,14 @@ type SubscriptionsChangeSeatsResource =
 
 -- | Changes the seats configuration of a subscription
 --
--- /See:/ 'subscriptionsChangeSeats'' smart constructor.
-data SubscriptionsChangeSeats' = SubscriptionsChangeSeats'
+-- /See:/ 'subscriptionsChangeSeats' smart constructor.
+data SubscriptionsChangeSeats = SubscriptionsChangeSeats
     { _scsPayload        :: !Seats
     , _scsCustomerId     :: !Text
     , _scsSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionsChangeSeats'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubscriptionsChangeSeats' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,39 +70,38 @@ data SubscriptionsChangeSeats' = SubscriptionsChangeSeats'
 -- * 'scsCustomerId'
 --
 -- * 'scsSubscriptionId'
-subscriptionsChangeSeats'
+subscriptionsChangeSeats
     :: Seats -- ^ 'scsPayload'
     -> Text -- ^ 'scsCustomerId'
     -> Text -- ^ 'scsSubscriptionId'
-    -> SubscriptionsChangeSeats'
-subscriptionsChangeSeats' pScsPayload_ pScsCustomerId_ pScsSubscriptionId_ =
-    SubscriptionsChangeSeats'
+    -> SubscriptionsChangeSeats
+subscriptionsChangeSeats pScsPayload_ pScsCustomerId_ pScsSubscriptionId_ =
+    SubscriptionsChangeSeats
     { _scsPayload = pScsPayload_
     , _scsCustomerId = pScsCustomerId_
     , _scsSubscriptionId = pScsSubscriptionId_
     }
 
 -- | Multipart request metadata.
-scsPayload :: Lens' SubscriptionsChangeSeats' Seats
+scsPayload :: Lens' SubscriptionsChangeSeats Seats
 scsPayload
   = lens _scsPayload (\ s a -> s{_scsPayload = a})
 
 -- | Id of the Customer
-scsCustomerId :: Lens' SubscriptionsChangeSeats' Text
+scsCustomerId :: Lens' SubscriptionsChangeSeats Text
 scsCustomerId
   = lens _scsCustomerId
       (\ s a -> s{_scsCustomerId = a})
 
 -- | Id of the subscription, which is unique for a customer
-scsSubscriptionId :: Lens' SubscriptionsChangeSeats' Text
+scsSubscriptionId :: Lens' SubscriptionsChangeSeats Text
 scsSubscriptionId
   = lens _scsSubscriptionId
       (\ s a -> s{_scsSubscriptionId = a})
 
-instance GoogleRequest SubscriptionsChangeSeats'
-         where
-        type Rs SubscriptionsChangeSeats' = Subscription
-        requestClient SubscriptionsChangeSeats'{..}
+instance GoogleRequest SubscriptionsChangeSeats where
+        type Rs SubscriptionsChangeSeats = Subscription
+        requestClient SubscriptionsChangeSeats{..}
           = go _scsCustomerId _scsSubscriptionId (Just AltJSON)
               _scsPayload
               appsResellerService

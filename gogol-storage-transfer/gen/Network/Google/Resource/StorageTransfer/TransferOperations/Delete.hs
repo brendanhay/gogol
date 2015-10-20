@@ -29,8 +29,8 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Delete
       TransferOperationsDeleteResource
 
     -- * Creating a Request
-    , transferOperationsDelete'
-    , TransferOperationsDelete'
+    , transferOperationsDelete
+    , TransferOperationsDelete
 
     -- * Request Lenses
     , todXgafv
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferOperations.delete@ method which the
--- 'TransferOperationsDelete'' request conforms to.
+-- 'TransferOperationsDelete' request conforms to.
 type TransferOperationsDeleteResource =
      "v1" :>
        Capture "name" Text :>
@@ -62,8 +62,8 @@ type TransferOperationsDeleteResource =
 
 -- | This method is not supported and the server returns \`UNIMPLEMENTED\`.
 --
--- /See:/ 'transferOperationsDelete'' smart constructor.
-data TransferOperationsDelete' = TransferOperationsDelete'
+-- /See:/ 'transferOperationsDelete' smart constructor.
+data TransferOperationsDelete = TransferOperationsDelete
     { _todXgafv          :: !(Maybe Text)
     , _todUploadProtocol :: !(Maybe Text)
     , _todPp             :: !Bool
@@ -74,7 +74,7 @@ data TransferOperationsDelete' = TransferOperationsDelete'
     , _todCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TransferOperationsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'TransferOperationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -93,11 +93,11 @@ data TransferOperationsDelete' = TransferOperationsDelete'
 -- * 'todName'
 --
 -- * 'todCallback'
-transferOperationsDelete'
+transferOperationsDelete
     :: Text -- ^ 'todName'
-    -> TransferOperationsDelete'
-transferOperationsDelete' pTodName_ =
-    TransferOperationsDelete'
+    -> TransferOperationsDelete
+transferOperationsDelete pTodName_ =
+    TransferOperationsDelete
     { _todXgafv = Nothing
     , _todUploadProtocol = Nothing
     , _todPp = True
@@ -109,50 +109,49 @@ transferOperationsDelete' pTodName_ =
     }
 
 -- | V1 error format.
-todXgafv :: Lens' TransferOperationsDelete' (Maybe Text)
+todXgafv :: Lens' TransferOperationsDelete (Maybe Text)
 todXgafv = lens _todXgafv (\ s a -> s{_todXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-todUploadProtocol :: Lens' TransferOperationsDelete' (Maybe Text)
+todUploadProtocol :: Lens' TransferOperationsDelete (Maybe Text)
 todUploadProtocol
   = lens _todUploadProtocol
       (\ s a -> s{_todUploadProtocol = a})
 
 -- | Pretty-print response.
-todPp :: Lens' TransferOperationsDelete' Bool
+todPp :: Lens' TransferOperationsDelete Bool
 todPp = lens _todPp (\ s a -> s{_todPp = a})
 
 -- | OAuth access token.
-todAccessToken :: Lens' TransferOperationsDelete' (Maybe Text)
+todAccessToken :: Lens' TransferOperationsDelete (Maybe Text)
 todAccessToken
   = lens _todAccessToken
       (\ s a -> s{_todAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-todUploadType :: Lens' TransferOperationsDelete' (Maybe Text)
+todUploadType :: Lens' TransferOperationsDelete (Maybe Text)
 todUploadType
   = lens _todUploadType
       (\ s a -> s{_todUploadType = a})
 
 -- | OAuth bearer token.
-todBearerToken :: Lens' TransferOperationsDelete' (Maybe Text)
+todBearerToken :: Lens' TransferOperationsDelete (Maybe Text)
 todBearerToken
   = lens _todBearerToken
       (\ s a -> s{_todBearerToken = a})
 
 -- | The name of the operation resource to be deleted.
-todName :: Lens' TransferOperationsDelete' Text
+todName :: Lens' TransferOperationsDelete Text
 todName = lens _todName (\ s a -> s{_todName = a})
 
 -- | JSONP
-todCallback :: Lens' TransferOperationsDelete' (Maybe Text)
+todCallback :: Lens' TransferOperationsDelete (Maybe Text)
 todCallback
   = lens _todCallback (\ s a -> s{_todCallback = a})
 
-instance GoogleRequest TransferOperationsDelete'
-         where
-        type Rs TransferOperationsDelete' = Empty
-        requestClient TransferOperationsDelete'{..}
+instance GoogleRequest TransferOperationsDelete where
+        type Rs TransferOperationsDelete = Empty
+        requestClient TransferOperationsDelete{..}
           = go _todName _todXgafv _todUploadProtocol
               (Just _todPp)
               _todAccessToken

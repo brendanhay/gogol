@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Update
       ManagementProFileUserLinksUpdateResource
 
     -- * Creating a Request
-    , managementProFileUserLinksUpdate'
-    , ManagementProFileUserLinksUpdate'
+    , managementProFileUserLinksUpdate
+    , ManagementProFileUserLinksUpdate
 
     -- * Request Lenses
     , mpfuluWebPropertyId
@@ -44,7 +44,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profileUserLinks.update@ method which the
--- 'ManagementProFileUserLinksUpdate'' request conforms to.
+-- 'ManagementProFileUserLinksUpdate' request conforms to.
 type ManagementProFileUserLinksUpdateResource =
      "management" :>
        "accounts" :>
@@ -61,8 +61,8 @@ type ManagementProFileUserLinksUpdateResource =
 
 -- | Updates permissions for an existing user on the given view (profile).
 --
--- /See:/ 'managementProFileUserLinksUpdate'' smart constructor.
-data ManagementProFileUserLinksUpdate' = ManagementProFileUserLinksUpdate'
+-- /See:/ 'managementProFileUserLinksUpdate' smart constructor.
+data ManagementProFileUserLinksUpdate = ManagementProFileUserLinksUpdate
     { _mpfuluWebPropertyId :: !Text
     , _mpfuluProFileId     :: !Text
     , _mpfuluPayload       :: !EntityUserLink
@@ -70,7 +70,7 @@ data ManagementProFileUserLinksUpdate' = ManagementProFileUserLinksUpdate'
     , _mpfuluLinkId        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementProFileUserLinksUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementProFileUserLinksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -83,15 +83,15 @@ data ManagementProFileUserLinksUpdate' = ManagementProFileUserLinksUpdate'
 -- * 'mpfuluAccountId'
 --
 -- * 'mpfuluLinkId'
-managementProFileUserLinksUpdate'
+managementProFileUserLinksUpdate
     :: Text -- ^ 'mpfuluWebPropertyId'
     -> Text -- ^ 'mpfuluProFileId'
     -> EntityUserLink -- ^ 'mpfuluPayload'
     -> Text -- ^ 'mpfuluAccountId'
     -> Text -- ^ 'mpfuluLinkId'
-    -> ManagementProFileUserLinksUpdate'
-managementProFileUserLinksUpdate' pMpfuluWebPropertyId_ pMpfuluProFileId_ pMpfuluPayload_ pMpfuluAccountId_ pMpfuluLinkId_ =
-    ManagementProFileUserLinksUpdate'
+    -> ManagementProFileUserLinksUpdate
+managementProFileUserLinksUpdate pMpfuluWebPropertyId_ pMpfuluProFileId_ pMpfuluPayload_ pMpfuluAccountId_ pMpfuluLinkId_ =
+    ManagementProFileUserLinksUpdate
     { _mpfuluWebPropertyId = pMpfuluWebPropertyId_
     , _mpfuluProFileId = pMpfuluProFileId_
     , _mpfuluPayload = pMpfuluPayload_
@@ -100,39 +100,39 @@ managementProFileUserLinksUpdate' pMpfuluWebPropertyId_ pMpfuluProFileId_ pMpful
     }
 
 -- | Web Property ID to update the user link for.
-mpfuluWebPropertyId :: Lens' ManagementProFileUserLinksUpdate' Text
+mpfuluWebPropertyId :: Lens' ManagementProFileUserLinksUpdate Text
 mpfuluWebPropertyId
   = lens _mpfuluWebPropertyId
       (\ s a -> s{_mpfuluWebPropertyId = a})
 
 -- | View (Profile ID) to update the user link for.
-mpfuluProFileId :: Lens' ManagementProFileUserLinksUpdate' Text
+mpfuluProFileId :: Lens' ManagementProFileUserLinksUpdate Text
 mpfuluProFileId
   = lens _mpfuluProFileId
       (\ s a -> s{_mpfuluProFileId = a})
 
 -- | Multipart request metadata.
-mpfuluPayload :: Lens' ManagementProFileUserLinksUpdate' EntityUserLink
+mpfuluPayload :: Lens' ManagementProFileUserLinksUpdate EntityUserLink
 mpfuluPayload
   = lens _mpfuluPayload
       (\ s a -> s{_mpfuluPayload = a})
 
 -- | Account ID to update the user link for.
-mpfuluAccountId :: Lens' ManagementProFileUserLinksUpdate' Text
+mpfuluAccountId :: Lens' ManagementProFileUserLinksUpdate Text
 mpfuluAccountId
   = lens _mpfuluAccountId
       (\ s a -> s{_mpfuluAccountId = a})
 
 -- | Link ID to update the user link for.
-mpfuluLinkId :: Lens' ManagementProFileUserLinksUpdate' Text
+mpfuluLinkId :: Lens' ManagementProFileUserLinksUpdate Text
 mpfuluLinkId
   = lens _mpfuluLinkId (\ s a -> s{_mpfuluLinkId = a})
 
 instance GoogleRequest
-         ManagementProFileUserLinksUpdate' where
-        type Rs ManagementProFileUserLinksUpdate' =
+         ManagementProFileUserLinksUpdate where
+        type Rs ManagementProFileUserLinksUpdate =
              EntityUserLink
-        requestClient ManagementProFileUserLinksUpdate'{..}
+        requestClient ManagementProFileUserLinksUpdate{..}
           = go _mpfuluAccountId _mpfuluWebPropertyId
               _mpfuluProFileId
               _mpfuluLinkId

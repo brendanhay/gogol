@@ -29,19 +29,19 @@ module Network.Google.Resource.DFAReporting.Advertisers.Update
       AdvertisersUpdateResource
 
     -- * Creating a Request
-    , advertisersUpdate'
-    , AdvertisersUpdate'
+    , advertisersUpdate
+    , AdvertisersUpdate
 
     -- * Request Lenses
-    , advProFileId
-    , advPayload
+    , auProFileId
+    , auPayload
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.advertisers.update@ method which the
--- 'AdvertisersUpdate'' request conforms to.
+-- 'AdvertisersUpdate' request conforms to.
 type AdvertisersUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,43 +51,43 @@ type AdvertisersUpdateResource =
 
 -- | Updates an existing advertiser.
 --
--- /See:/ 'advertisersUpdate'' smart constructor.
-data AdvertisersUpdate' = AdvertisersUpdate'
-    { _advProFileId :: !Int64
-    , _advPayload   :: !Advertiser
+-- /See:/ 'advertisersUpdate' smart constructor.
+data AdvertisersUpdate = AdvertisersUpdate
+    { _auProFileId :: !Int64
+    , _auPayload   :: !Advertiser
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdvertisersUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdvertisersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'advProFileId'
+-- * 'auProFileId'
 --
--- * 'advPayload'
-advertisersUpdate'
-    :: Int64 -- ^ 'advProFileId'
-    -> Advertiser -- ^ 'advPayload'
-    -> AdvertisersUpdate'
-advertisersUpdate' pAdvProFileId_ pAdvPayload_ =
-    AdvertisersUpdate'
-    { _advProFileId = pAdvProFileId_
-    , _advPayload = pAdvPayload_
+-- * 'auPayload'
+advertisersUpdate
+    :: Int64 -- ^ 'auProFileId'
+    -> Advertiser -- ^ 'auPayload'
+    -> AdvertisersUpdate
+advertisersUpdate pAuProFileId_ pAuPayload_ =
+    AdvertisersUpdate
+    { _auProFileId = pAuProFileId_
+    , _auPayload = pAuPayload_
     }
 
 -- | User profile ID associated with this request.
-advProFileId :: Lens' AdvertisersUpdate' Int64
-advProFileId
-  = lens _advProFileId (\ s a -> s{_advProFileId = a})
+auProFileId :: Lens' AdvertisersUpdate Int64
+auProFileId
+  = lens _auProFileId (\ s a -> s{_auProFileId = a})
 
 -- | Multipart request metadata.
-advPayload :: Lens' AdvertisersUpdate' Advertiser
-advPayload
-  = lens _advPayload (\ s a -> s{_advPayload = a})
+auPayload :: Lens' AdvertisersUpdate Advertiser
+auPayload
+  = lens _auPayload (\ s a -> s{_auPayload = a})
 
-instance GoogleRequest AdvertisersUpdate' where
-        type Rs AdvertisersUpdate' = Advertiser
-        requestClient AdvertisersUpdate'{..}
-          = go _advProFileId (Just AltJSON) _advPayload
+instance GoogleRequest AdvertisersUpdate where
+        type Rs AdvertisersUpdate = Advertiser
+        requestClient AdvertisersUpdate{..}
+          = go _auProFileId (Just AltJSON) _auPayload
               dFAReportingService
           where go
                   = buildClient

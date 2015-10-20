@@ -31,8 +31,8 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Rasters.BatchDelete
       RasterCollectionsRastersBatchDeleteResource
 
     -- * Creating a Request
-    , rasterCollectionsRastersBatchDelete'
-    , RasterCollectionsRastersBatchDelete'
+    , rasterCollectionsRastersBatchDelete
+    , RasterCollectionsRastersBatchDelete
 
     -- * Request Lenses
     , rcrbdPayload
@@ -43,7 +43,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasterCollections.rasters.batchDelete@ method which the
--- 'RasterCollectionsRastersBatchDelete'' request conforms to.
+-- 'RasterCollectionsRastersBatchDelete' request conforms to.
 type RasterCollectionsRastersBatchDeleteResource =
      "rasterCollections" :>
        Capture "id" Text :>
@@ -60,44 +60,43 @@ type RasterCollectionsRastersBatchDeleteResource =
 -- be included in a single batchDelete request. Each batchDelete request is
 -- atomic.
 --
--- /See:/ 'rasterCollectionsRastersBatchDelete'' smart constructor.
-data RasterCollectionsRastersBatchDelete' = RasterCollectionsRastersBatchDelete'
+-- /See:/ 'rasterCollectionsRastersBatchDelete' smart constructor.
+data RasterCollectionsRastersBatchDelete = RasterCollectionsRastersBatchDelete
     { _rcrbdPayload :: !RasterCollectionsRasterBatchDeleteRequest
     , _rcrbdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RasterCollectionsRastersBatchDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'RasterCollectionsRastersBatchDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rcrbdPayload'
 --
 -- * 'rcrbdId'
-rasterCollectionsRastersBatchDelete'
+rasterCollectionsRastersBatchDelete
     :: RasterCollectionsRasterBatchDeleteRequest -- ^ 'rcrbdPayload'
     -> Text -- ^ 'rcrbdId'
-    -> RasterCollectionsRastersBatchDelete'
-rasterCollectionsRastersBatchDelete' pRcrbdPayload_ pRcrbdId_ =
-    RasterCollectionsRastersBatchDelete'
+    -> RasterCollectionsRastersBatchDelete
+rasterCollectionsRastersBatchDelete pRcrbdPayload_ pRcrbdId_ =
+    RasterCollectionsRastersBatchDelete
     { _rcrbdPayload = pRcrbdPayload_
     , _rcrbdId = pRcrbdId_
     }
 
 -- | Multipart request metadata.
-rcrbdPayload :: Lens' RasterCollectionsRastersBatchDelete' RasterCollectionsRasterBatchDeleteRequest
+rcrbdPayload :: Lens' RasterCollectionsRastersBatchDelete RasterCollectionsRasterBatchDeleteRequest
 rcrbdPayload
   = lens _rcrbdPayload (\ s a -> s{_rcrbdPayload = a})
 
 -- | The ID of the raster collection to which these rasters belong.
-rcrbdId :: Lens' RasterCollectionsRastersBatchDelete' Text
+rcrbdId :: Lens' RasterCollectionsRastersBatchDelete Text
 rcrbdId = lens _rcrbdId (\ s a -> s{_rcrbdId = a})
 
 instance GoogleRequest
-         RasterCollectionsRastersBatchDelete' where
-        type Rs RasterCollectionsRastersBatchDelete' =
+         RasterCollectionsRastersBatchDelete where
+        type Rs RasterCollectionsRastersBatchDelete =
              RasterCollectionsRastersBatchDeleteResponse
-        requestClient
-          RasterCollectionsRastersBatchDelete'{..}
+        requestClient RasterCollectionsRastersBatchDelete{..}
           = go _rcrbdId (Just AltJSON) _rcrbdPayload
               mapsEngineService
           where go

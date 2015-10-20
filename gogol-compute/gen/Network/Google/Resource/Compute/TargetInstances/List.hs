@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.TargetInstances.List
       TargetInstancesListResource
 
     -- * Creating a Request
-    , targetInstancesList'
-    , TargetInstancesList'
+    , targetInstancesList
+    , TargetInstancesList
 
     -- * Request Lenses
     , tilProject
@@ -45,7 +45,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetInstances.list@ method which the
--- 'TargetInstancesList'' request conforms to.
+-- 'TargetInstancesList' request conforms to.
 type TargetInstancesListResource =
      Capture "project" Text :>
        "zones" :>
@@ -60,8 +60,8 @@ type TargetInstancesListResource =
 -- | Retrieves the list of TargetInstance resources available to the
 -- specified project and zone.
 --
--- /See:/ 'targetInstancesList'' smart constructor.
-data TargetInstancesList' = TargetInstancesList'
+-- /See:/ 'targetInstancesList' smart constructor.
+data TargetInstancesList = TargetInstancesList
     { _tilProject    :: !Text
     , _tilZone       :: !Text
     , _tilFilter     :: !(Maybe Text)
@@ -69,7 +69,7 @@ data TargetInstancesList' = TargetInstancesList'
     , _tilMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetInstancesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetInstancesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,12 +82,12 @@ data TargetInstancesList' = TargetInstancesList'
 -- * 'tilPageToken'
 --
 -- * 'tilMaxResults'
-targetInstancesList'
+targetInstancesList
     :: Text -- ^ 'tilProject'
     -> Text -- ^ 'tilZone'
-    -> TargetInstancesList'
-targetInstancesList' pTilProject_ pTilZone_ =
-    TargetInstancesList'
+    -> TargetInstancesList
+targetInstancesList pTilProject_ pTilZone_ =
+    TargetInstancesList
     { _tilProject = pTilProject_
     , _tilZone = pTilZone_
     , _tilFilter = Nothing
@@ -96,12 +96,12 @@ targetInstancesList' pTilProject_ pTilZone_ =
     }
 
 -- | Name of the project scoping this request.
-tilProject :: Lens' TargetInstancesList' Text
+tilProject :: Lens' TargetInstancesList Text
 tilProject
   = lens _tilProject (\ s a -> s{_tilProject = a})
 
 -- | Name of the zone scoping this request.
-tilZone :: Lens' TargetInstancesList' Text
+tilZone :: Lens' TargetInstancesList Text
 tilZone = lens _tilZone (\ s a -> s{_tilZone = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -115,26 +115,26 @@ tilZone = lens _tilZone (\ s a -> s{_tilZone = a})
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-tilFilter :: Lens' TargetInstancesList' (Maybe Text)
+tilFilter :: Lens' TargetInstancesList (Maybe Text)
 tilFilter
   = lens _tilFilter (\ s a -> s{_tilFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-tilPageToken :: Lens' TargetInstancesList' (Maybe Text)
+tilPageToken :: Lens' TargetInstancesList (Maybe Text)
 tilPageToken
   = lens _tilPageToken (\ s a -> s{_tilPageToken = a})
 
 -- | Maximum count of results to be returned.
-tilMaxResults :: Lens' TargetInstancesList' Word32
+tilMaxResults :: Lens' TargetInstancesList Word32
 tilMaxResults
   = lens _tilMaxResults
       (\ s a -> s{_tilMaxResults = a})
 
-instance GoogleRequest TargetInstancesList' where
-        type Rs TargetInstancesList' = TargetInstanceList
-        requestClient TargetInstancesList'{..}
+instance GoogleRequest TargetInstancesList where
+        type Rs TargetInstancesList = TargetInstanceList
+        requestClient TargetInstancesList{..}
           = go _tilProject _tilZone _tilFilter _tilPageToken
               (Just _tilMaxResults)
               (Just AltJSON)

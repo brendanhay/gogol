@@ -29,19 +29,19 @@ module Network.Google.Resource.Compute.Images.Delete
       ImagesDeleteResource
 
     -- * Creating a Request
-    , imagesDelete'
-    , ImagesDelete'
+    , imagesDelete
+    , ImagesDelete
 
     -- * Request Lenses
-    , idImage
-    , idProject
+    , imaImage
+    , imaProject
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.images.delete@ method which the
--- 'ImagesDelete'' request conforms to.
+-- 'ImagesDelete' request conforms to.
 type ImagesDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,42 +51,42 @@ type ImagesDeleteResource =
 
 -- | Deletes the specified image resource.
 --
--- /See:/ 'imagesDelete'' smart constructor.
-data ImagesDelete' = ImagesDelete'
-    { _idImage   :: !Text
-    , _idProject :: !Text
+-- /See:/ 'imagesDelete' smart constructor.
+data ImagesDelete = ImagesDelete
+    { _imaImage   :: !Text
+    , _imaProject :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ImagesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ImagesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'idImage'
+-- * 'imaImage'
 --
--- * 'idProject'
-imagesDelete'
-    :: Text -- ^ 'idImage'
-    -> Text -- ^ 'idProject'
-    -> ImagesDelete'
-imagesDelete' pIdImage_ pIdProject_ =
-    ImagesDelete'
-    { _idImage = pIdImage_
-    , _idProject = pIdProject_
+-- * 'imaProject'
+imagesDelete
+    :: Text -- ^ 'imaImage'
+    -> Text -- ^ 'imaProject'
+    -> ImagesDelete
+imagesDelete pImaImage_ pImaProject_ =
+    ImagesDelete
+    { _imaImage = pImaImage_
+    , _imaProject = pImaProject_
     }
 
 -- | Name of the image resource to delete.
-idImage :: Lens' ImagesDelete' Text
-idImage = lens _idImage (\ s a -> s{_idImage = a})
+imaImage :: Lens' ImagesDelete Text
+imaImage = lens _imaImage (\ s a -> s{_imaImage = a})
 
 -- | Project ID for this request.
-idProject :: Lens' ImagesDelete' Text
-idProject
-  = lens _idProject (\ s a -> s{_idProject = a})
+imaProject :: Lens' ImagesDelete Text
+imaProject
+  = lens _imaProject (\ s a -> s{_imaProject = a})
 
-instance GoogleRequest ImagesDelete' where
-        type Rs ImagesDelete' = Operation
-        requestClient ImagesDelete'{..}
-          = go _idProject _idImage (Just AltJSON)
+instance GoogleRequest ImagesDelete where
+        type Rs ImagesDelete = Operation
+        requestClient ImagesDelete{..}
+          = go _imaProject _imaImage (Just AltJSON)
               computeService
           where go
                   = buildClient (Proxy :: Proxy ImagesDeleteResource)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Goals.Insert
       ManagementGoalsInsertResource
 
     -- * Creating a Request
-    , managementGoalsInsert'
-    , ManagementGoalsInsert'
+    , managementGoalsInsert
+    , ManagementGoalsInsert
 
     -- * Request Lenses
     , mgiWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.goals.insert@ method which the
--- 'ManagementGoalsInsert'' request conforms to.
+-- 'ManagementGoalsInsert' request conforms to.
 type ManagementGoalsInsertResource =
      "management" :>
        "accounts" :>
@@ -58,15 +58,15 @@ type ManagementGoalsInsertResource =
 
 -- | Create a new goal.
 --
--- /See:/ 'managementGoalsInsert'' smart constructor.
-data ManagementGoalsInsert' = ManagementGoalsInsert'
+-- /See:/ 'managementGoalsInsert' smart constructor.
+data ManagementGoalsInsert = ManagementGoalsInsert
     { _mgiWebPropertyId :: !Text
     , _mgiProFileId     :: !Text
     , _mgiPayload       :: !Goal
     , _mgiAccountId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementGoalsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementGoalsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data ManagementGoalsInsert' = ManagementGoalsInsert'
 -- * 'mgiPayload'
 --
 -- * 'mgiAccountId'
-managementGoalsInsert'
+managementGoalsInsert
     :: Text -- ^ 'mgiWebPropertyId'
     -> Text -- ^ 'mgiProFileId'
     -> Goal -- ^ 'mgiPayload'
     -> Text -- ^ 'mgiAccountId'
-    -> ManagementGoalsInsert'
-managementGoalsInsert' pMgiWebPropertyId_ pMgiProFileId_ pMgiPayload_ pMgiAccountId_ =
-    ManagementGoalsInsert'
+    -> ManagementGoalsInsert
+managementGoalsInsert pMgiWebPropertyId_ pMgiProFileId_ pMgiPayload_ pMgiAccountId_ =
+    ManagementGoalsInsert
     { _mgiWebPropertyId = pMgiWebPropertyId_
     , _mgiProFileId = pMgiProFileId_
     , _mgiPayload = pMgiPayload_
@@ -92,29 +92,29 @@ managementGoalsInsert' pMgiWebPropertyId_ pMgiProFileId_ pMgiPayload_ pMgiAccoun
     }
 
 -- | Web property ID to create the goal for.
-mgiWebPropertyId :: Lens' ManagementGoalsInsert' Text
+mgiWebPropertyId :: Lens' ManagementGoalsInsert Text
 mgiWebPropertyId
   = lens _mgiWebPropertyId
       (\ s a -> s{_mgiWebPropertyId = a})
 
 -- | View (Profile) ID to create the goal for.
-mgiProFileId :: Lens' ManagementGoalsInsert' Text
+mgiProFileId :: Lens' ManagementGoalsInsert Text
 mgiProFileId
   = lens _mgiProFileId (\ s a -> s{_mgiProFileId = a})
 
 -- | Multipart request metadata.
-mgiPayload :: Lens' ManagementGoalsInsert' Goal
+mgiPayload :: Lens' ManagementGoalsInsert Goal
 mgiPayload
   = lens _mgiPayload (\ s a -> s{_mgiPayload = a})
 
 -- | Account ID to create the goal for.
-mgiAccountId :: Lens' ManagementGoalsInsert' Text
+mgiAccountId :: Lens' ManagementGoalsInsert Text
 mgiAccountId
   = lens _mgiAccountId (\ s a -> s{_mgiAccountId = a})
 
-instance GoogleRequest ManagementGoalsInsert' where
-        type Rs ManagementGoalsInsert' = Goal
-        requestClient ManagementGoalsInsert'{..}
+instance GoogleRequest ManagementGoalsInsert where
+        type Rs ManagementGoalsInsert = Goal
+        requestClient ManagementGoalsInsert{..}
           = go _mgiAccountId _mgiWebPropertyId _mgiProFileId
               (Just AltJSON)
               _mgiPayload

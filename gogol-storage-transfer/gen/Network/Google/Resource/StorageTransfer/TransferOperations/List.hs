@@ -33,8 +33,8 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.List
       TransferOperationsListResource
 
     -- * Creating a Request
-    , transferOperationsList'
-    , TransferOperationsList'
+    , transferOperationsList
+    , TransferOperationsList
 
     -- * Request Lenses
     , tolXgafv
@@ -54,7 +54,7 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferOperations.list@ method which the
--- 'TransferOperationsList'' request conforms to.
+-- 'TransferOperationsList' request conforms to.
 type TransferOperationsListResource =
      "v1" :>
        Capture "name" Text :>
@@ -77,8 +77,8 @@ type TransferOperationsListResource =
 -- to use different resource name schemes, such as
 -- \`users\/*\/operations\`.
 --
--- /See:/ 'transferOperationsList'' smart constructor.
-data TransferOperationsList' = TransferOperationsList'
+-- /See:/ 'transferOperationsList' smart constructor.
+data TransferOperationsList = TransferOperationsList
     { _tolXgafv          :: !(Maybe Text)
     , _tolUploadProtocol :: !(Maybe Text)
     , _tolPp             :: !Bool
@@ -92,7 +92,7 @@ data TransferOperationsList' = TransferOperationsList'
     , _tolCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TransferOperationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TransferOperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -117,11 +117,11 @@ data TransferOperationsList' = TransferOperationsList'
 -- * 'tolPageSize'
 --
 -- * 'tolCallback'
-transferOperationsList'
+transferOperationsList
     :: Text -- ^ 'tolName'
-    -> TransferOperationsList'
-transferOperationsList' pTolName_ =
-    TransferOperationsList'
+    -> TransferOperationsList
+transferOperationsList pTolName_ =
+    TransferOperationsList
     { _tolXgafv = Nothing
     , _tolUploadProtocol = Nothing
     , _tolPp = True
@@ -136,65 +136,65 @@ transferOperationsList' pTolName_ =
     }
 
 -- | V1 error format.
-tolXgafv :: Lens' TransferOperationsList' (Maybe Text)
+tolXgafv :: Lens' TransferOperationsList (Maybe Text)
 tolXgafv = lens _tolXgafv (\ s a -> s{_tolXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-tolUploadProtocol :: Lens' TransferOperationsList' (Maybe Text)
+tolUploadProtocol :: Lens' TransferOperationsList (Maybe Text)
 tolUploadProtocol
   = lens _tolUploadProtocol
       (\ s a -> s{_tolUploadProtocol = a})
 
 -- | Pretty-print response.
-tolPp :: Lens' TransferOperationsList' Bool
+tolPp :: Lens' TransferOperationsList Bool
 tolPp = lens _tolPp (\ s a -> s{_tolPp = a})
 
 -- | OAuth access token.
-tolAccessToken :: Lens' TransferOperationsList' (Maybe Text)
+tolAccessToken :: Lens' TransferOperationsList (Maybe Text)
 tolAccessToken
   = lens _tolAccessToken
       (\ s a -> s{_tolAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-tolUploadType :: Lens' TransferOperationsList' (Maybe Text)
+tolUploadType :: Lens' TransferOperationsList (Maybe Text)
 tolUploadType
   = lens _tolUploadType
       (\ s a -> s{_tolUploadType = a})
 
 -- | OAuth bearer token.
-tolBearerToken :: Lens' TransferOperationsList' (Maybe Text)
+tolBearerToken :: Lens' TransferOperationsList (Maybe Text)
 tolBearerToken
   = lens _tolBearerToken
       (\ s a -> s{_tolBearerToken = a})
 
 -- | The value \`transferOperations\`.
-tolName :: Lens' TransferOperationsList' Text
+tolName :: Lens' TransferOperationsList Text
 tolName = lens _tolName (\ s a -> s{_tolName = a})
 
 -- | The standard list filter.
-tolFilter :: Lens' TransferOperationsList' (Maybe Text)
+tolFilter :: Lens' TransferOperationsList (Maybe Text)
 tolFilter
   = lens _tolFilter (\ s a -> s{_tolFilter = a})
 
 -- | The standard list page token.
-tolPageToken :: Lens' TransferOperationsList' (Maybe Text)
+tolPageToken :: Lens' TransferOperationsList (Maybe Text)
 tolPageToken
   = lens _tolPageToken (\ s a -> s{_tolPageToken = a})
 
 -- | The standard list page size.
-tolPageSize :: Lens' TransferOperationsList' (Maybe Int32)
+tolPageSize :: Lens' TransferOperationsList (Maybe Int32)
 tolPageSize
   = lens _tolPageSize (\ s a -> s{_tolPageSize = a})
 
 -- | JSONP
-tolCallback :: Lens' TransferOperationsList' (Maybe Text)
+tolCallback :: Lens' TransferOperationsList (Maybe Text)
 tolCallback
   = lens _tolCallback (\ s a -> s{_tolCallback = a})
 
-instance GoogleRequest TransferOperationsList' where
-        type Rs TransferOperationsList' =
+instance GoogleRequest TransferOperationsList where
+        type Rs TransferOperationsList =
              ListOperationsResponse
-        requestClient TransferOperationsList'{..}
+        requestClient TransferOperationsList{..}
           = go _tolName _tolXgafv _tolUploadProtocol
               (Just _tolPp)
               _tolAccessToken

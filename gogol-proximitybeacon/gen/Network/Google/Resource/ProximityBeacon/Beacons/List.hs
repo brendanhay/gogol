@@ -31,8 +31,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.List
       BeaconsListResource
 
     -- * Creating a Request
-    , beaconsList'
-    , BeaconsList'
+    , beaconsList
+    , BeaconsList
 
     -- * Request Lenses
     , blXgafv
@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.list@ method which the
--- 'BeaconsList'' request conforms to.
+-- 'BeaconsList' request conforms to.
 type BeaconsListResource =
      "v1beta1" :>
        "beacons" :>
@@ -72,8 +72,8 @@ type BeaconsListResource =
 -- criteria. Only those beacons that the client has permission to list will
 -- be returned.
 --
--- /See:/ 'beaconsList'' smart constructor.
-data BeaconsList' = BeaconsList'
+-- /See:/ 'beaconsList' smart constructor.
+data BeaconsList = BeaconsList
     { _blXgafv          :: !(Maybe Text)
     , _blUploadProtocol :: !(Maybe Text)
     , _blPp             :: !Bool
@@ -86,7 +86,7 @@ data BeaconsList' = BeaconsList'
     , _blCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BeaconsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'BeaconsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -109,10 +109,10 @@ data BeaconsList' = BeaconsList'
 -- * 'blPageSize'
 --
 -- * 'blCallback'
-beaconsList'
-    :: BeaconsList'
-beaconsList' =
-    BeaconsList'
+beaconsList
+    :: BeaconsList
+beaconsList =
+    BeaconsList
     { _blXgafv = Nothing
     , _blUploadProtocol = Nothing
     , _blPp = True
@@ -126,27 +126,27 @@ beaconsList' =
     }
 
 -- | V1 error format.
-blXgafv :: Lens' BeaconsList' (Maybe Text)
+blXgafv :: Lens' BeaconsList (Maybe Text)
 blXgafv = lens _blXgafv (\ s a -> s{_blXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-blUploadProtocol :: Lens' BeaconsList' (Maybe Text)
+blUploadProtocol :: Lens' BeaconsList (Maybe Text)
 blUploadProtocol
   = lens _blUploadProtocol
       (\ s a -> s{_blUploadProtocol = a})
 
 -- | Pretty-print response.
-blPp :: Lens' BeaconsList' Bool
+blPp :: Lens' BeaconsList Bool
 blPp = lens _blPp (\ s a -> s{_blPp = a})
 
 -- | OAuth access token.
-blAccessToken :: Lens' BeaconsList' (Maybe Text)
+blAccessToken :: Lens' BeaconsList (Maybe Text)
 blAccessToken
   = lens _blAccessToken
       (\ s a -> s{_blAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-blUploadType :: Lens' BeaconsList' (Maybe Text)
+blUploadType :: Lens' BeaconsList (Maybe Text)
 blUploadType
   = lens _blUploadType (\ s a -> s{_blUploadType = a})
 
@@ -196,34 +196,34 @@ blUploadType
 -- string parameter, the whole filter expression must be URL-encoded.
 -- Example REST request: \`GET
 -- \/v1beta1\/beacons?q=status:active%20lat:51.123%20lng:-1.095%20radius:1000\`
-blQ :: Lens' BeaconsList' (Maybe Text)
+blQ :: Lens' BeaconsList (Maybe Text)
 blQ = lens _blQ (\ s a -> s{_blQ = a})
 
 -- | OAuth bearer token.
-blBearerToken :: Lens' BeaconsList' (Maybe Text)
+blBearerToken :: Lens' BeaconsList (Maybe Text)
 blBearerToken
   = lens _blBearerToken
       (\ s a -> s{_blBearerToken = a})
 
 -- | A pagination token obtained from a previous request to list beacons.
-blPageToken :: Lens' BeaconsList' (Maybe Text)
+blPageToken :: Lens' BeaconsList (Maybe Text)
 blPageToken
   = lens _blPageToken (\ s a -> s{_blPageToken = a})
 
 -- | The maximum number of records to return for this request, up to a
 -- server-defined upper limit.
-blPageSize :: Lens' BeaconsList' (Maybe Int32)
+blPageSize :: Lens' BeaconsList (Maybe Int32)
 blPageSize
   = lens _blPageSize (\ s a -> s{_blPageSize = a})
 
 -- | JSONP
-blCallback :: Lens' BeaconsList' (Maybe Text)
+blCallback :: Lens' BeaconsList (Maybe Text)
 blCallback
   = lens _blCallback (\ s a -> s{_blCallback = a})
 
-instance GoogleRequest BeaconsList' where
-        type Rs BeaconsList' = ListBeaconsResponse
-        requestClient BeaconsList'{..}
+instance GoogleRequest BeaconsList where
+        type Rs BeaconsList = ListBeaconsResponse
+        requestClient BeaconsList{..}
           = go _blXgafv _blUploadProtocol (Just _blPp)
               _blAccessToken
               _blUploadType

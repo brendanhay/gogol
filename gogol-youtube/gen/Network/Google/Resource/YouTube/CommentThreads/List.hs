@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.CommentThreads.List
       CommentThreadsListResource
 
     -- * Creating a Request
-    , commentThreadsList'
-    , CommentThreadsList'
+    , commentThreadsList
+    , CommentThreadsList
 
     -- * Request Lenses
     , ctlPart
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.commentThreads.list@ method which the
--- 'CommentThreadsList'' request conforms to.
+-- 'CommentThreadsList' request conforms to.
 type CommentThreadsListResource =
      "commentThreads" :>
        QueryParam "part" Text :>
@@ -72,8 +72,8 @@ type CommentThreadsListResource =
 
 -- | Returns a list of comment threads that match the API request parameters.
 --
--- /See:/ 'commentThreadsList'' smart constructor.
-data CommentThreadsList' = CommentThreadsList'
+-- /See:/ 'commentThreadsList' smart constructor.
+data CommentThreadsList = CommentThreadsList
     { _ctlPart                         :: !Text
     , _ctlModerationStatus             :: !CommentThreadsListModerationStatus
     , _ctlSearchTerms                  :: !(Maybe Text)
@@ -87,7 +87,7 @@ data CommentThreadsList' = CommentThreadsList'
     , _ctlMaxResults                   :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentThreadsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentThreadsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -112,11 +112,11 @@ data CommentThreadsList' = CommentThreadsList'
 -- * 'ctlTextFormat'
 --
 -- * 'ctlMaxResults'
-commentThreadsList'
+commentThreadsList
     :: Text -- ^ 'ctlPart'
-    -> CommentThreadsList'
-commentThreadsList' pCtlPart_ =
-    CommentThreadsList'
+    -> CommentThreadsList
+commentThreadsList pCtlPart_ =
+    CommentThreadsList
     { _ctlPart = pCtlPart_
     , _ctlModerationStatus = Published
     , _ctlSearchTerms = Nothing
@@ -132,13 +132,13 @@ commentThreadsList' pCtlPart_ =
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- commentThread resource properties that the API response will include.
-ctlPart :: Lens' CommentThreadsList' Text
+ctlPart :: Lens' CommentThreadsList Text
 ctlPart = lens _ctlPart (\ s a -> s{_ctlPart = a})
 
 -- | Set this parameter to limit the returned comment threads to a particular
 -- moderation state. Note: This parameter is not supported for use in
 -- conjunction with the id parameter.
-ctlModerationStatus :: Lens' CommentThreadsList' CommentThreadsListModerationStatus
+ctlModerationStatus :: Lens' CommentThreadsList CommentThreadsListModerationStatus
 ctlModerationStatus
   = lens _ctlModerationStatus
       (\ s a -> s{_ctlModerationStatus = a})
@@ -147,7 +147,7 @@ ctlModerationStatus
 -- only contain comments that contain the specified search terms. Note:
 -- This parameter is not supported for use in conjunction with the id
 -- parameter.
-ctlSearchTerms :: Lens' CommentThreadsList' (Maybe Text)
+ctlSearchTerms :: Lens' CommentThreadsList (Maybe Text)
 ctlSearchTerms
   = lens _ctlSearchTerms
       (\ s a -> s{_ctlSearchTerms = a})
@@ -155,34 +155,34 @@ ctlSearchTerms
 -- | The channelId parameter instructs the API to return comment threads
 -- containing comments about the specified channel. (The response will not
 -- include comments left on videos that the channel uploaded.)
-ctlChannelId :: Lens' CommentThreadsList' (Maybe Text)
+ctlChannelId :: Lens' CommentThreadsList (Maybe Text)
 ctlChannelId
   = lens _ctlChannelId (\ s a -> s{_ctlChannelId = a})
 
 -- | The allThreadsRelatedToChannelId parameter instructs the API to return
 -- all comment threads associated with the specified channel. The response
 -- can include comments about the channel or about the channel\'s videos.
-ctlAllThreadsRelatedToChannelId :: Lens' CommentThreadsList' (Maybe Text)
+ctlAllThreadsRelatedToChannelId :: Lens' CommentThreadsList (Maybe Text)
 ctlAllThreadsRelatedToChannelId
   = lens _ctlAllThreadsRelatedToChannelId
       (\ s a -> s{_ctlAllThreadsRelatedToChannelId = a})
 
 -- | The videoId parameter instructs the API to return comment threads
 -- associated with the specified video ID.
-ctlVideoId :: Lens' CommentThreadsList' (Maybe Text)
+ctlVideoId :: Lens' CommentThreadsList (Maybe Text)
 ctlVideoId
   = lens _ctlVideoId (\ s a -> s{_ctlVideoId = a})
 
 -- | The id parameter specifies a comma-separated list of comment thread IDs
 -- for the resources that should be retrieved.
-ctlId :: Lens' CommentThreadsList' (Maybe Text)
+ctlId :: Lens' CommentThreadsList (Maybe Text)
 ctlId = lens _ctlId (\ s a -> s{_ctlId = a})
 
 -- | The pageToken parameter identifies a specific page in the result set
 -- that should be returned. In an API response, the nextPageToken property
 -- identifies the next page of the result that can be retrieved. Note: This
 -- parameter is not supported for use in conjunction with the id parameter.
-ctlPageToken :: Lens' CommentThreadsList' (Maybe Text)
+ctlPageToken :: Lens' CommentThreadsList (Maybe Text)
 ctlPageToken
   = lens _ctlPageToken (\ s a -> s{_ctlPageToken = a})
 
@@ -191,12 +191,12 @@ ctlPageToken
 -- ordered by time. This is the default behavior. - relevance - Comment
 -- threads are ordered by relevance.Note: This parameter is not supported
 -- for use in conjunction with the id parameter.
-ctlOrder :: Lens' CommentThreadsList' CommentThreadsListOrder
+ctlOrder :: Lens' CommentThreadsList CommentThreadsListOrder
 ctlOrder = lens _ctlOrder (\ s a -> s{_ctlOrder = a})
 
 -- | Set this parameter\'s value to html or plainText to instruct the API to
 -- return the comments left by users in html formatted or in plain text.
-ctlTextFormat :: Lens' CommentThreadsList' CommentThreadsListTextFormat
+ctlTextFormat :: Lens' CommentThreadsList CommentThreadsListTextFormat
 ctlTextFormat
   = lens _ctlTextFormat
       (\ s a -> s{_ctlTextFormat = a})
@@ -204,15 +204,15 @@ ctlTextFormat
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set. Note: This parameter is not
 -- supported for use in conjunction with the id parameter.
-ctlMaxResults :: Lens' CommentThreadsList' Word32
+ctlMaxResults :: Lens' CommentThreadsList Word32
 ctlMaxResults
   = lens _ctlMaxResults
       (\ s a -> s{_ctlMaxResults = a})
 
-instance GoogleRequest CommentThreadsList' where
-        type Rs CommentThreadsList' =
+instance GoogleRequest CommentThreadsList where
+        type Rs CommentThreadsList =
              CommentThreadListResponse
-        requestClient CommentThreadsList'{..}
+        requestClient CommentThreadsList{..}
           = go (Just _ctlPart) (Just _ctlModerationStatus)
               _ctlSearchTerms
               _ctlChannelId

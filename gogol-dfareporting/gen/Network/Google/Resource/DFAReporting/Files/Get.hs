@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Files.Get
       FilesGetResource
 
     -- * Creating a Request
-    , filesGet'
-    , FilesGet'
+    , filesGet
+    , FilesGet
 
     -- * Request Lenses
     , fgReportId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.files.get@ method which the
--- 'FilesGet'' request conforms to.
+-- 'FilesGet' request conforms to.
 type FilesGetResource =
      "reports" :>
        Capture "reportId" Int64 :>
@@ -58,51 +58,50 @@ type FilesGetResource =
 
 -- | Retrieves a report file by its report ID and file ID.
 --
--- /See:/ 'filesGet'' smart constructor.
-data FilesGet' = FilesGet'
+-- /See:/ 'filesGet' smart constructor.
+data FilesGet = FilesGet
     { _fgReportId :: !Int64
     , _fgFileId   :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FilesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'FilesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fgReportId'
 --
 -- * 'fgFileId'
-filesGet'
+filesGet
     :: Int64 -- ^ 'fgReportId'
     -> Int64 -- ^ 'fgFileId'
-    -> FilesGet'
-filesGet' pFgReportId_ pFgFileId_ =
-    FilesGet'
+    -> FilesGet
+filesGet pFgReportId_ pFgFileId_ =
+    FilesGet
     { _fgReportId = pFgReportId_
     , _fgFileId = pFgFileId_
     }
 
 -- | The ID of the report.
-fgReportId :: Lens' FilesGet' Int64
+fgReportId :: Lens' FilesGet Int64
 fgReportId
   = lens _fgReportId (\ s a -> s{_fgReportId = a})
 
 -- | The ID of the report file.
-fgFileId :: Lens' FilesGet' Int64
+fgFileId :: Lens' FilesGet Int64
 fgFileId = lens _fgFileId (\ s a -> s{_fgFileId = a})
 
-instance GoogleRequest FilesGet' where
-        type Rs FilesGet' = File
-        requestClient FilesGet'{..}
+instance GoogleRequest FilesGet where
+        type Rs FilesGet = File
+        requestClient FilesGet{..}
           = go _fgReportId _fgFileId (Just AltJSON)
               dFAReportingService
           where go :<|> _
                   = buildClient (Proxy :: Proxy FilesGetResource)
                       mempty
 
-instance GoogleRequest (MediaDownload FilesGet')
-         where
-        type Rs (MediaDownload FilesGet') = Stream
-        requestClient (MediaDownload FilesGet'{..})
+instance GoogleRequest (MediaDownload FilesGet) where
+        type Rs (MediaDownload FilesGet) = Stream
+        requestClient (MediaDownload FilesGet{..})
           = go _fgReportId _fgFileId (Just AltMedia)
               dFAReportingService
           where _ :<|> go

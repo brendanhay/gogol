@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.MyLibrary.Annotations.Insert
       MyLibraryAnnotationsInsertResource
 
     -- * Creating a Request
-    , myLibraryAnnotationsInsert'
-    , MyLibraryAnnotationsInsert'
+    , myLibraryAnnotationsInsert
+    , MyLibraryAnnotationsInsert
 
     -- * Request Lenses
     , mlaiCountry
@@ -43,7 +43,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.annotations.insert@ method which the
--- 'MyLibraryAnnotationsInsert'' request conforms to.
+-- 'MyLibraryAnnotationsInsert' request conforms to.
 type MyLibraryAnnotationsInsertResource =
      "mylibrary" :>
        "annotations" :>
@@ -55,15 +55,15 @@ type MyLibraryAnnotationsInsertResource =
 
 -- | Inserts a new annotation.
 --
--- /See:/ 'myLibraryAnnotationsInsert'' smart constructor.
-data MyLibraryAnnotationsInsert' = MyLibraryAnnotationsInsert'
+-- /See:/ 'myLibraryAnnotationsInsert' smart constructor.
+data MyLibraryAnnotationsInsert = MyLibraryAnnotationsInsert
     { _mlaiCountry                   :: !(Maybe Text)
     , _mlaiPayload                   :: !Annotation
     , _mlaiShowOnlySummaryInResponse :: !(Maybe Bool)
     , _mlaiSource                    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MyLibraryAnnotationsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'MyLibraryAnnotationsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,11 +74,11 @@ data MyLibraryAnnotationsInsert' = MyLibraryAnnotationsInsert'
 -- * 'mlaiShowOnlySummaryInResponse'
 --
 -- * 'mlaiSource'
-myLibraryAnnotationsInsert'
+myLibraryAnnotationsInsert
     :: Annotation -- ^ 'mlaiPayload'
-    -> MyLibraryAnnotationsInsert'
-myLibraryAnnotationsInsert' pMlaiPayload_ =
-    MyLibraryAnnotationsInsert'
+    -> MyLibraryAnnotationsInsert
+myLibraryAnnotationsInsert pMlaiPayload_ =
+    MyLibraryAnnotationsInsert
     { _mlaiCountry = Nothing
     , _mlaiPayload = pMlaiPayload_
     , _mlaiShowOnlySummaryInResponse = Nothing
@@ -86,31 +86,31 @@ myLibraryAnnotationsInsert' pMlaiPayload_ =
     }
 
 -- | ISO-3166-1 code to override the IP-based location.
-mlaiCountry :: Lens' MyLibraryAnnotationsInsert' (Maybe Text)
+mlaiCountry :: Lens' MyLibraryAnnotationsInsert (Maybe Text)
 mlaiCountry
   = lens _mlaiCountry (\ s a -> s{_mlaiCountry = a})
 
 -- | Multipart request metadata.
-mlaiPayload :: Lens' MyLibraryAnnotationsInsert' Annotation
+mlaiPayload :: Lens' MyLibraryAnnotationsInsert Annotation
 mlaiPayload
   = lens _mlaiPayload (\ s a -> s{_mlaiPayload = a})
 
 -- | Requests that only the summary of the specified layer be provided in the
 -- response.
-mlaiShowOnlySummaryInResponse :: Lens' MyLibraryAnnotationsInsert' (Maybe Bool)
+mlaiShowOnlySummaryInResponse :: Lens' MyLibraryAnnotationsInsert (Maybe Bool)
 mlaiShowOnlySummaryInResponse
   = lens _mlaiShowOnlySummaryInResponse
       (\ s a -> s{_mlaiShowOnlySummaryInResponse = a})
 
 -- | String to identify the originator of this request.
-mlaiSource :: Lens' MyLibraryAnnotationsInsert' (Maybe Text)
+mlaiSource :: Lens' MyLibraryAnnotationsInsert (Maybe Text)
 mlaiSource
   = lens _mlaiSource (\ s a -> s{_mlaiSource = a})
 
-instance GoogleRequest MyLibraryAnnotationsInsert'
+instance GoogleRequest MyLibraryAnnotationsInsert
          where
-        type Rs MyLibraryAnnotationsInsert' = Annotation
-        requestClient MyLibraryAnnotationsInsert'{..}
+        type Rs MyLibraryAnnotationsInsert = Annotation
+        requestClient MyLibraryAnnotationsInsert{..}
           = go _mlaiCountry _mlaiShowOnlySummaryInResponse
               _mlaiSource
               (Just AltJSON)

@@ -35,8 +35,8 @@ module Network.Google.Resource.YouTube.Activities.Insert
       ActivitiesInsertResource
 
     -- * Creating a Request
-    , activitiesInsert'
-    , ActivitiesInsert'
+    , activitiesInsert
+    , ActivitiesInsert
 
     -- * Request Lenses
     , aiPart
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.activities.insert@ method which the
--- 'ActivitiesInsert'' request conforms to.
+-- 'ActivitiesInsert' request conforms to.
 type ActivitiesInsertResource =
      "activities" :>
        QueryParam "part" Text :>
@@ -62,25 +62,25 @@ type ActivitiesInsertResource =
 -- would use the API\'s videos.rate() method to rate a video and the
 -- playlistItems.insert() method to mark a video as a favorite.
 --
--- /See:/ 'activitiesInsert'' smart constructor.
-data ActivitiesInsert' = ActivitiesInsert'
+-- /See:/ 'activitiesInsert' smart constructor.
+data ActivitiesInsert = ActivitiesInsert
     { _aiPart    :: !Text
     , _aiPayload :: !Activity
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ActivitiesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ActivitiesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aiPart'
 --
 -- * 'aiPayload'
-activitiesInsert'
+activitiesInsert
     :: Text -- ^ 'aiPart'
     -> Activity -- ^ 'aiPayload'
-    -> ActivitiesInsert'
-activitiesInsert' pAiPart_ pAiPayload_ =
-    ActivitiesInsert'
+    -> ActivitiesInsert
+activitiesInsert pAiPart_ pAiPayload_ =
+    ActivitiesInsert
     { _aiPart = pAiPart_
     , _aiPayload = pAiPayload_
     }
@@ -88,17 +88,17 @@ activitiesInsert' pAiPart_ pAiPayload_ =
 -- | The part parameter serves two purposes in this operation. It identifies
 -- the properties that the write operation will set as well as the
 -- properties that the API response will include.
-aiPart :: Lens' ActivitiesInsert' Text
+aiPart :: Lens' ActivitiesInsert Text
 aiPart = lens _aiPart (\ s a -> s{_aiPart = a})
 
 -- | Multipart request metadata.
-aiPayload :: Lens' ActivitiesInsert' Activity
+aiPayload :: Lens' ActivitiesInsert Activity
 aiPayload
   = lens _aiPayload (\ s a -> s{_aiPayload = a})
 
-instance GoogleRequest ActivitiesInsert' where
-        type Rs ActivitiesInsert' = Activity
-        requestClient ActivitiesInsert'{..}
+instance GoogleRequest ActivitiesInsert where
+        type Rs ActivitiesInsert = Activity
+        requestClient ActivitiesInsert{..}
           = go (Just _aiPart) (Just AltJSON) _aiPayload
               youTubeService
           where go

@@ -29,20 +29,20 @@ module Network.Google.Resource.PlusDomains.Audiences.List
       AudiencesListResource
 
     -- * Creating a Request
-    , audiencesList'
-    , AudiencesList'
+    , audiencesList
+    , AudiencesList
 
     -- * Request Lenses
-    , alUserId
-    , alPageToken
-    , alMaxResults
+    , aUserId
+    , aPageToken
+    , aMaxResults
     ) where
 
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plusDomains.audiences.list@ method which the
--- 'AudiencesList'' request conforms to.
+-- 'AudiencesList' request conforms to.
 type AudiencesListResource =
      "people" :>
        Capture "userId" Text :>
@@ -53,55 +53,55 @@ type AudiencesListResource =
 
 -- | List all of the audiences to which a user can share.
 --
--- /See:/ 'audiencesList'' smart constructor.
-data AudiencesList' = AudiencesList'
-    { _alUserId     :: !Text
-    , _alPageToken  :: !(Maybe Text)
-    , _alMaxResults :: !Word32
+-- /See:/ 'audiencesList' smart constructor.
+data AudiencesList = AudiencesList
+    { _aUserId     :: !Text
+    , _aPageToken  :: !(Maybe Text)
+    , _aMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AudiencesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AudiencesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'alUserId'
+-- * 'aUserId'
 --
--- * 'alPageToken'
+-- * 'aPageToken'
 --
--- * 'alMaxResults'
-audiencesList'
-    :: Text -- ^ 'alUserId'
-    -> AudiencesList'
-audiencesList' pAlUserId_ =
-    AudiencesList'
-    { _alUserId = pAlUserId_
-    , _alPageToken = Nothing
-    , _alMaxResults = 20
+-- * 'aMaxResults'
+audiencesList
+    :: Text -- ^ 'aUserId'
+    -> AudiencesList
+audiencesList pAUserId_ =
+    AudiencesList
+    { _aUserId = pAUserId_
+    , _aPageToken = Nothing
+    , _aMaxResults = 20
     }
 
 -- | The ID of the user to get audiences for. The special value \"me\" can be
 -- used to indicate the authenticated user.
-alUserId :: Lens' AudiencesList' Text
-alUserId = lens _alUserId (\ s a -> s{_alUserId = a})
+aUserId :: Lens' AudiencesList Text
+aUserId = lens _aUserId (\ s a -> s{_aUserId = a})
 
 -- | The continuation token, which is used to page through large result sets.
 -- To get the next page of results, set this parameter to the value of
 -- \"nextPageToken\" from the previous response.
-alPageToken :: Lens' AudiencesList' (Maybe Text)
-alPageToken
-  = lens _alPageToken (\ s a -> s{_alPageToken = a})
+aPageToken :: Lens' AudiencesList (Maybe Text)
+aPageToken
+  = lens _aPageToken (\ s a -> s{_aPageToken = a})
 
 -- | The maximum number of circles to include in the response, which is used
 -- for paging. For any response, the actual number returned might be less
 -- than the specified maxResults.
-alMaxResults :: Lens' AudiencesList' Word32
-alMaxResults
-  = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
+aMaxResults :: Lens' AudiencesList Word32
+aMaxResults
+  = lens _aMaxResults (\ s a -> s{_aMaxResults = a})
 
-instance GoogleRequest AudiencesList' where
-        type Rs AudiencesList' = AudiencesFeed
-        requestClient AudiencesList'{..}
-          = go _alUserId _alPageToken (Just _alMaxResults)
+instance GoogleRequest AudiencesList where
+        type Rs AudiencesList = AudiencesFeed
+        requestClient AudiencesList{..}
+          = go _aUserId _aPageToken (Just _aMaxResults)
               (Just AltJSON)
               plusDomainsService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Customers.Patch
       CustomersPatchResource
 
     -- * Creating a Request
-    , customersPatch'
-    , CustomersPatch'
+    , customersPatch
+    , CustomersPatch
 
     -- * Request Lenses
     , cpCustomerKey
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.customers.patch@ method which the
--- 'CustomersPatch'' request conforms to.
+-- 'CustomersPatch' request conforms to.
 type CustomersPatchResource =
      "customers" :>
        Capture "customerKey" Text :>
@@ -50,43 +50,43 @@ type CustomersPatchResource =
 
 -- | Updates a customer. This method supports patch semantics.
 --
--- /See:/ 'customersPatch'' smart constructor.
-data CustomersPatch' = CustomersPatch'
+-- /See:/ 'customersPatch' smart constructor.
+data CustomersPatch = CustomersPatch
     { _cpCustomerKey :: !Text
     , _cpPayload     :: !Customer
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CustomersPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'CustomersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cpCustomerKey'
 --
 -- * 'cpPayload'
-customersPatch'
+customersPatch
     :: Text -- ^ 'cpCustomerKey'
     -> Customer -- ^ 'cpPayload'
-    -> CustomersPatch'
-customersPatch' pCpCustomerKey_ pCpPayload_ =
-    CustomersPatch'
+    -> CustomersPatch
+customersPatch pCpCustomerKey_ pCpPayload_ =
+    CustomersPatch
     { _cpCustomerKey = pCpCustomerKey_
     , _cpPayload = pCpPayload_
     }
 
 -- | Id of the customer to be updated
-cpCustomerKey :: Lens' CustomersPatch' Text
+cpCustomerKey :: Lens' CustomersPatch Text
 cpCustomerKey
   = lens _cpCustomerKey
       (\ s a -> s{_cpCustomerKey = a})
 
 -- | Multipart request metadata.
-cpPayload :: Lens' CustomersPatch' Customer
+cpPayload :: Lens' CustomersPatch Customer
 cpPayload
   = lens _cpPayload (\ s a -> s{_cpPayload = a})
 
-instance GoogleRequest CustomersPatch' where
-        type Rs CustomersPatch' = Customer
-        requestClient CustomersPatch'{..}
+instance GoogleRequest CustomersPatch where
+        type Rs CustomersPatch = Customer
+        requestClient CustomersPatch{..}
           = go _cpCustomerKey (Just AltJSON) _cpPayload
               directoryService
           where go

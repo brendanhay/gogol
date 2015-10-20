@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Delete
       FloodlightActivityGroupsDeleteResource
 
     -- * Creating a Request
-    , floodlightActivityGroupsDelete'
-    , FloodlightActivityGroupsDelete'
+    , floodlightActivityGroupsDelete
+    , FloodlightActivityGroupsDelete
 
     -- * Request Lenses
     , fagdProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightActivityGroups.delete@ method which the
--- 'FloodlightActivityGroupsDelete'' request conforms to.
+-- 'FloodlightActivityGroupsDelete' request conforms to.
 type FloodlightActivityGroupsDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,43 +51,43 @@ type FloodlightActivityGroupsDeleteResource =
 
 -- | Deletes an existing floodlight activity group.
 --
--- /See:/ 'floodlightActivityGroupsDelete'' smart constructor.
-data FloodlightActivityGroupsDelete' = FloodlightActivityGroupsDelete'
+-- /See:/ 'floodlightActivityGroupsDelete' smart constructor.
+data FloodlightActivityGroupsDelete = FloodlightActivityGroupsDelete
     { _fagdProFileId :: !Int64
     , _fagdId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FloodlightActivityGroupsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'FloodlightActivityGroupsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fagdProFileId'
 --
 -- * 'fagdId'
-floodlightActivityGroupsDelete'
+floodlightActivityGroupsDelete
     :: Int64 -- ^ 'fagdProFileId'
     -> Int64 -- ^ 'fagdId'
-    -> FloodlightActivityGroupsDelete'
-floodlightActivityGroupsDelete' pFagdProFileId_ pFagdId_ =
-    FloodlightActivityGroupsDelete'
+    -> FloodlightActivityGroupsDelete
+floodlightActivityGroupsDelete pFagdProFileId_ pFagdId_ =
+    FloodlightActivityGroupsDelete
     { _fagdProFileId = pFagdProFileId_
     , _fagdId = pFagdId_
     }
 
 -- | User profile ID associated with this request.
-fagdProFileId :: Lens' FloodlightActivityGroupsDelete' Int64
+fagdProFileId :: Lens' FloodlightActivityGroupsDelete Int64
 fagdProFileId
   = lens _fagdProFileId
       (\ s a -> s{_fagdProFileId = a})
 
 -- | Floodlight activity Group ID.
-fagdId :: Lens' FloodlightActivityGroupsDelete' Int64
+fagdId :: Lens' FloodlightActivityGroupsDelete Int64
 fagdId = lens _fagdId (\ s a -> s{_fagdId = a})
 
-instance GoogleRequest
-         FloodlightActivityGroupsDelete' where
-        type Rs FloodlightActivityGroupsDelete' = ()
-        requestClient FloodlightActivityGroupsDelete'{..}
+instance GoogleRequest FloodlightActivityGroupsDelete
+         where
+        type Rs FloodlightActivityGroupsDelete = ()
+        requestClient FloodlightActivityGroupsDelete{..}
           = go _fagdProFileId _fagdId (Just AltJSON)
               dFAReportingService
           where go

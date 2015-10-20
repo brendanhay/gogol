@@ -29,8 +29,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.DownloadAccount
       RelyingPartyDownloadAccountResource
 
     -- * Creating a Request
-    , relyingPartyDownloadAccount'
-    , RelyingPartyDownloadAccount'
+    , relyingPartyDownloadAccount
+    , RelyingPartyDownloadAccount
 
     -- * Request Lenses
     , rpdaPayload
@@ -40,7 +40,7 @@ import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.downloadAccount@ method which the
--- 'RelyingPartyDownloadAccount'' request conforms to.
+-- 'RelyingPartyDownloadAccount' request conforms to.
 type RelyingPartyDownloadAccountResource =
      "downloadAccount" :>
        QueryParam "alt" AltJSON :>
@@ -50,34 +50,34 @@ type RelyingPartyDownloadAccountResource =
 
 -- | Batch download user accounts.
 --
--- /See:/ 'relyingPartyDownloadAccount'' smart constructor.
-newtype RelyingPartyDownloadAccount' = RelyingPartyDownloadAccount'
+-- /See:/ 'relyingPartyDownloadAccount' smart constructor.
+newtype RelyingPartyDownloadAccount = RelyingPartyDownloadAccount
     { _rpdaPayload :: IdentitytoolkitRelyingPartyDownloadAccountRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RelyingPartyDownloadAccount'' with the minimum fields required to make a request.
+-- | Creates a value of 'RelyingPartyDownloadAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rpdaPayload'
-relyingPartyDownloadAccount'
+relyingPartyDownloadAccount
     :: IdentitytoolkitRelyingPartyDownloadAccountRequest -- ^ 'rpdaPayload'
-    -> RelyingPartyDownloadAccount'
-relyingPartyDownloadAccount' pRpdaPayload_ =
-    RelyingPartyDownloadAccount'
+    -> RelyingPartyDownloadAccount
+relyingPartyDownloadAccount pRpdaPayload_ =
+    RelyingPartyDownloadAccount
     { _rpdaPayload = pRpdaPayload_
     }
 
 -- | Multipart request metadata.
-rpdaPayload :: Lens' RelyingPartyDownloadAccount' IdentitytoolkitRelyingPartyDownloadAccountRequest
+rpdaPayload :: Lens' RelyingPartyDownloadAccount IdentitytoolkitRelyingPartyDownloadAccountRequest
 rpdaPayload
   = lens _rpdaPayload (\ s a -> s{_rpdaPayload = a})
 
-instance GoogleRequest RelyingPartyDownloadAccount'
+instance GoogleRequest RelyingPartyDownloadAccount
          where
-        type Rs RelyingPartyDownloadAccount' =
+        type Rs RelyingPartyDownloadAccount =
              DownloadAccountResponse
-        requestClient RelyingPartyDownloadAccount'{..}
+        requestClient RelyingPartyDownloadAccount{..}
           = go (Just AltJSON) _rpdaPayload
               identityToolkitService
           where go

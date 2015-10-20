@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.Insert
       MarketplaceNotesInsertResource
 
     -- * Creating a Request
-    , marketplaceNotesInsert'
-    , MarketplaceNotesInsert'
+    , marketplaceNotesInsert
+    , MarketplaceNotesInsert
 
     -- * Request Lenses
     , mniPayload
@@ -41,7 +41,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.marketplacenotes.insert@ method which the
--- 'MarketplaceNotesInsert'' request conforms to.
+-- 'MarketplaceNotesInsert' request conforms to.
 type MarketplaceNotesInsertResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
@@ -53,43 +53,43 @@ type MarketplaceNotesInsertResource =
 
 -- | Add notes to the order
 --
--- /See:/ 'marketplaceNotesInsert'' smart constructor.
-data MarketplaceNotesInsert' = MarketplaceNotesInsert'
+-- /See:/ 'marketplaceNotesInsert' smart constructor.
+data MarketplaceNotesInsert = MarketplaceNotesInsert
     { _mniPayload :: !AddOrderNotesRequest
     , _mniOrderId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MarketplaceNotesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'MarketplaceNotesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mniPayload'
 --
 -- * 'mniOrderId'
-marketplaceNotesInsert'
+marketplaceNotesInsert
     :: AddOrderNotesRequest -- ^ 'mniPayload'
     -> Text -- ^ 'mniOrderId'
-    -> MarketplaceNotesInsert'
-marketplaceNotesInsert' pMniPayload_ pMniOrderId_ =
-    MarketplaceNotesInsert'
+    -> MarketplaceNotesInsert
+marketplaceNotesInsert pMniPayload_ pMniOrderId_ =
+    MarketplaceNotesInsert
     { _mniPayload = pMniPayload_
     , _mniOrderId = pMniOrderId_
     }
 
 -- | Multipart request metadata.
-mniPayload :: Lens' MarketplaceNotesInsert' AddOrderNotesRequest
+mniPayload :: Lens' MarketplaceNotesInsert AddOrderNotesRequest
 mniPayload
   = lens _mniPayload (\ s a -> s{_mniPayload = a})
 
 -- | The orderId to add notes for.
-mniOrderId :: Lens' MarketplaceNotesInsert' Text
+mniOrderId :: Lens' MarketplaceNotesInsert Text
 mniOrderId
   = lens _mniOrderId (\ s a -> s{_mniOrderId = a})
 
-instance GoogleRequest MarketplaceNotesInsert' where
-        type Rs MarketplaceNotesInsert' =
+instance GoogleRequest MarketplaceNotesInsert where
+        type Rs MarketplaceNotesInsert =
              AddOrderNotesResponse
-        requestClient MarketplaceNotesInsert'{..}
+        requestClient MarketplaceNotesInsert{..}
           = go _mniOrderId (Just AltJSON) _mniPayload
               adExchangeBuyerService
           where go

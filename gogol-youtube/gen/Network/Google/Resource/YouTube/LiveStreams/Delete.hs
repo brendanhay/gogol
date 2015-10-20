@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.LiveStreams.Delete
       LiveStreamsDeleteResource
 
     -- * Creating a Request
-    , liveStreamsDelete'
-    , LiveStreamsDelete'
+    , liveStreamsDelete
+    , LiveStreamsDelete
 
     -- * Request Lenses
     , lsdOnBehalfOfContentOwner
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveStreams.delete@ method which the
--- 'LiveStreamsDelete'' request conforms to.
+-- 'LiveStreamsDelete' request conforms to.
 type LiveStreamsDeleteResource =
      "liveStreams" :>
        QueryParam "id" Text :>
@@ -52,14 +52,14 @@ type LiveStreamsDeleteResource =
 
 -- | Deletes a video stream.
 --
--- /See:/ 'liveStreamsDelete'' smart constructor.
-data LiveStreamsDelete' = LiveStreamsDelete'
+-- /See:/ 'liveStreamsDelete' smart constructor.
+data LiveStreamsDelete = LiveStreamsDelete
     { _lsdOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lsdOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lsdId                            :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LiveStreamsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'LiveStreamsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,11 +68,11 @@ data LiveStreamsDelete' = LiveStreamsDelete'
 -- * 'lsdOnBehalfOfContentOwnerChannel'
 --
 -- * 'lsdId'
-liveStreamsDelete'
+liveStreamsDelete
     :: Text -- ^ 'lsdId'
-    -> LiveStreamsDelete'
-liveStreamsDelete' pLsdId_ =
-    LiveStreamsDelete'
+    -> LiveStreamsDelete
+liveStreamsDelete pLsdId_ =
+    LiveStreamsDelete
     { _lsdOnBehalfOfContentOwner = Nothing
     , _lsdOnBehalfOfContentOwnerChannel = Nothing
     , _lsdId = pLsdId_
@@ -88,7 +88,7 @@ liveStreamsDelete' pLsdId_ =
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-lsdOnBehalfOfContentOwner :: Lens' LiveStreamsDelete' (Maybe Text)
+lsdOnBehalfOfContentOwner :: Lens' LiveStreamsDelete (Maybe Text)
 lsdOnBehalfOfContentOwner
   = lens _lsdOnBehalfOfContentOwner
       (\ s a -> s{_lsdOnBehalfOfContentOwner = a})
@@ -109,19 +109,19 @@ lsdOnBehalfOfContentOwner
 -- actions on behalf of the channel specified in the parameter value,
 -- without having to provide authentication credentials for each separate
 -- channel.
-lsdOnBehalfOfContentOwnerChannel :: Lens' LiveStreamsDelete' (Maybe Text)
+lsdOnBehalfOfContentOwnerChannel :: Lens' LiveStreamsDelete (Maybe Text)
 lsdOnBehalfOfContentOwnerChannel
   = lens _lsdOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lsdOnBehalfOfContentOwnerChannel = a})
 
 -- | The id parameter specifies the YouTube live stream ID for the resource
 -- that is being deleted.
-lsdId :: Lens' LiveStreamsDelete' Text
+lsdId :: Lens' LiveStreamsDelete Text
 lsdId = lens _lsdId (\ s a -> s{_lsdId = a})
 
-instance GoogleRequest LiveStreamsDelete' where
-        type Rs LiveStreamsDelete' = ()
-        requestClient LiveStreamsDelete'{..}
+instance GoogleRequest LiveStreamsDelete where
+        type Rs LiveStreamsDelete = ()
+        requestClient LiveStreamsDelete{..}
           = go (Just _lsdId) _lsdOnBehalfOfContentOwner
               _lsdOnBehalfOfContentOwnerChannel
               (Just AltJSON)

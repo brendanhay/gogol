@@ -29,8 +29,8 @@ module Network.Google.Resource.SQL.Instances.Delete
       InstancesDeleteResource
 
     -- * Creating a Request
-    , instancesDelete'
-    , InstancesDelete'
+    , instancesDelete
+    , InstancesDelete
 
     -- * Request Lenses
     , idProject
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.delete@ method which the
--- 'InstancesDelete'' request conforms to.
+-- 'InstancesDelete' request conforms to.
 type InstancesDeleteResource =
      "projects" :>
        Capture "project" Text :>
@@ -51,42 +51,42 @@ type InstancesDeleteResource =
 
 -- | Deletes a Cloud SQL instance.
 --
--- /See:/ 'instancesDelete'' smart constructor.
-data InstancesDelete' = InstancesDelete'
+-- /See:/ 'instancesDelete' smart constructor.
+data InstancesDelete = InstancesDelete
     { _idProject  :: !Text
     , _idInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'idProject'
 --
 -- * 'idInstance'
-instancesDelete'
+instancesDelete
     :: Text -- ^ 'idProject'
     -> Text -- ^ 'idInstance'
-    -> InstancesDelete'
-instancesDelete' pIdProject_ pIdInstance_ =
-    InstancesDelete'
+    -> InstancesDelete
+instancesDelete pIdProject_ pIdInstance_ =
+    InstancesDelete
     { _idProject = pIdProject_
     , _idInstance = pIdInstance_
     }
 
 -- | Project ID of the project that contains the instance to be deleted.
-idProject :: Lens' InstancesDelete' Text
+idProject :: Lens' InstancesDelete Text
 idProject
   = lens _idProject (\ s a -> s{_idProject = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-idInstance :: Lens' InstancesDelete' Text
+idInstance :: Lens' InstancesDelete Text
 idInstance
   = lens _idInstance (\ s a -> s{_idInstance = a})
 
-instance GoogleRequest InstancesDelete' where
-        type Rs InstancesDelete' = Operation
-        requestClient InstancesDelete'{..}
+instance GoogleRequest InstancesDelete where
+        type Rs InstancesDelete = Operation
+        requestClient InstancesDelete{..}
           = go _idProject _idInstance (Just AltJSON)
               sQLAdminService
           where go

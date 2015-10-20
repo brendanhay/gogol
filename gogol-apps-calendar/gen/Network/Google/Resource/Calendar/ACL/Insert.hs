@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.ACL.Insert
       ACLInsertResource
 
     -- * Creating a Request
-    , aclInsert'
-    , ACLInsert'
+    , aclInsert
+    , ACLInsert
 
     -- * Request Lenses
     , aiCalendarId
@@ -41,7 +41,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.acl.insert@ method which the
--- 'ACLInsert'' request conforms to.
+-- 'ACLInsert' request conforms to.
 type ACLInsertResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -51,25 +51,25 @@ type ACLInsertResource =
 
 -- | Creates an access control rule.
 --
--- /See:/ 'aclInsert'' smart constructor.
-data ACLInsert' = ACLInsert'
+-- /See:/ 'aclInsert' smart constructor.
+data ACLInsert = ACLInsert
     { _aiCalendarId :: !Text
     , _aiPayload    :: !ACLRule
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ACLInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ACLInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aiCalendarId'
 --
 -- * 'aiPayload'
-aclInsert'
+aclInsert
     :: Text -- ^ 'aiCalendarId'
     -> ACLRule -- ^ 'aiPayload'
-    -> ACLInsert'
-aclInsert' pAiCalendarId_ pAiPayload_ =
-    ACLInsert'
+    -> ACLInsert
+aclInsert pAiCalendarId_ pAiPayload_ =
+    ACLInsert
     { _aiCalendarId = pAiCalendarId_
     , _aiPayload = pAiPayload_
     }
@@ -77,18 +77,18 @@ aclInsert' pAiCalendarId_ pAiPayload_ =
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-aiCalendarId :: Lens' ACLInsert' Text
+aiCalendarId :: Lens' ACLInsert Text
 aiCalendarId
   = lens _aiCalendarId (\ s a -> s{_aiCalendarId = a})
 
 -- | Multipart request metadata.
-aiPayload :: Lens' ACLInsert' ACLRule
+aiPayload :: Lens' ACLInsert ACLRule
 aiPayload
   = lens _aiPayload (\ s a -> s{_aiPayload = a})
 
-instance GoogleRequest ACLInsert' where
-        type Rs ACLInsert' = ACLRule
-        requestClient ACLInsert'{..}
+instance GoogleRequest ACLInsert where
+        type Rs ACLInsert = ACLRule
+        requestClient ACLInsert{..}
           = go _aiCalendarId (Just AltJSON) _aiPayload
               appsCalendarService
           where go

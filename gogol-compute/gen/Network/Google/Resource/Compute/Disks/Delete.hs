@@ -32,8 +32,8 @@ module Network.Google.Resource.Compute.Disks.Delete
       DisksDeleteResource
 
     -- * Creating a Request
-    , disksDelete'
-    , DisksDelete'
+    , disksDelete
+    , DisksDelete
 
     -- * Request Lenses
     , ddProject
@@ -45,7 +45,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.disks.delete@ method which the
--- 'DisksDelete'' request conforms to.
+-- 'DisksDelete' request conforms to.
 type DisksDeleteResource =
      Capture "project" Text :>
        "zones" :>
@@ -59,14 +59,14 @@ type DisksDeleteResource =
 -- delete any snapshots previously made from the disk. You must separately
 -- delete snapshots.
 --
--- /See:/ 'disksDelete'' smart constructor.
-data DisksDelete' = DisksDelete'
+-- /See:/ 'disksDelete' smart constructor.
+data DisksDelete = DisksDelete
     { _ddProject :: !Text
     , _ddDisk    :: !Text
     , _ddZone    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DisksDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'DisksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,34 +75,34 @@ data DisksDelete' = DisksDelete'
 -- * 'ddDisk'
 --
 -- * 'ddZone'
-disksDelete'
+disksDelete
     :: Text -- ^ 'ddProject'
     -> Text -- ^ 'ddDisk'
     -> Text -- ^ 'ddZone'
-    -> DisksDelete'
-disksDelete' pDdProject_ pDdDisk_ pDdZone_ =
-    DisksDelete'
+    -> DisksDelete
+disksDelete pDdProject_ pDdDisk_ pDdZone_ =
+    DisksDelete
     { _ddProject = pDdProject_
     , _ddDisk = pDdDisk_
     , _ddZone = pDdZone_
     }
 
 -- | Project ID for this request.
-ddProject :: Lens' DisksDelete' Text
+ddProject :: Lens' DisksDelete Text
 ddProject
   = lens _ddProject (\ s a -> s{_ddProject = a})
 
 -- | Name of the persistent disk to delete.
-ddDisk :: Lens' DisksDelete' Text
+ddDisk :: Lens' DisksDelete Text
 ddDisk = lens _ddDisk (\ s a -> s{_ddDisk = a})
 
 -- | The name of the zone for this request.
-ddZone :: Lens' DisksDelete' Text
+ddZone :: Lens' DisksDelete Text
 ddZone = lens _ddZone (\ s a -> s{_ddZone = a})
 
-instance GoogleRequest DisksDelete' where
-        type Rs DisksDelete' = Operation
-        requestClient DisksDelete'{..}
+instance GoogleRequest DisksDelete where
+        type Rs DisksDelete = Operation
+        requestClient DisksDelete{..}
           = go _ddProject _ddZone _ddDisk (Just AltJSON)
               computeService
           where go

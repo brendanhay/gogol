@@ -29,19 +29,19 @@ module Network.Google.Resource.MapsEngine.Layers.Publish
       LayersPublishResource
 
     -- * Creating a Request
-    , layersPublish'
-    , LayersPublish'
+    , layersPublish
+    , LayersPublish
 
     -- * Request Lenses
-    , lForce
-    , lId
+    , lpForce
+    , lpId
     ) where
 
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.layers.publish@ method which the
--- 'LayersPublish'' request conforms to.
+-- 'LayersPublish' request conforms to.
 type LayersPublishResource =
      "layers" :>
        Capture "id" Text :>
@@ -52,42 +52,42 @@ type LayersPublishResource =
 
 -- | Publish a layer asset.
 --
--- /See:/ 'layersPublish'' smart constructor.
-data LayersPublish' = LayersPublish'
-    { _lForce :: !(Maybe Bool)
-    , _lId    :: !Text
+-- /See:/ 'layersPublish' smart constructor.
+data LayersPublish = LayersPublish
+    { _lpForce :: !(Maybe Bool)
+    , _lpId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersPublish'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersPublish' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lForce'
+-- * 'lpForce'
 --
--- * 'lId'
-layersPublish'
-    :: Text -- ^ 'lId'
-    -> LayersPublish'
-layersPublish' pLId_ =
-    LayersPublish'
-    { _lForce = Nothing
-    , _lId = pLId_
+-- * 'lpId'
+layersPublish
+    :: Text -- ^ 'lpId'
+    -> LayersPublish
+layersPublish pLpId_ =
+    LayersPublish
+    { _lpForce = Nothing
+    , _lpId = pLpId_
     }
 
 -- | If set to true, the API will allow publication of the layer even if
 -- it\'s out of date. If not true, you\'ll need to reprocess any
 -- out-of-date layer before publishing.
-lForce :: Lens' LayersPublish' (Maybe Bool)
-lForce = lens _lForce (\ s a -> s{_lForce = a})
+lpForce :: Lens' LayersPublish (Maybe Bool)
+lpForce = lens _lpForce (\ s a -> s{_lpForce = a})
 
 -- | The ID of the layer.
-lId :: Lens' LayersPublish' Text
-lId = lens _lId (\ s a -> s{_lId = a})
+lpId :: Lens' LayersPublish Text
+lpId = lens _lpId (\ s a -> s{_lpId = a})
 
-instance GoogleRequest LayersPublish' where
-        type Rs LayersPublish' = PublishResponse
-        requestClient LayersPublish'{..}
-          = go _lId _lForce (Just AltJSON) mapsEngineService
+instance GoogleRequest LayersPublish where
+        type Rs LayersPublish = PublishResponse
+        requestClient LayersPublish{..}
+          = go _lpId _lpForce (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy LayersPublishResource)
                       mempty

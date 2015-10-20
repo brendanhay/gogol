@@ -29,18 +29,18 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Process
       RasterCollectionsProcessResource
 
     -- * Creating a Request
-    , rasterCollectionsProcess'
-    , RasterCollectionsProcess'
+    , rasterCollectionsProcess
+    , RasterCollectionsProcess
 
     -- * Request Lenses
-    , rcpcId
+    , rcpId
     ) where
 
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasterCollections.process@ method which the
--- 'RasterCollectionsProcess'' request conforms to.
+-- 'RasterCollectionsProcess' request conforms to.
 type RasterCollectionsProcessResource =
      "rasterCollections" :>
        Capture "id" Text :>
@@ -50,33 +50,32 @@ type RasterCollectionsProcessResource =
 
 -- | Process a raster collection asset.
 --
--- /See:/ 'rasterCollectionsProcess'' smart constructor.
-newtype RasterCollectionsProcess' = RasterCollectionsProcess'
-    { _rcpcId :: Text
+-- /See:/ 'rasterCollectionsProcess' smart constructor.
+newtype RasterCollectionsProcess = RasterCollectionsProcess
+    { _rcpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RasterCollectionsProcess'' with the minimum fields required to make a request.
+-- | Creates a value of 'RasterCollectionsProcess' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcpcId'
-rasterCollectionsProcess'
-    :: Text -- ^ 'rcpcId'
-    -> RasterCollectionsProcess'
-rasterCollectionsProcess' pRcpcId_ =
-    RasterCollectionsProcess'
-    { _rcpcId = pRcpcId_
+-- * 'rcpId'
+rasterCollectionsProcess
+    :: Text -- ^ 'rcpId'
+    -> RasterCollectionsProcess
+rasterCollectionsProcess pRcpId_ =
+    RasterCollectionsProcess
+    { _rcpId = pRcpId_
     }
 
 -- | The ID of the raster collection.
-rcpcId :: Lens' RasterCollectionsProcess' Text
-rcpcId = lens _rcpcId (\ s a -> s{_rcpcId = a})
+rcpId :: Lens' RasterCollectionsProcess Text
+rcpId = lens _rcpId (\ s a -> s{_rcpId = a})
 
-instance GoogleRequest RasterCollectionsProcess'
-         where
-        type Rs RasterCollectionsProcess' = ProcessResponse
-        requestClient RasterCollectionsProcess'{..}
-          = go _rcpcId (Just AltJSON) mapsEngineService
+instance GoogleRequest RasterCollectionsProcess where
+        type Rs RasterCollectionsProcess = ProcessResponse
+        requestClient RasterCollectionsProcess{..}
+          = go _rcpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy RasterCollectionsProcessResource)

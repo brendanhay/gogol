@@ -29,18 +29,18 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.Get
       EnterprisesGetResource
 
     -- * Creating a Request
-    , enterprisesGet'
-    , EnterprisesGet'
+    , enterprisesGet
+    , EnterprisesGet
 
     -- * Request Lenses
-    , egEnterpriseId
+    , eEnterpriseId
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.enterprises.get@ method which the
--- 'EnterprisesGet'' request conforms to.
+-- 'EnterprisesGet' request conforms to.
 type EnterprisesGetResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -48,34 +48,34 @@ type EnterprisesGetResource =
 
 -- | Retrieves the name and domain of an enterprise.
 --
--- /See:/ 'enterprisesGet'' smart constructor.
-newtype EnterprisesGet' = EnterprisesGet'
-    { _egEnterpriseId :: Text
+-- /See:/ 'enterprisesGet' smart constructor.
+newtype EnterprisesGet = EnterprisesGet
+    { _eEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EnterprisesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'EnterprisesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'egEnterpriseId'
-enterprisesGet'
-    :: Text -- ^ 'egEnterpriseId'
-    -> EnterprisesGet'
-enterprisesGet' pEgEnterpriseId_ =
-    EnterprisesGet'
-    { _egEnterpriseId = pEgEnterpriseId_
+-- * 'eEnterpriseId'
+enterprisesGet
+    :: Text -- ^ 'eEnterpriseId'
+    -> EnterprisesGet
+enterprisesGet pEEnterpriseId_ =
+    EnterprisesGet
+    { _eEnterpriseId = pEEnterpriseId_
     }
 
 -- | The ID of the enterprise.
-egEnterpriseId :: Lens' EnterprisesGet' Text
-egEnterpriseId
-  = lens _egEnterpriseId
-      (\ s a -> s{_egEnterpriseId = a})
+eEnterpriseId :: Lens' EnterprisesGet Text
+eEnterpriseId
+  = lens _eEnterpriseId
+      (\ s a -> s{_eEnterpriseId = a})
 
-instance GoogleRequest EnterprisesGet' where
-        type Rs EnterprisesGet' = Enterprise
-        requestClient EnterprisesGet'{..}
-          = go _egEnterpriseId (Just AltJSON)
+instance GoogleRequest EnterprisesGet where
+        type Rs EnterprisesGet = Enterprise
+        requestClient EnterprisesGet{..}
+          = go _eEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient (Proxy :: Proxy EnterprisesGetResource)

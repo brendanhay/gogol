@@ -29,8 +29,8 @@ module Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Insert
       RollingUpdatesInsertResource
 
     -- * Creating a Request
-    , rollingUpdatesInsert'
-    , RollingUpdatesInsert'
+    , rollingUpdatesInsert
+    , RollingUpdatesInsert
 
     -- * Request Lenses
     , ruiProject
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.rollingUpdates.insert@ method which the
--- 'RollingUpdatesInsert'' request conforms to.
+-- 'RollingUpdatesInsert' request conforms to.
 type RollingUpdatesInsertResource =
      Capture "project" Text :>
        "zones" :>
@@ -54,14 +54,14 @@ type RollingUpdatesInsertResource =
 
 -- | Inserts and starts a new update.
 --
--- /See:/ 'rollingUpdatesInsert'' smart constructor.
-data RollingUpdatesInsert' = RollingUpdatesInsert'
+-- /See:/ 'rollingUpdatesInsert' smart constructor.
+data RollingUpdatesInsert = RollingUpdatesInsert
     { _ruiProject :: !Text
     , _ruiZone    :: !Text
     , _ruiPayload :: !RollingUpdate
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RollingUpdatesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'RollingUpdatesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,35 +70,35 @@ data RollingUpdatesInsert' = RollingUpdatesInsert'
 -- * 'ruiZone'
 --
 -- * 'ruiPayload'
-rollingUpdatesInsert'
+rollingUpdatesInsert
     :: Text -- ^ 'ruiProject'
     -> Text -- ^ 'ruiZone'
     -> RollingUpdate -- ^ 'ruiPayload'
-    -> RollingUpdatesInsert'
-rollingUpdatesInsert' pRuiProject_ pRuiZone_ pRuiPayload_ =
-    RollingUpdatesInsert'
+    -> RollingUpdatesInsert
+rollingUpdatesInsert pRuiProject_ pRuiZone_ pRuiPayload_ =
+    RollingUpdatesInsert
     { _ruiProject = pRuiProject_
     , _ruiZone = pRuiZone_
     , _ruiPayload = pRuiPayload_
     }
 
 -- | The Google Developers Console project name.
-ruiProject :: Lens' RollingUpdatesInsert' Text
+ruiProject :: Lens' RollingUpdatesInsert Text
 ruiProject
   = lens _ruiProject (\ s a -> s{_ruiProject = a})
 
 -- | The name of the zone in which the update\'s target resides.
-ruiZone :: Lens' RollingUpdatesInsert' Text
+ruiZone :: Lens' RollingUpdatesInsert Text
 ruiZone = lens _ruiZone (\ s a -> s{_ruiZone = a})
 
 -- | Multipart request metadata.
-ruiPayload :: Lens' RollingUpdatesInsert' RollingUpdate
+ruiPayload :: Lens' RollingUpdatesInsert RollingUpdate
 ruiPayload
   = lens _ruiPayload (\ s a -> s{_ruiPayload = a})
 
-instance GoogleRequest RollingUpdatesInsert' where
-        type Rs RollingUpdatesInsert' = Operation
-        requestClient RollingUpdatesInsert'{..}
+instance GoogleRequest RollingUpdatesInsert where
+        type Rs RollingUpdatesInsert = Operation
+        requestClient RollingUpdatesInsert{..}
           = go _ruiProject _ruiZone (Just AltJSON) _ruiPayload
               replicaPoolUpdaterService
           where go

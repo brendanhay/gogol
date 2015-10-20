@@ -29,22 +29,22 @@ module Network.Google.Resource.Blogger.Posts.Insert
       PostsInsertResource
 
     -- * Creating a Request
-    , postsInsert'
-    , PostsInsert'
+    , postsInsert
+    , PostsInsert
 
     -- * Request Lenses
-    , piiFetchBody
-    , piiIsDraft
-    , piiFetchImages
-    , piiBlogId
-    , piiPayload
+    , posFetchBody
+    , posIsDraft
+    , posFetchImages
+    , posBlogId
+    , posPayload
     ) where
 
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.posts.insert@ method which the
--- 'PostsInsert'' request conforms to.
+-- 'PostsInsert' request conforms to.
 type PostsInsertResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -57,76 +57,76 @@ type PostsInsertResource =
 
 -- | Add a post.
 --
--- /See:/ 'postsInsert'' smart constructor.
-data PostsInsert' = PostsInsert'
-    { _piiFetchBody   :: !Bool
-    , _piiIsDraft     :: !(Maybe Bool)
-    , _piiFetchImages :: !(Maybe Bool)
-    , _piiBlogId      :: !Text
-    , _piiPayload     :: !Post'
+-- /See:/ 'postsInsert' smart constructor.
+data PostsInsert = PostsInsert
+    { _posFetchBody   :: !Bool
+    , _posIsDraft     :: !(Maybe Bool)
+    , _posFetchImages :: !(Maybe Bool)
+    , _posBlogId      :: !Text
+    , _posPayload     :: !Post'
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PostsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'PostsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'piiFetchBody'
+-- * 'posFetchBody'
 --
--- * 'piiIsDraft'
+-- * 'posIsDraft'
 --
--- * 'piiFetchImages'
+-- * 'posFetchImages'
 --
--- * 'piiBlogId'
+-- * 'posBlogId'
 --
--- * 'piiPayload'
-postsInsert'
-    :: Text -- ^ 'piiBlogId'
-    -> Post' -- ^ 'piiPayload'
-    -> PostsInsert'
-postsInsert' pPiiBlogId_ pPiiPayload_ =
-    PostsInsert'
-    { _piiFetchBody = True
-    , _piiIsDraft = Nothing
-    , _piiFetchImages = Nothing
-    , _piiBlogId = pPiiBlogId_
-    , _piiPayload = pPiiPayload_
+-- * 'posPayload'
+postsInsert
+    :: Text -- ^ 'posBlogId'
+    -> Post' -- ^ 'posPayload'
+    -> PostsInsert
+postsInsert pPosBlogId_ pPosPayload_ =
+    PostsInsert
+    { _posFetchBody = True
+    , _posIsDraft = Nothing
+    , _posFetchImages = Nothing
+    , _posBlogId = pPosBlogId_
+    , _posPayload = pPosPayload_
     }
 
 -- | Whether the body content of the post is included with the result
 -- (default: true).
-piiFetchBody :: Lens' PostsInsert' Bool
-piiFetchBody
-  = lens _piiFetchBody (\ s a -> s{_piiFetchBody = a})
+posFetchBody :: Lens' PostsInsert Bool
+posFetchBody
+  = lens _posFetchBody (\ s a -> s{_posFetchBody = a})
 
 -- | Whether to create the post as a draft (default: false).
-piiIsDraft :: Lens' PostsInsert' (Maybe Bool)
-piiIsDraft
-  = lens _piiIsDraft (\ s a -> s{_piiIsDraft = a})
+posIsDraft :: Lens' PostsInsert (Maybe Bool)
+posIsDraft
+  = lens _posIsDraft (\ s a -> s{_posIsDraft = a})
 
 -- | Whether image URL metadata for each post is included in the returned
 -- result (default: false).
-piiFetchImages :: Lens' PostsInsert' (Maybe Bool)
-piiFetchImages
-  = lens _piiFetchImages
-      (\ s a -> s{_piiFetchImages = a})
+posFetchImages :: Lens' PostsInsert (Maybe Bool)
+posFetchImages
+  = lens _posFetchImages
+      (\ s a -> s{_posFetchImages = a})
 
 -- | ID of the blog to add the post to.
-piiBlogId :: Lens' PostsInsert' Text
-piiBlogId
-  = lens _piiBlogId (\ s a -> s{_piiBlogId = a})
+posBlogId :: Lens' PostsInsert Text
+posBlogId
+  = lens _posBlogId (\ s a -> s{_posBlogId = a})
 
 -- | Multipart request metadata.
-piiPayload :: Lens' PostsInsert' Post'
-piiPayload
-  = lens _piiPayload (\ s a -> s{_piiPayload = a})
+posPayload :: Lens' PostsInsert Post'
+posPayload
+  = lens _posPayload (\ s a -> s{_posPayload = a})
 
-instance GoogleRequest PostsInsert' where
-        type Rs PostsInsert' = Post'
-        requestClient PostsInsert'{..}
-          = go _piiBlogId (Just _piiFetchBody) _piiIsDraft
-              _piiFetchImages
+instance GoogleRequest PostsInsert where
+        type Rs PostsInsert = Post'
+        requestClient PostsInsert{..}
+          = go _posBlogId (Just _posFetchBody) _posIsDraft
+              _posFetchImages
               (Just AltJSON)
-              _piiPayload
+              _posPayload
               bloggerService
           where go
                   = buildClient (Proxy :: Proxy PostsInsertResource)

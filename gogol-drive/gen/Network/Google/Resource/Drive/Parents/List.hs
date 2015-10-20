@@ -29,18 +29,18 @@ module Network.Google.Resource.Drive.Parents.List
       ParentsListResource
 
     -- * Creating a Request
-    , parentsList'
-    , ParentsList'
+    , parentsList
+    , ParentsList
 
     -- * Request Lenses
-    , pFileId
+    , parFileId
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.parents.list@ method which the
--- 'ParentsList'' request conforms to.
+-- 'ParentsList' request conforms to.
 type ParentsListResource =
      "files" :>
        Capture "fileId" Text :>
@@ -49,32 +49,33 @@ type ParentsListResource =
 
 -- | Lists a file\'s parents.
 --
--- /See:/ 'parentsList'' smart constructor.
-newtype ParentsList' = ParentsList'
-    { _pFileId :: Text
+-- /See:/ 'parentsList' smart constructor.
+newtype ParentsList = ParentsList
+    { _parFileId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ParentsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ParentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pFileId'
-parentsList'
-    :: Text -- ^ 'pFileId'
-    -> ParentsList'
-parentsList' pPFileId_ =
-    ParentsList'
-    { _pFileId = pPFileId_
+-- * 'parFileId'
+parentsList
+    :: Text -- ^ 'parFileId'
+    -> ParentsList
+parentsList pParFileId_ =
+    ParentsList
+    { _parFileId = pParFileId_
     }
 
 -- | The ID of the file.
-pFileId :: Lens' ParentsList' Text
-pFileId = lens _pFileId (\ s a -> s{_pFileId = a})
+parFileId :: Lens' ParentsList Text
+parFileId
+  = lens _parFileId (\ s a -> s{_parFileId = a})
 
-instance GoogleRequest ParentsList' where
-        type Rs ParentsList' = ParentList
-        requestClient ParentsList'{..}
-          = go _pFileId (Just AltJSON) driveService
+instance GoogleRequest ParentsList where
+        type Rs ParentsList = ParentList
+        requestClient ParentsList{..}
+          = go _parFileId (Just AltJSON) driveService
           where go
                   = buildClient (Proxy :: Proxy ParentsListResource)
                       mempty

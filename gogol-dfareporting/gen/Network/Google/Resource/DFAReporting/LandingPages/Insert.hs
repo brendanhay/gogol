@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.LandingPages.Insert
       LandingPagesInsertResource
 
     -- * Creating a Request
-    , landingPagesInsert'
-    , LandingPagesInsert'
+    , landingPagesInsert
+    , LandingPagesInsert
 
     -- * Request Lenses
     , lpiCampaignId
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.landingPages.insert@ method which the
--- 'LandingPagesInsert'' request conforms to.
+-- 'LandingPagesInsert' request conforms to.
 type LandingPagesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -55,14 +55,14 @@ type LandingPagesInsertResource =
 
 -- | Inserts a new landing page for the specified campaign.
 --
--- /See:/ 'landingPagesInsert'' smart constructor.
-data LandingPagesInsert' = LandingPagesInsert'
+-- /See:/ 'landingPagesInsert' smart constructor.
+data LandingPagesInsert = LandingPagesInsert
     { _lpiCampaignId :: !Int64
     , _lpiProFileId  :: !Int64
     , _lpiPayload    :: !LandingPage
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LandingPagesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'LandingPagesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,37 +71,37 @@ data LandingPagesInsert' = LandingPagesInsert'
 -- * 'lpiProFileId'
 --
 -- * 'lpiPayload'
-landingPagesInsert'
+landingPagesInsert
     :: Int64 -- ^ 'lpiCampaignId'
     -> Int64 -- ^ 'lpiProFileId'
     -> LandingPage -- ^ 'lpiPayload'
-    -> LandingPagesInsert'
-landingPagesInsert' pLpiCampaignId_ pLpiProFileId_ pLpiPayload_ =
-    LandingPagesInsert'
+    -> LandingPagesInsert
+landingPagesInsert pLpiCampaignId_ pLpiProFileId_ pLpiPayload_ =
+    LandingPagesInsert
     { _lpiCampaignId = pLpiCampaignId_
     , _lpiProFileId = pLpiProFileId_
     , _lpiPayload = pLpiPayload_
     }
 
 -- | Landing page campaign ID.
-lpiCampaignId :: Lens' LandingPagesInsert' Int64
+lpiCampaignId :: Lens' LandingPagesInsert Int64
 lpiCampaignId
   = lens _lpiCampaignId
       (\ s a -> s{_lpiCampaignId = a})
 
 -- | User profile ID associated with this request.
-lpiProFileId :: Lens' LandingPagesInsert' Int64
+lpiProFileId :: Lens' LandingPagesInsert Int64
 lpiProFileId
   = lens _lpiProFileId (\ s a -> s{_lpiProFileId = a})
 
 -- | Multipart request metadata.
-lpiPayload :: Lens' LandingPagesInsert' LandingPage
+lpiPayload :: Lens' LandingPagesInsert LandingPage
 lpiPayload
   = lens _lpiPayload (\ s a -> s{_lpiPayload = a})
 
-instance GoogleRequest LandingPagesInsert' where
-        type Rs LandingPagesInsert' = LandingPage
-        requestClient LandingPagesInsert'{..}
+instance GoogleRequest LandingPagesInsert where
+        type Rs LandingPagesInsert = LandingPage
+        requestClient LandingPagesInsert{..}
           = go _lpiProFileId _lpiCampaignId (Just AltJSON)
               _lpiPayload
               dFAReportingService

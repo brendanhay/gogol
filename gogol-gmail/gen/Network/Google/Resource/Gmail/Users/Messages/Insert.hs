@@ -31,22 +31,22 @@ module Network.Google.Resource.Gmail.Users.Messages.Insert
       UsersMessagesInsertResource
 
     -- * Creating a Request
-    , usersMessagesInsert'
-    , UsersMessagesInsert'
+    , usersMessagesInsert
+    , UsersMessagesInsert
 
     -- * Request Lenses
-    , umiPayload
-    , umiUserId
-    , umiMedia
-    , umiDeleted
-    , umiInternalDateSource
+    , uPayload
+    , uUserId
+    , uMedia
+    , uDeleted
+    , uInternalDateSource
     ) where
 
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.messages.insert@ method which the
--- 'UsersMessagesInsert'' request conforms to.
+-- 'UsersMessagesInsert' request conforms to.
 type UsersMessagesInsertResource =
      Capture "userId" Text :>
        "messages" :>
@@ -62,77 +62,74 @@ type UsersMessagesInsertResource =
 -- IMAP APPEND, bypassing most scanning and classification. Does not send a
 -- message.
 --
--- /See:/ 'usersMessagesInsert'' smart constructor.
-data UsersMessagesInsert' = UsersMessagesInsert'
-    { _umiPayload            :: !Message
-    , _umiUserId             :: !Text
-    , _umiMedia              :: !Body
-    , _umiDeleted            :: !Bool
-    , _umiInternalDateSource :: !UsersMessagesInsertInternalDateSource
+-- /See:/ 'usersMessagesInsert' smart constructor.
+data UsersMessagesInsert = UsersMessagesInsert
+    { _uPayload            :: !Message
+    , _uUserId             :: !Text
+    , _uMedia              :: !Body
+    , _uDeleted            :: !Bool
+    , _uInternalDateSource :: !UsersMessagesInsertInternalDateSource
     }
 
--- | Creates a value of 'UsersMessagesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersMessagesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'umiPayload'
+-- * 'uPayload'
 --
--- * 'umiUserId'
+-- * 'uUserId'
 --
--- * 'umiMedia'
+-- * 'uMedia'
 --
--- * 'umiDeleted'
+-- * 'uDeleted'
 --
--- * 'umiInternalDateSource'
-usersMessagesInsert'
-    :: Message -- ^ 'umiPayload'
-    -> Text -- ^ 'umiMedia'
+-- * 'uInternalDateSource'
+usersMessagesInsert
+    :: Message -- ^ 'uPayload'
+    -> Text -- ^ 'uMedia'
     -> Body
-    -> UsersMessagesInsert'
-usersMessagesInsert' pUmiPayload_ pUmiUserId_ pUmiMedia_ =
-    UsersMessagesInsert'
-    { _umiPayload = pUmiPayload_
-    , _umiUserId = pUmiUserId_
-    , _umiMedia = pUmiMedia_
-    , _umiDeleted = False
-    , _umiInternalDateSource = UMIIDSReceivedTime
+    -> UsersMessagesInsert
+usersMessagesInsert pUPayload_ pUUserId_ pUMedia_ =
+    UsersMessagesInsert
+    { _uPayload = pUPayload_
+    , _uUserId = pUUserId_
+    , _uMedia = pUMedia_
+    , _uDeleted = False
+    , _uInternalDateSource = UMIIDSReceivedTime
     }
 
 -- | Multipart request metadata.
-umiPayload :: Lens' UsersMessagesInsert' Message
-umiPayload
-  = lens _umiPayload (\ s a -> s{_umiPayload = a})
+uPayload :: Lens' UsersMessagesInsert Message
+uPayload = lens _uPayload (\ s a -> s{_uPayload = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-umiUserId :: Lens' UsersMessagesInsert' Text
-umiUserId
-  = lens _umiUserId (\ s a -> s{_umiUserId = a})
+uUserId :: Lens' UsersMessagesInsert Text
+uUserId = lens _uUserId (\ s a -> s{_uUserId = a})
 
-umiMedia :: Lens' UsersMessagesInsert' Body
-umiMedia = lens _umiMedia (\ s a -> s{_umiMedia = a})
+uMedia :: Lens' UsersMessagesInsert Body
+uMedia = lens _uMedia (\ s a -> s{_uMedia = a})
 
 -- | Mark the email as permanently deleted (not TRASH) and only visible in
 -- Google Apps Vault to a Vault administrator. Only used for Google Apps
 -- for Work accounts.
-umiDeleted :: Lens' UsersMessagesInsert' Bool
-umiDeleted
-  = lens _umiDeleted (\ s a -> s{_umiDeleted = a})
+uDeleted :: Lens' UsersMessagesInsert Bool
+uDeleted = lens _uDeleted (\ s a -> s{_uDeleted = a})
 
 -- | Source for Gmail\'s internal date of the message.
-umiInternalDateSource :: Lens' UsersMessagesInsert' UsersMessagesInsertInternalDateSource
-umiInternalDateSource
-  = lens _umiInternalDateSource
-      (\ s a -> s{_umiInternalDateSource = a})
+uInternalDateSource :: Lens' UsersMessagesInsert UsersMessagesInsertInternalDateSource
+uInternalDateSource
+  = lens _uInternalDateSource
+      (\ s a -> s{_uInternalDateSource = a})
 
-instance GoogleRequest UsersMessagesInsert' where
-        type Rs UsersMessagesInsert' = Message
-        requestClient UsersMessagesInsert'{..}
-          = go _umiUserId (Just _umiDeleted)
-              (Just _umiInternalDateSource)
+instance GoogleRequest UsersMessagesInsert where
+        type Rs UsersMessagesInsert = Message
+        requestClient UsersMessagesInsert{..}
+          = go _uUserId (Just _uDeleted)
+              (Just _uInternalDateSource)
               (Just AltJSON)
-              _umiPayload
-              _umiMedia
+              _uPayload
+              _uMedia
               gmailService
           where go
                   = buildClient

@@ -30,8 +30,8 @@ module Network.Google.Resource.CloudUserAccounts.Linux.GetLinuxAccountViews
       LinuxGetLinuxAccountViewsResource
 
     -- * Creating a Request
-    , linuxGetLinuxAccountViews'
-    , LinuxGetLinuxAccountViews'
+    , linuxGetLinuxAccountViews
+    , LinuxGetLinuxAccountViews
 
     -- * Request Lenses
     , lglavOrderBy
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
 -- | A resource alias for @clouduseraccounts.linux.getLinuxAccountViews@ method which the
--- 'LinuxGetLinuxAccountViews'' request conforms to.
+-- 'LinuxGetLinuxAccountViews' request conforms to.
 type LinuxGetLinuxAccountViewsResource =
      Capture "project" Text :>
        "zones" :>
@@ -64,8 +64,8 @@ type LinuxGetLinuxAccountViewsResource =
 -- | Retrieves a list of user accounts for an instance within a specific
 -- project.
 --
--- /See:/ 'linuxGetLinuxAccountViews'' smart constructor.
-data LinuxGetLinuxAccountViews' = LinuxGetLinuxAccountViews'
+-- /See:/ 'linuxGetLinuxAccountViews' smart constructor.
+data LinuxGetLinuxAccountViews = LinuxGetLinuxAccountViews
     { _lglavOrderBy    :: !(Maybe Text)
     , _lglavProject    :: !Text
     , _lglavZone       :: !Text
@@ -75,7 +75,7 @@ data LinuxGetLinuxAccountViews' = LinuxGetLinuxAccountViews'
     , _lglavInstance   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LinuxGetLinuxAccountViews'' with the minimum fields required to make a request.
+-- | Creates a value of 'LinuxGetLinuxAccountViews' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -92,13 +92,13 @@ data LinuxGetLinuxAccountViews' = LinuxGetLinuxAccountViews'
 -- * 'lglavMaxResults'
 --
 -- * 'lglavInstance'
-linuxGetLinuxAccountViews'
+linuxGetLinuxAccountViews
     :: Text -- ^ 'lglavProject'
     -> Text -- ^ 'lglavZone'
     -> Text -- ^ 'lglavInstance'
-    -> LinuxGetLinuxAccountViews'
-linuxGetLinuxAccountViews' pLglavProject_ pLglavZone_ pLglavInstance_ =
-    LinuxGetLinuxAccountViews'
+    -> LinuxGetLinuxAccountViews
+linuxGetLinuxAccountViews pLglavProject_ pLglavZone_ pLglavInstance_ =
+    LinuxGetLinuxAccountViews
     { _lglavOrderBy = Nothing
     , _lglavProject = pLglavProject_
     , _lglavZone = pLglavZone_
@@ -116,17 +116,17 @@ linuxGetLinuxAccountViews' pLglavProject_ pLglavZone_ pLglavInstance_ =
 -- first). Use this to sort resources like operations so that the newest
 -- operation is returned first. Currently, only sorting by name or
 -- creationTimestamp desc is supported.
-lglavOrderBy :: Lens' LinuxGetLinuxAccountViews' (Maybe Text)
+lglavOrderBy :: Lens' LinuxGetLinuxAccountViews (Maybe Text)
 lglavOrderBy
   = lens _lglavOrderBy (\ s a -> s{_lglavOrderBy = a})
 
 -- | Project ID for this request.
-lglavProject :: Lens' LinuxGetLinuxAccountViews' Text
+lglavProject :: Lens' LinuxGetLinuxAccountViews Text
 lglavProject
   = lens _lglavProject (\ s a -> s{_lglavProject = a})
 
 -- | Name of the zone for this request.
-lglavZone :: Lens' LinuxGetLinuxAccountViews' Text
+lglavZone :: Lens' LinuxGetLinuxAccountViews Text
 lglavZone
   = lens _lglavZone (\ s a -> s{_lglavZone = a})
 
@@ -141,35 +141,35 @@ lglavZone
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-lglavFilter :: Lens' LinuxGetLinuxAccountViews' (Maybe Text)
+lglavFilter :: Lens' LinuxGetLinuxAccountViews (Maybe Text)
 lglavFilter
   = lens _lglavFilter (\ s a -> s{_lglavFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-lglavPageToken :: Lens' LinuxGetLinuxAccountViews' (Maybe Text)
+lglavPageToken :: Lens' LinuxGetLinuxAccountViews (Maybe Text)
 lglavPageToken
   = lens _lglavPageToken
       (\ s a -> s{_lglavPageToken = a})
 
 -- | Maximum count of results to be returned.
-lglavMaxResults :: Lens' LinuxGetLinuxAccountViews' Word32
+lglavMaxResults :: Lens' LinuxGetLinuxAccountViews Word32
 lglavMaxResults
   = lens _lglavMaxResults
       (\ s a -> s{_lglavMaxResults = a})
 
 -- | The fully-qualified URL of the virtual machine requesting the views.
-lglavInstance :: Lens' LinuxGetLinuxAccountViews' Text
+lglavInstance :: Lens' LinuxGetLinuxAccountViews Text
 lglavInstance
   = lens _lglavInstance
       (\ s a -> s{_lglavInstance = a})
 
-instance GoogleRequest LinuxGetLinuxAccountViews'
+instance GoogleRequest LinuxGetLinuxAccountViews
          where
-        type Rs LinuxGetLinuxAccountViews' =
+        type Rs LinuxGetLinuxAccountViews =
              LinuxGetLinuxAccountViewsResponse
-        requestClient LinuxGetLinuxAccountViews'{..}
+        requestClient LinuxGetLinuxAccountViews{..}
           = go _lglavProject _lglavZone (Just _lglavInstance)
               _lglavOrderBy
               _lglavFilter

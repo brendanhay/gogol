@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.Patch
       AccountsPatchResource
 
     -- * Creating a Request
-    , accountsPatch'
-    , AccountsPatch'
+    , accountsPatch
+    , AccountsPatch
 
     -- * Request Lenses
     , apPayload
@@ -41,7 +41,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.accounts.patch@ method which the
--- 'AccountsPatch'' request conforms to.
+-- 'AccountsPatch' request conforms to.
 type AccountsPatchResource =
      "accounts" :>
        Capture "id" Int32 :>
@@ -50,41 +50,41 @@ type AccountsPatchResource =
 
 -- | Updates an existing account. This method supports patch semantics.
 --
--- /See:/ 'accountsPatch'' smart constructor.
-data AccountsPatch' = AccountsPatch'
+-- /See:/ 'accountsPatch' smart constructor.
+data AccountsPatch = AccountsPatch
     { _apPayload :: !Account
     , _apId      :: !Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'apPayload'
 --
 -- * 'apId'
-accountsPatch'
+accountsPatch
     :: Account -- ^ 'apPayload'
     -> Int32 -- ^ 'apId'
-    -> AccountsPatch'
-accountsPatch' pApPayload_ pApId_ =
-    AccountsPatch'
+    -> AccountsPatch
+accountsPatch pApPayload_ pApId_ =
+    AccountsPatch
     { _apPayload = pApPayload_
     , _apId = pApId_
     }
 
 -- | Multipart request metadata.
-apPayload :: Lens' AccountsPatch' Account
+apPayload :: Lens' AccountsPatch Account
 apPayload
   = lens _apPayload (\ s a -> s{_apPayload = a})
 
 -- | The account id
-apId :: Lens' AccountsPatch' Int32
+apId :: Lens' AccountsPatch Int32
 apId = lens _apId (\ s a -> s{_apId = a})
 
-instance GoogleRequest AccountsPatch' where
-        type Rs AccountsPatch' = Account
-        requestClient AccountsPatch'{..}
+instance GoogleRequest AccountsPatch where
+        type Rs AccountsPatch = Account
+        requestClient AccountsPatch{..}
           = go _apId (Just AltJSON) _apPayload
               adExchangeBuyerService
           where go

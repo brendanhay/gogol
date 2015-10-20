@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.CalendarList.Delete
       CalendarListDeleteResource
 
     -- * Creating a Request
-    , calendarListDelete'
-    , CalendarListDelete'
+    , calendarListDelete
+    , CalendarListDelete
 
     -- * Request Lenses
     , cldCalendarId
@@ -40,7 +40,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendarList.delete@ method which the
--- 'CalendarListDelete'' request conforms to.
+-- 'CalendarListDelete' request conforms to.
 type CalendarListDeleteResource =
      "users" :>
        "me" :>
@@ -50,35 +50,35 @@ type CalendarListDeleteResource =
 
 -- | Deletes an entry on the user\'s calendar list.
 --
--- /See:/ 'calendarListDelete'' smart constructor.
-newtype CalendarListDelete' = CalendarListDelete'
+-- /See:/ 'calendarListDelete' smart constructor.
+newtype CalendarListDelete = CalendarListDelete
     { _cldCalendarId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CalendarListDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'CalendarListDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cldCalendarId'
-calendarListDelete'
+calendarListDelete
     :: Text -- ^ 'cldCalendarId'
-    -> CalendarListDelete'
-calendarListDelete' pCldCalendarId_ =
-    CalendarListDelete'
+    -> CalendarListDelete
+calendarListDelete pCldCalendarId_ =
+    CalendarListDelete
     { _cldCalendarId = pCldCalendarId_
     }
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-cldCalendarId :: Lens' CalendarListDelete' Text
+cldCalendarId :: Lens' CalendarListDelete Text
 cldCalendarId
   = lens _cldCalendarId
       (\ s a -> s{_cldCalendarId = a})
 
-instance GoogleRequest CalendarListDelete' where
-        type Rs CalendarListDelete' = ()
-        requestClient CalendarListDelete'{..}
+instance GoogleRequest CalendarListDelete where
+        type Rs CalendarListDelete = ()
+        requestClient CalendarListDelete{..}
           = go _cldCalendarId (Just AltJSON)
               appsCalendarService
           where go

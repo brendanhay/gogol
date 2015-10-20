@@ -30,8 +30,8 @@ module Network.Google.Resource.Content.Accounttax.List
       AccounttaxListResource
 
     -- * Creating a Request
-    , accounttaxList'
-    , AccounttaxList'
+    , accounttaxList
+    , AccounttaxList
 
     -- * Request Lenses
     , allMerchantId
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accounttax.list@ method which the
--- 'AccounttaxList'' request conforms to.
+-- 'AccounttaxList' request conforms to.
 type AccounttaxListResource =
      Capture "merchantId" Word64 :>
        "accounttax" :>
@@ -55,14 +55,14 @@ type AccounttaxListResource =
 -- | Lists the tax settings of the sub-accounts in your Merchant Center
 -- account.
 --
--- /See:/ 'accounttaxList'' smart constructor.
-data AccounttaxList' = AccounttaxList'
+-- /See:/ 'accounttaxList' smart constructor.
+data AccounttaxList = AccounttaxList
     { _allMerchantId :: !Word64
     , _allPageToken  :: !(Maybe Text)
     , _allMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccounttaxList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccounttaxList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,37 +71,37 @@ data AccounttaxList' = AccounttaxList'
 -- * 'allPageToken'
 --
 -- * 'allMaxResults'
-accounttaxList'
+accounttaxList
     :: Word64 -- ^ 'allMerchantId'
-    -> AccounttaxList'
-accounttaxList' pAllMerchantId_ =
-    AccounttaxList'
+    -> AccounttaxList
+accounttaxList pAllMerchantId_ =
+    AccounttaxList
     { _allMerchantId = pAllMerchantId_
     , _allPageToken = Nothing
     , _allMaxResults = Nothing
     }
 
 -- | The ID of the managing account.
-allMerchantId :: Lens' AccounttaxList' Word64
+allMerchantId :: Lens' AccounttaxList Word64
 allMerchantId
   = lens _allMerchantId
       (\ s a -> s{_allMerchantId = a})
 
 -- | The token returned by the previous request.
-allPageToken :: Lens' AccounttaxList' (Maybe Text)
+allPageToken :: Lens' AccounttaxList (Maybe Text)
 allPageToken
   = lens _allPageToken (\ s a -> s{_allPageToken = a})
 
 -- | The maximum number of tax settings to return in the response, used for
 -- paging.
-allMaxResults :: Lens' AccounttaxList' (Maybe Word32)
+allMaxResults :: Lens' AccounttaxList (Maybe Word32)
 allMaxResults
   = lens _allMaxResults
       (\ s a -> s{_allMaxResults = a})
 
-instance GoogleRequest AccounttaxList' where
-        type Rs AccounttaxList' = AccounttaxListResponse
-        requestClient AccounttaxList'{..}
+instance GoogleRequest AccounttaxList where
+        type Rs AccounttaxList = AccounttaxListResponse
+        requestClient AccounttaxList{..}
           = go _allMerchantId _allPageToken _allMaxResults
               (Just AltJSON)
               shoppingContentService

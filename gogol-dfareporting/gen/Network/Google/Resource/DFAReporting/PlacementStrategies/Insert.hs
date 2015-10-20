@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Insert
       PlacementStrategiesInsertResource
 
     -- * Creating a Request
-    , placementStrategiesInsert'
-    , PlacementStrategiesInsert'
+    , placementStrategiesInsert
+    , PlacementStrategiesInsert
 
     -- * Request Lenses
     , psiProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placementStrategies.insert@ method which the
--- 'PlacementStrategiesInsert'' request conforms to.
+-- 'PlacementStrategiesInsert' request conforms to.
 type PlacementStrategiesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,44 +52,43 @@ type PlacementStrategiesInsertResource =
 
 -- | Inserts a new placement strategy.
 --
--- /See:/ 'placementStrategiesInsert'' smart constructor.
-data PlacementStrategiesInsert' = PlacementStrategiesInsert'
+-- /See:/ 'placementStrategiesInsert' smart constructor.
+data PlacementStrategiesInsert = PlacementStrategiesInsert
     { _psiProFileId :: !Int64
     , _psiPayload   :: !PlacementStrategy
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlacementStrategiesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlacementStrategiesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'psiProFileId'
 --
 -- * 'psiPayload'
-placementStrategiesInsert'
+placementStrategiesInsert
     :: Int64 -- ^ 'psiProFileId'
     -> PlacementStrategy -- ^ 'psiPayload'
-    -> PlacementStrategiesInsert'
-placementStrategiesInsert' pPsiProFileId_ pPsiPayload_ =
-    PlacementStrategiesInsert'
+    -> PlacementStrategiesInsert
+placementStrategiesInsert pPsiProFileId_ pPsiPayload_ =
+    PlacementStrategiesInsert
     { _psiProFileId = pPsiProFileId_
     , _psiPayload = pPsiPayload_
     }
 
 -- | User profile ID associated with this request.
-psiProFileId :: Lens' PlacementStrategiesInsert' Int64
+psiProFileId :: Lens' PlacementStrategiesInsert Int64
 psiProFileId
   = lens _psiProFileId (\ s a -> s{_psiProFileId = a})
 
 -- | Multipart request metadata.
-psiPayload :: Lens' PlacementStrategiesInsert' PlacementStrategy
+psiPayload :: Lens' PlacementStrategiesInsert PlacementStrategy
 psiPayload
   = lens _psiPayload (\ s a -> s{_psiPayload = a})
 
-instance GoogleRequest PlacementStrategiesInsert'
+instance GoogleRequest PlacementStrategiesInsert
          where
-        type Rs PlacementStrategiesInsert' =
-             PlacementStrategy
-        requestClient PlacementStrategiesInsert'{..}
+        type Rs PlacementStrategiesInsert = PlacementStrategy
+        requestClient PlacementStrategiesInsert{..}
           = go _psiProFileId (Just AltJSON) _psiPayload
               dFAReportingService
           where go

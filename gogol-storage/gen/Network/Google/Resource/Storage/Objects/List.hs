@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.Objects.List
       ObjectsListResource
 
     -- * Creating a Request
-    , objectsList'
-    , ObjectsList'
+    , objectsList
+    , ObjectsList
 
     -- * Request Lenses
     , olPrefix
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.list@ method which the
--- 'ObjectsList'' request conforms to.
+-- 'ObjectsList' request conforms to.
 type ObjectsListResource =
      "b" :>
        Capture "bucket" Text :>
@@ -61,8 +61,8 @@ type ObjectsListResource =
 
 -- | Retrieves a list of objects matching the criteria.
 --
--- /See:/ 'objectsList'' smart constructor.
-data ObjectsList' = ObjectsList'
+-- /See:/ 'objectsList' smart constructor.
+data ObjectsList = ObjectsList
     { _olPrefix     :: !(Maybe Text)
     , _olBucket     :: !Text
     , _olVersions   :: !(Maybe Bool)
@@ -72,7 +72,7 @@ data ObjectsList' = ObjectsList'
     , _olMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ObjectsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ObjectsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -89,11 +89,11 @@ data ObjectsList' = ObjectsList'
 -- * 'olDelimiter'
 --
 -- * 'olMaxResults'
-objectsList'
+objectsList
     :: Text -- ^ 'olBucket'
-    -> ObjectsList'
-objectsList' pOlBucket_ =
-    ObjectsList'
+    -> ObjectsList
+objectsList pOlBucket_ =
+    ObjectsList
     { _olPrefix = Nothing
     , _olBucket = pOlBucket_
     , _olVersions = Nothing
@@ -104,27 +104,27 @@ objectsList' pOlBucket_ =
     }
 
 -- | Filter results to objects whose names begin with this prefix.
-olPrefix :: Lens' ObjectsList' (Maybe Text)
+olPrefix :: Lens' ObjectsList (Maybe Text)
 olPrefix = lens _olPrefix (\ s a -> s{_olPrefix = a})
 
 -- | Name of the bucket in which to look for objects.
-olBucket :: Lens' ObjectsList' Text
+olBucket :: Lens' ObjectsList Text
 olBucket = lens _olBucket (\ s a -> s{_olBucket = a})
 
 -- | If true, lists all versions of an object as distinct results. The
 -- default is false. For more information, see Object Versioning.
-olVersions :: Lens' ObjectsList' (Maybe Bool)
+olVersions :: Lens' ObjectsList (Maybe Bool)
 olVersions
   = lens _olVersions (\ s a -> s{_olVersions = a})
 
 -- | Set of properties to return. Defaults to noAcl.
-olProjection :: Lens' ObjectsList' (Maybe ObjectsListProjection)
+olProjection :: Lens' ObjectsList (Maybe ObjectsListProjection)
 olProjection
   = lens _olProjection (\ s a -> s{_olProjection = a})
 
 -- | A previously-returned page token representing part of the larger set of
 -- results to view.
-olPageToken :: Lens' ObjectsList' (Maybe Text)
+olPageToken :: Lens' ObjectsList (Maybe Text)
 olPageToken
   = lens _olPageToken (\ s a -> s{_olPageToken = a})
 
@@ -133,20 +133,20 @@ olPageToken
 -- Objects whose names, aside from the prefix, contain delimiter will have
 -- their name, truncated after the delimiter, returned in prefixes.
 -- Duplicate prefixes are omitted.
-olDelimiter :: Lens' ObjectsList' (Maybe Text)
+olDelimiter :: Lens' ObjectsList (Maybe Text)
 olDelimiter
   = lens _olDelimiter (\ s a -> s{_olDelimiter = a})
 
 -- | Maximum number of items plus prefixes to return. As duplicate prefixes
 -- are omitted, fewer total results may be returned than requested. The
 -- default value of this parameter is 1,000 items.
-olMaxResults :: Lens' ObjectsList' (Maybe Word32)
+olMaxResults :: Lens' ObjectsList (Maybe Word32)
 olMaxResults
   = lens _olMaxResults (\ s a -> s{_olMaxResults = a})
 
-instance GoogleRequest ObjectsList' where
-        type Rs ObjectsList' = Objects
-        requestClient ObjectsList'{..}
+instance GoogleRequest ObjectsList where
+        type Rs ObjectsList = Objects
+        requestClient ObjectsList{..}
           = go _olBucket _olPrefix _olVersions _olProjection
               _olPageToken
               _olDelimiter

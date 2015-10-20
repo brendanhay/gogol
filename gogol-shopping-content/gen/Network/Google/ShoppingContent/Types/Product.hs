@@ -2619,66 +2619,63 @@ instance ToJSON OrdersGetTestOrderTemplateResponse
 --
 -- /See:/ 'accountsCustomBatchRequestEntry' smart constructor.
 data AccountsCustomBatchRequestEntry = AccountsCustomBatchRequestEntry
-    { _acbrecMerchantId :: !(Maybe Word64)
-    , _acbrecAccount    :: !(Maybe Account)
-    , _acbrecAccountId  :: !(Maybe Word64)
-    , _acbrecMethod     :: !(Maybe Text)
-    , _acbrecBatchId    :: !(Maybe Word32)
+    { _accMerchantId :: !(Maybe Word64)
+    , _accAccount    :: !(Maybe Account)
+    , _accAccountId  :: !(Maybe Word64)
+    , _accMethod     :: !(Maybe Text)
+    , _accBatchId    :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acbrecMerchantId'
+-- * 'accMerchantId'
 --
--- * 'acbrecAccount'
+-- * 'accAccount'
 --
--- * 'acbrecAccountId'
+-- * 'accAccountId'
 --
--- * 'acbrecMethod'
+-- * 'accMethod'
 --
--- * 'acbrecBatchId'
+-- * 'accBatchId'
 accountsCustomBatchRequestEntry
     :: AccountsCustomBatchRequestEntry
 accountsCustomBatchRequestEntry =
     AccountsCustomBatchRequestEntry
-    { _acbrecMerchantId = Nothing
-    , _acbrecAccount = Nothing
-    , _acbrecAccountId = Nothing
-    , _acbrecMethod = Nothing
-    , _acbrecBatchId = Nothing
+    { _accMerchantId = Nothing
+    , _accAccount = Nothing
+    , _accAccountId = Nothing
+    , _accMethod = Nothing
+    , _accBatchId = Nothing
     }
 
 -- | The ID of the managing account.
-acbrecMerchantId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word64)
-acbrecMerchantId
-  = lens _acbrecMerchantId
-      (\ s a -> s{_acbrecMerchantId = a})
+accMerchantId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word64)
+accMerchantId
+  = lens _accMerchantId
+      (\ s a -> s{_accMerchantId = a})
 
 -- | The account to create or update. Only defined if the method is insert or
 -- update.
-acbrecAccount :: Lens' AccountsCustomBatchRequestEntry (Maybe Account)
-acbrecAccount
-  = lens _acbrecAccount
-      (\ s a -> s{_acbrecAccount = a})
+accAccount :: Lens' AccountsCustomBatchRequestEntry (Maybe Account)
+accAccount
+  = lens _accAccount (\ s a -> s{_accAccount = a})
 
 -- | The ID of the account to get or delete. Only defined if the method is
 -- get or delete.
-acbrecAccountId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word64)
-acbrecAccountId
-  = lens _acbrecAccountId
-      (\ s a -> s{_acbrecAccountId = a})
+accAccountId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word64)
+accAccountId
+  = lens _accAccountId (\ s a -> s{_accAccountId = a})
 
-acbrecMethod :: Lens' AccountsCustomBatchRequestEntry (Maybe Text)
-acbrecMethod
-  = lens _acbrecMethod (\ s a -> s{_acbrecMethod = a})
+accMethod :: Lens' AccountsCustomBatchRequestEntry (Maybe Text)
+accMethod
+  = lens _accMethod (\ s a -> s{_accMethod = a})
 
 -- | An entry ID, unique within the batch request.
-acbrecBatchId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word32)
-acbrecBatchId
-  = lens _acbrecBatchId
-      (\ s a -> s{_acbrecBatchId = a})
+accBatchId :: Lens' AccountsCustomBatchRequestEntry (Maybe Word32)
+accBatchId
+  = lens _accBatchId (\ s a -> s{_accBatchId = a})
 
 instance FromJSON AccountsCustomBatchRequestEntry
          where
@@ -2695,11 +2692,11 @@ instance ToJSON AccountsCustomBatchRequestEntry where
         toJSON AccountsCustomBatchRequestEntry{..}
           = object
               (catMaybes
-                 [("merchantId" .=) <$> _acbrecMerchantId,
-                  ("account" .=) <$> _acbrecAccount,
-                  ("accountId" .=) <$> _acbrecAccountId,
-                  ("method" .=) <$> _acbrecMethod,
-                  ("batchId" .=) <$> _acbrecBatchId])
+                 [("merchantId" .=) <$> _accMerchantId,
+                  ("account" .=) <$> _accAccount,
+                  ("accountId" .=) <$> _accAccountId,
+                  ("method" .=) <$> _accMethod,
+                  ("batchId" .=) <$> _accBatchId])
 
 --
 -- /See:/ 'weight' smart constructor.
@@ -4420,51 +4417,55 @@ instance ToJSON ProductShippingWeight where
 --
 -- /See:/ 'accountstatusesCustomBatchRequestEntry' smart constructor.
 data AccountstatusesCustomBatchRequestEntry = AccountstatusesCustomBatchRequestEntry
-    { _aaMerchantId :: !(Maybe Word64)
-    , _aaAccountId  :: !(Maybe Word64)
-    , _aaMethod     :: !(Maybe Text)
-    , _aaBatchId    :: !(Maybe Word32)
+    { _acbrecMerchantId :: !(Maybe Word64)
+    , _acbrecAccountId  :: !(Maybe Word64)
+    , _acbrecMethod     :: !(Maybe Text)
+    , _acbrecBatchId    :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aaMerchantId'
+-- * 'acbrecMerchantId'
 --
--- * 'aaAccountId'
+-- * 'acbrecAccountId'
 --
--- * 'aaMethod'
+-- * 'acbrecMethod'
 --
--- * 'aaBatchId'
+-- * 'acbrecBatchId'
 accountstatusesCustomBatchRequestEntry
     :: AccountstatusesCustomBatchRequestEntry
 accountstatusesCustomBatchRequestEntry =
     AccountstatusesCustomBatchRequestEntry
-    { _aaMerchantId = Nothing
-    , _aaAccountId = Nothing
-    , _aaMethod = Nothing
-    , _aaBatchId = Nothing
+    { _acbrecMerchantId = Nothing
+    , _acbrecAccountId = Nothing
+    , _acbrecMethod = Nothing
+    , _acbrecBatchId = Nothing
     }
 
 -- | The ID of the managing account.
-aaMerchantId :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Word64)
-aaMerchantId
-  = lens _aaMerchantId (\ s a -> s{_aaMerchantId = a})
+acbrecMerchantId :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Word64)
+acbrecMerchantId
+  = lens _acbrecMerchantId
+      (\ s a -> s{_acbrecMerchantId = a})
 
 -- | The ID of the (sub-)account whose status to get.
-aaAccountId :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Word64)
-aaAccountId
-  = lens _aaAccountId (\ s a -> s{_aaAccountId = a})
+acbrecAccountId :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Word64)
+acbrecAccountId
+  = lens _acbrecAccountId
+      (\ s a -> s{_acbrecAccountId = a})
 
 -- | The method (get).
-aaMethod :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Text)
-aaMethod = lens _aaMethod (\ s a -> s{_aaMethod = a})
+acbrecMethod :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Text)
+acbrecMethod
+  = lens _acbrecMethod (\ s a -> s{_acbrecMethod = a})
 
 -- | An entry ID, unique within the batch request.
-aaBatchId :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Word32)
-aaBatchId
-  = lens _aaBatchId (\ s a -> s{_aaBatchId = a})
+acbrecBatchId :: Lens' AccountstatusesCustomBatchRequestEntry (Maybe Word32)
+acbrecBatchId
+  = lens _acbrecBatchId
+      (\ s a -> s{_acbrecBatchId = a})
 
 instance FromJSON
          AccountstatusesCustomBatchRequestEntry where
@@ -4481,10 +4482,10 @@ instance ToJSON
         toJSON AccountstatusesCustomBatchRequestEntry{..}
           = object
               (catMaybes
-                 [("merchantId" .=) <$> _aaMerchantId,
-                  ("accountId" .=) <$> _aaAccountId,
-                  ("method" .=) <$> _aaMethod,
-                  ("batchId" .=) <$> _aaBatchId])
+                 [("merchantId" .=) <$> _acbrecMerchantId,
+                  ("accountId" .=) <$> _acbrecAccountId,
+                  ("method" .=) <$> _acbrecMethod,
+                  ("batchId" .=) <$> _acbrecBatchId])
 
 -- | A batch entry encoding a single non-batch productstatuses response.
 --
@@ -4784,65 +4785,62 @@ instance ToJSON ProductShipping where
 --
 -- /See:/ 'accountshippingCustomBatchRequestEntry' smart constructor.
 data AccountshippingCustomBatchRequestEntry = AccountshippingCustomBatchRequestEntry
-    { _acccMerchantId      :: !(Maybe Word64)
-    , _acccAccountId       :: !(Maybe Word64)
-    , _acccMethod          :: !(Maybe Text)
-    , _acccAccountShipping :: !(Maybe AccountShipping)
-    , _acccBatchId         :: !(Maybe Word32)
+    { _aaMerchantId      :: !(Maybe Word64)
+    , _aaAccountId       :: !(Maybe Word64)
+    , _aaMethod          :: !(Maybe Text)
+    , _aaAccountShipping :: !(Maybe AccountShipping)
+    , _aaBatchId         :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountshippingCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acccMerchantId'
+-- * 'aaMerchantId'
 --
--- * 'acccAccountId'
+-- * 'aaAccountId'
 --
--- * 'acccMethod'
+-- * 'aaMethod'
 --
--- * 'acccAccountShipping'
+-- * 'aaAccountShipping'
 --
--- * 'acccBatchId'
+-- * 'aaBatchId'
 accountshippingCustomBatchRequestEntry
     :: AccountshippingCustomBatchRequestEntry
 accountshippingCustomBatchRequestEntry =
     AccountshippingCustomBatchRequestEntry
-    { _acccMerchantId = Nothing
-    , _acccAccountId = Nothing
-    , _acccMethod = Nothing
-    , _acccAccountShipping = Nothing
-    , _acccBatchId = Nothing
+    { _aaMerchantId = Nothing
+    , _aaAccountId = Nothing
+    , _aaMethod = Nothing
+    , _aaAccountShipping = Nothing
+    , _aaBatchId = Nothing
     }
 
 -- | The ID of the managing account.
-acccMerchantId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word64)
-acccMerchantId
-  = lens _acccMerchantId
-      (\ s a -> s{_acccMerchantId = a})
+aaMerchantId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word64)
+aaMerchantId
+  = lens _aaMerchantId (\ s a -> s{_aaMerchantId = a})
 
 -- | The ID of the account for which to get\/update account shipping
 -- settings.
-acccAccountId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word64)
-acccAccountId
-  = lens _acccAccountId
-      (\ s a -> s{_acccAccountId = a})
+aaAccountId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word64)
+aaAccountId
+  = lens _aaAccountId (\ s a -> s{_aaAccountId = a})
 
-acccMethod :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Text)
-acccMethod
-  = lens _acccMethod (\ s a -> s{_acccMethod = a})
+aaMethod :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Text)
+aaMethod = lens _aaMethod (\ s a -> s{_aaMethod = a})
 
 -- | The account shipping settings to update. Only defined if the method is
 -- update.
-acccAccountShipping :: Lens' AccountshippingCustomBatchRequestEntry (Maybe AccountShipping)
-acccAccountShipping
-  = lens _acccAccountShipping
-      (\ s a -> s{_acccAccountShipping = a})
+aaAccountShipping :: Lens' AccountshippingCustomBatchRequestEntry (Maybe AccountShipping)
+aaAccountShipping
+  = lens _aaAccountShipping
+      (\ s a -> s{_aaAccountShipping = a})
 
 -- | An entry ID, unique within the batch request.
-acccBatchId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word32)
-acccBatchId
-  = lens _acccBatchId (\ s a -> s{_acccBatchId = a})
+aaBatchId :: Lens' AccountshippingCustomBatchRequestEntry (Maybe Word32)
+aaBatchId
+  = lens _aaBatchId (\ s a -> s{_aaBatchId = a})
 
 instance FromJSON
          AccountshippingCustomBatchRequestEntry where
@@ -4860,11 +4858,11 @@ instance ToJSON
         toJSON AccountshippingCustomBatchRequestEntry{..}
           = object
               (catMaybes
-                 [("merchantId" .=) <$> _acccMerchantId,
-                  ("accountId" .=) <$> _acccAccountId,
-                  ("method" .=) <$> _acccMethod,
-                  ("accountShipping" .=) <$> _acccAccountShipping,
-                  ("batchId" .=) <$> _acccBatchId])
+                 [("merchantId" .=) <$> _aaMerchantId,
+                  ("accountId" .=) <$> _aaAccountId,
+                  ("method" .=) <$> _aaMethod,
+                  ("accountShipping" .=) <$> _aaAccountShipping,
+                  ("batchId" .=) <$> _aaBatchId])
 
 --
 -- /See:/ 'accountsCustomBatchRequest' smart constructor.
@@ -5882,53 +5880,49 @@ instance ToJSON ProductsCustomBatchRequestEntry where
 --
 -- /See:/ 'datafeedstatusesCustomBatchRequestEntry' smart constructor.
 data DatafeedstatusesCustomBatchRequestEntry = DatafeedstatusesCustomBatchRequestEntry
-    { _datMerchantId :: !(Maybe Word64)
-    , _datMethod     :: !(Maybe Text)
-    , _datDatafeedId :: !(Maybe Word64)
-    , _datBatchId    :: !(Maybe Word32)
+    { _dMerchantId :: !(Maybe Word64)
+    , _dMethod     :: !(Maybe Text)
+    , _dDatafeedId :: !(Maybe Word64)
+    , _dBatchId    :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedstatusesCustomBatchRequestEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'datMerchantId'
+-- * 'dMerchantId'
 --
--- * 'datMethod'
+-- * 'dMethod'
 --
--- * 'datDatafeedId'
+-- * 'dDatafeedId'
 --
--- * 'datBatchId'
+-- * 'dBatchId'
 datafeedstatusesCustomBatchRequestEntry
     :: DatafeedstatusesCustomBatchRequestEntry
 datafeedstatusesCustomBatchRequestEntry =
     DatafeedstatusesCustomBatchRequestEntry
-    { _datMerchantId = Nothing
-    , _datMethod = Nothing
-    , _datDatafeedId = Nothing
-    , _datBatchId = Nothing
+    { _dMerchantId = Nothing
+    , _dMethod = Nothing
+    , _dDatafeedId = Nothing
+    , _dBatchId = Nothing
     }
 
 -- | The ID of the managing account.
-datMerchantId :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Word64)
-datMerchantId
-  = lens _datMerchantId
-      (\ s a -> s{_datMerchantId = a})
+dMerchantId :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Word64)
+dMerchantId
+  = lens _dMerchantId (\ s a -> s{_dMerchantId = a})
 
-datMethod :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Text)
-datMethod
-  = lens _datMethod (\ s a -> s{_datMethod = a})
+dMethod :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Text)
+dMethod = lens _dMethod (\ s a -> s{_dMethod = a})
 
 -- | The ID of the data feed to get or delete.
-datDatafeedId :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Word64)
-datDatafeedId
-  = lens _datDatafeedId
-      (\ s a -> s{_datDatafeedId = a})
+dDatafeedId :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Word64)
+dDatafeedId
+  = lens _dDatafeedId (\ s a -> s{_dDatafeedId = a})
 
 -- | An entry ID, unique within the batch request.
-datBatchId :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Word32)
-datBatchId
-  = lens _datBatchId (\ s a -> s{_datBatchId = a})
+dBatchId :: Lens' DatafeedstatusesCustomBatchRequestEntry (Maybe Word32)
+dBatchId = lens _dBatchId (\ s a -> s{_dBatchId = a})
 
 instance FromJSON
          DatafeedstatusesCustomBatchRequestEntry where
@@ -5946,10 +5940,10 @@ instance ToJSON
         toJSON DatafeedstatusesCustomBatchRequestEntry{..}
           = object
               (catMaybes
-                 [("merchantId" .=) <$> _datMerchantId,
-                  ("method" .=) <$> _datMethod,
-                  ("datafeedId" .=) <$> _datDatafeedId,
-                  ("batchId" .=) <$> _datBatchId])
+                 [("merchantId" .=) <$> _dMerchantId,
+                  ("method" .=) <$> _dMethod,
+                  ("datafeedId" .=) <$> _dDatafeedId,
+                  ("batchId" .=) <$> _dBatchId])
 
 --
 -- /See:/ 'orderCustomer' smart constructor.
@@ -6972,43 +6966,45 @@ instance ToJSON TestOrder where
 --
 -- /See:/ 'datafeedstatusesCustomBatchResponseEntry' smart constructor.
 data DatafeedstatusesCustomBatchResponseEntry = DatafeedstatusesCustomBatchResponseEntry
-    { _dErrors         :: !(Maybe Errors)
-    , _dDatafeedStatus :: !(Maybe DatafeedStatus)
-    , _dBatchId        :: !(Maybe Word32)
+    { _datErrors         :: !(Maybe Errors)
+    , _datDatafeedStatus :: !(Maybe DatafeedStatus)
+    , _datBatchId        :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatafeedstatusesCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dErrors'
+-- * 'datErrors'
 --
--- * 'dDatafeedStatus'
+-- * 'datDatafeedStatus'
 --
--- * 'dBatchId'
+-- * 'datBatchId'
 datafeedstatusesCustomBatchResponseEntry
     :: DatafeedstatusesCustomBatchResponseEntry
 datafeedstatusesCustomBatchResponseEntry =
     DatafeedstatusesCustomBatchResponseEntry
-    { _dErrors = Nothing
-    , _dDatafeedStatus = Nothing
-    , _dBatchId = Nothing
+    { _datErrors = Nothing
+    , _datDatafeedStatus = Nothing
+    , _datBatchId = Nothing
     }
 
 -- | A list of errors defined if and only if the request failed.
-dErrors :: Lens' DatafeedstatusesCustomBatchResponseEntry (Maybe Errors)
-dErrors = lens _dErrors (\ s a -> s{_dErrors = a})
+datErrors :: Lens' DatafeedstatusesCustomBatchResponseEntry (Maybe Errors)
+datErrors
+  = lens _datErrors (\ s a -> s{_datErrors = a})
 
 -- | The requested data feed status. Defined if and only if the request was
 -- successful.
-dDatafeedStatus :: Lens' DatafeedstatusesCustomBatchResponseEntry (Maybe DatafeedStatus)
-dDatafeedStatus
-  = lens _dDatafeedStatus
-      (\ s a -> s{_dDatafeedStatus = a})
+datDatafeedStatus :: Lens' DatafeedstatusesCustomBatchResponseEntry (Maybe DatafeedStatus)
+datDatafeedStatus
+  = lens _datDatafeedStatus
+      (\ s a -> s{_datDatafeedStatus = a})
 
 -- | The ID of the request entry this entry responds to.
-dBatchId :: Lens' DatafeedstatusesCustomBatchResponseEntry (Maybe Word32)
-dBatchId = lens _dBatchId (\ s a -> s{_dBatchId = a})
+datBatchId :: Lens' DatafeedstatusesCustomBatchResponseEntry (Maybe Word32)
+datBatchId
+  = lens _datBatchId (\ s a -> s{_datBatchId = a})
 
 instance FromJSON
          DatafeedstatusesCustomBatchResponseEntry where
@@ -7025,9 +7021,9 @@ instance ToJSON
         toJSON DatafeedstatusesCustomBatchResponseEntry{..}
           = object
               (catMaybes
-                 [("errors" .=) <$> _dErrors,
-                  ("datafeedStatus" .=) <$> _dDatafeedStatus,
-                  ("batchId" .=) <$> _dBatchId])
+                 [("errors" .=) <$> _datErrors,
+                  ("datafeedStatus" .=) <$> _datDatafeedStatus,
+                  ("batchId" .=) <$> _datBatchId])
 
 --
 -- /See:/ 'orderRefund' smart constructor.
@@ -8854,45 +8850,45 @@ instance ToJSON Errors where
 --
 -- /See:/ 'accountstatusesCustomBatchResponseEntry' smart constructor.
 data AccountstatusesCustomBatchResponseEntry = AccountstatusesCustomBatchResponseEntry
-    { _accAccountStatus :: !(Maybe AccountStatus)
-    , _accErrors        :: !(Maybe Errors)
-    , _accBatchId       :: !(Maybe Word32)
+    { _acccAccountStatus :: !(Maybe AccountStatus)
+    , _acccErrors        :: !(Maybe Errors)
+    , _acccBatchId       :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountstatusesCustomBatchResponseEntry' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'accAccountStatus'
+-- * 'acccAccountStatus'
 --
--- * 'accErrors'
+-- * 'acccErrors'
 --
--- * 'accBatchId'
+-- * 'acccBatchId'
 accountstatusesCustomBatchResponseEntry
     :: AccountstatusesCustomBatchResponseEntry
 accountstatusesCustomBatchResponseEntry =
     AccountstatusesCustomBatchResponseEntry
-    { _accAccountStatus = Nothing
-    , _accErrors = Nothing
-    , _accBatchId = Nothing
+    { _acccAccountStatus = Nothing
+    , _acccErrors = Nothing
+    , _acccBatchId = Nothing
     }
 
 -- | The requested account status. Defined if and only if the request was
 -- successful.
-accAccountStatus :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe AccountStatus)
-accAccountStatus
-  = lens _accAccountStatus
-      (\ s a -> s{_accAccountStatus = a})
+acccAccountStatus :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe AccountStatus)
+acccAccountStatus
+  = lens _acccAccountStatus
+      (\ s a -> s{_acccAccountStatus = a})
 
 -- | A list of errors defined if and only if the request failed.
-accErrors :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe Errors)
-accErrors
-  = lens _accErrors (\ s a -> s{_accErrors = a})
+acccErrors :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe Errors)
+acccErrors
+  = lens _acccErrors (\ s a -> s{_acccErrors = a})
 
 -- | The ID of the request entry this entry responds to.
-accBatchId :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe Word32)
-accBatchId
-  = lens _accBatchId (\ s a -> s{_accBatchId = a})
+acccBatchId :: Lens' AccountstatusesCustomBatchResponseEntry (Maybe Word32)
+acccBatchId
+  = lens _acccBatchId (\ s a -> s{_acccBatchId = a})
 
 instance FromJSON
          AccountstatusesCustomBatchResponseEntry where
@@ -8909,9 +8905,9 @@ instance ToJSON
         toJSON AccountstatusesCustomBatchResponseEntry{..}
           = object
               (catMaybes
-                 [("accountStatus" .=) <$> _accAccountStatus,
-                  ("errors" .=) <$> _accErrors,
-                  ("batchId" .=) <$> _accBatchId])
+                 [("accountStatus" .=) <$> _acccAccountStatus,
+                  ("errors" .=) <$> _acccErrors,
+                  ("batchId" .=) <$> _acccBatchId])
 
 --
 -- /See:/ 'inventorySetResponse' smart constructor.

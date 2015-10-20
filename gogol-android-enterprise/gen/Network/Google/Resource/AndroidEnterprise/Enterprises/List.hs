@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidEnterprise.Enterprises.List
       EnterprisesListResource
 
     -- * Creating a Request
-    , enterprisesList'
-    , EnterprisesList'
+    , enterprisesList
+    , EnterprisesList
 
     -- * Request Lenses
     , elDomain
@@ -40,7 +40,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.enterprises.list@ method which the
--- 'EnterprisesList'' request conforms to.
+-- 'EnterprisesList' request conforms to.
 type EnterprisesListResource =
      "enterprises" :>
        QueryParam "domain" Text :>
@@ -49,31 +49,31 @@ type EnterprisesListResource =
 
 -- | Looks up an enterprise by domain name.
 --
--- /See:/ 'enterprisesList'' smart constructor.
-newtype EnterprisesList' = EnterprisesList'
+-- /See:/ 'enterprisesList' smart constructor.
+newtype EnterprisesList = EnterprisesList
     { _elDomain :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EnterprisesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'EnterprisesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'elDomain'
-enterprisesList'
+enterprisesList
     :: Text -- ^ 'elDomain'
-    -> EnterprisesList'
-enterprisesList' pElDomain_ =
-    EnterprisesList'
+    -> EnterprisesList
+enterprisesList pElDomain_ =
+    EnterprisesList
     { _elDomain = pElDomain_
     }
 
 -- | The exact primary domain name of the enterprise to look up.
-elDomain :: Lens' EnterprisesList' Text
+elDomain :: Lens' EnterprisesList Text
 elDomain = lens _elDomain (\ s a -> s{_elDomain = a})
 
-instance GoogleRequest EnterprisesList' where
-        type Rs EnterprisesList' = EnterprisesListResponse
-        requestClient EnterprisesList'{..}
+instance GoogleRequest EnterprisesList where
+        type Rs EnterprisesList = EnterprisesListResponse
+        requestClient EnterprisesList{..}
           = go (Just _elDomain) (Just AltJSON)
               androidEnterpriseService
           where go

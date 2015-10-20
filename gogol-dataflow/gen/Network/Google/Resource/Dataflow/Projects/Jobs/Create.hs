@@ -29,8 +29,8 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Create
       ProjectsJobsCreateResource
 
     -- * Creating a Request
-    , projectsJobsCreate'
-    , ProjectsJobsCreate'
+    , projectsJobsCreate
+    , ProjectsJobsCreate
 
     -- * Request Lenses
     , pjcXgafv
@@ -50,7 +50,7 @@ import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.jobs.create@ method which the
--- 'ProjectsJobsCreate'' request conforms to.
+-- 'ProjectsJobsCreate' request conforms to.
 type ProjectsJobsCreateResource =
      "v1b3" :>
        "projects" :>
@@ -70,8 +70,8 @@ type ProjectsJobsCreateResource =
 
 -- | Creates a dataflow job.
 --
--- /See:/ 'projectsJobsCreate'' smart constructor.
-data ProjectsJobsCreate' = ProjectsJobsCreate'
+-- /See:/ 'projectsJobsCreate' smart constructor.
+data ProjectsJobsCreate = ProjectsJobsCreate
     { _pjcXgafv          :: !(Maybe Text)
     , _pjcUploadProtocol :: !(Maybe Text)
     , _pjcPp             :: !Bool
@@ -85,7 +85,7 @@ data ProjectsJobsCreate' = ProjectsJobsCreate'
     , _pjcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsJobsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsJobsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -110,12 +110,12 @@ data ProjectsJobsCreate' = ProjectsJobsCreate'
 -- * 'pjcReplaceJobId'
 --
 -- * 'pjcCallback'
-projectsJobsCreate'
+projectsJobsCreate
     :: Job -- ^ 'pjcPayload'
     -> Text -- ^ 'pjcProjectId'
-    -> ProjectsJobsCreate'
-projectsJobsCreate' pPjcPayload_ pPjcProjectId_ =
-    ProjectsJobsCreate'
+    -> ProjectsJobsCreate
+projectsJobsCreate pPjcPayload_ pPjcProjectId_ =
+    ProjectsJobsCreate
     { _pjcXgafv = Nothing
     , _pjcUploadProtocol = Nothing
     , _pjcPp = True
@@ -130,65 +130,65 @@ projectsJobsCreate' pPjcPayload_ pPjcProjectId_ =
     }
 
 -- | V1 error format.
-pjcXgafv :: Lens' ProjectsJobsCreate' (Maybe Text)
+pjcXgafv :: Lens' ProjectsJobsCreate (Maybe Text)
 pjcXgafv = lens _pjcXgafv (\ s a -> s{_pjcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pjcUploadProtocol :: Lens' ProjectsJobsCreate' (Maybe Text)
+pjcUploadProtocol :: Lens' ProjectsJobsCreate (Maybe Text)
 pjcUploadProtocol
   = lens _pjcUploadProtocol
       (\ s a -> s{_pjcUploadProtocol = a})
 
 -- | Pretty-print response.
-pjcPp :: Lens' ProjectsJobsCreate' Bool
+pjcPp :: Lens' ProjectsJobsCreate Bool
 pjcPp = lens _pjcPp (\ s a -> s{_pjcPp = a})
 
 -- | OAuth access token.
-pjcAccessToken :: Lens' ProjectsJobsCreate' (Maybe Text)
+pjcAccessToken :: Lens' ProjectsJobsCreate (Maybe Text)
 pjcAccessToken
   = lens _pjcAccessToken
       (\ s a -> s{_pjcAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pjcUploadType :: Lens' ProjectsJobsCreate' (Maybe Text)
+pjcUploadType :: Lens' ProjectsJobsCreate (Maybe Text)
 pjcUploadType
   = lens _pjcUploadType
       (\ s a -> s{_pjcUploadType = a})
 
 -- | Multipart request metadata.
-pjcPayload :: Lens' ProjectsJobsCreate' Job
+pjcPayload :: Lens' ProjectsJobsCreate Job
 pjcPayload
   = lens _pjcPayload (\ s a -> s{_pjcPayload = a})
 
 -- | OAuth bearer token.
-pjcBearerToken :: Lens' ProjectsJobsCreate' (Maybe Text)
+pjcBearerToken :: Lens' ProjectsJobsCreate (Maybe Text)
 pjcBearerToken
   = lens _pjcBearerToken
       (\ s a -> s{_pjcBearerToken = a})
 
 -- | Level of information requested in response.
-pjcView :: Lens' ProjectsJobsCreate' (Maybe Text)
+pjcView :: Lens' ProjectsJobsCreate (Maybe Text)
 pjcView = lens _pjcView (\ s a -> s{_pjcView = a})
 
 -- | The project which owns the job.
-pjcProjectId :: Lens' ProjectsJobsCreate' Text
+pjcProjectId :: Lens' ProjectsJobsCreate Text
 pjcProjectId
   = lens _pjcProjectId (\ s a -> s{_pjcProjectId = a})
 
 -- | DEPRECATED. This field is now on the Job message.
-pjcReplaceJobId :: Lens' ProjectsJobsCreate' (Maybe Text)
+pjcReplaceJobId :: Lens' ProjectsJobsCreate (Maybe Text)
 pjcReplaceJobId
   = lens _pjcReplaceJobId
       (\ s a -> s{_pjcReplaceJobId = a})
 
 -- | JSONP
-pjcCallback :: Lens' ProjectsJobsCreate' (Maybe Text)
+pjcCallback :: Lens' ProjectsJobsCreate (Maybe Text)
 pjcCallback
   = lens _pjcCallback (\ s a -> s{_pjcCallback = a})
 
-instance GoogleRequest ProjectsJobsCreate' where
-        type Rs ProjectsJobsCreate' = Job
-        requestClient ProjectsJobsCreate'{..}
+instance GoogleRequest ProjectsJobsCreate where
+        type Rs ProjectsJobsCreate = Job
+        requestClient ProjectsJobsCreate{..}
           = go _pjcProjectId _pjcXgafv _pjcUploadProtocol
               (Just _pjcPp)
               _pjcAccessToken

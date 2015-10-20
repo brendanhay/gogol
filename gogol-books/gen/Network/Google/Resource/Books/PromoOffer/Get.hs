@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.PromoOffer.Get
       PromoOfferGetResource
 
     -- * Creating a Request
-    , promoOfferGet'
-    , PromoOfferGet'
+    , promoOfferGet
+    , PromoOfferGet
 
     -- * Request Lenses
     , pogManufacturer
@@ -45,7 +45,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.promooffer.get@ method which the
--- 'PromoOfferGet'' request conforms to.
+-- 'PromoOfferGet' request conforms to.
 type PromoOfferGetResource =
      "promooffer" :>
        "get" :>
@@ -59,8 +59,8 @@ type PromoOfferGetResource =
 
 -- | Returns a list of promo offers available to the user
 --
--- /See:/ 'promoOfferGet'' smart constructor.
-data PromoOfferGet' = PromoOfferGet'
+-- /See:/ 'promoOfferGet' smart constructor.
+data PromoOfferGet = PromoOfferGet
     { _pogManufacturer :: !(Maybe Text)
     , _pogSerial       :: !(Maybe Text)
     , _pogDevice       :: !(Maybe Text)
@@ -69,7 +69,7 @@ data PromoOfferGet' = PromoOfferGet'
     , _pogAndroidId    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PromoOfferGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PromoOfferGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -84,10 +84,10 @@ data PromoOfferGet' = PromoOfferGet'
 -- * 'pogProduct'
 --
 -- * 'pogAndroidId'
-promoOfferGet'
-    :: PromoOfferGet'
-promoOfferGet' =
-    PromoOfferGet'
+promoOfferGet
+    :: PromoOfferGet
+promoOfferGet =
+    PromoOfferGet
     { _pogManufacturer = Nothing
     , _pogSerial = Nothing
     , _pogDevice = Nothing
@@ -97,38 +97,38 @@ promoOfferGet' =
     }
 
 -- | device manufacturer
-pogManufacturer :: Lens' PromoOfferGet' (Maybe Text)
+pogManufacturer :: Lens' PromoOfferGet (Maybe Text)
 pogManufacturer
   = lens _pogManufacturer
       (\ s a -> s{_pogManufacturer = a})
 
 -- | device serial
-pogSerial :: Lens' PromoOfferGet' (Maybe Text)
+pogSerial :: Lens' PromoOfferGet (Maybe Text)
 pogSerial
   = lens _pogSerial (\ s a -> s{_pogSerial = a})
 
 -- | device device
-pogDevice :: Lens' PromoOfferGet' (Maybe Text)
+pogDevice :: Lens' PromoOfferGet (Maybe Text)
 pogDevice
   = lens _pogDevice (\ s a -> s{_pogDevice = a})
 
 -- | device model
-pogModel :: Lens' PromoOfferGet' (Maybe Text)
+pogModel :: Lens' PromoOfferGet (Maybe Text)
 pogModel = lens _pogModel (\ s a -> s{_pogModel = a})
 
 -- | device product
-pogProduct :: Lens' PromoOfferGet' (Maybe Text)
+pogProduct :: Lens' PromoOfferGet (Maybe Text)
 pogProduct
   = lens _pogProduct (\ s a -> s{_pogProduct = a})
 
 -- | device android_id
-pogAndroidId :: Lens' PromoOfferGet' (Maybe Text)
+pogAndroidId :: Lens' PromoOfferGet (Maybe Text)
 pogAndroidId
   = lens _pogAndroidId (\ s a -> s{_pogAndroidId = a})
 
-instance GoogleRequest PromoOfferGet' where
-        type Rs PromoOfferGet' = Offers
-        requestClient PromoOfferGet'{..}
+instance GoogleRequest PromoOfferGet where
+        type Rs PromoOfferGet = Offers
+        requestClient PromoOfferGet{..}
           = go _pogManufacturer _pogSerial _pogDevice _pogModel
               _pogProduct
               _pogAndroidId

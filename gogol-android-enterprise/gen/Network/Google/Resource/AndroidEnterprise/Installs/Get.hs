@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidEnterprise.Installs.Get
       InstallsGetResource
 
     -- * Creating a Request
-    , installsGet'
-    , InstallsGet'
+    , installsGet
+    , InstallsGet
 
     -- * Request Lenses
     , igEnterpriseId
@@ -43,7 +43,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.installs.get@ method which the
--- 'InstallsGet'' request conforms to.
+-- 'InstallsGet' request conforms to.
 type InstallsGetResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -57,15 +57,15 @@ type InstallsGetResource =
 
 -- | Retrieves details of an installation of an app on a device.
 --
--- /See:/ 'installsGet'' smart constructor.
-data InstallsGet' = InstallsGet'
+-- /See:/ 'installsGet' smart constructor.
+data InstallsGet = InstallsGet
     { _igEnterpriseId :: !Text
     , _igUserId       :: !Text
     , _igInstallId    :: !Text
     , _igDeviceId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstallsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstallsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,14 +76,14 @@ data InstallsGet' = InstallsGet'
 -- * 'igInstallId'
 --
 -- * 'igDeviceId'
-installsGet'
+installsGet
     :: Text -- ^ 'igEnterpriseId'
     -> Text -- ^ 'igUserId'
     -> Text -- ^ 'igInstallId'
     -> Text -- ^ 'igDeviceId'
-    -> InstallsGet'
-installsGet' pIgEnterpriseId_ pIgUserId_ pIgInstallId_ pIgDeviceId_ =
-    InstallsGet'
+    -> InstallsGet
+installsGet pIgEnterpriseId_ pIgUserId_ pIgInstallId_ pIgDeviceId_ =
+    InstallsGet
     { _igEnterpriseId = pIgEnterpriseId_
     , _igUserId = pIgUserId_
     , _igInstallId = pIgInstallId_
@@ -91,29 +91,29 @@ installsGet' pIgEnterpriseId_ pIgUserId_ pIgInstallId_ pIgDeviceId_ =
     }
 
 -- | The ID of the enterprise.
-igEnterpriseId :: Lens' InstallsGet' Text
+igEnterpriseId :: Lens' InstallsGet Text
 igEnterpriseId
   = lens _igEnterpriseId
       (\ s a -> s{_igEnterpriseId = a})
 
 -- | The ID of the user.
-igUserId :: Lens' InstallsGet' Text
+igUserId :: Lens' InstallsGet Text
 igUserId = lens _igUserId (\ s a -> s{_igUserId = a})
 
 -- | The ID of the product represented by the install, e.g.
 -- \"app:com.google.android.gm\".
-igInstallId :: Lens' InstallsGet' Text
+igInstallId :: Lens' InstallsGet Text
 igInstallId
   = lens _igInstallId (\ s a -> s{_igInstallId = a})
 
 -- | The Android ID of the device.
-igDeviceId :: Lens' InstallsGet' Text
+igDeviceId :: Lens' InstallsGet Text
 igDeviceId
   = lens _igDeviceId (\ s a -> s{_igDeviceId = a})
 
-instance GoogleRequest InstallsGet' where
-        type Rs InstallsGet' = Install
-        requestClient InstallsGet'{..}
+instance GoogleRequest InstallsGet where
+        type Rs InstallsGet = Install
+        requestClient InstallsGet{..}
           = go _igEnterpriseId _igUserId _igDeviceId
               _igInstallId
               (Just AltJSON)

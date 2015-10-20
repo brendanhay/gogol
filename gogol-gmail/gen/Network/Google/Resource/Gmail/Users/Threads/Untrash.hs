@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.Threads.Untrash
       UsersThreadsUntrashResource
 
     -- * Creating a Request
-    , usersThreadsUntrash'
-    , UsersThreadsUntrash'
+    , usersThreadsUntrash
+    , UsersThreadsUntrash
 
     -- * Request Lenses
     , utuUserId
@@ -41,7 +41,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.threads.untrash@ method which the
--- 'UsersThreadsUntrash'' request conforms to.
+-- 'UsersThreadsUntrash' request conforms to.
 type UsersThreadsUntrashResource =
      Capture "userId" Text :>
        "threads" :>
@@ -51,42 +51,42 @@ type UsersThreadsUntrashResource =
 
 -- | Removes the specified thread from the trash.
 --
--- /See:/ 'usersThreadsUntrash'' smart constructor.
-data UsersThreadsUntrash' = UsersThreadsUntrash'
+-- /See:/ 'usersThreadsUntrash' smart constructor.
+data UsersThreadsUntrash = UsersThreadsUntrash
     { _utuUserId :: !Text
     , _utuId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersThreadsUntrash'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersThreadsUntrash' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'utuUserId'
 --
 -- * 'utuId'
-usersThreadsUntrash'
+usersThreadsUntrash
     :: Text -- ^ 'utuId'
     -> Text
-    -> UsersThreadsUntrash'
-usersThreadsUntrash' pUtuUserId_ pUtuId_ =
-    UsersThreadsUntrash'
+    -> UsersThreadsUntrash
+usersThreadsUntrash pUtuUserId_ pUtuId_ =
+    UsersThreadsUntrash
     { _utuUserId = pUtuUserId_
     , _utuId = pUtuId_
     }
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-utuUserId :: Lens' UsersThreadsUntrash' Text
+utuUserId :: Lens' UsersThreadsUntrash Text
 utuUserId
   = lens _utuUserId (\ s a -> s{_utuUserId = a})
 
 -- | The ID of the thread to remove from Trash.
-utuId :: Lens' UsersThreadsUntrash' Text
+utuId :: Lens' UsersThreadsUntrash Text
 utuId = lens _utuId (\ s a -> s{_utuId = a})
 
-instance GoogleRequest UsersThreadsUntrash' where
-        type Rs UsersThreadsUntrash' = Thread
-        requestClient UsersThreadsUntrash'{..}
+instance GoogleRequest UsersThreadsUntrash where
+        type Rs UsersThreadsUntrash = Thread
+        requestClient UsersThreadsUntrash{..}
           = go _utuUserId _utuId (Just AltJSON) gmailService
           where go
                   = buildClient

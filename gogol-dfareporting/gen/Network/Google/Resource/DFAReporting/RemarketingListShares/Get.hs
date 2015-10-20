@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.RemarketingListShares.Get
       RemarketingListSharesGetResource
 
     -- * Creating a Request
-    , remarketingListSharesGet'
-    , RemarketingListSharesGet'
+    , remarketingListSharesGet
+    , RemarketingListSharesGet
 
     -- * Request Lenses
     , rlsgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.remarketingListShares.get@ method which the
--- 'RemarketingListSharesGet'' request conforms to.
+-- 'RemarketingListSharesGet' request conforms to.
 type RemarketingListSharesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,46 +52,45 @@ type RemarketingListSharesGetResource =
 
 -- | Gets one remarketing list share by remarketing list ID.
 --
--- /See:/ 'remarketingListSharesGet'' smart constructor.
-data RemarketingListSharesGet' = RemarketingListSharesGet'
+-- /See:/ 'remarketingListSharesGet' smart constructor.
+data RemarketingListSharesGet = RemarketingListSharesGet
     { _rlsgProFileId         :: !Int64
     , _rlsgRemarketingListId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RemarketingListSharesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'RemarketingListSharesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rlsgProFileId'
 --
 -- * 'rlsgRemarketingListId'
-remarketingListSharesGet'
+remarketingListSharesGet
     :: Int64 -- ^ 'rlsgProFileId'
     -> Int64 -- ^ 'rlsgRemarketingListId'
-    -> RemarketingListSharesGet'
-remarketingListSharesGet' pRlsgProFileId_ pRlsgRemarketingListId_ =
-    RemarketingListSharesGet'
+    -> RemarketingListSharesGet
+remarketingListSharesGet pRlsgProFileId_ pRlsgRemarketingListId_ =
+    RemarketingListSharesGet
     { _rlsgProFileId = pRlsgProFileId_
     , _rlsgRemarketingListId = pRlsgRemarketingListId_
     }
 
 -- | User profile ID associated with this request.
-rlsgProFileId :: Lens' RemarketingListSharesGet' Int64
+rlsgProFileId :: Lens' RemarketingListSharesGet Int64
 rlsgProFileId
   = lens _rlsgProFileId
       (\ s a -> s{_rlsgProFileId = a})
 
 -- | Remarketing list ID.
-rlsgRemarketingListId :: Lens' RemarketingListSharesGet' Int64
+rlsgRemarketingListId :: Lens' RemarketingListSharesGet Int64
 rlsgRemarketingListId
   = lens _rlsgRemarketingListId
       (\ s a -> s{_rlsgRemarketingListId = a})
 
-instance GoogleRequest RemarketingListSharesGet'
-         where
-        type Rs RemarketingListSharesGet' =
+instance GoogleRequest RemarketingListSharesGet where
+        type Rs RemarketingListSharesGet =
              RemarketingListShare
-        requestClient RemarketingListSharesGet'{..}
+        requestClient RemarketingListSharesGet{..}
           = go _rlsgProFileId _rlsgRemarketingListId
               (Just AltJSON)
               dFAReportingService

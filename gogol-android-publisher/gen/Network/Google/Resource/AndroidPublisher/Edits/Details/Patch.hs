@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.Details.Patch
       EditsDetailsPatchResource
 
     -- * Creating a Request
-    , editsDetailsPatch'
-    , EditsDetailsPatch'
+    , editsDetailsPatch
+    , EditsDetailsPatch
 
     -- * Request Lenses
     , edpPackageName
@@ -42,7 +42,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.details.patch@ method which the
--- 'EditsDetailsPatch'' request conforms to.
+-- 'EditsDetailsPatch' request conforms to.
 type EditsDetailsPatchResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -54,14 +54,14 @@ type EditsDetailsPatchResource =
 
 -- | Updates app details for this edit. This method supports patch semantics.
 --
--- /See:/ 'editsDetailsPatch'' smart constructor.
-data EditsDetailsPatch' = EditsDetailsPatch'
+-- /See:/ 'editsDetailsPatch' smart constructor.
+data EditsDetailsPatch = EditsDetailsPatch
     { _edpPackageName :: !Text
     , _edpPayload     :: !AppDetails
     , _edpEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsDetailsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsDetailsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,13 +70,13 @@ data EditsDetailsPatch' = EditsDetailsPatch'
 -- * 'edpPayload'
 --
 -- * 'edpEditId'
-editsDetailsPatch'
+editsDetailsPatch
     :: Text -- ^ 'edpPackageName'
     -> AppDetails -- ^ 'edpPayload'
     -> Text -- ^ 'edpEditId'
-    -> EditsDetailsPatch'
-editsDetailsPatch' pEdpPackageName_ pEdpPayload_ pEdpEditId_ =
-    EditsDetailsPatch'
+    -> EditsDetailsPatch
+editsDetailsPatch pEdpPackageName_ pEdpPayload_ pEdpEditId_ =
+    EditsDetailsPatch
     { _edpPackageName = pEdpPackageName_
     , _edpPayload = pEdpPayload_
     , _edpEditId = pEdpEditId_
@@ -84,24 +84,24 @@ editsDetailsPatch' pEdpPackageName_ pEdpPayload_ pEdpEditId_ =
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-edpPackageName :: Lens' EditsDetailsPatch' Text
+edpPackageName :: Lens' EditsDetailsPatch Text
 edpPackageName
   = lens _edpPackageName
       (\ s a -> s{_edpPackageName = a})
 
 -- | Multipart request metadata.
-edpPayload :: Lens' EditsDetailsPatch' AppDetails
+edpPayload :: Lens' EditsDetailsPatch AppDetails
 edpPayload
   = lens _edpPayload (\ s a -> s{_edpPayload = a})
 
 -- | Unique identifier for this edit.
-edpEditId :: Lens' EditsDetailsPatch' Text
+edpEditId :: Lens' EditsDetailsPatch Text
 edpEditId
   = lens _edpEditId (\ s a -> s{_edpEditId = a})
 
-instance GoogleRequest EditsDetailsPatch' where
-        type Rs EditsDetailsPatch' = AppDetails
-        requestClient EditsDetailsPatch'{..}
+instance GoogleRequest EditsDetailsPatch where
+        type Rs EditsDetailsPatch = AppDetails
+        requestClient EditsDetailsPatch{..}
           = go _edpPackageName _edpEditId (Just AltJSON)
               _edpPayload
               androidPublisherService

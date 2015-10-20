@@ -27,8 +27,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.APKs.List
       EditsAPKsListResource
 
     -- * Creating a Request
-    , editsAPKsList'
-    , EditsAPKsList'
+    , editsAPKsList
+    , EditsAPKsList
 
     -- * Request Lenses
     , eapklPackageName
@@ -39,7 +39,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.apks.list@ method which the
--- 'EditsAPKsList'' request conforms to.
+-- 'EditsAPKsList' request conforms to.
 type EditsAPKsListResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -49,44 +49,44 @@ type EditsAPKsListResource =
                Get '[JSON] APKsListResponse
 
 --
--- /See:/ 'editsAPKsList'' smart constructor.
-data EditsAPKsList' = EditsAPKsList'
+-- /See:/ 'editsAPKsList' smart constructor.
+data EditsAPKsList = EditsAPKsList
     { _eapklPackageName :: !Text
     , _eapklEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsAPKsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsAPKsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'eapklPackageName'
 --
 -- * 'eapklEditId'
-editsAPKsList'
+editsAPKsList
     :: Text -- ^ 'eapklPackageName'
     -> Text -- ^ 'eapklEditId'
-    -> EditsAPKsList'
-editsAPKsList' pEapklPackageName_ pEapklEditId_ =
-    EditsAPKsList'
+    -> EditsAPKsList
+editsAPKsList pEapklPackageName_ pEapklEditId_ =
+    EditsAPKsList
     { _eapklPackageName = pEapklPackageName_
     , _eapklEditId = pEapklEditId_
     }
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eapklPackageName :: Lens' EditsAPKsList' Text
+eapklPackageName :: Lens' EditsAPKsList Text
 eapklPackageName
   = lens _eapklPackageName
       (\ s a -> s{_eapklPackageName = a})
 
 -- | Unique identifier for this edit.
-eapklEditId :: Lens' EditsAPKsList' Text
+eapklEditId :: Lens' EditsAPKsList Text
 eapklEditId
   = lens _eapklEditId (\ s a -> s{_eapklEditId = a})
 
-instance GoogleRequest EditsAPKsList' where
-        type Rs EditsAPKsList' = APKsListResponse
-        requestClient EditsAPKsList'{..}
+instance GoogleRequest EditsAPKsList where
+        type Rs EditsAPKsList = APKsListResponse
+        requestClient EditsAPKsList{..}
           = go _eapklPackageName _eapklEditId (Just AltJSON)
               androidPublisherService
           where go

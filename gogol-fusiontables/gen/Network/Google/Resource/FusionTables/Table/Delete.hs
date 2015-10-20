@@ -29,18 +29,18 @@ module Network.Google.Resource.FusionTables.Table.Delete
       TableDeleteResource
 
     -- * Creating a Request
-    , tableDelete'
-    , TableDelete'
+    , tableDelete
+    , TableDelete
 
     -- * Request Lenses
-    , tdTableId
+    , tddTableId
     ) where
 
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.table.delete@ method which the
--- 'TableDelete'' request conforms to.
+-- 'TableDelete' request conforms to.
 type TableDeleteResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -48,33 +48,33 @@ type TableDeleteResource =
 
 -- | Deletes a table.
 --
--- /See:/ 'tableDelete'' smart constructor.
-newtype TableDelete' = TableDelete'
-    { _tdTableId :: Text
+-- /See:/ 'tableDelete' smart constructor.
+newtype TableDelete = TableDelete
+    { _tddTableId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TableDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'TableDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tdTableId'
-tableDelete'
-    :: Text -- ^ 'tdTableId'
-    -> TableDelete'
-tableDelete' pTdTableId_ =
-    TableDelete'
-    { _tdTableId = pTdTableId_
+-- * 'tddTableId'
+tableDelete
+    :: Text -- ^ 'tddTableId'
+    -> TableDelete
+tableDelete pTddTableId_ =
+    TableDelete
+    { _tddTableId = pTddTableId_
     }
 
 -- | ID of the table to be deleted.
-tdTableId :: Lens' TableDelete' Text
-tdTableId
-  = lens _tdTableId (\ s a -> s{_tdTableId = a})
+tddTableId :: Lens' TableDelete Text
+tddTableId
+  = lens _tddTableId (\ s a -> s{_tddTableId = a})
 
-instance GoogleRequest TableDelete' where
-        type Rs TableDelete' = ()
-        requestClient TableDelete'{..}
-          = go _tdTableId (Just AltJSON) fusionTablesService
+instance GoogleRequest TableDelete where
+        type Rs TableDelete = ()
+        requestClient TableDelete{..}
+          = go _tddTableId (Just AltJSON) fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TableDeleteResource)
                       mempty

@@ -29,8 +29,8 @@ module Network.Google.Resource.TaskQueue.Tasks.Get
       TasksGetResource
 
     -- * Creating a Request
-    , tasksGet'
-    , TasksGet'
+    , tasksGet
+    , TasksGet
 
     -- * Request Lenses
     , tgTaskqueue
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
 -- | A resource alias for @taskqueue.tasks.get@ method which the
--- 'TasksGet'' request conforms to.
+-- 'TasksGet' request conforms to.
 type TasksGetResource =
      Capture "project" Text :>
        "taskqueues" :>
@@ -53,14 +53,14 @@ type TasksGetResource =
 
 -- | Get a particular task from a TaskQueue.
 --
--- /See:/ 'tasksGet'' smart constructor.
-data TasksGet' = TasksGet'
+-- /See:/ 'tasksGet' smart constructor.
+data TasksGet = TasksGet
     { _tgTaskqueue :: !Text
     , _tgProject   :: !Text
     , _tgTask      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TasksGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TasksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data TasksGet' = TasksGet'
 -- * 'tgProject'
 --
 -- * 'tgTask'
-tasksGet'
+tasksGet
     :: Text -- ^ 'tgTaskqueue'
     -> Text -- ^ 'tgProject'
     -> Text -- ^ 'tgTask'
-    -> TasksGet'
-tasksGet' pTgTaskqueue_ pTgProject_ pTgTask_ =
-    TasksGet'
+    -> TasksGet
+tasksGet pTgTaskqueue_ pTgProject_ pTgTask_ =
+    TasksGet
     { _tgTaskqueue = pTgTaskqueue_
     , _tgProject = pTgProject_
     , _tgTask = pTgTask_
     }
 
 -- | The taskqueue in which the task belongs.
-tgTaskqueue :: Lens' TasksGet' Text
+tgTaskqueue :: Lens' TasksGet Text
 tgTaskqueue
   = lens _tgTaskqueue (\ s a -> s{_tgTaskqueue = a})
 
 -- | The project under which the queue lies.
-tgProject :: Lens' TasksGet' Text
+tgProject :: Lens' TasksGet Text
 tgProject
   = lens _tgProject (\ s a -> s{_tgProject = a})
 
 -- | The task to get properties of.
-tgTask :: Lens' TasksGet' Text
+tgTask :: Lens' TasksGet Text
 tgTask = lens _tgTask (\ s a -> s{_tgTask = a})
 
-instance GoogleRequest TasksGet' where
-        type Rs TasksGet' = Task
-        requestClient TasksGet'{..}
+instance GoogleRequest TasksGet where
+        type Rs TasksGet = Task
+        requestClient TasksGet{..}
           = go _tgProject _tgTaskqueue _tgTask (Just AltJSON)
               taskQueueService
           where go

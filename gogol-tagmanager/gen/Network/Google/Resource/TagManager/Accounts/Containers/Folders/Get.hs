@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Get
       AccountsContainersFoldersGetResource
 
     -- * Creating a Request
-    , accountsContainersFoldersGet'
-    , AccountsContainersFoldersGet'
+    , accountsContainersFoldersGet
+    , AccountsContainersFoldersGet
 
     -- * Request Lenses
     , acfgContainerId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.folders.get@ method which the
--- 'AccountsContainersFoldersGet'' request conforms to.
+-- 'AccountsContainersFoldersGet' request conforms to.
 type AccountsContainersFoldersGetResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -54,14 +54,14 @@ type AccountsContainersFoldersGetResource =
 
 -- | Gets a GTM Folder.
 --
--- /See:/ 'accountsContainersFoldersGet'' smart constructor.
-data AccountsContainersFoldersGet' = AccountsContainersFoldersGet'
+-- /See:/ 'accountsContainersFoldersGet' smart constructor.
+data AccountsContainersFoldersGet = AccountsContainersFoldersGet
     { _acfgContainerId :: !Text
     , _acfgFolderId    :: !Text
     , _acfgAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersFoldersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersFoldersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,39 +70,39 @@ data AccountsContainersFoldersGet' = AccountsContainersFoldersGet'
 -- * 'acfgFolderId'
 --
 -- * 'acfgAccountId'
-accountsContainersFoldersGet'
+accountsContainersFoldersGet
     :: Text -- ^ 'acfgContainerId'
     -> Text -- ^ 'acfgFolderId'
     -> Text -- ^ 'acfgAccountId'
-    -> AccountsContainersFoldersGet'
-accountsContainersFoldersGet' pAcfgContainerId_ pAcfgFolderId_ pAcfgAccountId_ =
-    AccountsContainersFoldersGet'
+    -> AccountsContainersFoldersGet
+accountsContainersFoldersGet pAcfgContainerId_ pAcfgFolderId_ pAcfgAccountId_ =
+    AccountsContainersFoldersGet
     { _acfgContainerId = pAcfgContainerId_
     , _acfgFolderId = pAcfgFolderId_
     , _acfgAccountId = pAcfgAccountId_
     }
 
 -- | The GTM Container ID.
-acfgContainerId :: Lens' AccountsContainersFoldersGet' Text
+acfgContainerId :: Lens' AccountsContainersFoldersGet Text
 acfgContainerId
   = lens _acfgContainerId
       (\ s a -> s{_acfgContainerId = a})
 
 -- | The GTM Folder ID.
-acfgFolderId :: Lens' AccountsContainersFoldersGet' Text
+acfgFolderId :: Lens' AccountsContainersFoldersGet Text
 acfgFolderId
   = lens _acfgFolderId (\ s a -> s{_acfgFolderId = a})
 
 -- | The GTM Account ID.
-acfgAccountId :: Lens' AccountsContainersFoldersGet' Text
+acfgAccountId :: Lens' AccountsContainersFoldersGet Text
 acfgAccountId
   = lens _acfgAccountId
       (\ s a -> s{_acfgAccountId = a})
 
-instance GoogleRequest AccountsContainersFoldersGet'
+instance GoogleRequest AccountsContainersFoldersGet
          where
-        type Rs AccountsContainersFoldersGet' = Folder
-        requestClient AccountsContainersFoldersGet'{..}
+        type Rs AccountsContainersFoldersGet = Folder
+        requestClient AccountsContainersFoldersGet{..}
           = go _acfgAccountId _acfgContainerId _acfgFolderId
               (Just AltJSON)
               tagManagerService

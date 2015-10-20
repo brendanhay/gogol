@@ -29,21 +29,21 @@ module Network.Google.Resource.Drive.Replies.Update
       RepliesUpdateResource
 
     -- * Creating a Request
-    , repliesUpdate'
-    , RepliesUpdate'
+    , repliesUpdate
+    , RepliesUpdate
 
     -- * Request Lenses
-    , repPayload
-    , repReplyId
-    , repFileId
-    , repCommentId
+    , ruPayload
+    , ruReplyId
+    , ruFileId
+    , ruCommentId
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.replies.update@ method which the
--- 'RepliesUpdate'' request conforms to.
+-- 'RepliesUpdate' request conforms to.
 type RepliesUpdateResource =
      "files" :>
        Capture "fileId" Text :>
@@ -57,65 +57,63 @@ type RepliesUpdateResource =
 
 -- | Updates an existing reply.
 --
--- /See:/ 'repliesUpdate'' smart constructor.
-data RepliesUpdate' = RepliesUpdate'
-    { _repPayload   :: !CommentReply
-    , _repReplyId   :: !Text
-    , _repFileId    :: !Text
-    , _repCommentId :: !Text
+-- /See:/ 'repliesUpdate' smart constructor.
+data RepliesUpdate = RepliesUpdate
+    { _ruPayload   :: !CommentReply
+    , _ruReplyId   :: !Text
+    , _ruFileId    :: !Text
+    , _ruCommentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RepliesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'RepliesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'repPayload'
+-- * 'ruPayload'
 --
--- * 'repReplyId'
+-- * 'ruReplyId'
 --
--- * 'repFileId'
+-- * 'ruFileId'
 --
--- * 'repCommentId'
-repliesUpdate'
-    :: CommentReply -- ^ 'repPayload'
-    -> Text -- ^ 'repReplyId'
-    -> Text -- ^ 'repFileId'
-    -> Text -- ^ 'repCommentId'
-    -> RepliesUpdate'
-repliesUpdate' pRepPayload_ pRepReplyId_ pRepFileId_ pRepCommentId_ =
-    RepliesUpdate'
-    { _repPayload = pRepPayload_
-    , _repReplyId = pRepReplyId_
-    , _repFileId = pRepFileId_
-    , _repCommentId = pRepCommentId_
+-- * 'ruCommentId'
+repliesUpdate
+    :: CommentReply -- ^ 'ruPayload'
+    -> Text -- ^ 'ruReplyId'
+    -> Text -- ^ 'ruFileId'
+    -> Text -- ^ 'ruCommentId'
+    -> RepliesUpdate
+repliesUpdate pRuPayload_ pRuReplyId_ pRuFileId_ pRuCommentId_ =
+    RepliesUpdate
+    { _ruPayload = pRuPayload_
+    , _ruReplyId = pRuReplyId_
+    , _ruFileId = pRuFileId_
+    , _ruCommentId = pRuCommentId_
     }
 
 -- | Multipart request metadata.
-repPayload :: Lens' RepliesUpdate' CommentReply
-repPayload
-  = lens _repPayload (\ s a -> s{_repPayload = a})
+ruPayload :: Lens' RepliesUpdate CommentReply
+ruPayload
+  = lens _ruPayload (\ s a -> s{_ruPayload = a})
 
 -- | The ID of the reply.
-repReplyId :: Lens' RepliesUpdate' Text
-repReplyId
-  = lens _repReplyId (\ s a -> s{_repReplyId = a})
+ruReplyId :: Lens' RepliesUpdate Text
+ruReplyId
+  = lens _ruReplyId (\ s a -> s{_ruReplyId = a})
 
 -- | The ID of the file.
-repFileId :: Lens' RepliesUpdate' Text
-repFileId
-  = lens _repFileId (\ s a -> s{_repFileId = a})
+ruFileId :: Lens' RepliesUpdate Text
+ruFileId = lens _ruFileId (\ s a -> s{_ruFileId = a})
 
 -- | The ID of the comment.
-repCommentId :: Lens' RepliesUpdate' Text
-repCommentId
-  = lens _repCommentId (\ s a -> s{_repCommentId = a})
+ruCommentId :: Lens' RepliesUpdate Text
+ruCommentId
+  = lens _ruCommentId (\ s a -> s{_ruCommentId = a})
 
-instance GoogleRequest RepliesUpdate' where
-        type Rs RepliesUpdate' = CommentReply
-        requestClient RepliesUpdate'{..}
-          = go _repFileId _repCommentId _repReplyId
-              (Just AltJSON)
-              _repPayload
+instance GoogleRequest RepliesUpdate where
+        type Rs RepliesUpdate = CommentReply
+        requestClient RepliesUpdate{..}
+          = go _ruFileId _ruCommentId _ruReplyId (Just AltJSON)
+              _ruPayload
               driveService
           where go
                   = buildClient (Proxy :: Proxy RepliesUpdateResource)

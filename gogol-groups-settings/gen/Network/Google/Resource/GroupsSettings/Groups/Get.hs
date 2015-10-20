@@ -29,8 +29,8 @@ module Network.Google.Resource.GroupsSettings.Groups.Get
       GroupsGetResource
 
     -- * Creating a Request
-    , groupsGet'
-    , GroupsGet'
+    , groupsGet
+    , GroupsGet
 
     -- * Request Lenses
     , ggGroupUniqueId
@@ -40,40 +40,40 @@ import           Network.Google.GroupsSettings.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @groupsSettings.groups.get@ method which the
--- 'GroupsGet'' request conforms to.
+-- 'GroupsGet' request conforms to.
 type GroupsGetResource =
      Capture "groupUniqueId" Text :>
        QueryParam "alt" AltJSON :> Get '[JSON] Groups
 
 -- | Gets one resource by id.
 --
--- /See:/ 'groupsGet'' smart constructor.
-newtype GroupsGet' = GroupsGet'
+-- /See:/ 'groupsGet' smart constructor.
+newtype GroupsGet = GroupsGet
     { _ggGroupUniqueId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GroupsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'GroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ggGroupUniqueId'
-groupsGet'
+groupsGet
     :: Text -- ^ 'ggGroupUniqueId'
-    -> GroupsGet'
-groupsGet' pGgGroupUniqueId_ =
-    GroupsGet'
+    -> GroupsGet
+groupsGet pGgGroupUniqueId_ =
+    GroupsGet
     { _ggGroupUniqueId = pGgGroupUniqueId_
     }
 
 -- | The resource ID
-ggGroupUniqueId :: Lens' GroupsGet' Text
+ggGroupUniqueId :: Lens' GroupsGet Text
 ggGroupUniqueId
   = lens _ggGroupUniqueId
       (\ s a -> s{_ggGroupUniqueId = a})
 
-instance GoogleRequest GroupsGet' where
-        type Rs GroupsGet' = Groups
-        requestClient GroupsGet'{..}
+instance GoogleRequest GroupsGet where
+        type Rs GroupsGet = Groups
+        requestClient GroupsGet{..}
           = go _ggGroupUniqueId (Just AltJSON)
               groupsSettingsService
           where go

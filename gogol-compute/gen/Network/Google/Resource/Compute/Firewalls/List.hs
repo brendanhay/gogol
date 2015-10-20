@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Firewalls.List
       FirewallsListResource
 
     -- * Creating a Request
-    , firewallsList'
-    , FirewallsList'
+    , firewallsList
+    , FirewallsList
 
     -- * Request Lenses
     , flProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.firewalls.list@ method which the
--- 'FirewallsList'' request conforms to.
+-- 'FirewallsList' request conforms to.
 type FirewallsListResource =
      Capture "project" Text :>
        "global" :>
@@ -57,15 +57,15 @@ type FirewallsListResource =
 -- | Retrieves the list of firewall resources available to the specified
 -- project.
 --
--- /See:/ 'firewallsList'' smart constructor.
-data FirewallsList' = FirewallsList'
+-- /See:/ 'firewallsList' smart constructor.
+data FirewallsList = FirewallsList
     { _flProject    :: !Text
     , _flFilter     :: !(Maybe Text)
     , _flPageToken  :: !(Maybe Text)
     , _flMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FirewallsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'FirewallsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,11 +76,11 @@ data FirewallsList' = FirewallsList'
 -- * 'flPageToken'
 --
 -- * 'flMaxResults'
-firewallsList'
+firewallsList
     :: Text -- ^ 'flProject'
-    -> FirewallsList'
-firewallsList' pFlProject_ =
-    FirewallsList'
+    -> FirewallsList
+firewallsList pFlProject_ =
+    FirewallsList
     { _flProject = pFlProject_
     , _flFilter = Nothing
     , _flPageToken = Nothing
@@ -88,7 +88,7 @@ firewallsList' pFlProject_ =
     }
 
 -- | Project ID for this request.
-flProject :: Lens' FirewallsList' Text
+flProject :: Lens' FirewallsList Text
 flProject
   = lens _flProject (\ s a -> s{_flProject = a})
 
@@ -103,24 +103,24 @@ flProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-flFilter :: Lens' FirewallsList' (Maybe Text)
+flFilter :: Lens' FirewallsList (Maybe Text)
 flFilter = lens _flFilter (\ s a -> s{_flFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-flPageToken :: Lens' FirewallsList' (Maybe Text)
+flPageToken :: Lens' FirewallsList (Maybe Text)
 flPageToken
   = lens _flPageToken (\ s a -> s{_flPageToken = a})
 
 -- | Maximum count of results to be returned.
-flMaxResults :: Lens' FirewallsList' Word32
+flMaxResults :: Lens' FirewallsList Word32
 flMaxResults
   = lens _flMaxResults (\ s a -> s{_flMaxResults = a})
 
-instance GoogleRequest FirewallsList' where
-        type Rs FirewallsList' = FirewallList
-        requestClient FirewallsList'{..}
+instance GoogleRequest FirewallsList where
+        type Rs FirewallsList = FirewallList
+        requestClient FirewallsList{..}
           = go _flProject _flFilter _flPageToken
               (Just _flMaxResults)
               (Just AltJSON)

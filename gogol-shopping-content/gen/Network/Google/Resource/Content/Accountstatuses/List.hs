@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Accountstatuses.List
       AccountstatusesListResource
 
     -- * Creating a Request
-    , accountstatusesList'
-    , AccountstatusesList'
+    , accountstatusesList
+    , AccountstatusesList
 
     -- * Request Lenses
     , acc3MerchantId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accountstatuses.list@ method which the
--- 'AccountstatusesList'' request conforms to.
+-- 'AccountstatusesList' request conforms to.
 type AccountstatusesListResource =
      Capture "merchantId" Word64 :>
        "accountstatuses" :>
@@ -53,14 +53,14 @@ type AccountstatusesListResource =
 
 -- | Lists the statuses of the sub-accounts in your Merchant Center account.
 --
--- /See:/ 'accountstatusesList'' smart constructor.
-data AccountstatusesList' = AccountstatusesList'
+-- /See:/ 'accountstatusesList' smart constructor.
+data AccountstatusesList = AccountstatusesList
     { _acc3MerchantId :: !Word64
     , _acc3PageToken  :: !(Maybe Text)
     , _acc3MaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountstatusesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountstatusesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,39 +69,39 @@ data AccountstatusesList' = AccountstatusesList'
 -- * 'acc3PageToken'
 --
 -- * 'acc3MaxResults'
-accountstatusesList'
+accountstatusesList
     :: Word64 -- ^ 'acc3MerchantId'
-    -> AccountstatusesList'
-accountstatusesList' pAcc3MerchantId_ =
-    AccountstatusesList'
+    -> AccountstatusesList
+accountstatusesList pAcc3MerchantId_ =
+    AccountstatusesList
     { _acc3MerchantId = pAcc3MerchantId_
     , _acc3PageToken = Nothing
     , _acc3MaxResults = Nothing
     }
 
 -- | The ID of the managing account.
-acc3MerchantId :: Lens' AccountstatusesList' Word64
+acc3MerchantId :: Lens' AccountstatusesList Word64
 acc3MerchantId
   = lens _acc3MerchantId
       (\ s a -> s{_acc3MerchantId = a})
 
 -- | The token returned by the previous request.
-acc3PageToken :: Lens' AccountstatusesList' (Maybe Text)
+acc3PageToken :: Lens' AccountstatusesList (Maybe Text)
 acc3PageToken
   = lens _acc3PageToken
       (\ s a -> s{_acc3PageToken = a})
 
 -- | The maximum number of account statuses to return in the response, used
 -- for paging.
-acc3MaxResults :: Lens' AccountstatusesList' (Maybe Word32)
+acc3MaxResults :: Lens' AccountstatusesList (Maybe Word32)
 acc3MaxResults
   = lens _acc3MaxResults
       (\ s a -> s{_acc3MaxResults = a})
 
-instance GoogleRequest AccountstatusesList' where
-        type Rs AccountstatusesList' =
+instance GoogleRequest AccountstatusesList where
+        type Rs AccountstatusesList =
              AccountstatusesListResponse
-        requestClient AccountstatusesList'{..}
+        requestClient AccountstatusesList{..}
           = go _acc3MerchantId _acc3PageToken _acc3MaxResults
               (Just AltJSON)
               shoppingContentService

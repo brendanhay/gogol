@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.SSLCertificates.List
       SSLCertificatesListResource
 
     -- * Creating a Request
-    , sslCertificatesList'
-    , SSLCertificatesList'
+    , sslCertificatesList
+    , SSLCertificatesList
 
     -- * Request Lenses
     , sclProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.sslCertificates.list@ method which the
--- 'SSLCertificatesList'' request conforms to.
+-- 'SSLCertificatesList' request conforms to.
 type SSLCertificatesListResource =
      Capture "project" Text :>
        "global" :>
@@ -58,15 +58,15 @@ type SSLCertificatesListResource =
 -- | Retrieves the list of SslCertificate resources available to the
 -- specified project.
 --
--- /See:/ 'sslCertificatesList'' smart constructor.
-data SSLCertificatesList' = SSLCertificatesList'
+-- /See:/ 'sslCertificatesList' smart constructor.
+data SSLCertificatesList = SSLCertificatesList
     { _sclProject    :: !Text
     , _sclFilter     :: !(Maybe Text)
     , _sclPageToken  :: !(Maybe Text)
     , _sclMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SSLCertificatesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'SSLCertificatesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,11 +77,11 @@ data SSLCertificatesList' = SSLCertificatesList'
 -- * 'sclPageToken'
 --
 -- * 'sclMaxResults'
-sslCertificatesList'
+sslCertificatesList
     :: Text -- ^ 'sclProject'
-    -> SSLCertificatesList'
-sslCertificatesList' pSclProject_ =
-    SSLCertificatesList'
+    -> SSLCertificatesList
+sslCertificatesList pSclProject_ =
+    SSLCertificatesList
     { _sclProject = pSclProject_
     , _sclFilter = Nothing
     , _sclPageToken = Nothing
@@ -89,7 +89,7 @@ sslCertificatesList' pSclProject_ =
     }
 
 -- | Name of the project scoping this request.
-sclProject :: Lens' SSLCertificatesList' Text
+sclProject :: Lens' SSLCertificatesList Text
 sclProject
   = lens _sclProject (\ s a -> s{_sclProject = a})
 
@@ -104,26 +104,26 @@ sclProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-sclFilter :: Lens' SSLCertificatesList' (Maybe Text)
+sclFilter :: Lens' SSLCertificatesList (Maybe Text)
 sclFilter
   = lens _sclFilter (\ s a -> s{_sclFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-sclPageToken :: Lens' SSLCertificatesList' (Maybe Text)
+sclPageToken :: Lens' SSLCertificatesList (Maybe Text)
 sclPageToken
   = lens _sclPageToken (\ s a -> s{_sclPageToken = a})
 
 -- | Maximum count of results to be returned.
-sclMaxResults :: Lens' SSLCertificatesList' Word32
+sclMaxResults :: Lens' SSLCertificatesList Word32
 sclMaxResults
   = lens _sclMaxResults
       (\ s a -> s{_sclMaxResults = a})
 
-instance GoogleRequest SSLCertificatesList' where
-        type Rs SSLCertificatesList' = SSLCertificateList
-        requestClient SSLCertificatesList'{..}
+instance GoogleRequest SSLCertificatesList where
+        type Rs SSLCertificatesList = SSLCertificateList
+        requestClient SSLCertificatesList{..}
           = go _sclProject _sclFilter _sclPageToken
               (Just _sclMaxResults)
               (Just AltJSON)

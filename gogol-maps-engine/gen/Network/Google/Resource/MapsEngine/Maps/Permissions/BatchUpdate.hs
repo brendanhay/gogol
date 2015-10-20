@@ -31,8 +31,8 @@ module Network.Google.Resource.MapsEngine.Maps.Permissions.BatchUpdate
       MapsPermissionsBatchUpdateResource
 
     -- * Creating a Request
-    , mapsPermissionsBatchUpdate'
-    , MapsPermissionsBatchUpdate'
+    , mapsPermissionsBatchUpdate
+    , MapsPermissionsBatchUpdate
 
     -- * Request Lenses
     , mpbuPayload
@@ -43,7 +43,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.maps.permissions.batchUpdate@ method which the
--- 'MapsPermissionsBatchUpdate'' request conforms to.
+-- 'MapsPermissionsBatchUpdate' request conforms to.
 type MapsPermissionsBatchUpdateResource =
      "maps" :>
        Capture "id" Text :>
@@ -57,43 +57,43 @@ type MapsPermissionsBatchUpdateResource =
 -- can hold up to 20 different permission entries. Each batchInsert request
 -- is atomic.
 --
--- /See:/ 'mapsPermissionsBatchUpdate'' smart constructor.
-data MapsPermissionsBatchUpdate' = MapsPermissionsBatchUpdate'
+-- /See:/ 'mapsPermissionsBatchUpdate' smart constructor.
+data MapsPermissionsBatchUpdate = MapsPermissionsBatchUpdate
     { _mpbuPayload :: !PermissionsBatchUpdateRequest
     , _mpbuId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MapsPermissionsBatchUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'MapsPermissionsBatchUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mpbuPayload'
 --
 -- * 'mpbuId'
-mapsPermissionsBatchUpdate'
+mapsPermissionsBatchUpdate
     :: PermissionsBatchUpdateRequest -- ^ 'mpbuPayload'
     -> Text -- ^ 'mpbuId'
-    -> MapsPermissionsBatchUpdate'
-mapsPermissionsBatchUpdate' pMpbuPayload_ pMpbuId_ =
-    MapsPermissionsBatchUpdate'
+    -> MapsPermissionsBatchUpdate
+mapsPermissionsBatchUpdate pMpbuPayload_ pMpbuId_ =
+    MapsPermissionsBatchUpdate
     { _mpbuPayload = pMpbuPayload_
     , _mpbuId = pMpbuId_
     }
 
 -- | Multipart request metadata.
-mpbuPayload :: Lens' MapsPermissionsBatchUpdate' PermissionsBatchUpdateRequest
+mpbuPayload :: Lens' MapsPermissionsBatchUpdate PermissionsBatchUpdateRequest
 mpbuPayload
   = lens _mpbuPayload (\ s a -> s{_mpbuPayload = a})
 
 -- | The ID of the asset to which permissions will be added.
-mpbuId :: Lens' MapsPermissionsBatchUpdate' Text
+mpbuId :: Lens' MapsPermissionsBatchUpdate Text
 mpbuId = lens _mpbuId (\ s a -> s{_mpbuId = a})
 
-instance GoogleRequest MapsPermissionsBatchUpdate'
+instance GoogleRequest MapsPermissionsBatchUpdate
          where
-        type Rs MapsPermissionsBatchUpdate' =
+        type Rs MapsPermissionsBatchUpdate =
              PermissionsBatchUpdateResponse
-        requestClient MapsPermissionsBatchUpdate'{..}
+        requestClient MapsPermissionsBatchUpdate{..}
           = go _mpbuId (Just AltJSON) _mpbuPayload
               mapsEngineService
           where go

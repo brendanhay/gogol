@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.OperatingSystems.Get
       OperatingSystemsGetResource
 
     -- * Creating a Request
-    , operatingSystemsGet'
-    , OperatingSystemsGet'
+    , operatingSystemsGet
+    , OperatingSystemsGet
 
     -- * Request Lenses
     , osgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.operatingSystems.get@ method which the
--- 'OperatingSystemsGet'' request conforms to.
+-- 'OperatingSystemsGet' request conforms to.
 type OperatingSystemsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,42 +52,42 @@ type OperatingSystemsGetResource =
 
 -- | Gets one operating system by DART ID.
 --
--- /See:/ 'operatingSystemsGet'' smart constructor.
-data OperatingSystemsGet' = OperatingSystemsGet'
+-- /See:/ 'operatingSystemsGet' smart constructor.
+data OperatingSystemsGet = OperatingSystemsGet
     { _osgProFileId :: !Int64
     , _osgDartId    :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperatingSystemsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'OperatingSystemsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'osgProFileId'
 --
 -- * 'osgDartId'
-operatingSystemsGet'
+operatingSystemsGet
     :: Int64 -- ^ 'osgProFileId'
     -> Int64 -- ^ 'osgDartId'
-    -> OperatingSystemsGet'
-operatingSystemsGet' pOsgProFileId_ pOsgDartId_ =
-    OperatingSystemsGet'
+    -> OperatingSystemsGet
+operatingSystemsGet pOsgProFileId_ pOsgDartId_ =
+    OperatingSystemsGet
     { _osgProFileId = pOsgProFileId_
     , _osgDartId = pOsgDartId_
     }
 
 -- | User profile ID associated with this request.
-osgProFileId :: Lens' OperatingSystemsGet' Int64
+osgProFileId :: Lens' OperatingSystemsGet Int64
 osgProFileId
   = lens _osgProFileId (\ s a -> s{_osgProFileId = a})
 
 -- | Operating system DART ID.
-osgDartId :: Lens' OperatingSystemsGet' Int64
+osgDartId :: Lens' OperatingSystemsGet Int64
 osgDartId
   = lens _osgDartId (\ s a -> s{_osgDartId = a})
 
-instance GoogleRequest OperatingSystemsGet' where
-        type Rs OperatingSystemsGet' = OperatingSystem
-        requestClient OperatingSystemsGet'{..}
+instance GoogleRequest OperatingSystemsGet where
+        type Rs OperatingSystemsGet = OperatingSystem
+        requestClient OperatingSystemsGet{..}
           = go _osgProFileId _osgDartId (Just AltJSON)
               dFAReportingService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Get
       ManagementProFilesGetResource
 
     -- * Creating a Request
-    , managementProFilesGet'
-    , ManagementProFilesGet'
+    , managementProFilesGet
+    , ManagementProFilesGet
 
     -- * Request Lenses
     , mpfgWebPropertyId
@@ -42,7 +42,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profiles.get@ method which the
--- 'ManagementProFilesGet'' request conforms to.
+-- 'ManagementProFilesGet' request conforms to.
 type ManagementProFilesGetResource =
      "management" :>
        "accounts" :>
@@ -55,14 +55,14 @@ type ManagementProFilesGetResource =
 
 -- | Gets a view (profile) to which the user has access.
 --
--- /See:/ 'managementProFilesGet'' smart constructor.
-data ManagementProFilesGet' = ManagementProFilesGet'
+-- /See:/ 'managementProFilesGet' smart constructor.
+data ManagementProFilesGet = ManagementProFilesGet
     { _mpfgWebPropertyId :: !Text
     , _mpfgProFileId     :: !Text
     , _mpfgAccountId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementProFilesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementProFilesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,39 +71,39 @@ data ManagementProFilesGet' = ManagementProFilesGet'
 -- * 'mpfgProFileId'
 --
 -- * 'mpfgAccountId'
-managementProFilesGet'
+managementProFilesGet
     :: Text -- ^ 'mpfgWebPropertyId'
     -> Text -- ^ 'mpfgProFileId'
     -> Text -- ^ 'mpfgAccountId'
-    -> ManagementProFilesGet'
-managementProFilesGet' pMpfgWebPropertyId_ pMpfgProFileId_ pMpfgAccountId_ =
-    ManagementProFilesGet'
+    -> ManagementProFilesGet
+managementProFilesGet pMpfgWebPropertyId_ pMpfgProFileId_ pMpfgAccountId_ =
+    ManagementProFilesGet
     { _mpfgWebPropertyId = pMpfgWebPropertyId_
     , _mpfgProFileId = pMpfgProFileId_
     , _mpfgAccountId = pMpfgAccountId_
     }
 
 -- | Web property ID to retrieve the goal for.
-mpfgWebPropertyId :: Lens' ManagementProFilesGet' Text
+mpfgWebPropertyId :: Lens' ManagementProFilesGet Text
 mpfgWebPropertyId
   = lens _mpfgWebPropertyId
       (\ s a -> s{_mpfgWebPropertyId = a})
 
 -- | View (Profile) ID to retrieve the goal for.
-mpfgProFileId :: Lens' ManagementProFilesGet' Text
+mpfgProFileId :: Lens' ManagementProFilesGet Text
 mpfgProFileId
   = lens _mpfgProFileId
       (\ s a -> s{_mpfgProFileId = a})
 
 -- | Account ID to retrieve the goal for.
-mpfgAccountId :: Lens' ManagementProFilesGet' Text
+mpfgAccountId :: Lens' ManagementProFilesGet Text
 mpfgAccountId
   = lens _mpfgAccountId
       (\ s a -> s{_mpfgAccountId = a})
 
-instance GoogleRequest ManagementProFilesGet' where
-        type Rs ManagementProFilesGet' = ProFile
-        requestClient ManagementProFilesGet'{..}
+instance GoogleRequest ManagementProFilesGet where
+        type Rs ManagementProFilesGet = ProFile
+        requestClient ManagementProFilesGet{..}
           = go _mpfgAccountId _mpfgWebPropertyId _mpfgProFileId
               (Just AltJSON)
               analyticsService

@@ -29,8 +29,8 @@ module Network.Google.Resource.Autoscaler.ZoneOperations.Delete
       ZoneOperationsDeleteResource
 
     -- * Creating a Request
-    , zoneOperationsDelete'
-    , ZoneOperationsDelete'
+    , zoneOperationsDelete
+    , ZoneOperationsDelete
 
     -- * Request Lenses
     , zodProject
@@ -42,7 +42,7 @@ import           Network.Google.Autoscaler.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @autoscaler.zoneOperations.delete@ method which the
--- 'ZoneOperationsDelete'' request conforms to.
+-- 'ZoneOperationsDelete' request conforms to.
 type ZoneOperationsDeleteResource =
      Capture "project" Text :>
        "zones" :>
@@ -53,14 +53,14 @@ type ZoneOperationsDeleteResource =
 
 -- | Deletes the specified zone-specific operation resource.
 --
--- /See:/ 'zoneOperationsDelete'' smart constructor.
-data ZoneOperationsDelete' = ZoneOperationsDelete'
+-- /See:/ 'zoneOperationsDelete' smart constructor.
+data ZoneOperationsDelete = ZoneOperationsDelete
     { _zodProject   :: !Text
     , _zodOperation :: !Text
     , _zodZone      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ZoneOperationsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ZoneOperationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,32 +69,32 @@ data ZoneOperationsDelete' = ZoneOperationsDelete'
 -- * 'zodOperation'
 --
 -- * 'zodZone'
-zoneOperationsDelete'
+zoneOperationsDelete
     :: Text -- ^ 'zodProject'
     -> Text -- ^ 'zodOperation'
     -> Text -- ^ 'zodZone'
-    -> ZoneOperationsDelete'
-zoneOperationsDelete' pZodProject_ pZodOperation_ pZodZone_ =
-    ZoneOperationsDelete'
+    -> ZoneOperationsDelete
+zoneOperationsDelete pZodProject_ pZodOperation_ pZodZone_ =
+    ZoneOperationsDelete
     { _zodProject = pZodProject_
     , _zodOperation = pZodOperation_
     , _zodZone = pZodZone_
     }
 
-zodProject :: Lens' ZoneOperationsDelete' Text
+zodProject :: Lens' ZoneOperationsDelete Text
 zodProject
   = lens _zodProject (\ s a -> s{_zodProject = a})
 
-zodOperation :: Lens' ZoneOperationsDelete' Text
+zodOperation :: Lens' ZoneOperationsDelete Text
 zodOperation
   = lens _zodOperation (\ s a -> s{_zodOperation = a})
 
-zodZone :: Lens' ZoneOperationsDelete' Text
+zodZone :: Lens' ZoneOperationsDelete Text
 zodZone = lens _zodZone (\ s a -> s{_zodZone = a})
 
-instance GoogleRequest ZoneOperationsDelete' where
-        type Rs ZoneOperationsDelete' = ()
-        requestClient ZoneOperationsDelete'{..}
+instance GoogleRequest ZoneOperationsDelete where
+        type Rs ZoneOperationsDelete = ()
+        requestClient ZoneOperationsDelete{..}
           = go _zodProject _zodZone _zodOperation
               (Just AltJSON)
               autoscalerService

@@ -29,8 +29,8 @@ module Network.Google.Resource.SiteVerification.WebResource.GetToken
       WebResourceGetTokenResource
 
     -- * Creating a Request
-    , webResourceGetToken'
-    , WebResourceGetToken'
+    , webResourceGetToken
+    , WebResourceGetToken
 
     -- * Request Lenses
     , wrgtPayload
@@ -40,7 +40,7 @@ import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.getToken@ method which the
--- 'WebResourceGetToken'' request conforms to.
+-- 'WebResourceGetToken' request conforms to.
 type WebResourceGetTokenResource =
      "token" :>
        QueryParam "alt" AltJSON :>
@@ -52,33 +52,33 @@ type WebResourceGetTokenResource =
 
 -- | Get a verification token for placing on a website or domain.
 --
--- /See:/ 'webResourceGetToken'' smart constructor.
-newtype WebResourceGetToken' = WebResourceGetToken'
+-- /See:/ 'webResourceGetToken' smart constructor.
+newtype WebResourceGetToken = WebResourceGetToken
     { _wrgtPayload :: SiteVerificationWebResourceGettokenRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'WebResourceGetToken'' with the minimum fields required to make a request.
+-- | Creates a value of 'WebResourceGetToken' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'wrgtPayload'
-webResourceGetToken'
+webResourceGetToken
     :: SiteVerificationWebResourceGettokenRequest -- ^ 'wrgtPayload'
-    -> WebResourceGetToken'
-webResourceGetToken' pWrgtPayload_ =
-    WebResourceGetToken'
+    -> WebResourceGetToken
+webResourceGetToken pWrgtPayload_ =
+    WebResourceGetToken
     { _wrgtPayload = pWrgtPayload_
     }
 
 -- | Multipart request metadata.
-wrgtPayload :: Lens' WebResourceGetToken' SiteVerificationWebResourceGettokenRequest
+wrgtPayload :: Lens' WebResourceGetToken SiteVerificationWebResourceGettokenRequest
 wrgtPayload
   = lens _wrgtPayload (\ s a -> s{_wrgtPayload = a})
 
-instance GoogleRequest WebResourceGetToken' where
-        type Rs WebResourceGetToken' =
+instance GoogleRequest WebResourceGetToken where
+        type Rs WebResourceGetToken =
              SiteVerificationWebResourceGettokenResponse
-        requestClient WebResourceGetToken'{..}
+        requestClient WebResourceGetToken{..}
           = go (Just AltJSON) _wrgtPayload
               siteVerificationService
           where go

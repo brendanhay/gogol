@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Filters.Patch
       ManagementFiltersPatchResource
 
     -- * Creating a Request
-    , managementFiltersPatch'
-    , ManagementFiltersPatch'
+    , managementFiltersPatch
+    , ManagementFiltersPatch
 
     -- * Request Lenses
     , mfpFilterId
@@ -42,7 +42,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.filters.patch@ method which the
--- 'ManagementFiltersPatch'' request conforms to.
+-- 'ManagementFiltersPatch' request conforms to.
 type ManagementFiltersPatchResource =
      "management" :>
        "accounts" :>
@@ -54,14 +54,14 @@ type ManagementFiltersPatchResource =
 
 -- | Updates an existing filter. This method supports patch semantics.
 --
--- /See:/ 'managementFiltersPatch'' smart constructor.
-data ManagementFiltersPatch' = ManagementFiltersPatch'
+-- /See:/ 'managementFiltersPatch' smart constructor.
+data ManagementFiltersPatch = ManagementFiltersPatch
     { _mfpFilterId  :: !Text
     , _mfpPayload   :: !Filter
     , _mfpAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementFiltersPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementFiltersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,36 +70,36 @@ data ManagementFiltersPatch' = ManagementFiltersPatch'
 -- * 'mfpPayload'
 --
 -- * 'mfpAccountId'
-managementFiltersPatch'
+managementFiltersPatch
     :: Text -- ^ 'mfpFilterId'
     -> Filter -- ^ 'mfpPayload'
     -> Text -- ^ 'mfpAccountId'
-    -> ManagementFiltersPatch'
-managementFiltersPatch' pMfpFilterId_ pMfpPayload_ pMfpAccountId_ =
-    ManagementFiltersPatch'
+    -> ManagementFiltersPatch
+managementFiltersPatch pMfpFilterId_ pMfpPayload_ pMfpAccountId_ =
+    ManagementFiltersPatch
     { _mfpFilterId = pMfpFilterId_
     , _mfpPayload = pMfpPayload_
     , _mfpAccountId = pMfpAccountId_
     }
 
 -- | ID of the filter to be updated.
-mfpFilterId :: Lens' ManagementFiltersPatch' Text
+mfpFilterId :: Lens' ManagementFiltersPatch Text
 mfpFilterId
   = lens _mfpFilterId (\ s a -> s{_mfpFilterId = a})
 
 -- | Multipart request metadata.
-mfpPayload :: Lens' ManagementFiltersPatch' Filter
+mfpPayload :: Lens' ManagementFiltersPatch Filter
 mfpPayload
   = lens _mfpPayload (\ s a -> s{_mfpPayload = a})
 
 -- | Account ID to which the filter belongs.
-mfpAccountId :: Lens' ManagementFiltersPatch' Text
+mfpAccountId :: Lens' ManagementFiltersPatch Text
 mfpAccountId
   = lens _mfpAccountId (\ s a -> s{_mfpAccountId = a})
 
-instance GoogleRequest ManagementFiltersPatch' where
-        type Rs ManagementFiltersPatch' = Filter
-        requestClient ManagementFiltersPatch'{..}
+instance GoogleRequest ManagementFiltersPatch where
+        type Rs ManagementFiltersPatch = Filter
+        requestClient ManagementFiltersPatch{..}
           = go _mfpAccountId _mfpFilterId (Just AltJSON)
               _mfpPayload
               analyticsService

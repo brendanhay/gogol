@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.Pages.Update
       PagesUpdateResource
 
     -- * Creating a Request
-    , pagesUpdate'
-    , PagesUpdate'
+    , pagesUpdate
+    , PagesUpdate
 
     -- * Request Lenses
     , puuBlogId
@@ -44,7 +44,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.pages.update@ method which the
--- 'PagesUpdate'' request conforms to.
+-- 'PagesUpdate' request conforms to.
 type PagesUpdateResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -57,8 +57,8 @@ type PagesUpdateResource =
 
 -- | Update a page.
 --
--- /See:/ 'pagesUpdate'' smart constructor.
-data PagesUpdate' = PagesUpdate'
+-- /See:/ 'pagesUpdate' smart constructor.
+data PagesUpdate = PagesUpdate
     { _puuBlogId  :: !Text
     , _puuPageId  :: !Text
     , _puuPayload :: !Page
@@ -66,7 +66,7 @@ data PagesUpdate' = PagesUpdate'
     , _puuPublish :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PagesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'PagesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,13 +79,13 @@ data PagesUpdate' = PagesUpdate'
 -- * 'puuRevert'
 --
 -- * 'puuPublish'
-pagesUpdate'
+pagesUpdate
     :: Text -- ^ 'puuBlogId'
     -> Text -- ^ 'puuPageId'
     -> Page -- ^ 'puuPayload'
-    -> PagesUpdate'
-pagesUpdate' pPuuBlogId_ pPuuPageId_ pPuuPayload_ =
-    PagesUpdate'
+    -> PagesUpdate
+pagesUpdate pPuuBlogId_ pPuuPageId_ pPuuPayload_ =
+    PagesUpdate
     { _puuBlogId = pPuuBlogId_
     , _puuPageId = pPuuPageId_
     , _puuPayload = pPuuPayload_
@@ -94,35 +94,35 @@ pagesUpdate' pPuuBlogId_ pPuuPageId_ pPuuPayload_ =
     }
 
 -- | The ID of the Blog.
-puuBlogId :: Lens' PagesUpdate' Text
+puuBlogId :: Lens' PagesUpdate Text
 puuBlogId
   = lens _puuBlogId (\ s a -> s{_puuBlogId = a})
 
 -- | The ID of the Page.
-puuPageId :: Lens' PagesUpdate' Text
+puuPageId :: Lens' PagesUpdate Text
 puuPageId
   = lens _puuPageId (\ s a -> s{_puuPageId = a})
 
 -- | Multipart request metadata.
-puuPayload :: Lens' PagesUpdate' Page
+puuPayload :: Lens' PagesUpdate Page
 puuPayload
   = lens _puuPayload (\ s a -> s{_puuPayload = a})
 
 -- | Whether a revert action should be performed when the page is updated
 -- (default: false).
-puuRevert :: Lens' PagesUpdate' (Maybe Bool)
+puuRevert :: Lens' PagesUpdate (Maybe Bool)
 puuRevert
   = lens _puuRevert (\ s a -> s{_puuRevert = a})
 
 -- | Whether a publish action should be performed when the page is updated
 -- (default: false).
-puuPublish :: Lens' PagesUpdate' (Maybe Bool)
+puuPublish :: Lens' PagesUpdate (Maybe Bool)
 puuPublish
   = lens _puuPublish (\ s a -> s{_puuPublish = a})
 
-instance GoogleRequest PagesUpdate' where
-        type Rs PagesUpdate' = Page
-        requestClient PagesUpdate'{..}
+instance GoogleRequest PagesUpdate where
+        type Rs PagesUpdate = Page
+        requestClient PagesUpdate{..}
           = go _puuBlogId _puuPageId _puuRevert _puuPublish
               (Just AltJSON)
               _puuPayload

@@ -29,8 +29,8 @@ module Network.Google.Resource.Genomics.Callsets.Create
       CallsetsCreateResource
 
     -- * Creating a Request
-    , callsetsCreate'
-    , CallsetsCreate'
+    , callsetsCreate
+    , CallsetsCreate
 
     -- * Request Lenses
     , ccXgafv
@@ -47,7 +47,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.callsets.create@ method which the
--- 'CallsetsCreate'' request conforms to.
+-- 'CallsetsCreate' request conforms to.
 type CallsetsCreateResource =
      "v1" :>
        "callsets" :>
@@ -63,8 +63,8 @@ type CallsetsCreateResource =
 
 -- | Creates a new call set.
 --
--- /See:/ 'callsetsCreate'' smart constructor.
-data CallsetsCreate' = CallsetsCreate'
+-- /See:/ 'callsetsCreate' smart constructor.
+data CallsetsCreate = CallsetsCreate
     { _ccXgafv          :: !(Maybe Text)
     , _ccUploadProtocol :: !(Maybe Text)
     , _ccPp             :: !Bool
@@ -75,7 +75,7 @@ data CallsetsCreate' = CallsetsCreate'
     , _ccCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CallsetsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CallsetsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -94,11 +94,11 @@ data CallsetsCreate' = CallsetsCreate'
 -- * 'ccBearerToken'
 --
 -- * 'ccCallback'
-callsetsCreate'
+callsetsCreate
     :: CallSet -- ^ 'ccPayload'
-    -> CallsetsCreate'
-callsetsCreate' pCcPayload_ =
-    CallsetsCreate'
+    -> CallsetsCreate
+callsetsCreate pCcPayload_ =
+    CallsetsCreate
     { _ccXgafv = Nothing
     , _ccUploadProtocol = Nothing
     , _ccPp = True
@@ -110,49 +110,49 @@ callsetsCreate' pCcPayload_ =
     }
 
 -- | V1 error format.
-ccXgafv :: Lens' CallsetsCreate' (Maybe Text)
+ccXgafv :: Lens' CallsetsCreate (Maybe Text)
 ccXgafv = lens _ccXgafv (\ s a -> s{_ccXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ccUploadProtocol :: Lens' CallsetsCreate' (Maybe Text)
+ccUploadProtocol :: Lens' CallsetsCreate (Maybe Text)
 ccUploadProtocol
   = lens _ccUploadProtocol
       (\ s a -> s{_ccUploadProtocol = a})
 
 -- | Pretty-print response.
-ccPp :: Lens' CallsetsCreate' Bool
+ccPp :: Lens' CallsetsCreate Bool
 ccPp = lens _ccPp (\ s a -> s{_ccPp = a})
 
 -- | OAuth access token.
-ccAccessToken :: Lens' CallsetsCreate' (Maybe Text)
+ccAccessToken :: Lens' CallsetsCreate (Maybe Text)
 ccAccessToken
   = lens _ccAccessToken
       (\ s a -> s{_ccAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ccUploadType :: Lens' CallsetsCreate' (Maybe Text)
+ccUploadType :: Lens' CallsetsCreate (Maybe Text)
 ccUploadType
   = lens _ccUploadType (\ s a -> s{_ccUploadType = a})
 
 -- | Multipart request metadata.
-ccPayload :: Lens' CallsetsCreate' CallSet
+ccPayload :: Lens' CallsetsCreate CallSet
 ccPayload
   = lens _ccPayload (\ s a -> s{_ccPayload = a})
 
 -- | OAuth bearer token.
-ccBearerToken :: Lens' CallsetsCreate' (Maybe Text)
+ccBearerToken :: Lens' CallsetsCreate (Maybe Text)
 ccBearerToken
   = lens _ccBearerToken
       (\ s a -> s{_ccBearerToken = a})
 
 -- | JSONP
-ccCallback :: Lens' CallsetsCreate' (Maybe Text)
+ccCallback :: Lens' CallsetsCreate (Maybe Text)
 ccCallback
   = lens _ccCallback (\ s a -> s{_ccCallback = a})
 
-instance GoogleRequest CallsetsCreate' where
-        type Rs CallsetsCreate' = CallSet
-        requestClient CallsetsCreate'{..}
+instance GoogleRequest CallsetsCreate where
+        type Rs CallsetsCreate = CallSet
+        requestClient CallsetsCreate{..}
           = go _ccXgafv _ccUploadProtocol (Just _ccPp)
               _ccAccessToken
               _ccUploadType

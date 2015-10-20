@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
       TargetableRemarketingListsGetResource
 
     -- * Creating a Request
-    , targetableRemarketingListsGet'
-    , TargetableRemarketingListsGet'
+    , targetableRemarketingListsGet
+    , TargetableRemarketingListsGet
 
     -- * Request Lenses
     , trlgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.targetableRemarketingLists.get@ method which the
--- 'TargetableRemarketingListsGet'' request conforms to.
+-- 'TargetableRemarketingListsGet' request conforms to.
 type TargetableRemarketingListsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,44 +52,44 @@ type TargetableRemarketingListsGetResource =
 
 -- | Gets one remarketing list by ID.
 --
--- /See:/ 'targetableRemarketingListsGet'' smart constructor.
-data TargetableRemarketingListsGet' = TargetableRemarketingListsGet'
+-- /See:/ 'targetableRemarketingListsGet' smart constructor.
+data TargetableRemarketingListsGet = TargetableRemarketingListsGet
     { _trlgProFileId :: !Int64
     , _trlgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetableRemarketingListsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetableRemarketingListsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'trlgProFileId'
 --
 -- * 'trlgId'
-targetableRemarketingListsGet'
+targetableRemarketingListsGet
     :: Int64 -- ^ 'trlgProFileId'
     -> Int64 -- ^ 'trlgId'
-    -> TargetableRemarketingListsGet'
-targetableRemarketingListsGet' pTrlgProFileId_ pTrlgId_ =
-    TargetableRemarketingListsGet'
+    -> TargetableRemarketingListsGet
+targetableRemarketingListsGet pTrlgProFileId_ pTrlgId_ =
+    TargetableRemarketingListsGet
     { _trlgProFileId = pTrlgProFileId_
     , _trlgId = pTrlgId_
     }
 
 -- | User profile ID associated with this request.
-trlgProFileId :: Lens' TargetableRemarketingListsGet' Int64
+trlgProFileId :: Lens' TargetableRemarketingListsGet Int64
 trlgProFileId
   = lens _trlgProFileId
       (\ s a -> s{_trlgProFileId = a})
 
 -- | Remarketing list ID.
-trlgId :: Lens' TargetableRemarketingListsGet' Int64
+trlgId :: Lens' TargetableRemarketingListsGet Int64
 trlgId = lens _trlgId (\ s a -> s{_trlgId = a})
 
-instance GoogleRequest TargetableRemarketingListsGet'
+instance GoogleRequest TargetableRemarketingListsGet
          where
-        type Rs TargetableRemarketingListsGet' =
+        type Rs TargetableRemarketingListsGet =
              TargetableRemarketingList
-        requestClient TargetableRemarketingListsGet'{..}
+        requestClient TargetableRemarketingListsGet{..}
           = go _trlgProFileId _trlgId (Just AltJSON)
               dFAReportingService
           where go

@@ -31,20 +31,20 @@ module Network.Google.Resource.FusionTables.Table.Patch
       TablePatchResource
 
     -- * Creating a Request
-    , tablePatch'
-    , TablePatch'
+    , tablePatch
+    , TablePatch
 
     -- * Request Lenses
-    , tppPayload
-    , tppReplaceViewDefinition
-    , tppTableId
+    , tpPayload
+    , tpReplaceViewDefinition
+    , tpTableId
     ) where
 
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.table.patch@ method which the
--- 'TablePatch'' request conforms to.
+-- 'TablePatch' request conforms to.
 type TablePatchResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -56,57 +56,57 @@ type TablePatchResource =
 -- description, and attribution will be updated. This method supports patch
 -- semantics.
 --
--- /See:/ 'tablePatch'' smart constructor.
-data TablePatch' = TablePatch'
-    { _tppPayload               :: !Table
-    , _tppReplaceViewDefinition :: !(Maybe Bool)
-    , _tppTableId               :: !Text
+-- /See:/ 'tablePatch' smart constructor.
+data TablePatch = TablePatch
+    { _tpPayload               :: !Table
+    , _tpReplaceViewDefinition :: !(Maybe Bool)
+    , _tpTableId               :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablePatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablePatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tppPayload'
+-- * 'tpPayload'
 --
--- * 'tppReplaceViewDefinition'
+-- * 'tpReplaceViewDefinition'
 --
--- * 'tppTableId'
-tablePatch'
-    :: Table -- ^ 'tppPayload'
-    -> Text -- ^ 'tppTableId'
-    -> TablePatch'
-tablePatch' pTppPayload_ pTppTableId_ =
-    TablePatch'
-    { _tppPayload = pTppPayload_
-    , _tppReplaceViewDefinition = Nothing
-    , _tppTableId = pTppTableId_
+-- * 'tpTableId'
+tablePatch
+    :: Table -- ^ 'tpPayload'
+    -> Text -- ^ 'tpTableId'
+    -> TablePatch
+tablePatch pTpPayload_ pTpTableId_ =
+    TablePatch
+    { _tpPayload = pTpPayload_
+    , _tpReplaceViewDefinition = Nothing
+    , _tpTableId = pTpTableId_
     }
 
 -- | Multipart request metadata.
-tppPayload :: Lens' TablePatch' Table
-tppPayload
-  = lens _tppPayload (\ s a -> s{_tppPayload = a})
+tpPayload :: Lens' TablePatch Table
+tpPayload
+  = lens _tpPayload (\ s a -> s{_tpPayload = a})
 
 -- | Whether the view definition is also updated. The specified view
 -- definition replaces the existing one. Only a view can be updated with a
 -- new definition.
-tppReplaceViewDefinition :: Lens' TablePatch' (Maybe Bool)
-tppReplaceViewDefinition
-  = lens _tppReplaceViewDefinition
-      (\ s a -> s{_tppReplaceViewDefinition = a})
+tpReplaceViewDefinition :: Lens' TablePatch (Maybe Bool)
+tpReplaceViewDefinition
+  = lens _tpReplaceViewDefinition
+      (\ s a -> s{_tpReplaceViewDefinition = a})
 
 -- | ID of the table that is being updated.
-tppTableId :: Lens' TablePatch' Text
-tppTableId
-  = lens _tppTableId (\ s a -> s{_tppTableId = a})
+tpTableId :: Lens' TablePatch Text
+tpTableId
+  = lens _tpTableId (\ s a -> s{_tpTableId = a})
 
-instance GoogleRequest TablePatch' where
-        type Rs TablePatch' = Table
-        requestClient TablePatch'{..}
-          = go _tppTableId _tppReplaceViewDefinition
+instance GoogleRequest TablePatch where
+        type Rs TablePatch = Table
+        requestClient TablePatch{..}
+          = go _tpTableId _tpReplaceViewDefinition
               (Just AltJSON)
-              _tppPayload
+              _tpPayload
               fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TablePatchResource)

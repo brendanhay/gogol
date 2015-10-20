@@ -29,8 +29,8 @@ module Network.Google.Resource.Mirror.Subscriptions.Delete
       SubscriptionsDeleteResource
 
     -- * Creating a Request
-    , subscriptionsDelete'
-    , SubscriptionsDelete'
+    , subscriptionsDelete
+    , SubscriptionsDelete
 
     -- * Request Lenses
     , sdId
@@ -40,7 +40,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.subscriptions.delete@ method which the
--- 'SubscriptionsDelete'' request conforms to.
+-- 'SubscriptionsDelete' request conforms to.
 type SubscriptionsDeleteResource =
      "subscriptions" :>
        Capture "id" Text :>
@@ -48,31 +48,31 @@ type SubscriptionsDeleteResource =
 
 -- | Deletes a subscription.
 --
--- /See:/ 'subscriptionsDelete'' smart constructor.
-newtype SubscriptionsDelete' = SubscriptionsDelete'
+-- /See:/ 'subscriptionsDelete' smart constructor.
+newtype SubscriptionsDelete = SubscriptionsDelete
     { _sdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubscriptionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sdId'
-subscriptionsDelete'
+subscriptionsDelete
     :: Text -- ^ 'sdId'
-    -> SubscriptionsDelete'
-subscriptionsDelete' pSdId_ =
-    SubscriptionsDelete'
+    -> SubscriptionsDelete
+subscriptionsDelete pSdId_ =
+    SubscriptionsDelete
     { _sdId = pSdId_
     }
 
 -- | The ID of the subscription.
-sdId :: Lens' SubscriptionsDelete' Text
+sdId :: Lens' SubscriptionsDelete Text
 sdId = lens _sdId (\ s a -> s{_sdId = a})
 
-instance GoogleRequest SubscriptionsDelete' where
-        type Rs SubscriptionsDelete' = ()
-        requestClient SubscriptionsDelete'{..}
+instance GoogleRequest SubscriptionsDelete where
+        type Rs SubscriptionsDelete = ()
+        requestClient SubscriptionsDelete{..}
           = go _sdId (Just AltJSON) mirrorService
           where go
                   = buildClient

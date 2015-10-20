@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Instances.SetTags
       InstancesSetTagsResource
 
     -- * Creating a Request
-    , instancesSetTags'
-    , InstancesSetTags'
+    , instancesSetTags
+    , InstancesSetTags
 
     -- * Request Lenses
     , istProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.setTags@ method which the
--- 'InstancesSetTags'' request conforms to.
+-- 'InstancesSetTags' request conforms to.
 type InstancesSetTagsResource =
      Capture "project" Text :>
        "zones" :>
@@ -58,15 +58,15 @@ type InstancesSetTagsResource =
 -- | Sets tags for the specified instance to the data included in the
 -- request.
 --
--- /See:/ 'instancesSetTags'' smart constructor.
-data InstancesSetTags' = InstancesSetTags'
+-- /See:/ 'instancesSetTags' smart constructor.
+data InstancesSetTags = InstancesSetTags
     { _istProject  :: !Text
     , _istZone     :: !Text
     , _istPayload  :: !Tags
     , _istInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesSetTags'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesSetTags' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data InstancesSetTags' = InstancesSetTags'
 -- * 'istPayload'
 --
 -- * 'istInstance'
-instancesSetTags'
+instancesSetTags
     :: Text -- ^ 'istProject'
     -> Text -- ^ 'istZone'
     -> Tags -- ^ 'istPayload'
     -> Text -- ^ 'istInstance'
-    -> InstancesSetTags'
-instancesSetTags' pIstProject_ pIstZone_ pIstPayload_ pIstInstance_ =
-    InstancesSetTags'
+    -> InstancesSetTags
+instancesSetTags pIstProject_ pIstZone_ pIstPayload_ pIstInstance_ =
+    InstancesSetTags
     { _istProject = pIstProject_
     , _istZone = pIstZone_
     , _istPayload = pIstPayload_
@@ -92,27 +92,27 @@ instancesSetTags' pIstProject_ pIstZone_ pIstPayload_ pIstInstance_ =
     }
 
 -- | Project ID for this request.
-istProject :: Lens' InstancesSetTags' Text
+istProject :: Lens' InstancesSetTags Text
 istProject
   = lens _istProject (\ s a -> s{_istProject = a})
 
 -- | The name of the zone for this request.
-istZone :: Lens' InstancesSetTags' Text
+istZone :: Lens' InstancesSetTags Text
 istZone = lens _istZone (\ s a -> s{_istZone = a})
 
 -- | Multipart request metadata.
-istPayload :: Lens' InstancesSetTags' Tags
+istPayload :: Lens' InstancesSetTags Tags
 istPayload
   = lens _istPayload (\ s a -> s{_istPayload = a})
 
 -- | Name of the instance scoping this request.
-istInstance :: Lens' InstancesSetTags' Text
+istInstance :: Lens' InstancesSetTags Text
 istInstance
   = lens _istInstance (\ s a -> s{_istInstance = a})
 
-instance GoogleRequest InstancesSetTags' where
-        type Rs InstancesSetTags' = Operation
-        requestClient InstancesSetTags'{..}
+instance GoogleRequest InstancesSetTags where
+        type Rs InstancesSetTags = Operation
+        requestClient InstancesSetTags{..}
           = go _istProject _istZone _istInstance (Just AltJSON)
               _istPayload
               computeService

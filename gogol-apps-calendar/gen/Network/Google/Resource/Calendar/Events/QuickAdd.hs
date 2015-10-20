@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.Events.QuickAdd
       EventsQuickAddResource
 
     -- * Creating a Request
-    , eventsQuickAdd'
-    , EventsQuickAdd'
+    , eventsQuickAdd
+    , EventsQuickAdd
 
     -- * Request Lenses
     , eqaCalendarId
@@ -42,7 +42,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.quickAdd@ method which the
--- 'EventsQuickAdd'' request conforms to.
+-- 'EventsQuickAdd' request conforms to.
 type EventsQuickAddResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -54,14 +54,14 @@ type EventsQuickAddResource =
 
 -- | Creates an event based on a simple text string.
 --
--- /See:/ 'eventsQuickAdd'' smart constructor.
-data EventsQuickAdd' = EventsQuickAdd'
+-- /See:/ 'eventsQuickAdd' smart constructor.
+data EventsQuickAdd = EventsQuickAdd
     { _eqaCalendarId        :: !Text
     , _eqaText              :: !Text
     , _eqaSendNotifications :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventsQuickAdd'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventsQuickAdd' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,12 +70,12 @@ data EventsQuickAdd' = EventsQuickAdd'
 -- * 'eqaText'
 --
 -- * 'eqaSendNotifications'
-eventsQuickAdd'
+eventsQuickAdd
     :: Text -- ^ 'eqaCalendarId'
     -> Text -- ^ 'eqaText'
-    -> EventsQuickAdd'
-eventsQuickAdd' pEqaCalendarId_ pEqaText_ =
-    EventsQuickAdd'
+    -> EventsQuickAdd
+eventsQuickAdd pEqaCalendarId_ pEqaText_ =
+    EventsQuickAdd
     { _eqaCalendarId = pEqaCalendarId_
     , _eqaText = pEqaText_
     , _eqaSendNotifications = Nothing
@@ -84,25 +84,25 @@ eventsQuickAdd' pEqaCalendarId_ pEqaText_ =
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-eqaCalendarId :: Lens' EventsQuickAdd' Text
+eqaCalendarId :: Lens' EventsQuickAdd Text
 eqaCalendarId
   = lens _eqaCalendarId
       (\ s a -> s{_eqaCalendarId = a})
 
 -- | The text describing the event to be created.
-eqaText :: Lens' EventsQuickAdd' Text
+eqaText :: Lens' EventsQuickAdd Text
 eqaText = lens _eqaText (\ s a -> s{_eqaText = a})
 
 -- | Whether to send notifications about the creation of the event. Optional.
 -- The default is False.
-eqaSendNotifications :: Lens' EventsQuickAdd' (Maybe Bool)
+eqaSendNotifications :: Lens' EventsQuickAdd (Maybe Bool)
 eqaSendNotifications
   = lens _eqaSendNotifications
       (\ s a -> s{_eqaSendNotifications = a})
 
-instance GoogleRequest EventsQuickAdd' where
-        type Rs EventsQuickAdd' = Event
-        requestClient EventsQuickAdd'{..}
+instance GoogleRequest EventsQuickAdd where
+        type Rs EventsQuickAdd = Event
+        requestClient EventsQuickAdd{..}
           = go _eqaCalendarId (Just _eqaText)
               _eqaSendNotifications
               (Just AltJSON)

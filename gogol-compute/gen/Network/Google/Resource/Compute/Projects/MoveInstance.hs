@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.Projects.MoveInstance
       ProjectsMoveInstanceResource
 
     -- * Creating a Request
-    , projectsMoveInstance'
-    , ProjectsMoveInstance'
+    , projectsMoveInstance
+    , ProjectsMoveInstance
 
     -- * Request Lenses
     , pmiProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.projects.moveInstance@ method which the
--- 'ProjectsMoveInstance'' request conforms to.
+-- 'ProjectsMoveInstance' request conforms to.
 type ProjectsMoveInstanceResource =
      Capture "project" Text :>
        "moveInstance" :>
@@ -53,42 +53,42 @@ type ProjectsMoveInstanceResource =
 -- | Moves an instance and its attached persistent disks from one zone to
 -- another.
 --
--- /See:/ 'projectsMoveInstance'' smart constructor.
-data ProjectsMoveInstance' = ProjectsMoveInstance'
+-- /See:/ 'projectsMoveInstance' smart constructor.
+data ProjectsMoveInstance = ProjectsMoveInstance
     { _pmiProject :: !Text
     , _pmiPayload :: !InstanceMoveRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsMoveInstance'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsMoveInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pmiProject'
 --
 -- * 'pmiPayload'
-projectsMoveInstance'
+projectsMoveInstance
     :: Text -- ^ 'pmiProject'
     -> InstanceMoveRequest -- ^ 'pmiPayload'
-    -> ProjectsMoveInstance'
-projectsMoveInstance' pPmiProject_ pPmiPayload_ =
-    ProjectsMoveInstance'
+    -> ProjectsMoveInstance
+projectsMoveInstance pPmiProject_ pPmiPayload_ =
+    ProjectsMoveInstance
     { _pmiProject = pPmiProject_
     , _pmiPayload = pPmiPayload_
     }
 
 -- | Project ID for this request.
-pmiProject :: Lens' ProjectsMoveInstance' Text
+pmiProject :: Lens' ProjectsMoveInstance Text
 pmiProject
   = lens _pmiProject (\ s a -> s{_pmiProject = a})
 
 -- | Multipart request metadata.
-pmiPayload :: Lens' ProjectsMoveInstance' InstanceMoveRequest
+pmiPayload :: Lens' ProjectsMoveInstance InstanceMoveRequest
 pmiPayload
   = lens _pmiPayload (\ s a -> s{_pmiPayload = a})
 
-instance GoogleRequest ProjectsMoveInstance' where
-        type Rs ProjectsMoveInstance' = Operation
-        requestClient ProjectsMoveInstance'{..}
+instance GoogleRequest ProjectsMoveInstance where
+        type Rs ProjectsMoveInstance = Operation
+        requestClient ProjectsMoveInstance{..}
           = go _pmiProject (Just AltJSON) _pmiPayload
               computeService
           where go

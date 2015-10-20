@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Zones.List
       ZonesListResource
 
     -- * Creating a Request
-    , zonesList'
-    , ZonesList'
+    , zonesList
+    , ZonesList
 
     -- * Request Lenses
     , zlProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.zones.list@ method which the
--- 'ZonesList'' request conforms to.
+-- 'ZonesList' request conforms to.
 type ZonesListResource =
      Capture "project" Text :>
        "zones" :>
@@ -54,15 +54,15 @@ type ZonesListResource =
 
 -- | Retrieves the list of zone resources available to the specified project.
 --
--- /See:/ 'zonesList'' smart constructor.
-data ZonesList' = ZonesList'
+-- /See:/ 'zonesList' smart constructor.
+data ZonesList = ZonesList
     { _zlProject    :: !Text
     , _zlFilter     :: !(Maybe Text)
     , _zlPageToken  :: !(Maybe Text)
     , _zlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ZonesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ZonesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,11 +73,11 @@ data ZonesList' = ZonesList'
 -- * 'zlPageToken'
 --
 -- * 'zlMaxResults'
-zonesList'
+zonesList
     :: Text -- ^ 'zlProject'
-    -> ZonesList'
-zonesList' pZlProject_ =
-    ZonesList'
+    -> ZonesList
+zonesList pZlProject_ =
+    ZonesList
     { _zlProject = pZlProject_
     , _zlFilter = Nothing
     , _zlPageToken = Nothing
@@ -85,7 +85,7 @@ zonesList' pZlProject_ =
     }
 
 -- | Project ID for this request.
-zlProject :: Lens' ZonesList' Text
+zlProject :: Lens' ZonesList Text
 zlProject
   = lens _zlProject (\ s a -> s{_zlProject = a})
 
@@ -100,24 +100,24 @@ zlProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-zlFilter :: Lens' ZonesList' (Maybe Text)
+zlFilter :: Lens' ZonesList (Maybe Text)
 zlFilter = lens _zlFilter (\ s a -> s{_zlFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-zlPageToken :: Lens' ZonesList' (Maybe Text)
+zlPageToken :: Lens' ZonesList (Maybe Text)
 zlPageToken
   = lens _zlPageToken (\ s a -> s{_zlPageToken = a})
 
 -- | Maximum count of results to be returned.
-zlMaxResults :: Lens' ZonesList' Word32
+zlMaxResults :: Lens' ZonesList Word32
 zlMaxResults
   = lens _zlMaxResults (\ s a -> s{_zlMaxResults = a})
 
-instance GoogleRequest ZonesList' where
-        type Rs ZonesList' = ZoneList
-        requestClient ZonesList'{..}
+instance GoogleRequest ZonesList where
+        type Rs ZonesList = ZoneList
+        requestClient ZonesList{..}
           = go _zlProject _zlFilter _zlPageToken
               (Just _zlMaxResults)
               (Just AltJSON)

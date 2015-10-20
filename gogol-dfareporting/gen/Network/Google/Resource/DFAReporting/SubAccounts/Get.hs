@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.SubAccounts.Get
       SubAccountsGetResource
 
     -- * Creating a Request
-    , subAccountsGet'
-    , SubAccountsGet'
+    , subAccountsGet
+    , SubAccountsGet
 
     -- * Request Lenses
     , sagProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.subaccounts.get@ method which the
--- 'SubAccountsGet'' request conforms to.
+-- 'SubAccountsGet' request conforms to.
 type SubAccountsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,41 +51,41 @@ type SubAccountsGetResource =
 
 -- | Gets one subaccount by ID.
 --
--- /See:/ 'subAccountsGet'' smart constructor.
-data SubAccountsGet' = SubAccountsGet'
+-- /See:/ 'subAccountsGet' smart constructor.
+data SubAccountsGet = SubAccountsGet
     { _sagProFileId :: !Int64
     , _sagId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubAccountsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubAccountsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sagProFileId'
 --
 -- * 'sagId'
-subAccountsGet'
+subAccountsGet
     :: Int64 -- ^ 'sagProFileId'
     -> Int64 -- ^ 'sagId'
-    -> SubAccountsGet'
-subAccountsGet' pSagProFileId_ pSagId_ =
-    SubAccountsGet'
+    -> SubAccountsGet
+subAccountsGet pSagProFileId_ pSagId_ =
+    SubAccountsGet
     { _sagProFileId = pSagProFileId_
     , _sagId = pSagId_
     }
 
 -- | User profile ID associated with this request.
-sagProFileId :: Lens' SubAccountsGet' Int64
+sagProFileId :: Lens' SubAccountsGet Int64
 sagProFileId
   = lens _sagProFileId (\ s a -> s{_sagProFileId = a})
 
 -- | Subaccount ID.
-sagId :: Lens' SubAccountsGet' Int64
+sagId :: Lens' SubAccountsGet Int64
 sagId = lens _sagId (\ s a -> s{_sagId = a})
 
-instance GoogleRequest SubAccountsGet' where
-        type Rs SubAccountsGet' = SubAccount
-        requestClient SubAccountsGet'{..}
+instance GoogleRequest SubAccountsGet where
+        type Rs SubAccountsGet = SubAccount
+        requestClient SubAccountsGet{..}
           = go _sagProFileId _sagId (Just AltJSON)
               dFAReportingService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.BigQuery.Tables.Insert
       TablesInsertResource
 
     -- * Creating a Request
-    , tablesInsert'
-    , TablesInsert'
+    , tablesInsert
+    , TablesInsert
 
     -- * Request Lenses
     , tiPayload
@@ -42,7 +42,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.tables.insert@ method which the
--- 'TablesInsert'' request conforms to.
+-- 'TablesInsert' request conforms to.
 type TablesInsertResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -54,14 +54,14 @@ type TablesInsertResource =
 
 -- | Creates a new, empty table in the dataset.
 --
--- /See:/ 'tablesInsert'' smart constructor.
-data TablesInsert' = TablesInsert'
+-- /See:/ 'tablesInsert' smart constructor.
+data TablesInsert = TablesInsert
     { _tiPayload   :: !Table
     , _tiDatasetId :: !Text
     , _tiProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,36 +70,36 @@ data TablesInsert' = TablesInsert'
 -- * 'tiDatasetId'
 --
 -- * 'tiProjectId'
-tablesInsert'
+tablesInsert
     :: Table -- ^ 'tiPayload'
     -> Text -- ^ 'tiDatasetId'
     -> Text -- ^ 'tiProjectId'
-    -> TablesInsert'
-tablesInsert' pTiPayload_ pTiDatasetId_ pTiProjectId_ =
-    TablesInsert'
+    -> TablesInsert
+tablesInsert pTiPayload_ pTiDatasetId_ pTiProjectId_ =
+    TablesInsert
     { _tiPayload = pTiPayload_
     , _tiDatasetId = pTiDatasetId_
     , _tiProjectId = pTiProjectId_
     }
 
 -- | Multipart request metadata.
-tiPayload :: Lens' TablesInsert' Table
+tiPayload :: Lens' TablesInsert Table
 tiPayload
   = lens _tiPayload (\ s a -> s{_tiPayload = a})
 
 -- | Dataset ID of the new table
-tiDatasetId :: Lens' TablesInsert' Text
+tiDatasetId :: Lens' TablesInsert Text
 tiDatasetId
   = lens _tiDatasetId (\ s a -> s{_tiDatasetId = a})
 
 -- | Project ID of the new table
-tiProjectId :: Lens' TablesInsert' Text
+tiProjectId :: Lens' TablesInsert Text
 tiProjectId
   = lens _tiProjectId (\ s a -> s{_tiProjectId = a})
 
-instance GoogleRequest TablesInsert' where
-        type Rs TablesInsert' = Table
-        requestClient TablesInsert'{..}
+instance GoogleRequest TablesInsert where
+        type Rs TablesInsert = Table
+        requestClient TablesInsert{..}
           = go _tiProjectId _tiDatasetId (Just AltJSON)
               _tiPayload
               bigQueryService

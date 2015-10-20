@@ -30,8 +30,8 @@ module Network.Google.Resource.Reports.CustomerUsageReports.Get
       CustomerUsageReportsGetResource
 
     -- * Creating a Request
-    , customerUsageReportsGet'
-    , CustomerUsageReportsGet'
+    , customerUsageReportsGet
+    , CustomerUsageReportsGet
 
     -- * Request Lenses
     , curgCustomerId
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.Reports.Types
 
 -- | A resource alias for @reports.customerUsageReports.get@ method which the
--- 'CustomerUsageReportsGet'' request conforms to.
+-- 'CustomerUsageReportsGet' request conforms to.
 type CustomerUsageReportsGetResource =
      "usage" :>
        "dates" :>
@@ -57,15 +57,15 @@ type CustomerUsageReportsGetResource =
 -- | Retrieves a report which is a collection of properties \/ statistics for
 -- a specific customer.
 --
--- /See:/ 'customerUsageReportsGet'' smart constructor.
-data CustomerUsageReportsGet' = CustomerUsageReportsGet'
+-- /See:/ 'customerUsageReportsGet' smart constructor.
+data CustomerUsageReportsGet = CustomerUsageReportsGet
     { _curgCustomerId :: !(Maybe Text)
     , _curgDate       :: !Text
     , _curgParameters :: !(Maybe Text)
     , _curgPageToken  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CustomerUsageReportsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CustomerUsageReportsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,11 +76,11 @@ data CustomerUsageReportsGet' = CustomerUsageReportsGet'
 -- * 'curgParameters'
 --
 -- * 'curgPageToken'
-customerUsageReportsGet'
+customerUsageReportsGet
     :: Text -- ^ 'curgDate'
-    -> CustomerUsageReportsGet'
-customerUsageReportsGet' pCurgDate_ =
-    CustomerUsageReportsGet'
+    -> CustomerUsageReportsGet
+customerUsageReportsGet pCurgDate_ =
+    CustomerUsageReportsGet
     { _curgCustomerId = Nothing
     , _curgDate = pCurgDate_
     , _curgParameters = Nothing
@@ -88,32 +88,32 @@ customerUsageReportsGet' pCurgDate_ =
     }
 
 -- | Represents the customer for which the data is to be fetched.
-curgCustomerId :: Lens' CustomerUsageReportsGet' (Maybe Text)
+curgCustomerId :: Lens' CustomerUsageReportsGet (Maybe Text)
 curgCustomerId
   = lens _curgCustomerId
       (\ s a -> s{_curgCustomerId = a})
 
 -- | Represents the date in yyyy-mm-dd format for which the data is to be
 -- fetched.
-curgDate :: Lens' CustomerUsageReportsGet' Text
+curgDate :: Lens' CustomerUsageReportsGet Text
 curgDate = lens _curgDate (\ s a -> s{_curgDate = a})
 
 -- | Represents the application name, parameter name pairs to fetch in csv as
 -- app_name1:param_name1, app_name2:param_name2.
-curgParameters :: Lens' CustomerUsageReportsGet' (Maybe Text)
+curgParameters :: Lens' CustomerUsageReportsGet (Maybe Text)
 curgParameters
   = lens _curgParameters
       (\ s a -> s{_curgParameters = a})
 
 -- | Token to specify next page.
-curgPageToken :: Lens' CustomerUsageReportsGet' (Maybe Text)
+curgPageToken :: Lens' CustomerUsageReportsGet (Maybe Text)
 curgPageToken
   = lens _curgPageToken
       (\ s a -> s{_curgPageToken = a})
 
-instance GoogleRequest CustomerUsageReportsGet' where
-        type Rs CustomerUsageReportsGet' = UsageReports
-        requestClient CustomerUsageReportsGet'{..}
+instance GoogleRequest CustomerUsageReportsGet where
+        type Rs CustomerUsageReportsGet = UsageReports
+        requestClient CustomerUsageReportsGet{..}
           = go _curgDate _curgCustomerId _curgParameters
               _curgPageToken
               (Just AltJSON)

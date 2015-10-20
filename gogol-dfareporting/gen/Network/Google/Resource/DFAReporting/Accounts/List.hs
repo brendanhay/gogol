@@ -29,25 +29,25 @@ module Network.Google.Resource.DFAReporting.Accounts.List
       AccountsListResource
 
     -- * Creating a Request
-    , accountsList'
-    , AccountsList'
+    , accountsList
+    , AccountsList
 
     -- * Request Lenses
-    , alSearchString
-    , alIds
-    , alProFileId
-    , alSortOrder
-    , alActive
-    , alPageToken
-    , alSortField
-    , alMaxResults
+    , accSearchString
+    , accIds
+    , accProFileId
+    , accSortOrder
+    , accActive
+    , accPageToken
+    , accSortField
+    , accMaxResults
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accounts.list@ method which the
--- 'AccountsList'' request conforms to.
+-- 'AccountsList' request conforms to.
 type AccountsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -64,50 +64,50 @@ type AccountsListResource =
 
 -- | Retrieves the list of accounts, possibly filtered.
 --
--- /See:/ 'accountsList'' smart constructor.
-data AccountsList' = AccountsList'
-    { _alSearchString :: !(Maybe Text)
-    , _alIds          :: !(Maybe [Int64])
-    , _alProFileId    :: !Int64
-    , _alSortOrder    :: !(Maybe AccountsListSortOrder)
-    , _alActive       :: !(Maybe Bool)
-    , _alPageToken    :: !(Maybe Text)
-    , _alSortField    :: !(Maybe AccountsListSortField)
-    , _alMaxResults   :: !(Maybe Int32)
+-- /See:/ 'accountsList' smart constructor.
+data AccountsList = AccountsList
+    { _accSearchString :: !(Maybe Text)
+    , _accIds          :: !(Maybe [Int64])
+    , _accProFileId    :: !Int64
+    , _accSortOrder    :: !(Maybe AccountsListSortOrder)
+    , _accActive       :: !(Maybe Bool)
+    , _accPageToken    :: !(Maybe Text)
+    , _accSortField    :: !(Maybe AccountsListSortField)
+    , _accMaxResults   :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'alSearchString'
+-- * 'accSearchString'
 --
--- * 'alIds'
+-- * 'accIds'
 --
--- * 'alProFileId'
+-- * 'accProFileId'
 --
--- * 'alSortOrder'
+-- * 'accSortOrder'
 --
--- * 'alActive'
+-- * 'accActive'
 --
--- * 'alPageToken'
+-- * 'accPageToken'
 --
--- * 'alSortField'
+-- * 'accSortField'
 --
--- * 'alMaxResults'
-accountsList'
-    :: Int64 -- ^ 'alProFileId'
-    -> AccountsList'
-accountsList' pAlProFileId_ =
-    AccountsList'
-    { _alSearchString = Nothing
-    , _alIds = Nothing
-    , _alProFileId = pAlProFileId_
-    , _alSortOrder = Nothing
-    , _alActive = Nothing
-    , _alPageToken = Nothing
-    , _alSortField = Nothing
-    , _alMaxResults = Nothing
+-- * 'accMaxResults'
+accountsList
+    :: Int64 -- ^ 'accProFileId'
+    -> AccountsList
+accountsList pAccProFileId_ =
+    AccountsList
+    { _accSearchString = Nothing
+    , _accIds = Nothing
+    , _accProFileId = pAccProFileId_
+    , _accSortOrder = Nothing
+    , _accActive = Nothing
+    , _accPageToken = Nothing
+    , _accSortField = Nothing
+    , _accMaxResults = Nothing
     }
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
@@ -117,57 +117,59 @@ accountsList' pAlProFileId_ =
 -- and the end of the search string. For example, a search string of
 -- \"account\" will match objects with name \"my account\", \"account
 -- 2015\", or simply \"account\".
-alSearchString :: Lens' AccountsList' (Maybe Text)
-alSearchString
-  = lens _alSearchString
-      (\ s a -> s{_alSearchString = a})
+accSearchString :: Lens' AccountsList (Maybe Text)
+accSearchString
+  = lens _accSearchString
+      (\ s a -> s{_accSearchString = a})
 
 -- | Select only accounts with these IDs.
-alIds :: Lens' AccountsList' [Int64]
-alIds
-  = lens _alIds (\ s a -> s{_alIds = a}) . _Default .
+accIds :: Lens' AccountsList [Int64]
+accIds
+  = lens _accIds (\ s a -> s{_accIds = a}) . _Default .
       _Coerce
 
 -- | User profile ID associated with this request.
-alProFileId :: Lens' AccountsList' Int64
-alProFileId
-  = lens _alProFileId (\ s a -> s{_alProFileId = a})
+accProFileId :: Lens' AccountsList Int64
+accProFileId
+  = lens _accProFileId (\ s a -> s{_accProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-alSortOrder :: Lens' AccountsList' (Maybe AccountsListSortOrder)
-alSortOrder
-  = lens _alSortOrder (\ s a -> s{_alSortOrder = a})
+accSortOrder :: Lens' AccountsList (Maybe AccountsListSortOrder)
+accSortOrder
+  = lens _accSortOrder (\ s a -> s{_accSortOrder = a})
 
 -- | Select only active accounts. Don\'t set this field to select both active
 -- and non-active accounts.
-alActive :: Lens' AccountsList' (Maybe Bool)
-alActive = lens _alActive (\ s a -> s{_alActive = a})
+accActive :: Lens' AccountsList (Maybe Bool)
+accActive
+  = lens _accActive (\ s a -> s{_accActive = a})
 
 -- | Value of the nextPageToken from the previous result page.
-alPageToken :: Lens' AccountsList' (Maybe Text)
-alPageToken
-  = lens _alPageToken (\ s a -> s{_alPageToken = a})
+accPageToken :: Lens' AccountsList (Maybe Text)
+accPageToken
+  = lens _accPageToken (\ s a -> s{_accPageToken = a})
 
 -- | Field by which to sort the list.
-alSortField :: Lens' AccountsList' (Maybe AccountsListSortField)
-alSortField
-  = lens _alSortField (\ s a -> s{_alSortField = a})
+accSortField :: Lens' AccountsList (Maybe AccountsListSortField)
+accSortField
+  = lens _accSortField (\ s a -> s{_accSortField = a})
 
 -- | Maximum number of results to return.
-alMaxResults :: Lens' AccountsList' (Maybe Int32)
-alMaxResults
-  = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
+accMaxResults :: Lens' AccountsList (Maybe Int32)
+accMaxResults
+  = lens _accMaxResults
+      (\ s a -> s{_accMaxResults = a})
 
-instance GoogleRequest AccountsList' where
-        type Rs AccountsList' = AccountsListResponse
-        requestClient AccountsList'{..}
-          = go _alProFileId _alSearchString
-              (_alIds ^. _Default)
-              _alSortOrder
-              _alActive
-              _alPageToken
-              _alSortField
-              _alMaxResults
+instance GoogleRequest AccountsList where
+        type Rs AccountsList = AccountsListResponse
+        requestClient AccountsList{..}
+          = go _accProFileId _accSearchString
+              (_accIds ^. _Default)
+              _accSortOrder
+              _accActive
+              _accPageToken
+              _accSortField
+              _accMaxResults
               (Just AltJSON)
               dFAReportingService
           where go

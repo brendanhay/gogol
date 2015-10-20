@@ -29,8 +29,8 @@ module Network.Google.Resource.AndroidEnterprise.Devices.Get
       DevicesGetResource
 
     -- * Creating a Request
-    , devicesGet'
-    , DevicesGet'
+    , devicesGet
+    , DevicesGet
 
     -- * Request Lenses
     , dgEnterpriseId
@@ -42,7 +42,7 @@ import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.devices.get@ method which the
--- 'DevicesGet'' request conforms to.
+-- 'DevicesGet' request conforms to.
 type DevicesGetResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -54,14 +54,14 @@ type DevicesGetResource =
 
 -- | Retrieves the details of a device.
 --
--- /See:/ 'devicesGet'' smart constructor.
-data DevicesGet' = DevicesGet'
+-- /See:/ 'devicesGet' smart constructor.
+data DevicesGet = DevicesGet
     { _dgEnterpriseId :: !Text
     , _dgUserId       :: !Text
     , _dgDeviceId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DevicesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'DevicesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,36 +70,36 @@ data DevicesGet' = DevicesGet'
 -- * 'dgUserId'
 --
 -- * 'dgDeviceId'
-devicesGet'
+devicesGet
     :: Text -- ^ 'dgEnterpriseId'
     -> Text -- ^ 'dgUserId'
     -> Text -- ^ 'dgDeviceId'
-    -> DevicesGet'
-devicesGet' pDgEnterpriseId_ pDgUserId_ pDgDeviceId_ =
-    DevicesGet'
+    -> DevicesGet
+devicesGet pDgEnterpriseId_ pDgUserId_ pDgDeviceId_ =
+    DevicesGet
     { _dgEnterpriseId = pDgEnterpriseId_
     , _dgUserId = pDgUserId_
     , _dgDeviceId = pDgDeviceId_
     }
 
 -- | The ID of the enterprise.
-dgEnterpriseId :: Lens' DevicesGet' Text
+dgEnterpriseId :: Lens' DevicesGet Text
 dgEnterpriseId
   = lens _dgEnterpriseId
       (\ s a -> s{_dgEnterpriseId = a})
 
 -- | The ID of the user.
-dgUserId :: Lens' DevicesGet' Text
+dgUserId :: Lens' DevicesGet Text
 dgUserId = lens _dgUserId (\ s a -> s{_dgUserId = a})
 
 -- | The ID of the device.
-dgDeviceId :: Lens' DevicesGet' Text
+dgDeviceId :: Lens' DevicesGet Text
 dgDeviceId
   = lens _dgDeviceId (\ s a -> s{_dgDeviceId = a})
 
-instance GoogleRequest DevicesGet' where
-        type Rs DevicesGet' = Device
-        requestClient DevicesGet'{..}
+instance GoogleRequest DevicesGet where
+        type Rs DevicesGet = Device
+        requestClient DevicesGet{..}
           = go _dgEnterpriseId _dgUserId _dgDeviceId
               (Just AltJSON)
               androidEnterpriseService

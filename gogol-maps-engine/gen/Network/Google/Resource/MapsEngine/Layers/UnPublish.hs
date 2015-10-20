@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Layers.UnPublish
       LayersUnPublishResource
 
     -- * Creating a Request
-    , layersUnPublish'
-    , LayersUnPublish'
+    , layersUnPublish
+    , LayersUnPublish
 
     -- * Request Lenses
     , lupId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.layers.unpublish@ method which the
--- 'LayersUnPublish'' request conforms to.
+-- 'LayersUnPublish' request conforms to.
 type LayersUnPublishResource =
      "layers" :>
        Capture "id" Text :>
@@ -50,31 +50,31 @@ type LayersUnPublishResource =
 
 -- | Unpublish a layer asset.
 --
--- /See:/ 'layersUnPublish'' smart constructor.
-newtype LayersUnPublish' = LayersUnPublish'
+-- /See:/ 'layersUnPublish' smart constructor.
+newtype LayersUnPublish = LayersUnPublish
     { _lupId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersUnPublish'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersUnPublish' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lupId'
-layersUnPublish'
+layersUnPublish
     :: Text -- ^ 'lupId'
-    -> LayersUnPublish'
-layersUnPublish' pLupId_ =
-    LayersUnPublish'
+    -> LayersUnPublish
+layersUnPublish pLupId_ =
+    LayersUnPublish
     { _lupId = pLupId_
     }
 
 -- | The ID of the layer.
-lupId :: Lens' LayersUnPublish' Text
+lupId :: Lens' LayersUnPublish Text
 lupId = lens _lupId (\ s a -> s{_lupId = a})
 
-instance GoogleRequest LayersUnPublish' where
-        type Rs LayersUnPublish' = PublishResponse
-        requestClient LayersUnPublish'{..}
+instance GoogleRequest LayersUnPublish where
+        type Rs LayersUnPublish = PublishResponse
+        requestClient LayersUnPublish{..}
           = go _lupId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

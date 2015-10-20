@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Files.EmptyTrash
       FilesEmptyTrashResource
 
     -- * Creating a Request
-    , filesEmptyTrash'
-    , FilesEmptyTrash'
+    , filesEmptyTrash
+    , FilesEmptyTrash
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.files.emptyTrash@ method which the
--- 'FilesEmptyTrash'' request conforms to.
+-- 'FilesEmptyTrash' request conforms to.
 type FilesEmptyTrashResource =
      "files" :>
        "trash" :>
@@ -46,20 +46,20 @@ type FilesEmptyTrashResource =
 
 -- | Permanently deletes all of the user\'s trashed files.
 --
--- /See:/ 'filesEmptyTrash'' smart constructor.
-data FilesEmptyTrash' =
-    FilesEmptyTrash'
+-- /See:/ 'filesEmptyTrash' smart constructor.
+data FilesEmptyTrash =
+    FilesEmptyTrash
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FilesEmptyTrash'' with the minimum fields required to make a request.
+-- | Creates a value of 'FilesEmptyTrash' with the minimum fields required to make a request.
 --
-filesEmptyTrash'
-    :: FilesEmptyTrash'
-filesEmptyTrash' = FilesEmptyTrash'
+filesEmptyTrash
+    :: FilesEmptyTrash
+filesEmptyTrash = FilesEmptyTrash
 
-instance GoogleRequest FilesEmptyTrash' where
-        type Rs FilesEmptyTrash' = ()
-        requestClient FilesEmptyTrash'{}
+instance GoogleRequest FilesEmptyTrash where
+        type Rs FilesEmptyTrash = ()
+        requestClient FilesEmptyTrash{}
           = go (Just AltJSON) driveService
           where go
                   = buildClient

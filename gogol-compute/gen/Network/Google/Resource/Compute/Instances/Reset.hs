@@ -29,20 +29,20 @@ module Network.Google.Resource.Compute.Instances.Reset
       InstancesResetResource
 
     -- * Creating a Request
-    , instancesReset'
-    , InstancesReset'
+    , instancesReset
+    , InstancesReset
 
     -- * Request Lenses
-    , irrProject
-    , irrZone
-    , irrInstance
+    , irProject
+    , irZone
+    , irInstance
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.reset@ method which the
--- 'InstancesReset'' request conforms to.
+-- 'InstancesReset' request conforms to.
 type InstancesResetResource =
      Capture "project" Text :>
        "zones" :>
@@ -54,52 +54,52 @@ type InstancesResetResource =
 
 -- | Performs a hard reset on the instance.
 --
--- /See:/ 'instancesReset'' smart constructor.
-data InstancesReset' = InstancesReset'
-    { _irrProject  :: !Text
-    , _irrZone     :: !Text
-    , _irrInstance :: !Text
+-- /See:/ 'instancesReset' smart constructor.
+data InstancesReset = InstancesReset
+    { _irProject  :: !Text
+    , _irZone     :: !Text
+    , _irInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesReset'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesReset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'irrProject'
+-- * 'irProject'
 --
--- * 'irrZone'
+-- * 'irZone'
 --
--- * 'irrInstance'
-instancesReset'
-    :: Text -- ^ 'irrProject'
-    -> Text -- ^ 'irrZone'
-    -> Text -- ^ 'irrInstance'
-    -> InstancesReset'
-instancesReset' pIrrProject_ pIrrZone_ pIrrInstance_ =
-    InstancesReset'
-    { _irrProject = pIrrProject_
-    , _irrZone = pIrrZone_
-    , _irrInstance = pIrrInstance_
+-- * 'irInstance'
+instancesReset
+    :: Text -- ^ 'irProject'
+    -> Text -- ^ 'irZone'
+    -> Text -- ^ 'irInstance'
+    -> InstancesReset
+instancesReset pIrProject_ pIrZone_ pIrInstance_ =
+    InstancesReset
+    { _irProject = pIrProject_
+    , _irZone = pIrZone_
+    , _irInstance = pIrInstance_
     }
 
 -- | Project ID for this request.
-irrProject :: Lens' InstancesReset' Text
-irrProject
-  = lens _irrProject (\ s a -> s{_irrProject = a})
+irProject :: Lens' InstancesReset Text
+irProject
+  = lens _irProject (\ s a -> s{_irProject = a})
 
 -- | The name of the zone for this request.
-irrZone :: Lens' InstancesReset' Text
-irrZone = lens _irrZone (\ s a -> s{_irrZone = a})
+irZone :: Lens' InstancesReset Text
+irZone = lens _irZone (\ s a -> s{_irZone = a})
 
 -- | Name of the instance scoping this request.
-irrInstance :: Lens' InstancesReset' Text
-irrInstance
-  = lens _irrInstance (\ s a -> s{_irrInstance = a})
+irInstance :: Lens' InstancesReset Text
+irInstance
+  = lens _irInstance (\ s a -> s{_irInstance = a})
 
-instance GoogleRequest InstancesReset' where
-        type Rs InstancesReset' = Operation
-        requestClient InstancesReset'{..}
-          = go _irrProject _irrZone _irrInstance (Just AltJSON)
+instance GoogleRequest InstancesReset where
+        type Rs InstancesReset = Operation
+        requestClient InstancesReset{..}
+          = go _irProject _irZone _irInstance (Just AltJSON)
               computeService
           where go
                   = buildClient (Proxy :: Proxy InstancesResetResource)

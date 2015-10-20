@@ -29,18 +29,18 @@ module Network.Google.Resource.Content.Orders.Custombatch
       OrdersCustombatchResource
 
     -- * Creating a Request
-    , ordersCustombatch'
-    , OrdersCustombatch'
+    , ordersCustombatch
+    , OrdersCustombatch
 
     -- * Request Lenses
-    , ordPayload
+    , ocPayload
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.custombatch@ method which the
--- 'OrdersCustombatch'' request conforms to.
+-- 'OrdersCustombatch' request conforms to.
 type OrdersCustombatchResource =
      "orders" :>
        "batch" :>
@@ -50,35 +50,33 @@ type OrdersCustombatchResource =
 
 -- | Retrieves or modifies multiple orders in a single request.
 --
--- /See:/ 'ordersCustombatch'' smart constructor.
-newtype OrdersCustombatch' = OrdersCustombatch'
-    { _ordPayload :: OrdersCustomBatchRequest
+-- /See:/ 'ordersCustombatch' smart constructor.
+newtype OrdersCustombatch = OrdersCustombatch
+    { _ocPayload :: OrdersCustomBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersCustombatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ordPayload'
-ordersCustombatch'
-    :: OrdersCustomBatchRequest -- ^ 'ordPayload'
-    -> OrdersCustombatch'
-ordersCustombatch' pOrdPayload_ =
-    OrdersCustombatch'
-    { _ordPayload = pOrdPayload_
+-- * 'ocPayload'
+ordersCustombatch
+    :: OrdersCustomBatchRequest -- ^ 'ocPayload'
+    -> OrdersCustombatch
+ordersCustombatch pOcPayload_ =
+    OrdersCustombatch
+    { _ocPayload = pOcPayload_
     }
 
 -- | Multipart request metadata.
-ordPayload :: Lens' OrdersCustombatch' OrdersCustomBatchRequest
-ordPayload
-  = lens _ordPayload (\ s a -> s{_ordPayload = a})
+ocPayload :: Lens' OrdersCustombatch OrdersCustomBatchRequest
+ocPayload
+  = lens _ocPayload (\ s a -> s{_ocPayload = a})
 
-instance GoogleRequest OrdersCustombatch' where
-        type Rs OrdersCustombatch' =
-             OrdersCustomBatchResponse
-        requestClient OrdersCustombatch'{..}
-          = go (Just AltJSON) _ordPayload
-              shoppingContentService
+instance GoogleRequest OrdersCustombatch where
+        type Rs OrdersCustombatch = OrdersCustomBatchResponse
+        requestClient OrdersCustombatch{..}
+          = go (Just AltJSON) _ocPayload shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy OrdersCustombatchResource)

@@ -30,8 +30,8 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Patch
       AccountsAdUnitsPatchResource
 
     -- * Creating a Request
-    , accountsAdUnitsPatch'
-    , AccountsAdUnitsPatch'
+    , accountsAdUnitsPatch
+    , AccountsAdUnitsPatch
 
     -- * Request Lenses
     , aaupAdUnitId
@@ -44,7 +44,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.accounts.adunits.patch@ method which the
--- 'AccountsAdUnitsPatch'' request conforms to.
+-- 'AccountsAdUnitsPatch' request conforms to.
 type AccountsAdUnitsPatchResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -58,15 +58,15 @@ type AccountsAdUnitsPatchResource =
 -- | Update the supplied ad unit in the specified publisher AdSense account.
 -- This method supports patch semantics.
 --
--- /See:/ 'accountsAdUnitsPatch'' smart constructor.
-data AccountsAdUnitsPatch' = AccountsAdUnitsPatch'
+-- /See:/ 'accountsAdUnitsPatch' smart constructor.
+data AccountsAdUnitsPatch = AccountsAdUnitsPatch
     { _aaupAdUnitId   :: !Text
     , _aaupPayload    :: !AdUnit
     , _aaupAdClientId :: !Text
     , _aaupAccountId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsAdUnitsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsAdUnitsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data AccountsAdUnitsPatch' = AccountsAdUnitsPatch'
 -- * 'aaupAdClientId'
 --
 -- * 'aaupAccountId'
-accountsAdUnitsPatch'
+accountsAdUnitsPatch
     :: Text -- ^ 'aaupAdUnitId'
     -> AdUnit -- ^ 'aaupPayload'
     -> Text -- ^ 'aaupAdClientId'
     -> Text -- ^ 'aaupAccountId'
-    -> AccountsAdUnitsPatch'
-accountsAdUnitsPatch' pAaupAdUnitId_ pAaupPayload_ pAaupAdClientId_ pAaupAccountId_ =
-    AccountsAdUnitsPatch'
+    -> AccountsAdUnitsPatch
+accountsAdUnitsPatch pAaupAdUnitId_ pAaupPayload_ pAaupAdClientId_ pAaupAccountId_ =
+    AccountsAdUnitsPatch
     { _aaupAdUnitId = pAaupAdUnitId_
     , _aaupPayload = pAaupPayload_
     , _aaupAdClientId = pAaupAdClientId_
@@ -92,30 +92,30 @@ accountsAdUnitsPatch' pAaupAdUnitId_ pAaupPayload_ pAaupAdClientId_ pAaupAccount
     }
 
 -- | Ad unit to get.
-aaupAdUnitId :: Lens' AccountsAdUnitsPatch' Text
+aaupAdUnitId :: Lens' AccountsAdUnitsPatch Text
 aaupAdUnitId
   = lens _aaupAdUnitId (\ s a -> s{_aaupAdUnitId = a})
 
 -- | Multipart request metadata.
-aaupPayload :: Lens' AccountsAdUnitsPatch' AdUnit
+aaupPayload :: Lens' AccountsAdUnitsPatch AdUnit
 aaupPayload
   = lens _aaupPayload (\ s a -> s{_aaupPayload = a})
 
 -- | Ad client which contains the ad unit.
-aaupAdClientId :: Lens' AccountsAdUnitsPatch' Text
+aaupAdClientId :: Lens' AccountsAdUnitsPatch Text
 aaupAdClientId
   = lens _aaupAdClientId
       (\ s a -> s{_aaupAdClientId = a})
 
 -- | Account which contains the ad client.
-aaupAccountId :: Lens' AccountsAdUnitsPatch' Text
+aaupAccountId :: Lens' AccountsAdUnitsPatch Text
 aaupAccountId
   = lens _aaupAccountId
       (\ s a -> s{_aaupAccountId = a})
 
-instance GoogleRequest AccountsAdUnitsPatch' where
-        type Rs AccountsAdUnitsPatch' = AdUnit
-        requestClient AccountsAdUnitsPatch'{..}
+instance GoogleRequest AccountsAdUnitsPatch where
+        type Rs AccountsAdUnitsPatch = AdUnit
+        requestClient AccountsAdUnitsPatch{..}
           = go _aaupAccountId _aaupAdClientId
               (Just _aaupAdUnitId)
               (Just AltJSON)

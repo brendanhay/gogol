@@ -30,8 +30,8 @@ module Network.Google.Resource.Content.Accountshipping.List
       AccountshippingListResource
 
     -- * Creating a Request
-    , accountshippingList'
-    , AccountshippingList'
+    , accountshippingList
+    , AccountshippingList
 
     -- * Request Lenses
     , al1MerchantId
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accountshipping.list@ method which the
--- 'AccountshippingList'' request conforms to.
+-- 'AccountshippingList' request conforms to.
 type AccountshippingListResource =
      Capture "merchantId" Word64 :>
        "accountshipping" :>
@@ -55,14 +55,14 @@ type AccountshippingListResource =
 -- | Lists the shipping settings of the sub-accounts in your Merchant Center
 -- account.
 --
--- /See:/ 'accountshippingList'' smart constructor.
-data AccountshippingList' = AccountshippingList'
+-- /See:/ 'accountshippingList' smart constructor.
+data AccountshippingList = AccountshippingList
     { _al1MerchantId :: !Word64
     , _al1PageToken  :: !(Maybe Text)
     , _al1MaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountshippingList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountshippingList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,38 +71,38 @@ data AccountshippingList' = AccountshippingList'
 -- * 'al1PageToken'
 --
 -- * 'al1MaxResults'
-accountshippingList'
+accountshippingList
     :: Word64 -- ^ 'al1MerchantId'
-    -> AccountshippingList'
-accountshippingList' pAl1MerchantId_ =
-    AccountshippingList'
+    -> AccountshippingList
+accountshippingList pAl1MerchantId_ =
+    AccountshippingList
     { _al1MerchantId = pAl1MerchantId_
     , _al1PageToken = Nothing
     , _al1MaxResults = Nothing
     }
 
 -- | The ID of the managing account.
-al1MerchantId :: Lens' AccountshippingList' Word64
+al1MerchantId :: Lens' AccountshippingList Word64
 al1MerchantId
   = lens _al1MerchantId
       (\ s a -> s{_al1MerchantId = a})
 
 -- | The token returned by the previous request.
-al1PageToken :: Lens' AccountshippingList' (Maybe Text)
+al1PageToken :: Lens' AccountshippingList (Maybe Text)
 al1PageToken
   = lens _al1PageToken (\ s a -> s{_al1PageToken = a})
 
 -- | The maximum number of shipping settings to return in the response, used
 -- for paging.
-al1MaxResults :: Lens' AccountshippingList' (Maybe Word32)
+al1MaxResults :: Lens' AccountshippingList (Maybe Word32)
 al1MaxResults
   = lens _al1MaxResults
       (\ s a -> s{_al1MaxResults = a})
 
-instance GoogleRequest AccountshippingList' where
-        type Rs AccountshippingList' =
+instance GoogleRequest AccountshippingList where
+        type Rs AccountshippingList =
              AccountshippingListResponse
-        requestClient AccountshippingList'{..}
+        requestClient AccountshippingList{..}
           = go _al1MerchantId _al1PageToken _al1MaxResults
               (Just AltJSON)
               shoppingContentService

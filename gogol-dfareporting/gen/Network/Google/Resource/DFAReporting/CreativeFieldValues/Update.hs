@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Update
       CreativeFieldValuesUpdateResource
 
     -- * Creating a Request
-    , creativeFieldValuesUpdate'
-    , CreativeFieldValuesUpdate'
+    , creativeFieldValuesUpdate
+    , CreativeFieldValuesUpdate
 
     -- * Request Lenses
     , cfvuCreativeFieldId
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creativeFieldValues.update@ method which the
--- 'CreativeFieldValuesUpdate'' request conforms to.
+-- 'CreativeFieldValuesUpdate' request conforms to.
 type CreativeFieldValuesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -55,14 +55,14 @@ type CreativeFieldValuesUpdateResource =
 
 -- | Updates an existing creative field value.
 --
--- /See:/ 'creativeFieldValuesUpdate'' smart constructor.
-data CreativeFieldValuesUpdate' = CreativeFieldValuesUpdate'
+-- /See:/ 'creativeFieldValuesUpdate' smart constructor.
+data CreativeFieldValuesUpdate = CreativeFieldValuesUpdate
     { _cfvuCreativeFieldId :: !Int64
     , _cfvuProFileId       :: !Int64
     , _cfvuPayload         :: !CreativeFieldValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativeFieldValuesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CreativeFieldValuesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,40 +71,40 @@ data CreativeFieldValuesUpdate' = CreativeFieldValuesUpdate'
 -- * 'cfvuProFileId'
 --
 -- * 'cfvuPayload'
-creativeFieldValuesUpdate'
+creativeFieldValuesUpdate
     :: Int64 -- ^ 'cfvuCreativeFieldId'
     -> Int64 -- ^ 'cfvuProFileId'
     -> CreativeFieldValue -- ^ 'cfvuPayload'
-    -> CreativeFieldValuesUpdate'
-creativeFieldValuesUpdate' pCfvuCreativeFieldId_ pCfvuProFileId_ pCfvuPayload_ =
-    CreativeFieldValuesUpdate'
+    -> CreativeFieldValuesUpdate
+creativeFieldValuesUpdate pCfvuCreativeFieldId_ pCfvuProFileId_ pCfvuPayload_ =
+    CreativeFieldValuesUpdate
     { _cfvuCreativeFieldId = pCfvuCreativeFieldId_
     , _cfvuProFileId = pCfvuProFileId_
     , _cfvuPayload = pCfvuPayload_
     }
 
 -- | Creative field ID for this creative field value.
-cfvuCreativeFieldId :: Lens' CreativeFieldValuesUpdate' Int64
+cfvuCreativeFieldId :: Lens' CreativeFieldValuesUpdate Int64
 cfvuCreativeFieldId
   = lens _cfvuCreativeFieldId
       (\ s a -> s{_cfvuCreativeFieldId = a})
 
 -- | User profile ID associated with this request.
-cfvuProFileId :: Lens' CreativeFieldValuesUpdate' Int64
+cfvuProFileId :: Lens' CreativeFieldValuesUpdate Int64
 cfvuProFileId
   = lens _cfvuProFileId
       (\ s a -> s{_cfvuProFileId = a})
 
 -- | Multipart request metadata.
-cfvuPayload :: Lens' CreativeFieldValuesUpdate' CreativeFieldValue
+cfvuPayload :: Lens' CreativeFieldValuesUpdate CreativeFieldValue
 cfvuPayload
   = lens _cfvuPayload (\ s a -> s{_cfvuPayload = a})
 
-instance GoogleRequest CreativeFieldValuesUpdate'
+instance GoogleRequest CreativeFieldValuesUpdate
          where
-        type Rs CreativeFieldValuesUpdate' =
+        type Rs CreativeFieldValuesUpdate =
              CreativeFieldValue
-        requestClient CreativeFieldValuesUpdate'{..}
+        requestClient CreativeFieldValuesUpdate{..}
           = go _cfvuProFileId _cfvuCreativeFieldId
               (Just AltJSON)
               _cfvuPayload

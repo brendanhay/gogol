@@ -30,8 +30,8 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Insert
       AccountsAdUnitsInsertResource
 
     -- * Creating a Request
-    , accountsAdUnitsInsert'
-    , AccountsAdUnitsInsert'
+    , accountsAdUnitsInsert
+    , AccountsAdUnitsInsert
 
     -- * Request Lenses
     , aauiPayload
@@ -43,7 +43,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.accounts.adunits.insert@ method which the
--- 'AccountsAdUnitsInsert'' request conforms to.
+-- 'AccountsAdUnitsInsert' request conforms to.
 type AccountsAdUnitsInsertResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -56,14 +56,14 @@ type AccountsAdUnitsInsertResource =
 -- | Insert the supplied ad unit into the specified publisher AdSense
 -- account.
 --
--- /See:/ 'accountsAdUnitsInsert'' smart constructor.
-data AccountsAdUnitsInsert' = AccountsAdUnitsInsert'
+-- /See:/ 'accountsAdUnitsInsert' smart constructor.
+data AccountsAdUnitsInsert = AccountsAdUnitsInsert
     { _aauiPayload    :: !AdUnit
     , _aauiAdClientId :: !Text
     , _aauiAccountId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsAdUnitsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsAdUnitsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,38 +72,38 @@ data AccountsAdUnitsInsert' = AccountsAdUnitsInsert'
 -- * 'aauiAdClientId'
 --
 -- * 'aauiAccountId'
-accountsAdUnitsInsert'
+accountsAdUnitsInsert
     :: AdUnit -- ^ 'aauiPayload'
     -> Text -- ^ 'aauiAdClientId'
     -> Text -- ^ 'aauiAccountId'
-    -> AccountsAdUnitsInsert'
-accountsAdUnitsInsert' pAauiPayload_ pAauiAdClientId_ pAauiAccountId_ =
-    AccountsAdUnitsInsert'
+    -> AccountsAdUnitsInsert
+accountsAdUnitsInsert pAauiPayload_ pAauiAdClientId_ pAauiAccountId_ =
+    AccountsAdUnitsInsert
     { _aauiPayload = pAauiPayload_
     , _aauiAdClientId = pAauiAdClientId_
     , _aauiAccountId = pAauiAccountId_
     }
 
 -- | Multipart request metadata.
-aauiPayload :: Lens' AccountsAdUnitsInsert' AdUnit
+aauiPayload :: Lens' AccountsAdUnitsInsert AdUnit
 aauiPayload
   = lens _aauiPayload (\ s a -> s{_aauiPayload = a})
 
 -- | Ad client into which to insert the ad unit.
-aauiAdClientId :: Lens' AccountsAdUnitsInsert' Text
+aauiAdClientId :: Lens' AccountsAdUnitsInsert Text
 aauiAdClientId
   = lens _aauiAdClientId
       (\ s a -> s{_aauiAdClientId = a})
 
 -- | Account which will contain the ad unit.
-aauiAccountId :: Lens' AccountsAdUnitsInsert' Text
+aauiAccountId :: Lens' AccountsAdUnitsInsert Text
 aauiAccountId
   = lens _aauiAccountId
       (\ s a -> s{_aauiAccountId = a})
 
-instance GoogleRequest AccountsAdUnitsInsert' where
-        type Rs AccountsAdUnitsInsert' = AdUnit
-        requestClient AccountsAdUnitsInsert'{..}
+instance GoogleRequest AccountsAdUnitsInsert where
+        type Rs AccountsAdUnitsInsert = AdUnit
+        requestClient AccountsAdUnitsInsert{..}
           = go _aauiAccountId _aauiAdClientId (Just AltJSON)
               _aauiPayload
               adSenseHostService

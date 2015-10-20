@@ -32,8 +32,8 @@ module Network.Google.Resource.Spectrum.Paws.NotifySpectrumUse
       PawsNotifySpectrumUseResource
 
     -- * Creating a Request
-    , pawsNotifySpectrumUse'
-    , PawsNotifySpectrumUse'
+    , pawsNotifySpectrumUse
+    , PawsNotifySpectrumUse
 
     -- * Request Lenses
     , pnsuPayload
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
 -- | A resource alias for @spectrum.paws.notifySpectrumUse@ method which the
--- 'PawsNotifySpectrumUse'' request conforms to.
+-- 'PawsNotifySpectrumUse' request conforms to.
 type PawsNotifySpectrumUseResource =
      "notifySpectrumUse" :>
        QueryParam "alt" AltJSON :>
@@ -55,33 +55,33 @@ type PawsNotifySpectrumUseResource =
 -- regulator. The Google Spectrum Database does not operate in domains that
 -- require notification, so this always yields an UNIMPLEMENTED error.
 --
--- /See:/ 'pawsNotifySpectrumUse'' smart constructor.
-newtype PawsNotifySpectrumUse' = PawsNotifySpectrumUse'
+-- /See:/ 'pawsNotifySpectrumUse' smart constructor.
+newtype PawsNotifySpectrumUse = PawsNotifySpectrumUse
     { _pnsuPayload :: PawsNotifySpectrumUseRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PawsNotifySpectrumUse'' with the minimum fields required to make a request.
+-- | Creates a value of 'PawsNotifySpectrumUse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pnsuPayload'
-pawsNotifySpectrumUse'
+pawsNotifySpectrumUse
     :: PawsNotifySpectrumUseRequest -- ^ 'pnsuPayload'
-    -> PawsNotifySpectrumUse'
-pawsNotifySpectrumUse' pPnsuPayload_ =
-    PawsNotifySpectrumUse'
+    -> PawsNotifySpectrumUse
+pawsNotifySpectrumUse pPnsuPayload_ =
+    PawsNotifySpectrumUse
     { _pnsuPayload = pPnsuPayload_
     }
 
 -- | Multipart request metadata.
-pnsuPayload :: Lens' PawsNotifySpectrumUse' PawsNotifySpectrumUseRequest
+pnsuPayload :: Lens' PawsNotifySpectrumUse PawsNotifySpectrumUseRequest
 pnsuPayload
   = lens _pnsuPayload (\ s a -> s{_pnsuPayload = a})
 
-instance GoogleRequest PawsNotifySpectrumUse' where
-        type Rs PawsNotifySpectrumUse' =
+instance GoogleRequest PawsNotifySpectrumUse where
+        type Rs PawsNotifySpectrumUse =
              PawsNotifySpectrumUseResponse
-        requestClient PawsNotifySpectrumUse'{..}
+        requestClient PawsNotifySpectrumUse{..}
           = go (Just AltJSON) _pnsuPayload spectrumService
           where go
                   = buildClient

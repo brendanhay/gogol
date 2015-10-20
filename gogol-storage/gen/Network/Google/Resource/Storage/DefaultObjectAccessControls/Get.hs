@@ -30,8 +30,8 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Get
       DefaultObjectAccessControlsGetResource
 
     -- * Creating a Request
-    , defaultObjectAccessControlsGet'
-    , DefaultObjectAccessControlsGet'
+    , defaultObjectAccessControlsGet
+    , DefaultObjectAccessControlsGet
 
     -- * Request Lenses
     , doacgBucket
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.defaultObjectAccessControls.get@ method which the
--- 'DefaultObjectAccessControlsGet'' request conforms to.
+-- 'DefaultObjectAccessControlsGet' request conforms to.
 type DefaultObjectAccessControlsGetResource =
      "b" :>
        Capture "bucket" Text :>
@@ -54,46 +54,46 @@ type DefaultObjectAccessControlsGetResource =
 -- | Returns the default object ACL entry for the specified entity on the
 -- specified bucket.
 --
--- /See:/ 'defaultObjectAccessControlsGet'' smart constructor.
-data DefaultObjectAccessControlsGet' = DefaultObjectAccessControlsGet'
+-- /See:/ 'defaultObjectAccessControlsGet' smart constructor.
+data DefaultObjectAccessControlsGet = DefaultObjectAccessControlsGet
     { _doacgBucket :: !Text
     , _doacgEntity :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DefaultObjectAccessControlsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'DefaultObjectAccessControlsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'doacgBucket'
 --
 -- * 'doacgEntity'
-defaultObjectAccessControlsGet'
+defaultObjectAccessControlsGet
     :: Text -- ^ 'doacgBucket'
     -> Text -- ^ 'doacgEntity'
-    -> DefaultObjectAccessControlsGet'
-defaultObjectAccessControlsGet' pDoacgBucket_ pDoacgEntity_ =
-    DefaultObjectAccessControlsGet'
+    -> DefaultObjectAccessControlsGet
+defaultObjectAccessControlsGet pDoacgBucket_ pDoacgEntity_ =
+    DefaultObjectAccessControlsGet
     { _doacgBucket = pDoacgBucket_
     , _doacgEntity = pDoacgEntity_
     }
 
 -- | Name of a bucket.
-doacgBucket :: Lens' DefaultObjectAccessControlsGet' Text
+doacgBucket :: Lens' DefaultObjectAccessControlsGet Text
 doacgBucket
   = lens _doacgBucket (\ s a -> s{_doacgBucket = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
 -- allAuthenticatedUsers.
-doacgEntity :: Lens' DefaultObjectAccessControlsGet' Text
+doacgEntity :: Lens' DefaultObjectAccessControlsGet Text
 doacgEntity
   = lens _doacgEntity (\ s a -> s{_doacgEntity = a})
 
-instance GoogleRequest
-         DefaultObjectAccessControlsGet' where
-        type Rs DefaultObjectAccessControlsGet' =
+instance GoogleRequest DefaultObjectAccessControlsGet
+         where
+        type Rs DefaultObjectAccessControlsGet =
              ObjectAccessControl
-        requestClient DefaultObjectAccessControlsGet'{..}
+        requestClient DefaultObjectAccessControlsGet{..}
           = go _doacgBucket _doacgEntity (Just AltJSON)
               storageService
           where go

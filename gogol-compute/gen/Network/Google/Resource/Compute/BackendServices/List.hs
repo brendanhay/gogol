@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.BackendServices.List
       BackendServicesListResource
 
     -- * Creating a Request
-    , backendServicesList'
-    , BackendServicesList'
+    , backendServicesList
+    , BackendServicesList
 
     -- * Request Lenses
     , bslProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.backendServices.list@ method which the
--- 'BackendServicesList'' request conforms to.
+-- 'BackendServicesList' request conforms to.
 type BackendServicesListResource =
      Capture "project" Text :>
        "global" :>
@@ -58,15 +58,15 @@ type BackendServicesListResource =
 -- | Retrieves the list of BackendService resources available to the
 -- specified project.
 --
--- /See:/ 'backendServicesList'' smart constructor.
-data BackendServicesList' = BackendServicesList'
+-- /See:/ 'backendServicesList' smart constructor.
+data BackendServicesList = BackendServicesList
     { _bslProject    :: !Text
     , _bslFilter     :: !(Maybe Text)
     , _bslPageToken  :: !(Maybe Text)
     , _bslMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BackendServicesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'BackendServicesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,11 +77,11 @@ data BackendServicesList' = BackendServicesList'
 -- * 'bslPageToken'
 --
 -- * 'bslMaxResults'
-backendServicesList'
+backendServicesList
     :: Text -- ^ 'bslProject'
-    -> BackendServicesList'
-backendServicesList' pBslProject_ =
-    BackendServicesList'
+    -> BackendServicesList
+backendServicesList pBslProject_ =
+    BackendServicesList
     { _bslProject = pBslProject_
     , _bslFilter = Nothing
     , _bslPageToken = Nothing
@@ -89,7 +89,7 @@ backendServicesList' pBslProject_ =
     }
 
 -- | Name of the project scoping this request.
-bslProject :: Lens' BackendServicesList' Text
+bslProject :: Lens' BackendServicesList Text
 bslProject
   = lens _bslProject (\ s a -> s{_bslProject = a})
 
@@ -104,26 +104,26 @@ bslProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-bslFilter :: Lens' BackendServicesList' (Maybe Text)
+bslFilter :: Lens' BackendServicesList (Maybe Text)
 bslFilter
   = lens _bslFilter (\ s a -> s{_bslFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-bslPageToken :: Lens' BackendServicesList' (Maybe Text)
+bslPageToken :: Lens' BackendServicesList (Maybe Text)
 bslPageToken
   = lens _bslPageToken (\ s a -> s{_bslPageToken = a})
 
 -- | Maximum count of results to be returned.
-bslMaxResults :: Lens' BackendServicesList' Word32
+bslMaxResults :: Lens' BackendServicesList Word32
 bslMaxResults
   = lens _bslMaxResults
       (\ s a -> s{_bslMaxResults = a})
 
-instance GoogleRequest BackendServicesList' where
-        type Rs BackendServicesList' = BackendServiceList
-        requestClient BackendServicesList'{..}
+instance GoogleRequest BackendServicesList where
+        type Rs BackendServicesList = BackendServiceList
+        requestClient BackendServicesList{..}
           = go _bslProject _bslFilter _bslPageToken
               (Just _bslMaxResults)
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Mirror.Subscriptions.Insert
       SubscriptionsInsertResource
 
     -- * Creating a Request
-    , subscriptionsInsert'
-    , SubscriptionsInsert'
+    , subscriptionsInsert
+    , SubscriptionsInsert
 
     -- * Request Lenses
     , siPayload
@@ -40,7 +40,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.subscriptions.insert@ method which the
--- 'SubscriptionsInsert'' request conforms to.
+-- 'SubscriptionsInsert' request conforms to.
 type SubscriptionsInsertResource =
      "subscriptions" :>
        QueryParam "alt" AltJSON :>
@@ -49,32 +49,32 @@ type SubscriptionsInsertResource =
 
 -- | Creates a new subscription.
 --
--- /See:/ 'subscriptionsInsert'' smart constructor.
-newtype SubscriptionsInsert' = SubscriptionsInsert'
+-- /See:/ 'subscriptionsInsert' smart constructor.
+newtype SubscriptionsInsert = SubscriptionsInsert
     { _siPayload :: Subscription
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubscriptionsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'siPayload'
-subscriptionsInsert'
+subscriptionsInsert
     :: Subscription -- ^ 'siPayload'
-    -> SubscriptionsInsert'
-subscriptionsInsert' pSiPayload_ =
-    SubscriptionsInsert'
+    -> SubscriptionsInsert
+subscriptionsInsert pSiPayload_ =
+    SubscriptionsInsert
     { _siPayload = pSiPayload_
     }
 
 -- | Multipart request metadata.
-siPayload :: Lens' SubscriptionsInsert' Subscription
+siPayload :: Lens' SubscriptionsInsert Subscription
 siPayload
   = lens _siPayload (\ s a -> s{_siPayload = a})
 
-instance GoogleRequest SubscriptionsInsert' where
-        type Rs SubscriptionsInsert' = Subscription
-        requestClient SubscriptionsInsert'{..}
+instance GoogleRequest SubscriptionsInsert where
+        type Rs SubscriptionsInsert = Subscription
+        requestClient SubscriptionsInsert{..}
           = go (Just AltJSON) _siPayload mirrorService
           where go
                   = buildClient

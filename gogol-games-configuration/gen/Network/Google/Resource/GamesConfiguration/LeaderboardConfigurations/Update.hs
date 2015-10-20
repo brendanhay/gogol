@@ -29,8 +29,8 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Upda
       LeaderboardConfigurationsUpdateResource
 
     -- * Creating a Request
-    , leaderboardConfigurationsUpdate'
-    , LeaderboardConfigurationsUpdate'
+    , leaderboardConfigurationsUpdate
+    , LeaderboardConfigurationsUpdate
 
     -- * Request Lenses
     , lcuPayload
@@ -41,7 +41,7 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.leaderboardConfigurations.update@ method which the
--- 'LeaderboardConfigurationsUpdate'' request conforms to.
+-- 'LeaderboardConfigurationsUpdate' request conforms to.
 type LeaderboardConfigurationsUpdateResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
@@ -51,45 +51,45 @@ type LeaderboardConfigurationsUpdateResource =
 
 -- | Update the metadata of the leaderboard configuration with the given ID.
 --
--- /See:/ 'leaderboardConfigurationsUpdate'' smart constructor.
-data LeaderboardConfigurationsUpdate' = LeaderboardConfigurationsUpdate'
+-- /See:/ 'leaderboardConfigurationsUpdate' smart constructor.
+data LeaderboardConfigurationsUpdate = LeaderboardConfigurationsUpdate
     { _lcuPayload       :: !LeaderboardConfiguration
     , _lcuLeaderboardId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LeaderboardConfigurationsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'LeaderboardConfigurationsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lcuPayload'
 --
 -- * 'lcuLeaderboardId'
-leaderboardConfigurationsUpdate'
+leaderboardConfigurationsUpdate
     :: LeaderboardConfiguration -- ^ 'lcuPayload'
     -> Text -- ^ 'lcuLeaderboardId'
-    -> LeaderboardConfigurationsUpdate'
-leaderboardConfigurationsUpdate' pLcuPayload_ pLcuLeaderboardId_ =
-    LeaderboardConfigurationsUpdate'
+    -> LeaderboardConfigurationsUpdate
+leaderboardConfigurationsUpdate pLcuPayload_ pLcuLeaderboardId_ =
+    LeaderboardConfigurationsUpdate
     { _lcuPayload = pLcuPayload_
     , _lcuLeaderboardId = pLcuLeaderboardId_
     }
 
 -- | Multipart request metadata.
-lcuPayload :: Lens' LeaderboardConfigurationsUpdate' LeaderboardConfiguration
+lcuPayload :: Lens' LeaderboardConfigurationsUpdate LeaderboardConfiguration
 lcuPayload
   = lens _lcuPayload (\ s a -> s{_lcuPayload = a})
 
 -- | The ID of the leaderboard.
-lcuLeaderboardId :: Lens' LeaderboardConfigurationsUpdate' Text
+lcuLeaderboardId :: Lens' LeaderboardConfigurationsUpdate Text
 lcuLeaderboardId
   = lens _lcuLeaderboardId
       (\ s a -> s{_lcuLeaderboardId = a})
 
 instance GoogleRequest
-         LeaderboardConfigurationsUpdate' where
-        type Rs LeaderboardConfigurationsUpdate' =
+         LeaderboardConfigurationsUpdate where
+        type Rs LeaderboardConfigurationsUpdate =
              LeaderboardConfiguration
-        requestClient LeaderboardConfigurationsUpdate'{..}
+        requestClient LeaderboardConfigurationsUpdate{..}
           = go _lcuLeaderboardId (Just AltJSON) _lcuPayload
               gamesConfigurationService
           where go

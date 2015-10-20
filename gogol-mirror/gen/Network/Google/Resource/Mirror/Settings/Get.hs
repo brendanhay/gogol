@@ -29,8 +29,8 @@ module Network.Google.Resource.Mirror.Settings.Get
       SettingsGetResource
 
     -- * Creating a Request
-    , settingsGet'
-    , SettingsGet'
+    , settingsGet
+    , SettingsGet
 
     -- * Request Lenses
     , sgId
@@ -40,7 +40,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.settings.get@ method which the
--- 'SettingsGet'' request conforms to.
+-- 'SettingsGet' request conforms to.
 type SettingsGetResource =
      "settings" :>
        Capture "id" Text :>
@@ -48,21 +48,21 @@ type SettingsGetResource =
 
 -- | Gets a single setting by ID.
 --
--- /See:/ 'settingsGet'' smart constructor.
-newtype SettingsGet' = SettingsGet'
+-- /See:/ 'settingsGet' smart constructor.
+newtype SettingsGet = SettingsGet
     { _sgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SettingsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'SettingsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sgId'
-settingsGet'
+settingsGet
     :: Text -- ^ 'sgId'
-    -> SettingsGet'
-settingsGet' pSgId_ =
-    SettingsGet'
+    -> SettingsGet
+settingsGet pSgId_ =
+    SettingsGet
     { _sgId = pSgId_
     }
 
@@ -71,12 +71,12 @@ settingsGet' pSgId_ =
 -- use to render localized content. - timezone - The key to the user’s
 -- current time zone region as defined in the tz database. Example:
 -- America\/Los_Angeles.
-sgId :: Lens' SettingsGet' Text
+sgId :: Lens' SettingsGet Text
 sgId = lens _sgId (\ s a -> s{_sgId = a})
 
-instance GoogleRequest SettingsGet' where
-        type Rs SettingsGet' = Setting
-        requestClient SettingsGet'{..}
+instance GoogleRequest SettingsGet where
+        type Rs SettingsGet = Setting
+        requestClient SettingsGet{..}
           = go _sgId (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy SettingsGetResource)

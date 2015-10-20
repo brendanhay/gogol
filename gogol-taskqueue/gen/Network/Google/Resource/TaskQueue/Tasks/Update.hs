@@ -29,8 +29,8 @@ module Network.Google.Resource.TaskQueue.Tasks.Update
       TasksUpdateResource
 
     -- * Creating a Request
-    , tasksUpdate'
-    , TasksUpdate'
+    , tasksUpdate
+    , TasksUpdate
 
     -- * Request Lenses
     , tuTaskqueue
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
 -- | A resource alias for @taskqueue.tasks.update@ method which the
--- 'TasksUpdate'' request conforms to.
+-- 'TasksUpdate' request conforms to.
 type TasksUpdateResource =
      Capture "project" Text :>
        "taskqueues" :>
@@ -57,8 +57,8 @@ type TasksUpdateResource =
 
 -- | Update tasks that are leased out of a TaskQueue.
 --
--- /See:/ 'tasksUpdate'' smart constructor.
-data TasksUpdate' = TasksUpdate'
+-- /See:/ 'tasksUpdate' smart constructor.
+data TasksUpdate = TasksUpdate
     { _tuTaskqueue       :: !Text
     , _tuProject         :: !Text
     , _tuPayload         :: !Task
@@ -66,7 +66,7 @@ data TasksUpdate' = TasksUpdate'
     , _tuNewLeaseSeconds :: !Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TasksUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'TasksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,15 +79,15 @@ data TasksUpdate' = TasksUpdate'
 -- * 'tuTask'
 --
 -- * 'tuNewLeaseSeconds'
-tasksUpdate'
+tasksUpdate
     :: Text -- ^ 'tuTaskqueue'
     -> Text -- ^ 'tuProject'
     -> Task -- ^ 'tuPayload'
     -> Text -- ^ 'tuTask'
     -> Int32 -- ^ 'tuNewLeaseSeconds'
-    -> TasksUpdate'
-tasksUpdate' pTuTaskqueue_ pTuProject_ pTuPayload_ pTuTask_ pTuNewLeaseSeconds_ =
-    TasksUpdate'
+    -> TasksUpdate
+tasksUpdate pTuTaskqueue_ pTuProject_ pTuPayload_ pTuTask_ pTuNewLeaseSeconds_ =
+    TasksUpdate
     { _tuTaskqueue = pTuTaskqueue_
     , _tuProject = pTuProject_
     , _tuPayload = pTuPayload_
@@ -95,32 +95,32 @@ tasksUpdate' pTuTaskqueue_ pTuProject_ pTuPayload_ pTuTask_ pTuNewLeaseSeconds_ 
     , _tuNewLeaseSeconds = pTuNewLeaseSeconds_
     }
 
-tuTaskqueue :: Lens' TasksUpdate' Text
+tuTaskqueue :: Lens' TasksUpdate Text
 tuTaskqueue
   = lens _tuTaskqueue (\ s a -> s{_tuTaskqueue = a})
 
 -- | The project under which the queue lies.
-tuProject :: Lens' TasksUpdate' Text
+tuProject :: Lens' TasksUpdate Text
 tuProject
   = lens _tuProject (\ s a -> s{_tuProject = a})
 
 -- | Multipart request metadata.
-tuPayload :: Lens' TasksUpdate' Task
+tuPayload :: Lens' TasksUpdate Task
 tuPayload
   = lens _tuPayload (\ s a -> s{_tuPayload = a})
 
-tuTask :: Lens' TasksUpdate' Text
+tuTask :: Lens' TasksUpdate Text
 tuTask = lens _tuTask (\ s a -> s{_tuTask = a})
 
 -- | The new lease in seconds.
-tuNewLeaseSeconds :: Lens' TasksUpdate' Int32
+tuNewLeaseSeconds :: Lens' TasksUpdate Int32
 tuNewLeaseSeconds
   = lens _tuNewLeaseSeconds
       (\ s a -> s{_tuNewLeaseSeconds = a})
 
-instance GoogleRequest TasksUpdate' where
-        type Rs TasksUpdate' = Task
-        requestClient TasksUpdate'{..}
+instance GoogleRequest TasksUpdate where
+        type Rs TasksUpdate = Task
+        requestClient TasksUpdate{..}
           = go _tuProject _tuTaskqueue _tuTask
               (Just _tuNewLeaseSeconds)
               (Just AltJSON)

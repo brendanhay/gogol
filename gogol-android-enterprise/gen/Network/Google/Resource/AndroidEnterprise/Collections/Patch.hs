@@ -29,20 +29,20 @@ module Network.Google.Resource.AndroidEnterprise.Collections.Patch
       CollectionsPatchResource
 
     -- * Creating a Request
-    , collectionsPatch'
-    , CollectionsPatch'
+    , collectionsPatch
+    , CollectionsPatch
 
     -- * Request Lenses
-    , colEnterpriseId
-    , colCollectionId
-    , colPayload
+    , cpEnterpriseId
+    , cpCollectionId
+    , cpPayload
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.collections.patch@ method which the
--- 'CollectionsPatch'' request conforms to.
+-- 'CollectionsPatch' request conforms to.
 type CollectionsPatchResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -54,56 +54,56 @@ type CollectionsPatchResource =
 
 -- | Updates a collection. This method supports patch semantics.
 --
--- /See:/ 'collectionsPatch'' smart constructor.
-data CollectionsPatch' = CollectionsPatch'
-    { _colEnterpriseId :: !Text
-    , _colCollectionId :: !Text
-    , _colPayload      :: !Collection
+-- /See:/ 'collectionsPatch' smart constructor.
+data CollectionsPatch = CollectionsPatch
+    { _cpEnterpriseId :: !Text
+    , _cpCollectionId :: !Text
+    , _cpPayload      :: !Collection
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CollectionsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'CollectionsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'colEnterpriseId'
+-- * 'cpEnterpriseId'
 --
--- * 'colCollectionId'
+-- * 'cpCollectionId'
 --
--- * 'colPayload'
-collectionsPatch'
-    :: Text -- ^ 'colEnterpriseId'
-    -> Text -- ^ 'colCollectionId'
-    -> Collection -- ^ 'colPayload'
-    -> CollectionsPatch'
-collectionsPatch' pColEnterpriseId_ pColCollectionId_ pColPayload_ =
-    CollectionsPatch'
-    { _colEnterpriseId = pColEnterpriseId_
-    , _colCollectionId = pColCollectionId_
-    , _colPayload = pColPayload_
+-- * 'cpPayload'
+collectionsPatch
+    :: Text -- ^ 'cpEnterpriseId'
+    -> Text -- ^ 'cpCollectionId'
+    -> Collection -- ^ 'cpPayload'
+    -> CollectionsPatch
+collectionsPatch pCpEnterpriseId_ pCpCollectionId_ pCpPayload_ =
+    CollectionsPatch
+    { _cpEnterpriseId = pCpEnterpriseId_
+    , _cpCollectionId = pCpCollectionId_
+    , _cpPayload = pCpPayload_
     }
 
 -- | The ID of the enterprise.
-colEnterpriseId :: Lens' CollectionsPatch' Text
-colEnterpriseId
-  = lens _colEnterpriseId
-      (\ s a -> s{_colEnterpriseId = a})
+cpEnterpriseId :: Lens' CollectionsPatch Text
+cpEnterpriseId
+  = lens _cpEnterpriseId
+      (\ s a -> s{_cpEnterpriseId = a})
 
 -- | The ID of the collection.
-colCollectionId :: Lens' CollectionsPatch' Text
-colCollectionId
-  = lens _colCollectionId
-      (\ s a -> s{_colCollectionId = a})
+cpCollectionId :: Lens' CollectionsPatch Text
+cpCollectionId
+  = lens _cpCollectionId
+      (\ s a -> s{_cpCollectionId = a})
 
 -- | Multipart request metadata.
-colPayload :: Lens' CollectionsPatch' Collection
-colPayload
-  = lens _colPayload (\ s a -> s{_colPayload = a})
+cpPayload :: Lens' CollectionsPatch Collection
+cpPayload
+  = lens _cpPayload (\ s a -> s{_cpPayload = a})
 
-instance GoogleRequest CollectionsPatch' where
-        type Rs CollectionsPatch' = Collection
-        requestClient CollectionsPatch'{..}
-          = go _colEnterpriseId _colCollectionId (Just AltJSON)
-              _colPayload
+instance GoogleRequest CollectionsPatch where
+        type Rs CollectionsPatch = Collection
+        requestClient CollectionsPatch{..}
+          = go _cpEnterpriseId _cpCollectionId (Just AltJSON)
+              _cpPayload
               androidEnterpriseService
           where go
                   = buildClient

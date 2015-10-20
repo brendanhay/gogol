@@ -30,8 +30,8 @@ module Network.Google.Resource.Gmail.Users.Threads.Modify
       UsersThreadsModifyResource
 
     -- * Creating a Request
-    , usersThreadsModify'
-    , UsersThreadsModify'
+    , usersThreadsModify
+    , UsersThreadsModify
 
     -- * Request Lenses
     , utmPayload
@@ -43,7 +43,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.threads.modify@ method which the
--- 'UsersThreadsModify'' request conforms to.
+-- 'UsersThreadsModify' request conforms to.
 type UsersThreadsModifyResource =
      Capture "userId" Text :>
        "threads" :>
@@ -56,14 +56,14 @@ type UsersThreadsModifyResource =
 -- | Modifies the labels applied to the thread. This applies to all messages
 -- in the thread.
 --
--- /See:/ 'usersThreadsModify'' smart constructor.
-data UsersThreadsModify' = UsersThreadsModify'
+-- /See:/ 'usersThreadsModify' smart constructor.
+data UsersThreadsModify = UsersThreadsModify
     { _utmPayload :: !ModifyThreadRequest
     , _utmUserId  :: !Text
     , _utmId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersThreadsModify'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersThreadsModify' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,36 +72,36 @@ data UsersThreadsModify' = UsersThreadsModify'
 -- * 'utmUserId'
 --
 -- * 'utmId'
-usersThreadsModify'
+usersThreadsModify
     :: ModifyThreadRequest -- ^ 'utmPayload'
     -> Text -- ^ 'utmId'
     -> Text
-    -> UsersThreadsModify'
-usersThreadsModify' pUtmPayload_ pUtmUserId_ pUtmId_ =
-    UsersThreadsModify'
+    -> UsersThreadsModify
+usersThreadsModify pUtmPayload_ pUtmUserId_ pUtmId_ =
+    UsersThreadsModify
     { _utmPayload = pUtmPayload_
     , _utmUserId = pUtmUserId_
     , _utmId = pUtmId_
     }
 
 -- | Multipart request metadata.
-utmPayload :: Lens' UsersThreadsModify' ModifyThreadRequest
+utmPayload :: Lens' UsersThreadsModify ModifyThreadRequest
 utmPayload
   = lens _utmPayload (\ s a -> s{_utmPayload = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-utmUserId :: Lens' UsersThreadsModify' Text
+utmUserId :: Lens' UsersThreadsModify Text
 utmUserId
   = lens _utmUserId (\ s a -> s{_utmUserId = a})
 
 -- | The ID of the thread to modify.
-utmId :: Lens' UsersThreadsModify' Text
+utmId :: Lens' UsersThreadsModify Text
 utmId = lens _utmId (\ s a -> s{_utmId = a})
 
-instance GoogleRequest UsersThreadsModify' where
-        type Rs UsersThreadsModify' = Thread
-        requestClient UsersThreadsModify'{..}
+instance GoogleRequest UsersThreadsModify where
+        type Rs UsersThreadsModify = Thread
+        requestClient UsersThreadsModify{..}
           = go _utmUserId _utmId (Just AltJSON) _utmPayload
               gmailService
           where go

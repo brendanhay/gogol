@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Children.Get
       ChildrenGetResource
 
     -- * Creating a Request
-    , childrenGet'
-    , ChildrenGet'
+    , childrenGet
+    , ChildrenGet
 
     -- * Request Lenses
     , cgFolderId
@@ -41,7 +41,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.children.get@ method which the
--- 'ChildrenGet'' request conforms to.
+-- 'ChildrenGet' request conforms to.
 type ChildrenGetResource =
      "files" :>
        Capture "folderId" Text :>
@@ -52,42 +52,42 @@ type ChildrenGetResource =
 
 -- | Gets a specific child reference.
 --
--- /See:/ 'childrenGet'' smart constructor.
-data ChildrenGet' = ChildrenGet'
+-- /See:/ 'childrenGet' smart constructor.
+data ChildrenGet = ChildrenGet
     { _cgFolderId :: !Text
     , _cgChildId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChildrenGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChildrenGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cgFolderId'
 --
 -- * 'cgChildId'
-childrenGet'
+childrenGet
     :: Text -- ^ 'cgFolderId'
     -> Text -- ^ 'cgChildId'
-    -> ChildrenGet'
-childrenGet' pCgFolderId_ pCgChildId_ =
-    ChildrenGet'
+    -> ChildrenGet
+childrenGet pCgFolderId_ pCgChildId_ =
+    ChildrenGet
     { _cgFolderId = pCgFolderId_
     , _cgChildId = pCgChildId_
     }
 
 -- | The ID of the folder.
-cgFolderId :: Lens' ChildrenGet' Text
+cgFolderId :: Lens' ChildrenGet Text
 cgFolderId
   = lens _cgFolderId (\ s a -> s{_cgFolderId = a})
 
 -- | The ID of the child.
-cgChildId :: Lens' ChildrenGet' Text
+cgChildId :: Lens' ChildrenGet Text
 cgChildId
   = lens _cgChildId (\ s a -> s{_cgChildId = a})
 
-instance GoogleRequest ChildrenGet' where
-        type Rs ChildrenGet' = ChildReference
-        requestClient ChildrenGet'{..}
+instance GoogleRequest ChildrenGet where
+        type Rs ChildrenGet = ChildReference
+        requestClient ChildrenGet{..}
           = go _cgFolderId _cgChildId (Just AltJSON)
               driveService
           where go

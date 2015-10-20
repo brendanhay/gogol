@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.HTTPSHealthChecks.Insert
       HTTPSHealthChecksInsertResource
 
     -- * Creating a Request
-    , httpsHealthChecksInsert'
-    , HTTPSHealthChecksInsert'
+    , httpsHealthChecksInsert
+    , HTTPSHealthChecksInsert
 
     -- * Request Lenses
     , hhciProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.httpsHealthChecks.insert@ method which the
--- 'HTTPSHealthChecksInsert'' request conforms to.
+-- 'HTTPSHealthChecksInsert' request conforms to.
 type HTTPSHealthChecksInsertResource =
      Capture "project" Text :>
        "global" :>
@@ -54,42 +54,42 @@ type HTTPSHealthChecksInsertResource =
 -- | Creates a HttpsHealthCheck resource in the specified project using the
 -- data included in the request.
 --
--- /See:/ 'httpsHealthChecksInsert'' smart constructor.
-data HTTPSHealthChecksInsert' = HTTPSHealthChecksInsert'
+-- /See:/ 'httpsHealthChecksInsert' smart constructor.
+data HTTPSHealthChecksInsert = HTTPSHealthChecksInsert
     { _hhciProject :: !Text
     , _hhciPayload :: !HTTPSHealthCheck
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'HTTPSHealthChecksInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'HTTPSHealthChecksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'hhciProject'
 --
 -- * 'hhciPayload'
-httpsHealthChecksInsert'
+httpsHealthChecksInsert
     :: Text -- ^ 'hhciProject'
     -> HTTPSHealthCheck -- ^ 'hhciPayload'
-    -> HTTPSHealthChecksInsert'
-httpsHealthChecksInsert' pHhciProject_ pHhciPayload_ =
-    HTTPSHealthChecksInsert'
+    -> HTTPSHealthChecksInsert
+httpsHealthChecksInsert pHhciProject_ pHhciPayload_ =
+    HTTPSHealthChecksInsert
     { _hhciProject = pHhciProject_
     , _hhciPayload = pHhciPayload_
     }
 
 -- | Name of the project scoping this request.
-hhciProject :: Lens' HTTPSHealthChecksInsert' Text
+hhciProject :: Lens' HTTPSHealthChecksInsert Text
 hhciProject
   = lens _hhciProject (\ s a -> s{_hhciProject = a})
 
 -- | Multipart request metadata.
-hhciPayload :: Lens' HTTPSHealthChecksInsert' HTTPSHealthCheck
+hhciPayload :: Lens' HTTPSHealthChecksInsert HTTPSHealthCheck
 hhciPayload
   = lens _hhciPayload (\ s a -> s{_hhciPayload = a})
 
-instance GoogleRequest HTTPSHealthChecksInsert' where
-        type Rs HTTPSHealthChecksInsert' = Operation
-        requestClient HTTPSHealthChecksInsert'{..}
+instance GoogleRequest HTTPSHealthChecksInsert where
+        type Rs HTTPSHealthChecksInsert = Operation
+        requestClient HTTPSHealthChecksInsert{..}
           = go _hhciProject (Just AltJSON) _hhciPayload
               computeService
           where go

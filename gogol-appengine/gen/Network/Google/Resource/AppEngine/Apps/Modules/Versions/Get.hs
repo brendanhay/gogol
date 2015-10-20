@@ -29,8 +29,8 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Get
       AppsModulesVersionsGetResource
 
     -- * Creating a Request
-    , appsModulesVersionsGet'
-    , AppsModulesVersionsGet'
+    , appsModulesVersionsGet
+    , AppsModulesVersionsGet
 
     -- * Request Lenses
     , amvgXgafv
@@ -50,7 +50,7 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.modules.versions.get@ method which the
--- 'AppsModulesVersionsGet'' request conforms to.
+-- 'AppsModulesVersionsGet' request conforms to.
 type AppsModulesVersionsGetResource =
      "v1beta4" :>
        "apps" :>
@@ -72,8 +72,8 @@ type AppsModulesVersionsGetResource =
 
 -- | Gets application deployment information.
 --
--- /See:/ 'appsModulesVersionsGet'' smart constructor.
-data AppsModulesVersionsGet' = AppsModulesVersionsGet'
+-- /See:/ 'appsModulesVersionsGet' smart constructor.
+data AppsModulesVersionsGet = AppsModulesVersionsGet
     { _amvgXgafv          :: !(Maybe Text)
     , _amvgUploadProtocol :: !(Maybe Text)
     , _amvgPp             :: !Bool
@@ -87,7 +87,7 @@ data AppsModulesVersionsGet' = AppsModulesVersionsGet'
     , _amvgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AppsModulesVersionsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AppsModulesVersionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -112,13 +112,13 @@ data AppsModulesVersionsGet' = AppsModulesVersionsGet'
 -- * 'amvgView'
 --
 -- * 'amvgCallback'
-appsModulesVersionsGet'
+appsModulesVersionsGet
     :: Text -- ^ 'amvgVersionsId'
     -> Text -- ^ 'amvgModulesId'
     -> Text -- ^ 'amvgAppsId'
-    -> AppsModulesVersionsGet'
-appsModulesVersionsGet' pAmvgVersionsId_ pAmvgModulesId_ pAmvgAppsId_ =
-    AppsModulesVersionsGet'
+    -> AppsModulesVersionsGet
+appsModulesVersionsGet pAmvgVersionsId_ pAmvgModulesId_ pAmvgAppsId_ =
+    AppsModulesVersionsGet
     { _amvgXgafv = Nothing
     , _amvgUploadProtocol = Nothing
     , _amvgPp = True
@@ -133,68 +133,68 @@ appsModulesVersionsGet' pAmvgVersionsId_ pAmvgModulesId_ pAmvgAppsId_ =
     }
 
 -- | V1 error format.
-amvgXgafv :: Lens' AppsModulesVersionsGet' (Maybe Text)
+amvgXgafv :: Lens' AppsModulesVersionsGet (Maybe Text)
 amvgXgafv
   = lens _amvgXgafv (\ s a -> s{_amvgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-amvgUploadProtocol :: Lens' AppsModulesVersionsGet' (Maybe Text)
+amvgUploadProtocol :: Lens' AppsModulesVersionsGet (Maybe Text)
 amvgUploadProtocol
   = lens _amvgUploadProtocol
       (\ s a -> s{_amvgUploadProtocol = a})
 
 -- | Pretty-print response.
-amvgPp :: Lens' AppsModulesVersionsGet' Bool
+amvgPp :: Lens' AppsModulesVersionsGet Bool
 amvgPp = lens _amvgPp (\ s a -> s{_amvgPp = a})
 
 -- | OAuth access token.
-amvgAccessToken :: Lens' AppsModulesVersionsGet' (Maybe Text)
+amvgAccessToken :: Lens' AppsModulesVersionsGet (Maybe Text)
 amvgAccessToken
   = lens _amvgAccessToken
       (\ s a -> s{_amvgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-amvgUploadType :: Lens' AppsModulesVersionsGet' (Maybe Text)
+amvgUploadType :: Lens' AppsModulesVersionsGet (Maybe Text)
 amvgUploadType
   = lens _amvgUploadType
       (\ s a -> s{_amvgUploadType = a})
 
 -- | Part of \`name\`. See documentation of \`appsId\`.
-amvgVersionsId :: Lens' AppsModulesVersionsGet' Text
+amvgVersionsId :: Lens' AppsModulesVersionsGet Text
 amvgVersionsId
   = lens _amvgVersionsId
       (\ s a -> s{_amvgVersionsId = a})
 
 -- | Part of \`name\`. See documentation of \`appsId\`.
-amvgModulesId :: Lens' AppsModulesVersionsGet' Text
+amvgModulesId :: Lens' AppsModulesVersionsGet Text
 amvgModulesId
   = lens _amvgModulesId
       (\ s a -> s{_amvgModulesId = a})
 
 -- | OAuth bearer token.
-amvgBearerToken :: Lens' AppsModulesVersionsGet' (Maybe Text)
+amvgBearerToken :: Lens' AppsModulesVersionsGet (Maybe Text)
 amvgBearerToken
   = lens _amvgBearerToken
       (\ s a -> s{_amvgBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource requested. For example:
 -- \"apps\/myapp\/modules\/default\/versions\/v1\".
-amvgAppsId :: Lens' AppsModulesVersionsGet' Text
+amvgAppsId :: Lens' AppsModulesVersionsGet Text
 amvgAppsId
   = lens _amvgAppsId (\ s a -> s{_amvgAppsId = a})
 
 -- | Controls the set of fields returned in the \`Get\` response.
-amvgView :: Lens' AppsModulesVersionsGet' (Maybe Text)
+amvgView :: Lens' AppsModulesVersionsGet (Maybe Text)
 amvgView = lens _amvgView (\ s a -> s{_amvgView = a})
 
 -- | JSONP
-amvgCallback :: Lens' AppsModulesVersionsGet' (Maybe Text)
+amvgCallback :: Lens' AppsModulesVersionsGet (Maybe Text)
 amvgCallback
   = lens _amvgCallback (\ s a -> s{_amvgCallback = a})
 
-instance GoogleRequest AppsModulesVersionsGet' where
-        type Rs AppsModulesVersionsGet' = Version
-        requestClient AppsModulesVersionsGet'{..}
+instance GoogleRequest AppsModulesVersionsGet where
+        type Rs AppsModulesVersionsGet = Version
+        requestClient AppsModulesVersionsGet{..}
           = go _amvgAppsId _amvgModulesId _amvgVersionsId
               _amvgXgafv
               _amvgUploadProtocol

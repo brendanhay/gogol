@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.Objects.WatchAll
       ObjectsWatchAllResource
 
     -- * Creating a Request
-    , objectsWatchAll'
-    , ObjectsWatchAll'
+    , objectsWatchAll
+    , ObjectsWatchAll
 
     -- * Request Lenses
     , owaPrefix
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.watchAll@ method which the
--- 'ObjectsWatchAll'' request conforms to.
+-- 'ObjectsWatchAll' request conforms to.
 type ObjectsWatchAllResource =
      "b" :>
        Capture "bucket" Text :>
@@ -64,8 +64,8 @@ type ObjectsWatchAllResource =
 
 -- | Watch for changes on all objects in a bucket.
 --
--- /See:/ 'objectsWatchAll'' smart constructor.
-data ObjectsWatchAll' = ObjectsWatchAll'
+-- /See:/ 'objectsWatchAll' smart constructor.
+data ObjectsWatchAll = ObjectsWatchAll
     { _owaPrefix     :: !(Maybe Text)
     , _owaBucket     :: !Text
     , _owaPayload    :: !Channel
@@ -76,7 +76,7 @@ data ObjectsWatchAll' = ObjectsWatchAll'
     , _owaMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ObjectsWatchAll'' with the minimum fields required to make a request.
+-- | Creates a value of 'ObjectsWatchAll' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -95,12 +95,12 @@ data ObjectsWatchAll' = ObjectsWatchAll'
 -- * 'owaDelimiter'
 --
 -- * 'owaMaxResults'
-objectsWatchAll'
+objectsWatchAll
     :: Text -- ^ 'owaBucket'
     -> Channel -- ^ 'owaPayload'
-    -> ObjectsWatchAll'
-objectsWatchAll' pOwaBucket_ pOwaPayload_ =
-    ObjectsWatchAll'
+    -> ObjectsWatchAll
+objectsWatchAll pOwaBucket_ pOwaPayload_ =
+    ObjectsWatchAll
     { _owaPrefix = Nothing
     , _owaBucket = pOwaBucket_
     , _owaPayload = pOwaPayload_
@@ -112,35 +112,35 @@ objectsWatchAll' pOwaBucket_ pOwaPayload_ =
     }
 
 -- | Filter results to objects whose names begin with this prefix.
-owaPrefix :: Lens' ObjectsWatchAll' (Maybe Text)
+owaPrefix :: Lens' ObjectsWatchAll (Maybe Text)
 owaPrefix
   = lens _owaPrefix (\ s a -> s{_owaPrefix = a})
 
 -- | Name of the bucket in which to look for objects.
-owaBucket :: Lens' ObjectsWatchAll' Text
+owaBucket :: Lens' ObjectsWatchAll Text
 owaBucket
   = lens _owaBucket (\ s a -> s{_owaBucket = a})
 
 -- | Multipart request metadata.
-owaPayload :: Lens' ObjectsWatchAll' Channel
+owaPayload :: Lens' ObjectsWatchAll Channel
 owaPayload
   = lens _owaPayload (\ s a -> s{_owaPayload = a})
 
 -- | If true, lists all versions of an object as distinct results. The
 -- default is false. For more information, see Object Versioning.
-owaVersions :: Lens' ObjectsWatchAll' (Maybe Bool)
+owaVersions :: Lens' ObjectsWatchAll (Maybe Bool)
 owaVersions
   = lens _owaVersions (\ s a -> s{_owaVersions = a})
 
 -- | Set of properties to return. Defaults to noAcl.
-owaProjection :: Lens' ObjectsWatchAll' (Maybe ObjectsWatchAllProjection)
+owaProjection :: Lens' ObjectsWatchAll (Maybe ObjectsWatchAllProjection)
 owaProjection
   = lens _owaProjection
       (\ s a -> s{_owaProjection = a})
 
 -- | A previously-returned page token representing part of the larger set of
 -- results to view.
-owaPageToken :: Lens' ObjectsWatchAll' (Maybe Text)
+owaPageToken :: Lens' ObjectsWatchAll (Maybe Text)
 owaPageToken
   = lens _owaPageToken (\ s a -> s{_owaPageToken = a})
 
@@ -149,21 +149,21 @@ owaPageToken
 -- Objects whose names, aside from the prefix, contain delimiter will have
 -- their name, truncated after the delimiter, returned in prefixes.
 -- Duplicate prefixes are omitted.
-owaDelimiter :: Lens' ObjectsWatchAll' (Maybe Text)
+owaDelimiter :: Lens' ObjectsWatchAll (Maybe Text)
 owaDelimiter
   = lens _owaDelimiter (\ s a -> s{_owaDelimiter = a})
 
 -- | Maximum number of items plus prefixes to return. As duplicate prefixes
 -- are omitted, fewer total results may be returned than requested. The
 -- default value of this parameter is 1,000 items.
-owaMaxResults :: Lens' ObjectsWatchAll' (Maybe Word32)
+owaMaxResults :: Lens' ObjectsWatchAll (Maybe Word32)
 owaMaxResults
   = lens _owaMaxResults
       (\ s a -> s{_owaMaxResults = a})
 
-instance GoogleRequest ObjectsWatchAll' where
-        type Rs ObjectsWatchAll' = Channel
-        requestClient ObjectsWatchAll'{..}
+instance GoogleRequest ObjectsWatchAll where
+        type Rs ObjectsWatchAll = Channel
+        requestClient ObjectsWatchAll{..}
           = go _owaBucket _owaPrefix _owaVersions
               _owaProjection
               _owaPageToken

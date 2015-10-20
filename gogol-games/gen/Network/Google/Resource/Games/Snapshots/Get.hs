@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.Snapshots.Get
       SnapshotsGetResource
 
     -- * Creating a Request
-    , snapshotsGet'
-    , SnapshotsGet'
+    , snapshotsGet
+    , SnapshotsGet
 
     -- * Request Lenses
     , sLanguage
@@ -41,7 +41,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.snapshots.get@ method which the
--- 'SnapshotsGet'' request conforms to.
+-- 'SnapshotsGet' request conforms to.
 type SnapshotsGetResource =
      "snapshots" :>
        Capture "snapshotId" Text :>
@@ -50,41 +50,41 @@ type SnapshotsGetResource =
 
 -- | Retrieves the metadata for a given snapshot ID.
 --
--- /See:/ 'snapshotsGet'' smart constructor.
-data SnapshotsGet' = SnapshotsGet'
+-- /See:/ 'snapshotsGet' smart constructor.
+data SnapshotsGet = SnapshotsGet
     { _sLanguage   :: !(Maybe Text)
     , _sSnapshotId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SnapshotsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'SnapshotsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sLanguage'
 --
 -- * 'sSnapshotId'
-snapshotsGet'
+snapshotsGet
     :: Text -- ^ 'sSnapshotId'
-    -> SnapshotsGet'
-snapshotsGet' pSSnapshotId_ =
-    SnapshotsGet'
+    -> SnapshotsGet
+snapshotsGet pSSnapshotId_ =
+    SnapshotsGet
     { _sLanguage = Nothing
     , _sSnapshotId = pSSnapshotId_
     }
 
 -- | The preferred language to use for strings returned by this method.
-sLanguage :: Lens' SnapshotsGet' (Maybe Text)
+sLanguage :: Lens' SnapshotsGet (Maybe Text)
 sLanguage
   = lens _sLanguage (\ s a -> s{_sLanguage = a})
 
 -- | The ID of the snapshot.
-sSnapshotId :: Lens' SnapshotsGet' Text
+sSnapshotId :: Lens' SnapshotsGet Text
 sSnapshotId
   = lens _sSnapshotId (\ s a -> s{_sSnapshotId = a})
 
-instance GoogleRequest SnapshotsGet' where
-        type Rs SnapshotsGet' = Snapshot
-        requestClient SnapshotsGet'{..}
+instance GoogleRequest SnapshotsGet where
+        type Rs SnapshotsGet = Snapshot
+        requestClient SnapshotsGet{..}
           = go _sSnapshotId _sLanguage (Just AltJSON)
               gamesService
           where go

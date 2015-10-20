@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.Comments.Delete
       CommentsDeleteResource
 
     -- * Creating a Request
-    , commentsDelete'
-    , CommentsDelete'
+    , commentsDelete
+    , CommentsDelete
 
     -- * Request Lenses
     , cdBlogId
@@ -42,7 +42,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.comments.delete@ method which the
--- 'CommentsDelete'' request conforms to.
+-- 'CommentsDelete' request conforms to.
 type CommentsDeleteResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -54,14 +54,14 @@ type CommentsDeleteResource =
 
 -- | Delete a comment by ID.
 --
--- /See:/ 'commentsDelete'' smart constructor.
-data CommentsDelete' = CommentsDelete'
+-- /See:/ 'commentsDelete' smart constructor.
+data CommentsDelete = CommentsDelete
     { _cdBlogId    :: !Text
     , _cdPostId    :: !Text
     , _cdCommentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,34 +70,34 @@ data CommentsDelete' = CommentsDelete'
 -- * 'cdPostId'
 --
 -- * 'cdCommentId'
-commentsDelete'
+commentsDelete
     :: Text -- ^ 'cdBlogId'
     -> Text -- ^ 'cdPostId'
     -> Text -- ^ 'cdCommentId'
-    -> CommentsDelete'
-commentsDelete' pCdBlogId_ pCdPostId_ pCdCommentId_ =
-    CommentsDelete'
+    -> CommentsDelete
+commentsDelete pCdBlogId_ pCdPostId_ pCdCommentId_ =
+    CommentsDelete
     { _cdBlogId = pCdBlogId_
     , _cdPostId = pCdPostId_
     , _cdCommentId = pCdCommentId_
     }
 
 -- | The ID of the Blog.
-cdBlogId :: Lens' CommentsDelete' Text
+cdBlogId :: Lens' CommentsDelete Text
 cdBlogId = lens _cdBlogId (\ s a -> s{_cdBlogId = a})
 
 -- | The ID of the Post.
-cdPostId :: Lens' CommentsDelete' Text
+cdPostId :: Lens' CommentsDelete Text
 cdPostId = lens _cdPostId (\ s a -> s{_cdPostId = a})
 
 -- | The ID of the comment to delete.
-cdCommentId :: Lens' CommentsDelete' Text
+cdCommentId :: Lens' CommentsDelete Text
 cdCommentId
   = lens _cdCommentId (\ s a -> s{_cdCommentId = a})
 
-instance GoogleRequest CommentsDelete' where
-        type Rs CommentsDelete' = ()
-        requestClient CommentsDelete'{..}
+instance GoogleRequest CommentsDelete where
+        type Rs CommentsDelete = ()
+        requestClient CommentsDelete{..}
           = go _cdBlogId _cdPostId _cdCommentId (Just AltJSON)
               bloggerService
           where go

@@ -29,19 +29,19 @@ module Network.Google.Resource.Drive.Revisions.Get
       RevisionsGetResource
 
     -- * Creating a Request
-    , revisionsGet'
-    , RevisionsGet'
+    , revisionsGet
+    , RevisionsGet
 
     -- * Request Lenses
-    , revFileId
-    , revRevisionId
+    , rggFileId
+    , rggRevisionId
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.revisions.get@ method which the
--- 'RevisionsGet'' request conforms to.
+-- 'RevisionsGet' request conforms to.
 type RevisionsGetResource =
      "files" :>
        Capture "fileId" Text :>
@@ -51,44 +51,44 @@ type RevisionsGetResource =
 
 -- | Gets a specific revision.
 --
--- /See:/ 'revisionsGet'' smart constructor.
-data RevisionsGet' = RevisionsGet'
-    { _revFileId     :: !Text
-    , _revRevisionId :: !Text
+-- /See:/ 'revisionsGet' smart constructor.
+data RevisionsGet = RevisionsGet
+    { _rggFileId     :: !Text
+    , _rggRevisionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RevisionsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'RevisionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'revFileId'
+-- * 'rggFileId'
 --
--- * 'revRevisionId'
-revisionsGet'
-    :: Text -- ^ 'revFileId'
-    -> Text -- ^ 'revRevisionId'
-    -> RevisionsGet'
-revisionsGet' pRevFileId_ pRevRevisionId_ =
-    RevisionsGet'
-    { _revFileId = pRevFileId_
-    , _revRevisionId = pRevRevisionId_
+-- * 'rggRevisionId'
+revisionsGet
+    :: Text -- ^ 'rggFileId'
+    -> Text -- ^ 'rggRevisionId'
+    -> RevisionsGet
+revisionsGet pRggFileId_ pRggRevisionId_ =
+    RevisionsGet
+    { _rggFileId = pRggFileId_
+    , _rggRevisionId = pRggRevisionId_
     }
 
 -- | The ID of the file.
-revFileId :: Lens' RevisionsGet' Text
-revFileId
-  = lens _revFileId (\ s a -> s{_revFileId = a})
+rggFileId :: Lens' RevisionsGet Text
+rggFileId
+  = lens _rggFileId (\ s a -> s{_rggFileId = a})
 
 -- | The ID of the revision.
-revRevisionId :: Lens' RevisionsGet' Text
-revRevisionId
-  = lens _revRevisionId
-      (\ s a -> s{_revRevisionId = a})
+rggRevisionId :: Lens' RevisionsGet Text
+rggRevisionId
+  = lens _rggRevisionId
+      (\ s a -> s{_rggRevisionId = a})
 
-instance GoogleRequest RevisionsGet' where
-        type Rs RevisionsGet' = Revision
-        requestClient RevisionsGet'{..}
-          = go _revFileId _revRevisionId (Just AltJSON)
+instance GoogleRequest RevisionsGet where
+        type Rs RevisionsGet = Revision
+        requestClient RevisionsGet{..}
+          = go _rggFileId _rggRevisionId (Just AltJSON)
               driveService
           where go
                   = buildClient (Proxy :: Proxy RevisionsGetResource)

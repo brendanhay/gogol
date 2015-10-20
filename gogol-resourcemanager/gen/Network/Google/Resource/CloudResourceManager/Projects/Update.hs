@@ -31,26 +31,26 @@ module Network.Google.Resource.CloudResourceManager.Projects.Update
       ProjectsUpdateResource
 
     -- * Creating a Request
-    , projectsUpdate'
-    , ProjectsUpdate'
+    , projectsUpdate
+    , ProjectsUpdate
 
     -- * Request Lenses
-    , puXgafv
-    , puUploadProtocol
-    , puPp
-    , puAccessToken
-    , puUploadType
-    , puPayload
-    , puBearerToken
-    , puProjectId
-    , puCallback
+    , proXgafv
+    , proUploadProtocol
+    , proPp
+    , proAccessToken
+    , proUploadType
+    , proPayload
+    , proBearerToken
+    , proProjectId
+    , proCallback
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.projects.update@ method which the
--- 'ProjectsUpdate'' request conforms to.
+-- 'ProjectsUpdate' request conforms to.
 type ProjectsUpdateResource =
      "v1beta1" :>
        "projects" :>
@@ -69,114 +69,115 @@ type ProjectsUpdateResource =
 -- \`project_id\` (for example, \`my-project-123\`). The caller must have
 -- modify permissions for this project.
 --
--- /See:/ 'projectsUpdate'' smart constructor.
-data ProjectsUpdate' = ProjectsUpdate'
-    { _puXgafv          :: !(Maybe Text)
-    , _puUploadProtocol :: !(Maybe Text)
-    , _puPp             :: !Bool
-    , _puAccessToken    :: !(Maybe Text)
-    , _puUploadType     :: !(Maybe Text)
-    , _puPayload        :: !Project
-    , _puBearerToken    :: !(Maybe Text)
-    , _puProjectId      :: !Text
-    , _puCallback       :: !(Maybe Text)
+-- /See:/ 'projectsUpdate' smart constructor.
+data ProjectsUpdate = ProjectsUpdate
+    { _proXgafv          :: !(Maybe Text)
+    , _proUploadProtocol :: !(Maybe Text)
+    , _proPp             :: !Bool
+    , _proAccessToken    :: !(Maybe Text)
+    , _proUploadType     :: !(Maybe Text)
+    , _proPayload        :: !Project
+    , _proBearerToken    :: !(Maybe Text)
+    , _proProjectId      :: !Text
+    , _proCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'puXgafv'
+-- * 'proXgafv'
 --
--- * 'puUploadProtocol'
+-- * 'proUploadProtocol'
 --
--- * 'puPp'
+-- * 'proPp'
 --
--- * 'puAccessToken'
+-- * 'proAccessToken'
 --
--- * 'puUploadType'
+-- * 'proUploadType'
 --
--- * 'puPayload'
+-- * 'proPayload'
 --
--- * 'puBearerToken'
+-- * 'proBearerToken'
 --
--- * 'puProjectId'
+-- * 'proProjectId'
 --
--- * 'puCallback'
-projectsUpdate'
-    :: Project -- ^ 'puPayload'
-    -> Text -- ^ 'puProjectId'
-    -> ProjectsUpdate'
-projectsUpdate' pPuPayload_ pPuProjectId_ =
-    ProjectsUpdate'
-    { _puXgafv = Nothing
-    , _puUploadProtocol = Nothing
-    , _puPp = True
-    , _puAccessToken = Nothing
-    , _puUploadType = Nothing
-    , _puPayload = pPuPayload_
-    , _puBearerToken = Nothing
-    , _puProjectId = pPuProjectId_
-    , _puCallback = Nothing
+-- * 'proCallback'
+projectsUpdate
+    :: Project -- ^ 'proPayload'
+    -> Text -- ^ 'proProjectId'
+    -> ProjectsUpdate
+projectsUpdate pProPayload_ pProProjectId_ =
+    ProjectsUpdate
+    { _proXgafv = Nothing
+    , _proUploadProtocol = Nothing
+    , _proPp = True
+    , _proAccessToken = Nothing
+    , _proUploadType = Nothing
+    , _proPayload = pProPayload_
+    , _proBearerToken = Nothing
+    , _proProjectId = pProProjectId_
+    , _proCallback = Nothing
     }
 
 -- | V1 error format.
-puXgafv :: Lens' ProjectsUpdate' (Maybe Text)
-puXgafv = lens _puXgafv (\ s a -> s{_puXgafv = a})
+proXgafv :: Lens' ProjectsUpdate (Maybe Text)
+proXgafv = lens _proXgafv (\ s a -> s{_proXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-puUploadProtocol :: Lens' ProjectsUpdate' (Maybe Text)
-puUploadProtocol
-  = lens _puUploadProtocol
-      (\ s a -> s{_puUploadProtocol = a})
+proUploadProtocol :: Lens' ProjectsUpdate (Maybe Text)
+proUploadProtocol
+  = lens _proUploadProtocol
+      (\ s a -> s{_proUploadProtocol = a})
 
 -- | Pretty-print response.
-puPp :: Lens' ProjectsUpdate' Bool
-puPp = lens _puPp (\ s a -> s{_puPp = a})
+proPp :: Lens' ProjectsUpdate Bool
+proPp = lens _proPp (\ s a -> s{_proPp = a})
 
 -- | OAuth access token.
-puAccessToken :: Lens' ProjectsUpdate' (Maybe Text)
-puAccessToken
-  = lens _puAccessToken
-      (\ s a -> s{_puAccessToken = a})
+proAccessToken :: Lens' ProjectsUpdate (Maybe Text)
+proAccessToken
+  = lens _proAccessToken
+      (\ s a -> s{_proAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-puUploadType :: Lens' ProjectsUpdate' (Maybe Text)
-puUploadType
-  = lens _puUploadType (\ s a -> s{_puUploadType = a})
+proUploadType :: Lens' ProjectsUpdate (Maybe Text)
+proUploadType
+  = lens _proUploadType
+      (\ s a -> s{_proUploadType = a})
 
 -- | Multipart request metadata.
-puPayload :: Lens' ProjectsUpdate' Project
-puPayload
-  = lens _puPayload (\ s a -> s{_puPayload = a})
+proPayload :: Lens' ProjectsUpdate Project
+proPayload
+  = lens _proPayload (\ s a -> s{_proPayload = a})
 
 -- | OAuth bearer token.
-puBearerToken :: Lens' ProjectsUpdate' (Maybe Text)
-puBearerToken
-  = lens _puBearerToken
-      (\ s a -> s{_puBearerToken = a})
+proBearerToken :: Lens' ProjectsUpdate (Maybe Text)
+proBearerToken
+  = lens _proBearerToken
+      (\ s a -> s{_proBearerToken = a})
 
 -- | The project ID (for example, \`my-project-123\`). Required.
-puProjectId :: Lens' ProjectsUpdate' Text
-puProjectId
-  = lens _puProjectId (\ s a -> s{_puProjectId = a})
+proProjectId :: Lens' ProjectsUpdate Text
+proProjectId
+  = lens _proProjectId (\ s a -> s{_proProjectId = a})
 
 -- | JSONP
-puCallback :: Lens' ProjectsUpdate' (Maybe Text)
-puCallback
-  = lens _puCallback (\ s a -> s{_puCallback = a})
+proCallback :: Lens' ProjectsUpdate (Maybe Text)
+proCallback
+  = lens _proCallback (\ s a -> s{_proCallback = a})
 
-instance GoogleRequest ProjectsUpdate' where
-        type Rs ProjectsUpdate' = Project
-        requestClient ProjectsUpdate'{..}
-          = go _puProjectId _puXgafv _puUploadProtocol
-              (Just _puPp)
-              _puAccessToken
-              _puUploadType
-              _puBearerToken
-              _puCallback
+instance GoogleRequest ProjectsUpdate where
+        type Rs ProjectsUpdate = Project
+        requestClient ProjectsUpdate{..}
+          = go _proProjectId _proXgafv _proUploadProtocol
+              (Just _proPp)
+              _proAccessToken
+              _proUploadType
+              _proBearerToken
+              _proCallback
               (Just AltJSON)
-              _puPayload
+              _proPayload
               resourceManagerService
           where go
                   = buildClient (Proxy :: Proxy ProjectsUpdateResource)

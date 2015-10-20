@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.ProFiles.Delete
       ManagementProFilesDeleteResource
 
     -- * Creating a Request
-    , managementProFilesDelete'
-    , ManagementProFilesDelete'
+    , managementProFilesDelete
+    , ManagementProFilesDelete
 
     -- * Request Lenses
     , mpfdWebPropertyId
@@ -42,7 +42,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profiles.delete@ method which the
--- 'ManagementProFilesDelete'' request conforms to.
+-- 'ManagementProFilesDelete' request conforms to.
 type ManagementProFilesDeleteResource =
      "management" :>
        "accounts" :>
@@ -55,14 +55,14 @@ type ManagementProFilesDeleteResource =
 
 -- | Deletes a view (profile).
 --
--- /See:/ 'managementProFilesDelete'' smart constructor.
-data ManagementProFilesDelete' = ManagementProFilesDelete'
+-- /See:/ 'managementProFilesDelete' smart constructor.
+data ManagementProFilesDelete = ManagementProFilesDelete
     { _mpfdWebPropertyId :: !Text
     , _mpfdProFileId     :: !Text
     , _mpfdAccountId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementProFilesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementProFilesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,40 +71,39 @@ data ManagementProFilesDelete' = ManagementProFilesDelete'
 -- * 'mpfdProFileId'
 --
 -- * 'mpfdAccountId'
-managementProFilesDelete'
+managementProFilesDelete
     :: Text -- ^ 'mpfdWebPropertyId'
     -> Text -- ^ 'mpfdProFileId'
     -> Text -- ^ 'mpfdAccountId'
-    -> ManagementProFilesDelete'
-managementProFilesDelete' pMpfdWebPropertyId_ pMpfdProFileId_ pMpfdAccountId_ =
-    ManagementProFilesDelete'
+    -> ManagementProFilesDelete
+managementProFilesDelete pMpfdWebPropertyId_ pMpfdProFileId_ pMpfdAccountId_ =
+    ManagementProFilesDelete
     { _mpfdWebPropertyId = pMpfdWebPropertyId_
     , _mpfdProFileId = pMpfdProFileId_
     , _mpfdAccountId = pMpfdAccountId_
     }
 
 -- | Web property ID to delete the view (profile) for.
-mpfdWebPropertyId :: Lens' ManagementProFilesDelete' Text
+mpfdWebPropertyId :: Lens' ManagementProFilesDelete Text
 mpfdWebPropertyId
   = lens _mpfdWebPropertyId
       (\ s a -> s{_mpfdWebPropertyId = a})
 
 -- | ID of the view (profile) to be deleted.
-mpfdProFileId :: Lens' ManagementProFilesDelete' Text
+mpfdProFileId :: Lens' ManagementProFilesDelete Text
 mpfdProFileId
   = lens _mpfdProFileId
       (\ s a -> s{_mpfdProFileId = a})
 
 -- | Account ID to delete the view (profile) for.
-mpfdAccountId :: Lens' ManagementProFilesDelete' Text
+mpfdAccountId :: Lens' ManagementProFilesDelete Text
 mpfdAccountId
   = lens _mpfdAccountId
       (\ s a -> s{_mpfdAccountId = a})
 
-instance GoogleRequest ManagementProFilesDelete'
-         where
-        type Rs ManagementProFilesDelete' = ()
-        requestClient ManagementProFilesDelete'{..}
+instance GoogleRequest ManagementProFilesDelete where
+        type Rs ManagementProFilesDelete = ()
+        requestClient ManagementProFilesDelete{..}
           = go _mpfdAccountId _mpfdWebPropertyId _mpfdProFileId
               (Just AltJSON)
               analyticsService

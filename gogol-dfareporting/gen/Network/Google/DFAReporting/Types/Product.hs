@@ -3203,53 +3203,53 @@ instance ToJSON CreativeFieldAssignment where
 --
 -- /See:/ 'advertiserGroup' smart constructor.
 data AdvertiserGroup = AdvertiserGroup
-    { _aKind      :: !Text
-    , _aAccountId :: !(Maybe Int64)
-    , _aName      :: !(Maybe Text)
-    , _aId        :: !(Maybe Int64)
+    { _agKind      :: !Text
+    , _agAccountId :: !(Maybe Int64)
+    , _agName      :: !(Maybe Text)
+    , _agId        :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aKind'
+-- * 'agKind'
 --
--- * 'aAccountId'
+-- * 'agAccountId'
 --
--- * 'aName'
+-- * 'agName'
 --
--- * 'aId'
+-- * 'agId'
 advertiserGroup
     :: AdvertiserGroup
 advertiserGroup =
     AdvertiserGroup
-    { _aKind = "dfareporting#advertiserGroup"
-    , _aAccountId = Nothing
-    , _aName = Nothing
-    , _aId = Nothing
+    { _agKind = "dfareporting#advertiserGroup"
+    , _agAccountId = Nothing
+    , _agName = Nothing
+    , _agId = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#advertiserGroup\".
-aKind :: Lens' AdvertiserGroup Text
-aKind = lens _aKind (\ s a -> s{_aKind = a})
+agKind :: Lens' AdvertiserGroup Text
+agKind = lens _agKind (\ s a -> s{_agKind = a})
 
 -- | Account ID of this advertiser group. This is a read-only field that can
 -- be left blank.
-aAccountId :: Lens' AdvertiserGroup (Maybe Int64)
-aAccountId
-  = lens _aAccountId (\ s a -> s{_aAccountId = a})
+agAccountId :: Lens' AdvertiserGroup (Maybe Int64)
+agAccountId
+  = lens _agAccountId (\ s a -> s{_agAccountId = a})
 
 -- | Name of this advertiser group. This is a required field and must be less
 -- than 256 characters long and unique among advertiser groups of the same
 -- account.
-aName :: Lens' AdvertiserGroup (Maybe Text)
-aName = lens _aName (\ s a -> s{_aName = a})
+agName :: Lens' AdvertiserGroup (Maybe Text)
+agName = lens _agName (\ s a -> s{_agName = a})
 
 -- | ID of this advertiser group. This is a read-only, auto-generated field.
-aId :: Lens' AdvertiserGroup (Maybe Int64)
-aId = lens _aId (\ s a -> s{_aId = a})
+agId :: Lens' AdvertiserGroup (Maybe Int64)
+agId = lens _agId (\ s a -> s{_agId = a})
 
 instance FromJSON AdvertiserGroup where
         parseJSON
@@ -3265,9 +3265,9 @@ instance ToJSON AdvertiserGroup where
         toJSON AdvertiserGroup{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _aKind),
-                  ("accountId" .=) <$> _aAccountId,
-                  ("name" .=) <$> _aName, ("id" .=) <$> _aId])
+                 [Just ("kind" .= _agKind),
+                  ("accountId" .=) <$> _agAccountId,
+                  ("name" .=) <$> _agName, ("id" .=) <$> _agId])
 
 -- | Placement Tag Data
 --
@@ -3824,385 +3824,381 @@ instance ToJSON InventoryItemsListResponse where
 --
 -- /See:/ 'ad' smart constructor.
 data Ad = Ad
-    { _addCreativeGroupAssignments              :: !(Maybe [CreativeGroupAssignment])
-    , _addGeoTargeting                          :: !(Maybe GeoTargeting)
-    , _addCreativeRotation                      :: !(Maybe CreativeRotation)
-    , _addTechnologyTargeting                   :: !(Maybe TechnologyTargeting)
-    , _addAudienceSegmentId                     :: !(Maybe Int64)
-    , _addDayPartTargeting                      :: !(Maybe DayPartTargeting)
-    , _addSize                                  :: !(Maybe Size)
-    , _addStartTime                             :: !(Maybe DateTime')
-    , _addKind                                  :: !Text
-    , _addClickThroughURLSuffixProperties       :: !(Maybe ClickThroughURLSuffixProperties)
-    , _addCampaignIdDimensionValue              :: !(Maybe DimensionValue)
-    , _addAdvertiserId                          :: !(Maybe Int64)
-    , _addAdvertiserIdDimensionValue            :: !(Maybe DimensionValue)
-    , _addSSLCompliant                          :: !(Maybe Bool)
-    , _addCampaignId                            :: !(Maybe Int64)
-    , _addIdDimensionValue                      :: !(Maybe DimensionValue)
-    , _addClickThroughURL                       :: !(Maybe ClickThroughURL)
-    , _addDeliverySchedule                      :: !(Maybe DeliverySchedule)
-    , _addEventTagOverrides                     :: !(Maybe [EventTagOverride])
-    , _addActive                                :: !(Maybe Bool)
-    , _addAccountId                             :: !(Maybe Int64)
-    , _addName                                  :: !(Maybe Text)
-    , _addKeyValueTargetingExpression           :: !(Maybe KeyValueTargetingExpression)
-    , _addEndTime                               :: !(Maybe DateTime')
-    , _addCreateInfo                            :: !(Maybe LastModifiedInfo)
-    , _addLastModifiedInfo                      :: !(Maybe LastModifiedInfo)
-    , _addId                                    :: !(Maybe Int64)
-    , _addSSLRequired                           :: !(Maybe Bool)
-    , _addComments                              :: !(Maybe Text)
-    , _addSubAccountId                          :: !(Maybe Int64)
-    , _addType                                  :: !(Maybe AdType)
-    , _addRemarketingListExpression             :: !(Maybe ListTargetingExpression)
-    , _addDynamicClickTracker                   :: !(Maybe Bool)
-    , _addCompatibility                         :: !(Maybe AdCompatibility)
-    , _addArchived                              :: !(Maybe Bool)
-    , _addDefaultClickThroughEventTagProperties :: !(Maybe DefaultClickThroughEventTagProperties)
-    , _addPlacementAssignments                  :: !(Maybe [PlacementAssignment])
+    { _aCreativeGroupAssignments              :: !(Maybe [CreativeGroupAssignment])
+    , _aGeoTargeting                          :: !(Maybe GeoTargeting)
+    , _aCreativeRotation                      :: !(Maybe CreativeRotation)
+    , _aTechnologyTargeting                   :: !(Maybe TechnologyTargeting)
+    , _aAudienceSegmentId                     :: !(Maybe Int64)
+    , _aDayPartTargeting                      :: !(Maybe DayPartTargeting)
+    , _aSize                                  :: !(Maybe Size)
+    , _aStartTime                             :: !(Maybe DateTime')
+    , _aKind                                  :: !Text
+    , _aClickThroughURLSuffixProperties       :: !(Maybe ClickThroughURLSuffixProperties)
+    , _aCampaignIdDimensionValue              :: !(Maybe DimensionValue)
+    , _aAdvertiserId                          :: !(Maybe Int64)
+    , _aAdvertiserIdDimensionValue            :: !(Maybe DimensionValue)
+    , _aSSLCompliant                          :: !(Maybe Bool)
+    , _aCampaignId                            :: !(Maybe Int64)
+    , _aIdDimensionValue                      :: !(Maybe DimensionValue)
+    , _aClickThroughURL                       :: !(Maybe ClickThroughURL)
+    , _aDeliverySchedule                      :: !(Maybe DeliverySchedule)
+    , _aEventTagOverrides                     :: !(Maybe [EventTagOverride])
+    , _aActive                                :: !(Maybe Bool)
+    , _aAccountId                             :: !(Maybe Int64)
+    , _aName                                  :: !(Maybe Text)
+    , _aKeyValueTargetingExpression           :: !(Maybe KeyValueTargetingExpression)
+    , _aEndTime                               :: !(Maybe DateTime')
+    , _aCreateInfo                            :: !(Maybe LastModifiedInfo)
+    , _aLastModifiedInfo                      :: !(Maybe LastModifiedInfo)
+    , _aId                                    :: !(Maybe Int64)
+    , _aSSLRequired                           :: !(Maybe Bool)
+    , _aComments                              :: !(Maybe Text)
+    , _aSubAccountId                          :: !(Maybe Int64)
+    , _aType                                  :: !(Maybe AdType)
+    , _aRemarketingListExpression             :: !(Maybe ListTargetingExpression)
+    , _aDynamicClickTracker                   :: !(Maybe Bool)
+    , _aCompatibility                         :: !(Maybe AdCompatibility)
+    , _aArchived                              :: !(Maybe Bool)
+    , _aDefaultClickThroughEventTagProperties :: !(Maybe DefaultClickThroughEventTagProperties)
+    , _aPlacementAssignments                  :: !(Maybe [PlacementAssignment])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Ad' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'addCreativeGroupAssignments'
+-- * 'aCreativeGroupAssignments'
 --
--- * 'addGeoTargeting'
+-- * 'aGeoTargeting'
 --
--- * 'addCreativeRotation'
+-- * 'aCreativeRotation'
 --
--- * 'addTechnologyTargeting'
+-- * 'aTechnologyTargeting'
 --
--- * 'addAudienceSegmentId'
+-- * 'aAudienceSegmentId'
 --
--- * 'addDayPartTargeting'
+-- * 'aDayPartTargeting'
 --
--- * 'addSize'
+-- * 'aSize'
 --
--- * 'addStartTime'
+-- * 'aStartTime'
 --
--- * 'addKind'
+-- * 'aKind'
 --
--- * 'addClickThroughURLSuffixProperties'
+-- * 'aClickThroughURLSuffixProperties'
 --
--- * 'addCampaignIdDimensionValue'
+-- * 'aCampaignIdDimensionValue'
 --
--- * 'addAdvertiserId'
+-- * 'aAdvertiserId'
 --
--- * 'addAdvertiserIdDimensionValue'
+-- * 'aAdvertiserIdDimensionValue'
 --
--- * 'addSSLCompliant'
+-- * 'aSSLCompliant'
 --
--- * 'addCampaignId'
+-- * 'aCampaignId'
 --
--- * 'addIdDimensionValue'
+-- * 'aIdDimensionValue'
 --
--- * 'addClickThroughURL'
+-- * 'aClickThroughURL'
 --
--- * 'addDeliverySchedule'
+-- * 'aDeliverySchedule'
 --
--- * 'addEventTagOverrides'
+-- * 'aEventTagOverrides'
 --
--- * 'addActive'
+-- * 'aActive'
 --
--- * 'addAccountId'
+-- * 'aAccountId'
 --
--- * 'addName'
+-- * 'aName'
 --
--- * 'addKeyValueTargetingExpression'
+-- * 'aKeyValueTargetingExpression'
 --
--- * 'addEndTime'
+-- * 'aEndTime'
 --
--- * 'addCreateInfo'
+-- * 'aCreateInfo'
 --
--- * 'addLastModifiedInfo'
+-- * 'aLastModifiedInfo'
 --
--- * 'addId'
+-- * 'aId'
 --
--- * 'addSSLRequired'
+-- * 'aSSLRequired'
 --
--- * 'addComments'
+-- * 'aComments'
 --
--- * 'addSubAccountId'
+-- * 'aSubAccountId'
 --
--- * 'addType'
+-- * 'aType'
 --
--- * 'addRemarketingListExpression'
+-- * 'aRemarketingListExpression'
 --
--- * 'addDynamicClickTracker'
+-- * 'aDynamicClickTracker'
 --
--- * 'addCompatibility'
+-- * 'aCompatibility'
 --
--- * 'addArchived'
+-- * 'aArchived'
 --
--- * 'addDefaultClickThroughEventTagProperties'
+-- * 'aDefaultClickThroughEventTagProperties'
 --
--- * 'addPlacementAssignments'
+-- * 'aPlacementAssignments'
 ad
     :: Ad
 ad =
     Ad
-    { _addCreativeGroupAssignments = Nothing
-    , _addGeoTargeting = Nothing
-    , _addCreativeRotation = Nothing
-    , _addTechnologyTargeting = Nothing
-    , _addAudienceSegmentId = Nothing
-    , _addDayPartTargeting = Nothing
-    , _addSize = Nothing
-    , _addStartTime = Nothing
-    , _addKind = "dfareporting#ad"
-    , _addClickThroughURLSuffixProperties = Nothing
-    , _addCampaignIdDimensionValue = Nothing
-    , _addAdvertiserId = Nothing
-    , _addAdvertiserIdDimensionValue = Nothing
-    , _addSSLCompliant = Nothing
-    , _addCampaignId = Nothing
-    , _addIdDimensionValue = Nothing
-    , _addClickThroughURL = Nothing
-    , _addDeliverySchedule = Nothing
-    , _addEventTagOverrides = Nothing
-    , _addActive = Nothing
-    , _addAccountId = Nothing
-    , _addName = Nothing
-    , _addKeyValueTargetingExpression = Nothing
-    , _addEndTime = Nothing
-    , _addCreateInfo = Nothing
-    , _addLastModifiedInfo = Nothing
-    , _addId = Nothing
-    , _addSSLRequired = Nothing
-    , _addComments = Nothing
-    , _addSubAccountId = Nothing
-    , _addType = Nothing
-    , _addRemarketingListExpression = Nothing
-    , _addDynamicClickTracker = Nothing
-    , _addCompatibility = Nothing
-    , _addArchived = Nothing
-    , _addDefaultClickThroughEventTagProperties = Nothing
-    , _addPlacementAssignments = Nothing
+    { _aCreativeGroupAssignments = Nothing
+    , _aGeoTargeting = Nothing
+    , _aCreativeRotation = Nothing
+    , _aTechnologyTargeting = Nothing
+    , _aAudienceSegmentId = Nothing
+    , _aDayPartTargeting = Nothing
+    , _aSize = Nothing
+    , _aStartTime = Nothing
+    , _aKind = "dfareporting#ad"
+    , _aClickThroughURLSuffixProperties = Nothing
+    , _aCampaignIdDimensionValue = Nothing
+    , _aAdvertiserId = Nothing
+    , _aAdvertiserIdDimensionValue = Nothing
+    , _aSSLCompliant = Nothing
+    , _aCampaignId = Nothing
+    , _aIdDimensionValue = Nothing
+    , _aClickThroughURL = Nothing
+    , _aDeliverySchedule = Nothing
+    , _aEventTagOverrides = Nothing
+    , _aActive = Nothing
+    , _aAccountId = Nothing
+    , _aName = Nothing
+    , _aKeyValueTargetingExpression = Nothing
+    , _aEndTime = Nothing
+    , _aCreateInfo = Nothing
+    , _aLastModifiedInfo = Nothing
+    , _aId = Nothing
+    , _aSSLRequired = Nothing
+    , _aComments = Nothing
+    , _aSubAccountId = Nothing
+    , _aType = Nothing
+    , _aRemarketingListExpression = Nothing
+    , _aDynamicClickTracker = Nothing
+    , _aCompatibility = Nothing
+    , _aArchived = Nothing
+    , _aDefaultClickThroughEventTagProperties = Nothing
+    , _aPlacementAssignments = Nothing
     }
 
 -- | Creative group assignments for this ad. Applicable when type is
 -- AD_SERVING_CLICK_TRACKER. Only one assignment per creative group number
 -- is allowed for a maximum of two assignments.
-addCreativeGroupAssignments :: Lens' Ad [CreativeGroupAssignment]
-addCreativeGroupAssignments
-  = lens _addCreativeGroupAssignments
-      (\ s a -> s{_addCreativeGroupAssignments = a})
+aCreativeGroupAssignments :: Lens' Ad [CreativeGroupAssignment]
+aCreativeGroupAssignments
+  = lens _aCreativeGroupAssignments
+      (\ s a -> s{_aCreativeGroupAssignments = a})
       . _Default
       . _Coerce
 
 -- | Geographical targeting information for this ad.Applicable when type is
 -- AD_SERVING_STANDARD_AD.
-addGeoTargeting :: Lens' Ad (Maybe GeoTargeting)
-addGeoTargeting
-  = lens _addGeoTargeting
-      (\ s a -> s{_addGeoTargeting = a})
+aGeoTargeting :: Lens' Ad (Maybe GeoTargeting)
+aGeoTargeting
+  = lens _aGeoTargeting
+      (\ s a -> s{_aGeoTargeting = a})
 
 -- | Creative rotation for this ad. Applicable when type is
 -- AD_SERVING_DEFAULT_AD, AD_SERVING_STANDARD_AD, or AD_SERVING_TRACKING.
 -- When type is AD_SERVING_DEFAULT_AD, this field should have exactly one
 -- creativeAssignment.
-addCreativeRotation :: Lens' Ad (Maybe CreativeRotation)
-addCreativeRotation
-  = lens _addCreativeRotation
-      (\ s a -> s{_addCreativeRotation = a})
+aCreativeRotation :: Lens' Ad (Maybe CreativeRotation)
+aCreativeRotation
+  = lens _aCreativeRotation
+      (\ s a -> s{_aCreativeRotation = a})
 
 -- | Technology platform targeting information for this ad. Applicable when
 -- type is AD_SERVING_STANDARD_AD.
-addTechnologyTargeting :: Lens' Ad (Maybe TechnologyTargeting)
-addTechnologyTargeting
-  = lens _addTechnologyTargeting
-      (\ s a -> s{_addTechnologyTargeting = a})
+aTechnologyTargeting :: Lens' Ad (Maybe TechnologyTargeting)
+aTechnologyTargeting
+  = lens _aTechnologyTargeting
+      (\ s a -> s{_aTechnologyTargeting = a})
 
 -- | Audience segment ID that is being targeted for this ad. Applicable when
 -- type is AD_SERVING_STANDARD_AD.
-addAudienceSegmentId :: Lens' Ad (Maybe Int64)
-addAudienceSegmentId
-  = lens _addAudienceSegmentId
-      (\ s a -> s{_addAudienceSegmentId = a})
+aAudienceSegmentId :: Lens' Ad (Maybe Int64)
+aAudienceSegmentId
+  = lens _aAudienceSegmentId
+      (\ s a -> s{_aAudienceSegmentId = a})
 
 -- | Time and day targeting information for this ad. Applicable when type is
 -- AD_SERVING_STANDARD_AD.
-addDayPartTargeting :: Lens' Ad (Maybe DayPartTargeting)
-addDayPartTargeting
-  = lens _addDayPartTargeting
-      (\ s a -> s{_addDayPartTargeting = a})
+aDayPartTargeting :: Lens' Ad (Maybe DayPartTargeting)
+aDayPartTargeting
+  = lens _aDayPartTargeting
+      (\ s a -> s{_aDayPartTargeting = a})
 
 -- | Size of this ad. Applicable when type is AD_SERVING_DEFAULT_AD.
-addSize :: Lens' Ad (Maybe Size)
-addSize = lens _addSize (\ s a -> s{_addSize = a})
+aSize :: Lens' Ad (Maybe Size)
+aSize = lens _aSize (\ s a -> s{_aSize = a})
 
 -- | Date and time that this ad should start serving. If creating an ad, this
 -- field must be a time in the future. This is a required field on
 -- insertion.
-addStartTime :: Lens' Ad (Maybe UTCTime)
-addStartTime
-  = lens _addStartTime (\ s a -> s{_addStartTime = a})
-      . mapping _DateTime
+aStartTime :: Lens' Ad (Maybe UTCTime)
+aStartTime
+  = lens _aStartTime (\ s a -> s{_aStartTime = a}) .
+      mapping _DateTime
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#ad\".
-addKind :: Lens' Ad Text
-addKind = lens _addKind (\ s a -> s{_addKind = a})
+aKind :: Lens' Ad Text
+aKind = lens _aKind (\ s a -> s{_aKind = a})
 
 -- | Click-through URL suffix properties for this ad. Applies to the URL in
 -- the ad or (if overriding ad properties) the URL in the creative.
-addClickThroughURLSuffixProperties :: Lens' Ad (Maybe ClickThroughURLSuffixProperties)
-addClickThroughURLSuffixProperties
-  = lens _addClickThroughURLSuffixProperties
-      (\ s a -> s{_addClickThroughURLSuffixProperties = a})
+aClickThroughURLSuffixProperties :: Lens' Ad (Maybe ClickThroughURLSuffixProperties)
+aClickThroughURLSuffixProperties
+  = lens _aClickThroughURLSuffixProperties
+      (\ s a -> s{_aClickThroughURLSuffixProperties = a})
 
 -- | Dimension value for the ID of the campaign. This is a read-only,
 -- auto-generated field.
-addCampaignIdDimensionValue :: Lens' Ad (Maybe DimensionValue)
-addCampaignIdDimensionValue
-  = lens _addCampaignIdDimensionValue
-      (\ s a -> s{_addCampaignIdDimensionValue = a})
+aCampaignIdDimensionValue :: Lens' Ad (Maybe DimensionValue)
+aCampaignIdDimensionValue
+  = lens _aCampaignIdDimensionValue
+      (\ s a -> s{_aCampaignIdDimensionValue = a})
 
 -- | Advertiser ID of this ad. This is a required field on insertion.
-addAdvertiserId :: Lens' Ad (Maybe Int64)
-addAdvertiserId
-  = lens _addAdvertiserId
-      (\ s a -> s{_addAdvertiserId = a})
+aAdvertiserId :: Lens' Ad (Maybe Int64)
+aAdvertiserId
+  = lens _aAdvertiserId
+      (\ s a -> s{_aAdvertiserId = a})
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
-addAdvertiserIdDimensionValue :: Lens' Ad (Maybe DimensionValue)
-addAdvertiserIdDimensionValue
-  = lens _addAdvertiserIdDimensionValue
-      (\ s a -> s{_addAdvertiserIdDimensionValue = a})
+aAdvertiserIdDimensionValue :: Lens' Ad (Maybe DimensionValue)
+aAdvertiserIdDimensionValue
+  = lens _aAdvertiserIdDimensionValue
+      (\ s a -> s{_aAdvertiserIdDimensionValue = a})
 
 -- | Whether this ad is ssl compliant. This is a read-only field that is
 -- auto-generated when the ad is inserted or updated.
-addSSLCompliant :: Lens' Ad (Maybe Bool)
-addSSLCompliant
-  = lens _addSSLCompliant
-      (\ s a -> s{_addSSLCompliant = a})
+aSSLCompliant :: Lens' Ad (Maybe Bool)
+aSSLCompliant
+  = lens _aSSLCompliant
+      (\ s a -> s{_aSSLCompliant = a})
 
 -- | Campaign ID of this ad. This is a required field on insertion.
-addCampaignId :: Lens' Ad (Maybe Int64)
-addCampaignId
-  = lens _addCampaignId
-      (\ s a -> s{_addCampaignId = a})
+aCampaignId :: Lens' Ad (Maybe Int64)
+aCampaignId
+  = lens _aCampaignId (\ s a -> s{_aCampaignId = a})
 
 -- | Dimension value for the ID of this ad. This is a read-only,
 -- auto-generated field.
-addIdDimensionValue :: Lens' Ad (Maybe DimensionValue)
-addIdDimensionValue
-  = lens _addIdDimensionValue
-      (\ s a -> s{_addIdDimensionValue = a})
+aIdDimensionValue :: Lens' Ad (Maybe DimensionValue)
+aIdDimensionValue
+  = lens _aIdDimensionValue
+      (\ s a -> s{_aIdDimensionValue = a})
 
 -- | Click-through URL for this ad. This is a required field on insertion.
 -- Applicable when type is AD_SERVING_CLICK_TRACKER.
-addClickThroughURL :: Lens' Ad (Maybe ClickThroughURL)
-addClickThroughURL
-  = lens _addClickThroughURL
-      (\ s a -> s{_addClickThroughURL = a})
+aClickThroughURL :: Lens' Ad (Maybe ClickThroughURL)
+aClickThroughURL
+  = lens _aClickThroughURL
+      (\ s a -> s{_aClickThroughURL = a})
 
 -- | Delivery schedule information for this ad. Applicable when type is
 -- AD_SERVING_STANDARD_AD or AD_SERVING_TRACKING. This field along with
 -- subfields priority and impressionRatio are required on insertion when
 -- type is AD_SERVING_STANDARD_AD.
-addDeliverySchedule :: Lens' Ad (Maybe DeliverySchedule)
-addDeliverySchedule
-  = lens _addDeliverySchedule
-      (\ s a -> s{_addDeliverySchedule = a})
+aDeliverySchedule :: Lens' Ad (Maybe DeliverySchedule)
+aDeliverySchedule
+  = lens _aDeliverySchedule
+      (\ s a -> s{_aDeliverySchedule = a})
 
 -- | Event tag overrides for this ad.
-addEventTagOverrides :: Lens' Ad [EventTagOverride]
-addEventTagOverrides
-  = lens _addEventTagOverrides
-      (\ s a -> s{_addEventTagOverrides = a})
+aEventTagOverrides :: Lens' Ad [EventTagOverride]
+aEventTagOverrides
+  = lens _aEventTagOverrides
+      (\ s a -> s{_aEventTagOverrides = a})
       . _Default
       . _Coerce
 
 -- | Whether this ad is active.
-addActive :: Lens' Ad (Maybe Bool)
-addActive
-  = lens _addActive (\ s a -> s{_addActive = a})
+aActive :: Lens' Ad (Maybe Bool)
+aActive = lens _aActive (\ s a -> s{_aActive = a})
 
 -- | Account ID of this ad. This is a read-only field that can be left blank.
-addAccountId :: Lens' Ad (Maybe Int64)
-addAccountId
-  = lens _addAccountId (\ s a -> s{_addAccountId = a})
+aAccountId :: Lens' Ad (Maybe Int64)
+aAccountId
+  = lens _aAccountId (\ s a -> s{_aAccountId = a})
 
 -- | Name of this ad. This is a required field and must be less than 256
 -- characters long.
-addName :: Lens' Ad (Maybe Text)
-addName = lens _addName (\ s a -> s{_addName = a})
+aName :: Lens' Ad (Maybe Text)
+aName = lens _aName (\ s a -> s{_aName = a})
 
 -- | Key-value targeting information for this ad. Applicable when type is
 -- AD_SERVING_STANDARD_AD.
-addKeyValueTargetingExpression :: Lens' Ad (Maybe KeyValueTargetingExpression)
-addKeyValueTargetingExpression
-  = lens _addKeyValueTargetingExpression
-      (\ s a -> s{_addKeyValueTargetingExpression = a})
+aKeyValueTargetingExpression :: Lens' Ad (Maybe KeyValueTargetingExpression)
+aKeyValueTargetingExpression
+  = lens _aKeyValueTargetingExpression
+      (\ s a -> s{_aKeyValueTargetingExpression = a})
 
 -- | Date and time that this ad should stop serving. Must be later than the
 -- start time. This is a required field on insertion.
-addEndTime :: Lens' Ad (Maybe UTCTime)
-addEndTime
-  = lens _addEndTime (\ s a -> s{_addEndTime = a}) .
+aEndTime :: Lens' Ad (Maybe UTCTime)
+aEndTime
+  = lens _aEndTime (\ s a -> s{_aEndTime = a}) .
       mapping _DateTime
 
 -- | Information about the creation of this ad.This is a read-only field.
-addCreateInfo :: Lens' Ad (Maybe LastModifiedInfo)
-addCreateInfo
-  = lens _addCreateInfo
-      (\ s a -> s{_addCreateInfo = a})
+aCreateInfo :: Lens' Ad (Maybe LastModifiedInfo)
+aCreateInfo
+  = lens _aCreateInfo (\ s a -> s{_aCreateInfo = a})
 
 -- | Information about the most recent modification of this ad. This is a
 -- read-only field.
-addLastModifiedInfo :: Lens' Ad (Maybe LastModifiedInfo)
-addLastModifiedInfo
-  = lens _addLastModifiedInfo
-      (\ s a -> s{_addLastModifiedInfo = a})
+aLastModifiedInfo :: Lens' Ad (Maybe LastModifiedInfo)
+aLastModifiedInfo
+  = lens _aLastModifiedInfo
+      (\ s a -> s{_aLastModifiedInfo = a})
 
 -- | ID of this ad. This is a read-only, auto-generated field.
-addId :: Lens' Ad (Maybe Int64)
-addId = lens _addId (\ s a -> s{_addId = a})
+aId :: Lens' Ad (Maybe Int64)
+aId = lens _aId (\ s a -> s{_aId = a})
 
 -- | Whether this ad requires ssl. This is a read-only field that is
 -- auto-generated when the ad is inserted or updated.
-addSSLRequired :: Lens' Ad (Maybe Bool)
-addSSLRequired
-  = lens _addSSLRequired
-      (\ s a -> s{_addSSLRequired = a})
+aSSLRequired :: Lens' Ad (Maybe Bool)
+aSSLRequired
+  = lens _aSSLRequired (\ s a -> s{_aSSLRequired = a})
 
 -- | Comments for this ad.
-addComments :: Lens' Ad (Maybe Text)
-addComments
-  = lens _addComments (\ s a -> s{_addComments = a})
+aComments :: Lens' Ad (Maybe Text)
+aComments
+  = lens _aComments (\ s a -> s{_aComments = a})
 
 -- | Subaccount ID of this ad. This is a read-only field that can be left
 -- blank.
-addSubAccountId :: Lens' Ad (Maybe Int64)
-addSubAccountId
-  = lens _addSubAccountId
-      (\ s a -> s{_addSubAccountId = a})
+aSubAccountId :: Lens' Ad (Maybe Int64)
+aSubAccountId
+  = lens _aSubAccountId
+      (\ s a -> s{_aSubAccountId = a})
 
 -- | Type of ad. This is a required field on insertion. Note that default ads
 -- (AD_SERVING_DEFAULT_AD) cannot be created directly (see Creative
 -- resource).
-addType :: Lens' Ad (Maybe AdType)
-addType = lens _addType (\ s a -> s{_addType = a})
+aType :: Lens' Ad (Maybe AdType)
+aType = lens _aType (\ s a -> s{_aType = a})
 
 -- | Applicable when type is AD_SERVING_STANDARD_AD. Remarketing list
 -- targeting expression for this ad.
-addRemarketingListExpression :: Lens' Ad (Maybe ListTargetingExpression)
-addRemarketingListExpression
-  = lens _addRemarketingListExpression
-      (\ s a -> s{_addRemarketingListExpression = a})
+aRemarketingListExpression :: Lens' Ad (Maybe ListTargetingExpression)
+aRemarketingListExpression
+  = lens _aRemarketingListExpression
+      (\ s a -> s{_aRemarketingListExpression = a})
 
 -- | Whether this ad is a dynamic click tracker. Applicable when type is
 -- AD_SERVING_CLICK_TRACKER. This is a required field on insert, and is
 -- read-only after insert.
-addDynamicClickTracker :: Lens' Ad (Maybe Bool)
-addDynamicClickTracker
-  = lens _addDynamicClickTracker
-      (\ s a -> s{_addDynamicClickTracker = a})
+aDynamicClickTracker :: Lens' Ad (Maybe Bool)
+aDynamicClickTracker
+  = lens _aDynamicClickTracker
+      (\ s a -> s{_aDynamicClickTracker = a})
 
 -- | Compatibility of this ad. Applicable when type is AD_SERVING_DEFAULT_AD.
 -- WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on
@@ -4210,28 +4206,28 @@ addDynamicClickTracker
 -- APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO
 -- refers to rendering an in-stream video ads developed with the VAST
 -- standard.
-addCompatibility :: Lens' Ad (Maybe AdCompatibility)
-addCompatibility
-  = lens _addCompatibility
-      (\ s a -> s{_addCompatibility = a})
+aCompatibility :: Lens' Ad (Maybe AdCompatibility)
+aCompatibility
+  = lens _aCompatibility
+      (\ s a -> s{_aCompatibility = a})
 
 -- | Whether this ad is archived.
-addArchived :: Lens' Ad (Maybe Bool)
-addArchived
-  = lens _addArchived (\ s a -> s{_addArchived = a})
+aArchived :: Lens' Ad (Maybe Bool)
+aArchived
+  = lens _aArchived (\ s a -> s{_aArchived = a})
 
 -- | Default click-through event tag properties for this ad.
-addDefaultClickThroughEventTagProperties :: Lens' Ad (Maybe DefaultClickThroughEventTagProperties)
-addDefaultClickThroughEventTagProperties
-  = lens _addDefaultClickThroughEventTagProperties
+aDefaultClickThroughEventTagProperties :: Lens' Ad (Maybe DefaultClickThroughEventTagProperties)
+aDefaultClickThroughEventTagProperties
+  = lens _aDefaultClickThroughEventTagProperties
       (\ s a ->
-         s{_addDefaultClickThroughEventTagProperties = a})
+         s{_aDefaultClickThroughEventTagProperties = a})
 
 -- | Placement assignments for this ad.
-addPlacementAssignments :: Lens' Ad [PlacementAssignment]
-addPlacementAssignments
-  = lens _addPlacementAssignments
-      (\ s a -> s{_addPlacementAssignments = a})
+aPlacementAssignments :: Lens' Ad [PlacementAssignment]
+aPlacementAssignments
+  = lens _aPlacementAssignments
+      (\ s a -> s{_aPlacementAssignments = a})
       . _Default
       . _Coerce
 
@@ -4283,52 +4279,50 @@ instance ToJSON Ad where
           = object
               (catMaybes
                  [("creativeGroupAssignments" .=) <$>
-                    _addCreativeGroupAssignments,
-                  ("geoTargeting" .=) <$> _addGeoTargeting,
-                  ("creativeRotation" .=) <$> _addCreativeRotation,
-                  ("technologyTargeting" .=) <$>
-                    _addTechnologyTargeting,
-                  ("audienceSegmentId" .=) <$> _addAudienceSegmentId,
-                  ("dayPartTargeting" .=) <$> _addDayPartTargeting,
-                  ("size" .=) <$> _addSize,
-                  ("startTime" .=) <$> _addStartTime,
-                  Just ("kind" .= _addKind),
+                    _aCreativeGroupAssignments,
+                  ("geoTargeting" .=) <$> _aGeoTargeting,
+                  ("creativeRotation" .=) <$> _aCreativeRotation,
+                  ("technologyTargeting" .=) <$> _aTechnologyTargeting,
+                  ("audienceSegmentId" .=) <$> _aAudienceSegmentId,
+                  ("dayPartTargeting" .=) <$> _aDayPartTargeting,
+                  ("size" .=) <$> _aSize,
+                  ("startTime" .=) <$> _aStartTime,
+                  Just ("kind" .= _aKind),
                   ("clickThroughUrlSuffixProperties" .=) <$>
-                    _addClickThroughURLSuffixProperties,
+                    _aClickThroughURLSuffixProperties,
                   ("campaignIdDimensionValue" .=) <$>
-                    _addCampaignIdDimensionValue,
-                  ("advertiserId" .=) <$> _addAdvertiserId,
+                    _aCampaignIdDimensionValue,
+                  ("advertiserId" .=) <$> _aAdvertiserId,
                   ("advertiserIdDimensionValue" .=) <$>
-                    _addAdvertiserIdDimensionValue,
-                  ("sslCompliant" .=) <$> _addSSLCompliant,
-                  ("campaignId" .=) <$> _addCampaignId,
-                  ("idDimensionValue" .=) <$> _addIdDimensionValue,
-                  ("clickThroughUrl" .=) <$> _addClickThroughURL,
-                  ("deliverySchedule" .=) <$> _addDeliverySchedule,
-                  ("eventTagOverrides" .=) <$> _addEventTagOverrides,
-                  ("active" .=) <$> _addActive,
-                  ("accountId" .=) <$> _addAccountId,
-                  ("name" .=) <$> _addName,
+                    _aAdvertiserIdDimensionValue,
+                  ("sslCompliant" .=) <$> _aSSLCompliant,
+                  ("campaignId" .=) <$> _aCampaignId,
+                  ("idDimensionValue" .=) <$> _aIdDimensionValue,
+                  ("clickThroughUrl" .=) <$> _aClickThroughURL,
+                  ("deliverySchedule" .=) <$> _aDeliverySchedule,
+                  ("eventTagOverrides" .=) <$> _aEventTagOverrides,
+                  ("active" .=) <$> _aActive,
+                  ("accountId" .=) <$> _aAccountId,
+                  ("name" .=) <$> _aName,
                   ("keyValueTargetingExpression" .=) <$>
-                    _addKeyValueTargetingExpression,
-                  ("endTime" .=) <$> _addEndTime,
-                  ("createInfo" .=) <$> _addCreateInfo,
-                  ("lastModifiedInfo" .=) <$> _addLastModifiedInfo,
-                  ("id" .=) <$> _addId,
-                  ("sslRequired" .=) <$> _addSSLRequired,
-                  ("comments" .=) <$> _addComments,
-                  ("subaccountId" .=) <$> _addSubAccountId,
-                  ("type" .=) <$> _addType,
+                    _aKeyValueTargetingExpression,
+                  ("endTime" .=) <$> _aEndTime,
+                  ("createInfo" .=) <$> _aCreateInfo,
+                  ("lastModifiedInfo" .=) <$> _aLastModifiedInfo,
+                  ("id" .=) <$> _aId,
+                  ("sslRequired" .=) <$> _aSSLRequired,
+                  ("comments" .=) <$> _aComments,
+                  ("subaccountId" .=) <$> _aSubAccountId,
+                  ("type" .=) <$> _aType,
                   ("remarketingListExpression" .=) <$>
-                    _addRemarketingListExpression,
-                  ("dynamicClickTracker" .=) <$>
-                    _addDynamicClickTracker,
-                  ("compatibility" .=) <$> _addCompatibility,
-                  ("archived" .=) <$> _addArchived,
+                    _aRemarketingListExpression,
+                  ("dynamicClickTracker" .=) <$> _aDynamicClickTracker,
+                  ("compatibility" .=) <$> _aCompatibility,
+                  ("archived" .=) <$> _aArchived,
                   ("defaultClickThroughEventTagProperties" .=) <$>
-                    _addDefaultClickThroughEventTagProperties,
+                    _aDefaultClickThroughEventTagProperties,
                   ("placementAssignments" .=) <$>
-                    _addPlacementAssignments])
+                    _aPlacementAssignments])
 
 -- | Contains properties of a DoubleClick Planning project.
 --
@@ -9176,53 +9170,53 @@ instance ToJSON AccountUserProFilesListResponse where
 --
 -- /See:/ 'contentCategory' smart constructor.
 data ContentCategory = ContentCategory
-    { _ccKind      :: !Text
-    , _ccAccountId :: !(Maybe Int64)
-    , _ccName      :: !(Maybe Text)
-    , _ccId        :: !(Maybe Int64)
+    { _conKind      :: !Text
+    , _conAccountId :: !(Maybe Int64)
+    , _conName      :: !(Maybe Text)
+    , _conId        :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategory' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ccKind'
+-- * 'conKind'
 --
--- * 'ccAccountId'
+-- * 'conAccountId'
 --
--- * 'ccName'
+-- * 'conName'
 --
--- * 'ccId'
+-- * 'conId'
 contentCategory
     :: ContentCategory
 contentCategory =
     ContentCategory
-    { _ccKind = "dfareporting#contentCategory"
-    , _ccAccountId = Nothing
-    , _ccName = Nothing
-    , _ccId = Nothing
+    { _conKind = "dfareporting#contentCategory"
+    , _conAccountId = Nothing
+    , _conName = Nothing
+    , _conId = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#contentCategory\".
-ccKind :: Lens' ContentCategory Text
-ccKind = lens _ccKind (\ s a -> s{_ccKind = a})
+conKind :: Lens' ContentCategory Text
+conKind = lens _conKind (\ s a -> s{_conKind = a})
 
 -- | Account ID of this content category. This is a read-only field that can
 -- be left blank.
-ccAccountId :: Lens' ContentCategory (Maybe Int64)
-ccAccountId
-  = lens _ccAccountId (\ s a -> s{_ccAccountId = a})
+conAccountId :: Lens' ContentCategory (Maybe Int64)
+conAccountId
+  = lens _conAccountId (\ s a -> s{_conAccountId = a})
 
 -- | Name of this content category. This is a required field and must be less
 -- than 256 characters long and unique among content categories of the same
 -- account.
-ccName :: Lens' ContentCategory (Maybe Text)
-ccName = lens _ccName (\ s a -> s{_ccName = a})
+conName :: Lens' ContentCategory (Maybe Text)
+conName = lens _conName (\ s a -> s{_conName = a})
 
 -- | ID of this content category. This is a read-only, auto-generated field.
-ccId :: Lens' ContentCategory (Maybe Int64)
-ccId = lens _ccId (\ s a -> s{_ccId = a})
+conId :: Lens' ContentCategory (Maybe Int64)
+conId = lens _conId (\ s a -> s{_conId = a})
 
 instance FromJSON ContentCategory where
         parseJSON
@@ -9238,9 +9232,9 @@ instance ToJSON ContentCategory where
         toJSON ContentCategory{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _ccKind),
-                  ("accountId" .=) <$> _ccAccountId,
-                  ("name" .=) <$> _ccName, ("id" .=) <$> _ccId])
+                 [Just ("kind" .= _conKind),
+                  ("accountId" .=) <$> _conAccountId,
+                  ("name" .=) <$> _conName, ("id" .=) <$> _conId])
 
 -- | Represents fields that are compatible to be selected for a report of
 -- type \"STANDARD\".
@@ -9764,41 +9758,41 @@ instance ToJSON FloodlightReportCompatibleFields
 --
 -- /See:/ 'userRolePermissionGroup' smart constructor.
 data UserRolePermissionGroup = UserRolePermissionGroup
-    { _uKind :: !Text
-    , _uName :: !(Maybe Text)
-    , _uId   :: !(Maybe Int64)
+    { _urpgKind :: !Text
+    , _urpgName :: !(Maybe Text)
+    , _urpgId   :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolePermissionGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uKind'
+-- * 'urpgKind'
 --
--- * 'uName'
+-- * 'urpgName'
 --
--- * 'uId'
+-- * 'urpgId'
 userRolePermissionGroup
     :: UserRolePermissionGroup
 userRolePermissionGroup =
     UserRolePermissionGroup
-    { _uKind = "dfareporting#userRolePermissionGroup"
-    , _uName = Nothing
-    , _uId = Nothing
+    { _urpgKind = "dfareporting#userRolePermissionGroup"
+    , _urpgName = Nothing
+    , _urpgId = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#userRolePermissionGroup\".
-uKind :: Lens' UserRolePermissionGroup Text
-uKind = lens _uKind (\ s a -> s{_uKind = a})
+urpgKind :: Lens' UserRolePermissionGroup Text
+urpgKind = lens _urpgKind (\ s a -> s{_urpgKind = a})
 
 -- | Name of this user role permission group.
-uName :: Lens' UserRolePermissionGroup (Maybe Text)
-uName = lens _uName (\ s a -> s{_uName = a})
+urpgName :: Lens' UserRolePermissionGroup (Maybe Text)
+urpgName = lens _urpgName (\ s a -> s{_urpgName = a})
 
 -- | ID of this user role permission.
-uId :: Lens' UserRolePermissionGroup (Maybe Int64)
-uId = lens _uId (\ s a -> s{_uId = a})
+urpgId :: Lens' UserRolePermissionGroup (Maybe Int64)
+urpgId = lens _urpgId (\ s a -> s{_urpgId = a})
 
 instance FromJSON UserRolePermissionGroup where
         parseJSON
@@ -9814,8 +9808,8 @@ instance ToJSON UserRolePermissionGroup where
         toJSON UserRolePermissionGroup{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _uKind), ("name" .=) <$> _uName,
-                  ("id" .=) <$> _uId])
+                 [Just ("kind" .= _urpgKind),
+                  ("name" .=) <$> _urpgName, ("id" .=) <$> _urpgId])
 
 -- | Tag Settings
 --
@@ -11612,103 +11606,99 @@ instance ToJSON
 --
 -- /See:/ 'city' smart constructor.
 data City = City
-    { _citiMetroCode     :: !(Maybe Text)
-    , _citiRegionCode    :: !(Maybe Text)
-    , _citiKind          :: !Text
-    , _citiRegionDartId  :: !(Maybe Int64)
-    , _citiMetroDmaId    :: !(Maybe Int64)
-    , _citiName          :: !(Maybe Text)
-    , _citiCountryCode   :: !(Maybe Text)
-    , _citiCountryDartId :: !(Maybe Int64)
-    , _citiDartId        :: !(Maybe Int64)
+    { _ccMetroCode     :: !(Maybe Text)
+    , _ccRegionCode    :: !(Maybe Text)
+    , _ccKind          :: !Text
+    , _ccRegionDartId  :: !(Maybe Int64)
+    , _ccMetroDmaId    :: !(Maybe Int64)
+    , _ccName          :: !(Maybe Text)
+    , _ccCountryCode   :: !(Maybe Text)
+    , _ccCountryDartId :: !(Maybe Int64)
+    , _ccDartId        :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'City' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'citiMetroCode'
+-- * 'ccMetroCode'
 --
--- * 'citiRegionCode'
+-- * 'ccRegionCode'
 --
--- * 'citiKind'
+-- * 'ccKind'
 --
--- * 'citiRegionDartId'
+-- * 'ccRegionDartId'
 --
--- * 'citiMetroDmaId'
+-- * 'ccMetroDmaId'
 --
--- * 'citiName'
+-- * 'ccName'
 --
--- * 'citiCountryCode'
+-- * 'ccCountryCode'
 --
--- * 'citiCountryDartId'
+-- * 'ccCountryDartId'
 --
--- * 'citiDartId'
+-- * 'ccDartId'
 city
     :: City
 city =
     City
-    { _citiMetroCode = Nothing
-    , _citiRegionCode = Nothing
-    , _citiKind = "dfareporting#city"
-    , _citiRegionDartId = Nothing
-    , _citiMetroDmaId = Nothing
-    , _citiName = Nothing
-    , _citiCountryCode = Nothing
-    , _citiCountryDartId = Nothing
-    , _citiDartId = Nothing
+    { _ccMetroCode = Nothing
+    , _ccRegionCode = Nothing
+    , _ccKind = "dfareporting#city"
+    , _ccRegionDartId = Nothing
+    , _ccMetroDmaId = Nothing
+    , _ccName = Nothing
+    , _ccCountryCode = Nothing
+    , _ccCountryDartId = Nothing
+    , _ccDartId = Nothing
     }
 
 -- | Metro region code of the metro region (DMA) to which this city belongs.
-citiMetroCode :: Lens' City (Maybe Text)
-citiMetroCode
-  = lens _citiMetroCode
-      (\ s a -> s{_citiMetroCode = a})
+ccMetroCode :: Lens' City (Maybe Text)
+ccMetroCode
+  = lens _ccMetroCode (\ s a -> s{_ccMetroCode = a})
 
 -- | Region code of the region to which this city belongs.
-citiRegionCode :: Lens' City (Maybe Text)
-citiRegionCode
-  = lens _citiRegionCode
-      (\ s a -> s{_citiRegionCode = a})
+ccRegionCode :: Lens' City (Maybe Text)
+ccRegionCode
+  = lens _ccRegionCode (\ s a -> s{_ccRegionCode = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#city\".
-citiKind :: Lens' City Text
-citiKind = lens _citiKind (\ s a -> s{_citiKind = a})
+ccKind :: Lens' City Text
+ccKind = lens _ccKind (\ s a -> s{_ccKind = a})
 
 -- | DART ID of the region to which this city belongs.
-citiRegionDartId :: Lens' City (Maybe Int64)
-citiRegionDartId
-  = lens _citiRegionDartId
-      (\ s a -> s{_citiRegionDartId = a})
+ccRegionDartId :: Lens' City (Maybe Int64)
+ccRegionDartId
+  = lens _ccRegionDartId
+      (\ s a -> s{_ccRegionDartId = a})
 
 -- | ID of the metro region (DMA) to which this city belongs.
-citiMetroDmaId :: Lens' City (Maybe Int64)
-citiMetroDmaId
-  = lens _citiMetroDmaId
-      (\ s a -> s{_citiMetroDmaId = a})
+ccMetroDmaId :: Lens' City (Maybe Int64)
+ccMetroDmaId
+  = lens _ccMetroDmaId (\ s a -> s{_ccMetroDmaId = a})
 
 -- | Name of this city.
-citiName :: Lens' City (Maybe Text)
-citiName = lens _citiName (\ s a -> s{_citiName = a})
+ccName :: Lens' City (Maybe Text)
+ccName = lens _ccName (\ s a -> s{_ccName = a})
 
 -- | Country code of the country to which this city belongs.
-citiCountryCode :: Lens' City (Maybe Text)
-citiCountryCode
-  = lens _citiCountryCode
-      (\ s a -> s{_citiCountryCode = a})
+ccCountryCode :: Lens' City (Maybe Text)
+ccCountryCode
+  = lens _ccCountryCode
+      (\ s a -> s{_ccCountryCode = a})
 
 -- | DART ID of the country to which this city belongs.
-citiCountryDartId :: Lens' City (Maybe Int64)
-citiCountryDartId
-  = lens _citiCountryDartId
-      (\ s a -> s{_citiCountryDartId = a})
+ccCountryDartId :: Lens' City (Maybe Int64)
+ccCountryDartId
+  = lens _ccCountryDartId
+      (\ s a -> s{_ccCountryDartId = a})
 
 -- | DART ID of this city. This is the ID used for targeting and generating
 -- reports.
-citiDartId :: Lens' City (Maybe Int64)
-citiDartId
-  = lens _citiDartId (\ s a -> s{_citiDartId = a})
+ccDartId :: Lens' City (Maybe Int64)
+ccDartId = lens _ccDartId (\ s a -> s{_ccDartId = a})
 
 instance FromJSON City where
         parseJSON
@@ -11728,15 +11718,15 @@ instance ToJSON City where
         toJSON City{..}
           = object
               (catMaybes
-                 [("metroCode" .=) <$> _citiMetroCode,
-                  ("regionCode" .=) <$> _citiRegionCode,
-                  Just ("kind" .= _citiKind),
-                  ("regionDartId" .=) <$> _citiRegionDartId,
-                  ("metroDmaId" .=) <$> _citiMetroDmaId,
-                  ("name" .=) <$> _citiName,
-                  ("countryCode" .=) <$> _citiCountryCode,
-                  ("countryDartId" .=) <$> _citiCountryDartId,
-                  ("dartId" .=) <$> _citiDartId])
+                 [("metroCode" .=) <$> _ccMetroCode,
+                  ("regionCode" .=) <$> _ccRegionCode,
+                  Just ("kind" .= _ccKind),
+                  ("regionDartId" .=) <$> _ccRegionDartId,
+                  ("metroDmaId" .=) <$> _ccMetroDmaId,
+                  ("name" .=) <$> _ccName,
+                  ("countryCode" .=) <$> _ccCountryCode,
+                  ("countryDartId" .=) <$> _ccCountryDartId,
+                  ("dartId" .=) <$> _ccDartId])
 
 -- | Contains information about a platform type that can be targeted by ads.
 --
@@ -12889,147 +12879,150 @@ instance ToJSON PostalCodesListResponse where
 --
 -- /See:/ 'changeLog' smart constructor.
 data ChangeLog = ChangeLog
-    { _clUserProFileId   :: !(Maybe Int64)
-    , _clObjectType      :: !(Maybe Text)
-    , _clUserProFileName :: !(Maybe Text)
-    , _clKind            :: !Text
-    , _clObjectId        :: !(Maybe Int64)
-    , _clAction          :: !(Maybe Text)
-    , _clTransactionId   :: !(Maybe Int64)
-    , _clOldValue        :: !(Maybe Text)
-    , _clAccountId       :: !(Maybe Int64)
-    , _clNewValue        :: !(Maybe Text)
-    , _clFieldName       :: !(Maybe Text)
-    , _clId              :: !(Maybe Int64)
-    , _clSubAccountId    :: !(Maybe Int64)
-    , _clChangeTime      :: !(Maybe DateTime')
+    { _chaUserProFileId   :: !(Maybe Int64)
+    , _chaObjectType      :: !(Maybe Text)
+    , _chaUserProFileName :: !(Maybe Text)
+    , _chaKind            :: !Text
+    , _chaObjectId        :: !(Maybe Int64)
+    , _chaAction          :: !(Maybe Text)
+    , _chaTransactionId   :: !(Maybe Int64)
+    , _chaOldValue        :: !(Maybe Text)
+    , _chaAccountId       :: !(Maybe Int64)
+    , _chaNewValue        :: !(Maybe Text)
+    , _chaFieldName       :: !(Maybe Text)
+    , _chaId              :: !(Maybe Int64)
+    , _chaSubAccountId    :: !(Maybe Int64)
+    , _chaChangeTime      :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeLog' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'clUserProFileId'
+-- * 'chaUserProFileId'
 --
--- * 'clObjectType'
+-- * 'chaObjectType'
 --
--- * 'clUserProFileName'
+-- * 'chaUserProFileName'
 --
--- * 'clKind'
+-- * 'chaKind'
 --
--- * 'clObjectId'
+-- * 'chaObjectId'
 --
--- * 'clAction'
+-- * 'chaAction'
 --
--- * 'clTransactionId'
+-- * 'chaTransactionId'
 --
--- * 'clOldValue'
+-- * 'chaOldValue'
 --
--- * 'clAccountId'
+-- * 'chaAccountId'
 --
--- * 'clNewValue'
+-- * 'chaNewValue'
 --
--- * 'clFieldName'
+-- * 'chaFieldName'
 --
--- * 'clId'
+-- * 'chaId'
 --
--- * 'clSubAccountId'
+-- * 'chaSubAccountId'
 --
--- * 'clChangeTime'
+-- * 'chaChangeTime'
 changeLog
     :: ChangeLog
 changeLog =
     ChangeLog
-    { _clUserProFileId = Nothing
-    , _clObjectType = Nothing
-    , _clUserProFileName = Nothing
-    , _clKind = "dfareporting#changeLog"
-    , _clObjectId = Nothing
-    , _clAction = Nothing
-    , _clTransactionId = Nothing
-    , _clOldValue = Nothing
-    , _clAccountId = Nothing
-    , _clNewValue = Nothing
-    , _clFieldName = Nothing
-    , _clId = Nothing
-    , _clSubAccountId = Nothing
-    , _clChangeTime = Nothing
+    { _chaUserProFileId = Nothing
+    , _chaObjectType = Nothing
+    , _chaUserProFileName = Nothing
+    , _chaKind = "dfareporting#changeLog"
+    , _chaObjectId = Nothing
+    , _chaAction = Nothing
+    , _chaTransactionId = Nothing
+    , _chaOldValue = Nothing
+    , _chaAccountId = Nothing
+    , _chaNewValue = Nothing
+    , _chaFieldName = Nothing
+    , _chaId = Nothing
+    , _chaSubAccountId = Nothing
+    , _chaChangeTime = Nothing
     }
 
 -- | ID of the user who modified the object.
-clUserProFileId :: Lens' ChangeLog (Maybe Int64)
-clUserProFileId
-  = lens _clUserProFileId
-      (\ s a -> s{_clUserProFileId = a})
+chaUserProFileId :: Lens' ChangeLog (Maybe Int64)
+chaUserProFileId
+  = lens _chaUserProFileId
+      (\ s a -> s{_chaUserProFileId = a})
 
 -- | Object type of the change log.
-clObjectType :: Lens' ChangeLog (Maybe Text)
-clObjectType
-  = lens _clObjectType (\ s a -> s{_clObjectType = a})
+chaObjectType :: Lens' ChangeLog (Maybe Text)
+chaObjectType
+  = lens _chaObjectType
+      (\ s a -> s{_chaObjectType = a})
 
 -- | User profile name of the user who modified the object.
-clUserProFileName :: Lens' ChangeLog (Maybe Text)
-clUserProFileName
-  = lens _clUserProFileName
-      (\ s a -> s{_clUserProFileName = a})
+chaUserProFileName :: Lens' ChangeLog (Maybe Text)
+chaUserProFileName
+  = lens _chaUserProFileName
+      (\ s a -> s{_chaUserProFileName = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#changeLog\".
-clKind :: Lens' ChangeLog Text
-clKind = lens _clKind (\ s a -> s{_clKind = a})
+chaKind :: Lens' ChangeLog Text
+chaKind = lens _chaKind (\ s a -> s{_chaKind = a})
 
 -- | ID of the object of this change log. The object could be a campaign,
 -- placement, ad, or other type.
-clObjectId :: Lens' ChangeLog (Maybe Int64)
-clObjectId
-  = lens _clObjectId (\ s a -> s{_clObjectId = a})
+chaObjectId :: Lens' ChangeLog (Maybe Int64)
+chaObjectId
+  = lens _chaObjectId (\ s a -> s{_chaObjectId = a})
 
 -- | Action which caused the change.
-clAction :: Lens' ChangeLog (Maybe Text)
-clAction = lens _clAction (\ s a -> s{_clAction = a})
+chaAction :: Lens' ChangeLog (Maybe Text)
+chaAction
+  = lens _chaAction (\ s a -> s{_chaAction = a})
 
 -- | Transaction ID of this change log. When a single API call results in
 -- many changes, each change will have a separate ID in the change log but
 -- will share the same transactionId.
-clTransactionId :: Lens' ChangeLog (Maybe Int64)
-clTransactionId
-  = lens _clTransactionId
-      (\ s a -> s{_clTransactionId = a})
+chaTransactionId :: Lens' ChangeLog (Maybe Int64)
+chaTransactionId
+  = lens _chaTransactionId
+      (\ s a -> s{_chaTransactionId = a})
 
 -- | Old value of the object field.
-clOldValue :: Lens' ChangeLog (Maybe Text)
-clOldValue
-  = lens _clOldValue (\ s a -> s{_clOldValue = a})
+chaOldValue :: Lens' ChangeLog (Maybe Text)
+chaOldValue
+  = lens _chaOldValue (\ s a -> s{_chaOldValue = a})
 
 -- | Account ID of the modified object.
-clAccountId :: Lens' ChangeLog (Maybe Int64)
-clAccountId
-  = lens _clAccountId (\ s a -> s{_clAccountId = a})
+chaAccountId :: Lens' ChangeLog (Maybe Int64)
+chaAccountId
+  = lens _chaAccountId (\ s a -> s{_chaAccountId = a})
 
 -- | New value of the object field.
-clNewValue :: Lens' ChangeLog (Maybe Text)
-clNewValue
-  = lens _clNewValue (\ s a -> s{_clNewValue = a})
+chaNewValue :: Lens' ChangeLog (Maybe Text)
+chaNewValue
+  = lens _chaNewValue (\ s a -> s{_chaNewValue = a})
 
 -- | Field name of the object which changed.
-clFieldName :: Lens' ChangeLog (Maybe Text)
-clFieldName
-  = lens _clFieldName (\ s a -> s{_clFieldName = a})
+chaFieldName :: Lens' ChangeLog (Maybe Text)
+chaFieldName
+  = lens _chaFieldName (\ s a -> s{_chaFieldName = a})
 
 -- | ID of this change log.
-clId :: Lens' ChangeLog (Maybe Int64)
-clId = lens _clId (\ s a -> s{_clId = a})
+chaId :: Lens' ChangeLog (Maybe Int64)
+chaId = lens _chaId (\ s a -> s{_chaId = a})
 
 -- | Subaccount ID of the modified object.
-clSubAccountId :: Lens' ChangeLog (Maybe Int64)
-clSubAccountId
-  = lens _clSubAccountId
-      (\ s a -> s{_clSubAccountId = a})
+chaSubAccountId :: Lens' ChangeLog (Maybe Int64)
+chaSubAccountId
+  = lens _chaSubAccountId
+      (\ s a -> s{_chaSubAccountId = a})
 
 -- | Time when the object was modified.
-clChangeTime :: Lens' ChangeLog (Maybe UTCTime)
-clChangeTime
-  = lens _clChangeTime (\ s a -> s{_clChangeTime = a})
+chaChangeTime :: Lens' ChangeLog (Maybe UTCTime)
+chaChangeTime
+  = lens _chaChangeTime
+      (\ s a -> s{_chaChangeTime = a})
       . mapping _DateTime
 
 instance FromJSON ChangeLog where
@@ -13055,20 +13048,20 @@ instance ToJSON ChangeLog where
         toJSON ChangeLog{..}
           = object
               (catMaybes
-                 [("userProfileId" .=) <$> _clUserProFileId,
-                  ("objectType" .=) <$> _clObjectType,
-                  ("userProfileName" .=) <$> _clUserProFileName,
-                  Just ("kind" .= _clKind),
-                  ("objectId" .=) <$> _clObjectId,
-                  ("action" .=) <$> _clAction,
-                  ("transactionId" .=) <$> _clTransactionId,
-                  ("oldValue" .=) <$> _clOldValue,
-                  ("accountId" .=) <$> _clAccountId,
-                  ("newValue" .=) <$> _clNewValue,
-                  ("fieldName" .=) <$> _clFieldName,
-                  ("id" .=) <$> _clId,
-                  ("subaccountId" .=) <$> _clSubAccountId,
-                  ("changeTime" .=) <$> _clChangeTime])
+                 [("userProfileId" .=) <$> _chaUserProFileId,
+                  ("objectType" .=) <$> _chaObjectType,
+                  ("userProfileName" .=) <$> _chaUserProFileName,
+                  Just ("kind" .= _chaKind),
+                  ("objectId" .=) <$> _chaObjectId,
+                  ("action" .=) <$> _chaAction,
+                  ("transactionId" .=) <$> _chaTransactionId,
+                  ("oldValue" .=) <$> _chaOldValue,
+                  ("accountId" .=) <$> _chaAccountId,
+                  ("newValue" .=) <$> _chaNewValue,
+                  ("fieldName" .=) <$> _chaFieldName,
+                  ("id" .=) <$> _chaId,
+                  ("subaccountId" .=) <$> _chaSubAccountId,
+                  ("changeTime" .=) <$> _chaChangeTime])
 
 -- | Contains properties of a placement strategy.
 --
@@ -13674,41 +13667,41 @@ instance ToJSON TargetWindow where
 --
 -- /See:/ 'accountPermissionGroup' smart constructor.
 data AccountPermissionGroup = AccountPermissionGroup
-    { _apgKind :: !Text
-    , _apgName :: !(Maybe Text)
-    , _apgId   :: !(Maybe Int64)
+    { _apgpKind :: !Text
+    , _apgpName :: !(Maybe Text)
+    , _apgpId   :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermissionGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'apgKind'
+-- * 'apgpKind'
 --
--- * 'apgName'
+-- * 'apgpName'
 --
--- * 'apgId'
+-- * 'apgpId'
 accountPermissionGroup
     :: AccountPermissionGroup
 accountPermissionGroup =
     AccountPermissionGroup
-    { _apgKind = "dfareporting#accountPermissionGroup"
-    , _apgName = Nothing
-    , _apgId = Nothing
+    { _apgpKind = "dfareporting#accountPermissionGroup"
+    , _apgpName = Nothing
+    , _apgpId = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#accountPermissionGroup\".
-apgKind :: Lens' AccountPermissionGroup Text
-apgKind = lens _apgKind (\ s a -> s{_apgKind = a})
+apgpKind :: Lens' AccountPermissionGroup Text
+apgpKind = lens _apgpKind (\ s a -> s{_apgpKind = a})
 
 -- | Name of this account permission group.
-apgName :: Lens' AccountPermissionGroup (Maybe Text)
-apgName = lens _apgName (\ s a -> s{_apgName = a})
+apgpName :: Lens' AccountPermissionGroup (Maybe Text)
+apgpName = lens _apgpName (\ s a -> s{_apgpName = a})
 
 -- | ID of this account permission group.
-apgId :: Lens' AccountPermissionGroup (Maybe Int64)
-apgId = lens _apgId (\ s a -> s{_apgId = a})
+apgpId :: Lens' AccountPermissionGroup (Maybe Int64)
+apgpId = lens _apgpId (\ s a -> s{_apgpId = a})
 
 instance FromJSON AccountPermissionGroup where
         parseJSON
@@ -13724,8 +13717,8 @@ instance ToJSON AccountPermissionGroup where
         toJSON AccountPermissionGroup{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _apgKind), ("name" .=) <$> _apgName,
-                  ("id" .=) <$> _apgId])
+                 [Just ("kind" .= _apgpKind),
+                  ("name" .=) <$> _apgpName, ("id" .=) <$> _apgpId])
 
 -- | Contains properties of a DCM advertiser.
 --
@@ -15443,239 +15436,241 @@ instance ToJSON PlacementsGenerateTagsResponse where
 --
 -- /See:/ 'creativeAsset' smart constructor.
 data CreativeAsset = CreativeAsset
-    { _cZIndex                :: !(Maybe Int32)
-    , _cPushdown              :: !(Maybe Bool)
-    , _cVideoDuration         :: !(Maybe Float)
-    , _cOriginalBackup        :: !(Maybe Bool)
-    , _cWindowMode            :: !(Maybe CreativeAssetWindowMode)
-    , _cFlashVersion          :: !(Maybe Int32)
-    , _cPushdownDuration      :: !(Maybe Float)
-    , _cSize                  :: !(Maybe Size)
-    , _cVerticallyLocked      :: !(Maybe Bool)
-    , _cOffset                :: !(Maybe OffsetPosition)
-    , _cStreamingServingURL   :: !(Maybe Text)
-    , _cZipFilesize           :: !(Maybe Text)
-    , _cTransparency          :: !(Maybe Bool)
-    , _cHideSelectionBoxes    :: !(Maybe Bool)
-    , _cSSLCompliant          :: !(Maybe Bool)
-    , _cFileSize              :: !(Maybe Int64)
-    , _cAssetIdentifier       :: !(Maybe CreativeAssetId)
-    , _cDurationType          :: !(Maybe CreativeAssetDurationType)
-    , _cProgressiveServingURL :: !(Maybe Text)
-    , _cActive                :: !(Maybe Bool)
-    , _cRole                  :: !(Maybe CreativeAssetRole)
-    , _cMimeType              :: !(Maybe Text)
-    , _cPositionTopUnit       :: !(Maybe CreativeAssetPositionTopUnit)
-    , _cPositionLeftUnit      :: !(Maybe CreativeAssetPositionLeftUnit)
-    , _cAlignment             :: !(Maybe CreativeAssetAlignment)
-    , _cExpandedDimension     :: !(Maybe Size)
-    , _cZipFilename           :: !(Maybe Text)
-    , _cActionScript3         :: !(Maybe Bool)
-    , _cDisplayType           :: !(Maybe CreativeAssetDisplayType)
-    , _cChildAssetType        :: !(Maybe CreativeAssetChildAssetType)
-    , _cCollapsedSize         :: !(Maybe Size)
-    , _cId                    :: !(Maybe Int64)
-    , _cBitRate               :: !(Maybe Int32)
-    , _cCustomStartTimeValue  :: !(Maybe Int32)
-    , _cStartTimeType         :: !(Maybe CreativeAssetStartTimeType)
-    , _cDuration              :: !(Maybe Int32)
-    , _cArtworkType           :: !(Maybe CreativeAssetArtworkType)
-    , _cHideFlashObjects      :: !(Maybe Bool)
-    , _cDetectedFeatures      :: !(Maybe [CreativeAssetDetectedFeaturesItem])
-    , _cBackupImageExit       :: !(Maybe CreativeCustomEvent)
-    , _cPosition              :: !(Maybe OffsetPosition)
-    , _cHorizontallyLocked    :: !(Maybe Bool)
+    { _caaZIndex                :: !(Maybe Int32)
+    , _caaPushdown              :: !(Maybe Bool)
+    , _caaVideoDuration         :: !(Maybe Float)
+    , _caaOriginalBackup        :: !(Maybe Bool)
+    , _caaWindowMode            :: !(Maybe CreativeAssetWindowMode)
+    , _caaFlashVersion          :: !(Maybe Int32)
+    , _caaPushdownDuration      :: !(Maybe Float)
+    , _caaSize                  :: !(Maybe Size)
+    , _caaVerticallyLocked      :: !(Maybe Bool)
+    , _caaOffset                :: !(Maybe OffsetPosition)
+    , _caaStreamingServingURL   :: !(Maybe Text)
+    , _caaZipFilesize           :: !(Maybe Text)
+    , _caaTransparency          :: !(Maybe Bool)
+    , _caaHideSelectionBoxes    :: !(Maybe Bool)
+    , _caaSSLCompliant          :: !(Maybe Bool)
+    , _caaFileSize              :: !(Maybe Int64)
+    , _caaAssetIdentifier       :: !(Maybe CreativeAssetId)
+    , _caaDurationType          :: !(Maybe CreativeAssetDurationType)
+    , _caaProgressiveServingURL :: !(Maybe Text)
+    , _caaActive                :: !(Maybe Bool)
+    , _caaRole                  :: !(Maybe CreativeAssetRole)
+    , _caaMimeType              :: !(Maybe Text)
+    , _caaPositionTopUnit       :: !(Maybe CreativeAssetPositionTopUnit)
+    , _caaPositionLeftUnit      :: !(Maybe CreativeAssetPositionLeftUnit)
+    , _caaAlignment             :: !(Maybe CreativeAssetAlignment)
+    , _caaExpandedDimension     :: !(Maybe Size)
+    , _caaZipFilename           :: !(Maybe Text)
+    , _caaActionScript3         :: !(Maybe Bool)
+    , _caaDisplayType           :: !(Maybe CreativeAssetDisplayType)
+    , _caaChildAssetType        :: !(Maybe CreativeAssetChildAssetType)
+    , _caaCollapsedSize         :: !(Maybe Size)
+    , _caaId                    :: !(Maybe Int64)
+    , _caaBitRate               :: !(Maybe Int32)
+    , _caaCustomStartTimeValue  :: !(Maybe Int32)
+    , _caaStartTimeType         :: !(Maybe CreativeAssetStartTimeType)
+    , _caaDuration              :: !(Maybe Int32)
+    , _caaArtworkType           :: !(Maybe CreativeAssetArtworkType)
+    , _caaHideFlashObjects      :: !(Maybe Bool)
+    , _caaDetectedFeatures      :: !(Maybe [CreativeAssetDetectedFeaturesItem])
+    , _caaBackupImageExit       :: !(Maybe CreativeCustomEvent)
+    , _caaPosition              :: !(Maybe OffsetPosition)
+    , _caaHorizontallyLocked    :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeAsset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cZIndex'
+-- * 'caaZIndex'
 --
--- * 'cPushdown'
+-- * 'caaPushdown'
 --
--- * 'cVideoDuration'
+-- * 'caaVideoDuration'
 --
--- * 'cOriginalBackup'
+-- * 'caaOriginalBackup'
 --
--- * 'cWindowMode'
+-- * 'caaWindowMode'
 --
--- * 'cFlashVersion'
+-- * 'caaFlashVersion'
 --
--- * 'cPushdownDuration'
+-- * 'caaPushdownDuration'
 --
--- * 'cSize'
+-- * 'caaSize'
 --
--- * 'cVerticallyLocked'
+-- * 'caaVerticallyLocked'
 --
--- * 'cOffset'
+-- * 'caaOffset'
 --
--- * 'cStreamingServingURL'
+-- * 'caaStreamingServingURL'
 --
--- * 'cZipFilesize'
+-- * 'caaZipFilesize'
 --
--- * 'cTransparency'
+-- * 'caaTransparency'
 --
--- * 'cHideSelectionBoxes'
+-- * 'caaHideSelectionBoxes'
 --
--- * 'cSSLCompliant'
+-- * 'caaSSLCompliant'
 --
--- * 'cFileSize'
+-- * 'caaFileSize'
 --
--- * 'cAssetIdentifier'
+-- * 'caaAssetIdentifier'
 --
--- * 'cDurationType'
+-- * 'caaDurationType'
 --
--- * 'cProgressiveServingURL'
+-- * 'caaProgressiveServingURL'
 --
--- * 'cActive'
+-- * 'caaActive'
 --
--- * 'cRole'
+-- * 'caaRole'
 --
--- * 'cMimeType'
+-- * 'caaMimeType'
 --
--- * 'cPositionTopUnit'
+-- * 'caaPositionTopUnit'
 --
--- * 'cPositionLeftUnit'
+-- * 'caaPositionLeftUnit'
 --
--- * 'cAlignment'
+-- * 'caaAlignment'
 --
--- * 'cExpandedDimension'
+-- * 'caaExpandedDimension'
 --
--- * 'cZipFilename'
+-- * 'caaZipFilename'
 --
--- * 'cActionScript3'
+-- * 'caaActionScript3'
 --
--- * 'cDisplayType'
+-- * 'caaDisplayType'
 --
--- * 'cChildAssetType'
+-- * 'caaChildAssetType'
 --
--- * 'cCollapsedSize'
+-- * 'caaCollapsedSize'
 --
--- * 'cId'
+-- * 'caaId'
 --
--- * 'cBitRate'
+-- * 'caaBitRate'
 --
--- * 'cCustomStartTimeValue'
+-- * 'caaCustomStartTimeValue'
 --
--- * 'cStartTimeType'
+-- * 'caaStartTimeType'
 --
--- * 'cDuration'
+-- * 'caaDuration'
 --
--- * 'cArtworkType'
+-- * 'caaArtworkType'
 --
--- * 'cHideFlashObjects'
+-- * 'caaHideFlashObjects'
 --
--- * 'cDetectedFeatures'
+-- * 'caaDetectedFeatures'
 --
--- * 'cBackupImageExit'
+-- * 'caaBackupImageExit'
 --
--- * 'cPosition'
+-- * 'caaPosition'
 --
--- * 'cHorizontallyLocked'
+-- * 'caaHorizontallyLocked'
 creativeAsset
     :: CreativeAsset
 creativeAsset =
     CreativeAsset
-    { _cZIndex = Nothing
-    , _cPushdown = Nothing
-    , _cVideoDuration = Nothing
-    , _cOriginalBackup = Nothing
-    , _cWindowMode = Nothing
-    , _cFlashVersion = Nothing
-    , _cPushdownDuration = Nothing
-    , _cSize = Nothing
-    , _cVerticallyLocked = Nothing
-    , _cOffset = Nothing
-    , _cStreamingServingURL = Nothing
-    , _cZipFilesize = Nothing
-    , _cTransparency = Nothing
-    , _cHideSelectionBoxes = Nothing
-    , _cSSLCompliant = Nothing
-    , _cFileSize = Nothing
-    , _cAssetIdentifier = Nothing
-    , _cDurationType = Nothing
-    , _cProgressiveServingURL = Nothing
-    , _cActive = Nothing
-    , _cRole = Nothing
-    , _cMimeType = Nothing
-    , _cPositionTopUnit = Nothing
-    , _cPositionLeftUnit = Nothing
-    , _cAlignment = Nothing
-    , _cExpandedDimension = Nothing
-    , _cZipFilename = Nothing
-    , _cActionScript3 = Nothing
-    , _cDisplayType = Nothing
-    , _cChildAssetType = Nothing
-    , _cCollapsedSize = Nothing
-    , _cId = Nothing
-    , _cBitRate = Nothing
-    , _cCustomStartTimeValue = Nothing
-    , _cStartTimeType = Nothing
-    , _cDuration = Nothing
-    , _cArtworkType = Nothing
-    , _cHideFlashObjects = Nothing
-    , _cDetectedFeatures = Nothing
-    , _cBackupImageExit = Nothing
-    , _cPosition = Nothing
-    , _cHorizontallyLocked = Nothing
+    { _caaZIndex = Nothing
+    , _caaPushdown = Nothing
+    , _caaVideoDuration = Nothing
+    , _caaOriginalBackup = Nothing
+    , _caaWindowMode = Nothing
+    , _caaFlashVersion = Nothing
+    , _caaPushdownDuration = Nothing
+    , _caaSize = Nothing
+    , _caaVerticallyLocked = Nothing
+    , _caaOffset = Nothing
+    , _caaStreamingServingURL = Nothing
+    , _caaZipFilesize = Nothing
+    , _caaTransparency = Nothing
+    , _caaHideSelectionBoxes = Nothing
+    , _caaSSLCompliant = Nothing
+    , _caaFileSize = Nothing
+    , _caaAssetIdentifier = Nothing
+    , _caaDurationType = Nothing
+    , _caaProgressiveServingURL = Nothing
+    , _caaActive = Nothing
+    , _caaRole = Nothing
+    , _caaMimeType = Nothing
+    , _caaPositionTopUnit = Nothing
+    , _caaPositionLeftUnit = Nothing
+    , _caaAlignment = Nothing
+    , _caaExpandedDimension = Nothing
+    , _caaZipFilename = Nothing
+    , _caaActionScript3 = Nothing
+    , _caaDisplayType = Nothing
+    , _caaChildAssetType = Nothing
+    , _caaCollapsedSize = Nothing
+    , _caaId = Nothing
+    , _caaBitRate = Nothing
+    , _caaCustomStartTimeValue = Nothing
+    , _caaStartTimeType = Nothing
+    , _caaDuration = Nothing
+    , _caaArtworkType = Nothing
+    , _caaHideFlashObjects = Nothing
+    , _caaDetectedFeatures = Nothing
+    , _caaBackupImageExit = Nothing
+    , _caaPosition = Nothing
+    , _caaHorizontallyLocked = Nothing
     }
 
 -- | zIndex value of an asset. This is a read-only field. Applicable to the
 -- following creative types: all RICH_MEDIA.Additionally, only applicable
 -- to assets whose displayType is NOT one of the following types:
 -- ASSET_DISPLAY_TYPE_INPAGE or ASSET_DISPLAY_TYPE_OVERLAY.
-cZIndex :: Lens' CreativeAsset (Maybe Int32)
-cZIndex = lens _cZIndex (\ s a -> s{_cZIndex = a})
+caaZIndex :: Lens' CreativeAsset (Maybe Int32)
+caaZIndex
+  = lens _caaZIndex (\ s a -> s{_caaZIndex = a})
 
 -- | Whether the asset pushes down other content. Applicable to the following
 -- creative types: all RICH_MEDIA. Additionally, only applicable when the
 -- asset offsets are 0, the collapsedSize.width matches size.width, and the
 -- collapsedSize.height is less than size.height.
-cPushdown :: Lens' CreativeAsset (Maybe Bool)
-cPushdown
-  = lens _cPushdown (\ s a -> s{_cPushdown = a})
+caaPushdown :: Lens' CreativeAsset (Maybe Bool)
+caaPushdown
+  = lens _caaPushdown (\ s a -> s{_caaPushdown = a})
 
 -- | Detected video duration for video asset. This is a read-only field.
 -- Applicable to the following creative types: INSTREAM_VIDEO and all
 -- VPAID.
-cVideoDuration :: Lens' CreativeAsset (Maybe Float)
-cVideoDuration
-  = lens _cVideoDuration
-      (\ s a -> s{_cVideoDuration = a})
+caaVideoDuration :: Lens' CreativeAsset (Maybe Float)
+caaVideoDuration
+  = lens _caaVideoDuration
+      (\ s a -> s{_caaVideoDuration = a})
 
 -- | Whether the backup asset is original or changed by the user in DCM.
 -- Applicable to the following creative types: all RICH_MEDIA.
-cOriginalBackup :: Lens' CreativeAsset (Maybe Bool)
-cOriginalBackup
-  = lens _cOriginalBackup
-      (\ s a -> s{_cOriginalBackup = a})
+caaOriginalBackup :: Lens' CreativeAsset (Maybe Bool)
+caaOriginalBackup
+  = lens _caaOriginalBackup
+      (\ s a -> s{_caaOriginalBackup = a})
 
 -- | Window mode options for flash assets. Applicable to the following
 -- creative types: FLASH_INPAGE, RICH_MEDIA_EXPANDING,
 -- RICH_MEDIA_IM_EXPAND, RICH_MEDIA_INPAGE, and RICH_MEDIA_INPAGE_FLOATING.
-cWindowMode :: Lens' CreativeAsset (Maybe CreativeAssetWindowMode)
-cWindowMode
-  = lens _cWindowMode (\ s a -> s{_cWindowMode = a})
+caaWindowMode :: Lens' CreativeAsset (Maybe CreativeAssetWindowMode)
+caaWindowMode
+  = lens _caaWindowMode
+      (\ s a -> s{_caaWindowMode = a})
 
 -- | Flash version of the asset. This is a read-only field. Applicable to the
 -- following creative types: FLASH_INPAGE, ENHANCED_BANNER, all RICH_MEDIA,
 -- and all VPAID.
-cFlashVersion :: Lens' CreativeAsset (Maybe Int32)
-cFlashVersion
-  = lens _cFlashVersion
-      (\ s a -> s{_cFlashVersion = a})
+caaFlashVersion :: Lens' CreativeAsset (Maybe Int32)
+caaFlashVersion
+  = lens _caaFlashVersion
+      (\ s a -> s{_caaFlashVersion = a})
 
 -- | Pushdown duration in seconds for an asset. Must be between 0 and 9.99.
 -- Applicable to the following creative types: all RICH_MEDIA.Additionally,
 -- only applicable when the asset pushdown field is true, the offsets are
 -- 0, the collapsedSize.width matches size.width, and the
 -- collapsedSize.height is less than size.height.
-cPushdownDuration :: Lens' CreativeAsset (Maybe Float)
-cPushdownDuration
-  = lens _cPushdownDuration
-      (\ s a -> s{_cPushdownDuration = a})
+caaPushdownDuration :: Lens' CreativeAsset (Maybe Float)
+caaPushdownDuration
+  = lens _caaPushdownDuration
+      (\ s a -> s{_caaPushdownDuration = a})
 
 -- | Size associated with this creative asset. This is a required field when
 -- applicable; however for IMAGE and FLASH_INPAGE creatives, if left blank,
@@ -15683,92 +15678,95 @@ cPushdownDuration
 -- associated image asset. Applicable to the following creative types:
 -- ENHANCED_BANNER, ENHANCED_IMAGE, FLASH_INPAGE, HTML5_BANNER, IMAGE, and
 -- all RICH_MEDIA.
-cSize :: Lens' CreativeAsset (Maybe Size)
-cSize = lens _cSize (\ s a -> s{_cSize = a})
+caaSize :: Lens' CreativeAsset (Maybe Size)
+caaSize = lens _caaSize (\ s a -> s{_caaSize = a})
 
 -- | Whether the asset is vertically locked. This is a read-only field.
 -- Applicable to the following creative types: all RICH_MEDIA.
-cVerticallyLocked :: Lens' CreativeAsset (Maybe Bool)
-cVerticallyLocked
-  = lens _cVerticallyLocked
-      (\ s a -> s{_cVerticallyLocked = a})
+caaVerticallyLocked :: Lens' CreativeAsset (Maybe Bool)
+caaVerticallyLocked
+  = lens _caaVerticallyLocked
+      (\ s a -> s{_caaVerticallyLocked = a})
 
 -- | Offset position for an asset in collapsed mode. This is a read-only
 -- field. Applicable to the following creative types: all RICH_MEDIA and
 -- all VPAID. Additionally, only applicable to assets whose displayType is
 -- ASSET_DISPLAY_TYPE_EXPANDING or ASSET_DISPLAY_TYPE_PEEL_DOWN.
-cOffset :: Lens' CreativeAsset (Maybe OffsetPosition)
-cOffset = lens _cOffset (\ s a -> s{_cOffset = a})
+caaOffset :: Lens' CreativeAsset (Maybe OffsetPosition)
+caaOffset
+  = lens _caaOffset (\ s a -> s{_caaOffset = a})
 
 -- | Streaming URL for video asset. This is a read-only field. Applicable to
 -- the following creative types: INSTREAM_VIDEO and all VPAID.
-cStreamingServingURL :: Lens' CreativeAsset (Maybe Text)
-cStreamingServingURL
-  = lens _cStreamingServingURL
-      (\ s a -> s{_cStreamingServingURL = a})
+caaStreamingServingURL :: Lens' CreativeAsset (Maybe Text)
+caaStreamingServingURL
+  = lens _caaStreamingServingURL
+      (\ s a -> s{_caaStreamingServingURL = a})
 
 -- | Size of zip file. This is a read-only field. Applicable to the following
 -- creative types: HTML5_BANNER.
-cZipFilesize :: Lens' CreativeAsset (Maybe Text)
-cZipFilesize
-  = lens _cZipFilesize (\ s a -> s{_cZipFilesize = a})
+caaZipFilesize :: Lens' CreativeAsset (Maybe Text)
+caaZipFilesize
+  = lens _caaZipFilesize
+      (\ s a -> s{_caaZipFilesize = a})
 
 -- | Whether the asset is transparent. Applicable to the following creative
 -- types: all RICH_MEDIA. Additionally, only applicable to HTML5 assets.
-cTransparency :: Lens' CreativeAsset (Maybe Bool)
-cTransparency
-  = lens _cTransparency
-      (\ s a -> s{_cTransparency = a})
+caaTransparency :: Lens' CreativeAsset (Maybe Bool)
+caaTransparency
+  = lens _caaTransparency
+      (\ s a -> s{_caaTransparency = a})
 
 -- | Whether to hide selection boxes flag for an asset. Applicable to the
 -- following creative types: all RICH_MEDIA.
-cHideSelectionBoxes :: Lens' CreativeAsset (Maybe Bool)
-cHideSelectionBoxes
-  = lens _cHideSelectionBoxes
-      (\ s a -> s{_cHideSelectionBoxes = a})
+caaHideSelectionBoxes :: Lens' CreativeAsset (Maybe Bool)
+caaHideSelectionBoxes
+  = lens _caaHideSelectionBoxes
+      (\ s a -> s{_caaHideSelectionBoxes = a})
 
 -- | Whether the asset is SSL-compliant. This is a read-only field.
 -- Applicable to all but the following creative types: all REDIRECT and
 -- TRACKING_TEXT.
-cSSLCompliant :: Lens' CreativeAsset (Maybe Bool)
-cSSLCompliant
-  = lens _cSSLCompliant
-      (\ s a -> s{_cSSLCompliant = a})
+caaSSLCompliant :: Lens' CreativeAsset (Maybe Bool)
+caaSSLCompliant
+  = lens _caaSSLCompliant
+      (\ s a -> s{_caaSSLCompliant = a})
 
 -- | File size associated with this creative asset. This is a read-only
 -- field. Applicable to all but the following creative types: all REDIRECT
 -- and TRACKING_TEXT.
-cFileSize :: Lens' CreativeAsset (Maybe Int64)
-cFileSize
-  = lens _cFileSize (\ s a -> s{_cFileSize = a})
+caaFileSize :: Lens' CreativeAsset (Maybe Int64)
+caaFileSize
+  = lens _caaFileSize (\ s a -> s{_caaFileSize = a})
 
 -- | Identifier of this asset. This is the same identifier returned during
 -- creative asset insert operation. This is a required field. Applicable to
 -- all but the following creative types: all REDIRECT and TRACKING_TEXT.
-cAssetIdentifier :: Lens' CreativeAsset (Maybe CreativeAssetId)
-cAssetIdentifier
-  = lens _cAssetIdentifier
-      (\ s a -> s{_cAssetIdentifier = a})
+caaAssetIdentifier :: Lens' CreativeAsset (Maybe CreativeAssetId)
+caaAssetIdentifier
+  = lens _caaAssetIdentifier
+      (\ s a -> s{_caaAssetIdentifier = a})
 
 -- | Duration type for which an asset will be displayed. Applicable to the
 -- following creative types: all RICH_MEDIA.
-cDurationType :: Lens' CreativeAsset (Maybe CreativeAssetDurationType)
-cDurationType
-  = lens _cDurationType
-      (\ s a -> s{_cDurationType = a})
+caaDurationType :: Lens' CreativeAsset (Maybe CreativeAssetDurationType)
+caaDurationType
+  = lens _caaDurationType
+      (\ s a -> s{_caaDurationType = a})
 
 -- | Progressive URL for video asset. This is a read-only field. Applicable
 -- to the following creative types: INSTREAM_VIDEO and all VPAID.
-cProgressiveServingURL :: Lens' CreativeAsset (Maybe Text)
-cProgressiveServingURL
-  = lens _cProgressiveServingURL
-      (\ s a -> s{_cProgressiveServingURL = a})
+caaProgressiveServingURL :: Lens' CreativeAsset (Maybe Text)
+caaProgressiveServingURL
+  = lens _caaProgressiveServingURL
+      (\ s a -> s{_caaProgressiveServingURL = a})
 
 -- | Whether the video asset is active. This is a read-only field for
 -- VPAID_NON_LINEAR assets. Applicable to the following creative types:
 -- INSTREAM_VIDEO and all VPAID.
-cActive :: Lens' CreativeAsset (Maybe Bool)
-cActive = lens _cActive (\ s a -> s{_cActive = a})
+caaActive :: Lens' CreativeAsset (Maybe Bool)
+caaActive
+  = lens _caaActive (\ s a -> s{_caaActive = a})
 
 -- | Role of the asset in relation to creative. Applicable to all but the
 -- following creative types: all REDIRECT and TRACKING_TEXT. This is a
@@ -15790,156 +15788,160 @@ cActive = lens _cActive (\ s a -> s{_cActive = a})
 -- marked active serve as backup in case the VPAID creative cannot be
 -- served. Only PARENT_VIDEO assets can be added or removed for an
 -- INSTREAM_VIDEO or VPAID_LINEAR creative.
-cRole :: Lens' CreativeAsset (Maybe CreativeAssetRole)
-cRole = lens _cRole (\ s a -> s{_cRole = a})
+caaRole :: Lens' CreativeAsset (Maybe CreativeAssetRole)
+caaRole = lens _caaRole (\ s a -> s{_caaRole = a})
 
 -- | Detected MIME type for video asset. This is a read-only field.
 -- Applicable to the following creative types: INSTREAM_VIDEO and all
 -- VPAID.
-cMimeType :: Lens' CreativeAsset (Maybe Text)
-cMimeType
-  = lens _cMimeType (\ s a -> s{_cMimeType = a})
+caaMimeType :: Lens' CreativeAsset (Maybe Text)
+caaMimeType
+  = lens _caaMimeType (\ s a -> s{_caaMimeType = a})
 
 -- | Offset top unit for an asset. This is a read-only field if the asset
 -- displayType is ASSET_DISPLAY_TYPE_OVERLAY. Applicable to the following
 -- creative types: all RICH_MEDIA.
-cPositionTopUnit :: Lens' CreativeAsset (Maybe CreativeAssetPositionTopUnit)
-cPositionTopUnit
-  = lens _cPositionTopUnit
-      (\ s a -> s{_cPositionTopUnit = a})
+caaPositionTopUnit :: Lens' CreativeAsset (Maybe CreativeAssetPositionTopUnit)
+caaPositionTopUnit
+  = lens _caaPositionTopUnit
+      (\ s a -> s{_caaPositionTopUnit = a})
 
 -- | Offset left unit for an asset. This is a read-only field. Applicable to
 -- the following creative types: all RICH_MEDIA.
-cPositionLeftUnit :: Lens' CreativeAsset (Maybe CreativeAssetPositionLeftUnit)
-cPositionLeftUnit
-  = lens _cPositionLeftUnit
-      (\ s a -> s{_cPositionLeftUnit = a})
+caaPositionLeftUnit :: Lens' CreativeAsset (Maybe CreativeAssetPositionLeftUnit)
+caaPositionLeftUnit
+  = lens _caaPositionLeftUnit
+      (\ s a -> s{_caaPositionLeftUnit = a})
 
 -- | Possible alignments for an asset. This is a read-only field. Applicable
 -- to the following creative types: RICH_MEDIA_MULTI_FLOATING.
-cAlignment :: Lens' CreativeAsset (Maybe CreativeAssetAlignment)
-cAlignment
-  = lens _cAlignment (\ s a -> s{_cAlignment = a})
+caaAlignment :: Lens' CreativeAsset (Maybe CreativeAssetAlignment)
+caaAlignment
+  = lens _caaAlignment (\ s a -> s{_caaAlignment = a})
 
 -- | Detected expanded dimension for video asset. This is a read-only field.
 -- Applicable to the following creative types: INSTREAM_VIDEO and all
 -- VPAID.
-cExpandedDimension :: Lens' CreativeAsset (Maybe Size)
-cExpandedDimension
-  = lens _cExpandedDimension
-      (\ s a -> s{_cExpandedDimension = a})
+caaExpandedDimension :: Lens' CreativeAsset (Maybe Size)
+caaExpandedDimension
+  = lens _caaExpandedDimension
+      (\ s a -> s{_caaExpandedDimension = a})
 
 -- | File name of zip file. This is a read-only field. Applicable to the
 -- following creative types: HTML5_BANNER.
-cZipFilename :: Lens' CreativeAsset (Maybe Text)
-cZipFilename
-  = lens _cZipFilename (\ s a -> s{_cZipFilename = a})
+caaZipFilename :: Lens' CreativeAsset (Maybe Text)
+caaZipFilename
+  = lens _caaZipFilename
+      (\ s a -> s{_caaZipFilename = a})
 
 -- | Whether ActionScript3 is enabled for the flash asset. This is a
 -- read-only field. Applicable to the following creative types:
 -- FLASH_INPAGE and ENHANCED_BANNER.
-cActionScript3 :: Lens' CreativeAsset (Maybe Bool)
-cActionScript3
-  = lens _cActionScript3
-      (\ s a -> s{_cActionScript3 = a})
+caaActionScript3 :: Lens' CreativeAsset (Maybe Bool)
+caaActionScript3
+  = lens _caaActionScript3
+      (\ s a -> s{_caaActionScript3 = a})
 
 -- | Type of rich media asset. This is a read-only field. Applicable to the
 -- following creative types: all RICH_MEDIA.
-cDisplayType :: Lens' CreativeAsset (Maybe CreativeAssetDisplayType)
-cDisplayType
-  = lens _cDisplayType (\ s a -> s{_cDisplayType = a})
+caaDisplayType :: Lens' CreativeAsset (Maybe CreativeAssetDisplayType)
+caaDisplayType
+  = lens _caaDisplayType
+      (\ s a -> s{_caaDisplayType = a})
 
 -- | Rich media child asset type. This is a read-only field. Applicable to
 -- the following creative types: all VPAID.
-cChildAssetType :: Lens' CreativeAsset (Maybe CreativeAssetChildAssetType)
-cChildAssetType
-  = lens _cChildAssetType
-      (\ s a -> s{_cChildAssetType = a})
+caaChildAssetType :: Lens' CreativeAsset (Maybe CreativeAssetChildAssetType)
+caaChildAssetType
+  = lens _caaChildAssetType
+      (\ s a -> s{_caaChildAssetType = a})
 
 -- | Size of an asset when collapsed. This is a read-only field. Applicable
 -- to the following creative types: all RICH_MEDIA and all VPAID.
 -- Additionally, applicable to assets whose displayType is
 -- ASSET_DISPLAY_TYPE_EXPANDING or ASSET_DISPLAY_TYPE_PEEL_DOWN.
-cCollapsedSize :: Lens' CreativeAsset (Maybe Size)
-cCollapsedSize
-  = lens _cCollapsedSize
-      (\ s a -> s{_cCollapsedSize = a})
+caaCollapsedSize :: Lens' CreativeAsset (Maybe Size)
+caaCollapsedSize
+  = lens _caaCollapsedSize
+      (\ s a -> s{_caaCollapsedSize = a})
 
 -- | Numeric ID of this creative asset. This is a required field and should
 -- not be modified. Applicable to all but the following creative types: all
 -- REDIRECT and TRACKING_TEXT.
-cId :: Lens' CreativeAsset (Maybe Int64)
-cId = lens _cId (\ s a -> s{_cId = a})
+caaId :: Lens' CreativeAsset (Maybe Int64)
+caaId = lens _caaId (\ s a -> s{_caaId = a})
 
 -- | Detected bit-rate for video asset. This is a read-only field. Applicable
 -- to the following creative types: INSTREAM_VIDEO and all VPAID.
-cBitRate :: Lens' CreativeAsset (Maybe Int32)
-cBitRate = lens _cBitRate (\ s a -> s{_cBitRate = a})
+caaBitRate :: Lens' CreativeAsset (Maybe Int32)
+caaBitRate
+  = lens _caaBitRate (\ s a -> s{_caaBitRate = a})
 
 -- | Custom start time in seconds for making the asset visible. Applicable to
 -- the following creative types: all RICH_MEDIA.
-cCustomStartTimeValue :: Lens' CreativeAsset (Maybe Int32)
-cCustomStartTimeValue
-  = lens _cCustomStartTimeValue
-      (\ s a -> s{_cCustomStartTimeValue = a})
+caaCustomStartTimeValue :: Lens' CreativeAsset (Maybe Int32)
+caaCustomStartTimeValue
+  = lens _caaCustomStartTimeValue
+      (\ s a -> s{_caaCustomStartTimeValue = a})
 
 -- | Initial wait time type before making the asset visible. Applicable to
 -- the following creative types: all RICH_MEDIA.
-cStartTimeType :: Lens' CreativeAsset (Maybe CreativeAssetStartTimeType)
-cStartTimeType
-  = lens _cStartTimeType
-      (\ s a -> s{_cStartTimeType = a})
+caaStartTimeType :: Lens' CreativeAsset (Maybe CreativeAssetStartTimeType)
+caaStartTimeType
+  = lens _caaStartTimeType
+      (\ s a -> s{_caaStartTimeType = a})
 
 -- | Duration in seconds for which an asset will be displayed. Applicable to
 -- the following creative types: INSTREAM_VIDEO and VPAID_LINEAR.
-cDuration :: Lens' CreativeAsset (Maybe Int32)
-cDuration
-  = lens _cDuration (\ s a -> s{_cDuration = a})
+caaDuration :: Lens' CreativeAsset (Maybe Int32)
+caaDuration
+  = lens _caaDuration (\ s a -> s{_caaDuration = a})
 
 -- | Artwork type of rich media creative. This is a read-only field.
 -- Applicable to the following creative types: all RICH_MEDIA.
-cArtworkType :: Lens' CreativeAsset (Maybe CreativeAssetArtworkType)
-cArtworkType
-  = lens _cArtworkType (\ s a -> s{_cArtworkType = a})
+caaArtworkType :: Lens' CreativeAsset (Maybe CreativeAssetArtworkType)
+caaArtworkType
+  = lens _caaArtworkType
+      (\ s a -> s{_caaArtworkType = a})
 
 -- | Whether to hide Flash objects flag for an asset. Applicable to the
 -- following creative types: all RICH_MEDIA.
-cHideFlashObjects :: Lens' CreativeAsset (Maybe Bool)
-cHideFlashObjects
-  = lens _cHideFlashObjects
-      (\ s a -> s{_cHideFlashObjects = a})
+caaHideFlashObjects :: Lens' CreativeAsset (Maybe Bool)
+caaHideFlashObjects
+  = lens _caaHideFlashObjects
+      (\ s a -> s{_caaHideFlashObjects = a})
 
 -- | List of feature dependencies for the creative asset that are detected by
 -- DCM. Feature dependencies are features that a browser must be able to
 -- support in order to render your HTML5 creative correctly. This is a
 -- read-only, auto-generated field. Applicable to the following creative
 -- types: ENHANCED_BANNER and HTML5_BANNER.
-cDetectedFeatures :: Lens' CreativeAsset [CreativeAssetDetectedFeaturesItem]
-cDetectedFeatures
-  = lens _cDetectedFeatures
-      (\ s a -> s{_cDetectedFeatures = a})
+caaDetectedFeatures :: Lens' CreativeAsset [CreativeAssetDetectedFeaturesItem]
+caaDetectedFeatures
+  = lens _caaDetectedFeatures
+      (\ s a -> s{_caaDetectedFeatures = a})
       . _Default
       . _Coerce
 
 -- | Exit event configured for the backup image. Applicable to the following
 -- creative types: all RICH_MEDIA.
-cBackupImageExit :: Lens' CreativeAsset (Maybe CreativeCustomEvent)
-cBackupImageExit
-  = lens _cBackupImageExit
-      (\ s a -> s{_cBackupImageExit = a})
+caaBackupImageExit :: Lens' CreativeAsset (Maybe CreativeCustomEvent)
+caaBackupImageExit
+  = lens _caaBackupImageExit
+      (\ s a -> s{_caaBackupImageExit = a})
 
 -- | Offset position for an asset. Applicable to the following creative
 -- types: all RICH_MEDIA.
-cPosition :: Lens' CreativeAsset (Maybe OffsetPosition)
-cPosition
-  = lens _cPosition (\ s a -> s{_cPosition = a})
+caaPosition :: Lens' CreativeAsset (Maybe OffsetPosition)
+caaPosition
+  = lens _caaPosition (\ s a -> s{_caaPosition = a})
 
 -- | Whether the asset is horizontally locked. This is a read-only field.
 -- Applicable to the following creative types: all RICH_MEDIA.
-cHorizontallyLocked :: Lens' CreativeAsset (Maybe Bool)
-cHorizontallyLocked
-  = lens _cHorizontallyLocked
-      (\ s a -> s{_cHorizontallyLocked = a})
+caaHorizontallyLocked :: Lens' CreativeAsset (Maybe Bool)
+caaHorizontallyLocked
+  = lens _caaHorizontallyLocked
+      (\ s a -> s{_caaHorizontallyLocked = a})
 
 instance FromJSON CreativeAsset where
         parseJSON
@@ -15992,48 +15994,51 @@ instance ToJSON CreativeAsset where
         toJSON CreativeAsset{..}
           = object
               (catMaybes
-                 [("zIndex" .=) <$> _cZIndex,
-                  ("pushdown" .=) <$> _cPushdown,
-                  ("videoDuration" .=) <$> _cVideoDuration,
-                  ("originalBackup" .=) <$> _cOriginalBackup,
-                  ("windowMode" .=) <$> _cWindowMode,
-                  ("flashVersion" .=) <$> _cFlashVersion,
-                  ("pushdownDuration" .=) <$> _cPushdownDuration,
-                  ("size" .=) <$> _cSize,
-                  ("verticallyLocked" .=) <$> _cVerticallyLocked,
-                  ("offset" .=) <$> _cOffset,
-                  ("streamingServingUrl" .=) <$> _cStreamingServingURL,
-                  ("zipFilesize" .=) <$> _cZipFilesize,
-                  ("transparency" .=) <$> _cTransparency,
-                  ("hideSelectionBoxes" .=) <$> _cHideSelectionBoxes,
-                  ("sslCompliant" .=) <$> _cSSLCompliant,
-                  ("fileSize" .=) <$> _cFileSize,
-                  ("assetIdentifier" .=) <$> _cAssetIdentifier,
-                  ("durationType" .=) <$> _cDurationType,
+                 [("zIndex" .=) <$> _caaZIndex,
+                  ("pushdown" .=) <$> _caaPushdown,
+                  ("videoDuration" .=) <$> _caaVideoDuration,
+                  ("originalBackup" .=) <$> _caaOriginalBackup,
+                  ("windowMode" .=) <$> _caaWindowMode,
+                  ("flashVersion" .=) <$> _caaFlashVersion,
+                  ("pushdownDuration" .=) <$> _caaPushdownDuration,
+                  ("size" .=) <$> _caaSize,
+                  ("verticallyLocked" .=) <$> _caaVerticallyLocked,
+                  ("offset" .=) <$> _caaOffset,
+                  ("streamingServingUrl" .=) <$>
+                    _caaStreamingServingURL,
+                  ("zipFilesize" .=) <$> _caaZipFilesize,
+                  ("transparency" .=) <$> _caaTransparency,
+                  ("hideSelectionBoxes" .=) <$> _caaHideSelectionBoxes,
+                  ("sslCompliant" .=) <$> _caaSSLCompliant,
+                  ("fileSize" .=) <$> _caaFileSize,
+                  ("assetIdentifier" .=) <$> _caaAssetIdentifier,
+                  ("durationType" .=) <$> _caaDurationType,
                   ("progressiveServingUrl" .=) <$>
-                    _cProgressiveServingURL,
-                  ("active" .=) <$> _cActive, ("role" .=) <$> _cRole,
-                  ("mimeType" .=) <$> _cMimeType,
-                  ("positionTopUnit" .=) <$> _cPositionTopUnit,
-                  ("positionLeftUnit" .=) <$> _cPositionLeftUnit,
-                  ("alignment" .=) <$> _cAlignment,
-                  ("expandedDimension" .=) <$> _cExpandedDimension,
-                  ("zipFilename" .=) <$> _cZipFilename,
-                  ("actionScript3" .=) <$> _cActionScript3,
-                  ("displayType" .=) <$> _cDisplayType,
-                  ("childAssetType" .=) <$> _cChildAssetType,
-                  ("collapsedSize" .=) <$> _cCollapsedSize,
-                  ("id" .=) <$> _cId, ("bitRate" .=) <$> _cBitRate,
+                    _caaProgressiveServingURL,
+                  ("active" .=) <$> _caaActive,
+                  ("role" .=) <$> _caaRole,
+                  ("mimeType" .=) <$> _caaMimeType,
+                  ("positionTopUnit" .=) <$> _caaPositionTopUnit,
+                  ("positionLeftUnit" .=) <$> _caaPositionLeftUnit,
+                  ("alignment" .=) <$> _caaAlignment,
+                  ("expandedDimension" .=) <$> _caaExpandedDimension,
+                  ("zipFilename" .=) <$> _caaZipFilename,
+                  ("actionScript3" .=) <$> _caaActionScript3,
+                  ("displayType" .=) <$> _caaDisplayType,
+                  ("childAssetType" .=) <$> _caaChildAssetType,
+                  ("collapsedSize" .=) <$> _caaCollapsedSize,
+                  ("id" .=) <$> _caaId, ("bitRate" .=) <$> _caaBitRate,
                   ("customStartTimeValue" .=) <$>
-                    _cCustomStartTimeValue,
-                  ("startTimeType" .=) <$> _cStartTimeType,
-                  ("duration" .=) <$> _cDuration,
-                  ("artworkType" .=) <$> _cArtworkType,
-                  ("hideFlashObjects" .=) <$> _cHideFlashObjects,
-                  ("detectedFeatures" .=) <$> _cDetectedFeatures,
-                  ("backupImageExit" .=) <$> _cBackupImageExit,
-                  ("position" .=) <$> _cPosition,
-                  ("horizontallyLocked" .=) <$> _cHorizontallyLocked])
+                    _caaCustomStartTimeValue,
+                  ("startTimeType" .=) <$> _caaStartTimeType,
+                  ("duration" .=) <$> _caaDuration,
+                  ("artworkType" .=) <$> _caaArtworkType,
+                  ("hideFlashObjects" .=) <$> _caaHideFlashObjects,
+                  ("detectedFeatures" .=) <$> _caaDetectedFeatures,
+                  ("backupImageExit" .=) <$> _caaBackupImageExit,
+                  ("position" .=) <$> _caaPosition,
+                  ("horizontallyLocked" .=) <$>
+                    _caaHorizontallyLocked])
 
 -- | Placement List Response
 --
@@ -17904,41 +17909,41 @@ instance ToJSON OmnitureSettings where
 --
 -- /See:/ 'connectionType' smart constructor.
 data ConnectionType = ConnectionType
-    { _conKind :: !Text
-    , _conName :: !(Maybe Text)
-    , _conId   :: !(Maybe Int64)
+    { _cttKind :: !Text
+    , _cttName :: !(Maybe Text)
+    , _cttId   :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConnectionType' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'conKind'
+-- * 'cttKind'
 --
--- * 'conName'
+-- * 'cttName'
 --
--- * 'conId'
+-- * 'cttId'
 connectionType
     :: ConnectionType
 connectionType =
     ConnectionType
-    { _conKind = "dfareporting#connectionType"
-    , _conName = Nothing
-    , _conId = Nothing
+    { _cttKind = "dfareporting#connectionType"
+    , _cttName = Nothing
+    , _cttId = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#connectionType\".
-conKind :: Lens' ConnectionType Text
-conKind = lens _conKind (\ s a -> s{_conKind = a})
+cttKind :: Lens' ConnectionType Text
+cttKind = lens _cttKind (\ s a -> s{_cttKind = a})
 
 -- | Name of this connection type.
-conName :: Lens' ConnectionType (Maybe Text)
-conName = lens _conName (\ s a -> s{_conName = a})
+cttName :: Lens' ConnectionType (Maybe Text)
+cttName = lens _cttName (\ s a -> s{_cttName = a})
 
 -- | ID of this connection type.
-conId :: Lens' ConnectionType (Maybe Int64)
-conId = lens _conId (\ s a -> s{_conId = a})
+cttId :: Lens' ConnectionType (Maybe Int64)
+cttId = lens _cttId (\ s a -> s{_cttId = a})
 
 instance FromJSON ConnectionType where
         parseJSON
@@ -17953,8 +17958,8 @@ instance ToJSON ConnectionType where
         toJSON ConnectionType{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _conKind), ("name" .=) <$> _conName,
-                  ("id" .=) <$> _conId])
+                 [Just ("kind" .= _cttKind), ("name" .=) <$> _cttName,
+                  ("id" .=) <$> _cttId])
 
 -- | Contains properties of a package or roadblock.
 --

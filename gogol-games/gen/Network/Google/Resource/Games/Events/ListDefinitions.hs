@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.Events.ListDefinitions
       EventsListDefinitionsResource
 
     -- * Creating a Request
-    , eventsListDefinitions'
-    , EventsListDefinitions'
+    , eventsListDefinitions
+    , EventsListDefinitions
 
     -- * Request Lenses
     , eldLanguage
@@ -42,7 +42,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.events.listDefinitions@ method which the
--- 'EventsListDefinitions'' request conforms to.
+-- 'EventsListDefinitions' request conforms to.
 type EventsListDefinitionsResource =
      "eventDefinitions" :>
        QueryParam "language" Text :>
@@ -53,14 +53,14 @@ type EventsListDefinitionsResource =
 
 -- | Returns a list of the event definitions in this application.
 --
--- /See:/ 'eventsListDefinitions'' smart constructor.
-data EventsListDefinitions' = EventsListDefinitions'
+-- /See:/ 'eventsListDefinitions' smart constructor.
+data EventsListDefinitions = EventsListDefinitions
     { _eldLanguage   :: !(Maybe Text)
     , _eldPageToken  :: !(Maybe Text)
     , _eldMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventsListDefinitions'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventsListDefinitions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,37 +69,37 @@ data EventsListDefinitions' = EventsListDefinitions'
 -- * 'eldPageToken'
 --
 -- * 'eldMaxResults'
-eventsListDefinitions'
-    :: EventsListDefinitions'
-eventsListDefinitions' =
-    EventsListDefinitions'
+eventsListDefinitions
+    :: EventsListDefinitions
+eventsListDefinitions =
+    EventsListDefinitions
     { _eldLanguage = Nothing
     , _eldPageToken = Nothing
     , _eldMaxResults = Nothing
     }
 
 -- | The preferred language to use for strings returned by this method.
-eldLanguage :: Lens' EventsListDefinitions' (Maybe Text)
+eldLanguage :: Lens' EventsListDefinitions (Maybe Text)
 eldLanguage
   = lens _eldLanguage (\ s a -> s{_eldLanguage = a})
 
 -- | The token returned by the previous request.
-eldPageToken :: Lens' EventsListDefinitions' (Maybe Text)
+eldPageToken :: Lens' EventsListDefinitions (Maybe Text)
 eldPageToken
   = lens _eldPageToken (\ s a -> s{_eldPageToken = a})
 
 -- | The maximum number of event definitions to return in the response, used
 -- for paging. For any response, the actual number of event definitions to
 -- return may be less than the specified maxResults.
-eldMaxResults :: Lens' EventsListDefinitions' (Maybe Int32)
+eldMaxResults :: Lens' EventsListDefinitions (Maybe Int32)
 eldMaxResults
   = lens _eldMaxResults
       (\ s a -> s{_eldMaxResults = a})
 
-instance GoogleRequest EventsListDefinitions' where
-        type Rs EventsListDefinitions' =
+instance GoogleRequest EventsListDefinitions where
+        type Rs EventsListDefinitions =
              EventDefinitionListResponse
-        requestClient EventsListDefinitions'{..}
+        requestClient EventsListDefinitions{..}
           = go _eldLanguage _eldPageToken _eldMaxResults
               (Just AltJSON)
               gamesService

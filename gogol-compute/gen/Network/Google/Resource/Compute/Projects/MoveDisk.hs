@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Projects.MoveDisk
       ProjectsMoveDiskResource
 
     -- * Creating a Request
-    , projectsMoveDisk'
-    , ProjectsMoveDisk'
+    , projectsMoveDisk
+    , ProjectsMoveDisk
 
     -- * Request Lenses
     , pmdProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.projects.moveDisk@ method which the
--- 'ProjectsMoveDisk'' request conforms to.
+-- 'ProjectsMoveDisk' request conforms to.
 type ProjectsMoveDiskResource =
      Capture "project" Text :>
        "moveDisk" :>
@@ -51,42 +51,42 @@ type ProjectsMoveDiskResource =
 
 -- | Moves a persistent disk from one zone to another.
 --
--- /See:/ 'projectsMoveDisk'' smart constructor.
-data ProjectsMoveDisk' = ProjectsMoveDisk'
+-- /See:/ 'projectsMoveDisk' smart constructor.
+data ProjectsMoveDisk = ProjectsMoveDisk
     { _pmdProject :: !Text
     , _pmdPayload :: !DiskMoveRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsMoveDisk'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsMoveDisk' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pmdProject'
 --
 -- * 'pmdPayload'
-projectsMoveDisk'
+projectsMoveDisk
     :: Text -- ^ 'pmdProject'
     -> DiskMoveRequest -- ^ 'pmdPayload'
-    -> ProjectsMoveDisk'
-projectsMoveDisk' pPmdProject_ pPmdPayload_ =
-    ProjectsMoveDisk'
+    -> ProjectsMoveDisk
+projectsMoveDisk pPmdProject_ pPmdPayload_ =
+    ProjectsMoveDisk
     { _pmdProject = pPmdProject_
     , _pmdPayload = pPmdPayload_
     }
 
 -- | Project ID for this request.
-pmdProject :: Lens' ProjectsMoveDisk' Text
+pmdProject :: Lens' ProjectsMoveDisk Text
 pmdProject
   = lens _pmdProject (\ s a -> s{_pmdProject = a})
 
 -- | Multipart request metadata.
-pmdPayload :: Lens' ProjectsMoveDisk' DiskMoveRequest
+pmdPayload :: Lens' ProjectsMoveDisk DiskMoveRequest
 pmdPayload
   = lens _pmdPayload (\ s a -> s{_pmdPayload = a})
 
-instance GoogleRequest ProjectsMoveDisk' where
-        type Rs ProjectsMoveDisk' = Operation
-        requestClient ProjectsMoveDisk'{..}
+instance GoogleRequest ProjectsMoveDisk where
+        type Rs ProjectsMoveDisk = Operation
+        requestClient ProjectsMoveDisk{..}
           = go _pmdProject (Just AltJSON) _pmdPayload
               computeService
           where go

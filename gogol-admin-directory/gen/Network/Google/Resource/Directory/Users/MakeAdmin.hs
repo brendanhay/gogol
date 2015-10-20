@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Users.MakeAdmin
       UsersMakeAdminResource
 
     -- * Creating a Request
-    , usersMakeAdmin'
-    , UsersMakeAdmin'
+    , usersMakeAdmin
+    , UsersMakeAdmin
 
     -- * Request Lenses
     , umaPayload
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.users.makeAdmin@ method which the
--- 'UsersMakeAdmin'' request conforms to.
+-- 'UsersMakeAdmin' request conforms to.
 type UsersMakeAdminResource =
      "users" :>
        Capture "userKey" Text :>
@@ -51,42 +51,42 @@ type UsersMakeAdminResource =
 
 -- | change admin status of a user
 --
--- /See:/ 'usersMakeAdmin'' smart constructor.
-data UsersMakeAdmin' = UsersMakeAdmin'
+-- /See:/ 'usersMakeAdmin' smart constructor.
+data UsersMakeAdmin = UsersMakeAdmin
     { _umaPayload :: !UserMakeAdmin
     , _umaUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersMakeAdmin'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersMakeAdmin' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'umaPayload'
 --
 -- * 'umaUserKey'
-usersMakeAdmin'
+usersMakeAdmin
     :: UserMakeAdmin -- ^ 'umaPayload'
     -> Text -- ^ 'umaUserKey'
-    -> UsersMakeAdmin'
-usersMakeAdmin' pUmaPayload_ pUmaUserKey_ =
-    UsersMakeAdmin'
+    -> UsersMakeAdmin
+usersMakeAdmin pUmaPayload_ pUmaUserKey_ =
+    UsersMakeAdmin
     { _umaPayload = pUmaPayload_
     , _umaUserKey = pUmaUserKey_
     }
 
 -- | Multipart request metadata.
-umaPayload :: Lens' UsersMakeAdmin' UserMakeAdmin
+umaPayload :: Lens' UsersMakeAdmin UserMakeAdmin
 umaPayload
   = lens _umaPayload (\ s a -> s{_umaPayload = a})
 
 -- | Email or immutable Id of the user as admin
-umaUserKey :: Lens' UsersMakeAdmin' Text
+umaUserKey :: Lens' UsersMakeAdmin Text
 umaUserKey
   = lens _umaUserKey (\ s a -> s{_umaUserKey = a})
 
-instance GoogleRequest UsersMakeAdmin' where
-        type Rs UsersMakeAdmin' = ()
-        requestClient UsersMakeAdmin'{..}
+instance GoogleRequest UsersMakeAdmin where
+        type Rs UsersMakeAdmin = ()
+        requestClient UsersMakeAdmin{..}
           = go _umaUserKey (Just AltJSON) _umaPayload
               directoryService
           where go

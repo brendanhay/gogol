@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.MobileDevices.Action
       MobileDevicesActionResource
 
     -- * Creating a Request
-    , mobileDevicesAction'
-    , MobileDevicesAction'
+    , mobileDevicesAction
+    , MobileDevicesAction
 
     -- * Request Lenses
     , mdaResourceId
@@ -42,7 +42,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.mobiledevices.action@ method which the
--- 'MobileDevicesAction'' request conforms to.
+-- 'MobileDevicesAction' request conforms to.
 type MobileDevicesActionResource =
      "customer" :>
        Capture "customerId" Text :>
@@ -55,14 +55,14 @@ type MobileDevicesActionResource =
 
 -- | Take action on Mobile Device
 --
--- /See:/ 'mobileDevicesAction'' smart constructor.
-data MobileDevicesAction' = MobileDevicesAction'
+-- /See:/ 'mobileDevicesAction' smart constructor.
+data MobileDevicesAction = MobileDevicesAction
     { _mdaResourceId :: !Text
     , _mdaPayload    :: !MobileDeviceAction
     , _mdaCustomerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MobileDevicesAction'' with the minimum fields required to make a request.
+-- | Creates a value of 'MobileDevicesAction' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,38 +71,38 @@ data MobileDevicesAction' = MobileDevicesAction'
 -- * 'mdaPayload'
 --
 -- * 'mdaCustomerId'
-mobileDevicesAction'
+mobileDevicesAction
     :: Text -- ^ 'mdaResourceId'
     -> MobileDeviceAction -- ^ 'mdaPayload'
     -> Text -- ^ 'mdaCustomerId'
-    -> MobileDevicesAction'
-mobileDevicesAction' pMdaResourceId_ pMdaPayload_ pMdaCustomerId_ =
-    MobileDevicesAction'
+    -> MobileDevicesAction
+mobileDevicesAction pMdaResourceId_ pMdaPayload_ pMdaCustomerId_ =
+    MobileDevicesAction
     { _mdaResourceId = pMdaResourceId_
     , _mdaPayload = pMdaPayload_
     , _mdaCustomerId = pMdaCustomerId_
     }
 
 -- | Immutable id of Mobile Device
-mdaResourceId :: Lens' MobileDevicesAction' Text
+mdaResourceId :: Lens' MobileDevicesAction Text
 mdaResourceId
   = lens _mdaResourceId
       (\ s a -> s{_mdaResourceId = a})
 
 -- | Multipart request metadata.
-mdaPayload :: Lens' MobileDevicesAction' MobileDeviceAction
+mdaPayload :: Lens' MobileDevicesAction MobileDeviceAction
 mdaPayload
   = lens _mdaPayload (\ s a -> s{_mdaPayload = a})
 
 -- | Immutable id of the Google Apps account
-mdaCustomerId :: Lens' MobileDevicesAction' Text
+mdaCustomerId :: Lens' MobileDevicesAction Text
 mdaCustomerId
   = lens _mdaCustomerId
       (\ s a -> s{_mdaCustomerId = a})
 
-instance GoogleRequest MobileDevicesAction' where
-        type Rs MobileDevicesAction' = ()
-        requestClient MobileDevicesAction'{..}
+instance GoogleRequest MobileDevicesAction where
+        type Rs MobileDevicesAction = ()
+        requestClient MobileDevicesAction{..}
           = go _mdaCustomerId _mdaResourceId (Just AltJSON)
               _mdaPayload
               directoryService

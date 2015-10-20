@@ -32,8 +32,8 @@ module Network.Google.Resource.Games.TurnBasedMatches.Sync
       TurnBasedMatchesSyncResource
 
     -- * Creating a Request
-    , turnBasedMatchesSync'
-    , TurnBasedMatchesSync'
+    , turnBasedMatchesSync
+    , TurnBasedMatchesSync
 
     -- * Request Lenses
     , tbmsMaxCompletedMatches
@@ -47,7 +47,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.turnBasedMatches.sync@ method which the
--- 'TurnBasedMatchesSync'' request conforms to.
+-- 'TurnBasedMatchesSync' request conforms to.
 type TurnBasedMatchesSyncResource =
      "turnbasedmatches" :>
        "sync" :>
@@ -64,8 +64,8 @@ type TurnBasedMatchesSyncResource =
 -- Matches that should be removed from the local cache will have a status
 -- of MATCH_DELETED.
 --
--- /See:/ 'turnBasedMatchesSync'' smart constructor.
-data TurnBasedMatchesSync' = TurnBasedMatchesSync'
+-- /See:/ 'turnBasedMatchesSync' smart constructor.
+data TurnBasedMatchesSync = TurnBasedMatchesSync
     { _tbmsMaxCompletedMatches :: !(Maybe Int32)
     , _tbmsIncludeMatchData    :: !(Maybe Bool)
     , _tbmsLanguage            :: !(Maybe Text)
@@ -73,7 +73,7 @@ data TurnBasedMatchesSync' = TurnBasedMatchesSync'
     , _tbmsMaxResults          :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TurnBasedMatchesSync'' with the minimum fields required to make a request.
+-- | Creates a value of 'TurnBasedMatchesSync' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -86,10 +86,10 @@ data TurnBasedMatchesSync' = TurnBasedMatchesSync'
 -- * 'tbmsPageToken'
 --
 -- * 'tbmsMaxResults'
-turnBasedMatchesSync'
-    :: TurnBasedMatchesSync'
-turnBasedMatchesSync' =
-    TurnBasedMatchesSync'
+turnBasedMatchesSync
+    :: TurnBasedMatchesSync
+turnBasedMatchesSync =
+    TurnBasedMatchesSync
     { _tbmsMaxCompletedMatches = Nothing
     , _tbmsIncludeMatchData = Nothing
     , _tbmsLanguage = Nothing
@@ -100,7 +100,7 @@ turnBasedMatchesSync' =
 -- | The maximum number of completed or canceled matches to return in the
 -- response. If not set, all matches returned could be completed or
 -- canceled.
-tbmsMaxCompletedMatches :: Lens' TurnBasedMatchesSync' (Maybe Int32)
+tbmsMaxCompletedMatches :: Lens' TurnBasedMatchesSync (Maybe Int32)
 tbmsMaxCompletedMatches
   = lens _tbmsMaxCompletedMatches
       (\ s a -> s{_tbmsMaxCompletedMatches = a})
@@ -110,18 +110,18 @@ tbmsMaxCompletedMatches
 -- server may decide to only return data for some of the matches to limit
 -- download size for the client. The remainder of the data for these
 -- matches will be retrievable on request.
-tbmsIncludeMatchData :: Lens' TurnBasedMatchesSync' (Maybe Bool)
+tbmsIncludeMatchData :: Lens' TurnBasedMatchesSync (Maybe Bool)
 tbmsIncludeMatchData
   = lens _tbmsIncludeMatchData
       (\ s a -> s{_tbmsIncludeMatchData = a})
 
 -- | The preferred language to use for strings returned by this method.
-tbmsLanguage :: Lens' TurnBasedMatchesSync' (Maybe Text)
+tbmsLanguage :: Lens' TurnBasedMatchesSync (Maybe Text)
 tbmsLanguage
   = lens _tbmsLanguage (\ s a -> s{_tbmsLanguage = a})
 
 -- | The token returned by the previous request.
-tbmsPageToken :: Lens' TurnBasedMatchesSync' (Maybe Text)
+tbmsPageToken :: Lens' TurnBasedMatchesSync (Maybe Text)
 tbmsPageToken
   = lens _tbmsPageToken
       (\ s a -> s{_tbmsPageToken = a})
@@ -129,14 +129,14 @@ tbmsPageToken
 -- | The maximum number of matches to return in the response, used for
 -- paging. For any response, the actual number of matches to return may be
 -- less than the specified maxResults.
-tbmsMaxResults :: Lens' TurnBasedMatchesSync' (Maybe Int32)
+tbmsMaxResults :: Lens' TurnBasedMatchesSync (Maybe Int32)
 tbmsMaxResults
   = lens _tbmsMaxResults
       (\ s a -> s{_tbmsMaxResults = a})
 
-instance GoogleRequest TurnBasedMatchesSync' where
-        type Rs TurnBasedMatchesSync' = TurnBasedMatchSync
-        requestClient TurnBasedMatchesSync'{..}
+instance GoogleRequest TurnBasedMatchesSync where
+        type Rs TurnBasedMatchesSync = TurnBasedMatchSync
+        requestClient TurnBasedMatchesSync{..}
           = go _tbmsMaxCompletedMatches _tbmsIncludeMatchData
               _tbmsLanguage
               _tbmsPageToken

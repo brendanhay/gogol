@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.AccountUserProFiles.List
       AccountUserProFilesListResource
 
     -- * Creating a Request
-    , accountUserProFilesList'
-    , AccountUserProFilesList'
+    , accountUserProFilesList
+    , AccountUserProFilesList
 
     -- * Request Lenses
     , aupflUserRoleId
@@ -49,7 +49,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.accountUserProfiles.list@ method which the
--- 'AccountUserProFilesList'' request conforms to.
+-- 'AccountUserProFilesList' request conforms to.
 type AccountUserProFilesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -72,8 +72,8 @@ type AccountUserProFilesListResource =
 
 -- | Retrieves a list of account user profiles, possibly filtered.
 --
--- /See:/ 'accountUserProFilesList'' smart constructor.
-data AccountUserProFilesList' = AccountUserProFilesList'
+-- /See:/ 'accountUserProFilesList' smart constructor.
+data AccountUserProFilesList = AccountUserProFilesList
     { _aupflUserRoleId   :: !(Maybe Int64)
     , _aupflSearchString :: !(Maybe Text)
     , _aupflIds          :: !(Maybe [Int64])
@@ -86,7 +86,7 @@ data AccountUserProFilesList' = AccountUserProFilesList'
     , _aupflMaxResults   :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountUserProFilesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountUserProFilesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -109,11 +109,11 @@ data AccountUserProFilesList' = AccountUserProFilesList'
 -- * 'aupflSubAccountId'
 --
 -- * 'aupflMaxResults'
-accountUserProFilesList'
+accountUserProFilesList
     :: Int64 -- ^ 'aupflProFileId'
-    -> AccountUserProFilesList'
-accountUserProFilesList' pAupflProFileId_ =
-    AccountUserProFilesList'
+    -> AccountUserProFilesList
+accountUserProFilesList pAupflProFileId_ =
+    AccountUserProFilesList
     { _aupflUserRoleId = Nothing
     , _aupflSearchString = Nothing
     , _aupflIds = Nothing
@@ -127,7 +127,7 @@ accountUserProFilesList' pAupflProFileId_ =
     }
 
 -- | Select only user profiles with the specified user role ID.
-aupflUserRoleId :: Lens' AccountUserProFilesList' (Maybe Int64)
+aupflUserRoleId :: Lens' AccountUserProFilesList (Maybe Int64)
 aupflUserRoleId
   = lens _aupflUserRoleId
       (\ s a -> s{_aupflUserRoleId = a})
@@ -139,63 +139,63 @@ aupflUserRoleId
 -- implicitly at the start and the end of the search string. For example, a
 -- search string of \"user profile\" will match objects with name \"my user
 -- profile\", \"user profile 2015\", or simply \"user profile\".
-aupflSearchString :: Lens' AccountUserProFilesList' (Maybe Text)
+aupflSearchString :: Lens' AccountUserProFilesList (Maybe Text)
 aupflSearchString
   = lens _aupflSearchString
       (\ s a -> s{_aupflSearchString = a})
 
 -- | Select only user profiles with these IDs.
-aupflIds :: Lens' AccountUserProFilesList' [Int64]
+aupflIds :: Lens' AccountUserProFilesList [Int64]
 aupflIds
   = lens _aupflIds (\ s a -> s{_aupflIds = a}) .
       _Default
       . _Coerce
 
 -- | User profile ID associated with this request.
-aupflProFileId :: Lens' AccountUserProFilesList' Int64
+aupflProFileId :: Lens' AccountUserProFilesList Int64
 aupflProFileId
   = lens _aupflProFileId
       (\ s a -> s{_aupflProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-aupflSortOrder :: Lens' AccountUserProFilesList' (Maybe AccountUserProFilesListSortOrder)
+aupflSortOrder :: Lens' AccountUserProFilesList (Maybe AccountUserProFilesListSortOrder)
 aupflSortOrder
   = lens _aupflSortOrder
       (\ s a -> s{_aupflSortOrder = a})
 
 -- | Select only active user profiles.
-aupflActive :: Lens' AccountUserProFilesList' (Maybe Bool)
+aupflActive :: Lens' AccountUserProFilesList (Maybe Bool)
 aupflActive
   = lens _aupflActive (\ s a -> s{_aupflActive = a})
 
 -- | Value of the nextPageToken from the previous result page.
-aupflPageToken :: Lens' AccountUserProFilesList' (Maybe Text)
+aupflPageToken :: Lens' AccountUserProFilesList (Maybe Text)
 aupflPageToken
   = lens _aupflPageToken
       (\ s a -> s{_aupflPageToken = a})
 
 -- | Field by which to sort the list.
-aupflSortField :: Lens' AccountUserProFilesList' (Maybe AccountUserProFilesListSortField)
+aupflSortField :: Lens' AccountUserProFilesList (Maybe AccountUserProFilesListSortField)
 aupflSortField
   = lens _aupflSortField
       (\ s a -> s{_aupflSortField = a})
 
 -- | Select only user profiles with the specified subaccount ID.
-aupflSubAccountId :: Lens' AccountUserProFilesList' (Maybe Int64)
+aupflSubAccountId :: Lens' AccountUserProFilesList (Maybe Int64)
 aupflSubAccountId
   = lens _aupflSubAccountId
       (\ s a -> s{_aupflSubAccountId = a})
 
 -- | Maximum number of results to return.
-aupflMaxResults :: Lens' AccountUserProFilesList' (Maybe Int32)
+aupflMaxResults :: Lens' AccountUserProFilesList (Maybe Int32)
 aupflMaxResults
   = lens _aupflMaxResults
       (\ s a -> s{_aupflMaxResults = a})
 
-instance GoogleRequest AccountUserProFilesList' where
-        type Rs AccountUserProFilesList' =
+instance GoogleRequest AccountUserProFilesList where
+        type Rs AccountUserProFilesList =
              AccountUserProFilesListResponse
-        requestClient AccountUserProFilesList'{..}
+        requestClient AccountUserProFilesList{..}
           = go _aupflProFileId _aupflUserRoleId
               _aupflSearchString
               (_aupflIds ^. _Default)

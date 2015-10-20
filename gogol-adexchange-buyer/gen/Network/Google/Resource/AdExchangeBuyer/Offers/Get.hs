@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.Offers.Get
       OffersGetResource
 
     -- * Creating a Request
-    , offersGet'
-    , OffersGet'
+    , offersGet
+    , OffersGet
 
     -- * Request Lenses
     , ogOfferId
@@ -40,7 +40,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.offers.get@ method which the
--- 'OffersGet'' request conforms to.
+-- 'OffersGet' request conforms to.
 type OffersGetResource =
      "offers" :>
        Capture "offerId" Int64 :>
@@ -48,31 +48,31 @@ type OffersGetResource =
 
 -- | Gets the requested offer.
 --
--- /See:/ 'offersGet'' smart constructor.
-newtype OffersGet' = OffersGet'
+-- /See:/ 'offersGet' smart constructor.
+newtype OffersGet = OffersGet
     { _ogOfferId :: Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OffersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'OffersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ogOfferId'
-offersGet'
+offersGet
     :: Int64 -- ^ 'ogOfferId'
-    -> OffersGet'
-offersGet' pOgOfferId_ =
-    OffersGet'
+    -> OffersGet
+offersGet pOgOfferId_ =
+    OffersGet
     { _ogOfferId = pOgOfferId_
     }
 
-ogOfferId :: Lens' OffersGet' Int64
+ogOfferId :: Lens' OffersGet Int64
 ogOfferId
   = lens _ogOfferId (\ s a -> s{_ogOfferId = a})
 
-instance GoogleRequest OffersGet' where
-        type Rs OffersGet' = OfferDTO
-        requestClient OffersGet'{..}
+instance GoogleRequest OffersGet where
+        type Rs OffersGet = OfferDTO
+        requestClient OffersGet{..}
           = go _ogOfferId (Just AltJSON) adExchangeBuyerService
           where go
                   = buildClient (Proxy :: Proxy OffersGetResource)

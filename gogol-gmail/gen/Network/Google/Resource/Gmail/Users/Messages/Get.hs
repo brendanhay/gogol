@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.Messages.Get
       UsersMessagesGetResource
 
     -- * Creating a Request
-    , usersMessagesGet'
-    , UsersMessagesGet'
+    , usersMessagesGet
+    , UsersMessagesGet
 
     -- * Request Lenses
     , umgFormat
@@ -43,7 +43,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.messages.get@ method which the
--- 'UsersMessagesGet'' request conforms to.
+-- 'UsersMessagesGet' request conforms to.
 type UsersMessagesGetResource =
      Capture "userId" Text :>
        "messages" :>
@@ -54,15 +54,15 @@ type UsersMessagesGetResource =
 
 -- | Gets the specified message.
 --
--- /See:/ 'usersMessagesGet'' smart constructor.
-data UsersMessagesGet' = UsersMessagesGet'
+-- /See:/ 'usersMessagesGet' smart constructor.
+data UsersMessagesGet = UsersMessagesGet
     { _umgFormat          :: !UsersMessagesGetFormat
     , _umgUserId          :: !Text
     , _umgId              :: !Text
     , _umgMetadataHeaders :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersMessagesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersMessagesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,12 +73,12 @@ data UsersMessagesGet' = UsersMessagesGet'
 -- * 'umgId'
 --
 -- * 'umgMetadataHeaders'
-usersMessagesGet'
+usersMessagesGet
     :: Text -- ^ 'umgId'
     -> Text
-    -> UsersMessagesGet'
-usersMessagesGet' pUmgUserId_ pUmgId_ =
-    UsersMessagesGet'
+    -> UsersMessagesGet
+usersMessagesGet pUmgUserId_ pUmgId_ =
+    UsersMessagesGet
     { _umgFormat = Full
     , _umgUserId = pUmgUserId_
     , _umgId = pUmgId_
@@ -86,31 +86,31 @@ usersMessagesGet' pUmgUserId_ pUmgId_ =
     }
 
 -- | The format to return the message in.
-umgFormat :: Lens' UsersMessagesGet' UsersMessagesGetFormat
+umgFormat :: Lens' UsersMessagesGet UsersMessagesGetFormat
 umgFormat
   = lens _umgFormat (\ s a -> s{_umgFormat = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-umgUserId :: Lens' UsersMessagesGet' Text
+umgUserId :: Lens' UsersMessagesGet Text
 umgUserId
   = lens _umgUserId (\ s a -> s{_umgUserId = a})
 
 -- | The ID of the message to retrieve.
-umgId :: Lens' UsersMessagesGet' Text
+umgId :: Lens' UsersMessagesGet Text
 umgId = lens _umgId (\ s a -> s{_umgId = a})
 
 -- | When given and format is METADATA, only include headers specified.
-umgMetadataHeaders :: Lens' UsersMessagesGet' [Text]
+umgMetadataHeaders :: Lens' UsersMessagesGet [Text]
 umgMetadataHeaders
   = lens _umgMetadataHeaders
       (\ s a -> s{_umgMetadataHeaders = a})
       . _Default
       . _Coerce
 
-instance GoogleRequest UsersMessagesGet' where
-        type Rs UsersMessagesGet' = Message
-        requestClient UsersMessagesGet'{..}
+instance GoogleRequest UsersMessagesGet where
+        type Rs UsersMessagesGet = Message
+        requestClient UsersMessagesGet{..}
           = go _umgUserId _umgId (Just _umgFormat)
               (_umgMetadataHeaders ^. _Default)
               (Just AltJSON)

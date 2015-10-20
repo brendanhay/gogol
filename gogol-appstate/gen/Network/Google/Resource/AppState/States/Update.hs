@@ -31,8 +31,8 @@ module Network.Google.Resource.AppState.States.Update
       StatesUpdateResource
 
     -- * Creating a Request
-    , statesUpdate'
-    , StatesUpdate'
+    , statesUpdate
+    , StatesUpdate
 
     -- * Request Lenses
     , suCurrentStateVersion
@@ -44,7 +44,7 @@ import           Network.Google.AppState.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @appstate.states.update@ method which the
--- 'StatesUpdate'' request conforms to.
+-- 'StatesUpdate' request conforms to.
 type StatesUpdateResource =
      "states" :>
        Capture "stateKey" Int32 :>
@@ -57,14 +57,14 @@ type StatesUpdateResource =
 -- version matches the currently stored version. This method is safe in the
 -- face of concurrent writes. Maximum per-key size is 128KB.
 --
--- /See:/ 'statesUpdate'' smart constructor.
-data StatesUpdate' = StatesUpdate'
+-- /See:/ 'statesUpdate' smart constructor.
+data StatesUpdate = StatesUpdate
     { _suCurrentStateVersion :: !(Maybe Text)
     , _suStateKey            :: !Int32
     , _suPayload             :: !UpdateRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'StatesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'StatesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,12 +73,12 @@ data StatesUpdate' = StatesUpdate'
 -- * 'suStateKey'
 --
 -- * 'suPayload'
-statesUpdate'
+statesUpdate
     :: Int32 -- ^ 'suStateKey'
     -> UpdateRequest -- ^ 'suPayload'
-    -> StatesUpdate'
-statesUpdate' pSuStateKey_ pSuPayload_ =
-    StatesUpdate'
+    -> StatesUpdate
+statesUpdate pSuStateKey_ pSuPayload_ =
+    StatesUpdate
     { _suCurrentStateVersion = Nothing
     , _suStateKey = pSuStateKey_
     , _suPayload = pSuPayload_
@@ -88,24 +88,24 @@ statesUpdate' pSuStateKey_ pSuPayload_ =
 -- If this does not match the current version, this method will return a
 -- conflict error. If there is no data stored on the server for this key,
 -- the update will succeed irrespective of the value of this parameter.
-suCurrentStateVersion :: Lens' StatesUpdate' (Maybe Text)
+suCurrentStateVersion :: Lens' StatesUpdate (Maybe Text)
 suCurrentStateVersion
   = lens _suCurrentStateVersion
       (\ s a -> s{_suCurrentStateVersion = a})
 
 -- | The key for the data to be retrieved.
-suStateKey :: Lens' StatesUpdate' Int32
+suStateKey :: Lens' StatesUpdate Int32
 suStateKey
   = lens _suStateKey (\ s a -> s{_suStateKey = a})
 
 -- | Multipart request metadata.
-suPayload :: Lens' StatesUpdate' UpdateRequest
+suPayload :: Lens' StatesUpdate UpdateRequest
 suPayload
   = lens _suPayload (\ s a -> s{_suPayload = a})
 
-instance GoogleRequest StatesUpdate' where
-        type Rs StatesUpdate' = WriteResult
-        requestClient StatesUpdate'{..}
+instance GoogleRequest StatesUpdate where
+        type Rs StatesUpdate = WriteResult
+        requestClient StatesUpdate{..}
           = go _suStateKey _suCurrentStateVersion
               (Just AltJSON)
               _suPayload

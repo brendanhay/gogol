@@ -29,19 +29,19 @@ module Network.Google.Resource.DFAReporting.Sites.Get
       SitesGetResource
 
     -- * Creating a Request
-    , sitesGet'
-    , SitesGet'
+    , sitesGet
+    , SitesGet
 
     -- * Request Lenses
-    , sgProFileId
-    , sgId
+    , sggProFileId
+    , sggId
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.sites.get@ method which the
--- 'SitesGet'' request conforms to.
+-- 'SitesGet' request conforms to.
 type SitesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type SitesGetResource =
 
 -- | Gets one site by ID.
 --
--- /See:/ 'sitesGet'' smart constructor.
-data SitesGet' = SitesGet'
-    { _sgProFileId :: !Int64
-    , _sgId        :: !Int64
+-- /See:/ 'sitesGet' smart constructor.
+data SitesGet = SitesGet
+    { _sggProFileId :: !Int64
+    , _sggId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SitesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'SitesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sgProFileId'
+-- * 'sggProFileId'
 --
--- * 'sgId'
-sitesGet'
-    :: Int64 -- ^ 'sgProFileId'
-    -> Int64 -- ^ 'sgId'
-    -> SitesGet'
-sitesGet' pSgProFileId_ pSgId_ =
-    SitesGet'
-    { _sgProFileId = pSgProFileId_
-    , _sgId = pSgId_
+-- * 'sggId'
+sitesGet
+    :: Int64 -- ^ 'sggProFileId'
+    -> Int64 -- ^ 'sggId'
+    -> SitesGet
+sitesGet pSggProFileId_ pSggId_ =
+    SitesGet
+    { _sggProFileId = pSggProFileId_
+    , _sggId = pSggId_
     }
 
 -- | User profile ID associated with this request.
-sgProFileId :: Lens' SitesGet' Int64
-sgProFileId
-  = lens _sgProFileId (\ s a -> s{_sgProFileId = a})
+sggProFileId :: Lens' SitesGet Int64
+sggProFileId
+  = lens _sggProFileId (\ s a -> s{_sggProFileId = a})
 
 -- | Site ID.
-sgId :: Lens' SitesGet' Int64
-sgId = lens _sgId (\ s a -> s{_sgId = a})
+sggId :: Lens' SitesGet Int64
+sggId = lens _sggId (\ s a -> s{_sggId = a})
 
-instance GoogleRequest SitesGet' where
-        type Rs SitesGet' = Site
-        requestClient SitesGet'{..}
-          = go _sgProFileId _sgId (Just AltJSON)
+instance GoogleRequest SitesGet where
+        type Rs SitesGet = Site
+        requestClient SitesGet{..}
+          = go _sggProFileId _sggId (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy SitesGetResource)

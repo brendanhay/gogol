@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.MyConfig.GetUserSettings
       MyConfigGetUserSettingsResource
 
     -- * Creating a Request
-    , myConfigGetUserSettings'
-    , MyConfigGetUserSettings'
+    , myConfigGetUserSettings
+    , MyConfigGetUserSettings
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.myconfig.getUserSettings@ method which the
--- 'MyConfigGetUserSettings'' request conforms to.
+-- 'MyConfigGetUserSettings' request conforms to.
 type MyConfigGetUserSettingsResource =
      "myconfig" :>
        "getUserSettings" :>
@@ -46,20 +46,20 @@ type MyConfigGetUserSettingsResource =
 
 -- | Gets the current settings for the user.
 --
--- /See:/ 'myConfigGetUserSettings'' smart constructor.
-data MyConfigGetUserSettings' =
-    MyConfigGetUserSettings'
+-- /See:/ 'myConfigGetUserSettings' smart constructor.
+data MyConfigGetUserSettings =
+    MyConfigGetUserSettings
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MyConfigGetUserSettings'' with the minimum fields required to make a request.
+-- | Creates a value of 'MyConfigGetUserSettings' with the minimum fields required to make a request.
 --
-myConfigGetUserSettings'
-    :: MyConfigGetUserSettings'
-myConfigGetUserSettings' = MyConfigGetUserSettings'
+myConfigGetUserSettings
+    :: MyConfigGetUserSettings
+myConfigGetUserSettings = MyConfigGetUserSettings
 
-instance GoogleRequest MyConfigGetUserSettings' where
-        type Rs MyConfigGetUserSettings' = Usersettings
-        requestClient MyConfigGetUserSettings'{}
+instance GoogleRequest MyConfigGetUserSettings where
+        type Rs MyConfigGetUserSettings = Usersettings
+        requestClient MyConfigGetUserSettings{}
           = go (Just AltJSON) booksService
           where go
                   = buildClient

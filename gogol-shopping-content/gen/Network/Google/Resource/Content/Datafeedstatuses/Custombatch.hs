@@ -27,8 +27,8 @@ module Network.Google.Resource.Content.Datafeedstatuses.Custombatch
       DatafeedstatusesCustombatchResource
 
     -- * Creating a Request
-    , datafeedstatusesCustombatch'
-    , DatafeedstatusesCustombatch'
+    , datafeedstatusesCustombatch
+    , DatafeedstatusesCustombatch
 
     -- * Request Lenses
     , dcPayload
@@ -38,7 +38,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.datafeedstatuses.custombatch@ method which the
--- 'DatafeedstatusesCustombatch'' request conforms to.
+-- 'DatafeedstatusesCustombatch' request conforms to.
 type DatafeedstatusesCustombatchResource =
      "datafeedstatuses" :>
        "batch" :>
@@ -47,34 +47,34 @@ type DatafeedstatusesCustombatchResource =
              Post '[JSON] DatafeedstatusesCustomBatchResponse
 
 --
--- /See:/ 'datafeedstatusesCustombatch'' smart constructor.
-newtype DatafeedstatusesCustombatch' = DatafeedstatusesCustombatch'
+-- /See:/ 'datafeedstatusesCustombatch' smart constructor.
+newtype DatafeedstatusesCustombatch = DatafeedstatusesCustombatch
     { _dcPayload :: DatafeedstatusesCustomBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatafeedstatusesCustombatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatafeedstatusesCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dcPayload'
-datafeedstatusesCustombatch'
+datafeedstatusesCustombatch
     :: DatafeedstatusesCustomBatchRequest -- ^ 'dcPayload'
-    -> DatafeedstatusesCustombatch'
-datafeedstatusesCustombatch' pDcPayload_ =
-    DatafeedstatusesCustombatch'
+    -> DatafeedstatusesCustombatch
+datafeedstatusesCustombatch pDcPayload_ =
+    DatafeedstatusesCustombatch
     { _dcPayload = pDcPayload_
     }
 
 -- | Multipart request metadata.
-dcPayload :: Lens' DatafeedstatusesCustombatch' DatafeedstatusesCustomBatchRequest
+dcPayload :: Lens' DatafeedstatusesCustombatch DatafeedstatusesCustomBatchRequest
 dcPayload
   = lens _dcPayload (\ s a -> s{_dcPayload = a})
 
-instance GoogleRequest DatafeedstatusesCustombatch'
+instance GoogleRequest DatafeedstatusesCustombatch
          where
-        type Rs DatafeedstatusesCustombatch' =
+        type Rs DatafeedstatusesCustombatch =
              DatafeedstatusesCustomBatchResponse
-        requestClient DatafeedstatusesCustombatch'{..}
+        requestClient DatafeedstatusesCustombatch{..}
           = go (Just AltJSON) _dcPayload shoppingContentService
           where go
                   = buildClient

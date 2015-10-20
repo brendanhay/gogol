@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.Captions.Delete
       CaptionsDeleteResource
 
     -- * Creating a Request
-    , captionsDelete'
-    , CaptionsDelete'
+    , captionsDelete
+    , CaptionsDelete
 
     -- * Request Lenses
     , cddOnBehalfOf
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.captions.delete@ method which the
--- 'CaptionsDelete'' request conforms to.
+-- 'CaptionsDelete' request conforms to.
 type CaptionsDeleteResource =
      "captions" :>
        QueryParam "id" Text :>
@@ -52,14 +52,14 @@ type CaptionsDeleteResource =
 
 -- | Deletes a specified caption track.
 --
--- /See:/ 'captionsDelete'' smart constructor.
-data CaptionsDelete' = CaptionsDelete'
+-- /See:/ 'captionsDelete' smart constructor.
+data CaptionsDelete = CaptionsDelete
     { _cddOnBehalfOf             :: !(Maybe Text)
     , _cddOnBehalfOfContentOwner :: !(Maybe Text)
     , _cddId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CaptionsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'CaptionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,11 +68,11 @@ data CaptionsDelete' = CaptionsDelete'
 -- * 'cddOnBehalfOfContentOwner'
 --
 -- * 'cddId'
-captionsDelete'
+captionsDelete
     :: Text -- ^ 'cddId'
-    -> CaptionsDelete'
-captionsDelete' pCddId_ =
-    CaptionsDelete'
+    -> CaptionsDelete
+captionsDelete pCddId_ =
+    CaptionsDelete
     { _cddOnBehalfOf = Nothing
     , _cddOnBehalfOfContentOwner = Nothing
     , _cddId = pCddId_
@@ -80,7 +80,7 @@ captionsDelete' pCddId_ =
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
 -- of
-cddOnBehalfOf :: Lens' CaptionsDelete' (Maybe Text)
+cddOnBehalfOf :: Lens' CaptionsDelete (Maybe Text)
 cddOnBehalfOf
   = lens _cddOnBehalfOf
       (\ s a -> s{_cddOnBehalfOf = a})
@@ -95,7 +95,7 @@ cddOnBehalfOf
 -- without having to provide authentication credentials for each individual
 -- channel. The actual CMS account that the user authenticates with must be
 -- linked to the specified YouTube content owner.
-cddOnBehalfOfContentOwner :: Lens' CaptionsDelete' (Maybe Text)
+cddOnBehalfOfContentOwner :: Lens' CaptionsDelete (Maybe Text)
 cddOnBehalfOfContentOwner
   = lens _cddOnBehalfOfContentOwner
       (\ s a -> s{_cddOnBehalfOfContentOwner = a})
@@ -103,12 +103,12 @@ cddOnBehalfOfContentOwner
 -- | The id parameter identifies the caption track that is being deleted. The
 -- value is a caption track ID as identified by the id property in a
 -- caption resource.
-cddId :: Lens' CaptionsDelete' Text
+cddId :: Lens' CaptionsDelete Text
 cddId = lens _cddId (\ s a -> s{_cddId = a})
 
-instance GoogleRequest CaptionsDelete' where
-        type Rs CaptionsDelete' = ()
-        requestClient CaptionsDelete'{..}
+instance GoogleRequest CaptionsDelete where
+        type Rs CaptionsDelete = ()
+        requestClient CaptionsDelete{..}
           = go (Just _cddId) _cddOnBehalfOf
               _cddOnBehalfOfContentOwner
               (Just AltJSON)

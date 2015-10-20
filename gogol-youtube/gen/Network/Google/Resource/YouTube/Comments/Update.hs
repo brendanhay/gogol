@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.Comments.Update
       CommentsUpdateResource
 
     -- * Creating a Request
-    , commentsUpdate'
-    , CommentsUpdate'
+    , commentsUpdate
+    , CommentsUpdate
 
     -- * Request Lenses
     , cuPart
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.comments.update@ method which the
--- 'CommentsUpdate'' request conforms to.
+-- 'CommentsUpdate' request conforms to.
 type CommentsUpdateResource =
      "comments" :>
        QueryParam "part" Text :>
@@ -50,25 +50,25 @@ type CommentsUpdateResource =
 
 -- | Modifies a comment.
 --
--- /See:/ 'commentsUpdate'' smart constructor.
-data CommentsUpdate' = CommentsUpdate'
+-- /See:/ 'commentsUpdate' smart constructor.
+data CommentsUpdate = CommentsUpdate
     { _cuPart    :: !Text
     , _cuPayload :: !Comment
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cuPart'
 --
 -- * 'cuPayload'
-commentsUpdate'
+commentsUpdate
     :: Text -- ^ 'cuPart'
     -> Comment -- ^ 'cuPayload'
-    -> CommentsUpdate'
-commentsUpdate' pCuPart_ pCuPayload_ =
-    CommentsUpdate'
+    -> CommentsUpdate
+commentsUpdate pCuPart_ pCuPayload_ =
+    CommentsUpdate
     { _cuPart = pCuPart_
     , _cuPayload = pCuPayload_
     }
@@ -77,17 +77,17 @@ commentsUpdate' pCuPart_ pCuPayload_ =
 -- include. You must at least include the snippet part in the parameter
 -- value since that part contains all of the properties that the API
 -- request can update.
-cuPart :: Lens' CommentsUpdate' Text
+cuPart :: Lens' CommentsUpdate Text
 cuPart = lens _cuPart (\ s a -> s{_cuPart = a})
 
 -- | Multipart request metadata.
-cuPayload :: Lens' CommentsUpdate' Comment
+cuPayload :: Lens' CommentsUpdate Comment
 cuPayload
   = lens _cuPayload (\ s a -> s{_cuPayload = a})
 
-instance GoogleRequest CommentsUpdate' where
-        type Rs CommentsUpdate' = Comment
-        requestClient CommentsUpdate'{..}
+instance GoogleRequest CommentsUpdate where
+        type Rs CommentsUpdate = Comment
+        requestClient CommentsUpdate{..}
           = go (Just _cuPart) (Just AltJSON) _cuPayload
               youTubeService
           where go

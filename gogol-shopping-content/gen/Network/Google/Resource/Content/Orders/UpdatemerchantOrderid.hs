@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Orders.UpdatemerchantOrderid
       OrdersUpdatemerchantOrderidResource
 
     -- * Creating a Request
-    , ordersUpdatemerchantOrderid'
-    , OrdersUpdatemerchantOrderid'
+    , ordersUpdatemerchantOrderid
+    , OrdersUpdatemerchantOrderid
 
     -- * Request Lenses
     , ouoMerchantId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.updatemerchantorderid@ method which the
--- 'OrdersUpdatemerchantOrderid'' request conforms to.
+-- 'OrdersUpdatemerchantOrderid' request conforms to.
 type OrdersUpdatemerchantOrderidResource =
      Capture "merchantId" Word64 :>
        "orders" :>
@@ -54,14 +54,14 @@ type OrdersUpdatemerchantOrderidResource =
 
 -- | Updates the merchant order ID for a given order.
 --
--- /See:/ 'ordersUpdatemerchantOrderid'' smart constructor.
-data OrdersUpdatemerchantOrderid' = OrdersUpdatemerchantOrderid'
+-- /See:/ 'ordersUpdatemerchantOrderid' smart constructor.
+data OrdersUpdatemerchantOrderid = OrdersUpdatemerchantOrderid
     { _ouoMerchantId :: !Word64
     , _ouoPayload    :: !OrdersUpdateMerchantOrderIdRequest
     , _ouoOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersUpdatemerchantOrderid'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersUpdatemerchantOrderid' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,39 +70,39 @@ data OrdersUpdatemerchantOrderid' = OrdersUpdatemerchantOrderid'
 -- * 'ouoPayload'
 --
 -- * 'ouoOrderId'
-ordersUpdatemerchantOrderid'
+ordersUpdatemerchantOrderid
     :: Word64 -- ^ 'ouoMerchantId'
     -> OrdersUpdateMerchantOrderIdRequest -- ^ 'ouoPayload'
     -> Text -- ^ 'ouoOrderId'
-    -> OrdersUpdatemerchantOrderid'
-ordersUpdatemerchantOrderid' pOuoMerchantId_ pOuoPayload_ pOuoOrderId_ =
-    OrdersUpdatemerchantOrderid'
+    -> OrdersUpdatemerchantOrderid
+ordersUpdatemerchantOrderid pOuoMerchantId_ pOuoPayload_ pOuoOrderId_ =
+    OrdersUpdatemerchantOrderid
     { _ouoMerchantId = pOuoMerchantId_
     , _ouoPayload = pOuoPayload_
     , _ouoOrderId = pOuoOrderId_
     }
 
 -- | The ID of the managing account.
-ouoMerchantId :: Lens' OrdersUpdatemerchantOrderid' Word64
+ouoMerchantId :: Lens' OrdersUpdatemerchantOrderid Word64
 ouoMerchantId
   = lens _ouoMerchantId
       (\ s a -> s{_ouoMerchantId = a})
 
 -- | Multipart request metadata.
-ouoPayload :: Lens' OrdersUpdatemerchantOrderid' OrdersUpdateMerchantOrderIdRequest
+ouoPayload :: Lens' OrdersUpdatemerchantOrderid OrdersUpdateMerchantOrderIdRequest
 ouoPayload
   = lens _ouoPayload (\ s a -> s{_ouoPayload = a})
 
 -- | The ID of the order.
-ouoOrderId :: Lens' OrdersUpdatemerchantOrderid' Text
+ouoOrderId :: Lens' OrdersUpdatemerchantOrderid Text
 ouoOrderId
   = lens _ouoOrderId (\ s a -> s{_ouoOrderId = a})
 
-instance GoogleRequest OrdersUpdatemerchantOrderid'
+instance GoogleRequest OrdersUpdatemerchantOrderid
          where
-        type Rs OrdersUpdatemerchantOrderid' =
+        type Rs OrdersUpdatemerchantOrderid =
              OrdersUpdateMerchantOrderIdResponse
-        requestClient OrdersUpdatemerchantOrderid'{..}
+        requestClient OrdersUpdatemerchantOrderid{..}
           = go _ouoMerchantId _ouoOrderId (Just AltJSON)
               _ouoPayload
               shoppingContentService

@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.Scores.List
       ScoresListResource
 
     -- * Creating a Request
-    , scoresList'
-    , ScoresList'
+    , scoresList
+    , ScoresList
 
     -- * Request Lenses
     , sllCollection
@@ -45,7 +45,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.scores.list@ method which the
--- 'ScoresList'' request conforms to.
+-- 'ScoresList' request conforms to.
 type ScoresListResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
@@ -60,8 +60,8 @@ type ScoresListResource =
 
 -- | Lists the scores in a leaderboard, starting from the top.
 --
--- /See:/ 'scoresList'' smart constructor.
-data ScoresList' = ScoresList'
+-- /See:/ 'scoresList' smart constructor.
+data ScoresList = ScoresList
     { _sllCollection    :: !ScoresListCollection
     , _sllTimeSpan      :: !ScoresListTimeSpan
     , _sllLeaderboardId :: !Text
@@ -70,7 +70,7 @@ data ScoresList' = ScoresList'
     , _sllMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ScoresList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ScoresList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -85,13 +85,13 @@ data ScoresList' = ScoresList'
 -- * 'sllPageToken'
 --
 -- * 'sllMaxResults'
-scoresList'
+scoresList
     :: ScoresListCollection -- ^ 'sllCollection'
     -> ScoresListTimeSpan -- ^ 'sllTimeSpan'
     -> Text -- ^ 'sllLeaderboardId'
-    -> ScoresList'
-scoresList' pSllCollection_ pSllTimeSpan_ pSllLeaderboardId_ =
-    ScoresList'
+    -> ScoresList
+scoresList pSllCollection_ pSllTimeSpan_ pSllLeaderboardId_ =
+    ScoresList
     { _sllCollection = pSllCollection_
     , _sllTimeSpan = pSllTimeSpan_
     , _sllLeaderboardId = pSllLeaderboardId_
@@ -101,43 +101,43 @@ scoresList' pSllCollection_ pSllTimeSpan_ pSllLeaderboardId_ =
     }
 
 -- | The collection of scores you\'re requesting.
-sllCollection :: Lens' ScoresList' ScoresListCollection
+sllCollection :: Lens' ScoresList ScoresListCollection
 sllCollection
   = lens _sllCollection
       (\ s a -> s{_sllCollection = a})
 
 -- | The time span for the scores and ranks you\'re requesting.
-sllTimeSpan :: Lens' ScoresList' ScoresListTimeSpan
+sllTimeSpan :: Lens' ScoresList ScoresListTimeSpan
 sllTimeSpan
   = lens _sllTimeSpan (\ s a -> s{_sllTimeSpan = a})
 
 -- | The ID of the leaderboard.
-sllLeaderboardId :: Lens' ScoresList' Text
+sllLeaderboardId :: Lens' ScoresList Text
 sllLeaderboardId
   = lens _sllLeaderboardId
       (\ s a -> s{_sllLeaderboardId = a})
 
 -- | The preferred language to use for strings returned by this method.
-sllLanguage :: Lens' ScoresList' (Maybe Text)
+sllLanguage :: Lens' ScoresList (Maybe Text)
 sllLanguage
   = lens _sllLanguage (\ s a -> s{_sllLanguage = a})
 
 -- | The token returned by the previous request.
-sllPageToken :: Lens' ScoresList' (Maybe Text)
+sllPageToken :: Lens' ScoresList (Maybe Text)
 sllPageToken
   = lens _sllPageToken (\ s a -> s{_sllPageToken = a})
 
 -- | The maximum number of leaderboard scores to return in the response. For
 -- any response, the actual number of leaderboard scores returned may be
 -- less than the specified maxResults.
-sllMaxResults :: Lens' ScoresList' (Maybe Int32)
+sllMaxResults :: Lens' ScoresList (Maybe Int32)
 sllMaxResults
   = lens _sllMaxResults
       (\ s a -> s{_sllMaxResults = a})
 
-instance GoogleRequest ScoresList' where
-        type Rs ScoresList' = LeaderboardScores
-        requestClient ScoresList'{..}
+instance GoogleRequest ScoresList where
+        type Rs ScoresList = LeaderboardScores
+        requestClient ScoresList{..}
           = go _sllLeaderboardId _sllCollection
               (Just _sllTimeSpan)
               _sllLanguage

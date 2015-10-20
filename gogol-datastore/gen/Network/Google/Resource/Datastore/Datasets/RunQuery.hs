@@ -29,8 +29,8 @@ module Network.Google.Resource.Datastore.Datasets.RunQuery
       DatasetsRunQueryResource
 
     -- * Creating a Request
-    , datasetsRunQuery'
-    , DatasetsRunQuery'
+    , datasetsRunQuery
+    , DatasetsRunQuery
 
     -- * Request Lenses
     , drqPayload
@@ -41,7 +41,7 @@ import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @datastore.datasets.runQuery@ method which the
--- 'DatasetsRunQuery'' request conforms to.
+-- 'DatasetsRunQuery' request conforms to.
 type DatasetsRunQueryResource =
      Capture "datasetId" Text :>
        "runQuery" :>
@@ -51,42 +51,42 @@ type DatasetsRunQueryResource =
 
 -- | Query for entities.
 --
--- /See:/ 'datasetsRunQuery'' smart constructor.
-data DatasetsRunQuery' = DatasetsRunQuery'
+-- /See:/ 'datasetsRunQuery' smart constructor.
+data DatasetsRunQuery = DatasetsRunQuery
     { _drqPayload   :: !RunQueryRequest
     , _drqDatasetId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsRunQuery'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsRunQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'drqPayload'
 --
 -- * 'drqDatasetId'
-datasetsRunQuery'
+datasetsRunQuery
     :: RunQueryRequest -- ^ 'drqPayload'
     -> Text -- ^ 'drqDatasetId'
-    -> DatasetsRunQuery'
-datasetsRunQuery' pDrqPayload_ pDrqDatasetId_ =
-    DatasetsRunQuery'
+    -> DatasetsRunQuery
+datasetsRunQuery pDrqPayload_ pDrqDatasetId_ =
+    DatasetsRunQuery
     { _drqPayload = pDrqPayload_
     , _drqDatasetId = pDrqDatasetId_
     }
 
 -- | Multipart request metadata.
-drqPayload :: Lens' DatasetsRunQuery' RunQueryRequest
+drqPayload :: Lens' DatasetsRunQuery RunQueryRequest
 drqPayload
   = lens _drqPayload (\ s a -> s{_drqPayload = a})
 
 -- | Identifies the dataset.
-drqDatasetId :: Lens' DatasetsRunQuery' Text
+drqDatasetId :: Lens' DatasetsRunQuery Text
 drqDatasetId
   = lens _drqDatasetId (\ s a -> s{_drqDatasetId = a})
 
-instance GoogleRequest DatasetsRunQuery' where
-        type Rs DatasetsRunQuery' = RunQueryResponse
-        requestClient DatasetsRunQuery'{..}
+instance GoogleRequest DatasetsRunQuery where
+        type Rs DatasetsRunQuery = RunQueryResponse
+        requestClient DatasetsRunQuery{..}
           = go _drqDatasetId (Just AltJSON) _drqPayload
               datastoreService
           where go

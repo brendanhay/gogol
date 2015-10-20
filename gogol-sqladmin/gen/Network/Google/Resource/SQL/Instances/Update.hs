@@ -31,8 +31,8 @@ module Network.Google.Resource.SQL.Instances.Update
       InstancesUpdateResource
 
     -- * Creating a Request
-    , instancesUpdate'
-    , InstancesUpdate'
+    , instancesUpdate
+    , InstancesUpdate
 
     -- * Request Lenses
     , iuProject
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.update@ method which the
--- 'InstancesUpdate'' request conforms to.
+-- 'InstancesUpdate' request conforms to.
 type InstancesUpdateResource =
      "projects" :>
        Capture "project" Text :>
@@ -58,14 +58,14 @@ type InstancesUpdateResource =
 -- update, so you must include values for all the settings that you want to
 -- retain. For partial updates, use patch.
 --
--- /See:/ 'instancesUpdate'' smart constructor.
-data InstancesUpdate' = InstancesUpdate'
+-- /See:/ 'instancesUpdate' smart constructor.
+data InstancesUpdate = InstancesUpdate
     { _iuProject  :: !Text
     , _iuPayload  :: !DatabaseInstance
     , _iuInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,36 +74,36 @@ data InstancesUpdate' = InstancesUpdate'
 -- * 'iuPayload'
 --
 -- * 'iuInstance'
-instancesUpdate'
+instancesUpdate
     :: Text -- ^ 'iuProject'
     -> DatabaseInstance -- ^ 'iuPayload'
     -> Text -- ^ 'iuInstance'
-    -> InstancesUpdate'
-instancesUpdate' pIuProject_ pIuPayload_ pIuInstance_ =
-    InstancesUpdate'
+    -> InstancesUpdate
+instancesUpdate pIuProject_ pIuPayload_ pIuInstance_ =
+    InstancesUpdate
     { _iuProject = pIuProject_
     , _iuPayload = pIuPayload_
     , _iuInstance = pIuInstance_
     }
 
 -- | Project ID of the project that contains the instance.
-iuProject :: Lens' InstancesUpdate' Text
+iuProject :: Lens' InstancesUpdate Text
 iuProject
   = lens _iuProject (\ s a -> s{_iuProject = a})
 
 -- | Multipart request metadata.
-iuPayload :: Lens' InstancesUpdate' DatabaseInstance
+iuPayload :: Lens' InstancesUpdate DatabaseInstance
 iuPayload
   = lens _iuPayload (\ s a -> s{_iuPayload = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-iuInstance :: Lens' InstancesUpdate' Text
+iuInstance :: Lens' InstancesUpdate Text
 iuInstance
   = lens _iuInstance (\ s a -> s{_iuInstance = a})
 
-instance GoogleRequest InstancesUpdate' where
-        type Rs InstancesUpdate' = Operation
-        requestClient InstancesUpdate'{..}
+instance GoogleRequest InstancesUpdate where
+        type Rs InstancesUpdate = Operation
+        requestClient InstancesUpdate{..}
           = go _iuProject _iuInstance (Just AltJSON) _iuPayload
               sQLAdminService
           where go

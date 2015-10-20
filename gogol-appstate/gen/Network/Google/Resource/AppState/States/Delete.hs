@@ -33,8 +33,8 @@ module Network.Google.Resource.AppState.States.Delete
       StatesDeleteResource
 
     -- * Creating a Request
-    , statesDelete'
-    , StatesDelete'
+    , statesDelete
+    , StatesDelete
 
     -- * Request Lenses
     , sdStateKey
@@ -44,7 +44,7 @@ import           Network.Google.AppState.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @appstate.states.delete@ method which the
--- 'StatesDelete'' request conforms to.
+-- 'StatesDelete' request conforms to.
 type StatesDeleteResource =
      "states" :>
        Capture "stateKey" Int32 :>
@@ -56,32 +56,32 @@ type StatesDeleteResource =
 -- development and testing purposes. Invoking this method in shipping code
 -- can result in data loss and data corruption.
 --
--- /See:/ 'statesDelete'' smart constructor.
-newtype StatesDelete' = StatesDelete'
+-- /See:/ 'statesDelete' smart constructor.
+newtype StatesDelete = StatesDelete
     { _sdStateKey :: Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'StatesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'StatesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sdStateKey'
-statesDelete'
+statesDelete
     :: Int32 -- ^ 'sdStateKey'
-    -> StatesDelete'
-statesDelete' pSdStateKey_ =
-    StatesDelete'
+    -> StatesDelete
+statesDelete pSdStateKey_ =
+    StatesDelete
     { _sdStateKey = pSdStateKey_
     }
 
 -- | The key for the data to be retrieved.
-sdStateKey :: Lens' StatesDelete' Int32
+sdStateKey :: Lens' StatesDelete Int32
 sdStateKey
   = lens _sdStateKey (\ s a -> s{_sdStateKey = a})
 
-instance GoogleRequest StatesDelete' where
-        type Rs StatesDelete' = ()
-        requestClient StatesDelete'{..}
+instance GoogleRequest StatesDelete where
+        type Rs StatesDelete = ()
+        requestClient StatesDelete{..}
           = go _sdStateKey (Just AltJSON) appStateService
           where go
                   = buildClient (Proxy :: Proxy StatesDeleteResource)

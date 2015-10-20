@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.HTTPSHealthChecks.Delete
       HTTPSHealthChecksDeleteResource
 
     -- * Creating a Request
-    , httpsHealthChecksDelete'
-    , HTTPSHealthChecksDelete'
+    , httpsHealthChecksDelete
+    , HTTPSHealthChecksDelete
 
     -- * Request Lenses
     , hhcdProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.httpsHealthChecks.delete@ method which the
--- 'HTTPSHealthChecksDelete'' request conforms to.
+-- 'HTTPSHealthChecksDelete' request conforms to.
 type HTTPSHealthChecksDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,43 +51,43 @@ type HTTPSHealthChecksDeleteResource =
 
 -- | Deletes the specified HttpsHealthCheck resource.
 --
--- /See:/ 'httpsHealthChecksDelete'' smart constructor.
-data HTTPSHealthChecksDelete' = HTTPSHealthChecksDelete'
+-- /See:/ 'httpsHealthChecksDelete' smart constructor.
+data HTTPSHealthChecksDelete = HTTPSHealthChecksDelete
     { _hhcdProject          :: !Text
     , _hhcdHTTPSHealthCheck :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'HTTPSHealthChecksDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'HTTPSHealthChecksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'hhcdProject'
 --
 -- * 'hhcdHTTPSHealthCheck'
-httpsHealthChecksDelete'
+httpsHealthChecksDelete
     :: Text -- ^ 'hhcdProject'
     -> Text -- ^ 'hhcdHTTPSHealthCheck'
-    -> HTTPSHealthChecksDelete'
-httpsHealthChecksDelete' pHhcdProject_ pHhcdHTTPSHealthCheck_ =
-    HTTPSHealthChecksDelete'
+    -> HTTPSHealthChecksDelete
+httpsHealthChecksDelete pHhcdProject_ pHhcdHTTPSHealthCheck_ =
+    HTTPSHealthChecksDelete
     { _hhcdProject = pHhcdProject_
     , _hhcdHTTPSHealthCheck = pHhcdHTTPSHealthCheck_
     }
 
 -- | Name of the project scoping this request.
-hhcdProject :: Lens' HTTPSHealthChecksDelete' Text
+hhcdProject :: Lens' HTTPSHealthChecksDelete Text
 hhcdProject
   = lens _hhcdProject (\ s a -> s{_hhcdProject = a})
 
 -- | Name of the HttpsHealthCheck resource to delete.
-hhcdHTTPSHealthCheck :: Lens' HTTPSHealthChecksDelete' Text
+hhcdHTTPSHealthCheck :: Lens' HTTPSHealthChecksDelete Text
 hhcdHTTPSHealthCheck
   = lens _hhcdHTTPSHealthCheck
       (\ s a -> s{_hhcdHTTPSHealthCheck = a})
 
-instance GoogleRequest HTTPSHealthChecksDelete' where
-        type Rs HTTPSHealthChecksDelete' = Operation
-        requestClient HTTPSHealthChecksDelete'{..}
+instance GoogleRequest HTTPSHealthChecksDelete where
+        type Rs HTTPSHealthChecksDelete = Operation
+        requestClient HTTPSHealthChecksDelete{..}
           = go _hhcdProject _hhcdHTTPSHealthCheck
               (Just AltJSON)
               computeService

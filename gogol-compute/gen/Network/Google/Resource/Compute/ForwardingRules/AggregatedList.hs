@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.ForwardingRules.AggregatedList
       ForwardingRulesAggregatedListResource
 
     -- * Creating a Request
-    , forwardingRulesAggregatedList'
-    , ForwardingRulesAggregatedList'
+    , forwardingRulesAggregatedList
+    , ForwardingRulesAggregatedList
 
     -- * Request Lenses
     , fralProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.forwardingRules.aggregatedList@ method which the
--- 'ForwardingRulesAggregatedList'' request conforms to.
+-- 'ForwardingRulesAggregatedList' request conforms to.
 type ForwardingRulesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
@@ -56,15 +56,15 @@ type ForwardingRulesAggregatedListResource =
 
 -- | Retrieves the list of forwarding rules grouped by scope.
 --
--- /See:/ 'forwardingRulesAggregatedList'' smart constructor.
-data ForwardingRulesAggregatedList' = ForwardingRulesAggregatedList'
+-- /See:/ 'forwardingRulesAggregatedList' smart constructor.
+data ForwardingRulesAggregatedList = ForwardingRulesAggregatedList
     { _fralProject    :: !Text
     , _fralFilter     :: !(Maybe Text)
     , _fralPageToken  :: !(Maybe Text)
     , _fralMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ForwardingRulesAggregatedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ForwardingRulesAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,11 +75,11 @@ data ForwardingRulesAggregatedList' = ForwardingRulesAggregatedList'
 -- * 'fralPageToken'
 --
 -- * 'fralMaxResults'
-forwardingRulesAggregatedList'
+forwardingRulesAggregatedList
     :: Text -- ^ 'fralProject'
-    -> ForwardingRulesAggregatedList'
-forwardingRulesAggregatedList' pFralProject_ =
-    ForwardingRulesAggregatedList'
+    -> ForwardingRulesAggregatedList
+forwardingRulesAggregatedList pFralProject_ =
+    ForwardingRulesAggregatedList
     { _fralProject = pFralProject_
     , _fralFilter = Nothing
     , _fralPageToken = Nothing
@@ -87,7 +87,7 @@ forwardingRulesAggregatedList' pFralProject_ =
     }
 
 -- | Name of the project scoping this request.
-fralProject :: Lens' ForwardingRulesAggregatedList' Text
+fralProject :: Lens' ForwardingRulesAggregatedList Text
 fralProject
   = lens _fralProject (\ s a -> s{_fralProject = a})
 
@@ -102,29 +102,29 @@ fralProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-fralFilter :: Lens' ForwardingRulesAggregatedList' (Maybe Text)
+fralFilter :: Lens' ForwardingRulesAggregatedList (Maybe Text)
 fralFilter
   = lens _fralFilter (\ s a -> s{_fralFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-fralPageToken :: Lens' ForwardingRulesAggregatedList' (Maybe Text)
+fralPageToken :: Lens' ForwardingRulesAggregatedList (Maybe Text)
 fralPageToken
   = lens _fralPageToken
       (\ s a -> s{_fralPageToken = a})
 
 -- | Maximum count of results to be returned.
-fralMaxResults :: Lens' ForwardingRulesAggregatedList' Word32
+fralMaxResults :: Lens' ForwardingRulesAggregatedList Word32
 fralMaxResults
   = lens _fralMaxResults
       (\ s a -> s{_fralMaxResults = a})
 
-instance GoogleRequest ForwardingRulesAggregatedList'
+instance GoogleRequest ForwardingRulesAggregatedList
          where
-        type Rs ForwardingRulesAggregatedList' =
+        type Rs ForwardingRulesAggregatedList =
              ForwardingRuleAggregatedList
-        requestClient ForwardingRulesAggregatedList'{..}
+        requestClient ForwardingRulesAggregatedList{..}
           = go _fralProject _fralFilter _fralPageToken
               (Just _fralMaxResults)
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.Events.Get
       EventsGetResource
 
     -- * Creating a Request
-    , eventsGet'
-    , EventsGet'
+    , eventsGet
+    , EventsGet
 
     -- * Request Lenses
     , egCalendarId
@@ -44,7 +44,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.get@ method which the
--- 'EventsGet'' request conforms to.
+-- 'EventsGet' request conforms to.
 type EventsGetResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -57,8 +57,8 @@ type EventsGetResource =
 
 -- | Returns an event.
 --
--- /See:/ 'eventsGet'' smart constructor.
-data EventsGet' = EventsGet'
+-- /See:/ 'eventsGet' smart constructor.
+data EventsGet = EventsGet
     { _egCalendarId         :: !Text
     , _egMaxAttendees       :: !(Maybe Int32)
     , _egTimeZone           :: !(Maybe Text)
@@ -66,7 +66,7 @@ data EventsGet' = EventsGet'
     , _egEventId            :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -79,12 +79,12 @@ data EventsGet' = EventsGet'
 -- * 'egAlwaysIncludeEmail'
 --
 -- * 'egEventId'
-eventsGet'
+eventsGet
     :: Text -- ^ 'egCalendarId'
     -> Text -- ^ 'egEventId'
-    -> EventsGet'
-eventsGet' pEgCalendarId_ pEgEventId_ =
-    EventsGet'
+    -> EventsGet
+eventsGet pEgCalendarId_ pEgEventId_ =
+    EventsGet
     { _egCalendarId = pEgCalendarId_
     , _egMaxAttendees = Nothing
     , _egTimeZone = Nothing
@@ -95,21 +95,21 @@ eventsGet' pEgCalendarId_ pEgEventId_ =
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-egCalendarId :: Lens' EventsGet' Text
+egCalendarId :: Lens' EventsGet Text
 egCalendarId
   = lens _egCalendarId (\ s a -> s{_egCalendarId = a})
 
 -- | The maximum number of attendees to include in the response. If there are
 -- more than the specified number of attendees, only the participant is
 -- returned. Optional.
-egMaxAttendees :: Lens' EventsGet' (Maybe Int32)
+egMaxAttendees :: Lens' EventsGet (Maybe Int32)
 egMaxAttendees
   = lens _egMaxAttendees
       (\ s a -> s{_egMaxAttendees = a})
 
 -- | Time zone used in the response. Optional. The default is the time zone
 -- of the calendar.
-egTimeZone :: Lens' EventsGet' (Maybe Text)
+egTimeZone :: Lens' EventsGet (Maybe Text)
 egTimeZone
   = lens _egTimeZone (\ s a -> s{_egTimeZone = a})
 
@@ -119,19 +119,19 @@ egTimeZone
 -- is discouraged and should only be used by clients which cannot handle
 -- the absence of an email address value in the mentioned places. Optional.
 -- The default is False.
-egAlwaysIncludeEmail :: Lens' EventsGet' (Maybe Bool)
+egAlwaysIncludeEmail :: Lens' EventsGet (Maybe Bool)
 egAlwaysIncludeEmail
   = lens _egAlwaysIncludeEmail
       (\ s a -> s{_egAlwaysIncludeEmail = a})
 
 -- | Event identifier.
-egEventId :: Lens' EventsGet' Text
+egEventId :: Lens' EventsGet Text
 egEventId
   = lens _egEventId (\ s a -> s{_egEventId = a})
 
-instance GoogleRequest EventsGet' where
-        type Rs EventsGet' = Event
-        requestClient EventsGet'{..}
+instance GoogleRequest EventsGet where
+        type Rs EventsGet = Event
+        requestClient EventsGet{..}
           = go _egCalendarId _egEventId _egMaxAttendees
               _egTimeZone
               _egAlwaysIncludeEmail

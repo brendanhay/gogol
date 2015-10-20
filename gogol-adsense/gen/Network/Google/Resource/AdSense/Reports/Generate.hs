@@ -31,8 +31,8 @@ module Network.Google.Resource.AdSense.Reports.Generate
       ReportsGenerateResource
 
     -- * Creating a Request
-    , reportsGenerate'
-    , ReportsGenerate'
+    , reportsGenerate
+    , ReportsGenerate
 
     -- * Request Lenses
     , rgDimension
@@ -53,7 +53,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.reports.generate@ method which the
--- 'ReportsGenerate'' request conforms to.
+-- 'ReportsGenerate' request conforms to.
 type ReportsGenerateResource =
      "reports" :>
        QueryParam "startDate" Text :>
@@ -91,8 +91,8 @@ type ReportsGenerateResource =
 -- parameters. Returns the result as JSON; to retrieve output in CSV format
 -- specify \"alt=csv\" as a query parameter.
 --
--- /See:/ 'reportsGenerate'' smart constructor.
-data ReportsGenerate' = ReportsGenerate'
+-- /See:/ 'reportsGenerate' smart constructor.
+data ReportsGenerate = ReportsGenerate
     { _rgDimension            :: !(Maybe [Text])
     , _rgLocale               :: !(Maybe Text)
     , _rgEndDate              :: !Text
@@ -107,7 +107,7 @@ data ReportsGenerate' = ReportsGenerate'
     , _rgMaxResults           :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReportsGenerate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportsGenerate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -134,12 +134,12 @@ data ReportsGenerate' = ReportsGenerate'
 -- * 'rgUseTimezoneReporting'
 --
 -- * 'rgMaxResults'
-reportsGenerate'
+reportsGenerate
     :: Text -- ^ 'rgEndDate'
     -> Text -- ^ 'rgStartDate'
-    -> ReportsGenerate'
-reportsGenerate' pRgEndDate_ pRgStartDate_ =
-    ReportsGenerate'
+    -> ReportsGenerate
+reportsGenerate pRgEndDate_ pRgStartDate_ =
+    ReportsGenerate
     { _rgDimension = Nothing
     , _rgLocale = Nothing
     , _rgEndDate = pRgEndDate_
@@ -155,7 +155,7 @@ reportsGenerate' pRgEndDate_ pRgStartDate_ =
     }
 
 -- | Dimensions to base the report on.
-rgDimension :: Lens' ReportsGenerate' [Text]
+rgDimension :: Lens' ReportsGenerate [Text]
 rgDimension
   = lens _rgDimension (\ s a -> s{_rgDimension = a}) .
       _Default
@@ -163,29 +163,29 @@ rgDimension
 
 -- | Optional locale to use for translating report output to a local
 -- language. Defaults to \"en_US\" if not specified.
-rgLocale :: Lens' ReportsGenerate' (Maybe Text)
+rgLocale :: Lens' ReportsGenerate (Maybe Text)
 rgLocale = lens _rgLocale (\ s a -> s{_rgLocale = a})
 
 -- | End of the date range to report on in \"YYYY-MM-DD\" format, inclusive.
-rgEndDate :: Lens' ReportsGenerate' Text
+rgEndDate :: Lens' ReportsGenerate Text
 rgEndDate
   = lens _rgEndDate (\ s a -> s{_rgEndDate = a})
 
 -- | Start of the date range to report on in \"YYYY-MM-DD\" format,
 -- inclusive.
-rgStartDate :: Lens' ReportsGenerate' Text
+rgStartDate :: Lens' ReportsGenerate Text
 rgStartDate
   = lens _rgStartDate (\ s a -> s{_rgStartDate = a})
 
 -- | Accounts upon which to report.
-rgAccountId :: Lens' ReportsGenerate' [Text]
+rgAccountId :: Lens' ReportsGenerate [Text]
 rgAccountId
   = lens _rgAccountId (\ s a -> s{_rgAccountId = a}) .
       _Default
       . _Coerce
 
 -- | Numeric columns to include in the report.
-rgMetric :: Lens' ReportsGenerate' [Text]
+rgMetric :: Lens' ReportsGenerate [Text]
 rgMetric
   = lens _rgMetric (\ s a -> s{_rgMetric = a}) .
       _Default
@@ -193,46 +193,46 @@ rgMetric
 
 -- | Optional currency to use when reporting on monetary metrics. Defaults to
 -- the account\'s currency if not set.
-rgCurrency :: Lens' ReportsGenerate' (Maybe Text)
+rgCurrency :: Lens' ReportsGenerate (Maybe Text)
 rgCurrency
   = lens _rgCurrency (\ s a -> s{_rgCurrency = a})
 
 -- | The name of a dimension or metric to sort the resulting report on,
 -- optionally prefixed with \"+\" to sort ascending or \"-\" to sort
 -- descending. If no prefix is specified, the column is sorted ascending.
-rgSort :: Lens' ReportsGenerate' [Text]
+rgSort :: Lens' ReportsGenerate [Text]
 rgSort
   = lens _rgSort (\ s a -> s{_rgSort = a}) . _Default .
       _Coerce
 
 -- | Filters to be run on the report.
-rgFilter :: Lens' ReportsGenerate' [Text]
+rgFilter :: Lens' ReportsGenerate [Text]
 rgFilter
   = lens _rgFilter (\ s a -> s{_rgFilter = a}) .
       _Default
       . _Coerce
 
 -- | Index of the first row of report data to return.
-rgStartIndex :: Lens' ReportsGenerate' (Maybe Int32)
+rgStartIndex :: Lens' ReportsGenerate (Maybe Int32)
 rgStartIndex
   = lens _rgStartIndex (\ s a -> s{_rgStartIndex = a})
 
 -- | Whether the report should be generated in the AdSense account\'s local
 -- timezone. If false default PST\/PDT timezone will be used.
-rgUseTimezoneReporting :: Lens' ReportsGenerate' (Maybe Bool)
+rgUseTimezoneReporting :: Lens' ReportsGenerate (Maybe Bool)
 rgUseTimezoneReporting
   = lens _rgUseTimezoneReporting
       (\ s a -> s{_rgUseTimezoneReporting = a})
 
 -- | The maximum number of rows of report data to return.
-rgMaxResults :: Lens' ReportsGenerate' (Maybe Int32)
+rgMaxResults :: Lens' ReportsGenerate (Maybe Int32)
 rgMaxResults
   = lens _rgMaxResults (\ s a -> s{_rgMaxResults = a})
 
-instance GoogleRequest ReportsGenerate' where
-        type Rs ReportsGenerate' =
+instance GoogleRequest ReportsGenerate where
+        type Rs ReportsGenerate =
              AdsenseReportsGenerateResponse
-        requestClient ReportsGenerate'{..}
+        requestClient ReportsGenerate{..}
           = go (Just _rgStartDate) (Just _rgEndDate)
               (_rgDimension ^. _Default)
               _rgLocale
@@ -252,9 +252,9 @@ instance GoogleRequest ReportsGenerate' where
                       mempty
 
 instance GoogleRequest
-         (MediaDownload ReportsGenerate') where
-        type Rs (MediaDownload ReportsGenerate') = Stream
-        requestClient (MediaDownload ReportsGenerate'{..})
+         (MediaDownload ReportsGenerate) where
+        type Rs (MediaDownload ReportsGenerate) = Stream
+        requestClient (MediaDownload ReportsGenerate{..})
           = go (Just _rgStartDate) (Just _rgEndDate)
               (_rgDimension ^. _Default)
               _rgLocale

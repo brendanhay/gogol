@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.TargetVPNGateways.List
       TargetVPNGatewaysListResource
 
     -- * Creating a Request
-    , targetVPNGatewaysList'
-    , TargetVPNGatewaysList'
+    , targetVPNGatewaysList
+    , TargetVPNGatewaysList
 
     -- * Request Lenses
     , tvglProject
@@ -45,7 +45,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetVpnGateways.list@ method which the
--- 'TargetVPNGatewaysList'' request conforms to.
+-- 'TargetVPNGatewaysList' request conforms to.
 type TargetVPNGatewaysListResource =
      Capture "project" Text :>
        "regions" :>
@@ -60,8 +60,8 @@ type TargetVPNGatewaysListResource =
 -- | Retrieves the list of TargetVpnGateway resources available to the
 -- specified project and region.
 --
--- /See:/ 'targetVPNGatewaysList'' smart constructor.
-data TargetVPNGatewaysList' = TargetVPNGatewaysList'
+-- /See:/ 'targetVPNGatewaysList' smart constructor.
+data TargetVPNGatewaysList = TargetVPNGatewaysList
     { _tvglProject    :: !Text
     , _tvglFilter     :: !(Maybe Text)
     , _tvglRegion     :: !Text
@@ -69,7 +69,7 @@ data TargetVPNGatewaysList' = TargetVPNGatewaysList'
     , _tvglMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetVPNGatewaysList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetVPNGatewaysList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,12 +82,12 @@ data TargetVPNGatewaysList' = TargetVPNGatewaysList'
 -- * 'tvglPageToken'
 --
 -- * 'tvglMaxResults'
-targetVPNGatewaysList'
+targetVPNGatewaysList
     :: Text -- ^ 'tvglProject'
     -> Text -- ^ 'tvglRegion'
-    -> TargetVPNGatewaysList'
-targetVPNGatewaysList' pTvglProject_ pTvglRegion_ =
-    TargetVPNGatewaysList'
+    -> TargetVPNGatewaysList
+targetVPNGatewaysList pTvglProject_ pTvglRegion_ =
+    TargetVPNGatewaysList
     { _tvglProject = pTvglProject_
     , _tvglFilter = Nothing
     , _tvglRegion = pTvglRegion_
@@ -96,7 +96,7 @@ targetVPNGatewaysList' pTvglProject_ pTvglRegion_ =
     }
 
 -- | Project ID for this request.
-tvglProject :: Lens' TargetVPNGatewaysList' Text
+tvglProject :: Lens' TargetVPNGatewaysList Text
 tvglProject
   = lens _tvglProject (\ s a -> s{_tvglProject = a})
 
@@ -111,32 +111,32 @@ tvglProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-tvglFilter :: Lens' TargetVPNGatewaysList' (Maybe Text)
+tvglFilter :: Lens' TargetVPNGatewaysList (Maybe Text)
 tvglFilter
   = lens _tvglFilter (\ s a -> s{_tvglFilter = a})
 
 -- | The name of the region for this request.
-tvglRegion :: Lens' TargetVPNGatewaysList' Text
+tvglRegion :: Lens' TargetVPNGatewaysList Text
 tvglRegion
   = lens _tvglRegion (\ s a -> s{_tvglRegion = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-tvglPageToken :: Lens' TargetVPNGatewaysList' (Maybe Text)
+tvglPageToken :: Lens' TargetVPNGatewaysList (Maybe Text)
 tvglPageToken
   = lens _tvglPageToken
       (\ s a -> s{_tvglPageToken = a})
 
 -- | Maximum count of results to be returned.
-tvglMaxResults :: Lens' TargetVPNGatewaysList' Word32
+tvglMaxResults :: Lens' TargetVPNGatewaysList Word32
 tvglMaxResults
   = lens _tvglMaxResults
       (\ s a -> s{_tvglMaxResults = a})
 
-instance GoogleRequest TargetVPNGatewaysList' where
-        type Rs TargetVPNGatewaysList' = TargetVPNGatewayList
-        requestClient TargetVPNGatewaysList'{..}
+instance GoogleRequest TargetVPNGatewaysList where
+        type Rs TargetVPNGatewaysList = TargetVPNGatewayList
+        requestClient TargetVPNGatewaysList{..}
           = go _tvglProject _tvglRegion _tvglFilter
               _tvglPageToken
               (Just _tvglMaxResults)

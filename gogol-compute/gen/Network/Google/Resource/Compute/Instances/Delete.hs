@@ -30,20 +30,20 @@ module Network.Google.Resource.Compute.Instances.Delete
       InstancesDeleteResource
 
     -- * Creating a Request
-    , instancesDelete'
-    , InstancesDelete'
+    , instancesDelete
+    , InstancesDelete
 
     -- * Request Lenses
-    , insProject
-    , insZone
-    , insInstance
+    , idProject
+    , idZone
+    , idInstance
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.delete@ method which the
--- 'InstancesDelete'' request conforms to.
+-- 'InstancesDelete' request conforms to.
 type InstancesDeleteResource =
      Capture "project" Text :>
        "zones" :>
@@ -55,52 +55,52 @@ type InstancesDeleteResource =
 -- | Deletes the specified Instance resource. For more information, see
 -- Shutting down an instance.
 --
--- /See:/ 'instancesDelete'' smart constructor.
-data InstancesDelete' = InstancesDelete'
-    { _insProject  :: !Text
-    , _insZone     :: !Text
-    , _insInstance :: !Text
+-- /See:/ 'instancesDelete' smart constructor.
+data InstancesDelete = InstancesDelete
+    { _idProject  :: !Text
+    , _idZone     :: !Text
+    , _idInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'insProject'
+-- * 'idProject'
 --
--- * 'insZone'
+-- * 'idZone'
 --
--- * 'insInstance'
-instancesDelete'
-    :: Text -- ^ 'insProject'
-    -> Text -- ^ 'insZone'
-    -> Text -- ^ 'insInstance'
-    -> InstancesDelete'
-instancesDelete' pInsProject_ pInsZone_ pInsInstance_ =
-    InstancesDelete'
-    { _insProject = pInsProject_
-    , _insZone = pInsZone_
-    , _insInstance = pInsInstance_
+-- * 'idInstance'
+instancesDelete
+    :: Text -- ^ 'idProject'
+    -> Text -- ^ 'idZone'
+    -> Text -- ^ 'idInstance'
+    -> InstancesDelete
+instancesDelete pIdProject_ pIdZone_ pIdInstance_ =
+    InstancesDelete
+    { _idProject = pIdProject_
+    , _idZone = pIdZone_
+    , _idInstance = pIdInstance_
     }
 
 -- | Project ID for this request.
-insProject :: Lens' InstancesDelete' Text
-insProject
-  = lens _insProject (\ s a -> s{_insProject = a})
+idProject :: Lens' InstancesDelete Text
+idProject
+  = lens _idProject (\ s a -> s{_idProject = a})
 
 -- | The name of the zone for this request.
-insZone :: Lens' InstancesDelete' Text
-insZone = lens _insZone (\ s a -> s{_insZone = a})
+idZone :: Lens' InstancesDelete Text
+idZone = lens _idZone (\ s a -> s{_idZone = a})
 
 -- | Name of the instance resource to delete.
-insInstance :: Lens' InstancesDelete' Text
-insInstance
-  = lens _insInstance (\ s a -> s{_insInstance = a})
+idInstance :: Lens' InstancesDelete Text
+idInstance
+  = lens _idInstance (\ s a -> s{_idInstance = a})
 
-instance GoogleRequest InstancesDelete' where
-        type Rs InstancesDelete' = Operation
-        requestClient InstancesDelete'{..}
-          = go _insProject _insZone _insInstance (Just AltJSON)
+instance GoogleRequest InstancesDelete where
+        type Rs InstancesDelete = Operation
+        requestClient InstancesDelete{..}
+          = go _idProject _idZone _idInstance (Just AltJSON)
               computeService
           where go
                   = buildClient

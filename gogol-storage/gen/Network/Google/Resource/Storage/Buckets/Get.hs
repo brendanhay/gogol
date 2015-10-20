@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.Buckets.Get
       BucketsGetResource
 
     -- * Creating a Request
-    , bucketsGet'
-    , BucketsGet'
+    , bucketsGet
+    , BucketsGet
 
     -- * Request Lenses
     , bgIfMetagenerationMatch
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.buckets.get@ method which the
--- 'BucketsGet'' request conforms to.
+-- 'BucketsGet' request conforms to.
 type BucketsGetResource =
      "b" :>
        Capture "bucket" Text :>
@@ -54,15 +54,15 @@ type BucketsGetResource =
 
 -- | Returns metadata for the specified bucket.
 --
--- /See:/ 'bucketsGet'' smart constructor.
-data BucketsGet' = BucketsGet'
+-- /See:/ 'bucketsGet' smart constructor.
+data BucketsGet = BucketsGet
     { _bgIfMetagenerationMatch    :: !(Maybe Int64)
     , _bgBucket                   :: !Text
     , _bgIfMetagenerationNotMatch :: !(Maybe Int64)
     , _bgProjection               :: !(Maybe BucketsGetProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BucketsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'BucketsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,11 +73,11 @@ data BucketsGet' = BucketsGet'
 -- * 'bgIfMetagenerationNotMatch'
 --
 -- * 'bgProjection'
-bucketsGet'
+bucketsGet
     :: Text -- ^ 'bgBucket'
-    -> BucketsGet'
-bucketsGet' pBgBucket_ =
-    BucketsGet'
+    -> BucketsGet
+bucketsGet pBgBucket_ =
+    BucketsGet
     { _bgIfMetagenerationMatch = Nothing
     , _bgBucket = pBgBucket_
     , _bgIfMetagenerationNotMatch = Nothing
@@ -86,30 +86,30 @@ bucketsGet' pBgBucket_ =
 
 -- | Makes the return of the bucket metadata conditional on whether the
 -- bucket\'s current metageneration matches the given value.
-bgIfMetagenerationMatch :: Lens' BucketsGet' (Maybe Int64)
+bgIfMetagenerationMatch :: Lens' BucketsGet (Maybe Int64)
 bgIfMetagenerationMatch
   = lens _bgIfMetagenerationMatch
       (\ s a -> s{_bgIfMetagenerationMatch = a})
 
 -- | Name of a bucket.
-bgBucket :: Lens' BucketsGet' Text
+bgBucket :: Lens' BucketsGet Text
 bgBucket = lens _bgBucket (\ s a -> s{_bgBucket = a})
 
 -- | Makes the return of the bucket metadata conditional on whether the
 -- bucket\'s current metageneration does not match the given value.
-bgIfMetagenerationNotMatch :: Lens' BucketsGet' (Maybe Int64)
+bgIfMetagenerationNotMatch :: Lens' BucketsGet (Maybe Int64)
 bgIfMetagenerationNotMatch
   = lens _bgIfMetagenerationNotMatch
       (\ s a -> s{_bgIfMetagenerationNotMatch = a})
 
 -- | Set of properties to return. Defaults to noAcl.
-bgProjection :: Lens' BucketsGet' (Maybe BucketsGetProjection)
+bgProjection :: Lens' BucketsGet (Maybe BucketsGetProjection)
 bgProjection
   = lens _bgProjection (\ s a -> s{_bgProjection = a})
 
-instance GoogleRequest BucketsGet' where
-        type Rs BucketsGet' = Bucket
-        requestClient BucketsGet'{..}
+instance GoogleRequest BucketsGet where
+        type Rs BucketsGet = Bucket
+        requestClient BucketsGet{..}
           = go _bgBucket _bgIfMetagenerationMatch
               _bgIfMetagenerationNotMatch
               _bgProjection

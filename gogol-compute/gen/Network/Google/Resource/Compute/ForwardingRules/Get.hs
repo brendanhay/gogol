@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.ForwardingRules.Get
       ForwardingRulesGetResource
 
     -- * Creating a Request
-    , forwardingRulesGet'
-    , ForwardingRulesGet'
+    , forwardingRulesGet
+    , ForwardingRulesGet
 
     -- * Request Lenses
     , frgProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.forwardingRules.get@ method which the
--- 'ForwardingRulesGet'' request conforms to.
+-- 'ForwardingRulesGet' request conforms to.
 type ForwardingRulesGetResource =
      Capture "project" Text :>
        "regions" :>
@@ -54,14 +54,14 @@ type ForwardingRulesGetResource =
 
 -- | Returns the specified ForwardingRule resource.
 --
--- /See:/ 'forwardingRulesGet'' smart constructor.
-data ForwardingRulesGet' = ForwardingRulesGet'
+-- /See:/ 'forwardingRulesGet' smart constructor.
+data ForwardingRulesGet = ForwardingRulesGet
     { _frgProject        :: !Text
     , _frgForwardingRule :: !Text
     , _frgRegion         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ForwardingRulesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ForwardingRulesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,37 +70,37 @@ data ForwardingRulesGet' = ForwardingRulesGet'
 -- * 'frgForwardingRule'
 --
 -- * 'frgRegion'
-forwardingRulesGet'
+forwardingRulesGet
     :: Text -- ^ 'frgProject'
     -> Text -- ^ 'frgForwardingRule'
     -> Text -- ^ 'frgRegion'
-    -> ForwardingRulesGet'
-forwardingRulesGet' pFrgProject_ pFrgForwardingRule_ pFrgRegion_ =
-    ForwardingRulesGet'
+    -> ForwardingRulesGet
+forwardingRulesGet pFrgProject_ pFrgForwardingRule_ pFrgRegion_ =
+    ForwardingRulesGet
     { _frgProject = pFrgProject_
     , _frgForwardingRule = pFrgForwardingRule_
     , _frgRegion = pFrgRegion_
     }
 
 -- | Name of the project scoping this request.
-frgProject :: Lens' ForwardingRulesGet' Text
+frgProject :: Lens' ForwardingRulesGet Text
 frgProject
   = lens _frgProject (\ s a -> s{_frgProject = a})
 
 -- | Name of the ForwardingRule resource to return.
-frgForwardingRule :: Lens' ForwardingRulesGet' Text
+frgForwardingRule :: Lens' ForwardingRulesGet Text
 frgForwardingRule
   = lens _frgForwardingRule
       (\ s a -> s{_frgForwardingRule = a})
 
 -- | Name of the region scoping this request.
-frgRegion :: Lens' ForwardingRulesGet' Text
+frgRegion :: Lens' ForwardingRulesGet Text
 frgRegion
   = lens _frgRegion (\ s a -> s{_frgRegion = a})
 
-instance GoogleRequest ForwardingRulesGet' where
-        type Rs ForwardingRulesGet' = ForwardingRule
-        requestClient ForwardingRulesGet'{..}
+instance GoogleRequest ForwardingRulesGet where
+        type Rs ForwardingRulesGet = ForwardingRule
+        requestClient ForwardingRulesGet{..}
           = go _frgProject _frgRegion _frgForwardingRule
               (Just AltJSON)
               computeService

@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.Update
       AccountsPermissionsUpdateResource
 
     -- * Creating a Request
-    , accountsPermissionsUpdate'
-    , AccountsPermissionsUpdate'
+    , accountsPermissionsUpdate
+    , AccountsPermissionsUpdate
 
     -- * Request Lenses
     , apuPayload
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.permissions.update@ method which the
--- 'AccountsPermissionsUpdate'' request conforms to.
+-- 'AccountsPermissionsUpdate' request conforms to.
 type AccountsPermissionsUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -53,14 +53,14 @@ type AccountsPermissionsUpdateResource =
 
 -- | Updates a user\'s Account & Container Permissions.
 --
--- /See:/ 'accountsPermissionsUpdate'' smart constructor.
-data AccountsPermissionsUpdate' = AccountsPermissionsUpdate'
+-- /See:/ 'accountsPermissionsUpdate' smart constructor.
+data AccountsPermissionsUpdate = AccountsPermissionsUpdate
     { _apuPayload      :: !UserAccess
     , _apuAccountId    :: !Text
     , _apuPermissionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsPermissionsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsPermissionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,38 +69,38 @@ data AccountsPermissionsUpdate' = AccountsPermissionsUpdate'
 -- * 'apuAccountId'
 --
 -- * 'apuPermissionId'
-accountsPermissionsUpdate'
+accountsPermissionsUpdate
     :: UserAccess -- ^ 'apuPayload'
     -> Text -- ^ 'apuAccountId'
     -> Text -- ^ 'apuPermissionId'
-    -> AccountsPermissionsUpdate'
-accountsPermissionsUpdate' pApuPayload_ pApuAccountId_ pApuPermissionId_ =
-    AccountsPermissionsUpdate'
+    -> AccountsPermissionsUpdate
+accountsPermissionsUpdate pApuPayload_ pApuAccountId_ pApuPermissionId_ =
+    AccountsPermissionsUpdate
     { _apuPayload = pApuPayload_
     , _apuAccountId = pApuAccountId_
     , _apuPermissionId = pApuPermissionId_
     }
 
 -- | Multipart request metadata.
-apuPayload :: Lens' AccountsPermissionsUpdate' UserAccess
+apuPayload :: Lens' AccountsPermissionsUpdate UserAccess
 apuPayload
   = lens _apuPayload (\ s a -> s{_apuPayload = a})
 
 -- | The GTM Account ID.
-apuAccountId :: Lens' AccountsPermissionsUpdate' Text
+apuAccountId :: Lens' AccountsPermissionsUpdate Text
 apuAccountId
   = lens _apuAccountId (\ s a -> s{_apuAccountId = a})
 
 -- | The GTM User ID.
-apuPermissionId :: Lens' AccountsPermissionsUpdate' Text
+apuPermissionId :: Lens' AccountsPermissionsUpdate Text
 apuPermissionId
   = lens _apuPermissionId
       (\ s a -> s{_apuPermissionId = a})
 
-instance GoogleRequest AccountsPermissionsUpdate'
+instance GoogleRequest AccountsPermissionsUpdate
          where
-        type Rs AccountsPermissionsUpdate' = UserAccess
-        requestClient AccountsPermissionsUpdate'{..}
+        type Rs AccountsPermissionsUpdate = UserAccess
+        requestClient AccountsPermissionsUpdate{..}
           = go _apuAccountId _apuPermissionId (Just AltJSON)
               _apuPayload
               tagManagerService

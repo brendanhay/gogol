@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.Metagame.GetMetagameConfig
       MetagameGetMetagameConfigResource
 
     -- * Creating a Request
-    , metagameGetMetagameConfig'
-    , MetagameGetMetagameConfig'
+    , metagameGetMetagameConfig
+    , MetagameGetMetagameConfig
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.metagame.getMetagameConfig@ method which the
--- 'MetagameGetMetagameConfig'' request conforms to.
+-- 'MetagameGetMetagameConfig' request conforms to.
 type MetagameGetMetagameConfigResource =
      "metagameConfig" :>
        QueryParam "alt" AltJSON :>
@@ -46,21 +46,21 @@ type MetagameGetMetagameConfigResource =
 
 -- | Return the metagame configuration data for the calling application.
 --
--- /See:/ 'metagameGetMetagameConfig'' smart constructor.
-data MetagameGetMetagameConfig' =
-    MetagameGetMetagameConfig'
+-- /See:/ 'metagameGetMetagameConfig' smart constructor.
+data MetagameGetMetagameConfig =
+    MetagameGetMetagameConfig
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MetagameGetMetagameConfig'' with the minimum fields required to make a request.
+-- | Creates a value of 'MetagameGetMetagameConfig' with the minimum fields required to make a request.
 --
-metagameGetMetagameConfig'
-    :: MetagameGetMetagameConfig'
-metagameGetMetagameConfig' = MetagameGetMetagameConfig'
+metagameGetMetagameConfig
+    :: MetagameGetMetagameConfig
+metagameGetMetagameConfig = MetagameGetMetagameConfig
 
-instance GoogleRequest MetagameGetMetagameConfig'
+instance GoogleRequest MetagameGetMetagameConfig
          where
-        type Rs MetagameGetMetagameConfig' = MetagameConfig
-        requestClient MetagameGetMetagameConfig'{}
+        type Rs MetagameGetMetagameConfig = MetagameConfig
+        requestClient MetagameGetMetagameConfig{}
           = go (Just AltJSON) gamesService
           where go
                   = buildClient

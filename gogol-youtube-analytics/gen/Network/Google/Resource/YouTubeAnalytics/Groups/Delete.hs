@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTubeAnalytics.Groups.Delete
       GroupsDeleteResource
 
     -- * Creating a Request
-    , groupsDelete'
-    , GroupsDelete'
+    , groupsDelete
+    , GroupsDelete
 
     -- * Request Lenses
     , gdOnBehalfOfContentOwner
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @youtubeAnalytics.groups.delete@ method which the
--- 'GroupsDelete'' request conforms to.
+-- 'GroupsDelete' request conforms to.
 type GroupsDeleteResource =
      "groups" :>
        QueryParam "id" Text :>
@@ -50,24 +50,24 @@ type GroupsDeleteResource =
 
 -- | Deletes a group.
 --
--- /See:/ 'groupsDelete'' smart constructor.
-data GroupsDelete' = GroupsDelete'
+-- /See:/ 'groupsDelete' smart constructor.
+data GroupsDelete = GroupsDelete
     { _gdOnBehalfOfContentOwner :: !(Maybe Text)
     , _gdId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GroupsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'GroupsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gdOnBehalfOfContentOwner'
 --
 -- * 'gdId'
-groupsDelete'
+groupsDelete
     :: Text -- ^ 'gdId'
-    -> GroupsDelete'
-groupsDelete' pGdId_ =
-    GroupsDelete'
+    -> GroupsDelete
+groupsDelete pGdId_ =
+    GroupsDelete
     { _gdOnBehalfOfContentOwner = Nothing
     , _gdId = pGdId_
     }
@@ -82,19 +82,19 @@ groupsDelete' pGdId_ =
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-gdOnBehalfOfContentOwner :: Lens' GroupsDelete' (Maybe Text)
+gdOnBehalfOfContentOwner :: Lens' GroupsDelete (Maybe Text)
 gdOnBehalfOfContentOwner
   = lens _gdOnBehalfOfContentOwner
       (\ s a -> s{_gdOnBehalfOfContentOwner = a})
 
 -- | The id parameter specifies the YouTube group ID for the group that is
 -- being deleted.
-gdId :: Lens' GroupsDelete' Text
+gdId :: Lens' GroupsDelete Text
 gdId = lens _gdId (\ s a -> s{_gdId = a})
 
-instance GoogleRequest GroupsDelete' where
-        type Rs GroupsDelete' = ()
-        requestClient GroupsDelete'{..}
+instance GoogleRequest GroupsDelete where
+        type Rs GroupsDelete = ()
+        requestClient GroupsDelete{..}
           = go (Just _gdId) _gdOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeAnalyticsService

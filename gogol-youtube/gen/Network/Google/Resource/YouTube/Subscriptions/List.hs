@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.Subscriptions.List
       SubscriptionsListResource
 
     -- * Creating a Request
-    , subscriptionsList'
-    , SubscriptionsList'
+    , subscriptionsList
+    , SubscriptionsList
 
     -- * Request Lenses
     , sPart
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.subscriptions.list@ method which the
--- 'SubscriptionsList'' request conforms to.
+-- 'SubscriptionsList' request conforms to.
 type SubscriptionsListResource =
      "subscriptions" :>
        QueryParam "part" Text :>
@@ -69,8 +69,8 @@ type SubscriptionsListResource =
 
 -- | Returns subscription resources that match the API request criteria.
 --
--- /See:/ 'subscriptionsList'' smart constructor.
-data SubscriptionsList' = SubscriptionsList'
+-- /See:/ 'subscriptionsList' smart constructor.
+data SubscriptionsList = SubscriptionsList
     { _sPart                          :: !Text
     , _sMine                          :: !(Maybe Bool)
     , _sChannelId                     :: !(Maybe Text)
@@ -84,7 +84,7 @@ data SubscriptionsList' = SubscriptionsList'
     , _sMaxResults                    :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubscriptionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -109,11 +109,11 @@ data SubscriptionsList' = SubscriptionsList'
 -- * 'sOrder'
 --
 -- * 'sMaxResults'
-subscriptionsList'
+subscriptionsList
     :: Text -- ^ 'sPart'
-    -> SubscriptionsList'
-subscriptionsList' pSPart_ =
-    SubscriptionsList'
+    -> SubscriptionsList
+subscriptionsList pSPart_ =
+    SubscriptionsList
     { _sPart = pSPart_
     , _sMine = Nothing
     , _sChannelId = Nothing
@@ -134,17 +134,17 @@ subscriptionsList' pSPart_ =
 -- subscription resource, the snippet property contains other properties,
 -- such as a display title for the subscription. If you set part=snippet,
 -- the API response will also contain all of those nested properties.
-sPart :: Lens' SubscriptionsList' Text
+sPart :: Lens' SubscriptionsList Text
 sPart = lens _sPart (\ s a -> s{_sPart = a})
 
 -- | Set this parameter\'s value to true to retrieve a feed of the
 -- authenticated user\'s subscriptions.
-sMine :: Lens' SubscriptionsList' (Maybe Bool)
+sMine :: Lens' SubscriptionsList (Maybe Bool)
 sMine = lens _sMine (\ s a -> s{_sMine = a})
 
 -- | The channelId parameter specifies a YouTube channel ID. The API will
 -- only return that channel\'s subscriptions.
-sChannelId :: Lens' SubscriptionsList' (Maybe Text)
+sChannelId :: Lens' SubscriptionsList (Maybe Text)
 sChannelId
   = lens _sChannelId (\ s a -> s{_sChannelId = a})
 
@@ -158,7 +158,7 @@ sChannelId
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-sOnBehalfOfContentOwner :: Lens' SubscriptionsList' (Maybe Text)
+sOnBehalfOfContentOwner :: Lens' SubscriptionsList (Maybe Text)
 sOnBehalfOfContentOwner
   = lens _sOnBehalfOfContentOwner
       (\ s a -> s{_sOnBehalfOfContentOwner = a})
@@ -179,7 +179,7 @@ sOnBehalfOfContentOwner
 -- actions on behalf of the channel specified in the parameter value,
 -- without having to provide authentication credentials for each separate
 -- channel.
-sOnBehalfOfContentOwnerChannel :: Lens' SubscriptionsList' (Maybe Text)
+sOnBehalfOfContentOwnerChannel :: Lens' SubscriptionsList (Maybe Text)
 sOnBehalfOfContentOwnerChannel
   = lens _sOnBehalfOfContentOwnerChannel
       (\ s a -> s{_sOnBehalfOfContentOwnerChannel = a})
@@ -188,12 +188,12 @@ sOnBehalfOfContentOwnerChannel
 -- subscription ID(s) for the resource(s) that are being retrieved. In a
 -- subscription resource, the id property specifies the YouTube
 -- subscription ID.
-sId :: Lens' SubscriptionsList' (Maybe Text)
+sId :: Lens' SubscriptionsList (Maybe Text)
 sId = lens _sId (\ s a -> s{_sId = a})
 
 -- | Set this parameter\'s value to true to retrieve a feed of the
 -- subscribers of the authenticated user.
-sMySubscribers :: Lens' SubscriptionsList' (Maybe Bool)
+sMySubscribers :: Lens' SubscriptionsList (Maybe Bool)
 sMySubscribers
   = lens _sMySubscribers
       (\ s a -> s{_sMySubscribers = a})
@@ -201,7 +201,7 @@ sMySubscribers
 -- | The forChannelId parameter specifies a comma-separated list of channel
 -- IDs. The API response will then only contain subscriptions matching
 -- those channels.
-sForChannelId :: Lens' SubscriptionsList' (Maybe Text)
+sForChannelId :: Lens' SubscriptionsList (Maybe Text)
 sForChannelId
   = lens _sForChannelId
       (\ s a -> s{_sForChannelId = a})
@@ -209,24 +209,24 @@ sForChannelId
 -- | The pageToken parameter identifies a specific page in the result set
 -- that should be returned. In an API response, the nextPageToken and
 -- prevPageToken properties identify other pages that could be retrieved.
-sPageToken :: Lens' SubscriptionsList' (Maybe Text)
+sPageToken :: Lens' SubscriptionsList (Maybe Text)
 sPageToken
   = lens _sPageToken (\ s a -> s{_sPageToken = a})
 
 -- | The order parameter specifies the method that will be used to sort
 -- resources in the API response.
-sOrder :: Lens' SubscriptionsList' SubscriptionsListOrder
+sOrder :: Lens' SubscriptionsList SubscriptionsListOrder
 sOrder = lens _sOrder (\ s a -> s{_sOrder = a})
 
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set.
-sMaxResults :: Lens' SubscriptionsList' Word32
+sMaxResults :: Lens' SubscriptionsList Word32
 sMaxResults
   = lens _sMaxResults (\ s a -> s{_sMaxResults = a})
 
-instance GoogleRequest SubscriptionsList' where
-        type Rs SubscriptionsList' = SubscriptionListResponse
-        requestClient SubscriptionsList'{..}
+instance GoogleRequest SubscriptionsList where
+        type Rs SubscriptionsList = SubscriptionListResponse
+        requestClient SubscriptionsList{..}
           = go (Just _sPart) _sMine _sChannelId
               _sOnBehalfOfContentOwner
               _sOnBehalfOfContentOwnerChannel

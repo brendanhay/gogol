@@ -30,8 +30,8 @@ module Network.Google.Resource.DeploymentManager.Deployments.Stop
       DeploymentsStopResource
 
     -- * Creating a Request
-    , deploymentsStop'
-    , DeploymentsStop'
+    , deploymentsStop
+    , DeploymentsStop
 
     -- * Request Lenses
     , dsProject
@@ -43,7 +43,7 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @deploymentmanager.deployments.stop@ method which the
--- 'DeploymentsStop'' request conforms to.
+-- 'DeploymentsStop' request conforms to.
 type DeploymentsStopResource =
      Capture "project" Text :>
        "global" :>
@@ -57,14 +57,14 @@ type DeploymentsStopResource =
 -- | Stops an ongoing operation. This does not roll back any work that has
 -- already been completed, but prevents any new work from being started.
 --
--- /See:/ 'deploymentsStop'' smart constructor.
-data DeploymentsStop' = DeploymentsStop'
+-- /See:/ 'deploymentsStop' smart constructor.
+data DeploymentsStop = DeploymentsStop
     { _dsProject    :: !Text
     , _dsPayload    :: !DeploymentsStopRequest
     , _dsDeployment :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DeploymentsStop'' with the minimum fields required to make a request.
+-- | Creates a value of 'DeploymentsStop' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,36 +73,36 @@ data DeploymentsStop' = DeploymentsStop'
 -- * 'dsPayload'
 --
 -- * 'dsDeployment'
-deploymentsStop'
+deploymentsStop
     :: Text -- ^ 'dsProject'
     -> DeploymentsStopRequest -- ^ 'dsPayload'
     -> Text -- ^ 'dsDeployment'
-    -> DeploymentsStop'
-deploymentsStop' pDsProject_ pDsPayload_ pDsDeployment_ =
-    DeploymentsStop'
+    -> DeploymentsStop
+deploymentsStop pDsProject_ pDsPayload_ pDsDeployment_ =
+    DeploymentsStop
     { _dsProject = pDsProject_
     , _dsPayload = pDsPayload_
     , _dsDeployment = pDsDeployment_
     }
 
 -- | The project ID for this request.
-dsProject :: Lens' DeploymentsStop' Text
+dsProject :: Lens' DeploymentsStop Text
 dsProject
   = lens _dsProject (\ s a -> s{_dsProject = a})
 
 -- | Multipart request metadata.
-dsPayload :: Lens' DeploymentsStop' DeploymentsStopRequest
+dsPayload :: Lens' DeploymentsStop DeploymentsStopRequest
 dsPayload
   = lens _dsPayload (\ s a -> s{_dsPayload = a})
 
 -- | The name of the deployment for this request.
-dsDeployment :: Lens' DeploymentsStop' Text
+dsDeployment :: Lens' DeploymentsStop Text
 dsDeployment
   = lens _dsDeployment (\ s a -> s{_dsDeployment = a})
 
-instance GoogleRequest DeploymentsStop' where
-        type Rs DeploymentsStop' = Operation
-        requestClient DeploymentsStop'{..}
+instance GoogleRequest DeploymentsStop where
+        type Rs DeploymentsStop = Operation
+        requestClient DeploymentsStop{..}
           = go _dsProject _dsDeployment (Just AltJSON)
               _dsPayload
               deploymentManagerService

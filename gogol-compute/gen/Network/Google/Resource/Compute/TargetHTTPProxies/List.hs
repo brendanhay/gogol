@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.List
       TargetHTTPProxiesListResource
 
     -- * Creating a Request
-    , targetHTTPProxiesList'
-    , TargetHTTPProxiesList'
+    , targetHTTPProxiesList
+    , TargetHTTPProxiesList
 
     -- * Request Lenses
     , thttpplProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetHttpProxies.list@ method which the
--- 'TargetHTTPProxiesList'' request conforms to.
+-- 'TargetHTTPProxiesList' request conforms to.
 type TargetHTTPProxiesListResource =
      Capture "project" Text :>
        "global" :>
@@ -58,15 +58,15 @@ type TargetHTTPProxiesListResource =
 -- | Retrieves the list of TargetHttpProxy resources available to the
 -- specified project.
 --
--- /See:/ 'targetHTTPProxiesList'' smart constructor.
-data TargetHTTPProxiesList' = TargetHTTPProxiesList'
+-- /See:/ 'targetHTTPProxiesList' smart constructor.
+data TargetHTTPProxiesList = TargetHTTPProxiesList
     { _thttpplProject    :: !Text
     , _thttpplFilter     :: !(Maybe Text)
     , _thttpplPageToken  :: !(Maybe Text)
     , _thttpplMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetHTTPProxiesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetHTTPProxiesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,11 +77,11 @@ data TargetHTTPProxiesList' = TargetHTTPProxiesList'
 -- * 'thttpplPageToken'
 --
 -- * 'thttpplMaxResults'
-targetHTTPProxiesList'
+targetHTTPProxiesList
     :: Text -- ^ 'thttpplProject'
-    -> TargetHTTPProxiesList'
-targetHTTPProxiesList' pThttpplProject_ =
-    TargetHTTPProxiesList'
+    -> TargetHTTPProxiesList
+targetHTTPProxiesList pThttpplProject_ =
+    TargetHTTPProxiesList
     { _thttpplProject = pThttpplProject_
     , _thttpplFilter = Nothing
     , _thttpplPageToken = Nothing
@@ -89,7 +89,7 @@ targetHTTPProxiesList' pThttpplProject_ =
     }
 
 -- | Name of the project scoping this request.
-thttpplProject :: Lens' TargetHTTPProxiesList' Text
+thttpplProject :: Lens' TargetHTTPProxiesList Text
 thttpplProject
   = lens _thttpplProject
       (\ s a -> s{_thttpplProject = a})
@@ -105,7 +105,7 @@ thttpplProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-thttpplFilter :: Lens' TargetHTTPProxiesList' (Maybe Text)
+thttpplFilter :: Lens' TargetHTTPProxiesList (Maybe Text)
 thttpplFilter
   = lens _thttpplFilter
       (\ s a -> s{_thttpplFilter = a})
@@ -113,20 +113,20 @@ thttpplFilter
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-thttpplPageToken :: Lens' TargetHTTPProxiesList' (Maybe Text)
+thttpplPageToken :: Lens' TargetHTTPProxiesList (Maybe Text)
 thttpplPageToken
   = lens _thttpplPageToken
       (\ s a -> s{_thttpplPageToken = a})
 
 -- | Maximum count of results to be returned.
-thttpplMaxResults :: Lens' TargetHTTPProxiesList' Word32
+thttpplMaxResults :: Lens' TargetHTTPProxiesList Word32
 thttpplMaxResults
   = lens _thttpplMaxResults
       (\ s a -> s{_thttpplMaxResults = a})
 
-instance GoogleRequest TargetHTTPProxiesList' where
-        type Rs TargetHTTPProxiesList' = TargetHTTPProxyList
-        requestClient TargetHTTPProxiesList'{..}
+instance GoogleRequest TargetHTTPProxiesList where
+        type Rs TargetHTTPProxiesList = TargetHTTPProxyList
+        requestClient TargetHTTPProxiesList{..}
           = go _thttpplProject _thttpplFilter _thttpplPageToken
               (Just _thttpplMaxResults)
               (Just AltJSON)

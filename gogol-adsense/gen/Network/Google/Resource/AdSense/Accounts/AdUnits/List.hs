@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSense.Accounts.AdUnits.List
       AccountsAdUnitsListResource
 
     -- * Creating a Request
-    , accountsAdUnitsList'
-    , AccountsAdUnitsList'
+    , accountsAdUnitsList
+    , AccountsAdUnitsList
 
     -- * Request Lenses
     , aaulIncludeInactive
@@ -44,7 +44,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.accounts.adunits.list@ method which the
--- 'AccountsAdUnitsList'' request conforms to.
+-- 'AccountsAdUnitsList' request conforms to.
 type AccountsAdUnitsListResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -58,8 +58,8 @@ type AccountsAdUnitsListResource =
 
 -- | List all ad units in the specified ad client for the specified account.
 --
--- /See:/ 'accountsAdUnitsList'' smart constructor.
-data AccountsAdUnitsList' = AccountsAdUnitsList'
+-- /See:/ 'accountsAdUnitsList' smart constructor.
+data AccountsAdUnitsList = AccountsAdUnitsList
     { _aaulIncludeInactive :: !(Maybe Bool)
     , _aaulAdClientId      :: !Text
     , _aaulAccountId       :: !Text
@@ -67,7 +67,7 @@ data AccountsAdUnitsList' = AccountsAdUnitsList'
     , _aaulMaxResults      :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsAdUnitsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsAdUnitsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,12 +80,12 @@ data AccountsAdUnitsList' = AccountsAdUnitsList'
 -- * 'aaulPageToken'
 --
 -- * 'aaulMaxResults'
-accountsAdUnitsList'
+accountsAdUnitsList
     :: Text -- ^ 'aaulAdClientId'
     -> Text -- ^ 'aaulAccountId'
-    -> AccountsAdUnitsList'
-accountsAdUnitsList' pAaulAdClientId_ pAaulAccountId_ =
-    AccountsAdUnitsList'
+    -> AccountsAdUnitsList
+accountsAdUnitsList pAaulAdClientId_ pAaulAccountId_ =
+    AccountsAdUnitsList
     { _aaulIncludeInactive = Nothing
     , _aaulAdClientId = pAaulAdClientId_
     , _aaulAccountId = pAaulAccountId_
@@ -94,19 +94,19 @@ accountsAdUnitsList' pAaulAdClientId_ pAaulAccountId_ =
     }
 
 -- | Whether to include inactive ad units. Default: true.
-aaulIncludeInactive :: Lens' AccountsAdUnitsList' (Maybe Bool)
+aaulIncludeInactive :: Lens' AccountsAdUnitsList (Maybe Bool)
 aaulIncludeInactive
   = lens _aaulIncludeInactive
       (\ s a -> s{_aaulIncludeInactive = a})
 
 -- | Ad client for which to list ad units.
-aaulAdClientId :: Lens' AccountsAdUnitsList' Text
+aaulAdClientId :: Lens' AccountsAdUnitsList Text
 aaulAdClientId
   = lens _aaulAdClientId
       (\ s a -> s{_aaulAdClientId = a})
 
 -- | Account to which the ad client belongs.
-aaulAccountId :: Lens' AccountsAdUnitsList' Text
+aaulAccountId :: Lens' AccountsAdUnitsList Text
 aaulAccountId
   = lens _aaulAccountId
       (\ s a -> s{_aaulAccountId = a})
@@ -114,21 +114,21 @@ aaulAccountId
 -- | A continuation token, used to page through ad units. To retrieve the
 -- next page, set this parameter to the value of \"nextPageToken\" from the
 -- previous response.
-aaulPageToken :: Lens' AccountsAdUnitsList' (Maybe Text)
+aaulPageToken :: Lens' AccountsAdUnitsList (Maybe Text)
 aaulPageToken
   = lens _aaulPageToken
       (\ s a -> s{_aaulPageToken = a})
 
 -- | The maximum number of ad units to include in the response, used for
 -- paging.
-aaulMaxResults :: Lens' AccountsAdUnitsList' (Maybe Int32)
+aaulMaxResults :: Lens' AccountsAdUnitsList (Maybe Int32)
 aaulMaxResults
   = lens _aaulMaxResults
       (\ s a -> s{_aaulMaxResults = a})
 
-instance GoogleRequest AccountsAdUnitsList' where
-        type Rs AccountsAdUnitsList' = AdUnits
-        requestClient AccountsAdUnitsList'{..}
+instance GoogleRequest AccountsAdUnitsList where
+        type Rs AccountsAdUnitsList = AdUnits
+        requestClient AccountsAdUnitsList{..}
           = go _aaulAccountId _aaulAdClientId
               _aaulIncludeInactive
               _aaulPageToken

@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.List
       AccountsContainersListResource
 
     -- * Creating a Request
-    , accountsContainersList'
-    , AccountsContainersList'
+    , accountsContainersList
+    , AccountsContainersList
 
     -- * Request Lenses
     , aclAccountId
@@ -40,7 +40,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.list@ method which the
--- 'AccountsContainersList'' request conforms to.
+-- 'AccountsContainersList' request conforms to.
 type AccountsContainersListResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -50,33 +50,33 @@ type AccountsContainersListResource =
 
 -- | Lists all Containers that belongs to a GTM Account.
 --
--- /See:/ 'accountsContainersList'' smart constructor.
-newtype AccountsContainersList' = AccountsContainersList'
+-- /See:/ 'accountsContainersList' smart constructor.
+newtype AccountsContainersList = AccountsContainersList
     { _aclAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aclAccountId'
-accountsContainersList'
+accountsContainersList
     :: Text -- ^ 'aclAccountId'
-    -> AccountsContainersList'
-accountsContainersList' pAclAccountId_ =
-    AccountsContainersList'
+    -> AccountsContainersList
+accountsContainersList pAclAccountId_ =
+    AccountsContainersList
     { _aclAccountId = pAclAccountId_
     }
 
 -- | The GTM Account ID.
-aclAccountId :: Lens' AccountsContainersList' Text
+aclAccountId :: Lens' AccountsContainersList Text
 aclAccountId
   = lens _aclAccountId (\ s a -> s{_aclAccountId = a})
 
-instance GoogleRequest AccountsContainersList' where
-        type Rs AccountsContainersList' =
+instance GoogleRequest AccountsContainersList where
+        type Rs AccountsContainersList =
              ListContainersResponse
-        requestClient AccountsContainersList'{..}
+        requestClient AccountsContainersList{..}
           = go _aclAccountId (Just AltJSON) tagManagerService
           where go
                   = buildClient

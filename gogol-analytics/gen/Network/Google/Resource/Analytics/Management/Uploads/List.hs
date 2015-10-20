@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Uploads.List
       ManagementUploadsListResource
 
     -- * Creating a Request
-    , managementUploadsList'
-    , ManagementUploadsList'
+    , managementUploadsList
+    , ManagementUploadsList
 
     -- * Request Lenses
     , mulWebPropertyId
@@ -44,7 +44,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.uploads.list@ method which the
--- 'ManagementUploadsList'' request conforms to.
+-- 'ManagementUploadsList' request conforms to.
 type ManagementUploadsListResource =
      "management" :>
        "accounts" :>
@@ -60,8 +60,8 @@ type ManagementUploadsListResource =
 
 -- | List uploads to which the user has access.
 --
--- /See:/ 'managementUploadsList'' smart constructor.
-data ManagementUploadsList' = ManagementUploadsList'
+-- /See:/ 'managementUploadsList' smart constructor.
+data ManagementUploadsList = ManagementUploadsList
     { _mulWebPropertyId      :: !Text
     , _mulCustomDataSourceId :: !Text
     , _mulAccountId          :: !Text
@@ -69,7 +69,7 @@ data ManagementUploadsList' = ManagementUploadsList'
     , _mulMaxResults         :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementUploadsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementUploadsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,13 +82,13 @@ data ManagementUploadsList' = ManagementUploadsList'
 -- * 'mulStartIndex'
 --
 -- * 'mulMaxResults'
-managementUploadsList'
+managementUploadsList
     :: Text -- ^ 'mulWebPropertyId'
     -> Text -- ^ 'mulCustomDataSourceId'
     -> Text -- ^ 'mulAccountId'
-    -> ManagementUploadsList'
-managementUploadsList' pMulWebPropertyId_ pMulCustomDataSourceId_ pMulAccountId_ =
-    ManagementUploadsList'
+    -> ManagementUploadsList
+managementUploadsList pMulWebPropertyId_ pMulCustomDataSourceId_ pMulAccountId_ =
+    ManagementUploadsList
     { _mulWebPropertyId = pMulWebPropertyId_
     , _mulCustomDataSourceId = pMulCustomDataSourceId_
     , _mulAccountId = pMulAccountId_
@@ -97,38 +97,38 @@ managementUploadsList' pMulWebPropertyId_ pMulCustomDataSourceId_ pMulAccountId_
     }
 
 -- | Web property Id for the uploads to retrieve.
-mulWebPropertyId :: Lens' ManagementUploadsList' Text
+mulWebPropertyId :: Lens' ManagementUploadsList Text
 mulWebPropertyId
   = lens _mulWebPropertyId
       (\ s a -> s{_mulWebPropertyId = a})
 
 -- | Custom data source Id for uploads to retrieve.
-mulCustomDataSourceId :: Lens' ManagementUploadsList' Text
+mulCustomDataSourceId :: Lens' ManagementUploadsList Text
 mulCustomDataSourceId
   = lens _mulCustomDataSourceId
       (\ s a -> s{_mulCustomDataSourceId = a})
 
 -- | Account Id for the uploads to retrieve.
-mulAccountId :: Lens' ManagementUploadsList' Text
+mulAccountId :: Lens' ManagementUploadsList Text
 mulAccountId
   = lens _mulAccountId (\ s a -> s{_mulAccountId = a})
 
 -- | A 1-based index of the first upload to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
-mulStartIndex :: Lens' ManagementUploadsList' (Maybe Int32)
+mulStartIndex :: Lens' ManagementUploadsList (Maybe Int32)
 mulStartIndex
   = lens _mulStartIndex
       (\ s a -> s{_mulStartIndex = a})
 
 -- | The maximum number of uploads to include in this response.
-mulMaxResults :: Lens' ManagementUploadsList' (Maybe Int32)
+mulMaxResults :: Lens' ManagementUploadsList (Maybe Int32)
 mulMaxResults
   = lens _mulMaxResults
       (\ s a -> s{_mulMaxResults = a})
 
-instance GoogleRequest ManagementUploadsList' where
-        type Rs ManagementUploadsList' = Uploads
-        requestClient ManagementUploadsList'{..}
+instance GoogleRequest ManagementUploadsList where
+        type Rs ManagementUploadsList = Uploads
+        requestClient ManagementUploadsList{..}
           = go _mulAccountId _mulWebPropertyId
               _mulCustomDataSourceId
               _mulStartIndex

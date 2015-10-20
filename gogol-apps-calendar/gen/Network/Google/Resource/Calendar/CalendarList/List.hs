@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.CalendarList.List
       CalendarListListResource
 
     -- * Creating a Request
-    , calendarListList'
-    , CalendarListList'
+    , calendarListList
+    , CalendarListList
 
     -- * Request Lenses
     , cllSyncToken
@@ -45,7 +45,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendarList.list@ method which the
--- 'CalendarListList'' request conforms to.
+-- 'CalendarListList' request conforms to.
 type CalendarListListResource =
      "users" :>
        "me" :>
@@ -62,8 +62,8 @@ type CalendarListListResource =
 
 -- | Returns entries on the user\'s calendar list.
 --
--- /See:/ 'calendarListList'' smart constructor.
-data CalendarListList' = CalendarListList'
+-- /See:/ 'calendarListList' smart constructor.
+data CalendarListList = CalendarListList
     { _cllSyncToken     :: !(Maybe Text)
     , _cllMinAccessRole :: !(Maybe CalendarListListMinAccessRole)
     , _cllShowDeleted   :: !(Maybe Bool)
@@ -72,7 +72,7 @@ data CalendarListList' = CalendarListList'
     , _cllMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CalendarListList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CalendarListList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -87,10 +87,10 @@ data CalendarListList' = CalendarListList'
 -- * 'cllPageToken'
 --
 -- * 'cllMaxResults'
-calendarListList'
-    :: CalendarListList'
-calendarListList' =
-    CalendarListList'
+calendarListList
+    :: CalendarListList
+calendarListList =
+    CalendarListList
     { _cllSyncToken = Nothing
     , _cllMinAccessRole = Nothing
     , _cllShowDeleted = Nothing
@@ -112,46 +112,46 @@ calendarListList' =
 -- storage and perform a full synchronization without any syncToken. Learn
 -- more about incremental synchronization. Optional. The default is to
 -- return all entries.
-cllSyncToken :: Lens' CalendarListList' (Maybe Text)
+cllSyncToken :: Lens' CalendarListList (Maybe Text)
 cllSyncToken
   = lens _cllSyncToken (\ s a -> s{_cllSyncToken = a})
 
 -- | The minimum access role for the user in the returned entries. Optional.
 -- The default is no restriction.
-cllMinAccessRole :: Lens' CalendarListList' (Maybe CalendarListListMinAccessRole)
+cllMinAccessRole :: Lens' CalendarListList (Maybe CalendarListListMinAccessRole)
 cllMinAccessRole
   = lens _cllMinAccessRole
       (\ s a -> s{_cllMinAccessRole = a})
 
 -- | Whether to include deleted calendar list entries in the result.
 -- Optional. The default is False.
-cllShowDeleted :: Lens' CalendarListList' (Maybe Bool)
+cllShowDeleted :: Lens' CalendarListList (Maybe Bool)
 cllShowDeleted
   = lens _cllShowDeleted
       (\ s a -> s{_cllShowDeleted = a})
 
 -- | Whether to show hidden entries. Optional. The default is False.
-cllShowHidden :: Lens' CalendarListList' (Maybe Bool)
+cllShowHidden :: Lens' CalendarListList (Maybe Bool)
 cllShowHidden
   = lens _cllShowHidden
       (\ s a -> s{_cllShowHidden = a})
 
 -- | Token specifying which result page to return. Optional.
-cllPageToken :: Lens' CalendarListList' (Maybe Text)
+cllPageToken :: Lens' CalendarListList (Maybe Text)
 cllPageToken
   = lens _cllPageToken (\ s a -> s{_cllPageToken = a})
 
 -- | Maximum number of entries returned on one result page. By default the
 -- value is 100 entries. The page size can never be larger than 250
 -- entries. Optional.
-cllMaxResults :: Lens' CalendarListList' (Maybe Int32)
+cllMaxResults :: Lens' CalendarListList (Maybe Int32)
 cllMaxResults
   = lens _cllMaxResults
       (\ s a -> s{_cllMaxResults = a})
 
-instance GoogleRequest CalendarListList' where
-        type Rs CalendarListList' = CalendarList
-        requestClient CalendarListList'{..}
+instance GoogleRequest CalendarListList where
+        type Rs CalendarListList = CalendarList
+        requestClient CalendarListList{..}
           = go _cllSyncToken _cllMinAccessRole _cllShowDeleted
               _cllShowHidden
               _cllPageToken

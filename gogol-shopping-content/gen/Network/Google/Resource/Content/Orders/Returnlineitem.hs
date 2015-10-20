@@ -29,20 +29,20 @@ module Network.Google.Resource.Content.Orders.Returnlineitem
       OrdersReturnlineitemResource
 
     -- * Creating a Request
-    , ordersReturnlineitem'
-    , OrdersReturnlineitem'
+    , ordersReturnlineitem
+    , OrdersReturnlineitem
 
     -- * Request Lenses
-    , orrMerchantId
-    , orrPayload
-    , orrOrderId
+    , oMerchantId
+    , oPayload
+    , oOrderId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.returnlineitem@ method which the
--- 'OrdersReturnlineitem'' request conforms to.
+-- 'OrdersReturnlineitem' request conforms to.
 type OrdersReturnlineitemResource =
      Capture "merchantId" Word64 :>
        "orders" :>
@@ -54,56 +54,52 @@ type OrdersReturnlineitemResource =
 
 -- | Returns a line item.
 --
--- /See:/ 'ordersReturnlineitem'' smart constructor.
-data OrdersReturnlineitem' = OrdersReturnlineitem'
-    { _orrMerchantId :: !Word64
-    , _orrPayload    :: !OrdersReturnLineItemRequest
-    , _orrOrderId    :: !Text
+-- /See:/ 'ordersReturnlineitem' smart constructor.
+data OrdersReturnlineitem = OrdersReturnlineitem
+    { _oMerchantId :: !Word64
+    , _oPayload    :: !OrdersReturnLineItemRequest
+    , _oOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersReturnlineitem'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersReturnlineitem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'orrMerchantId'
+-- * 'oMerchantId'
 --
--- * 'orrPayload'
+-- * 'oPayload'
 --
--- * 'orrOrderId'
-ordersReturnlineitem'
-    :: Word64 -- ^ 'orrMerchantId'
-    -> OrdersReturnLineItemRequest -- ^ 'orrPayload'
-    -> Text -- ^ 'orrOrderId'
-    -> OrdersReturnlineitem'
-ordersReturnlineitem' pOrrMerchantId_ pOrrPayload_ pOrrOrderId_ =
-    OrdersReturnlineitem'
-    { _orrMerchantId = pOrrMerchantId_
-    , _orrPayload = pOrrPayload_
-    , _orrOrderId = pOrrOrderId_
+-- * 'oOrderId'
+ordersReturnlineitem
+    :: Word64 -- ^ 'oMerchantId'
+    -> OrdersReturnLineItemRequest -- ^ 'oPayload'
+    -> Text -- ^ 'oOrderId'
+    -> OrdersReturnlineitem
+ordersReturnlineitem pOMerchantId_ pOPayload_ pOOrderId_ =
+    OrdersReturnlineitem
+    { _oMerchantId = pOMerchantId_
+    , _oPayload = pOPayload_
+    , _oOrderId = pOOrderId_
     }
 
 -- | The ID of the managing account.
-orrMerchantId :: Lens' OrdersReturnlineitem' Word64
-orrMerchantId
-  = lens _orrMerchantId
-      (\ s a -> s{_orrMerchantId = a})
+oMerchantId :: Lens' OrdersReturnlineitem Word64
+oMerchantId
+  = lens _oMerchantId (\ s a -> s{_oMerchantId = a})
 
 -- | Multipart request metadata.
-orrPayload :: Lens' OrdersReturnlineitem' OrdersReturnLineItemRequest
-orrPayload
-  = lens _orrPayload (\ s a -> s{_orrPayload = a})
+oPayload :: Lens' OrdersReturnlineitem OrdersReturnLineItemRequest
+oPayload = lens _oPayload (\ s a -> s{_oPayload = a})
 
 -- | The ID of the order.
-orrOrderId :: Lens' OrdersReturnlineitem' Text
-orrOrderId
-  = lens _orrOrderId (\ s a -> s{_orrOrderId = a})
+oOrderId :: Lens' OrdersReturnlineitem Text
+oOrderId = lens _oOrderId (\ s a -> s{_oOrderId = a})
 
-instance GoogleRequest OrdersReturnlineitem' where
-        type Rs OrdersReturnlineitem' =
+instance GoogleRequest OrdersReturnlineitem where
+        type Rs OrdersReturnlineitem =
              OrdersReturnLineItemResponse
-        requestClient OrdersReturnlineitem'{..}
-          = go _orrMerchantId _orrOrderId (Just AltJSON)
-              _orrPayload
+        requestClient OrdersReturnlineitem{..}
+          = go _oMerchantId _oOrderId (Just AltJSON) _oPayload
               shoppingContentService
           where go
                   = buildClient

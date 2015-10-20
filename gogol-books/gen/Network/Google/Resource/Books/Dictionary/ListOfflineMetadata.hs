@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
       DictionaryListOfflineMetadataResource
 
     -- * Creating a Request
-    , dictionaryListOfflineMetadata'
-    , DictionaryListOfflineMetadata'
+    , dictionaryListOfflineMetadata
+    , DictionaryListOfflineMetadata
 
     -- * Request Lenses
     , dlomCpksver
@@ -40,7 +40,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.dictionary.listOfflineMetadata@ method which the
--- 'DictionaryListOfflineMetadata'' request conforms to.
+-- 'DictionaryListOfflineMetadata' request conforms to.
 type DictionaryListOfflineMetadataResource =
      "dictionary" :>
        "listOfflineMetadata" :>
@@ -49,33 +49,33 @@ type DictionaryListOfflineMetadataResource =
 
 -- | Returns a list of offline dictionary metadata available
 --
--- /See:/ 'dictionaryListOfflineMetadata'' smart constructor.
-newtype DictionaryListOfflineMetadata' = DictionaryListOfflineMetadata'
+-- /See:/ 'dictionaryListOfflineMetadata' smart constructor.
+newtype DictionaryListOfflineMetadata = DictionaryListOfflineMetadata
     { _dlomCpksver :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DictionaryListOfflineMetadata'' with the minimum fields required to make a request.
+-- | Creates a value of 'DictionaryListOfflineMetadata' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dlomCpksver'
-dictionaryListOfflineMetadata'
+dictionaryListOfflineMetadata
     :: Text -- ^ 'dlomCpksver'
-    -> DictionaryListOfflineMetadata'
-dictionaryListOfflineMetadata' pDlomCpksver_ =
-    DictionaryListOfflineMetadata'
+    -> DictionaryListOfflineMetadata
+dictionaryListOfflineMetadata pDlomCpksver_ =
+    DictionaryListOfflineMetadata
     { _dlomCpksver = pDlomCpksver_
     }
 
 -- | The device\/version ID from which to request the data.
-dlomCpksver :: Lens' DictionaryListOfflineMetadata' Text
+dlomCpksver :: Lens' DictionaryListOfflineMetadata Text
 dlomCpksver
   = lens _dlomCpksver (\ s a -> s{_dlomCpksver = a})
 
-instance GoogleRequest DictionaryListOfflineMetadata'
+instance GoogleRequest DictionaryListOfflineMetadata
          where
-        type Rs DictionaryListOfflineMetadata' = Metadata
-        requestClient DictionaryListOfflineMetadata'{..}
+        type Rs DictionaryListOfflineMetadata = Metadata
+        requestClient DictionaryListOfflineMetadata{..}
           = go (Just _dlomCpksver) (Just AltJSON) booksService
           where go
                   = buildClient

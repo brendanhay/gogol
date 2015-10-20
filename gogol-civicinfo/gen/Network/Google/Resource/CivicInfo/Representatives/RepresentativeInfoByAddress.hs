@@ -30,8 +30,8 @@ module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAdd
       RepresentativesRepresentativeInfoByAddressResource
 
     -- * Creating a Request
-    , representativesRepresentativeInfoByAddress'
-    , RepresentativesRepresentativeInfoByAddress'
+    , representativesRepresentativeInfoByAddress
+    , RepresentativesRepresentativeInfoByAddress
 
     -- * Request Lenses
     , rribaRoles
@@ -44,7 +44,7 @@ import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @civicinfo.representatives.representativeInfoByAddress@ method which the
--- 'RepresentativesRepresentativeInfoByAddress'' request conforms to.
+-- 'RepresentativesRepresentativeInfoByAddress' request conforms to.
 type RepresentativesRepresentativeInfoByAddressResource
      =
      "representatives" :>
@@ -62,15 +62,15 @@ type RepresentativesRepresentativeInfoByAddressResource
 -- | Looks up political geography and representative information for a single
 -- address.
 --
--- /See:/ 'representativesRepresentativeInfoByAddress'' smart constructor.
-data RepresentativesRepresentativeInfoByAddress' = RepresentativesRepresentativeInfoByAddress'
+-- /See:/ 'representativesRepresentativeInfoByAddress' smart constructor.
+data RepresentativesRepresentativeInfoByAddress = RepresentativesRepresentativeInfoByAddress
     { _rribaRoles          :: !(Maybe [RepresentativesRepresentativeInfoByAddressRoles])
     , _rribaAddress        :: !(Maybe Text)
     , _rribaIncludeOffices :: !Bool
     , _rribaLevels         :: !(Maybe [RepresentativesRepresentativeInfoByAddressLevels])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RepresentativesRepresentativeInfoByAddress'' with the minimum fields required to make a request.
+-- | Creates a value of 'RepresentativesRepresentativeInfoByAddress' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,10 +81,10 @@ data RepresentativesRepresentativeInfoByAddress' = RepresentativesRepresentative
 -- * 'rribaIncludeOffices'
 --
 -- * 'rribaLevels'
-representativesRepresentativeInfoByAddress'
-    :: RepresentativesRepresentativeInfoByAddress'
-representativesRepresentativeInfoByAddress' =
-    RepresentativesRepresentativeInfoByAddress'
+representativesRepresentativeInfoByAddress
+    :: RepresentativesRepresentativeInfoByAddress
+representativesRepresentativeInfoByAddress =
+    RepresentativesRepresentativeInfoByAddress
     { _rribaRoles = Nothing
     , _rribaAddress = Nothing
     , _rribaIncludeOffices = True
@@ -94,7 +94,7 @@ representativesRepresentativeInfoByAddress' =
 -- | A list of office roles to filter by. Only offices fulfilling one of
 -- these roles will be returned. Divisions that don\'t contain a matching
 -- office will not be returned.
-rribaRoles :: Lens' RepresentativesRepresentativeInfoByAddress' [RepresentativesRepresentativeInfoByAddressRoles]
+rribaRoles :: Lens' RepresentativesRepresentativeInfoByAddress [RepresentativesRepresentativeInfoByAddressRoles]
 rribaRoles
   = lens _rribaRoles (\ s a -> s{_rribaRoles = a}) .
       _Default
@@ -102,13 +102,13 @@ rribaRoles
 
 -- | The address to look up. May only be specified if the field ocdId is not
 -- given in the URL.
-rribaAddress :: Lens' RepresentativesRepresentativeInfoByAddress' (Maybe Text)
+rribaAddress :: Lens' RepresentativesRepresentativeInfoByAddress (Maybe Text)
 rribaAddress
   = lens _rribaAddress (\ s a -> s{_rribaAddress = a})
 
 -- | Whether to return information about offices and officials. If false,
 -- only the top-level district information will be returned.
-rribaIncludeOffices :: Lens' RepresentativesRepresentativeInfoByAddress' Bool
+rribaIncludeOffices :: Lens' RepresentativesRepresentativeInfoByAddress Bool
 rribaIncludeOffices
   = lens _rribaIncludeOffices
       (\ s a -> s{_rribaIncludeOffices = a})
@@ -116,18 +116,18 @@ rribaIncludeOffices
 -- | A list of office levels to filter by. Only offices that serve at least
 -- one of these levels will be returned. Divisions that don\'t contain a
 -- matching office will not be returned.
-rribaLevels :: Lens' RepresentativesRepresentativeInfoByAddress' [RepresentativesRepresentativeInfoByAddressLevels]
+rribaLevels :: Lens' RepresentativesRepresentativeInfoByAddress [RepresentativesRepresentativeInfoByAddressLevels]
 rribaLevels
   = lens _rribaLevels (\ s a -> s{_rribaLevels = a}) .
       _Default
       . _Coerce
 
 instance GoogleRequest
-         RepresentativesRepresentativeInfoByAddress' where
-        type Rs RepresentativesRepresentativeInfoByAddress' =
+         RepresentativesRepresentativeInfoByAddress where
+        type Rs RepresentativesRepresentativeInfoByAddress =
              RepresentativeInfoResponse
         requestClient
-          RepresentativesRepresentativeInfoByAddress'{..}
+          RepresentativesRepresentativeInfoByAddress{..}
           = go (_rribaRoles ^. _Default) _rribaAddress
               (Just _rribaIncludeOffices)
               (_rribaLevels ^. _Default)

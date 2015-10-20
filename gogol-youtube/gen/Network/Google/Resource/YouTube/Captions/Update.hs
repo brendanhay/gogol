@@ -31,8 +31,8 @@ module Network.Google.Resource.YouTube.Captions.Update
       CaptionsUpdateResource
 
     -- * Creating a Request
-    , captionsUpdate'
-    , CaptionsUpdate'
+    , captionsUpdate
+    , CaptionsUpdate
 
     -- * Request Lenses
     , capOnBehalfOf
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.captions.update@ method which the
--- 'CaptionsUpdate'' request conforms to.
+-- 'CaptionsUpdate' request conforms to.
 type CaptionsUpdateResource =
      "captions" :>
        QueryParam "part" Text :>
@@ -62,8 +62,8 @@ type CaptionsUpdateResource =
 -- the track\'s draft status, upload a new caption file for the track, or
 -- both.
 --
--- /See:/ 'captionsUpdate'' smart constructor.
-data CaptionsUpdate' = CaptionsUpdate'
+-- /See:/ 'captionsUpdate' smart constructor.
+data CaptionsUpdate = CaptionsUpdate
     { _capOnBehalfOf             :: !(Maybe Text)
     , _capPart                   :: !Text
     , _capPayload                :: !Caption
@@ -72,7 +72,7 @@ data CaptionsUpdate' = CaptionsUpdate'
     , _capSync                   :: !(Maybe Bool)
     }
 
--- | Creates a value of 'CaptionsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CaptionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -87,13 +87,13 @@ data CaptionsUpdate' = CaptionsUpdate'
 -- * 'capOnBehalfOfContentOwner'
 --
 -- * 'capSync'
-captionsUpdate'
+captionsUpdate
     :: Text -- ^ 'capPart'
     -> Caption -- ^ 'capPayload'
     -> Body -- ^ 'capMedia'
-    -> CaptionsUpdate'
-captionsUpdate' pCapPart_ pCapPayload_ pCapMedia_ =
-    CaptionsUpdate'
+    -> CaptionsUpdate
+captionsUpdate pCapPart_ pCapPayload_ pCapMedia_ =
+    CaptionsUpdate
     { _capOnBehalfOf = Nothing
     , _capPart = pCapPart_
     , _capPayload = pCapPayload_
@@ -104,7 +104,7 @@ captionsUpdate' pCapPart_ pCapPayload_ pCapMedia_ =
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
 -- of
-capOnBehalfOf :: Lens' CaptionsUpdate' (Maybe Text)
+capOnBehalfOf :: Lens' CaptionsUpdate (Maybe Text)
 capOnBehalfOf
   = lens _capOnBehalfOf
       (\ s a -> s{_capOnBehalfOf = a})
@@ -114,15 +114,15 @@ capOnBehalfOf
 -- properties that the API response will include. Set the property value to
 -- snippet if you are updating the track\'s draft status. Otherwise, set
 -- the property value to id.
-capPart :: Lens' CaptionsUpdate' Text
+capPart :: Lens' CaptionsUpdate Text
 capPart = lens _capPart (\ s a -> s{_capPart = a})
 
 -- | Multipart request metadata.
-capPayload :: Lens' CaptionsUpdate' Caption
+capPayload :: Lens' CaptionsUpdate Caption
 capPayload
   = lens _capPayload (\ s a -> s{_capPayload = a})
 
-capMedia :: Lens' CaptionsUpdate' Body
+capMedia :: Lens' CaptionsUpdate Body
 capMedia = lens _capMedia (\ s a -> s{_capMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
@@ -135,7 +135,7 @@ capMedia = lens _capMedia (\ s a -> s{_capMedia = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The actual CMS account that the user authenticates with must be
 -- linked to the specified YouTube content owner.
-capOnBehalfOfContentOwner :: Lens' CaptionsUpdate' (Maybe Text)
+capOnBehalfOfContentOwner :: Lens' CaptionsUpdate (Maybe Text)
 capOnBehalfOfContentOwner
   = lens _capOnBehalfOfContentOwner
       (\ s a -> s{_capOnBehalfOfContentOwner = a})
@@ -145,12 +145,12 @@ capOnBehalfOfContentOwner
 -- YouTube should automatically synchronize the caption file with the audio
 -- track of the video. If you set the value to true, YouTube will
 -- automatically synchronize the caption track with the audio track.
-capSync :: Lens' CaptionsUpdate' (Maybe Bool)
+capSync :: Lens' CaptionsUpdate (Maybe Bool)
 capSync = lens _capSync (\ s a -> s{_capSync = a})
 
-instance GoogleRequest CaptionsUpdate' where
-        type Rs CaptionsUpdate' = Caption
-        requestClient CaptionsUpdate'{..}
+instance GoogleRequest CaptionsUpdate where
+        type Rs CaptionsUpdate = Caption
+        requestClient CaptionsUpdate{..}
           = go (Just _capPart) _capOnBehalfOf
               _capOnBehalfOfContentOwner
               _capSync

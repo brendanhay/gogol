@@ -37,8 +37,8 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
       InstanceGroupManagersAbandonInstancesResource
 
     -- * Creating a Request
-    , instanceGroupManagersAbandonInstances'
-    , InstanceGroupManagersAbandonInstances'
+    , instanceGroupManagersAbandonInstances
+    , InstanceGroupManagersAbandonInstances
 
     -- * Request Lenses
     , igmaiProject
@@ -51,7 +51,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroupManagers.abandonInstances@ method which the
--- 'InstanceGroupManagersAbandonInstances'' request conforms to.
+-- 'InstanceGroupManagersAbandonInstances' request conforms to.
 type InstanceGroupManagersAbandonInstancesResource =
      Capture "project" Text :>
        "zones" :>
@@ -74,15 +74,15 @@ type InstanceGroupManagersAbandonInstancesResource =
 -- group. You must separately verify the status of the abandoning action
 -- with the listmanagedinstances method.
 --
--- /See:/ 'instanceGroupManagersAbandonInstances'' smart constructor.
-data InstanceGroupManagersAbandonInstances' = InstanceGroupManagersAbandonInstances'
+-- /See:/ 'instanceGroupManagersAbandonInstances' smart constructor.
+data InstanceGroupManagersAbandonInstances = InstanceGroupManagersAbandonInstances
     { _igmaiProject              :: !Text
     , _igmaiInstanceGroupManager :: !Text
     , _igmaiZone                 :: !Text
     , _igmaiPayload              :: !InstanceGroupManagersAbandonInstancesRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupManagersAbandonInstances'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupManagersAbandonInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -93,14 +93,14 @@ data InstanceGroupManagersAbandonInstances' = InstanceGroupManagersAbandonInstan
 -- * 'igmaiZone'
 --
 -- * 'igmaiPayload'
-instanceGroupManagersAbandonInstances'
+instanceGroupManagersAbandonInstances
     :: Text -- ^ 'igmaiProject'
     -> Text -- ^ 'igmaiInstanceGroupManager'
     -> Text -- ^ 'igmaiZone'
     -> InstanceGroupManagersAbandonInstancesRequest -- ^ 'igmaiPayload'
-    -> InstanceGroupManagersAbandonInstances'
-instanceGroupManagersAbandonInstances' pIgmaiProject_ pIgmaiInstanceGroupManager_ pIgmaiZone_ pIgmaiPayload_ =
-    InstanceGroupManagersAbandonInstances'
+    -> InstanceGroupManagersAbandonInstances
+instanceGroupManagersAbandonInstances pIgmaiProject_ pIgmaiInstanceGroupManager_ pIgmaiZone_ pIgmaiPayload_ =
+    InstanceGroupManagersAbandonInstances
     { _igmaiProject = pIgmaiProject_
     , _igmaiInstanceGroupManager = pIgmaiInstanceGroupManager_
     , _igmaiZone = pIgmaiZone_
@@ -108,32 +108,32 @@ instanceGroupManagersAbandonInstances' pIgmaiProject_ pIgmaiInstanceGroupManager
     }
 
 -- | The project ID for this request.
-igmaiProject :: Lens' InstanceGroupManagersAbandonInstances' Text
+igmaiProject :: Lens' InstanceGroupManagersAbandonInstances Text
 igmaiProject
   = lens _igmaiProject (\ s a -> s{_igmaiProject = a})
 
 -- | The name of the managed instance group.
-igmaiInstanceGroupManager :: Lens' InstanceGroupManagersAbandonInstances' Text
+igmaiInstanceGroupManager :: Lens' InstanceGroupManagersAbandonInstances Text
 igmaiInstanceGroupManager
   = lens _igmaiInstanceGroupManager
       (\ s a -> s{_igmaiInstanceGroupManager = a})
 
 -- | The name of the zone where the managed instance group is located.
-igmaiZone :: Lens' InstanceGroupManagersAbandonInstances' Text
+igmaiZone :: Lens' InstanceGroupManagersAbandonInstances Text
 igmaiZone
   = lens _igmaiZone (\ s a -> s{_igmaiZone = a})
 
 -- | Multipart request metadata.
-igmaiPayload :: Lens' InstanceGroupManagersAbandonInstances' InstanceGroupManagersAbandonInstancesRequest
+igmaiPayload :: Lens' InstanceGroupManagersAbandonInstances InstanceGroupManagersAbandonInstancesRequest
 igmaiPayload
   = lens _igmaiPayload (\ s a -> s{_igmaiPayload = a})
 
 instance GoogleRequest
-         InstanceGroupManagersAbandonInstances' where
-        type Rs InstanceGroupManagersAbandonInstances' =
+         InstanceGroupManagersAbandonInstances where
+        type Rs InstanceGroupManagersAbandonInstances =
              Operation
         requestClient
-          InstanceGroupManagersAbandonInstances'{..}
+          InstanceGroupManagersAbandonInstances{..}
           = go _igmaiProject _igmaiZone
               _igmaiInstanceGroupManager
               (Just AltJSON)

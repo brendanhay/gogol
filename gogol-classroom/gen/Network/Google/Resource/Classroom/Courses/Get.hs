@@ -32,8 +32,8 @@ module Network.Google.Resource.Classroom.Courses.Get
       CoursesGetResource
 
     -- * Creating a Request
-    , coursesGet'
-    , CoursesGet'
+    , coursesGet
+    , CoursesGet
 
     -- * Request Lenses
     , cgXgafv
@@ -50,7 +50,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.get@ method which the
--- 'CoursesGet'' request conforms to.
+-- 'CoursesGet' request conforms to.
 type CoursesGetResource =
      "v1" :>
        "courses" :>
@@ -69,8 +69,8 @@ type CoursesGetResource =
 -- the requested course or for access errors. * \`NOT_FOUND\` if no course
 -- exists with the requested ID.
 --
--- /See:/ 'coursesGet'' smart constructor.
-data CoursesGet' = CoursesGet'
+-- /See:/ 'coursesGet' smart constructor.
+data CoursesGet = CoursesGet
     { _cgXgafv          :: !(Maybe Text)
     , _cgUploadProtocol :: !(Maybe Text)
     , _cgPp             :: !Bool
@@ -81,7 +81,7 @@ data CoursesGet' = CoursesGet'
     , _cgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CoursesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CoursesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -100,11 +100,11 @@ data CoursesGet' = CoursesGet'
 -- * 'cgId'
 --
 -- * 'cgCallback'
-coursesGet'
+coursesGet
     :: Text -- ^ 'cgId'
-    -> CoursesGet'
-coursesGet' pCgId_ =
-    CoursesGet'
+    -> CoursesGet
+coursesGet pCgId_ =
+    CoursesGet
     { _cgXgafv = Nothing
     , _cgUploadProtocol = Nothing
     , _cgPp = True
@@ -116,49 +116,49 @@ coursesGet' pCgId_ =
     }
 
 -- | V1 error format.
-cgXgafv :: Lens' CoursesGet' (Maybe Text)
+cgXgafv :: Lens' CoursesGet (Maybe Text)
 cgXgafv = lens _cgXgafv (\ s a -> s{_cgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-cgUploadProtocol :: Lens' CoursesGet' (Maybe Text)
+cgUploadProtocol :: Lens' CoursesGet (Maybe Text)
 cgUploadProtocol
   = lens _cgUploadProtocol
       (\ s a -> s{_cgUploadProtocol = a})
 
 -- | Pretty-print response.
-cgPp :: Lens' CoursesGet' Bool
+cgPp :: Lens' CoursesGet Bool
 cgPp = lens _cgPp (\ s a -> s{_cgPp = a})
 
 -- | OAuth access token.
-cgAccessToken :: Lens' CoursesGet' (Maybe Text)
+cgAccessToken :: Lens' CoursesGet (Maybe Text)
 cgAccessToken
   = lens _cgAccessToken
       (\ s a -> s{_cgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-cgUploadType :: Lens' CoursesGet' (Maybe Text)
+cgUploadType :: Lens' CoursesGet (Maybe Text)
 cgUploadType
   = lens _cgUploadType (\ s a -> s{_cgUploadType = a})
 
 -- | OAuth bearer token.
-cgBearerToken :: Lens' CoursesGet' (Maybe Text)
+cgBearerToken :: Lens' CoursesGet (Maybe Text)
 cgBearerToken
   = lens _cgBearerToken
       (\ s a -> s{_cgBearerToken = a})
 
 -- | Identifier of the course to return. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
-cgId :: Lens' CoursesGet' Text
+cgId :: Lens' CoursesGet Text
 cgId = lens _cgId (\ s a -> s{_cgId = a})
 
 -- | JSONP
-cgCallback :: Lens' CoursesGet' (Maybe Text)
+cgCallback :: Lens' CoursesGet (Maybe Text)
 cgCallback
   = lens _cgCallback (\ s a -> s{_cgCallback = a})
 
-instance GoogleRequest CoursesGet' where
-        type Rs CoursesGet' = Course
-        requestClient CoursesGet'{..}
+instance GoogleRequest CoursesGet where
+        type Rs CoursesGet = Course
+        requestClient CoursesGet{..}
           = go _cgId _cgXgafv _cgUploadProtocol (Just _cgPp)
               _cgAccessToken
               _cgUploadType

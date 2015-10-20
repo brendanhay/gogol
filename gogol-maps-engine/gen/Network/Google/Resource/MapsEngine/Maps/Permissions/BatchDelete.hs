@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Maps.Permissions.BatchDelete
       MapsPermissionsBatchDeleteResource
 
     -- * Creating a Request
-    , mapsPermissionsBatchDelete'
-    , MapsPermissionsBatchDelete'
+    , mapsPermissionsBatchDelete
+    , MapsPermissionsBatchDelete
 
     -- * Request Lenses
     , mpbdPayload
@@ -41,7 +41,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.maps.permissions.batchDelete@ method which the
--- 'MapsPermissionsBatchDelete'' request conforms to.
+-- 'MapsPermissionsBatchDelete' request conforms to.
 type MapsPermissionsBatchDeleteResource =
      "maps" :>
        Capture "id" Text :>
@@ -53,43 +53,43 @@ type MapsPermissionsBatchDeleteResource =
 
 -- | Remove permission entries from an already existing asset.
 --
--- /See:/ 'mapsPermissionsBatchDelete'' smart constructor.
-data MapsPermissionsBatchDelete' = MapsPermissionsBatchDelete'
+-- /See:/ 'mapsPermissionsBatchDelete' smart constructor.
+data MapsPermissionsBatchDelete = MapsPermissionsBatchDelete
     { _mpbdPayload :: !PermissionsBatchDeleteRequest
     , _mpbdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MapsPermissionsBatchDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'MapsPermissionsBatchDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mpbdPayload'
 --
 -- * 'mpbdId'
-mapsPermissionsBatchDelete'
+mapsPermissionsBatchDelete
     :: PermissionsBatchDeleteRequest -- ^ 'mpbdPayload'
     -> Text -- ^ 'mpbdId'
-    -> MapsPermissionsBatchDelete'
-mapsPermissionsBatchDelete' pMpbdPayload_ pMpbdId_ =
-    MapsPermissionsBatchDelete'
+    -> MapsPermissionsBatchDelete
+mapsPermissionsBatchDelete pMpbdPayload_ pMpbdId_ =
+    MapsPermissionsBatchDelete
     { _mpbdPayload = pMpbdPayload_
     , _mpbdId = pMpbdId_
     }
 
 -- | Multipart request metadata.
-mpbdPayload :: Lens' MapsPermissionsBatchDelete' PermissionsBatchDeleteRequest
+mpbdPayload :: Lens' MapsPermissionsBatchDelete PermissionsBatchDeleteRequest
 mpbdPayload
   = lens _mpbdPayload (\ s a -> s{_mpbdPayload = a})
 
 -- | The ID of the asset from which permissions will be removed.
-mpbdId :: Lens' MapsPermissionsBatchDelete' Text
+mpbdId :: Lens' MapsPermissionsBatchDelete Text
 mpbdId = lens _mpbdId (\ s a -> s{_mpbdId = a})
 
-instance GoogleRequest MapsPermissionsBatchDelete'
+instance GoogleRequest MapsPermissionsBatchDelete
          where
-        type Rs MapsPermissionsBatchDelete' =
+        type Rs MapsPermissionsBatchDelete =
              PermissionsBatchDeleteResponse
-        requestClient MapsPermissionsBatchDelete'{..}
+        requestClient MapsPermissionsBatchDelete{..}
           = go _mpbdId (Just AltJSON) _mpbdPayload
               mapsEngineService
           where go

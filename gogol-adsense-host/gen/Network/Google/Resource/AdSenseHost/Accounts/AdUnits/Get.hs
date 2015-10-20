@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Get
       AccountsAdUnitsGetResource
 
     -- * Creating a Request
-    , accountsAdUnitsGet'
-    , AccountsAdUnitsGet'
+    , accountsAdUnitsGet
+    , AccountsAdUnitsGet
 
     -- * Request Lenses
     , aaugAdUnitId
@@ -42,7 +42,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.accounts.adunits.get@ method which the
--- 'AccountsAdUnitsGet'' request conforms to.
+-- 'AccountsAdUnitsGet' request conforms to.
 type AccountsAdUnitsGetResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -54,14 +54,14 @@ type AccountsAdUnitsGetResource =
 
 -- | Get the specified host ad unit in this AdSense account.
 --
--- /See:/ 'accountsAdUnitsGet'' smart constructor.
-data AccountsAdUnitsGet' = AccountsAdUnitsGet'
+-- /See:/ 'accountsAdUnitsGet' smart constructor.
+data AccountsAdUnitsGet = AccountsAdUnitsGet
     { _aaugAdUnitId   :: !Text
     , _aaugAdClientId :: !Text
     , _aaugAccountId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsAdUnitsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsAdUnitsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,38 +70,38 @@ data AccountsAdUnitsGet' = AccountsAdUnitsGet'
 -- * 'aaugAdClientId'
 --
 -- * 'aaugAccountId'
-accountsAdUnitsGet'
+accountsAdUnitsGet
     :: Text -- ^ 'aaugAdUnitId'
     -> Text -- ^ 'aaugAdClientId'
     -> Text -- ^ 'aaugAccountId'
-    -> AccountsAdUnitsGet'
-accountsAdUnitsGet' pAaugAdUnitId_ pAaugAdClientId_ pAaugAccountId_ =
-    AccountsAdUnitsGet'
+    -> AccountsAdUnitsGet
+accountsAdUnitsGet pAaugAdUnitId_ pAaugAdClientId_ pAaugAccountId_ =
+    AccountsAdUnitsGet
     { _aaugAdUnitId = pAaugAdUnitId_
     , _aaugAdClientId = pAaugAdClientId_
     , _aaugAccountId = pAaugAccountId_
     }
 
 -- | Ad unit to get.
-aaugAdUnitId :: Lens' AccountsAdUnitsGet' Text
+aaugAdUnitId :: Lens' AccountsAdUnitsGet Text
 aaugAdUnitId
   = lens _aaugAdUnitId (\ s a -> s{_aaugAdUnitId = a})
 
 -- | Ad client for which to get ad unit.
-aaugAdClientId :: Lens' AccountsAdUnitsGet' Text
+aaugAdClientId :: Lens' AccountsAdUnitsGet Text
 aaugAdClientId
   = lens _aaugAdClientId
       (\ s a -> s{_aaugAdClientId = a})
 
 -- | Account which contains the ad unit.
-aaugAccountId :: Lens' AccountsAdUnitsGet' Text
+aaugAccountId :: Lens' AccountsAdUnitsGet Text
 aaugAccountId
   = lens _aaugAccountId
       (\ s a -> s{_aaugAccountId = a})
 
-instance GoogleRequest AccountsAdUnitsGet' where
-        type Rs AccountsAdUnitsGet' = AdUnit
-        requestClient AccountsAdUnitsGet'{..}
+instance GoogleRequest AccountsAdUnitsGet where
+        type Rs AccountsAdUnitsGet = AdUnit
+        requestClient AccountsAdUnitsGet{..}
           = go _aaugAccountId _aaugAdClientId _aaugAdUnitId
               (Just AltJSON)
               adSenseHostService

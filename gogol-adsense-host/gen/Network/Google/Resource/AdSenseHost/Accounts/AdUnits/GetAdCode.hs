@@ -30,8 +30,8 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.GetAdCode
       AccountsAdUnitsGetAdCodeResource
 
     -- * Creating a Request
-    , accountsAdUnitsGetAdCode'
-    , AccountsAdUnitsGetAdCode'
+    , accountsAdUnitsGetAdCode
+    , AccountsAdUnitsGetAdCode
 
     -- * Request Lenses
     , aaugacAdUnitId
@@ -44,7 +44,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.accounts.adunits.getAdCode@ method which the
--- 'AccountsAdUnitsGetAdCode'' request conforms to.
+-- 'AccountsAdUnitsGetAdCode' request conforms to.
 type AccountsAdUnitsGetAdCodeResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -59,15 +59,15 @@ type AccountsAdUnitsGetAdCodeResource =
 -- | Get ad code for the specified ad unit, attaching the specified host
 -- custom channels.
 --
--- /See:/ 'accountsAdUnitsGetAdCode'' smart constructor.
-data AccountsAdUnitsGetAdCode' = AccountsAdUnitsGetAdCode'
+-- /See:/ 'accountsAdUnitsGetAdCode' smart constructor.
+data AccountsAdUnitsGetAdCode = AccountsAdUnitsGetAdCode
     { _aaugacAdUnitId            :: !Text
     , _aaugacAdClientId          :: !Text
     , _aaugacAccountId           :: !Text
     , _aaugacHostCustomChannelId :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsAdUnitsGetAdCode'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsAdUnitsGetAdCode' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -78,13 +78,13 @@ data AccountsAdUnitsGetAdCode' = AccountsAdUnitsGetAdCode'
 -- * 'aaugacAccountId'
 --
 -- * 'aaugacHostCustomChannelId'
-accountsAdUnitsGetAdCode'
+accountsAdUnitsGetAdCode
     :: Text -- ^ 'aaugacAdUnitId'
     -> Text -- ^ 'aaugacAdClientId'
     -> Text -- ^ 'aaugacAccountId'
-    -> AccountsAdUnitsGetAdCode'
-accountsAdUnitsGetAdCode' pAaugacAdUnitId_ pAaugacAdClientId_ pAaugacAccountId_ =
-    AccountsAdUnitsGetAdCode'
+    -> AccountsAdUnitsGetAdCode
+accountsAdUnitsGetAdCode pAaugacAdUnitId_ pAaugacAdClientId_ pAaugacAccountId_ =
+    AccountsAdUnitsGetAdCode
     { _aaugacAdUnitId = pAaugacAdUnitId_
     , _aaugacAdClientId = pAaugacAdClientId_
     , _aaugacAccountId = pAaugacAccountId_
@@ -92,35 +92,34 @@ accountsAdUnitsGetAdCode' pAaugacAdUnitId_ pAaugacAdClientId_ pAaugacAccountId_ 
     }
 
 -- | Ad unit to get the code for.
-aaugacAdUnitId :: Lens' AccountsAdUnitsGetAdCode' Text
+aaugacAdUnitId :: Lens' AccountsAdUnitsGetAdCode Text
 aaugacAdUnitId
   = lens _aaugacAdUnitId
       (\ s a -> s{_aaugacAdUnitId = a})
 
 -- | Ad client with contains the ad unit.
-aaugacAdClientId :: Lens' AccountsAdUnitsGetAdCode' Text
+aaugacAdClientId :: Lens' AccountsAdUnitsGetAdCode Text
 aaugacAdClientId
   = lens _aaugacAdClientId
       (\ s a -> s{_aaugacAdClientId = a})
 
 -- | Account which contains the ad client.
-aaugacAccountId :: Lens' AccountsAdUnitsGetAdCode' Text
+aaugacAccountId :: Lens' AccountsAdUnitsGetAdCode Text
 aaugacAccountId
   = lens _aaugacAccountId
       (\ s a -> s{_aaugacAccountId = a})
 
 -- | Host custom channel to attach to the ad code.
-aaugacHostCustomChannelId :: Lens' AccountsAdUnitsGetAdCode' [Text]
+aaugacHostCustomChannelId :: Lens' AccountsAdUnitsGetAdCode [Text]
 aaugacHostCustomChannelId
   = lens _aaugacHostCustomChannelId
       (\ s a -> s{_aaugacHostCustomChannelId = a})
       . _Default
       . _Coerce
 
-instance GoogleRequest AccountsAdUnitsGetAdCode'
-         where
-        type Rs AccountsAdUnitsGetAdCode' = AdCode
-        requestClient AccountsAdUnitsGetAdCode'{..}
+instance GoogleRequest AccountsAdUnitsGetAdCode where
+        type Rs AccountsAdUnitsGetAdCode = AdCode
+        requestClient AccountsAdUnitsGetAdCode{..}
           = go _aaugacAccountId _aaugacAdClientId
               _aaugacAdUnitId
               (_aaugacHostCustomChannelId ^. _Default)

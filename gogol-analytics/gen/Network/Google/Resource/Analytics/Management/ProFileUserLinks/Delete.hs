@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.ProFileUserLinks.Delete
       ManagementProFileUserLinksDeleteResource
 
     -- * Creating a Request
-    , managementProFileUserLinksDelete'
-    , ManagementProFileUserLinksDelete'
+    , managementProFileUserLinksDelete
+    , ManagementProFileUserLinksDelete
 
     -- * Request Lenses
     , mpfuldWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profileUserLinks.delete@ method which the
--- 'ManagementProFileUserLinksDelete'' request conforms to.
+-- 'ManagementProFileUserLinksDelete' request conforms to.
 type ManagementProFileUserLinksDeleteResource =
      "management" :>
        "accounts" :>
@@ -58,15 +58,15 @@ type ManagementProFileUserLinksDeleteResource =
 
 -- | Removes a user from the given view (profile).
 --
--- /See:/ 'managementProFileUserLinksDelete'' smart constructor.
-data ManagementProFileUserLinksDelete' = ManagementProFileUserLinksDelete'
+-- /See:/ 'managementProFileUserLinksDelete' smart constructor.
+data ManagementProFileUserLinksDelete = ManagementProFileUserLinksDelete
     { _mpfuldWebPropertyId :: !Text
     , _mpfuldProFileId     :: !Text
     , _mpfuldAccountId     :: !Text
     , _mpfuldLinkId        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementProFileUserLinksDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementProFileUserLinksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data ManagementProFileUserLinksDelete' = ManagementProFileUserLinksDelete'
 -- * 'mpfuldAccountId'
 --
 -- * 'mpfuldLinkId'
-managementProFileUserLinksDelete'
+managementProFileUserLinksDelete
     :: Text -- ^ 'mpfuldWebPropertyId'
     -> Text -- ^ 'mpfuldProFileId'
     -> Text -- ^ 'mpfuldAccountId'
     -> Text -- ^ 'mpfuldLinkId'
-    -> ManagementProFileUserLinksDelete'
-managementProFileUserLinksDelete' pMpfuldWebPropertyId_ pMpfuldProFileId_ pMpfuldAccountId_ pMpfuldLinkId_ =
-    ManagementProFileUserLinksDelete'
+    -> ManagementProFileUserLinksDelete
+managementProFileUserLinksDelete pMpfuldWebPropertyId_ pMpfuldProFileId_ pMpfuldAccountId_ pMpfuldLinkId_ =
+    ManagementProFileUserLinksDelete
     { _mpfuldWebPropertyId = pMpfuldWebPropertyId_
     , _mpfuldProFileId = pMpfuldProFileId_
     , _mpfuldAccountId = pMpfuldAccountId_
@@ -92,32 +92,32 @@ managementProFileUserLinksDelete' pMpfuldWebPropertyId_ pMpfuldProFileId_ pMpful
     }
 
 -- | Web Property ID to delete the user link for.
-mpfuldWebPropertyId :: Lens' ManagementProFileUserLinksDelete' Text
+mpfuldWebPropertyId :: Lens' ManagementProFileUserLinksDelete Text
 mpfuldWebPropertyId
   = lens _mpfuldWebPropertyId
       (\ s a -> s{_mpfuldWebPropertyId = a})
 
 -- | View (Profile) ID to delete the user link for.
-mpfuldProFileId :: Lens' ManagementProFileUserLinksDelete' Text
+mpfuldProFileId :: Lens' ManagementProFileUserLinksDelete Text
 mpfuldProFileId
   = lens _mpfuldProFileId
       (\ s a -> s{_mpfuldProFileId = a})
 
 -- | Account ID to delete the user link for.
-mpfuldAccountId :: Lens' ManagementProFileUserLinksDelete' Text
+mpfuldAccountId :: Lens' ManagementProFileUserLinksDelete Text
 mpfuldAccountId
   = lens _mpfuldAccountId
       (\ s a -> s{_mpfuldAccountId = a})
 
 -- | Link ID to delete the user link for.
-mpfuldLinkId :: Lens' ManagementProFileUserLinksDelete' Text
+mpfuldLinkId :: Lens' ManagementProFileUserLinksDelete Text
 mpfuldLinkId
   = lens _mpfuldLinkId (\ s a -> s{_mpfuldLinkId = a})
 
 instance GoogleRequest
-         ManagementProFileUserLinksDelete' where
-        type Rs ManagementProFileUserLinksDelete' = ()
-        requestClient ManagementProFileUserLinksDelete'{..}
+         ManagementProFileUserLinksDelete where
+        type Rs ManagementProFileUserLinksDelete = ()
+        requestClient ManagementProFileUserLinksDelete{..}
           = go _mpfuldAccountId _mpfuldWebPropertyId
               _mpfuldProFileId
               _mpfuldLinkId

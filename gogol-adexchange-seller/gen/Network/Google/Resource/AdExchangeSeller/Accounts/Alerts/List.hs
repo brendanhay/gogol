@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Alerts.List
       AccountsAlertsListResource
 
     -- * Creating a Request
-    , accountsAlertsList'
-    , AccountsAlertsList'
+    , accountsAlertsList
+    , AccountsAlertsList
 
     -- * Request Lenses
     , aalLocale
@@ -41,7 +41,7 @@ import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangeseller.accounts.alerts.list@ method which the
--- 'AccountsAlertsList'' request conforms to.
+-- 'AccountsAlertsList' request conforms to.
 type AccountsAlertsListResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -51,24 +51,24 @@ type AccountsAlertsListResource =
 
 -- | List the alerts for this Ad Exchange account.
 --
--- /See:/ 'accountsAlertsList'' smart constructor.
-data AccountsAlertsList' = AccountsAlertsList'
+-- /See:/ 'accountsAlertsList' smart constructor.
+data AccountsAlertsList = AccountsAlertsList
     { _aalLocale    :: !(Maybe Text)
     , _aalAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsAlertsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsAlertsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aalLocale'
 --
 -- * 'aalAccountId'
-accountsAlertsList'
+accountsAlertsList
     :: Text -- ^ 'aalAccountId'
-    -> AccountsAlertsList'
-accountsAlertsList' pAalAccountId_ =
-    AccountsAlertsList'
+    -> AccountsAlertsList
+accountsAlertsList pAalAccountId_ =
+    AccountsAlertsList
     { _aalLocale = Nothing
     , _aalAccountId = pAalAccountId_
     }
@@ -76,18 +76,18 @@ accountsAlertsList' pAalAccountId_ =
 -- | The locale to use for translating alert messages. The account locale
 -- will be used if this is not supplied. The AdSense default (English) will
 -- be used if the supplied locale is invalid or unsupported.
-aalLocale :: Lens' AccountsAlertsList' (Maybe Text)
+aalLocale :: Lens' AccountsAlertsList (Maybe Text)
 aalLocale
   = lens _aalLocale (\ s a -> s{_aalLocale = a})
 
 -- | Account owning the alerts.
-aalAccountId :: Lens' AccountsAlertsList' Text
+aalAccountId :: Lens' AccountsAlertsList Text
 aalAccountId
   = lens _aalAccountId (\ s a -> s{_aalAccountId = a})
 
-instance GoogleRequest AccountsAlertsList' where
-        type Rs AccountsAlertsList' = Alerts
-        requestClient AccountsAlertsList'{..}
+instance GoogleRequest AccountsAlertsList where
+        type Rs AccountsAlertsList = Alerts
+        requestClient AccountsAlertsList{..}
           = go _aalAccountId _aalLocale (Just AltJSON)
               adExchangeSellerService
           where go

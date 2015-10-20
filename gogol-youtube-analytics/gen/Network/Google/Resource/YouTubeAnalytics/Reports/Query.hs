@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTubeAnalytics.Reports.Query
       ReportsQueryResource
 
     -- * Creating a Request
-    , reportsQuery'
-    , ReportsQuery'
+    , reportsQuery
+    , ReportsQuery
 
     -- * Request Lenses
     , rqMetrics
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @youtubeAnalytics.reports.query@ method which the
--- 'ReportsQuery'' request conforms to.
+-- 'ReportsQuery' request conforms to.
 type ReportsQueryResource =
      "reports" :>
        QueryParam "ids" Text :>
@@ -66,8 +66,8 @@ type ReportsQueryResource =
 
 -- | Retrieve your YouTube Analytics reports.
 --
--- /See:/ 'reportsQuery'' smart constructor.
-data ReportsQuery' = ReportsQuery'
+-- /See:/ 'reportsQuery' smart constructor.
+data ReportsQuery = ReportsQuery
     { _rqMetrics    :: !Text
     , _rqFilters    :: !(Maybe Text)
     , _rqIds        :: !Text
@@ -80,7 +80,7 @@ data ReportsQuery' = ReportsQuery'
     , _rqStartDate  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReportsQuery'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportsQuery' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -103,14 +103,14 @@ data ReportsQuery' = ReportsQuery'
 -- * 'rqMaxResults'
 --
 -- * 'rqStartDate'
-reportsQuery'
+reportsQuery
     :: Text -- ^ 'rqMetrics'
     -> Text -- ^ 'rqIds'
     -> Text -- ^ 'rqEndDate'
     -> Text -- ^ 'rqStartDate'
-    -> ReportsQuery'
-reportsQuery' pRqMetrics_ pRqIds_ pRqEndDate_ pRqStartDate_ =
-    ReportsQuery'
+    -> ReportsQuery
+reportsQuery pRqMetrics_ pRqIds_ pRqEndDate_ pRqStartDate_ =
+    ReportsQuery
     { _rqMetrics = pRqMetrics_
     , _rqFilters = Nothing
     , _rqIds = pRqIds_
@@ -127,7 +127,7 @@ reportsQuery' pRqMetrics_ pRqIds_ pRqEndDate_ pRqStartDate_ =
 -- likes,dislikes. See the Available Reports document for a list of the
 -- reports that you can retrieve and the metrics available in each report,
 -- and see the Metrics document for definitions of those metrics.
-rqMetrics :: Lens' ReportsQuery' Text
+rqMetrics :: Lens' ReportsQuery Text
 rqMetrics
   = lens _rqMetrics (\ s a -> s{_rqMetrics = a})
 
@@ -139,7 +139,7 @@ rqMetrics
 -- satisfy both filters. For example, a filters parameter value of
 -- video==dMH0bHeiRNg;country==IT restricts the result set to include data
 -- for the given video in Italy.
-rqFilters :: Lens' ReportsQuery' (Maybe Text)
+rqFilters :: Lens' ReportsQuery (Maybe Text)
 rqFilters
   = lens _rqFilters (\ s a -> s{_rqFilters = a})
 
@@ -150,12 +150,12 @@ rqFilters
 -- CMS content owner, set the ids parameter value to
 -- contentOwner==OWNER_NAME, where OWNER_NAME is the CMS name of the
 -- content owner.
-rqIds :: Lens' ReportsQuery' Text
+rqIds :: Lens' ReportsQuery Text
 rqIds = lens _rqIds (\ s a -> s{_rqIds = a})
 
 -- | The end date for fetching YouTube Analytics data. The value should be in
 -- YYYY-MM-DD format.
-rqEndDate :: Lens' ReportsQuery' Text
+rqEndDate :: Lens' ReportsQuery Text
 rqEndDate
   = lens _rqEndDate (\ s a -> s{_rqEndDate = a})
 
@@ -163,45 +163,45 @@ rqEndDate
 -- is US Dollar (USD). If the result contains no financial metrics, this
 -- flag will be ignored. Responds with an error if the specified currency
 -- is not recognized.
-rqCurrency :: Lens' ReportsQuery' (Maybe Text)
+rqCurrency :: Lens' ReportsQuery (Maybe Text)
 rqCurrency
   = lens _rqCurrency (\ s a -> s{_rqCurrency = a})
 
 -- | A comma-separated list of dimensions or metrics that determine the sort
 -- order for YouTube Analytics data. By default the sort order is
 -- ascending. The \'-\' prefix causes descending sort order.
-rqSort :: Lens' ReportsQuery' (Maybe Text)
+rqSort :: Lens' ReportsQuery (Maybe Text)
 rqSort = lens _rqSort (\ s a -> s{_rqSort = a})
 
 -- | A comma-separated list of YouTube Analytics dimensions, such as views or
 -- ageGroup,gender. See the Available Reports document for a list of the
 -- reports that you can retrieve and the dimensions used for those reports.
 -- Also see the Dimensions document for definitions of those dimensions.
-rqDimensions :: Lens' ReportsQuery' (Maybe Text)
+rqDimensions :: Lens' ReportsQuery (Maybe Text)
 rqDimensions
   = lens _rqDimensions (\ s a -> s{_rqDimensions = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter (one-based,
 -- inclusive).
-rqStartIndex :: Lens' ReportsQuery' (Maybe Int32)
+rqStartIndex :: Lens' ReportsQuery (Maybe Int32)
 rqStartIndex
   = lens _rqStartIndex (\ s a -> s{_rqStartIndex = a})
 
 -- | The maximum number of rows to include in the response.
-rqMaxResults :: Lens' ReportsQuery' (Maybe Int32)
+rqMaxResults :: Lens' ReportsQuery (Maybe Int32)
 rqMaxResults
   = lens _rqMaxResults (\ s a -> s{_rqMaxResults = a})
 
 -- | The start date for fetching YouTube Analytics data. The value should be
 -- in YYYY-MM-DD format.
-rqStartDate :: Lens' ReportsQuery' Text
+rqStartDate :: Lens' ReportsQuery Text
 rqStartDate
   = lens _rqStartDate (\ s a -> s{_rqStartDate = a})
 
-instance GoogleRequest ReportsQuery' where
-        type Rs ReportsQuery' = ResultTable
-        requestClient ReportsQuery'{..}
+instance GoogleRequest ReportsQuery where
+        type Rs ReportsQuery = ResultTable
+        requestClient ReportsQuery{..}
           = go (Just _rqIds) (Just _rqStartDate)
               (Just _rqEndDate)
               (Just _rqMetrics)

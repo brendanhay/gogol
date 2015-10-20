@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.GlobalOperations.Delete
       GlobalOperationsDeleteResource
 
     -- * Creating a Request
-    , globalOperationsDelete'
-    , GlobalOperationsDelete'
+    , globalOperationsDelete
+    , GlobalOperationsDelete
 
     -- * Request Lenses
     , godProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.globalOperations.delete@ method which the
--- 'GlobalOperationsDelete'' request conforms to.
+-- 'GlobalOperationsDelete' request conforms to.
 type GlobalOperationsDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,42 +51,42 @@ type GlobalOperationsDeleteResource =
 
 -- | Deletes the specified Operations resource.
 --
--- /See:/ 'globalOperationsDelete'' smart constructor.
-data GlobalOperationsDelete' = GlobalOperationsDelete'
+-- /See:/ 'globalOperationsDelete' smart constructor.
+data GlobalOperationsDelete = GlobalOperationsDelete
     { _godProject   :: !Text
     , _godOperation :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GlobalOperationsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'GlobalOperationsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'godProject'
 --
 -- * 'godOperation'
-globalOperationsDelete'
+globalOperationsDelete
     :: Text -- ^ 'godProject'
     -> Text -- ^ 'godOperation'
-    -> GlobalOperationsDelete'
-globalOperationsDelete' pGodProject_ pGodOperation_ =
-    GlobalOperationsDelete'
+    -> GlobalOperationsDelete
+globalOperationsDelete pGodProject_ pGodOperation_ =
+    GlobalOperationsDelete
     { _godProject = pGodProject_
     , _godOperation = pGodOperation_
     }
 
 -- | Project ID for this request.
-godProject :: Lens' GlobalOperationsDelete' Text
+godProject :: Lens' GlobalOperationsDelete Text
 godProject
   = lens _godProject (\ s a -> s{_godProject = a})
 
 -- | Name of the Operations resource to delete.
-godOperation :: Lens' GlobalOperationsDelete' Text
+godOperation :: Lens' GlobalOperationsDelete Text
 godOperation
   = lens _godOperation (\ s a -> s{_godOperation = a})
 
-instance GoogleRequest GlobalOperationsDelete' where
-        type Rs GlobalOperationsDelete' = ()
-        requestClient GlobalOperationsDelete'{..}
+instance GoogleRequest GlobalOperationsDelete where
+        type Rs GlobalOperationsDelete = ()
+        requestClient GlobalOperationsDelete{..}
           = go _godProject _godOperation (Just AltJSON)
               computeService
           where go

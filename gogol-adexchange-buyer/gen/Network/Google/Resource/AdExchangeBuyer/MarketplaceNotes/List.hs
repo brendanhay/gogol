@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
       MarketplaceNotesListResource
 
     -- * Creating a Request
-    , marketplaceNotesList'
-    , MarketplaceNotesList'
+    , marketplaceNotesList
+    , MarketplaceNotesList
 
     -- * Request Lenses
     , mnlOrderId
@@ -40,7 +40,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.marketplacenotes.list@ method which the
--- 'MarketplaceNotesList'' request conforms to.
+-- 'MarketplaceNotesList' request conforms to.
 type MarketplaceNotesListResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
@@ -50,32 +50,32 @@ type MarketplaceNotesListResource =
 
 -- | Get all the notes associated with an order
 --
--- /See:/ 'marketplaceNotesList'' smart constructor.
-newtype MarketplaceNotesList' = MarketplaceNotesList'
+-- /See:/ 'marketplaceNotesList' smart constructor.
+newtype MarketplaceNotesList = MarketplaceNotesList
     { _mnlOrderId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MarketplaceNotesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'MarketplaceNotesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mnlOrderId'
-marketplaceNotesList'
+marketplaceNotesList
     :: Text -- ^ 'mnlOrderId'
-    -> MarketplaceNotesList'
-marketplaceNotesList' pMnlOrderId_ =
-    MarketplaceNotesList'
+    -> MarketplaceNotesList
+marketplaceNotesList pMnlOrderId_ =
+    MarketplaceNotesList
     { _mnlOrderId = pMnlOrderId_
     }
 
 -- | The orderId to get notes for.
-mnlOrderId :: Lens' MarketplaceNotesList' Text
+mnlOrderId :: Lens' MarketplaceNotesList Text
 mnlOrderId
   = lens _mnlOrderId (\ s a -> s{_mnlOrderId = a})
 
-instance GoogleRequest MarketplaceNotesList' where
-        type Rs MarketplaceNotesList' = GetOrderNotesResponse
-        requestClient MarketplaceNotesList'{..}
+instance GoogleRequest MarketplaceNotesList where
+        type Rs MarketplaceNotesList = GetOrderNotesResponse
+        requestClient MarketplaceNotesList{..}
           = go _mnlOrderId (Just AltJSON)
               adExchangeBuyerService
           where go

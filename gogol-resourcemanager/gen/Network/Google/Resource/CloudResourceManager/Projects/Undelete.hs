@@ -37,25 +37,25 @@ module Network.Google.Resource.CloudResourceManager.Projects.Undelete
       ProjectsUndeleteResource
 
     -- * Creating a Request
-    , projectsUndelete'
-    , ProjectsUndelete'
+    , projectsUndelete
+    , ProjectsUndelete
 
     -- * Request Lenses
-    , proXgafv
-    , proUploadProtocol
-    , proPp
-    , proAccessToken
-    , proUploadType
-    , proBearerToken
-    , proProjectId
-    , proCallback
+    , puXgafv
+    , puUploadProtocol
+    , puPp
+    , puAccessToken
+    , puUploadType
+    , puBearerToken
+    , puProjectId
+    , puCallback
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.projects.undelete@ method which the
--- 'ProjectsUndelete'' request conforms to.
+-- 'ProjectsUndelete' request conforms to.
 type ProjectsUndeleteResource =
      "v1beta1" :>
        "projects" :>
@@ -79,103 +79,102 @@ type ProjectsUndeleteResource =
 -- the project cannot be restored. The caller must have modify permissions
 -- for this project.
 --
--- /See:/ 'projectsUndelete'' smart constructor.
-data ProjectsUndelete' = ProjectsUndelete'
-    { _proXgafv          :: !(Maybe Text)
-    , _proUploadProtocol :: !(Maybe Text)
-    , _proPp             :: !Bool
-    , _proAccessToken    :: !(Maybe Text)
-    , _proUploadType     :: !(Maybe Text)
-    , _proBearerToken    :: !(Maybe Text)
-    , _proProjectId      :: !Text
-    , _proCallback       :: !(Maybe Text)
+-- /See:/ 'projectsUndelete' smart constructor.
+data ProjectsUndelete = ProjectsUndelete
+    { _puXgafv          :: !(Maybe Text)
+    , _puUploadProtocol :: !(Maybe Text)
+    , _puPp             :: !Bool
+    , _puAccessToken    :: !(Maybe Text)
+    , _puUploadType     :: !(Maybe Text)
+    , _puBearerToken    :: !(Maybe Text)
+    , _puProjectId      :: !Text
+    , _puCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsUndelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsUndelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'proXgafv'
+-- * 'puXgafv'
 --
--- * 'proUploadProtocol'
+-- * 'puUploadProtocol'
 --
--- * 'proPp'
+-- * 'puPp'
 --
--- * 'proAccessToken'
+-- * 'puAccessToken'
 --
--- * 'proUploadType'
+-- * 'puUploadType'
 --
--- * 'proBearerToken'
+-- * 'puBearerToken'
 --
--- * 'proProjectId'
+-- * 'puProjectId'
 --
--- * 'proCallback'
-projectsUndelete'
-    :: Text -- ^ 'proProjectId'
-    -> ProjectsUndelete'
-projectsUndelete' pProProjectId_ =
-    ProjectsUndelete'
-    { _proXgafv = Nothing
-    , _proUploadProtocol = Nothing
-    , _proPp = True
-    , _proAccessToken = Nothing
-    , _proUploadType = Nothing
-    , _proBearerToken = Nothing
-    , _proProjectId = pProProjectId_
-    , _proCallback = Nothing
+-- * 'puCallback'
+projectsUndelete
+    :: Text -- ^ 'puProjectId'
+    -> ProjectsUndelete
+projectsUndelete pPuProjectId_ =
+    ProjectsUndelete
+    { _puXgafv = Nothing
+    , _puUploadProtocol = Nothing
+    , _puPp = True
+    , _puAccessToken = Nothing
+    , _puUploadType = Nothing
+    , _puBearerToken = Nothing
+    , _puProjectId = pPuProjectId_
+    , _puCallback = Nothing
     }
 
 -- | V1 error format.
-proXgafv :: Lens' ProjectsUndelete' (Maybe Text)
-proXgafv = lens _proXgafv (\ s a -> s{_proXgafv = a})
+puXgafv :: Lens' ProjectsUndelete (Maybe Text)
+puXgafv = lens _puXgafv (\ s a -> s{_puXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-proUploadProtocol :: Lens' ProjectsUndelete' (Maybe Text)
-proUploadProtocol
-  = lens _proUploadProtocol
-      (\ s a -> s{_proUploadProtocol = a})
+puUploadProtocol :: Lens' ProjectsUndelete (Maybe Text)
+puUploadProtocol
+  = lens _puUploadProtocol
+      (\ s a -> s{_puUploadProtocol = a})
 
 -- | Pretty-print response.
-proPp :: Lens' ProjectsUndelete' Bool
-proPp = lens _proPp (\ s a -> s{_proPp = a})
+puPp :: Lens' ProjectsUndelete Bool
+puPp = lens _puPp (\ s a -> s{_puPp = a})
 
 -- | OAuth access token.
-proAccessToken :: Lens' ProjectsUndelete' (Maybe Text)
-proAccessToken
-  = lens _proAccessToken
-      (\ s a -> s{_proAccessToken = a})
+puAccessToken :: Lens' ProjectsUndelete (Maybe Text)
+puAccessToken
+  = lens _puAccessToken
+      (\ s a -> s{_puAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-proUploadType :: Lens' ProjectsUndelete' (Maybe Text)
-proUploadType
-  = lens _proUploadType
-      (\ s a -> s{_proUploadType = a})
+puUploadType :: Lens' ProjectsUndelete (Maybe Text)
+puUploadType
+  = lens _puUploadType (\ s a -> s{_puUploadType = a})
 
 -- | OAuth bearer token.
-proBearerToken :: Lens' ProjectsUndelete' (Maybe Text)
-proBearerToken
-  = lens _proBearerToken
-      (\ s a -> s{_proBearerToken = a})
+puBearerToken :: Lens' ProjectsUndelete (Maybe Text)
+puBearerToken
+  = lens _puBearerToken
+      (\ s a -> s{_puBearerToken = a})
 
 -- | The project ID (for example, \`foo-bar-123\`). Required.
-proProjectId :: Lens' ProjectsUndelete' Text
-proProjectId
-  = lens _proProjectId (\ s a -> s{_proProjectId = a})
+puProjectId :: Lens' ProjectsUndelete Text
+puProjectId
+  = lens _puProjectId (\ s a -> s{_puProjectId = a})
 
 -- | JSONP
-proCallback :: Lens' ProjectsUndelete' (Maybe Text)
-proCallback
-  = lens _proCallback (\ s a -> s{_proCallback = a})
+puCallback :: Lens' ProjectsUndelete (Maybe Text)
+puCallback
+  = lens _puCallback (\ s a -> s{_puCallback = a})
 
-instance GoogleRequest ProjectsUndelete' where
-        type Rs ProjectsUndelete' = Empty
-        requestClient ProjectsUndelete'{..}
-          = go _proProjectId _proXgafv _proUploadProtocol
-              (Just _proPp)
-              _proAccessToken
-              _proUploadType
-              _proBearerToken
-              _proCallback
+instance GoogleRequest ProjectsUndelete where
+        type Rs ProjectsUndelete = Empty
+        requestClient ProjectsUndelete{..}
+          = go _puProjectId _puXgafv _puUploadProtocol
+              (Just _puPp)
+              _puAccessToken
+              _puUploadType
+              _puBearerToken
+              _puCallback
               (Just AltJSON)
               resourceManagerService
           where go

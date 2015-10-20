@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Placements.Get
       PlacementsGetResource
 
     -- * Creating a Request
-    , placementsGet'
-    , PlacementsGet'
+    , placementsGet
+    , PlacementsGet
 
     -- * Request Lenses
     , pgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placements.get@ method which the
--- 'PlacementsGet'' request conforms to.
+-- 'PlacementsGet' request conforms to.
 type PlacementsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,41 +51,41 @@ type PlacementsGetResource =
 
 -- | Gets one placement by ID.
 --
--- /See:/ 'placementsGet'' smart constructor.
-data PlacementsGet' = PlacementsGet'
+-- /See:/ 'placementsGet' smart constructor.
+data PlacementsGet = PlacementsGet
     { _pgProFileId :: !Int64
     , _pgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlacementsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlacementsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pgProFileId'
 --
 -- * 'pgId'
-placementsGet'
+placementsGet
     :: Int64 -- ^ 'pgProFileId'
     -> Int64 -- ^ 'pgId'
-    -> PlacementsGet'
-placementsGet' pPgProFileId_ pPgId_ =
-    PlacementsGet'
+    -> PlacementsGet
+placementsGet pPgProFileId_ pPgId_ =
+    PlacementsGet
     { _pgProFileId = pPgProFileId_
     , _pgId = pPgId_
     }
 
 -- | User profile ID associated with this request.
-pgProFileId :: Lens' PlacementsGet' Int64
+pgProFileId :: Lens' PlacementsGet Int64
 pgProFileId
   = lens _pgProFileId (\ s a -> s{_pgProFileId = a})
 
 -- | Placement ID.
-pgId :: Lens' PlacementsGet' Int64
+pgId :: Lens' PlacementsGet Int64
 pgId = lens _pgId (\ s a -> s{_pgId = a})
 
-instance GoogleRequest PlacementsGet' where
-        type Rs PlacementsGet' = Placement
-        requestClient PlacementsGet'{..}
+instance GoogleRequest PlacementsGet where
+        type Rs PlacementsGet = Placement
+        requestClient PlacementsGet{..}
           = go _pgProFileId _pgId (Just AltJSON)
               dFAReportingService
           where go

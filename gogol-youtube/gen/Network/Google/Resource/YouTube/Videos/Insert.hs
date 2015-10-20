@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.Videos.Insert
       VideosInsertResource
 
     -- * Creating a Request
-    , videosInsert'
-    , VideosInsert'
+    , videosInsert
+    , VideosInsert
 
     -- * Request Lenses
     , viPart
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.videos.insert@ method which the
--- 'VideosInsert'' request conforms to.
+-- 'VideosInsert' request conforms to.
 type VideosInsertResource =
      "videos" :>
        QueryParam "part" Text :>
@@ -62,8 +62,8 @@ type VideosInsertResource =
 
 -- | Uploads a video to YouTube and optionally sets the video\'s metadata.
 --
--- /See:/ 'videosInsert'' smart constructor.
-data VideosInsert' = VideosInsert'
+-- /See:/ 'videosInsert' smart constructor.
+data VideosInsert = VideosInsert
     { _viPart                          :: !Text
     , _viStabilize                     :: !(Maybe Bool)
     , _viPayload                       :: !Video
@@ -74,7 +74,7 @@ data VideosInsert' = VideosInsert'
     , _viAutoLevels                    :: !(Maybe Bool)
     }
 
--- | Creates a value of 'VideosInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'VideosInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -93,13 +93,13 @@ data VideosInsert' = VideosInsert'
 -- * 'viNotifySubscribers'
 --
 -- * 'viAutoLevels'
-videosInsert'
+videosInsert
     :: Text -- ^ 'viPart'
     -> Video -- ^ 'viPayload'
     -> Body -- ^ 'viMedia'
-    -> VideosInsert'
-videosInsert' pViPart_ pViPayload_ pViMedia_ =
-    VideosInsert'
+    -> VideosInsert
+videosInsert pViPart_ pViPayload_ pViMedia_ =
+    VideosInsert
     { _viPart = pViPart_
     , _viStabilize = Nothing
     , _viPayload = pViPayload_
@@ -118,21 +118,21 @@ videosInsert' pViPart_ pViPayload_ pViMedia_ =
 -- calculates for a video and does not contain values that you can set or
 -- modify. If the parameter value specifies a part that does not contain
 -- mutable values, that part will still be included in the API response.
-viPart :: Lens' VideosInsert' Text
+viPart :: Lens' VideosInsert Text
 viPart = lens _viPart (\ s a -> s{_viPart = a})
 
 -- | The stabilize parameter indicates whether YouTube should adjust the
 -- video to remove shaky camera motions.
-viStabilize :: Lens' VideosInsert' (Maybe Bool)
+viStabilize :: Lens' VideosInsert (Maybe Bool)
 viStabilize
   = lens _viStabilize (\ s a -> s{_viStabilize = a})
 
 -- | Multipart request metadata.
-viPayload :: Lens' VideosInsert' Video
+viPayload :: Lens' VideosInsert Video
 viPayload
   = lens _viPayload (\ s a -> s{_viPayload = a})
 
-viMedia :: Lens' VideosInsert' Body
+viMedia :: Lens' VideosInsert Body
 viMedia = lens _viMedia (\ s a -> s{_viMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
@@ -145,7 +145,7 @@ viMedia = lens _viMedia (\ s a -> s{_viMedia = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-viOnBehalfOfContentOwner :: Lens' VideosInsert' (Maybe Text)
+viOnBehalfOfContentOwner :: Lens' VideosInsert (Maybe Text)
 viOnBehalfOfContentOwner
   = lens _viOnBehalfOfContentOwner
       (\ s a -> s{_viOnBehalfOfContentOwner = a})
@@ -166,7 +166,7 @@ viOnBehalfOfContentOwner
 -- actions on behalf of the channel specified in the parameter value,
 -- without having to provide authentication credentials for each separate
 -- channel.
-viOnBehalfOfContentOwnerChannel :: Lens' VideosInsert' (Maybe Text)
+viOnBehalfOfContentOwnerChannel :: Lens' VideosInsert (Maybe Text)
 viOnBehalfOfContentOwnerChannel
   = lens _viOnBehalfOfContentOwnerChannel
       (\ s a -> s{_viOnBehalfOfContentOwnerChannel = a})
@@ -178,20 +178,20 @@ viOnBehalfOfContentOwnerChannel
 -- uploading many videos might prefer to set the value to False to avoid
 -- sending a notification about each new video to the channel\'s
 -- subscribers.
-viNotifySubscribers :: Lens' VideosInsert' Bool
+viNotifySubscribers :: Lens' VideosInsert Bool
 viNotifySubscribers
   = lens _viNotifySubscribers
       (\ s a -> s{_viNotifySubscribers = a})
 
 -- | The autoLevels parameter indicates whether YouTube should automatically
 -- enhance the video\'s lighting and color.
-viAutoLevels :: Lens' VideosInsert' (Maybe Bool)
+viAutoLevels :: Lens' VideosInsert (Maybe Bool)
 viAutoLevels
   = lens _viAutoLevels (\ s a -> s{_viAutoLevels = a})
 
-instance GoogleRequest VideosInsert' where
-        type Rs VideosInsert' = Video
-        requestClient VideosInsert'{..}
+instance GoogleRequest VideosInsert where
+        type Rs VideosInsert = Video
+        requestClient VideosInsert{..}
           = go (Just _viPart) _viStabilize
               _viOnBehalfOfContentOwner
               _viOnBehalfOfContentOwnerChannel

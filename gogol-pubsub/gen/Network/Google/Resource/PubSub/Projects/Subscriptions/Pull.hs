@@ -32,8 +32,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Pull
       ProjectsSubscriptionsPullResource
 
     -- * Creating a Request
-    , projectsSubscriptionsPull'
-    , ProjectsSubscriptionsPull'
+    , projectsSubscriptionsPull
+    , ProjectsSubscriptionsPull
 
     -- * Request Lenses
     , pspXgafv
@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.pull@ method which the
--- 'ProjectsSubscriptionsPull'' request conforms to.
+-- 'ProjectsSubscriptionsPull' request conforms to.
 type ProjectsSubscriptionsPullResource =
      "v1" :>
        CaptureMode "subscription" "pull" Text :>
@@ -71,8 +71,8 @@ type ProjectsSubscriptionsPullResource =
 -- if there are too many concurrent pull requests pending for the given
 -- subscription.
 --
--- /See:/ 'projectsSubscriptionsPull'' smart constructor.
-data ProjectsSubscriptionsPull' = ProjectsSubscriptionsPull'
+-- /See:/ 'projectsSubscriptionsPull' smart constructor.
+data ProjectsSubscriptionsPull = ProjectsSubscriptionsPull
     { _pspXgafv          :: !(Maybe Text)
     , _pspUploadProtocol :: !(Maybe Text)
     , _pspPp             :: !Bool
@@ -84,7 +84,7 @@ data ProjectsSubscriptionsPull' = ProjectsSubscriptionsPull'
     , _pspCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsSubscriptionsPull'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsSubscriptionsPull' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -105,12 +105,12 @@ data ProjectsSubscriptionsPull' = ProjectsSubscriptionsPull'
 -- * 'pspSubscription'
 --
 -- * 'pspCallback'
-projectsSubscriptionsPull'
+projectsSubscriptionsPull
     :: PullRequest -- ^ 'pspPayload'
     -> Text -- ^ 'pspSubscription'
-    -> ProjectsSubscriptionsPull'
-projectsSubscriptionsPull' pPspPayload_ pPspSubscription_ =
-    ProjectsSubscriptionsPull'
+    -> ProjectsSubscriptionsPull
+projectsSubscriptionsPull pPspPayload_ pPspSubscription_ =
+    ProjectsSubscriptionsPull
     { _pspXgafv = Nothing
     , _pspUploadProtocol = Nothing
     , _pspPp = True
@@ -123,57 +123,57 @@ projectsSubscriptionsPull' pPspPayload_ pPspSubscription_ =
     }
 
 -- | V1 error format.
-pspXgafv :: Lens' ProjectsSubscriptionsPull' (Maybe Text)
+pspXgafv :: Lens' ProjectsSubscriptionsPull (Maybe Text)
 pspXgafv = lens _pspXgafv (\ s a -> s{_pspXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pspUploadProtocol :: Lens' ProjectsSubscriptionsPull' (Maybe Text)
+pspUploadProtocol :: Lens' ProjectsSubscriptionsPull (Maybe Text)
 pspUploadProtocol
   = lens _pspUploadProtocol
       (\ s a -> s{_pspUploadProtocol = a})
 
 -- | Pretty-print response.
-pspPp :: Lens' ProjectsSubscriptionsPull' Bool
+pspPp :: Lens' ProjectsSubscriptionsPull Bool
 pspPp = lens _pspPp (\ s a -> s{_pspPp = a})
 
 -- | OAuth access token.
-pspAccessToken :: Lens' ProjectsSubscriptionsPull' (Maybe Text)
+pspAccessToken :: Lens' ProjectsSubscriptionsPull (Maybe Text)
 pspAccessToken
   = lens _pspAccessToken
       (\ s a -> s{_pspAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pspUploadType :: Lens' ProjectsSubscriptionsPull' (Maybe Text)
+pspUploadType :: Lens' ProjectsSubscriptionsPull (Maybe Text)
 pspUploadType
   = lens _pspUploadType
       (\ s a -> s{_pspUploadType = a})
 
 -- | Multipart request metadata.
-pspPayload :: Lens' ProjectsSubscriptionsPull' PullRequest
+pspPayload :: Lens' ProjectsSubscriptionsPull PullRequest
 pspPayload
   = lens _pspPayload (\ s a -> s{_pspPayload = a})
 
 -- | OAuth bearer token.
-pspBearerToken :: Lens' ProjectsSubscriptionsPull' (Maybe Text)
+pspBearerToken :: Lens' ProjectsSubscriptionsPull (Maybe Text)
 pspBearerToken
   = lens _pspBearerToken
       (\ s a -> s{_pspBearerToken = a})
 
 -- | The subscription from which messages should be pulled.
-pspSubscription :: Lens' ProjectsSubscriptionsPull' Text
+pspSubscription :: Lens' ProjectsSubscriptionsPull Text
 pspSubscription
   = lens _pspSubscription
       (\ s a -> s{_pspSubscription = a})
 
 -- | JSONP
-pspCallback :: Lens' ProjectsSubscriptionsPull' (Maybe Text)
+pspCallback :: Lens' ProjectsSubscriptionsPull (Maybe Text)
 pspCallback
   = lens _pspCallback (\ s a -> s{_pspCallback = a})
 
-instance GoogleRequest ProjectsSubscriptionsPull'
+instance GoogleRequest ProjectsSubscriptionsPull
          where
-        type Rs ProjectsSubscriptionsPull' = PullResponse
-        requestClient ProjectsSubscriptionsPull'{..}
+        type Rs ProjectsSubscriptionsPull = PullResponse
+        requestClient ProjectsSubscriptionsPull{..}
           = go _pspSubscription _pspXgafv _pspUploadProtocol
               (Just _pspPp)
               _pspAccessToken

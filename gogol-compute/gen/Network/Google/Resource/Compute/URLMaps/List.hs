@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.URLMaps.List
       URLMapsListResource
 
     -- * Creating a Request
-    , urlMapsList'
-    , URLMapsList'
+    , urlMapsList
+    , URLMapsList
 
     -- * Request Lenses
     , umlProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.urlMaps.list@ method which the
--- 'URLMapsList'' request conforms to.
+-- 'URLMapsList' request conforms to.
 type URLMapsListResource =
      Capture "project" Text :>
        "global" :>
@@ -57,15 +57,15 @@ type URLMapsListResource =
 -- | Retrieves the list of UrlMap resources available to the specified
 -- project.
 --
--- /See:/ 'urlMapsList'' smart constructor.
-data URLMapsList' = URLMapsList'
+-- /See:/ 'urlMapsList' smart constructor.
+data URLMapsList = URLMapsList
     { _umlProject    :: !Text
     , _umlFilter     :: !(Maybe Text)
     , _umlPageToken  :: !(Maybe Text)
     , _umlMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'URLMapsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'URLMapsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,11 +76,11 @@ data URLMapsList' = URLMapsList'
 -- * 'umlPageToken'
 --
 -- * 'umlMaxResults'
-urlMapsList'
+urlMapsList
     :: Text -- ^ 'umlProject'
-    -> URLMapsList'
-urlMapsList' pUmlProject_ =
-    URLMapsList'
+    -> URLMapsList
+urlMapsList pUmlProject_ =
+    URLMapsList
     { _umlProject = pUmlProject_
     , _umlFilter = Nothing
     , _umlPageToken = Nothing
@@ -88,7 +88,7 @@ urlMapsList' pUmlProject_ =
     }
 
 -- | Name of the project scoping this request.
-umlProject :: Lens' URLMapsList' Text
+umlProject :: Lens' URLMapsList Text
 umlProject
   = lens _umlProject (\ s a -> s{_umlProject = a})
 
@@ -103,26 +103,26 @@ umlProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-umlFilter :: Lens' URLMapsList' (Maybe Text)
+umlFilter :: Lens' URLMapsList (Maybe Text)
 umlFilter
   = lens _umlFilter (\ s a -> s{_umlFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-umlPageToken :: Lens' URLMapsList' (Maybe Text)
+umlPageToken :: Lens' URLMapsList (Maybe Text)
 umlPageToken
   = lens _umlPageToken (\ s a -> s{_umlPageToken = a})
 
 -- | Maximum count of results to be returned.
-umlMaxResults :: Lens' URLMapsList' Word32
+umlMaxResults :: Lens' URLMapsList Word32
 umlMaxResults
   = lens _umlMaxResults
       (\ s a -> s{_umlMaxResults = a})
 
-instance GoogleRequest URLMapsList' where
-        type Rs URLMapsList' = URLMapList
-        requestClient URLMapsList'{..}
+instance GoogleRequest URLMapsList where
+        type Rs URLMapsList = URLMapList
+        requestClient URLMapsList{..}
           = go _umlProject _umlFilter _umlPageToken
               (Just _umlMaxResults)
               (Just AltJSON)

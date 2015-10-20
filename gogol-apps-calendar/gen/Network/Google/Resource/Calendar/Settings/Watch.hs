@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.Settings.Watch
       SettingsWatchResource
 
     -- * Creating a Request
-    , settingsWatch'
-    , SettingsWatch'
+    , settingsWatch
+    , SettingsWatch
 
     -- * Request Lenses
     , swSyncToken
@@ -43,7 +43,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.settings.watch@ method which the
--- 'SettingsWatch'' request conforms to.
+-- 'SettingsWatch' request conforms to.
 type SettingsWatchResource =
      "users" :>
        "me" :>
@@ -57,15 +57,15 @@ type SettingsWatchResource =
 
 -- | Watch for changes to Settings resources.
 --
--- /See:/ 'settingsWatch'' smart constructor.
-data SettingsWatch' = SettingsWatch'
+-- /See:/ 'settingsWatch' smart constructor.
+data SettingsWatch = SettingsWatch
     { _swSyncToken  :: !(Maybe Text)
     , _swPayload    :: !Channel
     , _swPageToken  :: !(Maybe Text)
     , _swMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SettingsWatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'SettingsWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,11 +76,11 @@ data SettingsWatch' = SettingsWatch'
 -- * 'swPageToken'
 --
 -- * 'swMaxResults'
-settingsWatch'
+settingsWatch
     :: Channel -- ^ 'swPayload'
-    -> SettingsWatch'
-settingsWatch' pSwPayload_ =
-    SettingsWatch'
+    -> SettingsWatch
+settingsWatch pSwPayload_ =
+    SettingsWatch
     { _swSyncToken = Nothing
     , _swPayload = pSwPayload_
     , _swPageToken = Nothing
@@ -94,30 +94,30 @@ settingsWatch' pSwPayload_ =
 -- and the client should clear its storage and perform a full
 -- synchronization without any syncToken. Learn more about incremental
 -- synchronization. Optional. The default is to return all entries.
-swSyncToken :: Lens' SettingsWatch' (Maybe Text)
+swSyncToken :: Lens' SettingsWatch (Maybe Text)
 swSyncToken
   = lens _swSyncToken (\ s a -> s{_swSyncToken = a})
 
 -- | Multipart request metadata.
-swPayload :: Lens' SettingsWatch' Channel
+swPayload :: Lens' SettingsWatch Channel
 swPayload
   = lens _swPayload (\ s a -> s{_swPayload = a})
 
 -- | Token specifying which result page to return. Optional.
-swPageToken :: Lens' SettingsWatch' (Maybe Text)
+swPageToken :: Lens' SettingsWatch (Maybe Text)
 swPageToken
   = lens _swPageToken (\ s a -> s{_swPageToken = a})
 
 -- | Maximum number of entries returned on one result page. By default the
 -- value is 100 entries. The page size can never be larger than 250
 -- entries. Optional.
-swMaxResults :: Lens' SettingsWatch' (Maybe Int32)
+swMaxResults :: Lens' SettingsWatch (Maybe Int32)
 swMaxResults
   = lens _swMaxResults (\ s a -> s{_swMaxResults = a})
 
-instance GoogleRequest SettingsWatch' where
-        type Rs SettingsWatch' = Channel
-        requestClient SettingsWatch'{..}
+instance GoogleRequest SettingsWatch where
+        type Rs SettingsWatch = Channel
+        requestClient SettingsWatch{..}
           = go _swSyncToken _swPageToken _swMaxResults
               (Just AltJSON)
               _swPayload

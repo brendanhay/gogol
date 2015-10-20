@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Maps.Get
       MapsGetResource
 
     -- * Creating a Request
-    , mapsGet'
-    , MapsGet'
+    , mapsGet
+    , MapsGet
 
     -- * Request Lenses
     , mgVersion
@@ -41,7 +41,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.maps.get@ method which the
--- 'MapsGet'' request conforms to.
+-- 'MapsGet' request conforms to.
 type MapsGetResource =
      "maps" :>
        Capture "id" Text :>
@@ -50,24 +50,24 @@ type MapsGetResource =
 
 -- | Return metadata for a particular map.
 --
--- /See:/ 'mapsGet'' smart constructor.
-data MapsGet' = MapsGet'
+-- /See:/ 'mapsGet' smart constructor.
+data MapsGet = MapsGet
     { _mgVersion :: !(Maybe MapsGetVersion)
     , _mgId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MapsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'MapsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mgVersion'
 --
 -- * 'mgId'
-mapsGet'
+mapsGet
     :: Text -- ^ 'mgId'
-    -> MapsGet'
-mapsGet' pMgId_ =
-    MapsGet'
+    -> MapsGet
+mapsGet pMgId_ =
+    MapsGet
     { _mgVersion = Nothing
     , _mgId = pMgId_
     }
@@ -76,17 +76,17 @@ mapsGet' pMgId_ =
 -- should be returned. When version is set to published, the published
 -- version of the map will be returned. Please use the maps.getPublished
 -- endpoint instead.
-mgVersion :: Lens' MapsGet' (Maybe MapsGetVersion)
+mgVersion :: Lens' MapsGet (Maybe MapsGetVersion)
 mgVersion
   = lens _mgVersion (\ s a -> s{_mgVersion = a})
 
 -- | The ID of the map.
-mgId :: Lens' MapsGet' Text
+mgId :: Lens' MapsGet Text
 mgId = lens _mgId (\ s a -> s{_mgId = a})
 
-instance GoogleRequest MapsGet' where
-        type Rs MapsGet' = Map
-        requestClient MapsGet'{..}
+instance GoogleRequest MapsGet where
+        type Rs MapsGet = Map
+        requestClient MapsGet{..}
           = go _mgId _mgVersion (Just AltJSON)
               mapsEngineService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Groups.Get
       GroupsGetResource
 
     -- * Creating a Request
-    , groupsGet'
-    , GroupsGet'
+    , groupsGet
+    , GroupsGet
 
     -- * Request Lenses
     , ggGroupKey
@@ -40,7 +40,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.groups.get@ method which the
--- 'GroupsGet'' request conforms to.
+-- 'GroupsGet' request conforms to.
 type GroupsGetResource =
      "groups" :>
        Capture "groupKey" Text :>
@@ -48,32 +48,32 @@ type GroupsGetResource =
 
 -- | Retrieve Group
 --
--- /See:/ 'groupsGet'' smart constructor.
-newtype GroupsGet' = GroupsGet'
+-- /See:/ 'groupsGet' smart constructor.
+newtype GroupsGet = GroupsGet
     { _ggGroupKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GroupsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'GroupsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ggGroupKey'
-groupsGet'
+groupsGet
     :: Text -- ^ 'ggGroupKey'
-    -> GroupsGet'
-groupsGet' pGgGroupKey_ =
-    GroupsGet'
+    -> GroupsGet
+groupsGet pGgGroupKey_ =
+    GroupsGet
     { _ggGroupKey = pGgGroupKey_
     }
 
 -- | Email or immutable Id of the group
-ggGroupKey :: Lens' GroupsGet' Text
+ggGroupKey :: Lens' GroupsGet Text
 ggGroupKey
   = lens _ggGroupKey (\ s a -> s{_ggGroupKey = a})
 
-instance GoogleRequest GroupsGet' where
-        type Rs GroupsGet' = Group
-        requestClient GroupsGet'{..}
+instance GoogleRequest GroupsGet where
+        type Rs GroupsGet = Group
+        requestClient GroupsGet{..}
           = go _ggGroupKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy GroupsGetResource)

@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.List
       RemarketingListsListResource
 
     -- * Creating a Request
-    , remarketingListsList'
-    , RemarketingListsList'
+    , remarketingListsList
+    , RemarketingListsList
 
     -- * Request Lenses
     , rllFloodlightActivityId
@@ -48,7 +48,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.remarketingLists.list@ method which the
--- 'RemarketingListsList'' request conforms to.
+-- 'RemarketingListsList' request conforms to.
 type RemarketingListsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -68,8 +68,8 @@ type RemarketingListsListResource =
 
 -- | Retrieves a list of remarketing lists, possibly filtered.
 --
--- /See:/ 'remarketingListsList'' smart constructor.
-data RemarketingListsList' = RemarketingListsList'
+-- /See:/ 'remarketingListsList' smart constructor.
+data RemarketingListsList = RemarketingListsList
     { _rllFloodlightActivityId :: !(Maybe Int64)
     , _rllAdvertiserId         :: !Int64
     , _rllProFileId            :: !Int64
@@ -81,7 +81,7 @@ data RemarketingListsList' = RemarketingListsList'
     , _rllMaxResults           :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RemarketingListsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'RemarketingListsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -102,12 +102,12 @@ data RemarketingListsList' = RemarketingListsList'
 -- * 'rllSortField'
 --
 -- * 'rllMaxResults'
-remarketingListsList'
+remarketingListsList
     :: Int64 -- ^ 'rllAdvertiserId'
     -> Int64 -- ^ 'rllProFileId'
-    -> RemarketingListsList'
-remarketingListsList' pRllAdvertiserId_ pRllProFileId_ =
-    RemarketingListsList'
+    -> RemarketingListsList
+remarketingListsList pRllAdvertiserId_ pRllProFileId_ =
+    RemarketingListsList
     { _rllFloodlightActivityId = Nothing
     , _rllAdvertiserId = pRllAdvertiserId_
     , _rllProFileId = pRllProFileId_
@@ -120,29 +120,29 @@ remarketingListsList' pRllAdvertiserId_ pRllProFileId_ =
     }
 
 -- | Select only remarketing lists that have this floodlight activity ID.
-rllFloodlightActivityId :: Lens' RemarketingListsList' (Maybe Int64)
+rllFloodlightActivityId :: Lens' RemarketingListsList (Maybe Int64)
 rllFloodlightActivityId
   = lens _rllFloodlightActivityId
       (\ s a -> s{_rllFloodlightActivityId = a})
 
 -- | Select only remarketing lists owned by this advertiser.
-rllAdvertiserId :: Lens' RemarketingListsList' Int64
+rllAdvertiserId :: Lens' RemarketingListsList Int64
 rllAdvertiserId
   = lens _rllAdvertiserId
       (\ s a -> s{_rllAdvertiserId = a})
 
 -- | User profile ID associated with this request.
-rllProFileId :: Lens' RemarketingListsList' Int64
+rllProFileId :: Lens' RemarketingListsList Int64
 rllProFileId
   = lens _rllProFileId (\ s a -> s{_rllProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-rllSortOrder :: Lens' RemarketingListsList' (Maybe RemarketingListsListSortOrder)
+rllSortOrder :: Lens' RemarketingListsList (Maybe RemarketingListsListSortOrder)
 rllSortOrder
   = lens _rllSortOrder (\ s a -> s{_rllSortOrder = a})
 
 -- | Select only active or only inactive remarketing lists.
-rllActive :: Lens' RemarketingListsList' (Maybe Bool)
+rllActive :: Lens' RemarketingListsList (Maybe Bool)
 rllActive
   = lens _rllActive (\ s a -> s{_rllActive = a})
 
@@ -154,29 +154,29 @@ rllActive
 -- example, a search string of \"remarketing list\" will match objects with
 -- name \"my remarketing list\", \"remarketing list 2015\", or simply
 -- \"remarketing list\".
-rllName :: Lens' RemarketingListsList' (Maybe Text)
+rllName :: Lens' RemarketingListsList (Maybe Text)
 rllName = lens _rllName (\ s a -> s{_rllName = a})
 
 -- | Value of the nextPageToken from the previous result page.
-rllPageToken :: Lens' RemarketingListsList' (Maybe Text)
+rllPageToken :: Lens' RemarketingListsList (Maybe Text)
 rllPageToken
   = lens _rllPageToken (\ s a -> s{_rllPageToken = a})
 
 -- | Field by which to sort the list.
-rllSortField :: Lens' RemarketingListsList' (Maybe RemarketingListsListSortField)
+rllSortField :: Lens' RemarketingListsList (Maybe RemarketingListsListSortField)
 rllSortField
   = lens _rllSortField (\ s a -> s{_rllSortField = a})
 
 -- | Maximum number of results to return.
-rllMaxResults :: Lens' RemarketingListsList' (Maybe Int32)
+rllMaxResults :: Lens' RemarketingListsList (Maybe Int32)
 rllMaxResults
   = lens _rllMaxResults
       (\ s a -> s{_rllMaxResults = a})
 
-instance GoogleRequest RemarketingListsList' where
-        type Rs RemarketingListsList' =
+instance GoogleRequest RemarketingListsList where
+        type Rs RemarketingListsList =
              RemarketingListsListResponse
-        requestClient RemarketingListsList'{..}
+        requestClient RemarketingListsList{..}
           = go _rllProFileId (Just _rllAdvertiserId)
               _rllFloodlightActivityId
               _rllSortOrder

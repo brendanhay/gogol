@@ -32,8 +32,8 @@ module Network.Google.Resource.GamesManagement.Events.Reset
       EventsResetResource
 
     -- * Creating a Request
-    , eventsReset'
-    , EventsReset'
+    , eventsReset
+    , EventsReset
 
     -- * Request Lenses
     , erEventId
@@ -43,7 +43,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.events.reset@ method which the
--- 'EventsReset'' request conforms to.
+-- 'EventsReset' request conforms to.
 type EventsResetResource =
      "events" :>
        Capture "eventId" Text :>
@@ -55,32 +55,32 @@ type EventsResetResource =
 -- whitelisted tester accounts for your application. All quests for this
 -- player that use the event will also be reset.
 --
--- /See:/ 'eventsReset'' smart constructor.
-newtype EventsReset' = EventsReset'
+-- /See:/ 'eventsReset' smart constructor.
+newtype EventsReset = EventsReset
     { _erEventId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventsReset'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventsReset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'erEventId'
-eventsReset'
+eventsReset
     :: Text -- ^ 'erEventId'
-    -> EventsReset'
-eventsReset' pErEventId_ =
-    EventsReset'
+    -> EventsReset
+eventsReset pErEventId_ =
+    EventsReset
     { _erEventId = pErEventId_
     }
 
 -- | The ID of the event.
-erEventId :: Lens' EventsReset' Text
+erEventId :: Lens' EventsReset Text
 erEventId
   = lens _erEventId (\ s a -> s{_erEventId = a})
 
-instance GoogleRequest EventsReset' where
-        type Rs EventsReset' = ()
-        requestClient EventsReset'{..}
+instance GoogleRequest EventsReset where
+        type Rs EventsReset = ()
+        requestClient EventsReset{..}
           = go _erEventId (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy EventsResetResource)

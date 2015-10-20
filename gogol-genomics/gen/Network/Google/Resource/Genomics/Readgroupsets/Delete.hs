@@ -29,8 +29,8 @@ module Network.Google.Resource.Genomics.Readgroupsets.Delete
       ReadgroupsetsDeleteResource
 
     -- * Creating a Request
-    , readgroupsetsDelete'
-    , ReadgroupsetsDelete'
+    , readgroupsetsDelete
+    , ReadgroupsetsDelete
 
     -- * Request Lenses
     , rdXgafv
@@ -47,7 +47,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.readgroupsets.delete@ method which the
--- 'ReadgroupsetsDelete'' request conforms to.
+-- 'ReadgroupsetsDelete' request conforms to.
 type ReadgroupsetsDeleteResource =
      "v1" :>
        "readgroupsets" :>
@@ -63,8 +63,8 @@ type ReadgroupsetsDeleteResource =
 
 -- | Deletes a read group set.
 --
--- /See:/ 'readgroupsetsDelete'' smart constructor.
-data ReadgroupsetsDelete' = ReadgroupsetsDelete'
+-- /See:/ 'readgroupsetsDelete' smart constructor.
+data ReadgroupsetsDelete = ReadgroupsetsDelete
     { _rdXgafv          :: !(Maybe Text)
     , _rdReadGroupSetId :: !Text
     , _rdUploadProtocol :: !(Maybe Text)
@@ -75,7 +75,7 @@ data ReadgroupsetsDelete' = ReadgroupsetsDelete'
     , _rdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReadgroupsetsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReadgroupsetsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -94,11 +94,11 @@ data ReadgroupsetsDelete' = ReadgroupsetsDelete'
 -- * 'rdBearerToken'
 --
 -- * 'rdCallback'
-readgroupsetsDelete'
+readgroupsetsDelete
     :: Text -- ^ 'rdReadGroupSetId'
-    -> ReadgroupsetsDelete'
-readgroupsetsDelete' pRdReadGroupSetId_ =
-    ReadgroupsetsDelete'
+    -> ReadgroupsetsDelete
+readgroupsetsDelete pRdReadGroupSetId_ =
+    ReadgroupsetsDelete
     { _rdXgafv = Nothing
     , _rdReadGroupSetId = pRdReadGroupSetId_
     , _rdUploadProtocol = Nothing
@@ -110,51 +110,51 @@ readgroupsetsDelete' pRdReadGroupSetId_ =
     }
 
 -- | V1 error format.
-rdXgafv :: Lens' ReadgroupsetsDelete' (Maybe Text)
+rdXgafv :: Lens' ReadgroupsetsDelete (Maybe Text)
 rdXgafv = lens _rdXgafv (\ s a -> s{_rdXgafv = a})
 
 -- | The ID of the read group set to be deleted. The caller must have WRITE
 -- permissions to the dataset associated with this read group set.
-rdReadGroupSetId :: Lens' ReadgroupsetsDelete' Text
+rdReadGroupSetId :: Lens' ReadgroupsetsDelete Text
 rdReadGroupSetId
   = lens _rdReadGroupSetId
       (\ s a -> s{_rdReadGroupSetId = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-rdUploadProtocol :: Lens' ReadgroupsetsDelete' (Maybe Text)
+rdUploadProtocol :: Lens' ReadgroupsetsDelete (Maybe Text)
 rdUploadProtocol
   = lens _rdUploadProtocol
       (\ s a -> s{_rdUploadProtocol = a})
 
 -- | Pretty-print response.
-rdPp :: Lens' ReadgroupsetsDelete' Bool
+rdPp :: Lens' ReadgroupsetsDelete Bool
 rdPp = lens _rdPp (\ s a -> s{_rdPp = a})
 
 -- | OAuth access token.
-rdAccessToken :: Lens' ReadgroupsetsDelete' (Maybe Text)
+rdAccessToken :: Lens' ReadgroupsetsDelete (Maybe Text)
 rdAccessToken
   = lens _rdAccessToken
       (\ s a -> s{_rdAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-rdUploadType :: Lens' ReadgroupsetsDelete' (Maybe Text)
+rdUploadType :: Lens' ReadgroupsetsDelete (Maybe Text)
 rdUploadType
   = lens _rdUploadType (\ s a -> s{_rdUploadType = a})
 
 -- | OAuth bearer token.
-rdBearerToken :: Lens' ReadgroupsetsDelete' (Maybe Text)
+rdBearerToken :: Lens' ReadgroupsetsDelete (Maybe Text)
 rdBearerToken
   = lens _rdBearerToken
       (\ s a -> s{_rdBearerToken = a})
 
 -- | JSONP
-rdCallback :: Lens' ReadgroupsetsDelete' (Maybe Text)
+rdCallback :: Lens' ReadgroupsetsDelete (Maybe Text)
 rdCallback
   = lens _rdCallback (\ s a -> s{_rdCallback = a})
 
-instance GoogleRequest ReadgroupsetsDelete' where
-        type Rs ReadgroupsetsDelete' = Empty
-        requestClient ReadgroupsetsDelete'{..}
+instance GoogleRequest ReadgroupsetsDelete where
+        type Rs ReadgroupsetsDelete = Empty
+        requestClient ReadgroupsetsDelete{..}
           = go _rdReadGroupSetId _rdXgafv _rdUploadProtocol
               (Just _rdPp)
               _rdAccessToken

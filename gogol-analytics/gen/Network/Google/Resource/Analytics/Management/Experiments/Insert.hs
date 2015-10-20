@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Experiments.Insert
       ManagementExperimentsInsertResource
 
     -- * Creating a Request
-    , managementExperimentsInsert'
-    , ManagementExperimentsInsert'
+    , managementExperimentsInsert
+    , ManagementExperimentsInsert
 
     -- * Request Lenses
     , meiWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.experiments.insert@ method which the
--- 'ManagementExperimentsInsert'' request conforms to.
+-- 'ManagementExperimentsInsert' request conforms to.
 type ManagementExperimentsInsertResource =
      "management" :>
        "accounts" :>
@@ -58,15 +58,15 @@ type ManagementExperimentsInsertResource =
 
 -- | Create a new experiment.
 --
--- /See:/ 'managementExperimentsInsert'' smart constructor.
-data ManagementExperimentsInsert' = ManagementExperimentsInsert'
+-- /See:/ 'managementExperimentsInsert' smart constructor.
+data ManagementExperimentsInsert = ManagementExperimentsInsert
     { _meiWebPropertyId :: !Text
     , _meiProFileId     :: !Text
     , _meiPayload       :: !Experiment
     , _meiAccountId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementExperimentsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementExperimentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data ManagementExperimentsInsert' = ManagementExperimentsInsert'
 -- * 'meiPayload'
 --
 -- * 'meiAccountId'
-managementExperimentsInsert'
+managementExperimentsInsert
     :: Text -- ^ 'meiWebPropertyId'
     -> Text -- ^ 'meiProFileId'
     -> Experiment -- ^ 'meiPayload'
     -> Text -- ^ 'meiAccountId'
-    -> ManagementExperimentsInsert'
-managementExperimentsInsert' pMeiWebPropertyId_ pMeiProFileId_ pMeiPayload_ pMeiAccountId_ =
-    ManagementExperimentsInsert'
+    -> ManagementExperimentsInsert
+managementExperimentsInsert pMeiWebPropertyId_ pMeiProFileId_ pMeiPayload_ pMeiAccountId_ =
+    ManagementExperimentsInsert
     { _meiWebPropertyId = pMeiWebPropertyId_
     , _meiProFileId = pMeiProFileId_
     , _meiPayload = pMeiPayload_
@@ -92,30 +92,30 @@ managementExperimentsInsert' pMeiWebPropertyId_ pMeiProFileId_ pMeiPayload_ pMei
     }
 
 -- | Web property ID to create the experiment for.
-meiWebPropertyId :: Lens' ManagementExperimentsInsert' Text
+meiWebPropertyId :: Lens' ManagementExperimentsInsert Text
 meiWebPropertyId
   = lens _meiWebPropertyId
       (\ s a -> s{_meiWebPropertyId = a})
 
 -- | View (Profile) ID to create the experiment for.
-meiProFileId :: Lens' ManagementExperimentsInsert' Text
+meiProFileId :: Lens' ManagementExperimentsInsert Text
 meiProFileId
   = lens _meiProFileId (\ s a -> s{_meiProFileId = a})
 
 -- | Multipart request metadata.
-meiPayload :: Lens' ManagementExperimentsInsert' Experiment
+meiPayload :: Lens' ManagementExperimentsInsert Experiment
 meiPayload
   = lens _meiPayload (\ s a -> s{_meiPayload = a})
 
 -- | Account ID to create the experiment for.
-meiAccountId :: Lens' ManagementExperimentsInsert' Text
+meiAccountId :: Lens' ManagementExperimentsInsert Text
 meiAccountId
   = lens _meiAccountId (\ s a -> s{_meiAccountId = a})
 
-instance GoogleRequest ManagementExperimentsInsert'
+instance GoogleRequest ManagementExperimentsInsert
          where
-        type Rs ManagementExperimentsInsert' = Experiment
-        requestClient ManagementExperimentsInsert'{..}
+        type Rs ManagementExperimentsInsert = Experiment
+        requestClient ManagementExperimentsInsert{..}
           = go _meiAccountId _meiWebPropertyId _meiProFileId
               (Just AltJSON)
               _meiPayload

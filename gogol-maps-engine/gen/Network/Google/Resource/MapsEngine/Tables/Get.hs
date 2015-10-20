@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Tables.Get
       TablesGetResource
 
     -- * Creating a Request
-    , tablesGet'
-    , TablesGet'
+    , tablesGet
+    , TablesGet
 
     -- * Request Lenses
     , tgVersion
@@ -41,7 +41,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.tables.get@ method which the
--- 'TablesGet'' request conforms to.
+-- 'TablesGet' request conforms to.
 type TablesGetResource =
      "tables" :>
        Capture "id" Text :>
@@ -50,39 +50,39 @@ type TablesGetResource =
 
 -- | Return metadata for a particular table, including the schema.
 --
--- /See:/ 'tablesGet'' smart constructor.
-data TablesGet' = TablesGet'
+-- /See:/ 'tablesGet' smart constructor.
+data TablesGet = TablesGet
     { _tgVersion :: !(Maybe TablesGetVersion)
     , _tgId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tgVersion'
 --
 -- * 'tgId'
-tablesGet'
+tablesGet
     :: Text -- ^ 'tgId'
-    -> TablesGet'
-tablesGet' pTgId_ =
-    TablesGet'
+    -> TablesGet
+tablesGet pTgId_ =
+    TablesGet
     { _tgVersion = Nothing
     , _tgId = pTgId_
     }
 
-tgVersion :: Lens' TablesGet' (Maybe TablesGetVersion)
+tgVersion :: Lens' TablesGet (Maybe TablesGetVersion)
 tgVersion
   = lens _tgVersion (\ s a -> s{_tgVersion = a})
 
 -- | The ID of the table.
-tgId :: Lens' TablesGet' Text
+tgId :: Lens' TablesGet Text
 tgId = lens _tgId (\ s a -> s{_tgId = a})
 
-instance GoogleRequest TablesGet' where
-        type Rs TablesGet' = Table
-        requestClient TablesGet'{..}
+instance GoogleRequest TablesGet where
+        type Rs TablesGet = Table
+        requestClient TablesGet{..}
           = go _tgId _tgVersion (Just AltJSON)
               mapsEngineService
           where go

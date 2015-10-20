@@ -29,18 +29,18 @@ module Network.Google.Resource.MapsEngine.Assets.Permissions.List
       AssetsPermissionsListResource
 
     -- * Creating a Request
-    , assetsPermissionsList'
-    , AssetsPermissionsList'
+    , assetsPermissionsList
+    , AssetsPermissionsList
 
     -- * Request Lenses
-    , aplId
+    , assId
     ) where
 
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.assets.permissions.list@ method which the
--- 'AssetsPermissionsList'' request conforms to.
+-- 'AssetsPermissionsList' request conforms to.
 type AssetsPermissionsListResource =
      "assets" :>
        Capture "id" Text :>
@@ -50,33 +50,33 @@ type AssetsPermissionsListResource =
 
 -- | Return all of the permissions for the specified asset.
 --
--- /See:/ 'assetsPermissionsList'' smart constructor.
-newtype AssetsPermissionsList' = AssetsPermissionsList'
-    { _aplId :: Text
+-- /See:/ 'assetsPermissionsList' smart constructor.
+newtype AssetsPermissionsList = AssetsPermissionsList
+    { _assId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AssetsPermissionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AssetsPermissionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aplId'
-assetsPermissionsList'
-    :: Text -- ^ 'aplId'
-    -> AssetsPermissionsList'
-assetsPermissionsList' pAplId_ =
-    AssetsPermissionsList'
-    { _aplId = pAplId_
+-- * 'assId'
+assetsPermissionsList
+    :: Text -- ^ 'assId'
+    -> AssetsPermissionsList
+assetsPermissionsList pAssId_ =
+    AssetsPermissionsList
+    { _assId = pAssId_
     }
 
 -- | The ID of the asset whose permissions will be listed.
-aplId :: Lens' AssetsPermissionsList' Text
-aplId = lens _aplId (\ s a -> s{_aplId = a})
+assId :: Lens' AssetsPermissionsList Text
+assId = lens _assId (\ s a -> s{_assId = a})
 
-instance GoogleRequest AssetsPermissionsList' where
-        type Rs AssetsPermissionsList' =
+instance GoogleRequest AssetsPermissionsList where
+        type Rs AssetsPermissionsList =
              PermissionsListResponse
-        requestClient AssetsPermissionsList'{..}
-          = go _aplId (Just AltJSON) mapsEngineService
+        requestClient AssetsPermissionsList{..}
+          = go _assId (Just AltJSON) mapsEngineService
           where go
                   = buildClient
                       (Proxy :: Proxy AssetsPermissionsListResource)

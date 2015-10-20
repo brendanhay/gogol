@@ -30,8 +30,8 @@ module Network.Google.Resource.Gmail.Users.Messages.Send
       UsersMessagesSendResource
 
     -- * Creating a Request
-    , usersMessagesSend'
-    , UsersMessagesSend'
+    , usersMessagesSend
+    , UsersMessagesSend
 
     -- * Request Lenses
     , umsPayload
@@ -43,7 +43,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.messages.send@ method which the
--- 'UsersMessagesSend'' request conforms to.
+-- 'UsersMessagesSend' request conforms to.
 type UsersMessagesSendResource =
      Capture "userId" Text :>
        "messages" :>
@@ -55,14 +55,14 @@ type UsersMessagesSendResource =
 -- | Sends the specified message to the recipients in the To, Cc, and Bcc
 -- headers.
 --
--- /See:/ 'usersMessagesSend'' smart constructor.
-data UsersMessagesSend' = UsersMessagesSend'
+-- /See:/ 'usersMessagesSend' smart constructor.
+data UsersMessagesSend = UsersMessagesSend
     { _umsPayload :: !Message
     , _umsUserId  :: !Text
     , _umsMedia   :: !Body
     }
 
--- | Creates a value of 'UsersMessagesSend'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersMessagesSend' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,35 +71,35 @@ data UsersMessagesSend' = UsersMessagesSend'
 -- * 'umsUserId'
 --
 -- * 'umsMedia'
-usersMessagesSend'
+usersMessagesSend
     :: Message -- ^ 'umsPayload'
     -> Text -- ^ 'umsMedia'
     -> Body
-    -> UsersMessagesSend'
-usersMessagesSend' pUmsPayload_ pUmsUserId_ pUmsMedia_ =
-    UsersMessagesSend'
+    -> UsersMessagesSend
+usersMessagesSend pUmsPayload_ pUmsUserId_ pUmsMedia_ =
+    UsersMessagesSend
     { _umsPayload = pUmsPayload_
     , _umsUserId = pUmsUserId_
     , _umsMedia = pUmsMedia_
     }
 
 -- | Multipart request metadata.
-umsPayload :: Lens' UsersMessagesSend' Message
+umsPayload :: Lens' UsersMessagesSend Message
 umsPayload
   = lens _umsPayload (\ s a -> s{_umsPayload = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-umsUserId :: Lens' UsersMessagesSend' Text
+umsUserId :: Lens' UsersMessagesSend Text
 umsUserId
   = lens _umsUserId (\ s a -> s{_umsUserId = a})
 
-umsMedia :: Lens' UsersMessagesSend' Body
+umsMedia :: Lens' UsersMessagesSend Body
 umsMedia = lens _umsMedia (\ s a -> s{_umsMedia = a})
 
-instance GoogleRequest UsersMessagesSend' where
-        type Rs UsersMessagesSend' = Message
-        requestClient UsersMessagesSend'{..}
+instance GoogleRequest UsersMessagesSend where
+        type Rs UsersMessagesSend = Message
+        requestClient UsersMessagesSend{..}
           = go _umsUserId (Just AltJSON) _umsPayload _umsMedia
               gmailService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Properties.Get
       PropertiesGetResource
 
     -- * Creating a Request
-    , propertiesGet'
-    , PropertiesGet'
+    , propertiesGet
+    , PropertiesGet
 
     -- * Request Lenses
     , pgPropertyKey
@@ -42,7 +42,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.properties.get@ method which the
--- 'PropertiesGet'' request conforms to.
+-- 'PropertiesGet' request conforms to.
 type PropertiesGetResource =
      "files" :>
        Capture "fileId" Text :>
@@ -53,14 +53,14 @@ type PropertiesGetResource =
 
 -- | Gets a property by its key.
 --
--- /See:/ 'propertiesGet'' smart constructor.
-data PropertiesGet' = PropertiesGet'
+-- /See:/ 'propertiesGet' smart constructor.
+data PropertiesGet = PropertiesGet
     { _pgPropertyKey :: !Text
     , _pgVisibility  :: !Text
     , _pgFileId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PropertiesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PropertiesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data PropertiesGet' = PropertiesGet'
 -- * 'pgVisibility'
 --
 -- * 'pgFileId'
-propertiesGet'
+propertiesGet
     :: Text -- ^ 'pgPropertyKey'
     -> Text -- ^ 'pgFileId'
-    -> PropertiesGet'
-propertiesGet' pPgPropertyKey_ pPgFileId_ =
-    PropertiesGet'
+    -> PropertiesGet
+propertiesGet pPgPropertyKey_ pPgFileId_ =
+    PropertiesGet
     { _pgPropertyKey = pPgPropertyKey_
     , _pgVisibility = "private"
     , _pgFileId = pPgFileId_
     }
 
 -- | The key of the property.
-pgPropertyKey :: Lens' PropertiesGet' Text
+pgPropertyKey :: Lens' PropertiesGet Text
 pgPropertyKey
   = lens _pgPropertyKey
       (\ s a -> s{_pgPropertyKey = a})
 
 -- | The visibility of the property.
-pgVisibility :: Lens' PropertiesGet' Text
+pgVisibility :: Lens' PropertiesGet Text
 pgVisibility
   = lens _pgVisibility (\ s a -> s{_pgVisibility = a})
 
 -- | The ID of the file.
-pgFileId :: Lens' PropertiesGet' Text
+pgFileId :: Lens' PropertiesGet Text
 pgFileId = lens _pgFileId (\ s a -> s{_pgFileId = a})
 
-instance GoogleRequest PropertiesGet' where
-        type Rs PropertiesGet' = Property
-        requestClient PropertiesGet'{..}
+instance GoogleRequest PropertiesGet where
+        type Rs PropertiesGet = Property
+        requestClient PropertiesGet{..}
           = go _pgFileId _pgPropertyKey (Just _pgVisibility)
               (Just AltJSON)
               driveService

@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update
       ManagementWebPropertyUserLinksUpdateResource
 
     -- * Creating a Request
-    , managementWebPropertyUserLinksUpdate'
-    , ManagementWebPropertyUserLinksUpdate'
+    , managementWebPropertyUserLinksUpdate
+    , ManagementWebPropertyUserLinksUpdate
 
     -- * Request Lenses
     , mwpuluWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webpropertyUserLinks.update@ method which the
--- 'ManagementWebPropertyUserLinksUpdate'' request conforms to.
+-- 'ManagementWebPropertyUserLinksUpdate' request conforms to.
 type ManagementWebPropertyUserLinksUpdateResource =
      "management" :>
        "accounts" :>
@@ -58,15 +58,15 @@ type ManagementWebPropertyUserLinksUpdateResource =
 
 -- | Updates permissions for an existing user on the given web property.
 --
--- /See:/ 'managementWebPropertyUserLinksUpdate'' smart constructor.
-data ManagementWebPropertyUserLinksUpdate' = ManagementWebPropertyUserLinksUpdate'
+-- /See:/ 'managementWebPropertyUserLinksUpdate' smart constructor.
+data ManagementWebPropertyUserLinksUpdate = ManagementWebPropertyUserLinksUpdate
     { _mwpuluWebPropertyId :: !Text
     , _mwpuluPayload       :: !EntityUserLink
     , _mwpuluAccountId     :: !Text
     , _mwpuluLinkId        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementWebPropertyUserLinksUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementWebPropertyUserLinksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,14 +77,14 @@ data ManagementWebPropertyUserLinksUpdate' = ManagementWebPropertyUserLinksUpdat
 -- * 'mwpuluAccountId'
 --
 -- * 'mwpuluLinkId'
-managementWebPropertyUserLinksUpdate'
+managementWebPropertyUserLinksUpdate
     :: Text -- ^ 'mwpuluWebPropertyId'
     -> EntityUserLink -- ^ 'mwpuluPayload'
     -> Text -- ^ 'mwpuluAccountId'
     -> Text -- ^ 'mwpuluLinkId'
-    -> ManagementWebPropertyUserLinksUpdate'
-managementWebPropertyUserLinksUpdate' pMwpuluWebPropertyId_ pMwpuluPayload_ pMwpuluAccountId_ pMwpuluLinkId_ =
-    ManagementWebPropertyUserLinksUpdate'
+    -> ManagementWebPropertyUserLinksUpdate
+managementWebPropertyUserLinksUpdate pMwpuluWebPropertyId_ pMwpuluPayload_ pMwpuluAccountId_ pMwpuluLinkId_ =
+    ManagementWebPropertyUserLinksUpdate
     { _mwpuluWebPropertyId = pMwpuluWebPropertyId_
     , _mwpuluPayload = pMwpuluPayload_
     , _mwpuluAccountId = pMwpuluAccountId_
@@ -92,34 +92,34 @@ managementWebPropertyUserLinksUpdate' pMwpuluWebPropertyId_ pMwpuluPayload_ pMwp
     }
 
 -- | Web property ID to update the account-user link for.
-mwpuluWebPropertyId :: Lens' ManagementWebPropertyUserLinksUpdate' Text
+mwpuluWebPropertyId :: Lens' ManagementWebPropertyUserLinksUpdate Text
 mwpuluWebPropertyId
   = lens _mwpuluWebPropertyId
       (\ s a -> s{_mwpuluWebPropertyId = a})
 
 -- | Multipart request metadata.
-mwpuluPayload :: Lens' ManagementWebPropertyUserLinksUpdate' EntityUserLink
+mwpuluPayload :: Lens' ManagementWebPropertyUserLinksUpdate EntityUserLink
 mwpuluPayload
   = lens _mwpuluPayload
       (\ s a -> s{_mwpuluPayload = a})
 
 -- | Account ID to update the account-user link for.
-mwpuluAccountId :: Lens' ManagementWebPropertyUserLinksUpdate' Text
+mwpuluAccountId :: Lens' ManagementWebPropertyUserLinksUpdate Text
 mwpuluAccountId
   = lens _mwpuluAccountId
       (\ s a -> s{_mwpuluAccountId = a})
 
 -- | Link ID to update the account-user link for.
-mwpuluLinkId :: Lens' ManagementWebPropertyUserLinksUpdate' Text
+mwpuluLinkId :: Lens' ManagementWebPropertyUserLinksUpdate Text
 mwpuluLinkId
   = lens _mwpuluLinkId (\ s a -> s{_mwpuluLinkId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyUserLinksUpdate' where
-        type Rs ManagementWebPropertyUserLinksUpdate' =
+         ManagementWebPropertyUserLinksUpdate where
+        type Rs ManagementWebPropertyUserLinksUpdate =
              EntityUserLink
         requestClient
-          ManagementWebPropertyUserLinksUpdate'{..}
+          ManagementWebPropertyUserLinksUpdate{..}
           = go _mwpuluAccountId _mwpuluWebPropertyId
               _mwpuluLinkId
               (Just AltJSON)

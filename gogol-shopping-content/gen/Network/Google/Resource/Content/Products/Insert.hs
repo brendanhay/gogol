@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Products.Insert
       ProductsInsertResource
 
     -- * Creating a Request
-    , productsInsert'
-    , ProductsInsert'
+    , productsInsert
+    , ProductsInsert
 
     -- * Request Lenses
     , piMerchantId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.products.insert@ method which the
--- 'ProductsInsert'' request conforms to.
+-- 'ProductsInsert' request conforms to.
 type ProductsInsertResource =
      Capture "merchantId" Word64 :>
        "products" :>
@@ -52,14 +52,14 @@ type ProductsInsertResource =
 
 -- | Uploads a product to your Merchant Center account.
 --
--- /See:/ 'productsInsert'' smart constructor.
-data ProductsInsert' = ProductsInsert'
+-- /See:/ 'productsInsert' smart constructor.
+data ProductsInsert = ProductsInsert
     { _piMerchantId :: !Word64
     , _piPayload    :: !Product
     , _piDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProductsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,34 +68,34 @@ data ProductsInsert' = ProductsInsert'
 -- * 'piPayload'
 --
 -- * 'piDryRun'
-productsInsert'
+productsInsert
     :: Word64 -- ^ 'piMerchantId'
     -> Product -- ^ 'piPayload'
-    -> ProductsInsert'
-productsInsert' pPiMerchantId_ pPiPayload_ =
-    ProductsInsert'
+    -> ProductsInsert
+productsInsert pPiMerchantId_ pPiPayload_ =
+    ProductsInsert
     { _piMerchantId = pPiMerchantId_
     , _piPayload = pPiPayload_
     , _piDryRun = Nothing
     }
 
 -- | The ID of the managing account.
-piMerchantId :: Lens' ProductsInsert' Word64
+piMerchantId :: Lens' ProductsInsert Word64
 piMerchantId
   = lens _piMerchantId (\ s a -> s{_piMerchantId = a})
 
 -- | Multipart request metadata.
-piPayload :: Lens' ProductsInsert' Product
+piPayload :: Lens' ProductsInsert Product
 piPayload
   = lens _piPayload (\ s a -> s{_piPayload = a})
 
 -- | Flag to run the request in dry-run mode.
-piDryRun :: Lens' ProductsInsert' (Maybe Bool)
+piDryRun :: Lens' ProductsInsert (Maybe Bool)
 piDryRun = lens _piDryRun (\ s a -> s{_piDryRun = a})
 
-instance GoogleRequest ProductsInsert' where
-        type Rs ProductsInsert' = Product
-        requestClient ProductsInsert'{..}
+instance GoogleRequest ProductsInsert where
+        type Rs ProductsInsert = Product
+        requestClient ProductsInsert{..}
           = go _piMerchantId _piDryRun (Just AltJSON)
               _piPayload
               shoppingContentService

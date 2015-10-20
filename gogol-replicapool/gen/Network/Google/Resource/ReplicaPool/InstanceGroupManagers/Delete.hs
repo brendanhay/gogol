@@ -31,8 +31,8 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Delete
       InstanceGroupManagersDeleteResource
 
     -- * Creating a Request
-    , instanceGroupManagersDelete'
-    , InstanceGroupManagersDelete'
+    , instanceGroupManagersDelete
+    , InstanceGroupManagersDelete
 
     -- * Request Lenses
     , igmdProject
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.instanceGroupManagers.delete@ method which the
--- 'InstanceGroupManagersDelete'' request conforms to.
+-- 'InstanceGroupManagersDelete' request conforms to.
 type InstanceGroupManagersDeleteResource =
      Capture "project" Text :>
        "zones" :>
@@ -57,14 +57,14 @@ type InstanceGroupManagersDeleteResource =
 -- If you\'d like to delete the manager without deleting the instances, you
 -- must first abandon the instances to remove them from the group.
 --
--- /See:/ 'instanceGroupManagersDelete'' smart constructor.
-data InstanceGroupManagersDelete' = InstanceGroupManagersDelete'
+-- /See:/ 'instanceGroupManagersDelete' smart constructor.
+data InstanceGroupManagersDelete = InstanceGroupManagersDelete
     { _igmdProject              :: !Text
     , _igmdInstanceGroupManager :: !Text
     , _igmdZone                 :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupManagersDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupManagersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -73,37 +73,37 @@ data InstanceGroupManagersDelete' = InstanceGroupManagersDelete'
 -- * 'igmdInstanceGroupManager'
 --
 -- * 'igmdZone'
-instanceGroupManagersDelete'
+instanceGroupManagersDelete
     :: Text -- ^ 'igmdProject'
     -> Text -- ^ 'igmdInstanceGroupManager'
     -> Text -- ^ 'igmdZone'
-    -> InstanceGroupManagersDelete'
-instanceGroupManagersDelete' pIgmdProject_ pIgmdInstanceGroupManager_ pIgmdZone_ =
-    InstanceGroupManagersDelete'
+    -> InstanceGroupManagersDelete
+instanceGroupManagersDelete pIgmdProject_ pIgmdInstanceGroupManager_ pIgmdZone_ =
+    InstanceGroupManagersDelete
     { _igmdProject = pIgmdProject_
     , _igmdInstanceGroupManager = pIgmdInstanceGroupManager_
     , _igmdZone = pIgmdZone_
     }
 
 -- | The Google Developers Console project name.
-igmdProject :: Lens' InstanceGroupManagersDelete' Text
+igmdProject :: Lens' InstanceGroupManagersDelete Text
 igmdProject
   = lens _igmdProject (\ s a -> s{_igmdProject = a})
 
 -- | Name of the Instance Group Manager resource to delete.
-igmdInstanceGroupManager :: Lens' InstanceGroupManagersDelete' Text
+igmdInstanceGroupManager :: Lens' InstanceGroupManagersDelete Text
 igmdInstanceGroupManager
   = lens _igmdInstanceGroupManager
       (\ s a -> s{_igmdInstanceGroupManager = a})
 
 -- | The name of the zone in which the instance group manager resides.
-igmdZone :: Lens' InstanceGroupManagersDelete' Text
+igmdZone :: Lens' InstanceGroupManagersDelete Text
 igmdZone = lens _igmdZone (\ s a -> s{_igmdZone = a})
 
-instance GoogleRequest InstanceGroupManagersDelete'
+instance GoogleRequest InstanceGroupManagersDelete
          where
-        type Rs InstanceGroupManagersDelete' = Operation
-        requestClient InstanceGroupManagersDelete'{..}
+        type Rs InstanceGroupManagersDelete = Operation
+        requestClient InstanceGroupManagersDelete{..}
           = go _igmdProject _igmdZone _igmdInstanceGroupManager
               (Just AltJSON)
               replicaPoolService

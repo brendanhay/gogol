@@ -29,8 +29,8 @@ module Network.Google.Resource.CivicInfo.Elections.ElectionQuery
       ElectionsElectionQueryResource
 
     -- * Creating a Request
-    , electionsElectionQuery'
-    , ElectionsElectionQuery'
+    , electionsElectionQuery
+    , ElectionsElectionQuery
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @civicinfo.elections.electionQuery@ method which the
--- 'ElectionsElectionQuery'' request conforms to.
+-- 'ElectionsElectionQuery' request conforms to.
 type ElectionsElectionQueryResource =
      "elections" :>
        QueryParam "alt" AltJSON :>
@@ -46,21 +46,21 @@ type ElectionsElectionQueryResource =
 
 -- | List of available elections to query.
 --
--- /See:/ 'electionsElectionQuery'' smart constructor.
-data ElectionsElectionQuery' =
-    ElectionsElectionQuery'
+-- /See:/ 'electionsElectionQuery' smart constructor.
+data ElectionsElectionQuery =
+    ElectionsElectionQuery
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ElectionsElectionQuery'' with the minimum fields required to make a request.
+-- | Creates a value of 'ElectionsElectionQuery' with the minimum fields required to make a request.
 --
-electionsElectionQuery'
-    :: ElectionsElectionQuery'
-electionsElectionQuery' = ElectionsElectionQuery'
+electionsElectionQuery
+    :: ElectionsElectionQuery
+electionsElectionQuery = ElectionsElectionQuery
 
-instance GoogleRequest ElectionsElectionQuery' where
-        type Rs ElectionsElectionQuery' =
+instance GoogleRequest ElectionsElectionQuery where
+        type Rs ElectionsElectionQuery =
              ElectionsQueryResponse
-        requestClient ElectionsElectionQuery'{}
+        requestClient ElectionsElectionQuery{}
           = go (Just AltJSON) civicInfoService
           where go
                   = buildClient

@@ -30,8 +30,8 @@ module Network.Google.Resource.CloudUserAccounts.Users.AddPublicKey
       UsersAddPublicKeyResource
 
     -- * Creating a Request
-    , usersAddPublicKey'
-    , UsersAddPublicKey'
+    , usersAddPublicKey
+    , UsersAddPublicKey
 
     -- * Request Lenses
     , uapkProject
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
 -- | A resource alias for @clouduseraccounts.users.addPublicKey@ method which the
--- 'UsersAddPublicKey'' request conforms to.
+-- 'UsersAddPublicKey' request conforms to.
 type UsersAddPublicKeyResource =
      Capture "project" Text :>
        "global" :>
@@ -56,14 +56,14 @@ type UsersAddPublicKeyResource =
 -- | Adds a public key to the specified User resource with the data included
 -- in the request.
 --
--- /See:/ 'usersAddPublicKey'' smart constructor.
-data UsersAddPublicKey' = UsersAddPublicKey'
+-- /See:/ 'usersAddPublicKey' smart constructor.
+data UsersAddPublicKey = UsersAddPublicKey
     { _uapkProject :: !Text
     , _uapkPayload :: !PublicKey
     , _uapkUser    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersAddPublicKey'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersAddPublicKey' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,35 +72,35 @@ data UsersAddPublicKey' = UsersAddPublicKey'
 -- * 'uapkPayload'
 --
 -- * 'uapkUser'
-usersAddPublicKey'
+usersAddPublicKey
     :: Text -- ^ 'uapkProject'
     -> PublicKey -- ^ 'uapkPayload'
     -> Text -- ^ 'uapkUser'
-    -> UsersAddPublicKey'
-usersAddPublicKey' pUapkProject_ pUapkPayload_ pUapkUser_ =
-    UsersAddPublicKey'
+    -> UsersAddPublicKey
+usersAddPublicKey pUapkProject_ pUapkPayload_ pUapkUser_ =
+    UsersAddPublicKey
     { _uapkProject = pUapkProject_
     , _uapkPayload = pUapkPayload_
     , _uapkUser = pUapkUser_
     }
 
 -- | Project ID for this request.
-uapkProject :: Lens' UsersAddPublicKey' Text
+uapkProject :: Lens' UsersAddPublicKey Text
 uapkProject
   = lens _uapkProject (\ s a -> s{_uapkProject = a})
 
 -- | Multipart request metadata.
-uapkPayload :: Lens' UsersAddPublicKey' PublicKey
+uapkPayload :: Lens' UsersAddPublicKey PublicKey
 uapkPayload
   = lens _uapkPayload (\ s a -> s{_uapkPayload = a})
 
 -- | Name of the user for this request.
-uapkUser :: Lens' UsersAddPublicKey' Text
+uapkUser :: Lens' UsersAddPublicKey Text
 uapkUser = lens _uapkUser (\ s a -> s{_uapkUser = a})
 
-instance GoogleRequest UsersAddPublicKey' where
-        type Rs UsersAddPublicKey' = Operation
-        requestClient UsersAddPublicKey'{..}
+instance GoogleRequest UsersAddPublicKey where
+        type Rs UsersAddPublicKey = Operation
+        requestClient UsersAddPublicKey{..}
           = go _uapkProject _uapkUser (Just AltJSON)
               _uapkPayload
               userAccountsService

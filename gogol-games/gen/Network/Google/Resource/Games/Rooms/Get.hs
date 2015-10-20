@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.Rooms.Get
       RoomsGetResource
 
     -- * Creating a Request
-    , roomsGet'
-    , RoomsGet'
+    , roomsGet
+    , RoomsGet
 
     -- * Request Lenses
     , rgRoomId
@@ -41,7 +41,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.rooms.get@ method which the
--- 'RoomsGet'' request conforms to.
+-- 'RoomsGet' request conforms to.
 type RoomsGetResource =
      "rooms" :>
        Capture "roomId" Text :>
@@ -50,40 +50,40 @@ type RoomsGetResource =
 
 -- | Get the data for a room.
 --
--- /See:/ 'roomsGet'' smart constructor.
-data RoomsGet' = RoomsGet'
+-- /See:/ 'roomsGet' smart constructor.
+data RoomsGet = RoomsGet
     { _rgRoomId   :: !Text
     , _rgLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoomsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'RoomsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rgRoomId'
 --
 -- * 'rgLanguage'
-roomsGet'
+roomsGet
     :: Text -- ^ 'rgRoomId'
-    -> RoomsGet'
-roomsGet' pRgRoomId_ =
-    RoomsGet'
+    -> RoomsGet
+roomsGet pRgRoomId_ =
+    RoomsGet
     { _rgRoomId = pRgRoomId_
     , _rgLanguage = Nothing
     }
 
 -- | The ID of the room.
-rgRoomId :: Lens' RoomsGet' Text
+rgRoomId :: Lens' RoomsGet Text
 rgRoomId = lens _rgRoomId (\ s a -> s{_rgRoomId = a})
 
 -- | The preferred language to use for strings returned by this method.
-rgLanguage :: Lens' RoomsGet' (Maybe Text)
+rgLanguage :: Lens' RoomsGet (Maybe Text)
 rgLanguage
   = lens _rgLanguage (\ s a -> s{_rgLanguage = a})
 
-instance GoogleRequest RoomsGet' where
-        type Rs RoomsGet' = Room
-        requestClient RoomsGet'{..}
+instance GoogleRequest RoomsGet where
+        type Rs RoomsGet = Room
+        requestClient RoomsGet{..}
           = go _rgRoomId _rgLanguage (Just AltJSON)
               gamesService
           where go

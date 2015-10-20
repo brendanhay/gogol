@@ -29,19 +29,19 @@ module Network.Google.Resource.Content.Accountstatuses.Get
       AccountstatusesGetResource
 
     -- * Creating a Request
-    , accountstatusesGet'
-    , AccountstatusesGet'
+    , accountstatusesGet
+    , AccountstatusesGet
 
     -- * Request Lenses
-    , accMerchantId
-    , accAccountId
+    , ag1MerchantId
+    , ag1AccountId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accountstatuses.get@ method which the
--- 'AccountstatusesGet'' request conforms to.
+-- 'AccountstatusesGet' request conforms to.
 type AccountstatusesGetResource =
      Capture "merchantId" Word64 :>
        "accountstatuses" :>
@@ -50,44 +50,44 @@ type AccountstatusesGetResource =
 
 -- | Retrieves the status of a Merchant Center account.
 --
--- /See:/ 'accountstatusesGet'' smart constructor.
-data AccountstatusesGet' = AccountstatusesGet'
-    { _accMerchantId :: !Word64
-    , _accAccountId  :: !Word64
+-- /See:/ 'accountstatusesGet' smart constructor.
+data AccountstatusesGet = AccountstatusesGet
+    { _ag1MerchantId :: !Word64
+    , _ag1AccountId  :: !Word64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountstatusesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountstatusesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'accMerchantId'
+-- * 'ag1MerchantId'
 --
--- * 'accAccountId'
-accountstatusesGet'
-    :: Word64 -- ^ 'accMerchantId'
-    -> Word64 -- ^ 'accAccountId'
-    -> AccountstatusesGet'
-accountstatusesGet' pAccMerchantId_ pAccAccountId_ =
-    AccountstatusesGet'
-    { _accMerchantId = pAccMerchantId_
-    , _accAccountId = pAccAccountId_
+-- * 'ag1AccountId'
+accountstatusesGet
+    :: Word64 -- ^ 'ag1MerchantId'
+    -> Word64 -- ^ 'ag1AccountId'
+    -> AccountstatusesGet
+accountstatusesGet pAg1MerchantId_ pAg1AccountId_ =
+    AccountstatusesGet
+    { _ag1MerchantId = pAg1MerchantId_
+    , _ag1AccountId = pAg1AccountId_
     }
 
 -- | The ID of the managing account.
-accMerchantId :: Lens' AccountstatusesGet' Word64
-accMerchantId
-  = lens _accMerchantId
-      (\ s a -> s{_accMerchantId = a})
+ag1MerchantId :: Lens' AccountstatusesGet Word64
+ag1MerchantId
+  = lens _ag1MerchantId
+      (\ s a -> s{_ag1MerchantId = a})
 
 -- | The ID of the account.
-accAccountId :: Lens' AccountstatusesGet' Word64
-accAccountId
-  = lens _accAccountId (\ s a -> s{_accAccountId = a})
+ag1AccountId :: Lens' AccountstatusesGet Word64
+ag1AccountId
+  = lens _ag1AccountId (\ s a -> s{_ag1AccountId = a})
 
-instance GoogleRequest AccountstatusesGet' where
-        type Rs AccountstatusesGet' = AccountStatus
-        requestClient AccountstatusesGet'{..}
-          = go _accMerchantId _accAccountId (Just AltJSON)
+instance GoogleRequest AccountstatusesGet where
+        type Rs AccountstatusesGet = AccountStatus
+        requestClient AccountstatusesGet{..}
+          = go _ag1MerchantId _ag1AccountId (Just AltJSON)
               shoppingContentService
           where go
                   = buildClient

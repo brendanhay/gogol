@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSense.Alerts.List
       AlertsListResource
 
     -- * Creating a Request
-    , alertsList'
-    , AlertsList'
+    , alertsList
+    , AlertsList
 
     -- * Request Lenses
     , alLocale
@@ -40,7 +40,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.alerts.list@ method which the
--- 'AlertsList'' request conforms to.
+-- 'AlertsList' request conforms to.
 type AlertsListResource =
      "alerts" :>
        QueryParam "locale" Text :>
@@ -48,32 +48,32 @@ type AlertsListResource =
 
 -- | List the alerts for this AdSense account.
 --
--- /See:/ 'alertsList'' smart constructor.
-newtype AlertsList' = AlertsList'
+-- /See:/ 'alertsList' smart constructor.
+newtype AlertsList = AlertsList
     { _alLocale :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AlertsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AlertsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'alLocale'
-alertsList'
-    :: AlertsList'
-alertsList' =
-    AlertsList'
+alertsList
+    :: AlertsList
+alertsList =
+    AlertsList
     { _alLocale = Nothing
     }
 
 -- | The locale to use for translating alert messages. The account locale
 -- will be used if this is not supplied. The AdSense default (English) will
 -- be used if the supplied locale is invalid or unsupported.
-alLocale :: Lens' AlertsList' (Maybe Text)
+alLocale :: Lens' AlertsList (Maybe Text)
 alLocale = lens _alLocale (\ s a -> s{_alLocale = a})
 
-instance GoogleRequest AlertsList' where
-        type Rs AlertsList' = Alerts
-        requestClient AlertsList'{..}
+instance GoogleRequest AlertsList where
+        type Rs AlertsList = Alerts
+        requestClient AlertsList{..}
           = go _alLocale (Just AltJSON) adSenseService
           where go
                   = buildClient (Proxy :: Proxy AlertsListResource)

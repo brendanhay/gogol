@@ -29,18 +29,18 @@ module Network.Google.Resource.Content.Productstatuses.Custombatch
       ProductstatusesCustombatchResource
 
     -- * Creating a Request
-    , productstatusesCustombatch'
-    , ProductstatusesCustombatch'
+    , productstatusesCustombatch
+    , ProductstatusesCustombatch
 
     -- * Request Lenses
-    , pcPayload
+    , pPayload
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.productstatuses.custombatch@ method which the
--- 'ProductstatusesCustombatch'' request conforms to.
+-- 'ProductstatusesCustombatch' request conforms to.
 type ProductstatusesCustombatchResource =
      "productstatuses" :>
        "batch" :>
@@ -50,35 +50,34 @@ type ProductstatusesCustombatchResource =
 
 -- | Gets the statuses of multiple products in a single request.
 --
--- /See:/ 'productstatusesCustombatch'' smart constructor.
-newtype ProductstatusesCustombatch' = ProductstatusesCustombatch'
-    { _pcPayload :: ProductstatusesCustomBatchRequest
+-- /See:/ 'productstatusesCustombatch' smart constructor.
+newtype ProductstatusesCustombatch = ProductstatusesCustombatch
+    { _pPayload :: ProductstatusesCustomBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductstatusesCustombatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProductstatusesCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pcPayload'
-productstatusesCustombatch'
-    :: ProductstatusesCustomBatchRequest -- ^ 'pcPayload'
-    -> ProductstatusesCustombatch'
-productstatusesCustombatch' pPcPayload_ =
-    ProductstatusesCustombatch'
-    { _pcPayload = pPcPayload_
+-- * 'pPayload'
+productstatusesCustombatch
+    :: ProductstatusesCustomBatchRequest -- ^ 'pPayload'
+    -> ProductstatusesCustombatch
+productstatusesCustombatch pPPayload_ =
+    ProductstatusesCustombatch
+    { _pPayload = pPPayload_
     }
 
 -- | Multipart request metadata.
-pcPayload :: Lens' ProductstatusesCustombatch' ProductstatusesCustomBatchRequest
-pcPayload
-  = lens _pcPayload (\ s a -> s{_pcPayload = a})
+pPayload :: Lens' ProductstatusesCustombatch ProductstatusesCustomBatchRequest
+pPayload = lens _pPayload (\ s a -> s{_pPayload = a})
 
-instance GoogleRequest ProductstatusesCustombatch'
+instance GoogleRequest ProductstatusesCustombatch
          where
-        type Rs ProductstatusesCustombatch' =
+        type Rs ProductstatusesCustombatch =
              ProductstatusesCustomBatchResponse
-        requestClient ProductstatusesCustombatch'{..}
-          = go (Just AltJSON) _pcPayload shoppingContentService
+        requestClient ProductstatusesCustombatch{..}
+          = go (Just AltJSON) _pPayload shoppingContentService
           where go
                   = buildClient
                       (Proxy :: Proxy ProductstatusesCustombatchResource)

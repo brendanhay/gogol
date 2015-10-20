@@ -29,20 +29,20 @@ module Network.Google.Resource.Content.Accounts.Insert
       AccountsInsertResource
 
     -- * Creating a Request
-    , accountsInsert'
-    , AccountsInsert'
+    , accountsInsert
+    , AccountsInsert
 
     -- * Request Lenses
-    , aiiMerchantId
-    , aiiPayload
-    , aiiDryRun
+    , aMerchantId
+    , aPayload
+    , aDryRun
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accounts.insert@ method which the
--- 'AccountsInsert'' request conforms to.
+-- 'AccountsInsert' request conforms to.
 type AccountsInsertResource =
      Capture "merchantId" Word64 :>
        "accounts" :>
@@ -52,54 +52,50 @@ type AccountsInsertResource =
 
 -- | Creates a Merchant Center sub-account.
 --
--- /See:/ 'accountsInsert'' smart constructor.
-data AccountsInsert' = AccountsInsert'
-    { _aiiMerchantId :: !Word64
-    , _aiiPayload    :: !Account
-    , _aiiDryRun     :: !(Maybe Bool)
+-- /See:/ 'accountsInsert' smart constructor.
+data AccountsInsert = AccountsInsert
+    { _aMerchantId :: !Word64
+    , _aPayload    :: !Account
+    , _aDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aiiMerchantId'
+-- * 'aMerchantId'
 --
--- * 'aiiPayload'
+-- * 'aPayload'
 --
--- * 'aiiDryRun'
-accountsInsert'
-    :: Word64 -- ^ 'aiiMerchantId'
-    -> Account -- ^ 'aiiPayload'
-    -> AccountsInsert'
-accountsInsert' pAiiMerchantId_ pAiiPayload_ =
-    AccountsInsert'
-    { _aiiMerchantId = pAiiMerchantId_
-    , _aiiPayload = pAiiPayload_
-    , _aiiDryRun = Nothing
+-- * 'aDryRun'
+accountsInsert
+    :: Word64 -- ^ 'aMerchantId'
+    -> Account -- ^ 'aPayload'
+    -> AccountsInsert
+accountsInsert pAMerchantId_ pAPayload_ =
+    AccountsInsert
+    { _aMerchantId = pAMerchantId_
+    , _aPayload = pAPayload_
+    , _aDryRun = Nothing
     }
 
 -- | The ID of the managing account.
-aiiMerchantId :: Lens' AccountsInsert' Word64
-aiiMerchantId
-  = lens _aiiMerchantId
-      (\ s a -> s{_aiiMerchantId = a})
+aMerchantId :: Lens' AccountsInsert Word64
+aMerchantId
+  = lens _aMerchantId (\ s a -> s{_aMerchantId = a})
 
 -- | Multipart request metadata.
-aiiPayload :: Lens' AccountsInsert' Account
-aiiPayload
-  = lens _aiiPayload (\ s a -> s{_aiiPayload = a})
+aPayload :: Lens' AccountsInsert Account
+aPayload = lens _aPayload (\ s a -> s{_aPayload = a})
 
 -- | Flag to run the request in dry-run mode.
-aiiDryRun :: Lens' AccountsInsert' (Maybe Bool)
-aiiDryRun
-  = lens _aiiDryRun (\ s a -> s{_aiiDryRun = a})
+aDryRun :: Lens' AccountsInsert (Maybe Bool)
+aDryRun = lens _aDryRun (\ s a -> s{_aDryRun = a})
 
-instance GoogleRequest AccountsInsert' where
-        type Rs AccountsInsert' = Account
-        requestClient AccountsInsert'{..}
-          = go _aiiMerchantId _aiiDryRun (Just AltJSON)
-              _aiiPayload
+instance GoogleRequest AccountsInsert where
+        type Rs AccountsInsert = Account
+        requestClient AccountsInsert{..}
+          = go _aMerchantId _aDryRun (Just AltJSON) _aPayload
               shoppingContentService
           where go
                   = buildClient (Proxy :: Proxy AccountsInsertResource)

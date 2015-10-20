@@ -29,19 +29,19 @@ module Network.Google.Resource.MapsEngine.Layers.Patch
       LayersPatchResource
 
     -- * Creating a Request
-    , layersPatch'
-    , LayersPatch'
+    , layersPatch
+    , LayersPatch
 
     -- * Request Lenses
-    , layPayload
-    , layId
+    , lppPayload
+    , lppId
     ) where
 
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.layers.patch@ method which the
--- 'LayersPatch'' request conforms to.
+-- 'LayersPatch' request conforms to.
 type LayersPatchResource =
      "layers" :>
        Capture "id" Text :>
@@ -50,42 +50,42 @@ type LayersPatchResource =
 
 -- | Mutate a layer asset.
 --
--- /See:/ 'layersPatch'' smart constructor.
-data LayersPatch' = LayersPatch'
-    { _layPayload :: !Layer
-    , _layId      :: !Text
+-- /See:/ 'layersPatch' smart constructor.
+data LayersPatch = LayersPatch
+    { _lppPayload :: !Layer
+    , _lppId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'layPayload'
+-- * 'lppPayload'
 --
--- * 'layId'
-layersPatch'
-    :: Layer -- ^ 'layPayload'
-    -> Text -- ^ 'layId'
-    -> LayersPatch'
-layersPatch' pLayPayload_ pLayId_ =
-    LayersPatch'
-    { _layPayload = pLayPayload_
-    , _layId = pLayId_
+-- * 'lppId'
+layersPatch
+    :: Layer -- ^ 'lppPayload'
+    -> Text -- ^ 'lppId'
+    -> LayersPatch
+layersPatch pLppPayload_ pLppId_ =
+    LayersPatch
+    { _lppPayload = pLppPayload_
+    , _lppId = pLppId_
     }
 
 -- | Multipart request metadata.
-layPayload :: Lens' LayersPatch' Layer
-layPayload
-  = lens _layPayload (\ s a -> s{_layPayload = a})
+lppPayload :: Lens' LayersPatch Layer
+lppPayload
+  = lens _lppPayload (\ s a -> s{_lppPayload = a})
 
 -- | The ID of the layer.
-layId :: Lens' LayersPatch' Text
-layId = lens _layId (\ s a -> s{_layId = a})
+lppId :: Lens' LayersPatch Text
+lppId = lens _lppId (\ s a -> s{_lppId = a})
 
-instance GoogleRequest LayersPatch' where
-        type Rs LayersPatch' = ()
-        requestClient LayersPatch'{..}
-          = go _layId (Just AltJSON) _layPayload
+instance GoogleRequest LayersPatch where
+        type Rs LayersPatch = ()
+        requestClient LayersPatch{..}
+          = go _lppId (Just AltJSON) _lppPayload
               mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy LayersPatchResource)

@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
       TargetableRemarketingListsListResource
 
     -- * Creating a Request
-    , targetableRemarketingListsList'
-    , TargetableRemarketingListsList'
+    , targetableRemarketingListsList
+    , TargetableRemarketingListsList
 
     -- * Request Lenses
     , trllAdvertiserId
@@ -47,7 +47,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.targetableRemarketingLists.list@ method which the
--- 'TargetableRemarketingListsList'' request conforms to.
+-- 'TargetableRemarketingListsList' request conforms to.
 type TargetableRemarketingListsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -68,8 +68,8 @@ type TargetableRemarketingListsListResource =
 
 -- | Retrieves a list of targetable remarketing lists, possibly filtered.
 --
--- /See:/ 'targetableRemarketingListsList'' smart constructor.
-data TargetableRemarketingListsList' = TargetableRemarketingListsList'
+-- /See:/ 'targetableRemarketingListsList' smart constructor.
+data TargetableRemarketingListsList = TargetableRemarketingListsList
     { _trllAdvertiserId :: !Int64
     , _trllProFileId    :: !Int64
     , _trllSortOrder    :: !(Maybe TargetableRemarketingListsListSortOrder)
@@ -80,7 +80,7 @@ data TargetableRemarketingListsList' = TargetableRemarketingListsList'
     , _trllMaxResults   :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetableRemarketingListsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetableRemarketingListsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -99,12 +99,12 @@ data TargetableRemarketingListsList' = TargetableRemarketingListsList'
 -- * 'trllSortField'
 --
 -- * 'trllMaxResults'
-targetableRemarketingListsList'
+targetableRemarketingListsList
     :: Int64 -- ^ 'trllAdvertiserId'
     -> Int64 -- ^ 'trllProFileId'
-    -> TargetableRemarketingListsList'
-targetableRemarketingListsList' pTrllAdvertiserId_ pTrllProFileId_ =
-    TargetableRemarketingListsList'
+    -> TargetableRemarketingListsList
+targetableRemarketingListsList pTrllAdvertiserId_ pTrllProFileId_ =
+    TargetableRemarketingListsList
     { _trllAdvertiserId = pTrllAdvertiserId_
     , _trllProFileId = pTrllProFileId_
     , _trllSortOrder = Nothing
@@ -117,25 +117,25 @@ targetableRemarketingListsList' pTrllAdvertiserId_ pTrllProFileId_ =
 
 -- | Select only targetable remarketing lists targetable by these
 -- advertisers.
-trllAdvertiserId :: Lens' TargetableRemarketingListsList' Int64
+trllAdvertiserId :: Lens' TargetableRemarketingListsList Int64
 trllAdvertiserId
   = lens _trllAdvertiserId
       (\ s a -> s{_trllAdvertiserId = a})
 
 -- | User profile ID associated with this request.
-trllProFileId :: Lens' TargetableRemarketingListsList' Int64
+trllProFileId :: Lens' TargetableRemarketingListsList Int64
 trllProFileId
   = lens _trllProFileId
       (\ s a -> s{_trllProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-trllSortOrder :: Lens' TargetableRemarketingListsList' (Maybe TargetableRemarketingListsListSortOrder)
+trllSortOrder :: Lens' TargetableRemarketingListsList (Maybe TargetableRemarketingListsListSortOrder)
 trllSortOrder
   = lens _trllSortOrder
       (\ s a -> s{_trllSortOrder = a})
 
 -- | Select only active or only inactive targetable remarketing lists.
-trllActive :: Lens' TargetableRemarketingListsList' (Maybe Bool)
+trllActive :: Lens' TargetableRemarketingListsList (Maybe Bool)
 trllActive
   = lens _trllActive (\ s a -> s{_trllActive = a})
 
@@ -147,32 +147,32 @@ trllActive
 -- example, a search string of \"remarketing list\" will match objects with
 -- name \"my remarketing list\", \"remarketing list 2015\", or simply
 -- \"remarketing list\".
-trllName :: Lens' TargetableRemarketingListsList' (Maybe Text)
+trllName :: Lens' TargetableRemarketingListsList (Maybe Text)
 trllName = lens _trllName (\ s a -> s{_trllName = a})
 
 -- | Value of the nextPageToken from the previous result page.
-trllPageToken :: Lens' TargetableRemarketingListsList' (Maybe Text)
+trllPageToken :: Lens' TargetableRemarketingListsList (Maybe Text)
 trllPageToken
   = lens _trllPageToken
       (\ s a -> s{_trllPageToken = a})
 
 -- | Field by which to sort the list.
-trllSortField :: Lens' TargetableRemarketingListsList' (Maybe TargetableRemarketingListsListSortField)
+trllSortField :: Lens' TargetableRemarketingListsList (Maybe TargetableRemarketingListsListSortField)
 trllSortField
   = lens _trllSortField
       (\ s a -> s{_trllSortField = a})
 
 -- | Maximum number of results to return.
-trllMaxResults :: Lens' TargetableRemarketingListsList' (Maybe Int32)
+trllMaxResults :: Lens' TargetableRemarketingListsList (Maybe Int32)
 trllMaxResults
   = lens _trllMaxResults
       (\ s a -> s{_trllMaxResults = a})
 
-instance GoogleRequest
-         TargetableRemarketingListsList' where
-        type Rs TargetableRemarketingListsList' =
+instance GoogleRequest TargetableRemarketingListsList
+         where
+        type Rs TargetableRemarketingListsList =
              TargetableRemarketingListsListResponse
-        requestClient TargetableRemarketingListsList'{..}
+        requestClient TargetableRemarketingListsList{..}
           = go _trllProFileId (Just _trllAdvertiserId)
               _trllSortOrder
               _trllActive

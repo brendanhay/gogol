@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.VPNTunnels.Delete
       VPNTunnelsDeleteResource
 
     -- * Creating a Request
-    , vpnTunnelsDelete'
-    , VPNTunnelsDelete'
+    , vpnTunnelsDelete
+    , VPNTunnelsDelete
 
     -- * Request Lenses
     , vtdProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.vpnTunnels.delete@ method which the
--- 'VPNTunnelsDelete'' request conforms to.
+-- 'VPNTunnelsDelete' request conforms to.
 type VPNTunnelsDeleteResource =
      Capture "project" Text :>
        "regions" :>
@@ -53,14 +53,14 @@ type VPNTunnelsDeleteResource =
 
 -- | Deletes the specified VpnTunnel resource.
 --
--- /See:/ 'vpnTunnelsDelete'' smart constructor.
-data VPNTunnelsDelete' = VPNTunnelsDelete'
+-- /See:/ 'vpnTunnelsDelete' smart constructor.
+data VPNTunnelsDelete = VPNTunnelsDelete
     { _vtdProject   :: !Text
     , _vtdVPNTunnel :: !Text
     , _vtdRegion    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VPNTunnelsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'VPNTunnelsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,36 @@ data VPNTunnelsDelete' = VPNTunnelsDelete'
 -- * 'vtdVPNTunnel'
 --
 -- * 'vtdRegion'
-vpnTunnelsDelete'
+vpnTunnelsDelete
     :: Text -- ^ 'vtdProject'
     -> Text -- ^ 'vtdVPNTunnel'
     -> Text -- ^ 'vtdRegion'
-    -> VPNTunnelsDelete'
-vpnTunnelsDelete' pVtdProject_ pVtdVPNTunnel_ pVtdRegion_ =
-    VPNTunnelsDelete'
+    -> VPNTunnelsDelete
+vpnTunnelsDelete pVtdProject_ pVtdVPNTunnel_ pVtdRegion_ =
+    VPNTunnelsDelete
     { _vtdProject = pVtdProject_
     , _vtdVPNTunnel = pVtdVPNTunnel_
     , _vtdRegion = pVtdRegion_
     }
 
 -- | Project ID for this request.
-vtdProject :: Lens' VPNTunnelsDelete' Text
+vtdProject :: Lens' VPNTunnelsDelete Text
 vtdProject
   = lens _vtdProject (\ s a -> s{_vtdProject = a})
 
 -- | Name of the VpnTunnel resource to delete.
-vtdVPNTunnel :: Lens' VPNTunnelsDelete' Text
+vtdVPNTunnel :: Lens' VPNTunnelsDelete Text
 vtdVPNTunnel
   = lens _vtdVPNTunnel (\ s a -> s{_vtdVPNTunnel = a})
 
 -- | The name of the region for this request.
-vtdRegion :: Lens' VPNTunnelsDelete' Text
+vtdRegion :: Lens' VPNTunnelsDelete Text
 vtdRegion
   = lens _vtdRegion (\ s a -> s{_vtdRegion = a})
 
-instance GoogleRequest VPNTunnelsDelete' where
-        type Rs VPNTunnelsDelete' = Operation
-        requestClient VPNTunnelsDelete'{..}
+instance GoogleRequest VPNTunnelsDelete where
+        type Rs VPNTunnelsDelete = Operation
+        requestClient VPNTunnelsDelete{..}
           = go _vtdProject _vtdRegion _vtdVPNTunnel
               (Just AltJSON)
               computeService

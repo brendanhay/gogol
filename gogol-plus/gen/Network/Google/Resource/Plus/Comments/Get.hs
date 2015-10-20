@@ -29,8 +29,8 @@ module Network.Google.Resource.Plus.Comments.Get
       CommentsGetResource
 
     -- * Creating a Request
-    , commentsGet'
-    , CommentsGet'
+    , commentsGet
+    , CommentsGet
 
     -- * Request Lenses
     , cgCommentId
@@ -40,7 +40,7 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plus.comments.get@ method which the
--- 'CommentsGet'' request conforms to.
+-- 'CommentsGet' request conforms to.
 type CommentsGetResource =
      "comments" :>
        Capture "commentId" Text :>
@@ -48,32 +48,32 @@ type CommentsGetResource =
 
 -- | Get a comment.
 --
--- /See:/ 'commentsGet'' smart constructor.
-newtype CommentsGet' = CommentsGet'
+-- /See:/ 'commentsGet' smart constructor.
+newtype CommentsGet = CommentsGet
     { _cgCommentId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cgCommentId'
-commentsGet'
+commentsGet
     :: Text -- ^ 'cgCommentId'
-    -> CommentsGet'
-commentsGet' pCgCommentId_ =
-    CommentsGet'
+    -> CommentsGet
+commentsGet pCgCommentId_ =
+    CommentsGet
     { _cgCommentId = pCgCommentId_
     }
 
 -- | The ID of the comment to get.
-cgCommentId :: Lens' CommentsGet' Text
+cgCommentId :: Lens' CommentsGet Text
 cgCommentId
   = lens _cgCommentId (\ s a -> s{_cgCommentId = a})
 
-instance GoogleRequest CommentsGet' where
-        type Rs CommentsGet' = Comment
-        requestClient CommentsGet'{..}
+instance GoogleRequest CommentsGet where
+        type Rs CommentsGet = Comment
+        requestClient CommentsGet{..}
           = go _cgCommentId (Just AltJSON) plusService
           where go
                   = buildClient (Proxy :: Proxy CommentsGetResource)

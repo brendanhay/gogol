@@ -29,8 +29,8 @@ module Network.Google.Resource.SQL.Users.Delete
       UsersDeleteResource
 
     -- * Creating a Request
-    , usersDelete'
-    , UsersDelete'
+    , usersDelete
+    , UsersDelete
 
     -- * Request Lenses
     , udProject
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.users.delete@ method which the
--- 'UsersDelete'' request conforms to.
+-- 'UsersDelete' request conforms to.
 type UsersDeleteResource =
      "projects" :>
        Capture "project" Text :>
@@ -56,15 +56,15 @@ type UsersDeleteResource =
 
 -- | Deletes a user from a Cloud SQL instance.
 --
--- /See:/ 'usersDelete'' smart constructor.
-data UsersDelete' = UsersDelete'
+-- /See:/ 'usersDelete' smart constructor.
+data UsersDelete = UsersDelete
     { _udProject  :: !Text
     , _udName     :: !Text
     , _udHost     :: !Text
     , _udInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,14 +75,14 @@ data UsersDelete' = UsersDelete'
 -- * 'udHost'
 --
 -- * 'udInstance'
-usersDelete'
+usersDelete
     :: Text -- ^ 'udProject'
     -> Text -- ^ 'udName'
     -> Text -- ^ 'udHost'
     -> Text -- ^ 'udInstance'
-    -> UsersDelete'
-usersDelete' pUdProject_ pUdName_ pUdHost_ pUdInstance_ =
-    UsersDelete'
+    -> UsersDelete
+usersDelete pUdProject_ pUdName_ pUdHost_ pUdInstance_ =
+    UsersDelete
     { _udProject = pUdProject_
     , _udName = pUdName_
     , _udHost = pUdHost_
@@ -90,26 +90,26 @@ usersDelete' pUdProject_ pUdName_ pUdHost_ pUdInstance_ =
     }
 
 -- | Project ID of the project that contains the instance.
-udProject :: Lens' UsersDelete' Text
+udProject :: Lens' UsersDelete Text
 udProject
   = lens _udProject (\ s a -> s{_udProject = a})
 
 -- | Name of the user in the instance.
-udName :: Lens' UsersDelete' Text
+udName :: Lens' UsersDelete Text
 udName = lens _udName (\ s a -> s{_udName = a})
 
 -- | Host of the user in the instance.
-udHost :: Lens' UsersDelete' Text
+udHost :: Lens' UsersDelete Text
 udHost = lens _udHost (\ s a -> s{_udHost = a})
 
 -- | Database instance ID. This does not include the project ID.
-udInstance :: Lens' UsersDelete' Text
+udInstance :: Lens' UsersDelete Text
 udInstance
   = lens _udInstance (\ s a -> s{_udInstance = a})
 
-instance GoogleRequest UsersDelete' where
-        type Rs UsersDelete' = Operation
-        requestClient UsersDelete'{..}
+instance GoogleRequest UsersDelete where
+        type Rs UsersDelete = Operation
+        requestClient UsersDelete{..}
           = go _udProject _udInstance (Just _udHost)
               (Just _udName)
               (Just AltJSON)

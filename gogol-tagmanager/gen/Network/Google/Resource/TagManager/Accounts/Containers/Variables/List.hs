@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Variables.List
       AccountsContainersVariablesListResource
 
     -- * Creating a Request
-    , accountsContainersVariablesList'
-    , AccountsContainersVariablesList'
+    , accountsContainersVariablesList
+    , AccountsContainersVariablesList
 
     -- * Request Lenses
     , acvlcContainerId
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.variables.list@ method which the
--- 'AccountsContainersVariablesList'' request conforms to.
+-- 'AccountsContainersVariablesList' request conforms to.
 type AccountsContainersVariablesListResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -53,46 +53,46 @@ type AccountsContainersVariablesListResource =
 
 -- | Lists all GTM Variables of a Container.
 --
--- /See:/ 'accountsContainersVariablesList'' smart constructor.
-data AccountsContainersVariablesList' = AccountsContainersVariablesList'
+-- /See:/ 'accountsContainersVariablesList' smart constructor.
+data AccountsContainersVariablesList = AccountsContainersVariablesList
     { _acvlcContainerId :: !Text
     , _acvlcAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersVariablesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersVariablesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'acvlcContainerId'
 --
 -- * 'acvlcAccountId'
-accountsContainersVariablesList'
+accountsContainersVariablesList
     :: Text -- ^ 'acvlcContainerId'
     -> Text -- ^ 'acvlcAccountId'
-    -> AccountsContainersVariablesList'
-accountsContainersVariablesList' pAcvlcContainerId_ pAcvlcAccountId_ =
-    AccountsContainersVariablesList'
+    -> AccountsContainersVariablesList
+accountsContainersVariablesList pAcvlcContainerId_ pAcvlcAccountId_ =
+    AccountsContainersVariablesList
     { _acvlcContainerId = pAcvlcContainerId_
     , _acvlcAccountId = pAcvlcAccountId_
     }
 
 -- | The GTM Container ID.
-acvlcContainerId :: Lens' AccountsContainersVariablesList' Text
+acvlcContainerId :: Lens' AccountsContainersVariablesList Text
 acvlcContainerId
   = lens _acvlcContainerId
       (\ s a -> s{_acvlcContainerId = a})
 
 -- | The GTM Account ID.
-acvlcAccountId :: Lens' AccountsContainersVariablesList' Text
+acvlcAccountId :: Lens' AccountsContainersVariablesList Text
 acvlcAccountId
   = lens _acvlcAccountId
       (\ s a -> s{_acvlcAccountId = a})
 
 instance GoogleRequest
-         AccountsContainersVariablesList' where
-        type Rs AccountsContainersVariablesList' =
+         AccountsContainersVariablesList where
+        type Rs AccountsContainersVariablesList =
              ListVariablesResponse
-        requestClient AccountsContainersVariablesList'{..}
+        requestClient AccountsContainersVariablesList{..}
           = go _acvlcAccountId _acvlcContainerId (Just AltJSON)
               tagManagerService
           where go

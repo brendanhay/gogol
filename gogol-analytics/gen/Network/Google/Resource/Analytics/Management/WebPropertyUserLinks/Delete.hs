@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Delete
       ManagementWebPropertyUserLinksDeleteResource
 
     -- * Creating a Request
-    , managementWebPropertyUserLinksDelete'
-    , ManagementWebPropertyUserLinksDelete'
+    , managementWebPropertyUserLinksDelete
+    , ManagementWebPropertyUserLinksDelete
 
     -- * Request Lenses
     , mwpuldWebPropertyId
@@ -42,7 +42,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webpropertyUserLinks.delete@ method which the
--- 'ManagementWebPropertyUserLinksDelete'' request conforms to.
+-- 'ManagementWebPropertyUserLinksDelete' request conforms to.
 type ManagementWebPropertyUserLinksDeleteResource =
      "management" :>
        "accounts" :>
@@ -55,14 +55,14 @@ type ManagementWebPropertyUserLinksDeleteResource =
 
 -- | Removes a user from the given web property.
 --
--- /See:/ 'managementWebPropertyUserLinksDelete'' smart constructor.
-data ManagementWebPropertyUserLinksDelete' = ManagementWebPropertyUserLinksDelete'
+-- /See:/ 'managementWebPropertyUserLinksDelete' smart constructor.
+data ManagementWebPropertyUserLinksDelete = ManagementWebPropertyUserLinksDelete
     { _mwpuldWebPropertyId :: !Text
     , _mwpuldAccountId     :: !Text
     , _mwpuldLinkId        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementWebPropertyUserLinksDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementWebPropertyUserLinksDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,40 +71,40 @@ data ManagementWebPropertyUserLinksDelete' = ManagementWebPropertyUserLinksDelet
 -- * 'mwpuldAccountId'
 --
 -- * 'mwpuldLinkId'
-managementWebPropertyUserLinksDelete'
+managementWebPropertyUserLinksDelete
     :: Text -- ^ 'mwpuldWebPropertyId'
     -> Text -- ^ 'mwpuldAccountId'
     -> Text -- ^ 'mwpuldLinkId'
-    -> ManagementWebPropertyUserLinksDelete'
-managementWebPropertyUserLinksDelete' pMwpuldWebPropertyId_ pMwpuldAccountId_ pMwpuldLinkId_ =
-    ManagementWebPropertyUserLinksDelete'
+    -> ManagementWebPropertyUserLinksDelete
+managementWebPropertyUserLinksDelete pMwpuldWebPropertyId_ pMwpuldAccountId_ pMwpuldLinkId_ =
+    ManagementWebPropertyUserLinksDelete
     { _mwpuldWebPropertyId = pMwpuldWebPropertyId_
     , _mwpuldAccountId = pMwpuldAccountId_
     , _mwpuldLinkId = pMwpuldLinkId_
     }
 
 -- | Web Property ID to delete the user link for.
-mwpuldWebPropertyId :: Lens' ManagementWebPropertyUserLinksDelete' Text
+mwpuldWebPropertyId :: Lens' ManagementWebPropertyUserLinksDelete Text
 mwpuldWebPropertyId
   = lens _mwpuldWebPropertyId
       (\ s a -> s{_mwpuldWebPropertyId = a})
 
 -- | Account ID to delete the user link for.
-mwpuldAccountId :: Lens' ManagementWebPropertyUserLinksDelete' Text
+mwpuldAccountId :: Lens' ManagementWebPropertyUserLinksDelete Text
 mwpuldAccountId
   = lens _mwpuldAccountId
       (\ s a -> s{_mwpuldAccountId = a})
 
 -- | Link ID to delete the user link for.
-mwpuldLinkId :: Lens' ManagementWebPropertyUserLinksDelete' Text
+mwpuldLinkId :: Lens' ManagementWebPropertyUserLinksDelete Text
 mwpuldLinkId
   = lens _mwpuldLinkId (\ s a -> s{_mwpuldLinkId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyUserLinksDelete' where
-        type Rs ManagementWebPropertyUserLinksDelete' = ()
+         ManagementWebPropertyUserLinksDelete where
+        type Rs ManagementWebPropertyUserLinksDelete = ()
         requestClient
-          ManagementWebPropertyUserLinksDelete'{..}
+          ManagementWebPropertyUserLinksDelete{..}
           = go _mwpuldAccountId _mwpuldWebPropertyId
               _mwpuldLinkId
               (Just AltJSON)

@@ -32,8 +32,8 @@ module Network.Google.Resource.SQL.Instances.ResetSSLConfig
       InstancesResetSSLConfigResource
 
     -- * Creating a Request
-    , instancesResetSSLConfig'
-    , InstancesResetSSLConfig'
+    , instancesResetSSLConfig
+    , InstancesResetSSLConfig
 
     -- * Request Lenses
     , irscProject
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.resetSslConfig@ method which the
--- 'InstancesResetSSLConfig'' request conforms to.
+-- 'InstancesResetSSLConfig' request conforms to.
 type InstancesResetSSLConfigResource =
      "projects" :>
        Capture "project" Text :>
@@ -58,42 +58,42 @@ type InstancesResetSSLConfigResource =
 -- instance is restarted. Existing instances without a server certificate
 -- will need to call this once to set a server certificate.
 --
--- /See:/ 'instancesResetSSLConfig'' smart constructor.
-data InstancesResetSSLConfig' = InstancesResetSSLConfig'
+-- /See:/ 'instancesResetSSLConfig' smart constructor.
+data InstancesResetSSLConfig = InstancesResetSSLConfig
     { _irscProject  :: !Text
     , _irscInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesResetSSLConfig'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesResetSSLConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'irscProject'
 --
 -- * 'irscInstance'
-instancesResetSSLConfig'
+instancesResetSSLConfig
     :: Text -- ^ 'irscProject'
     -> Text -- ^ 'irscInstance'
-    -> InstancesResetSSLConfig'
-instancesResetSSLConfig' pIrscProject_ pIrscInstance_ =
-    InstancesResetSSLConfig'
+    -> InstancesResetSSLConfig
+instancesResetSSLConfig pIrscProject_ pIrscInstance_ =
+    InstancesResetSSLConfig
     { _irscProject = pIrscProject_
     , _irscInstance = pIrscInstance_
     }
 
 -- | Project ID of the project that contains the instance.
-irscProject :: Lens' InstancesResetSSLConfig' Text
+irscProject :: Lens' InstancesResetSSLConfig Text
 irscProject
   = lens _irscProject (\ s a -> s{_irscProject = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-irscInstance :: Lens' InstancesResetSSLConfig' Text
+irscInstance :: Lens' InstancesResetSSLConfig Text
 irscInstance
   = lens _irscInstance (\ s a -> s{_irscInstance = a})
 
-instance GoogleRequest InstancesResetSSLConfig' where
-        type Rs InstancesResetSSLConfig' = Operation
-        requestClient InstancesResetSSLConfig'{..}
+instance GoogleRequest InstancesResetSSLConfig where
+        type Rs InstancesResetSSLConfig = Operation
+        requestClient InstancesResetSSLConfig{..}
           = go _irscProject _irscInstance (Just AltJSON)
               sQLAdminService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Mirror.Subscriptions.Update
       SubscriptionsUpdateResource
 
     -- * Creating a Request
-    , subscriptionsUpdate'
-    , SubscriptionsUpdate'
+    , subscriptionsUpdate
+    , SubscriptionsUpdate
 
     -- * Request Lenses
     , suPayload
@@ -41,7 +41,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.subscriptions.update@ method which the
--- 'SubscriptionsUpdate'' request conforms to.
+-- 'SubscriptionsUpdate' request conforms to.
 type SubscriptionsUpdateResource =
      "subscriptions" :>
        Capture "id" Text :>
@@ -51,41 +51,41 @@ type SubscriptionsUpdateResource =
 
 -- | Updates an existing subscription in place.
 --
--- /See:/ 'subscriptionsUpdate'' smart constructor.
-data SubscriptionsUpdate' = SubscriptionsUpdate'
+-- /See:/ 'subscriptionsUpdate' smart constructor.
+data SubscriptionsUpdate = SubscriptionsUpdate
     { _suPayload :: !Subscription
     , _suId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubscriptionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'suPayload'
 --
 -- * 'suId'
-subscriptionsUpdate'
+subscriptionsUpdate
     :: Subscription -- ^ 'suPayload'
     -> Text -- ^ 'suId'
-    -> SubscriptionsUpdate'
-subscriptionsUpdate' pSuPayload_ pSuId_ =
-    SubscriptionsUpdate'
+    -> SubscriptionsUpdate
+subscriptionsUpdate pSuPayload_ pSuId_ =
+    SubscriptionsUpdate
     { _suPayload = pSuPayload_
     , _suId = pSuId_
     }
 
 -- | Multipart request metadata.
-suPayload :: Lens' SubscriptionsUpdate' Subscription
+suPayload :: Lens' SubscriptionsUpdate Subscription
 suPayload
   = lens _suPayload (\ s a -> s{_suPayload = a})
 
 -- | The ID of the subscription.
-suId :: Lens' SubscriptionsUpdate' Text
+suId :: Lens' SubscriptionsUpdate Text
 suId = lens _suId (\ s a -> s{_suId = a})
 
-instance GoogleRequest SubscriptionsUpdate' where
-        type Rs SubscriptionsUpdate' = Subscription
-        requestClient SubscriptionsUpdate'{..}
+instance GoogleRequest SubscriptionsUpdate where
+        type Rs SubscriptionsUpdate = Subscription
+        requestClient SubscriptionsUpdate{..}
           = go _suId (Just AltJSON) _suPayload mirrorService
           where go
                   = buildClient

@@ -30,8 +30,8 @@ module Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
       BeaconInfoGetforObservedResource
 
     -- * Creating a Request
-    , beaconInfoGetforObserved'
-    , BeaconInfoGetforObserved'
+    , beaconInfoGetforObserved
+    , BeaconInfoGetforObserved
 
     -- * Request Lenses
     , bigoXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beaconinfo.getforobserved@ method which the
--- 'BeaconInfoGetforObserved'' request conforms to.
+-- 'BeaconInfoGetforObserved' request conforms to.
 type BeaconInfoGetforObservedResource =
      "v1beta1" :>
        "beaconinfo:getforobserved" :>
@@ -66,8 +66,8 @@ type BeaconInfoGetforObservedResource =
 -- | Given one or more beacon observations, returns any beacon information
 -- and attachments accessible to your application.
 --
--- /See:/ 'beaconInfoGetforObserved'' smart constructor.
-data BeaconInfoGetforObserved' = BeaconInfoGetforObserved'
+-- /See:/ 'beaconInfoGetforObserved' smart constructor.
+data BeaconInfoGetforObserved = BeaconInfoGetforObserved
     { _bigoXgafv          :: !(Maybe Text)
     , _bigoUploadProtocol :: !(Maybe Text)
     , _bigoPp             :: !Bool
@@ -78,7 +78,7 @@ data BeaconInfoGetforObserved' = BeaconInfoGetforObserved'
     , _bigoCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BeaconInfoGetforObserved'' with the minimum fields required to make a request.
+-- | Creates a value of 'BeaconInfoGetforObserved' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -97,11 +97,11 @@ data BeaconInfoGetforObserved' = BeaconInfoGetforObserved'
 -- * 'bigoBearerToken'
 --
 -- * 'bigoCallback'
-beaconInfoGetforObserved'
+beaconInfoGetforObserved
     :: GetInfoForObservedBeaconsRequest -- ^ 'bigoPayload'
-    -> BeaconInfoGetforObserved'
-beaconInfoGetforObserved' pBigoPayload_ =
-    BeaconInfoGetforObserved'
+    -> BeaconInfoGetforObserved
+beaconInfoGetforObserved pBigoPayload_ =
+    BeaconInfoGetforObserved
     { _bigoXgafv = Nothing
     , _bigoUploadProtocol = Nothing
     , _bigoPp = True
@@ -113,53 +113,52 @@ beaconInfoGetforObserved' pBigoPayload_ =
     }
 
 -- | V1 error format.
-bigoXgafv :: Lens' BeaconInfoGetforObserved' (Maybe Text)
+bigoXgafv :: Lens' BeaconInfoGetforObserved (Maybe Text)
 bigoXgafv
   = lens _bigoXgafv (\ s a -> s{_bigoXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-bigoUploadProtocol :: Lens' BeaconInfoGetforObserved' (Maybe Text)
+bigoUploadProtocol :: Lens' BeaconInfoGetforObserved (Maybe Text)
 bigoUploadProtocol
   = lens _bigoUploadProtocol
       (\ s a -> s{_bigoUploadProtocol = a})
 
 -- | Pretty-print response.
-bigoPp :: Lens' BeaconInfoGetforObserved' Bool
+bigoPp :: Lens' BeaconInfoGetforObserved Bool
 bigoPp = lens _bigoPp (\ s a -> s{_bigoPp = a})
 
 -- | OAuth access token.
-bigoAccessToken :: Lens' BeaconInfoGetforObserved' (Maybe Text)
+bigoAccessToken :: Lens' BeaconInfoGetforObserved (Maybe Text)
 bigoAccessToken
   = lens _bigoAccessToken
       (\ s a -> s{_bigoAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-bigoUploadType :: Lens' BeaconInfoGetforObserved' (Maybe Text)
+bigoUploadType :: Lens' BeaconInfoGetforObserved (Maybe Text)
 bigoUploadType
   = lens _bigoUploadType
       (\ s a -> s{_bigoUploadType = a})
 
 -- | Multipart request metadata.
-bigoPayload :: Lens' BeaconInfoGetforObserved' GetInfoForObservedBeaconsRequest
+bigoPayload :: Lens' BeaconInfoGetforObserved GetInfoForObservedBeaconsRequest
 bigoPayload
   = lens _bigoPayload (\ s a -> s{_bigoPayload = a})
 
 -- | OAuth bearer token.
-bigoBearerToken :: Lens' BeaconInfoGetforObserved' (Maybe Text)
+bigoBearerToken :: Lens' BeaconInfoGetforObserved (Maybe Text)
 bigoBearerToken
   = lens _bigoBearerToken
       (\ s a -> s{_bigoBearerToken = a})
 
 -- | JSONP
-bigoCallback :: Lens' BeaconInfoGetforObserved' (Maybe Text)
+bigoCallback :: Lens' BeaconInfoGetforObserved (Maybe Text)
 bigoCallback
   = lens _bigoCallback (\ s a -> s{_bigoCallback = a})
 
-instance GoogleRequest BeaconInfoGetforObserved'
-         where
-        type Rs BeaconInfoGetforObserved' =
+instance GoogleRequest BeaconInfoGetforObserved where
+        type Rs BeaconInfoGetforObserved =
              GetInfoForObservedBeaconsResponse
-        requestClient BeaconInfoGetforObserved'{..}
+        requestClient BeaconInfoGetforObserved{..}
           = go _bigoXgafv _bigoUploadProtocol (Just _bigoPp)
               _bigoAccessToken
               _bigoUploadType

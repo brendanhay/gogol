@@ -29,8 +29,8 @@ module Network.Google.Resource.TaskQueue.Taskqueues.Get
       TaskqueuesGetResource
 
     -- * Creating a Request
-    , taskqueuesGet'
-    , TaskqueuesGet'
+    , taskqueuesGet
+    , TaskqueuesGet
 
     -- * Request Lenses
     , tasTaskqueue
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
 -- | A resource alias for @taskqueue.taskqueues.get@ method which the
--- 'TaskqueuesGet'' request conforms to.
+-- 'TaskqueuesGet' request conforms to.
 type TaskqueuesGetResource =
      Capture "project" Text :>
        "taskqueues" :>
@@ -52,14 +52,14 @@ type TaskqueuesGetResource =
 
 -- | Get detailed information about a TaskQueue.
 --
--- /See:/ 'taskqueuesGet'' smart constructor.
-data TaskqueuesGet' = TaskqueuesGet'
+-- /See:/ 'taskqueuesGet' smart constructor.
+data TaskqueuesGet = TaskqueuesGet
     { _tasTaskqueue :: !Text
     , _tasProject   :: !Text
     , _tasGetStats  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TaskqueuesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TaskqueuesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,35 +68,35 @@ data TaskqueuesGet' = TaskqueuesGet'
 -- * 'tasProject'
 --
 -- * 'tasGetStats'
-taskqueuesGet'
+taskqueuesGet
     :: Text -- ^ 'tasTaskqueue'
     -> Text -- ^ 'tasProject'
-    -> TaskqueuesGet'
-taskqueuesGet' pTasTaskqueue_ pTasProject_ =
-    TaskqueuesGet'
+    -> TaskqueuesGet
+taskqueuesGet pTasTaskqueue_ pTasProject_ =
+    TaskqueuesGet
     { _tasTaskqueue = pTasTaskqueue_
     , _tasProject = pTasProject_
     , _tasGetStats = Nothing
     }
 
 -- | The id of the taskqueue to get the properties of.
-tasTaskqueue :: Lens' TaskqueuesGet' Text
+tasTaskqueue :: Lens' TaskqueuesGet Text
 tasTaskqueue
   = lens _tasTaskqueue (\ s a -> s{_tasTaskqueue = a})
 
 -- | The project under which the queue lies.
-tasProject :: Lens' TaskqueuesGet' Text
+tasProject :: Lens' TaskqueuesGet Text
 tasProject
   = lens _tasProject (\ s a -> s{_tasProject = a})
 
 -- | Whether to get stats. Optional.
-tasGetStats :: Lens' TaskqueuesGet' (Maybe Bool)
+tasGetStats :: Lens' TaskqueuesGet (Maybe Bool)
 tasGetStats
   = lens _tasGetStats (\ s a -> s{_tasGetStats = a})
 
-instance GoogleRequest TaskqueuesGet' where
-        type Rs TaskqueuesGet' = TaskQueue
-        requestClient TaskqueuesGet'{..}
+instance GoogleRequest TaskqueuesGet where
+        type Rs TaskqueuesGet = TaskQueue
+        requestClient TaskqueuesGet{..}
           = go _tasProject _tasTaskqueue _tasGetStats
               (Just AltJSON)
               taskQueueService

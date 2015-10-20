@@ -30,8 +30,8 @@ module Network.Google.Resource.AndroidPublisher.Edits.Details.Get
       EditsDetailsGetResource
 
     -- * Creating a Request
-    , editsDetailsGet'
-    , EditsDetailsGet'
+    , editsDetailsGet
+    , EditsDetailsGet
 
     -- * Request Lenses
     , edgPackageName
@@ -42,7 +42,7 @@ import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.details.get@ method which the
--- 'EditsDetailsGet'' request conforms to.
+-- 'EditsDetailsGet' request conforms to.
 type EditsDetailsGetResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -53,44 +53,44 @@ type EditsDetailsGetResource =
 -- | Fetches app details for this edit. This includes the default language
 -- and developer support contact information.
 --
--- /See:/ 'editsDetailsGet'' smart constructor.
-data EditsDetailsGet' = EditsDetailsGet'
+-- /See:/ 'editsDetailsGet' smart constructor.
+data EditsDetailsGet = EditsDetailsGet
     { _edgPackageName :: !Text
     , _edgEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsDetailsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsDetailsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'edgPackageName'
 --
 -- * 'edgEditId'
-editsDetailsGet'
+editsDetailsGet
     :: Text -- ^ 'edgPackageName'
     -> Text -- ^ 'edgEditId'
-    -> EditsDetailsGet'
-editsDetailsGet' pEdgPackageName_ pEdgEditId_ =
-    EditsDetailsGet'
+    -> EditsDetailsGet
+editsDetailsGet pEdgPackageName_ pEdgEditId_ =
+    EditsDetailsGet
     { _edgPackageName = pEdgPackageName_
     , _edgEditId = pEdgEditId_
     }
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-edgPackageName :: Lens' EditsDetailsGet' Text
+edgPackageName :: Lens' EditsDetailsGet Text
 edgPackageName
   = lens _edgPackageName
       (\ s a -> s{_edgPackageName = a})
 
 -- | Unique identifier for this edit.
-edgEditId :: Lens' EditsDetailsGet' Text
+edgEditId :: Lens' EditsDetailsGet Text
 edgEditId
   = lens _edgEditId (\ s a -> s{_edgEditId = a})
 
-instance GoogleRequest EditsDetailsGet' where
-        type Rs EditsDetailsGet' = AppDetails
-        requestClient EditsDetailsGet'{..}
+instance GoogleRequest EditsDetailsGet where
+        type Rs EditsDetailsGet = AppDetails
+        requestClient EditsDetailsGet{..}
           = go _edgPackageName _edgEditId (Just AltJSON)
               androidPublisherService
           where go

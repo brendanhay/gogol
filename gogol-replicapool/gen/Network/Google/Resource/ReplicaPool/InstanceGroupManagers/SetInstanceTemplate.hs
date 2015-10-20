@@ -30,8 +30,8 @@ module Network.Google.Resource.ReplicaPool.InstanceGroupManagers.SetInstanceTemp
       InstanceGroupManagersSetInstanceTemplateResource
 
     -- * Creating a Request
-    , instanceGroupManagersSetInstanceTemplate'
-    , InstanceGroupManagersSetInstanceTemplate'
+    , instanceGroupManagersSetInstanceTemplate
+    , InstanceGroupManagersSetInstanceTemplate
 
     -- * Request Lenses
     , igmsitProject
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.instanceGroupManagers.setInstanceTemplate@ method which the
--- 'InstanceGroupManagersSetInstanceTemplate'' request conforms to.
+-- 'InstanceGroupManagersSetInstanceTemplate' request conforms to.
 type InstanceGroupManagersSetInstanceTemplateResource
      =
      Capture "project" Text :>
@@ -61,15 +61,15 @@ type InstanceGroupManagersSetInstanceTemplateResource
 -- | Sets the instance template to use when creating new instances in this
 -- group. Existing instances are not affected.
 --
--- /See:/ 'instanceGroupManagersSetInstanceTemplate'' smart constructor.
-data InstanceGroupManagersSetInstanceTemplate' = InstanceGroupManagersSetInstanceTemplate'
+-- /See:/ 'instanceGroupManagersSetInstanceTemplate' smart constructor.
+data InstanceGroupManagersSetInstanceTemplate = InstanceGroupManagersSetInstanceTemplate
     { _igmsitProject              :: !Text
     , _igmsitInstanceGroupManager :: !Text
     , _igmsitZone                 :: !Text
     , _igmsitPayload              :: !InstanceGroupManagersSetInstanceTemplateRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupManagersSetInstanceTemplate'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupManagersSetInstanceTemplate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,14 +80,14 @@ data InstanceGroupManagersSetInstanceTemplate' = InstanceGroupManagersSetInstanc
 -- * 'igmsitZone'
 --
 -- * 'igmsitPayload'
-instanceGroupManagersSetInstanceTemplate'
+instanceGroupManagersSetInstanceTemplate
     :: Text -- ^ 'igmsitProject'
     -> Text -- ^ 'igmsitInstanceGroupManager'
     -> Text -- ^ 'igmsitZone'
     -> InstanceGroupManagersSetInstanceTemplateRequest -- ^ 'igmsitPayload'
-    -> InstanceGroupManagersSetInstanceTemplate'
-instanceGroupManagersSetInstanceTemplate' pIgmsitProject_ pIgmsitInstanceGroupManager_ pIgmsitZone_ pIgmsitPayload_ =
-    InstanceGroupManagersSetInstanceTemplate'
+    -> InstanceGroupManagersSetInstanceTemplate
+instanceGroupManagersSetInstanceTemplate pIgmsitProject_ pIgmsitInstanceGroupManager_ pIgmsitZone_ pIgmsitPayload_ =
+    InstanceGroupManagersSetInstanceTemplate
     { _igmsitProject = pIgmsitProject_
     , _igmsitInstanceGroupManager = pIgmsitInstanceGroupManager_
     , _igmsitZone = pIgmsitZone_
@@ -95,34 +95,34 @@ instanceGroupManagersSetInstanceTemplate' pIgmsitProject_ pIgmsitInstanceGroupMa
     }
 
 -- | The Google Developers Console project name.
-igmsitProject :: Lens' InstanceGroupManagersSetInstanceTemplate' Text
+igmsitProject :: Lens' InstanceGroupManagersSetInstanceTemplate Text
 igmsitProject
   = lens _igmsitProject
       (\ s a -> s{_igmsitProject = a})
 
 -- | The name of the instance group manager.
-igmsitInstanceGroupManager :: Lens' InstanceGroupManagersSetInstanceTemplate' Text
+igmsitInstanceGroupManager :: Lens' InstanceGroupManagersSetInstanceTemplate Text
 igmsitInstanceGroupManager
   = lens _igmsitInstanceGroupManager
       (\ s a -> s{_igmsitInstanceGroupManager = a})
 
 -- | The name of the zone in which the instance group manager resides.
-igmsitZone :: Lens' InstanceGroupManagersSetInstanceTemplate' Text
+igmsitZone :: Lens' InstanceGroupManagersSetInstanceTemplate Text
 igmsitZone
   = lens _igmsitZone (\ s a -> s{_igmsitZone = a})
 
 -- | Multipart request metadata.
-igmsitPayload :: Lens' InstanceGroupManagersSetInstanceTemplate' InstanceGroupManagersSetInstanceTemplateRequest
+igmsitPayload :: Lens' InstanceGroupManagersSetInstanceTemplate InstanceGroupManagersSetInstanceTemplateRequest
 igmsitPayload
   = lens _igmsitPayload
       (\ s a -> s{_igmsitPayload = a})
 
 instance GoogleRequest
-         InstanceGroupManagersSetInstanceTemplate' where
-        type Rs InstanceGroupManagersSetInstanceTemplate' =
+         InstanceGroupManagersSetInstanceTemplate where
+        type Rs InstanceGroupManagersSetInstanceTemplate =
              Operation
         requestClient
-          InstanceGroupManagersSetInstanceTemplate'{..}
+          InstanceGroupManagersSetInstanceTemplate{..}
           = go _igmsitProject _igmsitZone
               _igmsitInstanceGroupManager
               (Just AltJSON)

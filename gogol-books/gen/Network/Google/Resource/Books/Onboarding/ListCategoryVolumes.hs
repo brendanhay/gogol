@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
       OnboardingListCategoryVolumesResource
 
     -- * Creating a Request
-    , onboardingListCategoryVolumes'
-    , OnboardingListCategoryVolumes'
+    , onboardingListCategoryVolumes
+    , OnboardingListCategoryVolumes
 
     -- * Request Lenses
     , olcvLocale
@@ -44,7 +44,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.onboarding.listCategoryVolumes@ method which the
--- 'OnboardingListCategoryVolumes'' request conforms to.
+-- 'OnboardingListCategoryVolumes' request conforms to.
 type OnboardingListCategoryVolumesResource =
      "onboarding" :>
        "listCategoryVolumes" :>
@@ -59,8 +59,8 @@ type OnboardingListCategoryVolumesResource =
 
 -- | List available volumes under categories for onboarding experience.
 --
--- /See:/ 'onboardingListCategoryVolumes'' smart constructor.
-data OnboardingListCategoryVolumes' = OnboardingListCategoryVolumes'
+-- /See:/ 'onboardingListCategoryVolumes' smart constructor.
+data OnboardingListCategoryVolumes = OnboardingListCategoryVolumes
     { _olcvLocale                   :: !(Maybe Text)
     , _olcvMaxAllowedMaturityRating :: !(Maybe OnboardingListCategoryVolumesMaxAllowedMaturityRating)
     , _olcvCategoryId               :: !(Maybe [Text])
@@ -68,7 +68,7 @@ data OnboardingListCategoryVolumes' = OnboardingListCategoryVolumes'
     , _olcvPageSize                 :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OnboardingListCategoryVolumes'' with the minimum fields required to make a request.
+-- | Creates a value of 'OnboardingListCategoryVolumes' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,10 +81,10 @@ data OnboardingListCategoryVolumes' = OnboardingListCategoryVolumes'
 -- * 'olcvPageToken'
 --
 -- * 'olcvPageSize'
-onboardingListCategoryVolumes'
-    :: OnboardingListCategoryVolumes'
-onboardingListCategoryVolumes' =
-    OnboardingListCategoryVolumes'
+onboardingListCategoryVolumes
+    :: OnboardingListCategoryVolumes
+onboardingListCategoryVolumes =
+    OnboardingListCategoryVolumes
     { _olcvLocale = Nothing
     , _olcvMaxAllowedMaturityRating = Nothing
     , _olcvCategoryId = Nothing
@@ -94,19 +94,19 @@ onboardingListCategoryVolumes' =
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Default is en-US if
 -- unset.
-olcvLocale :: Lens' OnboardingListCategoryVolumes' (Maybe Text)
+olcvLocale :: Lens' OnboardingListCategoryVolumes (Maybe Text)
 olcvLocale
   = lens _olcvLocale (\ s a -> s{_olcvLocale = a})
 
 -- | The maximum allowed maturity rating of returned volumes. Books with a
 -- higher maturity rating are filtered out.
-olcvMaxAllowedMaturityRating :: Lens' OnboardingListCategoryVolumes' (Maybe OnboardingListCategoryVolumesMaxAllowedMaturityRating)
+olcvMaxAllowedMaturityRating :: Lens' OnboardingListCategoryVolumes (Maybe OnboardingListCategoryVolumesMaxAllowedMaturityRating)
 olcvMaxAllowedMaturityRating
   = lens _olcvMaxAllowedMaturityRating
       (\ s a -> s{_olcvMaxAllowedMaturityRating = a})
 
 -- | List of category ids requested.
-olcvCategoryId :: Lens' OnboardingListCategoryVolumes' [Text]
+olcvCategoryId :: Lens' OnboardingListCategoryVolumes [Text]
 olcvCategoryId
   = lens _olcvCategoryId
       (\ s a -> s{_olcvCategoryId = a})
@@ -114,20 +114,20 @@ olcvCategoryId
       . _Coerce
 
 -- | The value of the nextToken from the previous page.
-olcvPageToken :: Lens' OnboardingListCategoryVolumes' (Maybe Text)
+olcvPageToken :: Lens' OnboardingListCategoryVolumes (Maybe Text)
 olcvPageToken
   = lens _olcvPageToken
       (\ s a -> s{_olcvPageToken = a})
 
 -- | Number of maximum results per page to be included in the response.
-olcvPageSize :: Lens' OnboardingListCategoryVolumes' (Maybe Word32)
+olcvPageSize :: Lens' OnboardingListCategoryVolumes (Maybe Word32)
 olcvPageSize
   = lens _olcvPageSize (\ s a -> s{_olcvPageSize = a})
 
-instance GoogleRequest OnboardingListCategoryVolumes'
+instance GoogleRequest OnboardingListCategoryVolumes
          where
-        type Rs OnboardingListCategoryVolumes' = Volume2
-        requestClient OnboardingListCategoryVolumes'{..}
+        type Rs OnboardingListCategoryVolumes = Volume2
+        requestClient OnboardingListCategoryVolumes{..}
           = go _olcvLocale _olcvMaxAllowedMaturityRating
               (_olcvCategoryId ^. _Default)
               _olcvPageToken

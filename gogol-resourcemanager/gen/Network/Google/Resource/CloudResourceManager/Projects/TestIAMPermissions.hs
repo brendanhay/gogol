@@ -30,8 +30,8 @@ module Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
       ProjectsTestIAMPermissionsResource
 
     -- * Creating a Request
-    , projectsTestIAMPermissions'
-    , ProjectsTestIAMPermissions'
+    , projectsTestIAMPermissions
+    , ProjectsTestIAMPermissions
 
     -- * Request Lenses
     , ptipXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.projects.testIamPermissions@ method which the
--- 'ProjectsTestIAMPermissions'' request conforms to.
+-- 'ProjectsTestIAMPermissions' request conforms to.
 type ProjectsTestIAMPermissionsResource =
      "v1beta1" :>
        "projects" :>
@@ -68,8 +68,8 @@ type ProjectsTestIAMPermissionsResource =
 -- | Tests the specified permissions against the IAM access control policy
 -- for the specified project.
 --
--- /See:/ 'projectsTestIAMPermissions'' smart constructor.
-data ProjectsTestIAMPermissions' = ProjectsTestIAMPermissions'
+-- /See:/ 'projectsTestIAMPermissions' smart constructor.
+data ProjectsTestIAMPermissions = ProjectsTestIAMPermissions
     { _ptipXgafv          :: !(Maybe Text)
     , _ptipUploadProtocol :: !(Maybe Text)
     , _ptipPp             :: !Bool
@@ -81,7 +81,7 @@ data ProjectsTestIAMPermissions' = ProjectsTestIAMPermissions'
     , _ptipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsTestIAMPermissions'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -102,12 +102,12 @@ data ProjectsTestIAMPermissions' = ProjectsTestIAMPermissions'
 -- * 'ptipResource'
 --
 -- * 'ptipCallback'
-projectsTestIAMPermissions'
+projectsTestIAMPermissions
     :: TestIAMPermissionsRequest -- ^ 'ptipPayload'
     -> Text -- ^ 'ptipResource'
-    -> ProjectsTestIAMPermissions'
-projectsTestIAMPermissions' pPtipPayload_ pPtipResource_ =
-    ProjectsTestIAMPermissions'
+    -> ProjectsTestIAMPermissions
+projectsTestIAMPermissions pPtipPayload_ pPtipResource_ =
+    ProjectsTestIAMPermissions
     { _ptipXgafv = Nothing
     , _ptipUploadProtocol = Nothing
     , _ptipPp = True
@@ -120,39 +120,39 @@ projectsTestIAMPermissions' pPtipPayload_ pPtipResource_ =
     }
 
 -- | V1 error format.
-ptipXgafv :: Lens' ProjectsTestIAMPermissions' (Maybe Text)
+ptipXgafv :: Lens' ProjectsTestIAMPermissions (Maybe Text)
 ptipXgafv
   = lens _ptipXgafv (\ s a -> s{_ptipXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ptipUploadProtocol :: Lens' ProjectsTestIAMPermissions' (Maybe Text)
+ptipUploadProtocol :: Lens' ProjectsTestIAMPermissions (Maybe Text)
 ptipUploadProtocol
   = lens _ptipUploadProtocol
       (\ s a -> s{_ptipUploadProtocol = a})
 
 -- | Pretty-print response.
-ptipPp :: Lens' ProjectsTestIAMPermissions' Bool
+ptipPp :: Lens' ProjectsTestIAMPermissions Bool
 ptipPp = lens _ptipPp (\ s a -> s{_ptipPp = a})
 
 -- | OAuth access token.
-ptipAccessToken :: Lens' ProjectsTestIAMPermissions' (Maybe Text)
+ptipAccessToken :: Lens' ProjectsTestIAMPermissions (Maybe Text)
 ptipAccessToken
   = lens _ptipAccessToken
       (\ s a -> s{_ptipAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ptipUploadType :: Lens' ProjectsTestIAMPermissions' (Maybe Text)
+ptipUploadType :: Lens' ProjectsTestIAMPermissions (Maybe Text)
 ptipUploadType
   = lens _ptipUploadType
       (\ s a -> s{_ptipUploadType = a})
 
 -- | Multipart request metadata.
-ptipPayload :: Lens' ProjectsTestIAMPermissions' TestIAMPermissionsRequest
+ptipPayload :: Lens' ProjectsTestIAMPermissions TestIAMPermissionsRequest
 ptipPayload
   = lens _ptipPayload (\ s a -> s{_ptipPayload = a})
 
 -- | OAuth bearer token.
-ptipBearerToken :: Lens' ProjectsTestIAMPermissions' (Maybe Text)
+ptipBearerToken :: Lens' ProjectsTestIAMPermissions (Maybe Text)
 ptipBearerToken
   = lens _ptipBearerToken
       (\ s a -> s{_ptipBearerToken = a})
@@ -160,20 +160,20 @@ ptipBearerToken
 -- | REQUIRED: The resource for which policy detail is being requested.
 -- \`resource\` is usually specified as a path, such as,
 -- \`projects\/{project}\`.
-ptipResource :: Lens' ProjectsTestIAMPermissions' Text
+ptipResource :: Lens' ProjectsTestIAMPermissions Text
 ptipResource
   = lens _ptipResource (\ s a -> s{_ptipResource = a})
 
 -- | JSONP
-ptipCallback :: Lens' ProjectsTestIAMPermissions' (Maybe Text)
+ptipCallback :: Lens' ProjectsTestIAMPermissions (Maybe Text)
 ptipCallback
   = lens _ptipCallback (\ s a -> s{_ptipCallback = a})
 
-instance GoogleRequest ProjectsTestIAMPermissions'
+instance GoogleRequest ProjectsTestIAMPermissions
          where
-        type Rs ProjectsTestIAMPermissions' =
+        type Rs ProjectsTestIAMPermissions =
              TestIAMPermissionsResponse
-        requestClient ProjectsTestIAMPermissions'{..}
+        requestClient ProjectsTestIAMPermissions{..}
           = go _ptipResource _ptipXgafv _ptipUploadProtocol
               (Just _ptipPp)
               _ptipAccessToken

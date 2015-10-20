@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Files.Get
       FilesGetResource
 
     -- * Creating a Request
-    , filesGet'
-    , FilesGet'
+    , filesGet
+    , FilesGet
 
     -- * Request Lenses
     , fgUpdateViewedDate
@@ -44,7 +44,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.files.get@ method which the
--- 'FilesGet'' request conforms to.
+-- 'FilesGet' request conforms to.
 type FilesGetResource =
      "files" :>
        Capture "fileId" Text :>
@@ -65,8 +65,8 @@ type FilesGetResource =
 
 -- | Gets a file\'s metadata by ID.
 --
--- /See:/ 'filesGet'' smart constructor.
-data FilesGet' = FilesGet'
+-- /See:/ 'filesGet' smart constructor.
+data FilesGet = FilesGet
     { _fgUpdateViewedDate :: !Bool
     , _fgProjection       :: !(Maybe FilesGetProjection)
     , _fgAcknowledgeAbuse :: !Bool
@@ -74,7 +74,7 @@ data FilesGet' = FilesGet'
     , _fgRevisionId       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FilesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'FilesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -87,11 +87,11 @@ data FilesGet' = FilesGet'
 -- * 'fgFileId'
 --
 -- * 'fgRevisionId'
-filesGet'
+filesGet
     :: Text -- ^ 'fgFileId'
-    -> FilesGet'
-filesGet' pFgFileId_ =
-    FilesGet'
+    -> FilesGet
+filesGet pFgFileId_ =
+    FilesGet
     { _fgUpdateViewedDate = False
     , _fgProjection = Nothing
     , _fgAcknowledgeAbuse = False
@@ -101,36 +101,36 @@ filesGet' pFgFileId_ =
 
 -- | Deprecated: Use files.update with modifiedDateBehavior=noChange,
 -- updateViewedDate=true and an empty request body.
-fgUpdateViewedDate :: Lens' FilesGet' Bool
+fgUpdateViewedDate :: Lens' FilesGet Bool
 fgUpdateViewedDate
   = lens _fgUpdateViewedDate
       (\ s a -> s{_fgUpdateViewedDate = a})
 
 -- | This parameter is deprecated and has no function.
-fgProjection :: Lens' FilesGet' (Maybe FilesGetProjection)
+fgProjection :: Lens' FilesGet (Maybe FilesGetProjection)
 fgProjection
   = lens _fgProjection (\ s a -> s{_fgProjection = a})
 
 -- | Whether the user is acknowledging the risk of downloading known malware
 -- or other abusive files.
-fgAcknowledgeAbuse :: Lens' FilesGet' Bool
+fgAcknowledgeAbuse :: Lens' FilesGet Bool
 fgAcknowledgeAbuse
   = lens _fgAcknowledgeAbuse
       (\ s a -> s{_fgAcknowledgeAbuse = a})
 
 -- | The ID for the file in question.
-fgFileId :: Lens' FilesGet' Text
+fgFileId :: Lens' FilesGet Text
 fgFileId = lens _fgFileId (\ s a -> s{_fgFileId = a})
 
 -- | Specifies the Revision ID that should be downloaded. Ignored unless
 -- alt=media is specified.
-fgRevisionId :: Lens' FilesGet' (Maybe Text)
+fgRevisionId :: Lens' FilesGet (Maybe Text)
 fgRevisionId
   = lens _fgRevisionId (\ s a -> s{_fgRevisionId = a})
 
-instance GoogleRequest FilesGet' where
-        type Rs FilesGet' = File
-        requestClient FilesGet'{..}
+instance GoogleRequest FilesGet where
+        type Rs FilesGet = File
+        requestClient FilesGet{..}
           = go _fgFileId (Just _fgUpdateViewedDate)
               _fgProjection
               (Just _fgAcknowledgeAbuse)
@@ -141,10 +141,9 @@ instance GoogleRequest FilesGet' where
                   = buildClient (Proxy :: Proxy FilesGetResource)
                       mempty
 
-instance GoogleRequest (MediaDownload FilesGet')
-         where
-        type Rs (MediaDownload FilesGet') = Stream
-        requestClient (MediaDownload FilesGet'{..})
+instance GoogleRequest (MediaDownload FilesGet) where
+        type Rs (MediaDownload FilesGet) = Stream
+        requestClient (MediaDownload FilesGet{..})
           = go _fgFileId (Just _fgUpdateViewedDate)
               _fgProjection
               (Just _fgAcknowledgeAbuse)

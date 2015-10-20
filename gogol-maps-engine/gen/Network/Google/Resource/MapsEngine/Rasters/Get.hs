@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Rasters.Get
       RastersGetResource
 
     -- * Creating a Request
-    , rastersGet'
-    , RastersGet'
+    , rastersGet
+    , RastersGet
 
     -- * Request Lenses
     , rgId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasters.get@ method which the
--- 'RastersGet'' request conforms to.
+-- 'RastersGet' request conforms to.
 type RastersGetResource =
      "rasters" :>
        Capture "id" Text :>
@@ -48,31 +48,31 @@ type RastersGetResource =
 
 -- | Return metadata for a single raster.
 --
--- /See:/ 'rastersGet'' smart constructor.
-newtype RastersGet' = RastersGet'
+-- /See:/ 'rastersGet' smart constructor.
+newtype RastersGet = RastersGet
     { _rgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RastersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'RastersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rgId'
-rastersGet'
+rastersGet
     :: Text -- ^ 'rgId'
-    -> RastersGet'
-rastersGet' pRgId_ =
-    RastersGet'
+    -> RastersGet
+rastersGet pRgId_ =
+    RastersGet
     { _rgId = pRgId_
     }
 
 -- | The ID of the raster.
-rgId :: Lens' RastersGet' Text
+rgId :: Lens' RastersGet Text
 rgId = lens _rgId (\ s a -> s{_rgId = a})
 
-instance GoogleRequest RastersGet' where
-        type Rs RastersGet' = Raster
-        requestClient RastersGet'{..}
+instance GoogleRequest RastersGet where
+        type Rs RastersGet = Raster
+        requestClient RastersGet{..}
           = go _rgId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy RastersGetResource)

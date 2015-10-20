@@ -30,8 +30,8 @@ module Network.Google.Resource.Compute.TargetPools.GetHealth
       TargetPoolsGetHealthResource
 
     -- * Creating a Request
-    , targetPoolsGetHealth'
-    , TargetPoolsGetHealth'
+    , targetPoolsGetHealth
+    , TargetPoolsGetHealth
 
     -- * Request Lenses
     , tpghProject
@@ -44,7 +44,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.getHealth@ method which the
--- 'TargetPoolsGetHealth'' request conforms to.
+-- 'TargetPoolsGetHealth' request conforms to.
 type TargetPoolsGetHealthResource =
      Capture "project" Text :>
        "regions" :>
@@ -59,15 +59,15 @@ type TargetPoolsGetHealthResource =
 -- | Gets the most recent health check results for each IP for the given
 -- instance that is referenced by given TargetPool.
 --
--- /See:/ 'targetPoolsGetHealth'' smart constructor.
-data TargetPoolsGetHealth' = TargetPoolsGetHealth'
+-- /See:/ 'targetPoolsGetHealth' smart constructor.
+data TargetPoolsGetHealth = TargetPoolsGetHealth
     { _tpghProject    :: !Text
     , _tpghTargetPool :: !Text
     , _tpghPayload    :: !InstanceReference
     , _tpghRegion     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetPoolsGetHealth'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetPoolsGetHealth' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -78,44 +78,44 @@ data TargetPoolsGetHealth' = TargetPoolsGetHealth'
 -- * 'tpghPayload'
 --
 -- * 'tpghRegion'
-targetPoolsGetHealth'
+targetPoolsGetHealth
     :: Text -- ^ 'tpghProject'
     -> Text -- ^ 'tpghTargetPool'
     -> InstanceReference -- ^ 'tpghPayload'
     -> Text -- ^ 'tpghRegion'
-    -> TargetPoolsGetHealth'
-targetPoolsGetHealth' pTpghProject_ pTpghTargetPool_ pTpghPayload_ pTpghRegion_ =
-    TargetPoolsGetHealth'
+    -> TargetPoolsGetHealth
+targetPoolsGetHealth pTpghProject_ pTpghTargetPool_ pTpghPayload_ pTpghRegion_ =
+    TargetPoolsGetHealth
     { _tpghProject = pTpghProject_
     , _tpghTargetPool = pTpghTargetPool_
     , _tpghPayload = pTpghPayload_
     , _tpghRegion = pTpghRegion_
     }
 
-tpghProject :: Lens' TargetPoolsGetHealth' Text
+tpghProject :: Lens' TargetPoolsGetHealth Text
 tpghProject
   = lens _tpghProject (\ s a -> s{_tpghProject = a})
 
 -- | Name of the TargetPool resource to which the queried instance belongs.
-tpghTargetPool :: Lens' TargetPoolsGetHealth' Text
+tpghTargetPool :: Lens' TargetPoolsGetHealth Text
 tpghTargetPool
   = lens _tpghTargetPool
       (\ s a -> s{_tpghTargetPool = a})
 
 -- | Multipart request metadata.
-tpghPayload :: Lens' TargetPoolsGetHealth' InstanceReference
+tpghPayload :: Lens' TargetPoolsGetHealth InstanceReference
 tpghPayload
   = lens _tpghPayload (\ s a -> s{_tpghPayload = a})
 
 -- | Name of the region scoping this request.
-tpghRegion :: Lens' TargetPoolsGetHealth' Text
+tpghRegion :: Lens' TargetPoolsGetHealth Text
 tpghRegion
   = lens _tpghRegion (\ s a -> s{_tpghRegion = a})
 
-instance GoogleRequest TargetPoolsGetHealth' where
-        type Rs TargetPoolsGetHealth' =
+instance GoogleRequest TargetPoolsGetHealth where
+        type Rs TargetPoolsGetHealth =
              TargetPoolInstanceHealth
-        requestClient TargetPoolsGetHealth'{..}
+        requestClient TargetPoolsGetHealth{..}
           = go _tpghProject _tpghRegion _tpghTargetPool
               (Just AltJSON)
               _tpghPayload

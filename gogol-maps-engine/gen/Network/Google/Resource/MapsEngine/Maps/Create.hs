@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Maps.Create
       MapsCreateResource
 
     -- * Creating a Request
-    , mapsCreate'
-    , MapsCreate'
+    , mapsCreate
+    , MapsCreate
 
     -- * Request Lenses
     , mcPayload
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.maps.create@ method which the
--- 'MapsCreate'' request conforms to.
+-- 'MapsCreate' request conforms to.
 type MapsCreateResource =
      "maps" :>
        QueryParam "alt" AltJSON :>
@@ -48,32 +48,32 @@ type MapsCreateResource =
 
 -- | Create a map asset.
 --
--- /See:/ 'mapsCreate'' smart constructor.
-newtype MapsCreate' = MapsCreate'
+-- /See:/ 'mapsCreate' smart constructor.
+newtype MapsCreate = MapsCreate
     { _mcPayload :: Map
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MapsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'MapsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mcPayload'
-mapsCreate'
+mapsCreate
     :: Map -- ^ 'mcPayload'
-    -> MapsCreate'
-mapsCreate' pMcPayload_ =
-    MapsCreate'
+    -> MapsCreate
+mapsCreate pMcPayload_ =
+    MapsCreate
     { _mcPayload = pMcPayload_
     }
 
 -- | Multipart request metadata.
-mcPayload :: Lens' MapsCreate' Map
+mcPayload :: Lens' MapsCreate Map
 mcPayload
   = lens _mcPayload (\ s a -> s{_mcPayload = a})
 
-instance GoogleRequest MapsCreate' where
-        type Rs MapsCreate' = Map
-        requestClient MapsCreate'{..}
+instance GoogleRequest MapsCreate where
+        type Rs MapsCreate = Map
+        requestClient MapsCreate{..}
           = go (Just AltJSON) _mcPayload mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy MapsCreateResource)

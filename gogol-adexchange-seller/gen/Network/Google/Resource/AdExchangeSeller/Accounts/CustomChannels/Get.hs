@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.Get
       AccountsCustomChannelsGetResource
 
     -- * Creating a Request
-    , accountsCustomChannelsGet'
-    , AccountsCustomChannelsGet'
+    , accountsCustomChannelsGet
+    , AccountsCustomChannelsGet
 
     -- * Request Lenses
     , accgCustomChannelId
@@ -42,7 +42,7 @@ import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangeseller.accounts.customchannels.get@ method which the
--- 'AccountsCustomChannelsGet'' request conforms to.
+-- 'AccountsCustomChannelsGet' request conforms to.
 type AccountsCustomChannelsGetResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -54,14 +54,14 @@ type AccountsCustomChannelsGetResource =
 
 -- | Get the specified custom channel from the specified ad client.
 --
--- /See:/ 'accountsCustomChannelsGet'' smart constructor.
-data AccountsCustomChannelsGet' = AccountsCustomChannelsGet'
+-- /See:/ 'accountsCustomChannelsGet' smart constructor.
+data AccountsCustomChannelsGet = AccountsCustomChannelsGet
     { _accgCustomChannelId :: !Text
     , _accgAdClientId      :: !Text
     , _accgAccountId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsCustomChannelsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsCustomChannelsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,40 +70,40 @@ data AccountsCustomChannelsGet' = AccountsCustomChannelsGet'
 -- * 'accgAdClientId'
 --
 -- * 'accgAccountId'
-accountsCustomChannelsGet'
+accountsCustomChannelsGet
     :: Text -- ^ 'accgCustomChannelId'
     -> Text -- ^ 'accgAdClientId'
     -> Text -- ^ 'accgAccountId'
-    -> AccountsCustomChannelsGet'
-accountsCustomChannelsGet' pAccgCustomChannelId_ pAccgAdClientId_ pAccgAccountId_ =
-    AccountsCustomChannelsGet'
+    -> AccountsCustomChannelsGet
+accountsCustomChannelsGet pAccgCustomChannelId_ pAccgAdClientId_ pAccgAccountId_ =
+    AccountsCustomChannelsGet
     { _accgCustomChannelId = pAccgCustomChannelId_
     , _accgAdClientId = pAccgAdClientId_
     , _accgAccountId = pAccgAccountId_
     }
 
 -- | Custom channel to retrieve.
-accgCustomChannelId :: Lens' AccountsCustomChannelsGet' Text
+accgCustomChannelId :: Lens' AccountsCustomChannelsGet Text
 accgCustomChannelId
   = lens _accgCustomChannelId
       (\ s a -> s{_accgCustomChannelId = a})
 
 -- | Ad client which contains the custom channel.
-accgAdClientId :: Lens' AccountsCustomChannelsGet' Text
+accgAdClientId :: Lens' AccountsCustomChannelsGet Text
 accgAdClientId
   = lens _accgAdClientId
       (\ s a -> s{_accgAdClientId = a})
 
 -- | Account to which the ad client belongs.
-accgAccountId :: Lens' AccountsCustomChannelsGet' Text
+accgAccountId :: Lens' AccountsCustomChannelsGet Text
 accgAccountId
   = lens _accgAccountId
       (\ s a -> s{_accgAccountId = a})
 
-instance GoogleRequest AccountsCustomChannelsGet'
+instance GoogleRequest AccountsCustomChannelsGet
          where
-        type Rs AccountsCustomChannelsGet' = CustomChannel
-        requestClient AccountsCustomChannelsGet'{..}
+        type Rs AccountsCustomChannelsGet = CustomChannel
+        requestClient AccountsCustomChannelsGet{..}
           = go _accgAccountId _accgAdClientId
               _accgCustomChannelId
               (Just AltJSON)

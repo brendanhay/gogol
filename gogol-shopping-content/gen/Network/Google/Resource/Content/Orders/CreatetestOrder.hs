@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Orders.CreatetestOrder
       OrdersCreatetestOrderResource
 
     -- * Creating a Request
-    , ordersCreatetestOrder'
-    , OrdersCreatetestOrder'
+    , ordersCreatetestOrder
+    , OrdersCreatetestOrder
 
     -- * Request Lenses
     , ocoMerchantId
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.createtestorder@ method which the
--- 'OrdersCreatetestOrder'' request conforms to.
+-- 'OrdersCreatetestOrder' request conforms to.
 type OrdersCreatetestOrderResource =
      Capture "merchantId" Word64 :>
        "testorders" :>
@@ -51,44 +51,44 @@ type OrdersCreatetestOrderResource =
 
 -- | Sandbox only. Creates a test order.
 --
--- /See:/ 'ordersCreatetestOrder'' smart constructor.
-data OrdersCreatetestOrder' = OrdersCreatetestOrder'
+-- /See:/ 'ordersCreatetestOrder' smart constructor.
+data OrdersCreatetestOrder = OrdersCreatetestOrder
     { _ocoMerchantId :: !Word64
     , _ocoPayload    :: !OrdersCreateTestOrderRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersCreatetestOrder'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersCreatetestOrder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ocoMerchantId'
 --
 -- * 'ocoPayload'
-ordersCreatetestOrder'
+ordersCreatetestOrder
     :: Word64 -- ^ 'ocoMerchantId'
     -> OrdersCreateTestOrderRequest -- ^ 'ocoPayload'
-    -> OrdersCreatetestOrder'
-ordersCreatetestOrder' pOcoMerchantId_ pOcoPayload_ =
-    OrdersCreatetestOrder'
+    -> OrdersCreatetestOrder
+ordersCreatetestOrder pOcoMerchantId_ pOcoPayload_ =
+    OrdersCreatetestOrder
     { _ocoMerchantId = pOcoMerchantId_
     , _ocoPayload = pOcoPayload_
     }
 
 -- | The ID of the managing account.
-ocoMerchantId :: Lens' OrdersCreatetestOrder' Word64
+ocoMerchantId :: Lens' OrdersCreatetestOrder Word64
 ocoMerchantId
   = lens _ocoMerchantId
       (\ s a -> s{_ocoMerchantId = a})
 
 -- | Multipart request metadata.
-ocoPayload :: Lens' OrdersCreatetestOrder' OrdersCreateTestOrderRequest
+ocoPayload :: Lens' OrdersCreatetestOrder OrdersCreateTestOrderRequest
 ocoPayload
   = lens _ocoPayload (\ s a -> s{_ocoPayload = a})
 
-instance GoogleRequest OrdersCreatetestOrder' where
-        type Rs OrdersCreatetestOrder' =
+instance GoogleRequest OrdersCreatetestOrder where
+        type Rs OrdersCreatetestOrder =
              OrdersCreateTestOrderResponse
-        requestClient OrdersCreatetestOrder'{..}
+        requestClient OrdersCreatetestOrder{..}
           = go _ocoMerchantId (Just AltJSON) _ocoPayload
               shoppingContentService
           where go

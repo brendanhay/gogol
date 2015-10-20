@@ -29,19 +29,19 @@ module Network.Google.Resource.DFAReporting.Advertisers.Get
       AdvertisersGetResource
 
     -- * Creating a Request
-    , advertisersGet'
-    , AdvertisersGet'
+    , advertisersGet
+    , AdvertisersGet
 
     -- * Request Lenses
-    , agProFileId
-    , agId
+    , advProFileId
+    , advId
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.advertisers.get@ method which the
--- 'AdvertisersGet'' request conforms to.
+-- 'AdvertisersGet' request conforms to.
 type AdvertisersGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type AdvertisersGetResource =
 
 -- | Gets one advertiser by ID.
 --
--- /See:/ 'advertisersGet'' smart constructor.
-data AdvertisersGet' = AdvertisersGet'
-    { _agProFileId :: !Int64
-    , _agId        :: !Int64
+-- /See:/ 'advertisersGet' smart constructor.
+data AdvertisersGet = AdvertisersGet
+    { _advProFileId :: !Int64
+    , _advId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdvertisersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdvertisersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'agProFileId'
+-- * 'advProFileId'
 --
--- * 'agId'
-advertisersGet'
-    :: Int64 -- ^ 'agProFileId'
-    -> Int64 -- ^ 'agId'
-    -> AdvertisersGet'
-advertisersGet' pAgProFileId_ pAgId_ =
-    AdvertisersGet'
-    { _agProFileId = pAgProFileId_
-    , _agId = pAgId_
+-- * 'advId'
+advertisersGet
+    :: Int64 -- ^ 'advProFileId'
+    -> Int64 -- ^ 'advId'
+    -> AdvertisersGet
+advertisersGet pAdvProFileId_ pAdvId_ =
+    AdvertisersGet
+    { _advProFileId = pAdvProFileId_
+    , _advId = pAdvId_
     }
 
 -- | User profile ID associated with this request.
-agProFileId :: Lens' AdvertisersGet' Int64
-agProFileId
-  = lens _agProFileId (\ s a -> s{_agProFileId = a})
+advProFileId :: Lens' AdvertisersGet Int64
+advProFileId
+  = lens _advProFileId (\ s a -> s{_advProFileId = a})
 
 -- | Advertiser ID.
-agId :: Lens' AdvertisersGet' Int64
-agId = lens _agId (\ s a -> s{_agId = a})
+advId :: Lens' AdvertisersGet Int64
+advId = lens _advId (\ s a -> s{_advId = a})
 
-instance GoogleRequest AdvertisersGet' where
-        type Rs AdvertisersGet' = Advertiser
-        requestClient AdvertisersGet'{..}
-          = go _agProFileId _agId (Just AltJSON)
+instance GoogleRequest AdvertisersGet where
+        type Rs AdvertisersGet = Advertiser
+        requestClient AdvertisersGet{..}
+          = go _advProFileId _advId (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy AdvertisersGetResource)

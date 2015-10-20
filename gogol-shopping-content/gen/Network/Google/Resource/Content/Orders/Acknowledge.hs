@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Orders.Acknowledge
       OrdersAcknowledgeResource
 
     -- * Creating a Request
-    , ordersAcknowledge'
-    , OrdersAcknowledge'
+    , ordersAcknowledge
+    , OrdersAcknowledge
 
     -- * Request Lenses
     , oaMerchantId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.acknowledge@ method which the
--- 'OrdersAcknowledge'' request conforms to.
+-- 'OrdersAcknowledge' request conforms to.
 type OrdersAcknowledgeResource =
      Capture "merchantId" Word64 :>
        "orders" :>
@@ -54,14 +54,14 @@ type OrdersAcknowledgeResource =
 
 -- | Marks an order as acknowledged.
 --
--- /See:/ 'ordersAcknowledge'' smart constructor.
-data OrdersAcknowledge' = OrdersAcknowledge'
+-- /See:/ 'ordersAcknowledge' smart constructor.
+data OrdersAcknowledge = OrdersAcknowledge
     { _oaMerchantId :: !Word64
     , _oaPayload    :: !OrdersAcknowledgeRequest
     , _oaOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersAcknowledge'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersAcknowledge' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,37 +70,36 @@ data OrdersAcknowledge' = OrdersAcknowledge'
 -- * 'oaPayload'
 --
 -- * 'oaOrderId'
-ordersAcknowledge'
+ordersAcknowledge
     :: Word64 -- ^ 'oaMerchantId'
     -> OrdersAcknowledgeRequest -- ^ 'oaPayload'
     -> Text -- ^ 'oaOrderId'
-    -> OrdersAcknowledge'
-ordersAcknowledge' pOaMerchantId_ pOaPayload_ pOaOrderId_ =
-    OrdersAcknowledge'
+    -> OrdersAcknowledge
+ordersAcknowledge pOaMerchantId_ pOaPayload_ pOaOrderId_ =
+    OrdersAcknowledge
     { _oaMerchantId = pOaMerchantId_
     , _oaPayload = pOaPayload_
     , _oaOrderId = pOaOrderId_
     }
 
 -- | The ID of the managing account.
-oaMerchantId :: Lens' OrdersAcknowledge' Word64
+oaMerchantId :: Lens' OrdersAcknowledge Word64
 oaMerchantId
   = lens _oaMerchantId (\ s a -> s{_oaMerchantId = a})
 
 -- | Multipart request metadata.
-oaPayload :: Lens' OrdersAcknowledge' OrdersAcknowledgeRequest
+oaPayload :: Lens' OrdersAcknowledge OrdersAcknowledgeRequest
 oaPayload
   = lens _oaPayload (\ s a -> s{_oaPayload = a})
 
 -- | The ID of the order.
-oaOrderId :: Lens' OrdersAcknowledge' Text
+oaOrderId :: Lens' OrdersAcknowledge Text
 oaOrderId
   = lens _oaOrderId (\ s a -> s{_oaOrderId = a})
 
-instance GoogleRequest OrdersAcknowledge' where
-        type Rs OrdersAcknowledge' =
-             OrdersAcknowledgeResponse
-        requestClient OrdersAcknowledge'{..}
+instance GoogleRequest OrdersAcknowledge where
+        type Rs OrdersAcknowledge = OrdersAcknowledgeResponse
+        requestClient OrdersAcknowledge{..}
           = go _oaMerchantId _oaOrderId (Just AltJSON)
               _oaPayload
               shoppingContentService

@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.PostalCodes.List
       PostalCodesListResource
 
     -- * Creating a Request
-    , postalCodesList'
-    , PostalCodesList'
+    , postalCodesList
+    , PostalCodesList
 
     -- * Request Lenses
     , pclProFileId
@@ -40,7 +40,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.postalCodes.list@ method which the
--- 'PostalCodesList'' request conforms to.
+-- 'PostalCodesList' request conforms to.
 type PostalCodesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -50,32 +50,32 @@ type PostalCodesListResource =
 
 -- | Retrieves a list of postal codes.
 --
--- /See:/ 'postalCodesList'' smart constructor.
-newtype PostalCodesList' = PostalCodesList'
+-- /See:/ 'postalCodesList' smart constructor.
+newtype PostalCodesList = PostalCodesList
     { _pclProFileId :: Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PostalCodesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'PostalCodesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pclProFileId'
-postalCodesList'
+postalCodesList
     :: Int64 -- ^ 'pclProFileId'
-    -> PostalCodesList'
-postalCodesList' pPclProFileId_ =
-    PostalCodesList'
+    -> PostalCodesList
+postalCodesList pPclProFileId_ =
+    PostalCodesList
     { _pclProFileId = pPclProFileId_
     }
 
 -- | User profile ID associated with this request.
-pclProFileId :: Lens' PostalCodesList' Int64
+pclProFileId :: Lens' PostalCodesList Int64
 pclProFileId
   = lens _pclProFileId (\ s a -> s{_pclProFileId = a})
 
-instance GoogleRequest PostalCodesList' where
-        type Rs PostalCodesList' = PostalCodesListResponse
-        requestClient PostalCodesList'{..}
+instance GoogleRequest PostalCodesList where
+        type Rs PostalCodesList = PostalCodesListResponse
+        requestClient PostalCodesList{..}
           = go _pclProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

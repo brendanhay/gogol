@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Maps.UnPublish
       MapsUnPublishResource
 
     -- * Creating a Request
-    , mapsUnPublish'
-    , MapsUnPublish'
+    , mapsUnPublish
+    , MapsUnPublish
 
     -- * Request Lenses
     , mupId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.maps.unpublish@ method which the
--- 'MapsUnPublish'' request conforms to.
+-- 'MapsUnPublish' request conforms to.
 type MapsUnPublishResource =
      "maps" :>
        Capture "id" Text :>
@@ -50,31 +50,31 @@ type MapsUnPublishResource =
 
 -- | Unpublish a map asset.
 --
--- /See:/ 'mapsUnPublish'' smart constructor.
-newtype MapsUnPublish' = MapsUnPublish'
+-- /See:/ 'mapsUnPublish' smart constructor.
+newtype MapsUnPublish = MapsUnPublish
     { _mupId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MapsUnPublish'' with the minimum fields required to make a request.
+-- | Creates a value of 'MapsUnPublish' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mupId'
-mapsUnPublish'
+mapsUnPublish
     :: Text -- ^ 'mupId'
-    -> MapsUnPublish'
-mapsUnPublish' pMupId_ =
-    MapsUnPublish'
+    -> MapsUnPublish
+mapsUnPublish pMupId_ =
+    MapsUnPublish
     { _mupId = pMupId_
     }
 
 -- | The ID of the map.
-mupId :: Lens' MapsUnPublish' Text
+mupId :: Lens' MapsUnPublish Text
 mupId = lens _mupId (\ s a -> s{_mupId = a})
 
-instance GoogleRequest MapsUnPublish' where
-        type Rs MapsUnPublish' = PublishResponse
-        requestClient MapsUnPublish'{..}
+instance GoogleRequest MapsUnPublish where
+        type Rs MapsUnPublish = PublishResponse
+        requestClient MapsUnPublish{..}
           = go _mupId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy MapsUnPublishResource)

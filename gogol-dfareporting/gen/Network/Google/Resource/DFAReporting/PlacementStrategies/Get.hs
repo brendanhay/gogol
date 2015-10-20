@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Get
       PlacementStrategiesGetResource
 
     -- * Creating a Request
-    , placementStrategiesGet'
-    , PlacementStrategiesGet'
+    , placementStrategiesGet
+    , PlacementStrategiesGet
 
     -- * Request Lenses
     , psgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placementStrategies.get@ method which the
--- 'PlacementStrategiesGet'' request conforms to.
+-- 'PlacementStrategiesGet' request conforms to.
 type PlacementStrategiesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -52,41 +52,41 @@ type PlacementStrategiesGetResource =
 
 -- | Gets one placement strategy by ID.
 --
--- /See:/ 'placementStrategiesGet'' smart constructor.
-data PlacementStrategiesGet' = PlacementStrategiesGet'
+-- /See:/ 'placementStrategiesGet' smart constructor.
+data PlacementStrategiesGet = PlacementStrategiesGet
     { _psgProFileId :: !Int64
     , _psgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlacementStrategiesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlacementStrategiesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'psgProFileId'
 --
 -- * 'psgId'
-placementStrategiesGet'
+placementStrategiesGet
     :: Int64 -- ^ 'psgProFileId'
     -> Int64 -- ^ 'psgId'
-    -> PlacementStrategiesGet'
-placementStrategiesGet' pPsgProFileId_ pPsgId_ =
-    PlacementStrategiesGet'
+    -> PlacementStrategiesGet
+placementStrategiesGet pPsgProFileId_ pPsgId_ =
+    PlacementStrategiesGet
     { _psgProFileId = pPsgProFileId_
     , _psgId = pPsgId_
     }
 
 -- | User profile ID associated with this request.
-psgProFileId :: Lens' PlacementStrategiesGet' Int64
+psgProFileId :: Lens' PlacementStrategiesGet Int64
 psgProFileId
   = lens _psgProFileId (\ s a -> s{_psgProFileId = a})
 
 -- | Placement strategy ID.
-psgId :: Lens' PlacementStrategiesGet' Int64
+psgId :: Lens' PlacementStrategiesGet Int64
 psgId = lens _psgId (\ s a -> s{_psgId = a})
 
-instance GoogleRequest PlacementStrategiesGet' where
-        type Rs PlacementStrategiesGet' = PlacementStrategy
-        requestClient PlacementStrategiesGet'{..}
+instance GoogleRequest PlacementStrategiesGet where
+        type Rs PlacementStrategiesGet = PlacementStrategy
+        requestClient PlacementStrategiesGet{..}
           = go _psgProFileId _psgId (Just AltJSON)
               dFAReportingService
           where go

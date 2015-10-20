@@ -31,8 +31,8 @@ module Network.Google.Resource.Storage.Objects.Delete
       ObjectsDeleteResource
 
     -- * Creating a Request
-    , objectsDelete'
-    , ObjectsDelete'
+    , objectsDelete
+    , ObjectsDelete
 
     -- * Request Lenses
     , odIfMetagenerationMatch
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.delete@ method which the
--- 'ObjectsDelete'' request conforms to.
+-- 'ObjectsDelete' request conforms to.
 type ObjectsDeleteResource =
      "b" :>
        Capture "bucket" Text :>
@@ -65,8 +65,8 @@ type ObjectsDeleteResource =
 -- versioning is not enabled for the bucket, or if the generation parameter
 -- is used.
 --
--- /See:/ 'objectsDelete'' smart constructor.
-data ObjectsDelete' = ObjectsDelete'
+-- /See:/ 'objectsDelete' smart constructor.
+data ObjectsDelete = ObjectsDelete
     { _odIfMetagenerationMatch    :: !(Maybe Int64)
     , _odIfGenerationNotMatch     :: !(Maybe Int64)
     , _odIfGenerationMatch        :: !(Maybe Int64)
@@ -76,7 +76,7 @@ data ObjectsDelete' = ObjectsDelete'
     , _odGeneration               :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ObjectsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ObjectsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -93,12 +93,12 @@ data ObjectsDelete' = ObjectsDelete'
 -- * 'odObject'
 --
 -- * 'odGeneration'
-objectsDelete'
+objectsDelete
     :: Text -- ^ 'odBucket'
     -> Text -- ^ 'odObject'
-    -> ObjectsDelete'
-objectsDelete' pOdBucket_ pOdObject_ =
-    ObjectsDelete'
+    -> ObjectsDelete
+objectsDelete pOdBucket_ pOdObject_ =
+    ObjectsDelete
     { _odIfMetagenerationMatch = Nothing
     , _odIfGenerationNotMatch = Nothing
     , _odIfGenerationMatch = Nothing
@@ -110,50 +110,50 @@ objectsDelete' pOdBucket_ pOdObject_ =
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration matches the given value.
-odIfMetagenerationMatch :: Lens' ObjectsDelete' (Maybe Int64)
+odIfMetagenerationMatch :: Lens' ObjectsDelete (Maybe Int64)
 odIfMetagenerationMatch
   = lens _odIfMetagenerationMatch
       (\ s a -> s{_odIfMetagenerationMatch = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation does not match the given value.
-odIfGenerationNotMatch :: Lens' ObjectsDelete' (Maybe Int64)
+odIfGenerationNotMatch :: Lens' ObjectsDelete (Maybe Int64)
 odIfGenerationNotMatch
   = lens _odIfGenerationNotMatch
       (\ s a -> s{_odIfGenerationNotMatch = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- generation matches the given value.
-odIfGenerationMatch :: Lens' ObjectsDelete' (Maybe Int64)
+odIfGenerationMatch :: Lens' ObjectsDelete (Maybe Int64)
 odIfGenerationMatch
   = lens _odIfGenerationMatch
       (\ s a -> s{_odIfGenerationMatch = a})
 
 -- | Name of the bucket in which the object resides.
-odBucket :: Lens' ObjectsDelete' Text
+odBucket :: Lens' ObjectsDelete Text
 odBucket = lens _odBucket (\ s a -> s{_odBucket = a})
 
 -- | Makes the operation conditional on whether the object\'s current
 -- metageneration does not match the given value.
-odIfMetagenerationNotMatch :: Lens' ObjectsDelete' (Maybe Int64)
+odIfMetagenerationNotMatch :: Lens' ObjectsDelete (Maybe Int64)
 odIfMetagenerationNotMatch
   = lens _odIfMetagenerationNotMatch
       (\ s a -> s{_odIfMetagenerationNotMatch = a})
 
 -- | Name of the object. For information about how to URL encode object names
 -- to be path safe, see Encoding URI Path Parts.
-odObject :: Lens' ObjectsDelete' Text
+odObject :: Lens' ObjectsDelete Text
 odObject = lens _odObject (\ s a -> s{_odObject = a})
 
 -- | If present, permanently deletes a specific revision of this object (as
 -- opposed to the latest version, the default).
-odGeneration :: Lens' ObjectsDelete' (Maybe Int64)
+odGeneration :: Lens' ObjectsDelete (Maybe Int64)
 odGeneration
   = lens _odGeneration (\ s a -> s{_odGeneration = a})
 
-instance GoogleRequest ObjectsDelete' where
-        type Rs ObjectsDelete' = ()
-        requestClient ObjectsDelete'{..}
+instance GoogleRequest ObjectsDelete where
+        type Rs ObjectsDelete = ()
+        requestClient ObjectsDelete{..}
           = go _odBucket _odObject _odIfMetagenerationMatch
               _odIfGenerationNotMatch
               _odIfGenerationMatch

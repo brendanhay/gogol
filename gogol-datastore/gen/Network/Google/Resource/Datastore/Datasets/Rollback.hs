@@ -29,8 +29,8 @@ module Network.Google.Resource.Datastore.Datasets.Rollback
       DatasetsRollbackResource
 
     -- * Creating a Request
-    , datasetsRollback'
-    , DatasetsRollback'
+    , datasetsRollback
+    , DatasetsRollback
 
     -- * Request Lenses
     , drPayload
@@ -41,7 +41,7 @@ import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @datastore.datasets.rollback@ method which the
--- 'DatasetsRollback'' request conforms to.
+-- 'DatasetsRollback' request conforms to.
 type DatasetsRollbackResource =
      Capture "datasetId" Text :>
        "rollback" :>
@@ -51,42 +51,42 @@ type DatasetsRollbackResource =
 
 -- | Roll back a transaction.
 --
--- /See:/ 'datasetsRollback'' smart constructor.
-data DatasetsRollback' = DatasetsRollback'
+-- /See:/ 'datasetsRollback' smart constructor.
+data DatasetsRollback = DatasetsRollback
     { _drPayload   :: !RollbackRequest
     , _drDatasetId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsRollback'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsRollback' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'drPayload'
 --
 -- * 'drDatasetId'
-datasetsRollback'
+datasetsRollback
     :: RollbackRequest -- ^ 'drPayload'
     -> Text -- ^ 'drDatasetId'
-    -> DatasetsRollback'
-datasetsRollback' pDrPayload_ pDrDatasetId_ =
-    DatasetsRollback'
+    -> DatasetsRollback
+datasetsRollback pDrPayload_ pDrDatasetId_ =
+    DatasetsRollback
     { _drPayload = pDrPayload_
     , _drDatasetId = pDrDatasetId_
     }
 
 -- | Multipart request metadata.
-drPayload :: Lens' DatasetsRollback' RollbackRequest
+drPayload :: Lens' DatasetsRollback RollbackRequest
 drPayload
   = lens _drPayload (\ s a -> s{_drPayload = a})
 
 -- | Identifies the dataset.
-drDatasetId :: Lens' DatasetsRollback' Text
+drDatasetId :: Lens' DatasetsRollback Text
 drDatasetId
   = lens _drDatasetId (\ s a -> s{_drDatasetId = a})
 
-instance GoogleRequest DatasetsRollback' where
-        type Rs DatasetsRollback' = RollbackResponse
-        requestClient DatasetsRollback'{..}
+instance GoogleRequest DatasetsRollback where
+        type Rs DatasetsRollback = RollbackResponse
+        requestClient DatasetsRollback{..}
           = go _drDatasetId (Just AltJSON) _drPayload
               datastoreService
           where go

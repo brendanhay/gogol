@@ -30,8 +30,8 @@ module Network.Google.Resource.YouTubeReporting.Media.Download
       MediaDownloadResource
 
     -- * Creating a Request
-    , mediaDownload'
-    , MediaDownload'
+    , mediaDownload
+    , MediaDownload
 
     -- * Request Lenses
     , mdXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeReporting.Types
 
 -- | A resource alias for @youtubereporting.media.download@ method which the
--- 'MediaDownload'' request conforms to.
+-- 'MediaDownload' request conforms to.
 type MediaDownloadResource =
      "v1" :>
        "media" :>
@@ -78,8 +78,8 @@ type MediaDownloadResource =
 -- | Method for media download. Download is supported on the URI
 -- \`\/v1\/media\/{+name}?alt=media\`.
 --
--- /See:/ 'mediaDownload'' smart constructor.
-data MediaDownload' = MediaDownload'
+-- /See:/ 'mediaDownload' smart constructor.
+data MediaDownload = MediaDownload
     { _mdXgafv          :: !(Maybe Text)
     , _mdUploadProtocol :: !(Maybe Text)
     , _mdResourceName   :: !Text
@@ -90,7 +90,7 @@ data MediaDownload' = MediaDownload'
     , _mdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MediaDownload'' with the minimum fields required to make a request.
+-- | Creates a value of 'MediaDownload' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -109,11 +109,11 @@ data MediaDownload' = MediaDownload'
 -- * 'mdBearerToken'
 --
 -- * 'mdCallback'
-mediaDownload'
+mediaDownload
     :: Text -- ^ 'mdResourceName'
-    -> MediaDownload'
-mediaDownload' pMdResourceName_ =
-    MediaDownload'
+    -> MediaDownload
+mediaDownload pMdResourceName_ =
+    MediaDownload
     { _mdXgafv = Nothing
     , _mdUploadProtocol = Nothing
     , _mdResourceName = pMdResourceName_
@@ -125,51 +125,51 @@ mediaDownload' pMdResourceName_ =
     }
 
 -- | V1 error format.
-mdXgafv :: Lens' MediaDownload' (Maybe Text)
+mdXgafv :: Lens' MediaDownload (Maybe Text)
 mdXgafv = lens _mdXgafv (\ s a -> s{_mdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-mdUploadProtocol :: Lens' MediaDownload' (Maybe Text)
+mdUploadProtocol :: Lens' MediaDownload (Maybe Text)
 mdUploadProtocol
   = lens _mdUploadProtocol
       (\ s a -> s{_mdUploadProtocol = a})
 
 -- | Name of the media that is being downloaded. See
 -- [][ByteStream.ReadRequest.resource_name].
-mdResourceName :: Lens' MediaDownload' Text
+mdResourceName :: Lens' MediaDownload Text
 mdResourceName
   = lens _mdResourceName
       (\ s a -> s{_mdResourceName = a})
 
 -- | Pretty-print response.
-mdPp :: Lens' MediaDownload' Bool
+mdPp :: Lens' MediaDownload Bool
 mdPp = lens _mdPp (\ s a -> s{_mdPp = a})
 
 -- | OAuth access token.
-mdAccessToken :: Lens' MediaDownload' (Maybe Text)
+mdAccessToken :: Lens' MediaDownload (Maybe Text)
 mdAccessToken
   = lens _mdAccessToken
       (\ s a -> s{_mdAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-mdUploadType :: Lens' MediaDownload' (Maybe Text)
+mdUploadType :: Lens' MediaDownload (Maybe Text)
 mdUploadType
   = lens _mdUploadType (\ s a -> s{_mdUploadType = a})
 
 -- | OAuth bearer token.
-mdBearerToken :: Lens' MediaDownload' (Maybe Text)
+mdBearerToken :: Lens' MediaDownload (Maybe Text)
 mdBearerToken
   = lens _mdBearerToken
       (\ s a -> s{_mdBearerToken = a})
 
 -- | JSONP
-mdCallback :: Lens' MediaDownload' (Maybe Text)
+mdCallback :: Lens' MediaDownload (Maybe Text)
 mdCallback
   = lens _mdCallback (\ s a -> s{_mdCallback = a})
 
-instance GoogleRequest MediaDownload' where
-        type Rs MediaDownload' = Media
-        requestClient MediaDownload'{..}
+instance GoogleRequest MediaDownload where
+        type Rs MediaDownload = Media
+        requestClient MediaDownload{..}
           = go _mdResourceName _mdXgafv _mdUploadProtocol
               (Just _mdPp)
               _mdAccessToken
@@ -182,10 +182,10 @@ instance GoogleRequest MediaDownload' where
                   = buildClient (Proxy :: Proxy MediaDownloadResource)
                       mempty
 
-instance GoogleRequest (MediaDownload MediaDownload')
+instance GoogleRequest (MediaDownload MediaDownload)
          where
-        type Rs (MediaDownload MediaDownload') = Stream
-        requestClient (MediaDownload MediaDownload'{..})
+        type Rs (MediaDownload MediaDownload) = Stream
+        requestClient (MediaDownload MediaDownload{..})
           = go _mdResourceName _mdXgafv _mdUploadProtocol
               (Just _mdPp)
               _mdAccessToken

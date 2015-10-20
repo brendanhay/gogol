@@ -30,8 +30,8 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Patc
       LeaderboardConfigurationsPatchResource
 
     -- * Creating a Request
-    , leaderboardConfigurationsPatch'
-    , LeaderboardConfigurationsPatch'
+    , leaderboardConfigurationsPatch
+    , LeaderboardConfigurationsPatch
 
     -- * Request Lenses
     , lcpPayload
@@ -42,7 +42,7 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.leaderboardConfigurations.patch@ method which the
--- 'LeaderboardConfigurationsPatch'' request conforms to.
+-- 'LeaderboardConfigurationsPatch' request conforms to.
 type LeaderboardConfigurationsPatchResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
@@ -53,45 +53,45 @@ type LeaderboardConfigurationsPatchResource =
 -- | Update the metadata of the leaderboard configuration with the given ID.
 -- This method supports patch semantics.
 --
--- /See:/ 'leaderboardConfigurationsPatch'' smart constructor.
-data LeaderboardConfigurationsPatch' = LeaderboardConfigurationsPatch'
+-- /See:/ 'leaderboardConfigurationsPatch' smart constructor.
+data LeaderboardConfigurationsPatch = LeaderboardConfigurationsPatch
     { _lcpPayload       :: !LeaderboardConfiguration
     , _lcpLeaderboardId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LeaderboardConfigurationsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'LeaderboardConfigurationsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lcpPayload'
 --
 -- * 'lcpLeaderboardId'
-leaderboardConfigurationsPatch'
+leaderboardConfigurationsPatch
     :: LeaderboardConfiguration -- ^ 'lcpPayload'
     -> Text -- ^ 'lcpLeaderboardId'
-    -> LeaderboardConfigurationsPatch'
-leaderboardConfigurationsPatch' pLcpPayload_ pLcpLeaderboardId_ =
-    LeaderboardConfigurationsPatch'
+    -> LeaderboardConfigurationsPatch
+leaderboardConfigurationsPatch pLcpPayload_ pLcpLeaderboardId_ =
+    LeaderboardConfigurationsPatch
     { _lcpPayload = pLcpPayload_
     , _lcpLeaderboardId = pLcpLeaderboardId_
     }
 
 -- | Multipart request metadata.
-lcpPayload :: Lens' LeaderboardConfigurationsPatch' LeaderboardConfiguration
+lcpPayload :: Lens' LeaderboardConfigurationsPatch LeaderboardConfiguration
 lcpPayload
   = lens _lcpPayload (\ s a -> s{_lcpPayload = a})
 
 -- | The ID of the leaderboard.
-lcpLeaderboardId :: Lens' LeaderboardConfigurationsPatch' Text
+lcpLeaderboardId :: Lens' LeaderboardConfigurationsPatch Text
 lcpLeaderboardId
   = lens _lcpLeaderboardId
       (\ s a -> s{_lcpLeaderboardId = a})
 
-instance GoogleRequest
-         LeaderboardConfigurationsPatch' where
-        type Rs LeaderboardConfigurationsPatch' =
+instance GoogleRequest LeaderboardConfigurationsPatch
+         where
+        type Rs LeaderboardConfigurationsPatch =
              LeaderboardConfiguration
-        requestClient LeaderboardConfigurationsPatch'{..}
+        requestClient LeaderboardConfigurationsPatch{..}
           = go _lcpLeaderboardId (Just AltJSON) _lcpPayload
               gamesConfigurationService
           where go

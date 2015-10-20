@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Accounttax.Get
       AccounttaxGetResource
 
     -- * Creating a Request
-    , accounttaxGet'
-    , AccounttaxGet'
+    , accounttaxGet
+    , AccounttaxGet
 
     -- * Request Lenses
     , aggMerchantId
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accounttax.get@ method which the
--- 'AccounttaxGet'' request conforms to.
+-- 'AccounttaxGet' request conforms to.
 type AccounttaxGetResource =
      Capture "merchantId" Word64 :>
        "accounttax" :>
@@ -50,43 +50,43 @@ type AccounttaxGetResource =
 
 -- | Retrieves the tax settings of the account.
 --
--- /See:/ 'accounttaxGet'' smart constructor.
-data AccounttaxGet' = AccounttaxGet'
+-- /See:/ 'accounttaxGet' smart constructor.
+data AccounttaxGet = AccounttaxGet
     { _aggMerchantId :: !Word64
     , _aggAccountId  :: !Word64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccounttaxGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccounttaxGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aggMerchantId'
 --
 -- * 'aggAccountId'
-accounttaxGet'
+accounttaxGet
     :: Word64 -- ^ 'aggMerchantId'
     -> Word64 -- ^ 'aggAccountId'
-    -> AccounttaxGet'
-accounttaxGet' pAggMerchantId_ pAggAccountId_ =
-    AccounttaxGet'
+    -> AccounttaxGet
+accounttaxGet pAggMerchantId_ pAggAccountId_ =
+    AccounttaxGet
     { _aggMerchantId = pAggMerchantId_
     , _aggAccountId = pAggAccountId_
     }
 
 -- | The ID of the managing account.
-aggMerchantId :: Lens' AccounttaxGet' Word64
+aggMerchantId :: Lens' AccounttaxGet Word64
 aggMerchantId
   = lens _aggMerchantId
       (\ s a -> s{_aggMerchantId = a})
 
 -- | The ID of the account for which to get\/update account tax settings.
-aggAccountId :: Lens' AccounttaxGet' Word64
+aggAccountId :: Lens' AccounttaxGet Word64
 aggAccountId
   = lens _aggAccountId (\ s a -> s{_aggAccountId = a})
 
-instance GoogleRequest AccounttaxGet' where
-        type Rs AccounttaxGet' = AccountTax
-        requestClient AccounttaxGet'{..}
+instance GoogleRequest AccounttaxGet where
+        type Rs AccounttaxGet = AccountTax
+        requestClient AccounttaxGet{..}
           = go _aggMerchantId _aggAccountId (Just AltJSON)
               shoppingContentService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.Buckets.Update
       BucketsUpdateResource
 
     -- * Creating a Request
-    , bucketsUpdate'
-    , BucketsUpdate'
+    , bucketsUpdate
+    , BucketsUpdate
 
     -- * Request Lenses
     , buIfMetagenerationMatch
@@ -46,7 +46,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.buckets.update@ method which the
--- 'BucketsUpdate'' request conforms to.
+-- 'BucketsUpdate' request conforms to.
 type BucketsUpdateResource =
      "b" :>
        Capture "bucket" Text :>
@@ -63,8 +63,8 @@ type BucketsUpdateResource =
 
 -- | Updates a bucket.
 --
--- /See:/ 'bucketsUpdate'' smart constructor.
-data BucketsUpdate' = BucketsUpdate'
+-- /See:/ 'bucketsUpdate' smart constructor.
+data BucketsUpdate = BucketsUpdate
     { _buIfMetagenerationMatch      :: !(Maybe Int64)
     , _buPredefinedACL              :: !(Maybe BucketsUpdatePredefinedACL)
     , _buBucket                     :: !Text
@@ -74,7 +74,7 @@ data BucketsUpdate' = BucketsUpdate'
     , _buProjection                 :: !(Maybe BucketsUpdateProjection)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BucketsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'BucketsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -91,12 +91,12 @@ data BucketsUpdate' = BucketsUpdate'
 -- * 'buIfMetagenerationNotMatch'
 --
 -- * 'buProjection'
-bucketsUpdate'
+bucketsUpdate
     :: Text -- ^ 'buBucket'
     -> Bucket -- ^ 'buPayload'
-    -> BucketsUpdate'
-bucketsUpdate' pBuBucket_ pBuPayload_ =
-    BucketsUpdate'
+    -> BucketsUpdate
+bucketsUpdate pBuBucket_ pBuPayload_ =
+    BucketsUpdate
     { _buIfMetagenerationMatch = Nothing
     , _buPredefinedACL = Nothing
     , _buBucket = pBuBucket_
@@ -108,47 +108,47 @@ bucketsUpdate' pBuBucket_ pBuPayload_ =
 
 -- | Makes the return of the bucket metadata conditional on whether the
 -- bucket\'s current metageneration matches the given value.
-buIfMetagenerationMatch :: Lens' BucketsUpdate' (Maybe Int64)
+buIfMetagenerationMatch :: Lens' BucketsUpdate (Maybe Int64)
 buIfMetagenerationMatch
   = lens _buIfMetagenerationMatch
       (\ s a -> s{_buIfMetagenerationMatch = a})
 
 -- | Apply a predefined set of access controls to this bucket.
-buPredefinedACL :: Lens' BucketsUpdate' (Maybe BucketsUpdatePredefinedACL)
+buPredefinedACL :: Lens' BucketsUpdate (Maybe BucketsUpdatePredefinedACL)
 buPredefinedACL
   = lens _buPredefinedACL
       (\ s a -> s{_buPredefinedACL = a})
 
 -- | Name of a bucket.
-buBucket :: Lens' BucketsUpdate' Text
+buBucket :: Lens' BucketsUpdate Text
 buBucket = lens _buBucket (\ s a -> s{_buBucket = a})
 
 -- | Multipart request metadata.
-buPayload :: Lens' BucketsUpdate' Bucket
+buPayload :: Lens' BucketsUpdate Bucket
 buPayload
   = lens _buPayload (\ s a -> s{_buPayload = a})
 
 -- | Apply a predefined set of default object access controls to this bucket.
-buPredefinedDefaultObjectACL :: Lens' BucketsUpdate' (Maybe BucketsUpdatePredefinedDefaultObjectACL)
+buPredefinedDefaultObjectACL :: Lens' BucketsUpdate (Maybe BucketsUpdatePredefinedDefaultObjectACL)
 buPredefinedDefaultObjectACL
   = lens _buPredefinedDefaultObjectACL
       (\ s a -> s{_buPredefinedDefaultObjectACL = a})
 
 -- | Makes the return of the bucket metadata conditional on whether the
 -- bucket\'s current metageneration does not match the given value.
-buIfMetagenerationNotMatch :: Lens' BucketsUpdate' (Maybe Int64)
+buIfMetagenerationNotMatch :: Lens' BucketsUpdate (Maybe Int64)
 buIfMetagenerationNotMatch
   = lens _buIfMetagenerationNotMatch
       (\ s a -> s{_buIfMetagenerationNotMatch = a})
 
 -- | Set of properties to return. Defaults to full.
-buProjection :: Lens' BucketsUpdate' (Maybe BucketsUpdateProjection)
+buProjection :: Lens' BucketsUpdate (Maybe BucketsUpdateProjection)
 buProjection
   = lens _buProjection (\ s a -> s{_buProjection = a})
 
-instance GoogleRequest BucketsUpdate' where
-        type Rs BucketsUpdate' = Bucket
-        requestClient BucketsUpdate'{..}
+instance GoogleRequest BucketsUpdate where
+        type Rs BucketsUpdate = Bucket
+        requestClient BucketsUpdate{..}
           = go _buBucket _buIfMetagenerationMatch
               _buPredefinedACL
               _buPredefinedDefaultObjectACL

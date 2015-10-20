@@ -30,8 +30,8 @@ module Network.Google.Resource.Storage.BucketAccessControls.Patch
       BucketAccessControlsPatchResource
 
     -- * Creating a Request
-    , bucketAccessControlsPatch'
-    , BucketAccessControlsPatch'
+    , bucketAccessControlsPatch
+    , BucketAccessControlsPatch
 
     -- * Request Lenses
     , bacpBucket
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.bucketAccessControls.patch@ method which the
--- 'BucketAccessControlsPatch'' request conforms to.
+-- 'BucketAccessControlsPatch' request conforms to.
 type BucketAccessControlsPatchResource =
      "b" :>
        Capture "bucket" Text :>
@@ -56,14 +56,14 @@ type BucketAccessControlsPatchResource =
 -- | Updates an ACL entry on the specified bucket. This method supports patch
 -- semantics.
 --
--- /See:/ 'bucketAccessControlsPatch'' smart constructor.
-data BucketAccessControlsPatch' = BucketAccessControlsPatch'
+-- /See:/ 'bucketAccessControlsPatch' smart constructor.
+data BucketAccessControlsPatch = BucketAccessControlsPatch
     { _bacpBucket  :: !Text
     , _bacpPayload :: !BucketAccessControl
     , _bacpEntity  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BucketAccessControlsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'BucketAccessControlsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,40 +72,40 @@ data BucketAccessControlsPatch' = BucketAccessControlsPatch'
 -- * 'bacpPayload'
 --
 -- * 'bacpEntity'
-bucketAccessControlsPatch'
+bucketAccessControlsPatch
     :: Text -- ^ 'bacpBucket'
     -> BucketAccessControl -- ^ 'bacpPayload'
     -> Text -- ^ 'bacpEntity'
-    -> BucketAccessControlsPatch'
-bucketAccessControlsPatch' pBacpBucket_ pBacpPayload_ pBacpEntity_ =
-    BucketAccessControlsPatch'
+    -> BucketAccessControlsPatch
+bucketAccessControlsPatch pBacpBucket_ pBacpPayload_ pBacpEntity_ =
+    BucketAccessControlsPatch
     { _bacpBucket = pBacpBucket_
     , _bacpPayload = pBacpPayload_
     , _bacpEntity = pBacpEntity_
     }
 
 -- | Name of a bucket.
-bacpBucket :: Lens' BucketAccessControlsPatch' Text
+bacpBucket :: Lens' BucketAccessControlsPatch Text
 bacpBucket
   = lens _bacpBucket (\ s a -> s{_bacpBucket = a})
 
 -- | Multipart request metadata.
-bacpPayload :: Lens' BucketAccessControlsPatch' BucketAccessControl
+bacpPayload :: Lens' BucketAccessControlsPatch BucketAccessControl
 bacpPayload
   = lens _bacpPayload (\ s a -> s{_bacpPayload = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
 -- allAuthenticatedUsers.
-bacpEntity :: Lens' BucketAccessControlsPatch' Text
+bacpEntity :: Lens' BucketAccessControlsPatch Text
 bacpEntity
   = lens _bacpEntity (\ s a -> s{_bacpEntity = a})
 
-instance GoogleRequest BucketAccessControlsPatch'
+instance GoogleRequest BucketAccessControlsPatch
          where
-        type Rs BucketAccessControlsPatch' =
+        type Rs BucketAccessControlsPatch =
              BucketAccessControl
-        requestClient BucketAccessControlsPatch'{..}
+        requestClient BucketAccessControlsPatch{..}
           = go _bacpBucket _bacpEntity (Just AltJSON)
               _bacpPayload
               storageService

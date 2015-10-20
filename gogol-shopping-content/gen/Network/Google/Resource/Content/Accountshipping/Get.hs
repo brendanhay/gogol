@@ -29,19 +29,19 @@ module Network.Google.Resource.Content.Accountshipping.Get
       AccountshippingGetResource
 
     -- * Creating a Request
-    , accountshippingGet'
-    , AccountshippingGet'
+    , accountshippingGet
+    , AccountshippingGet
 
     -- * Request Lenses
-    , agMerchantId
-    , agAccountId
+    , acccMerchantId
+    , acccAccountId
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accountshipping.get@ method which the
--- 'AccountshippingGet'' request conforms to.
+-- 'AccountshippingGet' request conforms to.
 type AccountshippingGetResource =
      Capture "merchantId" Word64 :>
        "accountshipping" :>
@@ -51,44 +51,46 @@ type AccountshippingGetResource =
 
 -- | Retrieves the shipping settings of the account.
 --
--- /See:/ 'accountshippingGet'' smart constructor.
-data AccountshippingGet' = AccountshippingGet'
-    { _agMerchantId :: !Word64
-    , _agAccountId  :: !Word64
+-- /See:/ 'accountshippingGet' smart constructor.
+data AccountshippingGet = AccountshippingGet
+    { _acccMerchantId :: !Word64
+    , _acccAccountId  :: !Word64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountshippingGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountshippingGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'agMerchantId'
+-- * 'acccMerchantId'
 --
--- * 'agAccountId'
-accountshippingGet'
-    :: Word64 -- ^ 'agMerchantId'
-    -> Word64 -- ^ 'agAccountId'
-    -> AccountshippingGet'
-accountshippingGet' pAgMerchantId_ pAgAccountId_ =
-    AccountshippingGet'
-    { _agMerchantId = pAgMerchantId_
-    , _agAccountId = pAgAccountId_
+-- * 'acccAccountId'
+accountshippingGet
+    :: Word64 -- ^ 'acccMerchantId'
+    -> Word64 -- ^ 'acccAccountId'
+    -> AccountshippingGet
+accountshippingGet pAcccMerchantId_ pAcccAccountId_ =
+    AccountshippingGet
+    { _acccMerchantId = pAcccMerchantId_
+    , _acccAccountId = pAcccAccountId_
     }
 
 -- | The ID of the managing account.
-agMerchantId :: Lens' AccountshippingGet' Word64
-agMerchantId
-  = lens _agMerchantId (\ s a -> s{_agMerchantId = a})
+acccMerchantId :: Lens' AccountshippingGet Word64
+acccMerchantId
+  = lens _acccMerchantId
+      (\ s a -> s{_acccMerchantId = a})
 
 -- | The ID of the account for which to get\/update account shipping
 -- settings.
-agAccountId :: Lens' AccountshippingGet' Word64
-agAccountId
-  = lens _agAccountId (\ s a -> s{_agAccountId = a})
+acccAccountId :: Lens' AccountshippingGet Word64
+acccAccountId
+  = lens _acccAccountId
+      (\ s a -> s{_acccAccountId = a})
 
-instance GoogleRequest AccountshippingGet' where
-        type Rs AccountshippingGet' = AccountShipping
-        requestClient AccountshippingGet'{..}
-          = go _agMerchantId _agAccountId (Just AltJSON)
+instance GoogleRequest AccountshippingGet where
+        type Rs AccountshippingGet = AccountShipping
+        requestClient AccountshippingGet{..}
+          = go _acccMerchantId _acccAccountId (Just AltJSON)
               shoppingContentService
           where go
                   = buildClient

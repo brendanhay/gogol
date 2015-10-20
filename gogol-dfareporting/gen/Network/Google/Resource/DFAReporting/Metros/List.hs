@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Metros.List
       MetrosListResource
 
     -- * Creating a Request
-    , metrosList'
-    , MetrosList'
+    , metrosList
+    , MetrosList
 
     -- * Request Lenses
     , mlProFileId
@@ -40,7 +40,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.metros.list@ method which the
--- 'MetrosList'' request conforms to.
+-- 'MetrosList' request conforms to.
 type MetrosListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -50,32 +50,32 @@ type MetrosListResource =
 
 -- | Retrieves a list of metros.
 --
--- /See:/ 'metrosList'' smart constructor.
-newtype MetrosList' = MetrosList'
+-- /See:/ 'metrosList' smart constructor.
+newtype MetrosList = MetrosList
     { _mlProFileId :: Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MetrosList'' with the minimum fields required to make a request.
+-- | Creates a value of 'MetrosList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mlProFileId'
-metrosList'
+metrosList
     :: Int64 -- ^ 'mlProFileId'
-    -> MetrosList'
-metrosList' pMlProFileId_ =
-    MetrosList'
+    -> MetrosList
+metrosList pMlProFileId_ =
+    MetrosList
     { _mlProFileId = pMlProFileId_
     }
 
 -- | User profile ID associated with this request.
-mlProFileId :: Lens' MetrosList' Int64
+mlProFileId :: Lens' MetrosList Int64
 mlProFileId
   = lens _mlProFileId (\ s a -> s{_mlProFileId = a})
 
-instance GoogleRequest MetrosList' where
-        type Rs MetrosList' = MetrosListResponse
-        requestClient MetrosList'{..}
+instance GoogleRequest MetrosList where
+        type Rs MetrosList = MetrosListResponse
+        requestClient MetrosList{..}
           = go _mlProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy MetrosListResource)

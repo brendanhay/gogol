@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
       ProjectsGetIAMPolicyResource
 
     -- * Creating a Request
-    , projectsGetIAMPolicy'
-    , ProjectsGetIAMPolicy'
+    , projectsGetIAMPolicy
+    , ProjectsGetIAMPolicy
 
     -- * Request Lenses
     , pgipXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.projects.getIamPolicy@ method which the
--- 'ProjectsGetIAMPolicy'' request conforms to.
+-- 'ProjectsGetIAMPolicy' request conforms to.
 type ProjectsGetIAMPolicyResource =
      "v1beta1" :>
        "projects" :>
@@ -66,8 +66,8 @@ type ProjectsGetIAMPolicyResource =
 
 -- | Returns the IAM access control policy for specified project.
 --
--- /See:/ 'projectsGetIAMPolicy'' smart constructor.
-data ProjectsGetIAMPolicy' = ProjectsGetIAMPolicy'
+-- /See:/ 'projectsGetIAMPolicy' smart constructor.
+data ProjectsGetIAMPolicy = ProjectsGetIAMPolicy
     { _pgipXgafv          :: !(Maybe Text)
     , _pgipUploadProtocol :: !(Maybe Text)
     , _pgipPp             :: !Bool
@@ -79,7 +79,7 @@ data ProjectsGetIAMPolicy' = ProjectsGetIAMPolicy'
     , _pgipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsGetIAMPolicy'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsGetIAMPolicy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -100,12 +100,12 @@ data ProjectsGetIAMPolicy' = ProjectsGetIAMPolicy'
 -- * 'pgipResource'
 --
 -- * 'pgipCallback'
-projectsGetIAMPolicy'
+projectsGetIAMPolicy
     :: GetIAMPolicyRequest -- ^ 'pgipPayload'
     -> Text -- ^ 'pgipResource'
-    -> ProjectsGetIAMPolicy'
-projectsGetIAMPolicy' pPgipPayload_ pPgipResource_ =
-    ProjectsGetIAMPolicy'
+    -> ProjectsGetIAMPolicy
+projectsGetIAMPolicy pPgipPayload_ pPgipResource_ =
+    ProjectsGetIAMPolicy
     { _pgipXgafv = Nothing
     , _pgipUploadProtocol = Nothing
     , _pgipPp = True
@@ -118,57 +118,57 @@ projectsGetIAMPolicy' pPgipPayload_ pPgipResource_ =
     }
 
 -- | V1 error format.
-pgipXgafv :: Lens' ProjectsGetIAMPolicy' (Maybe Text)
+pgipXgafv :: Lens' ProjectsGetIAMPolicy (Maybe Text)
 pgipXgafv
   = lens _pgipXgafv (\ s a -> s{_pgipXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pgipUploadProtocol :: Lens' ProjectsGetIAMPolicy' (Maybe Text)
+pgipUploadProtocol :: Lens' ProjectsGetIAMPolicy (Maybe Text)
 pgipUploadProtocol
   = lens _pgipUploadProtocol
       (\ s a -> s{_pgipUploadProtocol = a})
 
 -- | Pretty-print response.
-pgipPp :: Lens' ProjectsGetIAMPolicy' Bool
+pgipPp :: Lens' ProjectsGetIAMPolicy Bool
 pgipPp = lens _pgipPp (\ s a -> s{_pgipPp = a})
 
 -- | OAuth access token.
-pgipAccessToken :: Lens' ProjectsGetIAMPolicy' (Maybe Text)
+pgipAccessToken :: Lens' ProjectsGetIAMPolicy (Maybe Text)
 pgipAccessToken
   = lens _pgipAccessToken
       (\ s a -> s{_pgipAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pgipUploadType :: Lens' ProjectsGetIAMPolicy' (Maybe Text)
+pgipUploadType :: Lens' ProjectsGetIAMPolicy (Maybe Text)
 pgipUploadType
   = lens _pgipUploadType
       (\ s a -> s{_pgipUploadType = a})
 
 -- | Multipart request metadata.
-pgipPayload :: Lens' ProjectsGetIAMPolicy' GetIAMPolicyRequest
+pgipPayload :: Lens' ProjectsGetIAMPolicy GetIAMPolicyRequest
 pgipPayload
   = lens _pgipPayload (\ s a -> s{_pgipPayload = a})
 
 -- | OAuth bearer token.
-pgipBearerToken :: Lens' ProjectsGetIAMPolicy' (Maybe Text)
+pgipBearerToken :: Lens' ProjectsGetIAMPolicy (Maybe Text)
 pgipBearerToken
   = lens _pgipBearerToken
       (\ s a -> s{_pgipBearerToken = a})
 
 -- | REQUIRED: The resource for which policy is being requested. Resource is
 -- usually specified as a path, such as, \`projects\/{project}\`.
-pgipResource :: Lens' ProjectsGetIAMPolicy' Text
+pgipResource :: Lens' ProjectsGetIAMPolicy Text
 pgipResource
   = lens _pgipResource (\ s a -> s{_pgipResource = a})
 
 -- | JSONP
-pgipCallback :: Lens' ProjectsGetIAMPolicy' (Maybe Text)
+pgipCallback :: Lens' ProjectsGetIAMPolicy (Maybe Text)
 pgipCallback
   = lens _pgipCallback (\ s a -> s{_pgipCallback = a})
 
-instance GoogleRequest ProjectsGetIAMPolicy' where
-        type Rs ProjectsGetIAMPolicy' = Policy
-        requestClient ProjectsGetIAMPolicy'{..}
+instance GoogleRequest ProjectsGetIAMPolicy where
+        type Rs ProjectsGetIAMPolicy = Policy
+        requestClient ProjectsGetIAMPolicy{..}
           = go _pgipResource _pgipXgafv _pgipUploadProtocol
               (Just _pgipPp)
               _pgipAccessToken

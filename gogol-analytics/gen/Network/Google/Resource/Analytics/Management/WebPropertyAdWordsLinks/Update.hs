@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Upda
       ManagementWebPropertyAdWordsLinksUpdateResource
 
     -- * Creating a Request
-    , managementWebPropertyAdWordsLinksUpdate'
-    , ManagementWebPropertyAdWordsLinksUpdate'
+    , managementWebPropertyAdWordsLinksUpdate
+    , ManagementWebPropertyAdWordsLinksUpdate
 
     -- * Request Lenses
     , mwpawluWebPropertyId
@@ -43,7 +43,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webPropertyAdWordsLinks.update@ method which the
--- 'ManagementWebPropertyAdWordsLinksUpdate'' request conforms to.
+-- 'ManagementWebPropertyAdWordsLinksUpdate' request conforms to.
 type ManagementWebPropertyAdWordsLinksUpdateResource
      =
      "management" :>
@@ -59,15 +59,15 @@ type ManagementWebPropertyAdWordsLinksUpdateResource
 
 -- | Updates an existing webProperty-AdWords link.
 --
--- /See:/ 'managementWebPropertyAdWordsLinksUpdate'' smart constructor.
-data ManagementWebPropertyAdWordsLinksUpdate' = ManagementWebPropertyAdWordsLinksUpdate'
+-- /See:/ 'managementWebPropertyAdWordsLinksUpdate' smart constructor.
+data ManagementWebPropertyAdWordsLinksUpdate = ManagementWebPropertyAdWordsLinksUpdate
     { _mwpawluWebPropertyId            :: !Text
     , _mwpawluPayload                  :: !EntityAdWordsLink
     , _mwpawluAccountId                :: !Text
     , _mwpawluWebPropertyAdWordsLinkId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementWebPropertyAdWordsLinksUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementWebPropertyAdWordsLinksUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -78,14 +78,14 @@ data ManagementWebPropertyAdWordsLinksUpdate' = ManagementWebPropertyAdWordsLink
 -- * 'mwpawluAccountId'
 --
 -- * 'mwpawluWebPropertyAdWordsLinkId'
-managementWebPropertyAdWordsLinksUpdate'
+managementWebPropertyAdWordsLinksUpdate
     :: Text -- ^ 'mwpawluWebPropertyId'
     -> EntityAdWordsLink -- ^ 'mwpawluPayload'
     -> Text -- ^ 'mwpawluAccountId'
     -> Text -- ^ 'mwpawluWebPropertyAdWordsLinkId'
-    -> ManagementWebPropertyAdWordsLinksUpdate'
-managementWebPropertyAdWordsLinksUpdate' pMwpawluWebPropertyId_ pMwpawluPayload_ pMwpawluAccountId_ pMwpawluWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksUpdate'
+    -> ManagementWebPropertyAdWordsLinksUpdate
+managementWebPropertyAdWordsLinksUpdate pMwpawluWebPropertyId_ pMwpawluPayload_ pMwpawluAccountId_ pMwpawluWebPropertyAdWordsLinkId_ =
+    ManagementWebPropertyAdWordsLinksUpdate
     { _mwpawluWebPropertyId = pMwpawluWebPropertyId_
     , _mwpawluPayload = pMwpawluPayload_
     , _mwpawluAccountId = pMwpawluAccountId_
@@ -93,35 +93,35 @@ managementWebPropertyAdWordsLinksUpdate' pMwpawluWebPropertyId_ pMwpawluPayload_
     }
 
 -- | Web property ID to retrieve the AdWords link for.
-mwpawluWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksUpdate' Text
+mwpawluWebPropertyId :: Lens' ManagementWebPropertyAdWordsLinksUpdate Text
 mwpawluWebPropertyId
   = lens _mwpawluWebPropertyId
       (\ s a -> s{_mwpawluWebPropertyId = a})
 
 -- | Multipart request metadata.
-mwpawluPayload :: Lens' ManagementWebPropertyAdWordsLinksUpdate' EntityAdWordsLink
+mwpawluPayload :: Lens' ManagementWebPropertyAdWordsLinksUpdate EntityAdWordsLink
 mwpawluPayload
   = lens _mwpawluPayload
       (\ s a -> s{_mwpawluPayload = a})
 
 -- | ID of the account which the given web property belongs to.
-mwpawluAccountId :: Lens' ManagementWebPropertyAdWordsLinksUpdate' Text
+mwpawluAccountId :: Lens' ManagementWebPropertyAdWordsLinksUpdate Text
 mwpawluAccountId
   = lens _mwpawluAccountId
       (\ s a -> s{_mwpawluAccountId = a})
 
 -- | Web property-AdWords link ID.
-mwpawluWebPropertyAdWordsLinkId :: Lens' ManagementWebPropertyAdWordsLinksUpdate' Text
+mwpawluWebPropertyAdWordsLinkId :: Lens' ManagementWebPropertyAdWordsLinksUpdate Text
 mwpawluWebPropertyAdWordsLinkId
   = lens _mwpawluWebPropertyAdWordsLinkId
       (\ s a -> s{_mwpawluWebPropertyAdWordsLinkId = a})
 
 instance GoogleRequest
-         ManagementWebPropertyAdWordsLinksUpdate' where
-        type Rs ManagementWebPropertyAdWordsLinksUpdate' =
+         ManagementWebPropertyAdWordsLinksUpdate where
+        type Rs ManagementWebPropertyAdWordsLinksUpdate =
              EntityAdWordsLink
         requestClient
-          ManagementWebPropertyAdWordsLinksUpdate'{..}
+          ManagementWebPropertyAdWordsLinksUpdate{..}
           = go _mwpawluAccountId _mwpawluWebPropertyId
               _mwpawluWebPropertyAdWordsLinkId
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.SQL.BackupRuns.Delete
       BackupRunsDeleteResource
 
     -- * Creating a Request
-    , backupRunsDelete'
-    , BackupRunsDelete'
+    , backupRunsDelete
+    , BackupRunsDelete
 
     -- * Request Lenses
     , brdProject
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.backupRuns.delete@ method which the
--- 'BackupRunsDelete'' request conforms to.
+-- 'BackupRunsDelete' request conforms to.
 type BackupRunsDeleteResource =
      "projects" :>
        Capture "project" Text :>
@@ -54,14 +54,14 @@ type BackupRunsDeleteResource =
 
 -- | Deletes the backup taken by a backup run.
 --
--- /See:/ 'backupRunsDelete'' smart constructor.
-data BackupRunsDelete' = BackupRunsDelete'
+-- /See:/ 'backupRunsDelete' smart constructor.
+data BackupRunsDelete = BackupRunsDelete
     { _brdProject  :: !Text
     , _brdId       :: !Int64
     , _brdInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BackupRunsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'BackupRunsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,36 +70,36 @@ data BackupRunsDelete' = BackupRunsDelete'
 -- * 'brdId'
 --
 -- * 'brdInstance'
-backupRunsDelete'
+backupRunsDelete
     :: Text -- ^ 'brdProject'
     -> Int64 -- ^ 'brdId'
     -> Text -- ^ 'brdInstance'
-    -> BackupRunsDelete'
-backupRunsDelete' pBrdProject_ pBrdId_ pBrdInstance_ =
-    BackupRunsDelete'
+    -> BackupRunsDelete
+backupRunsDelete pBrdProject_ pBrdId_ pBrdInstance_ =
+    BackupRunsDelete
     { _brdProject = pBrdProject_
     , _brdId = pBrdId_
     , _brdInstance = pBrdInstance_
     }
 
 -- | Project ID of the project that contains the instance.
-brdProject :: Lens' BackupRunsDelete' Text
+brdProject :: Lens' BackupRunsDelete Text
 brdProject
   = lens _brdProject (\ s a -> s{_brdProject = a})
 
 -- | The ID of the Backup Run to delete. To find a Backup Run ID, use the
 -- list method.
-brdId :: Lens' BackupRunsDelete' Int64
+brdId :: Lens' BackupRunsDelete Int64
 brdId = lens _brdId (\ s a -> s{_brdId = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-brdInstance :: Lens' BackupRunsDelete' Text
+brdInstance :: Lens' BackupRunsDelete Text
 brdInstance
   = lens _brdInstance (\ s a -> s{_brdInstance = a})
 
-instance GoogleRequest BackupRunsDelete' where
-        type Rs BackupRunsDelete' = Operation
-        requestClient BackupRunsDelete'{..}
+instance GoogleRequest BackupRunsDelete where
+        type Rs BackupRunsDelete = Operation
+        requestClient BackupRunsDelete{..}
           = go _brdProject _brdInstance _brdId (Just AltJSON)
               sQLAdminService
           where go

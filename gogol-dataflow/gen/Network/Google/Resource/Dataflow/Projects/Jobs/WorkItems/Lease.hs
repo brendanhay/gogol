@@ -29,8 +29,8 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
       ProjectsJobsWorkItemsLeaseResource
 
     -- * Creating a Request
-    , projectsJobsWorkItemsLease'
-    , ProjectsJobsWorkItemsLease'
+    , projectsJobsWorkItemsLease
+    , ProjectsJobsWorkItemsLease
 
     -- * Request Lenses
     , pjwilXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dataflow.projects.jobs.workItems.lease@ method which the
--- 'ProjectsJobsWorkItemsLease'' request conforms to.
+-- 'ProjectsJobsWorkItemsLease' request conforms to.
 type ProjectsJobsWorkItemsLeaseResource =
      "v1b3" :>
        "projects" :>
@@ -70,8 +70,8 @@ type ProjectsJobsWorkItemsLeaseResource =
 
 -- | Leases a dataflow WorkItem to run.
 --
--- /See:/ 'projectsJobsWorkItemsLease'' smart constructor.
-data ProjectsJobsWorkItemsLease' = ProjectsJobsWorkItemsLease'
+-- /See:/ 'projectsJobsWorkItemsLease' smart constructor.
+data ProjectsJobsWorkItemsLease = ProjectsJobsWorkItemsLease
     { _pjwilXgafv          :: !(Maybe Text)
     , _pjwilJobId          :: !Text
     , _pjwilUploadProtocol :: !(Maybe Text)
@@ -84,7 +84,7 @@ data ProjectsJobsWorkItemsLease' = ProjectsJobsWorkItemsLease'
     , _pjwilCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsJobsWorkItemsLease'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsJobsWorkItemsLease' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -107,13 +107,13 @@ data ProjectsJobsWorkItemsLease' = ProjectsJobsWorkItemsLease'
 -- * 'pjwilProjectId'
 --
 -- * 'pjwilCallback'
-projectsJobsWorkItemsLease'
+projectsJobsWorkItemsLease
     :: Text -- ^ 'pjwilJobId'
     -> LeaseWorkItemRequest -- ^ 'pjwilPayload'
     -> Text -- ^ 'pjwilProjectId'
-    -> ProjectsJobsWorkItemsLease'
-projectsJobsWorkItemsLease' pPjwilJobId_ pPjwilPayload_ pPjwilProjectId_ =
-    ProjectsJobsWorkItemsLease'
+    -> ProjectsJobsWorkItemsLease
+projectsJobsWorkItemsLease pPjwilJobId_ pPjwilPayload_ pPjwilProjectId_ =
+    ProjectsJobsWorkItemsLease
     { _pjwilXgafv = Nothing
     , _pjwilJobId = pPjwilJobId_
     , _pjwilUploadProtocol = Nothing
@@ -127,65 +127,65 @@ projectsJobsWorkItemsLease' pPjwilJobId_ pPjwilPayload_ pPjwilProjectId_ =
     }
 
 -- | V1 error format.
-pjwilXgafv :: Lens' ProjectsJobsWorkItemsLease' (Maybe Text)
+pjwilXgafv :: Lens' ProjectsJobsWorkItemsLease (Maybe Text)
 pjwilXgafv
   = lens _pjwilXgafv (\ s a -> s{_pjwilXgafv = a})
 
 -- | Identifies the workflow job this worker belongs to.
-pjwilJobId :: Lens' ProjectsJobsWorkItemsLease' Text
+pjwilJobId :: Lens' ProjectsJobsWorkItemsLease Text
 pjwilJobId
   = lens _pjwilJobId (\ s a -> s{_pjwilJobId = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pjwilUploadProtocol :: Lens' ProjectsJobsWorkItemsLease' (Maybe Text)
+pjwilUploadProtocol :: Lens' ProjectsJobsWorkItemsLease (Maybe Text)
 pjwilUploadProtocol
   = lens _pjwilUploadProtocol
       (\ s a -> s{_pjwilUploadProtocol = a})
 
 -- | Pretty-print response.
-pjwilPp :: Lens' ProjectsJobsWorkItemsLease' Bool
+pjwilPp :: Lens' ProjectsJobsWorkItemsLease Bool
 pjwilPp = lens _pjwilPp (\ s a -> s{_pjwilPp = a})
 
 -- | OAuth access token.
-pjwilAccessToken :: Lens' ProjectsJobsWorkItemsLease' (Maybe Text)
+pjwilAccessToken :: Lens' ProjectsJobsWorkItemsLease (Maybe Text)
 pjwilAccessToken
   = lens _pjwilAccessToken
       (\ s a -> s{_pjwilAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pjwilUploadType :: Lens' ProjectsJobsWorkItemsLease' (Maybe Text)
+pjwilUploadType :: Lens' ProjectsJobsWorkItemsLease (Maybe Text)
 pjwilUploadType
   = lens _pjwilUploadType
       (\ s a -> s{_pjwilUploadType = a})
 
 -- | Multipart request metadata.
-pjwilPayload :: Lens' ProjectsJobsWorkItemsLease' LeaseWorkItemRequest
+pjwilPayload :: Lens' ProjectsJobsWorkItemsLease LeaseWorkItemRequest
 pjwilPayload
   = lens _pjwilPayload (\ s a -> s{_pjwilPayload = a})
 
 -- | OAuth bearer token.
-pjwilBearerToken :: Lens' ProjectsJobsWorkItemsLease' (Maybe Text)
+pjwilBearerToken :: Lens' ProjectsJobsWorkItemsLease (Maybe Text)
 pjwilBearerToken
   = lens _pjwilBearerToken
       (\ s a -> s{_pjwilBearerToken = a})
 
 -- | Identifies the project this worker belongs to.
-pjwilProjectId :: Lens' ProjectsJobsWorkItemsLease' Text
+pjwilProjectId :: Lens' ProjectsJobsWorkItemsLease Text
 pjwilProjectId
   = lens _pjwilProjectId
       (\ s a -> s{_pjwilProjectId = a})
 
 -- | JSONP
-pjwilCallback :: Lens' ProjectsJobsWorkItemsLease' (Maybe Text)
+pjwilCallback :: Lens' ProjectsJobsWorkItemsLease (Maybe Text)
 pjwilCallback
   = lens _pjwilCallback
       (\ s a -> s{_pjwilCallback = a})
 
-instance GoogleRequest ProjectsJobsWorkItemsLease'
+instance GoogleRequest ProjectsJobsWorkItemsLease
          where
-        type Rs ProjectsJobsWorkItemsLease' =
+        type Rs ProjectsJobsWorkItemsLease =
              LeaseWorkItemResponse
-        requestClient ProjectsJobsWorkItemsLease'{..}
+        requestClient ProjectsJobsWorkItemsLease{..}
           = go _pjwilProjectId _pjwilJobId _pjwilXgafv
               _pjwilUploadProtocol
               (Just _pjwilPp)

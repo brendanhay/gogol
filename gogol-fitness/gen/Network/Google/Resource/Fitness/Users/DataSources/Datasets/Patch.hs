@@ -32,8 +32,8 @@ module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Patch
       UsersDataSourcesDatasetsPatchResource
 
     -- * Creating a Request
-    , usersDataSourcesDatasetsPatch'
-    , UsersDataSourcesDatasetsPatch'
+    , usersDataSourcesDatasetsPatch
+    , UsersDataSourcesDatasetsPatch
 
     -- * Request Lenses
     , udsdpDataSourceId
@@ -47,7 +47,7 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fitness.users.dataSources.datasets.patch@ method which the
--- 'UsersDataSourcesDatasetsPatch'' request conforms to.
+-- 'UsersDataSourcesDatasetsPatch' request conforms to.
 type UsersDataSourcesDatasetsPatchResource =
      Capture "userId" Text :>
        "dataSources" :>
@@ -63,8 +63,8 @@ type UsersDataSourcesDatasetsPatchResource =
 -- subsquent calls to retrieve this dataset. Data points can belong to more
 -- than one dataset. This method does not use patch semantics.
 --
--- /See:/ 'usersDataSourcesDatasetsPatch'' smart constructor.
-data UsersDataSourcesDatasetsPatch' = UsersDataSourcesDatasetsPatch'
+-- /See:/ 'usersDataSourcesDatasetsPatch' smart constructor.
+data UsersDataSourcesDatasetsPatch = UsersDataSourcesDatasetsPatch
     { _udsdpDataSourceId      :: !Text
     , _udsdpPayload           :: !Dataset
     , _udsdpUserId            :: !Text
@@ -72,7 +72,7 @@ data UsersDataSourcesDatasetsPatch' = UsersDataSourcesDatasetsPatch'
     , _udsdpCurrentTimeMillis :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersDataSourcesDatasetsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersDataSourcesDatasetsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -85,14 +85,14 @@ data UsersDataSourcesDatasetsPatch' = UsersDataSourcesDatasetsPatch'
 -- * 'udsdpDatasetId'
 --
 -- * 'udsdpCurrentTimeMillis'
-usersDataSourcesDatasetsPatch'
+usersDataSourcesDatasetsPatch
     :: Text -- ^ 'udsdpDataSourceId'
     -> Dataset -- ^ 'udsdpPayload'
     -> Text -- ^ 'udsdpUserId'
     -> Text -- ^ 'udsdpDatasetId'
-    -> UsersDataSourcesDatasetsPatch'
-usersDataSourcesDatasetsPatch' pUdsdpDataSourceId_ pUdsdpPayload_ pUdsdpUserId_ pUdsdpDatasetId_ =
-    UsersDataSourcesDatasetsPatch'
+    -> UsersDataSourcesDatasetsPatch
+usersDataSourcesDatasetsPatch pUdsdpDataSourceId_ pUdsdpPayload_ pUdsdpUserId_ pUdsdpDatasetId_ =
+    UsersDataSourcesDatasetsPatch
     { _udsdpDataSourceId = pUdsdpDataSourceId_
     , _udsdpPayload = pUdsdpPayload_
     , _udsdpUserId = pUdsdpUserId_
@@ -101,19 +101,19 @@ usersDataSourcesDatasetsPatch' pUdsdpDataSourceId_ pUdsdpPayload_ pUdsdpUserId_ 
     }
 
 -- | The data stream ID of the data source that created the dataset.
-udsdpDataSourceId :: Lens' UsersDataSourcesDatasetsPatch' Text
+udsdpDataSourceId :: Lens' UsersDataSourcesDatasetsPatch Text
 udsdpDataSourceId
   = lens _udsdpDataSourceId
       (\ s a -> s{_udsdpDataSourceId = a})
 
 -- | Multipart request metadata.
-udsdpPayload :: Lens' UsersDataSourcesDatasetsPatch' Dataset
+udsdpPayload :: Lens' UsersDataSourcesDatasetsPatch Dataset
 udsdpPayload
   = lens _udsdpPayload (\ s a -> s{_udsdpPayload = a})
 
 -- | Patch a dataset for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
-udsdpUserId :: Lens' UsersDataSourcesDatasetsPatch' Text
+udsdpUserId :: Lens' UsersDataSourcesDatasetsPatch Text
 udsdpUserId
   = lens _udsdpUserId (\ s a -> s{_udsdpUserId = a})
 
@@ -121,7 +121,7 @@ udsdpUserId
 -- time and maximum data point end time represented as nanoseconds from the
 -- epoch. The ID is formatted like: \"startTime-endTime\" where startTime
 -- and endTime are 64 bit integers.
-udsdpDatasetId :: Lens' UsersDataSourcesDatasetsPatch' Text
+udsdpDatasetId :: Lens' UsersDataSourcesDatasetsPatch Text
 udsdpDatasetId
   = lens _udsdpDatasetId
       (\ s a -> s{_udsdpDatasetId = a})
@@ -129,15 +129,15 @@ udsdpDatasetId
 -- | The client\'s current time in milliseconds since epoch. Note that the
 -- minStartTimeNs and maxEndTimeNs properties in the request body are in
 -- nanoseconds instead of milliseconds.
-udsdpCurrentTimeMillis :: Lens' UsersDataSourcesDatasetsPatch' (Maybe Int64)
+udsdpCurrentTimeMillis :: Lens' UsersDataSourcesDatasetsPatch (Maybe Int64)
 udsdpCurrentTimeMillis
   = lens _udsdpCurrentTimeMillis
       (\ s a -> s{_udsdpCurrentTimeMillis = a})
 
-instance GoogleRequest UsersDataSourcesDatasetsPatch'
+instance GoogleRequest UsersDataSourcesDatasetsPatch
          where
-        type Rs UsersDataSourcesDatasetsPatch' = Dataset
-        requestClient UsersDataSourcesDatasetsPatch'{..}
+        type Rs UsersDataSourcesDatasetsPatch = Dataset
+        requestClient UsersDataSourcesDatasetsPatch{..}
           = go _udsdpUserId _udsdpDataSourceId _udsdpDatasetId
               _udsdpCurrentTimeMillis
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.Posts.Search
       PostsSearchResource
 
     -- * Creating a Request
-    , postsSearch'
-    , PostsSearch'
+    , postsSearch
+    , PostsSearch
 
     -- * Request Lenses
     , psOrderBy
@@ -43,7 +43,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.posts.search@ method which the
--- 'PostsSearch'' request conforms to.
+-- 'PostsSearch' request conforms to.
 type PostsSearchResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -56,15 +56,15 @@ type PostsSearchResource =
 
 -- | Search for a post.
 --
--- /See:/ 'postsSearch'' smart constructor.
-data PostsSearch' = PostsSearch'
+-- /See:/ 'postsSearch' smart constructor.
+data PostsSearch = PostsSearch
     { _psOrderBy     :: !PostsSearchOrderBy
     , _psBlogId      :: !Text
     , _psQ           :: !Text
     , _psFetchBodies :: !Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PostsSearch'' with the minimum fields required to make a request.
+-- | Creates a value of 'PostsSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,12 +75,12 @@ data PostsSearch' = PostsSearch'
 -- * 'psQ'
 --
 -- * 'psFetchBodies'
-postsSearch'
+postsSearch
     :: Text -- ^ 'psBlogId'
     -> Text -- ^ 'psQ'
-    -> PostsSearch'
-postsSearch' pPsBlogId_ pPsQ_ =
-    PostsSearch'
+    -> PostsSearch
+postsSearch pPsBlogId_ pPsQ_ =
+    PostsSearch
     { _psOrderBy = PSOBPublished
     , _psBlogId = pPsBlogId_
     , _psQ = pPsQ_
@@ -88,29 +88,29 @@ postsSearch' pPsBlogId_ pPsQ_ =
     }
 
 -- | Sort search results
-psOrderBy :: Lens' PostsSearch' PostsSearchOrderBy
+psOrderBy :: Lens' PostsSearch PostsSearchOrderBy
 psOrderBy
   = lens _psOrderBy (\ s a -> s{_psOrderBy = a})
 
 -- | ID of the blog to fetch the post from.
-psBlogId :: Lens' PostsSearch' Text
+psBlogId :: Lens' PostsSearch Text
 psBlogId = lens _psBlogId (\ s a -> s{_psBlogId = a})
 
 -- | Query terms to search this blog for matching posts.
-psQ :: Lens' PostsSearch' Text
+psQ :: Lens' PostsSearch Text
 psQ = lens _psQ (\ s a -> s{_psQ = a})
 
 -- | Whether the body content of posts is included (default: true). This
 -- should be set to false when the post bodies are not required, to help
 -- minimize traffic.
-psFetchBodies :: Lens' PostsSearch' Bool
+psFetchBodies :: Lens' PostsSearch Bool
 psFetchBodies
   = lens _psFetchBodies
       (\ s a -> s{_psFetchBodies = a})
 
-instance GoogleRequest PostsSearch' where
-        type Rs PostsSearch' = PostList
-        requestClient PostsSearch'{..}
+instance GoogleRequest PostsSearch where
+        type Rs PostsSearch = PostList
+        requestClient PostsSearch{..}
           = go _psBlogId (Just _psQ) (Just _psOrderBy)
               (Just _psFetchBodies)
               (Just AltJSON)

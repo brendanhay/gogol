@@ -29,20 +29,20 @@ module Network.Google.Resource.AndroidEnterprise.Collections.Update
       CollectionsUpdateResource
 
     -- * Creating a Request
-    , collectionsUpdate'
-    , CollectionsUpdate'
+    , collectionsUpdate
+    , CollectionsUpdate
 
     -- * Request Lenses
-    , cuEnterpriseId
-    , cuCollectionId
-    , cuPayload
+    , cuuEnterpriseId
+    , cuuCollectionId
+    , cuuPayload
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.collections.update@ method which the
--- 'CollectionsUpdate'' request conforms to.
+-- 'CollectionsUpdate' request conforms to.
 type CollectionsUpdateResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -53,56 +53,56 @@ type CollectionsUpdateResource =
 
 -- | Updates a collection.
 --
--- /See:/ 'collectionsUpdate'' smart constructor.
-data CollectionsUpdate' = CollectionsUpdate'
-    { _cuEnterpriseId :: !Text
-    , _cuCollectionId :: !Text
-    , _cuPayload      :: !Collection
+-- /See:/ 'collectionsUpdate' smart constructor.
+data CollectionsUpdate = CollectionsUpdate
+    { _cuuEnterpriseId :: !Text
+    , _cuuCollectionId :: !Text
+    , _cuuPayload      :: !Collection
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CollectionsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'CollectionsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cuEnterpriseId'
+-- * 'cuuEnterpriseId'
 --
--- * 'cuCollectionId'
+-- * 'cuuCollectionId'
 --
--- * 'cuPayload'
-collectionsUpdate'
-    :: Text -- ^ 'cuEnterpriseId'
-    -> Text -- ^ 'cuCollectionId'
-    -> Collection -- ^ 'cuPayload'
-    -> CollectionsUpdate'
-collectionsUpdate' pCuEnterpriseId_ pCuCollectionId_ pCuPayload_ =
-    CollectionsUpdate'
-    { _cuEnterpriseId = pCuEnterpriseId_
-    , _cuCollectionId = pCuCollectionId_
-    , _cuPayload = pCuPayload_
+-- * 'cuuPayload'
+collectionsUpdate
+    :: Text -- ^ 'cuuEnterpriseId'
+    -> Text -- ^ 'cuuCollectionId'
+    -> Collection -- ^ 'cuuPayload'
+    -> CollectionsUpdate
+collectionsUpdate pCuuEnterpriseId_ pCuuCollectionId_ pCuuPayload_ =
+    CollectionsUpdate
+    { _cuuEnterpriseId = pCuuEnterpriseId_
+    , _cuuCollectionId = pCuuCollectionId_
+    , _cuuPayload = pCuuPayload_
     }
 
 -- | The ID of the enterprise.
-cuEnterpriseId :: Lens' CollectionsUpdate' Text
-cuEnterpriseId
-  = lens _cuEnterpriseId
-      (\ s a -> s{_cuEnterpriseId = a})
+cuuEnterpriseId :: Lens' CollectionsUpdate Text
+cuuEnterpriseId
+  = lens _cuuEnterpriseId
+      (\ s a -> s{_cuuEnterpriseId = a})
 
 -- | The ID of the collection.
-cuCollectionId :: Lens' CollectionsUpdate' Text
-cuCollectionId
-  = lens _cuCollectionId
-      (\ s a -> s{_cuCollectionId = a})
+cuuCollectionId :: Lens' CollectionsUpdate Text
+cuuCollectionId
+  = lens _cuuCollectionId
+      (\ s a -> s{_cuuCollectionId = a})
 
 -- | Multipart request metadata.
-cuPayload :: Lens' CollectionsUpdate' Collection
-cuPayload
-  = lens _cuPayload (\ s a -> s{_cuPayload = a})
+cuuPayload :: Lens' CollectionsUpdate Collection
+cuuPayload
+  = lens _cuuPayload (\ s a -> s{_cuuPayload = a})
 
-instance GoogleRequest CollectionsUpdate' where
-        type Rs CollectionsUpdate' = Collection
-        requestClient CollectionsUpdate'{..}
-          = go _cuEnterpriseId _cuCollectionId (Just AltJSON)
-              _cuPayload
+instance GoogleRequest CollectionsUpdate where
+        type Rs CollectionsUpdate = Collection
+        requestClient CollectionsUpdate{..}
+          = go _cuuEnterpriseId _cuuCollectionId (Just AltJSON)
+              _cuuPayload
               androidEnterpriseService
           where go
                   = buildClient

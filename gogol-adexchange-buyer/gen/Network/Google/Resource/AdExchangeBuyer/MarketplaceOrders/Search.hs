@@ -29,18 +29,18 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Search
       MarketplaceOrdersSearchResource
 
     -- * Creating a Request
-    , marketplaceOrdersSearch'
-    , MarketplaceOrdersSearch'
+    , marketplaceOrdersSearch
+    , MarketplaceOrdersSearch
 
     -- * Request Lenses
-    , mPqlQuery
+    , mosPqlQuery
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.marketplaceorders.search@ method which the
--- 'MarketplaceOrdersSearch'' request conforms to.
+-- 'MarketplaceOrdersSearch' request conforms to.
 type MarketplaceOrdersSearchResource =
      "marketplaceOrders" :>
        "search" :>
@@ -50,32 +50,33 @@ type MarketplaceOrdersSearchResource =
 
 -- | Search for orders using pql query
 --
--- /See:/ 'marketplaceOrdersSearch'' smart constructor.
-newtype MarketplaceOrdersSearch' = MarketplaceOrdersSearch'
-    { _mPqlQuery :: Maybe Text
+-- /See:/ 'marketplaceOrdersSearch' smart constructor.
+newtype MarketplaceOrdersSearch = MarketplaceOrdersSearch
+    { _mosPqlQuery :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MarketplaceOrdersSearch'' with the minimum fields required to make a request.
+-- | Creates a value of 'MarketplaceOrdersSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mPqlQuery'
-marketplaceOrdersSearch'
-    :: MarketplaceOrdersSearch'
-marketplaceOrdersSearch' =
-    MarketplaceOrdersSearch'
-    { _mPqlQuery = Nothing
+-- * 'mosPqlQuery'
+marketplaceOrdersSearch
+    :: MarketplaceOrdersSearch
+marketplaceOrdersSearch =
+    MarketplaceOrdersSearch
+    { _mosPqlQuery = Nothing
     }
 
 -- | Query string to retrieve specific orders.
-mPqlQuery :: Lens' MarketplaceOrdersSearch' (Maybe Text)
-mPqlQuery
-  = lens _mPqlQuery (\ s a -> s{_mPqlQuery = a})
+mosPqlQuery :: Lens' MarketplaceOrdersSearch (Maybe Text)
+mosPqlQuery
+  = lens _mosPqlQuery (\ s a -> s{_mosPqlQuery = a})
 
-instance GoogleRequest MarketplaceOrdersSearch' where
-        type Rs MarketplaceOrdersSearch' = GetOrdersResponse
-        requestClient MarketplaceOrdersSearch'{..}
-          = go _mPqlQuery (Just AltJSON) adExchangeBuyerService
+instance GoogleRequest MarketplaceOrdersSearch where
+        type Rs MarketplaceOrdersSearch = GetOrdersResponse
+        requestClient MarketplaceOrdersSearch{..}
+          = go _mosPqlQuery (Just AltJSON)
+              adExchangeBuyerService
           where go
                   = buildClient
                       (Proxy :: Proxy MarketplaceOrdersSearchResource)

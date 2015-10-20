@@ -29,8 +29,8 @@ module Network.Google.Resource.DNS.ManagedZones.Get
       ManagedZonesGetResource
 
     -- * Creating a Request
-    , managedZonesGet'
-    , ManagedZonesGet'
+    , managedZonesGet
+    , ManagedZonesGet
 
     -- * Request Lenses
     , mzgProject
@@ -41,7 +41,7 @@ import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dns.managedZones.get@ method which the
--- 'ManagedZonesGet'' request conforms to.
+-- 'ManagedZonesGet' request conforms to.
 type ManagedZonesGetResource =
      Capture "project" Text :>
        "managedZones" :>
@@ -50,44 +50,44 @@ type ManagedZonesGetResource =
 
 -- | Fetch the representation of an existing ManagedZone.
 --
--- /See:/ 'managedZonesGet'' smart constructor.
-data ManagedZonesGet' = ManagedZonesGet'
+-- /See:/ 'managedZonesGet' smart constructor.
+data ManagedZonesGet = ManagedZonesGet
     { _mzgProject     :: !Text
     , _mzgManagedZone :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagedZonesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagedZonesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mzgProject'
 --
 -- * 'mzgManagedZone'
-managedZonesGet'
+managedZonesGet
     :: Text -- ^ 'mzgProject'
     -> Text -- ^ 'mzgManagedZone'
-    -> ManagedZonesGet'
-managedZonesGet' pMzgProject_ pMzgManagedZone_ =
-    ManagedZonesGet'
+    -> ManagedZonesGet
+managedZonesGet pMzgProject_ pMzgManagedZone_ =
+    ManagedZonesGet
     { _mzgProject = pMzgProject_
     , _mzgManagedZone = pMzgManagedZone_
     }
 
 -- | Identifies the project addressed by this request.
-mzgProject :: Lens' ManagedZonesGet' Text
+mzgProject :: Lens' ManagedZonesGet Text
 mzgProject
   = lens _mzgProject (\ s a -> s{_mzgProject = a})
 
 -- | Identifies the managed zone addressed by this request. Can be the
 -- managed zone name or id.
-mzgManagedZone :: Lens' ManagedZonesGet' Text
+mzgManagedZone :: Lens' ManagedZonesGet Text
 mzgManagedZone
   = lens _mzgManagedZone
       (\ s a -> s{_mzgManagedZone = a})
 
-instance GoogleRequest ManagedZonesGet' where
-        type Rs ManagedZonesGet' = ManagedZone
-        requestClient ManagedZonesGet'{..}
+instance GoogleRequest ManagedZonesGet where
+        type Rs ManagedZonesGet = ManagedZone
+        requestClient ManagedZonesGet{..}
           = go _mzgProject _mzgManagedZone (Just AltJSON)
               dNSService
           where go

@@ -30,8 +30,8 @@ module Network.Google.Resource.Content.Orders.GettestOrdertemplate
       OrdersGettestOrdertemplateResource
 
     -- * Creating a Request
-    , ordersGettestOrdertemplate'
-    , OrdersGettestOrdertemplate'
+    , ordersGettestOrdertemplate
+    , OrdersGettestOrdertemplate
 
     -- * Request Lenses
     , ogoMerchantId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.orders.gettestordertemplate@ method which the
--- 'OrdersGettestOrdertemplate'' request conforms to.
+-- 'OrdersGettestOrdertemplate' request conforms to.
 type OrdersGettestOrdertemplateResource =
      Capture "merchantId" Word64 :>
        "testordertemplates" :>
@@ -55,46 +55,46 @@ type OrdersGettestOrdertemplateResource =
 -- | Sandbox only. Retrieves an order template that can be used to quickly
 -- create a new order in sandbox.
 --
--- /See:/ 'ordersGettestOrdertemplate'' smart constructor.
-data OrdersGettestOrdertemplate' = OrdersGettestOrdertemplate'
+-- /See:/ 'ordersGettestOrdertemplate' smart constructor.
+data OrdersGettestOrdertemplate = OrdersGettestOrdertemplate
     { _ogoMerchantId   :: !Word64
     , _ogoTemplateName :: !OrdersGettestOrdertemplateTemplateName
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrdersGettestOrdertemplate'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrdersGettestOrdertemplate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ogoMerchantId'
 --
 -- * 'ogoTemplateName'
-ordersGettestOrdertemplate'
+ordersGettestOrdertemplate
     :: Word64 -- ^ 'ogoMerchantId'
     -> OrdersGettestOrdertemplateTemplateName -- ^ 'ogoTemplateName'
-    -> OrdersGettestOrdertemplate'
-ordersGettestOrdertemplate' pOgoMerchantId_ pOgoTemplateName_ =
-    OrdersGettestOrdertemplate'
+    -> OrdersGettestOrdertemplate
+ordersGettestOrdertemplate pOgoMerchantId_ pOgoTemplateName_ =
+    OrdersGettestOrdertemplate
     { _ogoMerchantId = pOgoMerchantId_
     , _ogoTemplateName = pOgoTemplateName_
     }
 
 -- | The ID of the managing account.
-ogoMerchantId :: Lens' OrdersGettestOrdertemplate' Word64
+ogoMerchantId :: Lens' OrdersGettestOrdertemplate Word64
 ogoMerchantId
   = lens _ogoMerchantId
       (\ s a -> s{_ogoMerchantId = a})
 
 -- | The name of the template to retrieve.
-ogoTemplateName :: Lens' OrdersGettestOrdertemplate' OrdersGettestOrdertemplateTemplateName
+ogoTemplateName :: Lens' OrdersGettestOrdertemplate OrdersGettestOrdertemplateTemplateName
 ogoTemplateName
   = lens _ogoTemplateName
       (\ s a -> s{_ogoTemplateName = a})
 
-instance GoogleRequest OrdersGettestOrdertemplate'
+instance GoogleRequest OrdersGettestOrdertemplate
          where
-        type Rs OrdersGettestOrdertemplate' =
+        type Rs OrdersGettestOrdertemplate =
              OrdersGetTestOrderTemplateResponse
-        requestClient OrdersGettestOrdertemplate'{..}
+        requestClient OrdersGettestOrdertemplate{..}
           = go _ogoMerchantId _ogoTemplateName (Just AltJSON)
               shoppingContentService
           where go

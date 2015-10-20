@@ -30,20 +30,20 @@ module Network.Google.Resource.AndroidPublisher.Edits.Tracks.Get
       EditsTracksGetResource
 
     -- * Creating a Request
-    , editsTracksGet'
-    , EditsTracksGet'
+    , editsTracksGet
+    , EditsTracksGet
 
     -- * Request Lenses
-    , etgTrack
-    , etgPackageName
-    , etgEditId
+    , etgtTrack
+    , etgtPackageName
+    , etgtEditId
     ) where
 
 import           Network.Google.AndroidPublisher.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidpublisher.edits.tracks.get@ method which the
--- 'EditsTracksGet'' request conforms to.
+-- 'EditsTracksGet' request conforms to.
 type EditsTracksGetResource =
      Capture "packageName" Text :>
        "edits" :>
@@ -55,54 +55,55 @@ type EditsTracksGetResource =
 -- | Fetches the track configuration for the specified track type. Includes
 -- the APK version codes that are in this track.
 --
--- /See:/ 'editsTracksGet'' smart constructor.
-data EditsTracksGet' = EditsTracksGet'
-    { _etgTrack       :: !EditsTracksGetTrack
-    , _etgPackageName :: !Text
-    , _etgEditId      :: !Text
+-- /See:/ 'editsTracksGet' smart constructor.
+data EditsTracksGet = EditsTracksGet
+    { _etgtTrack       :: !EditsTracksGetTrack
+    , _etgtPackageName :: !Text
+    , _etgtEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EditsTracksGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'EditsTracksGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'etgTrack'
+-- * 'etgtTrack'
 --
--- * 'etgPackageName'
+-- * 'etgtPackageName'
 --
--- * 'etgEditId'
-editsTracksGet'
-    :: EditsTracksGetTrack -- ^ 'etgTrack'
-    -> Text -- ^ 'etgPackageName'
-    -> Text -- ^ 'etgEditId'
-    -> EditsTracksGet'
-editsTracksGet' pEtgTrack_ pEtgPackageName_ pEtgEditId_ =
-    EditsTracksGet'
-    { _etgTrack = pEtgTrack_
-    , _etgPackageName = pEtgPackageName_
-    , _etgEditId = pEtgEditId_
+-- * 'etgtEditId'
+editsTracksGet
+    :: EditsTracksGetTrack -- ^ 'etgtTrack'
+    -> Text -- ^ 'etgtPackageName'
+    -> Text -- ^ 'etgtEditId'
+    -> EditsTracksGet
+editsTracksGet pEtgtTrack_ pEtgtPackageName_ pEtgtEditId_ =
+    EditsTracksGet
+    { _etgtTrack = pEtgtTrack_
+    , _etgtPackageName = pEtgtPackageName_
+    , _etgtEditId = pEtgtEditId_
     }
 
 -- | The track type to read or modify.
-etgTrack :: Lens' EditsTracksGet' EditsTracksGetTrack
-etgTrack = lens _etgTrack (\ s a -> s{_etgTrack = a})
+etgtTrack :: Lens' EditsTracksGet EditsTracksGetTrack
+etgtTrack
+  = lens _etgtTrack (\ s a -> s{_etgtTrack = a})
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-etgPackageName :: Lens' EditsTracksGet' Text
-etgPackageName
-  = lens _etgPackageName
-      (\ s a -> s{_etgPackageName = a})
+etgtPackageName :: Lens' EditsTracksGet Text
+etgtPackageName
+  = lens _etgtPackageName
+      (\ s a -> s{_etgtPackageName = a})
 
 -- | Unique identifier for this edit.
-etgEditId :: Lens' EditsTracksGet' Text
-etgEditId
-  = lens _etgEditId (\ s a -> s{_etgEditId = a})
+etgtEditId :: Lens' EditsTracksGet Text
+etgtEditId
+  = lens _etgtEditId (\ s a -> s{_etgtEditId = a})
 
-instance GoogleRequest EditsTracksGet' where
-        type Rs EditsTracksGet' = Track
-        requestClient EditsTracksGet'{..}
-          = go _etgPackageName _etgEditId _etgTrack
+instance GoogleRequest EditsTracksGet where
+        type Rs EditsTracksGet = Track
+        requestClient EditsTracksGet{..}
+          = go _etgtPackageName _etgtEditId _etgtTrack
               (Just AltJSON)
               androidPublisherService
           where go

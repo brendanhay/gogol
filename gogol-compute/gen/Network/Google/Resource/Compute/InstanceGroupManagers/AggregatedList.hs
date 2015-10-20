@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.AggregatedList
       InstanceGroupManagersAggregatedListResource
 
     -- * Creating a Request
-    , instanceGroupManagersAggregatedList'
-    , InstanceGroupManagersAggregatedList'
+    , instanceGroupManagersAggregatedList
+    , InstanceGroupManagersAggregatedList
 
     -- * Request Lenses
     , igmalProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroupManagers.aggregatedList@ method which the
--- 'InstanceGroupManagersAggregatedList'' request conforms to.
+-- 'InstanceGroupManagersAggregatedList' request conforms to.
 type InstanceGroupManagersAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
@@ -56,15 +56,15 @@ type InstanceGroupManagersAggregatedListResource =
 
 -- | Retrieves the list of managed instance groups and groups them by zone.
 --
--- /See:/ 'instanceGroupManagersAggregatedList'' smart constructor.
-data InstanceGroupManagersAggregatedList' = InstanceGroupManagersAggregatedList'
+-- /See:/ 'instanceGroupManagersAggregatedList' smart constructor.
+data InstanceGroupManagersAggregatedList = InstanceGroupManagersAggregatedList
     { _igmalProject    :: !Text
     , _igmalFilter     :: !(Maybe Text)
     , _igmalPageToken  :: !(Maybe Text)
     , _igmalMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupManagersAggregatedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupManagersAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,11 +75,11 @@ data InstanceGroupManagersAggregatedList' = InstanceGroupManagersAggregatedList'
 -- * 'igmalPageToken'
 --
 -- * 'igmalMaxResults'
-instanceGroupManagersAggregatedList'
+instanceGroupManagersAggregatedList
     :: Text -- ^ 'igmalProject'
-    -> InstanceGroupManagersAggregatedList'
-instanceGroupManagersAggregatedList' pIgmalProject_ =
-    InstanceGroupManagersAggregatedList'
+    -> InstanceGroupManagersAggregatedList
+instanceGroupManagersAggregatedList pIgmalProject_ =
+    InstanceGroupManagersAggregatedList
     { _igmalProject = pIgmalProject_
     , _igmalFilter = Nothing
     , _igmalPageToken = Nothing
@@ -87,7 +87,7 @@ instanceGroupManagersAggregatedList' pIgmalProject_ =
     }
 
 -- | The project ID for this request.
-igmalProject :: Lens' InstanceGroupManagersAggregatedList' Text
+igmalProject :: Lens' InstanceGroupManagersAggregatedList Text
 igmalProject
   = lens _igmalProject (\ s a -> s{_igmalProject = a})
 
@@ -102,30 +102,29 @@ igmalProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-igmalFilter :: Lens' InstanceGroupManagersAggregatedList' (Maybe Text)
+igmalFilter :: Lens' InstanceGroupManagersAggregatedList (Maybe Text)
 igmalFilter
   = lens _igmalFilter (\ s a -> s{_igmalFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-igmalPageToken :: Lens' InstanceGroupManagersAggregatedList' (Maybe Text)
+igmalPageToken :: Lens' InstanceGroupManagersAggregatedList (Maybe Text)
 igmalPageToken
   = lens _igmalPageToken
       (\ s a -> s{_igmalPageToken = a})
 
 -- | Maximum count of results to be returned.
-igmalMaxResults :: Lens' InstanceGroupManagersAggregatedList' Word32
+igmalMaxResults :: Lens' InstanceGroupManagersAggregatedList Word32
 igmalMaxResults
   = lens _igmalMaxResults
       (\ s a -> s{_igmalMaxResults = a})
 
 instance GoogleRequest
-         InstanceGroupManagersAggregatedList' where
-        type Rs InstanceGroupManagersAggregatedList' =
+         InstanceGroupManagersAggregatedList where
+        type Rs InstanceGroupManagersAggregatedList =
              InstanceGroupManagerAggregatedList
-        requestClient
-          InstanceGroupManagersAggregatedList'{..}
+        requestClient InstanceGroupManagersAggregatedList{..}
           = go _igmalProject _igmalFilter _igmalPageToken
               (Just _igmalMaxResults)
               (Just AltJSON)

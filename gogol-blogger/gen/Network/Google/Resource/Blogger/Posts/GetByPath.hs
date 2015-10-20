@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.Posts.GetByPath
       PostsGetByPathResource
 
     -- * Creating a Request
-    , postsGetByPath'
-    , PostsGetByPath'
+    , postsGetByPath
+    , PostsGetByPath
 
     -- * Request Lenses
     , pgbpPath
@@ -43,7 +43,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.posts.getByPath@ method which the
--- 'PostsGetByPath'' request conforms to.
+-- 'PostsGetByPath' request conforms to.
 type PostsGetByPathResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -56,15 +56,15 @@ type PostsGetByPathResource =
 
 -- | Retrieve a Post by Path.
 --
--- /See:/ 'postsGetByPath'' smart constructor.
-data PostsGetByPath' = PostsGetByPath'
+-- /See:/ 'postsGetByPath' smart constructor.
+data PostsGetByPath = PostsGetByPath
     { _pgbpPath        :: !Text
     , _pgbpBlogId      :: !Text
     , _pgbpMaxComments :: !(Maybe Word32)
     , _pgbpView        :: !(Maybe PostsGetByPathView)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PostsGetByPath'' with the minimum fields required to make a request.
+-- | Creates a value of 'PostsGetByPath' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,12 +75,12 @@ data PostsGetByPath' = PostsGetByPath'
 -- * 'pgbpMaxComments'
 --
 -- * 'pgbpView'
-postsGetByPath'
+postsGetByPath
     :: Text -- ^ 'pgbpPath'
     -> Text -- ^ 'pgbpBlogId'
-    -> PostsGetByPath'
-postsGetByPath' pPgbpPath_ pPgbpBlogId_ =
-    PostsGetByPath'
+    -> PostsGetByPath
+postsGetByPath pPgbpPath_ pPgbpBlogId_ =
+    PostsGetByPath
     { _pgbpPath = pPgbpPath_
     , _pgbpBlogId = pPgbpBlogId_
     , _pgbpMaxComments = Nothing
@@ -88,28 +88,28 @@ postsGetByPath' pPgbpPath_ pPgbpBlogId_ =
     }
 
 -- | Path of the Post to retrieve.
-pgbpPath :: Lens' PostsGetByPath' Text
+pgbpPath :: Lens' PostsGetByPath Text
 pgbpPath = lens _pgbpPath (\ s a -> s{_pgbpPath = a})
 
 -- | ID of the blog to fetch the post from.
-pgbpBlogId :: Lens' PostsGetByPath' Text
+pgbpBlogId :: Lens' PostsGetByPath Text
 pgbpBlogId
   = lens _pgbpBlogId (\ s a -> s{_pgbpBlogId = a})
 
 -- | Maximum number of comments to pull back on a post.
-pgbpMaxComments :: Lens' PostsGetByPath' (Maybe Word32)
+pgbpMaxComments :: Lens' PostsGetByPath (Maybe Word32)
 pgbpMaxComments
   = lens _pgbpMaxComments
       (\ s a -> s{_pgbpMaxComments = a})
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
-pgbpView :: Lens' PostsGetByPath' (Maybe PostsGetByPathView)
+pgbpView :: Lens' PostsGetByPath (Maybe PostsGetByPathView)
 pgbpView = lens _pgbpView (\ s a -> s{_pgbpView = a})
 
-instance GoogleRequest PostsGetByPath' where
-        type Rs PostsGetByPath' = Post'
-        requestClient PostsGetByPath'{..}
+instance GoogleRequest PostsGetByPath where
+        type Rs PostsGetByPath = Post'
+        requestClient PostsGetByPath{..}
           = go _pgbpBlogId (Just _pgbpPath) _pgbpMaxComments
               _pgbpView
               (Just AltJSON)

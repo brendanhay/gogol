@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Users.Watch
       UsersWatchResource
 
     -- * Creating a Request
-    , usersWatch'
-    , UsersWatch'
+    , usersWatch
+    , UsersWatch
 
     -- * Request Lenses
     , uwEvent
@@ -52,7 +52,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.users.watch@ method which the
--- 'UsersWatch'' request conforms to.
+-- 'UsersWatch' request conforms to.
 type UsersWatchResource =
      "users" :>
        "watch" :>
@@ -74,8 +74,8 @@ type UsersWatchResource =
 
 -- | Watch for changes in users list
 --
--- /See:/ 'usersWatch'' smart constructor.
-data UsersWatch' = UsersWatch'
+-- /See:/ 'usersWatch' smart constructor.
+data UsersWatch = UsersWatch
     { _uwEvent           :: !(Maybe UsersWatchEvent)
     , _uwOrderBy         :: !(Maybe UsersWatchOrderBy)
     , _uwViewType        :: !UsersWatchViewType
@@ -91,7 +91,7 @@ data UsersWatch' = UsersWatch'
     , _uwMaxResults      :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersWatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -120,11 +120,11 @@ data UsersWatch' = UsersWatch'
 -- * 'uwPageToken'
 --
 -- * 'uwMaxResults'
-usersWatch'
+usersWatch
     :: Channel -- ^ 'uwPayload'
-    -> UsersWatch'
-usersWatch' pUwPayload_ =
-    UsersWatch'
+    -> UsersWatch
+usersWatch pUwPayload_ =
+    UsersWatch
     { _uwEvent = Nothing
     , _uwOrderBy = Nothing
     , _uwViewType = UWVTAdminView
@@ -141,77 +141,77 @@ usersWatch' pUwPayload_ =
     }
 
 -- | Event on which subscription is intended (if subscribing)
-uwEvent :: Lens' UsersWatch' (Maybe UsersWatchEvent)
+uwEvent :: Lens' UsersWatch (Maybe UsersWatchEvent)
 uwEvent = lens _uwEvent (\ s a -> s{_uwEvent = a})
 
 -- | Column to use for sorting results
-uwOrderBy :: Lens' UsersWatch' (Maybe UsersWatchOrderBy)
+uwOrderBy :: Lens' UsersWatch (Maybe UsersWatchOrderBy)
 uwOrderBy
   = lens _uwOrderBy (\ s a -> s{_uwOrderBy = a})
 
 -- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
-uwViewType :: Lens' UsersWatch' UsersWatchViewType
+uwViewType :: Lens' UsersWatch UsersWatchViewType
 uwViewType
   = lens _uwViewType (\ s a -> s{_uwViewType = a})
 
 -- | Comma-separated list of schema names. All fields from these schemas are
 -- fetched. This should only be set when projection=custom.
-uwCustomFieldMask :: Lens' UsersWatch' (Maybe Text)
+uwCustomFieldMask :: Lens' UsersWatch (Maybe Text)
 uwCustomFieldMask
   = lens _uwCustomFieldMask
       (\ s a -> s{_uwCustomFieldMask = a})
 
 -- | Name of the domain. Fill this field to get users from only this domain.
 -- To return all users in a multi-domain fill customer field instead.
-uwDomain :: Lens' UsersWatch' (Maybe Text)
+uwDomain :: Lens' UsersWatch (Maybe Text)
 uwDomain = lens _uwDomain (\ s a -> s{_uwDomain = a})
 
 -- | If set to true retrieves the list of deleted users. Default is false
-uwShowDeleted :: Lens' UsersWatch' (Maybe Text)
+uwShowDeleted :: Lens' UsersWatch (Maybe Text)
 uwShowDeleted
   = lens _uwShowDeleted
       (\ s a -> s{_uwShowDeleted = a})
 
 -- | Multipart request metadata.
-uwPayload :: Lens' UsersWatch' Channel
+uwPayload :: Lens' UsersWatch Channel
 uwPayload
   = lens _uwPayload (\ s a -> s{_uwPayload = a})
 
 -- | Whether to return results in ascending or descending order.
-uwSortOrder :: Lens' UsersWatch' (Maybe UsersWatchSortOrder)
+uwSortOrder :: Lens' UsersWatch (Maybe UsersWatchSortOrder)
 uwSortOrder
   = lens _uwSortOrder (\ s a -> s{_uwSortOrder = a})
 
 -- | Immutable id of the Google Apps account. In case of multi-domain, to
 -- fetch all users for a customer, fill this field instead of domain.
-uwCustomer :: Lens' UsersWatch' (Maybe Text)
+uwCustomer :: Lens' UsersWatch (Maybe Text)
 uwCustomer
   = lens _uwCustomer (\ s a -> s{_uwCustomer = a})
 
 -- | Query string search. Should be of the form \"\". Complete documentation
 -- is at
 -- https:\/\/developers.google.com\/admin-sdk\/directory\/v1\/guides\/search-users
-uwQuery :: Lens' UsersWatch' (Maybe Text)
+uwQuery :: Lens' UsersWatch (Maybe Text)
 uwQuery = lens _uwQuery (\ s a -> s{_uwQuery = a})
 
 -- | What subset of fields to fetch for this user.
-uwProjection :: Lens' UsersWatch' UsersWatchProjection
+uwProjection :: Lens' UsersWatch UsersWatchProjection
 uwProjection
   = lens _uwProjection (\ s a -> s{_uwProjection = a})
 
 -- | Token to specify next page in the list
-uwPageToken :: Lens' UsersWatch' (Maybe Text)
+uwPageToken :: Lens' UsersWatch (Maybe Text)
 uwPageToken
   = lens _uwPageToken (\ s a -> s{_uwPageToken = a})
 
 -- | Maximum number of results to return. Default is 100. Max allowed is 500
-uwMaxResults :: Lens' UsersWatch' (Maybe Int32)
+uwMaxResults :: Lens' UsersWatch (Maybe Int32)
 uwMaxResults
   = lens _uwMaxResults (\ s a -> s{_uwMaxResults = a})
 
-instance GoogleRequest UsersWatch' where
-        type Rs UsersWatch' = Channel
-        requestClient UsersWatch'{..}
+instance GoogleRequest UsersWatch where
+        type Rs UsersWatch = Channel
+        requestClient UsersWatch{..}
           = go _uwEvent _uwOrderBy (Just _uwViewType)
               _uwCustomFieldMask
               _uwDomain

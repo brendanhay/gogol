@@ -27,8 +27,8 @@ module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Update
       ClientAccessUpdateResource
 
     -- * Creating a Request
-    , clientAccessUpdate'
-    , ClientAccessUpdate'
+    , clientAccessUpdate
+    , ClientAccessUpdate
 
     -- * Request Lenses
     , cauSponsorAccountId
@@ -40,7 +40,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.clientaccess.update@ method which the
--- 'ClientAccessUpdate'' request conforms to.
+-- 'ClientAccessUpdate' request conforms to.
 type ClientAccessUpdateResource =
      "clientAccess" :>
        Capture "clientAccountId" Int64 :>
@@ -50,14 +50,14 @@ type ClientAccessUpdateResource =
                Put '[JSON] ClientAccessCapabilities
 
 --
--- /See:/ 'clientAccessUpdate'' smart constructor.
-data ClientAccessUpdate' = ClientAccessUpdate'
+-- /See:/ 'clientAccessUpdate' smart constructor.
+data ClientAccessUpdate = ClientAccessUpdate
     { _cauSponsorAccountId :: !Int32
     , _cauPayload          :: !ClientAccessCapabilities
     , _cauClientAccountId  :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ClientAccessUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ClientAccessUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -66,37 +66,36 @@ data ClientAccessUpdate' = ClientAccessUpdate'
 -- * 'cauPayload'
 --
 -- * 'cauClientAccountId'
-clientAccessUpdate'
+clientAccessUpdate
     :: Int32 -- ^ 'cauSponsorAccountId'
     -> ClientAccessCapabilities -- ^ 'cauPayload'
     -> Int64 -- ^ 'cauClientAccountId'
-    -> ClientAccessUpdate'
-clientAccessUpdate' pCauSponsorAccountId_ pCauPayload_ pCauClientAccountId_ =
-    ClientAccessUpdate'
+    -> ClientAccessUpdate
+clientAccessUpdate pCauSponsorAccountId_ pCauPayload_ pCauClientAccountId_ =
+    ClientAccessUpdate
     { _cauSponsorAccountId = pCauSponsorAccountId_
     , _cauPayload = pCauPayload_
     , _cauClientAccountId = pCauClientAccountId_
     }
 
-cauSponsorAccountId :: Lens' ClientAccessUpdate' Int32
+cauSponsorAccountId :: Lens' ClientAccessUpdate Int32
 cauSponsorAccountId
   = lens _cauSponsorAccountId
       (\ s a -> s{_cauSponsorAccountId = a})
 
 -- | Multipart request metadata.
-cauPayload :: Lens' ClientAccessUpdate' ClientAccessCapabilities
+cauPayload :: Lens' ClientAccessUpdate ClientAccessCapabilities
 cauPayload
   = lens _cauPayload (\ s a -> s{_cauPayload = a})
 
-cauClientAccountId :: Lens' ClientAccessUpdate' Int64
+cauClientAccountId :: Lens' ClientAccessUpdate Int64
 cauClientAccountId
   = lens _cauClientAccountId
       (\ s a -> s{_cauClientAccountId = a})
 
-instance GoogleRequest ClientAccessUpdate' where
-        type Rs ClientAccessUpdate' =
-             ClientAccessCapabilities
-        requestClient ClientAccessUpdate'{..}
+instance GoogleRequest ClientAccessUpdate where
+        type Rs ClientAccessUpdate = ClientAccessCapabilities
+        requestClient ClientAccessUpdate{..}
           = go _cauClientAccountId (Just _cauSponsorAccountId)
               (Just AltJSON)
               _cauPayload

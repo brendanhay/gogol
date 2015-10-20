@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Productstatuses.List
       ProductstatusesListResource
 
     -- * Creating a Request
-    , productstatusesList'
-    , ProductstatusesList'
+    , productstatusesList
+    , ProductstatusesList
 
     -- * Request Lenses
     , plMerchantId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.productstatuses.list@ method which the
--- 'ProductstatusesList'' request conforms to.
+-- 'ProductstatusesList' request conforms to.
 type ProductstatusesListResource =
      Capture "merchantId" Word64 :>
        "productstatuses" :>
@@ -53,14 +53,14 @@ type ProductstatusesListResource =
 
 -- | Lists the statuses of the products in your Merchant Center account.
 --
--- /See:/ 'productstatusesList'' smart constructor.
-data ProductstatusesList' = ProductstatusesList'
+-- /See:/ 'productstatusesList' smart constructor.
+data ProductstatusesList = ProductstatusesList
     { _plMerchantId :: !Word64
     , _plPageToken  :: !(Maybe Text)
     , _plMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProductstatusesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProductstatusesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,36 @@ data ProductstatusesList' = ProductstatusesList'
 -- * 'plPageToken'
 --
 -- * 'plMaxResults'
-productstatusesList'
+productstatusesList
     :: Word64 -- ^ 'plMerchantId'
-    -> ProductstatusesList'
-productstatusesList' pPlMerchantId_ =
-    ProductstatusesList'
+    -> ProductstatusesList
+productstatusesList pPlMerchantId_ =
+    ProductstatusesList
     { _plMerchantId = pPlMerchantId_
     , _plPageToken = Nothing
     , _plMaxResults = Nothing
     }
 
 -- | The ID of the managing account.
-plMerchantId :: Lens' ProductstatusesList' Word64
+plMerchantId :: Lens' ProductstatusesList Word64
 plMerchantId
   = lens _plMerchantId (\ s a -> s{_plMerchantId = a})
 
 -- | The token returned by the previous request.
-plPageToken :: Lens' ProductstatusesList' (Maybe Text)
+plPageToken :: Lens' ProductstatusesList (Maybe Text)
 plPageToken
   = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
 -- | The maximum number of product statuses to return in the response, used
 -- for paging.
-plMaxResults :: Lens' ProductstatusesList' (Maybe Word32)
+plMaxResults :: Lens' ProductstatusesList (Maybe Word32)
 plMaxResults
   = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
 
-instance GoogleRequest ProductstatusesList' where
-        type Rs ProductstatusesList' =
+instance GoogleRequest ProductstatusesList where
+        type Rs ProductstatusesList =
              ProductstatusesListResponse
-        requestClient ProductstatusesList'{..}
+        requestClient ProductstatusesList{..}
           = go _plMerchantId _plPageToken _plMaxResults
               (Just AltJSON)
               shoppingContentService

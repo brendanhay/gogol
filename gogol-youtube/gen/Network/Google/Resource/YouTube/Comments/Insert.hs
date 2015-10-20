@@ -30,19 +30,19 @@ module Network.Google.Resource.YouTube.Comments.Insert
       CommentsInsertResource
 
     -- * Creating a Request
-    , commentsInsert'
-    , CommentsInsert'
+    , commentsInsert
+    , CommentsInsert
 
     -- * Request Lenses
-    , cPart
-    , cPayload
+    , comPart
+    , comPayload
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.comments.insert@ method which the
--- 'CommentsInsert'' request conforms to.
+-- 'CommentsInsert' request conforms to.
 type CommentsInsertResource =
      "comments" :>
        QueryParam "part" Text :>
@@ -52,43 +52,44 @@ type CommentsInsertResource =
 -- | Creates a reply to an existing comment. Note: To create a top-level
 -- comment, use the commentThreads.insert method.
 --
--- /See:/ 'commentsInsert'' smart constructor.
-data CommentsInsert' = CommentsInsert'
-    { _cPart    :: !Text
-    , _cPayload :: !Comment
+-- /See:/ 'commentsInsert' smart constructor.
+data CommentsInsert = CommentsInsert
+    { _comPart    :: !Text
+    , _comPayload :: !Comment
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cPart'
+-- * 'comPart'
 --
--- * 'cPayload'
-commentsInsert'
-    :: Text -- ^ 'cPart'
-    -> Comment -- ^ 'cPayload'
-    -> CommentsInsert'
-commentsInsert' pCPart_ pCPayload_ =
-    CommentsInsert'
-    { _cPart = pCPart_
-    , _cPayload = pCPayload_
+-- * 'comPayload'
+commentsInsert
+    :: Text -- ^ 'comPart'
+    -> Comment -- ^ 'comPayload'
+    -> CommentsInsert
+commentsInsert pComPart_ pComPayload_ =
+    CommentsInsert
+    { _comPart = pComPart_
+    , _comPayload = pComPayload_
     }
 
 -- | The part parameter identifies the properties that the API response will
 -- include. Set the parameter value to snippet. The snippet part has a
 -- quota cost of 2 units.
-cPart :: Lens' CommentsInsert' Text
-cPart = lens _cPart (\ s a -> s{_cPart = a})
+comPart :: Lens' CommentsInsert Text
+comPart = lens _comPart (\ s a -> s{_comPart = a})
 
 -- | Multipart request metadata.
-cPayload :: Lens' CommentsInsert' Comment
-cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
+comPayload :: Lens' CommentsInsert Comment
+comPayload
+  = lens _comPayload (\ s a -> s{_comPayload = a})
 
-instance GoogleRequest CommentsInsert' where
-        type Rs CommentsInsert' = Comment
-        requestClient CommentsInsert'{..}
-          = go (Just _cPart) (Just AltJSON) _cPayload
+instance GoogleRequest CommentsInsert where
+        type Rs CommentsInsert = Comment
+        requestClient CommentsInsert{..}
+          = go (Just _comPart) (Just AltJSON) _comPayload
               youTubeService
           where go
                   = buildClient (Proxy :: Proxy CommentsInsertResource)

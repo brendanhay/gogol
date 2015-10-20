@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Layers.Get
       LayersGetResource
 
     -- * Creating a Request
-    , layersGet'
-    , LayersGet'
+    , layersGet
+    , LayersGet
 
     -- * Request Lenses
     , lgContentVersion
@@ -43,7 +43,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.layers.get@ method which the
--- 'LayersGet'' request conforms to.
+-- 'LayersGet' request conforms to.
 type LayersGetResource =
      "volumes" :>
        Capture "volumeId" Text :>
@@ -55,15 +55,15 @@ type LayersGetResource =
 
 -- | Gets the layer summary for a volume.
 --
--- /See:/ 'layersGet'' smart constructor.
-data LayersGet' = LayersGet'
+-- /See:/ 'layersGet' smart constructor.
+data LayersGet = LayersGet
     { _lgContentVersion :: !(Maybe Text)
     , _lgVolumeId       :: !Text
     , _lgSource         :: !(Maybe Text)
     , _lgSummaryId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,12 +74,12 @@ data LayersGet' = LayersGet'
 -- * 'lgSource'
 --
 -- * 'lgSummaryId'
-layersGet'
+layersGet
     :: Text -- ^ 'lgVolumeId'
     -> Text -- ^ 'lgSummaryId'
-    -> LayersGet'
-layersGet' pLgVolumeId_ pLgSummaryId_ =
-    LayersGet'
+    -> LayersGet
+layersGet pLgVolumeId_ pLgSummaryId_ =
+    LayersGet
     { _lgContentVersion = Nothing
     , _lgVolumeId = pLgVolumeId_
     , _lgSource = Nothing
@@ -87,28 +87,28 @@ layersGet' pLgVolumeId_ pLgSummaryId_ =
     }
 
 -- | The content version for the requested volume.
-lgContentVersion :: Lens' LayersGet' (Maybe Text)
+lgContentVersion :: Lens' LayersGet (Maybe Text)
 lgContentVersion
   = lens _lgContentVersion
       (\ s a -> s{_lgContentVersion = a})
 
 -- | The volume to retrieve layers for.
-lgVolumeId :: Lens' LayersGet' Text
+lgVolumeId :: Lens' LayersGet Text
 lgVolumeId
   = lens _lgVolumeId (\ s a -> s{_lgVolumeId = a})
 
 -- | String to identify the originator of this request.
-lgSource :: Lens' LayersGet' (Maybe Text)
+lgSource :: Lens' LayersGet (Maybe Text)
 lgSource = lens _lgSource (\ s a -> s{_lgSource = a})
 
 -- | The ID for the layer to get the summary for.
-lgSummaryId :: Lens' LayersGet' Text
+lgSummaryId :: Lens' LayersGet Text
 lgSummaryId
   = lens _lgSummaryId (\ s a -> s{_lgSummaryId = a})
 
-instance GoogleRequest LayersGet' where
-        type Rs LayersGet' = Layersummary
-        requestClient LayersGet'{..}
+instance GoogleRequest LayersGet where
+        type Rs LayersGet = Layersummary
+        requestClient LayersGet{..}
           = go _lgVolumeId _lgSummaryId _lgContentVersion
               _lgSource
               (Just AltJSON)

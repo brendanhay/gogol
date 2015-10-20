@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
       MyLibraryReadingPositionsGetResource
 
     -- * Creating a Request
-    , myLibraryReadingPositionsGet'
-    , MyLibraryReadingPositionsGet'
+    , myLibraryReadingPositionsGet
+    , MyLibraryReadingPositionsGet
 
     -- * Request Lenses
     , mlrpgContentVersion
@@ -42,7 +42,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.mylibrary.readingpositions.get@ method which the
--- 'MyLibraryReadingPositionsGet'' request conforms to.
+-- 'MyLibraryReadingPositionsGet' request conforms to.
 type MyLibraryReadingPositionsGetResource =
      "mylibrary" :>
        "readingpositions" :>
@@ -54,14 +54,14 @@ type MyLibraryReadingPositionsGetResource =
 
 -- | Retrieves my reading position information for a volume.
 --
--- /See:/ 'myLibraryReadingPositionsGet'' smart constructor.
-data MyLibraryReadingPositionsGet' = MyLibraryReadingPositionsGet'
+-- /See:/ 'myLibraryReadingPositionsGet' smart constructor.
+data MyLibraryReadingPositionsGet = MyLibraryReadingPositionsGet
     { _mlrpgContentVersion :: !(Maybe Text)
     , _mlrpgVolumeId       :: !Text
     , _mlrpgSource         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MyLibraryReadingPositionsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'MyLibraryReadingPositionsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,38 +70,38 @@ data MyLibraryReadingPositionsGet' = MyLibraryReadingPositionsGet'
 -- * 'mlrpgVolumeId'
 --
 -- * 'mlrpgSource'
-myLibraryReadingPositionsGet'
+myLibraryReadingPositionsGet
     :: Text -- ^ 'mlrpgVolumeId'
-    -> MyLibraryReadingPositionsGet'
-myLibraryReadingPositionsGet' pMlrpgVolumeId_ =
-    MyLibraryReadingPositionsGet'
+    -> MyLibraryReadingPositionsGet
+myLibraryReadingPositionsGet pMlrpgVolumeId_ =
+    MyLibraryReadingPositionsGet
     { _mlrpgContentVersion = Nothing
     , _mlrpgVolumeId = pMlrpgVolumeId_
     , _mlrpgSource = Nothing
     }
 
 -- | Volume content version for which this reading position is requested.
-mlrpgContentVersion :: Lens' MyLibraryReadingPositionsGet' (Maybe Text)
+mlrpgContentVersion :: Lens' MyLibraryReadingPositionsGet (Maybe Text)
 mlrpgContentVersion
   = lens _mlrpgContentVersion
       (\ s a -> s{_mlrpgContentVersion = a})
 
 -- | ID of volume for which to retrieve a reading position.
-mlrpgVolumeId :: Lens' MyLibraryReadingPositionsGet' Text
+mlrpgVolumeId :: Lens' MyLibraryReadingPositionsGet Text
 mlrpgVolumeId
   = lens _mlrpgVolumeId
       (\ s a -> s{_mlrpgVolumeId = a})
 
 -- | String to identify the originator of this request.
-mlrpgSource :: Lens' MyLibraryReadingPositionsGet' (Maybe Text)
+mlrpgSource :: Lens' MyLibraryReadingPositionsGet (Maybe Text)
 mlrpgSource
   = lens _mlrpgSource (\ s a -> s{_mlrpgSource = a})
 
-instance GoogleRequest MyLibraryReadingPositionsGet'
+instance GoogleRequest MyLibraryReadingPositionsGet
          where
-        type Rs MyLibraryReadingPositionsGet' =
+        type Rs MyLibraryReadingPositionsGet =
              ReadingPosition
-        requestClient MyLibraryReadingPositionsGet'{..}
+        requestClient MyLibraryReadingPositionsGet{..}
           = go _mlrpgVolumeId _mlrpgContentVersion _mlrpgSource
               (Just AltJSON)
               booksService

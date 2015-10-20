@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.DiskTypes.Get
       DiskTypesGetResource
 
     -- * Creating a Request
-    , diskTypesGet'
-    , DiskTypesGet'
+    , diskTypesGet
+    , DiskTypesGet
 
     -- * Request Lenses
     , dtgProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.diskTypes.get@ method which the
--- 'DiskTypesGet'' request conforms to.
+-- 'DiskTypesGet' request conforms to.
 type DiskTypesGetResource =
      Capture "project" Text :>
        "zones" :>
@@ -53,14 +53,14 @@ type DiskTypesGetResource =
 
 -- | Returns the specified disk type resource.
 --
--- /See:/ 'diskTypesGet'' smart constructor.
-data DiskTypesGet' = DiskTypesGet'
+-- /See:/ 'diskTypesGet' smart constructor.
+data DiskTypesGet = DiskTypesGet
     { _dtgProject  :: !Text
     , _dtgZone     :: !Text
     , _dtgDiskType :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DiskTypesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'DiskTypesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data DiskTypesGet' = DiskTypesGet'
 -- * 'dtgZone'
 --
 -- * 'dtgDiskType'
-diskTypesGet'
+diskTypesGet
     :: Text -- ^ 'dtgProject'
     -> Text -- ^ 'dtgZone'
     -> Text -- ^ 'dtgDiskType'
-    -> DiskTypesGet'
-diskTypesGet' pDtgProject_ pDtgZone_ pDtgDiskType_ =
-    DiskTypesGet'
+    -> DiskTypesGet
+diskTypesGet pDtgProject_ pDtgZone_ pDtgDiskType_ =
+    DiskTypesGet
     { _dtgProject = pDtgProject_
     , _dtgZone = pDtgZone_
     , _dtgDiskType = pDtgDiskType_
     }
 
 -- | Project ID for this request.
-dtgProject :: Lens' DiskTypesGet' Text
+dtgProject :: Lens' DiskTypesGet Text
 dtgProject
   = lens _dtgProject (\ s a -> s{_dtgProject = a})
 
 -- | The name of the zone for this request.
-dtgZone :: Lens' DiskTypesGet' Text
+dtgZone :: Lens' DiskTypesGet Text
 dtgZone = lens _dtgZone (\ s a -> s{_dtgZone = a})
 
 -- | Name of the disk type resource to return.
-dtgDiskType :: Lens' DiskTypesGet' Text
+dtgDiskType :: Lens' DiskTypesGet Text
 dtgDiskType
   = lens _dtgDiskType (\ s a -> s{_dtgDiskType = a})
 
-instance GoogleRequest DiskTypesGet' where
-        type Rs DiskTypesGet' = DiskType
-        requestClient DiskTypesGet'{..}
+instance GoogleRequest DiskTypesGet where
+        type Rs DiskTypesGet = DiskType
+        requestClient DiskTypesGet{..}
           = go _dtgProject _dtgZone _dtgDiskType (Just AltJSON)
               computeService
           where go

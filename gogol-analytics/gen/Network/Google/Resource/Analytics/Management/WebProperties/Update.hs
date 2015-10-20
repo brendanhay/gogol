@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.WebProperties.Update
       ManagementWebPropertiesUpdateResource
 
     -- * Creating a Request
-    , managementWebPropertiesUpdate'
-    , ManagementWebPropertiesUpdate'
+    , managementWebPropertiesUpdate
+    , ManagementWebPropertiesUpdate
 
     -- * Request Lenses
     , mwpuWebPropertyId
@@ -42,7 +42,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.webproperties.update@ method which the
--- 'ManagementWebPropertiesUpdate'' request conforms to.
+-- 'ManagementWebPropertiesUpdate' request conforms to.
 type ManagementWebPropertiesUpdateResource =
      "management" :>
        "accounts" :>
@@ -55,14 +55,14 @@ type ManagementWebPropertiesUpdateResource =
 
 -- | Updates an existing web property.
 --
--- /See:/ 'managementWebPropertiesUpdate'' smart constructor.
-data ManagementWebPropertiesUpdate' = ManagementWebPropertiesUpdate'
+-- /See:/ 'managementWebPropertiesUpdate' smart constructor.
+data ManagementWebPropertiesUpdate = ManagementWebPropertiesUpdate
     { _mwpuWebPropertyId :: !Text
     , _mwpuPayload       :: !WebProperty
     , _mwpuAccountId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementWebPropertiesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementWebPropertiesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,39 +71,39 @@ data ManagementWebPropertiesUpdate' = ManagementWebPropertiesUpdate'
 -- * 'mwpuPayload'
 --
 -- * 'mwpuAccountId'
-managementWebPropertiesUpdate'
+managementWebPropertiesUpdate
     :: Text -- ^ 'mwpuWebPropertyId'
     -> WebProperty -- ^ 'mwpuPayload'
     -> Text -- ^ 'mwpuAccountId'
-    -> ManagementWebPropertiesUpdate'
-managementWebPropertiesUpdate' pMwpuWebPropertyId_ pMwpuPayload_ pMwpuAccountId_ =
-    ManagementWebPropertiesUpdate'
+    -> ManagementWebPropertiesUpdate
+managementWebPropertiesUpdate pMwpuWebPropertyId_ pMwpuPayload_ pMwpuAccountId_ =
+    ManagementWebPropertiesUpdate
     { _mwpuWebPropertyId = pMwpuWebPropertyId_
     , _mwpuPayload = pMwpuPayload_
     , _mwpuAccountId = pMwpuAccountId_
     }
 
 -- | Web property ID
-mwpuWebPropertyId :: Lens' ManagementWebPropertiesUpdate' Text
+mwpuWebPropertyId :: Lens' ManagementWebPropertiesUpdate Text
 mwpuWebPropertyId
   = lens _mwpuWebPropertyId
       (\ s a -> s{_mwpuWebPropertyId = a})
 
 -- | Multipart request metadata.
-mwpuPayload :: Lens' ManagementWebPropertiesUpdate' WebProperty
+mwpuPayload :: Lens' ManagementWebPropertiesUpdate WebProperty
 mwpuPayload
   = lens _mwpuPayload (\ s a -> s{_mwpuPayload = a})
 
 -- | Account ID to which the web property belongs
-mwpuAccountId :: Lens' ManagementWebPropertiesUpdate' Text
+mwpuAccountId :: Lens' ManagementWebPropertiesUpdate Text
 mwpuAccountId
   = lens _mwpuAccountId
       (\ s a -> s{_mwpuAccountId = a})
 
-instance GoogleRequest ManagementWebPropertiesUpdate'
+instance GoogleRequest ManagementWebPropertiesUpdate
          where
-        type Rs ManagementWebPropertiesUpdate' = WebProperty
-        requestClient ManagementWebPropertiesUpdate'{..}
+        type Rs ManagementWebPropertiesUpdate = WebProperty
+        requestClient ManagementWebPropertiesUpdate{..}
           = go _mwpuAccountId _mwpuWebPropertyId (Just AltJSON)
               _mwpuPayload
               analyticsService

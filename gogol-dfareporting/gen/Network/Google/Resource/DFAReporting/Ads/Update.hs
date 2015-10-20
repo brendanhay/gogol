@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Ads.Update
       AdsUpdateResource
 
     -- * Creating a Request
-    , adsUpdate'
-    , AdsUpdate'
+    , adsUpdate
+    , AdsUpdate
 
     -- * Request Lenses
     , aProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.ads.update@ method which the
--- 'AdsUpdate'' request conforms to.
+-- 'AdsUpdate' request conforms to.
 type AdsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,41 +51,41 @@ type AdsUpdateResource =
 
 -- | Updates an existing ad.
 --
--- /See:/ 'adsUpdate'' smart constructor.
-data AdsUpdate' = AdsUpdate'
+-- /See:/ 'adsUpdate' smart constructor.
+data AdsUpdate = AdsUpdate
     { _aProFileId :: !Int64
     , _aPayload   :: !Ad
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aProFileId'
 --
 -- * 'aPayload'
-adsUpdate'
+adsUpdate
     :: Int64 -- ^ 'aProFileId'
     -> Ad -- ^ 'aPayload'
-    -> AdsUpdate'
-adsUpdate' pAProFileId_ pAPayload_ =
-    AdsUpdate'
+    -> AdsUpdate
+adsUpdate pAProFileId_ pAPayload_ =
+    AdsUpdate
     { _aProFileId = pAProFileId_
     , _aPayload = pAPayload_
     }
 
 -- | User profile ID associated with this request.
-aProFileId :: Lens' AdsUpdate' Int64
+aProFileId :: Lens' AdsUpdate Int64
 aProFileId
   = lens _aProFileId (\ s a -> s{_aProFileId = a})
 
 -- | Multipart request metadata.
-aPayload :: Lens' AdsUpdate' Ad
+aPayload :: Lens' AdsUpdate Ad
 aPayload = lens _aPayload (\ s a -> s{_aPayload = a})
 
-instance GoogleRequest AdsUpdate' where
-        type Rs AdsUpdate' = Ad
-        requestClient AdsUpdate'{..}
+instance GoogleRequest AdsUpdate where
+        type Rs AdsUpdate = Ad
+        requestClient AdsUpdate{..}
           = go _aProFileId (Just AltJSON) _aPayload
               dFAReportingService
           where go

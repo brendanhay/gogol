@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTubeReporting.Jobs.Reports.Get
       JobsReportsGetResource
 
     -- * Creating a Request
-    , jobsReportsGet'
-    , JobsReportsGet'
+    , jobsReportsGet
+    , JobsReportsGet
 
     -- * Request Lenses
     , jrgXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeReporting.Types
 
 -- | A resource alias for @youtubereporting.jobs.reports.get@ method which the
--- 'JobsReportsGet'' request conforms to.
+-- 'JobsReportsGet' request conforms to.
 type JobsReportsGetResource =
      "v1" :>
        "jobs" :>
@@ -68,8 +68,8 @@ type JobsReportsGetResource =
 
 -- | Gets the metadata of a specific report.
 --
--- /See:/ 'jobsReportsGet'' smart constructor.
-data JobsReportsGet' = JobsReportsGet'
+-- /See:/ 'jobsReportsGet' smart constructor.
+data JobsReportsGet = JobsReportsGet
     { _jrgXgafv                  :: !(Maybe Text)
     , _jrgJobId                  :: !Text
     , _jrgUploadProtocol         :: !(Maybe Text)
@@ -82,7 +82,7 @@ data JobsReportsGet' = JobsReportsGet'
     , _jrgCallback               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'JobsReportsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'JobsReportsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -105,12 +105,12 @@ data JobsReportsGet' = JobsReportsGet'
 -- * 'jrgBearerToken'
 --
 -- * 'jrgCallback'
-jobsReportsGet'
+jobsReportsGet
     :: Text -- ^ 'jrgJobId'
     -> Text -- ^ 'jrgReportId'
-    -> JobsReportsGet'
-jobsReportsGet' pJrgJobId_ pJrgReportId_ =
-    JobsReportsGet'
+    -> JobsReportsGet
+jobsReportsGet pJrgJobId_ pJrgReportId_ =
+    JobsReportsGet
     { _jrgXgafv = Nothing
     , _jrgJobId = pJrgJobId_
     , _jrgUploadProtocol = Nothing
@@ -124,61 +124,61 @@ jobsReportsGet' pJrgJobId_ pJrgReportId_ =
     }
 
 -- | V1 error format.
-jrgXgafv :: Lens' JobsReportsGet' (Maybe Text)
+jrgXgafv :: Lens' JobsReportsGet (Maybe Text)
 jrgXgafv = lens _jrgXgafv (\ s a -> s{_jrgXgafv = a})
 
 -- | The ID of the job.
-jrgJobId :: Lens' JobsReportsGet' Text
+jrgJobId :: Lens' JobsReportsGet Text
 jrgJobId = lens _jrgJobId (\ s a -> s{_jrgJobId = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-jrgUploadProtocol :: Lens' JobsReportsGet' (Maybe Text)
+jrgUploadProtocol :: Lens' JobsReportsGet (Maybe Text)
 jrgUploadProtocol
   = lens _jrgUploadProtocol
       (\ s a -> s{_jrgUploadProtocol = a})
 
 -- | Pretty-print response.
-jrgPp :: Lens' JobsReportsGet' Bool
+jrgPp :: Lens' JobsReportsGet Bool
 jrgPp = lens _jrgPp (\ s a -> s{_jrgPp = a})
 
 -- | OAuth access token.
-jrgAccessToken :: Lens' JobsReportsGet' (Maybe Text)
+jrgAccessToken :: Lens' JobsReportsGet (Maybe Text)
 jrgAccessToken
   = lens _jrgAccessToken
       (\ s a -> s{_jrgAccessToken = a})
 
 -- | The ID of the report to retrieve.
-jrgReportId :: Lens' JobsReportsGet' Text
+jrgReportId :: Lens' JobsReportsGet Text
 jrgReportId
   = lens _jrgReportId (\ s a -> s{_jrgReportId = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-jrgUploadType :: Lens' JobsReportsGet' (Maybe Text)
+jrgUploadType :: Lens' JobsReportsGet (Maybe Text)
 jrgUploadType
   = lens _jrgUploadType
       (\ s a -> s{_jrgUploadType = a})
 
 -- | The content owner\'s external ID on which behalf the user is acting on.
 -- If not set, the user is acting for himself (his own channel).
-jrgOnBehalfOfContentOwner :: Lens' JobsReportsGet' (Maybe Text)
+jrgOnBehalfOfContentOwner :: Lens' JobsReportsGet (Maybe Text)
 jrgOnBehalfOfContentOwner
   = lens _jrgOnBehalfOfContentOwner
       (\ s a -> s{_jrgOnBehalfOfContentOwner = a})
 
 -- | OAuth bearer token.
-jrgBearerToken :: Lens' JobsReportsGet' (Maybe Text)
+jrgBearerToken :: Lens' JobsReportsGet (Maybe Text)
 jrgBearerToken
   = lens _jrgBearerToken
       (\ s a -> s{_jrgBearerToken = a})
 
 -- | JSONP
-jrgCallback :: Lens' JobsReportsGet' (Maybe Text)
+jrgCallback :: Lens' JobsReportsGet (Maybe Text)
 jrgCallback
   = lens _jrgCallback (\ s a -> s{_jrgCallback = a})
 
-instance GoogleRequest JobsReportsGet' where
-        type Rs JobsReportsGet' = Report
-        requestClient JobsReportsGet'{..}
+instance GoogleRequest JobsReportsGet where
+        type Rs JobsReportsGet = Report
+        requestClient JobsReportsGet{..}
           = go _jrgJobId _jrgReportId _jrgXgafv
               _jrgUploadProtocol
               (Just _jrgPp)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.GlobalForwardingRules.Delete
       GlobalForwardingRulesDeleteResource
 
     -- * Creating a Request
-    , globalForwardingRulesDelete'
-    , GlobalForwardingRulesDelete'
+    , globalForwardingRulesDelete
+    , GlobalForwardingRulesDelete
 
     -- * Request Lenses
     , gfrdProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.globalForwardingRules.delete@ method which the
--- 'GlobalForwardingRulesDelete'' request conforms to.
+-- 'GlobalForwardingRulesDelete' request conforms to.
 type GlobalForwardingRulesDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,44 +51,44 @@ type GlobalForwardingRulesDeleteResource =
 
 -- | Deletes the specified ForwardingRule resource.
 --
--- /See:/ 'globalForwardingRulesDelete'' smart constructor.
-data GlobalForwardingRulesDelete' = GlobalForwardingRulesDelete'
+-- /See:/ 'globalForwardingRulesDelete' smart constructor.
+data GlobalForwardingRulesDelete = GlobalForwardingRulesDelete
     { _gfrdProject        :: !Text
     , _gfrdForwardingRule :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GlobalForwardingRulesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'GlobalForwardingRulesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gfrdProject'
 --
 -- * 'gfrdForwardingRule'
-globalForwardingRulesDelete'
+globalForwardingRulesDelete
     :: Text -- ^ 'gfrdProject'
     -> Text -- ^ 'gfrdForwardingRule'
-    -> GlobalForwardingRulesDelete'
-globalForwardingRulesDelete' pGfrdProject_ pGfrdForwardingRule_ =
-    GlobalForwardingRulesDelete'
+    -> GlobalForwardingRulesDelete
+globalForwardingRulesDelete pGfrdProject_ pGfrdForwardingRule_ =
+    GlobalForwardingRulesDelete
     { _gfrdProject = pGfrdProject_
     , _gfrdForwardingRule = pGfrdForwardingRule_
     }
 
 -- | Name of the project scoping this request.
-gfrdProject :: Lens' GlobalForwardingRulesDelete' Text
+gfrdProject :: Lens' GlobalForwardingRulesDelete Text
 gfrdProject
   = lens _gfrdProject (\ s a -> s{_gfrdProject = a})
 
 -- | Name of the ForwardingRule resource to delete.
-gfrdForwardingRule :: Lens' GlobalForwardingRulesDelete' Text
+gfrdForwardingRule :: Lens' GlobalForwardingRulesDelete Text
 gfrdForwardingRule
   = lens _gfrdForwardingRule
       (\ s a -> s{_gfrdForwardingRule = a})
 
-instance GoogleRequest GlobalForwardingRulesDelete'
+instance GoogleRequest GlobalForwardingRulesDelete
          where
-        type Rs GlobalForwardingRulesDelete' = Operation
-        requestClient GlobalForwardingRulesDelete'{..}
+        type Rs GlobalForwardingRulesDelete = Operation
+        requestClient GlobalForwardingRulesDelete{..}
           = go _gfrdProject _gfrdForwardingRule (Just AltJSON)
               computeService
           where go

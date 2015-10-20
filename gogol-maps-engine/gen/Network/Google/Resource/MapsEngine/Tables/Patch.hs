@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Tables.Patch
       TablesPatchResource
 
     -- * Creating a Request
-    , tablesPatch'
-    , TablesPatch'
+    , tablesPatch
+    , TablesPatch
 
     -- * Request Lenses
     , tpPayload
@@ -41,7 +41,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.tables.patch@ method which the
--- 'TablesPatch'' request conforms to.
+-- 'TablesPatch' request conforms to.
 type TablesPatchResource =
      "tables" :>
        Capture "id" Text :>
@@ -50,41 +50,41 @@ type TablesPatchResource =
 
 -- | Mutate a table asset.
 --
--- /See:/ 'tablesPatch'' smart constructor.
-data TablesPatch' = TablesPatch'
+-- /See:/ 'tablesPatch' smart constructor.
+data TablesPatch = TablesPatch
     { _tpPayload :: !Table
     , _tpId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tpPayload'
 --
 -- * 'tpId'
-tablesPatch'
+tablesPatch
     :: Table -- ^ 'tpPayload'
     -> Text -- ^ 'tpId'
-    -> TablesPatch'
-tablesPatch' pTpPayload_ pTpId_ =
-    TablesPatch'
+    -> TablesPatch
+tablesPatch pTpPayload_ pTpId_ =
+    TablesPatch
     { _tpPayload = pTpPayload_
     , _tpId = pTpId_
     }
 
 -- | Multipart request metadata.
-tpPayload :: Lens' TablesPatch' Table
+tpPayload :: Lens' TablesPatch Table
 tpPayload
   = lens _tpPayload (\ s a -> s{_tpPayload = a})
 
 -- | The ID of the table.
-tpId :: Lens' TablesPatch' Text
+tpId :: Lens' TablesPatch Text
 tpId = lens _tpId (\ s a -> s{_tpId = a})
 
-instance GoogleRequest TablesPatch' where
-        type Rs TablesPatch' = ()
-        requestClient TablesPatch'{..}
+instance GoogleRequest TablesPatch where
+        type Rs TablesPatch = ()
+        requestClient TablesPatch{..}
           = go _tpId (Just AltJSON) _tpPayload
               mapsEngineService
           where go

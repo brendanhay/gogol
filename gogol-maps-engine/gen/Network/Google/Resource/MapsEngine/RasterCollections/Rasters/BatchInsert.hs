@@ -32,8 +32,8 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Rasters.BatchInsert
       RasterCollectionsRastersBatchInsertResource
 
     -- * Creating a Request
-    , rasterCollectionsRastersBatchInsert'
-    , RasterCollectionsRastersBatchInsert'
+    , rasterCollectionsRastersBatchInsert
+    , RasterCollectionsRastersBatchInsert
 
     -- * Request Lenses
     , rcrbiPayload
@@ -44,7 +44,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasterCollections.rasters.batchInsert@ method which the
--- 'RasterCollectionsRastersBatchInsert'' request conforms to.
+-- 'RasterCollectionsRastersBatchInsert' request conforms to.
 type RasterCollectionsRastersBatchInsertResource =
      "rasterCollections" :>
        Capture "id" Text :>
@@ -62,44 +62,43 @@ type RasterCollectionsRastersBatchInsertResource =
 -- to 50 rasters can be included in a single batchInsert request. Each
 -- batchInsert request is atomic.
 --
--- /See:/ 'rasterCollectionsRastersBatchInsert'' smart constructor.
-data RasterCollectionsRastersBatchInsert' = RasterCollectionsRastersBatchInsert'
+-- /See:/ 'rasterCollectionsRastersBatchInsert' smart constructor.
+data RasterCollectionsRastersBatchInsert = RasterCollectionsRastersBatchInsert
     { _rcrbiPayload :: !RasterCollectionsRastersBatchInsertRequest
     , _rcrbiId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RasterCollectionsRastersBatchInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'RasterCollectionsRastersBatchInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rcrbiPayload'
 --
 -- * 'rcrbiId'
-rasterCollectionsRastersBatchInsert'
+rasterCollectionsRastersBatchInsert
     :: RasterCollectionsRastersBatchInsertRequest -- ^ 'rcrbiPayload'
     -> Text -- ^ 'rcrbiId'
-    -> RasterCollectionsRastersBatchInsert'
-rasterCollectionsRastersBatchInsert' pRcrbiPayload_ pRcrbiId_ =
-    RasterCollectionsRastersBatchInsert'
+    -> RasterCollectionsRastersBatchInsert
+rasterCollectionsRastersBatchInsert pRcrbiPayload_ pRcrbiId_ =
+    RasterCollectionsRastersBatchInsert
     { _rcrbiPayload = pRcrbiPayload_
     , _rcrbiId = pRcrbiId_
     }
 
 -- | Multipart request metadata.
-rcrbiPayload :: Lens' RasterCollectionsRastersBatchInsert' RasterCollectionsRastersBatchInsertRequest
+rcrbiPayload :: Lens' RasterCollectionsRastersBatchInsert RasterCollectionsRastersBatchInsertRequest
 rcrbiPayload
   = lens _rcrbiPayload (\ s a -> s{_rcrbiPayload = a})
 
 -- | The ID of the raster collection to which these rasters belong.
-rcrbiId :: Lens' RasterCollectionsRastersBatchInsert' Text
+rcrbiId :: Lens' RasterCollectionsRastersBatchInsert Text
 rcrbiId = lens _rcrbiId (\ s a -> s{_rcrbiId = a})
 
 instance GoogleRequest
-         RasterCollectionsRastersBatchInsert' where
-        type Rs RasterCollectionsRastersBatchInsert' =
+         RasterCollectionsRastersBatchInsert where
+        type Rs RasterCollectionsRastersBatchInsert =
              RasterCollectionsRastersBatchInsertResponse
-        requestClient
-          RasterCollectionsRastersBatchInsert'{..}
+        requestClient RasterCollectionsRastersBatchInsert{..}
           = go _rcrbiId (Just AltJSON) _rcrbiPayload
               mapsEngineService
           where go

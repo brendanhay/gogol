@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.DomainAliases.Insert
       DomainAliasesInsertResource
 
     -- * Creating a Request
-    , domainAliasesInsert'
-    , DomainAliasesInsert'
+    , domainAliasesInsert
+    , DomainAliasesInsert
 
     -- * Request Lenses
     , daiPayload
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.domainAliases.insert@ method which the
--- 'DomainAliasesInsert'' request conforms to.
+-- 'DomainAliasesInsert' request conforms to.
 type DomainAliasesInsertResource =
      "customer" :>
        Capture "customer" Text :>
@@ -52,42 +52,42 @@ type DomainAliasesInsertResource =
 
 -- | Inserts a Domain alias of the customer.
 --
--- /See:/ 'domainAliasesInsert'' smart constructor.
-data DomainAliasesInsert' = DomainAliasesInsert'
+-- /See:/ 'domainAliasesInsert' smart constructor.
+data DomainAliasesInsert = DomainAliasesInsert
     { _daiPayload  :: !DomainAlias
     , _daiCustomer :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DomainAliasesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'DomainAliasesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'daiPayload'
 --
 -- * 'daiCustomer'
-domainAliasesInsert'
+domainAliasesInsert
     :: DomainAlias -- ^ 'daiPayload'
     -> Text -- ^ 'daiCustomer'
-    -> DomainAliasesInsert'
-domainAliasesInsert' pDaiPayload_ pDaiCustomer_ =
-    DomainAliasesInsert'
+    -> DomainAliasesInsert
+domainAliasesInsert pDaiPayload_ pDaiCustomer_ =
+    DomainAliasesInsert
     { _daiPayload = pDaiPayload_
     , _daiCustomer = pDaiCustomer_
     }
 
 -- | Multipart request metadata.
-daiPayload :: Lens' DomainAliasesInsert' DomainAlias
+daiPayload :: Lens' DomainAliasesInsert DomainAlias
 daiPayload
   = lens _daiPayload (\ s a -> s{_daiPayload = a})
 
 -- | Immutable id of the Google Apps account.
-daiCustomer :: Lens' DomainAliasesInsert' Text
+daiCustomer :: Lens' DomainAliasesInsert Text
 daiCustomer
   = lens _daiCustomer (\ s a -> s{_daiCustomer = a})
 
-instance GoogleRequest DomainAliasesInsert' where
-        type Rs DomainAliasesInsert' = DomainAlias
-        requestClient DomainAliasesInsert'{..}
+instance GoogleRequest DomainAliasesInsert where
+        type Rs DomainAliasesInsert = DomainAlias
+        requestClient DomainAliasesInsert{..}
           = go _daiCustomer (Just AltJSON) _daiPayload
               directoryService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Experiments.List
       ManagementExperimentsListResource
 
     -- * Creating a Request
-    , managementExperimentsList'
-    , ManagementExperimentsList'
+    , managementExperimentsList
+    , ManagementExperimentsList
 
     -- * Request Lenses
     , melWebPropertyId
@@ -44,7 +44,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.experiments.list@ method which the
--- 'ManagementExperimentsList'' request conforms to.
+-- 'ManagementExperimentsList' request conforms to.
 type ManagementExperimentsListResource =
      "management" :>
        "accounts" :>
@@ -60,8 +60,8 @@ type ManagementExperimentsListResource =
 
 -- | Lists experiments to which the user has access.
 --
--- /See:/ 'managementExperimentsList'' smart constructor.
-data ManagementExperimentsList' = ManagementExperimentsList'
+-- /See:/ 'managementExperimentsList' smart constructor.
+data ManagementExperimentsList = ManagementExperimentsList
     { _melWebPropertyId :: !Text
     , _melProFileId     :: !Text
     , _melAccountId     :: !Text
@@ -69,7 +69,7 @@ data ManagementExperimentsList' = ManagementExperimentsList'
     , _melMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementExperimentsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementExperimentsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,13 +82,13 @@ data ManagementExperimentsList' = ManagementExperimentsList'
 -- * 'melStartIndex'
 --
 -- * 'melMaxResults'
-managementExperimentsList'
+managementExperimentsList
     :: Text -- ^ 'melWebPropertyId'
     -> Text -- ^ 'melProFileId'
     -> Text -- ^ 'melAccountId'
-    -> ManagementExperimentsList'
-managementExperimentsList' pMelWebPropertyId_ pMelProFileId_ pMelAccountId_ =
-    ManagementExperimentsList'
+    -> ManagementExperimentsList
+managementExperimentsList pMelWebPropertyId_ pMelProFileId_ pMelAccountId_ =
+    ManagementExperimentsList
     { _melWebPropertyId = pMelWebPropertyId_
     , _melProFileId = pMelProFileId_
     , _melAccountId = pMelAccountId_
@@ -97,38 +97,38 @@ managementExperimentsList' pMelWebPropertyId_ pMelProFileId_ pMelAccountId_ =
     }
 
 -- | Web property ID to retrieve experiments for.
-melWebPropertyId :: Lens' ManagementExperimentsList' Text
+melWebPropertyId :: Lens' ManagementExperimentsList Text
 melWebPropertyId
   = lens _melWebPropertyId
       (\ s a -> s{_melWebPropertyId = a})
 
 -- | View (Profile) ID to retrieve experiments for.
-melProFileId :: Lens' ManagementExperimentsList' Text
+melProFileId :: Lens' ManagementExperimentsList Text
 melProFileId
   = lens _melProFileId (\ s a -> s{_melProFileId = a})
 
 -- | Account ID to retrieve experiments for.
-melAccountId :: Lens' ManagementExperimentsList' Text
+melAccountId :: Lens' ManagementExperimentsList Text
 melAccountId
   = lens _melAccountId (\ s a -> s{_melAccountId = a})
 
 -- | An index of the first experiment to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
-melStartIndex :: Lens' ManagementExperimentsList' (Maybe Int32)
+melStartIndex :: Lens' ManagementExperimentsList (Maybe Int32)
 melStartIndex
   = lens _melStartIndex
       (\ s a -> s{_melStartIndex = a})
 
 -- | The maximum number of experiments to include in this response.
-melMaxResults :: Lens' ManagementExperimentsList' (Maybe Int32)
+melMaxResults :: Lens' ManagementExperimentsList (Maybe Int32)
 melMaxResults
   = lens _melMaxResults
       (\ s a -> s{_melMaxResults = a})
 
-instance GoogleRequest ManagementExperimentsList'
+instance GoogleRequest ManagementExperimentsList
          where
-        type Rs ManagementExperimentsList' = Experiments
-        requestClient ManagementExperimentsList'{..}
+        type Rs ManagementExperimentsList = Experiments
+        requestClient ManagementExperimentsList{..}
           = go _melAccountId _melWebPropertyId _melProFileId
               _melStartIndex
               _melMaxResults

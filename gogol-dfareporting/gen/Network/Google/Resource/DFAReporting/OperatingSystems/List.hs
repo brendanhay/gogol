@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.OperatingSystems.List
       OperatingSystemsListResource
 
     -- * Creating a Request
-    , operatingSystemsList'
-    , OperatingSystemsList'
+    , operatingSystemsList
+    , OperatingSystemsList
 
     -- * Request Lenses
     , oslProFileId
@@ -40,7 +40,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.operatingSystems.list@ method which the
--- 'OperatingSystemsList'' request conforms to.
+-- 'OperatingSystemsList' request conforms to.
 type OperatingSystemsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -50,33 +50,33 @@ type OperatingSystemsListResource =
 
 -- | Retrieves a list of operating systems.
 --
--- /See:/ 'operatingSystemsList'' smart constructor.
-newtype OperatingSystemsList' = OperatingSystemsList'
+-- /See:/ 'operatingSystemsList' smart constructor.
+newtype OperatingSystemsList = OperatingSystemsList
     { _oslProFileId :: Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperatingSystemsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'OperatingSystemsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'oslProFileId'
-operatingSystemsList'
+operatingSystemsList
     :: Int64 -- ^ 'oslProFileId'
-    -> OperatingSystemsList'
-operatingSystemsList' pOslProFileId_ =
-    OperatingSystemsList'
+    -> OperatingSystemsList
+operatingSystemsList pOslProFileId_ =
+    OperatingSystemsList
     { _oslProFileId = pOslProFileId_
     }
 
 -- | User profile ID associated with this request.
-oslProFileId :: Lens' OperatingSystemsList' Int64
+oslProFileId :: Lens' OperatingSystemsList Int64
 oslProFileId
   = lens _oslProFileId (\ s a -> s{_oslProFileId = a})
 
-instance GoogleRequest OperatingSystemsList' where
-        type Rs OperatingSystemsList' =
+instance GoogleRequest OperatingSystemsList where
+        type Rs OperatingSystemsList =
              OperatingSystemsListResponse
-        requestClient OperatingSystemsList'{..}
+        requestClient OperatingSystemsList{..}
           = go _oslProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

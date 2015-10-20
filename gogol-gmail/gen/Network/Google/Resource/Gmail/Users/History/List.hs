@@ -30,8 +30,8 @@ module Network.Google.Resource.Gmail.Users.History.List
       UsersHistoryListResource
 
     -- * Creating a Request
-    , usersHistoryList'
-    , UsersHistoryList'
+    , usersHistoryList
+    , UsersHistoryList
 
     -- * Request Lenses
     , uhlUserId
@@ -45,7 +45,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.history.list@ method which the
--- 'UsersHistoryList'' request conforms to.
+-- 'UsersHistoryList' request conforms to.
 type UsersHistoryListResource =
      Capture "userId" Text :>
        "history" :>
@@ -59,8 +59,8 @@ type UsersHistoryListResource =
 -- | Lists the history of all changes to the given mailbox. History results
 -- are returned in chronological order (increasing historyId).
 --
--- /See:/ 'usersHistoryList'' smart constructor.
-data UsersHistoryList' = UsersHistoryList'
+-- /See:/ 'usersHistoryList' smart constructor.
+data UsersHistoryList = UsersHistoryList
     { _uhlUserId         :: !Text
     , _uhlStartHistoryId :: !(Maybe Word64)
     , _uhlPageToken      :: !(Maybe Text)
@@ -68,7 +68,7 @@ data UsersHistoryList' = UsersHistoryList'
     , _uhlMaxResults     :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersHistoryList'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersHistoryList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,11 +81,11 @@ data UsersHistoryList' = UsersHistoryList'
 -- * 'uhlLabelId'
 --
 -- * 'uhlMaxResults'
-usersHistoryList'
+usersHistoryList
     :: Text
-    -> UsersHistoryList'
-usersHistoryList' pUhlUserId_ =
-    UsersHistoryList'
+    -> UsersHistoryList
+usersHistoryList pUhlUserId_ =
+    UsersHistoryList
     { _uhlUserId = pUhlUserId_
     , _uhlStartHistoryId = Nothing
     , _uhlPageToken = Nothing
@@ -95,7 +95,7 @@ usersHistoryList' pUhlUserId_ =
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-uhlUserId :: Lens' UsersHistoryList' Text
+uhlUserId :: Lens' UsersHistoryList Text
 uhlUserId
   = lens _uhlUserId (\ s a -> s{_uhlUserId = a})
 
@@ -110,30 +110,30 @@ uhlUserId
 -- should perform a full sync. If you receive no nextPageToken in the
 -- response, there are no updates to retrieve and you can store the
 -- returned historyId for a future request.
-uhlStartHistoryId :: Lens' UsersHistoryList' (Maybe Word64)
+uhlStartHistoryId :: Lens' UsersHistoryList (Maybe Word64)
 uhlStartHistoryId
   = lens _uhlStartHistoryId
       (\ s a -> s{_uhlStartHistoryId = a})
 
 -- | Page token to retrieve a specific page of results in the list.
-uhlPageToken :: Lens' UsersHistoryList' (Maybe Text)
+uhlPageToken :: Lens' UsersHistoryList (Maybe Text)
 uhlPageToken
   = lens _uhlPageToken (\ s a -> s{_uhlPageToken = a})
 
 -- | Only return messages with a label matching the ID.
-uhlLabelId :: Lens' UsersHistoryList' (Maybe Text)
+uhlLabelId :: Lens' UsersHistoryList (Maybe Text)
 uhlLabelId
   = lens _uhlLabelId (\ s a -> s{_uhlLabelId = a})
 
 -- | The maximum number of history records to return.
-uhlMaxResults :: Lens' UsersHistoryList' Word32
+uhlMaxResults :: Lens' UsersHistoryList Word32
 uhlMaxResults
   = lens _uhlMaxResults
       (\ s a -> s{_uhlMaxResults = a})
 
-instance GoogleRequest UsersHistoryList' where
-        type Rs UsersHistoryList' = ListHistoryResponse
-        requestClient UsersHistoryList'{..}
+instance GoogleRequest UsersHistoryList where
+        type Rs UsersHistoryList = ListHistoryResponse
+        requestClient UsersHistoryList{..}
           = go _uhlUserId _uhlStartHistoryId _uhlPageToken
               _uhlLabelId
               (Just _uhlMaxResults)

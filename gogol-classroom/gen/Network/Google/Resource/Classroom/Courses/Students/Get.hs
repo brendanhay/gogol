@@ -33,8 +33,8 @@ module Network.Google.Resource.Classroom.Courses.Students.Get
       CoursesStudentsGetResource
 
     -- * Creating a Request
-    , coursesStudentsGet'
-    , CoursesStudentsGet'
+    , coursesStudentsGet
+    , CoursesStudentsGet
 
     -- * Request Lenses
     , csgXgafv
@@ -52,7 +52,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.students.get@ method which the
--- 'CoursesStudentsGet'' request conforms to.
+-- 'CoursesStudentsGet' request conforms to.
 type CoursesStudentsGetResource =
      "v1" :>
        "courses" :>
@@ -74,8 +74,8 @@ type CoursesStudentsGetResource =
 -- no student of this course has the requested ID or if the course does not
 -- exist.
 --
--- /See:/ 'coursesStudentsGet'' smart constructor.
-data CoursesStudentsGet' = CoursesStudentsGet'
+-- /See:/ 'coursesStudentsGet' smart constructor.
+data CoursesStudentsGet = CoursesStudentsGet
     { _csgXgafv          :: !(Maybe Text)
     , _csgUploadProtocol :: !(Maybe Text)
     , _csgPp             :: !Bool
@@ -87,7 +87,7 @@ data CoursesStudentsGet' = CoursesStudentsGet'
     , _csgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CoursesStudentsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CoursesStudentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -108,12 +108,12 @@ data CoursesStudentsGet' = CoursesStudentsGet'
 -- * 'csgBearerToken'
 --
 -- * 'csgCallback'
-coursesStudentsGet'
+coursesStudentsGet
     :: Text -- ^ 'csgCourseId'
     -> Text -- ^ 'csgUserId'
-    -> CoursesStudentsGet'
-coursesStudentsGet' pCsgCourseId_ pCsgUserId_ =
-    CoursesStudentsGet'
+    -> CoursesStudentsGet
+coursesStudentsGet pCsgCourseId_ pCsgUserId_ =
+    CoursesStudentsGet
     { _csgXgafv = Nothing
     , _csgUploadProtocol = Nothing
     , _csgPp = True
@@ -126,33 +126,33 @@ coursesStudentsGet' pCsgCourseId_ pCsgUserId_ =
     }
 
 -- | V1 error format.
-csgXgafv :: Lens' CoursesStudentsGet' (Maybe Text)
+csgXgafv :: Lens' CoursesStudentsGet (Maybe Text)
 csgXgafv = lens _csgXgafv (\ s a -> s{_csgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-csgUploadProtocol :: Lens' CoursesStudentsGet' (Maybe Text)
+csgUploadProtocol :: Lens' CoursesStudentsGet (Maybe Text)
 csgUploadProtocol
   = lens _csgUploadProtocol
       (\ s a -> s{_csgUploadProtocol = a})
 
 -- | Pretty-print response.
-csgPp :: Lens' CoursesStudentsGet' Bool
+csgPp :: Lens' CoursesStudentsGet Bool
 csgPp = lens _csgPp (\ s a -> s{_csgPp = a})
 
 -- | Identifier of the course. This identifier can be either the
 -- Classroom-assigned identifier or an alias.
-csgCourseId :: Lens' CoursesStudentsGet' Text
+csgCourseId :: Lens' CoursesStudentsGet Text
 csgCourseId
   = lens _csgCourseId (\ s a -> s{_csgCourseId = a})
 
 -- | OAuth access token.
-csgAccessToken :: Lens' CoursesStudentsGet' (Maybe Text)
+csgAccessToken :: Lens' CoursesStudentsGet (Maybe Text)
 csgAccessToken
   = lens _csgAccessToken
       (\ s a -> s{_csgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-csgUploadType :: Lens' CoursesStudentsGet' (Maybe Text)
+csgUploadType :: Lens' CoursesStudentsGet (Maybe Text)
 csgUploadType
   = lens _csgUploadType
       (\ s a -> s{_csgUploadType = a})
@@ -160,24 +160,24 @@ csgUploadType
 -- | Identifier of the student to return. The identifier can be one of the
 -- following: * the numeric identifier for the user * the email address of
 -- the user * the string literal \`\"me\"\`, indicating the requesting user
-csgUserId :: Lens' CoursesStudentsGet' Text
+csgUserId :: Lens' CoursesStudentsGet Text
 csgUserId
   = lens _csgUserId (\ s a -> s{_csgUserId = a})
 
 -- | OAuth bearer token.
-csgBearerToken :: Lens' CoursesStudentsGet' (Maybe Text)
+csgBearerToken :: Lens' CoursesStudentsGet (Maybe Text)
 csgBearerToken
   = lens _csgBearerToken
       (\ s a -> s{_csgBearerToken = a})
 
 -- | JSONP
-csgCallback :: Lens' CoursesStudentsGet' (Maybe Text)
+csgCallback :: Lens' CoursesStudentsGet (Maybe Text)
 csgCallback
   = lens _csgCallback (\ s a -> s{_csgCallback = a})
 
-instance GoogleRequest CoursesStudentsGet' where
-        type Rs CoursesStudentsGet' = Student
-        requestClient CoursesStudentsGet'{..}
+instance GoogleRequest CoursesStudentsGet where
+        type Rs CoursesStudentsGet = Student
+        requestClient CoursesStudentsGet{..}
           = go _csgCourseId _csgUserId _csgXgafv
               _csgUploadProtocol
               (Just _csgPp)

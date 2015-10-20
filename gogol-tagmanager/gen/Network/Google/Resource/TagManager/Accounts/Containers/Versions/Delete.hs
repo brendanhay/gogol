@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Delete
       AccountsContainersVersionsDeleteResource
 
     -- * Creating a Request
-    , accountsContainersVersionsDelete'
-    , AccountsContainersVersionsDelete'
+    , accountsContainersVersionsDelete
+    , AccountsContainersVersionsDelete
 
     -- * Request Lenses
     , acvdcContainerId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.versions.delete@ method which the
--- 'AccountsContainersVersionsDelete'' request conforms to.
+-- 'AccountsContainersVersionsDelete' request conforms to.
 type AccountsContainersVersionsDeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -54,14 +54,14 @@ type AccountsContainersVersionsDeleteResource =
 
 -- | Deletes a Container Version.
 --
--- /See:/ 'accountsContainersVersionsDelete'' smart constructor.
-data AccountsContainersVersionsDelete' = AccountsContainersVersionsDelete'
+-- /See:/ 'accountsContainersVersionsDelete' smart constructor.
+data AccountsContainersVersionsDelete = AccountsContainersVersionsDelete
     { _acvdcContainerId        :: !Text
     , _acvdcContainerVersionId :: !Text
     , _acvdcAccountId          :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersVersionsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersVersionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,40 +70,40 @@ data AccountsContainersVersionsDelete' = AccountsContainersVersionsDelete'
 -- * 'acvdcContainerVersionId'
 --
 -- * 'acvdcAccountId'
-accountsContainersVersionsDelete'
+accountsContainersVersionsDelete
     :: Text -- ^ 'acvdcContainerId'
     -> Text -- ^ 'acvdcContainerVersionId'
     -> Text -- ^ 'acvdcAccountId'
-    -> AccountsContainersVersionsDelete'
-accountsContainersVersionsDelete' pAcvdcContainerId_ pAcvdcContainerVersionId_ pAcvdcAccountId_ =
-    AccountsContainersVersionsDelete'
+    -> AccountsContainersVersionsDelete
+accountsContainersVersionsDelete pAcvdcContainerId_ pAcvdcContainerVersionId_ pAcvdcAccountId_ =
+    AccountsContainersVersionsDelete
     { _acvdcContainerId = pAcvdcContainerId_
     , _acvdcContainerVersionId = pAcvdcContainerVersionId_
     , _acvdcAccountId = pAcvdcAccountId_
     }
 
 -- | The GTM Container ID.
-acvdcContainerId :: Lens' AccountsContainersVersionsDelete' Text
+acvdcContainerId :: Lens' AccountsContainersVersionsDelete Text
 acvdcContainerId
   = lens _acvdcContainerId
       (\ s a -> s{_acvdcContainerId = a})
 
 -- | The GTM Container Version ID.
-acvdcContainerVersionId :: Lens' AccountsContainersVersionsDelete' Text
+acvdcContainerVersionId :: Lens' AccountsContainersVersionsDelete Text
 acvdcContainerVersionId
   = lens _acvdcContainerVersionId
       (\ s a -> s{_acvdcContainerVersionId = a})
 
 -- | The GTM Account ID.
-acvdcAccountId :: Lens' AccountsContainersVersionsDelete' Text
+acvdcAccountId :: Lens' AccountsContainersVersionsDelete Text
 acvdcAccountId
   = lens _acvdcAccountId
       (\ s a -> s{_acvdcAccountId = a})
 
 instance GoogleRequest
-         AccountsContainersVersionsDelete' where
-        type Rs AccountsContainersVersionsDelete' = ()
-        requestClient AccountsContainersVersionsDelete'{..}
+         AccountsContainersVersionsDelete where
+        type Rs AccountsContainersVersionsDelete = ()
+        requestClient AccountsContainersVersionsDelete{..}
           = go _acvdcAccountId _acvdcContainerId
               _acvdcContainerVersionId
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.Events.Watch
       EventsWatchResource
 
     -- * Creating a Request
-    , eventsWatch'
-    , EventsWatch'
+    , eventsWatch
+    , EventsWatch
 
     -- * Request Lenses
     , ewSyncToken
@@ -58,7 +58,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.events.watch@ method which the
--- 'EventsWatch'' request conforms to.
+-- 'EventsWatch' request conforms to.
 type EventsWatchResource =
      "calendars" :>
        Capture "calendarId" Text :>
@@ -89,8 +89,8 @@ type EventsWatchResource =
 
 -- | Watch for changes to Events resources.
 --
--- /See:/ 'eventsWatch'' smart constructor.
-data EventsWatch' = EventsWatch'
+-- /See:/ 'eventsWatch' smart constructor.
+data EventsWatch = EventsWatch
     { _ewSyncToken               :: !(Maybe Text)
     , _ewCalendarId              :: !Text
     , _ewTimeMin                 :: !(Maybe DateTime')
@@ -112,7 +112,7 @@ data EventsWatch' = EventsWatch'
     , _ewTimeMax                 :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'EventsWatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'EventsWatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -153,12 +153,12 @@ data EventsWatch' = EventsWatch'
 -- * 'ewAlwaysIncludeEmail'
 --
 -- * 'ewTimeMax'
-eventsWatch'
+eventsWatch
     :: Text -- ^ 'ewCalendarId'
     -> Channel -- ^ 'ewPayload'
-    -> EventsWatch'
-eventsWatch' pEwCalendarId_ pEwPayload_ =
-    EventsWatch'
+    -> EventsWatch
+eventsWatch pEwCalendarId_ pEwPayload_ =
+    EventsWatch
     { _ewSyncToken = Nothing
     , _ewCalendarId = pEwCalendarId_
     , _ewTimeMin = Nothing
@@ -193,14 +193,14 @@ eventsWatch' pEwCalendarId_ pEwPayload_ =
 -- perform a full synchronization without any syncToken. Learn more about
 -- incremental synchronization. Optional. The default is to return all
 -- entries.
-ewSyncToken :: Lens' EventsWatch' (Maybe Text)
+ewSyncToken :: Lens' EventsWatch (Maybe Text)
 ewSyncToken
   = lens _ewSyncToken (\ s a -> s{_ewSyncToken = a})
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-ewCalendarId :: Lens' EventsWatch' Text
+ewCalendarId :: Lens' EventsWatch Text
 ewCalendarId
   = lens _ewCalendarId (\ s a -> s{_ewCalendarId = a})
 
@@ -208,21 +208,21 @@ ewCalendarId
 -- The default is not to filter by end time. Must be an RFC3339 timestamp
 -- with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00,
 -- 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.
-ewTimeMin :: Lens' EventsWatch' (Maybe UTCTime)
+ewTimeMin :: Lens' EventsWatch (Maybe UTCTime)
 ewTimeMin
   = lens _ewTimeMin (\ s a -> s{_ewTimeMin = a}) .
       mapping _DateTime
 
 -- | The order of the events returned in the result. Optional. The default is
 -- an unspecified, stable order.
-ewOrderBy :: Lens' EventsWatch' (Maybe EventsWatchOrderBy)
+ewOrderBy :: Lens' EventsWatch (Maybe EventsWatchOrderBy)
 ewOrderBy
   = lens _ewOrderBy (\ s a -> s{_ewOrderBy = a})
 
 -- | Whether to expand recurring events into instances and only return single
 -- one-off events and instances of recurring events, but not the underlying
 -- recurring events themselves. Optional. The default is False.
-ewSingleEvents :: Lens' EventsWatch' (Maybe Bool)
+ewSingleEvents :: Lens' EventsWatch (Maybe Bool)
 ewSingleEvents
   = lens _ewSingleEvents
       (\ s a -> s{_ewSingleEvents = a})
@@ -230,7 +230,7 @@ ewSingleEvents
 -- | Extended properties constraint specified as propertyName=value. Matches
 -- only private properties. This parameter might be repeated multiple times
 -- to return events that match all given constraints.
-ewPrivateExtendedProperty :: Lens' EventsWatch' [Text]
+ewPrivateExtendedProperty :: Lens' EventsWatch [Text]
 ewPrivateExtendedProperty
   = lens _ewPrivateExtendedProperty
       (\ s a -> s{_ewPrivateExtendedProperty = a})
@@ -243,25 +243,25 @@ ewPrivateExtendedProperty
 -- singleEvents are both False. If showDeleted and singleEvents are both
 -- True, only single instances of deleted events (but not the underlying
 -- recurring events) are returned. Optional. The default is False.
-ewShowDeleted :: Lens' EventsWatch' (Maybe Bool)
+ewShowDeleted :: Lens' EventsWatch (Maybe Bool)
 ewShowDeleted
   = lens _ewShowDeleted
       (\ s a -> s{_ewShowDeleted = a})
 
 -- | Multipart request metadata.
-ewPayload :: Lens' EventsWatch' Channel
+ewPayload :: Lens' EventsWatch Channel
 ewPayload
   = lens _ewPayload (\ s a -> s{_ewPayload = a})
 
 -- | Free text search terms to find events that match these terms in any
 -- field, except for extended properties. Optional.
-ewQ :: Lens' EventsWatch' (Maybe Text)
+ewQ :: Lens' EventsWatch (Maybe Text)
 ewQ = lens _ewQ (\ s a -> s{_ewQ = a})
 
 -- | Extended properties constraint specified as propertyName=value. Matches
 -- only shared properties. This parameter might be repeated multiple times
 -- to return events that match all given constraints.
-ewSharedExtendedProperty :: Lens' EventsWatch' [Text]
+ewSharedExtendedProperty :: Lens' EventsWatch [Text]
 ewSharedExtendedProperty
   = lens _ewSharedExtendedProperty
       (\ s a -> s{_ewSharedExtendedProperty = a})
@@ -271,14 +271,14 @@ ewSharedExtendedProperty
 -- | The maximum number of attendees to include in the response. If there are
 -- more than the specified number of attendees, only the participant is
 -- returned. Optional.
-ewMaxAttendees :: Lens' EventsWatch' (Maybe Int32)
+ewMaxAttendees :: Lens' EventsWatch (Maybe Int32)
 ewMaxAttendees
   = lens _ewMaxAttendees
       (\ s a -> s{_ewMaxAttendees = a})
 
 -- | Specifies event ID in the iCalendar format to be included in the
 -- response. Optional.
-ewICalUId :: Lens' EventsWatch' (Maybe Text)
+ewICalUId :: Lens' EventsWatch (Maybe Text)
 ewICalUId
   = lens _ewICalUId (\ s a -> s{_ewICalUId = a})
 
@@ -286,25 +286,25 @@ ewICalUId
 -- timestamp) to filter by. When specified, entries deleted since this time
 -- will always be included regardless of showDeleted. Optional. The default
 -- is not to filter by last modification time.
-ewUpdatedMin :: Lens' EventsWatch' (Maybe UTCTime)
+ewUpdatedMin :: Lens' EventsWatch (Maybe UTCTime)
 ewUpdatedMin
   = lens _ewUpdatedMin (\ s a -> s{_ewUpdatedMin = a})
       . mapping _DateTime
 
 -- | Token specifying which result page to return. Optional.
-ewPageToken :: Lens' EventsWatch' (Maybe Text)
+ewPageToken :: Lens' EventsWatch (Maybe Text)
 ewPageToken
   = lens _ewPageToken (\ s a -> s{_ewPageToken = a})
 
 -- | Time zone used in the response. Optional. The default is the time zone
 -- of the calendar.
-ewTimeZone :: Lens' EventsWatch' (Maybe Text)
+ewTimeZone :: Lens' EventsWatch (Maybe Text)
 ewTimeZone
   = lens _ewTimeZone (\ s a -> s{_ewTimeZone = a})
 
 -- | Whether to include hidden invitations in the result. Optional. The
 -- default is False.
-ewShowHiddenInvitations :: Lens' EventsWatch' (Maybe Bool)
+ewShowHiddenInvitations :: Lens' EventsWatch (Maybe Bool)
 ewShowHiddenInvitations
   = lens _ewShowHiddenInvitations
       (\ s a -> s{_ewShowHiddenInvitations = a})
@@ -312,7 +312,7 @@ ewShowHiddenInvitations
 -- | Maximum number of events returned on one result page. By default the
 -- value is 250 events. The page size can never be larger than 2500 events.
 -- Optional.
-ewMaxResults :: Lens' EventsWatch' (Maybe Int32)
+ewMaxResults :: Lens' EventsWatch (Maybe Int32)
 ewMaxResults
   = lens _ewMaxResults (\ s a -> s{_ewMaxResults = a})
 
@@ -322,7 +322,7 @@ ewMaxResults
 -- is discouraged and should only be used by clients which cannot handle
 -- the absence of an email address value in the mentioned places. Optional.
 -- The default is False.
-ewAlwaysIncludeEmail :: Lens' EventsWatch' (Maybe Bool)
+ewAlwaysIncludeEmail :: Lens' EventsWatch (Maybe Bool)
 ewAlwaysIncludeEmail
   = lens _ewAlwaysIncludeEmail
       (\ s a -> s{_ewAlwaysIncludeEmail = a})
@@ -332,14 +332,14 @@ ewAlwaysIncludeEmail
 -- timestamp with mandatory time zone offset, e.g.,
 -- 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be
 -- provided but will be ignored.
-ewTimeMax :: Lens' EventsWatch' (Maybe UTCTime)
+ewTimeMax :: Lens' EventsWatch (Maybe UTCTime)
 ewTimeMax
   = lens _ewTimeMax (\ s a -> s{_ewTimeMax = a}) .
       mapping _DateTime
 
-instance GoogleRequest EventsWatch' where
-        type Rs EventsWatch' = Channel
-        requestClient EventsWatch'{..}
+instance GoogleRequest EventsWatch where
+        type Rs EventsWatch = Channel
+        requestClient EventsWatch{..}
           = go _ewCalendarId _ewSyncToken _ewTimeMin _ewOrderBy
               _ewSingleEvents
               (_ewPrivateExtendedProperty ^. _Default)

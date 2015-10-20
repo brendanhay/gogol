@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.List
       AccountsContainersFoldersListResource
 
     -- * Creating a Request
-    , accountsContainersFoldersList'
-    , AccountsContainersFoldersList'
+    , accountsContainersFoldersList
+    , AccountsContainersFoldersList
 
     -- * Request Lenses
     , acflContainerId
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.folders.list@ method which the
--- 'AccountsContainersFoldersList'' request conforms to.
+-- 'AccountsContainersFoldersList' request conforms to.
 type AccountsContainersFoldersListResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -53,46 +53,46 @@ type AccountsContainersFoldersListResource =
 
 -- | Lists all GTM Folders of a Container.
 --
--- /See:/ 'accountsContainersFoldersList'' smart constructor.
-data AccountsContainersFoldersList' = AccountsContainersFoldersList'
+-- /See:/ 'accountsContainersFoldersList' smart constructor.
+data AccountsContainersFoldersList = AccountsContainersFoldersList
     { _acflContainerId :: !Text
     , _acflAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersFoldersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersFoldersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'acflContainerId'
 --
 -- * 'acflAccountId'
-accountsContainersFoldersList'
+accountsContainersFoldersList
     :: Text -- ^ 'acflContainerId'
     -> Text -- ^ 'acflAccountId'
-    -> AccountsContainersFoldersList'
-accountsContainersFoldersList' pAcflContainerId_ pAcflAccountId_ =
-    AccountsContainersFoldersList'
+    -> AccountsContainersFoldersList
+accountsContainersFoldersList pAcflContainerId_ pAcflAccountId_ =
+    AccountsContainersFoldersList
     { _acflContainerId = pAcflContainerId_
     , _acflAccountId = pAcflAccountId_
     }
 
 -- | The GTM Container ID.
-acflContainerId :: Lens' AccountsContainersFoldersList' Text
+acflContainerId :: Lens' AccountsContainersFoldersList Text
 acflContainerId
   = lens _acflContainerId
       (\ s a -> s{_acflContainerId = a})
 
 -- | The GTM Account ID.
-acflAccountId :: Lens' AccountsContainersFoldersList' Text
+acflAccountId :: Lens' AccountsContainersFoldersList Text
 acflAccountId
   = lens _acflAccountId
       (\ s a -> s{_acflAccountId = a})
 
-instance GoogleRequest AccountsContainersFoldersList'
+instance GoogleRequest AccountsContainersFoldersList
          where
-        type Rs AccountsContainersFoldersList' =
+        type Rs AccountsContainersFoldersList =
              ListFoldersResponse
-        requestClient AccountsContainersFoldersList'{..}
+        requestClient AccountsContainersFoldersList{..}
           = go _acflAccountId _acflContainerId (Just AltJSON)
               tagManagerService
           where go

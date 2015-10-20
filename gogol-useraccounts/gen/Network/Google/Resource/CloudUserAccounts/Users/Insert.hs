@@ -30,8 +30,8 @@ module Network.Google.Resource.CloudUserAccounts.Users.Insert
       UsersInsertResource
 
     -- * Creating a Request
-    , usersInsert'
-    , UsersInsert'
+    , usersInsert
+    , UsersInsert
 
     -- * Request Lenses
     , uiProject
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
 -- | A resource alias for @clouduseraccounts.users.insert@ method which the
--- 'UsersInsert'' request conforms to.
+-- 'UsersInsert' request conforms to.
 type UsersInsertResource =
      Capture "project" Text :>
        "global" :>
@@ -53,42 +53,42 @@ type UsersInsertResource =
 -- | Creates a User resource in the specified project using the data included
 -- in the request.
 --
--- /See:/ 'usersInsert'' smart constructor.
-data UsersInsert' = UsersInsert'
+-- /See:/ 'usersInsert' smart constructor.
+data UsersInsert = UsersInsert
     { _uiProject :: !Text
     , _uiPayload :: !User
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'uiProject'
 --
 -- * 'uiPayload'
-usersInsert'
+usersInsert
     :: Text -- ^ 'uiProject'
     -> User -- ^ 'uiPayload'
-    -> UsersInsert'
-usersInsert' pUiProject_ pUiPayload_ =
-    UsersInsert'
+    -> UsersInsert
+usersInsert pUiProject_ pUiPayload_ =
+    UsersInsert
     { _uiProject = pUiProject_
     , _uiPayload = pUiPayload_
     }
 
 -- | Project ID for this request.
-uiProject :: Lens' UsersInsert' Text
+uiProject :: Lens' UsersInsert Text
 uiProject
   = lens _uiProject (\ s a -> s{_uiProject = a})
 
 -- | Multipart request metadata.
-uiPayload :: Lens' UsersInsert' User
+uiPayload :: Lens' UsersInsert User
 uiPayload
   = lens _uiPayload (\ s a -> s{_uiPayload = a})
 
-instance GoogleRequest UsersInsert' where
-        type Rs UsersInsert' = Operation
-        requestClient UsersInsert'{..}
+instance GoogleRequest UsersInsert where
+        type Rs UsersInsert = Operation
+        requestClient UsersInsert{..}
           = go _uiProject (Just AltJSON) _uiPayload
               userAccountsService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.PlusDomains.Circles.RemovePeople
       CirclesRemovePeopleResource
 
     -- * Creating a Request
-    , circlesRemovePeople'
-    , CirclesRemovePeople'
+    , circlesRemovePeople
+    , CirclesRemovePeople
 
     -- * Request Lenses
     , crpEmail
@@ -42,7 +42,7 @@ import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plusDomains.circles.removePeople@ method which the
--- 'CirclesRemovePeople'' request conforms to.
+-- 'CirclesRemovePeople' request conforms to.
 type CirclesRemovePeopleResource =
      "circles" :>
        Capture "circleId" Text :>
@@ -53,14 +53,14 @@ type CirclesRemovePeopleResource =
 
 -- | Remove a person from a circle.
 --
--- /See:/ 'circlesRemovePeople'' smart constructor.
-data CirclesRemovePeople' = CirclesRemovePeople'
+-- /See:/ 'circlesRemovePeople' smart constructor.
+data CirclesRemovePeople = CirclesRemovePeople
     { _crpEmail    :: !(Maybe [Text])
     , _crpUserId   :: !(Maybe [Text])
     , _crpCircleId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CirclesRemovePeople'' with the minimum fields required to make a request.
+-- | Creates a value of 'CirclesRemovePeople' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,38 +69,38 @@ data CirclesRemovePeople' = CirclesRemovePeople'
 -- * 'crpUserId'
 --
 -- * 'crpCircleId'
-circlesRemovePeople'
+circlesRemovePeople
     :: Text -- ^ 'crpCircleId'
-    -> CirclesRemovePeople'
-circlesRemovePeople' pCrpCircleId_ =
-    CirclesRemovePeople'
+    -> CirclesRemovePeople
+circlesRemovePeople pCrpCircleId_ =
+    CirclesRemovePeople
     { _crpEmail = Nothing
     , _crpUserId = Nothing
     , _crpCircleId = pCrpCircleId_
     }
 
 -- | Email of the people to add to the circle. Optional, can be repeated.
-crpEmail :: Lens' CirclesRemovePeople' [Text]
+crpEmail :: Lens' CirclesRemovePeople [Text]
 crpEmail
   = lens _crpEmail (\ s a -> s{_crpEmail = a}) .
       _Default
       . _Coerce
 
 -- | IDs of the people to remove from the circle. Optional, can be repeated.
-crpUserId :: Lens' CirclesRemovePeople' [Text]
+crpUserId :: Lens' CirclesRemovePeople [Text]
 crpUserId
   = lens _crpUserId (\ s a -> s{_crpUserId = a}) .
       _Default
       . _Coerce
 
 -- | The ID of the circle to remove the person from.
-crpCircleId :: Lens' CirclesRemovePeople' Text
+crpCircleId :: Lens' CirclesRemovePeople Text
 crpCircleId
   = lens _crpCircleId (\ s a -> s{_crpCircleId = a})
 
-instance GoogleRequest CirclesRemovePeople' where
-        type Rs CirclesRemovePeople' = ()
-        requestClient CirclesRemovePeople'{..}
+instance GoogleRequest CirclesRemovePeople where
+        type Rs CirclesRemovePeople = ()
+        requestClient CirclesRemovePeople{..}
           = go _crpCircleId (_crpEmail ^. _Default)
               (_crpUserId ^. _Default)
               (Just AltJSON)

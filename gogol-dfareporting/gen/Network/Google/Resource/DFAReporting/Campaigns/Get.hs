@@ -29,19 +29,19 @@ module Network.Google.Resource.DFAReporting.Campaigns.Get
       CampaignsGetResource
 
     -- * Creating a Request
-    , campaignsGet'
-    , CampaignsGet'
+    , campaignsGet
+    , CampaignsGet
 
     -- * Request Lenses
-    , camaProFileId
-    , camaId
+    , cggProFileId
+    , cggId
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.campaigns.get@ method which the
--- 'CampaignsGet'' request conforms to.
+-- 'CampaignsGet' request conforms to.
 type CampaignsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,43 +51,42 @@ type CampaignsGetResource =
 
 -- | Gets one campaign by ID.
 --
--- /See:/ 'campaignsGet'' smart constructor.
-data CampaignsGet' = CampaignsGet'
-    { _camaProFileId :: !Int64
-    , _camaId        :: !Int64
+-- /See:/ 'campaignsGet' smart constructor.
+data CampaignsGet = CampaignsGet
+    { _cggProFileId :: !Int64
+    , _cggId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CampaignsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CampaignsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'camaProFileId'
+-- * 'cggProFileId'
 --
--- * 'camaId'
-campaignsGet'
-    :: Int64 -- ^ 'camaProFileId'
-    -> Int64 -- ^ 'camaId'
-    -> CampaignsGet'
-campaignsGet' pCamaProFileId_ pCamaId_ =
-    CampaignsGet'
-    { _camaProFileId = pCamaProFileId_
-    , _camaId = pCamaId_
+-- * 'cggId'
+campaignsGet
+    :: Int64 -- ^ 'cggProFileId'
+    -> Int64 -- ^ 'cggId'
+    -> CampaignsGet
+campaignsGet pCggProFileId_ pCggId_ =
+    CampaignsGet
+    { _cggProFileId = pCggProFileId_
+    , _cggId = pCggId_
     }
 
 -- | User profile ID associated with this request.
-camaProFileId :: Lens' CampaignsGet' Int64
-camaProFileId
-  = lens _camaProFileId
-      (\ s a -> s{_camaProFileId = a})
+cggProFileId :: Lens' CampaignsGet Int64
+cggProFileId
+  = lens _cggProFileId (\ s a -> s{_cggProFileId = a})
 
 -- | Campaign ID.
-camaId :: Lens' CampaignsGet' Int64
-camaId = lens _camaId (\ s a -> s{_camaId = a})
+cggId :: Lens' CampaignsGet Int64
+cggId = lens _cggId (\ s a -> s{_cggId = a})
 
-instance GoogleRequest CampaignsGet' where
-        type Rs CampaignsGet' = Campaign
-        requestClient CampaignsGet'{..}
-          = go _camaProFileId _camaId (Just AltJSON)
+instance GoogleRequest CampaignsGet where
+        type Rs CampaignsGet = Campaign
+        requestClient CampaignsGet{..}
+          = go _cggProFileId _cggId (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy CampaignsGetResource)

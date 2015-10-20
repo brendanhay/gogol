@@ -34,8 +34,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.Delete
       ProjectsTopicsDeleteResource
 
     -- * Creating a Request
-    , projectsTopicsDelete'
-    , ProjectsTopicsDelete'
+    , projectsTopicsDelete
+    , ProjectsTopicsDelete
 
     -- * Request Lenses
     , ptdXgafv
@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.delete@ method which the
--- 'ProjectsTopicsDelete'' request conforms to.
+-- 'ProjectsTopicsDelete' request conforms to.
 type ProjectsTopicsDeleteResource =
      "v1" :>
        Capture "topic" Text :>
@@ -72,8 +72,8 @@ type ProjectsTopicsDeleteResource =
 -- topic are not deleted, but their \`topic\` field is set to
 -- \`_deleted-topic_\`.
 --
--- /See:/ 'projectsTopicsDelete'' smart constructor.
-data ProjectsTopicsDelete' = ProjectsTopicsDelete'
+-- /See:/ 'projectsTopicsDelete' smart constructor.
+data ProjectsTopicsDelete = ProjectsTopicsDelete
     { _ptdXgafv          :: !(Maybe Text)
     , _ptdUploadProtocol :: !(Maybe Text)
     , _ptdPp             :: !Bool
@@ -84,7 +84,7 @@ data ProjectsTopicsDelete' = ProjectsTopicsDelete'
     , _ptdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsTopicsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsTopicsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -103,11 +103,11 @@ data ProjectsTopicsDelete' = ProjectsTopicsDelete'
 -- * 'ptdBearerToken'
 --
 -- * 'ptdCallback'
-projectsTopicsDelete'
+projectsTopicsDelete
     :: Text -- ^ 'ptdTopic'
-    -> ProjectsTopicsDelete'
-projectsTopicsDelete' pPtdTopic_ =
-    ProjectsTopicsDelete'
+    -> ProjectsTopicsDelete
+projectsTopicsDelete pPtdTopic_ =
+    ProjectsTopicsDelete
     { _ptdXgafv = Nothing
     , _ptdUploadProtocol = Nothing
     , _ptdPp = True
@@ -119,49 +119,49 @@ projectsTopicsDelete' pPtdTopic_ =
     }
 
 -- | V1 error format.
-ptdXgafv :: Lens' ProjectsTopicsDelete' (Maybe Text)
+ptdXgafv :: Lens' ProjectsTopicsDelete (Maybe Text)
 ptdXgafv = lens _ptdXgafv (\ s a -> s{_ptdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ptdUploadProtocol :: Lens' ProjectsTopicsDelete' (Maybe Text)
+ptdUploadProtocol :: Lens' ProjectsTopicsDelete (Maybe Text)
 ptdUploadProtocol
   = lens _ptdUploadProtocol
       (\ s a -> s{_ptdUploadProtocol = a})
 
 -- | Pretty-print response.
-ptdPp :: Lens' ProjectsTopicsDelete' Bool
+ptdPp :: Lens' ProjectsTopicsDelete Bool
 ptdPp = lens _ptdPp (\ s a -> s{_ptdPp = a})
 
 -- | OAuth access token.
-ptdAccessToken :: Lens' ProjectsTopicsDelete' (Maybe Text)
+ptdAccessToken :: Lens' ProjectsTopicsDelete (Maybe Text)
 ptdAccessToken
   = lens _ptdAccessToken
       (\ s a -> s{_ptdAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ptdUploadType :: Lens' ProjectsTopicsDelete' (Maybe Text)
+ptdUploadType :: Lens' ProjectsTopicsDelete (Maybe Text)
 ptdUploadType
   = lens _ptdUploadType
       (\ s a -> s{_ptdUploadType = a})
 
 -- | Name of the topic to delete.
-ptdTopic :: Lens' ProjectsTopicsDelete' Text
+ptdTopic :: Lens' ProjectsTopicsDelete Text
 ptdTopic = lens _ptdTopic (\ s a -> s{_ptdTopic = a})
 
 -- | OAuth bearer token.
-ptdBearerToken :: Lens' ProjectsTopicsDelete' (Maybe Text)
+ptdBearerToken :: Lens' ProjectsTopicsDelete (Maybe Text)
 ptdBearerToken
   = lens _ptdBearerToken
       (\ s a -> s{_ptdBearerToken = a})
 
 -- | JSONP
-ptdCallback :: Lens' ProjectsTopicsDelete' (Maybe Text)
+ptdCallback :: Lens' ProjectsTopicsDelete (Maybe Text)
 ptdCallback
   = lens _ptdCallback (\ s a -> s{_ptdCallback = a})
 
-instance GoogleRequest ProjectsTopicsDelete' where
-        type Rs ProjectsTopicsDelete' = Empty
-        requestClient ProjectsTopicsDelete'{..}
+instance GoogleRequest ProjectsTopicsDelete where
+        type Rs ProjectsTopicsDelete = Empty
+        requestClient ProjectsTopicsDelete{..}
           = go _ptdTopic _ptdXgafv _ptdUploadProtocol
               (Just _ptdPp)
               _ptdAccessToken

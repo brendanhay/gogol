@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert
       ManagementAccountUserLinksInsertResource
 
     -- * Creating a Request
-    , managementAccountUserLinksInsert'
-    , ManagementAccountUserLinksInsert'
+    , managementAccountUserLinksInsert
+    , ManagementAccountUserLinksInsert
 
     -- * Request Lenses
     , mauliPayload
@@ -41,7 +41,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.accountUserLinks.insert@ method which the
--- 'ManagementAccountUserLinksInsert'' request conforms to.
+-- 'ManagementAccountUserLinksInsert' request conforms to.
 type ManagementAccountUserLinksInsertResource =
      "management" :>
        "accounts" :>
@@ -53,45 +53,45 @@ type ManagementAccountUserLinksInsertResource =
 
 -- | Adds a new user to the given account.
 --
--- /See:/ 'managementAccountUserLinksInsert'' smart constructor.
-data ManagementAccountUserLinksInsert' = ManagementAccountUserLinksInsert'
+-- /See:/ 'managementAccountUserLinksInsert' smart constructor.
+data ManagementAccountUserLinksInsert = ManagementAccountUserLinksInsert
     { _mauliPayload   :: !EntityUserLink
     , _mauliAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementAccountUserLinksInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementAccountUserLinksInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mauliPayload'
 --
 -- * 'mauliAccountId'
-managementAccountUserLinksInsert'
+managementAccountUserLinksInsert
     :: EntityUserLink -- ^ 'mauliPayload'
     -> Text -- ^ 'mauliAccountId'
-    -> ManagementAccountUserLinksInsert'
-managementAccountUserLinksInsert' pMauliPayload_ pMauliAccountId_ =
-    ManagementAccountUserLinksInsert'
+    -> ManagementAccountUserLinksInsert
+managementAccountUserLinksInsert pMauliPayload_ pMauliAccountId_ =
+    ManagementAccountUserLinksInsert
     { _mauliPayload = pMauliPayload_
     , _mauliAccountId = pMauliAccountId_
     }
 
 -- | Multipart request metadata.
-mauliPayload :: Lens' ManagementAccountUserLinksInsert' EntityUserLink
+mauliPayload :: Lens' ManagementAccountUserLinksInsert EntityUserLink
 mauliPayload
   = lens _mauliPayload (\ s a -> s{_mauliPayload = a})
 
 -- | Account ID to create the user link for.
-mauliAccountId :: Lens' ManagementAccountUserLinksInsert' Text
+mauliAccountId :: Lens' ManagementAccountUserLinksInsert Text
 mauliAccountId
   = lens _mauliAccountId
       (\ s a -> s{_mauliAccountId = a})
 
 instance GoogleRequest
-         ManagementAccountUserLinksInsert' where
-        type Rs ManagementAccountUserLinksInsert' =
+         ManagementAccountUserLinksInsert where
+        type Rs ManagementAccountUserLinksInsert =
              EntityUserLink
-        requestClient ManagementAccountUserLinksInsert'{..}
+        requestClient ManagementAccountUserLinksInsert{..}
           = go _mauliAccountId (Just AltJSON) _mauliPayload
               analyticsService
           where go

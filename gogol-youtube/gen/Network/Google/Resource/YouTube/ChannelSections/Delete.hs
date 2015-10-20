@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.ChannelSections.Delete
       ChannelSectionsDeleteResource
 
     -- * Creating a Request
-    , channelSectionsDelete'
-    , ChannelSectionsDelete'
+    , channelSectionsDelete
+    , ChannelSectionsDelete
 
     -- * Request Lenses
     , csdOnBehalfOfContentOwner
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.channelSections.delete@ method which the
--- 'ChannelSectionsDelete'' request conforms to.
+-- 'ChannelSectionsDelete' request conforms to.
 type ChannelSectionsDeleteResource =
      "channelSections" :>
        QueryParam "id" Text :>
@@ -50,24 +50,24 @@ type ChannelSectionsDeleteResource =
 
 -- | Deletes a channelSection.
 --
--- /See:/ 'channelSectionsDelete'' smart constructor.
-data ChannelSectionsDelete' = ChannelSectionsDelete'
+-- /See:/ 'channelSectionsDelete' smart constructor.
+data ChannelSectionsDelete = ChannelSectionsDelete
     { _csdOnBehalfOfContentOwner :: !(Maybe Text)
     , _csdId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChannelSectionsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChannelSectionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'csdOnBehalfOfContentOwner'
 --
 -- * 'csdId'
-channelSectionsDelete'
+channelSectionsDelete
     :: Text -- ^ 'csdId'
-    -> ChannelSectionsDelete'
-channelSectionsDelete' pCsdId_ =
-    ChannelSectionsDelete'
+    -> ChannelSectionsDelete
+channelSectionsDelete pCsdId_ =
+    ChannelSectionsDelete
     { _csdOnBehalfOfContentOwner = Nothing
     , _csdId = pCsdId_
     }
@@ -82,7 +82,7 @@ channelSectionsDelete' pCsdId_ =
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-csdOnBehalfOfContentOwner :: Lens' ChannelSectionsDelete' (Maybe Text)
+csdOnBehalfOfContentOwner :: Lens' ChannelSectionsDelete (Maybe Text)
 csdOnBehalfOfContentOwner
   = lens _csdOnBehalfOfContentOwner
       (\ s a -> s{_csdOnBehalfOfContentOwner = a})
@@ -90,12 +90,12 @@ csdOnBehalfOfContentOwner
 -- | The id parameter specifies the YouTube channelSection ID for the
 -- resource that is being deleted. In a channelSection resource, the id
 -- property specifies the YouTube channelSection ID.
-csdId :: Lens' ChannelSectionsDelete' Text
+csdId :: Lens' ChannelSectionsDelete Text
 csdId = lens _csdId (\ s a -> s{_csdId = a})
 
-instance GoogleRequest ChannelSectionsDelete' where
-        type Rs ChannelSectionsDelete' = ()
-        requestClient ChannelSectionsDelete'{..}
+instance GoogleRequest ChannelSectionsDelete where
+        type Rs ChannelSectionsDelete = ()
+        requestClient ChannelSectionsDelete{..}
           = go (Just _csdId) _csdOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeService

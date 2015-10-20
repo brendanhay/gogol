@@ -29,8 +29,8 @@ module Network.Google.Resource.SQL.Users.List
       UsersListResource
 
     -- * Creating a Request
-    , usersList'
-    , UsersList'
+    , usersList
+    , UsersList
 
     -- * Request Lenses
     , ulProject
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.users.list@ method which the
--- 'UsersList'' request conforms to.
+-- 'UsersList' request conforms to.
 type UsersListResource =
      "projects" :>
        Capture "project" Text :>
@@ -53,42 +53,42 @@ type UsersListResource =
 
 -- | Lists users in the specified Cloud SQL instance.
 --
--- /See:/ 'usersList'' smart constructor.
-data UsersList' = UsersList'
+-- /See:/ 'usersList' smart constructor.
+data UsersList = UsersList
     { _ulProject  :: !Text
     , _ulInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ulProject'
 --
 -- * 'ulInstance'
-usersList'
+usersList
     :: Text -- ^ 'ulProject'
     -> Text -- ^ 'ulInstance'
-    -> UsersList'
-usersList' pUlProject_ pUlInstance_ =
-    UsersList'
+    -> UsersList
+usersList pUlProject_ pUlInstance_ =
+    UsersList
     { _ulProject = pUlProject_
     , _ulInstance = pUlInstance_
     }
 
 -- | Project ID of the project that contains the instance.
-ulProject :: Lens' UsersList' Text
+ulProject :: Lens' UsersList Text
 ulProject
   = lens _ulProject (\ s a -> s{_ulProject = a})
 
 -- | Database instance ID. This does not include the project ID.
-ulInstance :: Lens' UsersList' Text
+ulInstance :: Lens' UsersList Text
 ulInstance
   = lens _ulInstance (\ s a -> s{_ulInstance = a})
 
-instance GoogleRequest UsersList' where
-        type Rs UsersList' = UsersListResponse
-        requestClient UsersList'{..}
+instance GoogleRequest UsersList where
+        type Rs UsersList = UsersListResponse
+        requestClient UsersList{..}
           = go _ulProject _ulInstance (Just AltJSON)
               sQLAdminService
           where go

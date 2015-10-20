@@ -29,8 +29,8 @@ module Network.Google.Resource.Reseller.Subscriptions.ChangePlan
       SubscriptionsChangePlanResource
 
     -- * Creating a Request
-    , subscriptionsChangePlan'
-    , SubscriptionsChangePlan'
+    , subscriptionsChangePlan
+    , SubscriptionsChangePlan
 
     -- * Request Lenses
     , scpPayload
@@ -42,7 +42,7 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @reseller.subscriptions.changePlan@ method which the
--- 'SubscriptionsChangePlan'' request conforms to.
+-- 'SubscriptionsChangePlan' request conforms to.
 type SubscriptionsChangePlanResource =
      "customers" :>
        Capture "customerId" Text :>
@@ -55,14 +55,14 @@ type SubscriptionsChangePlanResource =
 
 -- | Changes the plan of a subscription
 --
--- /See:/ 'subscriptionsChangePlan'' smart constructor.
-data SubscriptionsChangePlan' = SubscriptionsChangePlan'
+-- /See:/ 'subscriptionsChangePlan' smart constructor.
+data SubscriptionsChangePlan = SubscriptionsChangePlan
     { _scpPayload        :: !ChangePlanRequest
     , _scpCustomerId     :: !Text
     , _scpSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionsChangePlan'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubscriptionsChangePlan' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,38 +71,38 @@ data SubscriptionsChangePlan' = SubscriptionsChangePlan'
 -- * 'scpCustomerId'
 --
 -- * 'scpSubscriptionId'
-subscriptionsChangePlan'
+subscriptionsChangePlan
     :: ChangePlanRequest -- ^ 'scpPayload'
     -> Text -- ^ 'scpCustomerId'
     -> Text -- ^ 'scpSubscriptionId'
-    -> SubscriptionsChangePlan'
-subscriptionsChangePlan' pScpPayload_ pScpCustomerId_ pScpSubscriptionId_ =
-    SubscriptionsChangePlan'
+    -> SubscriptionsChangePlan
+subscriptionsChangePlan pScpPayload_ pScpCustomerId_ pScpSubscriptionId_ =
+    SubscriptionsChangePlan
     { _scpPayload = pScpPayload_
     , _scpCustomerId = pScpCustomerId_
     , _scpSubscriptionId = pScpSubscriptionId_
     }
 
 -- | Multipart request metadata.
-scpPayload :: Lens' SubscriptionsChangePlan' ChangePlanRequest
+scpPayload :: Lens' SubscriptionsChangePlan ChangePlanRequest
 scpPayload
   = lens _scpPayload (\ s a -> s{_scpPayload = a})
 
 -- | Id of the Customer
-scpCustomerId :: Lens' SubscriptionsChangePlan' Text
+scpCustomerId :: Lens' SubscriptionsChangePlan Text
 scpCustomerId
   = lens _scpCustomerId
       (\ s a -> s{_scpCustomerId = a})
 
 -- | Id of the subscription, which is unique for a customer
-scpSubscriptionId :: Lens' SubscriptionsChangePlan' Text
+scpSubscriptionId :: Lens' SubscriptionsChangePlan Text
 scpSubscriptionId
   = lens _scpSubscriptionId
       (\ s a -> s{_scpSubscriptionId = a})
 
-instance GoogleRequest SubscriptionsChangePlan' where
-        type Rs SubscriptionsChangePlan' = Subscription
-        requestClient SubscriptionsChangePlan'{..}
+instance GoogleRequest SubscriptionsChangePlan where
+        type Rs SubscriptionsChangePlan = Subscription
+        requestClient SubscriptionsChangePlan{..}
           = go _scpCustomerId _scpSubscriptionId (Just AltJSON)
               _scpPayload
               appsResellerService

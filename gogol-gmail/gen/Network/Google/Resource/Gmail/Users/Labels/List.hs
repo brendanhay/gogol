@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.Labels.List
       UsersLabelsListResource
 
     -- * Creating a Request
-    , usersLabelsList'
-    , UsersLabelsList'
+    , usersLabelsList
+    , UsersLabelsList
 
     -- * Request Lenses
     , ullUserId
@@ -40,7 +40,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.labels.list@ method which the
--- 'UsersLabelsList'' request conforms to.
+-- 'UsersLabelsList' request conforms to.
 type UsersLabelsListResource =
      Capture "userId" Text :>
        "labels" :>
@@ -49,33 +49,33 @@ type UsersLabelsListResource =
 
 -- | Lists all labels in the user\'s mailbox.
 --
--- /See:/ 'usersLabelsList'' smart constructor.
-newtype UsersLabelsList' = UsersLabelsList'
+-- /See:/ 'usersLabelsList' smart constructor.
+newtype UsersLabelsList = UsersLabelsList
     { _ullUserId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersLabelsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersLabelsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ullUserId'
-usersLabelsList'
+usersLabelsList
     :: Text
-    -> UsersLabelsList'
-usersLabelsList' pUllUserId_ =
-    UsersLabelsList'
+    -> UsersLabelsList
+usersLabelsList pUllUserId_ =
+    UsersLabelsList
     { _ullUserId = pUllUserId_
     }
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-ullUserId :: Lens' UsersLabelsList' Text
+ullUserId :: Lens' UsersLabelsList Text
 ullUserId
   = lens _ullUserId (\ s a -> s{_ullUserId = a})
 
-instance GoogleRequest UsersLabelsList' where
-        type Rs UsersLabelsList' = ListLabelsResponse
-        requestClient UsersLabelsList'{..}
+instance GoogleRequest UsersLabelsList where
+        type Rs UsersLabelsList = ListLabelsResponse
+        requestClient UsersLabelsList{..}
           = go _ullUserId (Just AltJSON) gmailService
           where go
                   = buildClient

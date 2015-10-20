@@ -32,8 +32,8 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Activate
       BeaconsActivateResource
 
     -- * Creating a Request
-    , beaconsActivate'
-    , BeaconsActivate'
+    , beaconsActivate
+    , BeaconsActivate
 
     -- * Request Lenses
     , baXgafv
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beacons.activate@ method which the
--- 'BeaconsActivate'' request conforms to.
+-- 'BeaconsActivate' request conforms to.
 type BeaconsActivateResource =
      "v1beta1" :>
        CaptureMode "beaconName" "activate" Text :>
@@ -68,8 +68,8 @@ type BeaconsActivateResource =
 -- Calling this method on an already active beacon will do nothing (but
 -- will return a successful response code).
 --
--- /See:/ 'beaconsActivate'' smart constructor.
-data BeaconsActivate' = BeaconsActivate'
+-- /See:/ 'beaconsActivate' smart constructor.
+data BeaconsActivate = BeaconsActivate
     { _baXgafv          :: !(Maybe Text)
     , _baUploadProtocol :: !(Maybe Text)
     , _baPp             :: !Bool
@@ -80,7 +80,7 @@ data BeaconsActivate' = BeaconsActivate'
     , _baCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'BeaconsActivate'' with the minimum fields required to make a request.
+-- | Creates a value of 'BeaconsActivate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -99,11 +99,11 @@ data BeaconsActivate' = BeaconsActivate'
 -- * 'baBearerToken'
 --
 -- * 'baCallback'
-beaconsActivate'
+beaconsActivate
     :: Text -- ^ 'baBeaconName'
-    -> BeaconsActivate'
-beaconsActivate' pBaBeaconName_ =
-    BeaconsActivate'
+    -> BeaconsActivate
+beaconsActivate pBaBeaconName_ =
+    BeaconsActivate
     { _baXgafv = Nothing
     , _baUploadProtocol = Nothing
     , _baPp = True
@@ -115,49 +115,49 @@ beaconsActivate' pBaBeaconName_ =
     }
 
 -- | V1 error format.
-baXgafv :: Lens' BeaconsActivate' (Maybe Text)
+baXgafv :: Lens' BeaconsActivate (Maybe Text)
 baXgafv = lens _baXgafv (\ s a -> s{_baXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-baUploadProtocol :: Lens' BeaconsActivate' (Maybe Text)
+baUploadProtocol :: Lens' BeaconsActivate (Maybe Text)
 baUploadProtocol
   = lens _baUploadProtocol
       (\ s a -> s{_baUploadProtocol = a})
 
 -- | Pretty-print response.
-baPp :: Lens' BeaconsActivate' Bool
+baPp :: Lens' BeaconsActivate Bool
 baPp = lens _baPp (\ s a -> s{_baPp = a})
 
 -- | OAuth access token.
-baAccessToken :: Lens' BeaconsActivate' (Maybe Text)
+baAccessToken :: Lens' BeaconsActivate (Maybe Text)
 baAccessToken
   = lens _baAccessToken
       (\ s a -> s{_baAccessToken = a})
 
 -- | The beacon to activate. Required.
-baBeaconName :: Lens' BeaconsActivate' Text
+baBeaconName :: Lens' BeaconsActivate Text
 baBeaconName
   = lens _baBeaconName (\ s a -> s{_baBeaconName = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-baUploadType :: Lens' BeaconsActivate' (Maybe Text)
+baUploadType :: Lens' BeaconsActivate (Maybe Text)
 baUploadType
   = lens _baUploadType (\ s a -> s{_baUploadType = a})
 
 -- | OAuth bearer token.
-baBearerToken :: Lens' BeaconsActivate' (Maybe Text)
+baBearerToken :: Lens' BeaconsActivate (Maybe Text)
 baBearerToken
   = lens _baBearerToken
       (\ s a -> s{_baBearerToken = a})
 
 -- | JSONP
-baCallback :: Lens' BeaconsActivate' (Maybe Text)
+baCallback :: Lens' BeaconsActivate (Maybe Text)
 baCallback
   = lens _baCallback (\ s a -> s{_baCallback = a})
 
-instance GoogleRequest BeaconsActivate' where
-        type Rs BeaconsActivate' = Empty
-        requestClient BeaconsActivate'{..}
+instance GoogleRequest BeaconsActivate where
+        type Rs BeaconsActivate = Empty
+        requestClient BeaconsActivate{..}
           = go _baBeaconName _baXgafv _baUploadProtocol
               (Just _baPp)
               _baAccessToken

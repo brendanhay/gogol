@@ -29,8 +29,8 @@ module Network.Google.Resource.DeploymentManager.Operations.List
       OperationsListResource
 
     -- * Creating a Request
-    , operationsList'
-    , OperationsList'
+    , operationsList
+    , OperationsList
 
     -- * Request Lenses
     , olProject
@@ -43,7 +43,7 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @deploymentmanager.operations.list@ method which the
--- 'OperationsList'' request conforms to.
+-- 'OperationsList' request conforms to.
 type OperationsListResource =
      Capture "project" Text :>
        "global" :>
@@ -56,15 +56,15 @@ type OperationsListResource =
 
 -- | Lists all operations for a project.
 --
--- /See:/ 'operationsList'' smart constructor.
-data OperationsList' = OperationsList'
+-- /See:/ 'operationsList' smart constructor.
+data OperationsList = OperationsList
     { _olProject    :: !Text
     , _olFilter     :: !(Maybe Text)
     , _olPageToken  :: !(Maybe Text)
     , _olMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,11 +75,11 @@ data OperationsList' = OperationsList'
 -- * 'olPageToken'
 --
 -- * 'olMaxResults'
-operationsList'
+operationsList
     :: Text -- ^ 'olProject'
-    -> OperationsList'
-operationsList' pOlProject_ =
-    OperationsList'
+    -> OperationsList
+operationsList pOlProject_ =
+    OperationsList
     { _olProject = pOlProject_
     , _olFilter = Nothing
     , _olPageToken = Nothing
@@ -87,7 +87,7 @@ operationsList' pOlProject_ =
     }
 
 -- | The project ID for this request.
-olProject :: Lens' OperationsList' Text
+olProject :: Lens' OperationsList Text
 olProject
   = lens _olProject (\ s a -> s{_olProject = a})
 
@@ -102,24 +102,24 @@ olProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-olFilter :: Lens' OperationsList' (Maybe Text)
+olFilter :: Lens' OperationsList (Maybe Text)
 olFilter = lens _olFilter (\ s a -> s{_olFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-olPageToken :: Lens' OperationsList' (Maybe Text)
+olPageToken :: Lens' OperationsList (Maybe Text)
 olPageToken
   = lens _olPageToken (\ s a -> s{_olPageToken = a})
 
 -- | Maximum count of results to be returned.
-olMaxResults :: Lens' OperationsList' Word32
+olMaxResults :: Lens' OperationsList Word32
 olMaxResults
   = lens _olMaxResults (\ s a -> s{_olMaxResults = a})
 
-instance GoogleRequest OperationsList' where
-        type Rs OperationsList' = OperationsListResponse
-        requestClient OperationsList'{..}
+instance GoogleRequest OperationsList where
+        type Rs OperationsList = OperationsListResponse
+        requestClient OperationsList{..}
           = go _olProject _olFilter _olPageToken
               (Just _olMaxResults)
               (Just AltJSON)

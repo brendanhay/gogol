@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Goals.Update
       ManagementGoalsUpdateResource
 
     -- * Creating a Request
-    , managementGoalsUpdate'
-    , ManagementGoalsUpdate'
+    , managementGoalsUpdate
+    , ManagementGoalsUpdate
 
     -- * Request Lenses
     , mguWebPropertyId
@@ -44,7 +44,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.goals.update@ method which the
--- 'ManagementGoalsUpdate'' request conforms to.
+-- 'ManagementGoalsUpdate' request conforms to.
 type ManagementGoalsUpdateResource =
      "management" :>
        "accounts" :>
@@ -60,8 +60,8 @@ type ManagementGoalsUpdateResource =
 
 -- | Updates an existing view (profile).
 --
--- /See:/ 'managementGoalsUpdate'' smart constructor.
-data ManagementGoalsUpdate' = ManagementGoalsUpdate'
+-- /See:/ 'managementGoalsUpdate' smart constructor.
+data ManagementGoalsUpdate = ManagementGoalsUpdate
     { _mguWebPropertyId :: !Text
     , _mguGoalId        :: !Text
     , _mguProFileId     :: !Text
@@ -69,7 +69,7 @@ data ManagementGoalsUpdate' = ManagementGoalsUpdate'
     , _mguAccountId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementGoalsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementGoalsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,15 +82,15 @@ data ManagementGoalsUpdate' = ManagementGoalsUpdate'
 -- * 'mguPayload'
 --
 -- * 'mguAccountId'
-managementGoalsUpdate'
+managementGoalsUpdate
     :: Text -- ^ 'mguWebPropertyId'
     -> Text -- ^ 'mguGoalId'
     -> Text -- ^ 'mguProFileId'
     -> Goal -- ^ 'mguPayload'
     -> Text -- ^ 'mguAccountId'
-    -> ManagementGoalsUpdate'
-managementGoalsUpdate' pMguWebPropertyId_ pMguGoalId_ pMguProFileId_ pMguPayload_ pMguAccountId_ =
-    ManagementGoalsUpdate'
+    -> ManagementGoalsUpdate
+managementGoalsUpdate pMguWebPropertyId_ pMguGoalId_ pMguProFileId_ pMguPayload_ pMguAccountId_ =
+    ManagementGoalsUpdate
     { _mguWebPropertyId = pMguWebPropertyId_
     , _mguGoalId = pMguGoalId_
     , _mguProFileId = pMguProFileId_
@@ -99,34 +99,34 @@ managementGoalsUpdate' pMguWebPropertyId_ pMguGoalId_ pMguProFileId_ pMguPayload
     }
 
 -- | Web property ID to update the goal.
-mguWebPropertyId :: Lens' ManagementGoalsUpdate' Text
+mguWebPropertyId :: Lens' ManagementGoalsUpdate Text
 mguWebPropertyId
   = lens _mguWebPropertyId
       (\ s a -> s{_mguWebPropertyId = a})
 
 -- | Index of the goal to be updated.
-mguGoalId :: Lens' ManagementGoalsUpdate' Text
+mguGoalId :: Lens' ManagementGoalsUpdate Text
 mguGoalId
   = lens _mguGoalId (\ s a -> s{_mguGoalId = a})
 
 -- | View (Profile) ID to update the goal.
-mguProFileId :: Lens' ManagementGoalsUpdate' Text
+mguProFileId :: Lens' ManagementGoalsUpdate Text
 mguProFileId
   = lens _mguProFileId (\ s a -> s{_mguProFileId = a})
 
 -- | Multipart request metadata.
-mguPayload :: Lens' ManagementGoalsUpdate' Goal
+mguPayload :: Lens' ManagementGoalsUpdate Goal
 mguPayload
   = lens _mguPayload (\ s a -> s{_mguPayload = a})
 
 -- | Account ID to update the goal.
-mguAccountId :: Lens' ManagementGoalsUpdate' Text
+mguAccountId :: Lens' ManagementGoalsUpdate Text
 mguAccountId
   = lens _mguAccountId (\ s a -> s{_mguAccountId = a})
 
-instance GoogleRequest ManagementGoalsUpdate' where
-        type Rs ManagementGoalsUpdate' = Goal
-        requestClient ManagementGoalsUpdate'{..}
+instance GoogleRequest ManagementGoalsUpdate where
+        type Rs ManagementGoalsUpdate = Goal
+        requestClient ManagementGoalsUpdate{..}
           = go _mguAccountId _mguWebPropertyId _mguProFileId
               _mguGoalId
               (Just AltJSON)

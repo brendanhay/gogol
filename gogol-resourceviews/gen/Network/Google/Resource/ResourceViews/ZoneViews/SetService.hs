@@ -29,8 +29,8 @@ module Network.Google.Resource.ResourceViews.ZoneViews.SetService
       ZoneViewsSetServiceResource
 
     -- * Creating a Request
-    , zoneViewsSetService'
-    , ZoneViewsSetService'
+    , zoneViewsSetService
+    , ZoneViewsSetService
 
     -- * Request Lenses
     , zvssResourceView
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceViews.Types
 
 -- | A resource alias for @resourceviews.zoneViews.setService@ method which the
--- 'ZoneViewsSetService'' request conforms to.
+-- 'ZoneViewsSetService' request conforms to.
 type ZoneViewsSetServiceResource =
      Capture "project" Text :>
        "zones" :>
@@ -57,15 +57,15 @@ type ZoneViewsSetServiceResource =
 
 -- | Update the service information of a resource view or a resource.
 --
--- /See:/ 'zoneViewsSetService'' smart constructor.
-data ZoneViewsSetService' = ZoneViewsSetService'
+-- /See:/ 'zoneViewsSetService' smart constructor.
+data ZoneViewsSetService = ZoneViewsSetService
     { _zvssResourceView :: !Text
     , _zvssProject      :: !Text
     , _zvssZone         :: !Text
     , _zvssPayload      :: !ZoneViewsSetServiceRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ZoneViewsSetService'' with the minimum fields required to make a request.
+-- | Creates a value of 'ZoneViewsSetService' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,14 +76,14 @@ data ZoneViewsSetService' = ZoneViewsSetService'
 -- * 'zvssZone'
 --
 -- * 'zvssPayload'
-zoneViewsSetService'
+zoneViewsSetService
     :: Text -- ^ 'zvssResourceView'
     -> Text -- ^ 'zvssProject'
     -> Text -- ^ 'zvssZone'
     -> ZoneViewsSetServiceRequest -- ^ 'zvssPayload'
-    -> ZoneViewsSetService'
-zoneViewsSetService' pZvssResourceView_ pZvssProject_ pZvssZone_ pZvssPayload_ =
-    ZoneViewsSetService'
+    -> ZoneViewsSetService
+zoneViewsSetService pZvssResourceView_ pZvssProject_ pZvssZone_ pZvssPayload_ =
+    ZoneViewsSetService
     { _zvssResourceView = pZvssResourceView_
     , _zvssProject = pZvssProject_
     , _zvssZone = pZvssZone_
@@ -91,28 +91,28 @@ zoneViewsSetService' pZvssResourceView_ pZvssProject_ pZvssZone_ pZvssPayload_ =
     }
 
 -- | The name of the resource view.
-zvssResourceView :: Lens' ZoneViewsSetService' Text
+zvssResourceView :: Lens' ZoneViewsSetService Text
 zvssResourceView
   = lens _zvssResourceView
       (\ s a -> s{_zvssResourceView = a})
 
 -- | The project name of the resource view.
-zvssProject :: Lens' ZoneViewsSetService' Text
+zvssProject :: Lens' ZoneViewsSetService Text
 zvssProject
   = lens _zvssProject (\ s a -> s{_zvssProject = a})
 
 -- | The zone name of the resource view.
-zvssZone :: Lens' ZoneViewsSetService' Text
+zvssZone :: Lens' ZoneViewsSetService Text
 zvssZone = lens _zvssZone (\ s a -> s{_zvssZone = a})
 
 -- | Multipart request metadata.
-zvssPayload :: Lens' ZoneViewsSetService' ZoneViewsSetServiceRequest
+zvssPayload :: Lens' ZoneViewsSetService ZoneViewsSetServiceRequest
 zvssPayload
   = lens _zvssPayload (\ s a -> s{_zvssPayload = a})
 
-instance GoogleRequest ZoneViewsSetService' where
-        type Rs ZoneViewsSetService' = Operation
-        requestClient ZoneViewsSetService'{..}
+instance GoogleRequest ZoneViewsSetService where
+        type Rs ZoneViewsSetService = Operation
+        requestClient ZoneViewsSetService{..}
           = go _zvssProject _zvssZone _zvssResourceView
               (Just AltJSON)
               _zvssPayload

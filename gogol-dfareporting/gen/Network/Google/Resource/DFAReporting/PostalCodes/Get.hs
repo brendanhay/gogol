@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.PostalCodes.Get
       PostalCodesGetResource
 
     -- * Creating a Request
-    , postalCodesGet'
-    , PostalCodesGet'
+    , postalCodesGet
+    , PostalCodesGet
 
     -- * Request Lenses
     , pcgProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.postalCodes.get@ method which the
--- 'PostalCodesGet'' request conforms to.
+-- 'PostalCodesGet' request conforms to.
 type PostalCodesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,41 +51,41 @@ type PostalCodesGetResource =
 
 -- | Gets one postal code by ID.
 --
--- /See:/ 'postalCodesGet'' smart constructor.
-data PostalCodesGet' = PostalCodesGet'
+-- /See:/ 'postalCodesGet' smart constructor.
+data PostalCodesGet = PostalCodesGet
     { _pcgProFileId :: !Int64
     , _pcgCode      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PostalCodesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PostalCodesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pcgProFileId'
 --
 -- * 'pcgCode'
-postalCodesGet'
+postalCodesGet
     :: Int64 -- ^ 'pcgProFileId'
     -> Text -- ^ 'pcgCode'
-    -> PostalCodesGet'
-postalCodesGet' pPcgProFileId_ pPcgCode_ =
-    PostalCodesGet'
+    -> PostalCodesGet
+postalCodesGet pPcgProFileId_ pPcgCode_ =
+    PostalCodesGet
     { _pcgProFileId = pPcgProFileId_
     , _pcgCode = pPcgCode_
     }
 
 -- | User profile ID associated with this request.
-pcgProFileId :: Lens' PostalCodesGet' Int64
+pcgProFileId :: Lens' PostalCodesGet Int64
 pcgProFileId
   = lens _pcgProFileId (\ s a -> s{_pcgProFileId = a})
 
 -- | Postal code ID.
-pcgCode :: Lens' PostalCodesGet' Text
+pcgCode :: Lens' PostalCodesGet Text
 pcgCode = lens _pcgCode (\ s a -> s{_pcgCode = a})
 
-instance GoogleRequest PostalCodesGet' where
-        type Rs PostalCodesGet' = PostalCode
-        requestClient PostalCodesGet'{..}
+instance GoogleRequest PostalCodesGet where
+        type Rs PostalCodesGet = PostalCode
+        requestClient PostalCodesGet{..}
           = go _pcgProFileId _pcgCode (Just AltJSON)
               dFAReportingService
           where go

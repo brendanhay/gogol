@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSenseHost.AdClients.Get
       AdClientsGetResource
 
     -- * Creating a Request
-    , adClientsGet'
-    , AdClientsGet'
+    , adClientsGet
+    , AdClientsGet
 
     -- * Request Lenses
     , acgAdClientId
@@ -40,7 +40,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.adclients.get@ method which the
--- 'AdClientsGet'' request conforms to.
+-- 'AdClientsGet' request conforms to.
 type AdClientsGetResource =
      "adclients" :>
        Capture "adClientId" Text :>
@@ -48,33 +48,33 @@ type AdClientsGetResource =
 
 -- | Get information about one of the ad clients in the Host AdSense account.
 --
--- /See:/ 'adClientsGet'' smart constructor.
-newtype AdClientsGet' = AdClientsGet'
+-- /See:/ 'adClientsGet' smart constructor.
+newtype AdClientsGet = AdClientsGet
     { _acgAdClientId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdClientsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdClientsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'acgAdClientId'
-adClientsGet'
+adClientsGet
     :: Text -- ^ 'acgAdClientId'
-    -> AdClientsGet'
-adClientsGet' pAcgAdClientId_ =
-    AdClientsGet'
+    -> AdClientsGet
+adClientsGet pAcgAdClientId_ =
+    AdClientsGet
     { _acgAdClientId = pAcgAdClientId_
     }
 
 -- | Ad client to get.
-acgAdClientId :: Lens' AdClientsGet' Text
+acgAdClientId :: Lens' AdClientsGet Text
 acgAdClientId
   = lens _acgAdClientId
       (\ s a -> s{_acgAdClientId = a})
 
-instance GoogleRequest AdClientsGet' where
-        type Rs AdClientsGet' = AdClient
-        requestClient AdClientsGet'{..}
+instance GoogleRequest AdClientsGet where
+        type Rs AdClientsGet = AdClient
+        requestClient AdClientsGet{..}
           = go _acgAdClientId (Just AltJSON) adSenseHostService
           where go
                   = buildClient (Proxy :: Proxy AdClientsGetResource)

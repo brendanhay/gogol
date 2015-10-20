@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Filters.Get
       ManagementFiltersGetResource
 
     -- * Creating a Request
-    , managementFiltersGet'
-    , ManagementFiltersGet'
+    , managementFiltersGet
+    , ManagementFiltersGet
 
     -- * Request Lenses
     , mfgFilterId
@@ -41,7 +41,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.filters.get@ method which the
--- 'ManagementFiltersGet'' request conforms to.
+-- 'ManagementFiltersGet' request conforms to.
 type ManagementFiltersGetResource =
      "management" :>
        "accounts" :>
@@ -52,42 +52,42 @@ type ManagementFiltersGetResource =
 
 -- | Returns a filters to which the user has access.
 --
--- /See:/ 'managementFiltersGet'' smart constructor.
-data ManagementFiltersGet' = ManagementFiltersGet'
+-- /See:/ 'managementFiltersGet' smart constructor.
+data ManagementFiltersGet = ManagementFiltersGet
     { _mfgFilterId  :: !Text
     , _mfgAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementFiltersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementFiltersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mfgFilterId'
 --
 -- * 'mfgAccountId'
-managementFiltersGet'
+managementFiltersGet
     :: Text -- ^ 'mfgFilterId'
     -> Text -- ^ 'mfgAccountId'
-    -> ManagementFiltersGet'
-managementFiltersGet' pMfgFilterId_ pMfgAccountId_ =
-    ManagementFiltersGet'
+    -> ManagementFiltersGet
+managementFiltersGet pMfgFilterId_ pMfgAccountId_ =
+    ManagementFiltersGet
     { _mfgFilterId = pMfgFilterId_
     , _mfgAccountId = pMfgAccountId_
     }
 
 -- | Filter ID to retrieve filters for.
-mfgFilterId :: Lens' ManagementFiltersGet' Text
+mfgFilterId :: Lens' ManagementFiltersGet Text
 mfgFilterId
   = lens _mfgFilterId (\ s a -> s{_mfgFilterId = a})
 
 -- | Account ID to retrieve filters for.
-mfgAccountId :: Lens' ManagementFiltersGet' Text
+mfgAccountId :: Lens' ManagementFiltersGet Text
 mfgAccountId
   = lens _mfgAccountId (\ s a -> s{_mfgAccountId = a})
 
-instance GoogleRequest ManagementFiltersGet' where
-        type Rs ManagementFiltersGet' = Filter
-        requestClient ManagementFiltersGet'{..}
+instance GoogleRequest ManagementFiltersGet where
+        type Rs ManagementFiltersGet = Filter
+        requestClient ManagementFiltersGet{..}
           = go _mfgAccountId _mfgFilterId (Just AltJSON)
               analyticsService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.Comments.Delete
       CommentsDeleteResource
 
     -- * Creating a Request
-    , commentsDelete'
-    , CommentsDelete'
+    , commentsDelete
+    , CommentsDelete
 
     -- * Request Lenses
     , cdId
@@ -40,7 +40,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.comments.delete@ method which the
--- 'CommentsDelete'' request conforms to.
+-- 'CommentsDelete' request conforms to.
 type CommentsDeleteResource =
      "comments" :>
        QueryParam "id" Text :>
@@ -48,32 +48,32 @@ type CommentsDeleteResource =
 
 -- | Deletes a comment.
 --
--- /See:/ 'commentsDelete'' smart constructor.
-newtype CommentsDelete' = CommentsDelete'
+-- /See:/ 'commentsDelete' smart constructor.
+newtype CommentsDelete = CommentsDelete
     { _cdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CommentsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'CommentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cdId'
-commentsDelete'
+commentsDelete
     :: Text -- ^ 'cdId'
-    -> CommentsDelete'
-commentsDelete' pCdId_ =
-    CommentsDelete'
+    -> CommentsDelete
+commentsDelete pCdId_ =
+    CommentsDelete
     { _cdId = pCdId_
     }
 
 -- | The id parameter specifies the comment ID for the resource that is being
 -- deleted.
-cdId :: Lens' CommentsDelete' Text
+cdId :: Lens' CommentsDelete Text
 cdId = lens _cdId (\ s a -> s{_cdId = a})
 
-instance GoogleRequest CommentsDelete' where
-        type Rs CommentsDelete' = ()
-        requestClient CommentsDelete'{..}
+instance GoogleRequest CommentsDelete where
+        type Rs CommentsDelete = ()
+        requestClient CommentsDelete{..}
           = go (Just _cdId) (Just AltJSON) youTubeService
           where go
                   = buildClient (Proxy :: Proxy CommentsDeleteResource)

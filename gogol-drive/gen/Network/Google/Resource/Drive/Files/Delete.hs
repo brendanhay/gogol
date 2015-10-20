@@ -30,8 +30,8 @@ module Network.Google.Resource.Drive.Files.Delete
       FilesDeleteResource
 
     -- * Creating a Request
-    , filesDelete'
-    , FilesDelete'
+    , filesDelete
+    , FilesDelete
 
     -- * Request Lenses
     , fdFileId
@@ -41,7 +41,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.files.delete@ method which the
--- 'FilesDelete'' request conforms to.
+-- 'FilesDelete' request conforms to.
 type FilesDeleteResource =
      "files" :>
        Capture "fileId" Text :>
@@ -50,31 +50,31 @@ type FilesDeleteResource =
 -- | Permanently deletes a file by ID. Skips the trash. The currently
 -- authenticated user must own the file.
 --
--- /See:/ 'filesDelete'' smart constructor.
-newtype FilesDelete' = FilesDelete'
+-- /See:/ 'filesDelete' smart constructor.
+newtype FilesDelete = FilesDelete
     { _fdFileId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FilesDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'FilesDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fdFileId'
-filesDelete'
+filesDelete
     :: Text -- ^ 'fdFileId'
-    -> FilesDelete'
-filesDelete' pFdFileId_ =
-    FilesDelete'
+    -> FilesDelete
+filesDelete pFdFileId_ =
+    FilesDelete
     { _fdFileId = pFdFileId_
     }
 
 -- | The ID of the file to delete.
-fdFileId :: Lens' FilesDelete' Text
+fdFileId :: Lens' FilesDelete Text
 fdFileId = lens _fdFileId (\ s a -> s{_fdFileId = a})
 
-instance GoogleRequest FilesDelete' where
-        type Rs FilesDelete' = ()
-        requestClient FilesDelete'{..}
+instance GoogleRequest FilesDelete where
+        type Rs FilesDelete = ()
+        requestClient FilesDelete{..}
           = go _fdFileId (Just AltJSON) driveService
           where go
                   = buildClient (Proxy :: Proxy FilesDeleteResource)

@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSenseHost.CustomChannels.Insert
       CustomChannelsInsertResource
 
     -- * Creating a Request
-    , customChannelsInsert'
-    , CustomChannelsInsert'
+    , customChannelsInsert
+    , CustomChannelsInsert
 
     -- * Request Lenses
     , cciPayload
@@ -41,7 +41,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.customchannels.insert@ method which the
--- 'CustomChannelsInsert'' request conforms to.
+-- 'CustomChannelsInsert' request conforms to.
 type CustomChannelsInsertResource =
      "adclients" :>
        Capture "adClientId" Text :>
@@ -52,43 +52,43 @@ type CustomChannelsInsertResource =
 
 -- | Add a new custom channel to the host AdSense account.
 --
--- /See:/ 'customChannelsInsert'' smart constructor.
-data CustomChannelsInsert' = CustomChannelsInsert'
+-- /See:/ 'customChannelsInsert' smart constructor.
+data CustomChannelsInsert = CustomChannelsInsert
     { _cciPayload    :: !CustomChannel
     , _cciAdClientId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CustomChannelsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CustomChannelsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cciPayload'
 --
 -- * 'cciAdClientId'
-customChannelsInsert'
+customChannelsInsert
     :: CustomChannel -- ^ 'cciPayload'
     -> Text -- ^ 'cciAdClientId'
-    -> CustomChannelsInsert'
-customChannelsInsert' pCciPayload_ pCciAdClientId_ =
-    CustomChannelsInsert'
+    -> CustomChannelsInsert
+customChannelsInsert pCciPayload_ pCciAdClientId_ =
+    CustomChannelsInsert
     { _cciPayload = pCciPayload_
     , _cciAdClientId = pCciAdClientId_
     }
 
 -- | Multipart request metadata.
-cciPayload :: Lens' CustomChannelsInsert' CustomChannel
+cciPayload :: Lens' CustomChannelsInsert CustomChannel
 cciPayload
   = lens _cciPayload (\ s a -> s{_cciPayload = a})
 
 -- | Ad client to which the new custom channel will be added.
-cciAdClientId :: Lens' CustomChannelsInsert' Text
+cciAdClientId :: Lens' CustomChannelsInsert Text
 cciAdClientId
   = lens _cciAdClientId
       (\ s a -> s{_cciAdClientId = a})
 
-instance GoogleRequest CustomChannelsInsert' where
-        type Rs CustomChannelsInsert' = CustomChannel
-        requestClient CustomChannelsInsert'{..}
+instance GoogleRequest CustomChannelsInsert where
+        type Rs CustomChannelsInsert = CustomChannel
+        requestClient CustomChannelsInsert{..}
           = go _cciAdClientId (Just AltJSON) _cciPayload
               adSenseHostService
           where go

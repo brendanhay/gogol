@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.URLMaps.Delete
       URLMapsDeleteResource
 
     -- * Creating a Request
-    , urlMapsDelete'
-    , URLMapsDelete'
+    , urlMapsDelete
+    , URLMapsDelete
 
     -- * Request Lenses
     , umdURLMap
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.urlMaps.delete@ method which the
--- 'URLMapsDelete'' request conforms to.
+-- 'URLMapsDelete' request conforms to.
 type URLMapsDeleteResource =
      Capture "project" Text :>
        "global" :>
@@ -51,42 +51,42 @@ type URLMapsDeleteResource =
 
 -- | Deletes the specified UrlMap resource.
 --
--- /See:/ 'urlMapsDelete'' smart constructor.
-data URLMapsDelete' = URLMapsDelete'
+-- /See:/ 'urlMapsDelete' smart constructor.
+data URLMapsDelete = URLMapsDelete
     { _umdURLMap  :: !Text
     , _umdProject :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'URLMapsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'URLMapsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'umdURLMap'
 --
 -- * 'umdProject'
-urlMapsDelete'
+urlMapsDelete
     :: Text -- ^ 'umdURLMap'
     -> Text -- ^ 'umdProject'
-    -> URLMapsDelete'
-urlMapsDelete' pUmdURLMap_ pUmdProject_ =
-    URLMapsDelete'
+    -> URLMapsDelete
+urlMapsDelete pUmdURLMap_ pUmdProject_ =
+    URLMapsDelete
     { _umdURLMap = pUmdURLMap_
     , _umdProject = pUmdProject_
     }
 
 -- | Name of the UrlMap resource to delete.
-umdURLMap :: Lens' URLMapsDelete' Text
+umdURLMap :: Lens' URLMapsDelete Text
 umdURLMap
   = lens _umdURLMap (\ s a -> s{_umdURLMap = a})
 
 -- | Name of the project scoping this request.
-umdProject :: Lens' URLMapsDelete' Text
+umdProject :: Lens' URLMapsDelete Text
 umdProject
   = lens _umdProject (\ s a -> s{_umdProject = a})
 
-instance GoogleRequest URLMapsDelete' where
-        type Rs URLMapsDelete' = Operation
-        requestClient URLMapsDelete'{..}
+instance GoogleRequest URLMapsDelete where
+        type Rs URLMapsDelete = Operation
+        requestClient URLMapsDelete{..}
           = go _umdProject _umdURLMap (Just AltJSON)
               computeService
           where go

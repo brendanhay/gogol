@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.PageViews.Get
       PageViewsGetResource
 
     -- * Creating a Request
-    , pageViewsGet'
-    , PageViewsGet'
+    , pageViewsGet
+    , PageViewsGet
 
     -- * Request Lenses
     , pvgBlogId
@@ -41,7 +41,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.pageViews.get@ method which the
--- 'PageViewsGet'' request conforms to.
+-- 'PageViewsGet' request conforms to.
 type PageViewsGetResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -51,42 +51,42 @@ type PageViewsGetResource =
 
 -- | Retrieve pageview stats for a Blog.
 --
--- /See:/ 'pageViewsGet'' smart constructor.
-data PageViewsGet' = PageViewsGet'
+-- /See:/ 'pageViewsGet' smart constructor.
+data PageViewsGet = PageViewsGet
     { _pvgBlogId :: !Text
     , _pvgRange  :: !(Maybe [PageViewsGetRange])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PageViewsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PageViewsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pvgBlogId'
 --
 -- * 'pvgRange'
-pageViewsGet'
+pageViewsGet
     :: Text -- ^ 'pvgBlogId'
-    -> PageViewsGet'
-pageViewsGet' pPvgBlogId_ =
-    PageViewsGet'
+    -> PageViewsGet
+pageViewsGet pPvgBlogId_ =
+    PageViewsGet
     { _pvgBlogId = pPvgBlogId_
     , _pvgRange = Nothing
     }
 
 -- | The ID of the blog to get.
-pvgBlogId :: Lens' PageViewsGet' Text
+pvgBlogId :: Lens' PageViewsGet Text
 pvgBlogId
   = lens _pvgBlogId (\ s a -> s{_pvgBlogId = a})
 
-pvgRange :: Lens' PageViewsGet' [PageViewsGetRange]
+pvgRange :: Lens' PageViewsGet [PageViewsGetRange]
 pvgRange
   = lens _pvgRange (\ s a -> s{_pvgRange = a}) .
       _Default
       . _Coerce
 
-instance GoogleRequest PageViewsGet' where
-        type Rs PageViewsGet' = Pageviews
-        requestClient PageViewsGet'{..}
+instance GoogleRequest PageViewsGet where
+        type Rs PageViewsGet = Pageviews
+        requestClient PageViewsGet{..}
           = go _pvgBlogId (_pvgRange ^. _Default)
               (Just AltJSON)
               bloggerService

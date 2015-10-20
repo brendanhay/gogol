@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.Calendars.Insert
       CalendarsInsertResource
 
     -- * Creating a Request
-    , calendarsInsert'
-    , CalendarsInsert'
+    , calendarsInsert
+    , CalendarsInsert
 
     -- * Request Lenses
     , ciPayload
@@ -40,7 +40,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendars.insert@ method which the
--- 'CalendarsInsert'' request conforms to.
+-- 'CalendarsInsert' request conforms to.
 type CalendarsInsertResource =
      "calendars" :>
        QueryParam "alt" AltJSON :>
@@ -48,32 +48,32 @@ type CalendarsInsertResource =
 
 -- | Creates a secondary calendar.
 --
--- /See:/ 'calendarsInsert'' smart constructor.
-newtype CalendarsInsert' = CalendarsInsert'
+-- /See:/ 'calendarsInsert' smart constructor.
+newtype CalendarsInsert = CalendarsInsert
     { _ciPayload :: Calendar
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CalendarsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CalendarsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ciPayload'
-calendarsInsert'
+calendarsInsert
     :: Calendar -- ^ 'ciPayload'
-    -> CalendarsInsert'
-calendarsInsert' pCiPayload_ =
-    CalendarsInsert'
+    -> CalendarsInsert
+calendarsInsert pCiPayload_ =
+    CalendarsInsert
     { _ciPayload = pCiPayload_
     }
 
 -- | Multipart request metadata.
-ciPayload :: Lens' CalendarsInsert' Calendar
+ciPayload :: Lens' CalendarsInsert Calendar
 ciPayload
   = lens _ciPayload (\ s a -> s{_ciPayload = a})
 
-instance GoogleRequest CalendarsInsert' where
-        type Rs CalendarsInsert' = Calendar
-        requestClient CalendarsInsert'{..}
+instance GoogleRequest CalendarsInsert where
+        type Rs CalendarsInsert = Calendar
+        requestClient CalendarsInsert{..}
           = go (Just AltJSON) _ciPayload appsCalendarService
           where go
                   = buildClient

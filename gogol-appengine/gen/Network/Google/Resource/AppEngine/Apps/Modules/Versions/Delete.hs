@@ -29,8 +29,8 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Delete
       AppsModulesVersionsDeleteResource
 
     -- * Creating a Request
-    , appsModulesVersionsDelete'
-    , AppsModulesVersionsDelete'
+    , appsModulesVersionsDelete
+    , AppsModulesVersionsDelete
 
     -- * Request Lenses
     , amvdXgafv
@@ -49,7 +49,7 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @appengine.apps.modules.versions.delete@ method which the
--- 'AppsModulesVersionsDelete'' request conforms to.
+-- 'AppsModulesVersionsDelete' request conforms to.
 type AppsModulesVersionsDeleteResource =
      "v1beta4" :>
        "apps" :>
@@ -70,8 +70,8 @@ type AppsModulesVersionsDeleteResource =
 
 -- | Deletes an existing version.
 --
--- /See:/ 'appsModulesVersionsDelete'' smart constructor.
-data AppsModulesVersionsDelete' = AppsModulesVersionsDelete'
+-- /See:/ 'appsModulesVersionsDelete' smart constructor.
+data AppsModulesVersionsDelete = AppsModulesVersionsDelete
     { _amvdXgafv          :: !(Maybe Text)
     , _amvdUploadProtocol :: !(Maybe Text)
     , _amvdPp             :: !Bool
@@ -84,7 +84,7 @@ data AppsModulesVersionsDelete' = AppsModulesVersionsDelete'
     , _amvdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AppsModulesVersionsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'AppsModulesVersionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -107,13 +107,13 @@ data AppsModulesVersionsDelete' = AppsModulesVersionsDelete'
 -- * 'amvdAppsId'
 --
 -- * 'amvdCallback'
-appsModulesVersionsDelete'
+appsModulesVersionsDelete
     :: Text -- ^ 'amvdVersionsId'
     -> Text -- ^ 'amvdModulesId'
     -> Text -- ^ 'amvdAppsId'
-    -> AppsModulesVersionsDelete'
-appsModulesVersionsDelete' pAmvdVersionsId_ pAmvdModulesId_ pAmvdAppsId_ =
-    AppsModulesVersionsDelete'
+    -> AppsModulesVersionsDelete
+appsModulesVersionsDelete pAmvdVersionsId_ pAmvdModulesId_ pAmvdAppsId_ =
+    AppsModulesVersionsDelete
     { _amvdXgafv = Nothing
     , _amvdUploadProtocol = Nothing
     , _amvdPp = True
@@ -127,65 +127,65 @@ appsModulesVersionsDelete' pAmvdVersionsId_ pAmvdModulesId_ pAmvdAppsId_ =
     }
 
 -- | V1 error format.
-amvdXgafv :: Lens' AppsModulesVersionsDelete' (Maybe Text)
+amvdXgafv :: Lens' AppsModulesVersionsDelete (Maybe Text)
 amvdXgafv
   = lens _amvdXgafv (\ s a -> s{_amvdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-amvdUploadProtocol :: Lens' AppsModulesVersionsDelete' (Maybe Text)
+amvdUploadProtocol :: Lens' AppsModulesVersionsDelete (Maybe Text)
 amvdUploadProtocol
   = lens _amvdUploadProtocol
       (\ s a -> s{_amvdUploadProtocol = a})
 
 -- | Pretty-print response.
-amvdPp :: Lens' AppsModulesVersionsDelete' Bool
+amvdPp :: Lens' AppsModulesVersionsDelete Bool
 amvdPp = lens _amvdPp (\ s a -> s{_amvdPp = a})
 
 -- | OAuth access token.
-amvdAccessToken :: Lens' AppsModulesVersionsDelete' (Maybe Text)
+amvdAccessToken :: Lens' AppsModulesVersionsDelete (Maybe Text)
 amvdAccessToken
   = lens _amvdAccessToken
       (\ s a -> s{_amvdAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-amvdUploadType :: Lens' AppsModulesVersionsDelete' (Maybe Text)
+amvdUploadType :: Lens' AppsModulesVersionsDelete (Maybe Text)
 amvdUploadType
   = lens _amvdUploadType
       (\ s a -> s{_amvdUploadType = a})
 
 -- | Part of \`name\`. See documentation of \`appsId\`.
-amvdVersionsId :: Lens' AppsModulesVersionsDelete' Text
+amvdVersionsId :: Lens' AppsModulesVersionsDelete Text
 amvdVersionsId
   = lens _amvdVersionsId
       (\ s a -> s{_amvdVersionsId = a})
 
 -- | Part of \`name\`. See documentation of \`appsId\`.
-amvdModulesId :: Lens' AppsModulesVersionsDelete' Text
+amvdModulesId :: Lens' AppsModulesVersionsDelete Text
 amvdModulesId
   = lens _amvdModulesId
       (\ s a -> s{_amvdModulesId = a})
 
 -- | OAuth bearer token.
-amvdBearerToken :: Lens' AppsModulesVersionsDelete' (Maybe Text)
+amvdBearerToken :: Lens' AppsModulesVersionsDelete (Maybe Text)
 amvdBearerToken
   = lens _amvdBearerToken
       (\ s a -> s{_amvdBearerToken = a})
 
 -- | Part of \`name\`. Name of the resource requested. For example:
 -- \"apps\/myapp\/modules\/default\/versions\/v1\".
-amvdAppsId :: Lens' AppsModulesVersionsDelete' Text
+amvdAppsId :: Lens' AppsModulesVersionsDelete Text
 amvdAppsId
   = lens _amvdAppsId (\ s a -> s{_amvdAppsId = a})
 
 -- | JSONP
-amvdCallback :: Lens' AppsModulesVersionsDelete' (Maybe Text)
+amvdCallback :: Lens' AppsModulesVersionsDelete (Maybe Text)
 amvdCallback
   = lens _amvdCallback (\ s a -> s{_amvdCallback = a})
 
-instance GoogleRequest AppsModulesVersionsDelete'
+instance GoogleRequest AppsModulesVersionsDelete
          where
-        type Rs AppsModulesVersionsDelete' = Operation
-        requestClient AppsModulesVersionsDelete'{..}
+        type Rs AppsModulesVersionsDelete = Operation
+        requestClient AppsModulesVersionsDelete{..}
           = go _amvdAppsId _amvdModulesId _amvdVersionsId
               _amvdXgafv
               _amvdUploadProtocol

@@ -29,8 +29,8 @@ module Network.Google.Resource.BigQuery.Datasets.Insert
       DatasetsInsertResource
 
     -- * Creating a Request
-    , datasetsInsert'
-    , DatasetsInsert'
+    , datasetsInsert
+    , DatasetsInsert
 
     -- * Request Lenses
     , diPayload
@@ -41,7 +41,7 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @bigquery.datasets.insert@ method which the
--- 'DatasetsInsert'' request conforms to.
+-- 'DatasetsInsert' request conforms to.
 type DatasetsInsertResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -51,42 +51,42 @@ type DatasetsInsertResource =
 
 -- | Creates a new empty dataset.
 --
--- /See:/ 'datasetsInsert'' smart constructor.
-data DatasetsInsert' = DatasetsInsert'
+-- /See:/ 'datasetsInsert' smart constructor.
+data DatasetsInsert = DatasetsInsert
     { _diPayload   :: !Dataset
     , _diProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatasetsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'diPayload'
 --
 -- * 'diProjectId'
-datasetsInsert'
+datasetsInsert
     :: Dataset -- ^ 'diPayload'
     -> Text -- ^ 'diProjectId'
-    -> DatasetsInsert'
-datasetsInsert' pDiPayload_ pDiProjectId_ =
-    DatasetsInsert'
+    -> DatasetsInsert
+datasetsInsert pDiPayload_ pDiProjectId_ =
+    DatasetsInsert
     { _diPayload = pDiPayload_
     , _diProjectId = pDiProjectId_
     }
 
 -- | Multipart request metadata.
-diPayload :: Lens' DatasetsInsert' Dataset
+diPayload :: Lens' DatasetsInsert Dataset
 diPayload
   = lens _diPayload (\ s a -> s{_diPayload = a})
 
 -- | Project ID of the new dataset
-diProjectId :: Lens' DatasetsInsert' Text
+diProjectId :: Lens' DatasetsInsert Text
 diProjectId
   = lens _diProjectId (\ s a -> s{_diProjectId = a})
 
-instance GoogleRequest DatasetsInsert' where
-        type Rs DatasetsInsert' = Dataset
-        requestClient DatasetsInsert'{..}
+instance GoogleRequest DatasetsInsert where
+        type Rs DatasetsInsert = Dataset
+        requestClient DatasetsInsert{..}
           = go _diProjectId (Just AltJSON) _diPayload
               bigQueryService
           where go

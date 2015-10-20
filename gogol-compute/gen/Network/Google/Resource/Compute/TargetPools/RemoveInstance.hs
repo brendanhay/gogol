@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.TargetPools.RemoveInstance
       TargetPoolsRemoveInstanceResource
 
     -- * Creating a Request
-    , targetPoolsRemoveInstance'
-    , TargetPoolsRemoveInstance'
+    , targetPoolsRemoveInstance
+    , TargetPoolsRemoveInstance
 
     -- * Request Lenses
     , tpriProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.removeInstance@ method which the
--- 'TargetPoolsRemoveInstance'' request conforms to.
+-- 'TargetPoolsRemoveInstance' request conforms to.
 type TargetPoolsRemoveInstanceResource =
      Capture "project" Text :>
        "regions" :>
@@ -57,15 +57,15 @@ type TargetPoolsRemoveInstanceResource =
 
 -- | Removes instance URL from targetPool.
 --
--- /See:/ 'targetPoolsRemoveInstance'' smart constructor.
-data TargetPoolsRemoveInstance' = TargetPoolsRemoveInstance'
+-- /See:/ 'targetPoolsRemoveInstance' smart constructor.
+data TargetPoolsRemoveInstance = TargetPoolsRemoveInstance
     { _tpriProject    :: !Text
     , _tpriTargetPool :: !Text
     , _tpriPayload    :: !TargetPoolsRemoveInstanceRequest
     , _tpriRegion     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetPoolsRemoveInstance'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetPoolsRemoveInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,44 +76,44 @@ data TargetPoolsRemoveInstance' = TargetPoolsRemoveInstance'
 -- * 'tpriPayload'
 --
 -- * 'tpriRegion'
-targetPoolsRemoveInstance'
+targetPoolsRemoveInstance
     :: Text -- ^ 'tpriProject'
     -> Text -- ^ 'tpriTargetPool'
     -> TargetPoolsRemoveInstanceRequest -- ^ 'tpriPayload'
     -> Text -- ^ 'tpriRegion'
-    -> TargetPoolsRemoveInstance'
-targetPoolsRemoveInstance' pTpriProject_ pTpriTargetPool_ pTpriPayload_ pTpriRegion_ =
-    TargetPoolsRemoveInstance'
+    -> TargetPoolsRemoveInstance
+targetPoolsRemoveInstance pTpriProject_ pTpriTargetPool_ pTpriPayload_ pTpriRegion_ =
+    TargetPoolsRemoveInstance
     { _tpriProject = pTpriProject_
     , _tpriTargetPool = pTpriTargetPool_
     , _tpriPayload = pTpriPayload_
     , _tpriRegion = pTpriRegion_
     }
 
-tpriProject :: Lens' TargetPoolsRemoveInstance' Text
+tpriProject :: Lens' TargetPoolsRemoveInstance Text
 tpriProject
   = lens _tpriProject (\ s a -> s{_tpriProject = a})
 
 -- | Name of the TargetPool resource to which instance_url is to be removed.
-tpriTargetPool :: Lens' TargetPoolsRemoveInstance' Text
+tpriTargetPool :: Lens' TargetPoolsRemoveInstance Text
 tpriTargetPool
   = lens _tpriTargetPool
       (\ s a -> s{_tpriTargetPool = a})
 
 -- | Multipart request metadata.
-tpriPayload :: Lens' TargetPoolsRemoveInstance' TargetPoolsRemoveInstanceRequest
+tpriPayload :: Lens' TargetPoolsRemoveInstance TargetPoolsRemoveInstanceRequest
 tpriPayload
   = lens _tpriPayload (\ s a -> s{_tpriPayload = a})
 
 -- | Name of the region scoping this request.
-tpriRegion :: Lens' TargetPoolsRemoveInstance' Text
+tpriRegion :: Lens' TargetPoolsRemoveInstance Text
 tpriRegion
   = lens _tpriRegion (\ s a -> s{_tpriRegion = a})
 
-instance GoogleRequest TargetPoolsRemoveInstance'
+instance GoogleRequest TargetPoolsRemoveInstance
          where
-        type Rs TargetPoolsRemoveInstance' = Operation
-        requestClient TargetPoolsRemoveInstance'{..}
+        type Rs TargetPoolsRemoveInstance = Operation
+        requestClient TargetPoolsRemoveInstance{..}
           = go _tpriProject _tpriRegion _tpriTargetPool
               (Just AltJSON)
               _tpriPayload

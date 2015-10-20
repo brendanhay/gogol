@@ -30,8 +30,8 @@ module Network.Google.Resource.Coordinate.Jobs.Patch
       JobsPatchResource
 
     -- * Creating a Request
-    , jobsPatch'
-    , JobsPatch'
+    , jobsPatch
+    , JobsPatch
 
     -- * Request Lenses
     , jpJobId
@@ -53,7 +53,7 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @coordinate.jobs.patch@ method which the
--- 'JobsPatch'' request conforms to.
+-- 'JobsPatch' request conforms to.
 type JobsPatchResource =
      "teams" :>
        Capture "teamId" Text :>
@@ -75,8 +75,8 @@ type JobsPatchResource =
 -- | Updates a job. Fields that are set in the job state will be updated.
 -- This method supports patch semantics.
 --
--- /See:/ 'jobsPatch'' smart constructor.
-data JobsPatch' = JobsPatch'
+-- /See:/ 'jobsPatch' smart constructor.
+data JobsPatch = JobsPatch
     { _jpJobId               :: !Word64
     , _jpProgress            :: !(Maybe JobsPatchProgress)
     , _jpNote                :: !(Maybe Text)
@@ -92,7 +92,7 @@ data JobsPatch' = JobsPatch'
     , _jpCustomField         :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'JobsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'JobsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -121,13 +121,13 @@ data JobsPatch' = JobsPatch'
 -- * 'jpTitle'
 --
 -- * 'jpCustomField'
-jobsPatch'
+jobsPatch
     :: Word64 -- ^ 'jpJobId'
     -> Text -- ^ 'jpTeamId'
     -> Job -- ^ 'jpPayload'
-    -> JobsPatch'
-jobsPatch' pJpJobId_ pJpTeamId_ pJpPayload_ =
-    JobsPatch'
+    -> JobsPatch
+jobsPatch pJpJobId_ pJpTeamId_ pJpPayload_ =
+    JobsPatch
     { _jpJobId = pJpJobId_
     , _jpProgress = Nothing
     , _jpNote = Nothing
@@ -144,59 +144,59 @@ jobsPatch' pJpJobId_ pJpTeamId_ pJpPayload_ =
     }
 
 -- | Job number
-jpJobId :: Lens' JobsPatch' Word64
+jpJobId :: Lens' JobsPatch Word64
 jpJobId = lens _jpJobId (\ s a -> s{_jpJobId = a})
 
 -- | Job progress
-jpProgress :: Lens' JobsPatch' (Maybe JobsPatchProgress)
+jpProgress :: Lens' JobsPatch (Maybe JobsPatchProgress)
 jpProgress
   = lens _jpProgress (\ s a -> s{_jpProgress = a})
 
 -- | Job note as newline (Unix) separated string
-jpNote :: Lens' JobsPatch' (Maybe Text)
+jpNote :: Lens' JobsPatch (Maybe Text)
 jpNote = lens _jpNote (\ s a -> s{_jpNote = a})
 
 -- | Team ID
-jpTeamId :: Lens' JobsPatch' Text
+jpTeamId :: Lens' JobsPatch Text
 jpTeamId = lens _jpTeamId (\ s a -> s{_jpTeamId = a})
 
 -- | Customer phone number
-jpCustomerPhoneNumber :: Lens' JobsPatch' (Maybe Text)
+jpCustomerPhoneNumber :: Lens' JobsPatch (Maybe Text)
 jpCustomerPhoneNumber
   = lens _jpCustomerPhoneNumber
       (\ s a -> s{_jpCustomerPhoneNumber = a})
 
 -- | Customer name
-jpCustomerName :: Lens' JobsPatch' (Maybe Text)
+jpCustomerName :: Lens' JobsPatch (Maybe Text)
 jpCustomerName
   = lens _jpCustomerName
       (\ s a -> s{_jpCustomerName = a})
 
 -- | Job address as newline (Unix) separated string
-jpAddress :: Lens' JobsPatch' (Maybe Text)
+jpAddress :: Lens' JobsPatch (Maybe Text)
 jpAddress
   = lens _jpAddress (\ s a -> s{_jpAddress = a})
 
 -- | Multipart request metadata.
-jpPayload :: Lens' JobsPatch' Job
+jpPayload :: Lens' JobsPatch Job
 jpPayload
   = lens _jpPayload (\ s a -> s{_jpPayload = a})
 
 -- | Assignee email address, or empty string to unassign.
-jpAssignee :: Lens' JobsPatch' (Maybe Text)
+jpAssignee :: Lens' JobsPatch (Maybe Text)
 jpAssignee
   = lens _jpAssignee (\ s a -> s{_jpAssignee = a})
 
 -- | The latitude coordinate of this job\'s location.
-jpLat :: Lens' JobsPatch' (Maybe Double)
+jpLat :: Lens' JobsPatch (Maybe Double)
 jpLat = lens _jpLat (\ s a -> s{_jpLat = a})
 
 -- | The longitude coordinate of this job\'s location.
-jpLng :: Lens' JobsPatch' (Maybe Double)
+jpLng :: Lens' JobsPatch (Maybe Double)
 jpLng = lens _jpLng (\ s a -> s{_jpLng = a})
 
 -- | Job title
-jpTitle :: Lens' JobsPatch' (Maybe Text)
+jpTitle :: Lens' JobsPatch (Maybe Text)
 jpTitle = lens _jpTitle (\ s a -> s{_jpTitle = a})
 
 -- | Sets the value of custom fields. To set a custom field, pass the field
@@ -205,16 +205,16 @@ jpTitle = lens _jpTitle (\ s a -> s{_jpTitle = a})
 -- customField=12%3DAlice. Repeat the parameter for each custom field. Note
 -- that \'=\' cannot appear in the parameter value. Specifying an invalid,
 -- or inactive enum field will result in an error 500.
-jpCustomField :: Lens' JobsPatch' [Text]
+jpCustomField :: Lens' JobsPatch [Text]
 jpCustomField
   = lens _jpCustomField
       (\ s a -> s{_jpCustomField = a})
       . _Default
       . _Coerce
 
-instance GoogleRequest JobsPatch' where
-        type Rs JobsPatch' = Job
-        requestClient JobsPatch'{..}
+instance GoogleRequest JobsPatch where
+        type Rs JobsPatch = Job
+        requestClient JobsPatch{..}
           = go _jpTeamId _jpJobId _jpProgress _jpNote
               _jpCustomerPhoneNumber
               _jpCustomerName

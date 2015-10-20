@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.Layers.VolumeAnnotations.List
       LayersVolumeAnnotationsListResource
 
     -- * Creating a Request
-    , layersVolumeAnnotationsList'
-    , LayersVolumeAnnotationsList'
+    , layersVolumeAnnotationsList
+    , LayersVolumeAnnotationsList
 
     -- * Request Lenses
     , lvalStartOffset
@@ -54,7 +54,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.layers.volumeAnnotations.list@ method which the
--- 'LayersVolumeAnnotationsList'' request conforms to.
+-- 'LayersVolumeAnnotationsList' request conforms to.
 type LayersVolumeAnnotationsListResource =
      "volumes" :>
        Capture "volumeId" Text :>
@@ -78,8 +78,8 @@ type LayersVolumeAnnotationsListResource =
 
 -- | Gets the volume annotations for a volume and layer.
 --
--- /See:/ 'layersVolumeAnnotationsList'' smart constructor.
-data LayersVolumeAnnotationsList' = LayersVolumeAnnotationsList'
+-- /See:/ 'layersVolumeAnnotationsList' smart constructor.
+data LayersVolumeAnnotationsList = LayersVolumeAnnotationsList
     { _lvalStartOffset              :: !(Maybe Text)
     , _lvalLocale                   :: !(Maybe Text)
     , _lvalContentVersion           :: !Text
@@ -97,7 +97,7 @@ data LayersVolumeAnnotationsList' = LayersVolumeAnnotationsList'
     , _lvalStartPosition            :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersVolumeAnnotationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersVolumeAnnotationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -130,13 +130,13 @@ data LayersVolumeAnnotationsList' = LayersVolumeAnnotationsList'
 -- * 'lvalMaxResults'
 --
 -- * 'lvalStartPosition'
-layersVolumeAnnotationsList'
+layersVolumeAnnotationsList
     :: Text -- ^ 'lvalContentVersion'
     -> Text -- ^ 'lvalVolumeId'
     -> Text -- ^ 'lvalLayerId'
-    -> LayersVolumeAnnotationsList'
-layersVolumeAnnotationsList' pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
-    LayersVolumeAnnotationsList'
+    -> LayersVolumeAnnotationsList
+layersVolumeAnnotationsList pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
+    LayersVolumeAnnotationsList
     { _lvalStartOffset = Nothing
     , _lvalLocale = Nothing
     , _lvalContentVersion = pLvalContentVersion_
@@ -155,100 +155,100 @@ layersVolumeAnnotationsList' pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
     }
 
 -- | The start offset to start retrieving data from.
-lvalStartOffset :: Lens' LayersVolumeAnnotationsList' (Maybe Text)
+lvalStartOffset :: Lens' LayersVolumeAnnotationsList (Maybe Text)
 lvalStartOffset
   = lens _lvalStartOffset
       (\ s a -> s{_lvalStartOffset = a})
 
 -- | The locale information for the data. ISO-639-1 language and ISO-3166-1
 -- country code. Ex: \'en_US\'.
-lvalLocale :: Lens' LayersVolumeAnnotationsList' (Maybe Text)
+lvalLocale :: Lens' LayersVolumeAnnotationsList (Maybe Text)
 lvalLocale
   = lens _lvalLocale (\ s a -> s{_lvalLocale = a})
 
 -- | The content version for the requested volume.
-lvalContentVersion :: Lens' LayersVolumeAnnotationsList' Text
+lvalContentVersion :: Lens' LayersVolumeAnnotationsList Text
 lvalContentVersion
   = lens _lvalContentVersion
       (\ s a -> s{_lvalContentVersion = a})
 
 -- | Set to true to return deleted annotations. updatedMin must be in the
 -- request to use this. Defaults to false.
-lvalShowDeleted :: Lens' LayersVolumeAnnotationsList' (Maybe Bool)
+lvalShowDeleted :: Lens' LayersVolumeAnnotationsList (Maybe Bool)
 lvalShowDeleted
   = lens _lvalShowDeleted
       (\ s a -> s{_lvalShowDeleted = a})
 
 -- | The version of the volume annotations that you are requesting.
-lvalVolumeAnnotationsVersion :: Lens' LayersVolumeAnnotationsList' (Maybe Text)
+lvalVolumeAnnotationsVersion :: Lens' LayersVolumeAnnotationsList (Maybe Text)
 lvalVolumeAnnotationsVersion
   = lens _lvalVolumeAnnotationsVersion
       (\ s a -> s{_lvalVolumeAnnotationsVersion = a})
 
 -- | RFC 3339 timestamp to restrict to items updated prior to this timestamp
 -- (exclusive).
-lvalUpdatedMax :: Lens' LayersVolumeAnnotationsList' (Maybe Text)
+lvalUpdatedMax :: Lens' LayersVolumeAnnotationsList (Maybe Text)
 lvalUpdatedMax
   = lens _lvalUpdatedMax
       (\ s a -> s{_lvalUpdatedMax = a})
 
 -- | RFC 3339 timestamp to restrict to items updated since this timestamp
 -- (inclusive).
-lvalUpdatedMin :: Lens' LayersVolumeAnnotationsList' (Maybe Text)
+lvalUpdatedMin :: Lens' LayersVolumeAnnotationsList (Maybe Text)
 lvalUpdatedMin
   = lens _lvalUpdatedMin
       (\ s a -> s{_lvalUpdatedMin = a})
 
 -- | The end offset to end retrieving data from.
-lvalEndOffset :: Lens' LayersVolumeAnnotationsList' (Maybe Text)
+lvalEndOffset :: Lens' LayersVolumeAnnotationsList (Maybe Text)
 lvalEndOffset
   = lens _lvalEndOffset
       (\ s a -> s{_lvalEndOffset = a})
 
 -- | The volume to retrieve annotations for.
-lvalVolumeId :: Lens' LayersVolumeAnnotationsList' Text
+lvalVolumeId :: Lens' LayersVolumeAnnotationsList Text
 lvalVolumeId
   = lens _lvalVolumeId (\ s a -> s{_lvalVolumeId = a})
 
 -- | String to identify the originator of this request.
-lvalSource :: Lens' LayersVolumeAnnotationsList' (Maybe Text)
+lvalSource :: Lens' LayersVolumeAnnotationsList (Maybe Text)
 lvalSource
   = lens _lvalSource (\ s a -> s{_lvalSource = a})
 
 -- | The value of the nextToken from the previous page.
-lvalPageToken :: Lens' LayersVolumeAnnotationsList' (Maybe Text)
+lvalPageToken :: Lens' LayersVolumeAnnotationsList (Maybe Text)
 lvalPageToken
   = lens _lvalPageToken
       (\ s a -> s{_lvalPageToken = a})
 
 -- | The end position to end retrieving data from.
-lvalEndPosition :: Lens' LayersVolumeAnnotationsList' (Maybe Text)
+lvalEndPosition :: Lens' LayersVolumeAnnotationsList (Maybe Text)
 lvalEndPosition
   = lens _lvalEndPosition
       (\ s a -> s{_lvalEndPosition = a})
 
 -- | The ID for the layer to get the annotations.
-lvalLayerId :: Lens' LayersVolumeAnnotationsList' Text
+lvalLayerId :: Lens' LayersVolumeAnnotationsList Text
 lvalLayerId
   = lens _lvalLayerId (\ s a -> s{_lvalLayerId = a})
 
 -- | Maximum number of results to return
-lvalMaxResults :: Lens' LayersVolumeAnnotationsList' (Maybe Word32)
+lvalMaxResults :: Lens' LayersVolumeAnnotationsList (Maybe Word32)
 lvalMaxResults
   = lens _lvalMaxResults
       (\ s a -> s{_lvalMaxResults = a})
 
 -- | The start position to start retrieving data from.
-lvalStartPosition :: Lens' LayersVolumeAnnotationsList' (Maybe Text)
+lvalStartPosition :: Lens' LayersVolumeAnnotationsList (Maybe Text)
 lvalStartPosition
   = lens _lvalStartPosition
       (\ s a -> s{_lvalStartPosition = a})
 
-instance GoogleRequest LayersVolumeAnnotationsList'
+instance GoogleRequest LayersVolumeAnnotationsList
          where
-        type Rs LayersVolumeAnnotationsList' =
+        type Rs LayersVolumeAnnotationsList =
              Volumeannotations
-        requestClient LayersVolumeAnnotationsList'{..}
+        requestClient LayersVolumeAnnotationsList{..}
           = go _lvalVolumeId _lvalLayerId
               (Just _lvalContentVersion)
               _lvalStartOffset

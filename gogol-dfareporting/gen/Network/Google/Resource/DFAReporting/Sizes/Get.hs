@@ -29,19 +29,19 @@ module Network.Google.Resource.DFAReporting.Sizes.Get
       SizesGetResource
 
     -- * Creating a Request
-    , sizesGet'
-    , SizesGet'
+    , sizesGet
+    , SizesGet
 
     -- * Request Lenses
-    , sizProFileId
-    , sizId
+    , sgProFileId
+    , sgId
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.sizes.get@ method which the
--- 'SizesGet'' request conforms to.
+-- 'SizesGet' request conforms to.
 type SizesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type SizesGetResource =
 
 -- | Gets one size by ID.
 --
--- /See:/ 'sizesGet'' smart constructor.
-data SizesGet' = SizesGet'
-    { _sizProFileId :: !Int64
-    , _sizId        :: !Int64
+-- /See:/ 'sizesGet' smart constructor.
+data SizesGet = SizesGet
+    { _sgProFileId :: !Int64
+    , _sgId        :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SizesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'SizesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sizProFileId'
+-- * 'sgProFileId'
 --
--- * 'sizId'
-sizesGet'
-    :: Int64 -- ^ 'sizProFileId'
-    -> Int64 -- ^ 'sizId'
-    -> SizesGet'
-sizesGet' pSizProFileId_ pSizId_ =
-    SizesGet'
-    { _sizProFileId = pSizProFileId_
-    , _sizId = pSizId_
+-- * 'sgId'
+sizesGet
+    :: Int64 -- ^ 'sgProFileId'
+    -> Int64 -- ^ 'sgId'
+    -> SizesGet
+sizesGet pSgProFileId_ pSgId_ =
+    SizesGet
+    { _sgProFileId = pSgProFileId_
+    , _sgId = pSgId_
     }
 
 -- | User profile ID associated with this request.
-sizProFileId :: Lens' SizesGet' Int64
-sizProFileId
-  = lens _sizProFileId (\ s a -> s{_sizProFileId = a})
+sgProFileId :: Lens' SizesGet Int64
+sgProFileId
+  = lens _sgProFileId (\ s a -> s{_sgProFileId = a})
 
 -- | Size ID.
-sizId :: Lens' SizesGet' Int64
-sizId = lens _sizId (\ s a -> s{_sizId = a})
+sgId :: Lens' SizesGet Int64
+sgId = lens _sgId (\ s a -> s{_sgId = a})
 
-instance GoogleRequest SizesGet' where
-        type Rs SizesGet' = Size
-        requestClient SizesGet'{..}
-          = go _sizProFileId _sizId (Just AltJSON)
+instance GoogleRequest SizesGet where
+        type Rs SizesGet = Size
+        requestClient SizesGet{..}
+          = go _sgProFileId _sgId (Just AltJSON)
               dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy SizesGetResource)

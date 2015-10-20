@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Update
       AccountsContainersUpdateResource
 
     -- * Creating a Request
-    , accountsContainersUpdate'
-    , AccountsContainersUpdate'
+    , accountsContainersUpdate
+    , AccountsContainersUpdate
 
     -- * Request Lenses
     , acuContainerId
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.update@ method which the
--- 'AccountsContainersUpdate'' request conforms to.
+-- 'AccountsContainersUpdate' request conforms to.
 type AccountsContainersUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -55,15 +55,15 @@ type AccountsContainersUpdateResource =
 
 -- | Updates a Container.
 --
--- /See:/ 'accountsContainersUpdate'' smart constructor.
-data AccountsContainersUpdate' = AccountsContainersUpdate'
+-- /See:/ 'accountsContainersUpdate' smart constructor.
+data AccountsContainersUpdate = AccountsContainersUpdate
     { _acuContainerId :: !Text
     , _acuFingerprint :: !(Maybe Text)
     , _acuPayload     :: !Container
     , _acuAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,13 +74,13 @@ data AccountsContainersUpdate' = AccountsContainersUpdate'
 -- * 'acuPayload'
 --
 -- * 'acuAccountId'
-accountsContainersUpdate'
+accountsContainersUpdate
     :: Text -- ^ 'acuContainerId'
     -> Container -- ^ 'acuPayload'
     -> Text -- ^ 'acuAccountId'
-    -> AccountsContainersUpdate'
-accountsContainersUpdate' pAcuContainerId_ pAcuPayload_ pAcuAccountId_ =
-    AccountsContainersUpdate'
+    -> AccountsContainersUpdate
+accountsContainersUpdate pAcuContainerId_ pAcuPayload_ pAcuAccountId_ =
+    AccountsContainersUpdate
     { _acuContainerId = pAcuContainerId_
     , _acuFingerprint = Nothing
     , _acuPayload = pAcuPayload_
@@ -88,32 +88,31 @@ accountsContainersUpdate' pAcuContainerId_ pAcuPayload_ pAcuAccountId_ =
     }
 
 -- | The GTM Container ID.
-acuContainerId :: Lens' AccountsContainersUpdate' Text
+acuContainerId :: Lens' AccountsContainersUpdate Text
 acuContainerId
   = lens _acuContainerId
       (\ s a -> s{_acuContainerId = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- container in storage.
-acuFingerprint :: Lens' AccountsContainersUpdate' (Maybe Text)
+acuFingerprint :: Lens' AccountsContainersUpdate (Maybe Text)
 acuFingerprint
   = lens _acuFingerprint
       (\ s a -> s{_acuFingerprint = a})
 
 -- | Multipart request metadata.
-acuPayload :: Lens' AccountsContainersUpdate' Container
+acuPayload :: Lens' AccountsContainersUpdate Container
 acuPayload
   = lens _acuPayload (\ s a -> s{_acuPayload = a})
 
 -- | The GTM Account ID.
-acuAccountId :: Lens' AccountsContainersUpdate' Text
+acuAccountId :: Lens' AccountsContainersUpdate Text
 acuAccountId
   = lens _acuAccountId (\ s a -> s{_acuAccountId = a})
 
-instance GoogleRequest AccountsContainersUpdate'
-         where
-        type Rs AccountsContainersUpdate' = Container
-        requestClient AccountsContainersUpdate'{..}
+instance GoogleRequest AccountsContainersUpdate where
+        type Rs AccountsContainersUpdate = Container
+        requestClient AccountsContainersUpdate{..}
           = go _acuAccountId _acuContainerId _acuFingerprint
               (Just AltJSON)
               _acuPayload

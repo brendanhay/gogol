@@ -55,8 +55,8 @@ module Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
       ProjectsUpdateBillingInfoResource
 
     -- * Creating a Request
-    , projectsUpdateBillingInfo'
-    , ProjectsUpdateBillingInfo'
+    , projectsUpdateBillingInfo
+    , ProjectsUpdateBillingInfo
 
     -- * Request Lenses
     , pubiXgafv
@@ -74,7 +74,7 @@ import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @cloudbilling.projects.updateBillingInfo@ method which the
--- 'ProjectsUpdateBillingInfo'' request conforms to.
+-- 'ProjectsUpdateBillingInfo' request conforms to.
 type ProjectsUpdateBillingInfoResource =
      "v1" :>
        Capture "name" Text :>
@@ -118,8 +118,8 @@ type ProjectsUpdateBillingInfoResource =
 -- billing, you should always call this method with the name of an *open*
 -- billing account.
 --
--- /See:/ 'projectsUpdateBillingInfo'' smart constructor.
-data ProjectsUpdateBillingInfo' = ProjectsUpdateBillingInfo'
+-- /See:/ 'projectsUpdateBillingInfo' smart constructor.
+data ProjectsUpdateBillingInfo = ProjectsUpdateBillingInfo
     { _pubiXgafv          :: !(Maybe Text)
     , _pubiUploadProtocol :: !(Maybe Text)
     , _pubiPp             :: !Bool
@@ -131,7 +131,7 @@ data ProjectsUpdateBillingInfo' = ProjectsUpdateBillingInfo'
     , _pubiCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsUpdateBillingInfo'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsUpdateBillingInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -152,12 +152,12 @@ data ProjectsUpdateBillingInfo' = ProjectsUpdateBillingInfo'
 -- * 'pubiName'
 --
 -- * 'pubiCallback'
-projectsUpdateBillingInfo'
+projectsUpdateBillingInfo
     :: ProjectBillingInfo -- ^ 'pubiPayload'
     -> Text -- ^ 'pubiName'
-    -> ProjectsUpdateBillingInfo'
-projectsUpdateBillingInfo' pPubiPayload_ pPubiName_ =
-    ProjectsUpdateBillingInfo'
+    -> ProjectsUpdateBillingInfo
+projectsUpdateBillingInfo pPubiPayload_ pPubiName_ =
+    ProjectsUpdateBillingInfo
     { _pubiXgafv = Nothing
     , _pubiUploadProtocol = Nothing
     , _pubiPp = True
@@ -170,58 +170,58 @@ projectsUpdateBillingInfo' pPubiPayload_ pPubiName_ =
     }
 
 -- | V1 error format.
-pubiXgafv :: Lens' ProjectsUpdateBillingInfo' (Maybe Text)
+pubiXgafv :: Lens' ProjectsUpdateBillingInfo (Maybe Text)
 pubiXgafv
   = lens _pubiXgafv (\ s a -> s{_pubiXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pubiUploadProtocol :: Lens' ProjectsUpdateBillingInfo' (Maybe Text)
+pubiUploadProtocol :: Lens' ProjectsUpdateBillingInfo (Maybe Text)
 pubiUploadProtocol
   = lens _pubiUploadProtocol
       (\ s a -> s{_pubiUploadProtocol = a})
 
 -- | Pretty-print response.
-pubiPp :: Lens' ProjectsUpdateBillingInfo' Bool
+pubiPp :: Lens' ProjectsUpdateBillingInfo Bool
 pubiPp = lens _pubiPp (\ s a -> s{_pubiPp = a})
 
 -- | OAuth access token.
-pubiAccessToken :: Lens' ProjectsUpdateBillingInfo' (Maybe Text)
+pubiAccessToken :: Lens' ProjectsUpdateBillingInfo (Maybe Text)
 pubiAccessToken
   = lens _pubiAccessToken
       (\ s a -> s{_pubiAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pubiUploadType :: Lens' ProjectsUpdateBillingInfo' (Maybe Text)
+pubiUploadType :: Lens' ProjectsUpdateBillingInfo (Maybe Text)
 pubiUploadType
   = lens _pubiUploadType
       (\ s a -> s{_pubiUploadType = a})
 
 -- | Multipart request metadata.
-pubiPayload :: Lens' ProjectsUpdateBillingInfo' ProjectBillingInfo
+pubiPayload :: Lens' ProjectsUpdateBillingInfo ProjectBillingInfo
 pubiPayload
   = lens _pubiPayload (\ s a -> s{_pubiPayload = a})
 
 -- | OAuth bearer token.
-pubiBearerToken :: Lens' ProjectsUpdateBillingInfo' (Maybe Text)
+pubiBearerToken :: Lens' ProjectsUpdateBillingInfo (Maybe Text)
 pubiBearerToken
   = lens _pubiBearerToken
       (\ s a -> s{_pubiBearerToken = a})
 
 -- | The resource name of the project associated with the billing information
 -- that you want to update. For example, \`projects\/tokyo-rain-123\`.
-pubiName :: Lens' ProjectsUpdateBillingInfo' Text
+pubiName :: Lens' ProjectsUpdateBillingInfo Text
 pubiName = lens _pubiName (\ s a -> s{_pubiName = a})
 
 -- | JSONP
-pubiCallback :: Lens' ProjectsUpdateBillingInfo' (Maybe Text)
+pubiCallback :: Lens' ProjectsUpdateBillingInfo (Maybe Text)
 pubiCallback
   = lens _pubiCallback (\ s a -> s{_pubiCallback = a})
 
-instance GoogleRequest ProjectsUpdateBillingInfo'
+instance GoogleRequest ProjectsUpdateBillingInfo
          where
-        type Rs ProjectsUpdateBillingInfo' =
+        type Rs ProjectsUpdateBillingInfo =
              ProjectBillingInfo
-        requestClient ProjectsUpdateBillingInfo'{..}
+        requestClient ProjectsUpdateBillingInfo{..}
           = go _pubiName _pubiXgafv _pubiUploadProtocol
               (Just _pubiPp)
               _pubiAccessToken

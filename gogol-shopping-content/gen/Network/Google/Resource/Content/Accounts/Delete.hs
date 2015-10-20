@@ -29,8 +29,8 @@ module Network.Google.Resource.Content.Accounts.Delete
       AccountsDeleteResource
 
     -- * Creating a Request
-    , accountsDelete'
-    , AccountsDelete'
+    , accountsDelete
+    , AccountsDelete
 
     -- * Request Lenses
     , adMerchantId
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.accounts.delete@ method which the
--- 'AccountsDelete'' request conforms to.
+-- 'AccountsDelete' request conforms to.
 type AccountsDeleteResource =
      Capture "merchantId" Word64 :>
        "accounts" :>
@@ -52,14 +52,14 @@ type AccountsDeleteResource =
 
 -- | Deletes a Merchant Center sub-account.
 --
--- /See:/ 'accountsDelete'' smart constructor.
-data AccountsDelete' = AccountsDelete'
+-- /See:/ 'accountsDelete' smart constructor.
+data AccountsDelete = AccountsDelete
     { _adMerchantId :: !Word64
     , _adAccountId  :: !Word64
     , _adDryRun     :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,34 +68,34 @@ data AccountsDelete' = AccountsDelete'
 -- * 'adAccountId'
 --
 -- * 'adDryRun'
-accountsDelete'
+accountsDelete
     :: Word64 -- ^ 'adMerchantId'
     -> Word64 -- ^ 'adAccountId'
-    -> AccountsDelete'
-accountsDelete' pAdMerchantId_ pAdAccountId_ =
-    AccountsDelete'
+    -> AccountsDelete
+accountsDelete pAdMerchantId_ pAdAccountId_ =
+    AccountsDelete
     { _adMerchantId = pAdMerchantId_
     , _adAccountId = pAdAccountId_
     , _adDryRun = Nothing
     }
 
 -- | The ID of the managing account.
-adMerchantId :: Lens' AccountsDelete' Word64
+adMerchantId :: Lens' AccountsDelete Word64
 adMerchantId
   = lens _adMerchantId (\ s a -> s{_adMerchantId = a})
 
 -- | The ID of the account.
-adAccountId :: Lens' AccountsDelete' Word64
+adAccountId :: Lens' AccountsDelete Word64
 adAccountId
   = lens _adAccountId (\ s a -> s{_adAccountId = a})
 
 -- | Flag to run the request in dry-run mode.
-adDryRun :: Lens' AccountsDelete' (Maybe Bool)
+adDryRun :: Lens' AccountsDelete (Maybe Bool)
 adDryRun = lens _adDryRun (\ s a -> s{_adDryRun = a})
 
-instance GoogleRequest AccountsDelete' where
-        type Rs AccountsDelete' = ()
-        requestClient AccountsDelete'{..}
+instance GoogleRequest AccountsDelete where
+        type Rs AccountsDelete = ()
+        requestClient AccountsDelete{..}
           = go _adMerchantId _adAccountId _adDryRun
               (Just AltJSON)
               shoppingContentService

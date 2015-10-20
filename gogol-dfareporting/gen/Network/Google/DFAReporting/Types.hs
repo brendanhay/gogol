@@ -428,10 +428,10 @@ module Network.Google.DFAReporting.Types
     -- * AdvertiserGroup
     , AdvertiserGroup
     , advertiserGroup
-    , aKind
-    , aAccountId
-    , aName
-    , aId
+    , agKind
+    , agAccountId
+    , agName
+    , agId
 
     -- * TagData
     , TagData
@@ -499,43 +499,43 @@ module Network.Google.DFAReporting.Types
     -- * Ad
     , Ad
     , ad
-    , addCreativeGroupAssignments
-    , addGeoTargeting
-    , addCreativeRotation
-    , addTechnologyTargeting
-    , addAudienceSegmentId
-    , addDayPartTargeting
-    , addSize
-    , addStartTime
-    , addKind
-    , addClickThroughURLSuffixProperties
-    , addCampaignIdDimensionValue
-    , addAdvertiserId
-    , addAdvertiserIdDimensionValue
-    , addSSLCompliant
-    , addCampaignId
-    , addIdDimensionValue
-    , addClickThroughURL
-    , addDeliverySchedule
-    , addEventTagOverrides
-    , addActive
-    , addAccountId
-    , addName
-    , addKeyValueTargetingExpression
-    , addEndTime
-    , addCreateInfo
-    , addLastModifiedInfo
-    , addId
-    , addSSLRequired
-    , addComments
-    , addSubAccountId
-    , addType
-    , addRemarketingListExpression
-    , addDynamicClickTracker
-    , addCompatibility
-    , addArchived
-    , addDefaultClickThroughEventTagProperties
-    , addPlacementAssignments
+    , aCreativeGroupAssignments
+    , aGeoTargeting
+    , aCreativeRotation
+    , aTechnologyTargeting
+    , aAudienceSegmentId
+    , aDayPartTargeting
+    , aSize
+    , aStartTime
+    , aKind
+    , aClickThroughURLSuffixProperties
+    , aCampaignIdDimensionValue
+    , aAdvertiserId
+    , aAdvertiserIdDimensionValue
+    , aSSLCompliant
+    , aCampaignId
+    , aIdDimensionValue
+    , aClickThroughURL
+    , aDeliverySchedule
+    , aEventTagOverrides
+    , aActive
+    , aAccountId
+    , aName
+    , aKeyValueTargetingExpression
+    , aEndTime
+    , aCreateInfo
+    , aLastModifiedInfo
+    , aId
+    , aSSLRequired
+    , aComments
+    , aSubAccountId
+    , aType
+    , aRemarketingListExpression
+    , aDynamicClickTracker
+    , aCompatibility
+    , aArchived
+    , aDefaultClickThroughEventTagProperties
+    , aPlacementAssignments
 
     -- * FloodlightActivitiesListSortOrder
     , FloodlightActivitiesListSortOrder (..)
@@ -1157,10 +1157,10 @@ module Network.Google.DFAReporting.Types
     -- * ContentCategory
     , ContentCategory
     , contentCategory
-    , ccKind
-    , ccAccountId
-    , ccName
-    , ccId
+    , conKind
+    , conAccountId
+    , conName
+    , conId
 
     -- * ObjectFilterStatus
     , ObjectFilterStatus (..)
@@ -1224,9 +1224,9 @@ module Network.Google.DFAReporting.Types
     -- * UserRolePermissionGroup
     , UserRolePermissionGroup
     , userRolePermissionGroup
-    , uKind
-    , uName
-    , uId
+    , urpgKind
+    , urpgName
+    , urpgId
 
     -- * CreativesListTypes
     , CreativesListTypes (..)
@@ -1481,15 +1481,15 @@ module Network.Google.DFAReporting.Types
     -- * City
     , City
     , city
-    , citiMetroCode
-    , citiRegionCode
-    , citiKind
-    , citiRegionDartId
-    , citiMetroDmaId
-    , citiName
-    , citiCountryCode
-    , citiCountryDartId
-    , citiDartId
+    , ccMetroCode
+    , ccRegionCode
+    , ccKind
+    , ccRegionDartId
+    , ccMetroDmaId
+    , ccName
+    , ccCountryCode
+    , ccCountryDartId
+    , ccDartId
 
     -- * PlatformType
     , PlatformType
@@ -1669,20 +1669,20 @@ module Network.Google.DFAReporting.Types
     -- * ChangeLog
     , ChangeLog
     , changeLog
-    , clUserProFileId
-    , clObjectType
-    , clUserProFileName
-    , clKind
-    , clObjectId
-    , clAction
-    , clTransactionId
-    , clOldValue
-    , clAccountId
-    , clNewValue
-    , clFieldName
-    , clId
-    , clSubAccountId
-    , clChangeTime
+    , chaUserProFileId
+    , chaObjectType
+    , chaUserProFileName
+    , chaKind
+    , chaObjectId
+    , chaAction
+    , chaTransactionId
+    , chaOldValue
+    , chaAccountId
+    , chaNewValue
+    , chaFieldName
+    , chaId
+    , chaSubAccountId
+    , chaChangeTime
 
     -- * CreativesListSortField
     , CreativesListSortField (..)
@@ -1774,9 +1774,9 @@ module Network.Google.DFAReporting.Types
     -- * AccountPermissionGroup
     , AccountPermissionGroup
     , accountPermissionGroup
-    , apgKind
-    , apgName
-    , apgId
+    , apgpKind
+    , apgpName
+    , apgpId
 
     -- * Advertiser
     , Advertiser
@@ -1995,48 +1995,48 @@ module Network.Google.DFAReporting.Types
     -- * CreativeAsset
     , CreativeAsset
     , creativeAsset
-    , cZIndex
-    , cPushdown
-    , cVideoDuration
-    , cOriginalBackup
-    , cWindowMode
-    , cFlashVersion
-    , cPushdownDuration
-    , cSize
-    , cVerticallyLocked
-    , cOffset
-    , cStreamingServingURL
-    , cZipFilesize
-    , cTransparency
-    , cHideSelectionBoxes
-    , cSSLCompliant
-    , cFileSize
-    , cAssetIdentifier
-    , cDurationType
-    , cProgressiveServingURL
-    , cActive
-    , cRole
-    , cMimeType
-    , cPositionTopUnit
-    , cPositionLeftUnit
-    , cAlignment
-    , cExpandedDimension
-    , cZipFilename
-    , cActionScript3
-    , cDisplayType
-    , cChildAssetType
-    , cCollapsedSize
-    , cId
-    , cBitRate
-    , cCustomStartTimeValue
-    , cStartTimeType
-    , cDuration
-    , cArtworkType
-    , cHideFlashObjects
-    , cDetectedFeatures
-    , cBackupImageExit
-    , cPosition
-    , cHorizontallyLocked
+    , caaZIndex
+    , caaPushdown
+    , caaVideoDuration
+    , caaOriginalBackup
+    , caaWindowMode
+    , caaFlashVersion
+    , caaPushdownDuration
+    , caaSize
+    , caaVerticallyLocked
+    , caaOffset
+    , caaStreamingServingURL
+    , caaZipFilesize
+    , caaTransparency
+    , caaHideSelectionBoxes
+    , caaSSLCompliant
+    , caaFileSize
+    , caaAssetIdentifier
+    , caaDurationType
+    , caaProgressiveServingURL
+    , caaActive
+    , caaRole
+    , caaMimeType
+    , caaPositionTopUnit
+    , caaPositionLeftUnit
+    , caaAlignment
+    , caaExpandedDimension
+    , caaZipFilename
+    , caaActionScript3
+    , caaDisplayType
+    , caaChildAssetType
+    , caaCollapsedSize
+    , caaId
+    , caaBitRate
+    , caaCustomStartTimeValue
+    , caaStartTimeType
+    , caaDuration
+    , caaArtworkType
+    , caaHideFlashObjects
+    , caaDetectedFeatures
+    , caaBackupImageExit
+    , caaPosition
+    , caaHorizontallyLocked
 
     -- * AdCompatibility
     , AdCompatibility (..)
@@ -2289,9 +2289,9 @@ module Network.Google.DFAReporting.Types
     -- * ConnectionType
     , ConnectionType
     , connectionType
-    , conKind
-    , conName
-    , conId
+    , cttKind
+    , cttName
+    , cttId
 
     -- * CreativeCustomEventAdvertiserCustomEventType
     , CreativeCustomEventAdvertiserCustomEventType (..)

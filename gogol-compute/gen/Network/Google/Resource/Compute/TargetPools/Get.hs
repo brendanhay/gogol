@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.TargetPools.Get
       TargetPoolsGetResource
 
     -- * Creating a Request
-    , targetPoolsGet'
-    , TargetPoolsGet'
+    , targetPoolsGet
+    , TargetPoolsGet
 
     -- * Request Lenses
     , tpgProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.get@ method which the
--- 'TargetPoolsGet'' request conforms to.
+-- 'TargetPoolsGet' request conforms to.
 type TargetPoolsGetResource =
      Capture "project" Text :>
        "regions" :>
@@ -53,14 +53,14 @@ type TargetPoolsGetResource =
 
 -- | Returns the specified TargetPool resource.
 --
--- /See:/ 'targetPoolsGet'' smart constructor.
-data TargetPoolsGet' = TargetPoolsGet'
+-- /See:/ 'targetPoolsGet' smart constructor.
+data TargetPoolsGet = TargetPoolsGet
     { _tpgProject    :: !Text
     , _tpgTargetPool :: !Text
     , _tpgRegion     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetPoolsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetPoolsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,37 +69,37 @@ data TargetPoolsGet' = TargetPoolsGet'
 -- * 'tpgTargetPool'
 --
 -- * 'tpgRegion'
-targetPoolsGet'
+targetPoolsGet
     :: Text -- ^ 'tpgProject'
     -> Text -- ^ 'tpgTargetPool'
     -> Text -- ^ 'tpgRegion'
-    -> TargetPoolsGet'
-targetPoolsGet' pTpgProject_ pTpgTargetPool_ pTpgRegion_ =
-    TargetPoolsGet'
+    -> TargetPoolsGet
+targetPoolsGet pTpgProject_ pTpgTargetPool_ pTpgRegion_ =
+    TargetPoolsGet
     { _tpgProject = pTpgProject_
     , _tpgTargetPool = pTpgTargetPool_
     , _tpgRegion = pTpgRegion_
     }
 
 -- | Name of the project scoping this request.
-tpgProject :: Lens' TargetPoolsGet' Text
+tpgProject :: Lens' TargetPoolsGet Text
 tpgProject
   = lens _tpgProject (\ s a -> s{_tpgProject = a})
 
 -- | Name of the TargetPool resource to return.
-tpgTargetPool :: Lens' TargetPoolsGet' Text
+tpgTargetPool :: Lens' TargetPoolsGet Text
 tpgTargetPool
   = lens _tpgTargetPool
       (\ s a -> s{_tpgTargetPool = a})
 
 -- | Name of the region scoping this request.
-tpgRegion :: Lens' TargetPoolsGet' Text
+tpgRegion :: Lens' TargetPoolsGet Text
 tpgRegion
   = lens _tpgRegion (\ s a -> s{_tpgRegion = a})
 
-instance GoogleRequest TargetPoolsGet' where
-        type Rs TargetPoolsGet' = TargetPool
-        requestClient TargetPoolsGet'{..}
+instance GoogleRequest TargetPoolsGet where
+        type Rs TargetPoolsGet = TargetPool
+        requestClient TargetPoolsGet{..}
           = go _tpgProject _tpgRegion _tpgTargetPool
               (Just AltJSON)
               computeService

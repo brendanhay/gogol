@@ -29,8 +29,8 @@ module Network.Google.Resource.Partners.Companies.Get
       CompaniesGetResource
 
     -- * Creating a Request
-    , companiesGet'
-    , CompaniesGet'
+    , companiesGet
+    , CompaniesGet
 
     -- * Request Lenses
     , cgXgafv
@@ -58,7 +58,7 @@ import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @partners.companies.get@ method which the
--- 'CompaniesGet'' request conforms to.
+-- 'CompaniesGet' request conforms to.
 type CompaniesGetResource =
      "v2" :>
        "companies" :>
@@ -101,8 +101,8 @@ type CompaniesGetResource =
 
 -- | Gets a company.
 --
--- /See:/ 'companiesGet'' smart constructor.
-data CompaniesGet' = CompaniesGet'
+-- /See:/ 'companiesGet' smart constructor.
+data CompaniesGet = CompaniesGet
     { _cgXgafv                                       :: !(Maybe Text)
     , _cgCurrencyCode                                :: !(Maybe Text)
     , _cgUploadProtocol                              :: !(Maybe Text)
@@ -124,7 +124,7 @@ data CompaniesGet' = CompaniesGet'
     , _cgCallback                                    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CompaniesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CompaniesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -165,11 +165,11 @@ data CompaniesGet' = CompaniesGet'
 -- * 'cgRequestMetadataTrafficSourceTrafficSourceId'
 --
 -- * 'cgCallback'
-companiesGet'
+companiesGet
     :: Text -- ^ 'cgCompanyId'
-    -> CompaniesGet'
-companiesGet' pCgCompanyId_ =
-    CompaniesGet'
+    -> CompaniesGet
+companiesGet pCgCompanyId_ =
+    CompaniesGet
     { _cgXgafv = Nothing
     , _cgCurrencyCode = Nothing
     , _cgUploadProtocol = Nothing
@@ -192,24 +192,24 @@ companiesGet' pCgCompanyId_ =
     }
 
 -- | V1 error format.
-cgXgafv :: Lens' CompaniesGet' (Maybe Text)
+cgXgafv :: Lens' CompaniesGet (Maybe Text)
 cgXgafv = lens _cgXgafv (\ s a -> s{_cgXgafv = a})
 
 -- | If the company\'s budget is in a different currency code than this one,
 -- then the converted budget is converted to this currency code.
-cgCurrencyCode :: Lens' CompaniesGet' (Maybe Text)
+cgCurrencyCode :: Lens' CompaniesGet (Maybe Text)
 cgCurrencyCode
   = lens _cgCurrencyCode
       (\ s a -> s{_cgCurrencyCode = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-cgUploadProtocol :: Lens' CompaniesGet' (Maybe Text)
+cgUploadProtocol :: Lens' CompaniesGet (Maybe Text)
 cgUploadProtocol
   = lens _cgUploadProtocol
       (\ s a -> s{_cgUploadProtocol = a})
 
 -- | The ID of the company to retrieve.
-cgCompanyId :: Lens' CompaniesGet' Text
+cgCompanyId :: Lens' CompaniesGet Text
 cgCompanyId
   = lens _cgCompanyId (\ s a -> s{_cgCompanyId = a})
 
@@ -217,57 +217,57 @@ cgCompanyId
 -- \`address\` and \`address desc\` is supported which will sorted by
 -- closest to farthest in distance from given address and farthest to
 -- closest distance from given address respectively.
-cgOrderBy :: Lens' CompaniesGet' (Maybe Text)
+cgOrderBy :: Lens' CompaniesGet (Maybe Text)
 cgOrderBy
   = lens _cgOrderBy (\ s a -> s{_cgOrderBy = a})
 
 -- | Pretty-print response.
-cgPp :: Lens' CompaniesGet' Bool
+cgPp :: Lens' CompaniesGet Bool
 cgPp = lens _cgPp (\ s a -> s{_cgPp = a})
 
 -- | OAuth access token.
-cgAccessToken :: Lens' CompaniesGet' (Maybe Text)
+cgAccessToken :: Lens' CompaniesGet (Maybe Text)
 cgAccessToken
   = lens _cgAccessToken
       (\ s a -> s{_cgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-cgUploadType :: Lens' CompaniesGet' (Maybe Text)
+cgUploadType :: Lens' CompaniesGet (Maybe Text)
 cgUploadType
   = lens _cgUploadType (\ s a -> s{_cgUploadType = a})
 
 -- | The address to use for sorting the company\'s addresses by proximity. If
 -- not given, the geo-located address of the request is used. Used when
 -- order_by is set.
-cgAddress :: Lens' CompaniesGet' (Maybe Text)
+cgAddress :: Lens' CompaniesGet (Maybe Text)
 cgAddress
   = lens _cgAddress (\ s a -> s{_cgAddress = a})
 
 -- | Google Partners session ID.
-cgRequestMetadataPartnersSessionId :: Lens' CompaniesGet' (Maybe Text)
+cgRequestMetadataPartnersSessionId :: Lens' CompaniesGet (Maybe Text)
 cgRequestMetadataPartnersSessionId
   = lens _cgRequestMetadataPartnersSessionId
       (\ s a -> s{_cgRequestMetadataPartnersSessionId = a})
 
 -- | OAuth bearer token.
-cgBearerToken :: Lens' CompaniesGet' (Maybe Text)
+cgBearerToken :: Lens' CompaniesGet (Maybe Text)
 cgBearerToken
   = lens _cgBearerToken
       (\ s a -> s{_cgBearerToken = a})
 
 -- | Locale to use for the current request.
-cgRequestMetadataLocale :: Lens' CompaniesGet' (Maybe Text)
+cgRequestMetadataLocale :: Lens' CompaniesGet (Maybe Text)
 cgRequestMetadataLocale
   = lens _cgRequestMetadataLocale
       (\ s a -> s{_cgRequestMetadataLocale = a})
 
 -- | The view of \`Company\` resource to be returned. This must not be
 -- \`COMPANY_VIEW_UNSPECIFIED\`.
-cgView :: Lens' CompaniesGet' (Maybe Text)
+cgView :: Lens' CompaniesGet (Maybe Text)
 cgView = lens _cgView (\ s a -> s{_cgView = a})
 
 -- | Experiment IDs the current request belongs to.
-cgRequestMetadataExperimentIds :: Lens' CompaniesGet' [Text]
+cgRequestMetadataExperimentIds :: Lens' CompaniesGet [Text]
 cgRequestMetadataExperimentIds
   = lens _cgRequestMetadataExperimentIds
       (\ s a -> s{_cgRequestMetadataExperimentIds = a})
@@ -275,7 +275,7 @@ cgRequestMetadataExperimentIds
       . _Coerce
 
 -- | IP address to use instead of the user\'s geo-located IP address.
-cgRequestMetadataUserOverridesIPAddress :: Lens' CompaniesGet' (Maybe Text)
+cgRequestMetadataUserOverridesIPAddress :: Lens' CompaniesGet (Maybe Text)
 cgRequestMetadataUserOverridesIPAddress
   = lens _cgRequestMetadataUserOverridesIPAddress
       (\ s a ->
@@ -284,14 +284,14 @@ cgRequestMetadataUserOverridesIPAddress
 -- | Second level identifier to indicate where the traffic comes from. An
 -- identifier has multiple letters created by a team which redirected the
 -- traffic to us.
-cgRequestMetadataTrafficSourceTrafficSubId :: Lens' CompaniesGet' (Maybe Text)
+cgRequestMetadataTrafficSourceTrafficSubId :: Lens' CompaniesGet (Maybe Text)
 cgRequestMetadataTrafficSourceTrafficSubId
   = lens _cgRequestMetadataTrafficSourceTrafficSubId
       (\ s a ->
          s{_cgRequestMetadataTrafficSourceTrafficSubId = a})
 
 -- | Logged-in user ID to impersonate instead of the user\'s ID.
-cgRequestMetadataUserOverridesUserId :: Lens' CompaniesGet' (Maybe Text)
+cgRequestMetadataUserOverridesUserId :: Lens' CompaniesGet (Maybe Text)
 cgRequestMetadataUserOverridesUserId
   = lens _cgRequestMetadataUserOverridesUserId
       (\ s a ->
@@ -299,7 +299,7 @@ cgRequestMetadataUserOverridesUserId
 
 -- | Identifier to indicate where the traffic comes from. An identifier has
 -- multiple letters created by a team which redirected the traffic to us.
-cgRequestMetadataTrafficSourceTrafficSourceId :: Lens' CompaniesGet' (Maybe Text)
+cgRequestMetadataTrafficSourceTrafficSourceId :: Lens' CompaniesGet (Maybe Text)
 cgRequestMetadataTrafficSourceTrafficSourceId
   = lens _cgRequestMetadataTrafficSourceTrafficSourceId
       (\ s a ->
@@ -307,13 +307,13 @@ cgRequestMetadataTrafficSourceTrafficSourceId
              a})
 
 -- | JSONP
-cgCallback :: Lens' CompaniesGet' (Maybe Text)
+cgCallback :: Lens' CompaniesGet (Maybe Text)
 cgCallback
   = lens _cgCallback (\ s a -> s{_cgCallback = a})
 
-instance GoogleRequest CompaniesGet' where
-        type Rs CompaniesGet' = GetCompanyResponse
-        requestClient CompaniesGet'{..}
+instance GoogleRequest CompaniesGet where
+        type Rs CompaniesGet = GetCompanyResponse
+        requestClient CompaniesGet{..}
           = go _cgCompanyId _cgXgafv _cgCurrencyCode
               _cgUploadProtocol
               _cgOrderBy

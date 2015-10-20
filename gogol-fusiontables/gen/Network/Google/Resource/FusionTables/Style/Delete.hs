@@ -29,8 +29,8 @@ module Network.Google.Resource.FusionTables.Style.Delete
       StyleDeleteResource
 
     -- * Creating a Request
-    , styleDelete'
-    , StyleDelete'
+    , styleDelete
+    , StyleDelete
 
     -- * Request Lenses
     , sdStyleId
@@ -41,7 +41,7 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.style.delete@ method which the
--- 'StyleDelete'' request conforms to.
+-- 'StyleDelete' request conforms to.
 type StyleDeleteResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -51,42 +51,42 @@ type StyleDeleteResource =
 
 -- | Deletes a style.
 --
--- /See:/ 'styleDelete'' smart constructor.
-data StyleDelete' = StyleDelete'
+-- /See:/ 'styleDelete' smart constructor.
+data StyleDelete = StyleDelete
     { _sdStyleId :: !Int32
     , _sdTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'StyleDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'StyleDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sdStyleId'
 --
 -- * 'sdTableId'
-styleDelete'
+styleDelete
     :: Int32 -- ^ 'sdStyleId'
     -> Text -- ^ 'sdTableId'
-    -> StyleDelete'
-styleDelete' pSdStyleId_ pSdTableId_ =
-    StyleDelete'
+    -> StyleDelete
+styleDelete pSdStyleId_ pSdTableId_ =
+    StyleDelete
     { _sdStyleId = pSdStyleId_
     , _sdTableId = pSdTableId_
     }
 
 -- | Identifier (within a table) for the style being deleted
-sdStyleId :: Lens' StyleDelete' Int32
+sdStyleId :: Lens' StyleDelete Int32
 sdStyleId
   = lens _sdStyleId (\ s a -> s{_sdStyleId = a})
 
 -- | Table from which the style is being deleted
-sdTableId :: Lens' StyleDelete' Text
+sdTableId :: Lens' StyleDelete Text
 sdTableId
   = lens _sdTableId (\ s a -> s{_sdTableId = a})
 
-instance GoogleRequest StyleDelete' where
-        type Rs StyleDelete' = ()
-        requestClient StyleDelete'{..}
+instance GoogleRequest StyleDelete where
+        type Rs StyleDelete = ()
+        requestClient StyleDelete{..}
           = go _sdTableId _sdStyleId (Just AltJSON)
               fusionTablesService
           where go

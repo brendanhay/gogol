@@ -33,8 +33,8 @@ module Network.Google.Resource.CloudMonitoring.Timeseries.List
       TimeseriesListResource
 
     -- * Creating a Request
-    , timeseriesList'
-    , TimeseriesList'
+    , timeseriesList
+    , TimeseriesList
 
     -- * Request Lenses
     , tlWindow
@@ -54,7 +54,7 @@ import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @cloudmonitoring.timeseries.list@ method which the
--- 'TimeseriesList'' request conforms to.
+-- 'TimeseriesList' request conforms to.
 type TimeseriesListResource =
      Capture "project" Text :>
        "timeseries" :>
@@ -77,8 +77,8 @@ type TimeseriesListResource =
 -- subsequent pages of results by setting the pageToken query parameter to
 -- the value of the nextPageToken.
 --
--- /See:/ 'timeseriesList'' smart constructor.
-data TimeseriesList' = TimeseriesList'
+-- /See:/ 'timeseriesList' smart constructor.
+data TimeseriesList = TimeseriesList
     { _tlWindow     :: !(Maybe Text)
     , _tlProject    :: !Text
     , _tlCount      :: !Int32
@@ -92,7 +92,7 @@ data TimeseriesList' = TimeseriesList'
     , _tlYoungest   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TimeseriesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TimeseriesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -117,14 +117,14 @@ data TimeseriesList' = TimeseriesList'
 -- * 'tlPageToken'
 --
 -- * 'tlYoungest'
-timeseriesList'
+timeseriesList
     :: Text -- ^ 'tlProject'
     -> ListTimeseriesRequest -- ^ 'tlPayload'
     -> Text -- ^ 'tlMetric'
     -> Text -- ^ 'tlYoungest'
-    -> TimeseriesList'
-timeseriesList' pTlProject_ pTlPayload_ pTlMetric_ pTlYoungest_ =
-    TimeseriesList'
+    -> TimeseriesList
+timeseriesList pTlProject_ pTlPayload_ pTlMetric_ pTlYoungest_ =
+    TimeseriesList
     { _tlWindow = Nothing
     , _tlProject = pTlProject_
     , _tlCount = 6000
@@ -143,29 +143,29 @@ timeseriesList' pTlProject_ pTlPayload_ pTlMetric_ pTlYoungest_ =
 -- non-cumulative metric types. Units: - m: minute - h: hour - d: day - w:
 -- week Examples: 3m, 4w. Only one unit is allowed, for example: 2w3d is
 -- not allowed; you should use 17d instead.
-tlWindow :: Lens' TimeseriesList' (Maybe Text)
+tlWindow :: Lens' TimeseriesList (Maybe Text)
 tlWindow = lens _tlWindow (\ s a -> s{_tlWindow = a})
 
 -- | The project ID to which this time series belongs. The value can be the
 -- numeric project ID or string-based project name.
-tlProject :: Lens' TimeseriesList' Text
+tlProject :: Lens' TimeseriesList Text
 tlProject
   = lens _tlProject (\ s a -> s{_tlProject = a})
 
 -- | Maximum number of data points per page, which is used for pagination of
 -- results.
-tlCount :: Lens' TimeseriesList' Int32
+tlCount :: Lens' TimeseriesList Int32
 tlCount = lens _tlCount (\ s a -> s{_tlCount = a})
 
 -- | Multipart request metadata.
-tlPayload :: Lens' TimeseriesList' ListTimeseriesRequest
+tlPayload :: Lens' TimeseriesList ListTimeseriesRequest
 tlPayload
   = lens _tlPayload (\ s a -> s{_tlPayload = a})
 
 -- | The aggregation function that will reduce the data points in each window
 -- to a single point. This parameter is only valid for non-cumulative
 -- metrics with a value type of INT64 or DOUBLE.
-tlAggregator :: Lens' TimeseriesList' (Maybe TimeseriesListAggregator)
+tlAggregator :: Lens' TimeseriesList (Maybe TimeseriesListAggregator)
 tlAggregator
   = lens _tlAggregator (\ s a -> s{_tlAggregator = a})
 
@@ -176,20 +176,20 @@ tlAggregator
 -- is allowed, for example: 2w3d is not allowed; you should use 17d
 -- instead. If neither oldest nor timespan is specified, the default time
 -- interval will be (youngest - 4 hours, youngest].
-tlTimespan :: Lens' TimeseriesList' (Maybe Text)
+tlTimespan :: Lens' TimeseriesList (Maybe Text)
 tlTimespan
   = lens _tlTimespan (\ s a -> s{_tlTimespan = a})
 
 -- | Metric names are protocol-free URLs as listed in the Supported Metrics
 -- page. For example,
 -- compute.googleapis.com\/instance\/disk\/read_ops_count.
-tlMetric :: Lens' TimeseriesList' Text
+tlMetric :: Lens' TimeseriesList Text
 tlMetric = lens _tlMetric (\ s a -> s{_tlMetric = a})
 
 -- | Start of the time interval (exclusive), which is expressed as an RFC
 -- 3339 timestamp. If neither oldest nor timespan is specified, the default
 -- time interval will be (youngest - 4 hours, youngest]
-tlOldest :: Lens' TimeseriesList' (Maybe Text)
+tlOldest :: Lens' TimeseriesList (Maybe Text)
 tlOldest = lens _tlOldest (\ s a -> s{_tlOldest = a})
 
 -- | A collection of labels for the matching time series, which are
@@ -198,7 +198,7 @@ tlOldest = lens _tlOldest (\ s a -> s{_tlOldest = a})
 -- key!~value: key regex does not match the value For example, to list all
 -- of the time series descriptors for the region us-central1, you could
 -- specify: label=cloud.googleapis.com%2Flocation=~us-central1.*
-tlLabels :: Lens' TimeseriesList' [Text]
+tlLabels :: Lens' TimeseriesList [Text]
 tlLabels
   = lens _tlLabels (\ s a -> s{_tlLabels = a}) .
       _Default
@@ -207,19 +207,19 @@ tlLabels
 -- | The pagination token, which is used to page through large result sets.
 -- Set this value to the value of the nextPageToken to retrieve the next
 -- page of results.
-tlPageToken :: Lens' TimeseriesList' (Maybe Text)
+tlPageToken :: Lens' TimeseriesList (Maybe Text)
 tlPageToken
   = lens _tlPageToken (\ s a -> s{_tlPageToken = a})
 
 -- | End of the time interval (inclusive), which is expressed as an RFC 3339
 -- timestamp.
-tlYoungest :: Lens' TimeseriesList' Text
+tlYoungest :: Lens' TimeseriesList Text
 tlYoungest
   = lens _tlYoungest (\ s a -> s{_tlYoungest = a})
 
-instance GoogleRequest TimeseriesList' where
-        type Rs TimeseriesList' = ListTimeseriesResponse
-        requestClient TimeseriesList'{..}
+instance GoogleRequest TimeseriesList where
+        type Rs TimeseriesList = ListTimeseriesResponse
+        requestClient TimeseriesList{..}
           = go _tlProject _tlMetric (Just _tlYoungest)
               _tlWindow
               (Just _tlCount)

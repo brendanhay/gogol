@@ -31,8 +31,8 @@ module Network.Google.Resource.Spectrum.Paws.VerifyDevice
       PawsVerifyDeviceResource
 
     -- * Creating a Request
-    , pawsVerifyDevice'
-    , PawsVerifyDevice'
+    , pawsVerifyDevice
+    , PawsVerifyDevice
 
     -- * Request Lenses
     , pvdPayload
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
 -- | A resource alias for @spectrum.paws.verifyDevice@ method which the
--- 'PawsVerifyDevice'' request conforms to.
+-- 'PawsVerifyDevice' request conforms to.
 type PawsVerifyDeviceResource =
      "verifyDevice" :>
        QueryParam "alt" AltJSON :>
@@ -53,32 +53,32 @@ type PawsVerifyDeviceResource =
 -- rules. The Google Spectrum Database does not support master\/slave
 -- configurations, so this always yields an UNIMPLEMENTED error.
 --
--- /See:/ 'pawsVerifyDevice'' smart constructor.
-newtype PawsVerifyDevice' = PawsVerifyDevice'
+-- /See:/ 'pawsVerifyDevice' smart constructor.
+newtype PawsVerifyDevice = PawsVerifyDevice
     { _pvdPayload :: PawsVerifyDeviceRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PawsVerifyDevice'' with the minimum fields required to make a request.
+-- | Creates a value of 'PawsVerifyDevice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pvdPayload'
-pawsVerifyDevice'
+pawsVerifyDevice
     :: PawsVerifyDeviceRequest -- ^ 'pvdPayload'
-    -> PawsVerifyDevice'
-pawsVerifyDevice' pPvdPayload_ =
-    PawsVerifyDevice'
+    -> PawsVerifyDevice
+pawsVerifyDevice pPvdPayload_ =
+    PawsVerifyDevice
     { _pvdPayload = pPvdPayload_
     }
 
 -- | Multipart request metadata.
-pvdPayload :: Lens' PawsVerifyDevice' PawsVerifyDeviceRequest
+pvdPayload :: Lens' PawsVerifyDevice PawsVerifyDeviceRequest
 pvdPayload
   = lens _pvdPayload (\ s a -> s{_pvdPayload = a})
 
-instance GoogleRequest PawsVerifyDevice' where
-        type Rs PawsVerifyDevice' = PawsVerifyDeviceResponse
-        requestClient PawsVerifyDevice'{..}
+instance GoogleRequest PawsVerifyDevice where
+        type Rs PawsVerifyDevice = PawsVerifyDeviceResponse
+        requestClient PawsVerifyDevice{..}
           = go (Just AltJSON) _pvdPayload spectrumService
           where go
                   = buildClient

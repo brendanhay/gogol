@@ -29,8 +29,8 @@ module Network.Google.Resource.Drive.Apps.Get
       AppsGetResource
 
     -- * Creating a Request
-    , appsGet'
-    , AppsGet'
+    , appsGet
+    , AppsGet
 
     -- * Request Lenses
     , agAppId
@@ -40,7 +40,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.apps.get@ method which the
--- 'AppsGet'' request conforms to.
+-- 'AppsGet' request conforms to.
 type AppsGetResource =
      "apps" :>
        Capture "appId" Text :>
@@ -48,31 +48,31 @@ type AppsGetResource =
 
 -- | Gets a specific app.
 --
--- /See:/ 'appsGet'' smart constructor.
-newtype AppsGet' = AppsGet'
+-- /See:/ 'appsGet' smart constructor.
+newtype AppsGet = AppsGet
     { _agAppId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AppsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AppsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'agAppId'
-appsGet'
+appsGet
     :: Text -- ^ 'agAppId'
-    -> AppsGet'
-appsGet' pAgAppId_ =
-    AppsGet'
+    -> AppsGet
+appsGet pAgAppId_ =
+    AppsGet
     { _agAppId = pAgAppId_
     }
 
 -- | The ID of the app.
-agAppId :: Lens' AppsGet' Text
+agAppId :: Lens' AppsGet Text
 agAppId = lens _agAppId (\ s a -> s{_agAppId = a})
 
-instance GoogleRequest AppsGet' where
-        type Rs AppsGet' = App
-        requestClient AppsGet'{..}
+instance GoogleRequest AppsGet where
+        type Rs AppsGet = App
+        requestClient AppsGet{..}
           = go _agAppId (Just AltJSON) driveService
           where go
                   = buildClient (Proxy :: Proxy AppsGetResource) mempty

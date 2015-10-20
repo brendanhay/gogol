@@ -29,19 +29,19 @@ module Network.Google.Resource.Blogger.Pages.Publish
       PagesPublishResource
 
     -- * Creating a Request
-    , pagesPublish'
-    , PagesPublish'
+    , pagesPublish
+    , PagesPublish
 
     -- * Request Lenses
-    , pppBlogId
-    , pppPageId
+    , pagaBlogId
+    , pagaPageId
     ) where
 
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.pages.publish@ method which the
--- 'PagesPublish'' request conforms to.
+-- 'PagesPublish' request conforms to.
 type PagesPublishResource =
      "blogs" :>
        Capture "blogId" Text :>
@@ -52,43 +52,43 @@ type PagesPublishResource =
 
 -- | Publishes a draft page.
 --
--- /See:/ 'pagesPublish'' smart constructor.
-data PagesPublish' = PagesPublish'
-    { _pppBlogId :: !Text
-    , _pppPageId :: !Text
+-- /See:/ 'pagesPublish' smart constructor.
+data PagesPublish = PagesPublish
+    { _pagaBlogId :: !Text
+    , _pagaPageId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PagesPublish'' with the minimum fields required to make a request.
+-- | Creates a value of 'PagesPublish' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pppBlogId'
+-- * 'pagaBlogId'
 --
--- * 'pppPageId'
-pagesPublish'
-    :: Text -- ^ 'pppBlogId'
-    -> Text -- ^ 'pppPageId'
-    -> PagesPublish'
-pagesPublish' pPppBlogId_ pPppPageId_ =
-    PagesPublish'
-    { _pppBlogId = pPppBlogId_
-    , _pppPageId = pPppPageId_
+-- * 'pagaPageId'
+pagesPublish
+    :: Text -- ^ 'pagaBlogId'
+    -> Text -- ^ 'pagaPageId'
+    -> PagesPublish
+pagesPublish pPagaBlogId_ pPagaPageId_ =
+    PagesPublish
+    { _pagaBlogId = pPagaBlogId_
+    , _pagaPageId = pPagaPageId_
     }
 
 -- | The ID of the blog.
-pppBlogId :: Lens' PagesPublish' Text
-pppBlogId
-  = lens _pppBlogId (\ s a -> s{_pppBlogId = a})
+pagaBlogId :: Lens' PagesPublish Text
+pagaBlogId
+  = lens _pagaBlogId (\ s a -> s{_pagaBlogId = a})
 
 -- | The ID of the page.
-pppPageId :: Lens' PagesPublish' Text
-pppPageId
-  = lens _pppPageId (\ s a -> s{_pppPageId = a})
+pagaPageId :: Lens' PagesPublish Text
+pagaPageId
+  = lens _pagaPageId (\ s a -> s{_pagaPageId = a})
 
-instance GoogleRequest PagesPublish' where
-        type Rs PagesPublish' = Page
-        requestClient PagesPublish'{..}
-          = go _pppBlogId _pppPageId (Just AltJSON)
+instance GoogleRequest PagesPublish where
+        type Rs PagesPublish = Page
+        requestClient PagesPublish{..}
+          = go _pagaBlogId _pagaPageId (Just AltJSON)
               bloggerService
           where go
                   = buildClient (Proxy :: Proxy PagesPublishResource)

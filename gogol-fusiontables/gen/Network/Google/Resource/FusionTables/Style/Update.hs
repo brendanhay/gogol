@@ -29,8 +29,8 @@ module Network.Google.Resource.FusionTables.Style.Update
       StyleUpdateResource
 
     -- * Creating a Request
-    , styleUpdate'
-    , StyleUpdate'
+    , styleUpdate
+    , StyleUpdate
 
     -- * Request Lenses
     , suPayload
@@ -42,7 +42,7 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.style.update@ method which the
--- 'StyleUpdate'' request conforms to.
+-- 'StyleUpdate' request conforms to.
 type StyleUpdateResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -54,14 +54,14 @@ type StyleUpdateResource =
 
 -- | Updates an existing style.
 --
--- /See:/ 'styleUpdate'' smart constructor.
-data StyleUpdate' = StyleUpdate'
+-- /See:/ 'styleUpdate' smart constructor.
+data StyleUpdate = StyleUpdate
     { _suPayload :: !StyleSetting
     , _suStyleId :: !Int32
     , _suTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'StyleUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'StyleUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,36 +70,36 @@ data StyleUpdate' = StyleUpdate'
 -- * 'suStyleId'
 --
 -- * 'suTableId'
-styleUpdate'
+styleUpdate
     :: StyleSetting -- ^ 'suPayload'
     -> Int32 -- ^ 'suStyleId'
     -> Text -- ^ 'suTableId'
-    -> StyleUpdate'
-styleUpdate' pSuPayload_ pSuStyleId_ pSuTableId_ =
-    StyleUpdate'
+    -> StyleUpdate
+styleUpdate pSuPayload_ pSuStyleId_ pSuTableId_ =
+    StyleUpdate
     { _suPayload = pSuPayload_
     , _suStyleId = pSuStyleId_
     , _suTableId = pSuTableId_
     }
 
 -- | Multipart request metadata.
-suPayload :: Lens' StyleUpdate' StyleSetting
+suPayload :: Lens' StyleUpdate StyleSetting
 suPayload
   = lens _suPayload (\ s a -> s{_suPayload = a})
 
 -- | Identifier (within a table) for the style being updated.
-suStyleId :: Lens' StyleUpdate' Int32
+suStyleId :: Lens' StyleUpdate Int32
 suStyleId
   = lens _suStyleId (\ s a -> s{_suStyleId = a})
 
 -- | Table whose style is being updated.
-suTableId :: Lens' StyleUpdate' Text
+suTableId :: Lens' StyleUpdate Text
 suTableId
   = lens _suTableId (\ s a -> s{_suTableId = a})
 
-instance GoogleRequest StyleUpdate' where
-        type Rs StyleUpdate' = StyleSetting
-        requestClient StyleUpdate'{..}
+instance GoogleRequest StyleUpdate where
+        type Rs StyleUpdate = StyleSetting
+        requestClient StyleUpdate{..}
           = go _suTableId _suStyleId (Just AltJSON) _suPayload
               fusionTablesService
           where go

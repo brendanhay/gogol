@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.TargetPools.AggregatedList
       TargetPoolsAggregatedListResource
 
     -- * Creating a Request
-    , targetPoolsAggregatedList'
-    , TargetPoolsAggregatedList'
+    , targetPoolsAggregatedList
+    , TargetPoolsAggregatedList
 
     -- * Request Lenses
     , tpalProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetPools.aggregatedList@ method which the
--- 'TargetPoolsAggregatedList'' request conforms to.
+-- 'TargetPoolsAggregatedList' request conforms to.
 type TargetPoolsAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
@@ -56,15 +56,15 @@ type TargetPoolsAggregatedListResource =
 
 -- | Retrieves the list of target pools grouped by scope.
 --
--- /See:/ 'targetPoolsAggregatedList'' smart constructor.
-data TargetPoolsAggregatedList' = TargetPoolsAggregatedList'
+-- /See:/ 'targetPoolsAggregatedList' smart constructor.
+data TargetPoolsAggregatedList = TargetPoolsAggregatedList
     { _tpalProject    :: !Text
     , _tpalFilter     :: !(Maybe Text)
     , _tpalPageToken  :: !(Maybe Text)
     , _tpalMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetPoolsAggregatedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetPoolsAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,11 +75,11 @@ data TargetPoolsAggregatedList' = TargetPoolsAggregatedList'
 -- * 'tpalPageToken'
 --
 -- * 'tpalMaxResults'
-targetPoolsAggregatedList'
+targetPoolsAggregatedList
     :: Text -- ^ 'tpalProject'
-    -> TargetPoolsAggregatedList'
-targetPoolsAggregatedList' pTpalProject_ =
-    TargetPoolsAggregatedList'
+    -> TargetPoolsAggregatedList
+targetPoolsAggregatedList pTpalProject_ =
+    TargetPoolsAggregatedList
     { _tpalProject = pTpalProject_
     , _tpalFilter = Nothing
     , _tpalPageToken = Nothing
@@ -87,7 +87,7 @@ targetPoolsAggregatedList' pTpalProject_ =
     }
 
 -- | Name of the project scoping this request.
-tpalProject :: Lens' TargetPoolsAggregatedList' Text
+tpalProject :: Lens' TargetPoolsAggregatedList Text
 tpalProject
   = lens _tpalProject (\ s a -> s{_tpalProject = a})
 
@@ -102,29 +102,29 @@ tpalProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-tpalFilter :: Lens' TargetPoolsAggregatedList' (Maybe Text)
+tpalFilter :: Lens' TargetPoolsAggregatedList (Maybe Text)
 tpalFilter
   = lens _tpalFilter (\ s a -> s{_tpalFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-tpalPageToken :: Lens' TargetPoolsAggregatedList' (Maybe Text)
+tpalPageToken :: Lens' TargetPoolsAggregatedList (Maybe Text)
 tpalPageToken
   = lens _tpalPageToken
       (\ s a -> s{_tpalPageToken = a})
 
 -- | Maximum count of results to be returned.
-tpalMaxResults :: Lens' TargetPoolsAggregatedList' Word32
+tpalMaxResults :: Lens' TargetPoolsAggregatedList Word32
 tpalMaxResults
   = lens _tpalMaxResults
       (\ s a -> s{_tpalMaxResults = a})
 
-instance GoogleRequest TargetPoolsAggregatedList'
+instance GoogleRequest TargetPoolsAggregatedList
          where
-        type Rs TargetPoolsAggregatedList' =
+        type Rs TargetPoolsAggregatedList =
              TargetPoolAggregatedList
-        requestClient TargetPoolsAggregatedList'{..}
+        requestClient TargetPoolsAggregatedList{..}
           = go _tpalProject _tpalFilter _tpalPageToken
               (Just _tpalMaxResults)
               (Just AltJSON)

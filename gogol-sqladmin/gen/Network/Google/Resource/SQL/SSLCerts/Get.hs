@@ -31,8 +31,8 @@ module Network.Google.Resource.SQL.SSLCerts.Get
       SSLCertsGetResource
 
     -- * Creating a Request
-    , sslCertsGet'
-    , SSLCertsGet'
+    , sslCertsGet
+    , SSLCertsGet
 
     -- * Request Lenses
     , scgProject
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.sslCerts.get@ method which the
--- 'SSLCertsGet'' request conforms to.
+-- 'SSLCertsGet' request conforms to.
 type SSLCertsGetResource =
      "projects" :>
        Capture "project" Text :>
@@ -58,14 +58,14 @@ type SSLCertsGetResource =
 -- (required for usage). The private key must be saved from the response to
 -- initial creation.
 --
--- /See:/ 'sslCertsGet'' smart constructor.
-data SSLCertsGet' = SSLCertsGet'
+-- /See:/ 'sslCertsGet' smart constructor.
+data SSLCertsGet = SSLCertsGet
     { _scgProject         :: !Text
     , _scgSha1Fingerprint :: !Text
     , _scgInstance        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SSLCertsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'SSLCertsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -74,37 +74,37 @@ data SSLCertsGet' = SSLCertsGet'
 -- * 'scgSha1Fingerprint'
 --
 -- * 'scgInstance'
-sslCertsGet'
+sslCertsGet
     :: Text -- ^ 'scgProject'
     -> Text -- ^ 'scgSha1Fingerprint'
     -> Text -- ^ 'scgInstance'
-    -> SSLCertsGet'
-sslCertsGet' pScgProject_ pScgSha1Fingerprint_ pScgInstance_ =
-    SSLCertsGet'
+    -> SSLCertsGet
+sslCertsGet pScgProject_ pScgSha1Fingerprint_ pScgInstance_ =
+    SSLCertsGet
     { _scgProject = pScgProject_
     , _scgSha1Fingerprint = pScgSha1Fingerprint_
     , _scgInstance = pScgInstance_
     }
 
 -- | Project ID of the project that contains the instance.
-scgProject :: Lens' SSLCertsGet' Text
+scgProject :: Lens' SSLCertsGet Text
 scgProject
   = lens _scgProject (\ s a -> s{_scgProject = a})
 
 -- | Sha1 FingerPrint.
-scgSha1Fingerprint :: Lens' SSLCertsGet' Text
+scgSha1Fingerprint :: Lens' SSLCertsGet Text
 scgSha1Fingerprint
   = lens _scgSha1Fingerprint
       (\ s a -> s{_scgSha1Fingerprint = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-scgInstance :: Lens' SSLCertsGet' Text
+scgInstance :: Lens' SSLCertsGet Text
 scgInstance
   = lens _scgInstance (\ s a -> s{_scgInstance = a})
 
-instance GoogleRequest SSLCertsGet' where
-        type Rs SSLCertsGet' = SSLCert
-        requestClient SSLCertsGet'{..}
+instance GoogleRequest SSLCertsGet where
+        type Rs SSLCertsGet = SSLCert
+        requestClient SSLCertsGet{..}
           = go _scgProject _scgInstance _scgSha1Fingerprint
               (Just AltJSON)
               sQLAdminService

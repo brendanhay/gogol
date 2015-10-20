@@ -31,8 +31,8 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
       ProjectsZonesClustersDeleteResource
 
     -- * Creating a Request
-    , projectsZonesClustersDelete'
-    , ProjectsZonesClustersDelete'
+    , projectsZonesClustersDelete
+    , ProjectsZonesClustersDelete
 
     -- * Request Lenses
     , pzcdXgafv
@@ -51,7 +51,7 @@ import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.clusters.delete@ method which the
--- 'ProjectsZonesClustersDelete'' request conforms to.
+-- 'ProjectsZonesClustersDelete' request conforms to.
 type ProjectsZonesClustersDeleteResource =
      "v1" :>
        "projects" :>
@@ -74,8 +74,8 @@ type ProjectsZonesClustersDeleteResource =
 -- nodes. Firewalls and routes that were configured during cluster creation
 -- are also deleted.
 --
--- /See:/ 'projectsZonesClustersDelete'' smart constructor.
-data ProjectsZonesClustersDelete' = ProjectsZonesClustersDelete'
+-- /See:/ 'projectsZonesClustersDelete' smart constructor.
+data ProjectsZonesClustersDelete = ProjectsZonesClustersDelete
     { _pzcdXgafv          :: !(Maybe Text)
     , _pzcdUploadProtocol :: !(Maybe Text)
     , _pzcdPp             :: !Bool
@@ -88,7 +88,7 @@ data ProjectsZonesClustersDelete' = ProjectsZonesClustersDelete'
     , _pzcdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsZonesClustersDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsZonesClustersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -111,13 +111,13 @@ data ProjectsZonesClustersDelete' = ProjectsZonesClustersDelete'
 -- * 'pzcdProjectId'
 --
 -- * 'pzcdCallback'
-projectsZonesClustersDelete'
+projectsZonesClustersDelete
     :: Text -- ^ 'pzcdZone'
     -> Text -- ^ 'pzcdClusterId'
     -> Text -- ^ 'pzcdProjectId'
-    -> ProjectsZonesClustersDelete'
-projectsZonesClustersDelete' pPzcdZone_ pPzcdClusterId_ pPzcdProjectId_ =
-    ProjectsZonesClustersDelete'
+    -> ProjectsZonesClustersDelete
+projectsZonesClustersDelete pPzcdZone_ pPzcdClusterId_ pPzcdProjectId_ =
+    ProjectsZonesClustersDelete
     { _pzcdXgafv = Nothing
     , _pzcdUploadProtocol = Nothing
     , _pzcdPp = True
@@ -131,65 +131,65 @@ projectsZonesClustersDelete' pPzcdZone_ pPzcdClusterId_ pPzcdProjectId_ =
     }
 
 -- | V1 error format.
-pzcdXgafv :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
+pzcdXgafv :: Lens' ProjectsZonesClustersDelete (Maybe Text)
 pzcdXgafv
   = lens _pzcdXgafv (\ s a -> s{_pzcdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pzcdUploadProtocol :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
+pzcdUploadProtocol :: Lens' ProjectsZonesClustersDelete (Maybe Text)
 pzcdUploadProtocol
   = lens _pzcdUploadProtocol
       (\ s a -> s{_pzcdUploadProtocol = a})
 
 -- | Pretty-print response.
-pzcdPp :: Lens' ProjectsZonesClustersDelete' Bool
+pzcdPp :: Lens' ProjectsZonesClustersDelete Bool
 pzcdPp = lens _pzcdPp (\ s a -> s{_pzcdPp = a})
 
 -- | OAuth access token.
-pzcdAccessToken :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
+pzcdAccessToken :: Lens' ProjectsZonesClustersDelete (Maybe Text)
 pzcdAccessToken
   = lens _pzcdAccessToken
       (\ s a -> s{_pzcdAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pzcdUploadType :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
+pzcdUploadType :: Lens' ProjectsZonesClustersDelete (Maybe Text)
 pzcdUploadType
   = lens _pzcdUploadType
       (\ s a -> s{_pzcdUploadType = a})
 
 -- | The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) in which the cluster resides.
-pzcdZone :: Lens' ProjectsZonesClustersDelete' Text
+pzcdZone :: Lens' ProjectsZonesClustersDelete Text
 pzcdZone = lens _pzcdZone (\ s a -> s{_pzcdZone = a})
 
 -- | OAuth bearer token.
-pzcdBearerToken :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
+pzcdBearerToken :: Lens' ProjectsZonesClustersDelete (Maybe Text)
 pzcdBearerToken
   = lens _pzcdBearerToken
       (\ s a -> s{_pzcdBearerToken = a})
 
 -- | The name of the cluster to delete.
-pzcdClusterId :: Lens' ProjectsZonesClustersDelete' Text
+pzcdClusterId :: Lens' ProjectsZonesClustersDelete Text
 pzcdClusterId
   = lens _pzcdClusterId
       (\ s a -> s{_pzcdClusterId = a})
 
 -- | The Google Developers Console [project ID or project
 -- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
-pzcdProjectId :: Lens' ProjectsZonesClustersDelete' Text
+pzcdProjectId :: Lens' ProjectsZonesClustersDelete Text
 pzcdProjectId
   = lens _pzcdProjectId
       (\ s a -> s{_pzcdProjectId = a})
 
 -- | JSONP
-pzcdCallback :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
+pzcdCallback :: Lens' ProjectsZonesClustersDelete (Maybe Text)
 pzcdCallback
   = lens _pzcdCallback (\ s a -> s{_pzcdCallback = a})
 
-instance GoogleRequest ProjectsZonesClustersDelete'
+instance GoogleRequest ProjectsZonesClustersDelete
          where
-        type Rs ProjectsZonesClustersDelete' = Operation
-        requestClient ProjectsZonesClustersDelete'{..}
+        type Rs ProjectsZonesClustersDelete = Operation
+        requestClient ProjectsZonesClustersDelete{..}
           = go _pzcdProjectId _pzcdZone _pzcdClusterId
               _pzcdXgafv
               _pzcdUploadProtocol

@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Rasters.Permissions.List
       RastersPermissionsListResource
 
     -- * Creating a Request
-    , rastersPermissionsList'
-    , RastersPermissionsList'
+    , rastersPermissionsList
+    , RastersPermissionsList
 
     -- * Request Lenses
     , rplId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasters.permissions.list@ method which the
--- 'RastersPermissionsList'' request conforms to.
+-- 'RastersPermissionsList' request conforms to.
 type RastersPermissionsListResource =
      "rasters" :>
        Capture "id" Text :>
@@ -50,32 +50,32 @@ type RastersPermissionsListResource =
 
 -- | Return all of the permissions for the specified asset.
 --
--- /See:/ 'rastersPermissionsList'' smart constructor.
-newtype RastersPermissionsList' = RastersPermissionsList'
+-- /See:/ 'rastersPermissionsList' smart constructor.
+newtype RastersPermissionsList = RastersPermissionsList
     { _rplId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RastersPermissionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'RastersPermissionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rplId'
-rastersPermissionsList'
+rastersPermissionsList
     :: Text -- ^ 'rplId'
-    -> RastersPermissionsList'
-rastersPermissionsList' pRplId_ =
-    RastersPermissionsList'
+    -> RastersPermissionsList
+rastersPermissionsList pRplId_ =
+    RastersPermissionsList
     { _rplId = pRplId_
     }
 
 -- | The ID of the asset whose permissions will be listed.
-rplId :: Lens' RastersPermissionsList' Text
+rplId :: Lens' RastersPermissionsList Text
 rplId = lens _rplId (\ s a -> s{_rplId = a})
 
-instance GoogleRequest RastersPermissionsList' where
-        type Rs RastersPermissionsList' =
+instance GoogleRequest RastersPermissionsList where
+        type Rs RastersPermissionsList =
              PermissionsListResponse
-        requestClient RastersPermissionsList'{..}
+        requestClient RastersPermissionsList{..}
           = go _rplId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

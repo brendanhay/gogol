@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Advertisers.Insert
       AdvertisersInsertResource
 
     -- * Creating a Request
-    , advertisersInsert'
-    , AdvertisersInsert'
+    , advertisersInsert
+    , AdvertisersInsert
 
     -- * Request Lenses
     , aiiProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.advertisers.insert@ method which the
--- 'AdvertisersInsert'' request conforms to.
+-- 'AdvertisersInsert' request conforms to.
 type AdvertisersInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type AdvertisersInsertResource =
 
 -- | Inserts a new advertiser.
 --
--- /See:/ 'advertisersInsert'' smart constructor.
-data AdvertisersInsert' = AdvertisersInsert'
+-- /See:/ 'advertisersInsert' smart constructor.
+data AdvertisersInsert = AdvertisersInsert
     { _aiiProFileId :: !Int64
     , _aiiPayload   :: !Advertiser
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AdvertisersInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'AdvertisersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aiiProFileId'
 --
 -- * 'aiiPayload'
-advertisersInsert'
+advertisersInsert
     :: Int64 -- ^ 'aiiProFileId'
     -> Advertiser -- ^ 'aiiPayload'
-    -> AdvertisersInsert'
-advertisersInsert' pAiiProFileId_ pAiiPayload_ =
-    AdvertisersInsert'
+    -> AdvertisersInsert
+advertisersInsert pAiiProFileId_ pAiiPayload_ =
+    AdvertisersInsert
     { _aiiProFileId = pAiiProFileId_
     , _aiiPayload = pAiiPayload_
     }
 
 -- | User profile ID associated with this request.
-aiiProFileId :: Lens' AdvertisersInsert' Int64
+aiiProFileId :: Lens' AdvertisersInsert Int64
 aiiProFileId
   = lens _aiiProFileId (\ s a -> s{_aiiProFileId = a})
 
 -- | Multipart request metadata.
-aiiPayload :: Lens' AdvertisersInsert' Advertiser
+aiiPayload :: Lens' AdvertisersInsert Advertiser
 aiiPayload
   = lens _aiiPayload (\ s a -> s{_aiiPayload = a})
 
-instance GoogleRequest AdvertisersInsert' where
-        type Rs AdvertisersInsert' = Advertiser
-        requestClient AdvertisersInsert'{..}
+instance GoogleRequest AdvertisersInsert where
+        type Rs AdvertisersInsert = Advertiser
+        requestClient AdvertisersInsert{..}
           = go _aiiProFileId (Just AltJSON) _aiiPayload
               dFAReportingService
           where go

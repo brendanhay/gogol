@@ -29,8 +29,8 @@ module Network.Google.Resource.IdentityToolkit.RelyingParty.GetPublicKeys
       RelyingPartyGetPublicKeysResource
 
     -- * Creating a Request
-    , relyingPartyGetPublicKeys'
-    , RelyingPartyGetPublicKeys'
+    , relyingPartyGetPublicKeys
+    , RelyingPartyGetPublicKeys
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @identitytoolkit.relyingparty.getPublicKeys@ method which the
--- 'RelyingPartyGetPublicKeys'' request conforms to.
+-- 'RelyingPartyGetPublicKeys' request conforms to.
 type RelyingPartyGetPublicKeysResource =
      "publicKeys" :>
        QueryParam "alt" AltJSON :>
@@ -47,22 +47,22 @@ type RelyingPartyGetPublicKeysResource =
 
 -- | Get token signing public key.
 --
--- /See:/ 'relyingPartyGetPublicKeys'' smart constructor.
-data RelyingPartyGetPublicKeys' =
-    RelyingPartyGetPublicKeys'
+-- /See:/ 'relyingPartyGetPublicKeys' smart constructor.
+data RelyingPartyGetPublicKeys =
+    RelyingPartyGetPublicKeys
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RelyingPartyGetPublicKeys'' with the minimum fields required to make a request.
+-- | Creates a value of 'RelyingPartyGetPublicKeys' with the minimum fields required to make a request.
 --
-relyingPartyGetPublicKeys'
-    :: RelyingPartyGetPublicKeys'
-relyingPartyGetPublicKeys' = RelyingPartyGetPublicKeys'
+relyingPartyGetPublicKeys
+    :: RelyingPartyGetPublicKeys
+relyingPartyGetPublicKeys = RelyingPartyGetPublicKeys
 
-instance GoogleRequest RelyingPartyGetPublicKeys'
+instance GoogleRequest RelyingPartyGetPublicKeys
          where
-        type Rs RelyingPartyGetPublicKeys' =
+        type Rs RelyingPartyGetPublicKeys =
              IdentitytoolkitRelyingPartyGetPublicKeysResponse
-        requestClient RelyingPartyGetPublicKeys'{}
+        requestClient RelyingPartyGetPublicKeys{}
           = go (Just AltJSON) identityToolkitService
           where go
                   = buildClient

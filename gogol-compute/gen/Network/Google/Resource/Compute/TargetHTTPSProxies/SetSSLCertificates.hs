@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.TargetHTTPSProxies.SetSSLCertificates
       TargetHTTPSProxiesSetSSLCertificatesResource
 
     -- * Creating a Request
-    , targetHTTPSProxiesSetSSLCertificates'
-    , TargetHTTPSProxiesSetSSLCertificates'
+    , targetHTTPSProxiesSetSSLCertificates
+    , TargetHTTPSProxiesSetSSLCertificates
 
     -- * Request Lenses
     , thpsscProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.targetHttpsProxies.setSslCertificates@ method which the
--- 'TargetHTTPSProxiesSetSSLCertificates'' request conforms to.
+-- 'TargetHTTPSProxiesSetSSLCertificates' request conforms to.
 type TargetHTTPSProxiesSetSSLCertificatesResource =
      Capture "project" Text :>
        "targetHttpsProxies" :>
@@ -55,14 +55,14 @@ type TargetHTTPSProxiesSetSSLCertificatesResource =
 
 -- | Replaces SslCertificates for TargetHttpsProxy.
 --
--- /See:/ 'targetHTTPSProxiesSetSSLCertificates'' smart constructor.
-data TargetHTTPSProxiesSetSSLCertificates' = TargetHTTPSProxiesSetSSLCertificates'
+-- /See:/ 'targetHTTPSProxiesSetSSLCertificates' smart constructor.
+data TargetHTTPSProxiesSetSSLCertificates = TargetHTTPSProxiesSetSSLCertificates
     { _thpsscProject          :: !Text
     , _thpsscPayload          :: !TargetHTTPSProxiesSetSSLCertificatesRequest
     , _thpsscTargetHTTPSProxy :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TargetHTTPSProxiesSetSSLCertificates'' with the minimum fields required to make a request.
+-- | Creates a value of 'TargetHTTPSProxiesSetSSLCertificates' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -71,42 +71,42 @@ data TargetHTTPSProxiesSetSSLCertificates' = TargetHTTPSProxiesSetSSLCertificate
 -- * 'thpsscPayload'
 --
 -- * 'thpsscTargetHTTPSProxy'
-targetHTTPSProxiesSetSSLCertificates'
+targetHTTPSProxiesSetSSLCertificates
     :: Text -- ^ 'thpsscProject'
     -> TargetHTTPSProxiesSetSSLCertificatesRequest -- ^ 'thpsscPayload'
     -> Text -- ^ 'thpsscTargetHTTPSProxy'
-    -> TargetHTTPSProxiesSetSSLCertificates'
-targetHTTPSProxiesSetSSLCertificates' pThpsscProject_ pThpsscPayload_ pThpsscTargetHTTPSProxy_ =
-    TargetHTTPSProxiesSetSSLCertificates'
+    -> TargetHTTPSProxiesSetSSLCertificates
+targetHTTPSProxiesSetSSLCertificates pThpsscProject_ pThpsscPayload_ pThpsscTargetHTTPSProxy_ =
+    TargetHTTPSProxiesSetSSLCertificates
     { _thpsscProject = pThpsscProject_
     , _thpsscPayload = pThpsscPayload_
     , _thpsscTargetHTTPSProxy = pThpsscTargetHTTPSProxy_
     }
 
 -- | Name of the project scoping this request.
-thpsscProject :: Lens' TargetHTTPSProxiesSetSSLCertificates' Text
+thpsscProject :: Lens' TargetHTTPSProxiesSetSSLCertificates Text
 thpsscProject
   = lens _thpsscProject
       (\ s a -> s{_thpsscProject = a})
 
 -- | Multipart request metadata.
-thpsscPayload :: Lens' TargetHTTPSProxiesSetSSLCertificates' TargetHTTPSProxiesSetSSLCertificatesRequest
+thpsscPayload :: Lens' TargetHTTPSProxiesSetSSLCertificates TargetHTTPSProxiesSetSSLCertificatesRequest
 thpsscPayload
   = lens _thpsscPayload
       (\ s a -> s{_thpsscPayload = a})
 
 -- | Name of the TargetHttpsProxy resource whose URL map is to be set.
-thpsscTargetHTTPSProxy :: Lens' TargetHTTPSProxiesSetSSLCertificates' Text
+thpsscTargetHTTPSProxy :: Lens' TargetHTTPSProxiesSetSSLCertificates Text
 thpsscTargetHTTPSProxy
   = lens _thpsscTargetHTTPSProxy
       (\ s a -> s{_thpsscTargetHTTPSProxy = a})
 
 instance GoogleRequest
-         TargetHTTPSProxiesSetSSLCertificates' where
-        type Rs TargetHTTPSProxiesSetSSLCertificates' =
+         TargetHTTPSProxiesSetSSLCertificates where
+        type Rs TargetHTTPSProxiesSetSSLCertificates =
              Operation
         requestClient
-          TargetHTTPSProxiesSetSSLCertificates'{..}
+          TargetHTTPSProxiesSetSSLCertificates{..}
           = go _thpsscProject _thpsscTargetHTTPSProxy
               (Just AltJSON)
               _thpsscPayload

@@ -29,8 +29,8 @@ module Network.Google.Resource.Prediction.TrainedModels.List
       TrainedModelsListResource
 
     -- * Creating a Request
-    , trainedModelsList'
-    , TrainedModelsList'
+    , trainedModelsList
+    , TrainedModelsList
 
     -- * Request Lenses
     , tmlProject
@@ -42,7 +42,7 @@ import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @prediction.trainedmodels.list@ method which the
--- 'TrainedModelsList'' request conforms to.
+-- 'TrainedModelsList' request conforms to.
 type TrainedModelsListResource =
      Capture "project" Text :>
        "trainedmodels" :>
@@ -53,14 +53,14 @@ type TrainedModelsListResource =
 
 -- | List available models.
 --
--- /See:/ 'trainedModelsList'' smart constructor.
-data TrainedModelsList' = TrainedModelsList'
+-- /See:/ 'trainedModelsList' smart constructor.
+data TrainedModelsList = TrainedModelsList
     { _tmlProject    :: !Text
     , _tmlPageToken  :: !(Maybe Text)
     , _tmlMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TrainedModelsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'TrainedModelsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data TrainedModelsList' = TrainedModelsList'
 -- * 'tmlPageToken'
 --
 -- * 'tmlMaxResults'
-trainedModelsList'
+trainedModelsList
     :: Text -- ^ 'tmlProject'
-    -> TrainedModelsList'
-trainedModelsList' pTmlProject_ =
-    TrainedModelsList'
+    -> TrainedModelsList
+trainedModelsList pTmlProject_ =
+    TrainedModelsList
     { _tmlProject = pTmlProject_
     , _tmlPageToken = Nothing
     , _tmlMaxResults = Nothing
     }
 
 -- | The project associated with the model.
-tmlProject :: Lens' TrainedModelsList' Text
+tmlProject :: Lens' TrainedModelsList Text
 tmlProject
   = lens _tmlProject (\ s a -> s{_tmlProject = a})
 
 -- | Pagination token.
-tmlPageToken :: Lens' TrainedModelsList' (Maybe Text)
+tmlPageToken :: Lens' TrainedModelsList (Maybe Text)
 tmlPageToken
   = lens _tmlPageToken (\ s a -> s{_tmlPageToken = a})
 
 -- | Maximum number of results to return.
-tmlMaxResults :: Lens' TrainedModelsList' (Maybe Word32)
+tmlMaxResults :: Lens' TrainedModelsList (Maybe Word32)
 tmlMaxResults
   = lens _tmlMaxResults
       (\ s a -> s{_tmlMaxResults = a})
 
-instance GoogleRequest TrainedModelsList' where
-        type Rs TrainedModelsList' = List
-        requestClient TrainedModelsList'{..}
+instance GoogleRequest TrainedModelsList where
+        type Rs TrainedModelsList = List
+        requestClient TrainedModelsList{..}
           = go _tmlProject _tmlPageToken _tmlMaxResults
               (Just AltJSON)
               predictionService

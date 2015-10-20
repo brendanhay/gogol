@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Instances.AggregatedList
       InstancesAggregatedListResource
 
     -- * Creating a Request
-    , instancesAggregatedList'
-    , InstancesAggregatedList'
+    , instancesAggregatedList
+    , InstancesAggregatedList
 
     -- * Request Lenses
     , ialProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instances.aggregatedList@ method which the
--- 'InstancesAggregatedList'' request conforms to.
+-- 'InstancesAggregatedList' request conforms to.
 type InstancesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
@@ -56,15 +56,15 @@ type InstancesAggregatedListResource =
 
 -- | Retrieves aggregated list of instance resources.
 --
--- /See:/ 'instancesAggregatedList'' smart constructor.
-data InstancesAggregatedList' = InstancesAggregatedList'
+-- /See:/ 'instancesAggregatedList' smart constructor.
+data InstancesAggregatedList = InstancesAggregatedList
     { _ialProject    :: !Text
     , _ialFilter     :: !(Maybe Text)
     , _ialPageToken  :: !(Maybe Text)
     , _ialMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstancesAggregatedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstancesAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,11 +75,11 @@ data InstancesAggregatedList' = InstancesAggregatedList'
 -- * 'ialPageToken'
 --
 -- * 'ialMaxResults'
-instancesAggregatedList'
+instancesAggregatedList
     :: Text -- ^ 'ialProject'
-    -> InstancesAggregatedList'
-instancesAggregatedList' pIalProject_ =
-    InstancesAggregatedList'
+    -> InstancesAggregatedList
+instancesAggregatedList pIalProject_ =
+    InstancesAggregatedList
     { _ialProject = pIalProject_
     , _ialFilter = Nothing
     , _ialPageToken = Nothing
@@ -87,7 +87,7 @@ instancesAggregatedList' pIalProject_ =
     }
 
 -- | Project ID for this request.
-ialProject :: Lens' InstancesAggregatedList' Text
+ialProject :: Lens' InstancesAggregatedList Text
 ialProject
   = lens _ialProject (\ s a -> s{_ialProject = a})
 
@@ -102,27 +102,27 @@ ialProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-ialFilter :: Lens' InstancesAggregatedList' (Maybe Text)
+ialFilter :: Lens' InstancesAggregatedList (Maybe Text)
 ialFilter
   = lens _ialFilter (\ s a -> s{_ialFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-ialPageToken :: Lens' InstancesAggregatedList' (Maybe Text)
+ialPageToken :: Lens' InstancesAggregatedList (Maybe Text)
 ialPageToken
   = lens _ialPageToken (\ s a -> s{_ialPageToken = a})
 
 -- | Maximum count of results to be returned.
-ialMaxResults :: Lens' InstancesAggregatedList' Word32
+ialMaxResults :: Lens' InstancesAggregatedList Word32
 ialMaxResults
   = lens _ialMaxResults
       (\ s a -> s{_ialMaxResults = a})
 
-instance GoogleRequest InstancesAggregatedList' where
-        type Rs InstancesAggregatedList' =
+instance GoogleRequest InstancesAggregatedList where
+        type Rs InstancesAggregatedList =
              InstanceAggregatedList
-        requestClient InstancesAggregatedList'{..}
+        requestClient InstancesAggregatedList{..}
           = go _ialProject _ialFilter _ialPageToken
               (Just _ialMaxResults)
               (Just AltJSON)

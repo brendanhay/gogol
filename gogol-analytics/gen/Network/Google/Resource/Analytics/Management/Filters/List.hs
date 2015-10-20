@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.Filters.List
       ManagementFiltersListResource
 
     -- * Creating a Request
-    , managementFiltersList'
-    , ManagementFiltersList'
+    , managementFiltersList
+    , ManagementFiltersList
 
     -- * Request Lenses
     , mflAccountId
@@ -42,7 +42,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.filters.list@ method which the
--- 'ManagementFiltersList'' request conforms to.
+-- 'ManagementFiltersList' request conforms to.
 type ManagementFiltersListResource =
      "management" :>
        "accounts" :>
@@ -54,14 +54,14 @@ type ManagementFiltersListResource =
 
 -- | Lists all filters for an account
 --
--- /See:/ 'managementFiltersList'' smart constructor.
-data ManagementFiltersList' = ManagementFiltersList'
+-- /See:/ 'managementFiltersList' smart constructor.
+data ManagementFiltersList = ManagementFiltersList
     { _mflAccountId  :: !Text
     , _mflStartIndex :: !(Maybe Int32)
     , _mflMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementFiltersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementFiltersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,37 +70,37 @@ data ManagementFiltersList' = ManagementFiltersList'
 -- * 'mflStartIndex'
 --
 -- * 'mflMaxResults'
-managementFiltersList'
+managementFiltersList
     :: Text -- ^ 'mflAccountId'
-    -> ManagementFiltersList'
-managementFiltersList' pMflAccountId_ =
-    ManagementFiltersList'
+    -> ManagementFiltersList
+managementFiltersList pMflAccountId_ =
+    ManagementFiltersList
     { _mflAccountId = pMflAccountId_
     , _mflStartIndex = Nothing
     , _mflMaxResults = Nothing
     }
 
 -- | Account ID to retrieve filters for.
-mflAccountId :: Lens' ManagementFiltersList' Text
+mflAccountId :: Lens' ManagementFiltersList Text
 mflAccountId
   = lens _mflAccountId (\ s a -> s{_mflAccountId = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
-mflStartIndex :: Lens' ManagementFiltersList' (Maybe Int32)
+mflStartIndex :: Lens' ManagementFiltersList (Maybe Int32)
 mflStartIndex
   = lens _mflStartIndex
       (\ s a -> s{_mflStartIndex = a})
 
 -- | The maximum number of filters to include in this response.
-mflMaxResults :: Lens' ManagementFiltersList' (Maybe Int32)
+mflMaxResults :: Lens' ManagementFiltersList (Maybe Int32)
 mflMaxResults
   = lens _mflMaxResults
       (\ s a -> s{_mflMaxResults = a})
 
-instance GoogleRequest ManagementFiltersList' where
-        type Rs ManagementFiltersList' = Filters
-        requestClient ManagementFiltersList'{..}
+instance GoogleRequest ManagementFiltersList where
+        type Rs ManagementFiltersList = Filters
+        requestClient ManagementFiltersList{..}
           = go _mflAccountId _mflStartIndex _mflMaxResults
               (Just AltJSON)
               analyticsService

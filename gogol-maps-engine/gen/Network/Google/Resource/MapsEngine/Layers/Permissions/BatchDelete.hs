@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Layers.Permissions.BatchDelete
       LayersPermissionsBatchDeleteResource
 
     -- * Creating a Request
-    , layersPermissionsBatchDelete'
-    , LayersPermissionsBatchDelete'
+    , layersPermissionsBatchDelete
+    , LayersPermissionsBatchDelete
 
     -- * Request Lenses
     , lpbdPayload
@@ -41,7 +41,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.layers.permissions.batchDelete@ method which the
--- 'LayersPermissionsBatchDelete'' request conforms to.
+-- 'LayersPermissionsBatchDelete' request conforms to.
 type LayersPermissionsBatchDeleteResource =
      "layers" :>
        Capture "id" Text :>
@@ -53,43 +53,43 @@ type LayersPermissionsBatchDeleteResource =
 
 -- | Remove permission entries from an already existing asset.
 --
--- /See:/ 'layersPermissionsBatchDelete'' smart constructor.
-data LayersPermissionsBatchDelete' = LayersPermissionsBatchDelete'
+-- /See:/ 'layersPermissionsBatchDelete' smart constructor.
+data LayersPermissionsBatchDelete = LayersPermissionsBatchDelete
     { _lpbdPayload :: !PermissionsBatchDeleteRequest
     , _lpbdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LayersPermissionsBatchDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'LayersPermissionsBatchDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lpbdPayload'
 --
 -- * 'lpbdId'
-layersPermissionsBatchDelete'
+layersPermissionsBatchDelete
     :: PermissionsBatchDeleteRequest -- ^ 'lpbdPayload'
     -> Text -- ^ 'lpbdId'
-    -> LayersPermissionsBatchDelete'
-layersPermissionsBatchDelete' pLpbdPayload_ pLpbdId_ =
-    LayersPermissionsBatchDelete'
+    -> LayersPermissionsBatchDelete
+layersPermissionsBatchDelete pLpbdPayload_ pLpbdId_ =
+    LayersPermissionsBatchDelete
     { _lpbdPayload = pLpbdPayload_
     , _lpbdId = pLpbdId_
     }
 
 -- | Multipart request metadata.
-lpbdPayload :: Lens' LayersPermissionsBatchDelete' PermissionsBatchDeleteRequest
+lpbdPayload :: Lens' LayersPermissionsBatchDelete PermissionsBatchDeleteRequest
 lpbdPayload
   = lens _lpbdPayload (\ s a -> s{_lpbdPayload = a})
 
 -- | The ID of the asset from which permissions will be removed.
-lpbdId :: Lens' LayersPermissionsBatchDelete' Text
+lpbdId :: Lens' LayersPermissionsBatchDelete Text
 lpbdId = lens _lpbdId (\ s a -> s{_lpbdId = a})
 
-instance GoogleRequest LayersPermissionsBatchDelete'
+instance GoogleRequest LayersPermissionsBatchDelete
          where
-        type Rs LayersPermissionsBatchDelete' =
+        type Rs LayersPermissionsBatchDelete =
              PermissionsBatchDeleteResponse
-        requestClient LayersPermissionsBatchDelete'{..}
+        requestClient LayersPermissionsBatchDelete{..}
           = go _lpbdId (Just AltJSON) _lpbdPayload
               mapsEngineService
           where go

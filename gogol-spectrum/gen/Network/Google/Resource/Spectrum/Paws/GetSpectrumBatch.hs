@@ -30,8 +30,8 @@ module Network.Google.Resource.Spectrum.Paws.GetSpectrumBatch
       PawsGetSpectrumBatchResource
 
     -- * Creating a Request
-    , pawsGetSpectrumBatch'
-    , PawsGetSpectrumBatch'
+    , pawsGetSpectrumBatch
+    , PawsGetSpectrumBatch
 
     -- * Request Lenses
     , pgsbPayload
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
 -- | A resource alias for @spectrum.paws.getSpectrumBatch@ method which the
--- 'PawsGetSpectrumBatch'' request conforms to.
+-- 'PawsGetSpectrumBatch' request conforms to.
 type PawsGetSpectrumBatchResource =
      "getSpectrumBatch" :>
        QueryParam "alt" AltJSON :>
@@ -51,33 +51,33 @@ type PawsGetSpectrumBatchResource =
 -- | The Google Spectrum Database does not support batch requests, so this
 -- method always yields an UNIMPLEMENTED error.
 --
--- /See:/ 'pawsGetSpectrumBatch'' smart constructor.
-newtype PawsGetSpectrumBatch' = PawsGetSpectrumBatch'
+-- /See:/ 'pawsGetSpectrumBatch' smart constructor.
+newtype PawsGetSpectrumBatch = PawsGetSpectrumBatch
     { _pgsbPayload :: PawsGetSpectrumBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PawsGetSpectrumBatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'PawsGetSpectrumBatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pgsbPayload'
-pawsGetSpectrumBatch'
+pawsGetSpectrumBatch
     :: PawsGetSpectrumBatchRequest -- ^ 'pgsbPayload'
-    -> PawsGetSpectrumBatch'
-pawsGetSpectrumBatch' pPgsbPayload_ =
-    PawsGetSpectrumBatch'
+    -> PawsGetSpectrumBatch
+pawsGetSpectrumBatch pPgsbPayload_ =
+    PawsGetSpectrumBatch
     { _pgsbPayload = pPgsbPayload_
     }
 
 -- | Multipart request metadata.
-pgsbPayload :: Lens' PawsGetSpectrumBatch' PawsGetSpectrumBatchRequest
+pgsbPayload :: Lens' PawsGetSpectrumBatch PawsGetSpectrumBatchRequest
 pgsbPayload
   = lens _pgsbPayload (\ s a -> s{_pgsbPayload = a})
 
-instance GoogleRequest PawsGetSpectrumBatch' where
-        type Rs PawsGetSpectrumBatch' =
+instance GoogleRequest PawsGetSpectrumBatch where
+        type Rs PawsGetSpectrumBatch =
              PawsGetSpectrumBatchResponse
-        requestClient PawsGetSpectrumBatch'{..}
+        requestClient PawsGetSpectrumBatch{..}
           = go (Just AltJSON) _pgsbPayload spectrumService
           where go
                   = buildClient

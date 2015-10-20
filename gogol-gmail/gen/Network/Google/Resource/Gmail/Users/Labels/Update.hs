@@ -29,8 +29,8 @@ module Network.Google.Resource.Gmail.Users.Labels.Update
       UsersLabelsUpdateResource
 
     -- * Creating a Request
-    , usersLabelsUpdate'
-    , UsersLabelsUpdate'
+    , usersLabelsUpdate
+    , UsersLabelsUpdate
 
     -- * Request Lenses
     , uluPayload
@@ -42,7 +42,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.labels.update@ method which the
--- 'UsersLabelsUpdate'' request conforms to.
+-- 'UsersLabelsUpdate' request conforms to.
 type UsersLabelsUpdateResource =
      Capture "userId" Text :>
        "labels" :>
@@ -52,14 +52,14 @@ type UsersLabelsUpdateResource =
 
 -- | Updates the specified label.
 --
--- /See:/ 'usersLabelsUpdate'' smart constructor.
-data UsersLabelsUpdate' = UsersLabelsUpdate'
+-- /See:/ 'usersLabelsUpdate' smart constructor.
+data UsersLabelsUpdate = UsersLabelsUpdate
     { _uluPayload :: !Label
     , _uluUserId  :: !Text
     , _uluId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersLabelsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersLabelsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,36 +68,36 @@ data UsersLabelsUpdate' = UsersLabelsUpdate'
 -- * 'uluUserId'
 --
 -- * 'uluId'
-usersLabelsUpdate'
+usersLabelsUpdate
     :: Label -- ^ 'uluPayload'
     -> Text -- ^ 'uluId'
     -> Text
-    -> UsersLabelsUpdate'
-usersLabelsUpdate' pUluPayload_ pUluUserId_ pUluId_ =
-    UsersLabelsUpdate'
+    -> UsersLabelsUpdate
+usersLabelsUpdate pUluPayload_ pUluUserId_ pUluId_ =
+    UsersLabelsUpdate
     { _uluPayload = pUluPayload_
     , _uluUserId = pUluUserId_
     , _uluId = pUluId_
     }
 
 -- | Multipart request metadata.
-uluPayload :: Lens' UsersLabelsUpdate' Label
+uluPayload :: Lens' UsersLabelsUpdate Label
 uluPayload
   = lens _uluPayload (\ s a -> s{_uluPayload = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-uluUserId :: Lens' UsersLabelsUpdate' Text
+uluUserId :: Lens' UsersLabelsUpdate Text
 uluUserId
   = lens _uluUserId (\ s a -> s{_uluUserId = a})
 
 -- | The ID of the label to update.
-uluId :: Lens' UsersLabelsUpdate' Text
+uluId :: Lens' UsersLabelsUpdate Text
 uluId = lens _uluId (\ s a -> s{_uluId = a})
 
-instance GoogleRequest UsersLabelsUpdate' where
-        type Rs UsersLabelsUpdate' = Label
-        requestClient UsersLabelsUpdate'{..}
+instance GoogleRequest UsersLabelsUpdate where
+        type Rs UsersLabelsUpdate = Label
+        requestClient UsersLabelsUpdate{..}
           = go _uluUserId _uluId (Just AltJSON) _uluPayload
               gmailService
           where go

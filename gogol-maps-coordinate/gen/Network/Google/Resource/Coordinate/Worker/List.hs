@@ -29,8 +29,8 @@ module Network.Google.Resource.Coordinate.Worker.List
       WorkerListResource
 
     -- * Creating a Request
-    , workerList'
-    , WorkerList'
+    , workerList
+    , WorkerList
 
     -- * Request Lenses
     , wlTeamId
@@ -40,7 +40,7 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @coordinate.worker.list@ method which the
--- 'WorkerList'' request conforms to.
+-- 'WorkerList' request conforms to.
 type WorkerListResource =
      "teams" :>
        Capture "teamId" Text :>
@@ -50,31 +50,31 @@ type WorkerListResource =
 
 -- | Retrieves a list of workers in a team.
 --
--- /See:/ 'workerList'' smart constructor.
-newtype WorkerList' = WorkerList'
+-- /See:/ 'workerList' smart constructor.
+newtype WorkerList = WorkerList
     { _wlTeamId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'WorkerList'' with the minimum fields required to make a request.
+-- | Creates a value of 'WorkerList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'wlTeamId'
-workerList'
+workerList
     :: Text -- ^ 'wlTeamId'
-    -> WorkerList'
-workerList' pWlTeamId_ =
-    WorkerList'
+    -> WorkerList
+workerList pWlTeamId_ =
+    WorkerList
     { _wlTeamId = pWlTeamId_
     }
 
 -- | Team ID
-wlTeamId :: Lens' WorkerList' Text
+wlTeamId :: Lens' WorkerList Text
 wlTeamId = lens _wlTeamId (\ s a -> s{_wlTeamId = a})
 
-instance GoogleRequest WorkerList' where
-        type Rs WorkerList' = WorkerListResponse
-        requestClient WorkerList'{..}
+instance GoogleRequest WorkerList where
+        type Rs WorkerList = WorkerListResponse
+        requestClient WorkerList{..}
           = go _wlTeamId (Just AltJSON) mapsCoordinateService
           where go
                   = buildClient (Proxy :: Proxy WorkerListResource)

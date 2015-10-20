@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Members.Update
       MembersUpdateResource
 
     -- * Creating a Request
-    , membersUpdate'
-    , MembersUpdate'
+    , membersUpdate
+    , MembersUpdate
 
     -- * Request Lenses
     , muMemberKey
@@ -42,7 +42,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.members.update@ method which the
--- 'MembersUpdate'' request conforms to.
+-- 'MembersUpdate' request conforms to.
 type MembersUpdateResource =
      "groups" :>
        Capture "groupKey" Text :>
@@ -53,14 +53,14 @@ type MembersUpdateResource =
 
 -- | Update membership of a user in the specified group.
 --
--- /See:/ 'membersUpdate'' smart constructor.
-data MembersUpdate' = MembersUpdate'
+-- /See:/ 'membersUpdate' smart constructor.
+data MembersUpdate = MembersUpdate
     { _muMemberKey :: !Text
     , _muGroupKey  :: !Text
     , _muPayload   :: !Member
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MembersUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'MembersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,13 +69,13 @@ data MembersUpdate' = MembersUpdate'
 -- * 'muGroupKey'
 --
 -- * 'muPayload'
-membersUpdate'
+membersUpdate
     :: Text -- ^ 'muMemberKey'
     -> Text -- ^ 'muGroupKey'
     -> Member -- ^ 'muPayload'
-    -> MembersUpdate'
-membersUpdate' pMuMemberKey_ pMuGroupKey_ pMuPayload_ =
-    MembersUpdate'
+    -> MembersUpdate
+membersUpdate pMuMemberKey_ pMuGroupKey_ pMuPayload_ =
+    MembersUpdate
     { _muMemberKey = pMuMemberKey_
     , _muGroupKey = pMuGroupKey_
     , _muPayload = pMuPayload_
@@ -83,24 +83,24 @@ membersUpdate' pMuMemberKey_ pMuGroupKey_ pMuPayload_ =
 
 -- | Email or immutable Id of the user. If Id, it should match with id of
 -- member object
-muMemberKey :: Lens' MembersUpdate' Text
+muMemberKey :: Lens' MembersUpdate Text
 muMemberKey
   = lens _muMemberKey (\ s a -> s{_muMemberKey = a})
 
 -- | Email or immutable Id of the group. If Id, it should match with id of
 -- group object
-muGroupKey :: Lens' MembersUpdate' Text
+muGroupKey :: Lens' MembersUpdate Text
 muGroupKey
   = lens _muGroupKey (\ s a -> s{_muGroupKey = a})
 
 -- | Multipart request metadata.
-muPayload :: Lens' MembersUpdate' Member
+muPayload :: Lens' MembersUpdate Member
 muPayload
   = lens _muPayload (\ s a -> s{_muPayload = a})
 
-instance GoogleRequest MembersUpdate' where
-        type Rs MembersUpdate' = Member
-        requestClient MembersUpdate'{..}
+instance GoogleRequest MembersUpdate where
+        type Rs MembersUpdate = Member
+        requestClient MembersUpdate{..}
           = go _muGroupKey _muMemberKey (Just AltJSON)
               _muPayload
               directoryService

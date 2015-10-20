@@ -32,8 +32,8 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.BindDirect
       LiveBroadcastsBindDirectResource
 
     -- * Creating a Request
-    , liveBroadcastsBindDirect'
-    , LiveBroadcastsBindDirect'
+    , liveBroadcastsBindDirect
+    , LiveBroadcastsBindDirect
 
     -- * Request Lenses
     , lbbdPart
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveBroadcasts.bind_direct@ method which the
--- 'LiveBroadcastsBindDirect'' request conforms to.
+-- 'LiveBroadcastsBindDirect' request conforms to.
 type LiveBroadcastsBindDirectResource =
      "liveBroadcasts" :>
        "bind" :>
@@ -65,8 +65,8 @@ type LiveBroadcastsBindDirectResource =
 -- video stream, though a video stream may be bound to more than one
 -- broadcast.
 --
--- /See:/ 'liveBroadcastsBindDirect'' smart constructor.
-data LiveBroadcastsBindDirect' = LiveBroadcastsBindDirect'
+-- /See:/ 'liveBroadcastsBindDirect' smart constructor.
+data LiveBroadcastsBindDirect = LiveBroadcastsBindDirect
     { _lbbdPart                          :: !Text
     , _lbbdOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbbdOnBehalfOfContentOwnerChannel :: !(Maybe Text)
@@ -74,7 +74,7 @@ data LiveBroadcastsBindDirect' = LiveBroadcastsBindDirect'
     , _lbbdStreamId                      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LiveBroadcastsBindDirect'' with the minimum fields required to make a request.
+-- | Creates a value of 'LiveBroadcastsBindDirect' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -87,12 +87,12 @@ data LiveBroadcastsBindDirect' = LiveBroadcastsBindDirect'
 -- * 'lbbdId'
 --
 -- * 'lbbdStreamId'
-liveBroadcastsBindDirect'
+liveBroadcastsBindDirect
     :: Text -- ^ 'lbbdPart'
     -> Text -- ^ 'lbbdId'
-    -> LiveBroadcastsBindDirect'
-liveBroadcastsBindDirect' pLbbdPart_ pLbbdId_ =
-    LiveBroadcastsBindDirect'
+    -> LiveBroadcastsBindDirect
+liveBroadcastsBindDirect pLbbdPart_ pLbbdId_ =
+    LiveBroadcastsBindDirect
     { _lbbdPart = pLbbdPart_
     , _lbbdOnBehalfOfContentOwner = Nothing
     , _lbbdOnBehalfOfContentOwnerChannel = Nothing
@@ -104,7 +104,7 @@ liveBroadcastsBindDirect' pLbbdPart_ pLbbdId_ =
 -- liveBroadcast resource properties that the API response will include.
 -- The part names that you can include in the parameter value are id,
 -- snippet, contentDetails, and status.
-lbbdPart :: Lens' LiveBroadcastsBindDirect' Text
+lbbdPart :: Lens' LiveBroadcastsBindDirect Text
 lbbdPart = lens _lbbdPart (\ s a -> s{_lbbdPart = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
@@ -117,7 +117,7 @@ lbbdPart = lens _lbbdPart (\ s a -> s{_lbbdPart = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-lbbdOnBehalfOfContentOwner :: Lens' LiveBroadcastsBindDirect' (Maybe Text)
+lbbdOnBehalfOfContentOwner :: Lens' LiveBroadcastsBindDirect (Maybe Text)
 lbbdOnBehalfOfContentOwner
   = lens _lbbdOnBehalfOfContentOwner
       (\ s a -> s{_lbbdOnBehalfOfContentOwner = a})
@@ -138,28 +138,27 @@ lbbdOnBehalfOfContentOwner
 -- actions on behalf of the channel specified in the parameter value,
 -- without having to provide authentication credentials for each separate
 -- channel.
-lbbdOnBehalfOfContentOwnerChannel :: Lens' LiveBroadcastsBindDirect' (Maybe Text)
+lbbdOnBehalfOfContentOwnerChannel :: Lens' LiveBroadcastsBindDirect (Maybe Text)
 lbbdOnBehalfOfContentOwnerChannel
   = lens _lbbdOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lbbdOnBehalfOfContentOwnerChannel = a})
 
 -- | The id parameter specifies the unique ID of the broadcast that is being
 -- bound to a video stream.
-lbbdId :: Lens' LiveBroadcastsBindDirect' Text
+lbbdId :: Lens' LiveBroadcastsBindDirect Text
 lbbdId = lens _lbbdId (\ s a -> s{_lbbdId = a})
 
 -- | The streamId parameter specifies the unique ID of the video stream that
 -- is being bound to a broadcast. If this parameter is omitted, the API
 -- will remove any existing binding between the broadcast and a video
 -- stream.
-lbbdStreamId :: Lens' LiveBroadcastsBindDirect' (Maybe Text)
+lbbdStreamId :: Lens' LiveBroadcastsBindDirect (Maybe Text)
 lbbdStreamId
   = lens _lbbdStreamId (\ s a -> s{_lbbdStreamId = a})
 
-instance GoogleRequest LiveBroadcastsBindDirect'
-         where
-        type Rs LiveBroadcastsBindDirect' = LiveBroadcast
-        requestClient LiveBroadcastsBindDirect'{..}
+instance GoogleRequest LiveBroadcastsBindDirect where
+        type Rs LiveBroadcastsBindDirect = LiveBroadcast
+        requestClient LiveBroadcastsBindDirect{..}
           = go (Just _lbbdId) (Just _lbbdPart)
               _lbbdOnBehalfOfContentOwner
               _lbbdOnBehalfOfContentOwnerChannel

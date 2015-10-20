@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.ChangeLogs.List
       ChangeLogsListResource
 
     -- * Creating a Request
-    , changeLogsList'
-    , ChangeLogsList'
+    , changeLogsList
+    , ChangeLogsList
 
     -- * Request Lenses
     , cllUserProFileIds
@@ -50,7 +50,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.changeLogs.list@ method which the
--- 'ChangeLogsList'' request conforms to.
+-- 'ChangeLogsList' request conforms to.
 type ChangeLogsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -70,8 +70,8 @@ type ChangeLogsListResource =
 
 -- | Retrieves a list of change logs.
 --
--- /See:/ 'changeLogsList'' smart constructor.
-data ChangeLogsList' = ChangeLogsList'
+-- /See:/ 'changeLogsList' smart constructor.
+data ChangeLogsList = ChangeLogsList
     { _cllUserProFileIds :: !(Maybe [Int64])
     , _cllObjectType     :: !(Maybe ChangeLogsListObjectType)
     , _cllSearchString   :: !(Maybe Text)
@@ -85,7 +85,7 @@ data ChangeLogsList' = ChangeLogsList'
     , _cllMaxResults     :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChangeLogsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChangeLogsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -110,11 +110,11 @@ data ChangeLogsList' = ChangeLogsList'
 -- * 'cllObjectIds'
 --
 -- * 'cllMaxResults'
-changeLogsList'
+changeLogsList
     :: Int64 -- ^ 'cllProFileId'
-    -> ChangeLogsList'
-changeLogsList' pCllProFileId_ =
-    ChangeLogsList'
+    -> ChangeLogsList
+changeLogsList pCllProFileId_ =
+    ChangeLogsList
     { _cllUserProFileIds = Nothing
     , _cllObjectType = Nothing
     , _cllSearchString = Nothing
@@ -129,7 +129,7 @@ changeLogsList' pCllProFileId_ =
     }
 
 -- | Select only change logs with these user profile IDs.
-cllUserProFileIds :: Lens' ChangeLogsList' [Int64]
+cllUserProFileIds :: Lens' ChangeLogsList [Int64]
 cllUserProFileIds
   = lens _cllUserProFileIds
       (\ s a -> s{_cllUserProFileIds = a})
@@ -137,31 +137,31 @@ cllUserProFileIds
       . _Coerce
 
 -- | Select only change logs with the specified object type.
-cllObjectType :: Lens' ChangeLogsList' (Maybe ChangeLogsListObjectType)
+cllObjectType :: Lens' ChangeLogsList (Maybe ChangeLogsListObjectType)
 cllObjectType
   = lens _cllObjectType
       (\ s a -> s{_cllObjectType = a})
 
 -- | Select only change logs whose object ID, user name, old or new values
 -- match the search string.
-cllSearchString :: Lens' ChangeLogsList' (Maybe Text)
+cllSearchString :: Lens' ChangeLogsList (Maybe Text)
 cllSearchString
   = lens _cllSearchString
       (\ s a -> s{_cllSearchString = a})
 
 -- | Select only change logs with these IDs.
-cllIds :: Lens' ChangeLogsList' [Int64]
+cllIds :: Lens' ChangeLogsList [Int64]
 cllIds
   = lens _cllIds (\ s a -> s{_cllIds = a}) . _Default .
       _Coerce
 
 -- | User profile ID associated with this request.
-cllProFileId :: Lens' ChangeLogsList' Int64
+cllProFileId :: Lens' ChangeLogsList Int64
 cllProFileId
   = lens _cllProFileId (\ s a -> s{_cllProFileId = a})
 
 -- | Select only change logs with the specified action.
-cllAction :: Lens' ChangeLogsList' (Maybe ChangeLogsListAction)
+cllAction :: Lens' ChangeLogsList (Maybe ChangeLogsListAction)
 cllAction
   = lens _cllAction (\ s a -> s{_cllAction = a})
 
@@ -172,7 +172,7 @@ cllAction
 -- \"2015-07-18T22:54:00-04:00\". In other words, the year, month, day, the
 -- letter T, the hour (24-hour clock system), minute, second, and then the
 -- time zone offset.
-cllMinChangeTime :: Lens' ChangeLogsList' (Maybe Text)
+cllMinChangeTime :: Lens' ChangeLogsList (Maybe Text)
 cllMinChangeTime
   = lens _cllMinChangeTime
       (\ s a -> s{_cllMinChangeTime = a})
@@ -184,32 +184,32 @@ cllMinChangeTime
 -- \"2015-07-18T22:54:00-04:00\". In other words, the year, month, day, the
 -- letter T, the hour (24-hour clock system), minute, second, and then the
 -- time zone offset.
-cllMaxChangeTime :: Lens' ChangeLogsList' (Maybe Text)
+cllMaxChangeTime :: Lens' ChangeLogsList (Maybe Text)
 cllMaxChangeTime
   = lens _cllMaxChangeTime
       (\ s a -> s{_cllMaxChangeTime = a})
 
 -- | Value of the nextPageToken from the previous result page.
-cllPageToken :: Lens' ChangeLogsList' (Maybe Text)
+cllPageToken :: Lens' ChangeLogsList (Maybe Text)
 cllPageToken
   = lens _cllPageToken (\ s a -> s{_cllPageToken = a})
 
 -- | Select only change logs with these object IDs.
-cllObjectIds :: Lens' ChangeLogsList' [Int64]
+cllObjectIds :: Lens' ChangeLogsList [Int64]
 cllObjectIds
   = lens _cllObjectIds (\ s a -> s{_cllObjectIds = a})
       . _Default
       . _Coerce
 
 -- | Maximum number of results to return.
-cllMaxResults :: Lens' ChangeLogsList' (Maybe Int32)
+cllMaxResults :: Lens' ChangeLogsList (Maybe Int32)
 cllMaxResults
   = lens _cllMaxResults
       (\ s a -> s{_cllMaxResults = a})
 
-instance GoogleRequest ChangeLogsList' where
-        type Rs ChangeLogsList' = ChangeLogsListResponse
-        requestClient ChangeLogsList'{..}
+instance GoogleRequest ChangeLogsList where
+        type Rs ChangeLogsList = ChangeLogsListResponse
+        requestClient ChangeLogsList{..}
           = go _cllProFileId (_cllUserProFileIds ^. _Default)
               _cllObjectType
               _cllSearchString

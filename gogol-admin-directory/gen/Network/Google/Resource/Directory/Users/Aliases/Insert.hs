@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Users.Aliases.Insert
       UsersAliasesInsertResource
 
     -- * Creating a Request
-    , usersAliasesInsert'
-    , UsersAliasesInsert'
+    , usersAliasesInsert
+    , UsersAliasesInsert
 
     -- * Request Lenses
     , uaiPayload
@@ -41,7 +41,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.users.aliases.insert@ method which the
--- 'UsersAliasesInsert'' request conforms to.
+-- 'UsersAliasesInsert' request conforms to.
 type UsersAliasesInsertResource =
      "users" :>
        Capture "userKey" Text :>
@@ -51,42 +51,42 @@ type UsersAliasesInsertResource =
 
 -- | Add a alias for the user
 --
--- /See:/ 'usersAliasesInsert'' smart constructor.
-data UsersAliasesInsert' = UsersAliasesInsert'
+-- /See:/ 'usersAliasesInsert' smart constructor.
+data UsersAliasesInsert = UsersAliasesInsert
     { _uaiPayload :: !Alias
     , _uaiUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersAliasesInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersAliasesInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'uaiPayload'
 --
 -- * 'uaiUserKey'
-usersAliasesInsert'
+usersAliasesInsert
     :: Alias -- ^ 'uaiPayload'
     -> Text -- ^ 'uaiUserKey'
-    -> UsersAliasesInsert'
-usersAliasesInsert' pUaiPayload_ pUaiUserKey_ =
-    UsersAliasesInsert'
+    -> UsersAliasesInsert
+usersAliasesInsert pUaiPayload_ pUaiUserKey_ =
+    UsersAliasesInsert
     { _uaiPayload = pUaiPayload_
     , _uaiUserKey = pUaiUserKey_
     }
 
 -- | Multipart request metadata.
-uaiPayload :: Lens' UsersAliasesInsert' Alias
+uaiPayload :: Lens' UsersAliasesInsert Alias
 uaiPayload
   = lens _uaiPayload (\ s a -> s{_uaiPayload = a})
 
 -- | Email or immutable Id of the user
-uaiUserKey :: Lens' UsersAliasesInsert' Text
+uaiUserKey :: Lens' UsersAliasesInsert Text
 uaiUserKey
   = lens _uaiUserKey (\ s a -> s{_uaiUserKey = a})
 
-instance GoogleRequest UsersAliasesInsert' where
-        type Rs UsersAliasesInsert' = Alias
-        requestClient UsersAliasesInsert'{..}
+instance GoogleRequest UsersAliasesInsert where
+        type Rs UsersAliasesInsert = Alias
+        requestClient UsersAliasesInsert{..}
           = go _uaiUserKey (Just AltJSON) _uaiPayload
               directoryService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.Mirror.Contacts.Get
       ContactsGetResource
 
     -- * Creating a Request
-    , contactsGet'
-    , ContactsGet'
+    , contactsGet
+    , ContactsGet
 
     -- * Request Lenses
     , cgId
@@ -40,7 +40,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.contacts.get@ method which the
--- 'ContactsGet'' request conforms to.
+-- 'ContactsGet' request conforms to.
 type ContactsGetResource =
      "contacts" :>
        Capture "id" Text :>
@@ -48,31 +48,31 @@ type ContactsGetResource =
 
 -- | Gets a single contact by ID.
 --
--- /See:/ 'contactsGet'' smart constructor.
-newtype ContactsGet' = ContactsGet'
+-- /See:/ 'contactsGet' smart constructor.
+newtype ContactsGet = ContactsGet
     { _cgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ContactsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ContactsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cgId'
-contactsGet'
+contactsGet
     :: Text -- ^ 'cgId'
-    -> ContactsGet'
-contactsGet' pCgId_ =
-    ContactsGet'
+    -> ContactsGet
+contactsGet pCgId_ =
+    ContactsGet
     { _cgId = pCgId_
     }
 
 -- | The ID of the contact.
-cgId :: Lens' ContactsGet' Text
+cgId :: Lens' ContactsGet Text
 cgId = lens _cgId (\ s a -> s{_cgId = a})
 
-instance GoogleRequest ContactsGet' where
-        type Rs ContactsGet' = Contact
-        requestClient ContactsGet'{..}
+instance GoogleRequest ContactsGet where
+        type Rs ContactsGet = Contact
+        requestClient ContactsGet{..}
           = go _cgId (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsGetResource)

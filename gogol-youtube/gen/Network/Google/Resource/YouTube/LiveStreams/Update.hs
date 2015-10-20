@@ -31,8 +31,8 @@ module Network.Google.Resource.YouTube.LiveStreams.Update
       LiveStreamsUpdateResource
 
     -- * Creating a Request
-    , liveStreamsUpdate'
-    , LiveStreamsUpdate'
+    , liveStreamsUpdate
+    , LiveStreamsUpdate
 
     -- * Request Lenses
     , lsuPart
@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.liveStreams.update@ method which the
--- 'LiveStreamsUpdate'' request conforms to.
+-- 'LiveStreamsUpdate' request conforms to.
 type LiveStreamsUpdateResource =
      "liveStreams" :>
        QueryParam "part" Text :>
@@ -58,15 +58,15 @@ type LiveStreamsUpdateResource =
 -- be updated, then you need to create a new stream with the proper
 -- settings.
 --
--- /See:/ 'liveStreamsUpdate'' smart constructor.
-data LiveStreamsUpdate' = LiveStreamsUpdate'
+-- /See:/ 'liveStreamsUpdate' smart constructor.
+data LiveStreamsUpdate = LiveStreamsUpdate
     { _lsuPart                          :: !Text
     , _lsuPayload                       :: !LiveStream
     , _lsuOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lsuOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LiveStreamsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'LiveStreamsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -77,12 +77,12 @@ data LiveStreamsUpdate' = LiveStreamsUpdate'
 -- * 'lsuOnBehalfOfContentOwner'
 --
 -- * 'lsuOnBehalfOfContentOwnerChannel'
-liveStreamsUpdate'
+liveStreamsUpdate
     :: Text -- ^ 'lsuPart'
     -> LiveStream -- ^ 'lsuPayload'
-    -> LiveStreamsUpdate'
-liveStreamsUpdate' pLsuPart_ pLsuPayload_ =
-    LiveStreamsUpdate'
+    -> LiveStreamsUpdate
+liveStreamsUpdate pLsuPart_ pLsuPayload_ =
+    LiveStreamsUpdate
     { _lsuPart = pLsuPart_
     , _lsuPayload = pLsuPayload_
     , _lsuOnBehalfOfContentOwner = Nothing
@@ -97,11 +97,11 @@ liveStreamsUpdate' pLsuPart_ pLsuPayload_ =
 -- mutable properties that are contained in any parts that the parameter
 -- value specifies. If the request body does not specify a value for a
 -- mutable property, the existing value for that property will be removed.
-lsuPart :: Lens' LiveStreamsUpdate' Text
+lsuPart :: Lens' LiveStreamsUpdate Text
 lsuPart = lens _lsuPart (\ s a -> s{_lsuPart = a})
 
 -- | Multipart request metadata.
-lsuPayload :: Lens' LiveStreamsUpdate' LiveStream
+lsuPayload :: Lens' LiveStreamsUpdate LiveStream
 lsuPayload
   = lens _lsuPayload (\ s a -> s{_lsuPayload = a})
 
@@ -115,7 +115,7 @@ lsuPayload
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-lsuOnBehalfOfContentOwner :: Lens' LiveStreamsUpdate' (Maybe Text)
+lsuOnBehalfOfContentOwner :: Lens' LiveStreamsUpdate (Maybe Text)
 lsuOnBehalfOfContentOwner
   = lens _lsuOnBehalfOfContentOwner
       (\ s a -> s{_lsuOnBehalfOfContentOwner = a})
@@ -136,14 +136,14 @@ lsuOnBehalfOfContentOwner
 -- actions on behalf of the channel specified in the parameter value,
 -- without having to provide authentication credentials for each separate
 -- channel.
-lsuOnBehalfOfContentOwnerChannel :: Lens' LiveStreamsUpdate' (Maybe Text)
+lsuOnBehalfOfContentOwnerChannel :: Lens' LiveStreamsUpdate (Maybe Text)
 lsuOnBehalfOfContentOwnerChannel
   = lens _lsuOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lsuOnBehalfOfContentOwnerChannel = a})
 
-instance GoogleRequest LiveStreamsUpdate' where
-        type Rs LiveStreamsUpdate' = LiveStream
-        requestClient LiveStreamsUpdate'{..}
+instance GoogleRequest LiveStreamsUpdate where
+        type Rs LiveStreamsUpdate = LiveStream
+        requestClient LiveStreamsUpdate{..}
           = go (Just _lsuPart) _lsuOnBehalfOfContentOwner
               _lsuOnBehalfOfContentOwnerChannel
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.AdSense.Savedadstyles.Get
       SavedadstylesGetResource
 
     -- * Creating a Request
-    , savedadstylesGet'
-    , SavedadstylesGet'
+    , savedadstylesGet
+    , SavedadstylesGet
 
     -- * Request Lenses
     , sgSavedAdStyleId
@@ -40,7 +40,7 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsense.savedadstyles.get@ method which the
--- 'SavedadstylesGet'' request conforms to.
+-- 'SavedadstylesGet' request conforms to.
 type SavedadstylesGetResource =
      "savedadstyles" :>
        Capture "savedAdStyleId" Text :>
@@ -48,33 +48,33 @@ type SavedadstylesGetResource =
 
 -- | Get a specific saved ad style from the user\'s account.
 --
--- /See:/ 'savedadstylesGet'' smart constructor.
-newtype SavedadstylesGet' = SavedadstylesGet'
+-- /See:/ 'savedadstylesGet' smart constructor.
+newtype SavedadstylesGet = SavedadstylesGet
     { _sgSavedAdStyleId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SavedadstylesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'SavedadstylesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'sgSavedAdStyleId'
-savedadstylesGet'
+savedadstylesGet
     :: Text -- ^ 'sgSavedAdStyleId'
-    -> SavedadstylesGet'
-savedadstylesGet' pSgSavedAdStyleId_ =
-    SavedadstylesGet'
+    -> SavedadstylesGet
+savedadstylesGet pSgSavedAdStyleId_ =
+    SavedadstylesGet
     { _sgSavedAdStyleId = pSgSavedAdStyleId_
     }
 
 -- | Saved ad style to retrieve.
-sgSavedAdStyleId :: Lens' SavedadstylesGet' Text
+sgSavedAdStyleId :: Lens' SavedadstylesGet Text
 sgSavedAdStyleId
   = lens _sgSavedAdStyleId
       (\ s a -> s{_sgSavedAdStyleId = a})
 
-instance GoogleRequest SavedadstylesGet' where
-        type Rs SavedadstylesGet' = SavedAdStyle
-        requestClient SavedadstylesGet'{..}
+instance GoogleRequest SavedadstylesGet where
+        type Rs SavedadstylesGet = SavedAdStyle
+        requestClient SavedadstylesGet{..}
           = go _sgSavedAdStyleId (Just AltJSON) adSenseService
           where go
                   = buildClient

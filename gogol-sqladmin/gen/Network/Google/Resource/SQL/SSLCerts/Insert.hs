@@ -31,8 +31,8 @@ module Network.Google.Resource.SQL.SSLCerts.Insert
       SSLCertsInsertResource
 
     -- * Creating a Request
-    , sslCertsInsert'
-    , SSLCertsInsert'
+    , sslCertsInsert
+    , SSLCertsInsert
 
     -- * Request Lenses
     , sciProject
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @sql.sslCerts.insert@ method which the
--- 'SSLCertsInsert'' request conforms to.
+-- 'SSLCertsInsert' request conforms to.
 type SSLCertsInsertResource =
      "projects" :>
        Capture "project" Text :>
@@ -59,14 +59,14 @@ type SSLCertsInsertResource =
 -- server certificate authority. The new certificate will not be usable
 -- until the instance is restarted.
 --
--- /See:/ 'sslCertsInsert'' smart constructor.
-data SSLCertsInsert' = SSLCertsInsert'
+-- /See:/ 'sslCertsInsert' smart constructor.
+data SSLCertsInsert = SSLCertsInsert
     { _sciProject  :: !Text
     , _sciPayload  :: !SSLCertsInsertRequest
     , _sciInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SSLCertsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'SSLCertsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,13 +75,13 @@ data SSLCertsInsert' = SSLCertsInsert'
 -- * 'sciPayload'
 --
 -- * 'sciInstance'
-sslCertsInsert'
+sslCertsInsert
     :: Text -- ^ 'sciProject'
     -> SSLCertsInsertRequest -- ^ 'sciPayload'
     -> Text -- ^ 'sciInstance'
-    -> SSLCertsInsert'
-sslCertsInsert' pSciProject_ pSciPayload_ pSciInstance_ =
-    SSLCertsInsert'
+    -> SSLCertsInsert
+sslCertsInsert pSciProject_ pSciPayload_ pSciInstance_ =
+    SSLCertsInsert
     { _sciProject = pSciProject_
     , _sciPayload = pSciPayload_
     , _sciInstance = pSciInstance_
@@ -89,23 +89,23 @@ sslCertsInsert' pSciProject_ pSciPayload_ pSciInstance_ =
 
 -- | Project ID of the project to which the newly created Cloud SQL instances
 -- should belong.
-sciProject :: Lens' SSLCertsInsert' Text
+sciProject :: Lens' SSLCertsInsert Text
 sciProject
   = lens _sciProject (\ s a -> s{_sciProject = a})
 
 -- | Multipart request metadata.
-sciPayload :: Lens' SSLCertsInsert' SSLCertsInsertRequest
+sciPayload :: Lens' SSLCertsInsert SSLCertsInsertRequest
 sciPayload
   = lens _sciPayload (\ s a -> s{_sciPayload = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
-sciInstance :: Lens' SSLCertsInsert' Text
+sciInstance :: Lens' SSLCertsInsert Text
 sciInstance
   = lens _sciInstance (\ s a -> s{_sciInstance = a})
 
-instance GoogleRequest SSLCertsInsert' where
-        type Rs SSLCertsInsert' = SSLCertsInsertResponse
-        requestClient SSLCertsInsert'{..}
+instance GoogleRequest SSLCertsInsert where
+        type Rs SSLCertsInsert = SSLCertsInsertResponse
+        requestClient SSLCertsInsert{..}
           = go _sciProject _sciInstance (Just AltJSON)
               _sciPayload
               sQLAdminService

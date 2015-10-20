@@ -29,8 +29,8 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Get
       LicenseAssignmentsGetResource
 
     -- * Creating a Request
-    , licenseAssignmentsGet'
-    , LicenseAssignmentsGet'
+    , licenseAssignmentsGet
+    , LicenseAssignmentsGet
 
     -- * Request Lenses
     , lagSKUId
@@ -42,7 +42,7 @@ import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @licensing.licenseAssignments.get@ method which the
--- 'LicenseAssignmentsGet'' request conforms to.
+-- 'LicenseAssignmentsGet' request conforms to.
 type LicenseAssignmentsGetResource =
      Capture "productId" Text :>
        "sku" :>
@@ -54,14 +54,14 @@ type LicenseAssignmentsGetResource =
 
 -- | Get license assignment of a particular product and sku for a user
 --
--- /See:/ 'licenseAssignmentsGet'' smart constructor.
-data LicenseAssignmentsGet' = LicenseAssignmentsGet'
+-- /See:/ 'licenseAssignmentsGet' smart constructor.
+data LicenseAssignmentsGet = LicenseAssignmentsGet
     { _lagSKUId     :: !Text
     , _lagUserId    :: !Text
     , _lagProductId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LicenseAssignmentsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'LicenseAssignmentsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,35 +70,35 @@ data LicenseAssignmentsGet' = LicenseAssignmentsGet'
 -- * 'lagUserId'
 --
 -- * 'lagProductId'
-licenseAssignmentsGet'
+licenseAssignmentsGet
     :: Text -- ^ 'lagSKUId'
     -> Text -- ^ 'lagUserId'
     -> Text -- ^ 'lagProductId'
-    -> LicenseAssignmentsGet'
-licenseAssignmentsGet' pLagSKUId_ pLagUserId_ pLagProductId_ =
-    LicenseAssignmentsGet'
+    -> LicenseAssignmentsGet
+licenseAssignmentsGet pLagSKUId_ pLagUserId_ pLagProductId_ =
+    LicenseAssignmentsGet
     { _lagSKUId = pLagSKUId_
     , _lagUserId = pLagUserId_
     , _lagProductId = pLagProductId_
     }
 
 -- | Name for sku
-lagSKUId :: Lens' LicenseAssignmentsGet' Text
+lagSKUId :: Lens' LicenseAssignmentsGet Text
 lagSKUId = lens _lagSKUId (\ s a -> s{_lagSKUId = a})
 
 -- | email id or unique Id of the user
-lagUserId :: Lens' LicenseAssignmentsGet' Text
+lagUserId :: Lens' LicenseAssignmentsGet Text
 lagUserId
   = lens _lagUserId (\ s a -> s{_lagUserId = a})
 
 -- | Name for product
-lagProductId :: Lens' LicenseAssignmentsGet' Text
+lagProductId :: Lens' LicenseAssignmentsGet Text
 lagProductId
   = lens _lagProductId (\ s a -> s{_lagProductId = a})
 
-instance GoogleRequest LicenseAssignmentsGet' where
-        type Rs LicenseAssignmentsGet' = LicenseAssignment
-        requestClient LicenseAssignmentsGet'{..}
+instance GoogleRequest LicenseAssignmentsGet where
+        type Rs LicenseAssignmentsGet = LicenseAssignment
+        requestClient LicenseAssignmentsGet{..}
           = go _lagProductId _lagSKUId _lagUserId
               (Just AltJSON)
               appsLicensingService

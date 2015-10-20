@@ -30,8 +30,8 @@ module Network.Google.Resource.DFAReporting.RemarketingListShares.Patch
       RemarketingListSharesPatchResource
 
     -- * Creating a Request
-    , remarketingListSharesPatch'
-    , RemarketingListSharesPatch'
+    , remarketingListSharesPatch
+    , RemarketingListSharesPatch
 
     -- * Request Lenses
     , rlspProFileId
@@ -43,7 +43,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.remarketingListShares.patch@ method which the
--- 'RemarketingListSharesPatch'' request conforms to.
+-- 'RemarketingListSharesPatch' request conforms to.
 type RemarketingListSharesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -56,14 +56,14 @@ type RemarketingListSharesPatchResource =
 -- | Updates an existing remarketing list share. This method supports patch
 -- semantics.
 --
--- /See:/ 'remarketingListSharesPatch'' smart constructor.
-data RemarketingListSharesPatch' = RemarketingListSharesPatch'
+-- /See:/ 'remarketingListSharesPatch' smart constructor.
+data RemarketingListSharesPatch = RemarketingListSharesPatch
     { _rlspProFileId         :: !Int64
     , _rlspPayload           :: !RemarketingListShare
     , _rlspRemarketingListId :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RemarketingListSharesPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'RemarketingListSharesPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,40 +72,40 @@ data RemarketingListSharesPatch' = RemarketingListSharesPatch'
 -- * 'rlspPayload'
 --
 -- * 'rlspRemarketingListId'
-remarketingListSharesPatch'
+remarketingListSharesPatch
     :: Int64 -- ^ 'rlspProFileId'
     -> RemarketingListShare -- ^ 'rlspPayload'
     -> Int64 -- ^ 'rlspRemarketingListId'
-    -> RemarketingListSharesPatch'
-remarketingListSharesPatch' pRlspProFileId_ pRlspPayload_ pRlspRemarketingListId_ =
-    RemarketingListSharesPatch'
+    -> RemarketingListSharesPatch
+remarketingListSharesPatch pRlspProFileId_ pRlspPayload_ pRlspRemarketingListId_ =
+    RemarketingListSharesPatch
     { _rlspProFileId = pRlspProFileId_
     , _rlspPayload = pRlspPayload_
     , _rlspRemarketingListId = pRlspRemarketingListId_
     }
 
 -- | User profile ID associated with this request.
-rlspProFileId :: Lens' RemarketingListSharesPatch' Int64
+rlspProFileId :: Lens' RemarketingListSharesPatch Int64
 rlspProFileId
   = lens _rlspProFileId
       (\ s a -> s{_rlspProFileId = a})
 
 -- | Multipart request metadata.
-rlspPayload :: Lens' RemarketingListSharesPatch' RemarketingListShare
+rlspPayload :: Lens' RemarketingListSharesPatch RemarketingListShare
 rlspPayload
   = lens _rlspPayload (\ s a -> s{_rlspPayload = a})
 
 -- | Remarketing list ID.
-rlspRemarketingListId :: Lens' RemarketingListSharesPatch' Int64
+rlspRemarketingListId :: Lens' RemarketingListSharesPatch Int64
 rlspRemarketingListId
   = lens _rlspRemarketingListId
       (\ s a -> s{_rlspRemarketingListId = a})
 
-instance GoogleRequest RemarketingListSharesPatch'
+instance GoogleRequest RemarketingListSharesPatch
          where
-        type Rs RemarketingListSharesPatch' =
+        type Rs RemarketingListSharesPatch =
              RemarketingListShare
-        requestClient RemarketingListSharesPatch'{..}
+        requestClient RemarketingListSharesPatch{..}
           = go _rlspProFileId (Just _rlspRemarketingListId)
               (Just AltJSON)
               _rlspPayload

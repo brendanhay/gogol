@@ -29,19 +29,19 @@ module Network.Google.Resource.Drive.Revisions.Delete
       RevisionsDeleteResource
 
     -- * Creating a Request
-    , revisionsDelete'
-    , RevisionsDelete'
+    , revisionsDelete
+    , RevisionsDelete
 
     -- * Request Lenses
-    , rdFileId
-    , rdRevisionId
+    , rFileId
+    , rRevisionId
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.revisions.delete@ method which the
--- 'RevisionsDelete'' request conforms to.
+-- 'RevisionsDelete' request conforms to.
 type RevisionsDeleteResource =
      "files" :>
        Capture "fileId" Text :>
@@ -51,42 +51,42 @@ type RevisionsDeleteResource =
 
 -- | Removes a revision.
 --
--- /See:/ 'revisionsDelete'' smart constructor.
-data RevisionsDelete' = RevisionsDelete'
-    { _rdFileId     :: !Text
-    , _rdRevisionId :: !Text
+-- /See:/ 'revisionsDelete' smart constructor.
+data RevisionsDelete = RevisionsDelete
+    { _rFileId     :: !Text
+    , _rRevisionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RevisionsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'RevisionsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rdFileId'
+-- * 'rFileId'
 --
--- * 'rdRevisionId'
-revisionsDelete'
-    :: Text -- ^ 'rdFileId'
-    -> Text -- ^ 'rdRevisionId'
-    -> RevisionsDelete'
-revisionsDelete' pRdFileId_ pRdRevisionId_ =
-    RevisionsDelete'
-    { _rdFileId = pRdFileId_
-    , _rdRevisionId = pRdRevisionId_
+-- * 'rRevisionId'
+revisionsDelete
+    :: Text -- ^ 'rFileId'
+    -> Text -- ^ 'rRevisionId'
+    -> RevisionsDelete
+revisionsDelete pRFileId_ pRRevisionId_ =
+    RevisionsDelete
+    { _rFileId = pRFileId_
+    , _rRevisionId = pRRevisionId_
     }
 
 -- | The ID of the file.
-rdFileId :: Lens' RevisionsDelete' Text
-rdFileId = lens _rdFileId (\ s a -> s{_rdFileId = a})
+rFileId :: Lens' RevisionsDelete Text
+rFileId = lens _rFileId (\ s a -> s{_rFileId = a})
 
 -- | The ID of the revision.
-rdRevisionId :: Lens' RevisionsDelete' Text
-rdRevisionId
-  = lens _rdRevisionId (\ s a -> s{_rdRevisionId = a})
+rRevisionId :: Lens' RevisionsDelete Text
+rRevisionId
+  = lens _rRevisionId (\ s a -> s{_rRevisionId = a})
 
-instance GoogleRequest RevisionsDelete' where
-        type Rs RevisionsDelete' = ()
-        requestClient RevisionsDelete'{..}
-          = go _rdFileId _rdRevisionId (Just AltJSON)
+instance GoogleRequest RevisionsDelete where
+        type Rs RevisionsDelete = ()
+        requestClient RevisionsDelete{..}
+          = go _rFileId _rRevisionId (Just AltJSON)
               driveService
           where go
                   = buildClient

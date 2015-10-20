@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.Videos.List
       VideosListResource
 
     -- * Creating a Request
-    , videosList'
-    , VideosList'
+    , videosList
+    , VideosList
 
     -- * Request Lenses
     , vlChart
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.videos.list@ method which the
--- 'VideosList'' request conforms to.
+-- 'VideosList' request conforms to.
 type VideosListResource =
      "videos" :>
        QueryParam "part" Text :>
@@ -69,8 +69,8 @@ type VideosListResource =
 
 -- | Returns a list of videos that match the API request parameters.
 --
--- /See:/ 'videosList'' smart constructor.
-data VideosList' = VideosList'
+-- /See:/ 'videosList' smart constructor.
+data VideosList = VideosList
     { _vlChart                  :: !(Maybe VideosListChart)
     , _vlPart                   :: !Text
     , _vlRegionCode             :: !(Maybe Text)
@@ -84,7 +84,7 @@ data VideosList' = VideosList'
     , _vlMaxResults             :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VideosList'' with the minimum fields required to make a request.
+-- | Creates a value of 'VideosList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -109,11 +109,11 @@ data VideosList' = VideosList'
 -- * 'vlPageToken'
 --
 -- * 'vlMaxResults'
-videosList'
+videosList
     :: Text -- ^ 'vlPart'
-    -> VideosList'
-videosList' pVlPart_ =
-    VideosList'
+    -> VideosList
+videosList pVlPart_ =
+    VideosList
     { _vlChart = Nothing
     , _vlPart = pVlPart_
     , _vlRegionCode = Nothing
@@ -128,7 +128,7 @@ videosList' pVlPart_ =
     }
 
 -- | The chart parameter identifies the chart that you want to retrieve.
-vlChart :: Lens' VideosList' (Maybe VideosListChart)
+vlChart :: Lens' VideosList (Maybe VideosListChart)
 vlChart = lens _vlChart (\ s a -> s{_vlChart = a})
 
 -- | The part parameter specifies a comma-separated list of one or more video
@@ -138,24 +138,24 @@ vlChart = lens _vlChart (\ s a -> s{_vlChart = a})
 -- resource, the snippet property contains the channelId, title,
 -- description, tags, and categoryId properties. As such, if you set
 -- part=snippet, the API response will contain all of those properties.
-vlPart :: Lens' VideosList' Text
+vlPart :: Lens' VideosList Text
 vlPart = lens _vlPart (\ s a -> s{_vlPart = a})
 
 -- | The regionCode parameter instructs the API to select a video chart
 -- available in the specified region. This parameter can only be used in
 -- conjunction with the chart parameter. The parameter value is an ISO
 -- 3166-1 alpha-2 country code.
-vlRegionCode :: Lens' VideosList' (Maybe Text)
+vlRegionCode :: Lens' VideosList (Maybe Text)
 vlRegionCode
   = lens _vlRegionCode (\ s a -> s{_vlRegionCode = a})
 
 -- | DEPRECATED
-vlLocale :: Lens' VideosList' (Maybe Text)
+vlLocale :: Lens' VideosList (Maybe Text)
 vlLocale = lens _vlLocale (\ s a -> s{_vlLocale = a})
 
 -- | Set this parameter\'s value to like or dislike to instruct the API to
 -- only return videos liked or disliked by the authenticated user.
-vlMyRating :: Lens' VideosList' (Maybe VideosListMyRating)
+vlMyRating :: Lens' VideosList (Maybe VideosListMyRating)
 vlMyRating
   = lens _vlMyRating (\ s a -> s{_vlMyRating = a})
 
@@ -167,7 +167,7 @@ vlMyRating
 -- snippet.localized object will contain the localized values. However, if
 -- localized details are not available, the snippet.localized object will
 -- contain resource details in the resource\'s default language.
-vlHl :: Lens' VideosList' (Maybe Text)
+vlHl :: Lens' VideosList (Maybe Text)
 vlHl = lens _vlHl (\ s a -> s{_vlHl = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
@@ -180,7 +180,7 @@ vlHl = lens _vlHl (\ s a -> s{_vlHl = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-vlOnBehalfOfContentOwner :: Lens' VideosList' (Maybe Text)
+vlOnBehalfOfContentOwner :: Lens' VideosList (Maybe Text)
 vlOnBehalfOfContentOwner
   = lens _vlOnBehalfOfContentOwner
       (\ s a -> s{_vlOnBehalfOfContentOwner = a})
@@ -189,7 +189,7 @@ vlOnBehalfOfContentOwner
 -- the chart should be retrieved. This parameter can only be used in
 -- conjunction with the chart parameter. By default, charts are not
 -- restricted to a particular category.
-vlVideoCategoryId :: Lens' VideosList' Text
+vlVideoCategoryId :: Lens' VideosList Text
 vlVideoCategoryId
   = lens _vlVideoCategoryId
       (\ s a -> s{_vlVideoCategoryId = a})
@@ -197,7 +197,7 @@ vlVideoCategoryId
 -- | The id parameter specifies a comma-separated list of the YouTube video
 -- ID(s) for the resource(s) that are being retrieved. In a video resource,
 -- the id property specifies the video\'s ID.
-vlId :: Lens' VideosList' (Maybe Text)
+vlId :: Lens' VideosList (Maybe Text)
 vlId = lens _vlId (\ s a -> s{_vlId = a})
 
 -- | The pageToken parameter identifies a specific page in the result set
@@ -206,7 +206,7 @@ vlId = lens _vlId (\ s a -> s{_vlId = a})
 -- Note: This parameter is supported for use in conjunction with the
 -- myRating parameter, but it is not supported for use in conjunction with
 -- the id parameter.
-vlPageToken :: Lens' VideosList' (Maybe Text)
+vlPageToken :: Lens' VideosList (Maybe Text)
 vlPageToken
   = lens _vlPageToken (\ s a -> s{_vlPageToken = a})
 
@@ -214,13 +214,13 @@ vlPageToken
 -- should be returned in the result set. Note: This parameter is supported
 -- for use in conjunction with the myRating parameter, but it is not
 -- supported for use in conjunction with the id parameter.
-vlMaxResults :: Lens' VideosList' Word32
+vlMaxResults :: Lens' VideosList Word32
 vlMaxResults
   = lens _vlMaxResults (\ s a -> s{_vlMaxResults = a})
 
-instance GoogleRequest VideosList' where
-        type Rs VideosList' = VideoListResponse
-        requestClient VideosList'{..}
+instance GoogleRequest VideosList where
+        type Rs VideosList = VideoListResponse
+        requestClient VideosList{..}
           = go (Just _vlPart) _vlChart _vlRegionCode _vlLocale
               _vlMyRating
               _vlHl

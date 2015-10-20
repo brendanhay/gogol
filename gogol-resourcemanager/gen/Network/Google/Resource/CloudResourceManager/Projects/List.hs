@@ -31,8 +31,8 @@ module Network.Google.Resource.CloudResourceManager.Projects.List
       ProjectsListResource
 
     -- * Creating a Request
-    , projectsList'
-    , ProjectsList'
+    , projectsList
+    , ProjectsList
 
     -- * Request Lenses
     , plXgafv
@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.projects.list@ method which the
--- 'ProjectsList'' request conforms to.
+-- 'ProjectsList' request conforms to.
 type ProjectsListResource =
      "v1beta1" :>
        "projects" :>
@@ -72,8 +72,8 @@ type ProjectsListResource =
 -- filter. This method returns projects in an unspecified order. New
 -- projects do not necessarily appear at the end of the list.
 --
--- /See:/ 'projectsList'' smart constructor.
-data ProjectsList' = ProjectsList'
+-- /See:/ 'projectsList' smart constructor.
+data ProjectsList = ProjectsList
     { _plXgafv          :: !(Maybe Text)
     , _plUploadProtocol :: !(Maybe Text)
     , _plPp             :: !Bool
@@ -86,7 +86,7 @@ data ProjectsList' = ProjectsList'
     , _plCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -109,10 +109,10 @@ data ProjectsList' = ProjectsList'
 -- * 'plPageSize'
 --
 -- * 'plCallback'
-projectsList'
-    :: ProjectsList'
-projectsList' =
-    ProjectsList'
+projectsList
+    :: ProjectsList
+projectsList =
+    ProjectsList
     { _plXgafv = Nothing
     , _plUploadProtocol = Nothing
     , _plPp = True
@@ -126,32 +126,32 @@ projectsList' =
     }
 
 -- | V1 error format.
-plXgafv :: Lens' ProjectsList' (Maybe Text)
+plXgafv :: Lens' ProjectsList (Maybe Text)
 plXgafv = lens _plXgafv (\ s a -> s{_plXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-plUploadProtocol :: Lens' ProjectsList' (Maybe Text)
+plUploadProtocol :: Lens' ProjectsList (Maybe Text)
 plUploadProtocol
   = lens _plUploadProtocol
       (\ s a -> s{_plUploadProtocol = a})
 
 -- | Pretty-print response.
-plPp :: Lens' ProjectsList' Bool
+plPp :: Lens' ProjectsList Bool
 plPp = lens _plPp (\ s a -> s{_plPp = a})
 
 -- | OAuth access token.
-plAccessToken :: Lens' ProjectsList' (Maybe Text)
+plAccessToken :: Lens' ProjectsList (Maybe Text)
 plAccessToken
   = lens _plAccessToken
       (\ s a -> s{_plAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-plUploadType :: Lens' ProjectsList' (Maybe Text)
+plUploadType :: Lens' ProjectsList (Maybe Text)
 plUploadType
   = lens _plUploadType (\ s a -> s{_plUploadType = a})
 
 -- | OAuth bearer token.
-plBearerToken :: Lens' ProjectsList' (Maybe Text)
+plBearerToken :: Lens' ProjectsList (Maybe Text)
 plBearerToken
   = lens _plBearerToken
       (\ s a -> s{_plBearerToken = a})
@@ -167,13 +167,13 @@ plBearerToken
 -- the value \`red\`.| |labels.color:red label.size:big|The project\'s
 -- label \`color\` has the value \`red\` and its label \`size\` has the
 -- value \`big\`. Optional.
-plFilter :: Lens' ProjectsList' (Maybe Text)
+plFilter :: Lens' ProjectsList (Maybe Text)
 plFilter = lens _plFilter (\ s a -> s{_plFilter = a})
 
 -- | A pagination token returned from a previous call to ListProject that
 -- indicates from where listing should continue. Note: pagination is not
 -- yet supported; the server ignores this field. Optional.
-plPageToken :: Lens' ProjectsList' (Maybe Text)
+plPageToken :: Lens' ProjectsList (Maybe Text)
 plPageToken
   = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
@@ -181,18 +181,18 @@ plPageToken
 -- return fewer projects than requested. If unspecified, server picks an
 -- appropriate default. Note: pagination is not yet supported; the server
 -- ignores this field. Optional.
-plPageSize :: Lens' ProjectsList' (Maybe Int32)
+plPageSize :: Lens' ProjectsList (Maybe Int32)
 plPageSize
   = lens _plPageSize (\ s a -> s{_plPageSize = a})
 
 -- | JSONP
-plCallback :: Lens' ProjectsList' (Maybe Text)
+plCallback :: Lens' ProjectsList (Maybe Text)
 plCallback
   = lens _plCallback (\ s a -> s{_plCallback = a})
 
-instance GoogleRequest ProjectsList' where
-        type Rs ProjectsList' = ListProjectsResponse
-        requestClient ProjectsList'{..}
+instance GoogleRequest ProjectsList where
+        type Rs ProjectsList = ListProjectsResponse
+        requestClient ProjectsList{..}
           = go _plXgafv _plUploadProtocol (Just _plPp)
               _plAccessToken
               _plUploadType

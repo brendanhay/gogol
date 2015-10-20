@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Scores.Reset
       ScoresResetResource
 
     -- * Creating a Request
-    , scoresReset'
-    , ScoresReset'
+    , scoresReset
+    , ScoresReset
 
     -- * Request Lenses
     , srLeaderboardId
@@ -42,7 +42,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.scores.reset@ method which the
--- 'ScoresReset'' request conforms to.
+-- 'ScoresReset' request conforms to.
 type ScoresResetResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
@@ -55,33 +55,33 @@ type ScoresResetResource =
 -- authenticated player. This method is only accessible to whitelisted
 -- tester accounts for your application.
 --
--- /See:/ 'scoresReset'' smart constructor.
-newtype ScoresReset' = ScoresReset'
+-- /See:/ 'scoresReset' smart constructor.
+newtype ScoresReset = ScoresReset
     { _srLeaderboardId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ScoresReset'' with the minimum fields required to make a request.
+-- | Creates a value of 'ScoresReset' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'srLeaderboardId'
-scoresReset'
+scoresReset
     :: Text -- ^ 'srLeaderboardId'
-    -> ScoresReset'
-scoresReset' pSrLeaderboardId_ =
-    ScoresReset'
+    -> ScoresReset
+scoresReset pSrLeaderboardId_ =
+    ScoresReset
     { _srLeaderboardId = pSrLeaderboardId_
     }
 
 -- | The ID of the leaderboard.
-srLeaderboardId :: Lens' ScoresReset' Text
+srLeaderboardId :: Lens' ScoresReset Text
 srLeaderboardId
   = lens _srLeaderboardId
       (\ s a -> s{_srLeaderboardId = a})
 
-instance GoogleRequest ScoresReset' where
-        type Rs ScoresReset' = PlayerScoreResetResponse
-        requestClient ScoresReset'{..}
+instance GoogleRequest ScoresReset where
+        type Rs ScoresReset = PlayerScoreResetResponse
+        requestClient ScoresReset{..}
           = go _srLeaderboardId (Just AltJSON)
               gamesManagementService
           where go

@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Reports.Run
       ReportsRunResource
 
     -- * Creating a Request
-    , reportsRun'
-    , ReportsRun'
+    , reportsRun
+    , ReportsRun
 
     -- * Request Lenses
     , rrSynchronous
@@ -42,7 +42,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.reports.run@ method which the
--- 'ReportsRun'' request conforms to.
+-- 'ReportsRun' request conforms to.
 type ReportsRunResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -54,14 +54,14 @@ type ReportsRunResource =
 
 -- | Runs a report.
 --
--- /See:/ 'reportsRun'' smart constructor.
-data ReportsRun' = ReportsRun'
+-- /See:/ 'reportsRun' smart constructor.
+data ReportsRun = ReportsRun
     { _rrSynchronous :: !(Maybe Bool)
     , _rrReportId    :: !Int64
     , _rrProFileId   :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ReportsRun'' with the minimum fields required to make a request.
+-- | Creates a value of 'ReportsRun' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,36 +70,36 @@ data ReportsRun' = ReportsRun'
 -- * 'rrReportId'
 --
 -- * 'rrProFileId'
-reportsRun'
+reportsRun
     :: Int64 -- ^ 'rrReportId'
     -> Int64 -- ^ 'rrProFileId'
-    -> ReportsRun'
-reportsRun' pRrReportId_ pRrProFileId_ =
-    ReportsRun'
+    -> ReportsRun
+reportsRun pRrReportId_ pRrProFileId_ =
+    ReportsRun
     { _rrSynchronous = Nothing
     , _rrReportId = pRrReportId_
     , _rrProFileId = pRrProFileId_
     }
 
 -- | If set and true, tries to run the report synchronously.
-rrSynchronous :: Lens' ReportsRun' (Maybe Bool)
+rrSynchronous :: Lens' ReportsRun (Maybe Bool)
 rrSynchronous
   = lens _rrSynchronous
       (\ s a -> s{_rrSynchronous = a})
 
 -- | The ID of the report.
-rrReportId :: Lens' ReportsRun' Int64
+rrReportId :: Lens' ReportsRun Int64
 rrReportId
   = lens _rrReportId (\ s a -> s{_rrReportId = a})
 
 -- | The DFA profile ID.
-rrProFileId :: Lens' ReportsRun' Int64
+rrProFileId :: Lens' ReportsRun Int64
 rrProFileId
   = lens _rrProFileId (\ s a -> s{_rrProFileId = a})
 
-instance GoogleRequest ReportsRun' where
-        type Rs ReportsRun' = File
-        requestClient ReportsRun'{..}
+instance GoogleRequest ReportsRun where
+        type Rs ReportsRun = File
+        requestClient ReportsRun{..}
           = go _rrProFileId _rrReportId _rrSynchronous
               (Just AltJSON)
               dFAReportingService

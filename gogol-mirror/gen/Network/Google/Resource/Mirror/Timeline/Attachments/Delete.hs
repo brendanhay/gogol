@@ -29,8 +29,8 @@ module Network.Google.Resource.Mirror.Timeline.Attachments.Delete
       TimelineAttachmentsDeleteResource
 
     -- * Creating a Request
-    , timelineAttachmentsDelete'
-    , TimelineAttachmentsDelete'
+    , timelineAttachmentsDelete
+    , TimelineAttachmentsDelete
 
     -- * Request Lenses
     , tadItemId
@@ -41,7 +41,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.timeline.attachments.delete@ method which the
--- 'TimelineAttachmentsDelete'' request conforms to.
+-- 'TimelineAttachmentsDelete' request conforms to.
 type TimelineAttachmentsDeleteResource =
      "timeline" :>
        Capture "itemId" Text :>
@@ -51,44 +51,44 @@ type TimelineAttachmentsDeleteResource =
 
 -- | Deletes an attachment from a timeline item.
 --
--- /See:/ 'timelineAttachmentsDelete'' smart constructor.
-data TimelineAttachmentsDelete' = TimelineAttachmentsDelete'
+-- /See:/ 'timelineAttachmentsDelete' smart constructor.
+data TimelineAttachmentsDelete = TimelineAttachmentsDelete
     { _tadItemId       :: !Text
     , _tadAttachmentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TimelineAttachmentsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'TimelineAttachmentsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tadItemId'
 --
 -- * 'tadAttachmentId'
-timelineAttachmentsDelete'
+timelineAttachmentsDelete
     :: Text -- ^ 'tadItemId'
     -> Text -- ^ 'tadAttachmentId'
-    -> TimelineAttachmentsDelete'
-timelineAttachmentsDelete' pTadItemId_ pTadAttachmentId_ =
-    TimelineAttachmentsDelete'
+    -> TimelineAttachmentsDelete
+timelineAttachmentsDelete pTadItemId_ pTadAttachmentId_ =
+    TimelineAttachmentsDelete
     { _tadItemId = pTadItemId_
     , _tadAttachmentId = pTadAttachmentId_
     }
 
 -- | The ID of the timeline item the attachment belongs to.
-tadItemId :: Lens' TimelineAttachmentsDelete' Text
+tadItemId :: Lens' TimelineAttachmentsDelete Text
 tadItemId
   = lens _tadItemId (\ s a -> s{_tadItemId = a})
 
 -- | The ID of the attachment.
-tadAttachmentId :: Lens' TimelineAttachmentsDelete' Text
+tadAttachmentId :: Lens' TimelineAttachmentsDelete Text
 tadAttachmentId
   = lens _tadAttachmentId
       (\ s a -> s{_tadAttachmentId = a})
 
-instance GoogleRequest TimelineAttachmentsDelete'
+instance GoogleRequest TimelineAttachmentsDelete
          where
-        type Rs TimelineAttachmentsDelete' = ()
-        requestClient TimelineAttachmentsDelete'{..}
+        type Rs TimelineAttachmentsDelete = ()
+        requestClient TimelineAttachmentsDelete{..}
           = go _tadItemId _tadAttachmentId (Just AltJSON)
               mirrorService
           where go

@@ -30,8 +30,8 @@ module Network.Google.Resource.Gmail.Users.Labels.Delete
       UsersLabelsDeleteResource
 
     -- * Creating a Request
-    , usersLabelsDelete'
-    , UsersLabelsDelete'
+    , usersLabelsDelete
+    , UsersLabelsDelete
 
     -- * Request Lenses
     , uldUserId
@@ -42,7 +42,7 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.labels.delete@ method which the
--- 'UsersLabelsDelete'' request conforms to.
+-- 'UsersLabelsDelete' request conforms to.
 type UsersLabelsDeleteResource =
      Capture "userId" Text :>
        "labels" :>
@@ -52,42 +52,42 @@ type UsersLabelsDeleteResource =
 -- | Immediately and permanently deletes the specified label and removes it
 -- from any messages and threads that it is applied to.
 --
--- /See:/ 'usersLabelsDelete'' smart constructor.
-data UsersLabelsDelete' = UsersLabelsDelete'
+-- /See:/ 'usersLabelsDelete' smart constructor.
+data UsersLabelsDelete = UsersLabelsDelete
     { _uldUserId :: !Text
     , _uldId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersLabelsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersLabelsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'uldUserId'
 --
 -- * 'uldId'
-usersLabelsDelete'
+usersLabelsDelete
     :: Text -- ^ 'uldId'
     -> Text
-    -> UsersLabelsDelete'
-usersLabelsDelete' pUldUserId_ pUldId_ =
-    UsersLabelsDelete'
+    -> UsersLabelsDelete
+usersLabelsDelete pUldUserId_ pUldId_ =
+    UsersLabelsDelete
     { _uldUserId = pUldUserId_
     , _uldId = pUldId_
     }
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-uldUserId :: Lens' UsersLabelsDelete' Text
+uldUserId :: Lens' UsersLabelsDelete Text
 uldUserId
   = lens _uldUserId (\ s a -> s{_uldUserId = a})
 
 -- | The ID of the label to delete.
-uldId :: Lens' UsersLabelsDelete' Text
+uldId :: Lens' UsersLabelsDelete Text
 uldId = lens _uldId (\ s a -> s{_uldId = a})
 
-instance GoogleRequest UsersLabelsDelete' where
-        type Rs UsersLabelsDelete' = ()
-        requestClient UsersLabelsDelete'{..}
+instance GoogleRequest UsersLabelsDelete where
+        type Rs UsersLabelsDelete = ()
+        requestClient UsersLabelsDelete{..}
           = go _uldUserId _uldId (Just AltJSON) gmailService
           where go
                   = buildClient

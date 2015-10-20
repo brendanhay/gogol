@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Projects.Icons.List
       ProjectsIconsListResource
 
     -- * Creating a Request
-    , projectsIconsList'
-    , ProjectsIconsList'
+    , projectsIconsList
+    , ProjectsIconsList
 
     -- * Request Lenses
     , pilPageToken
@@ -42,7 +42,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.projects.icons.list@ method which the
--- 'ProjectsIconsList'' request conforms to.
+-- 'ProjectsIconsList' request conforms to.
 type ProjectsIconsListResource =
      "projects" :>
        Capture "projectId" Text :>
@@ -54,14 +54,14 @@ type ProjectsIconsListResource =
 
 -- | Return all icons in the current project
 --
--- /See:/ 'projectsIconsList'' smart constructor.
-data ProjectsIconsList' = ProjectsIconsList'
+-- /See:/ 'projectsIconsList' smart constructor.
+data ProjectsIconsList = ProjectsIconsList
     { _pilPageToken  :: !(Maybe Text)
     , _pilProjectId  :: !Text
     , _pilMaxResults :: !(Maybe Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsIconsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsIconsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,11 +70,11 @@ data ProjectsIconsList' = ProjectsIconsList'
 -- * 'pilProjectId'
 --
 -- * 'pilMaxResults'
-projectsIconsList'
+projectsIconsList
     :: Text -- ^ 'pilProjectId'
-    -> ProjectsIconsList'
-projectsIconsList' pPilProjectId_ =
-    ProjectsIconsList'
+    -> ProjectsIconsList
+projectsIconsList pPilProjectId_ =
+    ProjectsIconsList
     { _pilPageToken = Nothing
     , _pilProjectId = pPilProjectId_
     , _pilMaxResults = Nothing
@@ -83,25 +83,25 @@ projectsIconsList' pPilProjectId_ =
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
 -- nextPageToken from the previous response.
-pilPageToken :: Lens' ProjectsIconsList' (Maybe Text)
+pilPageToken :: Lens' ProjectsIconsList (Maybe Text)
 pilPageToken
   = lens _pilPageToken (\ s a -> s{_pilPageToken = a})
 
 -- | The ID of the project.
-pilProjectId :: Lens' ProjectsIconsList' Text
+pilProjectId :: Lens' ProjectsIconsList Text
 pilProjectId
   = lens _pilProjectId (\ s a -> s{_pilProjectId = a})
 
 -- | The maximum number of items to include in a single response page. The
 -- maximum supported value is 50.
-pilMaxResults :: Lens' ProjectsIconsList' (Maybe Word32)
+pilMaxResults :: Lens' ProjectsIconsList (Maybe Word32)
 pilMaxResults
   = lens _pilMaxResults
       (\ s a -> s{_pilMaxResults = a})
 
-instance GoogleRequest ProjectsIconsList' where
-        type Rs ProjectsIconsList' = IconsListResponse
-        requestClient ProjectsIconsList'{..}
+instance GoogleRequest ProjectsIconsList where
+        type Rs ProjectsIconsList = IconsListResponse
+        requestClient ProjectsIconsList{..}
           = go _pilProjectId _pilPageToken _pilMaxResults
               (Just AltJSON)
               mapsEngineService

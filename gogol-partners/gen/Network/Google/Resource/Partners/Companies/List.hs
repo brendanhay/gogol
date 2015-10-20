@@ -29,8 +29,8 @@ module Network.Google.Resource.Partners.Companies.List
       CompaniesListResource
 
     -- * Creating a Request
-    , companiesList'
-    , CompaniesList'
+    , companiesList
+    , CompaniesList
 
     -- * Request Lenses
     , clLanguageCodes
@@ -70,7 +70,7 @@ import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @partners.companies.list@ method which the
--- 'CompaniesList'' request conforms to.
+-- 'CompaniesList' request conforms to.
 type CompaniesListResource =
      "v2" :>
        "companies" :>
@@ -155,8 +155,8 @@ type CompaniesListResource =
 
 -- | Lists companies.
 --
--- /See:/ 'companiesList'' smart constructor.
-data CompaniesList' = CompaniesList'
+-- /See:/ 'companiesList' smart constructor.
+data CompaniesList = CompaniesList
     { _clLanguageCodes                               :: !(Maybe [Text])
     , _clXgafv                                       :: !(Maybe Text)
     , _clMaxMonthlyBudgetUnits                       :: !(Maybe Int64)
@@ -190,7 +190,7 @@ data CompaniesList' = CompaniesList'
     , _clCallback                                    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CompaniesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CompaniesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -255,10 +255,10 @@ data CompaniesList' = CompaniesList'
 -- * 'clRequestMetadataTrafficSourceTrafficSourceId'
 --
 -- * 'clCallback'
-companiesList'
-    :: CompaniesList'
-companiesList' =
-    CompaniesList'
+companiesList
+    :: CompaniesList
+companiesList =
+    CompaniesList
     { _clLanguageCodes = Nothing
     , _clXgafv = Nothing
     , _clMaxMonthlyBudgetUnits = Nothing
@@ -295,7 +295,7 @@ companiesList' =
 -- | List of language codes that company can support. Only primary language
 -- subtags are accepted as defined by BCP 47 (IETF BCP 47, \"Tags for
 -- Identifying Languages\").
-clLanguageCodes :: Lens' CompaniesList' [Text]
+clLanguageCodes :: Lens' CompaniesList [Text]
 clLanguageCodes
   = lens _clLanguageCodes
       (\ s a -> s{_clLanguageCodes = a})
@@ -303,18 +303,18 @@ clLanguageCodes
       . _Coerce
 
 -- | V1 error format.
-clXgafv :: Lens' CompaniesList' (Maybe Text)
+clXgafv :: Lens' CompaniesList (Maybe Text)
 clXgafv = lens _clXgafv (\ s a -> s{_clXgafv = a})
 
 -- | The whole units of the amount. For example if \`currencyCode\` is
 -- \`\"USD\"\`, then 1 unit is one US dollar.
-clMaxMonthlyBudgetUnits :: Lens' CompaniesList' (Maybe Int64)
+clMaxMonthlyBudgetUnits :: Lens' CompaniesList (Maybe Int64)
 clMaxMonthlyBudgetUnits
   = lens _clMaxMonthlyBudgetUnits
       (\ s a -> s{_clMaxMonthlyBudgetUnits = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-clUploadProtocol :: Lens' CompaniesList' (Maybe Text)
+clUploadProtocol :: Lens' CompaniesList (Maybe Text)
 clUploadProtocol
   = lens _clUploadProtocol
       (\ s a -> s{_clUploadProtocol = a})
@@ -323,34 +323,34 @@ clUploadProtocol
 -- \`address\` and \`address desc\` is supported which will sorted by
 -- closest to farthest in distance from given address and farthest to
 -- closest distance from given address respectively.
-clOrderBy :: Lens' CompaniesList' (Maybe Text)
+clOrderBy :: Lens' CompaniesList (Maybe Text)
 clOrderBy
   = lens _clOrderBy (\ s a -> s{_clOrderBy = a})
 
 -- | Pretty-print response.
-clPp :: Lens' CompaniesList' Bool
+clPp :: Lens' CompaniesList Bool
 clPp = lens _clPp (\ s a -> s{_clPp = a})
 
 -- | Company name to search for.
-clCompanyName :: Lens' CompaniesList' (Maybe Text)
+clCompanyName :: Lens' CompaniesList (Maybe Text)
 clCompanyName
   = lens _clCompanyName
       (\ s a -> s{_clCompanyName = a})
 
 -- | OAuth access token.
-clAccessToken :: Lens' CompaniesList' (Maybe Text)
+clAccessToken :: Lens' CompaniesList (Maybe Text)
 clAccessToken
   = lens _clAccessToken
       (\ s a -> s{_clAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-clUploadType :: Lens' CompaniesList' (Maybe Text)
+clUploadType :: Lens' CompaniesList (Maybe Text)
 clUploadType
   = lens _clUploadType (\ s a -> s{_clUploadType = a})
 
 -- | The address to use when searching for companies. If not given, the
 -- geo-located address of the request is used.
-clAddress :: Lens' CompaniesList' (Maybe Text)
+clAddress :: Lens' CompaniesList (Maybe Text)
 clAddress
   = lens _clAddress (\ s a -> s{_clAddress = a})
 
@@ -360,26 +360,26 @@ clAddress
 -- be positive, zero, or negative. If \`units\` is negative, \`nanos\` must
 -- be negative or zero. For example $-1.75 is represented as \`units\`=-1
 -- and \`nanos\`=-750,000,000.
-clMinMonthlyBudgetNanos :: Lens' CompaniesList' (Maybe Int32)
+clMinMonthlyBudgetNanos :: Lens' CompaniesList (Maybe Int32)
 clMinMonthlyBudgetNanos
   = lens _clMinMonthlyBudgetNanos
       (\ s a -> s{_clMinMonthlyBudgetNanos = a})
 
 -- | List of industries the company can help with.
-clIndustries :: Lens' CompaniesList' [Text]
+clIndustries :: Lens' CompaniesList [Text]
 clIndustries
   = lens _clIndustries (\ s a -> s{_clIndustries = a})
       . _Default
       . _Coerce
 
 -- | Google Partners session ID.
-clRequestMetadataPartnersSessionId :: Lens' CompaniesList' (Maybe Text)
+clRequestMetadataPartnersSessionId :: Lens' CompaniesList (Maybe Text)
 clRequestMetadataPartnersSessionId
   = lens _clRequestMetadataPartnersSessionId
       (\ s a -> s{_clRequestMetadataPartnersSessionId = a})
 
 -- | OAuth bearer token.
-clBearerToken :: Lens' CompaniesList' (Maybe Text)
+clBearerToken :: Lens' CompaniesList (Maybe Text)
 clBearerToken
   = lens _clBearerToken
       (\ s a -> s{_clBearerToken = a})
@@ -390,24 +390,24 @@ clBearerToken
 -- be positive, zero, or negative. If \`units\` is negative, \`nanos\` must
 -- be negative or zero. For example $-1.75 is represented as \`units\`=-1
 -- and \`nanos\`=-750,000,000.
-clMaxMonthlyBudgetNanos :: Lens' CompaniesList' (Maybe Int32)
+clMaxMonthlyBudgetNanos :: Lens' CompaniesList (Maybe Int32)
 clMaxMonthlyBudgetNanos
   = lens _clMaxMonthlyBudgetNanos
       (\ s a -> s{_clMaxMonthlyBudgetNanos = a})
 
 -- | Locale to use for the current request.
-clRequestMetadataLocale :: Lens' CompaniesList' (Maybe Text)
+clRequestMetadataLocale :: Lens' CompaniesList (Maybe Text)
 clRequestMetadataLocale
   = lens _clRequestMetadataLocale
       (\ s a -> s{_clRequestMetadataLocale = a})
 
 -- | The view of the \`Company\` resource to be returned. This must not be
 -- \`COMPANY_VIEW_UNSPECIFIED\`.
-clView :: Lens' CompaniesList' (Maybe Text)
+clView :: Lens' CompaniesList (Maybe Text)
 clView = lens _clView (\ s a -> s{_clView = a})
 
 -- | Experiment IDs the current request belongs to.
-clRequestMetadataExperimentIds :: Lens' CompaniesList' [Text]
+clRequestMetadataExperimentIds :: Lens' CompaniesList [Text]
 clRequestMetadataExperimentIds
   = lens _clRequestMetadataExperimentIds
       (\ s a -> s{_clRequestMetadataExperimentIds = a})
@@ -415,20 +415,20 @@ clRequestMetadataExperimentIds
       . _Coerce
 
 -- | IP address to use instead of the user\'s geo-located IP address.
-clRequestMetadataUserOverridesIPAddress :: Lens' CompaniesList' (Maybe Text)
+clRequestMetadataUserOverridesIPAddress :: Lens' CompaniesList (Maybe Text)
 clRequestMetadataUserOverridesIPAddress
   = lens _clRequestMetadataUserOverridesIPAddress
       (\ s a ->
          s{_clRequestMetadataUserOverridesIPAddress = a})
 
 -- | The 3-letter currency code defined in ISO 4217.
-clMaxMonthlyBudgetCurrencyCode :: Lens' CompaniesList' (Maybe Text)
+clMaxMonthlyBudgetCurrencyCode :: Lens' CompaniesList (Maybe Text)
 clMaxMonthlyBudgetCurrencyCode
   = lens _clMaxMonthlyBudgetCurrencyCode
       (\ s a -> s{_clMaxMonthlyBudgetCurrencyCode = a})
 
 -- | Website URL that will help to find a better matched company. .
-clWebsiteURL :: Lens' CompaniesList' (Maybe Text)
+clWebsiteURL :: Lens' CompaniesList (Maybe Text)
 clWebsiteURL
   = lens _clWebsiteURL (\ s a -> s{_clWebsiteURL = a})
 
@@ -436,21 +436,21 @@ clWebsiteURL
 -- Typically, this is the value of
 -- \`ListCompaniesResponse.next_page_token\` returned from the previous
 -- call to ListCompanies.
-clPageToken :: Lens' CompaniesList' (Maybe Text)
+clPageToken :: Lens' CompaniesList (Maybe Text)
 clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
 -- | Second level identifier to indicate where the traffic comes from. An
 -- identifier has multiple letters created by a team which redirected the
 -- traffic to us.
-clRequestMetadataTrafficSourceTrafficSubId :: Lens' CompaniesList' (Maybe Text)
+clRequestMetadataTrafficSourceTrafficSubId :: Lens' CompaniesList (Maybe Text)
 clRequestMetadataTrafficSourceTrafficSubId
   = lens _clRequestMetadataTrafficSourceTrafficSubId
       (\ s a ->
          s{_clRequestMetadataTrafficSourceTrafficSubId = a})
 
 -- | List of reasons for using Google Partner Search to get companies.
-clGpsMotivations :: Lens' CompaniesList' [Text]
+clGpsMotivations :: Lens' CompaniesList [Text]
 clGpsMotivations
   = lens _clGpsMotivations
       (\ s a -> s{_clGpsMotivations = a})
@@ -459,25 +459,25 @@ clGpsMotivations
 
 -- | Requested page size. Server may return fewer companies than requested.
 -- If unspecified, server picks an appropriate default.
-clPageSize :: Lens' CompaniesList' (Maybe Int32)
+clPageSize :: Lens' CompaniesList (Maybe Int32)
 clPageSize
   = lens _clPageSize (\ s a -> s{_clPageSize = a})
 
 -- | The 3-letter currency code defined in ISO 4217.
-clMinMonthlyBudgetCurrencyCode :: Lens' CompaniesList' (Maybe Text)
+clMinMonthlyBudgetCurrencyCode :: Lens' CompaniesList (Maybe Text)
 clMinMonthlyBudgetCurrencyCode
   = lens _clMinMonthlyBudgetCurrencyCode
       (\ s a -> s{_clMinMonthlyBudgetCurrencyCode = a})
 
 -- | List of services the company can help with.
-clServices :: Lens' CompaniesList' [Text]
+clServices :: Lens' CompaniesList [Text]
 clServices
   = lens _clServices (\ s a -> s{_clServices = a}) .
       _Default
       . _Coerce
 
 -- | Logged-in user ID to impersonate instead of the user\'s ID.
-clRequestMetadataUserOverridesUserId :: Lens' CompaniesList' (Maybe Text)
+clRequestMetadataUserOverridesUserId :: Lens' CompaniesList (Maybe Text)
 clRequestMetadataUserOverridesUserId
   = lens _clRequestMetadataUserOverridesUserId
       (\ s a ->
@@ -485,14 +485,14 @@ clRequestMetadataUserOverridesUserId
 
 -- | The whole units of the amount. For example if \`currencyCode\` is
 -- \`\"USD\"\`, then 1 unit is one US dollar.
-clMinMonthlyBudgetUnits :: Lens' CompaniesList' (Maybe Int64)
+clMinMonthlyBudgetUnits :: Lens' CompaniesList (Maybe Int64)
 clMinMonthlyBudgetUnits
   = lens _clMinMonthlyBudgetUnits
       (\ s a -> s{_clMinMonthlyBudgetUnits = a})
 
 -- | Identifier to indicate where the traffic comes from. An identifier has
 -- multiple letters created by a team which redirected the traffic to us.
-clRequestMetadataTrafficSourceTrafficSourceId :: Lens' CompaniesList' (Maybe Text)
+clRequestMetadataTrafficSourceTrafficSourceId :: Lens' CompaniesList (Maybe Text)
 clRequestMetadataTrafficSourceTrafficSourceId
   = lens _clRequestMetadataTrafficSourceTrafficSourceId
       (\ s a ->
@@ -500,13 +500,13 @@ clRequestMetadataTrafficSourceTrafficSourceId
              a})
 
 -- | JSONP
-clCallback :: Lens' CompaniesList' (Maybe Text)
+clCallback :: Lens' CompaniesList (Maybe Text)
 clCallback
   = lens _clCallback (\ s a -> s{_clCallback = a})
 
-instance GoogleRequest CompaniesList' where
-        type Rs CompaniesList' = ListCompaniesResponse
-        requestClient CompaniesList'{..}
+instance GoogleRequest CompaniesList where
+        type Rs CompaniesList = ListCompaniesResponse
+        requestClient CompaniesList{..}
           = go (_clLanguageCodes ^. _Default) _clXgafv
               _clMaxMonthlyBudgetUnits
               _clUploadProtocol

@@ -29,18 +29,18 @@ module Network.Google.Resource.AndroidEnterprise.Collections.List
       CollectionsListResource
 
     -- * Creating a Request
-    , collectionsList'
-    , CollectionsList'
+    , collectionsList
+    , CollectionsList
 
     -- * Request Lenses
-    , cEnterpriseId
+    , clEnterpriseId
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @androidenterprise.collections.list@ method which the
--- 'CollectionsList'' request conforms to.
+-- 'CollectionsList' request conforms to.
 type CollectionsListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
@@ -50,34 +50,34 @@ type CollectionsListResource =
 
 -- | Retrieves the IDs of all the collections for an enterprise.
 --
--- /See:/ 'collectionsList'' smart constructor.
-newtype CollectionsList' = CollectionsList'
-    { _cEnterpriseId :: Text
+-- /See:/ 'collectionsList' smart constructor.
+newtype CollectionsList = CollectionsList
+    { _clEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CollectionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CollectionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cEnterpriseId'
-collectionsList'
-    :: Text -- ^ 'cEnterpriseId'
-    -> CollectionsList'
-collectionsList' pCEnterpriseId_ =
-    CollectionsList'
-    { _cEnterpriseId = pCEnterpriseId_
+-- * 'clEnterpriseId'
+collectionsList
+    :: Text -- ^ 'clEnterpriseId'
+    -> CollectionsList
+collectionsList pClEnterpriseId_ =
+    CollectionsList
+    { _clEnterpriseId = pClEnterpriseId_
     }
 
 -- | The ID of the enterprise.
-cEnterpriseId :: Lens' CollectionsList' Text
-cEnterpriseId
-  = lens _cEnterpriseId
-      (\ s a -> s{_cEnterpriseId = a})
+clEnterpriseId :: Lens' CollectionsList Text
+clEnterpriseId
+  = lens _clEnterpriseId
+      (\ s a -> s{_clEnterpriseId = a})
 
-instance GoogleRequest CollectionsList' where
-        type Rs CollectionsList' = CollectionsListResponse
-        requestClient CollectionsList'{..}
-          = go _cEnterpriseId (Just AltJSON)
+instance GoogleRequest CollectionsList where
+        type Rs CollectionsList = CollectionsListResponse
+        requestClient CollectionsList{..}
+          = go _clEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go
                   = buildClient

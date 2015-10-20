@@ -29,8 +29,8 @@ module Network.Google.Resource.QPXExpress.Trips.Search
       TripsSearchResource
 
     -- * Creating a Request
-    , tripsSearch'
-    , TripsSearch'
+    , tripsSearch
+    , TripsSearch
 
     -- * Request Lenses
     , tsPayload
@@ -40,7 +40,7 @@ import           Network.Google.Prelude
 import           Network.Google.QPXExpress.Types
 
 -- | A resource alias for @qpxExpress.trips.search@ method which the
--- 'TripsSearch'' request conforms to.
+-- 'TripsSearch' request conforms to.
 type TripsSearchResource =
      "search" :>
        QueryParam "alt" AltJSON :>
@@ -49,32 +49,32 @@ type TripsSearchResource =
 
 -- | Returns a list of flights.
 --
--- /See:/ 'tripsSearch'' smart constructor.
-newtype TripsSearch' = TripsSearch'
+-- /See:/ 'tripsSearch' smart constructor.
+newtype TripsSearch = TripsSearch
     { _tsPayload :: TripsSearchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TripsSearch'' with the minimum fields required to make a request.
+-- | Creates a value of 'TripsSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tsPayload'
-tripsSearch'
+tripsSearch
     :: TripsSearchRequest -- ^ 'tsPayload'
-    -> TripsSearch'
-tripsSearch' pTsPayload_ =
-    TripsSearch'
+    -> TripsSearch
+tripsSearch pTsPayload_ =
+    TripsSearch
     { _tsPayload = pTsPayload_
     }
 
 -- | Multipart request metadata.
-tsPayload :: Lens' TripsSearch' TripsSearchRequest
+tsPayload :: Lens' TripsSearch TripsSearchRequest
 tsPayload
   = lens _tsPayload (\ s a -> s{_tsPayload = a})
 
-instance GoogleRequest TripsSearch' where
-        type Rs TripsSearch' = TripsSearchResponse
-        requestClient TripsSearch'{..}
+instance GoogleRequest TripsSearch where
+        type Rs TripsSearch = TripsSearchResponse
+        requestClient TripsSearch{..}
           = go (Just AltJSON) _tsPayload qPXExpressService
           where go
                   = buildClient (Proxy :: Proxy TripsSearchResource)

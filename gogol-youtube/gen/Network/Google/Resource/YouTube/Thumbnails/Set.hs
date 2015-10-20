@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.Thumbnails.Set
       ThumbnailsSetResource
 
     -- * Creating a Request
-    , thumbnailsSet'
-    , ThumbnailsSet'
+    , thumbnailsSet
+    , ThumbnailsSet
 
     -- * Request Lenses
     , tsMedia
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.thumbnails.set@ method which the
--- 'ThumbnailsSet'' request conforms to.
+-- 'ThumbnailsSet' request conforms to.
 type ThumbnailsSetResource =
      "thumbnails" :>
        "set" :>
@@ -54,14 +54,14 @@ type ThumbnailsSetResource =
 
 -- | Uploads a custom video thumbnail to YouTube and sets it for a video.
 --
--- /See:/ 'thumbnailsSet'' smart constructor.
-data ThumbnailsSet' = ThumbnailsSet'
+-- /See:/ 'thumbnailsSet' smart constructor.
+data ThumbnailsSet = ThumbnailsSet
     { _tsMedia                  :: !Body
     , _tsOnBehalfOfContentOwner :: !(Maybe Text)
     , _tsVideoId                :: !Text
     }
 
--- | Creates a value of 'ThumbnailsSet'' with the minimum fields required to make a request.
+-- | Creates a value of 'ThumbnailsSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,18 +70,18 @@ data ThumbnailsSet' = ThumbnailsSet'
 -- * 'tsOnBehalfOfContentOwner'
 --
 -- * 'tsVideoId'
-thumbnailsSet'
+thumbnailsSet
     :: Body -- ^ 'tsMedia'
     -> Text -- ^ 'tsVideoId'
-    -> ThumbnailsSet'
-thumbnailsSet' pTsMedia_ pTsVideoId_ =
-    ThumbnailsSet'
+    -> ThumbnailsSet
+thumbnailsSet pTsMedia_ pTsVideoId_ =
+    ThumbnailsSet
     { _tsMedia = pTsMedia_
     , _tsOnBehalfOfContentOwner = Nothing
     , _tsVideoId = pTsVideoId_
     }
 
-tsMedia :: Lens' ThumbnailsSet' Body
+tsMedia :: Lens' ThumbnailsSet Body
 tsMedia = lens _tsMedia (\ s a -> s{_tsMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
@@ -94,20 +94,20 @@ tsMedia = lens _tsMedia (\ s a -> s{_tsMedia = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The actual CMS account that the user authenticates with must be
 -- linked to the specified YouTube content owner.
-tsOnBehalfOfContentOwner :: Lens' ThumbnailsSet' (Maybe Text)
+tsOnBehalfOfContentOwner :: Lens' ThumbnailsSet (Maybe Text)
 tsOnBehalfOfContentOwner
   = lens _tsOnBehalfOfContentOwner
       (\ s a -> s{_tsOnBehalfOfContentOwner = a})
 
 -- | The videoId parameter specifies a YouTube video ID for which the custom
 -- video thumbnail is being provided.
-tsVideoId :: Lens' ThumbnailsSet' Text
+tsVideoId :: Lens' ThumbnailsSet Text
 tsVideoId
   = lens _tsVideoId (\ s a -> s{_tsVideoId = a})
 
-instance GoogleRequest ThumbnailsSet' where
-        type Rs ThumbnailsSet' = ThumbnailSetResponse
-        requestClient ThumbnailsSet'{..}
+instance GoogleRequest ThumbnailsSet where
+        type Rs ThumbnailsSet = ThumbnailSetResponse
+        requestClient ThumbnailsSet{..}
           = go (Just _tsVideoId) _tsOnBehalfOfContentOwner
               (Just AltJSON)
               _tsMedia

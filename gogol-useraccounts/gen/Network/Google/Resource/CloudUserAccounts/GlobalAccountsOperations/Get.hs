@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudUserAccounts.GlobalAccountsOperations.Get
       GlobalAccountsOperationsGetResource
 
     -- * Creating a Request
-    , globalAccountsOperationsGet'
-    , GlobalAccountsOperationsGet'
+    , globalAccountsOperationsGet
+    , GlobalAccountsOperationsGet
 
     -- * Request Lenses
     , gaogProject
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.UserAccounts.Types
 
 -- | A resource alias for @clouduseraccounts.globalAccountsOperations.get@ method which the
--- 'GlobalAccountsOperationsGet'' request conforms to.
+-- 'GlobalAccountsOperationsGet' request conforms to.
 type GlobalAccountsOperationsGetResource =
      Capture "project" Text :>
        "global" :>
@@ -51,44 +51,44 @@ type GlobalAccountsOperationsGetResource =
 
 -- | Retrieves the specified operation resource.
 --
--- /See:/ 'globalAccountsOperationsGet'' smart constructor.
-data GlobalAccountsOperationsGet' = GlobalAccountsOperationsGet'
+-- /See:/ 'globalAccountsOperationsGet' smart constructor.
+data GlobalAccountsOperationsGet = GlobalAccountsOperationsGet
     { _gaogProject   :: !Text
     , _gaogOperation :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'GlobalAccountsOperationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'GlobalAccountsOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'gaogProject'
 --
 -- * 'gaogOperation'
-globalAccountsOperationsGet'
+globalAccountsOperationsGet
     :: Text -- ^ 'gaogProject'
     -> Text -- ^ 'gaogOperation'
-    -> GlobalAccountsOperationsGet'
-globalAccountsOperationsGet' pGaogProject_ pGaogOperation_ =
-    GlobalAccountsOperationsGet'
+    -> GlobalAccountsOperationsGet
+globalAccountsOperationsGet pGaogProject_ pGaogOperation_ =
+    GlobalAccountsOperationsGet
     { _gaogProject = pGaogProject_
     , _gaogOperation = pGaogOperation_
     }
 
 -- | Project ID for this request.
-gaogProject :: Lens' GlobalAccountsOperationsGet' Text
+gaogProject :: Lens' GlobalAccountsOperationsGet Text
 gaogProject
   = lens _gaogProject (\ s a -> s{_gaogProject = a})
 
 -- | Name of the Operations resource to return.
-gaogOperation :: Lens' GlobalAccountsOperationsGet' Text
+gaogOperation :: Lens' GlobalAccountsOperationsGet Text
 gaogOperation
   = lens _gaogOperation
       (\ s a -> s{_gaogOperation = a})
 
-instance GoogleRequest GlobalAccountsOperationsGet'
+instance GoogleRequest GlobalAccountsOperationsGet
          where
-        type Rs GlobalAccountsOperationsGet' = Operation
-        requestClient GlobalAccountsOperationsGet'{..}
+        type Rs GlobalAccountsOperationsGet = Operation
+        requestClient GlobalAccountsOperationsGet{..}
           = go _gaogProject _gaogOperation (Just AltJSON)
               userAccountsService
           where go

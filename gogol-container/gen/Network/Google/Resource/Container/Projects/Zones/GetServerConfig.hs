@@ -29,8 +29,8 @@ module Network.Google.Resource.Container.Projects.Zones.GetServerConfig
       ProjectsZonesGetServerConfigResource
 
     -- * Creating a Request
-    , projectsZonesGetServerConfig'
-    , ProjectsZonesGetServerConfig'
+    , projectsZonesGetServerConfig
+    , ProjectsZonesGetServerConfig
 
     -- * Request Lenses
     , pzgscXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @container.projects.zones.getServerconfig@ method which the
--- 'ProjectsZonesGetServerConfig'' request conforms to.
+-- 'ProjectsZonesGetServerConfig' request conforms to.
 type ProjectsZonesGetServerConfigResource =
      "v1" :>
        "projects" :>
@@ -68,8 +68,8 @@ type ProjectsZonesGetServerConfigResource =
 
 -- | Returns configuration info about the Container Engine service.
 --
--- /See:/ 'projectsZonesGetServerConfig'' smart constructor.
-data ProjectsZonesGetServerConfig' = ProjectsZonesGetServerConfig'
+-- /See:/ 'projectsZonesGetServerConfig' smart constructor.
+data ProjectsZonesGetServerConfig = ProjectsZonesGetServerConfig
     { _pzgscXgafv          :: !(Maybe Text)
     , _pzgscUploadProtocol :: !(Maybe Text)
     , _pzgscPp             :: !Bool
@@ -81,7 +81,7 @@ data ProjectsZonesGetServerConfig' = ProjectsZonesGetServerConfig'
     , _pzgscCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsZonesGetServerConfig'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsZonesGetServerConfig' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -102,12 +102,12 @@ data ProjectsZonesGetServerConfig' = ProjectsZonesGetServerConfig'
 -- * 'pzgscProjectId'
 --
 -- * 'pzgscCallback'
-projectsZonesGetServerConfig'
+projectsZonesGetServerConfig
     :: Text -- ^ 'pzgscZone'
     -> Text -- ^ 'pzgscProjectId'
-    -> ProjectsZonesGetServerConfig'
-projectsZonesGetServerConfig' pPzgscZone_ pPzgscProjectId_ =
-    ProjectsZonesGetServerConfig'
+    -> ProjectsZonesGetServerConfig
+projectsZonesGetServerConfig pPzgscZone_ pPzgscProjectId_ =
+    ProjectsZonesGetServerConfig
     { _pzgscXgafv = Nothing
     , _pzgscUploadProtocol = Nothing
     , _pzgscPp = True
@@ -120,28 +120,28 @@ projectsZonesGetServerConfig' pPzgscZone_ pPzgscProjectId_ =
     }
 
 -- | V1 error format.
-pzgscXgafv :: Lens' ProjectsZonesGetServerConfig' (Maybe Text)
+pzgscXgafv :: Lens' ProjectsZonesGetServerConfig (Maybe Text)
 pzgscXgafv
   = lens _pzgscXgafv (\ s a -> s{_pzgscXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pzgscUploadProtocol :: Lens' ProjectsZonesGetServerConfig' (Maybe Text)
+pzgscUploadProtocol :: Lens' ProjectsZonesGetServerConfig (Maybe Text)
 pzgscUploadProtocol
   = lens _pzgscUploadProtocol
       (\ s a -> s{_pzgscUploadProtocol = a})
 
 -- | Pretty-print response.
-pzgscPp :: Lens' ProjectsZonesGetServerConfig' Bool
+pzgscPp :: Lens' ProjectsZonesGetServerConfig Bool
 pzgscPp = lens _pzgscPp (\ s a -> s{_pzgscPp = a})
 
 -- | OAuth access token.
-pzgscAccessToken :: Lens' ProjectsZonesGetServerConfig' (Maybe Text)
+pzgscAccessToken :: Lens' ProjectsZonesGetServerConfig (Maybe Text)
 pzgscAccessToken
   = lens _pzgscAccessToken
       (\ s a -> s{_pzgscAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pzgscUploadType :: Lens' ProjectsZonesGetServerConfig' (Maybe Text)
+pzgscUploadType :: Lens' ProjectsZonesGetServerConfig (Maybe Text)
 pzgscUploadType
   = lens _pzgscUploadType
       (\ s a -> s{_pzgscUploadType = a})
@@ -149,33 +149,33 @@ pzgscUploadType
 -- | The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) to return operations for, or
 -- \"-\" for all zones.
-pzgscZone :: Lens' ProjectsZonesGetServerConfig' Text
+pzgscZone :: Lens' ProjectsZonesGetServerConfig Text
 pzgscZone
   = lens _pzgscZone (\ s a -> s{_pzgscZone = a})
 
 -- | OAuth bearer token.
-pzgscBearerToken :: Lens' ProjectsZonesGetServerConfig' (Maybe Text)
+pzgscBearerToken :: Lens' ProjectsZonesGetServerConfig (Maybe Text)
 pzgscBearerToken
   = lens _pzgscBearerToken
       (\ s a -> s{_pzgscBearerToken = a})
 
 -- | The Google Developers Console [project ID or project
 -- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
-pzgscProjectId :: Lens' ProjectsZonesGetServerConfig' Text
+pzgscProjectId :: Lens' ProjectsZonesGetServerConfig Text
 pzgscProjectId
   = lens _pzgscProjectId
       (\ s a -> s{_pzgscProjectId = a})
 
 -- | JSONP
-pzgscCallback :: Lens' ProjectsZonesGetServerConfig' (Maybe Text)
+pzgscCallback :: Lens' ProjectsZonesGetServerConfig (Maybe Text)
 pzgscCallback
   = lens _pzgscCallback
       (\ s a -> s{_pzgscCallback = a})
 
-instance GoogleRequest ProjectsZonesGetServerConfig'
+instance GoogleRequest ProjectsZonesGetServerConfig
          where
-        type Rs ProjectsZonesGetServerConfig' = ServerConfig
-        requestClient ProjectsZonesGetServerConfig'{..}
+        type Rs ProjectsZonesGetServerConfig = ServerConfig
+        requestClient ProjectsZonesGetServerConfig{..}
           = go _pzgscProjectId _pzgscZone _pzgscXgafv
               _pzgscUploadProtocol
               (Just _pzgscPp)

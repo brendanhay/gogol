@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.Players.List
       PlayersListResource
 
     -- * Creating a Request
-    , playersList'
-    , PlayersList'
+    , playersList
+    , PlayersList
 
     -- * Request Lenses
     , plCollection
@@ -43,7 +43,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.players.list@ method which the
--- 'PlayersList'' request conforms to.
+-- 'PlayersList' request conforms to.
 type PlayersListResource =
      "players" :>
        "me" :>
@@ -57,15 +57,15 @@ type PlayersListResource =
 
 -- | Get the collection of players for the currently authenticated user.
 --
--- /See:/ 'playersList'' smart constructor.
-data PlayersList' = PlayersList'
+-- /See:/ 'playersList' smart constructor.
+data PlayersList = PlayersList
     { _plCollection :: !PlayersListCollection
     , _plLanguage   :: !(Maybe Text)
     , _plPageToken  :: !(Maybe Text)
     , _plMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlayersList'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayersList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,11 +76,11 @@ data PlayersList' = PlayersList'
 -- * 'plPageToken'
 --
 -- * 'plMaxResults'
-playersList'
+playersList
     :: PlayersListCollection -- ^ 'plCollection'
-    -> PlayersList'
-playersList' pPlCollection_ =
-    PlayersList'
+    -> PlayersList
+playersList pPlCollection_ =
+    PlayersList
     { _plCollection = pPlCollection_
     , _plLanguage = Nothing
     , _plPageToken = Nothing
@@ -88,30 +88,30 @@ playersList' pPlCollection_ =
     }
 
 -- | Collection of players being retrieved
-plCollection :: Lens' PlayersList' PlayersListCollection
+plCollection :: Lens' PlayersList PlayersListCollection
 plCollection
   = lens _plCollection (\ s a -> s{_plCollection = a})
 
 -- | The preferred language to use for strings returned by this method.
-plLanguage :: Lens' PlayersList' (Maybe Text)
+plLanguage :: Lens' PlayersList (Maybe Text)
 plLanguage
   = lens _plLanguage (\ s a -> s{_plLanguage = a})
 
 -- | The token returned by the previous request.
-plPageToken :: Lens' PlayersList' (Maybe Text)
+plPageToken :: Lens' PlayersList (Maybe Text)
 plPageToken
   = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
 -- | The maximum number of player resources to return in the response, used
 -- for paging. For any response, the actual number of player resources
 -- returned may be less than the specified maxResults.
-plMaxResults :: Lens' PlayersList' (Maybe Int32)
+plMaxResults :: Lens' PlayersList (Maybe Int32)
 plMaxResults
   = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
 
-instance GoogleRequest PlayersList' where
-        type Rs PlayersList' = PlayerListResponse
-        requestClient PlayersList'{..}
+instance GoogleRequest PlayersList where
+        type Rs PlayersList = PlayerListResponse
+        requestClient PlayersList{..}
           = go _plCollection _plLanguage _plPageToken
               _plMaxResults
               (Just AltJSON)

@@ -29,8 +29,8 @@ module Network.Google.Resource.Reseller.Subscriptions.Insert
       SubscriptionsInsertResource
 
     -- * Creating a Request
-    , subscriptionsInsert'
-    , SubscriptionsInsert'
+    , subscriptionsInsert
+    , SubscriptionsInsert
 
     -- * Request Lenses
     , siPayload
@@ -42,7 +42,7 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @reseller.subscriptions.insert@ method which the
--- 'SubscriptionsInsert'' request conforms to.
+-- 'SubscriptionsInsert' request conforms to.
 type SubscriptionsInsertResource =
      "customers" :>
        Capture "customerId" Text :>
@@ -54,14 +54,14 @@ type SubscriptionsInsertResource =
 
 -- | Creates\/Transfers a subscription for the customer.
 --
--- /See:/ 'subscriptionsInsert'' smart constructor.
-data SubscriptionsInsert' = SubscriptionsInsert'
+-- /See:/ 'subscriptionsInsert' smart constructor.
+data SubscriptionsInsert = SubscriptionsInsert
     { _siPayload           :: !Subscription
     , _siCustomerId        :: !Text
     , _siCustomerAuthToken :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubscriptionsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'SubscriptionsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -70,38 +70,38 @@ data SubscriptionsInsert' = SubscriptionsInsert'
 -- * 'siCustomerId'
 --
 -- * 'siCustomerAuthToken'
-subscriptionsInsert'
+subscriptionsInsert
     :: Subscription -- ^ 'siPayload'
     -> Text -- ^ 'siCustomerId'
-    -> SubscriptionsInsert'
-subscriptionsInsert' pSiPayload_ pSiCustomerId_ =
-    SubscriptionsInsert'
+    -> SubscriptionsInsert
+subscriptionsInsert pSiPayload_ pSiCustomerId_ =
+    SubscriptionsInsert
     { _siPayload = pSiPayload_
     , _siCustomerId = pSiCustomerId_
     , _siCustomerAuthToken = Nothing
     }
 
 -- | Multipart request metadata.
-siPayload :: Lens' SubscriptionsInsert' Subscription
+siPayload :: Lens' SubscriptionsInsert Subscription
 siPayload
   = lens _siPayload (\ s a -> s{_siPayload = a})
 
 -- | Id of the Customer
-siCustomerId :: Lens' SubscriptionsInsert' Text
+siCustomerId :: Lens' SubscriptionsInsert Text
 siCustomerId
   = lens _siCustomerId (\ s a -> s{_siCustomerId = a})
 
 -- | An auth token needed for transferring a subscription. Can be generated
 -- at https:\/\/www.google.com\/a\/cpanel\/customer-domain\/TransferToken.
 -- Optional.
-siCustomerAuthToken :: Lens' SubscriptionsInsert' (Maybe Text)
+siCustomerAuthToken :: Lens' SubscriptionsInsert (Maybe Text)
 siCustomerAuthToken
   = lens _siCustomerAuthToken
       (\ s a -> s{_siCustomerAuthToken = a})
 
-instance GoogleRequest SubscriptionsInsert' where
-        type Rs SubscriptionsInsert' = Subscription
-        requestClient SubscriptionsInsert'{..}
+instance GoogleRequest SubscriptionsInsert where
+        type Rs SubscriptionsInsert = Subscription
+        requestClient SubscriptionsInsert{..}
           = go _siCustomerId _siCustomerAuthToken
               (Just AltJSON)
               _siPayload

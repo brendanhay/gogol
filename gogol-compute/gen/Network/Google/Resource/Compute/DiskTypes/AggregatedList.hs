@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.DiskTypes.AggregatedList
       DiskTypesAggregatedListResource
 
     -- * Creating a Request
-    , diskTypesAggregatedList'
-    , DiskTypesAggregatedList'
+    , diskTypesAggregatedList
+    , DiskTypesAggregatedList
 
     -- * Request Lenses
     , dtalProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.diskTypes.aggregatedList@ method which the
--- 'DiskTypesAggregatedList'' request conforms to.
+-- 'DiskTypesAggregatedList' request conforms to.
 type DiskTypesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
@@ -56,15 +56,15 @@ type DiskTypesAggregatedListResource =
 
 -- | Retrieves the list of disk type resources grouped by scope.
 --
--- /See:/ 'diskTypesAggregatedList'' smart constructor.
-data DiskTypesAggregatedList' = DiskTypesAggregatedList'
+-- /See:/ 'diskTypesAggregatedList' smart constructor.
+data DiskTypesAggregatedList = DiskTypesAggregatedList
     { _dtalProject    :: !Text
     , _dtalFilter     :: !(Maybe Text)
     , _dtalPageToken  :: !(Maybe Text)
     , _dtalMaxResults :: !Word32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DiskTypesAggregatedList'' with the minimum fields required to make a request.
+-- | Creates a value of 'DiskTypesAggregatedList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -75,11 +75,11 @@ data DiskTypesAggregatedList' = DiskTypesAggregatedList'
 -- * 'dtalPageToken'
 --
 -- * 'dtalMaxResults'
-diskTypesAggregatedList'
+diskTypesAggregatedList
     :: Text -- ^ 'dtalProject'
-    -> DiskTypesAggregatedList'
-diskTypesAggregatedList' pDtalProject_ =
-    DiskTypesAggregatedList'
+    -> DiskTypesAggregatedList
+diskTypesAggregatedList pDtalProject_ =
+    DiskTypesAggregatedList
     { _dtalProject = pDtalProject_
     , _dtalFilter = Nothing
     , _dtalPageToken = Nothing
@@ -87,7 +87,7 @@ diskTypesAggregatedList' pDtalProject_ =
     }
 
 -- | Project ID for this request.
-dtalProject :: Lens' DiskTypesAggregatedList' Text
+dtalProject :: Lens' DiskTypesAggregatedList Text
 dtalProject
   = lens _dtalProject (\ s a -> s{_dtalProject = a})
 
@@ -102,28 +102,28 @@ dtalProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-dtalFilter :: Lens' DiskTypesAggregatedList' (Maybe Text)
+dtalFilter :: Lens' DiskTypesAggregatedList (Maybe Text)
 dtalFilter
   = lens _dtalFilter (\ s a -> s{_dtalFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-dtalPageToken :: Lens' DiskTypesAggregatedList' (Maybe Text)
+dtalPageToken :: Lens' DiskTypesAggregatedList (Maybe Text)
 dtalPageToken
   = lens _dtalPageToken
       (\ s a -> s{_dtalPageToken = a})
 
 -- | Maximum count of results to be returned.
-dtalMaxResults :: Lens' DiskTypesAggregatedList' Word32
+dtalMaxResults :: Lens' DiskTypesAggregatedList Word32
 dtalMaxResults
   = lens _dtalMaxResults
       (\ s a -> s{_dtalMaxResults = a})
 
-instance GoogleRequest DiskTypesAggregatedList' where
-        type Rs DiskTypesAggregatedList' =
+instance GoogleRequest DiskTypesAggregatedList where
+        type Rs DiskTypesAggregatedList =
              DiskTypeAggregatedList
-        requestClient DiskTypesAggregatedList'{..}
+        requestClient DiskTypesAggregatedList{..}
           = go _dtalProject _dtalFilter _dtalPageToken
               (Just _dtalMaxResults)
               (Just AltJSON)

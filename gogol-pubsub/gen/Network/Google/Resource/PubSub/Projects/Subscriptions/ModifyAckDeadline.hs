@@ -32,8 +32,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
       ProjectsSubscriptionsModifyAckDeadlineResource
 
     -- * Creating a Request
-    , projectsSubscriptionsModifyAckDeadline'
-    , ProjectsSubscriptionsModifyAckDeadline'
+    , projectsSubscriptionsModifyAckDeadline
+    , ProjectsSubscriptionsModifyAckDeadline
 
     -- * Request Lenses
     , psmadXgafv
@@ -51,7 +51,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.modifyAckDeadline@ method which the
--- 'ProjectsSubscriptionsModifyAckDeadline'' request conforms to.
+-- 'ProjectsSubscriptionsModifyAckDeadline' request conforms to.
 type ProjectsSubscriptionsModifyAckDeadlineResource =
      "v1" :>
        CaptureMode "subscription" "modifyAckDeadline" Text
@@ -72,8 +72,8 @@ type ProjectsSubscriptionsModifyAckDeadlineResource =
 -- subscriber, or to make the message available for redelivery if the
 -- processing was interrupted.
 --
--- /See:/ 'projectsSubscriptionsModifyAckDeadline'' smart constructor.
-data ProjectsSubscriptionsModifyAckDeadline' = ProjectsSubscriptionsModifyAckDeadline'
+-- /See:/ 'projectsSubscriptionsModifyAckDeadline' smart constructor.
+data ProjectsSubscriptionsModifyAckDeadline = ProjectsSubscriptionsModifyAckDeadline
     { _psmadXgafv          :: !(Maybe Text)
     , _psmadUploadProtocol :: !(Maybe Text)
     , _psmadPp             :: !Bool
@@ -85,7 +85,7 @@ data ProjectsSubscriptionsModifyAckDeadline' = ProjectsSubscriptionsModifyAckDea
     , _psmadCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsSubscriptionsModifyAckDeadline'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsSubscriptionsModifyAckDeadline' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -106,12 +106,12 @@ data ProjectsSubscriptionsModifyAckDeadline' = ProjectsSubscriptionsModifyAckDea
 -- * 'psmadSubscription'
 --
 -- * 'psmadCallback'
-projectsSubscriptionsModifyAckDeadline'
+projectsSubscriptionsModifyAckDeadline
     :: ModifyAckDeadlineRequest -- ^ 'psmadPayload'
     -> Text -- ^ 'psmadSubscription'
-    -> ProjectsSubscriptionsModifyAckDeadline'
-projectsSubscriptionsModifyAckDeadline' pPsmadPayload_ pPsmadSubscription_ =
-    ProjectsSubscriptionsModifyAckDeadline'
+    -> ProjectsSubscriptionsModifyAckDeadline
+projectsSubscriptionsModifyAckDeadline pPsmadPayload_ pPsmadSubscription_ =
+    ProjectsSubscriptionsModifyAckDeadline
     { _psmadXgafv = Nothing
     , _psmadUploadProtocol = Nothing
     , _psmadPp = True
@@ -124,61 +124,61 @@ projectsSubscriptionsModifyAckDeadline' pPsmadPayload_ pPsmadSubscription_ =
     }
 
 -- | V1 error format.
-psmadXgafv :: Lens' ProjectsSubscriptionsModifyAckDeadline' (Maybe Text)
+psmadXgafv :: Lens' ProjectsSubscriptionsModifyAckDeadline (Maybe Text)
 psmadXgafv
   = lens _psmadXgafv (\ s a -> s{_psmadXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-psmadUploadProtocol :: Lens' ProjectsSubscriptionsModifyAckDeadline' (Maybe Text)
+psmadUploadProtocol :: Lens' ProjectsSubscriptionsModifyAckDeadline (Maybe Text)
 psmadUploadProtocol
   = lens _psmadUploadProtocol
       (\ s a -> s{_psmadUploadProtocol = a})
 
 -- | Pretty-print response.
-psmadPp :: Lens' ProjectsSubscriptionsModifyAckDeadline' Bool
+psmadPp :: Lens' ProjectsSubscriptionsModifyAckDeadline Bool
 psmadPp = lens _psmadPp (\ s a -> s{_psmadPp = a})
 
 -- | OAuth access token.
-psmadAccessToken :: Lens' ProjectsSubscriptionsModifyAckDeadline' (Maybe Text)
+psmadAccessToken :: Lens' ProjectsSubscriptionsModifyAckDeadline (Maybe Text)
 psmadAccessToken
   = lens _psmadAccessToken
       (\ s a -> s{_psmadAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-psmadUploadType :: Lens' ProjectsSubscriptionsModifyAckDeadline' (Maybe Text)
+psmadUploadType :: Lens' ProjectsSubscriptionsModifyAckDeadline (Maybe Text)
 psmadUploadType
   = lens _psmadUploadType
       (\ s a -> s{_psmadUploadType = a})
 
 -- | Multipart request metadata.
-psmadPayload :: Lens' ProjectsSubscriptionsModifyAckDeadline' ModifyAckDeadlineRequest
+psmadPayload :: Lens' ProjectsSubscriptionsModifyAckDeadline ModifyAckDeadlineRequest
 psmadPayload
   = lens _psmadPayload (\ s a -> s{_psmadPayload = a})
 
 -- | OAuth bearer token.
-psmadBearerToken :: Lens' ProjectsSubscriptionsModifyAckDeadline' (Maybe Text)
+psmadBearerToken :: Lens' ProjectsSubscriptionsModifyAckDeadline (Maybe Text)
 psmadBearerToken
   = lens _psmadBearerToken
       (\ s a -> s{_psmadBearerToken = a})
 
 -- | The name of the subscription.
-psmadSubscription :: Lens' ProjectsSubscriptionsModifyAckDeadline' Text
+psmadSubscription :: Lens' ProjectsSubscriptionsModifyAckDeadline Text
 psmadSubscription
   = lens _psmadSubscription
       (\ s a -> s{_psmadSubscription = a})
 
 -- | JSONP
-psmadCallback :: Lens' ProjectsSubscriptionsModifyAckDeadline' (Maybe Text)
+psmadCallback :: Lens' ProjectsSubscriptionsModifyAckDeadline (Maybe Text)
 psmadCallback
   = lens _psmadCallback
       (\ s a -> s{_psmadCallback = a})
 
 instance GoogleRequest
-         ProjectsSubscriptionsModifyAckDeadline' where
-        type Rs ProjectsSubscriptionsModifyAckDeadline' =
+         ProjectsSubscriptionsModifyAckDeadline where
+        type Rs ProjectsSubscriptionsModifyAckDeadline =
              Empty
         requestClient
-          ProjectsSubscriptionsModifyAckDeadline'{..}
+          ProjectsSubscriptionsModifyAckDeadline{..}
           = go _psmadSubscription _psmadXgafv
               _psmadUploadProtocol
               (Just _psmadPp)

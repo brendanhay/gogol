@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.Licenses.Get
       LicensesGetResource
 
     -- * Creating a Request
-    , licensesGet'
-    , LicensesGet'
+    , licensesGet
+    , LicensesGet
 
     -- * Request Lenses
     , lgProject
@@ -41,7 +41,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.licenses.get@ method which the
--- 'LicensesGet'' request conforms to.
+-- 'LicensesGet' request conforms to.
 type LicensesGetResource =
      Capture "project" Text :>
        "global" :>
@@ -51,42 +51,42 @@ type LicensesGetResource =
 
 -- | Returns the specified license resource.
 --
--- /See:/ 'licensesGet'' smart constructor.
-data LicensesGet' = LicensesGet'
+-- /See:/ 'licensesGet' smart constructor.
+data LicensesGet = LicensesGet
     { _lgProject :: !Text
     , _lgLicense :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LicensesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'LicensesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'lgProject'
 --
 -- * 'lgLicense'
-licensesGet'
+licensesGet
     :: Text -- ^ 'lgProject'
     -> Text -- ^ 'lgLicense'
-    -> LicensesGet'
-licensesGet' pLgProject_ pLgLicense_ =
-    LicensesGet'
+    -> LicensesGet
+licensesGet pLgProject_ pLgLicense_ =
+    LicensesGet
     { _lgProject = pLgProject_
     , _lgLicense = pLgLicense_
     }
 
 -- | Project ID for this request.
-lgProject :: Lens' LicensesGet' Text
+lgProject :: Lens' LicensesGet Text
 lgProject
   = lens _lgProject (\ s a -> s{_lgProject = a})
 
 -- | Name of the license resource to return.
-lgLicense :: Lens' LicensesGet' Text
+lgLicense :: Lens' LicensesGet Text
 lgLicense
   = lens _lgLicense (\ s a -> s{_lgLicense = a})
 
-instance GoogleRequest LicensesGet' where
-        type Rs LicensesGet' = License
-        requestClient LicensesGet'{..}
+instance GoogleRequest LicensesGet where
+        type Rs LicensesGet = License
+        requestClient LicensesGet{..}
           = go _lgProject _lgLicense (Just AltJSON)
               computeService
           where go

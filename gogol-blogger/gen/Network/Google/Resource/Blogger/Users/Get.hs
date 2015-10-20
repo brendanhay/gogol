@@ -29,8 +29,8 @@ module Network.Google.Resource.Blogger.Users.Get
       UsersGetResource
 
     -- * Creating a Request
-    , usersGet'
-    , UsersGet'
+    , usersGet
+    , UsersGet
 
     -- * Request Lenses
     , ugUserId
@@ -40,7 +40,7 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @blogger.users.get@ method which the
--- 'UsersGet'' request conforms to.
+-- 'UsersGet' request conforms to.
 type UsersGetResource =
      "users" :>
        Capture "userId" Text :>
@@ -48,31 +48,31 @@ type UsersGetResource =
 
 -- | Gets one user by ID.
 --
--- /See:/ 'usersGet'' smart constructor.
-newtype UsersGet' = UsersGet'
+-- /See:/ 'usersGet' smart constructor.
+newtype UsersGet = UsersGet
     { _ugUserId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'ugUserId'
-usersGet'
+usersGet
     :: Text -- ^ 'ugUserId'
-    -> UsersGet'
-usersGet' pUgUserId_ =
-    UsersGet'
+    -> UsersGet
+usersGet pUgUserId_ =
+    UsersGet
     { _ugUserId = pUgUserId_
     }
 
 -- | The ID of the user to get.
-ugUserId :: Lens' UsersGet' Text
+ugUserId :: Lens' UsersGet Text
 ugUserId = lens _ugUserId (\ s a -> s{_ugUserId = a})
 
-instance GoogleRequest UsersGet' where
-        type Rs UsersGet' = User
-        requestClient UsersGet'{..}
+instance GoogleRequest UsersGet where
+        type Rs UsersGet = User
+        requestClient UsersGet{..}
           = go _ugUserId (Just AltJSON) bloggerService
           where go
                   = buildClient (Proxy :: Proxy UsersGetResource)

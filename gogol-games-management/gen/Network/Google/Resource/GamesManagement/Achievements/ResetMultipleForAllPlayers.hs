@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Achievements.ResetMultipleForAllP
       AchievementsResetMultipleForAllPlayersResource
 
     -- * Creating a Request
-    , achievementsResetMultipleForAllPlayers'
-    , AchievementsResetMultipleForAllPlayers'
+    , achievementsResetMultipleForAllPlayers
+    , AchievementsResetMultipleForAllPlayers
 
     -- * Request Lenses
     , armfapPayload
@@ -42,7 +42,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.achievements.resetMultipleForAllPlayers@ method which the
--- 'AchievementsResetMultipleForAllPlayers'' request conforms to.
+-- 'AchievementsResetMultipleForAllPlayers' request conforms to.
 type AchievementsResetMultipleForAllPlayersResource =
      "achievements" :>
        "resetMultipleForAllPlayers" :>
@@ -54,35 +54,35 @@ type AchievementsResetMultipleForAllPlayersResource =
 -- only available to user accounts for your developer console. Only draft
 -- achievements may be reset.
 --
--- /See:/ 'achievementsResetMultipleForAllPlayers'' smart constructor.
-newtype AchievementsResetMultipleForAllPlayers' = AchievementsResetMultipleForAllPlayers'
+-- /See:/ 'achievementsResetMultipleForAllPlayers' smart constructor.
+newtype AchievementsResetMultipleForAllPlayers = AchievementsResetMultipleForAllPlayers
     { _armfapPayload :: AchievementResetMultipleForAllRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AchievementsResetMultipleForAllPlayers'' with the minimum fields required to make a request.
+-- | Creates a value of 'AchievementsResetMultipleForAllPlayers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'armfapPayload'
-achievementsResetMultipleForAllPlayers'
+achievementsResetMultipleForAllPlayers
     :: AchievementResetMultipleForAllRequest -- ^ 'armfapPayload'
-    -> AchievementsResetMultipleForAllPlayers'
-achievementsResetMultipleForAllPlayers' pArmfapPayload_ =
-    AchievementsResetMultipleForAllPlayers'
+    -> AchievementsResetMultipleForAllPlayers
+achievementsResetMultipleForAllPlayers pArmfapPayload_ =
+    AchievementsResetMultipleForAllPlayers
     { _armfapPayload = pArmfapPayload_
     }
 
 -- | Multipart request metadata.
-armfapPayload :: Lens' AchievementsResetMultipleForAllPlayers' AchievementResetMultipleForAllRequest
+armfapPayload :: Lens' AchievementsResetMultipleForAllPlayers AchievementResetMultipleForAllRequest
 armfapPayload
   = lens _armfapPayload
       (\ s a -> s{_armfapPayload = a})
 
 instance GoogleRequest
-         AchievementsResetMultipleForAllPlayers' where
-        type Rs AchievementsResetMultipleForAllPlayers' = ()
+         AchievementsResetMultipleForAllPlayers where
+        type Rs AchievementsResetMultipleForAllPlayers = ()
         requestClient
-          AchievementsResetMultipleForAllPlayers'{..}
+          AchievementsResetMultipleForAllPlayers{..}
           = go (Just AltJSON) _armfapPayload
               gamesManagementService
           where go

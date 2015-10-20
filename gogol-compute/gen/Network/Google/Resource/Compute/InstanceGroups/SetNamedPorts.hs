@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.InstanceGroups.SetNamedPorts
       InstanceGroupsSetNamedPortsResource
 
     -- * Creating a Request
-    , instanceGroupsSetNamedPorts'
-    , InstanceGroupsSetNamedPorts'
+    , instanceGroupsSetNamedPorts
+    , InstanceGroupsSetNamedPorts
 
     -- * Request Lenses
     , igsnpProject
@@ -43,7 +43,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroups.setNamedPorts@ method which the
--- 'InstanceGroupsSetNamedPorts'' request conforms to.
+-- 'InstanceGroupsSetNamedPorts' request conforms to.
 type InstanceGroupsSetNamedPortsResource =
      Capture "project" Text :>
        "zones" :>
@@ -57,15 +57,15 @@ type InstanceGroupsSetNamedPortsResource =
 
 -- | Sets the named ports for the specified instance group.
 --
--- /See:/ 'instanceGroupsSetNamedPorts'' smart constructor.
-data InstanceGroupsSetNamedPorts' = InstanceGroupsSetNamedPorts'
+-- /See:/ 'instanceGroupsSetNamedPorts' smart constructor.
+data InstanceGroupsSetNamedPorts = InstanceGroupsSetNamedPorts
     { _igsnpProject       :: !Text
     , _igsnpZone          :: !Text
     , _igsnpPayload       :: !InstanceGroupsSetNamedPortsRequest
     , _igsnpInstanceGroup :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupsSetNamedPorts'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupsSetNamedPorts' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,14 +76,14 @@ data InstanceGroupsSetNamedPorts' = InstanceGroupsSetNamedPorts'
 -- * 'igsnpPayload'
 --
 -- * 'igsnpInstanceGroup'
-instanceGroupsSetNamedPorts'
+instanceGroupsSetNamedPorts
     :: Text -- ^ 'igsnpProject'
     -> Text -- ^ 'igsnpZone'
     -> InstanceGroupsSetNamedPortsRequest -- ^ 'igsnpPayload'
     -> Text -- ^ 'igsnpInstanceGroup'
-    -> InstanceGroupsSetNamedPorts'
-instanceGroupsSetNamedPorts' pIgsnpProject_ pIgsnpZone_ pIgsnpPayload_ pIgsnpInstanceGroup_ =
-    InstanceGroupsSetNamedPorts'
+    -> InstanceGroupsSetNamedPorts
+instanceGroupsSetNamedPorts pIgsnpProject_ pIgsnpZone_ pIgsnpPayload_ pIgsnpInstanceGroup_ =
+    InstanceGroupsSetNamedPorts
     { _igsnpProject = pIgsnpProject_
     , _igsnpZone = pIgsnpZone_
     , _igsnpPayload = pIgsnpPayload_
@@ -91,30 +91,30 @@ instanceGroupsSetNamedPorts' pIgsnpProject_ pIgsnpZone_ pIgsnpPayload_ pIgsnpIns
     }
 
 -- | The project ID for this request.
-igsnpProject :: Lens' InstanceGroupsSetNamedPorts' Text
+igsnpProject :: Lens' InstanceGroupsSetNamedPorts Text
 igsnpProject
   = lens _igsnpProject (\ s a -> s{_igsnpProject = a})
 
 -- | The name of the zone where the instance group is located.
-igsnpZone :: Lens' InstanceGroupsSetNamedPorts' Text
+igsnpZone :: Lens' InstanceGroupsSetNamedPorts Text
 igsnpZone
   = lens _igsnpZone (\ s a -> s{_igsnpZone = a})
 
 -- | Multipart request metadata.
-igsnpPayload :: Lens' InstanceGroupsSetNamedPorts' InstanceGroupsSetNamedPortsRequest
+igsnpPayload :: Lens' InstanceGroupsSetNamedPorts InstanceGroupsSetNamedPortsRequest
 igsnpPayload
   = lens _igsnpPayload (\ s a -> s{_igsnpPayload = a})
 
 -- | The name of the instance group where the named ports are updated.
-igsnpInstanceGroup :: Lens' InstanceGroupsSetNamedPorts' Text
+igsnpInstanceGroup :: Lens' InstanceGroupsSetNamedPorts Text
 igsnpInstanceGroup
   = lens _igsnpInstanceGroup
       (\ s a -> s{_igsnpInstanceGroup = a})
 
-instance GoogleRequest InstanceGroupsSetNamedPorts'
+instance GoogleRequest InstanceGroupsSetNamedPorts
          where
-        type Rs InstanceGroupsSetNamedPorts' = Operation
-        requestClient InstanceGroupsSetNamedPorts'{..}
+        type Rs InstanceGroupsSetNamedPorts = Operation
+        requestClient InstanceGroupsSetNamedPorts{..}
           = go _igsnpProject _igsnpZone _igsnpInstanceGroup
               (Just AltJSON)
               _igsnpPayload

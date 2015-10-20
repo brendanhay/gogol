@@ -29,18 +29,18 @@ module Network.Google.Resource.MapsEngine.Tables.Process
       TablesProcessResource
 
     -- * Creating a Request
-    , tablesProcess'
-    , TablesProcess'
+    , tablesProcess
+    , TablesProcess
 
     -- * Request Lenses
-    , tId
+    , tpsId
     ) where
 
 import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.tables.process@ method which the
--- 'TablesProcess'' request conforms to.
+-- 'TablesProcess' request conforms to.
 type TablesProcessResource =
      "tables" :>
        Capture "id" Text :>
@@ -50,32 +50,32 @@ type TablesProcessResource =
 
 -- | Process a table asset.
 --
--- /See:/ 'tablesProcess'' smart constructor.
-newtype TablesProcess' = TablesProcess'
-    { _tId :: Text
+-- /See:/ 'tablesProcess' smart constructor.
+newtype TablesProcess = TablesProcess
+    { _tpsId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TablesProcess'' with the minimum fields required to make a request.
+-- | Creates a value of 'TablesProcess' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tId'
-tablesProcess'
-    :: Text -- ^ 'tId'
-    -> TablesProcess'
-tablesProcess' pTId_ =
-    TablesProcess'
-    { _tId = pTId_
+-- * 'tpsId'
+tablesProcess
+    :: Text -- ^ 'tpsId'
+    -> TablesProcess
+tablesProcess pTpsId_ =
+    TablesProcess
+    { _tpsId = pTpsId_
     }
 
 -- | The ID of the table.
-tId :: Lens' TablesProcess' Text
-tId = lens _tId (\ s a -> s{_tId = a})
+tpsId :: Lens' TablesProcess Text
+tpsId = lens _tpsId (\ s a -> s{_tpsId = a})
 
-instance GoogleRequest TablesProcess' where
-        type Rs TablesProcess' = ProcessResponse
-        requestClient TablesProcess'{..}
-          = go _tId (Just AltJSON) mapsEngineService
+instance GoogleRequest TablesProcess where
+        type Rs TablesProcess = ProcessResponse
+        requestClient TablesProcess{..}
+          = go _tpsId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy TablesProcessResource)
                       mempty

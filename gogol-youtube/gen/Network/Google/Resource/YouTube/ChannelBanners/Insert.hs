@@ -37,8 +37,8 @@ module Network.Google.Resource.YouTube.ChannelBanners.Insert
       ChannelBannersInsertResource
 
     -- * Creating a Request
-    , channelBannersInsert'
-    , ChannelBannersInsert'
+    , channelBannersInsert
+    , ChannelBannersInsert
 
     -- * Request Lenses
     , cbiPayload
@@ -50,7 +50,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.channelBanners.insert@ method which the
--- 'ChannelBannersInsert'' request conforms to.
+-- 'ChannelBannersInsert' request conforms to.
 type ChannelBannersInsertResource =
      "channelBanners" :>
        "insert" :>
@@ -69,14 +69,14 @@ type ChannelBannersInsertResource =
 -- brandingSettings.image.bannerExternalUrl property\'s value to the URL
 -- obtained in step 2.
 --
--- /See:/ 'channelBannersInsert'' smart constructor.
-data ChannelBannersInsert' = ChannelBannersInsert'
+-- /See:/ 'channelBannersInsert' smart constructor.
+data ChannelBannersInsert = ChannelBannersInsert
     { _cbiPayload                :: !ChannelBannerResource
     , _cbiMedia                  :: !Body
     , _cbiOnBehalfOfContentOwner :: !(Maybe Text)
     }
 
--- | Creates a value of 'ChannelBannersInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ChannelBannersInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -85,23 +85,23 @@ data ChannelBannersInsert' = ChannelBannersInsert'
 -- * 'cbiMedia'
 --
 -- * 'cbiOnBehalfOfContentOwner'
-channelBannersInsert'
+channelBannersInsert
     :: ChannelBannerResource -- ^ 'cbiPayload'
     -> Body -- ^ 'cbiMedia'
-    -> ChannelBannersInsert'
-channelBannersInsert' pCbiPayload_ pCbiMedia_ =
-    ChannelBannersInsert'
+    -> ChannelBannersInsert
+channelBannersInsert pCbiPayload_ pCbiMedia_ =
+    ChannelBannersInsert
     { _cbiPayload = pCbiPayload_
     , _cbiMedia = pCbiMedia_
     , _cbiOnBehalfOfContentOwner = Nothing
     }
 
 -- | Multipart request metadata.
-cbiPayload :: Lens' ChannelBannersInsert' ChannelBannerResource
+cbiPayload :: Lens' ChannelBannersInsert ChannelBannerResource
 cbiPayload
   = lens _cbiPayload (\ s a -> s{_cbiPayload = a})
 
-cbiMedia :: Lens' ChannelBannersInsert' Body
+cbiMedia :: Lens' ChannelBannersInsert Body
 cbiMedia = lens _cbiMedia (\ s a -> s{_cbiMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
@@ -114,14 +114,14 @@ cbiMedia = lens _cbiMedia (\ s a -> s{_cbiMedia = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-cbiOnBehalfOfContentOwner :: Lens' ChannelBannersInsert' (Maybe Text)
+cbiOnBehalfOfContentOwner :: Lens' ChannelBannersInsert (Maybe Text)
 cbiOnBehalfOfContentOwner
   = lens _cbiOnBehalfOfContentOwner
       (\ s a -> s{_cbiOnBehalfOfContentOwner = a})
 
-instance GoogleRequest ChannelBannersInsert' where
-        type Rs ChannelBannersInsert' = ChannelBannerResource
-        requestClient ChannelBannersInsert'{..}
+instance GoogleRequest ChannelBannersInsert where
+        type Rs ChannelBannersInsert = ChannelBannerResource
+        requestClient ChannelBannersInsert{..}
           = go _cbiOnBehalfOfContentOwner (Just AltJSON)
               _cbiPayload
               _cbiMedia

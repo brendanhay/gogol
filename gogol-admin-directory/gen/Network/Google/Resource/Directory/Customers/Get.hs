@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Customers.Get
       CustomersGetResource
 
     -- * Creating a Request
-    , customersGet'
-    , CustomersGet'
+    , customersGet
+    , CustomersGet
 
     -- * Request Lenses
     , cgCustomerKey
@@ -40,7 +40,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.customers.get@ method which the
--- 'CustomersGet'' request conforms to.
+-- 'CustomersGet' request conforms to.
 type CustomersGetResource =
      "customers" :>
        Capture "customerKey" Text :>
@@ -48,33 +48,33 @@ type CustomersGetResource =
 
 -- | Retrives a customer.
 --
--- /See:/ 'customersGet'' smart constructor.
-newtype CustomersGet' = CustomersGet'
+-- /See:/ 'customersGet' smart constructor.
+newtype CustomersGet = CustomersGet
     { _cgCustomerKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CustomersGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'CustomersGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cgCustomerKey'
-customersGet'
+customersGet
     :: Text -- ^ 'cgCustomerKey'
-    -> CustomersGet'
-customersGet' pCgCustomerKey_ =
-    CustomersGet'
+    -> CustomersGet
+customersGet pCgCustomerKey_ =
+    CustomersGet
     { _cgCustomerKey = pCgCustomerKey_
     }
 
 -- | Id of the customer to be retrieved
-cgCustomerKey :: Lens' CustomersGet' Text
+cgCustomerKey :: Lens' CustomersGet Text
 cgCustomerKey
   = lens _cgCustomerKey
       (\ s a -> s{_cgCustomerKey = a})
 
-instance GoogleRequest CustomersGet' where
-        type Rs CustomersGet' = Customer
-        requestClient CustomersGet'{..}
+instance GoogleRequest CustomersGet where
+        type Rs CustomersGet = Customer
+        requestClient CustomersGet{..}
           = go _cgCustomerKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy CustomersGetResource)

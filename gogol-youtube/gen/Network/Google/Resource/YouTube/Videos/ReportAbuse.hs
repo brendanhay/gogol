@@ -29,8 +29,8 @@ module Network.Google.Resource.YouTube.Videos.ReportAbuse
       VideosReportAbuseResource
 
     -- * Creating a Request
-    , videosReportAbuse'
-    , VideosReportAbuse'
+    , videosReportAbuse
+    , VideosReportAbuse
 
     -- * Request Lenses
     , vraPayload
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @youtube.videos.reportAbuse@ method which the
--- 'VideosReportAbuse'' request conforms to.
+-- 'VideosReportAbuse' request conforms to.
 type VideosReportAbuseResource =
      "videos" :>
        "reportAbuse" :>
@@ -51,30 +51,30 @@ type VideosReportAbuseResource =
 
 -- | Report abuse for a video.
 --
--- /See:/ 'videosReportAbuse'' smart constructor.
-data VideosReportAbuse' = VideosReportAbuse'
+-- /See:/ 'videosReportAbuse' smart constructor.
+data VideosReportAbuse = VideosReportAbuse
     { _vraPayload                :: !VideoAbuseReport
     , _vraOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VideosReportAbuse'' with the minimum fields required to make a request.
+-- | Creates a value of 'VideosReportAbuse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'vraPayload'
 --
 -- * 'vraOnBehalfOfContentOwner'
-videosReportAbuse'
+videosReportAbuse
     :: VideoAbuseReport -- ^ 'vraPayload'
-    -> VideosReportAbuse'
-videosReportAbuse' pVraPayload_ =
-    VideosReportAbuse'
+    -> VideosReportAbuse
+videosReportAbuse pVraPayload_ =
+    VideosReportAbuse
     { _vraPayload = pVraPayload_
     , _vraOnBehalfOfContentOwner = Nothing
     }
 
 -- | Multipart request metadata.
-vraPayload :: Lens' VideosReportAbuse' VideoAbuseReport
+vraPayload :: Lens' VideosReportAbuse VideoAbuseReport
 vraPayload
   = lens _vraPayload (\ s a -> s{_vraPayload = a})
 
@@ -88,14 +88,14 @@ vraPayload
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-vraOnBehalfOfContentOwner :: Lens' VideosReportAbuse' (Maybe Text)
+vraOnBehalfOfContentOwner :: Lens' VideosReportAbuse (Maybe Text)
 vraOnBehalfOfContentOwner
   = lens _vraOnBehalfOfContentOwner
       (\ s a -> s{_vraOnBehalfOfContentOwner = a})
 
-instance GoogleRequest VideosReportAbuse' where
-        type Rs VideosReportAbuse' = ()
-        requestClient VideosReportAbuse'{..}
+instance GoogleRequest VideosReportAbuse where
+        type Rs VideosReportAbuse = ()
+        requestClient VideosReportAbuse{..}
           = go _vraOnBehalfOfContentOwner (Just AltJSON)
               _vraPayload
               youTubeService

@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Get
       PretargetingConfigGetResource
 
     -- * Creating a Request
-    , pretargetingConfigGet'
-    , PretargetingConfigGet'
+    , pretargetingConfigGet
+    , PretargetingConfigGet
 
     -- * Request Lenses
     , pcgAccountId
@@ -41,7 +41,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.pretargetingConfig.get@ method which the
--- 'PretargetingConfigGet'' request conforms to.
+-- 'PretargetingConfigGet' request conforms to.
 type PretargetingConfigGetResource =
      "pretargetingconfigs" :>
        Capture "accountId" Int64 :>
@@ -51,42 +51,42 @@ type PretargetingConfigGetResource =
 
 -- | Gets a specific pretargeting configuration
 --
--- /See:/ 'pretargetingConfigGet'' smart constructor.
-data PretargetingConfigGet' = PretargetingConfigGet'
+-- /See:/ 'pretargetingConfigGet' smart constructor.
+data PretargetingConfigGet = PretargetingConfigGet
     { _pcgAccountId :: !Int64
     , _pcgConfigId  :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PretargetingConfigGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'PretargetingConfigGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'pcgAccountId'
 --
 -- * 'pcgConfigId'
-pretargetingConfigGet'
+pretargetingConfigGet
     :: Int64 -- ^ 'pcgAccountId'
     -> Int64 -- ^ 'pcgConfigId'
-    -> PretargetingConfigGet'
-pretargetingConfigGet' pPcgAccountId_ pPcgConfigId_ =
-    PretargetingConfigGet'
+    -> PretargetingConfigGet
+pretargetingConfigGet pPcgAccountId_ pPcgConfigId_ =
+    PretargetingConfigGet
     { _pcgAccountId = pPcgAccountId_
     , _pcgConfigId = pPcgConfigId_
     }
 
 -- | The account id to get the pretargeting config for.
-pcgAccountId :: Lens' PretargetingConfigGet' Int64
+pcgAccountId :: Lens' PretargetingConfigGet Int64
 pcgAccountId
   = lens _pcgAccountId (\ s a -> s{_pcgAccountId = a})
 
 -- | The specific id of the configuration to retrieve.
-pcgConfigId :: Lens' PretargetingConfigGet' Int64
+pcgConfigId :: Lens' PretargetingConfigGet Int64
 pcgConfigId
   = lens _pcgConfigId (\ s a -> s{_pcgConfigId = a})
 
-instance GoogleRequest PretargetingConfigGet' where
-        type Rs PretargetingConfigGet' = PretargetingConfig
-        requestClient PretargetingConfigGet'{..}
+instance GoogleRequest PretargetingConfigGet where
+        type Rs PretargetingConfigGet = PretargetingConfig
+        requestClient PretargetingConfigGet{..}
           = go _pcgAccountId _pcgConfigId (Just AltJSON)
               adExchangeBuyerService
           where go

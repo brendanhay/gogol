@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Generatetag
       FloodlightActivitiesGeneratetagResource
 
     -- * Creating a Request
-    , floodlightActivitiesGeneratetag'
-    , FloodlightActivitiesGeneratetag'
+    , floodlightActivitiesGeneratetag
+    , FloodlightActivitiesGeneratetag
 
     -- * Request Lenses
     , fagFloodlightActivityId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.floodlightActivities.generatetag@ method which the
--- 'FloodlightActivitiesGeneratetag'' request conforms to.
+-- 'FloodlightActivitiesGeneratetag' request conforms to.
 type FloodlightActivitiesGeneratetagResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -53,44 +53,44 @@ type FloodlightActivitiesGeneratetagResource =
 
 -- | Generates a tag for a floodlight activity.
 --
--- /See:/ 'floodlightActivitiesGeneratetag'' smart constructor.
-data FloodlightActivitiesGeneratetag' = FloodlightActivitiesGeneratetag'
+-- /See:/ 'floodlightActivitiesGeneratetag' smart constructor.
+data FloodlightActivitiesGeneratetag = FloodlightActivitiesGeneratetag
     { _fagFloodlightActivityId :: !(Maybe Int64)
     , _fagProFileId            :: !Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FloodlightActivitiesGeneratetag'' with the minimum fields required to make a request.
+-- | Creates a value of 'FloodlightActivitiesGeneratetag' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'fagFloodlightActivityId'
 --
 -- * 'fagProFileId'
-floodlightActivitiesGeneratetag'
+floodlightActivitiesGeneratetag
     :: Int64 -- ^ 'fagProFileId'
-    -> FloodlightActivitiesGeneratetag'
-floodlightActivitiesGeneratetag' pFagProFileId_ =
-    FloodlightActivitiesGeneratetag'
+    -> FloodlightActivitiesGeneratetag
+floodlightActivitiesGeneratetag pFagProFileId_ =
+    FloodlightActivitiesGeneratetag
     { _fagFloodlightActivityId = Nothing
     , _fagProFileId = pFagProFileId_
     }
 
 -- | Floodlight activity ID for which we want to generate a tag.
-fagFloodlightActivityId :: Lens' FloodlightActivitiesGeneratetag' (Maybe Int64)
+fagFloodlightActivityId :: Lens' FloodlightActivitiesGeneratetag (Maybe Int64)
 fagFloodlightActivityId
   = lens _fagFloodlightActivityId
       (\ s a -> s{_fagFloodlightActivityId = a})
 
 -- | User profile ID associated with this request.
-fagProFileId :: Lens' FloodlightActivitiesGeneratetag' Int64
+fagProFileId :: Lens' FloodlightActivitiesGeneratetag Int64
 fagProFileId
   = lens _fagProFileId (\ s a -> s{_fagProFileId = a})
 
 instance GoogleRequest
-         FloodlightActivitiesGeneratetag' where
-        type Rs FloodlightActivitiesGeneratetag' =
+         FloodlightActivitiesGeneratetag where
+        type Rs FloodlightActivitiesGeneratetag =
              FloodlightActivitiesGenerateTagResponse
-        requestClient FloodlightActivitiesGeneratetag'{..}
+        requestClient FloodlightActivitiesGeneratetag{..}
           = go _fagProFileId _fagFloodlightActivityId
               (Just AltJSON)
               dFAReportingService

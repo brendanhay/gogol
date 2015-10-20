@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.CreativeFields.List
       CreativeFieldsListResource
 
     -- * Creating a Request
-    , creativeFieldsList'
-    , CreativeFieldsList'
+    , creativeFieldsList
+    , CreativeFieldsList
 
     -- * Request Lenses
     , cflSearchString
@@ -47,7 +47,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.creativeFields.list@ method which the
--- 'CreativeFieldsList'' request conforms to.
+-- 'CreativeFieldsList' request conforms to.
 type CreativeFieldsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -64,8 +64,8 @@ type CreativeFieldsListResource =
 
 -- | Retrieves a list of creative fields, possibly filtered.
 --
--- /See:/ 'creativeFieldsList'' smart constructor.
-data CreativeFieldsList' = CreativeFieldsList'
+-- /See:/ 'creativeFieldsList' smart constructor.
+data CreativeFieldsList = CreativeFieldsList
     { _cflSearchString  :: !(Maybe Text)
     , _cflIds           :: !(Maybe [Int64])
     , _cflProFileId     :: !Int64
@@ -76,7 +76,7 @@ data CreativeFieldsList' = CreativeFieldsList'
     , _cflMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CreativeFieldsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CreativeFieldsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -95,11 +95,11 @@ data CreativeFieldsList' = CreativeFieldsList'
 -- * 'cflAdvertiserIds'
 --
 -- * 'cflMaxResults'
-creativeFieldsList'
+creativeFieldsList
     :: Int64 -- ^ 'cflProFileId'
-    -> CreativeFieldsList'
-creativeFieldsList' pCflProFileId_ =
-    CreativeFieldsList'
+    -> CreativeFieldsList
+creativeFieldsList pCflProFileId_ =
+    CreativeFieldsList
     { _cflSearchString = Nothing
     , _cflIds = Nothing
     , _cflProFileId = pCflProFileId_
@@ -118,39 +118,39 @@ creativeFieldsList' pCflProFileId_ =
 -- example, a search string of \"creativefield\" will match creative fields
 -- with the name \"my creativefield\", \"creativefield 2015\", or simply
 -- \"creativefield\".
-cflSearchString :: Lens' CreativeFieldsList' (Maybe Text)
+cflSearchString :: Lens' CreativeFieldsList (Maybe Text)
 cflSearchString
   = lens _cflSearchString
       (\ s a -> s{_cflSearchString = a})
 
 -- | Select only creative fields with these IDs.
-cflIds :: Lens' CreativeFieldsList' [Int64]
+cflIds :: Lens' CreativeFieldsList [Int64]
 cflIds
   = lens _cflIds (\ s a -> s{_cflIds = a}) . _Default .
       _Coerce
 
 -- | User profile ID associated with this request.
-cflProFileId :: Lens' CreativeFieldsList' Int64
+cflProFileId :: Lens' CreativeFieldsList Int64
 cflProFileId
   = lens _cflProFileId (\ s a -> s{_cflProFileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-cflSortOrder :: Lens' CreativeFieldsList' (Maybe CreativeFieldsListSortOrder)
+cflSortOrder :: Lens' CreativeFieldsList (Maybe CreativeFieldsListSortOrder)
 cflSortOrder
   = lens _cflSortOrder (\ s a -> s{_cflSortOrder = a})
 
 -- | Value of the nextPageToken from the previous result page.
-cflPageToken :: Lens' CreativeFieldsList' (Maybe Text)
+cflPageToken :: Lens' CreativeFieldsList (Maybe Text)
 cflPageToken
   = lens _cflPageToken (\ s a -> s{_cflPageToken = a})
 
 -- | Field by which to sort the list.
-cflSortField :: Lens' CreativeFieldsList' (Maybe CreativeFieldsListSortField)
+cflSortField :: Lens' CreativeFieldsList (Maybe CreativeFieldsListSortField)
 cflSortField
   = lens _cflSortField (\ s a -> s{_cflSortField = a})
 
 -- | Select only creative fields that belong to these advertisers.
-cflAdvertiserIds :: Lens' CreativeFieldsList' [Int64]
+cflAdvertiserIds :: Lens' CreativeFieldsList [Int64]
 cflAdvertiserIds
   = lens _cflAdvertiserIds
       (\ s a -> s{_cflAdvertiserIds = a})
@@ -158,15 +158,15 @@ cflAdvertiserIds
       . _Coerce
 
 -- | Maximum number of results to return.
-cflMaxResults :: Lens' CreativeFieldsList' (Maybe Int32)
+cflMaxResults :: Lens' CreativeFieldsList (Maybe Int32)
 cflMaxResults
   = lens _cflMaxResults
       (\ s a -> s{_cflMaxResults = a})
 
-instance GoogleRequest CreativeFieldsList' where
-        type Rs CreativeFieldsList' =
+instance GoogleRequest CreativeFieldsList where
+        type Rs CreativeFieldsList =
              CreativeFieldsListResponse
-        requestClient CreativeFieldsList'{..}
+        requestClient CreativeFieldsList{..}
           = go _cflProFileId _cflSearchString
               (_cflIds ^. _Default)
               _cflSortOrder

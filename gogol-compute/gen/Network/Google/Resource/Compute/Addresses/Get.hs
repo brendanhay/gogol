@@ -29,20 +29,20 @@ module Network.Google.Resource.Compute.Addresses.Get
       AddressesGetResource
 
     -- * Creating a Request
-    , addressesGet'
-    , AddressesGet'
+    , addressesGet
+    , AddressesGet
 
     -- * Request Lenses
-    , aggProject
-    , aggAddress
-    , aggRegion
+    , addProject
+    , addAddress
+    , addRegion
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.addresses.get@ method which the
--- 'AddressesGet'' request conforms to.
+-- 'AddressesGet' request conforms to.
 type AddressesGetResource =
      Capture "project" Text :>
        "regions" :>
@@ -53,53 +53,53 @@ type AddressesGetResource =
 
 -- | Returns the specified address resource.
 --
--- /See:/ 'addressesGet'' smart constructor.
-data AddressesGet' = AddressesGet'
-    { _aggProject :: !Text
-    , _aggAddress :: !Text
-    , _aggRegion  :: !Text
+-- /See:/ 'addressesGet' smart constructor.
+data AddressesGet = AddressesGet
+    { _addProject :: !Text
+    , _addAddress :: !Text
+    , _addRegion  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AddressesGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AddressesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aggProject'
+-- * 'addProject'
 --
--- * 'aggAddress'
+-- * 'addAddress'
 --
--- * 'aggRegion'
-addressesGet'
-    :: Text -- ^ 'aggProject'
-    -> Text -- ^ 'aggAddress'
-    -> Text -- ^ 'aggRegion'
-    -> AddressesGet'
-addressesGet' pAggProject_ pAggAddress_ pAggRegion_ =
-    AddressesGet'
-    { _aggProject = pAggProject_
-    , _aggAddress = pAggAddress_
-    , _aggRegion = pAggRegion_
+-- * 'addRegion'
+addressesGet
+    :: Text -- ^ 'addProject'
+    -> Text -- ^ 'addAddress'
+    -> Text -- ^ 'addRegion'
+    -> AddressesGet
+addressesGet pAddProject_ pAddAddress_ pAddRegion_ =
+    AddressesGet
+    { _addProject = pAddProject_
+    , _addAddress = pAddAddress_
+    , _addRegion = pAddRegion_
     }
 
 -- | Project ID for this request.
-aggProject :: Lens' AddressesGet' Text
-aggProject
-  = lens _aggProject (\ s a -> s{_aggProject = a})
+addProject :: Lens' AddressesGet Text
+addProject
+  = lens _addProject (\ s a -> s{_addProject = a})
 
 -- | Name of the address resource to return.
-aggAddress :: Lens' AddressesGet' Text
-aggAddress
-  = lens _aggAddress (\ s a -> s{_aggAddress = a})
+addAddress :: Lens' AddressesGet Text
+addAddress
+  = lens _addAddress (\ s a -> s{_addAddress = a})
 
 -- | The name of the region for this request.
-aggRegion :: Lens' AddressesGet' Text
-aggRegion
-  = lens _aggRegion (\ s a -> s{_aggRegion = a})
+addRegion :: Lens' AddressesGet Text
+addRegion
+  = lens _addRegion (\ s a -> s{_addRegion = a})
 
-instance GoogleRequest AddressesGet' where
-        type Rs AddressesGet' = Address
-        requestClient AddressesGet'{..}
-          = go _aggProject _aggRegion _aggAddress
+instance GoogleRequest AddressesGet where
+        type Rs AddressesGet = Address
+        requestClient AddressesGet{..}
+          = go _addProject _addRegion _addAddress
               (Just AltJSON)
               computeService
           where go

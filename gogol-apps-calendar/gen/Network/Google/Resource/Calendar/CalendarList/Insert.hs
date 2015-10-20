@@ -29,8 +29,8 @@ module Network.Google.Resource.Calendar.CalendarList.Insert
       CalendarListInsertResource
 
     -- * Creating a Request
-    , calendarListInsert'
-    , CalendarListInsert'
+    , calendarListInsert
+    , CalendarListInsert
 
     -- * Request Lenses
     , cliPayload
@@ -41,7 +41,7 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @calendar.calendarList.insert@ method which the
--- 'CalendarListInsert'' request conforms to.
+-- 'CalendarListInsert' request conforms to.
 type CalendarListInsertResource =
      "users" :>
        "me" :>
@@ -53,30 +53,30 @@ type CalendarListInsertResource =
 
 -- | Adds an entry to the user\'s calendar list.
 --
--- /See:/ 'calendarListInsert'' smart constructor.
-data CalendarListInsert' = CalendarListInsert'
+-- /See:/ 'calendarListInsert' smart constructor.
+data CalendarListInsert = CalendarListInsert
     { _cliPayload        :: !CalendarListEntry
     , _cliColorRgbFormat :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CalendarListInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'CalendarListInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'cliPayload'
 --
 -- * 'cliColorRgbFormat'
-calendarListInsert'
+calendarListInsert
     :: CalendarListEntry -- ^ 'cliPayload'
-    -> CalendarListInsert'
-calendarListInsert' pCliPayload_ =
-    CalendarListInsert'
+    -> CalendarListInsert
+calendarListInsert pCliPayload_ =
+    CalendarListInsert
     { _cliPayload = pCliPayload_
     , _cliColorRgbFormat = Nothing
     }
 
 -- | Multipart request metadata.
-cliPayload :: Lens' CalendarListInsert' CalendarListEntry
+cliPayload :: Lens' CalendarListInsert CalendarListEntry
 cliPayload
   = lens _cliPayload (\ s a -> s{_cliPayload = a})
 
@@ -84,14 +84,14 @@ cliPayload
 -- the calendar colors (RGB). If this feature is used, the index-based
 -- colorId field will be set to the best matching option automatically.
 -- Optional. The default is False.
-cliColorRgbFormat :: Lens' CalendarListInsert' (Maybe Bool)
+cliColorRgbFormat :: Lens' CalendarListInsert (Maybe Bool)
 cliColorRgbFormat
   = lens _cliColorRgbFormat
       (\ s a -> s{_cliColorRgbFormat = a})
 
-instance GoogleRequest CalendarListInsert' where
-        type Rs CalendarListInsert' = CalendarListEntry
-        requestClient CalendarListInsert'{..}
+instance GoogleRequest CalendarListInsert where
+        type Rs CalendarListInsert = CalendarListEntry
+        requestClient CalendarListInsert{..}
           = go _cliColorRgbFormat (Just AltJSON) _cliPayload
               appsCalendarService
           where go

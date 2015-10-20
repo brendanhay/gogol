@@ -29,8 +29,8 @@ module Network.Google.Resource.Books.CloudLoading.UpdateBook
       CloudLoadingUpdateBookResource
 
     -- * Creating a Request
-    , cloudLoadingUpdateBook'
-    , CloudLoadingUpdateBook'
+    , cloudLoadingUpdateBook
+    , CloudLoadingUpdateBook
 
     -- * Request Lenses
     , clubPayload
@@ -40,7 +40,7 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @books.cloudloading.updateBook@ method which the
--- 'CloudLoadingUpdateBook'' request conforms to.
+-- 'CloudLoadingUpdateBook' request conforms to.
 type CloudLoadingUpdateBookResource =
      "cloudloading" :>
        "updateBook" :>
@@ -50,33 +50,33 @@ type CloudLoadingUpdateBookResource =
 
 -- |
 --
--- /See:/ 'cloudLoadingUpdateBook'' smart constructor.
-newtype CloudLoadingUpdateBook' = CloudLoadingUpdateBook'
+-- /See:/ 'cloudLoadingUpdateBook' smart constructor.
+newtype CloudLoadingUpdateBook = CloudLoadingUpdateBook
     { _clubPayload :: BooksCloudLoadingResource
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CloudLoadingUpdateBook'' with the minimum fields required to make a request.
+-- | Creates a value of 'CloudLoadingUpdateBook' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'clubPayload'
-cloudLoadingUpdateBook'
+cloudLoadingUpdateBook
     :: BooksCloudLoadingResource -- ^ 'clubPayload'
-    -> CloudLoadingUpdateBook'
-cloudLoadingUpdateBook' pClubPayload_ =
-    CloudLoadingUpdateBook'
+    -> CloudLoadingUpdateBook
+cloudLoadingUpdateBook pClubPayload_ =
+    CloudLoadingUpdateBook
     { _clubPayload = pClubPayload_
     }
 
 -- | Multipart request metadata.
-clubPayload :: Lens' CloudLoadingUpdateBook' BooksCloudLoadingResource
+clubPayload :: Lens' CloudLoadingUpdateBook BooksCloudLoadingResource
 clubPayload
   = lens _clubPayload (\ s a -> s{_clubPayload = a})
 
-instance GoogleRequest CloudLoadingUpdateBook' where
-        type Rs CloudLoadingUpdateBook' =
+instance GoogleRequest CloudLoadingUpdateBook where
+        type Rs CloudLoadingUpdateBook =
              BooksCloudLoadingResource
-        requestClient CloudLoadingUpdateBook'{..}
+        requestClient CloudLoadingUpdateBook{..}
           = go (Just AltJSON) _clubPayload booksService
           where go
                   = buildClient

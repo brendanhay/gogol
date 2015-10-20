@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudResourceManager.Organizations.Get
       OrganizationsGetResource
 
     -- * Creating a Request
-    , organizationsGet'
-    , OrganizationsGet'
+    , organizationsGet
+    , OrganizationsGet
 
     -- * Request Lenses
     , ogXgafv
@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.organizations.get@ method which the
--- 'OrganizationsGet'' request conforms to.
+-- 'OrganizationsGet' request conforms to.
 type OrganizationsGetResource =
      "v1beta1" :>
        "organizations" :>
@@ -63,8 +63,8 @@ type OrganizationsGetResource =
 
 -- | Fetches an Organization resource by id.
 --
--- /See:/ 'organizationsGet'' smart constructor.
-data OrganizationsGet' = OrganizationsGet'
+-- /See:/ 'organizationsGet' smart constructor.
+data OrganizationsGet = OrganizationsGet
     { _ogXgafv          :: !(Maybe Text)
     , _ogUploadProtocol :: !(Maybe Text)
     , _ogPp             :: !Bool
@@ -75,7 +75,7 @@ data OrganizationsGet' = OrganizationsGet'
     , _ogCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrganizationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrganizationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -94,11 +94,11 @@ data OrganizationsGet' = OrganizationsGet'
 -- * 'ogOrganizationId'
 --
 -- * 'ogCallback'
-organizationsGet'
+organizationsGet
     :: Text -- ^ 'ogOrganizationId'
-    -> OrganizationsGet'
-organizationsGet' pOgOrganizationId_ =
-    OrganizationsGet'
+    -> OrganizationsGet
+organizationsGet pOgOrganizationId_ =
+    OrganizationsGet
     { _ogXgafv = Nothing
     , _ogUploadProtocol = Nothing
     , _ogPp = True
@@ -110,50 +110,50 @@ organizationsGet' pOgOrganizationId_ =
     }
 
 -- | V1 error format.
-ogXgafv :: Lens' OrganizationsGet' (Maybe Text)
+ogXgafv :: Lens' OrganizationsGet (Maybe Text)
 ogXgafv = lens _ogXgafv (\ s a -> s{_ogXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ogUploadProtocol :: Lens' OrganizationsGet' (Maybe Text)
+ogUploadProtocol :: Lens' OrganizationsGet (Maybe Text)
 ogUploadProtocol
   = lens _ogUploadProtocol
       (\ s a -> s{_ogUploadProtocol = a})
 
 -- | Pretty-print response.
-ogPp :: Lens' OrganizationsGet' Bool
+ogPp :: Lens' OrganizationsGet Bool
 ogPp = lens _ogPp (\ s a -> s{_ogPp = a})
 
 -- | OAuth access token.
-ogAccessToken :: Lens' OrganizationsGet' (Maybe Text)
+ogAccessToken :: Lens' OrganizationsGet (Maybe Text)
 ogAccessToken
   = lens _ogAccessToken
       (\ s a -> s{_ogAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ogUploadType :: Lens' OrganizationsGet' (Maybe Text)
+ogUploadType :: Lens' OrganizationsGet (Maybe Text)
 ogUploadType
   = lens _ogUploadType (\ s a -> s{_ogUploadType = a})
 
 -- | OAuth bearer token.
-ogBearerToken :: Lens' OrganizationsGet' (Maybe Text)
+ogBearerToken :: Lens' OrganizationsGet (Maybe Text)
 ogBearerToken
   = lens _ogBearerToken
       (\ s a -> s{_ogBearerToken = a})
 
 -- | The id of the Organization resource to fetch.
-ogOrganizationId :: Lens' OrganizationsGet' Text
+ogOrganizationId :: Lens' OrganizationsGet Text
 ogOrganizationId
   = lens _ogOrganizationId
       (\ s a -> s{_ogOrganizationId = a})
 
 -- | JSONP
-ogCallback :: Lens' OrganizationsGet' (Maybe Text)
+ogCallback :: Lens' OrganizationsGet (Maybe Text)
 ogCallback
   = lens _ogCallback (\ s a -> s{_ogCallback = a})
 
-instance GoogleRequest OrganizationsGet' where
-        type Rs OrganizationsGet' = Organization
-        requestClient OrganizationsGet'{..}
+instance GoogleRequest OrganizationsGet where
+        type Rs OrganizationsGet = Organization
+        requestClient OrganizationsGet{..}
           = go _ogOrganizationId _ogXgafv _ogUploadProtocol
               (Just _ogPp)
               _ogAccessToken

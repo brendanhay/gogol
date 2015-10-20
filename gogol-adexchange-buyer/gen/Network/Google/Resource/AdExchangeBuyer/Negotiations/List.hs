@@ -29,8 +29,8 @@ module Network.Google.Resource.AdExchangeBuyer.Negotiations.List
       NegotiationsListResource
 
     -- * Creating a Request
-    , negotiationsList'
-    , NegotiationsList'
+    , negotiationsList
+    , NegotiationsList
 
     -- * Request Lenses
     , nlPayload
@@ -40,7 +40,7 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adexchangebuyer.negotiations.list@ method which the
--- 'NegotiationsList'' request conforms to.
+-- 'NegotiationsList' request conforms to.
 type NegotiationsListResource =
      "negotiations" :>
        QueryParam "alt" AltJSON :>
@@ -49,32 +49,32 @@ type NegotiationsListResource =
 
 -- | Lists all negotiations the authenticated user has access to.
 --
--- /See:/ 'negotiationsList'' smart constructor.
-newtype NegotiationsList' = NegotiationsList'
+-- /See:/ 'negotiationsList' smart constructor.
+newtype NegotiationsList = NegotiationsList
     { _nlPayload :: GetNegotiationsRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'NegotiationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'NegotiationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'nlPayload'
-negotiationsList'
+negotiationsList
     :: GetNegotiationsRequest -- ^ 'nlPayload'
-    -> NegotiationsList'
-negotiationsList' pNlPayload_ =
-    NegotiationsList'
+    -> NegotiationsList
+negotiationsList pNlPayload_ =
+    NegotiationsList
     { _nlPayload = pNlPayload_
     }
 
 -- | Multipart request metadata.
-nlPayload :: Lens' NegotiationsList' GetNegotiationsRequest
+nlPayload :: Lens' NegotiationsList GetNegotiationsRequest
 nlPayload
   = lens _nlPayload (\ s a -> s{_nlPayload = a})
 
-instance GoogleRequest NegotiationsList' where
-        type Rs NegotiationsList' = GetNegotiationsResponse
-        requestClient NegotiationsList'{..}
+instance GoogleRequest NegotiationsList where
+        type Rs NegotiationsList = GetNegotiationsResponse
+        requestClient NegotiationsList{..}
           = go (Just AltJSON) _nlPayload adExchangeBuyerService
           where go
                   = buildClient

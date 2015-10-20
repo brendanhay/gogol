@@ -29,8 +29,8 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Pause
       TransferOperationsPauseResource
 
     -- * Creating a Request
-    , transferOperationsPause'
-    , TransferOperationsPause'
+    , transferOperationsPause
+    , TransferOperationsPause
 
     -- * Request Lenses
     , topXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferOperations.pause@ method which the
--- 'TransferOperationsPause'' request conforms to.
+-- 'TransferOperationsPause' request conforms to.
 type TransferOperationsPauseResource =
      "v1" :>
        CaptureMode "name" "pause" Text :>
@@ -65,8 +65,8 @@ type TransferOperationsPauseResource =
 
 -- | Pauses a transfer operation.
 --
--- /See:/ 'transferOperationsPause'' smart constructor.
-data TransferOperationsPause' = TransferOperationsPause'
+-- /See:/ 'transferOperationsPause' smart constructor.
+data TransferOperationsPause = TransferOperationsPause
     { _topXgafv          :: !(Maybe Text)
     , _topUploadProtocol :: !(Maybe Text)
     , _topPp             :: !Bool
@@ -78,7 +78,7 @@ data TransferOperationsPause' = TransferOperationsPause'
     , _topCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TransferOperationsPause'' with the minimum fields required to make a request.
+-- | Creates a value of 'TransferOperationsPause' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -99,12 +99,12 @@ data TransferOperationsPause' = TransferOperationsPause'
 -- * 'topName'
 --
 -- * 'topCallback'
-transferOperationsPause'
+transferOperationsPause
     :: PauseTransferOperationRequest -- ^ 'topPayload'
     -> Text -- ^ 'topName'
-    -> TransferOperationsPause'
-transferOperationsPause' pTopPayload_ pTopName_ =
-    TransferOperationsPause'
+    -> TransferOperationsPause
+transferOperationsPause pTopPayload_ pTopName_ =
+    TransferOperationsPause
     { _topXgafv = Nothing
     , _topUploadProtocol = Nothing
     , _topPp = True
@@ -117,54 +117,54 @@ transferOperationsPause' pTopPayload_ pTopName_ =
     }
 
 -- | V1 error format.
-topXgafv :: Lens' TransferOperationsPause' (Maybe Text)
+topXgafv :: Lens' TransferOperationsPause (Maybe Text)
 topXgafv = lens _topXgafv (\ s a -> s{_topXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-topUploadProtocol :: Lens' TransferOperationsPause' (Maybe Text)
+topUploadProtocol :: Lens' TransferOperationsPause (Maybe Text)
 topUploadProtocol
   = lens _topUploadProtocol
       (\ s a -> s{_topUploadProtocol = a})
 
 -- | Pretty-print response.
-topPp :: Lens' TransferOperationsPause' Bool
+topPp :: Lens' TransferOperationsPause Bool
 topPp = lens _topPp (\ s a -> s{_topPp = a})
 
 -- | OAuth access token.
-topAccessToken :: Lens' TransferOperationsPause' (Maybe Text)
+topAccessToken :: Lens' TransferOperationsPause (Maybe Text)
 topAccessToken
   = lens _topAccessToken
       (\ s a -> s{_topAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-topUploadType :: Lens' TransferOperationsPause' (Maybe Text)
+topUploadType :: Lens' TransferOperationsPause (Maybe Text)
 topUploadType
   = lens _topUploadType
       (\ s a -> s{_topUploadType = a})
 
 -- | Multipart request metadata.
-topPayload :: Lens' TransferOperationsPause' PauseTransferOperationRequest
+topPayload :: Lens' TransferOperationsPause PauseTransferOperationRequest
 topPayload
   = lens _topPayload (\ s a -> s{_topPayload = a})
 
 -- | OAuth bearer token.
-topBearerToken :: Lens' TransferOperationsPause' (Maybe Text)
+topBearerToken :: Lens' TransferOperationsPause (Maybe Text)
 topBearerToken
   = lens _topBearerToken
       (\ s a -> s{_topBearerToken = a})
 
 -- | The name of the transfer operation. Required.
-topName :: Lens' TransferOperationsPause' Text
+topName :: Lens' TransferOperationsPause Text
 topName = lens _topName (\ s a -> s{_topName = a})
 
 -- | JSONP
-topCallback :: Lens' TransferOperationsPause' (Maybe Text)
+topCallback :: Lens' TransferOperationsPause (Maybe Text)
 topCallback
   = lens _topCallback (\ s a -> s{_topCallback = a})
 
-instance GoogleRequest TransferOperationsPause' where
-        type Rs TransferOperationsPause' = Empty
-        requestClient TransferOperationsPause'{..}
+instance GoogleRequest TransferOperationsPause where
+        type Rs TransferOperationsPause = Empty
+        requestClient TransferOperationsPause{..}
           = go _topName _topXgafv _topUploadProtocol
               (Just _topPp)
               _topAccessToken

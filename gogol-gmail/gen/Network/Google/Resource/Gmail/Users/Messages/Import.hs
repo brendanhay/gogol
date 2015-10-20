@@ -31,24 +31,24 @@ module Network.Google.Resource.Gmail.Users.Messages.Import
       UsersMessagesImportResource
 
     -- * Creating a Request
-    , usersMessagesImport'
-    , UsersMessagesImport'
+    , usersMessagesImport
+    , UsersMessagesImport
 
     -- * Request Lenses
-    , uPayload
-    , uUserId
-    , uMedia
-    , uProcessForCalendar
-    , uDeleted
-    , uNeverMarkSpam
-    , uInternalDateSource
+    , umiPayload
+    , umiUserId
+    , umiMedia
+    , umiProcessForCalendar
+    , umiDeleted
+    , umiNeverMarkSpam
+    , umiInternalDateSource
     ) where
 
 import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gmail.users.messages.import@ method which the
--- 'UsersMessagesImport'' request conforms to.
+-- 'UsersMessagesImport' request conforms to.
 type UsersMessagesImportResource =
      Capture "userId" Text :>
        "messages" :>
@@ -67,98 +67,101 @@ type UsersMessagesImportResource =
 -- delivery scanning and classification similar to receiving via SMTP. Does
 -- not send a message.
 --
--- /See:/ 'usersMessagesImport'' smart constructor.
-data UsersMessagesImport' = UsersMessagesImport'
-    { _uPayload            :: !Message
-    , _uUserId             :: !Text
-    , _uMedia              :: !Body
-    , _uProcessForCalendar :: !Bool
-    , _uDeleted            :: !Bool
-    , _uNeverMarkSpam      :: !Bool
-    , _uInternalDateSource :: !UsersMessagesImportInternalDateSource
+-- /See:/ 'usersMessagesImport' smart constructor.
+data UsersMessagesImport = UsersMessagesImport
+    { _umiPayload            :: !Message
+    , _umiUserId             :: !Text
+    , _umiMedia              :: !Body
+    , _umiProcessForCalendar :: !Bool
+    , _umiDeleted            :: !Bool
+    , _umiNeverMarkSpam      :: !Bool
+    , _umiInternalDateSource :: !UsersMessagesImportInternalDateSource
     }
 
--- | Creates a value of 'UsersMessagesImport'' with the minimum fields required to make a request.
+-- | Creates a value of 'UsersMessagesImport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uPayload'
+-- * 'umiPayload'
 --
--- * 'uUserId'
+-- * 'umiUserId'
 --
--- * 'uMedia'
+-- * 'umiMedia'
 --
--- * 'uProcessForCalendar'
+-- * 'umiProcessForCalendar'
 --
--- * 'uDeleted'
+-- * 'umiDeleted'
 --
--- * 'uNeverMarkSpam'
+-- * 'umiNeverMarkSpam'
 --
--- * 'uInternalDateSource'
-usersMessagesImport'
-    :: Message -- ^ 'uPayload'
-    -> Text -- ^ 'uMedia'
+-- * 'umiInternalDateSource'
+usersMessagesImport
+    :: Message -- ^ 'umiPayload'
+    -> Text -- ^ 'umiMedia'
     -> Body
-    -> UsersMessagesImport'
-usersMessagesImport' pUPayload_ pUUserId_ pUMedia_ =
-    UsersMessagesImport'
-    { _uPayload = pUPayload_
-    , _uUserId = pUUserId_
-    , _uMedia = pUMedia_
-    , _uProcessForCalendar = False
-    , _uDeleted = False
-    , _uNeverMarkSpam = False
-    , _uInternalDateSource = DateHeader
+    -> UsersMessagesImport
+usersMessagesImport pUmiPayload_ pUmiUserId_ pUmiMedia_ =
+    UsersMessagesImport
+    { _umiPayload = pUmiPayload_
+    , _umiUserId = pUmiUserId_
+    , _umiMedia = pUmiMedia_
+    , _umiProcessForCalendar = False
+    , _umiDeleted = False
+    , _umiNeverMarkSpam = False
+    , _umiInternalDateSource = DateHeader
     }
 
 -- | Multipart request metadata.
-uPayload :: Lens' UsersMessagesImport' Message
-uPayload = lens _uPayload (\ s a -> s{_uPayload = a})
+umiPayload :: Lens' UsersMessagesImport Message
+umiPayload
+  = lens _umiPayload (\ s a -> s{_umiPayload = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
-uUserId :: Lens' UsersMessagesImport' Text
-uUserId = lens _uUserId (\ s a -> s{_uUserId = a})
+umiUserId :: Lens' UsersMessagesImport Text
+umiUserId
+  = lens _umiUserId (\ s a -> s{_umiUserId = a})
 
-uMedia :: Lens' UsersMessagesImport' Body
-uMedia = lens _uMedia (\ s a -> s{_uMedia = a})
+umiMedia :: Lens' UsersMessagesImport Body
+umiMedia = lens _umiMedia (\ s a -> s{_umiMedia = a})
 
 -- | Process calendar invites in the email and add any extracted meetings to
 -- the Google Calendar for this user.
-uProcessForCalendar :: Lens' UsersMessagesImport' Bool
-uProcessForCalendar
-  = lens _uProcessForCalendar
-      (\ s a -> s{_uProcessForCalendar = a})
+umiProcessForCalendar :: Lens' UsersMessagesImport Bool
+umiProcessForCalendar
+  = lens _umiProcessForCalendar
+      (\ s a -> s{_umiProcessForCalendar = a})
 
 -- | Mark the email as permanently deleted (not TRASH) and only visible in
 -- Google Apps Vault to a Vault administrator. Only used for Google Apps
 -- for Work accounts.
-uDeleted :: Lens' UsersMessagesImport' Bool
-uDeleted = lens _uDeleted (\ s a -> s{_uDeleted = a})
+umiDeleted :: Lens' UsersMessagesImport Bool
+umiDeleted
+  = lens _umiDeleted (\ s a -> s{_umiDeleted = a})
 
 -- | Ignore the Gmail spam classifier decision and never mark this email as
 -- SPAM in the mailbox.
-uNeverMarkSpam :: Lens' UsersMessagesImport' Bool
-uNeverMarkSpam
-  = lens _uNeverMarkSpam
-      (\ s a -> s{_uNeverMarkSpam = a})
+umiNeverMarkSpam :: Lens' UsersMessagesImport Bool
+umiNeverMarkSpam
+  = lens _umiNeverMarkSpam
+      (\ s a -> s{_umiNeverMarkSpam = a})
 
 -- | Source for Gmail\'s internal date of the message.
-uInternalDateSource :: Lens' UsersMessagesImport' UsersMessagesImportInternalDateSource
-uInternalDateSource
-  = lens _uInternalDateSource
-      (\ s a -> s{_uInternalDateSource = a})
+umiInternalDateSource :: Lens' UsersMessagesImport UsersMessagesImportInternalDateSource
+umiInternalDateSource
+  = lens _umiInternalDateSource
+      (\ s a -> s{_umiInternalDateSource = a})
 
-instance GoogleRequest UsersMessagesImport' where
-        type Rs UsersMessagesImport' = Message
-        requestClient UsersMessagesImport'{..}
-          = go _uUserId (Just _uProcessForCalendar)
-              (Just _uDeleted)
-              (Just _uNeverMarkSpam)
-              (Just _uInternalDateSource)
+instance GoogleRequest UsersMessagesImport where
+        type Rs UsersMessagesImport = Message
+        requestClient UsersMessagesImport{..}
+          = go _umiUserId (Just _umiProcessForCalendar)
+              (Just _umiDeleted)
+              (Just _umiNeverMarkSpam)
+              (Just _umiInternalDateSource)
               (Just AltJSON)
-              _uPayload
-              _uMedia
+              _umiPayload
+              _umiMedia
               gmailService
           where go
                   = buildClient

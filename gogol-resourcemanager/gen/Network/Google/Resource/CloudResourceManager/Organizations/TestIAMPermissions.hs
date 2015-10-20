@@ -29,8 +29,8 @@ module Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermiss
       OrganizationsTestIAMPermissionsResource
 
     -- * Creating a Request
-    , organizationsTestIAMPermissions'
-    , OrganizationsTestIAMPermissions'
+    , organizationsTestIAMPermissions
+    , OrganizationsTestIAMPermissions
 
     -- * Request Lenses
     , otipXgafv
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.organizations.testIamPermissions@ method which the
--- 'OrganizationsTestIAMPermissions'' request conforms to.
+-- 'OrganizationsTestIAMPermissions' request conforms to.
 type OrganizationsTestIAMPermissionsResource =
      "v1beta1" :>
        "organizations" :>
@@ -66,8 +66,8 @@ type OrganizationsTestIAMPermissionsResource =
 
 -- | Returns permissions that a caller has on the specified Organization.
 --
--- /See:/ 'organizationsTestIAMPermissions'' smart constructor.
-data OrganizationsTestIAMPermissions' = OrganizationsTestIAMPermissions'
+-- /See:/ 'organizationsTestIAMPermissions' smart constructor.
+data OrganizationsTestIAMPermissions = OrganizationsTestIAMPermissions
     { _otipXgafv          :: !(Maybe Text)
     , _otipUploadProtocol :: !(Maybe Text)
     , _otipPp             :: !Bool
@@ -79,7 +79,7 @@ data OrganizationsTestIAMPermissions' = OrganizationsTestIAMPermissions'
     , _otipCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OrganizationsTestIAMPermissions'' with the minimum fields required to make a request.
+-- | Creates a value of 'OrganizationsTestIAMPermissions' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -100,12 +100,12 @@ data OrganizationsTestIAMPermissions' = OrganizationsTestIAMPermissions'
 -- * 'otipResource'
 --
 -- * 'otipCallback'
-organizationsTestIAMPermissions'
+organizationsTestIAMPermissions
     :: TestIAMPermissionsRequest -- ^ 'otipPayload'
     -> Text -- ^ 'otipResource'
-    -> OrganizationsTestIAMPermissions'
-organizationsTestIAMPermissions' pOtipPayload_ pOtipResource_ =
-    OrganizationsTestIAMPermissions'
+    -> OrganizationsTestIAMPermissions
+organizationsTestIAMPermissions pOtipPayload_ pOtipResource_ =
+    OrganizationsTestIAMPermissions
     { _otipXgafv = Nothing
     , _otipUploadProtocol = Nothing
     , _otipPp = True
@@ -118,39 +118,39 @@ organizationsTestIAMPermissions' pOtipPayload_ pOtipResource_ =
     }
 
 -- | V1 error format.
-otipXgafv :: Lens' OrganizationsTestIAMPermissions' (Maybe Text)
+otipXgafv :: Lens' OrganizationsTestIAMPermissions (Maybe Text)
 otipXgafv
   = lens _otipXgafv (\ s a -> s{_otipXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-otipUploadProtocol :: Lens' OrganizationsTestIAMPermissions' (Maybe Text)
+otipUploadProtocol :: Lens' OrganizationsTestIAMPermissions (Maybe Text)
 otipUploadProtocol
   = lens _otipUploadProtocol
       (\ s a -> s{_otipUploadProtocol = a})
 
 -- | Pretty-print response.
-otipPp :: Lens' OrganizationsTestIAMPermissions' Bool
+otipPp :: Lens' OrganizationsTestIAMPermissions Bool
 otipPp = lens _otipPp (\ s a -> s{_otipPp = a})
 
 -- | OAuth access token.
-otipAccessToken :: Lens' OrganizationsTestIAMPermissions' (Maybe Text)
+otipAccessToken :: Lens' OrganizationsTestIAMPermissions (Maybe Text)
 otipAccessToken
   = lens _otipAccessToken
       (\ s a -> s{_otipAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-otipUploadType :: Lens' OrganizationsTestIAMPermissions' (Maybe Text)
+otipUploadType :: Lens' OrganizationsTestIAMPermissions (Maybe Text)
 otipUploadType
   = lens _otipUploadType
       (\ s a -> s{_otipUploadType = a})
 
 -- | Multipart request metadata.
-otipPayload :: Lens' OrganizationsTestIAMPermissions' TestIAMPermissionsRequest
+otipPayload :: Lens' OrganizationsTestIAMPermissions TestIAMPermissionsRequest
 otipPayload
   = lens _otipPayload (\ s a -> s{_otipPayload = a})
 
 -- | OAuth bearer token.
-otipBearerToken :: Lens' OrganizationsTestIAMPermissions' (Maybe Text)
+otipBearerToken :: Lens' OrganizationsTestIAMPermissions (Maybe Text)
 otipBearerToken
   = lens _otipBearerToken
       (\ s a -> s{_otipBearerToken = a})
@@ -158,20 +158,20 @@ otipBearerToken
 -- | REQUIRED: The resource for which policy detail is being requested.
 -- \`resource\` is usually specified as a path, such as,
 -- \`projects\/{project}\`.
-otipResource :: Lens' OrganizationsTestIAMPermissions' Text
+otipResource :: Lens' OrganizationsTestIAMPermissions Text
 otipResource
   = lens _otipResource (\ s a -> s{_otipResource = a})
 
 -- | JSONP
-otipCallback :: Lens' OrganizationsTestIAMPermissions' (Maybe Text)
+otipCallback :: Lens' OrganizationsTestIAMPermissions (Maybe Text)
 otipCallback
   = lens _otipCallback (\ s a -> s{_otipCallback = a})
 
 instance GoogleRequest
-         OrganizationsTestIAMPermissions' where
-        type Rs OrganizationsTestIAMPermissions' =
+         OrganizationsTestIAMPermissions where
+        type Rs OrganizationsTestIAMPermissions =
              TestIAMPermissionsResponse
-        requestClient OrganizationsTestIAMPermissions'{..}
+        requestClient OrganizationsTestIAMPermissions{..}
           = go _otipResource _otipXgafv _otipUploadProtocol
               (Just _otipPp)
               _otipAccessToken

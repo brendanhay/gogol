@@ -31,8 +31,8 @@ module Network.Google.Resource.GamesManagement.Players.Hide
       PlayersHideResource
 
     -- * Creating a Request
-    , playersHide'
-    , PlayersHide'
+    , playersHide
+    , PlayersHide
 
     -- * Request Lenses
     , phApplicationId
@@ -43,7 +43,7 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesManagement.players.hide@ method which the
--- 'PlayersHide'' request conforms to.
+-- 'PlayersHide' request conforms to.
 type PlayersHideResource =
      "applications" :>
        Capture "applicationId" Text :>
@@ -56,44 +56,44 @@ type PlayersHideResource =
 -- This method is only available to user accounts for your developer
 -- console.
 --
--- /See:/ 'playersHide'' smart constructor.
-data PlayersHide' = PlayersHide'
+-- /See:/ 'playersHide' smart constructor.
+data PlayersHide = PlayersHide
     { _phApplicationId :: !Text
     , _phPlayerId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlayersHide'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlayersHide' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'phApplicationId'
 --
 -- * 'phPlayerId'
-playersHide'
+playersHide
     :: Text -- ^ 'phApplicationId'
     -> Text -- ^ 'phPlayerId'
-    -> PlayersHide'
-playersHide' pPhApplicationId_ pPhPlayerId_ =
-    PlayersHide'
+    -> PlayersHide
+playersHide pPhApplicationId_ pPhPlayerId_ =
+    PlayersHide
     { _phApplicationId = pPhApplicationId_
     , _phPlayerId = pPhPlayerId_
     }
 
 -- | The application ID from the Google Play developer console.
-phApplicationId :: Lens' PlayersHide' Text
+phApplicationId :: Lens' PlayersHide Text
 phApplicationId
   = lens _phApplicationId
       (\ s a -> s{_phApplicationId = a})
 
 -- | A player ID. A value of me may be used in place of the authenticated
 -- player\'s ID.
-phPlayerId :: Lens' PlayersHide' Text
+phPlayerId :: Lens' PlayersHide Text
 phPlayerId
   = lens _phPlayerId (\ s a -> s{_phPlayerId = a})
 
-instance GoogleRequest PlayersHide' where
-        type Rs PlayersHide' = ()
-        requestClient PlayersHide'{..}
+instance GoogleRequest PlayersHide where
+        type Rs PlayersHide = ()
+        requestClient PlayersHide{..}
           = go _phApplicationId _phPlayerId (Just AltJSON)
               gamesManagementService
           where go

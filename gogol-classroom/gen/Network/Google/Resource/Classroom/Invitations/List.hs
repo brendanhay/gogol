@@ -33,8 +33,8 @@ module Network.Google.Resource.Classroom.Invitations.List
       InvitationsListResource
 
     -- * Creating a Request
-    , invitationsList'
-    , InvitationsList'
+    , invitationsList
+    , InvitationsList
 
     -- * Request Lenses
     , ilXgafv
@@ -54,7 +54,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.invitations.list@ method which the
--- 'InvitationsList'' request conforms to.
+-- 'InvitationsList' request conforms to.
 type InvitationsListResource =
      "v1" :>
        "invitations" :>
@@ -78,8 +78,8 @@ type InvitationsListResource =
 -- supplied. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` for access errors.
 --
--- /See:/ 'invitationsList'' smart constructor.
-data InvitationsList' = InvitationsList'
+-- /See:/ 'invitationsList' smart constructor.
+data InvitationsList = InvitationsList
     { _ilXgafv          :: !(Maybe Text)
     , _ilUploadProtocol :: !(Maybe Text)
     , _ilPp             :: !Bool
@@ -93,7 +93,7 @@ data InvitationsList' = InvitationsList'
     , _ilCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InvitationsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'InvitationsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -118,10 +118,10 @@ data InvitationsList' = InvitationsList'
 -- * 'ilPageSize'
 --
 -- * 'ilCallback'
-invitationsList'
-    :: InvitationsList'
-invitationsList' =
-    InvitationsList'
+invitationsList
+    :: InvitationsList
+invitationsList =
+    InvitationsList
     { _ilXgafv = Nothing
     , _ilUploadProtocol = Nothing
     , _ilPp = True
@@ -136,33 +136,33 @@ invitationsList' =
     }
 
 -- | V1 error format.
-ilXgafv :: Lens' InvitationsList' (Maybe Text)
+ilXgafv :: Lens' InvitationsList (Maybe Text)
 ilXgafv = lens _ilXgafv (\ s a -> s{_ilXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ilUploadProtocol :: Lens' InvitationsList' (Maybe Text)
+ilUploadProtocol :: Lens' InvitationsList (Maybe Text)
 ilUploadProtocol
   = lens _ilUploadProtocol
       (\ s a -> s{_ilUploadProtocol = a})
 
 -- | Pretty-print response.
-ilPp :: Lens' InvitationsList' Bool
+ilPp :: Lens' InvitationsList Bool
 ilPp = lens _ilPp (\ s a -> s{_ilPp = a})
 
 -- | Restricts returned invitations to those for a course with the specified
 -- identifier.
-ilCourseId :: Lens' InvitationsList' (Maybe Text)
+ilCourseId :: Lens' InvitationsList (Maybe Text)
 ilCourseId
   = lens _ilCourseId (\ s a -> s{_ilCourseId = a})
 
 -- | OAuth access token.
-ilAccessToken :: Lens' InvitationsList' (Maybe Text)
+ilAccessToken :: Lens' InvitationsList (Maybe Text)
 ilAccessToken
   = lens _ilAccessToken
       (\ s a -> s{_ilAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ilUploadType :: Lens' InvitationsList' (Maybe Text)
+ilUploadType :: Lens' InvitationsList (Maybe Text)
 ilUploadType
   = lens _ilUploadType (\ s a -> s{_ilUploadType = a})
 
@@ -170,11 +170,11 @@ ilUploadType
 -- identifier can be one of the following: * the numeric identifier for the
 -- user * the email address of the user * the string literal \`\"me\"\`,
 -- indicating the requesting user
-ilUserId :: Lens' InvitationsList' (Maybe Text)
+ilUserId :: Lens' InvitationsList (Maybe Text)
 ilUserId = lens _ilUserId (\ s a -> s{_ilUserId = a})
 
 -- | OAuth bearer token.
-ilBearerToken :: Lens' InvitationsList' (Maybe Text)
+ilBearerToken :: Lens' InvitationsList (Maybe Text)
 ilBearerToken
   = lens _ilBearerToken
       (\ s a -> s{_ilBearerToken = a})
@@ -182,24 +182,24 @@ ilBearerToken
 -- | nextPageToken value returned from a previous list call, indicating that
 -- the subsequent page of results should be returned. The list request must
 -- be otherwise identical to the one that resulted in this token.
-ilPageToken :: Lens' InvitationsList' (Maybe Text)
+ilPageToken :: Lens' InvitationsList (Maybe Text)
 ilPageToken
   = lens _ilPageToken (\ s a -> s{_ilPageToken = a})
 
 -- | Maximum number of items to return. Zero means no maximum. The server may
 -- return fewer than the specified number of results.
-ilPageSize :: Lens' InvitationsList' (Maybe Int32)
+ilPageSize :: Lens' InvitationsList (Maybe Int32)
 ilPageSize
   = lens _ilPageSize (\ s a -> s{_ilPageSize = a})
 
 -- | JSONP
-ilCallback :: Lens' InvitationsList' (Maybe Text)
+ilCallback :: Lens' InvitationsList (Maybe Text)
 ilCallback
   = lens _ilCallback (\ s a -> s{_ilCallback = a})
 
-instance GoogleRequest InvitationsList' where
-        type Rs InvitationsList' = ListInvitationsResponse
-        requestClient InvitationsList'{..}
+instance GoogleRequest InvitationsList where
+        type Rs InvitationsList = ListInvitationsResponse
+        requestClient InvitationsList{..}
           = go _ilXgafv _ilUploadProtocol (Just _ilPp)
               _ilCourseId
               _ilAccessToken

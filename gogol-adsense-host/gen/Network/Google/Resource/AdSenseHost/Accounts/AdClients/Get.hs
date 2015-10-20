@@ -30,8 +30,8 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdClients.Get
       AccountsAdClientsGetResource
 
     -- * Creating a Request
-    , accountsAdClientsGet'
-    , AccountsAdClientsGet'
+    , accountsAdClientsGet
+    , AccountsAdClientsGet
 
     -- * Request Lenses
     , aacgAdClientId
@@ -42,7 +42,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.accounts.adclients.get@ method which the
--- 'AccountsAdClientsGet'' request conforms to.
+-- 'AccountsAdClientsGet' request conforms to.
 type AccountsAdClientsGetResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -53,44 +53,44 @@ type AccountsAdClientsGetResource =
 -- | Get information about one of the ad clients in the specified
 -- publisher\'s AdSense account.
 --
--- /See:/ 'accountsAdClientsGet'' smart constructor.
-data AccountsAdClientsGet' = AccountsAdClientsGet'
+-- /See:/ 'accountsAdClientsGet' smart constructor.
+data AccountsAdClientsGet = AccountsAdClientsGet
     { _aacgAdClientId :: !Text
     , _aacgAccountId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsAdClientsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsAdClientsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aacgAdClientId'
 --
 -- * 'aacgAccountId'
-accountsAdClientsGet'
+accountsAdClientsGet
     :: Text -- ^ 'aacgAdClientId'
     -> Text -- ^ 'aacgAccountId'
-    -> AccountsAdClientsGet'
-accountsAdClientsGet' pAacgAdClientId_ pAacgAccountId_ =
-    AccountsAdClientsGet'
+    -> AccountsAdClientsGet
+accountsAdClientsGet pAacgAdClientId_ pAacgAccountId_ =
+    AccountsAdClientsGet
     { _aacgAdClientId = pAacgAdClientId_
     , _aacgAccountId = pAacgAccountId_
     }
 
 -- | Ad client to get.
-aacgAdClientId :: Lens' AccountsAdClientsGet' Text
+aacgAdClientId :: Lens' AccountsAdClientsGet Text
 aacgAdClientId
   = lens _aacgAdClientId
       (\ s a -> s{_aacgAdClientId = a})
 
 -- | Account which contains the ad client.
-aacgAccountId :: Lens' AccountsAdClientsGet' Text
+aacgAccountId :: Lens' AccountsAdClientsGet Text
 aacgAccountId
   = lens _aacgAccountId
       (\ s a -> s{_aacgAccountId = a})
 
-instance GoogleRequest AccountsAdClientsGet' where
-        type Rs AccountsAdClientsGet' = AdClient
-        requestClient AccountsAdClientsGet'{..}
+instance GoogleRequest AccountsAdClientsGet where
+        type Rs AccountsAdClientsGet = AdClient
+        requestClient AccountsAdClientsGet{..}
           = go _aacgAccountId _aacgAdClientId (Just AltJSON)
               adSenseHostService
           where go

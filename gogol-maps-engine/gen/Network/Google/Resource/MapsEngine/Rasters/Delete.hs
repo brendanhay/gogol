@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.Rasters.Delete
       RastersDeleteResource
 
     -- * Creating a Request
-    , rastersDelete'
-    , RastersDelete'
+    , rastersDelete
+    , RastersDelete
 
     -- * Request Lenses
     , rdId
@@ -40,7 +40,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasters.delete@ method which the
--- 'RastersDelete'' request conforms to.
+-- 'RastersDelete' request conforms to.
 type RastersDeleteResource =
      "rasters" :>
        Capture "id" Text :>
@@ -48,33 +48,33 @@ type RastersDeleteResource =
 
 -- | Delete a raster.
 --
--- /See:/ 'rastersDelete'' smart constructor.
-newtype RastersDelete' = RastersDelete'
+-- /See:/ 'rastersDelete' smart constructor.
+newtype RastersDelete = RastersDelete
     { _rdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RastersDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'RastersDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rdId'
-rastersDelete'
+rastersDelete
     :: Text -- ^ 'rdId'
-    -> RastersDelete'
-rastersDelete' pRdId_ =
-    RastersDelete'
+    -> RastersDelete
+rastersDelete pRdId_ =
+    RastersDelete
     { _rdId = pRdId_
     }
 
 -- | The ID of the raster. Only the raster creator or project owner are
 -- permitted to delete. If the raster is included in a layer or mosaic, the
 -- request will fail. Remove it from all parents prior to deleting.
-rdId :: Lens' RastersDelete' Text
+rdId :: Lens' RastersDelete Text
 rdId = lens _rdId (\ s a -> s{_rdId = a})
 
-instance GoogleRequest RastersDelete' where
-        type Rs RastersDelete' = ()
-        requestClient RastersDelete'{..}
+instance GoogleRequest RastersDelete where
+        type Rs RastersDelete = ()
+        requestClient RastersDelete{..}
           = go _rdId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy RastersDeleteResource)

@@ -29,8 +29,8 @@ module Network.Google.Resource.DeploymentManager.Resources.List
       ResourcesListResource
 
     -- * Creating a Request
-    , resourcesList'
-    , ResourcesList'
+    , resourcesList
+    , ResourcesList
 
     -- * Request Lenses
     , rlProject
@@ -44,7 +44,7 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @deploymentmanager.resources.list@ method which the
--- 'ResourcesList'' request conforms to.
+-- 'ResourcesList' request conforms to.
 type ResourcesListResource =
      Capture "project" Text :>
        "global" :>
@@ -59,8 +59,8 @@ type ResourcesListResource =
 
 -- | Lists all resources in a given deployment.
 --
--- /See:/ 'resourcesList'' smart constructor.
-data ResourcesList' = ResourcesList'
+-- /See:/ 'resourcesList' smart constructor.
+data ResourcesList = ResourcesList
     { _rlProject    :: !Text
     , _rlFilter     :: !(Maybe Text)
     , _rlPageToken  :: !(Maybe Text)
@@ -68,7 +68,7 @@ data ResourcesList' = ResourcesList'
     , _rlDeployment :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ResourcesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ResourcesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -81,12 +81,12 @@ data ResourcesList' = ResourcesList'
 -- * 'rlMaxResults'
 --
 -- * 'rlDeployment'
-resourcesList'
+resourcesList
     :: Text -- ^ 'rlProject'
     -> Text -- ^ 'rlDeployment'
-    -> ResourcesList'
-resourcesList' pRlProject_ pRlDeployment_ =
-    ResourcesList'
+    -> ResourcesList
+resourcesList pRlProject_ pRlDeployment_ =
+    ResourcesList
     { _rlProject = pRlProject_
     , _rlFilter = Nothing
     , _rlPageToken = Nothing
@@ -95,7 +95,7 @@ resourcesList' pRlProject_ pRlDeployment_ =
     }
 
 -- | The project ID for this request.
-rlProject :: Lens' ResourcesList' Text
+rlProject :: Lens' ResourcesList Text
 rlProject
   = lens _rlProject (\ s a -> s{_rlProject = a})
 
@@ -110,29 +110,29 @@ rlProject
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-rlFilter :: Lens' ResourcesList' (Maybe Text)
+rlFilter :: Lens' ResourcesList (Maybe Text)
 rlFilter = lens _rlFilter (\ s a -> s{_rlFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-rlPageToken :: Lens' ResourcesList' (Maybe Text)
+rlPageToken :: Lens' ResourcesList (Maybe Text)
 rlPageToken
   = lens _rlPageToken (\ s a -> s{_rlPageToken = a})
 
 -- | Maximum count of results to be returned.
-rlMaxResults :: Lens' ResourcesList' Word32
+rlMaxResults :: Lens' ResourcesList Word32
 rlMaxResults
   = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
 
 -- | The name of the deployment for this request.
-rlDeployment :: Lens' ResourcesList' Text
+rlDeployment :: Lens' ResourcesList Text
 rlDeployment
   = lens _rlDeployment (\ s a -> s{_rlDeployment = a})
 
-instance GoogleRequest ResourcesList' where
-        type Rs ResourcesList' = ResourcesListResponse
-        requestClient ResourcesList'{..}
+instance GoogleRequest ResourcesList where
+        type Rs ResourcesList = ResourcesListResponse
+        requestClient ResourcesList{..}
           = go _rlProject _rlDeployment _rlFilter _rlPageToken
               (Just _rlMaxResults)
               (Just AltJSON)

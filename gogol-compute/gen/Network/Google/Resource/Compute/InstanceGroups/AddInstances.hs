@@ -31,8 +31,8 @@ module Network.Google.Resource.Compute.InstanceGroups.AddInstances
       InstanceGroupsAddInstancesResource
 
     -- * Creating a Request
-    , instanceGroupsAddInstances'
-    , InstanceGroupsAddInstances'
+    , instanceGroupsAddInstances
+    , InstanceGroupsAddInstances
 
     -- * Request Lenses
     , igaiProject
@@ -45,7 +45,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.instanceGroups.addInstances@ method which the
--- 'InstanceGroupsAddInstances'' request conforms to.
+-- 'InstanceGroupsAddInstances' request conforms to.
 type InstanceGroupsAddInstancesResource =
      Capture "project" Text :>
        "zones" :>
@@ -61,15 +61,15 @@ type InstanceGroupsAddInstancesResource =
 -- instances in the instance group must be in the same network\/subnetwork.
 -- TODO: Change to comment to state \"if IG is load balanced.\"
 --
--- /See:/ 'instanceGroupsAddInstances'' smart constructor.
-data InstanceGroupsAddInstances' = InstanceGroupsAddInstances'
+-- /See:/ 'instanceGroupsAddInstances' smart constructor.
+data InstanceGroupsAddInstances = InstanceGroupsAddInstances
     { _igaiProject       :: !Text
     , _igaiZone          :: !Text
     , _igaiPayload       :: !InstanceGroupsAddInstancesRequest
     , _igaiInstanceGroup :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'InstanceGroupsAddInstances'' with the minimum fields required to make a request.
+-- | Creates a value of 'InstanceGroupsAddInstances' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,14 +80,14 @@ data InstanceGroupsAddInstances' = InstanceGroupsAddInstances'
 -- * 'igaiPayload'
 --
 -- * 'igaiInstanceGroup'
-instanceGroupsAddInstances'
+instanceGroupsAddInstances
     :: Text -- ^ 'igaiProject'
     -> Text -- ^ 'igaiZone'
     -> InstanceGroupsAddInstancesRequest -- ^ 'igaiPayload'
     -> Text -- ^ 'igaiInstanceGroup'
-    -> InstanceGroupsAddInstances'
-instanceGroupsAddInstances' pIgaiProject_ pIgaiZone_ pIgaiPayload_ pIgaiInstanceGroup_ =
-    InstanceGroupsAddInstances'
+    -> InstanceGroupsAddInstances
+instanceGroupsAddInstances pIgaiProject_ pIgaiZone_ pIgaiPayload_ pIgaiInstanceGroup_ =
+    InstanceGroupsAddInstances
     { _igaiProject = pIgaiProject_
     , _igaiZone = pIgaiZone_
     , _igaiPayload = pIgaiPayload_
@@ -95,29 +95,29 @@ instanceGroupsAddInstances' pIgaiProject_ pIgaiZone_ pIgaiPayload_ pIgaiInstance
     }
 
 -- | The project ID for this request.
-igaiProject :: Lens' InstanceGroupsAddInstances' Text
+igaiProject :: Lens' InstanceGroupsAddInstances Text
 igaiProject
   = lens _igaiProject (\ s a -> s{_igaiProject = a})
 
 -- | The name of the zone where the instance group is located.
-igaiZone :: Lens' InstanceGroupsAddInstances' Text
+igaiZone :: Lens' InstanceGroupsAddInstances Text
 igaiZone = lens _igaiZone (\ s a -> s{_igaiZone = a})
 
 -- | Multipart request metadata.
-igaiPayload :: Lens' InstanceGroupsAddInstances' InstanceGroupsAddInstancesRequest
+igaiPayload :: Lens' InstanceGroupsAddInstances InstanceGroupsAddInstancesRequest
 igaiPayload
   = lens _igaiPayload (\ s a -> s{_igaiPayload = a})
 
 -- | The name of the instance group where you are adding instances.
-igaiInstanceGroup :: Lens' InstanceGroupsAddInstances' Text
+igaiInstanceGroup :: Lens' InstanceGroupsAddInstances Text
 igaiInstanceGroup
   = lens _igaiInstanceGroup
       (\ s a -> s{_igaiInstanceGroup = a})
 
-instance GoogleRequest InstanceGroupsAddInstances'
+instance GoogleRequest InstanceGroupsAddInstances
          where
-        type Rs InstanceGroupsAddInstances' = Operation
-        requestClient InstanceGroupsAddInstances'{..}
+        type Rs InstanceGroupsAddInstances = Operation
+        requestClient InstanceGroupsAddInstances{..}
           = go _igaiProject _igaiZone _igaiInstanceGroup
               (Just AltJSON)
               _igaiPayload

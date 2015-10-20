@@ -30,8 +30,8 @@ module Network.Google.Resource.Drive.Files.Trash
       FilesTrashResource
 
     -- * Creating a Request
-    , filesTrash'
-    , FilesTrash'
+    , filesTrash
+    , FilesTrash
 
     -- * Request Lenses
     , filFileId
@@ -41,7 +41,7 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @drive.files.trash@ method which the
--- 'FilesTrash'' request conforms to.
+-- 'FilesTrash' request conforms to.
 type FilesTrashResource =
      "files" :>
        Capture "fileId" Text :>
@@ -51,32 +51,32 @@ type FilesTrashResource =
 -- | Moves a file to the trash. The currently authenticated user must own the
 -- file.
 --
--- /See:/ 'filesTrash'' smart constructor.
-newtype FilesTrash' = FilesTrash'
+-- /See:/ 'filesTrash' smart constructor.
+newtype FilesTrash = FilesTrash
     { _filFileId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'FilesTrash'' with the minimum fields required to make a request.
+-- | Creates a value of 'FilesTrash' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'filFileId'
-filesTrash'
+filesTrash
     :: Text -- ^ 'filFileId'
-    -> FilesTrash'
-filesTrash' pFilFileId_ =
-    FilesTrash'
+    -> FilesTrash
+filesTrash pFilFileId_ =
+    FilesTrash
     { _filFileId = pFilFileId_
     }
 
 -- | The ID of the file to trash.
-filFileId :: Lens' FilesTrash' Text
+filFileId :: Lens' FilesTrash Text
 filFileId
   = lens _filFileId (\ s a -> s{_filFileId = a})
 
-instance GoogleRequest FilesTrash' where
-        type Rs FilesTrash' = File
-        requestClient FilesTrash'{..}
+instance GoogleRequest FilesTrash where
+        type Rs FilesTrash = File
+        requestClient FilesTrash{..}
           = go _filFileId (Just AltJSON) driveService
           where go
                   = buildClient (Proxy :: Proxy FilesTrashResource)

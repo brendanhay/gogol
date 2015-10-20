@@ -29,8 +29,8 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Update
       AccountsContainersTriggersUpdateResource
 
     -- * Creating a Request
-    , accountsContainersTriggersUpdate'
-    , AccountsContainersTriggersUpdate'
+    , accountsContainersTriggersUpdate
+    , AccountsContainersTriggersUpdate
 
     -- * Request Lenses
     , actuContainerId
@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.triggers.update@ method which the
--- 'AccountsContainersTriggersUpdate'' request conforms to.
+-- 'AccountsContainersTriggersUpdate' request conforms to.
 type AccountsContainersTriggersUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -58,8 +58,8 @@ type AccountsContainersTriggersUpdateResource =
 
 -- | Updates a GTM Trigger.
 --
--- /See:/ 'accountsContainersTriggersUpdate'' smart constructor.
-data AccountsContainersTriggersUpdate' = AccountsContainersTriggersUpdate'
+-- /See:/ 'accountsContainersTriggersUpdate' smart constructor.
+data AccountsContainersTriggersUpdate = AccountsContainersTriggersUpdate
     { _actuContainerId :: !Text
     , _actuTriggerId   :: !Text
     , _actuFingerprint :: !(Maybe Text)
@@ -67,7 +67,7 @@ data AccountsContainersTriggersUpdate' = AccountsContainersTriggersUpdate'
     , _actuAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsContainersTriggersUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsContainersTriggersUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,14 +80,14 @@ data AccountsContainersTriggersUpdate' = AccountsContainersTriggersUpdate'
 -- * 'actuPayload'
 --
 -- * 'actuAccountId'
-accountsContainersTriggersUpdate'
+accountsContainersTriggersUpdate
     :: Text -- ^ 'actuContainerId'
     -> Text -- ^ 'actuTriggerId'
     -> Trigger -- ^ 'actuPayload'
     -> Text -- ^ 'actuAccountId'
-    -> AccountsContainersTriggersUpdate'
-accountsContainersTriggersUpdate' pActuContainerId_ pActuTriggerId_ pActuPayload_ pActuAccountId_ =
-    AccountsContainersTriggersUpdate'
+    -> AccountsContainersTriggersUpdate
+accountsContainersTriggersUpdate pActuContainerId_ pActuTriggerId_ pActuPayload_ pActuAccountId_ =
+    AccountsContainersTriggersUpdate
     { _actuContainerId = pActuContainerId_
     , _actuTriggerId = pActuTriggerId_
     , _actuFingerprint = Nothing
@@ -96,39 +96,39 @@ accountsContainersTriggersUpdate' pActuContainerId_ pActuTriggerId_ pActuPayload
     }
 
 -- | The GTM Container ID.
-actuContainerId :: Lens' AccountsContainersTriggersUpdate' Text
+actuContainerId :: Lens' AccountsContainersTriggersUpdate Text
 actuContainerId
   = lens _actuContainerId
       (\ s a -> s{_actuContainerId = a})
 
 -- | The GTM Trigger ID.
-actuTriggerId :: Lens' AccountsContainersTriggersUpdate' Text
+actuTriggerId :: Lens' AccountsContainersTriggersUpdate Text
 actuTriggerId
   = lens _actuTriggerId
       (\ s a -> s{_actuTriggerId = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- trigger in storage.
-actuFingerprint :: Lens' AccountsContainersTriggersUpdate' (Maybe Text)
+actuFingerprint :: Lens' AccountsContainersTriggersUpdate (Maybe Text)
 actuFingerprint
   = lens _actuFingerprint
       (\ s a -> s{_actuFingerprint = a})
 
 -- | Multipart request metadata.
-actuPayload :: Lens' AccountsContainersTriggersUpdate' Trigger
+actuPayload :: Lens' AccountsContainersTriggersUpdate Trigger
 actuPayload
   = lens _actuPayload (\ s a -> s{_actuPayload = a})
 
 -- | The GTM Account ID.
-actuAccountId :: Lens' AccountsContainersTriggersUpdate' Text
+actuAccountId :: Lens' AccountsContainersTriggersUpdate Text
 actuAccountId
   = lens _actuAccountId
       (\ s a -> s{_actuAccountId = a})
 
 instance GoogleRequest
-         AccountsContainersTriggersUpdate' where
-        type Rs AccountsContainersTriggersUpdate' = Trigger
-        requestClient AccountsContainersTriggersUpdate'{..}
+         AccountsContainersTriggersUpdate where
+        type Rs AccountsContainersTriggersUpdate = Trigger
+        requestClient AccountsContainersTriggersUpdate{..}
           = go _actuAccountId _actuContainerId _actuTriggerId
               _actuFingerprint
               (Just AltJSON)

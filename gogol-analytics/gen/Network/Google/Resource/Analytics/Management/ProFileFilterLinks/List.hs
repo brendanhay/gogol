@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.ProFileFilterLinks.List
       ManagementProFileFilterLinksListResource
 
     -- * Creating a Request
-    , managementProFileFilterLinksList'
-    , ManagementProFileFilterLinksList'
+    , managementProFileFilterLinksList
+    , ManagementProFileFilterLinksList
 
     -- * Request Lenses
     , mpffllWebPropertyId
@@ -44,7 +44,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.profileFilterLinks.list@ method which the
--- 'ManagementProFileFilterLinksList'' request conforms to.
+-- 'ManagementProFileFilterLinksList' request conforms to.
 type ManagementProFileFilterLinksListResource =
      "management" :>
        "accounts" :>
@@ -61,8 +61,8 @@ type ManagementProFileFilterLinksListResource =
 
 -- | Lists all profile filter links for a profile.
 --
--- /See:/ 'managementProFileFilterLinksList'' smart constructor.
-data ManagementProFileFilterLinksList' = ManagementProFileFilterLinksList'
+-- /See:/ 'managementProFileFilterLinksList' smart constructor.
+data ManagementProFileFilterLinksList = ManagementProFileFilterLinksList
     { _mpffllWebPropertyId :: !Text
     , _mpffllProFileId     :: !Text
     , _mpffllAccountId     :: !Text
@@ -70,7 +70,7 @@ data ManagementProFileFilterLinksList' = ManagementProFileFilterLinksList'
     , _mpffllMaxResults    :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementProFileFilterLinksList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementProFileFilterLinksList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -83,13 +83,13 @@ data ManagementProFileFilterLinksList' = ManagementProFileFilterLinksList'
 -- * 'mpffllStartIndex'
 --
 -- * 'mpffllMaxResults'
-managementProFileFilterLinksList'
+managementProFileFilterLinksList
     :: Text -- ^ 'mpffllWebPropertyId'
     -> Text -- ^ 'mpffllProFileId'
     -> Text -- ^ 'mpffllAccountId'
-    -> ManagementProFileFilterLinksList'
-managementProFileFilterLinksList' pMpffllWebPropertyId_ pMpffllProFileId_ pMpffllAccountId_ =
-    ManagementProFileFilterLinksList'
+    -> ManagementProFileFilterLinksList
+managementProFileFilterLinksList pMpffllWebPropertyId_ pMpffllProFileId_ pMpffllAccountId_ =
+    ManagementProFileFilterLinksList
     { _mpffllWebPropertyId = pMpffllWebPropertyId_
     , _mpffllProFileId = pMpffllProFileId_
     , _mpffllAccountId = pMpffllAccountId_
@@ -100,7 +100,7 @@ managementProFileFilterLinksList' pMpffllWebPropertyId_ pMpffllProFileId_ pMpffl
 -- | Web property Id for profile filter links for. Can either be a specific
 -- web property ID or \'~all\', which refers to all the web properties that
 -- user has access to.
-mpffllWebPropertyId :: Lens' ManagementProFileFilterLinksList' Text
+mpffllWebPropertyId :: Lens' ManagementProFileFilterLinksList Text
 mpffllWebPropertyId
   = lens _mpffllWebPropertyId
       (\ s a -> s{_mpffllWebPropertyId = a})
@@ -108,35 +108,35 @@ mpffllWebPropertyId
 -- | Profile ID to retrieve filter links for. Can either be a specific
 -- profile ID or \'~all\', which refers to all the profiles that user has
 -- access to.
-mpffllProFileId :: Lens' ManagementProFileFilterLinksList' Text
+mpffllProFileId :: Lens' ManagementProFileFilterLinksList Text
 mpffllProFileId
   = lens _mpffllProFileId
       (\ s a -> s{_mpffllProFileId = a})
 
 -- | Account ID to retrieve profile filter links for.
-mpffllAccountId :: Lens' ManagementProFileFilterLinksList' Text
+mpffllAccountId :: Lens' ManagementProFileFilterLinksList Text
 mpffllAccountId
   = lens _mpffllAccountId
       (\ s a -> s{_mpffllAccountId = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
-mpffllStartIndex :: Lens' ManagementProFileFilterLinksList' (Maybe Int32)
+mpffllStartIndex :: Lens' ManagementProFileFilterLinksList (Maybe Int32)
 mpffllStartIndex
   = lens _mpffllStartIndex
       (\ s a -> s{_mpffllStartIndex = a})
 
 -- | The maximum number of profile filter links to include in this response.
-mpffllMaxResults :: Lens' ManagementProFileFilterLinksList' (Maybe Int32)
+mpffllMaxResults :: Lens' ManagementProFileFilterLinksList (Maybe Int32)
 mpffllMaxResults
   = lens _mpffllMaxResults
       (\ s a -> s{_mpffllMaxResults = a})
 
 instance GoogleRequest
-         ManagementProFileFilterLinksList' where
-        type Rs ManagementProFileFilterLinksList' =
+         ManagementProFileFilterLinksList where
+        type Rs ManagementProFileFilterLinksList =
              ProFileFilterLinks
-        requestClient ManagementProFileFilterLinksList'{..}
+        requestClient ManagementProFileFilterLinksList{..}
           = go _mpffllAccountId _mpffllWebPropertyId
               _mpffllProFileId
               _mpffllStartIndex

@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.VerificationCodes.Invalidate
       VerificationCodesInvalidateResource
 
     -- * Creating a Request
-    , verificationCodesInvalidate'
-    , VerificationCodesInvalidate'
+    , verificationCodesInvalidate
+    , VerificationCodesInvalidate
 
     -- * Request Lenses
     , vciUserKey
@@ -40,7 +40,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.verificationCodes.invalidate@ method which the
--- 'VerificationCodesInvalidate'' request conforms to.
+-- 'VerificationCodesInvalidate' request conforms to.
 type VerificationCodesInvalidateResource =
      "users" :>
        Capture "userKey" Text :>
@@ -50,33 +50,33 @@ type VerificationCodesInvalidateResource =
 
 -- | Invalidate the current backup verification codes for the user.
 --
--- /See:/ 'verificationCodesInvalidate'' smart constructor.
-newtype VerificationCodesInvalidate' = VerificationCodesInvalidate'
+-- /See:/ 'verificationCodesInvalidate' smart constructor.
+newtype VerificationCodesInvalidate = VerificationCodesInvalidate
     { _vciUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'VerificationCodesInvalidate'' with the minimum fields required to make a request.
+-- | Creates a value of 'VerificationCodesInvalidate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'vciUserKey'
-verificationCodesInvalidate'
+verificationCodesInvalidate
     :: Text -- ^ 'vciUserKey'
-    -> VerificationCodesInvalidate'
-verificationCodesInvalidate' pVciUserKey_ =
-    VerificationCodesInvalidate'
+    -> VerificationCodesInvalidate
+verificationCodesInvalidate pVciUserKey_ =
+    VerificationCodesInvalidate
     { _vciUserKey = pVciUserKey_
     }
 
 -- | Email or immutable Id of the user
-vciUserKey :: Lens' VerificationCodesInvalidate' Text
+vciUserKey :: Lens' VerificationCodesInvalidate Text
 vciUserKey
   = lens _vciUserKey (\ s a -> s{_vciUserKey = a})
 
-instance GoogleRequest VerificationCodesInvalidate'
+instance GoogleRequest VerificationCodesInvalidate
          where
-        type Rs VerificationCodesInvalidate' = ()
-        requestClient VerificationCodesInvalidate'{..}
+        type Rs VerificationCodesInvalidate = ()
+        requestClient VerificationCodesInvalidate{..}
           = go _vciUserKey (Just AltJSON) directoryService
           where go
                   = buildClient

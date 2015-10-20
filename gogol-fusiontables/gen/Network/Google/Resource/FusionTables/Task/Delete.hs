@@ -30,19 +30,19 @@ module Network.Google.Resource.FusionTables.Task.Delete
       TaskDeleteResource
 
     -- * Creating a Request
-    , taskDelete'
-    , TaskDelete'
+    , taskDelete
+    , TaskDelete
 
     -- * Request Lenses
-    , tTaskId
-    , tTableId
+    , tdTaskId
+    , tdTableId
     ) where
 
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @fusiontables.task.delete@ method which the
--- 'TaskDelete'' request conforms to.
+-- 'TaskDelete' request conforms to.
 type TaskDeleteResource =
      "tables" :>
        Capture "tableId" Text :>
@@ -53,41 +53,42 @@ type TaskDeleteResource =
 -- | Deletes a specific task by its ID, unless that task has already started
 -- running.
 --
--- /See:/ 'taskDelete'' smart constructor.
-data TaskDelete' = TaskDelete'
-    { _tTaskId  :: !Text
-    , _tTableId :: !Text
+-- /See:/ 'taskDelete' smart constructor.
+data TaskDelete = TaskDelete
+    { _tdTaskId  :: !Text
+    , _tdTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TaskDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'TaskDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tTaskId'
+-- * 'tdTaskId'
 --
--- * 'tTableId'
-taskDelete'
-    :: Text -- ^ 'tTaskId'
-    -> Text -- ^ 'tTableId'
-    -> TaskDelete'
-taskDelete' pTTaskId_ pTTableId_ =
-    TaskDelete'
-    { _tTaskId = pTTaskId_
-    , _tTableId = pTTableId_
+-- * 'tdTableId'
+taskDelete
+    :: Text -- ^ 'tdTaskId'
+    -> Text -- ^ 'tdTableId'
+    -> TaskDelete
+taskDelete pTdTaskId_ pTdTableId_ =
+    TaskDelete
+    { _tdTaskId = pTdTaskId_
+    , _tdTableId = pTdTableId_
     }
 
 -- | The identifier of the task to delete.
-tTaskId :: Lens' TaskDelete' Text
-tTaskId = lens _tTaskId (\ s a -> s{_tTaskId = a})
+tdTaskId :: Lens' TaskDelete Text
+tdTaskId = lens _tdTaskId (\ s a -> s{_tdTaskId = a})
 
 -- | Table from which the task is being deleted.
-tTableId :: Lens' TaskDelete' Text
-tTableId = lens _tTableId (\ s a -> s{_tTableId = a})
+tdTableId :: Lens' TaskDelete Text
+tdTableId
+  = lens _tdTableId (\ s a -> s{_tdTableId = a})
 
-instance GoogleRequest TaskDelete' where
-        type Rs TaskDelete' = ()
-        requestClient TaskDelete'{..}
-          = go _tTableId _tTaskId (Just AltJSON)
+instance GoogleRequest TaskDelete where
+        type Rs TaskDelete = ()
+        requestClient TaskDelete{..}
+          = go _tdTableId _tdTaskId (Just AltJSON)
               fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TaskDeleteResource)

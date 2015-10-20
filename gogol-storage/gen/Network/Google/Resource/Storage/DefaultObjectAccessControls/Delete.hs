@@ -30,8 +30,8 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Delete
       DefaultObjectAccessControlsDeleteResource
 
     -- * Creating a Request
-    , defaultObjectAccessControlsDelete'
-    , DefaultObjectAccessControlsDelete'
+    , defaultObjectAccessControlsDelete
+    , DefaultObjectAccessControlsDelete
 
     -- * Request Lenses
     , doacdBucket
@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.defaultObjectAccessControls.delete@ method which the
--- 'DefaultObjectAccessControlsDelete'' request conforms to.
+-- 'DefaultObjectAccessControlsDelete' request conforms to.
 type DefaultObjectAccessControlsDeleteResource =
      "b" :>
        Capture "bucket" Text :>
@@ -53,45 +53,45 @@ type DefaultObjectAccessControlsDeleteResource =
 -- | Permanently deletes the default object ACL entry for the specified
 -- entity on the specified bucket.
 --
--- /See:/ 'defaultObjectAccessControlsDelete'' smart constructor.
-data DefaultObjectAccessControlsDelete' = DefaultObjectAccessControlsDelete'
+-- /See:/ 'defaultObjectAccessControlsDelete' smart constructor.
+data DefaultObjectAccessControlsDelete = DefaultObjectAccessControlsDelete
     { _doacdBucket :: !Text
     , _doacdEntity :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DefaultObjectAccessControlsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'DefaultObjectAccessControlsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'doacdBucket'
 --
 -- * 'doacdEntity'
-defaultObjectAccessControlsDelete'
+defaultObjectAccessControlsDelete
     :: Text -- ^ 'doacdBucket'
     -> Text -- ^ 'doacdEntity'
-    -> DefaultObjectAccessControlsDelete'
-defaultObjectAccessControlsDelete' pDoacdBucket_ pDoacdEntity_ =
-    DefaultObjectAccessControlsDelete'
+    -> DefaultObjectAccessControlsDelete
+defaultObjectAccessControlsDelete pDoacdBucket_ pDoacdEntity_ =
+    DefaultObjectAccessControlsDelete
     { _doacdBucket = pDoacdBucket_
     , _doacdEntity = pDoacdEntity_
     }
 
 -- | Name of a bucket.
-doacdBucket :: Lens' DefaultObjectAccessControlsDelete' Text
+doacdBucket :: Lens' DefaultObjectAccessControlsDelete Text
 doacdBucket
   = lens _doacdBucket (\ s a -> s{_doacdBucket = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
 -- allAuthenticatedUsers.
-doacdEntity :: Lens' DefaultObjectAccessControlsDelete' Text
+doacdEntity :: Lens' DefaultObjectAccessControlsDelete Text
 doacdEntity
   = lens _doacdEntity (\ s a -> s{_doacdEntity = a})
 
 instance GoogleRequest
-         DefaultObjectAccessControlsDelete' where
-        type Rs DefaultObjectAccessControlsDelete' = ()
-        requestClient DefaultObjectAccessControlsDelete'{..}
+         DefaultObjectAccessControlsDelete where
+        type Rs DefaultObjectAccessControlsDelete = ()
+        requestClient DefaultObjectAccessControlsDelete{..}
           = go _doacdBucket _doacdEntity (Just AltJSON)
               storageService
           where go

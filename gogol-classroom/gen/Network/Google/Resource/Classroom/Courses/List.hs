@@ -33,8 +33,8 @@ module Network.Google.Resource.Classroom.Courses.List
       CoursesListResource
 
     -- * Creating a Request
-    , coursesList'
-    , CoursesList'
+    , coursesList
+    , CoursesList
 
     -- * Request Lenses
     , clStudentId
@@ -54,7 +54,7 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @classroom.courses.list@ method which the
--- 'CoursesList'' request conforms to.
+-- 'CoursesList' request conforms to.
 type CoursesListResource =
      "v1" :>
        "courses" :>
@@ -78,8 +78,8 @@ type CoursesListResource =
 -- \`INVALID_ARGUMENT\` if the query argument is malformed. * \`NOT_FOUND\`
 -- if any users specified in the query arguments do not exist.
 --
--- /See:/ 'coursesList'' smart constructor.
-data CoursesList' = CoursesList'
+-- /See:/ 'coursesList' smart constructor.
+data CoursesList = CoursesList
     { _clStudentId      :: !(Maybe Text)
     , _clXgafv          :: !(Maybe Text)
     , _clUploadProtocol :: !(Maybe Text)
@@ -93,7 +93,7 @@ data CoursesList' = CoursesList'
     , _clCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'CoursesList'' with the minimum fields required to make a request.
+-- | Creates a value of 'CoursesList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -118,10 +118,10 @@ data CoursesList' = CoursesList'
 -- * 'clPageSize'
 --
 -- * 'clCallback'
-coursesList'
-    :: CoursesList'
-coursesList' =
-    CoursesList'
+coursesList
+    :: CoursesList
+coursesList =
+    CoursesList
     { _clStudentId = Nothing
     , _clXgafv = Nothing
     , _clUploadProtocol = Nothing
@@ -139,32 +139,32 @@ coursesList' =
 -- identifier. The identifier can be one of the following: * the numeric
 -- identifier for the user * the email address of the user * the string
 -- literal \`\"me\"\`, indicating the requesting user
-clStudentId :: Lens' CoursesList' (Maybe Text)
+clStudentId :: Lens' CoursesList (Maybe Text)
 clStudentId
   = lens _clStudentId (\ s a -> s{_clStudentId = a})
 
 -- | V1 error format.
-clXgafv :: Lens' CoursesList' (Maybe Text)
+clXgafv :: Lens' CoursesList (Maybe Text)
 clXgafv = lens _clXgafv (\ s a -> s{_clXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-clUploadProtocol :: Lens' CoursesList' (Maybe Text)
+clUploadProtocol :: Lens' CoursesList (Maybe Text)
 clUploadProtocol
   = lens _clUploadProtocol
       (\ s a -> s{_clUploadProtocol = a})
 
 -- | Pretty-print response.
-clPp :: Lens' CoursesList' Bool
+clPp :: Lens' CoursesList Bool
 clPp = lens _clPp (\ s a -> s{_clPp = a})
 
 -- | OAuth access token.
-clAccessToken :: Lens' CoursesList' (Maybe Text)
+clAccessToken :: Lens' CoursesList (Maybe Text)
 clAccessToken
   = lens _clAccessToken
       (\ s a -> s{_clAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-clUploadType :: Lens' CoursesList' (Maybe Text)
+clUploadType :: Lens' CoursesList (Maybe Text)
 clUploadType
   = lens _clUploadType (\ s a -> s{_clUploadType = a})
 
@@ -172,12 +172,12 @@ clUploadType
 -- identifier. The identifier can be one of the following: * the numeric
 -- identifier for the user * the email address of the user * the string
 -- literal \`\"me\"\`, indicating the requesting user
-clTeacherId :: Lens' CoursesList' (Maybe Text)
+clTeacherId :: Lens' CoursesList (Maybe Text)
 clTeacherId
   = lens _clTeacherId (\ s a -> s{_clTeacherId = a})
 
 -- | OAuth bearer token.
-clBearerToken :: Lens' CoursesList' (Maybe Text)
+clBearerToken :: Lens' CoursesList (Maybe Text)
 clBearerToken
   = lens _clBearerToken
       (\ s a -> s{_clBearerToken = a})
@@ -185,25 +185,25 @@ clBearerToken
 -- | nextPageToken value returned from a previous list call, indicating that
 -- the subsequent page of results should be returned. The list request must
 -- be otherwise identical to the one that resulted in this token.
-clPageToken :: Lens' CoursesList' (Maybe Text)
+clPageToken :: Lens' CoursesList (Maybe Text)
 clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
 -- | Maximum number of items to return. Zero or unspecified indicates that
 -- the server may assign a maximum. The server may return fewer than the
 -- specified number of results.
-clPageSize :: Lens' CoursesList' (Maybe Int32)
+clPageSize :: Lens' CoursesList (Maybe Int32)
 clPageSize
   = lens _clPageSize (\ s a -> s{_clPageSize = a})
 
 -- | JSONP
-clCallback :: Lens' CoursesList' (Maybe Text)
+clCallback :: Lens' CoursesList (Maybe Text)
 clCallback
   = lens _clCallback (\ s a -> s{_clCallback = a})
 
-instance GoogleRequest CoursesList' where
-        type Rs CoursesList' = ListCoursesResponse
-        requestClient CoursesList'{..}
+instance GoogleRequest CoursesList where
+        type Rs CoursesList = ListCoursesResponse
+        requestClient CoursesList{..}
           = go _clStudentId _clXgafv _clUploadProtocol
               (Just _clPp)
               _clAccessToken

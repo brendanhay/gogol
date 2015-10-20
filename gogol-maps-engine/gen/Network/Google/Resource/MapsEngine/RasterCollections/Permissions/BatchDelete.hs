@@ -29,8 +29,8 @@ module Network.Google.Resource.MapsEngine.RasterCollections.Permissions.BatchDel
       RasterCollectionsPermissionsBatchDeleteResource
 
     -- * Creating a Request
-    , rasterCollectionsPermissionsBatchDelete'
-    , RasterCollectionsPermissionsBatchDelete'
+    , rasterCollectionsPermissionsBatchDelete
+    , RasterCollectionsPermissionsBatchDelete
 
     -- * Request Lenses
     , rcpbdPayload
@@ -41,7 +41,7 @@ import           Network.Google.MapsEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mapsengine.rasterCollections.permissions.batchDelete@ method which the
--- 'RasterCollectionsPermissionsBatchDelete'' request conforms to.
+-- 'RasterCollectionsPermissionsBatchDelete' request conforms to.
 type RasterCollectionsPermissionsBatchDeleteResource
      =
      "rasterCollections" :>
@@ -54,44 +54,44 @@ type RasterCollectionsPermissionsBatchDeleteResource
 
 -- | Remove permission entries from an already existing asset.
 --
--- /See:/ 'rasterCollectionsPermissionsBatchDelete'' smart constructor.
-data RasterCollectionsPermissionsBatchDelete' = RasterCollectionsPermissionsBatchDelete'
+-- /See:/ 'rasterCollectionsPermissionsBatchDelete' smart constructor.
+data RasterCollectionsPermissionsBatchDelete = RasterCollectionsPermissionsBatchDelete
     { _rcpbdPayload :: !PermissionsBatchDeleteRequest
     , _rcpbdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RasterCollectionsPermissionsBatchDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'RasterCollectionsPermissionsBatchDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'rcpbdPayload'
 --
 -- * 'rcpbdId'
-rasterCollectionsPermissionsBatchDelete'
+rasterCollectionsPermissionsBatchDelete
     :: PermissionsBatchDeleteRequest -- ^ 'rcpbdPayload'
     -> Text -- ^ 'rcpbdId'
-    -> RasterCollectionsPermissionsBatchDelete'
-rasterCollectionsPermissionsBatchDelete' pRcpbdPayload_ pRcpbdId_ =
-    RasterCollectionsPermissionsBatchDelete'
+    -> RasterCollectionsPermissionsBatchDelete
+rasterCollectionsPermissionsBatchDelete pRcpbdPayload_ pRcpbdId_ =
+    RasterCollectionsPermissionsBatchDelete
     { _rcpbdPayload = pRcpbdPayload_
     , _rcpbdId = pRcpbdId_
     }
 
 -- | Multipart request metadata.
-rcpbdPayload :: Lens' RasterCollectionsPermissionsBatchDelete' PermissionsBatchDeleteRequest
+rcpbdPayload :: Lens' RasterCollectionsPermissionsBatchDelete PermissionsBatchDeleteRequest
 rcpbdPayload
   = lens _rcpbdPayload (\ s a -> s{_rcpbdPayload = a})
 
 -- | The ID of the asset from which permissions will be removed.
-rcpbdId :: Lens' RasterCollectionsPermissionsBatchDelete' Text
+rcpbdId :: Lens' RasterCollectionsPermissionsBatchDelete Text
 rcpbdId = lens _rcpbdId (\ s a -> s{_rcpbdId = a})
 
 instance GoogleRequest
-         RasterCollectionsPermissionsBatchDelete' where
-        type Rs RasterCollectionsPermissionsBatchDelete' =
+         RasterCollectionsPermissionsBatchDelete where
+        type Rs RasterCollectionsPermissionsBatchDelete =
              PermissionsBatchDeleteResponse
         requestClient
-          RasterCollectionsPermissionsBatchDelete'{..}
+          RasterCollectionsPermissionsBatchDelete{..}
           = go _rcpbdId (Just AltJSON) _rcpbdPayload
               mapsEngineService
           where go

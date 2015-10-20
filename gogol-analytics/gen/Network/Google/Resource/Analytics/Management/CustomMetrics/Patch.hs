@@ -29,8 +29,8 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Patch
       ManagementCustomMetricsPatchResource
 
     -- * Creating a Request
-    , managementCustomMetricsPatch'
-    , ManagementCustomMetricsPatch'
+    , managementCustomMetricsPatch
+    , ManagementCustomMetricsPatch
 
     -- * Request Lenses
     , mcmpCustomMetricId
@@ -44,7 +44,7 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @analytics.management.customMetrics.patch@ method which the
--- 'ManagementCustomMetricsPatch'' request conforms to.
+-- 'ManagementCustomMetricsPatch' request conforms to.
 type ManagementCustomMetricsPatchResource =
      "management" :>
        "accounts" :>
@@ -60,8 +60,8 @@ type ManagementCustomMetricsPatchResource =
 
 -- | Updates an existing custom metric. This method supports patch semantics.
 --
--- /See:/ 'managementCustomMetricsPatch'' smart constructor.
-data ManagementCustomMetricsPatch' = ManagementCustomMetricsPatch'
+-- /See:/ 'managementCustomMetricsPatch' smart constructor.
+data ManagementCustomMetricsPatch = ManagementCustomMetricsPatch
     { _mcmpCustomMetricId              :: !Text
     , _mcmpWebPropertyId               :: !Text
     , _mcmpIgnoreCustomDataSourceLinks :: !Bool
@@ -69,7 +69,7 @@ data ManagementCustomMetricsPatch' = ManagementCustomMetricsPatch'
     , _mcmpAccountId                   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ManagementCustomMetricsPatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'ManagementCustomMetricsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -82,14 +82,14 @@ data ManagementCustomMetricsPatch' = ManagementCustomMetricsPatch'
 -- * 'mcmpPayload'
 --
 -- * 'mcmpAccountId'
-managementCustomMetricsPatch'
+managementCustomMetricsPatch
     :: Text -- ^ 'mcmpCustomMetricId'
     -> Text -- ^ 'mcmpWebPropertyId'
     -> CustomMetric -- ^ 'mcmpPayload'
     -> Text -- ^ 'mcmpAccountId'
-    -> ManagementCustomMetricsPatch'
-managementCustomMetricsPatch' pMcmpCustomMetricId_ pMcmpWebPropertyId_ pMcmpPayload_ pMcmpAccountId_ =
-    ManagementCustomMetricsPatch'
+    -> ManagementCustomMetricsPatch
+managementCustomMetricsPatch pMcmpCustomMetricId_ pMcmpWebPropertyId_ pMcmpPayload_ pMcmpAccountId_ =
+    ManagementCustomMetricsPatch
     { _mcmpCustomMetricId = pMcmpCustomMetricId_
     , _mcmpWebPropertyId = pMcmpWebPropertyId_
     , _mcmpIgnoreCustomDataSourceLinks = False
@@ -98,39 +98,39 @@ managementCustomMetricsPatch' pMcmpCustomMetricId_ pMcmpWebPropertyId_ pMcmpPayl
     }
 
 -- | Custom metric ID for the custom metric to update.
-mcmpCustomMetricId :: Lens' ManagementCustomMetricsPatch' Text
+mcmpCustomMetricId :: Lens' ManagementCustomMetricsPatch Text
 mcmpCustomMetricId
   = lens _mcmpCustomMetricId
       (\ s a -> s{_mcmpCustomMetricId = a})
 
 -- | Web property ID for the custom metric to update.
-mcmpWebPropertyId :: Lens' ManagementCustomMetricsPatch' Text
+mcmpWebPropertyId :: Lens' ManagementCustomMetricsPatch Text
 mcmpWebPropertyId
   = lens _mcmpWebPropertyId
       (\ s a -> s{_mcmpWebPropertyId = a})
 
 -- | Force the update and ignore any warnings related to the custom metric
 -- being linked to a custom data source \/ data set.
-mcmpIgnoreCustomDataSourceLinks :: Lens' ManagementCustomMetricsPatch' Bool
+mcmpIgnoreCustomDataSourceLinks :: Lens' ManagementCustomMetricsPatch Bool
 mcmpIgnoreCustomDataSourceLinks
   = lens _mcmpIgnoreCustomDataSourceLinks
       (\ s a -> s{_mcmpIgnoreCustomDataSourceLinks = a})
 
 -- | Multipart request metadata.
-mcmpPayload :: Lens' ManagementCustomMetricsPatch' CustomMetric
+mcmpPayload :: Lens' ManagementCustomMetricsPatch CustomMetric
 mcmpPayload
   = lens _mcmpPayload (\ s a -> s{_mcmpPayload = a})
 
 -- | Account ID for the custom metric to update.
-mcmpAccountId :: Lens' ManagementCustomMetricsPatch' Text
+mcmpAccountId :: Lens' ManagementCustomMetricsPatch Text
 mcmpAccountId
   = lens _mcmpAccountId
       (\ s a -> s{_mcmpAccountId = a})
 
-instance GoogleRequest ManagementCustomMetricsPatch'
+instance GoogleRequest ManagementCustomMetricsPatch
          where
-        type Rs ManagementCustomMetricsPatch' = CustomMetric
-        requestClient ManagementCustomMetricsPatch'{..}
+        type Rs ManagementCustomMetricsPatch = CustomMetric
+        requestClient ManagementCustomMetricsPatch{..}
           = go _mcmpAccountId _mcmpWebPropertyId
               _mcmpCustomMetricId
               (Just _mcmpIgnoreCustomDataSourceLinks)

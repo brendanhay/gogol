@@ -29,8 +29,8 @@ module Network.Google.Resource.Compute.RegionOperations.Get
       RegionOperationsGetResource
 
     -- * Creating a Request
-    , regionOperationsGet'
-    , RegionOperationsGet'
+    , regionOperationsGet
+    , RegionOperationsGet
 
     -- * Request Lenses
     , rogProject
@@ -42,7 +42,7 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @compute.regionOperations.get@ method which the
--- 'RegionOperationsGet'' request conforms to.
+-- 'RegionOperationsGet' request conforms to.
 type RegionOperationsGetResource =
      Capture "project" Text :>
        "regions" :>
@@ -53,14 +53,14 @@ type RegionOperationsGetResource =
 
 -- | Retrieves the specified region-specific Operations resource.
 --
--- /See:/ 'regionOperationsGet'' smart constructor.
-data RegionOperationsGet' = RegionOperationsGet'
+-- /See:/ 'regionOperationsGet' smart constructor.
+data RegionOperationsGet = RegionOperationsGet
     { _rogProject   :: !Text
     , _rogOperation :: !Text
     , _rogRegion    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RegionOperationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'RegionOperationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,36 +69,36 @@ data RegionOperationsGet' = RegionOperationsGet'
 -- * 'rogOperation'
 --
 -- * 'rogRegion'
-regionOperationsGet'
+regionOperationsGet
     :: Text -- ^ 'rogProject'
     -> Text -- ^ 'rogOperation'
     -> Text -- ^ 'rogRegion'
-    -> RegionOperationsGet'
-regionOperationsGet' pRogProject_ pRogOperation_ pRogRegion_ =
-    RegionOperationsGet'
+    -> RegionOperationsGet
+regionOperationsGet pRogProject_ pRogOperation_ pRogRegion_ =
+    RegionOperationsGet
     { _rogProject = pRogProject_
     , _rogOperation = pRogOperation_
     , _rogRegion = pRogRegion_
     }
 
 -- | Project ID for this request.
-rogProject :: Lens' RegionOperationsGet' Text
+rogProject :: Lens' RegionOperationsGet Text
 rogProject
   = lens _rogProject (\ s a -> s{_rogProject = a})
 
 -- | Name of the Operations resource to return.
-rogOperation :: Lens' RegionOperationsGet' Text
+rogOperation :: Lens' RegionOperationsGet Text
 rogOperation
   = lens _rogOperation (\ s a -> s{_rogOperation = a})
 
 -- | Name of the zone scoping this request.
-rogRegion :: Lens' RegionOperationsGet' Text
+rogRegion :: Lens' RegionOperationsGet Text
 rogRegion
   = lens _rogRegion (\ s a -> s{_rogRegion = a})
 
-instance GoogleRequest RegionOperationsGet' where
-        type Rs RegionOperationsGet' = Operation
-        requestClient RegionOperationsGet'{..}
+instance GoogleRequest RegionOperationsGet where
+        type Rs RegionOperationsGet = Operation
+        requestClient RegionOperationsGet{..}
           = go _rogProject _rogRegion _rogOperation
               (Just AltJSON)
               computeService

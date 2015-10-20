@@ -30,8 +30,8 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.List
       AccountsPermissionsListResource
 
     -- * Creating a Request
-    , accountsPermissionsList'
-    , AccountsPermissionsList'
+    , accountsPermissionsList
+    , AccountsPermissionsList
 
     -- * Request Lenses
     , aplAccountId
@@ -41,7 +41,7 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.permissions.list@ method which the
--- 'AccountsPermissionsList'' request conforms to.
+-- 'AccountsPermissionsList' request conforms to.
 type AccountsPermissionsListResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -52,33 +52,33 @@ type AccountsPermissionsListResource =
 -- | List all users that have access to the account along with Account and
 -- Container Permissions granted to each of them.
 --
--- /See:/ 'accountsPermissionsList'' smart constructor.
-newtype AccountsPermissionsList' = AccountsPermissionsList'
+-- /See:/ 'accountsPermissionsList' smart constructor.
+newtype AccountsPermissionsList = AccountsPermissionsList
     { _aplAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsPermissionsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsPermissionsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'aplAccountId'
-accountsPermissionsList'
+accountsPermissionsList
     :: Text -- ^ 'aplAccountId'
-    -> AccountsPermissionsList'
-accountsPermissionsList' pAplAccountId_ =
-    AccountsPermissionsList'
+    -> AccountsPermissionsList
+accountsPermissionsList pAplAccountId_ =
+    AccountsPermissionsList
     { _aplAccountId = pAplAccountId_
     }
 
 -- | The GTM Account ID. \'required tagmanager.accounts.permissions.list
-aplAccountId :: Lens' AccountsPermissionsList' Text
+aplAccountId :: Lens' AccountsPermissionsList Text
 aplAccountId
   = lens _aplAccountId (\ s a -> s{_aplAccountId = a})
 
-instance GoogleRequest AccountsPermissionsList' where
-        type Rs AccountsPermissionsList' =
+instance GoogleRequest AccountsPermissionsList where
+        type Rs AccountsPermissionsList =
              ListAccountUsersResponse
-        requestClient AccountsPermissionsList'{..}
+        requestClient AccountsPermissionsList{..}
           = go _aplAccountId (Just AltJSON) tagManagerService
           where go
                   = buildClient

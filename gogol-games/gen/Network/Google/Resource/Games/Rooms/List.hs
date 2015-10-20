@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.Rooms.List
       RoomsListResource
 
     -- * Creating a Request
-    , roomsList'
-    , RoomsList'
+    , roomsList
+    , RoomsList
 
     -- * Request Lenses
     , rLanguage
@@ -42,7 +42,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.rooms.list@ method which the
--- 'RoomsList'' request conforms to.
+-- 'RoomsList' request conforms to.
 type RoomsListResource =
      "rooms" :>
        QueryParam "language" Text :>
@@ -52,14 +52,14 @@ type RoomsListResource =
 
 -- | Returns invitations to join rooms.
 --
--- /See:/ 'roomsList'' smart constructor.
-data RoomsList' = RoomsList'
+-- /See:/ 'roomsList' smart constructor.
+data RoomsList = RoomsList
     { _rLanguage   :: !(Maybe Text)
     , _rPageToken  :: !(Maybe Text)
     , _rMaxResults :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RoomsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'RoomsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -68,35 +68,35 @@ data RoomsList' = RoomsList'
 -- * 'rPageToken'
 --
 -- * 'rMaxResults'
-roomsList'
-    :: RoomsList'
-roomsList' =
-    RoomsList'
+roomsList
+    :: RoomsList
+roomsList =
+    RoomsList
     { _rLanguage = Nothing
     , _rPageToken = Nothing
     , _rMaxResults = Nothing
     }
 
 -- | The preferred language to use for strings returned by this method.
-rLanguage :: Lens' RoomsList' (Maybe Text)
+rLanguage :: Lens' RoomsList (Maybe Text)
 rLanguage
   = lens _rLanguage (\ s a -> s{_rLanguage = a})
 
 -- | The token returned by the previous request.
-rPageToken :: Lens' RoomsList' (Maybe Text)
+rPageToken :: Lens' RoomsList (Maybe Text)
 rPageToken
   = lens _rPageToken (\ s a -> s{_rPageToken = a})
 
 -- | The maximum number of rooms to return in the response, used for paging.
 -- For any response, the actual number of rooms to return may be less than
 -- the specified maxResults.
-rMaxResults :: Lens' RoomsList' (Maybe Int32)
+rMaxResults :: Lens' RoomsList (Maybe Int32)
 rMaxResults
   = lens _rMaxResults (\ s a -> s{_rMaxResults = a})
 
-instance GoogleRequest RoomsList' where
-        type Rs RoomsList' = RoomList
-        requestClient RoomsList'{..}
+instance GoogleRequest RoomsList where
+        type Rs RoomsList = RoomList
+        requestClient RoomsList{..}
           = go _rLanguage _rPageToken _rMaxResults
               (Just AltJSON)
               gamesService

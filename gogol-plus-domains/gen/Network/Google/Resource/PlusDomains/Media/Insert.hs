@@ -32,8 +32,8 @@ module Network.Google.Resource.PlusDomains.Media.Insert
       MediaInsertResource
 
     -- * Creating a Request
-    , mediaInsert'
-    , MediaInsert'
+    , mediaInsert
+    , MediaInsert
 
     -- * Request Lenses
     , miCollection
@@ -46,7 +46,7 @@ import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @plusDomains.media.insert@ method which the
--- 'MediaInsert'' request conforms to.
+-- 'MediaInsert' request conforms to.
 type MediaInsertResource =
      "people" :>
        Capture "userId" Text :>
@@ -61,15 +61,15 @@ type MediaInsertResource =
 -- quota if photos are less than 2048 pixels on their longest side or
 -- videos are less than 15 minutes in length.
 --
--- /See:/ 'mediaInsert'' smart constructor.
-data MediaInsert' = MediaInsert'
+-- /See:/ 'mediaInsert' smart constructor.
+data MediaInsert = MediaInsert
     { _miCollection :: !MediaInsertCollection
     , _miPayload    :: !Media
     , _miUserId     :: !Text
     , _miMedia      :: !Body
     }
 
--- | Creates a value of 'MediaInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'MediaInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -80,39 +80,39 @@ data MediaInsert' = MediaInsert'
 -- * 'miUserId'
 --
 -- * 'miMedia'
-mediaInsert'
+mediaInsert
     :: MediaInsertCollection -- ^ 'miCollection'
     -> Media -- ^ 'miPayload'
     -> Text -- ^ 'miUserId'
     -> Body -- ^ 'miMedia'
-    -> MediaInsert'
-mediaInsert' pMiCollection_ pMiPayload_ pMiUserId_ pMiMedia_ =
-    MediaInsert'
+    -> MediaInsert
+mediaInsert pMiCollection_ pMiPayload_ pMiUserId_ pMiMedia_ =
+    MediaInsert
     { _miCollection = pMiCollection_
     , _miPayload = pMiPayload_
     , _miUserId = pMiUserId_
     , _miMedia = pMiMedia_
     }
 
-miCollection :: Lens' MediaInsert' MediaInsertCollection
+miCollection :: Lens' MediaInsert MediaInsertCollection
 miCollection
   = lens _miCollection (\ s a -> s{_miCollection = a})
 
 -- | Multipart request metadata.
-miPayload :: Lens' MediaInsert' Media
+miPayload :: Lens' MediaInsert Media
 miPayload
   = lens _miPayload (\ s a -> s{_miPayload = a})
 
 -- | The ID of the user to create the activity on behalf of.
-miUserId :: Lens' MediaInsert' Text
+miUserId :: Lens' MediaInsert Text
 miUserId = lens _miUserId (\ s a -> s{_miUserId = a})
 
-miMedia :: Lens' MediaInsert' Body
+miMedia :: Lens' MediaInsert Body
 miMedia = lens _miMedia (\ s a -> s{_miMedia = a})
 
-instance GoogleRequest MediaInsert' where
-        type Rs MediaInsert' = Media
-        requestClient MediaInsert'{..}
+instance GoogleRequest MediaInsert where
+        type Rs MediaInsert = Media
+        requestClient MediaInsert{..}
           = go _miUserId _miCollection (Just AltJSON)
               _miPayload
               _miMedia

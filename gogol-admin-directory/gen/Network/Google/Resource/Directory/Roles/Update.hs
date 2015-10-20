@@ -29,8 +29,8 @@ module Network.Google.Resource.Directory.Roles.Update
       RolesUpdateResource
 
     -- * Creating a Request
-    , rolesUpdate'
-    , RolesUpdate'
+    , rolesUpdate
+    , RolesUpdate
 
     -- * Request Lenses
     , ruPayload
@@ -42,7 +42,7 @@ import           Network.Google.Directory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @directory.roles.update@ method which the
--- 'RolesUpdate'' request conforms to.
+-- 'RolesUpdate' request conforms to.
 type RolesUpdateResource =
      "customer" :>
        Capture "customer" Text :>
@@ -53,14 +53,14 @@ type RolesUpdateResource =
 
 -- | Updates a role.
 --
--- /See:/ 'rolesUpdate'' smart constructor.
-data RolesUpdate' = RolesUpdate'
+-- /See:/ 'rolesUpdate' smart constructor.
+data RolesUpdate = RolesUpdate
     { _ruPayload  :: !Role
     , _ruRoleId   :: !Text
     , _ruCustomer :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RolesUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'RolesUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -69,35 +69,35 @@ data RolesUpdate' = RolesUpdate'
 -- * 'ruRoleId'
 --
 -- * 'ruCustomer'
-rolesUpdate'
+rolesUpdate
     :: Role -- ^ 'ruPayload'
     -> Text -- ^ 'ruRoleId'
     -> Text -- ^ 'ruCustomer'
-    -> RolesUpdate'
-rolesUpdate' pRuPayload_ pRuRoleId_ pRuCustomer_ =
-    RolesUpdate'
+    -> RolesUpdate
+rolesUpdate pRuPayload_ pRuRoleId_ pRuCustomer_ =
+    RolesUpdate
     { _ruPayload = pRuPayload_
     , _ruRoleId = pRuRoleId_
     , _ruCustomer = pRuCustomer_
     }
 
 -- | Multipart request metadata.
-ruPayload :: Lens' RolesUpdate' Role
+ruPayload :: Lens' RolesUpdate Role
 ruPayload
   = lens _ruPayload (\ s a -> s{_ruPayload = a})
 
 -- | Immutable ID of the role.
-ruRoleId :: Lens' RolesUpdate' Text
+ruRoleId :: Lens' RolesUpdate Text
 ruRoleId = lens _ruRoleId (\ s a -> s{_ruRoleId = a})
 
 -- | Immutable ID of the Google Apps account.
-ruCustomer :: Lens' RolesUpdate' Text
+ruCustomer :: Lens' RolesUpdate Text
 ruCustomer
   = lens _ruCustomer (\ s a -> s{_ruCustomer = a})
 
-instance GoogleRequest RolesUpdate' where
-        type Rs RolesUpdate' = Role
-        requestClient RolesUpdate'{..}
+instance GoogleRequest RolesUpdate where
+        type Rs RolesUpdate = Role
+        requestClient RolesUpdate{..}
           = go _ruCustomer _ruRoleId (Just AltJSON) _ruPayload
               directoryService
           where go

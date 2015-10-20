@@ -30,8 +30,8 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Get
       AchievementConfigurationsGetResource
 
     -- * Creating a Request
-    , achievementConfigurationsGet'
-    , AchievementConfigurationsGet'
+    , achievementConfigurationsGet
+    , AchievementConfigurationsGet
 
     -- * Request Lenses
     , acgAchievementId
@@ -41,7 +41,7 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @gamesConfiguration.achievementConfigurations.get@ method which the
--- 'AchievementConfigurationsGet'' request conforms to.
+-- 'AchievementConfigurationsGet' request conforms to.
 type AchievementConfigurationsGetResource =
      "achievements" :>
        Capture "achievementId" Text :>
@@ -51,35 +51,35 @@ type AchievementConfigurationsGetResource =
 -- | Retrieves the metadata of the achievement configuration with the given
 -- ID.
 --
--- /See:/ 'achievementConfigurationsGet'' smart constructor.
-newtype AchievementConfigurationsGet' = AchievementConfigurationsGet'
+-- /See:/ 'achievementConfigurationsGet' smart constructor.
+newtype AchievementConfigurationsGet = AchievementConfigurationsGet
     { _acgAchievementId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AchievementConfigurationsGet'' with the minimum fields required to make a request.
+-- | Creates a value of 'AchievementConfigurationsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'acgAchievementId'
-achievementConfigurationsGet'
+achievementConfigurationsGet
     :: Text -- ^ 'acgAchievementId'
-    -> AchievementConfigurationsGet'
-achievementConfigurationsGet' pAcgAchievementId_ =
-    AchievementConfigurationsGet'
+    -> AchievementConfigurationsGet
+achievementConfigurationsGet pAcgAchievementId_ =
+    AchievementConfigurationsGet
     { _acgAchievementId = pAcgAchievementId_
     }
 
 -- | The ID of the achievement used by this method.
-acgAchievementId :: Lens' AchievementConfigurationsGet' Text
+acgAchievementId :: Lens' AchievementConfigurationsGet Text
 acgAchievementId
   = lens _acgAchievementId
       (\ s a -> s{_acgAchievementId = a})
 
-instance GoogleRequest AchievementConfigurationsGet'
+instance GoogleRequest AchievementConfigurationsGet
          where
-        type Rs AchievementConfigurationsGet' =
+        type Rs AchievementConfigurationsGet =
              AchievementConfiguration
-        requestClient AchievementConfigurationsGet'{..}
+        requestClient AchievementConfigurationsGet{..}
           = go _acgAchievementId (Just AltJSON)
               gamesConfigurationService
           where go

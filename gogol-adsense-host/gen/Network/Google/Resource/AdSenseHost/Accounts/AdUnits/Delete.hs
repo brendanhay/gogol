@@ -30,8 +30,8 @@ module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Delete
       AccountsAdUnitsDeleteResource
 
     -- * Creating a Request
-    , accountsAdUnitsDelete'
-    , AccountsAdUnitsDelete'
+    , accountsAdUnitsDelete
+    , AccountsAdUnitsDelete
 
     -- * Request Lenses
     , aaudAdUnitId
@@ -43,7 +43,7 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @adsensehost.accounts.adunits.delete@ method which the
--- 'AccountsAdUnitsDelete'' request conforms to.
+-- 'AccountsAdUnitsDelete' request conforms to.
 type AccountsAdUnitsDeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
@@ -56,14 +56,14 @@ type AccountsAdUnitsDeleteResource =
 -- | Delete the specified ad unit from the specified publisher AdSense
 -- account.
 --
--- /See:/ 'accountsAdUnitsDelete'' smart constructor.
-data AccountsAdUnitsDelete' = AccountsAdUnitsDelete'
+-- /See:/ 'accountsAdUnitsDelete' smart constructor.
+data AccountsAdUnitsDelete = AccountsAdUnitsDelete
     { _aaudAdUnitId   :: !Text
     , _aaudAdClientId :: !Text
     , _aaudAccountId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'AccountsAdUnitsDelete'' with the minimum fields required to make a request.
+-- | Creates a value of 'AccountsAdUnitsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -72,38 +72,38 @@ data AccountsAdUnitsDelete' = AccountsAdUnitsDelete'
 -- * 'aaudAdClientId'
 --
 -- * 'aaudAccountId'
-accountsAdUnitsDelete'
+accountsAdUnitsDelete
     :: Text -- ^ 'aaudAdUnitId'
     -> Text -- ^ 'aaudAdClientId'
     -> Text -- ^ 'aaudAccountId'
-    -> AccountsAdUnitsDelete'
-accountsAdUnitsDelete' pAaudAdUnitId_ pAaudAdClientId_ pAaudAccountId_ =
-    AccountsAdUnitsDelete'
+    -> AccountsAdUnitsDelete
+accountsAdUnitsDelete pAaudAdUnitId_ pAaudAdClientId_ pAaudAccountId_ =
+    AccountsAdUnitsDelete
     { _aaudAdUnitId = pAaudAdUnitId_
     , _aaudAdClientId = pAaudAdClientId_
     , _aaudAccountId = pAaudAccountId_
     }
 
 -- | Ad unit to delete.
-aaudAdUnitId :: Lens' AccountsAdUnitsDelete' Text
+aaudAdUnitId :: Lens' AccountsAdUnitsDelete Text
 aaudAdUnitId
   = lens _aaudAdUnitId (\ s a -> s{_aaudAdUnitId = a})
 
 -- | Ad client for which to get ad unit.
-aaudAdClientId :: Lens' AccountsAdUnitsDelete' Text
+aaudAdClientId :: Lens' AccountsAdUnitsDelete Text
 aaudAdClientId
   = lens _aaudAdClientId
       (\ s a -> s{_aaudAdClientId = a})
 
 -- | Account which contains the ad unit.
-aaudAccountId :: Lens' AccountsAdUnitsDelete' Text
+aaudAccountId :: Lens' AccountsAdUnitsDelete Text
 aaudAccountId
   = lens _aaudAccountId
       (\ s a -> s{_aaudAccountId = a})
 
-instance GoogleRequest AccountsAdUnitsDelete' where
-        type Rs AccountsAdUnitsDelete' = AdUnit
-        requestClient AccountsAdUnitsDelete'{..}
+instance GoogleRequest AccountsAdUnitsDelete where
+        type Rs AccountsAdUnitsDelete = AdUnit
+        requestClient AccountsAdUnitsDelete{..}
           = go _aaudAccountId _aaudAdClientId _aaudAdUnitId
               (Just AltJSON)
               adSenseHostService

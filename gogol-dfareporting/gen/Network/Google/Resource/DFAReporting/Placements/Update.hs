@@ -29,8 +29,8 @@ module Network.Google.Resource.DFAReporting.Placements.Update
       PlacementsUpdateResource
 
     -- * Creating a Request
-    , placementsUpdate'
-    , PlacementsUpdate'
+    , placementsUpdate
+    , PlacementsUpdate
 
     -- * Request Lenses
     , puProFileId
@@ -41,7 +41,7 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @dfareporting.placements.update@ method which the
--- 'PlacementsUpdate'' request conforms to.
+-- 'PlacementsUpdate' request conforms to.
 type PlacementsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
@@ -51,42 +51,42 @@ type PlacementsUpdateResource =
 
 -- | Updates an existing placement.
 --
--- /See:/ 'placementsUpdate'' smart constructor.
-data PlacementsUpdate' = PlacementsUpdate'
+-- /See:/ 'placementsUpdate' smart constructor.
+data PlacementsUpdate = PlacementsUpdate
     { _puProFileId :: !Int64
     , _puPayload   :: !Placement
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PlacementsUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'PlacementsUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'puProFileId'
 --
 -- * 'puPayload'
-placementsUpdate'
+placementsUpdate
     :: Int64 -- ^ 'puProFileId'
     -> Placement -- ^ 'puPayload'
-    -> PlacementsUpdate'
-placementsUpdate' pPuProFileId_ pPuPayload_ =
-    PlacementsUpdate'
+    -> PlacementsUpdate
+placementsUpdate pPuProFileId_ pPuPayload_ =
+    PlacementsUpdate
     { _puProFileId = pPuProFileId_
     , _puPayload = pPuPayload_
     }
 
 -- | User profile ID associated with this request.
-puProFileId :: Lens' PlacementsUpdate' Int64
+puProFileId :: Lens' PlacementsUpdate Int64
 puProFileId
   = lens _puProFileId (\ s a -> s{_puProFileId = a})
 
 -- | Multipart request metadata.
-puPayload :: Lens' PlacementsUpdate' Placement
+puPayload :: Lens' PlacementsUpdate Placement
 puPayload
   = lens _puPayload (\ s a -> s{_puPayload = a})
 
-instance GoogleRequest PlacementsUpdate' where
-        type Rs PlacementsUpdate' = Placement
-        requestClient PlacementsUpdate'{..}
+instance GoogleRequest PlacementsUpdate where
+        type Rs PlacementsUpdate = Placement
+        requestClient PlacementsUpdate{..}
           = go _puProFileId (Just AltJSON) _puPayload
               dFAReportingService
           where go

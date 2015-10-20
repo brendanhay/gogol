@@ -33,8 +33,8 @@ module Network.Google.Resource.Genomics.Operations.Cancel
       OperationsCancelResource
 
     -- * Creating a Request
-    , operationsCancel'
-    , OperationsCancel'
+    , operationsCancel
+    , OperationsCancel
 
     -- * Request Lenses
     , ocXgafv
@@ -52,7 +52,7 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @genomics.operations.cancel@ method which the
--- 'OperationsCancel'' request conforms to.
+-- 'OperationsCancel' request conforms to.
 type OperationsCancelResource =
      "v1" :>
        CaptureMode "name" "cancel" Text :>
@@ -73,8 +73,8 @@ type OperationsCancelResource =
 -- Operations.ListOperations to check whether the cancellation succeeded or
 -- the operation completed despite cancellation.
 --
--- /See:/ 'operationsCancel'' smart constructor.
-data OperationsCancel' = OperationsCancel'
+-- /See:/ 'operationsCancel' smart constructor.
+data OperationsCancel = OperationsCancel
     { _ocXgafv          :: !(Maybe Text)
     , _ocUploadProtocol :: !(Maybe Text)
     , _ocPp             :: !Bool
@@ -86,7 +86,7 @@ data OperationsCancel' = OperationsCancel'
     , _ocCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OperationsCancel'' with the minimum fields required to make a request.
+-- | Creates a value of 'OperationsCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -107,12 +107,12 @@ data OperationsCancel' = OperationsCancel'
 -- * 'ocName'
 --
 -- * 'ocCallback'
-operationsCancel'
+operationsCancel
     :: CancelOperationRequest -- ^ 'ocPayload'
     -> Text -- ^ 'ocName'
-    -> OperationsCancel'
-operationsCancel' pOcPayload_ pOcName_ =
-    OperationsCancel'
+    -> OperationsCancel
+operationsCancel pOcPayload_ pOcName_ =
+    OperationsCancel
     { _ocXgafv = Nothing
     , _ocUploadProtocol = Nothing
     , _ocPp = True
@@ -125,53 +125,53 @@ operationsCancel' pOcPayload_ pOcName_ =
     }
 
 -- | V1 error format.
-ocXgafv :: Lens' OperationsCancel' (Maybe Text)
+ocXgafv :: Lens' OperationsCancel (Maybe Text)
 ocXgafv = lens _ocXgafv (\ s a -> s{_ocXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ocUploadProtocol :: Lens' OperationsCancel' (Maybe Text)
+ocUploadProtocol :: Lens' OperationsCancel (Maybe Text)
 ocUploadProtocol
   = lens _ocUploadProtocol
       (\ s a -> s{_ocUploadProtocol = a})
 
 -- | Pretty-print response.
-ocPp :: Lens' OperationsCancel' Bool
+ocPp :: Lens' OperationsCancel Bool
 ocPp = lens _ocPp (\ s a -> s{_ocPp = a})
 
 -- | OAuth access token.
-ocAccessToken :: Lens' OperationsCancel' (Maybe Text)
+ocAccessToken :: Lens' OperationsCancel (Maybe Text)
 ocAccessToken
   = lens _ocAccessToken
       (\ s a -> s{_ocAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ocUploadType :: Lens' OperationsCancel' (Maybe Text)
+ocUploadType :: Lens' OperationsCancel (Maybe Text)
 ocUploadType
   = lens _ocUploadType (\ s a -> s{_ocUploadType = a})
 
 -- | Multipart request metadata.
-ocPayload :: Lens' OperationsCancel' CancelOperationRequest
+ocPayload :: Lens' OperationsCancel CancelOperationRequest
 ocPayload
   = lens _ocPayload (\ s a -> s{_ocPayload = a})
 
 -- | OAuth bearer token.
-ocBearerToken :: Lens' OperationsCancel' (Maybe Text)
+ocBearerToken :: Lens' OperationsCancel (Maybe Text)
 ocBearerToken
   = lens _ocBearerToken
       (\ s a -> s{_ocBearerToken = a})
 
 -- | The name of the operation resource to be cancelled.
-ocName :: Lens' OperationsCancel' Text
+ocName :: Lens' OperationsCancel Text
 ocName = lens _ocName (\ s a -> s{_ocName = a})
 
 -- | JSONP
-ocCallback :: Lens' OperationsCancel' (Maybe Text)
+ocCallback :: Lens' OperationsCancel (Maybe Text)
 ocCallback
   = lens _ocCallback (\ s a -> s{_ocCallback = a})
 
-instance GoogleRequest OperationsCancel' where
-        type Rs OperationsCancel' = Empty
-        requestClient OperationsCancel'{..}
+instance GoogleRequest OperationsCancel where
+        type Rs OperationsCancel = Empty
+        requestClient OperationsCancel{..}
           = go _ocName _ocXgafv _ocUploadProtocol (Just _ocPp)
               _ocAccessToken
               _ocUploadType

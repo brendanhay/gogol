@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.Pushtokens.Update
       PushtokensUpdateResource
 
     -- * Creating a Request
-    , pushtokensUpdate'
-    , PushtokensUpdate'
+    , pushtokensUpdate
+    , PushtokensUpdate
 
     -- * Request Lenses
     , puPayload
@@ -40,7 +40,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.pushtokens.update@ method which the
--- 'PushtokensUpdate'' request conforms to.
+-- 'PushtokensUpdate' request conforms to.
 type PushtokensUpdateResource =
      "pushtokens" :>
        QueryParam "alt" AltJSON :>
@@ -48,32 +48,32 @@ type PushtokensUpdateResource =
 
 -- | Registers a push token for the current user and application.
 --
--- /See:/ 'pushtokensUpdate'' smart constructor.
-newtype PushtokensUpdate' = PushtokensUpdate'
+-- /See:/ 'pushtokensUpdate' smart constructor.
+newtype PushtokensUpdate = PushtokensUpdate
     { _puPayload :: PushToken
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'PushtokensUpdate'' with the minimum fields required to make a request.
+-- | Creates a value of 'PushtokensUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'puPayload'
-pushtokensUpdate'
+pushtokensUpdate
     :: PushToken -- ^ 'puPayload'
-    -> PushtokensUpdate'
-pushtokensUpdate' pPuPayload_ =
-    PushtokensUpdate'
+    -> PushtokensUpdate
+pushtokensUpdate pPuPayload_ =
+    PushtokensUpdate
     { _puPayload = pPuPayload_
     }
 
 -- | Multipart request metadata.
-puPayload :: Lens' PushtokensUpdate' PushToken
+puPayload :: Lens' PushtokensUpdate PushToken
 puPayload
   = lens _puPayload (\ s a -> s{_puPayload = a})
 
-instance GoogleRequest PushtokensUpdate' where
-        type Rs PushtokensUpdate' = ()
-        requestClient PushtokensUpdate'{..}
+instance GoogleRequest PushtokensUpdate where
+        type Rs PushtokensUpdate = ()
+        requestClient PushtokensUpdate{..}
           = go (Just AltJSON) _puPayload gamesService
           where go
                   = buildClient

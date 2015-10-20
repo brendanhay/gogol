@@ -29,8 +29,8 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Insert
       ObjectAccessControlsInsertResource
 
     -- * Creating a Request
-    , objectAccessControlsInsert'
-    , ObjectAccessControlsInsert'
+    , objectAccessControlsInsert
+    , ObjectAccessControlsInsert
 
     -- * Request Lenses
     , oaciBucket
@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objectAccessControls.insert@ method which the
--- 'ObjectAccessControlsInsert'' request conforms to.
+-- 'ObjectAccessControlsInsert' request conforms to.
 type ObjectAccessControlsInsertResource =
      "b" :>
        Capture "bucket" Text :>
@@ -57,15 +57,15 @@ type ObjectAccessControlsInsertResource =
 
 -- | Creates a new ACL entry on the specified object.
 --
--- /See:/ 'objectAccessControlsInsert'' smart constructor.
-data ObjectAccessControlsInsert' = ObjectAccessControlsInsert'
+-- /See:/ 'objectAccessControlsInsert' smart constructor.
+data ObjectAccessControlsInsert = ObjectAccessControlsInsert
     { _oaciBucket     :: !Text
     , _oaciPayload    :: !ObjectAccessControl
     , _oaciObject     :: !Text
     , _oaciGeneration :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ObjectAccessControlsInsert'' with the minimum fields required to make a request.
+-- | Creates a value of 'ObjectAccessControlsInsert' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -76,13 +76,13 @@ data ObjectAccessControlsInsert' = ObjectAccessControlsInsert'
 -- * 'oaciObject'
 --
 -- * 'oaciGeneration'
-objectAccessControlsInsert'
+objectAccessControlsInsert
     :: Text -- ^ 'oaciBucket'
     -> ObjectAccessControl -- ^ 'oaciPayload'
     -> Text -- ^ 'oaciObject'
-    -> ObjectAccessControlsInsert'
-objectAccessControlsInsert' pOaciBucket_ pOaciPayload_ pOaciObject_ =
-    ObjectAccessControlsInsert'
+    -> ObjectAccessControlsInsert
+objectAccessControlsInsert pOaciBucket_ pOaciPayload_ pOaciObject_ =
+    ObjectAccessControlsInsert
     { _oaciBucket = pOaciBucket_
     , _oaciPayload = pOaciPayload_
     , _oaciObject = pOaciObject_
@@ -90,33 +90,33 @@ objectAccessControlsInsert' pOaciBucket_ pOaciPayload_ pOaciObject_ =
     }
 
 -- | Name of a bucket.
-oaciBucket :: Lens' ObjectAccessControlsInsert' Text
+oaciBucket :: Lens' ObjectAccessControlsInsert Text
 oaciBucket
   = lens _oaciBucket (\ s a -> s{_oaciBucket = a})
 
 -- | Multipart request metadata.
-oaciPayload :: Lens' ObjectAccessControlsInsert' ObjectAccessControl
+oaciPayload :: Lens' ObjectAccessControlsInsert ObjectAccessControl
 oaciPayload
   = lens _oaciPayload (\ s a -> s{_oaciPayload = a})
 
 -- | Name of the object. For information about how to URL encode object names
 -- to be path safe, see Encoding URI Path Parts.
-oaciObject :: Lens' ObjectAccessControlsInsert' Text
+oaciObject :: Lens' ObjectAccessControlsInsert Text
 oaciObject
   = lens _oaciObject (\ s a -> s{_oaciObject = a})
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
-oaciGeneration :: Lens' ObjectAccessControlsInsert' (Maybe Int64)
+oaciGeneration :: Lens' ObjectAccessControlsInsert (Maybe Int64)
 oaciGeneration
   = lens _oaciGeneration
       (\ s a -> s{_oaciGeneration = a})
 
-instance GoogleRequest ObjectAccessControlsInsert'
+instance GoogleRequest ObjectAccessControlsInsert
          where
-        type Rs ObjectAccessControlsInsert' =
+        type Rs ObjectAccessControlsInsert =
              ObjectAccessControl
-        requestClient ObjectAccessControlsInsert'{..}
+        requestClient ObjectAccessControlsInsert{..}
           = go _oaciBucket _oaciObject _oaciGeneration
               (Just AltJSON)
               _oaciPayload

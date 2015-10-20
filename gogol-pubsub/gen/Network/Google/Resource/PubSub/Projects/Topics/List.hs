@@ -29,8 +29,8 @@ module Network.Google.Resource.PubSub.Projects.Topics.List
       ProjectsTopicsListResource
 
     -- * Creating a Request
-    , projectsTopicsList'
-    , ProjectsTopicsList'
+    , projectsTopicsList
+    , ProjectsTopicsList
 
     -- * Request Lenses
     , ptlXgafv
@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.list@ method which the
--- 'ProjectsTopicsList'' request conforms to.
+-- 'ProjectsTopicsList' request conforms to.
 type ProjectsTopicsListResource =
      "v1" :>
        Capture "project" Text :>
@@ -68,8 +68,8 @@ type ProjectsTopicsListResource =
 
 -- | Lists matching topics.
 --
--- /See:/ 'projectsTopicsList'' smart constructor.
-data ProjectsTopicsList' = ProjectsTopicsList'
+-- /See:/ 'projectsTopicsList' smart constructor.
+data ProjectsTopicsList = ProjectsTopicsList
     { _ptlXgafv          :: !(Maybe Text)
     , _ptlUploadProtocol :: !(Maybe Text)
     , _ptlProject        :: !Text
@@ -82,7 +82,7 @@ data ProjectsTopicsList' = ProjectsTopicsList'
     , _ptlCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsTopicsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsTopicsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -105,11 +105,11 @@ data ProjectsTopicsList' = ProjectsTopicsList'
 -- * 'ptlPageSize'
 --
 -- * 'ptlCallback'
-projectsTopicsList'
+projectsTopicsList
     :: Text -- ^ 'ptlProject'
-    -> ProjectsTopicsList'
-projectsTopicsList' pPtlProject_ =
-    ProjectsTopicsList'
+    -> ProjectsTopicsList
+projectsTopicsList pPtlProject_ =
+    ProjectsTopicsList
     { _ptlXgafv = Nothing
     , _ptlUploadProtocol = Nothing
     , _ptlProject = pPtlProject_
@@ -123,38 +123,38 @@ projectsTopicsList' pPtlProject_ =
     }
 
 -- | V1 error format.
-ptlXgafv :: Lens' ProjectsTopicsList' (Maybe Text)
+ptlXgafv :: Lens' ProjectsTopicsList (Maybe Text)
 ptlXgafv = lens _ptlXgafv (\ s a -> s{_ptlXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-ptlUploadProtocol :: Lens' ProjectsTopicsList' (Maybe Text)
+ptlUploadProtocol :: Lens' ProjectsTopicsList (Maybe Text)
 ptlUploadProtocol
   = lens _ptlUploadProtocol
       (\ s a -> s{_ptlUploadProtocol = a})
 
 -- | The name of the cloud project that topics belong to.
-ptlProject :: Lens' ProjectsTopicsList' Text
+ptlProject :: Lens' ProjectsTopicsList Text
 ptlProject
   = lens _ptlProject (\ s a -> s{_ptlProject = a})
 
 -- | Pretty-print response.
-ptlPp :: Lens' ProjectsTopicsList' Bool
+ptlPp :: Lens' ProjectsTopicsList Bool
 ptlPp = lens _ptlPp (\ s a -> s{_ptlPp = a})
 
 -- | OAuth access token.
-ptlAccessToken :: Lens' ProjectsTopicsList' (Maybe Text)
+ptlAccessToken :: Lens' ProjectsTopicsList (Maybe Text)
 ptlAccessToken
   = lens _ptlAccessToken
       (\ s a -> s{_ptlAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-ptlUploadType :: Lens' ProjectsTopicsList' (Maybe Text)
+ptlUploadType :: Lens' ProjectsTopicsList (Maybe Text)
 ptlUploadType
   = lens _ptlUploadType
       (\ s a -> s{_ptlUploadType = a})
 
 -- | OAuth bearer token.
-ptlBearerToken :: Lens' ProjectsTopicsList' (Maybe Text)
+ptlBearerToken :: Lens' ProjectsTopicsList (Maybe Text)
 ptlBearerToken
   = lens _ptlBearerToken
       (\ s a -> s{_ptlBearerToken = a})
@@ -162,23 +162,23 @@ ptlBearerToken
 -- | The value returned by the last \`ListTopicsResponse\`; indicates that
 -- this is a continuation of a prior \`ListTopics\` call, and that the
 -- system should return the next page of data.
-ptlPageToken :: Lens' ProjectsTopicsList' (Maybe Text)
+ptlPageToken :: Lens' ProjectsTopicsList (Maybe Text)
 ptlPageToken
   = lens _ptlPageToken (\ s a -> s{_ptlPageToken = a})
 
 -- | Maximum number of topics to return.
-ptlPageSize :: Lens' ProjectsTopicsList' (Maybe Int32)
+ptlPageSize :: Lens' ProjectsTopicsList (Maybe Int32)
 ptlPageSize
   = lens _ptlPageSize (\ s a -> s{_ptlPageSize = a})
 
 -- | JSONP
-ptlCallback :: Lens' ProjectsTopicsList' (Maybe Text)
+ptlCallback :: Lens' ProjectsTopicsList (Maybe Text)
 ptlCallback
   = lens _ptlCallback (\ s a -> s{_ptlCallback = a})
 
-instance GoogleRequest ProjectsTopicsList' where
-        type Rs ProjectsTopicsList' = ListTopicsResponse
-        requestClient ProjectsTopicsList'{..}
+instance GoogleRequest ProjectsTopicsList where
+        type Rs ProjectsTopicsList = ListTopicsResponse
+        requestClient ProjectsTopicsList{..}
           = go _ptlProject _ptlXgafv _ptlUploadProtocol
               (Just _ptlPp)
               _ptlAccessToken

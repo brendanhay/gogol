@@ -29,8 +29,8 @@ module Network.Google.Resource.Games.TurnBasedMatches.Cancel
       TurnBasedMatchesCancelResource
 
     -- * Creating a Request
-    , turnBasedMatchesCancel'
-    , TurnBasedMatchesCancel'
+    , turnBasedMatchesCancel
+    , TurnBasedMatchesCancel
 
     -- * Request Lenses
     , tbmcMatchId
@@ -40,7 +40,7 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @games.turnBasedMatches.cancel@ method which the
--- 'TurnBasedMatchesCancel'' request conforms to.
+-- 'TurnBasedMatchesCancel' request conforms to.
 type TurnBasedMatchesCancelResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
@@ -49,32 +49,32 @@ type TurnBasedMatchesCancelResource =
 
 -- | Cancel a turn-based match.
 --
--- /See:/ 'turnBasedMatchesCancel'' smart constructor.
-newtype TurnBasedMatchesCancel' = TurnBasedMatchesCancel'
+-- /See:/ 'turnBasedMatchesCancel' smart constructor.
+newtype TurnBasedMatchesCancel = TurnBasedMatchesCancel
     { _tbmcMatchId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TurnBasedMatchesCancel'' with the minimum fields required to make a request.
+-- | Creates a value of 'TurnBasedMatchesCancel' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'tbmcMatchId'
-turnBasedMatchesCancel'
+turnBasedMatchesCancel
     :: Text -- ^ 'tbmcMatchId'
-    -> TurnBasedMatchesCancel'
-turnBasedMatchesCancel' pTbmcMatchId_ =
-    TurnBasedMatchesCancel'
+    -> TurnBasedMatchesCancel
+turnBasedMatchesCancel pTbmcMatchId_ =
+    TurnBasedMatchesCancel
     { _tbmcMatchId = pTbmcMatchId_
     }
 
 -- | The ID of the match.
-tbmcMatchId :: Lens' TurnBasedMatchesCancel' Text
+tbmcMatchId :: Lens' TurnBasedMatchesCancel Text
 tbmcMatchId
   = lens _tbmcMatchId (\ s a -> s{_tbmcMatchId = a})
 
-instance GoogleRequest TurnBasedMatchesCancel' where
-        type Rs TurnBasedMatchesCancel' = ()
-        requestClient TurnBasedMatchesCancel'{..}
+instance GoogleRequest TurnBasedMatchesCancel where
+        type Rs TurnBasedMatchesCancel = ()
+        requestClient TurnBasedMatchesCancel{..}
           = go _tbmcMatchId (Just AltJSON) gamesService
           where go
                   = buildClient

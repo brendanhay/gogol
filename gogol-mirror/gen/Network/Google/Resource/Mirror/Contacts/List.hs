@@ -29,8 +29,8 @@ module Network.Google.Resource.Mirror.Contacts.List
       ContactsListResource
 
     -- * Creating a Request
-    , contactsList'
-    , ContactsList'
+    , contactsList
+    , ContactsList
 
     ) where
 
@@ -38,7 +38,7 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @mirror.contacts.list@ method which the
--- 'ContactsList'' request conforms to.
+-- 'ContactsList' request conforms to.
 type ContactsListResource =
      "contacts" :>
        QueryParam "alt" AltJSON :>
@@ -46,20 +46,20 @@ type ContactsListResource =
 
 -- | Retrieves a list of contacts for the authenticated user.
 --
--- /See:/ 'contactsList'' smart constructor.
-data ContactsList' =
-    ContactsList'
+-- /See:/ 'contactsList' smart constructor.
+data ContactsList =
+    ContactsList
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ContactsList'' with the minimum fields required to make a request.
+-- | Creates a value of 'ContactsList' with the minimum fields required to make a request.
 --
-contactsList'
-    :: ContactsList'
-contactsList' = ContactsList'
+contactsList
+    :: ContactsList
+contactsList = ContactsList
 
-instance GoogleRequest ContactsList' where
-        type Rs ContactsList' = ContactsListResponse
-        requestClient ContactsList'{}
+instance GoogleRequest ContactsList where
+        type Rs ContactsList = ContactsListResponse
+        requestClient ContactsList{}
           = go (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsListResource)

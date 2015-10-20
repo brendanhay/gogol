@@ -27,8 +27,8 @@ module Network.Google.Resource.Content.Datafeeds.Custombatch
       DatafeedsCustombatchResource
 
     -- * Creating a Request
-    , datafeedsCustombatch'
-    , DatafeedsCustombatch'
+    , datafeedsCustombatch
+    , DatafeedsCustombatch
 
     -- * Request Lenses
     , dPayload
@@ -39,7 +39,7 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @content.datafeeds.custombatch@ method which the
--- 'DatafeedsCustombatch'' request conforms to.
+-- 'DatafeedsCustombatch' request conforms to.
 type DatafeedsCustombatchResource =
      "datafeeds" :>
        "batch" :>
@@ -49,40 +49,40 @@ type DatafeedsCustombatchResource =
                Post '[JSON] DatafeedsCustomBatchResponse
 
 --
--- /See:/ 'datafeedsCustombatch'' smart constructor.
-data DatafeedsCustombatch' = DatafeedsCustombatch'
+-- /See:/ 'datafeedsCustombatch' smart constructor.
+data DatafeedsCustombatch = DatafeedsCustombatch
     { _dPayload :: !DatafeedsCustomBatchRequest
     , _dDryRun  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatafeedsCustombatch'' with the minimum fields required to make a request.
+-- | Creates a value of 'DatafeedsCustombatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'dPayload'
 --
 -- * 'dDryRun'
-datafeedsCustombatch'
+datafeedsCustombatch
     :: DatafeedsCustomBatchRequest -- ^ 'dPayload'
-    -> DatafeedsCustombatch'
-datafeedsCustombatch' pDPayload_ =
-    DatafeedsCustombatch'
+    -> DatafeedsCustombatch
+datafeedsCustombatch pDPayload_ =
+    DatafeedsCustombatch
     { _dPayload = pDPayload_
     , _dDryRun = Nothing
     }
 
 -- | Multipart request metadata.
-dPayload :: Lens' DatafeedsCustombatch' DatafeedsCustomBatchRequest
+dPayload :: Lens' DatafeedsCustombatch DatafeedsCustomBatchRequest
 dPayload = lens _dPayload (\ s a -> s{_dPayload = a})
 
 -- | Flag to run the request in dry-run mode.
-dDryRun :: Lens' DatafeedsCustombatch' (Maybe Bool)
+dDryRun :: Lens' DatafeedsCustombatch (Maybe Bool)
 dDryRun = lens _dDryRun (\ s a -> s{_dDryRun = a})
 
-instance GoogleRequest DatafeedsCustombatch' where
-        type Rs DatafeedsCustombatch' =
+instance GoogleRequest DatafeedsCustombatch where
+        type Rs DatafeedsCustombatch =
              DatafeedsCustomBatchResponse
-        requestClient DatafeedsCustombatch'{..}
+        requestClient DatafeedsCustombatch{..}
           = go _dDryRun (Just AltJSON) _dPayload
               shoppingContentService
           where go

@@ -33,8 +33,8 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
       ProjectsSubscriptionsCreateResource
 
     -- * Creating a Request
-    , projectsSubscriptionsCreate'
-    , ProjectsSubscriptionsCreate'
+    , projectsSubscriptionsCreate
+    , ProjectsSubscriptionsCreate
 
     -- * Request Lenses
     , pscXgafv
@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.create@ method which the
--- 'ProjectsSubscriptionsCreate'' request conforms to.
+-- 'ProjectsSubscriptionsCreate' request conforms to.
 type ProjectsSubscriptionsCreateResource =
      "v1" :>
        Capture "name" Text :>
@@ -73,8 +73,8 @@ type ProjectsSubscriptionsCreateResource =
 -- is not provided in the request, the server will assign a random name for
 -- this subscription on the same project as the topic.
 --
--- /See:/ 'projectsSubscriptionsCreate'' smart constructor.
-data ProjectsSubscriptionsCreate' = ProjectsSubscriptionsCreate'
+-- /See:/ 'projectsSubscriptionsCreate' smart constructor.
+data ProjectsSubscriptionsCreate = ProjectsSubscriptionsCreate
     { _pscXgafv          :: !(Maybe Text)
     , _pscUploadProtocol :: !(Maybe Text)
     , _pscPp             :: !Bool
@@ -86,7 +86,7 @@ data ProjectsSubscriptionsCreate' = ProjectsSubscriptionsCreate'
     , _pscCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ProjectsSubscriptionsCreate'' with the minimum fields required to make a request.
+-- | Creates a value of 'ProjectsSubscriptionsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -107,12 +107,12 @@ data ProjectsSubscriptionsCreate' = ProjectsSubscriptionsCreate'
 -- * 'pscName'
 --
 -- * 'pscCallback'
-projectsSubscriptionsCreate'
+projectsSubscriptionsCreate
     :: Subscription -- ^ 'pscPayload'
     -> Text -- ^ 'pscName'
-    -> ProjectsSubscriptionsCreate'
-projectsSubscriptionsCreate' pPscPayload_ pPscName_ =
-    ProjectsSubscriptionsCreate'
+    -> ProjectsSubscriptionsCreate
+projectsSubscriptionsCreate pPscPayload_ pPscName_ =
+    ProjectsSubscriptionsCreate
     { _pscXgafv = Nothing
     , _pscUploadProtocol = Nothing
     , _pscPp = True
@@ -125,38 +125,38 @@ projectsSubscriptionsCreate' pPscPayload_ pPscName_ =
     }
 
 -- | V1 error format.
-pscXgafv :: Lens' ProjectsSubscriptionsCreate' (Maybe Text)
+pscXgafv :: Lens' ProjectsSubscriptionsCreate (Maybe Text)
 pscXgafv = lens _pscXgafv (\ s a -> s{_pscXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-pscUploadProtocol :: Lens' ProjectsSubscriptionsCreate' (Maybe Text)
+pscUploadProtocol :: Lens' ProjectsSubscriptionsCreate (Maybe Text)
 pscUploadProtocol
   = lens _pscUploadProtocol
       (\ s a -> s{_pscUploadProtocol = a})
 
 -- | Pretty-print response.
-pscPp :: Lens' ProjectsSubscriptionsCreate' Bool
+pscPp :: Lens' ProjectsSubscriptionsCreate Bool
 pscPp = lens _pscPp (\ s a -> s{_pscPp = a})
 
 -- | OAuth access token.
-pscAccessToken :: Lens' ProjectsSubscriptionsCreate' (Maybe Text)
+pscAccessToken :: Lens' ProjectsSubscriptionsCreate (Maybe Text)
 pscAccessToken
   = lens _pscAccessToken
       (\ s a -> s{_pscAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-pscUploadType :: Lens' ProjectsSubscriptionsCreate' (Maybe Text)
+pscUploadType :: Lens' ProjectsSubscriptionsCreate (Maybe Text)
 pscUploadType
   = lens _pscUploadType
       (\ s a -> s{_pscUploadType = a})
 
 -- | Multipart request metadata.
-pscPayload :: Lens' ProjectsSubscriptionsCreate' Subscription
+pscPayload :: Lens' ProjectsSubscriptionsCreate Subscription
 pscPayload
   = lens _pscPayload (\ s a -> s{_pscPayload = a})
 
 -- | OAuth bearer token.
-pscBearerToken :: Lens' ProjectsSubscriptionsCreate' (Maybe Text)
+pscBearerToken :: Lens' ProjectsSubscriptionsCreate (Maybe Text)
 pscBearerToken
   = lens _pscBearerToken
       (\ s a -> s{_pscBearerToken = a})
@@ -168,18 +168,18 @@ pscBearerToken
 -- (\`_\`), periods (\`.\`), tildes (\`~\`), plus (\`+\`) or percent signs
 -- (\`%\`). It must be between 3 and 255 characters in length, and it must
 -- not start with \`\"goog\"\`.
-pscName :: Lens' ProjectsSubscriptionsCreate' Text
+pscName :: Lens' ProjectsSubscriptionsCreate Text
 pscName = lens _pscName (\ s a -> s{_pscName = a})
 
 -- | JSONP
-pscCallback :: Lens' ProjectsSubscriptionsCreate' (Maybe Text)
+pscCallback :: Lens' ProjectsSubscriptionsCreate (Maybe Text)
 pscCallback
   = lens _pscCallback (\ s a -> s{_pscCallback = a})
 
-instance GoogleRequest ProjectsSubscriptionsCreate'
+instance GoogleRequest ProjectsSubscriptionsCreate
          where
-        type Rs ProjectsSubscriptionsCreate' = Subscription
-        requestClient ProjectsSubscriptionsCreate'{..}
+        type Rs ProjectsSubscriptionsCreate = Subscription
+        requestClient ProjectsSubscriptionsCreate{..}
           = go _pscName _pscXgafv _pscUploadProtocol
               (Just _pscPp)
               _pscAccessToken
