@@ -72,7 +72,7 @@ perform Env{..} x = catches go handlers
                 , _serializeMessage = e
                 }
 
-    rq auth ct b = def
+    rq ct b = def
         { Client.host            = _svcHost
         , Client.port            = _svcPort
         , Client.secure          = _svcSecure

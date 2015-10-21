@@ -71,3 +71,5 @@ library
         , transformers         >= 0.2
         , transformers-base    >= 0.4
         , unordered-containers >= 0.2.5
+        , memory
+        , x509-store

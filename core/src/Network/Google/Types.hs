@@ -72,11 +72,8 @@ newtype AuthKey = AuthKey Text
 newtype OAuthScope = OAuthScope { scopeToText :: Text }
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
-newtype OAuthToken = OAuthToken { tokenToBS :: ByteString }
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable)
-
-instance FromJSON OAuthToken where
-    parseJSON = withText "oauth_token" (pure . OAuthToken . Text.encodeUtf8)
+newtype OAuthToken = OAuthToken { tokenToText :: Text }
+    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
 newtype Download a = Download a
 
@@ -231,10 +228,10 @@ appendQuery rq k v = rq
     { _rqQuery = DList.snoc (_rqQuery rq) (k, Text.encodeUtf8 <$> v)
     }
 
-appendHeader :: Request -> ByteString -> Maybe Text -> Request
+appendHeader :: Request -> HeaderName -> Maybe Text -> Request
 appendHeader rq _ Nothing  = rq
 appendHeader rq k (Just v) = rq
-    { _rqHeaders = DList.snoc (_rqHeaders rq) (CI.mk k, Text.encodeUtf8 v)
+    { _rqHeaders = DList.snoc (_rqHeaders rq) (k, Text.encodeUtf8 v)
     }
 
 setBody :: Request -> MediaType -> Body -> Request
@@ -422,7 +419,7 @@ instance ( KnownSymbol  s
     buildClient Proxy rq mx = buildClient (Proxy :: Proxy fn) $
         case mx of
             Nothing -> rq
-            Just x  -> appendHeader rq k v
+            Just x  -> appendHeader rq (CI.mk k) v
               where
                 k = byteSymbol (Proxy :: Proxy s)
                 v = Just (toText x)
