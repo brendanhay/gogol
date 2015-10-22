@@ -198,22 +198,22 @@ data Credentials
 --
 -- Throws 'AuthError' when environment variables or service account information
 -- cannot be read, and credentials files are invalid or cannot be found.
-getAuth :: (MonadIO m, MonadCatch m) => Manager -> Credentials -> m Auth
-getAuth m = \case
+getAuth :: (MonadIO m, MonadCatch m) => Credentials -> Manager -> m Auth
+getAuth c m = case c of
     FromToken   t -> pure (AuthToken t)
-    FromFile    f -> fromFilePath m f
-    FromAccount s -> fromMetadata m s
+    FromFile    f -> fromFilePath f m
+    FromAccount s -> fromMetadata s m
     Discover      ->
         catching _MissingFileError (fromFile m) $ \f -> do
             p <- isGCE m
             unless p $
                 throwingM _MissingFileError f
-            fromMetadata m "default"
+            fromMetadata "default" m
 
 -- | Refresh a token from the local GCE metadata endpoint for the specified
 -- 'ServiceId'.
-fromMetadata :: (MonadIO m, MonadCatch m) => Manager -> ServiceId -> m Auth
-fromMetadata m = refresh m >=> fmap AuthMeta . liftIO . newMVar
+fromMetadata :: (MonadIO m, MonadCatch m) => ServiceId -> Manager -> m Auth
+fromMetadata s = refresh s >=> fmap AuthMeta . liftIO . newMVar
 
 -- | Attempt to load either a @service_account@ or @authorized_user@ formatted
 -- file to obtain the credentials neccessary to perform a token refresh.
@@ -221,22 +221,24 @@ fromFile :: (MonadIO m, MonadCatch m) => Manager -> m Auth
 fromFile m = do
     f <- defaultCredentialsPath
     case f of
-        Just x  -> fromFilePath m x
-        Nothing -> cloudSDKConfigPath >>= fromFilePath m
+        Just x  -> fromFilePath x m
+        Nothing -> do
+            x <- cloudSDKConfigPath
+            fromFilePath x m
 
 -- | Attempt to load either a @service_account@ or @authorized_user@ formatted
 -- file to obtain the credentials neccessary to perform a token refresh from
 -- the specified file.
-fromFilePath :: (MonadIO m, MonadCatch m) => Manager -> FilePath -> m Auth
-fromFilePath m f = do
+fromFilePath :: (MonadIO m, MonadCatch m) => FilePath -> Manager -> m Auth
+fromFilePath f m = do
     p <- liftIO (doesFileExist f)
     unless p $
         throwM (MissingFileError f)
     e <- liftIO (LBS.readFile f) >>=
         either (throwM . InvalidFileError f) pure . parseLBS
     case e of
-        Left  a -> refresh m a >>= fmap AuthSign . liftIO . newMVar
-        Right u -> refresh m u >>= fmap AuthUser . liftIO . newMVar
+        Left  a -> refresh a m >>= fmap AuthSign . liftIO . newMVar
+        Right u -> refresh u m >>= fmap AuthUser . liftIO . newMVar
 
 -- | Lookup the @GOOGLE_APPLICATION_CREDENTIALS@ environment variable for the
 -- default application credentials filepath.
@@ -324,7 +326,7 @@ refreshToken m r = do
             if yv
                 then pure (y, _token y)
                 else do
-                    z <- refresh m (_details y)
+                    z <- refresh (_details y) m
                     pure (z, _token z)
 
 -- {
@@ -398,17 +400,18 @@ instance FromJSON AuthorisedUser where
         <*> o .: "refresh_token"
 
 class Refresh a where
-    refresh :: (MonadIO m, MonadCatch m) => Manager -> a -> m (Expires a)
+    refresh :: (MonadIO m, MonadCatch m) => a -> Manager -> m (Expires a)
 
 instance Refresh ServiceAccount where
-    refresh m s = do
+    refresh s m = do
         b <- jwtEncode s
-        refreshRequest m s $ accountsRequest
-            { Client.requestBody = RequestBodyBS $
-                   "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer"
-                <> "&assertion="
-                <> b
-            }
+        let rq = accountsRequest
+               { Client.requestBody = RequestBodyBS $
+                      "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer"
+                   <> "&assertion="
+                   <> b
+               }
+        refreshRequest s rq m
 
 jwtEncode :: (MonadIO m, MonadThrow m) => ServiceAccount -> m ByteString
 jwtEncode s = liftIO $ do
@@ -443,7 +446,7 @@ jwtEncode s = liftIO $ do
             ]
 
 instance Refresh AuthorisedUser where
-    refresh m u@AuthorisedUser{..} = refreshRequest m u $
+    refresh u@AuthorisedUser{..} = refreshRequest u $
         accountsRequest
             { Client.requestBody = RequestBodyBS . Text.encodeUtf8 $
                    "grant_type=refresh_token"
@@ -453,7 +456,7 @@ instance Refresh AuthorisedUser where
             }
 
 instance Refresh ServiceId where
-    refresh m sid = refreshRequest m sid $
+    refresh sid = refreshRequest sid $
         metadataRequest
             { Client.path = "instance/service-accounts/"
                 <> Text.encodeUtf8 (serviceIdToText sid)
@@ -472,11 +475,11 @@ accountsRequest = def
     }
 
 refreshRequest :: (MonadIO m, MonadCatch m)
-               => Manager
-               -> a
+               => a
                -> Client.Request
+               -> Manager
                -> m (Expires a)
-refreshRequest m r rq = do
+refreshRequest r rq m = do
     rs <- liftIO (httpLbs rq m) `catch` (throwM . RetrievalError)
     let bs = responseBody   rs
         s  = responseStatus rs

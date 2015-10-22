@@ -105,4 +105,4 @@ newEnv c = liftIO (newManager tlsManagerSettings) >>= newEnvWith c
 
 -- | /See:/ 'newEnv'
 newEnvWith :: (MonadIO m, MonadCatch m) => Credentials -> Manager -> m Env
-newEnvWith c m = Env mempty m <$> getAuth m c
+newEnvWith c m = Env mempty m <$> getAuth c m
