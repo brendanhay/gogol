@@ -50,7 +50,6 @@ import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Encoding      as LText
 import           Data.Word
 import           Network.Google.Prelude       hiding (Header, Request)
-import           Network.Google.Types         hiding (Request)
 import           Network.HTTP.Conduit
 import           Network.HTTP.Types
 import           Numeric
@@ -124,7 +123,7 @@ instance ToLog Text           where build = build . Text.encodeUtf8
 instance ToLog LText.Text     where build = build . LText.encodeUtf8
 instance ToLog Char           where build = build . BS8.singleton
 instance ToLog [Char]         where build = build . BS8.pack
--- instance ToLog StdMethod      where build = build . renderStdMethod
+instance ToLog StdMethod      where build = build . renderStdMethod
 
 -- | Intercalate a list of 'Builder's with newlines.
 buildLines :: [Builder] -> Builder
