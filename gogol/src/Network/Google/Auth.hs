@@ -60,20 +60,30 @@ module Network.Google.Auth where
    -- , ClientId    (..)
    -- ) where
 
-import Data.ByteArray.Encoding
 import           Control.Concurrent
 import           Control.Exception.Lens
-import           Control.Lens
+import           Control.Lens                    hiding ((.=))
 import           Control.Monad
 import           Control.Monad.Catch
 import           Control.Monad.IO.Class
+import           Crypto.Hash.Algorithms          (SHA256 (..))
+import           Crypto.PubKey.RSA.PKCS15        (signSafer)
+import           Crypto.PubKey.RSA.Types         (PrivateKey)
 import           Data.Aeson
+import           Data.Aeson.Types
+import           Data.ByteArray
+import           Data.ByteArray.Encoding
+import           Data.ByteString                 (ByteString)
+import qualified Data.ByteString.Char8           as BS8
 import qualified Data.ByteString.Lazy            as LBS
 import           Data.Default.Class              (def)
 import qualified Data.Text                       as Text
 import qualified Data.Text.Encoding              as Text
 import           Data.Time
+import           Data.Time.Clock.POSIX
 import           Data.Typeable
+import           Data.X509
+import           Data.X509.Memory
 import           Network.Google.Compute.Metadata
 import           Network.Google.Prelude
 import           Network.HTTP.Conduit            hiding (Request)
@@ -188,9 +198,10 @@ data Credentials
 -- cannot be read, and credentials files are invalid or cannot be found.
 getAuth :: (MonadIO m, MonadCatch m) => Manager -> Credentials -> m Auth
 getAuth m = \case
-    FromToken t -> pure (AuthToken t)
-    FromFile  f -> fromFilePath m f
-    Discover    ->
+    FromToken   t -> pure (AuthToken t)
+    FromFile    f -> fromFilePath m f
+    FromAccount s -> fromMetadata m s
+    Discover      ->
         catching _MissingFileError (fromFile m) $ \f -> do
             p <- isGCE m
             unless p $
@@ -215,7 +226,7 @@ fromFilePath m f = do
     e <- liftIO (LBS.readFile f) >>=
         either (throwM . InvalidFileError f) pure . parseLBS
     case e of
-        Left  a -> pure (AuthSign a)
+        Left  a -> refresh m a >>= fmap AuthSign . liftIO . newMVar
         Right u -> refresh m u >>= fmap AuthUser . liftIO . newMVar
 
 -- | Lookup the @GOOGLE_APPLICATION_CREDENTIALS@ environment variable for the
@@ -268,24 +279,26 @@ data Auth
 
 authorise :: (MonadIO m, MonadCatch m)
           => Manager
-          -> Request
+          -> Client.Request
           -> Auth
-          -> m Request
+          -> m Client.Request
 authorise m rq = \case
     AuthToken t -> pure $! authoriseBearer rq t
     AuthSign  r -> authoriseToken m r rq
     AuthMeta  r -> authoriseToken m r rq
     AuthUser  r -> authoriseToken m r rq
 
-authoriseBearer :: Request -> OAuthToken -> Request
-authoriseBearer rq =
-    appendHeader rq hAuthorization . Just . mappend "Bearer " . tokenToText
+authoriseBearer :: Client.Request -> OAuthToken -> Client.Request
+authoriseBearer rq t = rq
+    { Client.requestHeaders = (hAuthorization, "Bearer " <> tokenToBS t)
+        : Client.requestHeaders rq
+    }
 
 authoriseToken :: (MonadIO m, MonadCatch m, Refresh a)
                => Manager
                -> MVar (Expires a)
-               -> Request
-               -> m Request
+               -> Client.Request
+               -> m Client.Request
 authoriseToken m r rq = authoriseBearer rq <$> refreshToken m r
 
 refreshToken :: (MonadIO m, MonadCatch m, Refresh a)
@@ -338,15 +351,23 @@ data ServiceAccount = ServiceAccount
     { _serviceId    :: !ClientId
     , _serviceEmail :: !Text
     , _serviceKeyId :: !Text
-    , _serviceKey   :: !Text
+    , _serviceKey   :: !PrivateKey
     }
 
 instance FromJSON ServiceAccount where
-    parseJSON = withObject "service_account" $ \o -> ServiceAccount
-        <$> o .: "client_id"
-        <*> o .: "client_email"
-        <*> o .: "private_key_id"
-        <*> o .: "private_key"
+    parseJSON = withObject "service_account" $ \o -> do
+        bs <- Text.encodeUtf8 <$> o .: "private_key_id"
+        ServiceAccount
+            <$> o .: "client_id"
+            <*> o .: "client_email"
+            <*> o .: "private_key"
+            <*> parseKey bs
+      where
+        parseKey bs =
+            case listToMaybe (readKeyFileFromMemory bs) of
+                Just (PrivKeyRSA k) -> pure k
+                _                   ->
+                    fail "Unable to parse key contents from 'private_key_id'"
 
 -- {
 --   "client_id": "32555940559.apps.googleusercontent.com",
@@ -371,40 +392,57 @@ class Refresh a where
     refresh :: (MonadIO m, MonadCatch m) => Manager -> a -> m (Expires a)
 
 instance Refresh ServiceAccount where
-    refresh m s = refreshRequest m s $
-        accountsRequest
-            { Client.requestBody = RequestBodyBS . Text.encodeUtf8 $
+    refresh m s = do
+        b <- jwtEncode s
+        refreshRequest m s $ accountsRequest
+            { Client.requestBody = RequestBodyBS $
                    "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer"
-                <> "&assertion="     <> generateAssertion s
+                <> "&assertion="
+                <> b
             }
 
-        generateAssertion = do
-            n <- truncate <$> getPOSIXTime
-            readKeyFileFromMemory - do on parse.
+        -- first_segment = _urlsafe_b64encode(_json_encode(header))
+        -- second_segment = _urlsafe_b64encode(_json_encode(payload))
+        -- assertion_input = first_segment + b'.' + second_segment
 
-          where
-            assertion = = input <> "." <> signature
+        -- # Sign the assertion.
+        -- rsa_bytes = rsa.pkcs1.sign(assertion_input, self._private_key,
+        --                            'SHA-256')
+        -- signature = base64.urlsafe_b64encode(rsa_bytes).rstrip(b'=')
 
-            signature = dropWhileEnd (base64 btes . rstrip(b'=')
+        -- return assertion_input + b'.' + signature
 
-            bytes = rsa.pkcs1.sign(input, _serviceKey s, 'SHA256')
+jwtEncode :: (MonadIO m, MonadThrow m) => ServiceAccount -> m ByteString
+jwtEncode s = liftIO $ do
+    i <- input . truncate <$> getPOSIXTime
+    r <- signSafer (Just SHA256) (_serviceKey s) i
+    either failure (\x -> pure (i <> "." <> signature (base64 x))) r
+  where
+    failure e = throwM $
+        TokenRefreshError (toEnum 400) (Text.pack (show e)) Nothing
 
-            input n = header <> "." <> payload n
+    signature bs =
+        case BS8.unsnoc bs of
+            Nothing         -> mempty
+            Just (bs', x)
+                | x == '='  -> bs'
+                | otherwise -> bs
 
-            header = base64 . encode $ object
-                [ "alg" .= ("RS256" :: Text)
-                , "typ" .= ("JWT"   :: Text)
-                , "kid" .= _serviceKeyId s
-                ]
+    input n = header <> "." <> payload
+      where
+        header = base64Encode
+            [ "alg" .= ("RS256" :: Text)
+            , "typ" .= ("JWT"   :: Text)
+            , "kid" .= _serviceKeyId s
+            ]
 
-            payload n = base64 . encode $ object
-                [ "aud"   .= Client.host accountsRequest
-                , "scope" .= ([] :: [Text])
-                , "iat"   .= n
-                , "exp"   .= n + maxTokenLifetimeSeconds
-                , "iss"   .= _serviceEmail s
-                ]
-
+        payload = base64Encode
+            [ "aud"   .= Text.decodeUtf8 (Client.host accountsRequest)
+            , "scope" .= ([] :: [Text])
+            , "iat"   .= n
+            , "exp"   .= (n + maxTokenLifetimeSeconds)
+            , "iss"   .= _serviceEmail s
+            ]
 
 instance Refresh AuthorisedUser where
     refresh m u@AuthorisedUser{..} = refreshRequest m u $
@@ -455,7 +493,7 @@ refreshRequest m r rq = do
         pure $! Expires _bearerExpiry _bearerAccess r
 
     failure s = const $
-        refreshErr s ("Failure refreshing token from " <> Text.pack (Client.host rq))
+        refreshErr s ("Failure refreshing token from " <> Text.decodeUtf8 (Client.host rq))
             Nothing
 
     parseErr s bs =
@@ -468,5 +506,9 @@ refreshRequest m r rq = do
 parseLBS :: FromJSON a => LBS.ByteString -> Either Text a
 parseLBS = either (Left . Text.pack) Right . eitherDecode'
 
--- base64 :: ToJSON a => 
+base64Encode :: [Pair] -> ByteString
+base64Encode = base64 . LBS.toStrict . encode . object
+
+-- base64 :: ToJSON a =>
+base64 :: ByteArray a => a -> ByteString
 base64 = convertToBase Base64URLUnpadded

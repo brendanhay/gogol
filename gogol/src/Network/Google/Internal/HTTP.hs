@@ -25,7 +25,7 @@ import qualified Data.Text.Encoding                as Text
 import qualified Data.Text.Lazy                    as LText
 import qualified Data.Text.Lazy.Builder            as Build
 import           GHC.Exts                          (toList)
-import           Network.Google.Auth               (Auth, refreshToken)
+import           Network.Google.Auth
 import           Network.Google.Env                (Env (..))
 import           Network.Google.Internal.Multipart
 import           Network.Google.Types
@@ -38,11 +38,7 @@ import           Network.HTTP.Types
 --
 -- Resumable endpoints - Not supported to begin with, need to figure
 -- out how to return session id etc.
---
--- Assume initially that every service supports multipart upload.
---
--- When downloading media you must set the alt query parameter
--- to media in the request URL.
+--   - Assume initially that every service supports multipart upload.
 --
 -- "resumable" or "multipart" needs to go into the "uploadType" param
 
@@ -60,8 +56,8 @@ perform Env{..} x = catches go handlers
 
     go = liftResourceT $ do
         (ct, b) <- getContent _rqBody
-        auth    <- getAuthorisation _envAuth
-        rs      <- http (rq auth ct b) _envManager
+        rq      <- authorise _envManager (request ct b) _envAuth
+        rs      <- http rq _envManager
         r       <- _cliResponse (responseBody rs)
         pure $! case r of
             Right y -> Right y
@@ -72,7 +68,7 @@ perform Env{..} x = catches go handlers
                 , _serializeMessage = e
                 }
 
-    rq ct b = def
+    request ct b = def
         { Client.host            = _svcHost
         , Client.port            = _svcPort
         , Client.secure          = _svcSecure
@@ -81,7 +77,7 @@ perform Env{..} x = catches go handlers
         , Client.method          = _cliMethod
         , Client.path            = path
         , Client.queryString     = renderQuery True (toList _rqQuery)
-        , Client.requestHeaders  = auth : accept (ct (toList _rqHeaders))
+        , Client.requestHeaders  = accept (ct (toList _rqHeaders))
         , Client.requestBody     = b
         }
 
@@ -110,13 +106,6 @@ perform Env{..} x = catches go handlers
         ]
       where
         err e = return (Left e)
-
-getAuthorisation :: MonadIO m => Auth -> m Header
-getAuthorisation a = do
-    OAuthToken t <- refreshToken a
-    pure ( hAuthorization
-         , "Bearer " <> t
-         )
 
 getContent :: MonadIO m
            => Maybe Payload

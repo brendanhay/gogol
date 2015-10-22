@@ -72,8 +72,14 @@ newtype AuthKey = AuthKey Text
 newtype OAuthScope = OAuthScope { scopeToText :: Text }
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
 
-newtype OAuthToken = OAuthToken { tokenToText :: Text }
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
+newtype OAuthToken = OAuthToken { tokenToBS :: ByteString }
+    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable)
+
+instance FromJSON OAuthToken where
+    parseJSON = withText "oauth_token" (pure . OAuthToken . Text.encodeUtf8)
+
+instance ToJSON OAuthToken where
+    toJSON = toJSON . Text.decodeUtf8 . tokenToBS
 
 newtype Download a = Download a
 
