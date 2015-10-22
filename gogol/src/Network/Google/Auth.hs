@@ -57,6 +57,7 @@ module Network.Google.Auth
    , ClientId    (..)
    ) where
 
+import           Control.Applicative
 import           Control.Concurrent
 import           Control.Exception.Lens
 import           Control.Lens                    hiding ((.=))
@@ -82,6 +83,7 @@ import           Data.Typeable
 import           Data.X509
 import           Data.X509.Memory
 import           Network.Google.Compute.Metadata
+import           Network.Google.Internal.Logger
 import           Network.Google.Prelude
 import           Network.HTTP.Conduit            hiding (Request)
 import qualified Network.HTTP.Conduit            as Client
@@ -198,47 +200,64 @@ data Credentials
 --
 -- Throws 'AuthError' when environment variables or service account information
 -- cannot be read, and credentials files are invalid or cannot be found.
-getAuth :: (MonadIO m, MonadCatch m) => Credentials -> Manager -> m Auth
-getAuth c m = case c of
+getAuth :: (MonadIO m, MonadCatch m)
+        => Credentials
+        -> Logger
+        -> Manager
+        -> m Auth
+getAuth c l m = case c of
     FromToken   t -> pure (AuthToken t)
-    FromFile    f -> fromFilePath f m
-    FromAccount s -> fromMetadata s m
+    FromFile    f -> fromFilePath f l m
+    FromAccount s -> fromMetadata s l m
     Discover      ->
-        catching _MissingFileError (fromFile m) $ \f -> do
+        catching _MissingFileError (fromFile l m) $ \f -> do
             p <- isGCE m
             unless p $
                 throwingM _MissingFileError f
-            fromMetadata "default" m
+            fromMetadata "default" l m
 
 -- | Refresh a token from the local GCE metadata endpoint for the specified
 -- 'ServiceId'.
-fromMetadata :: (MonadIO m, MonadCatch m) => ServiceId -> Manager -> m Auth
-fromMetadata s = refresh s >=> fmap AuthMeta . liftIO . newMVar
+fromMetadata :: (MonadIO m, MonadCatch m)
+             => ServiceId
+             -> Logger
+             -> Manager
+             -> m Auth
+fromMetadata s l = refresh s l >=> fmap AuthMeta . liftIO . newMVar
 
 -- | Attempt to load either a @service_account@ or @authorized_user@ formatted
 -- file to obtain the credentials neccessary to perform a token refresh.
-fromFile :: (MonadIO m, MonadCatch m) => Manager -> m Auth
-fromFile m = do
+fromFile :: (MonadIO m, MonadCatch m) => Logger -> Manager -> m Auth
+fromFile l m = do
     f <- defaultCredentialsPath
     case f of
-        Just x  -> fromFilePath x m
+        Just x  -> fromFilePath x l m
         Nothing -> do
             x <- cloudSDKConfigPath
-            fromFilePath x m
+            fromFilePath x l m
+
+data Parse = SA !ServiceAccount | AU !AuthorisedUser
+
+instance FromJSON Parse where
+    parseJSON o = SA <$> parseJSON o <|> AU <$> parseJSON o
 
 -- | Attempt to load either a @service_account@ or @authorized_user@ formatted
 -- file to obtain the credentials neccessary to perform a token refresh from
 -- the specified file.
-fromFilePath :: (MonadIO m, MonadCatch m) => FilePath -> Manager -> m Auth
-fromFilePath f m = do
+fromFilePath :: (MonadIO m, MonadCatch m)
+             => FilePath
+             -> Logger
+             -> Manager
+             -> m Auth
+fromFilePath f l m = do
     p <- liftIO (doesFileExist f)
     unless p $
         throwM (MissingFileError f)
     e <- liftIO (LBS.readFile f) >>=
         either (throwM . InvalidFileError f) pure . parseLBS
     case e of
-        Left  a -> refresh a m >>= fmap AuthSign . liftIO . newMVar
-        Right u -> refresh u m >>= fmap AuthUser . liftIO . newMVar
+        SA a -> refresh a l m >>= fmap AuthSign . liftIO . newMVar
+        AU u -> refresh u l m >>= fmap AuthUser . liftIO . newMVar
 
 -- | Lookup the @GOOGLE_APPLICATION_CREDENTIALS@ environment variable for the
 -- default application credentials filepath.
@@ -289,15 +308,16 @@ data Auth
     | AuthUser  !(MVar (Expires AuthorisedUser))
 
 authorise :: (MonadIO m, MonadCatch m)
-          => Manager
+          => Logger
+          -> Manager
           -> Client.Request
           -> Auth
           -> m Client.Request
-authorise m rq = \case
+authorise l m rq = \case
     AuthToken t -> pure $! authoriseBearer rq t
-    AuthSign  r -> authoriseToken m r rq
-    AuthMeta  r -> authoriseToken m r rq
-    AuthUser  r -> authoriseToken m r rq
+    AuthSign  r -> authoriseToken l m r rq
+    AuthMeta  r -> authoriseToken l m r rq
+    AuthUser  r -> authoriseToken l m r rq
 
 authoriseBearer :: Client.Request -> OAuthToken -> Client.Request
 authoriseBearer rq t = rq
@@ -306,17 +326,19 @@ authoriseBearer rq t = rq
     }
 
 authoriseToken :: (MonadIO m, MonadCatch m, Refresh a)
-               => Manager
+               => Logger
+               -> Manager
                -> MVar (Expires a)
                -> Client.Request
                -> m Client.Request
-authoriseToken m r rq = authoriseBearer rq <$> refreshToken m r
+authoriseToken l m r rq = authoriseBearer rq <$> refreshToken l m r
 
 refreshToken :: (MonadIO m, MonadCatch m, Refresh a)
-             => Manager
+             => Logger
+             -> Manager
              -> MVar (Expires a)
              -> m OAuthToken
-refreshToken m r = do
+refreshToken l m r = do
     x  <- liftIO (readMVar r)
     xv <- isValid x
     if xv
@@ -326,7 +348,7 @@ refreshToken m r = do
             if yv
                 then pure (y, _token y)
                 else do
-                    z <- refresh (_details y) m
+                    z <- refresh (_details y) l m
                     pure (z, _token z)
 
 -- {
@@ -400,10 +422,14 @@ instance FromJSON AuthorisedUser where
         <*> o .: "refresh_token"
 
 class Refresh a where
-    refresh :: (MonadIO m, MonadCatch m) => a -> Manager -> m (Expires a)
+    refresh :: (MonadIO m, MonadCatch m)
+            => a
+            -> Logger
+            -> Manager
+            -> m (Expires a)
 
 instance Refresh ServiceAccount where
-    refresh s m = do
+    refresh s l m = do
         b <- jwtEncode s
         let rq = accountsRequest
                { Client.requestBody = RequestBodyBS $
@@ -411,7 +437,7 @@ instance Refresh ServiceAccount where
                    <> "&assertion="
                    <> b
                }
-        refreshRequest s rq m
+        refreshRequest s rq l m
 
 jwtEncode :: (MonadIO m, MonadThrow m) => ServiceAccount -> m ByteString
 jwtEncode s = liftIO $ do
@@ -477,15 +503,22 @@ accountsRequest = def
 refreshRequest :: (MonadIO m, MonadCatch m)
                => a
                -> Client.Request
+               -> Logger
                -> Manager
                -> m (Expires a)
-refreshRequest r rq m = do
+refreshRequest r rq l m = do
+    logDebug l rq -- debug:ClientRequest
+
     rs <- liftIO (httpLbs rq m) `catch` (throwM . RetrievalError)
+
+    logDebug l rs -- debug:ClientResponse
+
     let bs = responseBody   rs
         s  = responseStatus rs
+
     if fromEnum s == 200
         then success s bs
-        else failure s bs
+        else failure s
   where
     success s bs = do
         f  <- parseErr s bs
@@ -493,16 +526,23 @@ refreshRequest r rq m = do
         let Bearer {..} = f ts
         pure $! Expires _bearerExpiry _bearerAccess r
 
-    failure s = const $
-        refreshErr s ("Failure refreshing token from " <> Text.decodeUtf8 (Client.host rq))
-            Nothing
+    failure s = do
+        let e = "Failure refreshing token from " <> host <> path
+        logError l $ "[Refresh Error] " <> build e
+        refreshErr s e Nothing
 
     parseErr s bs =
         case parseLBS bs of
-            Left   e -> refreshErr s e Nothing
             Right !x -> pure x
+            Left   e -> do
+                logError l $ "[Parse Error] Failure parsing token refresh " <> build e
+                refreshErr s e Nothing
 
+    refreshErr :: MonadThrow m => Status -> Text -> Maybe Text -> m a
     refreshErr s e = throwM . TokenRefreshError s e
+
+    host = Text.decodeUtf8 (Client.host rq)
+    path = Text.decodeUtf8 (Client.path rq)
 
 parseLBS :: FromJSON a => LBS.ByteString -> Either Text a
 parseLBS = either (Left . Text.pack) Right . eitherDecode'

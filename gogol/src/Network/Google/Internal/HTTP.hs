@@ -27,6 +27,7 @@ import qualified Data.Text.Lazy.Builder            as Build
 import           GHC.Exts                          (toList)
 import           Network.Google.Auth
 import           Network.Google.Env                (Env (..))
+import           Network.Google.Internal.Logger
 import           Network.Google.Internal.Multipart
 import           Network.Google.Types
 import qualified Network.HTTP.Client.Conduit       as Client
@@ -56,9 +57,16 @@ perform Env{..} x = catches go handlers
 
     go = liftResourceT $ do
         (ct, b) <- getContent _rqBody
-        rq      <- authorise _envManager (request ct b) _envAuth
+        rq      <- authorise _envLogger _envManager (request ct b) _envAuth
+
+        logDebug _envLogger rq -- debug:ClientRequest
+
         rs      <- http rq _envManager
+
+        logDebug _envLogger rs -- debug:ClientResponse
+
         r       <- _cliResponse (responseBody rs)
+
         pure $! case r of
             Right y -> Right y
             Left  e -> Left . SerializeError $ SerializeError'

@@ -13,15 +13,17 @@ import           Control.Lens
 import           Control.Monad.Catch
 import           Control.Monad.IO.Class
 import           Control.Monad.Reader
-import           Data.Function          (on)
+import           Data.Function                  (on)
 import           Data.Monoid
 import           Network.Google.Auth
+import           Network.Google.Internal.Logger
 import           Network.Google.Types
 import           Network.HTTP.Conduit
 
 -- | The environment containing the parameters required to make Google requests.
 data Env = Env
-    { _envOverride :: !(Dual (Endo Service))
+    { _envLogger   :: !Logger
+    , _envOverride :: !(Dual (Endo Service))
     , _envManager  :: !Manager
     , _envAuth     :: !Auth
     }
@@ -33,6 +35,9 @@ class HasEnv a where
     environment :: Lens' a Env
     {-# MINIMAL environment #-}
 
+    -- | The function used to output log messages.
+    envLogger   :: Lens' a Logger
+
     -- | The currently applied overrides to all 'Service' configuration.
     envOverride :: Lens' a (Dual (Endo Service))
 
@@ -42,6 +47,7 @@ class HasEnv a where
     -- | The credentials used to sign requests for authentication with Google.
     envAuth     :: Lens' a Auth
 
+    envLogger   = environment . lens _envLogger   (\s a -> s { _envLogger     = a })
     envOverride = environment . lens _envOverride (\s a -> s { _envOverride = a })
     envManager  = environment . lens _envManager  (\s a -> s { _envManager  = a })
     envAuth     = environment . lens _envAuth     (\s a -> s { _envAuth     = a })
@@ -101,8 +107,10 @@ timeout s = local (override (serviceTimeout ?~ s))
 --
 -- /See:/ 'newEnvWith'.
 newEnv :: (MonadIO m, MonadCatch m) => Credentials -> m Env
-newEnv c = liftIO (newManager tlsManagerSettings) >>= newEnvWith c
+newEnv c = liftIO (newManager tlsManagerSettings) >>= newEnvWith c logger
+  where
+    logger _ _ = pure ()
 
 -- | /See:/ 'newEnv'
-newEnvWith :: (MonadIO m, MonadCatch m) => Credentials -> Manager -> m Env
-newEnvWith c m = Env mempty m <$> getAuth c m
+newEnvWith :: (MonadIO m, MonadCatch m) => Credentials -> Logger -> Manager -> m Env
+newEnvWith c l m = Env l mempty m <$> getAuth c l m

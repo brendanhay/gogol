@@ -46,6 +46,7 @@ library
 
     other-modules:
           Network.Google.Internal.HTTP
+        , Network.Google.Internal.Logger
         , Network.Google.Internal.Multipart
 
     build-depends:

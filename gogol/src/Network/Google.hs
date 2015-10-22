@@ -68,6 +68,15 @@ module Network.Google
     , trying
     , catching
 
+    -- * Logging
+    -- $logging
+
+    , Logger
+    , LogLevel     (..)
+
+    -- ** Constructing a Logger
+    , newLogger
+
     -- * Re-exported Types
     , Proxy       (..)
     , OctetStream
@@ -82,21 +91,22 @@ import           Control.Monad
 import           Control.Monad.Base
 import           Control.Monad.Catch
 import           Control.Monad.Reader
-import qualified Control.Monad.RWS.Lazy       as LRW
-import qualified Control.Monad.RWS.Strict     as RW
-import qualified Control.Monad.State.Lazy     as LS
-import qualified Control.Monad.State.Strict   as S
+import qualified Control.Monad.RWS.Lazy         as LRW
+import qualified Control.Monad.RWS.Strict       as RW
+import qualified Control.Monad.State.Lazy       as LS
+import qualified Control.Monad.State.Strict     as S
 import           Control.Monad.Trans.Control
-import           Control.Monad.Trans.Except   (ExceptT)
-import           Control.Monad.Trans.Identity (IdentityT)
-import           Control.Monad.Trans.List     (ListT)
-import           Control.Monad.Trans.Maybe    (MaybeT)
+import           Control.Monad.Trans.Except     (ExceptT)
+import           Control.Monad.Trans.Identity   (IdentityT)
+import           Control.Monad.Trans.List       (ListT)
+import           Control.Monad.Trans.Maybe      (MaybeT)
 import           Control.Monad.Trans.Resource
-import qualified Control.Monad.Writer.Lazy    as LW
-import qualified Control.Monad.Writer.Strict  as W
+import qualified Control.Monad.Writer.Lazy      as LW
+import qualified Control.Monad.Writer.Strict    as W
 import           Network.Google.Auth
 import           Network.Google.Env
 import           Network.Google.Internal.HTTP
+import           Network.Google.Internal.Logger
 import           Network.Google.Prelude
 import           Network.Google.Types
 
@@ -186,4 +196,16 @@ hoistError = either (throwingM _Error) return
 {- $async
 Requests can be sent asynchronously, but due to guarantees about resource closure
 require the use of <http://hackage.haskell.org/package/lifted-async lifted-async>.
+-}
+
+{- $logging
+The exposed logging interface is a primitive 'Logger' function which gets
+threaded through service calls and serialisation routines. This allows the
+library to output useful information and diagnostics.
+
+The 'newLogger' function can be used to construct a simple logger which writes
+output to a 'Handle', but in most production code you should probably consider
+using a more robust logging library such as
+<http://hackage.haskell.org/package/tiny-log tiny-log> or
+<http://hackage.haskell.org/package/fast-logger fast-logger>.
 -}
