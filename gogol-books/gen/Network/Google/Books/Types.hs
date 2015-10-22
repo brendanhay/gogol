@@ -21,12 +21,12 @@ module Network.Google.Books.Types
     -- * OAuth Scopes
     , booksScope
 
-    -- * Usersettings
-    , Usersettings
-    , usersettings
-    , uNotification
-    , uKind
-    , uNotesExport
+    -- * UserSettings
+    , UserSettings
+    , userSettings
+    , usNotification
+    , usKind
+    , usNotesExport
 
     -- * Annotations
     , Annotations
@@ -53,10 +53,10 @@ module Network.Google.Books.Types
     , adKind
     , adItems
 
-    -- * UsersettingsNotificationMoreFromAuthors
-    , UsersettingsNotificationMoreFromAuthors
-    , usersettingsNotificationMoreFromAuthors
-    , unmfaOptedState
+    -- * UserSettingsNotificationMoreFromAuthors
+    , UserSettingsNotificationMoreFromAuthors
+    , userSettingsNotificationMoreFromAuthors
+    , usnmfaOptedState
 
     -- * Volumeannotations
     , Volumeannotations
@@ -469,10 +469,10 @@ module Network.Google.Books.Types
     -- * VolumesListFilter
     , VolumesListFilter (..)
 
-    -- * UsersettingsNotification
-    , UsersettingsNotification
-    , usersettingsNotification
-    , unMoreFromAuthors
+    -- * UserSettingsNotification
+    , UserSettingsNotification
+    , userSettingsNotification
+    , usnMoreFromAuthors
 
     -- * DictlayerDataDictWordsItemSensesItemSynonymsItem
     , DictlayerDataDictWordsItemSensesItemSynonymsItem
@@ -728,11 +728,11 @@ module Network.Google.Books.Types
     , dTotalClusters
     , dClusters
 
-    -- * UsersettingsNotesExport
-    , UsersettingsNotesExport
-    , usersettingsNotesExport
-    , uneFolderName
-    , uneIsEnabled
+    -- * UserSettingsNotesExport
+    , UserSettingsNotesExport
+    , userSettingsNotesExport
+    , usneFolderName
+    , usneIsEnabled
 
     -- * ConcurrentAccessRestriction
     , ConcurrentAccessRestriction
@@ -845,8 +845,8 @@ module Network.Google.Books.Types
     -- * BooksAnnotationsRange
     , BooksAnnotationsRange
     , booksAnnotationsRange
-    , barStartOffset
-    , barEndOffset
+    , barStartOffSet
+    , barEndOffSet
     , barEndPosition
     , barStartPosition
 

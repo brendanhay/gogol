@@ -35,7 +35,7 @@ module Network.Google.Resource.BigQuery.TableData.InsertAll
 
     -- * Request Lenses
     , tdiaPayload
-    , tdiaDatasetId
+    , tdiaDataSetId
     , tdiaProjectId
     , tdiaTableId
     ) where
@@ -63,7 +63,7 @@ type TableDataInsertAllResource =
 -- /See:/ 'tableDataInsertAll' smart constructor.
 data TableDataInsertAll = TableDataInsertAll
     { _tdiaPayload   :: !TableDataInsertAllRequest
-    , _tdiaDatasetId :: !Text
+    , _tdiaDataSetId :: !Text
     , _tdiaProjectId :: !Text
     , _tdiaTableId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,21 +74,21 @@ data TableDataInsertAll = TableDataInsertAll
 --
 -- * 'tdiaPayload'
 --
--- * 'tdiaDatasetId'
+-- * 'tdiaDataSetId'
 --
 -- * 'tdiaProjectId'
 --
 -- * 'tdiaTableId'
 tableDataInsertAll
     :: TableDataInsertAllRequest -- ^ 'tdiaPayload'
-    -> Text -- ^ 'tdiaDatasetId'
+    -> Text -- ^ 'tdiaDataSetId'
     -> Text -- ^ 'tdiaProjectId'
     -> Text -- ^ 'tdiaTableId'
     -> TableDataInsertAll
-tableDataInsertAll pTdiaPayload_ pTdiaDatasetId_ pTdiaProjectId_ pTdiaTableId_ =
+tableDataInsertAll pTdiaPayload_ pTdiaDataSetId_ pTdiaProjectId_ pTdiaTableId_ =
     TableDataInsertAll
     { _tdiaPayload = pTdiaPayload_
-    , _tdiaDatasetId = pTdiaDatasetId_
+    , _tdiaDataSetId = pTdiaDataSetId_
     , _tdiaProjectId = pTdiaProjectId_
     , _tdiaTableId = pTdiaTableId_
     }
@@ -99,10 +99,10 @@ tdiaPayload
   = lens _tdiaPayload (\ s a -> s{_tdiaPayload = a})
 
 -- | Dataset ID of the destination table.
-tdiaDatasetId :: Lens' TableDataInsertAll Text
-tdiaDatasetId
-  = lens _tdiaDatasetId
-      (\ s a -> s{_tdiaDatasetId = a})
+tdiaDataSetId :: Lens' TableDataInsertAll Text
+tdiaDataSetId
+  = lens _tdiaDataSetId
+      (\ s a -> s{_tdiaDataSetId = a})
 
 -- | Project ID of the destination table.
 tdiaProjectId :: Lens' TableDataInsertAll Text
@@ -119,7 +119,7 @@ instance GoogleRequest TableDataInsertAll where
         type Rs TableDataInsertAll =
              TableDataInsertAllResponse
         requestClient TableDataInsertAll{..}
-          = go _tdiaProjectId _tdiaDatasetId _tdiaTableId
+          = go _tdiaProjectId _tdiaDataSetId _tdiaTableId
               (Just AltJSON)
               _tdiaPayload
               bigQueryService

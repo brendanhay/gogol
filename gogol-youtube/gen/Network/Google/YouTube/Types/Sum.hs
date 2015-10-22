@@ -5361,9 +5361,9 @@ instance ToJSON CdnSettingsIngestionType where
 -- value is offsetFromEnd, then the offsetMs field represents an offset
 -- from the end of the video.
 data InvideoTimingType
-    = OffsetFromEnd
+    = OffSetFromEnd
       -- ^ @offsetFromEnd@
-    | OffsetFromStart
+    | OffSetFromStart
       -- ^ @offsetFromStart@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -5371,14 +5371,14 @@ instance Hashable InvideoTimingType
 
 instance FromText InvideoTimingType where
     fromText = \case
-        "offsetFromEnd" -> Just OffsetFromEnd
-        "offsetFromStart" -> Just OffsetFromStart
+        "offsetFromEnd" -> Just OffSetFromEnd
+        "offsetFromStart" -> Just OffSetFromStart
         _ -> Nothing
 
 instance ToText InvideoTimingType where
     toText = \case
-        OffsetFromEnd -> "offsetFromEnd"
-        OffsetFromStart -> "offsetFromStart"
+        OffSetFromEnd -> "offsetFromEnd"
+        OffSetFromStart -> "offsetFromStart"
 
 instance FromJSON InvideoTimingType where
     parseJSON = parseJSONText "InvideoTimingType"

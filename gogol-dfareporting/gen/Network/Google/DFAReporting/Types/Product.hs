@@ -10955,46 +10955,46 @@ instance ToJSON AccountActiveAdSummary where
 
 -- | Offset Position.
 --
--- /See:/ 'offsetPosition' smart constructor.
-data OffsetPosition = OffsetPosition
-    { _opLeft :: !(Maybe Int32)
-    , _opTop  :: !(Maybe Int32)
+-- /See:/ 'offSetPosition' smart constructor.
+data OffSetPosition = OffSetPosition
+    { _ospLeft :: !(Maybe Int32)
+    , _ospTop  :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'OffsetPosition' with the minimum fields required to make a request.
+-- | Creates a value of 'OffSetPosition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'opLeft'
+-- * 'ospLeft'
 --
--- * 'opTop'
-offsetPosition
-    :: OffsetPosition
-offsetPosition =
-    OffsetPosition
-    { _opLeft = Nothing
-    , _opTop = Nothing
+-- * 'ospTop'
+offSetPosition
+    :: OffSetPosition
+offSetPosition =
+    OffSetPosition
+    { _ospLeft = Nothing
+    , _ospTop = Nothing
     }
 
 -- | Offset distance from left side of an asset or a window.
-opLeft :: Lens' OffsetPosition (Maybe Int32)
-opLeft = lens _opLeft (\ s a -> s{_opLeft = a})
+ospLeft :: Lens' OffSetPosition (Maybe Int32)
+ospLeft = lens _ospLeft (\ s a -> s{_ospLeft = a})
 
 -- | Offset distance from top side of an asset or a window.
-opTop :: Lens' OffsetPosition (Maybe Int32)
-opTop = lens _opTop (\ s a -> s{_opTop = a})
+ospTop :: Lens' OffSetPosition (Maybe Int32)
+ospTop = lens _ospTop (\ s a -> s{_ospTop = a})
 
-instance FromJSON OffsetPosition where
+instance FromJSON OffSetPosition where
         parseJSON
-          = withObject "OffsetPosition"
+          = withObject "OffSetPosition"
               (\ o ->
-                 OffsetPosition <$> (o .:? "left") <*> (o .:? "top"))
+                 OffSetPosition <$> (o .:? "left") <*> (o .:? "top"))
 
-instance ToJSON OffsetPosition where
-        toJSON OffsetPosition{..}
+instance ToJSON OffSetPosition where
+        toJSON OffSetPosition{..}
           = object
               (catMaybes
-                 [("left" .=) <$> _opLeft, ("top" .=) <$> _opTop])
+                 [("left" .=) <$> _ospLeft, ("top" .=) <$> _ospTop])
 
 -- | Represents a metric.
 --
@@ -12044,7 +12044,7 @@ instance ToJSON AccountPermissionGroupsListResponse
 --
 -- /See:/ 'popupWindowProperties' smart constructor.
 data PopupWindowProperties = PopupWindowProperties
-    { _pwpOffset         :: !(Maybe OffsetPosition)
+    { _pwpOffSet         :: !(Maybe OffSetPosition)
     , _pwpDimension      :: !(Maybe Size)
     , _pwpShowStatusBar  :: !(Maybe Bool)
     , _pwpShowMenuBar    :: !(Maybe Bool)
@@ -12059,7 +12059,7 @@ data PopupWindowProperties = PopupWindowProperties
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pwpOffset'
+-- * 'pwpOffSet'
 --
 -- * 'pwpDimension'
 --
@@ -12080,7 +12080,7 @@ popupWindowProperties
     :: PopupWindowProperties
 popupWindowProperties =
     PopupWindowProperties
-    { _pwpOffset = Nothing
+    { _pwpOffSet = Nothing
     , _pwpDimension = Nothing
     , _pwpShowStatusBar = Nothing
     , _pwpShowMenuBar = Nothing
@@ -12093,9 +12093,9 @@ popupWindowProperties =
 
 -- | Upper-left corner coordinates of the popup window. Applicable if
 -- positionType is COORDINATES.
-pwpOffset :: Lens' PopupWindowProperties (Maybe OffsetPosition)
-pwpOffset
-  = lens _pwpOffset (\ s a -> s{_pwpOffset = a})
+pwpOffSet :: Lens' PopupWindowProperties (Maybe OffSetPosition)
+pwpOffSet
+  = lens _pwpOffSet (\ s a -> s{_pwpOffSet = a})
 
 -- | Popup dimension for a creative. This is a read-only field. Applicable to
 -- the following creative types: all RICH_MEDIA and all VPAID
@@ -12161,7 +12161,7 @@ instance ToJSON PopupWindowProperties where
         toJSON PopupWindowProperties{..}
           = object
               (catMaybes
-                 [("offset" .=) <$> _pwpOffset,
+                 [("offset" .=) <$> _pwpOffSet,
                   ("dimension" .=) <$> _pwpDimension,
                   ("showStatusBar" .=) <$> _pwpShowStatusBar,
                   ("showMenuBar" .=) <$> _pwpShowMenuBar,
@@ -15445,7 +15445,7 @@ data CreativeAsset = CreativeAsset
     , _caaPushdownDuration      :: !(Maybe Float)
     , _caaSize                  :: !(Maybe Size)
     , _caaVerticallyLocked      :: !(Maybe Bool)
-    , _caaOffset                :: !(Maybe OffsetPosition)
+    , _caaOffSet                :: !(Maybe OffSetPosition)
     , _caaStreamingServingURL   :: !(Maybe Text)
     , _caaZipFilesize           :: !(Maybe Text)
     , _caaTransparency          :: !(Maybe Bool)
@@ -15476,7 +15476,7 @@ data CreativeAsset = CreativeAsset
     , _caaHideFlashObjects      :: !(Maybe Bool)
     , _caaDetectedFeatures      :: !(Maybe [CreativeAssetDetectedFeaturesItem])
     , _caaBackupImageExit       :: !(Maybe CreativeCustomEvent)
-    , _caaPosition              :: !(Maybe OffsetPosition)
+    , _caaPosition              :: !(Maybe OffSetPosition)
     , _caaHorizontallyLocked    :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -15502,7 +15502,7 @@ data CreativeAsset = CreativeAsset
 --
 -- * 'caaVerticallyLocked'
 --
--- * 'caaOffset'
+-- * 'caaOffSet'
 --
 -- * 'caaStreamingServingURL'
 --
@@ -15580,7 +15580,7 @@ creativeAsset =
     , _caaPushdownDuration = Nothing
     , _caaSize = Nothing
     , _caaVerticallyLocked = Nothing
-    , _caaOffset = Nothing
+    , _caaOffSet = Nothing
     , _caaStreamingServingURL = Nothing
     , _caaZipFilesize = Nothing
     , _caaTransparency = Nothing
@@ -15692,9 +15692,9 @@ caaVerticallyLocked
 -- field. Applicable to the following creative types: all RICH_MEDIA and
 -- all VPAID. Additionally, only applicable to assets whose displayType is
 -- ASSET_DISPLAY_TYPE_EXPANDING or ASSET_DISPLAY_TYPE_PEEL_DOWN.
-caaOffset :: Lens' CreativeAsset (Maybe OffsetPosition)
-caaOffset
-  = lens _caaOffset (\ s a -> s{_caaOffset = a})
+caaOffSet :: Lens' CreativeAsset (Maybe OffSetPosition)
+caaOffSet
+  = lens _caaOffSet (\ s a -> s{_caaOffSet = a})
 
 -- | Streaming URL for video asset. This is a read-only field. Applicable to
 -- the following creative types: INSTREAM_VIDEO and all VPAID.
@@ -15932,7 +15932,7 @@ caaBackupImageExit
 
 -- | Offset position for an asset. Applicable to the following creative
 -- types: all RICH_MEDIA.
-caaPosition :: Lens' CreativeAsset (Maybe OffsetPosition)
+caaPosition :: Lens' CreativeAsset (Maybe OffSetPosition)
 caaPosition
   = lens _caaPosition (\ s a -> s{_caaPosition = a})
 
@@ -16003,7 +16003,7 @@ instance ToJSON CreativeAsset where
                   ("pushdownDuration" .=) <$> _caaPushdownDuration,
                   ("size" .=) <$> _caaSize,
                   ("verticallyLocked" .=) <$> _caaVerticallyLocked,
-                  ("offset" .=) <$> _caaOffset,
+                  ("offset" .=) <$> _caaOffSet,
                   ("streamingServingUrl" .=) <$>
                     _caaStreamingServingURL,
                   ("zipFilesize" .=) <$> _caaZipFilesize,

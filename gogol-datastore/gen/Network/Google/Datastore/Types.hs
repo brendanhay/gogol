@@ -51,7 +51,7 @@ module Network.Google.Datastore.Types
     , PartitionId
     , partitionId
     , piNamespace
-    , piDatasetId
+    , piDataSetId
 
     -- * QueryResultBatch
     , QueryResultBatch
@@ -212,7 +212,7 @@ module Network.Google.Datastore.Types
     , query
     , qGroupBy
     , qStartCursor
-    , qOffset
+    , qOffSet
     , qEndCursor
     , qLimit
     , qProjection

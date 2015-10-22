@@ -21,61 +21,62 @@ import           Network.Google.Books.Types.Sum
 import           Network.Google.Prelude
 
 --
--- /See:/ 'usersettings' smart constructor.
-data Usersettings = Usersettings
-    { _uNotification :: !(Maybe UsersettingsNotification)
-    , _uKind         :: !Text
-    , _uNotesExport  :: !(Maybe UsersettingsNotesExport)
+-- /See:/ 'userSettings' smart constructor.
+data UserSettings = UserSettings
+    { _usNotification :: !(Maybe UserSettingsNotification)
+    , _usKind         :: !Text
+    , _usNotesExport  :: !(Maybe UserSettingsNotesExport)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Usersettings' with the minimum fields required to make a request.
+-- | Creates a value of 'UserSettings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uNotification'
+-- * 'usNotification'
 --
--- * 'uKind'
+-- * 'usKind'
 --
--- * 'uNotesExport'
-usersettings
-    :: Usersettings
-usersettings =
-    Usersettings
-    { _uNotification = Nothing
-    , _uKind = "books#usersettings"
-    , _uNotesExport = Nothing
+-- * 'usNotesExport'
+userSettings
+    :: UserSettings
+userSettings =
+    UserSettings
+    { _usNotification = Nothing
+    , _usKind = "books#usersettings"
+    , _usNotesExport = Nothing
     }
 
-uNotification :: Lens' Usersettings (Maybe UsersettingsNotification)
-uNotification
-  = lens _uNotification
-      (\ s a -> s{_uNotification = a})
+usNotification :: Lens' UserSettings (Maybe UserSettingsNotification)
+usNotification
+  = lens _usNotification
+      (\ s a -> s{_usNotification = a})
 
 -- | Resource type.
-uKind :: Lens' Usersettings Text
-uKind = lens _uKind (\ s a -> s{_uKind = a})
+usKind :: Lens' UserSettings Text
+usKind = lens _usKind (\ s a -> s{_usKind = a})
 
 -- | User settings in sub-objects, each for different purposes.
-uNotesExport :: Lens' Usersettings (Maybe UsersettingsNotesExport)
-uNotesExport
-  = lens _uNotesExport (\ s a -> s{_uNotesExport = a})
+usNotesExport :: Lens' UserSettings (Maybe UserSettingsNotesExport)
+usNotesExport
+  = lens _usNotesExport
+      (\ s a -> s{_usNotesExport = a})
 
-instance FromJSON Usersettings where
+instance FromJSON UserSettings where
         parseJSON
-          = withObject "Usersettings"
+          = withObject "UserSettings"
               (\ o ->
-                 Usersettings <$>
+                 UserSettings <$>
                    (o .:? "notification") <*>
                      (o .:? "kind" .!= "books#usersettings")
                      <*> (o .:? "notesExport"))
 
-instance ToJSON Usersettings where
-        toJSON Usersettings{..}
+instance ToJSON UserSettings where
+        toJSON UserSettings{..}
           = object
               (catMaybes
-                 [("notification" .=) <$> _uNotification,
-                  Just ("kind" .= _uKind),
-                  ("notesExport" .=) <$> _uNotesExport])
+                 [("notification" .=) <$> _usNotification,
+                  Just ("kind" .= _usKind),
+                  ("notesExport" .=) <$> _usNotesExport])
 
 --
 -- /See:/ 'annotations' smart constructor.
@@ -217,42 +218,43 @@ instance ToJSON AnnotationsData where
                   Just ("kind" .= _adKind), ("items" .=) <$> _adItems])
 
 --
--- /See:/ 'usersettingsNotificationMoreFromAuthors' smart constructor.
-newtype UsersettingsNotificationMoreFromAuthors = UsersettingsNotificationMoreFromAuthors
-    { _unmfaOptedState :: Maybe Text
+-- /See:/ 'userSettingsNotificationMoreFromAuthors' smart constructor.
+newtype UserSettingsNotificationMoreFromAuthors = UserSettingsNotificationMoreFromAuthors
+    { _usnmfaOptedState :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersettingsNotificationMoreFromAuthors' with the minimum fields required to make a request.
+-- | Creates a value of 'UserSettingsNotificationMoreFromAuthors' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'unmfaOptedState'
-usersettingsNotificationMoreFromAuthors
-    :: UsersettingsNotificationMoreFromAuthors
-usersettingsNotificationMoreFromAuthors =
-    UsersettingsNotificationMoreFromAuthors
-    { _unmfaOptedState = Nothing
+-- * 'usnmfaOptedState'
+userSettingsNotificationMoreFromAuthors
+    :: UserSettingsNotificationMoreFromAuthors
+userSettingsNotificationMoreFromAuthors =
+    UserSettingsNotificationMoreFromAuthors
+    { _usnmfaOptedState = Nothing
     }
 
-unmfaOptedState :: Lens' UsersettingsNotificationMoreFromAuthors (Maybe Text)
-unmfaOptedState
-  = lens _unmfaOptedState
-      (\ s a -> s{_unmfaOptedState = a})
+usnmfaOptedState :: Lens' UserSettingsNotificationMoreFromAuthors (Maybe Text)
+usnmfaOptedState
+  = lens _usnmfaOptedState
+      (\ s a -> s{_usnmfaOptedState = a})
 
 instance FromJSON
-         UsersettingsNotificationMoreFromAuthors where
+         UserSettingsNotificationMoreFromAuthors where
         parseJSON
           = withObject
-              "UsersettingsNotificationMoreFromAuthors"
+              "UserSettingsNotificationMoreFromAuthors"
               (\ o ->
-                 UsersettingsNotificationMoreFromAuthors <$>
+                 UserSettingsNotificationMoreFromAuthors <$>
                    (o .:? "opted_state"))
 
 instance ToJSON
-         UsersettingsNotificationMoreFromAuthors where
-        toJSON UsersettingsNotificationMoreFromAuthors{..}
+         UserSettingsNotificationMoreFromAuthors where
+        toJSON UserSettingsNotificationMoreFromAuthors{..}
           = object
-              (catMaybes [("opted_state" .=) <$> _unmfaOptedState])
+              (catMaybes
+                 [("opted_state" .=) <$> _usnmfaOptedState])
 
 --
 -- /See:/ 'volumeannotations' smart constructor.
@@ -3707,40 +3709,40 @@ instance ToJSON
                   ("attribution" .=) <$> _dddwisisisAttribution])
 
 --
--- /See:/ 'usersettingsNotification' smart constructor.
-newtype UsersettingsNotification = UsersettingsNotification
-    { _unMoreFromAuthors :: Maybe UsersettingsNotificationMoreFromAuthors
+-- /See:/ 'userSettingsNotification' smart constructor.
+newtype UserSettingsNotification = UserSettingsNotification
+    { _usnMoreFromAuthors :: Maybe UserSettingsNotificationMoreFromAuthors
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersettingsNotification' with the minimum fields required to make a request.
+-- | Creates a value of 'UserSettingsNotification' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'unMoreFromAuthors'
-usersettingsNotification
-    :: UsersettingsNotification
-usersettingsNotification =
-    UsersettingsNotification
-    { _unMoreFromAuthors = Nothing
+-- * 'usnMoreFromAuthors'
+userSettingsNotification
+    :: UserSettingsNotification
+userSettingsNotification =
+    UserSettingsNotification
+    { _usnMoreFromAuthors = Nothing
     }
 
-unMoreFromAuthors :: Lens' UsersettingsNotification (Maybe UsersettingsNotificationMoreFromAuthors)
-unMoreFromAuthors
-  = lens _unMoreFromAuthors
-      (\ s a -> s{_unMoreFromAuthors = a})
+usnMoreFromAuthors :: Lens' UserSettingsNotification (Maybe UserSettingsNotificationMoreFromAuthors)
+usnMoreFromAuthors
+  = lens _usnMoreFromAuthors
+      (\ s a -> s{_usnMoreFromAuthors = a})
 
-instance FromJSON UsersettingsNotification where
+instance FromJSON UserSettingsNotification where
         parseJSON
-          = withObject "UsersettingsNotification"
+          = withObject "UserSettingsNotification"
               (\ o ->
-                 UsersettingsNotification <$>
+                 UserSettingsNotification <$>
                    (o .:? "moreFromAuthors"))
 
-instance ToJSON UsersettingsNotification where
-        toJSON UsersettingsNotification{..}
+instance ToJSON UserSettingsNotification where
+        toJSON UserSettingsNotification{..}
           = object
               (catMaybes
-                 [("moreFromAuthors" .=) <$> _unMoreFromAuthors])
+                 [("moreFromAuthors" .=) <$> _usnMoreFromAuthors])
 
 --
 -- /See:/ 'dictlayerDataDictWordsItemSensesItemSynonymsItem' smart constructor.
@@ -5829,49 +5831,50 @@ instance ToJSON Discoveryclusters where
 
 -- | User settings in sub-objects, each for different purposes.
 --
--- /See:/ 'usersettingsNotesExport' smart constructor.
-data UsersettingsNotesExport = UsersettingsNotesExport
-    { _uneFolderName :: !(Maybe Text)
-    , _uneIsEnabled  :: !(Maybe Bool)
+-- /See:/ 'userSettingsNotesExport' smart constructor.
+data UserSettingsNotesExport = UserSettingsNotesExport
+    { _usneFolderName :: !(Maybe Text)
+    , _usneIsEnabled  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UsersettingsNotesExport' with the minimum fields required to make a request.
+-- | Creates a value of 'UserSettingsNotesExport' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uneFolderName'
+-- * 'usneFolderName'
 --
--- * 'uneIsEnabled'
-usersettingsNotesExport
-    :: UsersettingsNotesExport
-usersettingsNotesExport =
-    UsersettingsNotesExport
-    { _uneFolderName = Nothing
-    , _uneIsEnabled = Nothing
+-- * 'usneIsEnabled'
+userSettingsNotesExport
+    :: UserSettingsNotesExport
+userSettingsNotesExport =
+    UserSettingsNotesExport
+    { _usneFolderName = Nothing
+    , _usneIsEnabled = Nothing
     }
 
-uneFolderName :: Lens' UsersettingsNotesExport (Maybe Text)
-uneFolderName
-  = lens _uneFolderName
-      (\ s a -> s{_uneFolderName = a})
+usneFolderName :: Lens' UserSettingsNotesExport (Maybe Text)
+usneFolderName
+  = lens _usneFolderName
+      (\ s a -> s{_usneFolderName = a})
 
-uneIsEnabled :: Lens' UsersettingsNotesExport (Maybe Bool)
-uneIsEnabled
-  = lens _uneIsEnabled (\ s a -> s{_uneIsEnabled = a})
+usneIsEnabled :: Lens' UserSettingsNotesExport (Maybe Bool)
+usneIsEnabled
+  = lens _usneIsEnabled
+      (\ s a -> s{_usneIsEnabled = a})
 
-instance FromJSON UsersettingsNotesExport where
+instance FromJSON UserSettingsNotesExport where
         parseJSON
-          = withObject "UsersettingsNotesExport"
+          = withObject "UserSettingsNotesExport"
               (\ o ->
-                 UsersettingsNotesExport <$>
+                 UserSettingsNotesExport <$>
                    (o .:? "folderName") <*> (o .:? "isEnabled"))
 
-instance ToJSON UsersettingsNotesExport where
-        toJSON UsersettingsNotesExport{..}
+instance ToJSON UserSettingsNotesExport where
+        toJSON UserSettingsNotesExport{..}
           = object
               (catMaybes
-                 [("folderName" .=) <$> _uneFolderName,
-                  ("isEnabled" .=) <$> _uneIsEnabled])
+                 [("folderName" .=) <$> _usneFolderName,
+                  ("isEnabled" .=) <$> _usneIsEnabled])
 
 --
 -- /See:/ 'concurrentAccessRestriction' smart constructor.
@@ -6830,8 +6833,8 @@ instance ToJSON
 --
 -- /See:/ 'booksAnnotationsRange' smart constructor.
 data BooksAnnotationsRange = BooksAnnotationsRange
-    { _barStartOffset   :: !(Maybe Text)
-    , _barEndOffset     :: !(Maybe Text)
+    { _barStartOffSet   :: !(Maybe Text)
+    , _barEndOffSet     :: !(Maybe Text)
     , _barEndPosition   :: !(Maybe Text)
     , _barStartPosition :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6840,9 +6843,9 @@ data BooksAnnotationsRange = BooksAnnotationsRange
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'barStartOffset'
+-- * 'barStartOffSet'
 --
--- * 'barEndOffset'
+-- * 'barEndOffSet'
 --
 -- * 'barEndPosition'
 --
@@ -6851,22 +6854,22 @@ booksAnnotationsRange
     :: BooksAnnotationsRange
 booksAnnotationsRange =
     BooksAnnotationsRange
-    { _barStartOffset = Nothing
-    , _barEndOffset = Nothing
+    { _barStartOffSet = Nothing
+    , _barEndOffSet = Nothing
     , _barEndPosition = Nothing
     , _barStartPosition = Nothing
     }
 
 -- | The offset from the starting position.
-barStartOffset :: Lens' BooksAnnotationsRange (Maybe Text)
-barStartOffset
-  = lens _barStartOffset
-      (\ s a -> s{_barStartOffset = a})
+barStartOffSet :: Lens' BooksAnnotationsRange (Maybe Text)
+barStartOffSet
+  = lens _barStartOffSet
+      (\ s a -> s{_barStartOffSet = a})
 
 -- | The offset from the ending position.
-barEndOffset :: Lens' BooksAnnotationsRange (Maybe Text)
-barEndOffset
-  = lens _barEndOffset (\ s a -> s{_barEndOffset = a})
+barEndOffSet :: Lens' BooksAnnotationsRange (Maybe Text)
+barEndOffSet
+  = lens _barEndOffSet (\ s a -> s{_barEndOffSet = a})
 
 -- | The ending position for the range.
 barEndPosition :: Lens' BooksAnnotationsRange (Maybe Text)
@@ -6893,8 +6896,8 @@ instance ToJSON BooksAnnotationsRange where
         toJSON BooksAnnotationsRange{..}
           = object
               (catMaybes
-                 [("startOffset" .=) <$> _barStartOffset,
-                  ("endOffset" .=) <$> _barEndOffset,
+                 [("startOffset" .=) <$> _barStartOffSet,
+                  ("endOffset" .=) <$> _barEndOffSet,
                   ("endPosition" .=) <$> _barEndPosition,
                   ("startPosition" .=) <$> _barStartPosition])
 

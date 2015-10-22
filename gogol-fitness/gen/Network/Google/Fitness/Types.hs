@@ -29,14 +29,14 @@ module Network.Google.Fitness.Types
     -- * AggregateBucketType
     , AggregateBucketType (..)
 
-    -- * Dataset
-    , Dataset
-    , dataset
-    , dNextPageToken
-    , dDataSourceId
-    , dPoint
-    , dMinStartTimeNs
-    , dMaxEndTimeNs
+    -- * DataSet
+    , DataSet
+    , dataSet
+    , dsNextPageToken
+    , dsDataSourceId
+    , dsPoint
+    , dsMinStartTimeNs
+    , dsMaxEndTimeNs
 
     -- * Application
     , Application
@@ -122,7 +122,7 @@ module Network.Google.Fitness.Types
     , AggregateBucket
     , aggregateBucket
     , abEndTimeMillis
-    , abDataset
+    , abDataSet
     , abActivity
     , abType
     , abStartTimeMillis

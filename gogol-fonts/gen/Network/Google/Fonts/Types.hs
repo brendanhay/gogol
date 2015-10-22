@@ -27,7 +27,7 @@ module Network.Google.Fonts.Types
     , wFamily
     , wVersion
     , wFiles
-    , wSubsets
+    , wSubSets
     , wLastModified
 
     -- * WebfontList

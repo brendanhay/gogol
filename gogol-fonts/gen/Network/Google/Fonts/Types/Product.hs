@@ -29,7 +29,7 @@ data Webfont = Webfont
     , _wFamily       :: !(Maybe Text)
     , _wVersion      :: !(Maybe Text)
     , _wFiles        :: !(Maybe WebfontFiles)
-    , _wSubsets      :: !(Maybe [Text])
+    , _wSubSets      :: !(Maybe [Text])
     , _wLastModified :: !(Maybe Date')
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -49,7 +49,7 @@ data Webfont = Webfont
 --
 -- * 'wFiles'
 --
--- * 'wSubsets'
+-- * 'wSubSets'
 --
 -- * 'wLastModified'
 webfont
@@ -62,7 +62,7 @@ webfont =
     , _wFamily = Nothing
     , _wVersion = Nothing
     , _wFiles = Nothing
-    , _wSubsets = Nothing
+    , _wSubSets = Nothing
     , _wLastModified = Nothing
     }
 
@@ -96,9 +96,9 @@ wFiles :: Lens' Webfont (Maybe WebfontFiles)
 wFiles = lens _wFiles (\ s a -> s{_wFiles = a})
 
 -- | The scripts supported by the font.
-wSubsets :: Lens' Webfont [Text]
-wSubsets
-  = lens _wSubsets (\ s a -> s{_wSubsets = a}) .
+wSubSets :: Lens' Webfont [Text]
+wSubSets
+  = lens _wSubSets (\ s a -> s{_wSubSets = a}) .
       _Default
       . _Coerce
 
@@ -134,7 +134,7 @@ instance ToJSON Webfont where
                   ("family" .=) <$> _wFamily,
                   ("version" .=) <$> _wVersion,
                   ("files" .=) <$> _wFiles,
-                  ("subsets" .=) <$> _wSubsets,
+                  ("subsets" .=) <$> _wSubSets,
                   ("lastModified" .=) <$> _wLastModified])
 
 --

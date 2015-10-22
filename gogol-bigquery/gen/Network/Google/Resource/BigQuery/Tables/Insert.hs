@@ -34,7 +34,7 @@ module Network.Google.Resource.BigQuery.Tables.Insert
 
     -- * Request Lenses
     , tiPayload
-    , tiDatasetId
+    , tiDataSetId
     , tiProjectId
     ) where
 
@@ -57,7 +57,7 @@ type TablesInsertResource =
 -- /See:/ 'tablesInsert' smart constructor.
 data TablesInsert = TablesInsert
     { _tiPayload   :: !Table
-    , _tiDatasetId :: !Text
+    , _tiDataSetId :: !Text
     , _tiProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,18 +67,18 @@ data TablesInsert = TablesInsert
 --
 -- * 'tiPayload'
 --
--- * 'tiDatasetId'
+-- * 'tiDataSetId'
 --
 -- * 'tiProjectId'
 tablesInsert
     :: Table -- ^ 'tiPayload'
-    -> Text -- ^ 'tiDatasetId'
+    -> Text -- ^ 'tiDataSetId'
     -> Text -- ^ 'tiProjectId'
     -> TablesInsert
-tablesInsert pTiPayload_ pTiDatasetId_ pTiProjectId_ =
+tablesInsert pTiPayload_ pTiDataSetId_ pTiProjectId_ =
     TablesInsert
     { _tiPayload = pTiPayload_
-    , _tiDatasetId = pTiDatasetId_
+    , _tiDataSetId = pTiDataSetId_
     , _tiProjectId = pTiProjectId_
     }
 
@@ -88,9 +88,9 @@ tiPayload
   = lens _tiPayload (\ s a -> s{_tiPayload = a})
 
 -- | Dataset ID of the new table
-tiDatasetId :: Lens' TablesInsert Text
-tiDatasetId
-  = lens _tiDatasetId (\ s a -> s{_tiDatasetId = a})
+tiDataSetId :: Lens' TablesInsert Text
+tiDataSetId
+  = lens _tiDataSetId (\ s a -> s{_tiDataSetId = a})
 
 -- | Project ID of the new table
 tiProjectId :: Lens' TablesInsert Text
@@ -100,7 +100,7 @@ tiProjectId
 instance GoogleRequest TablesInsert where
         type Rs TablesInsert = Table
         requestClient TablesInsert{..}
-          = go _tiProjectId _tiDatasetId (Just AltJSON)
+          = go _tiProjectId _tiDataSetId (Just AltJSON)
               _tiPayload
               bigQueryService
           where go

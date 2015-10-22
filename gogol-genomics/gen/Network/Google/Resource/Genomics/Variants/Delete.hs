@@ -33,14 +33,14 @@ module Network.Google.Resource.Genomics.Variants.Delete
     , VariantsDelete
 
     -- * Request Lenses
-    , vddXgafv
-    , vddUploadProtocol
-    , vddPp
-    , vddAccessToken
-    , vddUploadType
-    , vddBearerToken
-    , vddVariantId
-    , vddCallback
+    , vdXgafv
+    , vdUploadProtocol
+    , vdPp
+    , vdAccessToken
+    , vdUploadType
+    , vdBearerToken
+    , vdVariantId
+    , vdCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -65,101 +65,100 @@ type VariantsDeleteResource =
 --
 -- /See:/ 'variantsDelete' smart constructor.
 data VariantsDelete = VariantsDelete
-    { _vddXgafv          :: !(Maybe Text)
-    , _vddUploadProtocol :: !(Maybe Text)
-    , _vddPp             :: !Bool
-    , _vddAccessToken    :: !(Maybe Text)
-    , _vddUploadType     :: !(Maybe Text)
-    , _vddBearerToken    :: !(Maybe Text)
-    , _vddVariantId      :: !Text
-    , _vddCallback       :: !(Maybe Text)
+    { _vdXgafv          :: !(Maybe Text)
+    , _vdUploadProtocol :: !(Maybe Text)
+    , _vdPp             :: !Bool
+    , _vdAccessToken    :: !(Maybe Text)
+    , _vdUploadType     :: !(Maybe Text)
+    , _vdBearerToken    :: !(Maybe Text)
+    , _vdVariantId      :: !Text
+    , _vdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsDelete' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vddXgafv'
+-- * 'vdXgafv'
 --
--- * 'vddUploadProtocol'
+-- * 'vdUploadProtocol'
 --
--- * 'vddPp'
+-- * 'vdPp'
 --
--- * 'vddAccessToken'
+-- * 'vdAccessToken'
 --
--- * 'vddUploadType'
+-- * 'vdUploadType'
 --
--- * 'vddBearerToken'
+-- * 'vdBearerToken'
 --
--- * 'vddVariantId'
+-- * 'vdVariantId'
 --
--- * 'vddCallback'
+-- * 'vdCallback'
 variantsDelete
-    :: Text -- ^ 'vddVariantId'
+    :: Text -- ^ 'vdVariantId'
     -> VariantsDelete
-variantsDelete pVddVariantId_ =
+variantsDelete pVdVariantId_ =
     VariantsDelete
-    { _vddXgafv = Nothing
-    , _vddUploadProtocol = Nothing
-    , _vddPp = True
-    , _vddAccessToken = Nothing
-    , _vddUploadType = Nothing
-    , _vddBearerToken = Nothing
-    , _vddVariantId = pVddVariantId_
-    , _vddCallback = Nothing
+    { _vdXgafv = Nothing
+    , _vdUploadProtocol = Nothing
+    , _vdPp = True
+    , _vdAccessToken = Nothing
+    , _vdUploadType = Nothing
+    , _vdBearerToken = Nothing
+    , _vdVariantId = pVdVariantId_
+    , _vdCallback = Nothing
     }
 
 -- | V1 error format.
-vddXgafv :: Lens' VariantsDelete (Maybe Text)
-vddXgafv = lens _vddXgafv (\ s a -> s{_vddXgafv = a})
+vdXgafv :: Lens' VariantsDelete (Maybe Text)
+vdXgafv = lens _vdXgafv (\ s a -> s{_vdXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-vddUploadProtocol :: Lens' VariantsDelete (Maybe Text)
-vddUploadProtocol
-  = lens _vddUploadProtocol
-      (\ s a -> s{_vddUploadProtocol = a})
+vdUploadProtocol :: Lens' VariantsDelete (Maybe Text)
+vdUploadProtocol
+  = lens _vdUploadProtocol
+      (\ s a -> s{_vdUploadProtocol = a})
 
 -- | Pretty-print response.
-vddPp :: Lens' VariantsDelete Bool
-vddPp = lens _vddPp (\ s a -> s{_vddPp = a})
+vdPp :: Lens' VariantsDelete Bool
+vdPp = lens _vdPp (\ s a -> s{_vdPp = a})
 
 -- | OAuth access token.
-vddAccessToken :: Lens' VariantsDelete (Maybe Text)
-vddAccessToken
-  = lens _vddAccessToken
-      (\ s a -> s{_vddAccessToken = a})
+vdAccessToken :: Lens' VariantsDelete (Maybe Text)
+vdAccessToken
+  = lens _vdAccessToken
+      (\ s a -> s{_vdAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-vddUploadType :: Lens' VariantsDelete (Maybe Text)
-vddUploadType
-  = lens _vddUploadType
-      (\ s a -> s{_vddUploadType = a})
+vdUploadType :: Lens' VariantsDelete (Maybe Text)
+vdUploadType
+  = lens _vdUploadType (\ s a -> s{_vdUploadType = a})
 
 -- | OAuth bearer token.
-vddBearerToken :: Lens' VariantsDelete (Maybe Text)
-vddBearerToken
-  = lens _vddBearerToken
-      (\ s a -> s{_vddBearerToken = a})
+vdBearerToken :: Lens' VariantsDelete (Maybe Text)
+vdBearerToken
+  = lens _vdBearerToken
+      (\ s a -> s{_vdBearerToken = a})
 
 -- | The ID of the variant to be deleted.
-vddVariantId :: Lens' VariantsDelete Text
-vddVariantId
-  = lens _vddVariantId (\ s a -> s{_vddVariantId = a})
+vdVariantId :: Lens' VariantsDelete Text
+vdVariantId
+  = lens _vdVariantId (\ s a -> s{_vdVariantId = a})
 
 -- | JSONP
-vddCallback :: Lens' VariantsDelete (Maybe Text)
-vddCallback
-  = lens _vddCallback (\ s a -> s{_vddCallback = a})
+vdCallback :: Lens' VariantsDelete (Maybe Text)
+vdCallback
+  = lens _vdCallback (\ s a -> s{_vdCallback = a})
 
 instance GoogleRequest VariantsDelete where
         type Rs VariantsDelete = Empty
         requestClient VariantsDelete{..}
-          = go _vddVariantId _vddXgafv _vddUploadProtocol
-              (Just _vddPp)
-              _vddAccessToken
-              _vddUploadType
-              _vddBearerToken
-              _vddCallback
+          = go _vdVariantId _vdXgafv _vdUploadProtocol
+              (Just _vdPp)
+              _vdAccessToken
+              _vdUploadType
+              _vdBearerToken
+              _vdCallback
               (Just AltJSON)
               genomicsService
           where go

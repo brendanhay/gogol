@@ -474,11 +474,11 @@ instance ToJSON TargetableRemarketingListsListSortOrder where
 -- | Offset left unit for an asset. This is a read-only field. Applicable to
 -- the following creative types: all RICH_MEDIA.
 data CreativeAssetPositionLeftUnit
-    = OffsetUnitPercent
+    = OffSetUnitPercent
       -- ^ @OFFSET_UNIT_PERCENT@
-    | OffsetUnitPixel
+    | OffSetUnitPixel
       -- ^ @OFFSET_UNIT_PIXEL@
-    | OffsetUnitPixelFromCenter
+    | OffSetUnitPixelFromCenter
       -- ^ @OFFSET_UNIT_PIXEL_FROM_CENTER@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -486,16 +486,16 @@ instance Hashable CreativeAssetPositionLeftUnit
 
 instance FromText CreativeAssetPositionLeftUnit where
     fromText = \case
-        "OFFSET_UNIT_PERCENT" -> Just OffsetUnitPercent
-        "OFFSET_UNIT_PIXEL" -> Just OffsetUnitPixel
-        "OFFSET_UNIT_PIXEL_FROM_CENTER" -> Just OffsetUnitPixelFromCenter
+        "OFFSET_UNIT_PERCENT" -> Just OffSetUnitPercent
+        "OFFSET_UNIT_PIXEL" -> Just OffSetUnitPixel
+        "OFFSET_UNIT_PIXEL_FROM_CENTER" -> Just OffSetUnitPixelFromCenter
         _ -> Nothing
 
 instance ToText CreativeAssetPositionLeftUnit where
     toText = \case
-        OffsetUnitPercent -> "OFFSET_UNIT_PERCENT"
-        OffsetUnitPixel -> "OFFSET_UNIT_PIXEL"
-        OffsetUnitPixelFromCenter -> "OFFSET_UNIT_PIXEL_FROM_CENTER"
+        OffSetUnitPercent -> "OFFSET_UNIT_PERCENT"
+        OffSetUnitPixel -> "OFFSET_UNIT_PIXEL"
+        OffSetUnitPixelFromCenter -> "OFFSET_UNIT_PIXEL_FROM_CENTER"
 
 instance FromJSON CreativeAssetPositionLeftUnit where
     parseJSON = parseJSONText "CreativeAssetPositionLeftUnit"
@@ -4277,11 +4277,11 @@ instance ToJSON EventTagsListSortField where
 -- displayType is ASSET_DISPLAY_TYPE_OVERLAY. Applicable to the following
 -- creative types: all RICH_MEDIA.
 data CreativeAssetPositionTopUnit
-    = CAPTUOffsetUnitPercent
+    = CAPTUOffSetUnitPercent
       -- ^ @OFFSET_UNIT_PERCENT@
-    | CAPTUOffsetUnitPixel
+    | CAPTUOffSetUnitPixel
       -- ^ @OFFSET_UNIT_PIXEL@
-    | CAPTUOffsetUnitPixelFromCenter
+    | CAPTUOffSetUnitPixelFromCenter
       -- ^ @OFFSET_UNIT_PIXEL_FROM_CENTER@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -4289,16 +4289,16 @@ instance Hashable CreativeAssetPositionTopUnit
 
 instance FromText CreativeAssetPositionTopUnit where
     fromText = \case
-        "OFFSET_UNIT_PERCENT" -> Just CAPTUOffsetUnitPercent
-        "OFFSET_UNIT_PIXEL" -> Just CAPTUOffsetUnitPixel
-        "OFFSET_UNIT_PIXEL_FROM_CENTER" -> Just CAPTUOffsetUnitPixelFromCenter
+        "OFFSET_UNIT_PERCENT" -> Just CAPTUOffSetUnitPercent
+        "OFFSET_UNIT_PIXEL" -> Just CAPTUOffSetUnitPixel
+        "OFFSET_UNIT_PIXEL_FROM_CENTER" -> Just CAPTUOffSetUnitPixelFromCenter
         _ -> Nothing
 
 instance ToText CreativeAssetPositionTopUnit where
     toText = \case
-        CAPTUOffsetUnitPercent -> "OFFSET_UNIT_PERCENT"
-        CAPTUOffsetUnitPixel -> "OFFSET_UNIT_PIXEL"
-        CAPTUOffsetUnitPixelFromCenter -> "OFFSET_UNIT_PIXEL_FROM_CENTER"
+        CAPTUOffSetUnitPercent -> "OFFSET_UNIT_PERCENT"
+        CAPTUOffSetUnitPixel -> "OFFSET_UNIT_PIXEL"
+        CAPTUOffSetUnitPixelFromCenter -> "OFFSET_UNIT_PIXEL_FROM_CENTER"
 
 instance FromJSON CreativeAssetPositionTopUnit where
     parseJSON = parseJSONText "CreativeAssetPositionTopUnit"

@@ -257,7 +257,7 @@ instance ToJSON Change where
 data ResourceRecordSetsListResponse = ResourceRecordSetsListResponse
     { _rrslrNextPageToken :: !(Maybe Text)
     , _rrslrKind          :: !Text
-    , _rrslrRrsets        :: !(Maybe [ResourceRecordSet])
+    , _rrslrRrSets        :: !(Maybe [ResourceRecordSet])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResourceRecordSetsListResponse' with the minimum fields required to make a request.
@@ -268,14 +268,14 @@ data ResourceRecordSetsListResponse = ResourceRecordSetsListResponse
 --
 -- * 'rrslrKind'
 --
--- * 'rrslrRrsets'
+-- * 'rrslrRrSets'
 resourceRecordSetsListResponse
     :: ResourceRecordSetsListResponse
 resourceRecordSetsListResponse =
     ResourceRecordSetsListResponse
     { _rrslrNextPageToken = Nothing
     , _rrslrKind = "dns#resourceRecordSetsListResponse"
-    , _rrslrRrsets = Nothing
+    , _rrslrRrSets = Nothing
     }
 
 -- | The presence of this field indicates that there exist more results
@@ -298,9 +298,9 @@ rrslrKind
   = lens _rrslrKind (\ s a -> s{_rrslrKind = a})
 
 -- | The resource record set resources.
-rrslrRrsets :: Lens' ResourceRecordSetsListResponse [ResourceRecordSet]
-rrslrRrsets
-  = lens _rrslrRrsets (\ s a -> s{_rrslrRrsets = a}) .
+rrslrRrSets :: Lens' ResourceRecordSetsListResponse [ResourceRecordSet]
+rrslrRrSets
+  = lens _rrslrRrSets (\ s a -> s{_rrslrRrSets = a}) .
       _Default
       . _Coerce
 
@@ -321,7 +321,7 @@ instance ToJSON ResourceRecordSetsListResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _rrslrNextPageToken,
                   Just ("kind" .= _rrslrKind),
-                  ("rrsets" .=) <$> _rrslrRrsets])
+                  ("rrsets" .=) <$> _rrslrRrSets])
 
 -- | A unit of data that will be returned by the DNS servers.
 --
@@ -535,11 +535,11 @@ instance ToJSON ManagedZone where
 --
 -- /See:/ 'quota' smart constructor.
 data Quota = Quota
-    { _qRrsetDeletionsPerChange  :: !(Maybe Int32)
-    , _qRrsetsPerManagedZone     :: !(Maybe Int32)
+    { _qRrSetDeletionsPerChange  :: !(Maybe Int32)
+    , _qRrSetsPerManagedZone     :: !(Maybe Int32)
     , _qKind                     :: !Text
-    , _qResourceRecordsPerRrset  :: !(Maybe Int32)
-    , _qRrsetAdditionsPerChange  :: !(Maybe Int32)
+    , _qResourceRecordsPerRrSet  :: !(Maybe Int32)
+    , _qRrSetAdditionsPerChange  :: !(Maybe Int32)
     , _qManagedZones             :: !(Maybe Int32)
     , _qTotalRrDataSizePerChange :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -548,15 +548,15 @@ data Quota = Quota
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'qRrsetDeletionsPerChange'
+-- * 'qRrSetDeletionsPerChange'
 --
--- * 'qRrsetsPerManagedZone'
+-- * 'qRrSetsPerManagedZone'
 --
 -- * 'qKind'
 --
--- * 'qResourceRecordsPerRrset'
+-- * 'qResourceRecordsPerRrSet'
 --
--- * 'qRrsetAdditionsPerChange'
+-- * 'qRrSetAdditionsPerChange'
 --
 -- * 'qManagedZones'
 --
@@ -565,27 +565,27 @@ quota
     :: Quota
 quota =
     Quota
-    { _qRrsetDeletionsPerChange = Nothing
-    , _qRrsetsPerManagedZone = Nothing
+    { _qRrSetDeletionsPerChange = Nothing
+    , _qRrSetsPerManagedZone = Nothing
     , _qKind = "dns#quota"
-    , _qResourceRecordsPerRrset = Nothing
-    , _qRrsetAdditionsPerChange = Nothing
+    , _qResourceRecordsPerRrSet = Nothing
+    , _qRrSetAdditionsPerChange = Nothing
     , _qManagedZones = Nothing
     , _qTotalRrDataSizePerChange = Nothing
     }
 
 -- | Maximum allowed number of ResourceRecordSets to delete per
 -- ChangesCreateRequest.
-qRrsetDeletionsPerChange :: Lens' Quota (Maybe Int32)
-qRrsetDeletionsPerChange
-  = lens _qRrsetDeletionsPerChange
-      (\ s a -> s{_qRrsetDeletionsPerChange = a})
+qRrSetDeletionsPerChange :: Lens' Quota (Maybe Int32)
+qRrSetDeletionsPerChange
+  = lens _qRrSetDeletionsPerChange
+      (\ s a -> s{_qRrSetDeletionsPerChange = a})
 
 -- | Maximum allowed number of ResourceRecordSets per zone in the project.
-qRrsetsPerManagedZone :: Lens' Quota (Maybe Int32)
-qRrsetsPerManagedZone
-  = lens _qRrsetsPerManagedZone
-      (\ s a -> s{_qRrsetsPerManagedZone = a})
+qRrSetsPerManagedZone :: Lens' Quota (Maybe Int32)
+qRrSetsPerManagedZone
+  = lens _qRrSetsPerManagedZone
+      (\ s a -> s{_qRrSetsPerManagedZone = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dns#quota\".
@@ -593,17 +593,17 @@ qKind :: Lens' Quota Text
 qKind = lens _qKind (\ s a -> s{_qKind = a})
 
 -- | Maximum allowed number of ResourceRecords per ResourceRecordSet.
-qResourceRecordsPerRrset :: Lens' Quota (Maybe Int32)
-qResourceRecordsPerRrset
-  = lens _qResourceRecordsPerRrset
-      (\ s a -> s{_qResourceRecordsPerRrset = a})
+qResourceRecordsPerRrSet :: Lens' Quota (Maybe Int32)
+qResourceRecordsPerRrSet
+  = lens _qResourceRecordsPerRrSet
+      (\ s a -> s{_qResourceRecordsPerRrSet = a})
 
 -- | Maximum allowed number of ResourceRecordSets to add per
 -- ChangesCreateRequest.
-qRrsetAdditionsPerChange :: Lens' Quota (Maybe Int32)
-qRrsetAdditionsPerChange
-  = lens _qRrsetAdditionsPerChange
-      (\ s a -> s{_qRrsetAdditionsPerChange = a})
+qRrSetAdditionsPerChange :: Lens' Quota (Maybe Int32)
+qRrSetAdditionsPerChange
+  = lens _qRrSetAdditionsPerChange
+      (\ s a -> s{_qRrSetAdditionsPerChange = a})
 
 -- | Maximum allowed number of managed zones in the project.
 qManagedZones :: Lens' Quota (Maybe Int32)
@@ -636,14 +636,14 @@ instance ToJSON Quota where
           = object
               (catMaybes
                  [("rrsetDeletionsPerChange" .=) <$>
-                    _qRrsetDeletionsPerChange,
+                    _qRrSetDeletionsPerChange,
                   ("rrsetsPerManagedZone" .=) <$>
-                    _qRrsetsPerManagedZone,
+                    _qRrSetsPerManagedZone,
                   Just ("kind" .= _qKind),
                   ("resourceRecordsPerRrset" .=) <$>
-                    _qResourceRecordsPerRrset,
+                    _qResourceRecordsPerRrSet,
                   ("rrsetAdditionsPerChange" .=) <$>
-                    _qRrsetAdditionsPerChange,
+                    _qRrSetAdditionsPerChange,
                   ("managedZones" .=) <$> _qManagedZones,
                   ("totalRrdataSizePerChange" .=) <$>
                     _qTotalRrDataSizePerChange])

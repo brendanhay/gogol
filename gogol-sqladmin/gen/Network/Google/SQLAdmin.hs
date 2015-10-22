@@ -240,7 +240,7 @@ module Network.Google.SQLAdmin
     , dCollation
     , dSelfLink
     , dName
-    , dCharset
+    , dCharSet
     , dInstance
 
     -- ** SSLCertsCreateEphemeralRequest

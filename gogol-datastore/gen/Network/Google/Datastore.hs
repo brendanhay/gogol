@@ -27,22 +27,22 @@ module Network.Google.Datastore
     -- * Resources
 
     -- ** datastore.datasets.allocateIds
-    , module Network.Google.Resource.Datastore.Datasets.AllocateIds
+    , module Network.Google.Resource.Datastore.DataSets.AllocateIds
 
     -- ** datastore.datasets.beginTransaction
-    , module Network.Google.Resource.Datastore.Datasets.BeginTransaction
+    , module Network.Google.Resource.Datastore.DataSets.BeginTransaction
 
     -- ** datastore.datasets.commit
-    , module Network.Google.Resource.Datastore.Datasets.Commit
+    , module Network.Google.Resource.Datastore.DataSets.Commit
 
     -- ** datastore.datasets.lookup
-    , module Network.Google.Resource.Datastore.Datasets.Lookup
+    , module Network.Google.Resource.Datastore.DataSets.Lookup
 
     -- ** datastore.datasets.rollback
-    , module Network.Google.Resource.Datastore.Datasets.Rollback
+    , module Network.Google.Resource.Datastore.DataSets.Rollback
 
     -- ** datastore.datasets.runQuery
-    , module Network.Google.Resource.Datastore.Datasets.RunQuery
+    , module Network.Google.Resource.Datastore.DataSets.RunQuery
 
     -- * Types
 
@@ -74,7 +74,7 @@ module Network.Google.Datastore
     , PartitionId
     , partitionId
     , piNamespace
-    , piDatasetId
+    , piDataSetId
 
     -- ** QueryResultBatch
     , QueryResultBatch
@@ -235,7 +235,7 @@ module Network.Google.Datastore
     , query
     , qGroupBy
     , qStartCursor
-    , qOffset
+    , qOffSet
     , qEndCursor
     , qLimit
     , qProjection
@@ -322,12 +322,12 @@ module Network.Google.Datastore
 
 import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Datastore.Datasets.AllocateIds
-import           Network.Google.Resource.Datastore.Datasets.BeginTransaction
-import           Network.Google.Resource.Datastore.Datasets.Commit
-import           Network.Google.Resource.Datastore.Datasets.Lookup
-import           Network.Google.Resource.Datastore.Datasets.Rollback
-import           Network.Google.Resource.Datastore.Datasets.RunQuery
+import           Network.Google.Resource.Datastore.DataSets.AllocateIds
+import           Network.Google.Resource.Datastore.DataSets.BeginTransaction
+import           Network.Google.Resource.Datastore.DataSets.Commit
+import           Network.Google.Resource.Datastore.DataSets.Lookup
+import           Network.Google.Resource.Datastore.DataSets.Rollback
+import           Network.Google.Resource.Datastore.DataSets.RunQuery
 
 {- $resources
 TODO
@@ -335,9 +335,9 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google Cloud Datastore API service.
 type DatastoreAPI =
-     DatasetsBeginTransactionResource :<|>
-       DatasetsAllocateIdsResource
-       :<|> DatasetsRunQueryResource
-       :<|> DatasetsRollbackResource
-       :<|> DatasetsLookupResource
-       :<|> DatasetsCommitResource
+     DataSetsBeginTransactionResource :<|>
+       DataSetsAllocateIdsResource
+       :<|> DataSetsRunQueryResource
+       :<|> DataSetsRollbackResource
+       :<|> DataSetsLookupResource
+       :<|> DataSetsCommitResource

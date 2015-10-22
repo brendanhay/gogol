@@ -166,12 +166,12 @@ module Network.Google.Books
 
     -- * Types
 
-    -- ** Usersettings
-    , Usersettings
-    , usersettings
-    , uNotification
-    , uKind
-    , uNotesExport
+    -- ** UserSettings
+    , UserSettings
+    , userSettings
+    , usNotification
+    , usKind
+    , usNotesExport
 
     -- ** Annotations
     , Annotations
@@ -198,10 +198,10 @@ module Network.Google.Books
     , adKind
     , adItems
 
-    -- ** UsersettingsNotificationMoreFromAuthors
-    , UsersettingsNotificationMoreFromAuthors
-    , usersettingsNotificationMoreFromAuthors
-    , unmfaOptedState
+    -- ** UserSettingsNotificationMoreFromAuthors
+    , UserSettingsNotificationMoreFromAuthors
+    , userSettingsNotificationMoreFromAuthors
+    , usnmfaOptedState
 
     -- ** Volumeannotations
     , Volumeannotations
@@ -614,10 +614,10 @@ module Network.Google.Books
     -- ** VolumesListFilter
     , VolumesListFilter (..)
 
-    -- ** UsersettingsNotification
-    , UsersettingsNotification
-    , usersettingsNotification
-    , unMoreFromAuthors
+    -- ** UserSettingsNotification
+    , UserSettingsNotification
+    , userSettingsNotification
+    , usnMoreFromAuthors
 
     -- ** DictlayerDataDictWordsItemSensesItemSynonymsItem
     , DictlayerDataDictWordsItemSensesItemSynonymsItem
@@ -873,11 +873,11 @@ module Network.Google.Books
     , dTotalClusters
     , dClusters
 
-    -- ** UsersettingsNotesExport
-    , UsersettingsNotesExport
-    , usersettingsNotesExport
-    , uneFolderName
-    , uneIsEnabled
+    -- ** UserSettingsNotesExport
+    , UserSettingsNotesExport
+    , userSettingsNotesExport
+    , usneFolderName
+    , usneIsEnabled
 
     -- ** ConcurrentAccessRestriction
     , ConcurrentAccessRestriction
@@ -990,8 +990,8 @@ module Network.Google.Books
     -- ** BooksAnnotationsRange
     , BooksAnnotationsRange
     , booksAnnotationsRange
-    , barStartOffset
-    , barEndOffset
+    , barStartOffSet
+    , barEndOffSet
     , barEndPosition
     , barStartPosition
 

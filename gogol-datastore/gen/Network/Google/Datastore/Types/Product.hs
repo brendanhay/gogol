@@ -233,7 +233,7 @@ instance ToJSON Property where
 -- /See:/ 'partitionId' smart constructor.
 data PartitionId = PartitionId
     { _piNamespace :: !(Maybe Text)
-    , _piDatasetId :: !(Maybe Text)
+    , _piDataSetId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PartitionId' with the minimum fields required to make a request.
@@ -242,13 +242,13 @@ data PartitionId = PartitionId
 --
 -- * 'piNamespace'
 --
--- * 'piDatasetId'
+-- * 'piDataSetId'
 partitionId
     :: PartitionId
 partitionId =
     PartitionId
     { _piNamespace = Nothing
-    , _piDatasetId = Nothing
+    , _piDataSetId = Nothing
     }
 
 -- | The namespace.
@@ -257,9 +257,9 @@ piNamespace
   = lens _piNamespace (\ s a -> s{_piNamespace = a})
 
 -- | The dataset ID.
-piDatasetId :: Lens' PartitionId (Maybe Text)
-piDatasetId
-  = lens _piDatasetId (\ s a -> s{_piDatasetId = a})
+piDataSetId :: Lens' PartitionId (Maybe Text)
+piDataSetId
+  = lens _piDataSetId (\ s a -> s{_piDataSetId = a})
 
 instance FromJSON PartitionId where
         parseJSON
@@ -273,7 +273,7 @@ instance ToJSON PartitionId where
           = object
               (catMaybes
                  [("namespace" .=) <$> _piNamespace,
-                  ("datasetId" .=) <$> _piDatasetId])
+                  ("datasetId" .=) <$> _piDataSetId])
 
 -- | A batch of results produced by a query.
 --
@@ -1505,7 +1505,7 @@ instance ToJSON PropertyFilter where
 data Query = Query
     { _qGroupBy     :: !(Maybe [PropertyReference])
     , _qStartCursor :: !(Maybe Word8)
-    , _qOffset      :: !(Maybe Int32)
+    , _qOffSet      :: !(Maybe Int32)
     , _qEndCursor   :: !(Maybe Word8)
     , _qLimit       :: !(Maybe Int32)
     , _qProjection  :: !(Maybe [PropertyExpression])
@@ -1522,7 +1522,7 @@ data Query = Query
 --
 -- * 'qStartCursor'
 --
--- * 'qOffset'
+-- * 'qOffSet'
 --
 -- * 'qEndCursor'
 --
@@ -1541,7 +1541,7 @@ query =
     Query
     { _qGroupBy = Nothing
     , _qStartCursor = Nothing
-    , _qOffset = Nothing
+    , _qOffSet = Nothing
     , _qEndCursor = Nothing
     , _qLimit = Nothing
     , _qProjection = Nothing
@@ -1566,8 +1566,8 @@ qStartCursor
 
 -- | The number of results to skip. Applies before limit, but after all other
 -- constraints (optional, defaults to 0).
-qOffset :: Lens' Query (Maybe Int32)
-qOffset = lens _qOffset (\ s a -> s{_qOffset = a})
+qOffSet :: Lens' Query (Maybe Int32)
+qOffSet = lens _qOffSet (\ s a -> s{_qOffSet = a})
 
 -- | An ending point for the query results. Optional. Query cursors are
 -- returned in query result batches.
@@ -1625,7 +1625,7 @@ instance ToJSON Query where
               (catMaybes
                  [("groupBy" .=) <$> _qGroupBy,
                   ("startCursor" .=) <$> _qStartCursor,
-                  ("offset" .=) <$> _qOffset,
+                  ("offset" .=) <$> _qOffSet,
                   ("endCursor" .=) <$> _qEndCursor,
                   ("limit" .=) <$> _qLimit,
                   ("projection" .=) <$> _qProjection,

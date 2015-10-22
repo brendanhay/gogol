@@ -25,99 +25,99 @@ import           Network.Google.Prelude
 -- from a particular data source. A data point can be found in more than
 -- one dataset.
 --
--- /See:/ 'dataset' smart constructor.
-data Dataset = Dataset
-    { _dNextPageToken  :: !(Maybe Text)
-    , _dDataSourceId   :: !(Maybe Text)
-    , _dPoint          :: !(Maybe [DataPoint])
-    , _dMinStartTimeNs :: !(Maybe Int64)
-    , _dMaxEndTimeNs   :: !(Maybe Int64)
+-- /See:/ 'dataSet' smart constructor.
+data DataSet = DataSet
+    { _dsNextPageToken  :: !(Maybe Text)
+    , _dsDataSourceId   :: !(Maybe Text)
+    , _dsPoint          :: !(Maybe [DataPoint])
+    , _dsMinStartTimeNs :: !(Maybe Int64)
+    , _dsMaxEndTimeNs   :: !(Maybe Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Dataset' with the minimum fields required to make a request.
+-- | Creates a value of 'DataSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dNextPageToken'
+-- * 'dsNextPageToken'
 --
--- * 'dDataSourceId'
+-- * 'dsDataSourceId'
 --
--- * 'dPoint'
+-- * 'dsPoint'
 --
--- * 'dMinStartTimeNs'
+-- * 'dsMinStartTimeNs'
 --
--- * 'dMaxEndTimeNs'
-dataset
-    :: Dataset
-dataset =
-    Dataset
-    { _dNextPageToken = Nothing
-    , _dDataSourceId = Nothing
-    , _dPoint = Nothing
-    , _dMinStartTimeNs = Nothing
-    , _dMaxEndTimeNs = Nothing
+-- * 'dsMaxEndTimeNs'
+dataSet
+    :: DataSet
+dataSet =
+    DataSet
+    { _dsNextPageToken = Nothing
+    , _dsDataSourceId = Nothing
+    , _dsPoint = Nothing
+    , _dsMinStartTimeNs = Nothing
+    , _dsMaxEndTimeNs = Nothing
     }
 
 -- | This token will be set when a dataset is received in response to a GET
 -- request and the dataset is too large to be included in a single
 -- response. Provide this value in a subsequent GET request to return the
 -- next page of data points within this dataset.
-dNextPageToken :: Lens' Dataset (Maybe Text)
-dNextPageToken
-  = lens _dNextPageToken
-      (\ s a -> s{_dNextPageToken = a})
+dsNextPageToken :: Lens' DataSet (Maybe Text)
+dsNextPageToken
+  = lens _dsNextPageToken
+      (\ s a -> s{_dsNextPageToken = a})
 
 -- | The data stream ID of the data source that created the points in this
 -- dataset.
-dDataSourceId :: Lens' Dataset (Maybe Text)
-dDataSourceId
-  = lens _dDataSourceId
-      (\ s a -> s{_dDataSourceId = a})
+dsDataSourceId :: Lens' DataSet (Maybe Text)
+dsDataSourceId
+  = lens _dsDataSourceId
+      (\ s a -> s{_dsDataSourceId = a})
 
 -- | A partial list of data points contained in the dataset, ordered by
 -- largest endTimeNanos first. This list is considered complete when
 -- retrieving a small dataset and partial when patching a dataset or
 -- retrieving a dataset that is too large to include in a single response.
-dPoint :: Lens' Dataset [DataPoint]
-dPoint
-  = lens _dPoint (\ s a -> s{_dPoint = a}) . _Default .
-      _Coerce
+dsPoint :: Lens' DataSet [DataPoint]
+dsPoint
+  = lens _dsPoint (\ s a -> s{_dsPoint = a}) . _Default
+      . _Coerce
 
 -- | The smallest start time of all data points in this possibly partial
 -- representation of the dataset. Time is in nanoseconds from epoch. This
 -- should also match the first part of the dataset identifier.
-dMinStartTimeNs :: Lens' Dataset (Maybe Int64)
-dMinStartTimeNs
-  = lens _dMinStartTimeNs
-      (\ s a -> s{_dMinStartTimeNs = a})
+dsMinStartTimeNs :: Lens' DataSet (Maybe Int64)
+dsMinStartTimeNs
+  = lens _dsMinStartTimeNs
+      (\ s a -> s{_dsMinStartTimeNs = a})
 
 -- | The largest end time of all data points in this possibly partial
 -- representation of the dataset. Time is in nanoseconds from epoch. This
 -- should also match the first part of the dataset identifier.
-dMaxEndTimeNs :: Lens' Dataset (Maybe Int64)
-dMaxEndTimeNs
-  = lens _dMaxEndTimeNs
-      (\ s a -> s{_dMaxEndTimeNs = a})
+dsMaxEndTimeNs :: Lens' DataSet (Maybe Int64)
+dsMaxEndTimeNs
+  = lens _dsMaxEndTimeNs
+      (\ s a -> s{_dsMaxEndTimeNs = a})
 
-instance FromJSON Dataset where
+instance FromJSON DataSet where
         parseJSON
-          = withObject "Dataset"
+          = withObject "DataSet"
               (\ o ->
-                 Dataset <$>
+                 DataSet <$>
                    (o .:? "nextPageToken") <*> (o .:? "dataSourceId")
                      <*> (o .:? "point" .!= mempty)
                      <*> (o .:? "minStartTimeNs")
                      <*> (o .:? "maxEndTimeNs"))
 
-instance ToJSON Dataset where
-        toJSON Dataset{..}
+instance ToJSON DataSet where
+        toJSON DataSet{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _dNextPageToken,
-                  ("dataSourceId" .=) <$> _dDataSourceId,
-                  ("point" .=) <$> _dPoint,
-                  ("minStartTimeNs" .=) <$> _dMinStartTimeNs,
-                  ("maxEndTimeNs" .=) <$> _dMaxEndTimeNs])
+                 [("nextPageToken" .=) <$> _dsNextPageToken,
+                  ("dataSourceId" .=) <$> _dsDataSourceId,
+                  ("point" .=) <$> _dsPoint,
+                  ("minStartTimeNs" .=) <$> _dsMinStartTimeNs,
+                  ("maxEndTimeNs" .=) <$> _dsMaxEndTimeNs])
 
 -- | See:
 -- google3\/java\/com\/google\/android\/apps\/heart\/platform\/api\/Application.java
@@ -881,7 +881,7 @@ instance ToJSON ListSessionsResponse where
 -- /See:/ 'aggregateBucket' smart constructor.
 data AggregateBucket = AggregateBucket
     { _abEndTimeMillis   :: !(Maybe Int64)
-    , _abDataset         :: !(Maybe [Dataset])
+    , _abDataSet         :: !(Maybe [DataSet])
     , _abActivity        :: !(Maybe Int32)
     , _abType            :: !(Maybe AggregateBucketType)
     , _abStartTimeMillis :: !(Maybe Int64)
@@ -894,7 +894,7 @@ data AggregateBucket = AggregateBucket
 --
 -- * 'abEndTimeMillis'
 --
--- * 'abDataset'
+-- * 'abDataSet'
 --
 -- * 'abActivity'
 --
@@ -908,7 +908,7 @@ aggregateBucket
 aggregateBucket =
     AggregateBucket
     { _abEndTimeMillis = Nothing
-    , _abDataset = Nothing
+    , _abDataSet = Nothing
     , _abActivity = Nothing
     , _abType = Nothing
     , _abStartTimeMillis = Nothing
@@ -923,9 +923,9 @@ abEndTimeMillis
       (\ s a -> s{_abEndTimeMillis = a})
 
 -- | There will be one dataset per AggregateBy in the request.
-abDataset :: Lens' AggregateBucket [Dataset]
-abDataset
-  = lens _abDataset (\ s a -> s{_abDataset = a}) .
+abDataSet :: Lens' AggregateBucket [DataSet]
+abDataSet
+  = lens _abDataSet (\ s a -> s{_abDataSet = a}) .
       _Default
       . _Coerce
 
@@ -968,7 +968,7 @@ instance ToJSON AggregateBucket where
           = object
               (catMaybes
                  [("endTimeMillis" .=) <$> _abEndTimeMillis,
-                  ("dataset" .=) <$> _abDataset,
+                  ("dataset" .=) <$> _abDataSet,
                   ("activity" .=) <$> _abActivity,
                   ("type" .=) <$> _abType,
                   ("startTimeMillis" .=) <$> _abStartTimeMillis,

@@ -42,13 +42,13 @@ module Network.Google.BigQuery.Types
     , tlKind
     , tlTables
 
-    -- * DatasetListDatasetsItem
-    , DatasetListDatasetsItem
-    , datasetListDatasetsItem
-    , dldiFriendlyName
-    , dldiKind
-    , dldiDatasetReference
-    , dldiId
+    -- * DataSetListDataSetsItem
+    , DataSetListDataSetsItem
+    , dataSetListDataSetsItem
+    , dsldsiFriendlyName
+    , dsldsiKind
+    , dsldsiDataSetReference
+    , dsldsiId
 
     -- * TableDataList
     , TableDataList
@@ -102,21 +102,21 @@ module Network.Google.BigQuery.Types
     , jsQuery
     , jsExtract
 
-    -- * Dataset
-    , Dataset
-    , dataset
-    , dCreationTime
-    , dAccess
-    , dEtag
-    , dLocation
-    , dFriendlyName
-    , dKind
-    , dLastModifiedTime
-    , dDatasetReference
-    , dSelfLink
-    , dId
-    , dDefaultTableExpirationMs
-    , dDescription
+    -- * DataSet
+    , DataSet
+    , dataSet
+    , dsCreationTime
+    , dsAccess
+    , dsEtag
+    , dsLocation
+    , dsFriendlyName
+    , dsKind
+    , dsLastModifiedTime
+    , dsDataSetReference
+    , dsSelfLink
+    , dsId
+    , dsDefaultTableExpirationMs
+    , dsDescription
 
     -- * ExternalDataConfiguration
     , ExternalDataConfiguration
@@ -132,7 +132,7 @@ module Network.Google.BigQuery.Types
     -- * TableReference
     , TableReference
     , tableReference
-    , trDatasetId
+    , trDataSetId
     , trProjectId
     , trTableId
 
@@ -160,13 +160,13 @@ module Network.Google.BigQuery.Types
     , gqrrJobComplete
     , gqrrCacheHit
 
-    -- * DatasetList
-    , DatasetList
-    , datasetList
-    , dlEtag
-    , dlNextPageToken
-    , dlKind
-    , dlDatasets
+    -- * DataSetList
+    , DataSetList
+    , dataSetList
+    , dslEtag
+    , dslNextPageToken
+    , dslKind
+    , dslDataSets
 
     -- * QueryRequest
     , QueryRequest
@@ -178,7 +178,7 @@ module Network.Google.BigQuery.Types
     , qrTimeoutMs
     , qrDryRun
     , qrMaxResults
-    , qrDefaultDataset
+    , qrDefaultDataSet
 
     -- * JobsListProjection
     , JobsListProjection (..)
@@ -217,11 +217,11 @@ module Network.Google.BigQuery.Types
     -- * JobsListStateFilter
     , JobsListStateFilter (..)
 
-    -- * DatasetReference
-    , DatasetReference
-    , datasetReference
-    , drDatasetId
-    , drProjectId
+    -- * DataSetReference
+    , DataSetReference
+    , dataSetReference
+    , dsrDataSetId
+    , dsrProjectId
 
     -- * TableDataInsertAllRequest
     , TableDataInsertAllRequest
@@ -338,7 +338,7 @@ module Network.Google.BigQuery.Types
     , jcqAllowLargeResults
     , jcqQuery
     , jcqFlattenResults
-    , jcqDefaultDataset
+    , jcqDefaultDataSet
 
     -- * TableDataInsertAllRequestRowsItem
     , TableDataInsertAllRequestRowsItem
@@ -390,15 +390,15 @@ module Network.Google.BigQuery.Types
     , jsErrorResult
     , jsErrors
 
-    -- * DatasetAccessItem
-    , DatasetAccessItem
-    , datasetAccessItem
-    , daiGroupByEmail
-    , daiDomain
-    , daiSpecialGroup
-    , daiRole
-    , daiView
-    , daiUserByEmail
+    -- * DataSetAccessItem
+    , DataSetAccessItem
+    , dataSetAccessItem
+    , dsaiGroupByEmail
+    , dsaiDomain
+    , dsaiSpecialGroup
+    , dsaiRole
+    , dsaiView
+    , dsaiUserByEmail
 
     -- * TableDataInsertAllResponse
     , TableDataInsertAllResponse

@@ -47,8 +47,8 @@ type MyConfigUpdateUserSettingsResource =
      "myconfig" :>
        "updateUserSettings" :>
          QueryParam "alt" AltJSON :>
-           ReqBody '[JSON] Usersettings :>
-             Post '[JSON] Usersettings
+           ReqBody '[JSON] UserSettings :>
+             Post '[JSON] UserSettings
 
 -- | Sets the settings for the user. If a sub-object is specified, it will
 -- overwrite the existing sub-object stored in the server. Unspecified
@@ -56,7 +56,7 @@ type MyConfigUpdateUserSettingsResource =
 --
 -- /See:/ 'myConfigUpdateUserSettings' smart constructor.
 newtype MyConfigUpdateUserSettings = MyConfigUpdateUserSettings
-    { _mcuusPayload :: Usersettings
+    { _mcuusPayload :: UserSettings
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyConfigUpdateUserSettings' with the minimum fields required to make a request.
@@ -65,7 +65,7 @@ newtype MyConfigUpdateUserSettings = MyConfigUpdateUserSettings
 --
 -- * 'mcuusPayload'
 myConfigUpdateUserSettings
-    :: Usersettings -- ^ 'mcuusPayload'
+    :: UserSettings -- ^ 'mcuusPayload'
     -> MyConfigUpdateUserSettings
 myConfigUpdateUserSettings pMcuusPayload_ =
     MyConfigUpdateUserSettings
@@ -73,13 +73,13 @@ myConfigUpdateUserSettings pMcuusPayload_ =
     }
 
 -- | Multipart request metadata.
-mcuusPayload :: Lens' MyConfigUpdateUserSettings Usersettings
+mcuusPayload :: Lens' MyConfigUpdateUserSettings UserSettings
 mcuusPayload
   = lens _mcuusPayload (\ s a -> s{_mcuusPayload = a})
 
 instance GoogleRequest MyConfigUpdateUserSettings
          where
-        type Rs MyConfigUpdateUserSettings = Usersettings
+        type Rs MyConfigUpdateUserSettings = UserSettings
         requestClient MyConfigUpdateUserSettings{..}
           = go (Just AltJSON) _mcuusPayload booksService
           where go

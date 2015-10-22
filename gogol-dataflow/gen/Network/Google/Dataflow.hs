@@ -193,7 +193,7 @@ module Network.Google.Dataflow
     -- ** Environment
     , Environment
     , environment
-    , eDataset
+    , eDataSet
     , eExperiments
     , eWorkerPools
     , eClusterManagerAPIService
@@ -724,7 +724,7 @@ module Network.Google.Dataflow
     -- ** Position
     , Position
     , position
-    , pByteOffset
+    , pByteOffSet
     , pConcatPosition
     , pRecordIndex
     , pShufflePosition

@@ -42,7 +42,7 @@ import           Network.Google.Prelude
 type MyConfigGetUserSettingsResource =
      "myconfig" :>
        "getUserSettings" :>
-         QueryParam "alt" AltJSON :> Get '[JSON] Usersettings
+         QueryParam "alt" AltJSON :> Get '[JSON] UserSettings
 
 -- | Gets the current settings for the user.
 --
@@ -58,7 +58,7 @@ myConfigGetUserSettings
 myConfigGetUserSettings = MyConfigGetUserSettings
 
 instance GoogleRequest MyConfigGetUserSettings where
-        type Rs MyConfigGetUserSettings = Usersettings
+        type Rs MyConfigGetUserSettings = UserSettings
         requestClient MyConfigGetUserSettings{}
           = go (Just AltJSON) booksService
           where go

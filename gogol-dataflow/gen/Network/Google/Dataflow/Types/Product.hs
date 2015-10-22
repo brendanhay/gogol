@@ -1292,7 +1292,7 @@ instance ToJSON SourceGetMetadataResponse where
 --
 -- /See:/ 'environment' smart constructor.
 data Environment = Environment
-    { _eDataset                  :: !(Maybe Text)
+    { _eDataSet                  :: !(Maybe Text)
     , _eExperiments              :: !(Maybe [Text])
     , _eWorkerPools              :: !(Maybe [WorkerPool])
     , _eClusterManagerAPIService :: !(Maybe Text)
@@ -1307,7 +1307,7 @@ data Environment = Environment
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eDataset'
+-- * 'eDataSet'
 --
 -- * 'eExperiments'
 --
@@ -1328,7 +1328,7 @@ environment
     :: Environment
 environment =
     Environment
-    { _eDataset = Nothing
+    { _eDataSet = Nothing
     , _eExperiments = Nothing
     , _eWorkerPools = Nothing
     , _eClusterManagerAPIService = Nothing
@@ -1342,8 +1342,8 @@ environment =
 -- | The dataset for the current project where various workflow related
 -- tables are stored. The supported resource type is: Google BigQuery:
 -- bigquery.googleapis.com\/{dataset}
-eDataset :: Lens' Environment (Maybe Text)
-eDataset = lens _eDataset (\ s a -> s{_eDataset = a})
+eDataSet :: Lens' Environment (Maybe Text)
+eDataSet = lens _eDataSet (\ s a -> s{_eDataSet = a})
 
 -- | The list of experiments to enable.
 eExperiments :: Lens' Environment [Text]
@@ -1426,7 +1426,7 @@ instance ToJSON Environment where
         toJSON Environment{..}
           = object
               (catMaybes
-                 [("dataset" .=) <$> _eDataset,
+                 [("dataset" .=) <$> _eDataSet,
                   ("experiments" .=) <$> _eExperiments,
                   ("workerPools" .=) <$> _eWorkerPools,
                   ("clusterManagerApiService" .=) <$>
@@ -6105,7 +6105,7 @@ instance ToJSON LeaseWorkItemResponse where
 --
 -- /See:/ 'position' smart constructor.
 data Position = Position
-    { _pByteOffset      :: !(Maybe Int64)
+    { _pByteOffSet      :: !(Maybe Int64)
     , _pConcatPosition  :: !(Maybe ConcatPosition)
     , _pRecordIndex     :: !(Maybe Int64)
     , _pShufflePosition :: !(Maybe Text)
@@ -6117,7 +6117,7 @@ data Position = Position
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pByteOffset'
+-- * 'pByteOffSet'
 --
 -- * 'pConcatPosition'
 --
@@ -6132,7 +6132,7 @@ position
     :: Position
 position =
     Position
-    { _pByteOffset = Nothing
+    { _pByteOffSet = Nothing
     , _pConcatPosition = Nothing
     , _pRecordIndex = Nothing
     , _pShufflePosition = Nothing
@@ -6141,9 +6141,9 @@ position =
     }
 
 -- | Position is a byte offset.
-pByteOffset :: Lens' Position (Maybe Int64)
-pByteOffset
-  = lens _pByteOffset (\ s a -> s{_pByteOffset = a})
+pByteOffSet :: Lens' Position (Maybe Int64)
+pByteOffSet
+  = lens _pByteOffSet (\ s a -> s{_pByteOffSet = a})
 
 -- | CloudPosition is a concat position.
 pConcatPosition :: Lens' Position (Maybe ConcatPosition)
@@ -6187,7 +6187,7 @@ instance ToJSON Position where
         toJSON Position{..}
           = object
               (catMaybes
-                 [("byteOffset" .=) <$> _pByteOffset,
+                 [("byteOffset" .=) <$> _pByteOffSet,
                   ("concatPosition" .=) <$> _pConcatPosition,
                   ("recordIndex" .=) <$> _pRecordIndex,
                   ("shufflePosition" .=) <$> _pShufflePosition,

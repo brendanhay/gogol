@@ -33,14 +33,14 @@ module Network.Google.Resource.Genomics.Variants.Get
     , VariantsGet
 
     -- * Request Lenses
-    , vXgafv
-    , vUploadProtocol
-    , vPp
-    , vAccessToken
-    , vUploadType
-    , vBearerToken
-    , vVariantId
-    , vCallback
+    , vgXgafv
+    , vgUploadProtocol
+    , vgPp
+    , vgAccessToken
+    , vgUploadType
+    , vgBearerToken
+    , vgVariantId
+    , vgCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -65,97 +65,100 @@ type VariantsGetResource =
 --
 -- /See:/ 'variantsGet' smart constructor.
 data VariantsGet = VariantsGet
-    { _vXgafv          :: !(Maybe Text)
-    , _vUploadProtocol :: !(Maybe Text)
-    , _vPp             :: !Bool
-    , _vAccessToken    :: !(Maybe Text)
-    , _vUploadType     :: !(Maybe Text)
-    , _vBearerToken    :: !(Maybe Text)
-    , _vVariantId      :: !Text
-    , _vCallback       :: !(Maybe Text)
+    { _vgXgafv          :: !(Maybe Text)
+    , _vgUploadProtocol :: !(Maybe Text)
+    , _vgPp             :: !Bool
+    , _vgAccessToken    :: !(Maybe Text)
+    , _vgUploadType     :: !(Maybe Text)
+    , _vgBearerToken    :: !(Maybe Text)
+    , _vgVariantId      :: !Text
+    , _vgCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vXgafv'
+-- * 'vgXgafv'
 --
--- * 'vUploadProtocol'
+-- * 'vgUploadProtocol'
 --
--- * 'vPp'
+-- * 'vgPp'
 --
--- * 'vAccessToken'
+-- * 'vgAccessToken'
 --
--- * 'vUploadType'
+-- * 'vgUploadType'
 --
--- * 'vBearerToken'
+-- * 'vgBearerToken'
 --
--- * 'vVariantId'
+-- * 'vgVariantId'
 --
--- * 'vCallback'
+-- * 'vgCallback'
 variantsGet
-    :: Text -- ^ 'vVariantId'
+    :: Text -- ^ 'vgVariantId'
     -> VariantsGet
-variantsGet pVVariantId_ =
+variantsGet pVgVariantId_ =
     VariantsGet
-    { _vXgafv = Nothing
-    , _vUploadProtocol = Nothing
-    , _vPp = True
-    , _vAccessToken = Nothing
-    , _vUploadType = Nothing
-    , _vBearerToken = Nothing
-    , _vVariantId = pVVariantId_
-    , _vCallback = Nothing
+    { _vgXgafv = Nothing
+    , _vgUploadProtocol = Nothing
+    , _vgPp = True
+    , _vgAccessToken = Nothing
+    , _vgUploadType = Nothing
+    , _vgBearerToken = Nothing
+    , _vgVariantId = pVgVariantId_
+    , _vgCallback = Nothing
     }
 
 -- | V1 error format.
-vXgafv :: Lens' VariantsGet (Maybe Text)
-vXgafv = lens _vXgafv (\ s a -> s{_vXgafv = a})
+vgXgafv :: Lens' VariantsGet (Maybe Text)
+vgXgafv = lens _vgXgafv (\ s a -> s{_vgXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-vUploadProtocol :: Lens' VariantsGet (Maybe Text)
-vUploadProtocol
-  = lens _vUploadProtocol
-      (\ s a -> s{_vUploadProtocol = a})
+vgUploadProtocol :: Lens' VariantsGet (Maybe Text)
+vgUploadProtocol
+  = lens _vgUploadProtocol
+      (\ s a -> s{_vgUploadProtocol = a})
 
 -- | Pretty-print response.
-vPp :: Lens' VariantsGet Bool
-vPp = lens _vPp (\ s a -> s{_vPp = a})
+vgPp :: Lens' VariantsGet Bool
+vgPp = lens _vgPp (\ s a -> s{_vgPp = a})
 
 -- | OAuth access token.
-vAccessToken :: Lens' VariantsGet (Maybe Text)
-vAccessToken
-  = lens _vAccessToken (\ s a -> s{_vAccessToken = a})
+vgAccessToken :: Lens' VariantsGet (Maybe Text)
+vgAccessToken
+  = lens _vgAccessToken
+      (\ s a -> s{_vgAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-vUploadType :: Lens' VariantsGet (Maybe Text)
-vUploadType
-  = lens _vUploadType (\ s a -> s{_vUploadType = a})
+vgUploadType :: Lens' VariantsGet (Maybe Text)
+vgUploadType
+  = lens _vgUploadType (\ s a -> s{_vgUploadType = a})
 
 -- | OAuth bearer token.
-vBearerToken :: Lens' VariantsGet (Maybe Text)
-vBearerToken
-  = lens _vBearerToken (\ s a -> s{_vBearerToken = a})
+vgBearerToken :: Lens' VariantsGet (Maybe Text)
+vgBearerToken
+  = lens _vgBearerToken
+      (\ s a -> s{_vgBearerToken = a})
 
 -- | The ID of the variant.
-vVariantId :: Lens' VariantsGet Text
-vVariantId
-  = lens _vVariantId (\ s a -> s{_vVariantId = a})
+vgVariantId :: Lens' VariantsGet Text
+vgVariantId
+  = lens _vgVariantId (\ s a -> s{_vgVariantId = a})
 
 -- | JSONP
-vCallback :: Lens' VariantsGet (Maybe Text)
-vCallback
-  = lens _vCallback (\ s a -> s{_vCallback = a})
+vgCallback :: Lens' VariantsGet (Maybe Text)
+vgCallback
+  = lens _vgCallback (\ s a -> s{_vgCallback = a})
 
 instance GoogleRequest VariantsGet where
         type Rs VariantsGet = Variant
         requestClient VariantsGet{..}
-          = go _vVariantId _vXgafv _vUploadProtocol (Just _vPp)
-              _vAccessToken
-              _vUploadType
-              _vBearerToken
-              _vCallback
+          = go _vgVariantId _vgXgafv _vgUploadProtocol
+              (Just _vgPp)
+              _vgAccessToken
+              _vgUploadType
+              _vgBearerToken
+              _vgCallback
               (Just AltJSON)
               genomicsService
           where go

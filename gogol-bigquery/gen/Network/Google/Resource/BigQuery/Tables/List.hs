@@ -34,7 +34,7 @@ module Network.Google.Resource.BigQuery.Tables.List
     , TablesList
 
     -- * Request Lenses
-    , tlDatasetId
+    , tlDataSetId
     , tlPageToken
     , tlProjectId
     , tlMaxResults
@@ -60,7 +60,7 @@ type TablesListResource =
 --
 -- /See:/ 'tablesList' smart constructor.
 data TablesList = TablesList
-    { _tlDatasetId  :: !Text
+    { _tlDataSetId  :: !Text
     , _tlPageToken  :: !(Maybe Text)
     , _tlProjectId  :: !Text
     , _tlMaxResults :: !(Maybe Word32)
@@ -70,7 +70,7 @@ data TablesList = TablesList
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tlDatasetId'
+-- * 'tlDataSetId'
 --
 -- * 'tlPageToken'
 --
@@ -78,21 +78,21 @@ data TablesList = TablesList
 --
 -- * 'tlMaxResults'
 tablesList
-    :: Text -- ^ 'tlDatasetId'
+    :: Text -- ^ 'tlDataSetId'
     -> Text -- ^ 'tlProjectId'
     -> TablesList
-tablesList pTlDatasetId_ pTlProjectId_ =
+tablesList pTlDataSetId_ pTlProjectId_ =
     TablesList
-    { _tlDatasetId = pTlDatasetId_
+    { _tlDataSetId = pTlDataSetId_
     , _tlPageToken = Nothing
     , _tlProjectId = pTlProjectId_
     , _tlMaxResults = Nothing
     }
 
 -- | Dataset ID of the tables to list
-tlDatasetId :: Lens' TablesList Text
-tlDatasetId
-  = lens _tlDatasetId (\ s a -> s{_tlDatasetId = a})
+tlDataSetId :: Lens' TablesList Text
+tlDataSetId
+  = lens _tlDataSetId (\ s a -> s{_tlDataSetId = a})
 
 -- | Page token, returned by a previous call, to request the next page of
 -- results
@@ -113,7 +113,7 @@ tlMaxResults
 instance GoogleRequest TablesList where
         type Rs TablesList = TableList
         requestClient TablesList{..}
-          = go _tlProjectId _tlDatasetId _tlPageToken
+          = go _tlProjectId _tlDataSetId _tlPageToken
               _tlMaxResults
               (Just AltJSON)
               bigQueryService

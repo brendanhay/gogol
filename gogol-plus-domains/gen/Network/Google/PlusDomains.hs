@@ -539,8 +539,8 @@ module Network.Google.PlusDomains
     -- ** PersonCoverCoverInfo
     , PersonCoverCoverInfo
     , personCoverCoverInfo
-    , pcciTopImageOffset
-    , pcciLeftImageOffset
+    , pcciTopImageOffSet
+    , pcciLeftImageOffSet
 
     -- ** ActivityObjectResharers
     , ActivityObjectResharers

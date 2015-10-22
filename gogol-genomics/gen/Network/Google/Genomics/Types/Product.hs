@@ -369,7 +369,7 @@ instance ToJSON Variant where
 -- /See:/ 'listBasesResponse' smart constructor.
 data ListBasesResponse = ListBasesResponse
     { _lbrNextPageToken :: !(Maybe Text)
-    , _lbrOffset        :: !(Maybe Int64)
+    , _lbrOffSet        :: !(Maybe Int64)
     , _lbrSequence      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -379,7 +379,7 @@ data ListBasesResponse = ListBasesResponse
 --
 -- * 'lbrNextPageToken'
 --
--- * 'lbrOffset'
+-- * 'lbrOffSet'
 --
 -- * 'lbrSequence'
 listBasesResponse
@@ -387,7 +387,7 @@ listBasesResponse
 listBasesResponse =
     ListBasesResponse
     { _lbrNextPageToken = Nothing
-    , _lbrOffset = Nothing
+    , _lbrOffSet = Nothing
     , _lbrSequence = Nothing
     }
 
@@ -403,9 +403,9 @@ lbrNextPageToken
 -- | The offset position (0-based) of the given \`sequence\` from the start
 -- of this \`Reference\`. This value will differ for each page in a
 -- paginated request.
-lbrOffset :: Lens' ListBasesResponse (Maybe Int64)
-lbrOffset
-  = lens _lbrOffset (\ s a -> s{_lbrOffset = a})
+lbrOffSet :: Lens' ListBasesResponse (Maybe Int64)
+lbrOffSet
+  = lens _lbrOffSet (\ s a -> s{_lbrOffSet = a})
 
 -- | A substring of the bases that make up this reference.
 lbrSequence :: Lens' ListBasesResponse (Maybe Text)
@@ -425,7 +425,7 @@ instance ToJSON ListBasesResponse where
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lbrNextPageToken,
-                  ("offset" .=) <$> _lbrOffset,
+                  ("offset" .=) <$> _lbrOffSet,
                   ("sequence" .=) <$> _lbrSequence])
 
 -- | The response message for Operations.ListOperations.
@@ -524,69 +524,69 @@ instance ToJSON CancelOperationRequest where
 
 -- | A Dataset is a collection of genomic data.
 --
--- /See:/ 'dataset' smart constructor.
-data Dataset = Dataset
-    { _dName       :: !(Maybe Text)
-    , _dId         :: !(Maybe Text)
-    , _dProjectId  :: !(Maybe Text)
-    , _dCreateTime :: !(Maybe Text)
+-- /See:/ 'dataSet' smart constructor.
+data DataSet = DataSet
+    { _dsName       :: !(Maybe Text)
+    , _dsId         :: !(Maybe Text)
+    , _dsProjectId  :: !(Maybe Text)
+    , _dsCreateTime :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Dataset' with the minimum fields required to make a request.
+-- | Creates a value of 'DataSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dName'
+-- * 'dsName'
 --
--- * 'dId'
+-- * 'dsId'
 --
--- * 'dProjectId'
+-- * 'dsProjectId'
 --
--- * 'dCreateTime'
-dataset
-    :: Dataset
-dataset =
-    Dataset
-    { _dName = Nothing
-    , _dId = Nothing
-    , _dProjectId = Nothing
-    , _dCreateTime = Nothing
+-- * 'dsCreateTime'
+dataSet
+    :: DataSet
+dataSet =
+    DataSet
+    { _dsName = Nothing
+    , _dsId = Nothing
+    , _dsProjectId = Nothing
+    , _dsCreateTime = Nothing
     }
 
 -- | The dataset name.
-dName :: Lens' Dataset (Maybe Text)
-dName = lens _dName (\ s a -> s{_dName = a})
+dsName :: Lens' DataSet (Maybe Text)
+dsName = lens _dsName (\ s a -> s{_dsName = a})
 
 -- | The server-generated dataset ID, unique across all datasets.
-dId :: Lens' Dataset (Maybe Text)
-dId = lens _dId (\ s a -> s{_dId = a})
+dsId :: Lens' DataSet (Maybe Text)
+dsId = lens _dsId (\ s a -> s{_dsId = a})
 
 -- | The Google Developers Console project ID that this dataset belongs to.
-dProjectId :: Lens' Dataset (Maybe Text)
-dProjectId
-  = lens _dProjectId (\ s a -> s{_dProjectId = a})
+dsProjectId :: Lens' DataSet (Maybe Text)
+dsProjectId
+  = lens _dsProjectId (\ s a -> s{_dsProjectId = a})
 
 -- | The time this dataset was created, in seconds from the epoch.
-dCreateTime :: Lens' Dataset (Maybe Text)
-dCreateTime
-  = lens _dCreateTime (\ s a -> s{_dCreateTime = a})
+dsCreateTime :: Lens' DataSet (Maybe Text)
+dsCreateTime
+  = lens _dsCreateTime (\ s a -> s{_dsCreateTime = a})
 
-instance FromJSON Dataset where
+instance FromJSON DataSet where
         parseJSON
-          = withObject "Dataset"
+          = withObject "DataSet"
               (\ o ->
-                 Dataset <$>
+                 DataSet <$>
                    (o .:? "name") <*> (o .:? "id") <*>
                      (o .:? "projectId")
                      <*> (o .:? "createTime"))
 
-instance ToJSON Dataset where
-        toJSON Dataset{..}
+instance ToJSON DataSet where
+        toJSON DataSet{..}
           = object
               (catMaybes
-                 [("name" .=) <$> _dName, ("id" .=) <$> _dId,
-                  ("projectId" .=) <$> _dProjectId,
-                  ("createTime" .=) <$> _dCreateTime])
+                 [("name" .=) <$> _dsName, ("id" .=) <$> _dsId,
+                  ("projectId" .=) <$> _dsProjectId,
+                  ("createTime" .=) <$> _dsCreateTime])
 
 -- | A read alignment describes a linear alignment of a string of DNA to a
 -- reference sequence, in addition to metadata about the fragment (the
@@ -616,140 +616,139 @@ instance ToJSON Dataset where
 --
 -- /See:/ 'read'' smart constructor.
 data Read' = Read'
-    { _reaFragmentLength            :: !(Maybe Int32)
-    , _reaDuplicateFragment         :: !(Maybe Bool)
-    , _reaReadGroupSetId            :: !(Maybe Text)
-    , _reaNextMatePosition          :: !(Maybe Position)
-    , _reaFailedVendorQualityChecks :: !(Maybe Bool)
-    , _reaAlignment                 :: !(Maybe LinearAlignment)
-    , _reaFragmentName              :: !(Maybe Text)
-    , _reaNumberReads               :: !(Maybe Int32)
-    , _reaId                        :: !(Maybe Text)
-    , _reaSecondaryAlignment        :: !(Maybe Bool)
-    , _reaReadGroupId               :: !(Maybe Text)
-    , _reaSupplementaryAlignment    :: !(Maybe Bool)
-    , _reaAlignedSequence           :: !(Maybe Text)
-    , _reaProperPlacement           :: !(Maybe Bool)
-    , _reaInfo                      :: !(Maybe ReadInfo)
-    , _reaReadNumber                :: !(Maybe Int32)
-    , _reaAlignedQuality            :: !(Maybe [Int32])
+    { _rFragmentLength            :: !(Maybe Int32)
+    , _rDuplicateFragment         :: !(Maybe Bool)
+    , _rReadGroupSetId            :: !(Maybe Text)
+    , _rNextMatePosition          :: !(Maybe Position)
+    , _rFailedVendorQualityChecks :: !(Maybe Bool)
+    , _rAlignment                 :: !(Maybe LinearAlignment)
+    , _rFragmentName              :: !(Maybe Text)
+    , _rNumberReads               :: !(Maybe Int32)
+    , _rId                        :: !(Maybe Text)
+    , _rSecondaryAlignment        :: !(Maybe Bool)
+    , _rReadGroupId               :: !(Maybe Text)
+    , _rSupplementaryAlignment    :: !(Maybe Bool)
+    , _rAlignedSequence           :: !(Maybe Text)
+    , _rProperPlacement           :: !(Maybe Bool)
+    , _rInfo                      :: !(Maybe ReadInfo)
+    , _rReadNumber                :: !(Maybe Int32)
+    , _rAlignedQuality            :: !(Maybe [Int32])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Read' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'reaFragmentLength'
+-- * 'rFragmentLength'
 --
--- * 'reaDuplicateFragment'
+-- * 'rDuplicateFragment'
 --
--- * 'reaReadGroupSetId'
+-- * 'rReadGroupSetId'
 --
--- * 'reaNextMatePosition'
+-- * 'rNextMatePosition'
 --
--- * 'reaFailedVendorQualityChecks'
+-- * 'rFailedVendorQualityChecks'
 --
--- * 'reaAlignment'
+-- * 'rAlignment'
 --
--- * 'reaFragmentName'
+-- * 'rFragmentName'
 --
--- * 'reaNumberReads'
+-- * 'rNumberReads'
 --
--- * 'reaId'
+-- * 'rId'
 --
--- * 'reaSecondaryAlignment'
+-- * 'rSecondaryAlignment'
 --
--- * 'reaReadGroupId'
+-- * 'rReadGroupId'
 --
--- * 'reaSupplementaryAlignment'
+-- * 'rSupplementaryAlignment'
 --
--- * 'reaAlignedSequence'
+-- * 'rAlignedSequence'
 --
--- * 'reaProperPlacement'
+-- * 'rProperPlacement'
 --
--- * 'reaInfo'
+-- * 'rInfo'
 --
--- * 'reaReadNumber'
+-- * 'rReadNumber'
 --
--- * 'reaAlignedQuality'
+-- * 'rAlignedQuality'
 read'
     :: Read'
 read' =
     Read'
-    { _reaFragmentLength = Nothing
-    , _reaDuplicateFragment = Nothing
-    , _reaReadGroupSetId = Nothing
-    , _reaNextMatePosition = Nothing
-    , _reaFailedVendorQualityChecks = Nothing
-    , _reaAlignment = Nothing
-    , _reaFragmentName = Nothing
-    , _reaNumberReads = Nothing
-    , _reaId = Nothing
-    , _reaSecondaryAlignment = Nothing
-    , _reaReadGroupId = Nothing
-    , _reaSupplementaryAlignment = Nothing
-    , _reaAlignedSequence = Nothing
-    , _reaProperPlacement = Nothing
-    , _reaInfo = Nothing
-    , _reaReadNumber = Nothing
-    , _reaAlignedQuality = Nothing
+    { _rFragmentLength = Nothing
+    , _rDuplicateFragment = Nothing
+    , _rReadGroupSetId = Nothing
+    , _rNextMatePosition = Nothing
+    , _rFailedVendorQualityChecks = Nothing
+    , _rAlignment = Nothing
+    , _rFragmentName = Nothing
+    , _rNumberReads = Nothing
+    , _rId = Nothing
+    , _rSecondaryAlignment = Nothing
+    , _rReadGroupId = Nothing
+    , _rSupplementaryAlignment = Nothing
+    , _rAlignedSequence = Nothing
+    , _rProperPlacement = Nothing
+    , _rInfo = Nothing
+    , _rReadNumber = Nothing
+    , _rAlignedQuality = Nothing
     }
 
 -- | The observed length of the fragment, equivalent to TLEN in SAM.
-reaFragmentLength :: Lens' Read' (Maybe Int32)
-reaFragmentLength
-  = lens _reaFragmentLength
-      (\ s a -> s{_reaFragmentLength = a})
+rFragmentLength :: Lens' Read' (Maybe Int32)
+rFragmentLength
+  = lens _rFragmentLength
+      (\ s a -> s{_rFragmentLength = a})
 
 -- | The fragment is a PCR or optical duplicate (SAM flag 0x400)
-reaDuplicateFragment :: Lens' Read' (Maybe Bool)
-reaDuplicateFragment
-  = lens _reaDuplicateFragment
-      (\ s a -> s{_reaDuplicateFragment = a})
+rDuplicateFragment :: Lens' Read' (Maybe Bool)
+rDuplicateFragment
+  = lens _rDuplicateFragment
+      (\ s a -> s{_rDuplicateFragment = a})
 
 -- | The ID of the read group set this read belongs to. (Every read must
 -- belong to exactly one read group set.)
-reaReadGroupSetId :: Lens' Read' (Maybe Text)
-reaReadGroupSetId
-  = lens _reaReadGroupSetId
-      (\ s a -> s{_reaReadGroupSetId = a})
+rReadGroupSetId :: Lens' Read' (Maybe Text)
+rReadGroupSetId
+  = lens _rReadGroupSetId
+      (\ s a -> s{_rReadGroupSetId = a})
 
 -- | The mapping of the primary alignment of the
 -- \`(readNumber+1)%numberReads\` read in the fragment. It replaces mate
 -- position and mate strand in SAM.
-reaNextMatePosition :: Lens' Read' (Maybe Position)
-reaNextMatePosition
-  = lens _reaNextMatePosition
-      (\ s a -> s{_reaNextMatePosition = a})
+rNextMatePosition :: Lens' Read' (Maybe Position)
+rNextMatePosition
+  = lens _rNextMatePosition
+      (\ s a -> s{_rNextMatePosition = a})
 
 -- | SAM flag 0x200
-reaFailedVendorQualityChecks :: Lens' Read' (Maybe Bool)
-reaFailedVendorQualityChecks
-  = lens _reaFailedVendorQualityChecks
-      (\ s a -> s{_reaFailedVendorQualityChecks = a})
+rFailedVendorQualityChecks :: Lens' Read' (Maybe Bool)
+rFailedVendorQualityChecks
+  = lens _rFailedVendorQualityChecks
+      (\ s a -> s{_rFailedVendorQualityChecks = a})
 
 -- | The linear alignment for this alignment record. This field will be null
 -- if the read is unmapped.
-reaAlignment :: Lens' Read' (Maybe LinearAlignment)
-reaAlignment
-  = lens _reaAlignment (\ s a -> s{_reaAlignment = a})
+rAlignment :: Lens' Read' (Maybe LinearAlignment)
+rAlignment
+  = lens _rAlignment (\ s a -> s{_rAlignment = a})
 
 -- | The fragment name. Equivalent to QNAME (query template name) in SAM.
-reaFragmentName :: Lens' Read' (Maybe Text)
-reaFragmentName
-  = lens _reaFragmentName
-      (\ s a -> s{_reaFragmentName = a})
+rFragmentName :: Lens' Read' (Maybe Text)
+rFragmentName
+  = lens _rFragmentName
+      (\ s a -> s{_rFragmentName = a})
 
 -- | The number of reads in the fragment (extension to SAM flag 0x1).
-reaNumberReads :: Lens' Read' (Maybe Int32)
-reaNumberReads
-  = lens _reaNumberReads
-      (\ s a -> s{_reaNumberReads = a})
+rNumberReads :: Lens' Read' (Maybe Int32)
+rNumberReads
+  = lens _rNumberReads (\ s a -> s{_rNumberReads = a})
 
 -- | The server-generated read ID, unique across all reads. This is different
 -- from the \`fragmentName\`.
-reaId :: Lens' Read' (Maybe Text)
-reaId = lens _reaId (\ s a -> s{_reaId = a})
+rId :: Lens' Read' (Maybe Text)
+rId = lens _rId (\ s a -> s{_rId = a})
 
 -- | Whether this alignment is secondary. Equivalent to SAM flag 0x100. A
 -- secondary alignment represents an alternative to the primary alignment
@@ -757,17 +756,16 @@ reaId = lens _reaId (\ s a -> s{_reaId = a})
 -- map ambiguously to multiple coordinates in the genome. By convention,
 -- each read has one and only one alignment where both
 -- \`secondaryAlignment\` and \`supplementaryAlignment\` are false.
-reaSecondaryAlignment :: Lens' Read' (Maybe Bool)
-reaSecondaryAlignment
-  = lens _reaSecondaryAlignment
-      (\ s a -> s{_reaSecondaryAlignment = a})
+rSecondaryAlignment :: Lens' Read' (Maybe Bool)
+rSecondaryAlignment
+  = lens _rSecondaryAlignment
+      (\ s a -> s{_rSecondaryAlignment = a})
 
 -- | The ID of the read group this read belongs to. (Every read must belong
 -- to exactly one read group.)
-reaReadGroupId :: Lens' Read' (Maybe Text)
-reaReadGroupId
-  = lens _reaReadGroupId
-      (\ s a -> s{_reaReadGroupId = a})
+rReadGroupId :: Lens' Read' (Maybe Text)
+rReadGroupId
+  = lens _rReadGroupId (\ s a -> s{_rReadGroupId = a})
 
 -- | Whether this alignment is supplementary. Equivalent to SAM flag 0x800.
 -- Supplementary alignments are used in the representation of a chimeric
@@ -780,10 +778,10 @@ reaReadGroupId
 -- read will be hard clipped. The \`alignedSequence\` and
 -- \`alignedQuality\` fields in the alignment record will only represent
 -- the bases for its respective linear alignment.
-reaSupplementaryAlignment :: Lens' Read' (Maybe Bool)
-reaSupplementaryAlignment
-  = lens _reaSupplementaryAlignment
-      (\ s a -> s{_reaSupplementaryAlignment = a})
+rSupplementaryAlignment :: Lens' Read' (Maybe Bool)
+rSupplementaryAlignment
+  = lens _rSupplementaryAlignment
+      (\ s a -> s{_rSupplementaryAlignment = a})
 
 -- | The bases of the read sequence contained in this alignment record,
 -- *without CIGAR operations applied*. \`alignedSequence\` and
@@ -792,29 +790,28 @@ reaSupplementaryAlignment
 -- alignment, or if the read was trimmed. When this occurs, the CIGAR for
 -- this read will begin\/end with a hard clip operator that will indicate
 -- the length of the excised sequence.
-reaAlignedSequence :: Lens' Read' (Maybe Text)
-reaAlignedSequence
-  = lens _reaAlignedSequence
-      (\ s a -> s{_reaAlignedSequence = a})
+rAlignedSequence :: Lens' Read' (Maybe Text)
+rAlignedSequence
+  = lens _rAlignedSequence
+      (\ s a -> s{_rAlignedSequence = a})
 
 -- | The orientation and the distance between reads from the fragment are
 -- consistent with the sequencing protocol (SAM flag 0x2)
-reaProperPlacement :: Lens' Read' (Maybe Bool)
-reaProperPlacement
-  = lens _reaProperPlacement
-      (\ s a -> s{_reaProperPlacement = a})
+rProperPlacement :: Lens' Read' (Maybe Bool)
+rProperPlacement
+  = lens _rProperPlacement
+      (\ s a -> s{_rProperPlacement = a})
 
 -- | A map of additional read alignment information. This must be of the form
 -- map (string key mapping to a list of string values).
-reaInfo :: Lens' Read' (Maybe ReadInfo)
-reaInfo = lens _reaInfo (\ s a -> s{_reaInfo = a})
+rInfo :: Lens' Read' (Maybe ReadInfo)
+rInfo = lens _rInfo (\ s a -> s{_rInfo = a})
 
 -- | The read number in sequencing. 0-based and less than numberReads. This
 -- field replaces SAM flag 0x40 and 0x80.
-reaReadNumber :: Lens' Read' (Maybe Int32)
-reaReadNumber
-  = lens _reaReadNumber
-      (\ s a -> s{_reaReadNumber = a})
+rReadNumber :: Lens' Read' (Maybe Int32)
+rReadNumber
+  = lens _rReadNumber (\ s a -> s{_rReadNumber = a})
 
 -- | The quality of the read sequence contained in this alignment record.
 -- \`alignedSequence\` and \`alignedQuality\` may be shorter than the full
@@ -822,10 +819,10 @@ reaReadNumber
 -- chimeric alignment, or if the read was trimmed. When this occurs, the
 -- CIGAR for this read will begin\/end with a hard clip operator that will
 -- indicate the length of the excised sequence.
-reaAlignedQuality :: Lens' Read' [Int32]
-reaAlignedQuality
-  = lens _reaAlignedQuality
-      (\ s a -> s{_reaAlignedQuality = a})
+rAlignedQuality :: Lens' Read' [Int32]
+rAlignedQuality
+  = lens _rAlignedQuality
+      (\ s a -> s{_rAlignedQuality = a})
       . _Default
       . _Coerce
 
@@ -856,25 +853,25 @@ instance ToJSON Read' where
         toJSON Read'{..}
           = object
               (catMaybes
-                 [("fragmentLength" .=) <$> _reaFragmentLength,
-                  ("duplicateFragment" .=) <$> _reaDuplicateFragment,
-                  ("readGroupSetId" .=) <$> _reaReadGroupSetId,
-                  ("nextMatePosition" .=) <$> _reaNextMatePosition,
+                 [("fragmentLength" .=) <$> _rFragmentLength,
+                  ("duplicateFragment" .=) <$> _rDuplicateFragment,
+                  ("readGroupSetId" .=) <$> _rReadGroupSetId,
+                  ("nextMatePosition" .=) <$> _rNextMatePosition,
                   ("failedVendorQualityChecks" .=) <$>
-                    _reaFailedVendorQualityChecks,
-                  ("alignment" .=) <$> _reaAlignment,
-                  ("fragmentName" .=) <$> _reaFragmentName,
-                  ("numberReads" .=) <$> _reaNumberReads,
-                  ("id" .=) <$> _reaId,
-                  ("secondaryAlignment" .=) <$> _reaSecondaryAlignment,
-                  ("readGroupId" .=) <$> _reaReadGroupId,
+                    _rFailedVendorQualityChecks,
+                  ("alignment" .=) <$> _rAlignment,
+                  ("fragmentName" .=) <$> _rFragmentName,
+                  ("numberReads" .=) <$> _rNumberReads,
+                  ("id" .=) <$> _rId,
+                  ("secondaryAlignment" .=) <$> _rSecondaryAlignment,
+                  ("readGroupId" .=) <$> _rReadGroupId,
                   ("supplementaryAlignment" .=) <$>
-                    _reaSupplementaryAlignment,
-                  ("alignedSequence" .=) <$> _reaAlignedSequence,
-                  ("properPlacement" .=) <$> _reaProperPlacement,
-                  ("info" .=) <$> _reaInfo,
-                  ("readNumber" .=) <$> _reaReadNumber,
-                  ("alignedQuality" .=) <$> _reaAlignedQuality])
+                    _rSupplementaryAlignment,
+                  ("alignedSequence" .=) <$> _rAlignedSequence,
+                  ("properPlacement" .=) <$> _rProperPlacement,
+                  ("info" .=) <$> _rInfo,
+                  ("readNumber" .=) <$> _rReadNumber,
+                  ("alignedQuality" .=) <$> _rAlignedQuality])
 
 -- | A call represents the determination of genotype with respect to a
 -- particular variant. It may include associated information such as
@@ -1001,119 +998,121 @@ instance ToJSON VariantCall where
 --
 -- /See:/ 'readGroup' smart constructor.
 data ReadGroup = ReadGroup
-    { _rReferenceSetId      :: !(Maybe Text)
-    , _rPrograms            :: !(Maybe [Program])
-    , _rExperiment          :: !(Maybe Experiment)
-    , _rName                :: !(Maybe Text)
-    , _rDatasetId           :: !(Maybe Text)
-    , _rId                  :: !(Maybe Text)
-    , _rSampleId            :: !(Maybe Text)
-    , _rPredictedInsertSize :: !(Maybe Int32)
-    , _rDescription         :: !(Maybe Text)
-    , _rInfo                :: !(Maybe ReadGroupInfo)
+    { _reaReferenceSetId      :: !(Maybe Text)
+    , _reaPrograms            :: !(Maybe [Program])
+    , _reaExperiment          :: !(Maybe Experiment)
+    , _reaName                :: !(Maybe Text)
+    , _reaDataSetId           :: !(Maybe Text)
+    , _reaId                  :: !(Maybe Text)
+    , _reaSampleId            :: !(Maybe Text)
+    , _reaPredictedInsertSize :: !(Maybe Int32)
+    , _reaDescription         :: !(Maybe Text)
+    , _reaInfo                :: !(Maybe ReadGroupInfo)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rReferenceSetId'
+-- * 'reaReferenceSetId'
 --
--- * 'rPrograms'
+-- * 'reaPrograms'
 --
--- * 'rExperiment'
+-- * 'reaExperiment'
 --
--- * 'rName'
+-- * 'reaName'
 --
--- * 'rDatasetId'
+-- * 'reaDataSetId'
 --
--- * 'rId'
+-- * 'reaId'
 --
--- * 'rSampleId'
+-- * 'reaSampleId'
 --
--- * 'rPredictedInsertSize'
+-- * 'reaPredictedInsertSize'
 --
--- * 'rDescription'
+-- * 'reaDescription'
 --
--- * 'rInfo'
+-- * 'reaInfo'
 readGroup
     :: ReadGroup
 readGroup =
     ReadGroup
-    { _rReferenceSetId = Nothing
-    , _rPrograms = Nothing
-    , _rExperiment = Nothing
-    , _rName = Nothing
-    , _rDatasetId = Nothing
-    , _rId = Nothing
-    , _rSampleId = Nothing
-    , _rPredictedInsertSize = Nothing
-    , _rDescription = Nothing
-    , _rInfo = Nothing
+    { _reaReferenceSetId = Nothing
+    , _reaPrograms = Nothing
+    , _reaExperiment = Nothing
+    , _reaName = Nothing
+    , _reaDataSetId = Nothing
+    , _reaId = Nothing
+    , _reaSampleId = Nothing
+    , _reaPredictedInsertSize = Nothing
+    , _reaDescription = Nothing
+    , _reaInfo = Nothing
     }
 
 -- | The reference set the reads in this read group are aligned to. Required
 -- if there are any read alignments.
-rReferenceSetId :: Lens' ReadGroup (Maybe Text)
-rReferenceSetId
-  = lens _rReferenceSetId
-      (\ s a -> s{_rReferenceSetId = a})
+reaReferenceSetId :: Lens' ReadGroup (Maybe Text)
+reaReferenceSetId
+  = lens _reaReferenceSetId
+      (\ s a -> s{_reaReferenceSetId = a})
 
 -- | The programs used to generate this read group. Programs are always
 -- identical for all read groups within a read group set. For this reason,
 -- only the first read group in a returned set will have this field
 -- populated.
-rPrograms :: Lens' ReadGroup [Program]
-rPrograms
-  = lens _rPrograms (\ s a -> s{_rPrograms = a}) .
+reaPrograms :: Lens' ReadGroup [Program]
+reaPrograms
+  = lens _reaPrograms (\ s a -> s{_reaPrograms = a}) .
       _Default
       . _Coerce
 
 -- | The experiment used to generate this read group.
-rExperiment :: Lens' ReadGroup (Maybe Experiment)
-rExperiment
-  = lens _rExperiment (\ s a -> s{_rExperiment = a})
+reaExperiment :: Lens' ReadGroup (Maybe Experiment)
+reaExperiment
+  = lens _reaExperiment
+      (\ s a -> s{_reaExperiment = a})
 
 -- | The read group name. This corresponds to the \'RG ID field in the SAM
 -- spec.
-rName :: Lens' ReadGroup (Maybe Text)
-rName = lens _rName (\ s a -> s{_rName = a})
+reaName :: Lens' ReadGroup (Maybe Text)
+reaName = lens _reaName (\ s a -> s{_reaName = a})
 
 -- | The ID of the dataset this read group belongs to.
-rDatasetId :: Lens' ReadGroup (Maybe Text)
-rDatasetId
-  = lens _rDatasetId (\ s a -> s{_rDatasetId = a})
+reaDataSetId :: Lens' ReadGroup (Maybe Text)
+reaDataSetId
+  = lens _reaDataSetId (\ s a -> s{_reaDataSetId = a})
 
 -- | The server-generated read group ID, unique for all read groups. Note:
 -- This is different than the \`\'RG ID\` field in the SAM spec. For that
 -- value, see the \`name\` field.
-rId :: Lens' ReadGroup (Maybe Text)
-rId = lens _rId (\ s a -> s{_rId = a})
+reaId :: Lens' ReadGroup (Maybe Text)
+reaId = lens _reaId (\ s a -> s{_reaId = a})
 
 -- | The sample this read group\'s data was generated from. Note: This is not
 -- an actual ID within this repository, but rather an identifier for a
 -- sample which may be meaningful to some external system.
-rSampleId :: Lens' ReadGroup (Maybe Text)
-rSampleId
-  = lens _rSampleId (\ s a -> s{_rSampleId = a})
+reaSampleId :: Lens' ReadGroup (Maybe Text)
+reaSampleId
+  = lens _reaSampleId (\ s a -> s{_reaSampleId = a})
 
 -- | The predicted insert size of this read group. The insert size is the
 -- length the sequenced DNA fragment from end-to-end, not including the
 -- adapters.
-rPredictedInsertSize :: Lens' ReadGroup (Maybe Int32)
-rPredictedInsertSize
-  = lens _rPredictedInsertSize
-      (\ s a -> s{_rPredictedInsertSize = a})
+reaPredictedInsertSize :: Lens' ReadGroup (Maybe Int32)
+reaPredictedInsertSize
+  = lens _reaPredictedInsertSize
+      (\ s a -> s{_reaPredictedInsertSize = a})
 
 -- | A free-form text description of this read group.
-rDescription :: Lens' ReadGroup (Maybe Text)
-rDescription
-  = lens _rDescription (\ s a -> s{_rDescription = a})
+reaDescription :: Lens' ReadGroup (Maybe Text)
+reaDescription
+  = lens _reaDescription
+      (\ s a -> s{_reaDescription = a})
 
 -- | A map of additional read group information. This must be of the form map
 -- (string key mapping to a list of string values).
-rInfo :: Lens' ReadGroup (Maybe ReadGroupInfo)
-rInfo = lens _rInfo (\ s a -> s{_rInfo = a})
+reaInfo :: Lens' ReadGroup (Maybe ReadGroupInfo)
+reaInfo = lens _reaInfo (\ s a -> s{_reaInfo = a})
 
 instance FromJSON ReadGroup where
         parseJSON
@@ -1135,15 +1134,17 @@ instance ToJSON ReadGroup where
         toJSON ReadGroup{..}
           = object
               (catMaybes
-                 [("referenceSetId" .=) <$> _rReferenceSetId,
-                  ("programs" .=) <$> _rPrograms,
-                  ("experiment" .=) <$> _rExperiment,
-                  ("name" .=) <$> _rName,
-                  ("datasetId" .=) <$> _rDatasetId, ("id" .=) <$> _rId,
-                  ("sampleId" .=) <$> _rSampleId,
-                  ("predictedInsertSize" .=) <$> _rPredictedInsertSize,
-                  ("description" .=) <$> _rDescription,
-                  ("info" .=) <$> _rInfo])
+                 [("referenceSetId" .=) <$> _reaReferenceSetId,
+                  ("programs" .=) <$> _reaPrograms,
+                  ("experiment" .=) <$> _reaExperiment,
+                  ("name" .=) <$> _reaName,
+                  ("datasetId" .=) <$> _reaDataSetId,
+                  ("id" .=) <$> _reaId,
+                  ("sampleId" .=) <$> _reaSampleId,
+                  ("predictedInsertSize" .=) <$>
+                    _reaPredictedInsertSize,
+                  ("description" .=) <$> _reaDescription,
+                  ("info" .=) <$> _reaInfo])
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
@@ -1651,7 +1652,7 @@ instance ToJSON CoverageBucket where
 --
 -- /See:/ 'searchReadGroupSetsRequest' smart constructor.
 data SearchReadGroupSetsRequest = SearchReadGroupSetsRequest
-    { _srgsrDatasetIds :: !(Maybe [Text])
+    { _srgsrDataSetIds :: !(Maybe [Text])
     , _srgsrName       :: !(Maybe Text)
     , _srgsrPageToken  :: !(Maybe Text)
     , _srgsrPageSize   :: !(Maybe Int32)
@@ -1661,7 +1662,7 @@ data SearchReadGroupSetsRequest = SearchReadGroupSetsRequest
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'srgsrDatasetIds'
+-- * 'srgsrDataSetIds'
 --
 -- * 'srgsrName'
 --
@@ -1672,7 +1673,7 @@ searchReadGroupSetsRequest
     :: SearchReadGroupSetsRequest
 searchReadGroupSetsRequest =
     SearchReadGroupSetsRequest
-    { _srgsrDatasetIds = Nothing
+    { _srgsrDataSetIds = Nothing
     , _srgsrName = Nothing
     , _srgsrPageToken = Nothing
     , _srgsrPageSize = Nothing
@@ -1680,10 +1681,10 @@ searchReadGroupSetsRequest =
 
 -- | Restricts this query to read group sets within the given datasets. At
 -- least one ID must be provided.
-srgsrDatasetIds :: Lens' SearchReadGroupSetsRequest [Text]
-srgsrDatasetIds
-  = lens _srgsrDatasetIds
-      (\ s a -> s{_srgsrDatasetIds = a})
+srgsrDataSetIds :: Lens' SearchReadGroupSetsRequest [Text]
+srgsrDataSetIds
+  = lens _srgsrDataSetIds
+      (\ s a -> s{_srgsrDataSetIds = a})
       . _Default
       . _Coerce
 
@@ -1721,7 +1722,7 @@ instance ToJSON SearchReadGroupSetsRequest where
         toJSON SearchReadGroupSetsRequest{..}
           = object
               (catMaybes
-                 [("datasetIds" .=) <$> _srgsrDatasetIds,
+                 [("datasetIds" .=) <$> _srgsrDataSetIds,
                   ("name" .=) <$> _srgsrName,
                   ("pageToken" .=) <$> _srgsrPageToken,
                   ("pageSize" .=) <$> _srgsrPageSize])
@@ -2296,7 +2297,7 @@ instance ToJSON Experiment where
 --
 -- /See:/ 'searchVariantSetsRequest' smart constructor.
 data SearchVariantSetsRequest = SearchVariantSetsRequest
-    { _svsrDatasetIds :: !(Maybe [Text])
+    { _svsrDataSetIds :: !(Maybe [Text])
     , _svsrPageToken  :: !(Maybe Text)
     , _svsrPageSize   :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2305,7 +2306,7 @@ data SearchVariantSetsRequest = SearchVariantSetsRequest
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'svsrDatasetIds'
+-- * 'svsrDataSetIds'
 --
 -- * 'svsrPageToken'
 --
@@ -2314,17 +2315,17 @@ searchVariantSetsRequest
     :: SearchVariantSetsRequest
 searchVariantSetsRequest =
     SearchVariantSetsRequest
-    { _svsrDatasetIds = Nothing
+    { _svsrDataSetIds = Nothing
     , _svsrPageToken = Nothing
     , _svsrPageSize = Nothing
     }
 
 -- | Exactly one dataset ID must be provided here. Only variant sets which
 -- belong to this dataset will be returned.
-svsrDatasetIds :: Lens' SearchVariantSetsRequest [Text]
-svsrDatasetIds
-  = lens _svsrDatasetIds
-      (\ s a -> s{_svsrDatasetIds = a})
+svsrDataSetIds :: Lens' SearchVariantSetsRequest [Text]
+svsrDataSetIds
+  = lens _svsrDataSetIds
+      (\ s a -> s{_svsrDataSetIds = a})
       . _Default
       . _Coerce
 
@@ -2354,7 +2355,7 @@ instance ToJSON SearchVariantSetsRequest where
         toJSON SearchVariantSetsRequest{..}
           = object
               (catMaybes
-                 [("datasetIds" .=) <$> _svsrDatasetIds,
+                 [("datasetIds" .=) <$> _svsrDataSetIds,
                   ("pageToken" .=) <$> _svsrPageToken,
                   ("pageSize" .=) <$> _svsrPageSize])
 
@@ -2837,7 +2838,7 @@ instance ToJSON Range where
 data ReadGroupSet = ReadGroupSet
     { _rgsReferenceSetId :: !(Maybe Text)
     , _rgsName           :: !(Maybe Text)
-    , _rgsDatasetId      :: !(Maybe Text)
+    , _rgsDataSetId      :: !(Maybe Text)
     , _rgsId             :: !(Maybe Text)
     , _rgsInfo           :: !(Maybe ReadGroupSetInfo)
     , _rgsReadGroups     :: !(Maybe [ReadGroup])
@@ -2852,7 +2853,7 @@ data ReadGroupSet = ReadGroupSet
 --
 -- * 'rgsName'
 --
--- * 'rgsDatasetId'
+-- * 'rgsDataSetId'
 --
 -- * 'rgsId'
 --
@@ -2867,7 +2868,7 @@ readGroupSet =
     ReadGroupSet
     { _rgsReferenceSetId = Nothing
     , _rgsName = Nothing
-    , _rgsDatasetId = Nothing
+    , _rgsDataSetId = Nothing
     , _rgsId = Nothing
     , _rgsInfo = Nothing
     , _rgsReadGroups = Nothing
@@ -2886,9 +2887,9 @@ rgsName :: Lens' ReadGroupSet (Maybe Text)
 rgsName = lens _rgsName (\ s a -> s{_rgsName = a})
 
 -- | The dataset ID.
-rgsDatasetId :: Lens' ReadGroupSet (Maybe Text)
-rgsDatasetId
-  = lens _rgsDatasetId (\ s a -> s{_rgsDatasetId = a})
+rgsDataSetId :: Lens' ReadGroupSet (Maybe Text)
+rgsDataSetId
+  = lens _rgsDataSetId (\ s a -> s{_rgsDataSetId = a})
 
 -- | The server-generated read group set ID, unique for all read group sets.
 rgsId :: Lens' ReadGroupSet (Maybe Text)
@@ -2931,7 +2932,7 @@ instance ToJSON ReadGroupSet where
               (catMaybes
                  [("referenceSetId" .=) <$> _rgsReferenceSetId,
                   ("name" .=) <$> _rgsName,
-                  ("datasetId" .=) <$> _rgsDatasetId,
+                  ("datasetId" .=) <$> _rgsDataSetId,
                   ("id" .=) <$> _rgsId, ("info" .=) <$> _rgsInfo,
                   ("readGroups" .=) <$> _rgsReadGroups,
                   ("filename" .=) <$> _rgsFilename])
@@ -3269,7 +3270,7 @@ instance ToJSON LinearAlignment where
 --
 -- /See:/ 'variantSet' smart constructor.
 data VariantSet = VariantSet
-    { _vsDatasetId       :: !(Maybe Text)
+    { _vsDataSetId       :: !(Maybe Text)
     , _vsReferenceBounds :: !(Maybe [ReferenceBound])
     , _vsMetadata        :: !(Maybe [VariantSetMetadata])
     , _vsId              :: !(Maybe Text)
@@ -3279,7 +3280,7 @@ data VariantSet = VariantSet
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vsDatasetId'
+-- * 'vsDataSetId'
 --
 -- * 'vsReferenceBounds'
 --
@@ -3290,16 +3291,16 @@ variantSet
     :: VariantSet
 variantSet =
     VariantSet
-    { _vsDatasetId = Nothing
+    { _vsDataSetId = Nothing
     , _vsReferenceBounds = Nothing
     , _vsMetadata = Nothing
     , _vsId = Nothing
     }
 
 -- | The dataset to which this variant set belongs.
-vsDatasetId :: Lens' VariantSet (Maybe Text)
-vsDatasetId
-  = lens _vsDatasetId (\ s a -> s{_vsDatasetId = a})
+vsDataSetId :: Lens' VariantSet (Maybe Text)
+vsDataSetId
+  = lens _vsDataSetId (\ s a -> s{_vsDataSetId = a})
 
 -- | A list of all references used by the variants in a variant set with
 -- associated coordinate upper bounds for each one.
@@ -3335,7 +3336,7 @@ instance ToJSON VariantSet where
         toJSON VariantSet{..}
           = object
               (catMaybes
-                 [("datasetId" .=) <$> _vsDatasetId,
+                 [("datasetId" .=) <$> _vsDataSetId,
                   ("referenceBounds" .=) <$> _vsReferenceBounds,
                   ("metadata" .=) <$> _vsMetadata,
                   ("id" .=) <$> _vsId])
@@ -3383,64 +3384,64 @@ instance ToJSON TestIAMPermissionsResponse where
 
 -- | The dataset list response.
 --
--- /See:/ 'listDatasetsResponse' smart constructor.
-data ListDatasetsResponse = ListDatasetsResponse
-    { _ldrNextPageToken :: !(Maybe Text)
-    , _ldrDatasets      :: !(Maybe [Dataset])
+-- /See:/ 'listDataSetsResponse' smart constructor.
+data ListDataSetsResponse = ListDataSetsResponse
+    { _ldsrNextPageToken :: !(Maybe Text)
+    , _ldsrDataSets      :: !(Maybe [DataSet])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ListDatasetsResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'ListDataSetsResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ldrNextPageToken'
+-- * 'ldsrNextPageToken'
 --
--- * 'ldrDatasets'
-listDatasetsResponse
-    :: ListDatasetsResponse
-listDatasetsResponse =
-    ListDatasetsResponse
-    { _ldrNextPageToken = Nothing
-    , _ldrDatasets = Nothing
+-- * 'ldsrDataSets'
+listDataSetsResponse
+    :: ListDataSetsResponse
+listDataSetsResponse =
+    ListDataSetsResponse
+    { _ldsrNextPageToken = Nothing
+    , _ldsrDataSets = Nothing
     }
 
 -- | The continuation token, which is used to page through large result sets.
 -- Provide this value in a subsequent request to return the next page of
 -- results. This field will be empty if there aren\'t any additional
 -- results.
-ldrNextPageToken :: Lens' ListDatasetsResponse (Maybe Text)
-ldrNextPageToken
-  = lens _ldrNextPageToken
-      (\ s a -> s{_ldrNextPageToken = a})
+ldsrNextPageToken :: Lens' ListDataSetsResponse (Maybe Text)
+ldsrNextPageToken
+  = lens _ldsrNextPageToken
+      (\ s a -> s{_ldsrNextPageToken = a})
 
 -- | The list of matching Datasets.
-ldrDatasets :: Lens' ListDatasetsResponse [Dataset]
-ldrDatasets
-  = lens _ldrDatasets (\ s a -> s{_ldrDatasets = a}) .
-      _Default
+ldsrDataSets :: Lens' ListDataSetsResponse [DataSet]
+ldsrDataSets
+  = lens _ldsrDataSets (\ s a -> s{_ldsrDataSets = a})
+      . _Default
       . _Coerce
 
-instance FromJSON ListDatasetsResponse where
+instance FromJSON ListDataSetsResponse where
         parseJSON
-          = withObject "ListDatasetsResponse"
+          = withObject "ListDataSetsResponse"
               (\ o ->
-                 ListDatasetsResponse <$>
+                 ListDataSetsResponse <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "datasets" .!= mempty))
 
-instance ToJSON ListDatasetsResponse where
-        toJSON ListDatasetsResponse{..}
+instance ToJSON ListDataSetsResponse where
+        toJSON ListDataSetsResponse{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _ldrNextPageToken,
-                  ("datasets" .=) <$> _ldrDatasets])
+                 [("nextPageToken" .=) <$> _ldsrNextPageToken,
+                  ("datasets" .=) <$> _ldsrDataSets])
 
 -- | The read group set import request.
 --
 -- /See:/ 'importReadGroupSetsRequest' smart constructor.
 data ImportReadGroupSetsRequest = ImportReadGroupSetsRequest
     { _irgsrReferenceSetId    :: !(Maybe Text)
-    , _irgsrDatasetId         :: !(Maybe Text)
+    , _irgsrDataSetId         :: !(Maybe Text)
     , _irgsrSourceURIs        :: !(Maybe [Text])
     , _irgsrPartitionStrategy :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3451,7 +3452,7 @@ data ImportReadGroupSetsRequest = ImportReadGroupSetsRequest
 --
 -- * 'irgsrReferenceSetId'
 --
--- * 'irgsrDatasetId'
+-- * 'irgsrDataSetId'
 --
 -- * 'irgsrSourceURIs'
 --
@@ -3461,7 +3462,7 @@ importReadGroupSetsRequest
 importReadGroupSetsRequest =
     ImportReadGroupSetsRequest
     { _irgsrReferenceSetId = Nothing
-    , _irgsrDatasetId = Nothing
+    , _irgsrDataSetId = Nothing
     , _irgsrSourceURIs = Nothing
     , _irgsrPartitionStrategy = Nothing
     }
@@ -3478,10 +3479,10 @@ irgsrReferenceSetId
 
 -- | Required. The ID of the dataset these read group sets will belong to.
 -- The caller must have WRITE permissions to this dataset.
-irgsrDatasetId :: Lens' ImportReadGroupSetsRequest (Maybe Text)
-irgsrDatasetId
-  = lens _irgsrDatasetId
-      (\ s a -> s{_irgsrDatasetId = a})
+irgsrDataSetId :: Lens' ImportReadGroupSetsRequest (Maybe Text)
+irgsrDataSetId
+  = lens _irgsrDataSetId
+      (\ s a -> s{_irgsrDataSetId = a})
 
 -- | A list of URIs pointing at [BAM
 -- files](https:\/\/samtools.github.io\/hts-specs\/SAMv1.pdf) in Google
@@ -3514,7 +3515,7 @@ instance ToJSON ImportReadGroupSetsRequest where
           = object
               (catMaybes
                  [("referenceSetId" .=) <$> _irgsrReferenceSetId,
-                  ("datasetId" .=) <$> _irgsrDatasetId,
+                  ("datasetId" .=) <$> _irgsrDataSetId,
                   ("sourceUris" .=) <$> _irgsrSourceURIs,
                   ("partitionStrategy" .=) <$>
                     _irgsrPartitionStrategy])
@@ -3742,7 +3743,7 @@ instance ToJSON Policy where
 --
 -- /See:/ 'exportVariantSetRequest' smart constructor.
 data ExportVariantSetRequest = ExportVariantSetRequest
-    { _evsrBigQueryDataset :: !(Maybe Text)
+    { _evsrBigQueryDataSet :: !(Maybe Text)
     , _evsrBigQueryTable   :: !(Maybe Text)
     , _evsrFormat          :: !(Maybe Text)
     , _evsrCallSetIds      :: !(Maybe [Text])
@@ -3753,7 +3754,7 @@ data ExportVariantSetRequest = ExportVariantSetRequest
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'evsrBigQueryDataset'
+-- * 'evsrBigQueryDataSet'
 --
 -- * 'evsrBigQueryTable'
 --
@@ -3766,7 +3767,7 @@ exportVariantSetRequest
     :: ExportVariantSetRequest
 exportVariantSetRequest =
     ExportVariantSetRequest
-    { _evsrBigQueryDataset = Nothing
+    { _evsrBigQueryDataSet = Nothing
     , _evsrBigQueryTable = Nothing
     , _evsrFormat = Nothing
     , _evsrCallSetIds = Nothing
@@ -3776,10 +3777,10 @@ exportVariantSetRequest =
 -- | Required. The BigQuery dataset to export data to. This dataset must
 -- already exist. Note that this is distinct from the Genomics concept of
 -- \"dataset\".
-evsrBigQueryDataset :: Lens' ExportVariantSetRequest (Maybe Text)
-evsrBigQueryDataset
-  = lens _evsrBigQueryDataset
-      (\ s a -> s{_evsrBigQueryDataset = a})
+evsrBigQueryDataSet :: Lens' ExportVariantSetRequest (Maybe Text)
+evsrBigQueryDataSet
+  = lens _evsrBigQueryDataSet
+      (\ s a -> s{_evsrBigQueryDataSet = a})
 
 -- | Required. The BigQuery table to export data to. If the table doesn\'t
 -- exist, it will be created. If it already exists, it will be overwritten.
@@ -3824,7 +3825,7 @@ instance ToJSON ExportVariantSetRequest where
         toJSON ExportVariantSetRequest{..}
           = object
               (catMaybes
-                 [("bigqueryDataset" .=) <$> _evsrBigQueryDataset,
+                 [("bigqueryDataset" .=) <$> _evsrBigQueryDataSet,
                   ("bigqueryTable" .=) <$> _evsrBigQueryTable,
                   ("format" .=) <$> _evsrFormat,
                   ("callSetIds" .=) <$> _evsrCallSetIds,
@@ -4293,23 +4294,23 @@ instance ToJSON ReferenceBound where
                   ("referenceName" .=) <$> _rbReferenceName])
 
 --
--- /See:/ 'undeleteDatasetRequest' smart constructor.
-data UndeleteDatasetRequest =
-    UndeleteDatasetRequest
+-- /See:/ 'undeleteDataSetRequest' smart constructor.
+data UndeleteDataSetRequest =
+    UndeleteDataSetRequest
     deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'UndeleteDatasetRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'UndeleteDataSetRequest' with the minimum fields required to make a request.
 --
-undeleteDatasetRequest
-    :: UndeleteDatasetRequest
-undeleteDatasetRequest = UndeleteDatasetRequest
+undeleteDataSetRequest
+    :: UndeleteDataSetRequest
+undeleteDataSetRequest = UndeleteDataSetRequest
 
-instance FromJSON UndeleteDatasetRequest where
+instance FromJSON UndeleteDataSetRequest where
         parseJSON
-          = withObject "UndeleteDatasetRequest"
-              (\ o -> pure UndeleteDatasetRequest)
+          = withObject "UndeleteDataSetRequest"
+              (\ o -> pure UndeleteDataSetRequest)
 
-instance ToJSON UndeleteDatasetRequest where
+instance ToJSON UndeleteDataSetRequest where
         toJSON = const emptyObject
 
 -- | Associates \`members\` with a \`role\`.

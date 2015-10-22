@@ -148,75 +148,76 @@ instance ToJSON TableList where
                   ("tables" .=) <$> _tlTables])
 
 --
--- /See:/ 'datasetListDatasetsItem' smart constructor.
-data DatasetListDatasetsItem = DatasetListDatasetsItem
-    { _dldiFriendlyName     :: !(Maybe Text)
-    , _dldiKind             :: !Text
-    , _dldiDatasetReference :: !(Maybe DatasetReference)
-    , _dldiId               :: !(Maybe Text)
+-- /See:/ 'dataSetListDataSetsItem' smart constructor.
+data DataSetListDataSetsItem = DataSetListDataSetsItem
+    { _dsldsiFriendlyName     :: !(Maybe Text)
+    , _dsldsiKind             :: !Text
+    , _dsldsiDataSetReference :: !(Maybe DataSetReference)
+    , _dsldsiId               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetListDatasetsItem' with the minimum fields required to make a request.
+-- | Creates a value of 'DataSetListDataSetsItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dldiFriendlyName'
+-- * 'dsldsiFriendlyName'
 --
--- * 'dldiKind'
+-- * 'dsldsiKind'
 --
--- * 'dldiDatasetReference'
+-- * 'dsldsiDataSetReference'
 --
--- * 'dldiId'
-datasetListDatasetsItem
-    :: DatasetListDatasetsItem
-datasetListDatasetsItem =
-    DatasetListDatasetsItem
-    { _dldiFriendlyName = Nothing
-    , _dldiKind = "bigquery#dataset"
-    , _dldiDatasetReference = Nothing
-    , _dldiId = Nothing
+-- * 'dsldsiId'
+dataSetListDataSetsItem
+    :: DataSetListDataSetsItem
+dataSetListDataSetsItem =
+    DataSetListDataSetsItem
+    { _dsldsiFriendlyName = Nothing
+    , _dsldsiKind = "bigquery#dataset"
+    , _dsldsiDataSetReference = Nothing
+    , _dsldsiId = Nothing
     }
 
 -- | A descriptive name for the dataset, if one exists.
-dldiFriendlyName :: Lens' DatasetListDatasetsItem (Maybe Text)
-dldiFriendlyName
-  = lens _dldiFriendlyName
-      (\ s a -> s{_dldiFriendlyName = a})
+dsldsiFriendlyName :: Lens' DataSetListDataSetsItem (Maybe Text)
+dsldsiFriendlyName
+  = lens _dsldsiFriendlyName
+      (\ s a -> s{_dsldsiFriendlyName = a})
 
 -- | The resource type. This property always returns the value
 -- \"bigquery#dataset\".
-dldiKind :: Lens' DatasetListDatasetsItem Text
-dldiKind = lens _dldiKind (\ s a -> s{_dldiKind = a})
+dsldsiKind :: Lens' DataSetListDataSetsItem Text
+dsldsiKind
+  = lens _dsldsiKind (\ s a -> s{_dsldsiKind = a})
 
 -- | The dataset reference. Use this property to access specific parts of the
 -- dataset\'s ID, such as project ID or dataset ID.
-dldiDatasetReference :: Lens' DatasetListDatasetsItem (Maybe DatasetReference)
-dldiDatasetReference
-  = lens _dldiDatasetReference
-      (\ s a -> s{_dldiDatasetReference = a})
+dsldsiDataSetReference :: Lens' DataSetListDataSetsItem (Maybe DataSetReference)
+dsldsiDataSetReference
+  = lens _dsldsiDataSetReference
+      (\ s a -> s{_dsldsiDataSetReference = a})
 
 -- | The fully-qualified, unique, opaque ID of the dataset.
-dldiId :: Lens' DatasetListDatasetsItem (Maybe Text)
-dldiId = lens _dldiId (\ s a -> s{_dldiId = a})
+dsldsiId :: Lens' DataSetListDataSetsItem (Maybe Text)
+dsldsiId = lens _dsldsiId (\ s a -> s{_dsldsiId = a})
 
-instance FromJSON DatasetListDatasetsItem where
+instance FromJSON DataSetListDataSetsItem where
         parseJSON
-          = withObject "DatasetListDatasetsItem"
+          = withObject "DataSetListDataSetsItem"
               (\ o ->
-                 DatasetListDatasetsItem <$>
+                 DataSetListDataSetsItem <$>
                    (o .:? "friendlyName") <*>
                      (o .:? "kind" .!= "bigquery#dataset")
                      <*> (o .:? "datasetReference")
                      <*> (o .:? "id"))
 
-instance ToJSON DatasetListDatasetsItem where
-        toJSON DatasetListDatasetsItem{..}
+instance ToJSON DataSetListDataSetsItem where
+        toJSON DataSetListDataSetsItem{..}
           = object
               (catMaybes
-                 [("friendlyName" .=) <$> _dldiFriendlyName,
-                  Just ("kind" .= _dldiKind),
-                  ("datasetReference" .=) <$> _dldiDatasetReference,
-                  ("id" .=) <$> _dldiId])
+                 [("friendlyName" .=) <$> _dsldsiFriendlyName,
+                  Just ("kind" .= _dsldsiKind),
+                  ("datasetReference" .=) <$> _dsldsiDataSetReference,
+                  ("id" .=) <$> _dsldsiId])
 
 --
 -- /See:/ 'tableDataList' smart constructor.
@@ -697,73 +698,73 @@ instance ToJSON JobStatistics where
                   ("extract" .=) <$> _jsExtract])
 
 --
--- /See:/ 'dataset' smart constructor.
-data Dataset = Dataset
-    { _dCreationTime             :: !(Maybe Int64)
-    , _dAccess                   :: !(Maybe [DatasetAccessItem])
-    , _dEtag                     :: !(Maybe Text)
-    , _dLocation                 :: !(Maybe Text)
-    , _dFriendlyName             :: !(Maybe Text)
-    , _dKind                     :: !Text
-    , _dLastModifiedTime         :: !(Maybe Int64)
-    , _dDatasetReference         :: !(Maybe DatasetReference)
-    , _dSelfLink                 :: !(Maybe Text)
-    , _dId                       :: !(Maybe Text)
-    , _dDefaultTableExpirationMs :: !(Maybe Int64)
-    , _dDescription              :: !(Maybe Text)
+-- /See:/ 'dataSet' smart constructor.
+data DataSet = DataSet
+    { _dsCreationTime             :: !(Maybe Int64)
+    , _dsAccess                   :: !(Maybe [DataSetAccessItem])
+    , _dsEtag                     :: !(Maybe Text)
+    , _dsLocation                 :: !(Maybe Text)
+    , _dsFriendlyName             :: !(Maybe Text)
+    , _dsKind                     :: !Text
+    , _dsLastModifiedTime         :: !(Maybe Int64)
+    , _dsDataSetReference         :: !(Maybe DataSetReference)
+    , _dsSelfLink                 :: !(Maybe Text)
+    , _dsId                       :: !(Maybe Text)
+    , _dsDefaultTableExpirationMs :: !(Maybe Int64)
+    , _dsDescription              :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Dataset' with the minimum fields required to make a request.
+-- | Creates a value of 'DataSet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dCreationTime'
+-- * 'dsCreationTime'
 --
--- * 'dAccess'
+-- * 'dsAccess'
 --
--- * 'dEtag'
+-- * 'dsEtag'
 --
--- * 'dLocation'
+-- * 'dsLocation'
 --
--- * 'dFriendlyName'
+-- * 'dsFriendlyName'
 --
--- * 'dKind'
+-- * 'dsKind'
 --
--- * 'dLastModifiedTime'
+-- * 'dsLastModifiedTime'
 --
--- * 'dDatasetReference'
+-- * 'dsDataSetReference'
 --
--- * 'dSelfLink'
+-- * 'dsSelfLink'
 --
--- * 'dId'
+-- * 'dsId'
 --
--- * 'dDefaultTableExpirationMs'
+-- * 'dsDefaultTableExpirationMs'
 --
--- * 'dDescription'
-dataset
-    :: Dataset
-dataset =
-    Dataset
-    { _dCreationTime = Nothing
-    , _dAccess = Nothing
-    , _dEtag = Nothing
-    , _dLocation = Nothing
-    , _dFriendlyName = Nothing
-    , _dKind = "bigquery#dataset"
-    , _dLastModifiedTime = Nothing
-    , _dDatasetReference = Nothing
-    , _dSelfLink = Nothing
-    , _dId = Nothing
-    , _dDefaultTableExpirationMs = Nothing
-    , _dDescription = Nothing
+-- * 'dsDescription'
+dataSet
+    :: DataSet
+dataSet =
+    DataSet
+    { _dsCreationTime = Nothing
+    , _dsAccess = Nothing
+    , _dsEtag = Nothing
+    , _dsLocation = Nothing
+    , _dsFriendlyName = Nothing
+    , _dsKind = "bigquery#dataset"
+    , _dsLastModifiedTime = Nothing
+    , _dsDataSetReference = Nothing
+    , _dsSelfLink = Nothing
+    , _dsId = Nothing
+    , _dsDefaultTableExpirationMs = Nothing
+    , _dsDescription = Nothing
     }
 
 -- | [Output-only] The time when this dataset was created, in milliseconds
 -- since the epoch.
-dCreationTime :: Lens' Dataset (Maybe Int64)
-dCreationTime
-  = lens _dCreationTime
-      (\ s a -> s{_dCreationTime = a})
+dsCreationTime :: Lens' DataSet (Maybe Int64)
+dsCreationTime
+  = lens _dsCreationTime
+      (\ s a -> s{_dsCreationTime = a})
 
 -- | [Optional] An array of objects that define dataset access for one or
 -- more entities. You can set this property when inserting or updating a
@@ -773,56 +774,57 @@ dCreationTime
 -- access.role: READER; access.specialGroup: projectWriters; access.role:
 -- WRITER; access.specialGroup: projectOwners; access.role: OWNER;
 -- access.userByEmail: [dataset creator email]; access.role: OWNER;
-dAccess :: Lens' Dataset [DatasetAccessItem]
-dAccess
-  = lens _dAccess (\ s a -> s{_dAccess = a}) . _Default
+dsAccess :: Lens' DataSet [DataSetAccessItem]
+dsAccess
+  = lens _dsAccess (\ s a -> s{_dsAccess = a}) .
+      _Default
       . _Coerce
 
 -- | [Output-only] A hash of the resource.
-dEtag :: Lens' Dataset (Maybe Text)
-dEtag = lens _dEtag (\ s a -> s{_dEtag = a})
+dsEtag :: Lens' DataSet (Maybe Text)
+dsEtag = lens _dsEtag (\ s a -> s{_dsEtag = a})
 
 -- | [Experimental] The geographic location where the dataset should reside.
 -- Possible values include EU and US. The default value is US.
-dLocation :: Lens' Dataset (Maybe Text)
-dLocation
-  = lens _dLocation (\ s a -> s{_dLocation = a})
+dsLocation :: Lens' DataSet (Maybe Text)
+dsLocation
+  = lens _dsLocation (\ s a -> s{_dsLocation = a})
 
 -- | [Optional] A descriptive name for the dataset.
-dFriendlyName :: Lens' Dataset (Maybe Text)
-dFriendlyName
-  = lens _dFriendlyName
-      (\ s a -> s{_dFriendlyName = a})
+dsFriendlyName :: Lens' DataSet (Maybe Text)
+dsFriendlyName
+  = lens _dsFriendlyName
+      (\ s a -> s{_dsFriendlyName = a})
 
 -- | [Output-only] The resource type.
-dKind :: Lens' Dataset Text
-dKind = lens _dKind (\ s a -> s{_dKind = a})
+dsKind :: Lens' DataSet Text
+dsKind = lens _dsKind (\ s a -> s{_dsKind = a})
 
 -- | [Output-only] The date when this dataset or any of its tables was last
 -- modified, in milliseconds since the epoch.
-dLastModifiedTime :: Lens' Dataset (Maybe Int64)
-dLastModifiedTime
-  = lens _dLastModifiedTime
-      (\ s a -> s{_dLastModifiedTime = a})
+dsLastModifiedTime :: Lens' DataSet (Maybe Int64)
+dsLastModifiedTime
+  = lens _dsLastModifiedTime
+      (\ s a -> s{_dsLastModifiedTime = a})
 
 -- | [Required] A reference that identifies the dataset.
-dDatasetReference :: Lens' Dataset (Maybe DatasetReference)
-dDatasetReference
-  = lens _dDatasetReference
-      (\ s a -> s{_dDatasetReference = a})
+dsDataSetReference :: Lens' DataSet (Maybe DataSetReference)
+dsDataSetReference
+  = lens _dsDataSetReference
+      (\ s a -> s{_dsDataSetReference = a})
 
 -- | [Output-only] A URL that can be used to access the resource again. You
 -- can use this URL in Get or Update requests to the resource.
-dSelfLink :: Lens' Dataset (Maybe Text)
-dSelfLink
-  = lens _dSelfLink (\ s a -> s{_dSelfLink = a})
+dsSelfLink :: Lens' DataSet (Maybe Text)
+dsSelfLink
+  = lens _dsSelfLink (\ s a -> s{_dsSelfLink = a})
 
 -- | [Output-only] The fully-qualified unique name of the dataset in the
 -- format projectId:datasetId. The dataset name without the project name is
 -- given in the datasetId field. When creating a new dataset, leave this
 -- field blank, and instead specify the datasetId field.
-dId :: Lens' Dataset (Maybe Text)
-dId = lens _dId (\ s a -> s{_dId = a})
+dsId :: Lens' DataSet (Maybe Text)
+dsId = lens _dsId (\ s a -> s{_dsId = a})
 
 -- | [Experimental] The default lifetime of all tables in the dataset, in
 -- milliseconds. The minimum value is 3600000 milliseconds (one hour). Once
@@ -834,21 +836,22 @@ dId = lens _dId (\ s a -> s{_dId = a})
 -- is modified or removed before the table expires, or if you provide an
 -- explicit expirationTime when creating a table, that value takes
 -- precedence over the default expiration time indicated by this property.
-dDefaultTableExpirationMs :: Lens' Dataset (Maybe Int64)
-dDefaultTableExpirationMs
-  = lens _dDefaultTableExpirationMs
-      (\ s a -> s{_dDefaultTableExpirationMs = a})
+dsDefaultTableExpirationMs :: Lens' DataSet (Maybe Int64)
+dsDefaultTableExpirationMs
+  = lens _dsDefaultTableExpirationMs
+      (\ s a -> s{_dsDefaultTableExpirationMs = a})
 
 -- | [Optional] A user-friendly description of the dataset.
-dDescription :: Lens' Dataset (Maybe Text)
-dDescription
-  = lens _dDescription (\ s a -> s{_dDescription = a})
+dsDescription :: Lens' DataSet (Maybe Text)
+dsDescription
+  = lens _dsDescription
+      (\ s a -> s{_dsDescription = a})
 
-instance FromJSON Dataset where
+instance FromJSON DataSet where
         parseJSON
-          = withObject "Dataset"
+          = withObject "DataSet"
               (\ o ->
-                 Dataset <$>
+                 DataSet <$>
                    (o .:? "creationTime") <*>
                      (o .:? "access" .!= mempty)
                      <*> (o .:? "etag")
@@ -862,21 +865,21 @@ instance FromJSON Dataset where
                      <*> (o .:? "defaultTableExpirationMs")
                      <*> (o .:? "description"))
 
-instance ToJSON Dataset where
-        toJSON Dataset{..}
+instance ToJSON DataSet where
+        toJSON DataSet{..}
           = object
               (catMaybes
-                 [("creationTime" .=) <$> _dCreationTime,
-                  ("access" .=) <$> _dAccess, ("etag" .=) <$> _dEtag,
-                  ("location" .=) <$> _dLocation,
-                  ("friendlyName" .=) <$> _dFriendlyName,
-                  Just ("kind" .= _dKind),
-                  ("lastModifiedTime" .=) <$> _dLastModifiedTime,
-                  ("datasetReference" .=) <$> _dDatasetReference,
-                  ("selfLink" .=) <$> _dSelfLink, ("id" .=) <$> _dId,
+                 [("creationTime" .=) <$> _dsCreationTime,
+                  ("access" .=) <$> _dsAccess, ("etag" .=) <$> _dsEtag,
+                  ("location" .=) <$> _dsLocation,
+                  ("friendlyName" .=) <$> _dsFriendlyName,
+                  Just ("kind" .= _dsKind),
+                  ("lastModifiedTime" .=) <$> _dsLastModifiedTime,
+                  ("datasetReference" .=) <$> _dsDataSetReference,
+                  ("selfLink" .=) <$> _dsSelfLink, ("id" .=) <$> _dsId,
                   ("defaultTableExpirationMs" .=) <$>
-                    _dDefaultTableExpirationMs,
-                  ("description" .=) <$> _dDescription])
+                    _dsDefaultTableExpirationMs,
+                  ("description" .=) <$> _dsDescription])
 
 --
 -- /See:/ 'externalDataConfiguration' smart constructor.
@@ -1007,7 +1010,7 @@ instance ToJSON ExternalDataConfiguration where
 --
 -- /See:/ 'tableReference' smart constructor.
 data TableReference = TableReference
-    { _trDatasetId :: !(Maybe Text)
+    { _trDataSetId :: !(Maybe Text)
     , _trProjectId :: !(Maybe Text)
     , _trTableId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1016,7 +1019,7 @@ data TableReference = TableReference
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'trDatasetId'
+-- * 'trDataSetId'
 --
 -- * 'trProjectId'
 --
@@ -1025,15 +1028,15 @@ tableReference
     :: TableReference
 tableReference =
     TableReference
-    { _trDatasetId = Nothing
+    { _trDataSetId = Nothing
     , _trProjectId = Nothing
     , _trTableId = Nothing
     }
 
 -- | [Required] The ID of the dataset containing this table.
-trDatasetId :: Lens' TableReference (Maybe Text)
-trDatasetId
-  = lens _trDatasetId (\ s a -> s{_trDatasetId = a})
+trDataSetId :: Lens' TableReference (Maybe Text)
+trDataSetId
+  = lens _trDataSetId (\ s a -> s{_trDataSetId = a})
 
 -- | [Required] The ID of the project containing this table.
 trProjectId :: Lens' TableReference (Maybe Text)
@@ -1059,7 +1062,7 @@ instance ToJSON TableReference where
         toJSON TableReference{..}
           = object
               (catMaybes
-                 [("datasetId" .=) <$> _trDatasetId,
+                 [("datasetId" .=) <$> _trDataSetId,
                   ("projectId" .=) <$> _trProjectId,
                   ("tableId" .=) <$> _trTableId])
 
@@ -1315,79 +1318,79 @@ instance ToJSON GetQueryResultsResponse where
                   ("cacheHit" .=) <$> _gqrrCacheHit])
 
 --
--- /See:/ 'datasetList' smart constructor.
-data DatasetList = DatasetList
-    { _dlEtag          :: !(Maybe Text)
-    , _dlNextPageToken :: !(Maybe Text)
-    , _dlKind          :: !Text
-    , _dlDatasets      :: !(Maybe [DatasetListDatasetsItem])
+-- /See:/ 'dataSetList' smart constructor.
+data DataSetList = DataSetList
+    { _dslEtag          :: !(Maybe Text)
+    , _dslNextPageToken :: !(Maybe Text)
+    , _dslKind          :: !Text
+    , _dslDataSets      :: !(Maybe [DataSetListDataSetsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetList' with the minimum fields required to make a request.
+-- | Creates a value of 'DataSetList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dlEtag'
+-- * 'dslEtag'
 --
--- * 'dlNextPageToken'
+-- * 'dslNextPageToken'
 --
--- * 'dlKind'
+-- * 'dslKind'
 --
--- * 'dlDatasets'
-datasetList
-    :: DatasetList
-datasetList =
-    DatasetList
-    { _dlEtag = Nothing
-    , _dlNextPageToken = Nothing
-    , _dlKind = "bigquery#datasetList"
-    , _dlDatasets = Nothing
+-- * 'dslDataSets'
+dataSetList
+    :: DataSetList
+dataSetList =
+    DataSetList
+    { _dslEtag = Nothing
+    , _dslNextPageToken = Nothing
+    , _dslKind = "bigquery#datasetList"
+    , _dslDataSets = Nothing
     }
 
 -- | A hash value of the results page. You can use this property to determine
 -- if the page has changed since the last request.
-dlEtag :: Lens' DatasetList (Maybe Text)
-dlEtag = lens _dlEtag (\ s a -> s{_dlEtag = a})
+dslEtag :: Lens' DataSetList (Maybe Text)
+dslEtag = lens _dslEtag (\ s a -> s{_dslEtag = a})
 
 -- | A token that can be used to request the next results page. This property
 -- is omitted on the final results page.
-dlNextPageToken :: Lens' DatasetList (Maybe Text)
-dlNextPageToken
-  = lens _dlNextPageToken
-      (\ s a -> s{_dlNextPageToken = a})
+dslNextPageToken :: Lens' DataSetList (Maybe Text)
+dslNextPageToken
+  = lens _dslNextPageToken
+      (\ s a -> s{_dslNextPageToken = a})
 
 -- | The list type. This property always returns the value
 -- \"bigquery#datasetList\".
-dlKind :: Lens' DatasetList Text
-dlKind = lens _dlKind (\ s a -> s{_dlKind = a})
+dslKind :: Lens' DataSetList Text
+dslKind = lens _dslKind (\ s a -> s{_dslKind = a})
 
 -- | An array of the dataset resources in the project. Each resource contains
 -- basic information. For full information about a particular dataset
 -- resource, use the Datasets: get method. This property is omitted when
 -- there are no datasets in the project.
-dlDatasets :: Lens' DatasetList [DatasetListDatasetsItem]
-dlDatasets
-  = lens _dlDatasets (\ s a -> s{_dlDatasets = a}) .
+dslDataSets :: Lens' DataSetList [DataSetListDataSetsItem]
+dslDataSets
+  = lens _dslDataSets (\ s a -> s{_dslDataSets = a}) .
       _Default
       . _Coerce
 
-instance FromJSON DatasetList where
+instance FromJSON DataSetList where
         parseJSON
-          = withObject "DatasetList"
+          = withObject "DataSetList"
               (\ o ->
-                 DatasetList <$>
+                 DataSetList <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "bigquery#datasetList")
                      <*> (o .:? "datasets" .!= mempty))
 
-instance ToJSON DatasetList where
-        toJSON DatasetList{..}
+instance ToJSON DataSetList where
+        toJSON DataSetList{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _dlEtag,
-                  ("nextPageToken" .=) <$> _dlNextPageToken,
-                  Just ("kind" .= _dlKind),
-                  ("datasets" .=) <$> _dlDatasets])
+                 [("etag" .=) <$> _dslEtag,
+                  ("nextPageToken" .=) <$> _dslNextPageToken,
+                  Just ("kind" .= _dslKind),
+                  ("datasets" .=) <$> _dslDataSets])
 
 --
 -- /See:/ 'queryRequest' smart constructor.
@@ -1399,7 +1402,7 @@ data QueryRequest = QueryRequest
     , _qrTimeoutMs      :: !(Maybe Word32)
     , _qrDryRun         :: !(Maybe Bool)
     , _qrMaxResults     :: !(Maybe Word32)
-    , _qrDefaultDataset :: !(Maybe DatasetReference)
+    , _qrDefaultDataSet :: !(Maybe DataSetReference)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueryRequest' with the minimum fields required to make a request.
@@ -1420,7 +1423,7 @@ data QueryRequest = QueryRequest
 --
 -- * 'qrMaxResults'
 --
--- * 'qrDefaultDataset'
+-- * 'qrDefaultDataSet'
 queryRequest
     :: QueryRequest
 queryRequest =
@@ -1432,7 +1435,7 @@ queryRequest =
     , _qrTimeoutMs = Nothing
     , _qrDryRun = Nothing
     , _qrMaxResults = Nothing
-    , _qrDefaultDataset = Nothing
+    , _qrDefaultDataSet = Nothing
     }
 
 -- | [Optional] Whether to look for the result in the query cache. The query
@@ -1490,10 +1493,10 @@ qrMaxResults
 -- | [Optional] Specifies the default datasetId and projectId to assume for
 -- any unqualified table names in the query. If not set, all table names in
 -- the query string must be qualified in the format \'datasetId.tableId\'.
-qrDefaultDataset :: Lens' QueryRequest (Maybe DatasetReference)
-qrDefaultDataset
-  = lens _qrDefaultDataset
-      (\ s a -> s{_qrDefaultDataset = a})
+qrDefaultDataSet :: Lens' QueryRequest (Maybe DataSetReference)
+qrDefaultDataSet
+  = lens _qrDefaultDataSet
+      (\ s a -> s{_qrDefaultDataSet = a})
 
 instance FromJSON QueryRequest where
         parseJSON
@@ -1519,7 +1522,7 @@ instance ToJSON QueryRequest where
                   ("timeoutMs" .=) <$> _qrTimeoutMs,
                   ("dryRun" .=) <$> _qrDryRun,
                   ("maxResults" .=) <$> _qrMaxResults,
-                  ("defaultDataset" .=) <$> _qrDefaultDataset])
+                  ("defaultDataset" .=) <$> _qrDefaultDataSet])
 
 --
 -- /See:/ 'jobStatistics4' smart constructor.
@@ -1885,52 +1888,52 @@ instance ToJSON JobConfigurationLoad where
                   ("fieldDelimiter" .=) <$> _jclFieldDelimiter])
 
 --
--- /See:/ 'datasetReference' smart constructor.
-data DatasetReference = DatasetReference
-    { _drDatasetId :: !(Maybe Text)
-    , _drProjectId :: !(Maybe Text)
+-- /See:/ 'dataSetReference' smart constructor.
+data DataSetReference = DataSetReference
+    { _dsrDataSetId :: !(Maybe Text)
+    , _dsrProjectId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetReference' with the minimum fields required to make a request.
+-- | Creates a value of 'DataSetReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'drDatasetId'
+-- * 'dsrDataSetId'
 --
--- * 'drProjectId'
-datasetReference
-    :: DatasetReference
-datasetReference =
-    DatasetReference
-    { _drDatasetId = Nothing
-    , _drProjectId = Nothing
+-- * 'dsrProjectId'
+dataSetReference
+    :: DataSetReference
+dataSetReference =
+    DataSetReference
+    { _dsrDataSetId = Nothing
+    , _dsrProjectId = Nothing
     }
 
 -- | [Required] A unique ID for this dataset, without the project name. The
 -- ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores
 -- (_). The maximum length is 1,024 characters.
-drDatasetId :: Lens' DatasetReference (Maybe Text)
-drDatasetId
-  = lens _drDatasetId (\ s a -> s{_drDatasetId = a})
+dsrDataSetId :: Lens' DataSetReference (Maybe Text)
+dsrDataSetId
+  = lens _dsrDataSetId (\ s a -> s{_dsrDataSetId = a})
 
 -- | [Optional] The ID of the project containing this dataset.
-drProjectId :: Lens' DatasetReference (Maybe Text)
-drProjectId
-  = lens _drProjectId (\ s a -> s{_drProjectId = a})
+dsrProjectId :: Lens' DataSetReference (Maybe Text)
+dsrProjectId
+  = lens _dsrProjectId (\ s a -> s{_dsrProjectId = a})
 
-instance FromJSON DatasetReference where
+instance FromJSON DataSetReference where
         parseJSON
-          = withObject "DatasetReference"
+          = withObject "DataSetReference"
               (\ o ->
-                 DatasetReference <$>
+                 DataSetReference <$>
                    (o .:? "datasetId") <*> (o .:? "projectId"))
 
-instance ToJSON DatasetReference where
-        toJSON DatasetReference{..}
+instance ToJSON DataSetReference where
+        toJSON DataSetReference{..}
           = object
               (catMaybes
-                 [("datasetId" .=) <$> _drDatasetId,
-                  ("projectId" .=) <$> _drProjectId])
+                 [("datasetId" .=) <$> _dsrDataSetId,
+                  ("projectId" .=) <$> _dsrProjectId])
 
 --
 -- /See:/ 'tableDataInsertAllRequest' smart constructor.
@@ -2873,7 +2876,7 @@ data JobConfigurationQuery = JobConfigurationQuery
     , _jcqAllowLargeResults            :: !(Maybe Bool)
     , _jcqQuery                        :: !(Maybe Text)
     , _jcqFlattenResults               :: !Bool
-    , _jcqDefaultDataset               :: !(Maybe DatasetReference)
+    , _jcqDefaultDataSet               :: !(Maybe DataSetReference)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobConfigurationQuery' with the minimum fields required to make a request.
@@ -2902,7 +2905,7 @@ data JobConfigurationQuery = JobConfigurationQuery
 --
 -- * 'jcqFlattenResults'
 --
--- * 'jcqDefaultDataset'
+-- * 'jcqDefaultDataSet'
 jobConfigurationQuery
     :: JobConfigurationQuery
 jobConfigurationQuery =
@@ -2918,7 +2921,7 @@ jobConfigurationQuery =
     , _jcqAllowLargeResults = Nothing
     , _jcqQuery = Nothing
     , _jcqFlattenResults = True
-    , _jcqDefaultDataset = Nothing
+    , _jcqDefaultDataSet = Nothing
     }
 
 -- | [Optional] Describes the table where the query results should be stored.
@@ -3014,10 +3017,10 @@ jcqFlattenResults
 
 -- | [Optional] Specifies the default dataset to use for unqualified table
 -- names in the query.
-jcqDefaultDataset :: Lens' JobConfigurationQuery (Maybe DatasetReference)
-jcqDefaultDataset
-  = lens _jcqDefaultDataset
-      (\ s a -> s{_jcqDefaultDataset = a})
+jcqDefaultDataSet :: Lens' JobConfigurationQuery (Maybe DataSetReference)
+jcqDefaultDataSet
+  = lens _jcqDefaultDataSet
+      (\ s a -> s{_jcqDefaultDataSet = a})
 
 instance FromJSON JobConfigurationQuery where
         parseJSON
@@ -3053,7 +3056,7 @@ instance ToJSON JobConfigurationQuery where
                   ("allowLargeResults" .=) <$> _jcqAllowLargeResults,
                   ("query" .=) <$> _jcqQuery,
                   Just ("flattenResults" .= _jcqFlattenResults),
-                  ("defaultDataset" .=) <$> _jcqDefaultDataset])
+                  ("defaultDataset" .=) <$> _jcqDefaultDataSet])
 
 --
 -- /See:/ 'tableDataInsertAllRequestRowsItem' smart constructor.
@@ -3460,106 +3463,106 @@ instance ToJSON JobStatus where
                   ("errors" .=) <$> _jsErrors])
 
 --
--- /See:/ 'datasetAccessItem' smart constructor.
-data DatasetAccessItem = DatasetAccessItem
-    { _daiGroupByEmail :: !(Maybe Text)
-    , _daiDomain       :: !(Maybe Text)
-    , _daiSpecialGroup :: !(Maybe Text)
-    , _daiRole         :: !(Maybe Text)
-    , _daiView         :: !(Maybe TableReference)
-    , _daiUserByEmail  :: !(Maybe Text)
+-- /See:/ 'dataSetAccessItem' smart constructor.
+data DataSetAccessItem = DataSetAccessItem
+    { _dsaiGroupByEmail :: !(Maybe Text)
+    , _dsaiDomain       :: !(Maybe Text)
+    , _dsaiSpecialGroup :: !(Maybe Text)
+    , _dsaiRole         :: !(Maybe Text)
+    , _dsaiView         :: !(Maybe TableReference)
+    , _dsaiUserByEmail  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'DatasetAccessItem' with the minimum fields required to make a request.
+-- | Creates a value of 'DataSetAccessItem' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'daiGroupByEmail'
+-- * 'dsaiGroupByEmail'
 --
--- * 'daiDomain'
+-- * 'dsaiDomain'
 --
--- * 'daiSpecialGroup'
+-- * 'dsaiSpecialGroup'
 --
--- * 'daiRole'
+-- * 'dsaiRole'
 --
--- * 'daiView'
+-- * 'dsaiView'
 --
--- * 'daiUserByEmail'
-datasetAccessItem
-    :: DatasetAccessItem
-datasetAccessItem =
-    DatasetAccessItem
-    { _daiGroupByEmail = Nothing
-    , _daiDomain = Nothing
-    , _daiSpecialGroup = Nothing
-    , _daiRole = Nothing
-    , _daiView = Nothing
-    , _daiUserByEmail = Nothing
+-- * 'dsaiUserByEmail'
+dataSetAccessItem
+    :: DataSetAccessItem
+dataSetAccessItem =
+    DataSetAccessItem
+    { _dsaiGroupByEmail = Nothing
+    , _dsaiDomain = Nothing
+    , _dsaiSpecialGroup = Nothing
+    , _dsaiRole = Nothing
+    , _dsaiView = Nothing
+    , _dsaiUserByEmail = Nothing
     }
 
 -- | [Pick one] An email address of a Google Group to grant access to.
-daiGroupByEmail :: Lens' DatasetAccessItem (Maybe Text)
-daiGroupByEmail
-  = lens _daiGroupByEmail
-      (\ s a -> s{_daiGroupByEmail = a})
+dsaiGroupByEmail :: Lens' DataSetAccessItem (Maybe Text)
+dsaiGroupByEmail
+  = lens _dsaiGroupByEmail
+      (\ s a -> s{_dsaiGroupByEmail = a})
 
 -- | [Pick one] A domain to grant access to. Any users signed in with the
 -- domain specified will be granted the specified access. Example:
 -- \"example.com\".
-daiDomain :: Lens' DatasetAccessItem (Maybe Text)
-daiDomain
-  = lens _daiDomain (\ s a -> s{_daiDomain = a})
+dsaiDomain :: Lens' DataSetAccessItem (Maybe Text)
+dsaiDomain
+  = lens _dsaiDomain (\ s a -> s{_dsaiDomain = a})
 
 -- | [Pick one] A special group to grant access to. Possible values include:
 -- projectOwners: Owners of the enclosing project. projectReaders: Readers
 -- of the enclosing project. projectWriters: Writers of the enclosing
 -- project. allAuthenticatedUsers: All authenticated BigQuery users.
-daiSpecialGroup :: Lens' DatasetAccessItem (Maybe Text)
-daiSpecialGroup
-  = lens _daiSpecialGroup
-      (\ s a -> s{_daiSpecialGroup = a})
+dsaiSpecialGroup :: Lens' DataSetAccessItem (Maybe Text)
+dsaiSpecialGroup
+  = lens _dsaiSpecialGroup
+      (\ s a -> s{_dsaiSpecialGroup = a})
 
 -- | [Required] Describes the rights granted to the user specified by the
 -- other member of the access object. The following string values are
 -- supported: READER, WRITER, OWNER.
-daiRole :: Lens' DatasetAccessItem (Maybe Text)
-daiRole = lens _daiRole (\ s a -> s{_daiRole = a})
+dsaiRole :: Lens' DataSetAccessItem (Maybe Text)
+dsaiRole = lens _dsaiRole (\ s a -> s{_dsaiRole = a})
 
 -- | [Pick one] A view from a different dataset to grant access to. Queries
 -- executed against that view will have read access to tables in this
 -- dataset. The role field is not required when this field is set. If that
 -- view is updated by any user, access to the view needs to be granted
 -- again via an update operation.
-daiView :: Lens' DatasetAccessItem (Maybe TableReference)
-daiView = lens _daiView (\ s a -> s{_daiView = a})
+dsaiView :: Lens' DataSetAccessItem (Maybe TableReference)
+dsaiView = lens _dsaiView (\ s a -> s{_dsaiView = a})
 
 -- | [Pick one] An email address of a user to grant access to. For example:
 -- fred\'example.com.
-daiUserByEmail :: Lens' DatasetAccessItem (Maybe Text)
-daiUserByEmail
-  = lens _daiUserByEmail
-      (\ s a -> s{_daiUserByEmail = a})
+dsaiUserByEmail :: Lens' DataSetAccessItem (Maybe Text)
+dsaiUserByEmail
+  = lens _dsaiUserByEmail
+      (\ s a -> s{_dsaiUserByEmail = a})
 
-instance FromJSON DatasetAccessItem where
+instance FromJSON DataSetAccessItem where
         parseJSON
-          = withObject "DatasetAccessItem"
+          = withObject "DataSetAccessItem"
               (\ o ->
-                 DatasetAccessItem <$>
+                 DataSetAccessItem <$>
                    (o .:? "groupByEmail") <*> (o .:? "domain") <*>
                      (o .:? "specialGroup")
                      <*> (o .:? "role")
                      <*> (o .:? "view")
                      <*> (o .:? "userByEmail"))
 
-instance ToJSON DatasetAccessItem where
-        toJSON DatasetAccessItem{..}
+instance ToJSON DataSetAccessItem where
+        toJSON DataSetAccessItem{..}
           = object
               (catMaybes
-                 [("groupByEmail" .=) <$> _daiGroupByEmail,
-                  ("domain" .=) <$> _daiDomain,
-                  ("specialGroup" .=) <$> _daiSpecialGroup,
-                  ("role" .=) <$> _daiRole, ("view" .=) <$> _daiView,
-                  ("userByEmail" .=) <$> _daiUserByEmail])
+                 [("groupByEmail" .=) <$> _dsaiGroupByEmail,
+                  ("domain" .=) <$> _dsaiDomain,
+                  ("specialGroup" .=) <$> _dsaiSpecialGroup,
+                  ("role" .=) <$> _dsaiRole, ("view" .=) <$> _dsaiView,
+                  ("userByEmail" .=) <$> _dsaiUserByEmail])
 
 --
 -- /See:/ 'tableDataInsertAllResponse' smart constructor.

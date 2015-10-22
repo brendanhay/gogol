@@ -27,22 +27,22 @@ module Network.Google.BigQuery
     -- * Resources
 
     -- ** bigquery.datasets.delete
-    , module Network.Google.Resource.BigQuery.Datasets.Delete
+    , module Network.Google.Resource.BigQuery.DataSets.Delete
 
     -- ** bigquery.datasets.get
-    , module Network.Google.Resource.BigQuery.Datasets.Get
+    , module Network.Google.Resource.BigQuery.DataSets.Get
 
     -- ** bigquery.datasets.insert
-    , module Network.Google.Resource.BigQuery.Datasets.Insert
+    , module Network.Google.Resource.BigQuery.DataSets.Insert
 
     -- ** bigquery.datasets.list
-    , module Network.Google.Resource.BigQuery.Datasets.List
+    , module Network.Google.Resource.BigQuery.DataSets.List
 
     -- ** bigquery.datasets.patch
-    , module Network.Google.Resource.BigQuery.Datasets.Patch
+    , module Network.Google.Resource.BigQuery.DataSets.Patch
 
     -- ** bigquery.datasets.update
-    , module Network.Google.Resource.BigQuery.Datasets.Update
+    , module Network.Google.Resource.BigQuery.DataSets.Update
 
     -- ** bigquery.jobs.cancel
     , module Network.Google.Resource.BigQuery.Jobs.Cancel
@@ -106,13 +106,13 @@ module Network.Google.BigQuery
     , tlKind
     , tlTables
 
-    -- ** DatasetListDatasetsItem
-    , DatasetListDatasetsItem
-    , datasetListDatasetsItem
-    , dldiFriendlyName
-    , dldiKind
-    , dldiDatasetReference
-    , dldiId
+    -- ** DataSetListDataSetsItem
+    , DataSetListDataSetsItem
+    , dataSetListDataSetsItem
+    , dsldsiFriendlyName
+    , dsldsiKind
+    , dsldsiDataSetReference
+    , dsldsiId
 
     -- ** TableDataList
     , TableDataList
@@ -166,21 +166,21 @@ module Network.Google.BigQuery
     , jsQuery
     , jsExtract
 
-    -- ** Dataset
-    , Dataset
-    , dataset
-    , dCreationTime
-    , dAccess
-    , dEtag
-    , dLocation
-    , dFriendlyName
-    , dKind
-    , dLastModifiedTime
-    , dDatasetReference
-    , dSelfLink
-    , dId
-    , dDefaultTableExpirationMs
-    , dDescription
+    -- ** DataSet
+    , DataSet
+    , dataSet
+    , dsCreationTime
+    , dsAccess
+    , dsEtag
+    , dsLocation
+    , dsFriendlyName
+    , dsKind
+    , dsLastModifiedTime
+    , dsDataSetReference
+    , dsSelfLink
+    , dsId
+    , dsDefaultTableExpirationMs
+    , dsDescription
 
     -- ** ExternalDataConfiguration
     , ExternalDataConfiguration
@@ -196,7 +196,7 @@ module Network.Google.BigQuery
     -- ** TableReference
     , TableReference
     , tableReference
-    , trDatasetId
+    , trDataSetId
     , trProjectId
     , trTableId
 
@@ -224,13 +224,13 @@ module Network.Google.BigQuery
     , gqrrJobComplete
     , gqrrCacheHit
 
-    -- ** DatasetList
-    , DatasetList
-    , datasetList
-    , dlEtag
-    , dlNextPageToken
-    , dlKind
-    , dlDatasets
+    -- ** DataSetList
+    , DataSetList
+    , dataSetList
+    , dslEtag
+    , dslNextPageToken
+    , dslKind
+    , dslDataSets
 
     -- ** QueryRequest
     , QueryRequest
@@ -242,7 +242,7 @@ module Network.Google.BigQuery
     , qrTimeoutMs
     , qrDryRun
     , qrMaxResults
-    , qrDefaultDataset
+    , qrDefaultDataSet
 
     -- ** JobsListProjection
     , JobsListProjection (..)
@@ -281,11 +281,11 @@ module Network.Google.BigQuery
     -- ** JobsListStateFilter
     , JobsListStateFilter (..)
 
-    -- ** DatasetReference
-    , DatasetReference
-    , datasetReference
-    , drDatasetId
-    , drProjectId
+    -- ** DataSetReference
+    , DataSetReference
+    , dataSetReference
+    , dsrDataSetId
+    , dsrProjectId
 
     -- ** TableDataInsertAllRequest
     , TableDataInsertAllRequest
@@ -402,7 +402,7 @@ module Network.Google.BigQuery
     , jcqAllowLargeResults
     , jcqQuery
     , jcqFlattenResults
-    , jcqDefaultDataset
+    , jcqDefaultDataSet
 
     -- ** TableDataInsertAllRequestRowsItem
     , TableDataInsertAllRequestRowsItem
@@ -454,15 +454,15 @@ module Network.Google.BigQuery
     , jsErrorResult
     , jsErrors
 
-    -- ** DatasetAccessItem
-    , DatasetAccessItem
-    , datasetAccessItem
-    , daiGroupByEmail
-    , daiDomain
-    , daiSpecialGroup
-    , daiRole
-    , daiView
-    , daiUserByEmail
+    -- ** DataSetAccessItem
+    , DataSetAccessItem
+    , dataSetAccessItem
+    , dsaiGroupByEmail
+    , dsaiDomain
+    , dsaiSpecialGroup
+    , dsaiRole
+    , dsaiView
+    , dsaiUserByEmail
 
     -- ** TableDataInsertAllResponse
     , TableDataInsertAllResponse
@@ -535,12 +535,12 @@ module Network.Google.BigQuery
 
 import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.BigQuery.Datasets.Delete
-import           Network.Google.Resource.BigQuery.Datasets.Get
-import           Network.Google.Resource.BigQuery.Datasets.Insert
-import           Network.Google.Resource.BigQuery.Datasets.List
-import           Network.Google.Resource.BigQuery.Datasets.Patch
-import           Network.Google.Resource.BigQuery.Datasets.Update
+import           Network.Google.Resource.BigQuery.DataSets.Delete
+import           Network.Google.Resource.BigQuery.DataSets.Get
+import           Network.Google.Resource.BigQuery.DataSets.Insert
+import           Network.Google.Resource.BigQuery.DataSets.List
+import           Network.Google.Resource.BigQuery.DataSets.Patch
+import           Network.Google.Resource.BigQuery.DataSets.Update
 import           Network.Google.Resource.BigQuery.Jobs.Cancel
 import           Network.Google.Resource.BigQuery.Jobs.Get
 import           Network.Google.Resource.BigQuery.Jobs.GetQueryResults
@@ -577,9 +577,9 @@ type BigQueryAPI =
        :<|> TableDataListResource
        :<|> TableDataInsertAllResource
        :<|> ProjectsListResource
-       :<|> DatasetsInsertResource
-       :<|> DatasetsListResource
-       :<|> DatasetsPatchResource
-       :<|> DatasetsGetResource
-       :<|> DatasetsDeleteResource
-       :<|> DatasetsUpdateResource
+       :<|> DataSetsInsertResource
+       :<|> DataSetsListResource
+       :<|> DataSetsPatchResource
+       :<|> DataSetsGetResource
+       :<|> DataSetsDeleteResource
+       :<|> DataSetsUpdateResource

@@ -40,7 +40,7 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Control
     , lbcId
     , lbcDisplaySlate
     , lbcWalltime
-    , lbcOffsetTimeMs
+    , lbcOffSetTimeMs
     ) where
 
 import           Network.Google.Prelude
@@ -72,7 +72,7 @@ data LiveBroadcastsControl = LiveBroadcastsControl
     , _lbcId                            :: !Text
     , _lbcDisplaySlate                  :: !(Maybe Bool)
     , _lbcWalltime                      :: !(Maybe DateTime')
-    , _lbcOffsetTimeMs                  :: !(Maybe Word64)
+    , _lbcOffSetTimeMs                  :: !(Maybe Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsControl' with the minimum fields required to make a request.
@@ -91,7 +91,7 @@ data LiveBroadcastsControl = LiveBroadcastsControl
 --
 -- * 'lbcWalltime'
 --
--- * 'lbcOffsetTimeMs'
+-- * 'lbcOffSetTimeMs'
 liveBroadcastsControl
     :: Text -- ^ 'lbcPart'
     -> Text -- ^ 'lbcId'
@@ -104,7 +104,7 @@ liveBroadcastsControl pLbcPart_ pLbcId_ =
     , _lbcId = pLbcId_
     , _lbcDisplaySlate = Nothing
     , _lbcWalltime = Nothing
-    , _lbcOffsetTimeMs = Nothing
+    , _lbcOffSetTimeMs = Nothing
     }
 
 -- | The part parameter specifies a comma-separated list of one or more
@@ -180,10 +180,10 @@ lbcWalltime
 -- performs the action as soon as possible. See the Getting started guide
 -- for more details. Important: You should only specify a value for this
 -- parameter if your broadcast stream is delayed.
-lbcOffsetTimeMs :: Lens' LiveBroadcastsControl (Maybe Word64)
-lbcOffsetTimeMs
-  = lens _lbcOffsetTimeMs
-      (\ s a -> s{_lbcOffsetTimeMs = a})
+lbcOffSetTimeMs :: Lens' LiveBroadcastsControl (Maybe Word64)
+lbcOffSetTimeMs
+  = lens _lbcOffSetTimeMs
+      (\ s a -> s{_lbcOffSetTimeMs = a})
 
 instance GoogleRequest LiveBroadcastsControl where
         type Rs LiveBroadcastsControl = LiveBroadcast
@@ -193,7 +193,7 @@ instance GoogleRequest LiveBroadcastsControl where
               _lbcOnBehalfOfContentOwnerChannel
               _lbcDisplaySlate
               _lbcWalltime
-              _lbcOffsetTimeMs
+              _lbcOffSetTimeMs
               (Just AltJSON)
               youTubeService
           where go

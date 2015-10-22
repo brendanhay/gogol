@@ -274,6 +274,9 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("unit",        "Unit")
          , ("upload",      "Upload")
          , ("user",        "User")
+         , ("bucket",      "Bucket")
+         , ("([^se])set",  "$1Set")
+         , ("group",       "Group")
          ]
 
 acronyms :: [(String, String)]

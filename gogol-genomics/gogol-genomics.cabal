@@ -36,49 +36,49 @@ library
     exposed-modules:
           Network.Google.Genomics
         , Network.Google.Genomics.Types
-        , Network.Google.Resource.Genomics.Callsets.Create
-        , Network.Google.Resource.Genomics.Callsets.Delete
-        , Network.Google.Resource.Genomics.Callsets.Get
-        , Network.Google.Resource.Genomics.Callsets.Patch
-        , Network.Google.Resource.Genomics.Callsets.Search
-        , Network.Google.Resource.Genomics.Datasets.Create
-        , Network.Google.Resource.Genomics.Datasets.Delete
-        , Network.Google.Resource.Genomics.Datasets.Get
-        , Network.Google.Resource.Genomics.Datasets.GetIAMPolicy
-        , Network.Google.Resource.Genomics.Datasets.List
-        , Network.Google.Resource.Genomics.Datasets.Patch
-        , Network.Google.Resource.Genomics.Datasets.SetIAMPolicy
-        , Network.Google.Resource.Genomics.Datasets.TestIAMPermissions
-        , Network.Google.Resource.Genomics.Datasets.Undelete
+        , Network.Google.Resource.Genomics.CallSets.Create
+        , Network.Google.Resource.Genomics.CallSets.Delete
+        , Network.Google.Resource.Genomics.CallSets.Get
+        , Network.Google.Resource.Genomics.CallSets.Patch
+        , Network.Google.Resource.Genomics.CallSets.Search
+        , Network.Google.Resource.Genomics.DataSets.Create
+        , Network.Google.Resource.Genomics.DataSets.Delete
+        , Network.Google.Resource.Genomics.DataSets.Get
+        , Network.Google.Resource.Genomics.DataSets.GetIAMPolicy
+        , Network.Google.Resource.Genomics.DataSets.List
+        , Network.Google.Resource.Genomics.DataSets.Patch
+        , Network.Google.Resource.Genomics.DataSets.SetIAMPolicy
+        , Network.Google.Resource.Genomics.DataSets.TestIAMPermissions
+        , Network.Google.Resource.Genomics.DataSets.Undelete
         , Network.Google.Resource.Genomics.Operations.Cancel
         , Network.Google.Resource.Genomics.Operations.Delete
         , Network.Google.Resource.Genomics.Operations.Get
         , Network.Google.Resource.Genomics.Operations.List
-        , Network.Google.Resource.Genomics.Readgroupsets.Coveragebuckets.List
-        , Network.Google.Resource.Genomics.Readgroupsets.Delete
-        , Network.Google.Resource.Genomics.Readgroupsets.Export
-        , Network.Google.Resource.Genomics.Readgroupsets.Get
-        , Network.Google.Resource.Genomics.Readgroupsets.Import
-        , Network.Google.Resource.Genomics.Readgroupsets.Patch
-        , Network.Google.Resource.Genomics.Readgroupsets.Search
+        , Network.Google.Resource.Genomics.ReadGroupSets.CoverageBuckets.List
+        , Network.Google.Resource.Genomics.ReadGroupSets.Delete
+        , Network.Google.Resource.Genomics.ReadGroupSets.Export
+        , Network.Google.Resource.Genomics.ReadGroupSets.Get
+        , Network.Google.Resource.Genomics.ReadGroupSets.Import
+        , Network.Google.Resource.Genomics.ReadGroupSets.Patch
+        , Network.Google.Resource.Genomics.ReadGroupSets.Search
         , Network.Google.Resource.Genomics.Reads.Search
         , Network.Google.Resource.Genomics.References.Bases.List
         , Network.Google.Resource.Genomics.References.Get
         , Network.Google.Resource.Genomics.References.Search
         , Network.Google.Resource.Genomics.Referencesets.Get
         , Network.Google.Resource.Genomics.Referencesets.Search
+        , Network.Google.Resource.Genomics.VariantSets.Create
+        , Network.Google.Resource.Genomics.VariantSets.Delete
+        , Network.Google.Resource.Genomics.VariantSets.Export
+        , Network.Google.Resource.Genomics.VariantSets.Get
+        , Network.Google.Resource.Genomics.VariantSets.Patch
+        , Network.Google.Resource.Genomics.VariantSets.Search
         , Network.Google.Resource.Genomics.Variants.Create
         , Network.Google.Resource.Genomics.Variants.Delete
         , Network.Google.Resource.Genomics.Variants.Get
         , Network.Google.Resource.Genomics.Variants.Import
         , Network.Google.Resource.Genomics.Variants.Patch
         , Network.Google.Resource.Genomics.Variants.Search
-        , Network.Google.Resource.Genomics.Variantsets.Create
-        , Network.Google.Resource.Genomics.Variantsets.Delete
-        , Network.Google.Resource.Genomics.Variantsets.Export
-        , Network.Google.Resource.Genomics.Variantsets.Get
-        , Network.Google.Resource.Genomics.Variantsets.Patch
-        , Network.Google.Resource.Genomics.Variantsets.Search
 
     other-modules:
           Network.Google.Genomics.Types.Product

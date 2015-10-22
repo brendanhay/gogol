@@ -33,14 +33,14 @@ module Network.Google.Resource.Books.Layers.VolumeAnnotations.List
     , LayersVolumeAnnotationsList
 
     -- * Request Lenses
-    , lvalStartOffset
+    , lvalStartOffSet
     , lvalLocale
     , lvalContentVersion
     , lvalShowDeleted
     , lvalVolumeAnnotationsVersion
     , lvalUpdatedMax
     , lvalUpdatedMin
-    , lvalEndOffset
+    , lvalEndOffSet
     , lvalVolumeId
     , lvalSource
     , lvalPageToken
@@ -80,14 +80,14 @@ type LayersVolumeAnnotationsListResource =
 --
 -- /See:/ 'layersVolumeAnnotationsList' smart constructor.
 data LayersVolumeAnnotationsList = LayersVolumeAnnotationsList
-    { _lvalStartOffset              :: !(Maybe Text)
+    { _lvalStartOffSet              :: !(Maybe Text)
     , _lvalLocale                   :: !(Maybe Text)
     , _lvalContentVersion           :: !Text
     , _lvalShowDeleted              :: !(Maybe Bool)
     , _lvalVolumeAnnotationsVersion :: !(Maybe Text)
     , _lvalUpdatedMax               :: !(Maybe Text)
     , _lvalUpdatedMin               :: !(Maybe Text)
-    , _lvalEndOffset                :: !(Maybe Text)
+    , _lvalEndOffSet                :: !(Maybe Text)
     , _lvalVolumeId                 :: !Text
     , _lvalSource                   :: !(Maybe Text)
     , _lvalPageToken                :: !(Maybe Text)
@@ -101,7 +101,7 @@ data LayersVolumeAnnotationsList = LayersVolumeAnnotationsList
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lvalStartOffset'
+-- * 'lvalStartOffSet'
 --
 -- * 'lvalLocale'
 --
@@ -115,7 +115,7 @@ data LayersVolumeAnnotationsList = LayersVolumeAnnotationsList
 --
 -- * 'lvalUpdatedMin'
 --
--- * 'lvalEndOffset'
+-- * 'lvalEndOffSet'
 --
 -- * 'lvalVolumeId'
 --
@@ -137,14 +137,14 @@ layersVolumeAnnotationsList
     -> LayersVolumeAnnotationsList
 layersVolumeAnnotationsList pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
     LayersVolumeAnnotationsList
-    { _lvalStartOffset = Nothing
+    { _lvalStartOffSet = Nothing
     , _lvalLocale = Nothing
     , _lvalContentVersion = pLvalContentVersion_
     , _lvalShowDeleted = Nothing
     , _lvalVolumeAnnotationsVersion = Nothing
     , _lvalUpdatedMax = Nothing
     , _lvalUpdatedMin = Nothing
-    , _lvalEndOffset = Nothing
+    , _lvalEndOffSet = Nothing
     , _lvalVolumeId = pLvalVolumeId_
     , _lvalSource = Nothing
     , _lvalPageToken = Nothing
@@ -155,10 +155,10 @@ layersVolumeAnnotationsList pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
     }
 
 -- | The start offset to start retrieving data from.
-lvalStartOffset :: Lens' LayersVolumeAnnotationsList (Maybe Text)
-lvalStartOffset
-  = lens _lvalStartOffset
-      (\ s a -> s{_lvalStartOffset = a})
+lvalStartOffSet :: Lens' LayersVolumeAnnotationsList (Maybe Text)
+lvalStartOffSet
+  = lens _lvalStartOffSet
+      (\ s a -> s{_lvalStartOffSet = a})
 
 -- | The locale information for the data. ISO-639-1 language and ISO-3166-1
 -- country code. Ex: \'en_US\'.
@@ -200,10 +200,10 @@ lvalUpdatedMin
       (\ s a -> s{_lvalUpdatedMin = a})
 
 -- | The end offset to end retrieving data from.
-lvalEndOffset :: Lens' LayersVolumeAnnotationsList (Maybe Text)
-lvalEndOffset
-  = lens _lvalEndOffset
-      (\ s a -> s{_lvalEndOffset = a})
+lvalEndOffSet :: Lens' LayersVolumeAnnotationsList (Maybe Text)
+lvalEndOffSet
+  = lens _lvalEndOffSet
+      (\ s a -> s{_lvalEndOffSet = a})
 
 -- | The volume to retrieve annotations for.
 lvalVolumeId :: Lens' LayersVolumeAnnotationsList Text
@@ -251,13 +251,13 @@ instance GoogleRequest LayersVolumeAnnotationsList
         requestClient LayersVolumeAnnotationsList{..}
           = go _lvalVolumeId _lvalLayerId
               (Just _lvalContentVersion)
-              _lvalStartOffset
+              _lvalStartOffSet
               _lvalLocale
               _lvalShowDeleted
               _lvalVolumeAnnotationsVersion
               _lvalUpdatedMax
               _lvalUpdatedMin
-              _lvalEndOffset
+              _lvalEndOffSet
               _lvalSource
               _lvalPageToken
               _lvalEndPosition

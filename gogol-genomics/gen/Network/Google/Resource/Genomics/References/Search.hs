@@ -34,14 +34,14 @@ module Network.Google.Resource.Genomics.References.Search
     , ReferencesSearch
 
     -- * Request Lenses
-    , rrXgafv
-    , rrUploadProtocol
-    , rrPp
-    , rrAccessToken
-    , rrUploadType
-    , rrPayload
-    , rrBearerToken
-    , rrCallback
+    , refXgafv
+    , refUploadProtocol
+    , refPp
+    , refAccessToken
+    , refUploadType
+    , refPayload
+    , refBearerToken
+    , refCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -69,101 +69,102 @@ type ReferencesSearchResource =
 --
 -- /See:/ 'referencesSearch' smart constructor.
 data ReferencesSearch = ReferencesSearch
-    { _rrXgafv          :: !(Maybe Text)
-    , _rrUploadProtocol :: !(Maybe Text)
-    , _rrPp             :: !Bool
-    , _rrAccessToken    :: !(Maybe Text)
-    , _rrUploadType     :: !(Maybe Text)
-    , _rrPayload        :: !SearchReferencesRequest
-    , _rrBearerToken    :: !(Maybe Text)
-    , _rrCallback       :: !(Maybe Text)
+    { _refXgafv          :: !(Maybe Text)
+    , _refUploadProtocol :: !(Maybe Text)
+    , _refPp             :: !Bool
+    , _refAccessToken    :: !(Maybe Text)
+    , _refUploadType     :: !(Maybe Text)
+    , _refPayload        :: !SearchReferencesRequest
+    , _refBearerToken    :: !(Maybe Text)
+    , _refCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesSearch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rrXgafv'
+-- * 'refXgafv'
 --
--- * 'rrUploadProtocol'
+-- * 'refUploadProtocol'
 --
--- * 'rrPp'
+-- * 'refPp'
 --
--- * 'rrAccessToken'
+-- * 'refAccessToken'
 --
--- * 'rrUploadType'
+-- * 'refUploadType'
 --
--- * 'rrPayload'
+-- * 'refPayload'
 --
--- * 'rrBearerToken'
+-- * 'refBearerToken'
 --
--- * 'rrCallback'
+-- * 'refCallback'
 referencesSearch
-    :: SearchReferencesRequest -- ^ 'rrPayload'
+    :: SearchReferencesRequest -- ^ 'refPayload'
     -> ReferencesSearch
-referencesSearch pRrPayload_ =
+referencesSearch pRefPayload_ =
     ReferencesSearch
-    { _rrXgafv = Nothing
-    , _rrUploadProtocol = Nothing
-    , _rrPp = True
-    , _rrAccessToken = Nothing
-    , _rrUploadType = Nothing
-    , _rrPayload = pRrPayload_
-    , _rrBearerToken = Nothing
-    , _rrCallback = Nothing
+    { _refXgafv = Nothing
+    , _refUploadProtocol = Nothing
+    , _refPp = True
+    , _refAccessToken = Nothing
+    , _refUploadType = Nothing
+    , _refPayload = pRefPayload_
+    , _refBearerToken = Nothing
+    , _refCallback = Nothing
     }
 
 -- | V1 error format.
-rrXgafv :: Lens' ReferencesSearch (Maybe Text)
-rrXgafv = lens _rrXgafv (\ s a -> s{_rrXgafv = a})
+refXgafv :: Lens' ReferencesSearch (Maybe Text)
+refXgafv = lens _refXgafv (\ s a -> s{_refXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-rrUploadProtocol :: Lens' ReferencesSearch (Maybe Text)
-rrUploadProtocol
-  = lens _rrUploadProtocol
-      (\ s a -> s{_rrUploadProtocol = a})
+refUploadProtocol :: Lens' ReferencesSearch (Maybe Text)
+refUploadProtocol
+  = lens _refUploadProtocol
+      (\ s a -> s{_refUploadProtocol = a})
 
 -- | Pretty-print response.
-rrPp :: Lens' ReferencesSearch Bool
-rrPp = lens _rrPp (\ s a -> s{_rrPp = a})
+refPp :: Lens' ReferencesSearch Bool
+refPp = lens _refPp (\ s a -> s{_refPp = a})
 
 -- | OAuth access token.
-rrAccessToken :: Lens' ReferencesSearch (Maybe Text)
-rrAccessToken
-  = lens _rrAccessToken
-      (\ s a -> s{_rrAccessToken = a})
+refAccessToken :: Lens' ReferencesSearch (Maybe Text)
+refAccessToken
+  = lens _refAccessToken
+      (\ s a -> s{_refAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-rrUploadType :: Lens' ReferencesSearch (Maybe Text)
-rrUploadType
-  = lens _rrUploadType (\ s a -> s{_rrUploadType = a})
+refUploadType :: Lens' ReferencesSearch (Maybe Text)
+refUploadType
+  = lens _refUploadType
+      (\ s a -> s{_refUploadType = a})
 
 -- | Multipart request metadata.
-rrPayload :: Lens' ReferencesSearch SearchReferencesRequest
-rrPayload
-  = lens _rrPayload (\ s a -> s{_rrPayload = a})
+refPayload :: Lens' ReferencesSearch SearchReferencesRequest
+refPayload
+  = lens _refPayload (\ s a -> s{_refPayload = a})
 
 -- | OAuth bearer token.
-rrBearerToken :: Lens' ReferencesSearch (Maybe Text)
-rrBearerToken
-  = lens _rrBearerToken
-      (\ s a -> s{_rrBearerToken = a})
+refBearerToken :: Lens' ReferencesSearch (Maybe Text)
+refBearerToken
+  = lens _refBearerToken
+      (\ s a -> s{_refBearerToken = a})
 
 -- | JSONP
-rrCallback :: Lens' ReferencesSearch (Maybe Text)
-rrCallback
-  = lens _rrCallback (\ s a -> s{_rrCallback = a})
+refCallback :: Lens' ReferencesSearch (Maybe Text)
+refCallback
+  = lens _refCallback (\ s a -> s{_refCallback = a})
 
 instance GoogleRequest ReferencesSearch where
         type Rs ReferencesSearch = SearchReferencesResponse
         requestClient ReferencesSearch{..}
-          = go _rrXgafv _rrUploadProtocol (Just _rrPp)
-              _rrAccessToken
-              _rrUploadType
-              _rrBearerToken
-              _rrCallback
+          = go _refXgafv _refUploadProtocol (Just _refPp)
+              _refAccessToken
+              _refUploadType
+              _refBearerToken
+              _refCallback
               (Just AltJSON)
-              _rrPayload
+              _refPayload
               genomicsService
           where go
                   = buildClient

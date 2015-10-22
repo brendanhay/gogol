@@ -35,16 +35,16 @@ library
     exposed-modules:
           Network.Google.Fitness
         , Network.Google.Fitness.Types
+        , Network.Google.Resource.Fitness.Users.DataSet.Aggregate
         , Network.Google.Resource.Fitness.Users.DataSources.Create
-        , Network.Google.Resource.Fitness.Users.DataSources.Datasets.Delete
-        , Network.Google.Resource.Fitness.Users.DataSources.Datasets.Get
-        , Network.Google.Resource.Fitness.Users.DataSources.Datasets.Patch
+        , Network.Google.Resource.Fitness.Users.DataSources.DataSets.Delete
+        , Network.Google.Resource.Fitness.Users.DataSources.DataSets.Get
+        , Network.Google.Resource.Fitness.Users.DataSources.DataSets.Patch
         , Network.Google.Resource.Fitness.Users.DataSources.Delete
         , Network.Google.Resource.Fitness.Users.DataSources.Get
         , Network.Google.Resource.Fitness.Users.DataSources.List
         , Network.Google.Resource.Fitness.Users.DataSources.Patch
         , Network.Google.Resource.Fitness.Users.DataSources.Update
-        , Network.Google.Resource.Fitness.Users.Dataset.Aggregate
         , Network.Google.Resource.Fitness.Users.Sessions.Delete
         , Network.Google.Resource.Fitness.Users.Sessions.List
         , Network.Google.Resource.Fitness.Users.Sessions.Update

@@ -28,46 +28,46 @@ module Network.Google.Genomics
     -- * Resources
 
     -- ** genomics.callsets.create
-    , module Network.Google.Resource.Genomics.Callsets.Create
+    , module Network.Google.Resource.Genomics.CallSets.Create
 
     -- ** genomics.callsets.delete
-    , module Network.Google.Resource.Genomics.Callsets.Delete
+    , module Network.Google.Resource.Genomics.CallSets.Delete
 
     -- ** genomics.callsets.get
-    , module Network.Google.Resource.Genomics.Callsets.Get
+    , module Network.Google.Resource.Genomics.CallSets.Get
 
     -- ** genomics.callsets.patch
-    , module Network.Google.Resource.Genomics.Callsets.Patch
+    , module Network.Google.Resource.Genomics.CallSets.Patch
 
     -- ** genomics.callsets.search
-    , module Network.Google.Resource.Genomics.Callsets.Search
+    , module Network.Google.Resource.Genomics.CallSets.Search
 
     -- ** genomics.datasets.create
-    , module Network.Google.Resource.Genomics.Datasets.Create
+    , module Network.Google.Resource.Genomics.DataSets.Create
 
     -- ** genomics.datasets.delete
-    , module Network.Google.Resource.Genomics.Datasets.Delete
+    , module Network.Google.Resource.Genomics.DataSets.Delete
 
     -- ** genomics.datasets.get
-    , module Network.Google.Resource.Genomics.Datasets.Get
+    , module Network.Google.Resource.Genomics.DataSets.Get
 
     -- ** genomics.datasets.getIamPolicy
-    , module Network.Google.Resource.Genomics.Datasets.GetIAMPolicy
+    , module Network.Google.Resource.Genomics.DataSets.GetIAMPolicy
 
     -- ** genomics.datasets.list
-    , module Network.Google.Resource.Genomics.Datasets.List
+    , module Network.Google.Resource.Genomics.DataSets.List
 
     -- ** genomics.datasets.patch
-    , module Network.Google.Resource.Genomics.Datasets.Patch
+    , module Network.Google.Resource.Genomics.DataSets.Patch
 
     -- ** genomics.datasets.setIamPolicy
-    , module Network.Google.Resource.Genomics.Datasets.SetIAMPolicy
+    , module Network.Google.Resource.Genomics.DataSets.SetIAMPolicy
 
     -- ** genomics.datasets.testIamPermissions
-    , module Network.Google.Resource.Genomics.Datasets.TestIAMPermissions
+    , module Network.Google.Resource.Genomics.DataSets.TestIAMPermissions
 
     -- ** genomics.datasets.undelete
-    , module Network.Google.Resource.Genomics.Datasets.Undelete
+    , module Network.Google.Resource.Genomics.DataSets.Undelete
 
     -- ** genomics.operations.cancel
     , module Network.Google.Resource.Genomics.Operations.Cancel
@@ -82,25 +82,25 @@ module Network.Google.Genomics
     , module Network.Google.Resource.Genomics.Operations.List
 
     -- ** genomics.readgroupsets.coveragebuckets.list
-    , module Network.Google.Resource.Genomics.Readgroupsets.Coveragebuckets.List
+    , module Network.Google.Resource.Genomics.ReadGroupSets.CoverageBuckets.List
 
     -- ** genomics.readgroupsets.delete
-    , module Network.Google.Resource.Genomics.Readgroupsets.Delete
+    , module Network.Google.Resource.Genomics.ReadGroupSets.Delete
 
     -- ** genomics.readgroupsets.export
-    , module Network.Google.Resource.Genomics.Readgroupsets.Export
+    , module Network.Google.Resource.Genomics.ReadGroupSets.Export
 
     -- ** genomics.readgroupsets.get
-    , module Network.Google.Resource.Genomics.Readgroupsets.Get
+    , module Network.Google.Resource.Genomics.ReadGroupSets.Get
 
     -- ** genomics.readgroupsets.import
-    , module Network.Google.Resource.Genomics.Readgroupsets.Import
+    , module Network.Google.Resource.Genomics.ReadGroupSets.Import
 
     -- ** genomics.readgroupsets.patch
-    , module Network.Google.Resource.Genomics.Readgroupsets.Patch
+    , module Network.Google.Resource.Genomics.ReadGroupSets.Patch
 
     -- ** genomics.readgroupsets.search
-    , module Network.Google.Resource.Genomics.Readgroupsets.Search
+    , module Network.Google.Resource.Genomics.ReadGroupSets.Search
 
     -- ** genomics.reads.search
     , module Network.Google.Resource.Genomics.Reads.Search
@@ -139,22 +139,22 @@ module Network.Google.Genomics
     , module Network.Google.Resource.Genomics.Variants.Search
 
     -- ** genomics.variantsets.create
-    , module Network.Google.Resource.Genomics.Variantsets.Create
+    , module Network.Google.Resource.Genomics.VariantSets.Create
 
     -- ** genomics.variantsets.delete
-    , module Network.Google.Resource.Genomics.Variantsets.Delete
+    , module Network.Google.Resource.Genomics.VariantSets.Delete
 
     -- ** genomics.variantsets.export
-    , module Network.Google.Resource.Genomics.Variantsets.Export
+    , module Network.Google.Resource.Genomics.VariantSets.Export
 
     -- ** genomics.variantsets.get
-    , module Network.Google.Resource.Genomics.Variantsets.Get
+    , module Network.Google.Resource.Genomics.VariantSets.Get
 
     -- ** genomics.variantsets.patch
-    , module Network.Google.Resource.Genomics.Variantsets.Patch
+    , module Network.Google.Resource.Genomics.VariantSets.Patch
 
     -- ** genomics.variantsets.search
-    , module Network.Google.Resource.Genomics.Variantsets.Search
+    , module Network.Google.Resource.Genomics.VariantSets.Search
 
     -- * Types
 
@@ -196,7 +196,7 @@ module Network.Google.Genomics
     , ListBasesResponse
     , listBasesResponse
     , lbrNextPageToken
-    , lbrOffset
+    , lbrOffSet
     , lbrSequence
 
     -- ** ListOperationsResponse
@@ -213,34 +213,34 @@ module Network.Google.Genomics
     , CancelOperationRequest
     , cancelOperationRequest
 
-    -- ** Dataset
-    , Dataset
-    , dataset
-    , dName
-    , dId
-    , dProjectId
-    , dCreateTime
+    -- ** DataSet
+    , DataSet
+    , dataSet
+    , dsName
+    , dsId
+    , dsProjectId
+    , dsCreateTime
 
     -- ** Read'
     , Read'
     , read'
-    , reaFragmentLength
-    , reaDuplicateFragment
-    , reaReadGroupSetId
-    , reaNextMatePosition
-    , reaFailedVendorQualityChecks
-    , reaAlignment
-    , reaFragmentName
-    , reaNumberReads
-    , reaId
-    , reaSecondaryAlignment
-    , reaReadGroupId
-    , reaSupplementaryAlignment
-    , reaAlignedSequence
-    , reaProperPlacement
-    , reaInfo
-    , reaReadNumber
-    , reaAlignedQuality
+    , rFragmentLength
+    , rDuplicateFragment
+    , rReadGroupSetId
+    , rNextMatePosition
+    , rFailedVendorQualityChecks
+    , rAlignment
+    , rFragmentName
+    , rNumberReads
+    , rId
+    , rSecondaryAlignment
+    , rReadGroupId
+    , rSupplementaryAlignment
+    , rAlignedSequence
+    , rProperPlacement
+    , rInfo
+    , rReadNumber
+    , rAlignedQuality
 
     -- ** VariantCall
     , VariantCall
@@ -255,16 +255,16 @@ module Network.Google.Genomics
     -- ** ReadGroup
     , ReadGroup
     , readGroup
-    , rReferenceSetId
-    , rPrograms
-    , rExperiment
-    , rName
-    , rDatasetId
-    , rId
-    , rSampleId
-    , rPredictedInsertSize
-    , rDescription
-    , rInfo
+    , reaReferenceSetId
+    , reaPrograms
+    , reaExperiment
+    , reaName
+    , reaDataSetId
+    , reaId
+    , reaSampleId
+    , reaPredictedInsertSize
+    , reaDescription
+    , reaInfo
 
     -- ** Operation
     , Operation
@@ -324,7 +324,7 @@ module Network.Google.Genomics
     -- ** SearchReadGroupSetsRequest
     , SearchReadGroupSetsRequest
     , searchReadGroupSetsRequest
-    , srgsrDatasetIds
+    , srgsrDataSetIds
     , srgsrName
     , srgsrPageToken
     , srgsrPageSize
@@ -398,7 +398,7 @@ module Network.Google.Genomics
     -- ** SearchVariantSetsRequest
     , SearchVariantSetsRequest
     , searchVariantSetsRequest
-    , svsrDatasetIds
+    , svsrDataSetIds
     , svsrPageToken
     , svsrPageSize
 
@@ -458,7 +458,7 @@ module Network.Google.Genomics
     , readGroupSet
     , rgsReferenceSetId
     , rgsName
-    , rgsDatasetId
+    , rgsDataSetId
     , rgsId
     , rgsInfo
     , rgsReadGroups
@@ -503,7 +503,7 @@ module Network.Google.Genomics
     -- ** VariantSet
     , VariantSet
     , variantSet
-    , vsDatasetId
+    , vsDataSetId
     , vsReferenceBounds
     , vsMetadata
     , vsId
@@ -513,17 +513,17 @@ module Network.Google.Genomics
     , testIAMPermissionsResponse
     , tiamprPermissions
 
-    -- ** ListDatasetsResponse
-    , ListDatasetsResponse
-    , listDatasetsResponse
-    , ldrNextPageToken
-    , ldrDatasets
+    -- ** ListDataSetsResponse
+    , ListDataSetsResponse
+    , listDataSetsResponse
+    , ldsrNextPageToken
+    , ldsrDataSets
 
     -- ** ImportReadGroupSetsRequest
     , ImportReadGroupSetsRequest
     , importReadGroupSetsRequest
     , irgsrReferenceSetId
-    , irgsrDatasetId
+    , irgsrDataSetId
     , irgsrSourceURIs
     , irgsrPartitionStrategy
 
@@ -552,7 +552,7 @@ module Network.Google.Genomics
     -- ** ExportVariantSetRequest
     , ExportVariantSetRequest
     , exportVariantSetRequest
-    , evsrBigQueryDataset
+    , evsrBigQueryDataSet
     , evsrBigQueryTable
     , evsrFormat
     , evsrCallSetIds
@@ -611,9 +611,9 @@ module Network.Google.Genomics
     , rbUpperBound
     , rbReferenceName
 
-    -- ** UndeleteDatasetRequest
-    , UndeleteDatasetRequest
-    , undeleteDatasetRequest
+    -- ** UndeleteDataSetRequest
+    , UndeleteDataSetRequest
+    , undeleteDataSetRequest
 
     -- ** Binding
     , Binding
@@ -654,31 +654,31 @@ module Network.Google.Genomics
 
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Genomics.Callsets.Create
-import           Network.Google.Resource.Genomics.Callsets.Delete
-import           Network.Google.Resource.Genomics.Callsets.Get
-import           Network.Google.Resource.Genomics.Callsets.Patch
-import           Network.Google.Resource.Genomics.Callsets.Search
-import           Network.Google.Resource.Genomics.Datasets.Create
-import           Network.Google.Resource.Genomics.Datasets.Delete
-import           Network.Google.Resource.Genomics.Datasets.Get
-import           Network.Google.Resource.Genomics.Datasets.GetIAMPolicy
-import           Network.Google.Resource.Genomics.Datasets.List
-import           Network.Google.Resource.Genomics.Datasets.Patch
-import           Network.Google.Resource.Genomics.Datasets.SetIAMPolicy
-import           Network.Google.Resource.Genomics.Datasets.TestIAMPermissions
-import           Network.Google.Resource.Genomics.Datasets.Undelete
+import           Network.Google.Resource.Genomics.CallSets.Create
+import           Network.Google.Resource.Genomics.CallSets.Delete
+import           Network.Google.Resource.Genomics.CallSets.Get
+import           Network.Google.Resource.Genomics.CallSets.Patch
+import           Network.Google.Resource.Genomics.CallSets.Search
+import           Network.Google.Resource.Genomics.DataSets.Create
+import           Network.Google.Resource.Genomics.DataSets.Delete
+import           Network.Google.Resource.Genomics.DataSets.Get
+import           Network.Google.Resource.Genomics.DataSets.GetIAMPolicy
+import           Network.Google.Resource.Genomics.DataSets.List
+import           Network.Google.Resource.Genomics.DataSets.Patch
+import           Network.Google.Resource.Genomics.DataSets.SetIAMPolicy
+import           Network.Google.Resource.Genomics.DataSets.TestIAMPermissions
+import           Network.Google.Resource.Genomics.DataSets.Undelete
 import           Network.Google.Resource.Genomics.Operations.Cancel
 import           Network.Google.Resource.Genomics.Operations.Delete
 import           Network.Google.Resource.Genomics.Operations.Get
 import           Network.Google.Resource.Genomics.Operations.List
-import           Network.Google.Resource.Genomics.Readgroupsets.Coveragebuckets.List
-import           Network.Google.Resource.Genomics.Readgroupsets.Delete
-import           Network.Google.Resource.Genomics.Readgroupsets.Export
-import           Network.Google.Resource.Genomics.Readgroupsets.Get
-import           Network.Google.Resource.Genomics.Readgroupsets.Import
-import           Network.Google.Resource.Genomics.Readgroupsets.Patch
-import           Network.Google.Resource.Genomics.Readgroupsets.Search
+import           Network.Google.Resource.Genomics.ReadGroupSets.CoverageBuckets.List
+import           Network.Google.Resource.Genomics.ReadGroupSets.Delete
+import           Network.Google.Resource.Genomics.ReadGroupSets.Export
+import           Network.Google.Resource.Genomics.ReadGroupSets.Get
+import           Network.Google.Resource.Genomics.ReadGroupSets.Import
+import           Network.Google.Resource.Genomics.ReadGroupSets.Patch
+import           Network.Google.Resource.Genomics.ReadGroupSets.Search
 import           Network.Google.Resource.Genomics.Reads.Search
 import           Network.Google.Resource.Genomics.References.Bases.List
 import           Network.Google.Resource.Genomics.References.Get
@@ -691,12 +691,12 @@ import           Network.Google.Resource.Genomics.Variants.Get
 import           Network.Google.Resource.Genomics.Variants.Import
 import           Network.Google.Resource.Genomics.Variants.Patch
 import           Network.Google.Resource.Genomics.Variants.Search
-import           Network.Google.Resource.Genomics.Variantsets.Create
-import           Network.Google.Resource.Genomics.Variantsets.Delete
-import           Network.Google.Resource.Genomics.Variantsets.Export
-import           Network.Google.Resource.Genomics.Variantsets.Get
-import           Network.Google.Resource.Genomics.Variantsets.Patch
-import           Network.Google.Resource.Genomics.Variantsets.Search
+import           Network.Google.Resource.Genomics.VariantSets.Create
+import           Network.Google.Resource.Genomics.VariantSets.Delete
+import           Network.Google.Resource.Genomics.VariantSets.Export
+import           Network.Google.Resource.Genomics.VariantSets.Get
+import           Network.Google.Resource.Genomics.VariantSets.Patch
+import           Network.Google.Resource.Genomics.VariantSets.Search
 
 {- $resources
 TODO
@@ -712,37 +712,37 @@ type GenomicsAPI =
        :<|> ReferencesBasesListResource
        :<|> ReferencesGetResource
        :<|> ReferencesSearchResource
-       :<|> VariantsetsExportResource
-       :<|> VariantsetsPatchResource
-       :<|> VariantsetsGetResource
-       :<|> VariantsetsCreateResource
-       :<|> VariantsetsSearchResource
-       :<|> VariantsetsDeleteResource
-       :<|> ReadgroupsetsCoveragebucketsListResource
-       :<|> ReadgroupsetsExportResource
-       :<|> ReadgroupsetsPatchResource
-       :<|> ReadgroupsetsGetResource
-       :<|> ReadgroupsetsImportResource
-       :<|> ReadgroupsetsSearchResource
-       :<|> ReadgroupsetsDeleteResource
+       :<|> VariantSetsExportResource
+       :<|> VariantSetsPatchResource
+       :<|> VariantSetsGetResource
+       :<|> VariantSetsCreateResource
+       :<|> VariantSetsSearchResource
+       :<|> VariantSetsDeleteResource
+       :<|> ReadGroupSetsCoverageBucketsListResource
+       :<|> ReadGroupSetsExportResource
+       :<|> ReadGroupSetsPatchResource
+       :<|> ReadGroupSetsGetResource
+       :<|> ReadGroupSetsImportResource
+       :<|> ReadGroupSetsSearchResource
+       :<|> ReadGroupSetsDeleteResource
        :<|> ReferencesetsGetResource
        :<|> ReferencesetsSearchResource
-       :<|> CallsetsPatchResource
-       :<|> CallsetsGetResource
-       :<|> CallsetsCreateResource
-       :<|> CallsetsSearchResource
-       :<|> CallsetsDeleteResource
+       :<|> CallSetsPatchResource
+       :<|> CallSetsGetResource
+       :<|> CallSetsCreateResource
+       :<|> CallSetsSearchResource
+       :<|> CallSetsDeleteResource
        :<|> OperationsListResource
        :<|> OperationsGetResource
        :<|> OperationsCancelResource
        :<|> OperationsDeleteResource
        :<|> ReadsSearchResource
-       :<|> DatasetsListResource
-       :<|> DatasetsUndeleteResource
-       :<|> DatasetsGetIAMPolicyResource
-       :<|> DatasetsPatchResource
-       :<|> DatasetsGetResource
-       :<|> DatasetsCreateResource
-       :<|> DatasetsSetIAMPolicyResource
-       :<|> DatasetsTestIAMPermissionsResource
-       :<|> DatasetsDeleteResource
+       :<|> DataSetsListResource
+       :<|> DataSetsUndeleteResource
+       :<|> DataSetsGetIAMPolicyResource
+       :<|> DataSetsPatchResource
+       :<|> DataSetsGetResource
+       :<|> DataSetsCreateResource
+       :<|> DataSetsSetIAMPolicyResource
+       :<|> DataSetsTestIAMPermissionsResource
+       :<|> DataSetsDeleteResource

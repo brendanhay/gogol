@@ -5245,7 +5245,7 @@ instance ToJSON VideoContentDetailsRegionRestriction
 -- /See:/ 'invideoTiming' smart constructor.
 data InvideoTiming = InvideoTiming
     { _itDurationMs :: !(Maybe Word64)
-    , _itOffsetMs   :: !(Maybe Word64)
+    , _itOffSetMs   :: !(Maybe Word64)
     , _itType       :: !(Maybe InvideoTimingType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5255,7 +5255,7 @@ data InvideoTiming = InvideoTiming
 --
 -- * 'itDurationMs'
 --
--- * 'itOffsetMs'
+-- * 'itOffSetMs'
 --
 -- * 'itType'
 invideoTiming
@@ -5263,7 +5263,7 @@ invideoTiming
 invideoTiming =
     InvideoTiming
     { _itDurationMs = Nothing
-    , _itOffsetMs = Nothing
+    , _itOffSetMs = Nothing
     , _itType = Nothing
     }
 
@@ -5277,9 +5277,9 @@ itDurationMs
 -- value of type the value of the offsetMs field will represent a time
 -- offset from the start or from the end of the video, expressed in
 -- milliseconds.
-itOffsetMs :: Lens' InvideoTiming (Maybe Word64)
-itOffsetMs
-  = lens _itOffsetMs (\ s a -> s{_itOffsetMs = a})
+itOffSetMs :: Lens' InvideoTiming (Maybe Word64)
+itOffSetMs
+  = lens _itOffSetMs (\ s a -> s{_itOffSetMs = a})
 
 -- | Describes a timing type. If the value is offsetFromStart, then the
 -- offsetMs field represents an offset from the start of the video. If the
@@ -5301,7 +5301,7 @@ instance ToJSON InvideoTiming where
           = object
               (catMaybes
                  [("durationMs" .=) <$> _itDurationMs,
-                  ("offsetMs" .=) <$> _itOffsetMs,
+                  ("offsetMs" .=) <$> _itOffSetMs,
                   ("type" .=) <$> _itType])
 
 -- | Localizations for different languages

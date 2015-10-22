@@ -729,7 +729,7 @@ module Network.Google.YouTube.Types
     , InvideoTiming
     , invideoTiming
     , itDurationMs
-    , itOffsetMs
+    , itOffSetMs
     , itType
 
     -- * PlayListLocalizations

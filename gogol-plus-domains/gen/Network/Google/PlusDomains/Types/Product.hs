@@ -3891,38 +3891,38 @@ instance ToJSON PersonURLsItem where
 --
 -- /See:/ 'personCoverCoverInfo' smart constructor.
 data PersonCoverCoverInfo = PersonCoverCoverInfo
-    { _pcciTopImageOffset  :: !(Maybe Int32)
-    , _pcciLeftImageOffset :: !(Maybe Int32)
+    { _pcciTopImageOffSet  :: !(Maybe Int32)
+    , _pcciLeftImageOffSet :: !(Maybe Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PersonCoverCoverInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pcciTopImageOffset'
+-- * 'pcciTopImageOffSet'
 --
--- * 'pcciLeftImageOffset'
+-- * 'pcciLeftImageOffSet'
 personCoverCoverInfo
     :: PersonCoverCoverInfo
 personCoverCoverInfo =
     PersonCoverCoverInfo
-    { _pcciTopImageOffset = Nothing
-    , _pcciLeftImageOffset = Nothing
+    { _pcciTopImageOffSet = Nothing
+    , _pcciLeftImageOffSet = Nothing
     }
 
 -- | The difference between the top position of the cover image and the
 -- actual displayed cover image. Only valid for banner layout.
-pcciTopImageOffset :: Lens' PersonCoverCoverInfo (Maybe Int32)
-pcciTopImageOffset
-  = lens _pcciTopImageOffset
-      (\ s a -> s{_pcciTopImageOffset = a})
+pcciTopImageOffSet :: Lens' PersonCoverCoverInfo (Maybe Int32)
+pcciTopImageOffSet
+  = lens _pcciTopImageOffSet
+      (\ s a -> s{_pcciTopImageOffSet = a})
 
 -- | The difference between the left position of the cover image and the
 -- actual displayed cover image. Only valid for banner layout.
-pcciLeftImageOffset :: Lens' PersonCoverCoverInfo (Maybe Int32)
-pcciLeftImageOffset
-  = lens _pcciLeftImageOffset
-      (\ s a -> s{_pcciLeftImageOffset = a})
+pcciLeftImageOffSet :: Lens' PersonCoverCoverInfo (Maybe Int32)
+pcciLeftImageOffSet
+  = lens _pcciLeftImageOffSet
+      (\ s a -> s{_pcciLeftImageOffSet = a})
 
 instance FromJSON PersonCoverCoverInfo where
         parseJSON
@@ -3936,8 +3936,8 @@ instance ToJSON PersonCoverCoverInfo where
         toJSON PersonCoverCoverInfo{..}
           = object
               (catMaybes
-                 [("topImageOffset" .=) <$> _pcciTopImageOffset,
-                  ("leftImageOffset" .=) <$> _pcciLeftImageOffset])
+                 [("topImageOffset" .=) <$> _pcciTopImageOffSet,
+                  ("leftImageOffset" .=) <$> _pcciLeftImageOffSet])
 
 -- | People who reshared this activity.
 --

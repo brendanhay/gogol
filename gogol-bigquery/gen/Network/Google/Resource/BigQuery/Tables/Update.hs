@@ -36,7 +36,7 @@ module Network.Google.Resource.BigQuery.Tables.Update
 
     -- * Request Lenses
     , tuPayload
-    , tuDatasetId
+    , tuDataSetId
     , tuProjectId
     , tuTableId
     ) where
@@ -63,7 +63,7 @@ type TablesUpdateResource =
 -- /See:/ 'tablesUpdate' smart constructor.
 data TablesUpdate = TablesUpdate
     { _tuPayload   :: !Table
-    , _tuDatasetId :: !Text
+    , _tuDataSetId :: !Text
     , _tuProjectId :: !Text
     , _tuTableId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,21 +74,21 @@ data TablesUpdate = TablesUpdate
 --
 -- * 'tuPayload'
 --
--- * 'tuDatasetId'
+-- * 'tuDataSetId'
 --
 -- * 'tuProjectId'
 --
 -- * 'tuTableId'
 tablesUpdate
     :: Table -- ^ 'tuPayload'
-    -> Text -- ^ 'tuDatasetId'
+    -> Text -- ^ 'tuDataSetId'
     -> Text -- ^ 'tuProjectId'
     -> Text -- ^ 'tuTableId'
     -> TablesUpdate
-tablesUpdate pTuPayload_ pTuDatasetId_ pTuProjectId_ pTuTableId_ =
+tablesUpdate pTuPayload_ pTuDataSetId_ pTuProjectId_ pTuTableId_ =
     TablesUpdate
     { _tuPayload = pTuPayload_
-    , _tuDatasetId = pTuDatasetId_
+    , _tuDataSetId = pTuDataSetId_
     , _tuProjectId = pTuProjectId_
     , _tuTableId = pTuTableId_
     }
@@ -99,9 +99,9 @@ tuPayload
   = lens _tuPayload (\ s a -> s{_tuPayload = a})
 
 -- | Dataset ID of the table to update
-tuDatasetId :: Lens' TablesUpdate Text
-tuDatasetId
-  = lens _tuDatasetId (\ s a -> s{_tuDatasetId = a})
+tuDataSetId :: Lens' TablesUpdate Text
+tuDataSetId
+  = lens _tuDataSetId (\ s a -> s{_tuDataSetId = a})
 
 -- | Project ID of the table to update
 tuProjectId :: Lens' TablesUpdate Text
@@ -116,7 +116,7 @@ tuTableId
 instance GoogleRequest TablesUpdate where
         type Rs TablesUpdate = Table
         requestClient TablesUpdate{..}
-          = go _tuProjectId _tuDatasetId _tuTableId
+          = go _tuProjectId _tuDataSetId _tuTableId
               (Just AltJSON)
               _tuPayload
               bigQueryService

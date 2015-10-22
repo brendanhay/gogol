@@ -30,13 +30,13 @@ module Network.Google.Fitness
     , module Network.Google.Resource.Fitness.Users.DataSources.Create
 
     -- ** fitness.users.dataSources.datasets.delete
-    , module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Delete
+    , module Network.Google.Resource.Fitness.Users.DataSources.DataSets.Delete
 
     -- ** fitness.users.dataSources.datasets.get
-    , module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Get
+    , module Network.Google.Resource.Fitness.Users.DataSources.DataSets.Get
 
     -- ** fitness.users.dataSources.datasets.patch
-    , module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Patch
+    , module Network.Google.Resource.Fitness.Users.DataSources.DataSets.Patch
 
     -- ** fitness.users.dataSources.delete
     , module Network.Google.Resource.Fitness.Users.DataSources.Delete
@@ -54,7 +54,7 @@ module Network.Google.Fitness
     , module Network.Google.Resource.Fitness.Users.DataSources.Update
 
     -- ** fitness.users.dataset.aggregate
-    , module Network.Google.Resource.Fitness.Users.Dataset.Aggregate
+    , module Network.Google.Resource.Fitness.Users.DataSet.Aggregate
 
     -- ** fitness.users.sessions.delete
     , module Network.Google.Resource.Fitness.Users.Sessions.Delete
@@ -70,14 +70,14 @@ module Network.Google.Fitness
     -- ** AggregateBucketType
     , AggregateBucketType (..)
 
-    -- ** Dataset
-    , Dataset
-    , dataset
-    , dNextPageToken
-    , dDataSourceId
-    , dPoint
-    , dMinStartTimeNs
-    , dMaxEndTimeNs
+    -- ** DataSet
+    , DataSet
+    , dataSet
+    , dsNextPageToken
+    , dsDataSourceId
+    , dsPoint
+    , dsMinStartTimeNs
+    , dsMaxEndTimeNs
 
     -- ** Application
     , Application
@@ -163,7 +163,7 @@ module Network.Google.Fitness
     , AggregateBucket
     , aggregateBucket
     , abEndTimeMillis
-    , abDataset
+    , abDataSet
     , abActivity
     , abType
     , abStartTimeMillis
@@ -236,11 +236,11 @@ module Network.Google.Fitness
 
 import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Fitness.Users.Dataset.Aggregate
+import           Network.Google.Resource.Fitness.Users.DataSet.Aggregate
 import           Network.Google.Resource.Fitness.Users.DataSources.Create
-import           Network.Google.Resource.Fitness.Users.DataSources.Datasets.Delete
-import           Network.Google.Resource.Fitness.Users.DataSources.Datasets.Get
-import           Network.Google.Resource.Fitness.Users.DataSources.Datasets.Patch
+import           Network.Google.Resource.Fitness.Users.DataSources.DataSets.Delete
+import           Network.Google.Resource.Fitness.Users.DataSources.DataSets.Get
+import           Network.Google.Resource.Fitness.Users.DataSources.DataSets.Patch
 import           Network.Google.Resource.Fitness.Users.DataSources.Delete
 import           Network.Google.Resource.Fitness.Users.DataSources.Get
 import           Network.Google.Resource.Fitness.Users.DataSources.List
@@ -256,10 +256,10 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Fitness service.
 type FitnessAPI =
-     UsersDatasetAggregateResource :<|>
-       UsersDataSourcesDatasetsPatchResource
-       :<|> UsersDataSourcesDatasetsGetResource
-       :<|> UsersDataSourcesDatasetsDeleteResource
+     UsersDataSetAggregateResource :<|>
+       UsersDataSourcesDataSetsPatchResource
+       :<|> UsersDataSourcesDataSetsGetResource
+       :<|> UsersDataSourcesDataSetsDeleteResource
        :<|> UsersDataSourcesListResource
        :<|> UsersDataSourcesPatchResource
        :<|> UsersDataSourcesGetResource

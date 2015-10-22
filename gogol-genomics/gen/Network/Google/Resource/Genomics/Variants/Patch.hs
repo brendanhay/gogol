@@ -34,16 +34,16 @@ module Network.Google.Resource.Genomics.Variants.Patch
     , VariantsPatch
 
     -- * Request Lenses
-    , varXgafv
-    , varUploadProtocol
-    , varUpdateMask
-    , varPp
-    , varAccessToken
-    , varUploadType
-    , varPayload
-    , varBearerToken
-    , varVariantId
-    , varCallback
+    , vpXgafv
+    , vpUploadProtocol
+    , vpUpdateMask
+    , vpPp
+    , vpAccessToken
+    , vpUploadType
+    , vpPayload
+    , vpBearerToken
+    , vpVariantId
+    , vpCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -71,126 +71,124 @@ type VariantsPatchResource =
 --
 -- /See:/ 'variantsPatch' smart constructor.
 data VariantsPatch = VariantsPatch
-    { _varXgafv          :: !(Maybe Text)
-    , _varUploadProtocol :: !(Maybe Text)
-    , _varUpdateMask     :: !(Maybe Text)
-    , _varPp             :: !Bool
-    , _varAccessToken    :: !(Maybe Text)
-    , _varUploadType     :: !(Maybe Text)
-    , _varPayload        :: !Variant
-    , _varBearerToken    :: !(Maybe Text)
-    , _varVariantId      :: !Text
-    , _varCallback       :: !(Maybe Text)
+    { _vpXgafv          :: !(Maybe Text)
+    , _vpUploadProtocol :: !(Maybe Text)
+    , _vpUpdateMask     :: !(Maybe Text)
+    , _vpPp             :: !Bool
+    , _vpAccessToken    :: !(Maybe Text)
+    , _vpUploadType     :: !(Maybe Text)
+    , _vpPayload        :: !Variant
+    , _vpBearerToken    :: !(Maybe Text)
+    , _vpVariantId      :: !Text
+    , _vpCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsPatch' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'varXgafv'
+-- * 'vpXgafv'
 --
--- * 'varUploadProtocol'
+-- * 'vpUploadProtocol'
 --
--- * 'varUpdateMask'
+-- * 'vpUpdateMask'
 --
--- * 'varPp'
+-- * 'vpPp'
 --
--- * 'varAccessToken'
+-- * 'vpAccessToken'
 --
--- * 'varUploadType'
+-- * 'vpUploadType'
 --
--- * 'varPayload'
+-- * 'vpPayload'
 --
--- * 'varBearerToken'
+-- * 'vpBearerToken'
 --
--- * 'varVariantId'
+-- * 'vpVariantId'
 --
--- * 'varCallback'
+-- * 'vpCallback'
 variantsPatch
-    :: Variant -- ^ 'varPayload'
-    -> Text -- ^ 'varVariantId'
+    :: Variant -- ^ 'vpPayload'
+    -> Text -- ^ 'vpVariantId'
     -> VariantsPatch
-variantsPatch pVarPayload_ pVarVariantId_ =
+variantsPatch pVpPayload_ pVpVariantId_ =
     VariantsPatch
-    { _varXgafv = Nothing
-    , _varUploadProtocol = Nothing
-    , _varUpdateMask = Nothing
-    , _varPp = True
-    , _varAccessToken = Nothing
-    , _varUploadType = Nothing
-    , _varPayload = pVarPayload_
-    , _varBearerToken = Nothing
-    , _varVariantId = pVarVariantId_
-    , _varCallback = Nothing
+    { _vpXgafv = Nothing
+    , _vpUploadProtocol = Nothing
+    , _vpUpdateMask = Nothing
+    , _vpPp = True
+    , _vpAccessToken = Nothing
+    , _vpUploadType = Nothing
+    , _vpPayload = pVpPayload_
+    , _vpBearerToken = Nothing
+    , _vpVariantId = pVpVariantId_
+    , _vpCallback = Nothing
     }
 
 -- | V1 error format.
-varXgafv :: Lens' VariantsPatch (Maybe Text)
-varXgafv = lens _varXgafv (\ s a -> s{_varXgafv = a})
+vpXgafv :: Lens' VariantsPatch (Maybe Text)
+vpXgafv = lens _vpXgafv (\ s a -> s{_vpXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-varUploadProtocol :: Lens' VariantsPatch (Maybe Text)
-varUploadProtocol
-  = lens _varUploadProtocol
-      (\ s a -> s{_varUploadProtocol = a})
+vpUploadProtocol :: Lens' VariantsPatch (Maybe Text)
+vpUploadProtocol
+  = lens _vpUploadProtocol
+      (\ s a -> s{_vpUploadProtocol = a})
 
 -- | An optional mask specifying which fields to update. At this time,
 -- mutable fields are names and info. Acceptable values are \"names\" and
 -- \"info\". If unspecified, all mutable fields will be updated.
-varUpdateMask :: Lens' VariantsPatch (Maybe Text)
-varUpdateMask
-  = lens _varUpdateMask
-      (\ s a -> s{_varUpdateMask = a})
+vpUpdateMask :: Lens' VariantsPatch (Maybe Text)
+vpUpdateMask
+  = lens _vpUpdateMask (\ s a -> s{_vpUpdateMask = a})
 
 -- | Pretty-print response.
-varPp :: Lens' VariantsPatch Bool
-varPp = lens _varPp (\ s a -> s{_varPp = a})
+vpPp :: Lens' VariantsPatch Bool
+vpPp = lens _vpPp (\ s a -> s{_vpPp = a})
 
 -- | OAuth access token.
-varAccessToken :: Lens' VariantsPatch (Maybe Text)
-varAccessToken
-  = lens _varAccessToken
-      (\ s a -> s{_varAccessToken = a})
+vpAccessToken :: Lens' VariantsPatch (Maybe Text)
+vpAccessToken
+  = lens _vpAccessToken
+      (\ s a -> s{_vpAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-varUploadType :: Lens' VariantsPatch (Maybe Text)
-varUploadType
-  = lens _varUploadType
-      (\ s a -> s{_varUploadType = a})
+vpUploadType :: Lens' VariantsPatch (Maybe Text)
+vpUploadType
+  = lens _vpUploadType (\ s a -> s{_vpUploadType = a})
 
 -- | Multipart request metadata.
-varPayload :: Lens' VariantsPatch Variant
-varPayload
-  = lens _varPayload (\ s a -> s{_varPayload = a})
+vpPayload :: Lens' VariantsPatch Variant
+vpPayload
+  = lens _vpPayload (\ s a -> s{_vpPayload = a})
 
 -- | OAuth bearer token.
-varBearerToken :: Lens' VariantsPatch (Maybe Text)
-varBearerToken
-  = lens _varBearerToken
-      (\ s a -> s{_varBearerToken = a})
+vpBearerToken :: Lens' VariantsPatch (Maybe Text)
+vpBearerToken
+  = lens _vpBearerToken
+      (\ s a -> s{_vpBearerToken = a})
 
 -- | The ID of the variant to be updated.
-varVariantId :: Lens' VariantsPatch Text
-varVariantId
-  = lens _varVariantId (\ s a -> s{_varVariantId = a})
+vpVariantId :: Lens' VariantsPatch Text
+vpVariantId
+  = lens _vpVariantId (\ s a -> s{_vpVariantId = a})
 
 -- | JSONP
-varCallback :: Lens' VariantsPatch (Maybe Text)
-varCallback
-  = lens _varCallback (\ s a -> s{_varCallback = a})
+vpCallback :: Lens' VariantsPatch (Maybe Text)
+vpCallback
+  = lens _vpCallback (\ s a -> s{_vpCallback = a})
 
 instance GoogleRequest VariantsPatch where
         type Rs VariantsPatch = Variant
         requestClient VariantsPatch{..}
-          = go _varVariantId _varXgafv _varUploadProtocol
-              _varUpdateMask
-              (Just _varPp)
-              _varAccessToken
-              _varUploadType
-              _varBearerToken
-              _varCallback
+          = go _vpVariantId _vpXgafv _vpUploadProtocol
+              _vpUpdateMask
+              (Just _vpPp)
+              _vpAccessToken
+              _vpUploadType
+              _vpBearerToken
+              _vpCallback
               (Just AltJSON)
-              _varPayload
+              _vpPayload
               genomicsService
           where go
                   = buildClient (Proxy :: Proxy VariantsPatchResource)

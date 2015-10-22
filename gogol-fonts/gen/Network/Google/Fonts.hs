@@ -40,7 +40,7 @@ module Network.Google.Fonts
     , wFamily
     , wVersion
     , wFiles
-    , wSubsets
+    , wSubSets
     , wLastModified
 
     -- ** WebfontList

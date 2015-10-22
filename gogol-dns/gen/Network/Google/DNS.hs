@@ -89,7 +89,7 @@ module Network.Google.DNS
     , resourceRecordSetsListResponse
     , rrslrNextPageToken
     , rrslrKind
-    , rrslrRrsets
+    , rrslrRrSets
 
     -- ** ChangeStatus
     , ChangeStatus (..)
@@ -118,11 +118,11 @@ module Network.Google.DNS
     -- ** Quota
     , Quota
     , quota
-    , qRrsetDeletionsPerChange
-    , qRrsetsPerManagedZone
+    , qRrSetDeletionsPerChange
+    , qRrSetsPerManagedZone
     , qKind
-    , qResourceRecordsPerRrset
-    , qRrsetAdditionsPerChange
+    , qResourceRecordsPerRrSet
+    , qRrSetAdditionsPerChange
     , qManagedZones
     , qTotalRrDataSizePerChange
 

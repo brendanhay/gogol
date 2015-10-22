@@ -909,7 +909,7 @@ data Database = Database
     , _dCollation :: !(Maybe Text)
     , _dSelfLink  :: !(Maybe Text)
     , _dName      :: !(Maybe Text)
-    , _dCharset   :: !(Maybe Text)
+    , _dCharSet   :: !(Maybe Text)
     , _dInstance  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -929,7 +929,7 @@ data Database = Database
 --
 -- * 'dName'
 --
--- * 'dCharset'
+-- * 'dCharSet'
 --
 -- * 'dInstance'
 database
@@ -942,7 +942,7 @@ database =
     , _dCollation = Nothing
     , _dSelfLink = Nothing
     , _dName = Nothing
-    , _dCharset = Nothing
+    , _dCharSet = Nothing
     , _dInstance = Nothing
     }
 
@@ -975,8 +975,8 @@ dName :: Lens' Database (Maybe Text)
 dName = lens _dName (\ s a -> s{_dName = a})
 
 -- | The MySQL charset value.
-dCharset :: Lens' Database (Maybe Text)
-dCharset = lens _dCharset (\ s a -> s{_dCharset = a})
+dCharSet :: Lens' Database (Maybe Text)
+dCharSet = lens _dCharSet (\ s a -> s{_dCharSet = a})
 
 -- | The name of the Cloud SQL instance. This does not include the project
 -- ID.
@@ -1006,7 +1006,7 @@ instance ToJSON Database where
                   Just ("kind" .= _dKind),
                   ("collation" .=) <$> _dCollation,
                   ("selfLink" .=) <$> _dSelfLink,
-                  ("name" .=) <$> _dName, ("charset" .=) <$> _dCharset,
+                  ("name" .=) <$> _dName, ("charset" .=) <$> _dCharSet,
                   ("instance" .=) <$> _dInstance])
 
 -- | SslCerts create ephemeral certificate request.

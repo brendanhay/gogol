@@ -210,7 +210,7 @@ module Network.Google.YouTube
     , module Network.Google.Resource.YouTube.Watermarks.Set
 
     -- ** youtube.watermarks.unset
-    , module Network.Google.Resource.YouTube.Watermarks.Unset
+    , module Network.Google.Resource.YouTube.Watermarks.UnSet
 
     -- * Types
 
@@ -917,7 +917,7 @@ module Network.Google.YouTube
     , InvideoTiming
     , invideoTiming
     , itDurationMs
-    , itOffsetMs
+    , itOffSetMs
     , itType
 
     -- ** PlayListLocalizations
@@ -2104,7 +2104,7 @@ import           Network.Google.Resource.YouTube.Videos.Rate
 import           Network.Google.Resource.YouTube.Videos.ReportAbuse
 import           Network.Google.Resource.YouTube.Videos.Update
 import           Network.Google.Resource.YouTube.Watermarks.Set
-import           Network.Google.Resource.YouTube.Watermarks.Unset
+import           Network.Google.Resource.YouTube.Watermarks.UnSet
 import           Network.Google.YouTube.Types
 
 {- $resources
@@ -2143,7 +2143,7 @@ type YouTubeAPI =
        :<|> ActivitiesInsertResource
        :<|> ActivitiesListResource
        :<|> WatermarksSetResource
-       :<|> WatermarksUnsetResource
+       :<|> WatermarksUnSetResource
        :<|> CommentThreadsInsertResource
        :<|> CommentThreadsListResource
        :<|> CommentThreadsUpdateResource

@@ -35,12 +35,12 @@ library
     exposed-modules:
           Network.Google.BigQuery
         , Network.Google.BigQuery.Types
-        , Network.Google.Resource.BigQuery.Datasets.Delete
-        , Network.Google.Resource.BigQuery.Datasets.Get
-        , Network.Google.Resource.BigQuery.Datasets.Insert
-        , Network.Google.Resource.BigQuery.Datasets.List
-        , Network.Google.Resource.BigQuery.Datasets.Patch
-        , Network.Google.Resource.BigQuery.Datasets.Update
+        , Network.Google.Resource.BigQuery.DataSets.Delete
+        , Network.Google.Resource.BigQuery.DataSets.Get
+        , Network.Google.Resource.BigQuery.DataSets.Insert
+        , Network.Google.Resource.BigQuery.DataSets.List
+        , Network.Google.Resource.BigQuery.DataSets.Patch
+        , Network.Google.Resource.BigQuery.DataSets.Update
         , Network.Google.Resource.BigQuery.Jobs.Cancel
         , Network.Google.Resource.BigQuery.Jobs.Get
         , Network.Google.Resource.BigQuery.Jobs.GetQueryResults

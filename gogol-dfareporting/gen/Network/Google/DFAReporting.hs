@@ -1971,11 +1971,11 @@ module Network.Google.DFAReporting
     -- ** AccountPermissionLevel
     , AccountPermissionLevel (..)
 
-    -- ** OffsetPosition
-    , OffsetPosition
-    , offsetPosition
-    , opLeft
-    , opTop
+    -- ** OffSetPosition
+    , OffSetPosition
+    , offSetPosition
+    , ospLeft
+    , ospTop
 
     -- ** Metric
     , Metric
@@ -2143,7 +2143,7 @@ module Network.Google.DFAReporting
     -- ** PopupWindowProperties
     , PopupWindowProperties
     , popupWindowProperties
-    , pwpOffset
+    , pwpOffSet
     , pwpDimension
     , pwpShowStatusBar
     , pwpShowMenuBar
@@ -2589,7 +2589,7 @@ module Network.Google.DFAReporting
     , caaPushdownDuration
     , caaSize
     , caaVerticallyLocked
-    , caaOffset
+    , caaOffSet
     , caaStreamingServingURL
     , caaZipFilesize
     , caaTransparency

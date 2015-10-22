@@ -33,14 +33,14 @@ module Network.Google.Resource.Genomics.Variants.Create
     , VariantsCreate
 
     -- * Request Lenses
-    , vccXgafv
-    , vccUploadProtocol
-    , vccPp
-    , vccAccessToken
-    , vccUploadType
-    , vccPayload
-    , vccBearerToken
-    , vccCallback
+    , vcXgafv
+    , vcUploadProtocol
+    , vcPp
+    , vcAccessToken
+    , vcUploadType
+    , vcPayload
+    , vcBearerToken
+    , vcCallback
     ) where
 
 import           Network.Google.Genomics.Types
@@ -65,102 +65,101 @@ type VariantsCreateResource =
 --
 -- /See:/ 'variantsCreate' smart constructor.
 data VariantsCreate = VariantsCreate
-    { _vccXgafv          :: !(Maybe Text)
-    , _vccUploadProtocol :: !(Maybe Text)
-    , _vccPp             :: !Bool
-    , _vccAccessToken    :: !(Maybe Text)
-    , _vccUploadType     :: !(Maybe Text)
-    , _vccPayload        :: !Variant
-    , _vccBearerToken    :: !(Maybe Text)
-    , _vccCallback       :: !(Maybe Text)
+    { _vcXgafv          :: !(Maybe Text)
+    , _vcUploadProtocol :: !(Maybe Text)
+    , _vcPp             :: !Bool
+    , _vcAccessToken    :: !(Maybe Text)
+    , _vcUploadType     :: !(Maybe Text)
+    , _vcPayload        :: !Variant
+    , _vcBearerToken    :: !(Maybe Text)
+    , _vcCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vccXgafv'
+-- * 'vcXgafv'
 --
--- * 'vccUploadProtocol'
+-- * 'vcUploadProtocol'
 --
--- * 'vccPp'
+-- * 'vcPp'
 --
--- * 'vccAccessToken'
+-- * 'vcAccessToken'
 --
--- * 'vccUploadType'
+-- * 'vcUploadType'
 --
--- * 'vccPayload'
+-- * 'vcPayload'
 --
--- * 'vccBearerToken'
+-- * 'vcBearerToken'
 --
--- * 'vccCallback'
+-- * 'vcCallback'
 variantsCreate
-    :: Variant -- ^ 'vccPayload'
+    :: Variant -- ^ 'vcPayload'
     -> VariantsCreate
-variantsCreate pVccPayload_ =
+variantsCreate pVcPayload_ =
     VariantsCreate
-    { _vccXgafv = Nothing
-    , _vccUploadProtocol = Nothing
-    , _vccPp = True
-    , _vccAccessToken = Nothing
-    , _vccUploadType = Nothing
-    , _vccPayload = pVccPayload_
-    , _vccBearerToken = Nothing
-    , _vccCallback = Nothing
+    { _vcXgafv = Nothing
+    , _vcUploadProtocol = Nothing
+    , _vcPp = True
+    , _vcAccessToken = Nothing
+    , _vcUploadType = Nothing
+    , _vcPayload = pVcPayload_
+    , _vcBearerToken = Nothing
+    , _vcCallback = Nothing
     }
 
 -- | V1 error format.
-vccXgafv :: Lens' VariantsCreate (Maybe Text)
-vccXgafv = lens _vccXgafv (\ s a -> s{_vccXgafv = a})
+vcXgafv :: Lens' VariantsCreate (Maybe Text)
+vcXgafv = lens _vcXgafv (\ s a -> s{_vcXgafv = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-vccUploadProtocol :: Lens' VariantsCreate (Maybe Text)
-vccUploadProtocol
-  = lens _vccUploadProtocol
-      (\ s a -> s{_vccUploadProtocol = a})
+vcUploadProtocol :: Lens' VariantsCreate (Maybe Text)
+vcUploadProtocol
+  = lens _vcUploadProtocol
+      (\ s a -> s{_vcUploadProtocol = a})
 
 -- | Pretty-print response.
-vccPp :: Lens' VariantsCreate Bool
-vccPp = lens _vccPp (\ s a -> s{_vccPp = a})
+vcPp :: Lens' VariantsCreate Bool
+vcPp = lens _vcPp (\ s a -> s{_vcPp = a})
 
 -- | OAuth access token.
-vccAccessToken :: Lens' VariantsCreate (Maybe Text)
-vccAccessToken
-  = lens _vccAccessToken
-      (\ s a -> s{_vccAccessToken = a})
+vcAccessToken :: Lens' VariantsCreate (Maybe Text)
+vcAccessToken
+  = lens _vcAccessToken
+      (\ s a -> s{_vcAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-vccUploadType :: Lens' VariantsCreate (Maybe Text)
-vccUploadType
-  = lens _vccUploadType
-      (\ s a -> s{_vccUploadType = a})
+vcUploadType :: Lens' VariantsCreate (Maybe Text)
+vcUploadType
+  = lens _vcUploadType (\ s a -> s{_vcUploadType = a})
 
 -- | Multipart request metadata.
-vccPayload :: Lens' VariantsCreate Variant
-vccPayload
-  = lens _vccPayload (\ s a -> s{_vccPayload = a})
+vcPayload :: Lens' VariantsCreate Variant
+vcPayload
+  = lens _vcPayload (\ s a -> s{_vcPayload = a})
 
 -- | OAuth bearer token.
-vccBearerToken :: Lens' VariantsCreate (Maybe Text)
-vccBearerToken
-  = lens _vccBearerToken
-      (\ s a -> s{_vccBearerToken = a})
+vcBearerToken :: Lens' VariantsCreate (Maybe Text)
+vcBearerToken
+  = lens _vcBearerToken
+      (\ s a -> s{_vcBearerToken = a})
 
 -- | JSONP
-vccCallback :: Lens' VariantsCreate (Maybe Text)
-vccCallback
-  = lens _vccCallback (\ s a -> s{_vccCallback = a})
+vcCallback :: Lens' VariantsCreate (Maybe Text)
+vcCallback
+  = lens _vcCallback (\ s a -> s{_vcCallback = a})
 
 instance GoogleRequest VariantsCreate where
         type Rs VariantsCreate = Variant
         requestClient VariantsCreate{..}
-          = go _vccXgafv _vccUploadProtocol (Just _vccPp)
-              _vccAccessToken
-              _vccUploadType
-              _vccBearerToken
-              _vccCallback
+          = go _vcXgafv _vcUploadProtocol (Just _vcPp)
+              _vcAccessToken
+              _vcUploadType
+              _vcBearerToken
+              _vcCallback
               (Just AltJSON)
-              _vccPayload
+              _vcPayload
               genomicsService
           where go
                   = buildClient (Proxy :: Proxy VariantsCreateResource)

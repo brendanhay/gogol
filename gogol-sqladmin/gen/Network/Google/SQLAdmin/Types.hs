@@ -120,7 +120,7 @@ module Network.Google.SQLAdmin.Types
     , dCollation
     , dSelfLink
     , dName
-    , dCharset
+    , dCharSet
     , dInstance
 
     -- * SSLCertsCreateEphemeralRequest

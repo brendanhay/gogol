@@ -34,7 +34,7 @@ module Network.Google.Resource.BigQuery.TableData.List
     , TableDataList'
 
     -- * Request Lenses
-    , tDatasetId
+    , tDataSetId
     , tPageToken
     , tProjectId
     , tTableId
@@ -65,7 +65,7 @@ type TableDataListResource =
 --
 -- /See:/ 'tableDataList'' smart constructor.
 data TableDataList' = TableDataList'
-    { _tDatasetId  :: !Text
+    { _tDataSetId  :: !Text
     , _tPageToken  :: !(Maybe Text)
     , _tProjectId  :: !Text
     , _tTableId    :: !Text
@@ -77,7 +77,7 @@ data TableDataList' = TableDataList'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tDatasetId'
+-- * 'tDataSetId'
 --
 -- * 'tPageToken'
 --
@@ -89,13 +89,13 @@ data TableDataList' = TableDataList'
 --
 -- * 'tMaxResults'
 tableDataList'
-    :: Text -- ^ 'tDatasetId'
+    :: Text -- ^ 'tDataSetId'
     -> Text -- ^ 'tProjectId'
     -> Text -- ^ 'tTableId'
     -> TableDataList'
-tableDataList' pTDatasetId_ pTProjectId_ pTTableId_ =
+tableDataList' pTDataSetId_ pTProjectId_ pTTableId_ =
     TableDataList'
-    { _tDatasetId = pTDatasetId_
+    { _tDataSetId = pTDataSetId_
     , _tPageToken = Nothing
     , _tProjectId = pTProjectId_
     , _tTableId = pTTableId_
@@ -104,9 +104,9 @@ tableDataList' pTDatasetId_ pTProjectId_ pTTableId_ =
     }
 
 -- | Dataset ID of the table to read
-tDatasetId :: Lens' TableDataList' Text
-tDatasetId
-  = lens _tDatasetId (\ s a -> s{_tDatasetId = a})
+tDataSetId :: Lens' TableDataList' Text
+tDataSetId
+  = lens _tDataSetId (\ s a -> s{_tDataSetId = a})
 
 -- | A token used for paging results. Providing this token instead of the
 -- startIndex parameter can help you retrieve stable results when an
@@ -137,7 +137,7 @@ tMaxResults
 instance GoogleRequest TableDataList' where
         type Rs TableDataList' = TableDataList
         requestClient TableDataList'{..}
-          = go _tProjectId _tDatasetId _tTableId _tPageToken
+          = go _tProjectId _tDataSetId _tTableId _tPageToken
               _tStartIndex
               _tMaxResults
               (Just AltJSON)

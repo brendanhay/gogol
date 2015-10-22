@@ -94,7 +94,7 @@ library
         , Network.Google.Resource.YouTube.Videos.ReportAbuse
         , Network.Google.Resource.YouTube.Videos.Update
         , Network.Google.Resource.YouTube.Watermarks.Set
-        , Network.Google.Resource.YouTube.Watermarks.Unset
+        , Network.Google.Resource.YouTube.Watermarks.UnSet
         , Network.Google.YouTube
         , Network.Google.YouTube.Types
 

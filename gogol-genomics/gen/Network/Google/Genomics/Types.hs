@@ -63,7 +63,7 @@ module Network.Google.Genomics.Types
     , ListBasesResponse
     , listBasesResponse
     , lbrNextPageToken
-    , lbrOffset
+    , lbrOffSet
     , lbrSequence
 
     -- * ListOperationsResponse
@@ -80,34 +80,34 @@ module Network.Google.Genomics.Types
     , CancelOperationRequest
     , cancelOperationRequest
 
-    -- * Dataset
-    , Dataset
-    , dataset
-    , dName
-    , dId
-    , dProjectId
-    , dCreateTime
+    -- * DataSet
+    , DataSet
+    , dataSet
+    , dsName
+    , dsId
+    , dsProjectId
+    , dsCreateTime
 
     -- * Read'
     , Read'
     , read'
-    , reaFragmentLength
-    , reaDuplicateFragment
-    , reaReadGroupSetId
-    , reaNextMatePosition
-    , reaFailedVendorQualityChecks
-    , reaAlignment
-    , reaFragmentName
-    , reaNumberReads
-    , reaId
-    , reaSecondaryAlignment
-    , reaReadGroupId
-    , reaSupplementaryAlignment
-    , reaAlignedSequence
-    , reaProperPlacement
-    , reaInfo
-    , reaReadNumber
-    , reaAlignedQuality
+    , rFragmentLength
+    , rDuplicateFragment
+    , rReadGroupSetId
+    , rNextMatePosition
+    , rFailedVendorQualityChecks
+    , rAlignment
+    , rFragmentName
+    , rNumberReads
+    , rId
+    , rSecondaryAlignment
+    , rReadGroupId
+    , rSupplementaryAlignment
+    , rAlignedSequence
+    , rProperPlacement
+    , rInfo
+    , rReadNumber
+    , rAlignedQuality
 
     -- * VariantCall
     , VariantCall
@@ -122,16 +122,16 @@ module Network.Google.Genomics.Types
     -- * ReadGroup
     , ReadGroup
     , readGroup
-    , rReferenceSetId
-    , rPrograms
-    , rExperiment
-    , rName
-    , rDatasetId
-    , rId
-    , rSampleId
-    , rPredictedInsertSize
-    , rDescription
-    , rInfo
+    , reaReferenceSetId
+    , reaPrograms
+    , reaExperiment
+    , reaName
+    , reaDataSetId
+    , reaId
+    , reaSampleId
+    , reaPredictedInsertSize
+    , reaDescription
+    , reaInfo
 
     -- * Operation
     , Operation
@@ -191,7 +191,7 @@ module Network.Google.Genomics.Types
     -- * SearchReadGroupSetsRequest
     , SearchReadGroupSetsRequest
     , searchReadGroupSetsRequest
-    , srgsrDatasetIds
+    , srgsrDataSetIds
     , srgsrName
     , srgsrPageToken
     , srgsrPageSize
@@ -265,7 +265,7 @@ module Network.Google.Genomics.Types
     -- * SearchVariantSetsRequest
     , SearchVariantSetsRequest
     , searchVariantSetsRequest
-    , svsrDatasetIds
+    , svsrDataSetIds
     , svsrPageToken
     , svsrPageSize
 
@@ -325,7 +325,7 @@ module Network.Google.Genomics.Types
     , readGroupSet
     , rgsReferenceSetId
     , rgsName
-    , rgsDatasetId
+    , rgsDataSetId
     , rgsId
     , rgsInfo
     , rgsReadGroups
@@ -370,7 +370,7 @@ module Network.Google.Genomics.Types
     -- * VariantSet
     , VariantSet
     , variantSet
-    , vsDatasetId
+    , vsDataSetId
     , vsReferenceBounds
     , vsMetadata
     , vsId
@@ -380,17 +380,17 @@ module Network.Google.Genomics.Types
     , testIAMPermissionsResponse
     , tiamprPermissions
 
-    -- * ListDatasetsResponse
-    , ListDatasetsResponse
-    , listDatasetsResponse
-    , ldrNextPageToken
-    , ldrDatasets
+    -- * ListDataSetsResponse
+    , ListDataSetsResponse
+    , listDataSetsResponse
+    , ldsrNextPageToken
+    , ldsrDataSets
 
     -- * ImportReadGroupSetsRequest
     , ImportReadGroupSetsRequest
     , importReadGroupSetsRequest
     , irgsrReferenceSetId
-    , irgsrDatasetId
+    , irgsrDataSetId
     , irgsrSourceURIs
     , irgsrPartitionStrategy
 
@@ -419,7 +419,7 @@ module Network.Google.Genomics.Types
     -- * ExportVariantSetRequest
     , ExportVariantSetRequest
     , exportVariantSetRequest
-    , evsrBigQueryDataset
+    , evsrBigQueryDataSet
     , evsrBigQueryTable
     , evsrFormat
     , evsrCallSetIds
@@ -478,9 +478,9 @@ module Network.Google.Genomics.Types
     , rbUpperBound
     , rbReferenceName
 
-    -- * UndeleteDatasetRequest
-    , UndeleteDatasetRequest
-    , undeleteDatasetRequest
+    -- * UndeleteDataSetRequest
+    , UndeleteDataSetRequest
+    , undeleteDataSetRequest
 
     -- * Binding
     , Binding

@@ -35,12 +35,12 @@ library
     exposed-modules:
           Network.Google.Datastore
         , Network.Google.Datastore.Types
-        , Network.Google.Resource.Datastore.Datasets.AllocateIds
-        , Network.Google.Resource.Datastore.Datasets.BeginTransaction
-        , Network.Google.Resource.Datastore.Datasets.Commit
-        , Network.Google.Resource.Datastore.Datasets.Lookup
-        , Network.Google.Resource.Datastore.Datasets.Rollback
-        , Network.Google.Resource.Datastore.Datasets.RunQuery
+        , Network.Google.Resource.Datastore.DataSets.AllocateIds
+        , Network.Google.Resource.Datastore.DataSets.BeginTransaction
+        , Network.Google.Resource.Datastore.DataSets.Commit
+        , Network.Google.Resource.Datastore.DataSets.Lookup
+        , Network.Google.Resource.Datastore.DataSets.Rollback
+        , Network.Google.Resource.Datastore.DataSets.RunQuery
 
     other-modules:
           Network.Google.Datastore.Types.Product
