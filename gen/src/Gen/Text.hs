@@ -135,7 +135,6 @@ renameReserved x
         , "Data"
         , "TimeOfDay"
         , "LocalTime"
-        , "Download"
         ] ++ map Text.pack (reservedNames haskellDef)
 
 camelAcronym :: Text -> Text

@@ -81,9 +81,9 @@ instance FromJSON OAuthToken where
 instance ToJSON OAuthToken where
     toJSON = toJSON . Text.decodeUtf8 . tokenToBS
 
-newtype Download a = Download a
+newtype MediaDownload a = MediaDownload a
 
-data Upload a = Upload a RequestBody
+data MediaUpload a = MediaUpload a RequestBody
 
 _Coerce :: (Coercible a b, Coercible b a) => Iso' a b
 _Coerce = iso coerce coerce

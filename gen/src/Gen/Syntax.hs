@@ -217,13 +217,13 @@ downloadDecl :: Global
 downloadDecl n p api url fs m =
     googleRequestDecl n ty rs [alt] p api url fs m pat prec
   where
-    ty = TyApp (TyCon "Download") (tycon n)
+    ty = TyApp (TyCon "MediaDownload") (tycon n)
     rs = InsType noLoc (TyApp (TyCon "Rs") ty) (TyCon "Stream")
 
     alt = app (var "Just") (var "AltMedia")
     pat = downloadPat m
 
-    prec = PApp (UnQual "Download")
+    prec = PApp (UnQual "MediaDownload")
         [ PRec (UnQual (dname n)) [PFieldWildcard | not (null fs)]
         ]
 
@@ -237,7 +237,7 @@ uploadDecl :: Global
 uploadDecl n p api url fs m =
     googleRequestDecl n ty rs extras p api url fs m pat prec
   where
-    ty = TyApp (TyCon "Upload") (tycon n)
+    ty = TyApp (TyCon "MediaUpload") (tycon n)
     rs = InsType noLoc (TyApp (TyCon "Rs") ty) $
         maybe unit_tycon (tycon . ref) (_mResponse m)
 
@@ -251,7 +251,7 @@ uploadDecl n p api url fs m =
 
     pat = uploadPat m
 
-    prec = PApp (UnQual "Upload")
+    prec = PApp (UnQual "MediaUpload")
         [ PRec (UnQual (dname n)) [PFieldWildcard | not (null fs)]
         , PVar media
         ]
